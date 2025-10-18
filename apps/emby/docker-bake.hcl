@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=MediaBrowser/Emby.Releases versioning=loose
-  default = "4.9.2.4"
+  default = "4.9.2.5"
 }
 
 group "default" {
