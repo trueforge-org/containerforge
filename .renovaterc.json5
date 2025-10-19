@@ -1,6 +1,9 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["github>home-operations/renovate-config"],
+  extends: [
+    "github>home-operations/renovate-config",
+    "github>trueforge-org/truecharts//.github/renovate/basics/labels.json5"
+  ],
   customManagers: [
     {
       customType: "regex",
