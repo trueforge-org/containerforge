@@ -123,7 +123,7 @@ jobs:
 
       # ---------------- Build step (local) ----------------
       - name: Build App Locally
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@3acf805d94d93a86cce4ca44798a76464a75b88c
         id: bake
         with:
           files: |
