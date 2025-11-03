@@ -108,14 +108,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      - name: Login to Quay
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef
-        if: github.event_name != 'pull_request'
-        with:
-          registry: quay.io
-          username: ${{ secrets.QUAY_CF_USER }}
-          password: ${{ secrets.QUAY_CF_TOKEN }}
-
       - name: Download Bake Metadata
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
@@ -305,6 +297,7 @@ jobs:
           header: app-size-diff-${{ inputs.app }}
           message: |
             ${{ steps.app-size-diff.outputs.size-diff-markdown }}
+
   mirror-to-quay:
     name: Mirror to Quay
     runs-on: ubuntu-latest
@@ -392,6 +385,87 @@ jobs:
             -d '{"visibility": "public"}' \
             -H "Authorization: Bearer ${{ secrets.QUAY_CF_API_TOKEN }}" \
             "https://quay.io/api/v1/repository/containerforge/${{ inputs.app }}/changevisibility"
+
+  mirror-to-ghcr:
+    name: Mirror to GHCR
+    runs-on: ubuntu-latest
+    needs:
+      - attest
+      - test
+    if: github.event_name != 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          persist-credentials: false
+
+      - name: Download Bake Metadata
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: ${{ inputs.app }}-bake-metadata
+          path: ${{ runner.temp }}
+
+      - name: Download Digest
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: ${{ inputs.app }}-digests-*
+          merge-multiple: true
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: trueforge-admin
+          password: ${{ secrets.TF_BOT_TOKEN }}
+
+      - name: Pull Original Image Digest
+        run: |
+          docker pull quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Tag for GHCR
+        run: |
+          TAGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}"))' ${{ runner.temp }}/docker-metadata-action-bake.json)
+          for tag in $TAGS; do
+            SHORTTAG="${tag#quay.io/containerforge/}"
+            docker tag quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} ghcr.io/containerforge/${{ inputs.app }}:${SHORTTAG}
+          done
+
+      - name: Push All GHCR Tags
+        run: |
+          docker push $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "ghcr.io/containerforge/${{ inputs.app }}")
+
+      - name: Create Multi-Arch Manifest List on GHCR
+        run: |
+          TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}")) | "-t ghcr.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
+          docker buildx imagetools create $TAG_ARGS ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Sign GHCR Image
+        run: |
+          cosign sign ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}"
+
+      - name: Verify GHCR Signed Digest
+        run: |
+          cosign verify ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
+
+      - name: Generate SBOM for GHCR
+        uses: anchore/sbom-action@v0.20.6
+        with:
+          dependency-snapshot: true
+          image: ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Attest GHCR Image
+        uses: actions/attest-build-provenance@v3.0.0
+        with:
+          push-to-registry: true
+          subject-name: ghcr.io/containerforge/${{ inputs.app }}
+          subject-digest: ${{ needs.merge.outputs.digest }}
+
 
   announce:
     if: ${{ inputs.release && needs.plan.outputs.app-exists != 'true' }}
