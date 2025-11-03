@@ -150,7 +150,7 @@ jobs:
         run: |-
           mkdir -p ${{ runner.temp }}/digests
           DIGEST="${{ fromJSON(steps.bake.outputs.metadata).image['containerimage.digest'] }}"
-          touch "${{ runner.temp }}/digests/${DIGEST#sha256:}"
+          echo "$DIGEST" > "${{ runner.temp }}/digests/${DIGEST#sha256:}"
 
       - name: Upload Digest
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -316,12 +316,9 @@ jobs:
       - attest
     if: github.event_name != 'pull_request'
     steps:
-
       - name: Install Cosign
         uses: sigstore/cosign-installer@v4.0.0
-
-      - name: Check install!
-        run: cosign version
+      - run: cosign version
 
       - name: Checkout
         uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493
@@ -350,14 +347,16 @@ jobs:
 
       - name: Pull GHCR Image Digest
         run: |
-          docker pull ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          DIGEST=$(cat ${{ runner.temp }}/digests/* | head -n1)
+          docker pull ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@$DIGEST
 
       - name: Tag for Quay
         run: |
+          DIGEST=$(cat ${{ runner.temp }}/digests/* | head -n1)
           TAGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}"))' ${{ runner.temp }}/docker-metadata-action-bake.json)
           for tag in $TAGS; do
             SHORTTAG="${tag#ghcr.io/${{ github.repository_owner }}/}"
-            docker tag ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} quay.io/containerforge/${{ inputs.app }}:${SHORTTAG}
+            docker tag ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@$DIGEST quay.io/containerforge/${{ inputs.app }}:${SHORTTAG}
           done
 
       - name: Push All Quay Tags
@@ -366,36 +365,35 @@ jobs:
 
       - name: Create Multi-Arch Manifest List on Quay
         run: |
+          DIGEST=$(cat ${{ runner.temp }}/digests/* | head -n1)
           TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t quay.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
-          docker buildx imagetools create $TAG_ARGS quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          docker buildx imagetools create $TAG_ARGS quay.io/containerforge/${{ inputs.app }}@$DIGEST
 
       - name: Generate SBOM for Quay
         uses: anchore/sbom-action@v0.20.6
         with:
           dependency-snapshot: true
-          image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          image: quay.io/containerforge/${{ inputs.app }}@${{ cat ${{ runner.temp }}/digests/* | head -n1 }}
 
       - name: Attest Quay Image
         uses: actions/attest-build-provenance@v3.0.0
         with:
           push-to-registry: true
           subject-name: quay.io/containerforge/${{ inputs.app }}
-          subject-digest: ${{ needs.merge.outputs.digest }}
-
+          subject-digest: ${{ cat ${{ runner.temp }}/digests/* | head -n1 }}
 
       - name: Sign Quay Image
         run: |
-          cosign sign quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+          cosign sign quay.io/containerforge/${{ inputs.app }}@${{ cat ${{ runner.temp }}/digests/* | head -n1 }} -y \
             -a "repo=${{ github.repository }}" \
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}"
 
       - name: Verify Quay Signed Digest
         run: |
-          cosign verify quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+          cosign verify quay.io/containerforge/${{ inputs.app }}@${{ cat ${{ runner.temp }}/digests/* | head -n1 }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
-
 
       - name: Set Quay to Public
         if: github.event_name != 'pull_request'
@@ -412,12 +410,9 @@ jobs:
       - attest
     if: github.event_name != 'pull_request'
     steps:
-
       - name: Install Cosign
         uses: sigstore/cosign-installer@v4.0.0
-
-      - name: Check install!
-        run: cosign version
+      - run: cosign version
 
       - name: Checkout
         uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493
@@ -446,14 +441,16 @@ jobs:
 
       - name: Pull Original Image Digest
         run: |
-          docker pull quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          DIGEST=$(cat ${{ runner.temp }}/digests/* | head -n1)
+          docker pull quay.io/containerforge/${{ inputs.app }}@$DIGEST
 
       - name: Tag for GHCR
         run: |
+          DIGEST=$(cat ${{ runner.temp }}/digests/* | head -n1)
           TAGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}"))' ${{ runner.temp }}/docker-metadata-action-bake.json)
           for tag in $TAGS; do
             SHORTTAG="${tag#quay.io/containerforge/}"
-            docker tag quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} ghcr.io/containerforge/${{ inputs.app }}:${SHORTTAG}
+            docker tag quay.io/containerforge/${{ inputs.app }}@$DIGEST ghcr.io/containerforge/${{ inputs.app }}:${SHORTTAG}
           done
 
       - name: Push All GHCR Tags
@@ -462,35 +459,36 @@ jobs:
 
       - name: Create Multi-Arch Manifest List on GHCR
         run: |
+          DIGEST=$(cat ${{ runner.temp }}/digests/* | head -n1)
           TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}")) | "-t ghcr.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
-          docker buildx imagetools create $TAG_ARGS ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          docker buildx imagetools create $TAG_ARGS ghcr.io/containerforge/${{ inputs.app }}@$DIGEST
 
       - name: Generate SBOM for GHCR
         uses: anchore/sbom-action@v0.20.6
         with:
           dependency-snapshot: true
-          image: ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          image: ghcr.io/containerforge/${{ inputs.app }}@${{ cat ${{ runner.temp }}/digests/* | head -n1 }}
 
       - name: Attest GHCR Image
         uses: actions/attest-build-provenance@v3.0.0
         with:
           push-to-registry: true
           subject-name: ghcr.io/containerforge/${{ inputs.app }}
-          subject-digest: ${{ needs.merge.outputs.digest }}
-
+          subject-digest: ${{ cat ${{ runner.temp }}/digests/* | head -n1 }}
 
       - name: Sign GHCR Image
         run: |
-          cosign sign ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+          cosign sign ghcr.io/containerforge/${{ inputs.app }}@${{ cat ${{ runner.temp }}/digests/* | head -n1 }} -y \
             -a "repo=${{ github.repository }}" \
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}"
 
       - name: Verify GHCR Signed Digest
         run: |
-          cosign verify ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+          cosign verify ghcr.io/containerforge/${{ inputs.app }}@${{ cat ${{ runner.temp }}/digests/* | head -n1 }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
+
 
 
   announce:
