@@ -258,6 +258,12 @@ jobs:
           subject-name: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
           subject-digest: ${{ needs.merge.outputs.digest }}
 
+      - name: Verify Attestation
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |-
+          gh attestation verify --repo ${{ github.repository }} oci://ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
   test:
     if: ${{ ! inputs.release }}
     name: Test
