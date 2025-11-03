@@ -257,10 +257,11 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "1"
         run: |
-          cosign sign ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+          cosign sign --yes --oidc-issuer https://token.actions.githubusercontent.com \
             -a "repo=${{ github.repository }}" \
             -a "workflow=${{ github.workflow }}" \
-            -a "ref=${{ github.sha }}"
+            -a "ref=${{ github.sha }}" \
+            ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
 
       - name: Verify the signed digest on GHCR
         if: github.event_name != 'pull_request'
