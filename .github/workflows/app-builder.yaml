@@ -257,7 +257,7 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "1"
         run: |
-          cosign sign --yes --oidc-issuer https://token.actions.githubusercontent.com \
+          cosign sign --oidc-issuer https://token.actions.githubusercontent.com \
             -a "repo=${{ github.repository }}" \
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}" \
