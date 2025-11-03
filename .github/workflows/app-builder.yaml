@@ -241,6 +241,20 @@ jobs:
           dependency-snapshot: true
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
+      - name: Attestation for GHCR
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
+        with:
+          push-to-registry: true
+          subject-name: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
+          subject-digest: ${{ needs.merge.outputs.digest }}
+
+      - name: Verify Attestation
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |-
+          gh attestation verify --repo ${{ github.repository }} oci://ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+
       - name: Sign the merged digest for GHCR
         if: github.event_name != 'pull_request'
         env:
@@ -260,18 +274,6 @@ jobs:
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
 
-      - name: Attestation for GHCR
-        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
-        with:
-          push-to-registry: true
-          subject-name: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
-          subject-digest: ${{ needs.merge.outputs.digest }}
-
-      - name: Verify Attestation
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |-
-          gh attestation verify --repo ${{ github.repository }} oci://ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
   test:
     if: ${{ ! inputs.release }}
@@ -380,6 +382,20 @@ jobs:
           TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t quay.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
           docker buildx imagetools create $TAG_ARGS quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
+      - name: Generate SBOM for Quay
+        uses: anchore/sbom-action@v0.20.6
+        with:
+          dependency-snapshot: true
+          image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Attest Quay Image
+        uses: actions/attest-build-provenance@v3.0.0
+        with:
+          push-to-registry: true
+          subject-name: quay.io/containerforge/${{ inputs.app }}
+          subject-digest: ${{ needs.merge.outputs.digest }}
+
+
       - name: Sign Quay Image
         env:
           COSIGN_EXPERIMENTAL: "1"
@@ -397,18 +413,6 @@ jobs:
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
 
-      - name: Generate SBOM for Quay
-        uses: anchore/sbom-action@v0.20.6
-        with:
-          dependency-snapshot: true
-          image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
-
-      - name: Attest Quay Image
-        uses: actions/attest-build-provenance@v3.0.0
-        with:
-          push-to-registry: true
-          subject-name: quay.io/containerforge/${{ inputs.app }}
-          subject-digest: ${{ needs.merge.outputs.digest }}
 
       - name: Set Quay to Public
         if: github.event_name != 'pull_request'
@@ -483,6 +487,20 @@ jobs:
           TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}")) | "-t ghcr.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
           docker buildx imagetools create $TAG_ARGS ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
+      - name: Generate SBOM for GHCR
+        uses: anchore/sbom-action@v0.20.6
+        with:
+          dependency-snapshot: true
+          image: ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Attest GHCR Image
+        uses: actions/attest-build-provenance@v3.0.0
+        with:
+          push-to-registry: true
+          subject-name: ghcr.io/containerforge/${{ inputs.app }}
+          subject-digest: ${{ needs.merge.outputs.digest }}
+
+
       - name: Sign GHCR Image
         env:
           COSIGN_EXPERIMENTAL: "1"
@@ -499,19 +517,6 @@ jobs:
           cosign verify ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
-
-      - name: Generate SBOM for GHCR
-        uses: anchore/sbom-action@v0.20.6
-        with:
-          dependency-snapshot: true
-          image: ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
-
-      - name: Attest GHCR Image
-        uses: actions/attest-build-provenance@v3.0.0
-        with:
-          push-to-registry: true
-          subject-name: ghcr.io/containerforge/${{ inputs.app }}
-          subject-digest: ${{ needs.merge.outputs.digest }}
 
 
   announce:
