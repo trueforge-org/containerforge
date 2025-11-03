@@ -217,6 +217,17 @@ jobs:
       - merge
     runs-on: ubuntu-latest
     steps:
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION="2.1.0"  # Set the version you need
+          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+      - name: Verify Cosign
+        run: cosign version
+
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
@@ -306,6 +317,17 @@ jobs:
       - test
     if: github.event_name != 'pull_request'
     steps:
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION="2.1.0"  # Set the version you need
+          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+      - name: Verify Cosign
+        run: cosign version
+
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
@@ -394,6 +416,17 @@ jobs:
       - test
     if: github.event_name != 'pull_request'
     steps:
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION="2.1.0"  # Set the version you need
+          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+      - name: Verify Cosign
+        run: cosign version
+
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
