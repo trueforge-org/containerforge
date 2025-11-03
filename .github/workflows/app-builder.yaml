@@ -64,7 +64,7 @@ jobs:
             type=raw,value=${{ steps.app-versions.outputs.raw }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
             type=raw,value=rolling,enable=${{ inputs.release }}
             type=raw,value=sandbox,enable=${{ ! inputs.release }}
-            type=raw,value=sha-${{ github.sha }},enable=${{ ! inputs.release }}
+            type=raw,value=sha-${{ github.sha }},enable=${{ inputs.release }}
 
       - name: Upload Bake Metadata
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
