@@ -121,8 +121,9 @@ jobs:
         run: |-
           rsync -a --ignore-existing --progress ./include/ ./apps/${{ inputs.app }}/
 
-      - name: Build App
-        uses: docker/bake-action@3acf805d94d93a86cce4ca44798a76464a75b88c
+      # ---------------- Build step (local) ----------------
+      - name: Build App Locally
+        uses: docker/bake-action@v3
         id: bake
         with:
           files: |
@@ -139,12 +140,18 @@ jobs:
             *.labels.org.opencontainers.image.vendor="TrueForge"
             *.labels.org.opencontainers.image.authors="TrueForge <info@trueforge.org>"
             *.labels.org.opencontainers.image.description="Container for ${{ inputs.app }} by TrueForge"
-            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }},push-by-digest=true,name-canonical=true,push=true,compression=zstd,force-compression=true
+            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }},load=true,push=false
             *.platform=${{ matrix.platform }}
             *.tags=
           source: .
           targets: image
           workdir: ./apps/${{ inputs.app }}
+
+      # ---------------- Push step ----------------
+      - name: Push Image to GHCR
+        run: |
+          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
+          docker push $IMAGE
 
       - name: Login to Quay
         uses: docker/login-action@v3
@@ -155,19 +162,19 @@ jobs:
 
       - name: Push digest to Quay
         run: |
-          DIGEST="${{ fromJSON(steps.bake.outputs.metadata).image['containerimage.digest'] }}"
-          LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${DIGEST}"
-          SAFE_DIGEST="${DIGEST#sha256:}"   # strips 'sha256:' prefix
-          QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:sticky-${SAFE_DIGEST}"
+          LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
+          QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
           # Tag local image for Quay using the same digest
           docker tag $LOCAL_IMAGE $QUAY_IMAGE
           # Push to Quay
           docker push $QUAY_IMAGE
 
       - name: Export Digest
-        run: |-
+        run: |
           mkdir -p ${{ runner.temp }}/digests
-          DIGEST="${{ fromJSON(steps.bake.outputs.metadata).image['containerimage.digest'] }}"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
+          # Get the digest from the pushed image on GHCR
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE | cut -d@ -f2)
           echo "$DIGEST" > "${{ runner.temp }}/digests/${DIGEST#sha256:}"
 
       - name: Upload Digest
