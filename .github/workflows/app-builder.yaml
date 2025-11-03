@@ -219,13 +219,10 @@ jobs:
     steps:
 
       - name: Install Cosign
-        run: |
-          COSIGN_VERSION="2.5.0"  # Set the version you need
-          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
-          chmod +x cosign-linux-amd64
-          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-
-      - name: Verify Cosign
+        uses: sigstore/cosign-installer@v4.0.0
+        with:
+          cosign-release: 'v3.0.2'
+      - name: Check install!
         run: cosign version
 
       - name: Login to GHCR
@@ -327,13 +324,10 @@ jobs:
     steps:
 
       - name: Install Cosign
-        run: |
-          COSIGN_VERSION="2.5.0"  # Set the version you need
-          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
-          chmod +x cosign-linux-amd64
-          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-
-      - name: Verify Cosign
+        uses: sigstore/cosign-installer@v4.0.0
+        with:
+          cosign-release: 'v3.0.2'
+      - name: Check install!
         run: cosign version
 
       - name: Checkout
@@ -432,13 +426,10 @@ jobs:
     steps:
 
       - name: Install Cosign
-        run: |
-          COSIGN_VERSION="2.5.0"  # Set the version you need
-          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
-          chmod +x cosign-linux-amd64
-          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-
-      - name: Verify Cosign
+        uses: sigstore/cosign-installer@v4.0.0
+        with:
+          cosign-release: 'v3.0.2'
+      - name: Check install!
         run: cosign version
 
       - name: Checkout
