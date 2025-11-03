@@ -155,7 +155,7 @@ jobs:
 
       - name: Push digest to Quay
         run: |
-          DIGEST="${{ steps.digest.outputs.digest }}"
+          DIGEST="${{ fromJSON(steps.bake.outputs.metadata).image['containerimage.digest'] }}"
           LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${DIGEST}"
           SAFE_DIGEST="${DIGEST#sha256:}"   # strips 'sha256:' prefix
           QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:sticky-${SAFE_DIGEST}"
