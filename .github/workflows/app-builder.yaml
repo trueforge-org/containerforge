@@ -23,7 +23,7 @@ jobs:
       platforms: ${{ steps.app-options.outputs.platforms }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           persist-credentials: false
 
@@ -46,7 +46,7 @@ jobs:
           upstream-version: ${{ steps.app-options.outputs.version }}
 
       - name: Build App Metadata
-        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5.8.0
+        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f
         id: meta
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
@@ -54,6 +54,9 @@ jobs:
           flavor: latest=false
           images: |
             ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
+            ghcr.io/containerforge/${{ inputs.app }}
+            quay.io/containerforge/${{ inputs.app }}
+            oci.trueforge.org/containerforge/${{ inputs.app }}
           tags: |
             type=semver,pattern={{version}},value=${{ steps.app-versions.outputs.semantic }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
             type=semver,pattern={{major}}.{{minor}},value=${{ steps.app-versions.outputs.semantic }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
@@ -61,9 +64,10 @@ jobs:
             type=raw,value=${{ steps.app-versions.outputs.raw }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
             type=raw,value=rolling,enable=${{ inputs.release }}
             type=raw,value=sandbox,enable=${{ ! inputs.release }}
+            type=raw,value=sticky-sha-${{ github.sha }}
 
       - name: Upload Bake Metadata
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ steps.meta.outputs.bake-file }}
@@ -72,8 +76,7 @@ jobs:
 
   build:
     name: Build (${{ matrix.platform }})
-    needs:
-      - plan
+    needs: plan
     strategy:
       fail-fast: false
       matrix:
@@ -81,12 +84,12 @@ jobs:
     runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           persist-credentials: false
 
       - name: Get Target Architecture
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         id: target
         with:
           script: |-
@@ -99,27 +102,27 @@ jobs:
           app: ${{ inputs.app }}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Download Bake Metadata
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ runner.temp }}
 
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
 
       - name: Add Include Directory to Build Context
         run: |-
           rsync -a --ignore-existing --progress ./include/ ./apps/${{ inputs.app }}/
 
       - name: Build App
-        uses: docker/bake-action@3acf805d94d93a86cce4ca44798a76464a75b88c # v6.9.0
+        uses: docker/bake-action@3acf805d94d93a86cce4ca44798a76464a75b88c
         id: bake
         with:
           files: |
@@ -150,7 +153,7 @@ jobs:
           touch "${{ runner.temp }}/digests/${DIGEST#sha256:}"
 
       - name: Upload Digest
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: ${{ inputs.app }}-digests-${{ steps.target.outputs.arch }}
           path: ${{ runner.temp }}/digests/*
@@ -160,42 +163,42 @@ jobs:
   merge:
     name: Merge
     runs-on: ubuntu-latest
-    needs:
-      - build
+    needs: build
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           persist-credentials: false
 
       - name: Download Bake Metadata
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ runner.temp }}
 
       - name: Download Digests
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
           path: ${{ runner.temp }}/digests
           pattern: ${{ inputs.app }}-digests-*
           merge-multiple: true
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+      - name: Login to GHCR
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      - name: Create Manifest List and Push
+      - name: Create Multi-Arch Manifest List for GHCR
         working-directory: ${{ runner.temp }}/digests
         run: |-
           docker buildx imagetools create \
-              $(jq --raw-output --compact-output '.target."docker-metadata-action".tags | map(select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json) \
-              $(printf 'ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@sha256:%s ' *)
+            $(jq --raw-output --compact-output '.target."docker-metadata-action".tags | map(select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json) \
+            $(printf 'ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@sha256:%s ' *)
+
 
       - name: Inspect Image
         run: |-
@@ -209,26 +212,37 @@ jobs:
           echo "digest=${DIGEST}" >> $GITHUB_OUTPUT
 
   attest:
-    name: Attest
+    name: Attest GHCR
     needs:
       - merge
     runs-on: ubuntu-latest
     steps:
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION="2.1.0"  # Set the version you need
+          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+      - name: Verify Cosign
+        run: cosign version
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      - name: Upload Dependency Snapshot
-        uses: anchore/sbom-action@8e94d75ddd33f69f691467e42275782e4bfefe84 # v0.20.9
+      - name: Upload Dependency Snapshot to GHCR
+        uses: anchore/sbom-action@8e94d75ddd33f69f691467e42275782e4bfefe84
         with:
           dependency-snapshot: true
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
-      - name: Attestation
-        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3.0.0
+      - name: Attestation for GHCR
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a
         with:
           push-to-registry: true
           subject-name: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
@@ -240,6 +254,27 @@ jobs:
         run: |-
           gh attestation verify --repo ${{ github.repository }} oci://ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
+
+      - name: Sign the merged digest for GHCR
+        if: github.event_name != 'pull_request'
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign sign ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}"
+
+      - name: Verify the signed digest on GHCR
+        if: github.event_name != 'pull_request'
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign verify ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
+
+
   test:
     if: ${{ ! inputs.release }}
     name: Test
@@ -249,12 +284,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           persist-credentials: false
 
       - name: Generate Token
-        uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2.1.4
+        uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42
         id: app-token
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
@@ -275,12 +310,214 @@ jobs:
           to-app: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:sandbox
 
       - name: Post App Size Diff
-        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405
         with:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           header: app-size-diff-${{ inputs.app }}
           message: |
             ${{ steps.app-size-diff.outputs.size-diff-markdown }}
+
+  mirror-to-quay:
+    name: Mirror to Quay
+    runs-on: ubuntu-latest
+    needs:
+      - attest
+      - test
+    if: github.event_name != 'pull_request'
+    steps:
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION="2.1.0"  # Set the version you need
+          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+      - name: Verify Cosign
+        run: cosign version
+
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          persist-credentials: false
+
+      - name: Download Bake Metadata
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: ${{ inputs.app }}-bake-metadata
+          path: ${{ runner.temp }}
+
+      - name: Download Digest
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: ${{ inputs.app }}-digests-*
+          merge-multiple: true
+
+      - name: Login to Quay
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_CF_USER }}
+          password: ${{ secrets.QUAY_CF_TOKEN }}
+
+      - name: Pull GHCR Image Digest
+        run: |
+          docker pull ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Tag for Quay
+        run: |
+          TAGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}"))' ${{ runner.temp }}/docker-metadata-action-bake.json)
+          for tag in $TAGS; do
+            SHORTTAG="${tag#ghcr.io/${{ github.repository_owner }}/}"
+            docker tag ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} quay.io/containerforge/${{ inputs.app }}:${SHORTTAG}
+          done
+
+      - name: Push All Quay Tags
+        run: |
+          docker push $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "quay.io/containerforge/${{ inputs.app }}")
+
+      - name: Create Multi-Arch Manifest List on Quay
+        run: |
+          TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t quay.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
+          docker buildx imagetools create $TAG_ARGS quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Generate SBOM for Quay
+        uses: anchore/sbom-action@v0.20.6
+        with:
+          dependency-snapshot: true
+          image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Attest Quay Image
+        uses: actions/attest-build-provenance@v3.0.0
+        with:
+          push-to-registry: true
+          subject-name: quay.io/containerforge/${{ inputs.app }}
+          subject-digest: ${{ needs.merge.outputs.digest }}
+
+
+      - name: Sign Quay Image
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign sign quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}"
+
+      - name: Verify Quay Signed Digest
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign verify quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
+
+
+      - name: Set Quay to Public
+        if: github.event_name != 'pull_request'
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"visibility": "public"}' \
+            -H "Authorization: Bearer ${{ secrets.QUAY_CF_API_TOKEN }}" \
+            "https://quay.io/api/v1/repository/containerforge/${{ inputs.app }}/changevisibility"
+
+  mirror-to-ghcr:
+    name: Mirror to GHCR
+    runs-on: ubuntu-latest
+    needs:
+      - attest
+      - test
+    if: github.event_name != 'pull_request'
+    steps:
+
+      - name: Install Cosign
+        run: |
+          COSIGN_VERSION="2.1.0"  # Set the version you need
+          curl -LO https://github.com/sigstore/cosign/releases/download/v${COSIGN_VERSION}/cosign-linux-amd64
+          chmod +x cosign-linux-amd64
+          sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+      - name: Verify Cosign
+        run: cosign version
+
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          persist-credentials: false
+
+      - name: Download Bake Metadata
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: ${{ inputs.app }}-bake-metadata
+          path: ${{ runner.temp }}
+
+      - name: Download Digest
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: ${{ inputs.app }}-digests-*
+          merge-multiple: true
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: trueforge-admin
+          password: ${{ secrets.TF_BOT_TOKEN }}
+
+      - name: Pull Original Image Digest
+        run: |
+          docker pull quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Tag for GHCR
+        run: |
+          TAGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}"))' ${{ runner.temp }}/docker-metadata-action-bake.json)
+          for tag in $TAGS; do
+            SHORTTAG="${tag#quay.io/containerforge/}"
+            docker tag quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} ghcr.io/containerforge/${{ inputs.app }}:${SHORTTAG}
+          done
+
+      - name: Push All GHCR Tags
+        run: |
+          docker push $(docker images --format '{{.Repository}}:{{.Tag}}' | grep "ghcr.io/containerforge/${{ inputs.app }}")
+
+      - name: Create Multi-Arch Manifest List on GHCR
+        run: |
+          TAG_ARGS=$(jq -r '.target."docker-metadata-action".tags[] | select(startswith("quay.io/containerforge/${{ inputs.app }}")) | "-t ghcr.io/containerforge/${{ inputs.app }}:" + (. | split("/")[2])' ${{ runner.temp }}/docker-metadata-action-bake.json | xargs)
+          docker buildx imagetools create $TAG_ARGS ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Generate SBOM for GHCR
+        uses: anchore/sbom-action@v0.20.6
+        with:
+          dependency-snapshot: true
+          image: ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+
+      - name: Attest GHCR Image
+        uses: actions/attest-build-provenance@v3.0.0
+        with:
+          push-to-registry: true
+          subject-name: ghcr.io/containerforge/${{ inputs.app }}
+          subject-digest: ${{ needs.merge.outputs.digest }}
+
+
+      - name: Sign GHCR Image
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign sign ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}"
+
+      - name: Verify GHCR Signed Digest
+        env:
+          COSIGN_EXPERIMENTAL: "1"
+        run: |
+          cosign verify ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/master
+
 
   announce:
     if: ${{ inputs.release && needs.plan.outputs.app-exists != 'true' }}
