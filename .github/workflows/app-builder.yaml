@@ -242,6 +242,9 @@ jobs:
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Sign the merged digest for GHCR
+        if: github.event_name != 'pull_request'
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign sign ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
             -a "repo=${{ github.repository }}" \
@@ -249,6 +252,9 @@ jobs:
             -a "ref=${{ github.sha }}"
 
       - name: Verify the signed digest on GHCR
+        if: github.event_name != 'pull_request'
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign verify ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
@@ -375,6 +381,8 @@ jobs:
           docker buildx imagetools create $TAG_ARGS quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Sign Quay Image
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign sign quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
             -a "repo=${{ github.repository }}" \
@@ -382,6 +390,8 @@ jobs:
             -a "ref=${{ github.sha }}"
 
       - name: Verify Quay Signed Digest
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign verify quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
@@ -474,6 +484,8 @@ jobs:
           docker buildx imagetools create $TAG_ARGS ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Sign GHCR Image
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign sign ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
             -a "repo=${{ github.repository }}" \
@@ -481,6 +493,8 @@ jobs:
             -a "ref=${{ github.sha }}"
 
       - name: Verify GHCR Signed Digest
+        env:
+          COSIGN_EXPERIMENTAL: "1"
         run: |
           cosign verify ghcr.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
