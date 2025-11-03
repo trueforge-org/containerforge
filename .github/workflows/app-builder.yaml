@@ -121,6 +121,12 @@ jobs:
         run: |-
           rsync -a --ignore-existing --progress ./include/ ./apps/${{ inputs.app }}/
 
+      - name: Set sanitized platform
+        run: |
+          SANITISED_PLATFORM="${{ matrix.platform }}"
+          SANITISED_PLATFORM="${SANITISED_PLATFORM//\//-}"
+          echo "SANITISED_PLATFORM=$SANITISED_PLATFORM" >> $GITHUB_ENV
+
       # ---------------- Build step (local) ----------------
       - name: Build App Locally
         uses: docker/bake-action@3acf805d94d93a86cce4ca44798a76464a75b88c
@@ -140,7 +146,7 @@ jobs:
             *.labels.org.opencontainers.image.vendor="TrueForge"
             *.labels.org.opencontainers.image.authors="TrueForge <info@trueforge.org>"
             *.labels.org.opencontainers.image.description="Container for ${{ inputs.app }} by TrueForge"
-            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }},load=true,push=false
+            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${SANITISED_PLATFORM},load=true,push=false
             *.platform=${{ matrix.platform }}
             *.tags=
           source: .
@@ -150,7 +156,7 @@ jobs:
       # ---------------- Push step ----------------
       - name: Push Image to GHCR
         run: |
-          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }}"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${SANITISED_PLATFORM}"
           docker push $IMAGE
 
       - name: Login to Quay
@@ -162,8 +168,8 @@ jobs:
 
       - name: Push digest to Quay
         run: |
-          LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }}"
-          QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }}"
+          LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${SANITISED_PLATFORM}"
+          QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:${{ github.sha }}-${SANITISED_PLATFORM}"
           # Tag local image for Quay using the same digest
           docker tag $LOCAL_IMAGE $QUAY_IMAGE
           # Push to Quay
@@ -172,7 +178,7 @@ jobs:
       - name: Export Digest
         run: |
           mkdir -p ${{ runner.temp }}/digests
-          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${SANITISED_PLATFORM}"
           # Get the digest from the pushed image on GHCR
           DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $IMAGE | cut -d@ -f2)
           echo "$DIGEST" > "${{ runner.temp }}/digests/${DIGEST#sha256:}"
