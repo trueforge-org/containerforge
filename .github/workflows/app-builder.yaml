@@ -193,13 +193,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      - name: Create Multi-Arch Manifest List for GHCR
-        working-directory: ${{ runner.temp }}/digests
-        run: |-
-          docker buildx imagetools create \
-            $(jq --raw-output --compact-output '.target."docker-metadata-action".tags | map(select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json) \
-            $(printf 'ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@sha256:%s ' *)
-
       - name: Login to Quay
         uses: docker/login-action@v3
         with:
@@ -207,14 +200,25 @@ jobs:
           username: ${{ secrets.QUAY_CF_USER }}
           password: ${{ secrets.QUAY_CF_TOKEN }}
 
-      - name: Create Multi-Arch Manifest List for quay
+      - name: Create Multi-Arch Manifest List for GHCR
         working-directory: ${{ runner.temp }}/digests
         run: |-
-          QUAY_TAGS=$(jq --raw-output --compact-output '.target."docker-metadata-action".tags | map(select(startswith("quay.io/containerforge/${{ inputs.app }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json)
-          docker buildx imagetools create \
-            $QUAY_TAGS \
-            $(printf 'ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@sha256:%s ' *)
+          # Get GHCR tags
+          GHCR_TAGS=$(jq -r --compact-output '.target."docker-metadata-action".tags
+            | map(select(startswith("ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t " + .)
+            | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json)
+          # Get Quay tags
+          QUAY_TAGS=$(jq -r --compact-output '.target."docker-metadata-action".tags
+            | map(select(startswith("quay.io/containerforge/'"${{ inputs.app }}"'")) | "-t " + .)
+            | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json)
 
+          # Combine all tags
+          ALL_TAGS="$QUAY_TAGS $GHCR_TAGS"
+
+          # Create multi-arch manifest for all targets
+          docker buildx imagetools create \
+            $ALL_TAGS \
+            $(printf 'ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@sha256:%s ' *)
       - name: Inspect Image
         run: |-
           docker buildx imagetools inspect ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:$(jq --raw-output '.target."docker-metadata-action".args.DOCKER_META_VERSION' ${{ runner.temp }}/docker-metadata-action-bake.json)
