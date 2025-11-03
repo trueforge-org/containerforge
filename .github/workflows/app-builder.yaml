@@ -140,7 +140,7 @@ jobs:
             *.labels.org.opencontainers.image.vendor="TrueForge"
             *.labels.org.opencontainers.image.authors="TrueForge <info@trueforge.org>"
             *.labels.org.opencontainers.image.description="Container for ${{ inputs.app }} by TrueForge"
-            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }},load=true,push=false
+            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }},load=true,push=false
             *.platform=${{ matrix.platform }}
             *.tags=
           source: .
@@ -150,7 +150,7 @@ jobs:
       # ---------------- Push step ----------------
       - name: Push Image to GHCR
         run: |
-          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }}"
           docker push $IMAGE
 
       - name: Login to Quay
@@ -162,8 +162,8 @@ jobs:
 
       - name: Push digest to Quay
         run: |
-          LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
-          QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform }}"
+          LOCAL_IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }}"
+          QUAY_IMAGE="quay.io/containerforge/${{ inputs.app }}:${{ github.sha }}-${{ matrix.platform.replace('/', '-') }}"
           # Tag local image for Quay using the same digest
           docker tag $LOCAL_IMAGE $QUAY_IMAGE
           # Push to Quay
