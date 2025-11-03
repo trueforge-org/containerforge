@@ -64,7 +64,7 @@ jobs:
             type=raw,value=${{ steps.app-versions.outputs.raw }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
             type=raw,value=rolling,enable=${{ inputs.release }}
             type=raw,value=sandbox,enable=${{ ! inputs.release }}
-            type=raw,value=sha-${{ github.sha }}
+            type=raw,value=sha-${{ github.sha }},enable=${{ ! inputs.release }}
 
       - name: Upload Bake Metadata
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -210,7 +210,7 @@ jobs:
       - name: Create Multi-Arch Manifest List for quay
         working-directory: ${{ runner.temp }}/digests
         run: |-
-          QUAY_TAGS=$(jq --raw-output --compact-output '.target."docker-metadata-action".tags | map(select(startswith("quay.io/${{ github.repository_owner }}/${{ inputs.app }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json)
+          QUAY_TAGS=$(jq --raw-output --compact-output '.target."docker-metadata-action".tags | map(select(startswith("quay.io/containerforge/${{ inputs.app }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/docker-metadata-action-bake.json)
           docker buildx imagetools create \
             $QUAY_TAGS \
             $(printf 'ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@sha256:%s ' *)
