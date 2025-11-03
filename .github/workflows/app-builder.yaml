@@ -318,6 +318,7 @@ jobs:
           subject-digest: ${{ needs.merge.outputs.digest }}
 
       - name: Attestation for Quay
+        if: github.event_name != 'pull_request'
         uses: actions/attest-build-provenance@v3.0.0
         with:
           push-to-registry: true
