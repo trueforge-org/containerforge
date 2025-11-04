@@ -356,14 +356,6 @@ jobs:
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}"
 
-      - name: Sign the merged digest for TrueForge-OCI
-        if: github.event_name != 'pull_request'
-        run: |
-          cosign sign oci.trueforge.org/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
-            -a "repo=${{ github.repository }}" \
-            -a "workflow=${{ github.workflow }}" \
-            -a "ref=${{ github.sha }}"
-
       - name: Verify the signed digest on GHCR
         if: github.event_name != 'pull_request'
         run: |
@@ -377,15 +369,6 @@ jobs:
           cosign verify quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main
-
-      # TODO: Ensure this works
-      # - name: Verify the signed digest on TrueForge-OCI
-      #   if: github.event_name != 'pull_request'
-      #   run: |
-      #     cosign verify oci.trueforge.org/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
-      #       --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-      #       --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main
-
 
   test:
     if: ${{ ! inputs.release }}
