@@ -297,7 +297,7 @@ jobs:
           cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
-            ghcr.io/trueforge-org/${APP}@${{ needs.merge.outputs.digest }}
+            ghcr.io/trueforge-org/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Verify Attestation for GHCR
         env:
@@ -306,7 +306,7 @@ jobs:
           cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
-            quay.io/containeforge/${APP}@${{ needs.merge.outputs.digest }}
+            quay.io/containeforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Verify Attestation for TrueForge-OCI
         env:
@@ -315,7 +315,7 @@ jobs:
           cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
-            oci.trueforge.org/containeforge/${APP}@${{ needs.merge.outputs.digest }}
+            oci.trueforge.org/containeforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
   sign:
     name: sign
     needs:
