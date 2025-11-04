@@ -2,9 +2,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Release
 
-concurrency:
-  group: ${{ github.head_ref }}-container-release
-
 on:
   push:
     branches:
