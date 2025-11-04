@@ -356,6 +356,14 @@ jobs:
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}"
 
+      - name: Sign the merged digest for TrueForge-OCI
+        if: github.event_name != 'pull_request'
+        run: |
+          cosign sign oci.trueforge.org/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} -y \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}"
+
       - name: Verify the signed digest on GHCR
         if: github.event_name != 'pull_request'
         run: |
