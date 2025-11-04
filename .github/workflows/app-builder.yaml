@@ -302,7 +302,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |-
-          cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
+          cosign verify-attestation --type slsaprovenance1 \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
             quay.io/trueforge-org/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
@@ -311,7 +311,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |-
-          cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
+          cosign verify-attestation --type slsaprovenance1 \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
             oci.trueforge.org/containeforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
