@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/trueforge-org/java17:17.0.16
+FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:1fd07905179429acafeb36968742508418c81f828f84cb13a340e1e6032f361c
 
 ARG VERSION
 

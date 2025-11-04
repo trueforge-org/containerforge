@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/trueforge-org/devcontainer:2.0.6
+FROM ghcr.io/trueforge-org/devcontainer:2.0.6@sha256:96e6287490000e708302a9fec2daa0cda794555624f59b480ef218bf1fb367c4
 
 USER root
 
