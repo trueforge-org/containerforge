@@ -288,12 +288,32 @@ jobs:
           subject-name: quay.io/containerforge/${{ inputs.app }}
           subject-digest: ${{ needs.merge.outputs.digest }}
 
-      - name: Verify Attestation
+      - name: Verify Attestation for GHCR
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |-
-          gh attestation verify --repo ${{ github.repository }} oci://ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
+            ghcr.io/trueforge-org/${APP}@${{ needs.merge.outputs.digest }}
 
+      - name: Verify Attestation for GHCR
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |-
+          cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
+            quay.io/containeforge/${APP}@${{ needs.merge.outputs.digest }}
+
+      - name: Verify Attestation for TrueForge-OCI
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |-
+          cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
+            oci.trueforge.org/containeforge/${APP}@${{ needs.merge.outputs.digest }}
   sign:
     name: sign
     needs:
@@ -330,13 +350,6 @@ jobs:
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}"
 
-      - name: Verify the signed digest on GHCR
-        if: github.event_name != 'pull_request'
-        run: |
-          cosign verify ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
-            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main
-
       - name: Sign the merged digest for Quay
         if: github.event_name != 'pull_request'
         run: |
@@ -345,6 +358,13 @@ jobs:
             -a "workflow=${{ github.workflow }}" \
             -a "ref=${{ github.sha }}"
 
+      - name: Verify the signed digest on GHCR
+        if: github.event_name != 'pull_request'
+        run: |
+          cosign verify ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main
+
       - name: Verify the signed digest on Quay
         if: github.event_name != 'pull_request'
         run: |
@@ -352,6 +372,12 @@ jobs:
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main
 
+      - name: Verify the signed digest on TrueForge-OCI
+        if: github.event_name != 'pull_request'
+        run: |
+          cosign verify oci.trueforge.org/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }} \
+            --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+            --certificate-identity=https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main
 
 
   test:
