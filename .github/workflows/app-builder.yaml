@@ -160,14 +160,6 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-      - name: Set Quay to Public
-        if: github.event_name != 'pull_request'
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-            -d '{"visibility": "public"}' \
-            -H "Authorization: Bearer ${{ secrets.QUAY_CF_API_TOKEN }}" \
-            "https://quay.io/api/v1/repository/containerforge/${{ inputs.app }}/changevisibility"
-
 
   merge:
     name: Merge
@@ -237,6 +229,14 @@ jobs:
           TAG=$(jq --raw-output '.target."docker-metadata-action".args.DOCKER_META_VERSION' ${{ runner.temp }}/docker-metadata-action-bake.json)
           DIGEST=$(docker buildx imagetools inspect ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:${TAG} --format '{{ json . }}' | jq --raw-output '.manifest.digest')
           echo "digest=${DIGEST}" >> $GITHUB_OUTPUT
+
+      - name: Set Quay to Public
+        if: github.event_name != 'pull_request'
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"visibility": "public"}' \
+            -H "Authorization: Bearer ${{ secrets.QUAY_CF_API_TOKEN }}" \
+            "https://quay.io/api/v1/repository/containerforge/${{ inputs.app }}/changevisibility"
 
   attest:
     name: Attest
