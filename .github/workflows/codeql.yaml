@@ -13,7 +13,8 @@ permissions:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     permissions:
       security-events: write
       packages: read

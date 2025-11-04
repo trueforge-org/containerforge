@@ -13,7 +13,8 @@ permissions:
 jobs:
   stale:
     name: Stale
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     permissions:
       actions: write
       contents: write
