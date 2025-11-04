@@ -294,7 +294,7 @@ jobs:
   sign:
     name: sign
     needs:
-      - attest
+      - merge
     runs-on: ubuntu-latest
     steps:
 
@@ -355,7 +355,6 @@ jobs:
     name: Test
     needs:
       - merge
-      - attest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -400,6 +399,7 @@ jobs:
     needs:
       - plan
       - attest
+      - sign
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -447,6 +447,7 @@ jobs:
       - build
       - merge
       - attest
+      - sign
       - announce
     name: Notify
     runs-on: ubuntu-latest
