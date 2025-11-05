@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/usr/bin/env bash
 
 [ -n "${NEXTCLOUD_URL:?"WARN: NEXTCLOUD_URL is unset"}" ]
 

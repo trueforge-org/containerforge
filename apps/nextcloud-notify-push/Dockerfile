@@ -23,8 +23,3 @@ USER nobody:nogroup
 
 # Copy files with correct permissions
 COPY --chmod=775 . /
-
-RUN echo "show app and root folder content...";\
-    ls -l / \
-    && \
-    ls -l /app
