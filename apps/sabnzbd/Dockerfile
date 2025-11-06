@@ -15,6 +15,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         p7zip-full \
+        unzip \
         build-essential \
         cargo \
         libffi-dev \
