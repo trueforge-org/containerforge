@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
 FROM ghcr.io/trueforge-org/python:3.13.7@sha256:462920f87d68208b7203ce499c21a3848dbf1ff90e726538027b40c414bd7ff9
+ARG TARGETARCH
 ARG VERSION
 
 ENV SABNZBD__ADDRESS="[::]" \
@@ -14,13 +15,13 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         p7zip-full \
-        par2cmdline \
         build-essential \
         cargo \
         libffi-dev \
         libssl-dev \
     && rm -rf /var/lib/apt/lists/*; \
     \
+    ln -sf /usr/bin/7z /usr/bin/7za; \
     mkdir -p /app; \
     curl -fsSL "https://github.com/sabnzbd/sabnzbd/releases/download/${VERSION}/SABnzbd-${VERSION}-src.tar.gz" \
         | tar xzf - -C /app --strip-components=1; \
@@ -37,6 +38,17 @@ RUN set -eux; \
     pip uninstall --yes uv; \
     apt-get purge -y --auto-remove build-essential cargo libffi-dev libssl-dev; \
     rm -rf /root/.cache /root/.cargo /tmp/*
+
+# download, install, and verify par2-turbo
+RUN set -eux; \
+    PAR2_VERSION="v1.3.0"; \
+    PAR2_FILE="par2cmdline-turbo-${PAR2_VERSION}-linux-${TARGETARCH}"; \
+    curl -fsSL -o "/tmp/${PAR2_FILE}.xz" \
+      "https://github.com/animetosho/par2cmdline-turbo/releases/download/${PAR2_VERSION}/${PAR2_FILE}.xz"; \
+    xz -d "/tmp/${PAR2_FILE}.xz"; \
+    install -m 0755 "/tmp/${PAR2_FILE}" /usr/local/bin/par2; \
+    rm -f "/tmp/${PAR2_FILE}"; \
+    par2 --version
 
 # Copy local files
 COPY . /
