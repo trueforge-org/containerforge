@@ -41,10 +41,10 @@ RUN set -eux; \
 
 # download, install, and verify par2-turbo
 RUN set -eux; \
-    PAR2_VERSION="v1.3.0"; \
+    PAR2_VERSION="1.3.0"; \
     PAR2_FILE="par2cmdline-turbo-${PAR2_VERSION}-linux-${TARGETARCH}"; \
     curl -fsSL -o "/tmp/${PAR2_FILE}.zip" \
-      "https://github.com/animetosho/par2cmdline-turbo/releases/download/${PAR2_VERSION}/${PAR2_FILE}.zip"; \
+      "https://github.com/animetosho/par2cmdline-turbo/releases/download/v${PAR2_VERSION}/${PAR2_FILE}.zip"; \
     unzip -q "/tmp/${PAR2_FILE}.zip" -d /tmp; \
     install -m 0755 "/tmp/${PAR2_FILE}" /usr/local/bin/par2; \
     rm -f "/tmp/${PAR2_FILE}" "/tmp/${PAR2_FILE}.zip"; \
