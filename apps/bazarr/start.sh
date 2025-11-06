@@ -5,5 +5,4 @@ exec \
         /app/bin/bazarr.py \
             --no-update True \
             --config /config \
-            --port ${BAZARR__PORT} \
-            "$@"
+            --port ${BAZARR__PORT}
