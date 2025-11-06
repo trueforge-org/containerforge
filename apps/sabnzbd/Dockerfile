@@ -46,9 +46,8 @@ RUN set -eux; \
     PAR2_FILE="par2cmdline-turbo-${PAR2_VERSION}-linux-${TARGETARCH}"; \
     curl -fsSL -o "/tmp/${PAR2_FILE}.zip" \
       "https://github.com/animetosho/par2cmdline-turbo/releases/download/v${PAR2_VERSION}/${PAR2_FILE}.zip"; \
-    unzip -q "/tmp/${PAR2_FILE}.zip" -d /tmp; \
-    install -m 0755 "/tmp/${PAR2_FILE}" /usr/local/bin/par2; \
-    rm -f "/tmp/${PAR2_FILE}" "/tmp/${PAR2_FILE}.zip"; \
+    unzip -q "/tmp/${PAR2_FILE}.zip" -d /usr/local/bin/; \
+    chmod +x /usr/local/bin/par2; \
     par2 --version
 
 # Copy local files
