@@ -1,6 +1,5 @@
 ARG VERSION
-FROM public.ecr.aws/docker/library/nextcloud:${VERSION}-fpm@sha256:e2d5ea25d0aa53a3bb22e7fa537f40f8246e1d9ce8cd825891a9a8ada24188b0
-
+FROM public.ecr.aws/docker/library/nextcloud:${VERSION}
 ARG TARGETARCH
 
 # Adds SURY PHP repository (This is a workaround because IMAP php extension is no longer available in Debian Trixie)
