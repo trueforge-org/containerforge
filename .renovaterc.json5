@@ -61,37 +61,32 @@
   packageRules: [
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/ubuntu"],
+      "matchPackageNames": ["/ubuntu/"],
       "groupName": "ubuntu"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/python"],
+      "matchPackageNames": ["/python/"],
       "groupName": "python"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/golang"],
+      "matchPackageNames": ["/golang/"],
       "groupName": "golang"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/node"],
-      "groupName": "node"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/java17"],
+      "matchPackageNames": ["/java17/"],
       "groupName": "java17"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/java21"],
+      "matchPackageNames": ["/java21/"],
       "groupName": "java21"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/trueforge-org/steamcmd"],
+      "matchPackageNames": ["/steamcmd/"],
       "groupName": "steamcmd"
     },
     {
@@ -110,33 +105,6 @@
       automerge: true,
       automergeType: "pr",
       ignoreTests: false,
-    },
-    {
-      description: ["Allowed Ubuntu Version for Base Images"],
-      matchDatasources: ["docker"],
-      matchPackageNames: ["/ubuntu/"],
-      allowedVersions: "/24\\.04/",
-    },
-    {
-      description: ["Allowed Alpine Version for Base Images"],
-      matchDatasources: ["docker"],
-      matchFileNames: ["**/Dockerfile"],
-      matchPackageNames: ["/alpine/"],
-      allowedVersions: "/3\\.22/",
-    },
-    {
-      description: ["Allowed Python Version for Base Images"],
-      matchDatasources: ["docker"],
-      matchFileNames: ["**/Dockerfile"],
-      matchPackageNames: ["/python/"],
-      allowedVersions: "/3\\.13-alpine3\\.22/",
-    },
-    {
-      description: ["Allowed Java Version for NZBHydra2 Base Image"],
-      matchDatasources: ["docker"],
-      matchFileNames: ["apps/nzbhydra2/Dockerfile"],
-      matchPackageNames: ["/amazoncorretto/"],
-      allowedVersions: "/17-alpine3\\.22/",
     },
     {
       description: ["Allow Unstable Versions"],
