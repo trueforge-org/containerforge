@@ -60,6 +60,41 @@
   },
   packageRules: [
     {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/ubuntu"],
+      "groupName": "ubuntu"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/python"],
+      "groupName": "python"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/golang"],
+      "groupName": "golang"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/node"],
+      "groupName": "node"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/java17"],
+      "groupName": "java17"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/java21"],
+      "groupName": "java21"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/steamcmd"],
+      "groupName": "steamcmd"
+    },
+    {
       description: ["Release Rules for App Updates"],
       addLabels: ["app/{{parentDir}}"],
       additionalBranchPrefix: "{{parentDir}}-",
