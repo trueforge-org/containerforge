@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+
 
 FROM ghcr.io/trueforge-org/node:22.20@sha256:8624b5123c437d4ede0454fc92e6b38ae6e14a5b722a3b75a26425632ee24633 AS builder
 ARG VERSION

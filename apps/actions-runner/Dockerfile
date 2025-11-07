@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+
 
 FROM ghcr.io/trueforge-org/devcontainer:2.0.6@sha256:28d1ebf0a974588d484b7443155a2aa3872842356a1bac90dfcdbcb1fe5dad82
 

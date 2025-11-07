@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+
 
 # Builder stage
 FROM ghcr.io/trueforge-org/python:3.13.7@sha256:f7b8874a00dfefe9b411be2b4eaaf3f43475cc4afd264af76e790a213deb1b73 AS builder
