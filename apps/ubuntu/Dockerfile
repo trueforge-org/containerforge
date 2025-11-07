@@ -17,6 +17,30 @@ WORKDIR /app
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Create group and user "www-data" with UID and GID 33
+RUN groupadd -g 33 www-data && \
+    useradd -m -u 568 -g 33 -s /bin/bash www-data; \
+    mkdir -p /home/www-data; \
+    chown -R www-data:www-data /home/www-data
+
+# Create group and user "nginx" with UID and GID 101
+RUN groupadd -g 101 nginx && \
+    useradd -m -u 101 -g 101 -s /bin/bash nginx; \
+    mkdir -p /home/nginx; \
+    chown -R nginx:nginx /home/nginx
+
+# Create group and user "apps" with UID and GID 568
+RUN groupadd -g 568 apps && \
+    useradd -m -u 568 -g 568 -s /bin/bash apps; \
+    mkdir -p /home/apps; \
+    chown -R apps:apps /home/apps
+
+# Create group and user "nonroot" with UID and GID 65532
+RUN groupadd -g 65532 nonroot && \
+    useradd -m -u 65532 -g 65532 -s /bin/bash nonroot; \
+    mkdir -p /home/nonroot; \
+    chown -R nonroot:nonroot /home/nonroot
+
 # Install packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
@@ -53,7 +77,8 @@ RUN apt-get update \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
 
 # Use a safe non-root user
-USER nobody:nogroup
+# Note: nobody:nogroup does not map to the same uid:gid on every (host/share) distro!
+USER apps:apps
 
 COPY --chmod=0775 . /
 
