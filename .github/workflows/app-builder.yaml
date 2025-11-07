@@ -202,7 +202,7 @@ jobs:
           username: ${{ secrets.QUAY_CF_USER }}
           password: ${{ secrets.QUAY_CF_TOKEN }}
 
-      - name: Create Multi-Arch Manifest List for GHCR
+      - name: Create Multi-Arch Manifest List
         working-directory: ${{ runner.temp }}/digests
         run: |-
           # Get GHCR tags
@@ -233,7 +233,7 @@ jobs:
           echo "digest=${DIGEST}" >> $GITHUB_OUTPUT
 
       - name: Set Quay to Public
-        if: github.event_name != 'pull_request'
+        if: ${{ inputs.release }}
         run: |
           curl -X POST -H "Content-Type: application/json" \
             -d '{"visibility": "public"}' \
@@ -242,6 +242,7 @@ jobs:
 
   attest:
     name: Attest
+    if: ${{ inputs.release }}
     needs:
       - merge
     runs-on:
@@ -318,6 +319,7 @@ jobs:
       #       oci.trueforge.org/containeforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
   sign:
     name: sign
+    if: ${{ inputs.release }}
     needs:
       - merge
     runs-on:
