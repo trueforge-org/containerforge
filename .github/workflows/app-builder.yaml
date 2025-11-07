@@ -376,8 +376,7 @@ jobs:
     name: Test
     needs:
       - merge
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@71cf2267d89c5cb81562390fa70a37fa40b1305e
