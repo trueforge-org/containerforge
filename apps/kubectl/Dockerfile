@@ -26,4 +26,4 @@ RUN apt-get update && \
     # Cleanup
     rm -rf /var/lib/apt/lists/* kubectl* cmctl.tar.gz
 
-USER nobody:nogroup
+USER apps:apps

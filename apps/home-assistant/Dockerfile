@@ -70,7 +70,7 @@ RUN pip install uv; \
     mkdir -p /config && chown nobody:nogroup -R /config; \
     rm -rf /root/.cache /tmp/*
 
-USER nobody:nogroup
+USER apps:apps
 COPY --chmod=0775 . /
 
 WORKDIR /config

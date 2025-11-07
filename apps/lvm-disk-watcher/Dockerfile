@@ -20,4 +20,4 @@ WORKDIR /app
 
 ENTRYPOINT ["/bin/bash", "/scripts/watch_lvm.sh"]
 
-USER nobody:nogroup
+USER apps:apps

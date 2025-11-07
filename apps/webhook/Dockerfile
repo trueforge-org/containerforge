@@ -34,5 +34,5 @@ RUN set -eux; \
 # Copy local files
 COPY . /
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /config

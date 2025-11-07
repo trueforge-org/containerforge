@@ -25,5 +25,5 @@ RUN apt-get update && \
 
 COPY . /
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /config

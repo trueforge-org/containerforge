@@ -26,6 +26,6 @@ COPY . /
 COPY --from=ghcr.io/linuxserver/unrar:latest /usr/bin/unrar-alpine /usr/bin/unrar
 
 # Switch to non-root user
-USER nobody:nogroup
+USER apps:apps
 
 WORKDIR /config

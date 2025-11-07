@@ -46,7 +46,7 @@ COPY . /
 # Copy unrar binary from LinuxServer image
 COPY --from=ghcr.io/linuxserver/unrar:latest /usr/bin/unrar-alpine /usr/bin/unrar
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /config
 
 CMD [""]

@@ -16,5 +16,5 @@ RUN mkdir -p /app/bin && \
 
 COPY . /
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /config

@@ -38,7 +38,7 @@ RUN apt-get update \
 COPY . /
 
 # run as nobody
-USER nobody:nogroup
+USER apps:apps
 
 WORKDIR /config
 VOLUME ["/config"]

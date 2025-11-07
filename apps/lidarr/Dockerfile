@@ -29,5 +29,5 @@ RUN add-apt-repository universe && \
 
 COPY . /
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /config

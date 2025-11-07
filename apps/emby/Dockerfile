@@ -24,5 +24,5 @@ RUN \
 
 COPY . /
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /config

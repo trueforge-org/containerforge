@@ -94,5 +94,5 @@ RUN set -eux; \
     done
 
 # Switch to non-root user
-USER nobody:nogroup
+USER apps:apps
 

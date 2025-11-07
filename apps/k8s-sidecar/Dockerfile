@@ -30,7 +30,7 @@ RUN .venv/bin/pip install --no-cache-dir -r requirements.txt && \
 
 FROM ghcr.io/trueforge-org/python:3.13.7@sha256:f7b8874a00dfefe9b411be2b4eaaf3f43475cc4afd264af76e790a213deb1b73
 
-USER nobody:nogroup
+USER apps:apps
 
 WORKDIR /app
 

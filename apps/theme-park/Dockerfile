@@ -30,5 +30,5 @@ COPY --from=builder --chown=nobody:nogroup /tmp/index.html /usr/share/nginx/html
 COPY --from=builder --chown=nobody:nogroup /tmp/css /usr/share/nginx/html/css/
 COPY --from=builder --chown=nobody:nogroup /tmp/resources /usr/share/nginx/html/resources/
 
-USER nobody:nogroup
+USER apps:apps
 WORKDIR /usr/share/nginx/html
