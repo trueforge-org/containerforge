@@ -1,7 +1,7 @@
 
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04.0@sha256:665ed0fd948cf3c093cb8e3fbf7f3add2a14915814322a302bb6bb3f4e25726a AS build
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e0f946b03dc12bbfa4f72629bd61690502df47c59b4105bc37fe346dc5d489b8
 
 ENV PATH=/usr/local/go/bin:$PATH
 
@@ -28,7 +28,7 @@ RUN set -eux; \
     apt-get purge -y --auto-remove gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04.0@sha256:665ed0fd948cf3c093cb8e3fbf7f3add2a14915814322a302bb6bb3f4e25726a
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e0f946b03dc12bbfa4f72629bd61690502df47c59b4105bc37fe346dc5d489b8
 
 USER root
 
