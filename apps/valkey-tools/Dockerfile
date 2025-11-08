@@ -1,5 +1,5 @@
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e0f946b03dc12bbfa4f72629bd61690502df47c59b4105bc37fe346dc5d489b8
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:6b8f2bf1ddc52dd7a9a640e325492250ff9de736440271fde15505decbd88626
 
 ARG VERSION
 
