@@ -14,9 +14,12 @@ These are just examples; it could also be something much better.
 # Ensure target entrypoint scriptfolder exist
 mkdir -p /docker-entrypoint.d
 
-echo "[entrypoint] Merging custom scripts provided by user..."
+
 shopt -s dotglob
-cp -rn /customscripts/* /docker-entrypoint.d/
+if [ -d "/customscripts" ]; then
+  echo "[entrypoint] Merging custom scripts provided by user..."
+  cp -rn /customscripts/* /docker-entrypoint.d/
+fi
 
 if [ -d "/customoverlay" ]; then
   echo "[entrypoint] Merging Custom Overlay provided by user..."
