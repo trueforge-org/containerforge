@@ -11,11 +11,17 @@ These are just examples; it could also be something much better.
 * Questions should be discussed in Discord
 "
 
-# Process /docker-entrypoint.d/ if it exists and is not empty
-if [ -d "/docker-entrypoint.d" ] && /usr/bin/find "/docker-entrypoint.d" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read -r v; then
-    echo "[entrypoint] Processing /docker-entrypoint.d/ scripts..."
+# Ensure target directory exists
+mkdir -p /docker-entrypoint.d/init /docker-entrypoint.d/runtime
 
-    find "/docker-entrypoint.d" -follow -type f -print | sort -V | while read -r f; do
+# Copy scripts without overwriting
+cp -rn /customscripts/* /docker-entrypoint.d/
+
+# Process /docker-entrypoint.d/init/ if it exists and is not empty
+if [ -d "/docker-entrypoint.d/init" ] && /usr/bin/find "/docker-entrypoint.d/init" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read -r v; then
+    echo "[entrypoint] Processing init scripts..."
+
+    find "/docker-entrypoint.d/init" -follow -type f -print | sort -V | while read -r f; do
         case "$f" in
             *.envsh)
                 if [ -x "$f" ]; then
@@ -39,7 +45,7 @@ if [ -d "/docker-entrypoint.d" ] && /usr/bin/find "/docker-entrypoint.d" -mindep
 
     echo "[entrypoint] Configuration complete"
 else
-    echo "[entrypoint] No files found in /docker-entrypoint.d/, skipping"
+    echo "[entrypoint] No files found in /docker-entrypoint.d/init/, skipping"
 fi
 
 # Run main application
@@ -55,4 +61,35 @@ elif [ "$#" -gt 0 ]; then
 else
     echo "[entrypoint] Error: No /start.sh and no command provided" >&2
     exit 1
+fi
+
+# Process /docker-entrypoint.d/runtime/ if it exists and is not empty
+if [ -d "/docker-entrypoint.d/runtime" ] && /usr/bin/find "/docker-entrypoint.d/runtime" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read -r v; then
+    echo "[entrypoint] Processing runtime scripts..."
+
+    find "/docker-entrypoint.d/runtime" -follow -type f -print | sort -V | while read -r f; do
+        case "$f" in
+            *.envsh)
+                if [ -x "$f" ]; then
+                    echo "[entrypoint] Sourcing $f"
+                    . "$f"
+                else
+                    echo "[entrypoint] Ignoring $f, not executable"
+                fi
+                ;;
+            *.sh)
+                if [ -x "$f" ]; then
+                    echo "[entrypoint] Running $f"
+                    "$f"
+                else
+                    echo "[entrypoint] Ignoring $f, not executable"
+                fi
+                ;;
+            *) echo "[entrypoint] Ignoring $f";;
+        esac
+    done
+
+    echo "[entrypoint] Configuration complete"
+else
+    echo "[entrypoint] No files found in /docker-entrypoint.d/runtime/, skipping"
 fi
