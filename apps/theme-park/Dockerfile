@@ -26,9 +26,9 @@ ENV NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE=1
 USER root
 
 # Copy built files from builder
-COPY --from=builder --chown=nobody:nogroup /tmp/index.html /usr/share/nginx/html/
-COPY --from=builder --chown=nobody:nogroup /tmp/css /usr/share/nginx/html/css/
-COPY --from=builder --chown=nobody:nogroup /tmp/resources /usr/share/nginx/html/resources/
+COPY --from=builder --chown=568:568 /tmp/index.html /usr/share/nginx/html/
+COPY --from=builder --chown=568:568 /tmp/css /usr/share/nginx/html/css/
+COPY --from=builder --chown=568:568 /tmp/resources /usr/share/nginx/html/resources/
 
 USER apps:apps
 WORKDIR /usr/share/nginx/html

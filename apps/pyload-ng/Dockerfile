@@ -29,7 +29,7 @@ RUN set -eux; \
     \
     # Create required directories with correct permissions
     mkdir -p /config /downloads; \
-    chown -R nobody:nogroup /config /downloads; \
+    chown -R 568:568 /config /downloads; \
     \
     # Clean up temporary files
     rm -rf /root/.cache /tmp/*

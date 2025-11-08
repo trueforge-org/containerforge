@@ -6,7 +6,7 @@ ARG VERSION
 USER root
 
 # Copy files with ownership
-COPY --chown=nobody:nogroup . /
+COPY --chown=568:568 . /
 
 # Install LVM and dependencies, make script executable
 RUN apt-get update && \

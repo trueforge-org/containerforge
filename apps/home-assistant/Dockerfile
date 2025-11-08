@@ -67,7 +67,7 @@ RUN pip install uv; \
     uv pip install --index-strategy unsafe-best-match homeassistant=="${VERSION}"; \
     curl -fsSL -o /bin/go2rtc "https://github.com/AlexxIT/go2rtc/releases/latest/download/go2rtc_linux_${TARGETARCH}"; \
     chmod +x /bin/go2rtc; \
-    mkdir -p /config && chown nobody:nogroup -R /config; \
+    mkdir -p /config && chown 568:568 -R /config; \
     rm -rf /root/.cache /tmp/*
 
 USER apps:apps

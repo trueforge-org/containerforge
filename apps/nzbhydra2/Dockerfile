@@ -37,7 +37,7 @@ RUN apt-get update \
 # copy your repo
 COPY . /
 
-# run as nobody
+# run as 568
 USER apps:apps
 
 WORKDIR /config
