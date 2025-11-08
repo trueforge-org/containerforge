@@ -1,15 +1,34 @@
 #!/usr/bin/env bash
 
-echo "
-Welcome to a TrueForge ContainerForge container,
+show_header() {
+cat <<EOF
+Welcome to a TrueForge ContainerForge container!
+
 You are entering the vicinity of an area adjacent to a location.
 The kind of place where there might be a monster, or some kind of weird mirror.
 These are just examples; it could also be something much better.
-* Repository: https://github.com/trueforge-org/containerforge
-* Docs: https://trueforge.org
-* Bugs or feature requests should be opened in an GH issue
-* Questions should be discussed in Discord
-"
+
+Container Info:
+  * Running as: $(id -un) (UID: $(id -u), GID: $(id -g))
+  * Additional Groups: $(id -Gn)
+  * Number of CPUs available: $(nproc)
+  * Memory limits (if cgroup available):
+    $(awk '/MemTotal/ {print "    Total: "$2/1024 " MB"}' /proc/meminfo)
+
+Important Directories:
+  * /customscripts exists: $( [ -d /customscripts ] && echo "yes" || echo "no" )
+  * /customoverlay exists: $( [ -d /customoverlay ] && echo "yes" || echo "no" )
+
+Useful Links:
+  * Repository: https://github.com/trueforge-org/containerforge
+  * Docs: https://trueforge.org
+  * Discord: https://discord.gg/tVsPTHWTtr
+  * Bugs or feature requests: open a GH issue
+  * Questions: discuss in Discord
+EOF
+}
+
+show_header
 
 # Ensure target entrypoint scriptfolder exist
 mkdir -p /docker-entrypoint.d
