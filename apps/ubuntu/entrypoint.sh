@@ -28,7 +28,7 @@ if [ -d "/customoverlay" ]; then
   cp -rn /customoverlay/* /overlay/
 fi
 
-# Merge overlay into root (or /app if desired)
+# Merge overlay into root
 if [ -d "/overlay" ]; then
     echo "[entrypoint] Applying overlay..."
     cp -aT /overlay/* /
