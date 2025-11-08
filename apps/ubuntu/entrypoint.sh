@@ -1,15 +1,58 @@
 #!/usr/bin/env bash
 
-echo "
-Welcome to a TrueForge ContainerForge container,
+show_header() {
+cat <<EOF
+Welcome to a TrueForge ContainerForge container!
+
 You are entering the vicinity of an area adjacent to a location.
 The kind of place where there might be a monster, or some kind of weird mirror.
 These are just examples; it could also be something much better.
-* Repository: https://github.com/trueforge-org/containerforge
-* Docs: https://truecharts.org
-* Bugs or feature requests should be opened in an GH issue
-* Questions should be discussed in Discord
-"
+
+Container Info:
+  * Running as: $(id -un) (UID: $(id -u), GID: $(id -g))
+  * Additional Groups: $(id -Gn)
+  * Number of CPUs available: $(nproc)
+  * Memory limits (if cgroup available):
+    $(awk '/MemTotal/ {print "    Total: "$2/1024 " MB"}' /proc/meminfo)
+
+Important Directories:
+  * /customscripts exists: $( [ -d /customscripts ] && echo "yes" || echo "no" )
+  * /customoverlay exists: $( [ -d /customoverlay ] && echo "yes" || echo "no" )
+
+Useful Links:
+  * Repository: https://github.com/trueforge-org/containerforge
+  * Docs: https://trueforge.org
+  * Discord: https://discord.gg/tVsPTHWTtr
+  * Bugs or feature requests: open a GH issue
+  * Questions: discuss in Discord
+EOF
+}
+
+show_header
+
+# Ensure target entrypoint scriptfolder exist
+mkdir -p /docker-entrypoint.d
+
+
+shopt -s dotglob
+if [ -d "/customscripts" ]; then
+  echo "[entrypoint] Merging custom scripts provided by user..."
+  cp -rn /customscripts/* /docker-entrypoint.d/
+fi
+
+if [ -d "/customoverlay" ]; then
+  echo "[entrypoint] Merging Custom Overlay provided by user..."
+
+  # Copy overlay files without overwriting existing ones, including hidden files
+  cp -rn /customoverlay/* /overlay/
+fi
+
+# Merge overlay into root
+if [ -d "/overlay" ]; then
+    echo "[entrypoint] Applying overlay..."
+    cp -aT /overlay/* /
+fi
+shopt -u dotglob
 
 # Process /docker-entrypoint.d/ if it exists and is not empty
 if [ -d "/docker-entrypoint.d" ] && /usr/bin/find "/docker-entrypoint.d" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read -r v; then
