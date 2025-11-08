@@ -11,6 +11,27 @@ These are just examples; it could also be something much better.
 * Questions should be discussed in Discord
 "
 
+# Ensure target entrypoint scriptfolder exist
+mkdir -p /docker-entrypoint.d
+
+echo "[entrypoint] Merging custom scripts provided by user..."
+shopt -s dotglob
+cp -rn /customscripts/* /docker-entrypoint.d/
+
+if [ -d "/customoverlay" ]; then
+  echo "[entrypoint] Merging Custom Overlay provided by user..."
+
+  # Copy overlay files without overwriting existing ones, including hidden files
+  cp -rn /customoverlay/* /overlay/
+fi
+
+# Merge overlay into root (or /app if desired)
+if [ -d "/overlay" ]; then
+    echo "[entrypoint] Applying overlay..."
+    cp -aT /overlay/* /
+fi
+shopt -u dotglob
+
 # Process /docker-entrypoint.d/ if it exists and is not empty
 if [ -d "/docker-entrypoint.d" ] && /usr/bin/find "/docker-entrypoint.d" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read -r v; then
     echo "[entrypoint] Processing /docker-entrypoint.d/ scripts..."
