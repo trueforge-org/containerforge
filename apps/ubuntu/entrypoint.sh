@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+show_header() {
+echo "
+Welcome to a TrueForge ContainerForge container,
+You are entering the vicinity of an area adjacent to a location.
+The kind of place where there might be a monster, or some kind of weird mirror.
+These are just examples; it could also be something much better.
+* Repository: https://github.com/trueforge-org/containerforge
+* Docs: https://truecharts.org
+* Bugs or feature requests should be opened in an GH issue
+* Questions should be discussed in Discord
+"
+}
+
 run_main() {
     local background=${1:-false}
     shift
@@ -80,17 +93,7 @@ if [ "$runtime" = true ] && [ -n "$MAIN_PID" ]; then
 fi
 }
 
-echo "
-Welcome to a TrueForge ContainerForge container,
-You are entering the vicinity of an area adjacent to a location.
-The kind of place where there might be a monster, or some kind of weird mirror.
-These are just examples; it could also be something much better.
-* Repository: https://github.com/trueforge-org/containerforge
-* Docs: https://truecharts.org
-* Bugs or feature requests should be opened in an GH issue
-* Questions should be discussed in Discord
-"
-
+show_header
 
 # Ensure target directory exists
 mkdir -p /docker-entrypoint.d/init /docker-entrypoint.d/runtime
