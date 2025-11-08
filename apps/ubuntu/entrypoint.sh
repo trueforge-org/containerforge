@@ -28,6 +28,27 @@ Useful Links:
 EOF
 }
 
+check_uid_gid() {
+    local TARGET_UID=568
+    local TARGET_GID=568
+
+    local CURRENT_UID=$(id -u)
+    local CURRENT_GID=$(id -g)
+
+    if [[ "$CURRENT_UID" -ne "$TARGET_UID" ]]; then
+        echo "[entrypoint] WARNING: Set User-ID (UID) ($CURRENT_GID) does not match the guaranteed-default: $TARGET_GID"
+    fi
+
+    if [[ ="$CURRENT_GID" -ne "$TARGET_GID" ]]; then
+        echo "[entrypoint] WARNING: Set Group-ID (GID) ($CURRENT_GID) does not match the guaranteed-default: $TARGET_GID"
+    fi
+}
+
+
+### START MAIN
+
+check_uid_gid
+
 show_header
 
 # Ensure target entrypoint scriptfolder exist
