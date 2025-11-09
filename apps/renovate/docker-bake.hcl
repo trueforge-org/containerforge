@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=renovate/renovate
-  default = "41.173.1"
+  default = "42.2.0"
 }
 
 variable "CLUSTERTOOL_VERSION" {
