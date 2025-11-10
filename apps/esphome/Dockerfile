@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:7a6bfb3a8094cff32fd1453f4746e2ec36e38d28c147db2d80ddce773bedbf79
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:87a0f5a9d93409b66626a7de1e66fe7c4d9e1fd037cd4c86e91cc293ebfde78a
 ARG VERSION
 
 ENV \
