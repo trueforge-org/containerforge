@@ -49,8 +49,7 @@ RUN apt-get update && \
       # postgresql-${PG_MAJOR}-jit \
       postgresql-${PG_MAJOR}-pgaudit \
       postgresql-${PG_MAJOR}-pgvector \
-      postgresql-${PG_MAJOR}-pg-failover-slots\
-      postgresql-server-dev-${PG_MAJOR} \
+      postgresql-${PG_MAJOR}-pg-failover-slots \
     && \
     sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
