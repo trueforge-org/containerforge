@@ -67,7 +67,13 @@ func Test(t *testing.T) {
 		return
 	}
 
-	fmt.Println("Directory created at", hostDataDir)
+	// Change owner to UID 568 and GID 568
+	err = os.Chown(hostDataDir, 568, 568)
+	if err != nil {
+		fmt.Println("failed to set ownership: %v", err)
+	}
+
+	fmt.Println("Directory created and ownership set successfully", hostDataDir)
 
 	oldAppReq := testcontainers.ContainerRequest{
 		Image:        upgradeTestImage,
