@@ -73,5 +73,7 @@ STOPSIGNAL SIGINT
 
 USER apps
 
+COPY --chmod=0775 . /
+
 EXPOSE 5432
 CMD ["postgres"]
