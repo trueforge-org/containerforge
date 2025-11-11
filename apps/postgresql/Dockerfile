@@ -3,16 +3,18 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:aba163fade18b21ae0132813e7522fbd
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
+ARG PG_MAJOR
 
 # Derive PG_MAJOR directly from VERSION
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8
+    PATH=$PATH:/usr/lib/postgresql/${PG_MAJOR}/bin \
+    PGDATA=/data/${PG_MAJOR}
 
 USER root
 
 # --- Install and configure deps ---
-RUN PG_MAJOR=${VERSION%%.*} && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       postgresql-common \
       locales-all \
@@ -24,9 +26,7 @@ RUN PG_MAJOR=${VERSION%%.*} && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
 
-ENV PG_MAJOR=${PG_MAJOR} \
-    PATH=$PATH:/usr/lib/postgresql/${PG_MAJOR}/bin \
-    PGDATA=/data/${PG_MAJOR}
+
 
 # --- Install PostgreSQL (multiple versions) ---
 RUN set -eux; \

@@ -9,6 +9,11 @@ variable "VERSION" {
   default = "17.6"
 }
 
+variable "PG_MAJOR" {
+  // renovate: datasource=docker depName=docker.io/library/postgres
+  default = "17"
+}
+
 variable "BARMANVERSION" {
   // renovate: datasource=pypi versioning=loose depName=barman
   default = "3.16.2"
@@ -32,6 +37,7 @@ target "image" {
   args = {
     VERSION = "${VERSION}"
     BARMANVERSION = "${BARMANVERSION}"
+    PG_MAJOR = "${PG_MAJOR}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
