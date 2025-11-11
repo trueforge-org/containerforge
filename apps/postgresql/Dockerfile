@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:87a0f5a9d93409b66626a7de1e66fe7c4d9e1fd037cd4c86e91cc293ebfde78a
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:aba163fade18b21ae0132813e7522fbd005a1cdc8818e308679480a78ba93bb9
 
 ARG TARGETARCH
 ARG VENDOR
@@ -65,10 +65,6 @@ RUN set -eux; \
 	ln -sv ../postgresql.conf.sample "/usr/share/postgresql/$PG_MAJOR/"; \
 	sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /usr/share/postgresql/postgresql.conf.sample; \
 	grep -F "listen_addresses = '*'" /usr/share/postgresql/postgresql.conf.sample
-
-# --- Install Barman ---
-ARG BARMANVERSION
-RUN pip3 install --no-cache-dir psycopg2 barman[cloud,azure,snappy,google,zstandard,lz4]==${BARMANVERSION}
 
 # Req from upstream (see: https://github.com/docker-library/postgres/blob/23987751b63ce745bd27b1119ab29dc4a1ffd728/Dockerfile-debian.template#L219)
 STOPSIGNAL SIGINT
