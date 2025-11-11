@@ -4,17 +4,32 @@ set -Eeo pipefail
 
 # used to create initial postgres directories
 docker_create_db_directories() {
-	mkdir -p "$PGDATA"
-	chmod 00700 "$PGDATA" || :
+    # Check if PGDATA parent directory is writable
+    PGDATA_PARENT=$(dirname "$PGDATA")
+    if [ ! -w "$PGDATA_PARENT" ]; then
+        echo "Error: Parent directory '$PGDATA_PARENT' of PGDATA is not writable" >&2
+        return 1
+    fi
 
-	mkdir -p /var/run/postgresql || :
-	chmod 03775 /var/run/postgresql || :
+    # Create PGDATA directory
+    mkdir -p "$PGDATA"
+    chmod 00700 "$PGDATA" || :
 
-	if [ -n "${POSTGRES_INITDB_WALDIR:-}" ]; then
-		mkdir -p "$POSTGRES_INITDB_WALDIR"
-		chmod 700 "$POSTGRES_INITDB_WALDIR"
-	fi
+    # Check if PGDATA itself is writable
+    if [ ! -w "$PGDATA" ]; then
+        echo "Error: PGDATA directory '$PGDATA' is not writable" >&2
+        return 1
+    fi
+
+    mkdir -p /var/run/postgresql || :
+    chmod 03775 /var/run/postgresql || :
+
+    if [ -n "${POSTGRES_INITDB_WALDIR:-}" ]; then
+        mkdir -p "$POSTGRES_INITDB_WALDIR"
+        chmod 700 "$POSTGRES_INITDB_WALDIR"
+    fi
 }
+
 
 docker_init_database_dir() {
 	local uid; uid="$(id -u)"
