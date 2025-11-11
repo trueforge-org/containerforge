@@ -187,6 +187,7 @@ _main() {
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
 		docker_setup_env
 		docker_create_db_directories
+        /compatibility.sh
 
 		if [ ! -s "$PGDATA/PG_VERSION" ]; then
 			docker_verify_minimum_env
