@@ -68,6 +68,7 @@ RUN apt-get update \
         locales \
         fontconfig \
         p11-kit \
+        locales-all \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
