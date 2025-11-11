@@ -21,7 +21,7 @@ fi
 export OLD_PG_BINARY=$(get_bin_path "$OLD_VERSION")
 export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 
-OLD_PGDATA=${PARENT_DIR}/${OLD_VERSION}
+OLD_PGDATA=${PGDATA_PARENT}/${OLD_VERSION}
 NEW_PGDATA=${PGDATA}
 
 echo "Using new pg_upgrade [$NEW_PG_BINARY/pg_upgrade]"
