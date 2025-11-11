@@ -21,7 +21,7 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
-	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":17"
+	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":17.6"
 
 	oldApp, err := testcontainers.Run(
 		ctx, upgradeTestImage,
