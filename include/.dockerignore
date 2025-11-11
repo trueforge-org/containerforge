@@ -10,3 +10,5 @@
 !configure-scripts/
 !build/
 !docker-entrypoint.d/
+!compatibility.sh
+!upgrade.sh
