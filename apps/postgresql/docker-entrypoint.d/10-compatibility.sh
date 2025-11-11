@@ -48,8 +48,4 @@ elif [[ -f "/var/lib/postgresql/data/PGVERSION" ]] || \
      compgen -G "/var/lib/postgresql/*/data/PGVERSION" > /dev/null; then
     # Case D, E, F, G
     error_wrong_mount
-
-else
-    echo "No PGVERSION file found in recognized locations."
-    exit 1
 fi
