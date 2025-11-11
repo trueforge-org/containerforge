@@ -205,9 +205,9 @@ _main() {
 			pg_setup_hba_conf "$@"
             ## Check if upgrade is needed
             UPGRADE_REQ=""  # empty initially
-            echo "Checking for other PostgreSQL version directories in $PARENT_DIR..."
+            echo "Checking for other PostgreSQL version directories in $PGDATA_PARENT..."
             # Loop over subdirectories in the parent folder
-            for dir in "$PARENT_DIR"/*/; do
+            for dir in "$PGDATA_PARENT"/*/; do
                 # Remove trailing slash and get basename
                 version_dir=$(basename "$dir")
                 # Check if it's a number (major version)
