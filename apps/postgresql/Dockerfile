@@ -8,8 +8,8 @@ ARG PG_MAJOR
 # Derive PG_MAJOR directly from VERSION
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8
-    PATH=$PATH:/usr/lib/postgresql/${PG_MAJOR}/bin \
-    PGDATA=/data/${PG_MAJOR}
+    PATH=$PATH:/usr/lib/postgresql/$PG_MAJOR/bin \
+    PGDATA=/data/$PG_MAJOR
 
 USER root
 
