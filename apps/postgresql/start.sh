@@ -3,6 +3,8 @@ set -Eeo pipefail
 # TODO swap to -Eeuo pipefail above (after handling all potentially-unset variables)
 
 check_writeable() {
+    echo "Checking main dir write..."
+    echo "PGDATA set to ${PGDATA}"
     # Check if PGDATA parent directory is writable
     PGDATA_PARENT=$(dirname "$PGDATA")
     if [ ! -w "$PGDATA_PARENT" ]; then
