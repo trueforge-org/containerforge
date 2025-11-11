@@ -2,14 +2,17 @@
 set -Eeo pipefail
 # TODO swap to -Eeuo pipefail above (after handling all potentially-unset variables)
 
-# used to create initial postgres directories
-docker_create_db_directories() {
+check_writeable() {
     # Check if PGDATA parent directory is writable
     PGDATA_PARENT=$(dirname "$PGDATA")
     if [ ! -w "$PGDATA_PARENT" ]; then
         echo "Error: Parent directory '$PGDATA_PARENT' of PGDATA is not writable" >&2
         return 1
     fi
+}
+
+# used to create initial postgres directories
+docker_create_db_directories() {
 
     # Create PGDATA directory
     mkdir -p "$PGDATA"
@@ -186,8 +189,9 @@ _main() {
 
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
 		docker_setup_env
-		docker_create_db_directories
+        check_writeable
         /compatibility.sh
+		docker_create_db_directories
 
 		if [ ! -s "$PGDATA/PG_VERSION" ]; then
 			docker_verify_minimum_env
