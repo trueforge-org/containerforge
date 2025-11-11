@@ -92,6 +92,17 @@ func Test(t *testing.T) {
 	fmt.Println("=== Logs for oldApp ===")
 	printLogs(ctx, oldApp)
 
+	entries, err := os.ReadDir(hostDataDir)
+	if err != nil {
+		fmt.Println("Failed to read directory:", err)
+		return
+	}
+
+	fmt.Println("Files in /tmp/data:")
+	for _, entry := range entries {
+		fmt.Println("-", entry.Name())
+	}
+
 	appReq := testcontainers.ContainerRequest{
 		Image:        image,
 		ExposedPorts: []string{"5432/tcp"},
