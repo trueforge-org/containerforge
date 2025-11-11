@@ -5,6 +5,8 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -40,7 +42,20 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
-	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":17.6"
+	version := os.Getenv("VERSION")
+	fmt.Println("Current version:" + version)
+
+	majorVersion := strings.Split(version, ".")[0]
+
+	// Convert major version to int
+	majorInt, err := strconv.Atoi(majorVersion)
+	if err != nil {
+		panic(err)
+	}
+	oldMajor := strconv.Itoa(majorInt - 1)
+	fmt.Println("Old Major version:" + oldMajor)
+
+	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":" + oldMajor
 
 	oldApp, err := testcontainers.Run(
 		ctx, upgradeTestImage,
