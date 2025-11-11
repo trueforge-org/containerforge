@@ -36,13 +36,14 @@ check_uid_gid() {
     local CURRENT_GID=$(id -g)
 
     if [[ "$CURRENT_UID" -ne "$TARGET_UID" ]]; then
-        echo "[entrypoint] WARNING: Set User-ID (UID) ($CURRENT_GID) does not match the guaranteed-default: $TARGET_GID"
+        echo "[entrypoint] WARNING: Set User-ID (UID) ($CURRENT_UID) does not match the guaranteed-default: $TARGET_UID"
     fi
 
-    if [[ ="$CURRENT_GID" -ne "$TARGET_GID" ]]; then
+    if [[ "$CURRENT_GID" -ne "$TARGET_GID" ]]; then
         echo "[entrypoint] WARNING: Set Group-ID (GID) ($CURRENT_GID) does not match the guaranteed-default: $TARGET_GID"
     fi
 }
+
 
 
 ### START MAIN
