@@ -58,7 +58,7 @@ func Test(t *testing.T) {
 	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":" + oldMajor
 
 	// Directory to mount
-	hostDataDir := "/tmp/data"
+	hostDataDir := "/tmp/config"
 
 	// Create the directory, including any necessary parents
 	err = os.MkdirAll(hostDataDir, 0o777)
@@ -73,7 +73,7 @@ func Test(t *testing.T) {
 		Image:        upgradeTestImage,
 		ExposedPorts: []string{"5432/tcp"},
 		Mounts: testcontainers.Mounts(
-			testcontainers.BindMount(hostDataDir, "/data"),
+			testcontainers.BindMount(hostDataDir, "/config"),
 		),
 		WaitingFor: wait.ForListeningPort("5432/tcp"),
 	}
@@ -98,7 +98,7 @@ func Test(t *testing.T) {
 		return
 	}
 
-	fmt.Println("Files in /tmp/data:")
+	fmt.Println("Files in /tmp/config:")
 	for _, entry := range entries {
 		fmt.Println("-", entry.Name())
 	}
@@ -107,7 +107,7 @@ func Test(t *testing.T) {
 		Image:        image,
 		ExposedPorts: []string{"5432/tcp"},
 		Mounts: testcontainers.Mounts(
-			testcontainers.BindMount(hostDataDir, "/data"),
+			testcontainers.BindMount(hostDataDir, "/config"),
 		),
 		WaitingFor: wait.ForListeningPort("5432/tcp"),
 	}
