@@ -24,7 +24,8 @@ RUN apt-get update && \
     /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y && \
     echo "Package: postgresql-*\nPin: origin apt.postgresql.org\nPin-Priority: 1001" > /etc/apt/preferences.d/pgdg && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-    rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
+    rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/* && \
+    sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf
 
 
 
@@ -51,7 +52,6 @@ RUN apt-get update && \
       postgresql-${PG_MAJOR}-pgvector \
       postgresql-${PG_MAJOR}-pg-failover-slots \
     && \
-    sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/* \
     && \
