@@ -43,7 +43,8 @@ ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
 # --- Install additions, extentions, other post-install deps and configure ---
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      postgresql-${PG_MAJOR}-jit \
+      ## TODO, enable for 18+ \
+      # postgresql-${PG_MAJOR}-jit \
       postgresql-${PG_MAJOR}-pgaudit \
       postgresql-${PG_MAJOR}-pgvector \
       postgresql-${PG_MAJOR}-pg-failover-slots\
