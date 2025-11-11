@@ -9,7 +9,7 @@ ARG PG_MAJOR
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
     PATH=$PATH:/usr/lib/postgresql/$PG_MAJOR/bin \
-    PGDATA=/data/$PG_MAJOR
+    PGDATA=/config/$PG_MAJOR
 
 USER root
 

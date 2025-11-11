@@ -5,8 +5,8 @@ set -Eeo pipefail
 check_writeable() {
     echo "Checking main dir write..."
     echo "PGDATA set to ${PGDATA}"
+
     # Check if PGDATA parent directory is writable
-    PGDATA_PARENT=$(dirname "$PGDATA")
     if [ ! -w "$PGDATA_PARENT" ]; then
         echo "Error: Parent directory '$PGDATA_PARENT' of PGDATA is not writable" >&2
         return 1
@@ -190,6 +190,7 @@ _main() {
 	fi
 
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
+        PARENT_DIR=$(dirname "$PGDATA")
 		docker_setup_env
         check_writeable
         /compatibility.sh
@@ -204,7 +205,6 @@ _main() {
 			pg_setup_hba_conf "$@"
             ## Check if upgrade is needed
             UPGRADE_REQ=""  # empty initially
-            PARENT_DIR=$(dirname "$PGDATA")
             echo "Checking for other PostgreSQL version directories in $PARENT_DIR..."
             # Loop over subdirectories in the parent folder
             for dir in "$PARENT_DIR"/*/; do

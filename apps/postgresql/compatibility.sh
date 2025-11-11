@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DATA_DIR="/data"
+PGDATA_PARENT="/data"
 
 error_wrong_mount() {
     echo "Wrong mount point set, please mount your database data to /data"
@@ -18,7 +18,7 @@ move_pgdata() {
     fi
 
     PGVERSION_CONTENT=$(<"$pgversion_file")
-    DEST_DIR="$DATA_DIR/$PGVERSION_CONTENT"
+    DEST_DIR="$PGDATA_PARENT/$PGVERSION_CONTENT"
 
     echo "Moving contents of $src_dir to $DEST_DIR"
     mkdir -p "$DEST_DIR"
@@ -26,21 +26,21 @@ move_pgdata() {
 }
 
 # Case detection
-if [[ -f "$DATA_DIR/PGVERSION" ]]; then
+if [[ -f "$PGDATA_PARENT/PGVERSION" ]]; then
     # Case A: /data/PGVERSION exists
-    if compgen -G "$DATA_DIR/[0-9][0-9]" > /dev/null; then
+    if compgen -G "$PGDATA_PARENT/[0-9][0-9]" > /dev/null; then
         echo "Folders with 2-digit names exist in /data, cannot proceed"
         exit 1
     fi
-    move_pgdata "$DATA_DIR"
+    move_pgdata "$PGDATA_PARENT"
 
-elif [[ -f "$DATA_DIR/data/PGVERSION" ]]; then
+elif [[ -f "$PGDATA_PARENT/data/PGVERSION" ]]; then
     # Case B
-    move_pgdata "$DATA_DIR/data"
+    move_pgdata "$PGDATA_PARENT/data"
 
-elif [[ -f "$DATA_DIR/docker/PGVERSION" ]]; then
+elif [[ -f "$PGDATA_PARENT/docker/PGVERSION" ]]; then
     # Case C
-    move_pgdata "$DATA_DIR/docker"
+    move_pgdata "$PGDATA_PARENT/docker"
 
 elif [[ -f "/var/lib/postgresql/data/PGVERSION" ]] || \
      [[ -f "/var/lib/postgresql/docker/PGVERSION" ]] || \
