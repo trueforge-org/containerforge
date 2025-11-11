@@ -392,11 +392,18 @@ jobs:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
+      - name: Get App Options
+        uses: ./.github/actions/app-options
+        id: app-options
+        with:
+          app: ${{ inputs.app }}
+
       - name: Run App Tests
         uses: ./.github/actions/app-tests
         with:
           app: ${{ inputs.app }}
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
+          version: ${{ steps.app-options.outputs.version }}
           token: ${{ github.token }}
 
       - name: Get App Size Diff
