@@ -57,27 +57,59 @@ func Test(t *testing.T) {
 
 	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":" + oldMajor
 
-	oldApp, err := testcontainers.Run(
-		ctx, upgradeTestImage,
-		testcontainers.WithExposedPorts("5432/tcp"),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("5432/tcp"),
+	// Directory to mount
+	hostDataDir := "/tmp/data"
+
+	// Create the directory, including any necessary parents
+	err = os.MkdirAll(hostDataDir, 0o777)
+	if err != nil {
+		fmt.Println("Failed to create directory:", err)
+		return
+	}
+
+	fmt.Println("Directory created at", hostDataDir)
+
+	oldAppReq := testcontainers.ContainerRequest{
+		Image:        upgradeTestImage,
+		ExposedPorts: []string{"5432/tcp"},
+		Mounts: testcontainers.Mounts(
+			testcontainers.BindMount(hostDataDir, "/data"),
 		),
-	)
-	defer testcontainers.CleanupContainer(t, oldApp)
+		WaitingFor: wait.ForListeningPort("5432/tcp"),
+	}
+
+	oldApp, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: oldAppReq,
+		Started:          true,
+	})
+	defer func() {
+		if oldApp != nil {
+			oldApp.Terminate(ctx)
+		}
+	}()
 	require.NoError(t, err)
 
 	fmt.Println("=== Logs for oldApp ===")
 	printLogs(ctx, oldApp)
 
-	app, err := testcontainers.Run(
-		ctx, image,
-		testcontainers.WithExposedPorts("5432/tcp"),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("5432/tcp"),
+	appReq := testcontainers.ContainerRequest{
+		Image:        image,
+		ExposedPorts: []string{"5432/tcp"},
+		Mounts: testcontainers.Mounts(
+			testcontainers.BindMount(hostDataDir, "/data"),
 		),
-	)
-	defer testcontainers.CleanupContainer(t, app)
+		WaitingFor: wait.ForListeningPort("5432/tcp"),
+	}
+
+	app, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
+		ContainerRequest: appReq,
+		Started:          true,
+	})
+	defer func() {
+		if app != nil {
+			app.Terminate(ctx)
+		}
+	}()
 	require.NoError(t, err)
 
 	fmt.Println("=== Logs for app ===")
