@@ -190,7 +190,7 @@ _main() {
 	fi
 
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
-        PARENT_DIR=$(dirname "$PGDATA")
+        PGDATA_PARENT=$(dirname "$PGDATA")
 		docker_setup_env
         check_writeable
         /compatibility.sh
