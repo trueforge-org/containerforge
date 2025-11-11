@@ -6,15 +6,13 @@ ARG VERSION
 
 # Derive PG_MAJOR directly from VERSION
 ENV LANG=en_US.UTF-8 \
-    LC_ALL=en_US.UTF-8 \
-    PG_MAJOR=${VERSION%%.*} \
-    PATH=$PATH:/usr/lib/postgresql/${PG_MAJOR}/bin \
-    PGDATA=/data/${PG_MAJOR}
+    LC_ALL=en_US.UTF-8
 
 USER root
 
 # --- Install and configure deps ---
-RUN apt-get update && \
+RUN PG_MAJOR=${VERSION%%.*} && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
       postgresql-common \
       locales-all \
@@ -25,6 +23,10 @@ RUN apt-get update && \
     echo "Package: postgresql-*\nPin: origin apt.postgresql.org\nPin-Priority: 1001" > /etc/apt/preferences.d/pgdg && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
+
+ENV PG_MAJOR=${PG_MAJOR} \
+    PATH=$PATH:/usr/lib/postgresql/${PG_MAJOR}/bin \
+    PGDATA=/data/${PG_MAJOR}
 
 # --- Install PostgreSQL (multiple versions) ---
 RUN set -eux; \
