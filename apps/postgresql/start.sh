@@ -206,6 +206,7 @@ _main() {
 			pg_setup_hba_conf "$@"
             ## Check if upgrade is needed
             UPGRADE_REQ=""  # empty initially
+            shopt -s nullglob   # optional, avoids literal glob if no dirs exist
             echo "Checking for other PostgreSQL version directories in $PGDATA_PARENT..."
             # Loop over subdirectories in the parent folder
             for dir in "$PGDATA_PARENT"/*/; do
@@ -214,7 +215,7 @@ _main() {
                 # Check if it's a number (major version)
                 if [[ "$version_dir" =~ ^[0-9]+$ ]]; then
                     # Skip the current PGDATA directory itself
-                    if [ "$dir" != "$PGDATA/" ]; then
+                    if [ "$(realpath "$dir")" != "$(realpath "$PGDATA")" ]; then
                         if [ -s "$dir/PG_VERSION" ]; then
                             echo "Found old PostgreSQL version: $version_dir"
                             # If UPGRADE_REQ is empty or current version is higher, update it
@@ -225,6 +226,7 @@ _main() {
                     fi
                 fi
             done
+
 
             if [ -n "$UPGRADE_REQ" ]; then
             echo "Major Upgrade required, executing upgrade..."
