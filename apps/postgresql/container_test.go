@@ -21,6 +21,18 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
+	upgradeTestImage := "ghcr.io/trueforge-org/" + appName + ":17"
+
+	oldApp, err := testcontainers.Run(
+		ctx, upgradeTestImage,
+		testcontainers.WithExposedPorts("5432/tcp"),
+		testcontainers.WithWaitStrategy(
+			wait.ForListeningPort("5432/tcp"),
+		),
+	)
+	testcontainers.CleanupContainer(t, oldApp)
+	require.NoError(t, err)
+
 	app, err := testcontainers.Run(
 		ctx, image,
 		testcontainers.WithExposedPorts("5432/tcp"),
