@@ -5,12 +5,17 @@ set -Eeo pipefail
 check_writeable() {
     echo "Checking main dir write..."
     echo "PGDATA set to ${PGDATA}"
+    echo "Data root folder is set to $PGDATA_PARENT, testing write access..."
 
-    # Check if PGDATA parent directory is writable
-    if [ ! -w "$PGDATA_PARENT" ]; then
-        echo "Error: Parent directory '$PGDATA_PARENT' of PGDATA is not writable" >&2
+    local testfile="$PGDATA_PARENT/.write_test_$$"
+
+    if ! touch "$testfile" 2>/dev/null; then
+        echo "Error: Cannot write to '$PGDATA_PARENT'" >&2
         return 1
     fi
+
+    rm -f "$testfile"
+    echo "Parent directory is writable."
 }
 
 # used to create initial postgres directories
@@ -20,11 +25,15 @@ docker_create_db_directories() {
     mkdir -p "$PGDATA"
     chmod 00700 "$PGDATA" || :
 
-    # Check if PGDATA itself is writable
-    if [ ! -w "$PGDATA" ]; then
+    local testfile="$PGDATA/.write_test_$$"
+
+    if ! touch "$testfile" 2>/dev/null; then
         echo "Error: PGDATA directory '$PGDATA' is not writable" >&2
         return 1
     fi
+
+    rm -f "$testfile"
+    echo "Parent directory is writable."
 
     mkdir -p /var/run/postgresql || :
     chmod 03775 /var/run/postgresql || :
