@@ -22,7 +22,7 @@ fix_checksum() {
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
     echo "Enabling checksums prior to upgrade..."
     "$OLD_PG_BINARY/pg_checksums" "$STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
-  if [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
+  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
     echo "Disabling checksums upgrade..."
     "$OLD_PG_BINARY/pg_checksums" "$STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
   else
