@@ -145,6 +145,7 @@ docker_setup_env() {
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
     : "${POSTGRES_PASSWORD:=$POSTGRES_USER}"
     : "${POSTGRES_CHECKSUMS:="true"}"
+    : "${ADDITIONAL_DBS:=}"
 
 	declare -g DATABASE_ALREADY_EXISTS
 	: "${DATABASE_ALREADY_EXISTS:=}"
@@ -199,6 +200,26 @@ docker_temp_server_start() {
 		-o "$(printf '%q ' "$@")" \
 		-w start
 }
+
+create_additional_dbs() {
+    if [[ -z "$ADDITIONAL_DBS" ]]; then
+        echo "No additional databases specified in ADDITIONAL_DBS."
+        return 0
+    fi
+
+    # Split the ADDITIONAL_DBS variable into an array (comma-separated)
+    IFS=',' read -ra DBS <<< "$ADDITIONAL_DBS"
+
+    for db in "${DBS[@]}"; do
+        db=$(echo "$db" | xargs)  # Trim whitespace
+        if [[ -n "$db" ]]; then
+            echo "Creating database: $db"
+            # You can optionally set PGUSER, PGPASSWORD, PGHOST, PGPORT before running
+            createdb "$db" 2>/dev/null || echo "Database $db already exists or could not be created."
+        fi
+    done
+}
+
 
 docker_temp_server_stop() {
 	PGUSER="${PGUSER:-postgres}" \
@@ -269,6 +290,7 @@ _main() {
 			  docker_temp_server_start "$@"
 
 			  docker_setup_db
+              create_additional_dbs
 			  docker_process_init_files /docker-entrypoint-initdb.d/*
 
 			  docker_temp_server_stop
