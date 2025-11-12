@@ -243,6 +243,7 @@ _main() {
             if [ -n "$UPGRADE_REQ" ]; then
             echo "Major Upgrade required, executing upgrade..."
             source /upgrade.sh
+            UPGRADECHECK="true"
             else
               export PGPASSWORD="${PGPASSWORD:-$POSTGRES_PASSWORD}"
 			  docker_temp_server_start "$@"
@@ -266,21 +267,25 @@ _main() {
 	fi
     if [ "$PREPTEST" = "true" ]; then
       echo "Only generating test-data, not starting..."
+    elif [ "$UPGRADECHECK" = "false" ]; then
+      echo "The system seems to have been running an upgrade test, which failed to run upgrade."
+      exit 1
     else
 	  exec "$@"
     fi
 }
 
 PGDATA_PARENT=$(dirname "$PGDATA")
-
+UPGRADECHECK="true"
 if [ "$PREPTEST" = "true" ]; then
+UPGRADECHECK="false"
     (
         PREV_PG=17
         PGDATA="$PGDATA_PARENT/$PREV_PG"
         PATH="/usr/lib/postgresql/$PREV_PG/bin:$PATH"
         _main "$@"
     )
-    export PREPTEST="/false"
+    export PREPTEST="false"
 else
     export PATH="$PATH:/usr/lib/postgresql/$PG_MAJOR/bin"
 fi
