@@ -18,7 +18,7 @@ export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 fix_checksum() {
   echo "Checking old-postgres checksums setting..."
   # Determine current checksum status via exit code
-  if "$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" >/dev/null 2>&1; then
+  if "$OLD_PG_BINARY/pg_checksums" --check --pgdata="$OLD_PGDATA" >/dev/null 2>&1; then
     STATUS="enabled"
   else
     STATUS="disabled"
@@ -26,10 +26,10 @@ fix_checksum() {
   echo "Checksums enabled set to: $POSTGRES_CHECKSUMS, checking db..."
   # Enable or disable if needed
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
-    "$OLD_PG_BINARY/pg_checksums" --enable -P --data-directory="$OLD_PGDATA"
+    "$OLD_PG_BINARY/pg_checksums" --enable -P --pgdata="$OLD_PGDATA"
     echo "Checksums enabled."
   elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
-    "$OLD_PG_BINARY/pg_checksums" --disable -P --data-directory="$OLD_PGDATA"
+    "$OLD_PG_BINARY/pg_checksums" --disable -P --pgdata="$OLD_PGDATA"
     echo "Checksums disabled."
   else
     echo "Checksums setting match."
