@@ -60,6 +60,7 @@ echo "Checking upgrade compatibility of $OLD_VERSION to $TARGET_VERSION..."
   --old-datadir="$OLD_PGDATA" \
   --new-datadir="$NEW_PGDATA" \
   --socketdir /var/run/postgresql \
+  -U postgres \
   --check
 
 echo "Compatibility check passed."
@@ -70,6 +71,7 @@ echo "Upgrading from $OLD_VERSION to $TARGET_VERSION using --link..."
   --old-datadir="$OLD_PGDATA" \
   --new-datadir="$NEW_PGDATA" \
   --socketdir /var/run/postgresql \
+  -U postgres \
   --link
 
 echo "Upgrade complete."
