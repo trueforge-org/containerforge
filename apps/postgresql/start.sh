@@ -273,7 +273,7 @@ if [ "$PREPTEST" = "true" ]; then
     PGDATA="$PGDATA_PARENT/$((PG_MAJOR - 1))"
     PATH="$PATH:/usr/lib/postgresql/$((PG_MAJOR - 1))/bin"
     _main "$@"
-    $PREPTEST=false
+    PREPTEST=false
 else
     PATH="$PATH:/usr/lib/postgresql/$PG_MAJOR/bin"
 fi
