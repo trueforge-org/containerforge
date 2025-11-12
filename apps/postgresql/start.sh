@@ -200,7 +200,6 @@ _main() {
 	fi
 
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
-        PGDATA_PARENT=$(dirname "$PGDATA")
 		docker_setup_env
         check_writeable
         /compatibility.sh
@@ -261,8 +260,21 @@ _main() {
 			EOM
 		fi
 	fi
-
-	exec "$@"
+    if [ "$PREPTEST" = "true" ]; then
+      echo "Only generating test-data, not starting..."
+    else
+	  exec "$@"
+    fi
 }
 
+PGDATA_PARENT=$(dirname "$PGDATA")
+
+if [ "$PREPTEST" = "true" ]; then
+    PGDATA="$PGDATA_PARENT/$((PG_MAJOR - 1))"
+    PATH="$PATH:/usr/lib/postgresql/$((PG_MAJOR - 1))/bin"
+    _main "$@"
+    $PREPTEST=false
+else
+    PATH="$PATH:/usr/lib/postgresql/$PG_MAJOR/bin"
+fi
 _main "$@"
