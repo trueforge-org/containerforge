@@ -295,7 +295,7 @@ _main() {
 	  exec "$@"
     fi
 }
-
+PREPTEST=${PREPTEST:="false"}
 PGDATA_PARENT=$(dirname "$PGDATA")
 UPGRADECHECK="true"
 if [ "$PREPTEST" = "true" ]; then
