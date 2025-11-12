@@ -8,7 +8,8 @@ ARG PG_MAJOR
 # Derive PG_MAJOR directly from VERSION
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
-    PGDATA=/config/$PG_MAJOR
+    PGDATA=/config/$PG_MAJOR \
+    PG_MAJOR=$PG_MAJOR
 
 USER root
 

@@ -22,8 +22,13 @@ check_writeable() {
 docker_create_db_directories() {
 
     # Create PGDATA directory
-    mkdir -p "$PGDATA"
+    mkdir -p "$PGDATA" || :
     chmod 00700 "$PGDATA" || :
+
+    # Create custom socket PGDATA directory
+    rm -rf "$PGDATA_PARENT"/socket || :
+    mkdir -p "$PGDATA_PARENT"/socket || :
+    chmod 03775 "$PGDATA_PARENT"/socket || :
 
     local testfile="$PGDATA/.write_test_$$"
 
@@ -33,10 +38,7 @@ docker_create_db_directories() {
     fi
 
     rm -f "$testfile"
-    echo "Parent directory is writable."
-
-    mkdir -p /var/run/postgresql || :
-    chmod 03775 /var/run/postgresql || :
+    echo "PGDATA directory is writable."
 
     if [ -n "${POSTGRES_INITDB_WALDIR:-}" ]; then
         mkdir -p "$POSTGRES_INITDB_WALDIR"
