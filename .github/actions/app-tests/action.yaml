@@ -10,6 +10,9 @@ inputs:
   image:
     description: Image
     required: true
+  version:
+    description: Version
+    required: true
   token:
     description: GitHub Token
     required: true
@@ -27,5 +30,6 @@ runs:
       env:
         APP: ${{ inputs.app }}
         TEST_IMAGE: ${{ inputs.image }}
+        VERSION: ${{ inputs.version }}
       run: |-
         go test -v ./apps/${APP}/...

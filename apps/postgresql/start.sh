@@ -5,29 +5,37 @@ set -Eeo pipefail
 check_writeable() {
     echo "Checking main dir write..."
     echo "PGDATA set to ${PGDATA}"
+    echo "Data root folder is set to $PGDATA_PARENT, testing write access..."
 
-    # Check if PGDATA parent directory is writable
-    if [ ! -w "$PGDATA_PARENT" ]; then
-        echo "Error: Parent directory '$PGDATA_PARENT' of PGDATA is not writable" >&2
+    local testfile="$PGDATA_PARENT/.write_test_$$"
+
+    if ! touch "$testfile" 2>/dev/null; then
+        echo "Error: Cannot write to '$PGDATA_PARENT'" >&2
         return 1
     fi
+
+    rm -f "$testfile"
+    echo "Parent directory is writable."
 }
 
 # used to create initial postgres directories
 docker_create_db_directories() {
 
     # Create PGDATA directory
-    mkdir -p "$PGDATA"
+    mkdir -p "$PGDATA" || :
     chmod 00700 "$PGDATA" || :
 
-    # Check if PGDATA itself is writable
-    if [ ! -w "$PGDATA" ]; then
+    chmod 03775 "/var/run/postgresql" || :
+
+    local testfile="$PGDATA/.write_test_$$"
+
+    if ! touch "$testfile" 2>/dev/null; then
         echo "Error: PGDATA directory '$PGDATA' is not writable" >&2
         return 1
     fi
 
-    mkdir -p /var/run/postgresql || :
-    chmod 03775 /var/run/postgresql || :
+    rm -f "$testfile"
+    echo "PGDATA directory is writable."
 
     if [ -n "${POSTGRES_INITDB_WALDIR:-}" ]; then
         mkdir -p "$POSTGRES_INITDB_WALDIR"
@@ -131,10 +139,12 @@ docker_setup_db() {
 
 docker_setup_env() {
 	: "${POSTGRES_USER:=postgres}"
+	: "${PGUSER:=$POSTGRES_USER}"
 	: "${POSTGRES_DB:=$POSTGRES_USER}"
 	: "${POSTGRES_INITDB_ARGS:=}"
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
     : "${POSTGRES_PASSWORD:=$POSTGRES_USER}"
+    : "${POSTGRES_CHECKSUMS:="true"}"
 
 	declare -g DATABASE_ALREADY_EXISTS
 	: "${DATABASE_ALREADY_EXISTS:=}"
@@ -154,6 +164,28 @@ pg_setup_hba_conf() {
 		fi
 		printf 'host all all all %s\n' "$POSTGRES_HOST_AUTH_METHOD"
 	} >> "$PGDATA/pg_hba.conf"
+}
+
+set_checksums() {
+  # Determine current checksum status via exit code
+  if pg_checksums --check >/dev/null 2>&1; then
+    STATUS="enabled"
+  else
+    STATUS="disabled"
+  fi
+  echo "Checking checksums setting..."
+  echo "Checksums enabled set to: $POSTGRES_CHECKSUMS"
+  echo "Checking DB checksum setting..."
+  # Enable or disable if needed
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
+    pg_checksums --enable -P
+    echo "Not set, Checksums now enabled."
+  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
+    pg_checksums --disable -P
+    echo "Set, Checksums now disabled."
+  else
+    echo "Checksums setting match."
+  fi
 }
 
 docker_temp_server_start() {
@@ -191,10 +223,9 @@ _main() {
 	fi
 
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
-        PGDATA_PARENT=$(dirname "$PGDATA")
 		docker_setup_env
         check_writeable
-        /compatibility.sh
+        source /compatibility.sh
 		docker_create_db_directories
 
 		if [ ! -s "$PGDATA/PG_VERSION" ]; then
@@ -204,8 +235,10 @@ _main() {
 
 			docker_init_database_dir
 			pg_setup_hba_conf "$@"
+            set_checksums
             ## Check if upgrade is needed
             UPGRADE_REQ=""  # empty initially
+            shopt -s nullglob   # optional, avoids literal glob if no dirs exist
             echo "Checking for other PostgreSQL version directories in $PGDATA_PARENT..."
             # Loop over subdirectories in the parent folder
             for dir in "$PGDATA_PARENT"/*/; do
@@ -214,7 +247,7 @@ _main() {
                 # Check if it's a number (major version)
                 if [[ "$version_dir" =~ ^[0-9]+$ ]]; then
                     # Skip the current PGDATA directory itself
-                    if [ "$dir" != "$PGDATA/" ]; then
+                    if [ "$(realpath "$dir")" != "$(realpath "$PGDATA")" ]; then
                         if [ -s "$dir/PG_VERSION" ]; then
                             echo "Found old PostgreSQL version: $version_dir"
                             # If UPGRADE_REQ is empty or current version is higher, update it
@@ -226,9 +259,11 @@ _main() {
                 fi
             done
 
+
             if [ -n "$UPGRADE_REQ" ]; then
             echo "Major Upgrade required, executing upgrade..."
-            /upgrade.sh
+            source /upgrade.sh
+            UPGRADECHECK="true"
             else
               export PGPASSWORD="${PGPASSWORD:-$POSTGRES_PASSWORD}"
 			  docker_temp_server_start "$@"
@@ -243,6 +278,7 @@ _main() {
             fi
 
 		else
+            set_checksums
 			cat <<-'EOM'
 
 				PostgreSQL Database directory appears to contain a database; Skipping initialization
@@ -250,8 +286,29 @@ _main() {
 			EOM
 		fi
 	fi
-
-	exec "$@"
+    if [ "$PREPTEST" = "true" ]; then
+      echo "Only generating test-data, not starting..."
+    elif [ "$UPGRADECHECK" = "false" ]; then
+      echo "The system seems to have been running an upgrade test, which failed to run upgrade."
+      exit 1
+    else
+	  exec "$@"
+    fi
 }
-
+PREPTEST=${PREPTEST:="false"}
+PGDATA_PARENT=$(dirname "$PGDATA")
+UPGRADECHECK="true"
+if [ "$PREPTEST" = "true" ]; then
+UPGRADECHECK="false"
+    (
+        ## TODO: Remove this hardcode
+        PREV_MAJOR=$(cat /PREV_MAJOR)
+        PGDATA="$PGDATA_PARENT/$PREV_MAJOR"
+        PATH="/usr/lib/postgresql/$PREV_MAJOR/bin:$PATH"
+        _main "$@"
+    )
+    export PREPTEST="false"
+else
+    export PATH="$PATH:/usr/lib/postgresql/$PG_MAJOR/bin"
+fi
 _main "$@"

@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PGDATA_PARENT="/data"
-
 error_wrong_mount() {
     echo "Wrong mount point set, please mount your database data to /data"
     exit 1

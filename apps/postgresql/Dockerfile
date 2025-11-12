@@ -8,8 +8,8 @@ ARG PG_MAJOR
 # Derive PG_MAJOR directly from VERSION
 ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
-    PATH=$PATH:/usr/lib/postgresql/$PG_MAJOR/bin \
-    PGDATA=/config/$PG_MAJOR
+    PGDATA=/config/$PG_MAJOR \
+    PG_MAJOR=$PG_MAJOR
 
 USER root
 
@@ -31,15 +31,16 @@ RUN apt-get update && \
 
 # --- Install PostgreSQL (multiple versions) ---
 RUN set -eux; \
-    PG1=$((PG_MAJOR-1)); \
+    PREV_MAJOR=$((PG_MAJOR-1)); \
     apt-get update && \
     apt-get install -y --no-install-recommends \
       -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-      "postgresql-${PG1}" \
+      "postgresql-${PREV_MAJOR}" \
       "postgresql-${PG_MAJOR}=${VERSION}*" \
       postgresql-server-dev-${PG_MAJOR} && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-    rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
+    rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/* && \
+    echo "$PREV_MAJOR" >> /PREV_MAJOR
 
 ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
 

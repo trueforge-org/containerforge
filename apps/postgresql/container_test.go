@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"context"
+	"fmt"
 	"os"
 	"testing"
 
@@ -10,6 +12,23 @@ import (
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
 )
+
+func printLogs(ctx context.Context, container testcontainers.Container) {
+	logs, err := container.Logs(ctx)
+	if err != nil {
+		fmt.Println("failed to get logs:", err)
+		return
+	}
+	defer logs.Close()
+
+	scanner := bufio.NewScanner(logs)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Println("error reading logs:", err)
+	}
+}
 
 func Test(t *testing.T) {
 	ctx := context.Background()
@@ -28,6 +47,27 @@ func Test(t *testing.T) {
 			wait.ForListeningPort("5432/tcp"),
 		),
 	)
-	testcontainers.CleanupContainer(t, app)
+	defer testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
+
+	fmt.Println("=== Logs for fresh app ===")
+	printLogs(ctx, app)
+
+	fmt.Println("=== Starting In-App Upgrade tests... ===")
+
+	upgrade, err := testcontainers.Run(
+		ctx, image,
+		testcontainers.WithExposedPorts("5432/tcp"),
+		testcontainers.WithEnv(map[string]string{
+			"PREPTEST": "true",
+		}),
+		testcontainers.WithWaitStrategy(
+			wait.ForListeningPort("5432/tcp"),
+		),
+	)
+	defer testcontainers.CleanupContainer(t, upgrade)
+	require.NoError(t, err)
+
+	fmt.Println("=== Logs for in-app upgrade ===")
+	printLogs(ctx, upgrade)
 }

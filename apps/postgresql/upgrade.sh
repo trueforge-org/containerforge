@@ -1,13 +1,42 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export OLD_VERSION=${UPGRADE_REQ}
+export TARGET_VERSION=${PG_MAJOR}
+
+export OLD_PGDATA=${PGDATA_PARENT}/${OLD_VERSION}
+export NEW_PGDATA=${PGDATA}
+
 get_bin_path() {
   local version=$1
   echo "/usr/lib/postgresql/$version/bin"
 }
 
-OLD_VERSION=${UPGRADE_REQ}
-TARGET_VERSION=${PG_MAJOR}
+export OLD_PG_BINARY=$(get_bin_path "$OLD_VERSION")
+export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
+
+fix_checksum() {
+  echo "Checking old-postgres checksums setting..."
+  # Determine current checksum status via exit code
+  if "$OLD_PG_BINARY/pg_checksums" --check --pgdata="$OLD_PGDATA" >/dev/null 2>&1; then
+    STATUS="enabled"
+  else
+    STATUS="disabled"
+  fi
+  echo "Checksums enabled set to: $POSTGRES_CHECKSUMS, checking db..."
+  # Enable or disable if needed
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
+    "$OLD_PG_BINARY/pg_checksums" --enable -P --pgdata="$OLD_PGDATA"
+    echo "Checksums enabled."
+  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
+    "$OLD_PG_BINARY/pg_checksums" --disable -P --pgdata="$OLD_PGDATA"
+    echo "Checksums disabled."
+  else
+    echo "Checksums setting match."
+  fi
+}
+
+
 echo "Current version: $OLD_VERSION"
 echo "Target version: $TARGET_VERSION"
 
@@ -18,11 +47,9 @@ else
     echo "Safe to upgrade in one step."
 fi
 
-export OLD_PG_BINARY=$(get_bin_path "$OLD_VERSION")
-export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 
-OLD_PGDATA=${PGDATA_PARENT}/${OLD_VERSION}
-NEW_PGDATA=${PGDATA}
+
+fix_checksum
 
 echo "Using new pg_upgrade [$NEW_PG_BINARY/pg_upgrade]"
 
@@ -33,6 +60,7 @@ echo "Checking upgrade compatibility of $OLD_VERSION to $TARGET_VERSION..."
   --old-datadir="$OLD_PGDATA" \
   --new-datadir="$NEW_PGDATA" \
   --socketdir /var/run/postgresql \
+  -U "$POSTGRES_USER" \
   --check
 
 echo "Compatibility check passed."
@@ -43,6 +71,7 @@ echo "Upgrading from $OLD_VERSION to $TARGET_VERSION using --link..."
   --old-datadir="$OLD_PGDATA" \
   --new-datadir="$NEW_PGDATA" \
   --socketdir /var/run/postgresql \
+  -U "$POSTGRES_USER" \
   --link
 
 echo "Upgrade complete."
