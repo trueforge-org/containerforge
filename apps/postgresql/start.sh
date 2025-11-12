@@ -169,7 +169,6 @@ set_checksums() {
   echo "Checking checksums setting..."
   echo "using..."
   pg_checksums --version
-  pg_checksums --check
   STATUS=$(pg_checksums --check 2>&1 | grep -q "are not enabled in cluster" && echo "--disable" || echo "--enable")
   echo "Current Data checksums: ${STATUS#--}d"
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
