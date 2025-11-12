@@ -29,7 +29,7 @@ fi
 : "${DB_USER:?Need to set DB_USER}"
 : "${DB_PASSWORD:?Need to set DB_PASSWORD}"
 : "${DB_DATABASE:?Need to set DB_DATABASE}"
-: "${DB_LOGSDATABASE:?Need to set DB_LOGSDATABASE}"
+: "${DB_LOGSDB:?Need to set DB_LOGSDB}"
 : "${DB_HOST:?Need to set DB_HOST}"
 : "${DB_PORT:?Need to set DB_PORT}"
 
@@ -41,7 +41,7 @@ xmlstarlet ed -L \
     -u "/Config/PostgresHost" -v "$DB_HOST" \
     -u "/Config/PostgresPort" -v "$DB_PORT" \
     -u "/Config/PostgresMainDb" -v "$DB_DATABASE" \
-    -u "/Config/PostgresLogDb" -v "$DB_LOGSDATABASE" \
+    -u "/Config/PostgresLogDb" -v "$DB_LOGSDB" \
     "$CONFIG_FILE"
 
 echo "Config.xml updated for postgresql support"
