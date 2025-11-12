@@ -31,17 +31,18 @@ RUN apt-get update && \
 
 # --- Install PostgreSQL (multiple versions) ---
 RUN set -eux; \
-    PG1=$((PG_MAJOR-1)); \
+    PREV_MAJOR=$((PG_MAJOR-1)); \
     apt-get update && \
     apt-get install -y --no-install-recommends \
       -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-      "postgresql-${PG1}" \
+      "postgresql-${PREV_MAJOR}" \
       "postgresql-${PG_MAJOR}=${VERSION}*" \
       postgresql-server-dev-${PG_MAJOR} && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
 
-ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
+ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH" \
+    PREV_MAJOR=$PREV_MAJOR
 
 # --- Install additions, extentions, other post-install deps and configure ---
 RUN apt-get update && \
