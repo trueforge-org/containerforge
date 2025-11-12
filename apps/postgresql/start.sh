@@ -208,7 +208,8 @@ docker_temp_server_start() {
 set_zfs_opt(){
   if [[ "$ZFS_MODE" == "true" ]]
     psql -U $POSTGRES_USER -d $1 -c "ALTER SYSTEM SET wal_init_zero = 'off';"
-    psql -U $POSTGRES_USER -d $1 -c "ALTER SYSTEM SET wal_recycle = 'on';"
+    psql -U $POSTGRES_USER -d $1 -c "ALTER SYSTEM SET wal_recycle = 'off';"
+    psql -U $POSTGRES_USER -d $1 -c "ALTER SYSTEM SET full_page_writes = 'off';"
   fi
 }
 
