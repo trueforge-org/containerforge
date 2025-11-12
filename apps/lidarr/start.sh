@@ -44,7 +44,7 @@ xmlstarlet ed -L \
     -u "/Config/PostgresLogDb" -v "$DB_LOGSDATABASE" \
     "$CONFIG_FILE"
 
-echo "Databases created and config.xml updated."
+echo "Config.xml updated for postgresql support"
 fi
 
  exec \
