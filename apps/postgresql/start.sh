@@ -215,7 +215,7 @@ create_additional_dbs() {
         if [[ -n "$db" ]]; then
             echo "Creating database: $db"
             # You can optionally set PGUSER, PGPASSWORD, PGHOST, PGPORT before running
-            createdb "$db" 2>/dev/null || echo "Database $db already exists or could not be created."
+            createdb -U $POSTGRES_USER "$db" 2>/dev/null || echo "Database $db already exists or could not be created."
         fi
     done
 }
