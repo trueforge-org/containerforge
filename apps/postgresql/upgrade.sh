@@ -20,7 +20,7 @@ fix_checksum() {
   echo "using..."
   pg_checksums --version
   "$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA"
-  STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
+  STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "are not enabled in cluster" && echo "--disable" || echo "--enable")
   echo "Old Data checksums: ${STATUS#--}d"
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
     echo "Enabling checksums prior to upgrade..."
