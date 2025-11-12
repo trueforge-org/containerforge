@@ -273,7 +273,7 @@ if [ "$PREPTEST" = "true" ]; then
     (
         PREV_PG=17
         export PGDATA="$PGDATA_PARENT/$PREV_PG"
-        export PATH="$PATH:/usr/lib/postgresql/$PREV_PG/bin"
+        export PATH="/usr/lib/postgresql/$PREV_PG/bin:$PATH"
         _main "$@"
     )
     PREPTEST=false
