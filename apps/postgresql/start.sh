@@ -301,6 +301,7 @@ UPGRADECHECK="true"
 if [ "$PREPTEST" = "true" ]; then
 UPGRADECHECK="false"
     (
+        ## TODO: Remove this hardcode
         PREV_PG=17
         PGDATA="$PGDATA_PARENT/$PREV_PG"
         PATH="/usr/lib/postgresql/$PREV_PG/bin:$PATH"
