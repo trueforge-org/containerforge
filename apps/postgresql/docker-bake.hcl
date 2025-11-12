@@ -6,12 +6,12 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/postgres
-  default = "17.6"
+  default = "18.0"
 }
 
 variable "PG_MAJOR" {
   // renovate: datasource=docker depName=docker.io/library/postgres
-  default = "17"
+  default = "18"
 }
 
 variable "BARMANVERSION" {
