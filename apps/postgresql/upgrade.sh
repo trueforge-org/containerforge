@@ -6,6 +6,20 @@ get_bin_path() {
   echo "/usr/lib/postgresql/$version/bin"
 }
 
+fix_checksum() {
+  echo "Checking checksums..."
+  OLD_STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
+  NEW_STATUS=$("$NEW_PG_BINARY/pg_checksums" --check --data-directory="$NEW_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
+  echo "Old data checksums: ${OLD_STATUS#--}d"
+  echo "New data checksums: ${NEW_STATUS#--}d"
+  if [[ "$OLD_STATUS" != "$NEW_STATUS" ]]; then
+    echo "Setting checksums on old data to match new..."
+    "$OLD_PG_BINARY/pg_checksums" "$NEW_STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
+  else
+    echo "Checksum state matches — nothing to do."
+  fi
+}
+
 OLD_VERSION=${UPGRADE_REQ}
 TARGET_VERSION=${PG_MAJOR}
 echo "Current version: $OLD_VERSION"
@@ -23,6 +37,8 @@ export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 
 OLD_PGDATA=${PGDATA_PARENT}/${OLD_VERSION}
 NEW_PGDATA=${PGDATA}
+
+fix_checksum
 
 echo "Using new pg_upgrade [$NEW_PG_BINARY/pg_upgrade]"
 
