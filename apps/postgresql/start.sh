@@ -166,19 +166,24 @@ pg_setup_hba_conf() {
 }
 
 set_checksums() {
-  echo "Checking checksums setting..."
-  echo "using..."
-  pg_checksums --version
-  STATUS=$(pg_checksums --check 2>&1 | grep -q "are not enabled in cluster" && echo "--disable" || echo "--enable")
-  echo "Current Data checksums: ${STATUS#--}d"
-  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
-    echo "Enabling checksums..."
-    pg_checksums "$STATUS" -P
-  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
-    echo "Disabling checksums..."
-    pg_checksums "$STATUS" -P
+  # Determine current checksum status via exit code
+  if pg_checksums --check >/dev/null 2>&1; then
+    STATUS="enabled"
   else
-    echo "Checksum state matches — nothing to do."
+    STATUS="disabled"
+  fi
+  echo "Checking checksums setting..."
+  echo "Checksums enabled set to: $POSTGRES_CHECKSUMS"
+  echo "Checking DB checksum setting..."
+  # Enable or disable if needed
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
+    pg_checksums --enable -P
+    echo "Not set, Checksums now enabled."
+  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
+    pg_checksums --disable -P
+    echo "Set, Checksums now disabled."
+  else
+    echo "Checksums setting match."
   fi
 }
 

@@ -17,18 +17,22 @@ export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 
 fix_checksum() {
   echo "Checking old-postgres checksums setting..."
-  echo "using..."
-  "$OLD_PG_BINARY/pg_checksums" --version
-  STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "are not enabled in cluster" && echo "--disable" || echo "--enable")
-  echo "Old Data checksums: ${STATUS#--}d"
-  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
-    echo "Enabling checksums prior to upgrade..."
-    "$OLD_PG_BINARY/pg_checksums" "$STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
-  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
-    echo "Disabling checksums upgrade..."
-    "$OLD_PG_BINARY/pg_checksums" "$STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
+  # Determine current checksum status via exit code
+  if "$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" >/dev/null 2>&1; then
+    STATUS="enabled"
   else
-    echo "Checksum state matches — nothing to do."
+    STATUS="disabled"
+  fi
+  echo "Checksums enabled set to: $POSTGRES_CHECKSUMS, checking db..."
+  # Enable or disable if needed
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
+    "$OLD_PG_BINARY/pg_checksums" --enable -P --data-directory="$OLD_PGDATA"
+    echo "Checksums enabled."
+  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
+    "$OLD_PG_BINARY/pg_checksums" --disable -P --data-directory="$OLD_PGDATA"
+    echo "Checksums disabled."
+  else
+    echo "Checksums setting match."
   fi
 }
 
