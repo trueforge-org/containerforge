@@ -139,6 +139,7 @@ docker_setup_db() {
 
 docker_setup_env() {
 	: "${POSTGRES_USER:=postgres}"
+	: "${PGUSER:=$POSTGRES_USER}"
 	: "${POSTGRES_DB:=$POSTGRES_USER}"
 	: "${POSTGRES_INITDB_ARGS:=}"
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
