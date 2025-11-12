@@ -202,7 +202,7 @@ _main() {
 	if [ "$1" = 'postgres' ] && ! _pg_want_help "$@"; then
 		docker_setup_env
         check_writeable
-        /compatibility.sh
+        source /compatibility.sh
 		docker_create_db_directories
 
 		if [ ! -s "$PGDATA/PG_VERSION" ]; then
@@ -238,7 +238,7 @@ _main() {
 
             if [ -n "$UPGRADE_REQ" ]; then
             echo "Major Upgrade required, executing upgrade..."
-            /upgrade.sh
+            source /upgrade.sh
             else
               export PGPASSWORD="${PGPASSWORD:-$POSTGRES_PASSWORD}"
 			  docker_temp_server_start "$@"
