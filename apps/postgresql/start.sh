@@ -172,7 +172,7 @@ set_checksums() {
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
     echo "Enabling checksums..."
     pg_checksums "$STATUS" -P
-  if [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
+  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
     echo "Disabling checksums..."
     pg_checksums "$STATUS" -P
   else
