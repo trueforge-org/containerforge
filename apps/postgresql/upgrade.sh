@@ -20,10 +20,10 @@ fix_checksum() {
   # TODO: Remove
   echo "checksumcheck $OLD_PGDATA using $OLD_PG_BINARY"
   $OLD_PG_BINARY/pg_checksums --version
-  $OLD_PG_BINARY/pg_checksums
+  $OLD_PG_BINARY/pg_checksums --data-directory="$OLD_PGDATA"
   echo "checksumcheck $NEW_PGDATA using $NEW_PG_BINARY"
   $NEW_PG_BINARY/pg_checksums --version
-  $NEW_PG_BINARY/pg_checksums
+  $NEW_PG_BINARY/pg_checksums --check --data-directory="$NEW_PGDATA"
   OLD_STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
   NEW_STATUS=$("$NEW_PG_BINARY/pg_checksums" --check --data-directory="$NEW_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
   echo "Old data checksums: ${OLD_STATUS#--}d"
