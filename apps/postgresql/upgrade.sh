@@ -1,15 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export OLD_VERSION=${UPGRADE_REQ}
+export TARGET_VERSION=${PG_MAJOR}
+
+export OLD_PGDATA=${PGDATA_PARENT}/${OLD_VERSION}
+export NEW_PGDATA=${PGDATA}
+
 get_bin_path() {
   local version=$1
   echo "/usr/lib/postgresql/$version/bin"
 }
 
+export OLD_PG_BINARY=$(get_bin_path "$OLD_VERSION")
+export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
+
 fix_checksum() {
   echo "Checking checksums..."
   # TODO: Remove
+  echo "checksumcheck $OLD_PGDATA using $OLD_PG_BINARY"
   $OLD_PG_BINARY/pg_checksums
+  echo "checksumcheck $NEW_PGDATA using $NEW_PG_BINARY"
   $NEW_PG_BINARY/pg_checksums
   OLD_STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
   NEW_STATUS=$("$NEW_PG_BINARY/pg_checksums" --check --data-directory="$NEW_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
@@ -23,8 +34,8 @@ fix_checksum() {
   fi
 }
 
-OLD_VERSION=${UPGRADE_REQ}
-TARGET_VERSION=${PG_MAJOR}
+
+
 echo "Current version: $OLD_VERSION"
 echo "Target version: $TARGET_VERSION"
 
@@ -35,11 +46,7 @@ else
     echo "Safe to upgrade in one step."
 fi
 
-export OLD_PG_BINARY=$(get_bin_path "$OLD_VERSION")
-export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 
-OLD_PGDATA=${PGDATA_PARENT}/${OLD_VERSION}
-NEW_PGDATA=${PGDATA}
 
 fix_checksum
 
