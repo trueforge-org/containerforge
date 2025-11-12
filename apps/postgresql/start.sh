@@ -145,6 +145,7 @@ docker_setup_env() {
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
     : "${POSTGRES_PASSWORD:=$POSTGRES_USER}"
     : "${POSTGRES_CHECKSUMS:="true"}"
+    : "${ADDITIONAL_DBS:=}"
 
 	declare -g DATABASE_ALREADY_EXISTS
 	: "${DATABASE_ALREADY_EXISTS:=}"
