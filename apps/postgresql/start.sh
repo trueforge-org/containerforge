@@ -143,6 +143,7 @@ docker_setup_env() {
 	: "${POSTGRES_INITDB_ARGS:=}"
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
     : "${POSTGRES_PASSWORD:=$POSTGRES_USER}"
+    : "${POSTGRES_CHECKSUMS:="true"}"
 
 	declare -g DATABASE_ALREADY_EXISTS
 	: "${DATABASE_ALREADY_EXISTS:=}"
@@ -162,6 +163,21 @@ pg_setup_hba_conf() {
 		fi
 		printf 'host all all all %s\n' "$POSTGRES_HOST_AUTH_METHOD"
 	} >> "$PGDATA/pg_hba.conf"
+}
+
+set_checksums() {
+  echo "Checking checksums setting..."
+  STATUS=$(pg_checksums --check 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
+  echo "Current Data checksums: ${STATUS#--}d"
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
+    echo "Enabling checksums..."
+    pg_checksums "$STATUS" -P
+  if [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
+    echo "Disabling checksums..."
+    pg_checksums "$STATUS" -P
+  else
+    echo "Checksum state matches — nothing to do."
+  fi
 }
 
 docker_temp_server_start() {
@@ -211,6 +227,7 @@ _main() {
 
 			docker_init_database_dir
 			pg_setup_hba_conf "$@"
+            set_checksums
             ## Check if upgrade is needed
             UPGRADE_REQ=""  # empty initially
             shopt -s nullglob   # optional, avoids literal glob if no dirs exist
@@ -253,6 +270,7 @@ _main() {
             fi
 
 		else
+            set_checksums
 			cat <<-'EOM'
 
 				PostgreSQL Database directory appears to contain a database; Skipping initialization

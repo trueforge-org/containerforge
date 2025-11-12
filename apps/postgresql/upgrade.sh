@@ -16,26 +16,19 @@ export OLD_PG_BINARY=$(get_bin_path "$OLD_VERSION")
 export NEW_PG_BINARY=$(get_bin_path "$TARGET_VERSION")
 
 fix_checksum() {
-  echo "Checking checksums..."
-  # TODO: Remove
-  echo "checksumcheck $OLD_PGDATA using $OLD_PG_BINARY"
-  $OLD_PG_BINARY/pg_checksums --version
-  $OLD_PG_BINARY/pg_checksums --data-directory="$OLD_PGDATA"
-  echo "checksumcheck $NEW_PGDATA using $NEW_PG_BINARY"
-  $NEW_PG_BINARY/pg_checksums --version
-  $NEW_PG_BINARY/pg_checksums --check --data-directory="$NEW_PGDATA"
-  OLD_STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
-  NEW_STATUS=$("$NEW_PG_BINARY/pg_checksums" --check --data-directory="$NEW_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
-  echo "Old data checksums: ${OLD_STATUS#--}d"
-  echo "New data checksums: ${NEW_STATUS#--}d"
-  if [[ "$OLD_STATUS" != "$NEW_STATUS" ]]; then
-    echo "Setting checksums on old data to match new..."
-    "$OLD_PG_BINARY/pg_checksums" "$NEW_STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
+  echo "Checking old-postgres checksums setting..."
+  STATUS=$("$OLD_PG_BINARY/pg_checksums" --check --data-directory="$OLD_PGDATA" 2>&1 | grep -q "disabled" && echo "--disable" || echo "--enable")
+  echo "Old Data checksums: ${STATUS#--}d"
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" != "--enable" ]]; then
+    echo "Enabling checksums prior to upgrade..."
+    "$OLD_PG_BINARY/pg_checksums" "$STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
+  if [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" != "--disable" ]]; then
+    echo "Disabling checksums upgrade..."
+    "$OLD_PG_BINARY/pg_checksums" "$STATUS" --data-directory="$OLD_PGDATA" -P || exit 1
   else
     echo "Checksum state matches — nothing to do."
   fi
 }
-
 
 
 echo "Current version: $OLD_VERSION"
