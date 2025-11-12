@@ -31,10 +31,10 @@ if [[ "$DB_TYPE" == "postgres" ]]; then
 
     : "${DB_USER:?Need to set DB_USER}"
     : "${DB_PASSWORD:?Need to set DB_PASSWORD}"
-    : "${DB_DATABASE:?Need to set DB_DATABASE}"
-    : "${DB_LOGSDB:?Need to set DB_LOGSDB}"
-    : "${DB_HOST:?Need to set DB_HOST}"
-    : "${DB_PORT:?Need to set DB_PORT}"
+    : "${DB_DATABASE:=lidarr-main}"
+    : "${DB_LOGSDB:=lidarr-log}"
+    : "${DB_HOST:=postgres}"
+    : "${DB_PORT:=5432}"
 
     echo "Updating Lidarr config.xml for PostgreSQL..."
     cp -rf "$CONFIG_FILE" "${CONFIG_FILE}.bak"
