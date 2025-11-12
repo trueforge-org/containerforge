@@ -43,9 +43,6 @@ func Test(t *testing.T) {
 	app, err := testcontainers.Run(
 		ctx, image,
 		testcontainers.WithExposedPorts("5432/tcp"),
-		testcontainers.WithEnv(map[string]string{
-			"PREPTEST": "true",
-		}),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("5432/tcp"),
 		),
@@ -53,6 +50,24 @@ func Test(t *testing.T) {
 	defer testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
 
-	fmt.Println("=== Logs for app ===")
+	fmt.Println("=== Logs for fresh app ===")
 	printLogs(ctx, app)
+
+	fmt.Println("=== Starting In-App Upgrade tests... ===")
+
+	upgrade, err := testcontainers.Run(
+		ctx, image,
+		testcontainers.WithExposedPorts("5432/tcp"),
+		testcontainers.WithEnv(map[string]string{
+			"PREPTEST": "true",
+		}),
+		testcontainers.WithWaitStrategy(
+			wait.ForListeningPort("5432/tcp"),
+		),
+	)
+	defer testcontainers.CleanupContainer(t, upgrade)
+	require.NoError(t, err)
+
+	fmt.Println("=== Logs for in-app upgrade ===")
+	printLogs(ctx, upgrade)
 }
