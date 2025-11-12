@@ -303,7 +303,7 @@ UPGRADECHECK="false"
     (
         ## TODO: Remove this hardcode
         PREV_MAJOR=$(cat /PREV_MAJOR)
-        PGDATA="$PGDATA_PARENT/$PREV_PG"
+        PGDATA="$PGDATA_PARENT/$PREV_MAJOR"
         PATH="/usr/lib/postgresql/$PREV_MAJOR/bin:$PATH"
         _main "$@"
     )
