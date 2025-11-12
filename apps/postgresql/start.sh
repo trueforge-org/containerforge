@@ -145,6 +145,7 @@ docker_setup_env() {
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
     : "${POSTGRES_PASSWORD:=$POSTGRES_USER}"
     : "${POSTGRES_CHECKSUMS:="true"}"
+    : "${ZFS_MODE:="false"}"
     : "${ADDITIONAL_DBS:=}"
 
 	declare -g DATABASE_ALREADY_EXISTS
@@ -177,6 +178,9 @@ set_checksums() {
   echo "Checking checksums setting..."
   echo "Checksums enabled set to: $POSTGRES_CHECKSUMS"
   echo "Checking DB checksum setting..."
+  if [[ "$ZFS_MODE" == "true" ]]
+    POSTGRES_CHECKSUMS="false"
+  fi
   # Enable or disable if needed
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
     pg_checksums --enable -P
@@ -201,6 +205,13 @@ docker_temp_server_start() {
 		-w start
 }
 
+set_zfs_opt(){
+  if [[ "$ZFS_MODE" == "true" ]]
+    psql -U $POSTGRES_USER -d $1 -c "ALTER SYSTEM SET wal_init_zero = 'off';"
+    psql -U $POSTGRES_USER -d $1 -c "ALTER SYSTEM SET wal_recycle = 'on';"
+  fi
+}
+
 create_additional_dbs() {
     if [[ -z "$ADDITIONAL_DBS" ]]; then
         echo "No additional databases specified in ADDITIONAL_DBS."
@@ -216,10 +227,10 @@ create_additional_dbs() {
             echo "Creating database: $db"
             # You can optionally set PGUSER, PGPASSWORD, PGHOST, PGPORT before running
             createdb -U $POSTGRES_USER "$db" 2>/dev/null || echo "Database $db already exists or could not be created."
+            set_zfs_opt $db
         fi
     done
 }
-
 
 docker_temp_server_stop() {
 	PGUSER="${PGUSER:-postgres}" \
@@ -290,6 +301,7 @@ _main() {
 			  docker_temp_server_start "$@"
 
 			  docker_setup_db
+              set_zfs_opt $POSTGRES_DB
               create_additional_dbs
 			  docker_process_init_files /docker-entrypoint-initdb.d/*
 
