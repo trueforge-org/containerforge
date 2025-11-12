@@ -17,6 +17,7 @@ RUN add-apt-repository universe && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
         sqlite3 \
+        xmlstarlet \
     && \
     mkdir -p /app/bin && \
     curl -fsSL "https://lidarr.servarr.com/v1/update/${LIDARR__UPDATE__BRANCH}/updatefile?version=${VERSION}&os=linux&runtime=netcore&arch=${TARGETARCH/amd64/x64}" \
