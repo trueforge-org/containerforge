@@ -219,30 +219,6 @@ create_additional_dbs() {
     done
 }
 
-create_pg_user() {
-    if [[ -z "$DB_USER" || -z "$DB_PASSWORD" ]]; then
-        echo "No user to be created..."
-        return 0
-    fi
-
-    # Create the user if it doesn't exist
-    psql -v ON_ERROR_STOP=1 -U postgres -d postgres -tc "SELECT 1 FROM pg_roles WHERE rolname='$DB_USER'" | grep -q 1
-    if [[ $? -eq 0 ]]; then
-        echo "User '$DB_USER' already exists."
-    else
-        echo "Creating PostgreSQL user '$DB_USER'..."
-        psql -U postgres -d postgres -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASSWORD';"
-    fi
-
-    # Grant CONNECT on all existing databases
-    DB_LIST=$(psql -U postgres -d postgres -Atc "SELECT datname FROM pg_database WHERE datistemplate = false;")
-    for db in $DB_LIST; do
-        echo "Granting privileges on database '$db' to '$DB_USER'..."
-        psql -U postgres -d "$db" -c "GRANT ALL PRIVILEGES ON DATABASE $db TO $DB_USER;"
-    done
-
-    echo "User '$DB_USER' created with access to all databases (non-superuser)."
-}
 
 docker_temp_server_stop() {
 	PGUSER="${PGUSER:-postgres}" \
@@ -314,7 +290,6 @@ _main() {
 
 			  docker_setup_db
               create_additional_dbs
-              create_pg_user
 			  docker_process_init_files /docker-entrypoint-initdb.d/*
 
 			  docker_temp_server_stop
