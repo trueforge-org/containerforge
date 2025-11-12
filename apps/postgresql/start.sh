@@ -270,9 +270,12 @@ _main() {
 PGDATA_PARENT=$(dirname "$PGDATA")
 
 if [ "$PREPTEST" = "true" ]; then
-    PGDATA="$PGDATA_PARENT/$((PG_MAJOR - 1))"
-    PATH="$PATH:/usr/lib/postgresql/$((PG_MAJOR - 1))/bin"
-    _main "$@"
+    (
+        PREV_PG=17
+        export PGDATA="$PGDATA_PARENT/$PREV_PG"
+        export PATH="$PATH:/usr/lib/postgresql/$PREV_PG/bin"
+        _main "$@"
+    )
     PREPTEST=false
 else
     PATH="$PATH:/usr/lib/postgresql/$PG_MAJOR/bin"
