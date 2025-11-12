@@ -25,10 +25,7 @@ docker_create_db_directories() {
     mkdir -p "$PGDATA" || :
     chmod 00700 "$PGDATA" || :
 
-    # Create custom socket PGDATA directory
-    rm -rf "$PGDATA_PARENT"/socket || :
-    mkdir -p "$PGDATA_PARENT"/socket || :
-    chmod 03775 "$PGDATA_PARENT"/socket || :
+    chmod 03775 "var/run/postgresql" || :
 
     local testfile="$PGDATA/.write_test_$$"
 
@@ -146,8 +143,6 @@ docker_setup_env() {
 	: "${POSTGRES_INITDB_ARGS:=}"
 	: "${POSTGRES_HOST_AUTH_METHOD:=}"
     : "${POSTGRES_PASSWORD:=$POSTGRES_USER}"
-
-    export POSTGRES_INITDB_ARGS="${POSTGRES_INITDB_ARGS} --unix_socket_directories=${PGDATA_PARENT}/socket"
 
 	declare -g DATABASE_ALREADY_EXISTS
 	: "${DATABASE_ALREADY_EXISTS:=}"
