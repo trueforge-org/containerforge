@@ -9,18 +9,21 @@ echo "Postgres selected as database type, starting configuration..."
 
 CONFIG_FILE="./config.xml" # Adjust path if needed
 if [[ ! -f "$CONFIG_FILE" ]]; then
-# Start Lidarr in the background
-/app/bin/Lidarr --nobrowser --data=/config "$@" &
+  echo "Missing config file, running Lidarr to ensure configfile can be accessed"
 
-# Capture its PID
-LIDARR_PID=$!
+  # Start Lidarr in the background
+  /app/bin/Lidarr --nobrowser --data=/config "$@" &
 
-echo "Waiting 30 seconds before exiting..."
-sleep 30
+  # Capture its PID
+  LIDARR_PID=$!
 
-# Optionally, stop Lidarr if desired
-echo "Stopping Lidarr..."
-kill "$LIDARR_PID"
+  while [[ ! -f "$CONFIG_FILE" ]]; do
+      sleep 5
+  done
+
+  # Optionally, stop Lidarr if desired
+  echo "Config file present, stopping Lidarr..."
+  kill "$LIDARR_PID"
 fi
 
 : "${DB_USER:?Need to set DB_USER}"
