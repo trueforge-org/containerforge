@@ -39,10 +39,10 @@ RUN set -eux; \
       "postgresql-${PG_MAJOR}=${VERSION}*" \
       postgresql-server-dev-${PG_MAJOR} && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-    rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
+    rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/* && \
+    echo "$PREV_MAJOR" >> /PREV_MAJOR
 
-ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH" \
-    PREV_MAJOR=$PREV_MAJOR
+ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
 
 # --- Install additions, extentions, other post-install deps and configure ---
 RUN apt-get update && \

@@ -302,7 +302,7 @@ if [ "$PREPTEST" = "true" ]; then
 UPGRADECHECK="false"
     (
         ## TODO: Remove this hardcode
-        PREV_MAJOR=17
+        PREV_MAJOR=$(cat /PREV_MAJOR)
         PGDATA="$PGDATA_PARENT/$PREV_PG"
         PATH="/usr/lib/postgresql/$PREV_MAJOR/bin:$PATH"
         _main "$@"
