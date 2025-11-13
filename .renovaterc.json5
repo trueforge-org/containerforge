@@ -60,7 +60,6 @@
   },
   packageRules: [
     {
-      "matchDatasources": ["docker"],
       "matchPackageNames": ["/ubuntu/"],
       "groupName": "ubuntu"
     },
