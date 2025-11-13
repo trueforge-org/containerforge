@@ -29,15 +29,13 @@ RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\)
 # ---------- PRODUCTION DEPS ----------
 FROM corepack AS prod-deps
 
-ENV HUSKY=0
-
+## TODO: Remove for next release
+RUN sed -i 's#"prepare": "husky install"#"prepare": ""#' package.json
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm install --prod --frozen-lockfile
 
 # ---------- BUILD STAGE ----------
 FROM corepack AS builder
-
-ENV HUSKY=0
 
 # Install build dependencies
 RUN apt-get update && \
