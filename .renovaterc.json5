@@ -103,7 +103,7 @@
       commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
       commitMessageTopic: "{{depName}}",
       matchFileNames: ["**/docker-bake.hcl", "**/Dockerfile"],
-      semanticCommitScope: "{{parentDir}}",
+      semanticCommitScope: "{{#if groupName}}{{groupName}}{{else}}{{parentDir}}{{/if}}",
       semanticCommitType: "release",
     },
     {
