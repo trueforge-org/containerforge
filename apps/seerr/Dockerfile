@@ -44,11 +44,9 @@ RUN apt-get update && \
 
 # Install all dependencies & build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile
-
-RUN pnpm build
-
-# Prune unnecessary store files
-RUN pnpm store prune
+    && pnpm build \
+    && pnpm store prune \
+    && rm -rf .next/cache
 
 # ---------- FINAL RUNTIME IMAGE ----------
 FROM base
