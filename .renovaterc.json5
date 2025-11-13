@@ -73,27 +73,27 @@
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["/python/"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/python"],
       "groupName": "python"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["/golang/"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/golang"],
       "groupName": "golang"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["/java17/"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/java17"],
       "groupName": "java17"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["/java21/"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/java21"],
       "groupName": "java21"
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["/steamcmd/"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/steamcmd"],
       "groupName": "steamcmd"
     },
     {
