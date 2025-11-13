@@ -19,7 +19,7 @@ RUN apt-get update && \
     tar xzf /tmp/seerr.tar.gz -C /app/seerr --strip-components=1 && \
     cd /app/seerr && \
     CYPRESS_INSTALL_BINARY=0 yarn --frozen-lockfile --network-timeout 1000000 && \
-    npm install --global node-gyp \
+    npm install --global node-gyp && \
     yarn build && \
     yarn install --production --ignore-scripts --prefer-offline && \
     yarn cache clean && \
