@@ -70,42 +70,36 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/ubuntu"],
       "groupName": "ubuntu",
-      additionalBranchPrefix: "group-ubuntu-"
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/python"],
       "groupName": "python",
-      additionalBranchPrefix: "group-python-"
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/golang"],
       "groupName": "golang",
-      additionalBranchPrefix: "group-golang-"
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/java17"],
       "groupName": "java17",
-      additionalBranchPrefix: "group-java17-"
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/java21"],
       "groupName": "java21",
-      additionalBranchPrefix: "group-java21-"
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/steamcmd"],
       "groupName": "steamcmd",
-      additionalBranchPrefix: "group-steamcmd-"
     },
     {
       description: ["Release Rules for App Updates"],
       addLabels: ["app/{{parentDir}}"],
-      additionalBranchPrefix: "{{parentDir}}-",
+      additionalBranchPrefix: "{{#if groupName}}{{groupName}}{{else}}{{parentDir}}{{/if}}-",
       commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
       commitMessageTopic: "{{depName}}",
       matchFileNames: ["**/docker-bake.hcl", "**/Dockerfile"],
