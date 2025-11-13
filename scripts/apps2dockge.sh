@@ -43,7 +43,13 @@ for app_path in "$SOURCE_DIR"/*/; do
 
             # Remove specified keys using jq
             jq '
-              del(.["x-portals"], .["x-notes"], .services.permissions)
+              del(
+                .["x-portals"],
+                .["x-notes"],
+                .services.permissions,
+                .configs.permissions_actions_data,
+                .configs.permissions_run_script
+              )
               | .services |= with_entries(
                   .value |= if (.depends_on | type == "object") and (.depends_on | has("permissions"))
                             then .depends_on |= del(.permissions)
