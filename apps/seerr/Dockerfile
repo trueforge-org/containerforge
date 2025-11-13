@@ -15,7 +15,8 @@ RUN curl -L -o /tmp/seerr.tar.gz "https://github.com/seerr-team/seerr/archive/re
 
 WORKDIR /app/seerr
 
-RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/[\^~].*//') \
+RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\).*$/\1/')
+    echo "pnpm engine set to: $PNPM_MAJOR" && \
     && corepack enable \
     && corepack prepare "pnpm@$PNPM_MAJOR" --activate
 
