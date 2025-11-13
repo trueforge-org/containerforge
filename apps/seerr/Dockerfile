@@ -9,7 +9,7 @@ ENV NODE_OPTIONS=--max_old_space_size=2048 \
     PNPM_HOME="/pnpm" \
     PATH="$PNPM_HOME:$PATH"
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 build-essential && \
