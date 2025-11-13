@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=fallenbagel/jellyseerr
-  default = "2.7.3"
+  default = "1.34.0"
 }
 
 variable "LICENSE" {
