@@ -67,7 +67,8 @@
     }
     },
     {
-      "matchPackageNames": ["/ubuntu/"],
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/trueforge-org/ubuntu"],
       "groupName": "ubuntu"
     },
     {
