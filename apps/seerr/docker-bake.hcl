@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/Jackett/Jackett"
+  default = "https://github.com/seerr-team/seerr"
 }
 
 group "default" {
