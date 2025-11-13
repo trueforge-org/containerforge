@@ -10,10 +10,10 @@ ENV NODE_OPTIONS=--max_old_space_size=2048 \
     PATH="$PNPM_HOME:$PATH"
 
 RUN curl -L -o /tmp/seerr.tar.gz "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
-    mkdir -p /app/seerr && \
-    tar xzf /tmp/seerr.tar.gz -C /app/seerr --strip-components=1
+    mkdir -p /app && \
+    tar xzf /tmp/seerr.tar.gz -C /app --strip-components=1
 
-WORKDIR /app/seerr
+WORKDIR /app
 
 RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\).*$/\1/') && \
     echo "pnpm engine set to: $PNPM_MAJOR" \
