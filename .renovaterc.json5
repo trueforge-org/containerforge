@@ -4,6 +4,7 @@
     "github>home-operations/renovate-config",
     "github>trueforge-org/truecharts//.github/renovate/basics/labels.json5"
   ],
+  "pinDigests": true,
   customManagers: [
     {
       customType: "regex",
@@ -59,6 +60,12 @@
     },
   },
   packageRules: [
+   {
+      matchDatasources: ["docker"],
+      digest: {
+        enabled: true
+    }
+    },
     {
       "matchPackageNames": ["/ubuntu/"],
       "groupName": "ubuntu"
