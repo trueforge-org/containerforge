@@ -2,7 +2,13 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
     "github>home-operations/renovate-config",
-    "github>trueforge-org/truecharts//.github/renovate/basics/labels.json5"
+    "github>trueforge-org/truecharts//.github/renovate/basics/labels.json5",
+    "github>trueforge-org/truecharts//.github/renovate/updates/lockfile.json5",
+    "github>trueforge-org/truecharts//.github/renovate/updates/pin.json5",
+    "github>trueforge-org/truecharts//.github/renovate/updates/digest.json5",
+    "github>trueforge-org/truecharts//.github/renovate/updates/patch.json5",
+    "github>trueforge-org/truecharts//.github/renovate/updates/minor.json5",
+    "github>trueforge-org/truecharts//.github/renovate/updates/major.json5"
   ],
   "pinDigests": true,
   customManagers: [
