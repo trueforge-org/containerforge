@@ -43,11 +43,12 @@ ENV  CI=true \
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 build-essential && \
     rm -rf /var/lib/apt/lists/* \
-    && npm install --global node-gyp \
+    && npm install --global node-gyp
 
 # Install all dependencies & build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --fetch-timeout=1000000 \
-    && pnpm build \
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --fetch-timeout=1000000
+
+RUN pnpm build \
     && pnpm store prune \
     && rm -rf .next/cache
 
