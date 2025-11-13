@@ -21,6 +21,7 @@ RUN apt-get update && \
     yarn build && \
     yarn install --production --ignore-scripts --prefer-offline && \
     yarn cache clean && \
+    chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf \
       /tmp/* \
       /root/.cache \
