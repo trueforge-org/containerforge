@@ -43,7 +43,8 @@ RUN apt-get update && \
     && npm install --global node-gyp \
 
 # Install all dependencies & build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    CI=true CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile --fetch-timeout=1000000 \
     && pnpm build \
     && pnpm store prune \
     && rm -rf .next/cache
