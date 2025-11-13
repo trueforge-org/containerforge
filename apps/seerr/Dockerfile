@@ -13,8 +13,8 @@ RUN apt-get update && \
       build-essential && \
     rm -rf /var/lib/apt/lists/* && \
     curl -L -o /tmp/seerr.tar.gz \
-      # "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
-      "https://github.com/sct/overseerr/archive/refs/tags/v${VERSION}.tar.gz" && \
+      "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
+      #"https://github.com/sct/overseerr/archive/refs/tags/v${VERSION}.tar.gz" && \
     mkdir -p /app/seerr && \
     tar xzf /tmp/seerr.tar.gz -C /app/seerr --strip-components=1 && \
     cd /app/seerr && \

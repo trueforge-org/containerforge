@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=seerr-team/seerr
-  default = "1.34.0"
+  default = "2.7.3"
 }
 
 variable "LICENSE" {
