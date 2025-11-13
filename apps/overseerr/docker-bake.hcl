@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "seerr"
+  default = "overseerr"
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=seerr-team/seerr
+  // renovate: datasource=github-releases depName=sct/overseerr
   default = "1.34.0"
 }
 
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/seerr-team/seerr"
+  default = "https://github.com/sct/overseerr"
 }
 
 group "default" {
