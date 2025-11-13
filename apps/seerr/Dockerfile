@@ -32,7 +32,7 @@ FROM corepack AS prod-deps
 ## TODO: Remove for next release
 RUN sed -i 's#"prepare": "husky install"#"prepare": ""#' package.json
 
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm install --prod --frozen-lockfile --prefer-offline
 
 # ---------- BUILD STAGE ----------
 FROM corepack AS builder
@@ -44,7 +44,7 @@ RUN apt-get update && \
     && npm install --global node-gyp
 
 # Install all dependencies & build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile --prefer-offline
 
 RUN pnpm build \
     && pnpm store prune \
