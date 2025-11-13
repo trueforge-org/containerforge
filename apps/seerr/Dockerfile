@@ -28,13 +28,16 @@ RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\)
 # ---------- PRODUCTION DEPS ----------
 FROM corepack AS prod-deps
 
+ENV  CI=true
+
 # Install only production dependencies
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    CI=true \
-    pnpm install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 # ---------- BUILD STAGE ----------
 FROM corepack AS builder
+
+ENV  CI=true \
+     CYPRESS_INSTALL_BINARY=0
 
 # Install build dependencies
 RUN apt-get update && \
@@ -43,8 +46,7 @@ RUN apt-get update && \
     && npm install --global node-gyp \
 
 # Install all dependencies & build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    CI=true CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile --fetch-timeout=1000000 \
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --fetch-timeout=1000000 \
     && pnpm build \
     && pnpm store prune \
     && rm -rf .next/cache
