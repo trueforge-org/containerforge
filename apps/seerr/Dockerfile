@@ -9,7 +9,9 @@ ENV NODE_OPTIONS=--max_old_space_size=2048 \
     PNPM_HOME="/pnpm" \
     PATH="$PNPM_HOME:$PATH"
 
-RUN corepack enable
+RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/[\^~].*//') \
+    && corepack enable \
+    && corepack prepare "pnpm@$PNPM_MAJOR" --activate
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 build-essential && \
