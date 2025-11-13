@@ -39,4 +39,4 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
     pnpm install --prod --ignore-scripts --prefer-offline
 
 RUN pnpm store prune && \
-    chown -R apps:apps /app && chmod -R 755 /a
+    chown -R apps:apps /app && chmod -R 755 /apps
