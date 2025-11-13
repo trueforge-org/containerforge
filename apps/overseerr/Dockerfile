@@ -14,9 +14,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     curl -L -o /tmp/overseerr.tar.gz \
       "https://github.com/sct/overseerr/archive/refs/tags/v${VERSION}.tar.gz" && \
-    mkdir -p /app/overseerr && \
-    tar xzf /tmp/overseerr.tar.gz -C /app/overseerr --strip-components=1 && \
-    cd /app/overseerr && \
+    mkdir -p /app && \
+    tar xzf /tmp/overseerr.tar.gz -C /app --strip-components=1 && \
+    cd /app && \
     CYPRESS_INSTALL_BINARY=0 yarn --frozen-lockfile --network-timeout 1000000 && \
     yarn build && \
     yarn install --production --ignore-scripts --prefer-offline && \
@@ -25,12 +25,12 @@ RUN apt-get update && \
     rm -rf \
       /tmp/* \
       /root/.cache \
-      /app/overseerr/src \
-      /app/overseerr/server \
-      /app/overseerr/.next/cache/*
+      /app/src \
+      /app/server \
+      /app/.next/cache/*
 
 USER apps
-WORKDIR /app/overseerr
+WORKDIR /app
 
 EXPOSE 5055
 
