@@ -40,3 +40,10 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
 
 RUN pnpm store prune && \
     chown -R apps:apps /app && chmod -R 755 /app
+
+USER apps
+
+EXPOSE 5055
+
+CMD [ "npm", "start" ]
+
