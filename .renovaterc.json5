@@ -77,8 +77,6 @@
       description: ["Release Rules for App Updates"],
       addLabels: ["app/{{parentDir}}"],
       additionalBranchPrefix: "{{parentDir}}-",
-      commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
-      commitMessageTopic: "{{depName}}",
       matchFileNames: ["**/docker-bake.hcl", "**/Dockerfile"],
       semanticCommitScope: "{{parentDir}}",
       semanticCommitType: "release",
@@ -102,7 +100,7 @@
       "matchPackageNames": ["ghcr.io/trueforge-org/ubuntu"],
       "groupName": "ubuntu",
       additionalBranchPrefix: "update-{{groupName}}-",
-      semanticCommitScope: "update-{{roupName}}",
+      semanticCommitScope: "update-{{groupName}}",
     },
     {
       "matchDatasources": ["docker"],
