@@ -9,6 +9,12 @@ ENV NODE_OPTIONS=--max_old_space_size=2048 \
     PNPM_HOME="/pnpm" \
     PATH="$PNPM_HOME:$PATH"
 
+RUN curl -L -o /tmp/seerr.tar.gz "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
+    mkdir -p /app/seerr && \
+    tar xzf /tmp/seerr.tar.gz -C /app/seerr --strip-components=1
+
+WORKDIR /app/seerr
+
 RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/[\^~].*//') \
     && corepack enable \
     && corepack prepare "pnpm@$PNPM_MAJOR" --activate
@@ -16,12 +22,6 @@ RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/[\^~].*//') \
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 build-essential && \
     rm -rf /var/lib/apt/lists/*
-
-RUN curl -L -o /tmp/seerr.tar.gz "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
-    mkdir -p /app/seerr && \
-    tar xzf /tmp/seerr.tar.gz -C /app/seerr --strip-components=1
-
-WORKDIR /app/seerr
 
 # Install dependencies using BuildKit cache
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
