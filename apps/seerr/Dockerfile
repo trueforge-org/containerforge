@@ -1,45 +1,71 @@
-FROM ghcr.io/trueforge-org/node:22.20@sha256:c57ff53b69edd1f3aae2d6e00ad2da65606b5dbc1fb42c78b4a73b44e58d099d
+# ---------- BASE STAGE ----------
+FROM ghcr.io/trueforge-org/node:22.20@sha256:c57ff53b69edd1f3aae2d6e00ad2da65606b5dbc1fb42c78b4a73b44e58d099d AS base
 
 ARG VERSION
 
 USER root
 
 ENV NODE_OPTIONS=--max_old_space_size=2048 \
-    TMPDIR=/tmp/seerr-temp \
-    PNPM_HOME="/pnpm" \
-    PATH="$PNPM_HOME:$PATH"
+   TMPDIR=/tmp/seerr-temp \
+   PNPM_HOME="/pnpm" \
+   PATH="$PNPM_HOME:$PATH"
 
+WORKDIR /app
+
+# Fetch Seerr source and enable corepack for pnpm
 RUN curl -L -o /tmp/seerr.tar.gz "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
-    mkdir -p /app/seerr && \
-    tar xzf /tmp/seerr.tar.gz -C /app/seerr --strip-components=1
+    mkdir -p /app && \
+    tar xzf /tmp/seerr.tar.gz -C /app --strip-components=1
 
-WORKDIR /app/seerr
+# ---------- CorePack stage ----------
+FROM base AS corepack
 
-RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\).*$/\1/') && \
-    echo "pnpm engine set to: $PNPM_MAJOR" \
+RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\).*$/\1/') \
+    && echo "pnpm engine set to: $PNPM_MAJOR" \
     && corepack enable \
     && corepack prepare "pnpm@$PNPM_MAJOR" --activate
 
+
+# ---------- PRODUCTION DEPS ----------
+FROM corepack AS prod-deps
+
+## TODO: Remove for next release
+RUN sed -i 's#"prepare": "husky install"#"prepare": ""#' package.json
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store CI=true pnpm install --prod --frozen-lockfile --prefer-offline
+
+# ---------- BUILD STAGE ----------
+FROM corepack AS builder
+
+# Install build dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 build-essential && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* \
+    && npm install --global node-gyp
 
-# Install dependencies using BuildKit cache
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    CI=true \
-    CYPRESS_INSTALL_BINARY=0 \
-    pnpm install --frozen-lockfile --fetch-timeout=1000000
+# Install all dependencies & build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store CYPRESS_INSTALL_BINARY=0 pnpm install --frozen-lockfile --prefer-offline
 
-# Build project
-RUN pnpm build
+RUN pnpm build \
+    && pnpm store prune \
+    && rm -rf .next/cache
 
-# Install production dependencies only
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    CI=true \
-    pnpm install --prod --ignore-scripts --prefer-offline
+# ---------- FINAL RUNTIME IMAGE ----------
+FROM base
 
-RUN pnpm store prune && \
-    chown -R apps:apps /app && chmod -R 755 /app
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+# Copy build results files
+COPY --chown=apps:apps --from=builder /app/.next ./.next
+COPY --chown=apps:apps --from=builder /app/dist ./dist
+
+# Overwrite node_modules with production-only deps
+COPY --chown=apps:apps --from=prod-deps /app/node_modules ./node_modules
+
+# Fix permissions
+RUN chown -R apps:apps /app && chmod -R 755 /app
 
 USER apps
 
