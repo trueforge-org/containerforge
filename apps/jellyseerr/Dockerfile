@@ -47,3 +47,9 @@ EXPOSE 5055
 
 CMD [ "npm", "start" ]
 
+USER apps
+
+EXPOSE 5055
+
+CMD [ "npm", "start" ]
+
