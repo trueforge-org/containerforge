@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:aba163fade18b21ae0132813e7522fbd005a1cdc8818e308679480a78ba93bb9
+FROM ghcr.io/trueforge-org/java21:21.0.8
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -8,8 +8,10 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# TODO readd chromaprint
-RUN echo "test"
+RUN curl -fsSL "https://github.com/kiranshila/Doplarr/releases/download/v${VERSION}/doplarr.jar" > "${APP_DIR}/doplarr.jar" && \
+    curl -fsSL "https://raw.githubusercontent.com/kiranshila/Doplarr/v${VERSION}/config.edn" > "${APP_DIR}/config.edn" && \
+    chmod -R u=rwX,go=rX /app \
+    && chown -R apps:apps /app
 
 COPY . /
 
