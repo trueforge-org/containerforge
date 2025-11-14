@@ -4,11 +4,12 @@ FROM ghcr.io/trueforge-org/golang:1.25.1 as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
+ARG XCADDY_VERSION
 
 USER root
 WORKDIR /app
 
-RUN wget -O - "https://github.com/caddyserver/xcaddy/releases/download/v${VERSION}/xcaddy_${VERSION}_linux_amd64.tar.gz" | tar xzf - -C "/bin" && \
+RUN wget -O - "https://github.com/caddyserver/xcaddy/releases/download/v${XCADDY_VERSION}/xcaddy_${VERSION}_linux_amd64.tar.gz" | tar xzf - -C "/bin" && \
     xcaddy build v${VERSION} --output /caddy-bin \
         --with github.com/mholt/caddy-ratelimit \
         --with github.com/caddy-dns/cloudflare && \

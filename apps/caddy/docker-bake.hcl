@@ -8,6 +8,10 @@ variable "VERSION" {
   default = "2.10.2"
 }
 
+variable "XCADDY_VERSION" {
+  default = "0.4.5"
+}
+
 variable "LICENSE" {
   default = "AGPL-3.0-or-later"
 }
@@ -24,6 +28,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    XCADDY_VERSION = "${XCADDY_VERSION}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
