@@ -12,6 +12,7 @@
     "github>trueforge-org/truecharts//.github/renovate/updates/major.json5"
   ],
   "pinDigests": true,
+  "rebaseWhen": "auto",
   customManagers: [
     {
       customType: "regex",
