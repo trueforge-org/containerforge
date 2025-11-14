@@ -6,7 +6,7 @@ ARG VENDOR
 ARG VERSION
 
 ENV COMPlus_EnableDiagnostics=0 \
-    WHISPARR__UPDATE__BRANCH=nightly
+    WHISPARR__UPDATE__BRANCH=eros
 
 USER root
 WORKDIR /app
