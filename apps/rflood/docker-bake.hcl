@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "stash"
+  default = "rflood"
 }
 
 variable "VERSION" {
-  default = "0.29.3"
+  default = "0.16.2--4.11.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/stashapp/stash"
+  default = "https://github.com/thomst08/requestrr"
 }
 
 group "default" {
