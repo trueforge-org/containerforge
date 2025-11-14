@@ -86,6 +86,12 @@
       ignoreTests: false,
     },
     {
+      description: ["Allowed Ubuntu Version for Base Images"],
+      matchDatasources: ["docker"],
+      matchPackageNames: ["/ubuntu/"],
+      allowedVersions: "/24\\.04/",
+    },
+    {
       description: ["Allow Unstable Versions"],
       matchDatasources: ["github-releases"],
       matchFileNames: ["**/docker-bake.hcl"],
