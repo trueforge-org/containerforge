@@ -80,10 +80,6 @@
       matchFileNames: ["**/docker-bake.hcl", "**/Dockerfile"],
       semanticCommitScope: "{{parentDir}}",
       semanticCommitType: "release",
-    },
-    {
-      description: ["Auto-merge App Updates"],
-      matchFileNames: ["**/docker-bake.hcl"],
       automerge: true,
       automergeType: "pr",
       ignoreTests: false,
