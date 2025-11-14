@@ -8,10 +8,14 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# TODO readd chromaprint
-RUN echo "test"
+RUN mkdir "/app/bin" && \
+    curl -fsSL "https://github.com/thomst08/requestrr/releases/download/V${VERSION}/requestrr-linux-musl-x64.tar.gz" | tar xzf - -C "/app/bin" --strip-components=1 && \
+    chmod -R u=rwX,go=rX "/app" && \
+    chown -R apps:apps "/app"
 
 COPY . /
+
+EXPOSE 4545
 
 USER apps:apps
 WORKDIR /config

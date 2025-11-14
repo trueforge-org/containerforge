@@ -22,7 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithCmdArgs("test", "-f", "/app/doplarr.jar"),
+		testcontainers.WithCmdArgs("test", "-f", "/app/qbit_manage.py"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)

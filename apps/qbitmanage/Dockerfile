@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:aba163fade18b21ae0132813e7522fbd005a1cdc8818e308679480a78ba93bb9
+FROM ghcr.io/trueforge-org/python:3.13.7
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -8,10 +8,14 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# TODO readd chromaprint
-RUN echo "test"
+RUN curl -fsSL "https://github.com/StuffAnThings/qbit_manage/archive/v${VERSION}.tar.gz" | tar xzf - -C "/app" --strip-components=1 && \
+    pip3 install --break-system-packages --no-cache-dir --upgrade "/app" && \
+    chmod -R u=rwX,go=rX "/app" && \
+    chown -R apps:apps "/app"
+
+
+USER apps:apps
 
 COPY . /
 
-USER apps:apps
 WORKDIR /config

@@ -8,10 +8,14 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# TODO readd chromaprint
-RUN echo "test"
+RUN curl -fsSL "https://github.com/autobrr/qui/releases/download/v${VERSION}/qui_${VERSION}_linux_x86_64.tar.gz" | tar xzf - -C "/app" --strip-components=0 && \
+    chmod -R u=rwX,go=rX "/app" && \
+    chmod +x "/app/qui" && \
+    chown -R apps:apps "/app"
 
 COPY . /
+
+EXPOSE 7576
 
 USER apps:apps
 WORKDIR /config
