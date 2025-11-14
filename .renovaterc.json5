@@ -12,7 +12,7 @@
     "github>trueforge-org/truecharts//.github/renovate/updates/major.json5"
   ],
   "pinDigests": true,
-  "rebaseWhen": "auto",
+  "rebaseWhen": "needed",
   customManagers: [
     {
       customType: "regex",
@@ -72,7 +72,7 @@
       matchDatasources: ["docker"],
       digest: {
         enabled: true
-    }
+      }
     },
     {
       description: ["Release Rules for App Updates"],
