@@ -8,10 +8,9 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# TODO readd chromaprint
-RUN echo "test"
+USER apps:apps
+COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:b64687779bbe0dcd41f9854129ce8fa9d6c5f009e1992a79bed97c85fe253eaf /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
 COPY . /
 
-USER apps:apps
 WORKDIR /config

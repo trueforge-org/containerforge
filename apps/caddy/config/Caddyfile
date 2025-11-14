@@ -1,0 +1,43 @@
+## This is an example Caddyfile
+
+{
+  http_port  8080
+  https_port 8443
+}
+
+(block_world) {
+  @block not remote_ip private_ranges
+  abort @block
+}
+
+(security_headers) {
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains;"
+    X-Frame-Options "SAMEORIGIN"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "strict-origin"
+    X-Robots-Tag "noindex, nofollow, nosnippet, noarchive"
+  }
+}
+
+(log_settings) {
+  log {
+    output file /config/access.log
+    level WARN
+  }
+}
+
+# Default http file server
+:8080 {
+  import log_settings
+  root * /app/www
+  file_server
+  import block_world
+}
+
+# Default reverse proxy template for your domain
+# sub.yourdomain.com {
+#   import log_settings
+#   import security_headers
+#   reverse_proxy server:8080
+# }
