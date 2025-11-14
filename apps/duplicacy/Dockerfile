@@ -8,10 +8,18 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# TODO readd chromaprint
-RUN echo "test"
+
+VOLUME ["/cache","/logs"]
+
+RUN mkdir "/var/lib/dbus" && ln -s "/app/machine-id" "/var/lib/dbus/machine-id" && \
+    ln -s "/app/" "/app/.duplicacy-web"
+
+RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_x64_${VERSION}" > "/app/duplicacy_web" && \
+    chmod 755 "/app/duplicacy_web" \
+    && chown -R apps:apps /app
 
 COPY . /
 
 USER apps:apps
 WORKDIR /config
+EXPOSE 3875
