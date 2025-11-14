@@ -77,6 +77,9 @@ RUN apt-get update \
     && chmod 777 /cache \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
 
+# Copy unrar binary from LinuxServer image
+COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:92b4d32099ca9c9290bed83b4ba7cad5b0f563fd3e3bc63ca6a924b6f8a9245b /usr/bin/unrar-ubuntu /usr/bin/unrar
+
 # Use a safe non-root user
 # Note: nobody:nogroup does not map to the same uid:gid on every (host/share) distro!
 USER apps:apps
