@@ -9,9 +9,6 @@ WORKDIR /app
 
 EXPOSE 3000 5000
 
-ARG IMAGE_STATS
-ENV IMAGE_STATS=${IMAGE_STATS} FLOOD_AUTH="false" WEBUI_PORTS="3000/tcp,3000/udp,5000/tcp,5000/udp"
-
 # Install runtime dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -20,10 +17,7 @@ RUN apt-get update && \
     openssl \
     mediainfo && \
     rm -rf /var/lib/apt/lists/* && \
-    ln -s "${CONFIG_DIR}/rpc2/basic_auth_credentials" "/app/basic_auth_credentials"
-
-# Copy rtorrent from builder
-COPY --from=ghcr.io/hotio/rflood:release-0.16.2--4.11.0 /usr/local/bin/rtorrent "/app/rtorrent"
+    ln -s "/config/rpc2/basic_auth_credentials" "/app/basic_auth_credentials"
 
 # Install Flood
 ARG FLOOD_VERSION
