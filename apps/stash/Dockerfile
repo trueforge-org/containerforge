@@ -11,8 +11,6 @@ WORKDIR /app
 RUN curl -fsSL "https://github.com/stashapp/stash/releases/download/v${VERSION}/stash-linux" > "/app/stash" && \
     chmod 755 "/app/stash"
 
-ARG DEBIAN_FRONTEND="noninteractive"
-
 #
 # ------------------------------------------------------------
 #  ALL UBUNTU APT-GET STEPS (ONE RUN)
