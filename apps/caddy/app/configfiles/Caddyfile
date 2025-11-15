@@ -30,7 +30,7 @@
 # Default http file server
 :8080 {
   import log_settings
-  root * /app/www
+  root * /config/www
   file_server
   import block_world
 }
