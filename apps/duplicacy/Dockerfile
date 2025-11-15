@@ -5,18 +5,22 @@ ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
 
+ARG TARGETARCH=${TARGETARCH/arm64/arm64}
+ARG TARGETARCH=${TARGETARCH/amd64/x64}
+
+
 USER root
 WORKDIR /app
 
 
 VOLUME ["/cache","/logs"]
 
-RUN mkdir "/var/lib/dbus" && ln -s "/app/machine-id" "/var/lib/dbus/machine-id" && \
+RUN mkdir -p "/var/lib/dbus" && ln -s "/app/machine-id" "/var/lib/dbus/machine-id" && \
     ln -s "/app/" "/app/.duplicacy-web"
 
-RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_x64_${VERSION}" > "/app/duplicacy_web" && \
+RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_${TARGETARCH}_${VERSION}" > "/app/duplicacy_web" && \
     chmod 755 "/app/duplicacy_web" \
-    && chown -R apps:apps /app
+    && chown -R apps:apps /apps
 
 COPY . /
 

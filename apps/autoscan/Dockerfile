@@ -24,6 +24,6 @@ USER apps:apps
 
 COPY . /
 
-COPY --from=builder /autoscan/autoscan app/autoscan
+COPY --from=builder /autoscan/autoscan /app/autoscan
 
 WORKDIR /config
