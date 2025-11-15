@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ ! -f /config/core.conf ]]; then
-    cp /defaults/core.conf /config/core.conf
-fi
+cp -n /defaults/core.conf /config/core.conf
 
 mkdir -p /config/plugins/.python-eggs
 
