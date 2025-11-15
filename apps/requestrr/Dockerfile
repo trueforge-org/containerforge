@@ -13,7 +13,7 @@ USER root
 WORKDIR /app
 
 RUN mkdir "/app/bin" && \
-    curl -fsSL "https://github.com/thomst08/requestrr/releases/download/V${VERSION}/requestrr-linux-${TARGETARCH}}.tar.gz" | tar xzf - -C "/app/bin" --strip-components=1 && \
+    curl -fsSL "https://github.com/thomst08/requestrr/releases/download/V${VERSION}/requestrr-linux-${TARGETARCH}.tar.gz" | tar xzf - -C "/app/bin" --strip-components=1 && \
     chmod -R u=rwX,go=rX "/app" && \
     chown -R apps:apps "/app"
 

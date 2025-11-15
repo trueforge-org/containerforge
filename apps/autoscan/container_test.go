@@ -1,14 +1,15 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 func Test(t *testing.T) {
@@ -16,21 +17,31 @@ func Test(t *testing.T) {
 
 	appName := os.Getenv("APP")
 	require.NotEmpty(t, appName, "APP environment variable must be set")
+
 	image := os.Getenv("TEST_IMAGE")
 	if image == "" {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
-	app, err := testcontainers.Run(
-		ctx, image,
+	// Start container without any wait strategy
+	app, err := testcontainers.Run(ctx, image,
 		testcontainers.WithExposedPorts("3030/tcp"),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("3030/tcp"),
-			wait.ForHTTP("/").WithPort("3030/tcp").WithStatusCodeMatcher(func(status int) bool {
-				return status == 200
-			}),
-		),
 	)
-	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
+	defer testcontainers.CleanupContainer(t, app)
+
+	// Check logs for "Processor started"
+	logs, err := app.Logs(ctx)
+	require.NoError(t, err)
+
+	found := false
+	scanner := bufio.NewScanner(logs)
+	for scanner.Scan() {
+		if strings.Contains(scanner.Text(), "Processor started") {
+			found = true
+			break
+		}
+	}
+	require.NoError(t, scanner.Err())
+	require.True(t, found, `"Processor started" not found in container logs`)
 }
