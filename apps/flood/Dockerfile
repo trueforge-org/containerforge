@@ -7,22 +7,13 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-EXPOSE 3000 5000
-
-# Install runtime dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    xmlrpc-c \
-    nginx \
-    openssl \
-    mediainfo && \
-    rm -rf /var/lib/apt/lists/* && \
-    ln -s "/config/rpc2/basic_auth_credentials" "/app/basic_auth_credentials"
+EXPOSE 3000 4500
 
 # Install Flood
 ARG FLOOD_VERSION
 RUN curl -fsSL "https://github.com/jesec/flood/releases/download/v${FLOOD_VERSION}/flood-linux-x64" -o "/app/flood" && \
-    chmod 755 "/app/flood"
+    chmod 755 "/app/flood" && \
+    chown -R apps:apps /app
 
 COPY . /
 
