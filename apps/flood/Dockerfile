@@ -11,7 +11,7 @@ EXPOSE 3000 4500
 
 # Install Flood
 ARG FLOOD_VERSION
-RUN curl -fsSL "https://github.com/jesec/flood/releases/download/v${FLOOD_VERSION}/flood-linux-x64" -o "/app/flood" && \
+RUN curl -fsSL "https://github.com/jesec/flood/releases/download/v${VERSION}/flood-linux-x64" -o "/app/flood" && \
     chmod 755 "/app/flood" && \
     chown -R apps:apps /app
 
