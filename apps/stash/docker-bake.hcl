@@ -6,6 +6,13 @@ variable "APP" {
 
 variable "VERSION" {
   default = "0.29.3"
+
+}
+
+
+variable "INTEL_CR_VERSION" {
+  default = "25.40.35563.4"
+
 }
 
 variable "LICENSE" {
@@ -24,6 +31,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    INTEL_CR_VERSION = "${INTEL_CR_VERSION}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
