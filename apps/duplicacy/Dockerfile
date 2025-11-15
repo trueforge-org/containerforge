@@ -20,7 +20,7 @@ RUN ln -s "/app/" "/app/.duplicacy-web"
 
 RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_${TARGETARCH}_${VERSION}" > "/app/duplicacy_web" && \
     chmod 755 "/app/duplicacy_web" \
-    && chown -R apps:apps /apps
+    && chown -R apps:apps /app
 
 COPY . /
 
