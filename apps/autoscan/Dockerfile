@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/golang:1.25.1 as builder
+FROM ghcr.io/trueforge-org/golang:1.25.1@sha256:ac65e5c170bd1414782d964689f53a0f72f7e07567c212e666652e86a6ec26e5 as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
