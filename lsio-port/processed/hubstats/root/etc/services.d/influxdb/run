@@ -1,3 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-/usr/bin/influxd -pidfile /var/run/influxdb/influxd.pid -config /config/etc/influxdb/influxdb.conf

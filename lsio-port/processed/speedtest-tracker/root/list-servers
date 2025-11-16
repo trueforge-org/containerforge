@@ -1,3 +1,0 @@
-#!/bin/bash
-
-php /app/www/artisan app:ookla-list-servers

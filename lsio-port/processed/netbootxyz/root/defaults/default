@@ -1,7 +1,0 @@
-server {
-	listen REPLACE_PORT;
-	location / {
-		root /assets;
-		autoindex on;
-	}
-}

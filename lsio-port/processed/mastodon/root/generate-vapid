@@ -1,6 +1,0 @@
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
-
-cd /app/www || exit 1
-
-bundle exec rails mastodon:webpush:generate_vapid_key
