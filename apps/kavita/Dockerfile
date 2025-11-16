@@ -32,7 +32,6 @@ RUN \
     /var/tmp/*
 
 # add local files
-COPY /root /
 COPY . /
 # ports and volumes
 EXPOSE 5000

@@ -17,9 +17,6 @@ RUN \
     openjdk-17-jre-headless \
     unzip && \
   echo "**** install unifi ****" && \
-    | jq -r '._embedded.firmware[].version' \
-    | awk -F '+' '{print $1}'); \
-  fi && \
   UNIFI_DOWNLOAD=$(curl -sX GET "https://fw-update.ubnt.com/api/firmware?filter=eq~~product~~unifi-controller&filter=eq~~platform~~unix&filter=eq~~channel~~release&sort=-version" \
   | jq -r "._embedded.firmware[] | select(.version | test(\"v${VERSION}\")) | ._links.data.href") && \
   mkdir -p /app && \
@@ -38,6 +35,7 @@ RUN \
 # add local files
 USER apps
 COPY ./root/ /
+COPY ./ /
 
 # Volumes and Ports
 WORKDIR /usr/lib/unifi

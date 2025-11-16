@@ -18,7 +18,6 @@ RUN \
     bzip2 \
     intel-opencl-icd \
     libexpat1 && \
-  ln -s libOpenCL.so.1 /usr/lib/$TARGETARCH-linux-gnu/libOpenCL.so && \
   echo "**** install foldingathome ****" && \
   download_url="https://download.foldingathome.org/releases/public/fah-client/"$(curl -s https://download.foldingathome.org/releases/public/fah-client/meta.json | jq -r '.[] | select((.package | contains("debian")) and (.package | contains("release"))) | .package' | grep -v "$TARGETARCH" | grep "tar.bz2") && \
   curl -o \

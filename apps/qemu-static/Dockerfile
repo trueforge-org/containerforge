@@ -37,13 +37,14 @@ RUN \
 
 # runtime stage
 FROM ghcr.io/trueforge-org/ubuntu:24.4
-USER root
+
 # set version label
 ARG VERSION
+
+USER apps
 
 # Add build assets
 COPY --from=buildstage /build-out/ /
 
 # add local files
-COPY /root /
 COPY . /

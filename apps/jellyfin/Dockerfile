@@ -15,7 +15,6 @@ RUN \
   echo "**** install jellyfin *****" && \
   curl -s https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | gpg --dearmor | tee /usr/share/keyrings/jellyfin.gpg >/dev/null && \
   echo 'deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/ubuntu noble main' > /etc/apt/sources.list.d/jellyfin.list && \
-  fi && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     at \

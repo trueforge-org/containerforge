@@ -48,7 +48,7 @@ RUN \
 
 # add local files
 USER apps
-COPY ./root/ /
+COPY ./ /
 
 # ports and volumes
 EXPOSE 8875 554 1900/udp

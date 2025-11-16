@@ -40,7 +40,6 @@ RUN \
 
 # copy local files
 USER apps
-COPY ./root/ /
 
 # ports and volumes
 EXPOSE 8200

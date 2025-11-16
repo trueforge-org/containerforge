@@ -19,7 +19,8 @@ RUN python3 -m venv /lsiopy && \
     /var/lib/apt/lists/* \
     /tmp/*
 
-COPY root /
+USER apps
+COPY ./ /
 
 VOLUME /config
 

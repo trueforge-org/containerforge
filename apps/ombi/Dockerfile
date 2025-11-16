@@ -29,7 +29,7 @@ RUN \
     /var/tmp/*
 
 # add local files
-COPY /root /
+USER apps
 COPY . /
 # ports and volumes
 EXPOSE 3579
