@@ -15,7 +15,8 @@ RUN \
   apt-get install -y --no-install-recommends \
     build-essential \
     git \
-  python3 -m venv /lsiopy && \
+  && mkdir -p /app/cfpy && \
+  python3 -m venv /app/cfpy && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

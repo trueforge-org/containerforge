@@ -8,7 +8,7 @@ USER root
 
 ENV TMPDIR="/run/piper-temp"
 
-RUN python3 -m venv /lsiopy && \
+RUN mkdir -p /app/cfpy && python3 -m venv /app/cfpy && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
