@@ -1,6 +1,8 @@
 
-FROM debian:bookworm AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
 
+
+USER root
 
 RUN \
   echo "**** install build deps ****" && \
@@ -34,8 +36,8 @@ RUN \
   chmod +x /build-out/usr/bin/qemu-binfmt-conf
 
 # runtime stage
-FROM alpine:latest
-
+FROM ghcr.io/trueforge-org/ubuntu:24.4
+USER root
 # set version label
 ARG VERSION
 

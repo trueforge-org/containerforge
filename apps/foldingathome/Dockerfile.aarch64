@@ -33,6 +33,7 @@ RUN \
     /var/log/*
 
 # add local files
+USER apps
 COPY ./root/ /
 
 # ports and volumes

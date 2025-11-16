@@ -3,6 +3,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
+USER root
 
 RUN \
   echo "**** install resilio-sync ****" && \
@@ -19,6 +20,7 @@ RUN \
     /var/log/*
 
 # add local files
+USER apps
 COPY ./root/ /
 
 # ports and volumes

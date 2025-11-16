@@ -3,6 +3,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
+USER root
 
 # environment settings
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -35,6 +36,7 @@ RUN \
     /var/tmp/*
 
 # add local files
+USER apps
 COPY ./root/ /
 
 # Volumes and Ports

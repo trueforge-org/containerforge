@@ -3,6 +3,7 @@ FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
+USER root
 
 ENV HOME=/config \
    TMPDIR="/run/whisper-temp"
@@ -28,6 +29,7 @@ RUN \
     /var/lib/apt/lists/* \
     /tmp/*
 
+USER apps
 COPY ./root/ /
 
 VOLUME /config

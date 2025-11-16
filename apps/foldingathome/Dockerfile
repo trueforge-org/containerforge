@@ -3,6 +3,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
+USER root
 
 #Add needed nvidia environment variables for container toolkit
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
@@ -33,6 +34,7 @@ RUN \
     /var/log/*
 
 # add local files
+USER apps
 COPY ./root/ /
 
 # ports and volumes

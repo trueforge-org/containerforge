@@ -2,6 +2,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
+USER root
 
 # environment settings
 ENV HOME="/config" \

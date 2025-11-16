@@ -1,7 +1,8 @@
 ############## build stage ##############
-FROM ubuntu as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 as buildstage
 
-# set version label
+
+USER root
 
 # build environment settings
 
@@ -29,10 +30,7 @@ RUN \
     strip --strip-all shellcheck
 
 ############## runtime stage ##############
-FROM scratch
-ADD rootfs.tar.xz /
-
-# set version label
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # copy files from build stage
 COPY --from=buildstage /tmp/shellcheck/shellcheck /usr/local/bin/
