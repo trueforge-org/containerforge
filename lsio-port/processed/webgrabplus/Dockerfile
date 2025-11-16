@@ -1,11 +1,10 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
 
 # package versions
-ARG WEBGRAB_VER
 
 # environment variables.
 ENV HOME=/config
@@ -23,11 +22,11 @@ RUN \
   chmod +x /tmp/dotnet-install.sh && \
   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet && \
   echo "**** install webgrabplus ****" && \
-  if [ -z "$WEBGRAB_VER" ]; then \
-    WEBGRAB_VER=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|'); \
+  if [ -z "$VERSION" ]; then \
+    VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|'); \
   fi && \
-  echo "Found Webgrabplus version ${WEBGRAB_VER}" && \
-  WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${WEBGRAB_VER} | grep '>Linux</a>' | sed 's|.*\(https://webgrab.*.gz\).*|\1|') && \
+  echo "Found Webgrabplus version ${VERSION}" && \
+  WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep '>Linux</a>' | sed 's|.*\(https://webgrab.*.gz\).*|\1|') && \
   mkdir -p \
     /app/wg++ && \
   curl -o /tmp/wg++.tar.gz -L \

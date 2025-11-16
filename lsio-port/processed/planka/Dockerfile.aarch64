@@ -1,8 +1,7 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.21 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.21 AS buildstage
 
 # set version label
-ARG PLANKA_RELEASE
 
 RUN \
   echo "**** install packages ****" && \
@@ -17,14 +16,14 @@ RUN \
     py3-setuptools \
     python3-dev && \
   echo "**** install planka ****" && \
-  if [ -z ${PLANKA_RELEASE+x} ]; then \
-  PLANKA_RELEASE=$(curl -s https://api.github.com/repos/plankanban/planka/releases/latest \
+  if [ -z ${VERSION+x} ]; then \
+  VERSION=$(curl -s https://api.github.com/repos/plankanban/planka/releases/latest \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p /build && \
   curl -o \
     /tmp/planka.tar.gz -L \
-    "https://github.com/plankanban/planka/archive/${PLANKA_RELEASE}.tar.gz" && \
+    "https://github.com/plankanban/planka/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/planka.tar.gz -C \
     /build --strip-components=1 && \
@@ -45,10 +44,9 @@ RUN \
     $HOME/.npm \
     /tmp/*
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.21
 
 ARG VERSION
-ARG PLANKA_RELEASE
 
 COPY --from=buildstage /build/server/ /app
 COPY --from=buildstage /build/server/.env.sample /app/.env

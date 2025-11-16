@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG LIBRESPEED_RELEASE
 
 RUN \
   echo "**** install packages ****" && \
@@ -13,15 +12,15 @@ RUN \
     php84-pdo_pgsql \
     php84-pdo_sqlite && \
   echo "**** install librespeed ****" && \
-  if [ -z ${LIBRESPEED_RELEASE+x} ]; then \
-    LIBRESPEED_RELEASE=$(curl -sX GET "https://api.github.com/repos/librespeed/speedtest/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/librespeed/speedtest/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p \
     /app/www/public && \
   curl -o \
     /tmp/librespeed.tar.gz -L \
-    "https://github.com/librespeed/speedtest/archive/${LIBRESPEED_RELEASE}.tar.gz" && \
+    "https://github.com/librespeed/speedtest/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/librespeed.tar.gz -C \
     /app/www/public --strip-components=1 && \

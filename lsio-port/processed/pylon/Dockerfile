@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG PYLON_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -20,13 +19,13 @@ RUN \
   echo "**** install Pylon ****" && \
   mkdir -p \
     /app/pylon && \
-  if [ -z ${PYLON_RELEASE+x} ]; then \
-    PYLON_RELEASE=$(curl -sX GET "https://api.github.com/repos/pylonide/pylon/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/pylonide/pylon/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
   /tmp/pylon.tar.gz -L \
-    "https://github.com/pylonide/pylon/archive/${PYLON_RELEASE}.tar.gz" && \
+    "https://github.com/pylonide/pylon/archive/v${VERSION}.tar.gz" && \
   tar -xzf \
     /tmp/pylon.tar.gz -C \
     /app/pylon/ --strip-components=1 && \

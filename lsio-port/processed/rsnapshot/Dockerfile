@@ -1,19 +1,18 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG RSNAPSHOT_VERSION
 
 RUN \
   echo "**** install runtime packages ****" && \
-  if [ -z ${RSNAPSHOT_VERSION+x} ]; then \
-    RSNAPSHOT_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.21/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.21/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:rsnapshot$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache \
     openssh \
-    rsnapshot==${RSNAPSHOT_VERSION} \
+    rsnapshot==${VERSION} \
     rsync && \
   rm -rf /etc/rsnapshot.conf && \
   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf && \

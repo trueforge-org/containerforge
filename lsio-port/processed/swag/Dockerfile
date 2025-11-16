@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG CERTBOT_VERSION
 
 # environment settings
 ENV DHLEVEL=2048 \
@@ -77,15 +76,15 @@ RUN \
     php84-xsl \
     whois && \
   echo "**** install certbot plugins ****" && \
-  if [ -z ${CERTBOT_VERSION+x} ]; then \
-    CERTBOT_VERSION=$(curl -sL  https://pypi.python.org/pypi/certbot/json |jq -r '. | .info.version'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL  https://pypi.python.org/pypi/certbot/json |jq -r '. | .info.version'); \
   fi && \
   python3 -m venv /lsiopy && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.22/ \
-    certbot==${CERTBOT_VERSION} \
+    certbot==${VERSION} \
     certbot-dns-acmedns \
     certbot-dns-aliyun \
     certbot-dns-azure \

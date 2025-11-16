@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG HTPCMANAGER_COMMIT
 
 RUN \
   echo "**** install build packages ****" && \
@@ -33,13 +32,13 @@ RUN \
     vnstat && \
   echo "**** install app ****" && \
   mkdir -p /app/htpcmanager && \
-  if [ -z ${HTPCMANAGER_COMMIT+x} ]; then \
-    HTPCMANAGER_COMMIT=$(curl -sX GET https://api.github.com/repos/HTPC-Manager/HTPC-Manager/commits/master2 \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/HTPC-Manager/HTPC-Manager/commits/master2 \
     | jq -r '. | .sha'); \
   fi && \
   curl -s -o \
     /tmp/htpc.tar.gz -L \
-    "https://github.com/HTPC-Manager/HTPC-Manager/archive/${HTPCMANAGER_COMMIT}.tar.gz" && \
+    "https://github.com/HTPC-Manager/HTPC-Manager/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/htpc.tar.gz -C \
     /app/htpcmanager --strip-components=1 && \
@@ -50,7 +49,7 @@ RUN \
     pip \
     wheel && \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r /app/htpcmanager/requirements.txt && \
-  echo ${HTPCMANAGER_COMMIT} > /app/htpcmanager/VERSION.txt && \
+  echo ${VERSION} > /app/htpcmanager/VERSION.txt && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

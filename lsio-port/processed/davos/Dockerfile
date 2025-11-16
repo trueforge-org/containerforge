@@ -1,6 +1,5 @@
 
 FROM openjdk:8-alpine AS buildstage
-ARG DAVOS_RELEASE
 
 RUN \
   echo "**** Install build requirements ****" && \
@@ -9,13 +8,13 @@ RUN \
     curl \
     jq && \
   echo "**** Download Davos ****" && \
-  if [ -z ${DAVOS_RELEASE+x} ]; then \
-    DAVOS_RELEASE=$(curl -sX GET https://api.github.com/repos/linuxserver/davos/releases/latest \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/linuxserver/davos/releases/latest \
     | jq -r '. | .tag_name'); \
   fi && \
   curl -o \
     /tmp/davos.tar.gz -L \
-    "https://github.com/linuxserver/davos/archive/${DAVOS_RELEASE}.tar.gz" && \
+    "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" && \
   echo "**** Build Davos For Release ****" && \
   mkdir -p \
     /app/davos/ && \
@@ -28,7 +27,7 @@ RUN \
   cp build/libs/*.jar /davos.jar && \
   chmod 755 /davos.jar
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

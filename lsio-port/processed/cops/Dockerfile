@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG COPS_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -20,13 +19,13 @@ RUN \
   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
   echo "**** install cops ****" && \
-  if [ -z ${COPS_RELEASE+x} ]; then \
-    COPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/mikespub-org/seblucas-cops/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/mikespub-org/seblucas-cops/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/cops.tar.gz -L \
-    "https://github.com/mikespub-org/seblucas-cops/archive/${COPS_RELEASE}.tar.gz" && \
+    "https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz" && \
   mkdir -p \
     /app/www/public && \
   tar xf /tmp/cops.tar.gz -C \

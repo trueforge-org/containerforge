@@ -1,9 +1,8 @@
 
 # build stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
 
 # set version label
-ARG FFMPEG_VERSION
 
 # common env
 ENV \
@@ -877,10 +876,10 @@ RUN \
 # main ffmpeg build
 RUN \
   echo "**** Versioning ****" && \
-  if [ -z ${FFMPEG_VERSION+x} ]; then \
+  if [ -z ${VERSION+x} ]; then \
     FFMPEG=${FFMPEG_HARD}; \
   else \
-    FFMPEG=${FFMPEG_VERSION%-cli}; \
+    FFMPEG=${VERSION%-cli}; \
   fi && \
   echo "**** grabbing ffmpeg ****" && \
   mkdir -p /tmp/ffmpeg && \
@@ -1009,7 +1008,7 @@ RUN \
     /buildout/etc/OpenCL/vendors/nvidia.icd
 
 # runtime stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # Add files from binstage
 COPY --from=buildstage /buildout/ /

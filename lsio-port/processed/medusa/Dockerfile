@@ -1,11 +1,10 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG MEDUSA_RELEASE
 
 ENV LANG='en_US.UTF-8'
 
@@ -19,15 +18,15 @@ RUN \
     mediainfo \
     python3 && \
   echo "**** install app ****" && \
-  if [ -z ${MEDUSA_RELEASE+x} ]; then \
-    MEDUSA_RELEASE=$(curl -sX GET "https://api.github.com/repos/pymedusa/Medusa/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/pymedusa/Medusa/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p \
     /app/medusa && \
   curl -o \
     /tmp/medusa.tar.gz -L \
-    "https://github.com/pymedusa/Medusa/archive/${MEDUSA_RELEASE}.tar.gz" && \
+    "https://github.com/pymedusa/Medusa/archive/v${VERSION}.tar.gz" && \
   tar xf /tmp/medusa.tar.gz -C \
     /app/medusa --strip-components=1 && \
   cd /app/medusa && \

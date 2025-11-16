@@ -1,8 +1,7 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG OMBI_RELEASE
 
 # environment settings
 ENV HOME="/config" \
@@ -17,13 +16,13 @@ RUN \
   echo "**** install ombi ****" && \
   mkdir -p \
     /app/ombi && \
-  if [ -z ${OMBI_RELEASE+x} ]; then \
-    OMBI_RELEASE=$(curl -sX GET "https://api.github.com/repos/Ombi-app/Ombi/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/Ombi-app/Ombi/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
   /tmp/ombi-src.tar.gz -L \
-    "https://github.com/Ombi-app/Ombi/releases/download/${OMBI_RELEASE}/linux-$TARGETARCH.tar.gz" && \
+    "https://github.com/Ombi-app/Ombi/releases/download/v${VERSION}/linux-$TARGETARCH.tar.gz" && \
   tar xzf /tmp/ombi-src.tar.gz -C \
     /app/ombi/ && \
   chmod +x /app/ombi/Ombi && \

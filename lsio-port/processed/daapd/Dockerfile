@@ -1,8 +1,7 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
 ############## build stage ##############
 
-ARG DAAPD_RELEASE
 
 RUN \
   echo "**** install build packages ****" && \
@@ -41,13 +40,13 @@ RUN \
   mkdir -p \
     /tmp/source/owntone && \
   echo "**** compile owntone-server ****" && \
-  if [ -z ${DAAPD_RELEASE+x} ]; then \
-    DAAPD_RELEASE=$(curl -sX GET "https://api.github.com/repos/owntone/owntone-server/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/owntone/owntone-server/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
   /tmp/source/owntone.tar.gz -L \
-    "https://github.com/owntone/owntone-server/archive/${DAAPD_RELEASE}.tar.gz" && \
+    "https://github.com/owntone/owntone-server/archive/${VERSION}.tar.gz" && \
   tar xf /tmp/source/owntone.tar.gz -C \
     /tmp/source/owntone --strip-components=1 && \
   export PATH="/tmp/source:$PATH" && \
@@ -69,7 +68,7 @@ RUN \
   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig && \
   rm -rf /tmp/daapd-build/var
 ############## runtime stage ##############
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

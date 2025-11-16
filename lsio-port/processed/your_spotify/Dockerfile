@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS buildbase
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildbase
 
 # set version label
 ARG VERSION
-ARG YOUR_SPOTIFY_VERSION
 
 RUN \
   echo "**** install buildstage packages ****" && \
@@ -14,13 +13,13 @@ RUN \
     python3-dev \
     yarn && \
   echo "*** install your_spotify ***" && \
-  if [ -z ${YOUR_SPOTIFY_VERSION+x} ]; then \
-    YOUR_SPOTIFY_VERSION=$(curl -sX GET "https://api.github.com/repos/Yooooomi/your_spotify/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/Yooooomi/your_spotify/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/your_spotify.tar.gz -L \
-    "https://github.com/Yooooomi/your_spotify/archive/${YOUR_SPOTIFY_VERSION}.tar.gz" && \
+    "https://github.com/Yooooomi/your_spotify/archive/${VERSION}.tar.gz" && \
   mkdir -p /app/www && \
   tar xzf \
     /tmp/your_spotify.tar.gz -C \
@@ -53,7 +52,6 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 ARG VERSION
-ARG YOUR_SPOTIFY_VERSION
 
 ENV HOME=/app
 

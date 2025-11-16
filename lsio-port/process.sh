@@ -167,6 +167,8 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
     [[ ${#dockerfiles[@]} -eq 0 ]] && continue
 
     echo "[VERBOSE] Cleaning up Dockerfiles in $processed: ${dockerfiles[*]}"
+    BUILD_VERSION_ARG=${BUILD_VERSION_ARG//\'/}
+    BUILD_VERSION_ARG=${BUILD_VERSION_ARG// /}
     echo "BUILD_VERSION_ARG set to $BUILD_VERSION_ARG"
 
 for df in "${dockerfiles[@]}"; do
@@ -177,6 +179,10 @@ for df in "${dockerfiles[@]}"; do
             -e '/^ARG BUILD_DATE/d' \
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
+            -e "/ARG $BUILD_VERSION_ARG/d" \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
             -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
@@ -185,6 +191,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's/arm64/\$TARGETARCH/g' \
             -e 's/aarch64/\$TARGETARCH/g' \
             -e 's/aarch/\$TARGETARCH/g' \
+            -e '/^ARGVERSION/d' \
             "$df"
     else
         sed -i '' \
@@ -193,6 +200,10 @@ for df in "${dockerfiles[@]}"; do
             -e '/^ARG BUILD_DATE/d' \
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
+            -e "/ARG $BUILD_VERSION_ARG/d" \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
             -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
@@ -201,6 +212,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's/arm64/\$TARGETARCH/g' \
             -e 's/aarch64/\$TARGETARCH/g' \
             -e 's/aarch/\$TARGETARCH/g' \
+            -e '/^ARGVERSION/d' \
             "$df"
     fi
 

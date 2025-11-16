@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG PHPMYADMIN_VERSION
 
 # environment settings
 ARG PHPMYADMIN_RELEASE_GPG_KEY="3D06A59ECE730EB71B511C17CE752F178259BD92"
@@ -52,16 +51,16 @@ RUN \
   } > /etc/php84/conf.d/phpmyadmin-misc.ini && \
   echo "**** install phpmyadmin ****" && \
   mkdir -p /app/www/public && \
-  if [ -z ${PHPMYADMIN_VERSION+x} ]; then \
-    PHPMYADMIN_VERSION=$(curl -sL 'https://www.phpmyadmin.net/home_page/version.txt' \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL 'https://www.phpmyadmin.net/home_page/version.txt' \
     | head -n 1 | cut -d ' ' -f 1); \
   fi && \
   curl -s -o \
     /tmp/phpmyadmin.tar.xz -L \
-    "https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.xz" && \
+    "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" && \
   curl -s -o \
     "/tmp/phpmyadmin.tar.xz.asc" -L \
-    "https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.xz.asc" && \
+    "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" && \
   export GNUPGHOME="$(mktemp -d)" && \
   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \

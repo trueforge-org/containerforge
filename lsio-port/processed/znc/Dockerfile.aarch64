@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.22 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.22 AS buildstage
 ############## build stage ##############
 
 # package version
-ARG ZNC_RELEASE
 
 ENV MAKEFLAGS="-j4"
 
@@ -31,13 +30,13 @@ RUN \
 
 RUN \
   echo "**** compile znc ****" && \
-  if [ -z ${ZNC_RELEASE+x} ]; then \
-    ZNC_RELEASE=$(curl -s https://api.github.com/repos/znc/znc/tags \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -s https://api.github.com/repos/znc/znc/tags \
     | jq -r 'first(.[] | select(.name | test("-rc|-beta|-alpha") | not)) | .name'); \
   fi && \
   mkdir -p \
     /tmp/znc && \
-  git clone --branch "${ZNC_RELEASE}" --depth 1 \
+  git clone --branch "${VERSION}" --depth 1 \
     --recurse-submodules \
     https://github.com/znc/znc.git \
     /tmp/znc && \
@@ -85,7 +84,7 @@ RUN \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.22
 
 # set version label
 ARG VERSION

@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG NEXTCLOUD_RELEASE
 
 # environment settings
 ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
@@ -78,14 +77,14 @@ RUN \
   echo "**** install nextcloud ****" && \
   mkdir -p \
     /app/www/src/ && \
-  if [ -z ${NEXTCLOUD_RELEASE+x} ]; then \
-    NEXTCLOUD_RELEASE=$(curl -sX GET https://api.github.com/repos/nextcloud/server/releases \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/nextcloud/server/releases \
       | jq -r '.[] | select(.prerelease != true) | .tag_name' \
       | sed 's|^v||g' | sort -rV | head -1); \
   fi && \
   curl -o \
     /tmp/nextcloud.tar.bz2 -L \
-    https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_RELEASE}.tar.bz2 && \
+    https://download.nextcloud.com/server/releases/nextcloud-${VERSION}.tar.bz2 && \
   tar xf /tmp/nextcloud.tar.bz2 -C \
     /app/www/src --strip-components=1 && \
   rm -rf /app/www/src/updater && \

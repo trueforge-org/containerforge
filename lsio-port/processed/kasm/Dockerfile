@@ -1,8 +1,7 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
-ARG KASM_VERSION
 ARG VERSION
 
 # Env
@@ -58,14 +57,14 @@ RUN \
   echo 'hosts: files dns' > /etc/nsswitch.conf && \
   echo "**** setup wizard ****" && \
   mkdir -p /wizard && \
-  if [ -z ${KASM_VERSION+x} ]; then \
-      KASM_VERSION=$(curl -sX GET 'https://api.github.com/repos/kasmtech/kasm-install-wizard/releases/latest' \
+  if [ -z ${VERSION+x} ]; then \
+      VERSION=$(curl -sX GET 'https://api.github.com/repos/kasmtech/kasm-install-wizard/releases/latest' \
       | jq -r '.name'); \
   fi && \
-  echo "${KASM_VERSION}" > /version.txt && \
+  echo "${VERSION}" > /version.txt && \
   curl -o \
     /tmp/wizard.tar.gz -L \
-    "https://github.com/kasmtech/kasm-install-wizard/archive/refs/tags/${KASM_VERSION}.tar.gz" && \
+    "https://github.com/kasmtech/kasm-install-wizard/archive/refs/tags/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/wizard.tar.gz -C \
     /wizard --strip-components=1 && \
@@ -74,14 +73,14 @@ RUN \
   echo "**** add installer ****" && \
   curl -o \
     /tmp/kasm.tar.gz -L \
-    "https://github.com/kasmtech/kasm-install-wizard/releases/download/${KASM_VERSION}/kasm_release.tar.gz" && \
+    "https://github.com/kasmtech/kasm-install-wizard/releases/download/${VERSION}/kasm_release.tar.gz" && \
   tar xf \
     /tmp/kasm.tar.gz -C \
     / && \
   ALVERSION=$(cat /kasm_release/conf/database/seed_data/default_properties.yaml |awk '/alembic_version/ {print $2}') && \
   curl -o \
     /tmp/images.tar.gz -L \
-    "https://kasm-ci.s3.amazonaws.com/${KASM_VERSION}-images-combined.tar.gz" && \
+    "https://kasm-ci.s3.amazonaws.com/${VERSION}-images-combined.tar.gz" && \
   tar xf \
     /tmp/images.tar.gz -C \
     / && \

@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG HEALTHCHECKS_RELEASE
 
 ENV PYTHONUNBUFFERED=1
 
@@ -31,13 +30,13 @@ RUN \
     mariadb-connector-c && \
   echo "**** install healthchecks ****" && \
   mkdir -p /app/healthchecks && \
-  if [ -z ${HEALTHCHECKS_RELEASE+x} ]; then \
-    HEALTHCHECKS_RELEASE=$(curl -sX GET "https://api.github.com/repos/healthchecks/healthchecks/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/healthchecks/healthchecks/releases/latest" \
       | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/healthchecks.tar.gz -L \
-    "https://github.com/healthchecks/healthchecks/archive/${HEALTHCHECKS_RELEASE}.tar.gz" && \
+    "https://github.com/healthchecks/healthchecks/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/healthchecks.tar.gz -C \
     /app/healthchecks/ --strip-components=1 && \

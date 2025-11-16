@@ -1,11 +1,10 @@
 
 FROM ghcr.io/linuxserver/unrar:latest as unrar
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG MYLAR3_RELEASE
 
 RUN \
   echo "**** install build dependencies ****" && \
@@ -24,14 +23,14 @@ RUN \
     python3 \
     zlib && \
   echo "**** install mylar3 ****" && \
-  if [ -z ${MYLAR3_RELEASE+x} ]; then \
-    MYLAR3_RELEASE=$(curl -sX GET https://api.github.com/repos/mylar3/mylar3/releases/latest \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/mylar3/mylar3/releases/latest \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir /app/mylar3 && \
   curl -o \
     /tmp/mylar3.tar.gz -L \
-    "https://github.com/mylar3/mylar3/archive/${MYLAR3_RELEASE}.tar.gz" && \
+    "https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz" && \
   tar xf /tmp/mylar3.tar.gz -C \
     /app/mylar3/ --strip-components=1 && \
   cd /app/mylar3 && \

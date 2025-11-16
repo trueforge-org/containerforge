@@ -4,7 +4,7 @@
 FROM ghcr.io/linuxserver/picons-builder as piconsstage
 
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.20 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.20 as buildstage
 ############## build stage ##############
 
 # package versions
@@ -12,7 +12,6 @@ ARG ARGTABLE_VER="2.13"
 
 # environment settings
 ARG TZ="Etc/UTC"
-ARG TVHEADEND_COMMIT
 ENV HOME="/config"
 
 # copy patches and picons
@@ -62,15 +61,15 @@ RUN \
 
 RUN \
   echo "**** compile tvheadend ****" && \
-  if [ -z ${TVHEADEND_COMMIT+x} ]; then \
-    TVHEADEND_COMMIT=$(curl -sX GET https://api.github.com/repos/tvheadend/tvheadend/commits/master \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/tvheadend/tvheadend/commits/master \
     | jq -r '. | .sha'); \
   fi && \
   mkdir -p \
     /tmp/tvheadend && \
   git clone https://github.com/tvheadend/tvheadend.git /tmp/tvheadend && \
   cd /tmp/tvheadend && \
-  git checkout ${TVHEADEND_COMMIT} && \
+  git checkout ${VERSION} && \
   ./configure \
     `#Encoding` \
     --disable-ffmpeg_static \
@@ -149,7 +148,7 @@ RUN \
 
 
 ############## runtime stage ##############
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.20
 
 # set version label
 ARG VERSION

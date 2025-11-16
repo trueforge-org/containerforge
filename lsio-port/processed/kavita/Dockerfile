@@ -1,8 +1,7 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG KAVITA_RELEASE
 
 # environment settings
 ENV HOME="/config"
@@ -14,13 +13,13 @@ RUN \
   echo "**** install kavita ****" && \
   mkdir -p \
     /app/kavita && \
-  if [ -z ${KAVITA_RELEASE+x} ]; then \
-    KAVITA_RELEASE=$(curl -sX GET "https://api.github.com/repos/kareadita/kavita/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/kareadita/kavita/releases/latest" \
       | jq -r '.tag_name'); \
   fi && \
   curl -o \
     /tmp/kavita.tar.gz -fL \
-    "https://github.com/Kareadita/Kavita/releases/download/${KAVITA_RELEASE}/kavita-linux-$TARGETARCH.tar.gz" && \
+    "https://github.com/Kareadita/Kavita/releases/download/v${VERSION}/kavita-linux-$TARGETARCH.tar.gz" && \
   tar xf \
     /tmp/kavita.tar.gz -C \
     /app/kavita --strip-components=1 \

@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG KOMETA_VERSION
 
 # environment settings
 ENV S6_STAGE2_HOOK=/init-hook
@@ -23,14 +22,14 @@ RUN \
     libjpeg \
     libxslt \
     python3 && \
-  if [ -z ${KOMETA_VERSION+x} ]; then \
-    KOMETA_VERSION=$(curl -s https://api.github.com/repos/Kometa-Team/Kometa/releases \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -s https://api.github.com/repos/Kometa-Team/Kometa/releases \
     | jq -r 'first(.[]) | .tag_name'); \
   fi && \
   mkdir -p /app/kometa && \
   curl -o \
     /tmp/kometa.tar.gz -L \
-    "https://github.com/Kometa-Team/Kometa/archive/${KOMETA_VERSION}.tar.gz" && \
+    "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/kometa.tar.gz -C \
     /app/kometa --strip-components=1 && \

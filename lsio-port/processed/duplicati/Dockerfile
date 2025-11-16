@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG DUPLICATI_RELEASE
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -25,11 +24,11 @@ RUN \
     unzip \
     xz-utils && \
   echo "**** install duplicati ****" && \
-  if [ -z ${DUPLICATI_RELEASE+x} ]; then \
-    DUPLICATI_RELEASE=$(curl -sX GET "https://api.github.com/repos/duplicati/duplicati/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/duplicati/duplicati/releases/latest" \
       | jq -r .tag_name); \
   fi && \
-  duplicati_url=$(curl -s "https://api.github.com/repos/duplicati/duplicati/releases/tags/${DUPLICATI_RELEASE}" | jq -r '.assets[].browser_download_url' |grep 'linux-$TARGETARCH-gui.zip$') && \
+  duplicati_url=$(curl -s "https://api.github.com/repos/duplicati/duplicati/releases/tags/v${VERSION}" | jq -r '.assets[].browser_download_url' |grep 'linux-$TARGETARCH-gui.zip$') && \
   curl -o \
     /tmp/duplicati.zip -L \
     "${duplicati_url}" && \

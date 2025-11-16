@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG BABYBUDDY_VERSION
 
 ENV S6_STAGE2_HOOK="/init-hook"
 
@@ -29,13 +28,13 @@ RUN \
     mariadb-connector-c \
     python3 && \
   echo "**** install babybuddy ****" && \
-  if [ -z ${BABYBUDDY_VERSION+x} ]; then \
-    BABYBUDDY_VERSION=$(curl -sX GET "https://api.github.com/repos/babybuddy/babybuddy/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/babybuddy/babybuddy/releases/latest" \
       | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/babybuddy.tar.gz -L \
-    "https://github.com/babybuddy/babybuddy/archive/refs/tags/${BABYBUDDY_VERSION}.tar.gz" && \
+    "https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz" && \
   mkdir -p /app/www/public && \
   tar xf \
     /tmp/babybuddy.tar.gz -C \

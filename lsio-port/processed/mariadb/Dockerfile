@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG MARIADB_VERSION
 
 # environment variables
 ENV MYSQL_DIR="/config"
@@ -11,18 +10,18 @@ ENV DATADIR="$MYSQL_DIR/databases"
 
 RUN \
   echo "**** install runtime packages ****" && \
-  if [ -z ${MARIADB_VERSION+x} ]; then \
-    MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:mariadb$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache \
     gnupg \
     logrotate \
-    mariadb==${MARIADB_VERSION} \
-    mariadb-backup==${MARIADB_VERSION} \
-    mariadb-client==${MARIADB_VERSION} \
-    mariadb-common==${MARIADB_VERSION} \
-    mariadb-server-utils==${MARIADB_VERSION} && \
+    mariadb==${VERSION} \
+    mariadb-backup==${VERSION} \
+    mariadb-client==${VERSION} \
+    mariadb-common==${VERSION} \
+    mariadb-server-utils==${VERSION} && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

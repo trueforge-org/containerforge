@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG MSTREAM_RELEASE
 
 ENV HOME="/config"
 
@@ -17,13 +16,13 @@ RUN \
   echo "**** install app ****" && \
   mkdir -p \
     /app/mstream && \
-  if [ -z ${MSTREAM_RELEASE+x} ]; then \
-    MSTREAM_RELEASE=$(curl -sX GET "https://api.github.com/repos/IrosTheBeggar/mStream/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/IrosTheBeggar/mStream/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/mstream.tar.gz -L \
-    "https://github.com/IrosTheBeggar/mStream/archive/${MSTREAM_RELEASE}.tar.gz" && \
+    "https://github.com/IrosTheBeggar/mStream/archive/v${VERSION}.tar.gz" && \
   tar xzf \
     /tmp/mstream.tar.gz -C \
     /app/mstream/ --strip-components=1 && \

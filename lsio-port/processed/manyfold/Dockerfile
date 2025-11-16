@@ -1,8 +1,7 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 ARG VERSION
-ARG MANYFOLD_VERSION
 
 ENV RAILS_ENV="production" \
     NODE_ENV="production" \
@@ -10,7 +9,7 @@ ENV RAILS_ENV="production" \
     DOCKER_TAG=lscr.io/linuxserver/manyfold:v${VERSION} \
     PORT=3214 \
     RAILS_SERVE_STATIC_FILES=true \
-    APP_VERSION=${MANYFOLD_VERSION} \
+    APP_VERSION=v${VERSION} \
     HOME=/config
 
 RUN \
@@ -42,15 +41,15 @@ RUN \
     yaml-dev && \
   echo "**** install manyfold ****" && \
   mkdir -p /app/www && \
-  if [ -z ${MANYFOLD_VERSION+x} ]; then \
-    MANYFOLD_VERSION=$(curl -sX GET "https://api.github.com/repos/manyfold3d/manyfold/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/manyfold3d/manyfold/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
-  curl -sX GET "https://api.github.com/repos/manyfold3d/manyfold/git/matching-refs/tags/${MANYFOLD_VERSION}" \
+  curl -sX GET "https://api.github.com/repos/manyfold3d/manyfold/git/matching-refs/tags/v${VERSION}" \
     | jq -r '.[].object.sha' > /app/www/GIT_SHA && \
   curl -s -o \
     /tmp/manyfold.tar.gz -L \
-    "https://github.com/manyfold3d/manyfold/archive/${MANYFOLD_VERSION}.tar.gz" && \
+    "https://github.com/manyfold3d/manyfold/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/manyfold.tar.gz -C \
     /app/www/ --strip-components=1 && \
@@ -68,7 +67,7 @@ RUN \
   touch db/schema.rb && \
   DATABASE_URL="nulldb://user:pass@localhost/db" \
   SECRET_KEY_BASE="placeholder" \
-  APP_VERSION=${MANYFOLD_VERSION} \
+  APP_VERSION=v${VERSION} \
   bundle exec rake assets:precompile && \
   rm db/schema.rb && \
   echo "**** cleanup ****" && \

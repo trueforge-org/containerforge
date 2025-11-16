@@ -1,8 +1,7 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 ARG VERSION
-ARG CHANGEDETECTION_RELEASE
 
 ENV PYTHONUNBUFFERED=1
 

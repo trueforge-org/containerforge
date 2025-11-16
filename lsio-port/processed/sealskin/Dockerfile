@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG SEALSKIN_VERSION
 ENV HOME=/config
 
 # install software
@@ -20,13 +19,13 @@ RUN \
     python3 && \
   echo "**** install sealskin ****" && \
   mkdir /opt/sealskin && \
-  if [ -z ${SEALSKIN_VERSION+x} ]; then \
-    SEALSKIN_VERSION=$(curl -sX GET "https://api.github.com/repos/selkies-project/sealskin/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/selkies-project/sealskin/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/sealskin.tar.gz -L \
-    "https://github.com/selkies-project/sealskin/archive/${SEALSKIN_VERSION}.tar.gz" && \
+    "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/sealskin.tar.gz -C \
     /opt/sealskin --strip-components=1 && \

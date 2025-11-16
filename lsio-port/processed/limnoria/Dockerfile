@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
@@ -18,8 +18,8 @@ RUN \
     gnupg \
     python3 && \
   echo "**** install app ****" && \
-  if [ -z ${LIMNORIA_VERSION+x} ]; then \
-    LIMNORIA_VERSION=$(curl -sL  https://pypi.python.org/pypi/limnoria/json |jq -r '. | .info.version'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL  https://pypi.python.org/pypi/limnoria/json |jq -r '. | .info.version'); \
   fi && \
   python3 -m venv /lsiopy && \
   pip install -U --no-cache-dir \
@@ -28,7 +28,7 @@ RUN \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
     -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
-    limnoria=="${LIMNORIA_VERSION}" && \
+    limnoria=="${VERSION}" && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

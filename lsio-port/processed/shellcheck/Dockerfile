@@ -2,10 +2,8 @@
 FROM ubuntu as buildstage
 
 # set version label
-ARG VERSION
 
 # build environment settings
-ARG DEBIAN_FRONTEND="noninteractive"
 
 RUN \
     echo "**** install build packages ****" && \
@@ -35,7 +33,6 @@ FROM scratch
 ADD rootfs.tar.xz /
 
 # set version label
-ARG VERSION
 
 # copy files from build stage
 COPY --from=buildstage /tmp/shellcheck/shellcheck /usr/local/bin/

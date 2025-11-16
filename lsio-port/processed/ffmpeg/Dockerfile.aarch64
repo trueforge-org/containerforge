@@ -1,9 +1,8 @@
 
 # build stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:$TARGETARCHv8-noble AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-noble AS buildstage
 
 # set version label
-ARG FFMPEG_VERSION
 
 # common env
 ENV \
@@ -628,10 +627,10 @@ RUN \
 # main ffmpeg build
 RUN \
   echo "**** Versioning ****" && \
-  if [ -z ${FFMPEG_VERSION+x} ]; then \
+  if [ -z ${VERSION+x} ]; then \
     FFMPEG=${FFMPEG_HARD}; \
   else \
-    FFMPEG=${FFMPEG_VERSION%-cli}; \
+    FFMPEG=${VERSION%-cli}; \
   fi && \
   echo "**** grabbing ffmpeg ****" && \
   mkdir -p /tmp/ffmpeg && \
@@ -724,7 +723,7 @@ RUN \
     /buildout/usr/share/fonts/
 
 # runtime stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:$TARGETARCHv8-noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-noble
 
 # Add files from binstage
 COPY --from=buildstage /buildout/ /

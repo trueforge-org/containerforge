@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG PROJECTSEND_VERSION
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -25,15 +24,15 @@ RUN \
     php84-xmlreader && \
   echo "**** install projectsend ****" && \
   mkdir -p /app/www/public && \
-  if [ -z ${PROJECTSEND_VERSION+x} ]; then \
-    PROJECTSEND_VERSION=$(curl -s https://api.github.com/repos/projectsend/projectsend/releases/latest | jq -r '. | .tag_name'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -s https://api.github.com/repos/projectsend/projectsend/releases/latest | jq -r '. | .tag_name'); \
   fi && \
   curl -fso \
     /tmp/projectsend.zip -L \
-    "https://github.com/projectsend/projectsend/releases/download/${PROJECTSEND_VERSION}/projectsend-${PROJECTSEND_VERSION}.zip" || \
+    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip" || \
   curl -fso \
     /tmp/projectsend.zip -L \
-    "https://github.com/projectsend/projectsend/releases/download/${PROJECTSEND_VERSION}/projectsend.zip" && \
+    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip" && \
   unzip \
     /tmp/projectsend.zip -d \
     /app/www/public && \

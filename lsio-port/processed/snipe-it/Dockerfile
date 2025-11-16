@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
 # set version label
 ARG VERSION
-ARG SNIPEIT_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -29,13 +28,13 @@ RUN \
   echo "**** install snipe-it ****" && \
   mkdir -p \
     /app/www/ && \
-  if [ -z ${SNIPEIT_RELEASE+x} ]; then \
-    SNIPEIT_RELEASE=$(curl -sX GET "https://api.github.com/repos/grokability/snipe-it/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/grokability/snipe-it/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/snipeit.tar.gz -L \
-    "https://github.com/grokability/snipe-it/archive/${SNIPEIT_RELEASE}.tar.gz" && \
+    "https://github.com/grokability/snipe-it/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/snipeit.tar.gz -C \
     /app/www/ --strip-components=1 && \

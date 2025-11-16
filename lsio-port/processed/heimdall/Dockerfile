@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG HEIMDALL_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -30,13 +29,13 @@ RUN \
   echo "**** install heimdall ****" && \
   mkdir -p \
     /heimdall && \
-  if [ -z ${HEIMDALL_RELEASE+x} ]; then \
-    HEIMDALL_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/heimdall.tar.gz -L \
-    "https://github.com/linuxserver/Heimdall/archive/${HEIMDALL_RELEASE}.tar.gz" && \
+    "https://github.com/linuxserver/Heimdall/archive/v${VERSION}.tar.gz" && \
   mkdir -p \
     /app/www-tmp && \
   tar xf \

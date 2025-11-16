@@ -1,7 +1,6 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:edge as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4as buildstage
 
-ARG CELLS_RELEASE
 
 ENV \
   HOME="/config" \
@@ -17,13 +16,13 @@ RUN \
   echo "**** fetch source code ****" && \
   mkdir -p \
     /tmp/src/github.com/pydio/cells && \
-  if [ -z ${CELLS_RELEASE+x} ]; then \
-    CELLS_RELEASE=$(curl -sX GET "https://api.github.com/repos/pydio/cells/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/pydio/cells/releases/latest" \
       | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/cells-src.tar.gz -L \
-    https://github.com/pydio/cells/archive/${CELLS_RELEASE}.tar.gz && \
+    https://github.com/pydio/cells/archive/v${VERSION}.tar.gz && \
   tar xf \
     /tmp/cells-src.tar.gz -C \
     /tmp/src/github.com/pydio/cells --strip-components=1 && \
@@ -31,7 +30,7 @@ RUN \
   cd /tmp/src/github.com/pydio/cells && \
   GOARCH=$TARGETARCH GOOS=linux go build -trimpath \
     -ldflags "\
-    -X github.com/pydio/cells/v4/common.version=${CELLS_RELEASE:1} \
+    -X github.com/pydio/cells/v4/common.version=${VERSION:1} \
     -X github.com/pydio/cells/v4/common.BuildStamp=${BUILD_DATE} \
     -X github.com/pydio/cells/v4/common.BuildRevision=v${VERSION}" \
     -o /app/cells -x . && \
@@ -43,7 +42,7 @@ RUN \
     "${HOME}"/.cache \
     "${HOME}"/go
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 ARG VERSION
 
