@@ -36,7 +36,7 @@ RUN \
 
 # add local files
 COPY /root /
-COPY . /COPY . /
+COPY . /
 
 # ports and volumes
 EXPOSE 8443
