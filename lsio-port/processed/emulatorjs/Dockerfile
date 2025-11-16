@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4as migrationbuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4 as migrationbuilder
 
 RUN \
   echo "**** install build packages ****" && \
@@ -19,7 +19,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4as binbuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4 as binbuilder
 
 RUN \
   echo "**** install build packages ****" && \
@@ -60,7 +60,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4as nodebuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4 as nodebuilder
 
 
 RUN \

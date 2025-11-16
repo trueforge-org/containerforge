@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
 
 # build variables
 

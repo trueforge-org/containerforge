@@ -4,7 +4,7 @@
 FROM ghcr.io/linuxserver/picons-builder as piconsstage
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 as buildstage
 ############## build stage ##############
 
 # package versions

@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS builder
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS builder
 
 COPY /patches /patches
 ENV PATCH_VERSION=21 \

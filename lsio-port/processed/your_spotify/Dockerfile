@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildbase
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildbase
 
 # set version label
 ARG VERSION

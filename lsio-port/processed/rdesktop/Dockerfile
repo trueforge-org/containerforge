@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
 
 ARG XRDP_PULSE_VERSION=v0.7
 ARG DEBIAN_FRONTEND="noninteractive"

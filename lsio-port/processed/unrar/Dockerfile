@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS alpine-buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS alpine-buildstage
 
 # set version label
 

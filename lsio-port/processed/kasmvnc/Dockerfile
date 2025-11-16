@@ -26,7 +26,7 @@ RUN \
   cp index.html vnc.html && \
   mkdir Downloads
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
 
 ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
 
@@ -191,7 +191,7 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS nodebuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS nodebuilder
 ARG KCLIENT_RELEASE
 
 RUN \
