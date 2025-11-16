@@ -121,13 +121,28 @@ if [ -d "$root_folder" ] && [ -z "$(ls -A "$root_folder")" ]; then
     echo "[CLEANUP] Removed empty root folder..."
 fi
 
+
+    [[ -d "$processed" ]] || continue
+    dockerfiles=( "$processed/Dockerfile"* )
+
+    echo "[VERBOSE] Found Dockerfiles in $processed: ${dockerfiles[*]}"
+
+    # 1️⃣ Sanitize all Dockerfiles
+    for df in "${dockerfiles[@]}"; do
+        sed -i '' \
+            -e '/^LABEL build_version/d' \
+            -e '/^LABEL maintainer/d' \
+            -e '/^ARG BUILD_DATE/d' \
+            -e '/^# syntax=docker\/dockerfile:1/d' \
+            -e '/printf "Linuxserver\.io version/d' \
+            "$df"
+        echo "[VERBOSE] Sanitized $df"
+    done
+
 # ===== Dockerfile Deduplication =====
 echo "[POSTPROCESS] Checking for duplicate Dockerfiles..."
 
-    dockerfiles=( "$processed"/Dockerfile* )
     [[ ${#dockerfiles[@]} -gt 1 ]] || { echo "[VERBOSE] Only one Dockerfile in $processed, skipping..."; continue; }
-
-    echo "[VERBOSE] Found Dockerfiles in $processed: ${dockerfiles[*]}"
 
     temp_dir=$(mktemp -d)
     echo "[VERBOSE] Created temporary directory $temp_dir for processing"

@@ -4,6 +4,7 @@ set -euo pipefail
 REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
+DISTROS=("debian" "ubuntu" "arch" "fedora")
 
 mkdir -p "$REPO_DIR" "$PROCESSED_DIR"
 
@@ -56,6 +57,13 @@ for repo in $repos; do
         ((skipped_apps++))
         continue
     fi
+
+# Skip if $shortname is in DISTROS
+if [[ " ${DISTROS[*]} " == *" $shortname "* ]]; then
+    echo "[SKIP] '$shortname' is a distro, skipping."
+    ((skipped_apps++))
+    continue
+fi
 
     # Clone or pull
     if [[ -d "$target" ]]; then
