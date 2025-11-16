@@ -28,6 +28,32 @@ Useful Links:
 EOF
 }
 
+check_video() {
+    local FILES
+FILES=$(find /dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/video1? -type c -print 2>/dev/null)
+
+for i in ${FILES}; do
+    VIDEO_GID=$(stat -c '%g' "${i}")
+    VIDEO_UID=$(stat -c '%u' "${i}")
+    # check if user matches device
+    if id -u 568 | grep -qw "${VIDEO_UID}"; then
+        echo "**** permissions for ${i} are good ****"
+    else
+        # check if group matches and that device has group rw
+        if id -G 568 | grep -qw "${VIDEO_GID}" && [[ $(stat -c '%A' "${i}" | cut -b 5,6) == "rw" ]]; then
+            echo "**** permissions for ${i} are good ****"
+        # check if device needs to be added to video group
+        elif ! id -G 568 | grep -qw "${VIDEO_GID}"; then
+            echo "**** Warning: user needs to be added to videogroup ****"
+        fi
+        # check if device has group rw
+        if [[ $(stat -c '%A' "${i}" | cut -b 5,6) != "rw" ]]; then
+            echo -e "**** The device ${i} does not have group read/write permissions. ****"
+        fi
+    fi
+done
+}
+
 check_uid_gid() {
     local TARGET_UID=568
     local TARGET_GID=568
@@ -105,6 +131,11 @@ if [ -d "/docker-entrypoint.d" ] && /usr/bin/find "/docker-entrypoint.d" -mindep
     echo "[entrypoint] Configuration complete"
 else
     echo "[entrypoint] No files found in /docker-entrypoint.d/, skipping"
+fi
+
+if [ "$CFVID" = "true" ]; then
+    echo "[entrypoint] Checking video device permissions..."
+    check_video
 fi
 
 # Run main application

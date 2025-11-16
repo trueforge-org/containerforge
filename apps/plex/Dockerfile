@@ -5,8 +5,7 @@ ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
 
-ENV DEBIAN_FRONTEND="noninteractive" \
-    NVIDIA_DRIVER_CAPABILITIES="compute,video,utility" \
+ENV    NVIDIA_DRIVER_CAPABILITIES="compute,video,utility" \
     PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/config/Library/Application Support" \
     PLEX_MEDIA_SERVER_HOME="/usr/lib/plexmediaserver" \
     PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="6" \

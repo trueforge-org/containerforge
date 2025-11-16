@@ -4,8 +4,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:accb07943840b6a8b3a09886789c72f0
 ARG TARGETARCH
 ARG VERSION
 
-ENV DEBIAN_FRONTEND="noninteractive" \
-    NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
+ENV    NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 
 USER root
 
