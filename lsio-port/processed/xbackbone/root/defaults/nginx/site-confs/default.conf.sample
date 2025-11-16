@@ -1,0 +1,55 @@
+## Version 2025/07/09 - Changelog: https://github.com/linuxserver/docker-xbackbone/commits/main/root/defaults/nginx/site-confs/default.conf.sample
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    listen 443 quic reuseport default_server;
+    listen [::]:443 quic reuseport default_server;
+
+    server_name _;
+
+    include /config/nginx/ssl.conf;
+
+    root /app/www/public;
+    index index.html index.htm index.php;
+
+    charset utf-8;
+    error_page 404 /index.php;
+    client_max_body_size 2G;
+
+    location / {
+        # enable for basic auth
+        #auth_basic "Restricted";
+        #auth_basic_user_file /config/nginx/.htpasswd;
+
+        try_files $uri $uri/ /index.html /index.htm /index.php$is_args$args;
+    }
+
+    location ~ ^(.+\.php)(.*)$ {
+        # enable the next two lines for http auth
+        #auth_basic "Restricted";
+        #auth_basic_user_file /config/nginx/.htpasswd;
+
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
+        if (!-f $document_root$fastcgi_script_name) { return 404; }
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    # deny access to .htaccess/.htpasswd files
+    location ~ /\.ht {
+        deny all;
+    }
+
+    autoindex off;
+    location ~ ^\.md {
+        return 404;
+    }
+
+    location ~ ^/(app|bin|bootstrap|resources|storage|vendor|logs) {
+        return 403;
+    }
+}

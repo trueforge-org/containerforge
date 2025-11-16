@@ -1,0 +1,79 @@
+# ===== From ./processed/bookstack/root/etc/s6-overlay//s6-rc.d/init-bookstack-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# create directory structure
+mkdir -p \
+    /config/www/{uploads,files,images,themes} \
+    /config/www/framework/{cache,sessions,views} \
+    /config/backups \
+    /config/log/bookstack
+
+if [[ ! -f /tmp/dbwait.lock ]];then
+    rm -rf /config/www/framework/{cache,sessions,views}/*
+fi
+
+# check for .env and copy default if needed
+if [[ ! -f "/config/www/.env" ]] || [[ ! -s "/config/www/.env" ]]; then
+    cp /app/www/.env.example /config/www/.env
+fi
+
+# Check for app key
+if [[ -z ${APP_KEY} ]]; then
+    if ! grep -qE "APP_KEY=[0-9A-Za-z:+\/=]{1,}" /config/www/.env 2> /dev/null || grep -qE "APP_KEY=SomeRandomString" /config/www/.env 2> /dev/null; then
+        echo "The application key is missing, halting init!"
+        echo "You can generate a key with: docker run -it --rm --entrypoint /bin/bash lscr.io/linuxserver/bookstack:latest appkey"
+        echo "And apply it to the APP_KEY environment variable."
+        sleep infinity
+    fi
+fi
+
+## Bump php upload max filesize and post max size to 100MB by default
+if ! grep -qx '^upload_max_filesize.*$' /config/php/php-local.ini; then
+    echo 'upload_max_filesize = 100M' >>/config/php/php-local.ini
+fi
+if ! grep -qx '^post_max_size.*$' /config/php/php-local.ini; then
+    echo 'post_max_size = 100M' >>/config/php/php-local.ini
+fi
+
+# if DB_PORT is not set
+if [[ -z "${DB_PORT}" ]]; then
+    DB_PORT="3306"
+fi
+
+# check for the mysql endpoint
+echo "Waiting for DB to be available"
+END=$((SECONDS + 30))
+while [[ ${SECONDS} -lt ${END} ]] && [[ -n "${DB_HOST+x}" ]]; do
+    if [[ $(/usr/bin/nc -w1 "${DB_HOST}" "${DB_PORT}" | tr -d '\0') ]]; then
+        if [[ ! -f /tmp/dbwait.lock ]]; then
+            sleep 5
+        fi
+        touch /tmp/dbwait.lock
+        break
+    else
+        sleep 1
+    fi
+done
+
+# update database - will set up database if fresh, or, migrate existing
+php /app/www/artisan migrate --force
+
+# permissions
+lsiown -R abc:abc \
+    /config
+
+# ===== From ./processed/bookstack/root/etc/s6-overlay//s6-rc.d/svc-memcached/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+exec memcached -u abc
+
+# ===== From ./processed/bookstack/root/etc/s6-overlay//s6-rc.d/svc-queue-worker/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+echo "*** Starting Async Action Queue ***"
+
+exec /usr/bin/php /app/www/artisan queue:work --sleep=3 --tries=1 --max-time=3600
+

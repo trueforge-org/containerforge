@@ -1,0 +1,97 @@
+# ===== From ./processed/emulatorjs/root/etc/s6-overlay//s6-rc.d/init-emulatorjs-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# permissions
+lsiown abc:abc \
+    /data
+
+# check if ipfs is disabled
+if [ -z ${DISABLE_IPFS+x} ]; then
+
+    # ipfs migrate check on startup
+    if [[ -d "/data/.ipfs" ]]; then
+        echo "[ipfs-upgrade] Checking if fs-repo needs to be upgraded (this may take some time)"
+        HOME=/data s6-setuidgid abc /usr/bin/fs-repo-migrations -y -to 15
+    fi
+
+    # ipfs config
+    if [[ ! -d "/data/.ipfs" ]]; then
+        HOME=/data ipfs init --profile lowpower
+        lsiown -R abc:abc /data/.ipfs
+    fi
+fi
+
+# link user data to frontend
+if [[ ! -L '/emulatorjs/frontend/user' ]]; then
+    ln -s /data /emulatorjs/frontend/user
+fi
+
+# Default profile directory
+if [[ ! -d '/config/profile/default' ]]; then
+    mkdir -p /config/profile/default
+    echo "input_menu_toggle_gamepad_combo = 3
+system_directory = /home/web_user/retroarch/system/" >/config/profile/default/retroarch.cfg
+    lsiown -R abc:abc /config/profile
+fi
+if [[ ! -f '/config/profile/profile.json' ]]; then
+    echo '{}' >/config/profile/profile.json
+    lsiown -R abc:abc /config/profile
+fi
+
+# nginx mime types
+cp /defaults/mime.types /etc/nginx/mime.types
+
+# nginx body cache
+lsiown -R abc:root /var/lib/nginx
+
+# allow users to mount in ro rom dirs
+DIRS='3do atari2600 atari5200 atari7800 colecovision doom gba lynx n64 nes odyssey2 psx segaCD segaMD segaSaturn snes vb ws arcade atari5200 gb gbc jaguar msx nds ngp pce sega32x segaGG segaMS segaSG vectrex'
+for DIR in ${DIRS}; do
+    if [[ -d "/roms/${DIR}" ]] && [[ ! -L "/data/${DIR}/roms" ]]; then
+        mkdir -p "/data/${DIR}"
+        ln -s "/roms/${DIR}" "/data/${DIR}/roms"
+        lsiown abc:abc "/data/${DIR}"
+    fi
+done
+
+# ===== From ./processed/emulatorjs/root/etc/s6-overlay//s6-rc.d/svc-backend/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+HOME=/data exec \
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 3000" \
+        cd /emulatorjs s6-setuidgid abc node index.js
+
+# ===== From ./processed/emulatorjs/root/etc/s6-overlay//s6-rc.d/svc-ipfs/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if [ ! -z ${DISABLE_IPFS+x} ]; then
+  sleep infinity
+fi
+
+HOME=/data exec \
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 4001" \
+        s6-setuidgid abc ipfs daemon
+
+# ===== From ./processed/emulatorjs/root/etc/s6-overlay//s6-rc.d/svc-nginx/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if pgrep -f "[n]ginx:" > /dev/null; then
+    pkill -ef [n]ginx:
+fi
+
+exec \
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 80" \
+        /usr/sbin/nginx -c /etc/nginx/nginx.conf
+
+# ===== From ./processed/emulatorjs/root/etc/s6-overlay//s6-rc.d/svc-profile/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+HOME=/config exec \
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 3001" \
+        cd /emulatorjs s6-setuidgid abc node profile.js
+

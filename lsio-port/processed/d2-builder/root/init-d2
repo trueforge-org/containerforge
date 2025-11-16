@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export CLI_OPTIONS_STRING=$(printf "%s|" "$@")
+set --
+exec /init "$@"

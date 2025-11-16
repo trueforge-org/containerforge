@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+cd /opt/dockerhub-stats/ || exit
+
+ruby stats.rb

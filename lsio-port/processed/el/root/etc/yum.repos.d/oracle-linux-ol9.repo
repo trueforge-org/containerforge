@@ -1,0 +1,27 @@
+[el9_appstream]
+name=Enterprise Linux Application Stream Packages ($basearch) 
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL9/appstream/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[el9_codeready_builder]
+name=Enterprise Linux CodeReady Builder ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL9/codeready/builder/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[el9_baseos_latest]
+name=Enterprise Linux BaseOS Latest ($basearch)  
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL9/baseos/latest/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[el9_distro_builder]
+name=Enterprise Linux Distro Builder ($basearch)
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL9/distro/builder/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1

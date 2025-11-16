@@ -1,0 +1,124 @@
+# ===== From ./processed/lychee/root/etc/s6-overlay//s6-rc.d/init-lychee-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+mkdir -p \
+    /config/sym \
+    /config/log/lychee \
+    /pictures
+
+# pre-populate /pictures directory if it's empty
+if [[ ! "$(ls -A /pictures)" ]]; then
+    mv /app/www/public/uploads/* /pictures/
+    lsiown -R abc:abc /pictures
+elif [[ ! "$(ls -A /pictures/import 2>/dev/null)" ]]; then
+    printf "\n\n\n\nSeems like you tried to use a path that's not managed by lychee, this is unsupported\n\n\n\n"
+fi
+
+if [[ ! -L /app/www/public/uploads ]]; then
+    rm -rf /app/www/public/uploads
+    ln -s /pictures /app/www/public/uploads
+fi
+
+if [[ ! -L /app/www/public/sym ]]; then
+    rm -rf /app/www/public/sym
+    ln -s /config/sym /app/www/public/sym
+fi
+
+if [[ ! -L /app/www/storage/logs ]]; then
+    rm -rf /app/www/storage/logs
+    ln -s /config/log/lychee /app/www/storage/logs
+fi
+
+cp -n /defaults/user.ini /config/user.ini 2> >(grep -v 'cp: not replacing')
+rm -rf /etc/php84/conf.d/99-user.ini
+ln -s /config/user.ini /etc/php84/conf.d/99-user.ini
+
+cd /app/www || exit 1
+
+if [[ -z "${DB_CONNECTION}" ]]; then
+    echo "**** No DB_CONNECTION configured, halting init ****"
+    sleep infinity
+elif [[ "${DB_CONNECTION}" = "sqlite" ]]; then
+    if [[ -n "${DB_DATABASE}" ]]; then
+        if [[ ! -e "${DB_DATABASE}" ]]; then
+            touch "${DB_DATABASE}"
+            lsiown abc:abc "${DB_DATABASE}"
+        fi
+        lsiown abc:abc "${DB_DATABASE}"
+    else
+        DB_DATABASE="/config/database.sqlite"
+        export DB_DATABASE
+        printf "/config/database.sqlite" > /var/run/s6/container_environment/DB_DATABASE
+    fi
+elif [[ "${DB_CONNECTION}" = "mysql" ]]; then
+    echo "Waiting for DB to be available"
+    END=$((SECONDS + 30))
+    while [[ ${SECONDS} -lt ${END} ]] && [[ -n "${DB_HOST+x}" ]]; do
+        if [[ $(/usr/bin/nc -w1 "${DB_HOST}" "${DB_PORT}" | tr -d '\0') ]]; then
+            if [[ -n "${RUN}" ]]; then
+                break
+            fi
+            RUN="RAN"
+            # we sleep here again due to first run init on DB containers
+            if [[ ! -f /dbwait.lock ]]; then
+                sleep 5
+            fi
+        else
+            sleep 1
+        fi
+    done
+elif [[ "${DB_CONNECTION}" = "pgsql" ]]; then
+    echo "Waiting for DB to be available"
+    END=$((SECONDS + 30))
+    while [[ ${SECONDS} -lt ${END} ]] && [[ -n "${DB_HOST+x}" ]]; do
+        if pg_isready -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USERNAME}" -q; then
+            if [[ -n "${RUN}" ]]; then
+                break
+            fi
+            RUN="RAN"
+            # we sleep here again due to first run init on DB containers
+            if [[ ! -f /dbwait.lock ]]; then
+                sleep 5
+            fi
+        else
+            sleep 1
+        fi
+    done
+fi
+
+if [[ ! -e /config/.env ]]; then
+    cp -n /app/www/.env.example /config/.env 2> >(grep -v 'cp: not replacing')
+fi
+if [[ ! -L /app/www/.env ]]; then
+    rm -rf /app/www/.env
+    ln -s /config/.env /app/www/.env
+fi
+
+if grep -qPe '^APP_KEY=$' /config/.env; then
+    echo "**** Generating app key ****"
+    php /app/www/artisan key:generate -n
+fi
+
+php /app/www/artisan migrate --force
+
+touch -a /config/user.css
+if [[ ! -L /app/www/public/dist/user.css ]]; then
+    rm /app/www/public/dist/user.css
+    ln -s /config/user.css /app/www/public/dist/user.css
+fi
+
+touch -a /config/custom.js
+if [[ ! -L /app/www/public/dist/custom.js ]]; then
+    rm /app/www/public/dist/custom.js
+    ln -s /config/custom.js /app/www/public/dist/custom.js
+fi
+
+# permissions
+lsiown -R abc:abc \
+    /app/www/storage \
+    /config
+
+# set lockfile to avoid DB waits for this specific container
+touch /dbwait.lock
+

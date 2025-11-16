@@ -1,0 +1,109 @@
+# ===== From ./processed/dokuwiki/root/etc/s6-overlay//s6-rc.d/init-dokuwiki-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+USER_DIRECTORY=(\
+    "conf" \
+    "data/attic" \
+    "data/index" \
+    "data/media_attic" \
+    "data/media_meta" \
+    "data/media" \
+    "data/meta" \
+    "data/pages" \
+    "lib/images/interwiki" \
+    "lib/images/smileys/local" \
+    "lib/plugins" \
+    "lib/tpl"
+    )
+
+CORE_DIR=(\
+    "inc" \
+    "vendor" \
+    )
+
+## Make data directories
+if [[ ! -d /config/dokuwiki/data ]]; then
+    mkdir -p /config/dokuwiki/data
+fi
+
+if [[ ! -d /config/dokuwiki/lib/images/smileys ]]; then
+    mkdir -p /config/dokuwiki/lib/images/smileys/local
+fi
+
+## Move user folders to persistent storage
+for i in "${USER_DIRECTORY[@]}"; do
+    if [[ ! -d /config/dokuwiki/"${i}" ]] && [[ -d /app/www/public/"${i}" ]]; then
+        mv /app/www/public/"${i}" /config/dokuwiki/"${i}"/
+    fi
+done
+
+# Update built-in plugins
+for i in /app/www/public/lib/plugins/*/; do
+    if [[ -d "/config/dokuwiki/lib/plugins/$(basename "${i}")" ]] && [[ -d "/app/www/public/lib/plugins/$(basename "${i}")" ]] && [[ ! -L "/app/www/public/lib/plugins" ]]; then
+        cp -R /app/www/public/lib/plugins/"$(basename "${i}")"/* /config/dokuwiki/lib/plugins/"$(basename "${i}")"
+    fi
+done
+
+## Remove user folders
+for i in "${USER_DIRECTORY[@]}"; do
+    if [[ -d /app/www/public/"${i}" ]]; then
+        rm -rf /app/www/public/"${i}"
+    fi
+done
+
+## Make Symlinks
+for i in "${USER_DIRECTORY[@]}"; do
+    if [[ ! -L /app/www/public/"${i}" ]]; then
+        ln -s /config/dokuwiki/"${i}" /app/www/public/"${i}"
+    fi
+    lsiown abc:abc /config/dokuwiki/"${i}"
+done
+
+## Make Symlinks from /app/www/public to /config/dokuwiki
+## This is to make sure plugins that include files
+## from CORE_DIR work properly
+for i in "${CORE_DIR[@]}"; do
+    if [[ -L /config/dokuwiki/"${i}" ]] && [[ $(readlink -f /config/dokuwiki/"${i}") != /app/www/public/"${i}" ]]; then
+        rm /config/dokuwiki/"${i}"
+    fi
+    if [[ ! -L /config/dokuwiki/"${i}" ]]; then
+        ln -s /app/www/public/"${i}" /config/dokuwiki/"${i}"
+    fi
+    lsiown abc:abc /config/dokuwiki/"${i}"
+done
+
+## Bump php upload max filesize and post max size to 100MB by default
+if ! grep -qF 'upload_max_filesize' /config/php/php-local.ini; then
+    echo 'upload_max_filesize = 100M' >> /config/php/php-local.ini
+fi
+if ! grep -qF 'post_max_size' /config/php/php-local.ini; then
+    echo 'post_max_size = 100M' >> /config/php/php-local.ini
+fi
+
+## Remove install.php once setup & enable pretty urls to work after setting .htaccess method in admin panel.
+if [[ -f /config/dokuwiki/conf/local.php ]]; then
+    if rm -rf /app/www/public/install.php; then
+        echo "Existing install found, deleting install.php."
+    fi
+
+    # when default savedir stil active: change it to the path IN the container
+    if ! grep -q "^\$conf\[\'savedir\'\]\s*\=" /config/dokuwiki/conf/local.php; then
+        echo "\$conf['savedir'] = '/app/www/public/data';" >> /config/dokuwiki/conf/local.php
+    fi
+
+    # replace old app path
+    sed -i 's|/app/dokuwiki|/app/www/public|g' /config/dokuwiki/conf/local.php
+else
+    echo "Go to http://IP-ADDRESS:PORT/install.php to configure your install then restart your container when finished to remove install.php"
+fi
+
+## Backwards compatibility 2021/04/15
+sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
+
+# permissions
+lsiown -R abc:abc \
+    /app/www/public/data \
+    /app/www/public/inc/lang \
+    /config/dokuwiki/lib
+

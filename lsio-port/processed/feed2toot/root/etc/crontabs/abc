@@ -1,0 +1,2 @@
+# min   hour    day     month   weekday command
+*/15    *       *       *       *       /app/feed2toot-cron.sh 2>&1
