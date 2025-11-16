@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "pylon"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "pylonVERSION"
+  default = "v2.10.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/pylonide/pylon"
 }
 
 group "default" {

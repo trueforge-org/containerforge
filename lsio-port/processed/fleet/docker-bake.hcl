@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "fleet"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "fleetVERSION"
+  default = "2.3.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/linuxserver/fleet"
 }
 
 group "default" {

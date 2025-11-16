@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "heimdall"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "heimdallVERSION"
+  default = "v2.7.6"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://heimdall.site"
 }
 
 group "default" {

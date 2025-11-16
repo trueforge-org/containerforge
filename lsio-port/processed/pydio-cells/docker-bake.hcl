@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "pydio-cells"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "pydio-cellsVERSION"
+  default = "v4.4.15"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://pydio.com/"
 }
 
 group "default" {

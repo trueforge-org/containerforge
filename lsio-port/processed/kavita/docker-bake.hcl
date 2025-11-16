@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "kavita"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "kavitaVERSION"
+  default = "v0.8.8.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/Kareadita/Kavita"
 }
 
 group "default" {

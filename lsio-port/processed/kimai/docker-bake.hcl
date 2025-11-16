@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "kimai"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "kimaiVERSION"
+  default = "2.43.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://kimai.org/"
 }
 
 group "default" {

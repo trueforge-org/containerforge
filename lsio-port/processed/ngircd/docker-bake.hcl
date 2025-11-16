@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "ngircd"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "ngircdVERSION"
+  default = "27-r1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://ngircd.barton.de/"
 }
 
 group "default" {

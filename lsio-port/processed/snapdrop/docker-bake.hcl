@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "snapdrop"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "snapdropVERSION"
+  default = "b8b78cc2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/snapdrop/snapdrop"
 }
 
 group "default" {

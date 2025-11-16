@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "jellyfin"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "jellyfinVERSION"
+  default = "10.11.2ubu2404"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/jellyfin/jellyfin"
 }
 
 group "default" {

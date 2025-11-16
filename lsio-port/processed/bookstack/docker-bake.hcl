@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "bookstack"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "bookstackVERSION"
+  default = "v25.11.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/BookStackApp/BookStack"
 }
 
 group "default" {

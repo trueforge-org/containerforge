@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "openvscode-server"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "openvscode-serverVERSION"
+  default = "1.105.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/gitpod-io/openvscode-server"
 }
 
 group "default" {

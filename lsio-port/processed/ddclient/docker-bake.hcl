@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "ddclient"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "ddclientVERSION"
+  default = "v4.0.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/ddclient/ddclient"
 }
 
 group "default" {

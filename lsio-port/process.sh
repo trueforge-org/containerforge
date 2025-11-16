@@ -7,9 +7,16 @@ APPS_DIR="../apps"
 
 mkdir -p "$PROCESSED_DIR"
 
-# ===== PostProcessing =====
 echo ""
 echo "[POSTPROCESS] Starting post-processing of processed repos..."
+
+# Ensure yq is installed
+if ! command -v yq &>/dev/null; then
+    echo "[ERROR] yq is required to parse YAML files."
+    exit 1
+fi
+
+shopt -s nullglob
 
 for processed in "$PROCESSED_DIR"/*; do
     [[ -d "$processed" ]] || continue
@@ -20,194 +27,189 @@ for processed in "$PROCESSED_DIR"/*; do
     if [[ -d "./templates" ]]; then
         cp -r ./templates/* "$processed/" 2>/dev/null || echo "[WARN] Failed to copy templates for $foldername"
     fi
+# ===== Extract Jenkins vars =====
+JENKINS_YAML="$processed/jenkins-vars.yml"
+README_YAML="$processed/readme-vars.yml"
+SOURCE_FILE="$processed/source.txt"
+
+echo "[POSTPROCESS] Extracting Jenkins variables..."
+
+BUILD_VERSION_ARG=""
+CI_WEB=""
+CI_PORT=""
+CI_SSL=""
+CI_DOCKERENV=""
+CI_AUTH=""
+CI_WEBPATH=""
+CI_CMD=""
+SOURCE="UNKNOWNSOURCE"
+VERSION="UNKNOWNVERSION"
+
+if [[ -f "$JENKINS_YAML" ]]; then
+BUILD_VERSION_ARG=$(yq e -r '.repo_vars[] | select(test("BUILD_VERSION_ARG")) | split("=")[1]' "$JENKINS_YAML")
+CI_WEB=$(yq e -r '.repo_vars[] | select(test("CI_WEB")) | split("=")[1]' "$JENKINS_YAML")
+CI_PORT=$(yq e -r '.repo_vars[] | select(test("CI_PORT")) | split("=")[1]' "$JENKINS_YAML")
+CI_SSL=$(yq e -r '.repo_vars[] | select(test("CI_SSL")) | split("=")[1]' "$JENKINS_YAML")
+CI_DOCKERENV=$(yq e -r '.repo_vars[] | select(test("CI_DOCKERENV")) | split("=")[1]' "$JENKINS_YAML")
+CI_AUTH=$(yq e -r '.repo_vars[] | select(test("CI_AUTH")) | split("=")[1]' "$JENKINS_YAML")
+CI_WEBPATH=$(yq e -r '.repo_vars[] | select(test("CI_WEBPATH")) | split("=")[1]' "$JENKINS_YAML")
+CI_CMD=$(yq e -r '.repo_vars[] | select(test("CI_CMD")) | split("=")[1]' "$JENKINS_YAML")
+
+else
+    echo "[WARN] jenkins-vars.yml not found in $processed, skipping Jenkins vars extraction."
+fi
+
+if [[ -f "$README_YAML" ]]; then
+SOURCE=$(yq e '.project_url' "$README_YAML")
+else
+    echo "[WARN] readme-vars.yml not found in $processed, skipping source extraction."
+fi
+# Optional: export if needed for subprocesses
+export BUILD_VERSION_ARG CI_WEB CI_PORT CI_SSL CI_DOCKERENV CI_AUTH CI_WEBPATH CI_CMD SOURCE
+
+# Clean up YAML
+rm -rf "$JENKINS_YAML" || true
+rm -rf "$README_YAML" || true
+
 
     # 2️⃣ Replace TEMPLATE in docker-bake.hcl
     docker_bake_file="$processed/docker-bake.hcl"
     version_file="$processed/version.txt"
-    $version="UNKNOWNVERSION"
-    $source="UNKNOWNSOURCE"
+
+    [[ -f "$version_file" ]] && VERSION=$(<"$version_file") && rm -rf "$version_file"
+
+SOURCE=$(printf '%s\n' "$SOURCE" | sed 's/[&/\]/\\&/g')
     if [[ -f "$docker_bake_file" ]]; then
-        if [[ -f "$version_file" ]]; then
-            $version=$(cat "$version_file")
-        fi
-        if [[ -f "$source_file" ]]; then
-            $source=$(cat "$source_file")
-        fi
         if sed --version >/dev/null 2>&1; then
-            # GNU sed
-            sed -i "s/TEMPLATE/$foldername/g" "$docker_bake_file"
-            sed -i "s/TEMPLATEVERSION/$version/g" "$docker_bake_file"
-            sed -i "s/TEMPLATESOURCE/$source/g" "$docker_bake_file"
+            sed -i "s/TEMPLATENAME/$foldername/g" "$docker_bake_file"
+            sed -i "s/TEMPLATEVERSION/$VERSION/g" "$docker_bake_file"
+            sed -i "s/TEMPLATESOURCE/$SOURCE/g" "$docker_bake_file"
         else
-            # macOS / BSD sed
-            sed -i '' "s/TEMPLATE/$foldername/g" "$docker_bake_file"
-            sed -i '' "s/TEMPLATEVERSION/$version/g" "$docker_bake_file"
-            sed -i '' "s/TEMPLATESOURCE/$source/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATENAME/$foldername/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATEVERSION/$VERSION/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATESOURCE/$SOURCE/g" "$docker_bake_file"
         fi
     fi
-    rm -rf $version_file $source_file || true
+
 
     # 2️⃣ Replace TEMPLATEPORT in container_test.go
     container_test_file="$processed/container_test.go"
-    docker_file="$processed/Dockerfile"
+    container_test_file_web="$processed/container_test.go.web"
+    container_test_file_cmd="$processed/container_test.go.cmd"
+    container_test_file_port="$processed/container_test.go.port"
+        replace_val=""
+        if [[ "$CI_WEB" != "true" ]]; then
+            mv $container_test_file_web "$container_test_file"
+        elif [[ "$CI_PORT" != "" ]]; then
+            mv $container_test_file_port "$container_test_file"
+        elif [[ "$CI_CMD" != "" ]]; then
+            mv $container_test_file_cmd "$container_test_file"
+            else
+mv $container_test_file_cmd "$container_test_file"
+        fi
+rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_file_port" || true
+
     if [[ -f "$container_test_file" ]]; then
-      port=""
-      if grep -q "EXPOSE" "$docker_file"; then
-          port=$(grep "EXPOSE" "$docker_file" | grep -o '[0-9]\+' | head -n1)
-          if sed --version >/dev/null 2>&1; then
-            # GNU sed
-            sed -i "s/TEMPLATEPORT/$port/g" "$container_test_file"
-           else
-            # macOS / BSD sed
-            sed -i '' "s/TEMPLATEPORT/$port/g" "$container_test_file"
-           fi
-      fi
 
+
+
+     CI_WEBPATH=$(printf '%s\n' "$CI_WEBPATH" | sed 's/[&/\]/\\&/g')
+        if sed --version >/dev/null 2>&1; then
+            sed -i "s/CIPORT/$CI_PORT/g" "$container_test_file"
+
+            sed -i "s/CIWEBPATH/$CI_WEBPATH/g" "$container_test_file"
+            sed -i "s/CICMD/$CI_CMD/g" "$container_test_file"
+        else
+            sed -i '' "s/CIPORT/$CI_PORT/g" "$container_test_file"
+            sed -i '' "s/CIWEBPATH/$CI_WEBPATH/g" "$container_test_file"
+            sed -i '' "s/CICMD/$CI_CMD/g" "$container_test_file"
+        fi
     fi
 
-rm -rf $processed/Dockerfile.riscv64 && echo "[CLEANUP]: removed Dockerfile.riscv64" || true
+    rm -rf "$processed/Dockerfile.riscv64" && echo "[CLEANUP]: removed Dockerfile.riscv64" || true
 
-# 3️⃣ Clean empty svc-* folders and append run scripts to start.sh
-root_folder="$processed/root"
-etc_folder="$root_folder/etc"
-s6_root="$etc_folder/s6-overlay/"
-s6_dir="$s6_root/s6-rc.d"
-start_sh="$processed/start.sh"
+    # 3️⃣ Clean empty svc-* folders and append run scripts to start.sh
+    root_folder="$processed/root"
+    etc_folder="$root_folder/etc"
+    s6_root="$etc_folder/s6-overlay/"
+    s6_dir="$s6_root/s6-rc.d"
+    start_sh="$processed/start.sh"
 
-rm -rf $root_folder/donate.txt && echo "[CLEANUP]: removed donate.txt" || true
-rm -rf $root_folder/migrations && echo "[CLEANUP]: removed migrations" || true
+    rm -rf "$root_folder/donate.txt" "$root_folder/migrations" || true
 
-if [[ -d "$s6_dir" ]]; then
-    for subdir in "$s6_dir"/*; do
-        [[ -d "$subdir" ]] || continue
-        rm -f "$subdir/type" || true
-        rm -f "$subdir/up" || true
-        rm -f "$subdir/notification-fd" || true
+    if [[ -d "$s6_dir" ]]; then
+        find "$s6_dir" -type f \( -name "type" -o -name "up" -o -name "notification-fd" \) -delete
+        find "$s6_dir" -type d -empty -delete
+        rm -rf "$s6_dir/init-deprecate" || true
 
-    done
-    echo "[CLEANUP] Removed unnecessary files..."
-# Find all directories recursively, deepest first
-find "$s6_dir" -type d -depth | while IFS= read -r dir; do
-    all_empty=true
-
-    # Check if directory contains any non-empty files
-    while IFS= read -r -d '' file; do
-        if [[ -s "$file" ]]; then
-            all_empty=false
-            break
-        fi
-    done < <(find "$dir" -type f -print0)
-
-    # If directory contains no files or subdirectories, consider it empty
-    if [[ $(find "$dir" -mindepth 1 | wc -l) -eq 0 ]]; then
-        all_empty=true
+        for init in "$s6_dir"/init-* "$s6_dir"/svc-*; do
+            [[ -d "$init" ]] || continue
+            run_file="$init/run"
+            if [[ -f "$run_file" ]]; then
+                echo "# ===== From $init/run =====" >> "$start_sh"
+                cat "$run_file" >> "$start_sh"
+                echo "" >> "$start_sh"
+            fi
+        done
     fi
 
-    if $all_empty; then
-        rm -rf "$dir"
-    fi
+    rm -rf "$s6_root" || true
+    [[ -d "$etc_folder" && -z "$(ls -A "$etc_folder")" ]] && rm -rf "$etc_folder"
+    [[ -d "$root_folder" && -z "$(ls -A "$root_folder")" ]] && rm -rf "$root_folder"
 
-done
- echo "[CLEANUP] Removed empty folders..."
-
-    rm -rf "$s6_dir/init-deprecate" && echo "[CLEANUP] Deleted deprecation notice..." || true
-    for init in "$s6_dir"/init-*; do
-        [[ -d "$init" ]] || continue
-
-
-        # Append run script if exists
-        run_file="$init/run"
-        if [[ -f "$run_file" ]]; then
-            echo "# ===== From $init/run =====" >> "$start_sh"
-            cat "$run_file" >> "$start_sh"
-            echo "" >> "$start_sh"
-        fi
-    done
-    for svc in "$s6_dir"/svc-*; do
-        [[ -d "$svc" ]] || continue
-
-
-        # Append run script if exists
-        run_file="$svc/run"
-        if [[ -f "$run_file" ]]; then
-            echo "# ===== From $svc/run =====" >> "$start_sh"
-            cat "$run_file" >> "$start_sh"
-            echo "" >> "$start_sh"
-        fi
-    done
-fi
-rm -rf $s6_root || true
-echo "[CLEANUP] Removed s6-overlay root folder..."
-
-if [ -d "$etc_folder" ] && [ -z "$(ls -A "$etc_folder")" ]; then
-    rm -rf "$etc_folder"
-    echo "[CLEANUP] Removed empty etc folder..."
-fi
-
-if [ -d "$root_folder" ] && [ -z "$(ls -A "$root_folder")" ]; then
-    rm -rf "$root_folder"
-    echo "[CLEANUP] Removed empty root folder..."
-fi
-
-
-    [[ -d "$processed" ]] || continue
+    # ===== Sanitize Dockerfiles =====
     dockerfiles=( "$processed/Dockerfile"* )
+    [[ ${#dockerfiles[@]} -eq 0 ]] && continue
 
-    echo "[VERBOSE] Cleaning up Dickerfiles in $processed: ${dockerfiles[*]}"
+    echo "[VERBOSE] Cleaning up Dockerfiles in $processed: ${dockerfiles[*]}"
 
-    # 1️⃣ Sanitize all Dockerfiles
     for df in "${dockerfiles[@]}"; do
-        sed -i '' \
-            -e '/^LABEL build_version/d' \
-            -e '/^LABEL maintainer/d' \
-            -e '/^ARG BUILD_DATE/d' \
-            -e '/^# syntax=docker\/dockerfile:1/d' \
-            -e '/printf "Linuxserver\.io version/d' \
-            "$df"
+        if sed --version >/dev/null 2>&1; then
+            sed -i \
+                -e '/^LABEL build_version/d' \
+                -e '/^LABEL maintainer/d' \
+                -e '/^ARG BUILD_DATE/d' \
+                -e '/^# syntax=docker\/dockerfile:1/d' \
+                -e '/printf "Linuxserver\.io version/d' \
+                "$df"
+        else
+            sed -i '' \
+                -e '/^LABEL build_version/d' \
+                -e '/^LABEL maintainer/d' \
+                -e '/^ARG BUILD_DATE/d' \
+                -e '/^# syntax=docker\/dockerfile:1/d' \
+                -e '/printf "Linuxserver\.io version/d' \
+                "$df"
+        fi
         echo "[VERBOSE] Sanitized $df"
     done
 
-# ===== Dockerfile Deduplication =====
-echo "[POSTPROCESS] Checking for duplicate Dockerfiles..."
-
-    [[ ${#dockerfiles[@]} -gt 1 ]] || { echo "[VERBOSE] Only one Dockerfile in $processed, skipping..."; continue; }
-
-    temp_dir=$(mktemp -d)
-    # echo "[VERBOSE] Created temporary directory $temp_dir for processing"
-
-    # Replace FROM lines with PLACEHOLDER in temp files
-    for df in "${dockerfiles[@]}"; do
-        temp_file="$temp_dir/$(basename "$df")"
-        sed -E 's/^FROM .*/PLACEHOLDER/' "$df" > "$temp_file"
-        # echo "[VERBOSE] Processed $df -> $temp_file"
-    done
-
-    # Compare all temp files
-    first_file=$(ls "$temp_dir" | head -n1)
-    all_same=true
-    for f in "$temp_dir"/*; do
-        if ! cmp -s "$temp_dir/$first_file" "$f"; then
-            all_same=false
-            # echo "[VERBOSE] Difference found: $f differs from $first_file"
-            break
-        fi
-    done
-
-    # If all the same, remove all but Dockerfile
-    if $all_same; then
-        echo "[POSTPROCESS] All Dockerfiles identical for $processed. Removing duplicates..."
+    # ===== Dockerfile Deduplication =====
+    if [[ ${#dockerfiles[@]} -gt 1 ]]; then
+        temp_dir=$(mktemp -d)
         for df in "${dockerfiles[@]}"; do
-            if [[ $(basename "$df") != "Dockerfile" ]]; then
-                rm -f "$df"
-                # echo "[VERBOSE] Removed duplicate Dockerfile: $df"
+            temp_file="$temp_dir/$(basename "$df")"
+            sed -E 's/^FROM .*/PLACEHOLDER/' "$df" > "$temp_file"
+        done
+
+        first_file=$(ls "$temp_dir" | head -n1)
+        all_same=true
+        for f in "$temp_dir"/*; do
+            if ! cmp -s "$temp_dir/$first_file" "$f"; then
+                all_same=false
+                break
             fi
         done
-    # else
-        # echo "[POSTPROCESS] Dockerfiles differ for $processed, keeping all versions."
+
+        if $all_same; then
+            echo "[POSTPROCESS] All Dockerfiles identical for $processed. Removing duplicates..."
+            for df in "${dockerfiles[@]}"; do
+                [[ $(basename "$df") == "Dockerfile" ]] || rm -f "$df"
+            done
+        fi
+
+        rm -rf "$temp_dir"
     fi
-
-    rm -rf "$temp_dir"
-    # echo "[VERBOSE] Removed temporary directory $temp_dir"
-
-
 done
+
+shopt -u nullglob

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "limnoria"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "limnoriaVERSION"
+  default = "2025.11.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/ProgVal/limnoria"
 }
 
 group "default" {

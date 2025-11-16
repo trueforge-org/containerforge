@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "modmanager"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "modmanagerVERSION"
+  default = "61d5d733"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

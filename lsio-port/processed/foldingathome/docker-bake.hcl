@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "foldingathome"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "foldingathomeVERSION"
+  default = "8.4.9"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://foldingathome.org/"
 }
 
 group "default" {

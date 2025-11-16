@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "tvheadend"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "tvheadendVERSION"
+  default = "00abbbb0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.tvheadend.org/"
 }
 
 group "default" {

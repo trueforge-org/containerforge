@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "freshrss"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "freshrssVERSION"
+  default = "1.27.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://freshrss.org/"
 }
 
 group "default" {

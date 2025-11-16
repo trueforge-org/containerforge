@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "grocy"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "grocyVERSION"
+  default = "v4.5.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/grocy/grocy"
 }
 
 group "default" {

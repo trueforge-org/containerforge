@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "synclounge"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "syncloungeVERSION"
+  default = "5.2.35"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/samcm/synclounge"
 }
 
 group "default" {

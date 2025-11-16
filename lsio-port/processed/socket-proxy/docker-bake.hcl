@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "socket-proxy"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "socket-proxyVERSION"
+  default = "3.2.8-r0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

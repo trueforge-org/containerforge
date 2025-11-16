@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "daapd"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "daapdVERSION"
+  default = "28.10"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://owntone.github.io/owntone-server/"
 }
 
 group "default" {

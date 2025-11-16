@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "jenkins-builder"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "jenkins-builderVERSION"
+  default = "9ff0ce15"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

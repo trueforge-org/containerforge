@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "raneto"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "ranetoVERSION"
+  default = "0.18.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://raneto.com/"
 }
 
 group "default" {

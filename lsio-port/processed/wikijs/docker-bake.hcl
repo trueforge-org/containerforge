@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "wikijs"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "wikijsVERSION"
+  default = "v2.5.308"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/Requarks/wiki"
 }
 
 group "default" {

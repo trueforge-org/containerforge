@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "netbox"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "netboxVERSION"
+  default = "v4.4.6"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/netbox-community/netbox"
 }
 
 group "default" {

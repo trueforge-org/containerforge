@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "medusa"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "medusaVERSION"
+  default = "v1.0.25"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://pymedusa.com/"
 }
 
 group "default" {

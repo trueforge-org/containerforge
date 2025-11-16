@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "d2-builder"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "d2-builderVERSION"
+  default = "v0.7.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

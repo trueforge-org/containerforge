@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "budge"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "budgeVERSION"
+  default = "0.0.9"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/linuxserver/budge"
 }
 
 group "default" {

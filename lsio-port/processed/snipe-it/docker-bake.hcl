@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "snipe-it"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "snipe-itVERSION"
+  default = "v8.0.4"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/grokability/snipe-it"
 }
 
 group "default" {

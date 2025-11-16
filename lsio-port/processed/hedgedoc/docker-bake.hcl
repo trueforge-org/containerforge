@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "hedgedoc"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "hedgedocVERSION"
+  default = "1.10.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://hedgedoc.org/"
 }
 
 group "default" {

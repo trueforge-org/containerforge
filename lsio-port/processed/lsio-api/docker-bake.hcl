@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "lsio-api"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "lsio-apiVERSION"
+  default = "eb59ffe4"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

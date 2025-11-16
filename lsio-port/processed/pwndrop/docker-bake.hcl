@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "pwndrop"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "pwndropVERSION"
+  default = "1.0.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/kgretzky/pwndrop"
 }
 
 group "default" {

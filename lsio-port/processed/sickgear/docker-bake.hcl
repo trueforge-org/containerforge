@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "sickgear"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "sickgearVERSION"
+  default = "release_3.34.5"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/sickgear/sickgear"
 }
 
 group "default" {

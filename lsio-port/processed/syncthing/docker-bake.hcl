@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "syncthing"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "syncthingVERSION"
+  default = "v2.0.11"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://syncthing.net"
 }
 
 group "default" {

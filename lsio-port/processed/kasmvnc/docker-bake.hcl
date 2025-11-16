@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "kasmvnc"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "kasmvncVERSION"
+  default = "alpine321-89d8a445"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

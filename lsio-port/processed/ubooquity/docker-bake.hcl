@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "ubooquity"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "ubooquityVERSION"
+  default = "3.1.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://vaemendis.net/ubooquity/"
 }
 
 group "default" {

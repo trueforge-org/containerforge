@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "wireguard"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "wireguardVERSION"
+  default = "1.0.20250521-r0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.wireguard.com/"
 }
 
 group "default" {

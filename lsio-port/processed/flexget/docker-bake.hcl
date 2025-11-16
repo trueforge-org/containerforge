@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "flexget"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "flexgetVERSION"
+  default = "v3.18.23"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://flexget.com/"
 }
 
 group "default" {

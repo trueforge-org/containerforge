@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "your_spotify"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "your_spotifyVERSION"
+  default = "1.14.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/Yooooomi/your_spotify"
 }
 
 group "default" {

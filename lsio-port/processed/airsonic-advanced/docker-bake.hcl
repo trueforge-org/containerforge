@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "airsonic-advanced"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "airsonic-advancedVERSION"
+  default = "11.1.4"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/kagemomiji/airsonic-advanced"
 }
 
 group "default" {

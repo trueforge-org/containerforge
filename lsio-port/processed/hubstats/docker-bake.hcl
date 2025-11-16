@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "hubstats"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "hubstatsVERSION"
+  default = "null"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "UNKNOWNSOURCE"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "manyfold"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "manyfoldVERSION"
+  default = "v0.129.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/manyfold3d/manyfold/"
 }
 
 group "default" {

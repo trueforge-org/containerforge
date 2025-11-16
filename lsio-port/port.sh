@@ -147,6 +147,16 @@ latest_release=$(curl -s "${CURL_AUTH_HEADER[@]}" \
             echo "[WARN] no version.txt for $shortname"
         fi
 
+        # Copy jenkins-vars.yml
+        if ! cp "$target/jenkins-vars.yml" "$out_dir/"; then
+            echo "[WARN] no jenkins-vars.yml for $shortname"
+        fi
+
+        # Copy readme-vars.yml
+        if ! cp "$target/readme-vars.yml" "$out_dir/"; then
+            echo "[WARN] no readme-vars.yml for $shortname"
+        fi
+
         shopt -u nullglob nocaseglob
 
         if $copy_failed; then

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "pairdrop"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "pairdropVERSION"
+  default = "v1.11.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/schlagmichdoch/PairDrop"
 }
 
 group "default" {

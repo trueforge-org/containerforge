@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "code-server"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "code-serverVERSION"
+  default = "4.105.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://coder.com"
 }
 
 group "default" {

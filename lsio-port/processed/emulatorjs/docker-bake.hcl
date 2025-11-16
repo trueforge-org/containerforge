@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "emulatorjs"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "emulatorjsVERSION"
+  default = "1.9.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/linuxserver/emulatorjs"
 }
 
 group "default" {

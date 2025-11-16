@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "ombi"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "ombiVERSION"
+  default = "v4.47.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://ombi.io"
 }
 
 group "default" {

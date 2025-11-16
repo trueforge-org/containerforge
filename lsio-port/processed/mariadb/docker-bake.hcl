@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "mariadb"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "mariadbVERSION"
+  default = "11.4.8-r0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://mariadb.org/"
 }
 
 group "default" {

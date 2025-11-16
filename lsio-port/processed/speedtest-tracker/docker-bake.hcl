@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "speedtest-tracker"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "speedtest-trackerVERSION"
+  default = "v1.7.4"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/alexjustesen/speedtest-tracker"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "netbootxyz"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "netbootxyzVERSION"
+  default = "0.7.6"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://netboot.xyz"
 }
 
 group "default" {

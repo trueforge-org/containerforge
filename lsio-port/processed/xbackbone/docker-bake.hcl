@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "xbackbone"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "xbackboneVERSION"
+  default = "3.8.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/SergiX44/XBackBone"
 }
 
 group "default" {

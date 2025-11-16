@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "smokeping"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "smokepingVERSION"
+  default = "2.9.0-r0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://oss.oetiker.ch/smokeping/"
 }
 
 group "default" {

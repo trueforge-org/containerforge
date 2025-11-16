@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "librespeed"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "librespeedVERSION"
+  default = "5.4.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/librespeed/speedtest"
 }
 
 group "default" {

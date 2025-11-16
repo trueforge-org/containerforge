@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "fail2ban"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "fail2banVERSION"
+  default = "1.1.0-r2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://www.fail2ban.org/"
 }
 
 group "default" {
