@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

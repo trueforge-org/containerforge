@@ -13,10 +13,6 @@ RUN \
   echo "**** install kavita ****" && \
   mkdir -p \
     /app/kavita && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET "https://api.github.com/repos/kareadita/kavita/releases/latest" \
-      | jq -r '.tag_name'); \
-  fi && \
   curl -o \
     /tmp/kavita.tar.gz -fL \
     "https://github.com/Kareadita/Kavita/releases/download/v${VERSION}/kavita-linux-$TARGETARCH.tar.gz" && \
@@ -36,6 +32,6 @@ RUN \
 
 # add local files
 COPY /root /
-
+COPY . /
 # ports and volumes
 EXPOSE 5000

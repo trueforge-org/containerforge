@@ -6,16 +6,16 @@ mkdir -p /config/{workspace,.ssh}
 
 if [[ -n "${SUDO_PASSWORD}" ]] || [[ -n "${SUDO_PASSWORD_HASH}" ]]; then
     echo "setting up sudo access"
-    if ! grep -q 'abc' /etc/sudoers; then
-        echo "adding abc to sudoers"
-        echo "abc ALL=(ALL:ALL) ALL" >> /etc/sudoers
+    if ! grep -q '568' /etc/sudoers; then
+        echo "adding 568 to sudoers"
+        echo "568 ALL=(ALL:ALL) ALL" >> /etc/sudoers
     fi
     if [[ -n "${SUDO_PASSWORD_HASH}" ]]; then
         echo "setting sudo password using sudo password hash"
-        sed -i "s|^abc:\!:|abc:${SUDO_PASSWORD_HASH}:|" /etc/shadow
+        sed -i "s|^568:\!:|568:${SUDO_PASSWORD_HASH}:|" /etc/shadow
     else
         echo "setting sudo password using SUDO_PASSWORD env var"
-        echo -e "${SUDO_PASSWORD}\n${SUDO_PASSWORD}" | passwd abc
+        echo -e "${SUDO_PASSWORD}\n${SUDO_PASSWORD}" | passwd 568
     fi
 fi
 
@@ -27,16 +27,9 @@ if [[ ! -f /config/.profile ]]; then
     cp /root/.profile /config/.profile
 fi
 
-# fix permissions (ignore contents of /config/workspace)
-echo "setting permissions::config"
-find /config -path /config/workspace -prune -o -exec chown abc:abc {} +
-chown abc:abc /config/workspace
-echo "setting permissions::app"
-chown -R abc:abc /app/openvscode-server
-
-chmod 700 /config/.ssh
+chmod 700 /config/.ssh || true
 if [[ -n "$(ls -A /config/.ssh)" ]]; then
-    chmod 600 /config/.ssh/*
+    chmod 600 /config/.ssh/* || true
 fi
 
 # ===== From ./processed/openvscode-server/root/etc/s6-overlay//s6-rc.d/svc-openvscode-server/run =====
@@ -54,10 +47,7 @@ else
     echo "**** No connection token is set ****"
 fi
 
-exec \
-    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z 127.0.0.1 3000" \
-        cd /app/openvscode-server s6-setuidgid abc \
-            /app/openvscode-server/bin/openvscode-server \
+exec /app/openvscode-server/bin/openvscode-server \
                 --host 0.0.0.0 \
                 --port 3000 \
                 --disable-telemetry \

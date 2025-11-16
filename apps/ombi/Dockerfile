@@ -6,8 +6,7 @@ ARG VERSION
 # environment settings
 ENV HOME="/config" \
   COMPlus_EnableDiagnostics=0 \
-  DEBIAN_FRONTEND="noninteractive" \
-  TMPDIR=/run/ombi-temp
+   TMPDIR=/run/ombi-temp
 
 RUN \
   apt-get update && \
@@ -16,10 +15,6 @@ RUN \
   echo "**** install ombi ****" && \
   mkdir -p \
     /app/ombi && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET "https://api.github.com/repos/Ombi-app/Ombi/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
   curl -o \
   /tmp/ombi-src.tar.gz -L \
     "https://github.com/Ombi-app/Ombi/releases/download/v${VERSION}/linux-$TARGETARCH.tar.gz" && \
@@ -34,6 +29,6 @@ RUN \
 
 # add local files
 COPY /root /
-
+COPY . /
 # ports and volumes
 EXPOSE 3579

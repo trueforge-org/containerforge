@@ -16,8 +16,6 @@ RUN \
     openjdk-17-jre-headless \
     unzip && \
   echo "**** install unifi ****" && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET "https://fw-update.ubnt.com/api/firmware-latest?filter=eq~~product~~unifi-controller&filter=eq~~platform~~unix&filter=eq~~channel~~release" \
     | jq -r '._embedded.firmware[].version' \
     | awk -F '+' '{print $1}'); \
   fi && \

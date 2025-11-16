@@ -1,12 +1,11 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
 
 ENV HOME=/config \
-  DEBIAN_FRONTEND="noninteractive" \
-  TMPDIR="/run/whisper-temp"
+   TMPDIR="/run/whisper-temp"
 
 RUN \
   echo "**** install packages ****" && \
@@ -14,12 +13,6 @@ RUN \
   apt-get install -y --no-install-recommends \
     build-essential \
     git \
-    python3-dev \
-    python3-venv && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET "https://api.github.com/repos/rhasspy/wyoming-faster-whisper/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
   python3 -m venv /lsiopy && \
   pip install -U --no-cache-dir \
     pip \

@@ -5,8 +5,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 ARG VERSION
 
 ENV \
-  DEBIAN_FRONTEND="noninteractive" \
-  MAKEFLAGS="-j4" \
+   MAKEFLAGS="-j4" \
   ATTACHED_DEVICES_PERMS="/dev/dvb -type c"
 
 RUN \
@@ -21,10 +20,6 @@ RUN \
     openssl \
     perl && \
   echo "***** compile satip ****" && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET https://api.github.com/repos/catalinii/minisatip/releases/latest \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
   mkdir -p \
     /app/satip && \
   curl -o \

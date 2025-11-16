@@ -5,7 +5,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 ARG VERSION
 
 # environment settings
-ARG DEBIAN_FRONTEND="noninteractive"
+
 ENV HOME="/config"
 
 RUN \
@@ -18,10 +18,6 @@ RUN \
     net-tools \
     sudo && \
   echo "**** install code-server ****" && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET https://api.github.com/repos/coder/code-server/releases/latest \
-      | awk '/tag_name/{print $4;exit}' FS='[""]' | sed 's|^v||'); \
-  fi && \
   mkdir -p /app/code-server && \
   curl -o \
     /tmp/code-server.tar.gz -L \
@@ -38,6 +34,7 @@ RUN \
 
 # add local files
 COPY /root /
+COPY . /COPY . /
 
 # ports and volumes
 EXPOSE 8443

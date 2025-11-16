@@ -7,8 +7,7 @@ if [[ ! -f "/config/appsettings.json" ]]; then
 fi
 
 # permissions
-lsiown -R abc:abc \
-    /config \
+
     /app/kavita/wwwroot/index.html
 
 # ===== From ./processed/kavita/root/etc/s6-overlay//s6-rc.d/svc-kavita/run =====
@@ -16,6 +15,5 @@ lsiown -R abc:abc \
 # shellcheck shell=bash
 
 exec \
-    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 5000" \
-    cd /app/kavita s6-setuidgid abc /app/kavita/Kavita
+        cd /app/kavita /app/kavita/Kavita
 

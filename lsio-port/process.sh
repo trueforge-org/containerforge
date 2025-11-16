@@ -192,7 +192,6 @@ for df in "${dockerfiles[@]}"; do
             -e 's/aarch64/\$TARGETARCH/g' \
             -e 's/aarch/\$TARGETARCH/g' \
             -e '/^ARGVERSION/d' \
-            -e '/if \[ -z ${VERSION+x} \]; then \\,/,/fi && \\/d' \
             "$df"
     else
         sed -i '' \
@@ -214,7 +213,6 @@ for df in "${dockerfiles[@]}"; do
             -e 's/aarch64/\$TARGETARCH/g' \
             -e 's/aarch/\$TARGETARCH/g' \
             -e '/^ARGVERSION/d' \
-            -e '/^  if \[ -z ${VERSION+x} \]; then \\\$/, /^  fi && \\\$/d' \
             "$df"
     fi
 

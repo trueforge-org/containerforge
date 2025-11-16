@@ -73,12 +73,10 @@ if [[ ! -f /config/data/keystore ]]; then
 fi
 
 # permissions
-lsiown -R abc:abc \
-	/config \
+
 	/run/unifi
 
-lsiown abc:abc \
-    /config/data/keystore
+
 
 # ===== From ./processed/unifi-network-application/root/etc/s6-overlay//s6-rc.d/svc-unifi-network-application/run =====
 #!/usr/bin/with-contenv bash
@@ -90,8 +88,7 @@ fi
 
 if [[ -z ${MEM_STARTUP} ]] || [[ ${MEM_STARTUP} = "default" ]]; then
     exec \
-        s6-notifyoncheck -d -n 600 -w 1000 \
-        cd /config s6-setuidgid abc java \
+                cd /config java \
             -Xmx"${MEM_LIMIT}M" \
             -Dlog4j2.formatMsgNoLookups=true \
             -Dfile.encoding=UTF-8 \
@@ -108,8 +105,7 @@ if [[ -z ${MEM_STARTUP} ]] || [[ ${MEM_STARTUP} = "default" ]]; then
             -jar /usr/lib/unifi/lib/ace.jar start;
 else
     exec \
-        s6-notifyoncheck -d -n 600 -w 1000 \
-        cd /config s6-setuidgid abc java \
+                cd /config java \
             -Xms"${MEM_STARTUP}M" \
             -Xmx"${MEM_LIMIT}M" \
             -Dlog4j2.formatMsgNoLookups=true \

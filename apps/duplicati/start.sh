@@ -31,16 +31,10 @@ else
     fi
 fi
 
-# permissions
-lsiown -R abc:abc \
-    /config \
-    /run/duplicati-temp
-
 # ===== From ./processed/duplicati/root/etc/s6-overlay//s6-rc.d/svc-duplicati/run =====
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
 exec \
-    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 8200" \
-        cd /app/duplicati s6-setuidgid abc ./duplicati-server $CLI_ARGS
+            cd /app/duplicati ./duplicati-server $@
 

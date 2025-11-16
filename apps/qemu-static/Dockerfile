@@ -44,5 +44,4 @@ COPY --from=buildstage /build-out/ /
 
 # add local files
 COPY /root /
-
-ENTRYPOINT ["/register"]
+COPY . /

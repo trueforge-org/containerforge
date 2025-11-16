@@ -5,8 +5,7 @@
 mkdir -p /run/piper-temp
 
 # permissions
-lsiown -R abc:abc \
-    /config \
+
     /run/piper-temp
 
 # ===== From ./processed/piper/root/etc/s6-overlay//s6-rc.d/svc-piper/run =====
@@ -19,9 +18,7 @@ if [[ -z ${LOCAL_ONLY} ]]; then
     UPDATE_MODELS=true
 fi
 
-exec \
-    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 10200" \
-        s6-setuidgid abc python3 -m wyoming_piper \
+exec python3 -m wyoming_piper \
         --uri 'tcp://0.0.0.0:10200' \
         --length-scale "${PIPER_LENGTH:-1.0}" \
         --noise-scale "${PIPER_NOISE:-0.667}" \

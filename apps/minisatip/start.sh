@@ -3,6 +3,5 @@
 # shellcheck shell=bash
 
 exec \
-    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 8875" \
-        cd /app/satip ./minisatip ${RUN_OPTS} -f -x 8875
+            cd /app/satip/minisatip ${RUN_OPTS} -f -x 8875
 

@@ -26,7 +26,7 @@ func Test(t *testing.T) {
 		testcontainers.WithExposedPorts("/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("/tcp"),
-			wait.ForHTTP("''").WithPort("/tcp").WithStatusCodeMatcher(func(status int) bool {
+			wait.ForHTTP("'").WithPort("/tcp").WithStatusCodeMatcher(func(status int) bool {
 				return status == 200
 			}),
 		),

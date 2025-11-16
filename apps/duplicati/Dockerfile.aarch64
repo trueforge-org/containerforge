@@ -1,11 +1,11 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
 
 # environment settings
-ARG DEBIAN_FRONTEND="noninteractive"
+
 ENV HOME="/config" \
   TMPDIR=/run/duplicati-temp \
   DUPLICATI__REQUIRE_DB_ENCRYPTION_KEY=true \
@@ -24,10 +24,6 @@ RUN \
     unzip \
     xz-utils && \
   echo "**** install duplicati ****" && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET "https://api.github.com/repos/duplicati/duplicati/releases/latest" \
-      | jq -r .tag_name); \
-  fi && \
   duplicati_url=$(curl -s "https://api.github.com/repos/duplicati/duplicati/releases/tags/v${VERSION}" | jq -r '.assets[].browser_download_url' |grep 'linux-$TARGETARCH-gui.zip$') && \
   curl -o \
     /tmp/duplicati.zip -L \

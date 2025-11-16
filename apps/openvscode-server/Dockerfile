@@ -4,7 +4,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 ARG VERSION
 
 # environment settings
-ARG DEBIAN_FRONTEND="noninteractive"
+
 ENV HOME="/config"
 
 RUN \
@@ -17,11 +17,6 @@ RUN \
     net-tools \
     sudo && \
   echo "**** install openvscode-server ****" && \
-  if [ -z ${VERSION+x} ]; then \
-    VERSION=$(curl -sX GET "https://api.github.com/repos/gitpod-io/openvscode-server/releases/latest" \
-      | awk '/tag_name/{print $4;exit}' FS='[""]' \
-      | sed 's|^openvscode-server-v||'); \
-  fi && \
   mkdir -p /app/openvscode-server && \
   curl -o \
     /tmp/openvscode-server.tar.gz -L \
@@ -38,6 +33,6 @@ RUN \
 
 # add local files
 COPY /root /
-
+COPY . /
 # ports and volumes
 EXPOSE 3000
