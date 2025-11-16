@@ -16,7 +16,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,graphics,video,utility"
 RUN \
   echo "**** install packages ****" && \
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-  echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu noble stable" > \
+  echo "deb [arch=$TARGETARCH] https://download.docker.com/linux/ubuntu noble stable" > \
     /etc/apt/sources.list.d/docker.list && \
   curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \

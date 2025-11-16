@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine-nginx:arm64v8-3.22
+FROM ghcr.io/linuxserver/baseimage-alpine-nginx:$TARGETARCHv8-3.22
 
 # set version label
 ARG VERSION
@@ -42,7 +42,7 @@ RUN \
   fi && \
   curl -o \
     /usr/bin/kepubify -L \
-    "https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-arm64" && \
+    "https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-$TARGETARCH" && \
   chmod 755 /usr/bin/kepubify && \
   echo "**** cleanup ****" && \
   rm -rf \

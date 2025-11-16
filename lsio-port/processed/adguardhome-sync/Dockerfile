@@ -18,7 +18,7 @@ RUN \
   echo "*** Installing AdGuardHome Sync ***" && \
   curl -o \
     /tmp/adguardhomesync.tar.gz -L \
-    "https://github.com/bakito/adguardhome-sync/releases/download/${ADGUARDHOMESYNC_RELEASE}/adguardhome-sync_${ADGUARDHOMESYNC_RELEASE#v}_linux_amd64.tar.gz" && \
+    "https://github.com/bakito/adguardhome-sync/releases/download/${ADGUARDHOMESYNC_RELEASE}/adguardhome-sync_${ADGUARDHOMESYNC_RELEASE#v}_linux_$TARGETARCH.tar.gz" && \
   tar xzf \
     /tmp/adguardhomesync.tar.gz -C \
     /app/adguardhome-sync/ && \

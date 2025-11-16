@@ -29,7 +29,7 @@ RUN \
     /tmp/src/github.com/pydio/cells --strip-components=1 && \
   echo "**** compile cells  ****" && \
   cd /tmp/src/github.com/pydio/cells && \
-  GOARCH=amd64 GOOS=linux go build -trimpath \
+  GOARCH=$TARGETARCH GOOS=linux go build -trimpath \
     -ldflags "\
     -X github.com/pydio/cells/v4/common.version=${CELLS_RELEASE:1} \
     -X github.com/pydio/cells/v4/common.BuildStamp=${BUILD_DATE} \

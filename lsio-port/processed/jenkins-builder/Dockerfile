@@ -7,7 +7,7 @@ ARG VERSION
 RUN \
   echo "**** install build packages ****" && \
   YQ_VERSION=v4.45.1 &&\
-  wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq &&\
+  wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_$TARGETARCH -O /usr/bin/yq &&\
   chmod +x /usr/bin/yq && \
   apk add --no-cache --upgrade \
     ansible && \

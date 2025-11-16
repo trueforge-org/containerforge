@@ -1,6 +1,6 @@
 
 # build stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:arm64v8-noble AS buildstage
+FROM ghcr.io/linuxserver/baseimage-ubuntu:$TARGETARCHv8-noble AS buildstage
 
 # set version label
 ARG FFMPEG_VERSION
@@ -93,7 +93,7 @@ RUN \
     zlib1g-dev && \
   mkdir -p /tmp/rust && \
   RUST_VERSION=$(curl -fsX GET https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name') && \
-  curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-aarch64-unknown-linux-gnu.tar.gz" && \
+  curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-$TARGETARCH-unknown-linux-gnu.tar.gz" && \
   tar xf /tmp/rust.tar.gz -C /tmp/rust --strip-components=1 && \
   cd /tmp/rust && \
   ./install.sh && \
@@ -210,7 +210,7 @@ RUN \
   cd /tmp/harfbuzz && \
   meson build && \
   ninja -C build install && \
-  strip -d /usr/local/lib/aarch64-linux-gnu/libharfbuzz*.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libharfbuzz*.so
 RUN \
   echo "**** grabbing kvazaar ****" && \
   mkdir -p /tmp/kvazaar && \
@@ -288,12 +288,12 @@ RUN \
   echo "**** compiling libdrm ****" && \
   cd /tmp/libdrm && \
   meson setup \
-    --prefix=/usr --libdir=/usr/local/lib/aarch64-linux-gnu \
+    --prefix=/usr --libdir=/usr/local/lib/$TARGETARCH-linux-gnu \
     -Dvalgrind=disabled \
     . build && \
   ninja -C build && \
   ninja -C build install && \
-  strip -d /usr/local/lib/aarch64-linux-gnu/libdrm*.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libdrm*.so
 RUN \
   echo "**** grabbing liblc3 ****" && \
   mkdir -p /tmp/liblc3 && \
@@ -333,7 +333,7 @@ RUN \
   cd /tmp/mpp && \
   cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DTOOLCHAIN=aarch64-linux-gnu- \
+    -DTOOLCHAIN=$TARGETARCH-linux-gnu- \
     -G "Unix Makefiles" \
     . && \
   cmake --build . -j && \
@@ -413,7 +413,7 @@ RUN \
   echo "**** compiling rav1e ****" && \
   cd /tmp/rav1e && \
   cargo cinstall --release && \
-  strip -d /usr/local/lib/aarch64-linux-gnu/librav1e.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/librav1e.so
 RUN \
   echo "**** grabbing rist ****" && \
   mkdir -p /tmp/rist && \
@@ -702,7 +702,7 @@ RUN \
   mkdir -p \
     /buildout/usr/local/bin \
     /buildout/usr/local/etc/fonts \
-    /buildout/usr/local/lib/aarch64-linux-gnu \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu \
     /buildout/usr/share/fonts && \
   cp \
     /tmp/ffmpeg/ffmpeg \
@@ -717,14 +717,14 @@ RUN \
     /usr/local/lib/lib*so* \
     /buildout/usr/local/lib/ && \
   cp -a \
-    /usr/local/lib/aarch64-linux-gnu/lib*so* \
-    /buildout/usr/local/lib/aarch64-linux-gnu/ && \
+    /usr/local/lib/$TARGETARCH-linux-gnu/lib*so* \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/ && \
   cp -a \
     /usr/share/fonts/* \
     /buildout/usr/share/fonts/
 
 # runtime stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:arm64v8-noble
+FROM ghcr.io/linuxserver/baseimage-ubuntu:$TARGETARCHv8-noble
 
 # Add files from binstage
 COPY --from=buildstage /buildout/ /

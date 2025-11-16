@@ -20,7 +20,7 @@ RUN \
   fi && \
   curl -o \
     /tmp/kavita.tar.gz -fL \
-    "https://github.com/Kareadita/Kavita/releases/download/${KAVITA_RELEASE}/kavita-linux-x64.tar.gz" && \
+    "https://github.com/Kareadita/Kavita/releases/download/${KAVITA_RELEASE}/kavita-linux-$TARGETARCH.tar.gz" && \
   tar xf \
     /tmp/kavita.tar.gz -C \
     /app/kavita --strip-components=1 \

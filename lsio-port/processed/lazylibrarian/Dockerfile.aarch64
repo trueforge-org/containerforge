@@ -1,7 +1,7 @@
 
-FROM ghcr.io/linuxserver/unrar:arm64v8-latest AS unrar
+FROM ghcr.io/linuxserver/unrar:$TARGETARCHv8-latest AS unrar
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:arm64v8-noble
+FROM ghcr.io/linuxserver/baseimage-ubuntu:$TARGETARCHv8-noble
 
 # set version label
 ARG VERSION

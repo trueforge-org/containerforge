@@ -29,7 +29,7 @@ RUN \
     DUPLICATI_RELEASE=$(curl -sX GET "https://api.github.com/repos/duplicati/duplicati/releases/latest" \
       | jq -r .tag_name); \
   fi && \
-  duplicati_url=$(curl -s "https://api.github.com/repos/duplicati/duplicati/releases/tags/${DUPLICATI_RELEASE}" | jq -r '.assets[].browser_download_url' |grep 'linux-x64-gui.zip$') && \
+  duplicati_url=$(curl -s "https://api.github.com/repos/duplicati/duplicati/releases/tags/${DUPLICATI_RELEASE}" | jq -r '.assets[].browser_download_url' |grep 'linux-$TARGETARCH-gui.zip$') && \
   curl -o \
     /tmp/duplicati.zip -L \
     "${duplicati_url}" && \

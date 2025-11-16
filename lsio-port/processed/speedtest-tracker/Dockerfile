@@ -23,13 +23,13 @@ RUN \
     npm && \
   echo "*** install speedtest-cli ***" && \
   if [ -z ${CLI_VERSION+x} ]; then \
-    CLI_VERSION=$(curl -Ls https://packagecloud.io/ookla/speedtest-cli/debian/dists/bookworm/main/binary-amd64/Packages \
+    CLI_VERSION=$(curl -Ls https://packagecloud.io/ookla/speedtest-cli/debian/dists/bookworm/main/binary-$TARGETARCH/Packages \
     | sed -n '/Package: speedtest/,/Homepage:/p' \
     | grep -oP 'Version: \K\S+' | cut -d. -f1-3); \
   fi && \
   curl -o \
     /tmp/speedtest-cli.tgz -L \
-    "https://install.speedtest.net/app/cli/ookla-speedtest-${CLI_VERSION}-linux-x86_64.tgz" && \
+    "https://install.speedtest.net/app/cli/ookla-speedtest-${CLI_VERSION}-linux-$TARGETARCH.tgz" && \
   tar xzf \
     /tmp/speedtest-cli.tgz -C \
     /usr/bin && \

@@ -21,7 +21,7 @@ RUN \
   fi && \
   curl -o \
     /tmp/d2.tar.gz -L \
-    "https://github.com/terrastruct/d2/releases/download/${D2_VERSION}/d2-${D2_VERSION}-linux-amd64.tar.gz" && \
+    "https://github.com/terrastruct/d2/releases/download/${D2_VERSION}/d2-${D2_VERSION}-linux-$TARGETARCH.tar.gz" && \
   tar xzf \
   /tmp/d2.tar.gz -C \
     /tmp/d2 --strip-components=1 && \
