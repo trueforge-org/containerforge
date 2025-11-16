@@ -5,6 +5,14 @@ REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
 DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux")
+GITHUB_TOKEN="${GITHUB_TOKEN:-}"
+
+# Set curl auth header only if token is set
+if [[ -n "$GITHUB_TOKEN" ]]; then
+    CURL_AUTH_HEADER=(-H "Authorization: token $GITHUB_TOKEN")
+else
+    CURL_AUTH_HEADER=()
+fi
 
 mkdir -p "$REPO_DIR" "$PROCESSED_DIR"
 
@@ -17,7 +25,8 @@ rm -rf processed && echo "deleted processed folder..." || true
 
 while true; do
     echo "[*] Fetching page $page..."
-    resp=$(curl -s "https://api.github.com/orgs/linuxserver/repos?per_page=100&page=$page" \
+resp=$(curl -s "${CURL_AUTH_HEADER[@]}" \
+            "https://api.github.com/orgs/linuxserver/repos?per_page=100&page=$page" \
             | jq -r '.[].name')
 
     [[ -z "$resp" ]] && break
@@ -79,6 +88,14 @@ for repo in $repos; do
         git clone --quiet "https://github.com/linuxserver/$repo.git" "$target" || echo "[WARN] git clone failed for $shortname"
     fi
 
+    # ===== Fetch latest GitHub release version =====
+latest_release=$(curl -s "${CURL_AUTH_HEADER[@]}" \
+                     "https://api.github.com/repos/linuxserver/$repo/releases/latest" \
+                     | jq -r '.tag_name')
+    # Remove -ls* suffix
+    clean_version=$(echo "$latest_release" | sed 's/-ls.*//')
+    echo "$clean_version" > "$target/version.txt"
+
     # ===== Check Dockerfiles for baseimage-selkies =====
     skip_due_to_selkies=false
     shopt -s nullglob nocaseglob
@@ -109,6 +126,7 @@ for repo in $repos; do
         shopt -s nullglob nocaseglob
         copy_failed=false
 
+        # Copy Dockerfiles
         for df in "${dockerfiles[@]}"; do
             if ! cp "$df" "$out_dir/"; then
                 echo "[WARN] Failed to copy $df"
@@ -116,12 +134,19 @@ for repo in $repos; do
             fi
         done
 
+        # Copy root folder if exists
         if [[ -d "$target/root" ]]; then
             if ! cp -r "$target/root" "$out_dir/"; then
                 echo "[WARN] Failed to copy root/ folder for $shortname"
                 copy_failed=true
             fi
         fi
+
+        # Copy version.txt
+        if ! cp "$target/version.txt" "$out_dir/"; then
+            echo "[WARN] no version.txt for $shortname"
+        fi
+
         shopt -u nullglob nocaseglob
 
         if $copy_failed; then
