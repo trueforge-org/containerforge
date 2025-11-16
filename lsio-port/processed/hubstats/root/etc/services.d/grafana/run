@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+/usr/sbin/grafana-server --homepath=/usr/share/grafana --config=/config/etc/grafana/grafana.ini cfg:default.paths.data=/config/var/lib/grafana cfg:default.paths.logs=/config/var/log/grafana

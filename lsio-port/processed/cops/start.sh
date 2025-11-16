@@ -1,0 +1,45 @@
+# ===== From ./processed/cops/root/etc/s6-overlay//s6-rc.d/init-cops-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# create folders
+mkdir -p \
+    /config/cache
+# create folders (COPS 3.x)
+mkdir -p \
+    /config/config
+
+# clear previous config (COPS 1.x and 2.x)
+for f in /app/www/public/config_local.*.php; do
+    if [ -f "$f" ]; then
+        rm "$f"
+    fi
+done
+# clear previous config (COPS 3.x)
+for f in /app/www/public/config/local.*.php; do
+    if [ -f "$f" ]; then
+        rm "$f"
+    fi
+done
+
+# copy config
+if [[ ! -e /config/config/local.php ]]; then
+    if [[ -e /config/config_local.php ]]; then
+        echo "**** Existing config found, migrating for v3. Please check the contents of /config/config/local.php which will be the active config in v3 ****"
+        cp /config/config_local.php /config/config/local.php
+    else
+        echo "**** New instance detected, generating default config at /config/config/local.php ****"
+        cp /defaults/config/local.php /config/config/local.php
+    fi
+fi
+
+# copy extra user-profiles
+for f in /config/config/local*.php; do
+    cp "${f}" /app/www/public/config/
+    chmod +r "/app/www/public/config/$(basename ${f})"
+done
+
+# permissions
+lsiown -R abc:abc \
+    /config
+

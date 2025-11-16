@@ -1,0 +1,55 @@
+## Version 2025/07/10 - Changelog: https://github.com/linuxserver/docker-cops/commits/master/root/defaults/nginx/site-confs/default.conf.sample
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+    listen 443 quic reuseport default_server;
+    listen [::]:443 quic reuseport default_server;
+
+    server_name _;
+
+    include /config/nginx/ssl.conf;
+
+    root /app/www/public;
+    index index.html index.htm index.php;
+
+    #URL rewriting with COPS deprecated - see https://github.com/mikespub-org/seblucas-cops/wiki/Url-Rewriting-with-COPS
+    #location /download/ {
+    #    rewrite ^/download/(\d+)/(\d+)/.*\.(.*)$ /index.php/fetch/$2/$1/ignore.$3 last;
+    #    rewrite ^/download/(\d+)/.*\.(.*)$ /index.php/fetch/0/$1/ignore.$2 last;
+    #    break;
+    #}
+
+    #Can break loading the images - if you don't see anything, comment
+    location ~ ^/images.*\.(gif|png|ico|jpg)$ {
+        expires 31d;
+    }
+    #Can also break loading the images, comment if it happens
+    location ~ .(js|css|eot|svg|woff|ttf)$ {
+        expires 31d;
+    }
+
+    location /books {
+        root /;
+        internal;
+    }
+
+    location ~ ^(.+\.php)(.*)$ {
+        # enable the next two lines for http auth
+        #auth_basic "Restricted";
+        #auth_basic_user_file /config/nginx/.htpasswd;
+
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
+        if (!-f $document_root$fastcgi_script_name) { return 404; }
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    # deny access to .htaccess/.htpasswd files
+    location ~ /\.ht {
+        deny all;
+    }
+}

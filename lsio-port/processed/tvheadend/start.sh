@@ -1,0 +1,60 @@
+# ===== From ./processed/tvheadend/root/etc/s6-overlay//s6-rc.d/init-tvheadend-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# make folders
+mkdir -p \
+    /config/comskip
+
+# copy config
+if [[ ! -e /config/dvr/config ]]; then
+    (mkdir -p /config/dvr/config && cp /defaults/7a5edfbe189851e5b1d1df19c93962f0 /config/dvr/config/7a5edfbe189851e5b1d1df19c93962f0)
+fi
+if [[ ! -e /config/comskip/comskip.ini ]]; then
+    cp /defaults/comskip.ini.org /config/comskip/comskip.ini
+fi
+if [[ ! -e /config/config ]]; then
+    (cp /defaults/config /config/config)
+fi
+
+# permissions
+echo "Setting permissions"
+lsiown -R abc:abc /config
+
+# ===== From ./processed/tvheadend/root/etc/s6-overlay//s6-rc.d/init-video-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+FILES=$(find /dev/dri /dev/dvb -type c -print 2>/dev/null)
+
+for i in $FILES
+do
+    VIDEO_GID=$(stat -c '%g' "$i")
+    if id -G abc | grep -qw "$VIDEO_GID"; then
+        touch /groupadd
+    else
+        if [ ! "${VIDEO_GID}" == '0' ]; then
+            VIDEO_NAME=$(getent group "${VIDEO_GID}" | awk -F: '{print $1}')
+            if [ -z "${VIDEO_NAME}" ]; then
+                VIDEO_NAME="video$(head /dev/urandom | tr -dc 'a-z0-9' | head -c8)"
+                groupadd "$VIDEO_NAME"
+                groupmod -g "$VIDEO_GID" "$VIDEO_NAME"
+            fi
+            usermod -a -G "$VIDEO_NAME" abc
+            touch /groupadd
+        fi
+    fi
+done
+
+if [ -n "${FILES}" ] && [ ! -f "/groupadd" ]; then
+    usermod -a -G root abc
+fi
+
+# ===== From ./processed/tvheadend/root/etc/s6-overlay//s6-rc.d/svc-tvheadend/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+exec \
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 9981" \
+        s6-setuidgid abc /usr/bin/tvheadend -C -c /config $RUN_OPTS
+

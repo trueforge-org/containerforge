@@ -1,0 +1,23 @@
+# ===== From ./processed/fleet/root/etc/s6-overlay//s6-rc.d/init-fleet-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
+    lsiown -R abc:abc \
+        /config
+fi
+
+# ===== From ./processed/fleet/root/etc/s6-overlay//s6-rc.d/svc-fleet/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
+    exec \
+        s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 8080" \
+            s6-setuidgid abc /usr/bin/java -Dfleet.config.base=/config -Dlog4j2.formatMsgNoLookups=true -jar /app/fleet/fleet.jar
+else
+    exec \
+        s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 8080" \
+            /usr/bin/java -Dfleet.config.base=/config -Dlog4j2.formatMsgNoLookups=true -jar /app/fleet/fleet.jar
+fi
+

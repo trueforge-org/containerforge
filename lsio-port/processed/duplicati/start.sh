@@ -1,0 +1,46 @@
+# ===== From ./processed/duplicati/root/etc/s6-overlay//s6-rc.d/init-duplicati-config/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+mkdir -p /run/duplicati-temp
+
+if [[ -f "/config/Duplicati-server.sqlite" ]]; then
+    # Existing install
+    if [[ -n ${SETTINGS_ENCRYPTION_KEY} ]]; then
+        # Enable settings encryption
+        true
+    else
+        # Disable settings encryption
+        printf "true" > /run/s6/container_environment/DUPLICATI__DISABLE_DB_ENCRYPTION
+        echo "***      Missing encryption key, unable to encrypt your settings database     ***"
+        echo "*** Please set a value for SETTINGS_ENCRYPTION_KEY and recreate the container ***"
+    fi
+else
+    # New install
+    if [[ -z ${DUPLICATI__WEBSERVICE_PASSWORD} ]]; then
+        printf "changeme" > /run/s6/container_environment/DUPLICATI__WEBSERVICE_PASSWORD
+    fi
+    if [[ -n ${SETTINGS_ENCRYPTION_KEY} ]]; then
+        # Enable settings encryption
+        true
+    else
+        # Halt init
+        echo "***      Missing encryption key, unable to encrypt your settings database     ***"
+        echo "*** Please set a value for SETTINGS_ENCRYPTION_KEY and recreate the container ***"
+        sleep infinity
+    fi
+fi
+
+# permissions
+lsiown -R abc:abc \
+    /config \
+    /run/duplicati-temp
+
+# ===== From ./processed/duplicati/root/etc/s6-overlay//s6-rc.d/svc-duplicati/run =====
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+exec \
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 8200" \
+        cd /app/duplicati s6-setuidgid abc ./duplicati-server $CLI_ARGS
+
