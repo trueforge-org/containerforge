@@ -77,6 +77,11 @@ rm -rf "$README_YAML" || true
     version_file="$processed/version.txt"
 
     [[ -f "$version_file" ]] && VERSION=$(<"$version_file") && rm -rf "$version_file"
+    VERSIONPREFIX=""
+    if [[ "$VERSION" == v* ]]; then
+  VERSION="${VERSION#v}"   # remove leading "v"
+  VERSIONPREFIX="v"
+fi
 
 SOURCE=$(printf '%s\n' "$SOURCE" | sed 's/[&/\]/\\&/g')
     if [[ -f "$docker_bake_file" ]]; then
@@ -162,6 +167,7 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
     [[ ${#dockerfiles[@]} -eq 0 ]] && continue
 
     echo "[VERBOSE] Cleaning up Dockerfiles in $processed: ${dockerfiles[*]}"
+    echo "BUILD_VERSION_ARG set to $BUILD_VERSION_ARG"
 
 for df in "${dockerfiles[@]}"; do
     if sed --version >/dev/null 2>&1; then
@@ -172,6 +178,8 @@ for df in "${dockerfiles[@]}"; do
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
+            -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
+            -e "s/\$VERSION/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
             -e 's/x64/\$TARGETARCH/g' \
             -e 's/x86_64/\$TARGETARCH/g' \
@@ -187,6 +195,8 @@ for df in "${dockerfiles[@]}"; do
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
+            -e "s/\$VERSION/\${VERSION}/g" \
+            -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
             -e 's/x64/\$TARGETARCH/g' \
             -e 's/x86_64/\$TARGETARCH/g' \
