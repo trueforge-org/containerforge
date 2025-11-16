@@ -180,9 +180,9 @@ for df in "${dockerfiles[@]}"; do
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
             -e "/ARG $BUILD_VERSION_ARG/d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
             -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
@@ -192,6 +192,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's/aarch64/\$TARGETARCH/g' \
             -e 's/aarch/\$TARGETARCH/g' \
             -e '/^ARGVERSION/d' \
+            -e '/if \[ -z ${VERSION+x} \]; then \\,/,/fi && \\/d' \
             "$df"
     else
         sed -i '' \
@@ -201,9 +202,9 @@ for df in "${dockerfiles[@]}"; do
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
             -e "/ARG $BUILD_VERSION_ARG/d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
             -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
@@ -213,6 +214,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's/aarch64/\$TARGETARCH/g' \
             -e 's/aarch/\$TARGETARCH/g' \
             -e '/^ARGVERSION/d' \
+            -e '/^  if \[ -z ${VERSION+x} \]; then \\\$/, /^  fi && \\\$/d' \
             "$df"
     fi
 

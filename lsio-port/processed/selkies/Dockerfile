@@ -1,5 +1,5 @@
 FROM lscr.io/linuxserver/xvfb:debianbookworm AS xvfb
-FROM ghcr.io/trueforge-org/ubuntu:24.4AS frontend
+FROM ghcr.io/trueforge-org/ubuntu:24.4 AS frontend
 
 RUN \
   echo "**** install build packages ****" && \
