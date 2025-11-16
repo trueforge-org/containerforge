@@ -3,6 +3,7 @@ FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
+ARG TARGETARCH
 USER root
 
 ENV HOME=/config \
