@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG WEBAPP_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -30,7 +26,6 @@ RUN \
   /tmp/webapp.tar.gz -C \
     /app/ --strip-components=1 && \
   npm install --prefix /app && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

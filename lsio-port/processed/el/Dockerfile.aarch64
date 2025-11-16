@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM registry.access.redhat.com/ubi9/ubi AS base
 
@@ -86,10 +85,7 @@ RUN \
 # runtime stage
 FROM scratch
 COPY --from=base / /
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="TheLamer"
 
 # environment variables
 ENV PS1="$(whoami)@$(hostname):$(pwd)\\$ " \

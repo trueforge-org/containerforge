@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
@@ -9,11 +8,8 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 COPY --from=ghcr.io/astral-sh/uv:0.9.8 /uv /uvx /bin/
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG FLEXGET_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 # environment settings
 ENV HOME="/config" \
@@ -54,7 +50,6 @@ RUN \
   uv run scripts/bundle_webui.py && \
   uv sync --frozen --no-dev --no-cache --group=all && \
   uv pip install pip && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 # build stage
 FROM ghcr.io/linuxserver/baseimage-ubuntu:noble AS buildstage
@@ -1016,10 +1015,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
 COPY --from=buildstage /buildout/ /
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 
 ARG DEBIAN_FRONTEND="noninteractive"
 

@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG PROJECTSEND_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="TheSpad"
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -42,7 +38,6 @@ RUN \
     /tmp/projectsend.zip -d \
     /app/www/public && \
   mv /app/www/public/upload /defaults/ && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
     rm -rf \
     /tmp/*

@@ -1,11 +1,8 @@
 FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG CODE_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="aptalca"
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -33,7 +30,6 @@ RUN \
   tar xf \
     /tmp/openvscode-server.tar.gz -C \
     /app/openvscode-server/ --strip-components=1 && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** clean up ****" && \
   apt-get clean && \
   rm -rf \

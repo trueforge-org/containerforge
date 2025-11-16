@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG NEXTCLOUD_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="aptalca"
 
 # environment settings
 ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
@@ -95,7 +91,6 @@ RUN \
   rm -rf /app/www/src/updater && \
   mkdir -p /app/www/src/data && \
   chmod +x /app/www/src/occ && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

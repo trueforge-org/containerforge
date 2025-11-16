@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM debian:bookworm AS buildstage
 
@@ -39,11 +38,8 @@ RUN \
 FROM alpine:latest
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG QEMU_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 
 # Add build assets
 COPY --from=buildstage /build-out/ /

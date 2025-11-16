@@ -1,11 +1,8 @@
 FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG FREETUBE_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 
 # title
 ENV TITLE=FreeTube

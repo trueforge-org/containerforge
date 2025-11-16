@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG AIRSONIC_ADVANCED_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 # environment settings
 ENV AIRSONIC_ADVANCED_HOME="/app/airsonic" \
@@ -34,7 +30,6 @@ RUN \
   curl -o \
   ${AIRSONIC_ADVANCED_HOME}/airsonic.war -L \
     "https://github.com/kagemomiji/airsonic-advanced/releases/download/${AIRSONIC_ADVANCED_RELEASE}/airsonic.war" && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

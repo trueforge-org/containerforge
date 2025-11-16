@@ -1,15 +1,11 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
 FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG CALIBREWEB_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="notdriz"
 
 ENV \
   QTWEBENGINE_CHROMIUM_FLAGS="--no-sandbox"

@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM docker.io/alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG HAPROXY_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 # install packages
 RUN \
@@ -22,7 +18,6 @@ RUN \
   fi && \
   apk add --no-cache \
     haproxy==${HAPROXY_VERSION} && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   apk del --no-cache \
     curl && \
   rm -rf \

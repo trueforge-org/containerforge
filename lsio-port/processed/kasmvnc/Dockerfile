@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM node:12-buster AS wwwstage
 
@@ -233,11 +232,8 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG KASMBINS_RELEASE="1.15.0"
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 LABEL "com.kasmweb.image"="true"
 
 # env

@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:edge as buildstage
 
@@ -46,10 +45,7 @@ RUN \
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="aptalca"
 
 ENV \
   HOME="/config" \
@@ -61,7 +57,6 @@ RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     openssl && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 COPY --from=buildstage /app/cells /app/
 
