@@ -39,6 +39,20 @@ for processed in "$PROCESSED_DIR"/*; do
         fi
     fi
 
+    if [[ -f "$container_test.go" ]]; then
+      port=""
+      if grep -q "EXPOSE" "$file"; then
+          port=$(grep "EXPOSE" "$file" | grep -o '[0-9]\+' | head -n1)
+          if sed --version >/dev/null 2>&1; then
+            # GNU sed
+            sed -i "s/TEMPLATEPORT/$port/g" "$docker_bake_file"
+           else
+            # macOS / BSD sed
+            sed -i '' "s/TEMPLATEPORT/$port/g" "$docker_bake_file"
+           fi
+      fi
+
+    fi
 
 rm -rf $processed/Dockerfile.riscv64 && echo "[CLEANUP]: removed Dockerfile.riscv64" || true
 
