@@ -35,7 +35,7 @@ RUN \
     /var/tmp/*
 
 # add local files
-COPY root/ /
+COPY ./root/ /
 
 # Volumes and Ports
 WORKDIR /usr/lib/unifi

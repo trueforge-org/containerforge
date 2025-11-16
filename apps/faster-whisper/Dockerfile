@@ -28,7 +28,7 @@ RUN \
     /var/lib/apt/lists/* \
     /tmp/*
 
-COPY root/ /
+COPY ./root/ /
 
 VOLUME /config
 
