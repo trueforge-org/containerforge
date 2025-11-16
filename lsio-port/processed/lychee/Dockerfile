@@ -5,7 +5,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG LYCHEE_VERSION
 
 RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bin/cosign \
     --mount=type=bind,source=/lychee.pub,target=/config/lychee.pub \
@@ -38,16 +37,16 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
   echo "**** install lychee ****" && \
-  if [ -z "${LYCHEE_VERSION}" ]; then \
-    LYCHEE_VERSION=$(curl -sX GET "https://api.github.com/repos/LycheeOrg/Lychee/releases/latest" \
+  if [ -z "v${VERSION}" ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/LycheeOrg/Lychee/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/lychee.zip -L \
-    "https://github.com/LycheeOrg/Lychee/releases/download/${LYCHEE_VERSION}/Lychee.zip" && \
+    "https://github.com/LycheeOrg/Lychee/releases/download/v${VERSION}/Lychee.zip" && \
   curl -o \
     /tmp/lychee.zip.sigstore.json -L \
-    "https://github.com/LycheeOrg/Lychee/releases/download/${LYCHEE_VERSION}/Lychee.zip.sigstore.json" && \
+    "https://github.com/LycheeOrg/Lychee/releases/download/v${VERSION}/Lychee.zip.sigstore.json" && \
   cosign verify-blob --key /config/lychee.pub --bundle /tmp/lychee.zip.sigstore.json /tmp/lychee.zip && \
   unzip -q /tmp/lychee.zip -d /app && \
   mv /app/Lychee /app/www && \

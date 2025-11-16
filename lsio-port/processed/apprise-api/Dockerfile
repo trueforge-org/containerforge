@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG APPRISE_TAG
 
 ENV APPRISE_CONFIG_DIR=/config \
   APPRISE_ATTACH_DIR=/attachments \
@@ -22,14 +21,14 @@ RUN \
     python3 \
     uwsgi \
     uwsgi-python && \
-  if [ -z ${APPRISE_TAG+x} ]; then \
-    APPRISE_TAG=$(curl -s https://api.github.com/repos/caronc/apprise-api/tags \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -s https://api.github.com/repos/caronc/apprise-api/tags \
       | jq -r ". | .[0].name"); \
   fi && \
   mkdir -p /app/apprise-api && \
   curl -o \
     /tmp/apprise-api.tar.gz -L \
-    "https://github.com/caronc/apprise-api/archive/${APPRISE_TAG}.tar.gz" && \
+    "https://github.com/caronc/apprise-api/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/apprise-api.tar.gz -C \
     /app/apprise-api/ --strip-components=1 && \

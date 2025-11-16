@@ -2,7 +2,6 @@ FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 
 # set version label
 ARG VERSION
-ARG FREETUBE_VERSION
 
 # title
 ENV TITLE=FreeTube
@@ -16,11 +15,11 @@ RUN \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     jq && \
-  if [ -z ${FREETUBE_VERSION+x} ]; then \
-    FREETUBE_VERSION=$(curl -sL "https://api.github.com/repos/FreeTubeApp/FreeTube/releases" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "https://api.github.com/repos/FreeTubeApp/FreeTube/releases" \
       | jq -r 'map(select(.prerelease)) | first | .id'); \
   fi && \
-  URL=$(curl -sL "https://api.github.com/repos/FreeTubeApp/FreeTube/releases/${FREETUBE_VERSION}" \
+  URL=$(curl -sL "https://api.github.com/repos/FreeTubeApp/FreeTube/releases/${VERSION}" \
     |jq -r '.assets[]|select(.name|endswith("$TARGETARCH.deb")).browser_download_url') && \
   curl -o \
     /tmp/freetube.deb -L \

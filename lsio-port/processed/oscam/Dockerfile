@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG OSCAM_VERSION
 
 ENV \
   MAKEFLAGS="-j4"
@@ -26,13 +25,13 @@ RUN \
     pcsc-lite \
     pcsc-lite-libs && \
   echo "**** compile oscam ****" && \
-  if [ -z ${OSCAM_VERSION+x} ]; then \
-    OSCAM_VERSION=$(curl -s https://git.streamboard.tv/api/v4/projects/11/repository/tags | jq -r '.[0].name'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -s https://git.streamboard.tv/api/v4/projects/11/repository/tags | jq -r '.[0].name'); \
   fi && \
   mkdir -p /tmp/oscam && \
   curl -o \
     /tmp/oscam.tar.gz -L \
-    "https://git.streamboard.tv/common/oscam/-/archive/${OSCAM_VERSION}/oscam-${OSCAM_VERSION}.tar.gz" && \
+    "https://git.streamboard.tv/common/oscam/-/archive/${VERSION}/oscam-${VERSION}.tar.gz" && \
   tar xf \
     /tmp/oscam.tar.gz -C \
     /tmp/oscam --strip-components=1 && \

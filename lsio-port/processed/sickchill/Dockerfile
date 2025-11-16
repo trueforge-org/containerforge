@@ -1,11 +1,10 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG SICKCHILL_VERSION
 
 # set python to use utf-8 rather than ascii
 ENV PYTHONIOENCODING="UTF-8"
@@ -27,8 +26,8 @@ RUN \
     libxslt \
     python3 && \
   echo "**** install sickchill ****" && \
-  if [ -z ${SICKCHILL_VERSION+x} ]; then \
-    SICKCHILL_VERSION=$(curl -sL  https://pypi.python.org/pypi/sickchill/json |jq -r '. | .info.version'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL  https://pypi.python.org/pypi/sickchill/json |jq -r '. | .info.version'); \
   fi && \
   python3 -m venv /lsiopy && \
   pip install -U --no-cache-dir \
@@ -37,7 +36,7 @@ RUN \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
     certifi \
-    sickchill=="${SICKCHILL_VERSION}" && \
+    sickchill=="${VERSION}" && \
   echo "**** clean up ****" && \
   apk del --purge \
     build-dependencies && \

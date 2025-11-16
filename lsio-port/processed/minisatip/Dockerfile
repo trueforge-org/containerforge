@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG MINISATIP_VERSION
 
 ENV \
   DEBIAN_FRONTEND="noninteractive" \
@@ -22,15 +21,15 @@ RUN \
     openssl \
     perl && \
   echo "***** compile satip ****" && \
-  if [ -z ${MINISATIP_VERSION+x} ]; then \
-    MINISATIP_VERSION=$(curl -sX GET https://api.github.com/repos/catalinii/minisatip/releases/latest \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/catalinii/minisatip/releases/latest \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p \
     /app/satip && \
   curl -o \
     /tmp/satip.tar.gz -L \
-    "https://github.com/catalinii/minisatip/archive/${MINISATIP_VERSION}.tar.gz" && \
+    "https://github.com/catalinii/minisatip/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/satip.tar.gz -C \
     /app/satip --strip-components=1 && \

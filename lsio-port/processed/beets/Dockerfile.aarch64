@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.21
 
 # set version label
 ARG VERSION
-ARG BEETS_VERSION
 
 RUN \
   echo "**** install build packages ****" && \
@@ -65,8 +64,8 @@ RUN \
   make -f Makefile.linux && \
   cp -p mp3val /usr/bin && \
   echo "**** install pip packages ****" && \
-  if [ -z ${BEETS_VERSION+x} ]; then \
-    BEETS_VERSION=$(curl -sL  https://pypi.python.org/pypi/beets/json |jq -r '. | .info.version'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL  https://pypi.python.org/pypi/beets/json |jq -r '. | .info.version'); \
   fi && \
   python3 -m venv /lsiopy && \
   pip install -U --no-cache-dir \
@@ -74,7 +73,7 @@ RUN \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
     beautifulsoup4 \
-    beets==${BEETS_VERSION} \
+    beets==${VERSION} \
     beets-extrafiles \
     beetcamp \
     python3-discogs-client \

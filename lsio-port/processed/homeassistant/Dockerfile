@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG HASS_RELEASE
 
 ENV \
   S6_SERVICES_GRACETIME=240000 \
@@ -83,13 +82,13 @@ RUN \
   echo "**** Retrieve versions ****" && \
   mkdir -p \
     /tmp/core && \
-  if [ -z ${HASS_RELEASE+x} ]; then \
-    HASS_RELEASE=$(curl -sX GET https://api.github.com/repos/home-assistant/core/releases/latest \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://api.github.com/repos/home-assistant/core/releases/latest \
       | jq -r .tag_name); \
   fi && \
   curl -o \
     /tmp/core.tar.gz -L \
-    "https://github.com/home-assistant/core/archive/${HASS_RELEASE}.tar.gz" && \
+    "https://github.com/home-assistant/core/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/core.tar.gz -C \
     /tmp/core --strip-components=1 && \
@@ -136,8 +135,8 @@ RUN \
     | grep 'PIP_VERSION: ' \
     | sed 's|.*PIP_VERSION: ||' \
     | sed 's|"||g') && \
-  HA_UV_VERSION=$(curl -fsL "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${HASS_RELEASE}/Dockerfile" | grep 'install uv==' | sed 's|RUN pip3 install uv==||') && \
-  HA_GO2RTC_VERSION=$(curl -fsL "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${HASS_RELEASE}/Dockerfile" | grep 'AlexxIT/go2rtc/releases/download' | sed -r 's|^.*AlexxIT/go2rtc/releases/download/(.*)/go2rtc_linux.*$|\1|') && \
+  HA_UV_VERSION=$(curl -fsL "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/Dockerfile" | grep 'install uv==' | sed 's|RUN pip3 install uv==||') && \
+  HA_GO2RTC_VERSION=$(curl -fsL "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/Dockerfile" | grep 'AlexxIT/go2rtc/releases/download' | sed -r 's|^.*AlexxIT/go2rtc/releases/download/(.*)/go2rtc_linux.*$|\1|') && \
   curl -o \
     /bin/go2rtc -fL \
     "https://github.com/AlexxIT/go2rtc/releases/download/${HA_GO2RTC_VERSION}/go2rtc_linux_$TARGETARCH" && \
@@ -234,7 +233,7 @@ RUN \
       isal \
       pycups==${PYCUPS_VER} && \
   uv pip install \
-    homeassistant==${HASS_RELEASE} && \
+    homeassistant==${VERSION} && \
   for cleanfiles in *.pyc *.pyo; do \
     find /usr/local/lib/python3.*  -iname "${cleanfiles}" -exec rm -f '{}' + ; \
   done && \

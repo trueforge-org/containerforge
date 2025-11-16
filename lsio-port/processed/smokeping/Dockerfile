@@ -1,14 +1,13 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG SMOKEPING_VERSION
 
 RUN \
   echo "**** install packages ****" && \
-  if [ -z ${SMOKEPING_VERSION+x} ]; then \
-    SMOKEPING_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:smokeping$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache --virtual=build-dependencies \
@@ -30,7 +29,7 @@ RUN \
     perl-json-maybexs \
     perl-lwp-protocol-https \
     perl-path-tiny \
-    smokeping==${SMOKEPING_VERSION} \
+    smokeping==${VERSION} \
     ssmtp \
     sudo \
     tcptraceroute && \

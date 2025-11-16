@@ -1,5 +1,5 @@
 FROM lscr.io/linuxserver/xvfb:debianbookworm AS xvfb
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS frontend
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS frontend
 
 RUN \
   echo "**** install build packages ****" && \
@@ -40,7 +40,7 @@ RUN \
   done
 
 # Runtime stage
-FROM ghcr.io/linuxserver/baseimage-debian:bookworm
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

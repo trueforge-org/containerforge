@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG UNIFI_VERSION
 
 # environment settings
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -17,13 +16,13 @@ RUN \
     openjdk-17-jre-headless \
     unzip && \
   echo "**** install unifi ****" && \
-  if [ -z ${UNIFI_VERSION+x} ]; then \
-    UNIFI_VERSION=$(curl -sX GET "https://fw-update.ubnt.com/api/firmware-latest?filter=eq~~product~~unifi-controller&filter=eq~~platform~~unix&filter=eq~~channel~~release" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://fw-update.ubnt.com/api/firmware-latest?filter=eq~~product~~unifi-controller&filter=eq~~platform~~unix&filter=eq~~channel~~release" \
     | jq -r '._embedded.firmware[].version' \
     | awk -F '+' '{print $1}'); \
   fi && \
   UNIFI_DOWNLOAD=$(curl -sX GET "https://fw-update.ubnt.com/api/firmware?filter=eq~~product~~unifi-controller&filter=eq~~platform~~unix&filter=eq~~channel~~release&sort=-version" \
-  | jq -r "._embedded.firmware[] | select(.version | test(\"${UNIFI_VERSION}\")) | ._links.data.href") && \
+  | jq -r "._embedded.firmware[] | select(.version | test(\"v${VERSION}\")) | ._links.data.href") && \
   mkdir -p /app && \
   curl -o \
   /tmp/unifi.zip -L \

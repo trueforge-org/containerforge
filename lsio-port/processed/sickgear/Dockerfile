@@ -1,11 +1,10 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG SICKGEAR_RELEASE
 
 # set python to use utf-8 rather than ascii.
 ENV PYTHONIOENCODING="UTF-8"
@@ -20,13 +19,13 @@ RUN \
   echo "**** install app ****" && \
   mkdir -p \
     /app/sickgear/ && \
-  if [ -z ${SICKGEAR_RELEASE+x} ]; then \
-    SICKGEAR_RELEASE=$(curl -sX GET "https://api.github.com/repos/sickgear/sickgear/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/sickgear/sickgear/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/sickgear.tar.gz -L \
-    "https://github.com/sickgear/sickgear/archive/${SICKGEAR_RELEASE}.tar.gz" && \
+    "https://github.com/sickgear/sickgear/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/sickgear.tar.gz -C \
     /app/sickgear/ --strip-components=1 && \

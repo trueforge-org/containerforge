@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.14 as migrationbuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4as migrationbuilder
 
 RUN \
   echo "**** install build packages ****" && \
@@ -19,7 +19,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19 as binbuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4as binbuilder
 
 RUN \
   echo "**** install build packages ****" && \
@@ -60,9 +60,8 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19 as nodebuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4as nodebuilder
 
-ARG EMULATORJS_RELEASE
 
 RUN \
   echo "**** install build packages ****" && \
@@ -75,13 +74,13 @@ RUN \
 RUN \
   echo "**** grab emulatorjs ****" && \
   mkdir /emulatorjs && \
-  if [ -z ${EMULATORJS_RELEASE+x} ]; then \
-    EMULATORJS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/emulatorjs/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/linuxserver/emulatorjs/releases/latest" \
       | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/emulatorjs.tar.gz -L \
-    "https://github.com/linuxserver/emulatorjs/archive/${EMULATORJS_RELEASE}.tar.gz" && \
+    "https://github.com/linuxserver/emulatorjs/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/emulatorjs.tar.gz -C \
     /emulatorjs/ --strip-components=1
@@ -111,7 +110,7 @@ RUN \
   npm install
 
 # runtime stage
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

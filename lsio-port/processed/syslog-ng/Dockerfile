@@ -1,20 +1,19 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 ARG VERSION
-ARG SYSLOG_NG_VERSION
 
 RUN \
   echo "**** install packages ****" && \
-  if [ -z ${SYSLOG_NG_VERSION+x} ]; then \
-    SYSLOG_NG_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:syslog-ng$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add -U --upgrade --no-cache \
     grep \
     libdbi-drivers \
     paho-mqtt-c \
-    syslog-ng==${SYSLOG_NG_VERSION} \
+    syslog-ng==${VERSION} \
     syslog-ng-add-contextual-data \
     syslog-ng-amqp \
     syslog-ng-graphite \

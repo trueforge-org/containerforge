@@ -2,7 +2,6 @@
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
 ARG VERSION
-ARG MONICA_VERSION
 ARG MONICA_RELEASE_GPG_KEY="BDAB0D0D36A00466A2964E85DE15667131EA6018"
 ENV MEMORY_LIMIT 512M
 
@@ -54,16 +53,16 @@ RUN \
   } > /etc/php83/conf.d/memory-limit.ini && \
   echo "**** install monica ****" && \
   mkdir -p /app/www && \
-  if [ -z ${MONICA_VERSION+x} ]; then \
-    MONICA_VERSION=$(curl -sX GET "https://api.github.com/repos/monicahq/monica/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/monicahq/monica/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -s -o \
     /tmp/monica.tar.bz2 -L \
-    "https://github.com/monicahq/monica/releases/download/${MONICA_VERSION}/monica-${MONICA_VERSION}.tar.bz2" && \
+    "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2" && \
   curl -s -o \
     "/tmp/monica.tar.bz2.asc" -L \
-    "https://github.com/monicahq/monica/releases/download/${MONICA_VERSION}/monica-${MONICA_VERSION}.tar.bz2.asc" && \
+    "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc" && \
   export GNUPGHOME="$(mktemp -d)" && \
   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$MONICA_RELEASE_GPG_KEY" \
       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$MONICA_RELEASE_GPG_KEY" \

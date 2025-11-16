@@ -1,19 +1,18 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG NGIRCD_RELEASE
 
 RUN \
   echo "**** install packages ****" && \
-  if [ -z ${NGIRCD_RELEASE+x} ]; then \
-    NGIRCD_RELEASE=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:ngircd$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache \
-    ngircd==${NGIRCD_RELEASE} \
-    ngircd-doc==${NGIRCD_RELEASE} && \
+    ngircd==${VERSION} \
+    ngircd-doc==${VERSION} && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

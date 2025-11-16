@@ -1,8 +1,7 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG HABRIDGE_RELEASE
 
 # install packages
 RUN \
@@ -13,15 +12,15 @@ RUN \
     openjdk8-jre \
     sqlite-libs && \
   echo "**** install ha-bridge ****" && \
-  if [ -z ${HABRIDGE_RELEASE+x} ]; then \
-    HABRIDGE_RELEASE=$(curl -sL "https://api.github.com/repos/bwssytems/ha-bridge/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL "https://api.github.com/repos/bwssytems/ha-bridge/releases/latest" \
     | jq -r '.tag_name'); \
   fi && \
   mkdir -p \
     /app && \
   curl -o \
     /app/ha-bridge.jar -L \
-    "https://github.com/bwssytems/ha-bridge/releases/download/${HABRIDGE_RELEASE}/ha-bridge-${HABRIDGE_RELEASE:1}.jar" && \
+    "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar" && \
 
 # copy local files
 COPY root/ /

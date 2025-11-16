@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG SYNCLOUNGE_RELEASE
 
 # environment settings
 ENV HOME="/app"
@@ -18,11 +17,11 @@ RUN \
     git \
     npm && \
   echo "**** install SyncLounge ****" && \
-  if [ -z ${SYNCLOUNGE_RELEASE+x} ]; then \
-    SYNCLOUNGE_RELEASE=$(curl -sX GET "https://registry.npmjs.org/synclounge/" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://registry.npmjs.org/synclounge/" \
       | jq -r '."dist-tags".latest'); \
   fi && \
-  npm install -g --omit=dev synclounge@"$SYNCLOUNGE_RELEASE" && \
+  npm install -g --omit=dev synclounge@"$VERSION" && \
   npm prune --omit=dev && \
   echo "**** cleanup ****" && \
   apk del --purge \

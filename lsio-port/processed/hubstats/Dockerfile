@@ -1,27 +1,21 @@
 FROM lsiobase/ubuntu:xenial
 
 # set version label
-ARG VERSION
 
 # copy app files
 COPY app/ /opt/dockerhub-stats/
 
 # environment settings
-ARG DEBIAN_FRONTEND="noninteractive"
 
 # package versions
-ARG GRAFANA_VER="4.1.2-1486989747"
-ARG INFLUX_VER="1.2.0"
 
 # packages as variables
-ARG BUILD_PACKAGES="\
 	g++ \
 	gcc \
 	git \
 	make \
 	ruby-dev \
 	wget"
-ARG RUNTIME_PACKAGES="\
 	cron \
 	libfontconfig1 \
 	libfreetype6 \

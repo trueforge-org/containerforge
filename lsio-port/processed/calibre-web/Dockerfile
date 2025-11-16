@@ -1,11 +1,10 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG CALIBREWEB_RELEASE
 
 ENV \
   QTWEBENGINE_CHROMIUM_FLAGS="--no-sandbox"
@@ -33,13 +32,13 @@ RUN \
     sqlite3 \
     xdg-utils && \
   echo "**** install calibre-web ****" && \
-  if [ -z ${CALIBREWEB_RELEASE+x} ]; then \
-    CALIBREWEB_RELEASE=$(curl -sX GET "https://api.github.com/repos/janeczku/calibre-web/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/janeczku/calibre-web/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/calibre-web.tar.gz -L \
-    https://github.com/janeczku/calibre-web/archive/${CALIBREWEB_RELEASE}.tar.gz && \
+    https://github.com/janeczku/calibre-web/archive/${VERSION}.tar.gz && \
   mkdir -p \
     /app/calibre-web && \
   tar xf \

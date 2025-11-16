@@ -3,13 +3,12 @@ FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
 FROM ghcr.io/by275/libtorrent:2-alpine3.22 AS libtorrent
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 COPY --from=ghcr.io/astral-sh/uv:0.9.8 /uv /uvx /bin/
 
 # set version label
 ARG VERSION
-ARG FLEXGET_VERSION
 
 # environment settings
 ENV HOME="/config" \
@@ -33,15 +32,15 @@ RUN \
     nodejs \
     python3 && \
   echo "**** install flexget ****" && \
-  if [ -z ${FLEXGET_VERSION+x} ]; then \
-    FLEXGET_VERSION=$(curl -s https://api.github.com/repos/flexget/flexget/releases/latest \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -s https://api.github.com/repos/flexget/flexget/releases/latest \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p /run/flexget-temp /data && \
   mkdir -p /app/flexget && \
   curl -o \
     /tmp/flexget.tar.gz -L \
-    "https://github.com/Flexget/Flexget/archive/refs/tags/${FLEXGET_VERSION}.tar.gz" && \
+    "https://github.com/Flexget/Flexget/archive/refs/tags/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/flexget.tar.gz -C \
     /app/flexget --strip-components=1 && \

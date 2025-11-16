@@ -2,11 +2,8 @@ FROM scratch
 ADD rootfs.tar.xz /
 
 # set version label
-ARG VERSION
 
 # build variables
-ARG GOPATH=/tmp/golang
-ARG MANIFEST_DIR=$GOPATH/src/github.com/estesp/manifest-tool
 # install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \

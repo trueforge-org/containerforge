@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS builder
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS builder
 
 COPY /patches /patches
 ENV PATCH_VERSION=21 \

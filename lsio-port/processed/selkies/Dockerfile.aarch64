@@ -1,5 +1,5 @@
 FROM lscr.io/linuxserver/xvfb:$TARGETARCHv8-debianbookworm AS xvfb
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.22 AS frontend
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.22 AS frontend
 
 RUN \
   echo "**** install build packages ****" && \
@@ -40,7 +40,7 @@ RUN \
   done
 
 # Runtime stage
-FROM ghcr.io/linuxserver/baseimage-debian:$TARGETARCHv8-bookworm
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-bookworm
 
 # set version label
 ARG VERSION

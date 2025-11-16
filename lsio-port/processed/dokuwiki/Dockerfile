@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG DOKUWIKI_RELEASE
 
 RUN \
   echo "**** install build packages ****" && \
@@ -22,14 +21,14 @@ RUN \
     php84-pecl-imagick \
     php84-sqlite3 && \
   echo "**** install dokuwiki ****" && \
-  if [ -z ${DOKUWIKI_RELEASE+x} ]; then \
-    DOKUWIKI_RELEASE=$(wget https://download.dokuwiki.org/rss -O - 2>/dev/null | \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(wget https://download.dokuwiki.org/rss -O - 2>/dev/null | \
       xmlstarlet sel -T -t -v '/rss/channel/item[1]/link' | \
       cut -d'-' -f2-4 | cut -d'.' -f1 ); \
   fi && \
   curl -o \
   /tmp/dokuwiki.tar.gz -L \
-    "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-${DOKUWIKI_RELEASE}.tgz" && \
+    "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-${VERSION}.tgz" && \
   mkdir -p \
     /app/www/public && \
   tar xf \

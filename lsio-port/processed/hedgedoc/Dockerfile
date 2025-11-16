@@ -1,8 +1,7 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG HEDGEDOC_RELEASE
 
 # environment settings
 ENV NODE_ENV=production \
@@ -26,13 +25,13 @@ RUN \
     sqlite-dev \
     yarn && \
   echo "**** install hedgedoc ****" && \
-  if [ -z ${HEDGEDOC_RELEASE+x} ]; then \
-    HEDGEDOC_RELEASE=$(curl -sX GET "https://api.github.com/repos/hedgedoc/hedgedoc/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/hedgedoc/hedgedoc/releases/latest" \
     | jq -r '.tag_name'); \
   fi && \
   curl -o \
     /tmp/hedgedoc.tar.gz -L \
-    "https://github.com/hedgedoc/hedgedoc/releases/download/${HEDGEDOC_RELEASE}/hedgedoc-${HEDGEDOC_RELEASE}.tar.gz" && \
+    "https://github.com/hedgedoc/hedgedoc/releases/download/${VERSION}/hedgedoc-${VERSION}.tar.gz" && \
   mkdir -p \
     /app/hedgedoc && \
   tar xf /tmp/hedgedoc.tar.gz -C \

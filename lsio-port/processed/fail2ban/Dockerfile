@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

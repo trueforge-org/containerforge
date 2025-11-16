@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG KIMAI_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -23,13 +22,13 @@ RUN \
   echo "**** install kimai ****" && \
   mkdir -p\
     /app/www && \
-  if [ -z ${KIMAI_RELEASE+x} ]; then \
-    KIMAI_RELEASE=$(curl -sX GET "https://api.github.com/repos/kimai/kimai/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/kimai/kimai/releases/latest" \
       | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/kimai.tar.gz -L \
-    "https://github.com/kimai/kimai/archive/refs/tags/${KIMAI_RELEASE}.tar.gz" && \
+    "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/kimai.tar.gz -C \
     /app/www --strip-components=1 && \

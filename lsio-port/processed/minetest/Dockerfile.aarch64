@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:$TARGETARCHv8-3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-3.20
 
 # set version label
 ARG VERSION
-ARG MINETEST_RELEASE
 
 # environment variables
 ENV HOME="/config" \
@@ -98,15 +97,15 @@ RUN \
   make -j 4 && \
   make install && \
   echo "**** compile minetestserver ****" && \
-  if [ -z ${MINETEST_RELEASE+x} ]; then \
-    MINETEST_RELEASE=$(curl -sX GET "https://api.github.com/repos/minetest/minetest/releases" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/minetest/minetest/releases" \
       | jq -r 'first(.[] | select(.tag_name | contains("android") | not)) | .tag_name'); \
   fi && \
   mkdir -p \
     /tmp/minetest && \
   curl -o \
     /tmp/minetest-src.tar.gz -L \
-    "https://github.com/minetest/minetest/archive/${MINETEST_RELEASE}.tar.gz" && \
+    "https://github.com/minetest/minetest/archive/${VERSION}.tar.gz" && \
   tar xf \
   /tmp/minetest-src.tar.gz -C \
     /tmp/minetest --strip-components=1 && \

@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG THELOUNGE_VERSION
 
 # environment settings
 ENV THELOUNGE_HOME="/config"
@@ -19,14 +18,14 @@ RUN \
   apk add --no-cache \
     yarn && \
   echo "**** download thelounge ****" && \
-  if [ -z ${THELOUNGE_VERSION+x} ]; then \
-    THELOUNGE_VERSION=$(curl -sX GET "https://api.github.com/repos/thelounge/thelounge/releases/latest" | jq -r '. | .tag_name'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/thelounge/thelounge/releases/latest" | jq -r '. | .tag_name'); \
   fi && \
   mkdir -p \
     /app/thelounge && \
   curl -o \
     /tmp/thelounge.tar.gz -L \
-    "https://github.com/thelounge/thelounge/archive/refs/tags/${THELOUNGE_VERSION}.tar.gz" && \
+    "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/thelounge.tar.gz -C \
     /app/thelounge --strip-components=1 && \

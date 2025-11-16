@@ -1,8 +1,7 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
 
 # build variables
-ARG SYNCTHING_RELEASE
 
 RUN \
  echo "**** install build packages ****" && \
@@ -12,15 +11,15 @@ RUN \
 
 RUN \
   echo "**** fetch source code ****" && \
-  if [ -z ${SYNCTHING_RELEASE+x} ]; then \
-    SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p \
     /tmp/sync && \
   curl -o \
   /tmp/syncthing-src.tar.gz -L \
-    "https://github.com/syncthing/syncthing/archive/${SYNCTHING_RELEASE}.tar.gz" && \
+    "https://github.com/syncthing/syncthing/archive/v${VERSION}.tar.gz" && \
   tar xf \
   /tmp/syncthing-src.tar.gz -C \
     /tmp/sync --strip-components=1 && \
@@ -29,11 +28,11 @@ RUN \
   go clean -modcache && \
   CGO_ENABLED=0 go run build.go \
     -no-upgrade \
-    -version=${SYNCTHING_RELEASE} \
+    -version=v${VERSION} \
     build syncthing
 
 ############## runtime stage ##############
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

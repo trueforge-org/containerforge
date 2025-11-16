@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
@@ -91,15 +91,15 @@ RUN \
   cmake --build build && \
   cmake --install build && \
   echo "**** compile luanti ****" && \
-  if [ -z ${LUANTI_RELEASE+x} ]; then \
-    LUANTI_RELEASE=$(curl -sX GET "https://api.github.com/repos/luanti-org/luanti/releases" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/luanti-org/luanti/releases" \
       | jq -r 'first(.[] | select(.tag_name | contains("android") | not)) | .tag_name'); \
   fi && \
   mkdir -p \
     /tmp/luanti && \
   curl -o \
     /tmp/luanti-src.tar.gz -L \
-    "https://github.com/luanti-org/luanti/archive/${LUANTI_RELEASE}.tar.gz" && \
+    "https://github.com/luanti-org/luanti/archive/${VERSION}.tar.gz" && \
   tar xf /tmp/luanti-src.tar.gz -C \
     /tmp/luanti --strip-components=1 && \
   sed -i 's/# enable_ipv6 = true/enable_ipv6 = true/' /tmp/luanti/minetest.conf.example && \

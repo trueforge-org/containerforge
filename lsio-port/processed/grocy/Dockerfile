@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
 # set version label
 ARG VERSION
-ARG GROCY_RELEASE
 
 RUN \
   echo "**** install build packages ****" && \
@@ -24,13 +23,13 @@ RUN \
   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && \
   echo "**** install grocy ****" && \
   mkdir -p /app/www && \
-  if [ -z ${GROCY_RELEASE+x} ]; then \
-    GROCY_RELEASE=$(curl -sX GET "https://api.github.com/repos/grocy/grocy/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/grocy/grocy/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/grocy.tar.gz -L \
-    "https://github.com/grocy/grocy/archive/${GROCY_RELEASE}.tar.gz" && \
+    "https://github.com/grocy/grocy/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/grocy.tar.gz -C \
     /app/www/ --strip-components=1 && \

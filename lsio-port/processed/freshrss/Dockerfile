@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG FRESHRSS_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -25,15 +24,15 @@ RUN \
   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
   echo "**** install app ****" && \
-  if [ -z ${FRESHRSS_RELEASE+x} ]; then \
-    FRESHRSS_RELEASE=$(curl -sX GET "https://api.github.com/repos/FreshRSS/FreshRSS/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/FreshRSS/FreshRSS/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   mkdir -p \
     /app/www && \
   curl -o \
     /tmp/freshrss.tar.gz -L \
-    "https://github.com/FreshRSS/FreshRSS/archive/${FRESHRSS_RELEASE}.tar.gz" && \
+    "https://github.com/FreshRSS/FreshRSS/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/freshrss.tar.gz -C \
     /app/www --strip-components=1 && \

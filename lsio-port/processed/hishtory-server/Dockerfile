@@ -1,19 +1,18 @@
 
 FROM golang:1.23-alpine AS builder
 
-ARG HISHTORY_RELEASE
 
 RUN \
   apk add --no-cache \
     build-base \
     curl && \
-  if [ -z ${HISHTORY_RELEASE+x} ]; then \
-    HISHTORY_RELEASE=$(curl -sX GET "https://api.github.com/repos/ddworken/hishtory/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/ddworken/hishtory/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -s -o \
     /tmp/hishtory.tar.gz -L \
-    "https://github.com/ddworken/hishtory/archive/${HISHTORY_RELEASE}.tar.gz" && \
+    "https://github.com/ddworken/hishtory/archive/v${VERSION}.tar.gz" && \
   mkdir -p /build/hishtory && \
   tar xf \
     /tmp/hishtory.tar.gz -C \
@@ -22,11 +21,10 @@ RUN \
   unset GOPATH; go mod download && \
   unset GOPATH; go build -o /server -ldflags "-X main.ReleaseVersion=v0.`cat VERSION`" backend/server/server.go
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG HISHTORY_RELEASE
 
 RUN \
   apk add --no-cache \

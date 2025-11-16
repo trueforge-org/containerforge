@@ -1,5 +1,5 @@
 # buildstage
-FROM ghcr.io/linuxserver/baseimage-debian:bookworm as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4as buildstage
 
 RUN \
   echo "**** install build deps ****" && \

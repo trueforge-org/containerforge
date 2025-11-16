@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG FEED2TOOT_VERSION
 
 # environment settings
 ENV PYTHONIOENCODING=utf-8 \
@@ -14,15 +13,15 @@ RUN \
   apk add  -U --update --no-cache \
     python3 && \
   echo "**** install feed2toot ****" && \  
-  if [ -z ${FEED2TOOT_VERSION+x} ]; then \
-    FEED2TOOT_VERSION=$(curl -sL  https://pypi.python.org/pypi/feed2toot/json |jq -r '. | .info.version'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sL  https://pypi.python.org/pypi/feed2toot/json |jq -r '. | .info.version'); \
   fi && \
   python3 -m venv /lsiopy && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ \
-    feed2toot=="${FEED2TOOT_VERSION}" && \
+    feed2toot=="${VERSION}" && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

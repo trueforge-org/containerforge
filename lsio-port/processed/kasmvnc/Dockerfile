@@ -26,7 +26,7 @@ RUN \
   cp index.html vnc.html && \
   mkdir Downloads
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
 
 ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
 
@@ -191,7 +191,7 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21 AS nodebuilder
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS nodebuilder
 ARG KCLIENT_RELEASE
 
 RUN \
@@ -229,7 +229,7 @@ RUN \
   rm -f package-lock.json
 
 # runtime stage
-FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

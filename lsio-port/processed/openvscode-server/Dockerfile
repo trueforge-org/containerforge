@@ -1,8 +1,7 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG CODE_RELEASE
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -18,15 +17,15 @@ RUN \
     net-tools \
     sudo && \
   echo "**** install openvscode-server ****" && \
-  if [ -z ${CODE_RELEASE+x} ]; then \
-    CODE_RELEASE=$(curl -sX GET "https://api.github.com/repos/gitpod-io/openvscode-server/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/gitpod-io/openvscode-server/releases/latest" \
       | awk '/tag_name/{print $4;exit}' FS='[""]' \
       | sed 's|^openvscode-server-v||'); \
   fi && \
   mkdir -p /app/openvscode-server && \
   curl -o \
     /tmp/openvscode-server.tar.gz -L \
-    "https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v${CODE_RELEASE}/openvscode-server-v${CODE_RELEASE}-linux-$TARGETARCH.tar.gz" && \
+    "https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v${VERSION}/openvscode-server-v${VERSION}-linux-$TARGETARCH.tar.gz" && \
   tar xf \
     /tmp/openvscode-server.tar.gz -C \
     /app/openvscode-server/ --strip-components=1 && \

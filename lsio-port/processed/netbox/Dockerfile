@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG NETBOX_RELEASE
 
 RUN \
   echo "**** install build packages ****" && \
@@ -29,13 +28,13 @@ RUN \
     uwsgi-python && \
   echo "**** install netbox ****" && \
   mkdir -p /app/netbox && \
-  if [ -z ${NETBOX_RELEASE+x} ]; then \
-    NETBOX_RELEASE=$(curl -sX GET "https://api.github.com/repos/netbox-community/netbox/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/netbox-community/netbox/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
   /tmp/netbox.tar.gz -L \
-    "https://github.com/netbox-community/netbox/archive/${NETBOX_RELEASE}.tar.gz" && \
+    "https://github.com/netbox-community/netbox/archive/v${VERSION}.tar.gz" && \
   tar xf \
   /tmp/netbox.tar.gz -C \
     /app/netbox/ --strip-components=1 && \

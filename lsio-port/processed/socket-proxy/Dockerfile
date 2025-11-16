@@ -3,7 +3,6 @@ FROM docker.io/alpine:3.22
 
 # set version label
 ARG VERSION
-ARG HAPROXY_VERSION
 
 # install packages
 RUN \
@@ -12,12 +11,12 @@ RUN \
     alpine-release \
     curl \
     tzdata && \
-  if [ -z ${HAPROXY_VERSION+x} ]; then \
-  HAPROXY_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
+  if [ -z ${VERSION+x} ]; then \
+  VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:haproxy$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache \
-    haproxy==${HAPROXY_VERSION} && \
+    haproxy==${VERSION} && \
   apk del --no-cache \
     curl && \
   rm -rf \

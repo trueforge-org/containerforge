@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
 ARG VERSION
-ARG XBACKBONE_RELEASE
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -19,13 +18,13 @@ RUN \
     php84-tokenizer && \
   echo "**** install xbackbone ****" && \
     mkdir -p /app/www/public && \
-  if [ -z ${XBACKBONE_RELEASE+x} ]; then \
-    XBACKBONE_RELEASE=$(curl -sX GET "https://api.github.com/repos/SergiX44/XBackBone/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/SergiX44/XBackBone/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/xbackbone.zip -L \
-    "https://github.com/SergiX44/XBackBone/releases/download/${XBACKBONE_RELEASE}/release-v${XBACKBONE_RELEASE}.zip" && \
+    "https://github.com/SergiX44/XBackBone/releases/download/${VERSION}/release-v${VERSION}.zip" && \
   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ && \
   echo "**** cleanup ****" && \
   rm -rf \

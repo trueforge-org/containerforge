@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG JELLYFIN_RELEASE
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -15,8 +14,8 @@ RUN \
   echo "**** install jellyfin *****" && \
   curl -s https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | gpg --dearmor | tee /usr/share/keyrings/jellyfin.gpg >/dev/null && \
   echo 'deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/ubuntu noble main' > /etc/apt/sources.list.d/jellyfin.list && \
-  if [ -z ${JELLYFIN_RELEASE+x} ]; then \
-    JELLYFIN_RELEASE=$(curl -sX GET https://repo.jellyfin.org/ubuntu/dists/noble/main/binary-$TARGETARCH/Packages |grep -A 7 -m 1 'Package: jellyfin-server' | awk -F ': ' '/Version/{print $2;exit}'); \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET https://repo.jellyfin.org/ubuntu/dists/noble/main/binary-$TARGETARCH/Packages |grep -A 7 -m 1 'Package: jellyfin-server' | awk -F ': ' '/Version/{print $2;exit}'); \
   fi && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -25,7 +24,7 @@ RUN \
     mesa-va-drivers \
     xmlstarlet && \
   apt-get install -y --no-install-recommends \
-    jellyfin=${JELLYFIN_RELEASE} && \
+    jellyfin=${VERSION} && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

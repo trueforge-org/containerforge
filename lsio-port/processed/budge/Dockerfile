@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.20
 
 # set version label
 ARG VERSION
-ARG BUDGE_RELEASE
 
 ENV BUDGE_DATABASE=/config/budge.db \
     S6_STAGE2_HOOK="/init-hook"
@@ -20,13 +19,13 @@ RUN \
     sqlite && \
   echo "**** install budge ****" && \
   mkdir -p /app/www/public && \
-  if [ -z ${BUDGE_RELEASE+x} ]; then \
-    BUDGE_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/budge/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/linuxserver/budge/releases/latest" \
     | jq -r '.tag_name'); \
   fi && \
   curl -o \
     /tmp/budge.tar.gz -L \
-    "https://github.com/linuxserver/budge/archive/${BUDGE_RELEASE}.tar.gz" && \
+    "https://github.com/linuxserver/budge/archive/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/budge.tar.gz -C \
     /app/www/public/ --strip-components=1 && \

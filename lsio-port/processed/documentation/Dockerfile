@@ -1,11 +1,9 @@
 
 FROM ghcr.io/linuxserver/d2-builder:latest AS d2
 
-FROM ghcr.io/linuxserver/baseimage-alpine:edge
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
-ARG VERSION
-ARG D2_VERSION
 
 RUN \
   echo "**** install packages ****" && \

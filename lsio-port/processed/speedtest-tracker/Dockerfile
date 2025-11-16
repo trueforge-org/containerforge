@@ -2,7 +2,6 @@
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 ARG VERSION
-ARG SPEEDTEST_TRACKER_VERSION
 
 ENV HOME=/config
 
@@ -38,13 +37,13 @@ RUN \
   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
   echo "*** install speedtest-tracker ***" && \
-  if [ -z ${SPEEDTEST_TRACKER_VERSION+x} ]; then \
-    SPEEDTEST_TRACKER_VERSION=$(curl -sX GET "https://api.github.com/repos/alexjustesen/speedtest-tracker/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/alexjustesen/speedtest-tracker/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
     /tmp/speedtest-tracker.tar.gz -L \
-    "https://github.com/alexjustesen/speedtest-tracker/archive/${SPEEDTEST_TRACKER_VERSION}.tar.gz" && \
+    "https://github.com/alexjustesen/speedtest-tracker/archive/v${VERSION}.tar.gz" && \
   mkdir -p /app/www && \
   tar xzf \
     /tmp/speedtest-tracker.tar.gz -C \

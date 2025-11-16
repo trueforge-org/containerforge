@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.20
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION
-ARG WEBAPP_VERSION
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -15,13 +14,13 @@ RUN \
   apk add --no-cache --virtual=build-dependencies \
     npm && \
   echo "**** install WebApp ****" && \
-  if [ -z ${WEBAPP_VERSION+x} ]; then \
-    WEBAPP_VERSION=$(curl -sX GET "https://api.github.com/repos/netbootxyz/webapp/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/netbootxyz/webapp/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -o \
   /tmp/webapp.tar.gz -L \
-    "https://github.com/netbootxyz/webapp/archive/${WEBAPP_VERSION}.tar.gz" && \
+    "https://github.com/netbootxyz/webapp/archive/${VERSION}.tar.gz" && \
   tar xf \
   /tmp/webapp.tar.gz -C \
     /app/ --strip-components=1 && \

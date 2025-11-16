@@ -1,9 +1,8 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:$TARGETARCHv8-noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4$TARGETARCHv8-noble
 
 # set version label
 ARG VERSION
-ARG FOLDINGATHOME_RELEASE
 
 #Add needed nvidia environment variables for container toolkit
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"

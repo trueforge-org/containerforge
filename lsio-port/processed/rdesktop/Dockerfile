@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4AS buildstage
 
 ARG XRDP_PULSE_VERSION=v0.7
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -47,7 +47,7 @@ RUN \
   cp -ax ../xrdp_*.deb /buildout/xrdp.deb
 
 # runtime stage
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
 ARG VERSION

@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:edge
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 ARG VERSION
 
@@ -20,5 +20,5 @@ RUN \
 
 COPY root/ /
 
-EXPOSE 8000
+EXPVERSIONE 8000
 VOLUME /config

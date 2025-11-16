@@ -2,7 +2,6 @@
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 ARG VERSION
-ARG MASTODON_VERSION
 
 ENV RAILS_ENV="production" \
     NODE_ENV="production" \
@@ -38,13 +37,13 @@ RUN \
     yaml-dev && \
   echo "**** install mastodon ****" && \
   mkdir -p /app/www && \
-  if [ -z ${MASTODON_VERSION+x} ]; then \
-    MASTODON_VERSION=$(curl -sX GET "https://api.github.com/repos/mastodon/mastodon/releases/latest" \
+  if [ -z ${VERSION+x} ]; then \
+    VERSION=$(curl -sX GET "https://api.github.com/repos/mastodon/mastodon/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   curl -s -o \
     /tmp/mastodon.tar.gz -L \
-    "https://github.com/mastodon/mastodon/archive/${MASTODON_VERSION}.tar.gz" && \
+    "https://github.com/mastodon/mastodon/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/mastodon.tar.gz -C \
     /app/www/ --strip-components=1 && \
