@@ -26,7 +26,7 @@ RUN \
   mkdir -p /app/openvscode-server && \
   curl -o \
     /tmp/openvscode-server.tar.gz -L \
-    "https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v${CODE_RELEASE}/openvscode-server-v${CODE_RELEASE}-linux-x64.tar.gz" && \
+    "https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v${CODE_RELEASE}/openvscode-server-v${CODE_RELEASE}-linux-$TARGETARCH.tar.gz" && \
   tar xf \
     /tmp/openvscode-server.tar.gz -C \
     /app/openvscode-server/ --strip-components=1 && \

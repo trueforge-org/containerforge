@@ -68,7 +68,7 @@ RUN \
     /etc/dpkg/dpkg.cfg.d/docker && \
   echo "**** install deps ****" && \
   curl -fsSL https://download.docker.com/linux/debian/gpg | tee /usr/share/keyrings/docker.asc >/dev/null && \
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list && \
+  echo "deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list && \
   curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
@@ -241,7 +241,7 @@ RUN \
   mkdir /proot-apps/ && \
   PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]') && \
-  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-x86_64.tar.gz \
+  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
     | tar -xzf - -C /proot-apps/ && \
   echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
   echo "**** dind support ****" && \

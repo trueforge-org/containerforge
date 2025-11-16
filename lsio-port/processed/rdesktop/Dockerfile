@@ -66,7 +66,7 @@ RUN \
     /etc/dpkg/dpkg.cfg.d/excludes && \
   echo "**** add docker repos ****" && \
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | tee /usr/share/keyrings/docker.asc >/dev/null && \
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" > /etc/apt/sources.list.d/docker.list && \
+  echo "deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" > /etc/apt/sources.list.d/docker.list && \
   echo "**** install deps ****" && \
   ldconfig && \
   apt-get update && \
@@ -129,7 +129,7 @@ RUN \
   mkdir /proot-apps/ && \
   PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]') && \
-  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-x86_64.tar.gz \
+  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
     | tar -xzf - -C /proot-apps/ && \
   echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
   echo "**** locales ****" && \

@@ -127,7 +127,7 @@ RUN \
     zlib1g-dev && \
   mkdir -p /tmp/rust && \
   RUST_VERSION=$(curl -fsX GET https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name') && \
-  curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-x86_64-unknown-linux-gnu.tar.gz" && \
+  curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-$TARGETARCH-unknown-linux-gnu.tar.gz" && \
   tar xf /tmp/rust.tar.gz -C /tmp/rust --strip-components=1 && \
   cd /tmp/rust && \
   ./install.sh && \
@@ -244,7 +244,7 @@ RUN \
   cd /tmp/harfbuzz && \
   meson build && \
   ninja -C build install && \
-  strip -d /usr/local/lib/x86_64-linux-gnu/libharfbuzz*.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libharfbuzz*.so
 RUN \
   echo "**** grabbing kvazaar ****" && \
   mkdir -p /tmp/kvazaar && \
@@ -326,13 +326,13 @@ RUN \
     build && \
   ninja -C build install && \
   strip -d \
-    /usr/local/lib/x86_64-linux-gnu/libEGL.so \
-    /usr/local/lib/x86_64-linux-gnu/libGLdispatch.so \
-    /usr/local/lib/x86_64-linux-gnu/libGLESv1_CM.so \
-    /usr/local/lib/x86_64-linux-gnu/libGLESv2.so \
-    /usr/local/lib/x86_64-linux-gnu/libGL.so \
-    /usr/local/lib/x86_64-linux-gnu/libGLX.so \
-    /usr/local/lib/x86_64-linux-gnu/libOpenGL.so
+    /usr/local/lib/$TARGETARCH-linux-gnu/libEGL.so \
+    /usr/local/lib/$TARGETARCH-linux-gnu/libGLdispatch.so \
+    /usr/local/lib/$TARGETARCH-linux-gnu/libGLESv1_CM.so \
+    /usr/local/lib/$TARGETARCH-linux-gnu/libGLESv2.so \
+    /usr/local/lib/$TARGETARCH-linux-gnu/libGL.so \
+    /usr/local/lib/$TARGETARCH-linux-gnu/libGLX.so \
+    /usr/local/lib/$TARGETARCH-linux-gnu/libOpenGL.so
 RUN \
   echo "**** grabbing libdrm ****" && \
   mkdir -p /tmp/libdrm && \
@@ -343,12 +343,12 @@ RUN \
   echo "**** compiling libdrm ****" && \
   cd /tmp/libdrm && \
   meson setup \
-    --prefix=/usr --libdir=/usr/local/lib/x86_64-linux-gnu \
+    --prefix=/usr --libdir=/usr/local/lib/$TARGETARCH-linux-gnu \
     -Dvalgrind=disabled \
     . build && \
   ninja -C build && \
   ninja -C build install && \
-  strip -d /usr/local/lib/x86_64-linux-gnu/libdrm*.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libdrm*.so
 RUN \
   echo "**** grabbing liblc3 ****" && \
   mkdir -p /tmp/liblc3 && \
@@ -460,11 +460,11 @@ RUN \
   mkdir -p /tmp/ihd/build && \
   cd /tmp/ihd/build && \
   cmake \
-    -DLIBVA_DRIVERS_PATH=/usr/local/lib/x86_64-linux-gnu/dri/ \
+    -DLIBVA_DRIVERS_PATH=/usr/local/lib/$TARGETARCH-linux-gnu/dri/ \
     .. && \
   make && \
   make install && \
-  strip -d /usr/local/lib/x86_64-linux-gnu/dri/iHD_drv_video.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/dri/iHD_drv_video.so
 RUN \
   echo "**** grabbing libvpl ****" && \
   mkdir -p /tmp/libvpl && \
@@ -609,7 +609,7 @@ RUN \
   echo "**** compiling rav1e ****" && \
   cd /tmp/rav1e && \
   cargo cinstall --release && \
-  strip -d /usr/local/lib/x86_64-linux-gnu/librav1e.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/librav1e.so
 RUN \
   echo "**** grabbing libdovi ****" && \
   mkdir -p /tmp/libdovi && \
@@ -621,7 +621,7 @@ RUN \
   echo "**** compiling libdovi ****" && \
   cd /tmp/libdovi/dolby_vision && \
   cargo cinstall --release && \
-  strip -d /usr/local/lib/x86_64-linux-gnu/libdovi.so
+  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libdovi.so
 RUN \
   echo "**** grabbing libplacebo ****" && \
   mkdir -p /tmp/libplacebo && \
@@ -772,7 +772,7 @@ RUN \
   cd build && \
   cmake \
     -D CMAKE_BUILD_TYPE=Release \
-    -D VULKAN_HEADERS_INSTALL_DIR=/usr/local/lib/x86_64-linux-gnu \
+    -D VULKAN_HEADERS_INSTALL_DIR=/usr/local/lib/$TARGETARCH-linux-gnu \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     .. && \
   make && \
@@ -959,8 +959,8 @@ RUN \
     /buildout/usr/local/etc/fonts \
     /buildout/usr/local/lib/libmfx-gen \
     /buildout/usr/local/lib/mfx \
-    /buildout/usr/local/lib/x86_64-linux-gnu/dri \
-    /buildout/usr/local/lib/x86_64-linux-gnu/vdpau \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/vdpau \
     /buildout/usr/local/share/vulkan \
     /buildout/usr/share/fonts \
     /buildout/usr/share/libdrm \
@@ -984,17 +984,17 @@ RUN \
     /usr/local/lib/mfx/*.so \
     /buildout/usr/local/lib/mfx/ && \
   cp -a \
-    /usr/local/lib/x86_64-linux-gnu/lib*so* \
-    /buildout/usr/local/lib/x86_64-linux-gnu/ && \
+    /usr/local/lib/$TARGETARCH-linux-gnu/lib*so* \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/ && \
   cp -a \
-    /usr/local/lib/x86_64-linux-gnu/dri/*.so \
-    /buildout/usr/local/lib/x86_64-linux-gnu/dri/ && \
+    /usr/local/lib/$TARGETARCH-linux-gnu/dri/*.so \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri/ && \
   cp -a \
-    /usr/local/lib/x86_64-linux-gnu/vdpau/*.so \
-    /buildout/usr/local/lib/x86_64-linux-gnu/vdpau/ && \
+    /usr/local/lib/$TARGETARCH-linux-gnu/vdpau/*.so \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/vdpau/ && \
   cp -a \
-    /usr/lib/x86_64-linux-gnu/dri/i965* \
-    /buildout/usr/local/lib/x86_64-linux-gnu/dri/ && \
+    /usr/lib/$TARGETARCH-linux-gnu/dri/i965* \
+    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri/ && \
   cp -a \
     /usr/share/libdrm/amdgpu.ids \
     /buildout/usr/share/libdrm/ && \
@@ -1021,7 +1021,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 # hardware env
 ENV \
-  LIBVA_DRIVERS_PATH="/usr/local/lib/x86_64-linux-gnu/dri" \
+  LIBVA_DRIVERS_PATH="/usr/local/lib/$TARGETARCH-linux-gnu/dri" \
   LD_LIBRARY_PATH="/usr/local/lib" \
   NVIDIA_DRIVER_CAPABILITIES="compute,video,utility" \
   NVIDIA_VISIBLE_DEVICES="all"

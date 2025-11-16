@@ -8,10 +8,10 @@ ARG SYNC_VERSION
 RUN \
   echo "**** install resilio-sync ****" && \
   if [ -z ${SYNC_VERSION+x} ]; then \
-    SYNC_VERSION=$(curl -sX GET https://linux-packages.resilio.com/resilio-sync/deb/dists/resilio-sync/non-free/binary-amd64/Packages |grep -A 7 -m 1 'Package: resilio-sync' | awk -F ': ' '/Version/{print $2;exit}'); \
+    SYNC_VERSION=$(curl -sX GET https://linux-packages.resilio.com/resilio-sync/deb/dists/resilio-sync/non-free/binary-$TARGETARCH/Packages |grep -A 7 -m 1 'Package: resilio-sync' | awk -F ': ' '/Version/{print $2;exit}'); \
   fi && \
   curl -fsSL https://linux-packages.resilio.com/resilio-sync/key.asc | tee /usr/share/keyrings/resilio-sync.asc >/dev/null && \
-  echo "deb [aarch=amd64 signed-by=/usr/share/keyrings/resilio-sync.asc] https://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free" > /etc/apt/sources.list.d/resilio-sync.list && \
+  echo "deb [$TARGETARCH=$TARGETARCH signed-by=/usr/share/keyrings/resilio-sync.asc] https://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free" > /etc/apt/sources.list.d/resilio-sync.list && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     "resilio-sync=${SYNC_VERSION}" && \

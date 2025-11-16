@@ -23,7 +23,7 @@ RUN \
   fi && \
   curl -o \
   /tmp/ombi-src.tar.gz -L \
-    "https://github.com/Ombi-app/Ombi/releases/download/${OMBI_RELEASE}/linux-x64.tar.gz" && \
+    "https://github.com/Ombi-app/Ombi/releases/download/${OMBI_RELEASE}/linux-$TARGETARCH.tar.gz" && \
   tar xzf /tmp/ombi-src.tar.gz -C \
     /app/ombi/ && \
   chmod +x /app/ombi/Ombi && \

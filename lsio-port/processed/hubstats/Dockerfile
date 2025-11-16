@@ -51,11 +51,11 @@ RUN \
  echo "**** install influxdb and grafana ****" && \
  curl -o \
  /tmp/influxdb.deb \
-	"https://dl.influxdata.com/influxdb/releases/influxdb_${INFLUX_VER}_amd64.deb" && \
+	"https://dl.influxdata.com/influxdb/releases/influxdb_${INFLUX_VER}_$TARGETARCH.deb" && \
  dpkg -i /tmp/influxdb.deb && \
  curl -o \
  /tmp/grafana.deb \
-	"https://grafanarel.s3.amazonaws.com/builds/grafana_${GRAFANA_VER}_amd64.deb" && \
+	"https://grafanarel.s3.amazonaws.com/builds/grafana_${GRAFANA_VER}_$TARGETARCH.deb" && \
  dpkg -i /tmp/grafana.deb && \
  apt-get -f install && \
  echo "**** cleanup ****" && \

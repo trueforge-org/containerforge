@@ -26,7 +26,7 @@ RUN \
   mkdir -p /app/code-server && \
   curl -o \
     /tmp/code-server.tar.gz -L \
-    "https://github.com/coder/code-server/releases/download/v${CODE_RELEASE}/code-server-${CODE_RELEASE}-linux-amd64.tar.gz" && \
+    "https://github.com/coder/code-server/releases/download/v${CODE_RELEASE}/code-server-${CODE_RELEASE}-linux-$TARGETARCH.tar.gz" && \
   tar xf /tmp/code-server.tar.gz -C \
     /app/code-server --strip-components=1 && \
   echo "**** clean up ****" && \

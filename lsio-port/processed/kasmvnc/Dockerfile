@@ -346,7 +346,7 @@ RUN \
   mkdir /proot-apps/ && \
   PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]') && \
-  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-x86_64.tar.gz \
+  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
     | tar -xzf - -C /proot-apps/ && \
   echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
   echo "**** kasm support ****" && \
@@ -361,7 +361,7 @@ RUN \
   mkdir -p /var/run/pulse && \
   chown 1000:root /var/run/pulse && \
   mkdir -p /kasmbins && \
-  curl -s https://kasm-ci.s3.amazonaws.com/kasmbins-amd64-${KASMBINS_RELEASE}.tar.gz \
+  curl -s https://kasm-ci.s3.amazonaws.com/kasmbins-$TARGETARCH-${KASMBINS_RELEASE}.tar.gz \
     | tar xzvf - -C /kasmbins/ && \
   chmod +x /kasmbins/* && \
   chown -R 1000:1000 /kasmbins && \

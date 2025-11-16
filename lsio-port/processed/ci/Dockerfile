@@ -12,9 +12,9 @@ RUN \
     gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
   curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | \
     gpg --dearmor -o /etc/apt/keyrings/google.gpg && \
-  echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu noble stable" | \
+  echo "deb [arch=$TARGETARCH signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu noble stable" | \
     tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-  echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google.gpg] http://dl.google.com/linux/chrome/deb/ stable main' > \
+  echo 'deb [arch=$TARGETARCH signed-by=/etc/apt/keyrings/google.gpg] http://dl.google.com/linux/chrome/deb/ stable main' > \
     /etc/apt/sources.list.d/google-chrome.list && \
   echo "**** install runtime packages ****" && \
   apt-get update && \
@@ -30,10 +30,10 @@ RUN \
   echo "Retrieving Chrome driver version ${CHROME_RELEASE}" && \
   curl -sk -o \
     /tmp/chrome.zip -L \
-    "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_RELEASE}/linux64/chromedriver-linux64.zip" && \
+    "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_RELEASE}/linu$TARGETARCH/chromedriver-linu$TARGETARCH.zip" && \
   cd /tmp && \
   unzip chrome.zip && \
-  mv chromedriver-linux64/chromedriver /usr/bin/chromedriver && \
+  mv chromedriver-linu$TARGETARCH/chromedriver /usr/bin/chromedriver && \
   chown root:root /usr/bin/chromedriver && \
   chmod +x /usr/bin/chromedriver && \
   echo "**** Install python deps ****" && \

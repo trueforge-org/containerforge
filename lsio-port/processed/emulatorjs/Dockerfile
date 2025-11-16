@@ -131,7 +131,7 @@ RUN \
   mkdir /data && \
   echo "**** use pinned node ****" && \
   curl -L \
-    https://github.com/thelamer/node-stash/raw/master/v16.20.2/x86_64/node -o \
+    https://github.com/thelamer/node-stash/raw/master/v16.20.2/$TARGETARCH/node -o \
     /bin/node && \
   chmod +x /bin/node && \
   echo "**** cleanup ****" && \

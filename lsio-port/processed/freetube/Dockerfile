@@ -21,7 +21,7 @@ RUN \
       | jq -r 'map(select(.prerelease)) | first | .id'); \
   fi && \
   URL=$(curl -sL "https://api.github.com/repos/FreeTubeApp/FreeTube/releases/${FREETUBE_VERSION}" \
-    |jq -r '.assets[]|select(.name|endswith("amd64.deb")).browser_download_url') && \
+    |jq -r '.assets[]|select(.name|endswith("$TARGETARCH.deb")).browser_download_url') && \
   curl -o \
     /tmp/freetube.deb -L \
     "${URL}" && \

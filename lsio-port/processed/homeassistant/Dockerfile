@@ -94,10 +94,10 @@ RUN \
     /tmp/core.tar.gz -C \
     /tmp/core --strip-components=1 && \
   HASS_BASE=$(cat /tmp/core/build.yaml \
-    | grep 'amd64: ' \
+    | grep '$TARGETARCH: ' \
     | cut -d: -f3) && \
   HA_PY_MAJOR=$(curl -fsL https://raw.githubusercontent.com/home-assistant/docker/${HASS_BASE}/build.yaml \
-    | grep 'amd64: ' \
+    | grep '$TARGETARCH: ' \
     | cut -d: -f3 \
     | sed 's|-alpine.*||') && \
   HASS_BASE_RELEASE=$(curl -sL https://api.github.com/repos/home-assistant/docker/releases) && \
@@ -124,7 +124,7 @@ RUN \
     | sed 's|.*JEMALLOC_VERSION: ||' \
     | sed 's|"||g') && \
   HA_ALPINE_VER=$(curl -fsL https://raw.githubusercontent.com/home-assistant/docker/${HASS_BASE}/build.yaml \
-    | grep 'amd64: ' \
+    | grep '$TARGETARCH: ' \
     | cut -d: -f3 \
     | sed 's|.*-alpine||') && \
   IMAGE_ALPINE_VER=$(cat /etc/os-release | grep PRETTY_NAME | sed 's|.*Linux v||' | sed 's|"||') && \
@@ -140,7 +140,7 @@ RUN \
   HA_GO2RTC_VERSION=$(curl -fsL "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${HASS_RELEASE}/Dockerfile" | grep 'AlexxIT/go2rtc/releases/download' | sed -r 's|^.*AlexxIT/go2rtc/releases/download/(.*)/go2rtc_linux.*$|\1|') && \
   curl -o \
     /bin/go2rtc -fL \
-    "https://github.com/AlexxIT/go2rtc/releases/download/${HA_GO2RTC_VERSION}/go2rtc_linux_amd64" && \
+    "https://github.com/AlexxIT/go2rtc/releases/download/${HA_GO2RTC_VERSION}/go2rtc_linux_$TARGETARCH" && \
   chmod +x /bin/go2rtc && \
   echo "**** Quick test go2rtc binary: ****" && \
   /bin/go2rtc --version && \
@@ -161,7 +161,7 @@ RUN \
     echo "**** Installing python from the linuxserver python repo release ${PY_RELEASE_TAG} ****" && \
     curl -o \
       /tmp/python.tar.gz -L \
-      "https://github.com/linuxserver/docker-python/releases/download/${PY_RELEASE_TAG}/python-amd64.tar.gz" && \
+      "https://github.com/linuxserver/docker-python/releases/download/${PY_RELEASE_TAG}/python-$TARGETARCH.tar.gz" && \
     tar xf \
       /tmp/python.tar.gz -C \
       /usr/local && \
@@ -180,7 +180,7 @@ RUN \
     done && \
     cd /tmp/python && \
     ./configure \
-      --build="x86_64-linux-musl" \
+      --build="$TARGETARCH-linux-musl" \
       --enable-loadable-sqlite-extensions \
       --enable-optimizations \
       --enable-option-checking=fatal \

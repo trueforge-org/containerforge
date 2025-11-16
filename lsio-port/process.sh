@@ -163,26 +163,42 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
 
     echo "[VERBOSE] Cleaning up Dockerfiles in $processed: ${dockerfiles[*]}"
 
-    for df in "${dockerfiles[@]}"; do
-        if sed --version >/dev/null 2>&1; then
-            sed -i \
-                -e '/^LABEL build_version/d' \
-                -e '/^LABEL maintainer/d' \
-                -e '/^ARG BUILD_DATE/d' \
-                -e '/^# syntax=docker\/dockerfile:1/d' \
-                -e '/printf "Linuxserver\.io version/d' \
-                "$df"
-        else
-            sed -i '' \
-                -e '/^LABEL build_version/d' \
-                -e '/^LABEL maintainer/d' \
-                -e '/^ARG BUILD_DATE/d' \
-                -e '/^# syntax=docker\/dockerfile:1/d' \
-                -e '/printf "Linuxserver\.io version/d' \
-                "$df"
-        fi
-        echo "[VERBOSE] Sanitized $df"
-    done
+for df in "${dockerfiles[@]}"; do
+    if sed --version >/dev/null 2>&1; then
+        sed -i \
+            -e '/^LABEL build_version/d' \
+            -e '/^LABEL maintainer/d' \
+            -e '/^ARG BUILD_DATE/d' \
+            -e '/^# syntax=docker\/dockerfile:1/d' \
+            -e '/printf "Linuxserver\.io version/d' \
+            -e "s/$BUILD_VERSION_ARG/VERSION/g" \
+            -e 's/amd64/\$TARGETARCH/g' \
+            -e 's/x64/\$TARGETARCH/g' \
+            -e 's/x86_64/\$TARGETARCH/g' \
+            -e 's/arm64/\$TARGETARCH/g' \
+            -e 's/aarch64/\$TARGETARCH/g' \
+            -e 's/aarch/\$TARGETARCH/g' \
+            "$df"
+    else
+        sed -i '' \
+            -e '/^LABEL build_version/d' \
+            -e '/^LABEL maintainer/d' \
+            -e '/^ARG BUILD_DATE/d' \
+            -e '/^# syntax=docker\/dockerfile:1/d' \
+            -e '/printf "Linuxserver\.io version/d' \
+            -e "s/$BUILD_VERSION_ARG/VERSION/g" \
+            -e 's/amd64/\$TARGETARCH/g' \
+            -e 's/x64/\$TARGETARCH/g' \
+            -e 's/x86_64/\$TARGETARCH/g' \
+            -e 's/arm64/\$TARGETARCH/g' \
+            -e 's/aarch64/\$TARGETARCH/g' \
+            -e 's/aarch/\$TARGETARCH/g' \
+            "$df"
+    fi
+
+    echo "[VERBOSE] Sanitized $df"
+done
+
 
     # ===== Dockerfile Deduplication =====
     if [[ ${#dockerfiles[@]} -gt 1 ]]; then
