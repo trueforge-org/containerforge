@@ -1,34 +1,33 @@
-
 FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
-ARG VERSION
-ARG TARGETARCH
+ARG VERSION="10.11.3"
 USER root
 
 # environment settings
-
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 # https://github.com/dlemstra/Magick.NET/issues/707#issuecomment-785351620
 ENV MALLOC_TRIM_THRESHOLD_=131072
 
 RUN \
-  echo "**** install jellyfin *****" && \
-  curl -s https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | gpg --dearmor | tee /usr/share/keyrings/jellyfin.gpg >/dev/null && \
-  echo 'deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/ubuntu jammy main' > /etc/apt/sources.list.d/jellyfin.list && \
+  echo "**** install dependencies *****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
+    curl \
+    gpg \
     at \
     libjemalloc2 \
     mesa-va-drivers \
-    xmlstarlet && \
-  apt-get install -y --no-install-recommends \
-    jellyfin=${VERSION} && \
+    xmlstarlet \
+    gdebi-core && \
+  \
+  echo "**** download and install Jellyfin *****" && \
+  curl -L -o /tmp/jellyfin.deb \
+    "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_${VERSION}+ubu2404_all.deb" && \
+  gdebi -n /tmp/jellyfin.deb && \
+  \
   echo "**** cleanup ****" && \
-  rm -rf \
-    /tmp/* \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
+  rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # add local files
 USER apps

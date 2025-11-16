@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "10.11.2ubu2404"
+  default = "10.11.3"
 }
 
 variable "LICENSE" {
