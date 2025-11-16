@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "gc"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "gcVERSION"
+  default = "null"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "UNKNOWNSOURCE"
 }
 
 group "default" {

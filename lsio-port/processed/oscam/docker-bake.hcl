@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "oscam"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "oscamVERSION"
+  default = "11906"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://git.streamboard.tv/common/oscam"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "planka"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "plankaVERSION"
+  default = "v1.26.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/plankanban/planka/"
 }
 
 group "default" {

@@ -1,7 +1,7 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "TEMPLATE"
+  default = "TEMPLATENAME"
 }
 
 variable "VERSION" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "TEMPLATESOURCE"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "rsnapshot"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "rsnapshotVERSION"
+  default = "1.4.5-r0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://www.rsnapshot.org/"
 }
 
 group "default" {

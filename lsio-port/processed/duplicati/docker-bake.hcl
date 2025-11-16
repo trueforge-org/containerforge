@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "duplicati"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "duplicatiVERSION"
+  default = "v2.2.0.1_stable_2025-11-09"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.duplicati.com/"
 }
 
 group "default" {

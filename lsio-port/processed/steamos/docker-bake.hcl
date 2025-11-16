@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "steamos"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "steamosVERSION"
+  default = "2025-01-19"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.steamdeck.com/"
 }
 
 group "default" {

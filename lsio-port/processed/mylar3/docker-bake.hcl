@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "mylar3"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "mylar3VERSION"
+  default = "v0.8.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/mylar3/mylar3"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "lychee"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "lycheeVERSION"
+  default = "v6.10.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://lycheeorg.github.io/"
 }
 
 group "default" {

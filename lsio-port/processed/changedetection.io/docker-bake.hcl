@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "changedetection.io"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "changedetection.ioVERSION"
+  default = "0.51.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/dgtlmoon/changedetection.io"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "alpine-nginx"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "alpine-nginxVERSION"
+  default = "3.22-1.28.0-r3_8.4.14-r0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

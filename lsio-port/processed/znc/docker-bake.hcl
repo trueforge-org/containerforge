@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "znc"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "zncVERSION"
+  default = "znc-1.10.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://wiki.znc.in/ZNC"
 }
 
 group "default" {

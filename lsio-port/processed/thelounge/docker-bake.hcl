@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "thelounge"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "theloungeVERSION"
+  default = "v4.4.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://thelounge.github.io/"
 }
 
 group "default" {

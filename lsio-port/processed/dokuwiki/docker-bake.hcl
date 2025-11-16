@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "dokuwiki"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "dokuwikiVERSION"
+  default = "2025-05-14b"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.dokuwiki.org/dokuwiki/"
 }
 
 group "default" {

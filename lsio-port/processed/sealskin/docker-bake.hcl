@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "sealskin"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "sealskinVERSION"
+  default = "0.1.17"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/selkies-project/sealskin/"
 }
 
 group "default" {

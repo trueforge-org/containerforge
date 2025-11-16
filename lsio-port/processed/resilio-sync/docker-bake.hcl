@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "resilio-sync"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "resilio-syncVERSION"
+  default = "3.1.0.1073-1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.resilio.com/individuals/"
 }
 
 group "default" {

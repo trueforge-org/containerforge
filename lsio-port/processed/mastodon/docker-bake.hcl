@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "mastodon"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "mastodonVERSION"
+  default = "v4.5.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/mastodon/mastodon/"
 }
 
 group "default" {

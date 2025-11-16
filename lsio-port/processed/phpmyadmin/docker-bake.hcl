@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "phpmyadmin"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "phpmyadminVERSION"
+  default = "5.2.3"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/phpmyadmin/phpmyadmin/"
 }
 
 group "default" {

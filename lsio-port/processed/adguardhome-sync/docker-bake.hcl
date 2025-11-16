@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "adguardhome-sync"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "adguardhome-syncVERSION"
+  default = "v0.8.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/bakito/adguardhome-sync/"
 }
 
 group "default" {

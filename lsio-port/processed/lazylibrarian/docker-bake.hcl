@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "lazylibrarian"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "lazylibrarianVERSION"
+  default = "163d50bf"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://lazylibrarian.gitlab.io/"
 }
 
 group "default" {

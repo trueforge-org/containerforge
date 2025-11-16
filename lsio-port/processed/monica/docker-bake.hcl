@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "monica"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "monicaVERSION"
+  default = "v4.1.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/monicahq/monica"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "healthchecks"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "healthchecksVERSION"
+  default = "v3.11.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/healthchecks/healthchecks"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "luanti"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "luantiVERSION"
+  default = "5.14.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.luanti.org/"
 }
 
 group "default" {

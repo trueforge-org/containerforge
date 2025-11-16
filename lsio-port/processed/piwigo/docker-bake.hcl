@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "piwigo"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "piwigoVERSION"
+  default = "15.7.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://piwigo.org/"
 }
 
 group "default" {

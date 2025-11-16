@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "rdesktop"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "rdesktopVERSION"
+  default = "ubuntu-xfce-12eaf4b1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

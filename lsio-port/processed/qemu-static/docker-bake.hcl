@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "qemu-static"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "qemu-staticVERSION"
+  default = "10.0.2ds-2deb13u1bpo121"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

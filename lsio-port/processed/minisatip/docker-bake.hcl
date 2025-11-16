@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "minisatip"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "minisatipVERSION"
+  default = "v2.0.39"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/catalinii/minisatip"
 }
 
 group "default" {

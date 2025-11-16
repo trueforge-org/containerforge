@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "unifi-network-application"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "unifi-network-applicationVERSION"
+  default = "v9.5.21"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://ui.com/"
 }
 
 group "default" {

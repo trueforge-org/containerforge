@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "xvfb"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "xvfbVERSION"
+  default = "alpine322-9d327c0f"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "null"
 }
 
 group "default" {

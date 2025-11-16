@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "htpcmanager"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "htpcmanagerVERSION"
+  default = "26a641bf"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/HTPC-Manager/HTPC-Manager"
 }
 
 group "default" {

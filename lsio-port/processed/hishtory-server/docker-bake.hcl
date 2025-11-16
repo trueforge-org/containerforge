@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "hishtory-server"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "hishtory-serverVERSION"
+  default = "v0.335"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/ddworken/hishtory"
 }
 
 group "default" {

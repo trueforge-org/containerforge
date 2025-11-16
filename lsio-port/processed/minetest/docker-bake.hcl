@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "minetest"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "minetestVERSION"
+  default = "5.10.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://www.minetest.net/"
 }
 
 group "default" {

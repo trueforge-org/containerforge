@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "ldap-auth"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "ldap-authVERSION"
+  default = "3.4.5"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/nginxinc/nginx-ldap-auth"
 }
 
 group "default" {

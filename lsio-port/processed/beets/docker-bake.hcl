@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "beets"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "beetsVERSION"
+  default = "2.5.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://beets.io/"
 }
 
 group "default" {

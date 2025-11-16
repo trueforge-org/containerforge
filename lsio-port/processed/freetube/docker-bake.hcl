@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "freetube"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "freetubeVERSION"
+  default = "215975145"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://freetubeapp.io/"
 }
 
 group "default" {

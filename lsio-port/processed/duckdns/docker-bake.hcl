@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "duckdns"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "duckdnsVERSION"
+  default = "95e5988b"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://duckdns.org/"
 }
 
 group "default" {

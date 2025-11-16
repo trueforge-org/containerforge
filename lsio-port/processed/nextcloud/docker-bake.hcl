@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "nextcloud"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "nextcloudVERSION"
+  default = "32.0.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://nextcloud.com/"
 }
 
 group "default" {

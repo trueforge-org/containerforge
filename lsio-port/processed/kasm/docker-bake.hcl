@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "kasm"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "kasmVERSION"
+  default = "1.18.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.kasmweb.com/?utm_campaign=LinuxServer&utm_source=listing"
 }
 
 group "default" {

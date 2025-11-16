@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "projectsend"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "projectsendVERSION"
+  default = "r1945"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "http://www.projectsend.org"
 }
 
 group "default" {

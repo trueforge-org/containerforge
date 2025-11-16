@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "faster-whisper"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "faster-whisperVERSION"
+  default = "v3.0.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/SYSTRAN/faster-whisper"
 }
 
 group "default" {

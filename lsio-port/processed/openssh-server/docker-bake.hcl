@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "openssh-server"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "openssh-serverVERSION"
+  default = "10.0_p1-r9"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.openssh.com/"
 }
 
 group "default" {

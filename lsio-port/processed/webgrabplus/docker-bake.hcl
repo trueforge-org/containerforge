@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "webgrabplus"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "webgrabplusVERSION"
+  default = "5.5.0"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.webgrabplus.com"
 }
 
 group "default" {

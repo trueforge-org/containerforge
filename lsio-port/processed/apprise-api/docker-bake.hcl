@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "apprise-api"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "apprise-apiVERSION"
+  default = "v1.2.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/caronc/apprise-api"
 }
 
 group "default" {

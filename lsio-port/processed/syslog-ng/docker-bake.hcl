@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "syslog-ng"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "syslog-ngVERSION"
+  default = "4.8.3-r1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://www.syslog-ng.com/products/open-source-log-management/"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "kometa"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "kometaVERSION"
+  default = "v2.2.2"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/Kometa-Team/Kometa"
 }
 
 group "default" {

@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "cops"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "copsVERSION"
+  default = "3.7.8"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/mikespub-org/seblucas-cops"
 }
 
 group "default" {

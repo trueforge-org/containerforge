@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "habridge"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "habridgeVERSION"
+  default = "v5.4.1"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://github.com/bwssytems/ha-bridge/"
 }
 
 group "default" {

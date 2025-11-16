@@ -1,11 +1,11 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "feed2toot"
+  default = "TEMPLATE"
 }
 
 variable "VERSION" {
-  default = "feed2tootVERSION"
+  default = "0.17"
 }
 
 variable "LICENSE" {
@@ -13,7 +13,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/cloudbox/autoscan"
+  default = "https://gitlab.com/chaica/feed2toot"
 }
 
 group "default" {
