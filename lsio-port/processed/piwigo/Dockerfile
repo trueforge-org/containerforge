@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG PIWIGO_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 RUN \
   echo "**** install packages ****" && \
@@ -51,7 +47,6 @@ RUN \
     "https://piwigo.org/download/dlcounter.php?code=${PIWIGO_RELEASE}" && \
   unzip -q /tmp/piwigo.zip -d /tmp && \
   mv /tmp/piwigo/* /app/www/public && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

@@ -4,7 +4,7 @@ set -euo pipefail
 REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
-DISTROS=("debian" "ubuntu" "arch" "fedora")
+DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux")
 
 mkdir -p "$REPO_DIR" "$PROCESSED_DIR"
 
@@ -41,6 +41,7 @@ skipped_apps=0
 processed_repos=0
 failed_copies=()
 based_on_selkies=0
+no_dockerfile_skipped=0
 
 # ===== Clone / Pull & Copy =====
 for repo in $repos; do
@@ -58,12 +59,12 @@ for repo in $repos; do
         continue
     fi
 
-# Skip if $shortname is in DISTROS
-if [[ " ${DISTROS[*]} " == *" $shortname "* ]]; then
-    echo "[SKIP] '$shortname' is a distro, skipping."
-    ((skipped_apps++))
-    continue
-fi
+    # Skip if $shortname is in DISTROS
+    if [[ " ${DISTROS[*]} " == *" $shortname "* ]]; then
+        echo "[SKIP] '$shortname' is a distro, skipping."
+        ((skipped_apps++))
+        continue
+    fi
 
     # Clone or pull
     if [[ -d "$target" ]]; then
@@ -77,7 +78,15 @@ fi
     # ===== Check Dockerfiles for baseimage-selkies =====
     skip_due_to_selkies=false
     shopt -s nullglob nocaseglob
-    for df in "$target"/Dockerfile*; do
+    dockerfiles=("$target"/Dockerfile*)
+    if [[ ${#dockerfiles[@]} -eq 0 ]]; then
+        echo "[SKIP] '$shortname' has no Dockerfile, skipping processed copy."
+        ((no_dockerfile_skipped++))
+        shopt -u nullglob nocaseglob
+        continue
+    fi
+
+    for df in "${dockerfiles[@]}"; do
         if grep -q "FROM ghcr.io/linuxserver/baseimage-selkies" "$df"; then
             echo "[SKIP] '$shortname' uses baseimage-selkies, skipping processed copy."
             skip_due_to_selkies=true
@@ -96,7 +105,7 @@ fi
         shopt -s nullglob nocaseglob
         copy_failed=false
 
-        for df in "$target"/Dockerfile*; do
+        for df in "${dockerfiles[@]}"; do
             if ! cp "$df" "$out_dir/"; then
                 echo "[WARN] Failed to copy $df"
                 copy_failed=true
@@ -128,6 +137,7 @@ echo "Total repos under linuxserver.io: $total_all_repos"
 echo "Total docker-* repos:             $total_docker_repos"
 echo "Skipped (../apps exists):         $skipped_apps"
 echo "Skipped (baseimage-selkies):     $based_on_selkies"
+echo "Skipped (no Dockerfile):          $no_dockerfile_skipped"
 echo "Processed repos:                  $processed_repos"
 
 if (( ${#failed_copies[@]} > 0 )); then

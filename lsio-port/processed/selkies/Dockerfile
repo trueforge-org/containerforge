@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 FROM lscr.io/linuxserver/xvfb:debianbookworm AS xvfb
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS frontend
 
@@ -44,10 +43,7 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-debian:bookworm
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 
 # env
 ENV DISPLAY=:1 \

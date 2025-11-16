@@ -1,12 +1,8 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
-ARG BUILD_DATE
 ARG VERSION
 ARG MANYFOLD_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 ENV RAILS_ENV="production" \
     NODE_ENV="production" \
@@ -75,7 +71,6 @@ RUN \
   APP_VERSION=${MANYFOLD_VERSION} \
   bundle exec rake assets:precompile && \
   rm db/schema.rb && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   yarn cache clean && \
   apk del --purge \

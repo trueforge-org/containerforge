@@ -2,9 +2,7 @@
 FROM ubuntu as buildstage
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
 # build environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -37,9 +35,7 @@ FROM scratch
 ADD rootfs.tar.xz /
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
 # copy files from build stage
 COPY --from=buildstage /tmp/shellcheck/shellcheck /usr/local/bin/

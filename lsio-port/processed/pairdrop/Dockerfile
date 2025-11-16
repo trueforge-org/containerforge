@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG PAIRDROP_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 # environment settings
 ENV NODE_ENV="production"
@@ -32,7 +28,6 @@ RUN \
   cd /app/pairdrop && \
   chown -R abc:abc ./ && \
   su -s /bin/sh abc -c 'HOME=/tmp NODE_ENV=production npm ci' && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     $HOME/.cache \

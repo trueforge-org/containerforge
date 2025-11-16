@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG COPS_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="chbmb"
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -38,7 +34,6 @@ RUN \
   cd /app/www/public && \
   composer \
     install --no-dev --optimize-autoloader && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "***install kepubify" && \
   if [ -z ${KEPUBIFY_RELEASE+x} ]; then \
     KEPUBIFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/pgaskin/kepubify/releases/latest" \

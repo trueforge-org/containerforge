@@ -1,12 +1,8 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
-ARG BUILD_DATE
 ARG VERSION
 ARG SPEEDTEST_TRACKER_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 ENV HOME=/config
 
@@ -70,7 +66,6 @@ RUN \
     echo 'upload_max_filesize = 100M'; \
     echo 'variables_order = EGPCS'; \
   } > /etc/php84/conf.d/php-misc.ini && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge build-dependencies && \
   rm -rf \

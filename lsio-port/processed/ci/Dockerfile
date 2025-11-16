@@ -1,10 +1,7 @@
 FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="TheLamer"
 
 COPY requirements.txt /tmp/requirements.txt
 
@@ -45,7 +42,6 @@ RUN \
     pip && \
   pip3 install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     -r /tmp/requirements.txt && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apt-get autoclean && \
   rm -rf \

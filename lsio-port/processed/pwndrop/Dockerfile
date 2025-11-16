@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.20 as buildstage
 
@@ -37,17 +36,13 @@ echo "**** fetch source code ****" && \
 FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG PWNDROP_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="aptalca"
 
 # add pwndrop
 COPY --from=buildstage /app/pwndrop/ /app/pwndrop/
 
 RUN \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 # add local files
 COPY /root /

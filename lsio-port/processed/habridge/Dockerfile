@@ -1,11 +1,8 @@
 FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG HABRIDGE_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="saarg"
 
 # install packages
 RUN \
@@ -25,7 +22,6 @@ RUN \
   curl -o \
     /app/ha-bridge.jar -L \
     "https://github.com/bwssytems/ha-bridge/releases/download/${HABRIDGE_RELEASE}/ha-bridge-${HABRIDGE_RELEASE:1}.jar" && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 # copy local files
 COPY root/ /

@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.20
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG BUDGE_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="alex-phillips"
 
 ENV BUDGE_DATABASE=/config/budge.db \
     S6_STAGE2_HOOK="/init-hook"
@@ -50,7 +46,6 @@ RUN \
   echo "**** overlay-fs bug workaround ****" && \
   mv /app/www/public/frontend/node_modules /app/www/public/frontend/node_modules-tmp && \
   mv /app/www/public/backend/node_modules /app/www/public/backend/node_modules-tmp && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   npm cache clean --force && \
   apk del --purge \

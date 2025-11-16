@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG GROCY_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="alex-phillips, homerr"
 
 RUN \
   echo "**** install build packages ****" && \
@@ -46,7 +42,6 @@ RUN \
   cd /app/www && \
   yarn --production && \
   yarn cache clean && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

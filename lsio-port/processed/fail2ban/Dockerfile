@@ -1,12 +1,8 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="nomandera,nemchik"
 
 # environment settings
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
@@ -34,7 +30,6 @@ RUN \
     /etc/logrotate.conf && \
   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g' \
     /etc/periodic/daily/logrotate && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

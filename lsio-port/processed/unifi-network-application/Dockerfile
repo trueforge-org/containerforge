@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG UNIFI_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 # environment settings
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -34,7 +30,6 @@ RUN \
     "${UNIFI_DOWNLOAD}" && \
   unzip /tmp/unifi.zip -d /usr/lib && \
   mv /usr/lib/UniFi /usr/lib/unifi && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apt-get clean && \
   rm -rf \

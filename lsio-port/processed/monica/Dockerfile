@@ -1,12 +1,8 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
-ARG BUILD_DATE
 ARG VERSION
 ARG MONICA_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 ARG MONICA_RELEASE_GPG_KEY="BDAB0D0D36A00466A2964E85DE15667131EA6018"
 ENV MEMORY_LIMIT 512M
 
@@ -84,7 +80,6 @@ RUN \
   composer install \
     --no-dev \
     --no-interaction && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

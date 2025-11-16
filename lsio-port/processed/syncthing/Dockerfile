@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS buildstage
 
@@ -37,10 +36,7 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
 
 # environment settings
 ENV HOME="/config"
@@ -49,7 +45,6 @@ RUN \
   echo "**** create var lib folder ****" && \
   install -d -o abc -g abc \
     /var/lib/syncthing && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 # copy files from build stage and local files
 COPY --from=buildstage /tmp/sync/syncthing /usr/bin/

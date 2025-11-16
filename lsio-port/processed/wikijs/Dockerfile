@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG WIKIJS_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="alex-phillips"
 
 # environment settings
 ENV HOME="/app"
@@ -37,7 +33,6 @@ RUN \
     /app/wiki/ && \
   cd /app/wiki && \
   npm rebuild sqlite3 && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

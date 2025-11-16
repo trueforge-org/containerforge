@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM openjdk:8-alpine AS buildstage
 ARG DAVOS_RELEASE
@@ -32,10 +31,7 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="JAGFin1,Thelamer"
 
 # install packages
 RUN \
@@ -43,7 +39,6 @@ RUN \
     nss \
     openjdk8-jre \
     sqlite-libs && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 # copy files from build stage and local files
 COPY --from=buildstage /davos.jar /app/davos/davos.jar

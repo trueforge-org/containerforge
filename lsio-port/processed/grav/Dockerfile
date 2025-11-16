@@ -1,12 +1,8 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.20
 
-ARG BUILD_DATE
 ARG VERSION
 ARG GRAV_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="TheSpad"
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -49,7 +45,6 @@ RUN \
   unzip -q \
     /tmp/grav.zip -d /tmp/grav && \
   mv /tmp/grav/grav-admin/* /app/www/public/ && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

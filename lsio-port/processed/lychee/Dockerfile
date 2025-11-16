@@ -1,15 +1,11 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/sigstore/cosign/cosign:latest AS cosign-bin
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG LYCHEE_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="hackerman"
 
 RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bin/cosign \
     --mount=type=bind,source=/lychee.pub,target=/config/lychee.pub \
@@ -68,7 +64,6 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
   rm -rf /app/www/storage/framework/sessions/* && \
   rm -rf /app/www/storage/framework/views/* && \
   rm -rf /app/www/storage/logs/* && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG KIMAI_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="nemchik"
 
 RUN \
   echo "**** install runtime packages ****" && \
@@ -41,7 +37,6 @@ RUN \
   COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction && \
   COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap && \
   /usr/bin/composer clearcache -d /app/www/ && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

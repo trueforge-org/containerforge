@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG DOKUWIKI_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="chbmb"
 
 RUN \
   echo "**** install build packages ****" && \
@@ -39,7 +35,6 @@ RUN \
   tar xf \
     /tmp/dokuwiki.tar.gz -C \
     /app/www/public --strip-components=1 && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

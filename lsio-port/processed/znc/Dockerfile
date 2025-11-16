@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22 AS buildstage
 ############## build stage ##############
@@ -90,10 +89,7 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="notaptalca"
 
 # copy files from build stage
 COPY --from=buildstage /tmp/znc/usr/ /usr/
@@ -104,7 +100,6 @@ RUN \
   RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
   apk add -U --update --no-cache \
     ${RUNTIME_PACKAGES} && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 # copy local files
 COPY root/ /

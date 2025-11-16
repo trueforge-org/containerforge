@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 
 FROM golang:1.23-alpine AS builder
 
@@ -26,16 +25,12 @@ RUN \
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG HISHTORY_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thespad"
 
 RUN \
   apk add --no-cache \
     postgresql16-client && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
 
 COPY --from=builder /server /app/server
 

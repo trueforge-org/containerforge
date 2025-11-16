@@ -1,13 +1,9 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG FLEET_RELEASE
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="Josh Stark,Thelamer"
 
 # default env
 ENV fleet_database_driver="org.mariadb.jdbc.Driver" \
@@ -27,7 +23,6 @@ RUN \
   curl -o \
     /app/fleet/fleet.jar -L \
     "https://github.com/linuxserver/fleet/releases/download/${FLEET_RELEASE}/fleet-${FLEET_RELEASE}.jar" && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** clean up ****" && \
   rm -rf \
     /tmp/*

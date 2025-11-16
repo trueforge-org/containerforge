@@ -1,12 +1,8 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.22
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="saarg"
 
 # package versions
 ARG WEBGRAB_VER
@@ -44,7 +40,6 @@ RUN \
     /tmp/ini.zip -L \
     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip && \
   unzip -q /tmp/ini.zip -d /defaults/ini/ && \
-  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

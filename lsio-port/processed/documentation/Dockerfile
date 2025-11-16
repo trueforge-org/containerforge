@@ -1,15 +1,11 @@
-# syntax=docker/dockerfile:1
 
 FROM ghcr.io/linuxserver/d2-builder:latest AS d2
 
 FROM ghcr.io/linuxserver/baseimage-alpine:edge
 
 # set version label
-ARG BUILD_DATE
 ARG VERSION
 ARG D2_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="roxedus"
 
 RUN \
   echo "**** install packages ****" && \
