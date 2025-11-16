@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "v4.5.0"
+  default = "4.5.0"
 }
 
 variable "LICENSE" {
