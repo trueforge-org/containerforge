@@ -23,15 +23,29 @@ for processed in "$PROCESSED_DIR"/*; do
 
     # 2️⃣ Replace TEMPLATE in docker-bake.hcl
     docker_bake_file="$processed/docker-bake.hcl"
+    version_file="$processed/version.txt"
+    $version="UNKNOWNVERSION"
+    $source="UNKNOWNSOURCE"
     if [[ -f "$docker_bake_file" ]]; then
+        if [[ -f "$version_file" ]]; then
+            $version=$(cat "$version_file")
+        fi
+        if [[ -f "$source_file" ]]; then
+            $source=$(cat "$source_file")
+        fi
         if sed --version >/dev/null 2>&1; then
             # GNU sed
             sed -i "s/TEMPLATE/$foldername/g" "$docker_bake_file"
+            sed -i "s/TEMPLATEVERSION/$version/g" "$docker_bake_file"
+            sed -i "s/TEMPLATESOURCE/$source/g" "$docker_bake_file"
         else
             # macOS / BSD sed
             sed -i '' "s/TEMPLATE/$foldername/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATEVERSION/$version/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATESOURCE/$source/g" "$docker_bake_file"
         fi
     fi
+    rm -rf $version_file $source_file || true
 
     # 2️⃣ Replace TEMPLATEPORT in container_test.go
     container_test_file="$processed/container_test.go"
