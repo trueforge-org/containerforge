@@ -58,8 +58,9 @@ if [[ -d "$s6_dir" ]]; then
         rm -f "$subdir/type" || true
         rm -f "$subdir/up" || true
         rm -f "$subdir/notification-fd" || true
-        echo "[CLEANUP] Removed unnecessary files..."
+
     done
+    echo "[CLEANUP] Removed unnecessary files..."
 # Find all directories recursively, deepest first
 find "$s6_dir" -type d -depth | while IFS= read -r dir; do
     all_empty=true
@@ -80,8 +81,10 @@ find "$s6_dir" -type d -depth | while IFS= read -r dir; do
     if $all_empty; then
         rm -rf "$dir"
     fi
-    echo "[CLEANUP] Removed empty folders..."
+
 done
+ echo "[CLEANUP] Removed empty folders..."
+
     rm -rf "$s6_dir/init-deprecate" && echo "[CLEANUP] Deleted deprecation notice..." || true
     for init in "$s6_dir"/init-*; do
         [[ -d "$init" ]] || continue
@@ -125,7 +128,7 @@ fi
     [[ -d "$processed" ]] || continue
     dockerfiles=( "$processed/Dockerfile"* )
 
-    echo "[VERBOSE] Found Dockerfiles in $processed: ${dockerfiles[*]}"
+    echo "[VERBOSE] Cleaning up Dickerfiles in $processed: ${dockerfiles[*]}"
 
     # 1️⃣ Sanitize all Dockerfiles
     for df in "${dockerfiles[@]}"; do
@@ -145,13 +148,13 @@ echo "[POSTPROCESS] Checking for duplicate Dockerfiles..."
     [[ ${#dockerfiles[@]} -gt 1 ]] || { echo "[VERBOSE] Only one Dockerfile in $processed, skipping..."; continue; }
 
     temp_dir=$(mktemp -d)
-    echo "[VERBOSE] Created temporary directory $temp_dir for processing"
+    # echo "[VERBOSE] Created temporary directory $temp_dir for processing"
 
     # Replace FROM lines with PLACEHOLDER in temp files
     for df in "${dockerfiles[@]}"; do
         temp_file="$temp_dir/$(basename "$df")"
         sed -E 's/^FROM .*/PLACEHOLDER/' "$df" > "$temp_file"
-        echo "[VERBOSE] Processed $df -> $temp_file"
+        # echo "[VERBOSE] Processed $df -> $temp_file"
     done
 
     # Compare all temp files
@@ -160,7 +163,7 @@ echo "[POSTPROCESS] Checking for duplicate Dockerfiles..."
     for f in "$temp_dir"/*; do
         if ! cmp -s "$temp_dir/$first_file" "$f"; then
             all_same=false
-            echo "[VERBOSE] Difference found: $f differs from $first_file"
+            # echo "[VERBOSE] Difference found: $f differs from $first_file"
             break
         fi
     done
@@ -171,15 +174,15 @@ echo "[POSTPROCESS] Checking for duplicate Dockerfiles..."
         for df in "${dockerfiles[@]}"; do
             if [[ $(basename "$df") != "Dockerfile" ]]; then
                 rm -f "$df"
-                echo "[VERBOSE] Removed duplicate Dockerfile: $df"
+                # echo "[VERBOSE] Removed duplicate Dockerfile: $df"
             fi
         done
-    else
-        echo "[POSTPROCESS] Dockerfiles differ for $processed, keeping all versions."
+    # else
+        # echo "[POSTPROCESS] Dockerfiles differ for $processed, keeping all versions."
     fi
 
     rm -rf "$temp_dir"
-    echo "[VERBOSE] Removed temporary directory $temp_dir"
+    # echo "[VERBOSE] Removed temporary directory $temp_dir"
 
 
 done
