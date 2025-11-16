@@ -39,6 +39,9 @@ for processed in "$PROCESSED_DIR"/*; do
         fi
     fi
 
+
+rm -rf $processed/Dockerfile.riscv64 && echo "[CLEANUP]: removed Dockerfile.riscv64" || true
+
 # 3️⃣ Clean empty svc-* folders and append run scripts to start.sh
 root_folder="$processed/root"
 etc_folder="$root_folder/etc"
@@ -46,6 +49,8 @@ s6_root="$etc_folder/s6-overlay/"
 s6_dir="$s6_root/s6-rc.d"
 start_sh="$processed/start.sh"
 
+rm -rf $root_folder/donate.txt && echo "[CLEANUP]: removed donate.txt" || true
+rm -rf $root_folder/migrations && echo "[CLEANUP]: removed migrations" || true
 
 if [[ -d "$s6_dir" ]]; then
     for subdir in "$s6_dir"/*; do
@@ -115,5 +120,51 @@ if [ -d "$root_folder" ] && [ -z "$(ls -A "$root_folder")" ]; then
     rm -rf "$root_folder"
     echo "[CLEANUP] Removed empty root folder..."
 fi
+
+# ===== Dockerfile Deduplication =====
+echo "[POSTPROCESS] Checking for duplicate Dockerfiles..."
+
+    dockerfiles=( "$processed"/Dockerfile* )
+    [[ ${#dockerfiles[@]} -gt 1 ]] || { echo "[VERBOSE] Only one Dockerfile in $processed, skipping..."; continue; }
+
+    echo "[VERBOSE] Found Dockerfiles in $processed: ${dockerfiles[*]}"
+
+    temp_dir=$(mktemp -d)
+    echo "[VERBOSE] Created temporary directory $temp_dir for processing"
+
+    # Replace FROM lines with PLACEHOLDER in temp files
+    for df in "${dockerfiles[@]}"; do
+        temp_file="$temp_dir/$(basename "$df")"
+        sed -E 's/^FROM .*/PLACEHOLDER/' "$df" > "$temp_file"
+        echo "[VERBOSE] Processed $df -> $temp_file"
+    done
+
+    # Compare all temp files
+    first_file=$(ls "$temp_dir" | head -n1)
+    all_same=true
+    for f in "$temp_dir"/*; do
+        if ! cmp -s "$temp_dir/$first_file" "$f"; then
+            all_same=false
+            echo "[VERBOSE] Difference found: $f differs from $first_file"
+            break
+        fi
+    done
+
+    # If all the same, remove all but Dockerfile
+    if $all_same; then
+        echo "[POSTPROCESS] All Dockerfiles identical for $processed. Removing duplicates..."
+        for df in "${dockerfiles[@]}"; do
+            if [[ $(basename "$df") != "Dockerfile" ]]; then
+                rm -f "$df"
+                echo "[VERBOSE] Removed duplicate Dockerfile: $df"
+            fi
+        done
+    else
+        echo "[POSTPROCESS] Dockerfiles differ for $processed, keeping all versions."
+    fi
+
+    rm -rf "$temp_dir"
+    echo "[VERBOSE] Removed temporary directory $temp_dir"
+
 
 done
