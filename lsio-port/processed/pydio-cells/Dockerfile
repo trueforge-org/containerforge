@@ -33,7 +33,7 @@ RUN \
     -ldflags "\
     -X github.com/pydio/cells/v4/common.version=${CELLS_RELEASE:1} \
     -X github.com/pydio/cells/v4/common.BuildStamp=${BUILD_DATE} \
-    -X github.com/pydio/cells/v4/common.BuildRevision=${VERSION}" \
+    -X github.com/pydio/cells/v4/common.BuildRevision=v${VERSION}" \
     -o /app/cells -x . && \
   echo "**** cleanup ****" && \
   apk del --purge \

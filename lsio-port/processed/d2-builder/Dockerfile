@@ -26,7 +26,7 @@ RUN \
   /tmp/d2.tar.gz -C \
     /tmp/d2 --strip-components=1 && \
   cp /tmp/d2/bin/d2 /usr/local/bin && \
-  printf "Version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
+  printf "Version: v${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

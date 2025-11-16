@@ -179,7 +179,6 @@ for df in "${dockerfiles[@]}"; do
             -e '/printf "Linuxserver\.io version/d' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
             -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
-            -e "s/\$VERSION/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
             -e 's/x64/\$TARGETARCH/g' \
             -e 's/x86_64/\$TARGETARCH/g' \
@@ -195,7 +194,6 @@ for df in "${dockerfiles[@]}"; do
             -e '/^# syntax=docker\/dockerfile:1/d' \
             -e '/printf "Linuxserver\.io version/d' \
             -e "s/$BUILD_VERSION_ARG/VERSION/g" \
-            -e "s/\$VERSION/\${VERSION}/g" \
             -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
             -e 's/amd64/\$TARGETARCH/g' \
             -e 's/x64/\$TARGETARCH/g' \
