@@ -31,7 +31,7 @@ RUN \
     /tmp/*
 
 USER apps
-COPY ./root/ /
+COPY ./ /
 
 VOLUME /config
 
