@@ -87,7 +87,7 @@ if [ ! -f "$config_file" ]; then
   exit 1
 fi
 
-if ! grep -q "installed' => true" "$config_file"; then
+if ! grep -q "'installed' => true" "$config_file"; then
   echo 'Looks like Nextcloud failed to complete installation. Exiting in 15 sec...'
   # Sleep so people can get to the logs
   # And see what happened
