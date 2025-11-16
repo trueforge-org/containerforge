@@ -37,7 +37,8 @@ total_docker_repos=$(echo "$repos" | wc -l | tr -d ' ')
 echo "[*] Total docker-* repos: $total_docker_repos"
 
 # Counters
-skipped_apps=0
+skipped_distro_apps=0
+skipped_done_apps=0
 processed_repos=0
 failed_copies=()
 based_on_selkies=0
@@ -49,20 +50,21 @@ for repo in $repos; do
     shortname="${repo#docker-}"
     # Remove baseimage- prefix
     shortname="${shortname#baseimage-}"
-
     target="$REPO_DIR/$shortname"
 
-    # Skip if exists under ../apps
-    if [[ -d "$APPS_DIR/$shortname" ]]; then
-        echo "[SKIP] '$shortname' exists under ../apps, skipping."
-        ((skipped_apps++))
+    # Skip if $shortname is in DISTROS before cloning
+    if [[ " ${DISTROS[*]} " == *" $shortname "* ]]; then
+        echo "[SKIP] '$shortname' is a distro, skipping clone/pull."
+        rm -rf $target || true
+        ((skipped_distro_apps++))
         continue
     fi
 
-    # Skip if $shortname is in DISTROS
-    if [[ " ${DISTROS[*]} " == *" $shortname "* ]]; then
-        echo "[SKIP] '$shortname' is a distro, skipping."
-        ((skipped_apps++))
+    # Skip if exists under ../apps
+    if [[ -d "$APPS_DIR/$shortname" ]]; then
+        echo "[SKIP] '$shortname' exists under ../apps, clone/pull."
+        rm -rf $target || true
+        ((skipped_done_apps++))
         continue
     fi
 
@@ -135,7 +137,8 @@ echo ""
 echo "==================== SUMMARY ===================="
 echo "Total repos under linuxserver.io: $total_all_repos"
 echo "Total docker-* repos:             $total_docker_repos"
-echo "Skipped (../apps exists):         $skipped_apps"
+echo "Skipped (app is distro):         $skipped_distro_apps"
+echo "Skipped (../apps exists):         $skipped_done_apps"
 echo "Skipped (baseimage-selkies):     $based_on_selkies"
 echo "Skipped (no Dockerfile):          $no_dockerfile_skipped"
 echo "Processed repos:                  $processed_repos"
