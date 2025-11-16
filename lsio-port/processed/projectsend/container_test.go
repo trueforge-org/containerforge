@@ -23,10 +23,10 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithExposedPorts("TEMPLATEPORT/tcp"),
+		testcontainers.WithExposedPorts("'80'/tcp"),
 		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("TEMPLATEPORT/tcp"),
-			wait.ForHTTP("/").WithPort("TEMPLATEPORT/tcp").WithStatusCodeMatcher(func(status int) bool {
+			wait.ForListeningPort("'80'/tcp"),
+			wait.ForHTTP("'/install/make-config.php'").WithPort("'80'/tcp").WithStatusCodeMatcher(func(status int) bool {
 				return status == 200
 			}),
 		),

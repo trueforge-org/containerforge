@@ -1,7 +1,7 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "TEMPLATE"
+  default = "openssh-server"
 }
 
 variable "VERSION" {
