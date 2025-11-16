@@ -61,6 +61,8 @@ for repo in $repos; do
     shortname="${shortname#alpine-}"
     # Remove baseimage- prefix
     shortname="${shortname#baseimage-}"
+    # Remove alpine- prefix
+    shortname="${shortname#alpine-}"
     target="$REPO_DIR/$shortname"
 
     # Skip if $shortname is in DISTROS before cloning

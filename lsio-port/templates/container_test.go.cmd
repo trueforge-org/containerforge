@@ -23,13 +23,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithExposedPorts("TEMPLATEPORT/tcp"),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("TEMPLATEPORT/tcp"),
-			wait.ForHTTP("/").WithPort("TEMPLATEPORT/tcp").WithStatusCodeMatcher(func(status int) bool {
-				return status == 200
-			}),
-		),
+		testcontainers.WithCmdArgs("CICMD"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
