@@ -48,6 +48,8 @@ no_dockerfile_skipped=0
 for repo in $repos; do
     # Remove docker- prefix
     shortname="${repo#docker-}"
+    # Remove alpine- prefix
+    shortname="${shortname#alpine-}"
     # Remove baseimage- prefix
     shortname="${shortname#baseimage-}"
     target="$REPO_DIR/$shortname"

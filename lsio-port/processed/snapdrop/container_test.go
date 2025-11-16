@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/testcontainers/testcontainers-go"
+	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 func Test(t *testing.T) {
@@ -22,7 +23,13 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithCmdArgs("test", "-f", "something"),
+		testcontainers.WithExposedPorts("80/tcp"),
+		testcontainers.WithWaitStrategy(
+			wait.ForListeningPort("80/tcp"),
+			wait.ForHTTP("/").WithPort("80/tcp").WithStatusCodeMatcher(func(status int) bool {
+				return status == 200
+			}),
+		),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)

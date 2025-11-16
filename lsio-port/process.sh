@@ -5,13 +5,7 @@ REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
 
-mkdir -p "$REPO_DIR" "$PROCESSED_DIR"
-
-echo "[*] Fetching ALL LinuxServer.io repositories (with pagination)..."
-
-all_repos=""
-page=1
-
+mkdir -p "$PROCESSED_DIR"
 
 # ===== PostProcessing =====
 echo ""
@@ -39,16 +33,19 @@ for processed in "$PROCESSED_DIR"/*; do
         fi
     fi
 
-    if [[ -f "$container_test.go" ]]; then
+    # 2️⃣ Replace TEMPLATEPORT in container_test.go
+    container_test_file="$processed/container_test.go"
+    docker_file="$processed/Dockerfile"
+    if [[ -f "$container_test_file" ]]; then
       port=""
-      if grep -q "EXPOSE" "$file"; then
-          port=$(grep "EXPOSE" "$file" | grep -o '[0-9]\+' | head -n1)
+      if grep -q "EXPOSE" "$docker_file"; then
+          port=$(grep "EXPOSE" "$docker_file" | grep -o '[0-9]\+' | head -n1)
           if sed --version >/dev/null 2>&1; then
             # GNU sed
-            sed -i "s/TEMPLATEPORT/$port/g" "$docker_bake_file"
+            sed -i "s/TEMPLATEPORT/$port/g" "$container_test_file"
            else
             # macOS / BSD sed
-            sed -i '' "s/TEMPLATEPORT/$port/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATEPORT/$port/g" "$container_test_file"
            fi
       fi
 
