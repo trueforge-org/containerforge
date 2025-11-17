@@ -2,6 +2,9 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 USER root
 
+ARG TARGETARCH
+ARG VERSION
+
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 # https://github.com/dlemstra/Magick.NET/issues/707#issuecomment-785351620
 
