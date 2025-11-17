@@ -6,7 +6,7 @@ FROM ghcr.io/by275/libtorrent:2-alpine3.22 AS libtorrent
 
 FROM ghcr.io/trueforge-org/python:3.12.6
 
-COPY --from=ghcr.io/astral-sh/uv:0.9.8 /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d /uv /uvx /bin/
 
 # set version label
 ARG VERSION
