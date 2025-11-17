@@ -16,7 +16,7 @@ RUN echo "**** install kavita ****" && \
     "https://github.com/Kareadita/Kavita/releases/download/v${VERSION}/kavita-linux-$TARGETARCH.tar.gz" && \
   tar xf \
     /tmp/kavita.tar.gz -C \
-    /app--strip-components=1 \
+    /app --strip-components=1 \
     --no-same-owner && \
   chmod +x /app/Kavita && \
   mkdir -p /defaults/ && \

@@ -24,6 +24,9 @@ func Test(t *testing.T) {
 	app, err := testcontainers.Run(
 		ctx, image,
 		testcontainers.WithExposedPorts("8200/tcp"),
+		testcontainers.WithEnv(map[string]string{
+			"SETTINGS_ENCRYPTION_KEY": "abcde12345",
+		}),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("8200/tcp"),
 			wait.ForHTTP("/login.html'").WithPort("8200/tcp").WithStatusCodeMatcher(func(status int) bool {
