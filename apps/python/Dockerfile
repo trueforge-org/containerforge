@@ -81,6 +81,8 @@ RUN set -eux; \
         \( -type d -a \( -name test -o -name tests -o -name idle_test \) \
         -o -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \) -exec rm -rf '{}' +; \
     ldconfig; \
+    mkdir -p /config/venv; \
+    chown -R apps:apps /config/venv && chmod -R 755 /config/venv; \
     python3 --version; \
     pip3 --version
 
