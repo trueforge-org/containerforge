@@ -5,9 +5,10 @@ REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
 DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux" "el")
-BLACKLIST=("nextcloud")
+BLACKLIST=("nextcloud" "ci" "build-agent" "jenkins-builder")
 source ./GITHUB_TOKEN.env || echo "[INFO] No GITHUB_TOKEN.env file found, proceeding without GitHub token."
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
+NOREPULL="${NOREPULL:="false"}"
 
 # Set curl auth header only if token is set
 if [[ -n "$GITHUB_TOKEN" ]]; then
@@ -93,7 +94,9 @@ for repo in $repos; do
     fi
 
     # Clone or pull
-    if [[ -d "$target" ]]; then
+    if [[ "$NOREPULL" == "true" && -d "$target" ]]; then
+        echo "[SKIP] NOREPULL is set, skipping pull for $shortname"
+    elif [[ -d "$target" ]]; then
         echo "[PULL] Updating $shortname"
         git -C "$target" pull --quiet || echo "[WARN] git pull failed for $shortname"
     else
@@ -188,7 +191,7 @@ echo ""
 echo "==================== SUMMARY ===================="
 echo "Total repos under linuxserver.io: $total_all_repos"
 echo "Total docker-* repos:             $total_docker_repos"
-echo "Skipped (app is blacklisted):         $skipped_distro_apps"
+echo "Skipped (app is blacklisted):         $skipped_blacklist_apps"
 echo "Skipped (app is distro):         $skipped_distro_apps"
 echo "Skipped (../apps exists):         $skipped_done_apps"
 echo "Skipped (baseimage-selkies):     $based_on_selkies"

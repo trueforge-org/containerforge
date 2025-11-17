@@ -194,7 +194,9 @@ for df in "${dockerfiles[@]}"; do
             -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
+            -e "\|ADD rootfs.tar.xz|d" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
             -e 's|amd64|\$TARGETARCH|g' \
             -e 's|x64|\$TARGETARCH|g' \
@@ -208,8 +210,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
-
-
+            -e 's|abc|apps|g' \
             "$df"
     else
         sed -i '' \
@@ -219,9 +220,11 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^# syntax=docker/dockerfile:1|d' \
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
+            -e "\|ADD rootfs.tar.xz|d" \
             -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
             -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
             -e 's|amd64|\$TARGETARCH|g' \
@@ -236,6 +239,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
+            -e 's|abc|apps|g' \
             "$df"
     fi
 perl -0777 -i -pe '
@@ -245,6 +249,7 @@ perl -0777 -i -pe '
     ^[ \t]*fi\b[^\n]*\n                     # match the closing fi line
   }{}mgx
 ' "$df"
+awk 'prev && /^$/ { next } { print } { prev = /\\$/ }' "$df" > "$df.tmp" && mv "$df.tmp" "$df"
 if [[ ! -d "$root_folder" ]]; then
     if sed --version >/dev/null 2>&1; then
         sed -i \
@@ -285,18 +290,50 @@ done
 
         rm -rf "$temp_dir"
     fi
+echo "[POSTPROCESS] Sanitizing start.sh in $processed"
+if [[ -f "$processed/start.sh" ]]; then
+    if sed --version >/dev/null 2>&1; then
+        sed -i \
+        -e 's|#!/usr/bin/with-contenv.*||g' \
+        -e 's|# shellcheck.*||g' \
+        -e 's|#!/usr/bin/with-contenv bash||g' \
+        -e 's|lsiown.*||g' \
+        -e 's|abc|apps|g' \
+        -e 's|s6-setuidgid apps||g' \
+        -e 's|s6-setuidgid 568||g' \
+        -e 's|s6-notifyoncheck.*||g' \
+        -e 's|# ===== From.*||g' \
+        -e 's|.*LSIO_NON_ROOT_USER.*||g' \
+        "$processed/start.sh"
+    else
+        sed -i '' \
+        -e 's|#!/usr/bin/with-contenv.*||g' \
+        -e 's|# shellcheck.*||g' \
+        -e 's|#!/usr/bin/with-contenv bash||g' \
+        -e 's|lsiown.*||g' \
+        -e 's|abc|apps|g' \
+        -e 's|s6-setuidgid apps||g' \
+        -e 's|s6-setuidgid 568||g' \
+        -e 's|s6-notifyoncheck.*||g' \
+        -e 's|# ===== From.*||g' \
+        -e 's|.*LSIO_NON_ROOT_USER.*||g' \
+        "$processed/start.sh"
+    fi
+fi
 done
 
-find "$processed" -type f -name "*.sh" | while read -r file; do
-    # Read the first line
-    first_line=$(head -n 1 "$file")
+echo "[POSTPROCESS] Ensuring bash shebangs in .sh files..."
+find "$PROCESSED_DIR" -type f -name "*.sh" | while IFS= read -r file; do
+    # Strip possible carriage return
+    first_line=$(head -n 1 "$file" | tr -d '\r')
 
-    # Check if it starts with a bash shebang
     if [[ "$first_line" != "#!"*bash* ]]; then
         echo "Adding bash shebang to $file"
-        # Insert the shebang at the top
-        sed -i '1i #!/bin/bash' "$file"
+        # Prepend using a temp file
+        {
+            printf '%s\n' '#!/usr/bin/env bash'
+            cat "$file"
+        } > "$file.tmp" && mv "$file.tmp" "$file"
     fi
 done
-
 shopt -u nullglob
