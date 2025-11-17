@@ -1,5 +1,5 @@
 ## TODO: pin version tag
-FROM ghcr.io/trueforge-org/golang:rolling AS buildstage
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:ac65e5c170bd1414782d964689f53a0f72f7e07567c212e666652e86a6ec26e5 AS buildstage
 
 # build variables
 
