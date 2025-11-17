@@ -41,6 +41,7 @@ RUN \
     linux-headers-generic \
     perl && \
   apt-get -y autoremove && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \

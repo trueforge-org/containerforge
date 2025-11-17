@@ -14,6 +14,7 @@ RUN \
   apt-get install -y --no-install-recommends \
     "resilio-sync=${VERSION}" && \
   echo "**** cleanup ****" && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \

@@ -31,6 +31,7 @@ RUN \
   tar xf /tmp/fah.tar.bz2 -C /app --strip-components=1 && \
   echo "**** cleanup ****" && \
   apt-get clean && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \

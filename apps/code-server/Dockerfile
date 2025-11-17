@@ -28,6 +28,7 @@ RUN \
     /app/code-server --strip-components=1 && \
   echo "**** clean up ****" && \
   apt-get clean && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /config/* \
     /tmp/* \

@@ -31,6 +31,7 @@ RUN \
   gdebi -n /tmp/duplicati.deb && \
   echo "**** cleanup ****" && \
   apt-get clean && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # copy local files

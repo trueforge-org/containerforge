@@ -25,6 +25,7 @@ RUN echo "**** install kavita ****" && \
   cp /app/kavita/config/appsettings-init.json /defaults/ && \
   rm -rf /app/kavita/config && \
   ln -s /config /app/kavita/config && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** clean up ****" && \
   rm -rf \
     /tmp/* \

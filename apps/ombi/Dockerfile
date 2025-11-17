@@ -27,6 +27,7 @@ RUN \
     /app/ombi/ && \
   chmod +x /app/ombi/Ombi && \
   echo "**** clean up ****" && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \

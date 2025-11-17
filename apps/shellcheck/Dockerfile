@@ -12,7 +12,8 @@ RUN \
     curl -L -o /tmp/shellcheck.tar.xz \
         https://github.com/koalaman/shellcheck/releases/download/v${VERSION}/shellcheck-v${VERSION}.linux.${TARGETARCH}.tar.xz && \
     tar -xJf /tmp/shellcheck.tar.xz -C /usr/local/bin --strip-components=1 shellcheck-v0.11.0/shellcheck && \
-    chmod +x /usr/local/bin/shellcheck
+    chmod +x /usr/local/bin/shellcheck && \
+    chown -R apps:apps /app && chmod -R 755 /app
 
 USER apps
 

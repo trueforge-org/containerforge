@@ -27,6 +27,7 @@ RUN \
     build-essential \
     git \
     python3-dev && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /var/lib/apt/lists/* \
     /tmp/*

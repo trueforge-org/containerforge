@@ -28,6 +28,7 @@ RUN \
   mv /usr/lib/UniFi /usr/lib/unifi && \
   echo "**** cleanup ****" && \
   apt-get clean && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \
