@@ -6,8 +6,8 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-ARG SPECIAL=${TARGETARCH/amd64/10-64bit}
-ARG SPECIAL=${TARGETARCH/arm64/stable-arm64}
+ARG SPECIAL=${TARGETARCH/amd64/-10-64bit}
+ARG SPECIAL=${TARGETARCH/arm64/-stable-arm64}
 
 #Add needed nvidia environment variables for container toolkit
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
@@ -23,7 +23,7 @@ RUN \
     intel-opencl-icd \
     libexpat1 && \
   echo "**** install foldingathome ****" && \
-  download_url="https://download.foldingathome.org/releases/public/fah-client/debian-${SPECIAL}/release/fah-client_8.4.9_${TARGETARCH}.deb" \
+  download_url="https://download.foldingathome.org/releases/public/fah-client/debian${SPECIAL}/release/fah-client_8.4.9_${TARGETARCH}.deb" \
   && curl -o \
     /tmp/fah.tar.bz2 -L \
     ${download_url} && \
