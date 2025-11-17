@@ -23,7 +23,7 @@ RUN \
     intel-opencl-icd \
     libexpat1 && \
   echo "**** install foldingathome ****" && \
-  download_url="https://download.foldingathome.org/releases/public/fah-client/debian-${SPECIAL{/release/fah-client_8.4.9_${TARGETARCH}.deb" \
+  download_url="https://download.foldingathome.org/releases/public/fah-client/debian-${SPECIAL}/release/fah-client_8.4.9_${TARGETARCH}.deb" \
   && curl -o \
     /tmp/fah.tar.bz2 -L \
     ${download_url} && \
