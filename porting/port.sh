@@ -5,7 +5,7 @@ REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
 DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux" "el")
-BLACKLIST=("nextcloud" "ci" "build-agent" "jenkins-builder")
+BLACKLIST=("nextcloud" "ci" "build-agent" "jenkins-builder" "d2-builder" "documentation")
 source ./GITHUB_TOKEN.env || echo "[INFO] No GITHUB_TOKEN.env file found, proceeding without GitHub token."
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 NOREPULL="${NOREPULL:="false"}"
