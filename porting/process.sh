@@ -55,6 +55,16 @@ CI_AUTH=$(yq e -r '.repo_vars[] | select(test("CI_AUTH")) | split("=")[1]' "$JEN
 CI_WEBPATH=$(yq e -r '.repo_vars[] | select(test("CI_WEBPATH")) | split("=")[1]' "$JENKINS_YAML")
 CI_CMD=$(yq e -r '.repo_vars[] | select(test("CI_CMD")) | split("=")[1]' "$JENKINS_YAML")
 
+BUILD_VERSION_ARG=${BUILD_VERSION_ARG//\'/}
+CI_WEB=${CI_WEB//\'/}
+CI_PORT=${CI_PORT//\'/}
+CI_SSL=${CI_SSL//\'/}
+CI_DOCKERENV=${CI_DOCKERENV//\'/}
+CI_AUTH=${CI_AUTH//\'/}
+CI_WEBPATH=${CI_WEBPATH//\'/}
+CI_CMD=${CI_CMD//\'/}
+BUILD_VERSION_ARG=${BUILD_VERSION_ARG//\'/}
+
 else
     echo "[WARN] jenkins-vars.yml not found in $processed, skipping Jenkins vars extraction."
 fi
@@ -102,17 +112,18 @@ SOURCE=$(printf '%s\n' "$SOURCE" | sed 's/[&/\]/\\&/g')
     container_test_file_web="$processed/container_test.go.web"
     container_test_file_cmd="$processed/container_test.go.cmd"
     container_test_file_port="$processed/container_test.go.port"
+    container_test_file_test="$processed/container_test.go.test"
         replace_val=""
-        if [[ "$CI_WEB" != "true" ]]; then
+        if [[ "$CI_WEB" == "true" ]]; then
             mv $container_test_file_web "$container_test_file"
         elif [[ "$CI_PORT" != "" ]]; then
             mv $container_test_file_port "$container_test_file"
         elif [[ "$CI_CMD" != "" ]]; then
             mv $container_test_file_cmd "$container_test_file"
             else
-mv $container_test_file_cmd "$container_test_file"
+mv $container_test_file_test "$container_test_file"
         fi
-rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_file_port" || true
+rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_file_port" "$container_test_file_test" || true
 
     if [[ -f "$container_test_file" ]]; then
 
@@ -174,51 +185,84 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
 for df in "${dockerfiles[@]}"; do
     if sed --version >/dev/null 2>&1; then
         sed -i \
-            -e '/^LABEL build_version/d' \
-            -e '/^LABEL maintainer/d' \
-            -e '/^ARG BUILD_DATE/d' \
-            -e '/^# syntax=docker\/dockerfile:1/d' \
-            -e '/printf "Linuxserver\.io version/d' \
-            -e "/ARG $BUILD_VERSION_ARG/d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e "s/$BUILD_VERSION_ARG/VERSION/g" \
-            -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
-            -e 's/amd64/\$TARGETARCH/g' \
-            -e 's/x64/\$TARGETARCH/g' \
-            -e 's/x86_64/\$TARGETARCH/g' \
-            -e 's/arm64/\$TARGETARCH/g' \
-            -e 's/aarch64/\$TARGETARCH/g' \
-            -e 's/aarch/\$TARGETARCH/g' \
-            -e '/^ARGVERSION/d' \
+            -e '\|^LABEL build_version|d' \
+            -e '\|^LABEL maintainer|d' \
+            -e '\|^ARG BUILD_DATE|d' \
+            -e '\|^# syntax=docker/dockerfile:1|d' \
+            -e '\|printf "Linuxserver\.io version|d' \
+            -e "\|ARG $BUILD_VERSION_ARG|d" \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
+            -e "s|$BUILD_VERSION_ARG|VERSION|g" \
+            -e "\|ADD rootfs.tar.xz|d" \
+            -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
+            -e 's|amd64|\$TARGETARCH|g' \
+            -e 's|x64|\$TARGETARCH|g' \
+            -e 's|x86_64|\$TARGETARCH|g' \
+            -e 's|arm64|\$TARGETARCH|g' \
+            -e 's|aarch64|\$TARGETARCH|g' \
+            -e 's|aarch|\$TARGETARCH|g' \
+            -e '\|^ARGVERSION|d' \
+            -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
+            -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
+            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
+            -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
+            -e 's|abc|apps|g' \
             "$df"
     else
         sed -i '' \
-            -e '/^LABEL build_version/d' \
-            -e '/^LABEL maintainer/d' \
-            -e '/^ARG BUILD_DATE/d' \
-            -e '/^# syntax=docker\/dockerfile:1/d' \
-            -e '/printf "Linuxserver\.io version/d' \
-            -e "/ARG $BUILD_VERSION_ARG/d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian:[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e "s/$BUILD_VERSION_ARG/VERSION/g" \
-            -e "s/\${VERSION}/$VERSIONPREFIX\${VERSION}/g" \
-            -e 's/amd64/\$TARGETARCH/g' \
-            -e 's/x64/\$TARGETARCH/g' \
-            -e 's/x86_64/\$TARGETARCH/g' \
-            -e 's/arm64/\$TARGETARCH/g' \
-            -e 's/aarch64/\$TARGETARCH/g' \
-            -e 's/aarch/\$TARGETARCH/g' \
-            -e '/^ARGVERSION/d' \
+            -e '\|^LABEL build_version|d' \
+            -e '\|^LABEL maintainer|d' \
+            -e '\|^ARG BUILD_DATE|d' \
+            -e '\|^# syntax=docker/dockerfile:1|d' \
+            -e '\|printf "Linuxserver\.io version|d' \
+            -e "\|ARG $BUILD_VERSION_ARG|d" \
+            -e "\|ADD rootfs.tar.xz|d" \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
+            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
+            -e "s|$BUILD_VERSION_ARG|VERSION|g" \
+            -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
+            -e 's|amd64|\$TARGETARCH|g' \
+            -e 's|x64|\$TARGETARCH|g' \
+            -e 's|x86_64|\$TARGETARCH|g' \
+            -e 's|arm64|\$TARGETARCH|g' \
+            -e 's|aarch64|\$TARGETARCH|g' \
+            -e 's|aarch|\$TARGETARCH|g' \
+            -e '\|^ARGVERSION|d' \
+            -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
+            -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
+            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
+            -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
+            -e 's|abc|apps|g' \
             "$df"
     fi
-
+perl -0777 -i -pe '
+  s{
+    ^[ \t]*if[^\n]*\{VERSION\+x\}[^\n]*\n   # match the opening line containing {VERSION+x}
+    (?:.*\\\n)*?                            # non-greedy match of continuation lines ending with \
+    ^[ \t]*fi\b[^\n]*\n                     # match the closing fi line
+  }{}mgx
+' "$df"
+awk 'prev && /^$/ { next } { print } { prev = /\\$/ }' "$df" > "$df.tmp" && mv "$df.tmp" "$df"
+if [[ ! -d "$root_folder" ]]; then
+    if sed --version >/dev/null 2>&1; then
+        sed -i \
+        -e 's|COPY.*root.*||g' \
+        "$df"
+    else
+        sed -i '' \
+        -e 's|COPY.*root.*||g' \
+        "$df"
+    fi
+fi
     echo "[VERBOSE] Sanitized $df"
 done
-
 
     # ===== Dockerfile Deduplication =====
     if [[ ${#dockerfiles[@]} -gt 1 ]]; then
@@ -246,6 +290,50 @@ done
 
         rm -rf "$temp_dir"
     fi
+echo "[POSTPROCESS] Sanitizing start.sh in $processed"
+if [[ -f "$processed/start.sh" ]]; then
+    if sed --version >/dev/null 2>&1; then
+        sed -i \
+        -e 's|#!/usr/bin/with-contenv.*||g' \
+        -e 's|# shellcheck.*||g' \
+        -e 's|#!/usr/bin/with-contenv bash||g' \
+        -e 's|lsiown.*||g' \
+        -e 's|abc|apps|g' \
+        -e 's|s6-setuidgid apps||g' \
+        -e 's|s6-setuidgid 568||g' \
+        -e 's|s6-notifyoncheck.*||g' \
+        -e 's|# ===== From.*||g' \
+        -e 's|.*LSIO_NON_ROOT_USER.*||g' \
+        "$processed/start.sh"
+    else
+        sed -i '' \
+        -e 's|#!/usr/bin/with-contenv.*||g' \
+        -e 's|# shellcheck.*||g' \
+        -e 's|#!/usr/bin/with-contenv bash||g' \
+        -e 's|lsiown.*||g' \
+        -e 's|abc|apps|g' \
+        -e 's|s6-setuidgid apps||g' \
+        -e 's|s6-setuidgid 568||g' \
+        -e 's|s6-notifyoncheck.*||g' \
+        -e 's|# ===== From.*||g' \
+        -e 's|.*LSIO_NON_ROOT_USER.*||g' \
+        "$processed/start.sh"
+    fi
+fi
 done
 
+echo "[POSTPROCESS] Ensuring bash shebangs in .sh files..."
+find "$PROCESSED_DIR" -type f -name "*.sh" | while IFS= read -r file; do
+    # Strip possible carriage return
+    first_line=$(head -n 1 "$file" | tr -d '\r')
+
+    if [[ "$first_line" != "#!"*bash* ]]; then
+        echo "Adding bash shebang to $file"
+        # Prepend using a temp file
+        {
+            printf '%s\n' '#!/usr/bin/env bash'
+            cat "$file"
+        } > "$file.tmp" && mv "$file.tmp" "$file"
+    fi
+done
 shopt -u nullglob
