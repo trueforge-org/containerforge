@@ -23,9 +23,9 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithExposedPorts("80/tcp"),
+		testcontainers.WithExposedPorts("3000/tcp"),
 		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("80/tcp"),
+			wait.ForListeningPort("3000/tcp"),
 		),
 	)
 	testcontainers.CleanupContainer(t, app)
