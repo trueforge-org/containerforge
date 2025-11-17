@@ -245,6 +245,17 @@ perl -0777 -i -pe '
     ^[ \t]*fi\b[^\n]*\n                     # match the closing fi line
   }{}mgx
 ' "$df"
+if [[ ! -d "$root_folder" ]]; then
+    if sed --version >/dev/null 2>&1; then
+        sed -i \
+        -e 's|COPY.*root.*||g' \
+        "$df"
+    else
+        sed -i '' \
+        -e 's|COPY.*root.*||g' \
+        "$df"
+    fi
+fi
     echo "[VERBOSE] Sanitized $df"
 done
 
@@ -273,6 +284,18 @@ done
         fi
 
         rm -rf "$temp_dir"
+    fi
+done
+
+find "$processed" -type f -name "*.sh" | while read -r file; do
+    # Read the first line
+    first_line=$(head -n 1 "$file")
+
+    # Check if it starts with a bash shebang
+    if [[ "$first_line" != "#!"*bash* ]]; then
+        echo "Adding bash shebang to $file"
+        # Insert the shebang at the top
+        sed -i '1i #!/bin/bash' "$file"
     fi
 done
 
