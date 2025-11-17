@@ -1,7 +1,8 @@
 FROM ghcr.io/trueforge-org/ubuntu:24.4
 
 # set version label
-ARG VERSION="10.11.3"
+ARG VERSION
+ARG TARGETARCH
 USER root
 
 # environment settings
