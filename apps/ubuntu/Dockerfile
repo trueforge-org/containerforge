@@ -50,6 +50,7 @@ RUN apt-get update \
         tini \
         coreutils \
         curl \
+        git \
         jq \
         nano \
         tzdata \
@@ -63,12 +64,14 @@ RUN apt-get update \
         libssl3 \
         sed \
         software-properties-common \
+        sudo \
         gnupg \
         dirmngr \
         xz-utils \
         locales \
         fontconfig \
         p11-kit \
+        unzip \
         locales-all \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
