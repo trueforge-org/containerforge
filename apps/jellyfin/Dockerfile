@@ -24,7 +24,13 @@ RUN \
   \
   echo "**** download and install Jellyfin *****" && \
   curl -L -o /tmp/jellyfin.deb \
-    "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_${VERSION}+ubu2404_all.deb" && \
+    "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_server_${VERSION}+ubu2404_${TARGETARCH}.deb" && \
+  gdebi -n /tmp/jellyfin.deb && \
+  curl -L -o /tmp/jellyfin.deb \
+    "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_web_${VERSION}+ubu2404_${TARGETARCH}.deb" && \
+  gdebi -n /tmp/jellyfin.deb && \
+  curl -L -o /tmp/jellyfin.deb \
+    "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_${VERSION}+ubu2404_${TARGETARCH}.deb" && \
   gdebi -n /tmp/jellyfin.deb && \
   \
   echo "**** cleanup ****" && \
