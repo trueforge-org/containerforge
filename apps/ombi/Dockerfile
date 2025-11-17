@@ -10,8 +10,7 @@ ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 # environment settings
 ENV HOME="/config" \
-  COMPlus_EnableDiagnostics=0 \
-   TMPDIR=/run/ombi-temp
+  COMPlus_EnableDiagnostics=0
 
 RUN echo "**** install ombi ****" && \
   mkdir -p \
@@ -21,8 +20,6 @@ RUN echo "**** install ombi ****" && \
     "https://github.com/Ombi-app/Ombi/releases/download/v${VERSION}/linux-$TARGETARCH.tar.gz" && \
   tar xzf /tmp/ombi-src.tar.gz -C \
     /app/ombi/ && \
-  mkdir -p $TMPDIR && \
-  chown -R apps:apps $TMPDIR && \
   chmod +x /app/ombi/Ombi && \
   echo "**** clean up ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \

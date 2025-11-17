@@ -9,7 +9,6 @@ ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 # environment settings
 ENV HOME="/config" \
-    TMPDIR=/run/duplicati-temp \
     DUPLICATI__REQUIRE_DB_ENCRYPTION_KEY=true \
     DUPLICATI__SERVER_DATAFOLDER=/config \
     DUPLICATI__WEBSERVICE_PORT=8200 \

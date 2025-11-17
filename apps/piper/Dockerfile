@@ -6,8 +6,6 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-ENV TMPDIR="/run/piper-temp"
-
 RUN mkdir -p /app/cfpy && python3 -m venv /app/cfpy && \
   pip install -U --no-cache-dir \
     pip \
@@ -16,7 +14,6 @@ RUN mkdir -p /app/cfpy && python3 -m venv /app/cfpy && \
     piper-tts \
     "wyoming-piper==${VERSION}" && \
   echo "**** cleanup ****" && \
-  chown -R apps:apps $TMPDIR && chmod -R 755 $TMPDIR && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /var/lib/apt/lists/* \

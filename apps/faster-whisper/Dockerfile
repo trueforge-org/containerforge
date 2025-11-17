@@ -6,8 +6,7 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-ENV HOME=/config \
-   TMPDIR="/run/whisper-temp"
+ENV HOME=/config
 
 RUN \
   echo "**** install packages ****" && \
