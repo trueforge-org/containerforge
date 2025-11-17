@@ -25,6 +25,7 @@ RUN echo "**** install pairdrop ****" && \
   cd /app/pairdrop && \
   chown -R apps:apps ./ && \
   su -s /bin/sh apps -c 'HOME=/tmp NODE_ENV=production npm ci' && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** cleanup ****" && \
   rm -rf \
     $HOME/.cache \

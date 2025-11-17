@@ -26,6 +26,7 @@ RUN \
     /app/www/ --strip-components=1 && \
   cd /app/www/server && \
   npm i && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** cleanup ****" && \
   rm -rf \
     /etc/logrotate.d/php-fpm \

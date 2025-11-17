@@ -15,6 +15,7 @@ RUN echo "*** Installing AdGuardHome Sync ***" && \
   tar xzf \
     /tmp/adguardhomesync.tar.gz -C \
     /app/ && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   echo "*** Cleaning Up ***" && \
   rm /tmp/adguardhomesync.tar.gz
 

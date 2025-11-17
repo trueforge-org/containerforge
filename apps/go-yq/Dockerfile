@@ -11,7 +11,7 @@ RUN echo "*** Installing go-yq ***" && \
     /app -L \
     "https://github.com/mikefarah/yq/releases/download/v${version}/yq_linux_${TARGETARCH}" && \
     mv /app/yq_linux_${TARGETARCH} /app/yq && \
-    chown apps:apps /app/yq && chmod +x /app/yq && \
+    chown apps:apps /app/yq && chmod 755 /app/yq && chmod +x /app/yq && \
     cp -rf /app/yq /usr/bin/yq
 
 USER apps

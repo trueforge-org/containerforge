@@ -40,6 +40,7 @@ RUN \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ . && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ Levenshtein && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** cleanup ****" && \
   apt-get -y purge \
     libjpeg-turbo8-dev \
