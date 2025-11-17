@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cp /app/appsettings.json /config/appsettings.json
+
 if [[ -n "${BASE_URL}" ]]; then
     EXTRA_PARAM="--baseurl ${BASE_URL}"
 fi

@@ -8,7 +8,8 @@ USER root
 ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 # environment settings
-ENV HOME="/config"
+ENV HOME="/config" \
+  COMPlus_EnableDiagnostics=0
 
 RUN echo "**** install kavita ****" && \
   curl -o \

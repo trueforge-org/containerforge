@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cp -rn /defaults /config/
-ln -s /app/appsettings.json /config/appsettings.json
+cp /app/appsettings.json /config/config/appsettings.json
 
 exec /app/Kavita $@
 
