@@ -26,7 +26,7 @@ RUN \
   cp index.html vnc.html && \
   mkdir Downloads
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:c0d65e9793c7c477d7c27c7936d9aa40dad9a404fdf49f1cfdd69da7220988bb AS buildstage
 
 ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
 
@@ -220,7 +220,7 @@ RUN \
   rm -f package-lock.json
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:c0d65e9793c7c477d7c27c7936d9aa40dad9a404fdf49f1cfdd69da7220988bb
 
 # set version label
 ARG VERSION

@@ -1,7 +1,7 @@
 ## Move to our an own container
 FROM ghcr.io/sigstore/cosign/cosign:latest@sha256:b29487e48205d875c324c79583e2806d9d269c0fa299e0861bbec023d8430c8b AS cosign-bin
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:c0d65e9793c7c477d7c27c7936d9aa40dad9a404fdf49f1cfdd69da7220988bb
 
 # set version label
 ARG VERSION

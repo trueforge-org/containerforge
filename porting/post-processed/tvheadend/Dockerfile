@@ -5,7 +5,7 @@
 FROM ghcr.io/linuxserver/picons-builder@sha256:a55955e8f9d43cfcceb74fbc6cea2ef3dce2d795bd9e95d0fb3887a1c7fe613e as piconsstage
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:c0d65e9793c7c477d7c27c7936d9aa40dad9a404fdf49f1cfdd69da7220988bb as buildstage
 ############## build stage ##############
 
 # package versions
@@ -143,7 +143,7 @@ RUN \
     /picons
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:c0d65e9793c7c477d7c27c7936d9aa40dad9a404fdf49f1cfdd69da7220988bb
 
 # set version label
 ARG VERSION
