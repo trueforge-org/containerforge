@@ -88,8 +88,8 @@ USER apps
 COPY . /
 COPY ./root /
 
-# add unrar
-COPY --from=unrar /usr/bin/unrar-ubuntu /usr/bin/unrar
+
+
 
 # ports and volumes
 EXPOSE 8083

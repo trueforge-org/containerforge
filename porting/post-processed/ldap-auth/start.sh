@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # generate fernet key for ldap if it doesn't exist
 if [[ ! -f "/run/.fernetkey" ]]; then
     if [[ -z "${FERNETKEY}" ]]; then
@@ -19,39 +16,11 @@ if [[ ! -f "/run/.fernetkey" ]]; then
     echo "${KEY}" > /run/.fernetkey
 fi
 
-
-
-
-
 export FERNET_KEY=$(cat /run/.fernetkey)
 
-
-    exec \
-        
-             python3 /app/ldap-backend-app.py \
+## TODO deal with multiexec
+exec  python3 /app/ldap-backend-app.py \
                 --host 0.0.0.0 --port 9000
-else
-    exec \
-        
-            python3 /app/ldap-backend-app.py \
-                --host 0.0.0.0 --port 9000
-fi
 
-
-
-
-
-export FERNET_KEY=$(cat /run/.fernetkey)
-
-
-    exec \
-        
-             python3 /app/nginx-ldap-auth-daemon.py \
+exec python3 /app/nginx-ldap-auth-daemon.py \
                 --host 0.0.0.0 --port 8888
-else
-    exec \
-        
-            python3 /app/nginx-ldap-auth-daemon.py \
-                --host 0.0.0.0 --port 8888
-fi
-

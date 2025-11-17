@@ -1,4 +1,4 @@
-
+## Move to our an own container
 FROM ghcr.io/sigstore/cosign/cosign:latest AS cosign-bin
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4
@@ -15,7 +15,6 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
     exiftool \
     ffmpeg \
     gd \
-    grep \
     imagemagick \
     jpegoptim \
     php84-bcmath \
@@ -33,8 +32,7 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
     php84-sodium \
     php84-sqlite3 \
     php84-tokenizer \
-    postgresql16-client \
-    unzip && \
+    postgresql16-client && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \

@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -17,16 +17,13 @@ RUN \
     jpeg-dev \
     libffi-dev \
     mariadb-dev \
-    musl-dev \
     postgresql-dev \
-    python3-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     grep \
     mariadb-client \
     postgresql-client \
-    python3 \
     uwsgi \
     uwsgi-python \
     mariadb-connector-c && \

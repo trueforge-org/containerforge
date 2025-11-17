@@ -8,13 +8,8 @@ ENV FORCE_CONTAINER_REMOVAL=1 \
 FORCE_IMAGE_REMOVAL=1
 
 
-RUN \
- echo "**** install build packages ****" && \
- apk add --no-cache --virtual=build-dependencies \
-	git && \
- echo "**** install runtime packages ****" && \
+RUN echo "**** install runtime packages ****" && \
  apk add --no-cache \
-	bash \
 	docker && \
  echo "**** fetch latest ver of docker-gc script ****" && \
  git clone https://github.com/spotify/docker-gc /tmp/docker-gc && \
@@ -32,6 +27,3 @@ RUN \
 
 # volumes
 VOLUME /var/lib/docker-gc
-
-# run command
-CMD ["/docker-gc"]

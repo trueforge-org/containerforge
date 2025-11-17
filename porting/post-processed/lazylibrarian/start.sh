@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make folders
 mkdir -p \
     /config/log \
@@ -18,20 +15,6 @@ fi
 # update version.txt
 cp /defaults/version.txt /config/cache/version.txt
 
-# permissions
-
-    /config
-
-
-    /downloads \
-    /books
-
-
-
-
-
-exec \
-    
-         python3 /app/lazylibrarian/LazyLibrarian.py \
+exec python3 /app/lazylibrarian/LazyLibrarian.py \
         --datadir /config --nolaunch
 

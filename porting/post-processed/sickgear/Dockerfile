@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/unrar:latest AS unrar
+
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4
 
@@ -46,7 +46,7 @@ USER apps
 COPY . /
 COPY ./root /
 
-# add unrar
+
 COPY --from=unrar /usr/bin/unrar-alpine /usr/bin/unrar
 
 # ports and volumes

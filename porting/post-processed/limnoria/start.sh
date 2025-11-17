@@ -1,19 +1,10 @@
 #!/usr/bin/env bash
 
-
-
-
 # create folders
 mkdir -p \
     /config/{backup,conf,data,data/tmp,web,logs,plugins}
 
-# set permissions
-
-
-
-
-
-
+## TODO Move these to Dockerfile
 PLUGIN_REQUIREMENTS=$(find /config/plugins -maxdepth 2 -name 'requirements.txt')
 if [[ -n "${PLUGIN_REQUIREMENTS}" ]]; then
     apk add --no-cache --virtual=pip-dependencies \
@@ -34,10 +25,6 @@ if [[ -n "${PLUGIN_REQUIREMENTS}" ]]; then
         "${HOME}"/.cargo
 fi
 
-
-
-
-
 if [[ "$(find /config -maxdepth 1 -name '*.conf' | wc -l)" -gt 1 ]]; then
     echo "Multiple Limnoria configuration (*.conf) files found. Only one at a time may be used. Remove the extra configurations."
     while [[ ! "$(find /config -maxdepth 1 -name '*.conf' | wc -l)" -eq 1 ]]; do
@@ -55,7 +42,6 @@ fi
 
 CONF_FILE=$(find /config -maxdepth 1 -name '*.conf')
 
-exec \
-     limnoria \
+exec limnoria \
         "${CONF_FILE}"
 

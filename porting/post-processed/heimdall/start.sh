@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make our folders
 mkdir -p \
     /config/www/{avatars,backgrounds,icons,logs,SupportedApps} \
@@ -45,7 +42,7 @@ ln -s /config/www/searchproviders.yaml /app/www/storage/app/searchproviders.yaml
 # tidy up install files & set permissions
 if [[ -f /app/set-perms ]]; then
     rm -rf /app/set-perms
-    
+
         /app/www \
         /config
 fi
@@ -60,10 +57,5 @@ fi
 # set queue driver to database
 sed -i 's/QUEUE_DRIVER=sync/QUEUE_DRIVER=database/' /config/www/.env
 
-
-
-
-
-exec \
-     php /app/www/artisan queue:work database --sleep=3 --tries=3
+exec php /app/www/artisan queue:work database --sleep=3 --tries=3
 

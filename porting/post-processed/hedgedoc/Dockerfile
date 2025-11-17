@@ -1,4 +1,5 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION
@@ -15,13 +16,11 @@ RUN \
   apk add -U --no-cache \
     fontconfig \
     font-noto \
-    icu-data-full \
-    nodejs-current && \
+    icu-data-full && \
   apk add -U --no-cache --virtual=build-dependencies \
     build-base \
     git \
     icu-libs \
-    npm \
     openssl-dev \
     python3-dev \
     sqlite-dev \

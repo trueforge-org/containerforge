@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
-
-
-
 # copy config.json if doesn't exist
 if [[ ! -f /config/config.json ]]; then
     cp /defaults/config.json /config/config.json
 fi
 
-# symlink uploads
 mkdir -p /config/uploads
 rm -rf /app/hedgedoc/public/uploads
 ln -s /config/uploads /app/hedgedoc/public/uploads
@@ -39,15 +35,9 @@ if [[ -f "/config/codimd.sqlite" ]] && [[ ! -f "/config/hedgedoc.sqlite" ]]; the
     mv /config/codimd.sqlite /config/hedgedoc.sqlite
 fi
 
-# permissions
-
-    /config
 
 # set lockfile to avoid DB waits for this specific container
 touch /dbwait.lock
-
-
-
 
 
 # if user is using our env variables set the DB_URL
@@ -65,8 +55,7 @@ if [[ -z ${CMD_CONFIG_FILE+x} ]]; then
     export CMD_CONFIG_FILE="/config/config.json"
 fi
 
+cd /app/hedgedoc
 # run program
-exec \
-    
-        cd /app/hedgedoc  node app.js 
+exec node app.js
 

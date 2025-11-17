@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/unrar:latest AS unrar
+
 
 FROM ghcr.io/trueforge-org/python:3.13.7
 
@@ -75,8 +75,8 @@ USER apps
 COPY . /
 COPY ./root /
 
-# add unrar
-COPY --from=unrar /usr/bin/unrar-ubuntu /usr/bin/unrar
+
+
 
 # ports and volumes
 EXPOSE 8083

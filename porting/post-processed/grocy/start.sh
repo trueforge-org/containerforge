@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create missing cache directory
 mkdir -p /app/www/data/viewcache || :
 
@@ -26,7 +23,4 @@ if [[ ! -f "/config/data/plugins/DemoBarcodeLookupPlugin.php" ]]; then
     cp -R /defaults/plugins /config/data
 fi
 
-# permissions
-
-    /config
-
+## TODO: find exec

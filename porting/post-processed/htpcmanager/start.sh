@@ -1,26 +1,8 @@
 #!/usr/bin/env bash
 
-
-
-
-# permissions
-
-    /app \
-    /config
-
-
-
-
-
-exec \
-    
-         python3 /app/htpcmanager/Htpc.py \
+exec python3 /app/htpcmanager/Htpc.py \
         --datadir /config
 
-
-
-
-
-exec \
-    vnstatd -n
+## TODO: will never run
+exec vnstatd -n
 

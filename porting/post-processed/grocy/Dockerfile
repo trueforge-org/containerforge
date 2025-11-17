@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin versionn tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION
@@ -9,7 +9,6 @@ USER root
 RUN \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \
-    git \
     yarn && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \

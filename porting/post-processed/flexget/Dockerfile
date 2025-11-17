@@ -1,5 +1,5 @@
 
-FROM ghcr.io/linuxserver/unrar:latest AS unrar
+
 
 ## TODO: replace with something of ours
 FROM ghcr.io/by275/libtorrent:2-alpine3.22 AS libtorrent
@@ -61,7 +61,7 @@ COPY --from=libtorrent /libtorrent-build/usr/lib/libtorrent-rasterbar.* /usr/lib
 COPY --from=libtorrent /libtorrent-build/usr/lib/python3.12 /config/venv/lib/python3.12
 COPY ./root /
 
-# add unrar
+
 COPY --from=unrar /usr/bin/unrar-alpine /usr/bin/unrar
 
 # ports and volumes

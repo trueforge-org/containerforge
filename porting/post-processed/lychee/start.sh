@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 mkdir -p \
     /config/sym \
     /config/log/lychee \
@@ -11,7 +8,7 @@ mkdir -p \
 # pre-populate /pictures directory if it's empty
 if [[ ! "$(ls -A /pictures)" ]]; then
     mv /app/www/public/uploads/* /pictures/
-    
+
 elif [[ ! "$(ls -A /pictures/import 2>/dev/null)" ]]; then
     printf "\n\n\n\nSeems like you tried to use a path that's not managed by lychee, this is unsupported\n\n\n\n"
 fi
@@ -44,9 +41,9 @@ elif [[ "${DB_CONNECTION}" = "sqlite" ]]; then
     if [[ -n "${DB_DATABASE}" ]]; then
         if [[ ! -e "${DB_DATABASE}" ]]; then
             touch "${DB_DATABASE}"
-            
+
         fi
-        
+
     else
         DB_DATABASE="/config/database.sqlite"
         export DB_DATABASE
@@ -115,11 +112,7 @@ if [[ ! -L /app/www/public/dist/custom.js ]]; then
     ln -s /config/custom.js /app/www/public/dist/custom.js
 fi
 
-# permissions
-
-    /app/www/storage \
-    /config
-
 # set lockfile to avoid DB waits for this specific container
 touch /dbwait.lock
 
+## TODO: Find exec

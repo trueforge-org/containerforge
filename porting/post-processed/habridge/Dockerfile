@@ -1,4 +1,5 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: check if java17 works, otherwise make java 8 base
+FROM ghcr.io/trueforge-org/java17:17.0.8
 
 # set version label
 ARG VERSION

@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -13,12 +13,8 @@ RUN \
     build-base \
     cargo \
     libffi-dev \
-    openssl-dev \
-    python3-dev && \
+    openssl-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    gnupg \
-    python3 && \
   echo "**** install app ****" && \
   python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \

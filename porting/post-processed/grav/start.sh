@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # Symlink directories
 symlinks=(
     /app/www/public/backup
@@ -47,8 +44,4 @@ shopt -u globstar dotglob
 
 sed -i 's/enable_auto_updates_check: true/enable_auto_updates_check: false/' /config/www/user/plugins/admin/admin.yaml
 
-# permissions
-
-    /app \
-    /config/www
-
+## TODO: find exec

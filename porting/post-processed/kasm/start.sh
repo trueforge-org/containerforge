@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 # Create directories
 if [[ ! -d "/opt/docker" ]]; then
     mkdir -p /opt/docker
@@ -32,9 +30,6 @@ if [[ ! -L "/var/lib/docker-plugins" ]]; then
     mkdir -p /var/lib/docker-plugins/rclone/cache
 fi
 
-
-
-
 _term() {
     if [ -f "/opt/kasm/bin/stop" ]; then
         echo "Caught SIGTERM signal!"
@@ -46,10 +41,8 @@ _term() {
     fi
 }
 
+## TODO: deal with multiple execs in a single container
 exec /usr/local/bin/dockerd-entrypoint.sh -l error --data-root /opt/docker
-
-
-
 
 # Wait for docker to be up
 while true; do

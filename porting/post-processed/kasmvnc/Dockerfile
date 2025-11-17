@@ -1,5 +1,5 @@
-
-FROM node:12-buster AS wwwstage
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling AS wwwstage
 
 ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
 
@@ -39,18 +39,12 @@ RUN \
     alpine-sdk \
     autoconf \
     automake \
-    bash \
-    ca-certificates \
     cmake \
     coreutils \
-    curl \
     eudev-dev \
     font-cursor-misc \
     font-misc-misc \
     font-util-dev \
-    git \
-    grep \
-    jq \
     libdrm-dev \
     libepoxy-dev \
     libjpeg-turbo-dev \
@@ -78,8 +72,6 @@ RUN \
     pixman-dev \
     procps \
     shadow \
-    tar \
-    tzdata \
     wayland-dev \
     wayland-protocols \
     xcb-util-dev \
@@ -191,7 +183,8 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS nodebuilder
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling AS nodebuilder
 ARG KCLIENT_RELEASE
 
 RUN \
@@ -203,8 +196,6 @@ RUN \
     g++ \
     gcc \
     make \
-    nodejs \
-    npm \
     pulseaudio-dev \
     python3
 
@@ -255,8 +246,6 @@ COPY --from=buildstage /build-out/ /
 RUN \
   echo "**** install deps ****" && \
   apk add --no-cache \
-    bash \
-    ca-certificates \
     cups \
     cups-client \
     dbus-x11 \

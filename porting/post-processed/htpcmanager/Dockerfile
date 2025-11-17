@@ -1,5 +1,4 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -24,13 +23,10 @@ RUN \
     linux-headers \
     openjpeg-dev \
     openssl-dev \
-    python3-dev \
     tiff-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
-    git \
-    python3 \
     vnstat && \
   echo "**** install app ****" && \
   mkdir -p /app/htpcmanager && \

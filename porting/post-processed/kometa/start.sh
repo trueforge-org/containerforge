@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
-
-
-
-
 cp /app/kometa/config/config.yml.template /config
-
-# permissions
-
-    /config
-
-
-
-
 
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
 
@@ -44,13 +32,7 @@ else
      python3 /app/kometa/kometa.py --run --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
 fi
 
-
-
-
-
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
-
-export KOMETA_LINUXSERVER=True
 
 cd / || exit 1
 

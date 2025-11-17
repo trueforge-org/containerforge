@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -20,7 +20,6 @@ RUN \
     libzen-dev \
     python3-dev && \
   apk add  -U --update --no-cache \
-    grep \
     libjpeg \
     libxslt \
     python3 && \

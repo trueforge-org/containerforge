@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
-
-    /app/healthchecks/hc/api/migrations
-
 if [[ ! -f "/config/local_settings.py" ]]; then
     touch /config/local_settings.py
 fi
@@ -43,11 +37,7 @@ cd /app/healthchecks || exit
 
 python3 ./manage.py makemigrations
 
-# permissions
-
-    /config
-
- python3 ./manage.py migrate
+python3 ./manage.py migrate
 
 if [[ -n "$SUPERUSER_EMAIL" ]] && [[ -n "$SUPERUSER_PASSWORD" ]]; then
 cat << EOF |  python3 /app/healthchecks/manage.py shell
@@ -69,11 +59,6 @@ else:
 EOF
 fi
 
-
-
-
-
-exec \
-    
-        cd /app/healthchecks  /usr/sbin/uwsgi --ini uwsgi.ini
+cd /app/healthchecks
+exec /usr/sbin/uwsgi --ini uwsgi.ini
 

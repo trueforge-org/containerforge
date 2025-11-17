@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make our folders
 mkdir -p \
     /config/www/img
@@ -53,21 +50,8 @@ if [ "$DB_TYPE" = "postgresql" ]; then
         s|\$PostgreSql_hostname.*|\$PostgreSql_hostname = \'${DB_HOSTNAME}\';|g; \
         s|\$PostgreSql_databasename.*|\$PostgreSql_databasename = \'${DB_NAME}\';|g" \
         /app/www/public/results/telemetry_settings.php
-elif [ "$DB_TYPE" = "mysql" ]; then
-    sed -i "\
-        s|\$MySql_username.*|\$MySql_username = \'${DB_USERNAME}\';|g; \
-        s|\$MySql_password.*|\$MySql_password = \'${DB_PASSWORD}\';|g; \
-        s|\$MySql_hostname.*|\$MySql_hostname = \'${DB_HOSTNAME}\';|g; \
-        s|\$MySql_databasename.*|\$MySql_databasename = \'${DB_NAME}\';|g; \
-        s|\$MySql_port.*|\$MySql_port = \'${DB_PORT:-3306}\';|g" \
-        /app/www/public/results/telemetry_settings.php
 else
     sed -i \
         "s|\$db_type.*|\$db_type = \'sqlite\';|g" \
         /app/www/public/results/telemetry_settings.php
 fi
-
-# permissions
-
-    /config
-

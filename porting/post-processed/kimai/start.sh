@@ -66,8 +66,5 @@ done
 # set lockfile to avoid DB waits for this specific container
 touch /dbwait.lock
 
-
-    /config/www
-
 console kimai:install -n
 
