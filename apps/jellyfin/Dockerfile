@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && echo "deb [signed-by=/usr/share/keyrings/jellyfin-archive-keyring.gpg] https://repo.jellyfin.org/ubuntu noble main" \
          > /etc/apt/sources.list.d/jellyfin.list \
     && apt-get update \
-    && curl -s https://repo.jellyfin.org/install-debuntu.sh | bash \
+    && apt-get install -y --no-install-recommends \
+      jellyfin=${VERSION} \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER apps
