@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-mkdir -p /run/duplicati-temp
-
 if [[ -f "/config/Duplicati-server.sqlite" ]]; then
     # Existing install
     if [[ -n ${SETTINGS_ENCRYPTION_KEY} ]]; then

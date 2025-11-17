@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-mkdir -p "/run/whisper-temp"
-
-
-
 exec python3 -m wyoming_faster_whisper \
         --uri 'tcp://0.0.0.0:10300' \
         --model "${WHISPER_MODEL}" \

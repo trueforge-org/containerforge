@@ -12,7 +12,7 @@ RUN \
   echo "deb [$TARGETARCH=$TARGETARCH signed-by=/usr/share/keyrings/resilio-sync.asc] https://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free" > /etc/apt/sources.list.d/resilio-sync.list && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
-    "resilio-sync=${VERSION}" && \
+    resilio-sync=${VERSION}* && \
   echo "**** cleanup ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \

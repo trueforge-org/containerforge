@@ -18,7 +18,9 @@ RUN \
   apt-get install -y \
     bzip2 \
     intel-opencl-icd \
-    libexpat1 && \
+    libexpat1 \
+    polkitd-pkla \
+    policykit-1 && \
   echo "**** install foldingathome ****" && \
   download_url="https://download.foldingathome.org/releases/public/fah-client/debian-10-64bit/release/fah-client_8.4.9_${TARGETARCH}.deb" && \
   if [ "$TARGETARCH" = "arm64" ]; then \
