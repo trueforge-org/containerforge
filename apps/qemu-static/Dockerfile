@@ -1,6 +1,8 @@
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
 
+ARG VERSION
+ARG TARGETARCH
 
 USER root
 
