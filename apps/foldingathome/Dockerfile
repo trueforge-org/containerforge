@@ -20,15 +20,14 @@ RUN \
     intel-opencl-icd \
     libexpat1 && \
   echo "**** install foldingathome ****" && \
-  if [ "$TARGETARCH" = "amd64" ]; then \
-  download_url="https://download.foldingathome.org/releases/public/fah-client/debian-10-64bit/release/fah-client_8.4.9_${TARGETARCH}.deb" \
-  else \
-  download_url="https://download.foldingathome.org/releases/public/fah-client/debian-stable-arm64/release/fah-client_8.4.9_${TARGETARCH}.deb" \
-  fi \
-  && curl -o \
+  download_url="https://download.foldingathome.org/releases/public/fah-client/debian-10-64bit/release/fah-client_8.4.9_${TARGETARCH}.deb" && \
+  if [ "$TARGETARCH" = "arm64" ]; then \
+    download_url="https://download.foldingathome.org/releases/public/fah-client/debian-stable-arm64/release/fah-client_8.4.9_${TARGETARCH}.deb"; \
+  fi && \
+  curl -o \
     /tmp/fah.tar.bz2 -L \
     ${download_url} && \
-  tar xf /tmp/fah.tar.bz2 -C /app --strip-components=1 && \
+  dpkg -i /tmp/fah-client_8.4.9_${TARGETARCH}.deb && \
   echo "**** cleanup ****" && \
   apt-get clean && \
   chown -R apps:apps /app && chmod -R 755 /app && \

@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          > /etc/apt/sources.list.d/jellyfin.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-      jellyfin=${VERSION} \
+      jellyfin=${VERSION}* \
     && chown -R apps:apps /app && chmod -R 755 /app && \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
