@@ -20,7 +20,7 @@ else
 fi
 
 cd /config
-exec /app/fah-client \
+exec fah-client \
             --http-addresses 0.0.0.0:7396 --allow 0/0 ${TOKEN_AND_NAME} \
             ${CLI_ARGS} $"$@"
 
