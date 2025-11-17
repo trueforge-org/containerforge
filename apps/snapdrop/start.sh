@@ -2,5 +2,4 @@
 
 cd /app/www/server || exit 1
 
-exec /usr/bin/node index.js
-
+exec node index.js
