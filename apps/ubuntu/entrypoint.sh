@@ -28,6 +28,7 @@ Useful Links:
 EOF
 }
 
+## TODO: do the same for /dev/snd sound devices
 check_video() {
     local WARNINGS=0
     local BAD_DEVICES=()
