@@ -1,5 +1,5 @@
 # ---------- BASE STAGE ----------
-FROM ghcr.io/trueforge-org/node:22.20@sha256:c6e05ac1c4a5cfb5e606471283f467b05206b4f7a47839f2a7f68fd2c1918101 AS base
+FROM ghcr.io/trueforge-org/node:22.20@sha256:56c028d92c9c7e5d29c1265fd0b615c9fbc4995cf5f6ef6007393c3030b4b749 AS base
 
 ARG VERSION
 
