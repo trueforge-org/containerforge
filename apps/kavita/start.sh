@@ -3,5 +3,5 @@
 cp -rn /defaults /config/
 ln -s /app/appsettings.json /config/appsettings.json
 
-exec /app/kavita/Kavita
+exec /app/Kavita $@
 
