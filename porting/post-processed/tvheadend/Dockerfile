@@ -2,7 +2,7 @@
 ############## picons stage ##############
 # built by https://github.com/linuxserver/picons-builder
 ## TODO: replace with our own
-FROM ghcr.io/linuxserver/picons-builder as piconsstage
+FROM ghcr.io/linuxserver/picons-builder@sha256:a55955e8f9d43cfcceb74fbc6cea2ef3dce2d795bd9e95d0fb3887a1c7fe613e as piconsstage
 
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4 as buildstage
