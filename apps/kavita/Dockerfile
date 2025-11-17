@@ -21,10 +21,12 @@ RUN echo "**** install kavita ****" && \
     --no-same-owner && \
   chmod +x /app/Kavita && \
   mkdir -p /defaults/ && \
-  cp -R /app/config/* /defaults/ && \
+  cp /app/config/appsettings-init.json /defaults/ && \
   rm -rf /app/config && \
   ln -s /config /app/config && \
   chown -R apps:apps /app && chmod -R 755 /app && \
+  chown -R apps:apps /config && chmod -R 755 /config && \
+  chown -R apps:apps /defaults && chmod -R 755 /defaults && \
   echo "**** clean up ****" && \
   rm -rf \
     /tmp/* \
