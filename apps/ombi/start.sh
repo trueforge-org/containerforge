@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+echo "defaults content:"
+ls -l /defaults
+echo "app content:"
+ls -l /app
+echo "config content:"
+ls -l /config
+
 cp /app/appsettings.json /config/appsettings.json
 
 if [[ -n "${BASE_URL}" ]]; then

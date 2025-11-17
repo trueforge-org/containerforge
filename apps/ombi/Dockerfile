@@ -19,8 +19,8 @@ RUN echo "**** install ombi ****" && \
   /tmp/ombi-src.tar.gz -L \
     "https://github.com/Ombi-app/Ombi/releases/download/v${VERSION}/linux-$TARGETARCH.tar.gz" && \
   tar xzf /tmp/ombi-src.tar.gz -C \
-    /app/ombi/ && \
-  chmod +x /app/ombi/Ombi && \
+    /app/ && \
+  chmod +x /app/Ombi && \
   echo "**** clean up ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
