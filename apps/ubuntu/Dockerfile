@@ -10,7 +10,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     NVIDIA_DRIVER_CAPABILITIES="compute,video,utility" \
      # Enable detection of dotnet running in a container
     DOTNET_RUNNING_IN_CONTAINER=true \
-    XDG_CONFIG_HOME=/config
+    XDG_CONFIG_HOME=/config \
+    TMPDIR="/tmp/app"
 
 USER root
 WORKDIR /app
@@ -78,6 +79,9 @@ RUN apt-get update \
     && apt-get clean \
     && update-ca-certificates \
     && mkdir /cache \
+    && mkdir -p $TMPDIR \
+    && chown -R apps:apps $TMPDIR && chmod -R 755 $TMPDIR \
+    && chown -R apps:apps /app && chmod -R 755 /app \
     && chmod 777 /cache \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
 
