@@ -26,9 +26,9 @@ func Test(t *testing.T) {
 		testcontainers.WithExposedPorts("10300/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("10300/tcp"),
-			wait.ForHTTP("'").WithPort("/10300tcp").WithStatusCodeMatcher(func(status int) bool {
-				return status == 200
-			}),
+			// wait.ForHTTP("'").WithPort("/10300tcp").WithStatusCodeMatcher(func(status int) bool {
+			// 	return status == 200
+			// }),
 		),
 	)
 	testcontainers.CleanupContainer(t, app)

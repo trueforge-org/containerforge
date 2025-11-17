@@ -30,7 +30,7 @@ RUN \
   curl -o \
     /tmp/fah-client.deb -L \
     ${download_url} && \
-  apt install /tmp/fah-client.deb && \
+  apt install -y /tmp/fah-client.deb && \
   echo "**** cleanup ****" && \
   apt-get clean && \
   chown -R apps:apps /app && chmod -R 755 /app && \

@@ -16,5 +16,5 @@
     fi
 
 
-exec /app/duplicati/duplicati-server $@
+exec duplicati-server $@
 
