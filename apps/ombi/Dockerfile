@@ -13,11 +13,7 @@ ENV HOME="/config" \
   COMPlus_EnableDiagnostics=0 \
    TMPDIR=/run/ombi-temp
 
-RUN \
-  apt-get update && \
-  apt-get install -y \
-    libicu74 && \
-  echo "**** install ombi ****" && \
+RUN echo "**** install ombi ****" && \
   mkdir -p \
     /app/ombi && \
   curl -o \
@@ -25,6 +21,8 @@ RUN \
     "https://github.com/Ombi-app/Ombi/releases/download/v${VERSION}/linux-$TARGETARCH.tar.gz" && \
   tar xzf /tmp/ombi-src.tar.gz -C \
     /app/ombi/ && \
+  mkdir -p $TMPDIR && \
+  chown -R apps:apps $TMPDIR && \
   chmod +x /app/ombi/Ombi && \
   echo "**** clean up ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \

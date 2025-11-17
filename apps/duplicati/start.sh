@@ -1,6 +1,4 @@
-# ===== From ./processed/duplicati/root/etc/s6-overlay//s6-rc.d/init-duplicati-config/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 mkdir -p /run/duplicati-temp
 
@@ -31,10 +29,6 @@ else
     fi
 fi
 
-# ===== From ./processed/duplicati/root/etc/s6-overlay//s6-rc.d/svc-duplicati/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
 
-exec \
-            cd /app/duplicati ./duplicati-server $@
+exec /app/duplicati/duplicati-server $@
 

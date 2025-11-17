@@ -16,6 +16,7 @@ RUN mkdir -p /app/cfpy && python3 -m venv /app/cfpy && \
     piper-tts \
     "wyoming-piper==${VERSION}" && \
   echo "**** cleanup ****" && \
+  chown -R apps:apps $TMPDIR && chmod -R 755 $TMPDIR && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /var/lib/apt/lists/* \

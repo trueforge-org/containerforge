@@ -25,9 +25,9 @@ RUN \
     download_url="https://download.foldingathome.org/releases/public/fah-client/debian-stable-arm64/release/fah-client_8.4.9_${TARGETARCH}.deb"; \
   fi && \
   curl -o \
-    /tmp/fah.tar.bz2 -L \
+    /tmp/fah-client.deb -L \
     ${download_url} && \
-  dpkg -i /tmp/fah-client_8.4.9_${TARGETARCH}.deb && \
+  dpkg -i /tmp/fah-client.deb && \
   echo "**** cleanup ****" && \
   apt-get clean && \
   chown -R apps:apps /app && chmod -R 755 /app && \

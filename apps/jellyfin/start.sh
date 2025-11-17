@@ -1,6 +1,4 @@
-# ===== From ./processed/jellyfin/root/etc/s6-overlay//s6-rc.d/init-jellyfin-config/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 # create directories
 mkdir -p \
@@ -8,22 +6,12 @@ mkdir -p \
     /data \
     /transcode
 
-# ===== From ./processed/jellyfin/root/etc/s6-overlay//s6-rc.d/init-jellyfin-video/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
-
-
-
 # openmax lib loading
 if [[ -e "/opt/vc/lib" ]] && [[ ! -e "/etc/ld.so.conf.d/00-vmcs.conf" ]]; then
     echo "[jellyfin-init] Pi Libs detected loading"
     echo "/opt/vc/lib" > "/etc/ld.so.conf.d/00-vmcs.conf"
     ldconfig
 fi
-
-# ===== From ./processed/jellyfin/root/etc/s6-overlay//s6-rc.d/svc-jellyfin/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
 
 if [[ -z "${FFMPEG_PATH}" ]] || [[ ! -f "${FFMPEG_PATH}" ]]; then
     FFMPEG_PATH=/usr/lib/jellyfin-ffmpeg/ffmpeg

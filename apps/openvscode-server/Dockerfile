@@ -16,7 +16,6 @@ RUN \
   apt-get install -y \
     git \
     libatomic1 \
-    nano \
     net-tools \
     sudo && \
   echo "**** install openvscode-server ****" && \

@@ -23,10 +23,10 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithExposedPorts("/tcp"),
+		testcontainers.WithExposedPorts("10300/tcp"),
 		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("/tcp"),
-			wait.ForHTTP("'").WithPort("/tcp").WithStatusCodeMatcher(func(status int) bool {
+			wait.ForListeningPort("10300/tcp"),
+			wait.ForHTTP("'").WithPort("/10300tcp").WithStatusCodeMatcher(func(status int) bool {
 				return status == 200
 			}),
 		),

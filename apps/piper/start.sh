@@ -1,16 +1,4 @@
-# ===== From ./processed/piper/root/etc/s6-overlay//s6-rc.d/init-piper-config/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
-
-mkdir -p /run/piper-temp
-
-# permissions
-
-    /run/piper-temp
-
-# ===== From ./processed/piper/root/etc/s6-overlay//s6-rc.d/svc-piper/run =====
-#!/command/with-contenv bash
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 unset UPDATE_MODELS
 

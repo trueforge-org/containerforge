@@ -21,9 +21,6 @@ RUN \
   apt-get update && \
   apt-get install -y \
     fonts-dejavu-core \
-    unzip \
-    xz-utils \
-    curl \
     gdebi-core && \
   echo "**** install duplicati ****" && \
   curl -L -o /tmp/duplicati.deb \
@@ -36,6 +33,8 @@ RUN \
 
 # copy local files
 USER apps
+
+COPY ./ /
 
 # ports and volumes
 EXPOSE 8200

@@ -1,6 +1,4 @@
-# ===== From ./processed/unifi-network-application/root/etc/s6-overlay//s6-rc.d/init-unifi-network-application-config/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 # create our folders
 mkdir -p \
@@ -72,23 +70,12 @@ if [[ ! -f /config/data/keystore ]]; then
     -keysize 4096 -dname "cn=unifi" -ext san=dns:unifi
 fi
 
-# permissions
-
-	/run/unifi
-
-
-
-# ===== From ./processed/unifi-network-application/root/etc/s6-overlay//s6-rc.d/svc-unifi-network-application/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
-
 if [[ -z ${MEM_LIMIT} ]] || [[ ${MEM_LIMIT} = "default" ]]; then
     MEM_LIMIT="1024"
 fi
 
 if [[ -z ${MEM_STARTUP} ]] || [[ ${MEM_STARTUP} = "default" ]]; then
-    exec \
-                cd /config java \
+    exec java \
             -Xmx"${MEM_LIMIT}M" \
             -Dlog4j2.formatMsgNoLookups=true \
             -Dfile.encoding=UTF-8 \
@@ -104,8 +91,7 @@ if [[ -z ${MEM_STARTUP} ]] || [[ ${MEM_STARTUP} = "default" ]]; then
             --add-opens java.rmi/sun.rmi.transport=ALL-UNNAMED \
             -jar /usr/lib/unifi/lib/ace.jar start;
 else
-    exec \
-                cd /config java \
+    exec java \
             -Xms"${MEM_STARTUP}M" \
             -Xmx"${MEM_LIMIT}M" \
             -Dlog4j2.formatMsgNoLookups=true \

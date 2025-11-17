@@ -24,6 +24,7 @@ RUN \
 # add local files
 USER apps
 COPY ./root/ /
+COPY ./ /
 
 # ports and volumes
 EXPOSE 8888 55555

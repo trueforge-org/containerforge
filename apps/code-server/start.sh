@@ -33,9 +33,7 @@ if [[ -z ${PWA_APPNAME} ]]; then
     PWA_APPNAME="code-server"
 fi
 
-    exec \
-                    \
-                /app/code-server/bin/code-server \
+    exec /app/code-server/bin/code-server \
                     --bind-addr 0.0.0.0:8443 \
                     --user-data-dir /config/data \
                     --extensions-dir /config/extensions \

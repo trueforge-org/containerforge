@@ -1,6 +1,4 @@
-# ===== From ./processed/openvscode-server/root/etc/s6-overlay//s6-rc.d/init-openvscode-server/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 mkdir -p /config/{workspace,.ssh}
 
@@ -19,22 +17,17 @@ if [[ -n "${SUDO_PASSWORD}" ]] || [[ -n "${SUDO_PASSWORD_HASH}" ]]; then
     fi
 fi
 
-if [[ ! -f /config/.bashrc ]]; then \
-    cp /root/.bashrc /config/.bashrc
-fi
 
-if [[ ! -f /config/.profile ]]; then
-    cp /root/.profile /config/.profile
-fi
+cp -n /root/.bashrc /config/.bashrc
+
+
+cp -n /root/.profile /config/.profile
 
 chmod 700 /config/.ssh || true
 if [[ -n "$(ls -A /config/.ssh)" ]]; then
     chmod 600 /config/.ssh/* || true
 fi
 
-# ===== From ./processed/openvscode-server/root/etc/s6-overlay//s6-rc.d/svc-openvscode-server/run =====
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
 
 if [[ -n "$CONNECTION_SECRET" ]]; then
     CODE_ARGS="${CODE_ARGS} --connection-secret ${CONNECTION_SECRET}"
