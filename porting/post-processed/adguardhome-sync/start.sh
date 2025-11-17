@@ -1,28 +1,7 @@
 #!/usr/bin/env bash
 
+cp -n /defaults/adguardhome-sync.yaml /config/adguardhome-sync.yaml
 
-
-
-if [[ ! -f "/config/adguardhome-sync.yaml" ]]; then
-    cp -a /defaults/adguardhome-sync.yaml /config/adguardhome-sync.yaml
-fi
-
-
-    
-        /config
-fi
-
-
-
-
-
-
-    exec \
-        
-             /app/adguardhome-sync/adguardhome-sync run --config "${CONFIGFILE:-/config/adguardhome-sync.yaml}"
-else
-    exec \
-        
-            /app/adguardhome-sync/adguardhome-sync run --config "${CONFIGFILE:-/config/adguardhome-sync.yaml}"
-fi
+cd /app
+exec  /app/adguardhome-sync/adguardhome-sync run --config "${CONFIGFILE:-/config/adguardhome-sync.yaml}"
 

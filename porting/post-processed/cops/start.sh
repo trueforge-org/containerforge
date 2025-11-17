@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create folders
 mkdir -p \
     /config/cache
@@ -40,7 +37,5 @@ for f in /config/config/local*.php; do
     chmod +r "/app/www/public/config/$(basename ${f})"
 done
 
-# permissions
 
-    /config
-
+## TODO: Where is the exec?

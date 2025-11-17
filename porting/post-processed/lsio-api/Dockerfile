@@ -13,7 +13,7 @@ RUN \
   apk add  -U --update --no-cache \
     python3 && \
   cd /app && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip && \
   pip install -U --no-cache-dir -r /tmp/requirements.txt && \

@@ -1,3 +1,4 @@
+## TODO: replace with something of ours
 FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 
 # set version label
@@ -14,9 +15,6 @@ RUN \
     /kclient/public/icon.png \
     https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/freetube-logo.png && \
   echo "**** install packages ****" && \
-  apt-get update && \
-  apt-get install -y --no-install-recommends \
-    jq && \
   URL=$(curl -sL "https://api.github.com/repos/FreeTubeApp/FreeTube/releases/${VERSION}" \
     |jq -r '.assets[]|select(.name|endswith("$TARGETARCH.deb")).browser_download_url') && \
   curl -o \

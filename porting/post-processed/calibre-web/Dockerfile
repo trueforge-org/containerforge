@@ -1,7 +1,7 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -17,8 +17,7 @@ RUN \
   apt-get install -y --no-install-recommends \
     build-essential \
     libldap2-dev \
-    libsasl2-dev \
-    python3-dev && \
+    libsasl2-dev && \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     imagemagick \
@@ -30,7 +29,6 @@ RUN \
     libxi6 \
     libxslt1.1 \
     libxfixes3 \
-    python3-venv \
     sqlite3 \
     xdg-utils && \
   echo "**** install calibre-web ****" && \
@@ -43,7 +41,7 @@ RUN \
     /tmp/calibre-web.tar.gz -C \
     /app/calibre-web --strip-components=1 && \
   cd /app/calibre-web && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
@@ -58,12 +56,13 @@ RUN \
   curl -o \
     /usr/bin/kepubify -L \
     https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit && \
+  rm -rf /etc/ImageMagick-6/policy.xml && \
+  ln -s /defaults/policy.xml /etc/ImageMagick-6/policy.xml && \
   echo "**** cleanup ****" && \
   apt-get -y purge \
     build-essential \
     libldap2-dev \
-    libsasl2-dev \
-    python3-dev && \
+    libsasl2-dev && \
   apt-get -y autoremove && \
   rm -rf \
     /tmp/* \

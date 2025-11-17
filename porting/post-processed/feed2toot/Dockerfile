@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -10,12 +10,8 @@ USER root
 ENV PYTHONIOENCODING=utf-8 \
     PYTHONUNBUFFERED=1
 
-RUN \
-  echo "**** install packages ****" && \
-  apk add  -U --update --no-cache \
-    python3 && \
-  echo "**** install feed2toot ****" && \  
-  python3 -m venv /lsiopy && \
+RUN echo "**** install feed2toot ****" && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

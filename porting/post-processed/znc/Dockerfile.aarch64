@@ -24,7 +24,7 @@ RUN \
     swig \
     tar \
     tcl-dev && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir pip setuptools && \
   pip install -U --no-cache-dir cmake
 

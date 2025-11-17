@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
-# create symlinks for imagemagick policy.xml
-rm -rf /etc/ImageMagick-6/policy.xml
-ln -s /defaults/policy.xml /etc/ImageMagick-6/policy.xml
-
 # create Google drive client_secrets.json file
 if [[ ! -f /config/client_secrets.json ]]; then
     echo "{}" > /config/client_secrets.json
@@ -19,11 +12,6 @@ fi
 
 # Pre-stage some files & directories for permissions purposes
 mkdir -p /app/calibre-web/cps/cache
-
-# permissions
-
-    /config \
-    /app/calibre-web/cps/cache
 
 export CALIBRE_DBPATH=/config
 
@@ -43,13 +31,7 @@ EOS
   fi
 fi
 
-
-
-
-
 export CALIBRE_DBPATH=/config
-
-exec \
-    
-        cd /app/calibre-web  python3 /app/calibre-web/cps.py
+cd /app/calibre-web
+exec python3 /app/calibre-web/cps.py
 

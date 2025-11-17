@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 USER_DIRECTORY=(\
     "conf" \
     "data/attic" \
@@ -58,7 +55,7 @@ for i in "${USER_DIRECTORY[@]}"; do
     if [[ ! -L /app/www/public/"${i}" ]]; then
         ln -s /config/dokuwiki/"${i}" /app/www/public/"${i}"
     fi
-    
+
 done
 
 ## Make Symlinks from /app/www/public to /config/dokuwiki
@@ -71,7 +68,7 @@ for i in "${CORE_DIR[@]}"; do
     if [[ ! -L /config/dokuwiki/"${i}" ]]; then
         ln -s /app/www/public/"${i}" /config/dokuwiki/"${i}"
     fi
-    
+
 done
 
 ## Bump php upload max filesize and post max size to 100MB by default
@@ -102,9 +99,4 @@ fi
 ## Backwards compatibility 2021/04/15
 sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
 
-# permissions
-
-    /app/www/public/data \
-    /app/www/public/inc/lang \
-    /config/dokuwiki/lib
-
+## TODO: Missing exec

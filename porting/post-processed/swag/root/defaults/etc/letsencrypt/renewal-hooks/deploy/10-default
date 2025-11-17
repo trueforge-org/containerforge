@@ -6,4 +6,4 @@ openssl pkcs12 -export -out privkey.pfx -inkey privkey.pem -in cert.pem -certfil
 sleep 1
 cat {privkey,fullchain}.pem >priv-fullchain-bundle.pem
 chmod 600 priv-fullchain-bundle.pem
-chown -R abc:abc /config/etc/letsencrypt
+chown -R apps:apps /config/etc/letsencrypt

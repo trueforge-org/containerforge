@@ -42,7 +42,7 @@ RUN \
     /app/htpcmanager --strip-components=1 && \
   echo "**** install pip packages ****" && \
   sed -i -e '/psutil\|pyopenssl\|pySMART/d' /app/htpcmanager/requirements.txt && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

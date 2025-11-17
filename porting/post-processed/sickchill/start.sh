@@ -24,6 +24,6 @@ echo "Setting permissions"
 
 
 exec \
-    
-     python3 /lsiopy/bin/SickChill --datadir /config
+
+     python3 /config/venv/bin/SickChill --datadir /config
 

@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/node:20.5.1
 
 # set version label
 ARG VERSION
@@ -16,8 +16,6 @@ RUN \
     python3 && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
-    nodejs \
-    npm \
     sqlite && \
   echo "**** install budge ****" && \
   mkdir -p /app/www/public && \

@@ -6,9 +6,6 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-# environment settings
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
-
 RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
@@ -32,6 +29,8 @@ RUN \
     /etc/logrotate.conf && \
   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g' \
     /etc/periodic/daily/logrotate && \
+  rm -rf /etc/fail2ban && \
+  ln -s /config/fail2ban /etc/fail2ban && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

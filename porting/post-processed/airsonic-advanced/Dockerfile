@@ -7,7 +7,7 @@ ARG TARGETARCH
 USER root
 
 # environment settings
-ENV AIRSONIC_ADVANCED_HOME="/app/airsonic" \
+ENV AIRSONIC_ADVANCED_HOME="/app" \
 AIRSONIC_ADVANCED_SETTINGS="/config" \
 LANG="C.UTF-8"
 

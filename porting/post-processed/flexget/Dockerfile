@@ -1,9 +1,10 @@
 
 FROM ghcr.io/linuxserver/unrar:latest AS unrar
 
+## TODO: replace with something of ours
 FROM ghcr.io/by275/libtorrent:2-alpine3.22 AS libtorrent
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.12.6
 
 COPY --from=ghcr.io/astral-sh/uv:0.9.8 /uv /uvx /bin/
 
@@ -16,7 +17,7 @@ USER root
 ENV HOME="/config" \
   PYTHONIOENCODING=utf-8 \
   TMPDIR=/run/flexget-temp \
-  UV_PROJECT_ENVIRONMENT=/lsiopy \
+  UV_PROJECT_ENVIRONMENT=/config/venv \
   UV_COMPILE_BYTECODE=1 \
   UV_LINK_MODE=copy
 
@@ -24,15 +25,13 @@ RUN \
   echo "**** install packages ****" && \
   apk add -U --update --no-cache --virtual=build-dependencies \
     build-base \
-    libffi-dev \
-    python3-dev && \
+    libffi-dev && \
   apk add  -U --update --no-cache \
     7zip \
     boost1.84-system \
     boost1.84-python3 \
     libstdc++ \
-    nodejs \
-    python3 && \
+    nodejs && \
   echo "**** install flexget ****" && \
   mkdir -p /run/flexget-temp /data && \
   mkdir -p /app/flexget && \
@@ -43,7 +42,7 @@ RUN \
     /tmp/flexget.tar.gz -C \
     /app/flexget --strip-components=1 && \
   cd /app/flexget && \
-  uv venv /lsiopy && \
+  uv venv /config/venv && \
   uv run scripts/bundle_webui.py && \
   uv sync --frozen --no-dev --no-cache --group=all && \
   uv pip install pip && \
@@ -54,13 +53,12 @@ RUN \
     /tmp/* \
     $HOME/.cache
 
-COPY --from=libtorrent /libtorrent-build/usr/lib/libtorrent-rasterbar.* /usr/lib/
-
-COPY --from=libtorrent /libtorrent-build/usr/lib/python3.12 /lsiopy/lib/python3.12
-
 # add local files
 USER apps
 COPY . /
+
+COPY --from=libtorrent /libtorrent-build/usr/lib/libtorrent-rasterbar.* /usr/lib/
+COPY --from=libtorrent /libtorrent-build/usr/lib/python3.12 /config/venv/lib/python3.12
 COPY ./root /
 
 # add unrar

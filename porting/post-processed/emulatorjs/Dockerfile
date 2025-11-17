@@ -1,11 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4 as migrationbuilder
-
-RUN \
-  echo "**** install build packages ****" && \
-  apk add \
-    git \
-    go
+## TODO: set version
+FROM ghcr.io/trueforge-org/go:rolling as migrationbuilder
 
 RUN \
   echo "**** build fs-repo-migrations ****" && \
@@ -19,13 +13,8 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4 as binbuilder
-
-RUN \
-  echo "**** install build packages ****" && \
-  apk add \
-    git \
-    go
+  ## TODO: set version
+FROM ghcr.io/trueforge-org/go:rolling as binbuilder
 
 RUN \
   echo "**** build nestool ****" && \
@@ -60,14 +49,13 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4 as nodebuilder
+## TODO: set version
+FROM ghcr.io/trueforge-org/node:rolling as nodebuilder
 
 
 RUN \
   echo "**** install build packages ****" && \
   apk add \
-    nodejs \
-    npm \
     p7zip \
     zip
 
@@ -106,7 +94,8 @@ RUN \
   npm install
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: set version
+FROM ghcr.io/trueforge-org/python:rolling
 
 # set version label
 ARG VERSION

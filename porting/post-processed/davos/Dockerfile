@@ -3,10 +3,6 @@ FROM openjdk:8-alpine AS buildstage
 
 RUN \
   echo "**** Install build requirements ****" && \
-  apk add \
-    bash \
-    curl \
-    jq && \
   echo "**** Download Davos ****" && \
   curl -o \
     /tmp/davos.tar.gz -L \
@@ -23,13 +19,14 @@ RUN \
   cp build/libs/*.jar /davos.jar && \
   chmod 755 /davos.jar
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/java17:17.0.8
 
 # set version label
 ARG VERSION
 ARG TARGETARCH
 USER root
 
+## TODO test with JAVA17 otherwise make another base
 # install packages
 RUN \
   apk add --no-cache \

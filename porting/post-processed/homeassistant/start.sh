@@ -5,7 +5,7 @@
 
 # migration
 rm -rf \
-    /config/lsiopy \
+    /config/config/venv \
     /config/.local/{bin,lib}
 
 # Add apps user to python system install owner group, lsio (7310)
@@ -70,6 +70,6 @@ if [[ -z "${DISABLE_JEMALLOC+x}" ]]; then
 fi
 
 exec \
-    
+
      python3 -m homeassistant -c /config
 

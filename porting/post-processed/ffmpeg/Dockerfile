@@ -1,8 +1,11 @@
 
 # build stage
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
+## TODO: set version
+FROM ghcr.io/trueforge-org/python:rolling AS buildstage
 
-# set version label
+ARG TARGETARCH
+ARG VERSION
+USER root
 
 # common env
 ENV \
@@ -131,7 +134,7 @@ RUN \
   cd /tmp/rust && \
   ./install.sh && \
   cargo install bindgen-cli cargo-c cbindgen --locked && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     setuptools \
@@ -1062,5 +1065,3 @@ RUN \
 USER apps
 COPY . /
 COPY ./root /
-
-ENTRYPOINT ["/ffmpegwrapper.sh"]

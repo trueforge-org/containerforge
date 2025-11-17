@@ -1,46 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
-FILES=$(find /dev/snd -type c -print 2>/dev/null)
-
-for i in ${FILES}
-do
-    AUDIO_UID=$(stat -c '%u' "${i}")
-    AUDIO_GID=$(stat -c '%g' "${i}")
-    # check if user matches device
-    if id -u apps | grep -qw "${AUDIO_UID}"; then
-        echo "---permissions for ${i} are good---"
-    else
-        # check if group matches and that device has group rw
-        if id -G apps | grep -qw "${AUDIO_GID}" && [ "$(stat -c '%A' "${i}" | cut -b 5,6)" = "rw" ]; then
-            echo "---permissions for ${i} are good---"
-        # check if device needs to be added to video group
-        elif ! id -G apps | grep -qw "${AUDIO_GID}"; then
-            # check if video group needs to be created
-            GROUP_NAME=$(getent group "${AUDIO_GID}" | awk -F: '{print $1}')
-            if [ -z "${GROUP_NAME}" ]; then
-                GROUP_NAME="audio-$(head /dev/urandom | tr -dc 'a-z0-9' | head -c4)"
-                groupadd "${GROUP_NAME}"
-                groupmod -g "${AUDIO_GID}" "${GROUP_NAME}"
-                echo "---creating audio group ${GROUP_NAME} with id ${AUDIO_GID}---"
-            fi
-            echo "---adding ${i} to audio group ${GROUP_NAME} with id ${AUDIO_GID}---"
-            usermod -a -G "${GROUP_NAME}" apps
-        fi
-        # check if device has group rw
-        if [ "$(stat -c '%A' "${i}" | cut -b 5,6)" != "rw" ]; then
-            echo -e "---The device ${i} does not have group read/write permissions, attempting to fix inside the container.---"
-            chmod g+rw "${i}"
-        fi
-    fi
-done
-
-
-
-
-
 # make our folders
 mkdir -p \
     /var/run/dbus \
@@ -93,43 +52,18 @@ if [[ ! -L /etc/owntone.conf ]]; then
     ln -s /config/owntone.conf /etc/owntone.conf
 fi
 
-# permissions
-
-    /app \
-    /config \
-    /daapd-pidfolder
-
-
-
-
-
-
 until [[ -e /var/run/dbus/system_bus_socket ]]; do
     sleep 1s
 done
 
-exec \
-    avahi-daemon --no-chroot
+## TODO: we need to deal differently with multi-exec or not include this container
+## AVAHI in docker is an issue
+exec avahi-daemon --no-chroot
 
+exec dbus-daemon --system --nofork
 
-
-
-
-exec \
-    dbus-daemon --system --nofork
-
-
-
-
-
-
-
-exec \
-     /usr/sbin/owntone -f \
+exec /usr/sbin/owntone -f \
     -P /daapd-pidfolder/owntone.pid
 
-
-#!/usr/bin/execlineb -P
-
-librespot --backend pipe --device /music/spotify -n forked-daapd --cache /tmp
+exed librespot --backend pipe --device /music/spotify -n forked-daapd --cache /tmp
 

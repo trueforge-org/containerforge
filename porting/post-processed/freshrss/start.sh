@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make our folders
 mkdir -p \
     /config/www/freshrss
@@ -35,8 +32,4 @@ if [[ -f /config/www/freshrss/data/config.php ]]; then
     sed -i "s|'disable_update' => false,|'disable_update' => true,|g" /config/www/freshrss/data/config.php
 fi
 
-# permissions
-
-    /app/www \
-    /config
-
+## TODO: find exec

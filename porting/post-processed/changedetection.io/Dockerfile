@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.12.6
 
 ARG VERSION
 ARG TARGETARCH
@@ -17,7 +17,6 @@ RUN \
     libffi-dev \
     libxslt-dev \
     openssl-dev \
-    python3-dev \
     zip \
     zlib-dev && \
   apk add --update --no-cache \
@@ -26,7 +25,6 @@ RUN \
     libxslt \
     nodejs \
     poppler-utils \
-    python3 && \
   echo "**** install changedetection.io ****" && \
   mkdir -p /app/changedetection && \
   if [ -z ${CHANGEDETECTON_RELEASE+x} ]; then \
@@ -40,7 +38,7 @@ RUN \
     /tmp/changedetection.tar.gz -C \
     /app/changedetection/ --strip-components=1 && \
   rm /tmp/changedetection.tar.gz && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     setuptools \
@@ -51,8 +49,8 @@ RUN \
   git clone --depth 1 --branch "${PLAYWRIGHT_PY_RELEASE}" https://github.com/microsoft/playwright-python /tmp/playwright-python && \
   cd /tmp/playwright-python && \
   pip install -U --no-cache-dir . && \
-  rm -f /lsiopy/lib/python3.12/site-packages/playwright/driver/node && \
-  ln -s /usr/bin/node /lsiopy/lib/python3.12/site-packages/playwright/driver/node && \
+  rm -f /config/venv/lib/python3.12/site-packages/playwright/driver/node && \
+  ln -s /usr/bin/node /config/venv/lib/python3.12/site-packages/playwright/driver/node && \
   # Force UTF-8 encoding for browser steps to prevent exception
   sed -i "s|xpath_element_js = importlib.resources.files(\"changedetectionio.content_fetchers.res\").joinpath('xpath_element_scraper.js').read_text()|xpath_element_js = importlib.resources.files(\"changedetectionio.content_fetchers.res\").joinpath('xpath_element_scraper.js').read_text(encoding='utf-8')|" /app/changedetection/changedetectionio/blueprint/browser_steps/browser_steps.py && \
   echo "**** cleanup ****" && \

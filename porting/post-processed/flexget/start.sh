@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 
-
-
 mkdir -p \
     /config/.flexget \
     /run/flexget-temp
@@ -37,22 +35,12 @@ if [[ -n "${FG_WEBUI_PASSWORD}" ]]; then
     fi
 fi
 
-# permissions
-
-    /config \
-    /run/flexget-temp
-
 if grep -qe ' /data ' /proc/mounts; then
-    
+
         /data
 fi
 
-
-
-
-
-exec \
-    
-        cd /config  python3 /lsiopy/bin/flexget \
+cd /config
+exec python3 /config/venv/bin/flexget \
             --loglevel "${FG_LOG_LEVEL:-info}" --logfile "${FG_LOG_FILE:-/config/.flexget/flexget.log}" -c "${FG_CONFIG_FILE:-/config/.flexget/config.yml}" daemon start --autoreload-config
 

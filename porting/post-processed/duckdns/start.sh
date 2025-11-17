@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 #Check to make sure the subdomain and token are set
 if [ -z "${SUBDOMAINS}" ] || [ -z "${TOKEN}" ]; then
     echo "Please pass both your subdomain(s) and token as environment variables in your docker run command. See the readme for more details."
@@ -14,11 +11,6 @@ if [[ ! -f /config/logrotate.conf ]]; then
     chmod 640 /config/logrotate.conf
 fi
 
-# permissions
-
-    /config
-
 # run initial IP update
-exec \
-     /app/duck.sh
+exec /app/duck.sh
 

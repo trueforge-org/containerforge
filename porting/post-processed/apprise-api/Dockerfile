@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -16,23 +16,21 @@ RUN \
     cargo \
     build-base \
     libffi-dev \
-    openssl-dev \
-    python3-dev && \
+    openssl-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache --upgrade \
-    python3 \
     uwsgi \
     uwsgi-python && \
-  mkdir -p /app/apprise-api && \
+  mkdir -p /app && \
   curl -o \
     /tmp/apprise-api.tar.gz -L \
     "https://github.com/caronc/apprise-api/archive/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/apprise-api.tar.gz -C \
-    /app/apprise-api/ --strip-components=1 && \
+    /app/ --strip-components=1 && \
   echo "**** install pip packages ****" && \
-  cd /app/apprise-api && \
-  python3 -m venv /lsiopy && \
+  cd /app && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

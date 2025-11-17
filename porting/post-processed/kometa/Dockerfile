@@ -32,7 +32,7 @@ RUN \
     /tmp/kometa.tar.gz -C \
     /app/kometa --strip-components=1 && \
   cd /app/kometa && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

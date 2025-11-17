@@ -6,8 +6,6 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-ENV S6_STAGE2_HOOK="/init-hook"
-
 RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \

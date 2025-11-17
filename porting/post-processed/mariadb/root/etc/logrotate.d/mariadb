@@ -2,9 +2,9 @@
     firstaction
         /usr/bin/mariadb-admin -uroot --local version >/dev/null 2>&1
     endscript
-    su abc abc
+    su apps apps
     missingok
-    create 660 abc abc
+    create 660 apps apps
     notifempty
     daily
     minsize 1M
@@ -14,9 +14,9 @@
     dateformat .%Y-%m-%d-%H-%M-%S
     compress
     delaycompress
-    sharedscripts 
+    sharedscripts
     olddir archive/
-    createolddir 770 abc abc
+    createolddir 770 apps apps
     postrotate
         /usr/bin/mariadb-admin -uroot --local flush-error-log flush-engine-log flush-general-log flush-slow-log
     endscript

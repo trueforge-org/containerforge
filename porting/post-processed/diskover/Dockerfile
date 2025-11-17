@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/node:20.5.1
 
 # set version label
 ARG VERSION
@@ -17,9 +17,6 @@ RUN \
   apk add --no-cache --virtual=build-dependencies \
     build-base \
     cargo \
-    git \
-    nodejs \
-    npm \
     python3-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
@@ -42,7 +39,7 @@ RUN \
     /tmp/diskover.tar.gz -C \
     /app/ --strip-components=1 && \
   cd /app/diskover && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     setuptools \

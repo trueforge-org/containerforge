@@ -11,7 +11,7 @@ RUN \
   apk add --no-cache \
     python3 && \
   echo "**** install app ****" && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

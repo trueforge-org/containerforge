@@ -1,7 +1,9 @@
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
 ############## build stage ##############
-
+USER root
+ARG VERSION
+ARG TARGETARCH
 
 RUN \
   echo "**** install build packages ****" && \
@@ -63,6 +65,7 @@ RUN \
   make DESTDIR=/tmp/daapd-build install && \
   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig && \
   rm -rf /tmp/daapd-build/var
+
 ############## runtime stage ##############
 FROM ghcr.io/trueforge-org/ubuntu:24.4
 

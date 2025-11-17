@@ -28,7 +28,7 @@ RUN \
   tar xf /tmp/medusa.tar.gz -C \
     /app/medusa --strip-components=1 && \
   cd /app/medusa && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     setuptools \

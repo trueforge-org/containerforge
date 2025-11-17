@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # setup web
 mkdir -p \
     /config/diskover-web.conf.d
@@ -11,12 +8,6 @@ mkdir -p \
 if [[ ! -e "/config/diskoverdb.sqlite3" ]]; then
     touch /config/diskoverdb.sqlite3
 fi
-
-
-
-
-
-
 
 if [ -f "/config/diskover.cfg" ]; then
     echo '

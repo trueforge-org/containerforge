@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -21,7 +21,6 @@ RUN \
     libpng-dev \
     mpg123-dev \
     openjpeg-dev \
-    python3-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     chromaprint \
@@ -39,9 +38,7 @@ RUN \
     libffi \
     libpng \
     mpg123 \
-    nano \
     openjpeg \
-    python3 \
     sqlite-libs && \
   echo "**** compile mp3gain ****" && \
   mkdir -p \
@@ -65,7 +62,7 @@ RUN \
   make -f Makefile.linux && \
   cp -p mp3val /usr/bin && \
   echo "**** install pip packages ****" && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

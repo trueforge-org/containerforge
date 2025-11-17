@@ -97,7 +97,7 @@ RUN \
   cd /tmp/rust && \
   ./install.sh && \
   cargo install cargo-c --locked && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     setuptools \
@@ -633,7 +633,7 @@ RUN \
   curl -Lf \
     https://ffmpeg.org/releases/ffmpeg-${FFMPEG}.tar.bz2 | \
     tar -jx --strip-components=1 -C /tmp/ffmpeg
-  
+
   RUN \
     echo "**** compiling ffmpeg ****" && \
     cd /tmp/ffmpeg && \

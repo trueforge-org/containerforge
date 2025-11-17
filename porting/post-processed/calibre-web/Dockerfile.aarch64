@@ -49,7 +49,7 @@ RUN \
     /tmp/calibre-web.tar.gz -C \
     /app/calibre-web --strip-components=1 && \
   cd /app/calibre-web && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

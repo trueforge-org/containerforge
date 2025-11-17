@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -17,7 +17,6 @@ RUN \
     libxml2-dev \
     libxslt-dev \
     mariadb-dev \
-    postgresql-dev \
     python3-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
@@ -28,7 +27,6 @@ RUN \
     libxml2 \
     libxslt \
     mariadb-connector-c \
-    python3 && \
   echo "**** install babybuddy ****" && \
   curl -o \
     /tmp/babybuddy.tar.gz -L \
@@ -38,7 +36,7 @@ RUN \
     /tmp/babybuddy.tar.gz -C \
     /app/www/public --strip-components=1 && \
   cd /app/www/public && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
@@ -46,6 +44,8 @@ RUN \
     -r requirements.txt && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     mysqlclient && \
+  ln -s /config/data /app/www/public/data \
+  && ln -s /config/media /app/www/public/media && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

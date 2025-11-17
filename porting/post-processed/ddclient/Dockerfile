@@ -9,8 +9,7 @@ USER root
 RUN \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \
-    build-base \
-    wget && \
+    build-base && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     bind-tools \

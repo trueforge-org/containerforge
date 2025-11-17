@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create directory structure
 mkdir -p \
     /config/www/{uploads,files,images,themes} \
@@ -60,19 +57,8 @@ done
 # update database - will set up database if fresh, or, migrate existing
 php /app/www/artisan migrate --force
 
-# permissions
-
-    /config
-
-
-
-
-
-exec memcached -u apps
-
-
-
-
+## TODO: THis requires to be made into an external thing
+# exec memcached -u apps
 
 echo "*** Starting Async Action Queue ***"
 

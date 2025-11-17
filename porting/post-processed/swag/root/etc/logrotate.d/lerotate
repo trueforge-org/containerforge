@@ -7,5 +7,5 @@
     missingok
     notifempty
     sharedscripts
-    su abc abc
+    su apps apps
 }

@@ -195,7 +195,7 @@ RUN \
   python3 \
     -m venv \
     --system-site-packages \
-    /lsiopy && \
+    /config/venv && \
   pip install . && \
   pip install setuptools && \
   echo "**** install selkies interposer ****" && \

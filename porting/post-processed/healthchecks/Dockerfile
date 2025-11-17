@@ -40,7 +40,7 @@ RUN \
     /app/healthchecks/ --strip-components=1 && \
   echo "**** install pip packages ****" && \
   cd /app/healthchecks && \
-  python3 -m venv /lsiopy && \
+  python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
