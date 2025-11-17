@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+_install=(/app/code-server/bin/code-server "--extensions-dir" "/config/extensions" "--install-extension")
+
+"${_install[@]}" "$@"

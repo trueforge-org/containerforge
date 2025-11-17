@@ -5,8 +5,7 @@ ARG VERSION
 
 ENV DELUGE_BIN="deluged" \
     XDG_CONFIG_HOME="/config" \
-    PYTHON_EGG_CACHE="/config/plugins/.python-eggs" \
-    TMPDIR="/tmp"
+    PYTHON_EGG_CACHE="/config/plugins/.python-eggs"
 
 USER root
 

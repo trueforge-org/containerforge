@@ -13,3 +13,4 @@
 !docker-entrypoint.d/
 !compatibility.sh
 !upgrade.sh
+!/root
