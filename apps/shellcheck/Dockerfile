@@ -1,36 +1,20 @@
-############## build stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.4 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.4
 
+ARG VERSION
+ARG TARGETARCH
+
+ARG RUNNER_ARCH=${TARGETARCH/arm64/aarch64}
+ARG RUNNER_ARCH=${TARGETARCH/amd64/x86_64}
 
 USER root
 
-# build environment settings
-
 RUN \
-    echo "**** install build packages ****" && \
-    apt-get update && \
-    apt-get install -y \
-        cabal-install \
-        curl \
-        ghc \
-        git && \
-    echo "**** compile shellcheck ****" && \
-    git clone https://github.com/koalaman/shellcheck /tmp/shellcheck && \
-    cd /tmp/shellcheck && \
-    cabal update && \
-    cabal install --dependencies-only && \
-    cabal build Paths_ShellCheck && \
-    ghc \
-        -idist/build/autogen \
-        -isrc \
-        -optl-pthread \
-        -optl-static \
-        --make \
-        shellcheck && \
-    strip --strip-all shellcheck
+    echo "**** download shellcheck binary ****" && \
+    curl -L -o /tmp/shellcheck.tar.xz \
+        https://github.com/koalaman/shellcheck/releases/download/v${VERSION}/shellcheck-v${VERSION}.linux.${TARGETARCH}.tar.xz && \
+    tar -xJf /tmp/shellcheck.tar.xz -C /usr/local/bin --strip-components=1 shellcheck-v0.11.0/shellcheck && \
+    chmod +x /usr/local/bin/shellcheck
 
-############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+USER apps
 
-# copy files from build stage
-COPY --from=buildstage /tmp/shellcheck/shellcheck /usr/local/bin/
+COPY ./ /
