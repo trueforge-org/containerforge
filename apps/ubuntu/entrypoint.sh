@@ -29,30 +29,48 @@ EOF
 }
 
 check_video() {
-    local FILES
-FILES=$(find /dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/video1? -type c -print 2>/dev/null)
+    local WARNINGS=0
+    local BAD_DEVICES=()
+    local USER_UID=${1:-$(id -u)}
+    local USER_GIDS
 
-for i in ${FILES}; do
-    VIDEO_GID=$(stat -c '%g' "${i}")
-    VIDEO_UID=$(stat -c '%u' "${i}")
-    # check if user matches device
-    if id -u 568 | grep -qw "${VIDEO_UID}"; then
-        echo "**** permissions for ${i} are good ****"
+    # Get all groups the user belongs to
+    USER_GIDS=$(id -G "$USER_UID")
+
+    # Gather all video/graphics devices
+    local FILES=()
+    while IFS= read -r f; do FILES+=("$f"); done < <(find /dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/kfd -type c 2>/dev/null)
+    while IFS= read -r f; do FILES+=("$f"); done < <(find /dev -maxdepth 1 -name 'video[0-9]' -type c 2>/dev/null)
+
+    for i in "${FILES[@]}"; do
+        local VIDEO_GID VIDEO_UID MODE GROUP_PERM
+        VIDEO_GID=$(stat -c '%g' "$i")
+        VIDEO_UID=$(stat -c '%u' "$i")
+        MODE=$(stat -c '%a' "$i")
+        GROUP_PERM=$(( (MODE / 10) % 10 ))
+
+        if [ "$USER_UID" -eq "$VIDEO_UID" ]; then
+            continue
+        elif echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$VIDEO_GID" && [ "$GROUP_PERM" -ge 6 ]; then
+            continue
+        else
+            WARNINGS=$((WARNINGS + 1))
+            BAD_DEVICES+=("$i")
+        fi
+    done
+
+    if [ "$WARNINGS" -eq 0 ]; then
+        echo "**** Video permissions are good ****"
     else
-        # check if group matches and that device has group rw
-        if id -G 568 | grep -qw "${VIDEO_GID}" && [[ $(stat -c '%A' "${i}" | cut -b 5,6) == "rw" ]]; then
-            echo "**** permissions for ${i} are good ****"
-        # check if device needs to be added to video group
-        elif ! id -G 568 | grep -qw "${VIDEO_GID}"; then
-            echo "**** Warning: user needs to be added to videogroup ****"
-        fi
-        # check if device has group rw
-        if [[ $(stat -c '%A' "${i}" | cut -b 5,6) != "rw" ]]; then
-            echo -e "**** The device ${i} does not have group read/write permissions. ****"
-        fi
+        echo "**** Warning: some video devices may not have correct permissions ****"
+        echo "Affected devices:"
+        for d in "${BAD_DEVICES[@]}"; do
+            echo "  - $d"
+        done
     fi
-done
 }
+
+
 
 check_uid_gid() {
     local TARGET_UID=568
@@ -133,7 +151,7 @@ else
     echo "[entrypoint] No files found in /docker-entrypoint.d/, skipping"
 fi
 
-if [ "$CFVID" = "true" ]; then
+if [ "$EXP_VID" = "true" ]; then
     echo "[entrypoint] Checking video device permissions..."
     check_video
 fi
