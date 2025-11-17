@@ -25,6 +25,7 @@ RUN \
   mkdir -p \
     /app/lazylibrarian && \
   echo "Installing from commit ${VERSION}" && \
+  mkdir -p /defaults && \
   echo "${VERSION}" > /defaults/version.txt && \
   curl -o \
     /tmp/lazylibrarian.tar.gz -L \
