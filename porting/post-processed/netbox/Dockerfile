@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -18,13 +18,11 @@ RUN \
     openldap-dev \
     openssl-dev \
     postgresql-dev \
-    python3-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache --upgrade \
     libldap \
     postgresql-client \
-    python3 \
     tiff \
     uwsgi \
     uwsgi-python && \

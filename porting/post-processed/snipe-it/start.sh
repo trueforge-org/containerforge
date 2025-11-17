@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create folders
 mkdir -p \
     /config/storage \
@@ -46,11 +43,6 @@ elif [[ -f "/config/SNIPE_IT_APP_KEY.txt" ]]; then
     printf '%s' "$(cat /config/SNIPE_IT_APP_KEY.txt)" > /run/s6/container_environment/APP_KEY
 fi
 
-# permissions
-
-    /config/ \
-    /app/www/bootstrap/cache
-
 # add server name to nginx config while handling legacy settings
 if [[ -n ${NGINX_APP_URL+x} ]]; then
     REPLACE_URL=${NGINX_APP_URL}
@@ -82,3 +74,4 @@ if [[ -n ${TZ+x} ]]; then
     printf '%s' "${TZ}" >/run/s6/container_environment/APP_TIMEZONE
 fi
 
+## TODO: Find exec

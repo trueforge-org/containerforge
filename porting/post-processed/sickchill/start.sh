@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create symlinks
 sitepackages=$(python -c "import site; print(site.getsitepackages()[0])")
 
@@ -17,13 +14,5 @@ done
 # permissions
 echo "Setting permissions"
 
-    /config
-
-
-
-
-
-exec \
-
-     python3 /config/venv/bin/SickChill --datadir /config
+exec python3 /config/venv/bin/SickChill --datadir /config
 

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create local logs dir
 mkdir -p \
     /config/menus/remote \
@@ -40,13 +37,6 @@ if [[ ! -f /config/menus/remote/menu.ipxe ]]; then
     rm -f /tmp/menus.tar.gz
 fi
 
-# Ownership
-
-
-
-
-
-
 # make our folders
 mkdir -p \
     /assets \
@@ -68,30 +58,12 @@ if [[ ! -f /config/nginx/site-confs/default ]]; then
     cp /defaults/default /config/nginx/site-confs/default
 fi
 
-# Ownership
 
+## TODO: Deal with multi-exec
+exec /usr/sbin/nginx -c /config/nginx/nginx.conf
 
+exec /usr/sbin/in.tftpd --foreground --listen --user apps --secure ${PORT_RANGE:+--port-range $PORT_RANGE} /config/menus
 
-
-
-
-exec \
-    
-        /usr/sbin/nginx -c /config/nginx/nginx.conf
-
-
-
-
-
-exec \
-    
-        /usr/sbin/in.tftpd --foreground --listen --user apps --secure ${PORT_RANGE:+--port-range $PORT_RANGE} /config/menus
-
-
-
-
-
-exec \
-    
-        cd /app  /usr/bin/node app.js
+cd /app
+exec /usr/bin/node app.js
 

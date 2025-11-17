@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 folders=(
     /app/raneto/node_modules/@raneto/theme-default/dist/public/images
     /app/raneto/content
@@ -32,15 +29,7 @@ if [[ ! -f /config/config/config.js ]]; then
     cp /defaults/config.js /config/config/config.js
 fi
 
-# permissions
-
-    /config 
-
-
-
-
-
-HOST=0.0.0.0 exec \
-    
-        cd /app/raneto  node server.js
+HOST=0.0.0.0
+cd /app/raneto
+exec node server.js
 

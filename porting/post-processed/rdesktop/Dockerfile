@@ -74,7 +74,6 @@ RUN \
   DEBIAN_FRONTEND=noninteractive \
   apt-get install -y --no-install-recommends \
     apt-transport-https \
-    ca-certificates \
     dbus-x11 \
     docker-ce-cli \
     docker-compose-plugin \
@@ -95,7 +94,6 @@ RUN \
     openssh-client \
     pulseaudio \
     software-properties-common \
-    sudo \
     x11-apps \
     x11-xserver-utils \
     xfonts-base \

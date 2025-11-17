@@ -11,14 +11,14 @@ if [[ ! -e /lock.file ]]; then
     sed -e 's/^wheel:\(.*\)/wheel:\1,apps/g' -i /etc/group
     # create directory for project
     mkdir -p /code
-    # make sure URL is set and folder is empty to clone code 
+    # make sure URL is set and folder is empty to clone code
     if [[ ${GITURL+x} ]] && [[ ! "$(/bin/ls -A /code 2>/dev/null)" ]] ; then \
         # clone the url the user passed to this directory
         git clone "${GITURL}" /code
-        
+
             /code
     else
-        
+
             /code
     fi
 
@@ -32,31 +32,15 @@ touch /lock.file
 
 # permissions
 mkdir -p /config/sessions
-
-
-    /config
-
-
-
-
-
+cd /app/pylon
 if [[ -n ${PYUSER+x} ]] && [[ -n ${PYPASS+x} ]]; then
-    exec \
-        
-            cd /app/pylon  \
-            node server.js -l 0.0.0.0 -p 3131 -w /code \
+    exec node server.js -l 0.0.0.0 -p 3131 -w /code \
             --username "${PYUSER}" --password "${PYPASS}"
 elif [[ -z ${PYUSER+x} ]] && [[ -z ${PYPASS+x} ]]; then
-    exec \
-        
-            cd /app/pylon  \
-            node server.js -l 0.0.0.0 -p 3131 -w /code
+    exec node server.js -l 0.0.0.0 -p 3131 -w /code
 else
     echo "**** You must specify both PYUSER _and_ PYPASS or neither ****"
     echo "****         Starting without a username/password         ****"
-    exec \
-        
-            cd /app/pylon  \
-            node server.js -l 0.0.0.0 -p 3131 -w /code
+    exec node server.js -l 0.0.0.0 -p 3131 -w /code
 fi
 

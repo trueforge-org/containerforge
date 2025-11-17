@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO pin version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION
@@ -12,10 +12,6 @@ ENV HOME="/app"
 ENV NODE_ENV="production"
 
 RUN \
-  echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    nodejs \
-    npm && \
   echo "**** install snapdrop ****" && \
   mkdir -p /app/www && \
   if [ -z ${SNAPDROP_RELEASE} ]; then \

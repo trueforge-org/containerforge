@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 mkdir -p \
     /app/netbox/netbox/static \
     /config/scripts
@@ -54,25 +51,12 @@ ln -sf /config/ldap_config.py /app/netbox/netbox/netbox/ldap_config.py
 
 mv /defaults/uwsgi.ini /app/netbox/netbox/uwsgi.ini > /dev/null 2>&1
 
-# permissions
-
-    /config
-
-
-
-
-
-exec \
-    
-        cd /app/netbox/netbox  /usr/sbin/uwsgi uwsgi.ini
-
-
-
-
+cd /app/netbox/netbox
+exec /usr/sbin/uwsgi uwsgi.ini
 
 cd /app/netbox/netbox || exit 1
 
- python3 ./manage.py migrate
+python3 ./manage.py migrate
 
 if [[ -n "$SUPERUSER_EMAIL" ]] && [[ -n "$SUPERUSER_PASSWORD" ]]; then
 cat << EOF |  python3 /app/netbox/netbox/manage.py shell
@@ -98,7 +82,4 @@ if [[ ! -e "/app/netbox/netbox/project-static/docs/index.html" ]]; then
     cd /app/netbox/netbox || exit 1
 fi
 
-# permissions
-
-    /app/netbox/netbox/static
-
+## TODO: find exec

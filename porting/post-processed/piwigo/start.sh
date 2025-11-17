@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make our folders
 mkdir -p \
     /config/www \
@@ -75,8 +72,5 @@ if [[ ! -f "/config/www/local/config/config.inc.php" ]]; then
     cp /app/www/public/include/config_default.inc.php /config/www/local/config/config.inc.php
 fi
 
-# permissions
-
-    /config \
-    /gallery
+## TODO: find exec
 

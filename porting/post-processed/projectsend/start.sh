@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # set default values for variables
 PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-512M}
 MAX_UPLOAD=${MAX_UPLOAD:-5000}
@@ -35,7 +32,7 @@ shopt -s dotglob
 for i in *; do
     if [ ! -e "/data/projectsend/${i}" ]; then
         cp -R "${i}" "/data/projectsend/${i}"
-        
+
     fi
 done
 
@@ -107,14 +104,6 @@ touch /config/crontabs/apps
 
 crontab -u apps /config/crontabs/apps
 
-# permissions
-
-    /config \
-    /app/www/public/cache
-
-
-    /data/projectsend \
-    /app/www/public/includes
-
 chmod 755 /app/www/public/emails
 
+## TODO: find exec

@@ -1,7 +1,5 @@
 
-
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/pyton:3.13.7
 
 # set version label
 ARG VERSION
@@ -20,13 +18,11 @@ RUN \
     git \
     libffi-dev \
     libxslt-dev \
-    openssl-dev \
-    python3-dev && \
+    openssl-dev && \
   echo "**** install packages ****" && \
   apk add --no-cache \
     libmediainfo \
-    libxslt \
-    python3 && \
+    libxslt && \
   echo "**** install sickchill ****" && \
   python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
@@ -47,10 +43,6 @@ RUN \
 # copy local files
 USER apps
 COPY . /
-
-
-
-
 
 # ports and volumes
 EXPOSE 8081

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make our folders and links
 mkdir -p \
     /data
@@ -23,23 +20,12 @@ if [[ ! -f /config/rsnapshot.conf ]]; then
     sed -i -E 's@^backup	/usr/local/	localhost/$@#backup	/usr/local/	localhost/@g' /config/rsnapshot.conf
 fi
 
-# permissions
-
-    /config
-
-
-
-
-
 echo "***** Validating config file *****"
 
-rsnapshot configtest
-
-
-
-
+exec rsnapshot configtest
 
 echo "***** Upgrading config file if required *****"
 
-rsnapshot upgrade-config-file
+exec rsnapshot upgrade-config-file
 
+## TODO: does there need to be a final exec here?

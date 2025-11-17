@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 # create self signed cert
 if [ ! -f "/config/ssl/proxy_key.pem" ]; then
   mkdir -p /config/ssl
@@ -11,7 +9,6 @@ if [ ! -f "/config/ssl/proxy_key.pem" ]; then
     -keyout /config/ssl/proxy_key.pem \
     -subj "/C=US/ST=CA/L=Carlsbad/O=Linuxserver.io/OU=LSIO Server/CN=*"
   chmod 600 /config/ssl/proxy_key.pem
-  chown -R apps:apps /config/ssl
 fi
 
 # generate server key
@@ -22,7 +19,6 @@ if [ ! -f "/config/ssl/server_key.pem" ]; then
     -out /config/ssl/server_key.pem \
     -pkeyopt rsa_keygen_bits:4096
   chmod 600 /config/ssl/server_key.pem
-  chown -R apps:apps /config/ssl
 fi
 
 # docker socket perms
@@ -46,14 +42,7 @@ if [ -S "${DOCKER_SOCK_PATH}" ]; then
   fi
 fi
 
-# perms
-chown apps:apps /sealskin.zip
-chown apps:apps /storage
-
-
-
-
 # Run SealSkin
-exec  \
-  bash -c 'cd /opt/sealskin/server && python3 main.py'
+cd /opt/sealskin/server
+exec python3 main.py
 

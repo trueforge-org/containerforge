@@ -10,9 +10,7 @@ RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache --upgrade \
     logrotate \
-    nano \
-    netcat-openbsd \
-    sudo && \
+    netcat-openbsd && \
   echo "**** install openssh-server ****" && \
   apk add --no-cache \
     openssh-client==${VERSION} \

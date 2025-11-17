@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 cd /app || exit 1
 
 mkdir -p /config/logs
@@ -34,13 +31,6 @@ echo "Migrating database..."
 
     TZ=UTC  node db/init.js
 
-    # permissions
-    
-        /config
-else
-    TZ=UTC node db/init.js
-fi
-
 
 
 
@@ -51,12 +41,7 @@ export NODE_ENV=production
 export TZ=UTC
 
 
-    HOME=/config exec \
-        
-        cd /app  node app.js --prod
-else
-    HOME=/config exec \
-        
-        cd /app node app.js --prod
-fi
+HOME=/config
 
+cd /app
+exec node app.js --prod

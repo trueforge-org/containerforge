@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin to version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION

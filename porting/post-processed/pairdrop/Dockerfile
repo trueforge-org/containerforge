@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin to version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION
@@ -10,12 +10,7 @@ ARG PAIRDROP_RELEASE
 # environment settings
 ENV NODE_ENV="production"
 
-RUN \
-  echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    nodejs \
-    npm && \
-  echo "**** install pairdrop ****" && \
+RUN echo "**** install pairdrop ****" && \
   mkdir -p /app/pairdrop && \
   if [ -z ${PAIRDROP_RELEASE} ]; then \
     PAIRDROP_RELEASE=$(curl -sL "https://api.github.com/repos/schlagmichdoch/pairdrop/tags" \

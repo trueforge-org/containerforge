@@ -1,7 +1,5 @@
 
-
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -15,9 +13,6 @@ RUN \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \
     build-base && \
-  echo "**** install packages ****" && \
-  apk add --no-cache \
-    python3 && \
   echo "**** install app ****" && \
   mkdir -p \
     /app/sickgear/ && \

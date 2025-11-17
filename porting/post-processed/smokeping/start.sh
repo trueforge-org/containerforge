@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create folders
 mkdir -p \
     /config/site-confs \
@@ -68,29 +65,13 @@ fi
 chmod 777 /var/cache/fontconfig/
 chmod o-rwx /config/smokeping_secrets
 
-
-    /config \
-    /data \
-    /run/apache2 \
-    /usr/share/webapps/smokeping \
-    /var/cache/smokeping \
-    /var/www/localhost/smokeping
-
-
-
-
-
 if [[ -f "/config/httpd.conf" ]]; then
     PORT=$(grep -e "^Listen" /config/httpd.conf | awk -F ' ' '{print $2}')
 fi
 
-exec \
-    
-        /usr/sbin/apachectl -D FOREGROUND
 
-
-
-
+## TODO: deal with multi-exec
+exec /usr/sbin/apachectl -D FOREGROUND
 
 if [[ -n "${MASTER_URL}" ]] && [[ -n "${SHARED_SECRET}" ]] && [[ -n "${CACHE_DIR}" ]]; then
     install -g apps -o apps -m 400 -D <(echo "${SHARED_SECRET}") /var/smokeping/secret.txt

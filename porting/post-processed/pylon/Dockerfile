@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -12,7 +12,6 @@ RUN \
     findutils \
     git \
     nodejs \
-    python3 \
     sudo && \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \

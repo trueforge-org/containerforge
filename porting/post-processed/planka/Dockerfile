@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
+## TODO pin version tag
+FROM ghcr.io/trueforge-org/python:rolling AS buildstage
 
 # set version label
 
@@ -13,8 +13,7 @@ RUN \
   apk add  --no-cache --virtual=build-dependencies \
     build-base \
     npm \
-    py3-setuptools \
-    python3-dev && \
+    py3-setuptools && \
   echo "**** install planka ****" && \
   mkdir -p /build && \
   curl -o \
@@ -40,7 +39,8 @@ RUN \
     $HOME/.npm \
     /tmp/*
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+    ## TODO: pin to version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 ARG VERSION
 ARG TARGETARCH
@@ -53,7 +53,6 @@ COPY --from=buildstage /build/client/build/index.html /app/views/index.ejs
 
 RUN \
   apk add  --no-cache \
-    nodejs \
     postgresql16-client && \
     echo "**** create symlinks ****" && \
     /bin/bash -c \

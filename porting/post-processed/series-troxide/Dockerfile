@@ -21,6 +21,7 @@ RUN \
   cargo install series-troxide
 
 # runtime
+## Move to our container
 FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 
 # set version label

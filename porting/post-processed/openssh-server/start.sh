@@ -47,14 +47,6 @@ if [[ -f /build_version ]]; then
     '
 fi
 
-
-
-
-
-
-
-
-
 # create folders
 mkdir -p \
     /config/{.ssh,logs/openssh,sshd}
@@ -105,10 +97,10 @@ if [[ ! -d /config/ssh_host_keys ]]; then
     cp /etc/ssh/ssh_host_* /config/ssh_host_keys
 fi
 
-# Enable sshd_config.d if mounted 
-if [[ -d /config/sshd/sshd_config.d ]]; then 
-    sed -i 's/Include \/etc\/ssh\/sshd_config.d\/\*.conf/Include \/config\/sshd\/sshd_config.d\/\*.conf/' /config/sshd/sshd_config 
-    sed -i '/Include \/config\/sshd\/sshd_config.d/s/^#*//' /config/sshd/sshd_config 
+# Enable sshd_config.d if mounted
+if [[ -d /config/sshd/sshd_config.d ]]; then
+    sed -i 's/Include \/etc\/ssh\/sshd_config.d\/\*.conf/Include \/config\/sshd\/sshd_config.d\/\*.conf/' /config/sshd/sshd_config
+    sed -i '/Include \/config\/sshd\/sshd_config.d/s/^#*//' /config/sshd/sshd_config
 fi
 
 # display SSH host public key(s)
@@ -193,26 +185,6 @@ if [[ ! -f /config/logs/loginfo.txt ]]; then
     echo "The current log file is named \"current\". The rotated log files are gzipped, named with a TAI64N timestamp and a \".s\" extension" > /config/logs/loginfo.txt
 fi
 
-# permissions
-
-    /config
-chmod go-w \
-    /config
-chmod 700 \
-    /config/.ssh
-chmod 600 \
-    /config/.ssh/authorized_keys
-
-
-    /config/sshd
-chmod 750 \
-    /config/sshd
-chmod 640 \
-    /config/sshd/sshd_config
-
-
-
-
 
 USER_NAME=${USER_NAME:-linuxserver.io}
 
@@ -220,7 +192,6 @@ for i in /config/ssh_host_keys/ssh_host_*_key; do
     SSH_HOST_KEYS="${SSH_HOST_KEYS} -h ${i}"
 done
 
-exec 2>&1 \
-    
-        s6-setuidgid "${USER_NAME}" /usr/sbin/sshd.pam -D -e -f /config/sshd/sshd_config ${SSH_HOST_KEYS}
+## TODO check syntax
+exec /usr/sbin/sshd.pam -D -e -f /config/sshd/sshd_config ${SSH_HOST_KEYS}
 

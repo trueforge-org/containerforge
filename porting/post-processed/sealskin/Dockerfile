@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -11,14 +11,11 @@ ENV HOME=/config
 RUN \
   echo "**** install build packages ****" && \
   apk add --no-cache --upgrade --virtual=build-dependencies \
-    python3-dev \
-    py3-pip \
     zip && \
   echo "**** install packages ****" && \
   apk add --no-cache \
     caddy \
     openssl \
-    python3 && \
   echo "**** install sealskin ****" && \
   mkdir /opt/sealskin && \
   curl -o \
@@ -30,6 +27,8 @@ RUN \
   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages && \
   cd /opt/sealskin/browser_extension && \
   zip -r /sealskin.zip * && \
+  chown apps:apps /sealskin.zip && \
+  chown apps:apps /storage && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \

@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4 as buildstage
+## TODO pin version tag
+FROM ghcr.io/trueforge-org/go:rolling as buildstage
 
 
 ENV \

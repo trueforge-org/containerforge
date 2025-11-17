@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 if [[ ! -f "/keylock" ]]; then
     cd /etc/xrdp || exit 1
     xrdp-keygen xrdp
@@ -14,9 +11,6 @@ if [[ ! -f "/keylock" ]]; then
     touch /keylock
 fi
 
-
-
-
 mkdir -p /var/run/xrdp || exit 1
 chown root:xrdp /var/run/xrdp || exit 1
 chmod 2775 /var/run/xrdp || exit 1
@@ -24,10 +18,6 @@ chmod 2775 /var/run/xrdp || exit 1
 mkdir -p /var/run/xrdp/sockdir || exit 1
 chown root:xrdp /var/run/xrdp/sockdir || exit 1
 chmod 3777 /var/run/xrdp/sockdir || exit 1
-
-
-
-
 
 # default file copies first run
 if [[ ! -d /config/.config ]]; then
@@ -40,8 +30,8 @@ if [[ ! -f /config/.config/openbox/autostart ]]; then
   cp /defaults/autostart /config/.config/openbox/autostart
 fi
 if [[ ! -f /config/.config/openbox/menu.xml ]]; then
-  mkdir -p /config/.config/openbox 
-  cp /defaults/menu.xml /config/.config/openbox/menu.xml 
+  mkdir -p /config/.config/openbox
+  cp /defaults/menu.xml /config/.config/openbox/menu.xml
 fi
 
 # XDG Home
@@ -94,45 +84,6 @@ if [[ "${PERM}" != "apps" ]]; then
     chown -R apps:apps /config
 fi
 
-
-
-
-
-FILES=$(find /dev/dri /dev/dvb -type c -print 2>/dev/null)
-
-for i in $FILES
-do
-    VIDEO_GID=$(stat -c '%g' "${i}")
-    VIDEO_UID=$(stat -c '%u' "${i}")
-    # check if user matches device
-    if id -u apps | grep -qw "${VIDEO_UID}"; then
-        echo "**** permissions for ${i} are good ****"
-    else
-        # check if group matches and that device has group rw
-        if id -G apps | grep -qw "${VIDEO_GID}" && [[ $(stat -c '%A' "${i}" | cut -b 5,6) = "rw" ]]; then
-            echo "**** permissions for ${i} are good ****"
-        # check if device needs to be added to video group
-        elif ! id -G apps | grep -qw "${VIDEO_GID}"; then
-            # check if video group needs to be created
-            VIDEO_NAME=$(getent group "${VIDEO_GID}" | awk -F: '{print $1}')
-            if [ -z "${VIDEO_NAME}" ]; then
-                VIDEO_NAME="video$(head /dev/urandom | tr -dc 'a-z0-9' | head -c4)"
-                groupadd "${VIDEO_NAME}"
-                groupmod -g "${VIDEO_GID}" "${VIDEO_NAME}"
-                echo "**** creating video group ${VIDEO_NAME} with id ${VIDEO_GID} ****"
-            fi
-            echo "**** adding ${i} to video group ${VIDEO_NAME} with id ${VIDEO_GID} ****"
-            usermod -a -G "${VIDEO_NAME}" apps
-        fi
-        # check if device has group rw
-        if [[ $(stat -c '%A' "${i}" | cut -b 5,6) != "rw" ]]; then
-            echo -e "**** The device ${i} does not have group read/write permissions, attempting to fix inside the container.If it doesn't work, you can run the following on your docker host: ****\nsudo chmod g+rw ${i}\n"
-            chmod g+rw "${i}"
-        fi
-    fi
-done
-
-
 #! /usr/bin/execlineb -P
 
 # Move stderr to out so it's piped to logger
@@ -146,14 +97,11 @@ s6-env DISPLAY=:1
 
 /usr/sbin/xrdp --nodaemon
 
-
-#! /usr/bin/execlineb -P
-
 # Redirect stderr to stdout.
 fdmove -c 2 1
 
 # Notify service manager when xrdp is up
 
-
-/usr/sbin/xrdp-sesman --nodaemon
+## TODO check
+exec /usr/sbin/xrdp-sesman --nodaemon
 

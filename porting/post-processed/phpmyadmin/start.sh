@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 mkdir -p \
     /config/phpmyadmin
 
@@ -45,10 +42,7 @@ fi
     if [[ -d "/config/themes" && ! -L "/app/www/public/themes" ]]; then
         ln -s "/config/themes" "/app/www/public/themes"
     fi
+
 fi
 
-
-    
-        /config
-fi
-
+## TODO: find exec
