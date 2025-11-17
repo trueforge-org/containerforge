@@ -1,0 +1,36 @@
+## Version 2024/07/16 - Changelog: https://github.com/linuxserver/docker-snapdrop/commits/master/root/defaults/nginx/site-confs/default.conf.sample
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    server_name _;
+
+    include /config/nginx/ssl.conf;
+
+    root /app/www/client;
+    index index.html;
+
+    location / {
+        # enable for basic auth
+        #auth_basic "Restricted";
+        #auth_basic_user_file /config/nginx/.htpasswd;
+
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /server {
+        proxy_connect_timeout 300;
+        proxy_pass http://localhost:3000;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header X-Forwarded-for $remote_addr;
+    }
+
+    # deny access to .htaccess/.htpasswd files
+    location ~ /\.ht {
+        deny all;
+    }
+}

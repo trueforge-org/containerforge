@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+
+
+
+if [[ -n ${HISHTORY_POSTGRES_DB} ]]; then
+    DB_HOST=$(awk -F '@|:|/' '{print $6}' <<<"${HISHTORY_POSTGRES_DB}")
+    DB_PORT=$(awk -F '@|:|/' '{print $7}' <<<"${HISHTORY_POSTGRES_DB}")
+    DB_USER=$(awk -F '@|:|/' '{print $4}' <<<"${HISHTORY_POSTGRES_DB}")
+    echo "Waiting for DB ${DB_HOST} to become available on port ${DB_PORT}..."
+    while :; do
+        if pg_isready -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -q; then
+            exit 0
+        fi
+        sleep 3
+    done
+elif [[ -n ${HISHTORY_SQLITE_DB} ]]; then
+    echo "Using SQLite database, ensure you have mounted $(dirname "${HISHTORY_SQLITE_DB}") to your host"
+else
+    echo "No database configured, sleeping..."
+    sleep infinity
+fi
+
+
+
+
+
+
+    exec \
+        
+             /app/server
+else
+    exec \
+        
+            /app/server
+fi
+

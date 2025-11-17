@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+
+
+
+# make our folders and links
+mkdir -p \
+    /data
+
+if [[ ! -f /config/rsnapshot.conf ]]; then
+    cp /etc/rsnapshot.conf.default /config/rsnapshot.conf
+
+    # adjust default config
+    sed -i -E 's@^#cmd_cp		/bin/cp$@cmd_cp		/bin/cp@g' /config/rsnapshot.conf
+    sed -i -E 's@^#cmd_ssh	/usr/bin/ssh$@cmd_ssh	/usr/bin/ssh@g' /config/rsnapshot.conf
+    sed -i -E 's@^#cmd_du		/usr/bin/du$@cmd_du		/usr/bin/du@g' /config/rsnapshot.conf
+    sed -i -E 's@^#cmd_rsnapshot_diff	/usr/local/bin/rsnapshot-diff$@cmd_rsnapshot_diff	/usr/bin/rsnapshot-diff@g' /config/rsnapshot.conf
+    sed -i -E 's@^#logfile	/var/log/rsnapshot$@logfile	/config/rsnapshot.log@g' /config/rsnapshot.conf
+    sed -i -E 's@^lockfile	/var/run/rsnapshot.pid$@lockfile	/config/rsnapshot.pid@g' /config/rsnapshot.conf
+    sed -i -E 's@^#link_dest	0$@link_dest	1@g' /config/rsnapshot.conf
+    sed -i -E 's@^backup	/home/		localhost/$@backup	/data/		localhost/\n#backup	/home/		localhost/@g' /config/rsnapshot.conf
+    sed -i -E 's@^backup	/etc/		localhost/$@#backup	/etc/		localhost/@g' /config/rsnapshot.conf
+    sed -i -E 's@^backup	/usr/local/	localhost/$@#backup	/usr/local/	localhost/@g' /config/rsnapshot.conf
+fi
+
+# permissions
+
+    /config
+
+
+
+
+
+echo "***** Validating config file *****"
+
+rsnapshot configtest
+
+
+
+
+
+echo "***** Upgrading config file if required *****"
+
+rsnapshot upgrade-config-file
+

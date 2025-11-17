@@ -1,0 +1,598 @@
+#!/usr/bin/env bash
+
+
+
+
+# Display variables for troubleshooting
+echo -e "Variables set:\\n\
+PUID=${PUID}\\n\
+PGID=${PGID}\\n\
+TZ=${TZ}\\n\
+URL=${URL}\\n\
+SUBDOMAINS=${SUBDOMAINS}\\n\
+EXTRA_DOMAINS=${EXTRA_DOMAINS}\\n\
+ONLY_SUBDOMAINS=${ONLY_SUBDOMAINS}\\n\
+VALIDATION=${VALIDATION}\\n\
+CERTPROVIDER=${CERTPROVIDER}\\n\
+DNSPLUGIN=${DNSPLUGIN}\\n\
+EMAIL=${EMAIL}\\n\
+STAGING=${STAGING}\\n"
+
+# Sanitize variables
+SANED_VARS=(DNSPLUGIN EMAIL EXTRA_DOMAINS ONLY_SUBDOMAINS STAGING SUBDOMAINS URL VALIDATION CERTPROVIDER)
+for i in "${SANED_VARS[@]}"; do
+    export echo "${i}"="${!i//\"/}"
+    export echo "${i}"="$(echo "${!i}" | tr '[:upper:]' '[:lower:]')"
+done
+
+# Check for and install requested DNS plugins
+if grep -q "universal-package-install" <<< "${DOCKER_MODS}" && grep -q "certbot-dns" <<< "${INSTALL_PIP_PACKAGES}"; then
+    echo "**** Installing requested dns plugins ****"
+    /etc/s6-overlay/s6-rc.d/init-mod-universal-package-install-add-package/run
+    /etc/s6-overlay/s6-rc.d/init-mods-package-install/run
+fi
+
+# check to make sure DNSPLUGIN is selected if dns validation is used
+CERTBOT_DNS_AUTHENTICATORS=$(certbot plugins --authenticators 2>/dev/null | sed -e 's/^Entry point: EntryPoint(name='\''cpanel'\''/Entry point: EntryPoint(name='\''dns-cpanel'\''/' -e '/EntryPoint(name='\''dns-/!d' -e 's/^Entry point: EntryPoint(name='\''dns-\([^ ]*\)'\'',/\1/' | sort)
+if [[ "${VALIDATION}" = "dns" ]] && ! echo "${CERTBOT_DNS_AUTHENTICATORS}" | grep -q "${DNSPLUGIN}"; then
+    echo "Please set the DNSPLUGIN variable to one of the following:"
+    echo "${CERTBOT_DNS_AUTHENTICATORS}"
+    sleep infinity
+fi
+
+# set_ini_value logic:
+# - if the name is not found in the file, append the name=value to the end of the file
+# - if the name is found in the file, replace the value
+# - if the name is found in the file but commented out, uncomment the line and replace the value
+# call set_ini_value with parameters: $1=name $2=value $3=file
+function set_ini_value() {
+    name=${1//\//\\/}
+    value=${2//\//\\/}
+    sed -i \
+        -e '/^#\?\(\s*'"${name}"'\s*=\s*\).*/{s//\1'"${value}"'/;:a;n;ba;q}' \
+        -e '$a'"${name}"'='"${value}" "${3}"
+}
+
+# ensure config files exist and has at least one value set (set_ini_value does not work on empty files)
+touch /config/etc/letsencrypt/cli.ini
+
+grep -qF 'agree-tos' /config/etc/letsencrypt/cli.ini || echo 'agree-tos=true' >>/config/etc/letsencrypt/cli.ini
+
+# Check for broken dns credentials value in cli.ini and remove
+sed -i '/dns--credentials/d' /config/etc/letsencrypt/cli.ini
+
+# Disable Certbot's built in log rotation
+set_ini_value "max-log-backups" "0" /config/etc/letsencrypt/cli.ini
+
+# copy dns default configs
+cp -n /defaults/dns-conf/* /config/dns-conf/ 2> >(grep -v 'cp: not replacing')
+
+
+# copy default renewal hooks
+cp -nR /defaults/etc/letsencrypt/renewal-hooks/* /config/etc/letsencrypt/renewal-hooks/ 2> >(grep -v 'cp: not replacing')
+
+
+# replace nginx service location in renewal hooks
+find /config/etc/letsencrypt/renewal-hooks/ -type f -exec sed -i 's|/run/service/nginx|/run/service/svc-nginx|g' {} \;
+find /config/etc/letsencrypt/renewal-hooks/ -type f -exec sed -i 's|/var/run/s6/services/nginx|/run/service/svc-nginx|g' {} \;
+find /config/etc/letsencrypt/renewal-hooks/ -type f -exec sed -i 's|s6-supervise nginx|s6-supervise svc-nginx|g' {} \;
+
+# create original config file if it doesn't exist, move non-hidden legacy file to hidden
+if [[ -f "/config/donoteditthisfile.conf" ]]; then
+    mv /config/donoteditthisfile.conf /config/.donoteditthisfile.conf
+fi
+if [[ ! -f "/config/.donoteditthisfile.conf" ]]; then
+    echo -e "ORIGURL=\"${URL}\" ORIGSUBDOMAINS=\"${SUBDOMAINS}\" ORIGONLY_SUBDOMAINS=\"${ONLY_SUBDOMAINS}\" ORIGEXTRA_DOMAINS=\"${EXTRA_DOMAINS}\" ORIGVALIDATION=\"${VALIDATION}\" ORIGDNSPLUGIN=\"${DNSPLUGIN}\" ORIGPROPAGATION=\"${PROPAGATION}\" ORIGSTAGING=\"${STAGING}\" ORIGCERTPROVIDER=\"${CERTPROVIDER}\" ORIGEMAIL=\"${EMAIL}\"" >/config/.donoteditthisfile.conf
+    echo "Created .donoteditthisfile.conf"
+fi
+
+# load original config settings
+
+. /config/.donoteditthisfile.conf
+
+# setting ORIGDOMAIN for use in revoke sections
+if [[ "${ORIGONLY_SUBDOMAINS}" = "true" ]] && [[ ! "${ORIGSUBDOMAINS}" = "wildcard" ]]; then
+    ORIGDOMAIN="$(echo "${ORIGSUBDOMAINS}" | tr ',' ' ' | awk '{print $1}').${ORIGURL}"
+else
+    ORIGDOMAIN="${ORIGURL}"
+fi
+
+# update plugin names in dns conf inis
+sed -i 's|^certbot[-_]dns[-_]aliyun:||g' /config/dns-conf/aliyun.ini
+sed -i 's|^certbot[-_]dns[-_]cpanel:||g' /config/dns-conf/cpanel.ini
+sed -i 's|^dns[-_]cpanel[-_]|cpanel_|g' /config/dns-conf/cpanel.ini
+sed -i 's|^directadmin[-_]|dns_directadmin_|g' /config/dns-conf/directadmin.ini
+sed -i 's|^certbot[-_]dns[-_]domeneshop:||g' /config/dns-conf/domeneshop.ini
+sed -i 's|^certbot[-_]plugin[-_]gandi:dns[-_]|dns_gandi_|g' /config/dns-conf/gandi.ini
+sed -i 's|^certbot[-_]dns[-_]inwx:||g' /config/dns-conf/inwx.ini
+sed -i 's|^certbot[-_]dns[-_]transip:||g' /config/dns-conf/transip.ini
+
+# update plugin names in renewal conf
+if [[ -f "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf" ]] && [[ "${ORIGVALIDATION}" = "dns" ]]; then
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(aliyun)$ ]]; then
+        sed -i 's|^authenticator = certbot[-_]dns[-_]aliyun:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^certbot[-_]dns[-_]aliyun:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(cpanel)$ ]]; then
+        sed -i 's|^authenticator = certbot[-_]dns[-_]cpanel:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^certbot[-_]dns[-_]cpanel:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^authenticator = dns[-_]cpanel|authenticator = cpanel|g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^dns[-_]cpanel[-_]|cpanel_|g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(directadmin)$ ]]; then
+        sed -i 's|^authenticator = directadmin|authenticator = dns-directadmin|g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^directadmin[-_]|dns_directadmin_|g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(domeneshop)$ ]]; then
+        sed -i 's|^authenticator = certbot[-_]dns[-_]domeneshop:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^certbot[-_]dns[-_]domeneshop:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(gandi)$ ]]; then
+        sed -i 's|^authenticator = certbot[-_]plugin[-_]gandi:dns|authenticator = dns-gandi|g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^certbot[-_]plugin[-_]gandi:dns[-_]|dns_gandi_|g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(inwx)$ ]]; then
+        sed -i 's|^authenticator = certbot[-_]dns[-_]inwx:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^certbot[-_]dns[-_]inwx:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+    if [[ "${ORIGDNSPLUGIN}" =~ ^(transip)$ ]]; then
+        sed -i 's|^authenticator = certbot[-_]dns[-_]transip:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+        sed -i 's|^certbot[-_]dns[-_]transip:||g' "/config/etc/letsencrypt/renewal/${ORIGDOMAIN}.conf"
+    fi
+fi
+
+# set default validation to http
+if [[ -z "${VALIDATION}" ]]; then
+    VALIDATION="http"
+    echo "VALIDATION parameter not set; setting it to http"
+fi
+
+# set duckdns validation to dns
+if [[ "${VALIDATION}" = "duckdns" ]]; then
+    VALIDATION="dns"
+    DNSPLUGIN="duckdns"
+    if [[ -n "${DUCKDNSTOKEN}" ]] && ! grep -q "dns_duckdns_token=${DUCKDNSTOKEN}$" /config/dns-conf/duckdns.ini; then
+        sed -i "s|^dns_duckdns_token=.*|dns_duckdns_token=${DUCKDNSTOKEN}|g" /config/dns-conf/duckdns.ini
+    fi
+fi
+if [[ "${VALIDATION}" = "dns" ]] && [[ "${DNSPLUGIN}" = "duckdns" ]]; then
+    if [[ "${SUBDOMAINS}" = "wildcard" ]]; then
+        echo "the resulting certificate will only cover the subdomains due to a limitation of duckdns, so it is advised to set the root location to use www.subdomain.duckdns.org"
+        export ONLY_SUBDOMAINS=true
+    else
+        echo "the resulting certificate will only cover the main domain due to a limitation of duckdns, ie. subdomain.duckdns.org"
+        export SUBDOMAINS=""
+    fi
+    export EXTRA_DOMAINS=""
+fi
+
+# setting the symlink for key location
+rm -rf /config/keys/letsencrypt
+if [[ "${ONLY_SUBDOMAINS}" = "true" ]] && [[ ! "${SUBDOMAINS}" = "wildcard" ]]; then
+    DOMAIN="$(echo "${SUBDOMAINS}" | tr ',' ' ' | awk '{print $1}').${URL}"
+    ln -s /config/etc/letsencrypt/live/"${DOMAIN}" /config/keys/letsencrypt
+else
+    ln -s /config/etc/letsencrypt/live/"${URL}" /config/keys/letsencrypt
+fi
+
+# cleanup unused csr and keys folders
+rm -rf /config/etc/letsencrypt/csr
+rm -rf /config/etc/letsencrypt/keys
+
+# checking for changes in cert variables, revoking certs if necessary
+if [[ ! "${URL}" = "${ORIGURL}" ]] ||
+    [[ ! "${SUBDOMAINS}" = "${ORIGSUBDOMAINS}" ]] ||
+    [[ ! "${ONLY_SUBDOMAINS}" = "${ORIGONLY_SUBDOMAINS}" ]] ||
+    [[ ! "${EXTRA_DOMAINS}" = "${ORIGEXTRA_DOMAINS}" ]] ||
+    [[ ! "${VALIDATION}" = "${ORIGVALIDATION}" ]] ||
+    [[ ! "${DNSPLUGIN}" = "${ORIGDNSPLUGIN}" ]] ||
+    [[ ! "${PROPAGATION}" = "${ORIGPROPAGATION}" ]] ||
+    [[ ! "${STAGING}" = "${ORIGSTAGING}" ]] ||
+    [[ ! "${CERTPROVIDER}" = "${ORIGCERTPROVIDER}" ]]; then
+    echo "Different validation parameters entered than what was used before. Revoking and deleting existing certificate, and an updated one will be created"
+    if [[ "${ORIGCERTPROVIDER}" = "zerossl" ]]; then
+        REV_ACMESERVER=("https://acme.zerossl.com/v2/DV90")
+    elif [[ "${ORIGSTAGING}" = "true" ]]; then
+        REV_ACMESERVER=("https://acme-staging-v02.api.letsencrypt.org/directory")
+    else
+        REV_ACMESERVER=("https://acme-v02.api.letsencrypt.org/directory")
+    fi
+    if [[ -f /config/etc/letsencrypt/live/"${ORIGDOMAIN}"/fullchain.pem ]]; then
+        certbot revoke --config-dir /config/etc/letsencrypt --logs-dir /config/log/letsencrypt --work-dir /tmp/letsencrypt --config /config/etc/letsencrypt/cli.ini --non-interactive --cert-path /config/etc/letsencrypt/live/"${ORIGDOMAIN}"/fullchain.pem --key-path /config/etc/letsencrypt/live/"${ORIGDOMAIN}"/privkey.pem --server "${REV_ACMESERVER[@]}" || true
+    else
+        certbot revoke --config-dir /config/etc/letsencrypt --logs-dir /config/log/letsencrypt --work-dir /tmp/letsencrypt --config /config/etc/letsencrypt/cli.ini --non-interactive --cert-name "${ORIGDOMAIN}" --server "${REV_ACMESERVER[@]}" || true
+    fi
+    rm -rf /config/etc/letsencrypt/{accounts,archive,live,renewal}
+fi
+
+# saving new variables
+echo -e "ORIGURL=\"${URL}\" ORIGSUBDOMAINS=\"${SUBDOMAINS}\" ORIGONLY_SUBDOMAINS=\"${ONLY_SUBDOMAINS}\" ORIGEXTRA_DOMAINS=\"${EXTRA_DOMAINS}\" ORIGVALIDATION=\"${VALIDATION}\" ORIGDNSPLUGIN=\"${DNSPLUGIN}\" ORIGPROPAGATION=\"${PROPAGATION}\" ORIGSTAGING=\"${STAGING}\" ORIGCERTPROVIDER=\"${CERTPROVIDER}\" ORIGEMAIL=\"${EMAIL}\"" >/config/.donoteditthisfile.conf
+
+# Check if the cert is using the old LE root cert, revoke and regen if necessary
+if [[ -f "/config/keys/letsencrypt/chain.pem" ]] && { [[ "${CERTPROVIDER}" == "letsencrypt" ]] || [[ "${CERTPROVIDER}" == "" ]]; } && [[ "${STAGING}" != "true" ]] && ! openssl x509 -in /config/keys/letsencrypt/chain.pem -noout -issuer | grep -q "ISRG Root X"; then
+    echo "The cert seems to be using the old LE root cert, which is no longer valid. Deleting and revoking."
+    REV_ACMESERVER=("https://acme-v02.api.letsencrypt.org/directory")
+    if [[ -f /config/etc/letsencrypt/live/"${ORIGDOMAIN}"/fullchain.pem ]]; then
+        certbot revoke --config-dir /config/etc/letsencrypt --logs-dir /config/log/letsencrypt --work-dir /tmp/letsencrypt --config /config/etc/letsencrypt/cli.ini --non-interactive --cert-path /config/etc/letsencrypt/live/"${ORIGDOMAIN}"/fullchain.pem --server "${REV_ACMESERVER[@]}" || true
+    else
+        certbot revoke --config-dir /config/etc/letsencrypt --logs-dir /config/log/letsencrypt --work-dir /tmp/letsencrypt --config /config/etc/letsencrypt/cli.ini --non-interactive --cert-name "${ORIGDOMAIN}" --server "${REV_ACMESERVER[@]}" || true
+    fi
+    rm -rf /config/etc/letsencrypt/{accounts,archive,live,renewal}
+fi
+
+# if zerossl is selected or staging is set to true, use the relevant server
+if [[ "${CERTPROVIDER}" = "zerossl" ]] && [[ "${STAGING}" = "true" ]]; then
+    echo "ZeroSSL does not support staging mode, ignoring STAGING variable"
+fi
+if [[ "${CERTPROVIDER}" = "zerossl" ]] && [[ -n "${EMAIL}" ]]; then
+    echo "ZeroSSL is selected as the cert provider, registering cert with ${EMAIL}"
+    ACMESERVER="https://acme.zerossl.com/v2/DV90"
+elif [[ "${CERTPROVIDER}" = "zerossl" ]] && [[ -z "${EMAIL}" ]]; then
+    echo "ZeroSSL is selected as the cert provider, but the e-mail address has not been entered. Please visit https://zerossl.com, register a new account and set the account e-mail address in the EMAIL environment variable"
+    sleep infinity
+elif [[ "${STAGING}" = "true" ]]; then
+    echo "NOTICE: Staging is active"
+    echo "Using Let's Encrypt as the cert provider"
+    ACMESERVER="https://acme-staging-v02.api.letsencrypt.org/directory"
+else
+    echo "Using Let's Encrypt as the cert provider"
+    ACMESERVER="https://acme-v02.api.letsencrypt.org/directory"
+fi
+
+set_ini_value "server" "${ACMESERVER}" /config/etc/letsencrypt/cli.ini
+
+# figuring out domain only vs domain & subdomains vs subdomains only
+DOMAINS_ARRAY=()
+if [[ -z "${SUBDOMAINS}" ]] || [[ "${ONLY_SUBDOMAINS}" != true ]]; then
+    DOMAINS_ARRAY+=("${URL}")
+fi
+if [[ -n "${SUBDOMAINS}" ]]; then
+    echo "SUBDOMAINS entered, processing"
+    SUBDOMAINS_ARRAY=()
+    if [[ "${SUBDOMAINS}" = "wildcard" ]]; then
+        SUBDOMAINS_ARRAY+=("*.${URL}")
+        echo "Wildcard cert for ${URL} will be requested"
+    else
+        for job in $(echo "${SUBDOMAINS}" | tr "," " "); do
+            SUBDOMAINS_ARRAY+=("${job}.${URL}")
+        done
+        echo "Sub-domains processed are: $(echo "${SUBDOMAINS_ARRAY[*]}" | tr " " ",")"
+    fi
+    DOMAINS_ARRAY+=("${SUBDOMAINS_ARRAY[@]}")
+fi
+
+# add extra domains
+if [[ -n "${EXTRA_DOMAINS}" ]]; then
+    echo "EXTRA_DOMAINS entered, processing"
+    EXTRA_DOMAINS_ARRAY=()
+    for job in $(echo "${EXTRA_DOMAINS}" | tr "," " "); do
+        EXTRA_DOMAINS_ARRAY+=("${job}")
+    done
+    echo "Extra domains processed are: $(echo "${EXTRA_DOMAINS_ARRAY[*]}" | tr " " ",")"
+    DOMAINS_ARRAY+=("${EXTRA_DOMAINS_ARRAY[@]}")
+fi
+
+# setting domains in cli.ini
+set_ini_value "domains" "$(echo "${DOMAINS_ARRAY[*]}" | tr " " ",")" /config/etc/letsencrypt/cli.ini
+
+# figuring out whether to use e-mail and which
+if [[ ${EMAIL} == *@* ]]; then
+    echo "E-mail address entered: ${EMAIL}"
+    set_ini_value "email" "${EMAIL}" /config/etc/letsencrypt/cli.ini
+    set_ini_value "no-eff-email" "true" /config/etc/letsencrypt/cli.ini
+    set_ini_value "register-unsafely-without-email" "false" /config/etc/letsencrypt/cli.ini
+else
+    echo "No e-mail address entered or address invalid"
+    set_ini_value "register-unsafely-without-email" "true" /config/etc/letsencrypt/cli.ini
+fi
+
+# alter extension for error message
+if [[ "${DNSPLUGIN}" = "google" ]]; then
+    DNSCREDENTIALFILE="/config/dns-conf/${DNSPLUGIN}.json"
+else
+    DNSCREDENTIALFILE="/config/dns-conf/${DNSPLUGIN}.ini"
+fi
+
+# setting the validation method to use
+if [[ "${VALIDATION}" = "dns" ]]; then
+    set_ini_value "preferred-challenges" "dns" /config/etc/letsencrypt/cli.ini
+    set_ini_value "authenticator" "dns-${DNSPLUGIN}" /config/etc/letsencrypt/cli.ini
+    set_ini_value "dns-${DNSPLUGIN}-credentials" "${DNSCREDENTIALFILE}" /config/etc/letsencrypt/cli.ini
+    if [[ -n "${PROPAGATION}" ]]; then set_ini_value "dns-${DNSPLUGIN}-propagation-seconds" "${PROPAGATION}" /config/etc/letsencrypt/cli.ini; fi
+
+    # plugins that don't support setting credentials file
+    if [[ "${DNSPLUGIN}" =~ ^(route53|standalone)$ ]]; then
+        sed -i "/^dns-${DNSPLUGIN}-credentials\b/d" /config/etc/letsencrypt/cli.ini
+    fi
+    # plugins that don't support setting propagation
+    if [[ "${DNSPLUGIN}" =~ ^(gandi|route53|standalone)$ ]]; then
+        if [[ -n "${PROPAGATION}" ]]; then echo "${DNSPLUGIN} dns plugin does not support setting propagation time"; fi
+        sed -i "/^dns-${DNSPLUGIN}-propagation-seconds\b/d" /config/etc/letsencrypt/cli.ini
+    fi
+    # plugins that use old parameter naming convention
+    if [[ "${DNSPLUGIN}" =~ ^(cpanel)$ ]]; then
+        sed -i "/^dns-${DNSPLUGIN}-credentials\b/d" /config/etc/letsencrypt/cli.ini
+        sed -i "/^dns-${DNSPLUGIN}-propagation-seconds\b/d" /config/etc/letsencrypt/cli.ini
+        set_ini_value "authenticator" "${DNSPLUGIN}" /config/etc/letsencrypt/cli.ini
+        set_ini_value "${DNSPLUGIN}-credentials" "${DNSCREDENTIALFILE}" /config/etc/letsencrypt/cli.ini
+        if [[ -n "${PROPAGATION}" ]]; then set_ini_value "${DNSPLUGIN}-propagation-seconds" "${PROPAGATION}" /config/etc/letsencrypt/cli.ini; fi
+    fi
+    # don't restore txt records when using DuckDNS plugin
+    if [[ "${DNSPLUGIN}" =~ ^(duckdns)$ ]]; then
+        set_ini_value "dns-${DNSPLUGIN}-no-txt-restore" "true" /config/etc/letsencrypt/cli.ini
+    fi
+
+    echo "${VALIDATION} validation via ${DNSPLUGIN} plugin is selected"
+elif [[ "${VALIDATION}" = "tls-sni" ]]; then
+    set_ini_value "preferred-challenges" "http" /config/etc/letsencrypt/cli.ini
+    set_ini_value "authenticator" "standalone" /config/etc/letsencrypt/cli.ini
+    echo "*****tls-sni validation has been deprecated, attempting http validation instead"
+else
+    set_ini_value "preferred-challenges" "http" /config/etc/letsencrypt/cli.ini
+    set_ini_value "authenticator" "standalone" /config/etc/letsencrypt/cli.ini
+    echo "http validation is selected"
+fi
+
+# generating certs if necessary
+if [[ ! -f "/config/keys/letsencrypt/fullchain.pem" ]]; then
+    if [[ "${CERTPROVIDER}" = "zerossl" ]] && [[ -n "${EMAIL}" ]]; then
+        echo "Retrieving EAB from ZeroSSL"
+        EAB_CREDS=$(curl -s https://api.zerossl.com/acme/eab-credentials-email --data "email=${EMAIL}")
+        ZEROSSL_EAB_KID=$(echo "${EAB_CREDS}" | jq .eab_kid)
+        ZEROSSL_EAB_HMAC_KEY=$(echo "${EAB_CREDS}" | jq .eab_hmac_key)
+        if [[ -z "${ZEROSSL_EAB_KID}" ]] || [[ -z "${ZEROSSL_EAB_HMAC_KEY}" ]]; then
+            echo "Unable to retrieve EAB credentials from ZeroSSL. Check the outgoing connections to api.zerossl.com and dns. Sleeping."
+            sleep infinity
+        fi
+        set_ini_value "eab-kid" "${ZEROSSL_EAB_KID}" /config/etc/letsencrypt/cli.ini
+        set_ini_value "eab-hmac-key" "${ZEROSSL_EAB_HMAC_KEY}" /config/etc/letsencrypt/cli.ini
+    fi
+    echo "Generating new certificate"
+    certbot certonly --config-dir /config/etc/letsencrypt --logs-dir /config/log/letsencrypt --work-dir /tmp/letsencrypt --config /config/etc/letsencrypt/cli.ini --non-interactive --renew-by-default
+    if [[ ! -d /config/keys/letsencrypt ]]; then
+        if [[ "${VALIDATION}" = "dns" ]]; then
+            echo "ERROR: Cert does not exist! Please see the validation error above. Make sure you entered correct credentials into the ${DNSCREDENTIALFILE} file."
+        else
+            echo "ERROR: Cert does not exist! Please see the validation error above. The issue may be due to incorrect dns or port forwarding settings. Please fix your settings and recreate the container"
+        fi
+        sleep infinity
+    fi
+    run-parts /config/etc/letsencrypt/renewal-hooks/deploy/
+    echo "New certificate generated; starting nginx"
+else
+    echo "Certificate exists; parameters unchanged; starting nginx"
+fi
+
+# if certbot generated key exists, remove self-signed cert and replace it with symlink to live cert
+if [[ -d /config/keys/letsencrypt ]]; then
+    rm -rf /config/keys/cert.crt
+    ln -s ./letsencrypt/fullchain.pem /config/keys/cert.crt
+    rm -rf /config/keys/cert.key
+    ln -s ./letsencrypt/privkey.pem /config/keys/cert.key
+fi
+
+
+
+
+
+
+    if ! iptables -L &> /dev/null; then
+        ln -sf /usr/sbin/xtables-legacy-multi /usr/sbin/iptables
+        ln -sf /usr/sbin/xtables-legacy-multi /usr/sbin/iptables-save
+        ln -sf /usr/sbin/xtables-legacy-multi /usr/sbin/iptables-restore
+        ln -sf /usr/sbin/xtables-legacy-multi /usr/sbin/ip6tables
+        ln -sf /usr/sbin/xtables-legacy-multi /usr/sbin/ip6tables-save
+        ln -sf /usr/sbin/xtables-legacy-multi /usr/sbin/ip6tables-restore
+    fi
+
+    # copy/update the fail2ban config defaults to/in /config
+    cp -R /defaults/fail2ban/filter.d /config/fail2ban/
+    cp -R /defaults/fail2ban/action.d /config/fail2ban/
+    # if jail.local is missing in /config, copy default
+    if [[ ! -f /config/fail2ban/jail.local ]]; then
+        cp /defaults/fail2ban/jail.local /config/fail2ban/jail.local
+    fi
+    # Replace fail2ban config with user config
+    if [[ -d /etc/fail2ban/filter.d ]]; then
+        rm -rf /etc/fail2ban/filter.d
+    fi
+    if [[ -d /etc/fail2ban/action.d ]]; then
+        rm -rf /etc/fail2ban/action.d
+    fi
+    cp -R /config/fail2ban/filter.d /etc/fail2ban/
+    cp -R /config/fail2ban/action.d /etc/fail2ban/
+    cp /defaults/fail2ban/fail2ban.local /etc/fail2ban/
+    cp /config/fail2ban/jail.local /etc/fail2ban/jail.local
+
+    # logfiles needed by fail2ban
+    if [[ ! -f /config/log/nginx/error.log ]]; then
+        touch /config/log/nginx/error.log
+    fi
+    if [[ ! -f /config/log/nginx/access.log ]]; then
+        touch /config/log/nginx/access.log
+    fi
+fi
+
+
+
+
+
+if [[ -f /config/nginx/geoip2.conf ]]; then
+    echo "/config/nginx/geoip2.conf exists.
+        Please migrate to https://github.com/linuxserver/docker-mods/tree/swag-maxmind"
+fi
+if [[ -f /config/nginx/ldap.conf ]]; then
+    echo "/config/nginx/ldap.conf exists.
+        Please apply any customizations to /config/nginx/ldap-server.conf
+        Ensure your configs are updated and remove /config/nginx/ldap.conf
+        If you do not use this config, simply remove it."
+fi
+if grep -qrle ' /etc/letsencrypt' /config/nginx; then
+    echo "    The following nginx confs are using certificates from the obsolete location
+    /etc/letsencrypt and should be updated to point to /config/etc/letsencrypt
+        "
+    echo -n "    " && grep -rle ' /etc/letsencrypt' /config/nginx
+fi
+
+
+
+
+
+# permissions
+find /config/log ! -path '/config/log/logrotate.status' -exec chmod +r {} \+
+
+
+    /config
+
+
+
+
+
+# Check if the cert is expired or expires within a day, if so, renew
+if openssl x509 -in /config/keys/letsencrypt/fullchain.pem -noout -checkend 86400 >/dev/null; then
+    echo "The cert does not expire within the next day. Letting the cron script handle the renewal attempts overnight (2:08am)."
+else
+    echo "The cert is either expired or it expires within the next day. Attempting to renew. This could take up to 10 minutes."
+    /app/le-renew.sh
+    sleep 1
+fi
+
+
+
+
+
+# check to make sure that the required variables are set
+if [[ -z "${URL}" ]]; then
+    echo "Please pass your URL as an environment variable in your docker run command. See docker info for more details."
+    sleep infinity
+fi
+
+
+
+
+
+# copy default config files if they don't exist
+if [[ ! -f /config/nginx/proxy.conf ]]; then
+    cp /defaults/nginx/proxy.conf.sample /config/nginx/proxy.conf
+fi
+
+# copy authelia config files if they don't exist
+if [[ ! -f /config/nginx/authelia-location.conf ]]; then
+    cp /defaults/nginx/authelia-location.conf.sample /config/nginx/authelia-location.conf
+fi
+if [[ ! -f /config/nginx/authelia-server.conf ]]; then
+    cp /defaults/nginx/authelia-server.conf.sample /config/nginx/authelia-server.conf
+fi
+
+# copy authentik config files if they don't exist
+if [[ ! -f /config/nginx/authentik-location.conf ]]; then
+    cp /defaults/nginx/authentik-location.conf.sample /config/nginx/authentik-location.conf
+fi
+if [[ ! -f /config/nginx/authentik-server.conf ]]; then
+    cp /defaults/nginx/authentik-server.conf.sample /config/nginx/authentik-server.conf
+fi
+
+# copy tinyauth config files if they don't exist
+if [[ ! -f /config/nginx/tinyauth-location.conf ]]; then
+    cp /defaults/nginx/tinyauth-location.conf.sample /config/nginx/tinyauth-location.conf
+fi
+if [[ ! -f /config/nginx/tinyauth-server.conf ]]; then
+    cp /defaults/nginx/tinyauth-server.conf.sample /config/nginx/tinyauth-server.conf
+fi
+
+# copy old ldap config file to new location
+if [[ -f /config/nginx/ldap.conf ]] && [[ ! -f /config/nginx/ldap-server.conf ]]; then
+    cp /config/nginx/ldap.conf /config/nginx/ldap-server.conf
+fi
+
+# copy ldap config files if they don't exist
+if [[ ! -f /config/nginx/ldap-location.conf ]]; then
+    cp /defaults/nginx/ldap-location.conf.sample /config/nginx/ldap-location.conf
+fi
+if [[ ! -f /config/nginx/ldap-server.conf ]]; then
+    cp /defaults/nginx/ldap-server.conf.sample /config/nginx/ldap-server.conf
+fi
+
+
+
+
+
+# make our folders and links
+mkdir -p \
+    /config/{fail2ban,dns-conf} \
+    /config/etc/letsencrypt/renewal-hooks \
+    /config/log/{fail2ban,letsencrypt,nginx} \
+    /config/nginx/proxy-confs \
+    /run/fail2ban \
+    /tmp/letsencrypt
+
+
+
+
+
+
+# samples are removed on init by the nginx base
+
+# copy new samples
+if [[ -d /defaults/nginx/proxy-confs/ ]]; then
+    find /defaults/nginx/proxy-confs/ \
+        -maxdepth 1 \
+        -name "*.conf.sample" \
+        -type f \
+        -exec cp "{}" /config/nginx/proxy-confs/ \;
+fi
+
+
+
+
+
+
+    exec \
+        fail2ban-client -x -f start
+else
+    sleep infinity
+fi
+
+
+
+
+
+if [[ ${SWAG_AUTORELOAD,,} == "true" ]]; then
+    if [[ -f "/etc/s6-overlay/s6-rc.d/svc-mod-swag-auto-reload/run" ]]; then
+        echo "ERROR: Legacy SWAG Auto Reload Mod detected, to use the built-in Auto Reload functionality please remove it from your container config."
+        sleep infinity
+    else
+        echo "Auto-reload: Watching the following folders for changes to .conf files:"
+        echo "/config/nginx"
+        ACTIVE_WATCH=("/config/nginx")
+        for i in $(echo "${SWAG_AUTORELOAD_WATCHLIST}" | tr "|" " "); do
+            if [ -f "${i}" ] || [ -d "${i}" ]; then
+                echo "${i}"
+                ACTIVE_WATCH+=("${i}")
+            fi
+            done
+
+            function wait_for_changes {
+            inotifywait -rq \
+                --event modify,move,create,delete \
+                --includei '\.conf$' \
+                "${ACTIVE_WATCH[@]}"
+            }
+
+            while wait_for_changes; do
+            NGINX_CONF=()
+            if ! grep -q "/config/nginx/nginx.conf" /etc/nginx/nginx.conf; then
+                NGINX_CONF=("-c" "/config/nginx/nginx.conf")
+            fi
+            if /usr/sbin/nginx "${NGINX_CONF[@]}" -t; then
+                echo "Changes to nginx config detected and the changes are valid, reloading nginx"
+                /usr/sbin/nginx "${NGINX_CONF[@]}" -s reload
+            else
+                echo "Changes to nginx config detected but the changes are not valid, skipping nginx reload. Please fix your config."
+            fi
+        done
+    fi
+else
+    sleep infinity
+fi
+

@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+
+
+# create self signed cert
+if [ ! -f "/config/ssl/proxy_key.pem" ]; then
+  mkdir -p /config/ssl
+  openssl req -new -x509 \
+    -days 3650 -nodes \
+    -out /config/ssl/proxy_cert.pem \
+    -keyout /config/ssl/proxy_key.pem \
+    -subj "/C=US/ST=CA/L=Carlsbad/O=Linuxserver.io/OU=LSIO Server/CN=*"
+  chmod 600 /config/ssl/proxy_key.pem
+  chown -R apps:apps /config/ssl
+fi
+
+# generate server key
+if [ ! -f "/config/ssl/server_key.pem" ]; then
+  mkdir -p /config/ssl
+  openssl genpkey \
+    -algorithm RSA \
+    -out /config/ssl/server_key.pem \
+    -pkeyopt rsa_keygen_bits:4096
+  chmod 600 /config/ssl/server_key.pem
+  chown -R apps:apps /config/ssl
+fi
+
+# docker socket perms
+DOCKER_SOCK_PATH="/var/run/docker.sock"
+if [ -S "${DOCKER_SOCK_PATH}" ]; then
+  DOCKER_GID=$(stat -c '%g' "${DOCKER_SOCK_PATH}")
+  if ! id -G apps | grep -qw "${DOCKER_GID}"; then
+    DOCKER_GROUP_NAME=$(getent group "${DOCKER_GID}" | awk -F: '{print $1}')
+    if [ -z "${DOCKER_GROUP_NAME}" ]; then
+      DOCKER_GROUP_NAME="docker_sock_group"
+      echo "**** Creating group '${DOCKER_GROUP_NAME}' with GID ${DOCKER_GID} for the Docker socket ****"
+      groupadd -g "${DOCKER_GID}" "${DOCKER_GROUP_NAME}"
+    fi
+    echo "**** Adding user 'apps' to group '${DOCKER_GROUP_NAME}' (GID: ${DOCKER_GID}) ****"
+    usermod -a -G "${DOCKER_GROUP_NAME}" apps
+  fi
+  if [ "$(stat -c '%A' "${DOCKER_SOCK_PATH}" | cut -c 5,6)" != "rw" ]; then
+    echo -e "\n**** WARNING: The Docker socket ${DOCKER_SOCK_PATH} does not have group read/write permissions. ****"
+    echo "**** To fix this, run the following command on your DOCKER HOST: ****"
+    echo -e "sudo chmod g+rw ${DOCKER_SOCK_PATH}\n"
+  fi
+fi
+
+# perms
+chown apps:apps /sealskin.zip
+chown apps:apps /storage
+
+
+
+
+# Run SealSkin
+exec  \
+  bash -c 'cd /opt/sealskin/server && python3 main.py'
+

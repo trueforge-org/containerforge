@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+
+
+
+mkdir -p \
+    /config/.flexget \
+    /run/flexget-temp
+
+FG_CONFIG_FILE="${FG_CONFIG_FILE:-/config/.flexget/config.yml}"
+case "${FG_CONFIG_FILE}" in
+  *yml)
+    FG_LOCK_FILE="${FG_CONFIG_FILE/config.yml/.config-lock}"
+    ;;
+  *yaml)
+    FG_LOCK_FILE="${FG_CONFIG_FILE/config.yaml/.config-lock}"
+    ;;
+  default)
+    echo "invalid config file extension"
+    exit 1
+    ;;
+esac
+
+# clean up config-lock from unclean shutdown
+if [[ -f "${FG_LOCK_FILE}" ]]; then
+    rm -rf "${FG_LOCK_FILE}"
+fi
+
+if [[ ! -f "${FG_CONFIG_FILE}" ]]; then
+    cp /default/config.yml "${FG_CONFIG_FILE}"
+fi
+
+if [[ -n "${FG_WEBUI_PASSWORD}" ]]; then
+    if ! flexget -c "${FG_CONFIG_FILE}" --logfile "${FG_LOG_FILE:-/config/.flexget/flexget.log}" --loglevel error web passwd "${FG_WEBUI_PASSWORD}" | tee /dev/stderr | grep -q 'Updated password'; then
+        echo "Halting init, please address the above issues and recreate the container"
+        sleep infinity
+    fi
+fi
+
+# permissions
+
+    /config \
+    /run/flexget-temp
+
+if grep -qe ' /data ' /proc/mounts; then
+    
+        /data
+fi
+
+
+
+
+
+exec \
+    
+        cd /config  python3 /lsiopy/bin/flexget \
+            --loglevel "${FG_LOG_LEVEL:-info}" --logfile "${FG_LOG_FILE:-/config/.flexget/flexget.log}" -c "${FG_CONFIG_FILE:-/config/.flexget/config.yml}" daemon start --autoreload-config
+

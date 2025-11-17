@@ -1,0 +1,65 @@
+
+FROM ghcr.io/trueforge-org/ubuntu:24.4
+
+# set version label
+ARG VERSION
+ARG TARGETARCH
+USER root
+
+RUN \
+  echo "**** install build packages ****" && \
+  apk add --no-cache --virtual=build-dependencies \
+    autoconf \
+    automake \
+    build-base \
+    cargo \
+    freetype-dev \
+    jpeg-dev \
+    lcms2-dev \
+    libffi-dev \
+    libpng-dev \
+    libwebp-dev \
+    libxml2-dev \
+    libxslt-dev \
+    linux-headers \
+    openjpeg-dev \
+    openssl-dev \
+    python3-dev \
+    tiff-dev \
+    zlib-dev && \
+  echo "**** install runtime packages ****" && \
+  apk add --no-cache \
+    git \
+    python3 \
+    vnstat && \
+  echo "**** install app ****" && \
+  mkdir -p /app/htpcmanager && \
+  curl -s -o \
+    /tmp/htpc.tar.gz -L \
+    "https://github.com/HTPC-Manager/HTPC-Manager/archive/${VERSION}.tar.gz" && \
+  tar xf \
+    /tmp/htpc.tar.gz -C \
+    /app/htpcmanager --strip-components=1 && \
+  echo "**** install pip packages ****" && \
+  sed -i -e '/psutil\|pyopenssl\|pySMART/d' /app/htpcmanager/requirements.txt && \
+  python3 -m venv /lsiopy && \
+  pip install -U --no-cache-dir \
+    pip \
+    wheel && \
+  pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r /app/htpcmanager/requirements.txt && \
+  echo ${VERSION} > /app/htpcmanager/VERSION.txt && \
+  echo "**** cleanup ****" && \
+  apk del --purge \
+    build-dependencies && \
+  rm -rf \
+    $HOME/.cache \
+    /tmp/*
+
+# add local files
+USER apps
+COPY . /
+
+
+# ports and volumes
+EXPOSE 8085
+VOLUME /config

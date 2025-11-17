@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+
+
+
+# set default values for variables
+PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-512M}
+MAX_UPLOAD=${MAX_UPLOAD:-5000}
+PHP_MAX_FILE_UPLOAD=${PHP_MAX_FILE_UPLOAD:-200}
+USABLE_MAX_UPLOAD=${MAX_UPLOAD//[!0-9]/}
+
+# create our folders
+mkdir -p \
+    /config/projectsend \
+    /data/projectsend
+
+if [[ ! -f "/config/php/projectsend.ini" ]]; then
+    cp /defaults/projectsend.ini /config/php/projectsend.ini
+
+    sed -i \
+        -e "s#;*memory_limit =.*#memory_limit = ${PHP_MEMORY_LIMIT}#i" \
+        -e "s#;*upload_max_filesize =.*#upload_max_filesize = ${USABLE_MAX_UPLOAD}M#i" \
+        -e "s#;*max_file_uploads =.*#max_file_uploads = ${PHP_MAX_FILE_UPLOAD}#i" \
+        -e "s#;*post_max_size =.*#post_max_size = ${USABLE_MAX_UPLOAD}M#i" \
+        -e "s#;*cgi.fix_pathinfo=.*#cgi.fix_pathinfo= 0#i" \
+        /config/php/projectsend.ini
+fi
+
+# copy config
+PREV_DIR=$(pwd)
+
+cd /defaults/upload || exit 1
+shopt -s globstar nullglob
+shopt -s dotglob
+for i in *; do
+    if [ ! -e "/data/projectsend/${i}" ]; then
+        cp -R "${i}" "/data/projectsend/${i}"
+        
+    fi
+done
+
+shopt -u globstar nullglob
+shopt -u dotglob
+
+cd "${PREV_DIR}" || exit 1
+
+# create symlinks
+if [[ ! -L /app/www/public/upload ]]; then
+    ln -sf /data/projectsend /app/www/public/upload
+fi
+
+if [[ -f /app/www/public/includes/sys.config.php ]]; then
+    rm /app/www/public/includes/sys.config.php
+fi
+if [[ ! -L /app/www/public/includes/sys.config.php ]]; then
+    ln -sf /config/projectsend/sys.config.php /app/www/public/includes/sys.config.php
+fi
+
+#Handle translations
+mkdir -p /config/translations
+shopt -s globstar dotglob
+
+#check if there are newer translation files in the container and if so copy them to /config
+if [[ -d /config/translations/lang && ! -L /app/www/public/lang ]]; then
+    rm -rf /app/www/public/lang
+fi
+if [[ ! -d /config/translations/lang && ! -L /app/www/public/lang ]]; then
+    mv /app/www/public/lang /config/translations/
+fi
+if [[ -d /config/translations/lang && ! -L /app/www/public/lang ]]; then
+    ln -s /config/translations/lang /app/www/public/lang
+fi
+if [[ ! -f /config/translations/lang/en.po ]] || [[ ! -f /config/translations/lang/en.mo ]]; then
+    mkdir -p /config/translations/lang
+    cp /defaults/lang/* /config/translations/lang/
+fi
+
+symlinks=(
+    /app/www/public/templates/default/lang
+    /app/www/public/templates/gallery/lang
+    /app/www/public/templates/pinboxes/lang
+)
+
+for i in "${symlinks[@]}"; do
+    path=$(echo "${i}" | awk -F '/' '{print $(NF-1)}')
+    # symlink translations
+    if [[ -d /config/translations/"$path" && ! -L "${i}" ]]; then
+        rm -rf "${i}"
+    fi
+    if [[ ! -d /config/translations/"$path" && ! -L "${i}" ]]; then
+        mv "$i" /config/translations/"$(echo "${i}" | awk -F '/' '{print $(NF-1)}')"
+    fi
+    if [[ -d /config/translations/"$path" && ! -L "${i}" ]]; then
+        ln -s /config/translations/"$path" "${i}"
+    fi
+    if [[ ! -f /config/translations/"$path"/en.po ]] || [[ ! -f /config/translations/"$path"/en.mo ]]; then
+        mkdir -p /config/translations/"$path"
+        cp /defaults/lang/* /config/translations/"$path"/
+    fi
+done
+
+shopt -u globstar dotglob
+
+# handle crontab if configured
+mkdir -p /config/crontabs
+touch /config/crontabs/apps
+
+crontab -u apps /config/crontabs/apps
+
+# permissions
+
+    /config \
+    /app/www/public/cache
+
+
+    /data/projectsend \
+    /app/www/public/includes
+
+chmod 755 /app/www/public/emails
+

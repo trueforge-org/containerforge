@@ -1,0 +1,55 @@
+
+FROM ghcr.io/trueforge-org/ubuntu:24.4
+
+# set version label
+ARG VERSION
+ARG TARGETARCH
+USER root
+
+# environment settings
+ENV THELOUNGE_HOME="/config"
+
+RUN \
+  echo "**** install build packages ****" && \
+  apk add --no-cache --virtual=build-dependencies \
+    build-base \
+    git \
+    py3-setuptools \
+    python3-dev && \
+  echo "**** install runtime packages ****" && \
+  apk add --no-cache \
+    yarn && \
+  echo "**** download thelounge ****" && \
+  mkdir -p \
+    /app/thelounge && \
+  curl -o \
+    /tmp/thelounge.tar.gz -L \
+    "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" && \
+  tar xf \
+    /tmp/thelounge.tar.gz -C \
+    /app/thelounge --strip-components=1 && \
+  cd /app/thelounge && \
+  echo "**** modify thelounge source ****" && \
+  sed -i "s/public: false,/public: true,/g" defaults/config.js && \
+  echo "**** install thelounge ****" && \
+  yarn install && \
+  NODE_ENV=production yarn build && \
+  yarn link && \
+  yarn --non-interactive cache clean && \
+  echo "**** cleanup ****" && \
+  apk del --purge \
+    build-dependencies && \
+  rm -rf \
+    /root \
+    /tmp/* && \
+  mkdir -p / \
+    /root
+
+# copy local files
+USER apps
+COPY . /
+
+
+# ports and volumes
+EXPOSE 9000
+VOLUME /config
