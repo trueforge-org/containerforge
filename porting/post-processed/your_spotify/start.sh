@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 VAR_PATH="/app/www/apps/client/build"
 
 cp "$VAR_PATH/variables-template.js" "$VAR_PATH/variables.js"
@@ -36,16 +33,10 @@ sed -i "s#connect-src \(.*\);#connect-src 'self' $CSP_CONNECT_SRC;#g" "$VAR_PATH
 
 HOME="/app"
 
-
-
-
-
 export API_ENDPOINT="${APP_URL}/api"
 export CLIENT_ENDPOINT="${APP_URL}"
 
- yarn --cwd /app/www/apps/server migrate
-
-exec \
-    
-        cd /app/www/apps/server  yarn start
+yarn --cwd /app/www/apps/server migrate
+cd /app/www/apps/server
+exec  yarn start
 

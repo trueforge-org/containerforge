@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 mkdir -p \
     /app/wg++/bin.net/WebGrab+Plus \
     /config/License
@@ -17,9 +14,4 @@ if [[ ! -e /config/siteini.pack ]]; then
     cp -R /defaults/ini/siteini.pack /config/
 fi
 
-# permissions
-
-    /app \
-    /config \
-    /data
-
+## TODO: figure out exec

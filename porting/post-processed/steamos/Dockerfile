@@ -45,9 +45,7 @@ RUN \
     firefox \
     fuse2 \
     gamescope \
-    git \
     gperftools \
-    jq \
     kate \
     konsole \
     lib32-gamescope \
@@ -64,7 +62,6 @@ RUN \
     steamdeck-kde-presets \
     steam-jupiter-stable \
     steamos-customizations \
-    unzip \
     xdg-user-dirs \
     xorg-xwayland \
     zenity && \

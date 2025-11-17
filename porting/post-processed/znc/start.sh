@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make folders
 mkdir -p \
     /config/configs
@@ -22,18 +19,8 @@ if [[ ! -f /config/configs/znc.conf ]]; then
     cp /defaults/znc.conf /config/configs/znc.conf
 fi
 
-# permissions
-
-    /config
-
-
-
-
-
 PORT=$(grep "Port =" /config/configs/znc.conf | awk -F '=' '{print $2;exit}')
 
-exec \
-    
-         /usr/local/bin/znc -d /config \
+exec /usr/local/bin/znc -d /config \
         --foreground
 

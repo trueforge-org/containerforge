@@ -1,13 +1,12 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/golang:rolling AS buildstage
 
 # build variables
 
 RUN \
  echo "**** install build packages ****" && \
   apk add --no-cache \
-    build-base \
-    go
+    build-base
 
 RUN \
   echo "**** fetch source code ****" && \
@@ -42,10 +41,13 @@ RUN \
   echo "**** create var lib folder ****" && \
   install -d -o apps -g apps \
     /var/lib/syncthing && \
-# copy files from build stage and local files
-COPY --from=buildstage /tmp/sync/syncthing /usr/bin/
+
 USER apps
 COPY . /
+
+# copy files from build stage and local files
+COPY --from=buildstage /tmp/sync/syncthing /usr/bin/
+
 
 
 # ports and volumes

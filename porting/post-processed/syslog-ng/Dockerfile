@@ -8,7 +8,6 @@ USER root
 RUN \
   echo "**** install packages ****" && \
   apk add -U --upgrade --no-cache \
-    grep \
     libdbi-drivers \
     paho-mqtt-c \
     syslog-ng==${VERSION} \

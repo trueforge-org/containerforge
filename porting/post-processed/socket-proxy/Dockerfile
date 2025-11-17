@@ -1,5 +1,5 @@
 
-FROM docker.io/alpine:3.22
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 
 # set version label
 ARG VERSION
@@ -9,10 +9,6 @@ USER root
 # install packages
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache \
-    alpine-release \
-    curl \
-    tzdata && \
   apk add --no-cache \
     haproxy==${VERSION} && \
   apk del --no-cache \
@@ -55,4 +51,3 @@ USER apps
 COPY . /
 COPY ./root /
 
-ENTRYPOINT ["/docker-entrypoint.sh"]

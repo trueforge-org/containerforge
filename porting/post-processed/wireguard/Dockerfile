@@ -16,7 +16,6 @@ RUN \
   apk add --no-cache \
     bc \
     coredns \
-    grep \
     iproute2 \
     iptables \
     ip6tables \

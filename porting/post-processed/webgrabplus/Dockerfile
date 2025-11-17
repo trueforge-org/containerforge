@@ -15,8 +15,7 @@ RUN \
   echo "**** install packages ****" && \
   apk -U --update --no-cache add \
     icu-libs \
-    iputils \
-    unzip && \
+    iputils && \
   echo "**** install dotnet sdk ****" && \
   mkdir -p /app/dotnet && \
   curl -o /tmp/dotnet-install.sh -L \

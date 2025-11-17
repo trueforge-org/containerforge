@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -14,8 +14,7 @@ ENV NODE_ENV="production"
 RUN \
   echo "**** install build packages ****" && \
   apk -U --update --no-cache add --virtual=build-dependencies \
-    build-base \
-    python3 && \
+    build-base && \
   apk add --no-cache \
     git \
     nodejs \

@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 ARG VERSION
 ARG TARGETARCH
@@ -20,8 +20,6 @@ RUN \
     php84-xmlreader \
     postgresql16-client \
     ssmtp && \
-  apk add --no-cache --virtual=build-dependencies \
-    npm && \
   echo "*** install speedtest-cli ***" && \
   if [ -z ${CLI_VERSION+x} ]; then \
     CLI_VERSION=$(curl -Ls https://packagecloud.io/ookla/speedtest-cli/debian/dists/bookworm/main/binary-$TARGETARCH/Packages \

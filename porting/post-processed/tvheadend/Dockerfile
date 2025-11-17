@@ -1,6 +1,7 @@
 
 ############## picons stage ##############
 # built by https://github.com/linuxserver/picons-builder
+## TODO: replace with our own
 FROM ghcr.io/linuxserver/picons-builder as piconsstage
 
 
@@ -30,7 +31,6 @@ RUN \
     file \
     findutils \
     gettext-dev \
-    git \
     gnu-libiconv-dev \
     libdvbcsa-dev \
     libgcrypt-dev \
@@ -189,13 +189,15 @@ RUN \
     x264 \
     x265 \
     xmltv \
-    zlib && \
+    zlib
+
+USER apps
 # copy local files and buildstage artifacts
 COPY --from=buildstage /tmp/argtable-build/usr/ /usr/
 COPY --from=buildstage /tmp/comskip-build/usr/ /usr/
 COPY --from=buildstage /tmp/tvheadend-build/usr/ /usr/
 COPY --from=buildstage /picons /picons
-USER apps
+
 COPY . /
 COPY ./root /
 

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # create folders
 mkdir -p /config/www/xbackbone/{storage,logs,static}
 mkdir -p /config/www/xbackbone/resources/database
@@ -83,9 +80,4 @@ if [[ $(grep -c "/index.php?\$args =404;" /config/nginx/site-confs/default.conf)
     sed -i $'s|/index.php?\$args =404;|/index.php?\$args;|g' /config/nginx/site-confs/default.conf
 fi
 
-# permissions
-
-    /config \
-    /app/www/public/resources/cache \
-    /app/www/public/resources/sessions
-
+## TODO: figure out exec

@@ -45,5 +45,4 @@ ARG TARGETARCH
 USER root
 
 # Add files from buildstage
-COPY --from=alpine-buildstage /usr/bin/unrar /usr/bin/unrar-alpine
-COPY --from=alpine-buildstage /usr/bin/unrar /usr/bin/unrar-ubuntu
+COPY --from=alpine-buildstage /usr/bin/unrar /usr/bin/unrar

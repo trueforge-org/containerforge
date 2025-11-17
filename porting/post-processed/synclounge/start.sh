@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 if [ -n "${AUTH_LIST}" ]; then
     export authentication__mechanism='["plex"]'
     export authentication__type='["server", "user"]'
@@ -9,12 +7,5 @@ if [ -n "${AUTH_LIST}" ]; then
 fi
 
 
-    exec \
-        
-             synclounge
-else
-    exec \
-        
-            synclounge
-fi
+exec synclounge
 

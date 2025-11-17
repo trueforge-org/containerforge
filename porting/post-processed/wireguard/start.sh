@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
-
 mkdir -p /config/wg_confs
 
 # migration to subfolder for wg confs
@@ -196,13 +192,6 @@ if [[ ! -f /config/coredns/Corefile ]]; then
     cp /defaults/Corefile /config/coredns/Corefile
 fi
 
-# permissions
-
-    /config
-
-
-
-
 mkdir -p /config/{templates,coredns}
 
 echo "Uname info: $(uname -a)"
@@ -219,34 +208,26 @@ else
     sleep infinity
 fi
 
-
-
-
-
 if netstat -apn | grep -q ":53 " && [[ -z "${USE_COREDNS}" ]]; then
     USE_COREDNS="false"
 fi
 
 if [[ ${USE_COREDNS} == "false" ]]; then
-    
+
         sleep infinity
 else
     if grep -q "health" /config/coredns/Corefile; then
         exec \
-            
+
             cd /config/coredns \
             /usr/bin/coredns -dns.port=53
     else
         exec \
-            
+
             cd /config/coredns \
             /usr/bin/coredns -dns.port=53
     fi
 fi
-
-
-
-
 
 unset WG_CONFS
 rm -rf /run/activeconfs
@@ -292,3 +273,4 @@ else
     echo "**** All tunnels are now down. Please fix the tunnel config ${FAILED} and restart the container ****"
 fi
 
+## TODO: figure out exec

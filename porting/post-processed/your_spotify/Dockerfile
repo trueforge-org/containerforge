@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildbase
+FROM ghcr.io/trueforge-org/python:3.13.7 AS buildbase
 
 # set version label
 ARG VERSION
@@ -47,11 +47,11 @@ RUN \
   rm -rf /app/www/node_modules && \
   yarn cache clean
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 ARG VERSION
 ARG TARGETARCH
-USER root
+
 
 ENV HOME=/app
 
@@ -60,7 +60,7 @@ COPY --from=buildbase /app/www/package.json /app/www/package.json
 COPY --from=buildbase /app/www/yarn.lock /app/www/yarn.lock
 COPY --from=buildserver /app/www/apps/server/lib/ /app/www/apps/server/lib/
 COPY --from=buildserver /app/www/apps/server/package.json /app/www/apps/server/package.json
-
+USER root
 RUN \
   echo "**** install build packages ****" && \
   apk -U --update --no-cache add --virtual=build-dependencies \

@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 
-
-
-
-
-    /config
-
 if [[ "${DB_CONNECTION:=sqlite}" = "sqlite" ]]; then
     if [[ -n "${DB_DATABASE}" ]]; then
         if [[ ! -e "${DB_DATABASE}" ]]; then
             touch "${DB_DATABASE}"
-            
+
         fi
     else
         touch /config/database.sqlite
@@ -20,24 +14,10 @@ if [[ "${DB_CONNECTION:=sqlite}" = "sqlite" ]]; then
         if [[ ! -L "/app/www/database/database.sqlite" ]]; then
             ln -s "/config/database.sqlite" "/app/www/database/database.sqlite"
         fi
-        
+
     fi
     export DB_CONNECTION=sqlite
     echo "sqlite" > /run/s6/container_environment/DB_CONNECTION
-elif [[ "${DB_CONNECTION}" = "mysql" ]]; then
-    echo "Waiting for DB to be available"
-    END=$((SECONDS + 30))
-    while [[ ${SECONDS} -lt ${END} ]] && [[ -n "${DB_HOST+x}" ]]; do
-        if [[ $(/usr/bin/nc -w1 "${DB_HOST}" "${DB_PORT}" | tr -d '\0') ]]; then
-            if [[ ! -f /dbwait.lock ]]; then
-                sleep 5
-            fi
-            touch /dbwait.lock
-            break
-        else
-            sleep 1
-        fi
-    done
 elif [[ "${DB_CONNECTION}" = "pgsql" ]]; then
     echo "Waiting for DB to be available"
     END=$((SECONDS + 30))
@@ -53,10 +33,6 @@ elif [[ "${DB_CONNECTION}" = "pgsql" ]]; then
         fi
     done
 fi
-
-
-    /app/www/bootstrap/cache \
-    /app/www/storage
 
 # Check for env file
 if [[ -f /config/.env ]]; then
@@ -93,15 +69,7 @@ fi
 # Migrate database
  php /app/www/artisan migrate --force --no-ansi -q
 
-
-    /config
-
-
-
-
-
 cd /app/www || exit 1
 
-exec \
-     php artisan queue:work --tries=3 --no-ansi -q
+exec php artisan queue:work --tries=3 --no-ansi -q
 

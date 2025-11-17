@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 # Pass gpu flags if mounted
 if ls /dev/dri/renderD* 1> /dev/null 2>&1 && [ -z ${DISABLE_DRI+x} ] && ! which nvidia-smi; then
   HW3D="-hw3d"

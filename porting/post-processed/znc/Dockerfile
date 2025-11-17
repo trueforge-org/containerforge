@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.13.7 AS buildstage
 ############## build stage ##############
 
 # package version
@@ -17,13 +17,11 @@ RUN \
     c-ares-dev \
     cyrus-sasl-dev \
     gettext-dev \
-    git \
     icu-dev \
     openssl-dev \
     perl-dev \
     python3-dev \
     swig \
-    tar \
     tcl-dev && \
   python3 -m venv /config/venv && \
   pip install -U --no-cache-dir pip setuptools && \
@@ -86,11 +84,13 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4
 # set version label
 ARG VERSION
 ARG TARGETARCH
-USER root
 
 # copy files from build stage
 COPY --from=buildstage /tmp/znc/usr/ /usr/
 COPY --from=buildstage /tmp/znc/packages /packages
+
+USER root
+
 
 RUN \
   echo "**** install runtime packages ****" && \

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 #Copy defaults
 SYSLOG_VERSION=$(syslog-ng --version 2>/dev/null | grep "Config version" | awk -F ':' '{print $2}' | tr -d '[:space:]')
 
@@ -35,7 +32,7 @@ EOF
 fi
 
 
-    
+
         /config
 fi
 
@@ -44,10 +41,5 @@ fi
 
 
 
-    exec 2>&1 \
+exec 2>&1 \
          /usr/sbin/syslog-ng -F -f /config/syslog-ng.conf --persist-file /config/syslog-ng.persist --pidfile=/config/syslog-ng.pid --control=/config/syslog-ng.ctl --stderr --no-caps
-else
-    exec 2>&1 \
-        /usr/sbin/syslog-ng -F -f /config/syslog-ng.conf --persist-file /config/syslog-ng.persist --pidfile=/config/syslog-ng.pid --control=/config/syslog-ng.ctl --stderr --no-caps
-fi
-

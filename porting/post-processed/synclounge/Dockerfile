@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION
@@ -12,12 +12,8 @@ WORKDIR /app
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache \
-    nodejs && \
   apk add --no-cache --virtual=build-dependencies \
-    build-base \
-    git \
-    npm && \
+    build-base && \
   echo "**** install SyncLounge ****" && \
   npm install -g --omit=dev synclounge@"$VERSION" && \
   npm prune --omit=dev && \
