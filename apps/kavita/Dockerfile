@@ -21,6 +21,7 @@ RUN echo "**** install kavita ****" && \
     /app/kavita --strip-components=1 \
     --no-same-owner && \
   chmod +x /app/kavita/Kavita && \
+  mkdir -p /defaults/ && \
   cp /app/kavita/config/appsettings-init.json /defaults/ && \
   rm -rf /app/kavita/config && \
   ln -s /config /app/kavita/config && \
