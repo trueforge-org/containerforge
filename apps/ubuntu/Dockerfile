@@ -78,7 +78,6 @@ RUN apt-get update \
     && apt-get clean \
     && update-ca-certificates \
     && mkdir /cache \
-    && chown -R apps:apps $TMPDIR && chmod -R 755 $TMPDIR \
     && chown -R apps:apps /app && chmod -R 755 /app \
     && chmod 777 /cache \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
