@@ -12,7 +12,7 @@ exec python3 -m wyoming_piper \
         --noise-scale "${PIPER_NOISE:-0.667}" \
         --noise-w "${PIPER_NOISEW:-0.333}" \
         --speaker "${PIPER_SPEAKER:-0}" \
-        --voice "${PIPER_VOICE}" \
+        --voice "${PIPER_VOICE:-n_US-lessac-medium}" \
         --data-dir /config \
         --download-dir /config \
         ${UPDATE_MODELS:+--update-voices} \

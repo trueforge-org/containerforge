@@ -20,11 +20,11 @@ RUN echo "**** install kavita ****" && \
     /tmp/kavita.tar.gz -C \
     /app/kavita --strip-components=1 \
     --no-same-owner && \
-  chmod +x /app/kavita/Kavita && \
+  chmod +x /app/Kavita && \
   mkdir -p /defaults/ && \
-  cp /app/kavita/config/appsettings-init.json /defaults/ && \
-  rm -rf /app/kavita/config && \
-  ln -s /config /app/kavita/config && \
+  cp -R /app/config/* /defaults/ && \
+  rm -rf /app/config && \
+  ln -s /config /app/config && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** clean up ****" && \
   rm -rf \
@@ -34,5 +34,6 @@ RUN echo "**** install kavita ****" && \
 
 # add local files
 COPY . /
+
 # ports and volumes
 EXPOSE 5000

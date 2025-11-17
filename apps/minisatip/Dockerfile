@@ -41,6 +41,8 @@ RUN \
     linux-headers-generic \
     perl && \
   apt-get -y autoremove && \
+  mkdir -p /var/cache/minisatip && \
+  chown -R apps:apps /var/cache/minisatip && chmod -R 755 /var/cache/minisatip && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /tmp/* \

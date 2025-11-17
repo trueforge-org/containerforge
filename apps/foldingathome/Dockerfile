@@ -14,6 +14,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN \
   echo "**** install runtime packages ****" && \
+  useradd --system --home /var/lib/fah-client --shell /bin/false fah-client && \
   apt-get update && \
   apt-get install -y \
     bzip2 \
@@ -29,7 +30,7 @@ RUN \
   curl -o \
     /tmp/fah-client.deb -L \
     ${download_url} && \
-  dpkg -i /tmp/fah-client.deb && \
+  apt install /tmp/fah-client.deb && \
   echo "**** cleanup ****" && \
   apt-get clean && \
   chown -R apps:apps /app && chmod -R 755 /app && \
