@@ -4,7 +4,8 @@ set -euo pipefail
 REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
-DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux")
+DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux" "el")
+BLACKLIST=("nextcloud")
 source ./GITHUB_TOKEN.env || echo "[INFO] No GITHUB_TOKEN.env file found, proceeding without GitHub token."
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 
@@ -48,6 +49,7 @@ echo "[*] Total docker-* repos: $total_docker_repos"
 
 # Counters
 skipped_distro_apps=0
+skipped_blacklist_apps=0
 skipped_done_apps=0
 processed_repos=0
 failed_copies=()
@@ -65,6 +67,14 @@ for repo in $repos; do
     # Remove alpine- prefix
     shortname="${shortname#alpine-}"
     target="$REPO_DIR/$shortname"
+
+    # Skip if $shortname is in BLACKLIST before cloning
+    if [[ " ${BLACKLIST[*]} " == *" $shortname "* ]]; then
+        echo "[SKIP] '$shortname' is blacklisted, skipping clone/pull."
+        rm -rf $target || true
+        ((skipped_blacklist_apps++))
+        continue
+    fi
 
     # Skip if $shortname is in DISTROS before cloning
     if [[ " ${DISTROS[*]} " == *" $shortname "* ]]; then
@@ -178,6 +188,7 @@ echo ""
 echo "==================== SUMMARY ===================="
 echo "Total repos under linuxserver.io: $total_all_repos"
 echo "Total docker-* repos:             $total_docker_repos"
+echo "Skipped (app is blacklisted):         $skipped_distro_apps"
 echo "Skipped (app is distro):         $skipped_distro_apps"
 echo "Skipped (../apps exists):         $skipped_done_apps"
 echo "Skipped (baseimage-selkies):     $based_on_selkies"
