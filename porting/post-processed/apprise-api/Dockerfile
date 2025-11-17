@@ -12,36 +12,30 @@ ENV APPRISE_CONFIG_DIR=/config \
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --upgrade --virtual=build-dependencies \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     cargo \
-    build-base \
+    build-essential \
     libffi-dev \
-    openssl-dev && \
+    libssl-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache --upgrade \
+  apt-get install -y --no-install-recommends \
     uwsgi \
-    uwsgi-python && \
+    uwsgi-plugin-python3 && \
   mkdir -p /app && \
-  curl -o \
-    /tmp/apprise-api.tar.gz -L \
-    "https://github.com/caronc/apprise-api/archive/v${VERSION}.tar.gz" && \
-  tar xf \
-    /tmp/apprise-api.tar.gz -C \
-    /app/ --strip-components=1 && \
+  curl -o /tmp/apprise-api.tar.gz -L "https://github.com/caronc/apprise-api/archive/v${VERSION}.tar.gz" && \
+  tar xf /tmp/apprise-api.tar.gz -C /app/ --strip-components=1 && \
   echo "**** install pip packages ****" && \
   cd /app && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
-    pip \
-    wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
-  rm -rf \
-    $HOME/.cache \
-    $HOME/.cargo \
-    /tmp/*
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    cargo build-essential python3-dev libssl-dev libffi-dev && \
+  apt-get autoremove -y && \
+  apt-get clean && \
+  rm -rf $HOME/.cache $HOME/.cargo /tmp/* /var/lib/apt/lists/*
 
 # copy local files
 USER apps
