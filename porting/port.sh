@@ -5,6 +5,7 @@ REPO_DIR="./repos"
 PROCESSED_DIR="./processed"
 APPS_DIR="../apps"
 DISTROS=("debian" "ubuntu" "arch" "fedora" "alpine" "centos" "rocky" "openSUSE" "opensuse" "photon" "clearlinux")
+source ./GITHUB_TOKEN.env || echo "[INFO] No GITHUB_TOKEN.env file found, proceeding without GitHub token."
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 
 # Set curl auth header only if token is set
@@ -147,6 +148,7 @@ latest_release=$(curl -s "${CURL_AUTH_HEADER[@]}" \
         # Copy version.txt
         if ! cp "$target/version.txt" "$out_dir/"; then
             echo "[WARN] no version.txt for $shortname"
+            rm -rf "$target/version.txt" || true
         fi
 
         # Copy jenkins-vars.yml
