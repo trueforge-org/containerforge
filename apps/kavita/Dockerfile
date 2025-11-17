@@ -5,14 +5,12 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
+ARG TARGETARCH=${TARGETARCH/amd64/x64}
+
 # environment settings
 ENV HOME="/config"
 
-RUN \
-  apt-get update && \
-  apt-get install -y \
-    libicu74 && \
-  echo "**** install kavita ****" && \
+RUN echo "**** install kavita ****" && \
   mkdir -p \
     /app/kavita && \
   curl -o \
