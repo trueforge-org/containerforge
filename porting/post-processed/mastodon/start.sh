@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-
-
-
 mkdir -p \
     /app/www/tmp \
     /config/mastodon/public/system
-
-
-    /app/www/tmp
 
 # Remove old pid in the event of an unclean shutdown
 if [[ -f /app/www/tmp/pids/server.pid ]]; then
@@ -28,40 +22,24 @@ if [[ ${SIDEKIQ_ONLY,,} != "true" ]]; then
 fi
 
 if [[ ${NO_CHOWN,,} != "true" ]]; then
-    
+
         /config
 fi
-
-
-
 
 
 export RAILS_ENV=production
 export PATH="${PATH}:/app/www/bin"
 export RAILS_SERVE_STATIC_FILES=false
-
-exec \
-    
-    cd /app/www  /usr/bin/bundle exec rails s -p 3000
-
-
-
-
-
-export RAILS_ENV=production
 export HOME=/config
-export PATH="${PATH}:/app/www/bin"
 
-exec \
-    
-    cd /app/www  /app/www/bin/prometheus_exporter
+cd /app/www
 
+## TODO: deal with multiexec
+exec /usr/bin/bundle exec rails s -p 3000
 
+cd /app/www
+exec /app/www/bin/prometheus_exporter
 
-
-
-export RAILS_ENV=production
-export PATH="${PATH}:/app/www/bin"
 
 if [[ -n ${SIDEKIQ_THREADS} ]]; then
     SIDEKIQ_THREADS=$(printf '%d' "${SIDEKIQ_THREADS}")
@@ -88,14 +66,6 @@ else
          /usr/bin/bundle exec "sidekiq -c ${SIDEKIQ_THREADS}"
 fi
 
-
-
-
-
-export NODE_ENV=production
-export PATH="${PATH}:/app/www/bin"
-
-exec \
-    
-    cd /app/www  node ./streaming
+cd /app/www
+exec node ./streaming
 

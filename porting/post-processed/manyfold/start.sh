@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # set secret key if unset
 SECRET_FILE="/config/secret_key_base.txt"
 if [ -n "${SECRET_KEY_BASE}" ]; then
@@ -21,10 +18,6 @@ mkdir -p \
     /app/www/log \
     /app/www/tmp
 
-
-    /app/www/log \
-    /app/www/tmp
-
 printf %s "$(cat /app/www/GIT_SHA)" > /run/s6/container_environment/GIT_SHA
 
 # Remove old pid in the event of an unclean shutdown
@@ -37,7 +30,7 @@ DB_SCHEME=$(awk -F":" '{print $1}' <<<"${DATABASE_URL}")
 if [[ ${DB_SCHEME} = "sqlite3" ]]; then
     DB_PATH=$(awk -F":" '{print $2}' <<<"${DATABASE_URL}")
     touch "${DB_PATH}"
-    
+
         /config
 elif [[ ${DB_SCHEME} = "postgresql" ]]; then
     DB_HOST=$(awk -F '@|:|/' '{print $6}' <<<"${DATABASE_URL}")
@@ -48,23 +41,6 @@ elif [[ ${DB_SCHEME} = "postgresql" ]]; then
     END=$((SECONDS + 30))
     while [[ ${SECONDS} -lt ${END} ]] && [[ -n "${DB_HOST+x}" ]]; do
         if pg_isready -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -q; then
-            if [[ ! -f /run/dbwait.lock ]]; then
-                sleep 5
-            fi
-            touch /run/dbwait.lock
-            break
-        else
-            sleep 1
-        fi
-    done
-elif [[ ${DB_SCHEME} = "mysql2" ]]; then
-    DB_HOST=$(awk -F '@|:|/' '{print $6}' <<<"${DATABASE_URL}")
-    DB_PORT=$(awk -F '@|:|/' '{print $7}' <<<"${DATABASE_URL}")
-    if [[ ! ${DB_PORT} =~ [0-9]+ ]]; then DB_PORT=3306; fi
-    echo "Waiting for DB to be available"
-    END=$((SECONDS + 30))
-    while [[ ${SECONDS} -lt ${END} ]] && [[ -n "${DB_HOST+x}" ]]; do
-        if [[ $(/usr/bin/nc -w1 "${DB_HOST}" "${DB_PORT}" | tr -d '\0') ]]; then
             if [[ ! -f /run/dbwait.lock ]]; then
                 sleep 5
             fi
@@ -85,11 +61,6 @@ cd /app/www/ || exit 1
 echo "**** Running Manyfold database init. ****"
  /usr/bin/bundle exec rails db:prepare:with_data
 
-
-
-
-
-exec \
-    
-        cd /app/www  foreman start
+cd /app/www
+exec foreman start
 

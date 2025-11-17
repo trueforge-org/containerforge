@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make our folders
 mkdir -p \
     /config/.minetest/games \
@@ -17,16 +14,6 @@ if [[ ! -d "/config/.minetest/games/minimal" ]]; then
     cp -pr /defaults/games/* /config/.minetest/games/
 fi
 
-# permissions
-
-    /config
-
-
-
-
-
-exec \
-    
-         minetestserver --port 30000 \
+exec minetestserver --port 30000 \
         --config /config/.minetest/main-config/minetest.conf ${CLI_ARGS}
 

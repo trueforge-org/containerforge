@@ -1,7 +1,5 @@
 
-
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -15,14 +13,12 @@ RUN \
     jpeg-dev \
     libffi-dev \
     libwebp-dev \
-    python3-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     jpeg \
     libwebp-tools \
     nodejs \
-    python3 \
     zlib && \
   echo "**** install mylar3 ****" && \
   mkdir /app/mylar3 && \
@@ -47,10 +43,6 @@ RUN \
 # add local files
 USER apps
 COPY . /
-
-
-
-COPY --from=unrar /usr/bin/unrar-alpine /usr/bin/unrar
 
 # ports and volumes
 VOLUME /config

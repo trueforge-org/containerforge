@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 # make folders if required
 mkdir -p \
     "${DATADIR}" \
@@ -18,9 +15,6 @@ fi
 if [[ -f /run/mysqld/mysqld.pid ]]; then
     rm -f /run/mysqld/mysqld.pid
 fi
-
-
-
 
 
 # set start function used later
@@ -43,7 +37,7 @@ start_mariadb() {
 if [[ ! -d "${DATADIR}/mysql" ]]; then
     # load env file if it exists
     if [[ -f "/config/env" ]]; then
-        
+
         source /config/env
     fi
 
@@ -100,17 +94,12 @@ EONEWSQL
         done
     fi
 
-
-        
         chmod -R 777 /config/log/mysql /run/mysqld
-    fi
 
     # initialise database structure
 
         mariadb-install-db --datadir="${DATADIR}" --user=apps --auth-root-authentication-method=normal
-    else
-        mariadb-install-db --datadir="${DATADIR}" --auth-root-authentication-method=normal
-    fi
+
     # start mariadb and apply our sql commands we set above
     start_mariadb
 
@@ -139,21 +128,10 @@ EONEWSQL
 EOFPASS
 
         sleep 5s
-    fi
 
     # clean up any old install files from /tmp
     rm -f "${tempSqlFile}"
 fi
-
-
-    # own the folder the pid for mysql runs in
-    
-    
-fi
-
-
-
-
 
 # check logrotate permissions
 if mariadb-admin -uroot --local version >/dev/null 2>&1; then
@@ -218,7 +196,7 @@ fi
 
 
 
-    
+
          \
         /usr/bin/mariadbd-safe \
         --defaults-extra-file=/config/custom.cnf \
@@ -228,14 +206,3 @@ fi
         --user=apps &
 
     wait
-else
-    
-        /usr/bin/mariadbd-safe \
-        --defaults-extra-file=/config/custom.cnf \
-        --datadir="${DATADIR}" \
-        --pid-file=/run/mysqld/mysqld.pid \
-        --skip-networking=OFF &
-
-    wait
-fi
-

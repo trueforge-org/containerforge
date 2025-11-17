@@ -62,7 +62,7 @@ COPY --from=libtorrent /libtorrent-build/usr/lib/python3.12 /config/venv/lib/pyt
 COPY ./root /
 
 
-COPY --from=unrar /usr/bin/unrar-alpine /usr/bin/unrar
+
 
 # ports and volumes
 EXPOSE 5050

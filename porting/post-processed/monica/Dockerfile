@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO pin to version tag
+FROM ghcr.io/trueforge-org/postgrsql-client:rolling
 
 ARG VERSION
 ARG TARGETARCH
@@ -12,8 +12,7 @@ RUN \
   apk add --no-cache --virtual=build-dependencies \
     bzip2 \
     gpg \
-    gpg-agent \
-    gnupg && \
+    gpg-agent && \
   apk add --no-cache \
     memcached \
     php83-apcu \
@@ -29,8 +28,7 @@ RUN \
     php83-sodium \
     php83-soap \
     php83-tokenizer \
-    php83-xmlreader \
-    postgresql15-client && \
+    php83-xmlreader && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \
   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && \

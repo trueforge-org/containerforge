@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 ARG VERSION
 ARG TARGETARCH
@@ -32,12 +32,8 @@ RUN \
     ruby-bundler && \
   apk add --no-cache --virtual=build-dependencies \
     build-base \
-    git \
-    grep \
     libffi-dev \
     mariadb-dev \
-    nodejs \
-    npm \
     postgresql-dev \
     ruby-dev \
     yaml-dev && \

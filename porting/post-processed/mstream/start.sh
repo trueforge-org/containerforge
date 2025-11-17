@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 mkdir -p \
     /config/{album-art,db,keys,logs,sync} \
     /music
@@ -40,18 +37,8 @@ if grep -q '"webAppDirectory": "public"' /config/config.json; then
 *************************************'
 fi
 
-# permissions
-
-    /config \
-    /app/mstream/bin
-
-
-
-
-
 PORT=$(jq -r '.port' /config/config.json)
 
-exec \
-    
-        cd /app/mstream  mstream -j /config/config.json
+cd /app/mstream
+exec mstream -j /config/config.json
 

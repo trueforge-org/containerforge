@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin to version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 # set version label
 ARG VERSION
@@ -11,10 +11,7 @@ ENV HOME="/config"
 RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache --upgrade \
-    nodejs \
     openssl && \
-  apk add --no-cache --upgrade --virtual=build-dependencies \
-    npm && \
   echo "**** install app ****" && \
   mkdir -p \
     /app/mstream && \

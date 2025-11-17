@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 MONICADIR=/app/www
 STORAGE="${MONICADIR}/storage"
 
@@ -112,23 +109,12 @@ if [[ ! -f "/config/www/oauth-public.key" ]] || [[ ! -f "/config/www/oauth-priva
      php ${MONICADIR}/artisan passport:client --personal --no-interaction
 fi
 
-
-    "${STORAGE}" \
-    "${MONICADIR}/bootstrap/cache" \
-    /config
-
 # set lockfile to avoid DB waits for this specific container
 touch /dbwait.lock
 
-
-
-
-
+## TODO: move to seperate container
 exec memcached -u apps
 
-
-
-
-
+## TODO: deal with multi exec
 exec  /usr/bin/php /app/www/artisan queue:work --sleep=10 --timeout=0 --tries=3
 

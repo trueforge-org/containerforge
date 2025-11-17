@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -17,8 +17,7 @@ RUN \
   echo "**** install packages ****" && \
   apk add -U --update --no-cache \
     ffmpeg \
-    mediainfo \
-    python3 && \
+    mediainfo && \
   echo "**** install app ****" && \
   mkdir -p \
     /app/medusa && \
@@ -30,9 +29,7 @@ RUN \
   cd /app/medusa && \
   python3 -m venv /config/venv && \
   pip install -U --no-cache-dir \
-    pip \
-    setuptools \
-    wheel && \
+    setuptools && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   echo "**** clean up ****" && \
   apk del --purge \
@@ -46,8 +43,6 @@ USER apps
 COPY . /
 
 
-
-COPY --from=unrar /usr/bin/unrar-alpine /usr/bin/unrar
 
 # ports and volumes
 EXPOSE 8081

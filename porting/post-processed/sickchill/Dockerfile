@@ -50,7 +50,7 @@ COPY . /
 
 
 
-COPY --from=unrar /usr/bin/unrar-alpine /usr/bin/unrar
+
 
 # ports and volumes
 EXPOSE 8081

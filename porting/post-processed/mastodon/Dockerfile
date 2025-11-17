@@ -1,5 +1,5 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4
+## TODO: pin version tag
+FROM ghcr.io/trueforge-org/node:rolling
 
 ARG VERSION
 ARG TARGETARCH
@@ -17,7 +17,6 @@ RUN \
     file \
     libpq \
     libidn \
-    nodejs \
     ruby \
     ruby-bundler \
     ruby-rdoc \
@@ -32,7 +31,6 @@ RUN \
     libxml2-dev \
     libxslt-dev \
     linux-headers \
-    npm \
     openssl-dev \
     ruby-dev \
     vips-dev \
