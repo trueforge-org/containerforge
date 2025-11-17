@@ -6,8 +6,8 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-ARG SPECIAL=${TARGETARCH/amd64/-10-64bit}
-ARG SPECIAL=${TARGETARCH/arm64/-stable-arm64}
+ARG SPECIAL=${TARGETARCH/amd64/"-10-64bit"}
+ARG SPECIAL=${TARGETARCH/arm64/"-stable-arm64"}
 
 #Add needed nvidia environment variables for container toolkit
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
