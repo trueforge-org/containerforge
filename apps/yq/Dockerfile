@@ -13,4 +13,4 @@ RUN echo "**** install app ****" && \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     yq=="${VERSION}" && \
-  chown -R apps:apps /app && chmod -R 755 /app && \
+  chown -R apps:apps /app && chmod -R 755 /app
