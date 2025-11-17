@@ -23,12 +23,12 @@ RUN \
     gdebi-core && \
   \
   echo "**** download and install Jellyfin *****" && \
-  curl -L -o /tmp/jellyfin.deb \
+  curl -L -o /tmp/jellyfin_server.deb \
     "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_server_${VERSION}+ubu2404_${TARGETARCH}.deb" && \
-  gdebi -n /tmp/jellyfin.deb && \
-  curl -L -o /tmp/jellyfin.deb \
+  gdebi -n /tmp/jellyfin_server.deb && \
+  curl -L -o /tmp/jellyfin_web.deb \
     "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_web_${VERSION}+ubu2404_${TARGETARCH}.deb" && \
-  gdebi -n /tmp/jellyfin.deb && \
+  gdebi -n /tmp/jellyfin_web.deb && \
   curl -L -o /tmp/jellyfin.deb \
     "https://repo.jellyfin.org/files/server/ubuntu/latest-stable/${TARGETARCH}/jellyfin_${VERSION}+ubu2404_${TARGETARCH}.deb" && \
   gdebi -n /tmp/jellyfin.deb && \
