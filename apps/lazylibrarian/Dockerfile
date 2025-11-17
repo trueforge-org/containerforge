@@ -25,6 +25,7 @@ RUN \
   mkdir -p \
     /app/lazylibrarian && \
   echo "Installing from commit ${VERSION}" && \
+  mkdir -p /defaults && \
   echo "${VERSION}" > /defaults/version.txt && \
   curl -o \
     /tmp/lazylibrarian.tar.gz -L \
@@ -39,6 +40,7 @@ RUN \
     wheel && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ . && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ Levenshtein && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** cleanup ****" && \
   apt-get -y purge \
     libjpeg-turbo8-dev \

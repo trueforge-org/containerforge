@@ -339,5 +339,8 @@ find "$PROCESSED_DIR" -type f -name "*.sh" | while IFS= read -r file; do
             cat "$file"
         } > "$file.tmp" && mv "$file.tmp" "$file"
     fi
+
+    # ensure its also executable
+    chmod +x $file
 done
 shopt -u nullglob

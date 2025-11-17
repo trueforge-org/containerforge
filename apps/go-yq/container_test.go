@@ -8,7 +8,6 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 func Test(t *testing.T) {
@@ -23,7 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithCmdArgs("test", "-f", "TEMPLATEEXEC"),
+		testcontainers.WithCmdArgs("yq", "--version"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
