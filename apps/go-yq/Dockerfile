@@ -7,11 +7,11 @@ ARG TARGETARCH
 USER root
 
 RUN echo "*** Installing go-yq ***" && \
-  curl -o \
-    /app -L \
-    "https://github.com/mikefarah/yq/releases/download/v${version}/yq_linux_${TARGETARCH}" && \
-    mv /app/yq_linux_${TARGETARCH} /app/yq && \
-    chown apps:apps /app/yq && chmod 755 /app/yq && chmod +x /app/yq && \
-    cp -rf /app/yq /usr/bin/yq
+    mkdir -p /app && \
+    curl -L -o /app/yq \
+        "https://github.com/mikefarah/yq/releases/download/v${VERSION}/yq_linux_${TARGETARCH}" && \
+    chmod 755 /app/yq && \
+    chown apps:apps /app/yq && \
+    cp -f /app/yq /usr/bin/yq
 
 USER apps
