@@ -211,6 +211,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
+            -e 's|/lsiopy|/config/venv|g' \
             "$df"
     else
         sed -i '' \
@@ -240,6 +241,7 @@ for df in "${dockerfiles[@]}"; do
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
+            -e 's|/lsiopy|/config/venv|g' \
             "$df"
     fi
 perl -0777 -i -pe '
@@ -304,6 +306,7 @@ if [[ -f "$processed/start.sh" ]]; then
         -e 's|s6-notifyoncheck.*||g' \
         -e 's|# ===== From.*||g' \
         -e 's|.*LSIO_NON_ROOT_USER.*||g' \
+        -e 's|/lsiopy|/config/venv|g' \
         "$processed/start.sh"
     else
         sed -i '' \
@@ -317,6 +320,7 @@ if [[ -f "$processed/start.sh" ]]; then
         -e 's|s6-notifyoncheck.*||g' \
         -e 's|# ===== From.*||g' \
         -e 's|.*LSIO_NON_ROOT_USER.*||g' \
+        -e 's|/lsiopy|/config/venv|g' \
         "$processed/start.sh"
     fi
 fi
