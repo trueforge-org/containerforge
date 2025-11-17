@@ -80,6 +80,8 @@ RUN apt-get update \
     && mkdir /cache \
     && chown -R apps:apps /app && chmod -R 755 /app \
     && chmod 777 /cache \
+    && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && \
+    chmod +x /usr/local/bin/yq \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
 
 # Copy unrar binary from LinuxServer image
