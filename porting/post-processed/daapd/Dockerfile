@@ -7,25 +7,28 @@ ARG TARGETARCH
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add -U --update --no-cache \
-    alsa-lib-dev \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    libasound2-dev \
     autoconf \
     automake \
-    avahi-dev \
+    libavahi-client-dev \
+    libavahi-common-dev \
     bison \
-    bsd-compat-headers \
-    build-base \
-    confuse-dev \
-    curl-dev \
-    ffmpeg-dev \
-    flac-dev \
+    build-essential \
+    libconfuse-dev \
+    libcurl4-openssl-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libflac-dev \
     flex \
-    gettext-dev \
-    gnutls-dev \
+    libgettextpo-dev \
+    libgnutls28-dev \
     gperf \
-    json-c-dev \
+    libjson-c-dev \
     libevent-dev \
-    libgcrypt-dev \
+    libgcrypt20-dev \
     libogg-dev \
     libplist-dev \
     libsodium-dev \
@@ -33,12 +36,13 @@ RUN \
     libunistring-dev \
     libwebsockets-dev \
     libxml2-dev \
-    mxml-dev \
-    openjdk8-jre-base \
-    openssl-dev \
-    protobuf-c-dev \
-    sqlite-dev \
-    taglib-dev && \
+    libmxml-dev \
+    default-jre-headless \
+    libssl-dev \
+    libprotobuf-c-dev \
+    libsqlite3-dev \
+    libtag1-dev && \
+  rm -rf /var/lib/apt/lists/* && \
   mkdir -p \
     /tmp/source/owntone && \
   echo "**** compile owntone-server ****" && \
@@ -76,27 +80,29 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add -U --update --no-cache \
-    avahi \
-    confuse \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    avahi-daemon \
+    libconfuse2 \
     dbus \
     ffmpeg \
-    gnutls \
-    json-c \
-    libevent \
-    libgcrypt \
-    libplist \
-    libsodium \
-    libunistring \
-    libuuid \
-    libwebsockets \
-    mxml \
-    protobuf-c \
-    sqlite \
-    sqlite-libs && \
-  apk add -U --update --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    librespot && \
-  mkdir -p /music && \
+    libgnutls30 \
+    libjson-c3 \
+    libevent-2.1-7 \
+    libgcrypt20 \
+    libplist3 \
+    libsodium23 \
+    libunistring2 \
+    libuuid1 \
+    libwebsockets18 \
+    libmxml1 \
+    libprotobuf-c1 \
+    libsqlite3-0 \
+    sqlite3 && \
+  apt-get install -y --no-install-recommends librespot || true && \
+  rm -rf /var/lib/apt/lists/* && \
+  mkdir -p /music
+
 # copy buildstage and local files
 COPY --from=buildstage /tmp/daapd-build/ /
 USER apps

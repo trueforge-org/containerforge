@@ -8,25 +8,25 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     fontconfig \
     mariadb-client \
     memcached \
-    php84-dom \
-    php84-exif \
-    php84-gd \
-    php84-ldap \
-    php84-mysqlnd \
-    php84-opcache \
-    php84-pdo_mysql \
-    php84-pecl-memcached \
-    php84-tokenizer \
-    qt5-qtbase \
-    ttf-freefont && \
+    php8.4-xml \
+    php8.4-exif \
+    php8.4-gd \
+    php8.4-ldap \
+    php8.4-mysql \
+    php8.4-opcache \
+    php8.4-memcached \
+    php8.4-tokenizer \
+    qtbase5-dev \
+    fonts-freefont-ttf && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
+  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.4/fpm/pool.d/www.conf && \
+  if ! grep -qxF 'clear_env = no' /etc/php/8.4/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.4/fpm/pool.d/www.conf; fi && \
+  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.4/fpm/php-fpm.conf && \
   echo "**** fetch bookstack ****" && \
   mkdir -p\
     /app/www && \
@@ -47,7 +47,8 @@ RUN \
   rm -rf \
     /tmp/* \
     $HOME/.cache \
-    $HOME/.composer
+    $HOME/.composer && \
+  rm -rf /var/lib/apt/lists/*
 
 # copy local files
 USER apps

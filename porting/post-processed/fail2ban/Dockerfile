@@ -8,9 +8,10 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     fail2ban \
-    iptables-legacy \
+    iptables \
     logrotate \
     msmtp \
     nftables \

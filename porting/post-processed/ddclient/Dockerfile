@@ -8,18 +8,19 @@ USER root
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    build-base && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    build-essential && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    bind-tools \
+  apt-get install -y --no-install-recommends \
+    dnsutils \
     inotify-tools \
     perl \
-    perl-digest-sha1 \
-    perl-io-socket-inet6 \
-    perl-io-socket-ssl \
-    perl-json \
-    perl-netaddr-ip && \
+    libdigest-sha1-perl \
+    libio-socket-inet6-perl \
+    libio-socket-ssl-perl \
+    libjson-perl \
+    libnetaddr-ip-perl && \
   echo "***** install perl modules ****" && \
   curl -L http://cpanmin.us | perl - App::cpanminus && \
   cpanm \
@@ -39,12 +40,12 @@ RUN \
   mkdir -p /etc/ddclient/ && \
   cp /tmp/ddclient/sample-get-ip-from-fritzbox /etc/ddclient/get-ip-from-fritzbox && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
+  apt-get purge -y --auto-remove build-essential && \
   rm -rf \
     /config/.cpanm \
     /root/.cpanm \
-    /tmp/*
+    /tmp/* && \
+  rm -rf /var/lib/apt/lists/*
 
 # copy local files
 USER apps

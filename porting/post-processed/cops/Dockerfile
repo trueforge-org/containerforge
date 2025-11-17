@@ -8,18 +8,16 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache --upgrade \
-    # libxml2 \
-    icu-data-full \
-    php84-dom \
-    php84-gd \
-    php84-intl \
-    php84-pdo_sqlite \
-    php84-sqlite3 && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    php8.4-xml \
+    php8.4-gd \
+    php8.4-intl \
+    php8.4-sqlite3 && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
+  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.4/fpm/pool.d/www.conf && \
+  if ! grep -qxF 'clear_env = no' /etc/php/8.4/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.4/fpm/pool.d/www.conf; fi && \
+  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.4/fpm/php-fpm.conf && \
   echo "**** install cops ****" && \
   curl -o \
     /tmp/cops.tar.gz -L \
@@ -43,7 +41,9 @@ RUN \
   echo "**** cleanup ****" && \
   rm -rf \
     /root/.composer \
-    /tmp/*
+    /tmp/* && \
+  apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 # add local files
 USER apps

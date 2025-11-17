@@ -8,20 +8,20 @@ USER root
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    xmlstarlet && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    build-essential && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get install -y --no-install-recommends \
     imagemagick \
-    php84-bz2 \
-    php84-dom \
-    php84-gd \
-    php84-ldap \
-    php84-pdo_mysql \
-    php84-pdo_pgsql \
-    php84-pdo_sqlite \
-    php84-pecl-imagick \
-    php84-sqlite3 && \
+    php8.4-bz2 \
+    php8.4-dom \
+    php8.4-gd \
+    php8.4-ldap \
+    php8.4-mysql \
+    php8.4-pgsql \
+    php8.4-sqlite3 \
+    php-imagick && \
   echo "**** install dokuwiki ****" && \
   curl -o \
   /tmp/dokuwiki.tar.gz -L \
@@ -32,11 +32,12 @@ RUN \
     /tmp/dokuwiki.tar.gz -C \
     /app/www/public --strip-components=1 && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
+  apt-get purge -y --auto-remove \
+    build-essential && \
   rm -rf \
     /tmp/* \
-    $HOME/.cache
+    $HOME/.cache && \
+  rm -rf /var/lib/apt/lists/*
 
 # copy local files
 USER apps

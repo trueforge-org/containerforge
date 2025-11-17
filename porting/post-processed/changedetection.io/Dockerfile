@@ -8,23 +8,21 @@ USER root
 ENV PYTHONUNBUFFERED=1
 
 RUN \
-  apk add --update --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    build-essential \
     cargo \
-    git \
-    jpeg-dev \
-    libc-dev \
+    libjpeg-dev \
     libffi-dev \
-    libxslt-dev \
-    openssl-dev \
+    libxslt1-dev \
+    libssl-dev \
     zip \
-    zlib-dev && \
-  apk add --update --no-cache \
+    zlib1g-dev \
     file \
-    libjpeg \
-    libxslt \
+    libjpeg62-turbo \
+    libxslt1.1 \
     nodejs \
-    poppler-utils \
+    poppler-utils && \
   echo "**** install changedetection.io ****" && \
   mkdir -p /app/changedetection && \
   if [ -z ${CHANGEDETECTON_RELEASE+x} ]; then \
@@ -54,12 +52,15 @@ RUN \
   # Force UTF-8 encoding for browser steps to prevent exception
   sed -i "s|xpath_element_js = importlib.resources.files(\"changedetectionio.content_fetchers.res\").joinpath('xpath_element_scraper.js').read_text()|xpath_element_js = importlib.resources.files(\"changedetectionio.content_fetchers.res\").joinpath('xpath_element_scraper.js').read_text(encoding='utf-8')|" /app/changedetection/changedetectionio/blueprint/browser_steps/browser_steps.py && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    build-essential cargo libjpeg-dev libffi-dev libxslt1-dev libssl-dev zip zlib1g-dev && \
+  apt-get autoremove -y && \
+  apt-get clean && \
   rm -rf \
     /tmp/* \
     $HOME/.cache \
-    $HOME/.npm
+    $HOME/.npm \
+    /var/lib/apt/lists/*
 
 USER apps
 COPY . /

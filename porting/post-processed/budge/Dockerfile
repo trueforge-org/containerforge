@@ -11,12 +11,14 @@ ENV BUDGE_DATABASE=/config/budge.db \
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    build-essential \
+    python3-dev \
     python3 && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    sqlite && \
+  apt-get install -y --no-install-recommends \
+    sqlite3 && \
   echo "**** install budge ****" && \
   mkdir -p /app/www/public && \
   curl -o \
@@ -43,11 +45,14 @@ RUN \
   mv /app/www/public/backend/node_modules /app/www/public/backend/node_modules-tmp && \
   echo "**** cleanup ****" && \
   npm cache clean --force && \
-  apk del --purge \
-    build-dependencies && \
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    build-essential python3-dev && \
+  apt-get autoremove -y && \
+  apt-get clean && \
   rm -rf \
     /tmp/* \
-    $HOME/.cache
+    $HOME/.cache \
+    /var/lib/apt/lists/*
 
 # add local files
 USER apps

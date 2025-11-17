@@ -1,18 +1,13 @@
 
-FROM openjdk:8-alpine AS buildstage
+FROM ghcr.io/trueforge-org/java17:17.0.8 AS buildstage
 
 RUN \
   echo "**** Install build requirements ****" && \
   echo "**** Download Davos ****" && \
-  curl -o \
-    /tmp/davos.tar.gz -L \
-    "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" && \
+  curl -o /tmp/davos.tar.gz -L "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" && \
   echo "**** Build Davos For Release ****" && \
-  mkdir -p \
-    /app/davos/ && \
-  tar xf \
-    /tmp/davos.tar.gz -C \
-    /app/davos/ --strip-components=1 && \
+  mkdir -p /app/davos/ && \
+  tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 && \
   cd /app/davos/ && \
   ./gradlew -Penv=release clean build && \
   echo "**** Copy Finished Jar ****" && \
@@ -27,16 +22,12 @@ ARG TARGETARCH
 USER root
 
 ## TODO test with JAVA17 otherwise make another base
-# install packages
 RUN \
-  apk add --no-cache \
-    nss \
-    openjdk8-jre \
-    sqlite-libs && \
-# copy files from build stage and local files
-COPY --from=buildstage /davos.jar /app/davos/davos.jar
-USER apps
-COPY . /
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    openjdk-8-jre-headless \
+    libsqlite3-0 && \
+  rm -rf /var/lib/apt/lists/*
 
 
 # ports and volumes

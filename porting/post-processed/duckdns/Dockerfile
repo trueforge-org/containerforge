@@ -8,9 +8,12 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache \
-    bind-tools \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    dnsutils \
     logrotate && \
+  rm -rf /var/lib/apt/lists/*
+
 # add local files
 USER apps
 COPY . /

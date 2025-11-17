@@ -14,15 +14,18 @@ ENV ES_HOST=elasticsearch
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    build-essential \
     cargo \
     python3-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get install -y --no-install-recommends \
     ncurses \
-    php83-sqlite3 \
-    python3 && \
+    php-sqlite3 \
+    php-fpm \
+    python3 \
+    python3-venv && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \
   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && \
@@ -47,12 +50,15 @@ RUN \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
     -r requirements.txt && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
+  apt-get purge -y --auto-remove \
+    build-essential \
+    cargo \
+    python3-dev && \
   rm -rf \
     /tmp/* \
     $HOME/.cache \
-    $HOME/.cargo
+    $HOME/.cargo && \
+  rm -rf /var/lib/apt/lists/*
 
 # add local files
 USER apps

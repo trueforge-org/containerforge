@@ -55,9 +55,11 @@ FROM ghcr.io/trueforge-org/node:rolling@sha256:56c028d92c9c7e5d29c1265fd0b615c9f
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add \
-    p7zip \
-    zip
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    p7zip-full \
+    zip && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN \
   echo "**** grab emulatorjs ****" && \
@@ -104,15 +106,16 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     file \
     flac \
-    kubo \
+    ipfs-kubo \
     nginx \
-    p7zip \
+    p7zip-full \
     python3 \
-    sdl2 && \
-  apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    libsdl2-2.0-0 && \
+  apt-get install -y --no-install-recommends \
     mame-tools && \
   mkdir /data && \
   echo "**** use pinned node ****" && \
@@ -122,7 +125,8 @@ RUN \
   chmod +x /bin/node && \
   echo "**** cleanup ****" && \
   rm -rf \
-    /tmp/*
+    /tmp/* && \
+  rm -rf /var/lib/apt/lists/*
 
 # add local files and files from buildstage
 COPY --from=binbuilder /build-out/ /
