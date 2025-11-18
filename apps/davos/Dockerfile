@@ -25,10 +25,11 @@ USER root
 RUN \
   apt-get update && \
   apt-get install -y --no-install-recommends \
-    openjdk-8-jre-headless \
     libsqlite3-0 && \
   rm -rf /var/lib/apt/lists/*
 
+USER apps
+COPY ./ /
 
 # ports and volumes
 EXPOSE 8080

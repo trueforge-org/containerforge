@@ -24,6 +24,8 @@ RUN \
   echo "**** install airsonic advanced ****" && \
   mkdir -p \
     ${AIRSONIC_ADVANCED_HOME} && \
+  mkdir -p "/run/tomcat.4040" && \
+  chown -R 568:568 /run/tomcat.4040 && \
   curl -o \
   ${AIRSONIC_ADVANCED_HOME}/airsonic.war -L \
     "https://github.com/kagemomiji/airsonic-advanced/releases/download/${VERSION}/airsonic.war" && \

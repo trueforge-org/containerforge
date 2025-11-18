@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 mkdir -p "${AIRSONIC_ADVANCED_SETTINGS}"/transcode
-mkdir -p "/run/tomcat.4040"
 
 fi
 
