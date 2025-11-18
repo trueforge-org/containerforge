@@ -33,60 +33,58 @@ ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
 COPY --from=wwwstage /build-out /www
 
 RUN \
-  echo "**** install build deps ****" && \
-  apk add \
-    alpine-release \
-    alpine-sdk \
-    autoconf \
-    automake \
-    cmake \
-    coreutils \
-    eudev-dev \
-    font-cursor-misc \
-    font-misc-misc \
-    font-util-dev \
-    libdrm-dev \
-    libepoxy-dev \
-    libjpeg-turbo-dev \
-    libjpeg-turbo-static \
-    libpciaccess-dev \
-    libtool \
-    libwebp-dev \
-    libx11-dev \
-    libxau-dev \
-    libxcb-dev \
-    libxcursor-dev \
-    libxcvt-dev \
-    libxdmcp-dev \
-    libxext-dev \
-    libxfont2-dev \
-    libxkbfile-dev \
-    libxrandr-dev \
-    libxshmfence-dev \
-    libxtst-dev \
-    mesa-dev \
-    mesa-dri-gallium \
-    meson \
-    nettle-dev \
-    openssl-dev \
-    pixman-dev \
-    procps \
-    shadow \
-    wayland-dev \
-    wayland-protocols \
-    xcb-util-dev \
-    xcb-util-image-dev \
-    xcb-util-keysyms-dev \
-    xcb-util-renderutil-dev \
-    xcb-util-wm-dev \
-    xinit \
-    xkbcomp \
-    xkbcomp-dev \
-    xkeyboard-config \
-    xorgproto \
-    xorg-server-common \
-    xorg-server-dev \
-    xtrans
+    echo "**** install build deps ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        autoconf \
+        automake \
+        cmake \
+        libudev-dev \
+        xfonts-base \
+        xfonts-75dpi \
+        xfonts-100dpi \
+        libdrm-dev \
+        libepoxy-dev \
+        libjpeg-turbo8-dev \
+        libjpeg-turbo8 \
+        libpciaccess-dev \
+        libtool \
+        libwebp-dev \
+        libx11-dev \
+        libxau-dev \
+        libxcb1-dev \
+        libxcursor-dev \
+        libxdmcp-dev \
+        libxext-dev \
+        libxfont-dev \
+        libxkbfile-dev \
+        libxrandr-dev \
+        libxshmfence-dev \
+        libxtst-dev \
+        libgl1-mesa-dev \
+        libgl1-mesa-dri \
+        meson \
+        libnettle-dev \
+        libssl-dev \
+        libpixman-1-dev \
+        procps \
+        shadow \
+        libwayland-dev \
+        wayland-protocols \
+        libxcb-util-dev \
+        libxcb-image0-dev \
+        libxcb-keysyms1-dev \
+        libxcb-render-util0-dev \
+        libxcb-wm-dev \
+        xinit \
+        xkbcomp \
+        xkb-data \
+        xserver-xorg-core \
+        xserver-xorg-dev \
+        libxtrans-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN \
   echo "**** build libjpeg-turbo ****" && \
@@ -188,16 +186,18 @@ FROM ghcr.io/trueforge-org/node:rolling@sha256:70adf71e6e9d204219ace16d177a96c7b
 ARG KCLIENT_RELEASE
 
 RUN \
-  echo "**** install build deps ****" && \
-  apk add --no-cache \
-    alpine-sdk \
-    curl \
-    cmake \
-    g++ \
-    gcc \
-    make \
-    pulseaudio-dev \
-    python3
+    echo "**** install build deps ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        cmake \
+        g++ \
+        gcc \
+        make \
+        libpulse-dev \
+        python3.11 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN \
   echo "**** grab source ****" && \
@@ -244,137 +244,123 @@ COPY --from=nodebuilder /kclient /kclient
 COPY --from=buildstage /build-out/ /
 
 RUN \
-  echo "**** install deps ****" && \
-  apk add --no-cache \
-    cups \
-    cups-client \
-    dbus-x11 \
-    docker \
-    docker-cli-compose \
-    dunst \
-    ffmpeg \
-    font-noto \
-    font-noto-emoji \
-    fuse-overlayfs \
-    gcompat \
-    intel-media-driver \
-    iproute2-minimal \
-    lang \
-    libgcc \
-    libgomp \
-    libjpeg-turbo \
-    libnotify \
-    libstdc++ \
-    libwebp \
-    libxfont2 \
-    libxshmfence \
-    mcookie \
-    mesa \
-    mesa-dri-gallium \
-    mesa-gbm \
-    mesa-gl \
-    mesa-va-gallium \
-    mesa-vulkan-ati \
-    mesa-vulkan-intel \
-    mesa-vulkan-layers \
-    mesa-vulkan-swrast \
-    nginx \
-    nodejs \
-    openbox \
-    openssh-client \
-    openssl \
-    pciutils-libs \
-    perl \
-    perl-datetime \
-    perl-hash-merge-simple \
-    perl-list-moreutils \
-    perl-switch \
-    perl-try-tiny \
-    perl-yaml-tiny \
-    pixman \
-    pulseaudio \
-    pulseaudio-utils \
-    py3-xdg \
-    python3 \
-    setxkbmap \
-    sudo \
-    tar \
-    vulkan-tools \
-    xauth \
-    xf86-video-amdgpu \
-    xf86-video-ati \
-    xf86-video-intel \
-    xf86-video-nouveau \
-    xf86-video-qxl \
-    xkbcomp \
-    xkeyboard-config \
-    xterm && \
-  apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
-    cups-pdf && \
-  echo "**** printer config ****" && \
-  sed -i \
-    "s:^#Out.*:Out /home/kasm-user/PDF:" \
-    /etc/cups/cups-pdf.conf && \
-  sed -i \
-    's/^SystemGroup .*/SystemGroup lpadmin root/' \
-    /etc/cups/cups-files.conf && \
-  echo "**** filesystem setup ****" && \
-  ln -s /usr/local/share/kasmvnc /usr/share/kasmvnc && \
-  ln -s /usr/local/etc/kasmvnc /etc/kasmvnc && \
-  ln -s /usr/local/lib/kasmvnc /usr/lib/kasmvncserver && \
-  echo "**** openbox tweaks ****" && \
-  sed -i \
-    -e 's/NLIMC/NLMC/g' \
-    -e 's|</applications>|  <application class="*"><maximized>yes</maximized></application>\n</applications>|' \
-    -e 's|</keyboard>|  <keybind key="C-S-d"><action name="ToggleDecorations"/></keybind>\n</keyboard>|' \
-    /etc/xdg/openbox/rc.xml && \
-  echo "**** user perms ****" && \
-  echo "apps:apps" | chpasswd && \
-  usermod -s /bin/bash apps && \
-  echo '%wheel ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/wheel && \
-  adduser apps wheel && \
-  echo "**** proot-apps ****" && \
-  mkdir /proot-apps/ && \
-  PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]') && \
-  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
-    | tar -xzf - -C /proot-apps/ && \
-  echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
-  echo "**** kasm support ****" && \
-  useradd \
-    -u 1000 -U \
-    -d /home/kasm-user \
-    -s /bin/bash kasm-user && \
-  echo "kasm-user:kasm" | chpasswd && \
-  adduser kasm-user wheel && \
-  mkdir -p /home/kasm-user && \
-  chown 1000:1000 /home/kasm-user && \
-  mkdir -p /var/run/pulse && \
-  chown 1000:root /var/run/pulse && \
-  mkdir -p /kasmbins && \
-  curl -s https://kasm-ci.s3.amazonaws.com/kasmbins-$TARGETARCH-${KASMBINS_RELEASE}.tar.gz \
-    | tar xzvf - -C /kasmbins/ && \
-  chmod +x /kasmbins/* && \
-  chown -R 1000:1000 /kasmbins && \
-  chown 1000:1000 /usr/share/kasmvnc/www/Downloads && \
-  mkdir -p /dockerstartup && \
-  echo "**** dind support ****" && \
-  addgroup -S dockremap && \
-  adduser -S -G dockremap dockremap && \
-  echo 'dockremap:165536:65536' >> /etc/subuid && \
-  echo 'dockremap:165536:65536' >> /etc/subgid && \
-  curl -o \
-  /usr/local/bin/dind -L \
-    https://raw.githubusercontent.com/moby/moby/master/hack/dind && \
-  chmod +x /usr/local/bin/dind && \
-  usermod -aG docker apps && \
-  echo 'hosts: files dns' > /etc/nsswitch.conf && \
-  echo "**** theme ****" && \
-  curl -s https://raw.githubusercontent.com/thelamer/lang-stash/master/theme.tar.gz \
-    | tar xzvf - -C /usr/share/themes/Clearlooks/openbox-3/ && \
-  echo "**** cleanup ****" && \
-  rm -rf \
-    /tmp/*
+    echo "**** install deps ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        cups \
+        cups-client \
+        dbus-x11 \
+        docker.io \
+        docker-compose \
+        dunst \
+        ffmpeg \
+        fonts-noto \
+        fonts-noto-color-emoji \
+        fuse-overlayfs \
+        intel-media-va-driver \
+        iproute2 \
+        libgcc-s1 \
+        libgomp1 \
+        libjpeg-turbo8 \
+        libnotify-bin \
+        libstdc++6 \
+        libwebp6 \
+        libxfont2 \
+        libxshmfence1 \
+        mcookie \
+        libgl1-mesa-dri \
+        libgbm1 \
+        libgl1-mesa-glx \
+        mesa-vulkan-drivers \
+        nginx \
+        nodejs \
+        openbox \
+        openssh-client \
+        openssl \
+        pciutils \
+        libpixman-1-0 \
+        pulseaudio \
+        pulseaudio-utils \
+        python3-xdg \
+        python3 \
+        x11-xkb-utils \
+        vulkan-tools \
+        xauth \
+        xserver-xorg-video-amdgpu \
+        xserver-xorg-video-ati \
+        xserver-xorg-video-intel \
+        xserver-xorg-video-nouveau \
+        xserver-xorg-video-qxl \
+        xkbcomp \
+        xkeyboard-config \
+        xterm \
+        cups-pdf && \
+    echo "**** printer config ****" && \
+    sed -i \
+        "s:^#Out.*:Out /home/kasm-user/PDF:" \
+        /etc/cups/cups-pdf.conf && \
+    sed -i \
+        's/^SystemGroup .*/SystemGroup lpadmin root/' \
+        /etc/cups/cups-files.conf && \
+    echo "**** filesystem setup ****" && \
+    ln -s /usr/local/share/kasmvnc /usr/share/kasmvnc && \
+    ln -s /usr/local/etc/kasmvnc /etc/kasmvnc && \
+    ln -s /usr/local/lib/kasmvnc /usr/lib/kasmvncserver && \
+    echo "**** openbox tweaks ****" && \
+    sed -i \
+        -e 's/NLIMC/NLMC/g' \
+        -e 's|</applications>|  <application class="*"><maximized>yes</maximized></application>\n</applications>|' \
+        -e 's|</keyboard>|  <keybind key="C-S-d"><action name="ToggleDecorations"/></keybind>\n</keyboard>|' \
+        /etc/xdg/openbox/rc.xml && \
+    echo "**** user perms ****" && \
+    echo "apps:apps" | chpasswd && \
+    usermod -s /bin/bash apps && \
+    echo '%wheel ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/wheel && \
+    adduser apps wheel && \
+    echo "**** proot-apps ****" && \
+    mkdir /proot-apps/ && \
+    PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
+        | awk '/tag_name/{print $4;exit}' FS='[""]') && \
+    curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
+        | tar -xzf - -C /proot-apps/ && \
+    echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
+    echo "**** kasm support ****" && \
+    useradd \
+        -u 1000 -U \
+        -d /home/kasm-user \
+        -s /bin/bash kasm-user && \
+    echo "kasm-user:kasm" | chpasswd && \
+    adduser kasm-user wheel && \
+    mkdir -p /home/kasm-user && \
+    chown 1000:1000 /home/kasm-user && \
+    mkdir -p /var/run/pulse && \
+    chown 1000:root /var/run/pulse && \
+    mkdir -p /kasmbins && \
+    curl -s https://kasm-ci.s3.amazonaws.com/kasmbins-$TARGETARCH-${KASMBINS_RELEASE}.tar.gz \
+        | tar xzvf - -C /kasmbins/ && \
+    chmod +x /kasmbins/* && \
+    chown -R 1000:1000 /kasmbins && \
+    chown 1000:1000 /usr/share/kasmvnc/www/Downloads && \
+    mkdir -p /dockerstartup && \
+    echo "**** dind support ****" && \
+    addgroup --system dockremap && \
+    adduser --system --ingroup dockremap dockremap && \
+    echo 'dockremap:165536:65536' >> /etc/subuid && \
+    echo 'dockremap:165536:65536' >> /etc/subgid && \
+    curl -o \
+    /usr/local/bin/dind -L \
+        https://raw.githubusercontent.com/moby/moby/master/hack/dind && \
+    chmod +x /usr/local/bin/dind && \
+    usermod -aG docker apps && \
+    echo 'hosts: files dns' > /etc/nsswitch.conf && \
+    echo "**** theme ****" && \
+    curl -s https://raw.githubusercontent.com/thelamer/lang-stash/master/theme.tar.gz \
+        | tar xzvf - -C /usr/share/themes/Clearlooks/openbox-3/ && \
+    echo "**** cleanup ****" && \
+    rm -rf \
+        /tmp/* && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # add local files
 USER apps

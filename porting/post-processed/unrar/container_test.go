@@ -8,7 +8,6 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 func Test(t *testing.T) {
@@ -23,10 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithExposedPorts("8090/tcp"),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("8090/tcp"),
-		),
+		testcontainers.WithCmdArgs("unrar", "--version"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)

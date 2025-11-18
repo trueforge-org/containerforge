@@ -12,36 +12,47 @@ ENV HOME="/config" \
 PYTHONIOENCODING=utf-8
 
 RUN \
-  echo "**** install packages ****" && \
-  apk add -U --update --no-cache --virtual=build-dependencies \
-    build-base \
-    libffi-dev \
-    libxml2-dev \
-    libzen-dev \
-    python3-dev && \
-  apk add  -U --update --no-cache \
-    libjpeg \
-    libxslt \
-    python3 && \
-  mkdir -p /app/kometa && \
-  curl -o \
-    /tmp/kometa.tar.gz -L \
-    "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz" && \
-  tar xf \
-    /tmp/kometa.tar.gz -C \
-    /app/kometa --strip-components=1 && \
-  cd /app/kometa && \
-  python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
-    pip \
-    wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-  echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
-  rm -rf \
-    /tmp/* \
-    $HOME/.cache
+    echo "**** install packages ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libffi-dev \
+        libxml2-dev \
+        libzen-dev \
+        python3-dev \
+        libjpeg-dev \
+        libxslt1-dev \
+        python3-venv \
+        python3-pip && \
+    mkdir -p /app/kometa && \
+    python3 - <<'PY'
+import os, urllib.request, tarfile, io
+url = "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz"
+data = urllib.request.urlopen(url).read()
+tf = tarfile.open(fileobj=io.BytesIO(data), mode="r:gz")
+for m in tf.getmembers():
+        parts = m.name.split("/")[1:]
+        if not parts:
+                continue
+        m.name = "/".join(parts)
+        tf.extract(m, path="/app/kometa")
+PY && \
+    cd /app/kometa && \
+    python3 -m venv /config/venv && \
+    /config/venv/bin/pip install -U --no-cache-dir \
+        pip \
+        wheel && \
+    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+    echo "**** cleanup ****" && \
+    apt-get remove -y --purge \
+        build-essential \
+        libffi-dev \
+        libxml2-dev \
+        libzen-dev \
+        python3-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* $HOME/.cache
 
 # add local files
 USER apps

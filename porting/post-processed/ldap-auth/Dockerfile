@@ -7,30 +7,38 @@ ARG TARGETARCH
 USER root
 
 RUN \
-  echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    build-base \
-    openldap-dev \
-    python3-dev && \
-  echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    libffi \
-    libldap \
-    python3 && \
-  python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
-    pip \
-    wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
-    cryptography \
-    legacy-cgi \
-    python-ldap=="${VERSION}" && \
-  echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
-  rm -rf \
-    /tmp/* \
-    $HOME/.cache
+    echo "**** install build packages ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libldap2-dev \
+        python3-dev \
+        libffi-dev && \
+    echo "**** install runtime packages ****" && \
+    apt-get install -y --no-install-recommends \
+        libldap-2.4-2 \
+        libffi7 \
+        python3 && \
+    python3 -m venv /config/venv && \
+    /config/venv/bin/pip install -U --no-cache-dir \
+        pip \
+        wheel && \
+    /config/venv/bin/pip install -U --no-cache-dir \
+        cryptography \
+        legacy-cgi \
+        python-ldap=="${VERSION}" && \
+    echo "**** cleanup ****" && \
+    apt-get remove -y --purge \
+        build-essential \
+        libldap2-dev \
+        python3-dev \
+        libffi-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        $HOME/.cache
 
 # copy local files
 USER apps

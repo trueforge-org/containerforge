@@ -11,28 +11,25 @@ USER root
 RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bin/cosign \
     --mount=type=bind,source=/lychee.pub,target=/config/lychee.pub \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache --upgrade \
-    exiftool \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    libimage-exiftool-perl \
     ffmpeg \
-    gd \
+    libgd-dev \
     imagemagick \
     jpegoptim \
-    php84-bcmath \
-    php84-dom \
-    php84-exif \
-    php84-gd \
-    php84-intl \
-    php84-mysqli \
-    php84-pdo_mysql \
-    php84-pdo_pgsql \
-    php84-pdo_sqlite \
-    php84-pecl-imagick \
-    php84-pecl-redis \
-    php84-pgsql \
-    php84-sodium \
-    php84-sqlite3 \
-    php84-tokenizer \
-    postgresql16-client && \
+    php8.4-bcmath \
+    php8.4-xml \
+    php8.4-gd \
+    php8.4-intl \
+    php8.4-mysql \
+    php8.4-pgsql \
+    php8.4-sqlite3 \
+    php-imagick \
+    php-redis \
+    php-sodium \
+    postgresql-client && \
+  rm -rf /var/lib/apt/lists/* && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
