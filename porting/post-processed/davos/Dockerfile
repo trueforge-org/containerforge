@@ -1,5 +1,7 @@
-
 FROM ghcr.io/trueforge-org/java8:rolling AS buildstage
+USER root
+ARG VERSION
+ARG TARGETARCH
 
 RUN \
   echo "**** Install build requirements ****" && \
@@ -25,12 +27,15 @@ USER root
 RUN \
   apt-get update && \
   apt-get install -y --no-install-recommends \
-    openjdk-8-jre-headless \
     libsqlite3-0 && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf /var/lib/apt/lists/*
 
+USER apps
+COPY --from=buildstage /davos.jar /app/davos.jar
+COPY ./ /
 
 # ports and volumes
 EXPOSE 8080
-WORKDIR /app/davos
-VOLUME /config
+WORKDIR /app
+VOLUME /download
