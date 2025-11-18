@@ -31,6 +31,7 @@ RUN \
   /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
   /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   echo "**** cleanup ****" && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     cargo build-essential python3-dev libssl-dev libffi-dev && \
   apt-get autoremove -y && \

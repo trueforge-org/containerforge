@@ -26,6 +26,7 @@ RUN apt-get update && \
     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r /app/kometa/requirements.txt && \
     apt-get remove -y --purge build-essential libffi-dev libxml2-dev libzen-dev && \
     apt-get autoremove -y && \
+   chown -R apps:apps /app && chmod -R 755 /app && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* $HOME/.cache
 

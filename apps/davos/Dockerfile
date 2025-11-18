@@ -26,6 +26,7 @@ RUN \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     libsqlite3-0 && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf /var/lib/apt/lists/*
 
 USER apps

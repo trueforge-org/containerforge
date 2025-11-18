@@ -21,7 +21,6 @@ RUN \
     libavutil-dev \
     libavfilter-dev \
     libavdevice-dev \
-    libavresample-dev \
     libasound2-dev \
     autoconf \
     automake \
@@ -113,6 +112,7 @@ RUN \
     libsqlite3-0 \
     sqlite3 && \
   apt-get install -y --no-install-recommends librespot || true && \
+  chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf /var/lib/apt/lists/* && \
   mkdir -p /music
 
