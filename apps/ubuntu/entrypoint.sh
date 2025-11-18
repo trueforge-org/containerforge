@@ -4,13 +4,9 @@ show_header() {
 cat <<EOF
 Welcome to a TrueForge ContainerForge container!
 
-You are entering the vicinity of an area adjacent to a location.
-The kind of place where there might be a monster, or some kind of weird mirror.
-These are just examples; it could also be something much better.
-
 Container Info:
   * Running as: $(id -un) (UID: $(id -u), GID: $(id -g))
-  * Additional Groups: $(id -Gn)
+  * Additional Groups: $(id -Gn) (GIDs: $(id -G))
   * Number of CPUs available: $(nproc)
   * Memory limits (if cgroup available):
     $(awk '/MemTotal/ {print "    Total: "$2/1024 " MB"}' /proc/meminfo)
