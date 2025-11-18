@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-cp /app/kometa/config/config.yml.template /config
+cp -n /app/kometa/config/config.yml.template /config/config.yml
 
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
 
 cd / || exit 1
 
-# halt startup if no config file is found
 if [[ -n "${KOMETA_CONFIG}" ]]; then
     CONFIG_FILE="${KOMETA_CONFIG}"
 elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; then
@@ -16,8 +15,6 @@ fi
 
 if [[ -n "${CONFIG_FILE}" ]] && [[ ! -e "${CONFIG_FILE}" ]]; then
     echo "No config file found at ${CONFIG_FILE}, halting init."
-    echo "[ls.io-init] done."
-    s6-rc -bad change
 fi
 
 if { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--run|-r)([\s]|$)'; } && { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; }; then
@@ -45,7 +42,6 @@ fi
 
 if [[ -n "${CONFIG_FILE}" ]] && [[ ! -e "${CONFIG_FILE}" ]]; then
     echo "No config file found at ${CONFIG_FILE}, halting init."
-    s6-rc -bad change
 fi
 
 if { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--time|-t)([\s])'; } && { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; }; then
