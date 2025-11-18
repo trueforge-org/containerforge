@@ -12,9 +12,9 @@ RUN apt-get update && \
         build-essential \
         libffi-dev \
         libxml2-dev \
-        libxslt1-dev \
         libzen-dev \
-        libjpeg-dev && \
+        libjpeg-dev \
+        libxslt1-dev && \
     mkdir -p /app/kometa && \
     curl -L -o /tmp/kometa.tar.gz \
         "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz" && \
@@ -22,18 +22,10 @@ RUN apt-get update && \
     cd /app/kometa && \
     python3 -m venv /config/venv && \
     /config/venv/bin/pip install -U pip wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir -r /app/kometa/requirements.txt && \
-    \
-    apt-get remove -y --purge build-essential libzen-dev && \
+    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r /app/kometa/requirements.txt && \
+    apt-get remove -y --purge build-essential libffi-dev libxml2-dev libzen-dev && \
     apt-get autoremove -y && \
-    \
-    apt-get install -y --no-install-recommends \
-        libffi8 \
-        libxml2 \
-        libxslt1.1 \
-        libjpeg62-turbo && \
-    \
-    chown -R apps:apps /app && chmod -R 755 /app && \
+   chown -R apps:apps /app && chmod -R 755 /app && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* $HOME/.cache
 
