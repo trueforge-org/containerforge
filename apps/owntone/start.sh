@@ -5,7 +5,7 @@ mkdir -p \
     /var/run/dbus \
     /run/dbus \
     /config/dbase_and_logs \
-    /daapd-pidfolder
+    /overtone-pidfolder
 
 
 if [[ -e /var/run/dbus.pid ]]; then
@@ -63,7 +63,7 @@ exec avahi-daemon --no-chroot
 exec dbus-daemon --system --nofork
 
 exec /usr/sbin/owntone -f \
-    -P /daapd-pidfolder/owntone.pid
+    -P /overtone-pidfolder/owntone.pid
 
-exed librespot --backend pipe --device /music/spotify -n forked-daapd --cache /tmp
+exed librespot --backend pipe --device /music/spotify -n forked-overtone --cache /tmp
 

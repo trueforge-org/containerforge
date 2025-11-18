@@ -9,6 +9,13 @@ RUN \
   echo "**** install build packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
+        autoconf \
+        automake \
+        autoconf-archive \
+        libtool \
+        pkg-config \
+        gettext \
+        m4 \
     libasound2-dev \
     autoconf \
     automake \
@@ -82,13 +89,6 @@ RUN \
   echo "**** install runtime packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        autoconf \
-        automake \
-        autoconf-archive \
-        libtool \
-        pkg-config \
-        gettext \
-        m4 \
     avahi-daemon \
     libconfuse2 \
     dbus \

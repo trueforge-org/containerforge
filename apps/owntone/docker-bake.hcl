@@ -1,7 +1,7 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "daapd"
+  default = "owntone"
 }
 
 variable "VERSION" {
