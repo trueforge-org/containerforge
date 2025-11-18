@@ -3,8 +3,6 @@ cp /app/kometa/config/config.yml.template /config
 
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
 
-export KOMETA_LINUXSERVER=True
-
 cd / || exit 1
 
 # halt startup if no config file is found
