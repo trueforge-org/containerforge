@@ -16,6 +16,12 @@ RUN \
         pkg-config \
         gettext \
         m4 \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libavfilter-dev \
+    libavdevice-dev \
+    libavresample-dev
     libasound2-dev \
     autoconf \
     automake \
