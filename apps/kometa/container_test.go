@@ -26,7 +26,7 @@ func Test(t *testing.T) {
 		ctx,
 		image,
 		testcontainers.WithWaitStrategy(
-			wait.ForExit(),
+			wait.ForLog("Finished Run"),
 		),
 	)
 	testcontainers.CleanupContainer(t, app)
