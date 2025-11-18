@@ -12,19 +12,16 @@ ENV NODE_ENV=production \
   YARN_CACHE_FOLDER=/tmp/.yarn
 
 RUN \
-  echo "**** install build packages ****" && \
-  apk add -U --no-cache \
-    fontconfig \
-    font-noto \
-    icu-data-full && \
-  apk add -U --no-cache --virtual=build-dependencies \
-    build-base \
-    git \
-    icu-libs \
-    openssl-dev \
-    python3-dev \
-    sqlite-dev \
-    yarn && \
+    echo "**** install build packages ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        fonts-noto \
+        icu-data-full && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+        build-essential \
+        libssl-dev \
+        python3-dev \
+        libsqlite3-dev && \
   echo "**** install hedgedoc ****" && \
   curl -o \
     /tmp/hedgedoc.tar.gz -L \

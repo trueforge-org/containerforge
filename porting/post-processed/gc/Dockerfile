@@ -9,21 +9,22 @@ FORCE_IMAGE_REMOVAL=1
 
 
 RUN echo "**** install runtime packages ****" && \
- apk add --no-cache \
-	docker && \
+ apt-get update && \
+ apt-get install -y --no-install-recommends \
+    docker.io && \
  echo "**** fetch latest ver of docker-gc script ****" && \
  git clone https://github.com/spotify/docker-gc /tmp/docker-gc && \
  echo "**** link docker executable, copy and make docker-gc executable ****" && \
  ln -s /usr/bin/docker \
-	/bin/docker && \
+    /bin/docker && \
  cp /tmp/docker-gc/docker-gc /docker-gc && \
  chmod +x \
-	/docker-gc && \
+    /docker-gc && \
  echo "**** cleanup ****" && \
- apk del --purge \
-	build-dependencies && \
+ apt-get autoremove -y && \
+ apt-get clean && \
  rm -rf \
-	/tmp/*
+    /var/lib/apt/lists/* /tmp/*
 
 # volumes
 VOLUME /var/lib/docker-gc

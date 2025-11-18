@@ -22,36 +22,37 @@ ENV HOME="/config" \
   UV_LINK_MODE=copy
 
 RUN \
-  echo "**** install packages ****" && \
-  apk add -U --update --no-cache --virtual=build-dependencies \
-    build-base \
-    libffi-dev && \
-  apk add  -U --update --no-cache \
-    7zip \
-    boost1.84-system \
-    boost1.84-python3 \
-    libstdc++ \
-    nodejs && \
-  echo "**** install flexget ****" && \
-  mkdir -p /run/flexget-temp /data && \
-  mkdir -p /app/flexget && \
-  curl -o \
-    /tmp/flexget.tar.gz -L \
-    "https://github.com/Flexget/Flexget/archive/refs/tags/v${VERSION}.tar.gz" && \
-  tar xf \
-    /tmp/flexget.tar.gz -C \
-    /app/flexget --strip-components=1 && \
-  cd /app/flexget && \
-  uv venv /config/venv && \
-  uv run scripts/bundle_webui.py && \
-  uv sync --frozen --no-dev --no-cache --group=all && \
-  uv pip install pip && \
-  echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
-  rm -rf \
-    /tmp/* \
-    $HOME/.cache
+    echo "**** install packages ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libffi-dev \
+        p7zip-full \
+        libboost-system-dev \
+        libboost-python3-dev \
+        libstdc++6 \
+        nodejs && \
+    echo "**** install flexget ****" && \
+    mkdir -p /run/flexget-temp /data && \
+    mkdir -p /app/flexget && \
+    $SELECTION_PLACEHOLDER$ \
+    tar xf \
+        /tmp/flexget.tar.gz -C \
+        /app/flexget --strip-components=1 && \
+    cd /app/flexget && \
+    uv venv /config/venv && \
+    uv run scripts/bundle_webui.py && \
+    uv sync --frozen --no-dev --no-cache --group=all && \
+    uv pip install pip && \
+    echo "**** cleanup ****" && \
+    apt-get remove --purge -y build-essential libffi-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf \
+        /tmp/* \
+        $HOME/.cache \
+        /var/lib/apt/lists/*
+
 
 # add local files
 USER apps

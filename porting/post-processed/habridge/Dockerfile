@@ -8,18 +8,21 @@ USER root
 
 # install packages
 RUN \
-  echo "**** install runtime packages ****" && \
-  apk add --no-cache \
-    libcap \
-    nss \
-    openjdk8-jre \
-    sqlite-libs && \
-  echo "**** install ha-bridge ****" && \
-  mkdir -p \
-    /app && \
-  curl -o \
-    /app/ha-bridge.jar -L \
-    "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar" && \
+    echo "**** install runtime packages ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libcap2 \
+        libnss3 \
+        openjdk-8-jre-headless \
+        libsqlite3-0 && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "**** install ha-bridge ****" && \
+    mkdir -p \
+        /app && \
+    curl -o \
+        /app/ha-bridge.jar -L \
+        "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar"
+
 # copy local files
 USER apps
 COPY . /
