@@ -28,50 +28,85 @@ Useful Links:
 EOF
 }
 
-## TODO: do the same for /dev/snd sound devices
-check_video() {
+check_devices() {
     local WARNINGS=0
     local BAD_DEVICES=()
+    local MISSING_GROUPS_MAP=()  # store missing GIDs per device as "device:gid1,gid2"
+    local TOTAL_MISSING_GROUPS=() # all missing GIDs
     local USER_UID=${1:-$(id -u)}
     local USER_GIDS
+    local DEVICE_TYPE=$2   # "video" or "sound"
+
+    echo "[Entrypoint] Checking Device permissions for $DEVICE_TYPE devices..."
 
     # Get all groups the user belongs to
     USER_GIDS=$(id -G "$USER_UID")
 
-    # Gather all video/graphics devices
+    # Gather devices based on type
     local FILES=()
-    while IFS= read -r f; do FILES+=("$f"); done < <(find /dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/kfd -type c 2>/dev/null)
-    while IFS= read -r f; do FILES+=("$f"); done < <(find /dev -maxdepth 1 -name 'video[0-9]' -type c 2>/dev/null)
+    if [ "$DEVICE_TYPE" = "video" ]; then
+        while IFS= read -r f; do FILES+=("$f"); done < <(find /dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/kfd -type c 2>/dev/null)
+        while IFS= read -r f; do FILES+=("$f"); done < <(find /dev -maxdepth 1 -name 'video[0-9]' -type c 2>/dev/null)
+    elif [ "$DEVICE_TYPE" = "sound" ]; then
+        while IFS= read -r f; do FILES+=("$f"); done < <(find /dev/snd -type c 2>/dev/null)
+    else
+        echo "Unknown device type: $DEVICE_TYPE"
+        return 1
+    fi
 
     for i in "${FILES[@]}"; do
-        local VIDEO_GID VIDEO_UID MODE GROUP_PERM
-        VIDEO_GID=$(stat -c '%g' "$i")
-        VIDEO_UID=$(stat -c '%u' "$i")
+        local DEV_GID DEV_UID MODE GROUP_PERM MISSING_GIDS=()
+        DEV_GID=$(stat -c '%g' "$i")
+        DEV_UID=$(stat -c '%u' "$i")
         MODE=$(stat -c '%a' "$i")
         GROUP_PERM=$(( (MODE / 10) % 10 ))
 
-        if [ "$USER_UID" -eq "$VIDEO_UID" ]; then
+        if [ "$USER_UID" -eq "$DEV_UID" ]; then
             continue
-        elif echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$VIDEO_GID" && [ "$GROUP_PERM" -ge 6 ]; then
+        elif echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$DEV_GID" && [ "$GROUP_PERM" -ge 6 ]; then
             continue
         else
             WARNINGS=$((WARNINGS + 1))
             BAD_DEVICES+=("$i")
+            # check if user is missing the group
+            if ! echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$DEV_GID"; then
+                MISSING_GIDS+=("$DEV_GID")
+                TOTAL_MISSING_GROUPS+=("$DEV_GID")
+            fi
+            if [ "${#MISSING_GIDS[@]}" -gt 0 ]; then
+                MISSING_GROUPS_MAP+=("$i:${MISSING_GIDS[*]}")
+            fi
         fi
     done
 
     if [ "$WARNINGS" -eq 0 ]; then
-        echo "**** Video permissions are good ****"
+        echo "**** $DEVICE_TYPE permissions are good ****"
     else
-        echo "**** Warning: some video devices may not have correct permissions ****"
+        echo "**** Warning: some $DEVICE_TYPE devices may not have correct permissions ****"
         echo "Affected devices:"
         for d in "${BAD_DEVICES[@]}"; do
-            echo "  - $d"
+            local entry missing_gids=""
+            for entry in "${MISSING_GROUPS_MAP[@]}"; do
+                if [[ $entry == "$d:"* ]]; then
+                    missing_gids=${entry#*:}
+                fi
+            done
+            if [ -n "$missing_gids" ]; then
+                echo "  - $d (missing GID(s): $missing_gids)"
+            else
+                echo "  - $d"
+            fi
         done
+        # Print total list of missing groups
+        if [ "${#TOTAL_MISSING_GROUPS[@]}" -gt 0 ]; then
+            # Remove duplicates
+            local UNIQUE_GROUPS
+            UNIQUE_GROUPS=($(echo "${TOTAL_MISSING_GROUPS[@]}" | tr ' ' '\n' | sort -nu))
+            echo ""
+            echo "Total list of missing GIDs for $DEVICE_TYPE: ${UNIQUE_GROUPS[*]}"
+        fi
     fi
 }
-
-
 
 check_uid_gid() {
     local TARGET_UID=568
@@ -88,8 +123,6 @@ check_uid_gid() {
         echo "[entrypoint] WARNING: Set Group-ID (GID) ($CURRENT_GID) does not match the guaranteed-default: $TARGET_GID"
     fi
 }
-
-
 
 ### START MAIN
 
@@ -152,10 +185,8 @@ else
     echo "[entrypoint] No files found in /docker-entrypoint.d/, skipping"
 fi
 
-if [ "$EXP_VID" = "true" ]; then
-    echo "[entrypoint] Checking video device permissions..."
-    check_video
-fi
+check_devices "$UID" video
+check_devices "$UID" sound
 
 # Run main application
 if [ -x /start.sh ]; then

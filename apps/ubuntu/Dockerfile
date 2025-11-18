@@ -32,7 +32,7 @@ RUN groupadd -g 101 nginx && \
 # Create group and user "apps" with UID and GID 568
 RUN groupadd -g 568 apps && \
     useradd -m -u 568 -g 568 -s /bin/bash apps; \
-    usermod -aG 10,20,29,44,39,101,129 568; \
+    usermod -aG 10,20,29,44,39,101,107,129 568; \
     mkdir -p /home/apps; \
     chown -R apps:apps /home/apps
 
