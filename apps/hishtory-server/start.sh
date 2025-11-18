@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-
 if [[ -n ${HISHTORY_POSTGRES_DB} ]]; then
     DB_HOST=$(awk -F '@|:|/' '{print $6}' <<<"${HISHTORY_POSTGRES_DB}")
     DB_PORT=$(awk -F '@|:|/' '{print $7}' <<<"${HISHTORY_POSTGRES_DB}")
@@ -26,12 +23,4 @@ fi
 
 
 
-    exec \
-        
-             /app/server
-else
-    exec \
-        
-            /app/server
-fi
-
+exec /app/server

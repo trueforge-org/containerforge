@@ -2,7 +2,6 @@
 
 mkdir -p "${AIRSONIC_ADVANCED_SETTINGS}"/transcode
 
-fi
 
 if [[ ! -e "${AIRSONIC_ADVANCED_SETTINGS}"/transcode/ffmpeg || ! -e  "${AIRSONIC_ADVANCED_SETTINGS}"/transcode/flac || ! -e "${AIRSONIC_ADVANCED_SETTINGS}"/transcode/lame  ]]; then
     ln -sf /usr/bin/ffmpeg "${AIRSONIC_ADVANCED_SETTINGS}"/transcode/

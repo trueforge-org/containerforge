@@ -21,7 +21,7 @@ RUN \
     libavutil-dev \
     libavfilter-dev \
     libavdevice-dev \
-    libavresample-dev
+    libavresample-dev \
     libasound2-dev \
     autoconf \
     automake \
