@@ -16,16 +16,17 @@ func Test(t *testing.T) {
 
 	appName := os.Getenv("APP")
 	require.NotEmpty(t, appName, "APP environment variable must be set")
+
 	image := os.Getenv("TEST_IMAGE")
 	if image == "" {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
 	app, err := testcontainers.Run(
-		ctx, image,
-		testcontainers.WithExposedPorts("80/tcp"),
+		ctx,
+		image,
 		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort("80/tcp"),
+			wait.ForExit(),
 		),
 	)
 	testcontainers.CleanupContainer(t, app)
