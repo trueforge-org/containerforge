@@ -23,7 +23,7 @@ export \
 
 # create directories
 mkdir -p \
-    $JELLYFIN_CONFIG_DIR "$JELLYFIN_DATA_DIR/plugins/configurations" "$JELLYFIN_DATA_DIR/transcodes" "$JELLYFIN_LOG_DIR" "$JELLYFIN_CACHE_DIR" || true
+    $JELLYFIN_CONFIG_DIR "$JELLYFIN_DATA_DIR/plugins/configurations" "$JELLYFIN_CACHE_DIR/transcodes" "$JELLYFIN_LOG_DIR"|| true
 
 exec /usr/bin/jellyfin \
         --ffmpeg="${FFMPEG_PATH}"
