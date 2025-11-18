@@ -59,7 +59,9 @@ check_devices() {
 
         if [ "$USER_UID" -eq "$DEV_UID" ]; then
             continue
-        elif echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$DEV_GID" && [ "$GROUP_PERM" -ge 6 ]; then
+        elif echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$DEV_GID"; then
+        ## TODO: do we want to check for group perms?
+        ## elif echo "$USER_GIDS" | tr ' ' '\n' | grep -qx "$DEV_GID" && [ "$GROUP_PERM" -ge 6 ]; then
             continue
         else
             WARNINGS=$((WARNINGS + 1))
