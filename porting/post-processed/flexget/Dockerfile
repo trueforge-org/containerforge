@@ -2,7 +2,7 @@
 
 
 ## TODO: replace with something of ours
-FROM ghcr.io/by275/libtorrent:2-alpine3.22 AS libtorrent
+FROM ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83 AS libtorrent
 
 FROM ghcr.io/trueforge-org/python:3.13.7@sha256:8a2c1da075925eac6d7e3a405035b60a68e1f82cf61b7807a7e87d9ca4f8c999
 
