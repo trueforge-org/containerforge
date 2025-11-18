@@ -25,7 +25,7 @@ USER root
 # Install runtime and build dependencies
 RUN set -eux; \
     apt-get update; \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         build-essential \
         libbluetooth-dev \
         tk-dev \
