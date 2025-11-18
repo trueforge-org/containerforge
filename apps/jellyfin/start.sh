@@ -2,9 +2,7 @@
 
 # create directories
 mkdir -p \
-    /config/{log,data/plugins/configurations,data/transcodes,cache} \
-    /data \
-    /transcode
+    /config/{log,data/plugins/configurations,data/transcodes,cache} || true
 
 # openmax lib loading
 if [[ -e "/opt/vc/lib" ]] && [[ ! -e "/etc/ld.so.conf.d/00-vmcs.conf" ]]; then
@@ -19,13 +17,12 @@ fi
 
 export \
     HOME="/config" \
-    JELLYFIN_DATA_DIR="/config/data" \
-    JELLYFIN_CONFIG_DIR="/config" \
-    JELLYFIN_LOG_DIR="/config/log" \
-    JELLYFIN_CACHE_DIR="/config/cache" \
-    JELLYFIN_WEB_DIR="/usr/share/jellyfin/web"
+    JELLYFIN_DATA_DIR=${JELLYFIN_DATA_DIR:="/config/data"} \
+    JELLYFIN_CONFIG_DIR=${JELLYFIN_CONFIG_DIR:="/config"} \
+    JELLYFIN_LOG_DIR=${JELLYFIN_LOG_DIR:="/config/log"} \
+    JELLYFIN_CACHE_DIR=${JELLYFIN_CACHE_DIR:="/config/cache"} \
+    JELLYFIN_WEB_DIR=${JELLYFIN_WEB_DIR:="/usr/share/jellyfin/web"}
 
-exec \
-            /usr/bin/jellyfin \
+exec /usr/bin/jellyfin \
         --ffmpeg="${FFMPEG_PATH}"
 

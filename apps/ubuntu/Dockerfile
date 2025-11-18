@@ -99,7 +99,7 @@ RUN echo "show app and root folder content...";\
     ls -l /app
 
 # Config directory (persistent volume)
-VOLUME ["/config"]
+VOLUME ["/config", "/data"]
 WORKDIR /config
 
 # PID 1 with tini, handoff to entrypoint
