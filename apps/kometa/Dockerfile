@@ -28,22 +28,20 @@ RUN \
     python3 - <<'PY'
 import os, urllib.request, tarfile, io
 url = "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz"
-data = urllib.request.urlopen(url).read()
-tf = tarfile.open(fileobj=io.BytesIO(data), mode="r:gz")
-for m in tf.getmembers():
-        parts = m.name.split("/")[1:]
-        if not parts:
-                continue
-        m.name = "/".join(parts)
-        tf.extract(m, path="/app/kometa")
-PY && \
-    cd /app/kometa && \
-    python3 -m venv /config/venv && \
-    /config/venv/bin/pip install -U --no-cache-dir \
-        pip \
-        wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-    echo "**** cleanup ****" && \
+mkdir -p /app/kometa && \
+  curl -o \
+    /tmp/kometa.tar.gz -L \
+    "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz" && \
+  tar xf \
+    /tmp/kometa.tar.gz -C \
+    /app/kometa --strip-components=1 && \
+  cd /app/kometa && \
+  python3 -m venv /config/venv && \
+  pip install -U --no-cache-dir \
+    pip \
+    wheel && \
+  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  echo "**** cleanup ****" && \
     apt-get remove -y --purge \
         build-essential \
         libffi-dev \

@@ -14,9 +14,6 @@ RUN echo "**** install runtime packages ****" && \
     docker.io && \
  echo "**** fetch latest ver of docker-gc script ****" && \
  git clone https://github.com/spotify/docker-gc /tmp/docker-gc && \
- echo "**** link docker executable, copy and make docker-gc executable ****" && \
- ln -s /usr/bin/docker \
-    /bin/docker && \
  cp /tmp/docker-gc/docker-gc /docker-gc && \
  chmod +x \
     /docker-gc && \
