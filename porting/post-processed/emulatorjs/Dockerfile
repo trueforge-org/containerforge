@@ -97,7 +97,7 @@ RUN \
 
 # runtime stage
 ## TODO: set version
-FROM ghcr.io/trueforge-org/python:rolling@sha256:df8a842bc31ab4814baa7aed2738cd6a961878915498e563ff2d9d9eb46418f3
+FROM ghcr.io/trueforge-org/python:rolling@sha256:ee0d6169d1276e97acbc5d2d7717702d211f7433c00bd3e4e16f1d8c80fe1103
 
 # set version label
 ARG VERSION
