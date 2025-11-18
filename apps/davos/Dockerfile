@@ -30,6 +30,7 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 USER apps
+COPY --from=buildstage /davos.jar /app/davos.jar
 COPY ./ /
 
 # ports and volumes

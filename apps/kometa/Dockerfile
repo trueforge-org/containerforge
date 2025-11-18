@@ -32,12 +32,6 @@ RUN apt-get update && \
 
 
 USER apps
-# add local files
-COPY . /app/kometa/
-COPY ./root/ /
-
-
+COPY . /
 
 VOLUME /config
-
-ENTRYPOINT ["/init-kometa"]

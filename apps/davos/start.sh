@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
-
-exec java -Djava.io.tmpdir="/run/tomcat.8080" -jar /app/davos/davos.jar
+mkdir -p /tmp/davos
+exec java -Djava.io.tmpdir="/tmp/davos" -jar /app/davos.jar
 
