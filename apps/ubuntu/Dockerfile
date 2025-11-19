@@ -112,7 +112,7 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
     rm -rf intel-compute-runtime; \
     apt-get clean autoclean --yes; \
     apt-get autoremove --yes; \
-    rm -rf /var/cache/apt/archives* /var/lib/apt/lists/* \
+    rm -rf /var/cache/apt/archives* /var/lib/apt/lists/*; \
     fi
 
 
