@@ -11,6 +11,9 @@
     "github>trueforge-org/truecharts//.github/renovate/updates/minor.json5",
     "github>trueforge-org/truecharts//.github/renovate/updates/major.json5"
   ],
+  "ignorePaths": [
+    "porting/**"
+  ],
   "pinDigests": true,
   "rebaseWhen": "conflicted",
   customManagers: [
