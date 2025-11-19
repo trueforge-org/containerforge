@@ -11,5 +11,5 @@ fi
 
 HOME=/config
 
-cd /app/pairdrop
+cd /app
 exec npm start -- "${OPT_RATE_LIMIT}" "${OPT_WS_FALLBACK}"

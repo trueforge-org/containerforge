@@ -11,18 +11,14 @@ ARG PAIRDROP_RELEASE
 ENV NODE_ENV="production"
 
 RUN echo "**** install pairdrop ****" && \
-  mkdir -p /app/pairdrop && \
-  if [ -z ${PAIRDROP_RELEASE} ]; then \
-    PAIRDROP_RELEASE=$(curl -sL "https://api.github.com/repos/schlagmichdoch/pairdrop/tags" \
-    | jq -r '.[0].name'); \
-  fi && \
+  mkdir -p /app && \
   curl -o \
     /tmp/pairdrop.tar.gz -L \
-    "https://github.com/schlagmichdoch/PairDrop/archive/refs/tags/${PAIRDROP_RELEASE}.tar.gz" && \
+    "https://github.com/schlagmichdoch/PairDrop/archive/refs/tags/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/pairdrop.tar.gz -C \
-    /app/pairdrop/ --strip-components=1 && \
-  cd /app/pairdrop && \
+    ./ --strip-components=1 && \
+  cd /app && \
   chown -R apps:apps ./ && \
   su -s /bin/sh apps -c 'HOME=/tmp NODE_ENV=production npm ci' && \
   chown -R apps:apps /app && chmod -R 755 /app && \
