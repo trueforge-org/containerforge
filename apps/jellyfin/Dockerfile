@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libjemalloc2 \
       mesa-va-drivers \
       xmlstarlet \
-
       libfontconfig1 \
       libfreetype6 \
     && echo "**** add Jellyfin repo *****" \
