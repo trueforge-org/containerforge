@@ -11,7 +11,10 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     NVIDIA_DRIVER_CAPABILITIES="compute,video,utility" \
      # Enable detection of dotnet running in a container
     DOTNET_RUNNING_IN_CONTAINER=true \
-    XDG_CONFIG_HOME=/config
+    XDG_CONFIG_HOME=/config \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
 
 USER root
 
@@ -19,7 +22,6 @@ USER root
 VOLUME ["/config", "/data"]
 
 WORKDIR /app
-
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -60,18 +62,18 @@ RUN apt-get update \
         fontconfig \
         p11-kit \
         unzip \
-        locales-all \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
     && update-ca-certificates \
+    && locale-gen en_US.UTF-8 C.UTF-8 \
+    && update-locale LANG=en_US.UTF-8
     && mkdir /cache /docker-entrypoint.d \
     && chown -R apps:apps /app /config /data /cache /docker-entrypoint.d && chmod -R 755 /app /config /data /cache /docker-entrypoint.d \
     && chmod 777 /cache \
     && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${TARGETARCH} -O /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
-
 
 # Use a safe non-root user
 # Note: nobody:nogroup does not map to the same uid:gid on every (host/share) distro!
