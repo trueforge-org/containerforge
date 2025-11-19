@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libjemalloc2 \
       mesa-va-drivers \
       xmlstarlet \
+
+      libfontconfig1 \
+      libfreetype6 \
     && echo "**** add Jellyfin repo *****" \
     && curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | gpg --dearmor -o /usr/share/keyrings/jellyfin-archive-keyring.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/jellyfin-archive-keyring.gpg] https://repo.jellyfin.org/ubuntu noble main" \
