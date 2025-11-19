@@ -5,7 +5,6 @@ FROM ghcr.io/trueforge-org/node:rolling@sha256:70adf71e6e9d204219ace16d177a96c7b
 ARG VERSION
 ARG TARGETARCH
 USER root
-ARG PAIRDROP_RELEASE
 
 # environment settings
 ENV NODE_ENV="production"
