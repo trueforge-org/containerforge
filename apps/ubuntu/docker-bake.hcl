@@ -44,6 +44,10 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    NEO_VER = "${NEO_VER}"
+    IGC2_VER = "${IGC2_VER}"
+    IGC1_LEGACY_VER = "${IGC1_LEGACY_VER}"
+    NEO_LEGACY_VER = "${NEO_LEGACY_VER}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
