@@ -109,8 +109,9 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
     \
     apt-get install --no-install-recommends --no-install-suggests -f -y ./*.deb; \
     cd .. && rm -rf intel-compute-runtime; \
-    && apt-get clean autoclean --yes \
-    && apt-get autoremove --yes && rm -rf /var/cache/apt/archives* /var/lib/apt/lists/*
+    apt-get clean autoclean --yes; \
+    apt-get autoremove --yes; \
+    rm -rf /var/cache/apt/archives* /var/lib/apt/lists/*
 
 
 # Use a safe non-root user
