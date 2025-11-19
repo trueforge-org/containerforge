@@ -68,6 +68,7 @@ RUN apt-get update \
         fontconfig \
         p11-kit \
         unzip \
+        ocl-icd-libopencl1 \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
@@ -105,7 +106,7 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
          -LO https://github.com/intel/intel-graphics-compiler/releases/download/igc-${IGC1_LEGACY_VER}/intel-igc-opencl_${IGC1_LEGACY_VER}_amd64.deb \
          -LO https://github.com/intel/compute-runtime/releases/download/${NEO_LEGACY_VER}/intel-opencl-icd-legacy1_${NEO_LEGACY_VER}_amd64.deb; \
     \
-    apt-get install --no-install-recommends --no-install-suggests -f -y ./*.deb; \
+    apt-get install --no-install-recommends --no-install-suggests -y ./*.deb; \
     cd ..; \
     rm -rf intel-compute-runtime; \
     apt-get clean autoclean --yes; \
