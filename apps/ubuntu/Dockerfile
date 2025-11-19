@@ -77,8 +77,8 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean \
     && update-ca-certificates \
-    && mkdir /cache \
-    && chown -R apps:apps /app && chmod -R 755 /app \
+    && mkdir /cache /docker-entrypoint.d \
+    && chown -R apps:apps /app /cache /docker-entrypoint.d && chmod -R 755 /app /cache /docker-entrypoint.d \
     && chmod 777 /cache \
     && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq \

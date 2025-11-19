@@ -128,22 +128,8 @@ check_uid_gid
 
 show_header
 
-# Ensure target entrypoint scriptfolder exist
-mkdir -p /docker-entrypoint.d
-
 
 shopt -s dotglob
-if [ -d "/customscripts" ]; then
-  echo "[entrypoint] Merging custom scripts provided by user..."
-  cp -rn /customscripts/* /docker-entrypoint.d/
-fi
-
-if [ -d "/customoverlay" ]; then
-  echo "[entrypoint] Merging Custom Overlay provided by user..."
-
-  # Copy overlay files without overwriting existing ones, including hidden files
-  cp -rn /customoverlay/* /overlay/
-fi
 
 # Merge overlay into root
 if [ -d "/overlay" ]; then
@@ -152,6 +138,14 @@ if [ -d "/overlay" ]; then
 fi
 shopt -u dotglob
 
+# Merge user overlay into root
+if [ -d "/customoverlay" ]; then
+  echo "[entrypoint] Applying Custom Overlay provided by user..."
+
+  cp -aT /overlay/* /
+fi
+
+## TODO: handle custom scripts here as well
 # Process /docker-entrypoint.d/ if it exists and is not empty
 if [ -d "/docker-entrypoint.d" ] && /usr/bin/find "/docker-entrypoint.d" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read -r v; then
     echo "[entrypoint] Processing /docker-entrypoint.d/ scripts..."
