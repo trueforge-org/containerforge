@@ -108,10 +108,13 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
          -LO https://github.com/intel/compute-runtime/releases/download/${NEO_LEGACY_VER}/intel-opencl-icd-legacy1_${NEO_LEGACY_VER}_amd64.deb; \
     \
     apt-get install --no-install-recommends --no-install-suggests -f -y ./*.deb; \
-    cd .. && rm -rf intel-compute-runtime; \
+    cd ..; \
+    rm -rf intel-compute-runtime; \
     apt-get clean autoclean --yes; \
     apt-get autoremove --yes; \
-    rm -rf /var/cache/apt/archives* /var/lib/apt/lists/*
+    rm -rf /var/cache/apt/archives* /var/lib/apt/lists/* \
+    fi
+
 
 
 # Use a safe non-root user
