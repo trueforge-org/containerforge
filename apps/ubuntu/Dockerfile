@@ -8,10 +8,8 @@ ARG TARGETARCH
 ARG VENDOR
 
 # https://github.com/intel/compute-runtime/releases
-ARG GMMLIB_VER
 # >= Gen12 graphics (current)
 ARG IGC2_VER
-ARG IGC2_BUILD
 ARG NEO_VER
 # <= Gen11 graphics (legacy)
 ARG IGC1_LEGACY_VER
