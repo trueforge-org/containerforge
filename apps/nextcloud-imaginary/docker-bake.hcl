@@ -9,7 +9,7 @@ variable "VERSION" {
 }
 
 variable "IMAGINARY_COMMMIT" {
-  // renovate: datasource=git-refs depName=https://github.com/h2non/imaginary
+  // renovate: datasource=git-refs depName=https://github.com/h2non/imaginary  versioning=loose
   default = "b632dae8cc321452c3f85bcae79c580b1ae1ed84"
 }
 
