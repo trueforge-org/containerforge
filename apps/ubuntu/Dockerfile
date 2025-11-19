@@ -18,9 +18,6 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 USER root
 
-# Config directory (persistent volume)
-VOLUME ["/config", "/data"]
-
 WORKDIR /app
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -68,7 +65,7 @@ RUN apt-get update \
     && update-ca-certificates \
     && locale-gen en_US.UTF-8 C.UTF-8 \
     && update-locale LANG=en_US.UTF-8 \
-    && mkdir /app /config /data /cache /docker-entrypoint.d \
+    && mkdir /config /data /cache /docker-entrypoint.d \
     && chown -R apps:apps /app /config /data /cache /docker-entrypoint.d && chmod -R 755 /app /config /data /cache /docker-entrypoint.d \
     && chmod 777 /cache \
     && wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${TARGETARCH} -O /usr/local/bin/yq && \
@@ -85,7 +82,9 @@ COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:92b4d32099ca9c9290bed83b4ba7
 #Copy root files
 COPY --chmod=0775 . /
 
+VOLUME ["/config", "/data"]
 WORKDIR /config
+
 
 # PID 1 with tini, handoff to entrypoint
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
