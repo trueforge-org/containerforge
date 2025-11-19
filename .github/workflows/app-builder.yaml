@@ -143,6 +143,7 @@ jobs:
             *.labels.wud.watch.digest="true"
             *.labels.wud.tag.include='^\d+\.\d+\.\d+$$'
             *.labels.wud.display.name=${{ inputs.app }}
+            *.labels.wud.link.template="https://quay.io/repository/containerforge/${{ inputs.app }}?tab=tags"
             *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }},push-by-digest=true,name-canonical=true,push=true,compression=zstd,force-compression=true
             *.platform=${{ matrix.platform }}
             *.tags=
