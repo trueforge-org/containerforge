@@ -19,7 +19,7 @@ RUN echo "**** install pairdrop ****" && \
     ./ --strip-components=1 && \
   cd /app && \
   chown -R apps:apps ./ && \
-  su -s /bin/sh apps -c 'HOME=/tmp NODE_ENV=production npm ci' && \
+  su -s /bin/sh apps -c 'HOME=/tmp NODE_ENV=production npm ic' && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** cleanup ****" && \
   rm -rf \
