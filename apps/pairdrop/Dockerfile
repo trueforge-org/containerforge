@@ -13,7 +13,7 @@ RUN echo "**** install pairdrop ****" && \
   mkdir -p /app && \
   curl -o \
     /tmp/pairdrop.tar.gz -L \
-    "https://github.com/schlagmichdoch/PairDrop/archive/refs/tags/${VERSION}.tar.gz" && \
+    "https://github.com/schlagmichdoch/PairDrop/archive/refs/tags/v${VERSION}.tar.gz" && \
   tar xf \
     /tmp/pairdrop.tar.gz -C \
     ./ --strip-components=1 && \
