@@ -67,7 +67,7 @@ RUN apt-get update \
     && apt-get clean \
     && update-ca-certificates \
     && locale-gen en_US.UTF-8 C.UTF-8 \
-    && update-locale LANG=en_US.UTF-8
+    && update-locale LANG=en_US.UTF-8 \
     && mkdir /cache /docker-entrypoint.d \
     && chown -R apps:apps /app /config /data /cache /docker-entrypoint.d && chmod -R 755 /app /config /data /cache /docker-entrypoint.d \
     && chmod 777 /cache \
