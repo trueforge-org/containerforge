@@ -83,7 +83,7 @@ RUN apt-get update \
     chmod +x /usr/local/bin/yq \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/
 
-RUN if [ "${PACKAGE_ARCH}" = "amd64" ]; then \
+RUN if [ "${TARGETARCH}" = "amd64" ]; then \
     mkdir intel-compute-runtime && cd intel-compute-runtime; \
     \
     # Fetch GMMLIB_VER from a specific NEO release
