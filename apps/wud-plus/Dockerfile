@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:rolling
+FROM ghcr.io/trueforge-org/node:rolling as dependencies
 
 USER root
 
@@ -10,19 +10,40 @@ ENV VERSION=$VERSION
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-HEALTHCHECK --interval=30s --timeout=5s CMD if [[ -z ${WUD_SERVER_ENABLED} || ${WUD_SERVER_ENABLED} == 'true' ]]; then curl --fail http://localhost:${WUD_SERVER_PORT:-3000}/health || exit 1; else exit 0; fi;
-
 WORKDIR /app
+
+USER root
+
+RUN mkdir -p /app/src && \
+    curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
+        | tar xzf - -C /app/src --strip-components=1 && \
+    cd src && \
+    cd ui/ && \
+    npm run build && \
+    cd .. && \
+    cp ./app/package*. ./ && \
+    npm ci --omit=dev --omit=devoptional --no-audit --no-fund && \
+    chown -R apps:apps /app && chmod -R 755 /app && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
+
+FROM ghcr.io/trueforge-org/node:rolling
+
+ARG VERSION
+
+ENV WORKDIR=/app
+ENV WUD_LOG_FORMAT=text
+ENV VERSION=$VERSION
 
 USER apps:apps
 
-RUN mkdir -p /app && \
-    curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
-        | tar xzf - -C /app --strip-components=1
-    #chown -R apps:apps /app && chmod -R 755 /app && \
+## Copy node_modules
+COPY --from=dependencies /app/node_modules /app/node_modules
 
-# Install dependencies
-RUN cp ./app/package* ./ && npm ci --omit=dev --omit=devoptional --no-audit --no-fund
+# Copy app
+COPY --from=dependencies  /app/src/app/ ./
+
+# Copy ui
+COPY --from=dependencies  /app/src/ui/dist/ ./ui
 
 COPY --chmod=0775 . /
 
