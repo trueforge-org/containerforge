@@ -18,12 +18,11 @@ RUN mkdir -p /app/src && \
     curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1 && \
     cd src \
-    && cd app && npm ci \
-    && cd ../e2e && npm ci \
-    && cd ../ui && npm ci && npm run build \
-    && cd ../ && \
-    cp ./app/package*. ./ && \
-    npm ci --omit=dev --omit=optional --no-audit --no-fund && \
+    && cd /app/src/app && npm ci \
+    && cd /app/src/e2e && npm ci \
+    && cd /app/src/ui && npm ci && npm run build \
+    cp /app/src/app/package*. /app/src && \
+    cd /app/src/ && npm ci --omit=dev --omit=optional --no-audit --no-fund && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
@@ -38,13 +37,13 @@ ENV VERSION=$VERSION
 USER apps:apps
 
 ## Copy node_modules
-COPY --from=dependencies /app/node_modules /app/node_modules
+COPY --from=dependencies /app/src/node_modules /app/node_modules
 
 # Copy app
-COPY --from=dependencies  /app/src/app/ ./
+COPY --from=dependencies  /app/src/app/ /app
 
 # Copy ui
-COPY --from=dependencies  /app/src/ui/dist/ ./ui
+COPY --from=dependencies  /app/src/ui/dist/ /app/ui
 
 COPY --chmod=0775 . /
 
