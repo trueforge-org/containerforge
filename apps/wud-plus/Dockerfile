@@ -21,7 +21,7 @@ RUN mkdir -p /app/src && \
     && cd /app/src/app && npm ci \
     && cd /app/src/e2e && npm ci \
     && cd /app/src/ui && npm ci && npm run build \
-    cp /app/src/app/package*. /app/src && \
+    && cp /app/src/app/package* /app/src && \
     cd /app/src/ && npm ci --omit=dev --omit=optional --no-audit --no-fund && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
