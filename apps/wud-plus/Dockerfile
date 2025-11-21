@@ -22,7 +22,7 @@ RUN mkdir -p /app && \
     #chown -R apps:apps /app && chmod -R 755 /app && \
 
 # Install dependencies
-RUN cd /app/app && npm ci --omit=dev --omit=devoptional --no-audit --no-fund
+RUN cp ./app/package* ./ && npm ci --omit=dev --omit=devoptional --no-audit --no-fund
 
 COPY --chmod=0775 . /
 

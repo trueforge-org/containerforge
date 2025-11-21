@@ -2,4 +2,4 @@
 
 set -e
 
-exec node index "$@" | /app/app/node_modules/.bin/bunyan -L  -o short
+exec node index "$@" | /app/node_modules/.bin/bunyan -L  -o short
