@@ -17,10 +17,11 @@ USER root
 RUN mkdir -p /app/src && \
     curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1 && \
-    cd src && \
-    cd ui/ && \
-    npm run build && \
-    cd .. && \
+    cd src \
+    && cd app && npm ci \
+    && cd ../e2e && npm ci \
+    && cd ../ui && npm ci && npm run build && \
+    && cd ../ && \
     cp ./app/package*. ./ && \
     npm ci --omit=dev --omit=devoptional --no-audit --no-fund && \
     chown -R apps:apps /app && chmod -R 755 /app && \
