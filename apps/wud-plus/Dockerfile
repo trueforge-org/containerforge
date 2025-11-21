@@ -23,7 +23,7 @@ RUN mkdir -p /app/src && \
     && cd ../ui && npm ci && npm run build \
     && cd ../ && \
     cp ./app/package*. ./ && \
-    npm ci --omit=dev --omit=devoptional --no-audit --no-fund && \
+    npm ci --omit=dev --omit=optional --no-audit --no-fund && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
