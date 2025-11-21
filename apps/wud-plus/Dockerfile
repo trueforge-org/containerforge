@@ -14,7 +14,7 @@ WORKDIR /app
 
 USER root
 
-RUN mkdir -p /app/src && \
+RUN mkdir -p /app/src /store && \
     curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1 && \
     cd src \
@@ -23,7 +23,7 @@ RUN mkdir -p /app/src && \
     && cd /app/src/ui && npm ci && npm run build \
     && cp /app/src/app/package* /app/src && \
     cd /app/src/ && npm ci --omit=dev --omit=optional --no-audit --no-fund && \
-    chown -R apps:apps /app && chmod -R 755 /app && \
+    chown -R apps:apps /app /store && chmod -R 755 /app /store && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 FROM ghcr.io/trueforge-org/node:rolling
