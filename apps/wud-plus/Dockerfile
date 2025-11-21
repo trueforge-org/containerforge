@@ -21,7 +21,7 @@ RUN mkdir -p /app/bin && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Install dependencies
-RUN npm ci --omit=dev --omit=optional --no-audit --no-fund --no-update-notifier
+RUN npm ci --omit=dev,optional --no-audit --no-fund
 
 USER apps:apps
 
