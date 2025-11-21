@@ -14,6 +14,8 @@ HEALTHCHECK --interval=30s --timeout=5s CMD if [[ -z ${WUD_SERVER_ENABLED} || ${
 
 WORKDIR /app
 
+USER apps:apps
+
 RUN mkdir -p /app/bin && \
     curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app --strip-components=1 && \
@@ -23,8 +25,5 @@ RUN mkdir -p /app/bin && \
 # Install dependencies
 RUN cd /app/app && npm ci --omit=dev --omit=devoptional --no-audit --no-fund
 
-USER apps:apps
-
 COPY --chmod=0775 . /
 
-WORKDIR /config
