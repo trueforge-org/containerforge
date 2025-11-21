@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:rolling as dependencies
+FROM ghcr.io/trueforge-org/node:rolling AS dependencies
 
 USER root
 
@@ -20,7 +20,7 @@ RUN mkdir -p /app/src && \
     cd src \
     && cd app && npm ci \
     && cd ../e2e && npm ci \
-    && cd ../ui && npm ci && npm run build && \
+    && cd ../ui && npm ci && npm run build \
     && cd ../ && \
     cp ./app/package*. ./ && \
     npm ci --omit=dev --omit=devoptional --no-audit --no-fund && \
