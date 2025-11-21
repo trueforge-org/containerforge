@@ -16,11 +16,10 @@ WORKDIR /app
 
 USER apps:apps
 
-RUN mkdir -p /app/bin && \
+RUN mkdir -p /app && \
     curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
-        | tar xzf - -C /app --strip-components=1 && \
-    chown -R apps:apps /app && chmod -R 755 /app && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
+        | tar xzf - -C /app --strip-components=1
+    #chown -R apps:apps /app && chmod -R 755 /app && \
 
 # Install dependencies
 RUN cd /app/app && npm ci --omit=dev --omit=devoptional --no-audit --no-fund
