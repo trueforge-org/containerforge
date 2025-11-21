@@ -141,6 +141,7 @@ jobs:
             *.labels.org.opencontainers.image.authors=TrueForge <info@trueforge.org>
             *.labels.org.opencontainers.image.description=Container for ${{ inputs.app }} by TrueForge
             *.labels.wud.watch.digest=true
+            *.labels.wud.watch=true
             *.labels.wud.tag.include=^\d+\.\d+\.\d+(?:\.\d+)?$
             *.labels.wud.display.name=${{ inputs.app }}
             *.labels.wud.link.template=https://quay.io/repository/containerforge/${{ inputs.app }}?tab=tags
