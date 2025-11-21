@@ -14,7 +14,7 @@ WORKDIR /app
 
 USER root
 
-RUN mkdir -p /app/src /store && \
+RUN mkdir -p /app/src && \
     curl -fsSL "https://github.com/trueforge-org/wud-plus/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1 && \
     cd src \
@@ -33,6 +33,9 @@ ARG VERSION
 ENV WORKDIR=/app
 ENV WUD_LOG_FORMAT=text
 ENV VERSION=$VERSION
+
+RUN mkdir -p s/store && \
+    chown -R apps:apps /app /store && chmod -R 755 /app /store
 
 USER apps:apps
 
