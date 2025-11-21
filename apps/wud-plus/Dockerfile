@@ -34,6 +34,8 @@ ENV WORKDIR=/app
 ENV WUD_LOG_FORMAT=text
 ENV VERSION=$VERSION
 
+USER root
+
 RUN mkdir -p s/store && \
     chown -R apps:apps /app /store && chmod -R 755 /app /store
 
