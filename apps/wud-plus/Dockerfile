@@ -47,3 +47,4 @@ COPY --from=dependencies  /app/src/ui/dist/ /app/ui
 
 COPY --chmod=0775 . /
 
+WORKDIR /app
