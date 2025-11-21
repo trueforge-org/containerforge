@@ -23,7 +23,7 @@ RUN mkdir -p /app/src && \
     && cd /app/src/ui && npm ci && npm run build \
     && cp /app/src/app/package* /app/src && \
     cd /app/src/ && npm ci --omit=dev --omit=optional --no-audit --no-fund && \
-    chown -R apps:apps /app /store && chmod -R 755 /app /store && \
+    chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 FROM ghcr.io/trueforge-org/node:rolling
