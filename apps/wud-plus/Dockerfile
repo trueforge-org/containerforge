@@ -36,11 +36,11 @@ ENV VERSION=$VERSION
 
 USER apps:apps
 
-## Copy node_modules
-COPY --from=dependencies /app/src/node_modules /app/node_modules
-
 # Copy app
 COPY --from=dependencies  /app/src/app/ /app
+
+## Copy node_modules
+COPY --from=dependencies /app/src/node_modules /app/node_modules
 
 # Copy ui
 COPY --from=dependencies  /app/src/ui/dist/ /app/ui
