@@ -10,7 +10,7 @@ ARG VERSION
 
 ENV WORKDIR=/app
 
-RUN git clone --branch "${WATCHTOWER_VERSION}" https://github.com/containrrr/watchtower.git
+RUN git clone --branch "${VERSION}" https://github.com/containrrr/watchtower.git
 
 RUN cd watchtower && \
   GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-extldflags '-static' -X github.com/containrrr/watchtower/internal/meta.Version=$(git describe --tags)" . && \
