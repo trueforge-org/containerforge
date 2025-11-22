@@ -27,7 +27,8 @@
     // "github>trueforge-org/truecharts//.github/renovate/special/devcontainer.json5"
   ],
   "ignorePaths": [
-    "porting/**"
+    "porting/**",
+    ".mise.toml"
   ],
   "pinDigests": true,
   "rebaseWhen": "conflicted",
