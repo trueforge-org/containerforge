@@ -140,6 +140,7 @@ jobs:
             *.labels.org.opencontainers.image.vendor=TrueForge
             *.labels.org.opencontainers.image.authors=TrueForge <info@trueforge.org>
             *.labels.org.opencontainers.image.description=Container for ${{ inputs.app }} by TrueForge
+            *.labels.wud.watch=true
             *.labels.wud.watch.digest=true
             *.labels.wud.tag.include=^\d+\.\d+\.\d+(?:\.\d+)?$
             *.labels.wud.display.name=${{ inputs.app }}
