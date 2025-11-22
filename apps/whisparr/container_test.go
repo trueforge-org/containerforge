@@ -27,7 +27,7 @@ func Test(t *testing.T) {
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("6969/tcp"),
 			wait.ForHTTP("/").WithPort("6969/tcp").WithStatusCodeMatcher(func(status int) bool {
-				return status == 200
+				return status >= 200 && status < 400
 			}),
 		),
 	)

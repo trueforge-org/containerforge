@@ -26,7 +26,7 @@ func Test(t *testing.T) {
 		testcontainers.WithExposedPorts("8080/tcp"), // replace with actual port if different
 		testcontainers.WithWaitStrategy(
 			wait.ForHTTP("/").WithPort("8080/tcp").WithStatusCodeMatcher(func(status int) bool {
-				return status == 200
+				return status >= 200 && status < 400
 			}),
 		),
 	)

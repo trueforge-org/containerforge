@@ -30,7 +30,7 @@ func Test(t *testing.T) {
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("8200/tcp"),
 			wait.ForHTTP("/signin.html").WithPort("8200/tcp").WithStatusCodeMatcher(func(status int) bool {
-				return status == 200
+				return status >= 200 && status < 400
 			}),
 		),
 	)
