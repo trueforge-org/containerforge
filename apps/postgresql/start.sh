@@ -169,18 +169,19 @@ pg_setup_hba_conf() {
 }
 
 set_checksums() {
+  echo "Checking checksums setting..."
   # Determine current checksum status via exit code
+    STATUS="disabled"
   if pg_checksums --check >/dev/null 2>&1; then
     STATUS="enabled"
-  else
-    STATUS="disabled"
   fi
-  echo "Checking checksums setting..."
-  echo "Checksums enabled set to: $POSTGRES_CHECKSUMS"
-  echo "Checking DB checksum setting..."
   if [[ "$ZFS_MODE" == "true" ]]; then
     POSTGRES_CHECKSUMS="false"
   fi
+  echo "Checksums wanted set to: $POSTGRES_CHECKSUMS"
+  echo "Current Checksums set to $STATUS"
+  echo "Checking DB checksum setting..."
+
   # Enable or disable if needed
   if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
     pg_checksums --enable -P
@@ -228,7 +229,6 @@ create_additional_dbs() {
             echo "Creating database: $db"
             # You can optionally set PGUSER, PGPASSWORD, PGHOST, PGPORT before running
             createdb -U $POSTGRES_USER "$db" 2>/dev/null || echo "Database $db already exists or could not be created."
-            set_zfs_opt $db
         fi
     done
 }
