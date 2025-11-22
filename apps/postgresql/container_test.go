@@ -63,6 +63,7 @@ func Test(t *testing.T) {
 			"PREPTEST": "true",
 		}),
 		testcontainers.WithWaitStrategy(
+			wait.ForHealthCheck(),
 			wait.ForListeningPort("5432/tcp"),
 		),
 	)
