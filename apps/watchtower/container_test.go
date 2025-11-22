@@ -22,7 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithCmdArgs("/watchtower", "--health-check"),
+		testcontainers.WithCmdArgs("/app/watchtower", "--health-check"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)

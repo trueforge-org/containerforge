@@ -26,7 +26,7 @@ USER apps:apps
 # copy files from other container
 COPY --from=builder /app/watchtower/watchtower /app/watchtower
 
-HEALTHCHECK CMD [ "/watchtower", "--health-check"]
+HEALTHCHECK CMD [ "/app/watchtower", "--health-check"]
 
 COPY --chmod=0775 . /
 
