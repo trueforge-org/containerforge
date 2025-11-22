@@ -19,6 +19,8 @@ RUN cd watchtower && \
 
 FROM ghcr.io/trueforge-org/ubuntu:24.04
 
+ENV WATCHTOWER_LABEL_ENABLE=true
+
 USER apps:apps
 
 # copy files from other container

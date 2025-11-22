@@ -30,9 +30,11 @@ FROM ghcr.io/trueforge-org/node:rolling@sha256:bc0b3758205bf09f45751164affb9028d
 
 ARG VERSION
 
-ENV WORKDIR=/app
-ENV WUD_LOG_FORMAT=text
-ENV VERSION=$VERSION
+ENV WORKDIR=/app \
+    WUD_LOG_FORMAT=text \
+    VERSION=$VERSION \
+    WUD_REGISTRY_CUSTOM_TRUEFORGE_URL=https://oci.trueforge.org \
+    WUD_WATCHER_local_WATCHBYDEFAULT=false
 
 USER root
 
