@@ -2,4 +2,4 @@
 
 set -e
 
-exec /app/watchtower --http-api-metrics $@
+exec /app/watchtower
