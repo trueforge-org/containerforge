@@ -229,7 +229,6 @@ create_additional_dbs() {
             echo "Creating database: $db"
             # You can optionally set PGUSER, PGPASSWORD, PGHOST, PGPORT before running
             createdb -U $POSTGRES_USER "$db" 2>/dev/null || echo "Database $db already exists or could not be created."
-            set_zfs_opt $db
         fi
     done
 }
