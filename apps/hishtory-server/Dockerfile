@@ -22,7 +22,7 @@ RUN \
   unset GOPATH; go build -o /server -ldflags "-X main.ReleaseVersion=v0.`cat VERSION`" backend/server/server.go
 
 ## TODO: change to an actual tag when this has an actual tag.
-FROM ghcr.io/trueforge-org/postgresql-client:rolling@sha256:b407ec33f071defa776c13e6c685dd0a2820ecdc452179a90b5827a3cc1b2ce7
+FROM ghcr.io/trueforge-org/postgresql-client:rolling@sha256:99c15c699dd53fb62c0795a7313402557219ab4e29b84b6bedddf6c4c8373fba
 
 # set version label
 ARG VERSION
