@@ -28,7 +28,7 @@
   ],
   "ignorePaths": [
     "porting/**",
-    ".mise.toml"
+    "*.mise.toml*"
   ],
   "pinDigests": true,
   "rebaseWhen": "conflicted",
