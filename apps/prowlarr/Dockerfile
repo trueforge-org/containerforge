@@ -29,4 +29,4 @@ COPY . /
 USER apps:apps
 WORKDIR /config
 
-HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:${PROWLARR__SERVER__PORT}/", ]
+HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:${PROWLARR__SERVER__PORT}/" ]

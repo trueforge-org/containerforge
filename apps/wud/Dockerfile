@@ -59,4 +59,4 @@ ENV WORKDIR=/app \
 
 WORKDIR /app
 
-HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:3000/", ]
+HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:3000/" ]
