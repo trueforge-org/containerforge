@@ -20,7 +20,7 @@ RUN set -eux; \
     grep -rl 'https://theme-park.dev' . | xargs sed -i 's|https\://theme-park.dev||g'
 
 # Nginx stage
-FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:4b3a2f64d36a25792db38ecf88c54653c00a9f2e98980a61bb9b77bc71f1b1c8
+FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:d965e4482c4cc6d20f0122a38da523da102a81d01a57d0d912c1fb03b31086e0
 ENV NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE=1
 
 USER root
