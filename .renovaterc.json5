@@ -123,6 +123,10 @@
       ignoreUnstable: false,
     },
     {
+      "matchPaths": ["**/.mise.toml"],
+      "pinDigests": false
+    },
+    {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/trueforge-org/ubuntu"],
       "groupName": "ubuntu",
