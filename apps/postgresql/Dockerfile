@@ -75,5 +75,7 @@ USER apps
 
 COPY --chmod=0775 . /
 
+HEALTHCHECK CMD ["pg_isready",  "-h",  "127.0.0.1",  "-p",  "5432",  "-U",  "${PGUSER}",  "-d",  "${POSTGRES_DB}"]
+
 EXPOSE 5432
 CMD ["postgres"]
