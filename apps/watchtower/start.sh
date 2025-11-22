@@ -2,4 +2,4 @@
 
 set -e
 
-exec /app/watchtower
+exec /app/watchtower $@
