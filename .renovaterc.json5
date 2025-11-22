@@ -9,7 +9,8 @@
     "github>trueforge-org/truecharts//.github/renovate/updates/digest.json5",
     "github>trueforge-org/truecharts//.github/renovate/updates/patch.json5",
     "github>trueforge-org/truecharts//.github/renovate/updates/minor.json5",
-    "github>trueforge-org/truecharts//.github/renovate/updates/major.json5"
+    "github>trueforge-org/truecharts//.github/renovate/updates/major.json5",
+    "github>trueforge-org/truecharts//.github/renovate/kind/github-actions.json5"
   ],
   "ignorePaths": [
     "porting/**"
