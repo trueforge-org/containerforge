@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:22.20@sha256:bc0b3758205bf09f45751164affb9028ddcd246e852a1611b0468a03a2244ea9
+FROM ghcr.io/trueforge-org/node:22.20@sha256:a542ce53c1e8f0dd5791c383265f05b830b99292abca1e17cfe8b0f7fdd26650
 
 ARG VERSION
 
