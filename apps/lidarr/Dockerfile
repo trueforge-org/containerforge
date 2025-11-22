@@ -6,7 +6,8 @@ ARG VENDOR
 ARG VERSION
 
 ENV DOTNET_EnableDiagnostics=0 \
-    LIDARR__UPDATE__BRANCH=plugins
+    LIDARR__UPDATE__BRANCH=plugins \
+    LIDARR__SERVER__PORT=8686
 
 USER root
 WORKDIR /app
@@ -32,3 +33,5 @@ COPY . /
 
 USER apps:apps
 WORKDIR /config
+
+HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${LIDARR__SERVER__PORT}/"

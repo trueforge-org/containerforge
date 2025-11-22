@@ -25,6 +25,7 @@ func Test(t *testing.T) {
 		ctx, image,
 		testcontainers.WithExposedPorts("8000/tcp"),
 		testcontainers.WithWaitStrategy(
+			wait.ForHealthCheck(),
 			wait.ForHTTP("/balfolk.ics").WithPort("8000/tcp").WithStatusCodeMatcher(func(status int) bool {
 				return status >= 200 && status < 400
 			}),

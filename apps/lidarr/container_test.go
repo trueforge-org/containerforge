@@ -25,6 +25,7 @@ func Test(t *testing.T) {
 		ctx, image,
 		testcontainers.WithExposedPorts("8686/tcp"),
 		testcontainers.WithWaitStrategy(
+			wait.ForHealthCheck(),
 			wait.ForListeningPort("8686/tcp"),
 			wait.ForHTTP("/").WithPort("8686/tcp").WithStatusCodeMatcher(func(status int) bool {
 				return status >= 200 && status < 400

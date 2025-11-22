@@ -6,7 +6,8 @@ ARG VENDOR
 ARG VERSION
 
 ENV DOTNET_EnableDiagnostics=0 \
-    PROWLARR__UPDATE__BRANCH=develop
+    PROWLARR__UPDATE__BRANCH=develop \
+    PROWLARR__SERVER__PORT=9696
 
 USER root
 WORKDIR /app
@@ -27,3 +28,5 @@ COPY . /
 
 USER apps:apps
 WORKDIR /config
+
+HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${PROWLARR__SERVER__PORT}/"
