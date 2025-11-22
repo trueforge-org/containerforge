@@ -4,6 +4,8 @@ show_header() {
 cat <<EOF
 Welcome to a TrueForge ContainerForge container!
 
+If you are running into any issues, please file a support request on discord.
+
 Container Info:
   * Running as: $(id -un) (UID: $(id -u), GID: $(id -g))
   * Additional Groups: $(id -Gn) (GIDs: $(id -G))
