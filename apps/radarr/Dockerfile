@@ -6,7 +6,8 @@ ARG VENDOR
 ARG VERSION
 
 ENV DOTNET_EnableDiagnostics=0 \
-    RADARR__UPDATE__BRANCH=develop
+    RADARR__UPDATE__BRANCH=develop \
+    RADARR__SERVER__PORT=7878
 
 USER root
 WORKDIR /app
@@ -27,3 +28,5 @@ COPY . /
 
 USER apps:apps
 WORKDIR /config
+
+HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:${RADARR__SERVER__PORT}/", ]

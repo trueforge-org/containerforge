@@ -6,7 +6,8 @@ ARG VENDOR
 ARG VERSION
 
 ENV COMPlus_EnableDiagnostics=0 \
-    WHISPARR__UPDATE__BRANCH=eros
+    WHISPARR__UPDATE__BRANCH=eros \
+    WHISPARR__SERVER__PORT=6969
 
 USER root
 WORKDIR /app
@@ -27,3 +28,5 @@ COPY . /
 
 USER apps:apps
 WORKDIR /config
+
+HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:${WHISPARR__SERVER__PORT}/", ]
