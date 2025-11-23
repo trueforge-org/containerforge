@@ -33,8 +33,13 @@ if [[ -z ${PWA_APPNAME} ]]; then
     PWA_APPNAME="code-server"
 fi
 
+if [[ -z ${PORT} ]]; then
+    PORT="8443"
+fi
+
+
     exec /app/code-server/bin/code-server \
-                    --bind-addr 0.0.0.0:8443 \
+                    --bind-addr 0.0.0.0:${PORT} \
                     --user-data-dir /config/data \
                     --extensions-dir /config/extensions \
                     --disable-telemetry \
