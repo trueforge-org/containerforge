@@ -29,6 +29,7 @@ RUN add-apt-repository universe && \
         | tar xzf - -C /app/bin --strip-components=1 && \
     curl -fsSL "https://github.com/acoustid/chromaprint/releases/download/v${FPCALC_VERSION}/chromaprint-fpcalc-1.6.0-linux-${FPCALC_ARCH}.tar.gz" \
         | tar xzf - -C /usr/local/bin && \
+    ls -la /usr/local/bin && \
     printf "UpdateMethod=docker\nBranch=%s\nPackageVersion=%s\nPackageAuthor=[%s](https://github.com/%s)\n" \
         "${LIDARR__UPDATE__BRANCH}" "${VERSION}" "${VENDOR}" "${VENDOR}" > /app/package_info && \
     ln -s $(which ffprobe) /app/bin/ffprobe && \
