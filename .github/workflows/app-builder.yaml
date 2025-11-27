@@ -123,7 +123,7 @@ jobs:
           rsync -a --ignore-existing --progress ./include/ ./apps/${{ inputs.app }}/
 
       - name: Build App
-        uses: docker/bake-action@41c10f2beb4c60ac3eb05f9d48947994b7ae47e5
+        uses: docker/bake-action@5be5f02ff8819ecd3092ea6b2e6261c31774f2b4
         id: bake
         with:
           files: |
