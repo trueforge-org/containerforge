@@ -8,7 +8,7 @@ ARG VERSION
 
 ENV HOME="/config" \
     PYTHONUSERBASE="/usr/local" \
-    VENV_FOLDER="/config/.venv"
+        VENV_FOLDER="/app/.venv"
 
 USER root
 WORKDIR /app

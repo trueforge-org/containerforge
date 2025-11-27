@@ -18,7 +18,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     UV_SYSTEM_PYTHON=true \
     UV_EXTRA_INDEX_URL="https://wheel-index.linuxserver.io/ubuntu/ https://pypi.org/simple" \
     UV_INDEX_STRATEGY="unsafe-best-match" \
-    PATH=/usr/local/bin:$PATH
+    PATH=/usr/local/bin:$PATH \
+    VENV_FOLDER="/app/.venv"
 
 USER root
 
