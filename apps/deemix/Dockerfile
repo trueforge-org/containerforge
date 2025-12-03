@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/node:rolling as builder
+FROM ghcr.io/trueforge-org/node:22.20.0 as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -20,7 +20,7 @@ RUN yarn install-all
 
 RUN yarn dist-server
 
-FROM ghcr.io/trueforge-org/ubuntu
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
