@@ -130,6 +130,8 @@ check_uid_gid
 
 show_header
 
+UMASK_SET=${UMASK_SET:-002}
+umask "$UMASK_SET"
 
 shopt -s dotglob
 
