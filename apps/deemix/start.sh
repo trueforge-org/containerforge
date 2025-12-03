@@ -1,7 +1,4 @@
-UMASK_SET=${UMASK_SET:-022}
-umask "$UMASK_SET"
-
-cd /
+#!/usr/bin/env bash
 
 # Check if an alternative port was defined, set it to it or default
 if [ ! -z ${INTPORT} ]; then
