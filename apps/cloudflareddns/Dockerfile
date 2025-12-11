@@ -9,7 +9,7 @@ USER root
 WORKDIR /app
 
 USER apps:apps
-COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:61a328744a12dc0e1b15aed22ca6ea657e7a9480afafb5084e6538193aa8eba6 /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
+COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:6c258aff1991d8c7740856ec9a93722aa28852a93dbc3c2bf73e423b43b48d73 /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
 COPY . /
 
