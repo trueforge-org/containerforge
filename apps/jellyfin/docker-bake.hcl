@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=ghcr.io/jellyfin/jellyfin
   default = "10.11.3"
 }
 
