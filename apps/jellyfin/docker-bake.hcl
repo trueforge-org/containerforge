@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=jellyfin/jellyfin
-  default = "10.11.3"
+  default = "10.11.4"
 }
 
 variable "LICENSE" {
