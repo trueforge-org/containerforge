@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:be294e0b693a9c982bd5d5f14c18b7181326eb9f47f2d05c4f8a0c2cc58b6709
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:6a1f7016a76387e56144ba2467a8488c7871aed21e473006bd1cce4ea5df211e
 ARG VERSION
 
 ENV NZBGET__PORT=6789
