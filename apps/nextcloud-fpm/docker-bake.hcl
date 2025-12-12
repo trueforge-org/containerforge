@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=public.ecr.aws/docker/library/nextcloud versioning=loose
-  default = "32.0.1-fpm@sha256:1b7786935321e01a689affccb48a5845ed800184aa50c1b0c50d4aa75693e27f"
+  default = "32.0.3"
 }
 
 variable "LICENSE" {
