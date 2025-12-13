@@ -170,8 +170,7 @@ jobs:
 
   merge:
     name: Merge
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     needs: build
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
