@@ -12,6 +12,7 @@ ENV RUNNER_MANUALLY_TRAP_SIG=1 \
     HOMEBREW_NO_INSTALL_CLEANUP=1 \
     RUNNER_ALLOW_RUNASROOT="1"
 
+
 # ---------------------------
 # Step 1: Create runner user early
 # ---------------------------
