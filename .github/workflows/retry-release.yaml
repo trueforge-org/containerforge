@@ -13,7 +13,8 @@ permissions:
 jobs:
   apps:
     name: Get App Inventory
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     outputs:
       apps: ${{ steps.inventory.outputs.apps }}
     steps:
@@ -29,7 +30,8 @@ jobs:
   retry:
     if: ${{ needs.apps.outputs.apps != '[]' }}
     name: Retry Release
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     needs:
       - apps
     strategy:

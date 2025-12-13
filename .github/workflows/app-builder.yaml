@@ -17,7 +17,8 @@ on:
 jobs:
   plan:
     name: Plan
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     outputs:
       app-exists: ${{ steps.app-exists.outputs.exists }}
       platforms: ${{ steps.app-options.outputs.platforms }}
@@ -169,7 +170,8 @@ jobs:
 
   merge:
     name: Merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     needs: build
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
@@ -249,7 +251,8 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
 
       - name: Install Cosign
@@ -325,7 +328,8 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
 
       - name: Install Cosign
@@ -380,7 +384,8 @@ jobs:
     name: Test
     needs:
       - merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
@@ -432,7 +437,8 @@ jobs:
       - plan
       - attest
       - sign
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -482,7 +488,8 @@ jobs:
       - sign
       - announce
     name: Notify
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
       - if: ${{ contains(needs.*.result, 'failure') }}
         name: Checkout
