@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "2.328.0"
+  default = "2.330.0"
 }
 
 variable "BUILDX_VERSION" {
@@ -13,7 +13,7 @@ variable "BUILDX_VERSION" {
 }
 
 variable "RUNNER_CONTAINER_HOOKS_VERSION" {
-  default = "0.7.0"
+  default = "0.8.0"
 }
 
 variable "DOCKER_VERSION" {
