@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=custom.servarr-eros depName=whisparr versioning=loose
-  default = "3.0.2.1670"
+  default = "3.0.2.1680"
 }
 
 variable "LICENSE" {
