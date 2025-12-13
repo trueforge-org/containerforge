@@ -26,7 +26,7 @@ RUN curl -L https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}
 RUN .venv/bin/pip install --no-cache-dir -r requirements.txt && \
     rm requirements.txt && \
     # Remove tests and compiled Python files
-    find /app/.venv \( -type d -a -name test -o -name tests \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+    find /config/venv \( -type d -a -name test -o -name tests \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
 FROM ghcr.io/trueforge-org/python:3.13.7@sha256:be294e0b693a9c982bd5d5f14c18b7181326eb9f47f2d05c4f8a0c2cc58b6709
 
@@ -37,6 +37,6 @@ WORKDIR /app
 # Copy built app from builder
 COPY --from=builder /app /app
 
-ENV PATH="/app/.venv/bin:$PATH"
+ENV PATH="/config/venv/bin:$PATH"
 
 CMD [ "python", "-u", "/app/sidecar.py" ]

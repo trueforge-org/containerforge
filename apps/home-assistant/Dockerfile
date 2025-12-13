@@ -7,8 +7,7 @@ ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
 ARG VERSION
 
 ENV HOME="/config" \
-    PYTHONUSERBASE="/usr/local" \
-        VENV_FOLDER="/app/.venv"
+    PYTHONUSERBASE="/usr/local"
 
 USER root
 WORKDIR /app
