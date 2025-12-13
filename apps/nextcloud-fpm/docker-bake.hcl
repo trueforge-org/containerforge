@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=public.ecr.aws/docker/library/nextcloud versioning=regex:^\\d+\\.\\d+\\.\\d+-fpm$
+  // renovate: datasource=docker depName=public.ecr.aws/docker/library/nextcloud versioning=regex:^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)-fpm$
   default = "32.0.3-fpm"
 }
 
