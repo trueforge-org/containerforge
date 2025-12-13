@@ -9,8 +9,7 @@ on:
 jobs:
   prepare:
     name: Prepare
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     outputs:
       changed-files: ${{ steps.changed-files.outputs.changed_files }}
     steps:
@@ -48,8 +47,7 @@ jobs:
     name: Build Success
     needs:
       - build
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     steps:
       - name: Any jobs failed?
         if: ${{ contains(needs.*.result, 'failure') }}

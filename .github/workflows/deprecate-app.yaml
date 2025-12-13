@@ -24,8 +24,7 @@ permissions:
 jobs:
   plan:
     name: Plan (${{ inputs.app }})
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     outputs:
       pull-number: ${{ steps.pr.outputs.pull-request-number }}
     steps:
@@ -65,8 +64,7 @@ jobs:
     name: Merge (${{ inputs.app }})
     needs:
       - plan
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
@@ -92,8 +90,7 @@ jobs:
     name: Announce (${{ inputs.app }})
     needs:
       - merge
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1

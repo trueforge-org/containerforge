@@ -90,5 +90,4 @@ RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-
     && rm runner-container-hooks.zip \
     && chown -R runner:docker /home/runner/k8s
 
-
 USER runner
