@@ -9,7 +9,8 @@ ENV RUNNER_MANUALLY_TRAP_SIG=1 \
     ImageOS=ubuntu22 \
     HOMEBREW_NO_ANALYTICS=1 \
     HOMEBREW_NO_ENV_HINTS=1 \
-    HOMEBREW_NO_INSTALL_CLEANUP=1
+    HOMEBREW_NO_INSTALL_CLEANUP=1 \
+    RUNNER_ALLOW_RUNASROOT="1"
 
 # ---------------------------
 # Step 1: Create runner user early
