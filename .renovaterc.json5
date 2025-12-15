@@ -3,7 +3,7 @@
   extends: [
     'github>trueforge-org/renovate-config',
     'github>home-operations/renovate-config:autoMergeLabels.json5',
-    'github>home-operations/renovate-config:ContainerForge.json5',
+    'github>home-operations/renovate-config:containerForge.json5',
   ],
   ignorePaths: [
     'porting/**',
