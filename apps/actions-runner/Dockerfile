@@ -82,7 +82,7 @@ RUN set -eux; \
 # ---------------------------
 RUN curl -fsSL -o runner.tar.gz "https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-${TARGETOS}-${RUNNER_ARCH}-${VERSION}.tar.gz" \
     && tar xzf runner.tar.gz && rm runner.tar.gz \
-    && chown -R runner:docker /home/runner
+    && chown -R apps:docker /home/runner
 
 # ---------------------------
 # Step 4: Download and extract container hooks
@@ -90,6 +90,6 @@ RUN curl -fsSL -o runner.tar.gz "https://github.com/actions/runner/releases/down
 RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-container-hooks/releases/download/v${RUNNER_CONTAINER_HOOKS_VERSION}/actions-runner-hooks-k8s-${RUNNER_CONTAINER_HOOKS_VERSION}.zip" \
     && unzip runner-container-hooks.zip -d ./k8s \
     && rm runner-container-hooks.zip \
-    && chown -R runner:docker /home/runner/k8s
+    && chown -R apps:docker /home/runner/k8s
 
 USER apps
