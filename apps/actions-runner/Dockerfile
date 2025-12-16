@@ -16,12 +16,14 @@ ENV RUNNER_MANUALLY_TRAP_SIG=1 \
 # ---------------------------
 # Step 1: Create runner user early
 # ---------------------------
-RUN adduser --disabled-password --gecos "" --uid 1001 runner \
-    && groupadd docker --gid 123 \
-    && usermod -aG sudo runner \
-    && usermod -aG docker runner \
+RUN groupadd docker --gid 123 \
+    && usermod -aG sudo apps \
+    && usermod -aG docker apps \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
-    && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
+    && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers \
+    mkdir -p /home/runner /config/helm /go \
+    chown -R apps:docker /home/runner /config/helm /go \
+    chmod -R 777 /home/runner /config/helm /go
 
 WORKDIR /home/runner
 
@@ -90,4 +92,4 @@ RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-
     && rm runner-container-hooks.zip \
     && chown -R runner:docker /home/runner/k8s
 
-USER runner
+USER apps
