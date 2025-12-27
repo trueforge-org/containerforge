@@ -10,7 +10,7 @@ ARG TARGETARCH
 COPY --from=go /usr/local/go /usr/local/go
 
 ENV GOTOOLCHAIN=local
-ENV GOPATH=/go
+ENV GOPATH=/config/go
 ENV PATH="/usr/local/go/bin:${PATH}"
 
 LABEL dev.containers.features="common"

@@ -34,7 +34,7 @@ USER root
 
 ARG VERSION
 ENV GOTOOLCHAIN=local
-ENV GOPATH=/go
+ENV GOPATH=/config/go
 ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 COPY --from=build --link /target/ /
