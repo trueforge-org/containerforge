@@ -10,7 +10,8 @@ ENV RUNNER_MANUALLY_TRAP_SIG=1 \
     HOMEBREW_NO_ANALYTICS=1 \
     HOMEBREW_NO_ENV_HINTS=1 \
     HOMEBREW_NO_INSTALL_CLEANUP=1 \
-    RUNNER_ALLOW_RUNASROOT="1"
+    RUNNER_ALLOW_RUNASROOT="1" \
+    GOPATH="/tmp/go"
 
 
 # ---------------------------
@@ -21,9 +22,9 @@ RUN groupadd docker --gid 123 \
     && usermod -aG docker apps \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
     && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers \
-    mkdir -p /home/runner /config/helm /go \
-    chown -R apps:docker /home/runner /config/helm /go \
-    chmod -R 777 /home/runner /config/helm /go
+    mkdir -p /home/runner /config/helm /go /config/go /tmp/go \
+    chown -R apps:docker /home/runner /config/helm /go /tmp/go /config/go \
+    chmod -R 777 /home/runner /config/helm /go /tmp/go /config/go
 
 WORKDIR /home/runner
 
