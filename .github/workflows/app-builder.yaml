@@ -24,7 +24,7 @@ jobs:
       platforms: ${{ steps.app-options.outputs.platforms }}
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@064fe7f3312418007dea2b49a19844a9ee378f49
         with:
           persist-credentials: false
 
@@ -85,7 +85,7 @@ jobs:
     runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@064fe7f3312418007dea2b49a19844a9ee378f49
         with:
           persist-credentials: false
 
@@ -176,7 +176,7 @@ jobs:
       digest: ${{ steps.digest.outputs.digest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@064fe7f3312418007dea2b49a19844a9ee378f49
         with:
           persist-credentials: false
 
@@ -384,7 +384,7 @@ jobs:
       group: default
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@064fe7f3312418007dea2b49a19844a9ee378f49
         with:
           persist-credentials: false
 
