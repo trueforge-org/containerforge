@@ -15,7 +15,7 @@ variable "NEO_VER" {
 
 variable "IGC2_VER" {
   // renovate: datasource=github-releases depName=intel/intel-graphics-compiler
-  default = "2.22.2"
+  default = "2.27.10"
 }
 
 // Fixed Legacy value
