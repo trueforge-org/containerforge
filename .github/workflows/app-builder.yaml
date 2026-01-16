@@ -270,13 +270,13 @@ jobs:
           password: ${{ secrets.QUAY_CF_TOKEN }}
 
       - name: Upload Dependency Snapshot to GHCR
-        uses: anchore/sbom-action@0b82b0b1a22399a1c542d4d656f70cd903571b5c
+        uses: anchore/sbom-action@3363a57fa0e6fd07bdd197a3a42a5b25b77468f9
         with:
           dependency-snapshot: true
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Upload Dependency Snapshot to Quay
-        uses: anchore/sbom-action@0b82b0b1a22399a1c542d4d656f70cd903571b5c
+        uses: anchore/sbom-action@3363a57fa0e6fd07bdd197a3a42a5b25b77468f9
         with:
           dependency-snapshot: true
           image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
