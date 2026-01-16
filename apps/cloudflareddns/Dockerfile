@@ -9,7 +9,7 @@ USER root
 WORKDIR /app
 
 USER apps:apps
-COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:46ce9b960c0a2610ce305724b726a8a73cf336944e3d598f7a82abaf6bc2ca68 /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
+COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:d63254aab1ee3d68f9e4d2fa094032489235faaf0d7b8524e3c1ebf62c7e9dcb /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
 # Fix shebang since container does not use s6-overlay
 RUN sed -i 's|#!/command/with-contenv bash|#!/usr/bin/env bash|g' /app/cloudflare-ddns.sh
