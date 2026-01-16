@@ -1,5 +1,5 @@
 ## TODO: set version tag
-FROM ghcr.io/trueforge-org/java17:rolling@sha256:cbdc423534467dddd05869dfe0852b298ee3058f2287878355f2d7729a2b62f4
+FROM ghcr.io/trueforge-org/java17:rolling@sha256:446408b55ab6801b37df9958e9be8f2db6e162311bbe64911996e32ba0e5671e
 
 # set version label
 ARG VERSION
