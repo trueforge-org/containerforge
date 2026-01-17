@@ -30,7 +30,7 @@ RUN add-apt-repository universe && \
     printf "UpdateMethod=docker\nBranch=%s\nPackageVersion=%s\nPackageAuthor=[%s](https://github.com/%s)\n" \
         "${LIDARR__UPDATE__BRANCH}" "${VERSION}" "${VENDOR}" "${VENDOR}" > /app/package_info && \
     ln -s $(which ffprobe) /app/bin/ffprobe && \
-    chown -R apps:apps /app && chmod -R 755 /app && \
+    chown -R apps:apps /app && chmod -R 755 /app
 
 COPY . /
 
