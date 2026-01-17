@@ -8,6 +8,11 @@ ARG VERSION
 USER root
 WORKDIR /app
 
+# Install dig
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends dnsutils \
+    && rm -rf /var/lib/apt/lists/*
+
 USER apps:apps
 COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:0360fc2d81efb9872d9b78ccd8b6124c57c751ddbc27a0afed583c5e06048679 /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
