@@ -184,6 +184,7 @@ jobs:
     name: Merge
     runs-on: ubuntu-latest
     needs: build
+    if: ${{ github.event.pull_request == null || github.event.pull_request.head.repo.full_name == github.repository }}
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
     steps:
