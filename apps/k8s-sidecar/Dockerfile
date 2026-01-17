@@ -18,15 +18,15 @@ RUN python -m venv .venv && .venv/bin/pip install --no-cache-dir -U pip setuptoo
 ENV RELEASE_URL="https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz"
 RUN curl -L https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz -o release.tar.gz && \
     mkdir src_temp && \
-    tar -xzf release.tar.gz -C src_temp k8s-sidecar-1.30.10/src && \
-    cp -r src_temp/k8s-sidecar-1.30.10/src/* /app/ && \
+    tar -xzf release.tar.gz -C src_temp k8s-sidecar-${VERSION}/src && \
+    cp -r src_temp/k8s-sidecar-${VERSION}/src/* /app/ && \
     rm -rf release.tar.gz src_temp
 
 # Install Python dependencies
 RUN .venv/bin/pip install --no-cache-dir -r requirements.txt && \
     rm requirements.txt && \
     # Remove tests and compiled Python files
-    find /config/venv \( -type d -a -name test -o -name tests \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+    find .venv \( -type d -name test -o -name tests \) -o \( -type f -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
 FROM ghcr.io/trueforge-org/python:3.13.7@sha256:cbb27d8be6746edc1ba1b6abc502a3ce311948e4e9025c73b7dee50c6a1bbd0d
 
