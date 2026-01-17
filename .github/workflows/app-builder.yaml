@@ -158,7 +158,6 @@ jobs:
             *.labels.wud.display.name=${{ inputs.app }}
             *.labels.com.centurylinklabs.watchtower.enable=true
             *.labels.wud.link.template=https://quay.io/repository/containerforge/${{ inputs.app }}?tab=tags
-            # Conditionally push based on fork PR
             *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }},push=${{ env.PUSH }},push-by-digest=true,name-canonical=true,compression=zstd,force-compression=true
             *.platform=${{ matrix.platform }}
             *.tags=
