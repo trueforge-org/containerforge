@@ -40,6 +40,7 @@ RUN curl -fsSL -o /tmp/app.zip "https://github.com/morpheus65535/bazarr/releases
     && pip uninstall --yes uv \
     && rm -rf /root/.cache /root/.cargo /tmp/* /app/bin/bin
 
+
 # Copy local files
 COPY . /
 
