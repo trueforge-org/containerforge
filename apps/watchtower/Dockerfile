@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:ef064baf106f16df6db5b38fe79ae8d3b664d126f9e3308118e470f30c31c2bb AS builder
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:fe43916cf50e8a401601eb0070b46951f32fc97c7e4ded38ce58c70d7b923362 AS builder
 
 USER root
 
