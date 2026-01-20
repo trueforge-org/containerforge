@@ -21,6 +21,6 @@ RUN set -eux; \
     rm -rf /tmp/hytale.zip
 
 # Copy application files with correct ownership
-COPY --chown=apps:apps . /app
+COPY . /
 
 USER apps:apps
