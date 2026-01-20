@@ -7,10 +7,14 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-# Ensure unzip exists (safe even if already installed)
+# Ensure unzip & rsync exists (safe even if already installed)
 RUN set -eux; \
-    command -v unzip >/dev/null 2>&1 || \
-    (apt-get update && apt-get install -y --no-install-recommends unzip && rm -rf /var/lib/apt/lists/*)
+    command -v unzip >/dev/null 2>&1 || command -v rsync >/dev/null 2>&1 || ( \
+        apt-get update && \
+        apt-get install -y --no-install-recommends unzip rsync && \
+        rm -rf /var/lib/apt/lists/* \
+    )
+
 
 # Download Hytale Downloader
 RUN set -eux; \
