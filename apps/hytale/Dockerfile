@@ -9,9 +9,12 @@ WORKDIR /app
 
 # Ensure unzip & rsync exists (safe even if already installed)
 RUN set -eux; \
-    command -v unzip >/dev/null 2>&1 || command -v rsync >/dev/null 2>&1 || ( \
+    missing=""; \
+    command -v unzip >/dev/null 2>&1 || missing="$missing unzip"; \
+    command -v rsync >/dev/null 2>&1 || missing="$missing rsync"; \
+    [ -n "$missing" ] && ( \
         apt-get update && \
-        apt-get install -y --no-install-recommends unzip rsync && \
+        apt-get install -y --no-install-recommends $missing && \
         rm -rf /var/lib/apt/lists/* \
     )
 
