@@ -99,5 +99,5 @@ fi
 echo "[INFO] Starting Hytale server..."
 exec java $HYTALE_JAVA_ARGS -XX:AOTCache=HytaleServer.aot -jar HytaleServer.jar \
 	$SERVER_ARGS \
-	--bind $HYTALE_PORT \
+	--bind 0.0.0.0:$HYTALE_PORT \
 	$HYTALE_EXTRA_ARGS
