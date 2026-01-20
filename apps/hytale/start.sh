@@ -17,6 +17,7 @@ HYTALE_BACKUP_ENALBED=${HYTALE_BACKUP_ENABLED:-false}
 HYTALE_BACKUP_DIR=${HYTALE_BACKUP_DIR:-/app/backups}
 HYTALE_BACKUP_FREQ=${HYTALE_BACKUP_FREQ:-30}
 HYTALE_EXTRA_ARGS=${HYTALE_EXTRA_ARGS:-""}
+HYTALE_JAVA_ARGS=${HYTALE_JAVA_ARGS:-""}
 
 # ----------------------------------------
 # Cleanup any leftover zip files before starting
@@ -55,7 +56,7 @@ if [ -d "$SERVER_DIR" ]; then
     echo "[INFO] Moving files from $SERVER_DIR to /app"
     # -a: archive (preserve permissions), -v: verbose, --remove-source-files: delete originals
     # --ignore-existing: optional, we want to overwrite, so omit it
-    rsync -a --remove-source-files "$SERVER_DIR"/ /app/
+    rsync -r --remove-source-files "$SERVER_DIR"/ /app/
     # Remove empty directories left in /Server
     find "$SERVER_DIR" -type d -empty -delete
     rm -rf "$SERVER_DIR"
@@ -96,7 +97,7 @@ fi
 # Start server
 # ----------------------------------------
 echo "[INFO] Starting Hytale server..."
-exec java -XX:AOTCache=HytaleServer.aot -jar HytaleServer.jar \
+exec java $HYTALE_JAVA_ARGS -XX:AOTCache=HytaleServer.aot -jar HytaleServer.jar \
 	$SERVER_ARGS \
-	--bind HYTALE_PORT \
+	--bind $HYTALE_PORT \
 	$HYTALE_EXTRA_ARGS
