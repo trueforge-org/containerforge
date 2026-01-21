@@ -15,7 +15,7 @@ RUN wget -O - "https://github.com/caddyserver/xcaddy/releases/download/v${XCADDY
         --with github.com/caddy-dns/cloudflare && \
     chmod 755 "/caddy-bin"
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:afda48b06fbfbd284a91a99ec069d72accfe94ee427ff64604811edc5b049667
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5e17d35aea5a235316958f3cb7d6c4ea7fb2026199c797d66e4a2b91eef2db51
 
 USER apps:apps
 
