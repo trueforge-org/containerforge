@@ -10,7 +10,7 @@ variable "VERSION" {
 
 variable "NEO_VER" {
   // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
-  default = "25.48.36300.8"
+  default = "2018ww19-010806"
 }
 
 variable "IGC2_VER" {
