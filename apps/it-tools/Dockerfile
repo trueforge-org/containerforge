@@ -14,8 +14,6 @@ RUN npm install -g corepack@latest \
 
 FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:648e1c33d1d31bd235f783976375783d2db10399f66250b6b6ab4f9b3d2efcc3
 USER root
-RUN mkdir -p /tmp/nginx-temp \
-    && chown -R 568:568 /tmp/nginx-temp
 COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html
 USER apps:apps
 WORKDIR /usr/share/nginx/html
