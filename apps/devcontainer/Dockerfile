@@ -201,14 +201,18 @@ RUN printf '%s\n' \
     "set fish_greeting" \
     > /etc/fish/config.fish
 
+# Install fisher plugins
+RUN /usr/bin/fish -c "
+    curl -sL https://git.io/fisher | source; \
+    fisher install jorgebucaran/fisher; \
+    fisher install decors/fish-colored-man; \
+    fisher install edc/bass; \
+    fisher install jorgebucaran/autopair.fish; \
+    fisher install nickeb96/puffer-fish; \
+    fisher install PatrickF1/fzf.fish
+    "
+
 # Install kubectl plugins via krew
 RUN krew install pv-mounter \
     && krew install cnpg \
     && krew install df-pv
-
-# Direnv whitelist
-RUN mkdir -p /root/.config/direnv && \
-    tee /root/.config/direnv/direnv.toml > /dev/null <<EOF
-[whitelist]
-prefix = [ "/workspaces" ]
-EOF
