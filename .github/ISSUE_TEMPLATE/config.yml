@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Need help?
+    url: https://discord.gg/tVsPTHWTtr
+    about: Ask our support staff on Discord!
+  - name: Not sure where to start?
+    url: https://trueforge.org/
+    about: Start by reading the quick-start guides!

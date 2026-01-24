@@ -1,0 +1,48 @@
+name: ⚙️ Enhancement / improvement
+description: Suggest an improvement to UX, UI, or site behavior
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: improvement
+    attributes:
+      label: What should be improved?
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - label: Improves usability
+        - label: Improves performance
+        - label: Improves accessibility
+        - label: Improves maintainability
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: I've read and agree with the following
+      options:
+        - label: I've checked all open and closed issues and my issue is not there.
+          required: true

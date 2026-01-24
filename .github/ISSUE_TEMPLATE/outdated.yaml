@@ -1,0 +1,61 @@
+---
+name: "🛡️ Outdated Base Software"
+description: "Report outdated base images, OS packages, or other dependencies that need updating."
+labels: ["outdated"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Description**
+        <!-- Describe which base software, OS, or dependency is outdated. Include the container/image affected. -->
+    validations:
+      required: true
+
+
+  - type: markdown
+    attributes:
+      value: |
+        **Current Version**
+        <!-- Provide the current version of the base image, OS, or dependency -->
+    validations:
+      required: true
+
+
+  - type: markdown
+    attributes:
+      value: |
+        **Suggested Update**
+        <!-- If known, provide the newer version or fix -->
+
+  - type: markdown
+    attributes:
+      value: |
+        **Impact**
+        <!-- Explain why updating is important (security, compatibility, performance, etc.) -->
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Environment / Container Details**
+        - Container/Image: 
+        - Tag/Version:
+        - OS/Platform:
+        - Docker Version:
+        - Other relevant info
+
+  - type: markdown
+    attributes:
+      value: |
+        **Additional Notes**
+        <!-- Any extra information, links to CVEs, advisories, or reference docs -->
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: I've read and agree with the following
+      options:
+        - label: I've checked all open and closed issues and my issue is not there.
+          required: true
+        - label: I confirm that this image is outdated for at least 1 month.
+          required: true

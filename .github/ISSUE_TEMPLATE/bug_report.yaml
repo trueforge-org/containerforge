@@ -1,0 +1,57 @@
+---
+name: "🐛 Bug Report"
+description: "Report an issue with a container/image build, Dockerfile, or runtime behavior."
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Description**
+        <!-- Describe the bug clearly. Include which container/image is affected. -->
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Steps to Reproduce**
+        <!-- Step by step instructions to reproduce the issue -->
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Expected Behavior**
+        <!-- What you expected to happen -->
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Actual Behavior**
+        <!-- What actually happened -->
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Environment**
+        - Container/Image: 
+        - Tag/Version:
+        - OS/Platform:
+        - Docker Version/General Runtime Information:
+        - Other details if applicable
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: I've read and agree with the following
+      options:
+        - label: I've checked all open and closed issues and my issue is not there.
+          required: true
