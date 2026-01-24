@@ -187,6 +187,7 @@ RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosc
 # Fish hooks, aliases and fish promt
 RUN printf '%s\n' \
     "if status is-interactive" \
+    "set -x DIRENV_ALLOW_ROOT 1" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
