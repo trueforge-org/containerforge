@@ -202,15 +202,13 @@ RUN printf '%s\n' \
     > /etc/fish/config.fish
 
 # Install fisher plugins
-RUN /usr/bin/fish -c "
-    curl -sL https://git.io/fisher | source; \
+RUN /usr/bin/fish -c "curl -sL https://git.io/fisher | source; \
     fisher install jorgebucaran/fisher; \
     fisher install decors/fish-colored-man; \
     fisher install edc/bass; \
     fisher install jorgebucaran/autopair.fish; \
     fisher install nickeb96/puffer-fish; \
-    fisher install PatrickF1/fzf.fish
-    "
+    fisher install PatrickF1/fzf.fish"
 
 # Install kubectl plugins via krew
 RUN krew install pv-mounter \
