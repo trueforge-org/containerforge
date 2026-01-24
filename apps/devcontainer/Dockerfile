@@ -198,9 +198,9 @@ RUN printf '%s\n' \
     > /etc/fish/config.fish
 
 # Install kubectl plugins via krew
-RUN kubectl krew install pv-mounter \
-    && kubectl krew install cnpg \
-    && kubectl krew install df-pv
+RUN krew install pv-mounter \
+    && krew install cnpg \
+    && krew install df-pv
 
 # Direnv whitelist
 RUN mkdir -p /root/.config/direnv && \
