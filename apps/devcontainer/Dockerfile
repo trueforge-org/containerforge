@@ -217,3 +217,4 @@ EOF
 RUN groupadd -r vscode && useradd -m -r -g vscode vscode;\
     chown -R vscode:vscode /home/vscode/ && chmod -R 755 /home/vscode/
 
+USER vscode
