@@ -4,54 +4,50 @@ description: "Report an issue with a container/image build, Dockerfile, or runti
 title: "[BUG] "
 labels: ["bug"]
 body:
-  - type: markdown
+  - type: textarea
+    id: description
     attributes:
-      value: |
-        **Description**
-        <!-- Describe the bug clearly. Include which container/image is affected. -->
-    validations:
+      label: "Description"
+      description: "Describe the bug clearly. Include which container/image is affected."
+      placeholder: "e.g., The container fails to start when using image xyz:1.0"
       required: true
 
-  - type: markdown
+  - type: textarea
+    id: steps_to_reproduce
     attributes:
-      value: |
-        **Steps to Reproduce**
-        <!-- Step by step instructions to reproduce the issue -->
-    validations:
+      label: "Steps to Reproduce"
+      description: "Step by step instructions to reproduce the issue"
+      placeholder: "1. docker run xyz:1.0\n2. Observe logs"
       required: true
 
-  - type: markdown
+  - type: textarea
+    id: expected_behavior
     attributes:
-      value: |
-        **Expected Behavior**
-        <!-- What you expected to happen -->
-    validations:
+      label: "Expected Behavior"
+      description: "What you expected to happen"
+      placeholder: "The container should start successfully"
       required: true
 
-  - type: markdown
+  - type: textarea
+    id: actual_behavior
     attributes:
-      value: |
-        **Actual Behavior**
-        <!-- What actually happened -->
-    validations:
+      label: "Actual Behavior"
+      description: "What actually happened"
+      placeholder: "The container crashes with exit code 1"
       required: true
 
-  - type: markdown
+  - type: textarea
+    id: environment
     attributes:
-      value: |
-        **Environment**
-        - Container/Image: 
-        - Tag/Version:
-        - OS/Platform:
-        - Docker Version/General Runtime Information:
-        - Other details if applicable
-    validations:
+      label: "Environment"
+      description: "Container/image, tag, OS, Docker version, and other relevant info"
+      placeholder: "- Container/Image: xyz\n- Tag/Version: 1.0\n- OS: Ubuntu 22.04\n- Docker Version: 24.0"
       required: true
 
   - type: checkboxes
     id: terms
     attributes:
-      label: I've read and agree with the following
+      label: "I've read and agree with the following"
       options:
-        - label: I've checked all open and closed issues and my issue is not there.
+        - label: "I've checked all open and closed issues and my issue is not there."
           required: true
