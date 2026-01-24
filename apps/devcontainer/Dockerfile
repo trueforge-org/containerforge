@@ -223,5 +223,3 @@ EOF
 # Fix permissions for devcontainer user
 RUN chown -R vscode:vscode /home/vscode/
 RUN chmod -R 755 /home/vscode/
-
-USER vscode
