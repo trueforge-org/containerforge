@@ -92,7 +92,6 @@ ARG XARCH=${TARGETARCH/amd64/x86_64}
 ARG AARCH=${TARGETARCH/arm64/aarch64}
 ARG AARCH=${TARGETARCH/amd64/x86_64}
 
-
 # Versioned download of Kubernetes tools (no duplicates)
 RUN set -eux; \
     mkdir -p /tools/bin; \
@@ -162,15 +161,12 @@ RUN set -eux; \
 
 ENV PATH="/tools/bin:${PATH}"
 
-
-
 # Install homebrew
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
       mkdir -p /usr/local/Homebrew && \
       curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C /usr/local/Homebrew && \
       ln -s /usr/local/Homebrew/bin/brew /usr/local/bin/brew; \
     fi
-
 
 # Create Fish config directories
 RUN mkdir -p /root/.config/fish/completions \
@@ -186,7 +182,8 @@ RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosc
     stern --completion fish > /root/.config/fish/completions/stern.fish || true && \
     yq shell-completion fish > /root/.config/fish/completions/yq.fish || true
 
-# Fish hooks, aliases and fish promt
+# Fish hooks, aliases and fish promt -> Needs to be done in one file in /etc/fish/config.fish
+# Otherwise root won't pick it up
 RUN printf '%s\n' \
     "if status is-interactive" \
     "    set -x KREW_ROOT $HOME/.krew" \
