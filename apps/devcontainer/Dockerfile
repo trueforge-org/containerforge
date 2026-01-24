@@ -1,7 +1,7 @@
 FROM ghcr.io/trueforge-org/golang:1.25.1@sha256:51c610afee97a366fb99ce3f80f69bbbb6b14838430045d742cb03a83d8624e3 AS go
 
 # hadolint ignore=DL3007
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:3664bd10fe22328f1b7d6d1002a074b6bbfc78b7688200388230f49190d622e2
 
 ARG VERSION
 ARG TARGETARCH
@@ -16,8 +16,6 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 LABEL dev.containers.features="common"
 
 USER root
-
-RUN bash
 
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
@@ -34,7 +32,7 @@ RUN apt-get update && \
         zstd \
         && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    
+
 # Install dependencies and GitHub CLI
 RUN apt-get update && \
     apt-get install -y curl gnupg lsb-release && \
@@ -172,49 +170,41 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
     fi
 
 
-# Create the completions and conf.d directories explicitly
-RUN mkdir -p /home/vscode/.config/fish/completions && \
-    mkdir -p /home/vscode/.config/fish/conf.d
+# Create Fish config directories
+RUN mkdir -p /root/.config/fish/completions \
+             /root/.config/fish/conf.d
 
 # Add completions only if the command exists
 RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl; do \
       if command -v "$tool" >/dev/null 2>&1; then \
-        mkdir -p /home/vscode/.config/fish/completions && \
-        $tool completion fish > "/home/vscode/.config/fish/completions/${tool}.fish" || true; \
+        $tool completion fish > "/root/.config/fish/completions/${tool}.fish" || true; \
       fi; \
     done && \
-    gh completion --shell fish > /home/vscode/.config/fish/completions/gh.fish || true && \
-    stern --completion fish > /home/vscode/.config/fish/completions/stern.fish || true && \
-    yq shell-completion fish > /home/vscode/.config/fish/completions/yq.fish || true
+    gh completion --shell fish > /root/.config/fish/completions/gh.fish || true && \
+    stern --completion fish > /root/.config/fish/completions/stern.fish || true && \
+    yq shell-completion fish > /root/.config/fish/completions/yq.fish || true
 
 # Fish hooks
-RUN mkdir -p /home/vscode/.config/fish/conf.d && \
-    printf '%s\n' \
+RUN printf '%s\n' \
     "if status is-interactive" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
-    > /home/vscode/.config/fish/conf.d/hooks.fish
+    > /root/.config/fish/conf.d/hooks.fish
 
-# Add aliases to fish config
-RUN mkdir -p /home/vscode/.config/fish/conf.d && \
-  printf '%s\n' \
-  "alias kubectl kubecolor" \
-  "alias k kubectl" \
-  "alias task go-task" \
-  > /home/vscode/.config/fish/conf.d/aliases.fish
+# Fish aliases
+RUN printf '%s\n' \
+    "alias kubectl kubecolor" \
+    "alias k kubectl" \
+    "alias task go-task" \
+    > /root/.config/fish/conf.d/aliases.fish
 
 # Custom fish prompt
-RUN mkdir -p /home/vscode/.config/fish/conf.d && \
-    echo "set fish_greeting" > /home/vscode/.config/fish/conf.d/fish_greeting.fish
+RUN echo "set fish_greeting" > /root/.config/fish/conf.d/fish_greeting.fish
 
-# Setup direnv whitelist
-RUN mkdir -p /home/vscode/.config/direnv && \
-  tee /home/vscode/.config/direnv/direnv.toml > /dev/null <<EOF
+# Direnv whitelist
+RUN mkdir -p /root/.config/direnv && \
+    tee /root/.config/direnv/direnv.toml > /dev/null <<EOF
 [whitelist]
 prefix = [ "/workspaces" ]
 EOF
-
-# Fix permissions for devcontainer user
-RUN chown -R vscode:vscode /home/vscode/
-RUN chmod -R 755 /home/vscode/
