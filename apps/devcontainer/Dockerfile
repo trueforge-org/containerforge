@@ -196,6 +196,11 @@ RUN printf '%s\n' \
     "set fish_greeting" \
     > /etc/fish/config.fish
 
+# Install kubectl plugins via krew
+RUN kubectl krew install pv-mounter \
+    && kubectl krew install cnpg \
+    && kubectl krew install df-pv
+
 # Direnv whitelist
 RUN mkdir -p /root/.config/direnv && \
     tee /root/.config/direnv/direnv.toml > /dev/null <<EOF
