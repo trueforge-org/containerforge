@@ -20,15 +20,26 @@ USER root
 # Create user first
 RUN groupadd -r vscode && useradd -m -r -g vscode vscode
 
-# hadolint ignore=DL3008,DL3015,SC2086,SC2155
-RUN apk update && \
-  apk --no-cache add \
-    age bash bind-tools ca-certificates curl direnv fish fzf \
-    gettext git github-cli helm iputils jq k9s kubectl kustomize \
-    python3 py3-pip moreutils openssh-client openssl starship yq \
-    sshfs libc6-compat fuse && \
-  rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+# Ensure fish is the default shell
+RUN chsh -s /usr/bin/fish vscode
+ENV SHELL=/usr/bin/fish
 
+# Core dependencies (duplicates removed)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        age bind9-dnsutils direnv fish fzf \
+        gettext git gh iputils-ping \
+        moreutils openssh-client openssl \
+        sshfs fuse3 sq webp \
+        git \
+        gh \
+        unzip \
+        jo \
+        moreutils \
+        zstd \
+        && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    
 # Install dependencies and GitHub CLI
 RUN apt-get update && \
     apt-get install -y curl gnupg lsb-release && \
@@ -212,9 +223,5 @@ EOF
 # Fix permissions for devcontainer user
 RUN chown -R vscode:vscode /home/vscode/
 RUN chmod -R 755 /home/vscode/
-
-# Ensure fish is the default shell
-RUN chsh -s /usr/bin/fish vscode
-ENV SHELL=/usr/bin/fish
 
 USER vscode
