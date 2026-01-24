@@ -162,6 +162,8 @@ RUN set -eux; \
 
 ENV PATH="/tools/bin:${PATH}"
 
+
+
 # Install homebrew
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
       mkdir -p /usr/local/Homebrew && \
@@ -187,7 +189,9 @@ RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosc
 # Fish hooks, aliases and fish promt
 RUN printf '%s\n' \
     "if status is-interactive" \
-    "set -x DIRENV_ALLOW_ROOT 1" \
+    "    set -x KREW_ROOT $HOME/.krew" \
+    "    set -x PATH $KREW_ROOT/bin $PATH" \
+    "    direnv allow /workspaces/talos" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
