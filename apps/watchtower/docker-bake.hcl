@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=containerrr/watchtower
+  // renovate: datasource=github-releases depName=containrrr/watchtower
   default = "v1.7.1"
 }
 
