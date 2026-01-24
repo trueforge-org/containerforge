@@ -17,13 +17,6 @@ LABEL dev.containers.features="common"
 
 USER root
 
-# Create user first
-RUN groupadd -r vscode && useradd -m -r -g vscode vscode
-
-# Ensure fish is the default shell
-RUN chsh -s /usr/bin/fish vscode
-ENV SHELL=/usr/bin/fish
-
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
