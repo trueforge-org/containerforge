@@ -170,13 +170,14 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
     fi
 
 
-# Create Fish config directories
-RUN mkdir -p /home/vscode/.config/fish/completions \
-             /home/vscode/.config/fish/conf.d
+# Create the completions and conf.d directories explicitly
+RUN mkdir -p /home/vscode/.config/fish/completions && \
+    mkdir -p /home/vscode/.config/fish/conf.d
 
 # Add completions only if the command exists
 RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl; do \
       if command -v "$tool" >/dev/null 2>&1; then \
+        mkdir -p /home/vscode/.config/fish/completions && \
         $tool completion fish > "/home/vscode/.config/fish/completions/${tool}.fish" || true; \
       fi; \
     done && \
@@ -185,31 +186,34 @@ RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosc
     yq shell-completion fish > /home/vscode/.config/fish/completions/yq.fish || true
 
 # Fish hooks
-RUN printf '%s\n' \
+RUN mkdir -p /home/vscode/.config/fish/conf.d && \
+    printf '%s\n' \
     "if status is-interactive" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
     > /home/vscode/.config/fish/conf.d/hooks.fish
 
-# Fish aliases
-RUN printf '%s\n' \
-    "alias kubectl kubecolor" \
-    "alias k kubectl" \
-    "alias task go-task" \
-    > /home/vscode/.config/fish/conf.d/aliases.fish
+# Add aliases to fish config
+RUN mkdir -p /home/vscode/.config/fish/conf.d && \
+  printf '%s\n' \
+  "alias kubectl kubecolor" \
+  "alias k kubectl" \
+  "alias task go-task" \
+  > /home/vscode/.config/fish/conf.d/aliases.fish
 
 # Custom fish prompt
-RUN echo "set fish_greeting" > /home/vscode/.config/fish/conf.d/fish_greeting.fish
+RUN mkdir -p /home/vscode/.config/fish/conf.d && \
+    echo "set fish_greeting" > /home/vscode/.config/fish/conf.d/fish_greeting.fish
 
-# Direnv whitelist
+# Setup direnv whitelist
 RUN mkdir -p /home/vscode/.config/direnv && \
-    tee /home/vscode/.config/direnv/direnv.toml > /dev/null <<EOF
+  tee /home/vscode/.config/direnv/direnv.toml > /dev/null <<EOF
 [whitelist]
 prefix = [ "/workspaces" ]
 EOF
 
 # Fix permissions for devcontainer user
-RUN groupadd -r vscode && useradd -m -r -g vscode vscode;\
-    chown -R vscode:vscode /home/vscode/ && chmod -R 755 /home/vscode/
+RUN chown -R vscode:vscode /home/vscode/
+RUN chmod -R 755 /home/vscode/
 
