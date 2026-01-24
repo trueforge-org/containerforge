@@ -184,23 +184,17 @@ RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosc
     stern --completion fish > /root/.config/fish/completions/stern.fish || true && \
     yq shell-completion fish > /root/.config/fish/completions/yq.fish || true
 
-# Fish hooks
+# Fish hooks, aliases and fish promt
 RUN printf '%s\n' \
     "if status is-interactive" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
-    > /root/.config/fish/conf.d/hooks.fish
-
-# Fish aliases
-RUN printf '%s\n' \
     "alias kubectl kubecolor" \
     "alias k kubectl" \
     "alias task go-task" \
-    > /root/.config/fish/conf.d/aliases.fish
-
-# Custom fish prompt
-RUN echo "set fish_greeting" > /root/.config/fish/conf.d/fish_greeting.fish
+    "set fish_greeting" \
+    > /etc/fish/config.fish
 
 # Direnv whitelist
 RUN mkdir -p /root/.config/direnv && \
