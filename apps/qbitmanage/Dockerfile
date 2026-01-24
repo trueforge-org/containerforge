@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:7c54cb2dc135ee909b5ac1c874a894442eff453e1409db837c8cd3af933a0527
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:3664bd10fe22328f1b7d6d1002a074b6bbfc78b7688200388230f49190d622e2
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
