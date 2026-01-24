@@ -213,4 +213,8 @@ EOF
 RUN chown -R vscode:vscode /home/vscode/
 RUN chmod -R 755 /home/vscode/
 
+# Ensure fish is the default shell
+RUN chsh -s /usr/bin/fish vscode
+ENV SHELL=/usr/bin/fish
+
 USER vscode
