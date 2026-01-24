@@ -1,7 +1,7 @@
 FROM ghcr.io/trueforge-org/golang:1.25.1@sha256:51c610afee97a366fb99ce3f80f69bbbb6b14838430045d742cb03a83d8624e3 AS go
 
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:3664bd10fe22328f1b7d6d1002a074b6bbfc78b7688200388230f49190d622e2
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG VERSION
 ARG TARGETARCH
@@ -18,8 +18,7 @@ LABEL dev.containers.features="common"
 USER root
 
 # Create user first
-RUN groupadd -g 1000 vscode \
- && useradd  -u 1000 -g 1000 -m vscode
+RUN groupadd -r vscode && useradd -m -r -g vscode vscode
 
 # Ensure fish is the default shell
 RUN chsh -s /usr/bin/fish vscode
