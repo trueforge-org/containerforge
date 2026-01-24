@@ -4,58 +4,61 @@ description: "Report outdated base images, OS packages, or other dependencies th
 labels: ["outdated"]
 body:
   - type: textarea
+    id: description
     attributes:
-      value: |
-        **Description**
-        <!-- Describe which base software, OS, or dependency is outdated. Include the container/image affected. -->
-    validations:
-      required: true
-
-
-  - type: textarea
-    attributes:
-      value: |
-        **Current Version**
-        <!-- Provide the current version of the base image, OS, or dependency -->
-    validations:
-      required: true
-
-
-  - type: textarea
-    attributes:
-      value: |
-        **Suggested Update**
-        <!-- If known, provide the newer version or fix -->
-
-  - type: textarea
-    attributes:
-      value: |
-        **Impact**
-        <!-- Explain why updating is important (security, compatibility, performance, etc.) -->
+      label: "Description"
+      description: "Describe which base software, OS, or dependency is outdated. Include the container/image affected."
+      placeholder: "e.g., Ubuntu base image is outdated in xyz:1.0"
     validations:
       required: true
 
   - type: textarea
+    id: current_version
     attributes:
-      value: |
-        **Environment / Container Details**
-        - Container/Image: 
-        - Tag/Version:
-        - OS/Platform:
-        - Docker Version:
-        - Other relevant info
+      label: "Current Version"
+      description: "Provide the current version of the base image, OS, or dependency."
+      placeholder: "e.g., ubuntu:20.04"
+    validations:
+      required: true
 
   - type: textarea
+    id: suggested_update
     attributes:
-      value: |
-        **Additional Notes**
-        <!-- Any extra information, links to CVEs, advisories, or reference docs -->
+      label: "Suggested Update"
+      description: "If known, provide the newer version or fix."
+      placeholder: "e.g., ubuntu:22.04"
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact"
+      description: "Explain why updating is important (security, compatibility, performance, etc.)"
+      placeholder: "e.g., Security vulnerability CVE-xxxx affects this image"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment / Container Details"
+      description: "Include container/image, tag, OS, Docker version, and any other relevant info."
+      placeholder: "- Container/Image: xyz\n- Tag/Version: 1.0\n- OS: Ubuntu 20.04\n- Docker Version: 24.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "Additional Notes"
+      description: "Any extra information, links to CVEs, advisories, or reference docs."
+      placeholder: "Optional notes"
+
   - type: checkboxes
     id: terms
     attributes:
-      label: I've read and agree with the following
+      label: "I've read and agree with the following"
       options:
-        - label: I've checked all open and closed issues and my issue is not there.
+        - label: "I've checked all open and closed issues and my issue is not there."
           required: true
-        - label: I confirm that this image is outdated for at least 1 month.
+        - label: "I confirm that this image is outdated for at least 1 month."
           required: true
