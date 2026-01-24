@@ -18,7 +18,8 @@ LABEL dev.containers.features="common"
 USER root
 
 # Create user first
-RUN groupadd -r vscode && useradd -m -r -g vscode vscode
+RUN groupadd -g 1000 vscode \
+ && useradd  -u 1000 -g 1000 -m vscode
 
 # Ensure fish is the default shell
 RUN chsh -s /usr/bin/fish vscode
