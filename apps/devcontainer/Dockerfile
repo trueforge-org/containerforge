@@ -17,9 +17,6 @@ LABEL dev.containers.features="common"
 
 USER root
 
-# Create user first
-RUN groupadd -r vscode && useradd -m -r -g vscode vscode
-
 # Ensure fish is the default shell
 RUN chsh -s /usr/bin/fish vscode
 ENV SHELL=/usr/bin/fish
@@ -219,7 +216,3 @@ RUN mkdir -p /home/vscode/.config/direnv && \
 [whitelist]
 prefix = [ "/workspaces" ]
 EOF
-
-# Fix permissions for devcontainer user
-RUN chown -R vscode:vscode /home/vscode/
-RUN chmod -R 755 /home/vscode/
