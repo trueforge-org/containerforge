@@ -17,6 +17,8 @@ LABEL dev.containers.features="common"
 
 USER root
 
+RUN bash
+
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
