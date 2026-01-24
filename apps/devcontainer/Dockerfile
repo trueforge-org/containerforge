@@ -92,7 +92,6 @@ ARG XARCH=${TARGETARCH/amd64/x86_64}
 ARG AARCH=${TARGETARCH/arm64/aarch64}
 ARG AARCH=${TARGETARCH/amd64/x86_64}
 
-
 # Versioned download of Kubernetes tools (no duplicates)
 RUN set -eux; \
     mkdir -p /tools/bin; \
@@ -169,47 +168,46 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
       ln -s /usr/local/Homebrew/bin/brew /usr/local/bin/brew; \
     fi
 
-
 # Create Fish config directories
-RUN mkdir -p /home/vscode/.config/fish/completions \
-             /home/vscode/.config/fish/conf.d
+RUN mkdir -p /root/.config/fish/completions \
+             /root/.config/fish/conf.d
 
 # Add completions only if the command exists
 RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl; do \
       if command -v "$tool" >/dev/null 2>&1; then \
-        $tool completion fish > "/home/vscode/.config/fish/completions/${tool}.fish" || true; \
+        $tool completion fish > "/root/.config/fish/completions/${tool}.fish" || true; \
       fi; \
     done && \
-    gh completion --shell fish > /home/vscode/.config/fish/completions/gh.fish || true && \
-    stern --completion fish > /home/vscode/.config/fish/completions/stern.fish || true && \
-    yq shell-completion fish > /home/vscode/.config/fish/completions/yq.fish || true
+    gh completion --shell fish > /root/.config/fish/completions/gh.fish || true && \
+    stern --completion fish > /root/.config/fish/completions/stern.fish || true && \
+    yq shell-completion fish > /root/.config/fish/completions/yq.fish || true
 
-# Fish hooks
+# Fish hooks, aliases and fish promt -> Needs to be done in one file in /etc/fish/config.fish
+# Otherwise root won't pick it up
 RUN printf '%s\n' \
     "if status is-interactive" \
+    "    set -x KREW_ROOT $HOME/.krew" \
+    "    set -x PATH $KREW_ROOT/bin $PATH" \
+    "    direnv allow /workspaces/talos" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
-    > /home/vscode/.config/fish/conf.d/hooks.fish
-
-# Fish aliases
-RUN printf '%s\n' \
     "alias kubectl kubecolor" \
     "alias k kubectl" \
     "alias task go-task" \
-    > /home/vscode/.config/fish/conf.d/aliases.fish
+    "set fish_greeting" \
+    > /etc/fish/config.fish
 
-# Custom fish prompt
-RUN echo "set fish_greeting" > /home/vscode/.config/fish/conf.d/fish_greeting.fish
+# Install fisher plugins
+RUN /usr/bin/fish -c "curl -sL https://git.io/fisher | source; \
+    fisher install jorgebucaran/fisher; \
+    fisher install decors/fish-colored-man; \
+    fisher install edc/bass; \
+    fisher install jorgebucaran/autopair.fish; \
+    fisher install nickeb96/puffer-fish; \
+    fisher install PatrickF1/fzf.fish"
 
-# Direnv whitelist
-RUN mkdir -p /home/vscode/.config/direnv && \
-    tee /home/vscode/.config/direnv/direnv.toml > /dev/null <<EOF
-[whitelist]
-prefix = [ "/workspaces" ]
-EOF
-
-# Fix permissions for devcontainer user
-RUN groupadd -r vscode && useradd -m -r -g vscode vscode;\
-    chown -R vscode:vscode /home/vscode/ && chmod -R 755 /home/vscode/
-
+# Install kubectl plugins via krew
+RUN krew install pv-mounter \
+    && krew install cnpg \
+    && krew install df-pv

@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=trueforge-org/truecharts
+  // renovate: datasource=github-releases depName=trueforge-org/forgetool
   default = "2.0.6"
 }
 
