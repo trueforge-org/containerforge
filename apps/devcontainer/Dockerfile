@@ -50,6 +50,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install SOPS
+# renovate: datasource=github-releases depName=getsops/sops versioning=v<semver>
 ENV SOPS_VERSION=3.11.0
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
@@ -74,22 +75,37 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ### Kubernetes-Tools Installer
+# renovate: datasource=github-releases depName=kubernetes/kubernetes versioning=v<semver>
 ENV kubectlVersion=1.35.0
+# renovate: datasource=github-releases depName=kubernetes-sigs/kustomize versioning=v<semver>
 ENV kustomizeVersion=5.8.0
-# Should to be updated to v4 when fluxcd moves to it
+# renovate: datasource=github-releases depName=helm/helm versioning=v<semver>
 ENV helmVersion=3.20.0
+# WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
+# renovate: datasource=github-releases depName=instrumenta/kubeval versioning=v<semver>
 ENV kubevalVersion=0.16.1
+# renovate: datasource=github-releases depName=yannh/kubeconform versioning=v<semver>
 ENV kubeconformVersion=0.7.0
+# renovate: datasource=github-releases depName=open-policy-agent/conftest versioning=v<semver>
 ENV conftestVersion=0.66.0
+# renovate: datasource=github-releases depName=mikefarah/yq versioning=v<semver>
 ENV goyqVersion=4.49.2
+# renovate: datasource=github-releases depName=rancher/cli versioning=v<semver>
 ENV rancherVersion=2.13.1
+# renovate: datasource=github-releases depName=tilt-dev/tilt versioning=v<semver>
 ENV tiltVersion=0.36.1
+# renovate: datasource=github-releases depName=GoogleContainerTools/skaffold versioning=v<semver>
 ENV skaffoldVersion=2.17.1
+# renovate: datasource=github-releases depName=zegl/kube-score versioning=v<semver>
 ENV kubeScoreVersion=1.20.0
+# renovate: datasource=github-releases depName=helm/chart-releaser versioning=v<semver>
 ENV chartReleaserVersion=1.8.1
+# renovate: datasource=github-releases depName=helm/chart-testing versioning=v<semver>
 ENV chartTestingVersion=3.14.0
+# renovate: datasource=github-releases depName=derailed/k9s versioning=v<semver>
 ENV k9sVersion=0.50.18
+# renovate: datasource=github-releases depName=starship/starship versioning=v<semver>
 ENV starshipVersion=1.24.2
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
@@ -130,7 +146,7 @@ RUN set -eux; \
             go-yq) url="https://github.com/mikefarah/yq/releases/download/v${version}/yq_linux_${TARGETARCH}"; command_path_in_package="yq_linux_${TARGETARCH}"; ;; \
             rancher) url="https://github.com/rancher/cli/releases/download/v${version}/rancher-linux-${TARGETARCH}-v${version}.tar.gz"; command_path_in_package="rancher-v${version}/rancher"; ;; \
             tilt) url="https://github.com/tilt-dev/tilt/releases/download/v${version}/tilt.${version}.linux.${XARCH}.tar.gz"; ;; \
-            skaffold) url="https://storage.googleapis.com/skaffold/releases/v${version}/skaffold-linux-${TARGETARCH}"; command_path_in_package="skaffold-linux-${TARGETARCH}"; ;; \
+            skaffold) url= "https://github.com/GoogleContainerTools/skaffold/releases/v${version}/skaffold-linux-${TARGETARCH}"; command_path_in_package="skaffold-linux-${TARGETARCH}"; ;; \
             kube-score) url="https://github.com/zegl/kube-score/releases/download/v${version}/kube-score_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
             chart-releaser) url="https://github.com/helm/chart-releaser/releases/download/v${version}/chart-releaser_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="cr"; rename="cr"; ;; \
             chart-testing) url="https://github.com/helm/chart-testing/releases/download/v${version}/chart-testing_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="ct"; rename="ct"; ;; \
