@@ -50,7 +50,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install SOPS
-# renovate: datasource=github-releases depName=getsops/sops versioning=v<semver>
+# renovate: datasource=github-releases depName=getsops/sops
 ENV SOPS_VERSION=3.11.0
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
@@ -75,37 +75,37 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ### Kubernetes-Tools Installer
-# renovate: datasource=github-releases depName=kubernetes/kubernetes versioning=v<semver>
+# renovate: datasource=github-releases depName=kubernetes/kubernetes
 ENV kubectlVersion=1.35.0
-# renovate: datasource=github-releases depName=kubernetes-sigs/kustomize versioning=v<semver>
+# renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
-# renovate: datasource=github-releases depName=helm/helm versioning=v<semver>
+# renovate: datasource=github-releases depName=helm/helm
 ENV helmVersion=3.20.0
 # WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
-# renovate: datasource=github-releases depName=instrumenta/kubeval versioning=v<semver>
+# renovate: datasource=github-releases depName=instrumenta/kubeval
 ENV kubevalVersion=0.16.1
-# renovate: datasource=github-releases depName=yannh/kubeconform versioning=v<semver>
+# renovate: datasource=github-releases depName=yannh/kubeconform
 ENV kubeconformVersion=0.7.0
-# renovate: datasource=github-releases depName=open-policy-agent/conftest versioning=v<semver>
+# renovate: datasource=github-releases depName=open-policy-agent/conftest
 ENV conftestVersion=0.66.0
-# renovate: datasource=github-releases depName=mikefarah/yq versioning=v<semver>
+# renovate: datasource=github-releases depName=mikefarah/yq
 ENV goyqVersion=4.49.2
-# renovate: datasource=github-releases depName=rancher/cli versioning=v<semver>
+# renovate: datasource=github-releases depName=rancher/cli
 ENV rancherVersion=2.13.1
-# renovate: datasource=github-releases depName=tilt-dev/tilt versioning=v<semver>
+# renovate: datasource=github-releases depName=tilt-dev/tilt
 ENV tiltVersion=0.36.1
-# renovate: datasource=github-releases depName=GoogleContainerTools/skaffold versioning=v<semver>
+# renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
 ENV skaffoldVersion=2.17.1
-# renovate: datasource=github-releases depName=zegl/kube-score versioning=v<semver>
+# renovate: datasource=github-releases depName=zegl/kube-score
 ENV kubeScoreVersion=1.20.0
-# renovate: datasource=github-releases depName=helm/chart-releaser versioning=v<semver>
+# renovate: datasource=github-releases depName=helm/chart-releaser
 ENV chartReleaserVersion=1.8.1
-# renovate: datasource=github-releases depName=helm/chart-testing versioning=v<semver>
+# renovate: datasource=github-releases depName=helm/chart-testing
 ENV chartTestingVersion=3.14.0
-# renovate: datasource=github-releases depName=derailed/k9s versioning=v<semver>
+# renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.50.18
-# renovate: datasource=github-releases depName=starship/starship versioning=v<semver>
+# renovate: datasource=github-releases depName=starship/starship
 ENV starshipVersion=1.24.2
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
