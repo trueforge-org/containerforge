@@ -145,8 +145,7 @@ shopt -u dotglob
 # Merge user overlay into root
 if [ -d "/customoverlay" ]; then
   echo "[entrypoint] Applying Custom Overlay provided by user..."
-
-  cp -aT /overlay/* /
+  cp -aT /customoverlay/* /
 fi
 
 ## TODO: handle custom scripts here as well
