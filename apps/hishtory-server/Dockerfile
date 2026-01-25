@@ -1,5 +1,5 @@
 ## TODO: pin version tag
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:51c610afee97a366fb99ce3f80f69bbbb6b14838430045d742cb03a83d8624e3 AS builder
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:df7b28f4837c254247d733bbac9a864b6cb8cd282c8c7a8b7cd1f37bdb8f759b AS builder
 
 ARG TARGETARCH
 ARG VERSION
