@@ -20,7 +20,7 @@ USER root
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        age bind9-dnsutils direnv fish fzf \
+        age bind9-dnsutils direnv fzf \
         gettext git gh iputils-ping \
         moreutils openssh-client openssl \
         sshfs fuse3 sq webp \
@@ -32,6 +32,11 @@ RUN apt-get update && \
         zstd \
         && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Add newest fish version
+RUN apt-add-repository ppa:fish-shell/release-4 && \
+    apt update && \
+    apt install -y  --no-install-recommends fish
 
 # Install dependencies and GitHub CLI
 RUN apt-get update && \
@@ -70,21 +75,21 @@ RUN apt-get update && \
 
 ### Kubernetes-Tools Installer
 ENV kubectlVersion=1.21.0
-ENV kustomizeVersion=4.4.1
-ENV helmVersion=3.14.4
+ENV kustomizeVersion=5.8.0
+ENV helmVersion=4.1.0
 ENV oldhelmVersion=3.12.1
-ENV kubevalVersion=0.15.0
-ENV kubeconformVersion=0.4.12
-ENV conftestVersion=0.25.0
-ENV goyqVersion=4.44.1
-ENV rancherVersion=2.12.1
-ENV tiltVersion=0.33.14
-ENV skaffoldVersion=1.28.0
-ENV kubeScoreVersion=1.18.0
-ENV chartReleaserVersion=1.6.1
-ENV chartTestingVersion=3.11.0
-ENV k9sVersion=0.27.1
-ENV starshipVersion=1.23.0
+ENV kubevalVersion=0.16.1
+ENV kubeconformVersion=0.7.0
+ENV conftestVersion=0.66.0
+ENV goyqVersion=4.49.2
+ENV rancherVersion=2.13.1
+ENV tiltVersion=0.36.1
+ENV skaffoldVersion=2.17.1
+ENV kubeScoreVersion=1.20.0
+ENV chartReleaserVersion=1.8.1
+ENV chartTestingVersion=3.14.0
+ENV k9sVersion=0.50.18
+ENV starshipVersion=1.24.2
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
@@ -118,7 +123,7 @@ RUN set -eux; \
             kubectl) url="https://dl.k8s.io/release/v${version}/bin/linux/${TARGETARCH}/kubectl"; ;; \
             kustomize) url="https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${version}/kustomize_v${version}_linux_${TARGETARCH}.tar.gz"; ;; \
             helm) url="https://get.helm.sh/helm-v${version}-linux-${TARGETARCH}.tar.gz"; command_path_in_package="linux-${TARGETARCH}/helm"; ;; \
-            kubeval) url="https://github.com/instrumenta/kubeval/releases/download/${version}/kubeval-linux-${TARGETARCH}.tar.gz"; ;; \
+            kubeval) url="https://github.com/instrumenta/kubeval/releases/download/v${version}/kubeval-linux-${TARGETARCH}.tar.gz"; ;; \
             kubeconform) url="https://github.com/yannh/kubeconform/releases/download/v${version}/kubeconform-linux-${TARGETARCH}.tar.gz"; ;; \
             conftest) url="https://github.com/open-policy-agent/conftest/releases/download/v${version}/conftest_${version}_Linux_${XARCH}.tar.gz"; ;; \
             go-yq) url="https://github.com/mikefarah/yq/releases/download/v${version}/yq_linux_${TARGETARCH}"; command_path_in_package="yq_linux_${TARGETARCH}"; ;; \
@@ -192,6 +197,10 @@ RUN printf '%s\n' \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
+    # Auto-allow current repo .envrc
+    "if test -f .envrc " \
+    "    direnv allow . " \
+    " end" \
     "alias kubectl kubecolor" \
     "alias k kubectl" \
     "alias task go-task" \
