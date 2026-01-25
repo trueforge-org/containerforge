@@ -76,7 +76,8 @@ RUN apt-get update && \
 ### Kubernetes-Tools Installer
 ENV kubectlVersion=1.35.0
 ENV kustomizeVersion=5.8.0
-ENV helmVersion=4.1.0
+# Should to be updated to v4 when fluxcd moves to it
+ENV helmVersion=3.20.0
 ENV oldhelmVersion=3.12.1
 ENV kubevalVersion=0.16.1
 ENV kubeconformVersion=0.7.0
