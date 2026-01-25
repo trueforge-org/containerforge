@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "ContainerForge",
+  "image": "oci.trueforge.org/containerforge/devcontainer:2.0.6@sha256:b8f8a95a0edf58aaab4076fa477bd8e3c6efcb68fb41cb4c37da05e618ff0320",
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mitchdenny.ecdc",
+        "EditorConfig.editorconfig",
+        "PKief.material-icon-theme",
+        "usernamehw.errorlens",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "hashicorp.hcl",
+        "exiasr.hadolint",
+        "golang.go",
+        "joao-peterson.gotag",
+        "eamodio.gitlens",
+        "timonwong.shellcheck"
+      ]
+    }
+  }
+}

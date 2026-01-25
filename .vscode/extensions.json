@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "mitchdenny.ecdc",
+        "EditorConfig.editorconfig",
+        "PKief.material-icon-theme",
+        "usernamehw.errorlens",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "hashicorp.hcl",
+        "exiasr.hadolint",
+        "golang.go",
+        "joao-peterson.gotag",
+        "eamodio.gitlens",
+        "timonwong.shellcheck"
+    ]
+}
