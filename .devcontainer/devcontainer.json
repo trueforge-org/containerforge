@@ -17,7 +17,15 @@
         "golang.go",
         "joao-peterson.gotag",
         "eamodio.gitlens",
-        "timonwong.shellcheck"
+        "timonwong.shellcheck",
+        "formulahendry.code-runner",
+        "streetsidesoftware.code-spell-checker",
+        "Codium.codium",
+        "mhutchie.git-graph",
+        "yzhang.markdown-all-in-one",
+        "searKing.preview-vscode",
+        "DavidAnson.vscode-markdownlint",
+        "GitHub.copilot"
       ]
     }
   }
