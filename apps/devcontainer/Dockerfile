@@ -20,7 +20,7 @@ USER root
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        age bind9-dnsutils direnv fish fzf \
+        age bind9-dnsutils direnv fzf \
         gettext git gh iputils-ping \
         moreutils openssh-client openssl \
         sshfs fuse3 sq webp \
@@ -32,6 +32,11 @@ RUN apt-get update && \
         zstd \
         && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Add newest fish version
+RUN apt-add-repository ppa:fish-shell/release-4 && \
+    apt update && \
+    apt install -y  --no-install-recommends fish
 
 # Install dependencies and GitHub CLI
 RUN apt-get update && \
@@ -45,6 +50,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install SOPS
+# renovate: datasource=github-releases depName=getsops/sops versioning=v<semver>
 ENV SOPS_VERSION=3.11.0
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
@@ -69,22 +75,38 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ### Kubernetes-Tools Installer
-ENV kubectlVersion=1.21.0
-ENV kustomizeVersion=4.4.1
-ENV helmVersion=3.14.4
+# renovate: datasource=github-releases depName=kubernetes/kubernetes versioning=v<semver>
+ENV kubectlVersion=1.35.0
+# renovate: datasource=github-releases depName=kubernetes-sigs/kustomize versioning=v<semver>
+ENV kustomizeVersion=5.8.0
+# renovate: datasource=github-releases depName=helm/helm versioning=v<semver>
+ENV helmVersion=3.20.0
+# WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
-ENV kubevalVersion=0.15.0
-ENV kubeconformVersion=0.4.12
-ENV conftestVersion=0.25.0
-ENV goyqVersion=4.44.1
-ENV rancherVersion=2.12.1
-ENV tiltVersion=0.33.14
-ENV skaffoldVersion=1.28.0
-ENV kubeScoreVersion=1.18.0
-ENV chartReleaserVersion=1.6.1
-ENV chartTestingVersion=3.11.0
-ENV k9sVersion=0.27.1
-ENV starshipVersion=1.23.0
+# renovate: datasource=github-releases depName=instrumenta/kubeval versioning=v<semver>
+ENV kubevalVersion=0.16.1
+# renovate: datasource=github-releases depName=yannh/kubeconform versioning=v<semver>
+ENV kubeconformVersion=0.7.0
+# renovate: datasource=github-releases depName=open-policy-agent/conftest versioning=v<semver>
+ENV conftestVersion=0.66.0
+# renovate: datasource=github-releases depName=mikefarah/yq versioning=v<semver>
+ENV goyqVersion=4.49.2
+# renovate: datasource=github-releases depName=rancher/cli versioning=v<semver>
+ENV rancherVersion=2.13.1
+# renovate: datasource=github-releases depName=tilt-dev/tilt versioning=v<semver>
+ENV tiltVersion=0.36.1
+# renovate: datasource=github-releases depName=GoogleContainerTools/skaffold versioning=v<semver>
+ENV skaffoldVersion=2.17.1
+# renovate: datasource=github-releases depName=zegl/kube-score versioning=v<semver>
+ENV kubeScoreVersion=1.20.0
+# renovate: datasource=github-releases depName=helm/chart-releaser versioning=v<semver>
+ENV chartReleaserVersion=1.8.1
+# renovate: datasource=github-releases depName=helm/chart-testing versioning=v<semver>
+ENV chartTestingVersion=3.14.0
+# renovate: datasource=github-releases depName=derailed/k9s versioning=v<semver>
+ENV k9sVersion=0.50.18
+# renovate: datasource=github-releases depName=starship/starship versioning=v<semver>
+ENV starshipVersion=1.24.2
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
@@ -118,7 +140,7 @@ RUN set -eux; \
             kubectl) url="https://dl.k8s.io/release/v${version}/bin/linux/${TARGETARCH}/kubectl"; ;; \
             kustomize) url="https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${version}/kustomize_v${version}_linux_${TARGETARCH}.tar.gz"; ;; \
             helm) url="https://get.helm.sh/helm-v${version}-linux-${TARGETARCH}.tar.gz"; command_path_in_package="linux-${TARGETARCH}/helm"; ;; \
-            kubeval) url="https://github.com/instrumenta/kubeval/releases/download/${version}/kubeval-linux-${TARGETARCH}.tar.gz"; ;; \
+            kubeval) url="https://github.com/instrumenta/kubeval/releases/download/v${version}/kubeval-linux-${TARGETARCH}.tar.gz"; ;; \
             kubeconform) url="https://github.com/yannh/kubeconform/releases/download/v${version}/kubeconform-linux-${TARGETARCH}.tar.gz"; ;; \
             conftest) url="https://github.com/open-policy-agent/conftest/releases/download/v${version}/conftest_${version}_Linux_${XARCH}.tar.gz"; ;; \
             go-yq) url="https://github.com/mikefarah/yq/releases/download/v${version}/yq_linux_${TARGETARCH}"; command_path_in_package="yq_linux_${TARGETARCH}"; ;; \
@@ -188,10 +210,13 @@ RUN printf '%s\n' \
     "if status is-interactive" \
     "    set -x KREW_ROOT $HOME/.krew" \
     "    set -x PATH $KREW_ROOT/bin $PATH" \
-    "    direnv allow /workspaces/talos" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
+    # Auto-allow current repo .envrc
+    "if test -f .envrc " \
+    "    direnv allow . " \
+    " end" \
     "alias kubectl kubecolor" \
     "alias k kubectl" \
     "alias task go-task" \
