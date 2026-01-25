@@ -15,5 +15,9 @@ RUN npm install -g corepack@latest \
 FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:366449710716e95bae002a019ed2ba77823a350cdccef459c073361cd5e61da8
 USER root
 COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html
+
+# Copy configuration files into container
+COPY --chmod=755 ./ /
+
 USER apps:apps
 WORKDIR /usr/share/nginx/html
