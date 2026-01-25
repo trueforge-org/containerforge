@@ -74,7 +74,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ### Kubernetes-Tools Installer
-ENV kubectlVersion=1.21.0
+ENV kubectlVersion=1.35.0
 ENV kustomizeVersion=5.8.0
 ENV helmVersion=4.1.0
 ENV oldhelmVersion=3.12.1
