@@ -193,7 +193,6 @@ RUN printf '%s\n' \
     "if status is-interactive" \
     "    set -x KREW_ROOT $HOME/.krew" \
     "    set -x PATH $KREW_ROOT/bin $PATH" \
-    "    direnv allow /workspaces/talos" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
