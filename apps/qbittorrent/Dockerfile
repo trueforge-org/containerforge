@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:3664bd10fe22328f1b7d6d1002a074b6bbfc78b7688200388230f49190d622e2
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:28879e692c9ef5264f2bc23dc0cb2ff1402c276b2126309e00eb097ee5ebc1a1
 ARG TARGETARCH
 ARG QBARCH=${TARGETARCH/arm64/aarch64}
 ARG QBARCH=${QBARCH/amd64/x86_64}
