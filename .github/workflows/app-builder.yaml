@@ -296,14 +296,14 @@ jobs:
           image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Attestation for GHCR
-        uses: actions/attest-build-provenance@55d56c36d11c7e27fad04e3e0663bfebd761fb01
+        uses: actions/attest-build-provenance@c4c3d11ce80dcf55737f95e49ec3f19d956dbdb3
         with:
           push-to-registry: true
           subject-name: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
           subject-digest: ${{ needs.merge.outputs.digest }}
 
       - name: Attestation for Quay
-        uses: actions/attest-build-provenance@55d56c36d11c7e27fad04e3e0663bfebd761fb01
+        uses: actions/attest-build-provenance@c4c3d11ce80dcf55737f95e49ec3f19d956dbdb3
         with:
           push-to-registry: true
           subject-name: quay.io/containerforge/${{ inputs.app }}
