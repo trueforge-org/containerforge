@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=trueforge-org/forgetool
-  default = "2.0.6"
+  default = "3.0.0"
 }
 
 variable "LICENSE" {
@@ -15,7 +15,7 @@ variable "LICENSE" {
 
 
 variable "SOURCE" {
-  default = "https://truecharts.org"
+  default = "https://trueforge.org"
 }
 
 group "default" {
