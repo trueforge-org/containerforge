@@ -68,7 +68,7 @@ jobs:
             type=raw,value=sha-${{ github.sha }},enable=${{ inputs.release }}
 
       - name: Upload Bake Metadata
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ steps.meta.outputs.bake-file }}
@@ -173,7 +173,7 @@ jobs:
           echo "$DIGEST" > "${{ runner.temp }}/digests/${DIGEST#sha256:}"
 
       - name: Upload Digest
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
         with:
           name: ${{ inputs.app }}-digests-${{ steps.target.outputs.arch }}
           path: ${{ runner.temp }}/digests/*
