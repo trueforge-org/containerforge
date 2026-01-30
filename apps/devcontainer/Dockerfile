@@ -92,7 +92,7 @@ ENV conftestVersion=0.66.0
 # renovate: datasource=github-releases depName=mikefarah/yq
 ENV goyqVersion=4.50.1
 # renovate: datasource=github-releases depName=rancher/cli
-ENV rancherVersion=2.13.1
+ENV rancherVersion=2.13.2
 # renovate: datasource=github-releases depName=tilt-dev/tilt
 ENV tiltVersion=0.36.1
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
@@ -152,7 +152,7 @@ RUN set -eux; \
             chart-testing) url="https://github.com/helm/chart-testing/releases/download/v${version}/chart-testing_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="ct"; rename="ct"; ;; \
             k9s) url="https://github.com/derailed/k9s/releases/download/v${version}/k9s_Linux_${TARGETARCH}.tar.gz"; command_path_in_package="k9s"; ;; \
             starship) url="https://github.com/starship/starship/releases/download/v${version}/starship-${AARCH/arm64/aarch64}-unknown-linux-${CTYPE}.tar.gz"; command_path_in_package="starship"; ;; \
-            clustertool) url="https://github.com/trueforge-org/truecharts/releases/download/v${version}/clustertool_${VERSION}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="clustertool"; ;; \
+            forgetool) url="https://github.com/trueforge-org/forgetool/releases/download/v${version}/forgetool_${VERSION}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="forgetool"; ;; \
             *) echo "Unknown tool: $tool"; exit 1 ;; \
         esac; \
         mkdir -p /tools/${tool}; \
@@ -176,7 +176,7 @@ RUN set -eux; \
     download_and_copy "chart-testing" "$chartTestingVersion"; \
     download_and_copy "k9s" "$k9sVersion"; \
     download_and_copy "starship" "$starshipVersion"; \
-    download_and_copy "clustertool" "$VERSION"; \
+    download_and_copy "forgetool" "$VERSION"; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
         download_and_copy "kubeval" "$kubevalVersion"; \
     fi;
