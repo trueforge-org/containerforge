@@ -60,7 +60,7 @@ RUN set -eux; \
 
 # Install Python packages and Home Assistant
 RUN pip install uv; \
-    uv pip install psycopg2 \
+    uv pip install psycopg2; \
     uv pip install --index-strategy unsafe-best-match \
         --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements.txt"; \
     uv pip install --index-strategy unsafe-best-match --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements_all.txt"; \
