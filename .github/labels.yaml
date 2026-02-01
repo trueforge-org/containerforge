@@ -17,6 +17,13 @@
   color: ff9800
 - name: type/major
   color: f6412d
+# Issues
+- name: bug
+  color: "B60205"
+- name: enhancement
+  color: "a2eeef"
+- name: outdated
+  color: "a2eeef"
 # Uncategorized
 - name: stale
   color: c5def5
