@@ -80,7 +80,7 @@ ENV kubectlVersion=1.35.0
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
 # renovate: datasource=github-releases depName=helm/helm
-ENV helmVersion=3.20.0
+ENV helmVersion=4.1.0
 # WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
 # renovate: datasource=github-releases depName=instrumenta/kubeval
