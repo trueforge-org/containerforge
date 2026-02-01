@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cp -n /app/kometa/config/config.yml.template /config/config.yml
+cp --update=none /app/kometa/config/config.yml.template /config/config.yml
 
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
 
