@@ -22,7 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithCmdArgs("clustertool", "info"),
+		testcontainers.WithCmdArgs("forgetool", "info"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
