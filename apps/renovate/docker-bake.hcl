@@ -9,11 +9,6 @@ variable "VERSION" {
   default = "43.3.0"
 }
 
-variable "CLUSTERTOOL_VERSION" {
-  // renovate: datasource=github-releases depName=trueforge-org/truecharts
-  default = "2.0.6"
-}
-
 variable "LICENSE" {
   default = "AGPL-3.0-or-later"
 }
