@@ -15,7 +15,7 @@ variable "BUILDX_VERSION" {
 
 variable "RUNNER_CONTAINER_HOOKS_VERSION" {
   // renovate: datasource=github-releases depName=actions/runner-container-hooks
-  default = "0.8.0"
+  default = "0.8.1"
 }
 
 variable "DOCKER_VERSION" {
