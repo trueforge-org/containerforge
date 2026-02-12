@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:28879e692c9ef5264f2bc23dc0cb2ff1402c276b2126309e00eb097ee5ebc1a1 AS builder
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87 AS builder
 WORKDIR /app
 ARG VERSION
 
@@ -28,7 +28,7 @@ RUN .venv/bin/pip install --no-cache-dir -r requirements.txt && \
     # Remove tests and compiled Python files
     find .venv \( -type d -name test -o -name tests \) -o \( -type f -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:28879e692c9ef5264f2bc23dc0cb2ff1402c276b2126309e00eb097ee5ebc1a1
+FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
 
 USER apps:apps
 
