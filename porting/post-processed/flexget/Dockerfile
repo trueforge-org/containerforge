@@ -55,7 +55,7 @@ RUN \
 
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 
 COPY --from=libtorrent /libtorrent-build/usr/lib/libtorrent-rasterbar.* /usr/lib/
@@ -68,3 +68,5 @@ COPY ./root /
 # ports and volumes
 EXPOSE 5050
 VOLUME /config
+
+WORKDIR /config

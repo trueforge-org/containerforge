@@ -23,10 +23,12 @@ RUN \
         "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar"
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 EXPOSE 8080
 VOLUME /config
+
+WORKDIR /config

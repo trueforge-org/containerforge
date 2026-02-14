@@ -31,7 +31,7 @@ RUN \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf /var/lib/apt/lists/*
 
-USER apps
+USER apps:apps
 COPY --from=buildstage /davos.jar /app/davos.jar
 COPY . /
 
@@ -39,3 +39,6 @@ COPY . /
 EXPOSE 8080
 WORKDIR /app
 VOLUME /download
+
+WORKDIR /config
+VOLUME /config

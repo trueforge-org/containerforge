@@ -23,9 +23,11 @@ RUN echo "**** install feed2toot ****" && \
     $HOME/.cache
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 VOLUME /config
+
+WORKDIR /config

@@ -15,6 +15,9 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
+
+WORKDIR /config
+VOLUME /config

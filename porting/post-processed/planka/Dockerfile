@@ -61,7 +61,7 @@ RUN \
     for i in "${!src[@]}"; do rm -rf /app/"${src[i]}" && ln -s /config/"${dst[i]}" /app/"${src[i]}"; done'
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 
 
@@ -69,3 +69,5 @@ COPY . /
 EXPOSE 1337
 
 VOLUME /config
+
+WORKDIR /config

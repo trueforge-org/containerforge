@@ -41,9 +41,11 @@ RUN \
     /tmp/*
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 
 # ports and volumes
 VOLUME /config
 EXPOSE 8090
+
+WORKDIR /config

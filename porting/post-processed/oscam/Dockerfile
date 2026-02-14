@@ -80,7 +80,7 @@ RUN \
     /tmp/*
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -88,3 +88,5 @@ COPY ./root /
 EXPOSE 8888
 
 VOLUME /config
+
+WORKDIR /config

@@ -24,10 +24,12 @@ RUN \
     $HOME/.cache
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 EXPOSE 2222
 
 VOLUME /config
+
+WORKDIR /config

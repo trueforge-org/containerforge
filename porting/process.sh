@@ -223,7 +223,7 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^ARGVERSION|d' \
             -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
             -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
-            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|COPY.*root.*|USER apps:apps\nCOPY . /\nCOPY ./root /|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
@@ -253,7 +253,7 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^ARGVERSION|d' \
             -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
             -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
-            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|COPY.*root.*|USER apps:apps\nCOPY . /\nCOPY ./root /|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
@@ -278,6 +278,18 @@ if [[ ! -d "$root_folder" ]]; then
         -e 's|COPY.*root.*||g' \
         "$df"
     fi
+fi
+if sed --version >/dev/null 2>&1; then
+    sed -i 's|^USER apps$|USER apps:apps|g' "$df"
+else
+    sed -i '' 's|^USER apps$|USER apps:apps|g' "$df"
+fi
+if ! grep -q '^WORKDIR /config$' "$df"; then
+    echo "" >> "$df"
+    echo "WORKDIR /config" >> "$df"
+fi
+if ! grep -Eq '^VOLUME .*/config' "$df"; then
+    echo "VOLUME /config" >> "$df"
 fi
     echo "[VERBOSE] Sanitized $df"
 done

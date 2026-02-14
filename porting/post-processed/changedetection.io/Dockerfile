@@ -62,10 +62,12 @@ RUN \
     $HOME/.npm \
     /var/lib/apt/lists/*
 
-USER apps
+USER apps:apps
 COPY . /
 
 
 EXPOSE 5000
 
 VOLUME /config
+
+WORKDIR /config

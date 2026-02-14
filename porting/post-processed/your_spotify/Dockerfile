@@ -85,8 +85,11 @@ RUN \
     $HOME/.cache \
     $HOME/.npm
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 EXPOSE 80 443
+
+WORKDIR /config
+VOLUME /config

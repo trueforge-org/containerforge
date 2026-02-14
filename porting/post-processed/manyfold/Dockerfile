@@ -85,8 +85,11 @@ RUN \
         /app/www/vendor/bundle/ruby/3.3.0/cache/* \
         /tmp/*
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 EXPOSE 3214
+
+WORKDIR /config
+VOLUME /config

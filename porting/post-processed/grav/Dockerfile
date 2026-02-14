@@ -51,7 +51,7 @@ RUN \
         $HOME/.composer
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -59,3 +59,5 @@ COPY ./root /
 EXPOSE 80 443
 
 VOLUME /config
+
+WORKDIR /config

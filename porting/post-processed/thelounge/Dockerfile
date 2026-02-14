@@ -44,10 +44,12 @@ RUN \
     /root
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 
 
 # ports and volumes
 EXPOSE 9000
 VOLUME /config
+
+WORKDIR /config

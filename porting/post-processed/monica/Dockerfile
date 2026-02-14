@@ -81,10 +81,12 @@ RUN \
   rm -rf \
     /tmp/*
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 EXPOSE 80 443
 
 VOLUME /config
+
+WORKDIR /config

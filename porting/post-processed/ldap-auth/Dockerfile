@@ -41,9 +41,12 @@ RUN \
         $HOME/.cache
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 EXPOSE 8888 9000
+
+WORKDIR /config
+VOLUME /config

@@ -47,7 +47,10 @@ ENV ALLOW_RESTARTS=0 \
   VOLUMES=0
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
+
+WORKDIR /config
+VOLUME /config

@@ -98,7 +98,7 @@ RUN \
   apk add -U --update --no-cache \
     ${RUNTIME_PACKAGES} && \
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -106,3 +106,5 @@ COPY ./root /
 EXPOSE 6501
 
 VOLUME /config
+
+WORKDIR /config

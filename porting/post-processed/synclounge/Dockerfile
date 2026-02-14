@@ -25,6 +25,9 @@ RUN \
     /tmp/*
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 
+
+WORKDIR /config
+VOLUME /config

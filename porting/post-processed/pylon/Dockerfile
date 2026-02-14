@@ -41,9 +41,12 @@ RUN \
     /root
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 
 
 # ports
 EXPOSE 3131
+
+WORKDIR /config
+VOLUME /config

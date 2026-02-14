@@ -45,9 +45,11 @@ RUN \
     /tmp/*
 
 # copy files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 VOLUME /config /data
+
+WORKDIR /config

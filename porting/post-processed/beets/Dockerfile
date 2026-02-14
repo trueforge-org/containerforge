@@ -92,10 +92,12 @@ EDITOR="nano" \
 HOME="/config"
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 EXPOSE 8337
 VOLUME /config
+
+WORKDIR /config

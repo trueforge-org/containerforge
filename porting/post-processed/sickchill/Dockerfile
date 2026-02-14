@@ -41,9 +41,11 @@ RUN \
     $HOME/.cargo
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 
 # ports and volumes
 EXPOSE 8081
 VOLUME /config
+
+WORKDIR /config

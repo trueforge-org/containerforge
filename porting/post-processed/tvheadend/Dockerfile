@@ -191,7 +191,7 @@ RUN \
     xmltv \
     zlib
 
-USER apps
+USER apps:apps
 # copy local files and buildstage artifacts
 COPY --from=buildstage /tmp/argtable-build/usr/ /usr/
 COPY --from=buildstage /tmp/comskip-build/usr/ /usr/
@@ -204,3 +204,5 @@ COPY ./root /
 # ports and volumes
 EXPOSE 9981 9982
 VOLUME /config
+
+WORKDIR /config

@@ -105,7 +105,7 @@ RUN \
 
 # copy buildstage and local files
 COPY --from=buildstage /tmp/daapd-build/ /
-USER apps
+USER apps:apps
 COPY . /
 
 
@@ -113,3 +113,5 @@ COPY . /
 EXPOSE 3689
 
 VOLUME /config /music
+
+WORKDIR /config

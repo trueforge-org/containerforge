@@ -24,7 +24,7 @@ RUN \
     rm -rf /config/.cache /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -32,3 +32,5 @@ COPY ./root /
 EXPOSE 3000
 
 VOLUME /config
+
+WORKDIR /config

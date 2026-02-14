@@ -44,5 +44,8 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 COPY --from=builder /build-out /
-USER apps
+USER apps:apps
 COPY . /
+
+WORKDIR /config
+VOLUME /config

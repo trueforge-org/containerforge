@@ -41,10 +41,12 @@ RUN \
         $HOME/.composer
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 EXPOSE 80 443
 VOLUME /config
+
+WORKDIR /config

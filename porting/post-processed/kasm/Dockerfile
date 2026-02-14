@@ -109,10 +109,13 @@ RUN \
     /var/tmp/*
 
 # add init files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # Ports and volumes
 EXPOSE 3000 443
 VOLUME /opt/
+
+WORKDIR /config
+VOLUME /config

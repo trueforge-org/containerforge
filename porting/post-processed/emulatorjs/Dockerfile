@@ -132,9 +132,12 @@ RUN \
 COPY --from=binbuilder /build-out/ /
 COPY --from=migrationbuilder /build-out/ /
 COPY --from=nodebuilder /emulatorjs/ /emulatorjs/
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports
 EXPOSE 80 3000
+
+WORKDIR /config
+VOLUME /config

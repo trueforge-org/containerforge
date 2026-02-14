@@ -37,7 +37,7 @@ RUN \
     /root/.cache
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -48,3 +48,5 @@ COPY ./root /
 EXPOSE 8081
 
 VOLUME /config
+
+WORKDIR /config

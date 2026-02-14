@@ -52,7 +52,7 @@ RUN \
     /etc/apache2/httpd.conf
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -60,3 +60,5 @@ COPY ./root /
 EXPOSE 80
 
 VOLUME /config /data
+
+WORKDIR /config

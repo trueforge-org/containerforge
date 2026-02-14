@@ -69,8 +69,10 @@ RUN \
     /app/www/node_modules \
     /tmp/*
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 VOLUME /config
+
+WORKDIR /config

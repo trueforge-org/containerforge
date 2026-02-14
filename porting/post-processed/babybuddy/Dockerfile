@@ -46,10 +46,12 @@ RUN \
   rm -rf /tmp/* $HOME/.cache $HOME/.cargo /var/lib/apt/lists/*
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 EXPOSE 8000
 VOLUME /config
+
+WORKDIR /config

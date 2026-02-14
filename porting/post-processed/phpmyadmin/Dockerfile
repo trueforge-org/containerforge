@@ -79,8 +79,11 @@ RUN \
     /tmp/* \
     /app/www/public/setup
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 EXPOSE 80 443
+
+WORKDIR /config
+VOLUME /config

@@ -42,7 +42,7 @@ RUN \
   install -d -o apps -g apps \
     /var/lib/syncthing && \
 
-USER apps
+USER apps:apps
 COPY . /
 
 # copy files from build stage and local files
@@ -53,3 +53,5 @@ COPY --from=buildstage /tmp/sync/syncthing /usr/bin/
 # ports and volumes
 EXPOSE 8384 22000/tcp 22000/udp 21027/UDP
 VOLUME /config
+
+WORKDIR /config

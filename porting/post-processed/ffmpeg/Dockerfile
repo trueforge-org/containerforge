@@ -1062,6 +1062,9 @@ RUN \
   ldd /usr/local/bin/ffmpeg && \
   /usr/local/bin/ffmpeg -version
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
+
+WORKDIR /config
+VOLUME /config

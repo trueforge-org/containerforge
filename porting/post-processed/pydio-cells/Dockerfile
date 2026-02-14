@@ -56,5 +56,8 @@ RUN \
     openssl && \
 COPY --from=buildstage /app/cells /app/
 
-USER apps
+USER apps:apps
 COPY . /
+
+WORKDIR /config
+VOLUME /config

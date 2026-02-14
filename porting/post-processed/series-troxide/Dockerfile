@@ -32,7 +32,7 @@ USER root
 # title
 ENV TITLE=Series-Troxie
 
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -58,7 +58,7 @@ RUN \
     /tmp/*
 
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -66,3 +66,5 @@ COPY ./root /
 EXPOSE 3000
 
 VOLUME /config
+
+WORKDIR /config

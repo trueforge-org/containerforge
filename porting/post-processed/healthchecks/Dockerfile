@@ -65,7 +65,7 @@ RUN \
         /var/lib/apt/lists/*
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -73,3 +73,5 @@ COPY ./root /
 EXPOSE 8000
 
 VOLUME /config
+
+WORKDIR /config

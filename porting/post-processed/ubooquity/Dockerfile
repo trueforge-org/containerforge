@@ -20,7 +20,7 @@ RUN echo "**** install ubooquity ****" && \
     /tmp/*
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -28,3 +28,5 @@ COPY ./root /
 EXPOSE 2202 2203
 
 VOLUME /config
+
+WORKDIR /config

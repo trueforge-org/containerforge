@@ -49,7 +49,7 @@ RUN \
     /tmp/*
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
@@ -57,3 +57,5 @@ COPY ./root /
 EXPOSE 80 443
 
 VOLUME /config /gallery
+
+WORKDIR /config

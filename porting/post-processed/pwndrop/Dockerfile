@@ -40,9 +40,12 @@ COPY --from=buildstage /app/pwndrop/ /app/pwndrop/
 
 RUN \
 # add local files
-USER apps
+USER apps:apps
 COPY . /
 COPY ./root /
 
 # ports and volumes
 EXPOSE 8080 4443
+
+WORKDIR /config
+VOLUME /config

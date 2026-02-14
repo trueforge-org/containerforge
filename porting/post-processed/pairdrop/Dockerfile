@@ -28,9 +28,12 @@ RUN echo "**** install pairdrop ****" && \
     /tmp/.npm
 
 # copy local files
-USER apps
+USER apps:apps
 COPY . /
 
 
 # ports and volumes
 EXPOSE 3000
+
+WORKDIR /config
+VOLUME /config
