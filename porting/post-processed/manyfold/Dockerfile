@@ -85,7 +85,7 @@ RUN \
         /app/www/vendor/bundle/ruby/3.3.0/cache/* \
         /tmp/*
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

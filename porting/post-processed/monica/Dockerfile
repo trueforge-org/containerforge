@@ -81,7 +81,7 @@ RUN \
   rm -rf \
     /tmp/*
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

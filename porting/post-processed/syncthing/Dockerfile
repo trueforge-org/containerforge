@@ -42,7 +42,7 @@ RUN \
   install -d -o apps -g apps \
     /var/lib/syncthing && \
 
-USER apps:apps
+USER apps
 COPY . /
 
 # copy files from build stage and local files

@@ -28,7 +28,7 @@ RUN echo "**** install pairdrop ****" && \
     /tmp/.npm
 
 # copy local files
-USER apps:apps
+USER apps
 COPY . /
 
 

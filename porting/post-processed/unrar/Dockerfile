@@ -46,7 +46,7 @@ USER root
 # Add files from buildstage
 COPY --from=alpine-buildstage /usr/bin/unrar /usr/bin/unrar
 
-USER apps:apps
+USER apps
 COPY . /
 
 WORKDIR /config

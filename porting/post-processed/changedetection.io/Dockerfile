@@ -62,7 +62,7 @@ RUN \
     $HOME/.npm \
     /var/lib/apt/lists/*
 
-USER apps:apps
+USER apps
 COPY . /
 
 

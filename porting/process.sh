@@ -227,7 +227,7 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^ARGVERSION|d' \
             -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
             -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
-            -e 's|COPY.*root.*|USER apps:apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
@@ -257,7 +257,7 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^ARGVERSION|d' \
             -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
             -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
-            -e 's|COPY.*root.*|USER apps:apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
@@ -290,9 +290,9 @@ if [[ "$CURRENT_BASE" == ghcr.io/trueforge-org/java*:* ]]; then
     perl -i -ne 'print unless /^\s*(openjdk-[^[:space:]]*|default-jre[^[:space:]]*|default-jdk[^[:space:]]*)\s*\\?\s*$/' "$df"
 fi
 if sed --version >/dev/null 2>&1; then
-    sed -i 's|^USER apps$|USER apps:apps|g' "$df"
+    sed -i 's|^USER apps$|USER apps|g' "$df"
 else
-    sed -i '' 's|^USER apps$|USER apps:apps|g' "$df"
+    sed -i '' 's|^USER apps$|USER apps|g' "$df"
 fi
 if ! grep -q '^WORKDIR /config$' "$df"; then
     echo "" >> "$df"
@@ -360,6 +360,31 @@ if [[ -f "$processed/start.sh" ]]; then
         -e 's|.*LSIO_NON_ROOT_USER.*||g' \
         -e 's|/lsiopy|/config/venv|g' \
         "$processed/start.sh"
+    fi
+    if ! grep -q '^# NONROOT_COMPAT$' "$processed/start.sh"; then
+        {
+            head -n 1 "$processed/start.sh"
+            cat <<'EOF'
+# NONROOT_COMPAT
+if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+  shopt -s expand_aliases
+  alias apk=':'
+  alias apt-get=':'
+  alias chown=':'
+  alias chmod=':'
+  alias usermod=':'
+  alias groupadd=':'
+  alias adduser=':'
+  alias useradd=':'
+  alias setcap=':'
+  alias mount=':'
+  alias sysctl=':'
+  alias service=':'
+  alias s6-svc=':'
+fi
+EOF
+            tail -n +2 "$processed/start.sh"
+        } > "$processed/start.sh.tmp" && mv "$processed/start.sh.tmp" "$processed/start.sh"
     fi
 fi
 done

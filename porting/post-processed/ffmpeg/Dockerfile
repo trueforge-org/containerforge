@@ -1062,7 +1062,7 @@ RUN \
   ldd /usr/local/bin/ffmpeg && \
   /usr/local/bin/ffmpeg -version
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

@@ -98,7 +98,7 @@ RUN \
   apk add -U --update --no-cache \
     ${RUNTIME_PACKAGES} && \
 # copy local files
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

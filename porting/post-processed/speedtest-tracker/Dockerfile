@@ -69,7 +69,7 @@ RUN \
     /app/www/node_modules \
     /tmp/*
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

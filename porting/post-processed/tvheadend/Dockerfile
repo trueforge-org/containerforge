@@ -191,7 +191,7 @@ RUN \
     xmltv \
     zlib
 
-USER apps:apps
+USER apps
 # copy local files and buildstage artifacts
 COPY --from=buildstage /tmp/argtable-build/usr/ /usr/
 COPY --from=buildstage /tmp/comskip-build/usr/ /usr/

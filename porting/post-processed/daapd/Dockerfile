@@ -105,7 +105,7 @@ RUN \
 
 # copy buildstage and local files
 COPY --from=buildstage /tmp/daapd-build/ /
-USER apps:apps
+USER apps
 COPY . /
 
 

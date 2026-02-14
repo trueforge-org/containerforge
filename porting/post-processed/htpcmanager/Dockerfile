@@ -52,7 +52,7 @@ RUN \
     /tmp/*
 
 # add local files
-USER apps:apps
+USER apps
 COPY . /
 
 

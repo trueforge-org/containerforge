@@ -1,4 +1,21 @@
 #!/usr/bin/env bash
+# NONROOT_COMPAT
+if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+  shopt -s expand_aliases
+  alias apk=':'
+  alias apt-get=':'
+  alias chown=':'
+  alias chmod=':'
+  alias usermod=':'
+  alias groupadd=':'
+  alias adduser=':'
+  alias useradd=':'
+  alias setcap=':'
+  alias mount=':'
+  alias sysctl=':'
+  alias service=':'
+  alias s6-svc=':'
+fi
 
 #Copy defaults
 SYSLOG_VERSION=$(syslog-ng --version 2>/dev/null | grep "Config version" | awk -F ':' '{print $2}' | tr -d '[:space:]')
@@ -30,16 +47,5 @@ cat <<-EOF
 ********************************************************
 EOF
 fi
-
-
-
-        /config
-fi
-
-
-
-
-
-
 exec 2>&1 \
          /usr/sbin/syslog-ng -F -f /config/syslog-ng.conf --persist-file /config/syslog-ng.persist --pidfile=/config/syslog-ng.pid --control=/config/syslog-ng.ctl --stderr --no-caps

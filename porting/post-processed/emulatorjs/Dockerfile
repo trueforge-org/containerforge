@@ -132,7 +132,7 @@ RUN \
 COPY --from=binbuilder /build-out/ /
 COPY --from=migrationbuilder /build-out/ /
 COPY --from=nodebuilder /emulatorjs/ /emulatorjs/
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

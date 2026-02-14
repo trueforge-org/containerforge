@@ -22,7 +22,7 @@ RUN \
         "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar"
 
 # copy local files
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

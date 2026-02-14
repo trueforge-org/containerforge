@@ -31,7 +31,7 @@ RUN \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf /var/lib/apt/lists/*
 
-USER apps:apps
+USER apps
 COPY --from=buildstage /davos.jar /app/davos.jar
 COPY . /
 

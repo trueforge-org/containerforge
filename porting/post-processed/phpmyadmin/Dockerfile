@@ -79,7 +79,7 @@ RUN \
     /tmp/* \
     /app/www/public/setup
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

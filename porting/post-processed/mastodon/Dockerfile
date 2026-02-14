@@ -108,7 +108,7 @@ RUN \
         -o -name '.*' \) \
         -type f -delete
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

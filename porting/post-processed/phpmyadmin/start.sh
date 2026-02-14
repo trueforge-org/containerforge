@@ -1,4 +1,21 @@
 #!/usr/bin/env bash
+# NONROOT_COMPAT
+if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+  shopt -s expand_aliases
+  alias apk=':'
+  alias apt-get=':'
+  alias chown=':'
+  alias chmod=':'
+  alias usermod=':'
+  alias groupadd=':'
+  alias adduser=':'
+  alias useradd=':'
+  alias setcap=':'
+  alias mount=':'
+  alias sysctl=':'
+  alias service=':'
+  alias s6-svc=':'
+fi
 
 mkdir -p \
     /config/phpmyadmin
@@ -42,7 +59,5 @@ fi
     if [[ -d "/config/themes" && ! -L "/app/www/public/themes" ]]; then
         ln -s "/config/themes" "/app/www/public/themes"
     fi
-
-fi
 
 ## TODO: find exec

@@ -85,7 +85,7 @@ RUN \
     $HOME/.cache \
     $HOME/.npm
 
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

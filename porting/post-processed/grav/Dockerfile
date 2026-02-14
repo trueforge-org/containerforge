@@ -51,7 +51,7 @@ RUN \
         $HOME/.composer
 
 # copy local files
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

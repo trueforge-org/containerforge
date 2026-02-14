@@ -96,7 +96,7 @@ RUN \
     /var/lib/pacman/sync/*
 
 # add local files
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

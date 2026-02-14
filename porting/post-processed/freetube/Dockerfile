@@ -24,7 +24,7 @@ RUN \
     rm -rf /config/.cache /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # add local files
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

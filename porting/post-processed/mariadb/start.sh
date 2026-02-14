@@ -1,4 +1,21 @@
 #!/usr/bin/env bash
+# NONROOT_COMPAT
+if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+  shopt -s expand_aliases
+  alias apk=':'
+  alias apt-get=':'
+  alias chown=':'
+  alias chmod=':'
+  alias usermod=':'
+  alias groupadd=':'
+  alias adduser=':'
+  alias useradd=':'
+  alias setcap=':'
+  alias mount=':'
+  alias sysctl=':'
+  alias service=':'
+  alias s6-svc=':'
+fi
 
 # make folders if required
 mkdir -p \
@@ -19,11 +36,7 @@ fi
 
 # set start function used later
 start_mariadb() {
-
-        mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/run/mysqld/mysqld.pid --user=apps &
-    else
-        mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/run/mysqld/mysqld.pid &
-    fi
+    mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/run/mysqld/mysqld.pid --user=apps &
     pid="$!"
     RET=1
     while [[ ${RET} -ne 0 ]]; do
@@ -128,6 +141,7 @@ EONEWSQL
 EOFPASS
 
         sleep 5s
+    fi
 
     # clean up any old install files from /tmp
     rm -f "${tempSqlFile}"
@@ -190,15 +204,7 @@ EOF
         sleep 5s
     fi
 fi
-
-
-
-
-
-
-
-         \
-        /usr/bin/mariadbd-safe \
+/usr/bin/mariadbd-safe \
         --defaults-extra-file=/config/custom.cnf \
         --datadir="${DATADIR}" \
         --pid-file=/run/mysqld/mysqld.pid \

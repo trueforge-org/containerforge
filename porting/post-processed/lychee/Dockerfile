@@ -68,7 +68,7 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
     $HOME/.npm
 
 # copy local files
-USER apps:apps
+USER apps
 COPY . /
 COPY ./root /
 

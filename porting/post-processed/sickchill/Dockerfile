@@ -41,7 +41,7 @@ RUN \
     $HOME/.cargo
 
 # copy local files
-USER apps:apps
+USER apps
 COPY . /
 
 # ports and volumes
