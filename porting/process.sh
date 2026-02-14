@@ -183,6 +183,17 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
     echo "BUILD_VERSION_ARG set to $BUILD_VERSION_ARG"
 
 for df in "${dockerfiles[@]}"; do
+    BASE_IMAGE="ghcr.io/trueforge-org/ubuntu:24.4"
+    if grep -qiE '\b(javac|java|jdk|jre|mvn|maven|gradle)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/java17:rolling"
+    elif grep -qiE '\b(go build|go mod|golang)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/golang:rolling"
+    elif grep -qiE '\b(npm|nodejs|yarn|pnpm)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/node:rolling"
+    elif grep -qiE '\b(python|pip|venv)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/python:3.13.7"
+    fi
+
     if sed --version >/dev/null 2>&1; then
         sed -i \
             -e '\|^LABEL build_version|d' \
@@ -191,10 +202,10 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^# syntax=docker/dockerfile:1|d' \
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM scratch[^aA ]*|FROM ${BASE_IMAGE}\nARG VERSION|g" \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "\|ADD rootfs.tar.xz|d" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
@@ -222,10 +233,10 @@ for df in "${dockerfiles[@]}"; do
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
             -e "\|ADD rootfs.tar.xz|d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM scratch[^aA ]*|FROM ${BASE_IMAGE}\nARG VERSION|g" \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
             -e 's|amd64|\$TARGETARCH|g' \
