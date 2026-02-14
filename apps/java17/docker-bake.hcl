@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=adoptium/temurin17-binaries
   default = "17.0.16+8"
 }
 

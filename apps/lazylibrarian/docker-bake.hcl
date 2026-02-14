@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=git-tags depName=https://gitlab.com/LazyLibrarian/LazyLibrarian versioning=loose
   default = "07aba984"
 }
 

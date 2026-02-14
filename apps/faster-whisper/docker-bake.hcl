@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=SYSTRAN/faster-whisper
   default = "3.0.2"
 }
 

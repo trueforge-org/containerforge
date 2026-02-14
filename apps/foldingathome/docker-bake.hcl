@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=foldingathome/fah-client-bastet versioning=loose
   default = "8.4.9"
 }
 

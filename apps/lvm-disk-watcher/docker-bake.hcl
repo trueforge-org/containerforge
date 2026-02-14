@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=trueforge-org/lvm-disk-watcher
   default = "1.1.0"
 }
 

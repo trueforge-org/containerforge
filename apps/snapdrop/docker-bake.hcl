@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=snapdrop/snapdrop
   default = "b8b78cc2"
 }
 

@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=thomst08/requestrr
   default = "4.11.0"
 }
 

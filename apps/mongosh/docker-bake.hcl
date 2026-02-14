@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=npm depName=mongosh
   default = "1.2.0"
 }
 

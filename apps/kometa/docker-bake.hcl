@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=Kometa-Team/Kometa
   default = "2.2.2"
 }
 

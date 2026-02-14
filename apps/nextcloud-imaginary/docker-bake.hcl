@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=git-refs depName=https://github.com/h2non/imaginary versioning=loose
   default = "20230401"
 }
 

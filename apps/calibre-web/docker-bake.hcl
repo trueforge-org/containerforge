@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=janeczku/calibre-web
   default = "0.6.25"
 }
 
