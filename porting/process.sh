@@ -88,7 +88,10 @@ rm -rf "$README_YAML" || true
 
     # Ensure standardized docker-bake.hcl exists for processing
     if [[ ! -f "$docker_bake_file" && -f "./templates/docker-bake.hcl" ]]; then
-        cp ./templates/docker-bake.hcl "$docker_bake_file"
+        cp ./templates/docker-bake.hcl "$docker_bake_file" || {
+            echo "[ERROR] Failed to create standardized docker-bake.hcl for $foldername"
+            exit 1
+        }
     fi
 
     [[ -f "$version_file" ]] && VERSION=$(<"$version_file") && rm -rf "$version_file"
