@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 as builder
+FROM ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION

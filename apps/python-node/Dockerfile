@@ -11,13 +11,13 @@ ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 ENV HOME=/app/nodehome
 
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/bin/node /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/bin/npm /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/bin/npx /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 /usr/local/bin/node /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 /usr/local/bin/npm /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 /usr/local/bin/npx /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /YARN_VERSION.txt /YARN_VERSION.txt
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /opt/ /opthold/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 /YARN_VERSION.txt /YARN_VERSION.txt
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:c0dc57295c677e6b1341544d1b89a2254ddebd07c55840c491be19b3bc3bec37 /opt/ /opthold/
 
 RUN YARN_VERSION=$(cat /YARN_VERSION.txt) && \
     mv /opthold/yarn-v$YARN_VERSION /opt/yarn-v$YARN_VERSION \
