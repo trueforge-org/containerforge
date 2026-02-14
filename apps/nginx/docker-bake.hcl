@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=docker depName=docker.io/library/nginx versioning=loose
   default = "1.24.0-2ubuntu7.5"
 }
 

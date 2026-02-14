@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=Ombi-app/Ombi
   default = "4.47.1"
 }
 

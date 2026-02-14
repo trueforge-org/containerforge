@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=docker depName=lscr.io/linuxserver/unifi-network-application versioning=loose
   default = "9.5.21"
 }
 

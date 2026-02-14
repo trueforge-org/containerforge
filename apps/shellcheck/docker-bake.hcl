@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=koalaman/shellcheck
   default = "0.11.0"
 }
 

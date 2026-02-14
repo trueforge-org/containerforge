@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=docker depName=docker.io/library/scratch versioning=loose
   default = "1.0.0"
 }
 

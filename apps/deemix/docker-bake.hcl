@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=DasRaschloch/deemix-gui
   default = "0.0.1"
 }
 

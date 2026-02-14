@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=Kareadita/Kavita
   default = "0.8.8.3"
 }
 

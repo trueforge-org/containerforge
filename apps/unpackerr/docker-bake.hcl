@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=Unpackerr/unpackerr
   default = "0.14.5"
 }
 

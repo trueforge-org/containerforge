@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=cloudbox/autoscan
   default = "1.4.0"
 }
 

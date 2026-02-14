@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=gitpod-io/openvscode-server
   default = "1.105.1"
 }
 

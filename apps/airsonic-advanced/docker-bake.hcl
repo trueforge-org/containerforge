@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=kagemomiji/airsonic-advanced
   default = "11.1.4"
 }
 
