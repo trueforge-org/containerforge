@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=trueforge-org/kube-sa-proxy versioning=loose
   default = "v1.30.2"
 }
 

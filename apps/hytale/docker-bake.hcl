@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=trueforge-org/hytale versioning=loose
   default = "1.0.0"
 }
 

@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=trueforge-org/resilio-sync versioning=loose
   default = "3.1.2.1076"
 }
 
