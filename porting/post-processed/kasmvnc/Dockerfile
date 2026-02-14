@@ -273,7 +273,6 @@ RUN \
         libgl1-mesa-glx \
         mesa-vulkan-drivers \
         nginx \
-        nodejs \
         openbox \
         openssh-client \
         openssl \

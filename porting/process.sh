@@ -188,6 +188,7 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
     echo "BUILD_VERSION_ARG set to $BUILD_VERSION_ARG"
 
 for df in "${dockerfiles[@]}"; do
+    CURRENT_BASE=$(awk '/^FROM / { print $2; exit }' "$df")
     BASE_IMAGE="ghcr.io/trueforge-org/ubuntu:24.4"
     if grep -qiE '\b(javac|java|jdk|jre|mvn|maven|gradle)\b' "$df"; then
         BASE_IMAGE="ghcr.io/trueforge-org/java17:rolling"
@@ -278,6 +279,12 @@ if [[ ! -d "$root_folder" ]]; then
         -e 's|COPY.*root.*||g' \
         "$df"
     fi
+fi
+if [[ "$CURRENT_BASE" == ghcr.io/trueforge-org/node:* ]]; then
+    perl -i -ne 'print unless /^\s*nodejs\s*\\?\s*$/' "$df"
+fi
+if [[ "$CURRENT_BASE" == ghcr.io/trueforge-org/java*:* ]]; then
+    perl -i -ne 'print unless /^\s*(openjdk-[^[:space:]]*|default-jre[^[:space:]]*|default-jdk[^[:space:]]*)\s*\\?\s*$/' "$df"
 fi
 if sed --version >/dev/null 2>&1; then
     sed -i 's|^USER apps$|USER apps:apps|g' "$df"

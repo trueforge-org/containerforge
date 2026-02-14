@@ -7,8 +7,7 @@ ARG TARGETARCH
 USER root
 
 # environment settings
-ENV HOME="/app"
-WORKDIR /app
+ENV HOME="/config"
 
 RUN \
   echo "**** install build packages ****" && \

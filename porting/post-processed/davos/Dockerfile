@@ -37,7 +37,6 @@ COPY . /
 
 # ports and volumes
 EXPOSE 8080
-WORKDIR /app
 VOLUME /download
 
 WORKDIR /config
