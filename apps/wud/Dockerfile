@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:rolling@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 AS dependencies
+FROM ghcr.io/trueforge-org/node:rolling@sha256:14a0ff6cea8efdb9eb923acf206058a9ecf22c8933b39a0ec66bf1458915790c AS dependencies
 
 USER root
 
@@ -26,7 +26,7 @@ RUN mkdir -p /app/src && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-FROM ghcr.io/trueforge-org/node:rolling@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693
+FROM ghcr.io/trueforge-org/node:rolling@sha256:14a0ff6cea8efdb9eb923acf206058a9ecf22c8933b39a0ec66bf1458915790c
 
 ARG VERSION
 
