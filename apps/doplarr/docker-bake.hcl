@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=kiranshila/doplarr
-  default = "3.6.3"
+  default = "3.7.0"
 }
 
 variable "LICENSE" {
