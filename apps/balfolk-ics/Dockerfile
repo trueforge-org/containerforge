@@ -2,6 +2,8 @@ FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce
 
 ARG VERSION
 
+LABEL org.trueforge.build.version="${VERSION}"
+
 USER root
 
 # Install cron and other dependencies
