@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/golang
-  default = "1.25.7"
+  default = "1.26.0"
 }
 
 variable "LICENSE" {
