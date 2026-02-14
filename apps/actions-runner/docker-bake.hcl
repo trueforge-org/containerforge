@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "BUILDX_VERSION" {
   // renovate: datasource=github-releases depName=docker/buildx
-  default = "0.28.0"
+  default = "0.31.1"
 }
 
 variable "RUNNER_CONTAINER_HOOKS_VERSION" {
