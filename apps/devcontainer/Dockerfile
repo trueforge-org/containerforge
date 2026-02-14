@@ -90,7 +90,7 @@ ENV kubeconformVersion=0.7.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
 ENV conftestVersion=0.66.0
 # renovate: datasource=github-releases depName=mikefarah/yq
-ENV goyqVersion=4.52.2
+ENV goyqVersion=4.52.4
 # renovate: datasource=github-releases depName=rancher/cli
 ENV rancherVersion=2.13.2
 # renovate: datasource=github-releases depName=tilt-dev/tilt
