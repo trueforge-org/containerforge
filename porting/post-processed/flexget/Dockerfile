@@ -68,3 +68,5 @@ COPY ./root /
 # ports and volumes
 EXPOSE 5050
 VOLUME /config
+
+WORKDIR /config

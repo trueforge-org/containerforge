@@ -60,3 +60,5 @@ COPY ./root /
 EXPOSE 80
 
 VOLUME /config /data
+
+WORKDIR /config

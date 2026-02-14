@@ -86,6 +86,14 @@ rm -rf "$README_YAML" || true
     docker_bake_file="$processed/docker-bake.hcl"
     version_file="$processed/version.txt"
 
+    # Ensure standardized docker-bake.hcl exists for processing
+    if [[ ! -f "$docker_bake_file" && -f "./templates/docker-bake.hcl" ]]; then
+        cp ./templates/docker-bake.hcl "$docker_bake_file" || {
+            echo "[ERROR] Failed to create standardized docker-bake.hcl for $foldername"
+            exit 1
+        }
+    fi
+
     [[ -f "$version_file" ]] && VERSION=$(<"$version_file") && rm -rf "$version_file"
     VERSIONPREFIX=""
     if [[ "$VERSION" == v* ]]; then
@@ -183,6 +191,18 @@ rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_fi
     echo "BUILD_VERSION_ARG set to $BUILD_VERSION_ARG"
 
 for df in "${dockerfiles[@]}"; do
+    CURRENT_BASE=$(awk '/^FROM / { print $2; exit }' "$df")
+    BASE_IMAGE="ghcr.io/trueforge-org/ubuntu:24.4"
+    if grep -qiE '\b(javac|java|jdk|jre|mvn|maven|gradle)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/java17:rolling"
+    elif grep -qiE '\b(go build|go mod|golang)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/golang:rolling"
+    elif grep -qiE '\b(npm|nodejs|yarn|pnpm)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/node:rolling"
+    elif grep -qiE '\b(python|pip|venv)\b' "$df"; then
+        BASE_IMAGE="ghcr.io/trueforge-org/python:3.13.7"
+    fi
+
     if sed --version >/dev/null 2>&1; then
         sed -i \
             -e '\|^LABEL build_version|d' \
@@ -191,10 +211,10 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^# syntax=docker/dockerfile:1|d' \
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM scratch[^aA ]*|FROM ${BASE_IMAGE}\nARG VERSION|g" \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "\|ADD rootfs.tar.xz|d" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
@@ -222,10 +242,10 @@ for df in "${dockerfiles[@]}"; do
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
             -e "\|ADD rootfs.tar.xz|d" \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4|g' \
-            -e 's|^FROM scratch[^aA ]*|FROM ghcr.io/trueforge-org/ubuntu:24.4\nARG VERSION|g' \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM scratch[^aA ]*|FROM ${BASE_IMAGE}\nARG VERSION|g" \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
             -e 's|amd64|\$TARGETARCH|g' \
@@ -262,6 +282,24 @@ if [[ ! -d "$root_folder" ]]; then
         -e 's|COPY.*root.*||g' \
         "$df"
     fi
+fi
+if [[ "$CURRENT_BASE" == ghcr.io/trueforge-org/node:* ]]; then
+    perl -i -ne 'print unless /^\s*nodejs\s*\\?\s*$/' "$df"
+fi
+if [[ "$CURRENT_BASE" == ghcr.io/trueforge-org/java*:* ]]; then
+    perl -i -ne 'print unless /^\s*(openjdk-[^[:space:]]*|default-jre[^[:space:]]*|default-jdk[^[:space:]]*)\s*\\?\s*$/' "$df"
+fi
+if sed --version >/dev/null 2>&1; then
+    sed -i 's|^USER apps$|USER apps|g' "$df"
+else
+    sed -i '' 's|^USER apps$|USER apps|g' "$df"
+fi
+if ! grep -q '^WORKDIR /config$' "$df"; then
+    echo "" >> "$df"
+    echo "WORKDIR /config" >> "$df"
+fi
+if ! grep -Eq '^VOLUME .*/config' "$df"; then
+    echo "VOLUME /config" >> "$df"
 fi
     echo "[VERBOSE] Sanitized $df"
 done
@@ -322,6 +360,31 @@ if [[ -f "$processed/start.sh" ]]; then
         -e 's|.*LSIO_NON_ROOT_USER.*||g' \
         -e 's|/lsiopy|/config/venv|g' \
         "$processed/start.sh"
+    fi
+    if ! grep -q '^# NONROOT_COMPAT$' "$processed/start.sh"; then
+        {
+            head -n 1 "$processed/start.sh"
+            cat <<'EOF'
+# NONROOT_COMPAT
+if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+  shopt -s expand_aliases
+  alias apk=':'
+  alias apt-get=':'
+  alias chown=':'
+  alias chmod=':'
+  alias usermod=':'
+  alias groupadd=':'
+  alias adduser=':'
+  alias useradd=':'
+  alias setcap=':'
+  alias mount=':'
+  alias sysctl=':'
+  alias service=':'
+  alias s6-svc=':'
+fi
+EOF
+            tail -n +2 "$processed/start.sh"
+        } > "$processed/start.sh.tmp" && mv "$processed/start.sh.tmp" "$processed/start.sh"
     fi
 fi
 done

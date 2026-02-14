@@ -51,3 +51,5 @@ COPY . /
 # ports and volumes
 EXPOSE 9000
 VOLUME /config
+
+WORKDIR /config

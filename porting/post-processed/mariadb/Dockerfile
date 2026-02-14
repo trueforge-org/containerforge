@@ -36,3 +36,5 @@ COPY ./root /
 EXPOSE 3306
 
 VOLUME /config
+
+WORKDIR /config

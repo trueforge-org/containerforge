@@ -46,3 +46,5 @@ COPY ./root /
 # ports and volumes
 EXPOSE 8080
 VOLUME /config
+
+WORKDIR /config

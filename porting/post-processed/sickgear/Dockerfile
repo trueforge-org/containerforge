@@ -48,3 +48,5 @@ COPY ./root /
 EXPOSE 8081
 
 VOLUME /config
+
+WORKDIR /config

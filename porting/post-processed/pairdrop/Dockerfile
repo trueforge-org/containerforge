@@ -34,3 +34,6 @@ COPY . /
 
 # ports and volumes
 EXPOSE 3000
+
+WORKDIR /config
+VOLUME /config

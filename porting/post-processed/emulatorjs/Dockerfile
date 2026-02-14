@@ -1,5 +1,5 @@
 ## TODO: set version
-FROM ghcr.io/trueforge-org/go:rolling as migrationbuilder
+FROM ghcr.io/trueforge-org/golang:rolling as migrationbuilder
 
 RUN \
   echo "**** build fs-repo-migrations ****" && \
@@ -14,7 +14,7 @@ RUN \
   done
 
   ## TODO: set version
-FROM ghcr.io/trueforge-org/go:rolling as binbuilder
+FROM ghcr.io/trueforge-org/golang:rolling as binbuilder
 
 RUN \
   echo "**** build nestool ****" && \
@@ -138,3 +138,6 @@ COPY ./root /
 
 # ports
 EXPOSE 80 3000
+
+WORKDIR /config
+VOLUME /config

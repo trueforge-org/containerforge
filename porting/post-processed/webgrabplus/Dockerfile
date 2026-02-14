@@ -51,3 +51,5 @@ COPY ./root /
 
 # ports and volumes
 VOLUME /config /data
+
+WORKDIR /config

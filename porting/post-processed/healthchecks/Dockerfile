@@ -73,3 +73,5 @@ COPY ./root /
 EXPOSE 8000
 
 VOLUME /config
+
+WORKDIR /config

@@ -12,7 +12,6 @@ RUN \
     apt-get install -y --no-install-recommends \
         libcap2 \
         libnss3 \
-        openjdk-8-jre-headless \
         libsqlite3-0 && \
     rm -rf /var/lib/apt/lists/* && \
     echo "**** install ha-bridge ****" && \
@@ -30,3 +29,5 @@ COPY ./root /
 # ports and volumes
 EXPOSE 8080
 VOLUME /config
+
+WORKDIR /config

@@ -47,3 +47,6 @@ COPY . /
 
 # ports
 EXPOSE 3131
+
+WORKDIR /config
+VOLUME /config

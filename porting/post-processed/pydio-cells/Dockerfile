@@ -1,5 +1,5 @@
 ## TODO pin version tag
-FROM ghcr.io/trueforge-org/go:rolling as buildstage
+FROM ghcr.io/trueforge-org/golang:rolling as buildstage
 
 
 ENV \
@@ -59,3 +59,5 @@ COPY --from=buildstage /app/cells /app/
 USER apps
 COPY . /
 
+WORKDIR /config
+VOLUME /config

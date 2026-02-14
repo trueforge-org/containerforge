@@ -47,3 +47,6 @@ COPY ./root /
 
 # ports and volumes
 EXPOSE 8888 9000
+
+WORKDIR /config
+VOLUME /config

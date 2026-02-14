@@ -69,3 +69,5 @@ COPY . /
 EXPOSE 1337
 
 VOLUME /config
+
+WORKDIR /config

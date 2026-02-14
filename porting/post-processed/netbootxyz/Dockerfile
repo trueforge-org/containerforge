@@ -10,7 +10,6 @@ RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     nginx \
-    nodejs \
     tftp-hpa && \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \
@@ -38,3 +37,5 @@ COPY ./root /
 EXPOSE 3000
 
 VOLUME /config
+
+WORKDIR /config

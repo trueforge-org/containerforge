@@ -59,3 +59,5 @@ COPY . /
 # ports and volumes
 EXPOSE 8085
 VOLUME /config
+
+WORKDIR /config

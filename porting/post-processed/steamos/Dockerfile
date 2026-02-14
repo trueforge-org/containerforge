@@ -104,3 +104,5 @@ COPY ./root /
 EXPOSE 3000
 
 VOLUME /config
+
+WORKDIR /config

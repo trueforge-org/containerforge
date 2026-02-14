@@ -116,3 +116,6 @@ COPY ./root /
 # Ports and volumes
 EXPOSE 3000 443
 VOLUME /opt/
+
+WORKDIR /config
+VOLUME /config

@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/pyton:3.13.7
+FROM ghcr.io/trueforge-org/python:3.13.7
 
 # set version label
 ARG VERSION
@@ -47,3 +47,5 @@ COPY . /
 # ports and volumes
 EXPOSE 8081
 VOLUME /config
+
+WORKDIR /config

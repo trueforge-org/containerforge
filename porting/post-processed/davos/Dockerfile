@@ -33,9 +33,11 @@ RUN \
 
 USER apps
 COPY --from=buildstage /davos.jar /app/davos.jar
-COPY ./ /
+COPY . /
 
 # ports and volumes
 EXPOSE 8080
-WORKDIR /app
 VOLUME /download
+
+WORKDIR /config
+VOLUME /config

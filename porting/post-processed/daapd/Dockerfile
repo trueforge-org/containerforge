@@ -113,3 +113,5 @@ COPY . /
 EXPOSE 3689
 
 VOLUME /config /music
+
+WORKDIR /config

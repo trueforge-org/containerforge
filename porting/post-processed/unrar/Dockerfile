@@ -39,5 +39,15 @@ RUN \
 # Storage layer consumed downstream
 FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174
 
+ARG VERSION
+ARG TARGETARCH
+USER root
+
 # Add files from buildstage
 COPY --from=alpine-buildstage /usr/bin/unrar /usr/bin/unrar
+
+USER apps
+COPY . /
+
+WORKDIR /config
+VOLUME /config

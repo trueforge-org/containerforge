@@ -74,3 +74,5 @@ COPY . /
 COPY ./root /
 
 VOLUME /config
+
+WORKDIR /config

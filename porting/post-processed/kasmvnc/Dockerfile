@@ -273,7 +273,6 @@ RUN \
         libgl1-mesa-glx \
         mesa-vulkan-drivers \
         nginx \
-        nodejs \
         openbox \
         openssh-client \
         openssl \
@@ -370,3 +369,5 @@ COPY ./root /
 # ports and volumes
 EXPOSE 3000 3001
 VOLUME /config
+
+WORKDIR /config

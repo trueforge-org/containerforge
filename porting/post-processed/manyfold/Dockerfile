@@ -90,3 +90,6 @@ COPY . /
 COPY ./root /
 
 EXPOSE 3214
+
+WORKDIR /config
+VOLUME /config

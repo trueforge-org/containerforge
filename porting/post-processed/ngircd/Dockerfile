@@ -24,3 +24,5 @@ COPY ./root /
 EXPOSE 6667
 
 VOLUME /config
+
+WORKDIR /config

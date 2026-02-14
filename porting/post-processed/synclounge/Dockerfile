@@ -8,7 +8,6 @@ USER root
 
 # environment settings
 ENV HOME="/app"
-WORKDIR /app
 
 RUN \
   echo "**** install build packages ****" && \
@@ -28,3 +27,6 @@ RUN \
 USER apps
 COPY . /
 
+
+WORKDIR /config
+VOLUME /config

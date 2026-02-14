@@ -44,3 +44,5 @@ COPY . /
 # ports and volumes
 EXPOSE 8000 8443
 VOLUME /config /storage
+
+WORKDIR /config

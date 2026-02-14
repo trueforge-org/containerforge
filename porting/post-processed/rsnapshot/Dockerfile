@@ -26,3 +26,5 @@ COPY ./root /
 
 # ports and volumes
 VOLUME /config
+
+WORKDIR /config

@@ -18,3 +18,6 @@ RUN \
 USER apps
 COPY . /
 COPY ./root /
+
+WORKDIR /config
+VOLUME /config

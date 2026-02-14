@@ -84,3 +84,6 @@ COPY . /
 COPY ./root /
 
 EXPOSE 80 443
+
+WORKDIR /config
+VOLUME /config
