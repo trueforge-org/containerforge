@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=trueforge-org/balfolk-ics versioning=loose
   default = "0.0.5"
 }
 
