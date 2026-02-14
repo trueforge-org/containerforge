@@ -44,3 +44,5 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 COPY --from=builder /build-out /
+USER apps
+COPY . /

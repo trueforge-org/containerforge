@@ -86,6 +86,11 @@ rm -rf "$README_YAML" || true
     docker_bake_file="$processed/docker-bake.hcl"
     version_file="$processed/version.txt"
 
+    # Ensure standardized docker-bake.hcl exists for processing
+    if [[ ! -f "$docker_bake_file" && -f "./templates/docker-bake.hcl" ]]; then
+        cp ./templates/docker-bake.hcl "$docker_bake_file"
+    fi
+
     [[ -f "$version_file" ]] && VERSION=$(<"$version_file") && rm -rf "$version_file"
     VERSIONPREFIX=""
     if [[ "$VERSION" == v* ]]; then
