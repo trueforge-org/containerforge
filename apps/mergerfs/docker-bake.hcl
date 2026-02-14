@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=trapexit/mergerfs
-  default = "2.41.0"
+  default = "2.41.1"
 }
 
 variable "LICENSE" {
