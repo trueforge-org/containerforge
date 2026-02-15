@@ -9,7 +9,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "AGPL-3.0-or-later"
+  default = "BSD-3-Clause"
 }
 
 variable "SOURCE" {
@@ -22,9 +22,6 @@ group "default" {
 
 target "image" {
   inherits = ["docker-metadata-action"]
-  args = {
-    VERSION = "${VERSION}"
-  }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
     "org.opencontainers.image.licenses" = "${LICENSE}"
