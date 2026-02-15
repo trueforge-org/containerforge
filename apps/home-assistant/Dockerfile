@@ -59,12 +59,12 @@ RUN set -eux; \
         && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages and Home Assistant
-RUN pip install uv; \
-    uv pip install psycopg2; \
-    uv pip install --index-strategy unsafe-best-match \
+RUN pip3 install --no-cache-dir psycopg2; \
+    pip3 install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements.txt"; \
-    uv pip install --index-strategy unsafe-best-match --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements_all.txt"; \
-    uv pip install --index-strategy unsafe-best-match homeassistant=="${VERSION}"; \
+    pip3 install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+        --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements_all.txt"; \
+    pip3 install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ homeassistant=="${VERSION}"; \
     cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt; \
     chmod 644 /etc/ca-certificates.crt; \
     curl -fsSL -o /bin/go2rtc "https://github.com/AlexxIT/go2rtc/releases/latest/download/go2rtc_linux_${TARGETARCH}"; \
