@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "1.6.34"
+  default = "1.6.24-1build3"
 }
 
 variable "LICENSE" {
@@ -22,6 +22,9 @@ group "default" {
 
 target "image" {
   inherits = ["docker-metadata-action"]
+  args = {
+    VERSION = "${VERSION}"
+  }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
     "org.opencontainers.image.licenses" = "${LICENSE}"
