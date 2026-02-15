@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"os"
+	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -13,12 +13,7 @@ import (
 func Test(t *testing.T) {
 	ctx := context.Background()
 
-	appName := os.Getenv("APP")
-	require.NotEmpty(t, appName, "APP environment variable must be set")
-	image := os.Getenv("TEST_IMAGE")
-	if image == "" {
-		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
-	}
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/python:rolling")
 
 	configDir := t.TempDir()
 
@@ -28,7 +23,6 @@ func Test(t *testing.T) {
 			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
 		),
 		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -L /config/venv && test \"$(readlink /config/venv)\" = /defaults/venv"),
-
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
