@@ -1,7 +1,7 @@
 # hadolint ignore=DL3007
 ARG VERSION
 
-FROM docker.io/renovate/renovate:${VERSION}-full
+FROM ghcr.io/trueforge-org/renovate:${VERSION}-full
 
 
 ARG TARGETARCH

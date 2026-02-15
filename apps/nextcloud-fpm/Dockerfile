@@ -1,5 +1,5 @@
 ARG VERSION
-FROM public.ecr.aws/docker/library/nextcloud:${VERSION}
+FROM ghcr.io/trueforge-org/nextcloud:${VERSION}
 ARG TARGETARCH
 
 # Adds SURY PHP repository (This is a workaround because IMAP php extension is no longer available in Debian Trixie)
