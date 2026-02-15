@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "renovate"
+  default = "tailscale"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=renovate/renovate
-  default = "43.15.1"
+  // renovate: datasource=docker depName=docker.io/tailscale/tailscale
+  default = "v1.94.2"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/renovate/renovate"
+  default = "https://github.com/tailscale/tailscale"
 }
 
 group "default" {

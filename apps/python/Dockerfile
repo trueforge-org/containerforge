@@ -82,7 +82,8 @@ RUN set -eux; \
         \( -type d -a \( -name test -o -name tests -o -name idle_test \) \
         -o -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \) -exec rm -rf '{}' +; \
     ldconfig; \
-    mkdir -p /app/venv; \
+    mkdir -p /app/venv /defaults; \
+    ln -sfn /defaults/venv /config/venv; \
     chown -R apps:apps /app && chmod -R 755 /app; \
     python3 --version; \
     pip3 --version
@@ -99,3 +100,4 @@ RUN set -eux; \
 # Switch to non-root user
 USER apps:apps
 
+COPY --chmod=0755 docker-entrypoint.d/05-restore-venv.sh /docker-entrypoint.d/05-restore-venv.sh

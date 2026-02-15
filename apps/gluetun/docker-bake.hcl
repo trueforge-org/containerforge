@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "renovate"
+  default = "gluetun"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=renovate/renovate
-  default = "43.15.1"
+  // renovate: datasource=github-releases depName=qdm12/gluetun
+  default = "v3.41.1"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/renovate/renovate"
+  default = "https://github.com/qdm12/gluetun"
 }
 
 group "default" {
