@@ -14,12 +14,11 @@ RUN \
   apt-get install -y --no-install-recommends \
     build-essential \
     git \
-  && mkdir -p /app/cfpy && \
-  python3 -m venv /app/cfpy && \
-  pip install -U --no-cache-dir \
+  && python3 -m venv /config/venv && \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     git+https://github.com/rhasspy/wyoming-faster-whisper@v${VERSION} && \
   echo "**** cleanup ****" && \
   apt-get purge -y --auto-remove \
