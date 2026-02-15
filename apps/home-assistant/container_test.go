@@ -21,7 +21,9 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
-	configDir := t.TempDir()
+	configDir, err := os.MkdirTemp("", "home-assistant-config-")
+	require.NoError(t, err)
+	require.NoError(t, os.Chmod(configDir, 0o777))
 
 	app, err := testcontainers.Run(
 		ctx, image,

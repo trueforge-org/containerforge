@@ -22,11 +22,16 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
-	configDir := t.TempDir()
+	configDir, err := os.MkdirTemp("", "kometa-config-")
+	require.NoError(t, err)
+	require.NoError(t, os.Chmod(configDir, 0o777))
 
 	app, err := testcontainers.Run(
 		ctx,
 		image,
+		testcontainers.WithMounts(
+			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
+		),
 		testcontainers.WithWaitStrategy(
 			wait.ForLog("Finished Run"),
 		),

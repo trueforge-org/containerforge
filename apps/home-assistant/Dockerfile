@@ -65,6 +65,8 @@ RUN pip install uv; \
         --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements.txt"; \
     uv pip install --index-strategy unsafe-best-match --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements_all.txt"; \
     uv pip install --index-strategy unsafe-best-match homeassistant=="${VERSION}"; \
+    cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt; \
+    chmod 644 /etc/ca-certificates.crt; \
     curl -fsSL -o /bin/go2rtc "https://github.com/AlexxIT/go2rtc/releases/latest/download/go2rtc_linux_${TARGETARCH}"; \
     chmod +x /bin/go2rtc; \
     mkdir -p /config && chown 568:568 -R /config; \

@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 cp --update=none /app/kometa/config/config.yml.template /config/config.yml
 
+CA_BUNDLE_PATH="/etc/ca-certificates.crt"
+export SSL_CERT_FILE="${CA_BUNDLE_PATH}"
+export CURL_CA_BUNDLE="${CA_BUNDLE_PATH}"
+export REQUESTS_CA_BUNDLE="${CA_BUNDLE_PATH}"
+
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
 
 cd / || exit 1
@@ -18,13 +23,13 @@ if [[ -n "${CONFIG_FILE}" ]] && [[ ! -e "${CONFIG_FILE}" ]]; then
 fi
 
 if { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--run|-r)([\s]|$)'; } && { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; }; then
-     /config/venv/bin/python3 /app/kometa/kometa.py "${CLI_OPTIONS[@]}"
+     python3 /app/kometa/kometa.py "${CLI_OPTIONS[@]}"
 elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--run|-r)([\s]|$)'; then
-     /config/venv/bin/python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
+     python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
 elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; then
-     /config/venv/bin/python3 /app/kometa/kometa.py --run "${CLI_OPTIONS[@]}"
+     python3 /app/kometa/kometa.py --run "${CLI_OPTIONS[@]}"
 else
-     /config/venv/bin/python3 /app/kometa/kometa.py --run --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
+     python3 /app/kometa/kometa.py --run --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
 fi
 
 IFS="|" read -r -a CLI_OPTIONS <<< "$CLI_OPTIONS_STRING"
@@ -46,15 +51,14 @@ fi
 
 if { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--time|-t)([\s])'; } && { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; }; then
     exec \
-         /config/venv/bin/python3 /app/kometa/kometa.py "${CLI_OPTIONS[@]}"
+         python3 /app/kometa/kometa.py "${CLI_OPTIONS[@]}"
 elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--time|-t)([\s])'; then
     exec \
-         /config/venv/bin/python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
+         python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
 elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; then
     exec \
-         /config/venv/bin/python3 /app/kometa/kometa.py --time "${KOMETA_TIME:-03:00}" "${CLI_OPTIONS[@]}"
+         python3 /app/kometa/kometa.py --time "${KOMETA_TIME:-03:00}" "${CLI_OPTIONS[@]}"
 else
     exec \
-         /config/venv/bin/python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" --time "${KOMETA_TIME:-03:00}" "${CLI_OPTIONS[@]}"
+         python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" --time "${KOMETA_TIME:-03:00}" "${CLI_OPTIONS[@]}"
 fi
-
