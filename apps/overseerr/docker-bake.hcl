@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=sct/overseerr
-  default = "1.34.0"
+  default = "1.35.0"
 }
 
 variable "LICENSE" {
