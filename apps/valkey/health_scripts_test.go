@@ -1,0 +1,70 @@
+package main
+
+import (
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
+
+func TestHealthScriptsUseValkeyEnvWithRedisAlias(t *testing.T) {
+	t.Run("local readiness prefers VALKEY over REDIS", func(t *testing.T) {
+		output := runHealthScript(t, "ping_readiness_local.sh", map[string]string{
+			"VALKEY_PASSWORD": "valkey-pass",
+			"REDIS_PASSWORD":  "redis-pass",
+			"VALKEY_PORT":     "6381",
+			"REDIS_PORT":      "6382",
+		})
+	require.Contains(t, output, "AUTH=valkey-pass")
+	require.Contains(t, output, "ARG=-h\nARG=localhost\nARG=-p\nARG=6381\nARG=ping")
+	})
+
+	t.Run("master readiness falls back to REDIS alias", func(t *testing.T) {
+		output := runHealthScript(t, "ping_readiness_master.sh", map[string]string{
+			"REDIS_MASTER_PASSWORD":    "redis-master-pass",
+			"REDIS_MASTER_HOST":        "redis-master-host",
+			"REDIS_MASTER_PORT_NUMBER": "6390",
+		})
+	require.Contains(t, output, "AUTH=redis-master-pass")
+	require.Contains(t, output, "ARG=-h\nARG=redis-master-host\nARG=-p\nARG=6390\nARG=ping")
+	})
+}
+
+func runHealthScript(t *testing.T, scriptName string, vars map[string]string) string {
+	t.Helper()
+
+	tmpDir := t.TempDir()
+	resultFile := filepath.Join(tmpDir, "result.txt")
+	stub := filepath.Join(tmpDir, "valkey-cli")
+const stubScript = `#!/bin/sh
+printf 'AUTH=%s\n' "${REDISCLI_AUTH:-}" > "$VALKEY_CLI_RESULT_FILE"
+for arg in "$@"; do
+  printf 'ARG=%s\n' "$arg" >> "$VALKEY_CLI_RESULT_FILE"
+done
+echo PONG
+`
+	err := os.WriteFile(stub, []byte(stubScript), 0o755)
+	require.NoError(t, err)
+
+	_, file, _, ok := runtime.Caller(0)
+	require.True(t, ok)
+	scriptPath := filepath.Join(filepath.Dir(file), "health", scriptName)
+	cmd := exec.Command("bash", scriptPath, "2")
+	cmd.Env = append(os.Environ(),
+		"PATH="+tmpDir+":"+os.Getenv("PATH"),
+		"VALKEY_CLI_RESULT_FILE="+resultFile,
+	)
+	for k, v := range vars {
+		cmd.Env = append(cmd.Env, k+"="+v)
+	}
+
+	out, err := cmd.CombinedOutput()
+	require.NoError(t, err, string(out))
+
+	data, err := os.ReadFile(resultFile)
+	require.NoError(t, err)
+	return string(data)
+}
