@@ -20,20 +20,31 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
+	configDir := t.TempDir()
+
 	app, err := testcontainers.Run(
 		ctx, image,
+		testcontainers.WithMounts(
+			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
+		),
 		testcontainers.WithCmdArgs("node", "--version"),
 	)
 	testcontainers.CleanupContainer(t, app)
 
 	app, err = testcontainers.Run(
 		ctx, image,
+		testcontainers.WithMounts(
+			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
+		),
 		testcontainers.WithCmdArgs("npm", "--version"),
 	)
 	testcontainers.CleanupContainer(t, app)
 
 	app, err = testcontainers.Run(
 		ctx, image,
+		testcontainers.WithMounts(
+			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
+		),
 		testcontainers.WithCmdArgs("yarn", "--version"),
 	)
 	testcontainers.CleanupContainer(t, app)
