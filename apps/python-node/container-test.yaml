@@ -1,8 +1,6 @@
 timeoutSeconds: 10
-
-# unmappedCurrentTests: commands present in container_test.go
-# that are not representable in the current container-test schema fields.
-# - ["python3", "--version"]
-# - ["node", "--version"]
-# - ["npm", "--version"]
-# - ["yarn", "--version"]
+commands:
+- python3 --version
+- node --version
+- npm --version
+- yarn --version

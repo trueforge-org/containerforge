@@ -1,5 +1,3 @@
 timeoutSeconds: 10
-
-# unmappedCurrentTests: commands present in container_test.go
-# that are not representable in the current container-test schema fields.
-# - ["php-fpm", "-F"]
+commands:
+- php-fpm -F

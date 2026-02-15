@@ -1,5 +1,3 @@
 timeoutSeconds: 10
-
-# unmappedCurrentTests: commands present in container_test.go
-# that are not representable in the current container-test schema fields.
-# - ["python", "-u", "/app/sidecar.py"]
+commands:
+- python -u /app/sidecar.py
