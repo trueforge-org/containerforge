@@ -13,6 +13,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY --chmod=0755 health /health
+COPY --chmod=0755 start.sh /start.sh
 
 ENV VALKEY_PORT=6379
 
@@ -22,4 +23,4 @@ HEALTHCHECK CMD ["/bin/sh", "-c", "/health/ping_liveness_local.sh 2"]
 
 EXPOSE 6379
 
-CMD ["valkey-server", "--bind", "0.0.0.0", "--port", "6379"]
+CMD ["/start.sh"]

@@ -18,8 +18,8 @@ func TestHealthScriptsUseValkeyEnvWithRedisAlias(t *testing.T) {
 			"VALKEY_PORT":     "6381",
 			"REDIS_PORT":      "6382",
 		})
-		require.Contains(t, output, "AUTH=valkey-pass")
-		require.Contains(t, output, "ARGS=-h localhost -p 6381 ping")
+	require.Contains(t, output, "AUTH=valkey-pass")
+	require.Contains(t, output, "ARG=-h\nARG=localhost\nARG=-p\nARG=6381\nARG=ping")
 	})
 
 	t.Run("master readiness falls back to REDIS alias", func(t *testing.T) {
@@ -28,8 +28,8 @@ func TestHealthScriptsUseValkeyEnvWithRedisAlias(t *testing.T) {
 			"REDIS_MASTER_HOST":        "redis-master-host",
 			"REDIS_MASTER_PORT_NUMBER": "6390",
 		})
-		require.Contains(t, output, "AUTH=redis-master-pass")
-		require.Contains(t, output, "ARGS=-h redis-master-host -p 6390 ping")
+	require.Contains(t, output, "AUTH=redis-master-pass")
+	require.Contains(t, output, "ARG=-h\nARG=redis-master-host\nARG=-p\nARG=6390\nARG=ping")
 	})
 }
 
@@ -39,9 +39,11 @@ func runHealthScript(t *testing.T, scriptName string, vars map[string]string) st
 	tmpDir := t.TempDir()
 	resultFile := filepath.Join(tmpDir, "result.txt")
 	stub := filepath.Join(tmpDir, "valkey-cli")
-	const stubScript = `#!/bin/sh
+const stubScript = `#!/bin/sh
 printf 'AUTH=%s\n' "${REDISCLI_AUTH:-}" > "$VALKEY_CLI_RESULT_FILE"
-printf 'ARGS=%s\n' "$*" >> "$VALKEY_CLI_RESULT_FILE"
+for arg in "$@"; do
+  printf 'ARG=%s\n' "$arg" >> "$VALKEY_CLI_RESULT_FILE"
+done
 echo PONG
 `
 	err := os.WriteFile(stub, []byte(stubScript), 0o755)
