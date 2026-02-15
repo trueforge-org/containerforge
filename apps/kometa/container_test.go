@@ -19,6 +19,11 @@ func Test(t *testing.T) {
 
 	configDir, err := os.MkdirTemp("", "kometa-config-")
 	require.NoError(t, err)
+	t.Cleanup(func() {
+		if cleanupErr := os.RemoveAll(configDir); cleanupErr != nil {
+			t.Errorf("failed to remove temp config dir %q: %v", configDir, cleanupErr)
+		}
+	})
 	require.NoError(t, os.Chmod(configDir, 0o777))
 
 	app, err := testcontainers.Run(
