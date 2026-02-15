@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - TEMPLATEEXEC
+files:
+  - path: TEMPLATEEXEC

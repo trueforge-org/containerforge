@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+commands:
+- node --version
+- npm --version
+- yarn --version

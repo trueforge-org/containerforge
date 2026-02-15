@@ -2,24 +2,18 @@ package main
 
 import (
 	"context"
-	"os"
+	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 func Test(t *testing.T) {
 	ctx := context.Background()
 
-	appName := os.Getenv("APP")
-	require.NotEmpty(t, appName, "APP environment variable must be set")
-	image := os.Getenv("TEST_IMAGE")
-	if image == "" {
-		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
-	}
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/rsnapshot:rolling")
 
 	configDir := t.TempDir()
 

@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /plugins/macvlan
+files:
+  - path: /plugins/macvlan

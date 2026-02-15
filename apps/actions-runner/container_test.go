@@ -2,33 +2,13 @@ package main
 
 import (
 	"context"
-	"os"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
-	"github.com/testcontainers/testcontainers-go"
+	"github.com/trueforge-org/containerforge/testhelpers"
 )
 
 func Test(t *testing.T) {
 	ctx := context.Background()
-
-	appName := os.Getenv("APP")
-	require.NotEmpty(t, appName, "APP environment variable must be set")
-	image := os.Getenv("TEST_IMAGE")
-	if image == "" {
-		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
-	}
-
-	configDir := t.TempDir()
-
-	app, err := testcontainers.Run(
-		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
-		testcontainers.WithCmdArgs("test", "-f", "/usr/local/bin/yq"),
-	)
-	testcontainers.CleanupContainer(t, app)
-	require.NoError(t, err)
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/actions-runner:rolling")
+	testhelpers.TestFileExists(t, ctx, image, "/usr/local/bin/yq", nil)
 }

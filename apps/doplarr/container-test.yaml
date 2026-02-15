@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/doplarr.jar
+files:
+  - path: /app/doplarr.jar

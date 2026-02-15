@@ -1,0 +1,6 @@
+timeoutSeconds: 10
+commands:
+- python3 --version
+- node --version
+- npm --version
+- yarn --version

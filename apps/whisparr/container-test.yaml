@@ -1,0 +1,6 @@
+timeoutSeconds: 10
+urls:
+  - url: http://127.0.0.1:6969/
+tcp:
+  - host: 127.0.0.1
+    port: 6969

@@ -1,0 +1,6 @@
+timeoutSeconds: 10
+urls:
+  - url: http://127.0.0.1:9633/metrics
+tcp:
+  - host: 127.0.0.1
+    port: 9633

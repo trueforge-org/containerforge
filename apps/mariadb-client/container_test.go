@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"os"
+	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -13,14 +13,7 @@ import (
 func Test(t *testing.T) {
 	ctx := context.Background()
 
-	appName := os.Getenv("APP")
-	require.NotEmpty(t, appName, "APP environment variable must be set")
-	image := os.Getenv("TEST_IMAGE")
-	if image == "" {
-		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
-	}
-
-	configDir := t.TempDir()
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/mariadb-client:rolling")
 
 	container, err := testcontainers.Run(
 		ctx,

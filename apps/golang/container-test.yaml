@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /usr/local/go/bin/go
+files:
+  - path: /usr/local/go/bin/go

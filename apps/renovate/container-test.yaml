@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /etc/os-release
+files:
+  - path: /etc/os-release

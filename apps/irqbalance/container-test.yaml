@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /usr/sbin/irqbalance
+files:
+  - path: /usr/sbin/irqbalance

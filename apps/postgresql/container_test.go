@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"os"
+	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -33,12 +33,7 @@ func printLogs(ctx context.Context, container testcontainers.Container) {
 func Test(t *testing.T) {
 	ctx := context.Background()
 
-	appName := os.Getenv("APP")
-	require.NotEmpty(t, appName, "APP environment variable must be set")
-	image := os.Getenv("TEST_IMAGE")
-	if image == "" {
-		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
-	}
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/postgresql:rolling")
 
 	configDir := t.TempDir()
 

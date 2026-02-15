@@ -1,0 +1,3 @@
+timeoutSeconds: 10
+commands:
+- php-fpm -F

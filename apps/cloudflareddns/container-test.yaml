@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/cloudflare-ddns.sh
+files:
+  - path: /app/cloudflare-ddns.sh

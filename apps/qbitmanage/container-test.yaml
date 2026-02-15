@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/qbit_manage.py
+files:
+  - path: /app/qbit_manage.py

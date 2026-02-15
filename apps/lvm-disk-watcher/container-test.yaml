@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/watch_lvm.sh
+files:
+  - path: /app/watch_lvm.sh

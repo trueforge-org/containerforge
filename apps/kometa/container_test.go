@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	"os"
 	"testing"
 
 	"github.com/stretchr/testify/require"
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
@@ -14,17 +14,8 @@ import (
 func Test(t *testing.T) {
 	ctx := context.Background()
 
-	appName := os.Getenv("APP")
-	require.NotEmpty(t, appName, "APP environment variable must be set")
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/kometa:rolling")
 
-	image := os.Getenv("TEST_IMAGE")
-	if image == "" {
-		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
-	}
-
-	configDir, err := os.MkdirTemp("", "kometa-config-")
-	require.NoError(t, err)
-	require.NoError(t, os.Chmod(configDir, 0o777))
 
 	app, err := testcontainers.Run(
 		ctx,
