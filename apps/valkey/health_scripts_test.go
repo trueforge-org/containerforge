@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -38,10 +39,17 @@ func runHealthScript(t *testing.T, scriptName string, vars map[string]string) st
 	tmpDir := t.TempDir()
 	resultFile := filepath.Join(tmpDir, "result.txt")
 	stub := filepath.Join(tmpDir, "valkey-cli")
-	err := os.WriteFile(stub, []byte("#!/bin/sh\nprintf 'AUTH=%s\\n' \"${REDISCLI_AUTH:-}\" > \"$VALKEY_CLI_RESULT_FILE\"\nprintf 'ARGS=%s\\n' \"$*\" >> \"$VALKEY_CLI_RESULT_FILE\"\necho PONG\n"), 0o755)
+	const stubScript = `#!/bin/sh
+printf 'AUTH=%s\n' "${REDISCLI_AUTH:-}" > "$VALKEY_CLI_RESULT_FILE"
+printf 'ARGS=%s\n' "$*" >> "$VALKEY_CLI_RESULT_FILE"
+echo PONG
+`
+	err := os.WriteFile(stub, []byte(stubScript), 0o755)
 	require.NoError(t, err)
 
-	scriptPath := filepath.Join("/home/runner/work/containerforge/containerforge/apps/valkey/health", scriptName)
+	_, file, _, ok := runtime.Caller(0)
+	require.True(t, ok)
+	scriptPath := filepath.Join(filepath.Dir(file), "health", scriptName)
 	cmd := exec.Command("bash", scriptPath, "2")
 	cmd.Env = append(os.Environ(),
 		"PATH="+tmpDir+":"+os.Getenv("PATH"),
