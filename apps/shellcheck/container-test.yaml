@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /usr/local/bin/shellcheck
+files:
+  - path: /usr/local/bin/shellcheck

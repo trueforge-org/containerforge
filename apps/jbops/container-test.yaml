@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/fun/plexapi_haiku.py
+files:
+  - path: /app/fun/plexapi_haiku.py

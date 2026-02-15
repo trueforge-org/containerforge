@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /usr/local/bin/kopia
+files:
+  - path: /usr/local/bin/kopia

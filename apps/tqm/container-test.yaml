@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/bin/tqm
+files:
+  - path: /app/bin/tqm

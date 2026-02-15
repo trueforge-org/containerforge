@@ -1,0 +1,6 @@
+timeoutSeconds: 10
+urls:
+  - url: http://127.0.0.1:8080/sabnzbd
+tcp:
+  - host: 127.0.0.1
+    port: 8080

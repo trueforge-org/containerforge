@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /app/autoscan
+files:
+  - path: /app/autoscan

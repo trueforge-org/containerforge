@@ -1,0 +1,6 @@
+timeoutSeconds: 10
+urls:
+  - url: http://127.0.0.1:3000/
+tcp:
+  - host: 127.0.0.1
+    port: 3000

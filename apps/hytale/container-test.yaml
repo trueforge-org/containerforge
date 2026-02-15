@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - hytale-downloader
+files:
+  - path: hytale-downloader

@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /entrypoint.sh
+files:
+  - path: /entrypoint.sh

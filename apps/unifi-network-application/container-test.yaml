@@ -1,0 +1,5 @@
+timeoutSeconds: 10
+paths:
+  - /usr/lib/unifi/lib/ace.jar
+files:
+  - path: /usr/lib/unifi/lib/ace.jar

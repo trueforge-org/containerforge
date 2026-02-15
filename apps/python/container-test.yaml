@@ -1,0 +1,7 @@
+timeoutSeconds: 10
+paths:
+  - /usr/local/bin/python3
+  - /config/venv
+files:
+  - path: /usr/local/bin/python3
+  - path: /config/venv
