@@ -8,6 +8,6 @@ response=$(
     ping
 )
 if [ "$response" != "PONG" ]; then
-  echo "failed to connect using password: $REDIS_PASSWORD response: $response"
+  echo "failed to connect; response: $response"
   exit 1
 fi
