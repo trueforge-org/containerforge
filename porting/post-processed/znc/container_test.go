@@ -21,8 +21,13 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
+	configDir := t.TempDir()
+
 	app, err := testcontainers.Run(
 		ctx, image,
+		testcontainers.WithMounts(
+			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
+		),
 		testcontainers.WithExposedPorts("6501/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("6501/tcp"),

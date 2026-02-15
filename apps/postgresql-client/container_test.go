@@ -20,6 +20,8 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
+	configDir := t.TempDir()
+
 	container, err := testcontainers.Run(
 		ctx,
 		image,

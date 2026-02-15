@@ -20,9 +20,15 @@ func Test(t *testing.T) {
 		image = "ghcr.io/trueforge-org/" + appName + ":rolling"
 	}
 
+	configDir := t.TempDir()
+
 	app, err := testcontainers.Run(
 		ctx, image,
+		testcontainers.WithMounts(
+			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
+		),
 		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -L /config/venv && test \"$(readlink /config/venv)\" = /defaults/venv"),
+
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
