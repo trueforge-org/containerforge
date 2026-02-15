@@ -31,10 +31,6 @@ RUN \
     /var/lib/apt/lists/* \
     /tmp/*
 
-ENV SSL_CERT_FILE=/etc/ca-certificates.crt
-ENV CURL_CA_BUNDLE=/etc/ca-certificates.crt
-ENV REQUESTS_CA_BUNDLE=/etc/ca-certificates.crt
-
 USER apps
 COPY ./ /
 
