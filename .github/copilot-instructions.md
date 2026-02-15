@@ -10,6 +10,7 @@
 - Most app updates should only touch files in the same `apps/<app>/` directory.
 - When changing image versioning, ensure values in `docker-bake.hcl` are actually used by the corresponding `Dockerfile`.
 - Do not introduce unrelated refactors or formatting-only edits.
+- Use semantic naming (Conventional Commits style) for both commit messages and PR titles.
 
 ## Validation
 
