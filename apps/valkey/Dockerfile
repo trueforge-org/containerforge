@@ -14,7 +14,7 @@ RUN apt-get update && \
 
 COPY --chmod=0755 health /health
 
-ENV REDIS_PORT=6379
+ENV VALKEY_PORT=6379
 
 USER apps:apps
 
