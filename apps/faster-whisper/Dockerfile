@@ -14,21 +14,26 @@ RUN \
   apt-get install -y --no-install-recommends \
     build-essential \
     git \
-  && python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  && pip3 install -U --no-cache-dir \
     pip \
     wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  pip3 install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     git+https://github.com/rhasspy/wyoming-faster-whisper@v${VERSION} && \
   echo "**** cleanup ****" && \
   apt-get purge -y --auto-remove \
     build-essential \
     git \
     python3-dev && \
+  cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt && \
+  chmod 644 /etc/ca-certificates.crt && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
     /var/lib/apt/lists/* \
     /tmp/*
+
+ENV SSL_CERT_FILE=/etc/ca-certificates.crt
+ENV CURL_CA_BUNDLE=/etc/ca-certificates.crt
+ENV REQUESTS_CA_BUNDLE=/etc/ca-certificates.crt
 
 USER apps
 COPY ./ /
