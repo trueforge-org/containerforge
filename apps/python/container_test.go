@@ -22,7 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithCmdArgs("python3", "test", "-f", "/usr/local/bin/python3"),
+		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -L /config/venv && test \"$(readlink /config/venv)\" = /defaults/venv"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
