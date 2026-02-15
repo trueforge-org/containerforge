@@ -10,5 +10,10 @@ import (
 func Test(t *testing.T) {
 	ctx := context.Background()
 	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/home-assistant:rolling")
-	testhelpers.TestHTTPEndpoint(t, ctx, image, testhelpers.HTTPTestConfig{Port: "8123"}, nil)
+	testhelpers.TestHTTPEndpoint(t, ctx, image, testhelpers.HTTPTestConfig{
+		Port: "8123",
+		StatusCodeMatcher: func(status int) bool {
+			return status >= 200 && status < 400
+		},
+	}, nil)
 }

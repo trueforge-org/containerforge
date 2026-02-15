@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/docker/go-connections/nat"
@@ -26,7 +27,7 @@ type ContainerConfig struct {
 	Env map[string]string
 }
 
-// applyContainerConfig applies optional container configuration.
+// applyContainerConfig converts optional container configuration into container customizers.
 func applyContainerConfig(config *ContainerConfig) []testcontainers.ContainerCustomizer {
 	var opts []testcontainers.ContainerCustomizer
 
@@ -41,7 +42,7 @@ func applyContainerConfig(config *ContainerConfig) []testcontainers.ContainerCus
 	return opts
 }
 
-// runContainer starts a container, ensures cleanup, and centralizes common assertions.
+// runContainer starts a container with a temporary /config bind mount, then ensures cleanup.
 func runContainer(t *testing.T, ctx context.Context, image string, opts ...testcontainers.ContainerCustomizer) testcontainers.Container {
 	t.Helper()
 
@@ -53,12 +54,12 @@ func runContainer(t *testing.T, ctx context.Context, image string, opts ...testc
 	}, opts...)
 
 	c, err := testcontainers.Run(ctx, image, opts...)
-	testcontainers.CleanupContainer(t, c)
 	require.NoError(t, err)
+	testcontainers.CleanupContainer(t, c)
 	return c
 }
 
-// assertExitZero waits for container exit (via wait strategy set by caller) and asserts the exit code is zero.
+// assertExitZero asserts the container exited successfully after caller-configured exit waiting.
 func assertExitZero(t *testing.T, ctx context.Context, c testcontainers.Container, what string) {
 	t.Helper()
 	state, err := c.State(ctx)
@@ -68,9 +69,10 @@ func assertExitZero(t *testing.T, ctx context.Context, c testcontainers.Containe
 
 // HTTPTestConfig holds the configuration for HTTP endpoint tests.
 type HTTPTestConfig struct {
-	Port       string
-	Path       string
-	StatusCode int
+	Port              string
+	Path              string
+	StatusCode        int           // Used when StatusCodeMatcher is nil.
+	StatusCodeMatcher func(int) bool // Takes precedence over StatusCode when provided.
 }
 
 // TestHTTPEndpoint tests that an HTTP endpoint is accessible and returns the expected status code.
@@ -80,8 +82,14 @@ func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfi
 	if httpConfig.Path == "" {
 		httpConfig.Path = "/"
 	}
-	if httpConfig.StatusCode == 0 {
-		httpConfig.StatusCode = 200
+	statusCodeMatcher := httpConfig.StatusCodeMatcher
+	if statusCodeMatcher == nil {
+		if httpConfig.StatusCode == 0 {
+			httpConfig.StatusCode = 200
+		}
+		statusCodeMatcher = func(status int) bool {
+			return status == httpConfig.StatusCode
+		}
 	}
 
 	portStr := httpConfig.Port + "/tcp"
@@ -91,14 +99,12 @@ func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfi
 		testcontainers.WithExposedPorts(portStr),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort(portTCP),
-			wait.ForHTTP(httpConfig.Path).WithPort(portTCP).WithStatusCodeMatcher(func(status int) bool {
-				return status == httpConfig.StatusCode
-			}),
+			wait.ForHTTP(httpConfig.Path).WithPort(portTCP).WithStatusCodeMatcher(statusCodeMatcher),
 		),
 	}
 
 	opts = append(opts, applyContainerConfig(containerConfig)...)
-	_ = runContainer(t, ctx, image, opts...)
+	runContainer(t, ctx, image, opts...)
 }
 
 // TestFileExists tests that a file exists in the container.
@@ -108,20 +114,19 @@ func TestFileExists(t *testing.T, ctx context.Context, image string, filePath st
 }
 
 // TestCommandSucceeds tests that a command runs successfully in the container (exit code 0).
-func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) {
+func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, config *ContainerConfig, command ...string) {
 	t.Helper()
 
 	opts := []testcontainers.ContainerCustomizer{
-		testcontainers.WithEntrypoint(entrypoint),
 		testcontainers.WithWaitStrategy(wait.ForExit()),
 	}
 
-	if len(args) > 0 {
-		opts = append(opts, testcontainers.WithEntrypointArgs(args...))
+	if len(command) > 0 {
+		opts = append(opts, testcontainers.WithCmdArgs(command...))
 	}
 
 	opts = append(opts, applyContainerConfig(config)...)
 
 	container := runContainer(t, ctx, image, opts...)
-	assertExitZero(t, ctx, container, fmt.Sprintf("command '%s %v' should succeed", entrypoint, args))
+	assertExitZero(t, ctx, container, fmt.Sprintf("command '%s' should succeed", strings.Join(command, " ")))
 }
