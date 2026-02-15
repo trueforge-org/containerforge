@@ -16,7 +16,9 @@ func Test(t *testing.T) {
 
 	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/bazarr:rolling")
 
-	configDir := t.TempDir()
+	configDir, err := os.MkdirTemp("", "bazarr-config-")
+	require.NoError(t, err)
+	require.NoError(t, os.Chmod(configDir, 0o777))
 
 	app, err := testcontainers.Run(
 		ctx, image,

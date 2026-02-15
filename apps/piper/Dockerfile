@@ -6,11 +6,10 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-RUN python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+RUN pip3 install -U --no-cache-dir \
     pip \
     wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  pip3 install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     piper-tts \
     "wyoming-piper==${VERSION}" && \
   echo "**** cleanup ****" && \

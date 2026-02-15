@@ -36,6 +36,8 @@ RUN curl -fsSL -o /tmp/app.zip "https://github.com/morpheus65535/bazarr/releases
     && uv pip install \
         --requirement /app/bin/requirements.txt \
         --requirement /app/bin/postgres-requirements.txt \
+    && cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt \
+    && chmod 644 /etc/ca-certificates.crt \
     && chown -R root:root /app && chmod -R 755 /app \
     && pip uninstall --yes uv \
     && rm -rf /root/.cache /root/.cargo /tmp/* /app/bin/bin
