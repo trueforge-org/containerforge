@@ -148,6 +148,7 @@ COPY . /
 
 # ports and volumes
 EXPOSE 30000/udp
+VOLUME /config
 VOLUME /config/.minetest
 
 WORKDIR /config
