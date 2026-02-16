@@ -13,4 +13,4 @@ This container remains in `/porting/post-processed` for now.
 ## AMD64 build check (2026-02-16)
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
-- Reason: E: Command line option 'U' [from -U] is not understood in combination with the other options.
+- Reason: `apt-get -U --update --no-cache add ...` failed with `E: Command line option 'U' [from -U] is not understood in combination with the other options.`
