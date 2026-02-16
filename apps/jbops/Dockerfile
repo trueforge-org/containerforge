@@ -19,6 +19,8 @@ RUN set -eux; \
         git \
     && rm -rf /var/lib/apt/lists/*; \
     \
+    # Remove any existing contents from /app to ensure git clone succeeds
+    find /app -mindepth 1 -delete; \
     git clone --single-branch --branch "${VERSION}" https://github.com/blacktwin/JBOPS.git .; \
     pip install --upgrade --requirement requirements.txt; \
     chown -R root:root /app && chmod -R 755 /app; \
