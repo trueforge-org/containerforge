@@ -16,7 +16,7 @@
 
 - For Docker bake changes, validate from the app directory with:
   - `docker buildx bake --print`
-  
+
 
 ## Security and reliability
 
@@ -27,3 +27,8 @@
 ## Go specifics
 
 - Don't change go.sum and go.mod on unrelated PRs
+
+## Container requirements
+- Run as `apps` user
+- Run `read-only-rootfs` compatible
+- Ensure /config is mountable as a persistence storage option (so empty at start)
