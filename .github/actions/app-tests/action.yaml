@@ -46,5 +46,6 @@ runs:
         APP: ${{ inputs.app }}
         TEST_IMAGE: ${{ inputs.image }}
         VERSION: ${{ inputs.version }}
+        TESTHELPERS_CONTAINER_LOGS: all
       run: |-
         forgetool container test --image "${TEST_IMAGE}" --config "./apps/${APP}/container-test.yaml"
