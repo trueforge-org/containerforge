@@ -15,7 +15,7 @@ RUN \
     mkdir -p /app/bin /tmp/emby \
     && dpkg-deb -xv /tmp/emby.deb /tmp/emby/ \
     && mv -t /app/bin/ /tmp/emby/opt/emby-server/* \
-    && chown -R root:root /app && chmod -R 755 /app \
+    && chown -R apps:apps /app && chmod -R 755 /app \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
@@ -23,5 +23,5 @@ RUN \
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config
