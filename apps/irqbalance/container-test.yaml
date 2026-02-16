@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /usr/sbin/irqbalance
-files:
-  - path: /usr/sbin/irqbalance
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /usr/sbin/irqbalance

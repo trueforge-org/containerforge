@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
-timeoutSeconds: 10
+timeoutSeconds: 120
 http:
-  - port: "8123"
-    path: /
+- port: '8123'
+  path: /

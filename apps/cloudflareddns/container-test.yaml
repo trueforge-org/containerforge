@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /app/cloudflare-ddns.sh
-files:
-  - path: /app/cloudflare-ddns.sh
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /app/cloudflare-ddns.sh

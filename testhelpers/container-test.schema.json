@@ -9,7 +9,8 @@
       "http": [
         {
           "port": "8123",
-          "path": "/"
+          "path": "/",
+          "statusCode": 200
         }
       ]
     },
@@ -55,7 +56,8 @@
         [
           {
             "port": "8123",
-            "path": "/"
+            "path": "/",
+            "statusCode": 200
           }
         ]
       ],
@@ -147,7 +149,8 @@
       "examples": [
         {
           "port": "8123",
-          "path": "/"
+          "path": "/",
+          "statusCode": 200
         }
       ],
       "type": "object",
@@ -172,12 +175,21 @@
             "/",
             "/healthz"
           ]
+        },
+        "statusCode": {
+          "type": "integer",
+          "description": "Expected HTTP status code. Runtime defaults to 200 when omitted.",
+          "examples": [
+            200,
+            400,
+            403
+          ]
         }
       }
     },
     "tcpTestConfig": {
       "title": "TCP test",
-      "description": "Configuration for a single TCP listening check.",
+      "description": "Configuration for a single TCP listening check using only a container port.",
       "examples": [
         {
           "port": "8000"
@@ -195,13 +207,6 @@
           "examples": [
             "8000",
             "8123"
-          ]
-        },
-        "host": {
-          "$ref": "#/$defs/nonEmptyString",
-          "description": "Reserved for compatibility with legacy configs. Runtime currently waits on container ports and does not use this field.",
-          "examples": [
-            "127.0.0.1"
           ]
         }
       }

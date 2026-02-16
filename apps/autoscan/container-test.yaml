@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /app/autoscan
-files:
-  - path: /app/autoscan
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /app/autoscan

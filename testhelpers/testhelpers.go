@@ -295,7 +295,6 @@ type HTTPTestConfig struct {
 // TCPTestConfig holds the configuration for TCP wait checks.
 type TCPTestConfig struct {
 	Port string `yaml:"port"`
-	Host string `yaml:"host"`
 }
 
 // CommandTestConfig holds optional configuration for command checks.
