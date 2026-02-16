@@ -16,9 +16,16 @@ Shared helpers for standalone Go container checks.
 
 - `CheckHTTPEndpoint(...) error`
   Runs a container and waits for an HTTP endpoint on a port/path to match the expected status.
+  HTTP checks always include a TCP listening wait on the same port first.
 
 - `CheckTCPListening(...) error`
   Runs a container and waits for a TCP port to become reachable.
+
+- `CheckWaits(..., httpConfigs []HTTPTestConfig, tcpConfigs []TCPTestConfig, ...) error`
+  Runs one container and waits for multiple checks in the same lifecycle:
+  - `httpConfigs []HTTPTestConfig`
+  - `tcpConfigs []TCPTestConfig`
+  Every HTTP item implicitly enforces TCP listening wait first on the same port.
 
 - `CheckFileExists(...) error`
   Verifies a file exists inside the container by running `test -f`.
@@ -33,6 +40,9 @@ Shared helpers for standalone Go container checks.
 
 - `TestHTTPEndpoint(...)`, `TestTCPListening(...)`, `TestFileExists(...)`, `TestCommandSucceeds(...)`
   Convenience wrappers for `go test` that fail the test immediately when the check returns an error.
+
+- `TestWaits(...)`
+  Convenience wrapper for combined HTTP/TCP wait lists.
 
 - `HTTPTestConfig.StatusCodeMatcher func(int) bool`
   Optional custom matcher for HTTP status codes.

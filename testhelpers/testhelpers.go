@@ -293,6 +293,11 @@ type HTTPTestConfig struct {
 	StatusCodeMatcher func(int) bool
 }
 
+// TCPTestConfig holds the configuration for TCP wait checks.
+type TCPTestConfig struct {
+	Port string
+}
+
 // CommandTestConfig holds optional configuration for command checks.
 type CommandTestConfig struct {
 	ExpectedExitCode int
@@ -300,9 +305,7 @@ type CommandTestConfig struct {
 	MatchContent     bool
 }
 
-// CheckHTTPEndpoint verifies that an HTTP endpoint is accessible and returns the expected status code.
-func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestConfig, containerConfig *ContainerConfig) (err error) {
-
+func normalizeHTTPConfig(httpConfig HTTPTestConfig) HTTPTestConfig {
 	if httpConfig.Path == "" {
 		httpConfig.Path = "/"
 	}
@@ -315,25 +318,88 @@ func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestCon
 		}
 	}
 
-	portStr := httpConfig.Port + "/tcp"
-	portTCP := nat.Port(portStr)
+	return httpConfig
+}
 
-	logInfo("🧪 HTTP endpoint check: image=%s port=%s path=%s expected=%d", image, portStr, httpConfig.Path, httpConfig.StatusCode)
-	if httpConfig.StatusCodeMatcher != nil {
-		logDebug("Custom HTTP status matcher configured")
+func appendHTTPWaitStrategies(httpConfigs []HTTPTestConfig, portsSet map[string]struct{}, tcpWaitStrategies []wait.Strategy, httpWaitStrategies []wait.Strategy) ([]wait.Strategy, []wait.Strategy, error) {
+	for index, httpConfig := range httpConfigs {
+		httpConfig = normalizeHTTPConfig(httpConfig)
+		if strings.TrimSpace(httpConfig.Port) == "" {
+			return nil, nil, fmt.Errorf("http wait #%d missing port", index+1)
+		}
+
+		portStr := strings.TrimSpace(httpConfig.Port) + "/tcp"
+		portTCP := nat.Port(portStr)
+		portsSet[portStr] = struct{}{}
+
+		statusCodeMatcher := httpConfig.StatusCodeMatcher
+		tcpWaitStrategies = append(tcpWaitStrategies,
+			wait.ForListeningPort(portTCP),
+		)
+		httpWaitStrategies = append(httpWaitStrategies,
+			wait.ForHTTP(httpConfig.Path).WithPort(portTCP).WithStatusCodeMatcher(func(status int) bool {
+				return statusCodeMatcher(status)
+			}),
+		)
 	}
+
+	return tcpWaitStrategies, httpWaitStrategies, nil
+}
+
+func appendTCPWaitStrategies(tcpConfigs []TCPTestConfig, portsSet map[string]struct{}, tcpWaitStrategies []wait.Strategy) ([]wait.Strategy, error) {
+	for index, tcpConfig := range tcpConfigs {
+		if strings.TrimSpace(tcpConfig.Port) == "" {
+			return nil, fmt.Errorf("tcp wait #%d missing port", index+1)
+		}
+
+		portStr := strings.TrimSpace(tcpConfig.Port) + "/tcp"
+		portTCP := nat.Port(portStr)
+		portsSet[portStr] = struct{}{}
+
+		tcpWaitStrategies = append(tcpWaitStrategies, wait.ForListeningPort(portTCP))
+	}
+
+	return tcpWaitStrategies, nil
+}
+
+// CheckWaits verifies HTTP and TCP waits within one container start/stop lifecycle.
+func CheckWaits(ctx context.Context, image string, httpConfigs []HTTPTestConfig, tcpConfigs []TCPTestConfig, containerConfig *ContainerConfig) (err error) {
+	if len(httpConfigs) == 0 && len(tcpConfigs) == 0 {
+		return fmt.Errorf("at least one HTTP or TCP wait must be provided")
+	}
+
+	logInfo("🧪 Wait checks: image=%s http=%d tcp=%d", image, len(httpConfigs), len(tcpConfigs))
 	if containerConfig != nil {
-		logInfo("HTTP test container config: env=%s", envSummary(containerConfig.Env))
+		logInfo("Wait checks container config: env=%s", envSummary(containerConfig.Env))
 	}
+
+	portsSet := map[string]struct{}{}
+	var tcpWaitStrategies []wait.Strategy
+	var httpWaitStrategies []wait.Strategy
+
+	var errBuild error
+	tcpWaitStrategies, httpWaitStrategies, errBuild = appendHTTPWaitStrategies(httpConfigs, portsSet, tcpWaitStrategies, httpWaitStrategies)
+	if errBuild != nil {
+		return errBuild
+	}
+
+	tcpWaitStrategies, errBuild = appendTCPWaitStrategies(tcpConfigs, portsSet, tcpWaitStrategies)
+	if errBuild != nil {
+		return errBuild
+	}
+
+	// Global invariant: run all TCP waits before any HTTP waits.
+	waitStrategies := append(tcpWaitStrategies, httpWaitStrategies...)
+
+	exposedPorts := make([]string, 0, len(portsSet))
+	for port := range portsSet {
+		exposedPorts = append(exposedPorts, port)
+	}
+	sort.Strings(exposedPorts)
 
 	opts := []testcontainers.ContainerCustomizer{
-		testcontainers.WithExposedPorts(portStr),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort(portTCP),
-			wait.ForHTTP(httpConfig.Path).WithPort(portTCP).WithStatusCodeMatcher(func(status int) bool {
-				return httpConfig.StatusCodeMatcher(status)
-			}),
-		),
+		testcontainers.WithExposedPorts(exposedPorts...),
+		testcontainers.WithWaitStrategy(waitStrategies...),
 	}
 
 	// Apply optional container config
@@ -343,63 +409,41 @@ func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestCon
 	if err != nil {
 		return err
 	}
-	logOK("HTTP wait strategy passed: %s%s", portStr, httpConfig.Path)
 	defer func() {
 		if shouldDumpContainerLogs(err != nil) {
-			dumpContainerLogs(ctx, container, "HTTP endpoint check")
+			dumpContainerLogs(ctx, container, "wait checks")
 		} else {
-			logDebug("Skipping container logs for HTTP endpoint check (mode=%q, failed=%t)", strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS"))), err != nil)
+			logDebug("Skipping container logs for wait checks (mode=%q, failed=%t)", strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS"))), err != nil)
 		}
-		termErr := terminateContainer(ctx, container, "HTTP endpoint check")
+		termErr := terminateContainer(ctx, container, "wait checks")
 		if err == nil && termErr != nil {
 			err = fmt.Errorf("failed to terminate container: %w", termErr)
 		}
 	}()
 
-	logInfo("HTTP endpoint check finished successfully for image=%s", image)
+	logInfo("Wait checks completed successfully for image=%s", image)
 
 	return nil
 }
 
+// CheckHTTPEndpoint verifies that an HTTP endpoint is accessible and returns the expected status code.
+func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestConfig, containerConfig *ContainerConfig) (err error) {
+	httpConfig = normalizeHTTPConfig(httpConfig)
+
+	logInfo("🧪 HTTP endpoint check: image=%s port=%s/tcp path=%s expected=%d", image, httpConfig.Port, httpConfig.Path, httpConfig.StatusCode)
+	logDebug("HTTP endpoint checks always include mandatory TCP listening wait first")
+	if httpConfig.StatusCodeMatcher != nil {
+		logDebug("Custom HTTP status matcher configured")
+	}
+
+	return CheckWaits(ctx, image, []HTTPTestConfig{httpConfig}, nil, containerConfig)
+}
+
 // CheckTCPListening verifies that a TCP port is listening in the container.
 func CheckTCPListening(ctx context.Context, image string, port string, config *ContainerConfig) (err error) {
-	portStr := port + "/tcp"
-	portTCP := nat.Port(portStr)
+	logInfo("🧪 TCP listening check: image=%s port=%s/tcp", image, port)
 
-	logInfo("🧪 TCP listening check: image=%s port=%s", image, portStr)
-	if config != nil {
-		logInfo("TCP check container config: env=%s", envSummary(config.Env))
-	}
-
-	opts := []testcontainers.ContainerCustomizer{
-		testcontainers.WithExposedPorts(portStr),
-		testcontainers.WithWaitStrategy(
-			wait.ForListeningPort(portTCP),
-		),
-	}
-
-	// Apply optional container config
-	opts = append(opts, applyContainerConfig(config)...)
-
-	container, err := runContainer(ctx, image, opts...)
-	if err != nil {
-		return err
-	}
-	defer func() {
-		if shouldDumpContainerLogs(err != nil) {
-			dumpContainerLogs(ctx, container, "tcp listening check")
-		} else {
-			logDebug("Skipping container logs for TCP listening check (mode=%q, failed=%t)", strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS"))), err != nil)
-		}
-		termErr := terminateContainer(ctx, container, "tcp listening check")
-		if err == nil && termErr != nil {
-			err = fmt.Errorf("failed to terminate container: %w", termErr)
-		}
-	}()
-
-	logInfo("TCP listening check completed successfully for image=%s port=%s", image, portStr)
-
-	return nil
+	return CheckWaits(ctx, image, nil, []TCPTestConfig{{Port: port}}, config)
 }
 
 // CheckFileExists verifies a file exists in the container.
@@ -493,6 +537,14 @@ func TestTCPListening(t *testing.T, ctx context.Context, image string, port stri
 	t.Helper()
 	if err := CheckTCPListening(ctx, image, port, containerConfig); err != nil {
 		t.Fatalf("TCP listening check failed: %v", err)
+	}
+}
+
+// TestWaits runs combined HTTP/TCP waits and fails the test on error.
+func TestWaits(t *testing.T, ctx context.Context, image string, httpConfigs []HTTPTestConfig, tcpConfigs []TCPTestConfig, containerConfig *ContainerConfig) {
+	t.Helper()
+	if err := CheckWaits(ctx, image, httpConfigs, tcpConfigs, containerConfig); err != nil {
+		t.Fatalf("wait checks failed: %v", err)
 	}
 }
 
