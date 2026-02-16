@@ -80,3 +80,40 @@ When defining `container-test.yaml` based on the helper structs, use:
 - `tcp: []TCPTestConfig`
 - `commands: []CommandTestConfig`
 - `filePaths: []string`
+
+## Example YAMLs
+
+Minimal HTTP readiness check:
+
+```yaml
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 180
+http:
+  - port: "8123"
+    path: /
+```
+
+TCP + file existence checks:
+
+```yaml
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+  - port: "8000"
+filePaths:
+  - /usr/local/bin/yq
+  - /bin/sh
+```
+
+Command checks with exit code and output matching:
+
+```yaml
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+commands:
+  - command: test -x /usr/local/bin/imaginary
+    expectedExitCode: 0
+  - command: /usr/local/bin/imaginary -version
+    expectedExitCode: 1
+    expectedContent: dev
+    matchContent: true
+```

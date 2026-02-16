@@ -286,23 +286,24 @@ func assertExitZero(ctx context.Context, c testcontainers.Container, what string
 
 // HTTPTestConfig holds the configuration for HTTP endpoint tests
 type HTTPTestConfig struct {
-	Port              string
-	Path              string
-	StatusCode        int
+	Port              string `yaml:"port"`
+	Path              string `yaml:"path"`
+	StatusCode        int    `yaml:"statusCode"`
 	StatusCodeMatcher func(int) bool
 }
 
 // TCPTestConfig holds the configuration for TCP wait checks.
 type TCPTestConfig struct {
-	Port string
+	Port string `yaml:"port"`
+	Host string `yaml:"host"`
 }
 
 // CommandTestConfig holds optional configuration for command checks.
 type CommandTestConfig struct {
-	Command          string
-	ExpectedExitCode int
-	ExpectedContent  string
-	MatchContent     bool
+	Command          string `yaml:"command"`
+	ExpectedExitCode int    `yaml:"expectedExitCode"`
+	ExpectedContent  string `yaml:"expectedContent"`
+	MatchContent     bool   `yaml:"matchContent"`
 }
 
 func normalizeHTTPConfig(httpConfig HTTPTestConfig) HTTPTestConfig {
