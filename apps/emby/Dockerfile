@@ -21,6 +21,8 @@ RUN \
         patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/system/EmbyServer; \
     elif [ "${TARGETARCH}" = "arm64" ]; then \
         patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/system/EmbyServer; \
+    else \
+        echo "Error: Unsupported architecture: ${TARGETARCH}"; exit 1; \
     fi \
     && chown -R apps:apps /app && chmod -R 755 /app \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false patchelf \
