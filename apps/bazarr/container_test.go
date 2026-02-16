@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
-	"github.com/trueforge-org/containerforge/testhelpers"
+	"os"
 	"testing"
+
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/stretchr/testify/require"
 
