@@ -342,6 +342,9 @@ done
         rm -rf "$temp_dir"
     fi
 echo "[POSTPROCESS] Sanitizing start.sh in $processed"
+if [[ ! -f "$processed/start.sh" ]]; then
+    printf '%s\n' '#!/usr/bin/env bash' > "$processed/start.sh"
+fi
 if [[ -f "$processed/start.sh" ]]; then
     if sed --version >/dev/null 2>&1; then
         sed -i \
