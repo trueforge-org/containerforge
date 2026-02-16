@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-babybuddy versioning=loose
+  // renovate: datasource=github-releases depName=babybuddy/babybuddy versioning=loose
   default = "2.7.1"
 }
 

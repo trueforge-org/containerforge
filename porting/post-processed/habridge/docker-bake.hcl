@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-habridge versioning=loose
+  // renovate: datasource=github-releases depName=bwssytems/ha-bridge versioning=loose
   default = "5.4.1"
 }
 

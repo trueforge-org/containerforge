@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-synclounge versioning=loose
+  // renovate: datasource=github-releases depName=samcm/synclounge versioning=loose
   default = "5.2.35"
 }
 

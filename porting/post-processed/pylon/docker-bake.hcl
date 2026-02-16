@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-pylon versioning=loose
+  // renovate: datasource=github-releases depName=pylonide/pylon versioning=loose
   default = "2.10.0"
 }
 

@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-sickgear versioning=loose
+  // renovate: datasource=github-releases depName=sickgear/sickgear versioning=loose
   default = "release_3.34.5"
 }
 

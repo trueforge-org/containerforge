@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-limnoria versioning=loose
+  // renovate: datasource=github-releases depName=ProgVal/limnoria versioning=loose
   default = "2025.11.2"
 }
 

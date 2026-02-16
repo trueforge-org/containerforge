@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-manyfold versioning=loose
+  // renovate: datasource=github-releases depName=manyfold3d/manyfold versioning=loose
   default = "0.129.1"
 }
 

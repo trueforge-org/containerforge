@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-pairdrop versioning=loose
+  // renovate: datasource=github-releases depName=schlagmichdoch/PairDrop versioning=loose
   default = "1.11.2"
 }
 

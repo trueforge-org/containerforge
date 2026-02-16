@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-sickchill versioning=loose
+  // renovate: datasource=github-releases depName=SickChill/SickChill versioning=loose
   default = "2024.3.1"
 }
 

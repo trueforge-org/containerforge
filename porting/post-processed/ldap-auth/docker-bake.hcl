@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-ldap-auth versioning=loose
+  // renovate: datasource=github-releases depName=nginxinc/nginx-ldap-auth versioning=loose
   default = "3.4.5"
 }
 

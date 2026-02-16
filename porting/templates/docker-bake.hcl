@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-TEMPLATENAME versioning=loose
+  // renovate: datasource=github-releases depName=TEMPLATERENOVATEDEP versioning=loose
   default = "TEMPLATEVERSION"
 }
 

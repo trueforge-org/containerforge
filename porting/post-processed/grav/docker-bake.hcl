@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-grav versioning=loose
+  // renovate: datasource=github-releases depName=getgrav/grav versioning=loose
   default = "1.7.49.5"
 }
 
