@@ -262,7 +262,7 @@ if ! grep -q '^WORKDIR /config$' "$df"; then
     echo "" >> "$df"
     echo "WORKDIR /config" >> "$df"
 fi
-if ! grep -Eq '^VOLUME .*/config' "$df"; then
+if ! grep -Eq '^VOLUME[[:space:]].*([[:space:]]|^)/config([[:space:]]|$)' "$df"; then
     echo "VOLUME /config" >> "$df"
 fi
     echo "[VERBOSE] Sanitized $df"
