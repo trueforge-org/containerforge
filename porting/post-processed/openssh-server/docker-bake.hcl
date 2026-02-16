@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-openssh-server versioning=loose
   default = "10.0_p1-r9"
 }
 

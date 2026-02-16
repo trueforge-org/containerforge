@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-socket-proxy versioning=loose
   default = "3.2.8-r0"
 }
 
