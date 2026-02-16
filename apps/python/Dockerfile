@@ -22,7 +22,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     UV_EXTRA_INDEX_URL="https://wheel-index.linuxserver.io/ubuntu/ https://pypi.org/simple" \
     UV_INDEX_STRATEGY="unsafe-best-match" \
     PATH=/usr/local/bin:$PATH \
-    VENV_FOLDER="/app/venv"
+    VENV_FOLDER="/apps/venv"
 
 USER root
 
@@ -85,10 +85,10 @@ RUN set -eux; \
         \( -type d -a \( -name test -o -name tests -o -name idle_test \) \
         -o -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \) -exec rm -rf '{}' +; \
     ldconfig; \
-    mkdir -p /app /app; \
-    python3 -m venv /app/venv; \
-    /app/venv/bin/python -m pip install --upgrade pip==${PIP_VERSION} setuptools==${SETUPTOOLS_VERSION} wheel==${WHEEL_VERSION}; \
-    chown -R apps:apps /app && chmod -R 755 /app; \
+    mkdir -p /app /apps; \
+    python3 -m venv "${VENV_FOLDER}"; \
+    "${VENV_FOLDER}"/bin/python -m pip install --upgrade pip==${PIP_VERSION} setuptools==${SETUPTOOLS_VERSION} wheel==${WHEEL_VERSION}; \
+    chown -R apps:apps /app /apps && chmod -R 755 /app /apps; \
     python3 --version; \
     pip3 --version
 
