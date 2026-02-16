@@ -31,7 +31,7 @@ RUN set -ex; \
         poppler-utils; \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=go /go/bin/imaginary /usr/local/bin/imaginary
+COPY --from=go /config/go/bin/imaginary /usr/local/bin/imaginary
 
 USER 568
 
