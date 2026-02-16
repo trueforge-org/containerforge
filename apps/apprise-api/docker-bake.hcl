@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=caronc/apprise-api
-  default = "v1.3.1"
+  default = "1.3.1"
 }
 
 variable "LICENSE" {
