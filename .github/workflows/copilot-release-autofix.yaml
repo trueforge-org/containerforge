@@ -128,26 +128,31 @@ jobs:
               }
             });
 
+            const issue = await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body,
+              labels: ['copilot-autofix'],
+            });
+
+            core.info(`Created Copilot autofix issue #${issue.data.number}`);
+
             try {
-              const issue = await github.rest.issues.create({
+              await github.rest.issues.addAssignees({
                 owner,
                 repo,
-                title,
-                body,
+                issue_number: issue.data.number,
                 assignees: ['copilot'],
-                labels: ['copilot-autofix'],
               });
-              core.info(`Created Copilot autofix issue #${issue.data.number}`);
+              core.info(`Assigned issue #${issue.data.number} to copilot`);
             } catch (error) {
-              core.warning(`Failed to assign issue to Copilot: ${error.message}`);
-
-              const issue = await github.rest.issues.create({
+              core.warning(`Failed to assign copilot: ${error.message}`);
+              await github.rest.issues.createComment({
                 owner,
                 repo,
-                title,
-                body: `${body}\n\n> Note: auto-assignment to @copilot failed. Assign manually in the issue UI if needed.`,
-                labels: ['copilot-autofix'],
+                issue_number: issue.data.number,
+                body: '@copilot please investigate this release failure and propose the smallest safe fix in a PR.',
               });
-
-              core.info(`Created fallback autofix issue #${issue.data.number} without assignee`);
+              core.info(`Posted @copilot fallback comment on issue #${issue.data.number}`);
             }
