@@ -20,16 +20,29 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup Go
-      uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.2.0
-      with:
-        go-version-file: go.mod
+    - name: Setup Forgetool
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: |-
+        TAG="$(curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" https://api.github.com/repos/trueforge-org/forgetool/releases | jq -r '[.[] | select(.prerelease == true)][0].tag_name')"
+        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "Unable to resolve latest forgetool prerelease tag"; exit 1; }
+        VERSION="${TAG#v}"
+        case "$(uname -m)" in
+          x86_64) ARCH="amd64" ;;
+          aarch64) ARCH="arm64" ;;
+          *) echo "Unsupported architecture: $(uname -m)" && exit 1 ;;
+        esac
+        curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz"
+        mkdir -p "${RUNNER_TEMP}/forgetool-bin"
+        tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool
+        chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
+        echo "${RUNNER_TEMP}/forgetool-bin" >> "${GITHUB_PATH}"
 
     - name: Run Tests
       shell: bash
       env:
         APP: ${{ inputs.app }}
         TEST_IMAGE: ${{ inputs.image }}
-        VERSION: ${{ inputs.version }}
       run: |-
-        go test -v ./apps/${APP}/...
+        forgetool container test --config "./apps/${APP}/container-test.yaml"
