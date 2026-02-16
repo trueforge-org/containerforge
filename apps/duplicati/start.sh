@@ -8,8 +8,8 @@ if [[ -f "/config/Duplicati-server.sqlite" ]]; then
     else
         # Disable settings encryption
         export DUPLICATI__DISABLE_DB_ENCRYPTION="true"
-        echo "***      Missing encryption key, unable to encrypt your settings database     ***"
-        echo "*** Please set a value for SETTINGS_ENCRYPTION_KEY and recreate the container ***"
+        echo "*** Missing encryption key; starting with settings database encryption disabled ***"
+        echo "*** Set SETTINGS_ENCRYPTION_KEY to enable settings database encryption         ***"
     fi
 else
     # New install
@@ -21,10 +21,10 @@ else
         true
     else
         export DUPLICATI__DISABLE_DB_ENCRYPTION="true"
-        echo "***      Missing encryption key, unable to encrypt your settings database     ***"
-        echo "*** Please set a value for SETTINGS_ENCRYPTION_KEY and recreate the container ***"
+        echo "*** Missing encryption key; starting with settings database encryption disabled ***"
+        echo "*** Set SETTINGS_ENCRYPTION_KEY to enable settings database encryption         ***"
     fi
 fi
 
 
-exec duplicati-server $@
+exec duplicati-server "$@"
