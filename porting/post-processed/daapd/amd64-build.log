@@ -1,0 +1,162 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.68kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [buildstage 1/2] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 8.08kB done
+#5 DONE 0.0s
+
+#6 [stage-1 2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     avahi-daemon     libconfuse2     dbus     ffmpeg     libgnutls30     libjson-c3     libevent-2.1-7     libgcrypt20     libplist3     libsodium23     libunistring2     libuuid1     libwebsockets18     libmxml1     libprotobuf-c1     libsqlite3-0     sqlite3 &&   apt-get install -y --no-install-recommends librespot || true &&   rm -rf /var/lib/apt/lists/* &&   mkdir -p /music
+#6 0.200 **** install runtime packages ****
+#6 0.385 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.503 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.819 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.927 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.040 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.143 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.235 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.299 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.895 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.959 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 2.050 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.131 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.230 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.368 Get:14 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.369 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.475 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.554 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.962 Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 3.023 Fetched 36.1 MB in 3s (12.9 MB/s)
+#6 3.023 Reading package lists...
+#6 3.789 Reading package lists...
+#6 4.554 Building dependency tree...
+#6 4.746 Reading state information...
+#6 4.764 E: Unable to locate package libjson-c3
+#6 4.764 E: Unable to locate package libplist3
+#6 4.764 E: Unable to locate package libunistring2
+#6 4.764 E: Unable to locate package libwebsockets18
+#6 DONE 4.8s
+
+#7 [buildstage 2/2] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     libasound2-dev     autoconf     automake     libavahi-client-dev     libavahi-common-dev     bison     build-essential     libconfuse-dev     libcurl4-libssl-dev     libavcodec-dev     libavformat-dev     libavutil-dev     libflac-dev     flex     libgettextpo-dev     libgnutls28-dev     gperf     libjson-c-dev     libevent-dev     libgcrypt20-dev     libogg-dev     libplist-dev     libsodium-dev     libtool     libunistring-dev     libwebsockets-dev     libxml2-dev     libmxml-dev     default-jre-headless     libssl-dev     libprotobuf-c-dev     libsqlite3-dev     libtag1-dev &&   rm -rf /var/lib/apt/lists/* &&   mkdir -p     /tmp/source/owntone &&   echo "**** compile owntone-server ****" &&   curl -o   /tmp/source/owntone.tar.gz -L     "https://github.com/owntone/owntone-server/archive/${VERSION}.tar.gz" &&   tar xf /tmp/source/owntone.tar.gz -C     /tmp/source/owntone --strip-components=1 &&   export PATH="/tmp/source:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" &&   cd /tmp/source/owntone &&   autoreconf -i -v &&   ./configure     --build=$CBUILD     --enable-chromecast     --enable-lastfm     --enable-mpd     --host=$CHOST     --infodir=/usr/share/info     --localstatedir=/var     --mandir=/usr/share/man     --prefix=/usr     --sysconfdir=/etc &&   make &&   make DESTDIR=/tmp/daapd-build install &&   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig &&   rm -rf /tmp/daapd-build/var
+#7 0.198 **** install build packages ****
+#7 0.388 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.510 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.828 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.937 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.048 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 1.158 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.234 Get:7 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.401 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.864 Get:9 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.947 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 2.031 Get:11 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 2.040 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 2.121 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.216 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.384 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.477 Get:16 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 2.477 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 2.558 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.984 Fetched 36.1 MB in 3s (13.1 MB/s)
+#7 2.984 Reading package lists...
+#7 3.747 Reading package lists...
+#7 4.502 Building dependency tree...
+#7 4.687 Reading state information...
+#7 4.702 E: Unable to locate package libcurl4-libssl-dev
+#7 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     libasound2-dev     autoconf     automake     libavahi-client-dev     libavahi-common-dev     bison     build-essential     libconfuse-dev     libcurl4-libssl-dev     libavcodec-dev     libavformat-dev     libavutil-dev     libflac-dev     flex     libgettextpo-dev     libgnutls28-dev     gperf     libjson-c-dev     libevent-dev     libgcrypt20-dev     libogg-dev     libplist-dev     libsodium-dev     libtool     libunistring-dev     libwebsockets-dev     libxml2-dev     libmxml-dev     default-jre-headless     libssl-dev     libprotobuf-c-dev     libsqlite3-dev     libtag1-dev &&   rm -rf /var/lib/apt/lists/* &&   mkdir -p     /tmp/source/owntone &&   echo \"**** compile owntone-server ****\" &&   curl -o   /tmp/source/owntone.tar.gz -L     \"https://github.com/owntone/owntone-server/archive/${VERSION}.tar.gz\" &&   tar xf /tmp/source/owntone.tar.gz -C     /tmp/source/owntone --strip-components=1 &&   export PATH=\"/tmp/source:$PATH\" &&   cd /tmp/source/owntone &&   autoreconf -i -v &&   ./configure     --build=$CBUILD     --enable-chromecast     --enable-lastfm     --enable-mpd     --host=$CHOST     --infodir=/usr/share/info     --localstatedir=/var     --mandir=/usr/share/man     --prefix=/usr     --sysconfdir=/etc &&   make &&   make DESTDIR=/tmp/daapd-build install &&   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig &&   rm -rf /tmp/daapd-build/var" did not complete successfully: exit code: 100
+------
+ > [buildstage 2/2] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     libasound2-dev     autoconf     automake     libavahi-client-dev     libavahi-common-dev     bison     build-essential     libconfuse-dev     libcurl4-libssl-dev     libavcodec-dev     libavformat-dev     libavutil-dev     libflac-dev     flex     libgettextpo-dev     libgnutls28-dev     gperf     libjson-c-dev     libevent-dev     libgcrypt20-dev     libogg-dev     libplist-dev     libsodium-dev     libtool     libunistring-dev     libwebsockets-dev     libxml2-dev     libmxml-dev     default-jre-headless     libssl-dev     libprotobuf-c-dev     libsqlite3-dev     libtag1-dev &&   rm -rf /var/lib/apt/lists/* &&   mkdir -p     /tmp/source/owntone &&   echo "**** compile owntone-server ****" &&   curl -o   /tmp/source/owntone.tar.gz -L     "https://github.com/owntone/owntone-server/archive/${VERSION}.tar.gz" &&   tar xf /tmp/source/owntone.tar.gz -C     /tmp/source/owntone --strip-components=1 &&   export PATH="/tmp/source:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" &&   cd /tmp/source/owntone &&   autoreconf -i -v &&   ./configure     --build=$CBUILD     --enable-chromecast     --enable-lastfm     --enable-mpd     --host=$CHOST     --infodir=/usr/share/info     --localstatedir=/var     --mandir=/usr/share/man     --prefix=/usr     --sysconfdir=/etc &&   make &&   make DESTDIR=/tmp/daapd-build install &&   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig &&   rm -rf /tmp/daapd-build/var:
+2.384 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+2.477 Get:16 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+2.477 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+2.558 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+2.984 Fetched 36.1 MB in 3s (13.1 MB/s)
+2.984 Reading package lists...
+3.747 Reading package lists...
+4.502 Building dependency tree...
+4.687 Reading state information...
+4.702 E: Unable to locate package libcurl4-libssl-dev
+------
+Dockerfile:8
+--------------------
+   7 |     
+   8 | >>> RUN \
+   9 | >>>   echo "**** install build packages ****" && \
+  10 | >>>   apt-get update && \
+  11 | >>>   apt-get install -y --no-install-recommends \
+  12 | >>>     libasound2-dev \
+  13 | >>>     autoconf \
+  14 | >>>     automake \
+  15 | >>>     libavahi-client-dev \
+  16 | >>>     libavahi-common-dev \
+  17 | >>>     bison \
+  18 | >>>     build-essential \
+  19 | >>>     libconfuse-dev \
+  20 | >>>     libcurl4-libssl-dev \
+  21 | >>>     libavcodec-dev \
+  22 | >>>     libavformat-dev \
+  23 | >>>     libavutil-dev \
+  24 | >>>     libflac-dev \
+  25 | >>>     flex \
+  26 | >>>     libgettextpo-dev \
+  27 | >>>     libgnutls28-dev \
+  28 | >>>     gperf \
+  29 | >>>     libjson-c-dev \
+  30 | >>>     libevent-dev \
+  31 | >>>     libgcrypt20-dev \
+  32 | >>>     libogg-dev \
+  33 | >>>     libplist-dev \
+  34 | >>>     libsodium-dev \
+  35 | >>>     libtool \
+  36 | >>>     libunistring-dev \
+  37 | >>>     libwebsockets-dev \
+  38 | >>>     libxml2-dev \
+  39 | >>>     libmxml-dev \
+  40 | >>>     default-jre-headless \
+  41 | >>>     libssl-dev \
+  42 | >>>     libprotobuf-c-dev \
+  43 | >>>     libsqlite3-dev \
+  44 | >>>     libtag1-dev && \
+  45 | >>>   rm -rf /var/lib/apt/lists/* && \
+  46 | >>>   mkdir -p \
+  47 | >>>     /tmp/source/owntone && \
+  48 | >>>   echo "**** compile owntone-server ****" && \
+  49 | >>>   curl -o \
+  50 | >>>   /tmp/source/owntone.tar.gz -L \
+  51 | >>>     "https://github.com/owntone/owntone-server/archive/${VERSION}.tar.gz" && \
+  52 | >>>   tar xf /tmp/source/owntone.tar.gz -C \
+  53 | >>>     /tmp/source/owntone --strip-components=1 && \
+  54 | >>>   export PATH="/tmp/source:$PATH" && \
+  55 | >>>   cd /tmp/source/owntone && \
+  56 | >>>   autoreconf -i -v && \
+  57 | >>>   ./configure \
+  58 | >>>     --build=$CBUILD \
+  59 | >>>     --enable-chromecast \
+  60 | >>>     --enable-lastfm \
+  61 | >>>     --enable-mpd \
+  62 | >>>     --host=$CHOST \
+  63 | >>>     --infodir=/usr/share/info \
+  64 | >>>     --localstatedir=/var \
+  65 | >>>     --mandir=/usr/share/man \
+  66 | >>>     --prefix=/usr \
+  67 | >>>     --sysconfdir=/etc && \
+  68 | >>>   make && \
+  69 | >>>   make DESTDIR=/tmp/daapd-build install && \
+  70 | >>>   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig && \
+  71 | >>>   rm -rf /tmp/daapd-build/var
+  72 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     libasound2-dev     autoconf     automake     libavahi-client-dev     libavahi-common-dev     bison     build-essential     libconfuse-dev     libcurl4-libssl-dev     libavcodec-dev     libavformat-dev     libavutil-dev     libflac-dev     flex     libgettextpo-dev     libgnutls28-dev     gperf     libjson-c-dev     libevent-dev     libgcrypt20-dev     libogg-dev     libplist-dev     libsodium-dev     libtool     libunistring-dev     libwebsockets-dev     libxml2-dev     libmxml-dev     default-jre-headless     libssl-dev     libprotobuf-c-dev     libsqlite3-dev     libtag1-dev &&   rm -rf /var/lib/apt/lists/* &&   mkdir -p     /tmp/source/owntone &&   echo \"**** compile owntone-server ****\" &&   curl -o   /tmp/source/owntone.tar.gz -L     \"https://github.com/owntone/owntone-server/archive/${VERSION}.tar.gz\" &&   tar xf /tmp/source/owntone.tar.gz -C     /tmp/source/owntone --strip-components=1 &&   export PATH=\"/tmp/source:$PATH\" &&   cd /tmp/source/owntone &&   autoreconf -i -v &&   ./configure     --build=$CBUILD     --enable-chromecast     --enable-lastfm     --enable-mpd     --host=$CHOST     --infodir=/usr/share/info     --localstatedir=/var     --mandir=/usr/share/man     --prefix=/usr     --sysconfdir=/etc &&   make &&   make DESTDIR=/tmp/daapd-build install &&   mv /tmp/daapd-build/etc/owntone.conf /tmp/daapd-build/etc/owntone.conf.orig &&   rm -rf /tmp/daapd-build/var" did not complete successfully: exit code: 100

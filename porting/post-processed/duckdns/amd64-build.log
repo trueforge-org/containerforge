@@ -1,0 +1,143 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 403B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 5.93kB 0.0s done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     dnsutils     logrotate &&   rm -rf /var/lib/apt/lists/*
+#6 0.165 **** install packages ****
+#6 0.464 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.783 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 1.225 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.413 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.535 Get:5 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.601 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 2.272 Get:7 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 2.432 Get:8 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.820 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 2.894 Get:10 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.977 Get:11 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 3.118 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 3.257 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 3.430 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.589 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.750 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 3.888 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.027 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.045 Fetched 36.1 MB in 4s (9,368 kB/s)
+#6 4.045 Reading package lists...
+#6 4.782 Reading package lists...
+#6 5.518 Building dependency tree...
+#6 5.666 Reading state information...
+#6 5.804 The following additional packages will be installed:
+#6 5.805   bind9-dnsutils bind9-host bind9-libs libbsd0 libedit2 liblmdb0 libmaxminddb0
+#6 5.805   libpopt0 libuv1t64
+#6 5.806 Suggested packages:
+#6 5.806   mmdb-bin bsd-mailx | mailx
+#6 5.838 The following NEW packages will be installed:
+#6 5.838   bind9-dnsutils bind9-host bind9-libs dnsutils libbsd0 libedit2 liblmdb0
+#6 5.839   libmaxminddb0 libpopt0 libuv1t64 logrotate
+#6 5.991 0 upgraded, 11 newly installed, 0 to remove and 5 not upgraded.
+#6 5.991 Need to get 1,856 kB of archives.
+#6 5.991 After this operation, 5,362 kB of additional disk space will be used.
+#6 5.991 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#6 6.130 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libpopt0 amd64 1.19+dfsg-1build1 [28.6 kB]
+#6 6.269 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 logrotate amd64 3.21.0-2build1 [52.2 kB]
+#6 6.407 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+#6 6.545 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#6 6.683 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 liblmdb0 amd64 0.9.31-1build1 [48.1 kB]
+#6 6.822 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libmaxminddb0 amd64 1.9.1-1build1 [24.4 kB]
+#6 6.960 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bind9-libs amd64 1:9.18.39-0ubuntu0.24.04.2 [1,257 kB]
+#6 7.112 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bind9-host amd64 1:9.18.39-0ubuntu0.24.04.2 [50.5 kB]
+#6 7.250 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bind9-dnsutils amd64 1:9.18.39-0ubuntu0.24.04.2 [156 kB]
+#6 7.389 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 dnsutils all 1:9.18.39-0ubuntu0.24.04.2 [3,684 B]
+#6 7.490 debconf: delaying package configuration, since apt-utils is not installed
+#6 7.515 Fetched 1,856 kB in 2s (1,202 kB/s)
+#6 7.530 Selecting previously unselected package libbsd0:amd64.
+#6 7.530 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#6 7.543 Preparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#6 7.544 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 7.560 Selecting previously unselected package libpopt0:amd64.
+#6 7.561 Preparing to unpack .../01-libpopt0_1.19+dfsg-1build1_amd64.deb ...
+#6 7.562 Unpacking libpopt0:amd64 (1.19+dfsg-1build1) ...
+#6 7.576 Selecting previously unselected package logrotate.
+#6 7.578 Preparing to unpack .../02-logrotate_3.21.0-2build1_amd64.deb ...
+#6 7.578 Unpacking logrotate (3.21.0-2build1) ...
+#6 7.596 Selecting previously unselected package libuv1t64:amd64.
+#6 7.598 Preparing to unpack .../03-libuv1t64_1.48.0-1.1build1_amd64.deb ...
+#6 7.598 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
+#6 7.613 Selecting previously unselected package libedit2:amd64.
+#6 7.615 Preparing to unpack .../04-libedit2_3.1-20230828-1build1_amd64.deb ...
+#6 7.616 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#6 7.630 Selecting previously unselected package liblmdb0:amd64.
+#6 7.632 Preparing to unpack .../05-liblmdb0_0.9.31-1build1_amd64.deb ...
+#6 7.633 Unpacking liblmdb0:amd64 (0.9.31-1build1) ...
+#6 7.647 Selecting previously unselected package libmaxminddb0:amd64.
+#6 7.648 Preparing to unpack .../06-libmaxminddb0_1.9.1-1build1_amd64.deb ...
+#6 7.649 Unpacking libmaxminddb0:amd64 (1.9.1-1build1) ...
+#6 7.662 Selecting previously unselected package bind9-libs:amd64.
+#6 7.664 Preparing to unpack .../07-bind9-libs_1%3a9.18.39-0ubuntu0.24.04.2_amd64.deb ...
+#6 7.664 Unpacking bind9-libs:amd64 (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.692 Selecting previously unselected package bind9-host.
+#6 7.694 Preparing to unpack .../08-bind9-host_1%3a9.18.39-0ubuntu0.24.04.2_amd64.deb ...
+#6 7.694 Unpacking bind9-host (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.708 Selecting previously unselected package bind9-dnsutils.
+#6 7.709 Preparing to unpack .../09-bind9-dnsutils_1%3a9.18.39-0ubuntu0.24.04.2_amd64.deb ...
+#6 7.710 Unpacking bind9-dnsutils (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.725 Selecting previously unselected package dnsutils.
+#6 7.726 Preparing to unpack .../10-dnsutils_1%3a9.18.39-0ubuntu0.24.04.2_all.deb ...
+#6 7.727 Unpacking dnsutils (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.746 Setting up liblmdb0:amd64 (0.9.31-1build1) ...
+#6 7.748 Setting up libmaxminddb0:amd64 (1.9.1-1build1) ...
+#6 7.750 Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+#6 7.752 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 7.754 Setting up libpopt0:amd64 (1.19+dfsg-1build1) ...
+#6 7.756 Setting up logrotate (3.21.0-2build1) ...
+#6 7.870 Created symlink /etc/systemd/system/timers.target.wants/logrotate.timer → /usr/lib/systemd/system/logrotate.timer.
+#6 7.874 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#6 7.876 Setting up bind9-libs:amd64 (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.878 Setting up bind9-host (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.880 Setting up bind9-dnsutils (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.882 Setting up dnsutils (1:9.18.39-0ubuntu0.24.04.2) ...
+#6 7.884 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 DONE 7.9s
+
+#7 [3/5] COPY . /
+#7 DONE 0.0s
+
+#8 [4/5] COPY ./root /
+#8 DONE 0.0s
+
+#9 [5/5] WORKDIR /config
+#9 DONE 0.0s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.3s done
+#10 exporting manifest sha256:ce787a85f705dceb9e3240a5497bd8f0aca9449347287fcd9e2e4c59b7b9be72 done
+#10 exporting config sha256:9f0d65f83693b223c1df1a4ff6a81a0082fde904f2e706a054a419a827df4302 done
+#10 exporting attestation manifest sha256:7f6d24a18b3c5a732f03290b9127825aba6587421a2ef62dbe3a2d40a8f7c430 done
+#10 exporting manifest list sha256:86084ff4dfac9788e0d3a79acbc2dd243061203f87414e1a88a80c552585ba1a done
+#10 naming to docker.io/library/porting-duckdns:amd64 done
+#10 unpacking to docker.io/library/porting-duckdns:amd64
+#10 unpacking to docker.io/library/porting-duckdns:amd64 0.4s done
+#10 DONE 0.7s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 sha256:46b905425667995840728594de33bf229125cd6216dbd24f11d394a5b65fef16 27.26MB / 27.26MB 0.3s done
+#4 DONE 0.3s

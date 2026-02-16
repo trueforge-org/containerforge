@@ -1,0 +1,114 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.54kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 45.70kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     perl-app-cpanminus     perl-dev &&   apt-get update && apt-get install -y --no-install-recommends     apache2     apache2-ctl     apache2-utils     apache-mod-fcgid     bc     dnsutils     font-noto-cjk     irtt     openssh-client     perl-authen-radius     perl-io-socket-inet6     perl-json-maybexs     perl-lwp-protocol-https     perl-path-tiny     smokeping==${VERSION}     ssmtp     sudo     tcptraceroute &&   echo "**** Build perl TacacsPlus module ****" &&   cpanm Authen::TacacsPlus &&   echo "**** Build perl InfluxDB modules ****" &&   cpanm InfluxDB::HTTP &&   cpanm Method::Signatures --force &&   cpanm Object::Result &&   cpanm InfluxDB::LineProtocol &&   echo "**** give setuid access to traceroute & tcptraceroute ****" &&   chmod a+s /usr/bin/traceroute &&   chmod a+s /usr/bin/tcptraceroute &&   echo "**** fix path to cropper.js ****" &&   sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html &&   echo "**** Cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /root/.cpanm     /etc/apache2/httpd.conf
+#6 0.150 **** install packages ****
+#6 0.316 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.318 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.466 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.524 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 0.611 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.757 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 0.777 Get:7 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 0.902 Get:8 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 0.970 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.054 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.146 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.254 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 2.021 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.235 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.441 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.585 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.834 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.977 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.996 Fetched 36.1 MB in 3s (12.8 MB/s)
+#6 2.996 Reading package lists...
+#6 3.747 Reading package lists...
+#6 4.526 Building dependency tree...
+#6 4.677 Reading state information...
+#6 4.691 E: Unable to locate package perl-app-cpanminus
+#6 4.691 E: Unable to locate package perl-dev
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     perl-app-cpanminus     perl-dev &&   apt-get update && apt-get install -y --no-install-recommends     apache2     apache2-ctl     apache2-utils     apache-mod-fcgid     bc     dnsutils     font-noto-cjk     irtt     openssh-client     perl-authen-radius     perl-io-socket-inet6     perl-json-maybexs     perl-lwp-protocol-https     perl-path-tiny     smokeping==${VERSION}     ssmtp     sudo     tcptraceroute &&   echo \"**** Build perl TacacsPlus module ****\" &&   cpanm Authen::TacacsPlus &&   echo \"**** Build perl InfluxDB modules ****\" &&   cpanm InfluxDB::HTTP &&   cpanm Method::Signatures --force &&   cpanm Object::Result &&   cpanm InfluxDB::LineProtocol &&   echo \"**** give setuid access to traceroute & tcptraceroute ****\" &&   chmod a+s /usr/bin/traceroute &&   chmod a+s /usr/bin/tcptraceroute &&   echo \"**** fix path to cropper.js ****\" &&   sed -i 's#src=\"/cropper/#/src=\"cropper/#' /etc/smokeping/basepage.html &&   echo \"**** Cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /root/.cpanm     /etc/apache2/httpd.conf" did not complete successfully: exit code: 100
+------
+ > [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     perl-app-cpanminus     perl-dev &&   apt-get update && apt-get install -y --no-install-recommends     apache2     apache2-ctl     apache2-utils     apache-mod-fcgid     bc     dnsutils     font-noto-cjk     irtt     openssh-client     perl-authen-radius     perl-io-socket-inet6     perl-json-maybexs     perl-lwp-protocol-https     perl-path-tiny     smokeping==${VERSION}     ssmtp     sudo     tcptraceroute &&   echo "**** Build perl TacacsPlus module ****" &&   cpanm Authen::TacacsPlus &&   echo "**** Build perl InfluxDB modules ****" &&   cpanm InfluxDB::HTTP &&   cpanm Method::Signatures --force &&   cpanm Object::Result &&   cpanm InfluxDB::LineProtocol &&   echo "**** give setuid access to traceroute & tcptraceroute ****" &&   chmod a+s /usr/bin/traceroute &&   chmod a+s /usr/bin/tcptraceroute &&   echo "**** fix path to cropper.js ****" &&   sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html &&   echo "**** Cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /root/.cpanm     /etc/apache2/httpd.conf:
+2.235 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+2.441 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+2.585 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+2.834 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+2.977 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+
+
+
+4.691 E: Unable to locate package perl-app-cpanminus
+4.691 E: Unable to locate package perl-dev
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install packages ****" && \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     build-essential \
+  13 | >>>     perl-app-cpanminus \
+  14 | >>>     perl-dev && \
+  15 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  16 | >>>     apache2 \
+  17 | >>>     apache2-ctl \
+  18 | >>>     apache2-utils \
+  19 | >>>     apache-mod-fcgid \
+  20 | >>>     bc \
+  21 | >>>     dnsutils \
+  22 | >>>     font-noto-cjk \
+  23 | >>>     irtt \
+  24 | >>>     openssh-client \
+  25 | >>>     perl-authen-radius \
+  26 | >>>     perl-io-socket-inet6 \
+  27 | >>>     perl-json-maybexs \
+  28 | >>>     perl-lwp-protocol-https \
+  29 | >>>     perl-path-tiny \
+  30 | >>>     smokeping==${VERSION} \
+  31 | >>>     ssmtp \
+  32 | >>>     sudo \
+  33 | >>>     tcptraceroute && \
+  34 | >>>   echo "**** Build perl TacacsPlus module ****" && \
+  35 | >>>   cpanm Authen::TacacsPlus && \
+  36 | >>>   echo "**** Build perl InfluxDB modules ****" && \
+  37 | >>>   cpanm InfluxDB::HTTP && \
+  38 | >>>   cpanm Method::Signatures --force && \
+  39 | >>>   cpanm Object::Result && \
+  40 | >>>   cpanm InfluxDB::LineProtocol && \
+  41 | >>>   echo "**** give setuid access to traceroute & tcptraceroute ****" && \
+  42 | >>>   chmod a+s /usr/bin/traceroute && \
+  43 | >>>   chmod a+s /usr/bin/tcptraceroute && \
+  44 | >>>   echo "**** fix path to cropper.js ****" && \
+  45 | >>>   sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html && \
+  46 | >>>   echo "**** Cleanup ****" && \
+  47 | >>>   apt-get autoremove -y && \
+  48 | >>>   rm -rf \
+  49 | >>>     /tmp/* \
+  50 | >>>     /root/.cpanm \
+  51 | >>>     /etc/apache2/httpd.conf
+  52 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     perl-app-cpanminus     perl-dev &&   apt-get update && apt-get install -y --no-install-recommends     apache2     apache2-ctl     apache2-utils     apache-mod-fcgid     bc     dnsutils     font-noto-cjk     irtt     openssh-client     perl-authen-radius     perl-io-socket-inet6     perl-json-maybexs     perl-lwp-protocol-https     perl-path-tiny     smokeping==${VERSION}     ssmtp     sudo     tcptraceroute &&   echo \"**** Build perl TacacsPlus module ****\" &&   cpanm Authen::TacacsPlus &&   echo \"**** Build perl InfluxDB modules ****\" &&   cpanm InfluxDB::HTTP &&   cpanm Method::Signatures --force &&   cpanm Object::Result &&   cpanm InfluxDB::LineProtocol &&   echo \"**** give setuid access to traceroute & tcptraceroute ****\" &&   chmod a+s /usr/bin/traceroute &&   chmod a+s /usr/bin/tcptraceroute &&   echo \"**** fix path to cropper.js ****\" &&   sed -i 's#src=\"/cropper/#/src=\"cropper/#' /etc/smokeping/basepage.html &&   echo \"**** Cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /root/.cpanm     /etc/apache2/httpd.conf" did not complete successfully: exit code: 100

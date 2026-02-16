@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: Uses Alpine-style `apt-get add/del --no-cache` commands, which fail on Debian/Ubuntu base images.
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-planka:amd64 .`
+- Result: FAIL
+- Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     giflib     libgsf     nodejs     vips &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     npm     py3-setuptools &&   echo \"**** install planka ****\" &&   mkdir -p /build &&   curl -o     /tmp/planka.tar.gz -L     \"https://github.com/plankanban/planka/archive/v${VERSION}.tar.gz\" &&   tar xf     /tmp/planka.tar.gz -C     /build --strip-components=1 &&   cd /build/server &&   npm install pnpm@9 --global &&   pnpm import &&   pnpm install --prod &&   cd /build/client &&   pnpm import &&   pnpm install --prod &&   DISABLE_ESLINT_PLUGIN=true npm run build &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     $HOME/.cache     $HOME/.local     $HOME/.npm     /tmp/*" did not complete successfully: exit code: 100
+- Full log: `amd64-build.log`

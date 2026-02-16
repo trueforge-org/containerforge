@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fbaseimage-kasmvnc%3Apull&service=ghcr.io: 403 Forbidden
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-steamos:amd64 .`
+- Result: FAIL
+- Reason: ERROR: failed to build: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fbaseimage-kasmvnc%3Apull&service=ghcr.io: 403 Forbidden
+- Full log: `amd64-build.log`

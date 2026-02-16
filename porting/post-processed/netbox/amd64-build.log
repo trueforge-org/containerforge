@@ -1,0 +1,111 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.48kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 18.71kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     libjpeg-dev     libffi-dev     libxslt-dev     libxml2-dev     openldap-dev     libssl-dev     postgresql-dev     zlib-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libldap     postgresql-client     tiff     uwsgi     uwsgi-python &&   echo "**** install netbox ****" &&   mkdir -p /app/netbox &&   curl -o   /tmp/netbox.tar.gz -L     "https://github.com/netbox-community/netbox/archive/v${VERSION}.tar.gz" &&   tar xf   /tmp/netbox.tar.gz -C     /app/netbox/ --strip-components=1 &&     echo "**** install pip packages ****" &&   cd /app/netbox &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt &&   pip install --no-cache-dir  django-auth-ldap &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cargo     /config/.cache
+#6 0.171 **** install build packages ****
+#6 0.362 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.797 Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.800 Get:3 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.905 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.015 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.121 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.451 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.539 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.549 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 2.022 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.103 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.203 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.277 Get:13 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.296 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.388 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.468 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.740 Get:17 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.963 Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 3.038 Fetched 36.1 MB in 3s (12.7 MB/s)
+#6 3.038 Reading package lists...
+#6 3.776 Reading package lists...
+#6 4.501 Building dependency tree...
+#6 4.648 Reading state information...
+#6 4.663 E: Unable to locate package openldap-dev
+#6 4.663 E: Unable to locate package postgresql-dev
+#6 4.663 E: Unable to locate package zlib-dev
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     libjpeg-dev     libffi-dev     libxslt-dev     libxml2-dev     openldap-dev     libssl-dev     postgresql-dev     zlib-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libldap     postgresql-client     tiff     uwsgi     uwsgi-python &&   echo \"**** install netbox ****\" &&   mkdir -p /app/netbox &&   curl -o   /tmp/netbox.tar.gz -L     \"https://github.com/netbox-community/netbox/archive/v${VERSION}.tar.gz\" &&   tar xf   /tmp/netbox.tar.gz -C     /app/netbox/ --strip-components=1 &&     echo \"**** install pip packages ****\" &&   cd /app/netbox &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt &&   pip install --no-cache-dir  django-auth-ldap &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     ${HOME}/.cargo     ${HOME}/.cache" did not complete successfully: exit code: 100
+------
+ > [2/5] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     libjpeg-dev     libffi-dev     libxslt-dev     libxml2-dev     openldap-dev     libssl-dev     postgresql-dev     zlib-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libldap     postgresql-client     tiff     uwsgi     uwsgi-python &&   echo "**** install netbox ****" &&   mkdir -p /app/netbox &&   curl -o   /tmp/netbox.tar.gz -L     "https://github.com/netbox-community/netbox/archive/v${VERSION}.tar.gz" &&   tar xf   /tmp/netbox.tar.gz -C     /app/netbox/ --strip-components=1 &&     echo "**** install pip packages ****" &&   cd /app/netbox &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt &&   pip install --no-cache-dir  django-auth-ldap &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cargo     /config/.cache:
+2.388 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+2.468 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+2.740 Get:17 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+2.963 Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+
+
+
+4.663 E: Unable to locate package openldap-dev
+4.663 E: Unable to locate package postgresql-dev
+4.663 E: Unable to locate package zlib-dev
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install build packages ****" && \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     build-essential \
+  13 | >>>     cargo \
+  14 | >>>     libjpeg-dev \
+  15 | >>>     libffi-dev \
+  16 | >>>     libxslt-dev \
+  17 | >>>     libxml2-dev \
+  18 | >>>     openldap-dev \
+  19 | >>>     libssl-dev \
+  20 | >>>     postgresql-dev \
+  21 | >>>     zlib-dev && \
+  22 | >>>   echo "**** install runtime packages ****" && \
+  23 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  24 | >>>     libldap \
+  25 | >>>     postgresql-client \
+  26 | >>>     tiff \
+  27 | >>>     uwsgi \
+  28 | >>>     uwsgi-python && \
+  29 | >>>   echo "**** install netbox ****" && \
+  30 | >>>   mkdir -p /app/netbox && \
+  31 | >>>   curl -o \
+  32 | >>>   /tmp/netbox.tar.gz -L \
+  33 | >>>     "https://github.com/netbox-community/netbox/archive/v${VERSION}.tar.gz" && \
+  34 | >>>   tar xf \
+  35 | >>>   /tmp/netbox.tar.gz -C \
+  36 | >>>     /app/netbox/ --strip-components=1 && \
+  37 | >>>     echo "**** install pip packages ****" && \
+  38 | >>>   cd /app/netbox && \
+  39 | >>>   python3 -m venv /config/venv && \
+  40 | >>>   pip install -U --no-cache-dir \
+  41 | >>>     pip \
+  42 | >>>     wheel && \
+  43 | >>>   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
+  44 | >>>   pip install --no-cache-dir  django-auth-ldap && \
+  45 | >>>   echo "**** cleanup ****" && \
+  46 | >>>   apt-get autoremove -y && \
+  47 | >>>   rm -rf \
+  48 | >>>     /tmp/* \
+  49 | >>>     ${HOME}/.cargo \
+  50 | >>>     ${HOME}/.cache
+  51 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     libjpeg-dev     libffi-dev     libxslt-dev     libxml2-dev     openldap-dev     libssl-dev     postgresql-dev     zlib-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libldap     postgresql-client     tiff     uwsgi     uwsgi-python &&   echo \"**** install netbox ****\" &&   mkdir -p /app/netbox &&   curl -o   /tmp/netbox.tar.gz -L     \"https://github.com/netbox-community/netbox/archive/v${VERSION}.tar.gz\" &&   tar xf   /tmp/netbox.tar.gz -C     /app/netbox/ --strip-components=1 &&     echo \"**** install pip packages ****\" &&   cd /app/netbox &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt &&   pip install --no-cache-dir  django-auth-ldap &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     ${HOME}/.cargo     ${HOME}/.cache" did not complete successfully: exit code: 100

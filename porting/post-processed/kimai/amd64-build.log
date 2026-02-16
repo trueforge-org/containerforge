@@ -1,0 +1,407 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.73kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 6.41kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install kimai ****" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo "**** install composer dependencies ****" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*         /config/.cache         /config/.composer
+#6 0.156 **** install runtime packages ****
+#6 0.334 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.482 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.488 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.641 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.796 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 0.949 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.121 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.205 Get:8 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.276 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 2.097 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.107 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 2.251 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.260 Get:13 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 2.451 Get:14 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.478 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.699 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.966 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 3.118 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 3.138 Fetched 36.1 MB in 3s (12.2 MB/s)
+#6 3.138 Reading package lists...
+#6 3.867 Reading package lists...
+#6 4.593 Building dependency tree...
+#6 4.735 Reading state information...
+#6 4.871 The following additional packages will be installed:
+#6 4.871   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3 libheif-plugin-aomdec
+#6 4.871   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#6 4.871   libsharpyuv0 libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6
+#6 4.872   libxcb1 libxdmcp6 libxpm4 php-common php8.3-cli php8.3-common
+#6 4.872   php8.3-igbinary php8.3-opcache php8.3-phpdbg php8.3-readline php8.3-redis
+#6 4.872   psmisc ucf
+#6 4.873 Suggested packages:
+#6 4.873   libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec
+#6 4.873   libheif-plugin-jpegdec libheif-plugin-jpegenc libheif-plugin-j2kdec
+#6 4.873   libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc
+#6 4.873   redis-server php-pear
+#6 4.873 Recommended packages:
+#6 4.873   libheif-plugin-aomenc
+#6 4.986 The following NEW packages will be installed:
+#6 4.986   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3 libheif-plugin-aomdec
+#6 4.987   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#6 4.987   libsharpyuv0 libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6
+#6 4.987   libxcb1 libxdmcp6 libxpm4 php-common php-redis php8.3-cli php8.3-common
+#6 4.987   php8.3-gd php8.3-igbinary php8.3-intl php8.3-ldap php8.3-mysql
+#6 4.987   php8.3-opcache php8.3-phpdbg php8.3-readline php8.3-redis php8.3-xml psmisc
+#6 4.987   ucf
+#6 5.156 0 upgraded, 39 newly installed, 0 to remove and 5 not upgraded.
+#6 5.156 Need to get 10.5 MB of archives.
+#6 5.156 After this operation, 39.7 MB of additional disk space will be used.
+#6 5.156 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#6 5.312 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#6 5.465 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#6 5.618 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#6 5.794 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#6 5.946 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#6 6.100 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-opcache amd64 8.3.6-0ubuntu0.24.04.6 [372 kB]
+#6 6.264 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-readline amd64 8.3.6-0ubuntu0.24.04.6 [13.4 kB]
+#6 6.416 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.24.04.1 [161 kB]
+#6 6.572 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-cli amd64 8.3.6-0ubuntu0.24.04.6 [1,916 kB]
+#6 6.789 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-phpdbg amd64 8.3.6-0ubuntu0.24.04.6 [1,933 kB]
+#6 7.007 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-igbinary amd64 3.2.13-1ubuntu3 [37.9 kB]
+#6 7.159 Get:13 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-redis amd64 5.3.7+4.3.0-3ubuntu1 [168 kB]
+#6 7.315 Get:14 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-redis amd64 5.3.7+4.3.0-3ubuntu1 [3,058 B]
+#6 7.467 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#6 7.619 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#6 7.771 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#6 7.924 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#6 8.079 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#6 8.252 Get:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
+#6 8.471 Get:21 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+#6 8.626 Get:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+#6 8.778 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#6 8.931 Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
+#6 9.082 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
+#6 9.234 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
+#6 9.395 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#6 9.550 Get:28 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#6 9.703 Get:29 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+#6 9.856 Get:30 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+#6 10.01 Get:31 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#6 10.17 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
+#6 10.33 Get:33 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#6 10.48 Get:34 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+#6 10.63 Get:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
+#6 10.79 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#6 10.94 Get:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-ldap amd64 8.3.6-0ubuntu0.24.04.6 [33.5 kB]
+#6 11.10 Get:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#6 11.25 Get:39 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#6 11.36 debconf: delaying package configuration, since apt-utils is not installed
+#6 11.38 Fetched 10.5 MB in 6s (1,670 kB/s)
+#6 11.40 Selecting previously unselected package psmisc.
+#6 11.40 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#6 11.41 Preparing to unpack .../00-psmisc_23.7-1build1_amd64.deb ...
+#6 11.41 Unpacking psmisc (23.7-1build1) ...
+#6 11.43 Selecting previously unselected package php-common.
+#6 11.43 Preparing to unpack .../01-php-common_2%3a93ubuntu2_all.deb ...
+#6 11.43 Unpacking php-common (2:93ubuntu2) ...
+#6 11.45 Selecting previously unselected package ucf.
+#6 11.45 Preparing to unpack .../02-ucf_3.0043+nmu1_all.deb ...
+#6 11.45 Moving old data out of the way
+#6 11.46 Unpacking ucf (3.0043+nmu1) ...
+#6 11.47 Selecting previously unselected package php8.3-common.
+#6 11.48 Preparing to unpack .../03-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.48 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.53 Selecting previously unselected package libbsd0:amd64.
+#6 11.53 Preparing to unpack .../04-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#6 11.53 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 11.54 Selecting previously unselected package libedit2:amd64.
+#6 11.55 Preparing to unpack .../05-libedit2_3.1-20230828-1build1_amd64.deb ...
+#6 11.55 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#6 11.56 Selecting previously unselected package php8.3-opcache.
+#6 11.56 Preparing to unpack .../06-php8.3-opcache_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.57 Unpacking php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.59 Selecting previously unselected package php8.3-readline.
+#6 11.59 Preparing to unpack .../07-php8.3-readline_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.59 Unpacking php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.60 Selecting previously unselected package libsodium23:amd64.
+#6 11.60 Preparing to unpack .../08-libsodium23_1.0.18-1ubuntu0.24.04.1_amd64.deb ...
+#6 11.61 Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#6 11.62 Selecting previously unselected package php8.3-cli.
+#6 11.62 Preparing to unpack .../09-php8.3-cli_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.62 Unpacking php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.66 Selecting previously unselected package php8.3-phpdbg.
+#6 11.66 Preparing to unpack .../10-php8.3-phpdbg_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.66 Unpacking php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.71 Setting up psmisc (23.7-1build1) ...
+#6 11.71 Setting up php-common (2:93ubuntu2) ...
+#6 11.82 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#6 11.84 Selecting previously unselected package php8.3-igbinary.
+#6 11.84 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16855 files and directories currently installed.)
+#6 11.85 Preparing to unpack .../00-php8.3-igbinary_3.2.13-1ubuntu3_amd64.deb ...
+#6 11.86 Unpacking php8.3-igbinary (3.2.13-1ubuntu3) ...
+#6 11.88 Selecting previously unselected package php8.3-redis.
+#6 11.88 Preparing to unpack .../01-php8.3-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
+#6 11.88 Unpacking php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 11.89 Selecting previously unselected package php-redis.
+#6 11.90 Preparing to unpack .../02-php-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
+#6 11.90 Unpacking php-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 11.91 Selecting previously unselected package libxau6:amd64.
+#6 11.91 Preparing to unpack .../03-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#6 11.91 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#6 11.92 Selecting previously unselected package libxdmcp6:amd64.
+#6 11.93 Preparing to unpack .../04-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#6 11.93 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#6 11.94 Selecting previously unselected package libxcb1:amd64.
+#6 11.94 Preparing to unpack .../05-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#6 11.94 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#6 11.95 Selecting previously unselected package libx11-data.
+#6 11.96 Preparing to unpack .../06-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#6 11.96 Unpacking libx11-data (2:1.8.7-1build1) ...
+#6 12.01 Selecting previously unselected package libx11-6:amd64.
+#6 12.01 Preparing to unpack .../07-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#6 12.01 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#6 12.03 Selecting previously unselected package libaom3:amd64.
+#6 12.03 Preparing to unpack .../08-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+#6 12.04 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#6 12.07 Selecting previously unselected package libde265-0:amd64.
+#6 12.07 Preparing to unpack .../09-libde265-0_1.0.15-1build3_amd64.deb ...
+#6 12.07 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+#6 12.09 Selecting previously unselected package libdeflate0:amd64.
+#6 12.09 Preparing to unpack .../10-libdeflate0_1.19-1build1.1_amd64.deb ...
+#6 12.09 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+#6 12.11 Selecting previously unselected package libsharpyuv0:amd64.
+#6 12.11 Preparing to unpack .../11-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#6 12.11 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#6 12.12 Selecting previously unselected package libheif-plugin-aomdec:amd64.
+#6 12.12 Preparing to unpack .../12-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 12.12 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#6 12.14 Selecting previously unselected package libheif-plugin-libde265:amd64.
+#6 12.14 Preparing to unpack .../13-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 12.14 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#6 12.15 Selecting previously unselected package libheif1:amd64.
+#6 12.15 Preparing to unpack .../14-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 12.15 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#6 12.17 Selecting previously unselected package libjpeg-turbo8:amd64.
+#6 12.17 Preparing to unpack .../15-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#6 12.17 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 12.19 Selecting previously unselected package libjpeg8:amd64.
+#6 12.19 Preparing to unpack .../16-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#6 12.19 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 12.20 Selecting previously unselected package libjbig0:amd64.
+#6 12.21 Preparing to unpack .../17-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+#6 12.21 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#6 12.22 Selecting previously unselected package liblerc4:amd64.
+#6 12.22 Preparing to unpack .../18-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+#6 12.22 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#6 12.24 Selecting previously unselected package libwebp7:amd64.
+#6 12.24 Preparing to unpack .../19-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#6 12.24 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#6 12.26 Selecting previously unselected package libtiff6:amd64.
+#6 12.26 Preparing to unpack .../20-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
+#6 12.26 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#6 12.28 Selecting previously unselected package libxpm4:amd64.
+#6 12.28 Preparing to unpack .../21-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#6 12.28 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#6 12.29 Selecting previously unselected package libgd3:amd64.
+#6 12.29 Preparing to unpack .../22-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+#6 12.29 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+#6 12.31 Selecting previously unselected package php8.3-gd.
+#6 12.31 Preparing to unpack .../23-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 12.31 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.33 Selecting previously unselected package php8.3-intl.
+#6 12.33 Preparing to unpack .../24-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 12.33 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.35 Selecting previously unselected package php8.3-ldap.
+#6 12.35 Preparing to unpack .../25-php8.3-ldap_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 12.35 Unpacking php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.37 Selecting previously unselected package php8.3-mysql.
+#6 12.37 Preparing to unpack .../26-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 12.37 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.39 Selecting previously unselected package php8.3-xml.
+#6 12.39 Preparing to unpack .../27-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 12.39 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.42 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#6 12.42 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#6 12.42 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#6 12.43 Setting up libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#6 12.43 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#6 12.43 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+#6 12.43 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#6 12.43 Setting up libx11-data (2:1.8.7-1build1) ...
+#6 12.44 Setting up ucf (3.0043+nmu1) ...
+#6 12.50 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 12.50 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#6 12.50 Setting up libde265-0:amd64 (1.0.15-1build3) ...
+#6 12.50 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 12.51 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 12.51 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#6 12.51 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#6 12.51 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#6 12.51 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.61 
+#6 12.61 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#6 12.81 
+#6 12.81 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#6 13.02 
+#6 13.02 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#6 13.22 
+#6 13.22 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#6 13.43 
+#6 13.43 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#6 13.64 
+#6 13.64 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#6 13.85 
+#6 13.85 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#6 14.07 
+#6 14.07 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#6 14.29 
+#6 14.29 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#6 14.50 
+#6 14.50 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#6 14.72 
+#6 14.72 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#6 14.93 
+#6 14.93 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#6 15.14 
+#6 15.14 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#6 15.36 
+#6 15.36 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#6 15.57 
+#6 15.57 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#6 15.78 
+#6 15.78 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#6 16.01 
+#6 16.01 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#6 16.13 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.23 
+#6 16.23 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#6 16.44 
+#6 16.44 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#6 16.66 
+#6 16.66 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#6 16.78 Setting up php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.88 
+#6 16.88 Creating config file /etc/php/8.3/mods-available/readline.ini with new version
+#6 17.00 Setting up php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
+#6 17.10 
+#6 17.10 Creating config file /etc/php/8.3/mods-available/ldap.ini with new version
+#6 17.22 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#6 17.22 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#6 17.22 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 17.32 
+#6 17.32 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#6 17.54 
+#6 17.54 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#6 17.75 
+#6 17.75 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#6 17.97 
+#6 17.97 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#6 18.18 
+#6 18.18 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#6 18.40 
+#6 18.40 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#6 18.51 Setting up php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#6 18.61 
+#6 18.61 Creating config file /etc/php/8.3/mods-available/opcache.ini with new version
+#6 18.73 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#6 18.73 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 18.83 
+#6 18.83 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#6 18.95 Setting up php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#6 18.95 update-alternatives: using /usr/bin/php8.3 to provide /usr/bin/php (php) in auto mode
+#6 18.95 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php8.3.1.gz (of link group php) doesn't exist
+#6 18.95 update-alternatives: using /usr/bin/phar8.3 to provide /usr/bin/phar (phar) in auto mode
+#6 18.95 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar8.3.1.gz (of link group phar) doesn't exist
+#6 18.96 update-alternatives: using /usr/bin/phar.phar8.3 to provide /usr/bin/phar.phar (phar.phar) in auto mode
+#6 18.96 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar8.3.1.gz (of link group phar.phar) doesn't exist
+#6 19.05 
+#6 19.05 Creating config file /etc/php/8.3/cli/php.ini with new version
+#6 19.68 Setting up php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#6 19.68 update-alternatives: using /usr/bin/phpdbg8.3 to provide /usr/bin/phpdbg (phpdbg) in auto mode
+#6 19.68 update-alternatives: warning: skip creation of /usr/share/man/man1/phpdbg.1.gz because associated file /usr/share/man/man1/phpdbg8.3.1.gz (of link group phpdbg) doesn't exist
+#6 19.78 
+#6 19.78 Creating config file /etc/php/8.3/phpdbg/php.ini with new version
+#6 20.41 Setting up php8.3-igbinary (3.2.13-1ubuntu3) ...
+#6 20.48 Setting up php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 20.56 Setting up php-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 20.56 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#6 20.57 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+#6 20.57 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#6 20.67 
+#6 20.67 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+#6 20.79 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#6 20.79 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#6 20.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 20.81 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#6 20.82 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#6 20.85 **** configure php-fpm to pass env vars ****
+#6 20.85 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo \"**** configure php-fpm to pass env vars ****\" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo \"**** install kimai ****\" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         \"https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz\" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo \"**** install composer dependencies ****\" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/*         $HOME/.cache         $HOME/.composer" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install kimai ****" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo "**** install composer dependencies ****" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*         /config/.cache         /config/.composer:
+20.57 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+20.67 
+20.67 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+20.79 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+20.79 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+20.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+20.81 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+20.82 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+20.85 **** configure php-fpm to pass env vars ****
+20.85 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>     echo "**** install runtime packages ****" && \
+  11 | >>>     apt-get update && \
+  12 | >>>     apt-get install -y --no-install-recommends \
+  13 | >>>         php8.3-gd \
+  14 | >>>         php8.3-intl \
+  15 | >>>         php8.3-ldap \
+  16 | >>>         php8.3-mysql \
+  17 | >>>         php-redis \
+  18 | >>>         php8.3-xml && \
+  19 | >>>     rm -rf /var/lib/apt/lists/* && \
+  20 | >>>     echo "**** configure php-fpm to pass env vars ****" && \
+  21 | >>>     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
+  22 | >>>     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
+  23 | >>>     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+  24 | >>>     echo "**** install kimai ****" && \
+  25 | >>>     mkdir -p\
+  26 | >>>         /app/www && \
+  27 | >>>     curl -o \
+  28 | >>>         /tmp/kimai.tar.gz -L \
+  29 | >>>         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" && \
+  30 | >>>     tar xf \
+  31 | >>>         /tmp/kimai.tar.gz -C \
+  32 | >>>         /app/www --strip-components=1 && \
+  33 | >>>     echo "**** install composer dependencies ****" && \
+  34 | >>>     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction && \
+  35 | >>>     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap && \
+  36 | >>>     /usr/bin/composer clearcache -d /app/www/ && \
+  37 | >>>     echo "**** cleanup ****" && \
+  38 | >>>     rm -rf \
+  39 | >>>         /tmp/* \
+  40 | >>>         $HOME/.cache \
+  41 | >>>         $HOME/.composer
+  42 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo \"**** configure php-fpm to pass env vars ****\" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo \"**** install kimai ****\" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         \"https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz\" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo \"**** install composer dependencies ****\" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/*         $HOME/.cache         $HOME/.composer" did not complete successfully: exit code: 2

@@ -1,0 +1,102 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.23kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 3.54kB done
+#5 DONE 0.0s
+
+#6 [2/4] RUN   echo "**** install build dependencies ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo "**** install mylar3 ****" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     "https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*
+#6 0.143 **** install build dependencies ****
+#6 0.247 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.247 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.328 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.389 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 0.409 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.489 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 0.508 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 0.569 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 0.599 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 0.659 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 0.695 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.159 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.622 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 1.953 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.033 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.159 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.308 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.388 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.407 Fetched 36.1 MB in 2s (16.1 MB/s)
+#6 2.407 Reading package lists...
+#6 3.149 Reading package lists...
+#6 3.886 Building dependency tree...
+#6 4.036 Reading state information...
+#6 4.051 E: Unable to locate package zlib-dev
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build dependencies ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo \"**** install mylar3 ****\" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     \"https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz\" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*" did not complete successfully: exit code: 100
+------
+ > [2/4] RUN   echo "**** install build dependencies ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo "**** install mylar3 ****" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     "https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*:
+1.159 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+1.622 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+1.953 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+2.033 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+2.159 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+2.308 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+
+
+
+4.051 E: Unable to locate package zlib-dev
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install build dependencies ****" && \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     build-essential \
+  13 | >>>     libjpeg-dev \
+  14 | >>>     libffi-dev \
+  15 | >>>     libwebp-dev \
+  16 | >>>     zlib-dev && \
+  17 | >>>   echo "**** install runtime packages ****" && \
+  18 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  19 | >>>     libjpeg-turbo8 \
+  20 | >>>     libwebp-tools \
+  21 | >>>     nodejs \
+  22 | >>>     zlib && \
+  23 | >>>   echo "**** install mylar3 ****" && \
+  24 | >>>   mkdir /app/mylar3 && \
+  25 | >>>   curl -o \
+  26 | >>>     /tmp/mylar3.tar.gz -L \
+  27 | >>>     "https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz" && \
+  28 | >>>   tar xf /tmp/mylar3.tar.gz -C \
+  29 | >>>     /app/mylar3/ --strip-components=1 && \
+  30 | >>>   cd /app/mylar3 && \
+  31 | >>>   python3 -m venv /config/venv && \
+  32 | >>>   pip install -U --no-cache-dir \
+  33 | >>>     pip \
+  34 | >>>     wheel && \
+  35 | >>>   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt && \
+  36 | >>>   echo "**** cleanup ****" && \
+  37 | >>>   apt-get autoremove -y && \
+  38 | >>>   rm -rf \
+  39 | >>>     /root/.cache \
+  40 | >>>     /tmp/*
+  41 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build dependencies ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo \"**** install mylar3 ****\" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     \"https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz\" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*" did not complete successfully: exit code: 100

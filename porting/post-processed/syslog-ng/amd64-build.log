@@ -1,0 +1,104 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 761B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 5.38kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libdbi-drivers     paho-mqtt-c     syslog-ng==${VERSION}     syslog-ng-add-contextual-data     syslog-ng-amqp     syslog-ng-graphite     syslog-ng-http     syslog-ng-json     syslog-ng-map-value-pairs     syslog-ng-python     syslog-ng-redis     syslog-ng-scl     syslog-ng-sql     syslog-ng-stardate     syslog-ng-stomp     syslog-ng-tags-parser     syslog-ng-xml &&   rm -rf     /tmp/*
+#6 0.140 **** install packages ****
+#6 0.441 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.608 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 1.042 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.114 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 1.150 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.259 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.593 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.835 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.974 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.084 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 2.164 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 2.244 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.308 Get:13 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 2.344 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.436 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.516 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.607 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.686 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 3.047 Fetched 36.1 MB in 3s (12.5 MB/s)
+#6 3.047 Reading package lists...
+#6 3.766 Reading package lists...
+#6 4.526 Building dependency tree...
+#6 4.668 Reading state information...
+#6 4.682 E: Unable to locate package libdbi-drivers
+#6 4.682 E: Unable to locate package paho-mqtt-c
+#6 4.682 E: Unable to locate package syslog-ng=
+#6 4.682 E: Unable to locate package syslog-ng-add-contextual-data
+#6 4.682 E: Unable to locate package syslog-ng-amqp
+#6 4.682 E: Unable to locate package syslog-ng-graphite
+#6 4.682 E: Unable to locate package syslog-ng-http
+#6 4.682 E: Unable to locate package syslog-ng-json
+#6 4.682 E: Unable to locate package syslog-ng-map-value-pairs
+#6 4.682 E: Unable to locate package syslog-ng-python
+#6 4.682 E: Unable to locate package syslog-ng-redis
+#6 4.682 E: Unable to locate package syslog-ng-sql
+#6 4.682 E: Unable to locate package syslog-ng-stardate
+#6 4.682 E: Unable to locate package syslog-ng-stomp
+#6 4.682 E: Unable to locate package syslog-ng-tags-parser
+#6 4.682 E: Unable to locate package syslog-ng-xml
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libdbi-drivers     paho-mqtt-c     syslog-ng==${VERSION}     syslog-ng-add-contextual-data     syslog-ng-amqp     syslog-ng-graphite     syslog-ng-http     syslog-ng-json     syslog-ng-map-value-pairs     syslog-ng-python     syslog-ng-redis     syslog-ng-scl     syslog-ng-sql     syslog-ng-stardate     syslog-ng-stomp     syslog-ng-tags-parser     syslog-ng-xml &&   rm -rf     /tmp/*" did not complete successfully: exit code: 100
+------
+ > [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libdbi-drivers     paho-mqtt-c     syslog-ng==${VERSION}     syslog-ng-add-contextual-data     syslog-ng-amqp     syslog-ng-graphite     syslog-ng-http     syslog-ng-json     syslog-ng-map-value-pairs     syslog-ng-python     syslog-ng-redis     syslog-ng-scl     syslog-ng-sql     syslog-ng-stardate     syslog-ng-stomp     syslog-ng-tags-parser     syslog-ng-xml &&   rm -rf     /tmp/*:
+4.682 E: Unable to locate package syslog-ng-http
+4.682 E: Unable to locate package syslog-ng-json
+4.682 E: Unable to locate package syslog-ng-map-value-pairs
+4.682 E: Unable to locate package syslog-ng-python
+4.682 E: Unable to locate package syslog-ng-redis
+4.682 E: Unable to locate package syslog-ng-sql
+4.682 E: Unable to locate package syslog-ng-stardate
+4.682 E: Unable to locate package syslog-ng-stomp
+4.682 E: Unable to locate package syslog-ng-tags-parser
+4.682 E: Unable to locate package syslog-ng-xml
+------
+Dockerfile:8
+--------------------
+   7 |     
+   8 | >>> RUN \
+   9 | >>>   echo "**** install packages ****" && \
+  10 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  11 | >>>     libdbi-drivers \
+  12 | >>>     paho-mqtt-c \
+  13 | >>>     syslog-ng==${VERSION} \
+  14 | >>>     syslog-ng-add-contextual-data \
+  15 | >>>     syslog-ng-amqp \
+  16 | >>>     syslog-ng-graphite \
+  17 | >>>     syslog-ng-http \
+  18 | >>>     syslog-ng-json \
+  19 | >>>     syslog-ng-map-value-pairs \
+  20 | >>>     syslog-ng-python \
+  21 | >>>     syslog-ng-redis \
+  22 | >>>     syslog-ng-scl \
+  23 | >>>     syslog-ng-sql \
+  24 | >>>     syslog-ng-stardate \
+  25 | >>>     syslog-ng-stomp \
+  26 | >>>     syslog-ng-tags-parser \
+  27 | >>>     syslog-ng-xml && \
+  28 | >>>   rm -rf \
+  29 | >>>     /tmp/*
+  30 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libdbi-drivers     paho-mqtt-c     syslog-ng==${VERSION}     syslog-ng-add-contextual-data     syslog-ng-amqp     syslog-ng-graphite     syslog-ng-http     syslog-ng-json     syslog-ng-map-value-pairs     syslog-ng-python     syslog-ng-redis     syslog-ng-scl     syslog-ng-sql     syslog-ng-stardate     syslog-ng-stomp     syslog-ng-tags-parser     syslog-ng-xml &&   rm -rf     /tmp/*" did not complete successfully: exit code: 100

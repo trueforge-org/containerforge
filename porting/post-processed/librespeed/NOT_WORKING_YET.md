@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 ## AMD64 build check (2026-02-16)
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: PASS
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-librespeed:amd64 .`
+- Result: FAIL
+- Reason: 12.23 tar: Child returned status 1
+- Full log: `amd64-build.log`

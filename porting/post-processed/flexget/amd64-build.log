@@ -1,0 +1,379 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.82kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d
+#2 ...
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#3 DONE 0.3s
+
+#4 [internal] load metadata for ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83
+#4 ...
+
+#2 [internal] load metadata for ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d
+#2 DONE 0.7s
+
+#4 [internal] load metadata for ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83
+#4 DONE 0.7s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [stage-1 1/8] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#6 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#6 CACHED
+
+#7 [libtorrent 1/1] FROM ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83
+#7 resolve ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83 0.0s done
+#7 DONE 0.0s
+
+#8 FROM ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d
+#8 resolve ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d 0.0s done
+#8 ...
+
+#9 [internal] load build context
+#9 transferring context: 6.83kB done
+#9 DONE 0.0s
+
+#8 FROM ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d
+#8 sha256:6ae2e8a0e1d00ae3c660f30c978289f5c8f5fc21bbe9761d122db21195c5b1c4 98B / 98B 0.2s done
+#8 sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb 0B / 21.68MB 0.2s
+#8 ...
+
+#7 [libtorrent 1/1] FROM ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83
+#7 sha256:05115b7dd2205a872dbb9b16f0e7915040fa9ee668b4bac1aef2b69ab1d84e1f 3.86MB / 3.86MB 0.3s done
+#7 extracting sha256:05115b7dd2205a872dbb9b16f0e7915040fa9ee668b4bac1aef2b69ab1d84e1f 0.1s done
+#7 DONE 0.4s
+
+#8 FROM ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d
+#8 sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb 3.15MB / 21.68MB 0.5s
+#8 sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb 6.29MB / 21.68MB 0.6s
+#8 sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb 14.68MB / 21.68MB 0.8s
+#8 sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb 21.68MB / 21.68MB 0.9s done
+#8 extracting sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb
+#8 extracting sha256:62a15fb331e1e7c97a8c5add5b19ef56cfd49dd6072ecb29f7388603577a1ecb 0.2s done
+#8 DONE 1.1s
+
+#8 FROM ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d
+#8 extracting sha256:6ae2e8a0e1d00ae3c660f30c978289f5c8f5fc21bbe9761d122db21195c5b1c4 done
+#8 DONE 1.2s
+
+#10 [stage-1 2/8] COPY --from=ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d /uv /uvx /bin/
+#10 DONE 0.1s
+
+#11 [stage-1 3/8] RUN     echo "**** install packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libffi-dev         p7zip-full         libboost-system-dev         libboost-python-dev         libstdc++6         nodejs &&     echo "**** install flexget ****" &&     mkdir -p /run/flexget-temp /data &&     mkdir -p /app/flexget &&     $SELECTION_PLACEHOLDER$     tar xf         /tmp/flexget.tar.gz -C         /app/flexget --strip-components=1 &&     cd /app/flexget &&     uv venv /config/venv &&     uv run scripts/bundle_webui.py &&     uv sync --frozen --no-dev --no-cache --group=all &&     uv pip install pip &&     echo "**** cleanup ****" &&     apt-get remove --purge -y build-essential libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /tmp/*         /config/.cache         /var/lib/apt/lists/*
+#11 0.148 **** install packages ****
+#11 0.470 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#11 0.770 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#11 0.904 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#11 1.012 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#11 1.123 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#11 1.229 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#11 1.519 Get:7 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#11 1.557 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#11 2.047 Get:9 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#11 2.128 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#11 2.220 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#11 2.300 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#11 2.337 Get:13 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#11 2.400 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#11 2.493 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#11 2.563 Get:16 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#11 2.573 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#11 2.897 Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#11 3.069 Fetched 36.1 MB in 3s (12.5 MB/s)
+#11 3.069 Reading package lists...
+#11 3.797 Reading package lists...
+#11 4.518 Building dependency tree...
+#11 4.662 Reading state information...
+#11 4.804 build-essential is already the newest version (12.10ubuntu1).
+#11 4.804 libffi-dev is already the newest version (3.4.6-1build1).
+#11 4.804 The following additional packages will be installed:
+#11 4.804   7zip gcc-14-base libasan8 libatomic1 libboost-python1.83-dev
+#11 4.804   libboost-python1.83.0 libboost-system1.83-dev libboost-system1.83.0
+#11 4.804   libboost1.83-dev libcares2 libcc1-0 libgcc-s1 libgomp1 libhwasan0 libitm1
+#11 4.804   libjs-jquery libjs-sphinxdoc libjs-underscore liblsan0 libnode109
+#11 4.805   libpython3-dev libpython3.12-dev libpython3.12t64 libquadmath0 libtsan2
+#11 4.805   libubsan1 libuv1t64 node-acorn node-busboy node-cjs-module-lexer node-undici
+#11 4.805   node-xtend python3-dev python3.12-dev
+#11 4.806 Suggested packages:
+#11 4.806   7zip-standalone 7zip-rar libboost1.83-doc gccxml libboost-atomic1.83-dev
+#11 4.806   libboost-chrono1.83-dev libboost-container1.83-dev libboost-context1.83-dev
+#11 4.806   libboost-contract1.83-dev libboost-coroutine1.83-dev
+#11 4.806   libboost-date-time1.83-dev libboost-exception1.83-dev libboost-fiber1.83-dev
+#11 4.806   libboost-filesystem1.83-dev libboost-graph-parallel1.83-dev
+#11 4.806   libboost-graph1.83-dev libboost-iostreams1.83-dev libboost-json1.83-dev
+#11 4.806   libboost-locale1.83-dev libboost-log1.83-dev libboost-math1.83-dev
+#11 4.806   libboost-mpi-python1.83-dev libboost-mpi1.83-dev libboost-nowide1.83-dev
+#11 4.806   libboost-numpy1.83-dev libboost-program-options1.83-dev
+#11 4.806   libboost-random1.83-dev libboost-regex1.83-dev
+#11 4.806   libboost-serialization1.83-dev libboost-stacktrace1.83-dev
+#11 4.806   libboost-test1.83-dev libboost-thread1.83-dev libboost-timer1.83-dev
+#11 4.806   libboost-type-erasure1.83-dev libboost-url1.83-dev libboost-wave1.83-dev
+#11 4.806   libboost1.83-tools-dev libmpfrc++-dev libntl-dev npm
+#11 4.806 Recommended packages:
+#11 4.806   javascript-common nodejs-doc
+#11 4.932 The following NEW packages will be installed:
+#11 4.932   7zip libboost-python-dev libboost-python1.83-dev libboost-python1.83.0
+#11 4.932   libboost-system-dev libboost-system1.83-dev libboost-system1.83.0
+#11 4.932   libboost1.83-dev libcares2 libjs-jquery libjs-sphinxdoc libjs-underscore
+#11 4.933   libnode109 libpython3-dev libpython3.12-dev libpython3.12t64 libuv1t64
+#11 4.933   node-acorn node-busboy node-cjs-module-lexer node-undici node-xtend nodejs
+#11 4.933   p7zip-full python3-dev python3.12-dev
+#11 4.933 The following packages will be upgraded:
+#11 4.933   gcc-14-base libasan8 libatomic1 libcc1-0 libgcc-s1 libgomp1 libhwasan0
+#11 4.934   libitm1 liblsan0 libquadmath0 libstdc++6 libtsan2 libubsan1
+#11 5.029 13 upgraded, 26 newly installed, 0 to remove and 11 not upgraded.
+#11 5.029 Need to get 46.8 MB of archives.
+#11 5.029 After this operation, 273 MB of additional disk space will be used.
+#11 5.029 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1,184 kB]
+#11 5.116 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04.1 [2,772 kB]
+#11 5.212 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]
+#11 5.291 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]
+#11 5.375 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [153 kB]
+#11 5.455 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,322 kB]
+#11 5.543 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.7 kB]
+#11 5.623 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,641 kB]
+#11 5.712 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04.1 [148 kB]
+#11 5.792 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04.1 [48.0 kB]
+#11 5.872 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.5 kB]
+#11 5.952 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04.1 [3,027 kB]
+#11 6.049 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]
+#11 6.128 Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+#11 6.208 Get:15 http://archive.ubuntu.com/ubuntu noble/universe amd64 7zip amd64 23.01+dfsg-11 [1,846 kB]
+#11 6.299 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libboost1.83-dev amd64 1.83.0-2.1ubuntu3.2 [10.7 MB]
+#11 6.570 Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libboost-python1.83.0 amd64 1.83.0-2.1ubuntu3.2 [312 kB]
+#11 6.654 Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.11 [2,345 kB]
+#11 6.775 Get:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-dev amd64 3.12.3-1ubuntu0.11 [5,683 kB]
+#11 6.956 Get:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-dev amd64 3.12.3-0ubuntu2.1 [10.3 kB]
+#11 7.035 Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-dev amd64 3.12.3-1ubuntu0.11 [498 kB]
+#11 7.123 Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [328 kB]
+#11 7.208 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [118 kB]
+#11 7.288 Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-sphinxdoc all 7.2.6-6 [149 kB]
+#11 7.370 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-dev amd64 3.12.3-0ubuntu2.1 [26.7 kB]
+#11 7.449 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 libboost-python1.83-dev amd64 1.83.0-2.1ubuntu3.2 [337 kB]
+#11 7.533 Get:27 http://archive.ubuntu.com/ubuntu noble/universe amd64 libboost-python-dev amd64 1.83.0.1ubuntu2 [4,344 B]
+#11 7.613 Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libboost-system1.83.0 amd64 1.83.0-2.1ubuntu3.2 [236 kB]
+#11 7.696 Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libboost-system1.83-dev amd64 1.83.0-2.1ubuntu3.2 [231 kB]
+#11 7.779 Get:30 http://archive.ubuntu.com/ubuntu noble/universe amd64 libboost-system-dev amd64 1.83.0.1ubuntu2 [4,206 B]
+#11 7.858 Get:31 http://archive.ubuntu.com/ubuntu noble/main amd64 libcares2 amd64 1.27.0-1.0ubuntu1 [73.7 kB]
+#11 7.939 Get:32 http://archive.ubuntu.com/ubuntu noble/universe amd64 node-xtend all 4.0.2-3 [3,902 B]
+#11 8.018 Get:33 http://archive.ubuntu.com/ubuntu noble/universe amd64 nodejs amd64 18.19.1+dfsg-6ubuntu5 [306 kB]
+#11 8.102 Get:34 http://archive.ubuntu.com/ubuntu noble/universe amd64 node-acorn all 8.8.1+ds+~cs25.17.7-2 [115 kB]
+#11 8.183 Get:35 http://archive.ubuntu.com/ubuntu noble/universe amd64 node-cjs-module-lexer all 1.2.3+dfsg-1 [32.1 kB]
+#11 8.263 Get:36 http://archive.ubuntu.com/ubuntu noble/universe amd64 node-busboy all 1.6.0+~cs2.6.0-2 [17.3 kB]
+#11 8.342 Get:37 http://archive.ubuntu.com/ubuntu noble/universe amd64 node-undici all 5.26.3+dfsg1+~cs23.10.12-2 [325 kB]
+#11 8.427 Get:38 http://archive.ubuntu.com/ubuntu noble/universe amd64 libnode109 amd64 18.19.1+dfsg-6ubuntu5 [11.6 MB]
+#11 8.715 Get:39 http://archive.ubuntu.com/ubuntu noble/universe amd64 p7zip-full all 16.02+transitional.1 [2,500 B]
+#11 8.828 debconf: delaying package configuration, since apt-utils is not installed
+#11 8.852 Fetched 46.8 MB in 4s (12.4 MB/s)
+#11 8.868 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#11 8.883 Preparing to unpack .../libubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 8.886 Unpacking libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 8.925 Preparing to unpack .../libtsan2_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 8.927 Unpacking libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 8.994 Preparing to unpack .../gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 8.996 Unpacking gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.018 Setting up gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 9.037 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#11 9.051 Preparing to unpack .../libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.068 Unpacking libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.107 Setting up libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 9.126 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#11 9.141 Preparing to unpack .../0-libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.143 Unpacking libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.161 Preparing to unpack .../1-liblsan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.164 Unpacking liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.204 Preparing to unpack .../2-libitm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.206 Unpacking libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.224 Preparing to unpack .../3-libhwasan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.226 Unpacking libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.271 Preparing to unpack .../4-libgomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.273 Unpacking libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.292 Preparing to unpack .../5-libcc1-0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.294 Unpacking libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.311 Preparing to unpack .../6-libatomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.314 Unpacking libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.330 Preparing to unpack .../7-libasan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.333 Unpacking libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.407 Preparing to unpack .../8-libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 9.409 Unpacking libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 9.431 Setting up libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 9.451 Selecting previously unselected package libuv1t64:amd64.
+#11 9.451 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#11 9.465 Preparing to unpack .../00-libuv1t64_1.48.0-1.1build1_amd64.deb ...
+#11 9.466 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
+#11 9.480 Selecting previously unselected package 7zip.
+#11 9.482 Preparing to unpack .../01-7zip_23.01+dfsg-11_amd64.deb ...
+#11 9.483 Unpacking 7zip (23.01+dfsg-11) ...
+#11 9.525 Selecting previously unselected package libboost1.83-dev:amd64.
+#11 9.527 Preparing to unpack .../02-libboost1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb ...
+#11 9.528 Unpacking libboost1.83-dev:amd64 (1.83.0-2.1ubuntu3.2) ...
+#11 12.38 Selecting previously unselected package libboost-python1.83.0.
+#11 12.38 Preparing to unpack .../03-libboost-python1.83.0_1.83.0-2.1ubuntu3.2_amd64.deb ...
+#11 12.39 Unpacking libboost-python1.83.0 (1.83.0-2.1ubuntu3.2) ...
+#11 12.41 Selecting previously unselected package libpython3.12t64:amd64.
+#11 12.41 Preparing to unpack .../04-libpython3.12t64_3.12.3-1ubuntu0.11_amd64.deb ...
+#11 12.41 Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#11 12.46 Selecting previously unselected package libpython3.12-dev:amd64.
+#11 12.46 Preparing to unpack .../05-libpython3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#11 12.46 Unpacking libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#11 12.62 Selecting previously unselected package libpython3-dev:amd64.
+#11 12.62 Preparing to unpack .../06-libpython3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#11 12.62 Unpacking libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#11 12.64 Selecting previously unselected package python3.12-dev.
+#11 12.64 Preparing to unpack .../07-python3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#11 12.64 Unpacking python3.12-dev (3.12.3-1ubuntu0.11) ...
+#11 12.66 Selecting previously unselected package libjs-jquery.
+#11 12.66 Preparing to unpack .../08-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
+#11 12.66 Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#11 12.68 Selecting previously unselected package libjs-underscore.
+#11 12.69 Preparing to unpack .../09-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
+#11 12.69 Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#11 12.70 Selecting previously unselected package libjs-sphinxdoc.
+#11 12.71 Preparing to unpack .../10-libjs-sphinxdoc_7.2.6-6_all.deb ...
+#11 12.71 Unpacking libjs-sphinxdoc (7.2.6-6) ...
+#11 12.72 Selecting previously unselected package python3-dev.
+#11 12.73 Preparing to unpack .../11-python3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#11 12.73 Unpacking python3-dev (3.12.3-0ubuntu2.1) ...
+#11 12.74 Selecting previously unselected package libboost-python1.83-dev.
+#11 12.75 Preparing to unpack .../12-libboost-python1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb ...
+#11 12.75 Unpacking libboost-python1.83-dev (1.83.0-2.1ubuntu3.2) ...
+#11 12.77 Selecting previously unselected package libboost-python-dev.
+#11 12.77 Preparing to unpack .../13-libboost-python-dev_1.83.0.1ubuntu2_amd64.deb ...
+#11 12.78 Unpacking libboost-python-dev (1.83.0.1ubuntu2) ...
+#11 12.79 Selecting previously unselected package libboost-system1.83.0:amd64.
+#11 12.79 Preparing to unpack .../14-libboost-system1.83.0_1.83.0-2.1ubuntu3.2_amd64.deb ...
+#11 12.79 Unpacking libboost-system1.83.0:amd64 (1.83.0-2.1ubuntu3.2) ...
+#11 12.81 Selecting previously unselected package libboost-system1.83-dev:amd64.
+#11 12.82 Preparing to unpack .../15-libboost-system1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb ...
+#11 12.82 Unpacking libboost-system1.83-dev:amd64 (1.83.0-2.1ubuntu3.2) ...
+#11 12.84 Selecting previously unselected package libboost-system-dev:amd64.
+#11 12.84 Preparing to unpack .../16-libboost-system-dev_1.83.0.1ubuntu2_amd64.deb ...
+#11 12.84 Unpacking libboost-system-dev:amd64 (1.83.0.1ubuntu2) ...
+#11 12.86 Selecting previously unselected package libcares2:amd64.
+#11 12.86 Preparing to unpack .../17-libcares2_1.27.0-1.0ubuntu1_amd64.deb ...
+#11 12.86 Unpacking libcares2:amd64 (1.27.0-1.0ubuntu1) ...
+#11 12.88 Selecting previously unselected package node-xtend.
+#11 12.88 Preparing to unpack .../18-node-xtend_4.0.2-3_all.deb ...
+#11 12.88 Unpacking node-xtend (4.0.2-3) ...
+#11 12.90 Selecting previously unselected package nodejs.
+#11 12.90 Preparing to unpack .../19-nodejs_18.19.1+dfsg-6ubuntu5_amd64.deb ...
+#11 12.90 Unpacking nodejs (18.19.1+dfsg-6ubuntu5) ...
+#11 12.95 Selecting previously unselected package node-acorn.
+#11 12.95 Preparing to unpack .../20-node-acorn_8.8.1+ds+~cs25.17.7-2_all.deb ...
+#11 12.95 Unpacking node-acorn (8.8.1+ds+~cs25.17.7-2) ...
+#11 12.99 Selecting previously unselected package node-cjs-module-lexer.
+#11 12.99 Preparing to unpack .../21-node-cjs-module-lexer_1.2.3+dfsg-1_all.deb ...
+#11 12.99 Unpacking node-cjs-module-lexer (1.2.3+dfsg-1) ...
+#11 13.01 Selecting previously unselected package node-busboy.
+#11 13.01 Preparing to unpack .../22-node-busboy_1.6.0+~cs2.6.0-2_all.deb ...
+#11 13.01 Unpacking node-busboy (1.6.0+~cs2.6.0-2) ...
+#11 13.03 Selecting previously unselected package node-undici.
+#11 13.03 Preparing to unpack .../23-node-undici_5.26.3+dfsg1+~cs23.10.12-2_all.deb ...
+#11 13.03 Unpacking node-undici (5.26.3+dfsg1+~cs23.10.12-2) ...
+#11 13.08 Selecting previously unselected package libnode109:amd64.
+#11 13.08 Preparing to unpack .../24-libnode109_18.19.1+dfsg-6ubuntu5_amd64.deb ...
+#11 13.08 Unpacking libnode109:amd64 (18.19.1+dfsg-6ubuntu5) ...
+#11 13.26 Selecting previously unselected package p7zip-full.
+#11 13.26 Preparing to unpack .../25-p7zip-full_16.02+transitional.1_all.deb ...
+#11 13.27 Unpacking p7zip-full (16.02+transitional.1) ...
+#11 13.29 Setting up libboost-python1.83.0 (1.83.0-2.1ubuntu3.2) ...
+#11 13.29 Setting up libboost1.83-dev:amd64 (1.83.0-2.1ubuntu3.2) ...
+#11 13.29 Setting up libboost-system1.83.0:amd64 (1.83.0-2.1ubuntu3.2) ...
+#11 13.30 Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+#11 13.30 Setting up node-cjs-module-lexer (1.2.3+dfsg-1) ...
+#11 13.30 Setting up 7zip (23.01+dfsg-11) ...
+#11 13.30 Setting up libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.31 Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#11 13.31 Setting up libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.31 Setting up libcares2:amd64 (1.27.0-1.0ubuntu1) ...
+#11 13.31 Setting up libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.31 Setting up libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.32 Setting up libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.32 Setting up libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.32 Setting up libboost-system1.83-dev:amd64 (1.83.0-2.1ubuntu3.2) ...
+#11 13.32 Setting up libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.32 Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#11 13.33 Setting up node-xtend (4.0.2-3) ...
+#11 13.33 Setting up libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.33 Setting up liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.34 Setting up libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 13.34 Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#11 13.34 Setting up node-busboy (1.6.0+~cs2.6.0-2) ...
+#11 13.34 Setting up libboost-system-dev:amd64 (1.83.0.1ubuntu2) ...
+#11 13.35 Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#11 13.35 Setting up p7zip-full (16.02+transitional.1) ...
+#11 13.35 Setting up python3.12-dev (3.12.3-1ubuntu0.11) ...
+#11 13.36 Setting up libjs-sphinxdoc (7.2.6-6) ...
+#11 13.36 Setting up node-undici (5.26.3+dfsg1+~cs23.10.12-2) ...
+#11 13.36 Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#11 13.36 Setting up python3-dev (3.12.3-0ubuntu2.1) ...
+#11 13.37 Setting up libboost-python1.83-dev (1.83.0-2.1ubuntu3.2) ...
+#11 13.37 Setting up libboost-python-dev (1.83.0.1ubuntu2) ...
+#11 13.37 Setting up node-acorn (8.8.1+ds+~cs25.17.7-2) ...
+#11 13.37 Setting up libnode109:amd64 (18.19.1+dfsg-6ubuntu5) ...
+#11 13.38 Setting up nodejs (18.19.1+dfsg-6ubuntu5) ...
+#11 13.38 update-alternatives: using /usr/bin/nodejs to provide /usr/bin/js (js) in auto mode
+#11 13.38 update-alternatives: warning: skip creation of /usr/share/man/man1/js.1.gz because associated file /usr/share/man/man1/nodejs.1.gz (of link group js) doesn't exist
+#11 13.38 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#11 13.43 **** install flexget ****
+#11 13.43 /bin/bash: line 1: $: command not found
+#11 ERROR: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libffi-dev         p7zip-full         libboost-system-dev         libboost-python-dev         libstdc++6         nodejs &&     echo \"**** install flexget ****\" &&     mkdir -p /run/flexget-temp /data &&     mkdir -p /app/flexget &&     $SELECTION_PLACEHOLDER$     tar xf         /tmp/flexget.tar.gz -C         /app/flexget --strip-components=1 &&     cd /app/flexget &&     uv venv /config/venv &&     uv run scripts/bundle_webui.py &&     uv sync --frozen --no-dev --no-cache --group=all &&     uv pip install pip &&     echo \"**** cleanup ****\" &&     apt-get remove --purge -y build-essential libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /tmp/*         $HOME/.cache         /var/lib/apt/lists/*" did not complete successfully: exit code: 127
+------
+ > [stage-1 3/8] RUN     echo "**** install packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libffi-dev         p7zip-full         libboost-system-dev         libboost-python-dev         libstdc++6         nodejs &&     echo "**** install flexget ****" &&     mkdir -p /run/flexget-temp /data &&     mkdir -p /app/flexget &&     $SELECTION_PLACEHOLDER$     tar xf         /tmp/flexget.tar.gz -C         /app/flexget --strip-components=1 &&     cd /app/flexget &&     uv venv /config/venv &&     uv run scripts/bundle_webui.py &&     uv sync --frozen --no-dev --no-cache --group=all &&     uv pip install pip &&     echo "**** cleanup ****" &&     apt-get remove --purge -y build-essential libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /tmp/*         /config/.cache         /var/lib/apt/lists/*:
+13.37 Setting up libboost-python1.83-dev (1.83.0-2.1ubuntu3.2) ...
+13.37 Setting up libboost-python-dev (1.83.0.1ubuntu2) ...
+13.37 Setting up node-acorn (8.8.1+ds+~cs25.17.7-2) ...
+13.37 Setting up libnode109:amd64 (18.19.1+dfsg-6ubuntu5) ...
+13.38 Setting up nodejs (18.19.1+dfsg-6ubuntu5) ...
+13.38 update-alternatives: using /usr/bin/nodejs to provide /usr/bin/js (js) in auto mode
+13.38 update-alternatives: warning: skip creation of /usr/share/man/man1/js.1.gz because associated file /usr/share/man/man1/nodejs.1.gz (of link group js) doesn't exist
+13.38 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+13.43 **** install flexget ****
+13.43 /bin/bash: line 1: $: command not found
+------
+Dockerfile:20
+--------------------
+  19 |     
+  20 | >>> RUN \
+  21 | >>>     echo "**** install packages ****" && \
+  22 | >>>     apt-get update && \
+  23 | >>>     apt-get install -y --no-install-recommends \
+  24 | >>>         build-essential \
+  25 | >>>         libffi-dev \
+  26 | >>>         p7zip-full \
+  27 | >>>         libboost-system-dev \
+  28 | >>>         libboost-python-dev \
+  29 | >>>         libstdc++6 \
+  30 | >>>         nodejs && \
+  31 | >>>     echo "**** install flexget ****" && \
+  32 | >>>     mkdir -p /run/flexget-temp /data && \
+  33 | >>>     mkdir -p /app/flexget && \
+  34 | >>>     $SELECTION_PLACEHOLDER$ \
+  35 | >>>     tar xf \
+  36 | >>>         /tmp/flexget.tar.gz -C \
+  37 | >>>         /app/flexget --strip-components=1 && \
+  38 | >>>     cd /app/flexget && \
+  39 | >>>     uv venv /config/venv && \
+  40 | >>>     uv run scripts/bundle_webui.py && \
+  41 | >>>     uv sync --frozen --no-dev --no-cache --group=all && \
+  42 | >>>     uv pip install pip && \
+  43 | >>>     echo "**** cleanup ****" && \
+  44 | >>>     apt-get remove --purge -y build-essential libffi-dev && \
+  45 | >>>     apt-get autoremove -y && \
+  46 | >>>     apt-get clean && \
+  47 | >>>     rm -rf \
+  48 | >>>         /tmp/* \
+  49 | >>>         $HOME/.cache \
+  50 | >>>         /var/lib/apt/lists/*
+  51 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libffi-dev         p7zip-full         libboost-system-dev         libboost-python-dev         libstdc++6         nodejs &&     echo \"**** install flexget ****\" &&     mkdir -p /run/flexget-temp /data &&     mkdir -p /app/flexget &&     $SELECTION_PLACEHOLDER$     tar xf         /tmp/flexget.tar.gz -C         /app/flexget --strip-components=1 &&     cd /app/flexget &&     uv venv /config/venv &&     uv run scripts/bundle_webui.py &&     uv sync --frozen --no-dev --no-cache --group=all &&     uv pip install pip &&     echo \"**** cleanup ****\" &&     apt-get remove --purge -y build-essential libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /tmp/*         $HOME/.cache         /var/lib/apt/lists/*" did not complete successfully: exit code: 127

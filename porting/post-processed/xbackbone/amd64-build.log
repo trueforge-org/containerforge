@@ -1,0 +1,97 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 902B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 7.92kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     php84-ftp     php84-gd     php84-intl     php84-ldap     php84-mysqli     php84-pdo_mysql     php84-pdo_sqlite     php84-sqlite3     php84-tokenizer &&   echo "**** install xbackbone ****" &&     mkdir -p /app/www/public &&   curl -o     /tmp/xbackbone.zip -L     "https://github.com/SergiX44/XBackBone/releases/download/${VERSION}/release-v${VERSION}.zip" &&   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
+#6 0.147 **** install runtime packages ****
+#6 0.317 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.318 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.469 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.522 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 0.616 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.765 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 0.771 Get:7 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 0.962 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 0.968 Get:9 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.121 Get:10 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.135 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.268 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 2.043 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.252 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.468 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.613 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.865 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 3.010 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 3.029 Fetched 36.1 MB in 3s (12.7 MB/s)
+#6 3.029 Reading package lists...
+#6 3.748 Reading package lists...
+#6 4.468 Building dependency tree...
+#6 4.607 Reading state information...
+#6 4.621 E: Unable to locate package php84-ftp
+#6 4.621 E: Unable to locate package php84-gd
+#6 4.621 E: Unable to locate package php84-intl
+#6 4.621 E: Unable to locate package php84-ldap
+#6 4.621 E: Unable to locate package php84-mysqli
+#6 4.621 E: Unable to locate package php84-pdo_mysql
+#6 4.621 E: Unable to locate package php84-pdo_sqlite
+#6 4.621 E: Unable to locate package php84-sqlite3
+#6 4.621 E: Unable to locate package php84-tokenizer
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     php84-ftp     php84-gd     php84-intl     php84-ldap     php84-mysqli     php84-pdo_mysql     php84-pdo_sqlite     php84-sqlite3     php84-tokenizer &&   echo \"**** install xbackbone ****\" &&     mkdir -p /app/www/public &&   curl -o     /tmp/xbackbone.zip -L     \"https://github.com/SergiX44/XBackBone/releases/download/${VERSION}/release-v${VERSION}.zip\" &&   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100
+------
+ > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     php84-ftp     php84-gd     php84-intl     php84-ldap     php84-mysqli     php84-pdo_mysql     php84-pdo_sqlite     php84-sqlite3     php84-tokenizer &&   echo "**** install xbackbone ****" &&     mkdir -p /app/www/public &&   curl -o     /tmp/xbackbone.zip -L     "https://github.com/SergiX44/XBackBone/releases/download/${VERSION}/release-v${VERSION}.zip" &&   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache:
+
+4.621 E: Unable to locate package php84-ftp
+4.621 E: Unable to locate package php84-gd
+4.621 E: Unable to locate package php84-intl
+4.621 E: Unable to locate package php84-ldap
+4.621 E: Unable to locate package php84-mysqli
+4.621 E: Unable to locate package php84-pdo_mysql
+4.621 E: Unable to locate package php84-pdo_sqlite
+4.621 E: Unable to locate package php84-sqlite3
+4.621 E: Unable to locate package php84-tokenizer
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install runtime packages ****" && \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     php84-ftp \
+  13 | >>>     php84-gd \
+  14 | >>>     php84-intl \
+  15 | >>>     php84-ldap \
+  16 | >>>     php84-mysqli \
+  17 | >>>     php84-pdo_mysql \
+  18 | >>>     php84-pdo_sqlite \
+  19 | >>>     php84-sqlite3 \
+  20 | >>>     php84-tokenizer && \
+  21 | >>>   echo "**** install xbackbone ****" && \
+  22 | >>>     mkdir -p /app/www/public && \
+  23 | >>>   curl -o \
+  24 | >>>     /tmp/xbackbone.zip -L \
+  25 | >>>     "https://github.com/SergiX44/XBackBone/releases/download/${VERSION}/release-v${VERSION}.zip" && \
+  26 | >>>   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ && \
+  27 | >>>   echo "**** cleanup ****" && \
+  28 | >>>   rm -rf \
+  29 | >>>     /tmp/* \
+  30 | >>>     $HOME/.cache
+  31 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     php84-ftp     php84-gd     php84-intl     php84-ldap     php84-mysqli     php84-pdo_mysql     php84-pdo_sqlite     php84-sqlite3     php84-tokenizer &&   echo \"**** install xbackbone ****\" &&     mkdir -p /app/www/public &&   curl -o     /tmp/xbackbone.zip -L     \"https://github.com/SergiX44/XBackBone/releases/download/${VERSION}/release-v${VERSION}.zip\" &&   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100

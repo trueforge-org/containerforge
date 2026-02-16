@@ -1,0 +1,330 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.75kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 11.96kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     php8.3-xml     php8.3-gd     php8.3-intl     php8.3-sqlite3 &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&   echo "**** install cops ****" &&   curl -o     /tmp/cops.tar.gz -L     "https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz" &&   mkdir -p     /app/www/public &&   tar xf /tmp/cops.tar.gz -C     /app/www/public --strip-components=1 &&   cd /app/www/public &&   composer     install --no-dev --optimize-autoloader &&   echo "***install kepubify" &&   if [ -z ${KEPUBIFY_RELEASE+x} ]; then     KEPUBIFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/pgaskin/kepubify/releases/latest"       | awk '/tag_name/{print $4;exit}' FS='[""]');   fi &&   curl -o     /usr/bin/kepubify -L     "https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit" &&   chmod 755 /usr/bin/kepubify &&   echo "**** cleanup ****" &&   rm -rf     /root/.composer     /tmp/* &&   apt-get clean && rm -rf /var/lib/apt/lists/*
+#6 0.151 **** install runtime packages ****
+#6 0.335 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.478 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.745 Get:3 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.117 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.313 Get:5 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.351 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.431 Get:7 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 1.520 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.728 Get:9 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.930 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 3.271 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 3.444 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 3.599 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.776 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.951 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 4.142 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 4.294 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.446 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.464 Fetched 36.1 MB in 4s (8,421 kB/s)
+#6 4.464 Reading package lists...
+#6 5.205 Reading package lists...
+#6 5.952 Building dependency tree...
+#6 6.103 Reading state information...
+#6 6.246 The following additional packages will be installed:
+#6 6.246   libaom3 libbsd0 libde265-0 libdeflate0 libgd3 libheif-plugin-aomdec
+#6 6.246   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#6 6.246   libsharpyuv0 libtiff6 libwebp7 libx11-6 libx11-data libxau6 libxcb1
+#6 6.247   libxdmcp6 libxpm4 php-common php8.3-common psmisc ucf
+#6 6.247 Suggested packages:
+#6 6.247   libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec
+#6 6.247   libheif-plugin-jpegdec libheif-plugin-jpegenc libheif-plugin-j2kdec
+#6 6.247   libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc
+#6 6.247 Recommended packages:
+#6 6.247   libheif-plugin-aomenc
+#6 6.304 The following NEW packages will be installed:
+#6 6.304   libaom3 libbsd0 libde265-0 libdeflate0 libgd3 libheif-plugin-aomdec
+#6 6.305   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#6 6.305   libsharpyuv0 libtiff6 libwebp7 libx11-6 libx11-data libxau6 libxcb1
+#6 6.305   libxdmcp6 libxpm4 php-common php8.3-common php8.3-gd php8.3-intl
+#6 6.305   php8.3-sqlite3 php8.3-xml psmisc ucf
+#6 6.472 0 upgraded, 29 newly installed, 0 to remove and 5 not upgraded.
+#6 6.472 Need to get 5,626 kB of archives.
+#6 6.472 After this operation, 24.9 MB of additional disk space will be used.
+#6 6.472 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#6 6.624 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#6 6.776 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#6 6.928 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#6 7.080 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#6 7.231 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#6 7.383 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#6 7.542 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#6 7.695 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
+#6 7.868 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+#6 8.021 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+#6 8.173 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#6 8.325 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
+#6 8.476 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
+#6 8.628 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
+#6 8.782 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#6 8.934 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#6 9.086 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+#6 9.238 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+#6 9.391 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#6 9.545 Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
+#6 9.698 Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#6 9.850 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+#6 10.00 Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#6 10.15 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#6 10.31 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
+#6 10.46 Get:27 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#6 10.62 Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-sqlite3 amd64 8.3.6-0ubuntu0.24.04.6 [34.2 kB]
+#6 10.77 Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#6 10.87 debconf: delaying package configuration, since apt-utils is not installed
+#6 10.90 Fetched 5,626 kB in 4s (1,262 kB/s)
+#6 10.91 Selecting previously unselected package libbsd0:amd64.
+#6 10.91 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#6 10.92 Preparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#6 10.93 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 10.94 Selecting previously unselected package ucf.
+#6 10.94 Preparing to unpack .../01-ucf_3.0043+nmu1_all.deb ...
+#6 10.95 Moving old data out of the way
+#6 10.95 Unpacking ucf (3.0043+nmu1) ...
+#6 10.96 Selecting previously unselected package libxau6:amd64.
+#6 10.97 Preparing to unpack .../02-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#6 10.97 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#6 10.98 Selecting previously unselected package libxdmcp6:amd64.
+#6 10.98 Preparing to unpack .../03-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#6 10.98 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#6 11.00 Selecting previously unselected package libxcb1:amd64.
+#6 11.00 Preparing to unpack .../04-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#6 11.00 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#6 11.01 Selecting previously unselected package libx11-data.
+#6 11.01 Preparing to unpack .../05-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#6 11.01 Unpacking libx11-data (2:1.8.7-1build1) ...
+#6 11.07 Selecting previously unselected package libx11-6:amd64.
+#6 11.07 Preparing to unpack .../06-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#6 11.07 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#6 11.09 Selecting previously unselected package psmisc.
+#6 11.09 Preparing to unpack .../07-psmisc_23.7-1build1_amd64.deb ...
+#6 11.09 Unpacking psmisc (23.7-1build1) ...
+#6 11.11 Selecting previously unselected package libaom3:amd64.
+#6 11.11 Preparing to unpack .../08-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+#6 11.11 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#6 11.15 Selecting previously unselected package libde265-0:amd64.
+#6 11.15 Preparing to unpack .../09-libde265-0_1.0.15-1build3_amd64.deb ...
+#6 11.15 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+#6 11.17 Selecting previously unselected package libdeflate0:amd64.
+#6 11.17 Preparing to unpack .../10-libdeflate0_1.19-1build1.1_amd64.deb ...
+#6 11.17 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+#6 11.18 Selecting previously unselected package libsharpyuv0:amd64.
+#6 11.18 Preparing to unpack .../11-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#6 11.18 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#6 11.20 Selecting previously unselected package libheif-plugin-aomdec:amd64.
+#6 11.20 Preparing to unpack .../12-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 11.20 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#6 11.21 Selecting previously unselected package libheif-plugin-libde265:amd64.
+#6 11.21 Preparing to unpack .../13-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 11.21 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#6 11.23 Selecting previously unselected package libheif1:amd64.
+#6 11.23 Preparing to unpack .../14-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 11.23 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#6 11.25 Selecting previously unselected package libjpeg-turbo8:amd64.
+#6 11.25 Preparing to unpack .../15-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#6 11.25 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 11.26 Selecting previously unselected package libjpeg8:amd64.
+#6 11.27 Preparing to unpack .../16-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#6 11.27 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 11.28 Selecting previously unselected package libjbig0:amd64.
+#6 11.28 Preparing to unpack .../17-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+#6 11.28 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#6 11.30 Selecting previously unselected package liblerc4:amd64.
+#6 11.30 Preparing to unpack .../18-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+#6 11.30 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#6 11.31 Selecting previously unselected package libwebp7:amd64.
+#6 11.31 Preparing to unpack .../19-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#6 11.32 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#6 11.33 Selecting previously unselected package libtiff6:amd64.
+#6 11.33 Preparing to unpack .../20-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
+#6 11.33 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#6 11.35 Selecting previously unselected package libxpm4:amd64.
+#6 11.35 Preparing to unpack .../21-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#6 11.35 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#6 11.37 Selecting previously unselected package libgd3:amd64.
+#6 11.37 Preparing to unpack .../22-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+#6 11.37 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+#6 11.39 Selecting previously unselected package php-common.
+#6 11.39 Preparing to unpack .../23-php-common_2%3a93ubuntu2_all.deb ...
+#6 11.39 Unpacking php-common (2:93ubuntu2) ...
+#6 11.40 Selecting previously unselected package php8.3-common.
+#6 11.41 Preparing to unpack .../24-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.41 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.46 Selecting previously unselected package php8.3-gd.
+#6 11.46 Preparing to unpack .../25-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.46 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.48 Selecting previously unselected package php8.3-intl.
+#6 11.48 Preparing to unpack .../26-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.48 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.50 Selecting previously unselected package php8.3-sqlite3.
+#6 11.50 Preparing to unpack .../27-php8.3-sqlite3_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.50 Unpacking php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.52 Selecting previously unselected package php8.3-xml.
+#6 11.52 Preparing to unpack .../28-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 11.52 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.55 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#6 11.55 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#6 11.55 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#6 11.55 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#6 11.55 Setting up psmisc (23.7-1build1) ...
+#6 11.56 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+#6 11.56 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#6 11.56 Setting up libx11-data (2:1.8.7-1build1) ...
+#6 11.56 Setting up ucf (3.0043+nmu1) ...
+#6 11.62 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 11.63 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#6 11.63 Setting up libde265-0:amd64 (1.0.15-1build3) ...
+#6 11.63 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 11.63 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 11.63 Setting up php-common (2:93ubuntu2) ...
+#6 11.75 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#6 11.75 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#6 11.76 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#6 11.76 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.86 
+#6 11.86 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#6 11.99 
+#6 11.99 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#6 12.13 
+#6 12.13 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#6 12.27 
+#6 12.27 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#6 12.40 
+#6 12.40 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#6 12.55 
+#6 12.55 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#6 12.69 
+#6 12.69 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#6 12.84 
+#6 12.84 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#6 12.99 
+#6 12.99 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#6 13.14 
+#6 13.14 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#6 13.29 
+#6 13.29 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#6 13.44 
+#6 13.44 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#6 13.59 
+#6 13.59 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#6 13.73 
+#6 13.73 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#6 13.88 
+#6 13.88 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#6 14.03 
+#6 14.03 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#6 14.18 
+#6 14.18 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#6 14.23 Setting up php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#6 14.33 
+#6 14.33 Creating config file /etc/php/8.3/mods-available/sqlite3.ini with new version
+#6 14.48 
+#6 14.48 Creating config file /etc/php/8.3/mods-available/pdo_sqlite.ini with new version
+#6 14.53 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#6 14.53 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#6 14.54 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 14.63 
+#6 14.63 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#6 14.78 
+#6 14.78 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#6 14.93 
+#6 14.93 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#6 15.08 
+#6 15.08 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#6 15.23 
+#6 15.23 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#6 15.38 
+#6 15.38 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#6 15.43 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#6 15.43 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.53 
+#6 15.53 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#6 15.59 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#6 15.59 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#6 15.59 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+#6 15.59 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.74 
+#6 15.74 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+#6 15.80 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#6 15.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 15.83 **** configure php-fpm to pass env vars ****
+#6 15.84 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     php8.3-xml     php8.3-gd     php8.3-intl     php8.3-sqlite3 &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&   echo \"**** install cops ****\" &&   curl -o     /tmp/cops.tar.gz -L     \"https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz\" &&   mkdir -p     /app/www/public &&   tar xf /tmp/cops.tar.gz -C     /app/www/public --strip-components=1 &&   cd /app/www/public &&   composer     install --no-dev --optimize-autoloader &&   echo \"***install kepubify\" &&   if [ -z ${KEPUBIFY_RELEASE+x} ]; then     KEPUBIFY_RELEASE=$(curl -sX GET \"https://api.github.com/repos/pgaskin/kepubify/releases/latest\"       | awk '/tag_name/{print $4;exit}' FS='[\"\"]');   fi &&   curl -o     /usr/bin/kepubify -L     \"https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit\" &&   chmod 755 /usr/bin/kepubify &&   echo \"**** cleanup ****\" &&   rm -rf     /root/.composer     /tmp/* &&   apt-get clean && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     php8.3-xml     php8.3-gd     php8.3-intl     php8.3-sqlite3 &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&   echo "**** install cops ****" &&   curl -o     /tmp/cops.tar.gz -L     "https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz" &&   mkdir -p     /app/www/public &&   tar xf /tmp/cops.tar.gz -C     /app/www/public --strip-components=1 &&   cd /app/www/public &&   composer     install --no-dev --optimize-autoloader &&   echo "***install kepubify" &&   if [ -z ${KEPUBIFY_RELEASE+x} ]; then     KEPUBIFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/pgaskin/kepubify/releases/latest"       | awk '/tag_name/{print $4;exit}' FS='[""]');   fi &&   curl -o     /usr/bin/kepubify -L     "https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit" &&   chmod 755 /usr/bin/kepubify &&   echo "**** cleanup ****" &&   rm -rf     /root/.composer     /tmp/* &&   apt-get clean && rm -rf /var/lib/apt/lists/*:
+15.59 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+15.59 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+15.59 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+15.59 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+15.74 
+15.74 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+15.80 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+15.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+15.83 **** configure php-fpm to pass env vars ****
+15.84 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install runtime packages ****" && \
+  11 | >>>   apt-get update && \
+  12 | >>>   apt-get install -y --no-install-recommends \
+  13 | >>>     php8.3-xml \
+  14 | >>>     php8.3-gd \
+  15 | >>>     php8.3-intl \
+  16 | >>>     php8.3-sqlite3 && \
+  17 | >>>   echo "**** configure php-fpm to pass env vars ****" && \
+  18 | >>>   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
+  19 | >>>   if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
+  20 | >>>   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+  21 | >>>   echo "**** install cops ****" && \
+  22 | >>>   curl -o \
+  23 | >>>     /tmp/cops.tar.gz -L \
+  24 | >>>     "https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz" && \
+  25 | >>>   mkdir -p \
+  26 | >>>     /app/www/public && \
+  27 | >>>   tar xf /tmp/cops.tar.gz -C \
+  28 | >>>     /app/www/public --strip-components=1 && \
+  29 | >>>   cd /app/www/public && \
+  30 | >>>   composer \
+  31 | >>>     install --no-dev --optimize-autoloader && \
+  32 | >>>   echo "***install kepubify" && \
+  33 | >>>   if [ -z ${KEPUBIFY_RELEASE+x} ]; then \
+  34 | >>>     KEPUBIFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/pgaskin/kepubify/releases/latest" \
+  35 | >>>       | awk '/tag_name/{print $4;exit}' FS='[""]'); \
+  36 | >>>   fi && \
+  37 | >>>   curl -o \
+  38 | >>>     /usr/bin/kepubify -L \
+  39 | >>>     "https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit" && \
+  40 | >>>   chmod 755 /usr/bin/kepubify && \
+  41 | >>>   echo "**** cleanup ****" && \
+  42 | >>>   rm -rf \
+  43 | >>>     /root/.composer \
+  44 | >>>     /tmp/* && \
+  45 | >>>   apt-get clean && rm -rf /var/lib/apt/lists/*
+  46 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     php8.3-xml     php8.3-gd     php8.3-intl     php8.3-sqlite3 &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&   echo \"**** install cops ****\" &&   curl -o     /tmp/cops.tar.gz -L     \"https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz\" &&   mkdir -p     /app/www/public &&   tar xf /tmp/cops.tar.gz -C     /app/www/public --strip-components=1 &&   cd /app/www/public &&   composer     install --no-dev --optimize-autoloader &&   echo \"***install kepubify\" &&   if [ -z ${KEPUBIFY_RELEASE+x} ]; then     KEPUBIFY_RELEASE=$(curl -sX GET \"https://api.github.com/repos/pgaskin/kepubify/releases/latest\"       | awk '/tag_name/{print $4;exit}' FS='[\"\"]');   fi &&   curl -o     /usr/bin/kepubify -L     \"https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit\" &&   chmod 755 /usr/bin/kepubify &&   echo \"**** cleanup ****\" &&   rm -rf     /root/.composer     /tmp/* &&   apt-get clean && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2

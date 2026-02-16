@@ -14,3 +14,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: E: Unable to locate package libdigest-sha1-perl
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-ddclient:amd64 .`
+- Result: FAIL
+- Reason: 20.92   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: cpanmin.us
+- Full log: `amd64-build.log`

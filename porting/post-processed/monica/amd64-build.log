@@ -1,0 +1,547 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.90kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/postgresql-client:1.1.0
+#2 DONE 0.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 12.57kB done
+#4 DONE 0.0s
+
+#5 [1/5] FROM ghcr.io/trueforge-org/postgresql-client:1.1.0@sha256:e1ed0aeb4ecb455b14d1facd73e8ac3896aee97c70d6c09973f2ba8b62906b8d
+#5 resolve ghcr.io/trueforge-org/postgresql-client:1.1.0@sha256:e1ed0aeb4ecb455b14d1facd73e8ac3896aee97c70d6c09973f2ba8b62906b8d 0.0s done
+#5 sha256:10f0619a3ddfeffa9c05e12e66c2fc20190d621a706bdd1017d3e44803c31bc4 0B / 1.79MB 0.2s
+#5 sha256:10f0619a3ddfeffa9c05e12e66c2fc20190d621a706bdd1017d3e44803c31bc4 1.79MB / 1.79MB 0.2s done
+#5 extracting sha256:10f0619a3ddfeffa9c05e12e66c2fc20190d621a706bdd1017d3e44803c31bc4 0.1s done
+#5 DONE 0.3s
+
+#6 [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     bzip2     gpg     gpg-agent &&   apt-get update && apt-get install -y --no-install-recommends     memcached     php-apcu     php8.3-bcmath     php8.3-xml     php8.3-gd     php8.3-gmp     php8.3-intl     php-memcached     php8.3-mysql     php-redis     php8.3-common     php8.3-soap     php8.3-xml &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf &&   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php83/php-fpm.conf &&   echo "**** setup php opcache ****" &&   {       echo '[opcache]';       echo 'opcache.enable=1';       echo 'opcache.revalidate_freq=0';       echo 'opcache.validate_timestamps=0';       echo 'opcache.max_accelerated_files=20000';       echo 'opcache.memory_consumption=192';       echo 'opcache.max_wasted_percentage=10';       echo 'opcache.interned_strings_buffer=16';       echo 'opcache.fast_shutdown=1';   } > /etc/php83/conf.d/opcache-recommended.ini;     echo 'apc.enable_cli=1' >> /etc/php83/conf.d/docker-php-ext-apcu.ini;     {       echo 'memory_limit=${MEMORY_LIMIT}';   } > /etc/php83/conf.d/memory-limit.ini &&   echo "**** install monica ****" &&   mkdir -p /app/www &&   curl -s -o     /tmp/monica.tar.bz2 -L     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2" &&   curl -s -o     "/tmp/monica.tar.bz2.asc" -L     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018" &&   if ! gpg --batch -q --verify "/tmp/monica.tar.bz2.asc" "/tmp/monica.tar.bz2"; then     echo "File signature mismatch"     exit 1;   fi &&   tar xf     /tmp/monica.tar.bz2 -C     /app/www --strip-components=1 &&   cd /app/www &&   composer install     --no-dev     --no-interaction &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*
+#6 0.307 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.319 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.451 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.585 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 0.594 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.739 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 0.814 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 0.901 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.012 Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.170 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.668 Get:11 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.819 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.964 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.213 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.356 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.563 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.777 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.920 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.938 Fetched 36.1 MB in 3s (13.0 MB/s)
+#6 2.938 Reading package lists...
+#6 3.663 Reading package lists...
+#6 4.395 Building dependency tree...
+#6 4.544 Reading state information...
+#6 4.681 gpg is already the newest version (2.4.4-2ubuntu17.4).
+#6 4.681 gpg set to manually installed.
+#6 4.681 gpg-agent is already the newest version (2.4.4-2ubuntu17.4).
+#6 4.681 gpg-agent set to manually installed.
+#6 4.681 Suggested packages:
+#6 4.681   bzip2-doc
+#6 4.703 The following NEW packages will be installed:
+#6 4.704   bzip2
+#6 4.860 0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.
+#6 4.860 Need to get 34.5 kB of archives.
+#6 4.860 After this operation, 112 kB of additional disk space will be used.
+#6 4.860 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
+#6 4.958 debconf: delaying package configuration, since apt-utils is not installed
+#6 4.981 Fetched 34.5 kB in 0s (228 kB/s)
+#6 4.995 Selecting previously unselected package bzip2.
+#6 4.995 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16881 files and directories currently installed.)
+#6 5.007 Preparing to unpack .../bzip2_1.0.8-5.1build0.1_amd64.deb ...
+#6 5.008 Unpacking bzip2 (1.0.8-5.1build0.1) ...
+#6 5.028 Setting up bzip2 (1.0.8-5.1build0.1) ...
+#6 5.213 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+#6 5.222 Hit:2 http://security.ubuntu.com/ubuntu noble-security InRelease
+#6 5.350 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#6 5.493 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#6 5.551 Reading package lists...
+#6 6.295 Reading package lists...
+#6 7.022 Building dependency tree...
+#6 7.163 Reading state information...
+#6 7.298 The following additional packages will be installed:
+#6 7.298   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libevent-2.1-7t64 libgd3
+#6 7.298   libhashkit2t64 libheif-plugin-aomdec libheif-plugin-libde265 libheif1
+#6 7.299   libjbig0 libjpeg-turbo8 libjpeg8 liblerc4 libmemcached11t64 libsharpyuv0
+#6 7.299   libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6
+#6 7.299   libxpm4 php-common php8.3-apcu php8.3-cli php8.3-igbinary php8.3-memcached
+#6 7.299   php8.3-msgpack php8.3-opcache php8.3-phpdbg php8.3-readline php8.3-redis
+#6 7.299   psmisc ucf
+#6 7.300 Suggested packages:
+#6 7.300   libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec
+#6 7.300   libheif-plugin-jpegdec libheif-plugin-jpegenc libheif-plugin-j2kdec
+#6 7.300   libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc
+#6 7.300   libanyevent-perl libcache-memcached-perl libmemcached libterm-readkey-perl
+#6 7.300   libyaml-perl redis-server php-pear
+#6 7.300 Recommended packages:
+#6 7.300   libheif-plugin-aomenc
+#6 7.449 The following NEW packages will be installed:
+#6 7.449   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libevent-2.1-7t64 libgd3
+#6 7.449   libhashkit2t64 libheif-plugin-aomdec libheif-plugin-libde265 libheif1
+#6 7.449   libjbig0 libjpeg-turbo8 libjpeg8 liblerc4 libmemcached11t64 libsharpyuv0
+#6 7.450   libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6
+#6 7.450   libxpm4 memcached php-apcu php-common php-memcached php-redis php8.3-apcu
+#6 7.450   php8.3-bcmath php8.3-cli php8.3-common php8.3-gd php8.3-gmp php8.3-igbinary
+#6 7.450   php8.3-intl php8.3-memcached php8.3-msgpack php8.3-mysql php8.3-opcache
+#6 7.450   php8.3-phpdbg php8.3-readline php8.3-redis php8.3-soap php8.3-xml psmisc ucf
+#6 7.757 0 upgraded, 50 newly installed, 0 to remove and 5 not upgraded.
+#6 7.757 Need to get 11.2 MB of archives.
+#6 7.757 After this operation, 41.9 MB of additional disk space will be used.
+#6 7.757 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libevent-2.1-7t64 amd64 2.1.12-stable-9ubuntu2 [145 kB]
+#6 7.903 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 memcached amd64 1.6.24-1build3 [213 kB]
+#6 8.051 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#6 8.197 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#6 8.340 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#6 8.483 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#6 8.648 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#6 8.791 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#6 8.935 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-opcache amd64 8.3.6-0ubuntu0.24.04.6 [372 kB]
+#6 9.088 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-readline amd64 8.3.6-0ubuntu0.24.04.6 [13.4 kB]
+#6 9.230 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.24.04.1 [161 kB]
+#6 9.377 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-cli amd64 8.3.6-0ubuntu0.24.04.6 [1,916 kB]
+#6 9.581 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-phpdbg amd64 8.3.6-0ubuntu0.24.04.6 [1,933 kB]
+#6 9.785 Get:14 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-apcu amd64 5.1.22+4.0.11-2ubuntu1 [45.1 kB]
+#6 9.928 Get:15 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-apcu amd64 5.1.22+4.0.11-2ubuntu1 [3,174 B]
+#6 10.07 Get:16 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-igbinary amd64 3.2.13-1ubuntu3 [37.9 kB]
+#6 10.21 Get:17 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-msgpack amd64 1:2.2.0~rc2-3ubuntu1 [29.8 kB]
+#6 10.36 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libhashkit2t64 amd64 1.1.4-1.1build3 [15.5 kB]
+#6 10.50 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 libmemcached11t64 amd64 1.1.4-1.1build3 [80.5 kB]
+#6 10.64 Get:20 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-memcached amd64 3.2.0+2.2.0-4ubuntu3 [45.0 kB]
+#6 10.79 Get:21 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-memcached amd64 3.2.0+2.2.0-4ubuntu3 [3,674 B]
+#6 10.93 Get:22 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-redis amd64 5.3.7+4.3.0-3ubuntu1 [168 kB]
+#6 11.08 Get:23 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-redis amd64 5.3.7+4.3.0-3ubuntu1 [3,058 B]
+#6 11.22 Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#6 11.36 Get:25 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#6 11.51 Get:26 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#6 11.65 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#6 11.79 Get:28 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#6 11.95 Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
+#6 12.16 Get:30 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+#6 12.31 Get:31 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+#6 12.45 Get:32 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#6 12.59 Get:33 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
+#6 12.73 Get:34 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
+#6 12.88 Get:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
+#6 13.03 Get:36 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#6 13.17 Get:37 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#6 13.31 Get:38 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+#6 13.46 Get:39 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+#6 13.60 Get:40 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#6 13.75 Get:41 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
+#6 13.90 Get:42 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#6 14.04 Get:43 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+#6 14.19 Get:44 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-bcmath amd64 8.3.6-0ubuntu0.24.04.6 [16.6 kB]
+#6 14.33 Get:45 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
+#6 14.47 Get:46 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gmp amd64 8.3.6-0ubuntu0.24.04.6 [23.4 kB]
+#6 14.62 Get:47 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#6 14.76 Get:48 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#6 14.91 Get:49 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-soap amd64 8.3.6-0ubuntu0.24.04.6 [133 kB]
+#6 15.05 Get:50 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#6 15.16 debconf: delaying package configuration, since apt-utils is not installed
+#6 15.18 Fetched 11.2 MB in 8s (1,471 kB/s)
+#6 15.19 Selecting previously unselected package libevent-2.1-7t64:amd64.
+#6 15.19 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16908 files and directories currently installed.)
+#6 15.20 Preparing to unpack .../00-libevent-2.1-7t64_2.1.12-stable-9ubuntu2_amd64.deb ...
+#6 15.20 Unpacking libevent-2.1-7t64:amd64 (2.1.12-stable-9ubuntu2) ...
+#6 15.22 Selecting previously unselected package memcached.
+#6 15.22 Preparing to unpack .../01-memcached_1.6.24-1build3_amd64.deb ...
+#6 15.22 Unpacking memcached (1.6.24-1build3) ...
+#6 15.24 Selecting previously unselected package psmisc.
+#6 15.24 Preparing to unpack .../02-psmisc_23.7-1build1_amd64.deb ...
+#6 15.25 Unpacking psmisc (23.7-1build1) ...
+#6 15.27 Selecting previously unselected package php-common.
+#6 15.27 Preparing to unpack .../03-php-common_2%3a93ubuntu2_all.deb ...
+#6 15.27 Unpacking php-common (2:93ubuntu2) ...
+#6 15.28 Selecting previously unselected package ucf.
+#6 15.29 Preparing to unpack .../04-ucf_3.0043+nmu1_all.deb ...
+#6 15.29 Moving old data out of the way
+#6 15.29 Unpacking ucf (3.0043+nmu1) ...
+#6 15.31 Selecting previously unselected package php8.3-common.
+#6 15.31 Preparing to unpack .../05-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 15.31 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.36 Selecting previously unselected package libbsd0:amd64.
+#6 15.36 Preparing to unpack .../06-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#6 15.36 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 15.37 Selecting previously unselected package libedit2:amd64.
+#6 15.38 Preparing to unpack .../07-libedit2_3.1-20230828-1build1_amd64.deb ...
+#6 15.38 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#6 15.39 Selecting previously unselected package php8.3-opcache.
+#6 15.39 Preparing to unpack .../08-php8.3-opcache_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 15.40 Unpacking php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.42 Selecting previously unselected package php8.3-readline.
+#6 15.42 Preparing to unpack .../09-php8.3-readline_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 15.42 Unpacking php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.43 Selecting previously unselected package libsodium23:amd64.
+#6 15.44 Preparing to unpack .../10-libsodium23_1.0.18-1ubuntu0.24.04.1_amd64.deb ...
+#6 15.44 Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#6 15.45 Selecting previously unselected package php8.3-cli.
+#6 15.46 Preparing to unpack .../11-php8.3-cli_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 15.46 Unpacking php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.50 Selecting previously unselected package php8.3-phpdbg.
+#6 15.50 Preparing to unpack .../12-php8.3-phpdbg_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 15.50 Unpacking php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#6 15.54 Setting up psmisc (23.7-1build1) ...
+#6 15.54 Setting up php-common (2:93ubuntu2) ...
+#6 15.66 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#6 15.68 Selecting previously unselected package php8.3-apcu.
+#6 15.68 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 17223 files and directories currently installed.)
+#6 15.69 Preparing to unpack .../00-php8.3-apcu_5.1.22+4.0.11-2ubuntu1_amd64.deb ...
+#6 15.69 Unpacking php8.3-apcu (5.1.22+4.0.11-2ubuntu1) ...
+#6 15.71 Selecting previously unselected package php-apcu.
+#6 15.71 Preparing to unpack .../01-php-apcu_5.1.22+4.0.11-2ubuntu1_amd64.deb ...
+#6 15.71 Unpacking php-apcu (5.1.22+4.0.11-2ubuntu1) ...
+#6 15.72 Selecting previously unselected package php8.3-igbinary.
+#6 15.72 Preparing to unpack .../02-php8.3-igbinary_3.2.13-1ubuntu3_amd64.deb ...
+#6 15.73 Unpacking php8.3-igbinary (3.2.13-1ubuntu3) ...
+#6 15.74 Selecting previously unselected package php8.3-msgpack.
+#6 15.74 Preparing to unpack .../03-php8.3-msgpack_1%3a2.2.0~rc2-3ubuntu1_amd64.deb ...
+#6 15.75 Unpacking php8.3-msgpack (1:2.2.0~rc2-3ubuntu1) ...
+#6 15.76 Selecting previously unselected package libhashkit2t64:amd64.
+#6 15.76 Preparing to unpack .../04-libhashkit2t64_1.1.4-1.1build3_amd64.deb ...
+#6 15.76 Unpacking libhashkit2t64:amd64 (1.1.4-1.1build3) ...
+#6 15.78 Selecting previously unselected package libmemcached11t64:amd64.
+#6 15.78 Preparing to unpack .../05-libmemcached11t64_1.1.4-1.1build3_amd64.deb ...
+#6 15.78 Unpacking libmemcached11t64:amd64 (1.1.4-1.1build3) ...
+#6 15.80 Selecting previously unselected package php8.3-memcached.
+#6 15.80 Preparing to unpack .../06-php8.3-memcached_3.2.0+2.2.0-4ubuntu3_amd64.deb ...
+#6 15.80 Unpacking php8.3-memcached (3.2.0+2.2.0-4ubuntu3) ...
+#6 15.81 Selecting previously unselected package php-memcached.
+#6 15.81 Preparing to unpack .../07-php-memcached_3.2.0+2.2.0-4ubuntu3_amd64.deb ...
+#6 15.82 Unpacking php-memcached (3.2.0+2.2.0-4ubuntu3) ...
+#6 15.83 Selecting previously unselected package php8.3-redis.
+#6 15.83 Preparing to unpack .../08-php8.3-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
+#6 15.83 Unpacking php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 15.85 Selecting previously unselected package php-redis.
+#6 15.85 Preparing to unpack .../09-php-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
+#6 15.85 Unpacking php-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 15.86 Selecting previously unselected package libxau6:amd64.
+#6 15.87 Preparing to unpack .../10-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#6 15.87 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#6 15.88 Selecting previously unselected package libxdmcp6:amd64.
+#6 15.88 Preparing to unpack .../11-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#6 15.88 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#6 15.90 Selecting previously unselected package libxcb1:amd64.
+#6 15.90 Preparing to unpack .../12-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#6 15.90 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#6 15.91 Selecting previously unselected package libx11-data.
+#6 15.91 Preparing to unpack .../13-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#6 15.91 Unpacking libx11-data (2:1.8.7-1build1) ...
+#6 15.97 Selecting previously unselected package libx11-6:amd64.
+#6 15.97 Preparing to unpack .../14-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#6 15.97 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#6 15.99 Selecting previously unselected package libaom3:amd64.
+#6 15.99 Preparing to unpack .../15-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+#6 15.99 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#6 16.03 Selecting previously unselected package libde265-0:amd64.
+#6 16.03 Preparing to unpack .../16-libde265-0_1.0.15-1build3_amd64.deb ...
+#6 16.03 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+#6 16.05 Selecting previously unselected package libdeflate0:amd64.
+#6 16.05 Preparing to unpack .../17-libdeflate0_1.19-1build1.1_amd64.deb ...
+#6 16.05 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+#6 16.07 Selecting previously unselected package libsharpyuv0:amd64.
+#6 16.07 Preparing to unpack .../18-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#6 16.07 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#6 16.09 Selecting previously unselected package libheif-plugin-aomdec:amd64.
+#6 16.09 Preparing to unpack .../19-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 16.09 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#6 16.10 Selecting previously unselected package libheif-plugin-libde265:amd64.
+#6 16.10 Preparing to unpack .../20-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 16.10 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#6 16.12 Selecting previously unselected package libheif1:amd64.
+#6 16.12 Preparing to unpack .../21-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
+#6 16.12 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#6 16.14 Selecting previously unselected package libjpeg-turbo8:amd64.
+#6 16.14 Preparing to unpack .../22-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#6 16.14 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 16.16 Selecting previously unselected package libjpeg8:amd64.
+#6 16.16 Preparing to unpack .../23-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#6 16.16 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 16.17 Selecting previously unselected package libjbig0:amd64.
+#6 16.17 Preparing to unpack .../24-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+#6 16.17 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#6 16.19 Selecting previously unselected package liblerc4:amd64.
+#6 16.19 Preparing to unpack .../25-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+#6 16.19 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#6 16.20 Selecting previously unselected package libwebp7:amd64.
+#6 16.21 Preparing to unpack .../26-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#6 16.21 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#6 16.22 Selecting previously unselected package libtiff6:amd64.
+#6 16.23 Preparing to unpack .../27-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
+#6 16.23 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#6 16.24 Selecting previously unselected package libxpm4:amd64.
+#6 16.24 Preparing to unpack .../28-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#6 16.25 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#6 16.26 Selecting previously unselected package libgd3:amd64.
+#6 16.26 Preparing to unpack .../29-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+#6 16.26 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+#6 16.28 Selecting previously unselected package php8.3-bcmath.
+#6 16.28 Preparing to unpack .../30-php8.3-bcmath_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.28 Unpacking php8.3-bcmath (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.30 Selecting previously unselected package php8.3-gd.
+#6 16.30 Preparing to unpack .../31-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.30 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.32 Selecting previously unselected package php8.3-gmp.
+#6 16.32 Preparing to unpack .../32-php8.3-gmp_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.32 Unpacking php8.3-gmp (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.34 Selecting previously unselected package php8.3-intl.
+#6 16.34 Preparing to unpack .../33-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.34 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.36 Selecting previously unselected package php8.3-mysql.
+#6 16.36 Preparing to unpack .../34-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.36 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.38 Selecting previously unselected package php8.3-soap.
+#6 16.38 Preparing to unpack .../35-php8.3-soap_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.38 Unpacking php8.3-soap (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.40 Selecting previously unselected package php8.3-xml.
+#6 16.40 Preparing to unpack .../36-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 16.40 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.43 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#6 16.43 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#6 16.43 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#6 16.43 Setting up libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#6 16.44 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#6 16.44 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+#6 16.44 Setting up libevent-2.1-7t64:amd64 (2.1.12-stable-9ubuntu2) ...
+#6 16.44 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#6 16.44 Setting up memcached (1.6.24-1build3) ...
+#6 16.56 invoke-rc.d: could not determine current runlevel
+#6 16.56 invoke-rc.d: policy-rc.d denied execution of start.
+#6 16.67 Created symlink /etc/systemd/system/multi-user.target.wants/memcached.service → /usr/lib/systemd/system/memcached.service.
+#6 16.67 Setting up libx11-data (2:1.8.7-1build1) ...
+#6 16.67 Setting up ucf (3.0043+nmu1) ...
+#6 16.73 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 16.74 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#6 16.74 Setting up libhashkit2t64:amd64 (1.1.4-1.1build3) ...
+#6 16.74 Setting up libde265-0:amd64 (1.0.15-1build3) ...
+#6 16.74 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 16.74 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 16.75 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#6 16.75 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#6 16.75 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#6 16.75 Setting up libmemcached11t64:amd64 (1.1.4-1.1build3) ...
+#6 16.75 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 16.85 
+#6 16.85 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#6 17.06 
+#6 17.06 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#6 17.26 
+#6 17.26 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#6 17.47 
+#6 17.47 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#6 17.68 
+#6 17.68 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#6 17.88 
+#6 17.88 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#6 18.10 
+#6 18.10 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#6 18.31 
+#6 18.31 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#6 18.53 
+#6 18.53 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#6 18.75 
+#6 18.75 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#6 18.96 
+#6 18.96 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#6 19.18 
+#6 19.18 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#6 19.40 
+#6 19.40 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#6 19.61 
+#6 19.61 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#6 19.83 
+#6 19.83 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#6 20.05 
+#6 20.05 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#6 20.26 
+#6 20.26 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#6 20.39 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#6 20.48 
+#6 20.48 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#6 20.70 
+#6 20.70 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#6 20.92 
+#6 20.92 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#6 21.04 Setting up php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#6 21.13 
+#6 21.13 Creating config file /etc/php/8.3/mods-available/readline.ini with new version
+#6 21.25 Setting up php8.3-gmp (8.3.6-0ubuntu0.24.04.6) ...
+#6 21.37 
+#6 21.37 Creating config file /etc/php/8.3/mods-available/gmp.ini with new version
+#6 21.49 Setting up php8.3-soap (8.3.6-0ubuntu0.24.04.6) ...
+#6 21.59 
+#6 21.59 Creating config file /etc/php/8.3/mods-available/soap.ini with new version
+#6 21.71 Setting up php8.3-bcmath (8.3.6-0ubuntu0.24.04.6) ...
+#6 21.81 
+#6 21.81 Creating config file /etc/php/8.3/mods-available/bcmath.ini with new version
+#6 21.93 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#6 21.93 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#6 21.94 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 22.04 
+#6 22.04 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#6 22.26 
+#6 22.26 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#6 22.47 
+#6 22.47 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#6 22.68 
+#6 22.68 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#6 22.90 
+#6 22.90 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#6 23.12 
+#6 23.12 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#6 23.24 Setting up php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#6 23.34 
+#6 23.34 Creating config file /etc/php/8.3/mods-available/opcache.ini with new version
+#6 23.46 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#6 23.47 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 23.57 
+#6 23.57 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#6 23.69 Setting up php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#6 23.69 update-alternatives: using /usr/bin/php8.3 to provide /usr/bin/php (php) in auto mode
+#6 23.69 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php8.3.1.gz (of link group php) doesn't exist
+#6 23.69 update-alternatives: using /usr/bin/phar8.3 to provide /usr/bin/phar (phar) in auto mode
+#6 23.69 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar8.3.1.gz (of link group phar) doesn't exist
+#6 23.70 update-alternatives: using /usr/bin/phar.phar8.3 to provide /usr/bin/phar.phar (phar.phar) in auto mode
+#6 23.70 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar8.3.1.gz (of link group phar.phar) doesn't exist
+#6 23.79 
+#6 23.79 Creating config file /etc/php/8.3/cli/php.ini with new version
+#6 24.44 Setting up php8.3-msgpack (1:2.2.0~rc2-3ubuntu1) ...
+#6 24.51 Setting up php8.3-apcu (5.1.22+4.0.11-2ubuntu1) ...
+#6 24.59 Setting up php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#6 24.60 update-alternatives: using /usr/bin/phpdbg8.3 to provide /usr/bin/phpdbg (phpdbg) in auto mode
+#6 24.60 update-alternatives: warning: skip creation of /usr/share/man/man1/phpdbg.1.gz because associated file /usr/share/man/man1/phpdbg8.3.1.gz (of link group phpdbg) doesn't exist
+#6 24.69 
+#6 24.69 Creating config file /etc/php/8.3/phpdbg/php.ini with new version
+#6 25.40 Setting up php8.3-igbinary (3.2.13-1ubuntu3) ...
+#6 25.48 Setting up php-apcu (5.1.22+4.0.11-2ubuntu1) ...
+#6 25.48 Setting up php8.3-memcached (3.2.0+2.2.0-4ubuntu3) ...
+#6 25.56 Setting up php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 25.64 Setting up php-memcached (3.2.0+2.2.0-4ubuntu3) ...
+#6 25.64 Setting up php-redis (5.3.7+4.3.0-3ubuntu1) ...
+#6 25.65 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#6 25.65 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+#6 25.65 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#6 25.75 
+#6 25.75 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+#6 25.87 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#6 25.88 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#6 25.88 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 25.90 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#6 25.90 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#6 25.92 **** configure php-fpm to pass env vars ****
+#6 25.93 sed: can't read /etc/php83/php-fpm.d/www.conf: No such file or directory
+#6 25.93 /bin/bash: line 1: /etc/php83/php-fpm.d/www.conf: No such file or directory
+#6 25.93 /bin/bash: line 1: /etc/php83/conf.d/docker-php-ext-apcu.ini: No such file or directory
+#6 25.93 /bin/bash: line 1: /etc/php83/conf.d/memory-limit.ini: No such file or directory
+#6 25.94 gpg: keyserver receive failed: Server indicated a failure
+#6 25.94 gpg: keyserver receive failed: Server indicated a failure
+#6 25.94 gpg: keyserver receive failed: Server indicated a failure
+#6 ERROR: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     bzip2     gpg     gpg-agent &&   apt-get update && apt-get install -y --no-install-recommends     memcached     php-apcu     php8.3-bcmath     php8.3-xml     php8.3-gd     php8.3-gmp     php8.3-intl     php-memcached     php8.3-mysql     php-redis     php8.3-common     php8.3-soap     php8.3-xml &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf &&   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin:/\" >> /etc/php83/php-fpm.conf &&   echo \"**** setup php opcache ****\" &&   {       echo '[opcache]';       echo 'opcache.enable=1';       echo 'opcache.revalidate_freq=0';       echo 'opcache.validate_timestamps=0';       echo 'opcache.max_accelerated_files=20000';       echo 'opcache.memory_consumption=192';       echo 'opcache.max_wasted_percentage=10';       echo 'opcache.interned_strings_buffer=16';       echo 'opcache.fast_shutdown=1';   } > /etc/php83/conf.d/opcache-recommended.ini;     echo 'apc.enable_cli=1' >> /etc/php83/conf.d/docker-php-ext-apcu.ini;     {       echo 'memory_limit=${MEMORY_LIMIT}';   } > /etc/php83/conf.d/memory-limit.ini &&   echo \"**** install monica ****\" &&   mkdir -p /app/www &&   curl -s -o     /tmp/monica.tar.bz2 -L     \"https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2\" &&   curl -s -o     \"/tmp/monica.tar.bz2.asc\" -L     \"https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$MONICA_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$MONICA_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$MONICA_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$MONICA_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/monica.tar.bz2.asc\" \"/tmp/monica.tar.bz2\"; then     echo \"File signature mismatch\"     exit 1;   fi &&   tar xf     /tmp/monica.tar.bz2 -C     /app/www --strip-components=1 &&   cd /app/www &&   composer install     --no-dev     --no-interaction &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     bzip2     gpg     gpg-agent &&   apt-get update && apt-get install -y --no-install-recommends     memcached     php-apcu     php8.3-bcmath     php8.3-xml     php8.3-gd     php8.3-gmp     php8.3-intl     php-memcached     php8.3-mysql     php-redis     php8.3-common     php8.3-soap     php8.3-xml &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf &&   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php83/php-fpm.conf &&   echo "**** setup php opcache ****" &&   {       echo '[opcache]';       echo 'opcache.enable=1';       echo 'opcache.revalidate_freq=0';       echo 'opcache.validate_timestamps=0';       echo 'opcache.max_accelerated_files=20000';       echo 'opcache.memory_consumption=192';       echo 'opcache.max_wasted_percentage=10';       echo 'opcache.interned_strings_buffer=16';       echo 'opcache.fast_shutdown=1';   } > /etc/php83/conf.d/opcache-recommended.ini;     echo 'apc.enable_cli=1' >> /etc/php83/conf.d/docker-php-ext-apcu.ini;     {       echo 'memory_limit=${MEMORY_LIMIT}';   } > /etc/php83/conf.d/memory-limit.ini &&   echo "**** install monica ****" &&   mkdir -p /app/www &&   curl -s -o     /tmp/monica.tar.bz2 -L     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2" &&   curl -s -o     "/tmp/monica.tar.bz2.asc" -L     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "BDAB0D0D36A00466A2964E85DE15667131EA6018" &&   if ! gpg --batch -q --verify "/tmp/monica.tar.bz2.asc" "/tmp/monica.tar.bz2"; then     echo "File signature mismatch"     exit 1;   fi &&   tar xf     /tmp/monica.tar.bz2 -C     /app/www --strip-components=1 &&   cd /app/www &&   composer install     --no-dev     --no-interaction &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*:
+25.90 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+25.90 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+25.92 **** configure php-fpm to pass env vars ****
+25.93 sed: can't read /etc/php83/php-fpm.d/www.conf: No such file or directory
+25.93 /bin/bash: line 1: /etc/php83/php-fpm.d/www.conf: No such file or directory
+25.93 /bin/bash: line 1: /etc/php83/conf.d/docker-php-ext-apcu.ini: No such file or directory
+25.93 /bin/bash: line 1: /etc/php83/conf.d/memory-limit.ini: No such file or directory
+25.94 gpg: keyserver receive failed: Server indicated a failure
+25.94 gpg: keyserver receive failed: Server indicated a failure
+25.94 gpg: keyserver receive failed: Server indicated a failure
+------
+
+ [33m2 warnings found (use docker --debug to expand):
+[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "MONICA_RELEASE_GPG_KEY") (line 6)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 7)
+Dockerfile:10
+--------------------
+   9 |     
+  10 | >>> RUN \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     bzip2 \
+  13 | >>>     gpg \
+  14 | >>>     gpg-agent && \
+  15 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  16 | >>>     memcached \
+  17 | >>>     php-apcu \
+  18 | >>>     php8.3-bcmath \
+  19 | >>>     php8.3-xml \
+  20 | >>>     php8.3-gd \
+  21 | >>>     php8.3-gmp \
+  22 | >>>     php8.3-intl \
+  23 | >>>     php-memcached \
+  24 | >>>     php8.3-mysql \
+  25 | >>>     php-redis \
+  26 | >>>     php8.3-common \
+  27 | >>>     php8.3-soap \
+  28 | >>>     php8.3-xml && \
+  29 | >>>   echo "**** configure php-fpm to pass env vars ****" && \
+  30 | >>>   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \
+  31 | >>>   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && \
+  32 | >>>   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php83/php-fpm.conf && \
+  33 | >>>   echo "**** setup php opcache ****" && \
+  34 | >>>   { \
+  35 | >>>       echo '[opcache]'; \
+  36 | >>>       echo 'opcache.enable=1'; \
+  37 | >>>       echo 'opcache.revalidate_freq=0'; \
+  38 | >>>       echo 'opcache.validate_timestamps=0'; \
+  39 | >>>       echo 'opcache.max_accelerated_files=20000'; \
+  40 | >>>       echo 'opcache.memory_consumption=192'; \
+  41 | >>>       echo 'opcache.max_wasted_percentage=10'; \
+  42 | >>>       echo 'opcache.interned_strings_buffer=16'; \
+  43 | >>>       echo 'opcache.fast_shutdown=1'; \
+  44 | >>>   } > /etc/php83/conf.d/opcache-recommended.ini; \
+  45 | >>>   \
+  46 | >>>   echo 'apc.enable_cli=1' >> /etc/php83/conf.d/docker-php-ext-apcu.ini; \
+  47 | >>>   \
+  48 | >>>   { \
+  49 | >>>       echo 'memory_limit=${MEMORY_LIMIT}'; \
+  50 | >>>   } > /etc/php83/conf.d/memory-limit.ini && \
+  51 | >>>   echo "**** install monica ****" && \
+  52 | >>>   mkdir -p /app/www && \
+  53 | >>>   curl -s -o \
+  54 | >>>     /tmp/monica.tar.bz2 -L \
+  55 | >>>     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2" && \
+  56 | >>>   curl -s -o \
+  57 | >>>     "/tmp/monica.tar.bz2.asc" -L \
+  58 | >>>     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc" && \
+  59 | >>>   export GNUPGHOME="$(mktemp -d)" && \
+  60 | >>>   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$MONICA_RELEASE_GPG_KEY" \
+  61 | >>>       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$MONICA_RELEASE_GPG_KEY" \
+  62 | >>>       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "$MONICA_RELEASE_GPG_KEY" \
+  63 | >>>       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "$MONICA_RELEASE_GPG_KEY" && \
+  64 | >>>   if ! gpg --batch -q --verify "/tmp/monica.tar.bz2.asc" "/tmp/monica.tar.bz2"; then \
+  65 | >>>     echo "File signature mismatch" \
+  66 | >>>     exit 1; \
+  67 | >>>   fi && \
+  68 | >>>   tar xf \
+  69 | >>>     /tmp/monica.tar.bz2 -C \
+  70 | >>>     /app/www --strip-components=1 && \
+  71 | >>>   cd /app/www && \
+  72 | >>>   composer install \
+  73 | >>>     --no-dev \
+  74 | >>>     --no-interaction && \
+  75 | >>>   echo "**** cleanup ****" && \
+  76 | >>>   apt-get autoremove -y && \
+  77 | >>>   rm -rf \
+  78 | >>>     /tmp/*
+  79 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     bzip2     gpg     gpg-agent &&   apt-get update && apt-get install -y --no-install-recommends     memcached     php-apcu     php8.3-bcmath     php8.3-xml     php8.3-gd     php8.3-gmp     php8.3-intl     php-memcached     php8.3-mysql     php-redis     php8.3-common     php8.3-soap     php8.3-xml &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf &&   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin:/\" >> /etc/php83/php-fpm.conf &&   echo \"**** setup php opcache ****\" &&   {       echo '[opcache]';       echo 'opcache.enable=1';       echo 'opcache.revalidate_freq=0';       echo 'opcache.validate_timestamps=0';       echo 'opcache.max_accelerated_files=20000';       echo 'opcache.memory_consumption=192';       echo 'opcache.max_wasted_percentage=10';       echo 'opcache.interned_strings_buffer=16';       echo 'opcache.fast_shutdown=1';   } > /etc/php83/conf.d/opcache-recommended.ini;     echo 'apc.enable_cli=1' >> /etc/php83/conf.d/docker-php-ext-apcu.ini;     {       echo 'memory_limit=${MEMORY_LIMIT}';   } > /etc/php83/conf.d/memory-limit.ini &&   echo \"**** install monica ****\" &&   mkdir -p /app/www &&   curl -s -o     /tmp/monica.tar.bz2 -L     \"https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2\" &&   curl -s -o     \"/tmp/monica.tar.bz2.asc\" -L     \"https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$MONICA_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$MONICA_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$MONICA_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$MONICA_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/monica.tar.bz2.asc\" \"/tmp/monica.tar.bz2\"; then     echo \"File signature mismatch\"     exit 1;   fi &&   tar xf     /tmp/monica.tar.bz2 -C     /app/www --strip-components=1 &&   cd /app/www &&   composer install     --no-dev     --no-interaction &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*" did not complete successfully: exit code: 2

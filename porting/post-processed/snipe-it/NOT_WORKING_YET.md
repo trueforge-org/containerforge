@@ -16,3 +16,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: Uses Alpine-style `apt-get add/del --no-cache` commands, which fail on Debian/Ubuntu base images.
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-snipe-it:amd64 .`
+- Result: FAIL
+- Reason: 26.86 /bin/bash: line 1: /etc/php83/php-fpm.d/www.conf: No such file or directory
+- Full log: `amd64-build.log`

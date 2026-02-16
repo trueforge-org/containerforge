@@ -1,0 +1,119 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.17kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 4.83kB done
+#5 DONE 0.0s
+
+#6 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo "**** install sealskin ****" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /config/.cache     /tmp/*
+#6 0.145 **** install build packages ****
+#6 0.307 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.316 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.458 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.508 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 0.601 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.708 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 0.746 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 0.847 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 0.908 Get:9 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.021 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.051 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.819 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.971 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.114 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.364 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.577 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.784 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.928 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.947 Fetched 36.1 MB in 3s (13.0 MB/s)
+#6 2.947 Reading package lists...
+#6 3.691 Reading package lists...
+#6 4.426 Building dependency tree...
+#6 4.572 Reading state information...
+#6 4.737 The following NEW packages will be installed:
+#6 4.737   zip
+#6 4.893 0 upgraded, 1 newly installed, 0 to remove and 24 not upgraded.
+#6 4.893 Need to get 176 kB of archives.
+#6 4.893 After this operation, 549 kB of additional disk space will be used.
+#6 4.893 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 zip amd64 3.0-13ubuntu0.2 [176 kB]
+#6 5.000 debconf: delaying package configuration, since apt-utils is not installed
+#6 5.023 Fetched 176 kB in 0s (1,131 kB/s)
+#6 5.037 Selecting previously unselected package zip.
+#6 5.037 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#6 5.052 Preparing to unpack .../zip_3.0-13ubuntu0.2_amd64.deb ...
+#6 5.053 Unpacking zip (3.0-13ubuntu0.2) ...
+#6 5.076 Setting up zip (3.0-13ubuntu0.2) ...
+#6 5.092 **** install packages ****
+#6 5.258 Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
+#6 5.258 Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+#6 5.398 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#6 5.541 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#6 5.600 Reading package lists...
+#6 6.340 Reading package lists...
+#6 7.056 Building dependency tree...
+#6 7.199 Reading state information...
+#6 7.277 E: Unable to locate package echo
+#6 7.277 E: Unable to locate package **** install sealskin ****
+#6 7.277 E: Couldn't find any package by glob '**** install sealskin ****'
+#6 7.277 E: Regex compilation error - Invalid preceding regular expression
+#6 7.277 E: Couldn't find any package by regex '**** install sealskin ****'
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo \"**** install sealskin ****\" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     \"https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz\" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     $HOME/.cache     /tmp/*" did not complete successfully: exit code: 100
+------
+ > [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo "**** install sealskin ****" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /config/.cache     /tmp/*:
+5.398 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+5.541 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+
+
+
+7.277 E: Unable to locate package echo
+7.277 E: Unable to locate package **** install sealskin ****
+7.277 E: Couldn't find any package by glob '**** install sealskin ****'
+7.277 E: Regex compilation error - Invalid preceding regular expression
+7.277 E: Couldn't find any package by regex '**** install sealskin ****'
+------
+Dockerfile:11
+--------------------
+  10 |     # install software
+  11 | >>> RUN \
+  12 | >>>   echo "**** install build packages ****" && \
+  13 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  14 | >>>     zip && \
+  15 | >>>   echo "**** install packages ****" && \
+  16 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  17 | >>>     caddy \
+  18 | >>>     openssl \
+  19 | >>>   echo "**** install sealskin ****" && \
+  20 | >>>   mkdir /opt/sealskin && \
+  21 | >>>   curl -o \
+  22 | >>>     /tmp/sealskin.tar.gz -L \
+  23 | >>>     "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" && \
+  24 | >>>   tar xf \
+  25 | >>>     /tmp/sealskin.tar.gz -C \
+  26 | >>>     /opt/sealskin --strip-components=1 && \
+  27 | >>>   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages && \
+  28 | >>>   cd /opt/sealskin/browser_extension && \
+  29 | >>>   zip -r /sealskin.zip * && \
+  30 | >>>   chown apps:apps /sealskin.zip && \
+  31 | >>>   chown apps:apps /storage && \
+  32 | >>>   echo "**** cleanup ****" && \
+  33 | >>>   apt-get autoremove -y && \
+  34 | >>>   rm -rf \
+  35 | >>>     $HOME/.cache \
+  36 | >>>     /tmp/*
+  37 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo \"**** install sealskin ****\" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     \"https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz\" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     $HOME/.cache     /tmp/*" did not complete successfully: exit code: 100

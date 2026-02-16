@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: failed to solve: process "/bin/bash -o pipefail -c echo \"**** Install build requirements ****\" &&   echo \"**** Download Davos ****\" &&   curl -o /tmp/davos.tar.gz -L \"https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz\" &&   echo \"**** Build Davos For Release ****\" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo \"**** Copy Finished Jar ****\" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar" did not complete successfully: exit code: 1
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-davos:amd64 .`
+- Result: FAIL
+- Reason: 0.306 tar: Child returned status 1
+- Full log: `amd64-build.log`
