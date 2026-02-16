@@ -114,45 +114,9 @@ SOURCE=$(printf '%s\n' "$SOURCE" | sed 's/[&/\]/\\&/g')
         fi
     fi
 
-
-    # 2️⃣ Replace TEMPLATEPORT in container_test.go
-    container_test_file="$processed/container_test.go"
-    container_test_file_web="$processed/container_test.go.web"
-    container_test_file_cmd="$processed/container_test.go.cmd"
-    container_test_file_port="$processed/container_test.go.port"
-    container_test_file_test="$processed/container_test.go.test"
-        replace_val=""
-        if [[ "$CI_WEB" == "true" ]]; then
-            mv $container_test_file_web "$container_test_file"
-        elif [[ "$CI_PORT" != "" ]]; then
-            mv $container_test_file_port "$container_test_file"
-        elif [[ "$CI_CMD" != "" ]]; then
-            mv $container_test_file_cmd "$container_test_file"
-            else
-mv $container_test_file_test "$container_test_file"
-        fi
-rm -rf "$container_test_file_web" "$container_test_file_cmd" "$container_test_file_port" "$container_test_file_test" || true
-
-    if [[ -f "$container_test_file" ]]; then
-
-
-
-     CI_WEBPATH=$(printf '%s\n' "$CI_WEBPATH" | sed 's/[&/\]/\\&/g')
-        if sed --version >/dev/null 2>&1; then
-            sed -i "s/CIPORT/$CI_PORT/g" "$container_test_file"
-
-            sed -i "s/CIWEBPATH/$CI_WEBPATH/g" "$container_test_file"
-            sed -i "s/CICMD/$CI_CMD/g" "$container_test_file"
-        else
-            sed -i '' "s/CIPORT/$CI_PORT/g" "$container_test_file"
-            sed -i '' "s/CIWEBPATH/$CI_WEBPATH/g" "$container_test_file"
-            sed -i '' "s/CICMD/$CI_CMD/g" "$container_test_file"
-        fi
-    fi
-
     rm -rf "$processed/Dockerfile.riscv64" && echo "[CLEANUP]: removed Dockerfile.riscv64" || true
 
-    # 3️⃣ Clean empty svc-* folders and append run scripts to start.sh
+    # 2️⃣ Clean empty svc-* folders and append run scripts to start.sh
     root_folder="$processed/root"
     etc_folder="$root_folder/etc"
     s6_root="$etc_folder/s6-overlay/"
