@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=mikefarah/yq
-  default = "v4.52.4"
+  // renovate: datasource=pypi depName=yq
+  default = "3.4.3"
 }
 
 variable "LICENSE" {
