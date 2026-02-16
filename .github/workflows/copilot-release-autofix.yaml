@@ -1,0 +1,158 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Copilot Release Autofix
+
+on:
+  workflow_run:
+    workflows:
+      - Release
+    types:
+      - completed
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  copilot-autofix:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    name: Create Copilot Autofix Task
+    runs-on:
+      group: default
+    steps:
+      - name: Open issue and assign Copilot
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+        with:
+          github-token: ${{ secrets.OR_PAT }}
+          script: |-
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const runId = Number(process.env.RUN_ID);
+            const runAttempt = Number(process.env.RUN_ATTEMPT);
+            const runUrl = process.env.RUN_URL;
+            const runSha = process.env.RUN_SHA;
+
+            const jobs = await github.paginate(
+              github.rest.actions.listJobsForWorkflowRunAttempt,
+              {
+                owner,
+                repo,
+                run_id: runId,
+                attempt_number: runAttempt,
+                per_page: 100,
+              },
+            );
+
+            const failedJobs = jobs.filter((job) => job.conclusion === 'failure');
+            if (failedJobs.length === 0) {
+              core.info('No failed jobs found for failed workflow run. Skipping.');
+              return;
+            }
+
+            const appMatches = new Set();
+            for (const job of failedJobs) {
+              const buildMatch = job.name.match(/Build\s+(.+?)(?:\s+\/|$)/);
+              if (buildMatch && buildMatch[1]) {
+                appMatches.add(buildMatch[1].trim());
+              }
+            }
+
+            const appList = [...appMatches].sort();
+            const appText = appList.length > 0 ? appList.join(', ') : 'unknown-app';
+            const title = `fix(ci): release failure for ${appText} (run ${runId})`;
+
+            const existingIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              labels: 'copilot-autofix',
+              per_page: 100,
+            });
+
+            const duplicate = existingIssues.find((issue) => issue.title === title);
+            if (duplicate) {
+              core.info(`Autofix issue already exists: #${duplicate.number}`);
+              return;
+            }
+
+            const failedJobLines = failedJobs.slice(0, 20).map((job) => {
+              const failedSteps = (job.steps || [])
+                .filter((step) => step.conclusion === 'failure')
+                .map((step) => `  - ${step.name}`)
+                .join('\n');
+              return [
+                `- ${job.name}`,
+                `  - URL: ${job.html_url}`,
+                failedSteps || '  - Failed step: (not reported by API)',
+              ].join('\n');
+            }).join('\n');
+
+            const body = [
+              'Automated release build failed. Please investigate and propose a code fix in a pull request.',
+              '',
+              '### Context',
+              `- Workflow run: ${runUrl}`,
+              `- Commit: ${runSha}`,
+              `- Apps: ${appText}`,
+              '',
+              '### Failed jobs / steps',
+              failedJobLines,
+              '',
+              '### Task',
+              '- Reproduce the failure from this run.',
+              '- Make the smallest safe fix in the affected app directory.',
+              '- Ensure any changed docker-bake.hcl values are used by the corresponding Dockerfile.',
+              '- Open a pull request with a Conventional Commits style title.',
+              '',
+              '### Validation',
+              '- Validate with `docker buildx bake --print` from the affected app directory.',
+              '- Include a concise root-cause explanation in the PR body.',
+              '',
+              '_Created automatically by `copilot-release-autofix.yaml`._',
+            ].join('\n');
+
+            await github.rest.issues.createLabel({
+              owner,
+              repo,
+              name: 'copilot-autofix',
+              color: '1d76db',
+              description: 'Automated Copilot issue created from failed release builds',
+            }).catch((error) => {
+              if (error.status !== 422) {
+                throw error;
+              }
+            });
+
+            const issue = await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body,
+              labels: ['copilot-autofix'],
+            });
+
+            core.info(`Created Copilot autofix issue #${issue.data.number}`);
+
+            try {
+              await github.rest.issues.addAssignees({
+                owner,
+                repo,
+                issue_number: issue.data.number,
+                assignees: ['copilot'],
+              });
+              core.info(`Assigned issue #${issue.data.number} to copilot`);
+            } catch (error) {
+              core.warning(`Failed to assign copilot: ${error.message}`);
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issue.data.number,
+                body: '@copilot please investigate this release failure and propose the smallest safe fix in a PR.',
+              });
+              core.info(`Posted @copilot fallback comment on issue #${issue.data.number}`);
+            }

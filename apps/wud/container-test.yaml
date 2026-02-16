@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+http:
+- port: '3000'
+  path: /

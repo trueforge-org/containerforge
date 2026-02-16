@@ -1,9 +1,12 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3b826c0233182d7c31a9323121178b98976765b9ee03f9a96200ab0c70e2e1e2
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5d05227fca161b90936494534d014201795165beb84d5f1aced98565f7c6655e
 
 # Environment variables
 ARG VERSION
+ARG PIP_VERSION
+ARG SETUPTOOLS_VERSION
+ARG WHEEL_VERSION
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -19,7 +22,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     UV_EXTRA_INDEX_URL="https://wheel-index.linuxserver.io/ubuntu/ https://pypi.org/simple" \
     UV_INDEX_STRATEGY="unsafe-best-match" \
     PATH=/usr/local/bin:$PATH \
-    VENV_FOLDER="/config/venv"
+    VENV_FOLDER="/app/venv"
 
 USER root
 
@@ -82,7 +85,9 @@ RUN set -eux; \
         \( -type d -a \( -name test -o -name tests -o -name idle_test \) \
         -o -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \) -exec rm -rf '{}' +; \
     ldconfig; \
-    mkdir -p /app/venv; \
+    mkdir -p /app /app; \
+    python3 -m venv /app/venv; \
+    /app/venv/bin/python -m pip install --upgrade pip==${PIP_VERSION} setuptools==${SETUPTOOLS_VERSION} wheel==${WHEEL_VERSION}; \
     chown -R apps:apps /app && chmod -R 755 /app; \
     python3 --version; \
     pip3 --version
@@ -97,5 +102,6 @@ RUN set -eux; \
     done
 
 # Switch to non-root user
-USER apps:apps
+USER apps
 
+COPY --chmod=0755 start.sh /start.sh

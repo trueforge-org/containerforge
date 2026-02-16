@@ -11,6 +11,7 @@
 !configure-scripts/
 !build/
 !docker-entrypoint.d/
+!health/
 !compatibility.sh
 !upgrade.sh
 !/root

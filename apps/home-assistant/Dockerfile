@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 ARG TARGETARCH
 ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
 ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
@@ -59,12 +59,14 @@ RUN set -eux; \
         && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages and Home Assistant
-RUN pip install uv; \
-    uv pip install psycopg2; \
-    uv pip install --index-strategy unsafe-best-match \
+RUN pip3 install --no-cache-dir psycopg2; \
+    pip3 install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements.txt"; \
-    uv pip install --index-strategy unsafe-best-match --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements_all.txt"; \
-    uv pip install --index-strategy unsafe-best-match homeassistant=="${VERSION}"; \
+    pip3 install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+        --requirement "https://raw.githubusercontent.com/home-assistant/core/refs/tags/${VERSION}/requirements_all.txt"; \
+    pip3 install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ homeassistant=="${VERSION}"; \
+    cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt; \
+    chmod 644 /etc/ca-certificates.crt; \
     curl -fsSL -o /bin/go2rtc "https://github.com/AlexxIT/go2rtc/releases/latest/download/go2rtc_linux_${TARGETARCH}"; \
     chmod +x /bin/go2rtc; \
     mkdir -p /config && chown 568:568 -R /config; \

@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 
 ARG VERSION
 ARG YARN_VERSION
@@ -11,13 +11,13 @@ ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 ENV HOME=/app/nodehome
 
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/bin/node /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/bin/npm /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/bin/npx /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /usr/local/bin/node /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /usr/local/bin/npm /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /usr/local/bin/npx /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /YARN_VERSION.txt /YARN_VERSION.txt
-COPY --from=ghcr.io/trueforge-org/node:22.20.0@sha256:3345d6d3e3fb826b171518a83172dad4f4fc7f248933606daf72ed517053e693 /opt/ /opthold/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /YARN_VERSION.txt /YARN_VERSION.txt
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /opt/ /opthold/
 
 RUN YARN_VERSION=$(cat /YARN_VERSION.txt) && \
     mv /opthold/yarn-v$YARN_VERSION /opt/yarn-v$YARN_VERSION \

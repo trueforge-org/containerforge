@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:1501a7a85f3300078dbb390398ce4c7f5358b33ef650f51c4ad8e51618fe5d9a
+FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:4f40cd39a8df3fb89552299ea9aa6d30aa65f393a5f360fa3a29e1b54fd7bd12
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION

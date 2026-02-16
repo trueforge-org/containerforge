@@ -1,5 +1,5 @@
 # Stage 1 - Build the Go application
-FROM ghcr.io/trueforge-org/golang:1.25.1@sha256:be0a42e1af759466bd249b5ce04c288e8beab4df14ac634fc9aa6db04bbe8b03 AS builder
+FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:9553c58d3700b7322b23a4a4cc1e4e33d04d7787625fd27c9baeb51f93cf0be5 AS builder
 
 USER root
 
@@ -30,13 +30,16 @@ RUN go build -ldflags "-w -s" -o /output/my-proxy-service .
 
 
 # Stage 2 - Create the final image
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3b826c0233182d7c31a9323121178b98976765b9ee03f9a96200ab0c70e2e1e2
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5d05227fca161b90936494534d014201795165beb84d5f1aced98565f7c6655e
 
 # Set working directory
 WORKDIR /app
 
 # Copy the binary from the builder stage
 COPY --from=builder /output/my-proxy-service .
+
+# Provide the default token file expected by the app's API_FILE default.
+RUN touch /app/file_to_watch.txt
 
 # Set environment variables
 ENV PORT=3000

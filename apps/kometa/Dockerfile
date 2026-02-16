@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 
 ARG VERSION
 ARG TARGETARCH
@@ -20,9 +20,10 @@ RUN apt-get update && \
         "https://github.com/Kometa-Team/Kometa/archive/v${VERSION}.tar.gz" && \
     tar xf /tmp/kometa.tar.gz -C /app/kometa --strip-components=1 && \
     cd /app/kometa && \
-    python3 -m venv /config/venv && \
-    /config/venv/bin/pip install -U pip wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r /app/kometa/requirements.txt && \
+    pip3 install -U pip wheel && \
+    pip3 install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r /app/kometa/requirements.txt && \
+    cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt && \
+    chmod 644 /etc/ca-certificates.crt && \
     apt-get remove -y --purge build-essential libffi-dev libxml2-dev libzen-dev && \
     apt-get autoremove -y && \
     chown -R apps:apps /app && chmod -R 755 /app && \

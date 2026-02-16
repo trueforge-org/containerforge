@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 ARG VENDOR
 ARG VERSION
 
@@ -36,6 +36,8 @@ RUN curl -fsSL -o /tmp/app.zip "https://github.com/morpheus65535/bazarr/releases
     && uv pip install \
         --requirement /app/bin/requirements.txt \
         --requirement /app/bin/postgres-requirements.txt \
+    && cp /etc/ssl/certs/ca-certificates.crt /etc/ca-certificates.crt \
+    && chmod 644 /etc/ca-certificates.crt \
     && chown -R root:root /app && chmod -R 755 /app \
     && pip uninstall --yes uv \
     && rm -rf /root/.cache /root/.cargo /tmp/* /app/bin/bin

@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87 AS builder
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429 AS builder
 WORKDIR /app
 ARG VERSION
 
@@ -12,7 +12,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create virtual environment and upgrade pip/setuptools
-RUN python -m venv .venv && .venv/bin/pip install --no-cache-dir -U pip setuptools
+RUN python -m venv /app/venv && /app/venv/bin/pip install --no-cache-dir -U pip setuptools
 
 # Download and extract only the src/ folder from the release
 ENV RELEASE_URL="https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz"
@@ -23,12 +23,12 @@ RUN curl -L https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}
     rm -rf release.tar.gz src_temp
 
 # Install Python dependencies
-RUN .venv/bin/pip install --no-cache-dir -r requirements.txt && \
+RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
     rm requirements.txt && \
     # Remove tests and compiled Python files
-    find .venv \( -type d -name test -o -name tests \) -o \( -type f -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+    find /app/venv \( -type d -name test -o -name tests \) -o \( -type f -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 
 USER apps:apps
 
@@ -36,7 +36,8 @@ WORKDIR /app
 
 # Copy built app from builder
 COPY --from=builder /app /app
+COPY --from=builder /app/venv /app/venv
 
-ENV PATH="/config/venv/bin:$PATH"
+ENV PATH="/app/venv/bin:$PATH"
 
 CMD [ "python", "-u", "/app/sidecar.py" ]

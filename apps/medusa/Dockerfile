@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:708f480d444e56c1b20c0966b9fa08ce0aaba16ed5e2ef3469f5f6a161549e87
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 
 # set version label
 ARG VERSION
@@ -30,7 +30,7 @@ RUN \
     tar xf /tmp/medusa.tar.gz -C \
         /app/medusa --strip-components=1 && \
     cd /app/medusa && \
-    python3 -m venv /config/venv && \
+    python3 -m venv /app/venv && \
     pip install -U --no-cache-dir \
         setuptools && \
     pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
