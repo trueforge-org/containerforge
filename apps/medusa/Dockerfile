@@ -30,7 +30,7 @@ RUN \
     tar xf /tmp/medusa.tar.gz -C \
         /app/medusa --strip-components=1 && \
     cd /app/medusa && \
-    python3 -m venv /config/venv && \
+    python3 -m venv /app/venv && \
     pip install -U --no-cache-dir \
         setuptools && \
     pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \

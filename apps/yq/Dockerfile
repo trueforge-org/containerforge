@@ -7,7 +7,7 @@ ARG TARGETARCH
 USER root
 
 RUN echo "**** install app ****" && \
-  python3 -m venv /config/venv && \
+  python3 -m venv /app/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

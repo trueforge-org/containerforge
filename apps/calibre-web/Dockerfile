@@ -41,7 +41,7 @@ RUN \
     /tmp/calibre-web.tar.gz -C \
     /app/calibre-web --strip-components=1 && \
   cd /app/calibre-web && \
-  python3 -m venv /config/venv && \
+  python3 -m venv /app/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
