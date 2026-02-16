@@ -10,6 +10,7 @@ WORKDIR /app
 # Ensure unzip & rsync exists (safe even if already installed)
 RUN set -eux; \
     missing=""; \
+    command -v curl >/dev/null 2>&1 || missing="$missing curl"; \
     command -v unzip >/dev/null 2>&1 || missing="$missing unzip"; \
     command -v rsync >/dev/null 2>&1 || missing="$missing rsync"; \
     [ -n "$missing" ] && ( \
@@ -19,15 +20,11 @@ RUN set -eux; \
     )
 
 
-# Download Hytale Downloader
-RUN set -eux; \
-    curl -fL https://downloader.hytale.com/hytale-downloader.zip -o /tmp/hytale.zip; \
-    unzip -q /tmp/hytale.zip -d /tmp; \
-    mv /tmp/hytale-downloader-linux-amd64 /usr/local/bin/hytale-downloader; \
-    chmod +x /usr/local/bin/hytale-downloader; \
-    rm -rf /tmp/hytale.zip
+# Install runtime downloader wrapper
+COPY hytale-downloader /usr/local/bin/hytale-downloader
+RUN chmod +x /usr/local/bin/hytale-downloader
 
 # Copy application files with correct ownership
 COPY . /
 
-USER apps:apps
+USER apps
