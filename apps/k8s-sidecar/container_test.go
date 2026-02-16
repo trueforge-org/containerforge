@@ -21,9 +21,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithCmdArgs("python", "-u", "/app/sidecar.py"),
 	)
 	testcontainers.CleanupContainer(t, app)

@@ -20,9 +20,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithCmdArgs("test", "-f", "TEMPLATEEXEC"),
 	)
 	testcontainers.CleanupContainer(t, app)

@@ -41,9 +41,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("5432/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForHealthCheck(),
@@ -60,9 +58,7 @@ func Test(t *testing.T) {
 
 	upgrade, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("5432/tcp"),
 		testcontainers.WithEnv(map[string]string{
 			"PREPTEST": "true",

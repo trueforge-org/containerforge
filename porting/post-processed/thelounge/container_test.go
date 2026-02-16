@@ -21,9 +21,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("9000/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("9000/tcp"),

@@ -22,9 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("8200/tcp"),
 		testcontainers.WithEnv(map[string]string{
 			"SETTINGS_ENCRYPTION_KEY": "abcde12345",

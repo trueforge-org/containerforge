@@ -22,9 +22,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("9633/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForHTTP("/metrics").WithPort("9633/tcp").WithStatusCodeMatcher(func(status int) bool {

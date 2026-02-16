@@ -49,11 +49,7 @@ func runContainer(t *testing.T, ctx context.Context, image string, opts ...testc
 	configDir := t.TempDir()
 	// Ensure the mounted directory is accessible by UID 568 inside the container.
 	PrepareConfigDir(t, configDir)
-	opts = append([]testcontainers.ContainerCustomizer{
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
-	}, opts...)
+	opts = append([]testcontainers.ContainerCustomizer{}, opts...)
 
 	c, err := testcontainers.Run(ctx, image, opts...)
 	require.NoError(t, err)
