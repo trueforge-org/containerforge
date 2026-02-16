@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-htpcmanager versioning=loose
+  // renovate: datasource=github-releases depName=HTPC-Manager/HTPC-Manager versioning=loose
   default = "26a641bf"
 }
 

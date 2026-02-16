@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-monica versioning=loose
+  // renovate: datasource=github-releases depName=monicahq/monica versioning=loose
   default = "4.1.2"
 }
 

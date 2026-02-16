@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-mylar3 versioning=loose
+  // renovate: datasource=github-releases depName=mylar3/mylar3 versioning=loose
   default = "0.8.3"
 }
 

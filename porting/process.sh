@@ -101,16 +101,24 @@ rm -rf "$README_YAML" || true
   VERSIONPREFIX="v"
 fi
 
-SOURCE=$(printf '%s\n' "$SOURCE" | sed 's/[&/\]/\\&/g')
+    RENOVATE_DEP="linuxserver/docker-$foldername"
+    if [[ "$SOURCE" =~ ^https?://github\.com/([^/]+)/([^/?#]+) ]]; then
+        RENOVATE_DEP="${BASH_REMATCH[1]}/${BASH_REMATCH[2]%.git}"
+    fi
+
+    SOURCE=$(printf '%s\n' "$SOURCE" | sed 's/[&/\]/\\&/g')
+    RENOVATE_DEP=$(printf '%s\n' "$RENOVATE_DEP" | sed 's/[&/\]/\\&/g')
     if [[ -f "$docker_bake_file" ]]; then
         if sed --version >/dev/null 2>&1; then
             sed -i "s/TEMPLATENAME/$foldername/g" "$docker_bake_file"
             sed -i "s/TEMPLATEVERSION/$VERSION/g" "$docker_bake_file"
             sed -i "s/TEMPLATESOURCE/$SOURCE/g" "$docker_bake_file"
+            sed -i "s/TEMPLATERENOVATEDEP/$RENOVATE_DEP/g" "$docker_bake_file"
         else
             sed -i '' "s/TEMPLATENAME/$foldername/g" "$docker_bake_file"
             sed -i '' "s/TEMPLATEVERSION/$VERSION/g" "$docker_bake_file"
             sed -i '' "s/TEMPLATESOURCE/$SOURCE/g" "$docker_bake_file"
+            sed -i '' "s/TEMPLATERENOVATEDEP/$RENOVATE_DEP/g" "$docker_bake_file"
         fi
     fi
 

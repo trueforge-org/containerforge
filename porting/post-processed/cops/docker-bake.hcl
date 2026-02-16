@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-cops versioning=loose
+  // renovate: datasource=github-releases depName=mikespub-org/seblucas-cops versioning=loose
   default = "3.7.8"
 }
 

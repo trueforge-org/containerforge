@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-speedtest-tracker versioning=loose
+  // renovate: datasource=github-releases depName=alexjustesen/speedtest-tracker versioning=loose
   default = "1.7.4"
 }
 

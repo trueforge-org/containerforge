@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-emulatorjs versioning=loose
+  // renovate: datasource=github-releases depName=linuxserver/emulatorjs versioning=loose
   default = "1.9.2"
 }
 

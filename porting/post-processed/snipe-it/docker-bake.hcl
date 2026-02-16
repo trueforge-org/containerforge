@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-snipe-it versioning=loose
+  // renovate: datasource=github-releases depName=grokability/snipe-it versioning=loose
   default = "8.0.4"
 }
 
