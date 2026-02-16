@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:9a693d4ad7151ab7bd13b94e6c6137b90dabf6d44280a1aad6e4a65e191749d2
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:5d05227fca161b90936494534d014201795165beb84d5f1aced98565f7c6655e
 
 ARG VERSION
 ARG TARGETARCH
