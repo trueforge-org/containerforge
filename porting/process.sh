@@ -23,9 +23,13 @@ for processed in "$PROCESSED_DIR"/*; do
     foldername=$(basename "$processed")
     echo "[POSTPROCESS] Processing $foldername"
 
-    # 1️⃣ Copy templates/*
+    # 1️⃣ Copy templates/* (except start.sh; preserve app-specific scripts)
     if [[ -d "./templates" ]]; then
-        cp -r ./templates/* "$processed/" 2>/dev/null || echo "[WARN] Failed to copy templates for $foldername"
+        for template_item in ./templates/*; do
+            [[ -e "$template_item" ]] || continue
+            [[ "$(basename "$template_item")" == "start.sh" ]] && continue
+            cp -r "$template_item" "$processed/" 2>/dev/null || echo "[WARN] Failed to copy $(basename "$template_item") template for $foldername"
+        done
     fi
 # ===== Extract Jenkins vars =====
 JENKINS_YAML="$processed/jenkins-vars.yml"
@@ -343,12 +347,43 @@ done
     fi
 echo "[POSTPROCESS] Sanitizing start.sh in $processed"
 if [[ ! -f "$processed/start.sh" ]]; then
-    template_start="${BASH_SOURCE[0]%/*}/templates/start.sh"
-    if [[ -f "$template_start" ]]; then
-        cp "$template_start" "$processed/start.sh"
-    else
-        printf '%s\n' '#!/usr/bin/env bash' > "$processed/start.sh"
+    default_start_cmd=""
+    default_start_df="$processed/Dockerfile"
+    [[ -f "$default_start_df" ]] || default_start_df="${dockerfiles[0]}"
+    if [[ -f "$default_start_df" ]]; then
+        default_start_cmd=$(
+            awk '
+                BEGIN { cmd="" }
+                /^[[:space:]]*(CMD|ENTRYPOINT)[[:space:]]+/ {
+                    line=$0
+                    sub(/^[[:space:]]*(CMD|ENTRYPOINT)[[:space:]]+/, "", line)
+                    cmd=line
+                }
+                END { print cmd }
+            ' "$default_start_df"
+        )
     fi
+
+    if [[ "$default_start_cmd" =~ ^\[[[:space:]]*.*\][[:space:]]*$ ]] && command -v jq >/dev/null 2>&1; then
+        parsed_start_cmd="$(printf '%s' "$default_start_cmd" | jq -r 'map(@sh) | join(" ")' 2>/dev/null || true)"
+        [[ -n "$parsed_start_cmd" && "$parsed_start_cmd" != "null" ]] && default_start_cmd="$parsed_start_cmd"
+    fi
+    if [[ -z "$default_start_cmd" ]]; then
+        default_start_cmd="echo \"No default command found for ${foldername}\" >&2; exit 1"
+    fi
+    escaped_start_cmd=${default_start_cmd//\\/\\\\}
+    escaped_start_cmd=${escaped_start_cmd//\"/\\\"}
+    cat >"$processed/start.sh" <<EOF
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ \$# -gt 0 ]]; then
+    exec "\$@"
+fi
+
+# Auto-generated fallback start command for ${foldername}.
+exec /bin/sh -lc "${escaped_start_cmd}"
+EOF
     chmod +x "$processed/start.sh"
 fi
 if [[ -f "$processed/start.sh" ]]; then
