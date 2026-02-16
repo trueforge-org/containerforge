@@ -19,7 +19,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     UV_EXTRA_INDEX_URL="https://wheel-index.linuxserver.io/ubuntu/ https://pypi.org/simple" \
     UV_INDEX_STRATEGY="unsafe-best-match" \
     PATH=/usr/local/bin:$PATH \
-    VENV_FOLDER="/config/venv"
+    VENV_FOLDER="/apps/venv"
 
 USER root
 
@@ -82,8 +82,9 @@ RUN set -eux; \
         \( -type d -a \( -name test -o -name tests -o -name idle_test \) \
         -o -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \) -exec rm -rf '{}' +; \
     ldconfig; \
-    mkdir -p /app/venv /defaults; \
-    ln -sfn /defaults/venv /config/venv; \
+    mkdir -p /app /apps; \
+    python3 -m venv /apps/venv; \
+    /apps/venv/bin/python -m pip install --upgrade pip setuptools wheel; \
     chown -R apps:apps /app && chmod -R 755 /app; \
     python3 --version; \
     pip3 --version
@@ -98,6 +99,6 @@ RUN set -eux; \
     done
 
 # Switch to non-root user
-USER apps:apps
+USER apps
 
-COPY --chmod=0755 docker-entrypoint.d/05-restore-venv.sh /docker-entrypoint.d/05-restore-venv.sh
+COPY --chmod=0755 start.sh /start.sh
