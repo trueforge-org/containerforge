@@ -50,6 +50,7 @@ COPY . /
 COPY ./root /
 
 # ports and volumes
-VOLUME /config /data
+VOLUME /config
+VOLUME /data
 
 WORKDIR /config
