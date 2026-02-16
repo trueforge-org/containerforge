@@ -17,7 +17,11 @@ RUN \
     mkdir -p /app/bin /tmp/emby \
     && dpkg-deb -xv /tmp/emby.deb /tmp/emby/ \
     && mv -t /app/bin/ /tmp/emby/opt/emby-server/* \
-    && patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/system/EmbyServer \
+    && if [ "${TARGETARCH}" = "amd64" ]; then \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/system/EmbyServer; \
+    elif [ "${TARGETARCH}" = "arm64" ]; then \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/system/EmbyServer; \
+    fi \
     && chown -R apps:apps /app && chmod -R 755 /app \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false patchelf \
     && apt-get autoremove -y \
