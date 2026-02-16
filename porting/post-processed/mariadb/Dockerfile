@@ -15,11 +15,11 @@ RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         logrotate \
-        mariadb-server=${VERSION} \
-        mariadb-backup=${VERSION} \
-        mariadb-client=${VERSION} \
-        mariadb-common=${VERSION} \
-        mariadb-server-core=${VERSION} && \
+        mariadb-server \
+        mariadb-backup \
+        mariadb-client \
+        mariadb-common \
+        mariadb-server-core && \
     echo "**** cleanup ****" && \
     apt-get clean && \
     rm -rf \

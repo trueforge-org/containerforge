@@ -8,7 +8,7 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     php84-ftp \
     php84-gd \
     php84-intl \

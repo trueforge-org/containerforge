@@ -25,7 +25,7 @@ RUN \
         libffi-dev \
         p7zip-full \
         libboost-system-dev \
-        libboost-python3-dev \
+        libboost-python-dev \
         libstdc++6 \
         nodejs && \
     echo "**** install flexget ****" && \

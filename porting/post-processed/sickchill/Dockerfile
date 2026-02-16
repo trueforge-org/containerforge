@@ -12,15 +12,15 @@ ENV HOME=/config
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     cargo \
     git \
     libffi-dev \
     libxslt-dev \
-    openssl-dev && \
+    libssl-dev && \
   echo "**** install packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     libmediainfo \
     libxslt && \
   echo "**** install sickchill ****" && \
@@ -33,8 +33,7 @@ RUN \
     certifi \
     sickchill=="${VERSION}" && \
   echo "**** clean up ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     $HOME/.cache \

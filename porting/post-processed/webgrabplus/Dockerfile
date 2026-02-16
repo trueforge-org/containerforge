@@ -13,8 +13,8 @@ ENV HOME=/config
 
 RUN \
   echo "**** install packages ****" && \
-  apt-get -U --update --no-cache add \
-    icu-libs \
+  apt-get update && apt-get install -y --no-install-recommends \
+    libicu74 \
     iputils && \
   echo "**** install dotnet sdk ****" && \
   mkdir -p /app/dotnet && \

@@ -18,13 +18,13 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
     libgd-dev \
     imagemagick \
     jpegoptim \
-    php8.4-bcmath \
-    php8.4-xml \
-    php8.4-gd \
-    php8.4-intl \
-    php8.4-mysql \
-    php8.4-pgsql \
-    php8.4-sqlite3 \
+    php8.3-bcmath \
+    php8.3-xml \
+    php8.3-gd \
+    php8.3-intl \
+    php8.3-mysql \
+    php8.3-pgsql \
+    php8.3-sqlite3 \
     php-imagick \
     php-redis \
     php-sodium \

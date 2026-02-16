@@ -21,8 +21,8 @@ RUN \
     zlib1g-dev && \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
-    libjpeg62-turbo \
-    libffi7 \
+    libjpeg-turbo8 \
+    libffi8 \
     libpq5 \
     libxml2 \
     libxslt1.1 \

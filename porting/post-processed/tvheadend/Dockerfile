@@ -19,16 +19,16 @@ COPY --from=piconsstage /picons.tar.bz2 /picons.tar.bz2
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     automake \
     bsd-compat-headers \
-    build-base \
+    build-essential \
     cmake \
-    ffmpeg4-dev \
+    libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev \
     file \
     findutils \
-    gettext-dev \
+    gettext \
     gnu-libiconv-dev \
     libdvbcsa-dev \
     libgcrypt-dev \
@@ -38,8 +38,8 @@ RUN \
     libvpx-dev \
     libxml2-dev \
     libxslt-dev \
-    linux-headers \
-    openssl-dev \
+    linux-headers-generic \
+    libssl-dev \
     opus-dev \
     patch \
     pcre2-dev \
@@ -153,19 +153,19 @@ ENV HOME="/config"
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     bsd-compat-headers \
     ffmpeg \
-    ffmpeg4-libavcodec \
-    ffmpeg4-libavdevice \
-    ffmpeg4-libavfilter \
-    ffmpeg4-libavformat \
-    ffmpeg4-libavutil \
-    ffmpeg4-libpostproc \
-    ffmpeg4-libswresample \
-    ffmpeg4-libswscale \
+    libavcodec60 \
+    libavdevice60 \
+    libavfilter9 \
+    libavformat60 \
+    libavutil58 \
+    libpostproc57 \
+    libswresample4 \
+    libswscale7 \
     gnu-libiconv \
-    libdvbcsa \
+    libdvbcsa1 \
     libhdhomerun-libs \
     libva \
     libva-intel-driver \
@@ -173,7 +173,7 @@ RUN \
     libvpx \
     libxml2 \
     libxslt \
-    linux-headers \
+    linux-headers-generic \
     mesa-va-gallium \
     opus \
     pcre2 \

@@ -13,8 +13,7 @@ RUN echo "**** install ubooquity ****" && \
     "https://vaemendis.net/ubooquity/downloads/Ubooquity-${VERSION}.zip" && \
   unzip /tmp/ubooquity.zip -d /app/ubooquity && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/*
 

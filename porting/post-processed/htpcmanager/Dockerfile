@@ -7,26 +7,26 @@ USER root
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
+  apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     automake \
-    build-base \
+    build-essential \
     cargo \
-    freetype-dev \
-    jpeg-dev \
-    lcms2-dev \
+    libfreetype-dev \
+    libjpeg-dev \
+    liblcms2-dev \
     libffi-dev \
     libpng-dev \
     libwebp-dev \
     libxml2-dev \
     libxslt-dev \
-    linux-headers \
+    linux-headers-generic \
     openjpeg-dev \
-    openssl-dev \
+    libssl-dev \
     tiff-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     vnstat && \
   echo "**** install app ****" && \
   mkdir -p /app/htpcmanager && \
@@ -45,8 +45,7 @@ RUN \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r /app/htpcmanager/requirements.txt && \
   echo ${VERSION} > /app/htpcmanager/VERSION.txt && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.cache \
     /tmp/*

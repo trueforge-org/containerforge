@@ -16,8 +16,8 @@ RUN \
         libffi-dev && \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
-        libldap-2.4-2 \
-        libffi7 \
+        libldap2 \
+        libffi8 \
         python3 && \
     python3 -m venv /config/venv && \
     /config/venv/bin/pip install -U --no-cache-dir \

@@ -7,11 +7,11 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     tftp-hpa && \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
+  apt-get update && apt-get install -y --no-install-recommends \
     npm && \
   echo "**** install WebApp ****" && \
   curl -o \
@@ -22,8 +22,7 @@ RUN \
     /app/ --strip-components=1 && \
   npm install --prefix /app && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/*
 

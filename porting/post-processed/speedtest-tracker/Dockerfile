@@ -7,7 +7,7 @@ USER root
 ENV HOME=/config
 
 RUN \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     grep \
     php84-gd \
     php84-intl \
@@ -61,7 +61,7 @@ RUN \
     echo 'variables_order = EGPCS'; \
   } > /etc/php84/conf.d/php-misc.ini && \
   echo "**** cleanup ****" && \
-  apt-get del --purge build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.cache \
     $HOME/.npm \

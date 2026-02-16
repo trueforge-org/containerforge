@@ -7,7 +7,7 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apt-get add -U --upgrade --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     libdbi-drivers \
     paho-mqtt-c \
     syslog-ng==${VERSION} \

@@ -16,7 +16,7 @@ RUN \
     dnsutils \
     inotify-tools \
     perl \
-    libdigest-sha1-perl \
+    libdigest-sha-perl \
     libio-socket-inet6-perl \
     libio-socket-ssl-perl \
     libjson-perl \

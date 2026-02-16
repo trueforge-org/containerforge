@@ -13,22 +13,22 @@ RUN \
     && awk '/^P:wireguard-tools$/,/V:/' /tmp/APTINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   echo "**** install dependencies ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     bc \
     coredns \
     iproute2 \
     iptables \
-    ip6tables \
+    iptables \
     iputils \
     kmod \
-    libcap-utils \
+    libcap2-bin \
     libqrencode-tools \
     net-tools \
     nftables \
     openresolv \
     wireguard-tools==${WIREGUARD_RELEASE} && \
   echo "wireguard" >> /etc/modules && \
-  sed -i 's|\[\[ $proto == -4 \]\] && cmd sysctl -q net\.ipv4\.conf\.all\.src_valid_mark=1|[[ $proto == -4 ]] \&\& [[ $(sysctl -n net.ipv4.conf.all.src_valid_mark) != 1 ]] \&\& cmd sysctl -q net.ipv4.conf.all.src_valid_mark=1|' /usr/bin/wg-quick && \
+  sed -i 's|\[\[ $proto == -4 \]\] && cmd sysctl -q net\.ipv4\.conf\.all\.src_valid_mark=1|[[ $proto == -4 ]] && [[ $(sysctl -n net.ipv4.conf.all.src_valid_mark) != 1 ]] && cmd sysctl -q net.ipv4.conf.all.src_valid_mark=1|' /usr/bin/wg-quick && \
   rm -rf /etc/wireguard && \
   ln -s /config/wg_confs /etc/wireguard && \
   echo "**** clean up ****" && \

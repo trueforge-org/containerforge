@@ -40,9 +40,9 @@ RUN \
     gstreamer1.0-plugins-base \
     gstreamer1.0-tools \
     imagemagick \
-    libjpeg62-turbo \
+    libjpeg-turbo8 \
     lame \
-    libffi7 \
+    libffi8 \
     libpng16-16 \
     mpg123 \
     libopenjp2-7 \

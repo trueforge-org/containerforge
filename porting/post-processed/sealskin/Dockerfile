@@ -10,10 +10,10 @@ ENV HOME=/config
 # install software
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --upgrade --virtual=build-dependencies \
+  apt-get update && apt-get install -y --no-install-recommends \
     zip && \
   echo "**** install packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     caddy \
     openssl \
   echo "**** install sealskin ****" && \
@@ -30,8 +30,7 @@ RUN \
   chown apps:apps /sealskin.zip && \
   chown apps:apps /storage && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.cache \
     /tmp/*

@@ -8,26 +8,24 @@ ENV MEMORY_LIMIT 512M
 
 
 RUN \
-  apt-get add --no-cache --virtual=build-dependencies \
+  apt-get update && apt-get install -y --no-install-recommends \
     bzip2 \
     gpg \
     gpg-agent && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     memcached \
-    php83-apcu \
-    php83-bcmath \
-    php83-dom \
-    php83-gd \
-    php83-gmp \
-    php83-intl \
-    php83-pecl-memcached \
-    php83-mysqli \
-    php83-pdo_mysql \
-    php83-redis \
-    php83-sodium \
-    php83-soap \
-    php83-tokenizer \
-    php83-xmlreader && \
+    php-apcu \
+    php8.3-bcmath \
+    php8.3-xml \
+    php8.3-gd \
+    php8.3-gmp \
+    php8.3-intl \
+    php-memcached \
+    php8.3-mysql \
+    php-redis \
+    php8.3-common \
+    php8.3-soap \
+    php8.3-xml && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \
   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && \
@@ -75,8 +73,7 @@ RUN \
     --no-dev \
     --no-interaction && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/*
 

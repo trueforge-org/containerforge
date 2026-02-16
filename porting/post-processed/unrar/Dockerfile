@@ -11,8 +11,8 @@ COPY data.rar /data.rar
 
 RUN \
   echo "**** install build dependencies ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base && \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential && \
   echo "**** install unrar from source ****" && \
   mkdir /tmp/unrar && \
   curl -o \
@@ -30,8 +30,7 @@ RUN \
   /usr/bin/unrar v /data.rar && \
   /usr/bin/unrar t /data.rar && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /root/.cache \
     /tmp/*

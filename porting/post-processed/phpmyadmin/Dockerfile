@@ -13,11 +13,11 @@ ENV MEMORY_LIMIT=512M
 ENV UPLOAD_LIMIT=8192K
 
 RUN \
-  apt-get add --no-cache --virtual=build-dependencies \
+  apt-get update && apt-get install -y --no-install-recommends \
     gpg \
     gpg-agent \
     gnupg-dirmngr && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     php84-bz2 \
     php84-dom \
     php84-gd \
@@ -73,8 +73,7 @@ RUN \
     /app/www/public/ --strip-components=1 && \
   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     /app/www/public/setup

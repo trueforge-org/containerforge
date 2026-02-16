@@ -4,13 +4,13 @@ FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
 
 RUN \
   echo "**** install packages ****" && \
-  apt-get add  --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     giflib \
     libgsf \
     nodejs \
     vips && \
-  apt-get add  --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     npm \
     py3-setuptools && \
   echo "**** install planka ****" && \
@@ -30,8 +30,7 @@ RUN \
   pnpm install --prod && \
   DISABLE_ESLINT_PLUGIN=true npm run build && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.cache \
     $HOME/.local \
@@ -50,7 +49,7 @@ COPY --from=buildstage /build/client/build /app/public/
 COPY --from=buildstage /build/client/build/index.html /app/views/index.ejs
 
 RUN \
-  apt-get add  --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     postgresql16-client && \
     echo "**** create symlinks ****" && \
     /bin/bash -c \

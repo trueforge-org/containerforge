@@ -19,7 +19,7 @@ RUN \
     zip \
     zlib1g-dev \
     file \
-    libjpeg62-turbo \
+    libjpeg-turbo8 \
     libxslt1.1 \
     nodejs \
     poppler-utils && \

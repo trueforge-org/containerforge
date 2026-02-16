@@ -8,11 +8,11 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache --upgrade \
+  apt-get update && apt-get install -y --no-install-recommends \
     logrotate \
     netcat-openbsd && \
   echo "**** install openssh-server ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     openssh-client==${VERSION} \
     openssh-server-pam==${VERSION} \
     openssh-sftp-server==${VERSION} && \

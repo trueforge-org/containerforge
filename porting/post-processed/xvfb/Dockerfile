@@ -7,8 +7,8 @@ ENV PATCH_VERSION=21 \
 
 RUN \
   echo "**** build deps ****" && \
-  apt-get add \
-    alpine-sdk 
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential 
 
 RUN \
   echo "**** setup abuild ****" && \

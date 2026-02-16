@@ -8,15 +8,15 @@ USER root
 
 RUN \
   echo "**** install build dependencies ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
-    jpeg-dev \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libjpeg-dev \
     libffi-dev \
     libwebp-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
-    jpeg \
+  apt-get update && apt-get install -y --no-install-recommends \
+    libjpeg-turbo8 \
     libwebp-tools \
     nodejs \
     zlib && \
@@ -34,8 +34,7 @@ RUN \
     wheel && \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /root/.cache \
     /tmp/*

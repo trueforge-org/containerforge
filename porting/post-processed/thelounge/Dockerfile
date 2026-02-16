@@ -11,11 +11,11 @@ ENV THELOUNGE_HOME="/config"
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     git && \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     yarn && \
   echo "**** download thelounge ****" && \
   mkdir -p \
@@ -35,8 +35,7 @@ RUN \
   yarn link && \
   yarn --non-interactive cache clean && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /root \
     /tmp/* && \

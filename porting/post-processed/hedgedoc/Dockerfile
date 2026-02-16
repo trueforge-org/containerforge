@@ -35,8 +35,7 @@ RUN \
   yarn workspaces focus --production && \
   echo "**** cleanup ****" && \
   yarn cache clean && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.npm \
     $HOME/.yarn \
