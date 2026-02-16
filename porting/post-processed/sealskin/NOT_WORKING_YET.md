@@ -17,5 +17,5 @@ This container remains in `/porting/post-processed` for now.
 ## AMD64 build check (2026-02-16 rerun)
 - Command: `docker build --progress=plain --platform linux/amd64 -t porting-sealskin:amd64 .`
 - Result: FAIL
-- Reason: 7.277 E: Unable to locate package **** install sealskin ****
+- Reason: Dockerfile is missing `&&` between `openssl` install and the next `echo`, so apt treats `echo`/`**** install sealskin ****` as package names.
 - Full log: `amd64-build.log`

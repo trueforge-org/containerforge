@@ -17,5 +17,5 @@ This container remains in `/porting/post-processed` for now.
 ## AMD64 build check (2026-02-16 rerun)
 - Command: `docker build --progress=plain --platform linux/amd64 -t porting-flexget:amd64 .`
 - Result: FAIL
-- Reason: 13.43 /bin/bash: line 1: $: command not found
+- Reason: Build command still contains unresolved `$SELECTION_PLACEHOLDER$`, which executes as `$` and fails with `/bin/bash: line 1: $: command not found`.
 - Full log: `amd64-build.log`
