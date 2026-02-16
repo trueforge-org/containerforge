@@ -1,10 +1,5 @@
-# duckdns: porting status
+# duckdns: migrated
 
-This container remains in `/porting/post-processed` for now.
+This container has been migrated to `/apps/duckdns` and now has build/test coverage there.
 
-## Why it is not marked working in `/apps` yet
-- Not yet migrated into `/apps`, so it is not covered by the normal app build/test workflow.
-- No app-specific `container-test.yaml` exists yet for CI runtime verification after migration.
-
-## Next step
-- Finish app-specific runtime validation and add `apps/<app>/container-test.yaml` before moving this container into `/apps`.
+The `/porting/post-processed/duckdns` copy is retained as generated porting output.
