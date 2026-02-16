@@ -1,6 +1,6 @@
 # Downstream Changes
 
-Base image version: `3.14.3`
+Base image version: `3.13.12`
 
 This update changes Python base-image runtime behavior to align with container policy:
 
@@ -13,7 +13,7 @@ This update changes Python base-image runtime behavior to align with container p
 
 For each path below, required change is:
 
-- **Required change:** No Dockerfile change required.
+- **Required change:** update dockerfile to  from 3.13.12@sha256:d0392caa927c7c5f3d2e75b31098faa3cebad8d7c311fe7dfd0d074270418422
 - **Runtime expectation change:** Do not rely on `/config/venv` being a symlink. Base image now provides a built-in venv at `/apps/venv` and restores `/config/venv` from it when `/config/venv` is missing/empty. Keep ephemeral caches/scratch data in `/tmp`.
 
 Affected paths:
