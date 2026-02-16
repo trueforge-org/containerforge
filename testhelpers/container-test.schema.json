@@ -2,36 +2,43 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://trueforge-org.github.io/containerforge/container-test.schema.json",
   "title": "Container test configuration",
+  "description": "Schema for apps/*/container-test.yaml consumed by testhelpers.RunChecksFromYAML. Define one or more check groups (http, tcp, commands, filePaths) for a container image.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "timeoutSeconds": {
       "type": "integer",
-      "minimum": 1
+      "minimum": 1,
+      "description": "Optional overall timeout for the full YAML check run in seconds. This wraps image pull/create, wait checks, file checks, and command checks. Values below 120 are accepted in YAML, but runtime enforces a 120-second minimum to avoid startup pull/create flakiness on larger images."
     },
     "http": {
       "type": "array",
+      "description": "HTTP readiness checks. Each item waits for TCP listening on the same port first, then performs an HTTP request and validates status code.",
       "items": {
         "$ref": "#/$defs/httpTestConfig"
       }
     },
     "tcp": {
       "type": "array",
+      "description": "TCP readiness checks. Each item waits for a TCP port to become reachable inside the started container.",
       "items": {
         "$ref": "#/$defs/tcpTestConfig"
       }
     },
     "commands": {
       "type": "array",
+      "description": "Command checks executed as `sh -c <command>`. Useful for validating binaries, versions, behavior, and optional output matching.",
       "items": {
         "$ref": "#/$defs/commandTestConfig"
       }
     },
     "filePaths": {
       "type": "array",
+      "description": "File existence checks. Each string is verified with `test -f` inside the container.",
       "items": {
         "type": "string",
-        "minLength": 1
+        "minLength": 1,
+        "description": "Absolute file path expected to exist in the container filesystem."
       }
     }
   },
@@ -59,6 +66,8 @@
   ],
   "$defs": {
     "httpTestConfig": {
+      "title": "HTTP test",
+      "description": "Configuration for a single HTTP readiness check.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -66,15 +75,19 @@
       ],
       "properties": {
         "port": {
-          "$ref": "#/$defs/nonEmptyString"
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Container port number to probe (string form, e.g. \"8123\")."
         },
         "path": {
           "type": "string",
-          "default": "/"
+          "default": "/",
+          "description": "HTTP path requested on the port. Defaults to `/` when omitted."
         }
       }
     },
     "tcpTestConfig": {
+      "title": "TCP test",
+      "description": "Configuration for a single TCP listening check.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -82,14 +95,18 @@
       ],
       "properties": {
         "port": {
-          "$ref": "#/$defs/nonEmptyString"
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Container port number to wait on (string form, e.g. \"8000\")."
         },
         "host": {
-          "$ref": "#/$defs/nonEmptyString"
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Reserved for compatibility with legacy configs. Runtime currently waits on container ports and does not use this field."
         }
       }
     },
     "commandTestConfig": {
+      "title": "Command test",
+      "description": "Configuration for a single command check executed as `sh -c <command>`.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -97,22 +114,27 @@
       ],
       "properties": {
         "command": {
-          "$ref": "#/$defs/nonEmptyString"
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Shell command to execute inside the container."
         },
         "expectedExitCode": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Expected command exit code. Runtime defaults to 0 when omitted."
         },
         "expectedContent": {
-          "type": "string"
+          "type": "string",
+          "description": "Expected substring in command output (container logs). Used only when matchContent is true."
         },
         "matchContent": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Enable substring matching against command output. When true, expectedContent must be present in output."
         }
       }
     },
     "nonEmptyString": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "String that must contain at least one character."
     }
   }
 }

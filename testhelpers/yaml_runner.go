@@ -10,6 +10,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+const minYAMLTimeoutSeconds = 120
+
 // ContainerTestYAML defines the struct-based container-test.yaml schema.
 //
 // Supported keys:
@@ -51,8 +53,14 @@ func RunChecksFromYAML(ctx context.Context, image string, yamlPath string, conta
 	}
 
 	if config.TimeoutSeconds > 0 {
+		effectiveTimeoutSeconds := config.TimeoutSeconds
+		if effectiveTimeoutSeconds < minYAMLTimeoutSeconds {
+			logWarn("timeoutSeconds=%d is very low for container startup; using minimum %d seconds", config.TimeoutSeconds, minYAMLTimeoutSeconds)
+			effectiveTimeoutSeconds = minYAMLTimeoutSeconds
+		}
+
 		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, time.Duration(config.TimeoutSeconds)*time.Second)
+		ctx, cancel = context.WithTimeout(ctx, time.Duration(effectiveTimeoutSeconds)*time.Second)
 		defer cancel()
 	}
 
