@@ -17,7 +17,7 @@ RUN \
     bison \
     build-essential \
     libconfuse-dev \
-    libcurl4-openssl-dev \
+    libcurl4-libssl-dev \
     libavcodec-dev \
     libavformat-dev \
     libavutil-dev \

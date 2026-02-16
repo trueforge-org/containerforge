@@ -10,14 +10,13 @@ ENV HOME="/app"
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base && \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential && \
   echo "**** install SyncLounge ****" && \
   npm install -g --omit=dev synclounge@"$VERSION" && \
   npm prune --omit=dev && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.cache \
     /tmp/*

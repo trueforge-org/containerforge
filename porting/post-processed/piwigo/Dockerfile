@@ -8,27 +8,27 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     exiftool \
     ffmpeg \
     imagemagick \
-    imagemagick-heic \
-    libjpeg-turbo-utils \
+    libheif1 \
+    libjpeg-turbo-progs \
     mediainfo \
-    php83-apcu \
-    php83-cgi \
-    php83-ctype \
-    php83-curl \
-    php83-dom \
-    php83-exif \
-    php83-gd \
-    php83-ldap \
-    php83-mysqli \
-    php83-mysqlnd \
-    php83-pear \
-    php83-pecl-imagick \
-    php83-xsl \
-    php83-zip \
+    php-apcu \
+    php8.3-cgi \
+    php8.3-common \
+    php8.3-curl \
+    php8.3-xml \
+    php8.3-exif \
+    php8.3-gd \
+    php8.3-ldap \
+    php8.3-mysql \
+    php8.3-mysql \
+    php-pear \
+    php-imagick \
+    php8.3-xsl \
+    php8.3-zip \
     poppler-utils \
     re2c && \
   echo "**** modify php-fpm process limits ****" && \

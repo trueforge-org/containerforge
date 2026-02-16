@@ -8,17 +8,17 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     perl-app-cpanminus \
     perl-dev && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     apache2 \
     apache2-ctl \
     apache2-utils \
     apache-mod-fcgid \
     bc \
-    bind-tools \
+    dnsutils \
     font-noto-cjk \
     irtt \
     openssh-client \
@@ -44,8 +44,7 @@ RUN \
   echo "**** fix path to cropper.js ****" && \
   sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html && \
   echo "**** Cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     /root/.cpanm \

@@ -9,7 +9,7 @@ ENV HOME="/config"
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache --upgrade \
+  apt-get update && apt-get install -y --no-install-recommends \
     openssl && \
   echo "**** install app ****" && \
   mkdir -p \
@@ -27,8 +27,7 @@ RUN \
   echo "**** cleanup ****" && \
   rm -rf /app/mstream/save/sync && \
   ln -s /config/sync /app/mstream/save/sync && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     $HOME/.cache \
     $HOME/.npm \

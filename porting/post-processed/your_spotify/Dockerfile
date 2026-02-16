@@ -8,8 +8,8 @@ USER root
 
 RUN \
   echo "**** install buildstage packages ****" && \
-  apt-get -U --update --no-cache add --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     cmake \
     npm \
     python3-dev \
@@ -63,12 +63,12 @@ COPY --from=buildserver /app/www/apps/server/package.json /app/www/apps/server/p
 USER root
 RUN \
   echo "**** install build packages ****" && \
-  apt-get -U --update --no-cache add --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     cmake \
     python3-dev && \
   echo "**** install runtime packages ****" && \
-  apt-get add -U --update --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     nodejs \
     npm \
     yarn && \
@@ -78,8 +78,7 @@ RUN \
   yarn cache clean && \
   npm install -g serve && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     $HOME/.cache \

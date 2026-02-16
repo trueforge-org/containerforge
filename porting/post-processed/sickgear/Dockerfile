@@ -11,8 +11,8 @@ ENV PYTHONIOENCODING="UTF-8"
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base && \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential && \
   echo "**** install app ****" && \
   mkdir -p \
     /app/sickgear/ && \
@@ -30,8 +30,7 @@ RUN \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r recommended.txt && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     /root/.cache

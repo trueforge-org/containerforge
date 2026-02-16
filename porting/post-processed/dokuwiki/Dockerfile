@@ -14,13 +14,13 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     imagemagick \
-    php8.4-bz2 \
-    php8.4-dom \
-    php8.4-gd \
-    php8.4-ldap \
-    php8.4-mysql \
-    php8.4-pgsql \
-    php8.4-sqlite3 \
+    php8.3-bz2 \
+    php8.3-dom \
+    php8.3-gd \
+    php8.3-ldap \
+    php8.3-mysql \
+    php8.3-pgsql \
+    php8.3-sqlite3 \
     php-imagick && \
   echo "**** install dokuwiki ****" && \
   curl -o \

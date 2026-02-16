@@ -4,8 +4,8 @@ FROM ghcr.io/trueforge-org/golang:rolling as buildstage
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     go
 
 RUN \

@@ -8,14 +8,14 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     findutils \
     git \
     nodejs \
     sudo && \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     npm && \
   echo "**** install Pylon ****" && \
   mkdir -p \
@@ -32,8 +32,7 @@ RUN \
   echo "**** install node modules ****" && \
   npm install --prefix /app/pylon && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /root \
     /tmp/* && \

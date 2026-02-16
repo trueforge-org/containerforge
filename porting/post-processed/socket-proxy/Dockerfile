@@ -9,9 +9,9 @@ USER root
 # install packages
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     haproxy==${VERSION} && \
-  apt-get del --no-cache \
+  apt-get remove -y --purge \
     curl && \
   rm -rf \
     /etc/haproxy \

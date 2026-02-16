@@ -10,7 +10,7 @@ RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         busybox \
-        libnginx-mod-http-brotli \
+        libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static \
         php8.3-fpm \
         php8.3-common \
         php8.3-xml \

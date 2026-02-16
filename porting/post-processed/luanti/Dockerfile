@@ -48,7 +48,7 @@ RUN \
     apt-get install -y --no-install-recommends \
         libgmp10 \
         libhiredis0.14 \
-        libleveldb1 \
+        libleveldb1d \
         libgcc-s1 \
         libpq5 \
         libstdc++6 \

@@ -11,21 +11,21 @@ ENV \
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     libdvbcsa-dev \
-    libusb-dev \
-    linux-headers \
-    openssl-dev \
-    pcsc-lite-dev && \
+    libusb-1.0-0-dev \
+    linux-headers-generic \
+    libssl-dev \
+    libpcsclite-dev && \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
-    ccid \
-    libdvbcsa \
-    libusb \
+  apt-get update && apt-get install -y --no-install-recommends \
+    libccid \
+    libdvbcsa1 \
+    libusb-1.0-0 \
     openssl \
-    pcsc-lite \
-    pcsc-lite-libs && \
+    pcscd \
+    libpcsclite1 && \
   echo "**** compile oscam ****" && \
   mkdir -p /tmp/oscam && \
   curl -o \
@@ -74,8 +74,7 @@ RUN \
   groupmod -g 16 dialout && \
   usermod -a -G 16 apps && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/*
 

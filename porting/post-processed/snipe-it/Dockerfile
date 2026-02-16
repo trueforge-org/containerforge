@@ -8,21 +8,21 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     libxml2 \
     mariadb-client \
-    php83-bcmath \
-    php83-exif \
-    php83-gd \
-    php83-ldap \
-    php83-pdo_mysql \
-    php83-pdo_sqlite \
-    php83-pecl-redis \
-    php83-sodium \
-    php83-sqlite3 \
-    php83-tokenizer \
-    php83-xmlreader \
-    php83-pecl-mcrypt && \
+    php8.3-bcmath \
+    php8.3-exif \
+    php8.3-gd \
+    php8.3-ldap \
+    php8.3-mysql \
+    php8.3-sqlite3 \
+    php-redis \
+    php8.3-common \
+    php8.3-sqlite3 \
+    php8.3-common \
+    php8.3-xml \
+    php-mcrypt && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \
   grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && \

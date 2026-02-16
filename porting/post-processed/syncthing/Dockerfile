@@ -4,8 +4,8 @@ FROM ghcr.io/trueforge-org/golang:rolling@sha256:ac65e5c170bd1414782d964689f53a0
 
 RUN \
  echo "**** install build packages ****" && \
-  apt-get add --no-cache \
-    build-base
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential
 
 RUN \
   echo "**** fetch source code ****" && \

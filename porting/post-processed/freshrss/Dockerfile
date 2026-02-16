@@ -10,18 +10,18 @@ RUN \
     echo "**** install runtime packages ****" && \
     apt-get update && \
     apt-get install -y \
-        php8.4-xml \
-        php8.4-exif \
-        php8.4-gmp \
-        php8.4-intl \
-        php8.4-mysql \
-        php8.4-pgsql \
-        php8.4-sqlite3 \
+        php8.3-xml \
+        php8.3-exif \
+        php8.3-gmp \
+        php8.3-intl \
+        php8.3-mysql \
+        php8.3-pgsql \
+        php8.3-sqlite3 \
         sqlite3 && \
     echo "**** configure php-fpm to pass env vars ****" && \
-    sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.4/fpm/pool.d/www.conf && \
-    if ! grep -qxF 'clear_env = no' /etc/php/8.4/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.4/fpm/pool.d/www.conf; fi && \
-    echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.4/fpm/php-fpm.conf && \
+    sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
+    if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
+    echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
     echo "**** install app ****" && \
     mkdir -p \
         /app/www && \

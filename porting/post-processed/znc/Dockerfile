@@ -8,17 +8,17 @@ ENV MAKEFLAGS="-j4"
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add -U --update --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     argon2-dev \
     autoconf \
     automake \
-    boost-dev\
-    build-base \
+    libboost-dev\
+    build-essential \
     c-ares-dev \
-    cyrus-sasl-dev \
-    gettext-dev \
-    icu-dev \
-    openssl-dev \
+    libsasl2-dev \
+    gettext \
+    libicu-dev \
+    libssl-dev \
     perl-dev \
     python3-dev \
     swig \
@@ -95,7 +95,7 @@ USER root
 RUN \
   echo "**** install runtime packages ****" && \
   RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
-  apt-get add -U --update --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     ${RUNTIME_PACKAGES} && \
 # copy local files
 USER apps

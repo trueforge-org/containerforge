@@ -16,7 +16,7 @@ RUN \
         ffmpeg \
         file \
         libpq5 \
-        libidn11 \
+        libidn12 \
         ruby \
         bundler \
         rdoc \
@@ -25,7 +25,7 @@ RUN \
         libyaml-0-2 && \
     apt-get install -y --no-install-recommends \
         build-essential \
-        libidn11-dev \
+        libidn-dev \
         libpq-dev \
         libxml2-dev \
         libxslt1-dev \
@@ -64,7 +64,7 @@ RUN \
     yarn cache clean && \
     apt-get purge -y --auto-remove \
         build-essential \
-        libidn11-dev \
+        libidn-dev \
         libpq-dev \
         libxml2-dev \
         libxslt1-dev \

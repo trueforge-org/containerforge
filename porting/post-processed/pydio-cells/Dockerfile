@@ -8,9 +8,9 @@ ENV \
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
-    go \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    golang-go \
     openssl && \
   echo "**** fetch source code ****" && \
   mkdir -p \
@@ -30,8 +30,7 @@ RUN \
     -X github.com/pydio/cells/v4/common.BuildRevision=v${VERSION}" \
     -o /app/cells -x . && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     "${HOME}"/.cache \
@@ -51,8 +50,8 @@ ENV \
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
-    openssl && \
+  apt-get update && apt-get install -y --no-install-recommends \
+    openssl
 COPY --from=buildstage /app/cells /app/
 
 USER apps

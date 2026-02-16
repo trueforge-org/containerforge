@@ -15,21 +15,21 @@ ARG LDFLAGS="-lintl"
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     bzip2-dev \
     cmake \
-    curl-dev \
+    libcurl4-libssl-dev \
     doxygen \
-    gettext-dev \
-    gmp-dev \
+    gettext \
+    libgmp-dev \
     hiredis-dev \
-    icu-dev \
-    leveldb-dev \
+    libicu-dev \
+    libleveldb-dev \
     libjpeg-turbo-dev \
     libogg-dev \
     libpng-dev \
-    openssl-dev \
+    libssl-dev \
     libtool \
     libvorbis-dev \
     libxi-dev \
@@ -43,10 +43,10 @@ RUN \
     sqlite-dev \
     zstd-dev && \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache \
+  apt-get update && apt-get install -y --no-install-recommends \
     gmp \
     hiredis \
-    leveldb \
+    libleveldb1d \
     libgcc \
     libintl \
     libpq \
@@ -136,8 +136,7 @@ RUN \
     /defaults/games && \
   cp -pr  /tmp/minetest/games/* /defaults/games/ && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/*
 

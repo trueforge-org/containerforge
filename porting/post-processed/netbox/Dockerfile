@@ -8,19 +8,19 @@ USER root
 
 RUN \
   echo "**** install build packages ****" && \
-  apt-get add --no-cache --upgrade --virtual=build-dependencies \
-    build-base \
+  apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     cargo \
-    jpeg-dev \
+    libjpeg-dev \
     libffi-dev \
     libxslt-dev \
     libxml2-dev \
     openldap-dev \
-    openssl-dev \
+    libssl-dev \
     postgresql-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
-  apt-get add --no-cache --upgrade \
+  apt-get update && apt-get install -y --no-install-recommends \
     libldap \
     postgresql-client \
     tiff \
@@ -43,8 +43,7 @@ RUN \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
   pip install --no-cache-dir  django-auth-ldap && \
   echo "**** cleanup ****" && \
-  apt-get del --purge \
-    build-dependencies && \
+  apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
     ${HOME}/.cargo \
