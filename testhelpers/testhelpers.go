@@ -47,6 +47,8 @@ func runContainer(t *testing.T, ctx context.Context, image string, opts ...testc
 	t.Helper()
 
 	configDir := t.TempDir()
+	// Ensure the mounted directory is accessible by UID 568 inside the container.
+	PrepareConfigDir(t, configDir)
 	opts = append([]testcontainers.ContainerCustomizer{
 		testcontainers.WithMounts(
 			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
@@ -71,7 +73,7 @@ func assertExitZero(t *testing.T, ctx context.Context, c testcontainers.Containe
 type HTTPTestConfig struct {
 	Port              string
 	Path              string
-	StatusCode        int           // Used when StatusCodeMatcher is nil.
+	StatusCode        int            // Used when StatusCodeMatcher is nil.
 	StatusCodeMatcher func(int) bool // Takes precedence over StatusCode when provided.
 }
 
@@ -129,4 +131,16 @@ func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, config
 
 	container := runContainer(t, ctx, image, opts...)
 	assertExitZero(t, ctx, container, fmt.Sprintf("command '%s' should succeed", strings.Join(command, " ")))
+}
+
+// PrepareConfigDir attempts to chown the directory to UID:GID 568:568.
+// If chown fails (non-root runner), it falls back to making the directory world-writable.
+func PrepareConfigDir(t *testing.T, dir string) {
+	t.Helper()
+	if err := os.Chown(dir, 568, 568); err != nil {
+		t.Logf("chown %s to 568:568 failed: %v; falling back to chmod 0777", dir, err)
+		if err := os.Chmod(dir, 0o777); err != nil {
+			t.Fatalf("failed to set permissions on %s: %v", dir, err)
+		}
+	}
 }

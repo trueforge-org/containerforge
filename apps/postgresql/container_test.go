@@ -37,6 +37,7 @@ func Test(t *testing.T) {
 	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/postgresql:rolling")
 
 	configDir := t.TempDir()
+	testhelpers.PrepareConfigDir(t, configDir)
 
 	app, err := testcontainers.Run(
 		ctx, image,

@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
@@ -22,6 +23,7 @@ func Test(t *testing.T) {
 	}
 
 	configDir := t.TempDir()
+	testhelpers.PrepareConfigDir(t, configDir)
 
 	app, err := testcontainers.Run(
 		ctx, image,

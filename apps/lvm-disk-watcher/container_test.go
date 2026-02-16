@@ -17,6 +17,7 @@ func Test(t *testing.T) {
 	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/lvm-disk-watcher:rolling")
 
 	configDir := t.TempDir()
+	testhelpers.PrepareConfigDir(t, configDir)
 
 	app, err := testcontainers.Run(
 		ctx, image,
