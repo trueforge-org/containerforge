@@ -9,3 +9,8 @@ This container remains in `/porting/post-processed` for now.
 
 ## Next step
 - Finish app-specific runtime validation and add `apps/<app>/container-test.yaml` before moving this container into `/apps`.
+
+## AMD64 build check (2026-02-16)
+- Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: E: Unable to locate package libdigest-sha1-perl

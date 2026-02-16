@@ -8,3 +8,8 @@ This container remains in `/porting/post-processed` for now.
 
 ## Next step
 - Finish app-specific runtime validation and add `apps/<app>/container-test.yaml` before moving this container into `/apps`.
+
+## AMD64 build check (2026-02-16)
+- Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fbaseimage-kasmvnc%3Apull&service=ghcr.io: 403 Forbidden
