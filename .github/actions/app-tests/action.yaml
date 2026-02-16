@@ -45,12 +45,7 @@ runs:
       env:
         APP: ${{ inputs.app }}
         TEST_IMAGE: ${{ inputs.image }}
-<<<<<<< copilot/remove-test-backend-go
-      run: |-
-        forgetool container test --config "./apps/${APP}/container-test.yaml"
-=======
         VERSION: ${{ inputs.version }}
         TESTHELPERS_CONTAINER_LOGS: all
       run: |-
-        go run ./cmd/run-yaml-tests --image "${TEST_IMAGE}" --yaml "./apps/${APP}/container-test.yaml"
->>>>>>> main
+        forgetool container test --image "${TEST_IMAGE}" --config "./apps/${APP}/container-test.yaml"
