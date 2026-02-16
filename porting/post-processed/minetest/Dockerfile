@@ -15,7 +15,7 @@ ARG LDFLAGS="-lintl"
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     bzip2-dev \
     cmake \
@@ -43,7 +43,7 @@ RUN \
     sqlite-dev \
     zstd-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     gmp \
     hiredis \
     leveldb \
@@ -136,7 +136,7 @@ RUN \
     /defaults/games && \
   cp -pr  /tmp/minetest/games/* /defaults/games/ && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/*

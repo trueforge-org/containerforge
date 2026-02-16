@@ -7,7 +7,7 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apk add -U --upgrade --no-cache \
+  apt-get add -U --upgrade --no-cache \
     libdbi-drivers \
     paho-mqtt-c \
     syslog-ng==${VERSION} \

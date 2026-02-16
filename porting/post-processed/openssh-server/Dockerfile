@@ -8,11 +8,11 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache --upgrade \
+  apt-get add --no-cache --upgrade \
     logrotate \
     netcat-openbsd && \
   echo "**** install openssh-server ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     openssh-client==${VERSION} \
     openssh-server-pam==${VERSION} \
     openssh-sftp-server==${VERSION} && \

@@ -9,11 +9,11 @@ ENV MEMORY_LIMIT 512M
 
 
 RUN \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     bzip2 \
     gpg \
     gpg-agent && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     memcached \
     php83-apcu \
     php83-bcmath \
@@ -76,7 +76,7 @@ RUN \
     --no-dev \
     --no-interaction && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/*

@@ -11,7 +11,7 @@ COPY data.rar /data.rar
 
 RUN \
   echo "**** install build dependencies ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base && \
   echo "**** install unrar from source ****" && \
   mkdir /tmp/unrar && \
@@ -30,7 +30,7 @@ RUN \
   /usr/bin/unrar v /data.rar && \
   /usr/bin/unrar t /data.rar && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /root/.cache \

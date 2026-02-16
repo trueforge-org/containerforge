@@ -8,14 +8,14 @@ USER root
 
 RUN \
   echo "**** install build dependencies ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     jpeg-dev \
     libffi-dev \
     libwebp-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     jpeg \
     libwebp-tools \
     nodejs \
@@ -34,7 +34,7 @@ RUN \
     wheel && \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /root/.cache \

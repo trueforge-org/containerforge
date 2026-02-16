@@ -8,7 +8,7 @@ ENV MAKEFLAGS="-j4"
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add -U --update --no-cache \
+  apt-get add -U --update --no-cache \
     argon2-dev \
     autoconf \
     automake \
@@ -74,7 +74,7 @@ RUN \
   scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
     | sort -u \
-    | xargs -r apk info --installed \
+    | xargs -r apt-get info --installed \
     | sort -u \
     >> /tmp/znc/packages
 ############## runtime stage ##############
@@ -95,7 +95,7 @@ USER root
 RUN \
   echo "**** install runtime packages ****" && \
   RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
-  apk add -U --update --no-cache \
+  apt-get add -U --update --no-cache \
     ${RUNTIME_PACKAGES} && \
 # copy local files
 USER apps

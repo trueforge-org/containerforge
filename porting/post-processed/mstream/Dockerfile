@@ -10,7 +10,7 @@ ENV HOME="/config"
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache --upgrade \
+  apt-get add --no-cache --upgrade \
     openssl && \
   echo "**** install app ****" && \
   mkdir -p \
@@ -28,7 +28,7 @@ RUN \
   echo "**** cleanup ****" && \
   rm -rf /app/mstream/save/sync && \
   ln -s /config/sync /app/mstream/save/sync && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     $HOME/.cache \

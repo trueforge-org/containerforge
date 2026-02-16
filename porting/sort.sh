@@ -1,4 +1,4 @@
-mkdir -p ./denied-apk ./denied-from ./denied-root ./good ./denied-dockerlines ./denied-startlines
+mkdir -p ./denied-apt-get ./denied-from ./denied-root ./good ./denied-dockerlines ./denied-startlines
 
 for dir in ./post-processed/*/; do
     startlines=0
@@ -6,8 +6,8 @@ for dir in ./post-processed/*/; do
     [ -f "$dir/start.sh" ] && startlines=$(wc -l < "$dir/start.sh")
     [ -f "$dir/Dockerfile" ] && dockerlines=$(wc -l < "$dir/Dockerfile")
 
-    if [ -f "$dir/Dockerfile" ] && grep -q "apk " "$dir/Dockerfile"; then
-        mv "$dir" ./denied-apk/
+    if [ -f "$dir/Dockerfile" ] && grep -q "apt-get " "$dir/Dockerfile"; then
+        mv "$dir" ./denied-apt-get/
     elif [ -f "$dir/Dockerfile" ] && grep -q "FROM ghcr.io/linuxserver/" "$dir/Dockerfile"; then
         mv "$dir" ./denied-from/
     elif [ -d "$dir/root" ]; then

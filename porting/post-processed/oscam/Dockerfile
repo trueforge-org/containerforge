@@ -11,7 +11,7 @@ ENV \
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     libdvbcsa-dev \
     libusb-dev \
@@ -19,7 +19,7 @@ RUN \
     openssl-dev \
     pcsc-lite-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     ccid \
     libdvbcsa \
     libusb \
@@ -74,7 +74,7 @@ RUN \
   groupmod -g 16 dialout && \
   usermod -a -G 16 apps && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/*

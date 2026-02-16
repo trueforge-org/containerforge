@@ -21,7 +21,7 @@ COPY --from=piconsstage /picons.tar.bz2 /picons.tar.bz2
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     autoconf \
     automake \
     bsd-compat-headers \
@@ -155,7 +155,7 @@ ENV HOME="/config"
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     bsd-compat-headers \
     ffmpeg \
     ffmpeg4-libavcodec \

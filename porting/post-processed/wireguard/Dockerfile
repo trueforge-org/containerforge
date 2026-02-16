@@ -9,11 +9,11 @@ ARG WIREGUARD_RELEASE
 
 RUN \
   if [ -z ${WIREGUARD_RELEASE+x} ]; then \
-  WIREGUARD_RELEASE=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APKINDEX.tar.gz" | tar -xz -C /tmp \
-    && awk '/^P:wireguard-tools$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
+  WIREGUARD_RELEASE=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.22/main/$TARGETARCH/APTINDEX.tar.gz" | tar -xz -C /tmp \
+    && awk '/^P:wireguard-tools$/,/V:/' /tmp/APTINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   echo "**** install dependencies ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     bc \
     coredns \
     iproute2 \

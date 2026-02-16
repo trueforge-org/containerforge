@@ -8,7 +8,7 @@ USER root
 ENV HOME=/config
 
 RUN \
-  apk add --no-cache \
+  apt-get add --no-cache \
     grep \
     php84-gd \
     php84-intl \
@@ -62,7 +62,7 @@ RUN \
     echo 'variables_order = EGPCS'; \
   } > /etc/php84/conf.d/php-misc.ini && \
   echo "**** cleanup ****" && \
-  apk del --purge build-dependencies && \
+  apt-get del --purge build-dependencies && \
   rm -rf \
     $HOME/.cache \
     $HOME/.npm \

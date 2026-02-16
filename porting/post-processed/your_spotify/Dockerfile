@@ -8,7 +8,7 @@ USER root
 
 RUN \
   echo "**** install buildstage packages ****" && \
-  apk -U --update --no-cache add --virtual=build-dependencies \
+  apt-get -U --update --no-cache add --virtual=build-dependencies \
     build-base \
     cmake \
     npm \
@@ -63,12 +63,12 @@ COPY --from=buildserver /app/www/apps/server/package.json /app/www/apps/server/p
 USER root
 RUN \
   echo "**** install build packages ****" && \
-  apk -U --update --no-cache add --virtual=build-dependencies \
+  apt-get -U --update --no-cache add --virtual=build-dependencies \
     build-base \
     cmake \
     python3-dev && \
   echo "**** install runtime packages ****" && \
-  apk add -U --update --no-cache \
+  apt-get add -U --update --no-cache \
     nodejs \
     npm \
     yarn && \
@@ -78,7 +78,7 @@ RUN \
   yarn cache clean && \
   npm install -g serve && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/* \

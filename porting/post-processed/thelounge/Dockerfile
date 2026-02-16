@@ -11,11 +11,11 @@ ENV THELOUNGE_HOME="/config"
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     git && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     yarn && \
   echo "**** download thelounge ****" && \
   mkdir -p \
@@ -35,7 +35,7 @@ RUN \
   yarn link && \
   yarn --non-interactive cache clean && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /root \

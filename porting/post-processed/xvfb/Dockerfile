@@ -2,12 +2,12 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f87
 
 COPY /patches /patches
 ENV PATCH_VERSION=21 \
-    APK_BRANCH=3.22-stable \
+    APT_BRANCH=3.22-stable \
     HOME=/config
 
 RUN \
   echo "**** build deps ****" && \
-  apk add \
+  apt-get add \
     alpine-sdk 
 
 RUN \
@@ -16,11 +16,11 @@ RUN \
   abuild-keygen --install -n 
 
 RUN \
-  echo "**** get and build apkbuild ****" && \
+  echo "**** get and build apt-get build ****" && \
   abuild-keygen -a -n && \
   git clone \
     --depth 1 \
-    --branch ${APK_BRANCH} \
+    --branch ${APT_BRANCH} \
     https://gitlab.alpinelinux.org/alpine/aports.git && \
   cd aports/community/xorg-server/ && \
   cp \
@@ -28,12 +28,12 @@ RUN \
     patch.patch && \
   sed -i \
     's|\.tar\.xz"|\.tar\.xz\npatch.patch"|' \
-    APKBUILD && \
+    APTBUILD && \
   sed -i \
     '/^sha512sums="/,/"$/{ s|\(  .*\.tar\.xz\)|\1\n'"$(sha512sum patch.patch)"'|; }' \
-    APKBUILD && \
+    APTBUILD && \
   abuild -F -r || : && \
-  tar -xf /config/packages/community/*/xvfb*.apk && \
+  tar -xf /config/packages/community/*/xvfb*.apt-get && \
   mkdir -p /build-out/usr/bin && \
   mv usr/bin/Xvfb /build-out/usr/bin/
 

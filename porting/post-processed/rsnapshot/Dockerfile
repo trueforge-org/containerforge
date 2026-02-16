@@ -8,7 +8,7 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     openssh \
     rsnapshot==${VERSION} \
     rsync && \

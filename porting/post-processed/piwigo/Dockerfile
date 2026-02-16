@@ -8,7 +8,7 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     exiftool \
     ffmpeg \
     imagemagick \

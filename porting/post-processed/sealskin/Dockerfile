@@ -10,10 +10,10 @@ ENV HOME=/config
 # install software
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --upgrade --virtual=build-dependencies \
+  apt-get add --no-cache --upgrade --virtual=build-dependencies \
     zip && \
   echo "**** install packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     caddy \
     openssl \
   echo "**** install sealskin ****" && \
@@ -30,7 +30,7 @@ RUN \
   chown apps:apps /sealskin.zip && \
   chown apps:apps /storage && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     $HOME/.cache \

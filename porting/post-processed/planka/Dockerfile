@@ -5,12 +5,12 @@ FROM ghcr.io/trueforge-org/python:rolling@sha256:ee0d6169d1276e97acbc5d2d7717702
 
 RUN \
   echo "**** install packages ****" && \
-  apk add  --no-cache \
+  apt-get add  --no-cache \
     giflib \
     libgsf \
     nodejs \
     vips && \
-  apk add  --no-cache --virtual=build-dependencies \
+  apt-get add  --no-cache --virtual=build-dependencies \
     build-base \
     npm \
     py3-setuptools && \
@@ -31,7 +31,7 @@ RUN \
   pnpm install --prod && \
   DISABLE_ESLINT_PLUGIN=true npm run build && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     $HOME/.cache \
@@ -52,7 +52,7 @@ COPY --from=buildstage /build/client/build /app/public/
 COPY --from=buildstage /build/client/build/index.html /app/views/index.ejs
 
 RUN \
-  apk add  --no-cache \
+  apt-get add  --no-cache \
     postgresql16-client && \
     echo "**** create symlinks ****" && \
     /bin/bash -c \
