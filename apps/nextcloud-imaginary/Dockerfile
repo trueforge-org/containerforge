@@ -3,6 +3,8 @@ FROM ghcr.io/trueforge-org/golang:1.25.7@sha256:e6bde907a745d8f7a3efccf46d172631
 
 ARG IMAGINARY_COMMIT=b632dae8cc321452c3f85bcae79c580b1ae1ed84
 
+USER root
+
 RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
