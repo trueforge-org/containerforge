@@ -23,16 +23,16 @@ if [[ -n "${CONFIG_FILE}" ]] && [[ ! -e "${CONFIG_FILE}" ]]; then
     echo "No config file found at ${CONFIG_FILE}, halting init."
 fi
 
-if { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--time|-t)([\s])'; } && { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; }; then
+if { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--run|-r)([\s]|$)'; } && { echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; }; then
     exec \
          python3 /app/kometa/kometa.py "${CLI_OPTIONS[@]}"
-elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--time|-t)([\s])'; then
+elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--run|-r)([\s]|$)'; then
     exec \
          python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
 elif echo "${CLI_OPTIONS[@]}" | grep -qPo '([\s]|^)(--config|-c)([\s])(.+\/[^\/]+)\.(yml|yaml)'; then
     exec \
-         python3 /app/kometa/kometa.py --time "${KOMETA_TIME:-03:00}" "${CLI_OPTIONS[@]}"
+         python3 /app/kometa/kometa.py --run "${CLI_OPTIONS[@]}"
 else
     exec \
-         python3 /app/kometa/kometa.py --config "${CONFIG_FILE}" --time "${KOMETA_TIME:-03:00}" "${CLI_OPTIONS[@]}"
+         python3 /app/kometa/kometa.py --run --config "${CONFIG_FILE}" "${CLI_OPTIONS[@]}"
 fi
