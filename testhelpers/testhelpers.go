@@ -7,7 +7,6 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"testing"
 	"time"
 
 	"github.com/docker/go-connections/nat"
@@ -300,6 +299,7 @@ type TCPTestConfig struct {
 
 // CommandTestConfig holds optional configuration for command checks.
 type CommandTestConfig struct {
+	Command          string
 	ExpectedExitCode int
 	ExpectedContent  string
 	MatchContent     bool
@@ -451,6 +451,24 @@ func CheckFileExists(ctx context.Context, image string, filePath string, config 
 	return CheckCommandSucceeds(ctx, image, config, "test", "-f", filePath)
 }
 
+// CheckFilesExist verifies that all provided files exist in the container.
+func CheckFilesExist(ctx context.Context, image string, filePaths []string, config *ContainerConfig) error {
+	if len(filePaths) == 0 {
+		return fmt.Errorf("at least one file path must be provided")
+	}
+
+	for index, filePath := range filePaths {
+		if strings.TrimSpace(filePath) == "" {
+			return fmt.Errorf("file check #%d missing file path", index+1)
+		}
+		if err := CheckFileExists(ctx, image, filePath, config); err != nil {
+			return fmt.Errorf("file check #%d failed: %w", index+1, err)
+		}
+	}
+
+	return nil
+}
+
 // CheckCommand verifies that a command runs with optional expected exit code and output content checks.
 func CheckCommand(ctx context.Context, image string, containerConfig *ContainerConfig, commandConfig *CommandTestConfig, entrypoint string, args ...string) (err error) {
 	expectedExitCode := 0
@@ -519,55 +537,27 @@ func CheckCommand(ctx context.Context, image string, containerConfig *ContainerC
 	return nil
 }
 
+// CheckCommands verifies that all provided commands pass using the command backend checks.
+func CheckCommands(ctx context.Context, image string, containerConfig *ContainerConfig, commands []CommandTestConfig) error {
+	if len(commands) == 0 {
+		return fmt.Errorf("at least one command must be provided")
+	}
+
+	for index, command := range commands {
+		if strings.TrimSpace(command.Command) == "" {
+			return fmt.Errorf("command check #%d missing command", index+1)
+		}
+
+		commandConfig := command
+		if err := CheckCommand(ctx, image, containerConfig, &commandConfig, "sh", "-c", command.Command); err != nil {
+			return fmt.Errorf("command check #%d failed: %w", index+1, err)
+		}
+	}
+
+	return nil
+}
+
 // CheckCommandSucceeds verifies that a command runs successfully in the container (exit code 0).
 func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) error {
 	return CheckCommand(ctx, image, config, nil, entrypoint, args...)
-}
-
-// TestHTTPEndpoint runs an HTTP endpoint check and fails the test on error.
-func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfig HTTPTestConfig, containerConfig *ContainerConfig) {
-	t.Helper()
-	if err := CheckHTTPEndpoint(ctx, image, httpConfig, containerConfig); err != nil {
-		t.Fatalf("HTTP endpoint check failed: %v", err)
-	}
-}
-
-// TestTCPListening runs a TCP listening check and fails the test on error.
-func TestTCPListening(t *testing.T, ctx context.Context, image string, port string, containerConfig *ContainerConfig) {
-	t.Helper()
-	if err := CheckTCPListening(ctx, image, port, containerConfig); err != nil {
-		t.Fatalf("TCP listening check failed: %v", err)
-	}
-}
-
-// TestWaits runs combined HTTP/TCP waits and fails the test on error.
-func TestWaits(t *testing.T, ctx context.Context, image string, httpConfigs []HTTPTestConfig, tcpConfigs []TCPTestConfig, containerConfig *ContainerConfig) {
-	t.Helper()
-	if err := CheckWaits(ctx, image, httpConfigs, tcpConfigs, containerConfig); err != nil {
-		t.Fatalf("wait checks failed: %v", err)
-	}
-}
-
-// TestFileExists runs a file existence check and fails the test on error.
-func TestFileExists(t *testing.T, ctx context.Context, image string, filePath string, containerConfig *ContainerConfig) {
-	t.Helper()
-	if err := CheckFileExists(ctx, image, filePath, containerConfig); err != nil {
-		t.Fatalf("file existence check failed: %v", err)
-	}
-}
-
-// TestCommandSucceeds runs a command check and fails the test on error.
-func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, containerConfig *ContainerConfig, entrypoint string, args ...string) {
-	t.Helper()
-	if err := CheckCommandSucceeds(ctx, image, containerConfig, entrypoint, args...); err != nil {
-		t.Fatalf("command check failed: %v", err)
-	}
-}
-
-// TestCommand runs a command check with optional expected exit code and output content checks.
-func TestCommand(t *testing.T, ctx context.Context, image string, containerConfig *ContainerConfig, commandConfig *CommandTestConfig, entrypoint string, args ...string) {
-	t.Helper()
-	if err := CheckCommand(ctx, image, containerConfig, commandConfig, entrypoint, args...); err != nil {
-		t.Fatalf("command check failed: %v", err)
-	}
 }

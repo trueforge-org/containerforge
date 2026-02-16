@@ -30,6 +30,9 @@ Shared helpers for standalone Go container checks.
 - `CheckFileExists(...) error`
   Verifies a file exists inside the container by running `test -f`.
 
+- `CheckFilesExist(..., filePaths []string, ...) error`
+  Verifies multiple files exist (one check per file path).
+
 - `CheckCommandSucceeds(...) error`
   Runs a command via container cmd args and verifies exit code `0`.
 
@@ -38,7 +41,13 @@ Shared helpers for standalone Go container checks.
   - `ExpectedExitCode` (defaults to `0` when omitted)
   - `ExpectedContent` + `MatchContent=true` for output contains match (after trimming)
 
-- `TestHTTPEndpoint(...)`, `TestTCPListening(...)`, `TestFileExists(...)`, `TestCommandSucceeds(...)`
+- `CheckCommands(..., commands []CommandTestConfig) error`
+  Runs multiple command checks.
+  Each item uses `CommandTestConfig.Command` executed as `sh -c <command>`.
+
+For list-based file/command checks, each item currently starts its own container run.
+
+- `TestHTTPEndpoint(...)`, `TestTCPListening(...)`, `TestFileExists(...)`, `TestFilesExist(...)`, `TestCommandSucceeds(...)`, `TestCommands(...)`
   Convenience wrappers for `go test` that fail the test immediately when the check returns an error.
 
 - `TestWaits(...)`
