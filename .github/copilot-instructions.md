@@ -6,7 +6,7 @@
 - You MUST keep changes minimal, and you MUST NOT make unrelated refactors or formatting-only edits.
 - Containers MUST run as `apps`, MUST remain read-only-rootfs compatible, and MUST treat `/app` as read-only.
 - You MUST treat `/config` as persistent storage that may be empty at startup, and you MUST use `/tmp` for ephemeral cache/scratch.
-- For Python containers, you MUST treat `/apps/venv` as image-provided and read-only at runtime; use `/tmp/venv` for ephemeral writable venvs and `/config/venv` for persistent writable venvs.
+- For Python containers, you MUST treat `/app/venv` as image-provided and read-only at runtime; use `/tmp/venv` for ephemeral writable venvs and `/config/venv` for persistent writable venvs.
 - For Docker bake/version edits, you MUST keep `docker-bake.hcl` and `Dockerfile` aligned, and you MUST run `docker buildx bake --print` from the app directory.
 - For Go containers, you MUST build binaries in a build stage and copy them into the runtime stage, and you MUST NOT compile in the runtime stage.
 - If a changed container image is used downstream via `FROM`, you MUST update `apps/<app>/DOWNSTREAM_CHANGES.md` with affected paths, exact required changes, and normalized base version (`x.y.z`).
@@ -84,15 +84,15 @@ When completing a task, you MUST verify:
 
 ## 9) Python-specific runtime rules
 
-- You MUST treat `/apps/venv` as a bundled base venv and you MUST NOT write or mutate it at runtime.
+- You MUST treat `/app/venv` as a bundled base venv and you MUST NOT write or mutate it at runtime.
 - If Python deps/venv content must be writable and non-persistent, you MUST use `/tmp/venv`.
 - If Python deps/venv content must be writable and persistent, you MUST use `/config/venv`.
-- For empty `/config` startup, you SHOULD seed `/config/venv` from `/apps/venv` in startup logic only when `/config/venv` is missing or empty.
+- For empty `/config` startup, you SHOULD seed `/config/venv` from `/app/venv` in startup logic only when `/config/venv` is missing or empty.
 - You MUST avoid runtime symlink assumptions for `/config/venv`; use an actual directory.
-- You MUST keep temporary installer/build/cache artifacts in `/tmp` (not `/config` and not `/apps/venv`).
+- You MUST keep temporary installer/build/cache artifacts in `/tmp` (not `/config` and not `/app/venv`).
 
 Python venv mode selection:
 
-- Read-only runtime: use `/apps/venv` directly.
+- Read-only runtime: use `/app/venv` directly.
 - Writable ephemeral runtime: seed/use `/tmp/venv`.
 - Writable persistent runtime: seed/use `/config/venv`.
