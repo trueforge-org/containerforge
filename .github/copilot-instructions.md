@@ -32,3 +32,4 @@
 - Run as `apps` user
 - Run `read-only-rootfs` compatible
 - Ensure /config is mountable as a persistence storage option (so empty at start)
+- When working on containers, check if they are used as `from` containers in other Dockerfiles and take this into account when making alterations. But dont update those files (as they wont be using the new from container yet), instead document the alterations needed in a file on each container needing changes
