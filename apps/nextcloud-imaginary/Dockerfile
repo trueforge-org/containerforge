@@ -1,6 +1,7 @@
 # Stage 1: Build imaginary binary
 FROM ghcr.io/trueforge-org/golang:1.25.7@sha256:e6bde907a745d8f7a3efccf46d172631dde8e8d857a189bfcab634ef1ea2fd64 as go
 
+ARG VERSION
 ARG IMAGINARY_COMMIT=b632dae8cc321452c3f85bcae79c580b1ae1ed84
 
 USER root
