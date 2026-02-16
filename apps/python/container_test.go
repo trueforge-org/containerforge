@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
+
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/stretchr/testify/require"
 
@@ -22,7 +23,7 @@ func Test(t *testing.T) {
 		testcontainers.WithMounts(
 			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
 		),
-		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -L /config/venv && test \"$(readlink /config/venv)\" = /defaults/venv"),
+		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -d /app/venv && test -f /app/venv/bin/python && test -d /config/venv && test -f /config/venv/bin/python"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
