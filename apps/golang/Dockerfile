@@ -32,12 +32,14 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:ede54cb88fd5efef6f41610146f10b43
 
 USER root
 
-ARG VERSION
 ENV GOTOOLCHAIN=local
+ENV HOME=/config
 ENV GOPATH=/config/go
-ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+ENV GOCACHE=/tmp/go-build
+ENV PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 
 COPY --from=build --link /target/ /
 
-RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH"
-WORKDIR $GOPATH
+USER apps
+
+WORKDIR /config
