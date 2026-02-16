@@ -1,10 +1,4 @@
-<<<<<<< copilot/remove-test-backend-go
-timeoutSeconds: 10
-files:
-  - path: /tools/bin/forgetool
-=======
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
 commands:
 - command: forgetool info
->>>>>>> main
