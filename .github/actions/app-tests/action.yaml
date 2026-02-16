@@ -31,5 +31,6 @@ runs:
         APP: ${{ inputs.app }}
         TEST_IMAGE: ${{ inputs.image }}
         VERSION: ${{ inputs.version }}
+        TESTHELPERS_CONTAINER_LOGS: all
       run: |-
-        go test -v ./apps/${APP}/...
+        go run ./cmd/run-yaml-tests --image "${TEST_IMAGE}" --yaml "./apps/${APP}/container-test.yaml"

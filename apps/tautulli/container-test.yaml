@@ -1,6 +1,5 @@
-timeoutSeconds: 10
-urls:
-  - url: http://127.0.0.1:8181/
-tcp:
-  - host: 127.0.0.1
-    port: 8181
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+http:
+- port: '8181'
+  path: /

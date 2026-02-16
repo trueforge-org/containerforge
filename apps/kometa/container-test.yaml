@@ -1,1 +1,2 @@
-timeoutSeconds: 10
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120

@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /usr/local/bin/shellcheck
-files:
-  - path: /usr/local/bin/shellcheck
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /usr/local/bin/shellcheck

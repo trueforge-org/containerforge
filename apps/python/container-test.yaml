@@ -1,9 +1,6 @@
-timeoutSeconds: 10
-paths:
-  - /usr/local/bin/python3
-  - /app/venv
-  - /config/venv
-files:
-  - path: /usr/local/bin/python3
-  - path: /app/venv
-  - path: /config/venv
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /usr/local/bin/python3
+- /app/venv
+- /config/venv
