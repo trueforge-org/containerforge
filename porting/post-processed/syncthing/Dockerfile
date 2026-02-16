@@ -5,7 +5,7 @@ FROM ghcr.io/trueforge-org/golang:rolling@sha256:ac65e5c170bd1414782d964689f53a0
 
 RUN \
  echo "**** install build packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     build-base
 
 RUN \

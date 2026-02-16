@@ -8,7 +8,7 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     php84-bcmath \
     php84-bz2 \
     php84-cli \

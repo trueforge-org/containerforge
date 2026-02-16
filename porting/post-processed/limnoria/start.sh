@@ -8,7 +8,7 @@ mkdir -p \
 ## TODO Move these to Dockerfile
 PLUGIN_REQUIREMENTS=$(find /config/plugins -maxdepth 2 -name 'requirements.txt')
 if [[ -n "${PLUGIN_REQUIREMENTS}" ]]; then
-    apk add --no-cache --virtual=pip-dependencies \
+    apt-get add --no-cache --virtual=pip-dependencies \
         build-base \
         cargo \
         libffi-dev \
@@ -18,7 +18,7 @@ if [[ -n "${PLUGIN_REQUIREMENTS}" ]]; then
         pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
             -r "${line}"
     done <<<"${PLUGIN_REQUIREMENTS}"
-    apk del --purge \
+    apt-get del --purge \
         pip-dependencies
     rm -rf \
         /tmp/* \

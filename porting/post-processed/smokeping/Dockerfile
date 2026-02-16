@@ -8,11 +8,11 @@ USER root
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     perl-app-cpanminus \
     perl-dev && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     apache2 \
     apache2-ctl \
     apache2-utils \
@@ -44,7 +44,7 @@ RUN \
   echo "**** fix path to cropper.js ****" && \
   sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html && \
   echo "**** Cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/* \

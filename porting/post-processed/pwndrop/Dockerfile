@@ -5,7 +5,7 @@ FROM ghcr.io/trueforge-org/golang:rolling as buildstage
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     build-base \
     go
 

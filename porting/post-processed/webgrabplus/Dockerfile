@@ -13,7 +13,7 @@ ENV HOME=/config
 
 RUN \
   echo "**** install packages ****" && \
-  apk -U --update --no-cache add \
+  apt-get -U --update --no-cache add \
     icu-libs \
     iputils && \
   echo "**** install dotnet sdk ****" && \

@@ -12,7 +12,7 @@ ENV HOME=/config
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     cargo \
     git \
@@ -20,7 +20,7 @@ RUN \
     libxslt-dev \
     openssl-dev && \
   echo "**** install packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     libmediainfo \
     libxslt && \
   echo "**** install sickchill ****" && \
@@ -33,7 +33,7 @@ RUN \
     certifi \
     sickchill=="${VERSION}" && \
   echo "**** clean up ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/* \

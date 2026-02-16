@@ -9,7 +9,7 @@ ENV \
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     go \
     openssl && \
@@ -31,7 +31,7 @@ RUN \
     -X github.com/pydio/cells/v4/common.BuildRevision=v${VERSION}" \
     -o /app/cells -x . && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/* \
@@ -52,7 +52,7 @@ ENV \
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     openssl && \
 COPY --from=buildstage /app/cells /app/
 

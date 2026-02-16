@@ -8,7 +8,7 @@ USER root
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --upgrade --virtual=build-dependencies \
+  apt-get add --no-cache --upgrade --virtual=build-dependencies \
     build-base \
     cargo \
     jpeg-dev \
@@ -20,7 +20,7 @@ RUN \
     postgresql-dev \
     zlib-dev && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache --upgrade \
+  apt-get add --no-cache --upgrade \
     libldap \
     postgresql-client \
     tiff \
@@ -43,7 +43,7 @@ RUN \
   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
   pip install --no-cache-dir  django-auth-ldap && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/* \

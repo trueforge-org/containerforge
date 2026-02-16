@@ -8,11 +8,11 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     nginx \
     tftp-hpa && \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     npm && \
   echo "**** install WebApp ****" && \
   curl -o \
@@ -23,7 +23,7 @@ RUN \
     /app/ --strip-components=1 && \
   npm install --prefix /app && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/*

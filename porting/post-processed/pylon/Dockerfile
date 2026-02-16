@@ -8,13 +8,13 @@ USER root
 
 RUN \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     findutils \
     git \
     nodejs \
     sudo && \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     npm && \
   echo "**** install Pylon ****" && \
@@ -32,7 +32,7 @@ RUN \
   echo "**** install node modules ****" && \
   npm install --prefix /app/pylon && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /root \

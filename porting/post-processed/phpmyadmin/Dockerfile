@@ -13,11 +13,11 @@ ENV MEMORY_LIMIT=512M
 ENV UPLOAD_LIMIT=8192K
 
 RUN \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     gpg \
     gpg-agent \
     gnupg-dirmngr && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     php84-bz2 \
     php84-dom \
     php84-gd \
@@ -73,7 +73,7 @@ RUN \
     /app/www/public/ --strip-components=1 && \
   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     /tmp/* \

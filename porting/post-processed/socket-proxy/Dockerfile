@@ -9,9 +9,9 @@ USER root
 # install packages
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     haproxy==${VERSION} && \
-  apk del --no-cache \
+  apt-get del --no-cache \
     curl && \
   rm -rf \
     /etc/haproxy \

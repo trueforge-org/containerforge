@@ -52,7 +52,7 @@ RUN \
     corepack enable && \
     yarn install && \
     gem install foreman && \
-    RUBY=$(apk list ruby | grep -oP '.*-\K(\d\.\d\.\d)') && \
+    RUBY=$(apt-get list ruby | grep -oP '.*-\K(\d\.\d\.\d)') && \
     sed -i "s/\d.\d.\d/${RUBY}/" .ruby-version && \
     bundle config set --local deployment 'true' && \
     bundle config set --local without 'development test' && \

@@ -13,9 +13,9 @@ ENV NODE_ENV="production"
 
 RUN \
   echo "**** install build packages ****" && \
-  apk -U --update --no-cache add --virtual=build-dependencies \
+  apt-get -U --update --no-cache add --virtual=build-dependencies \
     build-base && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     git \
     nodejs \
     npm \
@@ -35,7 +35,7 @@ RUN \
   cd /app/wiki && \
   npm rebuild sqlite3 && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     $HOME/.cache \

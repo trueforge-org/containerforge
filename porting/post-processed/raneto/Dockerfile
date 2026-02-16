@@ -10,12 +10,12 @@ ENV PORT=3000
 
 RUN \
   echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
+  apt-get add --no-cache --virtual=build-dependencies \
     build-base \
     libsass-dev \
     npm && \
   echo "**** install runtime packages ****" && \
-  apk add --no-cache \
+  apt-get add --no-cache \
     nodejs && \
   echo "**** install raneto ****" && \
   mkdir -p \
@@ -35,7 +35,7 @@ RUN \
   mkdir sessions && \
   rm -f config/config.js && \
   echo "**** cleanup ****" && \
-  apk del --purge \
+  apt-get del --purge \
     build-dependencies && \
   rm -rf \
     $HOME/.npm \
