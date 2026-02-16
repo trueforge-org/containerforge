@@ -69,6 +69,8 @@ Use these rules as strict defaults when making changes in this repository.
   - The base-image version where the change is expected, sourced from the app's `docker-bake.hcl` `VERSION` and normalized to `x.y.z`.
 - You MUST NOT document downstream requirements as inline comments in Dockerfiles unless explicitly requested.
 
+- You MUST avoid re-installing packages that are already provided by upstream/base images (for example via `apt-get`). Check the base image contents before adding OS-level packages, and prefer using what the base image supplies.
+
 ## 8) Practical execution checklist
 
 When completing a task, you MUST verify:
