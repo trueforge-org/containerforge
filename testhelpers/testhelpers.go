@@ -4,18 +4,147 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"sort"
+	"strings"
+	"time"
 
 	"github.com/docker/go-connections/nat"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
 )
 
+const (
+	colorReset  = "\033[0m"
+	colorBlue   = "\033[34m"
+	colorCyan   = "\033[36m"
+	colorGreen  = "\033[32m"
+	colorYellow = "\033[33m"
+	colorRed    = "\033[31m"
+)
+
+func envTruthy(name string) bool {
+	value := strings.TrimSpace(strings.ToLower(os.Getenv(name)))
+	switch value {
+	case "1", "true", "yes", "on", "y":
+		return true
+	default:
+		return false
+	}
+}
+
+func colorsEnabled() bool {
+	if os.Getenv("NO_COLOR") != "" {
+		return false
+	}
+
+	if envTruthy("FORCE_COLOR") || envTruthy("CLICOLOR_FORCE") {
+		return true
+	}
+
+	if strings.EqualFold(strings.TrimSpace(os.Getenv("TERM")), "dumb") {
+		return false
+	}
+
+	return true
+}
+
+func debugEnabled() bool {
+	return envTruthy("TESTHELPERS_DEBUG")
+}
+
+func logPrefix(level string) string {
+	if !colorsEnabled() {
+		switch level {
+		case "DEBUG":
+			return "🐛 [DEBUG]"
+		case "WARN":
+			return "⚠️ [WARN]"
+		case "ERROR":
+			return "❌ [ERROR]"
+		case "OK":
+			return "✅ [OK]"
+		default:
+			return "ℹ️ [INFO]"
+		}
+	}
+
+	switch level {
+	case "DEBUG":
+		return colorCyan + "🐛 [DEBUG]" + colorReset
+	case "WARN":
+		return colorYellow + "⚠️ [WARN]" + colorReset
+	case "ERROR":
+		return colorRed + "❌ [ERROR]" + colorReset
+	case "OK":
+		return colorGreen + "✅ [OK]" + colorReset
+	default:
+		return colorBlue + "ℹ️ [INFO]" + colorReset
+	}
+}
+
+func logInfo(format string, args ...any) {
+	fmt.Printf("%s %s %s\n", time.Now().Format("15:04:05"), logPrefix("INFO"), fmt.Sprintf(format, args...))
+}
+
+func logDebug(format string, args ...any) {
+	if !debugEnabled() {
+		return
+	}
+	fmt.Printf("%s %s %s\n", time.Now().Format("15:04:05"), logPrefix("DEBUG"), fmt.Sprintf(format, args...))
+}
+
+func logWarn(format string, args ...any) {
+	fmt.Printf("%s %s %s\n", time.Now().Format("15:04:05"), logPrefix("WARN"), fmt.Sprintf(format, args...))
+}
+
+func logError(format string, args ...any) {
+	fmt.Printf("%s %s %s\n", time.Now().Format("15:04:05"), logPrefix("ERROR"), fmt.Sprintf(format, args...))
+}
+
+func logOK(format string, args ...any) {
+	fmt.Printf("%s %s %s\n", time.Now().Format("15:04:05"), logPrefix("OK"), fmt.Sprintf(format, args...))
+}
+
+func envSummary(env map[string]string) string {
+	if len(env) == 0 {
+		return "none"
+	}
+
+	keys := make([]string, 0, len(env))
+	for key := range env {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+
+	return fmt.Sprintf("%d vars [%s]", len(keys), strings.Join(keys, ", "))
+}
+
+func commandString(entrypoint string, args []string) string {
+	if len(args) == 0 {
+		return entrypoint
+	}
+
+	return entrypoint + " " + strings.Join(args, " ")
+}
+
+func terminateContainer(ctx context.Context, container testcontainers.Container, label string) error {
+	logDebug("🧹 Cleaning up container for %s", label)
+	if err := container.Terminate(ctx); err != nil {
+		logError("Failed to terminate container for %s: %v", label, err)
+		return err
+	}
+	logDebug("Container terminated for %s", label)
+	return nil
+}
+
 // GetTestImage returns the image to test from TEST_IMAGE env var or falls back to the default
 func GetTestImage(defaultImage string) string {
 	image := os.Getenv("TEST_IMAGE")
 	if image == "" {
+		logInfo("Using default test image: %s", defaultImage)
 		return defaultImage
 	}
+	logInfo("Using TEST_IMAGE override: %s", image)
 	return image
 }
 
@@ -29,12 +158,16 @@ func applyContainerConfig(config *ContainerConfig) []testcontainers.ContainerCus
 	var opts []testcontainers.ContainerCustomizer
 
 	if config == nil {
+		logDebug("No extra container config provided")
 		return opts
 	}
 
 	// Apply environment variables
 	if len(config.Env) > 0 {
 		opts = append(opts, testcontainers.WithEnv(config.Env))
+		logInfo("Applying container environment: %s", envSummary(config.Env))
+	} else {
+		logDebug("Container config provided without env vars")
 	}
 
 	return opts
@@ -42,22 +175,31 @@ func applyContainerConfig(config *ContainerConfig) []testcontainers.ContainerCus
 
 // runContainer is a tiny helper to start a container with common patterns centralized.
 func runContainer(ctx context.Context, image string, opts ...testcontainers.ContainerCustomizer) (testcontainers.Container, error) {
+	logInfo("🚀 Starting container: image=%s customizers=%d", image, len(opts))
+	logDebug("Invoking testcontainers.Run for image=%s", image)
 	container, err := testcontainers.Run(ctx, image, opts...)
 	if err != nil {
+		logError("Container start failed for image=%s: %v", image, err)
 		return nil, err
 	}
+	logOK("Container is up: image=%s", image)
 	return container, nil
 }
 
 // assertExitZero waits for container exit (via wait strategy set by caller) and verifies the exit code is zero.
 func assertExitZero(ctx context.Context, c testcontainers.Container, what string) error {
+	logInfo("Validating container exit status for %s", what)
 	state, err := c.State(ctx)
 	if err != nil {
+		logError("Failed to read container state for %s: %v", what, err)
 		return fmt.Errorf("failed to get container state: %w", err)
 	}
+	logDebug("Container state for %s: running=%t, status=%s, exitCode=%d", what, state.Running, state.Status, state.ExitCode)
 	if state.ExitCode != 0 {
+		logError("Non-zero exit for %s: exit code %d", what, state.ExitCode)
 		return fmt.Errorf("%s: exit code %d", what, state.ExitCode)
 	}
+	logOK("Exit status OK for %s", what)
 	return nil
 }
 
@@ -87,6 +229,14 @@ func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestCon
 	portStr := httpConfig.Port + "/tcp"
 	portTCP := nat.Port(portStr)
 
+	logInfo("🧪 HTTP endpoint check: image=%s port=%s path=%s expected=%d", image, portStr, httpConfig.Path, httpConfig.StatusCode)
+	if httpConfig.StatusCodeMatcher != nil {
+		logDebug("Custom HTTP status matcher configured")
+	}
+	if containerConfig != nil {
+		logInfo("HTTP test container config: env=%s", envSummary(containerConfig.Env))
+	}
+
 	opts := []testcontainers.ContainerCustomizer{
 		testcontainers.WithExposedPorts(portStr),
 		testcontainers.WithWaitStrategy(
@@ -104,12 +254,15 @@ func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestCon
 	if err != nil {
 		return err
 	}
+	logOK("HTTP wait strategy passed: %s%s", portStr, httpConfig.Path)
 	defer func() {
-		termErr := container.Terminate(ctx)
+		termErr := terminateContainer(ctx, container, "HTTP endpoint check")
 		if err == nil && termErr != nil {
 			err = fmt.Errorf("failed to terminate container: %w", termErr)
 		}
 	}()
+
+	logInfo("HTTP endpoint check finished successfully for image=%s", image)
 
 	return nil
 }
@@ -121,6 +274,11 @@ func CheckFileExists(ctx context.Context, image string, filePath string, config 
 
 // CheckCommandSucceeds verifies that a command runs successfully in the container (exit code 0).
 func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) (err error) {
+	fullCommand := commandString(entrypoint, args)
+	logInfo("🧪 Command check: image=%s command=%q", image, fullCommand)
+	if config != nil {
+		logInfo("Command check container config: env=%s", envSummary(config.Env))
+	}
 
 	opts := []testcontainers.ContainerCustomizer{
 		testcontainers.WithEntrypoint(entrypoint),
@@ -139,15 +297,18 @@ func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerCo
 		return err
 	}
 	defer func() {
-		termErr := container.Terminate(ctx)
+		termErr := terminateContainer(ctx, container, "command check")
 		if err == nil && termErr != nil {
 			err = fmt.Errorf("failed to terminate container: %w", termErr)
 		}
 	}()
 
 	if err := assertExitZero(ctx, container, fmt.Sprintf("command '%s %v' should succeed", entrypoint, args)); err != nil {
+		logWarn("Command check failed: %q", fullCommand)
 		return err
 	}
+
+	logInfo("Command check completed successfully: %q", fullCommand)
 
 	return nil
 }
