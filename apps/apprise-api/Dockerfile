@@ -18,10 +18,6 @@ RUN \
     build-essential \
     libffi-dev \
     libssl-dev && \
-  echo "**** install runtime packages ****" && \
-  apt-get install -y --no-install-recommends \
-    uwsgi \
-    uwsgi-plugin-python3 && \
   mkdir -p /app && \
   curl -o /tmp/apprise-api.tar.gz -L "https://github.com/caronc/apprise-api/archive/v${VERSION}.tar.gz" && \
   tar xf /tmp/apprise-api.tar.gz -C /app/ --strip-components=1 && \
@@ -30,6 +26,7 @@ RUN \
   python3 -m venv /app/venv && \
   /app/venv/bin/pip install -U --no-cache-dir pip wheel && \
   /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  /app/venv/bin/pip install -U --no-cache-dir uwsgi && \
   echo "**** cleanup ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
