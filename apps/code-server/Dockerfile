@@ -40,3 +40,5 @@ COPY . /
 
 # ports and volumes
 EXPOSE 8443
+
+USER apps

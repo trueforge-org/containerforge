@@ -39,3 +39,5 @@ COPY /root /
 COPY . /
 # ports and volumes
 EXPOSE 3000
+
+USER apps

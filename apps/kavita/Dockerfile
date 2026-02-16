@@ -38,3 +38,5 @@ COPY . /
 
 # ports and volumes
 EXPOSE 5000
+
+USER apps
