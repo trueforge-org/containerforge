@@ -36,8 +36,9 @@
 - When a container is used as a `from` container elsewhere, ensure to document required changes on those other containers.
 - Assume the dockerfile always has to explicitly move to `USER root` because the from container likely runs as non-root
 - `/app` will be read-only
-- `/config` will be mounted as a persistent storage option and hence empty on runtime
 - `/app` contains the application (binary) itself, that does not require write access
+- If an application requires write access, copy those things to `/config` during runtime
+- `/config` will be mounted as a persistent storage option and hence empty on runtime
 - Application configuration files go into `/config` when possible
-- If an application requires write access, use copy those things to `/config` during runtime
+- `/tmp` will be throw away temporary storage (ramdisk) for things like cache files
 - Important system binaries, such as go or python, can be put into `/usr/local` paths. This ensures `/app` is empty for containers using this as a `from` container
