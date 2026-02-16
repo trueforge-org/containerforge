@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=mikefarah/yq
-  default = "4.48.2"
+  default = "4.52.4"
 }
 
 variable "LICENSE" {
