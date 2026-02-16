@@ -14,6 +14,7 @@ RUN apt-get update && \
         build-essential \
         geoip-database \
         p7zip-full \
+    # Deluge currently imports pkg_resources, removed in setuptools 81+.
     && pip3 install --break-system-packages geoip2 libtorrent "setuptools<81" "deluge==${VERSION}" \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 COPY . /
