@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trueforge-org.github.io/containerforge/container-test.schema.json",
+  "title": "Container test configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "timeoutSeconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "http": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/httpTestConfig"
+      }
+    },
+    "tcp": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tcpTestConfig"
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/commandTestConfig"
+      }
+    },
+    "filePaths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "http"
+      ]
+    },
+    {
+      "required": [
+        "tcp"
+      ]
+    },
+    {
+      "required": [
+        "commands"
+      ]
+    },
+    {
+      "required": [
+        "filePaths"
+      ]
+    }
+  ],
+  "$defs": {
+    "httpTestConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "port"
+      ],
+      "properties": {
+        "port": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "path": {
+          "type": "string",
+          "default": "/"
+        }
+      }
+    },
+    "tcpTestConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "port"
+      ],
+      "properties": {
+        "port": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "host": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "commandTestConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command"
+      ],
+      "properties": {
+        "command": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "expectedExitCode": {
+          "type": "integer"
+        },
+        "expectedContent": {
+          "type": "string"
+        },
+        "matchContent": {
+          "type": "boolean"
+        }
+      }
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

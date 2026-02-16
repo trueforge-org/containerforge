@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 10
 filePaths:
   - /usr/local/bin/yq
