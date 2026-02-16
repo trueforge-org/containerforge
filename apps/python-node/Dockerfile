@@ -11,11 +11,11 @@ ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 ENV HOME=/tmp/nodehome
 
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /usr/local/bin/node /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c /usr/local/bin/node /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /YARN_VERSION.txt /YARN_VERSION.txt
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 /opt/ /opthold/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c /YARN_VERSION.txt /YARN_VERSION.txt
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c /opt/ /opthold/
 
 RUN YARN_VERSION=$(cat /YARN_VERSION.txt) && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
