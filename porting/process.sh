@@ -178,6 +178,8 @@ for df in "${dockerfiles[@]}"; do
             -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
             -e "s|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ${BASE_IMAGE}|g" \
             -e "s|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-kasmvnc|FROM ghcr.io/trueforge-org/baseimage-kasmvnc|g" \
+            -e "s|^FROM ghcr.io/linuxserver/picons-builder|FROM ghcr.io/trueforge-org/picons-builder|g" \
             -e "s|^FROM scratch[^aA ]*|FROM ${BASE_IMAGE}\nARG VERSION|g" \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "\|ADD rootfs.tar.xz|d" \
@@ -209,6 +211,8 @@ for df in "${dockerfiles[@]}"; do
             -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
             -e "s|^FROM ghcr.io/linuxserver/baseimage-ubuntu[^aA ]*|FROM ${BASE_IMAGE}|g" \
             -e "s|^FROM ghcr.io/linuxserver/baseimage-debian[^aA ]*|FROM ${BASE_IMAGE}|g" \
+            -e "s|^FROM ghcr.io/linuxserver/baseimage-kasmvnc|FROM ghcr.io/trueforge-org/baseimage-kasmvnc|g" \
+            -e "s|^FROM ghcr.io/linuxserver/picons-builder|FROM ghcr.io/trueforge-org/picons-builder|g" \
             -e "s|^FROM scratch[^aA ]*|FROM ${BASE_IMAGE}\nARG VERSION|g" \
             -e "s|$BUILD_VERSION_ARG|VERSION|g" \
             -e "s|\${VERSION}|$VERSIONPREFIX\${VERSION}|g" \
