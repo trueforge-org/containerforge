@@ -181,6 +181,8 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^LABEL maintainer|d' \
             -e '\|^ARG BUILD_DATE|d' \
             -e '\|^# syntax=docker/dockerfile:1|d' \
+            -e '\|^[[:space:]]*#.*TODO|d' \
+            -e '\|^[[:space:]]*#.*Move to our container|d' \
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
             -e "s|^FROM ghcr.io/linuxserver/baseimage-alpine[^aA ]*|FROM ${BASE_IMAGE}|g" \
@@ -213,6 +215,8 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^LABEL maintainer|d' \
             -e '\|^ARG BUILD_DATE|d' \
             -e '\|^# syntax=docker/dockerfile:1|d' \
+            -e '\|^[[:space:]]*#.*TODO|d' \
+            -e '\|^[[:space:]]*#.*Move to our container|d' \
             -e '\|printf "Linuxserver\.io version|d' \
             -e "\|ARG $BUILD_VERSION_ARG|d" \
             -e "\|ADD rootfs.tar.xz|d" \
@@ -270,6 +274,27 @@ if sed --version >/dev/null 2>&1; then
 else
     sed -i '' 's|^USER apps$|USER apps|g' "$df"
 fi
+awk '
+/^VOLUME[[:space:]]+/ {
+    n=split($0, a, /[[:space:]]+/)
+    has_config=0
+    for (i=2; i<=n; i++) {
+        if (a[i] == "/config") {
+            has_config=1
+        }
+    }
+    if (has_config && n > 2) {
+        print "VOLUME /config"
+        for (i=2; i<=n; i++) {
+            if (a[i] != "" && a[i] != "/config") {
+                print "VOLUME " a[i]
+            }
+        }
+        next
+    }
+}
+{ print }
+' "$df" > "$df.tmp" && mv "$df.tmp" "$df"
 if ! grep -q '^WORKDIR /config$' "$df"; then
     echo "" >> "$df"
     echo "WORKDIR /config" >> "$df"
