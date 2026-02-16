@@ -32,4 +32,4 @@ runs:
         TEST_IMAGE: ${{ inputs.image }}
         VERSION: ${{ inputs.version }}
       run: |-
-        go test -v ./apps/${APP}/...
+        go run ./apps/${APP}/container_check.go

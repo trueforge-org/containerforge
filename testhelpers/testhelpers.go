@@ -4,10 +4,8 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"testing"
 
 	"github.com/docker/go-connections/nat"
-	"github.com/stretchr/testify/require"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
 )
@@ -42,40 +40,48 @@ func applyContainerConfig(config *ContainerConfig) []testcontainers.ContainerCus
 	return opts
 }
 
-// runContainer is a tiny helper to start a container with common patterns like CleanupContainer and immediate error check centralized.
-func runContainer(t *testing.T, ctx context.Context, image string, opts ...testcontainers.ContainerCustomizer) testcontainers.Container {
-	t.Helper()
-
-	c, err := testcontainers.Run(ctx, image, opts...)
-	testcontainers.CleanupContainer(t, c)
-	require.NoError(t, err)
-	return c
+// runContainer is a tiny helper to start a container with common patterns centralized.
+func runContainer(ctx context.Context, image string, opts ...testcontainers.ContainerCustomizer) (testcontainers.Container, error) {
+	container, err := testcontainers.Run(ctx, image, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return container, nil
 }
 
-// assertExitZero waits for container exit (via wait strategy set by caller) and asserts the exit code is zero.
-func assertExitZero(t *testing.T, ctx context.Context, c testcontainers.Container, what string) {
-	t.Helper()
+// assertExitZero waits for container exit (via wait strategy set by caller) and verifies the exit code is zero.
+func assertExitZero(ctx context.Context, c testcontainers.Container, what string) error {
 	state, err := c.State(ctx)
-	require.NoError(t, err)
-	require.Equal(t, 0, state.ExitCode, what)
+	if err != nil {
+		return fmt.Errorf("failed to get container state: %w", err)
+	}
+	if state.ExitCode != 0 {
+		return fmt.Errorf("%s: exit code %d", what, state.ExitCode)
+	}
+	return nil
 }
 
 // HTTPTestConfig holds the configuration for HTTP endpoint tests
 type HTTPTestConfig struct {
-	Port       string
-	Path       string
-	StatusCode int
+	Port              string
+	Path              string
+	StatusCode        int
+	StatusCodeMatcher func(int) bool
 }
 
-// TestHTTPEndpoint tests that an HTTP endpoint is accessible and returns the expected status code
-func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfig HTTPTestConfig, containerConfig *ContainerConfig) {
-	t.Helper()
+// CheckHTTPEndpoint verifies that an HTTP endpoint is accessible and returns the expected status code.
+func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestConfig, containerConfig *ContainerConfig) (err error) {
 
 	if httpConfig.Path == "" {
 		httpConfig.Path = "/"
 	}
 	if httpConfig.StatusCode == 0 {
 		httpConfig.StatusCode = 200
+	}
+	if httpConfig.StatusCodeMatcher == nil {
+		httpConfig.StatusCodeMatcher = func(status int) bool {
+			return status == httpConfig.StatusCode
+		}
 	}
 
 	portStr := httpConfig.Port + "/tcp"
@@ -86,7 +92,7 @@ func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfi
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort(portTCP),
 			wait.ForHTTP(httpConfig.Path).WithPort(portTCP).WithStatusCodeMatcher(func(status int) bool {
-				return status == httpConfig.StatusCode
+				return httpConfig.StatusCodeMatcher(status)
 			}),
 		),
 	}
@@ -94,20 +100,27 @@ func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfi
 	// Apply optional container config
 	opts = append(opts, applyContainerConfig(containerConfig)...)
 
-	_ = runContainer(t, ctx, image, opts...)
+	container, err := runContainer(ctx, image, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		termErr := container.Terminate(ctx)
+		if err == nil && termErr != nil {
+			err = fmt.Errorf("failed to terminate container: %w", termErr)
+		}
+	}()
+
+	return nil
 }
 
-// TestFileExists tests that a file exists in the container
-func TestFileExists(t *testing.T, ctx context.Context, image string, filePath string, config *ContainerConfig) {
-	t.Helper()
-
-	// Delegate to the generic command helper to avoid duplication
-	TestCommandSucceeds(t, ctx, image, config, "test", "-f", filePath)
+// CheckFileExists verifies a file exists in the container.
+func CheckFileExists(ctx context.Context, image string, filePath string, config *ContainerConfig) error {
+	return CheckCommandSucceeds(ctx, image, config, "test", "-f", filePath)
 }
 
-// TestCommandSucceeds tests that a command runs successfully in the container (exit code 0)
-func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) {
-	t.Helper()
+// CheckCommandSucceeds verifies that a command runs successfully in the container (exit code 0).
+func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) (err error) {
 
 	opts := []testcontainers.ContainerCustomizer{
 		testcontainers.WithEntrypoint(entrypoint),
@@ -121,6 +134,20 @@ func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, config
 	// Apply optional container config
 	opts = append(opts, applyContainerConfig(config)...)
 
-	container := runContainer(t, ctx, image, opts...)
-	assertExitZero(t, ctx, container, fmt.Sprintf("command '%s %v' should succeed", entrypoint, args))
+	container, err := runContainer(ctx, image, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		termErr := container.Terminate(ctx)
+		if err == nil && termErr != nil {
+			err = fmt.Errorf("failed to terminate container: %w", termErr)
+		}
+	}()
+
+	if err := assertExitZero(ctx, container, fmt.Sprintf("command '%s %v' should succeed", entrypoint, args)); err != nil {
+		return err
+	}
+
+	return nil
 }
