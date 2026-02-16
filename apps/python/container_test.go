@@ -23,7 +23,7 @@ func Test(t *testing.T) {
 		testcontainers.WithMounts(
 			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
 		),
-		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -d /apps/venv && test -f /apps/venv/bin/python && test -d /config/venv && test -f /config/venv/bin/python"),
+		testcontainers.WithCmdArgs("sh", "-c", "test -f /usr/local/bin/python3 && test -d /app/venv && test -f /app/venv/bin/python && test -d /config/venv && test -f /config/venv/bin/python"),
 	)
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
