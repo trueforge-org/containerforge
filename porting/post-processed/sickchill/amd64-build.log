@@ -1,0 +1,179 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.11kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 3.45kB done
+#5 DONE 0.0s
+
+#6 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo "**** install sickchill ****" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill=="${VERSION}" &&   echo "**** clean up ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cache     /config/.cargo
+#6 0.158 **** install build packages ****
+#6 0.322 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.331 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.474 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.522 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 0.620 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.714 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 0.767 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 0.852 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 0.919 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.022 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.119 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.886 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 2.031 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.281 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.494 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.637 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.843 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.987 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 3.006 Fetched 36.1 MB in 3s (12.8 MB/s)
+#6 3.006 Reading package lists...
+#6 3.760 Reading package lists...
+#6 4.520 Building dependency tree...
+#6 4.662 Reading state information...
+#6 4.795 build-essential is already the newest version (12.10ubuntu1).
+#6 4.795 git is already the newest version (1:2.43.0-1ubuntu7.3).
+#6 4.795 libffi-dev is already the newest version (3.4.6-1build1).
+#6 4.795 libssl-dev is already the newest version (3.0.13-0ubuntu3.7).
+#6 4.795 The following additional packages will be installed:
+#6 4.796   libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
+#6 4.796   libstd-rust-1.75 libstd-rust-dev libxml2-dev rustc
+#6 4.797 Suggested packages:
+#6 4.797   cargo-doc llvm-17 lld-17 clang-17
+#6 4.828 The following NEW packages will be installed:
+#6 4.829   cargo libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
+#6 4.829   libstd-rust-1.75 libstd-rust-dev libxml2-dev libxslt1-dev rustc
+#6 4.986 0 upgraded, 11 newly installed, 0 to remove and 24 not upgraded.
+#6 4.986 Need to get 97.7 MB of archives.
+#6 4.986 After this operation, 426 MB of additional disk space will be used.
+#6 4.986 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#6 5.132 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-parser2.9 amd64 2.9.4-6build1 [22.3 kB]
+#6 5.275 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libssh2-1t64 amd64 1.11.0-4.1build2 [120 kB]
+#6 5.420 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libgit2-1.7 amd64 1.7.2+ds-1ubuntu3 [529 kB]
+#6 5.578 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libllvm17t64 amd64 1:17.0.6-9ubuntu1 [26.2 MB]
+#6 6.569 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-1.75 amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [20.0 MB]
+#6 7.358 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
+#6 7.525 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxslt1-dev amd64 1.1.39-0exp1ubuntu0.24.04.3 [91.9 kB]
+#6 7.669 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-dev amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [40.6 MB]
+#6 9.124 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 rustc amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [3,183 kB]
+#6 9.369 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cargo amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [6,053 kB]
+#6 9.671 debconf: delaying package configuration, since apt-utils is not installed
+#6 9.695 Fetched 97.7 MB in 5s (20.6 MB/s)
+#6 9.710 Selecting previously unselected package libedit2:amd64.
+#6 9.710 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#6 9.726 Preparing to unpack .../00-libedit2_3.1-20230828-1build1_amd64.deb ...
+#6 9.728 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#6 9.746 Selecting previously unselected package libhttp-parser2.9:amd64.
+#6 9.747 Preparing to unpack .../01-libhttp-parser2.9_2.9.4-6build1_amd64.deb ...
+#6 9.748 Unpacking libhttp-parser2.9:amd64 (2.9.4-6build1) ...
+#6 9.768 Selecting previously unselected package libssh2-1t64:amd64.
+#6 9.768 Preparing to unpack .../02-libssh2-1t64_1.11.0-4.1build2_amd64.deb ...
+#6 9.770 Unpacking libssh2-1t64:amd64 (1.11.0-4.1build2) ...
+#6 9.790 Selecting previously unselected package libgit2-1.7:amd64.
+#6 9.793 Preparing to unpack .../03-libgit2-1.7_1.7.2+ds-1ubuntu3_amd64.deb ...
+#6 9.794 Unpacking libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
+#6 9.814 Selecting previously unselected package libllvm17t64:amd64.
+#6 9.816 Preparing to unpack .../04-libllvm17t64_1%3a17.0.6-9ubuntu1_amd64.deb ...
+#6 9.817 Unpacking libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
+#6 10.24 Selecting previously unselected package libstd-rust-1.75:amd64.
+#6 10.24 Preparing to unpack .../05-libstd-rust-1.75_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#6 10.24 Unpacking libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 10.51 Selecting previously unselected package libxml2-dev:amd64.
+#6 10.52 Preparing to unpack .../06-libxml2-dev_2.9.14+dfsg-1.3ubuntu3.7_amd64.deb ...
+#6 10.52 Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+#6 10.55 Selecting previously unselected package libxslt1-dev:amd64.
+#6 10.55 Preparing to unpack .../07-libxslt1-dev_1.1.39-0exp1ubuntu0.24.04.3_amd64.deb ...
+#6 10.55 Unpacking libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
+#6 10.58 Selecting previously unselected package libstd-rust-dev:amd64.
+#6 10.58 Preparing to unpack .../08-libstd-rust-dev_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#6 10.58 Unpacking libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.14 Selecting previously unselected package rustc.
+#6 11.14 Preparing to unpack .../09-rustc_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#6 11.14 Unpacking rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.19 Selecting previously unselected package cargo.
+#6 11.19 Preparing to unpack .../10-cargo_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#6 11.20 Unpacking cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.30 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#6 11.30 Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+#6 11.30 Setting up libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
+#6 11.30 Setting up libssh2-1t64:amd64 (1.11.0-4.1build2) ...
+#6 11.31 Setting up libhttp-parser2.9:amd64 (2.9.4-6build1) ...
+#6 11.31 Setting up libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
+#6 11.31 Setting up libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.31 Setting up libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.31 Setting up rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.32 Setting up libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
+#6 11.32 Setting up cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#6 11.32 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 11.37 **** install packages ****
+#6 11.54 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+#6 11.68 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#6 11.68 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
+#6 11.82 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#6 11.88 Reading package lists...
+#6 12.62 Reading package lists...
+#6 13.35 Building dependency tree...
+#6 13.50 Reading state information...
+#6 13.51 E: Unable to locate package libmediainfo
+#6 13.51 E: Unable to locate package libxslt
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo \"**** install sickchill ****\" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill==\"${VERSION}\" &&   echo \"**** clean up ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     $HOME/.cache     $HOME/.cargo" did not complete successfully: exit code: 100
+------
+ > [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo "**** install sickchill ****" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill=="${VERSION}" &&   echo "**** clean up ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cache     /config/.cargo:
+11.37 **** install packages ****
+11.54 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+11.68 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+11.68 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
+11.82 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+
+
+
+13.51 E: Unable to locate package libmediainfo
+13.51 E: Unable to locate package libxslt
+------
+Dockerfile:13
+--------------------
+  12 |     
+  13 | >>> RUN \
+  14 | >>>   echo "**** install build packages ****" && \
+  15 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  16 | >>>     build-essential \
+  17 | >>>     cargo \
+  18 | >>>     git \
+  19 | >>>     libffi-dev \
+  20 | >>>     libxslt-dev \
+  21 | >>>     libssl-dev && \
+  22 | >>>   echo "**** install packages ****" && \
+  23 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  24 | >>>     libmediainfo \
+  25 | >>>     libxslt && \
+  26 | >>>   echo "**** install sickchill ****" && \
+  27 | >>>   python3 -m venv /config/venv && \
+  28 | >>>   pip install -U --no-cache-dir \
+  29 | >>>     pip \
+  30 | >>>     setuptools \
+  31 | >>>     wheel && \
+  32 | >>>   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+  33 | >>>     certifi \
+  34 | >>>     sickchill=="${VERSION}" && \
+  35 | >>>   echo "**** clean up ****" && \
+  36 | >>>   apt-get autoremove -y && \
+  37 | >>>   rm -rf \
+  38 | >>>     /tmp/* \
+  39 | >>>     $HOME/.cache \
+  40 | >>>     $HOME/.cargo
+  41 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo \"**** install sickchill ****\" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill==\"${VERSION}\" &&   echo \"**** clean up ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     $HOME/.cache     $HOME/.cargo" did not complete successfully: exit code: 100

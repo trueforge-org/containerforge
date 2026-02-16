@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: Package libjpeg62-turbo is not available, but is referred to by another package.
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-changedetection.io:amd64 .`
+- Result: FAIL
+- Reason: 16.27 fatal: Remote branch  not found in upstream origin
+- Full log: `amd64-build.log`

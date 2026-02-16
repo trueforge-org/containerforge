@@ -1,0 +1,213 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.77kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 789B done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libxml2-dev     libxslt1-dev     libmariadb-dev     zlib1g-dev &&   echo "**** install runtime packages ****" &&   apt-get install -y --no-install-recommends     libjpeg-turbo8     libffi8     libpq5     libxml2     libxslt1.1     libmariadb3 &&   echo "**** install babybuddy ****" &&   curl -o /tmp/babybuddy.tar.gz -L "https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz" &&   mkdir -p /app/www/public &&   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 &&   cd /app/www/public &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient &&   ln -s /config/data /app/www/public/data &&   ln -s /config/media /app/www/public/media &&   echo "**** cleanup ****" &&   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false     build-essential libjpeg-dev libffi-dev libxml2-dev libxslt1-dev libmariadb-dev python3-dev zlib1g-dev &&   apt-get autoremove -y &&   apt-get clean &&   rm -rf /tmp/* /config/.cache /config/.cargo /var/lib/apt/lists/*
+#6 0.150 **** install build packages ****
+#6 0.627 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.627 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 1.371 Get:3 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.496 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.711 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.926 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 2.094 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.137 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 2.550 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.770 Get:10 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 3.529 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 3.709 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 3.869 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 4.067 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 4.250 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 4.432 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 4.590 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.748 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.766 Fetched 36.1 MB in 5s (7,866 kB/s)
+#6 4.766 Reading package lists...
+#6 5.512 Reading package lists...
+#6 6.238 Building dependency tree...
+#6 6.380 Reading state information...
+#6 6.514 build-essential is already the newest version (12.10ubuntu1).
+#6 6.514 libffi-dev is already the newest version (3.4.6-1build1).
+#6 6.514 zlib1g-dev is already the newest version (1:1.3.dfsg-3.1ubuntu2.1).
+#6 6.514 The following additional packages will be installed:
+#6 6.515   libjpeg-turbo8 libjpeg-turbo8-dev libjpeg8 libjpeg8-dev libmariadb3
+#6 6.515   mariadb-common mysql-common
+#6 6.550 The following NEW packages will be installed:
+#6 6.550   libjpeg-dev libjpeg-turbo8 libjpeg-turbo8-dev libjpeg8 libjpeg8-dev
+#6 6.550   libmariadb-dev libmariadb3 libxml2-dev libxslt1-dev mariadb-common
+#6 6.550   mysql-common
+#6 6.722 0 upgraded, 11 newly installed, 0 to remove and 24 not upgraded.
+#6 6.722 Need to get 1,829 kB of archives.
+#6 6.722 After this operation, 7,663 kB of additional disk space will be used.
+#6 6.722 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#6 6.881 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8-dev amd64 2.1.5-2ubuntu2 [295 kB]
+#6 7.041 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#6 7.198 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8-dev amd64 8c-2ubuntu11 [1,484 B]
+#6 7.355 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-dev amd64 8c-2ubuntu11 [1,482 B]
+#6 7.513 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 mysql-common all 5.8+1.1.0build1 [6,746 B]
+#6 7.670 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-common all 1:10.11.14-0ubuntu0.24.04.1 [28.6 kB]
+#6 7.828 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 libmariadb3 amd64 1:10.11.14-0ubuntu0.24.04.1 [196 kB]
+#6 7.987 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 libmariadb-dev amd64 1:10.11.14-0ubuntu0.24.04.1 [274 kB]
+#6 8.146 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
+#6 8.312 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxslt1-dev amd64 1.1.39-0exp1ubuntu0.24.04.3 [91.9 kB]
+#6 8.420 debconf: delaying package configuration, since apt-utils is not installed
+#6 8.444 Fetched 1,829 kB in 2s (1,041 kB/s)
+#6 8.459 Selecting previously unselected package libjpeg-turbo8:amd64.
+#6 8.459 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#6 8.473 Preparing to unpack .../00-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#6 8.474 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 8.492 Selecting previously unselected package libjpeg-turbo8-dev:amd64.
+#6 8.494 Preparing to unpack .../01-libjpeg-turbo8-dev_2.1.5-2ubuntu2_amd64.deb ...
+#6 8.495 Unpacking libjpeg-turbo8-dev:amd64 (2.1.5-2ubuntu2) ...
+#6 8.514 Selecting previously unselected package libjpeg8:amd64.
+#6 8.516 Preparing to unpack .../02-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#6 8.517 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 8.529 Selecting previously unselected package libjpeg8-dev:amd64.
+#6 8.530 Preparing to unpack .../03-libjpeg8-dev_8c-2ubuntu11_amd64.deb ...
+#6 8.531 Unpacking libjpeg8-dev:amd64 (8c-2ubuntu11) ...
+#6 8.544 Selecting previously unselected package libjpeg-dev:amd64.
+#6 8.545 Preparing to unpack .../04-libjpeg-dev_8c-2ubuntu11_amd64.deb ...
+#6 8.546 Unpacking libjpeg-dev:amd64 (8c-2ubuntu11) ...
+#6 8.560 Selecting previously unselected package mysql-common.
+#6 8.561 Preparing to unpack .../05-mysql-common_5.8+1.1.0build1_all.deb ...
+#6 8.571 Unpacking mysql-common (5.8+1.1.0build1) ...
+#6 8.586 Selecting previously unselected package mariadb-common.
+#6 8.588 Preparing to unpack .../06-mariadb-common_1%3a10.11.14-0ubuntu0.24.04.1_all.deb ...
+#6 8.592 Unpacking mariadb-common (1:10.11.14-0ubuntu0.24.04.1) ...
+#6 8.606 Selecting previously unselected package libmariadb3:amd64.
+#6 8.607 Preparing to unpack .../07-libmariadb3_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
+#6 8.608 Unpacking libmariadb3:amd64 (1:10.11.14-0ubuntu0.24.04.1) ...
+#6 8.625 Selecting previously unselected package libmariadb-dev.
+#6 8.626 Preparing to unpack .../08-libmariadb-dev_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
+#6 8.627 Unpacking libmariadb-dev (1:10.11.14-0ubuntu0.24.04.1) ...
+#6 8.655 Selecting previously unselected package libxml2-dev:amd64.
+#6 8.657 Preparing to unpack .../09-libxml2-dev_2.9.14+dfsg-1.3ubuntu3.7_amd64.deb ...
+#6 8.658 Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+#6 8.691 Selecting previously unselected package libxslt1-dev:amd64.
+#6 8.693 Preparing to unpack .../10-libxslt1-dev_1.1.39-0exp1ubuntu0.24.04.3_amd64.deb ...
+#6 8.693 Unpacking libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
+#6 8.725 Setting up mysql-common (5.8+1.1.0build1) ...
+#6 8.738 update-alternatives: using /etc/mysql/my.cnf.fallback to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+#6 8.740 Setting up mariadb-common (1:10.11.14-0ubuntu0.24.04.1) ...
+#6 8.744 update-alternatives: using /etc/mysql/mariadb.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+#6 8.747 Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+#6 8.749 Setting up libmariadb3:amd64 (1:10.11.14-0ubuntu0.24.04.1) ...
+#6 8.751 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#6 8.754 Setting up libmariadb-dev (1:10.11.14-0ubuntu0.24.04.1) ...
+#6 8.755 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#6 8.757 Setting up libjpeg-turbo8-dev:amd64 (2.1.5-2ubuntu2) ...
+#6 8.759 Setting up libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
+#6 8.761 Setting up libjpeg8-dev:amd64 (8c-2ubuntu11) ...
+#6 8.763 Setting up libjpeg-dev:amd64 (8c-2ubuntu11) ...
+#6 8.766 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 8.800 **** install runtime packages ****
+#6 8.806 Reading package lists...
+#6 9.543 Building dependency tree...
+#6 9.695 Reading state information...
+#6 9.860 libjpeg-turbo8 is already the newest version (2.1.5-2ubuntu2).
+#6 9.860 libjpeg-turbo8 set to manually installed.
+#6 9.860 libffi8 is already the newest version (3.4.6-1build1).
+#6 9.860 libxml2 is already the newest version (2.9.14+dfsg-1.3ubuntu3.7).
+#6 9.860 libxml2 set to manually installed.
+#6 9.860 libxslt1.1 is already the newest version (1.1.39-0exp1ubuntu0.24.04.3).
+#6 9.860 libxslt1.1 set to manually installed.
+#6 9.860 libmariadb3 is already the newest version (1:10.11.14-0ubuntu0.24.04.1).
+#6 9.860 libmariadb3 set to manually installed.
+#6 9.860 The following NEW packages will be installed:
+#6 9.861   libpq5
+#6 10.03 0 upgraded, 1 newly installed, 0 to remove and 24 not upgraded.
+#6 10.03 Need to get 145 kB of archives.
+#6 10.03 After this operation, 446 kB of additional disk space will be used.
+#6 10.03 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpq5 amd64 16.11-0ubuntu0.24.04.1 [145 kB]
+#6 10.13 debconf: delaying package configuration, since apt-utils is not installed
+#6 10.16 Fetched 145 kB in 0s (867 kB/s)
+#6 10.17 Selecting previously unselected package libpq5:amd64.
+#6 10.17 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 21152 files and directories currently installed.)
+#6 10.18 Preparing to unpack .../libpq5_16.11-0ubuntu0.24.04.1_amd64.deb ...
+#6 10.19 Unpacking libpq5:amd64 (16.11-0ubuntu0.24.04.1) ...
+#6 10.21 Setting up libpq5:amd64 (16.11-0ubuntu0.24.04.1) ...
+#6 10.21 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 10.23 **** install babybuddy ****
+#6 10.24   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#6 10.24                                  Dload  Upload   Total   Spent    Left  Speed
+#6 10.24   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#6 10.46 100    14  100    14    0     0     63      0 --:--:-- --:--:-- --:--:--    63
+#6 10.46 tar: This does not look like a tar archive
+#6 10.46 
+#6 10.46 gzip: stdin: not in gzip format
+#6 10.46 tar: Child returned status 1
+#6 10.46 tar: Error is not recoverable: exiting now
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libxml2-dev     libxslt1-dev     libmariadb-dev     zlib1g-dev &&   echo \"**** install runtime packages ****\" &&   apt-get install -y --no-install-recommends     libjpeg-turbo8     libffi8     libpq5     libxml2     libxslt1.1     libmariadb3 &&   echo \"**** install babybuddy ****\" &&   curl -o /tmp/babybuddy.tar.gz -L \"https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz\" &&   mkdir -p /app/www/public &&   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 &&   cd /app/www/public &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient &&   ln -s /config/data /app/www/public/data &&   ln -s /config/media /app/www/public/media &&   echo \"**** cleanup ****\" &&   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false     build-essential libjpeg-dev libffi-dev libxml2-dev libxslt1-dev libmariadb-dev python3-dev zlib1g-dev &&   apt-get autoremove -y &&   apt-get clean &&   rm -rf /tmp/* $HOME/.cache $HOME/.cargo /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libxml2-dev     libxslt1-dev     libmariadb-dev     zlib1g-dev &&   echo "**** install runtime packages ****" &&   apt-get install -y --no-install-recommends     libjpeg-turbo8     libffi8     libpq5     libxml2     libxslt1.1     libmariadb3 &&   echo "**** install babybuddy ****" &&   curl -o /tmp/babybuddy.tar.gz -L "https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz" &&   mkdir -p /app/www/public &&   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 &&   cd /app/www/public &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient &&   ln -s /config/data /app/www/public/data &&   ln -s /config/media /app/www/public/media &&   echo "**** cleanup ****" &&   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false     build-essential libjpeg-dev libffi-dev libxml2-dev libxslt1-dev libmariadb-dev python3-dev zlib1g-dev &&   apt-get autoremove -y &&   apt-get clean &&   rm -rf /tmp/* /config/.cache /config/.cargo /var/lib/apt/lists/*:
+10.03 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpq5 amd64 16.11-0ubuntu0.24.04.1 [145 kB]
+10.13 debconf: delaying package configuration, since apt-utils is not installed
+                        Dload  Upload   Total   Spent    Left  Speed
+10.24   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+--:--    63
+10.46 tar: This does not look like a tar archive
+10.46 
+10.46 gzip: stdin: not in gzip format
+10.46 tar: Child returned status 1
+10.46 tar: Error is not recoverable: exiting now
+------
+Dockerfile:11
+--------------------
+  10 |     
+  11 | >>> RUN \
+  12 | >>>   echo "**** install build packages ****" && \
+  13 | >>>   apt-get update && \
+  14 | >>>   apt-get install -y --no-install-recommends \
+  15 | >>>     build-essential \
+  16 | >>>     libjpeg-dev \
+  17 | >>>     libffi-dev \
+  18 | >>>     libxml2-dev \
+  19 | >>>     libxslt1-dev \
+  20 | >>>     libmariadb-dev \
+  21 | >>>     zlib1g-dev && \
+  22 | >>>   echo "**** install runtime packages ****" && \
+  23 | >>>   apt-get install -y --no-install-recommends \
+  24 | >>>     libjpeg-turbo8 \
+  25 | >>>     libffi8 \
+  26 | >>>     libpq5 \
+  27 | >>>     libxml2 \
+  28 | >>>     libxslt1.1 \
+  29 | >>>     libmariadb3 && \
+  30 | >>>   echo "**** install babybuddy ****" && \
+  31 | >>>   curl -o /tmp/babybuddy.tar.gz -L "https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz" && \
+  32 | >>>   mkdir -p /app/www/public && \
+  33 | >>>   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 && \
+  34 | >>>   cd /app/www/public && \
+  35 | >>>   python3 -m venv /config/venv && \
+  36 | >>>   pip install -U --no-cache-dir pip wheel && \
+  37 | >>>   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  38 | >>>   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
+  39 | >>>   ln -s /config/data /app/www/public/data && \
+  40 | >>>   ln -s /config/media /app/www/public/media && \
+  41 | >>>   echo "**** cleanup ****" && \
+  42 | >>>   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  43 | >>>     build-essential libjpeg-dev libffi-dev libxml2-dev libxslt1-dev libmariadb-dev python3-dev zlib1g-dev && \
+  44 | >>>   apt-get autoremove -y && \
+  45 | >>>   apt-get clean && \
+  46 | >>>   rm -rf /tmp/* $HOME/.cache $HOME/.cargo /var/lib/apt/lists/*
+  47 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libxml2-dev     libxslt1-dev     libmariadb-dev     zlib1g-dev &&   echo \"**** install runtime packages ****\" &&   apt-get install -y --no-install-recommends     libjpeg-turbo8     libffi8     libpq5     libxml2     libxslt1.1     libmariadb3 &&   echo \"**** install babybuddy ****\" &&   curl -o /tmp/babybuddy.tar.gz -L \"https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz\" &&   mkdir -p /app/www/public &&   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 &&   cd /app/www/public &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient &&   ln -s /config/data /app/www/public/data &&   ln -s /config/media /app/www/public/media &&   echo \"**** cleanup ****\" &&   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false     build-essential libjpeg-dev libffi-dev libxml2-dev libxslt1-dev libmariadb-dev python3-dev zlib1g-dev &&   apt-get autoremove -y &&   apt-get clean &&   rm -rf /tmp/* $HOME/.cache $HOME/.cargo /var/lib/apt/lists/*" did not complete successfully: exit code: 2

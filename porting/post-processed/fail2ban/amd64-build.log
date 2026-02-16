@@ -1,0 +1,297 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.33kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 5.29kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     fail2ban     iptables     logrotate     msmtp     nftables     whois &&   echo "**** copy fail2ban confs to /defaults ****" &&   mkdir -p     /defaults/fail2ban &&   curl -o     /tmp/fail2ban-confs.tar.gz -L     "https://github.com/linuxserver/fail2ban-confs/tarball/master" &&   tar xf     /tmp/fail2ban-confs.tar.gz -C     /defaults/fail2ban/ --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE &&   echo "**** fix logrotate ****" &&   sed -i "s#/var/log/messages {}.*# #g"     /etc/logrotate.conf &&   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g'     /etc/periodic/daily/logrotate &&   rm -rf /etc/fail2ban &&   ln -s /config/fail2ban /etc/fail2ban &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
+#6 0.145 **** install runtime packages ****
+#6 0.312 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.456 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 1.008 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 1.243 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.438 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.634 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.755 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.959 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 2.103 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.229 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 2.389 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 3.264 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 3.407 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 3.586 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.751 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.917 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 4.060 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.203 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.222 Fetched 36.1 MB in 4s (8,914 kB/s)
+#6 4.222 Reading package lists...
+#6 4.945 Reading package lists...
+#6 5.668 Building dependency tree...
+#6 5.817 Reading state information...
+#6 5.957 The following additional packages will be installed:
+#6 5.957   libbsd0 libedit2 libgsasl18 libgssglue1 libidn12 libip4tc2 libip6tc2
+#6 5.957   libjansson4 libmnl0 libnetfilter-conntrack3 libnfnetlink0 libnftables1
+#6 5.957   libnftnl11 libntlm0 libpopt0 libsecret-1-0 libsecret-common libxtables12
+#6 5.957   python3-pyasyncore python3-setuptools python3-systemd ucf
+#6 5.958 Suggested packages:
+#6 5.958   mailx system-log-daemon monit sqlite3 firewalld kmod bsd-mailx | mailx
+#6 5.958   msmtp-mta python-setuptools-doc
+#6 5.958 Recommended packages:
+#6 5.958   python3-pyinotify gsasl-common
+#6 6.018 The following NEW packages will be installed:
+#6 6.018   fail2ban iptables libbsd0 libedit2 libgsasl18 libgssglue1 libidn12 libip4tc2
+#6 6.018   libip6tc2 libjansson4 libmnl0 libnetfilter-conntrack3 libnfnetlink0
+#6 6.018   libnftables1 libnftnl11 libntlm0 libpopt0 libsecret-1-0 libsecret-common
+#6 6.019   libxtables12 logrotate msmtp nftables python3-pyasyncore python3-setuptools
+#6 6.019   python3-systemd ucf whois
+#6 6.189 0 upgraded, 28 newly installed, 0 to remove and 5 not upgraded.
+#6 6.189 Need to get 2,713 kB of archives.
+#6 6.189 After this operation, 12.0 MB of additional disk space will be used.
+#6 6.189 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#6 6.333 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libmnl0 amd64 1.0.5-2build1 [12.3 kB]
+#6 6.476 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libpopt0 amd64 1.19+dfsg-1build1 [28.6 kB]
+#6 6.618 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libxtables12 amd64 1.8.10-3ubuntu2 [35.7 kB]
+#6 6.761 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 logrotate amd64 3.21.0-2build1 [52.2 kB]
+#6 6.904 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#6 7.047 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libip4tc2 amd64 1.8.10-3ubuntu2 [23.3 kB]
+#6 7.190 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libip6tc2 amd64 1.8.10-3ubuntu2 [23.7 kB]
+#6 7.332 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libnfnetlink0 amd64 1.0.2-2build1 [14.8 kB]
+#6 7.475 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libnetfilter-conntrack3 amd64 1.0.9-6build1 [45.2 kB]
+#6 7.618 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libnftnl11 amd64 1.2.6-2build1 [66.0 kB]
+#6 7.761 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 iptables amd64 1.8.10-3ubuntu2 [381 kB]
+#6 7.906 Get:13 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#6 8.049 Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libjansson4 amd64 2.14-2build2 [32.8 kB]
+#6 8.192 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libnftables1 amd64 1.0.9-1build1 [358 kB]
+#6 8.338 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 nftables amd64 1.0.9-1build1 [69.8 kB]
+#6 8.480 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 python3-systemd amd64 235-1build4 [42.4 kB]
+#6 8.623 Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-setuptools all 68.1.2-2ubuntu1.2 [397 kB]
+#6 8.769 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 python3-pyasyncore all 1.0.2-2 [10.1 kB]
+#6 8.912 Get:20 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 fail2ban all 1.0.2-3ubuntu0.1 [409 kB]
+#6 9.058 Get:21 http://archive.ubuntu.com/ubuntu noble/main amd64 libgssglue1 amd64 0.9-1build1 [20.7 kB]
+#6 9.201 Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 libidn12 amd64 1.42-1build1 [55.9 kB]
+#6 9.343 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libntlm0 amd64 1.7-1build1 [19.4 kB]
+#6 9.486 Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 libgsasl18 amd64 2.2.1-1willsync1build2 [72.8 kB]
+#6 9.629 Get:25 http://archive.ubuntu.com/ubuntu noble/main amd64 libsecret-common all 0.21.4-1build3 [4,962 B]
+#6 9.771 Get:26 http://archive.ubuntu.com/ubuntu noble/main amd64 libsecret-1-0 amd64 0.21.4-1build3 [116 kB]
+#6 9.914 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 whois amd64 5.5.22 [51.7 kB]
+#6 10.06 Get:28 http://archive.ubuntu.com/ubuntu noble/universe amd64 msmtp amd64 1.8.24-1build2 [174 kB]
+#6 10.16 debconf: delaying package configuration, since apt-utils is not installed
+#6 10.18 Fetched 2,713 kB in 4s (673 kB/s)
+#6 10.20 Selecting previously unselected package libbsd0:amd64.
+#6 10.20 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#6 10.21 Preparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#6 10.21 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 10.23 Selecting previously unselected package libmnl0:amd64.
+#6 10.23 Preparing to unpack .../01-libmnl0_1.0.5-2build1_amd64.deb ...
+#6 10.23 Unpacking libmnl0:amd64 (1.0.5-2build1) ...
+#6 10.24 Selecting previously unselected package libpopt0:amd64.
+#6 10.25 Preparing to unpack .../02-libpopt0_1.19+dfsg-1build1_amd64.deb ...
+#6 10.25 Unpacking libpopt0:amd64 (1.19+dfsg-1build1) ...
+#6 10.26 Selecting previously unselected package libxtables12:amd64.
+#6 10.26 Preparing to unpack .../03-libxtables12_1.8.10-3ubuntu2_amd64.deb ...
+#6 10.26 Unpacking libxtables12:amd64 (1.8.10-3ubuntu2) ...
+#6 10.28 Selecting previously unselected package logrotate.
+#6 10.28 Preparing to unpack .../04-logrotate_3.21.0-2build1_amd64.deb ...
+#6 10.28 Unpacking logrotate (3.21.0-2build1) ...
+#6 10.30 Selecting previously unselected package ucf.
+#6 10.30 Preparing to unpack .../05-ucf_3.0043+nmu1_all.deb ...
+#6 10.30 Moving old data out of the way
+#6 10.30 Unpacking ucf (3.0043+nmu1) ...
+#6 10.32 Selecting previously unselected package libip4tc2:amd64.
+#6 10.32 Preparing to unpack .../06-libip4tc2_1.8.10-3ubuntu2_amd64.deb ...
+#6 10.32 Unpacking libip4tc2:amd64 (1.8.10-3ubuntu2) ...
+#6 10.34 Selecting previously unselected package libip6tc2:amd64.
+#6 10.34 Preparing to unpack .../07-libip6tc2_1.8.10-3ubuntu2_amd64.deb ...
+#6 10.34 Unpacking libip6tc2:amd64 (1.8.10-3ubuntu2) ...
+#6 10.35 Selecting previously unselected package libnfnetlink0:amd64.
+#6 10.35 Preparing to unpack .../08-libnfnetlink0_1.0.2-2build1_amd64.deb ...
+#6 10.35 Unpacking libnfnetlink0:amd64 (1.0.2-2build1) ...
+#6 10.37 Selecting previously unselected package libnetfilter-conntrack3:amd64.
+#6 10.37 Preparing to unpack .../09-libnetfilter-conntrack3_1.0.9-6build1_amd64.deb ...
+#6 10.37 Unpacking libnetfilter-conntrack3:amd64 (1.0.9-6build1) ...
+#6 10.38 Selecting previously unselected package libnftnl11:amd64.
+#6 10.38 Preparing to unpack .../10-libnftnl11_1.2.6-2build1_amd64.deb ...
+#6 10.39 Unpacking libnftnl11:amd64 (1.2.6-2build1) ...
+#6 10.40 Selecting previously unselected package iptables.
+#6 10.40 Preparing to unpack .../11-iptables_1.8.10-3ubuntu2_amd64.deb ...
+#6 10.40 Unpacking iptables (1.8.10-3ubuntu2) ...
+#6 10.45 Selecting previously unselected package libedit2:amd64.
+#6 10.45 Preparing to unpack .../12-libedit2_3.1-20230828-1build1_amd64.deb ...
+#6 10.45 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#6 10.47 Selecting previously unselected package libjansson4:amd64.
+#6 10.47 Preparing to unpack .../13-libjansson4_2.14-2build2_amd64.deb ...
+#6 10.47 Unpacking libjansson4:amd64 (2.14-2build2) ...
+#6 10.48 Selecting previously unselected package libnftables1:amd64.
+#6 10.48 Preparing to unpack .../14-libnftables1_1.0.9-1build1_amd64.deb ...
+#6 10.48 Unpacking libnftables1:amd64 (1.0.9-1build1) ...
+#6 10.50 Selecting previously unselected package nftables.
+#6 10.50 Preparing to unpack .../15-nftables_1.0.9-1build1_amd64.deb ...
+#6 10.51 Unpacking nftables (1.0.9-1build1) ...
+#6 10.52 Selecting previously unselected package python3-systemd.
+#6 10.52 Preparing to unpack .../16-python3-systemd_235-1build4_amd64.deb ...
+#6 10.52 Unpacking python3-systemd (235-1build4) ...
+#6 10.54 Selecting previously unselected package python3-setuptools.
+#6 10.54 Preparing to unpack .../17-python3-setuptools_68.1.2-2ubuntu1.2_all.deb ...
+#6 10.54 Unpacking python3-setuptools (68.1.2-2ubuntu1.2) ...
+#6 10.59 Selecting previously unselected package python3-pyasyncore.
+#6 10.59 Preparing to unpack .../18-python3-pyasyncore_1.0.2-2_all.deb ...
+#6 10.59 Unpacking python3-pyasyncore (1.0.2-2) ...
+#6 10.61 Selecting previously unselected package fail2ban.
+#6 10.61 Preparing to unpack .../19-fail2ban_1.0.2-3ubuntu0.1_all.deb ...
+#6 10.61 Unpacking fail2ban (1.0.2-3ubuntu0.1) ...
+#6 10.70 Selecting previously unselected package libgssglue1:amd64.
+#6 10.70 Preparing to unpack .../20-libgssglue1_0.9-1build1_amd64.deb ...
+#6 10.70 Unpacking libgssglue1:amd64 (0.9-1build1) ...
+#6 10.71 Selecting previously unselected package libidn12:amd64.
+#6 10.71 Preparing to unpack .../21-libidn12_1.42-1build1_amd64.deb ...
+#6 10.71 Unpacking libidn12:amd64 (1.42-1build1) ...
+#6 10.73 Selecting previously unselected package libntlm0:amd64.
+#6 10.73 Preparing to unpack .../22-libntlm0_1.7-1build1_amd64.deb ...
+#6 10.73 Unpacking libntlm0:amd64 (1.7-1build1) ...
+#6 10.75 Selecting previously unselected package libgsasl18:amd64.
+#6 10.75 Preparing to unpack .../23-libgsasl18_2.2.1-1willsync1build2_amd64.deb ...
+#6 10.75 Unpacking libgsasl18:amd64 (2.2.1-1willsync1build2) ...
+#6 10.76 Selecting previously unselected package libsecret-common.
+#6 10.76 Preparing to unpack .../24-libsecret-common_0.21.4-1build3_all.deb ...
+#6 10.76 Unpacking libsecret-common (0.21.4-1build3) ...
+#6 10.78 Selecting previously unselected package libsecret-1-0:amd64.
+#6 10.78 Preparing to unpack .../25-libsecret-1-0_0.21.4-1build3_amd64.deb ...
+#6 10.78 Unpacking libsecret-1-0:amd64 (0.21.4-1build3) ...
+#6 10.79 Selecting previously unselected package whois.
+#6 10.80 Preparing to unpack .../26-whois_5.5.22_amd64.deb ...
+#6 10.80 Unpacking whois (5.5.22) ...
+#6 10.81 Selecting previously unselected package msmtp.
+#6 10.81 Preparing to unpack .../27-msmtp_1.8.24-1build2_amd64.deb ...
+#6 10.82 Unpacking msmtp (1.8.24-1build2) ...
+#6 10.87 Setting up libip4tc2:amd64 (1.8.10-3ubuntu2) ...
+#6 10.87 Setting up python3-setuptools (68.1.2-2ubuntu1.2) ...
+#6 11.27 Setting up whois (5.5.22) ...
+#6 11.27 Setting up libip6tc2:amd64 (1.8.10-3ubuntu2) ...
+#6 11.27 Setting up libjansson4:amd64 (2.14-2build2) ...
+#6 11.28 Setting up libntlm0:amd64 (1.7-1build1) ...
+#6 11.28 Setting up libmnl0:amd64 (1.0.5-2build1) ...
+#6 11.28 Setting up libidn12:amd64 (1.42-1build1) ...
+#6 11.28 Setting up libgssglue1:amd64 (0.9-1build1) ...
+#6 11.29 Setting up ucf (3.0043+nmu1) ...
+#6 11.35 Setting up libxtables12:amd64 (1.8.10-3ubuntu2) ...
+#6 11.35 Setting up libgsasl18:amd64 (2.2.1-1willsync1build2) ...
+#6 11.35 Setting up libnfnetlink0:amd64 (1.0.2-2build1) ...
+#6 11.35 Setting up python3-pyasyncore (1.0.2-2) ...
+#6 11.44 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#6 11.44 Setting up libsecret-common (0.21.4-1build3) ...
+#6 11.45 Setting up python3-systemd (235-1build4) ...
+#6 11.54 Setting up libpopt0:amd64 (1.19+dfsg-1build1) ...
+#6 11.54 Setting up logrotate (3.21.0-2build1) ...
+#6 11.66 Created symlink /etc/systemd/system/timers.target.wants/logrotate.timer → /usr/lib/systemd/system/logrotate.timer.
+#6 11.66 Setting up fail2ban (1.0.2-3ubuntu0.1) ...
+#6 12.02 /usr/lib/python3/dist-packages/fail2ban/tests/fail2banregextestcase.py:224: SyntaxWarning: invalid escape sequence '\s'
+#6 12.02   "1490349000 test failed.dns.ch", "^\s*test <F-ID>\S+</F-ID>"
+#6 12.02 /usr/lib/python3/dist-packages/fail2ban/tests/fail2banregextestcase.py:435: SyntaxWarning: invalid escape sequence '\S'
+#6 12.02   '^'+prefix+'<F-ID>User <F-USER>\S+</F-USER></F-ID> not allowed\n'
+#6 12.02 /usr/lib/python3/dist-packages/fail2ban/tests/fail2banregextestcase.py:443: SyntaxWarning: invalid escape sequence '\S'
+#6 12.02   '^'+prefix+'User <F-USER>\S+</F-USER> not allowed\n'
+#6 12.02 /usr/lib/python3/dist-packages/fail2ban/tests/fail2banregextestcase.py:444: SyntaxWarning: invalid escape sequence '\d'
+#6 12.02   '^'+prefix+'Received disconnect from <F-ID><ADDR> port \d+</F-ID>'
+#6 12.02 /usr/lib/python3/dist-packages/fail2ban/tests/fail2banregextestcase.py:451: SyntaxWarning: invalid escape sequence '\s'
+#6 12.02   _test_variants('common', prefix="\s*\S+ sshd\[<F-MLFID>\d+</F-MLFID>\]:\s+")
+#6 12.02 /usr/lib/python3/dist-packages/fail2ban/tests/fail2banregextestcase.py:537: SyntaxWarning: invalid escape sequence '\['
+#6 12.02   'common[prefregex="^svc\[<F-MLFID>\d+</F-MLFID>\] connect <F-CONTENT>.+</F-CONTENT>$"'
+#6 12.06 /usr/lib/python3/dist-packages/fail2ban/tests/servertestcase.py:1375: SyntaxWarning: invalid escape sequence '\s'
+#6 12.06   "`{ nft -a list chain inet f2b-table f2b-chain | grep -oP '@addr-set-j-w-nft-mp\s+.*\s+\Khandle\s+(\d+)$'; } | while read -r hdl; do`",
+#6 12.06 /usr/lib/python3/dist-packages/fail2ban/tests/servertestcase.py:1378: SyntaxWarning: invalid escape sequence '\s'
+#6 12.06   "`{ nft -a list chain inet f2b-table f2b-chain | grep -oP '@addr6-set-j-w-nft-mp\s+.*\s+\Khandle\s+(\d+)$'; } | while read -r hdl; do`",
+#6 12.06 /usr/lib/python3/dist-packages/fail2ban/tests/servertestcase.py:1421: SyntaxWarning: invalid escape sequence '\s'
+#6 12.06   "`{ nft -a list chain inet f2b-table f2b-chain | grep -oP '@addr-set-j-w-nft-ap\s+.*\s+\Khandle\s+(\d+)$'; } | while read -r hdl; do`",
+#6 12.06 /usr/lib/python3/dist-packages/fail2ban/tests/servertestcase.py:1424: SyntaxWarning: invalid escape sequence '\s'
+#6 12.06   "`{ nft -a list chain inet f2b-table f2b-chain | grep -oP '@addr6-set-j-w-nft-ap\s+.*\s+\Khandle\s+(\d+)$'; } | while read -r hdl; do`",
+#6 12.10 invoke-rc.d: could not determine current runlevel
+#6 12.11 invoke-rc.d: policy-rc.d denied execution of start.
+#6 12.21 Created symlink /etc/systemd/system/multi-user.target.wants/fail2ban.service → /usr/lib/systemd/system/fail2ban.service.
+#6 12.21 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#6 12.22 Setting up libnftnl11:amd64 (1.2.6-2build1) ...
+#6 12.22 Setting up libsecret-1-0:amd64 (0.21.4-1build3) ...
+#6 12.22 Setting up libnetfilter-conntrack3:amd64 (1.0.9-6build1) ...
+#6 12.22 Setting up libnftables1:amd64 (1.0.9-1build1) ...
+#6 12.23 Setting up nftables (1.0.9-1build1) ...
+#6 12.31 Setting up msmtp (1.8.24-1build2) ...
+#6 12.44 Setting up iptables (1.8.10-3ubuntu2) ...
+#6 12.44 update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+#6 12.44 update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+#6 12.45 update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+#6 12.45 update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+#6 12.45 update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+#6 12.45 update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+#6 12.46 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 12.49 **** copy fail2ban confs to /defaults ****
+#6 12.49   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#6 12.49                                  Dload  Upload   Total   Spent    Left  Speed
+#6 12.49   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#6 13.08 100  109k    0  109k    0     0   187k      0 --:--:-- --:--:-- --:--:--  187k
+#6 13.10 **** fix logrotate ****
+#6 13.10 sed: can't read /etc/periodic/daily/logrotate: No such file or directory
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     fail2ban     iptables     logrotate     msmtp     nftables     whois &&   echo \"**** copy fail2ban confs to /defaults ****\" &&   mkdir -p     /defaults/fail2ban &&   curl -o     /tmp/fail2ban-confs.tar.gz -L     \"https://github.com/linuxserver/fail2ban-confs/tarball/master\" &&   tar xf     /tmp/fail2ban-confs.tar.gz -C     /defaults/fail2ban/ --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE &&   echo \"**** fix logrotate ****\" &&   sed -i \"s#/var/log/messages {}.*# #g\"     /etc/logrotate.conf &&   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g'     /etc/periodic/daily/logrotate &&   rm -rf /etc/fail2ban &&   ln -s /config/fail2ban /etc/fail2ban &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     fail2ban     iptables     logrotate     msmtp     nftables     whois &&   echo "**** copy fail2ban confs to /defaults ****" &&   mkdir -p     /defaults/fail2ban &&   curl -o     /tmp/fail2ban-confs.tar.gz -L     "https://github.com/linuxserver/fail2ban-confs/tarball/master" &&   tar xf     /tmp/fail2ban-confs.tar.gz -C     /defaults/fail2ban/ --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE &&   echo "**** fix logrotate ****" &&   sed -i "s#/var/log/messages {}.*# #g"     /etc/logrotate.conf &&   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g'     /etc/periodic/daily/logrotate &&   rm -rf /etc/fail2ban &&   ln -s /config/fail2ban /etc/fail2ban &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache:
+12.22 Setting up libsecret-1-0:amd64 (0.21.4-1build3) ...
+12.22 Setting up libnetfilter-conntrack3:amd64 (1.0.9-6build1) ...
+12.22 Setting up libnftables1:amd64 (1.0.9-1build1) ...
+12.23 Setting up nftables (1.0.9-1build1) ...
+12.31 Setting up msmtp (1.8.24-1build2) ...
+12.44 Setting up iptables (1.8.10-3ubuntu2) ...
+-- --:--:--     0
+13.08 100  109k    0  109k    0     0   187k      0 --:--:-- --:--:-- --:--:--  187k
+13.10 **** fix logrotate ****
+13.10 sed: can't read /etc/periodic/daily/logrotate: No such file or directory
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install runtime packages ****" && \
+  11 | >>>   apt-get update && \
+  12 | >>>   apt-get install -y --no-install-recommends \
+  13 | >>>     fail2ban \
+  14 | >>>     iptables \
+  15 | >>>     logrotate \
+  16 | >>>     msmtp \
+  17 | >>>     nftables \
+  18 | >>>     whois && \
+  19 | >>>   echo "**** copy fail2ban confs to /defaults ****" && \
+  20 | >>>   mkdir -p \
+  21 | >>>     /defaults/fail2ban && \
+  22 | >>>   curl -o \
+  23 | >>>     /tmp/fail2ban-confs.tar.gz -L \
+  24 | >>>     "https://github.com/linuxserver/fail2ban-confs/tarball/master" && \
+  25 | >>>   tar xf \
+  26 | >>>     /tmp/fail2ban-confs.tar.gz -C \
+  27 | >>>     /defaults/fail2ban/ --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE && \
+  28 | >>>   echo "**** fix logrotate ****" && \
+  29 | >>>   sed -i "s#/var/log/messages {}.*# #g" \
+  30 | >>>     /etc/logrotate.conf && \
+  31 | >>>   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g' \
+  32 | >>>     /etc/periodic/daily/logrotate && \
+  33 | >>>   rm -rf /etc/fail2ban && \
+  34 | >>>   ln -s /config/fail2ban /etc/fail2ban && \
+  35 | >>>   echo "**** cleanup ****" && \
+  36 | >>>   rm -rf \
+  37 | >>>     /tmp/* \
+  38 | >>>     $HOME/.cache
+  39 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     fail2ban     iptables     logrotate     msmtp     nftables     whois &&   echo \"**** copy fail2ban confs to /defaults ****\" &&   mkdir -p     /defaults/fail2ban &&   curl -o     /tmp/fail2ban-confs.tar.gz -L     \"https://github.com/linuxserver/fail2ban-confs/tarball/master\" &&   tar xf     /tmp/fail2ban-confs.tar.gz -C     /defaults/fail2ban/ --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE &&   echo \"**** fix logrotate ****\" &&   sed -i \"s#/var/log/messages {}.*# #g\"     /etc/logrotate.conf &&   sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g'     /etc/periodic/daily/logrotate &&   rm -rf /etc/fail2ban &&   ln -s /config/fail2ban /etc/fail2ban &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 2

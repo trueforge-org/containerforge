@@ -16,3 +16,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: failed to compute cache key: failed to calculate checksum of ref ntgcosadh0xpbpttq2x5wsvla::sx6q0k91qmsahrmlfakz0z9on: "/patches": not found
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-xvfb:amd64 .`
+- Result: FAIL
+- Reason: ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref ntgcosadh0xpbpttq2x5wsvla::4ntfjn2utfwlmgj39eus805gj: "/patches": not found
+- Full log: `amd64-build.log`

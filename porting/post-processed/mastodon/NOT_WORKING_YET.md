@@ -14,3 +14,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: E: Unable to locate package libidn11
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-mastodon:amd64 .`
+- Result: FAIL
+- Reason: 103.5 tar: Child returned status 1
+- Full log: `amd64-build.log`

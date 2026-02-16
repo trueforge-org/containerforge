@@ -1,0 +1,125 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.61kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 9.07kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     php84-bcmath     php84-bz2     php84-cli     php84-dom     php84-gd     php84-gettext     php84-gmp     php84-mysqli     php84-pdo     php84-pdo_dblib     php84-pdo_mysql     php84-pecl-apcu     php84-pecl-memcached     php84-soap     php84-xmlreader &&   echo "**** install projectsend ****" &&   mkdir -p /app/www/public &&   curl -fso     /tmp/projectsend.zip -L     "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip" ||   curl -fso     /tmp/projectsend.zip -L     "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip" &&   unzip     /tmp/projectsend.zip -d     /app/www/public &&   mv /app/www/public/upload /defaults/ &&   echo "**** download default lang files ****" &&   mkdir -p /defaults/lang &&   curl -fso     /defaults/lang/en.mo -L     "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.mo" &&   curl -fso     /defaults/lang/en.po -L     "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.po" &&   echo "**** cleanup ****" &&     rm -rf     /tmp/*
+#6 0.152 **** install runtime packages ****
+#6 0.605 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.730 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 1.390 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.401 Get:4 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.573 Get:5 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.584 Get:6 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.779 Get:7 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.970 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 2.383 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 2.559 Get:10 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.563 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 3.448 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 3.594 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.758 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.924 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 4.067 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 4.246 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.389 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.408 Fetched 36.1 MB in 4s (8,538 kB/s)
+#6 4.408 Reading package lists...
+#6 5.147 Reading package lists...
+#6 5.872 Building dependency tree...
+#6 6.016 Reading state information...
+#6 6.030 E: Unable to locate package php84-bcmath
+#6 6.030 E: Unable to locate package php84-bz2
+#6 6.030 E: Unable to locate package php84-cli
+#6 6.030 E: Unable to locate package php84-dom
+#6 6.030 E: Unable to locate package php84-gd
+#6 6.030 E: Unable to locate package php84-gettext
+#6 6.030 E: Unable to locate package php84-gmp
+#6 6.030 E: Unable to locate package php84-mysqli
+#6 6.030 E: Unable to locate package php84-pdo
+#6 6.030 E: Unable to locate package php84-pdo_dblib
+#6 6.030 E: Unable to locate package php84-pdo_mysql
+#6 6.030 E: Unable to locate package php84-pecl-apcu
+#6 6.030 E: Unable to locate package php84-pecl-memcached
+#6 6.030 E: Unable to locate package php84-soap
+#6 6.030 E: Unable to locate package php84-xmlreader
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     php84-bcmath     php84-bz2     php84-cli     php84-dom     php84-gd     php84-gettext     php84-gmp     php84-mysqli     php84-pdo     php84-pdo_dblib     php84-pdo_mysql     php84-pecl-apcu     php84-pecl-memcached     php84-soap     php84-xmlreader &&   echo \"**** install projectsend ****\" &&   mkdir -p /app/www/public &&   curl -fso     /tmp/projectsend.zip -L     \"https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip\" ||   curl -fso     /tmp/projectsend.zip -L     \"https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip\" &&   unzip     /tmp/projectsend.zip -d     /app/www/public &&   mv /app/www/public/upload /defaults/ &&   echo \"**** download default lang files ****\" &&   mkdir -p /defaults/lang &&   curl -fso     /defaults/lang/en.mo -L     \"https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.mo\" &&   curl -fso     /defaults/lang/en.po -L     \"https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.po\" &&   echo \"**** cleanup ****\" &&     rm -rf     /tmp/*" did not complete successfully: exit code: 22
+------
+ > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     php84-bcmath     php84-bz2     php84-cli     php84-dom     php84-gd     php84-gettext     php84-gmp     php84-mysqli     php84-pdo     php84-pdo_dblib     php84-pdo_mysql     php84-pecl-apcu     php84-pecl-memcached     php84-soap     php84-xmlreader &&   echo "**** install projectsend ****" &&   mkdir -p /app/www/public &&   curl -fso     /tmp/projectsend.zip -L     "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip" ||   curl -fso     /tmp/projectsend.zip -L     "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip" &&   unzip     /tmp/projectsend.zip -d     /app/www/public &&   mv /app/www/public/upload /defaults/ &&   echo "**** download default lang files ****" &&   mkdir -p /defaults/lang &&   curl -fso     /defaults/lang/en.mo -L     "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.mo" &&   curl -fso     /defaults/lang/en.po -L     "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.po" &&   echo "**** cleanup ****" &&     rm -rf     /tmp/*:
+6.030 E: Unable to locate package php84-gettext
+6.030 E: Unable to locate package php84-gmp
+6.030 E: Unable to locate package php84-mysqli
+6.030 E: Unable to locate package php84-pdo
+6.030 E: Unable to locate package php84-pdo_dblib
+6.030 E: Unable to locate package php84-pdo_mysql
+6.030 E: Unable to locate package php84-pecl-apcu
+6.030 E: Unable to locate package php84-pecl-memcached
+6.030 E: Unable to locate package php84-soap
+6.030 E: Unable to locate package php84-xmlreader
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install runtime packages ****" && \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     php84-bcmath \
+  13 | >>>     php84-bz2 \
+  14 | >>>     php84-cli \
+  15 | >>>     php84-dom \
+  16 | >>>     php84-gd \
+  17 | >>>     php84-gettext \
+  18 | >>>     php84-gmp \
+  19 | >>>     php84-mysqli \
+  20 | >>>     php84-pdo \
+  21 | >>>     php84-pdo_dblib \
+  22 | >>>     php84-pdo_mysql \
+  23 | >>>     php84-pecl-apcu \
+  24 | >>>     php84-pecl-memcached \
+  25 | >>>     php84-soap \
+  26 | >>>     php84-xmlreader && \
+  27 | >>>   echo "**** install projectsend ****" && \
+  28 | >>>   mkdir -p /app/www/public && \
+  29 | >>>   curl -fso \
+  30 | >>>     /tmp/projectsend.zip -L \
+  31 | >>>     "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip" || \
+  32 | >>>   curl -fso \
+  33 | >>>     /tmp/projectsend.zip -L \
+  34 | >>>     "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip" && \
+  35 | >>>   unzip \
+  36 | >>>     /tmp/projectsend.zip -d \
+  37 | >>>     /app/www/public && \
+  38 | >>>   mv /app/www/public/upload /defaults/ && \
+  39 | >>>   echo "**** download default lang files ****" && \
+  40 | >>>   mkdir -p /defaults/lang && \
+  41 | >>>   curl -fso \
+  42 | >>>     /defaults/lang/en.mo -L \
+  43 | >>>     "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.mo" && \
+  44 | >>>   curl -fso \
+  45 | >>>     /defaults/lang/en.po -L \
+  46 | >>>     "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.po" && \
+  47 | >>>   echo "**** cleanup ****" && \
+  48 | >>>     rm -rf \
+  49 | >>>     /tmp/*
+  50 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     php84-bcmath     php84-bz2     php84-cli     php84-dom     php84-gd     php84-gettext     php84-gmp     php84-mysqli     php84-pdo     php84-pdo_dblib     php84-pdo_mysql     php84-pecl-apcu     php84-pecl-memcached     php84-soap     php84-xmlreader &&   echo \"**** install projectsend ****\" &&   mkdir -p /app/www/public &&   curl -fso     /tmp/projectsend.zip -L     \"https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip\" ||   curl -fso     /tmp/projectsend.zip -L     \"https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip\" &&   unzip     /tmp/projectsend.zip -d     /app/www/public &&   mv /app/www/public/upload /defaults/ &&   echo \"**** download default lang files ****\" &&   mkdir -p /defaults/lang &&   curl -fso     /defaults/lang/en.mo -L     \"https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.mo\" &&   curl -fso     /defaults/lang/en.po -L     \"https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.po\" &&   echo \"**** cleanup ****\" &&     rm -rf     /tmp/*" did not complete successfully: exit code: 22

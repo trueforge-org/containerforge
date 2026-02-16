@@ -1,0 +1,239 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.45kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 7.77kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y         php8.3-xml         php8.3-exif         php8.3-gmp         php8.3-intl         php8.3-mysql         php8.3-pgsql         php8.3-sqlite3         sqlite3 &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install app ****" &&     mkdir -p         /app/www &&     curl -o         /tmp/freshrss.tar.gz -L         "https://github.com/FreshRSS/FreshRSS/archive/${VERSION}.tar.gz" &&     tar xf         /tmp/freshrss.tar.gz -C         /app/www --strip-components=1 &&     sed -i "s|'disable_update' => false,|'disable_update' => true,|g"         /app/www/config.default.php &&     echo "**** cleanup ****" &&     rm -rf         /tmp/* &&     apt-get clean && rm -rf /var/lib/apt/lists/*
+#6 0.152 **** install runtime packages ****
+#6 0.336 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.597 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.744 Get:3 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 0.844 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 1.245 Get:5 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.355 Get:6 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.358 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.543 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.733 Get:9 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 2.003 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 3.153 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 3.291 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 3.448 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 3.622 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.784 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.944 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 4.082 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.221 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.239 Fetched 36.1 MB in 4s (8,892 kB/s)
+#6 4.239 Reading package lists...
+#6 4.988 Reading package lists...
+#6 5.723 Building dependency tree...
+#6 5.869 Reading state information...
+#6 6.007 The following additional packages will be installed:
+#6 6.007   libpq5 php-common psmisc ucf
+#6 6.008 Suggested packages:
+#6 6.008   sqlite3-doc
+#6 6.053 The following NEW packages will be installed:
+#6 6.053   libpq5 php-common php8.3-common php8.3-gmp php8.3-intl php8.3-mysql
+#6 6.053   php8.3-pgsql php8.3-sqlite3 php8.3-xml psmisc sqlite3 ucf
+#6 6.206 0 upgraded, 12 newly installed, 0 to remove and 5 not upgraded.
+#6 6.206 Need to get 1,808 kB of archives.
+#6 6.206 After this operation, 13.6 MB of additional disk space will be used.
+#6 6.206 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#6 6.345 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#6 6.484 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpq5 amd64 16.11-0ubuntu0.24.04.1 [145 kB]
+#6 6.622 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#6 6.761 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#6 6.906 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gmp amd64 8.3.6-0ubuntu0.24.04.6 [23.4 kB]
+#6 7.044 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#6 7.183 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#6 7.321 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-pgsql amd64 8.3.6-0ubuntu0.24.04.6 [62.6 kB]
+#6 7.460 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-sqlite3 amd64 8.3.6-0ubuntu0.24.04.6 [34.2 kB]
+#6 7.598 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#6 7.736 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 sqlite3 amd64 3.45.1-1ubuntu2.5 [144 kB]
+#6 7.838 debconf: delaying package configuration, since apt-utils is not installed
+#6 7.863 Fetched 1,808 kB in 2s (1,077 kB/s)
+#6 7.877 Selecting previously unselected package ucf.
+#6 7.877 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#6 7.888 Preparing to unpack .../00-ucf_3.0043+nmu1_all.deb ...
+#6 7.890 Moving old data out of the way
+#6 7.891 Unpacking ucf (3.0043+nmu1) ...
+#6 7.910 Selecting previously unselected package psmisc.
+#6 7.911 Preparing to unpack .../01-psmisc_23.7-1build1_amd64.deb ...
+#6 7.912 Unpacking psmisc (23.7-1build1) ...
+#6 7.932 Selecting previously unselected package libpq5:amd64.
+#6 7.933 Preparing to unpack .../02-libpq5_16.11-0ubuntu0.24.04.1_amd64.deb ...
+#6 7.935 Unpacking libpq5:amd64 (16.11-0ubuntu0.24.04.1) ...
+#6 7.952 Selecting previously unselected package php-common.
+#6 7.953 Preparing to unpack .../03-php-common_2%3a93ubuntu2_all.deb ...
+#6 7.954 Unpacking php-common (2:93ubuntu2) ...
+#6 7.972 Selecting previously unselected package php8.3-common.
+#6 7.973 Preparing to unpack .../04-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 7.975 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.023 Selecting previously unselected package php8.3-gmp.
+#6 8.025 Preparing to unpack .../05-php8.3-gmp_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 8.027 Unpacking php8.3-gmp (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.043 Selecting previously unselected package php8.3-intl.
+#6 8.045 Preparing to unpack .../06-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 8.047 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.065 Selecting previously unselected package php8.3-mysql.
+#6 8.066 Preparing to unpack .../07-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 8.068 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.086 Selecting previously unselected package php8.3-pgsql.
+#6 8.088 Preparing to unpack .../08-php8.3-pgsql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 8.090 Unpacking php8.3-pgsql (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.106 Selecting previously unselected package php8.3-sqlite3.
+#6 8.108 Preparing to unpack .../09-php8.3-sqlite3_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 8.110 Unpacking php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.126 Selecting previously unselected package php8.3-xml.
+#6 8.127 Preparing to unpack .../10-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#6 8.129 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.147 Selecting previously unselected package sqlite3.
+#6 8.148 Preparing to unpack .../11-sqlite3_3.45.1-1ubuntu2.5_amd64.deb ...
+#6 8.149 Unpacking sqlite3 (3.45.1-1ubuntu2.5) ...
+#6 8.170 Setting up psmisc (23.7-1build1) ...
+#6 8.172 Setting up libpq5:amd64 (16.11-0ubuntu0.24.04.1) ...
+#6 8.174 Setting up ucf (3.0043+nmu1) ...
+#6 8.236 Setting up sqlite3 (3.45.1-1ubuntu2.5) ...
+#6 8.239 Setting up php-common (2:93ubuntu2) ...
+#6 8.352 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#6 8.356 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#6 8.453 
+#6 8.453 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#6 8.586 
+#6 8.586 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#6 8.721 
+#6 8.721 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#6 8.856 
+#6 8.856 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#6 8.994 
+#6 8.994 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#6 9.133 
+#6 9.133 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#6 9.275 
+#6 9.275 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#6 9.418 
+#6 9.418 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#6 9.564 
+#6 9.564 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#6 9.710 
+#6 9.710 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#6 9.856 
+#6 9.856 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#6 10.00 
+#6 10.00 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#6 10.15 
+#6 10.15 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#6 10.29 
+#6 10.29 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#6 10.44 
+#6 10.44 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#6 10.58 
+#6 10.58 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#6 10.73 
+#6 10.73 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#6 10.78 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#6 10.88 
+#6 10.88 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#6 11.02 
+#6 11.02 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#6 11.18 
+#6 11.18 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#6 11.23 Setting up php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.32 
+#6 11.32 Creating config file /etc/php/8.3/mods-available/sqlite3.ini with new version
+#6 11.47 
+#6 11.47 Creating config file /etc/php/8.3/mods-available/pdo_sqlite.ini with new version
+#6 11.52 Setting up php8.3-gmp (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.62 
+#6 11.62 Creating config file /etc/php/8.3/mods-available/gmp.ini with new version
+#6 11.67 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#6 11.77 
+#6 11.77 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#6 11.91 
+#6 11.91 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#6 12.06 
+#6 12.06 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#6 12.21 
+#6 12.21 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#6 12.35 
+#6 12.35 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#6 12.50 
+#6 12.50 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#6 12.55 Setting up php8.3-pgsql (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.65 
+#6 12.65 Creating config file /etc/php/8.3/mods-available/pgsql.ini with new version
+#6 12.79 
+#6 12.79 Creating config file /etc/php/8.3/mods-available/pdo_pgsql.ini with new version
+#6 12.85 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#6 12.94 
+#6 12.94 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#6 13.00 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 13.03 **** configure php-fpm to pass env vars ****
+#6 13.03 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y         php8.3-xml         php8.3-exif         php8.3-gmp         php8.3-intl         php8.3-mysql         php8.3-pgsql         php8.3-sqlite3         sqlite3 &&     echo \"**** configure php-fpm to pass env vars ****\" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo \"**** install app ****\" &&     mkdir -p         /app/www &&     curl -o         /tmp/freshrss.tar.gz -L         \"https://github.com/FreshRSS/FreshRSS/archive/${VERSION}.tar.gz\" &&     tar xf         /tmp/freshrss.tar.gz -C         /app/www --strip-components=1 &&     sed -i \"s|'disable_update' => false,|'disable_update' => true,|g\"         /app/www/config.default.php &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/* &&     apt-get clean && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y         php8.3-xml         php8.3-exif         php8.3-gmp         php8.3-intl         php8.3-mysql         php8.3-pgsql         php8.3-sqlite3         sqlite3 &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install app ****" &&     mkdir -p         /app/www &&     curl -o         /tmp/freshrss.tar.gz -L         "https://github.com/FreshRSS/FreshRSS/archive/${VERSION}.tar.gz" &&     tar xf         /tmp/freshrss.tar.gz -C         /app/www --strip-components=1 &&     sed -i "s|'disable_update' => false,|'disable_update' => true,|g"         /app/www/config.default.php &&     echo "**** cleanup ****" &&     rm -rf         /tmp/* &&     apt-get clean && rm -rf /var/lib/apt/lists/*:
+12.65 
+12.65 Creating config file /etc/php/8.3/mods-available/pgsql.ini with new version
+12.79 
+12.79 Creating config file /etc/php/8.3/mods-available/pdo_pgsql.ini with new version
+12.85 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+12.94 
+12.94 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+13.00 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+13.03 **** configure php-fpm to pass env vars ****
+13.03 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>     echo "**** install runtime packages ****" && \
+  11 | >>>     apt-get update && \
+  12 | >>>     apt-get install -y \
+  13 | >>>         php8.3-xml \
+  14 | >>>         php8.3-exif \
+  15 | >>>         php8.3-gmp \
+  16 | >>>         php8.3-intl \
+  17 | >>>         php8.3-mysql \
+  18 | >>>         php8.3-pgsql \
+  19 | >>>         php8.3-sqlite3 \
+  20 | >>>         sqlite3 && \
+  21 | >>>     echo "**** configure php-fpm to pass env vars ****" && \
+  22 | >>>     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
+  23 | >>>     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
+  24 | >>>     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+  25 | >>>     echo "**** install app ****" && \
+  26 | >>>     mkdir -p \
+  27 | >>>         /app/www && \
+  28 | >>>     curl -o \
+  29 | >>>         /tmp/freshrss.tar.gz -L \
+  30 | >>>         "https://github.com/FreshRSS/FreshRSS/archive/${VERSION}.tar.gz" && \
+  31 | >>>     tar xf \
+  32 | >>>         /tmp/freshrss.tar.gz -C \
+  33 | >>>         /app/www --strip-components=1 && \
+  34 | >>>     sed -i "s|'disable_update' => false,|'disable_update' => true,|g" \
+  35 | >>>         /app/www/config.default.php && \
+  36 | >>>     echo "**** cleanup ****" && \
+  37 | >>>     rm -rf \
+  38 | >>>         /tmp/* && \
+  39 | >>>     apt-get clean && rm -rf /var/lib/apt/lists/*
+  40 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y         php8.3-xml         php8.3-exif         php8.3-gmp         php8.3-intl         php8.3-mysql         php8.3-pgsql         php8.3-sqlite3         sqlite3 &&     echo \"**** configure php-fpm to pass env vars ****\" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo \"**** install app ****\" &&     mkdir -p         /app/www &&     curl -o         /tmp/freshrss.tar.gz -L         \"https://github.com/FreshRSS/FreshRSS/archive/${VERSION}.tar.gz\" &&     tar xf         /tmp/freshrss.tar.gz -C         /app/www --strip-components=1 &&     sed -i \"s|'disable_update' => false,|'disable_update' => true,|g\"         /app/www/config.default.php &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/* &&     apt-get clean && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 2

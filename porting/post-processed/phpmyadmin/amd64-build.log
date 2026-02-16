@@ -1,0 +1,139 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 3.19kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 20.60kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf &&   echo "**** setup php opcache ****" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo "**** install phpmyadmin ****" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" &&   curl -s -o     "/tmp/phpmyadmin.tar.xz.asc" -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92" &&   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then     echo "File signature mismatch";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup
+#6 0.311 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.447 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.719 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.903 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.088 Get:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.104 Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 1.826 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.159 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 2.298 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 2.299 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 2.459 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 2.600 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 2.744 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.920 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.084 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.246 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 3.386 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 3.527 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 3.546 Fetched 36.1 MB in 3s (10.7 MB/s)
+#6 3.546 Reading package lists...
+#6 4.282 Reading package lists...
+#6 4.993 Building dependency tree...
+#6 5.131 Reading state information...
+#6 5.145 E: Unable to locate package gnupg-dirmngr
+#6 5.146 /bin/bash: line 1: /etc/php84/conf.d/session-strict.ini: No such file or directory
+#6 5.146 /bin/bash: line 1: /etc/php84/conf.d/phpmyadmin-misc.ini: No such file or directory
+#6 5.156 gpg: keyserver receive failed: Server indicated a failure
+#6 5.160 gpg: keyserver receive failed: Server indicated a failure
+#6 5.163 gpg: keyserver receive failed: Server indicated a failure
+#6 ERROR: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php84/php-fpm.conf &&   echo \"**** setup php opcache ****\" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo \"**** install phpmyadmin ****\" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz\" &&   curl -s -o     \"/tmp/phpmyadmin.tar.xz.asc\" -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/phpmyadmin.tar.xz.asc\" \"/tmp/phpmyadmin.tar.xz\"; then     echo \"File signature mismatch\";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i \"s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@\" \"/app/www/public/libraries/vendor_config.php\" &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup" did not complete successfully: exit code: 2
+------
+ > [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf &&   echo "**** setup php opcache ****" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo "**** install phpmyadmin ****" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" &&   curl -s -o     "/tmp/phpmyadmin.tar.xz.asc" -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92" &&   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then     echo "File signature mismatch";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup:
+3.527 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+
+
+
+5.145 E: Unable to locate package gnupg-dirmngr
+5.146 /bin/bash: line 1: /etc/php84/conf.d/session-strict.ini: No such file or directory
+5.146 /bin/bash: line 1: /etc/php84/conf.d/phpmyadmin-misc.ini: No such file or directory
+5.156 gpg: keyserver receive failed: Server indicated a failure
+5.160 gpg: keyserver receive failed: Server indicated a failure
+5.163 gpg: keyserver receive failed: Server indicated a failure
+------
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "PHPMYADMIN_RELEASE_GPG_KEY") (line 10)
+Dockerfile:15
+--------------------
+  14 |     
+  15 | >>> RUN \
+  16 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  17 | >>>     gpg \
+  18 | >>>     gpg-agent \
+  19 | >>>     gnupg-dirmngr && \
+  20 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  21 | >>>     php84-bz2 \
+  22 | >>>     php84-dom \
+  23 | >>>     php84-gd \
+  24 | >>>     php84-mysqli \
+  25 | >>>     php84-opcache \
+  26 | >>>     php84-pecl-uploadprogress \
+  27 | >>>     php84-tokenizer && \
+  28 | >>>   echo "**** configure php-fpm to pass env vars ****" && \
+  29 | >>>   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
+  30 | >>>   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
+  31 | >>>   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
+  32 | >>>   echo "**** setup php opcache ****" && \
+  33 | >>>   { \
+  34 | >>>       echo 'opcache.memory_consumption=128'; \
+  35 | >>>       echo 'opcache.interned_strings_buffer=8'; \
+  36 | >>>       echo 'opcache.max_accelerated_files=4000'; \
+  37 | >>>       echo 'opcache.revalidate_freq=2'; \
+  38 | >>>       echo 'opcache.fast_shutdown=1'; \
+  39 | >>>   } > /etc/php84/conf.d/opcache-recommended.ini; \
+  40 | >>>   \
+  41 | >>>   { \
+  42 | >>>       echo 'session.cookie_httponly=1'; \
+  43 | >>>       echo 'session.use_strict_mode=1'; \
+  44 | >>>   } > /etc/php84/conf.d/session-strict.ini; \
+  45 | >>>   \
+  46 | >>>   { \
+  47 | >>>       echo 'allow_url_fopen=Off'; \
+  48 | >>>       echo 'max_execution_time=${MAX_EXECUTION_TIME}'; \
+  49 | >>>       echo 'max_input_vars=10000'; \
+  50 | >>>       echo 'memory_limit=${MEMORY_LIMIT}'; \
+  51 | >>>       echo 'post_max_size=${UPLOAD_LIMIT}'; \
+  52 | >>>       echo 'upload_max_filesize=${UPLOAD_LIMIT}'; \
+  53 | >>>   } > /etc/php84/conf.d/phpmyadmin-misc.ini && \
+  54 | >>>   echo "**** install phpmyadmin ****" && \
+  55 | >>>   mkdir -p /app/www/public && \
+  56 | >>>   curl -s -o \
+  57 | >>>     /tmp/phpmyadmin.tar.xz -L \
+  58 | >>>     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" && \
+  59 | >>>   curl -s -o \
+  60 | >>>     "/tmp/phpmyadmin.tar.xz.asc" -L \
+  61 | >>>     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" && \
+  62 | >>>   export GNUPGHOME="$(mktemp -d)" && \
+  63 | >>>   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
+  64 | >>>       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
+  65 | >>>       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
+  66 | >>>       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" && \
+  67 | >>>   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then \
+  68 | >>>     echo "File signature mismatch"; \
+  69 | >>>     exit 1; \
+  70 | >>>   fi && \
+  71 | >>>   tar xf \
+  72 | >>>     /tmp/phpmyadmin.tar.xz -C \
+  73 | >>>     /app/www/public/ --strip-components=1 && \
+  74 | >>>   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" && \
+  75 | >>>   echo "**** cleanup ****" && \
+  76 | >>>   apt-get autoremove -y && \
+  77 | >>>   rm -rf \
+  78 | >>>     /tmp/* \
+  79 | >>>     /app/www/public/setup
+  80 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php84/php-fpm.conf &&   echo \"**** setup php opcache ****\" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo \"**** install phpmyadmin ****\" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz\" &&   curl -s -o     \"/tmp/phpmyadmin.tar.xz.asc\" -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/phpmyadmin.tar.xz.asc\" \"/tmp/phpmyadmin.tar.xz\"; then     echo \"File signature mismatch\";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i \"s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@\" \"/app/www/public/libraries/vendor_config.php\" &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup" did not complete successfully: exit code: 2

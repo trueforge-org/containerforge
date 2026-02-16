@@ -1,0 +1,51 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 4.75kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [buildstage 1/4] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 13.52kB done
+#5 DONE 0.0s
+
+#6 [buildstage 2/4] RUN   echo "**** install build deps ****" &&   sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list &&   apt-get update &&   apt-get install -y     build-essential     devscripts     dpkg-dev     git     libpulse-dev     meson     pulseaudio &&   apt build-dep -y     pulseaudio     xrdp
+#6 0.196 **** install build deps ****
+#6 0.198 sed: couldn't open temporary file /etc/apt/sedhWwgdD: Permission denied
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&   sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list &&   apt-get update &&   apt-get install -y     build-essential     devscripts     dpkg-dev     git     libpulse-dev     meson     pulseaudio &&   apt build-dep -y     pulseaudio     xrdp" did not complete successfully: exit code: 4
+------
+ > [buildstage 2/4] RUN   echo "**** install build deps ****" &&   sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list &&   apt-get update &&   apt-get install -y     build-essential     devscripts     dpkg-dev     git     libpulse-dev     meson     pulseaudio &&   apt build-dep -y     pulseaudio     xrdp:
+0.196 **** install build deps ****
+0.198 sed: couldn't open temporary file /etc/apt/sedhWwgdD: Permission denied
+------
+Dockerfile:6
+--------------------
+   5 |     
+   6 | >>> RUN \
+   7 | >>>   echo "**** install build deps ****" && \
+   8 | >>>   sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list && \
+   9 | >>>   apt-get update && \
+  10 | >>>   apt-get install -y \
+  11 | >>>     build-essential \
+  12 | >>>     devscripts \
+  13 | >>>     dpkg-dev \
+  14 | >>>     git \
+  15 | >>>     libpulse-dev \
+  16 | >>>     meson \
+  17 | >>>     pulseaudio && \
+  18 | >>>   apt build-dep -y \
+  19 | >>>     pulseaudio \
+  20 | >>>     xrdp
+  21 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&   sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list &&   apt-get update &&   apt-get install -y     build-essential     devscripts     dpkg-dev     git     libpulse-dev     meson     pulseaudio &&   apt build-dep -y     pulseaudio     xrdp" did not complete successfully: exit code: 4

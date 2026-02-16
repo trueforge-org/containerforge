@@ -1,0 +1,68 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 10.89kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
+#3 DONE 0.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [wwwstage 1/3] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
+#5 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c 0.0s done
+#5 CACHED
+
+#6 [buildstage 1/6] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#6 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 58.38kB done
+#7 DONE 0.0s
+
+#8 [wwwstage 2/3] RUN   echo "**** build clientside ****" &&   export QT_QPA_PLATFORM=offscreen &&   export QT_QPA_FONTDIR=/usr/share/fonts &&   mkdir /src &&   cd /src &&   wget https://github.com/kasmtech/noVNC/tarball/46412d23aff1f45dffa83fafb04a683282c8db58 -O -     | tar  --strip-components=1 -xz &&   npm install &&   npm run-script build
+#8 0.191 **** build clientside ****
+#8 0.192 mkdir: cannot create directory ‘/src’: Permission denied
+#8 ERROR: process "/bin/bash -o pipefail -c echo \"**** build clientside ****\" &&   export QT_QPA_PLATFORM=offscreen &&   export QT_QPA_FONTDIR=/usr/share/fonts &&   mkdir /src &&   cd /src &&   wget https://github.com/kasmtech/noVNC/tarball/${KASMWEB_RELEASE} -O -     | tar  --strip-components=1 -xz &&   npm install &&   npm run-script build" did not complete successfully: exit code: 1
+
+#9 [nodebuilder 2/4] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3.11 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*
+#9 0.170 **** install build deps ****
+#9 0.177 Reading package lists...
+#9 0.186 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
+#9 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3.11 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+------
+ > [nodebuilder 2/4] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3.11 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*:
+0.170 **** install build deps ****
+0.177 Reading package lists...
+0.186 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
+------
+------
+ > [wwwstage 2/3] RUN   echo "**** build clientside ****" &&   export QT_QPA_PLATFORM=offscreen &&   export QT_QPA_FONTDIR=/usr/share/fonts &&   mkdir /src &&   cd /src &&   wget https://github.com/kasmtech/noVNC/tarball/46412d23aff1f45dffa83fafb04a683282c8db58 -O -     | tar  --strip-components=1 -xz &&   npm install &&   npm run-script build:
+0.191 **** build clientside ****
+0.192 mkdir: cannot create directory ‘/src’: Permission denied
+------
+Dockerfile:186
+--------------------
+ 185 |     
+ 186 | >>> RUN \
+ 187 | >>>     echo "**** install build deps ****" && \
+ 188 | >>>     apt-get update && \
+ 189 | >>>     apt-get install -y --no-install-recommends \
+ 190 | >>>         build-essential \
+ 191 | >>>         cmake \
+ 192 | >>>         g++ \
+ 193 | >>>         gcc \
+ 194 | >>>         make \
+ 195 | >>>         libpulse-dev \
+ 196 | >>>         python3.11 && \
+ 197 | >>>     apt-get clean && \
+ 198 | >>>     rm -rf /var/lib/apt/lists/*
+ 199 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3.11 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100

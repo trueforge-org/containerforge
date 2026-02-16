@@ -1,0 +1,95 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 728B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/java8:8
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/java8:8@sha256:51c920918b599e01b2ec2e3aab81ab434c54349302de9ebfc44b0abe6794bfc4
+#4 resolve ghcr.io/trueforge-org/java8:8@sha256:51c920918b599e01b2ec2e3aab81ab434c54349302de9ebfc44b0abe6794bfc4 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 4.22kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         libcap2         libnss3         libsqlite3-0 &&     rm -rf /var/lib/apt/lists/* &&     echo "**** install ha-bridge ****" &&     mkdir -p         /app &&     curl -o         /app/ha-bridge.jar -L         "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar"
+#6 0.143 **** install runtime packages ****
+#6 0.326 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.759 Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 0.760 Get:3 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.867 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 0.975 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.081 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.498 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.777 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 1.867 Get:9 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.949 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 2.048 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 2.140 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 2.214 Get:13 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.232 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 2.311 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 2.391 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 2.670 Get:17 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 2.826 Get:18 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.964 Fetched 36.1 MB in 3s (12.9 MB/s)
+#6 2.964 Reading package lists...
+#6 3.689 Reading package lists...
+#6 4.413 Building dependency tree...
+#6 4.555 Reading state information...
+#6 4.685 libcap2 is already the newest version (1:2.66-5ubuntu2.2).
+#6 4.685 libsqlite3-0 is already the newest version (3.45.1-1ubuntu2.5).
+#6 4.685 libsqlite3-0 set to manually installed.
+#6 4.685 The following additional packages will be installed:
+#6 4.685   libnspr4
+#6 4.708 The following NEW packages will be installed:
+#6 4.709   libnspr4 libnss3
+#6 4.801 0 upgraded, 2 newly installed, 0 to remove and 5 not upgraded.
+#6 4.801 Need to get 1,562 kB of archives.
+#6 4.801 After this operation, 4,371 kB of additional disk space will be used.
+#6 4.801 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libnspr4 amd64 2:4.35-1.1build1 [117 kB]
+#6 4.881 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libnss3 amd64 2:3.98-1build1 [1,445 kB]
+#6 4.988 debconf: delaying package configuration, since apt-utils is not installed
+#6 5.010 Fetched 1,562 kB in 0s (8,824 kB/s)
+#6 5.024 Selecting previously unselected package libnspr4:amd64.
+#6 5.024 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#6 5.036 Preparing to unpack .../libnspr4_2%3a4.35-1.1build1_amd64.deb ...
+#6 5.038 Unpacking libnspr4:amd64 (2:4.35-1.1build1) ...
+#6 5.055 Selecting previously unselected package libnss3:amd64.
+#6 5.056 Preparing to unpack .../libnss3_2%3a3.98-1build1_amd64.deb ...
+#6 5.057 Unpacking libnss3:amd64 (2:3.98-1build1) ...
+#6 5.090 Setting up libnspr4:amd64 (2:4.35-1.1build1) ...
+#6 5.092 Setting up libnss3:amd64 (2:3.98-1build1) ...
+#6 5.094 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#6 5.137 **** install ha-bridge ****
+#6 5.143   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#6 5.144                                  Dload  Upload   Total   Spent    Left  Speed
+#6 5.144   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100     9  100     9    0     0     46      0 --:--:-- --:--:-- --:--:--    46
+#6 DONE 5.4s
+
+#7 [3/5] COPY . /
+#7 DONE 0.0s
+
+#8 [4/5] COPY ./root /
+#8 DONE 0.0s
+
+#9 [5/5] WORKDIR /config
+#9 DONE 0.0s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.2s done
+#10 exporting manifest sha256:f499068c8bee6840a64ae4ac0cdf7001de9c7d614b5fa9e50908731c0b67bdba done
+#10 exporting config sha256:2b6d3b027a43d3390f00cc11b58e6fd8da9cd85448475d16c948445a4d4fb246 done
+#10 exporting attestation manifest sha256:1590553a5f046ccb10bcff25f88bbdcd4f59184c67f86189ed049b030ff2028f done
+#10 exporting manifest list sha256:1ce524e6fe09c9890d9eb9402600e3feb9f7efb5d1c64ef6a84f05a0d5902dd1 done
+#10 naming to docker.io/library/porting-habridge:amd64 done
+#10 unpacking to docker.io/library/porting-habridge:amd64 0.1s done
+#10 DONE 0.4s

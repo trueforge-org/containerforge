@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: Package libjpeg62-turbo is not available, but is referred to by another package.
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-beets:amd64 .`
+- Result: FAIL
+- Reason: 45.04 E: Unable to locate package libfftw3-3
+- Full log: `amd64-build.log`

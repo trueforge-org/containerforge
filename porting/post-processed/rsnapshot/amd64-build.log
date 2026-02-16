@@ -1,0 +1,80 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 585B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 4.84kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
+#6 0.192 **** install runtime packages ****
+#6 0.358 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.362 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 1.007 Get:3 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 1.090 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.174 Get:5 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 1.280 Get:6 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.472 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 1.976 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 2.150 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.719 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 2.864 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 3.026 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 3.170 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.336 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 3.500 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 3.644 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 3.822 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 3.965 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 3.984 Fetched 36.1 MB in 4s (9,595 kB/s)
+#6 3.984 Reading package lists...
+#6 4.724 Reading package lists...
+#6 5.455 Building dependency tree...
+#6 5.598 Reading state information...
+#6 5.611 E: Unable to locate package openssh
+#6 5.611 E: Unable to locate package rsnapshot=
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100
+------
+ > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache:
+3.336 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+3.500 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+3.644 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+3.822 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+3.965 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+
+
+
+5.611 E: Unable to locate package openssh
+5.611 E: Unable to locate package rsnapshot=
+------
+Dockerfile:9
+--------------------
+   8 |     
+   9 | >>> RUN \
+  10 | >>>   echo "**** install runtime packages ****" && \
+  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
+  12 | >>>     openssh \
+  13 | >>>     rsnapshot==${VERSION} \
+  14 | >>>     rsync && \
+  15 | >>>   rm -rf /etc/rsnapshot.conf && \
+  16 | >>>   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf && \
+  17 | >>>   echo "**** cleanup ****" && \
+  18 | >>>   rm -rf \
+  19 | >>>     /tmp/* \
+  20 | >>>     $HOME/.cache
+  21 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100

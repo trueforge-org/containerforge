@@ -1,0 +1,97 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.28kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
+#4 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c 0.0s done
+#4 CACHED
+
+#5 [internal] load build context
+#5 transferring context: 5.06kB done
+#5 DONE 0.0s
+
+#6 [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         fonts-noto         icu-data-full &&     apt-get install -y --no-install-recommends --no-install-suggests         build-essential         libssl-dev         python3-dev         libsqlite3-dev &&   echo "**** install hedgedoc ****" &&   curl -o     /tmp/hedgedoc.tar.gz -L     "https://github.com/hedgedoc/hedgedoc/releases/download/${VERSION}/hedgedoc-${VERSION}.tar.gz" &&   mkdir -p     /app/hedgedoc &&   tar xf /tmp/hedgedoc.tar.gz -C     /app/hedgedoc --strip-components=1 &&   cd /app/hedgedoc &&   yarn install --immutable &&   yarn run build &&   yarn workspaces focus --production &&   echo "**** cleanup ****" &&   yarn cache clean &&   apt-get autoremove -y &&   rm -rf     /app/nodehome/.npm     /app/nodehome/.yarn     /tmp/*
+#6 0.142 **** install build packages ****
+#6 0.247 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#6 0.444 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#6 0.539 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#6 1.107 Get:4 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#6 1.176 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#6 1.427 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#6 1.649 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#6 1.747 Get:8 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#6 2.007 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#6 2.063 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#6 2.354 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#6 3.199 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#6 3.363 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#6 3.545 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#6 3.690 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#6 3.859 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#6 4.025 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#6 4.170 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 4.189 Fetched 36.1 MB in 4s (8,983 kB/s)
+#6 4.189 Reading package lists...
+#6 4.917 Reading package lists...
+#6 5.629 Building dependency tree...
+#6 5.770 Reading state information...
+#6 5.783 E: Unable to locate package icu-data-full
+#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         fonts-noto         icu-data-full &&     apt-get install -y --no-install-recommends --no-install-suggests         build-essential         libssl-dev         python3-dev         libsqlite3-dev &&   echo \"**** install hedgedoc ****\" &&   curl -o     /tmp/hedgedoc.tar.gz -L     \"https://github.com/hedgedoc/hedgedoc/releases/download/${VERSION}/hedgedoc-${VERSION}.tar.gz\" &&   mkdir -p     /app/hedgedoc &&   tar xf /tmp/hedgedoc.tar.gz -C     /app/hedgedoc --strip-components=1 &&   cd /app/hedgedoc &&   yarn install --immutable &&   yarn run build &&   yarn workspaces focus --production &&   echo \"**** cleanup ****\" &&   yarn cache clean &&   apt-get autoremove -y &&   rm -rf     $HOME/.npm     $HOME/.yarn     /tmp/*" did not complete successfully: exit code: 100
+------
+ > [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         fonts-noto         icu-data-full &&     apt-get install -y --no-install-recommends --no-install-suggests         build-essential         libssl-dev         python3-dev         libsqlite3-dev &&   echo "**** install hedgedoc ****" &&   curl -o     /tmp/hedgedoc.tar.gz -L     "https://github.com/hedgedoc/hedgedoc/releases/download/${VERSION}/hedgedoc-${VERSION}.tar.gz" &&   mkdir -p     /app/hedgedoc &&   tar xf /tmp/hedgedoc.tar.gz -C     /app/hedgedoc --strip-components=1 &&   cd /app/hedgedoc &&   yarn install --immutable &&   yarn run build &&   yarn workspaces focus --production &&   echo "**** cleanup ****" &&   yarn cache clean &&   apt-get autoremove -y &&   rm -rf     /app/nodehome/.npm     /app/nodehome/.yarn     /tmp/*:
+3.363 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+3.545 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+3.690 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+3.859 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+4.025 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+4.170 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+
+
+
+5.783 E: Unable to locate package icu-data-full
+------
+Dockerfile:13
+--------------------
+  12 |     
+  13 | >>> RUN \
+  14 | >>>     echo "**** install build packages ****" && \
+  15 | >>>     apt-get update && \
+  16 | >>>     apt-get install -y --no-install-recommends \
+  17 | >>>         fonts-noto \
+  18 | >>>         icu-data-full && \
+  19 | >>>     apt-get install -y --no-install-recommends --no-install-suggests \
+  20 | >>>         build-essential \
+  21 | >>>         libssl-dev \
+  22 | >>>         python3-dev \
+  23 | >>>         libsqlite3-dev && \
+  24 | >>>   echo "**** install hedgedoc ****" && \
+  25 | >>>   curl -o \
+  26 | >>>     /tmp/hedgedoc.tar.gz -L \
+  27 | >>>     "https://github.com/hedgedoc/hedgedoc/releases/download/${VERSION}/hedgedoc-${VERSION}.tar.gz" && \
+  28 | >>>   mkdir -p \
+  29 | >>>     /app/hedgedoc && \
+  30 | >>>   tar xf /tmp/hedgedoc.tar.gz -C \
+  31 | >>>     /app/hedgedoc --strip-components=1 && \
+  32 | >>>   cd /app/hedgedoc && \
+  33 | >>>   yarn install --immutable && \
+  34 | >>>   yarn run build && \
+  35 | >>>   yarn workspaces focus --production && \
+  36 | >>>   echo "**** cleanup ****" && \
+  37 | >>>   yarn cache clean && \
+  38 | >>>   apt-get autoremove -y && \
+  39 | >>>   rm -rf \
+  40 | >>>     $HOME/.npm \
+  41 | >>>     $HOME/.yarn \
+  42 | >>>     /tmp/*
+  43 |     
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         fonts-noto         icu-data-full &&     apt-get install -y --no-install-recommends --no-install-suggests         build-essential         libssl-dev         python3-dev         libsqlite3-dev &&   echo \"**** install hedgedoc ****\" &&   curl -o     /tmp/hedgedoc.tar.gz -L     \"https://github.com/hedgedoc/hedgedoc/releases/download/${VERSION}/hedgedoc-${VERSION}.tar.gz\" &&   mkdir -p     /app/hedgedoc &&   tar xf /tmp/hedgedoc.tar.gz -C     /app/hedgedoc --strip-components=1 &&   cd /app/hedgedoc &&   yarn install --immutable &&   yarn run build &&   yarn workspaces focus --production &&   echo \"**** cleanup ****\" &&   yarn cache clean &&   apt-get autoremove -y &&   rm -rf     $HOME/.npm     $HOME/.yarn     /tmp/*" did not complete successfully: exit code: 100
