@@ -4,6 +4,9 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:ede54cb88fd5efef6f41610146f10b43
 
 # Environment variables
 ARG VERSION
+ARG PIP_VERSION
+ARG SETUPTOOLS_VERSION
+ARG WHEEL_VERSION
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -84,7 +87,7 @@ RUN set -eux; \
     ldconfig; \
     mkdir -p /app /app; \
     python3 -m venv /app/venv; \
-    /app/venv/bin/python -m pip install --upgrade pip==26.0.1 setuptools==82.0.0 wheel==0.46.3; \
+    /app/venv/bin/python -m pip install --upgrade pip==${PIP_VERSION} setuptools==${SETUPTOOLS_VERSION} wheel==${WHEEL_VERSION}; \
     chown -R apps:apps /app && chmod -R 755 /app; \
     python3 --version; \
     pip3 --version
