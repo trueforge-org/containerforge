@@ -38,6 +38,9 @@ WORKDIR /app
 # Copy the binary from the builder stage
 COPY --from=builder /output/my-proxy-service .
 
+# Provide the default token file expected by the app's API_FILE default.
+RUN touch /app/file_to_watch.txt
+
 # Set environment variables
 ENV PORT=3000
 
