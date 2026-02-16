@@ -12,11 +12,11 @@ RUN apt-get update && \
     apt-get install -y fuse && \
     rm -rf /var/lib/apt/lists/*
 
-ADD "https://github.com/trapexit/mergerfs/releases/download/${VERSION}/mergerfs-${VERSION}-static-linux_amd64.tar.gz" "/tmp"
-RUN tar xzf "/tmp/mergerfs-${VERSION}-static-linux_amd64.tar.gz" -C "/" && \
-    rm -rf "/tmp/mergerfs-${VERSION}-static-linux_amd64.tar.gz"
+ADD "https://github.com/trapexit/mergerfs/releases/download/${VERSION}/mergerfs-${VERSION}-static-linux_${TARGETARCH}.tar.gz" "/tmp"
+RUN tar xzf "/tmp/mergerfs-${VERSION}-static-linux_${TARGETARCH}.tar.gz" -C "/" && \
+    rm -rf "/tmp/mergerfs-${VERSION}-static-linux_${TARGETARCH}.tar.gz"
 
 COPY . /
 
-USER root:root
+USER apps
 WORKDIR /config
