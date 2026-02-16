@@ -1,4 +1,6 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
 commands:
-- command: kubectl version
+- command: kubectl version --client
+  expectedContent: Client Version
+  matchContent: true
