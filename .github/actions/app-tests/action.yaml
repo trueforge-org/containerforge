@@ -31,5 +31,6 @@ runs:
         APP: ${{ inputs.app }}
         TEST_IMAGE: ${{ inputs.image }}
         VERSION: ${{ inputs.version }}
+        TESTHELPERS_CONTAINER_LOGS: all
       run: |-
         go run ./apps/${APP}/container_check.go

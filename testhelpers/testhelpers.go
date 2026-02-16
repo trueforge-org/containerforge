@@ -7,6 +7,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/docker/go-connections/nat"
@@ -333,6 +334,47 @@ func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestCon
 	return nil
 }
 
+// CheckTCPListening verifies that a TCP port is listening in the container.
+func CheckTCPListening(ctx context.Context, image string, port string, config *ContainerConfig) (err error) {
+	portStr := port + "/tcp"
+	portTCP := nat.Port(portStr)
+
+	logInfo("🧪 TCP listening check: image=%s port=%s", image, portStr)
+	if config != nil {
+		logInfo("TCP check container config: env=%s", envSummary(config.Env))
+	}
+
+	opts := []testcontainers.ContainerCustomizer{
+		testcontainers.WithExposedPorts(portStr),
+		testcontainers.WithWaitStrategy(
+			wait.ForListeningPort(portTCP),
+		),
+	}
+
+	// Apply optional container config
+	opts = append(opts, applyContainerConfig(config)...)
+
+	container, err := runContainer(ctx, image, opts...)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if shouldDumpContainerLogs(err != nil) {
+			dumpContainerLogs(ctx, container, "tcp listening check")
+		} else {
+			logDebug("Skipping container logs for TCP listening check (mode=%q, failed=%t)", strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS"))), err != nil)
+		}
+		termErr := terminateContainer(ctx, container, "tcp listening check")
+		if err == nil && termErr != nil {
+			err = fmt.Errorf("failed to terminate container: %w", termErr)
+		}
+	}()
+
+	logInfo("TCP listening check completed successfully for image=%s port=%s", image, portStr)
+
+	return nil
+}
+
 // CheckFileExists verifies a file exists in the container.
 func CheckFileExists(ctx context.Context, image string, filePath string, config *ContainerConfig) error {
 	return CheckCommandSucceeds(ctx, image, config, "test", "-f", filePath)
@@ -382,4 +424,36 @@ func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerCo
 	logInfo("Command check completed successfully: %q", fullCommand)
 
 	return nil
+}
+
+// TestHTTPEndpoint runs an HTTP endpoint check and fails the test on error.
+func TestHTTPEndpoint(t *testing.T, ctx context.Context, image string, httpConfig HTTPTestConfig, containerConfig *ContainerConfig) {
+	t.Helper()
+	if err := CheckHTTPEndpoint(ctx, image, httpConfig, containerConfig); err != nil {
+		t.Fatalf("HTTP endpoint check failed: %v", err)
+	}
+}
+
+// TestTCPListening runs a TCP listening check and fails the test on error.
+func TestTCPListening(t *testing.T, ctx context.Context, image string, port string, containerConfig *ContainerConfig) {
+	t.Helper()
+	if err := CheckTCPListening(ctx, image, port, containerConfig); err != nil {
+		t.Fatalf("TCP listening check failed: %v", err)
+	}
+}
+
+// TestFileExists runs a file existence check and fails the test on error.
+func TestFileExists(t *testing.T, ctx context.Context, image string, filePath string, containerConfig *ContainerConfig) {
+	t.Helper()
+	if err := CheckFileExists(ctx, image, filePath, containerConfig); err != nil {
+		t.Fatalf("file existence check failed: %v", err)
+	}
+}
+
+// TestCommandSucceeds runs a command check and fails the test on error.
+func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, containerConfig *ContainerConfig, entrypoint string, args ...string) {
+	t.Helper()
+	if err := CheckCommandSucceeds(ctx, image, containerConfig, entrypoint, args...); err != nil {
+		t.Fatalf("command check failed: %v", err)
+	}
 }

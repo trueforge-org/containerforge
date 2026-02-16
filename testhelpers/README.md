@@ -17,11 +17,17 @@ Shared helpers for standalone Go container checks.
 - `CheckHTTPEndpoint(...) error`
   Runs a container and waits for an HTTP endpoint on a port/path to match the expected status.
 
+- `CheckTCPListening(...) error`
+  Runs a container and waits for a TCP port to become reachable.
+
 - `CheckFileExists(...) error`
   Verifies a file exists inside the container by running `test -f`.
 
 - `CheckCommandSucceeds(...) error`
   Runs a command via container cmd args and verifies exit code `0`.
+
+- `TestHTTPEndpoint(...)`, `TestTCPListening(...)`, `TestFileExists(...)`, `TestCommandSucceeds(...)`
+  Convenience wrappers for `go test` that fail the test immediately when the check returns an error.
 
 - `HTTPTestConfig.StatusCodeMatcher func(int) bool`
   Optional custom matcher for HTTP status codes.
