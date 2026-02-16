@@ -38,7 +38,7 @@
 - `apps/<app>/DOWNSTREAM_CHANGES.md` must list each affected downstream container path and the exact required change.
 - `apps/<app>/DOWNSTREAM_CHANGES.md` must include the base-image version the change is expected in, sourced from that app's `docker-bake.hcl` `VERSION` value and normalized to `x.y.z`.
 - Do not document downstream requirements as inline comments in Dockerfiles unless explicitly requested.
-- Assume the dockerfile always has to explicitly move to `USER root` because the from container likely runs as non-root
+- Assume every `FROM` container runs as `USER apps` by default and hence might require `USER root` before running most commands, such as apt and apt-get
 - `/app` will be read-only
 - `/app` contains the application (binary) itself, that does not require write access
 - If an application requires write access, copy those things to `/config` during runtime
