@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
+
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/stretchr/testify/require"
 
@@ -16,13 +17,9 @@ func Test(t *testing.T) {
 
 	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/it-tools:rolling")
 
-	configDir := t.TempDir()
-
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("8080/tcp"), // replace with actual port if different
 		testcontainers.WithWaitStrategy(
 			wait.ForHTTP("/").WithPort("8080/tcp").WithStatusCodeMatcher(func(status int) bool {

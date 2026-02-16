@@ -4,8 +4,9 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"github.com/trueforge-org/containerforge/testhelpers"
 	"testing"
+
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/stretchr/testify/require"
 
@@ -35,13 +36,9 @@ func Test(t *testing.T) {
 
 	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/postgresql:rolling")
 
-	configDir := t.TempDir()
-
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("5432/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForHealthCheck(),
@@ -58,9 +55,7 @@ func Test(t *testing.T) {
 
 	upgrade, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("5432/tcp"),
 		testcontainers.WithEnv(map[string]string{
 			"PREPTEST": "true",

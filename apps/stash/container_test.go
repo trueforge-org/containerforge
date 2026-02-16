@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
-	"github.com/trueforge-org/containerforge/testhelpers"
+	"os"
 	"testing"
+
+	"github.com/trueforge-org/containerforge/testhelpers"
 
 	"github.com/stretchr/testify/require"
 
@@ -22,9 +24,7 @@ func Test(t *testing.T) {
 
 	app, err := testcontainers.Run(
 		ctx, image,
-		testcontainers.WithMounts(
-			testcontainers.BindMount(configDir, testcontainers.ContainerMountTarget("/config")),
-		),
+
 		testcontainers.WithExposedPorts("9999/tcp"),
 		testcontainers.WithWaitStrategy(
 			wait.ForListeningPort("9999/tcp"),
