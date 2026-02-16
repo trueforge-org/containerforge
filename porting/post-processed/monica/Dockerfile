@@ -22,11 +22,9 @@ RUN \
     php8.3-intl \
     php-memcached \
     php8.3-mysql \
-    php8.3-mysql \
     php-redis \
     php8.3-common \
     php8.3-soap \
-    php8.3-common \
     php8.3-xml && \
   echo "**** configure php-fpm to pass env vars ****" && \
   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \

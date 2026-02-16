@@ -19,8 +19,6 @@ RUN \
     php8.3-sqlite3 \
     php-redis \
     php8.3-common \
-    php8.3-sqlite3 \
-    php8.3-common \
     php8.3-xml \
     php-mcrypt && \
   echo "**** configure php-fpm to pass env vars ****" && \

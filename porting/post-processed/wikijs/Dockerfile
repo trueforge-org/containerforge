@@ -15,7 +15,7 @@ RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential && \
-  apt-get update && apt-get install -y --no-install-recommends \
+  apt-get install -y --no-install-recommends \
     git \
     nodejs \
     npm \

@@ -24,7 +24,6 @@ RUN \
     php8.3-gd \
     php8.3-ldap \
     php8.3-mysql \
-    php8.3-mysql \
     php-pear \
     php-imagick \
     php8.3-xsl \
