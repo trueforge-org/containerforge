@@ -164,15 +164,15 @@ fi
 
 for df in "${dockerfiles[@]}"; do
     CURRENT_BASE=$(awk '/^FROM / { print $2; exit }' "$df")
-    BASE_IMAGE="ghcr.io/trueforge-org/ubuntu:24.4"
+    BASE_IMAGE="ghcr.io/trueforge-org/ubuntu:24.04"
     if grep -qiE '\b(javac|java|jdk|jre|mvn|maven|gradle)\b' "$df"; then
-        BASE_IMAGE="ghcr.io/trueforge-org/java17:rolling"
+        BASE_IMAGE="ghcr.io/trueforge-org/java17:17"
     elif grep -qiE '\b(go build|go mod|golang)\b' "$df"; then
-        BASE_IMAGE="ghcr.io/trueforge-org/golang:rolling"
+        BASE_IMAGE="ghcr.io/trueforge-org/golang:1.26.0"
     elif grep -qiE '\b(npm|nodejs|yarn|pnpm)\b' "$df"; then
-        BASE_IMAGE="ghcr.io/trueforge-org/node:rolling"
+        BASE_IMAGE="ghcr.io/trueforge-org/node:22.22.0"
     elif grep -qiE '\b(python|pip|venv)\b' "$df"; then
-        BASE_IMAGE="ghcr.io/trueforge-org/python:3.13.7"
+        BASE_IMAGE="ghcr.io/trueforge-org/python:3.13.12"
     fi
 
     if sed --version >/dev/null 2>&1; then
@@ -244,6 +244,16 @@ for df in "${dockerfiles[@]}"; do
             -e 's|/lsiopy|/config/venv|g' \
             "$df"
     fi
+    perl -i -pe '
+      s/^FROM ghcr\.io\/trueforge-org\/ubuntu[.:][^\s@]+(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/ubuntu:24.04/;
+      s/^FROM ghcr\.io\/trueforge-org\/python[.:][^\s@]+(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/python:3.13.12/;
+      s/^FROM ghcr\.io\/trueforge-org\/node[.:][^\s@]+(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/node:22.22.0/;
+      s/^FROM ghcr\.io\/trueforge-org\/golang[.:][^\s@]+(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/golang:1.26.0/;
+      s/^FROM ghcr\.io\/trueforge-org\/postgresql-client[.:][^\s@]+(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/postgresql-client:1.1.0/;
+      s/^FROM ghcr\.io\/trueforge-org\/java8(?::[^\s@]+)?(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/java8:8/;
+      s/^FROM ghcr\.io\/trueforge-org\/java17(?::[^\s@]+)?(?:@sha256:[a-f0-9]+)?/FROM ghcr.io\/trueforge-org\/java17:17/;
+      s/^FROM (ghcr\.io\/trueforge-org\/[^\s@]+)@sha256:[a-f0-9]+/FROM $1/;
+    ' "$df"
 perl -0777 -i -pe '
   s{
     ^[ \t]*if[^\n]*\{VERSION\+x\}[^\n]*\n   # match the opening line containing {VERSION+x}

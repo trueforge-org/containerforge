@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/baseimage-kasmvnc:arch@sha256:b200e3ff729a68ae9cb4339914fd3a770b461eb20c2a58f8d919ec65324044c3
+FROM ghcr.io/trueforge-org/baseimage-kasmvnc:arch
 
 # set version label
 ARG VERSION

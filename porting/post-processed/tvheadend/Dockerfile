@@ -1,9 +1,9 @@
 ############## picons stage ##############
 # built by https://github.com/linuxserver/picons-builder
-FROM ghcr.io/trueforge-org/picons-builder@sha256:a55955e8f9d43cfcceb74fbc6cea2ef3dce2d795bd9e95d0fb3887a1c7fe613e as piconsstage
+FROM ghcr.io/trueforge-org/picons-builder as piconsstage
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage
 ############## build stage ##############
 
 # package versions
@@ -141,7 +141,7 @@ RUN \
     /picons
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 
 # set version label
 ARG VERSION

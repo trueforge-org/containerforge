@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/postgresql-client:rolling
+FROM ghcr.io/trueforge-org/postgresql-client:1.1.0
 
 ARG VERSION
 ARG TARGETARCH

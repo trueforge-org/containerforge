@@ -1,5 +1,5 @@
 # buildstage
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage
 
 RUN \
   echo "**** install build deps ****" && \
@@ -21,7 +21,7 @@ RUN \
   cargo install series-troxide
 
 # runtime
-FROM ghcr.io/trueforge-org/baseimage-kasmvnc:debianbookworm@sha256:c6129530811450448ab760064b27e111fb3351fc3222af652f605a48eb518ed7
+FROM ghcr.io/trueforge-org/baseimage-kasmvnc:debianbookworm
 
 # set version label
 ARG VERSION

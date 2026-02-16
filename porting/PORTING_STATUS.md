@@ -82,3 +82,8 @@ This status file tracks why each container is still under `/porting/post-process
 - `xvfb`: see `post-processed/xvfb/NOT_WORKING_YET.md`
 - `your_spotify`: see `post-processed/your_spotify/NOT_WORKING_YET.md`
 - `znc`: see `post-processed/znc/NOT_WORKING_YET.md`
+
+## Non-trueforge base images
+The following ported containers still reference non-trueforge base images (left as-is):
+- `post-processed/flexget/Dockerfile`: `ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83`
+- `post-processed/lychee/Dockerfile`: `ghcr.io/sigstore/cosign/cosign:latest@sha256:b29487e48205d875c324c79583e2806d9d269c0fa299e0861bbec023d8430c8b`

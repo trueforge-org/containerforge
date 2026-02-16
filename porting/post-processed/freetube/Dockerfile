@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/baseimage-kasmvnc:debianbookworm@sha256:c6129530811450448ab760064b27e111fb3351fc3222af652f605a48eb518ed7
+FROM ghcr.io/trueforge-org/baseimage-kasmvnc:debianbookworm
 
 # set version label
 ARG VERSION
