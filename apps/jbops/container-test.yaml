@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /app/fun/plexapi_haiku.py
-files:
-  - path: /app/fun/plexapi_haiku.py
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /app/fun/plexapi_haiku.py

@@ -1,1 +1,1 @@
-FROM ghcr.io/trueforge-org/seerr:2.7.3@sha256:a479149dd43d68ae443a270165ebfe8f9f534dda11ea7cc6e675f8eb7fe8ae69
+FROM ghcr.io/trueforge-org/seerr:2.7.3@sha256:5e7a73fa2524eae3a8a05bc3db4bf31015d7ff867b2aeef5b57e05e2c46fb14c

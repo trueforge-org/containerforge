@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:77449580f12ca47641798a11e38291c1e30b532818ea7809078c3fa6e9bfc4df
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:2eeeff0873bb716c998dbcbbe7f6bf04f37a653398ff79d366890fa93fd072b8
 
 # set version label
 ARG VERSION
@@ -27,9 +27,9 @@ RUN \
   tar xf /tmp/apprise-api.tar.gz -C /app/ --strip-components=1 && \
   echo "**** install pip packages ****" && \
   cd /app && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir pip wheel && \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   echo "**** cleanup ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \

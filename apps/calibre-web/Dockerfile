@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:77449580f12ca47641798a11e38291c1e30b532818ea7809078c3fa6e9bfc4df
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:2eeeff0873bb716c998dbcbbe7f6bf04f37a653398ff79d366890fa93fd072b8
 
 # set version label
 ARG VERSION
@@ -41,7 +41,7 @@ RUN \
     /tmp/calibre-web.tar.gz -C \
     /app/calibre-web --strip-components=1 && \
   cd /app/calibre-web && \
-  python3 -m venv /config/venv && \
+  python3 -m venv /app/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \

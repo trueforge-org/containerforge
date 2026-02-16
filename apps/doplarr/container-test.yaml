@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /app/doplarr.jar
-files:
-  - path: /app/doplarr.jar
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /app/doplarr.jar

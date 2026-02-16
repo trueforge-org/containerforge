@@ -1,6 +1,5 @@
-timeoutSeconds: 10
-urls:
-  - url: http://127.0.0.1:3875/
-tcp:
-  - host: 127.0.0.1
-    port: 3875
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+http:
+- port: '3875'
+  path: /

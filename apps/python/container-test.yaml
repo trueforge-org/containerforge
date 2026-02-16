@@ -1,6 +1,15 @@
+<<<<<<< copilot/remove-test-backend-go
 timeoutSeconds: 10
 paths:
   - /app/venv
 files:
   - path: /usr/local/bin/python3
   - path: /app/venv/bin/python
+=======
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /usr/local/bin/python3
+- /app/venv
+- /config/venv
+>>>>>>> main

@@ -1,7 +1,7 @@
 
 
 # Builder stage
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:77449580f12ca47641798a11e38291c1e30b532818ea7809078c3fa6e9bfc4df AS builder
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:2eeeff0873bb716c998dbcbbe7f6bf04f37a653398ff79d366890fa93fd072b8 AS builder
 ARG VERSION
 
 USER root
@@ -20,7 +20,7 @@ RUN set -eux; \
     grep -rl 'https://theme-park.dev' . | xargs sed -i 's|https\://theme-park.dev||g'
 
 # Nginx stage
-FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:beb12e261144f8a599be7deaaedcaab05909869a7214e60c418a6ea386492183
+FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:d911c464fae10dabab197d4829cffa901ddf305e5e7e562385e040acd1583853
 ENV NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE=1
 
 USER root

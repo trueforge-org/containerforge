@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /app/watch_lvm.sh
-files:
-  - path: /app/watch_lvm.sh
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /app/watch_lvm.sh

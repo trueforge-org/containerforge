@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:be0a42e1af759466bd249b5ce04c288e8beab4df14ac634fc9aa6db04bbe8b03 AS builder
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:9553c58d3700b7322b23a4a4cc1e4e33d04d7787625fd27c9baeb51f93cf0be5 AS builder
 
 ARG VERSION
 
@@ -7,7 +7,7 @@ RUN git clone --depth 1 --branch "${VERSION}" https://github.com/qdm12/gluetun.g
     cd /src/gluetun && \
     go build -trimpath -ldflags="-s -w" -o /usr/local/bin/gluetun cmd/gluetun/main.go
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:ede54cb88fd5efef6f41610146f10b4399f5e584d9227202b6c14a515a35e94e
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:9a693d4ad7151ab7bd13b94e6c6137b90dabf6d44280a1aad6e4a65e191749d2
 
 USER root
 RUN apt-get update && \

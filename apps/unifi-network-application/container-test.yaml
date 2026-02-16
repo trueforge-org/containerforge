@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /usr/lib/unifi/lib/ace.jar
-files:
-  - path: /usr/lib/unifi/lib/ace.jar
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /usr/lib/unifi/lib/ace.jar

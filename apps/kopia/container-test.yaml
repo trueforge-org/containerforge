@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - /usr/local/bin/kopia
-files:
-  - path: /usr/local/bin/kopia
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /usr/local/bin/kopia

@@ -1,5 +1,4 @@
-timeoutSeconds: 10
-paths:
-  - hytale-downloader
-files:
-  - path: hytale-downloader
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- hytale-downloader
