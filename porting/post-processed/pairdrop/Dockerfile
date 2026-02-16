@@ -1,4 +1,3 @@
-## TODO: pin to version tag
 FROM ghcr.io/trueforge-org/node:rolling@sha256:5623d300a3daef923e94ff2a518468f381105886e35f8562868a3ceb7ebe39c9
 
 # set version label

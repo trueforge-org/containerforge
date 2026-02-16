@@ -23,7 +23,6 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-## TODO test with JAVA17 otherwise make another base
 RUN \
   apt-get update && \
   apt-get install -y --no-install-recommends \

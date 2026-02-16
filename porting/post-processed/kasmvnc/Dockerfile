@@ -1,4 +1,3 @@
-## TODO: pin version tag
 FROM ghcr.io/trueforge-org/node:rolling@sha256:70adf71e6e9d204219ace16d177a96c7b06cc3d881c413eaaa312ed27d13479a AS wwwstage
 
 ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
@@ -181,7 +180,6 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-## TODO: pin version tag
 FROM ghcr.io/trueforge-org/node:rolling@sha256:70adf71e6e9d204219ace16d177a96c7b06cc3d881c413eaaa312ed27d13479a AS nodebuilder
 ARG KCLIENT_RELEASE
 

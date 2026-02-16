@@ -112,6 +112,7 @@ COPY . /
 # ports and volumes
 EXPOSE 3689
 
-VOLUME /config /music
+VOLUME /config
+VOLUME /music
 
 WORKDIR /config

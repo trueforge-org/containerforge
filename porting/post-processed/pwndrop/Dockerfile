@@ -1,4 +1,3 @@
-## TODO pin version tag
 FROM ghcr.io/trueforge-org/golang:rolling as buildstage
 
 # build variables

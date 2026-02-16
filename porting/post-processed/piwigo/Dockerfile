@@ -56,6 +56,7 @@ COPY ./root /
 # ports and volumes
 EXPOSE 80 443
 
-VOLUME /config /gallery
+VOLUME /config
+VOLUME /gallery
 
 WORKDIR /config

@@ -1,4 +1,3 @@
-## TODO pin to version tag
 FROM ghcr.io/trueforge-org/postgresql-client:rolling
 
 ARG VERSION

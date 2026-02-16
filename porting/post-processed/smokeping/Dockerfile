@@ -59,6 +59,7 @@ COPY ./root /
 # ports and volumes
 EXPOSE 80
 
-VOLUME /config /data
+VOLUME /config
+VOLUME /data
 
 WORKDIR /config
