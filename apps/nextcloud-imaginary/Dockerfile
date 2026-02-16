@@ -33,7 +33,7 @@ RUN set -ex; \
 
 COPY --from=go /config/go/bin/imaginary /usr/local/bin/imaginary
 
-USER 568
+USER apps
 
 ENV MALLOC_ARENA_MAX=2
 

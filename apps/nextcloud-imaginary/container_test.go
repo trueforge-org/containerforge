@@ -27,3 +27,10 @@ func Test(t *testing.T) {
 	testcontainers.CleanupContainer(t, app)
 	require.NoError(t, err)
 }
+
+func TestRunsAsAppsUser(t *testing.T) {
+	ctx := context.Background()
+	image := testhelpers.GetTestImage("ghcr.io/trueforge-org/nextcloud-imaginary:rolling")
+
+	testhelpers.TestCommandSucceeds(t, ctx, image, nil, "sh", "-c", "[ \"$(id -un)\" = \"apps\" ]")
+}
