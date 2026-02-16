@@ -1,6 +1,4 @@
 timeoutSeconds: 10
-urls:
-  - url: http://127.0.0.1:8123/
-tcp:
-  - host: 127.0.0.1
-    port: 8123
+http:
+  - port: "8123"
+    path: /

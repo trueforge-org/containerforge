@@ -71,3 +71,12 @@ go run ./cmd/run-tests --mode command --image ghcr.io/trueforge-org/cloudflaredd
 ```
 
 Optional env vars for the started container can be added with repeated `--env KEY=VALUE`.
+
+## YAML structure (struct-based)
+
+When defining `container-test.yaml` based on the helper structs, use:
+
+- `http: []HTTPTestConfig`
+- `tcp: []TCPTestConfig`
+- `commands: []CommandTestConfig`
+- `filePaths: []string`

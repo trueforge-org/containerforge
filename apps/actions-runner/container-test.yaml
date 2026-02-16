@@ -1,5 +1,4 @@
 timeoutSeconds: 10
-paths:
+filePaths:
   - /usr/local/bin/yq
-files:
-  - path: /usr/local/bin/yq
+  - /bin/sh

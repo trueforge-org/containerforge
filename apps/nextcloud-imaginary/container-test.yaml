@@ -1,3 +1,8 @@
 timeoutSeconds: 10
 commands:
-- /usr/local/bin/imaginary -version
+  - command: /usr/local/bin/imaginary -version
+    expectedExitCode: 1
+    expectedContent: dev
+    matchContent: true
+  - command: test -x /usr/local/bin/imaginary
+    expectedExitCode: 0
