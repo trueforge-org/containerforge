@@ -23,7 +23,13 @@ jobs:
           max_depth: 1
 
   build:
-    if: "${{ needs.prepare.outputs.changed-files != '[]' && (github.event_name != 'pull_request' || (!startsWith(github.event.pull_request.title, 'chore(ubuntu-dep): update ghcr.io/trueforge-org/ubuntu') && !startsWith(github.event.pull_request.title, 'chore(python-dep): update ghcr.io/trueforge-org/python'))) }}"
+    if: >-
+      ${{
+        needs.prepare.outputs.changed-files != '[]' &&
+        (github.event_name != 'pull_request' ||
+        (!startsWith(github.event.pull_request.title, 'chore(ubuntu-dep): update ghcr.io/trueforge-org/ubuntu') &&
+        !startsWith(github.event.pull_request.title, 'chore(python-dep): update ghcr.io/trueforge-org/python')))
+      }}
     name: Build ${{ matrix.app }}
     needs:
       - prepare
