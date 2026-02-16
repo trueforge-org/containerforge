@@ -9,7 +9,7 @@ variable "VERSION" {
   default = "20230401"
 }
 
-variable "IMAGINARY_COMMMIT" {
+variable "IMAGINARY_COMMIT" {
   // renovate: datasource=git-refs depName=https://github.com/h2non/imaginary versioning=loose
   default = "b632dae8cc321452c3f85bcae79c580b1ae1ed84"
 }
@@ -31,6 +31,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    IMAGINARY_COMMIT = "${IMAGINARY_COMMIT}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
