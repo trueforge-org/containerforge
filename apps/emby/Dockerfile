@@ -9,19 +9,28 @@ ENV    NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 USER root
 
 RUN \
-    curl -fsSL -o /tmp/emby.deb \
+    apt-get update \
+    && apt-get install -y --no-install-recommends patchelf \
+    && curl -fsSL -o /tmp/emby.deb \
         "https://github.com/MediaBrowser/Emby.Releases/releases/download/${VERSION}/emby-server-deb_${VERSION}_${TARGETARCH}.deb" \
     && \
     mkdir -p /app/bin /tmp/emby \
     && dpkg-deb -xv /tmp/emby.deb /tmp/emby/ \
     && mv -t /app/bin/ /tmp/emby/opt/emby-server/* \
-    && chown -R root:root /app && chmod -R 755 /app \
-    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && if [ "${TARGETARCH}" = "amd64" ]; then \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/system/EmbyServer; \
+    elif [ "${TARGETARCH}" = "arm64" ]; then \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/system/EmbyServer; \
+    else \
+        echo "Error: Unsupported architecture: ${TARGETARCH}"; exit 1; \
+    fi \
+    && chown -R apps:apps /app && chmod -R 755 /app \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false patchelf \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config
