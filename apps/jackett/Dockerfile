@@ -18,7 +18,7 @@ RUN mkdir -p /app/bin && \
     chown -R root:root /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/* /app/bin/JackettUpdater*
 
-USER apps:apps
+USER apps
 
 COPY --chmod=0775 . /
 
