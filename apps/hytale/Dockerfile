@@ -21,7 +21,39 @@ RUN set -eux; \
 
 
 # Install runtime downloader wrapper
-COPY hytale-downloader /usr/local/bin/hytale-downloader
+RUN cat <<'EOF' > /usr/local/bin/hytale-downloader
+#!/usr/bin/env bash
+set -euo pipefail
+
+TMP_DIR="$(mktemp -d)"
+LOG_FILE="$TMP_DIR/hytale-downloader-stderr.log"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+if ! curl -fL https://downloader.hytale.com/hytale-downloader.zip -o "$TMP_DIR/hytale.zip" 2>"$LOG_FILE"; then
+    echo "[ERROR] Failed to download hytale-downloader.zip from downloader.hytale.com" >&2
+    echo "[ERROR] curl output:" >&2
+    cat "$LOG_FILE" >&2 || true
+    exit 1
+fi
+
+if [ -n "${HYTALE_DOWNLOADER_SHA256:-}" ]; then
+    if ! echo "${HYTALE_DOWNLOADER_SHA256}  $TMP_DIR/hytale.zip" | sha256sum -c - >/dev/null 2>>"$LOG_FILE"; then
+        echo "[ERROR] hytale-downloader.zip checksum verification failed" >&2
+        cat "$LOG_FILE" >&2 || true
+        exit 1
+    fi
+fi
+
+if ! unzip -q "$TMP_DIR/hytale.zip" -d "$TMP_DIR" 2>>"$LOG_FILE"; then
+    echo "[ERROR] Failed to extract hytale-downloader.zip" >&2
+    echo "[ERROR] unzip output:" >&2
+    cat "$LOG_FILE" >&2 || true
+    exit 1
+fi
+
+chmod +x "$TMP_DIR/hytale-downloader-linux-amd64"
+exec "$TMP_DIR/hytale-downloader-linux-amd64" "$@"
+EOF
 RUN chmod +x /usr/local/bin/hytale-downloader
 
 # Copy application files with correct ownership
