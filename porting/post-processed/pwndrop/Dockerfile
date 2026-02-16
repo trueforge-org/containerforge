@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:rolling as buildstage
+FROM ghcr.io/trueforge-org/golang:1.26.0 as buildstage
 
 # build variables
 
@@ -27,7 +27,7 @@ echo "**** fetch source code ****" && \
   cp -r ./www /app/pwndrop/admin
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 
 # set version label
 ARG VERSION

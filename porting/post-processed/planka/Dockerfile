@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:rolling@sha256:ee0d6169d1276e97acbc5d2d7717702d211f7433c00bd3e4e16f1d8c80fe1103 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
 
 # set version label
 
@@ -38,7 +38,7 @@ RUN \
     $HOME/.npm \
     /tmp/*
 
-FROM ghcr.io/trueforge-org/node:rolling@sha256:70adf71e6e9d204219ace16d177a96c7b06cc3d881c413eaaa312ed27d13479a
+FROM ghcr.io/trueforge-org/node:22.22.0
 
 ARG VERSION
 ARG TARGETARCH

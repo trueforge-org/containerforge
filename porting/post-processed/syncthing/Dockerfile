@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:ac65e5c170bd1414782d964689f53a0f72f7e07567c212e666652e86a6ec26e5 AS buildstage
+FROM ghcr.io/trueforge-org/golang:1.26.0 AS buildstage
 
 # build variables
 
@@ -26,7 +26,7 @@ RUN \
     build syncthing
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 
 # set version label
 ARG VERSION

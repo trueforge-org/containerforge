@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:436649ee533b748645c1e3ad8e4a1fc3fd2d9d4f0b1cc937bf742a5c3a7f32e5 AS buildbase
+FROM ghcr.io/trueforge-org/python:3.13.12 AS buildbase
 
 # set version label
 ARG VERSION
@@ -47,7 +47,7 @@ RUN \
   rm -rf /app/www/node_modules && \
   yarn cache clean
 
-FROM ghcr.io/trueforge-org/python:3.13.7@sha256:436649ee533b748645c1e3ad8e4a1fc3fd2d9d4f0b1cc937bf742a5c3a7f32e5
+FROM ghcr.io/trueforge-org/python:3.13.12
 
 ARG VERSION
 ARG TARGETARCH

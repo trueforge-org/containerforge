@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174 AS alpine-buildstage
+FROM ghcr.io/trueforge-org/ubuntu:24.04 AS alpine-buildstage
 
 
 ARG VERSION
@@ -37,7 +37,7 @@ RUN \
     /tmp/*
 
 # Storage layer consumed downstream
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 
 ARG VERSION
 ARG TARGETARCH

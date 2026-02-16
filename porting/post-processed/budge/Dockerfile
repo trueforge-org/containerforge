@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/node:20.5.1
+FROM ghcr.io/trueforge-org/node:22.22.0
 
 # set version label
 ARG VERSION

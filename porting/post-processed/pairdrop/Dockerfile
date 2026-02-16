@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:rolling@sha256:5623d300a3daef923e94ff2a518468f381105886e35f8562868a3ceb7ebe39c9
+FROM ghcr.io/trueforge-org/node:22.22.0
 
 # set version label
 ARG VERSION

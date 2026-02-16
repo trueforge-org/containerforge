@@ -1,5 +1,5 @@
 # build stage
-FROM ghcr.io/trueforge-org/python:rolling@sha256:ee0d6169d1276e97acbc5d2d7717702d211f7433c00bd3e4e16f1d8c80fe1103 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
 
 ARG TARGETARCH
 ARG VERSION
@@ -1004,7 +1004,7 @@ RUN \
     /buildout/etc/OpenCL/vendors/nvidia.icd
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:0628c88c702e66783b5565dadf138d0f878ee3c5e8ef8fc7c52b28224ae4d174
+FROM ghcr.io/trueforge-org/ubuntu:24.04
 
 # Add files from binstage
 COPY --from=buildstage /buildout/ /
