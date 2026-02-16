@@ -20,7 +20,7 @@ RUN set -eux; \
     \
     # Install Python packages
     pip install --no-cache-dir uv; \
-    uv pip install --requirement "https://raw.githubusercontent.com/Tautulli/tautulli-baseimage/python3/requirements.txt"; \
+    UV_EXTRA_INDEX_URL="https://pypi.org/simple" uv pip install "setuptools<81" --requirement "https://raw.githubusercontent.com/Tautulli/tautulli-baseimage/python3/requirements.txt"; \
     \
     # Download and extract Tautulli
     mkdir -p /app; \
@@ -40,5 +40,5 @@ RUN set -eux; \
 # Copy local files
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config
