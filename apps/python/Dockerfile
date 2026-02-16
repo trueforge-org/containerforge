@@ -84,7 +84,7 @@ RUN set -eux; \
     ldconfig; \
     mkdir -p /app /app; \
     python3 -m venv /app/venv; \
-    /app/venv/bin/python -m pip install --upgrade pip setuptools wheel; \
+    /app/venv/bin/python -m pip install --upgrade pip==26.0.1 setuptools==82.0.0 wheel==0.46.3; \
     chown -R apps:apps /app && chmod -R 755 /app; \
     python3 --version; \
     pip3 --version
