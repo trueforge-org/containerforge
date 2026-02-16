@@ -26,7 +26,7 @@ RUN set -eux; \
     wget --progress=dot:giga -O /tmp/openjdk.tar.gz.sig ${BINARY_URL}.sig; \
     export GNUPGHOME="$(mktemp -d)"; \
     # gpg: key 843C48A565F8F04B: "Adoptium GPG Key (DEB/RPM Signing Key) <temurin-dev@eclipse.org>" imported
-    gpg --batch --keyserver keyserver.ubuntu.com --recv-keys 3B04D753C9050D9A5D343F39843C48A565F8F04B; \
+    wget -qO- "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3B04D753C9050D9A5D343F39843C48A565F8F04B" | gpg --batch --import; \
     gpg --batch --verify /tmp/openjdk.tar.gz.sig /tmp/openjdk.tar.gz; \
     rm -rf "${GNUPGHOME}" /tmp/openjdk.tar.gz.sig; \
     mkdir -p "$JAVA_HOME"; \
