@@ -4,7 +4,14 @@ set -euo pipefail
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
-curl -fL https://downloader.hytale.com/hytale-downloader.zip -o "$TMP_DIR/hytale.zip"
-unzip -q "$TMP_DIR/hytale.zip" -d "$TMP_DIR"
+if ! curl -fL https://downloader.hytale.com/hytale-downloader.zip -o "$TMP_DIR/hytale.zip"; then
+    echo "[ERROR] Failed to download hytale-downloader.zip from downloader.hytale.com" >&2
+    exit 1
+fi
+
+if ! unzip -q "$TMP_DIR/hytale.zip" -d "$TMP_DIR"; then
+    echo "[ERROR] Failed to extract hytale-downloader.zip" >&2
+    exit 1
+fi
 chmod +x "$TMP_DIR/hytale-downloader-linux-amd64"
 exec "$TMP_DIR/hytale-downloader-linux-amd64" "$@"
