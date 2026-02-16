@@ -3,6 +3,7 @@ package testhelpers
 import (
 	"context"
 	"fmt"
+	"io"
 	"os"
 	"sort"
 	"strings"
@@ -50,6 +51,23 @@ func colorsEnabled() bool {
 
 func debugEnabled() bool {
 	return envTruthy("TESTHELPERS_DEBUG")
+}
+
+func shouldDumpContainerLogs(testFailed bool) bool {
+	mode := strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS")))
+	switch mode {
+	case "always", "all":
+		return true
+	case "never", "off", "none", "0", "false", "no":
+		return false
+	case "success", "passed", "pass":
+		return !testFailed
+	case "failure", "fail", "failed", "onfail", "on-fail", "error", "errors", "":
+		return testFailed
+	default:
+		logWarn("Unknown TESTHELPERS_CONTAINER_LOGS mode %q, defaulting to failure-only", mode)
+		return testFailed
+	}
 }
 
 func logPrefix(level string) string {
@@ -105,6 +123,23 @@ func logOK(format string, args ...any) {
 	fmt.Printf("%s %s %s\n", time.Now().Format("15:04:05"), logPrefix("OK"), fmt.Sprintf(format, args...))
 }
 
+func separatorLine(runeChar string, count int) string {
+	if count <= 0 {
+		count = 72
+	}
+	return strings.Repeat(runeChar, count)
+}
+
+func logSection(title string) {
+	line := separatorLine("=", 72)
+	if colorsEnabled() {
+		fmt.Printf("%s %s\n", colorCyan+line+colorReset, colorCyan+title+colorReset)
+		fmt.Printf("%s\n", colorCyan+line+colorReset)
+		return
+	}
+	fmt.Printf("%s\n%s\n%s\n", line, title, line)
+}
+
 func envSummary(env map[string]string) string {
 	if len(env) == 0 {
 		return "none"
@@ -135,6 +170,32 @@ func terminateContainer(ctx context.Context, container testcontainers.Container,
 	}
 	logDebug("Container terminated for %s", label)
 	return nil
+}
+
+func dumpContainerLogs(ctx context.Context, c testcontainers.Container, label string) {
+	logSection(fmt.Sprintf("📦 Container Logs (%s)", label))
+
+	reader, err := c.Logs(ctx)
+	if err != nil {
+		logWarn("Unable to fetch container logs for %s: %v", label, err)
+		return
+	}
+	defer reader.Close()
+
+	content, err := io.ReadAll(reader)
+	if err != nil {
+		logWarn("Unable to read container logs for %s: %v", label, err)
+		return
+	}
+
+	text := strings.TrimSpace(string(content))
+	if text == "" {
+		logInfo("No container logs were emitted for %s", label)
+		return
+	}
+
+	fmt.Println(text)
+	logSection(fmt.Sprintf("✅ End Container Logs (%s)", label))
 }
 
 // GetTestImage returns the image to test from TEST_IMAGE env var or falls back to the default
@@ -188,7 +249,7 @@ func runContainer(ctx context.Context, image string, opts ...testcontainers.Cont
 
 // assertExitZero waits for container exit (via wait strategy set by caller) and verifies the exit code is zero.
 func assertExitZero(ctx context.Context, c testcontainers.Container, what string) error {
-	logInfo("Validating container exit status for %s", what)
+	logInfo("Checking container exit code for %s", what)
 	state, err := c.State(ctx)
 	if err != nil {
 		logError("Failed to read container state for %s: %v", what, err)
@@ -196,10 +257,10 @@ func assertExitZero(ctx context.Context, c testcontainers.Container, what string
 	}
 	logDebug("Container state for %s: running=%t, status=%s, exitCode=%d", what, state.Running, state.Status, state.ExitCode)
 	if state.ExitCode != 0 {
-		logError("Non-zero exit for %s: exit code %d", what, state.ExitCode)
+		logError("Container exited with non-zero code for %s: %d", what, state.ExitCode)
 		return fmt.Errorf("%s: exit code %d", what, state.ExitCode)
 	}
-	logOK("Exit status OK for %s", what)
+	logOK("Container exit code is 0 for %s", what)
 	return nil
 }
 
@@ -256,6 +317,11 @@ func CheckHTTPEndpoint(ctx context.Context, image string, httpConfig HTTPTestCon
 	}
 	logOK("HTTP wait strategy passed: %s%s", portStr, httpConfig.Path)
 	defer func() {
+		if shouldDumpContainerLogs(err != nil) {
+			dumpContainerLogs(ctx, container, "HTTP endpoint check")
+		} else {
+			logDebug("Skipping container logs for HTTP endpoint check (mode=%q, failed=%t)", strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS"))), err != nil)
+		}
 		termErr := terminateContainer(ctx, container, "HTTP endpoint check")
 		if err == nil && termErr != nil {
 			err = fmt.Errorf("failed to terminate container: %w", termErr)
@@ -297,13 +363,18 @@ func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerCo
 		return err
 	}
 	defer func() {
+		if shouldDumpContainerLogs(err != nil) {
+			dumpContainerLogs(ctx, container, "command check")
+		} else {
+			logDebug("Skipping container logs for command check (mode=%q, failed=%t)", strings.TrimSpace(strings.ToLower(os.Getenv("TESTHELPERS_CONTAINER_LOGS"))), err != nil)
+		}
 		termErr := terminateContainer(ctx, container, "command check")
 		if err == nil && termErr != nil {
 			err = fmt.Errorf("failed to terminate container: %w", termErr)
 		}
 	}()
 
-	if err := assertExitZero(ctx, container, fmt.Sprintf("command '%s %v' should succeed", entrypoint, args)); err != nil {
+	if err := assertExitZero(ctx, container, fmt.Sprintf("command %q", fullCommand)); err != nil {
 		logWarn("Command check failed: %q", fullCommand)
 		return err
 	}
