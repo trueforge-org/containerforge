@@ -25,17 +25,18 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       run: |-
-        TAG="$(curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" https://api.github.com/repos/trueforge-org/forgetool/releases | jq -r '[.[] | select(.prerelease == true)][0].tag_name')"
-        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "Unable to resolve latest forgetool prerelease tag"; exit 1; }
+        RELEASES_JSON="$(curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" https://api.github.com/repos/trueforge-org/forgetool/releases)" || { echo "Failed to fetch forgetool releases from GitHub API"; exit 1; }
+        TAG="$(jq -r '([.[] | select(.prerelease == true) | .tag_name] | first) // empty' <<< "${RELEASES_JSON}")"
+        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "No forgetool prerelease tag found in GitHub Releases API response"; exit 1; }
         VERSION="${TAG#v}"
         case "$(uname -m)" in
           x86_64) ARCH="amd64" ;;
           aarch64) ARCH="arm64" ;;
-          *) echo "Unsupported architecture: $(uname -m)" && exit 1 ;;
+          *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64." && exit 1 ;;
         esac
-        curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz"
+        curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
         mkdir -p "${RUNNER_TEMP}/forgetool-bin"
-        tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool
+        tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool || { echo "Failed to extract forgetool binary from archive"; exit 1; }
         chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
         echo "${RUNNER_TEMP}/forgetool-bin" >> "${GITHUB_PATH}"
 
