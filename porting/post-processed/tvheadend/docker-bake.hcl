@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-tvheadend versioning=loose
   default = "00abbbb0"
 }
 

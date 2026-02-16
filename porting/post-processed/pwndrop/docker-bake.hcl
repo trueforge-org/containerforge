@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-pwndrop versioning=loose
   default = "1.0.1"
 }
 

@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-diskover versioning=loose
   default = "2.3.3"
 }
 

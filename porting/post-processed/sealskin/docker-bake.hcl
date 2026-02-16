@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-sealskin versioning=loose
   default = "0.1.17"
 }
 

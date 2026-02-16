@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-mariadb versioning=loose
   default = "11.4.8-r0"
 }
 

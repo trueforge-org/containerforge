@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-phpmyadmin versioning=loose
   default = "5.2.3"
 }
 

@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=linuxserver/docker-ffmpeg versioning=loose
   default = "8.0-cli"
 }
 
