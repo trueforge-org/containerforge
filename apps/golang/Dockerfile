@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:ede54cb88fd5efef6f41610146f10b4399f5e584d9227202b6c14a515a35e94e as build
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5d05227fca161b90936494534d014201795165beb84d5f1aced98565f7c6655e as build
 
 ENV PATH=/usr/local/go/bin:$PATH
 
@@ -28,16 +28,18 @@ RUN set -eux; \
     apt-get purge -y --auto-remove gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:ede54cb88fd5efef6f41610146f10b4399f5e584d9227202b6c14a515a35e94e
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5d05227fca161b90936494534d014201795165beb84d5f1aced98565f7c6655e
 
 USER root
 
-ARG VERSION
 ENV GOTOOLCHAIN=local
+ENV HOME=/config
 ENV GOPATH=/config/go
-ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+ENV GOCACHE=/tmp/go-build
+ENV PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 
 COPY --from=build --link /target/ /
 
-RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH"
-WORKDIR $GOPATH
+USER apps
+
+WORKDIR /config

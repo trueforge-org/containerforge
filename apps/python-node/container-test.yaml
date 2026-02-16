@@ -1,6 +1,7 @@
-timeoutSeconds: 10
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
 commands:
-- python3 --version
-- node --version
-- npm --version
-- yarn --version
+- command: python3 --version
+- command: node --version
+- command: npm --version
+- command: yarn --version

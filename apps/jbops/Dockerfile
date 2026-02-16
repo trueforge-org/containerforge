@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:77449580f12ca47641798a11e38291c1e30b532818ea7809078c3fa6e9bfc4df
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00750811fb5c6481942d0f9903fa012e5c221ebb8ddd261024fb72fecf456429
 ARG VERSION
 
 ENV PLEXAPI_CONFIG_PATH="/config/config.ini" \
@@ -18,7 +18,7 @@ RUN set -eux; \
         libssl-dev \
         git \
     && rm -rf /var/lib/apt/lists/*; \
-    \
+    rm -rf /app/venv; \
     git clone --single-branch --branch "${VERSION}" https://github.com/blacktwin/JBOPS.git .; \
     pip install --upgrade --requirement requirements.txt; \
     chown -R root:root /app && chmod -R 755 /app; \

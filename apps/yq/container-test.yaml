@@ -1,3 +1,4 @@
-timeoutSeconds: 10
+# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
+timeoutSeconds: 120
 commands:
-- yq --version
+- command: yq --version
