@@ -26,6 +26,11 @@ Shared helpers for standalone Go container checks.
 - `CheckCommandSucceeds(...) error`
   Runs a command via container cmd args and verifies exit code `0`.
 
+- `CheckCommand(..., commandConfig *CommandTestConfig, ...) error`
+  Runs a command with optional assertions:
+  - `ExpectedExitCode` (defaults to `0` when omitted)
+  - `ExpectedContent` + `MatchContent=true` for output contains match (after trimming)
+
 - `TestHTTPEndpoint(...)`, `TestTCPListening(...)`, `TestFileExists(...)`, `TestCommandSucceeds(...)`
   Convenience wrappers for `go test` that fail the test immediately when the check returns an error.
 
@@ -42,6 +47,8 @@ go run ./cmd/run-tests --mode file --image ghcr.io/trueforge-org/actions-runner:
 go run ./cmd/run-tests --mode http --image ghcr.io/trueforge-org/adguardhome-sync:rolling --http-port 8080 --http-path / --http-status 200
 
 go run ./cmd/run-tests --mode command --image ghcr.io/trueforge-org/cloudflareddns:rolling --entrypoint test --arg -f --arg /app/cloudflare-ddns.sh
+
+go run ./cmd/run-tests --mode command --image ghcr.io/trueforge-org/cloudflareddns:rolling --entrypoint sh --arg -c --arg 'echo ok' --command-exit-code 0 --command-content ok
 ```
 
 Optional env vars for the started container can be added with repeated `--env KEY=VALUE`.

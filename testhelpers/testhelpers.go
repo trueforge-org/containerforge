@@ -248,8 +248,23 @@ func runContainer(ctx context.Context, image string, opts ...testcontainers.Cont
 	return container, nil
 }
 
-// assertExitZero waits for container exit (via wait strategy set by caller) and verifies the exit code is zero.
-func assertExitZero(ctx context.Context, c testcontainers.Container, what string) error {
+func readContainerLogs(ctx context.Context, c testcontainers.Container) (string, error) {
+	reader, err := c.Logs(ctx)
+	if err != nil {
+		return "", err
+	}
+	defer reader.Close()
+
+	content, err := io.ReadAll(reader)
+	if err != nil {
+		return "", err
+	}
+
+	return string(content), nil
+}
+
+// assertExitCode waits for container exit (via wait strategy set by caller) and verifies the exit code.
+func assertExitCode(ctx context.Context, c testcontainers.Container, what string, expectedExitCode int) error {
 	logInfo("Checking container exit code for %s", what)
 	state, err := c.State(ctx)
 	if err != nil {
@@ -257,12 +272,17 @@ func assertExitZero(ctx context.Context, c testcontainers.Container, what string
 		return fmt.Errorf("failed to get container state: %w", err)
 	}
 	logDebug("Container state for %s: running=%t, status=%s, exitCode=%d", what, state.Running, state.Status, state.ExitCode)
-	if state.ExitCode != 0 {
-		logError("Container exited with non-zero code for %s: %d", what, state.ExitCode)
+	if state.ExitCode != expectedExitCode {
+		logError("Container exit code mismatch for %s: expected=%d actual=%d", what, expectedExitCode, state.ExitCode)
 		return fmt.Errorf("%s: exit code %d", what, state.ExitCode)
 	}
-	logOK("Container exit code is 0 for %s", what)
+	logOK("Container exit code is %d for %s", expectedExitCode, what)
 	return nil
+}
+
+// assertExitZero waits for container exit (via wait strategy set by caller) and verifies the exit code is zero.
+func assertExitZero(ctx context.Context, c testcontainers.Container, what string) error {
+	return assertExitCode(ctx, c, what, 0)
 }
 
 // HTTPTestConfig holds the configuration for HTTP endpoint tests
@@ -271,6 +291,13 @@ type HTTPTestConfig struct {
 	Path              string
 	StatusCode        int
 	StatusCodeMatcher func(int) bool
+}
+
+// CommandTestConfig holds optional configuration for command checks.
+type CommandTestConfig struct {
+	ExpectedExitCode int
+	ExpectedContent  string
+	MatchContent     bool
 }
 
 // CheckHTTPEndpoint verifies that an HTTP endpoint is accessible and returns the expected status code.
@@ -380,12 +407,20 @@ func CheckFileExists(ctx context.Context, image string, filePath string, config 
 	return CheckCommandSucceeds(ctx, image, config, "test", "-f", filePath)
 }
 
-// CheckCommandSucceeds verifies that a command runs successfully in the container (exit code 0).
-func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) (err error) {
+// CheckCommand verifies that a command runs with optional expected exit code and output content checks.
+func CheckCommand(ctx context.Context, image string, containerConfig *ContainerConfig, commandConfig *CommandTestConfig, entrypoint string, args ...string) (err error) {
+	expectedExitCode := 0
+	if commandConfig != nil {
+		expectedExitCode = commandConfig.ExpectedExitCode
+	}
+
 	fullCommand := commandString(entrypoint, args)
-	logInfo("🧪 Command check: image=%s command=%q", image, fullCommand)
-	if config != nil {
-		logInfo("Command check container config: env=%s", envSummary(config.Env))
+	logInfo("🧪 Command check: image=%s command=%q expectedExitCode=%d", image, fullCommand, expectedExitCode)
+	if containerConfig != nil {
+		logInfo("Command check container config: env=%s", envSummary(containerConfig.Env))
+	}
+	if commandConfig != nil && commandConfig.MatchContent {
+		logInfo("Command check output match enabled")
 	}
 
 	opts := []testcontainers.ContainerCustomizer{
@@ -398,7 +433,7 @@ func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerCo
 	}
 
 	// Apply optional container config
-	opts = append(opts, applyContainerConfig(config)...)
+	opts = append(opts, applyContainerConfig(containerConfig)...)
 
 	container, err := runContainer(ctx, image, opts...)
 	if err != nil {
@@ -416,14 +451,33 @@ func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerCo
 		}
 	}()
 
-	if err := assertExitZero(ctx, container, fmt.Sprintf("command %q", fullCommand)); err != nil {
+	if err := assertExitCode(ctx, container, fmt.Sprintf("command %q", fullCommand), expectedExitCode); err != nil {
 		logWarn("Command check failed: %q", fullCommand)
 		return err
+	}
+
+	if commandConfig != nil && commandConfig.MatchContent {
+		output, logErr := readContainerLogs(ctx, container)
+		if logErr != nil {
+			return fmt.Errorf("failed reading command output: %w", logErr)
+		}
+
+		actual := strings.TrimSpace(output)
+		expected := strings.TrimSpace(commandConfig.ExpectedContent)
+		if !strings.Contains(actual, expected) {
+			return fmt.Errorf("command %q output mismatch: expected content %q not found in %q", fullCommand, expected, actual)
+		}
+		logOK("Command output contains expected content")
 	}
 
 	logInfo("Command check completed successfully: %q", fullCommand)
 
 	return nil
+}
+
+// CheckCommandSucceeds verifies that a command runs successfully in the container (exit code 0).
+func CheckCommandSucceeds(ctx context.Context, image string, config *ContainerConfig, entrypoint string, args ...string) error {
+	return CheckCommand(ctx, image, config, nil, entrypoint, args...)
 }
 
 // TestHTTPEndpoint runs an HTTP endpoint check and fails the test on error.
@@ -454,6 +508,14 @@ func TestFileExists(t *testing.T, ctx context.Context, image string, filePath st
 func TestCommandSucceeds(t *testing.T, ctx context.Context, image string, containerConfig *ContainerConfig, entrypoint string, args ...string) {
 	t.Helper()
 	if err := CheckCommandSucceeds(ctx, image, containerConfig, entrypoint, args...); err != nil {
+		t.Fatalf("command check failed: %v", err)
+	}
+}
+
+// TestCommand runs a command check with optional expected exit code and output content checks.
+func TestCommand(t *testing.T, ctx context.Context, image string, containerConfig *ContainerConfig, commandConfig *CommandTestConfig, entrypoint string, args ...string) {
+	t.Helper()
+	if err := CheckCommand(ctx, image, containerConfig, commandConfig, entrypoint, args...); err != nil {
 		t.Fatalf("command check failed: %v", err)
 	}
 }

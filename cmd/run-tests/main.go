@@ -44,6 +44,8 @@ func main() {
 		httpPath   = flag.String("http-path", "/", "http path in mode=http")
 		httpStatus = flag.Int("http-status", 200, "expected http status in mode=http")
 		entrypoint = flag.String("entrypoint", "", "entrypoint command in mode=command")
+		cmdExit    = flag.Int("command-exit-code", 0, "expected exit code in mode=command")
+		cmdContent = flag.String("command-content", "", "expected command output content in mode=command (exact match after trim)")
 	)
 
 	var envPairs stringSliceFlag
@@ -94,7 +96,14 @@ func main() {
 			fmt.Fprintln(os.Stderr, "--entrypoint is required in mode=command")
 			os.Exit(2)
 		}
-		runErr = testhelpers.CheckCommandSucceeds(ctx, *image, config, *entrypoint, cmdArgs...)
+		commandConfig := &testhelpers.CommandTestConfig{
+			ExpectedExitCode: *cmdExit,
+		}
+		if strings.TrimSpace(*cmdContent) != "" {
+			commandConfig.MatchContent = true
+			commandConfig.ExpectedContent = *cmdContent
+		}
+		runErr = testhelpers.CheckCommand(ctx, *image, config, commandConfig, *entrypoint, cmdArgs...)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown --mode %q, expected one of: file, http, command\n", *mode)
 		os.Exit(2)
