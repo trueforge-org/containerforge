@@ -1,51 +1,80 @@
 # Copilot Instructions for ContainerForge
 
-## Repository focus
+## Quick Start (Agent)
 
-- This repository contains one app per folder under `apps/<app>` plus shared files in `include/`.
-- Keep changes scoped to the smallest possible surface area for the affected app.
+- You MUST keep changes inside `apps/<app>/` unless the task explicitly requires shared or cross-app edits.
+- You MUST keep changes minimal, and you MUST NOT make unrelated refactors or formatting-only edits.
+- Containers MUST run as `apps`, MUST remain read-only-rootfs compatible, and MUST treat `/app` as read-only.
+- You MUST treat `/config` as persistent storage that may be empty at startup, and you MUST use `/tmp` for ephemeral cache/scratch.
+- For Docker bake/version edits, you MUST keep `docker-bake.hcl` and `Dockerfile` aligned, and you MUST run `docker buildx bake --print` from the app directory.
+- For Go containers, you MUST build binaries in a build stage and copy them into the runtime stage, and you MUST NOT compile in the runtime stage.
+- If a changed container image is used downstream via `FROM`, you MUST update `apps/<app>/DOWNSTREAM_CHANGES.md` with affected paths, exact required changes, and normalized base version (`x.y.z`).
 
-## Expected change patterns
+Use these rules as strict defaults when making changes in this repository.
 
-- Most app updates should only touch files in the same `apps/<app>/` directory.
-- When changing image versioning, ensure values in `docker-bake.hcl` are actually used by the corresponding `Dockerfile`.
-- Do not introduce unrelated refactors or formatting-only edits.
-- Use semantic naming (Conventional Commits style) for both commit messages and PR titles.
+## 1) Scope and change boundaries
 
-## Validation
+- You MUST treat this repo as one app per folder under `apps/<app>` plus shared assets in `include/`.
+- You MUST scope changes to the smallest possible surface area for the affected app.
+- You MUST keep most updates inside the same `apps/<app>/` directory.
+- You MUST NOT introduce unrelated refactors or formatting-only edits.
 
-- For Docker bake changes, validate from the app directory with:
+## 2) Image/version consistency
+
+- When changing container image versioning, you MUST ensure values in `docker-bake.hcl` are actually used by the corresponding `Dockerfile`.
+- You SHOULD use semantic naming (Conventional Commits style) for commit messages and PR titles.
+
+## 3) Validation requirements
+
+- For Docker bake changes, you MUST validate from the app directory with:
   - `docker buildx bake --print`
 
+## 4) Security and reliability defaults
 
-## Security and reliability
+- You SHOULD prefer pinned versions/digests where already used.
+- You MUST NOT add dependencies unless required for the task.
+- You MUST preserve rootless and minimal container behavior.
 
-- Prefer pinned versions/digests where already used.
-- Avoid adding dependencies unless required for the task.
-- Preserve rootless and minimal-container behavior.
+## 5) Go-specific rules
 
-## Go specifics
+- You MUST NOT change `go.mod` or `go.sum` on unrelated PRs.
+- Go binaries MUST be built in a dedicated build stage and copied into the final/runtime stage.
+- You MUST NOT compile Go binaries in the runtime stage.
 
-- Don't change go.sum and go.mod on unrelated PRs
-- Go binaries must be built in a dedicated build stage and copied into the final/runtime stage; do not compile Go binaries in the runtime stage.
+## 6) Container runtime requirements (mandatory)
 
-## Container requirements
-- Run as `apps` user, not `apps:apps`
-- Run `read-only-rootfs` compatible
-- Ensure /config is mountable as a persistence storage option (so empty at start)
-- When working on containers, check if they are used as `from` containers in other Dockerfiles and take this into account when making alterations.
-- When a container is used as a `from` container elsewhere, document required downstream changes in `apps/<app>/DOWNSTREAM_CHANGES.md` in the source app directory.
-- `apps/<app>/DOWNSTREAM_CHANGES.md` must list each affected downstream container path and the exact required change.
-- `apps/<app>/DOWNSTREAM_CHANGES.md` must include the base-image version the change is expected in, sourced from that app's `docker-bake.hcl` `VERSION` value and normalized to `x.y.z`.
-- Do not document downstream requirements as inline comments in Dockerfiles unless explicitly requested.
-- Assume every `FROM` container runs as `USER apps` by default and hence might require `USER root` before running most commands, such as apt and apt-get
-- `/app` will be read-only
-- `/app` contains the application (binary) itself, that does not require write access
-- If an application requires write access, copy those things to `/config` during runtime
-- `/config` will be mounted as a persistent storage option and hence empty on runtime
-- Applications using `ghcr.io/trueforge-org/golang` as their main/final stage must run correctly when `/config` is empty at container start.
-- `/config` is persistence only; do not place temporary caches there unless persistence is explicitly required
-- Application configuration files go into `/config` when possible
-- `/tmp` will be throw away temporary storage (ramdisk) for things like cache files
-- Ephemeral caches (for example `GOCACHE`, pip cache, npm cache, build scratch) must use `/tmp`, not `/config`
-- Important system binaries, such as go or python, can be put into `/usr/local` paths. This ensures `/app` is empty for containers using this as a `from` container
+- Containers MUST run as user `apps` (not `apps:apps`).
+- Containers MUST remain compatible with read-only root filesystem (`read-only-rootfs`).
+- You MUST assume `/app` is read-only.
+- `/app` MUST contain the application binary and MUST NOT require write access.
+- `/config` MUST be mountable as persistent storage and MAY be empty at container start.
+- If the app needs writable files at runtime, you MUST populate/copy required files into `/config` during runtime.
+- Applications using `ghcr.io/trueforge-org/golang` as their final stage MUST run correctly when `/config` is empty.
+- `/config` is for persistence only; you MUST NOT place temporary caches there unless persistence is explicitly required.
+- You SHOULD store application configuration files in `/config` when possible.
+- `/tmp` is ephemeral (ramdisk-style) scratch space.
+- Ephemeral caches (for example `GOCACHE`, pip cache, npm cache, build scratch) MUST use `/tmp`, not `/config`.
+- Important system binaries (for example Go or Python) MAY be installed under `/usr/local` so `/app` remains empty for downstream `FROM` consumers.
+
+## 7) Base-image and downstream impact rules
+
+- Before changing a container image, you MUST check whether it is used as a `FROM` base in other Dockerfiles.
+- You MUST assume upstream base images run as `USER apps` by default.
+- If commands require elevated permissions (for example `apt`/`apt-get`), you MUST switch to `USER root` first as needed.
+- If a changed container image is used downstream, you MUST document required downstream updates in `apps/<app>/DOWNSTREAM_CHANGES.md` (in the source app directory).
+- `apps/<app>/DOWNSTREAM_CHANGES.md` MUST include:
+  - Each affected downstream container path.
+  - The exact required change for each downstream container.
+  - The base-image version where the change is expected, sourced from the app's `docker-bake.hcl` `VERSION` and normalized to `x.y.z`.
+- You MUST NOT document downstream requirements as inline comments in Dockerfiles unless explicitly requested.
+
+## 8) Practical execution checklist
+
+When completing a task, you MUST verify:
+
+1. Changes are minimal and app-scoped.
+2. Version values in `docker-bake.hcl` and `Dockerfile` are consistent.
+3. Runtime behavior remains rootless and read-only-rootfs compatible.
+4. `/config` empty-start behavior works where required.
+5. Any downstream `FROM` impact is documented in `apps/<app>/DOWNSTREAM_CHANGES.md`.
+6. `docker buildx bake --print` has been run for Docker bake changes.
