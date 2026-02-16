@@ -343,7 +343,13 @@ done
     fi
 echo "[POSTPROCESS] Sanitizing start.sh in $processed"
 if [[ ! -f "$processed/start.sh" ]]; then
-    printf '%s\n' '#!/usr/bin/env bash' > "$processed/start.sh"
+    template_start="${BASH_SOURCE[0]%/*}/templates/start.sh"
+    if [[ -f "$template_start" ]]; then
+        cp "$template_start" "$processed/start.sh"
+    else
+        printf '%s\n' '#!/usr/bin/env bash' > "$processed/start.sh"
+    fi
+    chmod +x "$processed/start.sh"
 fi
 if [[ -f "$processed/start.sh" ]]; then
     if sed --version >/dev/null 2>&1; then
