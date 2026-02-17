@@ -8,23 +8,20 @@ USER root
 RUN \
   echo "**** install packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    libdbi-drivers \
-    paho-mqtt-c \
-    syslog-ng==${VERSION} \
-    syslog-ng-add-contextual-data \
-    syslog-ng-amqp \
-    syslog-ng-graphite \
-    syslog-ng-http \
-    syslog-ng-json \
-    syslog-ng-map-value-pairs \
-    syslog-ng-python \
-    syslog-ng-redis \
+    libdbi1t64 \
+    libpaho-mqtt1.3 \
+    syslog-ng \
+    syslog-ng-mod-add-contextual-data \
+    syslog-ng-mod-amqp \
+    syslog-ng-mod-graphite \
+    syslog-ng-mod-http \
+    syslog-ng-mod-python \
+    syslog-ng-mod-redis \
     syslog-ng-scl \
-    syslog-ng-sql \
-    syslog-ng-stardate \
-    syslog-ng-stomp \
-    syslog-ng-tags-parser \
-    syslog-ng-xml && \
+    syslog-ng-mod-sql \
+    syslog-ng-mod-stardate \
+    syslog-ng-mod-stomp \
+    syslog-ng-mod-xml-parser && \
   rm -rf \
     /tmp/*
 

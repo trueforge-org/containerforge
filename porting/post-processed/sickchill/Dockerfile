@@ -21,15 +21,15 @@ RUN \
     libssl-dev && \
   echo "**** install packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    libmediainfo \
-    libxslt && \
+    libmediainfo0v5 \
+    libxslt1.1 && \
   echo "**** install sickchill ****" && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
     certifi \
     sickchill=="${VERSION}" && \
   echo "**** clean up ****" && \

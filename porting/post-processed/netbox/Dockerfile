@@ -15,17 +15,18 @@ RUN \
     libffi-dev \
     libxslt-dev \
     libxml2-dev \
-    openldap-dev \
+    libldap2-dev \
+    libsasl2-dev \
     libssl-dev \
-    postgresql-dev \
-    zlib-dev && \
+    libpq-dev \
+    zlib1g-dev && \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    libldap \
+    libldap2 \
     postgresql-client \
-    tiff \
+    libtiff6 \
     uwsgi \
-    uwsgi-python && \
+    uwsgi-plugin-python3 && \
   echo "**** install netbox ****" && \
   mkdir -p /app/netbox && \
   curl -o \
@@ -37,11 +38,11 @@ RUN \
     echo "**** install pip packages ****" && \
   cd /app/netbox && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
-  pip install --no-cache-dir  django-auth-ldap && \
+  /config/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
+  /config/venv/bin/pip install --no-cache-dir django-auth-ldap && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

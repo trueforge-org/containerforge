@@ -17,47 +17,45 @@ RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    bzip2-dev \
+    libbz2-dev \
     cmake \
-    libcurl4-libssl-dev \
+    libcurl4-openssl-dev \
     doxygen \
     gettext \
     libgmp-dev \
-    hiredis-dev \
+    libhiredis-dev \
     libicu-dev \
     libleveldb-dev \
-    libjpeg-turbo-dev \
+    libjpeg-dev \
     libogg-dev \
     libpng-dev \
     libssl-dev \
     libtool \
     libvorbis-dev \
     libxi-dev \
-    luajit-dev \
-    mesa-dev \
-    ncurses-dev \
-    openal-soft-dev \
-    postgresql-dev \
+    libluajit-5.1-dev \
+    libgl1-mesa-dev \
+    libncurses-dev \
+    libopenal-dev \
+    libpq-dev \
     python3-dev \
-    sdl2-dev \
-    sqlite-dev \
-    zstd-dev && \
+    libsdl2-dev \
+    libsqlite3-dev \
+    libzstd-dev && \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    gmp \
-    hiredis \
+    libgmp10 \
+    libhiredis1.1.0 \
     libleveldb1d \
-    libgcc \
-    libintl \
-    libpq \
-    libstdc++ \
+    libgcc-s1 \
+    libpq5 \
+    libstdc++6 \
     luajit \
     lua-socket \
-    sdl2 \
-    sqlite \
-    sqlite-libs \
+    libsdl2-2.0-0 \
+    sqlite3 \
     zstd \
-    zstd-libs && \
+    libzstd1 && \
   echo "**** compile prometheus-cpp ****" && \
   mkdir -p /tmp/prometheus-cpp && \
   PROM_URL=$(curl -sX GET "https://api.github.com/repos/jupp0r/prometheus-cpp/releases/latest" \

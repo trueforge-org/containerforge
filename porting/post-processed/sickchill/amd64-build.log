@@ -1,179 +1,915 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.11kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 831B / 831B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.1s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.15kB done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#3 DONE 0.1s
 
-#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 3.45kB done
-#5 DONE 0.0s
+#5 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#5 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#5 CACHED
 
-#6 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo "**** install sickchill ****" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill=="${VERSION}" &&   echo "**** clean up ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cache     /config/.cargo
-#6 0.158 **** install build packages ****
-#6 0.322 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.331 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.474 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.522 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 0.620 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.714 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 0.767 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 0.852 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 0.919 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 1.022 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 1.119 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 1.886 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 2.031 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.281 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 2.494 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 2.637 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 2.843 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 2.987 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 3.006 Fetched 36.1 MB in 3s (12.8 MB/s)
-#6 3.006 Reading package lists...
-#6 3.760 Reading package lists...
-#6 4.520 Building dependency tree...
-#6 4.662 Reading state information...
-#6 4.795 build-essential is already the newest version (12.10ubuntu1).
-#6 4.795 git is already the newest version (1:2.43.0-1ubuntu7.3).
-#6 4.795 libffi-dev is already the newest version (3.4.6-1build1).
-#6 4.795 libssl-dev is already the newest version (3.0.13-0ubuntu3.7).
-#6 4.795 The following additional packages will be installed:
-#6 4.796   libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
-#6 4.796   libstd-rust-1.75 libstd-rust-dev libxml2-dev rustc
-#6 4.797 Suggested packages:
-#6 4.797   cargo-doc llvm-17 lld-17 clang-17
-#6 4.828 The following NEW packages will be installed:
-#6 4.829   cargo libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
-#6 4.829   libstd-rust-1.75 libstd-rust-dev libxml2-dev libxslt1-dev rustc
-#6 4.986 0 upgraded, 11 newly installed, 0 to remove and 24 not upgraded.
-#6 4.986 Need to get 97.7 MB of archives.
-#6 4.986 After this operation, 426 MB of additional disk space will be used.
-#6 4.986 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
-#6 5.132 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-parser2.9 amd64 2.9.4-6build1 [22.3 kB]
-#6 5.275 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libssh2-1t64 amd64 1.11.0-4.1build2 [120 kB]
-#6 5.420 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libgit2-1.7 amd64 1.7.2+ds-1ubuntu3 [529 kB]
-#6 5.578 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libllvm17t64 amd64 1:17.0.6-9ubuntu1 [26.2 MB]
-#6 6.569 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-1.75 amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [20.0 MB]
-#6 7.358 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
-#6 7.525 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxslt1-dev amd64 1.1.39-0exp1ubuntu0.24.04.3 [91.9 kB]
-#6 7.669 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-dev amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [40.6 MB]
-#6 9.124 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 rustc amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [3,183 kB]
-#6 9.369 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cargo amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [6,053 kB]
-#6 9.671 debconf: delaying package configuration, since apt-utils is not installed
-#6 9.695 Fetched 97.7 MB in 5s (20.6 MB/s)
-#6 9.710 Selecting previously unselected package libedit2:amd64.
-#6 9.710 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
-#6 9.726 Preparing to unpack .../00-libedit2_3.1-20230828-1build1_amd64.deb ...
-#6 9.728 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
-#6 9.746 Selecting previously unselected package libhttp-parser2.9:amd64.
-#6 9.747 Preparing to unpack .../01-libhttp-parser2.9_2.9.4-6build1_amd64.deb ...
-#6 9.748 Unpacking libhttp-parser2.9:amd64 (2.9.4-6build1) ...
-#6 9.768 Selecting previously unselected package libssh2-1t64:amd64.
-#6 9.768 Preparing to unpack .../02-libssh2-1t64_1.11.0-4.1build2_amd64.deb ...
-#6 9.770 Unpacking libssh2-1t64:amd64 (1.11.0-4.1build2) ...
-#6 9.790 Selecting previously unselected package libgit2-1.7:amd64.
-#6 9.793 Preparing to unpack .../03-libgit2-1.7_1.7.2+ds-1ubuntu3_amd64.deb ...
-#6 9.794 Unpacking libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
-#6 9.814 Selecting previously unselected package libllvm17t64:amd64.
-#6 9.816 Preparing to unpack .../04-libllvm17t64_1%3a17.0.6-9ubuntu1_amd64.deb ...
-#6 9.817 Unpacking libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
-#6 10.24 Selecting previously unselected package libstd-rust-1.75:amd64.
-#6 10.24 Preparing to unpack .../05-libstd-rust-1.75_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 10.24 Unpacking libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 10.51 Selecting previously unselected package libxml2-dev:amd64.
-#6 10.52 Preparing to unpack .../06-libxml2-dev_2.9.14+dfsg-1.3ubuntu3.7_amd64.deb ...
-#6 10.52 Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
-#6 10.55 Selecting previously unselected package libxslt1-dev:amd64.
-#6 10.55 Preparing to unpack .../07-libxslt1-dev_1.1.39-0exp1ubuntu0.24.04.3_amd64.deb ...
-#6 10.55 Unpacking libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
-#6 10.58 Selecting previously unselected package libstd-rust-dev:amd64.
-#6 10.58 Preparing to unpack .../08-libstd-rust-dev_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 10.58 Unpacking libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.14 Selecting previously unselected package rustc.
-#6 11.14 Preparing to unpack .../09-rustc_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 11.14 Unpacking rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.19 Selecting previously unselected package cargo.
-#6 11.19 Preparing to unpack .../10-cargo_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 11.20 Unpacking cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.30 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
-#6 11.30 Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
-#6 11.30 Setting up libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
-#6 11.30 Setting up libssh2-1t64:amd64 (1.11.0-4.1build2) ...
-#6 11.31 Setting up libhttp-parser2.9:amd64 (2.9.4-6build1) ...
-#6 11.31 Setting up libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
-#6 11.31 Setting up libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.31 Setting up libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.31 Setting up rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.32 Setting up libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
-#6 11.32 Setting up cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 11.32 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-#6 11.37 **** install packages ****
-#6 11.54 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
-#6 11.68 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-#6 11.68 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
-#6 11.82 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
-#6 11.88 Reading package lists...
-#6 12.62 Reading package lists...
-#6 13.35 Building dependency tree...
-#6 13.50 Reading state information...
-#6 13.51 E: Unable to locate package libmediainfo
-#6 13.51 E: Unable to locate package libxslt
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo \"**** install sickchill ****\" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill==\"${VERSION}\" &&   echo \"**** clean up ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     $HOME/.cache     $HOME/.cargo" did not complete successfully: exit code: 100
-------
- > [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo "**** install sickchill ****" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill=="${VERSION}" &&   echo "**** clean up ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cache     /config/.cargo:
-11.37 **** install packages ****
-11.54 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
-11.68 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-11.68 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
-11.82 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#6 [internal] load build context
+#6 transferring context: 3.82kB done
+#6 DONE 0.0s
 
+#7 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo0v5     libxslt1.1 &&   echo "**** install sickchill ****" &&   python3 -m venv /config/venv &&   /config/venv/bin/pip install -U --no-cache-dir     pip     setuptools     wheel &&   /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill=="2024.3.1" &&   echo "**** clean up ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /config/.cache     /config/.cargo
+#7 0.145 **** install build packages ****
+#7 0.195 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.263 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.361 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.432 Get:4 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 0.456 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 0.551 Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 0.552 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 0.607 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 0.632 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 0.683 Get:10 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 0.777 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.277 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.376 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 1.539 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 1.678 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 1.771 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 1.906 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.000 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 2.073 Fetched 36.1 MB in 2s (19.0 MB/s)
+#7 2.073 Reading package lists...
+#7 2.839 Reading package lists...
+#7 3.601 Building dependency tree...
+#7 3.755 Reading state information...
+#7 3.896 build-essential is already the newest version (12.10ubuntu1).
+#7 3.896 git is already the newest version (1:2.43.0-1ubuntu7.3).
+#7 3.896 libffi-dev is already the newest version (3.4.6-1build1).
+#7 3.896 libssl-dev is already the newest version (3.0.13-0ubuntu3.7).
+#7 3.896 The following additional packages will be installed:
+#7 3.896   libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
+#7 3.896   libstd-rust-1.75 libstd-rust-dev libxml2-dev rustc
+#7 3.897 Suggested packages:
+#7 3.897   cargo-doc llvm-17 lld-17 clang-17
+#7 3.928 The following NEW packages will be installed:
+#7 3.929   cargo libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
+#7 3.929   libstd-rust-1.75 libstd-rust-dev libxml2-dev libxslt1-dev rustc
+#7 4.037 0 upgraded, 11 newly installed, 0 to remove and 24 not upgraded.
+#7 4.037 Need to get 97.7 MB of archives.
+#7 4.037 After this operation, 426 MB of additional disk space will be used.
+#7 4.037 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#7 4.131 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-parser2.9 amd64 2.9.4-6build1 [22.3 kB]
+#7 4.224 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libssh2-1t64 amd64 1.11.0-4.1build2 [120 kB]
+#7 4.319 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libgit2-1.7 amd64 1.7.2+ds-1ubuntu3 [529 kB]
+#7 4.423 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libllvm17t64 amd64 1:17.0.6-9ubuntu1 [26.2 MB]
+#7 5.067 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-1.75 amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [20.0 MB]
+#7 5.585 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-dev amd64 2.9.14+dfsg-1.3ubuntu3.7 [782 kB]
+#7 5.695 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libxslt1-dev amd64 1.1.39-0exp1ubuntu0.24.04.3 [91.9 kB]
+#7 5.789 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-dev amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [40.6 MB]
+#7 6.743 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 rustc amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [3,183 kB]
+#7 6.904 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cargo amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [6,053 kB]
+#7 7.138 debconf: delaying package configuration, since apt-utils is not installed
+#7 7.163 Fetched 97.7 MB in 3s (31.5 MB/s)
+#7 7.180 Selecting previously unselected package libedit2:amd64.
+#7 7.180 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#7 7.196 Preparing to unpack .../00-libedit2_3.1-20230828-1build1_amd64.deb ...
+#7 7.197 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#7 7.217 Selecting previously unselected package libhttp-parser2.9:amd64.
+#7 7.218 Preparing to unpack .../01-libhttp-parser2.9_2.9.4-6build1_amd64.deb ...
+#7 7.219 Unpacking libhttp-parser2.9:amd64 (2.9.4-6build1) ...
+#7 7.234 Selecting previously unselected package libssh2-1t64:amd64.
+#7 7.235 Preparing to unpack .../02-libssh2-1t64_1.11.0-4.1build2_amd64.deb ...
+#7 7.237 Unpacking libssh2-1t64:amd64 (1.11.0-4.1build2) ...
+#7 7.253 Selecting previously unselected package libgit2-1.7:amd64.
+#7 7.255 Preparing to unpack .../03-libgit2-1.7_1.7.2+ds-1ubuntu3_amd64.deb ...
+#7 7.256 Unpacking libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
+#7 7.277 Selecting previously unselected package libllvm17t64:amd64.
+#7 7.279 Preparing to unpack .../04-libllvm17t64_1%3a17.0.6-9ubuntu1_amd64.deb ...
+#7 7.280 Unpacking libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
+#7 7.686 Selecting previously unselected package libstd-rust-1.75:amd64.
+#7 7.688 Preparing to unpack .../05-libstd-rust-1.75_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#7 7.689 Unpacking libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 7.963 Selecting previously unselected package libxml2-dev:amd64.
+#7 7.966 Preparing to unpack .../06-libxml2-dev_2.9.14+dfsg-1.3ubuntu3.7_amd64.deb ...
+#7 7.967 Unpacking libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+#7 8.000 Selecting previously unselected package libxslt1-dev:amd64.
+#7 8.002 Preparing to unpack .../07-libxslt1-dev_1.1.39-0exp1ubuntu0.24.04.3_amd64.deb ...
+#7 8.003 Unpacking libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
+#7 8.028 Selecting previously unselected package libstd-rust-dev:amd64.
+#7 8.030 Preparing to unpack .../08-libstd-rust-dev_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#7 8.031 Unpacking libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.603 Selecting previously unselected package rustc.
+#7 8.605 Preparing to unpack .../09-rustc_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#7 8.606 Unpacking rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.659 Selecting previously unselected package cargo.
+#7 8.661 Preparing to unpack .../10-cargo_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
+#7 8.662 Unpacking cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.764 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#7 8.766 Setting up libxml2-dev:amd64 (2.9.14+dfsg-1.3ubuntu3.7) ...
+#7 8.768 Setting up libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
+#7 8.770 Setting up libssh2-1t64:amd64 (1.11.0-4.1build2) ...
+#7 8.772 Setting up libhttp-parser2.9:amd64 (2.9.4-6build1) ...
+#7 8.775 Setting up libxslt1-dev:amd64 (1.1.39-0exp1ubuntu0.24.04.3) ...
+#7 8.777 Setting up libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.779 Setting up libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.781 Setting up rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.783 Setting up libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
+#7 8.785 Setting up cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
+#7 8.788 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 8.838 **** install packages ****
+#7 8.959 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+#7 9.046 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#7 9.072 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
+#7 9.139 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#7 9.209 Reading package lists...
+#7 9.959 Reading package lists...
+#7 10.70 Building dependency tree...
+#7 10.85 Reading state information...
+#7 10.99 libxslt1.1 is already the newest version (1.1.39-0exp1ubuntu0.24.04.3).
+#7 10.99 libxslt1.1 set to manually installed.
+#7 10.99 The following additional packages will be installed:
+#7 10.99   libmms0 libtinyxml2-10 libzen0t64
+#7 11.04 The following NEW packages will be installed:
+#7 11.04   libmediainfo0v5 libmms0 libtinyxml2-10 libzen0t64
+#7 11.24 0 upgraded, 4 newly installed, 0 to remove and 24 not upgraded.
+#7 11.24 Need to get 2,733 kB of archives.
+#7 11.24 After this operation, 8,210 kB of additional disk space will be used.
+#7 11.24 Get:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 libmms0 amd64 0.6.4-3build1 [26.5 kB]
+#7 11.34 Get:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 libtinyxml2-10 amd64 10.0.0+dfsg-2 [32.5 kB]
+#7 11.43 Get:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 libzen0t64 amd64 0.4.41-2.1build1 [109 kB]
+#7 11.52 Get:4 http://archive.ubuntu.com/ubuntu noble/universe amd64 libmediainfo0v5 amd64 24.01+dfsg-1build2 [2,565 kB]
+#7 11.68 debconf: delaying package configuration, since apt-utils is not installed
+#7 11.71 Fetched 2,733 kB in 1s (5,120 kB/s)
+#7 11.73 Selecting previously unselected package libmms0:amd64.
+#7 11.73 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 21079 files and directories currently installed.)
+#7 11.74 Preparing to unpack .../libmms0_0.6.4-3build1_amd64.deb ...
+#7 11.74 Unpacking libmms0:amd64 (0.6.4-3build1) ...
+#7 11.76 Selecting previously unselected package libtinyxml2-10:amd64.
+#7 11.76 Preparing to unpack .../libtinyxml2-10_10.0.0+dfsg-2_amd64.deb ...
+#7 11.76 Unpacking libtinyxml2-10:amd64 (10.0.0+dfsg-2) ...
+#7 11.78 Selecting previously unselected package libzen0t64:amd64.
+#7 11.78 Preparing to unpack .../libzen0t64_0.4.41-2.1build1_amd64.deb ...
+#7 11.78 Unpacking libzen0t64:amd64 (0.4.41-2.1build1) ...
+#7 11.80 Selecting previously unselected package libmediainfo0v5:amd64.
+#7 11.80 Preparing to unpack .../libmediainfo0v5_24.01+dfsg-1build2_amd64.deb ...
+#7 11.80 Unpacking libmediainfo0v5:amd64 (24.01+dfsg-1build2) ...
+#7 11.85 Setting up libtinyxml2-10:amd64 (10.0.0+dfsg-2) ...
+#7 11.85 Setting up libmms0:amd64 (0.6.4-3build1) ...
+#7 11.85 Setting up libzen0t64:amd64 (0.4.41-2.1build1) ...
+#7 11.86 Setting up libmediainfo0v5:amd64 (24.01+dfsg-1build2) ...
+#7 11.86 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 11.88 **** install sickchill ****
+#7 15.60 Requirement already satisfied: pip in ./venv/lib/python3.13/site-packages (25.3)
+#7 15.64 Collecting pip
+#7 15.68   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
+#7 15.81 Collecting setuptools
+#7 15.83   Downloading setuptools-82.0.0-py3-none-any.whl.metadata (6.6 kB)
+#7 15.86 Collecting wheel
+#7 15.89   Downloading wheel-0.46.3-py3-none-any.whl.metadata (2.4 kB)
+#7 15.91 Collecting packaging>=24.0 (from wheel)
+#7 15.93   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+#7 15.95 Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+#7 16.24    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 6.2 MB/s  0:00:00
+#7 16.28 Downloading setuptools-82.0.0-py3-none-any.whl (1.0 MB)
+#7 16.45    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 6.1 MB/s  0:00:00
+#7 16.47 Downloading wheel-0.46.3-py3-none-any.whl (30 kB)
+#7 16.49 Downloading packaging-26.0-py3-none-any.whl (74 kB)
+#7 16.53 Installing collected packages: setuptools, pip, packaging, wheel
+#7 17.12   Attempting uninstall: pip
+#7 17.12     Found existing installation: pip 25.3
+#7 17.17     Uninstalling pip-25.3:
+#7 17.17       Successfully uninstalled pip-25.3
+#7 18.08 
+#7 18.08 Successfully installed packaging-26.0 pip-26.0.1 setuptools-82.0.0 wheel-0.46.3
+#7 18.89 Looking in links: https://wheel-index.linuxserver.io/alpine-3.20/
+#7 18.90 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834546660>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 19.40 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8345651d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 20.40 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834565450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 22.40 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8345656d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 26.40 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834565950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 26.43 Collecting certifi
+#7 26.46   Downloading certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
+#7 26.46 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8345647d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 26.96 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834566350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 27.96 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834566490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 29.97 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834566710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 33.97 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834566990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 34.01 Collecting sickchill==2024.3.1
+#7 34.05   Downloading sickchill-2024.3.1-py3-none-any.whl.metadata (8.5 kB)
+#7 34.06 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834565bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 34.56 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834565d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 35.56 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834566fd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 37.56 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834567250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 41.57 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8345674d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 41.58 Collecting Mako<2.0.0,>=1.1.4 (from sickchill==2024.3.1)
+#7 41.60   Downloading mako-1.3.10-py3-none-any.whl.metadata (2.9 kB)
+#7 41.61 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834565d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 42.11 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834565bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 43.11 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834567750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 45.11 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834567c50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 49.11 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa834567ed0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 49.14 Collecting PyNMA<2.0,>=1.0 (from sickchill==2024.3.1)
+#7 49.17   Downloading PyNMA-1.0.tar.gz (2.4 kB)
+#7 49.17   Installing build dependencies: started
+#7 57.96   Installing build dependencies: finished with status 'done'
+#7 57.96   Getting requirements to build wheel: started
+#7 58.63   Getting requirements to build wheel: finished with status 'done'
+#7 58.63   Preparing metadata (pyproject.toml): started
+#7 59.31   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 59.31 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 59.81 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 60.81 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 62.82 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 66.82 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 67.05 Collecting SQLAlchemy<3.0.0,>=2.0.0 (from sickchill==2024.3.1)
+#7 67.08   Downloading sqlalchemy-2.0.46-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+#7 67.09 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c16d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 67.59 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 68.59 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 70.59 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 74.60 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c20d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 74.62 Collecting Send2Trash>=1.5.0 (from sickchill==2024.3.1)
+#7 74.64   Downloading send2trash-2.1.0-py3-none-any.whl.metadata (4.1 kB)
+#7 74.65 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 75.15 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 76.15 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0410>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 78.15 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 82.15 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 82.17 Collecting Unidecode<2.0.0,>=1.2.0 (from sickchill==2024.3.1)
+#7 82.19   Downloading Unidecode-1.4.0-py3-none-any.whl.metadata (13 kB)
+#7 82.19 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 82.69 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 83.69 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 85.70 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3b10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 89.70 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3d90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 89.71 Collecting babelfish>=0.6.0 (from sickchill==2024.3.1)
+#7 89.73   Downloading babelfish-0.6.1-py3-none-any.whl.metadata (3.1 kB)
+#7 89.74 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290410>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 90.24 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3d90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 91.24 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3b10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 93.24 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 97.24 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 97.27 Collecting beekeeper-alt>=2022.9.3 (from sickchill==2024.3.1)
+#7 97.31   Downloading beekeeper_alt-2022.9.3-py3-none-any.whl.metadata (5.3 kB)
+#7 97.32 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2e90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 97.82 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2c10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 98.82 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 100.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 104.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 104.8 Collecting bencode.py<5.0.0,>=4.0.0 (from sickchill==2024.3.1)
+#7 104.9   Downloading bencode.py-4.0.0-py2.py3-none-any.whl.metadata (5.8 kB)
+#7 104.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 105.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 106.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332902d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 108.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 112.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 112.4 Collecting cachecontrol<0.15.0,>=0.13.1 (from sickchill==2024.3.1)
+#7 112.4   Downloading cachecontrol-0.14.4-py3-none-any.whl.metadata (3.1 kB)
+#7 112.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 112.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 113.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 115.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 119.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 119.9 Collecting cinemagoer<2024.0.0,>=2023.5.1 (from sickchill==2024.3.1)
+#7 120.0   Downloading cinemagoer-2023.5.1-py3-none-any.whl.metadata (2.9 kB)
+#7 120.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 120.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 121.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c39d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 123.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3c50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 127.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3ed0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 127.5 Collecting configobj<6.0.0,>=5.0.6 (from sickchill==2024.3.1)
+#7 127.5   Downloading configobj-5.0.9-py2.py3-none-any.whl.metadata (3.2 kB)
+#7 127.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 128.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 129.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 131.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 135.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 135.1 Collecting deluge-client<2.0.0,>=1.9.0 (from sickchill==2024.3.1)
+#7 135.1   Downloading deluge_client-1.10.2-py3-none-any.whl.metadata (4.3 kB)
+#7 135.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 135.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 136.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332920d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 138.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 142.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3ed0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 142.6 Collecting enzyme<0.5.0,>=0.4.1 (from sickchill==2024.3.1)
+#7 142.6   Downloading enzyme-0.4.1.tar.gz (47 kB)
+#7 142.6   Installing build dependencies: started
+#7 151.5   Installing build dependencies: finished with status 'done'
+#7 151.5   Getting requirements to build wheel: started
+#7 152.1   Getting requirements to build wheel: finished with status 'done'
+#7 152.1   Preparing metadata (pyproject.toml): started
+#7 152.8   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 152.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 153.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 154.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 156.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 160.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 160.3 Collecting gntp<2.0.0,>=1.0.3 (from sickchill==2024.3.1)
+#7 160.4   Downloading gntp-1.0.3-py3-none-any.whl.metadata (4.5 kB)
+#7 160.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 160.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 161.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 163.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 167.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 168.0 Collecting greenlet>=2.0.0 (from sickchill==2024.3.1)
+#7 168.0   Downloading greenlet-3.3.1-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.7 kB)
+#7 168.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c20d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 168.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 169.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 171.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2e90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 175.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3c50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 175.5 Collecting guessit<4.0.0,>=3.3.1 (from sickchill==2024.3.1)
+#7 175.6   Downloading guessit-3.8.0-py3-none-any.whl.metadata (140 kB)
+#7 175.6 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2e90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 176.1 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 177.1 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c2850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 179.1 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c20d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 183.1 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3b10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 183.1 Collecting ifaddr<0.3.0,>=0.1.7 (from sickchill==2024.3.1)
+#7 183.1   Downloading ifaddr-0.2.0-py3-none-any.whl.metadata (4.9 kB)
+#7 183.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 183.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 184.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 186.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 190.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 190.7 Collecting imagesize<2.0.0,>=1.2.0 (from sickchill==2024.3.1)
+#7 190.7   Downloading imagesize-1.4.1-py2.py3-none-any.whl.metadata (1.5 kB)
+#7 190.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 191.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 192.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 194.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290f50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 198.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 198.2 Collecting ipaddress<2.0.0,>=1.0.23 (from sickchill==2024.3.1)
+#7 198.2   Downloading ipaddress-1.0.23-py2.py3-none-any.whl.metadata (923 bytes)
+#7 198.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 198.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 199.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 201.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 205.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3ed0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 205.8 Collecting jsonrpclib-pelix<0.5.0,>=0.4.2 (from sickchill==2024.3.1)
+#7 205.8   Downloading jsonrpclib_pelix-0.4.3.4-py3-none-any.whl.metadata (18 kB)
+#7 205.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 206.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 207.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332916d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 209.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 213.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833290550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 213.3 Collecting kodipydent-alt>=2022.9.3 (from sickchill==2024.3.1)
+#7 213.4   Downloading kodipydent_alt-2022.9.3-py3-none-any.whl.metadata (3.7 kB)
+#7 213.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 213.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 214.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 216.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292e90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 220.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 220.9 Collecting markdown2<3.0.0,>=2.4.0 (from sickchill==2024.3.1)
+#7 220.9   Downloading markdown2-2.5.4-py3-none-any.whl.metadata (2.1 kB)
+#7 220.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 221.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 222.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c3250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 224.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 228.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 228.5 Collecting new-rtorrent-python<2.0.0,>=1.0.1-alpha.0 (from sickchill==2024.3.1)
+#7 228.5   Downloading new_rtorrent_python-1.0.1a0-py3-none-any.whl.metadata (798 bytes)
+#7 228.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 229.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 230.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 232.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332902d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 236.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332911d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 236.0 Collecting packaging<24.0,>=20.9 (from sickchill==2024.3.1)
+#7 236.0   Downloading packaging-23.2-py3-none-any.whl.metadata (3.2 kB)
+#7 236.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 236.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 237.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 239.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332916d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 243.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 243.6 Collecting profilehooks<2.0.0,>=1.12.0 (from sickchill==2024.3.1)
+#7 243.6   Downloading profilehooks-1.13.0-py3-none-any.whl.metadata (7.0 kB)
+#7 243.6 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 244.1 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 245.1 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292e90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 247.1 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 251.1 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 251.1 Collecting putio.py<9.0.0,>=8.7.0 (from sickchill==2024.3.1)
+#7 251.2   Downloading putio_py-8.8.0-py3-none-any.whl.metadata (1.2 kB)
+#7 251.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 251.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 252.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332939d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 254.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293c50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 258.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293ed0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 258.7 Collecting pyOpenSSL<25.0.0,>=20.0.1 (from sickchill==2024.3.1)
+#7 258.7   Downloading pyOpenSSL-24.3.0-py3-none-any.whl.metadata (15 kB)
+#7 258.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332939d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 259.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 260.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 262.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 266.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 266.2 Collecting python-dateutil<3.0.0,>=2.8.1 (from sickchill==2024.3.1)
+#7 266.3   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#7 266.3 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 266.8 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 267.8 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 269.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 273.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332934d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 273.8 Collecting python-slugify<9.0.0,>=4.0.1 (from sickchill==2024.3.1)
+#7 273.8   Downloading python_slugify-8.0.4-py2.py3-none-any.whl.metadata (8.5 kB)
+#7 273.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332920d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 274.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 275.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332916d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 277.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 281.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 281.4 Collecting python-twitter<4.0,>=3.5 (from sickchill==2024.3.1)
+#7 281.4   Downloading python_twitter-3.5-py2.py3-none-any.whl.metadata (32 kB)
+#7 281.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18190>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 281.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18410>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 282.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 284.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 288.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 288.9 Collecting python3-fanart<3.0.0,>=2.0.0 (from sickchill==2024.3.1)
+#7 289.0   Downloading python3_fanart-2.0.0-py3-none-any.whl.metadata (4.8 kB)
+#7 289.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a191d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 289.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 290.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 292.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332916d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 296.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 296.5 Collecting qbittorrent-api<2025.0.0,>=2021.3.18 (from sickchill==2024.3.1)
+#7 296.6   Downloading qbittorrent_api-2024.12.71-py3-none-any.whl.metadata (21 kB)
+#7 296.6 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 297.1 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332916d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 298.1 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 300.1 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332920d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 304.1 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 304.1 Collecting rarfile<5.0,>=4.0 (from sickchill==2024.3.1)
+#7 304.1   Downloading rarfile-4.2-py3-none-any.whl.metadata (4.4 kB)
+#7 304.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 304.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 305.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 307.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 311.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 311.6 Collecting requests<3.0.0,>=2.25.1 (from sickchill==2024.3.1)
+#7 311.7   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+#7 311.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 312.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 313.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 315.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332911d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 319.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332902d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 319.2 Collecting stevedore<6.0.0,>=5.1.0 (from sickchill==2024.3.1)
+#7 319.2   Downloading stevedore-5.6.0-py3-none-any.whl.metadata (2.3 kB)
+#7 319.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332911d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 319.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 320.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 322.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 326.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 326.7 Collecting subliminal<3.0.0,>=2.1.0 (from sickchill==2024.3.1)
+#7 326.8   Downloading subliminal-2.5.0-py3-none-any.whl.metadata (8.5 kB)
+#7 326.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 327.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 328.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 330.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332911d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 334.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 334.3 Collecting timeago<2.0.0,>=1.0.15 (from sickchill==2024.3.1)
+#7 334.3   Downloading timeago-1.0.16-py3-none-any.whl.metadata (4.5 kB)
+#7 334.3 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 334.8 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 335.8 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 337.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 341.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 341.9 Collecting tmdbsimple<3.0.0,>=2.8.0 (from sickchill==2024.3.1)
+#7 341.9   Downloading tmdbsimple-2.9.1-py3-none-any.whl.metadata (6.9 kB)
+#7 341.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 342.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332907d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 343.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 345.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 349.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 349.4 Collecting tornado<7.0.0,>=6.3.2 (from sickchill==2024.3.1)
+#7 349.5   Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+#7 349.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332920d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 350.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 351.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293b10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 353.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 357.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 357.0 Collecting tus.py<2.0.0,>=1.3.4 (from sickchill==2024.3.1)
+#7 357.0   Downloading tus.py-1.3.4.tar.gz (3.8 kB)
+#7 357.0   Installing build dependencies: started
+#7 365.8   Installing build dependencies: finished with status 'done'
+#7 365.8   Getting requirements to build wheel: started
+#7 366.5   Getting requirements to build wheel: finished with status 'done'
+#7 366.5   Preparing metadata (pyproject.toml): started
+#7 367.2   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 367.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 367.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 368.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 370.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 374.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 374.7 Collecting tvdbsimple<2.0.0,>=1.0.6 (from sickchill==2024.3.1)
+#7 374.7   Downloading tvdbsimple-1.0.6.tar.gz (11 kB)
+#7 374.7   Installing build dependencies: started
+#7 383.5   Installing build dependencies: finished with status 'done'
+#7 383.5   Getting requirements to build wheel: started
+#7 384.2   Getting requirements to build wheel: finished with status 'done'
+#7 384.2   Preparing metadata (pyproject.toml): started
+#7 384.8   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 384.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a0d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 385.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 386.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a5d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 388.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 392.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833292490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 392.4 Collecting validators<0.23.0,>=0.18.2 (from sickchill==2024.3.1)
+#7 392.4   Downloading validators-0.22.0-py3-none-any.whl.metadata (4.7 kB)
+#7 392.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8332920d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 392.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1aad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 393.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 395.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 399.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 399.9 Collecting win-inet-pton<2.0.0,>=1.1.0 (from sickchill==2024.3.1)
+#7 399.9   Downloading win_inet_pton-1.1.0-py2.py3-none-any.whl.metadata (2.6 kB)
+#7 399.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833291bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 400.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833293b10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 401.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 403.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 407.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 407.5 Collecting msgpack<2.0.0,>=0.5.2 (from cachecontrol<0.15.0,>=0.13.1->sickchill==2024.3.1)
+#7 407.5   Downloading msgpack-1.1.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+#7 407.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a191d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 408.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 409.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 411.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 415.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1aad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 415.2 Collecting lxml (from cinemagoer<2024.0.0,>=2023.5.1->sickchill==2024.3.1)
+#7 415.2   Downloading lxml-6.0.2-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.6 kB)
+#7 415.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 415.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a0d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 416.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 418.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 422.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 422.8 Collecting rebulk>=3.2.0 (from guessit<4.0.0,>=3.3.1->sickchill==2024.3.1)
+#7 422.8   Downloading rebulk-3.2.0-py3-none-any.whl.metadata (22 kB)
+#7 422.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 423.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 424.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 426.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1b110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 430.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1b390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 430.3 Collecting MarkupSafe>=0.9.2 (from Mako<2.0.0,>=1.1.4->sickchill==2024.3.1)
+#7 430.4   Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#7 430.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 430.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 431.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 433.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 437.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 438.0 Collecting cryptography<45,>=41.0.5 (from pyOpenSSL<25.0.0,>=20.0.1->sickchill==2024.3.1)
+#7 438.1   Downloading cryptography-44.0.3-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+#7 438.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 438.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 439.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 441.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ad50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 445.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1afd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 445.7 Collecting cffi>=1.12 (from cryptography<45,>=41.0.5->pyOpenSSL<25.0.0,>=20.0.1->sickchill==2024.3.1)
+#7 445.7   Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#7 445.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 446.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 447.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 449.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 453.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 453.2 Collecting six>=1.5 (from python-dateutil<3.0.0,>=2.8.1->sickchill==2024.3.1)
+#7 453.2   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#7 453.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1b750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 453.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1bb10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 454.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1bd90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 456.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af4050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 460.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af42d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 460.8 Collecting text-unidecode>=1.3 (from python-slugify<9.0.0,>=4.0.1->sickchill==2024.3.1)
+#7 460.8   Downloading text_unidecode-1.3-py2.py3-none-any.whl.metadata (2.4 kB)
+#7 460.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af4910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 461.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af4b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 462.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af4e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 464.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 468.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 468.3 Collecting future (from python-twitter<4.0,>=3.5->sickchill==2024.3.1)
+#7 468.3   Downloading future-1.0.0-py3-none-any.whl.metadata (4.0 kB)
+#7 468.3 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1b750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 468.8 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1a490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 469.8 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 471.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 475.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 475.8 Collecting requests-oauthlib (from python-twitter<4.0,>=3.5->sickchill==2024.3.1)
+#7 475.9   Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl.metadata (11 kB)
+#7 475.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 476.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 477.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 479.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 483.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 483.4 Collecting urllib3>=1.24.2 (from qbittorrent-api<2025.0.0,>=2021.3.18->sickchill==2024.3.1)
+#7 483.4   Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+#7 483.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 483.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 484.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a196d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 486.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a18b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 490.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1b9d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 491.0 Collecting charset_normalizer<4,>=2 (from requests<3.0.0,>=2.25.1->sickchill==2024.3.1)
+#7 491.0   Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+#7 491.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1b750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 491.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c25d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 492.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c1810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 494.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 498.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 498.6 Collecting idna<4,>=2.5 (from requests<3.0.0,>=2.25.1->sickchill==2024.3.1)
+#7 498.6   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+#7 498.6 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af4910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 499.1 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 500.1 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 502.1 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 506.1 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a1ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 506.2 Collecting typing-extensions>=4.6.0 (from SQLAlchemy<3.0.0,>=2.0.0->sickchill==2024.3.1)
+#7 506.2   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#7 506.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 506.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 507.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 509.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 513.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af65d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 513.7 Collecting beautifulsoup4>=4.4.0 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 513.7   Downloading beautifulsoup4-4.14.3-py3-none-any.whl.metadata (3.8 kB)
+#7 513.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa833a19f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 514.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af65d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 515.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 517.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 521.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 521.3 Collecting chardet>=5.0 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 521.3   Downloading chardet-5.2.0-py3-none-any.whl.metadata (3.4 kB)
+#7 521.3 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 521.8 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 522.8 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6fd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 524.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 528.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af74d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 528.8 Collecting click (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 528.8   Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+#7 528.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af74d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 529.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 530.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6fd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 532.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 536.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 536.4 Collecting click-option-group>=0.5.6 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 536.4   Downloading click_option_group-0.5.9-py3-none-any.whl.metadata (5.8 kB)
+#7 536.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 536.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 537.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af65d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 539.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 543.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6c10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 543.9 Collecting defusedxml>=0.7.1 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 543.9   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+#7 543.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 544.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af74d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 545.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 547.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 551.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7c50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 551.5 Collecting dogpile-cache>=1.0 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 551.5   Downloading dogpile_cache-1.5.0-py3-none-any.whl.metadata (5.5 kB)
+#7 551.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfc550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 552.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfc7d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 553.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfca50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 555.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfccd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 559.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7c50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 559.0 Collecting knowit>=0.5.5 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 559.0   Downloading knowit-0.5.11-py3-none-any.whl.metadata (9.2 kB)
+#7 559.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 559.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 560.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 562.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 566.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 566.6 Collecting platformdirs>=3 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 566.6   Downloading platformdirs-4.9.2-py3-none-any.whl.metadata (4.7 kB)
+#7 566.6 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af5950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 567.1 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6c10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 568.1 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 570.1 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af74d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 574.1 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7d90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 574.1 Collecting pysubs2>=1.7 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 574.1   Downloading pysubs2-1.8.0-py3-none-any.whl.metadata (3.2 kB)
+#7 574.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfd450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 574.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfd6d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 575.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfd950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 577.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfdbd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 581.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfde50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 581.6 Collecting srt>=3.5 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 581.7   Downloading srt-3.5.3.tar.gz (28 kB)
+#7 581.7   Installing build dependencies: started
+#7 590.5   Installing build dependencies: finished with status 'done'
+#7 590.5   Getting requirements to build wheel: started
+#7 591.1   Getting requirements to build wheel: finished with status 'done'
+#7 591.1   Preparing metadata (pyproject.toml): started
+#7 591.8   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 591.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 592.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 593.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 595.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfde50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 599.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfdbd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 599.3 Collecting tomlkit>=0.13.2 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 599.3   Downloading tomlkit-0.14.0-py3-none-any.whl.metadata (2.8 kB)
+#7 599.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 599.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 600.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfd6d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 602.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfdd10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 606.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfdf90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 606.9 Collecting soupsieve>=1.6.1 (from beautifulsoup4>=4.4.0->subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 606.9   Downloading soupsieve-2.8.3-py3-none-any.whl.metadata (4.6 kB)
+#7 606.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfe210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 607.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfe5d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 608.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfe850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 610.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfead0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 614.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfed50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 614.4 Collecting xmltodict>=0.9.2 (from beekeeper-alt>=2022.9.3->sickchill==2024.3.1)
+#7 614.4   Downloading xmltodict-1.0.3-py3-none-any.whl.metadata (14 kB)
+#7 614.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 615.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfefd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 616.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfed50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 618.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfead0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 622.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfe850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 622.0 Collecting pycparser (from cffi>=1.12->cryptography<45,>=41.0.5->pyOpenSSL<25.0.0,>=20.0.1->sickchill==2024.3.1)
+#7 622.0   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#7 622.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfdf90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 622.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfdd10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 623.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfd6d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 625.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bff110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 629.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bff4d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 629.5 Collecting decorator>=4.0.0 (from dogpile-cache>=1.0->subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 629.5   Downloading decorator-5.2.1-py3-none-any.whl.metadata (3.9 kB)
+#7 629.5 INFO: pip is looking at multiple versions of knowit to determine which version is compatible with other requirements. This could take a while.
+#7 629.5 Collecting knowit>=0.5.5 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 629.6   Downloading knowit-0.5.10-py3-none-any.whl.metadata (9.2 kB)
+#7 629.6   Downloading knowit-0.5.9-py3-none-any.whl.metadata (9.2 kB)
+#7 629.7   Downloading knowit-0.5.8-py3-none-any.whl.metadata (9.1 kB)
+#7 629.7   Downloading knowit-0.5.7-py3-none-any.whl.metadata (9.1 kB)
+#7 629.7   Downloading knowit-0.5.6-py3-none-any.whl.metadata (9.2 kB)
+#7 629.8   Downloading knowit-0.5.5-py3-none-any.whl.metadata (9.1 kB)
+#7 629.8 Collecting subliminal<3.0.0,>=2.1.0 (from sickchill==2024.3.1)
+#7 629.8   Downloading subliminal-2.4.0-py3-none-any.whl.metadata (8.5 kB)
+#7 629.8 INFO: pip is still looking at multiple versions of knowit to determine which version is compatible with other requirements. This could take a while.
+#7 629.8 INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+#7 629.9   Downloading subliminal-2.3.2-py3-none-any.whl.metadata (8.3 kB)
+#7 629.9   Downloading subliminal-2.2.1-py3-none-any.whl.metadata (14 kB)
+#7 629.9 INFO: pip is looking at multiple versions of subliminal to determine which version is compatible with other requirements. This could take a while.
+#7 629.9   Downloading subliminal-2.2.0-py3-none-any.whl.metadata (14 kB)
+#7 630.0   Downloading subliminal-2.1.0-py3-none-any.whl.metadata (12 kB)
+#7 630.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfed50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 630.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c07d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 631.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 633.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 637.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0f50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 637.5 Collecting pysrt>=1.0.1 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 637.5   Downloading pysrt-1.1.2.tar.gz (104 kB)
+#7 637.6   Installing build dependencies: started
+#7 646.5   Installing build dependencies: finished with status 'done'
+#7 646.5   Getting requirements to build wheel: started
+#7 647.2   Getting requirements to build wheel: finished with status 'done'
+#7 647.2   Preparing metadata (pyproject.toml): started
+#7 647.8   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 647.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfca50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 648.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfc7d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 649.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfc550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 651.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8344c25d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 655.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af7110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 655.4 Collecting appdirs>=1.3 (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 655.4   Downloading appdirs-1.4.4-py2.py3-none-any.whl.metadata (9.0 kB)
+#7 655.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af56d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 655.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af60d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 656.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af6490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 658.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa832af4a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 662.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0f50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 662.9 Collecting pytz>=2012c (from subliminal<3.0.0,>=2.1.0->sickchill==2024.3.1)
+#7 662.9   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+#7 663.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfc7d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 663.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa831bfca50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 664.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 666.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 670.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fa8317c0cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.20/
+#7 670.5 Collecting oauthlib>=3.0.0 (from requests-oauthlib->python-twitter<4.0,>=3.5->sickchill==2024.3.1)
+#7 670.5   Downloading oauthlib-3.3.1-py3-none-any.whl.metadata (7.9 kB)
+#7 670.6 Downloading sickchill-2024.3.1-py3-none-any.whl (15.7 MB)
+#7 673.7    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.7/15.7 MB 5.1 MB/s  0:00:03
+#7 673.7 Downloading bencode.py-4.0.0-py2.py3-none-any.whl (18 kB)
+#7 673.7 Downloading cachecontrol-0.14.4-py3-none-any.whl (22 kB)
+#7 673.8 Downloading cinemagoer-2023.5.1-py3-none-any.whl (297 kB)
+#7 673.8 Downloading configobj-5.0.9-py2.py3-none-any.whl (35 kB)
+#7 673.9 Downloading deluge_client-1.10.2-py3-none-any.whl (12 kB)
+#7 673.9 Downloading gntp-1.0.3-py3-none-any.whl (16 kB)
+#7 673.9 Downloading guessit-3.8.0-py3-none-any.whl (206 kB)
+#7 673.9 Downloading ifaddr-0.2.0-py3-none-any.whl (12 kB)
+#7 674.0 Downloading imagesize-1.4.1-py2.py3-none-any.whl (8.8 kB)
+#7 674.0 Downloading ipaddress-1.0.23-py2.py3-none-any.whl (18 kB)
+#7 674.0 Downloading jsonrpclib_pelix-0.4.3.4-py3-none-any.whl (42 kB)
+#7 674.0 Downloading mako-1.3.10-py3-none-any.whl (78 kB)
+#7 674.1 Downloading markdown2-2.5.4-py3-none-any.whl (49 kB)
+#7 674.1 Downloading msgpack-1.1.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (424 kB)
+#7 674.2 Downloading new_rtorrent_python-1.0.1a0-py3-none-any.whl (37 kB)
+#7 674.2 Downloading packaging-23.2-py3-none-any.whl (53 kB)
+#7 674.2 Downloading profilehooks-1.13.0-py3-none-any.whl (10 kB)
+#7 674.3 Downloading putio_py-8.8.0-py3-none-any.whl (7.4 kB)
+#7 674.3 Downloading pyOpenSSL-24.3.0-py3-none-any.whl (56 kB)
+#7 674.4 Downloading cryptography-44.0.3-cp39-abi3-manylinux_2_34_x86_64.whl (4.2 MB)
+#7 675.2    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.2/4.2 MB 5.3 MB/s  0:00:00
+#7 675.2 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#7 675.3 Downloading python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)
+#7 675.3 Downloading python_twitter-3.5-py2.py3-none-any.whl (67 kB)
+#7 675.3 Downloading python3_fanart-2.0.0-py3-none-any.whl (13 kB)
+#7 675.3 Downloading qbittorrent_api-2024.12.71-py3-none-any.whl (65 kB)
+#7 675.4 Downloading rarfile-4.2-py3-none-any.whl (29 kB)
+#7 675.4 Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+#7 675.4 Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+#7 675.5 Downloading idna-3.11-py3-none-any.whl (71 kB)
+#7 675.5 Downloading sqlalchemy-2.0.46-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+#7 675.9    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 7.4 MB/s  0:00:00
+#7 676.0 Downloading stevedore-5.6.0-py3-none-any.whl (54 kB)
+#7 676.0 Downloading subliminal-2.1.0-py3-none-any.whl (66 kB)
+#7 676.0 Downloading timeago-1.0.16-py3-none-any.whl (29 kB)
+#7 676.0 Downloading tmdbsimple-2.9.1-py3-none-any.whl (38 kB)
+#7 676.1 Downloading tornado-6.5.4-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (445 kB)
+#7 676.1 Downloading Unidecode-1.4.0-py3-none-any.whl (235 kB)
+#7 676.2 Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+#7 676.2 Downloading validators-0.22.0-py3-none-any.whl (26 kB)
+#7 676.2 Downloading win_inet_pton-1.1.0-py2.py3-none-any.whl (4.8 kB)
+#7 676.3 Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
+#7 676.3 Downloading appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+#7 676.3 Downloading babelfish-0.6.1-py3-none-any.whl (94 kB)
+#7 676.4 Downloading beautifulsoup4-4.14.3-py3-none-any.whl (107 kB)
+#7 676.4 Downloading beekeeper_alt-2022.9.3-py3-none-any.whl (16 kB)
+#7 676.4 Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#7 676.5 Downloading chardet-5.2.0-py3-none-any.whl (199 kB)
+#7 676.5 Downloading click-8.3.1-py3-none-any.whl (108 kB)
+#7 676.6 Downloading dogpile_cache-1.5.0-py3-none-any.whl (64 kB)
+#7 676.6 Downloading decorator-5.2.1-py3-none-any.whl (9.2 kB)
+#7 676.6 Downloading greenlet-3.3.1-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (612 kB)
+#7 676.7    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 612.9/612.9 kB 7.4 MB/s  0:00:00
+#7 676.7 Downloading kodipydent_alt-2022.9.3-py3-none-any.whl (11 kB)
+#7 676.7 Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#7 676.8 Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+#7 676.8 Downloading rebulk-3.2.0-py3-none-any.whl (56 kB)
+#7 676.9 Downloading send2trash-2.1.0-py3-none-any.whl (17 kB)
+#7 676.9 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#7 676.9 Downloading soupsieve-2.8.3-py3-none-any.whl (37 kB)
+#7 676.9 Downloading text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
+#7 677.0 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#7 677.0 Downloading xmltodict-1.0.3-py3-none-any.whl (13 kB)
+#7 677.0 Downloading future-1.0.0-py3-none-any.whl (491 kB)
+#7 677.1 Downloading lxml-6.0.2-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+#7 678.3    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 4.5 MB/s  0:00:01
+#7 678.3 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#7 678.3 Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
+#7 678.3 Downloading oauthlib-3.3.1-py3-none-any.whl (160 kB)
+#7 678.5 Building wheels for collected packages: enzyme, PyNMA, tus.py, tvdbsimple, pysrt
+#7 678.5   Building wheel for enzyme (pyproject.toml): started
+#7 679.2   Building wheel for enzyme (pyproject.toml): finished with status 'done'
+#7 679.2   Created wheel for enzyme: filename=enzyme-0.4.1-py3-none-any.whl size=50807 sha256=429c858e1f087805f0908aa2f38b0b3cacb052a5002d5930a225d4abd2004478
+#7 679.2   Stored in directory: /tmp/pip-ephem-wheel-cache-4b_nh4ur/wheels/86/df/94/6048e0fd93322028c39caf6014c42307f22545ea7179c02d4b
+#7 679.2   Building wheel for PyNMA (pyproject.toml): started
+#7 679.9   Building wheel for PyNMA (pyproject.toml): finished with status 'done'
+#7 679.9   Created wheel for PyNMA: filename=pynma-1.0-py3-none-any.whl size=3037 sha256=11cf620731f5de37e2b13eef146f46f521d620e782bf150349abe33d80d58b0a
+#7 679.9   Stored in directory: /tmp/pip-ephem-wheel-cache-4b_nh4ur/wheels/06/6c/2e/972ed13e1bb75cf07fa7a741ca69b4809f794b16af8a7a9bdf
+#7 679.9   Building wheel for tus.py (pyproject.toml): started
+#7 680.6   Building wheel for tus.py (pyproject.toml): finished with status 'done'
+#7 680.6   Created wheel for tus.py: filename=tus_py-1.3.4-py3-none-any.whl size=3874 sha256=1bb974b9c64149492443d91a47a3a2e56921dba2d1a509c9ef77bf7d723e7b17
+#7 680.6   Stored in directory: /tmp/pip-ephem-wheel-cache-4b_nh4ur/wheels/66/8a/37/af75653f361b9afb96a1aa7d0255d1c100b30ff570e8a38844
+#7 680.6   Building wheel for tvdbsimple (pyproject.toml): started
+#7 681.3   Building wheel for tvdbsimple (pyproject.toml): finished with status 'done'
+#7 681.3   Created wheel for tvdbsimple: filename=tvdbsimple-1.0.6-py3-none-any.whl size=14942 sha256=2c6dff9b2557c42aeac9a597d0630297d73fca7a91f78d11b56201d410e5dbc1
+#7 681.3   Stored in directory: /tmp/pip-ephem-wheel-cache-4b_nh4ur/wheels/0a/e7/b8/1b8a3c46e9686deb353d080f68234370f6e21cee364f083553
+#7 681.3   Building wheel for pysrt (pyproject.toml): started
+#7 682.0   Building wheel for pysrt (pyproject.toml): finished with status 'done'
+#7 682.0   Created wheel for pysrt: filename=pysrt-1.1.2-py3-none-any.whl size=13501 sha256=e7574d867b26df83568b1c44b75f01103d8902e8c33fca7e2112a84d95b16cc9
+#7 682.0   Stored in directory: /tmp/pip-ephem-wheel-cache-4b_nh4ur/wheels/1c/af/06/094acdd1f5840fd0b55bb1c728924f3c3dacbf3fa59fb38a0b
+#7 682.0 Successfully built enzyme PyNMA tus.py tvdbsimple pysrt
+#7 682.2 Installing collected packages: win-inet-pton, timeago, text-unidecode, rebulk, pytz, PyNMA, ipaddress, ifaddr, gntp, enzyme, deluge-client, bencode.py, appdirs, xmltodict, validators, urllib3, Unidecode, typing-extensions, tornado, stevedore, soupsieve, six, Send2Trash, rarfile, python-slugify, pycparser, profilehooks, packaging, oauthlib, msgpack, MarkupSafe, markdown2, lxml, jsonrpclib-pelix, imagesize, idna, greenlet, future, decorator, configobj, click, charset_normalizer, chardet, certifi, babelfish, SQLAlchemy, requests, python-dateutil, pysrt, Mako, dogpile-cache, cffi, beekeeper-alt, beautifulsoup4, tvdbsimple, tus.py, tmdbsimple, requests-oauthlib, qbittorrent-api, python3-fanart, new-rtorrent-python, kodipydent-alt, guessit, cryptography, cinemagoer, cachecontrol, subliminal, python-twitter, pyOpenSSL, putio.py, sickchill
+#7 683.2   Attempting uninstall: packaging
+#7 683.2     Found existing installation: packaging 26.0
+#7 683.2     Uninstalling packaging-26.0:
+#7 683.2       Successfully uninstalled packaging-26.0
+#7 687.1 
+#7 687.1 ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+#7 687.1 wheel 0.46.3 requires packaging>=24.0, but you have packaging 23.2 which is incompatible.
+#7 687.1 Successfully installed Mako-1.3.10 MarkupSafe-3.0.3 PyNMA-1.0 SQLAlchemy-2.0.46 Send2Trash-2.1.0 Unidecode-1.4.0 appdirs-1.4.4 babelfish-0.6.1 beautifulsoup4-4.14.3 beekeeper-alt-2022.9.3 bencode.py-4.0.0 cachecontrol-0.14.4 certifi-2026.1.4 cffi-2.0.0 chardet-5.2.0 charset_normalizer-3.4.4 cinemagoer-2023.5.1 click-8.3.1 configobj-5.0.9 cryptography-44.0.3 decorator-5.2.1 deluge-client-1.10.2 dogpile-cache-1.5.0 enzyme-0.4.1 future-1.0.0 gntp-1.0.3 greenlet-3.3.1 guessit-3.8.0 idna-3.11 ifaddr-0.2.0 imagesize-1.4.1 ipaddress-1.0.23 jsonrpclib-pelix-0.4.3.4 kodipydent-alt-2022.9.3 lxml-6.0.2 markdown2-2.5.4 msgpack-1.1.2 new-rtorrent-python-1.0.1a0 oauthlib-3.3.1 packaging-23.2 profilehooks-1.13.0 putio.py-8.8.0 pyOpenSSL-24.3.0 pycparser-3.0 pysrt-1.1.2 python-dateutil-2.9.0.post0 python-slugify-8.0.4 python-twitter-3.5 python3-fanart-2.0.0 pytz-2025.2 qbittorrent-api-2024.12.71 rarfile-4.2 rebulk-3.2.0 requests-2.32.5 requests-oauthlib-2.0.0 sickchill-2024.3.1 six-1.17.0 soupsieve-2.8.3 stevedore-5.6.0 subliminal-2.1.0 text-unidecode-1.3 timeago-1.0.16 tmdbsimple-2.9.1 tornado-6.5.4 tus.py-1.3.4 tvdbsimple-1.0.6 typing-extensions-4.15.0 urllib3-2.6.3 validators-0.22.0 win-inet-pton-1.1.0 xmltodict-1.0.3
+#7 687.5 **** clean up ****
+#7 687.5 Reading package lists...
+#7 688.2 Building dependency tree...
+#7 688.4 Reading state information...
+#7 688.5 0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
+#7 DONE 688.7s
 
+#8 [3/4] COPY . /
+#8 DONE 0.1s
 
-13.51 E: Unable to locate package libmediainfo
-13.51 E: Unable to locate package libxslt
-------
-Dockerfile:13
---------------------
-  12 |     
-  13 | >>> RUN \
-  14 | >>>   echo "**** install build packages ****" && \
-  15 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  16 | >>>     build-essential \
-  17 | >>>     cargo \
-  18 | >>>     git \
-  19 | >>>     libffi-dev \
-  20 | >>>     libxslt-dev \
-  21 | >>>     libssl-dev && \
-  22 | >>>   echo "**** install packages ****" && \
-  23 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  24 | >>>     libmediainfo \
-  25 | >>>     libxslt && \
-  26 | >>>   echo "**** install sickchill ****" && \
-  27 | >>>   python3 -m venv /config/venv && \
-  28 | >>>   pip install -U --no-cache-dir \
-  29 | >>>     pip \
-  30 | >>>     setuptools \
-  31 | >>>     wheel && \
-  32 | >>>   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
-  33 | >>>     certifi \
-  34 | >>>     sickchill=="${VERSION}" && \
-  35 | >>>   echo "**** clean up ****" && \
-  36 | >>>   apt-get autoremove -y && \
-  37 | >>>   rm -rf \
-  38 | >>>     /tmp/* \
-  39 | >>>     $HOME/.cache \
-  40 | >>>     $HOME/.cargo
-  41 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cargo     git     libffi-dev     libxslt-dev     libssl-dev &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libmediainfo     libxslt &&   echo \"**** install sickchill ****\" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     setuptools     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/     certifi     sickchill==\"${VERSION}\" &&   echo \"**** clean up ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     $HOME/.cache     $HOME/.cargo" did not complete successfully: exit code: 100
+#9 [4/4] WORKDIR /config
+#9 DONE 0.0s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 21.0s done
+#10 exporting manifest sha256:e4fb8dd293d0a1a37783fe261c41ff2c5df0d8bc58f0e66fd57a5b1d68b5a475 done
+#10 exporting config sha256:b53368d65090a89da25f4d42d24e84414a9d41c6388ddc8fcbea3e96fa542cf2 done
+#10 exporting attestation manifest sha256:ddfbe8d85dc901f17f2d1ec73099d3c06f2eb9ddd1a168b7916a7f49997d88b3 done
+#10 exporting manifest list sha256:3c1c4111cc6ec99c241922d7413678851184298411fd33e4a70a5190eac926f4 done
+#10 naming to docker.io/library/sickchill:2024.3.1 done
+#10 unpacking to docker.io/library/sickchill:2024.3.1
+#10 unpacking to docker.io/library/sickchill:2024.3.1 3.9s done
+#10 DONE 25.0s
