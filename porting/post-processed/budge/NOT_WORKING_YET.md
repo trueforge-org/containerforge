@@ -25,3 +25,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: PASS
 - Reason: Build succeeds after source URL fallback and python-is-python3 for node-gyp tooling.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 larger debian-style batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after Debian package correction (python-is-python3) and source URL fallback.
+- Full log: `amd64-build.log`

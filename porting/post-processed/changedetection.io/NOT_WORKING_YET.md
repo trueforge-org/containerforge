@@ -25,3 +25,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Build still fails due venv path/layout mismatch in later playwright install step.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 larger debian-style batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Still fails in venv/playwright install path handling; requires focused python-venv path refactor.
+- Full log: `amd64-build.log`
