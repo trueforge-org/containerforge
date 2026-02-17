@@ -13,15 +13,17 @@ RUN \
     php8.3-xml \
     php8.3-gd \
     php8.3-intl \
+    composer \
+    php8.3-zip \
     php8.3-sqlite3 && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
   echo "**** install cops ****" && \
-  curl -o \
-    /tmp/cops.tar.gz -L \
-    "https://github.com/mikespub-org/seblucas-cops/archive/${VERSION}.tar.gz" && \
+  curl -fL -o \
+    /tmp/cops.tar.gz \
+    "https://github.com/mikespub-org/seblucas-cops/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/cops.tar.gz \
+    "https://github.com/mikespub-org/seblucas-cops/archive/refs/tags/v${VERSION}.tar.gz" && \
   mkdir -p \
     /app/www/public && \
   tar xf /tmp/cops.tar.gz -C \

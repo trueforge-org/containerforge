@@ -14,19 +14,21 @@ RUN \
         php8.3-intl \
         php8.3-ldap \
         php8.3-mysql \
+        composer \
         php-redis \
+        php8.3-zip \
         php8.3-xml && \
     rm -rf /var/lib/apt/lists/* && \
     echo "**** configure php-fpm to pass env vars ****" && \
-    sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
-    if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
-    echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+    if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
     echo "**** install kimai ****" && \
     mkdir -p\
         /app/www && \
-    curl -o \
-        /tmp/kimai.tar.gz -L \
-        "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" && \
+    curl -fL -o \
+        /tmp/kimai.tar.gz \
+        "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+        /tmp/kimai.tar.gz \
+        "https://github.com/kimai/kimai/archive/refs/tags/v${VERSION}.tar.gz" && \
     tar xf \
         /tmp/kimai.tar.gz -C \
         /app/www --strip-components=1 && \

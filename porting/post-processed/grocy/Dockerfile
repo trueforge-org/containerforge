@@ -16,19 +16,23 @@ RUN \
         php8.3-intl \
         php8.3-ldap \
         php8.3-opcache \
+        composer \
+        php8.3-xml \
         php8.3-sqlite3 \
         php8.3-tokenizer && \
     echo "**** configure php-fpm to pass env vars ****" && \
-    sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
-    grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf && \
+    if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
     echo "**** install grocy ****" && \
     mkdir -p /app/www && \
-    curl -o \
-        /tmp/grocy.tar.gz -L \
-        "https://github.com/grocy/grocy/archive/v${VERSION}.tar.gz" && \
+    curl -fL -o \
+        /tmp/grocy.tar.gz \
+        "https://github.com/grocy/grocy/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+        /tmp/grocy.tar.gz \
+        "https://github.com/grocy/grocy/archive/refs/tags/${VERSION}.tar.gz" && \
     tar xf \
         /tmp/grocy.tar.gz -C \
         /app/www/ --strip-components=1 && \
+    mkdir -p /defaults/plugins && \
     cp -R /app/www/data/plugins \
         /defaults/plugins && \
     echo "**** install composer packages ****" && \

@@ -14,6 +14,7 @@ RUN \
     mariadb-client \
     memcached \
     php8.3-xml \
+    php8.3-curl \
     php8.3-exif \
     php8.3-gd \
     php8.3-ldap \
@@ -21,18 +22,20 @@ RUN \
     php8.3-opcache \
     php8.3-memcached \
     php8.3-tokenizer \
+    php8.3-zip \
+    composer \
     qtbase5-dev \
     fonts-freefont-ttf && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
   echo "**** fetch bookstack ****" && \
   mkdir -p\
     /app/www && \
-  curl -o \
-    /tmp/bookstack.tar.gz -L \
-    "https://github.com/BookStackApp/BookStack/archive/v${VERSION}.tar.gz" && \
+  curl -fL -o \
+    /tmp/bookstack.tar.gz \
+    "https://github.com/BookStackApp/BookStack/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/bookstack.tar.gz \
+    "https://github.com/BookStackApp/BookStack/archive/refs/tags/${VERSION}.tar.gz" && \
   tar xf \
     /tmp/bookstack.tar.gz -C \
     /app/www/ --strip-components=1 && \

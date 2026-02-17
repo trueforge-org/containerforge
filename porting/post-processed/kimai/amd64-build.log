@@ -1,370 +1,1260 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 810B / 810B done
 #1 DONE 0.0s
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.73kB done
-#1 DONE 0.0s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.93kB done
+#2 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.1s
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.3s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#4 CACHED
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 done
+#5 CACHED
 
-#5 [internal] load build context
-#5 transferring context: 6.41kB done
-#5 DONE 0.0s
+#6 [internal] load build context
+#6 transferring context: 2.54kB done
+#6 DONE 0.0s
 
-#6 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install kimai ****" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo "**** install composer dependencies ****" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*         /config/.cache         /config/.composer
-#6 0.156 **** install runtime packages ****
-#6 0.334 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.482 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.488 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.641 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.796 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 0.949 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 1.121 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 1.205 Get:8 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 1.276 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 2.097 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 2.107 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 2.251 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 2.260 Get:13 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 2.451 Get:14 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 2.478 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 2.699 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.966 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 3.118 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 3.138 Fetched 36.1 MB in 3s (12.2 MB/s)
-#6 3.138 Reading package lists...
-#6 3.867 Reading package lists...
-#6 4.593 Building dependency tree...
-#6 4.735 Reading state information...
-#6 4.871 The following additional packages will be installed:
-#6 4.871   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3 libheif-plugin-aomdec
-#6 4.871   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
-#6 4.871   libsharpyuv0 libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6
-#6 4.872   libxcb1 libxdmcp6 libxpm4 php-common php8.3-cli php8.3-common
-#6 4.872   php8.3-igbinary php8.3-opcache php8.3-phpdbg php8.3-readline php8.3-redis
-#6 4.872   psmisc ucf
-#6 4.873 Suggested packages:
-#6 4.873   libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec
-#6 4.873   libheif-plugin-jpegdec libheif-plugin-jpegenc libheif-plugin-j2kdec
-#6 4.873   libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc
-#6 4.873   redis-server php-pear
-#6 4.873 Recommended packages:
-#6 4.873   libheif-plugin-aomenc
-#6 4.986 The following NEW packages will be installed:
-#6 4.986   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3 libheif-plugin-aomdec
-#6 4.987   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
-#6 4.987   libsharpyuv0 libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6
-#6 4.987   libxcb1 libxdmcp6 libxpm4 php-common php-redis php8.3-cli php8.3-common
-#6 4.987   php8.3-gd php8.3-igbinary php8.3-intl php8.3-ldap php8.3-mysql
-#6 4.987   php8.3-opcache php8.3-phpdbg php8.3-readline php8.3-redis php8.3-xml psmisc
-#6 4.987   ucf
-#6 5.156 0 upgraded, 39 newly installed, 0 to remove and 5 not upgraded.
-#6 5.156 Need to get 10.5 MB of archives.
-#6 5.156 After this operation, 39.7 MB of additional disk space will be used.
-#6 5.156 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
-#6 5.312 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
-#6 5.465 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
-#6 5.618 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
-#6 5.794 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
-#6 5.946 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
-#6 6.100 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-opcache amd64 8.3.6-0ubuntu0.24.04.6 [372 kB]
-#6 6.264 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-readline amd64 8.3.6-0ubuntu0.24.04.6 [13.4 kB]
-#6 6.416 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.24.04.1 [161 kB]
-#6 6.572 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-cli amd64 8.3.6-0ubuntu0.24.04.6 [1,916 kB]
-#6 6.789 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-phpdbg amd64 8.3.6-0ubuntu0.24.04.6 [1,933 kB]
-#6 7.007 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-igbinary amd64 3.2.13-1ubuntu3 [37.9 kB]
-#6 7.159 Get:13 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-redis amd64 5.3.7+4.3.0-3ubuntu1 [168 kB]
-#6 7.315 Get:14 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-redis amd64 5.3.7+4.3.0-3ubuntu1 [3,058 B]
-#6 7.467 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
-#6 7.619 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
-#6 7.771 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
-#6 7.924 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
-#6 8.079 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
-#6 8.252 Get:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
-#6 8.471 Get:21 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
-#6 8.626 Get:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
-#6 8.778 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
-#6 8.931 Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
-#6 9.082 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
-#6 9.234 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
-#6 9.395 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
-#6 9.550 Get:28 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
-#6 9.703 Get:29 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
-#6 9.856 Get:30 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
-#6 10.01 Get:31 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
-#6 10.17 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
-#6 10.33 Get:33 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
-#6 10.48 Get:34 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
-#6 10.63 Get:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
-#6 10.79 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
-#6 10.94 Get:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-ldap amd64 8.3.6-0ubuntu0.24.04.6 [33.5 kB]
-#6 11.10 Get:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
-#6 11.25 Get:39 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
-#6 11.36 debconf: delaying package configuration, since apt-utils is not installed
-#6 11.38 Fetched 10.5 MB in 6s (1,670 kB/s)
-#6 11.40 Selecting previously unselected package psmisc.
-#6 11.40 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
-#6 11.41 Preparing to unpack .../00-psmisc_23.7-1build1_amd64.deb ...
-#6 11.41 Unpacking psmisc (23.7-1build1) ...
-#6 11.43 Selecting previously unselected package php-common.
-#6 11.43 Preparing to unpack .../01-php-common_2%3a93ubuntu2_all.deb ...
-#6 11.43 Unpacking php-common (2:93ubuntu2) ...
-#6 11.45 Selecting previously unselected package ucf.
-#6 11.45 Preparing to unpack .../02-ucf_3.0043+nmu1_all.deb ...
-#6 11.45 Moving old data out of the way
-#6 11.46 Unpacking ucf (3.0043+nmu1) ...
-#6 11.47 Selecting previously unselected package php8.3-common.
-#6 11.48 Preparing to unpack .../03-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 11.48 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
-#6 11.53 Selecting previously unselected package libbsd0:amd64.
-#6 11.53 Preparing to unpack .../04-libbsd0_0.12.1-1build1.1_amd64.deb ...
-#6 11.53 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
-#6 11.54 Selecting previously unselected package libedit2:amd64.
-#6 11.55 Preparing to unpack .../05-libedit2_3.1-20230828-1build1_amd64.deb ...
-#6 11.55 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
-#6 11.56 Selecting previously unselected package php8.3-opcache.
-#6 11.56 Preparing to unpack .../06-php8.3-opcache_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 11.57 Unpacking php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
-#6 11.59 Selecting previously unselected package php8.3-readline.
-#6 11.59 Preparing to unpack .../07-php8.3-readline_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 11.59 Unpacking php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
-#6 11.60 Selecting previously unselected package libsodium23:amd64.
-#6 11.60 Preparing to unpack .../08-libsodium23_1.0.18-1ubuntu0.24.04.1_amd64.deb ...
-#6 11.61 Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
-#6 11.62 Selecting previously unselected package php8.3-cli.
-#6 11.62 Preparing to unpack .../09-php8.3-cli_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 11.62 Unpacking php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
-#6 11.66 Selecting previously unselected package php8.3-phpdbg.
-#6 11.66 Preparing to unpack .../10-php8.3-phpdbg_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 11.66 Unpacking php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
-#6 11.71 Setting up psmisc (23.7-1build1) ...
-#6 11.71 Setting up php-common (2:93ubuntu2) ...
-#6 11.82 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
-#6 11.84 Selecting previously unselected package php8.3-igbinary.
-#6 11.84 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16855 files and directories currently installed.)
-#6 11.85 Preparing to unpack .../00-php8.3-igbinary_3.2.13-1ubuntu3_amd64.deb ...
-#6 11.86 Unpacking php8.3-igbinary (3.2.13-1ubuntu3) ...
-#6 11.88 Selecting previously unselected package php8.3-redis.
-#6 11.88 Preparing to unpack .../01-php8.3-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
-#6 11.88 Unpacking php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
-#6 11.89 Selecting previously unselected package php-redis.
-#6 11.90 Preparing to unpack .../02-php-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
-#6 11.90 Unpacking php-redis (5.3.7+4.3.0-3ubuntu1) ...
-#6 11.91 Selecting previously unselected package libxau6:amd64.
-#6 11.91 Preparing to unpack .../03-libxau6_1%3a1.0.9-1build6_amd64.deb ...
-#6 11.91 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
-#6 11.92 Selecting previously unselected package libxdmcp6:amd64.
-#6 11.93 Preparing to unpack .../04-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
-#6 11.93 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
-#6 11.94 Selecting previously unselected package libxcb1:amd64.
-#6 11.94 Preparing to unpack .../05-libxcb1_1.15-1ubuntu2_amd64.deb ...
-#6 11.94 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
-#6 11.95 Selecting previously unselected package libx11-data.
-#6 11.96 Preparing to unpack .../06-libx11-data_2%3a1.8.7-1build1_all.deb ...
-#6 11.96 Unpacking libx11-data (2:1.8.7-1build1) ...
-#6 12.01 Selecting previously unselected package libx11-6:amd64.
-#6 12.01 Preparing to unpack .../07-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
-#6 12.01 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
-#6 12.03 Selecting previously unselected package libaom3:amd64.
-#6 12.03 Preparing to unpack .../08-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
-#6 12.04 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
-#6 12.07 Selecting previously unselected package libde265-0:amd64.
-#6 12.07 Preparing to unpack .../09-libde265-0_1.0.15-1build3_amd64.deb ...
-#6 12.07 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
-#6 12.09 Selecting previously unselected package libdeflate0:amd64.
-#6 12.09 Preparing to unpack .../10-libdeflate0_1.19-1build1.1_amd64.deb ...
-#6 12.09 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
-#6 12.11 Selecting previously unselected package libsharpyuv0:amd64.
-#6 12.11 Preparing to unpack .../11-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
-#6 12.11 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
-#6 12.12 Selecting previously unselected package libheif-plugin-aomdec:amd64.
-#6 12.12 Preparing to unpack .../12-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
-#6 12.12 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
-#6 12.14 Selecting previously unselected package libheif-plugin-libde265:amd64.
-#6 12.14 Preparing to unpack .../13-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
-#6 12.14 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
-#6 12.15 Selecting previously unselected package libheif1:amd64.
-#6 12.15 Preparing to unpack .../14-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
-#6 12.15 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
-#6 12.17 Selecting previously unselected package libjpeg-turbo8:amd64.
-#6 12.17 Preparing to unpack .../15-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
-#6 12.17 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
-#6 12.19 Selecting previously unselected package libjpeg8:amd64.
-#6 12.19 Preparing to unpack .../16-libjpeg8_8c-2ubuntu11_amd64.deb ...
-#6 12.19 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
-#6 12.20 Selecting previously unselected package libjbig0:amd64.
-#6 12.21 Preparing to unpack .../17-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
-#6 12.21 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
-#6 12.22 Selecting previously unselected package liblerc4:amd64.
-#6 12.22 Preparing to unpack .../18-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
-#6 12.22 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
-#6 12.24 Selecting previously unselected package libwebp7:amd64.
-#6 12.24 Preparing to unpack .../19-libwebp7_1.3.2-0.4build3_amd64.deb ...
-#6 12.24 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
-#6 12.26 Selecting previously unselected package libtiff6:amd64.
-#6 12.26 Preparing to unpack .../20-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
-#6 12.26 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
-#6 12.28 Selecting previously unselected package libxpm4:amd64.
-#6 12.28 Preparing to unpack .../21-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
-#6 12.28 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
-#6 12.29 Selecting previously unselected package libgd3:amd64.
-#6 12.29 Preparing to unpack .../22-libgd3_2.3.3-9ubuntu5_amd64.deb ...
-#6 12.29 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
-#6 12.31 Selecting previously unselected package php8.3-gd.
-#6 12.31 Preparing to unpack .../23-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 12.31 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
-#6 12.33 Selecting previously unselected package php8.3-intl.
-#6 12.33 Preparing to unpack .../24-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 12.33 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
-#6 12.35 Selecting previously unselected package php8.3-ldap.
-#6 12.35 Preparing to unpack .../25-php8.3-ldap_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 12.35 Unpacking php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
-#6 12.37 Selecting previously unselected package php8.3-mysql.
-#6 12.37 Preparing to unpack .../26-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 12.37 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
-#6 12.39 Selecting previously unselected package php8.3-xml.
-#6 12.39 Preparing to unpack .../27-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
-#6 12.39 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
-#6 12.42 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
-#6 12.42 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
-#6 12.42 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
-#6 12.43 Setting up libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
-#6 12.43 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
-#6 12.43 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
-#6 12.43 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
-#6 12.43 Setting up libx11-data (2:1.8.7-1build1) ...
-#6 12.44 Setting up ucf (3.0043+nmu1) ...
-#6 12.50 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
-#6 12.50 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
-#6 12.50 Setting up libde265-0:amd64 (1.0.15-1build3) ...
-#6 12.50 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
-#6 12.51 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
-#6 12.51 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
-#6 12.51 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
-#6 12.51 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
-#6 12.51 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
-#6 12.61 
-#6 12.61 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
-#6 12.81 
-#6 12.81 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
-#6 13.02 
-#6 13.02 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
-#6 13.22 
-#6 13.22 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
-#6 13.43 
-#6 13.43 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
-#6 13.64 
-#6 13.64 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
-#6 13.85 
-#6 13.85 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
-#6 14.07 
-#6 14.07 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
-#6 14.29 
-#6 14.29 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
-#6 14.50 
-#6 14.50 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
-#6 14.72 
-#6 14.72 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
-#6 14.93 
-#6 14.93 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
-#6 15.14 
-#6 15.14 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
-#6 15.36 
-#6 15.36 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
-#6 15.57 
-#6 15.57 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
-#6 15.78 
-#6 15.78 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
-#6 16.01 
-#6 16.01 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
-#6 16.13 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
-#6 16.23 
-#6 16.23 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
-#6 16.44 
-#6 16.44 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
-#6 16.66 
-#6 16.66 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
-#6 16.78 Setting up php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
-#6 16.88 
-#6 16.88 Creating config file /etc/php/8.3/mods-available/readline.ini with new version
-#6 17.00 Setting up php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
-#6 17.10 
-#6 17.10 Creating config file /etc/php/8.3/mods-available/ldap.ini with new version
-#6 17.22 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
-#6 17.22 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
-#6 17.22 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
-#6 17.32 
-#6 17.32 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
-#6 17.54 
-#6 17.54 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
-#6 17.75 
-#6 17.75 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
-#6 17.97 
-#6 17.97 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
-#6 18.18 
-#6 18.18 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
-#6 18.40 
-#6 18.40 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
-#6 18.51 Setting up php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
-#6 18.61 
-#6 18.61 Creating config file /etc/php/8.3/mods-available/opcache.ini with new version
-#6 18.73 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
-#6 18.73 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
-#6 18.83 
-#6 18.83 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
-#6 18.95 Setting up php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
-#6 18.95 update-alternatives: using /usr/bin/php8.3 to provide /usr/bin/php (php) in auto mode
-#6 18.95 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php8.3.1.gz (of link group php) doesn't exist
-#6 18.95 update-alternatives: using /usr/bin/phar8.3 to provide /usr/bin/phar (phar) in auto mode
-#6 18.95 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar8.3.1.gz (of link group phar) doesn't exist
-#6 18.96 update-alternatives: using /usr/bin/phar.phar8.3 to provide /usr/bin/phar.phar (phar.phar) in auto mode
-#6 18.96 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar8.3.1.gz (of link group phar.phar) doesn't exist
-#6 19.05 
-#6 19.05 Creating config file /etc/php/8.3/cli/php.ini with new version
-#6 19.68 Setting up php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
-#6 19.68 update-alternatives: using /usr/bin/phpdbg8.3 to provide /usr/bin/phpdbg (phpdbg) in auto mode
-#6 19.68 update-alternatives: warning: skip creation of /usr/share/man/man1/phpdbg.1.gz because associated file /usr/share/man/man1/phpdbg8.3.1.gz (of link group phpdbg) doesn't exist
-#6 19.78 
-#6 19.78 Creating config file /etc/php/8.3/phpdbg/php.ini with new version
-#6 20.41 Setting up php8.3-igbinary (3.2.13-1ubuntu3) ...
-#6 20.48 Setting up php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
-#6 20.56 Setting up php-redis (5.3.7+4.3.0-3ubuntu1) ...
-#6 20.56 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
-#6 20.57 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
-#6 20.57 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
-#6 20.67 
-#6 20.67 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
-#6 20.79 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
-#6 20.79 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
-#6 20.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-#6 20.81 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
-#6 20.82 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
-#6 20.85 **** configure php-fpm to pass env vars ****
-#6 20.85 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo \"**** configure php-fpm to pass env vars ****\" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo \"**** install kimai ****\" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         \"https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz\" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo \"**** install composer dependencies ****\" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/*         $HOME/.cache         $HOME/.composer" did not complete successfully: exit code: 2
+#7 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         composer         php-redis         php8.3-zip         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure php-fpm to pass env vars ****" &&     if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&     echo "**** install kimai ****" &&     mkdir -p        /app/www &&     curl -fL -o         /tmp/kimai.tar.gz         "https://github.com/kimai/kimai/archive/refs/tags/2.43.0.tar.gz" || curl -fL -o         /tmp/kimai.tar.gz         "https://github.com/kimai/kimai/archive/refs/tags/v2.43.0.tar.gz" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo "**** install composer dependencies ****" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*         /config/.cache         /config/.composer
+#7 0.122 **** install runtime packages ****
+#7 0.544 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.552 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.877 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 0.915 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.005 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.096 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.224 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.383 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.449 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.695 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 1.790 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 1.858 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.930 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 1.997 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.116 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.218 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.316 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.384 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 2.565 Fetched 36.1 MB in 2s (14.9 MB/s)
+#7 2.565 Reading package lists...
+#7 3.360 Reading package lists...
+#7 4.137 Building dependency tree...
+#7 4.272 Reading state information...
+#7 4.417 The following additional packages will be installed:
+#7 4.417   jsonlint libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3
+#7 4.417   libheif-plugin-aomdec libheif-plugin-libde265 libheif1 libjbig0
+#7 4.417   libjpeg-turbo8 libjpeg8 liblerc4 libsharpyuv0 libsodium23 libtiff6 libwebp7
+#7 4.417   libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxpm4 libzip4t64 php-cli
+#7 4.417   php-common php-composer-ca-bundle php-composer-class-map-generator
+#7 4.417   php-composer-metadata-minifier php-composer-pcre php-composer-semver
+#7 4.417   php-composer-spdx-licenses php-composer-xdebug-handler php-json-schema
+#7 4.417   php-mbstring php-psr-container php-psr-log php-react-promise
+#7 4.417   php-seld-signal-handler php-symfony-console
+#7 4.417   php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder
+#7 4.417   php-symfony-process php-symfony-service-contracts php-symfony-string
+#7 4.417   php8.3-cli php8.3-common php8.3-igbinary php8.3-mbstring php8.3-opcache
+#7 4.418   php8.3-readline php8.3-redis psmisc ucf
+#7 4.419 Suggested packages:
+#7 4.419   fossil mercurial subversion libgd-tools libheif-plugin-x265
+#7 4.419   libheif-plugin-ffmpegdec libheif-plugin-jpegdec libheif-plugin-jpegenc
+#7 4.419   libheif-plugin-j2kdec libheif-plugin-j2kenc libheif-plugin-rav1e
+#7 4.419   libheif-plugin-svtenc redis-server php-pear
+#7 4.419 Recommended packages:
+#7 4.419   php-curl libheif-plugin-aomenc
+#7 4.675 The following NEW packages will be installed:
+#7 4.675   composer jsonlint libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3
+#7 4.675   libheif-plugin-aomdec libheif-plugin-libde265 libheif1 libjbig0
+#7 4.676   libjpeg-turbo8 libjpeg8 liblerc4 libsharpyuv0 libsodium23 libtiff6 libwebp7
+#7 4.676   libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxpm4 libzip4t64 php-cli
+#7 4.676   php-common php-composer-ca-bundle php-composer-class-map-generator
+#7 4.676   php-composer-metadata-minifier php-composer-pcre php-composer-semver
+#7 4.676   php-composer-spdx-licenses php-composer-xdebug-handler php-json-schema
+#7 4.676   php-mbstring php-psr-container php-psr-log php-react-promise php-redis
+#7 4.676   php-seld-signal-handler php-symfony-console
+#7 4.676   php-symfony-deprecation-contracts php-symfony-filesystem php-symfony-finder
+#7 4.676   php-symfony-process php-symfony-service-contracts php-symfony-string
+#7 4.676   php8.3-cli php8.3-common php8.3-gd php8.3-igbinary php8.3-intl php8.3-ldap
+#7 4.676   php8.3-mbstring php8.3-mysql php8.3-opcache php8.3-readline php8.3-redis
+#7 4.676   php8.3-xml php8.3-zip psmisc ucf
+#7 4.757 0 upgraded, 64 newly installed, 0 to remove and 5 not upgraded.
+#7 4.757 Need to get 10.0 MB of archives.
+#7 4.757 After this operation, 40.5 MB of additional disk space will be used.
+#7 4.757 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#7 4.826 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#7 4.893 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#7 4.960 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#7 5.038 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#7 5.105 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#7 5.173 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-opcache amd64 8.3.6-0ubuntu0.24.04.6 [372 kB]
+#7 5.245 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-readline amd64 8.3.6-0ubuntu0.24.04.6 [13.4 kB]
+#7 5.312 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.24.04.1 [161 kB]
+#7 5.381 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-cli amd64 8.3.6-0ubuntu0.24.04.6 [1,916 kB]
+#7 5.477 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-igbinary amd64 3.2.13-1ubuntu3 [37.9 kB]
+#7 5.545 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-redis amd64 5.3.7+4.3.0-3ubuntu1 [168 kB]
+#7 5.614 Get:13 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-redis amd64 5.3.7+4.3.0-3ubuntu1 [3,058 B]
+#7 5.681 Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#7 5.748 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#7 5.814 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#7 5.882 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#7 5.949 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#7 6.026 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 php-cli all 2:8.3+93ubuntu2 [4,584 B]
+#7 6.093 Get:20 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-ca-bundle all 1.4.1-1 [11.1 kB]
+#7 6.160 Get:21 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-finder all 6.4.5+dfsg-3ubuntu3 [32.0 kB]
+#7 6.227 Get:22 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-pcre all 3.1.1-1 [10.2 kB]
+#7 6.298 Get:23 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-class-map-generator all 1.1.0-2 [10.5 kB]
+#7 6.365 Get:24 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-metadata-minifier all 1.0.0-2 [3,594 B]
+#7 6.432 Get:25 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-semver all 3.4.0-1 [19.2 kB]
+#7 6.499 Get:26 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-spdx-licenses all 1.5.8-1 [15.4 kB]
+#7 6.567 Get:27 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-psr-log all 3.0.0-1 [6,862 B]
+#7 6.634 Get:28 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-composer-xdebug-handler all 3.0.3-3 [16.6 kB]
+#7 6.701 Get:29 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-json-schema all 5.2.13-1 [33.8 kB]
+#7 6.768 Get:30 http://archive.ubuntu.com/ubuntu noble/universe amd64 jsonlint all 1.10.2-1 [13.7 kB]
+#7 6.835 Get:31 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-deprecation-contracts all 3.4.1-4 [5,668 B]
+#7 6.902 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mbstring amd64 8.3.6-0ubuntu0.24.04.6 [512 kB]
+#7 6.977 Get:33 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-mbstring all 2:8.3+93ubuntu2 [1,848 B]
+#7 7.043 Get:34 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-psr-container all 2.0.2-1 [3,878 B]
+#7 7.110 Get:35 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-service-contracts all 3.4.1-4 [10.0 kB]
+#7 7.177 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#7 7.246 Get:37 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-string all 6.4.5+dfsg-3ubuntu3 [44.0 kB]
+#7 7.316 Get:38 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-console all 6.4.5+dfsg-3ubuntu3 [96.7 kB]
+#7 7.384 Get:39 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-filesystem all 6.4.5+dfsg-3ubuntu3 [30.7 kB]
+#7 7.451 Get:40 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-symfony-process all 6.4.5+dfsg-3ubuntu3 [37.4 kB]
+#7 7.519 Get:41 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-react-promise all 3.1.0-1 [18.5 kB]
+#7 7.586 Get:42 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-seld-signal-handler all 2.0.2-1 [10.0 kB]
+#7 7.653 Get:43 http://archive.ubuntu.com/ubuntu noble/universe amd64 composer all 2.7.1-2 [471 kB]
+#7 7.727 Get:44 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
+#7 7.824 Get:45 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+#7 7.893 Get:46 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+#7 7.960 Get:47 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#7 8.027 Get:48 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
+#7 8.093 Get:49 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
+#7 8.160 Get:50 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
+#7 8.231 Get:51 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#7 8.299 Get:52 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#7 8.368 Get:53 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+#7 8.435 Get:54 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+#7 8.503 Get:55 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#7 8.573 Get:56 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
+#7 8.642 Get:57 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#7 8.709 Get:58 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+#7 8.777 Get:59 http://archive.ubuntu.com/ubuntu noble/universe amd64 libzip4t64 amd64 1.7.3-1.1ubuntu2 [53.6 kB]
+#7 8.845 Get:60 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
+#7 8.912 Get:61 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-ldap amd64 8.3.6-0ubuntu0.24.04.6 [33.5 kB]
+#7 8.979 Get:62 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#7 9.047 Get:63 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#7 9.115 Get:64 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-zip amd64 8.3.6-0ubuntu0.24.04.6 [29.4 kB]
+#7 9.217 debconf: delaying package configuration, since apt-utils is not installed
+#7 9.241 Fetched 10.0 MB in 4s (2,261 kB/s)
+#7 9.253 Selecting previously unselected package psmisc.
+#7 9.253 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 9.261 Preparing to unpack .../0-psmisc_23.7-1build1_amd64.deb ...
+#7 9.262 Unpacking psmisc (23.7-1build1) ...
+#7 9.283 Selecting previously unselected package php-common.
+#7 9.285 Preparing to unpack .../1-php-common_2%3a93ubuntu2_all.deb ...
+#7 9.286 Unpacking php-common (2:93ubuntu2) ...
+#7 9.304 Selecting previously unselected package ucf.
+#7 9.306 Preparing to unpack .../2-ucf_3.0043+nmu1_all.deb ...
+#7 9.307 Moving old data out of the way
+#7 9.308 Unpacking ucf (3.0043+nmu1) ...
+#7 9.328 Selecting previously unselected package php8.3-common.
+#7 9.329 Preparing to unpack .../3-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 9.331 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 9.369 Selecting previously unselected package libbsd0:amd64.
+#7 9.370 Preparing to unpack .../4-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#7 9.372 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 9.387 Selecting previously unselected package libedit2:amd64.
+#7 9.388 Preparing to unpack .../5-libedit2_3.1-20230828-1build1_amd64.deb ...
+#7 9.389 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#7 9.403 Selecting previously unselected package php8.3-opcache.
+#7 9.404 Preparing to unpack .../6-php8.3-opcache_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 9.406 Unpacking php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#7 9.424 Selecting previously unselected package php8.3-readline.
+#7 9.426 Preparing to unpack .../7-php8.3-readline_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 9.428 Unpacking php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#7 9.441 Selecting previously unselected package libsodium23:amd64.
+#7 9.443 Preparing to unpack .../8-libsodium23_1.0.18-1ubuntu0.24.04.1_amd64.deb ...
+#7 9.443 Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#7 9.458 Selecting previously unselected package php8.3-cli.
+#7 9.459 Preparing to unpack .../9-php8.3-cli_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 9.460 Unpacking php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 9.499 Setting up psmisc (23.7-1build1) ...
+#7 9.502 Setting up php-common (2:93ubuntu2) ...
+#7 9.603 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#7 9.625 Selecting previously unselected package php8.3-igbinary.
+#7 9.625 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16845 files and directories currently installed.)
+#7 9.633 Preparing to unpack .../00-php8.3-igbinary_3.2.13-1ubuntu3_amd64.deb ...
+#7 9.635 Unpacking php8.3-igbinary (3.2.13-1ubuntu3) ...
+#7 9.652 Selecting previously unselected package php8.3-redis.
+#7 9.654 Preparing to unpack .../01-php8.3-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
+#7 9.656 Unpacking php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
+#7 9.670 Selecting previously unselected package php-redis.
+#7 9.671 Preparing to unpack .../02-php-redis_5.3.7+4.3.0-3ubuntu1_amd64.deb ...
+#7 9.673 Unpacking php-redis (5.3.7+4.3.0-3ubuntu1) ...
+#7 9.684 Selecting previously unselected package libxau6:amd64.
+#7 9.685 Preparing to unpack .../03-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#7 9.686 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#7 9.701 Selecting previously unselected package libxdmcp6:amd64.
+#7 9.702 Preparing to unpack .../04-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#7 9.703 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#7 9.716 Selecting previously unselected package libxcb1:amd64.
+#7 9.718 Preparing to unpack .../05-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#7 9.719 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#7 9.731 Selecting previously unselected package libx11-data.
+#7 9.732 Preparing to unpack .../06-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#7 9.733 Unpacking libx11-data (2:1.8.7-1build1) ...
+#7 9.767 Selecting previously unselected package libx11-6:amd64.
+#7 9.769 Preparing to unpack .../07-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#7 9.770 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#7 9.789 Selecting previously unselected package php-cli.
+#7 9.791 Preparing to unpack .../08-php-cli_2%3a8.3+93ubuntu2_all.deb ...
+#7 9.791 Unpacking php-cli (2:8.3+93ubuntu2) ...
+#7 9.804 Selecting previously unselected package php-composer-ca-bundle.
+#7 9.805 Preparing to unpack .../09-php-composer-ca-bundle_1.4.1-1_all.deb ...
+#7 9.806 Unpacking php-composer-ca-bundle (1.4.1-1) ...
+#7 9.819 Selecting previously unselected package php-symfony-finder.
+#7 9.820 Preparing to unpack .../10-php-symfony-finder_6.4.5+dfsg-3ubuntu3_all.deb ...
+#7 9.822 Unpacking php-symfony-finder (6.4.5+dfsg-3ubuntu3) ...
+#7 9.834 Selecting previously unselected package php-composer-pcre.
+#7 9.836 Preparing to unpack .../11-php-composer-pcre_3.1.1-1_all.deb ...
+#7 9.837 Unpacking php-composer-pcre (3.1.1-1) ...
+#7 9.849 Selecting previously unselected package php-composer-class-map-generator.
+#7 9.851 Preparing to unpack .../12-php-composer-class-map-generator_1.1.0-2_all.deb ...
+#7 9.852 Unpacking php-composer-class-map-generator (1.1.0-2) ...
+#7 9.864 Selecting previously unselected package php-composer-metadata-minifier.
+#7 9.865 Preparing to unpack .../13-php-composer-metadata-minifier_1.0.0-2_all.deb ...
+#7 9.866 Unpacking php-composer-metadata-minifier (1.0.0-2) ...
+#7 9.878 Selecting previously unselected package php-composer-semver.
+#7 9.879 Preparing to unpack .../14-php-composer-semver_3.4.0-1_all.deb ...
+#7 9.880 Unpacking php-composer-semver (3.4.0-1) ...
+#7 9.894 Selecting previously unselected package php-composer-spdx-licenses.
+#7 9.895 Preparing to unpack .../15-php-composer-spdx-licenses_1.5.8-1_all.deb ...
+#7 9.896 Unpacking php-composer-spdx-licenses (1.5.8-1) ...
+#7 9.908 Selecting previously unselected package php-psr-log.
+#7 9.910 Preparing to unpack .../16-php-psr-log_3.0.0-1_all.deb ...
+#7 9.911 Unpacking php-psr-log (3.0.0-1) ...
+#7 9.922 Selecting previously unselected package php-composer-xdebug-handler.
+#7 9.923 Preparing to unpack .../17-php-composer-xdebug-handler_3.0.3-3_all.deb ...
+#7 9.924 Unpacking php-composer-xdebug-handler (3.0.3-3) ...
+#7 9.936 Selecting previously unselected package php-json-schema.
+#7 9.937 Preparing to unpack .../18-php-json-schema_5.2.13-1_all.deb ...
+#7 9.938 Unpacking php-json-schema (5.2.13-1) ...
+#7 9.956 Selecting previously unselected package jsonlint.
+#7 9.957 Preparing to unpack .../19-jsonlint_1.10.2-1_all.deb ...
+#7 9.958 Unpacking jsonlint (1.10.2-1) ...
+#7 9.973 Selecting previously unselected package php-symfony-deprecation-contracts.
+#7 9.974 Preparing to unpack .../20-php-symfony-deprecation-contracts_3.4.1-4_all.deb ...
+#7 9.975 Unpacking php-symfony-deprecation-contracts (3.4.1-4) ...
+#7 9.990 Selecting previously unselected package php8.3-mbstring.
+#7 9.991 Preparing to unpack .../21-php8.3-mbstring_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 9.993 Unpacking php8.3-mbstring (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.01 Selecting previously unselected package php-mbstring.
+#7 10.01 Preparing to unpack .../22-php-mbstring_2%3a8.3+93ubuntu2_all.deb ...
+#7 10.01 Unpacking php-mbstring (2:8.3+93ubuntu2) ...
+#7 10.03 Selecting previously unselected package php-psr-container.
+#7 10.03 Preparing to unpack .../23-php-psr-container_2.0.2-1_all.deb ...
+#7 10.03 Unpacking php-psr-container (2.0.2-1) ...
+#7 10.04 Selecting previously unselected package php-symfony-service-contracts.
+#7 10.04 Preparing to unpack .../24-php-symfony-service-contracts_3.4.1-4_all.deb ...
+#7 10.04 Unpacking php-symfony-service-contracts (3.4.1-4) ...
+#7 10.06 Selecting previously unselected package php8.3-intl.
+#7 10.06 Preparing to unpack .../25-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 10.06 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.07 Selecting previously unselected package php-symfony-string.
+#7 10.07 Preparing to unpack .../26-php-symfony-string_6.4.5+dfsg-3ubuntu3_all.deb ...
+#7 10.08 Unpacking php-symfony-string (6.4.5+dfsg-3ubuntu3) ...
+#7 10.09 Selecting previously unselected package php-symfony-console.
+#7 10.09 Preparing to unpack .../27-php-symfony-console_6.4.5+dfsg-3ubuntu3_all.deb ...
+#7 10.09 Unpacking php-symfony-console (6.4.5+dfsg-3ubuntu3) ...
+#7 10.12 Selecting previously unselected package php-symfony-filesystem.
+#7 10.12 Preparing to unpack .../28-php-symfony-filesystem_6.4.5+dfsg-3ubuntu3_all.deb ...
+#7 10.12 Unpacking php-symfony-filesystem (6.4.5+dfsg-3ubuntu3) ...
+#7 10.13 Selecting previously unselected package php-symfony-process.
+#7 10.13 Preparing to unpack .../29-php-symfony-process_6.4.5+dfsg-3ubuntu3_all.deb ...
+#7 10.13 Unpacking php-symfony-process (6.4.5+dfsg-3ubuntu3) ...
+#7 10.15 Selecting previously unselected package php-react-promise.
+#7 10.15 Preparing to unpack .../30-php-react-promise_3.1.0-1_all.deb ...
+#7 10.15 Unpacking php-react-promise (3.1.0-1) ...
+#7 10.16 Selecting previously unselected package php-seld-signal-handler.
+#7 10.16 Preparing to unpack .../31-php-seld-signal-handler_2.0.2-1_all.deb ...
+#7 10.16 Unpacking php-seld-signal-handler (2.0.2-1) ...
+#7 10.18 Selecting previously unselected package composer.
+#7 10.18 Preparing to unpack .../32-composer_2.7.1-2_all.deb ...
+#7 10.18 Unpacking composer (2.7.1-2) ...
+#7 10.22 Selecting previously unselected package libaom3:amd64.
+#7 10.22 Preparing to unpack .../33-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+#7 10.23 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#7 10.26 Selecting previously unselected package libde265-0:amd64.
+#7 10.26 Preparing to unpack .../34-libde265-0_1.0.15-1build3_amd64.deb ...
+#7 10.26 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+#7 10.28 Selecting previously unselected package libdeflate0:amd64.
+#7 10.28 Preparing to unpack .../35-libdeflate0_1.19-1build1.1_amd64.deb ...
+#7 10.28 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+#7 10.29 Selecting previously unselected package libsharpyuv0:amd64.
+#7 10.29 Preparing to unpack .../36-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#7 10.30 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 10.31 Selecting previously unselected package libheif-plugin-aomdec:amd64.
+#7 10.31 Preparing to unpack .../37-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 10.31 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#7 10.32 Selecting previously unselected package libheif-plugin-libde265:amd64.
+#7 10.33 Preparing to unpack .../38-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 10.33 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#7 10.34 Selecting previously unselected package libheif1:amd64.
+#7 10.34 Preparing to unpack .../39-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 10.34 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#7 10.36 Selecting previously unselected package libjpeg-turbo8:amd64.
+#7 10.36 Preparing to unpack .../40-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#7 10.36 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 10.38 Selecting previously unselected package libjpeg8:amd64.
+#7 10.38 Preparing to unpack .../41-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#7 10.38 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 10.39 Selecting previously unselected package libjbig0:amd64.
+#7 10.39 Preparing to unpack .../42-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+#7 10.39 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#7 10.41 Selecting previously unselected package liblerc4:amd64.
+#7 10.41 Preparing to unpack .../43-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+#7 10.41 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#7 10.43 Selecting previously unselected package libwebp7:amd64.
+#7 10.43 Preparing to unpack .../44-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#7 10.43 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 10.44 Selecting previously unselected package libtiff6:amd64.
+#7 10.45 Preparing to unpack .../45-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
+#7 10.45 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#7 10.46 Selecting previously unselected package libxpm4:amd64.
+#7 10.46 Preparing to unpack .../46-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#7 10.46 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#7 10.48 Selecting previously unselected package libgd3:amd64.
+#7 10.48 Preparing to unpack .../47-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+#7 10.48 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+#7 10.50 Selecting previously unselected package libzip4t64:amd64.
+#7 10.50 Preparing to unpack .../48-libzip4t64_1.7.3-1.1ubuntu2_amd64.deb ...
+#7 10.50 Unpacking libzip4t64:amd64 (1.7.3-1.1ubuntu2) ...
+#7 10.52 Selecting previously unselected package php8.3-gd.
+#7 10.52 Preparing to unpack .../49-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 10.52 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.54 Selecting previously unselected package php8.3-ldap.
+#7 10.54 Preparing to unpack .../50-php8.3-ldap_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 10.54 Unpacking php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.56 Selecting previously unselected package php8.3-mysql.
+#7 10.56 Preparing to unpack .../51-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 10.56 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.58 Selecting previously unselected package php8.3-xml.
+#7 10.58 Preparing to unpack .../52-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 10.58 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.60 Selecting previously unselected package php8.3-zip.
+#7 10.60 Preparing to unpack .../53-php8.3-zip_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 10.60 Unpacking php8.3-zip (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.62 Setting up php-symfony-finder (6.4.5+dfsg-3ubuntu3) ...
+#7 10.63 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 10.63 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#7 10.63 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#7 10.63 Setting up libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#7 10.63 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#7 10.64 Setting up php-psr-container (2.0.2-1) ...
+#7 10.64 Setting up php-composer-pcre (3.1.1-1) ...
+#7 10.64 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+#7 10.65 Setting up php-symfony-service-contracts (3.4.1-4) ...
+#7 10.65 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#7 10.65 Setting up php-composer-class-map-generator (1.1.0-2) ...
+#7 10.65 Setting up php-seld-signal-handler (2.0.2-1) ...
+#7 10.66 Setting up php-composer-ca-bundle (1.4.1-1) ...
+#7 10.66 Setting up libx11-data (2:1.8.7-1build1) ...
+#7 10.66 Setting up php-symfony-process (6.4.5+dfsg-3ubuntu3) ...
+#7 10.67 Setting up ucf (3.0043+nmu1) ...
+#7 10.72 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 10.72 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 10.73 Setting up php-react-promise (3.1.0-1) ...
+#7 10.73 Setting up php-psr-log (3.0.0-1) ...
+#7 10.73 Setting up php-composer-metadata-minifier (1.0.0-2) ...
+#7 10.74 Setting up php-composer-semver (3.4.0-1) ...
+#7 10.74 Setting up php-composer-spdx-licenses (1.5.8-1) ...
+#7 10.74 Setting up libde265-0:amd64 (1.0.15-1build3) ...
+#7 10.74 Setting up libzip4t64:amd64 (1.7.3-1.1ubuntu2) ...
+#7 10.75 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 10.75 Setting up php-symfony-deprecation-contracts (3.4.1-4) ...
+#7 10.75 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 10.76 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#7 10.76 Setting up php-composer-xdebug-handler (3.0.3-3) ...
+#7 10.76 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#7 10.76 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#7 10.77 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.85 
+#7 10.85 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#7 10.99 
+#7 10.99 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#7 11.12 
+#7 11.12 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#7 11.26 
+#7 11.26 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#7 11.40 
+#7 11.40 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#7 11.54 
+#7 11.54 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#7 11.68 
+#7 11.68 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#7 11.82 
+#7 11.82 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#7 11.97 
+#7 11.97 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#7 12.11 
+#7 12.11 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#7 12.26 
+#7 12.26 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#7 12.40 
+#7 12.40 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#7 12.54 
+#7 12.54 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#7 12.69 
+#7 12.69 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#7 12.83 
+#7 12.83 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#7 12.98 
+#7 12.98 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#7 13.12 
+#7 13.12 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#7 13.19 Setting up php8.3-zip (8.3.6-0ubuntu0.24.04.6) ...
+#7 13.27 
+#7 13.27 Creating config file /etc/php/8.3/mods-available/zip.ini with new version
+#7 13.33 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 13.42 
+#7 13.42 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#7 13.56 
+#7 13.56 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#7 13.70 
+#7 13.70 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#7 13.77 Setting up php8.3-mbstring (8.3.6-0ubuntu0.24.04.6) ...
+#7 13.85 
+#7 13.85 Creating config file /etc/php/8.3/mods-available/mbstring.ini with new version
+#7 13.91 Setting up php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.00 
+#7 14.00 Creating config file /etc/php/8.3/mods-available/readline.ini with new version
+#7 14.06 Setting up php-symfony-filesystem (6.4.5+dfsg-3ubuntu3) ...
+#7 14.06 Setting up php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.15 
+#7 14.15 Creating config file /etc/php/8.3/mods-available/ldap.ini with new version
+#7 14.22 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#7 14.22 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#7 14.22 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.31 
+#7 14.31 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#7 14.46 
+#7 14.46 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#7 14.61 
+#7 14.61 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#7 14.75 
+#7 14.75 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#7 14.89 
+#7 14.89 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#7 15.04 
+#7 15.04 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#7 15.10 Setting up php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.19 
+#7 15.19 Creating config file /etc/php/8.3/mods-available/opcache.ini with new version
+#7 15.25 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#7 15.26 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.34 
+#7 15.34 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#7 15.41 Setting up php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.41 update-alternatives: using /usr/bin/php8.3 to provide /usr/bin/php (php) in auto mode
+#7 15.41 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php8.3.1.gz (of link group php) doesn't exist
+#7 15.41 update-alternatives: using /usr/bin/phar8.3 to provide /usr/bin/phar (phar) in auto mode
+#7 15.41 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar8.3.1.gz (of link group phar) doesn't exist
+#7 15.41 update-alternatives: using /usr/bin/phar.phar8.3 to provide /usr/bin/phar.phar (phar.phar) in auto mode
+#7 15.41 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar8.3.1.gz (of link group phar.phar) doesn't exist
+#7 15.49 
+#7 15.49 Creating config file /etc/php/8.3/cli/php.ini with new version
+#7 15.98 Setting up php-mbstring (2:8.3+93ubuntu2) ...
+#7 15.98 Setting up php-cli (2:8.3+93ubuntu2) ...
+#7 15.98 update-alternatives: using /usr/bin/php.default to provide /usr/bin/php (php) in auto mode
+#7 15.98 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php.default.1.gz (of link group php) doesn't exist
+#7 15.99 update-alternatives: using /usr/bin/phar.default to provide /usr/bin/phar (phar) in auto mode
+#7 15.99 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar.default.1.gz (of link group phar) doesn't exist
+#7 15.99 update-alternatives: using /usr/bin/phar.phar.default to provide /usr/bin/phar.phar (phar.phar) in auto mode
+#7 15.99 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar.default.1.gz (of link group phar.phar) doesn't exist
+#7 15.99 Setting up php-symfony-string (6.4.5+dfsg-3ubuntu3) ...
+#7 15.99 Setting up php-json-schema (5.2.13-1) ...
+#7 15.99 Setting up php-symfony-console (6.4.5+dfsg-3ubuntu3) ...
+#7 15.99 Setting up jsonlint (1.10.2-1) ...
+#7 16.00 Setting up php8.3-igbinary (3.2.13-1ubuntu3) ...
+#7 16.03 Setting up composer (2.7.1-2) ...
+#7 16.04 Setting up php8.3-redis (5.3.7+4.3.0-3ubuntu1) ...
+#7 16.07 Setting up php-redis (5.3.7+4.3.0-3ubuntu1) ...
+#7 16.08 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#7 16.08 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+#7 16.08 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#7 16.17 
+#7 16.17 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+#7 16.24 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#7 16.24 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#7 16.24 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 16.26 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 16.28 **** configure php-fpm to pass env vars ****
+#7 16.28 **** install kimai ****
+#7 16.29   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 16.29                                  Dload  Upload   Total   Spent    Left  Speed
+#7 16.29   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 16.98 100 3061k    0 3061k    0     0  4418k      0 --:--:-- --:--:-- --:--:-- 4418k
+#7 17.08 **** install composer dependencies ****
+#7 17.12 Composer plugins have been disabled for safety in this non-interactive session. Set COMPOSER_ALLOW_SUPERUSER=1 if you want to allow plugins to run as root/super user.
+#7 17.12 Do not run Composer as root/super user! See https://getcomposer.org/root for details
+#7 17.17 Installing dependencies from lock file
+#7 17.17 Verifying lock file contents can be installed on current platform.
+#7 17.19 Package operations: 144 installs, 0 updates, 0 removals
+#7 17.20   - Downloading symfony/flex (v2.9.0)
+#7 17.25     Failed to download symfony/flex from dist: Could not authenticate against github.com
+#7 17.25     Now trying to download from source
+#7 17.25   - Syncing symfony/flex (v2.9.0) into cache
+#7 18.01   - Downloading symfony/runtime (v6.4.26)
+#7 18.06     Failed to download symfony/runtime from dist: Could not authenticate against github.com
+#7 18.06     Now trying to download from source
+#7 18.06   - Syncing symfony/runtime (v6.4.26) into cache
+#7 18.66   - Downloading azuyalabs/yasumi (2.8.0)
+#7 18.71     Failed to download azuyalabs/yasumi from dist: Could not authenticate against github.com
+#7 18.71     Now trying to download from source
+#7 18.71   - Syncing azuyalabs/yasumi (2.8.0) into cache
+#7 20.02   - Downloading composer/semver (3.4.4)
+#7 20.06     Failed to download composer/semver from dist: Could not authenticate against github.com
+#7 20.06     Now trying to download from source
+#7 20.06   - Syncing composer/semver (3.4.4) into cache
+#7 20.36   - Downloading dasprid/enum (1.0.7)
+#7 20.41     Failed to download dasprid/enum from dist: Could not authenticate against github.com
+#7 20.41     Now trying to download from source
+#7 20.41   - Syncing dasprid/enum (1.0.7) into cache
+#7 20.64   - Downloading symfony/deprecation-contracts (v3.6.0)
+#7 20.69     Failed to download symfony/deprecation-contracts from dist: Could not authenticate against github.com
+#7 20.69     Now trying to download from source
+#7 20.69   - Syncing symfony/deprecation-contracts (v3.6.0) into cache
+#7 20.93   - Downloading symfony/routing (v6.4.28)
+#7 20.97     Failed to download symfony/routing from dist: Could not authenticate against github.com
+#7 20.97     Now trying to download from source
+#7 20.97   - Syncing symfony/routing (v6.4.28) into cache
+#7 21.57   - Downloading symfony/polyfill-php83 (v1.33.0)
+#7 21.62     Failed to download symfony/polyfill-php83 from dist: Could not authenticate against github.com
+#7 21.62     Now trying to download from source
+#7 21.62   - Syncing symfony/polyfill-php83 (v1.33.0) into cache
+#7 21.86   - Downloading symfony/http-foundation (v6.4.29)
+#7 21.91     Failed to download symfony/http-foundation from dist: Could not authenticate against github.com
+#7 21.91     Now trying to download from source
+#7 21.91   - Syncing symfony/http-foundation (v6.4.29) into cache
+#7 23.09   - Downloading psr/event-dispatcher (1.0.0)
+#7 23.13     Failed to download psr/event-dispatcher from dist: Could not authenticate against github.com
+#7 23.13     Now trying to download from source
+#7 23.13   - Syncing psr/event-dispatcher (1.0.0) into cache
+#7 23.37   - Downloading symfony/event-dispatcher-contracts (v3.6.0)
+#7 23.42     Failed to download symfony/event-dispatcher-contracts from dist: Could not authenticate against github.com
+#7 23.42     Now trying to download from source
+#7 23.42   - Syncing symfony/event-dispatcher-contracts (v3.6.0) into cache
+#7 23.67   - Downloading symfony/event-dispatcher (v6.4.25)
+#7 23.71     Failed to download symfony/event-dispatcher from dist: Could not authenticate against github.com
+#7 23.71     Now trying to download from source
+#7 23.71   - Syncing symfony/event-dispatcher (v6.4.25) into cache
+#7 24.11   - Downloading symfony/var-dumper (v6.4.26)
+#7 24.16     Failed to download symfony/var-dumper from dist: Could not authenticate against github.com
+#7 24.16     Now trying to download from source
+#7 24.16   - Syncing symfony/var-dumper (v6.4.26) into cache
+#7 24.65   - Downloading psr/log (3.0.2)
+#7 24.70     Failed to download psr/log from dist: Could not authenticate against github.com
+#7 24.70     Now trying to download from source
+#7 24.70   - Syncing psr/log (3.0.2) into cache
+#7 24.94   - Downloading symfony/error-handler (v6.4.26)
+#7 24.98     Failed to download symfony/error-handler from dist: Could not authenticate against github.com
+#7 24.98     Now trying to download from source
+#7 24.98   - Syncing symfony/error-handler (v6.4.26) into cache
+#7 25.30   - Downloading symfony/http-kernel (v6.4.29)
+#7 25.34     Failed to download symfony/http-kernel from dist: Could not authenticate against github.com
+#7 25.34     Now trying to download from source
+#7 25.34   - Syncing symfony/http-kernel (v6.4.29) into cache
+#7 26.30   - Downloading symfony/finder (v6.4.27)
+#7 26.35     Failed to download symfony/finder from dist: Could not authenticate against github.com
+#7 26.35     Now trying to download from source
+#7 26.35   - Syncing symfony/finder (v6.4.27) into cache
+#7 26.74   - Downloading symfony/filesystem (v6.4.24)
+#7 26.79     Failed to download symfony/filesystem from dist: Could not authenticate against github.com
+#7 26.79     Now trying to download from source
+#7 26.79   - Syncing symfony/filesystem (v6.4.24) into cache
+#7 27.18   - Downloading symfony/var-exporter (v6.4.26)
+#7 27.22     Failed to download symfony/var-exporter from dist: Could not authenticate against github.com
+#7 27.22     Now trying to download from source
+#7 27.22   - Syncing symfony/var-exporter (v6.4.26) into cache
+#7 27.51   - Downloading psr/container (2.0.2)
+#7 27.56     Failed to download psr/container from dist: Could not authenticate against github.com
+#7 27.56     Now trying to download from source
+#7 27.56   - Syncing psr/container (2.0.2) into cache
+#7 27.82   - Downloading symfony/service-contracts (v3.6.1)
+#7 27.87     Failed to download symfony/service-contracts from dist: Could not authenticate against github.com
+#7 27.87     Now trying to download from source
+#7 27.87   - Syncing symfony/service-contracts (v3.6.1) into cache
+#7 28.16   - Downloading symfony/dependency-injection (v6.4.26)
+#7 28.20     Failed to download symfony/dependency-injection from dist: Could not authenticate against github.com
+#7 28.20     Now trying to download from source
+#7 28.20   - Syncing symfony/dependency-injection (v6.4.26) into cache
+#7 29.63   - Downloading symfony/config (v6.4.28)
+#7 29.68     Failed to download symfony/config from dist: Could not authenticate against github.com
+#7 29.68     Now trying to download from source
+#7 29.68   - Syncing symfony/config (v6.4.28) into cache
+#7 30.81   - Downloading psr/cache (3.0.0)
+#7 30.86     Failed to download psr/cache from dist: Could not authenticate against github.com
+#7 30.86     Now trying to download from source
+#7 30.86   - Syncing psr/cache (3.0.0) into cache
+#7 31.09   - Downloading symfony/cache-contracts (v3.6.0)
+#7 31.13     Failed to download symfony/cache-contracts from dist: Could not authenticate against github.com
+#7 31.13     Now trying to download from source
+#7 31.13   - Syncing symfony/cache-contracts (v3.6.0) into cache
+#7 31.38   - Downloading symfony/cache (v6.4.28)
+#7 31.42     Failed to download symfony/cache from dist: Could not authenticate against github.com
+#7 31.42     Now trying to download from source
+#7 31.42   - Syncing symfony/cache (v6.4.28) into cache
+#7 31.98   - Downloading symfony/framework-bundle (v6.4.27)
+#7 32.03     Failed to download symfony/framework-bundle from dist: Could not authenticate against github.com
+#7 32.03     Now trying to download from source
+#7 32.03   - Syncing symfony/framework-bundle (v6.4.27) into cache
+#7 34.10   - Downloading symfony/stopwatch (v6.4.24)
+#7 34.15     Failed to download symfony/stopwatch from dist: Could not authenticate against github.com
+#7 34.15     Now trying to download from source
+#7 34.15   - Syncing symfony/stopwatch (v6.4.24) into cache
+#7 34.48   - Downloading symfony/string (v6.4.26)
+#7 34.53     Failed to download symfony/string from dist: Could not authenticate against github.com
+#7 34.53     Now trying to download from source
+#7 34.53   - Syncing symfony/string (v6.4.26) into cache
+#7 34.90   - Downloading symfony/console (v6.4.27)
+#7 34.95     Failed to download symfony/console from dist: Could not authenticate against github.com
+#7 34.95     Now trying to download from source
+#7 34.95   - Syncing symfony/console (v6.4.27) into cache
+#7 35.82   - Downloading doctrine/event-manager (2.0.1)
+#7 35.87     Failed to download doctrine/event-manager from dist: Could not authenticate against github.com
+#7 35.87     Now trying to download from source
+#7 35.87   - Syncing doctrine/event-manager (2.0.1) into cache
+#7 36.14   - Downloading doctrine/deprecations (1.1.5)
+#7 36.19     Failed to download doctrine/deprecations from dist: Could not authenticate against github.com
+#7 36.19     Now trying to download from source
+#7 36.19   - Syncing doctrine/deprecations (1.1.5) into cache
+#7 36.46   - Downloading doctrine/dbal (3.10.3)
+#7 36.51     Failed to download doctrine/dbal from dist: Could not authenticate against github.com
+#7 36.51     Now trying to download from source
+#7 36.51   - Syncing doctrine/dbal (3.10.3) into cache
+#7 41.10   - Downloading doctrine/migrations (3.9.4)
+#7 41.15     Failed to download doctrine/migrations from dist: Could not authenticate against github.com
+#7 41.15     Now trying to download from source
+#7 41.15   - Syncing doctrine/migrations (3.9.4) into cache
+#7 41.84   - Downloading doctrine/persistence (3.4.3)
+#7 41.89     Failed to download doctrine/persistence from dist: Could not authenticate against github.com
+#7 41.89     Now trying to download from source
+#7 41.89   - Syncing doctrine/persistence (3.4.3) into cache
+#7 42.30   - Downloading symfony/doctrine-bridge (v6.4.26)
+#7 42.34     Failed to download symfony/doctrine-bridge from dist: Could not authenticate against github.com
+#7 42.34     Now trying to download from source
+#7 42.34   - Syncing symfony/doctrine-bridge (v6.4.26) into cache
+#7 42.91   - Downloading doctrine/sql-formatter (1.5.3)
+#7 42.95     Failed to download doctrine/sql-formatter from dist: Could not authenticate against github.com
+#7 42.95     Now trying to download from source
+#7 42.95   - Syncing doctrine/sql-formatter (1.5.3) into cache
+#7 43.36   - Downloading doctrine/doctrine-bundle (2.18.1)
+#7 43.41     Failed to download doctrine/doctrine-bundle from dist: Could not authenticate against github.com
+#7 43.41     Now trying to download from source
+#7 43.41   - Syncing doctrine/doctrine-bundle (2.18.1) into cache
+#7 44.20   - Downloading doctrine/doctrine-migrations-bundle (3.6.0)
+#7 44.25     Failed to download doctrine/doctrine-migrations-bundle from dist: Could not authenticate against github.com
+#7 44.25     Now trying to download from source
+#7 44.25   - Syncing doctrine/doctrine-migrations-bundle (3.6.0) into cache
+#7 44.56   - Downloading doctrine/lexer (3.0.1)
+#7 44.61     Failed to download doctrine/lexer from dist: Could not authenticate against github.com
+#7 44.61     Now trying to download from source
+#7 44.61   - Syncing doctrine/lexer (3.0.1) into cache
+#7 44.87   - Downloading doctrine/instantiator (2.0.0)
+#7 44.92     Failed to download doctrine/instantiator from dist: Could not authenticate against github.com
+#7 44.92     Now trying to download from source
+#7 44.92   - Syncing doctrine/instantiator (2.0.0) into cache
+#7 45.18   - Downloading doctrine/inflector (2.1.0)
+#7 45.23     Failed to download doctrine/inflector from dist: Could not authenticate against github.com
+#7 45.23     Now trying to download from source
+#7 45.23   - Syncing doctrine/inflector (2.1.0) into cache
+#7 45.55   - Downloading doctrine/common (3.5.0)
+#7 45.60     Failed to download doctrine/common from dist: Could not authenticate against github.com
+#7 45.60     Now trying to download from source
+#7 45.60   - Syncing doctrine/common (3.5.0) into cache
+#7 47.16   - Downloading symfony/polyfill-php84 (v1.33.0)
+#7 47.21     Failed to download symfony/polyfill-php84 from dist: Could not authenticate against github.com
+#7 47.21     Now trying to download from source
+#7 47.21   - Syncing symfony/polyfill-php84 (v1.33.0) into cache
+#7 47.43   - Downloading doctrine/collections (2.4.0)
+#7 47.48     Failed to download doctrine/collections from dist: Could not authenticate against github.com
+#7 47.48     Now trying to download from source
+#7 47.48   - Syncing doctrine/collections (2.4.0) into cache
+#7 47.88   - Downloading doctrine/cache (2.2.0)
+#7 47.93     Failed to download doctrine/cache from dist: Could not authenticate against github.com
+#7 47.93     Now trying to download from source
+#7 47.93   - Syncing doctrine/cache (2.2.0) into cache
+#7 48.25   - Downloading doctrine/orm (2.20.8)
+#7 48.30     Failed to download doctrine/orm from dist: Could not authenticate against github.com
+#7 48.30     Now trying to download from source
+#7 48.30   - Syncing doctrine/orm (2.20.8) into cache
+#7 54.94   - Downloading phpstan/phpdoc-parser (2.3.0)
+#7 54.99     Failed to download phpstan/phpdoc-parser from dist: Could not authenticate against github.com
+#7 54.99     Now trying to download from source
+#7 54.99   - Syncing phpstan/phpdoc-parser (2.3.0) into cache
+#7 55.46   - Downloading jms/metadata (2.8.0)
+#7 55.51     Failed to download jms/metadata from dist: Could not authenticate against github.com
+#7 55.51     Now trying to download from source
+#7 55.51   - Syncing jms/metadata (2.8.0) into cache
+#7 55.77   - Downloading jms/serializer (3.32.5)
+#7 55.82     Failed to download jms/serializer from dist: Could not authenticate against github.com
+#7 55.82     Now trying to download from source
+#7 55.82   - Syncing jms/serializer (3.32.5) into cache
+#7 56.67   - Downloading easybill/zugferd-php (v2.1.1)
+#7 56.71     Failed to download easybill/zugferd-php from dist: Could not authenticate against github.com
+#7 56.71     Now trying to download from source
+#7 56.71   - Syncing easybill/zugferd-php (v2.1.1) into cache
+#7 57.44   - Downloading bacon/bacon-qr-code (2.0.8)
+#7 57.49     Failed to download bacon/bacon-qr-code from dist: Could not authenticate against github.com
+#7 57.49     Now trying to download from source
+#7 57.49   - Syncing bacon/bacon-qr-code (2.0.8) into cache
+#7 57.79   - Downloading endroid/qr-code (4.8.5)
+#7 57.83     Failed to download endroid/qr-code from dist: Could not authenticate against github.com
+#7 57.83     Now trying to download from source
+#7 57.83   - Syncing endroid/qr-code (4.8.5) into cache
+#7 58.40   - Downloading erusev/parsedown (1.7.4)
+#7 58.45     Failed to download erusev/parsedown from dist: Could not authenticate against github.com
+#7 58.45     Now trying to download from source
+#7 58.45   - Syncing erusev/parsedown (1.7.4) into cache
+#7 58.90   - Downloading willdurand/negotiation (3.1.0)
+#7 58.95     Failed to download willdurand/negotiation from dist: Could not authenticate against github.com
+#7 58.95     Now trying to download from source
+#7 58.95   - Syncing willdurand/negotiation (3.1.0) into cache
+#7 59.26   - Downloading willdurand/jsonp-callback-validator (v2.0.0)
+#7 59.31     Failed to download willdurand/jsonp-callback-validator from dist: Could not authenticate against github.com
+#7 59.31     Now trying to download from source
+#7 59.31   - Syncing willdurand/jsonp-callback-validator (v2.0.0) into cache
+#7 59.55   - Downloading symfony/password-hasher (v6.4.24)
+#7 59.60     Failed to download symfony/password-hasher from dist: Could not authenticate against github.com
+#7 59.60     Now trying to download from source
+#7 59.60   - Syncing symfony/password-hasher (v6.4.24) into cache
+#7 59.85   - Downloading symfony/security-core (v6.4.27)
+#7 59.90     Failed to download symfony/security-core from dist: Could not authenticate against github.com
+#7 59.90     Now trying to download from source
+#7 59.90   - Syncing symfony/security-core (v6.4.27) into cache
+#7 60.40   - Downloading friendsofsymfony/rest-bundle (3.8.0)
+#7 60.44     Failed to download friendsofsymfony/rest-bundle from dist: Could not authenticate against github.com
+#7 60.44     Now trying to download from source
+#7 60.44   - Syncing friendsofsymfony/rest-bundle (3.8.0) into cache
+#7 61.17   - Downloading psr/clock (1.0.0)
+#7 61.22     Failed to download psr/clock from dist: Could not authenticate against github.com
+#7 61.22     Now trying to download from source
+#7 61.22   - Syncing psr/clock (1.0.0) into cache
+#7 61.45   - Downloading gedmo/doctrine-extensions (v3.21.0)
+#7 61.50     Failed to download gedmo/doctrine-extensions from dist: Could not authenticate against github.com
+#7 61.50     Now trying to download from source
+#7 61.50   - Syncing gedmo/doctrine-extensions (v3.21.0) into cache
+#7 62.78   - Downloading symfony/yaml (v6.4.26)
+#7 62.83     Failed to download symfony/yaml from dist: Could not authenticate against github.com
+#7 62.83     Now trying to download from source
+#7 62.83   - Syncing symfony/yaml (v6.4.26) into cache
+#7 63.41   - Downloading symfony/translation-contracts (v3.6.1)
+#7 63.46     Failed to download symfony/translation-contracts from dist: Could not authenticate against github.com
+#7 63.46     Now trying to download from source
+#7 63.46   - Syncing symfony/translation-contracts (v3.6.1) into cache
+#7 63.71   - Downloading symfony/validator (v6.4.29)
+#7 63.75     Failed to download symfony/validator from dist: Could not authenticate against github.com
+#7 63.75     Now trying to download from source
+#7 63.75   - Syncing symfony/validator (v6.4.29) into cache
+#7 64.85   - Downloading symfony/process (v6.4.26)
+#7 64.90     Failed to download symfony/process from dist: Could not authenticate against github.com
+#7 64.90     Now trying to download from source
+#7 64.90   - Syncing symfony/process (v6.4.26) into cache
+#7 65.40   - Downloading smalot/pdfparser (v2.12.1)
+#7 65.45     Failed to download smalot/pdfparser from dist: Could not authenticate against github.com
+#7 65.45     Now trying to download from source
+#7 65.45   - Syncing smalot/pdfparser (v2.12.1) into cache
+#7 67.04   - Downloading setasign/fpdi (v2.6.4)
+#7 67.09     Failed to download setasign/fpdi from dist: Could not authenticate against github.com
+#7 67.09     Now trying to download from source
+#7 67.09   - Syncing setasign/fpdi (v2.6.4) into cache
+#7 67.60   - Downloading setasign/fpdf (1.8.6)
+#7 67.65     Failed to download setasign/fpdf from dist: Could not authenticate against github.com
+#7 67.65     Now trying to download from source
+#7 67.65   - Syncing setasign/fpdf (1.8.6) into cache
+#7 67.92   - Downloading horstoeko/stringmanagement (v1.0.12)
+#7 67.97     Failed to download horstoeko/stringmanagement from dist: Could not authenticate against github.com
+#7 67.97     Now trying to download from source
+#7 67.97   - Syncing horstoeko/stringmanagement (v1.0.12) into cache
+#7 68.27   - Downloading horstoeko/mimedb (v1.0.8)
+#7 68.33     Failed to download horstoeko/mimedb from dist: Could not authenticate against github.com
+#7 68.33     Now trying to download from source
+#7 68.33   - Syncing horstoeko/mimedb (v1.0.8) into cache
+#7 68.58   - Downloading goetas-webservices/xsd2php-runtime (v0.2.17)
+#7 68.62     Failed to download goetas-webservices/xsd2php-runtime from dist: Could not authenticate against github.com
+#7 68.62     Now trying to download from source
+#7 68.62   - Syncing goetas-webservices/xsd2php-runtime (v0.2.17) into cache
+#7 68.88   - Downloading horstoeko/zugferd (v1.0.116)
+#7 68.93     Failed to download horstoeko/zugferd from dist: Could not authenticate against github.com
+#7 68.93     Now trying to download from source
+#7 68.93   - Syncing horstoeko/zugferd (v1.0.116) into cache
+#7 70.17   - Downloading horstoeko/zugferdublbridge (v1.0.15)
+#7 70.22     Failed to download horstoeko/zugferdublbridge from dist: Could not authenticate against github.com
+#7 70.22     Now trying to download from source
+#7 70.22   - Syncing horstoeko/zugferdublbridge (v1.0.15) into cache
+#7 70.53   - Downloading jms/serializer-bundle (5.5.1)
+#7 70.58     Failed to download jms/serializer-bundle from dist: Could not authenticate against github.com
+#7 70.58     Now trying to download from source
+#7 70.58   - Syncing jms/serializer-bundle (5.5.1) into cache
+#7 71.00   - Downloading twig/twig (v3.22.0)
+#7 71.05     Failed to download twig/twig from dist: Could not authenticate against github.com
+#7 71.05     Now trying to download from source
+#7 71.05   - Syncing twig/twig (v3.22.0) into cache
+#7 72.77   - Downloading symfony/twig-bridge (v6.4.25)
+#7 72.82     Failed to download symfony/twig-bridge from dist: Could not authenticate against github.com
+#7 72.82     Now trying to download from source
+#7 72.82   - Syncing symfony/twig-bridge (v6.4.25) into cache
+#7 73.39   - Downloading symfony/translation (v6.4.26)
+#7 73.43     Failed to download symfony/translation from dist: Could not authenticate against github.com
+#7 73.43     Now trying to download from source
+#7 73.43   - Syncing symfony/translation (v6.4.26) into cache
+#7 74.00   - Downloading symfony/options-resolver (v6.4.25)
+#7 74.05     Failed to download symfony/options-resolver from dist: Could not authenticate against github.com
+#7 74.05     Now trying to download from source
+#7 74.05   - Syncing symfony/options-resolver (v6.4.25) into cache
+#7 74.40   - Downloading symfony/asset (v6.4.24)
+#7 74.45     Failed to download symfony/asset from dist: Could not authenticate against github.com
+#7 74.45     Now trying to download from source
+#7 74.45   - Syncing symfony/asset (v6.4.24) into cache
+#7 74.77   - Downloading kevinpapst/tabler-bundle (1.9.0)
+#7 74.82     Failed to download kevinpapst/tabler-bundle from dist: Could not authenticate against github.com
+#7 74.82     Now trying to download from source
+#7 74.82   - Syncing kevinpapst/tabler-bundle (1.9.0) into cache
+#7 75.30   - Downloading league/csv (9.27.1)
+#7 75.35     Failed to download league/csv from dist: Could not authenticate against github.com
+#7 75.35     Now trying to download from source
+#7 75.35   - Syncing league/csv (9.27.1) into cache
+#7 76.26   - Downloading psr/http-message (2.0)
+#7 76.31     Failed to download psr/http-message from dist: Could not authenticate against github.com
+#7 76.31     Now trying to download from source
+#7 76.31   - Syncing psr/http-message (2.0) into cache
+#7 76.57   - Downloading paragonie/random_compat (v9.99.100)
+#7 76.62     Failed to download paragonie/random_compat from dist: Could not authenticate against github.com
+#7 76.62     Now trying to download from source
+#7 76.62   - Syncing paragonie/random_compat (v9.99.100) into cache
+#7 76.91   - Downloading myclabs/deep-copy (1.13.4)
+#7 76.96     Failed to download myclabs/deep-copy from dist: Could not authenticate against github.com
+#7 76.96     Now trying to download from source
+#7 76.96   - Syncing myclabs/deep-copy (1.13.4) into cache
+#7 77.21   - Downloading mpdf/psr-log-aware-trait (v3.0.0)
+#7 77.26     Failed to download mpdf/psr-log-aware-trait from dist: Could not authenticate against github.com
+#7 77.26     Now trying to download from source
+#7 77.26   - Syncing mpdf/psr-log-aware-trait (v3.0.0) into cache
+#7 77.49   - Downloading mpdf/psr-http-message-shim (v2.0.1)
+#7 77.54     Failed to download mpdf/psr-http-message-shim from dist: Could not authenticate against github.com
+#7 77.54     Now trying to download from source
+#7 77.54   - Syncing mpdf/psr-http-message-shim (v2.0.1) into cache
+#7 77.77   - Downloading mpdf/mpdf (v8.2.6)
+#7 77.81     Failed to download mpdf/mpdf from dist: Could not authenticate against github.com
+#7 77.81     Now trying to download from source
+#7 77.81   - Syncing mpdf/mpdf (v8.2.6) into cache
+#7 83.27   - Downloading nikic/php-parser (v5.6.2)
+#7 83.32     Failed to download nikic/php-parser from dist: Could not authenticate against github.com
+#7 83.32     Now trying to download from source
+#7 83.32   - Syncing nikic/php-parser (v5.6.2) into cache
+#7 84.50   - Downloading zircote/swagger-php (5.7.0)
+#7 84.55     Failed to download zircote/swagger-php from dist: Could not authenticate against github.com
+#7 84.55     Now trying to download from source
+#7 84.55   - Syncing zircote/swagger-php (5.7.0) into cache
+#7 85.40   - Downloading symfony/property-info (v6.4.24)
+#7 85.45     Failed to download symfony/property-info from dist: Could not authenticate against github.com
+#7 85.45     Now trying to download from source
+#7 85.45   - Syncing symfony/property-info (v6.4.24) into cache
+#7 85.86   - Downloading phpdocumentor/reflection-common (2.2.0)
+#7 85.91     Failed to download phpdocumentor/reflection-common from dist: Could not authenticate against github.com
+#7 85.91     Now trying to download from source
+#7 85.91   - Syncing phpdocumentor/reflection-common (2.2.0) into cache
+#7 86.16   - Downloading phpdocumentor/type-resolver (1.10.0)
+#7 86.21     Failed to download phpdocumentor/type-resolver from dist: Could not authenticate against github.com
+#7 86.21     Now trying to download from source
+#7 86.21   - Syncing phpdocumentor/type-resolver (1.10.0) into cache
+#7 86.59   - Downloading webmozart/assert (1.12.1)
+#7 86.63     Failed to download webmozart/assert from dist: Could not authenticate against github.com
+#7 86.63     Now trying to download from source
+#7 86.63   - Syncing webmozart/assert (1.12.1) into cache
+#7 87.07   - Downloading phpdocumentor/reflection-docblock (5.6.3)
+#7 87.12     Failed to download phpdocumentor/reflection-docblock from dist: Could not authenticate against github.com
+#7 87.12     Now trying to download from source
+#7 87.12   - Syncing phpdocumentor/reflection-docblock (5.6.3) into cache
+#7 87.52   - Downloading nelmio/api-doc-bundle (v5.7.1)
+#7 87.57     Failed to download nelmio/api-doc-bundle from dist: Could not authenticate against github.com
+#7 87.57     Now trying to download from source
+#7 87.57   - Syncing nelmio/api-doc-bundle (v5.7.1) into cache
+#7 89.38   - Downloading nelmio/cors-bundle (2.6.0)
+#7 89.42     Failed to download nelmio/cors-bundle from dist: Could not authenticate against github.com
+#7 89.42     Now trying to download from source
+#7 89.42   - Syncing nelmio/cors-bundle (2.6.0) into cache
+#7 89.71   - Downloading robrichards/xmlseclibs (3.1.3)
+#7 89.76     Failed to download robrichards/xmlseclibs from dist: Could not authenticate against github.com
+#7 89.76     Now trying to download from source
+#7 89.76   - Syncing robrichards/xmlseclibs (3.1.3) into cache
+#7 90.07   - Downloading onelogin/php-saml (4.3.0)
+#7 90.12     Failed to download onelogin/php-saml from dist: Could not authenticate against github.com
+#7 90.12     Now trying to download from source
+#7 90.12   - Syncing onelogin/php-saml (4.3.0) into cache
+#7 90.75   - Downloading openspout/openspout (v4.25.0)
+#7 90.80     Failed to download openspout/openspout from dist: Could not authenticate against github.com
+#7 90.80     Now trying to download from source
+#7 90.80   - Syncing openspout/openspout (v4.25.0) into cache
+#7 91.61   - Downloading pagerfanta/pagerfanta (v3.8.0)
+#7 91.66     Failed to download pagerfanta/pagerfanta from dist: Could not authenticate against github.com
+#7 91.66     Now trying to download from source
+#7 91.66   - Syncing pagerfanta/pagerfanta (v3.8.0) into cache
+#7 92.03   - Downloading psr/simple-cache (3.0.0)
+#7 92.08     Failed to download psr/simple-cache from dist: Could not authenticate against github.com
+#7 92.08     Now trying to download from source
+#7 92.08   - Syncing psr/simple-cache (3.0.0) into cache
+#7 92.32   - Downloading psr/http-factory (1.1.0)
+#7 92.37     Failed to download psr/http-factory from dist: Could not authenticate against github.com
+#7 92.37     Now trying to download from source
+#7 92.37   - Syncing psr/http-factory (1.1.0) into cache
+#7 92.61   - Downloading psr/http-client (1.0.3)
+#7 92.66     Failed to download psr/http-client from dist: Could not authenticate against github.com
+#7 92.66     Now trying to download from source
+#7 92.66   - Syncing psr/http-client (1.0.3) into cache
+#7 92.88   - Downloading markbaker/matrix (3.0.1)
+#7 92.93     Failed to download markbaker/matrix from dist: Could not authenticate against github.com
+#7 92.93     Now trying to download from source
+#7 92.93   - Syncing markbaker/matrix (3.0.1) into cache
+#7 93.17   - Downloading markbaker/complex (3.0.2)
+#7 93.22     Failed to download markbaker/complex from dist: Could not authenticate against github.com
+#7 93.22     Now trying to download from source
+#7 93.22   - Syncing markbaker/complex (3.0.2) into cache
+#7 93.49   - Downloading maennchen/zipstream-php (3.1.1)
+#7 93.53     Failed to download maennchen/zipstream-php from dist: Could not authenticate against github.com
+#7 93.53     Now trying to download from source
+#7 93.53   - Syncing maennchen/zipstream-php (3.1.1) into cache
+#7 93.86   - Downloading composer/pcre (3.3.2)
+#7 93.91     Failed to download composer/pcre from dist: Could not authenticate against github.com
+#7 93.91     Now trying to download from source
+#7 93.91   - Syncing composer/pcre (3.3.2) into cache
+#7 94.21   - Downloading phpoffice/phpspreadsheet (2.4.1)
+#7 94.26     Failed to download phpoffice/phpspreadsheet from dist: Could not authenticate against github.com
+#7 94.26     Now trying to download from source
+#7 94.26   - Syncing phpoffice/phpspreadsheet (2.4.1) into cache
+#7 100.5   - Downloading phpoffice/math (0.3.0)
+#7 100.6     Failed to download phpoffice/math from dist: Could not authenticate against github.com
+#7 100.6     Now trying to download from source
+#7 100.6   - Syncing phpoffice/math (0.3.0) into cache
+#7 101.0   - Downloading phpoffice/phpword (1.4.0)
+#7 101.1     Failed to download phpoffice/phpword from dist: Could not authenticate against github.com
+#7 101.1     Now trying to download from source
+#7 101.1   - Syncing phpoffice/phpword (1.4.0) into cache
+#7 116.4   - Downloading symfony/twig-bundle (v6.4.24)
+#7 116.5     Failed to download symfony/twig-bundle from dist: Could not authenticate against github.com
+#7 116.5     Now trying to download from source
+#7 116.5   - Syncing symfony/twig-bundle (v6.4.24) into cache
+#7 116.9   - Downloading symfony/property-access (v6.4.25)
+#7 117.0     Failed to download symfony/property-access from dist: Could not authenticate against github.com
+#7 117.0     Now trying to download from source
+#7 117.0   - Syncing symfony/property-access (v6.4.25) into cache
+#7 117.4   - Downloading symfony/security-http (v6.4.26)
+#7 117.4     Failed to download symfony/security-http from dist: Could not authenticate against github.com
+#7 117.4     Now trying to download from source
+#7 117.4   - Syncing symfony/security-http (v6.4.26) into cache
+#7 117.9   - Downloading symfony/security-csrf (v6.4.24)
+#7 118.0     Failed to download symfony/security-csrf from dist: Could not authenticate against github.com
+#7 118.0     Now trying to download from source
+#7 118.0   - Syncing symfony/security-csrf (v6.4.24) into cache
+#7 118.3   - Downloading symfony/clock (v6.4.24)
+#7 118.3     Failed to download symfony/clock from dist: Could not authenticate against github.com
+#7 118.3     Now trying to download from source
+#7 118.3   - Syncing symfony/clock (v6.4.24) into cache
+#7 118.5   - Downloading symfony/security-bundle (v6.4.26)
+#7 118.6     Failed to download symfony/security-bundle from dist: Could not authenticate against github.com
+#7 118.6     Now trying to download from source
+#7 118.6   - Syncing symfony/security-bundle (v6.4.26) into cache
+#7 119.2   - Downloading scheb/2fa-bundle (v6.13.1)
+#7 119.3     Failed to download scheb/2fa-bundle from dist: Could not authenticate against github.com
+#7 119.3     Now trying to download from source
+#7 119.3   - Syncing scheb/2fa-bundle (v6.13.1) into cache
+#7 119.5   - Downloading scheb/2fa-backup-code (v6.13.1)
+#7 119.6     Failed to download scheb/2fa-backup-code from dist: Could not authenticate against github.com
+#7 119.6     Now trying to download from source
+#7 119.6   - Syncing scheb/2fa-backup-code (v6.13.1) into cache
+#7 119.8   - Downloading paragonie/constant_time_encoding (v2.8.2)
+#7 119.9     Failed to download paragonie/constant_time_encoding from dist: Could not authenticate against github.com
+#7 119.9     Now trying to download from source
+#7 119.9   - Syncing paragonie/constant_time_encoding (v2.8.2) into cache
+#7 120.2   - Downloading spomky-labs/otphp (11.3.0)
+#7 120.2     Failed to download spomky-labs/otphp from dist: Could not authenticate against github.com
+#7 120.2     Now trying to download from source
+#7 120.2   - Syncing spomky-labs/otphp (11.3.0) into cache
+#7 120.6   - Downloading scheb/2fa-totp (v6.13.1)
+#7 120.7     Failed to download scheb/2fa-totp from dist: Could not authenticate against github.com
+#7 120.7     Now trying to download from source
+#7 120.7   - Syncing scheb/2fa-totp (v6.13.1) into cache
+#7 120.9   - Downloading symfony/css-selector (v6.4.24)
+#7 121.0     Failed to download symfony/css-selector from dist: Could not authenticate against github.com
+#7 121.0     Now trying to download from source
+#7 121.0   - Syncing symfony/css-selector (v6.4.24) into cache
+#7 121.3   - Downloading symfony/dotenv (v6.4.24)
+#7 121.4     Failed to download symfony/dotenv from dist: Could not authenticate against github.com
+#7 121.4     Now trying to download from source
+#7 121.4   - Syncing symfony/dotenv (v6.4.24) into cache
+#7 121.6   - Downloading symfony/expression-language (v6.4.24)
+#7 121.7     Failed to download symfony/expression-language from dist: Could not authenticate against github.com
+#7 121.7     Now trying to download from source
+#7 121.7   - Syncing symfony/expression-language (v6.4.24) into cache
+#7 122.2   - Downloading symfony/form (v6.4.27)
+#7 122.2     Failed to download symfony/form from dist: Could not authenticate against github.com
+#7 122.2     Now trying to download from source
+#7 122.2   - Syncing symfony/form (v6.4.27) into cache
+#7 123.5   - Downloading symfony/http-client-contracts (v3.6.0)
+#7 123.5     Failed to download symfony/http-client-contracts from dist: Could not authenticate against github.com
+#7 123.5     Now trying to download from source
+#7 123.5   - Syncing symfony/http-client-contracts (v3.6.0) into cache
+#7 123.8   - Downloading symfony/http-client (v6.4.28)
+#7 123.8     Failed to download symfony/http-client from dist: Could not authenticate against github.com
+#7 123.8     Now trying to download from source
+#7 123.8   - Syncing symfony/http-client (v6.4.28) into cache
+#7 124.3   - Downloading symfony/mime (v6.4.26)
+#7 124.3     Failed to download symfony/mime from dist: Could not authenticate against github.com
+#7 124.3     Now trying to download from source
+#7 124.3   - Syncing symfony/mime (v6.4.26) into cache
+#7 124.7   - Downloading egulias/email-validator (4.0.4)
+#7 124.7     Failed to download egulias/email-validator from dist: Could not authenticate against github.com
+#7 124.7     Now trying to download from source
+#7 124.7   - Syncing egulias/email-validator (4.0.4) into cache
+#7 125.0   - Downloading symfony/mailer (v6.4.27)
+#7 125.1     Failed to download symfony/mailer from dist: Could not authenticate against github.com
+#7 125.1     Now trying to download from source
+#7 125.1   - Syncing symfony/mailer (v6.4.27) into cache
+#7 125.4   - Downloading monolog/monolog (3.9.0)
+#7 125.4     Failed to download monolog/monolog from dist: Could not authenticate against github.com
+#7 125.4     Now trying to download from source
+#7 125.4   - Syncing monolog/monolog (3.9.0) into cache
+#7 126.2   - Downloading symfony/monolog-bridge (v6.4.28)
+#7 126.2     Failed to download symfony/monolog-bridge from dist: Could not authenticate against github.com
+#7 126.2     Now trying to download from source
+#7 126.2   - Syncing symfony/monolog-bridge (v6.4.28) into cache
+#7 126.6   - Downloading symfony/monolog-bundle (v3.10.0)
+#7 126.6     Failed to download symfony/monolog-bundle from dist: Could not authenticate against github.com
+#7 126.6     Now trying to download from source
+#7 126.6   - Syncing symfony/monolog-bundle (v3.10.0) into cache
+#7 127.0   - Downloading symfony/rate-limiter (v6.4.24)
+#7 127.1     Failed to download symfony/rate-limiter from dist: Could not authenticate against github.com
+#7 127.1     Now trying to download from source
+#7 127.1   - Syncing symfony/rate-limiter (v6.4.24) into cache
+#7 127.4   - Downloading symfony/serializer (v6.4.27)
+#7 127.4     Failed to download symfony/serializer from dist: Could not authenticate against github.com
+#7 127.4     Now trying to download from source
+#7 127.4   - Syncing symfony/serializer (v6.4.27) into cache
+#7 128.3   - Downloading symfony/webpack-encore-bundle (v2.3.0)
+#7 128.3     Failed to download symfony/webpack-encore-bundle from dist: Could not authenticate against github.com
+#7 128.3     Now trying to download from source
+#7 128.3   - Syncing symfony/webpack-encore-bundle (v2.3.0) into cache
+#7 128.6   - Downloading tijsverkoyen/css-to-inline-styles (v2.3.0)
+#7 128.6     Failed to download tijsverkoyen/css-to-inline-styles from dist: Could not authenticate against github.com
+#7 128.6     Now trying to download from source
+#7 128.6   - Syncing tijsverkoyen/css-to-inline-styles (v2.3.0) into cache
+#7 128.9   - Downloading twig/cssinliner-extra (v3.22.0)
+#7 129.0     Failed to download twig/cssinliner-extra from dist: Could not authenticate against github.com
+#7 129.0     Now trying to download from source
+#7 129.0   - Syncing twig/cssinliner-extra (v3.22.0) into cache
+#7 129.2   - Downloading twig/extra-bundle (v3.22.0)
+#7 129.3     Failed to download twig/extra-bundle from dist: Could not authenticate against github.com
+#7 129.3     Now trying to download from source
+#7 129.3   - Syncing twig/extra-bundle (v3.22.0) into cache
+#7 129.5   - Downloading lorenzo/pinky (1.1.0)
+#7 129.6     Failed to download lorenzo/pinky from dist: Could not authenticate against github.com
+#7 129.6     Now trying to download from source
+#7 129.6   - Syncing lorenzo/pinky (1.1.0) into cache
+#7 129.8   - Downloading twig/inky-extra (v3.22.0)
+#7 129.9     Failed to download twig/inky-extra from dist: Could not authenticate against github.com
+#7 129.9     Now trying to download from source
+#7 129.9   - Syncing twig/inky-extra (v3.22.0) into cache
+#7 130.1   - Downloading symfony/intl (v6.4.27)
+#7 130.2     Failed to download symfony/intl from dist: Could not authenticate against github.com
+#7 130.2     Now trying to download from source
+#7 130.2   - Syncing symfony/intl (v6.4.27) into cache
+#7 133.2   - Downloading twig/intl-extra (v3.22.0)
+#7 133.2     Failed to download twig/intl-extra from dist: Could not authenticate against github.com
+#7 133.2     Now trying to download from source
+#7 133.2   - Syncing twig/intl-extra (v3.22.0) into cache
+#7 133.5   - Downloading twig/string-extra (v3.22.0)
+#7 133.5     Failed to download twig/string-extra from dist: Could not authenticate against github.com
+#7 133.5     Now trying to download from source
+#7 133.5   - Syncing twig/string-extra (v3.22.0) into cache
+#7 133.8     0 [>---------------------------]    0 [->--------------------------]
+#7 133.8   - Installing symfony/flex (v2.9.0): Cloning 94b37978c9 from cache
+#7 133.8 The "symfony/flex" plugin was not loaded as plugins are disabled.
+#7 133.9   - Installing symfony/runtime (v6.4.26): Cloning 59933ca737 from cache
+#7 133.9 The "symfony/runtime" plugin was not loaded as plugins are disabled.
+#7 133.9   - Installing azuyalabs/yasumi (2.8.0): Cloning cc07874da0 from cache
+#7 134.3   - Installing composer/semver (3.4.4): Cloning 1981666189 from cache
+#7 134.4   - Installing dasprid/enum (1.0.7): Cloning b5874fa9ed from cache
+#7 134.4   - Installing symfony/deprecation-contracts (v3.6.0): Cloning 63afe740e9 from cache
+#7 134.4   - Installing symfony/routing (v6.4.28): Cloning ae064a6d9c from cache
+#7 134.6   - Installing symfony/polyfill-php83 (v1.33.0): Cloning 17f6f9a6b1 from cache
+#7 134.6   - Installing symfony/http-foundation (v6.4.29): Cloning b03d11e015 from cache
+#7 134.9   - Installing psr/event-dispatcher (1.0.0): Cloning dbefd12671 from cache
+#7 134.9   - Installing symfony/event-dispatcher-contracts (v3.6.0): Cloning 59eb412e93 from cache
+#7 134.9   - Installing symfony/event-dispatcher (v6.4.25): Cloning b0cf316202 from cache
+#7 135.0   - Installing symfony/var-dumper (v6.4.26): Cloning cfae1497a2 from cache
+#7 135.1   - Installing psr/log (3.0.2): Cloning f16e1d5863 from cache
+#7 135.2   - Installing symfony/error-handler (v6.4.26): Cloning 41bedcaec5 from cache
+#7 135.2   - Installing symfony/http-kernel (v6.4.29): Cloning 18818b48f5 from cache
+#7 135.5   - Installing symfony/finder (v6.4.27): Cloning a1b6aa435d from cache
+#7 135.6   - Installing symfony/filesystem (v6.4.24): Cloning 75ae2edb7c from cache
+#7 135.7   - Installing symfony/var-exporter (v6.4.26): Cloning 466fcac5fa from cache
+#7 135.7   - Installing psr/container (2.0.2): Cloning c71ecc56df from cache
+#7 135.8   - Installing symfony/service-contracts (v3.6.1): Cloning 45112560a3 from cache
+#7 135.8   - Installing symfony/dependency-injection (v6.4.26): Cloning 5f311eaf0b from cache
+#7 136.2   - Installing symfony/config (v6.4.28): Cloning 15947c18ef from cache
+#7 136.3   - Installing psr/cache (3.0.0): Cloning aa5030cfa5 from cache
+#7 136.4   - Installing symfony/cache-contracts (v3.6.0): Cloning 5d68a57d66 from cache
+#7 136.4   - Installing symfony/cache (v6.4.28): Cloning 31628f36fc from cache
+#7 136.5   - Installing symfony/framework-bundle (v6.4.27): Cloning ee58c2a732 from cache
+#7 137.2   - Installing symfony/stopwatch (v6.4.24): Cloning b67e94e06a from cache
+#7 137.3   - Installing symfony/string (v6.4.26): Cloning 5621f039a7 from cache
+#7 137.3   - Installing symfony/console (v6.4.27): Cloning 13d3176cf8 from cache
+#7 137.6   - Installing doctrine/event-manager (2.0.1): Cloning b680156fa3 from cache
+#7 137.6   - Installing doctrine/deprecations (1.1.5): Cloning 459c2f5dd3 from cache
+#7 137.6   - Installing doctrine/dbal (3.10.3): Cloning 65edaca19a from cache
+#7 138.7   - Installing doctrine/migrations (3.9.4): Cloning 1b88fcb812 from cache
+#7 138.8   - Installing doctrine/persistence (3.4.3): Cloning d59e6ef7ca from cache
+#7 138.9   - Installing symfony/doctrine-bridge (v6.4.26): Cloning c14bb5a912 from cache
+#7 139.1   - Installing doctrine/sql-formatter (1.5.3): Cloning a8af23a8e9 from cache
+#7 139.2   - Installing doctrine/doctrine-bundle (2.18.1): Cloning b769877014 from cache
+#7 139.3   - Installing doctrine/doctrine-migrations-bundle (3.6.0): Cloning 49ecc56456 from cache
+#7 139.4   - Installing doctrine/lexer (3.0.1): Cloning 31ad66abc0 from cache
+#7 139.4   - Installing doctrine/instantiator (2.0.0): Cloning c6222283fa from cache
+#7 139.5   - Installing doctrine/inflector (2.1.0): Cloning 6d6c96277e from cache
+#7 139.5   - Installing doctrine/common (3.5.0): Cloning d9ea4a54ca from cache
+#7 139.9   - Installing symfony/polyfill-php84 (v1.33.0): Cloning d8ced4d875 from cache
+#7 139.9   - Installing doctrine/collections (2.4.0): Cloning 9acfeea2e8 from cache
+#7 140.0   - Installing doctrine/cache (2.2.0): Cloning 1ca8f21980 from cache
+#7 140.1   - Installing doctrine/orm (2.20.8): Cloning 5bff0919a7 from cache
+#7 141.5   - Installing phpstan/phpdoc-parser (2.3.0): Cloning 1e0cd5370d from cache
+#7 141.6   - Installing jms/metadata (2.8.0): Cloning 7ca240dcac from cache
+#7 141.6   - Installing jms/serializer (3.32.5): Cloning 7c88b1b02f from cache
+#7 141.8   - Installing easybill/zugferd-php (v2.1.1): Cloning 376749138f from cache
+#7 142.1   - Installing bacon/bacon-qr-code (2.0.8): Cloning 8674e51bb6 from cache
+#7 142.2   - Installing endroid/qr-code (4.8.5): Cloning 0db25b506a from cache
+#7 142.5   - Installing erusev/parsedown (1.7.4): Cloning cb17b6477d from cache
+#7 142.5   - Installing willdurand/negotiation (3.1.0): Cloning 68e9ea0553 from cache
+#7 142.6   - Installing willdurand/jsonp-callback-validator (v2.0.0): Cloning 738c36e91d from cache
+#7 142.6   - Installing symfony/password-hasher (v6.4.24): Cloning dcab5ac874 from cache
+#7 142.6   - Installing symfony/security-core (v6.4.27): Cloning 673018434b from cache
+#7 142.8   - Installing friendsofsymfony/rest-bundle (3.8.0): Cloning d247368965 from cache
+#7 143.0   - Installing psr/clock (1.0.0): Cloning e41a24703d from cache
+#7 143.0   - Installing gedmo/doctrine-extensions (v3.21.0): Cloning eb53dfcb2b from cache
+#7 143.3   - Installing symfony/yaml (v6.4.26): Cloning 0fc8b966fd from cache
+#7 143.4   - Installing symfony/translation-contracts (v3.6.1): Cloning 65a8bc8208 from cache
+#7 143.4   - Installing symfony/validator (v6.4.29): Cloning 99df8a769e from cache
+#7 143.8   - Installing symfony/process (v6.4.26): Cloning 48bad91326 from cache
+#7 143.9   - Installing smalot/pdfparser (v2.12.1): Cloning 98d31ba34e from cache
+#7 144.8   - Installing setasign/fpdi (v2.6.4): Cloning 4b53852fde from cache
+#7 145.1   - Installing setasign/fpdf (1.8.6): Cloning 0838e0ee49 from cache
+#7 145.2   - Installing horstoeko/stringmanagement (v1.0.12): Cloning d304a094e3 from cache
+#7 145.2   - Installing horstoeko/mimedb (v1.0.8): Cloning 2d50f2b6bf from cache
+#7 145.2   - Installing goetas-webservices/xsd2php-runtime (v0.2.17): Cloning be15c48cda from cache
+#7 145.3   - Installing horstoeko/zugferd (v1.0.116): Cloning 23fe5478a3 from cache
+#7 145.6   - Installing horstoeko/zugferdublbridge (v1.0.15): Cloning 059bc2d701 from cache
+#7 145.6   - Installing jms/serializer-bundle (5.5.1): Cloning 0538a2bae3 from cache
+#7 145.7   - Installing twig/twig (v3.22.0): Cloning 4509984193 from cache
+#7 146.1   - Installing symfony/twig-bridge (v6.4.25): Cloning 9d13e87591 from cache
+#7 146.3   - Installing symfony/translation (v6.4.26): Cloning c8559fe25c from cache
+#7 146.4   - Installing symfony/options-resolver (v6.4.25): Cloning d28e7e2db8 from cache
+#7 146.5   - Installing symfony/asset (v6.4.24): Cloning cfee7c0d64 from cache
+#7 146.6   - Installing kevinpapst/tabler-bundle (1.9.0): Cloning 2e1cd990e4 from cache
+#7 146.7   - Installing league/csv (9.27.1): Cloning 26de738b8f from cache
+#7 147.6   - Installing psr/http-message (2.0): Cloning 402d35bcb9 from cache
+#7 147.6   - Installing paragonie/random_compat (v9.99.100): Cloning 996434e549 from cache
+#7 147.6   - Installing myclabs/deep-copy (1.13.4): Cloning 07d290f0c4 from cache
+#7 147.7   - Installing mpdf/psr-log-aware-trait (v3.0.0): Cloning a633da6065 from cache
+#7 147.7   - Installing mpdf/psr-http-message-shim (v2.0.1): Cloning f25a0153d6 from cache
+#7 147.7   - Installing mpdf/mpdf (v8.2.6): Cloning dd30e3b010 from cache
+#7 150.4   - Installing nikic/php-parser (v5.6.2): Cloning 3a454ca033 from cache
+#7 150.7   - Installing zircote/swagger-php (5.7.0): Cloning 39fcd46e79 from cache
+#7 150.9   - Installing symfony/property-info (v6.4.24): Cloning 1056ae3621 from cache
+#7 151.0   - Installing phpdocumentor/reflection-common (2.2.0): Cloning 1d01c49d4e from cache
+#7 151.0   - Installing phpdocumentor/type-resolver (1.10.0): Cloning 679e3ce485 from cache
+#7 151.1   - Installing webmozart/assert (1.12.1): Cloning 9be6926d8b from cache
+#7 151.2   - Installing phpdocumentor/reflection-docblock (5.6.3): Cloning 94f8051919 from cache
+#7 151.3   - Installing nelmio/api-doc-bundle (v5.7.1): Cloning 772d26a9d9 from cache
+#7 151.7   - Installing nelmio/cors-bundle (2.6.0): Cloning 5302174722 from cache
+#7 151.8   - Installing robrichards/xmlseclibs (3.1.3): Cloning 2bdfd74262 from cache
+#7 151.8   - Installing onelogin/php-saml (4.3.0): Cloning bf5efce9f2 from cache
+#7 151.9   - Installing openspout/openspout (v4.25.0): Cloning 519affe730 from cache
+#7 152.6   - Installing pagerfanta/pagerfanta (v3.8.0): Cloning a07c84296e from cache
+#7 152.7   - Installing psr/simple-cache (3.0.0): Cloning 764e0b3939 from cache
+#7 152.7   - Installing psr/http-factory (1.1.0): Cloning 2b4765fddf from cache
+#7 152.7   - Installing psr/http-client (1.0.3): Cloning bb5906edc1 from cache
+#7 152.7   - Installing markbaker/matrix (3.0.1): Cloning 728434227f from cache
+#7 152.8   - Installing markbaker/complex (3.0.2): Cloning 95c56caa1c from cache
+#7 152.8   - Installing maennchen/zipstream-php (3.1.1): Cloning 6187e9cc44 from cache
+#7 152.9   - Installing composer/pcre (3.3.2): Cloning b2bed4734f from cache
+#7 152.9   - Installing phpoffice/phpspreadsheet (2.4.1): Cloning 096ae6faf9 from cache
+#7 154.2   - Installing phpoffice/math (0.3.0): Cloning fc31c8f57a from cache
+#7 154.2   - Installing phpoffice/phpword (1.4.0): Cloning 6d75328229 from cache
+#7 155.0   - Installing symfony/twig-bundle (v6.4.24): Cloning 3b48b6e822 from cache
+#7 155.1   - Installing symfony/property-access (v6.4.25): Cloning fedc771326 from cache
+#7 155.2   - Installing symfony/security-http (v6.4.26): Cloning 6c2e236f0f from cache
+#7 155.3   - Installing symfony/security-csrf (v6.4.24): Cloning 9a1efc8c10 from cache
+#7 155.4   - Installing symfony/clock (v6.4.24): Cloning 5e15a9c9ae from cache
+#7 155.4   - Installing symfony/security-bundle (v6.4.26): Cloning b83773107a from cache
+#7 155.6   - Installing scheb/2fa-bundle (v6.13.1): Cloning 8eadd57ebc from cache
+#7 155.7   - Installing scheb/2fa-backup-code (v6.13.1): Cloning 6dceeb5be0 from cache
+#7 155.7   - Installing paragonie/constant_time_encoding (v2.8.2): Cloning e30811f7bc from cache
+#7 155.7   - Installing spomky-labs/otphp (11.3.0): Cloning 2d8ccb5fc9 from cache
+#7 155.8   - Installing scheb/2fa-totp (v6.13.1): Cloning e72879c8e0 from cache
+#7 155.8   - Installing symfony/css-selector (v6.4.24): Cloning 9b78441314 from cache
+#7 155.9   - Installing symfony/dotenv (v6.4.24): Cloning 234b6c602f from cache
+#7 156.0   - Installing symfony/expression-language (v6.4.24): Cloning 1ea0adaa53 from cache
+#7 156.0   - Installing symfony/form (v6.4.27): Cloning 5d922aea68 from cache
+#7 156.4   - Installing symfony/http-client-contracts (v3.6.0): Cloning 75d7043853 from cache
+#7 156.5   - Installing symfony/http-client (v6.4.28): Cloning c9e69c185c from cache
+#7 156.6   - Installing symfony/mime (v6.4.26): Cloning 61ab9681cd from cache
+#7 156.7   - Installing egulias/email-validator (4.0.4): Cloning d42c8731f0 from cache
+#7 156.7   - Installing symfony/mailer (v6.4.27): Cloning 2f096718ed from cache
+#7 156.8   - Installing monolog/monolog (3.9.0): Cloning 10d8574018 from cache
+#7 157.0   - Installing symfony/monolog-bridge (v6.4.28): Cloning d2f4b68e32 from cache
+#7 157.1   - Installing symfony/monolog-bundle (v3.10.0): Cloning 414f951743 from cache
+#7 157.1   - Installing symfony/rate-limiter (v6.4.24): Cloning 15a9a10fd0 from cache
+#7 157.2   - Installing symfony/serializer (v6.4.27): Cloning 28779bbdb3 from cache
+#7 157.4   - Installing symfony/webpack-encore-bundle (v2.3.0): Cloning 7ae70d44c2 from cache
+#7 157.4   - Installing tijsverkoyen/css-to-inline-styles (v2.3.0): Cloning 0d72ac1c00 from cache
+#7 157.5   - Installing twig/cssinliner-extra (v3.22.0): Cloning 9bcbf04ca5 from cache
+#7 157.5   - Installing twig/extra-bundle (v3.22.0): Cloning 6d253f0fe2 from cache
+#7 157.6   - Installing lorenzo/pinky (1.1.0): Cloning e1b1bdb2c1 from cache
+#7 157.6   - Installing twig/inky-extra (v3.22.0): Cloning 631f42c712 from cache
+#7 157.6   - Installing symfony/intl (v6.4.27): Cloning ccc5282461 from cache
+#7 158.5   - Installing twig/intl-extra (v3.22.0): Cloning 7393fc911c from cache
+#7 158.5   - Installing twig/string-extra (v3.22.0): Cloning 4b3337544a from cache
+#7 158.5     0 [>---------------------------]    0 [->--------------------------]
+#7 158.8 Package doctrine/cache is abandoned, you should avoid using it. No replacement was suggested.
+#7 158.8 Generating optimized autoload files
+#7 160.3 Class ParsedownTest located in ./vendor/erusev/parsedown/test/ParsedownTest.php does not comply with psr-0 autoloading standard. Skipping.
+#7 160.4 94 packages you are using are looking for funding.
+#7 160.4 Use the `composer fund` command to find out more!
+#7 160.4 > symfony-cmd
+#7 160.4 sh: 1: symfony-cmd: not found
+#7 160.4 Script symfony-cmd handling the auto-scripts event returned with error code 127
+#7 160.4 Script @auto-scripts was called via post-install-cmd
+#7 160.4 Plugins have been disabled automatically as you are running as root, this may be the cause of the script failure.
+#7 160.4 See also https://getcomposer.org/root
+#7 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         composer         php-redis         php8.3-zip         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo \"**** configure php-fpm to pass env vars ****\" &&     if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&     echo \"**** install kimai ****\" &&     mkdir -p        /app/www &&     curl -fL -o         /tmp/kimai.tar.gz         \"https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz\" || curl -fL -o         /tmp/kimai.tar.gz         \"https://github.com/kimai/kimai/archive/refs/tags/v${VERSION}.tar.gz\" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo \"**** install composer dependencies ****\" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/*         $HOME/.cache         $HOME/.composer" did not complete successfully: exit code: 127
 ------
- > [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install kimai ****" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo "**** install composer dependencies ****" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*         /config/.cache         /config/.composer:
-20.57 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
-20.67 
-20.67 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
-20.79 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
-20.79 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
-20.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-20.81 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
-20.82 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
-20.85 **** configure php-fpm to pass env vars ****
-20.85 sed: can't read /etc/php/8.3/fpm/pool.d/www.conf: No such file or directory
+ > [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         composer         php-redis         php8.3-zip         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure php-fpm to pass env vars ****" &&     if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&     echo "**** install kimai ****" &&     mkdir -p        /app/www &&     curl -fL -o         /tmp/kimai.tar.gz         "https://github.com/kimai/kimai/archive/refs/tags/2.43.0.tar.gz" || curl -fL -o         /tmp/kimai.tar.gz         "https://github.com/kimai/kimai/archive/refs/tags/v2.43.0.tar.gz" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo "**** install composer dependencies ****" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*         /config/.cache         /config/.composer:
+158.8 Generating optimized autoload files
+160.3 Class ParsedownTest located in ./vendor/erusev/parsedown/test/ParsedownTest.php does not comply with psr-0 autoloading standard. Skipping.
+160.4 94 packages you are using are looking for funding.
+160.4 Use the `composer fund` command to find out more!
+160.4 > symfony-cmd
+160.4 sh: 1: symfony-cmd: not found
+160.4 Script symfony-cmd handling the auto-scripts event returned with error code 127
+160.4 Script @auto-scripts was called via post-install-cmd
+160.4 Plugins have been disabled automatically as you are running as root, this may be the cause of the script failure.
+160.4 See also https://getcomposer.org/root
 ------
 Dockerfile:9
 --------------------
@@ -377,31 +1267,33 @@ Dockerfile:9
   14 | >>>         php8.3-intl \
   15 | >>>         php8.3-ldap \
   16 | >>>         php8.3-mysql \
-  17 | >>>         php-redis \
-  18 | >>>         php8.3-xml && \
-  19 | >>>     rm -rf /var/lib/apt/lists/* && \
-  20 | >>>     echo "**** configure php-fpm to pass env vars ****" && \
-  21 | >>>     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && \
-  22 | >>>     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
-  23 | >>>     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf && \
+  17 | >>>         composer \
+  18 | >>>         php-redis \
+  19 | >>>         php8.3-zip \
+  20 | >>>         php8.3-xml && \
+  21 | >>>     rm -rf /var/lib/apt/lists/* && \
+  22 | >>>     echo "**** configure php-fpm to pass env vars ****" && \
+  23 | >>>     if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
   24 | >>>     echo "**** install kimai ****" && \
   25 | >>>     mkdir -p\
   26 | >>>         /app/www && \
-  27 | >>>     curl -o \
-  28 | >>>         /tmp/kimai.tar.gz -L \
-  29 | >>>         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" && \
-  30 | >>>     tar xf \
-  31 | >>>         /tmp/kimai.tar.gz -C \
-  32 | >>>         /app/www --strip-components=1 && \
-  33 | >>>     echo "**** install composer dependencies ****" && \
-  34 | >>>     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction && \
-  35 | >>>     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap && \
-  36 | >>>     /usr/bin/composer clearcache -d /app/www/ && \
-  37 | >>>     echo "**** cleanup ****" && \
-  38 | >>>     rm -rf \
-  39 | >>>         /tmp/* \
-  40 | >>>         $HOME/.cache \
-  41 | >>>         $HOME/.composer
-  42 |     
+  27 | >>>     curl -fL -o \
+  28 | >>>         /tmp/kimai.tar.gz \
+  29 | >>>         "https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+  30 | >>>         /tmp/kimai.tar.gz \
+  31 | >>>         "https://github.com/kimai/kimai/archive/refs/tags/v${VERSION}.tar.gz" && \
+  32 | >>>     tar xf \
+  33 | >>>         /tmp/kimai.tar.gz -C \
+  34 | >>>         /app/www --strip-components=1 && \
+  35 | >>>     echo "**** install composer dependencies ****" && \
+  36 | >>>     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction && \
+  37 | >>>     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap && \
+  38 | >>>     /usr/bin/composer clearcache -d /app/www/ && \
+  39 | >>>     echo "**** cleanup ****" && \
+  40 | >>>     rm -rf \
+  41 | >>>         /tmp/* \
+  42 | >>>         $HOME/.cache \
+  43 | >>>         $HOME/.composer
+  44 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         php-redis         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo \"**** configure php-fpm to pass env vars ****\" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo \"**** install kimai ****\" &&     mkdir -p        /app/www &&     curl -o         /tmp/kimai.tar.gz -L         \"https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz\" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo \"**** install composer dependencies ****\" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/*         $HOME/.cache         $HOME/.composer" did not complete successfully: exit code: 2
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-gd         php8.3-intl         php8.3-ldap         php8.3-mysql         composer         php-redis         php8.3-zip         php8.3-xml &&     rm -rf /var/lib/apt/lists/* &&     echo \"**** configure php-fpm to pass env vars ****\" &&     if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&     echo \"**** install kimai ****\" &&     mkdir -p        /app/www &&     curl -fL -o         /tmp/kimai.tar.gz         \"https://github.com/kimai/kimai/archive/refs/tags/${VERSION}.tar.gz\" || curl -fL -o         /tmp/kimai.tar.gz         \"https://github.com/kimai/kimai/archive/refs/tags/v${VERSION}.tar.gz\" &&     tar xf         /tmp/kimai.tar.gz -C         /app/www --strip-components=1 &&     echo \"**** install composer dependencies ****\" &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction &&     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap &&     /usr/bin/composer clearcache -d /app/www/ &&     echo \"**** cleanup ****\" &&     rm -rf         /tmp/*         $HOME/.cache         $HOME/.composer" did not complete successfully: exit code: 127
