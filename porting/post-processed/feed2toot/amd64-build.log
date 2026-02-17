@@ -16,7 +16,7 @@
 #4 DONE 0.0s
 
 #5 [internal] load build context
-#5 transferring context: 4.67kB done
+#5 transferring context: 4.96kB done
 #5 DONE 0.0s
 
 #6 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
@@ -24,187 +24,187 @@
 #6 DONE 0.0s
 
 #7 [2/5] RUN echo "**** install feed2toot ****" &&   python3 -m venv /config/venv &&   /config/venv/bin/pip install -U --no-cache-dir     pip     wheel &&   /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/     feed2toot=="0.17" &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
-#7 0.122 **** install feed2toot ****
-#7 3.637 Requirement already satisfied: pip in ./venv/lib/python3.13/site-packages (25.3)
-#7 3.944 Collecting pip
-#7 4.107   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
-#7 4.147 Collecting wheel
-#7 4.172   Downloading wheel-0.46.3-py3-none-any.whl.metadata (2.4 kB)
-#7 4.206 Collecting packaging>=24.0 (from wheel)
-#7 4.231   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
-#7 4.258 Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
-#7 4.349    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 32.7 MB/s  0:00:00
-#7 4.375 Downloading wheel-0.46.3-py3-none-any.whl (30 kB)
-#7 4.400 Downloading packaging-26.0-py3-none-any.whl (74 kB)
-#7 4.420 Installing collected packages: pip, packaging, wheel
-#7 4.421   Attempting uninstall: pip
-#7 4.423     Found existing installation: pip 25.3
-#7 4.451     Uninstalling pip-25.3:
-#7 4.457       Successfully uninstalled pip-25.3
-#7 5.267 
-#7 5.268 Successfully installed packaging-26.0 pip-26.0.1 wheel-0.46.3
-#7 6.033 Looking in links: https://wheel-index.linuxserver.io/ubuntu/
-#7 6.037 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02492120>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 6.538 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024ccb90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 7.540 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cce10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 9.541 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cd090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 13.54 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cd310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 13.67 Collecting feed2toot==0.17
-#7 13.71   Downloading feed2toot-0.17.tar.gz (16 kB)
-#7 13.72   Installing build dependencies: started
-#7 22.27   Installing build dependencies: finished with status 'done'
-#7 22.27   Getting requirements to build wheel: started
-#7 22.91   Getting requirements to build wheel: finished with status 'done'
-#7 22.91   Preparing metadata (pyproject.toml): started
-#7 23.57   Preparing metadata (pyproject.toml): finished with status 'done'
-#7 23.57 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cde50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 24.07 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024ce0d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 25.08 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024ce350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 27.08 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024ce5d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 31.08 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024ce850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 31.11 Collecting beautifulsoup4 (from feed2toot==0.17)
-#7 31.14   Downloading beautifulsoup4-4.14.3-py3-none-any.whl.metadata (3.8 kB)
-#7 31.14 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cead0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 31.64 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 32.64 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf4d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 34.64 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 38.64 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf9d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 38.67 Collecting feedparser (from feed2toot==0.17)
-#7 38.70   Downloading feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
-#7 38.70 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 39.20 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc023787d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 40.21 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 42.21 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 46.21 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378f50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 46.27 Collecting Mastodon.py (from feed2toot==0.17)
-#7 46.30   Downloading mastodon_py-2.1.4-py3-none-any.whl.metadata (4.5 kB)
-#7 46.30 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cfb10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 46.81 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 47.81 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 49.81 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 53.81 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 53.84 Collecting soupsieve>=1.6.1 (from beautifulsoup4->feed2toot==0.17)
-#7 53.87   Downloading soupsieve-2.8.3-py3-none-any.whl.metadata (4.6 kB)
-#7 53.87 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cead0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 54.38 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 55.38 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf4d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 57.38 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 61.38 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc023791d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 61.41 Collecting typing-extensions>=4.0.0 (from beautifulsoup4->feed2toot==0.17)
-#7 61.44   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
-#7 61.44 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 61.94 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cf610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 62.94 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc023791d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 64.95 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 68.95 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc023796d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 68.98 Collecting sgmllib3k (from feedparser->feed2toot==0.17)
-#7 69.00   Downloading sgmllib3k-1.0.0.tar.gz (5.8 kB)
-#7 69.00   Installing build dependencies: started
-#7 77.51   Installing build dependencies: finished with status 'done'
-#7 77.51   Getting requirements to build wheel: started
-#7 78.14   Getting requirements to build wheel: finished with status 'done'
-#7 78.15   Preparing metadata (pyproject.toml): started
-#7 78.80   Preparing metadata (pyproject.toml): finished with status 'done'
-#7 78.80 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 79.30 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 80.31 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 82.31 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 86.31 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 86.35 Collecting requests>=2.4.2 (from Mastodon.py->feed2toot==0.17)
-#7 86.38   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
-#7 86.38 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc024cead0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 86.88 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 87.89 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 89.89 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 93.89 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 0.150 **** install feed2toot ****
+#7 3.925 Requirement already satisfied: pip in ./venv/lib/python3.13/site-packages (25.3)
+#7 3.971 Collecting pip
+#7 3.983   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
+#7 4.009 Collecting wheel
+#7 4.022   Downloading wheel-0.46.3-py3-none-any.whl.metadata (2.4 kB)
+#7 4.043 Collecting packaging>=24.0 (from wheel)
+#7 4.053   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+#7 4.066 Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+#7 4.072    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 443.3 MB/s  0:00:00
+#7 4.083 Downloading wheel-0.46.3-py3-none-any.whl (30 kB)
+#7 4.094 Downloading packaging-26.0-py3-none-any.whl (74 kB)
+#7 4.116 Installing collected packages: pip, packaging, wheel
+#7 4.117   Attempting uninstall: pip
+#7 4.120     Found existing installation: pip 25.3
+#7 4.163     Uninstalling pip-25.3:
+#7 4.170       Successfully uninstalled pip-25.3
+#7 5.108 
+#7 5.109 Successfully installed packaging-26.0 pip-26.0.1 wheel-0.46.3
+#7 5.943 Looking in links: https://wheel-index.linuxserver.io/ubuntu/
+#7 5.948 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1894036120>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 6.449 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f20b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 7.451 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f20e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 9.453 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f21090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 13.45 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f21310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 13.54 Collecting feed2toot==0.17
+#7 13.61   Downloading feed2toot-0.17.tar.gz (16 kB)
+#7 13.63   Installing build dependencies: started
+#7 22.21   Installing build dependencies: finished with status 'done'
+#7 22.21   Getting requirements to build wheel: started
+#7 22.92   Getting requirements to build wheel: finished with status 'done'
+#7 22.92   Preparing metadata (pyproject.toml): started
+#7 23.63   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 23.64 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f21e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 24.14 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f220d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 25.14 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f22350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 27.14 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f225d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 31.15 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f22850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 31.16 Collecting beautifulsoup4 (from feed2toot==0.17)
+#7 31.18   Downloading beautifulsoup4-4.14.3-py3-none-any.whl.metadata (3.8 kB)
+#7 31.18 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f22ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 31.68 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 32.68 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f234d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 34.69 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 38.69 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f239d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 38.70 Collecting feedparser (from feed2toot==0.17)
+#7 38.72   Downloading feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
+#7 38.72 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 39.22 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc87d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 40.22 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 42.23 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 46.23 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8f50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 46.25 Collecting Mastodon.py (from feed2toot==0.17)
+#7 46.26   Downloading mastodon_py-2.1.4-py3-none-any.whl.metadata (4.5 kB)
+#7 46.26 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23b10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 46.76 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 47.77 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 49.77 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 53.77 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 53.79 Collecting soupsieve>=1.6.1 (from beautifulsoup4->feed2toot==0.17)
+#7 53.80   Downloading soupsieve-2.8.3-py3-none-any.whl.metadata (4.6 kB)
+#7 53.80 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f22ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 54.30 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 55.30 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f234d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 57.31 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 61.31 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc91d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 61.33 Collecting typing-extensions>=4.0.0 (from beautifulsoup4->feed2toot==0.17)
+#7 61.34   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#7 61.34 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 61.84 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f23610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 62.84 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc91d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 64.85 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 68.85 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc96d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 68.86 Collecting sgmllib3k (from feedparser->feed2toot==0.17)
+#7 68.87   Downloading sgmllib3k-1.0.0.tar.gz (5.8 kB)
+#7 68.87   Installing build dependencies: started
+#7 77.45   Installing build dependencies: finished with status 'done'
+#7 77.45   Getting requirements to build wheel: started
+#7 78.13   Getting requirements to build wheel: finished with status 'done'
+#7 78.13   Preparing metadata (pyproject.toml): started
+#7 78.85   Preparing metadata (pyproject.toml): finished with status 'done'
+#7 78.85 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 79.35 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 80.35 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 82.36 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 86.36 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 86.38 Collecting requests>=2.4.2 (from Mastodon.py->feed2toot==0.17)
+#7 86.39   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+#7 86.40 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893f22ad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 86.90 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 87.90 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 89.90 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 93.90 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
 #7 93.92 Collecting python-dateutil (from Mastodon.py->feed2toot==0.17)
-#7 93.94   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
-#7 93.95 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 94.45 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 95.45 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 97.45 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237ae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 101.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237b250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 93.93   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#7 93.93 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 94.43 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 95.43 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 97.44 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 101.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcb250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
 #7 101.5 Collecting python-magic (from Mastodon.py->feed2toot==0.17)
 #7 101.5   Downloading python_magic-0.4.27-py2.py3-none-any.whl.metadata (5.8 kB)
-#7 101.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237b610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 102.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237bd90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 103.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc022f0050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 105.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc022f02d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 109.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc022f0550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 109.1 Collecting decorator>=4.0.0 (from Mastodon.py->feed2toot==0.17)
-#7 109.1   Downloading decorator-5.2.1-py3-none-any.whl.metadata (3.9 kB)
-#7 109.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237b610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 109.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237b750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 110.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237b390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 112.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237afd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 116.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 116.7 Collecting blurhash>=1.1.4 (from Mastodon.py->feed2toot==0.17)
-#7 116.7   Downloading blurhash-1.1.5-py2.py3-none-any.whl.metadata (4.0 kB)
-#7 116.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 117.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 118.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 120.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237ac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 124.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02310050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 124.3 Collecting charset_normalizer<4,>=2 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
-#7 124.3   Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
-#7 124.3 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237b110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 124.8 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 125.8 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 127.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 131.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 131.9 Collecting idna<4,>=2.5 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
-#7 131.9   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
-#7 131.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237aad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 132.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 133.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a5d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 135.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 139.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237afd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 139.4 Collecting urllib3<3,>=1.21.1 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
-#7 139.5   Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
-#7 139.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 140.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 141.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 143.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 147.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 147.0 Collecting certifi>=2017.4.17 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
-#7 147.0   Downloading certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
-#7 147.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc0237a490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 147.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 148.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 150.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02379310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 154.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7efc02378910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 154.6 Collecting six>=1.5 (from python-dateutil->Mastodon.py->feed2toot==0.17)
-#7 154.6   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
-#7 154.6 Downloading beautifulsoup4-4.14.3-py3-none-any.whl (107 kB)
-#7 154.7 Downloading soupsieve-2.8.3-py3-none-any.whl (37 kB)
-#7 154.7 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
-#7 154.7 Downloading feedparser-6.0.12-py3-none-any.whl (81 kB)
-#7 154.7 Downloading mastodon_py-2.1.4-py3-none-any.whl (123 kB)
-#7 154.8 Downloading blurhash-1.1.5-py2.py3-none-any.whl (6.6 kB)
-#7 154.8 Downloading decorator-5.2.1-py3-none-any.whl (9.2 kB)
-#7 154.8 Downloading requests-2.32.5-py3-none-any.whl (64 kB)
-#7 154.8 Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
-#7 154.9 Downloading idna-3.11-py3-none-any.whl (71 kB)
-#7 154.9 Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
-#7 154.9 Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
-#7 154.9 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
-#7 155.0 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
-#7 155.0 Downloading python_magic-0.4.27-py2.py3-none-any.whl (13 kB)
-#7 155.0 Building wheels for collected packages: feed2toot, sgmllib3k
-#7 155.0   Building wheel for feed2toot (pyproject.toml): started
-#7 155.7   Building wheel for feed2toot (pyproject.toml): finished with status 'done'
-#7 155.7   Created wheel for feed2toot: filename=feed2toot-0.17-py3-none-any.whl size=40566 sha256=58789f69e2cd6a04bc4646def4d26e5916fbbba6636c911bcf1a4aab20a9a124
-#7 155.7   Stored in directory: /tmp/pip-ephem-wheel-cache-ahkb_0zi/wheels/dd/49/1b/4c2024357f726683f930a709caa77d154ed9cd1daefa09e982
-#7 155.7   Building wheel for sgmllib3k (pyproject.toml): started
-#7 156.4   Building wheel for sgmllib3k (pyproject.toml): finished with status 'done'
-#7 156.4   Created wheel for sgmllib3k: filename=sgmllib3k-1.0.0-py3-none-any.whl size=6091 sha256=51bb2054b39b3d64275078a0afc757a204206c8c02815db35745ed1bd122f1c3
-#7 156.4   Stored in directory: /tmp/pip-ephem-wheel-cache-ahkb_0zi/wheels/3d/4d/ef/37cdccc18d6fd7e0dd7817dcdf9146d4d6789c32a227a28134
-#7 156.4 Successfully built feed2toot sgmllib3k
-#7 156.4 Installing collected packages: sgmllib3k, blurhash, urllib3, typing-extensions, soupsieve, six, python-magic, idna, feedparser, decorator, charset_normalizer, certifi, requests, python-dateutil, beautifulsoup4, Mastodon.py, feed2toot
-#7 156.9 
-#7 156.9 Successfully installed Mastodon.py-2.1.4 beautifulsoup4-4.14.3 blurhash-1.1.5 certifi-2026.1.4 charset_normalizer-3.4.4 decorator-5.2.1 feed2toot-0.17 feedparser-6.0.12 idna-3.11 python-dateutil-2.9.0.post0 python-magic-0.4.27 requests-2.32.5 sgmllib3k-1.0.0 six-1.17.0 soupsieve-2.8.3 typing-extensions-4.15.0 urllib3-2.6.3
-#7 157.0 **** cleanup ****
-#7 DONE 157.0s
+#7 101.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcb610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 102.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcbd90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 103.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893d40050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 105.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893d402d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 109.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893d40550>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 109.0 Collecting decorator>=4.0.0 (from Mastodon.py->feed2toot==0.17)
+#7 109.0   Downloading decorator-5.2.1-py3-none-any.whl.metadata (3.9 kB)
+#7 109.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcb610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 109.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcb750>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 110.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcb390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 112.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcafd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 116.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 116.5 Collecting blurhash>=1.1.4 (from Mastodon.py->feed2toot==0.17)
+#7 116.5   Downloading blurhash-1.1.5-py2.py3-none-any.whl.metadata (4.0 kB)
+#7 116.5 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 117.0 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 118.0 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca990>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 120.0 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcac10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 124.0 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893d60050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 124.1 Collecting charset_normalizer<4,>=2 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
+#7 124.1   Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+#7 124.1 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcb110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 124.6 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 125.6 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 127.6 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 131.6 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 131.7 Collecting idna<4,>=2.5 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
+#7 131.7   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+#7 131.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcaad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 132.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 133.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca5d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 135.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 139.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dcafd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 139.2 Collecting urllib3<3,>=1.21.1 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
+#7 139.2   Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+#7 139.2 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 139.7 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 140.7 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 142.7 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 146.7 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 146.7 Collecting certifi>=2017.4.17 (from requests>=2.4.2->Mastodon.py->feed2toot==0.17)
+#7 146.8   Downloading certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
+#7 146.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dca490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 147.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 148.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 150.3 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc9310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 154.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1893dc8910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 154.3 Collecting six>=1.5 (from python-dateutil->Mastodon.py->feed2toot==0.17)
+#7 154.3   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#7 154.3 Downloading beautifulsoup4-4.14.3-py3-none-any.whl (107 kB)
+#7 154.3 Downloading soupsieve-2.8.3-py3-none-any.whl (37 kB)
+#7 154.3 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#7 154.3 Downloading feedparser-6.0.12-py3-none-any.whl (81 kB)
+#7 154.4 Downloading mastodon_py-2.1.4-py3-none-any.whl (123 kB)
+#7 154.4 Downloading blurhash-1.1.5-py2.py3-none-any.whl (6.6 kB)
+#7 154.4 Downloading decorator-5.2.1-py3-none-any.whl (9.2 kB)
+#7 154.4 Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+#7 154.4 Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+#7 154.4 Downloading idna-3.11-py3-none-any.whl (71 kB)
+#7 154.4 Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+#7 154.5 Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
+#7 154.5 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#7 154.5 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#7 154.5 Downloading python_magic-0.4.27-py2.py3-none-any.whl (13 kB)
+#7 154.5 Building wheels for collected packages: feed2toot, sgmllib3k
+#7 154.5   Building wheel for feed2toot (pyproject.toml): started
+#7 155.3   Building wheel for feed2toot (pyproject.toml): finished with status 'done'
+#7 155.3   Created wheel for feed2toot: filename=feed2toot-0.17-py3-none-any.whl size=40566 sha256=b6277dc649e0684dd6c122b55c43588fc1f03fb4a0b3c0e12bdca730472de88f
+#7 155.3   Stored in directory: /tmp/pip-ephem-wheel-cache-7mpnhvqd/wheels/dd/49/1b/4c2024357f726683f930a709caa77d154ed9cd1daefa09e982
+#7 155.3   Building wheel for sgmllib3k (pyproject.toml): started
+#7 156.1   Building wheel for sgmllib3k (pyproject.toml): finished with status 'done'
+#7 156.1   Created wheel for sgmllib3k: filename=sgmllib3k-1.0.0-py3-none-any.whl size=6091 sha256=715d4264b74f8b553c693db8e576dd608390653061ba6b7a8d1baddec045e208
+#7 156.1   Stored in directory: /tmp/pip-ephem-wheel-cache-7mpnhvqd/wheels/3d/4d/ef/37cdccc18d6fd7e0dd7817dcdf9146d4d6789c32a227a28134
+#7 156.1 Successfully built feed2toot sgmllib3k
+#7 156.1 Installing collected packages: sgmllib3k, blurhash, urllib3, typing-extensions, soupsieve, six, python-magic, idna, feedparser, decorator, charset_normalizer, certifi, requests, python-dateutil, beautifulsoup4, Mastodon.py, feed2toot
+#7 156.7 
+#7 156.7 Successfully installed Mastodon.py-2.1.4 beautifulsoup4-4.14.3 blurhash-1.1.5 certifi-2026.1.4 charset_normalizer-3.4.4 decorator-5.2.1 feed2toot-0.17 feedparser-6.0.12 idna-3.11 python-dateutil-2.9.0.post0 python-magic-0.4.27 requests-2.32.5 sgmllib3k-1.0.0 six-1.17.0 soupsieve-2.8.3 typing-extensions-4.15.0 urllib3-2.6.3
+#7 156.8 **** cleanup ****
+#7 DONE 156.9s
 
 #8 [3/5] COPY . /
 #8 DONE 0.0s
@@ -218,18 +218,11 @@
 #11 exporting to image
 #11 exporting layers
 #11 exporting layers 0.7s done
-#11 exporting manifest sha256:8ef7bb093448d28b311159782e1d4fd3222783ae7b132bda247c1a7c30d5828c done
-#11 exporting config sha256:538af38682a265524c08058cd6aab127c7adc1170a5b37161b8b84d121e54684 done
-#11 exporting attestation manifest sha256:f58d92cdaa664d96b34ce0bc32ce182a5f44035f2a6805d31dec5bf736789298 done
-#11 exporting manifest list sha256:82db3bb22eb681ebaacb2b87ca1fb201cb17224009a8321c79996cb70a0614a9 done
+#11 exporting manifest sha256:c18a2373c15c1ef244f33ff0040f4c947723fc4fe4a77dc1693de8be3431a9ce done
+#11 exporting config sha256:6bc15dccb3f20eeadb54c10387e626f6d839aabb5010ad349da9c6c54b12762c done
+#11 exporting attestation manifest sha256:03ec402e5a92df59a814d7a74331cc6330696766ebbf14263dcda5a0d80fc05d done
+#11 exporting manifest list sha256:8b842e684334af6d215da237b2cc302f2ae61707298036e81767219f03453bb4 done
 #11 naming to docker.io/library/feed2toot:0.17 done
 #11 unpacking to docker.io/library/feed2toot:0.17
-#11 ...
-
-#6 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#6 sha256:46b905425667995840728594de33bf229125cd6216dbd24f11d394a5b65fef16 27.26MB / 27.26MB 0.6s done
-#6 DONE 0.7s
-
-#11 exporting to image
-#11 unpacking to docker.io/library/feed2toot:0.17 0.9s done
-#11 DONE 1.6s
+#11 unpacking to docker.io/library/feed2toot:0.17 0.3s done
+#11 DONE 1.1s

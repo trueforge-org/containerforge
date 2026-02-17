@@ -37,3 +37,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: PASS
 - Reason: Build succeeds after base-policy alignment to python-node and venv/playwright path fixes.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 next large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after python-node alignment and venv/playwright path fixes.
+- Full log: `amd64-build.log`

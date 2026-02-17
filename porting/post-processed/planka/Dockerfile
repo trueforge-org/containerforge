@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.13.12
+FROM ghcr.io/trueforge-org/python-node:3.13.12 AS buildstage
 
 # set version label
 ARG VERSION
@@ -9,11 +9,9 @@ RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     libgif7 \
     libgsf-1-114 \
-    nodejs \
     libvips42 && \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    npm \
     python3-setuptools && \
   echo "**** install planka ****" && \
   mkdir -p /build && \

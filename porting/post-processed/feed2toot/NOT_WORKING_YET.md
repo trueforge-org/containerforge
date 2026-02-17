@@ -26,3 +26,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: PASS
 - Reason: Build succeeds after Debian/Ubuntu wheel index and venv pip-path fix.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 next large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds with Ubuntu wheel-index and venv-pip path updates.
+- Full log: `amd64-build.log`

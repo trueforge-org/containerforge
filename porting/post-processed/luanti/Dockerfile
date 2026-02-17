@@ -47,7 +47,7 @@ RUN \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
         libgmp10 \
-        libhiredis0.14 \
+        libhiredis1.1.0 \
         libleveldb1d \
         libgcc-s1 \
         libpq5 \

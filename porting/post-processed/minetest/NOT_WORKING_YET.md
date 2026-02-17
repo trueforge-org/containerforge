@@ -38,3 +38,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Still failing in deep multi-component compile chain; requires broader upstream/toolchain adaptation.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 next large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in deep compile chain with non-localized upstream/toolchain issues.
+- Full log: `amd64-build.log`
