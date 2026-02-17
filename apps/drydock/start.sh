@@ -9,20 +9,20 @@ if [ "$(id -u)" = "0" ]; then
 	elif [ -S /var/run/docker.sock ]; then
 		DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
 		if [ "$DOCKER_GID" != "0" ]; then
-			# Non-root GID (e.g. Linux docker group): add node to socket group, drop to node
+			# Non-root GID (e.g. Linux docker group): add apps to socket group, drop to apps
 			EXISTING_GROUP=$(getent group "$DOCKER_GID" | cut -d: -f1)
 			if [ -n "$EXISTING_GROUP" ]; then
-				addgroup node "$EXISTING_GROUP" 2>/dev/null || true
+				usermod -aG "$EXISTING_GROUP" apps 2>/dev/null || true
 			else
-				addgroup -g "$DOCKER_GID" -S docker 2>/dev/null || true
-				addgroup node docker 2>/dev/null || true
+				groupadd -g "$DOCKER_GID" docker 2>/dev/null || true
+				usermod -aG docker apps 2>/dev/null || true
 			fi
-			exec su-exec node "$0" "$@"
+			exec gosu apps "$0" "$@"
 		fi
 		# GID is 0 (Docker Desktop / OrbStack): stay as root — matches Portainer/Watchtower/Dozzle
 	else
-		# No socket mounted: drop to node
-		exec su-exec node "$0" "$@"
+		# No socket mounted: drop to apps
+		exec gosu apps "$0" "$@"
 	fi
 fi
 

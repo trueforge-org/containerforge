@@ -1,60 +1,100 @@
-FROM ghcr.io/trueforge-org/node:rolling@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 AS dependencies
+# Base stage - install system dependencies
+FROM ghcr.io/trueforge-org/node:rolling@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122 AS base
 
 USER root
 
 ARG VERSION
 
 ENV WORKDIR=/app
-ENV WUD_LOG_FORMAT=text
-ENV VERSION=$VERSION
+ENV DD_LOG_FORMAT=text
+ENV DD_VERSION=$VERSION
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 WORKDIR /app
 
-RUN mkdir -p /app/src && \
-    curl -fsSL "https://github.com/trueforge-org/drydock/archive/refs/tags/${VERSION}.tar.gz" \
-        | tar xzf - -C /app/src --strip-components=1 && \
-    cd src \
-    && cd /app/src/app && npm ci \
-    && cd /app/src/e2e && npm ci \
-    && cd /app/src/ui && npm ci && npm run build \
-    && cp /app/src/app/package* /app/src && \
-    cd /app/src/ && npm ci --omit=dev --omit=optional --no-audit --no-fund && \
-    chown -R apps:apps /app && chmod -R 755 /app && \
+# Install system packages, trivy, and cosign
+# hadolint ignore=DL3008
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        bash \
+        curl \
+        git \
+        gosu \
+        jq \
+        openssl \
+        tini \
+        tzdata \
+    && curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/75c4dc0f45c5d7ffd05ae26df1e0c666787bdf2a/contrib/install.sh | sh -s -- -b /usr/local/bin \
+    && curl -fsSL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o /usr/local/bin/cosign \
+    && chmod +x /usr/local/bin/cosign \
+    && mkdir -p /config && \
+    chown -R apps:apps /app /config && chmod -R 755 /app /config && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-FROM ghcr.io/trueforge-org/node:rolling@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed9b334bf0acadf64aab31da483e40122
+# Build stage for backend app
+FROM base AS app-build
+
+USER root
+
+RUN mkdir -p /app/src && \
+    curl -fsSL "https://github.com/trueforge-org/drydock/archive/refs/tags/${VERSION}.tar.gz" \
+        | tar xzf - -C /app/src --strip-components=1
+
+WORKDIR /app/src/app
+
+# Install dependencies (including dev)
+RUN npm ci --include=dev --omit=optional --no-audit --no-fund --no-update-notifier
+
+# Build and remove dev dependencies
+RUN npm run build && \
+    npm prune --omit=dev
+
+# Build stage for frontend UI
+FROM base AS ui-build
+
+USER root
+
+RUN mkdir -p /app/src && \
+    curl -fsSL "https://github.com/trueforge-org/drydock/archive/refs/tags/${VERSION}.tar.gz" \
+        | tar xzf - -C /app/src --strip-components=1
+
+WORKDIR /app/src/ui
+
+# Install ui dependencies
+RUN npm ci --no-audit --no-fund --no-update-notifier
+
+# Build static assets
+RUN npm run build
+
+# Release stage
+FROM base AS release
 
 ARG VERSION
 
-
-
 USER root
 
-RUN mkdir -p /store && \
-    chown -R apps:apps /app /store && chmod -R 755 /app /store
+# Copy startup script
+COPY --chmod=0775 start.sh /
 
-USER apps:apps
+# Copy node_modules from app-build
+COPY --from=app-build /app/src/app/node_modules /app/node_modules
 
-# Copy app
-COPY --from=dependencies  /app/src/app/ /app
-
-## Copy node_modules
-COPY --from=dependencies /app/src/node_modules /app/node_modules
+# Copy app (dist)
+COPY --from=app-build /app/src/app/dist /app/dist
+COPY --from=app-build /app/src/app/package.json /app/package.json
 
 # Copy ui
-COPY --from=dependencies  /app/src/ui/dist/ /app/ui
+COPY --from=ui-build /app/src/ui/dist /app/ui
 
-COPY --chmod=0775 . /
-
-USER root
+USER apps
 
 ENV WORKDIR=/app \
-    WUD_LOG_FORMAT=text \
-    WUD_REGISTRY_CUSTOM_TRUEFORGE_URL=https://oci.trueforge.org \
-    WUD_WATCHER_local_WATCHBYDEFAULT=false
+    DD_LOG_FORMAT=text \
+    DD_VERSION=$VERSION \
+    DD_REGISTRY_CUSTOM_TRUEFORGE_URL=https://oci.trueforge.org \
+    DD_WATCHER_local_WATCHBYDEFAULT=false
 
 WORKDIR /app
 
-HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:3000/" ]
+HEALTHCHECK --interval=30s --timeout=5s CMD sh -c 'if [ -z "$DD_SERVER_ENABLED" ] || [ "$DD_SERVER_ENABLED" = "true" ]; then curl --fail http://localhost:${DD_SERVER_PORT:-3000}/health || exit 1; else exit 0; fi'
