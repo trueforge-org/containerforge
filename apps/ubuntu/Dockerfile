@@ -127,7 +127,6 @@ COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:92b4d32099ca9c9290bed83b4ba7
 #Copy root files
 COPY --chmod=0775 . /
 
-VOLUME ["/config", "/data"]
 WORKDIR /config
 
 
