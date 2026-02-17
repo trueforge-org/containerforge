@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.13.12 AS buildbase
+FROM ghcr.io/trueforge-org/python-node:3.13.12 AS buildbase
 
 # set version label
 ARG VERSION
@@ -11,9 +11,7 @@ RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
-    npm \
-    python3-dev \
-    yarnpkg && \
+    python3-dev && \
   echo "*** install your_spotify ***" && \
   (curl -fL -o \
     /tmp/your_spotify.tar.gz \
@@ -49,7 +47,7 @@ RUN \
   rm -rf /app/www/node_modules && \
   yarnpkg cache clean
 
-FROM ghcr.io/trueforge-org/python:3.13.12
+FROM ghcr.io/trueforge-org/python-node:3.13.12
 
 ARG VERSION
 ARG TARGETARCH
@@ -71,9 +69,7 @@ RUN \
     python3-dev && \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    nodejs \
-    npm \
-    yarnpkg && \
+    ca-certificates && \
   echo "**** install your_spotify ****" && \
   cd /app/www/apps/server && \
   yarnpkg --production --frozen-lockfile && \

@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:22.22.0
+FROM ghcr.io/trueforge-org/python-node:3.13.12
 
 # set version label
 ARG VERSION

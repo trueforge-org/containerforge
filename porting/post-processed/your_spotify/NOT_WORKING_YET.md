@@ -31,3 +31,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Still fails during client yarn build due Node engine mismatch (requires Node >=20 in dependency tree).
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch + base-policy pass)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after python-node base alignment and preserving modern node toolchain.
+- Full log: `amd64-build.log`

@@ -1,5 +1,5 @@
 ## Move to our an own container
-FROM ghcr.io/sigstore/cosign/cosign:latest@sha256:b29487e48205d875c324c79583e2806d9d269c0fa299e0861bbec023d8430c8b AS cosign-bin
+FROM ghcr.io/trueforge-org/node:22.22.0
 
 FROM ghcr.io/trueforge-org/ubuntu:24.04
 

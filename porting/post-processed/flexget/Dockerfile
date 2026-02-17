@@ -1,4 +1,4 @@
-FROM ghcr.io/by275/libtorrent:2-alpine3.22@sha256:647bd0036eb75df110dc0277118d2941babffe0e7b53b921a363fa573ea43d83 AS libtorrent
+FROM ghcr.io/trueforge-org/python-node:3.13.12
 
 FROM ghcr.io/trueforge-org/python:3.13.12
 

@@ -126,18 +126,19 @@ RUN \
     yasm \
     zlib1g-dev && \
   mkdir -p /tmp/rust && \
+  RUST_ARCH="$TARGETARCH" && if [ "$TARGETARCH" = "amd64" ]; then RUST_ARCH="x86_64"; elif [ "$TARGETARCH" = "arm64" ]; then RUST_ARCH="aarch64"; fi && \
   RUST_VERSION=$(curl -fsX GET https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name') && \
-  curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-$TARGETARCH-unknown-linux-gnu.tar.gz" && \
+  curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-${RUST_ARCH}-unknown-linux-gnu.tar.gz" && \
   tar xf /tmp/rust.tar.gz -C /tmp/rust --strip-components=1 && \
   cd /tmp/rust && \
   ./install.sh && \
   cargo install bindgen-cli cargo-c cbindgen --locked && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
-  pip install --no-cache-dir cmake==3.31.6 mako meson ninja packaging ply pyyaml
+  /config/venv/bin/pip install --no-cache-dir cmake==3.31.6 mako meson ninja packaging ply pyyaml
 
 # compile 3rd party libs
 RUN \

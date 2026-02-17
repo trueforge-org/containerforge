@@ -1,6 +1,6 @@
 ############## picons stage ##############
 # built by https://github.com/linuxserver/picons-builder
-FROM ghcr.io/trueforge-org/picons-builder as piconsstage
+FROM ghcr.io/trueforge-org/python:3.13.12
 
 
 FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage

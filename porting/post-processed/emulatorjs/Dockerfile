@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.26.0 as migrationbuilder
+FROM ghcr.io/trueforge-org/python-node:3.13.12
 USER root
 
 RUN \

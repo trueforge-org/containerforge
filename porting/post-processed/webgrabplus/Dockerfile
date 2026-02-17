@@ -28,6 +28,7 @@ RUN \
   fi && \
   echo "Found Webgrabplus version ${VERSION}" && \
   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^"]+\\.gz' | head -n1) && \
+  if [ -z "${WEBGRAB_URL}" ]; then WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw | grep -Eo 'https://[^"]+\\.gz' | head -n1); fi && \
   mkdir -p \
     /app/wg++ && \
   curl -o /tmp/wg++.tar.gz -L \

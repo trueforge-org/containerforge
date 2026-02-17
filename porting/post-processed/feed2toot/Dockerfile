@@ -12,10 +12,10 @@ ENV PYTHONIOENCODING=utf-8 \
 
 RUN echo "**** install feed2toot ****" && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     feed2toot=="${VERSION}" && \
   echo "**** cleanup ****" && \
   rm -rf \

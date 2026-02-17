@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
+FROM ghcr.io/trueforge-org/python-node:3.13.12
 
 # set version label
 ARG VERSION

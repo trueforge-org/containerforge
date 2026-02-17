@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:22.22.0 AS wwwstage
+FROM ghcr.io/trueforge-org/python-node:3.13.12
 
 ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
 USER root

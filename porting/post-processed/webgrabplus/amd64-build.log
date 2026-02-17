@@ -5,7 +5,7 @@
 #1 DONE 0.0s
 
 #2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 1.60kB done
+#2 transferring dockerfile: 1.75kB done
 #2 DONE 0.0s
 
 #3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
@@ -16,83 +16,83 @@
 #4 DONE 0.0s
 
 #5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 done
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
 #5 CACHED
 
 #6 [internal] load build context
-#6 transferring context: 2.38kB done
+#6 transferring context: 7.42kB done
 #6 DONE 0.0s
 
-#7 [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo "**** install dotnet sdk ****" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo "**** install webgrabplus ****" &&   if [ -z "5.5.0" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|');   fi &&   echo "Found Webgrabplus version 5.5.0" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v5.5.0 | grep -Eo 'https://[^"]+\\.gz' | head -n1) &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     "${WEBGRAB_URL}" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo "**** download siteini.pack ****" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*
-#7 0.158 **** install packages ****
-#7 0.427 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#7 0.596 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#7 0.597 Get:3 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#7 0.634 Get:4 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#7 0.742 Get:5 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#7 0.804 Get:6 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#7 1.201 Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#7 1.351 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#7 1.502 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#7 1.960 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#7 2.641 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#7 2.752 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#7 2.864 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#7 2.975 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#7 3.103 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#7 3.241 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#7 3.369 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#7 3.478 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#7 3.527 Fetched 36.1 MB in 3s (10.8 MB/s)
-#7 3.527 Reading package lists...
-#7 4.368 Reading package lists...
-#7 5.236 Building dependency tree...
-#7 5.438 Reading state information...
-#7 5.647 libicu74 is already the newest version (74.2-1ubuntu3.1).
-#7 5.647 libicu74 set to manually installed.
-#7 5.647 The following NEW packages will be installed:
-#7 5.648   iputils-ping
-#7 5.775 0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.
-#7 5.775 Need to get 44.6 kB of archives.
-#7 5.775 After this operation, 124 kB of additional disk space will be used.
-#7 5.775 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 iputils-ping amd64 3:20240117-1ubuntu0.1 [44.6 kB]
-#7 5.888 debconf: delaying package configuration, since apt-utils is not installed
-#7 5.918 Fetched 44.6 kB in 0s (370 kB/s)
-#7 5.932 Selecting previously unselected package iputils-ping.
-#7 5.932 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
-#7 5.944 Preparing to unpack .../iputils-ping_3%3a20240117-1ubuntu0.1_amd64.deb ...
-#7 5.945 Unpacking iputils-ping (3:20240117-1ubuntu0.1) ...
-#7 5.965 Setting up iputils-ping (3:20240117-1ubuntu0.1) ...
-#7 5.988 **** install dotnet sdk ****
-#7 5.995   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-#7 5.996                                  Dload  Upload   Total   Spent    Left  Speed
-#7 5.996   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-#7 6.424 100 63488    0 63488    0     0   144k      0 --:--:-- --:--:-- --:--:--  144k
-#7 17.65 dotnet-install: Attempting to download using primary link https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz
-#7 18.68 dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz size is 33516105 bytes.
-#7 18.68 dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz
-#7 19.41 dotnet-install: Downloaded file size is 33516105 bytes.
-#7 19.41 dotnet-install: The remote and local file sizes are equal.
-#7 19.45 dotnet-install: Installed version is 9.0.13
-#7 19.45 dotnet-install: Adding to current process PATH: `/app/dotnet`. Note: This change will be visible only when sourcing script.
-#7 19.45 dotnet-install: Note that the script does not resolve dependencies during installation.
-#7 19.45 dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
-#7 19.45 dotnet-install: Installation finished successfully.
-#7 19.45 **** install webgrabplus ****
-#7 19.45 Found Webgrabplus version 5.5.0
-#7 ERROR: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo \"**** install dotnet sdk ****\" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo \"**** install webgrabplus ****\" &&   if [ -z \"$VERSION\" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\\(.*\\)\">V.*|\\1|');   fi &&   echo \"Found Webgrabplus version ${VERSION}\" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^\"]+\\\\.gz' | head -n1) &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     \"${WEBGRAB_URL}\" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo \"**** download siteini.pack ****\" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*" did not complete successfully: exit code: 1
+#7 [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo "**** install dotnet sdk ****" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo "**** install webgrabplus ****" &&   if [ -z "5.5.0" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|');   fi &&   echo "Found Webgrabplus version 5.5.0" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v5.5.0 | grep -Eo 'https://[^"]+\\.gz' | head -n1) &&   if [ -z "${WEBGRAB_URL}" ]; then WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw | grep -Eo 'https://[^"]+\\.gz' | head -n1); fi &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     "${WEBGRAB_URL}" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo "**** download siteini.pack ****" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*
+#7 0.143 **** install packages ****
+#7 0.267 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.446 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.538 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 0.811 Get:4 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 0.863 Get:5 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 0.937 Get:6 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.209 Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.398 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.589 Get:9 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.863 Get:10 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 2.035 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 2.537 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 3.415 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 3.591 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 3.753 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 3.892 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 4.056 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 4.195 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 4.208 Fetched 36.1 MB in 4s (8,922 kB/s)
+#7 4.208 Reading package lists...
+#7 5.036 Reading package lists...
+#7 5.855 Building dependency tree...
+#7 6.014 Reading state information...
+#7 6.191 libicu74 is already the newest version (74.2-1ubuntu3.1).
+#7 6.191 libicu74 set to manually installed.
+#7 6.191 The following NEW packages will be installed:
+#7 6.192   iputils-ping
+#7 6.343 0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.
+#7 6.343 Need to get 44.6 kB of archives.
+#7 6.343 After this operation, 124 kB of additional disk space will be used.
+#7 6.343 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 iputils-ping amd64 3:20240117-1ubuntu0.1 [44.6 kB]
+#7 6.439 debconf: delaying package configuration, since apt-utils is not installed
+#7 6.461 Fetched 44.6 kB in 0s (305 kB/s)
+#7 6.472 Selecting previously unselected package iputils-ping.
+#7 6.472 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 6.481 Preparing to unpack .../iputils-ping_3%3a20240117-1ubuntu0.1_amd64.deb ...
+#7 6.482 Unpacking iputils-ping (3:20240117-1ubuntu0.1) ...
+#7 6.497 Setting up iputils-ping (3:20240117-1ubuntu0.1) ...
+#7 6.515 **** install dotnet sdk ****
+#7 6.520   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 6.520                                  Dload  Upload   Total   Spent    Left  Speed
+#7 6.520   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 7.349 100 63488    0 63488    0     0  76568      0 --:--:-- --:--:-- --:--:-- 76568
+#7 18.38 dotnet-install: Attempting to download using primary link https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz
+#7 18.98 dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz size is 33516105 bytes.
+#7 18.98 dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz
+#7 19.62 dotnet-install: Downloaded file size is 33516105 bytes.
+#7 19.62 dotnet-install: The remote and local file sizes are equal.
+#7 19.64 dotnet-install: Installed version is 9.0.13
+#7 19.65 dotnet-install: Adding to current process PATH: `/app/dotnet`. Note: This change will be visible only when sourcing script.
+#7 19.65 dotnet-install: Note that the script does not resolve dependencies during installation.
+#7 19.65 dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+#7 19.65 dotnet-install: Installation finished successfully.
+#7 19.65 **** install webgrabplus ****
+#7 19.65 Found Webgrabplus version 5.5.0
+#7 ERROR: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo \"**** install dotnet sdk ****\" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo \"**** install webgrabplus ****\" &&   if [ -z \"$VERSION\" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\\(.*\\)\">V.*|\\1|');   fi &&   echo \"Found Webgrabplus version ${VERSION}\" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^\"]+\\\\.gz' | head -n1) &&   if [ -z \"${WEBGRAB_URL}\" ]; then WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw | grep -Eo 'https://[^\"]+\\\\.gz' | head -n1); fi &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     \"${WEBGRAB_URL}\" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo \"**** download siteini.pack ****\" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*" did not complete successfully: exit code: 1
 ------
- > [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo "**** install dotnet sdk ****" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo "**** install webgrabplus ****" &&   if [ -z "5.5.0" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|');   fi &&   echo "Found Webgrabplus version 5.5.0" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v5.5.0 | grep -Eo 'https://[^"]+\\.gz' | head -n1) &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     "${WEBGRAB_URL}" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo "**** download siteini.pack ****" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*:
-18.68 dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz
-19.41 dotnet-install: Downloaded file size is 33516105 bytes.
-19.41 dotnet-install: The remote and local file sizes are equal.
-19.45 dotnet-install: Installed version is 9.0.13
-19.45 dotnet-install: Adding to current process PATH: `/app/dotnet`. Note: This change will be visible only when sourcing script.
-19.45 dotnet-install: Note that the script does not resolve dependencies during installation.
-19.45 dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
-19.45 dotnet-install: Installation finished successfully.
-19.45 **** install webgrabplus ****
-19.45 Found Webgrabplus version 5.5.0
+ > [2/5] RUN   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo "**** install dotnet sdk ****" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo "**** install webgrabplus ****" &&   if [ -z "5.5.0" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|');   fi &&   echo "Found Webgrabplus version 5.5.0" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v5.5.0 | grep -Eo 'https://[^"]+\\.gz' | head -n1) &&   if [ -z "${WEBGRAB_URL}" ]; then WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw | grep -Eo 'https://[^"]+\\.gz' | head -n1); fi &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     "${WEBGRAB_URL}" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo "**** download siteini.pack ****" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*:
+18.98 dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.13/dotnet-runtime-9.0.13-linux-x64.tar.gz
+19.62 dotnet-install: Downloaded file size is 33516105 bytes.
+19.62 dotnet-install: The remote and local file sizes are equal.
+19.64 dotnet-install: Installed version is 9.0.13
+19.65 dotnet-install: Adding to current process PATH: `/app/dotnet`. Note: This change will be visible only when sourcing script.
+19.65 dotnet-install: Note that the script does not resolve dependencies during installation.
+19.65 dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+19.65 dotnet-install: Installation finished successfully.
+19.65 **** install webgrabplus ****
+19.65 Found Webgrabplus version 5.5.0
 ------
 Dockerfile:14
 --------------------
@@ -114,22 +114,23 @@ Dockerfile:14
   28 | >>>   fi && \
   29 | >>>   echo "Found Webgrabplus version ${VERSION}" && \
   30 | >>>   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^"]+\\.gz' | head -n1) && \
-  31 | >>>   mkdir -p \
-  32 | >>>     /app/wg++ && \
-  33 | >>>   curl -o /tmp/wg++.tar.gz -L \
-  34 | >>>     "${WEBGRAB_URL}" && \
-  35 | >>>   tar xzf \
-  36 | >>>     /tmp/wg++.tar.gz -C \
-  37 | >>>     /app/wg++ --strip-components=1 && \
-  38 | >>>   echo "**** download siteini.pack ****" && \
-  39 | >>>   mkdir -p /defaults/ini && \
-  40 | >>>   curl -o \
-  41 | >>>     /tmp/ini.zip -L \
-  42 | >>>     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip && \
-  43 | >>>   unzip -q /tmp/ini.zip -d /defaults/ini/ && \
-  44 | >>>   echo "**** cleanup ****" && \
-  45 | >>>   rm -rf \
-  46 | >>>     /tmp/*
-  47 |     
+  31 | >>>   if [ -z "${WEBGRAB_URL}" ]; then WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw | grep -Eo 'https://[^"]+\\.gz' | head -n1); fi && \
+  32 | >>>   mkdir -p \
+  33 | >>>     /app/wg++ && \
+  34 | >>>   curl -o /tmp/wg++.tar.gz -L \
+  35 | >>>     "${WEBGRAB_URL}" && \
+  36 | >>>   tar xzf \
+  37 | >>>     /tmp/wg++.tar.gz -C \
+  38 | >>>     /app/wg++ --strip-components=1 && \
+  39 | >>>   echo "**** download siteini.pack ****" && \
+  40 | >>>   mkdir -p /defaults/ini && \
+  41 | >>>   curl -o \
+  42 | >>>     /tmp/ini.zip -L \
+  43 | >>>     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip && \
+  44 | >>>   unzip -q /tmp/ini.zip -d /defaults/ini/ && \
+  45 | >>>   echo "**** cleanup ****" && \
+  46 | >>>   rm -rf \
+  47 | >>>     /tmp/*
+  48 |     
 --------------------
-ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo \"**** install dotnet sdk ****\" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo \"**** install webgrabplus ****\" &&   if [ -z \"$VERSION\" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\\(.*\\)\">V.*|\\1|');   fi &&   echo \"Found Webgrabplus version ${VERSION}\" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^\"]+\\\\.gz' | head -n1) &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     \"${WEBGRAB_URL}\" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo \"**** download siteini.pack ****\" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*" did not complete successfully: exit code: 1
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libicu74     iputils-ping &&   echo \"**** install dotnet sdk ****\" &&   mkdir -p /app/dotnet &&   curl -o /tmp/dotnet-install.sh -L     https://dot.net/v1/dotnet-install.sh &&   chmod +x /tmp/dotnet-install.sh &&   /tmp/dotnet-install.sh -c 9.0 --install-dir /app/dotnet --runtime dotnet &&   echo \"**** install webgrabplus ****\" &&   if [ -z \"$VERSION\" ]; then     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\\(.*\\)\">V.*|\\1|');   fi &&   echo \"Found Webgrabplus version ${VERSION}\" &&   WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^\"]+\\\\.gz' | head -n1) &&   if [ -z \"${WEBGRAB_URL}\" ]; then WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw | grep -Eo 'https://[^\"]+\\\\.gz' | head -n1); fi &&   mkdir -p     /app/wg++ &&   curl -o /tmp/wg++.tar.gz -L     \"${WEBGRAB_URL}\" &&   tar xzf     /tmp/wg++.tar.gz -C     /app/wg++ --strip-components=1 &&   echo \"**** download siteini.pack ****\" &&   mkdir -p /defaults/ini &&   curl -o     /tmp/ini.zip -L     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip &&   unzip -q /tmp/ini.zip -d /defaults/ini/ &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*" did not complete successfully: exit code: 1

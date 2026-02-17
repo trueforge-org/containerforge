@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04
+FROM ghcr.io/trueforge-org/python:3.13.12
 
 ARG VERSION
 ARG TARGETARCH
