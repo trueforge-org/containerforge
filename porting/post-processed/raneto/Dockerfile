@@ -19,9 +19,11 @@ RUN \
   echo "**** install raneto ****" && \
   mkdir -p \
     /app/raneto && \
-  curl -o \
-    /tmp/raneto-src.tar.gz -L \
-    "https://github.com/ryanlelek/Raneto/archive/${VERSION}.tar.gz" && \
+  (curl -fL -o \
+    /tmp/raneto-src.tar.gz \
+    "https://github.com/ryanlelek/Raneto/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/raneto-src.tar.gz \
+    "https://github.com/ryanlelek/Raneto/archive/refs/tags/v${VERSION}.tar.gz") && \
   tar xf \
     /tmp/raneto-src.tar.gz -C \
     /app/raneto --strip-components=1 && \

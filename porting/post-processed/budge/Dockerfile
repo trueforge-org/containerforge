@@ -15,15 +15,18 @@ RUN \
   apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
-    python3 && \
+    python3 \
+    python-is-python3 && \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     sqlite3 && \
   echo "**** install budge ****" && \
   mkdir -p /app/www/public && \
-  curl -o \
-    /tmp/budge.tar.gz -L \
-    "https://github.com/linuxserver/budge/archive/${VERSION}.tar.gz" && \
+  (curl -fL -o \
+    /tmp/budge.tar.gz \
+    "https://github.com/linuxserver/budge/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/budge.tar.gz \
+    "https://github.com/linuxserver/budge/archive/refs/tags/v${VERSION}.tar.gz") && \
   tar xf \
     /tmp/budge.tar.gz -C \
     /app/www/public/ --strip-components=1 && \

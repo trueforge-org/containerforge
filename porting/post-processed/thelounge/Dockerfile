@@ -16,13 +16,15 @@ RUN \
     git && \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    yarn && \
+    yarnpkg && \
   echo "**** download thelounge ****" && \
   mkdir -p \
     /app/thelounge && \
-  curl -o \
-    /tmp/thelounge.tar.gz -L \
-    "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" && \
+  (curl -fL -o \
+    /tmp/thelounge.tar.gz \
+    "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/thelounge.tar.gz \
+    "https://github.com/thelounge/thelounge/archive/refs/tags/${VERSION}.tar.gz") && \
   tar xf \
     /tmp/thelounge.tar.gz -C \
     /app/thelounge --strip-components=1 && \
@@ -30,10 +32,10 @@ RUN \
   echo "**** modify thelounge source ****" && \
   sed -i "s/public: false,/public: true,/g" defaults/config.js && \
   echo "**** install thelounge ****" && \
-  yarn install && \
-  NODE_ENV=production yarn build && \
-  yarn link && \
-  yarn --non-interactive cache clean && \
+  yarnpkg install && \
+  NODE_ENV=production yarnpkg build && \
+  yarnpkg link && \
+  yarnpkg --non-interactive cache clean && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

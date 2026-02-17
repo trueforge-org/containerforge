@@ -28,14 +28,14 @@ RUN \
     libxslt1.1 \
     libmariadb3 && \
   echo "**** install babybuddy ****" && \
-  curl -o /tmp/babybuddy.tar.gz -L "https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz" && \
+  (curl -fL -o /tmp/babybuddy.tar.gz "https://github.com/babybuddy/babybuddy/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o /tmp/babybuddy.tar.gz "https://github.com/babybuddy/babybuddy/archive/refs/tags/${VERSION}.tar.gz") && \
   mkdir -p /app/www/public && \
   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 && \
   cd /app/www/public && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir pip wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
+  /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
   ln -s /config/data /app/www/public/data && \
   ln -s /config/media /app/www/public/media && \
   echo "**** cleanup ****" && \

@@ -14,9 +14,11 @@ RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     npm && \
   echo "**** install WebApp ****" && \
-  curl -o \
-  /tmp/webapp.tar.gz -L \
-    "https://github.com/netbootxyz/webapp/archive/${VERSION}.tar.gz" && \
+  (curl -fL -o \
+  /tmp/webapp.tar.gz \
+    "https://github.com/netbootxyz/webapp/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+  /tmp/webapp.tar.gz \
+    "https://github.com/netbootxyz/webapp/archive/refs/tags/v${VERSION}.tar.gz") && \
   tar xf \
   /tmp/webapp.tar.gz -C \
     /app/ --strip-components=1 && \

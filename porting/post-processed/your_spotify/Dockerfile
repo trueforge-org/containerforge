@@ -13,11 +13,13 @@ RUN \
     cmake \
     npm \
     python3-dev \
-    yarn && \
+    yarnpkg && \
   echo "*** install your_spotify ***" && \
-  curl -o \
-    /tmp/your_spotify.tar.gz -L \
-    "https://github.com/Yooooomi/your_spotify/archive/${VERSION}.tar.gz" && \
+  (curl -fL -o \
+    /tmp/your_spotify.tar.gz \
+    "https://github.com/Yooooomi/your_spotify/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/your_spotify.tar.gz \
+    "https://github.com/Yooooomi/your_spotify/archive/refs/tags/v${VERSION}.tar.gz") && \
   mkdir -p /app/www && \
   tar xzf \
     /tmp/your_spotify.tar.gz -C \
@@ -29,11 +31,11 @@ RUN \
   echo "*** install your_spotify client ***" && \
   cd /app/www && \
   rm -rf /app/www/apps/server && \
-  yarn --frozen-lockfile && \
+  yarnpkg --frozen-lockfile && \
   cd /app/www/apps/client && \
-  yarn build && \
+  yarnpkg build && \
   rm -rf /app/www/node_modules && \
-  yarn cache clean
+  yarnpkg cache clean
 
 FROM buildbase AS buildserver
 
@@ -41,11 +43,11 @@ RUN \
   echo "*** install your_spotify server ***" && \
   cd /app/www && \
   rm -rf /app/www/apps/client && \
-  yarn --frozen-lockfile && \
+  yarnpkg --frozen-lockfile && \
   cd /app/www/apps/server && \
-  yarn build && \
+  yarnpkg build && \
   rm -rf /app/www/node_modules && \
-  yarn cache clean
+  yarnpkg cache clean
 
 FROM ghcr.io/trueforge-org/python:3.13.12
 
@@ -71,11 +73,11 @@ RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     nodejs \
     npm \
-    yarn && \
+    yarnpkg && \
   echo "**** install your_spotify ****" && \
   cd /app/www/apps/server && \
-  yarn --production --frozen-lockfile && \
-  yarn cache clean && \
+  yarnpkg --production --frozen-lockfile && \
+  yarnpkg cache clean && \
   npm install -g serve && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \

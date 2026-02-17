@@ -14,15 +14,17 @@ RUN \
   echo "**** install app ****" && \
   mkdir -p \
     /app/mstream && \
-  curl -o \
-    /tmp/mstream.tar.gz -L \
-    "https://github.com/IrosTheBeggar/mStream/archive/v${VERSION}.tar.gz" && \
+  (curl -fL -o \
+    /tmp/mstream.tar.gz \
+    "https://github.com/IrosTheBeggar/mStream/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/mstream.tar.gz \
+    "https://github.com/IrosTheBeggar/mStream/archive/refs/tags/${VERSION}.tar.gz") && \
   tar xzf \
     /tmp/mstream.tar.gz -C \
     /app/mstream/ --strip-components=1 && \
   cd /app/mstream && \
+  npm install --omit=dev && \
   chown -R apps:apps ./ && \
-  su -s /bin/sh apps -c 'HOME=/tmp npm install --omit=dev' && \
   npm link && \
   echo "**** cleanup ****" && \
   rm -rf /app/mstream/save/sync && \

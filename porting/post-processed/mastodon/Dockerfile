@@ -36,9 +36,11 @@ RUN \
         libyaml-dev && \
     echo "**** install mastodon ****" && \
     mkdir -p /app/www && \
-    curl -s -o \
-        /tmp/mastodon.tar.gz -L \
-        "https://github.com/mastodon/mastodon/archive/v${VERSION}.tar.gz" && \
+    (curl -fsL -o \
+        /tmp/mastodon.tar.gz \
+        "https://github.com/mastodon/mastodon/archive/refs/tags/v${VERSION}.tar.gz" || curl -fsL -o \
+        /tmp/mastodon.tar.gz \
+        "https://github.com/mastodon/mastodon/archive/refs/tags/${VERSION}.tar.gz") && \
     tar xf \
         /tmp/mastodon.tar.gz -C \
         /app/www/ --strip-components=1 && \

@@ -16,19 +16,21 @@ RUN \
   echo "**** install app ****" && \
   mkdir -p \
     /app/sickgear/ && \
-  curl -o \
-    /tmp/sickgear.tar.gz -L \
-    "https://github.com/sickgear/sickgear/archive/${VERSION}.tar.gz" && \
+  (curl -fL -o \
+    /tmp/sickgear.tar.gz \
+    "https://github.com/sickgear/sickgear/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/sickgear.tar.gz \
+    "https://github.com/sickgear/sickgear/archive/refs/tags/v${VERSION}.tar.gz") && \
   tar xf \
     /tmp/sickgear.tar.gz -C \
     /app/sickgear/ --strip-components=1 && \
   cd /app/sickgear && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-  pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r recommended.txt && \
+  /config/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  /config/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r recommended.txt && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 16.27 fatal: Remote branch  not found in upstream origin
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 bigger batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails due venv path/layout mismatch in later playwright install step.
+- Full log: `amd64-build.log`
