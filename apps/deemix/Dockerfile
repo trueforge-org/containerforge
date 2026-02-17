@@ -28,7 +28,7 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-USER apps:apps
+USER apps
 
 COPY --from=builder /app/deemix-gui/dist/deemix-server-linux /app/deemix-server
 

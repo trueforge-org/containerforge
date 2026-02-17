@@ -12,4 +12,4 @@ RUN apt-get update && \
     && apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-USER apps:apps
+USER apps

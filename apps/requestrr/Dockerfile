@@ -23,5 +23,5 @@ COPY . /
 
 EXPOSE 4545
 
-USER apps:apps
+USER apps
 WORKDIR /config

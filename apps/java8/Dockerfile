@@ -44,4 +44,4 @@ RUN set -eux; \
     # https://openjdk.java.net/jeps/341
     java -Xshare:dump;
 
-USER apps:apps
+USER apps

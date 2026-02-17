@@ -14,7 +14,7 @@ RUN curl -fsSL "https://github.com/StuffAnThings/qbit_manage/archive/v${VERSION}
     chown -R apps:apps "/app"
 
 
-USER apps:apps
+USER apps
 
 COPY . /
 

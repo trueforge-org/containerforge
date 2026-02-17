@@ -19,7 +19,7 @@ RUN set -eux; \
     wget -q -O /usr/local/bin/notify_push "https://github.com/nextcloud/notify_push/releases/download/v${VERSION}/notify_push-${TARGETARCH}-${TRIPLET}"; \
     chmod +x /usr/local/bin/notify_push;
 
-USER apps:apps
+USER apps
 
 # Copy files with correct permissions
 COPY --chmod=775 . /

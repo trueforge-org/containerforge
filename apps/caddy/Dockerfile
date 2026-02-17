@@ -17,7 +17,7 @@ RUN wget -O - "https://github.com/caddyserver/xcaddy/releases/download/v${XCADDY
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:7f4b4dfea9fcd818103c5d1f64cd5135785977fc90927aab58d25a155f27be4a
 
-USER apps:apps
+USER apps
 
 COPY --from=builder /caddy-bin "/app/caddy"
 COPY . /

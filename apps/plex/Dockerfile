@@ -34,5 +34,5 @@ RUN \
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config

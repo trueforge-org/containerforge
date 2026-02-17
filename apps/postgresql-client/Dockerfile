@@ -20,7 +20,7 @@ RUN apt-get update && \
     && chmod -R u=rwX,go=rX /app \
     && printf "umask %d\n" "${UMASK}" >> /etc/profile
 
-USER apps:apps
+USER apps
 
 
 

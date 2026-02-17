@@ -17,5 +17,5 @@ RUN curl -fsSL "https://github.com/jesec/flood/releases/download/v${VERSION}/flo
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config

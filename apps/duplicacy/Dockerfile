@@ -24,7 +24,7 @@ RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_${TARGETA
 
 COPY . /
 
-USER apps:apps
+USER apps
 VOLUME ["/cache","/logs"]
 WORKDIR /config
 EXPOSE 3875

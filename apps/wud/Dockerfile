@@ -37,7 +37,7 @@ USER root
 RUN mkdir -p /store && \
     chown -R apps:apps /app /store && chmod -R 755 /app /store
 
-USER apps:apps
+USER apps
 
 # Copy app
 COPY --from=dependencies  /app/src/app/ /app

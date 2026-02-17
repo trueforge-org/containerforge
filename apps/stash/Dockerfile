@@ -75,5 +75,5 @@ RUN apt-get purge -y gnupg && apt-get autoremove -y && apt-get clean && rm -rf /
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config

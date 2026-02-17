@@ -21,7 +21,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:7f4b4dfea9fcd818103c5d1f64cd51357
 
 ENV WATCHTOWER_LABEL_ENABLE=true
 
-USER apps:apps
+USER apps
 
 # copy files from other container
 COPY --from=builder /app/watchtower/watchtower /app/watchtower

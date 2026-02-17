@@ -15,5 +15,5 @@ RUN curl -fsSL "https://github.com/kiranshila/Doplarr/releases/download/v${VERSI
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config

@@ -25,5 +25,5 @@ ENV VPN_SERVICE_PROVIDER=pia \
 EXPOSE 8000/tcp 8888/tcp 8388/tcp 8388/udp
 HEALTHCHECK --interval=5s --timeout=5s --start-period=10s --retries=3 CMD ["/usr/local/bin/gluetun", "healthcheck"]
 
-USER apps:apps
+USER apps
 ENTRYPOINT ["/usr/local/bin/gluetun"]

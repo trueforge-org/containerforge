@@ -38,7 +38,7 @@ RUN apt-get update \
 COPY . /
 
 # run as 568
-USER apps:apps
+USER apps
 
 WORKDIR /config
 VOLUME ["/config"]

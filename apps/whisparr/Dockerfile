@@ -26,7 +26,7 @@ RUN apt-get update && \
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config
 
 HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${WHISPARR__SERVER__PORT}/"

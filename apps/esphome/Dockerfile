@@ -32,7 +32,7 @@ RUN set -eux; \
 # Copy application code
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config
 
 CMD ["dashboard", "/config"]

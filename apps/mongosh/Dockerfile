@@ -32,4 +32,4 @@ RUN apt-get -qq update \
     /var/lib/apt/lists/* \
     /var/tmp/
 
-USER apps:apps
+USER apps

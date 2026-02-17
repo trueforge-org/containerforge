@@ -34,7 +34,7 @@ RUN add-apt-repository universe && \
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config
 
 HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${LIDARR__SERVER__PORT}/"

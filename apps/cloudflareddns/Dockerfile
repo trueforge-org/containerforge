@@ -13,7 +13,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends dnsutils \
     && rm -rf /var/lib/apt/lists/*
 
-USER apps:apps
+USER apps
 COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:195c3d07afc76e6db7119bd902f0565342976b5f6537461a97e09229dde14a5b /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
 # Fix shebang since container does not use s6-overlay

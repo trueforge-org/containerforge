@@ -30,6 +30,6 @@ RUN set -eux; \
 EXPOSE 8080
 STOPSIGNAL SIGQUIT
 
-USER apps:apps
+USER apps
 
 CMD ["nginx", "-c","/config/nginx.conf", "-g", "daemon off;"]

@@ -21,4 +21,4 @@ RUN apt-get update && \
     && printf "umask %d\n" "${UMASK}" >> /etc/profile \
     && update-ca-certificates
 
-USER apps:apps
+USER apps

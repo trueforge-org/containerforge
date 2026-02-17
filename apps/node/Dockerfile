@@ -66,6 +66,6 @@ RUN set -ex \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && rm -rf /tmp/*
 
-USER apps:apps
+USER apps
 
 CMD [ "node" ]

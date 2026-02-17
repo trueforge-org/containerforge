@@ -26,5 +26,5 @@ RUN apt-get update && \
 
 COPY . /
 
-USER apps:apps
+USER apps
 WORKDIR /config

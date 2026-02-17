@@ -17,7 +17,7 @@ COPY --chmod=0755 start.sh /start.sh
 
 ENV VALKEY_PORT=6379
 
-USER apps:apps
+USER apps
 
 HEALTHCHECK CMD ["/bin/sh", "-c", "/health/ping_liveness_local.sh 2"]
 
