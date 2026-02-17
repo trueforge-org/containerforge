@@ -30,7 +30,7 @@ RUN go build -ldflags "-w -s" -o /output/my-proxy-service .
 
 
 # Stage 2 - Create the final image
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:7f4b4dfea9fcd818103c5d1f64cd5135785977fc90927aab58d25a155f27be4a
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
 
 # Set working directory
 WORKDIR /app
