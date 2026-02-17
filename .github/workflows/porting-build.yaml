@@ -5,6 +5,9 @@ name: Porting Build
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   plan:
     name: Plan
@@ -22,7 +25,7 @@ jobs:
         run: |
           matrix=$(find ./porting -mindepth 2 -maxdepth 3 -name docker-bake.hcl \
             -not -path './porting/templates/*' \
-            -printf '%h\n' | sort | jq --raw-input --slurp --compact-output 'split("\n")[:-1]')
+            -printf '%h\n' | sort | jq --raw-input --slurp --compact-output 'split("\n") | map(select(length > 0))')
           echo "matrix=${matrix}" >> "$GITHUB_OUTPUT"
 
   build:
