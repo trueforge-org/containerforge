@@ -37,9 +37,7 @@ RUN groupadd -g 568 apps && \
     useradd -m -u 568 -g 568 -s /bin/bash apps; \
     usermod -aG 10,20,29,44,39,101,107,129 568; \
     mkdir -p /home/apps; \
-    chown -R apps:apps /home/apps; \
-    mkdir -p /config; \
-    chown -R apps:apps /config
+    chown -R apps:apps /home/apps
 
 # Install packages
 RUN apt-get update \
@@ -129,7 +127,6 @@ COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:92b4d32099ca9c9290bed83b4ba7
 #Copy root files
 COPY --chmod=0775 . /
 
-VOLUME ["/config", "/data"]
 WORKDIR /config
 
 
