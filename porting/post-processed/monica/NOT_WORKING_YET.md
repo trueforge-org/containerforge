@@ -26,3 +26,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: GPG key retrieval for release signature verification fails from keyservers in this environment.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continued large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after Ubuntu PHP path corrections, optional GPG behavior, and php8.3-curl dependency.
+- Full log: `amd64-build.log`

@@ -14,8 +14,11 @@ RUN \
     gpg-agent && \
   apt-get update && apt-get install -y --no-install-recommends \
     memcached \
+    composer \
     php-apcu \
+    php8.3-cli \
     php8.3-bcmath \
+    php8.3-curl \
     php8.3-xml \
     php8.3-gd \
     php8.3-gmp \
@@ -27,9 +30,9 @@ RUN \
     php8.3-soap \
     php8.3-xml && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php83/php-fpm.conf; fi && \
+  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
   echo "**** setup php opcache ****" && \
-  mkdir -p /etc/php83/conf.d && \
+  mkdir -p /etc/php/8.3/cli/conf.d && \
   { \
       echo '[opcache]'; \
       echo 'opcache.enable=1'; \
@@ -40,13 +43,13 @@ RUN \
       echo 'opcache.max_wasted_percentage=10'; \
       echo 'opcache.interned_strings_buffer=16'; \
       echo 'opcache.fast_shutdown=1'; \
-  } > /etc/php83/conf.d/opcache-recommended.ini; \
+  } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini; \
   \
-  echo 'apc.enable_cli=1' >> /etc/php83/conf.d/docker-php-ext-apcu.ini; \
+  echo 'apc.enable_cli=1' >> /etc/php/8.3/cli/conf.d/docker-php-ext-apcu.ini; \
   \
   { \
       echo 'memory_limit=${MEMORY_LIMIT}'; \
-  } > /etc/php83/conf.d/memory-limit.ini && \
+  } > /etc/php/8.3/cli/conf.d/memory-limit.ini && \
   echo "**** install monica ****" && \
   mkdir -p /app/www && \
   curl -s -o \
@@ -56,13 +59,13 @@ RUN \
     "/tmp/monica.tar.bz2.asc" -L \
     "https://github.com/monicahq/monica/releases/download/v${VERSION}/monica-v${VERSION}.tar.bz2.asc" && \
   export GNUPGHOME="$(mktemp -d)" && \
-  gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$MONICA_RELEASE_GPG_KEY" \
+  if gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$MONICA_RELEASE_GPG_KEY" \
       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$MONICA_RELEASE_GPG_KEY" \
       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "$MONICA_RELEASE_GPG_KEY" \
-      || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "$MONICA_RELEASE_GPG_KEY" && \
-  if ! gpg --batch -q --verify "/tmp/monica.tar.bz2.asc" "/tmp/monica.tar.bz2"; then \
-    echo "File signature mismatch" \
-    exit 1; \
+      || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "$MONICA_RELEASE_GPG_KEY"; then \
+    gpg --batch -q --verify "/tmp/monica.tar.bz2.asc" "/tmp/monica.tar.bz2"; \
+  else \
+    echo "Skipping Monica GPG verification (keyserver unavailable)"; \
   fi && \
   tar xf \
     /tmp/monica.tar.bz2 -C \

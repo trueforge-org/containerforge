@@ -26,3 +26,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Composer install runs plugin scripts and fails with `sh: 1: symfony-cmd: not found`.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continued large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after adding PHP CLI and running composer without scripts in build stage.
+- Full log: `amd64-build.log`

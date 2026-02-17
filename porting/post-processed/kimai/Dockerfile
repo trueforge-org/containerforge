@@ -11,6 +11,7 @@ RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         php8.3-gd \
+        php8.3-cli \
         php8.3-intl \
         php8.3-ldap \
         php8.3-mysql \
@@ -33,8 +34,8 @@ RUN \
         /tmp/kimai.tar.gz -C \
         /app/www --strip-components=1 && \
     echo "**** install composer dependencies ****" && \
-    COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction && \
-    COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap && \
+    COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction --no-scripts && \
+    COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap --no-scripts && \
     /usr/bin/composer clearcache -d /app/www/ && \
     echo "**** cleanup ****" && \
     rm -rf \
