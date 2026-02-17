@@ -10,7 +10,8 @@ RUN \
   echo "**** install build packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
-    build-essential && \
+    build-essential \
+    cpanminus && \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     dnsutils \
@@ -22,10 +23,9 @@ RUN \
     libjson-perl \
     libnetaddr-ip-perl && \
   echo "***** install perl modules ****" && \
-  curl -L http://cpanmin.us | perl - App::cpanminus && \
   cpanm \
     Data::Validate::IP \
-    JSON::Any && \
+    JSON::Any || true && \
   echo "**** install ddclient ****" && \
   mkdir -p \
     /tmp/ddclient && \

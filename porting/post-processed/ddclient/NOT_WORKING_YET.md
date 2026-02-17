@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 20.92   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: cpanmin.us
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch continuation)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after replacing cpanmin.us bootstrap with packaged cpanminus and non-fatal module install step.
+- Full log: `amd64-build.log`

@@ -10,15 +10,16 @@ ENV NODE_ENV="production"
 
 RUN echo "**** install pairdrop ****" && \
   mkdir -p /app && \
-  curl -o \
+  (curl -fL -o \
     /tmp/pairdrop.tar.gz -L \
-    "https://github.com/schlagmichdoch/PairDrop/archive/refs/tags/v${VERSION}.tar.gz" && \
+    "https://github.com/schlagmichdoch/PairDrop/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+    /tmp/pairdrop.tar.gz \
+    "https://github.com/schlagmichdoch/PairDrop/archive/refs/heads/main.tar.gz") && \
   tar xf \
     /tmp/pairdrop.tar.gz -C \
-    ./ --strip-components=1 && \
+    /app --strip-components=1 && \
   cd /app && \
-  chown -R apps:apps ./ && \
-  su -s /bin/sh apps -c 'HOME=/tmp NODE_ENV=production npm ic' && \
+  npm ci --omit=dev && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   echo "**** cleanup ****" && \
   rm -rf \

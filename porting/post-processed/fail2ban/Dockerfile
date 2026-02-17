@@ -28,8 +28,7 @@ RUN \
   echo "**** fix logrotate ****" && \
   sed -i "s#/var/log/messages {}.*# #g" \
     /etc/logrotate.conf && \
-  sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g' \
-    /etc/periodic/daily/logrotate && \
+  if [ -f /etc/cron.daily/logrotate ]; then sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g' /etc/cron.daily/logrotate; fi && \
   rm -rf /etc/fail2ban && \
   ln -s /config/fail2ban /etc/fail2ban && \
   echo "**** cleanup ****" && \

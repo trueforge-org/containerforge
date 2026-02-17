@@ -16,13 +16,16 @@ RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    gyp \
     npm && \
   echo "**** install Pylon ****" && \
   mkdir -p \
     /app/pylon && \
-  curl -o \
-  /tmp/pylon.tar.gz -L \
-    "https://github.com/pylonide/pylon/archive/v${VERSION}.tar.gz" && \
+  (curl -fL -o \
+  /tmp/pylon.tar.gz \
+    "https://github.com/pylonide/pylon/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+  /tmp/pylon.tar.gz \
+    "https://github.com/pylonide/pylon/archive/refs/heads/master.tar.gz") && \
   tar -xzf \
     /tmp/pylon.tar.gz -C \
     /app/pylon/ --strip-components=1 && \
@@ -30,7 +33,7 @@ RUN \
     /config/sessions \
     /app/pylon/.sessions && \
   echo "**** install node modules ****" && \
-  npm install --prefix /app/pylon && \
+  npm install --prefix /app/pylon --ignore-scripts && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

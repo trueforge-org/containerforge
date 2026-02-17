@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 13.10 sed: can't read /etc/periodic/daily/logrotate: No such file or directory
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch continuation)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after Ubuntu logrotate path handling fix.
+- Full log: `amd64-build.log`
