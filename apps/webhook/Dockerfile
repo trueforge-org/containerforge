@@ -36,4 +36,3 @@ COPY . /
 
 USER apps
 WORKDIR /config
-USER root
