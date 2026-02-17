@@ -1,0 +1,9 @@
+timestamp,batch,app,result_at_record_time
+2026-02-17T14:46:04Z,batch-2026-02-17-g,changedetection.io,PASS
+2026-02-17T14:46:04Z,batch-2026-02-17-g,feed2toot,PASS
+2026-02-17T14:46:04Z,batch-2026-02-17-g,your_spotify,PASS
+2026-02-17T14:46:04Z,batch-2026-02-17-g,netbox,PASS
+2026-02-17T14:46:04Z,batch-2026-02-17-g,planka,FAIL
+2026-02-17T14:46:04Z,batch-2026-02-17-g,luanti,FAIL
+2026-02-17T14:46:04Z,batch-2026-02-17-g,minetest,FAIL
+2026-02-17T14:46:04Z,batch-2026-02-17-g,phpmyadmin,FAIL
