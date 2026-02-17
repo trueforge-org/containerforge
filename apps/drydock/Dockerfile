@@ -23,7 +23,8 @@ RUN apt-get update && \
 
 # Install trivy and cosign
 RUN ARCH=${TARGETARCH:-amd64} && \
-    curl -fsSL "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_Linux-64bit.tar.gz" \
+    TRIVY_ARCH=$([ "$ARCH" = "arm64" ] && echo "ARM64" || echo "64bit") && \
+    curl -fsSL "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_Linux-${TRIVY_ARCH}.tar.gz" \
         | tar xz -C /usr/local/bin trivy && \
     curl -fsSL "https://github.com/sigstore/cosign/releases/download/v2.4.1/cosign-linux-${ARCH}" -o /usr/local/bin/cosign && \
     chmod +x /usr/local/bin/cosign && \
