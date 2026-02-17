@@ -37,7 +37,9 @@ RUN groupadd -g 568 apps && \
     useradd -m -u 568 -g 568 -s /bin/bash apps; \
     usermod -aG 10,20,29,44,39,101,107,129 568; \
     mkdir -p /home/apps; \
-    chown -R apps:apps /home/apps
+    chown -R apps:apps /home/apps; \
+    mkdir -p /config; \
+    chown -R apps:apps /config
 
 # Install packages
 RUN apt-get update \
