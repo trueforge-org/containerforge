@@ -1,4 +1,5 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0 as buildstage
+USER root
 
 
 ENV \
@@ -15,9 +16,11 @@ RUN \
   echo "**** fetch source code ****" && \
   mkdir -p \
     /tmp/src/github.com/pydio/cells && \
-  curl -o \
-    /tmp/cells-src.tar.gz -L \
-    https://github.com/pydio/cells/archive/v${VERSION}.tar.gz && \
+  (curl -fL -o \
+    /tmp/cells-src.tar.gz \
+    https://github.com/pydio/cells/archive/v${VERSION}.tar.gz || curl -fL -o \
+    /tmp/cells-src.tar.gz \
+    https://github.com/pydio/cells/archive/${VERSION}.tar.gz) && \
   tar xf \
     /tmp/cells-src.tar.gz -C \
     /tmp/src/github.com/pydio/cells --strip-components=1 && \

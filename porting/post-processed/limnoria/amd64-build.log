@@ -1,342 +1,46 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.35kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 825B / 825B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.1s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.34kB done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
+#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
 #3 DONE 0.0s
 
-#4 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 5.09kB done
+#5 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#5 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
 #5 DONE 0.0s
 
-#6 [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cargo         libffi-dev         libssl-dev         python3-venv &&     echo "**** install runtime packages ****" &&     echo "**** install app ****" &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         limnoria=="${VERSION}" &&     echo "**** cleanup ****" &&     apt-get purge -y --auto-remove         build-essential         cargo         libffi-dev         libssl-dev &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache         /config/.cargo
-#6 0.157 **** install build packages ****
-#6 0.341 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.497 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.777 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.885 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.994 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 1.101 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 1.245 Get:7 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 1.257 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 1.923 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 2.014 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 2.066 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 2.106 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 2.186 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 2.225 Get:14 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 2.278 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.378 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 2.451 Get:17 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 2.457 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 2.995 Fetched 36.1 MB in 3s (12.8 MB/s)
-#6 2.995 Reading package lists...
-#6 3.725 Reading package lists...
-#6 4.449 Building dependency tree...
-#6 4.594 Reading state information...
-#6 4.727 build-essential is already the newest version (12.10ubuntu1).
-#6 4.727 libffi-dev is already the newest version (3.4.6-1build1).
-#6 4.727 libssl-dev is already the newest version (3.0.13-0ubuntu3.7).
-#6 4.727 The following additional packages will be installed:
-#6 4.727   libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
-#6 4.727   libstd-rust-1.75 libstd-rust-dev python3-pip-whl python3-setuptools-whl
-#6 4.727   python3.12-venv rustc
-#6 4.728 Suggested packages:
-#6 4.728   cargo-doc llvm-17 lld-17 clang-17
-#6 4.765 The following NEW packages will be installed:
-#6 4.766   cargo libedit2 libgit2-1.7 libhttp-parser2.9 libllvm17t64 libssh2-1t64
-#6 4.766   libstd-rust-1.75 libstd-rust-dev python3-pip-whl python3-setuptools-whl
-#6 4.766   python3-venv python3.12-venv rustc
-#6 4.860 0 upgraded, 13 newly installed, 0 to remove and 24 not upgraded.
-#6 4.860 Need to get 99.2 MB of archives.
-#6 4.860 After this operation, 424 MB of additional disk space will be used.
-#6 4.860 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
-#6 4.941 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libhttp-parser2.9 amd64 2.9.4-6build1 [22.3 kB]
-#6 5.020 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libssh2-1t64 amd64 1.11.0-4.1build2 [120 kB]
-#6 5.102 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libgit2-1.7 amd64 1.7.2+ds-1ubuntu3 [529 kB]
-#6 5.184 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libllvm17t64 amd64 1:17.0.6-9ubuntu1 [26.2 MB]
-#6 5.739 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-1.75 amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [20.0 MB]
-#6 6.180 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3-pip-whl all 24.0+dfsg-1ubuntu1.3 [1,707 kB]
-#6 6.289 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3-setuptools-whl all 68.1.2-2ubuntu1.2 [716 kB]
-#6 6.380 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3.12-venv amd64 3.12.3-1ubuntu0.11 [5,680 B]
-#6 6.460 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 python3-venv amd64 3.12.3-0ubuntu2.1 [1,032 B]
-#6 6.540 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstd-rust-dev amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [40.6 MB]
-#6 7.355 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 rustc amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [3,183 kB]
-#6 7.491 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cargo amd64 1.75.0+dfsg0ubuntu1-0ubuntu7.1 [6,053 kB]
-#6 7.708 debconf: delaying package configuration, since apt-utils is not installed
-#6 7.732 Fetched 99.2 MB in 3s (35.1 MB/s)
-#6 7.747 Selecting previously unselected package libedit2:amd64.
-#6 7.747 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
-#6 7.763 Preparing to unpack .../00-libedit2_3.1-20230828-1build1_amd64.deb ...
-#6 7.764 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
-#6 7.782 Selecting previously unselected package libhttp-parser2.9:amd64.
-#6 7.784 Preparing to unpack .../01-libhttp-parser2.9_2.9.4-6build1_amd64.deb ...
-#6 7.784 Unpacking libhttp-parser2.9:amd64 (2.9.4-6build1) ...
-#6 7.799 Selecting previously unselected package libssh2-1t64:amd64.
-#6 7.800 Preparing to unpack .../02-libssh2-1t64_1.11.0-4.1build2_amd64.deb ...
-#6 7.801 Unpacking libssh2-1t64:amd64 (1.11.0-4.1build2) ...
-#6 7.817 Selecting previously unselected package libgit2-1.7:amd64.
-#6 7.819 Preparing to unpack .../03-libgit2-1.7_1.7.2+ds-1ubuntu3_amd64.deb ...
-#6 7.819 Unpacking libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
-#6 7.839 Selecting previously unselected package libllvm17t64:amd64.
-#6 7.841 Preparing to unpack .../04-libllvm17t64_1%3a17.0.6-9ubuntu1_amd64.deb ...
-#6 7.842 Unpacking libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
-#6 8.269 Selecting previously unselected package libstd-rust-1.75:amd64.
-#6 8.272 Preparing to unpack .../05-libstd-rust-1.75_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 8.272 Unpacking libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 8.550 Selecting previously unselected package python3-pip-whl.
-#6 8.552 Preparing to unpack .../06-python3-pip-whl_24.0+dfsg-1ubuntu1.3_all.deb ...
-#6 8.553 Unpacking python3-pip-whl (24.0+dfsg-1ubuntu1.3) ...
-#6 8.572 Selecting previously unselected package python3-setuptools-whl.
-#6 8.575 Preparing to unpack .../07-python3-setuptools-whl_68.1.2-2ubuntu1.2_all.deb ...
-#6 8.575 Unpacking python3-setuptools-whl (68.1.2-2ubuntu1.2) ...
-#6 8.592 Selecting previously unselected package python3.12-venv.
-#6 8.594 Preparing to unpack .../08-python3.12-venv_3.12.3-1ubuntu0.11_amd64.deb ...
-#6 8.595 Unpacking python3.12-venv (3.12.3-1ubuntu0.11) ...
-#6 8.608 Selecting previously unselected package python3-venv.
-#6 8.610 Preparing to unpack .../09-python3-venv_3.12.3-0ubuntu2.1_amd64.deb ...
-#6 8.610 Unpacking python3-venv (3.12.3-0ubuntu2.1) ...
-#6 8.622 Selecting previously unselected package libstd-rust-dev:amd64.
-#6 8.624 Preparing to unpack .../10-libstd-rust-dev_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 8.624 Unpacking libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.205 Selecting previously unselected package rustc.
-#6 9.207 Preparing to unpack .../11-rustc_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 9.208 Unpacking rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.256 Selecting previously unselected package cargo.
-#6 9.258 Preparing to unpack .../12-cargo_1.75.0+dfsg0ubuntu1-0ubuntu7.1_amd64.deb ...
-#6 9.259 Unpacking cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.359 Setting up python3-setuptools-whl (68.1.2-2ubuntu1.2) ...
-#6 9.361 Setting up python3-pip-whl (24.0+dfsg-1ubuntu1.3) ...
-#6 9.363 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
-#6 9.365 Setting up libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
-#6 9.367 Setting up libssh2-1t64:amd64 (1.11.0-4.1build2) ...
-#6 9.369 Setting up libhttp-parser2.9:amd64 (2.9.4-6build1) ...
-#6 9.371 Setting up python3.12-venv (3.12.3-1ubuntu0.11) ...
-#6 9.415 Setting up libstd-rust-1.75:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.417 Setting up libstd-rust-dev:amd64 (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.419 Setting up python3-venv (3.12.3-0ubuntu2.1) ...
-#6 9.421 Setting up rustc (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.422 Setting up libgit2-1.7:amd64 (1.7.2+ds-1ubuntu3) ...
-#6 9.424 Setting up cargo (1.75.0+dfsg0ubuntu1-0ubuntu7.1) ...
-#6 9.426 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-#6 9.477 **** install runtime packages ****
-#6 9.477 **** install app ****
-#6 13.09 Requirement already satisfied: pip in ./venv/lib/python3.13/site-packages (25.3)
-#6 13.14 Collecting pip
-#6 13.15   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
-#6 13.17 Collecting wheel
-#6 13.18   Downloading wheel-0.46.3-py3-none-any.whl.metadata (2.4 kB)
-#6 13.20 Collecting packaging>=24.0 (from wheel)
-#6 13.21   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
-#6 13.22 Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
-#6 13.22    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 438.3 MB/s  0:00:00
-#6 13.23 Downloading wheel-0.46.3-py3-none-any.whl (30 kB)
-#6 13.24 Downloading packaging-26.0-py3-none-any.whl (74 kB)
-#6 13.26 Installing collected packages: pip, packaging, wheel
-#6 13.26   Attempting uninstall: pip
-#6 13.27     Found existing installation: pip 25.3
-#6 13.31     Uninstalling pip-25.3:
-#6 13.32       Successfully uninstalled pip-25.3
-#6 14.21 
-#6 14.21 Successfully installed packaging-26.0 pip-26.0.1 wheel-0.46.3
-#6 15.17 Looking in links: https://wheel-index.linuxserver.io/alpine-3.21/
-#6 15.18 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 15.68 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 16.68 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 18.68 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabda0d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 22.68 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabda350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 22.79 Collecting setuptools (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 3))
-#6 22.80   Downloading setuptools-82.0.0-py3-none-any.whl.metadata (6.6 kB)
-#6 22.81 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 23.31 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 24.31 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdafd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 26.31 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabda5d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 30.31 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 30.32 Collecting chardet (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 7))
-#6 30.33   Downloading chardet-5.2.0-py3-none-any.whl.metadata (3.4 kB)
-#6 30.34 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdad50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 30.84 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabda710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 31.84 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 33.84 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 37.84 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdbb10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 37.87 Collecting python-gnupg (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 8))
-#6 37.90   Downloading python_gnupg-0.5.6-py2.py3-none-any.whl.metadata (2.1 kB)
-#6 37.90 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 38.40 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 39.40 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14b90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 41.41 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 45.41 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15090>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 45.42 Collecting PySocks (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 9))
-#6 45.44   Downloading PySocks-1.7.1-py3-none-any.whl.metadata (13 kB)
-#6 45.44 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 45.94 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 46.94 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 48.94 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 52.95 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 53.02 Collecting pyxmpp2-scram (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 10))
-#6 53.03   Downloading pyxmpp2_scram-2.0.2.tar.gz (6.6 kB)
-#6 53.04   Installing build dependencies: started
-#6 61.57   Installing build dependencies: finished with status 'done'
-#6 61.57   Getting requirements to build wheel: started
-#6 62.22   Getting requirements to build wheel: finished with status 'done'
-#6 62.22   Preparing metadata (pyproject.toml): started
-#6 62.89   Preparing metadata (pyproject.toml): finished with status 'done'
-#6 62.89 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 63.39 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 64.39 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 66.39 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16fd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 70.40 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa17250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 70.56 Collecting cryptography (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 14))
-#6 70.57   Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
-#6 70.57 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdafd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 71.07 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 72.08 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 74.08 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabda710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 78.08 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdad50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 78.09 Collecting feedparser (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 15))
-#6 78.10   Downloading feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
-#6 78.11 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdae90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 78.61 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 79.61 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb4d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 81.61 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb9d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 85.61 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdbb10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 85.66 Collecting python-dateutil (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 16))
-#6 85.67   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
-#6 85.67 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16d50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 86.17 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16850>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 87.17 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16350>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 89.17 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 93.18 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa160d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 93.29 Collecting ddate (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 17))
-#6 93.37   Downloading ddate-0.1.2-py2.py3-none-any.whl.metadata (3.9 kB)
-#6 93.38 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 93.88 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15590>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 94.88 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa151d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 96.88 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14f50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 100.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 101.0 Collecting cffi>=2.0.0 (from cryptography->-r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 14))
-#6 101.0   Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
-#6 101.0 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdafd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 101.5 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 102.5 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 104.5 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabda710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 108.5 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 108.5 Collecting sgmllib3k (from feedparser->-r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 15))
-#6 108.5   Downloading sgmllib3k-1.0.0.tar.gz (5.8 kB)
-#6 108.5   Installing build dependencies: started
-#6 117.1   Installing build dependencies: finished with status 'done'
-#6 117.1   Getting requirements to build wheel: started
-#6 117.7   Getting requirements to build wheel: finished with status 'done'
-#6 117.7   Preparing metadata (pyproject.toml): started
-#6 118.4   Preparing metadata (pyproject.toml): finished with status 'done'
-#6 118.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 118.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 119.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 121.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa15f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 125.9 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa16710>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 125.9 Collecting six>=1.5 (from python-dateutil->-r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 16))
-#6 125.9   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
-#6 125.9 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa17110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 126.4 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 127.4 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa14050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 129.4 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa17610>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 133.4 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa17890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 133.6 Collecting dateandtime (from ddate->-r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 17))
-#6 133.7   Downloading dateandtime-0.0.7-py2.py3-none-any.whl.metadata (853 bytes)
-#6 133.7 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabd9a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 134.2 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdb890>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 135.2 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aabdafd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 137.2 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa17d90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 141.2 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f44aaa179d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /alpine-3.21/
-#6 141.2 Collecting pycparser (from cffi>=2.0.0->cryptography->-r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 14))
-#6 141.2   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
-#6 141.2 Downloading setuptools-82.0.0-py3-none-any.whl (1.0 MB)
-#6 141.2    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 429.2 MB/s  0:00:00
-#6 141.2 Downloading chardet-5.2.0-py3-none-any.whl (199 kB)
-#6 141.2 Downloading python_gnupg-0.5.6-py2.py3-none-any.whl (22 kB)
-#6 141.2 Downloading PySocks-1.7.1-py3-none-any.whl (16 kB)
-#6 141.2 Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
-#6 141.3    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 404.0 MB/s  0:00:00
-#6 141.3 Downloading feedparser-6.0.12-py3-none-any.whl (81 kB)
-#6 141.3 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
-#6 141.4 Downloading ddate-0.1.2-py2.py3-none-any.whl (8.1 kB)
-#6 141.4 Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
-#6 141.4 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
-#6 141.5 Downloading dateandtime-0.0.7-py2.py3-none-any.whl (9.8 kB)
-#6 141.5 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
-#6 141.5 Building wheels for collected packages: pyxmpp2-scram, sgmllib3k
-#6 141.5   Building wheel for pyxmpp2-scram (pyproject.toml): started
-#6 142.2   Building wheel for pyxmpp2-scram (pyproject.toml): finished with status 'done'
-#6 142.2   Created wheel for pyxmpp2-scram: filename=pyxmpp2_scram-2.0.2-py3-none-any.whl size=7477 sha256=4f03c8d87af451f4bb5e5b600a35d55963917b3cf0bf2a49d3a15d387fe91f32
-#6 142.2   Stored in directory: /tmp/pip-ephem-wheel-cache-ri9qtpiu/wheels/4d/a1/7b/83c39db1a9bc48c45cd93ea71846cd09a6eef3093250255f0b
-#6 142.2   Building wheel for sgmllib3k (pyproject.toml): started
-#6 142.9   Building wheel for sgmllib3k (pyproject.toml): finished with status 'done'
-#6 142.9   Created wheel for sgmllib3k: filename=sgmllib3k-1.0.0-py3-none-any.whl size=6091 sha256=6ce1bacf85b78bd89f7eef5598757fd07e29343144be911a805013edf314fb8b
-#6 142.9   Stored in directory: /tmp/pip-ephem-wheel-cache-ri9qtpiu/wheels/3d/4d/ef/37cdccc18d6fd7e0dd7817dcdf9146d4d6789c32a227a28134
-#6 142.9 Successfully built pyxmpp2-scram sgmllib3k
-#6 142.9 Installing collected packages: sgmllib3k, pyxmpp2-scram, python-gnupg, six, setuptools, PySocks, pycparser, feedparser, chardet, python-dateutil, cffi, cryptography, dateandtime, ddate
-#6 144.1 
-#6 144.1 Successfully installed PySocks-1.7.1 cffi-2.0.0 chardet-5.2.0 cryptography-46.0.5 dateandtime-0.0.7 ddate-0.1.2 feedparser-6.0.12 pycparser-3.0 python-dateutil-2.9.0.post0 python-gnupg-0.5.6 pyxmpp2-scram-2.0.2 setuptools-82.0.0 sgmllib3k-1.0.0 six-1.17.0
-#6 144.9 ERROR: Invalid requirement: 'limnoria==': Expected semicolon (after name with no version specifier) or end
-#6 144.9     limnoria==
-#6 144.9             ^
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cargo         libffi-dev         libssl-dev         python3-venv &&     echo \"**** install runtime packages ****\" &&     echo \"**** install app ****\" &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         limnoria==\"${VERSION}\" &&     echo \"**** cleanup ****\" &&     apt-get purge -y --auto-remove         build-essential         cargo         libffi-dev         libssl-dev &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         $HOME/.cache         $HOME/.cargo" did not complete successfully: exit code: 1
-------
- > [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cargo         libffi-dev         libssl-dev         python3-venv &&     echo "**** install runtime packages ****" &&     echo "**** install app ****" &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         limnoria=="${VERSION}" &&     echo "**** cleanup ****" &&     apt-get purge -y --auto-remove         build-essential         cargo         libffi-dev         libssl-dev &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache         /config/.cargo:
-142.9   Building wheel for sgmllib3k (pyproject.toml): finished with status 'done'
-142.9   Created wheel for sgmllib3k: filename=sgmllib3k-1.0.0-py3-none-any.whl size=6091 sha256=6ce1bacf85b78bd89f7eef5598757fd07e29343144be911a805013edf314fb8b
-142.9   Stored in directory: /tmp/pip-ephem-wheel-cache-ri9qtpiu/wheels/3d/4d/ef/37cdccc18d6fd7e0dd7817dcdf9146d4d6789c32a227a28134
-142.9 Successfully built pyxmpp2-scram sgmllib3k
-142.9 Installing collected packages: sgmllib3k, pyxmpp2-scram, python-gnupg, six, setuptools, PySocks, pycparser, feedparser, chardet, python-dateutil, cffi, cryptography, dateandtime, ddate
-144.1 
-144.1 Successfully installed PySocks-1.7.1 cffi-2.0.0 chardet-5.2.0 cryptography-46.0.5 dateandtime-0.0.7 ddate-0.1.2 feedparser-6.0.12 pycparser-3.0 python-dateutil-2.9.0.post0 python-gnupg-0.5.6 pyxmpp2-scram-2.0.2 setuptools-82.0.0 sgmllib3k-1.0.0 six-1.17.0
-144.9 ERROR: Invalid requirement: 'limnoria==': Expected semicolon (after name with no version specifier) or end
-144.9     limnoria==
-144.9             ^
-------
-Dockerfile:10
---------------------
-   9 |     
-  10 | >>> RUN \
-  11 | >>>     echo "**** install build packages ****" && \
-  12 | >>>     apt-get update && \
-  13 | >>>     apt-get install -y --no-install-recommends \
-  14 | >>>         build-essential \
-  15 | >>>         cargo \
-  16 | >>>         libffi-dev \
-  17 | >>>         libssl-dev \
-  18 | >>>         python3-venv && \
-  19 | >>>     echo "**** install runtime packages ****" && \
-  20 | >>>     echo "**** install app ****" && \
-  21 | >>>     python3 -m venv /config/venv && \
-  22 | >>>     /config/venv/bin/pip install -U --no-cache-dir \
-  23 | >>>         pip \
-  24 | >>>         wheel && \
-  25 | >>>     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
-  26 | >>>         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt && \
-  27 | >>>     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
-  28 | >>>         limnoria=="${VERSION}" && \
-  29 | >>>     echo "**** cleanup ****" && \
-  30 | >>>     apt-get purge -y --auto-remove \
-  31 | >>>         build-essential \
-  32 | >>>         cargo \
-  33 | >>>         libffi-dev \
-  34 | >>>         libssl-dev && \
-  35 | >>>     rm -rf \
-  36 | >>>         /var/lib/apt/lists/* \
-  37 | >>>         /tmp/* \
-  38 | >>>         $HOME/.cache \
-  39 | >>>         $HOME/.cargo
-  40 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cargo         libffi-dev         libssl-dev         python3-venv &&     echo \"**** install runtime packages ****\" &&     echo \"**** install app ****\" &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/         limnoria==\"${VERSION}\" &&     echo \"**** cleanup ****\" &&     apt-get purge -y --auto-remove         build-essential         cargo         libffi-dev         libssl-dev &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         $HOME/.cache         $HOME/.cargo" did not complete successfully: exit code: 1
+#6 [internal] load build context
+#6 transferring context: 656B done
+#6 DONE 0.0s
+
+#7 [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cargo         libffi-dev         libssl-dev         python3-venv &&     echo "**** install runtime packages ****" &&     echo "**** install app ****" &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt &&     /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/         limnoria=="2025.11.2" &&     echo "**** cleanup ****" &&     apt-get purge -y --auto-remove         build-essential         cargo         libffi-dev         libssl-dev &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache         /config/.cargo
+#7 CACHED
+
+#8 [3/5] COPY . /
+#8 DONE 0.0s
+
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.0s done
+#11 exporting manifest sha256:14cba5563cbb5d3cd083890f2bbf8e28af492aefaa94e461704aef210414870e done
+#11 exporting config sha256:c385f09f4cac9fb931b33fd3ffe456e6653fd7d749a05962ea810f178d76610c done
+#11 exporting attestation manifest sha256:5a6f0355a3baab20963a74520cbf06e3c059be1aa39597a740f018519e262152 done
+#11 exporting manifest list sha256:ffe2f8852fb79f060ed90dd0df1aa9c5803397bcb15116560a4354772de45ee2 done
+#11 naming to docker.io/library/limnoria:2025.11.2 done
+#11 unpacking to docker.io/library/limnoria:2025.11.2 0.0s done
+#11 DONE 0.1s

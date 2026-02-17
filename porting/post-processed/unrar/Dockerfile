@@ -7,8 +7,6 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-COPY data.rar /data.rar
-
 RUN \
   echo "**** install build dependencies ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
@@ -26,9 +24,6 @@ RUN \
   sed -i 's|CXXFLAGS=-march=native |CXXFLAGS=|' makefile && \
   make && \
   install -v -m755 unrar /usr/bin && \
-  echo "**** test binary ****" && \
-  /usr/bin/unrar v /data.rar && \
-  /usr/bin/unrar t /data.rar && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

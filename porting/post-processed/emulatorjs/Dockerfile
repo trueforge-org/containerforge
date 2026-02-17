@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.13.12
+FROM ghcr.io/trueforge-org/golang:1.26.0 as migrationbuilder
 USER root
 
 RUN \
@@ -6,7 +6,7 @@ RUN \
   mkdir -p /build-out/usr/bin && \
   git clone https://github.com/ipfs/fs-repo-migrations.git && \
   cd fs-repo-migrations && \
-  for BUILD in fs-repo-migrations fs-repo-9-to-10 fs-repo-10-to-11 fs-repo-11-to-12; do \
+  for BUILD in fs-repo-migrations fs-repo-12-to-13 fs-repo-13-to-14 fs-repo-14-to-15; do \
     cd ${BUILD} && \
     go build && \
     mv fs-repo-* /build-out/usr/bin/ && \
@@ -109,7 +109,6 @@ RUN \
   apt-get install -y --no-install-recommends \
     file \
     flac \
-    ipfs-kubo \
     nginx \
     p7zip-full \
     python3 \

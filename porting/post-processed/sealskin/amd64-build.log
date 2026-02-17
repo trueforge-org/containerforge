@@ -1,119 +1,267 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.17kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 839B / 839B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.3s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.20kB done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#3 DONE 0.1s
 
-#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 4.83kB done
-#5 DONE 0.0s
+#5 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#5 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#5 CACHED
 
-#6 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo "**** install sealskin ****" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /config/.cache     /tmp/*
-#6 0.145 **** install build packages ****
-#6 0.307 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.316 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.458 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.508 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 0.601 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.708 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 0.746 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 0.847 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 0.908 Get:9 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 1.021 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 1.051 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 1.819 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 1.971 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 2.114 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.364 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 2.577 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 2.784 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 2.928 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 2.947 Fetched 36.1 MB in 3s (13.0 MB/s)
-#6 2.947 Reading package lists...
-#6 3.691 Reading package lists...
-#6 4.426 Building dependency tree...
-#6 4.572 Reading state information...
-#6 4.737 The following NEW packages will be installed:
-#6 4.737   zip
-#6 4.893 0 upgraded, 1 newly installed, 0 to remove and 24 not upgraded.
-#6 4.893 Need to get 176 kB of archives.
-#6 4.893 After this operation, 549 kB of additional disk space will be used.
-#6 4.893 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 zip amd64 3.0-13ubuntu0.2 [176 kB]
-#6 5.000 debconf: delaying package configuration, since apt-utils is not installed
-#6 5.023 Fetched 176 kB in 0s (1,131 kB/s)
-#6 5.037 Selecting previously unselected package zip.
-#6 5.037 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
-#6 5.052 Preparing to unpack .../zip_3.0-13ubuntu0.2_amd64.deb ...
-#6 5.053 Unpacking zip (3.0-13ubuntu0.2) ...
-#6 5.076 Setting up zip (3.0-13ubuntu0.2) ...
-#6 5.092 **** install packages ****
-#6 5.258 Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
-#6 5.258 Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
-#6 5.398 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-#6 5.541 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
-#6 5.600 Reading package lists...
-#6 6.340 Reading package lists...
-#6 7.056 Building dependency tree...
-#6 7.199 Reading state information...
-#6 7.277 E: Unable to locate package echo
-#6 7.277 E: Unable to locate package **** install sealskin ****
-#6 7.277 E: Couldn't find any package by glob '**** install sealskin ****'
-#6 7.277 E: Regex compilation error - Invalid preceding regular expression
-#6 7.277 E: Couldn't find any package by regex '**** install sealskin ****'
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo \"**** install sealskin ****\" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     \"https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz\" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     $HOME/.cache     /tmp/*" did not complete successfully: exit code: 100
-------
- > [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo "**** install sealskin ****" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /config/.cache     /tmp/*:
-5.398 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-5.541 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#6 [internal] load build context
+#6 transferring context: 1.69kB done
+#6 DONE 0.0s
 
+#7 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo "**** install packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl &&   echo "**** install sealskin ****" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     "https://github.com/selkies-project/sealskin/archive/0.1.17.tar.gz" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   mkdir -p /storage &&   chown apps:apps /storage &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /config/.cache     /tmp/*
+#7 0.153 **** install build packages ****
+#7 0.481 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.548 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 1.050 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 1.078 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.226 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.374 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.575 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.588 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 1.717 Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.818 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.980 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 2.092 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 2.758 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.894 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 3.003 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 3.130 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 3.255 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 3.364 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 3.521 Fetched 36.1 MB in 3s (10.8 MB/s)
+#7 3.521 Reading package lists...
+#7 4.322 Reading package lists...
+#7 5.102 Building dependency tree...
+#7 5.271 Reading state information...
+#7 5.441 The following NEW packages will be installed:
+#7 5.441   zip
+#7 5.566 0 upgraded, 1 newly installed, 0 to remove and 24 not upgraded.
+#7 5.566 Need to get 176 kB of archives.
+#7 5.566 After this operation, 549 kB of additional disk space will be used.
+#7 5.566 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 zip amd64 3.0-13ubuntu0.2 [176 kB]
+#7 5.684 debconf: delaying package configuration, since apt-utils is not installed
+#7 5.713 Fetched 176 kB in 0s (1,466 kB/s)
+#7 5.728 Selecting previously unselected package zip.
+#7 5.728 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#7 5.742 Preparing to unpack .../zip_3.0-13ubuntu0.2_amd64.deb ...
+#7 5.743 Unpacking zip (3.0-13ubuntu0.2) ...
+#7 5.768 Setting up zip (3.0-13ubuntu0.2) ...
+#7 5.785 **** install packages ****
+#7 5.914 Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
+#7 5.915 Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+#7 6.024 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#7 6.133 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#7 6.196 Reading package lists...
+#7 7.046 Reading package lists...
+#7 8.153 Building dependency tree...
+#7 8.468 Reading state information...
+#7 8.978 openssl is already the newest version (3.0.13-0ubuntu3.7).
+#7 8.978 openssl set to manually installed.
+#7 8.978 The following additional packages will be installed:
+#7 8.980   libnspr4 libnss3 libnss3-tools
+#7 9.022 The following NEW packages will be installed:
+#7 9.025   caddy libnspr4 libnss3 libnss3-tools
+#7 9.168 0 upgraded, 4 newly installed, 0 to remove and 24 not upgraded.
+#7 9.168 Need to get 12.7 MB of archives.
+#7 9.168 After this operation, 45.5 MB of additional disk space will be used.
+#7 9.168 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libnspr4 amd64 2:4.35-1.1build1 [117 kB]
+#7 9.278 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libnss3 amd64 2:3.98-1build1 [1,445 kB]
+#7 9.399 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libnss3-tools amd64 2:3.98-1build1 [615 kB]
+#7 9.511 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 caddy amd64 2.6.2-6ubuntu0.24.04.3 [10.5 MB]
+#7 9.935 debconf: delaying package configuration, since apt-utils is not installed
+#7 9.975 Fetched 12.7 MB in 1s (17.6 MB/s)
+#7 9.990 Selecting previously unselected package libnspr4:amd64.
+#7 9.990 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20768 files and directories currently installed.)
+#7 10.00 Preparing to unpack .../libnspr4_2%3a4.35-1.1build1_amd64.deb ...
+#7 10.01 Unpacking libnspr4:amd64 (2:4.35-1.1build1) ...
+#7 10.03 Selecting previously unselected package libnss3:amd64.
+#7 10.03 Preparing to unpack .../libnss3_2%3a3.98-1build1_amd64.deb ...
+#7 10.03 Unpacking libnss3:amd64 (2:3.98-1build1) ...
+#7 10.06 Selecting previously unselected package libnss3-tools.
+#7 10.07 Preparing to unpack .../libnss3-tools_2%3a3.98-1build1_amd64.deb ...
+#7 10.07 Unpacking libnss3-tools (2:3.98-1build1) ...
+#7 10.09 Selecting previously unselected package caddy.
+#7 10.10 Preparing to unpack .../caddy_2.6.2-6ubuntu0.24.04.3_amd64.deb ...
+#7 10.10 Unpacking caddy (2.6.2-6ubuntu0.24.04.3) ...
+#7 10.25 Setting up libnspr4:amd64 (2:4.35-1.1build1) ...
+#7 10.26 Setting up libnss3:amd64 (2:3.98-1build1) ...
+#7 10.26 Setting up libnss3-tools (2:3.98-1build1) ...
+#7 10.26 Setting up caddy (2.6.2-6ubuntu0.24.04.3) ...
+#7 10.46 Created symlink /etc/systemd/system/multi-user.target.wants/caddy.service → /usr/lib/systemd/system/caddy.service.
+#7 10.47 /usr/sbin/policy-rc.d returned 101, not running 'start caddy.service'
+#7 10.48 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 10.52 **** install sealskin ****
+#7 10.52   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 10.52                                  Dload  Upload   Total   Spent    Left  Speed
+#7 10.52   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 10.79 100  341k    0  341k    0     0  1295k      0 --:--:-- --:--:-- --:--:-- 1295k
+#7 12.02 Collecting fastapi (from -r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.04   Downloading fastapi-0.129.0-py3-none-any.whl.metadata (30 kB)
+#7 12.09 Collecting uvloop (from -r /opt/sealskin/server/requirements.txt (line 3))
+#7 12.10   Downloading uvloop-0.22.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#7 12.22 Collecting pydantic (from -r /opt/sealskin/server/requirements.txt (line 5))
+#7 12.23   Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+#7 12.43 Collecting cryptography (from -r /opt/sealskin/server/requirements.txt (line 6))
+#7 12.44   Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+#7 12.46 Collecting httpx (from -r /opt/sealskin/server/requirements.txt (line 7))
+#7 12.47   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#7 12.56 Collecting websockets (from -r /opt/sealskin/server/requirements.txt (line 8))
+#7 12.57   Downloading websockets-16.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+#7 12.60 Collecting docker (from -r /opt/sealskin/server/requirements.txt (line 9))
+#7 12.61   Downloading docker-7.1.0-py3-none-any.whl.metadata (3.8 kB)
+#7 12.65 Collecting PyYAML (from -r /opt/sealskin/server/requirements.txt (line 10))
+#7 12.66   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#7 12.67 Collecting python-multipart (from -r /opt/sealskin/server/requirements.txt (line 11))
+#7 12.68   Downloading python_multipart-0.0.22-py3-none-any.whl.metadata (1.8 kB)
+#7 12.71 Collecting uvicorn[standard] (from -r /opt/sealskin/server/requirements.txt (line 2))
+#7 12.72   Downloading uvicorn-0.41.0-py3-none-any.whl.metadata (6.7 kB)
+#7 12.74 Collecting python-jose[cryptography] (from -r /opt/sealskin/server/requirements.txt (line 4))
+#7 12.75   Downloading python_jose-3.5.0-py2.py3-none-any.whl.metadata (5.5 kB)
+#7 12.78 Collecting starlette<1.0.0,>=0.40.0 (from fastapi->-r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.79   Downloading starlette-0.52.1-py3-none-any.whl.metadata (6.3 kB)
+#7 12.83 Collecting typing-extensions>=4.8.0 (from fastapi->-r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.83   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#7 12.85 Collecting typing-inspection>=0.4.2 (from fastapi->-r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.86   Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+#7 12.87 Collecting annotated-doc>=0.0.2 (from fastapi->-r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.88   Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+#7 12.90 Collecting anyio<5,>=3.6.2 (from starlette<1.0.0,>=0.40.0->fastapi->-r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.91   Downloading anyio-4.12.1-py3-none-any.whl.metadata (4.3 kB)
+#7 12.93 Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette<1.0.0,>=0.40.0->fastapi->-r /opt/sealskin/server/requirements.txt (line 1))
+#7 12.94   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+#7 12.96 Collecting click>=7.0 (from uvicorn[standard]->-r /opt/sealskin/server/requirements.txt (line 2))
+#7 12.97   Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+#7 12.98 Collecting h11>=0.8 (from uvicorn[standard]->-r /opt/sealskin/server/requirements.txt (line 2))
+#7 12.99   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#7 13.03 Collecting httptools>=0.6.3 (from uvicorn[standard]->-r /opt/sealskin/server/requirements.txt (line 2))
+#7 13.04   Downloading httptools-0.7.1-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#7 13.06 Collecting python-dotenv>=0.13 (from uvicorn[standard]->-r /opt/sealskin/server/requirements.txt (line 2))
+#7 13.07   Downloading python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+#7 13.16 Collecting watchfiles>=0.20 (from uvicorn[standard]->-r /opt/sealskin/server/requirements.txt (line 2))
+#7 13.17   Downloading watchfiles-1.1.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#7 13.19 Collecting ecdsa!=0.15 (from python-jose[cryptography]->-r /opt/sealskin/server/requirements.txt (line 4))
+#7 13.20   Downloading ecdsa-0.19.1-py2.py3-none-any.whl.metadata (29 kB)
+#7 13.22 Collecting rsa!=4.1.1,!=4.4,<5.0,>=4.0 (from python-jose[cryptography]->-r /opt/sealskin/server/requirements.txt (line 4))
+#7 13.23   Downloading rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+#7 13.26 Collecting pyasn1>=0.5.0 (from python-jose[cryptography]->-r /opt/sealskin/server/requirements.txt (line 4))
+#7 13.27   Downloading pyasn1-0.6.2-py3-none-any.whl.metadata (8.4 kB)
+#7 13.31 Collecting annotated-types>=0.6.0 (from pydantic->-r /opt/sealskin/server/requirements.txt (line 5))
+#7 13.32   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+#7 14.02 Collecting pydantic-core==2.41.5 (from pydantic->-r /opt/sealskin/server/requirements.txt (line 5))
+#7 14.03   Downloading pydantic_core-2.41.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+#7 14.14 Collecting cffi>=2.0.0 (from cryptography->-r /opt/sealskin/server/requirements.txt (line 6))
+#7 14.16   Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#7 14.18 Collecting certifi (from httpx->-r /opt/sealskin/server/requirements.txt (line 7))
+#7 14.19   Downloading certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
+#7 14.22 Collecting httpcore==1.* (from httpx->-r /opt/sealskin/server/requirements.txt (line 7))
+#7 14.23   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#7 14.28 Collecting requests>=2.26.0 (from docker->-r /opt/sealskin/server/requirements.txt (line 9))
+#7 14.29   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+#7 14.32 Collecting urllib3>=1.26.0 (from docker->-r /opt/sealskin/server/requirements.txt (line 9))
+#7 14.33   Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+#7 14.35 Collecting pycparser (from cffi>=2.0.0->cryptography->-r /opt/sealskin/server/requirements.txt (line 6))
+#7 14.36   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#7 14.38 Collecting six>=1.9.0 (from ecdsa!=0.15->python-jose[cryptography]->-r /opt/sealskin/server/requirements.txt (line 4))
+#7 14.39   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#7 14.49 Collecting charset_normalizer<4,>=2 (from requests>=2.26.0->docker->-r /opt/sealskin/server/requirements.txt (line 9))
+#7 14.50   Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+#7 14.55 Downloading fastapi-0.129.0-py3-none-any.whl (102 kB)
+#7 14.56 Downloading starlette-0.52.1-py3-none-any.whl (74 kB)
+#7 14.57 Downloading anyio-4.12.1-py3-none-any.whl (113 kB)
+#7 14.58 Downloading uvicorn-0.41.0-py3-none-any.whl (68 kB)
+#7 14.59 Downloading uvloop-0.22.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#7 14.62    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 186.6 MB/s  0:00:00
+#7 14.63 Downloading python_jose-3.5.0-py2.py3-none-any.whl (34 kB)
+#7 14.64 Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
+#7 14.65 Downloading pydantic-2.12.5-py3-none-any.whl (463 kB)
+#7 14.66 Downloading pydantic_core-2.41.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#7 14.66    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 433.7 MB/s  0:00:00
+#7 14.67 Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+#7 14.69    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 445.2 MB/s  0:00:00
+#7 14.70 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#7 14.71 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#7 14.72 Downloading websockets-16.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+#7 14.73 Downloading docker-7.1.0-py3-none-any.whl (147 kB)
+#7 14.74 Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+#7 14.74    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 533.0 MB/s  0:00:00
+#7 14.75 Downloading python_multipart-0.0.22-py3-none-any.whl (24 kB)
+#7 14.76 Downloading annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+#7 14.77 Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#7 14.78 Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+#7 14.79 Downloading click-8.3.1-py3-none-any.whl (108 kB)
+#7 14.80 Downloading ecdsa-0.19.1-py2.py3-none-any.whl (150 kB)
+#7 14.81 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#7 14.82 Downloading httptools-0.7.1-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (478 kB)
+#7 14.83 Downloading idna-3.11-py3-none-any.whl (71 kB)
+#7 14.85 Downloading pyasn1-0.6.2-py3-none-any.whl (83 kB)
+#7 14.86 Downloading python_dotenv-1.2.1-py3-none-any.whl (21 kB)
+#7 14.86 Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+#7 14.87 Downloading charset_normalizer-3.4.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+#7 14.88 Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+#7 14.90 Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
+#7 14.91 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#7 14.92 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#7 14.93 Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+#7 14.94 Downloading watchfiles-1.1.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#7 14.95 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#7 15.05 Installing collected packages: websockets, uvloop, urllib3, typing-extensions, six, PyYAML, python-multipart, python-dotenv, pycparser, pyasn1, idna, httptools, h11, click, charset_normalizer, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, rsa, requests, pydantic-core, httpcore, ecdsa, cffi, anyio, watchfiles, starlette, python-jose, pydantic, httpx, docker, cryptography, fastapi
+#7 16.96 
+#7 16.97 Successfully installed PyYAML-6.0.3 annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.12.1 certifi-2026.1.4 cffi-2.0.0 charset_normalizer-3.4.4 click-8.3.1 cryptography-46.0.5 docker-7.1.0 ecdsa-0.19.1 fastapi-0.129.0 h11-0.16.0 httpcore-1.0.9 httptools-0.7.1 httpx-0.28.1 idna-3.11 pyasn1-0.6.2 pycparser-3.0 pydantic-2.12.5 pydantic-core-2.41.5 python-dotenv-1.2.1 python-jose-3.5.0 python-multipart-0.0.22 requests-2.32.5 rsa-4.9.1 six-1.17.0 starlette-0.52.1 typing-extensions-4.15.0 typing-inspection-0.4.2 urllib3-2.6.3 uvicorn-0.41.0 uvloop-0.22.1 watchfiles-1.1.1 websockets-16.0
+#7 17.19   adding: app_template_settings.js (deflated 91%)
+#7 17.19   adding: background.js (deflated 73%)
+#7 17.19   adding: crypto-utils.js (deflated 65%)
+#7 17.19   adding: files.css (deflated 75%)
+#7 17.19   adding: files.html (deflated 80%)
+#7 17.19   adding: files.js (deflated 75%)
+#7 17.19   adding: icons/ (stored 0%)
+#7 17.19   adding: icons/icon128.png (deflated 1%)
+#7 17.19   adding: languages.js (deflated 81%)
+#7 17.19   adding: manifest.json (deflated 47%)
+#7 17.19   adding: options.css (deflated 81%)
+#7 17.20   adding: options.html (deflated 86%)
+#7 17.20   adding: options.js (deflated 81%)
+#7 17.20   adding: popup.html (deflated 79%)
+#7 17.20   adding: popup.js (deflated 78%)
+#7 17.20   adding: README.md (deflated 60%)
+#7 17.20   adding: translations.js (deflated 77%)
+#7 17.23   adding: upload.html (deflated 62%)
+#7 17.23   adding: upload.js (deflated 66%)
+#7 17.23 **** cleanup ****
+#7 17.24 Reading package lists...
+#7 18.03 Building dependency tree...
+#7 18.20 Reading state information...
+#7 18.37 0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
+#7 DONE 18.5s
 
+#8 [3/4] COPY . /
+#8 DONE 0.0s
 
-7.277 E: Unable to locate package echo
-7.277 E: Unable to locate package **** install sealskin ****
-7.277 E: Couldn't find any package by glob '**** install sealskin ****'
-7.277 E: Regex compilation error - Invalid preceding regular expression
-7.277 E: Couldn't find any package by regex '**** install sealskin ****'
-------
-Dockerfile:11
---------------------
-  10 |     # install software
-  11 | >>> RUN \
-  12 | >>>   echo "**** install build packages ****" && \
-  13 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  14 | >>>     zip && \
-  15 | >>>   echo "**** install packages ****" && \
-  16 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  17 | >>>     caddy \
-  18 | >>>     openssl \
-  19 | >>>   echo "**** install sealskin ****" && \
-  20 | >>>   mkdir /opt/sealskin && \
-  21 | >>>   curl -o \
-  22 | >>>     /tmp/sealskin.tar.gz -L \
-  23 | >>>     "https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz" && \
-  24 | >>>   tar xf \
-  25 | >>>     /tmp/sealskin.tar.gz -C \
-  26 | >>>     /opt/sealskin --strip-components=1 && \
-  27 | >>>   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages && \
-  28 | >>>   cd /opt/sealskin/browser_extension && \
-  29 | >>>   zip -r /sealskin.zip * && \
-  30 | >>>   chown apps:apps /sealskin.zip && \
-  31 | >>>   chown apps:apps /storage && \
-  32 | >>>   echo "**** cleanup ****" && \
-  33 | >>>   apt-get autoremove -y && \
-  34 | >>>   rm -rf \
-  35 | >>>     $HOME/.cache \
-  36 | >>>     /tmp/*
-  37 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     zip &&   echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     caddy     openssl   echo \"**** install sealskin ****\" &&   mkdir /opt/sealskin &&   curl -o     /tmp/sealskin.tar.gz -L     \"https://github.com/selkies-project/sealskin/archive/${VERSION}.tar.gz\" &&   tar xf     /tmp/sealskin.tar.gz -C     /opt/sealskin --strip-components=1 &&   pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages &&   cd /opt/sealskin/browser_extension &&   zip -r /sealskin.zip * &&   chown apps:apps /sealskin.zip &&   chown apps:apps /storage &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     $HOME/.cache     /tmp/*" did not complete successfully: exit code: 100
+#9 [4/4] WORKDIR /config
+#9 DONE 0.0s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 6.1s done
+#10 exporting manifest sha256:03405c2f3046d64c1dfa882bff47fbcae38148bfd0b28ecb0cc30e2ecf198d91 done
+#10 exporting config sha256:22d1fa7ca19bca7503630ae1ed4bc5d64ec338f69a061171152eb2c00523094b done
+#10 exporting attestation manifest sha256:7db2e289bfbb79ff117404e372c5d7e094b357a700d4931cb17fd63ce4da3c54 done
+#10 exporting manifest list sha256:c00f0d848ef7ff17be188425c87ebde16147b04e29bf1b3bf7d063b7ab379149 done
+#10 naming to docker.io/library/sealskin:0.1.17 done
+#10 unpacking to docker.io/library/sealskin:0.1.17
+#10 unpacking to docker.io/library/sealskin:0.1.17 1.1s done
+#10 DONE 7.2s

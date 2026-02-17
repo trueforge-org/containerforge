@@ -13,6 +13,7 @@ RUN \
         php8.3-xml \
         php8.3-intl \
         php8.3-opcache \
+        php8.3-fpm \
         php8.3-mysql \
         php8.3-pgsql \
         php8.3-sqlite3 \
@@ -20,6 +21,8 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     echo "**** configure nginx ****" && \
+    mkdir -p /etc/nginx && \
+    touch /etc/nginx/fastcgi_params && \
     echo 'fastcgi_param  PHP_AUTH_USER      $remote_user; # Heimdall user authorization' >> \
         /etc/nginx/fastcgi_params && \
     echo 'fastcgi_param  PHP_AUTH_PW        $http_authorization; # Heimdall user authorization' >> \

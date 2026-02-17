@@ -20,3 +20,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libldap2-dev         python3-dev         libffi-dev &&     echo \"**** install runtime packages ****\" &&     apt-get install -y --no-install-recommends         libldap2         libffi8         python3 &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir         cryptography         legacy-cgi         python-ldap==\"${VERSION}\" &&     echo \"**** cleanup ****\" &&     apt-get remove -y --purge         build-essential         libldap2-dev         python3-dev         libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         $HOME/.cache" did not complete successfully: exit code: 1
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after adding SASL development/runtime packages and python3-venv setup.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted follow-up batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after adding libsasl2 build/runtime dependencies and ensuring python3-venv setup.
+- Full log: `amd64-build.log`

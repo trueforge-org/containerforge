@@ -15,7 +15,7 @@ RUN \
   echo "**** install packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     caddy \
-    openssl \
+    openssl && \
   echo "**** install sealskin ****" && \
   mkdir /opt/sealskin && \
   curl -o \
@@ -28,6 +28,7 @@ RUN \
   cd /opt/sealskin/browser_extension && \
   zip -r /sealskin.zip * && \
   chown apps:apps /sealskin.zip && \
+  mkdir -p /storage && \
   chown apps:apps /storage && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \

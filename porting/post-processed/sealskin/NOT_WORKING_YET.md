@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Dockerfile is missing `&&` between `openssl` install and the next `echo`, so apt treats `echo`/`**** install sealskin ****` as package names.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted follow-up batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after fixing apt command chaining and creating /storage before chown.
+- Full log: `amd64-build.log`

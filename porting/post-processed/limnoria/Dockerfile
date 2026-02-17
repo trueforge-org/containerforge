@@ -22,9 +22,9 @@ RUN \
     /config/venv/bin/pip install -U --no-cache-dir \
         pip \
         wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
+    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.21/ \
+    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         limnoria=="${VERSION}" && \
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove \

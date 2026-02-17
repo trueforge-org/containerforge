@@ -21,3 +21,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fbaseimage-kasmvnc%3Apull&service=ghcr.io: 403 Forbidden
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted follow-up batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build blocked by GHCR 403 token access for trueforge-org/baseimage-kasmvnc base image.
+- Full log: `amd64-build.log`

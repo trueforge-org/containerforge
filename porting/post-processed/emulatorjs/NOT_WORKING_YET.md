@@ -26,3 +26,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Runtime package install fails because `ipfs-kubo` package is unavailable in Ubuntu apt repos.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted follow-up batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in upstream emulatorjs source fetch step (tarball extraction failure for current VERSION tag path).
+- Full log: `amd64-build.log`

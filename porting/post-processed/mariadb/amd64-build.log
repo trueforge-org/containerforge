@@ -1,278 +1,46 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 765B done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 819B / 819B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.2s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 765B done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
 
-#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 16.25kB done
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
 #5 DONE 0.0s
 
-#6 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         logrotate         mariadb-server         mariadb-backup         mariadb-client         mariadb-common         mariadb-server-core &&     echo "**** cleanup ****" &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache
-#6 0.168 **** install runtime packages ****
-#6 0.273 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.355 Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.437 Get:3 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.518 Get:4 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 0.598 Get:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 0.646 Get:6 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 1.025 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 1.109 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 1.219 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 1.358 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 1.387 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 1.472 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 1.552 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 1.572 Get:14 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 1.671 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 1.751 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 2.479 Get:17 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 2.675 Get:18 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 2.814 Fetched 36.1 MB in 3s (13.8 MB/s)
-#6 2.814 Reading package lists...
-#6 3.535 Reading package lists...
-#6 4.254 Building dependency tree...
-#6 4.403 Reading state information...
-#6 4.550 The following additional packages will be installed:
-#6 4.550   galera-4 gawk iproute2 libbpf1 libbsd0 libconfig-inifiles-perl libdbi-perl
-#6 4.550   libedit2 libmariadb3 libmnl0 libmpfr6 libncurses6 libnuma1 libpopt0
-#6 4.550   libsigsegv2 libtirpc-common libtirpc3t64 liburing2 libwrap0 libxtables12
-#6 4.551   lsof mariadb-client-core mysql-common psmisc rsync socat
-#6 4.551 Suggested packages:
-#6 4.551   gawk-doc iproute2-doc libclone-perl libmldbm-perl libnet-daemon-perl
-#6 4.551   libsql-statement-perl bsd-mailx | mailx mailx mariadb-test netcat-openbsd
-#6 4.551   openssh-client openssh-server python3-braceexpand
-#6 4.551 Recommended packages:
-#6 4.551   libatm1t64 libgpm2 libdbd-mariadb-perl | libdbd-mysql-perl
-#6 4.551   libterm-readkey-perl libhtml-template-perl mariadb-plugin-provider-bzip2
-#6 4.551   mariadb-plugin-provider-lz4 mariadb-plugin-provider-lzma
-#6 4.551   mariadb-plugin-provider-lzo mariadb-plugin-provider-snappy pv
-#6 4.610 The following NEW packages will be installed:
-#6 4.610   galera-4 gawk iproute2 libbpf1 libbsd0 libconfig-inifiles-perl libdbi-perl
-#6 4.610   libedit2 libmariadb3 libmnl0 libmpfr6 libncurses6 libnuma1 libpopt0
-#6 4.610   libsigsegv2 libtirpc-common libtirpc3t64 liburing2 libwrap0 libxtables12
-#6 4.610   logrotate lsof mariadb-backup mariadb-client mariadb-client-core
-#6 4.611   mariadb-common mariadb-server mariadb-server-core mysql-common psmisc rsync
-#6 4.611   socat
-#6 4.706 0 upgraded, 32 newly installed, 0 to remove and 5 not upgraded.
-#6 4.706 Need to get 28.3 MB of archives.
-#6 4.706 After this operation, 234 MB of additional disk space will be used.
-#6 4.706 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libpopt0 amd64 1.19+dfsg-1build1 [28.6 kB]
-#6 4.786 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 rsync amd64 3.2.7-1ubuntu1.2 [436 kB]
-#6 4.871 Get:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 galera-4 amd64 26.4.16-2build4 [736 kB]
-#6 4.963 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr6 amd64 4.2.1-1build1.1 [353 kB]
-#6 5.047 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libsigsegv2 amd64 2.14-1ubuntu2 [15.0 kB]
-#6 5.127 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 gawk amd64 1:5.2.1-2build3 [463 kB]
-#6 5.214 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 mysql-common all 5.8+1.1.0build1 [6,746 B]
-#6 5.293 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-common all 1:10.11.14-0ubuntu0.24.04.1 [28.6 kB]
-#6 5.373 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libbpf1 amd64 1:1.3.0-2build2 [166 kB]
-#6 5.453 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libmnl0 amd64 1.0.5-2build1 [12.3 kB]
-#6 5.532 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libxtables12 amd64 1.8.10-3ubuntu2 [35.7 kB]
-#6 5.612 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 iproute2 amd64 6.1.0-1ubuntu6.2 [1,120 kB]
-#6 5.710 Get:13 http://archive.ubuntu.com/ubuntu noble/main amd64 libdbi-perl amd64 1.643-4build3 [721 kB]
-#6 5.800 Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-common all 1.3.4+ds-1.1build1 [8,094 B]
-#6 5.880 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libtirpc3t64 amd64 1.3.4+ds-1.1build1 [82.6 kB]
-#6 5.962 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 lsof amd64 4.95.0-1build3 [247 kB]
-#6 6.042 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libconfig-inifiles-perl all 3.000003-2 [39.4 kB]
-#6 6.122 Get:18 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 libmariadb3 amd64 1:10.11.14-0ubuntu0.24.04.1 [196 kB]
-#6 6.203 Get:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
-#6 6.283 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
-#6 6.363 Get:21 http://archive.ubuntu.com/ubuntu noble/main amd64 libncurses6 amd64 6.4+20240113-1ubuntu2 [112 kB]
-#6 6.442 Get:22 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-client-core amd64 1:10.11.14-0ubuntu0.24.04.1 [1,039 kB]
-#6 6.539 Get:23 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-client amd64 1:10.11.14-0ubuntu0.24.04.1 [2,502 kB]
-#6 6.662 Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libnuma1 amd64 2.0.18-1ubuntu0.24.04.1 [23.4 kB]
-#6 6.742 Get:25 http://archive.ubuntu.com/ubuntu noble/main amd64 liburing2 amd64 2.5-1build1 [21.1 kB]
-#6 6.821 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-server-core amd64 1:10.11.14-0ubuntu0.24.04.1 [8,406 kB]
-#6 7.051 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
-#6 7.132 Get:28 http://archive.ubuntu.com/ubuntu noble/main amd64 libwrap0 amd64 7.6.q-33 [47.9 kB]
-#6 7.212 Get:29 http://archive.ubuntu.com/ubuntu noble/main amd64 socat amd64 1.8.0.0-4build3 [374 kB]
-#6 7.296 Get:30 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-server amd64 1:10.11.14-0ubuntu0.24.04.1 [3,463 kB]
-#6 7.436 Get:31 http://archive.ubuntu.com/ubuntu noble/main amd64 logrotate amd64 3.21.0-2build1 [52.2 kB]
-#6 7.516 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 mariadb-backup amd64 1:10.11.14-0ubuntu0.24.04.1 [7,266 kB]
-#6 7.752 debconf: delaying package configuration, since apt-utils is not installed
-#6 7.776 Fetched 28.3 MB in 3s (9,349 kB/s)
-#6 7.790 Selecting previously unselected package libpopt0:amd64.
-#6 7.790 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
-#6 7.801 Preparing to unpack .../libpopt0_1.19+dfsg-1build1_amd64.deb ...
-#6 7.802 Unpacking libpopt0:amd64 (1.19+dfsg-1build1) ...
-#6 7.818 Selecting previously unselected package rsync.
-#6 7.820 Preparing to unpack .../rsync_3.2.7-1ubuntu1.2_amd64.deb ...
-#6 7.822 Unpacking rsync (3.2.7-1ubuntu1.2) ...
-#6 7.844 Selecting previously unselected package galera-4.
-#6 7.845 Preparing to unpack .../galera-4_26.4.16-2build4_amd64.deb ...
-#6 7.874 info: The home dir /nonexistent you specified can't be accessed: No such file or directory
-#6 7.874 
-#6 7.878 info: Selecting UID from range 100 to 999 ...
-#6 7.878 
-#6 7.880 info: Adding system user `_galera' (UID 102) ...
-#6 7.882 info: Adding new user `_galera' (UID 102) with group `nogroup' ...
-#6 7.895 info: Not creating `/nonexistent'.
-#6 7.898 Unpacking galera-4 (26.4.16-2build4) ...
-#6 7.920 Selecting previously unselected package libmpfr6:amd64.
-#6 7.922 Preparing to unpack .../libmpfr6_4.2.1-1build1.1_amd64.deb ...
-#6 7.923 Unpacking libmpfr6:amd64 (4.2.1-1build1.1) ...
-#6 7.941 Selecting previously unselected package libsigsegv2:amd64.
-#6 7.942 Preparing to unpack .../libsigsegv2_2.14-1ubuntu2_amd64.deb ...
-#6 7.943 Unpacking libsigsegv2:amd64 (2.14-1ubuntu2) ...
-#6 7.962 Setting up libmpfr6:amd64 (4.2.1-1build1.1) ...
-#6 7.964 Setting up libsigsegv2:amd64 (2.14-1ubuntu2) ...
-#6 7.983 Selecting previously unselected package gawk.
-#6 7.983 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16643 files and directories currently installed.)
-#6 7.993 Preparing to unpack .../00-gawk_1%3a5.2.1-2build3_amd64.deb ...
-#6 7.994 Unpacking gawk (1:5.2.1-2build3) ...
-#6 8.028 Selecting previously unselected package mysql-common.
-#6 8.029 Preparing to unpack .../01-mysql-common_5.8+1.1.0build1_all.deb ...
-#6 8.039 Unpacking mysql-common (5.8+1.1.0build1) ...
-#6 8.053 Selecting previously unselected package mariadb-common.
-#6 8.055 Preparing to unpack .../02-mariadb-common_1%3a10.11.14-0ubuntu0.24.04.1_all.deb ...
-#6 8.058 Unpacking mariadb-common (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 8.072 Selecting previously unselected package libbpf1:amd64.
-#6 8.073 Preparing to unpack .../03-libbpf1_1%3a1.3.0-2build2_amd64.deb ...
-#6 8.074 Unpacking libbpf1:amd64 (1:1.3.0-2build2) ...
-#6 8.090 Selecting previously unselected package libmnl0:amd64.
-#6 8.091 Preparing to unpack .../04-libmnl0_1.0.5-2build1_amd64.deb ...
-#6 8.092 Unpacking libmnl0:amd64 (1.0.5-2build1) ...
-#6 8.105 Selecting previously unselected package libxtables12:amd64.
-#6 8.107 Preparing to unpack .../05-libxtables12_1.8.10-3ubuntu2_amd64.deb ...
-#6 8.108 Unpacking libxtables12:amd64 (1.8.10-3ubuntu2) ...
-#6 8.122 Selecting previously unselected package iproute2.
-#6 8.123 Preparing to unpack .../06-iproute2_6.1.0-1ubuntu6.2_amd64.deb ...
-#6 8.124 Unpacking iproute2 (6.1.0-1ubuntu6.2) ...
-#6 8.161 Selecting previously unselected package libdbi-perl:amd64.
-#6 8.162 Preparing to unpack .../07-libdbi-perl_1.643-4build3_amd64.deb ...
-#6 8.163 Unpacking libdbi-perl:amd64 (1.643-4build3) ...
-#6 8.199 Selecting previously unselected package libtirpc-common.
-#6 8.201 Preparing to unpack .../08-libtirpc-common_1.3.4+ds-1.1build1_all.deb ...
-#6 8.202 Unpacking libtirpc-common (1.3.4+ds-1.1build1) ...
-#6 8.216 Selecting previously unselected package libtirpc3t64:amd64.
-#6 8.217 Preparing to unpack .../09-libtirpc3t64_1.3.4+ds-1.1build1_amd64.deb ...
-#6 8.223 Adding 'diversion of /lib/x86_64-linux-gnu/libtirpc.so.3 to /lib/x86_64-linux-gnu/libtirpc.so.3.usr-is-merged by libtirpc3t64'
-#6 8.228 Adding 'diversion of /lib/x86_64-linux-gnu/libtirpc.so.3.0.0 to /lib/x86_64-linux-gnu/libtirpc.so.3.0.0.usr-is-merged by libtirpc3t64'
-#6 8.230 Unpacking libtirpc3t64:amd64 (1.3.4+ds-1.1build1) ...
-#6 8.244 Selecting previously unselected package lsof.
-#6 8.246 Preparing to unpack .../10-lsof_4.95.0-1build3_amd64.deb ...
-#6 8.247 Unpacking lsof (4.95.0-1build3) ...
-#6 8.262 Selecting previously unselected package libconfig-inifiles-perl.
-#6 8.263 Preparing to unpack .../11-libconfig-inifiles-perl_3.000003-2_all.deb ...
-#6 8.264 Unpacking libconfig-inifiles-perl (3.000003-2) ...
-#6 8.279 Selecting previously unselected package libmariadb3:amd64.
-#6 8.280 Preparing to unpack .../12-libmariadb3_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
-#6 8.281 Unpacking libmariadb3:amd64 (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 8.298 Selecting previously unselected package libbsd0:amd64.
-#6 8.299 Preparing to unpack .../13-libbsd0_0.12.1-1build1.1_amd64.deb ...
-#6 8.300 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
-#6 8.315 Selecting previously unselected package libedit2:amd64.
-#6 8.316 Preparing to unpack .../14-libedit2_3.1-20230828-1build1_amd64.deb ...
-#6 8.317 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
-#6 8.332 Selecting previously unselected package libncurses6:amd64.
-#6 8.334 Preparing to unpack .../15-libncurses6_6.4+20240113-1ubuntu2_amd64.deb ...
-#6 8.335 Unpacking libncurses6:amd64 (6.4+20240113-1ubuntu2) ...
-#6 8.349 Selecting previously unselected package mariadb-client-core.
-#6 8.350 Preparing to unpack .../16-mariadb-client-core_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
-#6 8.351 Unpacking mariadb-client-core (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 8.408 Selecting previously unselected package mariadb-client.
-#6 8.411 Preparing to unpack .../17-mariadb-client_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
-#6 8.411 Unpacking mariadb-client (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 8.606 Selecting previously unselected package libnuma1:amd64.
-#6 8.608 Preparing to unpack .../18-libnuma1_2.0.18-1ubuntu0.24.04.1_amd64.deb ...
-#6 8.609 Unpacking libnuma1:amd64 (2.0.18-1ubuntu0.24.04.1) ...
-#6 8.623 Selecting previously unselected package liburing2:amd64.
-#6 8.624 Preparing to unpack .../19-liburing2_2.5-1build1_amd64.deb ...
-#6 8.625 Unpacking liburing2:amd64 (2.5-1build1) ...
-#6 8.639 Selecting previously unselected package mariadb-server-core.
-#6 8.640 Preparing to unpack .../20-mariadb-server-core_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
-#6 8.641 Unpacking mariadb-server-core (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 8.819 Selecting previously unselected package psmisc.
-#6 8.821 Preparing to unpack .../21-psmisc_23.7-1build1_amd64.deb ...
-#6 8.822 Unpacking psmisc (23.7-1build1) ...
-#6 8.843 Selecting previously unselected package libwrap0:amd64.
-#6 8.845 Preparing to unpack .../22-libwrap0_7.6.q-33_amd64.deb ...
-#6 8.846 Unpacking libwrap0:amd64 (7.6.q-33) ...
-#6 8.859 Selecting previously unselected package socat.
-#6 8.861 Preparing to unpack .../23-socat_1.8.0.0-4build3_amd64.deb ...
-#6 8.861 Unpacking socat (1.8.0.0-4build3) ...
-#6 8.888 Setting up mysql-common (5.8+1.1.0build1) ...
-#6 8.901 update-alternatives: using /etc/mysql/my.cnf.fallback to provide /etc/mysql/my.cnf (my.cnf) in auto mode
-#6 8.903 Setting up mariadb-common (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 8.907 update-alternatives: using /etc/mysql/mariadb.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
-#6 8.929 Selecting previously unselected package mariadb-server.
-#6 8.929 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 17643 files and directories currently installed.)
-#6 8.940 Preparing to unpack .../mariadb-server_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
-#6 9.155 Unpacking mariadb-server (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.335 Selecting previously unselected package logrotate.
-#6 9.337 Preparing to unpack .../logrotate_3.21.0-2build1_amd64.deb ...
-#6 9.338 Unpacking logrotate (3.21.0-2build1) ...
-#6 9.354 Selecting previously unselected package mariadb-backup.
-#6 9.355 Preparing to unpack .../mariadb-backup_1%3a10.11.14-0ubuntu0.24.04.1_amd64.deb ...
-#6 9.356 Unpacking mariadb-backup (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.487 Setting up libconfig-inifiles-perl (3.000003-2) ...
-#6 9.489 Setting up galera-4 (26.4.16-2build4) ...
-#6 9.491 Setting up gawk (1:5.2.1-2build3) ...
-#6 9.497 Setting up psmisc (23.7-1build1) ...
-#6 9.499 Setting up libtirpc-common (1.3.4+ds-1.1build1) ...
-#6 9.502 Setting up libwrap0:amd64 (7.6.q-33) ...
-#6 9.507 Setting up socat (1.8.0.0-4build3) ...
-#6 9.509 Setting up libncurses6:amd64 (6.4+20240113-1ubuntu2) ...
-#6 9.511 Setting up libmnl0:amd64 (1.0.5-2build1) ...
-#6 9.513 Setting up libmariadb3:amd64 (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.515 Setting up libxtables12:amd64 (1.8.10-3ubuntu2) ...
-#6 9.517 Setting up libnuma1:amd64 (2.0.18-1ubuntu0.24.04.1) ...
-#6 9.519 Setting up liburing2:amd64 (2.5-1build1) ...
-#6 9.521 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
-#6 9.523 Setting up libbpf1:amd64 (1:1.3.0-2build2) ...
-#6 9.525 Setting up libdbi-perl:amd64 (1.643-4build3) ...
-#6 9.527 Setting up libpopt0:amd64 (1.19+dfsg-1build1) ...
-#6 9.529 Setting up logrotate (3.21.0-2build1) ...
-#6 9.643 Created symlink /etc/systemd/system/timers.target.wants/logrotate.timer → /usr/lib/systemd/system/logrotate.timer.
-#6 9.647 Setting up libtirpc3t64:amd64 (1.3.4+ds-1.1build1) ...
-#6 9.649 Setting up iproute2 (6.1.0-1ubuntu6.2) ...
-#6 9.718 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
-#6 9.720 Setting up mariadb-client-core (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.722 Setting up mariadb-backup (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.724 Setting up lsof (4.95.0-1build3) ...
-#6 9.726 Setting up mariadb-server-core (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.728 Setting up rsync (3.2.7-1ubuntu1.2) ...
-#6 9.743 invoke-rc.d: could not determine current runlevel
-#6 9.747 invoke-rc.d: policy-rc.d denied execution of start.
-#6 9.817 Setting up mariadb-client (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.822 Setting up mariadb-server (1:10.11.14-0ubuntu0.24.04.1) ...
-#6 9.888 invoke-rc.d: could not determine current runlevel
-#6 9.891 invoke-rc.d: policy-rc.d denied execution of stop.
-#6 10.60 invoke-rc.d: could not determine current runlevel
-#6 10.60 invoke-rc.d: policy-rc.d denied execution of start.
-#6 10.70 Created symlink /etc/systemd/system/multi-user.target.wants/mariadb.service → /usr/lib/systemd/system/mariadb.service.
-#6 10.71 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-#6 10.75 **** cleanup ****
-#6 DONE 11.1s
+#6 [internal] load build context
+#6 transferring context: 737B done
+#6 DONE 0.0s
 
-#7 [3/5] COPY . /
-#7 DONE 0.0s
+#7 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         logrotate         mariadb-server         mariadb-backup         mariadb-client         mariadb-common         mariadb-server-core &&     echo "**** cleanup ****" &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache
+#7 CACHED
 
-#8 [4/5] COPY ./root /
+#8 [3/5] COPY . /
 #8 DONE 0.0s
 
-#9 [5/5] WORKDIR /config
+#9 [4/5] COPY ./root /
 #9 DONE 0.0s
 
-#10 exporting to image
-#10 exporting layers
-#10 exporting layers 7.0s done
-#10 exporting manifest sha256:47bff149a69bc79546f9368074f732e34cd4d179a299f4ff04798d56019330d9 done
-#10 exporting config sha256:4da34b59d3af5ae0998d4f5526427ab6de301513608e4a0d59f40b36bcd420fe done
-#10 exporting attestation manifest sha256:0cc96a95d6f9a4c105bfe1b42ec80c5bdeae1159f5b117313ccbe3c1bcb9078d done
-#10 exporting manifest list sha256:1f8eae81fe01b5d36516a71aa021a6650f049fcde218ffdce0fbafebf17728eb done
-#10 naming to docker.io/library/porting-mariadb:amd64 done
-#10 unpacking to docker.io/library/porting-mariadb:amd64
-#10 unpacking to docker.io/library/porting-mariadb:amd64 1.2s done
-#10 DONE 8.2s
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.0s done
+#11 exporting manifest sha256:8f7a8c4e740a8b44d539986b7072e684ddb27f30de873ae9e0ce2168f9cadae0 done
+#11 exporting config sha256:637cefe59028d4b2b4036fe4e5b95991f43f9e6e80b954348fdcaa2b9be92f79 done
+#11 exporting attestation manifest sha256:7453128c9496f660b7510c2ebb5cad89a781b1375b845ba5e1072792100d11b9 done
+#11 exporting manifest list sha256:510891bbd3c875fbd04f60168a51a89e01b0996346636c2f568099d0a683a3e0 done
+#11 naming to docker.io/library/mariadb:11.4.8-r0 done
+#11 unpacking to docker.io/library/mariadb:11.4.8-r0 0.0s done
+#11 DONE 0.1s

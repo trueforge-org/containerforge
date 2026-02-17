@@ -12,13 +12,17 @@ RUN \
     apt-get install -y --no-install-recommends \
         build-essential \
         libldap2-dev \
+        libsasl2-dev \
         python3-dev \
         libffi-dev && \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
         libldap2 \
+        libsasl2-2 \
         libffi8 \
-        python3 && \
+        python3 \
+        python3-venv && \
+    mkdir -p /config && \
     python3 -m venv /config/venv && \
     /config/venv/bin/pip install -U --no-cache-dir \
         pip \

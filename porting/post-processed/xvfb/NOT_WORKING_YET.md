@@ -22,3 +22,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref ntgcosadh0xpbpttq2x5wsvla::4ntfjn2utfwlmgj39eus805gj: "/patches": not found
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after replacing broken Alpine-style build flow with direct Ubuntu xvfb package install.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted follow-up batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after replacing broken Alpine-style source build flow with Ubuntu xvfb package install.
+- Full log: `amd64-build.log`

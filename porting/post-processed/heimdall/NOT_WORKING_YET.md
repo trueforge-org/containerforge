@@ -19,3 +19,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 11.73 /bin/bash: line 1: /etc/nginx/fastcgi_params: No such file or directory
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after ensuring nginx fastcgi_params path exists and php-fpm package is present.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 failing-unattempted follow-up batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after adding php-fpm package and ensuring nginx fastcgi_params path exists.
+- Full log: `amd64-build.log`
