@@ -5,6 +5,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "${SCRIPT_DIR}/.." && pwd)
 PORTING_DIR="${PORTING_DIR:-${REPO_ROOT}/porting/post-processed}"
 LOG_DIR="${LOG_DIR:-${REPO_ROOT}/porting/build-logs}"
+PLATFORM="${PLATFORM:-linux/amd64}"
 
 mkdir -p "${LOG_DIR}"
 
@@ -21,7 +22,7 @@ for docker_bake_file in "${PORTING_DIR}"/*/docker-bake.hcl; do
 
     if ! (
         cd "${container_dir}"
-        docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local
+        docker buildx bake --progress=plain --set "image-local.platform=${PLATFORM}" image-local
     ) 2>&1 | tee "${log_file}"; then
         echo "Build failed for ${container_name}. See ${log_file}"
         failures+=("${container_name}")
