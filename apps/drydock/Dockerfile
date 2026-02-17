@@ -92,8 +92,11 @@ ENV WORKDIR=/app \
     DD_LOG_FORMAT=text \
     DD_VERSION=$VERSION \
     DD_REGISTRY_CUSTOM_TRUEFORGE_URL=https://oci.trueforge.org \
-    DD_WATCHER_local_WATCHBYDEFAULT=false
+    DD_WATCHER_local_WATCHBYDEFAULT=false \
+    DD_STORE_PATH=/config
 
 WORKDIR /app
 
 HEALTHCHECK --interval=30s --timeout=5s CMD sh -c 'if [ -z "$DD_SERVER_ENABLED" ] || [ "$DD_SERVER_ENABLED" = "true" ]; then curl --fail http://localhost:${DD_SERVER_PORT:-3000}/health || exit 1; else exit 0; fi'
+
+CMD ["node", "dist/index.js"]
