@@ -31,11 +31,9 @@ RUN \
     poppler-utils \
     re2c && \
   echo "**** modify php-fpm process limits ****" && \
-  sed -i 's/pm.max_children = 5/pm.max_children = 32/' /etc/php83/php-fpm.d/www.conf && \
+  if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -i 's/pm.max_children = 5/pm.max_children = 32/' /etc/php83/php-fpm.d/www.conf; fi && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php83/php-fpm.conf && \
+  if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php83/php-fpm.conf; fi && \
   echo "**** download piwigo ****" && \
   mkdir -p /app/www/public && \
   curl -o \

@@ -1,4 +1,5 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0 as migrationbuilder
+USER root
 
 RUN \
   echo "**** build fs-repo-migrations ****" && \
@@ -13,6 +14,7 @@ RUN \
   done
 
 FROM ghcr.io/trueforge-org/golang:1.26.0 as binbuilder
+USER root
 
 RUN \
   echo "**** build nestool ****" && \
@@ -49,6 +51,7 @@ RUN \
 
 FROM ghcr.io/trueforge-org/node:22.22.0 as nodebuilder
 
+USER root
 
 RUN \
   echo "**** install build packages ****" && \

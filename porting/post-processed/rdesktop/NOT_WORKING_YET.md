@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&   sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list &&   apt-get update &&   apt-get install -y     build-essential     devscripts     dpkg-dev     git     libpulse-dev     meson     pulseaudio &&   apt build-dep -y     pulseaudio     xrdp" did not complete successfully: exit code: 4
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build fails in runtime dependency setup stage after package installation (non-zero exit in long RUN chain).
+- Full log: `amd64-build.log`

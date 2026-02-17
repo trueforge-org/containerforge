@@ -1,20 +1,23 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0 as buildstage
 
 # build variables
+USER root
 
 RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    go
+    golang-go
 
 RUN \
 echo "**** fetch source code ****" && \
   mkdir -p \
     /tmp/pwndrop && \
-  curl -o \
-  /tmp/pwndrop-src.tar.gz -L \
-    "https://github.com/kgretzky/pwndrop/archive/${VERSION}.tar.gz" && \
+  curl -fL -o \
+  /tmp/pwndrop-src.tar.gz \
+    "https://github.com/kgretzky/pwndrop/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+  /tmp/pwndrop-src.tar.gz \
+    "https://github.com/kgretzky/pwndrop/archive/refs/tags/v${VERSION}.tar.gz" && \
   tar xf \
   /tmp/pwndrop-src.tar.gz -C \
     /tmp/pwndrop --strip-components=1 && \
@@ -37,7 +40,6 @@ USER root
 # add pwndrop
 COPY --from=buildstage /app/pwndrop/ /app/pwndrop/
 
-RUN \
 # add local files
 USER apps
 COPY . /

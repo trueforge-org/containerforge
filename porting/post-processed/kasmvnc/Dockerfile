@@ -1,16 +1,18 @@
 FROM ghcr.io/trueforge-org/node:22.22.0 AS wwwstage
 
 ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
+USER root
 
 RUN \
   echo "**** build clientside ****" && \
+  apt-get update && apt-get install -y --no-install-recommends bzip2 && \
   export QT_QPA_PLATFORM=offscreen && \
   export QT_QPA_FONTDIR=/usr/share/fonts && \
   mkdir /src && \
   cd /src && \
   wget https://github.com/kasmtech/noVNC/tarball/${KASMWEB_RELEASE} -O - \
     | tar  --strip-components=1 -xz && \
-  npm install && \
+  npm install --legacy-peer-deps && \
   npm run-script build
 
 RUN \
@@ -28,6 +30,7 @@ RUN \
 FROM ghcr.io/trueforge-org/ubuntu:24.04 AS buildstage
 
 ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
+USER root
 
 COPY --from=wwwstage /build-out /www
 
@@ -182,6 +185,7 @@ RUN \
 # nodejs builder
 FROM ghcr.io/trueforge-org/node:22.22.0 AS nodebuilder
 ARG KCLIENT_RELEASE
+USER root
 
 RUN \
     echo "**** install build deps ****" && \
@@ -193,7 +197,7 @@ RUN \
         gcc \
         make \
         libpulse-dev \
-        python3.11 && \
+        python3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

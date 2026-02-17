@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     argon2-dev     autoconf     automake     libboost-dev    build-essential     c-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl-dev     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake" did not complete successfully: exit code: 100
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Configured VERSION branch is missing in upstream repo (`git clone --branch "${VERSION}"` fails).
+- Full log: `amd64-build.log`

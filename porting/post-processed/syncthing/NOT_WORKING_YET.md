@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 0.198 /bin/bash: line 1: USER: command not found
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Configured VERSION tarball lookup still fails (HTTP 400/404) and fallback release fetch did not resolve in this environment.
+- Full log: `amd64-build.log`

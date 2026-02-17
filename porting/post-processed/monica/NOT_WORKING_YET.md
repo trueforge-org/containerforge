@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 25.93 /bin/bash: line 1: /etc/php83/conf.d/memory-limit.ini: No such file or directory
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: GPG key retrieval for release signature verification fails from keyservers in this environment.
+- Full log: `amd64-build.log`

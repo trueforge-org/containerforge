@@ -1,68 +1,90 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.07kB done
-#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 820B / 820B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.1s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.22kB done
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+#2 DONE 0.0s
 
 #3 [internal] load metadata for ghcr.io/trueforge-org/golang:1.26.0
-#3 DONE 0.3s
+#3 DONE 0.1s
 
-#4 [internal] load .dockerignore
-#4 transferring context: 2B done
-#4 DONE 0.0s
+#4 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#4 DONE 0.1s
 
-#5 [stage-1 1/6] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#5 CACHED
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
 
-#6 [internal] load build context
-#6 transferring context: 3.99kB done
-#6 DONE 0.0s
+#6 [stage-1 1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#6 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#6 CACHED
 
 #7 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
 #7 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 0B / 63.66MB 0.2s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 8.39MB / 63.66MB 0.5s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 15.73MB / 63.66MB 0.6s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 26.21MB / 63.66MB 0.8s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 36.70MB / 63.66MB 0.9s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 48.23MB / 63.66MB 1.1s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 58.72MB / 63.66MB 1.2s
-#7 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 63.66MB / 63.66MB 1.3s done
-#7 extracting sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e
-#7 extracting sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 2.1s done
-#7 DONE 3.4s
+#7 DONE 0.0s
 
-#7 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
-#7 extracting sha256:2c1ce468d9f3d941396801f6e3afc8921466650dd05430fe644cd3537713d27f done
-#7 DONE 3.4s
+#8 [buildstage 2/3] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     golang-go
+#8 CACHED
 
-#8 [buildstage 2/3] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     go
-#8 0.138 **** install build packages ****
-#8 0.144 Reading package lists...
-#8 0.153 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
-#8 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     go" did not complete successfully: exit code: 100
+#9 [internal] load build context
+#9 transferring context: 1.96kB done
+#9 DONE 0.0s
+
+#10 [buildstage 3/3] RUN echo "**** fetch source code ****" &&   mkdir -p     /tmp/pwndrop &&   curl -fL -o   /tmp/pwndrop-src.tar.gz     "https://github.com/kgretzky/pwndrop/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o   /tmp/pwndrop-src.tar.gz     "https://github.com/kgretzky/pwndrop/archive/refs/tags/v${VERSION}.tar.gz" &&   tar xf   /tmp/pwndrop-src.tar.gz -C     /tmp/pwndrop --strip-components=1 &&   echo "**** compile pwndrop  ****" &&   cd /tmp/pwndrop &&   go build -ldflags="-s -w"     -o /app/pwndrop/pwndrop     -mod=vendor     main.go &&   cp -r ./www /app/pwndrop/admin
+#10 0.153 **** fetch source code ****
+#10 0.161   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#10 0.161                                  Dload  Upload   Total   Spent    Left  Speed
+#10 0.161   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#10 0.311   0    20    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#10 0.312 curl: (22) The requested URL returned error: 400
+#10 0.318   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#10 0.318                                  Dload  Upload   Total   Spent    Left  Speed
+#10 0.318   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#10 0.490   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    14    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#10 0.491 curl: (22) The requested URL returned error: 404
+#10 ERROR: process "/bin/bash -o pipefail -c echo \"**** fetch source code ****\" &&   mkdir -p     /tmp/pwndrop &&   curl -fL -o   /tmp/pwndrop-src.tar.gz     \"https://github.com/kgretzky/pwndrop/archive/refs/tags/${VERSION}.tar.gz\" || curl -fL -o   /tmp/pwndrop-src.tar.gz     \"https://github.com/kgretzky/pwndrop/archive/refs/tags/v${VERSION}.tar.gz\" &&   tar xf   /tmp/pwndrop-src.tar.gz -C     /tmp/pwndrop --strip-components=1 &&   echo \"**** compile pwndrop  ****\" &&   cd /tmp/pwndrop &&   go build -ldflags=\"-s -w\"     -o /app/pwndrop/pwndrop     -mod=vendor     main.go &&   cp -r ./www /app/pwndrop/admin" did not complete successfully: exit code: 22
 ------
- > [buildstage 2/3] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     go:
-0.138 **** install build packages ****
-0.144 Reading package lists...
-0.153 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
+ > [buildstage 3/3] RUN echo "**** fetch source code ****" &&   mkdir -p     /tmp/pwndrop &&   curl -fL -o   /tmp/pwndrop-src.tar.gz     "https://github.com/kgretzky/pwndrop/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o   /tmp/pwndrop-src.tar.gz     "https://github.com/kgretzky/pwndrop/archive/refs/tags/v${VERSION}.tar.gz" &&   tar xf   /tmp/pwndrop-src.tar.gz -C     /tmp/pwndrop --strip-components=1 &&   echo "**** compile pwndrop  ****" &&   cd /tmp/pwndrop &&   go build -ldflags="-s -w"     -o /app/pwndrop/pwndrop     -mod=vendor     main.go &&   cp -r ./www /app/pwndrop/admin:
+0.161   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+0.161                                  Dload  Upload   Total   Spent    Left  Speed
+0.161   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.311   0    20    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.312 curl: (22) The requested URL returned error: 400
+0.318   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+0.318                                  Dload  Upload   Total   Spent    Left  Speed
+0.318   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.490   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    14    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.491 curl: (22) The requested URL returned error: 404
 ------
 
  [33m1 warning found (use docker --debug to expand):
 [0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
-Dockerfile:5
+Dockerfile:12
 --------------------
-   4 |     
-   5 | >>> RUN \
-   6 | >>>   echo "**** install build packages ****" && \
-   7 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-   8 | >>>     build-essential \
-   9 | >>>     go
-  10 |     
+  11 |     
+  12 | >>> RUN \
+  13 | >>> echo "**** fetch source code ****" && \
+  14 | >>>   mkdir -p \
+  15 | >>>     /tmp/pwndrop && \
+  16 | >>>   curl -fL -o \
+  17 | >>>   /tmp/pwndrop-src.tar.gz \
+  18 | >>>     "https://github.com/kgretzky/pwndrop/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+  19 | >>>   /tmp/pwndrop-src.tar.gz \
+  20 | >>>     "https://github.com/kgretzky/pwndrop/archive/refs/tags/v${VERSION}.tar.gz" && \
+  21 | >>>   tar xf \
+  22 | >>>   /tmp/pwndrop-src.tar.gz -C \
+  23 | >>>     /tmp/pwndrop --strip-components=1 && \
+  24 | >>>   echo "**** compile pwndrop  ****" && \
+  25 | >>>   cd /tmp/pwndrop && \
+  26 | >>>   go build -ldflags="-s -w" \
+  27 | >>>     -o /app/pwndrop/pwndrop \
+  28 | >>>     -mod=vendor \
+  29 | >>>     main.go && \
+  30 | >>>   cp -r ./www /app/pwndrop/admin
+  31 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     go" did not complete successfully: exit code: 100
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** fetch source code ****\" &&   mkdir -p     /tmp/pwndrop &&   curl -fL -o   /tmp/pwndrop-src.tar.gz     \"https://github.com/kgretzky/pwndrop/archive/refs/tags/${VERSION}.tar.gz\" || curl -fL -o   /tmp/pwndrop-src.tar.gz     \"https://github.com/kgretzky/pwndrop/archive/refs/tags/v${VERSION}.tar.gz\" &&   tar xf   /tmp/pwndrop-src.tar.gz -C     /tmp/pwndrop --strip-components=1 &&   echo \"**** compile pwndrop  ****\" &&   cd /tmp/pwndrop &&   go build -ldflags=\"-s -w\"     -o /app/pwndrop/pwndrop     -mod=vendor     main.go &&   cp -r ./www /app/pwndrop/admin" did not complete successfully: exit code: 22

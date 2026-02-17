@@ -1,65 +1,290 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 2.73kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 814B / 814B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.3s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.74kB done
+#2 DONE 0.0s
 
-#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#3 DONE 0.3s
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
 
-#4 [internal] load .dockerignore
-#4 transferring context: 2B done
-#4 DONE 0.0s
+#4 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#4 DONE 0.1s
 
-#5 [buildstage 1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#5 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#5 CACHED
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
 
-#6 [stage-1 1/7] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#6 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#6 [buildstage 1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#6 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
 #6 CACHED
 
-#7 [internal] load build context
-#7 transferring context: 6.29kB done
-#7 DONE 0.0s
+#7 [stage-1 1/7] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#7 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#7 CACHED
 
-#8 [buildstage 2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     argon2-dev     autoconf     automake     libboost-dev    build-essential     c-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl-dev     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake
-#8 0.193 **** install build packages ****
-#8 0.202 Reading package lists...
-#8 0.215 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
-#8 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     argon2-dev     autoconf     automake     libboost-dev    build-essential     c-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl-dev     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake" did not complete successfully: exit code: 100
+#8 [buildstage 2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libargon2-dev     autoconf     automake     libboost-dev    build-essential     libc-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake
+#8 ...
+
+#9 [internal] load build context
+#9 transferring context: 3.40kB done
+#9 DONE 0.0s
+
+#8 [buildstage 2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libargon2-dev     autoconf     automake     libboost-dev    build-essential     libc-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake
+#8 0.153 **** install build packages ****
+#8 0.390 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#8 0.487 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#8 0.982 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#8 1.016 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#8 1.127 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#8 1.272 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#8 1.573 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#8 1.714 Get:8 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#8 1.725 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#8 1.832 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#8 1.951 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#8 2.474 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#8 2.581 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#8 2.702 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#8 2.826 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#8 2.959 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#8 3.065 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#8 3.171 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#8 3.255 Fetched 36.1 MB in 3s (11.7 MB/s)
+#8 3.255 Reading package lists...
+#8 4.002 Reading package lists...
+#8 4.744 Building dependency tree...
+#8 4.898 Reading state information...
+#8 5.040 build-essential is already the newest version (12.10ubuntu1).
+#8 5.040 libicu-dev is already the newest version (74.2-1ubuntu3.1).
+#8 5.040 libssl-dev is already the newest version (3.0.13-0ubuntu3.7).
+#8 5.040 perl is already the newest version (5.38.2-3.2ubuntu0.2).
+#8 5.040 perl set to manually installed.
+#8 5.040 tcl-dev is already the newest version (8.6.14build1).
+#8 5.040 tcl-dev set to manually installed.
+#8 5.040 The following additional packages will be installed:
+#8 5.040   autotools-dev libboost1.83-dev libcares2 libjs-jquery libjs-sphinxdoc
+#8 5.040   libjs-underscore libpython3-dev libpython3.12-dev libpython3.12t64 m4
+#8 5.040   python3.12-dev
+#8 5.041 Suggested packages:
+#8 5.041   autoconf-archive gnu-standards autoconf-doc libtool autopoint gettext-doc
+#8 5.041   libasprintf-dev libgettextpo-dev libboost-doc libboost1.83-doc
+#8 5.041   libboost-atomic1.83-dev libboost-chrono1.83-dev libboost-container1.83-dev
+#8 5.041   libboost-context1.83-dev libboost-contract1.83-dev
+#8 5.041   libboost-coroutine1.83-dev libboost-date-time1.83-dev
+#8 5.041   libboost-exception1.83-dev libboost-fiber1.83-dev
+#8 5.041   libboost-filesystem1.83-dev libboost-graph-parallel1.83-dev
+#8 5.041   libboost-graph1.83-dev libboost-iostreams1.83-dev libboost-json1.83-dev
+#8 5.041   libboost-locale1.83-dev libboost-log1.83-dev libboost-math1.83-dev
+#8 5.041   libboost-mpi-python1.83-dev libboost-mpi1.83-dev libboost-nowide1.83-dev
+#8 5.041   libboost-numpy1.83-dev libboost-program-options1.83-dev
+#8 5.041   libboost-python1.83-dev libboost-random1.83-dev libboost-regex1.83-dev
+#8 5.041   libboost-serialization1.83-dev libboost-stacktrace1.83-dev
+#8 5.041   libboost-system1.83-dev libboost-test1.83-dev libboost-thread1.83-dev
+#8 5.041   libboost-timer1.83-dev libboost-type-erasure1.83-dev libboost-url1.83-dev
+#8 5.041   libboost-wave1.83-dev libboost1.83-tools-dev libmpfrc++-dev libntl-dev
+#8 5.041   m4-doc swig-doc swig-examples
+#8 5.041 Recommended packages:
+#8 5.041   javascript-common
+#8 5.107 The following NEW packages will be installed:
+#8 5.107   autoconf automake autotools-dev gettext libargon2-dev libboost-dev
+#8 5.107   libboost1.83-dev libc-ares-dev libcares2 libjs-jquery libjs-sphinxdoc
+#8 5.107   libjs-underscore libpython3-dev libpython3.12-dev libpython3.12t64
+#8 5.108   libsasl2-dev m4 python3-dev python3.12-dev swig
+#8 5.173 0 upgraded, 20 newly installed, 0 to remove and 24 not upgraded.
+#8 5.173 Need to get 23.7 MB of archives.
+#8 5.173 After this operation, 217 MB of additional disk space will be used.
+#8 5.173 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 m4 amd64 1.4.19-4build1 [244 kB]
+#8 5.304 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 autoconf all 2.71-3 [339 kB]
+#8 5.357 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 autotools-dev all 20220109.1 [44.9 kB]
+#8 5.383 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 automake all 1:1.16.5-1.3ubuntu1 [558 kB]
+#8 5.424 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 gettext amd64 0.21-14ubuntu2 [864 kB]
+#8 5.470 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libargon2-dev amd64 0~20190702+dfsg-4build1 [25.0 kB]
+#8 5.496 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libboost1.83-dev amd64 1.83.0-2.1ubuntu3.2 [10.7 MB]
+#8 5.616 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libboost-dev amd64 1.83.0.1ubuntu2 [4,308 B]
+#8 5.641 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libcares2 amd64 1.27.0-1.0ubuntu1 [73.7 kB]
+#8 5.667 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [328 kB]
+#8 5.693 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [118 kB]
+#8 5.718 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-sphinxdoc all 7.2.6-6 [149 kB]
+#8 5.744 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.11 [2,345 kB]
+#8 5.774 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-dev amd64 3.12.3-1ubuntu0.11 [5,683 kB]
+#8 5.860 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-dev amd64 3.12.3-0ubuntu2.1 [10.3 kB]
+#8 5.886 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsasl2-dev amd64 2.1.28+dfsg1-5ubuntu3.1 [243 kB]
+#8 5.911 Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-dev amd64 3.12.3-1ubuntu0.11 [498 kB]
+#8 5.936 Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-dev amd64 3.12.3-0ubuntu2.1 [26.7 kB]
+#8 5.962 Get:19 http://archive.ubuntu.com/ubuntu noble/universe amd64 swig amd64 4.2.0-2ubuntu1 [1,187 kB]
+#8 5.988 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 libc-ares-dev amd64 1.27.0-1.0ubuntu1 [189 kB]
+#8 6.100 debconf: delaying package configuration, since apt-utils is not installed
+#8 6.126 Fetched 23.7 MB in 1s (27.0 MB/s)
+#8 6.141 Selecting previously unselected package m4.
+#8 6.141 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#8 6.157 Preparing to unpack .../00-m4_1.4.19-4build1_amd64.deb ...
+#8 6.158 Unpacking m4 (1.4.19-4build1) ...
+#8 6.179 Selecting previously unselected package autoconf.
+#8 6.181 Preparing to unpack .../01-autoconf_2.71-3_all.deb ...
+#8 6.182 Unpacking autoconf (2.71-3) ...
+#8 6.212 Selecting previously unselected package autotools-dev.
+#8 6.214 Preparing to unpack .../02-autotools-dev_20220109.1_all.deb ...
+#8 6.215 Unpacking autotools-dev (20220109.1) ...
+#8 6.233 Selecting previously unselected package automake.
+#8 6.235 Preparing to unpack .../03-automake_1%3a1.16.5-1.3ubuntu1_all.deb ...
+#8 6.237 Unpacking automake (1:1.16.5-1.3ubuntu1) ...
+#8 6.273 Selecting previously unselected package gettext.
+#8 6.275 Preparing to unpack .../04-gettext_0.21-14ubuntu2_amd64.deb ...
+#8 6.277 Unpacking gettext (0.21-14ubuntu2) ...
+#8 6.313 Selecting previously unselected package libargon2-dev:amd64.
+#8 6.315 Preparing to unpack .../05-libargon2-dev_0~20190702+dfsg-4build1_amd64.deb ...
+#8 6.316 Unpacking libargon2-dev:amd64 (0~20190702+dfsg-4build1) ...
+#8 6.335 Selecting previously unselected package libboost1.83-dev:amd64.
+#8 6.337 Preparing to unpack .../06-libboost1.83-dev_1.83.0-2.1ubuntu3.2_amd64.deb ...
+#8 6.338 Unpacking libboost1.83-dev:amd64 (1.83.0-2.1ubuntu3.2) ...
+#8 9.194 Selecting previously unselected package libboost-dev:amd64.
+#8 9.200 Preparing to unpack .../07-libboost-dev_1.83.0.1ubuntu2_amd64.deb ...
+#8 9.201 Unpacking libboost-dev:amd64 (1.83.0.1ubuntu2) ...
+#8 9.215 Selecting previously unselected package libcares2:amd64.
+#8 9.218 Preparing to unpack .../08-libcares2_1.27.0-1.0ubuntu1_amd64.deb ...
+#8 9.219 Unpacking libcares2:amd64 (1.27.0-1.0ubuntu1) ...
+#8 9.235 Selecting previously unselected package libjs-jquery.
+#8 9.238 Preparing to unpack .../09-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
+#8 9.243 Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#8 9.261 Selecting previously unselected package libjs-underscore.
+#8 9.264 Preparing to unpack .../10-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
+#8 9.265 Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#8 9.280 Selecting previously unselected package libjs-sphinxdoc.
+#8 9.283 Preparing to unpack .../11-libjs-sphinxdoc_7.2.6-6_all.deb ...
+#8 9.284 Unpacking libjs-sphinxdoc (7.2.6-6) ...
+#8 9.302 Selecting previously unselected package libpython3.12t64:amd64.
+#8 9.305 Preparing to unpack .../12-libpython3.12t64_3.12.3-1ubuntu0.11_amd64.deb ...
+#8 9.305 Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#8 9.351 Selecting previously unselected package libpython3.12-dev:amd64.
+#8 9.355 Preparing to unpack .../13-libpython3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#8 9.356 Unpacking libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#8 9.503 Selecting previously unselected package libpython3-dev:amd64.
+#8 9.507 Preparing to unpack .../14-libpython3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#8 9.508 Unpacking libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#8 9.522 Selecting previously unselected package libsasl2-dev.
+#8 9.526 Preparing to unpack .../15-libsasl2-dev_2.1.28+dfsg1-5ubuntu3.1_amd64.deb ...
+#8 9.527 Unpacking libsasl2-dev (2.1.28+dfsg1-5ubuntu3.1) ...
+#8 9.549 Selecting previously unselected package python3.12-dev.
+#8 9.553 Preparing to unpack .../16-python3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#8 9.554 Unpacking python3.12-dev (3.12.3-1ubuntu0.11) ...
+#8 9.569 Selecting previously unselected package python3-dev.
+#8 9.573 Preparing to unpack .../17-python3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#8 9.573 Unpacking python3-dev (3.12.3-0ubuntu2.1) ...
+#8 9.589 Selecting previously unselected package swig.
+#8 9.593 Preparing to unpack .../18-swig_4.2.0-2ubuntu1_amd64.deb ...
+#8 9.594 Unpacking swig (4.2.0-2ubuntu1) ...
+#8 9.745 Selecting previously unselected package libc-ares-dev:amd64.
+#8 9.749 Preparing to unpack .../19-libc-ares-dev_1.27.0-1.0ubuntu1_amd64.deb ...
+#8 9.750 Unpacking libc-ares-dev:amd64 (1.27.0-1.0ubuntu1) ...
+#8 9.785 Setting up libboost1.83-dev:amd64 (1.83.0-2.1ubuntu3.2) ...
+#8 9.787 Setting up gettext (0.21-14ubuntu2) ...
+#8 9.789 Setting up swig (4.2.0-2ubuntu1) ...
+#8 9.791 Setting up m4 (1.4.19-4build1) ...
+#8 9.794 Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#8 9.796 Setting up autotools-dev (20220109.1) ...
+#8 9.798 Setting up libsasl2-dev (2.1.28+dfsg1-5ubuntu3.1) ...
+#8 9.800 Setting up libcares2:amd64 (1.27.0-1.0ubuntu1) ...
+#8 9.802 Setting up libc-ares-dev:amd64 (1.27.0-1.0ubuntu1) ...
+#8 9.804 Setting up autoconf (2.71-3) ...
+#8 9.807 Setting up libboost-dev:amd64 (1.83.0.1ubuntu2) ...
+#8 9.809 Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#8 9.816 Setting up libargon2-dev:amd64 (0~20190702+dfsg-4build1) ...
+#8 9.818 Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#8 9.820 Setting up automake (1:1.16.5-1.3ubuntu1) ...
+#8 9.824 update-alternatives: using /usr/bin/automake-1.16 to provide /usr/bin/automake (automake) in auto mode
+#8 9.825 update-alternatives: warning: skip creation of /usr/share/man/man1/automake.1.gz because associated file /usr/share/man/man1/automake-1.16.1.gz (of link group automake) doesn't exist
+#8 9.825 update-alternatives: warning: skip creation of /usr/share/man/man1/aclocal.1.gz because associated file /usr/share/man/man1/aclocal-1.16.1.gz (of link group automake) doesn't exist
+#8 9.827 Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#8 9.829 Setting up python3.12-dev (3.12.3-1ubuntu0.11) ...
+#8 9.831 Setting up libjs-sphinxdoc (7.2.6-6) ...
+#8 9.833 Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#8 9.835 Setting up python3-dev (3.12.3-0ubuntu2.1) ...
+#8 9.838 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#8 13.89 Requirement already satisfied: pip in /usr/local/lib/python3.13/site-packages (25.3)
+#8 14.03 Collecting pip
+#8 14.38   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
+#8 14.50 Collecting setuptools
+#8 14.51   Downloading setuptools-82.0.0-py3-none-any.whl.metadata (6.6 kB)
+#8 14.53 Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+#8 14.54    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 306.0 MB/s  0:00:00
+#8 14.55 Downloading setuptools-82.0.0-py3-none-any.whl (1.0 MB)
+#8 14.55    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 674.2 MB/s  0:00:00
+#8 14.58 Installing collected packages: setuptools, pip
+#8 15.17   Attempting uninstall: pip
+#8 15.17     Found existing installation: pip 25.3
+#8 15.21     Uninstalling pip-25.3:
+#8 15.36       Successfully uninstalled pip-25.3
+#8 16.21 
+#8 16.21 Successfully installed pip-26.0.1 setuptools-82.0.0
+#8 17.13 Collecting cmake
+#8 17.14   Downloading cmake-4.2.1-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.5 kB)
+#8 17.15 Downloading cmake-4.2.1-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (28.9 MB)
+#8 17.38    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 28.9/28.9 MB 132.3 MB/s  0:00:00
+#8 17.46 Installing collected packages: cmake
+#8 18.44 Successfully installed cmake-4.2.1
+#8 DONE 18.7s
+
+#10 [buildstage 3/4] RUN   echo "**** compile znc ****" &&   mkdir -p     /tmp/znc &&   git clone --branch "${VERSION}" --depth 1     --recurse-submodules     https://github.com/znc/znc.git     /tmp/znc &&   curl -o     /tmp/playback.tar.gz -L     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz &&   tar xf     /tmp/playback.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-push.tar.gz -L     https://github.com/jreese/znc-push/archive/master.tar.gz &&   tar xf     /tmp/znc-push.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-clientbuffer.tar.gz -L     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz &&   tar xf     /tmp/znc-clientbuffer.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-palaver.tar.gz -L     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz &&   tar xf     /tmp/znc-palaver.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   cd /tmp/znc &&   mkdir -p build &&   cd build &&   cmake ..     -DWANT_PYTHON=yes     -DWANT_PERL=yes     -DWANT_TCL=yes &&   make &&   make DESTDIR=/tmp/znc install
+#10 0.312 **** compile znc ****
+#10 0.316 Cloning into '/tmp/znc'...
+#10 0.431 warning: Could not find remote branch  to clone.
+#10 0.432 fatal: Remote branch  not found in upstream origin
+#10 ERROR: process "/bin/bash -o pipefail -c echo \"**** compile znc ****\" &&   mkdir -p     /tmp/znc &&   git clone --branch \"${VERSION}\" --depth 1     --recurse-submodules     https://github.com/znc/znc.git     /tmp/znc &&   curl -o     /tmp/playback.tar.gz -L     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz &&   tar xf     /tmp/playback.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-push.tar.gz -L     https://github.com/jreese/znc-push/archive/master.tar.gz &&   tar xf     /tmp/znc-push.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-clientbuffer.tar.gz -L     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz &&   tar xf     /tmp/znc-clientbuffer.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-palaver.tar.gz -L     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz &&   tar xf     /tmp/znc-palaver.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   cd /tmp/znc &&   mkdir -p build &&   cd build &&   cmake ..     -DWANT_PYTHON=yes     -DWANT_PERL=yes     -DWANT_TCL=yes &&   make &&   make DESTDIR=/tmp/znc install" did not complete successfully: exit code: 128
 ------
- > [buildstage 2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     argon2-dev     autoconf     automake     libboost-dev    build-essential     c-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl-dev     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake:
-0.193 **** install build packages ****
-0.202 Reading package lists...
-0.215 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
+ > [buildstage 3/4] RUN   echo "**** compile znc ****" &&   mkdir -p     /tmp/znc &&   git clone --branch "${VERSION}" --depth 1     --recurse-submodules     https://github.com/znc/znc.git     /tmp/znc &&   curl -o     /tmp/playback.tar.gz -L     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz &&   tar xf     /tmp/playback.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-push.tar.gz -L     https://github.com/jreese/znc-push/archive/master.tar.gz &&   tar xf     /tmp/znc-push.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-clientbuffer.tar.gz -L     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz &&   tar xf     /tmp/znc-clientbuffer.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-palaver.tar.gz -L     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz &&   tar xf     /tmp/znc-palaver.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   cd /tmp/znc &&   mkdir -p build &&   cd build &&   cmake ..     -DWANT_PYTHON=yes     -DWANT_PERL=yes     -DWANT_TCL=yes &&   make &&   make DESTDIR=/tmp/znc install:
+0.312 **** compile znc ****
+0.316 Cloning into '/tmp/znc'...
+0.431 warning: Could not find remote branch  to clone.
+0.432 fatal: Remote branch  not found in upstream origin
 ------
-Dockerfile:9
+Dockerfile:31
 --------------------
-   8 |     
-   9 | >>> RUN \
-  10 | >>>   echo "**** install build packages ****" && \
-  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  12 | >>>     argon2-dev \
-  13 | >>>     autoconf \
-  14 | >>>     automake \
-  15 | >>>     libboost-dev\
-  16 | >>>     build-essential \
-  17 | >>>     c-ares-dev \
-  18 | >>>     libsasl2-dev \
-  19 | >>>     gettext \
-  20 | >>>     libicu-dev \
-  21 | >>>     libssl-dev \
-  22 | >>>     perl-dev \
-  23 | >>>     python3-dev \
-  24 | >>>     swig \
-  25 | >>>     tcl-dev && \
-  26 | >>>   python3 -m venv /config/venv && \
-  27 | >>>   pip install -U --no-cache-dir pip setuptools && \
-  28 | >>>   pip install -U --no-cache-dir cmake
-  29 |     
+  30 |     
+  31 | >>> RUN \
+  32 | >>>   echo "**** compile znc ****" && \
+  33 | >>>   mkdir -p \
+  34 | >>>     /tmp/znc && \
+  35 | >>>   git clone --branch "${VERSION}" --depth 1 \
+  36 | >>>     --recurse-submodules \
+  37 | >>>     https://github.com/znc/znc.git \
+  38 | >>>     /tmp/znc && \
+  39 | >>>   curl -o \
+  40 | >>>     /tmp/playback.tar.gz -L \
+  41 | >>>     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz && \
+  42 | >>>   tar xf \
+  43 | >>>     /tmp/playback.tar.gz -C \
+  44 | >>>     /tmp/znc/modules --strip-components=1 && \
+  45 | >>>   curl -o \
+  46 | >>>     /tmp/znc-push.tar.gz -L \
+  47 | >>>     https://github.com/jreese/znc-push/archive/master.tar.gz && \
+  48 | >>>   tar xf \
+  49 | >>>     /tmp/znc-push.tar.gz -C \
+  50 | >>>     /tmp/znc/modules --strip-components=1 && \
+  51 | >>>   curl -o \
+  52 | >>>     /tmp/znc-clientbuffer.tar.gz -L \
+  53 | >>>     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz && \
+  54 | >>>   tar xf \
+  55 | >>>     /tmp/znc-clientbuffer.tar.gz -C \
+  56 | >>>     /tmp/znc/modules --strip-components=1 && \
+  57 | >>>   curl -o \
+  58 | >>>     /tmp/znc-palaver.tar.gz -L \
+  59 | >>>     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz && \
+  60 | >>>   tar xf \
+  61 | >>>     /tmp/znc-palaver.tar.gz -C \
+  62 | >>>     /tmp/znc/modules --strip-components=1 && \
+  63 | >>>   cd /tmp/znc && \
+  64 | >>>   mkdir -p build && \
+  65 | >>>   cd build && \
+  66 | >>>   cmake .. \
+  67 | >>>     -DWANT_PYTHON=yes \
+  68 | >>>     -DWANT_PERL=yes \
+  69 | >>>     -DWANT_TCL=yes && \
+  70 | >>>   make && \
+  71 | >>>   make DESTDIR=/tmp/znc install
+  72 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     argon2-dev     autoconf     automake     libboost-dev    build-essential     c-ares-dev     libsasl2-dev     gettext     libicu-dev     libssl-dev     perl-dev     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake" did not complete successfully: exit code: 100
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** compile znc ****\" &&   mkdir -p     /tmp/znc &&   git clone --branch \"${VERSION}\" --depth 1     --recurse-submodules     https://github.com/znc/znc.git     /tmp/znc &&   curl -o     /tmp/playback.tar.gz -L     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz &&   tar xf     /tmp/playback.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-push.tar.gz -L     https://github.com/jreese/znc-push/archive/master.tar.gz &&   tar xf     /tmp/znc-push.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-clientbuffer.tar.gz -L     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz &&   tar xf     /tmp/znc-clientbuffer.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-palaver.tar.gz -L     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz &&   tar xf     /tmp/znc-palaver.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   cd /tmp/znc &&   mkdir -p build &&   cd build &&   cmake ..     -DWANT_PYTHON=yes     -DWANT_PERL=yes     -DWANT_TCL=yes &&   make &&   make DESTDIR=/tmp/znc install" did not complete successfully: exit code: 128

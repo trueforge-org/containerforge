@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3.11 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: kclient source extraction step still fails in build stage (tar extraction failure from release artifact).
+- Full log: `amd64-build.log`

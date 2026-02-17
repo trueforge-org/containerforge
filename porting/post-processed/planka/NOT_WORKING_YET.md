@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     giflib     libgsf     nodejs     vips &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     npm     py3-setuptools &&   echo \"**** install planka ****\" &&   mkdir -p /build &&   curl -o     /tmp/planka.tar.gz -L     \"https://github.com/plankanban/planka/archive/v${VERSION}.tar.gz\" &&   tar xf     /tmp/planka.tar.gz -C     /build --strip-components=1 &&   cd /build/server &&   npm install pnpm@9 --global &&   pnpm import &&   pnpm install --prod &&   cd /build/client &&   pnpm import &&   pnpm install --prod &&   DISABLE_ESLINT_PLUGIN=true npm run build &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     $HOME/.cache     $HOME/.local     $HOME/.npm     /tmp/*" did not complete successfully: exit code: 100
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Source tarball URL for configured VERSION resolves to HTTP 400 during fetch.
+- Full log: `amd64-build.log`

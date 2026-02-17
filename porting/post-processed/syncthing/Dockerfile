@@ -1,6 +1,7 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0 AS buildstage
 
 # build variables
+USER root
 
 RUN \
  echo "**** install build packages ****" && \
@@ -11,9 +12,14 @@ RUN \
   echo "**** fetch source code ****" && \
   mkdir -p \
     /tmp/sync && \
-  curl -o \
-  /tmp/syncthing-src.tar.gz -L \
-    "https://github.com/syncthing/syncthing/archive/v${VERSION}.tar.gz" && \
+  (curl -fL -o \
+  /tmp/syncthing-src.tar.gz \
+    "https://github.com/syncthing/syncthing/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+  /tmp/syncthing-src.tar.gz \
+    "https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz" || (SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
+    | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o \
+  /tmp/syncthing-src.tar.gz \
+    "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz")) && \
   tar xf \
   /tmp/syncthing-src.tar.gz -C \
     /tmp/sync --strip-components=1 && \
@@ -39,7 +45,7 @@ ENV HOME="/config"
 RUN \
   echo "**** create var lib folder ****" && \
   install -d -o apps -g apps \
-    /var/lib/syncthing && \
+    /var/lib/syncthing
 
 USER apps
 COPY . /

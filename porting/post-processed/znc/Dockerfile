@@ -1,6 +1,7 @@
 
 FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
 ############## build stage ##############
+USER root
 
 # package version
 
@@ -9,17 +10,17 @@ ENV MAKEFLAGS="-j4"
 RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    argon2-dev \
+    libargon2-dev \
     autoconf \
     automake \
     libboost-dev\
     build-essential \
-    c-ares-dev \
+    libc-ares-dev \
     libsasl2-dev \
     gettext \
     libicu-dev \
     libssl-dev \
-    perl-dev \
+    perl \
     python3-dev \
     swig \
     tcl-dev && \
@@ -96,8 +97,9 @@ RUN \
   echo "**** install runtime packages ****" && \
   RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
   apt-get update && apt-get install -y --no-install-recommends \
-    ${RUNTIME_PACKAGES} && \
-# copy local files
+    ${RUNTIME_PACKAGES}
+
+# copy local files
 USER apps
 COPY . /
 COPY ./root /

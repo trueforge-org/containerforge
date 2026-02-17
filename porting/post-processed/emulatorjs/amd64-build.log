@@ -1,81 +1,177 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 3.74kB done
-#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
-#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 15)
-#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 50)
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 835B / 835B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 ...
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 3.77kB done
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 16)
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 52)
+#2 DONE 0.0s
 
 #3 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
-#3 DONE 0.3s
-
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.3s
+#3 ...
 
 #4 [internal] load metadata for ghcr.io/trueforge-org/golang:1.26.0
-#4 DONE 0.7s
+#4 DONE 0.2s
 
-#5 [internal] load .dockerignore
-#5 transferring context: 2B done
-#5 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
+#3 DONE 0.2s
 
-#6 [stage-3 1/8] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#6 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#6 CACHED
+#5 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#5 DONE 0.2s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
 
 #7 [nodebuilder 1/6] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
 #7 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c 0.0s done
 #7 CACHED
 
-#8 [internal] load build context
-#8 transferring context: 14.54kB done
-#8 DONE 0.0s
+#8 [migrationbuilder 1/2] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
+#8 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
+#8 CACHED
 
-#9 [migrationbuilder 1/2] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
-#9 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
-#9 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 0B / 63.66MB 0.2s
-#9 ...
+#9 [stage-3 1/8] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#9 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#9 CACHED
 
-#10 [nodebuilder 2/6] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*
-#10 0.212 **** install build packages ****
-#10 0.218 Reading package lists...
-#10 0.228 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
-#10 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+#10 [internal] load build context
+#10 transferring context: 4.88kB done
+#10 DONE 0.0s
 
-#11 [binbuilder 2/4] RUN   echo "**** build nestool ****" &&   mkdir -p /build-out/usr/local/bin &&   git clone https://github.com/Kreeblah/NES20Tool.git &&   cd NES20Tool &&   go build &&   mv NES20Tool /build-out/usr/local/bin
-#11 CANCELED
+#11 [stage-3 2/8] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     ipfs-kubo     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo "**** use pinned node ****" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/amd64/node -o     /bin/node &&   chmod +x /bin/node &&   echo "**** cleanup ****" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*
+#11 0.315 **** install runtime packages ****
+#11 0.431 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#11 0.561 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#11 0.606 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#11 1.149 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#11 1.295 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#11 1.382 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#11 1.441 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#11 1.475 Get:8 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#11 1.703 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#11 2.360 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#11 2.470 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#11 2.591 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#11 2.696 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#11 2.818 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#11 2.924 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#11 3.055 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#11 3.179 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#11 3.284 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#11 3.556 Fetched 36.1 MB in 3s (11.3 MB/s)
+#11 3.556 Reading package lists...
+#11 5.225 Reading package lists...
+#11 6.589 Building dependency tree...
+#11 6.902 Reading state information...
+#11 6.926 E: Unable to locate package ipfs-kubo
+#11 ...
 
-#12 [migrationbuilder 2/2] RUN   echo "**** build fs-repo-migrations ****" &&   mkdir -p /build-out/usr/bin &&   git clone https://github.com/ipfs/fs-repo-migrations.git &&   cd fs-repo-migrations &&   for BUILD in fs-repo-migrations fs-repo-9-to-10 fs-repo-10-to-11 fs-repo-11-to-12; do     cd ${BUILD} &&     go build &&     mv fs-repo-* /build-out/usr/bin/ &&     cd .. ;   done
-#12 CANCELED
+#12 [nodebuilder 2/6] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*
+#12 0.246 **** install build packages ****
+#12 0.328 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#12 0.464 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#12 0.502 Get:3 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#12 0.648 Get:4 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#12 0.674 Get:5 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#12 0.708 Get:6 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#12 0.981 Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#12 1.109 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#12 1.238 Get:9 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#12 1.363 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#12 1.546 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#12 2.314 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#12 2.422 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#12 2.527 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#12 2.647 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#12 2.739 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#12 2.845 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#12 2.939 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#12 3.487 Fetched 36.1 MB in 3s (11.3 MB/s)
+#12 3.487 Reading package lists...
+#12 5.124 Reading package lists...
+#12 6.661 Building dependency tree...
+#12 6.944 Reading state information...
+#12 7.215 The following additional packages will be installed:
+#12 7.217   7zip
+#12 7.218 Suggested packages:
+#12 7.218   7zip-standalone 7zip-rar
+#12 7.291 The following NEW packages will be installed:
+#12 7.295   7zip p7zip-full zip
+#12 7.431 0 upgraded, 3 newly installed, 0 to remove and 5 not upgraded.
+#12 7.431 Need to get 2,024 kB of archives.
+#12 7.431 After this operation, 6,867 kB of additional disk space will be used.
+#12 7.431 Get:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 7zip amd64 23.01+dfsg-11 [1,846 kB]
+#12 ...
 
-#13 [stage-3 2/8] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     ipfs-kubo     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo "**** use pinned node ****" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/amd64/node -o     /bin/node &&   chmod +x /bin/node &&   echo "**** cleanup ****" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*
-#13 0.208 **** install runtime packages ****
+#11 [stage-3 2/8] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     ipfs-kubo     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo "**** use pinned node ****" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/amd64/node -o     /bin/node &&   chmod +x /bin/node &&   echo "**** cleanup ****" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*
+#11 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     ipfs-kubo     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo \"**** use pinned node ****\" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/$TARGETARCH/node -o     /bin/node &&   chmod +x /bin/node &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+
+#12 [nodebuilder 2/6] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*
+#12 7.586 Get:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 p7zip-full all 16.02+transitional.1 [2,500 B]
+#12 ...
+
+#13 [migrationbuilder 2/2] RUN   echo "**** build fs-repo-migrations ****" &&   mkdir -p /build-out/usr/bin &&   git clone https://github.com/ipfs/fs-repo-migrations.git &&   cd fs-repo-migrations &&   for BUILD in fs-repo-migrations fs-repo-9-to-10 fs-repo-10-to-11 fs-repo-11-to-12; do     cd ${BUILD} &&     go build &&     mv fs-repo-* /build-out/usr/bin/ &&     cd .. ;   done
+#13 0.326 **** build fs-repo-migrations ****
+#13 0.331 Cloning into 'fs-repo-migrations'...
+#13 3.607 Updating files:  80% (7873/9818)Updating files:  81% (7953/9818)Updating files:  82% (8051/9818)Updating files:  83% (8149/9818)Updating files:  84% (8248/9818)Updating files:  85% (8346/9818)Updating files:  86% (8444/9818)Updating files:  87% (8542/9818)Updating files:  88% (8640/9818)Updating files:  89% (8739/9818)Updating files:  90% (8837/9818)Updating files:  91% (8935/9818)Updating files:  92% (9033/9818)Updating files:  93% (9131/9818)Updating files:  94% (9229/9818)Updating files:  95% (9328/9818)Updating files:  96% (9426/9818)Updating files:  97% (9524/9818)Updating files:  98% (9622/9818)Updating files:  99% (9720/9818)Updating files: 100% (9818/9818)Updating files: 100% (9818/9818), done.
 #13 CANCELED
+
+#14 [binbuilder 2/4] RUN   echo "**** build nestool ****" &&   mkdir -p /build-out/usr/local/bin &&   git clone https://github.com/Kreeblah/NES20Tool.git &&   cd NES20Tool &&   go build &&   mv NES20Tool /build-out/usr/local/bin
+#14 0.323 **** build nestool ****
+#14 0.328 Cloning into 'NES20Tool'...
+#14 CANCELED
+
+#12 [nodebuilder 2/6] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*
+#12 CANCELED
 ------
- > [nodebuilder 2/6] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*:
-0.212 **** install build packages ****
-0.218 Reading package lists...
-0.228 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
+ > [stage-3 2/8] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     ipfs-kubo     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo "**** use pinned node ****" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/amd64/node -o     /bin/node &&   chmod +x /bin/node &&   echo "**** cleanup ****" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*:
+2.818 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+2.924 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+3.055 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+3.179 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+3.284 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+
+
+
+6.902 Reading state information...
+6.926 E: Unable to locate package ipfs-kubo
 ------
 
  [33m3 warnings found (use docker --debug to expand):
 [0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 15)
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 50)
-Dockerfile:53
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 16)
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 52)
+Dockerfile:106
 --------------------
-  52 |     
-  53 | >>> RUN \
-  54 | >>>   echo "**** install build packages ****" && \
-  55 | >>>   apt-get update && \
-  56 | >>>   apt-get install -y --no-install-recommends \
-  57 | >>>     p7zip-full \
-  58 | >>>     zip && \
-  59 | >>>   rm -rf /var/lib/apt/lists/*
-  60 |     
+ 105 |     
+ 106 | >>> RUN \
+ 107 | >>>   echo "**** install runtime packages ****" && \
+ 108 | >>>   apt-get update && \
+ 109 | >>>   apt-get install -y --no-install-recommends \
+ 110 | >>>     file \
+ 111 | >>>     flac \
+ 112 | >>>     ipfs-kubo \
+ 113 | >>>     nginx \
+ 114 | >>>     p7zip-full \
+ 115 | >>>     python3 \
+ 116 | >>>     libsdl2-2.0-0 && \
+ 117 | >>>   apt-get install -y --no-install-recommends \
+ 118 | >>>     mame-tools && \
+ 119 | >>>   mkdir /data && \
+ 120 | >>>   echo "**** use pinned node ****" && \
+ 121 | >>>   curl -L \
+ 122 | >>>     https://github.com/thelamer/node-stash/raw/master/v16.20.2/$TARGETARCH/node -o \
+ 123 | >>>     /bin/node && \
+ 124 | >>>   chmod +x /bin/node && \
+ 125 | >>>   echo "**** cleanup ****" && \
+ 126 | >>>   rm -rf \
+ 127 | >>>     /tmp/* && \
+ 128 | >>>   rm -rf /var/lib/apt/lists/*
+ 129 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     ipfs-kubo     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo \"**** use pinned node ****\" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/$TARGETARCH/node -o     /bin/node &&   chmod +x /bin/node &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100

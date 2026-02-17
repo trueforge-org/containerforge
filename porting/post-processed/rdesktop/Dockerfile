@@ -2,10 +2,11 @@
 FROM ghcr.io/trueforge-org/ubuntu:24.04 AS buildstage
 
 ARG XRDP_PULSE_VERSION=v0.7
+USER root
 
 RUN \
   echo "**** install build deps ****" && \
-  sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list && \
+  sed -Ei 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources && \
   apt-get update && \
   apt-get install -y \
     build-essential \
@@ -75,8 +76,8 @@ RUN \
   apt-get install -y --no-install-recommends \
     apt-transport-https \
     dbus-x11 \
-    docker-ce-cli \
-    docker-compose-plugin \
+    docker.io \
+    docker-compose-v2 \
     fonts-noto-color-emoji \
     fonts-noto-core \
     gawk \

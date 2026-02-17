@@ -21,3 +21,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 24.72 /bin/bash: line 1: /etc/php83/php-fpm.d/www.conf: No such file or directory
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after Dockerfile fixes.
+- Full log: `amd64-build.log`

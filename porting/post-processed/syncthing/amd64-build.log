@@ -1,66 +1,103 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.24kB done
-#1 WARN: NoEmptyContinuation: Empty continuation line (line 44)
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 821B / 821B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.2s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.68kB done
+#2 DONE 0.0s
 
 #3 [internal] load metadata for ghcr.io/trueforge-org/golang:1.26.0
-#3 DONE 0.3s
+#3 DONE 0.2s
 
-#4 [internal] load .dockerignore
-#4 transferring context: 2B done
-#4 DONE 0.0s
+#4 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#4 DONE 0.2s
 
-#5 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
-#5 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
-#5 CACHED
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
 
 #6 [stage-1 1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
 #6 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#6 CACHED
+#6 DONE 0.0s
 
-#7 [internal] load build context
-#7 transferring context: 3.60kB done
+#7 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
+#7 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
 #7 DONE 0.0s
 
-#8 [stage-1 2/5] RUN   echo "**** create var lib folder ****" &&   install -d -o apps -g apps     /var/lib/syncthing && USER apps
-#8 0.195 **** create var lib folder ****
-#8 0.198 /bin/bash: line 1: USER: command not found
-#8 ERROR: process "/bin/bash -o pipefail -c echo \"**** create var lib folder ****\" &&   install -d -o apps -g apps     /var/lib/syncthing && USER apps" did not complete successfully: exit code: 127
+#8 [internal] load build context
+#8 transferring context: 2.24kB done
+#8 DONE 0.0s
 
 #9 [buildstage 2/3] RUN  echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential
-#9 0.201 **** install build packages ****
-#9 0.209 Reading package lists...
-#9 0.218 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
-#9 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential" did not complete successfully: exit code: 100
+#9 CACHED
+
+#10 [stage-1 2/5] RUN   echo "**** create var lib folder ****" &&   install -d -o apps -g apps     /var/lib/syncthing
+#10 CACHED
+
+#11 [stage-1 3/5] COPY . /
+#11 DONE 0.0s
+
+#12 [buildstage 3/3] RUN   echo "**** fetch source code ****" &&   mkdir -p     /tmp/sync &&   (curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz" || (SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest"     | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz")) &&   tar xf   /tmp/syncthing-src.tar.gz -C     /tmp/sync --strip-components=1 &&   echo "**** compile syncthing  ****" &&   cd /tmp/sync &&   go clean -modcache &&   CGO_ENABLED=0 go run build.go     -no-upgrade     -version=v${VERSION}     build syncthing
+#12 0.290 **** fetch source code ****
+#12 0.303   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#12 0.303                                  Dload  Upload   Total   Spent    Left  Speed
+#12 0.303   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.500   0    14    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.500 curl: (22) The requested URL returned error: 404
+#12 0.507   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#12 0.507                                  Dload  Upload   Total   Spent    Left  Speed
+#12 0.508   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.636   0    20    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.636 curl: (22) The requested URL returned error: 400
+#12 0.656   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#12 0.656                                  Dload  Upload   Total   Spent    Left  Speed
+#12 0.656   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.706   0    20    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.706 curl: (22) The requested URL returned error: 400
+#12 ERROR: process "/bin/bash -o pipefail -c echo \"**** fetch source code ****\" &&   mkdir -p     /tmp/sync &&   (curl -fL -o   /tmp/syncthing-src.tar.gz     \"https://github.com/syncthing/syncthing/archive/refs/tags/v${VERSION}.tar.gz\" || curl -fL -o   /tmp/syncthing-src.tar.gz     \"https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz\" || (SYNCTHING_RELEASE=$(curl -sX GET \"https://api.github.com/repos/syncthing/syncthing/releases/latest\"     | awk '/tag_name/{print $4;exit}' FS='[\"\"]') && curl -fL -o   /tmp/syncthing-src.tar.gz     \"https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz\")) &&   tar xf   /tmp/syncthing-src.tar.gz -C     /tmp/sync --strip-components=1 &&   echo \"**** compile syncthing  ****\" &&   cd /tmp/sync &&   go clean -modcache &&   CGO_ENABLED=0 go run build.go     -no-upgrade     -version=v${VERSION}     build syncthing" did not complete successfully: exit code: 22
 ------
- > [buildstage 2/3] RUN  echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential:
-0.201 **** install build packages ****
-0.209 Reading package lists...
-0.218 E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
-------
-------
- > [stage-1 2/5] RUN   echo "**** create var lib folder ****" &&   install -d -o apps -g apps     /var/lib/syncthing && USER apps:
-0.195 **** create var lib folder ****
-0.198 /bin/bash: line 1: USER: command not found
+ > [buildstage 3/3] RUN   echo "**** fetch source code ****" &&   mkdir -p     /tmp/sync &&   (curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz" || (SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest"     | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz")) &&   tar xf   /tmp/syncthing-src.tar.gz -C     /tmp/sync --strip-components=1 &&   echo "**** compile syncthing  ****" &&   cd /tmp/sync &&   go clean -modcache &&   CGO_ENABLED=0 go run build.go     -no-upgrade     -version=v${VERSION}     build syncthing:
+0.507   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+0.507                                  Dload  Upload   Total   Spent    Left  Speed
+0.508   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.636   0    20    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.636 curl: (22) The requested URL returned error: 400
+0.656   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+0.656                                  Dload  Upload   Total   Spent    Left  Speed
+0.656   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.706   0    20    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+0.706 curl: (22) The requested URL returned error: 400
 ------
 
- [33m2 warnings found (use docker --debug to expand):
-[0m - NoEmptyContinuation: Empty continuation line (line 44)
- - ExposeProtoCasing: Defined protocol '21027/UDP' in EXPOSE instruction should be lowercase (line 53)
-Dockerfile:39
+ [33m1 warning found (use docker --debug to expand):
+[0m - ExposeProtoCasing: Defined protocol '21027/UDP' in EXPOSE instruction should be lowercase (line 59)
+Dockerfile:11
 --------------------
-  38 |     
-  39 | >>> RUN \
-  40 | >>>   echo "**** create var lib folder ****" && \
-  41 | >>>   install -d -o apps -g apps \
-  42 | >>>     /var/lib/syncthing && \
-  43 | >>> 
-  44 | >>> USER apps
-  45 |     COPY . /
+  10 |     
+  11 | >>> RUN \
+  12 | >>>   echo "**** fetch source code ****" && \
+  13 | >>>   mkdir -p \
+  14 | >>>     /tmp/sync && \
+  15 | >>>   (curl -fL -o \
+  16 | >>>   /tmp/syncthing-src.tar.gz \
+  17 | >>>     "https://github.com/syncthing/syncthing/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+  18 | >>>   /tmp/syncthing-src.tar.gz \
+  19 | >>>     "https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz" || (SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
+  20 | >>>     | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o \
+  21 | >>>   /tmp/syncthing-src.tar.gz \
+  22 | >>>     "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz")) && \
+  23 | >>>   tar xf \
+  24 | >>>   /tmp/syncthing-src.tar.gz -C \
+  25 | >>>     /tmp/sync --strip-components=1 && \
+  26 | >>>   echo "**** compile syncthing  ****" && \
+  27 | >>>   cd /tmp/sync && \
+  28 | >>>   go clean -modcache && \
+  29 | >>>   CGO_ENABLED=0 go run build.go \
+  30 | >>>     -no-upgrade \
+  31 | >>>     -version=v${VERSION} \
+  32 | >>>     build syncthing
+  33 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** create var lib folder ****\" &&   install -d -o apps -g apps     /var/lib/syncthing && USER apps" did not complete successfully: exit code: 127
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** fetch source code ****\" &&   mkdir -p     /tmp/sync &&   (curl -fL -o   /tmp/syncthing-src.tar.gz     \"https://github.com/syncthing/syncthing/archive/refs/tags/v${VERSION}.tar.gz\" || curl -fL -o   /tmp/syncthing-src.tar.gz     \"https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz\" || (SYNCTHING_RELEASE=$(curl -sX GET \"https://api.github.com/repos/syncthing/syncthing/releases/latest\"     | awk '/tag_name/{print $4;exit}' FS='[\"\"]') && curl -fL -o   /tmp/syncthing-src.tar.gz     \"https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz\")) &&   tar xf   /tmp/syncthing-src.tar.gz -C     /tmp/sync --strip-components=1 &&   echo \"**** compile syncthing  ****\" &&   cd /tmp/sync &&   go clean -modcache &&   CGO_ENABLED=0 go run build.go     -no-upgrade     -version=v${VERSION}     build syncthing" did not complete successfully: exit code: 22

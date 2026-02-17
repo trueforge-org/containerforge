@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 remediation rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Runtime package install fails because `ipfs-kubo` package is unavailable in Ubuntu apt repos.
+- Full log: `amd64-build.log`
