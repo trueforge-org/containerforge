@@ -1,66 +1,153 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 813B / 813B done
 #1 DONE 0.0s
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.23kB done
-#1 DONE 0.0s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.23kB done
+#2 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.3s
+#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#3 DONE 0.3s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#4 CACHED
+#5 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#5 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#5 CACHED
 
-#5 [internal] load build context
-#5 transferring context: 3.54kB done
-#5 DONE 0.0s
+#6 [internal] load build context
+#6 transferring context: 3.81kB done
+#6 DONE 0.0s
 
-#6 [2/4] RUN   echo "**** install build dependencies ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo "**** install mylar3 ****" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     "https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*
-#6 0.143 **** install build dependencies ****
-#6 0.247 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.247 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.328 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.389 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 0.409 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.489 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 0.508 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 0.569 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 0.599 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 0.659 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 0.695 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 1.159 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 1.622 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 1.953 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 2.033 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 2.159 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.308 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 2.388 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 2.407 Fetched 36.1 MB in 2s (16.1 MB/s)
-#6 2.407 Reading package lists...
-#6 3.149 Reading package lists...
-#6 3.886 Building dependency tree...
-#6 4.036 Reading state information...
-#6 4.051 E: Unable to locate package zlib-dev
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build dependencies ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo \"**** install mylar3 ****\" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     \"https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz\" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*" did not complete successfully: exit code: 100
+#7 [2/4] RUN   echo "**** install build dependencies ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib1g-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib1g &&   echo "**** install mylar3 ****" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     "https://github.com/mylar3/mylar3/archive/v0.8.3.tar.gz" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*
+#7 0.153 **** install build dependencies ****
+#7 0.611 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.745 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 1.016 Get:3 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.493 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 1.498 Get:5 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.604 Get:6 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.685 Get:7 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.705 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.873 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 2.442 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 2.595 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 3.434 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 3.572 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 3.746 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 3.907 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 4.065 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 4.203 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 4.341 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 4.360 Fetched 36.1 MB in 4s (8,640 kB/s)
+#7 4.360 Reading package lists...
+#7 5.118 Reading package lists...
+#7 5.862 Building dependency tree...
+#7 6.019 Reading state information...
+#7 6.165 build-essential is already the newest version (12.10ubuntu1).
+#7 6.165 libffi-dev is already the newest version (3.4.6-1build1).
+#7 6.165 zlib1g-dev is already the newest version (1:1.3.dfsg-3.1ubuntu2.1).
+#7 6.165 The following additional packages will be installed:
+#7 6.165   libjpeg-turbo8 libjpeg-turbo8-dev libjpeg8 libjpeg8-dev libsharpyuv-dev
+#7 6.165   libsharpyuv0 libwebp7 libwebpdecoder3 libwebpdemux2 libwebpmux3
+#7 6.196 The following NEW packages will be installed:
+#7 6.196   libjpeg-dev libjpeg-turbo8 libjpeg-turbo8-dev libjpeg8 libjpeg8-dev
+#7 6.196   libsharpyuv-dev libsharpyuv0 libwebp-dev libwebp7 libwebpdecoder3
+#7 6.197   libwebpdemux2 libwebpmux3
+#7 6.350 0 upgraded, 12 newly installed, 0 to remove and 24 not upgraded.
+#7 6.350 Need to get 1,231 kB of archives.
+#7 6.350 After this operation, 4,403 kB of additional disk space will be used.
+#7 6.350 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#7 6.488 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8-dev amd64 2.1.5-2ubuntu2 [295 kB]
+#7 6.628 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#7 6.766 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8-dev amd64 8c-2ubuntu11 [1,484 B]
+#7 6.903 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-dev amd64 8c-2ubuntu11 [1,482 B]
+#7 7.040 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#7 7.177 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv-dev amd64 1.3.2-0.4build3 [16.0 kB]
+#7 7.314 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#7 7.453 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebpdecoder3 amd64 1.3.2-0.4build3 [114 kB]
+#7 7.590 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebpdemux2 amd64 1.3.2-0.4build3 [12.4 kB]
+#7 7.727 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebpmux3 amd64 1.3.2-0.4build3 [25.7 kB]
+#7 7.864 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp-dev amd64 1.3.2-0.4build3 [367 kB]
+#7 7.988 debconf: delaying package configuration, since apt-utils is not installed
+#7 8.017 Fetched 1,231 kB in 2s (740 kB/s)
+#7 8.033 Selecting previously unselected package libjpeg-turbo8:amd64.
+#7 8.033 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#7 8.048 Preparing to unpack .../00-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#7 8.051 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 8.073 Selecting previously unselected package libjpeg-turbo8-dev:amd64.
+#7 8.074 Preparing to unpack .../01-libjpeg-turbo8-dev_2.1.5-2ubuntu2_amd64.deb ...
+#7 8.075 Unpacking libjpeg-turbo8-dev:amd64 (2.1.5-2ubuntu2) ...
+#7 8.101 Selecting previously unselected package libjpeg8:amd64.
+#7 8.103 Preparing to unpack .../02-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#7 8.105 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 8.122 Selecting previously unselected package libjpeg8-dev:amd64.
+#7 8.124 Preparing to unpack .../03-libjpeg8-dev_8c-2ubuntu11_amd64.deb ...
+#7 8.125 Unpacking libjpeg8-dev:amd64 (8c-2ubuntu11) ...
+#7 8.146 Selecting previously unselected package libjpeg-dev:amd64.
+#7 8.147 Preparing to unpack .../04-libjpeg-dev_8c-2ubuntu11_amd64.deb ...
+#7 8.148 Unpacking libjpeg-dev:amd64 (8c-2ubuntu11) ...
+#7 8.162 Selecting previously unselected package libsharpyuv0:amd64.
+#7 8.164 Preparing to unpack .../05-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#7 8.165 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 8.179 Selecting previously unselected package libsharpyuv-dev:amd64.
+#7 8.180 Preparing to unpack .../06-libsharpyuv-dev_1.3.2-0.4build3_amd64.deb ...
+#7 8.181 Unpacking libsharpyuv-dev:amd64 (1.3.2-0.4build3) ...
+#7 8.196 Selecting previously unselected package libwebp7:amd64.
+#7 8.198 Preparing to unpack .../07-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#7 8.198 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 8.215 Selecting previously unselected package libwebpdecoder3:amd64.
+#7 8.217 Preparing to unpack .../08-libwebpdecoder3_1.3.2-0.4build3_amd64.deb ...
+#7 8.218 Unpacking libwebpdecoder3:amd64 (1.3.2-0.4build3) ...
+#7 8.234 Selecting previously unselected package libwebpdemux2:amd64.
+#7 8.235 Preparing to unpack .../09-libwebpdemux2_1.3.2-0.4build3_amd64.deb ...
+#7 8.236 Unpacking libwebpdemux2:amd64 (1.3.2-0.4build3) ...
+#7 8.250 Selecting previously unselected package libwebpmux3:amd64.
+#7 8.252 Preparing to unpack .../10-libwebpmux3_1.3.2-0.4build3_amd64.deb ...
+#7 8.253 Unpacking libwebpmux3:amd64 (1.3.2-0.4build3) ...
+#7 8.266 Selecting previously unselected package libwebp-dev:amd64.
+#7 8.268 Preparing to unpack .../11-libwebp-dev_1.3.2-0.4build3_amd64.deb ...
+#7 8.269 Unpacking libwebp-dev:amd64 (1.3.2-0.4build3) ...
+#7 8.301 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 8.303 Setting up libwebpdecoder3:amd64 (1.3.2-0.4build3) ...
+#7 8.306 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 8.308 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 8.310 Setting up libsharpyuv-dev:amd64 (1.3.2-0.4build3) ...
+#7 8.313 Setting up libwebpmux3:amd64 (1.3.2-0.4build3) ...
+#7 8.315 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 8.318 Setting up libjpeg-turbo8-dev:amd64 (2.1.5-2ubuntu2) ...
+#7 8.320 Setting up libwebpdemux2:amd64 (1.3.2-0.4build3) ...
+#7 8.322 Setting up libwebp-dev:amd64 (1.3.2-0.4build3) ...
+#7 8.324 Setting up libjpeg8-dev:amd64 (8c-2ubuntu11) ...
+#7 8.327 Setting up libjpeg-dev:amd64 (8c-2ubuntu11) ...
+#7 8.329 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 8.370 **** install runtime packages ****
+#7 8.535 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+#7 8.666 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#7 8.702 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
+#7 8.804 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#7 8.863 Reading package lists...
+#7 9.628 Reading package lists...
+#7 10.37 Building dependency tree...
+#7 10.53 Reading state information...
+#7 10.55 E: Unable to locate package libwebp-tools
+#7 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build dependencies ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib1g-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib1g &&   echo \"**** install mylar3 ****\" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     \"https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz\" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*" did not complete successfully: exit code: 100
 ------
- > [2/4] RUN   echo "**** install build dependencies ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo "**** install mylar3 ****" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     "https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*:
-1.159 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-1.622 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-1.953 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-2.033 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-2.159 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-2.308 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+ > [2/4] RUN   echo "**** install build dependencies ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib1g-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib1g &&   echo "**** install mylar3 ****" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     "https://github.com/mylar3/mylar3/archive/v0.8.3.tar.gz" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*:
+8.329 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+8.370 **** install runtime packages ****
+8.535 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+8.666 Hit:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+8.702 Hit:3 http://security.ubuntu.com/ubuntu noble-security InRelease
+8.804 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
 
 
 
-4.051 E: Unable to locate package zlib-dev
+10.55 E: Unable to locate package libwebp-tools
 ------
 Dockerfile:9
 --------------------
@@ -72,13 +159,13 @@ Dockerfile:9
   13 | >>>     libjpeg-dev \
   14 | >>>     libffi-dev \
   15 | >>>     libwebp-dev \
-  16 | >>>     zlib-dev && \
+  16 | >>>     zlib1g-dev && \
   17 | >>>   echo "**** install runtime packages ****" && \
   18 | >>>   apt-get update && apt-get install -y --no-install-recommends \
   19 | >>>     libjpeg-turbo8 \
   20 | >>>     libwebp-tools \
   21 | >>>     nodejs \
-  22 | >>>     zlib && \
+  22 | >>>     zlib1g && \
   23 | >>>   echo "**** install mylar3 ****" && \
   24 | >>>   mkdir /app/mylar3 && \
   25 | >>>   curl -o \
@@ -99,4 +186,4 @@ Dockerfile:9
   40 | >>>     /tmp/*
   41 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build dependencies ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib &&   echo \"**** install mylar3 ****\" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     \"https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz\" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*" did not complete successfully: exit code: 100
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build dependencies ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     libjpeg-dev     libffi-dev     libwebp-dev     zlib1g-dev &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     libjpeg-turbo8     libwebp-tools     nodejs     zlib1g &&   echo \"**** install mylar3 ****\" &&   mkdir /app/mylar3 &&   curl -o     /tmp/mylar3.tar.gz -L     \"https://github.com/mylar3/mylar3/archive/v${VERSION}.tar.gz\" &&   tar xf /tmp/mylar3.tar.gz -C     /app/mylar3/ --strip-components=1 &&   cd /app/mylar3 &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root/.cache     /tmp/*" did not complete successfully: exit code: 100

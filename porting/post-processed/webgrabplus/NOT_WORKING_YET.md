@@ -22,3 +22,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 5.930 E: Unable to locate package iputils
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 finalizing in-progress batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in downstream install/download stage after package normalization.
+- Full log: `amd64-build.log`

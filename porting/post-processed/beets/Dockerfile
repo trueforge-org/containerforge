@@ -32,7 +32,7 @@ RUN \
     libchromaprint1 \
     libexpat1 \
     ffmpeg \
-    libfftw3-3 \
+    libfftw3-double3 \
     flac \
     libgdbm6 \
     gobject-introspection \

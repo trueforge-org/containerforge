@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 45.04 E: Unable to locate package libfftw3-3
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 finalizing in-progress batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails later in install flow (non-package issue remains after libfftw package correction).
+- Full log: `amd64-build.log`

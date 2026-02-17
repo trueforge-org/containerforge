@@ -19,7 +19,7 @@ RUN \
     git \
     nodejs \
     npm \
-    openssh && \
+    openssh-client && \
   echo "**** install wiki.js ****" && \
   mkdir -p /app/wiki && \
   if [ -z ${WIKIJS_RELEASE} ]; then \

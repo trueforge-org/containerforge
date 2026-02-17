@@ -13,13 +13,13 @@ RUN \
     libjpeg-dev \
     libffi-dev \
     libwebp-dev \
-    zlib-dev && \
+    zlib1g-dev && \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     libjpeg-turbo8 \
     libwebp-tools \
     nodejs \
-    zlib && \
+    zlib1g && \
   echo "**** install mylar3 ****" && \
   mkdir /app/mylar3 && \
   curl -o \
