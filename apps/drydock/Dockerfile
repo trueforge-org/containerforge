@@ -13,18 +13,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 WORKDIR /app
 
-# Install system packages, trivy, and cosign
+# Install additional system packages (bash, curl, git, jq, openssl, tini, tzdata already in base)
 # hadolint ignore=DL3008
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        bash \
-        curl \
-        git \
         gosu \
-        jq \
-        openssl \
-        tini \
-        tzdata \
     && curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/75c4dc0f45c5d7ffd05ae26df1e0c666787bdf2a/contrib/install.sh | sh -s -- -b /usr/local/bin \
     && curl -fsSL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o /usr/local/bin/cosign \
     && chmod +x /usr/local/bin/cosign \
