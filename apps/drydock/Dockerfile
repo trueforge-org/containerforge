@@ -4,6 +4,7 @@ FROM ghcr.io/trueforge-org/node:rolling@sha256:3c3a3dc7f96d36e986d4f6b5352fc77ed
 USER root
 
 ARG VERSION
+ARG TARGETARCH
 
 ENV WORKDIR=/app
 ENV DD_LOG_FORMAT=text
@@ -18,12 +19,17 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         gosu \
-    && curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/75c4dc0f45c5d7ffd05ae26df1e0c666787bdf2a/contrib/install.sh | sh -s -- -b /usr/local/bin \
-    && curl -fsSL https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64 -o /usr/local/bin/cosign \
-    && chmod +x /usr/local/bin/cosign \
-    && mkdir -p /config && \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install trivy and cosign
+RUN ARCH=${TARGETARCH:-amd64} && \
+    curl -fsSL "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_Linux-64bit.tar.gz" \
+        | tar xz -C /usr/local/bin trivy && \
+    curl -fsSL "https://github.com/sigstore/cosign/releases/download/v2.4.1/cosign-linux-${ARCH}" -o /usr/local/bin/cosign && \
+    chmod +x /usr/local/bin/cosign && \
+    mkdir -p /config && \
     chown -R apps:apps /app /config && chmod -R 755 /app /config && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
+    rm -rf /tmp/*
 
 # Build stage for backend app
 FROM base AS app-build
