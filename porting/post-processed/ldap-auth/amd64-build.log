@@ -1,197 +1,0 @@
-#0 building with "default" instance using docker driver
-
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.20kB done
-#1 DONE 0.0s
-
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.2s
-
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
-
-#4 [1/5] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#4 CACHED
-
-#5 [internal] load build context
-#5 transferring context: 25.13kB done
-#5 DONE 0.0s
-
-#6 [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libldap2-dev         python3-dev         libffi-dev &&     echo "**** install runtime packages ****" &&     apt-get install -y --no-install-recommends         libldap2         libffi8         python3 &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir         cryptography         legacy-cgi         python-ldap=="${VERSION}" &&     echo "**** cleanup ****" &&     apt-get remove -y --purge         build-essential         libldap2-dev         python3-dev         libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache
-#6 0.145 **** install build packages ****
-#6 0.468 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.734 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.904 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 1.012 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 1.122 Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 1.228 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 1.384 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 1.416 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 2.042 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 2.077 Get:10 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 2.133 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 2.213 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 2.305 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 2.398 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.498 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 2.498 Get:16 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 2.579 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 2.701 Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 3.098 Fetched 36.1 MB in 3s (12.3 MB/s)
-#6 3.098 Reading package lists...
-#6 3.835 Reading package lists...
-#6 4.575 Building dependency tree...
-#6 4.725 Reading state information...
-#6 4.867 build-essential is already the newest version (12.10ubuntu1).
-#6 4.867 libffi-dev is already the newest version (3.4.6-1build1).
-#6 4.867 The following additional packages will be installed:
-#6 4.867   libjs-jquery libjs-sphinxdoc libjs-underscore libldap-dev libpython3-dev
-#6 4.867   libpython3.12-dev libpython3.12t64 python3.12-dev
-#6 4.868 Recommended packages:
-#6 4.868   javascript-common
-#6 4.909 The following NEW packages will be installed:
-#6 4.909   libjs-jquery libjs-sphinxdoc libjs-underscore libldap-dev libldap2-dev
-#6 4.909   libpython3-dev libpython3.12-dev libpython3.12t64 python3-dev python3.12-dev
-#6 5.004 0 upgraded, 10 newly installed, 0 to remove and 24 not upgraded.
-#6 5.004 Need to get 9,477 kB of archives.
-#6 5.004 After this operation, 42.5 MB of additional disk space will be used.
-#6 5.004 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [328 kB]
-#6 5.087 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [118 kB]
-#6 5.166 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-sphinxdoc all 7.2.6-6 [149 kB]
-#6 5.247 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libldap-dev amd64 2.6.10+dfsg-0ubuntu0.24.04.1 [308 kB]
-#6 5.327 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.11 [2,345 kB]
-#6 5.421 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-dev amd64 3.12.3-1ubuntu0.11 [5,683 kB]
-#6 5.586 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-dev amd64 3.12.3-0ubuntu2.1 [10.3 kB]
-#6 5.666 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-dev amd64 3.12.3-1ubuntu0.11 [498 kB]
-#6 5.753 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-dev amd64 3.12.3-0ubuntu2.1 [26.7 kB]
-#6 5.833 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libldap2-dev all 2.6.10+dfsg-0ubuntu0.24.04.1 [11.1 kB]
-#6 5.939 debconf: delaying package configuration, since apt-utils is not installed
-#6 5.964 Fetched 9,477 kB in 1s (10.3 MB/s)
-#6 5.979 Selecting previously unselected package libjs-jquery.
-#6 5.979 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
-#6 5.995 Preparing to unpack .../0-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
-#6 6.001 Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
-#6 6.019 Selecting previously unselected package libjs-underscore.
-#6 6.021 Preparing to unpack .../1-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
-#6 6.022 Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
-#6 6.037 Selecting previously unselected package libjs-sphinxdoc.
-#6 6.038 Preparing to unpack .../2-libjs-sphinxdoc_7.2.6-6_all.deb ...
-#6 6.039 Unpacking libjs-sphinxdoc (7.2.6-6) ...
-#6 6.054 Selecting previously unselected package libldap-dev:amd64.
-#6 6.056 Preparing to unpack .../3-libldap-dev_2.6.10+dfsg-0ubuntu0.24.04.1_amd64.deb ...
-#6 6.056 Unpacking libldap-dev:amd64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
-#6 6.087 Selecting previously unselected package libpython3.12t64:amd64.
-#6 6.089 Preparing to unpack .../4-libpython3.12t64_3.12.3-1ubuntu0.11_amd64.deb ...
-#6 6.090 Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
-#6 6.137 Selecting previously unselected package libpython3.12-dev:amd64.
-#6 6.140 Preparing to unpack .../5-libpython3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
-#6 6.141 Unpacking libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
-#6 6.285 Selecting previously unselected package libpython3-dev:amd64.
-#6 6.288 Preparing to unpack .../6-libpython3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
-#6 6.289 Unpacking libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
-#6 6.302 Selecting previously unselected package python3.12-dev.
-#6 6.304 Preparing to unpack .../7-python3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
-#6 6.304 Unpacking python3.12-dev (3.12.3-1ubuntu0.11) ...
-#6 6.318 Selecting previously unselected package python3-dev.
-#6 6.320 Preparing to unpack .../8-python3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
-#6 6.321 Unpacking python3-dev (3.12.3-0ubuntu2.1) ...
-#6 6.336 Selecting previously unselected package libldap2-dev.
-#6 6.337 Preparing to unpack .../9-libldap2-dev_2.6.10+dfsg-0ubuntu0.24.04.1_all.deb ...
-#6 6.338 Unpacking libldap2-dev (2.6.10+dfsg-0ubuntu0.24.04.1) ...
-#6 6.358 Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
-#6 6.361 Setting up libldap-dev:amd64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
-#6 6.363 Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
-#6 6.369 Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
-#6 6.371 Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
-#6 6.373 Setting up libldap2-dev (2.6.10+dfsg-0ubuntu0.24.04.1) ...
-#6 6.374 Setting up python3.12-dev (3.12.3-1ubuntu0.11) ...
-#6 6.376 Setting up libjs-sphinxdoc (7.2.6-6) ...
-#6 6.378 Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
-#6 6.380 Setting up python3-dev (3.12.3-0ubuntu2.1) ...
-#6 6.383 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-#6 6.418 **** install runtime packages ****
-#6 6.424 Reading package lists...
-#6 7.152 Building dependency tree...
-#6 7.294 Reading state information...
-#6 7.455 libldap2 is already the newest version (2.6.10+dfsg-0ubuntu0.24.04.1).
-#6 7.455 libldap2 set to manually installed.
-#6 7.455 libffi8 is already the newest version (3.4.6-1build1).
-#6 7.455 python3 is already the newest version (3.12.3-0ubuntu2.1).
-#6 7.455 python3 set to manually installed.
-#6 7.455 0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
-#6 10.99 Requirement already satisfied: pip in ./venv/lib/python3.13/site-packages (25.3)
-#6 11.03 Collecting pip
-#6 11.05   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
-#6 11.07 Collecting wheel
-#6 11.09   Downloading wheel-0.46.3-py3-none-any.whl.metadata (2.4 kB)
-#6 11.11 Collecting packaging>=24.0 (from wheel)
-#6 11.11   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
-#6 11.13 Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
-#6 11.13    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 569.9 MB/s  0:00:00
-#6 11.14 Downloading wheel-0.46.3-py3-none-any.whl (30 kB)
-#6 11.15 Downloading packaging-26.0-py3-none-any.whl (74 kB)
-#6 11.17 Installing collected packages: pip, packaging, wheel
-#6 11.17   Attempting uninstall: pip
-#6 11.17     Found existing installation: pip 25.3
-#6 11.22     Uninstalling pip-25.3:
-#6 11.22       Successfully uninstalled pip-25.3
-#6 12.11 
-#6 12.11 Successfully installed packaging-26.0 pip-26.0.1 wheel-0.46.3
-#6 12.87 ERROR: Invalid requirement: 'python-ldap==': Expected semicolon (after name with no version specifier) or end
-#6 12.87     python-ldap==
-#6 12.87                ^
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libldap2-dev         python3-dev         libffi-dev &&     echo \"**** install runtime packages ****\" &&     apt-get install -y --no-install-recommends         libldap2         libffi8         python3 &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir         cryptography         legacy-cgi         python-ldap==\"${VERSION}\" &&     echo \"**** cleanup ****\" &&     apt-get remove -y --purge         build-essential         libldap2-dev         python3-dev         libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         $HOME/.cache" did not complete successfully: exit code: 1
-------
- > [2/5] RUN     echo "**** install build packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libldap2-dev         python3-dev         libffi-dev &&     echo "**** install runtime packages ****" &&     apt-get install -y --no-install-recommends         libldap2         libffi8         python3 &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir         cryptography         legacy-cgi         python-ldap=="${VERSION}" &&     echo "**** cleanup ****" &&     apt-get remove -y --purge         build-essential         libldap2-dev         python3-dev         libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         /config/.cache:
-11.17 Installing collected packages: pip, packaging, wheel
-11.17   Attempting uninstall: pip
-11.17     Found existing installation: pip 25.3
-11.22     Uninstalling pip-25.3:
-11.22       Successfully uninstalled pip-25.3
-12.11 
-12.11 Successfully installed packaging-26.0 pip-26.0.1 wheel-0.46.3
-12.87 ERROR: Invalid requirement: 'python-ldap==': Expected semicolon (after name with no version specifier) or end
-12.87     python-ldap==
-12.87                ^
-------
-Dockerfile:9
---------------------
-   8 |     
-   9 | >>> RUN \
-  10 | >>>     echo "**** install build packages ****" && \
-  11 | >>>     apt-get update && \
-  12 | >>>     apt-get install -y --no-install-recommends \
-  13 | >>>         build-essential \
-  14 | >>>         libldap2-dev \
-  15 | >>>         python3-dev \
-  16 | >>>         libffi-dev && \
-  17 | >>>     echo "**** install runtime packages ****" && \
-  18 | >>>     apt-get install -y --no-install-recommends \
-  19 | >>>         libldap2 \
-  20 | >>>         libffi8 \
-  21 | >>>         python3 && \
-  22 | >>>     python3 -m venv /config/venv && \
-  23 | >>>     /config/venv/bin/pip install -U --no-cache-dir \
-  24 | >>>         pip \
-  25 | >>>         wheel && \
-  26 | >>>     /config/venv/bin/pip install -U --no-cache-dir \
-  27 | >>>         cryptography \
-  28 | >>>         legacy-cgi \
-  29 | >>>         python-ldap=="${VERSION}" && \
-  30 | >>>     echo "**** cleanup ****" && \
-  31 | >>>     apt-get remove -y --purge \
-  32 | >>>         build-essential \
-  33 | >>>         libldap2-dev \
-  34 | >>>         python3-dev \
-  35 | >>>         libffi-dev && \
-  36 | >>>     apt-get autoremove -y && \
-  37 | >>>     apt-get clean && \
-  38 | >>>     rm -rf \
-  39 | >>>         /var/lib/apt/lists/* \
-  40 | >>>         /tmp/* \
-  41 | >>>         $HOME/.cache
-  42 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         libldap2-dev         python3-dev         libffi-dev &&     echo \"**** install runtime packages ****\" &&     apt-get install -y --no-install-recommends         libldap2         libffi8         python3 &&     python3 -m venv /config/venv &&     /config/venv/bin/pip install -U --no-cache-dir         pip         wheel &&     /config/venv/bin/pip install -U --no-cache-dir         cryptography         legacy-cgi         python-ldap==\"${VERSION}\" &&     echo \"**** cleanup ****\" &&     apt-get remove -y --purge         build-essential         libldap2-dev         python3-dev         libffi-dev &&     apt-get autoremove -y &&     apt-get clean &&     rm -rf         /var/lib/apt/lists/*         /tmp/*         $HOME/.cache" did not complete successfully: exit code: 1

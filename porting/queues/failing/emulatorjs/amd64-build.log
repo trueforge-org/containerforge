@@ -1,0 +1,109 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 835B / 835B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 3.76kB done
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 16)
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 52)
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#3 DONE 0.1s
+
+#4 [internal] load metadata for ghcr.io/trueforge-org/golang:1.26.0
+#4 ...
+
+#5 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
+#5 DONE 0.1s
+
+#4 [internal] load metadata for ghcr.io/trueforge-org/golang:1.26.0
+#4 DONE 3.1s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [nodebuilder 1/6] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
+#7 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c 0.0s done
+#7 DONE 0.0s
+
+#8 [nodebuilder 2/6] RUN   echo "**** install build packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     p7zip-full     zip &&   rm -rf /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [migrationbuilder 1/2] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
+#9 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
+#9 CACHED
+
+#10 [stage-3 1/8] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#10 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#10 CACHED
+
+#11 [internal] load build context
+#11 transferring context: 5.03kB done
+#11 DONE 0.0s
+
+#12 [stage-3 2/8] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo "**** use pinned node ****" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/amd64/node -o     /bin/node &&   chmod +x /bin/node &&   echo "**** cleanup ****" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*
+#12 ...
+
+#13 [nodebuilder 3/6] RUN   echo "**** grab emulatorjs ****" &&   mkdir /emulatorjs &&   curl -o     /tmp/emulatorjs.tar.gz -L     "https://github.com/linuxserver/emulatorjs/archive/${VERSION}.tar.gz" &&   tar xf     /tmp/emulatorjs.tar.gz -C     /emulatorjs/ --strip-components=1
+#13 0.306 **** grab emulatorjs ****
+#13 0.317   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#13 0.317                                  Dload  Upload   Total   Spent    Left  Speed
+#13 0.317   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100     9  100     9    0     0    277      0 --:--:-- --:--:-- --:--:--   281
+#13 0.353 tar: This does not look like a tar archive
+#13 0.354 
+#13 0.354 gzip: stdin: not in gzip format
+#13 0.354 tar: Child returned status 1
+#13 0.354 tar: Error is not recoverable: exiting now
+#13 ERROR: process "/bin/bash -o pipefail -c echo \"**** grab emulatorjs ****\" &&   mkdir /emulatorjs &&   curl -o     /tmp/emulatorjs.tar.gz -L     \"https://github.com/linuxserver/emulatorjs/archive/${VERSION}.tar.gz\" &&   tar xf     /tmp/emulatorjs.tar.gz -C     /emulatorjs/ --strip-components=1" did not complete successfully: exit code: 2
+
+#12 [stage-3 2/8] RUN   echo "**** install runtime packages ****" &&   apt-get update &&   apt-get install -y --no-install-recommends     file     flac     nginx     p7zip-full     python3     libsdl2-2.0-0 &&   apt-get install -y --no-install-recommends     mame-tools &&   mkdir /data &&   echo "**** use pinned node ****" &&   curl -L     https://github.com/thelamer/node-stash/raw/master/v16.20.2/amd64/node -o     /bin/node &&   chmod +x /bin/node &&   echo "**** cleanup ****" &&   rm -rf     /tmp/* &&   rm -rf /var/lib/apt/lists/*
+#12 0.345 **** install runtime packages ****
+#12 0.410 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#12 CANCELED
+
+#14 [migrationbuilder 2/2] RUN   echo "**** build fs-repo-migrations ****" &&   mkdir -p /build-out/usr/bin &&   git clone https://github.com/ipfs/fs-repo-migrations.git &&   cd fs-repo-migrations &&   for BUILD in fs-repo-migrations fs-repo-12-to-13 fs-repo-13-to-14 fs-repo-14-to-15; do     cd ${BUILD} &&     go build &&     mv fs-repo-* /build-out/usr/bin/ &&     cd .. ;   done
+#14 0.321 **** build fs-repo-migrations ****
+#14 0.326 Cloning into 'fs-repo-migrations'...
+#14 CANCELED
+
+#15 [binbuilder 2/4] RUN   echo "**** build nestool ****" &&   mkdir -p /build-out/usr/local/bin &&   git clone https://github.com/Kreeblah/NES20Tool.git &&   cd NES20Tool &&   go build &&   mv NES20Tool /build-out/usr/local/bin
+#15 0.304 **** build nestool ****
+#15 0.315 Cloning into 'NES20Tool'...
+#15 CANCELED
+------
+ > [nodebuilder 3/6] RUN   echo "**** grab emulatorjs ****" &&   mkdir /emulatorjs &&   curl -o     /tmp/emulatorjs.tar.gz -L     "https://github.com/linuxserver/emulatorjs/archive/${VERSION}.tar.gz" &&   tar xf     /tmp/emulatorjs.tar.gz -C     /emulatorjs/ --strip-components=1:
+0.306 **** grab emulatorjs ****
+0.317   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+0.317                                  Dload  Upload   Total   Spent    Left  Speed
+0.317   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100     9  100     9    0     0    277      0 --:--:-- --:--:-- --:--:--   281
+0.353 tar: This does not look like a tar archive
+0.354 
+0.354 gzip: stdin: not in gzip format
+0.354 tar: Child returned status 1
+0.354 tar: Error is not recoverable: exiting now
+------
+
+ [33m3 warnings found (use docker --debug to expand):
+[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 16)
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 52)
+Dockerfile:64
+--------------------
+  63 |     
+  64 | >>> RUN \
+  65 | >>>   echo "**** grab emulatorjs ****" && \
+  66 | >>>   mkdir /emulatorjs && \
+  67 | >>>   curl -o \
+  68 | >>>     /tmp/emulatorjs.tar.gz -L \
+  69 | >>>     "https://github.com/linuxserver/emulatorjs/archive/${VERSION}.tar.gz" && \
+  70 | >>>   tar xf \
+  71 | >>>     /tmp/emulatorjs.tar.gz -C \
+  72 | >>>     /emulatorjs/ --strip-components=1
+  73 |     
+--------------------
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** grab emulatorjs ****\" &&   mkdir /emulatorjs &&   curl -o     /tmp/emulatorjs.tar.gz -L     \"https://github.com/linuxserver/emulatorjs/archive/${VERSION}.tar.gz\" &&   tar xf     /tmp/emulatorjs.tar.gz -C     /emulatorjs/ --strip-components=1" did not complete successfully: exit code: 2

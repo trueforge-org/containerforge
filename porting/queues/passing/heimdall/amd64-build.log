@@ -1,0 +1,267 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 818B / 818B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.96kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 2.75kB done
+#6 DONE 0.0s
+
+#7 [2/5] RUN     echo "**** install runtime packages ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         php8.3-xml         php8.3-intl         php8.3-opcache         php8.3-fpm         php8.3-mysql         php8.3-pgsql         php8.3-sqlite3         php8.3-common &&     apt-get clean &&     rm -rf /var/lib/apt/lists/* &&     echo "**** configure nginx ****" &&     mkdir -p /etc/nginx &&     touch /etc/nginx/fastcgi_params &&     echo 'fastcgi_param  PHP_AUTH_USER      $remote_user; # Heimdall user authorization' >>         /etc/nginx/fastcgi_params &&     echo 'fastcgi_param  PHP_AUTH_PW        $http_authorization; # Heimdall user authorization' >>         /etc/nginx/fastcgi_params &&     echo "**** configure php opcache ****" &&     echo 'opcache.validate_timestamps=0' >>         /etc/php/8.3/fpm/conf.d/00_opcache.ini &&     echo "**** configure php-fpm to pass env vars ****" &&     sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf &&     if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi &&     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf &&     echo "**** install heimdall ****" &&     mkdir -p         /heimdall &&     curl -o         /tmp/heimdall.tar.gz -L         "https://github.com/linuxserver/Heimdall/archive/v2.7.6.tar.gz" &&     mkdir -p         /app/www-tmp &&     tar xf         /tmp/heimdall.tar.gz -C         /app/www-tmp --strip-components=1 &&     echo "**** cleanup ****" &&     rm -rf         /tmp/*
+#7 0.151 **** install runtime packages ****
+#7 0.347 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.479 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.795 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.906 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.019 Get:5 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.045 Get:6 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.180 Get:7 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 1.280 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 1.573 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.690 Get:10 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.827 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.936 Get:12 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 2.073 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.169 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.272 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.366 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 2.448 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 2.531 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.912 Fetched 36.1 MB in 3s (13.2 MB/s)
+#7 2.912 Reading package lists...
+#7 3.696 Reading package lists...
+#7 4.473 Building dependency tree...
+#7 4.658 Reading state information...
+#7 4.807 The following additional packages will be installed:
+#7 4.808   libbsd0 libedit2 libpq5 libsodium23 php-common php8.3-cli php8.3-readline
+#7 4.808   psmisc ucf
+#7 4.809 Suggested packages:
+#7 4.809   php-pear
+#7 4.864 The following NEW packages will be installed:
+#7 4.864   libbsd0 libedit2 libpq5 libsodium23 php-common php8.3-cli php8.3-common
+#7 4.864   php8.3-fpm php8.3-intl php8.3-mysql php8.3-opcache php8.3-pgsql
+#7 4.864   php8.3-readline php8.3-sqlite3 php8.3-xml psmisc ucf
+#7 4.961 0 upgraded, 17 newly installed, 0 to remove and 5 not upgraded.
+#7 4.961 Need to get 6,167 kB of archives.
+#7 4.961 After this operation, 26.6 MB of additional disk space will be used.
+#7 4.961 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#7 5.044 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#7 5.126 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#7 5.208 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#7 5.290 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpq5 amd64 16.11-0ubuntu0.24.04.1 [145 kB]
+#7 5.372 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.24.04.1 [161 kB]
+#7 5.454 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#7 5.537 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#7 5.623 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-opcache amd64 8.3.6-0ubuntu0.24.04.6 [372 kB]
+#7 5.706 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-readline amd64 8.3.6-0ubuntu0.24.04.6 [13.4 kB]
+#7 5.788 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-cli amd64 8.3.6-0ubuntu0.24.04.6 [1,916 kB]
+#7 5.881 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-fpm amd64 8.3.6-0ubuntu0.24.04.6 [1,925 kB]
+#7 5.975 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#7 6.057 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#7 6.139 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-pgsql amd64 8.3.6-0ubuntu0.24.04.6 [62.6 kB]
+#7 6.221 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-sqlite3 amd64 8.3.6-0ubuntu0.24.04.6 [34.2 kB]
+#7 6.303 Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#7 6.408 debconf: delaying package configuration, since apt-utils is not installed
+#7 6.435 Fetched 6,167 kB in 1s (4,301 kB/s)
+#7 6.452 Selecting previously unselected package libbsd0:amd64.
+#7 6.452 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 6.464 Preparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#7 6.467 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 6.488 Selecting previously unselected package ucf.
+#7 6.489 Preparing to unpack .../01-ucf_3.0043+nmu1_all.deb ...
+#7 6.492 Moving old data out of the way
+#7 6.493 Unpacking ucf (3.0043+nmu1) ...
+#7 6.513 Selecting previously unselected package libedit2:amd64.
+#7 6.515 Preparing to unpack .../02-libedit2_3.1-20230828-1build1_amd64.deb ...
+#7 6.516 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#7 6.531 Selecting previously unselected package psmisc.
+#7 6.534 Preparing to unpack .../03-psmisc_23.7-1build1_amd64.deb ...
+#7 6.535 Unpacking psmisc (23.7-1build1) ...
+#7 6.557 Selecting previously unselected package libpq5:amd64.
+#7 6.560 Preparing to unpack .../04-libpq5_16.11-0ubuntu0.24.04.1_amd64.deb ...
+#7 6.561 Unpacking libpq5:amd64 (16.11-0ubuntu0.24.04.1) ...
+#7 6.579 Selecting previously unselected package libsodium23:amd64.
+#7 6.581 Preparing to unpack .../05-libsodium23_1.0.18-1ubuntu0.24.04.1_amd64.deb ...
+#7 6.582 Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#7 6.601 Selecting previously unselected package php-common.
+#7 6.603 Preparing to unpack .../06-php-common_2%3a93ubuntu2_all.deb ...
+#7 6.604 Unpacking php-common (2:93ubuntu2) ...
+#7 6.626 Selecting previously unselected package php8.3-common.
+#7 6.628 Preparing to unpack .../07-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.631 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.681 Selecting previously unselected package php8.3-opcache.
+#7 6.683 Preparing to unpack .../08-php8.3-opcache_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.685 Unpacking php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.709 Selecting previously unselected package php8.3-readline.
+#7 6.711 Preparing to unpack .../09-php8.3-readline_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.713 Unpacking php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.732 Selecting previously unselected package php8.3-cli.
+#7 6.733 Preparing to unpack .../10-php8.3-cli_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.734 Unpacking php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.777 Selecting previously unselected package php8.3-fpm.
+#7 6.779 Preparing to unpack .../11-php8.3-fpm_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.785 Unpacking php8.3-fpm (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.832 Selecting previously unselected package php8.3-intl.
+#7 6.834 Preparing to unpack .../12-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.837 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.857 Selecting previously unselected package php8.3-mysql.
+#7 6.859 Preparing to unpack .../13-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.862 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.882 Selecting previously unselected package php8.3-pgsql.
+#7 6.884 Preparing to unpack .../14-php8.3-pgsql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.886 Unpacking php8.3-pgsql (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.906 Selecting previously unselected package php8.3-sqlite3.
+#7 6.908 Preparing to unpack .../15-php8.3-sqlite3_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.913 Unpacking php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.932 Selecting previously unselected package php8.3-xml.
+#7 6.934 Preparing to unpack .../16-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 6.937 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#7 6.964 Setting up libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#7 6.967 Setting up psmisc (23.7-1build1) ...
+#7 6.972 Setting up libpq5:amd64 (16.11-0ubuntu0.24.04.1) ...
+#7 6.975 Setting up ucf (3.0043+nmu1) ...
+#7 7.040 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 7.043 Setting up php-common (2:93ubuntu2) ...
+#7 7.160 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#7 7.164 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#7 7.167 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 7.268 
+#7 7.268 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#7 7.485 
+#7 7.485 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#7 7.692 
+#7 7.692 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#7 7.901 
+#7 7.901 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#7 8.111 
+#7 8.111 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#7 8.323 
+#7 8.323 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#7 8.537 
+#7 8.537 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#7 8.753 
+#7 8.753 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#7 8.974 
+#7 8.974 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#7 9.196 
+#7 9.196 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#7 9.418 
+#7 9.418 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#7 9.637 
+#7 9.637 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#7 9.853 
+#7 9.853 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#7 10.07 
+#7 10.07 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#7 10.29 
+#7 10.29 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#7 10.50 
+#7 10.50 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#7 10.72 
+#7 10.72 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#7 10.85 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.95 
+#7 10.95 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#7 11.17 
+#7 11.17 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#7 11.38 
+#7 11.38 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#7 11.51 Setting up php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#7 11.61 
+#7 11.61 Creating config file /etc/php/8.3/mods-available/sqlite3.ini with new version
+#7 11.83 
+#7 11.83 Creating config file /etc/php/8.3/mods-available/pdo_sqlite.ini with new version
+#7 11.96 Setting up php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#7 12.06 
+#7 12.06 Creating config file /etc/php/8.3/mods-available/readline.ini with new version
+#7 12.18 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#7 12.28 
+#7 12.28 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#7 12.50 
+#7 12.50 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#7 12.72 
+#7 12.72 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#7 12.94 
+#7 12.94 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#7 13.16 
+#7 13.16 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#7 13.38 
+#7 13.38 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#7 13.51 Setting up php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#7 13.61 
+#7 13.61 Creating config file /etc/php/8.3/mods-available/opcache.ini with new version
+#7 13.73 Setting up php8.3-pgsql (8.3.6-0ubuntu0.24.04.6) ...
+#7 13.84 
+#7 13.84 Creating config file /etc/php/8.3/mods-available/pgsql.ini with new version
+#7 14.06 
+#7 14.06 Creating config file /etc/php/8.3/mods-available/pdo_pgsql.ini with new version
+#7 14.18 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.28 
+#7 14.28 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#7 14.41 Setting up php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.41 update-alternatives: using /usr/bin/php8.3 to provide /usr/bin/php (php) in auto mode
+#7 14.41 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php8.3.1.gz (of link group php) doesn't exist
+#7 14.41 update-alternatives: using /usr/bin/phar8.3 to provide /usr/bin/phar (phar) in auto mode
+#7 14.41 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar8.3.1.gz (of link group phar) doesn't exist
+#7 14.42 update-alternatives: using /usr/bin/phar.phar8.3 to provide /usr/bin/phar.phar (phar.phar) in auto mode
+#7 14.42 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar8.3.1.gz (of link group phar.phar) doesn't exist
+#7 14.52 
+#7 14.52 Creating config file /etc/php/8.3/cli/php.ini with new version
+#7 15.23 Setting up php8.3-fpm (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.34 
+#7 15.34 Creating config file /etc/php/8.3/fpm/php.ini with new version
+#7 16.16 Created symlink /etc/systemd/system/multi-user.target.wants/php8.3-fpm.service → /usr/lib/systemd/system/php8.3-fpm.service.
+#7 16.18 invoke-rc.d: could not determine current runlevel
+#7 16.18 invoke-rc.d: policy-rc.d denied execution of start.
+#7 16.19 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 16.20 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 16.21 Processing triggers for php8.3-fpm (8.3.6-0ubuntu0.24.04.6) ...
+#7 16.21 invoke-rc.d: could not determine current runlevel
+#7 16.22 invoke-rc.d: policy-rc.d denied execution of restart.
+#7 16.26 **** configure nginx ****
+#7 16.27 **** configure php opcache ****
+#7 16.27 **** configure php-fpm to pass env vars ****
+#7 16.27 **** install heimdall ****
+#7 16.28   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 16.28                                  Dload  Upload   Total   Spent    Left  Speed
+#7 16.28   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 16.99 100 3296k    0 3296k    0     0  4610k      0 --:--:-- --:--:-- --:--:-- 4610k100 8720k    0 8720k    0     0  5141k      0 --:--:--  0:00:01 --:--:-- 5523k100 15.2M    0 15.2M    0     0  5779k      0 --:--:--  0:00:02 --:--:-- 6198k100 16.1M    0 16.1M    0     0  5907k      0 --:--:--  0:00:02 --:--:-- 6353k
+#7 20.28 **** cleanup ****
+#7 DONE 20.6s
+
+#8 [3/5] COPY . /
+#8 DONE 0.2s
+
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 4.2s done
+#11 exporting manifest sha256:ef4a82b60d83b6667dda6c1ff654b1728e2b6ba9bb60fbfe4850e31f9655c673 done
+#11 exporting config sha256:c92708b56d658bfd21c50a54cf32e5b54b8363c6dcbfde329f72259f4e39c410 done
+#11 exporting attestation manifest sha256:dfb8939276fce8e79cb0a4b49a5c5f354e60f92ea8d32279e0402504f79ff868 done
+#11 exporting manifest list sha256:bc81a0898da99dd67688bc0a7cb75941bf7d2e30309bcb73e699d1320cc01591 done
+#11 naming to docker.io/library/heimdall:2.7.6 done
+#11 unpacking to docker.io/library/heimdall:2.7.6
+#11 unpacking to docker.io/library/heimdall:2.7.6 3.0s done
+#11 DONE 7.2s

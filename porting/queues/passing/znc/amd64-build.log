@@ -1,0 +1,93 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 814B / 814B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.86kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
+
+#4 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
+#4 DONE 0.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [buildstage 1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
+#6 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
+#6 DONE 0.0s
+
+#7 [buildstage 2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     libargon2-dev     autoconf     automake     libboost-dev    libboost-locale-dev     build-essential     libc-ares-dev     libsasl2-dev     gettext     libicu-dev     libperl-dev     pax-utils     libssl-dev     perl     python3-dev     swig     tcl-dev &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir pip setuptools &&   pip install -U --no-cache-dir cmake
+#7 CACHED
+
+#8 [buildstage 3/4] RUN   echo "**** compile znc ****" &&   mkdir -p     /tmp/znc &&   git clone --branch "znc-1.10.1" --depth 1     --recurse-submodules     https://github.com/znc/znc.git     /tmp/znc &&   curl -o     /tmp/playback.tar.gz -L     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz &&   tar xf     /tmp/playback.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-push.tar.gz -L     https://github.com/jreese/znc-push/archive/master.tar.gz &&   tar xf     /tmp/znc-push.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-clientbuffer.tar.gz -L     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz &&   tar xf     /tmp/znc-clientbuffer.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   curl -o     /tmp/znc-palaver.tar.gz -L     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz &&   tar xf     /tmp/znc-palaver.tar.gz -C     /tmp/znc/modules --strip-components=1 &&   cd /tmp/znc &&   mkdir -p build &&   cd build &&   cmake ..     -DWANT_PYTHON=yes     -DWANT_PERL=yes     -DWANT_TCL=yes &&   make &&   make DESTDIR=/tmp/znc install
+#8 CACHED
+
+#9 [stage-1 1/7] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#9 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#9 CACHED
+
+#10 [internal] load build context
+#10 transferring context: 3.53kB done
+#10 DONE 0.0s
+
+#11 [buildstage 4/4] RUN   echo "**** determine runtime packages ****" &&   (scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }'     | sort -u     | xargs -r apt-get info --installed     | sort -u || true)     >> /tmp/znc/packages
+#11 0.136 **** determine runtime packages ****
+#11 0.143 E: Command line option --installed is not understood in combination with the other options
+#11 DONE 0.2s
+
+#12 [stage-1 2/7] COPY --from=buildstage /tmp/znc/usr/ /usr/
+#12 DONE 0.2s
+
+#13 [stage-1 3/7] COPY --from=buildstage /tmp/znc/packages /packages
+#13 DONE 0.0s
+
+#14 [stage-1 4/7] RUN   echo "**** install runtime packages ****" &&   RUNTIME_PACKAGES=$(echo $(cat /packages)) &&   apt-get update &&   if [ -n "${RUNTIME_PACKAGES}" ]; then apt-get install -y --no-install-recommends ${RUNTIME_PACKAGES}; fi
+#14 0.141 **** install runtime packages ****
+#14 0.308 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#14 0.316 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#14 0.450 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#14 0.571 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#14 0.592 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#14 0.734 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#14 0.823 Get:7 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#14 0.875 Get:8 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#14 0.967 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#14 1.019 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#14 1.142 Get:11 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#14 1.818 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#14 2.020 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#14 2.273 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#14 2.482 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#14 2.697 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#14 2.837 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#14 2.979 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#14 2.997 Fetched 36.1 MB in 3s (12.8 MB/s)
+#14 2.997 Reading package lists...
+#14 DONE 3.8s
+
+#15 [stage-1 5/7] COPY . /
+#15 DONE 0.0s
+
+#16 [stage-1 6/7] COPY ./root /
+#16 DONE 0.0s
+
+#17 [stage-1 7/7] WORKDIR /config
+#17 DONE 0.0s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 2.3s done
+#18 exporting manifest sha256:e03ecd78d2cdec35140c99de53a058100e78be2ef885eb36ef1d429e87689e16 done
+#18 exporting config sha256:7be70f6a5f66396bb006c2349750cf3d5b5189cb8a9dfeb30c357f3a6495c009 done
+#18 exporting attestation manifest sha256:5424e400b2b818f2e19d19a5522cb88ccae64f21c1c6ce68eed1077004fcaf70 done
+#18 exporting manifest list sha256:254ccfba3521fe3044c855a4db4229e4bd832acc385d5b3dda6c7e33140e4702 done
+#18 naming to docker.io/library/znc:znc-1.10.1 done
+#18 unpacking to docker.io/library/znc:znc-1.10.1
+#18 unpacking to docker.io/library/znc:znc-1.10.1 0.7s done
+#18 DONE 3.0s

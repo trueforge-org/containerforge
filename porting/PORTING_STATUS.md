@@ -1,6 +1,17 @@
 # Porting Status
 This status file tracks why each container is still under `/porting/post-processed` instead of `/apps`.
 
+## Batch workflow helpers
+- `./manage-batches.sh refresh`
+  - Rebuilds queue views under `/porting/queues`:
+    - `passing/` (latest `- Result: PASS`)
+    - `failing/` (latest `- Result: FAIL`)
+    - `unknown/` (no explicit result yet)
+    - `failing-unattempted/` (failing minus apps listed in `BATCH_ATTEMPTS.csv`)
+- `./manage-batches.sh record <batch-name> <app1> [app2...]`
+  - Appends attempt records to `/porting/BATCH_ATTEMPTS.csv`
+  - Refreshes queues so new batches can avoid retrying already-attempted apps.
+
 ## Summary
 - `babybuddy`: see `post-processed/babybuddy/NOT_WORKING_YET.md`
 - `beets`: see `post-processed/beets/NOT_WORKING_YET.md`

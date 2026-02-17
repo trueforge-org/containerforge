@@ -1,0 +1,113 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 812B / 812B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 881B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 7.00kB done
+#6 DONE 0.0s
+
+#7 [2/5] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     haproxy &&   apt-get remove -y --purge     curl &&   rm -rf     /etc/haproxy     /tmp/*
+#7 0.145 **** install build packages ****
+#7 0.252 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.334 Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.414 Get:3 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 0.476 Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.496 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 0.586 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 0.678 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.104 Get:8 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 1.185 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 1.203 Get:10 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.264 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 1.382 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 1.385 Get:13 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 1.521 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 1.635 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 1.715 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 2.157 Get:17 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 2.374 Get:18 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 2.669 Fetched 36.1 MB in 2s (14.5 MB/s)
+#7 2.669 Reading package lists...
+#7 3.441 Reading package lists...
+#7 4.216 Building dependency tree...
+#7 4.377 Reading state information...
+#7 4.524 The following additional packages will be installed:
+#7 4.525   liblua5.4-0
+#7 4.526 Suggested packages:
+#7 4.526   vim-haproxy haproxy-doc
+#7 4.552 The following NEW packages will be installed:
+#7 4.552   haproxy liblua5.4-0
+#7 4.650 0 upgraded, 2 newly installed, 0 to remove and 5 not upgraded.
+#7 4.650 Need to get 2,236 kB of archives.
+#7 4.650 After this operation, 5,274 kB of additional disk space will be used.
+#7 4.650 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 liblua5.4-0 amd64 5.4.6-3build2 [166 kB]
+#7 4.732 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 haproxy amd64 2.8.16-0ubuntu0.24.04.1 [2,070 kB]
+#7 4.883 debconf: delaying package configuration, since apt-utils is not installed
+#7 4.911 Fetched 2,236 kB in 0s (10.7 MB/s)
+#7 4.927 Selecting previously unselected package liblua5.4-0:amd64.
+#7 4.927 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 4.945 Preparing to unpack .../liblua5.4-0_5.4.6-3build2_amd64.deb ...
+#7 4.947 Unpacking liblua5.4-0:amd64 (5.4.6-3build2) ...
+#7 4.967 Selecting previously unselected package haproxy.
+#7 4.969 Preparing to unpack .../haproxy_2.8.16-0ubuntu0.24.04.1_amd64.deb ...
+#7 4.974 Unpacking haproxy (2.8.16-0ubuntu0.24.04.1) ...
+#7 5.026 Setting up liblua5.4-0:amd64 (5.4.6-3build2) ...
+#7 5.029 Setting up haproxy (2.8.16-0ubuntu0.24.04.1) ...
+#7 5.120 invoke-rc.d: could not determine current runlevel
+#7 5.124 invoke-rc.d: policy-rc.d denied execution of start.
+#7 5.232 Created symlink /etc/systemd/system/multi-user.target.wants/haproxy.service → /usr/lib/systemd/system/haproxy.service.
+#7 5.237 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 5.277 Reading package lists...
+#7 6.049 Building dependency tree...
+#7 6.219 Reading state information...
+#7 6.377 The following package was automatically installed and is no longer required:
+#7 6.378   libcurl4t64
+#7 6.378 Use 'apt autoremove' to remove it.
+#7 6.397 The following packages will be REMOVED:
+#7 6.398   curl*
+#7 6.545 0 upgraded, 0 newly installed, 1 to remove and 5 not upgraded.
+#7 6.545 After this operation, 534 kB disk space will be freed.
+#7 6.553 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16680 files and directories currently installed.)
+#7 6.564 Removing curl (8.5.0-2ubuntu10.6) ...
+#7 DONE 6.7s
+
+#8 [3/5] COPY . /
+#8 DONE 0.0s
+
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 2.3s done
+#11 exporting manifest sha256:1a1d2cc8b52bd4cf384776194b0fc96b53301c7d99ba346302489f2ac55e2a12 done
+#11 exporting config sha256:7e67f6b56e8c39ef7dcc549c21c34a154e9da2c8839673c287fc4a8b5989a293 done
+#11 exporting attestation manifest sha256:6ea3465e077eece4dce4f36836094a61f6e2c33bc46e32a0df57ed787858449a done
+#11 exporting manifest list sha256:5eb36e3a66386d39d2999467c61e64a29d2a2990623ae3ff95734e7bafda91fc done
+#11 naming to docker.io/library/socket-proxy:3.2.8-r0 done
+#11 unpacking to docker.io/library/socket-proxy:3.2.8-r0
+#11 unpacking to docker.io/library/socket-proxy:3.2.8-r0 0.4s done
+#11 DONE 2.8s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "AUTH") (line 20)

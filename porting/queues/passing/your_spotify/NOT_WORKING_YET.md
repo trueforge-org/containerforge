@@ -1,0 +1,45 @@
+# your_spotify: porting status
+
+This container remains in `/porting/post-processed` for now.
+
+## Why it is not marked working in `/apps` yet
+- Not yet migrated into `/apps`, so it is not covered by the normal app build/test workflow.
+- No app-specific `container-test.yaml` exists yet for CI runtime verification after migration.
+
+## Next step
+- Finish app-specific runtime validation and add `apps/<app>/container-test.yaml` before moving this container into `/apps`.
+
+## AMD64 build check (2026-02-16)
+- Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Uses Alpine-style `apt-get add/del --no-cache` commands, which fail on Debian/Ubuntu base images.
+
+## AMD64 build check (2026-02-16 rerun)
+- Command: `docker build --progress=plain --platform linux/amd64 -t porting-your_spotify:amd64 .`
+- Result: FAIL
+- Reason: 75.28 tar: Child returned status 1
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 bigger batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails during client yarn build stage; requires deeper node/yarn dependency/runtime investigation.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 larger debian-style batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Still fails during client yarn build due Node engine mismatch (requires Node >=20 in dependency tree).
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch + base-policy pass)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after python-node base alignment and preserving modern node toolchain.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 next large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds with corrected multi-stage python-node base flow.
+- Full log: `amd64-build.log`

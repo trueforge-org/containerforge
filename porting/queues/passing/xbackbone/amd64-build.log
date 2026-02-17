@@ -1,0 +1,304 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 826B / 826B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 863B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 8.22kB done
+#6 DONE 0.0s
+
+#7 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     php8.3-ftp     php8.3-gd     php8.3-intl     php8.3-ldap     php8.3-mysql     php8.3-sqlite3     php8.3-tokenizer &&   echo "**** install xbackbone ****" &&     mkdir -p /app/www/public &&   curl -o     /tmp/xbackbone.zip -L     "https://github.com/SergiX44/XBackBone/releases/download/3.8.1/release-v3.8.1.zip" &&   unzip -q -o /tmp/xbackbone.zip -d /app/www/public/ &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
+#7 0.143 **** install runtime packages ****
+#7 0.474 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.485 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.904 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.011 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.119 Get:5 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.209 Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 1.352 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.998 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 2.013 Get:9 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 2.092 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 2.153 Get:11 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 2.182 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.281 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.373 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 2.452 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.517 Get:16 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 2.543 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.622 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 3.048 Fetched 36.1 MB in 3s (12.5 MB/s)
+#7 3.048 Reading package lists...
+#7 3.804 Reading package lists...
+#7 4.534 Building dependency tree...
+#7 4.678 Reading state information...
+#7 4.811 The following additional packages will be installed:
+#7 4.811   libaom3 libbsd0 libde265-0 libdeflate0 libgd3 libheif-plugin-aomdec
+#7 4.811   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#7 4.811   libsharpyuv0 libtiff6 libwebp7 libx11-6 libx11-data libxau6 libxcb1
+#7 4.811   libxdmcp6 libxpm4 php-common psmisc ucf
+#7 4.812 Suggested packages:
+#7 4.812   libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec
+#7 4.812   libheif-plugin-jpegdec libheif-plugin-jpegenc libheif-plugin-j2kdec
+#7 4.812   libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc
+#7 4.812 Recommended packages:
+#7 4.812   libheif-plugin-aomenc
+#7 4.869 The following NEW packages will be installed:
+#7 4.869   libaom3 libbsd0 libde265-0 libdeflate0 libgd3 libheif-plugin-aomdec
+#7 4.869   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#7 4.869   libsharpyuv0 libtiff6 libwebp7 libx11-6 libx11-data libxau6 libxcb1
+#7 4.869   libxdmcp6 libxpm4 php-common php8.3-common php8.3-gd php8.3-intl php8.3-ldap
+#7 4.870   php8.3-mysql php8.3-sqlite3 psmisc ucf
+#7 4.963 0 upgraded, 30 newly installed, 0 to remove and 5 not upgraded.
+#7 4.963 Need to get 5,660 kB of archives.
+#7 4.963 After this operation, 25.0 MB of additional disk space will be used.
+#7 4.963 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#7 5.042 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#7 5.121 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#7 5.200 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#7 5.278 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#7 5.357 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#7 5.436 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#7 5.518 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#7 5.596 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
+#7 5.686 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+#7 5.765 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+#7 5.844 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#7 5.923 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
+#7 6.001 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
+#7 6.080 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
+#7 6.160 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#7 6.238 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#7 6.317 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+#7 6.396 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+#7 6.475 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#7 6.554 Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
+#7 6.634 Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#7 6.712 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+#7 6.791 Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#7 6.874 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#7 6.953 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
+#7 7.032 Get:27 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-intl amd64 8.3.6-0ubuntu0.24.04.6 [156 kB]
+#7 7.111 Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-ldap amd64 8.3.6-0ubuntu0.24.04.6 [33.5 kB]
+#7 7.190 Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#7 7.269 Get:30 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-sqlite3 amd64 8.3.6-0ubuntu0.24.04.6 [34.2 kB]
+#7 7.375 debconf: delaying package configuration, since apt-utils is not installed
+#7 7.399 Fetched 5,660 kB in 2s (2,365 kB/s)
+#7 7.414 Selecting previously unselected package libbsd0:amd64.
+#7 7.414 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 7.428 Preparing to unpack .../00-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#7 7.430 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 7.448 Selecting previously unselected package ucf.
+#7 7.449 Preparing to unpack .../01-ucf_3.0043+nmu1_all.deb ...
+#7 7.451 Moving old data out of the way
+#7 7.452 Unpacking ucf (3.0043+nmu1) ...
+#7 7.470 Selecting previously unselected package libxau6:amd64.
+#7 7.472 Preparing to unpack .../02-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#7 7.473 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#7 7.486 Selecting previously unselected package libxdmcp6:amd64.
+#7 7.488 Preparing to unpack .../03-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#7 7.489 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#7 7.503 Selecting previously unselected package libxcb1:amd64.
+#7 7.504 Preparing to unpack .../04-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#7 7.505 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#7 7.519 Selecting previously unselected package libx11-data.
+#7 7.520 Preparing to unpack .../05-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#7 7.521 Unpacking libx11-data (2:1.8.7-1build1) ...
+#7 7.573 Selecting previously unselected package libx11-6:amd64.
+#7 7.575 Preparing to unpack .../06-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#7 7.575 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#7 7.596 Selecting previously unselected package psmisc.
+#7 7.597 Preparing to unpack .../07-psmisc_23.7-1build1_amd64.deb ...
+#7 7.598 Unpacking psmisc (23.7-1build1) ...
+#7 7.618 Selecting previously unselected package libaom3:amd64.
+#7 7.620 Preparing to unpack .../08-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+#7 7.621 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#7 7.655 Selecting previously unselected package libde265-0:amd64.
+#7 7.657 Preparing to unpack .../09-libde265-0_1.0.15-1build3_amd64.deb ...
+#7 7.658 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+#7 7.673 Selecting previously unselected package libdeflate0:amd64.
+#7 7.675 Preparing to unpack .../10-libdeflate0_1.19-1build1.1_amd64.deb ...
+#7 7.676 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+#7 7.690 Selecting previously unselected package libsharpyuv0:amd64.
+#7 7.692 Preparing to unpack .../11-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#7 7.692 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 7.706 Selecting previously unselected package libheif-plugin-aomdec:amd64.
+#7 7.707 Preparing to unpack .../12-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 7.708 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#7 7.721 Selecting previously unselected package libheif-plugin-libde265:amd64.
+#7 7.723 Preparing to unpack .../13-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 7.723 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#7 7.738 Selecting previously unselected package libheif1:amd64.
+#7 7.739 Preparing to unpack .../14-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 7.740 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#7 7.757 Selecting previously unselected package libjpeg-turbo8:amd64.
+#7 7.759 Preparing to unpack .../15-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#7 7.760 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 7.775 Selecting previously unselected package libjpeg8:amd64.
+#7 7.777 Preparing to unpack .../16-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#7 7.778 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 7.791 Selecting previously unselected package libjbig0:amd64.
+#7 7.792 Preparing to unpack .../17-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+#7 7.794 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#7 7.813 Selecting previously unselected package liblerc4:amd64.
+#7 7.814 Preparing to unpack .../18-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+#7 7.816 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#7 7.835 Selecting previously unselected package libwebp7:amd64.
+#7 7.837 Preparing to unpack .../19-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#7 7.838 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 7.857 Selecting previously unselected package libtiff6:amd64.
+#7 7.858 Preparing to unpack .../20-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
+#7 7.859 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#7 7.881 Selecting previously unselected package libxpm4:amd64.
+#7 7.882 Preparing to unpack .../21-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#7 7.883 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#7 7.956 Selecting previously unselected package libgd3:amd64.
+#7 7.958 Preparing to unpack .../22-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+#7 7.959 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+#7 7.976 Selecting previously unselected package php-common.
+#7 7.977 Preparing to unpack .../23-php-common_2%3a93ubuntu2_all.deb ...
+#7 7.978 Unpacking php-common (2:93ubuntu2) ...
+#7 8.008 Selecting previously unselected package php8.3-common.
+#7 8.010 Preparing to unpack .../24-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 8.012 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.060 Selecting previously unselected package php8.3-gd.
+#7 8.062 Preparing to unpack .../25-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 8.063 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.080 Selecting previously unselected package php8.3-intl.
+#7 8.082 Preparing to unpack .../26-php8.3-intl_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 8.084 Unpacking php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.102 Selecting previously unselected package php8.3-ldap.
+#7 8.103 Preparing to unpack .../27-php8.3-ldap_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 8.105 Unpacking php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.122 Selecting previously unselected package php8.3-mysql.
+#7 8.123 Preparing to unpack .../28-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 8.125 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.144 Selecting previously unselected package php8.3-sqlite3.
+#7 8.146 Preparing to unpack .../29-php8.3-sqlite3_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 8.148 Unpacking php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.171 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 8.174 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#7 8.176 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#7 8.178 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#7 8.180 Setting up psmisc (23.7-1build1) ...
+#7 8.182 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+#7 8.185 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#7 8.187 Setting up libx11-data (2:1.8.7-1build1) ...
+#7 8.189 Setting up ucf (3.0043+nmu1) ...
+#7 8.251 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 8.254 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 8.256 Setting up libde265-0:amd64 (1.0.15-1build3) ...
+#7 8.258 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 8.260 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 8.262 Setting up php-common (2:93ubuntu2) ...
+#7 8.379 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#7 8.383 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#7 8.386 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#7 8.388 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 8.488 
+#7 8.488 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#7 8.624 
+#7 8.624 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#7 8.760 
+#7 8.760 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#7 8.896 
+#7 8.896 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#7 9.038 
+#7 9.038 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#7 9.180 
+#7 9.180 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#7 9.325 
+#7 9.325 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#7 9.471 
+#7 9.471 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#7 9.619 
+#7 9.619 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#7 9.769 
+#7 9.769 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#7 9.918 
+#7 9.918 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#7 10.07 
+#7 10.07 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#7 10.22 
+#7 10.22 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#7 10.37 
+#7 10.37 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#7 10.53 
+#7 10.53 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#7 10.67 
+#7 10.67 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#7 10.82 
+#7 10.82 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#7 10.88 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 10.97 
+#7 10.97 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#7 11.12 
+#7 11.12 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#7 11.27 
+#7 11.27 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#7 11.33 Setting up php8.3-sqlite3 (8.3.6-0ubuntu0.24.04.6) ...
+#7 11.43 
+#7 11.43 Creating config file /etc/php/8.3/mods-available/sqlite3.ini with new version
+#7 11.59 
+#7 11.59 Creating config file /etc/php/8.3/mods-available/pdo_sqlite.ini with new version
+#7 11.64 Setting up php8.3-ldap (8.3.6-0ubuntu0.24.04.6) ...
+#7 11.74 
+#7 11.74 Creating config file /etc/php/8.3/mods-available/ldap.ini with new version
+#7 11.80 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#7 11.80 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#7 11.80 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#7 11.81 Setting up php8.3-intl (8.3.6-0ubuntu0.24.04.6) ...
+#7 11.91 
+#7 11.91 Creating config file /etc/php/8.3/mods-available/intl.ini with new version
+#7 11.96 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#7 11.96 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#7 11.97 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+#7 11.97 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#7 12.07 
+#7 12.07 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+#7 12.12 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#7 12.13 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 12.17 **** install xbackbone ****
+#7 12.17   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 12.17                                  Dload  Upload   Total   Spent    Left  Speed
+#7 12.17   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 12.66 100 9044k  100 9044k    0     0  18.1M      0 --:--:-- --:--:-- --:--:-- 18.1M
+#7 13.54 **** cleanup ****
+#7 DONE 13.7s
+
+#8 [3/5] COPY . /
+#8 DONE 0.1s
+
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 4.1s done
+#11 exporting manifest sha256:075864dca49cc85e8c493b7213422339eb75a9f8f84ad335047fa3e001504009 done
+#11 exporting config sha256:d2f167db65115fa551df8d6351e047da6e6b25cd6b3a68ff3f35f9a365898730 done
+#11 exporting attestation manifest sha256:bac7b06d64a46335b76793ff6b6e2a2b72450b151991f01a4e6d52e179f65165 done
+#11 exporting manifest list sha256:b2379c67ddd68b6ffb08ea8afbefce359782e4436b03cfd14c650986de6761c7 done
+#11 naming to docker.io/library/xbackbone:3.8.1 done
+#11 unpacking to docker.io/library/xbackbone:3.8.1
+#11 unpacking to docker.io/library/xbackbone:3.8.1 1.7s done
+#11 DONE 5.8s

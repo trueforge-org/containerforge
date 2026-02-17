@@ -1,0 +1,458 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 821B / 821B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.82kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.3s
+
+#4 [internal] load metadata for ghcr.io/trueforge-org/golang:1.26.0
+#4 DONE 0.8s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [stage-1 1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#6 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 4.79kB done
+#7 DONE 0.0s
+
+#8 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
+#8 resolve ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a 0.0s done
+#8 ...
+
+#9 [stage-1 2/5] RUN   echo "**** create var lib folder ****" &&   install -d -o apps -g apps     /var/lib/syncthing
+#9 0.162 **** create var lib folder ****
+#9 DONE 0.2s
+
+#10 [stage-1 3/5] COPY . /
+#10 DONE 0.0s
+
+#8 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 0B / 63.66MB 0.2s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 4.19MB / 63.66MB 0.3s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 16.78MB / 63.66MB 0.5s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 25.17MB / 63.66MB 0.6s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 36.70MB / 63.66MB 0.8s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 47.19MB / 63.66MB 0.9s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 58.72MB / 63.66MB 1.1s
+#8 sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 63.66MB / 63.66MB 1.1s done
+#8 extracting sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e
+#8 extracting sha256:b8d6750c3f1f4de846918bb3ddf327eff1bef3b076a5e1dea28d890e156e948e 2.2s done
+#8 DONE 3.4s
+
+#8 [buildstage 1/3] FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:ecb4c82c8be78165ae38c3c7bc1b0e7f5c65255ad79d2b0aa2c83d2084a8424a
+#8 extracting sha256:2c1ce468d9f3d941396801f6e3afc8921466650dd05430fe644cd3537713d27f done
+#8 DONE 3.4s
+
+#11 [buildstage 2/3] RUN  echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential
+#11 0.139 **** install build packages ****
+#11 0.474 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#11 0.747 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#11 0.878 Get:3 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#11 1.349 Get:4 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#11 1.459 Get:5 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#11 1.559 Get:6 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#11 1.586 Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#11 1.793 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#11 2.001 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#11 2.634 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#11 2.812 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#11 3.742 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#11 3.894 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#11 4.069 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#11 4.246 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#11 4.398 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#11 4.589 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#11 4.741 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#11 4.759 Fetched 36.1 MB in 5s (7,859 kB/s)
+#11 4.759 Reading package lists...
+#11 5.491 Reading package lists...
+#11 6.235 Building dependency tree...
+#11 6.385 Reading state information...
+#11 6.534 The following additional packages will be installed:
+#11 6.534   binutils binutils-common binutils-x86-64-linux-gnu bzip2 cpp cpp-13
+#11 6.534   cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev g++ g++-13
+#11 6.534   g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13 gcc-13-base
+#11 6.534   gcc-13-x86-64-linux-gnu gcc-14-base gcc-x86-64-linux-gnu libasan8 libatomic1
+#11 6.534   libbinutils libcc1-0 libctf-nobfd0 libctf0 libdpkg-perl libgcc-13-dev
+#11 6.534   libgcc-s1 libgomp1 libgprofng0 libhwasan0 libisl23 libitm1 libjansson4
+#11 6.534   liblsan0 libmpc3 libmpfr6 libquadmath0 libsframe1 libstdc++-13-dev
+#11 6.535   libstdc++6 libtsan2 libubsan1 lto-disabled-list make patch
+#11 6.535 Suggested packages:
+#11 6.535   binutils-doc gprofng-gui bzip2-doc cpp-doc gcc-13-locales cpp-13-doc
+#11 6.535   debian-keyring g++-multilib g++-13-multilib gcc-13-doc gcc-multilib
+#11 6.535   manpages-dev autoconf automake libtool flex bison gdb gcc-doc
+#11 6.535   gcc-13-multilib gdb-x86-64-linux-gnu bzr libstdc++-13-doc make-doc ed
+#11 6.535   diffutils-doc
+#11 6.535 Recommended packages:
+#11 6.535   fakeroot libalgorithm-merge-perl libfile-fcntllock-perl
+#11 6.535   liblocale-gettext-perl
+#11 6.592 The following NEW packages will be installed:
+#11 6.592   binutils binutils-common binutils-x86-64-linux-gnu build-essential bzip2 cpp
+#11 6.592   cpp-13 cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev g++ g++-13
+#11 6.592   g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13 gcc-13-base
+#11 6.592   gcc-13-x86-64-linux-gnu gcc-x86-64-linux-gnu libasan8 libatomic1 libbinutils
+#11 6.593   libcc1-0 libctf-nobfd0 libctf0 libdpkg-perl libgcc-13-dev libgomp1
+#11 6.593   libgprofng0 libhwasan0 libisl23 libitm1 libjansson4 liblsan0 libmpc3
+#11 6.593   libmpfr6 libquadmath0 libsframe1 libstdc++-13-dev libtsan2 libubsan1
+#11 6.593   lto-disabled-list make patch
+#11 6.594 The following packages will be upgraded:
+#11 6.594   gcc-14-base libgcc-s1 libstdc++6
+#11 6.764 3 upgraded, 44 newly installed, 0 to remove and 2 not upgraded.
+#11 6.764 Need to get 68.1 MB of archives.
+#11 6.764 After this operation, 229 MB of additional disk space will be used.
+#11 6.764 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]
+#11 6.917 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]
+#11 7.078 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]
+#11 7.230 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libjansson4 amd64 2.14-2build2 [32.8 kB]
+#11 7.381 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-common amd64 2.42-4ubuntu2.8 [240 kB]
+#11 7.535 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsframe1 amd64 2.42-4ubuntu2.8 [15.6 kB]
+#11 7.686 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbinutils amd64 2.42-4ubuntu2.8 [576 kB]
+#11 7.844 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf-nobfd0 amd64 2.42-4ubuntu2.8 [97.9 kB]
+#11 7.996 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf0 amd64 2.42-4ubuntu2.8 [94.5 kB]
+#11 8.148 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgprofng0 amd64 2.42-4ubuntu2.8 [849 kB]
+#11 8.311 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.42-4ubuntu2.8 [2,463 kB]
+#11 8.492 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils amd64 2.42-4ubuntu2.8 [18.1 kB]
+#11 8.644 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-base amd64 13.3.0-6ubuntu2~24.04.1 [51.6 kB]
+#11 8.795 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libisl23 amd64 0.26-3build1.1 [680 kB]
+#11 8.954 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr6 amd64 4.2.1-1build1.1 [353 kB]
+#11 9.109 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpc3 amd64 1.3.1-1build1.1 [54.6 kB]
+#11 9.261 Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [10.7 MB]
+#11 9.781 Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13 amd64 13.3.0-6ubuntu2~24.04.1 [1,042 B]
+#11 9.933 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [5,326 B]
+#11 10.08 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp amd64 4:13.2.0-7ubuntu1 [22.4 kB]
+#11 10.24 Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04.1 [48.0 kB]
+#11 10.39 Get:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04.1 [148 kB]
+#11 10.54 Get:23 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.7 kB]
+#11 10.70 Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.5 kB]
+#11 10.85 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04.1 [3,027 kB]
+#11 11.10 Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,322 kB]
+#11 11.30 Get:27 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04.1 [2,772 kB]
+#11 11.55 Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1,184 kB]
+#11 11.74 Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,641 kB]
+#11 11.95 Get:30 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [153 kB]
+#11 12.10 Get:31 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2,681 kB]
+#11 12.36 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [21.1 MB]
+#11 13.24 Get:33 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13 amd64 13.3.0-6ubuntu2~24.04.1 [494 kB]
+#11 13.71 Get:34 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [1,212 B]
+#11 13.86 Get:35 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc amd64 4:13.2.0-7ubuntu1 [5,018 B]
+#11 14.01 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2,420 kB]
+#11 14.25 Get:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [12.2 MB]
+#11 14.82 Get:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13 amd64 13.3.0-6ubuntu2~24.04.1 [16.0 kB]
+#11 14.97 Get:39 http://archive.ubuntu.com/ubuntu noble/main amd64 g++-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [964 B]
+#11 15.12 Get:40 http://archive.ubuntu.com/ubuntu noble/main amd64 g++ amd64 4:13.2.0-7ubuntu1 [1,100 B]
+#11 15.27 Get:41 http://archive.ubuntu.com/ubuntu noble/main amd64 make amd64 4.3-4.1build2 [180 kB]
+#11 15.43 Get:42 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdpkg-perl all 1.22.6ubuntu6.5 [269 kB]
+#11 15.59 Get:43 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
+#11 15.74 Get:44 http://archive.ubuntu.com/ubuntu noble/main amd64 patch amd64 2.7.6-7build3 [104 kB]
+#11 15.90 Get:45 http://archive.ubuntu.com/ubuntu noble/main amd64 lto-disabled-list all 47 [12.4 kB]
+#11 16.05 Get:46 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 dpkg-dev all 1.22.6ubuntu6.5 [1,074 kB]
+#11 16.24 Get:47 http://archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4,928 B]
+#11 16.35 debconf: delaying package configuration, since apt-utils is not installed
+#11 16.38 Fetched 68.1 MB in 10s (7,063 kB/s)
+#11 16.39 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#11 16.40 Preparing to unpack .../gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 16.40 Unpacking gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 16.43 Setting up gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 16.44 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#11 16.46 Preparing to unpack .../libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 16.47 Unpacking libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 16.51 Setting up libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 16.53 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#11 16.54 Preparing to unpack .../libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 16.54 Unpacking libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#11 16.56 Setting up libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 16.59 Selecting previously unselected package libjansson4:amd64.
+#11 16.59 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#11 16.60 Preparing to unpack .../00-libjansson4_2.14-2build2_amd64.deb ...
+#11 16.60 Unpacking libjansson4:amd64 (2.14-2build2) ...
+#11 16.61 Selecting previously unselected package binutils-common:amd64.
+#11 16.61 Preparing to unpack .../01-binutils-common_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.61 Unpacking binutils-common:amd64 (2.42-4ubuntu2.8) ...
+#11 16.63 Selecting previously unselected package libsframe1:amd64.
+#11 16.63 Preparing to unpack .../02-libsframe1_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.63 Unpacking libsframe1:amd64 (2.42-4ubuntu2.8) ...
+#11 16.65 Selecting previously unselected package libbinutils:amd64.
+#11 16.65 Preparing to unpack .../03-libbinutils_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.65 Unpacking libbinutils:amd64 (2.42-4ubuntu2.8) ...
+#11 16.67 Selecting previously unselected package libctf-nobfd0:amd64.
+#11 16.68 Preparing to unpack .../04-libctf-nobfd0_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.68 Unpacking libctf-nobfd0:amd64 (2.42-4ubuntu2.8) ...
+#11 16.69 Selecting previously unselected package libctf0:amd64.
+#11 16.69 Preparing to unpack .../05-libctf0_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.69 Unpacking libctf0:amd64 (2.42-4ubuntu2.8) ...
+#11 16.71 Selecting previously unselected package libgprofng0:amd64.
+#11 16.71 Preparing to unpack .../06-libgprofng0_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.71 Unpacking libgprofng0:amd64 (2.42-4ubuntu2.8) ...
+#11 16.74 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#11 16.74 Preparing to unpack .../07-binutils-x86-64-linux-gnu_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.74 Unpacking binutils-x86-64-linux-gnu (2.42-4ubuntu2.8) ...
+#11 16.81 Selecting previously unselected package binutils.
+#11 16.82 Preparing to unpack .../08-binutils_2.42-4ubuntu2.8_amd64.deb ...
+#11 16.82 Unpacking binutils (2.42-4ubuntu2.8) ...
+#11 16.84 Selecting previously unselected package gcc-13-base:amd64.
+#11 16.84 Preparing to unpack .../09-gcc-13-base_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 16.84 Unpacking gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#11 16.85 Selecting previously unselected package libisl23:amd64.
+#11 16.85 Preparing to unpack .../10-libisl23_0.26-3build1.1_amd64.deb ...
+#11 16.86 Unpacking libisl23:amd64 (0.26-3build1.1) ...
+#11 16.88 Selecting previously unselected package libmpfr6:amd64.
+#11 16.88 Preparing to unpack .../11-libmpfr6_4.2.1-1build1.1_amd64.deb ...
+#11 16.88 Unpacking libmpfr6:amd64 (4.2.1-1build1.1) ...
+#11 16.90 Selecting previously unselected package libmpc3:amd64.
+#11 16.90 Preparing to unpack .../12-libmpc3_1.3.1-1build1.1_amd64.deb ...
+#11 16.90 Unpacking libmpc3:amd64 (1.3.1-1build1.1) ...
+#11 16.92 Selecting previously unselected package cpp-13-x86-64-linux-gnu.
+#11 16.92 Preparing to unpack .../13-cpp-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 16.92 Unpacking cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#11 17.04 Selecting previously unselected package cpp-13.
+#11 17.05 Preparing to unpack .../14-cpp-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 17.05 Unpacking cpp-13 (13.3.0-6ubuntu2~24.04.1) ...
+#11 17.06 Selecting previously unselected package cpp-x86-64-linux-gnu.
+#11 17.06 Preparing to unpack .../15-cpp-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#11 17.06 Unpacking cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#11 17.08 Selecting previously unselected package cpp.
+#11 17.08 Preparing to unpack .../16-cpp_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#11 17.08 Unpacking cpp (4:13.2.0-7ubuntu1) ...
+#11 17.10 Selecting previously unselected package libcc1-0:amd64.
+#11 17.10 Preparing to unpack .../17-libcc1-0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.10 Unpacking libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.11 Selecting previously unselected package libgomp1:amd64.
+#11 17.12 Preparing to unpack .../18-libgomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.12 Unpacking libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.13 Selecting previously unselected package libitm1:amd64.
+#11 17.13 Preparing to unpack .../19-libitm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.14 Unpacking libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.15 Selecting previously unselected package libatomic1:amd64.
+#11 17.15 Preparing to unpack .../20-libatomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.15 Unpacking libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.17 Selecting previously unselected package libasan8:amd64.
+#11 17.17 Preparing to unpack .../21-libasan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.17 Unpacking libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.22 Selecting previously unselected package liblsan0:amd64.
+#11 17.22 Preparing to unpack .../22-liblsan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.22 Unpacking liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.25 Selecting previously unselected package libtsan2:amd64.
+#11 17.25 Preparing to unpack .../23-libtsan2_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.25 Unpacking libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.30 Selecting previously unselected package libubsan1:amd64.
+#11 17.31 Preparing to unpack .../24-libubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.31 Unpacking libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.33 Selecting previously unselected package libhwasan0:amd64.
+#11 17.34 Preparing to unpack .../25-libhwasan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.34 Unpacking libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.37 Selecting previously unselected package libquadmath0:amd64.
+#11 17.37 Preparing to unpack .../26-libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#11 17.38 Unpacking libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 17.39 Selecting previously unselected package libgcc-13-dev:amd64.
+#11 17.39 Preparing to unpack .../27-libgcc-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 17.39 Unpacking libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#11 17.48 Selecting previously unselected package gcc-13-x86-64-linux-gnu.
+#11 17.48 Preparing to unpack .../28-gcc-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 17.48 Unpacking gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#11 17.74 Selecting previously unselected package gcc-13.
+#11 17.74 Preparing to unpack .../29-gcc-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 17.74 Unpacking gcc-13 (13.3.0-6ubuntu2~24.04.1) ...
+#11 17.76 Selecting previously unselected package gcc-x86-64-linux-gnu.
+#11 17.76 Preparing to unpack .../30-gcc-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#11 17.76 Unpacking gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#11 17.77 Selecting previously unselected package gcc.
+#11 17.78 Preparing to unpack .../31-gcc_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#11 17.78 Unpacking gcc (4:13.2.0-7ubuntu1) ...
+#11 17.79 Selecting previously unselected package libstdc++-13-dev:amd64.
+#11 17.79 Preparing to unpack .../32-libstdc++-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 17.80 Unpacking libstdc++-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#11 17.99 Selecting previously unselected package g++-13-x86-64-linux-gnu.
+#11 17.99 Preparing to unpack .../33-g++-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 18.00 Unpacking g++-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.13 Selecting previously unselected package g++-13.
+#11 18.14 Preparing to unpack .../34-g++-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#11 18.14 Unpacking g++-13 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.15 Selecting previously unselected package g++-x86-64-linux-gnu.
+#11 18.15 Preparing to unpack .../35-g++-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#11 18.15 Unpacking g++-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#11 18.17 Selecting previously unselected package g++.
+#11 18.17 Preparing to unpack .../36-g++_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#11 18.17 Unpacking g++ (4:13.2.0-7ubuntu1) ...
+#11 18.18 Selecting previously unselected package make.
+#11 18.18 Preparing to unpack .../37-make_4.3-4.1build2_amd64.deb ...
+#11 18.19 Unpacking make (4.3-4.1build2) ...
+#11 18.20 Selecting previously unselected package libdpkg-perl.
+#11 18.20 Preparing to unpack .../38-libdpkg-perl_1.22.6ubuntu6.5_all.deb ...
+#11 18.20 Unpacking libdpkg-perl (1.22.6ubuntu6.5) ...
+#11 18.24 Selecting previously unselected package bzip2.
+#11 18.24 Preparing to unpack .../39-bzip2_1.0.8-5.1build0.1_amd64.deb ...
+#11 18.24 Unpacking bzip2 (1.0.8-5.1build0.1) ...
+#11 18.26 Selecting previously unselected package patch.
+#11 18.26 Preparing to unpack .../40-patch_2.7.6-7build3_amd64.deb ...
+#11 18.26 Unpacking patch (2.7.6-7build3) ...
+#11 18.27 Selecting previously unselected package lto-disabled-list.
+#11 18.28 Preparing to unpack .../41-lto-disabled-list_47_all.deb ...
+#11 18.28 Unpacking lto-disabled-list (47) ...
+#11 18.29 Selecting previously unselected package dpkg-dev.
+#11 18.29 Preparing to unpack .../42-dpkg-dev_1.22.6ubuntu6.5_all.deb ...
+#11 18.29 Unpacking dpkg-dev (1.22.6ubuntu6.5) ...
+#11 18.33 Selecting previously unselected package build-essential.
+#11 18.33 Preparing to unpack .../43-build-essential_12.10ubuntu1_amd64.deb ...
+#11 18.33 Unpacking build-essential (12.10ubuntu1) ...
+#11 18.36 Setting up lto-disabled-list (47) ...
+#11 18.36 Setting up binutils-common:amd64 (2.42-4ubuntu2.8) ...
+#11 18.36 Setting up libctf-nobfd0:amd64 (2.42-4ubuntu2.8) ...
+#11 18.36 Setting up libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.37 Setting up bzip2 (1.0.8-5.1build0.1) ...
+#11 18.37 Setting up libsframe1:amd64 (2.42-4ubuntu2.8) ...
+#11 18.37 Setting up libjansson4:amd64 (2.14-2build2) ...
+#11 18.38 Setting up gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.38 Setting up make (4.3-4.1build2) ...
+#11 18.38 Setting up libmpfr6:amd64 (4.2.1-1build1.1) ...
+#11 18.38 Setting up libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.38 Setting up libmpc3:amd64 (1.3.1-1build1.1) ...
+#11 18.39 Setting up libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.39 Setting up patch (2.7.6-7build3) ...
+#11 18.39 Setting up libdpkg-perl (1.22.6ubuntu6.5) ...
+#11 18.39 Setting up libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.39 Setting up libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.40 Setting up libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.40 Setting up libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.40 Setting up libbinutils:amd64 (2.42-4ubuntu2.8) ...
+#11 18.40 Setting up libisl23:amd64 (0.26-3build1.1) ...
+#11 18.41 Setting up libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.41 Setting up liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.41 Setting up libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#11 18.41 Setting up libctf0:amd64 (2.42-4ubuntu2.8) ...
+#11 18.42 Setting up cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.42 Setting up libgprofng0:amd64 (2.42-4ubuntu2.8) ...
+#11 18.42 Setting up libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.42 Setting up libstdc++-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.43 Setting up binutils-x86-64-linux-gnu (2.42-4ubuntu2.8) ...
+#11 18.43 Setting up cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#11 18.43 Setting up cpp-13 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.43 Setting up gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.43 Setting up binutils (2.42-4ubuntu2.8) ...
+#11 18.44 Setting up dpkg-dev (1.22.6ubuntu6.5) ...
+#11 18.44 Setting up gcc-13 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.44 Setting up cpp (4:13.2.0-7ubuntu1) ...
+#11 18.45 Setting up g++-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.45 Setting up gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#11 18.46 Setting up gcc (4:13.2.0-7ubuntu1) ...
+#11 18.47 Setting up g++-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#11 18.47 Setting up g++-13 (13.3.0-6ubuntu2~24.04.1) ...
+#11 18.47 Setting up g++ (4:13.2.0-7ubuntu1) ...
+#11 18.47 update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+#11 18.47 update-alternatives: warning: skip creation of /usr/share/man/man1/c++.1.gz because associated file /usr/share/man/man1/g++.1.gz (of link group c++) doesn't exist
+#11 18.47 Setting up build-essential (12.10ubuntu1) ...
+#11 18.48 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#11 DONE 18.9s
+
+#12 [buildstage 3/3] RUN   echo "**** fetch source code ****" &&   mkdir -p     /tmp/sync &&   (curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/v2.0.11.tar.gz" || curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/2.0.11.tar.gz" || (SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest"     | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz") || curl -fL -o   /tmp/syncthing-src.tar.gz     "https://github.com/syncthing/syncthing/archive/refs/heads/main.tar.gz") &&   tar xf   /tmp/syncthing-src.tar.gz -C     /tmp/sync --strip-components=1 &&   echo "**** compile syncthing  ****" &&   cd /tmp/sync &&   go clean -modcache &&   CGO_ENABLED=0 go run build.go     -no-upgrade     -version=v2.0.11     build syncthing
+#12 0.154 **** fetch source code ****
+#12 0.162   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#12 0.162                                  Dload  Upload   Total   Spent    Left  Speed
+#12 0.162   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#12 0.681 100 2288k    0 2288k    0     0  4408k      0 --:--:-- --:--:-- --:--:-- 4408k100 5267k    0 5267k    0     0  6278k      0 --:--:-- --:--:-- --:--:-- 9340k
+#12 1.114 **** compile syncthing  ****
+#12 1.148 go: downloading sigs.k8s.io/yaml v1.6.0
+#12 1.176 go: downloading github.com/shirou/gopsutil/v4 v4.25.6
+#12 1.193 go: downloading golang.org/x/net v0.43.0
+#12 2.057 go: downloading golang.org/x/sys v0.35.0
+#12 2.086 go: downloading go.yaml.in/yaml/v2 v2.4.2
+#12 2.110 go: downloading golang.org/x/text v0.28.0
+#12 17.31 go: downloading github.com/alecthomas/kong v1.12.1
+#12 17.31 go: downloading github.com/gofrs/flock v0.12.1
+#12 17.32 go: downloading github.com/thejerf/suture/v4 v4.0.6
+#12 17.32 go: downloading github.com/willabides/kongplete v0.4.0
+#12 17.34 go: downloading golang.org/x/exp v0.0.0-20250811191247-51f88131bc50
+#12 17.37 go: downloading google.golang.org/protobuf v1.36.7
+#12 17.37 go: downloading github.com/AudriusButkevicius/recli v0.0.7
+#12 17.37 go: downloading github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51
+#12 17.40 go: downloading github.com/urfave/cli v1.22.17
+#12 17.41 go: downloading github.com/prometheus/client_golang v1.23.0
+#12 17.55 go: downloading go.uber.org/automaxprocs v1.6.0
+#12 17.55 go: downloading github.com/jmoiron/sqlx v1.4.0
+#12 17.59 go: downloading modernc.org/sqlite v1.38.2
+#12 17.61 go: downloading golang.org/x/crypto v0.41.0
+#12 17.80 go: downloading github.com/hashicorp/golang-lru/v2 v2.0.7
+#12 17.80 go: downloading github.com/syncthing/notify v0.0.0-20250528144937-c7027d4f7465
+#12 17.86 go: downloading github.com/miscreant/miscreant.go v0.0.0-20200214223636-26d376326b75
+#12 17.86 go: downloading github.com/pierrec/lz4/v4 v4.1.22
+#12 17.91 go: downloading github.com/posener/complete v1.2.3
+#12 17.91 go: downloading github.com/riywo/loginshell v0.0.0-20200815045211-7d26008be1ab
+#12 17.95 go: downloading github.com/rcrowley/go-metrics v0.0.0-20250401214520-65e299d6c5c9
+#12 17.95 go: downloading github.com/pkg/errors v0.9.1
+#12 17.98 go: downloading github.com/cpuguy83/go-md2man/v2 v2.0.7
+#12 17.99 go: downloading github.com/beorn7/perks v1.0.1
+#12 18.01 go: downloading github.com/cespare/xxhash/v2 v2.3.0
+#12 18.02 go: downloading github.com/prometheus/client_model v0.6.2
+#12 18.04 go: downloading github.com/prometheus/common v0.65.0
+#12 18.10 go: downloading github.com/prometheus/procfs v0.16.1
+#12 18.10 go: downloading github.com/jackpal/gateway v1.0.16
+#12 18.18 go: downloading github.com/syndtr/goleveldb v1.0.1-0.20220721030215-126854af5e6d
+#12 18.22 go: downloading github.com/calmh/incontainer v1.0.0
+#12 18.24 go: downloading github.com/go-ldap/ldap/v3 v3.4.11
+#12 18.27 go: downloading github.com/julienschmidt/httprouter v1.3.0
+#12 18.29 go: downloading github.com/vitrun/qart v0.0.0-20160531060029-bf64b92db6b0
+#12 18.32 go: downloading github.com/quic-go/quic-go v0.52.0
+#12 18.82 go: downloading golang.org/x/time v0.12.0
+#12 18.83 go: downloading github.com/calmh/glob v0.0.0-20220615080505-1d823af5017b
+#12 18.85 go: downloading github.com/russross/blackfriday/v2 v2.1.0
+#12 18.87 go: downloading github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822
+#12 18.89 go: downloading github.com/Azure/go-ntlmssp v0.0.0-20221128193559-754e69321358
+#12 18.89 go: downloading github.com/go-asn1-ber/asn1-ber v1.5.8-0.20250403174932-29230038a667
+#12 18.92 go: downloading github.com/google/uuid v1.6.0
+#12 18.94 go: downloading github.com/stretchr/testify v1.10.0
+#12 18.95 go: downloading github.com/jackpal/go-nat-pmp v1.0.2
+#12 18.98 go: downloading github.com/ccding/go-stun v0.1.5
+#12 18.98 go: downloading github.com/tklauser/go-sysconf v0.3.15
+#12 19.00 go: downloading github.com/golang/snappy v0.0.4
+#12 19.02 go: downloading github.com/calmh/xdr v1.2.0
+#12 19.04 go: downloading github.com/davecgh/go-spew v1.1.1
+#12 19.05 go: downloading github.com/pmezard/go-difflib v1.0.0
+#12 19.07 go: downloading github.com/stretchr/objx v0.5.2
+#12 19.08 go: downloading github.com/hashicorp/go-multierror v1.1.1
+#12 19.10 go: downloading github.com/tklauser/numcpus v0.10.0
+#12 19.10 go: downloading github.com/hashicorp/errwrap v1.1.0
+#12 19.12 go: downloading gopkg.in/yaml.v3 v3.0.1
+#12 20.97 go: downloading modernc.org/libc v1.66.3
+#12 22.48 go: downloading modernc.org/memory v1.11.0
+#12 22.48 go: downloading github.com/dustin/go-humanize v1.0.1
+#12 22.48 go: downloading modernc.org/mathutil v1.7.1
+#12 22.52 go: downloading github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec
+#12 DONE 56.9s
+
+#13 [stage-1 4/5] COPY --from=buildstage /tmp/sync/syncthing /usr/bin/
+#13 DONE 0.0s
+
+#14 [stage-1 5/5] WORKDIR /config
+#14 DONE 0.0s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 1.2s done
+#15 exporting manifest sha256:4c929ed08ead08fb1dede40b6a6db3af7b8549bf60332c6e75f94fd58e19aa56 done
+#15 exporting config sha256:912a29863b5a745733be0f5013d2db2469b8564a1be6465c5437775c2a84bf59 done
+#15 exporting attestation manifest sha256:783e26d7c58f41398459060e3f6dabd67a4c00c292aab10c40163ddecbf02fe9 done
+#15 exporting manifest list sha256:6f6c27b247c3993e372b6204122eae3d4b47125674eb775e9912f7056b13a423 done
+#15 naming to docker.io/library/syncthing:2.0.11 done
+#15 unpacking to docker.io/library/syncthing:2.0.11
+#15 ...
+
+#6 [stage-1 1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#6 sha256:46b905425667995840728594de33bf229125cd6216dbd24f11d394a5b65fef16 27.26MB / 27.26MB 0.9s done
+#6 DONE 1.0s
+
+#15 exporting to image
+#15 unpacking to docker.io/library/syncthing:2.0.11 1.1s done
+#15 DONE 2.3s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - ExposeProtoCasing: Defined protocol '21027/UDP' in EXPOSE instruction should be lowercase (line 62)

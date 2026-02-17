@@ -1,166 +1,0 @@
-#0 building with "default" instance using docker driver
-
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.30kB done
-#1 DONE 0.0s
-
-#2 [internal] load metadata for ghcr.io/trueforge-org/python:3.13.12
-#2 DONE 0.3s
-
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
-
-#4 [1/4] FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b
-#4 resolve ghcr.io/trueforge-org/python:3.13.12@sha256:d9b5d12c8e22d9b84df211da15c73e7e2b36441675f00bba2c706f93526c602b 0.0s done
-#4 CACHED
-
-#5 [internal] load build context
-#5 transferring context: 3.30kB done
-#5 DONE 0.0s
-
-#6 [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     git &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     yarn &&   echo "**** download thelounge ****" &&   mkdir -p     /app/thelounge &&   curl -o     /tmp/thelounge.tar.gz -L     "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" &&   tar xf     /tmp/thelounge.tar.gz -C     /app/thelounge --strip-components=1 &&   cd /app/thelounge &&   echo "**** modify thelounge source ****" &&   sed -i "s/public: false,/public: true,/g" defaults/config.js &&   echo "**** install thelounge ****" &&   yarn install &&   NODE_ENV=production yarn build &&   yarn link &&   yarn --non-interactive cache clean &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root     /tmp/* &&   mkdir -p /     /root
-#6 0.149 **** install build packages ****
-#6 0.253 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.317 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.334 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.414 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.495 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 0.514 Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 0.585 Get:7 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 0.666 Get:8 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 0.699 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 0.745 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 0.913 Get:11 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 1.052 Get:12 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 1.171 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 1.309 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 1.389 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 1.507 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 1.622 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 1.701 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 1.990 Fetched 36.1 MB in 2s (19.9 MB/s)
-#6 1.990 Reading package lists...
-#6 2.740 Reading package lists...
-#6 3.463 Building dependency tree...
-#6 3.607 Reading state information...
-#6 3.764 build-essential is already the newest version (12.10ubuntu1).
-#6 3.764 git is already the newest version (1:2.43.0-1ubuntu7.3).
-#6 3.764 0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
-#6 3.765 **** install runtime packages ****
-#6 3.873 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
-#6 3.926 Hit:2 http://security.ubuntu.com/ubuntu noble-security InRelease
-#6 3.946 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-#6 4.025 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
-#6 4.097 Reading package lists...
-#6 4.828 Reading package lists...
-#6 5.563 Building dependency tree...
-#6 5.714 Reading state information...
-#6 5.856 The following additional packages will be installed:
-#6 5.856   python3-cliapp python3-markdown python3-ttystatus python3-yaml
-#6 5.856   python3-zombie-imp
-#6 5.856 Suggested packages:
-#6 5.856   python3-xdg python-markdown-doc
-#6 5.856 Recommended packages:
-#6 5.856   python3-pygments
-#6 5.903 The following NEW packages will be installed:
-#6 5.904   cmdtest python3-cliapp python3-markdown python3-ttystatus python3-yaml
-#6 5.904   python3-zombie-imp
-#6 6.000 0 upgraded, 6 newly installed, 0 to remove and 24 not upgraded.
-#6 6.000 Need to get 288 kB of archives.
-#6 6.000 After this operation, 1,361 kB of additional disk space will be used.
-#6 6.000 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 python3-yaml amd64 6.0.1-2build2 [123 kB]
-#6 6.276 Get:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-cliapp all 1.20180812.1-6 [44.6 kB]
-#6 6.685 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 python3-markdown all 3.5.2-1 [72.0 kB]
-#6 6.976 Get:4 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-ttystatus all 0.38-4 [14.7 kB]
-#6 7.123 Get:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-zombie-imp all 0.0.2-2 [11.9 kB]
-#6 7.268 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 cmdtest all 0.32.14.gcdfe14e-6 [22.1 kB]
-#6 7.387 debconf: delaying package configuration, since apt-utils is not installed
-#6 7.411 Fetched 288 kB in 1s (210 kB/s)
-#6 7.426 Selecting previously unselected package python3-yaml.
-#6 7.426 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
-#6 7.439 Preparing to unpack .../0-python3-yaml_6.0.1-2build2_amd64.deb ...
-#6 7.440 Unpacking python3-yaml (6.0.1-2build2) ...
-#6 7.461 Selecting previously unselected package python3-cliapp.
-#6 7.463 Preparing to unpack .../1-python3-cliapp_1.20180812.1-6_all.deb ...
-#6 7.464 Unpacking python3-cliapp (1.20180812.1-6) ...
-#6 7.482 Selecting previously unselected package python3-markdown.
-#6 7.483 Preparing to unpack .../2-python3-markdown_3.5.2-1_all.deb ...
-#6 7.484 Unpacking python3-markdown (3.5.2-1) ...
-#6 7.505 Selecting previously unselected package python3-ttystatus.
-#6 7.507 Preparing to unpack .../3-python3-ttystatus_0.38-4_all.deb ...
-#6 7.508 Unpacking python3-ttystatus (0.38-4) ...
-#6 7.527 Selecting previously unselected package python3-zombie-imp.
-#6 7.529 Preparing to unpack .../4-python3-zombie-imp_0.0.2-2_all.deb ...
-#6 7.529 Unpacking python3-zombie-imp (0.0.2-2) ...
-#6 7.544 Selecting previously unselected package cmdtest.
-#6 7.546 Preparing to unpack .../5-cmdtest_0.32.14.gcdfe14e-6_all.deb ...
-#6 7.547 Unpacking cmdtest (0.32.14.gcdfe14e-6) ...
-#6 7.570 Setting up python3-ttystatus (0.38-4) ...
-#6 7.676 Setting up python3-zombie-imp (0.0.2-2) ...
-#6 7.763 Setting up python3-yaml (6.0.1-2build2) ...
-#6 7.881 Setting up python3-cliapp (1.20180812.1-6) ...
-#6 7.994 Setting up python3-markdown (3.5.2-1) ...
-#6 8.125 Setting up cmdtest (0.32.14.gcdfe14e-6) ...
-#6 8.232 **** download thelounge ****
-#6 8.239   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-#6 8.239                                  Dload  Upload   Total   Spent    Left  Speed
-#6 8.239   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-#6 8.672 100    14  100    14    0     0     32      0 --:--:-- --:--:-- --:--:--    32
-#6 8.675 tar: This does not look like a tar archive
-#6 8.675 
-#6 8.675 gzip: stdin: not in gzip format
-#6 8.676 tar: Child returned status 1
-#6 8.676 tar: Error is not recoverable: exiting now
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     git &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     yarn &&   echo \"**** download thelounge ****\" &&   mkdir -p     /app/thelounge &&   curl -o     /tmp/thelounge.tar.gz -L     \"https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz\" &&   tar xf     /tmp/thelounge.tar.gz -C     /app/thelounge --strip-components=1 &&   cd /app/thelounge &&   echo \"**** modify thelounge source ****\" &&   sed -i \"s/public: false,/public: true,/g\" defaults/config.js &&   echo \"**** install thelounge ****\" &&   yarn install &&   NODE_ENV=production yarn build &&   yarn link &&   yarn --non-interactive cache clean &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root     /tmp/* &&   mkdir -p /     /root" did not complete successfully: exit code: 2
-------
- > [2/4] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     git &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     yarn &&   echo "**** download thelounge ****" &&   mkdir -p     /app/thelounge &&   curl -o     /tmp/thelounge.tar.gz -L     "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" &&   tar xf     /tmp/thelounge.tar.gz -C     /app/thelounge --strip-components=1 &&   cd /app/thelounge &&   echo "**** modify thelounge source ****" &&   sed -i "s/public: false,/public: true,/g" defaults/config.js &&   echo "**** install thelounge ****" &&   yarn install &&   NODE_ENV=production yarn build &&   yarn link &&   yarn --non-interactive cache clean &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /root     /tmp/* &&   mkdir -p /     /root:
-7.994 Setting up python3-markdown (3.5.2-1) ...
-8.125 Setting up cmdtest (0.32.14.gcdfe14e-6) ...
-8.232 **** download thelounge ****
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
---:--:--    32
-8.675 tar: This does not look like a tar archive
-8.675 
-8.675 gzip: stdin: not in gzip format
-8.676 tar: Child returned status 1
-8.676 tar: Error is not recoverable: exiting now
-------
-Dockerfile:12
---------------------
-  11 |     
-  12 | >>> RUN \
-  13 | >>>   echo "**** install build packages ****" && \
-  14 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  15 | >>>     build-essential \
-  16 | >>>     git && \
-  17 | >>>   echo "**** install runtime packages ****" && \
-  18 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  19 | >>>     yarn && \
-  20 | >>>   echo "**** download thelounge ****" && \
-  21 | >>>   mkdir -p \
-  22 | >>>     /app/thelounge && \
-  23 | >>>   curl -o \
-  24 | >>>     /tmp/thelounge.tar.gz -L \
-  25 | >>>     "https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz" && \
-  26 | >>>   tar xf \
-  27 | >>>     /tmp/thelounge.tar.gz -C \
-  28 | >>>     /app/thelounge --strip-components=1 && \
-  29 | >>>   cd /app/thelounge && \
-  30 | >>>   echo "**** modify thelounge source ****" && \
-  31 | >>>   sed -i "s/public: false,/public: true,/g" defaults/config.js && \
-  32 | >>>   echo "**** install thelounge ****" && \
-  33 | >>>   yarn install && \
-  34 | >>>   NODE_ENV=production yarn build && \
-  35 | >>>   yarn link && \
-  36 | >>>   yarn --non-interactive cache clean && \
-  37 | >>>   echo "**** cleanup ****" && \
-  38 | >>>   apt-get autoremove -y && \
-  39 | >>>   rm -rf \
-  40 | >>>     /root \
-  41 | >>>     /tmp/* && \
-  42 | >>>   mkdir -p / \
-  43 | >>>     /root
-  44 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     git &&   echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     yarn &&   echo \"**** download thelounge ****\" &&   mkdir -p     /app/thelounge &&   curl -o     /tmp/thelounge.tar.gz -L     \"https://github.com/thelounge/thelounge/archive/refs/tags/v${VERSION}.tar.gz\" &&   tar xf     /tmp/thelounge.tar.gz -C     /app/thelounge --strip-components=1 &&   cd /app/thelounge &&   echo \"**** modify thelounge source ****\" &&   sed -i \"s/public: false,/public: true,/g\" defaults/config.js &&   echo \"**** install thelounge ****\" &&   yarn install &&   NODE_ENV=production yarn build &&   yarn link &&   yarn --non-interactive cache clean &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /root     /tmp/* &&   mkdir -p /     /root" did not complete successfully: exit code: 2

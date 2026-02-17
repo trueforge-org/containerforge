@@ -1,0 +1,112 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 815B / 815B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.15kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
+#3 DONE 0.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
+#5 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c 0.0s done
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 1.74kB done
+#6 DONE 0.0s
+
+#7 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssl &&   echo "**** install app ****" &&   mkdir -p     /app/mstream &&   (curl -fL -o     /tmp/mstream.tar.gz     "https://github.com/IrosTheBeggar/mStream/archive/refs/tags/v5.13.1.tar.gz" || curl -fL -o     /tmp/mstream.tar.gz     "https://github.com/IrosTheBeggar/mStream/archive/refs/tags/5.13.1.tar.gz") &&   tar xzf     /tmp/mstream.tar.gz -C     /app/mstream/ --strip-components=1 &&   cd /app/mstream &&   npm install --omit=dev &&   chown -R apps:apps ./ &&   npm link &&   echo "**** cleanup ****" &&   rm -rf /app/mstream/save/sync &&   ln -s /config/sync /app/mstream/save/sync &&   apt-get autoremove -y &&   rm -rf     /config/.cache     /config/.npm     /tmp/*     /tmp/.npm
+#7 0.157 **** install runtime packages ****
+#7 0.237 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.239 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.368 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.402 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 0.434 Get:5 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 0.493 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 0.592 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 0.634 Get:8 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 0.696 Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 0.716 Get:10 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 0.742 Get:11 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 0.769 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 0.797 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 0.823 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 0.855 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 0.884 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 0.914 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 0.940 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 1.766 Fetched 36.1 MB in 2s (22.9 MB/s)
+#7 1.766 Reading package lists...
+#7 2.672 Reading package lists...
+#7 3.567 Building dependency tree...
+#7 3.812 Reading state information...
+#7 4.211 openssl is already the newest version (3.0.13-0ubuntu3.7).
+#7 4.211 openssl set to manually installed.
+#7 4.211 0 upgraded, 0 newly installed, 0 to remove and 5 not upgraded.
+#7 4.213 **** install app ****
+#7 4.221   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 4.221                                  Dload  Upload   Total   Spent    Left  Speed
+#7 4.221   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 4.959 100 2576k    0 2576k    0     0  3492k      0 --:--:-- --:--:-- --:--:-- 3492k100  9.7M    0  9.7M    0     0  5817k      0 --:--:--  0:00:01 --:--:-- 7560k100 17.5M    0 17.5M    0     0  6559k      0 --:--:--  0:00:02 --:--:-- 7691k100 25.0M    0 25.0M    0     0  6908k      0 --:--:--  0:00:03 --:--:-- 7752k100 33.5M    0 33.5M    0     0  7275k      0 --:--:--  0:00:04 --:--:-- 7975k100 43.8M    0 43.8M    0     0  8616k      0 --:--:--  0:00:05 --:--:-- 9462k
+#7 12.45 npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+#7 13.16 npm warn deprecated har-validator@5.1.5: this library is no longer supported
+#7 13.63 npm warn deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+#7 17.31 
+#7 17.31 added 471 packages, and audited 472 packages in 7s
+#7 17.31 
+#7 17.31 57 packages are looking for funding
+#7 17.31   run `npm fund` for details
+#7 17.33 
+#7 17.33 15 vulnerabilities (2 low, 5 moderate, 6 high, 2 critical)
+#7 17.33 
+#7 17.33 To address issues that do not require attention, run:
+#7 17.33   npm audit fix
+#7 17.33 
+#7 17.33 Some issues need review, and may require choosing
+#7 17.33 a different dependency.
+#7 17.33 
+#7 17.33 Run `npm audit` for details.
+#7 17.33 npm notice
+#7 17.33 npm notice New major version of npm available! 10.9.4 -> 11.10.0
+#7 17.33 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.10.0
+#7 17.33 npm notice To update run: npm install -g npm@11.10.0
+#7 17.33 npm notice
+#7 17.98 
+#7 17.98 added 1 package, and audited 3 packages in 370ms
+#7 17.98 
+#7 17.98 found 0 vulnerabilities
+#7 17.99 **** cleanup ****
+#7 18.00 Reading package lists...
+#7 18.88 Building dependency tree...
+#7 19.13 Reading state information...
+#7 19.48 0 upgraded, 0 newly installed, 0 to remove and 5 not upgraded.
+#7 DONE 19.9s
+
+#8 [3/5] COPY . /
+#8 DONE 0.1s
+
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 9.5s done
+#11 exporting manifest sha256:a5a4bca0dd6379295df0cb701ba35096219589e0ad75657bdce283c15aa17f0c done
+#11 exporting config sha256:d2ad0344e71afef32ddbb017582c54d6291d71131c705081b1cfe52aabbf8d95 done
+#11 exporting attestation manifest sha256:a7697c10054cb1beac864d467fbc6c0bda3571d3f9c1e2eaf4e11b9d91205a47 done
+#11 exporting manifest list sha256:3d2f40b9a79b0a295182782131a3adb44a6980ffd640b86ce8d1dbeaedd6b070 done
+#11 naming to docker.io/library/mstream:5.13.1 done
+#11 unpacking to docker.io/library/mstream:5.13.1
+#11 unpacking to docker.io/library/mstream:5.13.1 2.8s done
+#11 DONE 12.4s

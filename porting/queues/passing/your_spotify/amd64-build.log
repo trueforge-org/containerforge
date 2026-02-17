@@ -1,0 +1,406 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 836B / 836B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.49kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/python-node:3.13.12
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [buildbase 1/2] FROM ghcr.io/trueforge-org/python-node:3.13.12@sha256:6d333e0771503ca08dcde722688d80d98436e3e390d1dc74c704e573e89dd050
+#5 resolve ghcr.io/trueforge-org/python-node:3.13.12@sha256:6d333e0771503ca08dcde722688d80d98436e3e390d1dc74c704e573e89dd050 0.0s done
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 11.28kB done
+#6 DONE 0.0s
+
+#7 [buildbase 2/2] RUN   echo "**** install buildstage packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cmake     python3-dev &&   echo "*** install your_spotify ***" &&   (curl -fL -o     /tmp/your_spotify.tar.gz     "https://github.com/Yooooomi/your_spotify/archive/refs/tags/1.14.0.tar.gz" || curl -fL -o     /tmp/your_spotify.tar.gz     "https://github.com/Yooooomi/your_spotify/archive/refs/tags/v1.14.0.tar.gz") &&   mkdir -p /app/www &&   tar xzf     /tmp/your_spotify.tar.gz -C     /app/www/ --strip-components=1
+#7 0.152 **** install buildstage packages ****
+#7 0.613 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.620 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 1.021 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 1.060 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.170 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.281 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.436 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.439 Get:8 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 1.538 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.548 Get:10 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 1.627 Get:11 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 2.213 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 2.304 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.406 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.498 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 2.579 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.673 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.757 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 3.077 Fetched 36.1 MB in 3s (12.5 MB/s)
+#7 3.077 Reading package lists...
+#7 3.884 Reading package lists...
+#7 4.688 Building dependency tree...
+#7 4.883 Reading state information...
+#7 5.042 build-essential is already the newest version (12.10ubuntu1).
+#7 5.042 The following additional packages will be installed:
+#7 5.042   cmake-data libarchive13t64 libjs-jquery libjs-sphinxdoc libjs-underscore
+#7 5.043   libjsoncpp25 libpython3-dev libpython3.12-dev libpython3.12t64 librhash0
+#7 5.043   libuv1t64 python3.12-dev
+#7 5.044 Suggested packages:
+#7 5.044   cmake-doc cmake-format elpa-cmake-mode ninja-build lrzip
+#7 5.044 Recommended packages:
+#7 5.044   javascript-common
+#7 5.094 The following NEW packages will be installed:
+#7 5.094   cmake cmake-data libarchive13t64 libjs-jquery libjs-sphinxdoc
+#7 5.094   libjs-underscore libjsoncpp25 libpython3-dev libpython3.12-dev
+#7 5.095   libpython3.12t64 librhash0 libuv1t64 python3-dev python3.12-dev
+#7 5.192 0 upgraded, 14 newly installed, 0 to remove and 24 not upgraded.
+#7 5.192 Need to get 23.2 MB of archives.
+#7 5.192 After this operation, 91.1 MB of additional disk space will be used.
+#7 5.192 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+#7 5.274 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libarchive13t64 amd64 3.7.2-2ubuntu0.5 [382 kB]
+#7 5.358 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libjsoncpp25 amd64 1.9.5-6build1 [82.8 kB]
+#7 5.439 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 librhash0 amd64 1.4.3-3build1 [129 kB]
+#7 5.520 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake-data all 3.28.3-1build7 [2,155 kB]
+#7 5.614 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake amd64 3.28.3-1build7 [11.2 MB]
+#7 5.904 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [328 kB]
+#7 5.990 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [118 kB]
+#7 6.072 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-sphinxdoc all 7.2.6-6 [149 kB]
+#7 6.154 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.11 [2,345 kB]
+#7 6.278 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-dev amd64 3.12.3-1ubuntu0.11 [5,683 kB]
+#7 6.463 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-dev amd64 3.12.3-0ubuntu2.1 [10.3 kB]
+#7 6.544 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-dev amd64 3.12.3-1ubuntu0.11 [498 kB]
+#7 6.633 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-dev amd64 3.12.3-0ubuntu2.1 [26.7 kB]
+#7 6.751 debconf: delaying package configuration, since apt-utils is not installed
+#7 6.782 Fetched 23.2 MB in 2s (15.1 MB/s)
+#7 6.799 Selecting previously unselected package libuv1t64:amd64.
+#7 6.799 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#7 6.814 Preparing to unpack .../00-libuv1t64_1.48.0-1.1build1_amd64.deb ...
+#7 6.819 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
+#7 6.839 Selecting previously unselected package libarchive13t64:amd64.
+#7 6.841 Preparing to unpack .../01-libarchive13t64_3.7.2-2ubuntu0.5_amd64.deb ...
+#7 6.842 Unpacking libarchive13t64:amd64 (3.7.2-2ubuntu0.5) ...
+#7 6.864 Selecting previously unselected package libjsoncpp25:amd64.
+#7 6.867 Preparing to unpack .../02-libjsoncpp25_1.9.5-6build1_amd64.deb ...
+#7 6.868 Unpacking libjsoncpp25:amd64 (1.9.5-6build1) ...
+#7 6.885 Selecting previously unselected package librhash0:amd64.
+#7 6.887 Preparing to unpack .../03-librhash0_1.4.3-3build1_amd64.deb ...
+#7 6.888 Unpacking librhash0:amd64 (1.4.3-3build1) ...
+#7 6.906 Selecting previously unselected package cmake-data.
+#7 6.909 Preparing to unpack .../04-cmake-data_3.28.3-1build7_all.deb ...
+#7 6.914 Unpacking cmake-data (3.28.3-1build7) ...
+#7 7.490 Selecting previously unselected package cmake.
+#7 7.494 Preparing to unpack .../05-cmake_3.28.3-1build7_amd64.deb ...
+#7 7.495 Unpacking cmake (3.28.3-1build7) ...
+#7 7.651 Selecting previously unselected package libjs-jquery.
+#7 7.654 Preparing to unpack .../06-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
+#7 7.659 Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#7 7.678 Selecting previously unselected package libjs-underscore.
+#7 7.681 Preparing to unpack .../07-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
+#7 7.682 Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#7 7.699 Selecting previously unselected package libjs-sphinxdoc.
+#7 7.702 Preparing to unpack .../08-libjs-sphinxdoc_7.2.6-6_all.deb ...
+#7 7.703 Unpacking libjs-sphinxdoc (7.2.6-6) ...
+#7 7.726 Selecting previously unselected package libpython3.12t64:amd64.
+#7 7.728 Preparing to unpack .../09-libpython3.12t64_3.12.3-1ubuntu0.11_amd64.deb ...
+#7 7.729 Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#7 7.779 Selecting previously unselected package libpython3.12-dev:amd64.
+#7 7.782 Preparing to unpack .../10-libpython3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#7 7.783 Unpacking libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#7 7.936 Selecting previously unselected package libpython3-dev:amd64.
+#7 7.939 Preparing to unpack .../11-libpython3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#7 7.940 Unpacking libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#7 7.954 Selecting previously unselected package python3.12-dev.
+#7 7.957 Preparing to unpack .../12-python3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#7 7.958 Unpacking python3.12-dev (3.12.3-1ubuntu0.11) ...
+#7 7.974 Selecting previously unselected package python3-dev.
+#7 7.977 Preparing to unpack .../13-python3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#7 7.978 Unpacking python3-dev (3.12.3-0ubuntu2.1) ...
+#7 8.002 Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+#7 8.004 Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#7 8.007 Setting up libjsoncpp25:amd64 (1.9.5-6build1) ...
+#7 8.010 Setting up librhash0:amd64 (1.4.3-3build1) ...
+#7 8.012 Setting up cmake-data (3.28.3-1build7) ...
+#7 8.020 Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#7 8.027 Setting up libarchive13t64:amd64 (3.7.2-2ubuntu0.5) ...
+#7 8.029 Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#7 8.032 Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#7 8.035 Setting up python3.12-dev (3.12.3-1ubuntu0.11) ...
+#7 8.038 Setting up libjs-sphinxdoc (7.2.6-6) ...
+#7 8.040 Setting up cmake (3.28.3-1build7) ...
+#7 8.043 Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#7 8.048 Setting up python3-dev (3.12.3-0ubuntu2.1) ...
+#7 8.051 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 8.091 *** install your_spotify ***
+#7 8.097   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#7 8.097                                  Dload  Upload   Total   Spent    Left  Speed
+#7 8.097   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 8.640 100  577k    0  577k    0     0  1064k      0 --:--:-- --:--:-- --:--:-- 1064k
+#7 DONE 8.9s
+
+#8 [buildclient 1/1] RUN   echo "*** install your_spotify client ***" &&   cd /app/www &&   rm -rf /app/www/apps/server &&   yarnpkg --frozen-lockfile &&   cd /app/www/apps/client &&   yarnpkg build &&   rm -rf /app/www/node_modules &&   yarnpkg cache clean
+#8 0.245 *** install your_spotify client ***
+#8 0.487 yarn install v1.22.22
+#8 0.588 [1/4] Resolving packages...
+#8 1.116 [2/4] Fetching packages...
+#8 ...
+
+#9 [buildserver 1/1] RUN   echo "*** install your_spotify server ***" &&   cd /app/www &&   rm -rf /app/www/apps/client &&   yarnpkg --frozen-lockfile &&   cd /app/www/apps/server &&   yarnpkg build &&   rm -rf /app/www/node_modules &&   yarnpkg cache clean
+#9 0.240 *** install your_spotify server ***
+#9 0.564 yarn install v1.22.22
+#9 0.681 [1/4] Resolving packages...
+#9 0.941 [2/4] Fetching packages...
+#9 15.10 [3/4] Linking dependencies...
+#9 15.10 warning "workspace-aggregator-e8bb0560-22fe-4948-a235-5c2b4514a6c9 > @your_spotify/dev > ts-node@10.9.2" has unmet peer dependency "@types/node@*".
+#9 18.98 [4/4] Building fresh packages...
+#9 19.09 Done in 18.52s.
+#9 19.30 yarn run v1.22.22
+#9 19.36 $ tsc && cp -r src/public lib/
+#9 25.84 Done in 6.55s.
+#9 26.78 yarn cache v1.22.22
+#9 28.35 success Cleared cache.
+#9 28.35 Done in 1.57s.
+#9 DONE 29.3s
+
+#8 [buildclient 1/1] RUN   echo "*** install your_spotify client ***" &&   cd /app/www &&   rm -rf /app/www/apps/server &&   yarnpkg --frozen-lockfile &&   cd /app/www/apps/client &&   yarnpkg build &&   rm -rf /app/www/node_modules &&   yarnpkg cache clean
+#8 49.69 [3/4] Linking dependencies...
+#8 49.70 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > react-copy-to-clipboard@5.1.0" has incorrect peer dependency "react@^15.3.0 || 16 || 17 || 18".
+#8 49.70 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > @types/react-dom@19.1.2" has unmet peer dependency "@types/react@^19.0.0".
+#8 49.70 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/dev > ts-node@10.9.2" has unmet peer dependency "@types/node@*".
+#8 49.70 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > @mui/material > @types/react-transition-group@4.4.12" has unmet peer dependency "@types/react@*".
+#8 49.70 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > react-scripts > eslint-config-react-app > eslint-plugin-flowtype@8.0.3" has unmet peer dependency "@babel/plugin-syntax-flow@^7.14.5".
+#8 49.70 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > react-scripts > eslint-config-react-app > eslint-plugin-flowtype@8.0.3" has unmet peer dependency "@babel/plugin-transform-react-jsx@^7.14.9".
+#8 49.71 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > react-scripts > react-dev-utils > fork-ts-checker-webpack-plugin@6.5.3" has unmet peer dependency "typescript@>= 2.7".
+#8 49.71 warning "workspace-aggregator-44e53e40-e1d7-4b78-bdda-e15c528116f1 > @your_spotify/client > react-scripts > eslint-config-react-app > @typescript-eslint/eslint-plugin > tsutils@3.21.0" has unmet peer dependency "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta".
+#8 69.93 [4/4] Building fresh packages...
+#8 71.04 Done in 70.55s.
+#8 71.21 yarn run v1.22.22
+#8 71.25 $ DISABLE_ESLINT_PLUGIN=true react-scripts build
+#8 72.39 Creating an optimized production build...
+#8 72.52 Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+#8 72.52   npx update-browserslist-db@latest
+#8 72.52   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#8 122.9 Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+#8 122.9   npx update-browserslist-db@latest
+#8 122.9   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#8 123.9 Compiled successfully.
+#8 123.9 
+#8 123.9 File sizes after gzip:
+#8 123.9 
+#8 123.9   360.98 kB  build/static/js/main.95b331be.js
+#8 123.9   6.53 kB    build/static/css/main.04d1ef05.css
+#8 123.9 
+#8 123.9 The project was built assuming it is hosted at /.
+#8 123.9 You can control this with the homepage field in your package.json.
+#8 123.9 
+#8 123.9 The build folder is ready to be deployed.
+#8 123.9 You may serve it with a static server:
+#8 123.9 
+#8 123.9   npm install -g serve
+#8 123.9   serve -s build
+#8 123.9 
+#8 123.9 Find out more about deployment here:
+#8 123.9 
+#8 123.9   https://cra.link/deployment
+#8 123.9 
+#8 124.2 Done in 52.95s.
+#8 127.4 yarn cache v1.22.22
+#8 133.2 success Cleared cache.
+#8 133.2 Done in 5.78s.
+#8 DONE 133.4s
+
+#10 [stage-3  2/10] COPY --from=buildclient /app/www/apps/client/build/ /app/www/apps/client/build/
+#10 DONE 0.0s
+
+#11 [stage-3  3/10] COPY --from=buildbase /app/www/package.json /app/www/package.json
+#11 DONE 0.0s
+
+#12 [stage-3  4/10] COPY --from=buildbase /app/www/yarn.lock /app/www/yarn.lock
+#12 DONE 0.0s
+
+#13 [stage-3  5/10] COPY --from=buildserver /app/www/apps/server/lib/ /app/www/apps/server/lib/
+#13 DONE 0.0s
+
+#14 [stage-3  6/10] COPY --from=buildserver /app/www/apps/server/package.json /app/www/apps/server/package.json
+#14 DONE 0.0s
+
+#15 [stage-3  7/10] RUN   echo "**** install build packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     build-essential     cmake     python3-dev &&   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     ca-certificates &&   echo "**** install your_spotify ****" &&   cd /app/www/apps/server &&   yarnpkg --production --frozen-lockfile &&   yarnpkg cache clean &&   npm install -g serve &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/.cache     /app/.npm
+#15 0.160 **** install build packages ****
+#15 0.779 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#15 0.781 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#15 1.517 Get:3 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#15 1.633 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#15 1.845 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#15 2.057 Get:6 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#15 2.264 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#15 2.415 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#15 2.606 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#15 2.818 Get:10 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#15 2.910 Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#15 3.891 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#15 4.050 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#15 4.230 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#15 4.426 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#15 4.583 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#15 4.765 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#15 4.921 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#15 4.941 Fetched 36.1 MB in 5s (7,599 kB/s)
+#15 4.941 Reading package lists...
+#15 5.811 Reading package lists...
+#15 6.655 Building dependency tree...
+#15 6.864 Reading state information...
+#15 7.075 build-essential is already the newest version (12.10ubuntu1).
+#15 7.075 The following additional packages will be installed:
+#15 7.075   cmake-data libarchive13t64 libjs-jquery libjs-sphinxdoc libjs-underscore
+#15 7.075   libjsoncpp25 libpython3-dev libpython3.12-dev libpython3.12t64 librhash0
+#15 7.076   libuv1t64 python3.12-dev
+#15 7.077 Suggested packages:
+#15 7.077   cmake-doc cmake-format elpa-cmake-mode ninja-build lrzip
+#15 7.077 Recommended packages:
+#15 7.077   javascript-common
+#15 7.130 The following NEW packages will be installed:
+#15 7.130   cmake cmake-data libarchive13t64 libjs-jquery libjs-sphinxdoc
+#15 7.130   libjs-underscore libjsoncpp25 libpython3-dev libpython3.12-dev
+#15 7.131   libpython3.12t64 librhash0 libuv1t64 python3-dev python3.12-dev
+#15 7.306 0 upgraded, 14 newly installed, 0 to remove and 24 not upgraded.
+#15 7.306 Need to get 23.2 MB of archives.
+#15 7.306 After this operation, 91.1 MB of additional disk space will be used.
+#15 7.306 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+#15 7.462 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libarchive13t64 amd64 3.7.2-2ubuntu0.5 [382 kB]
+#15 7.621 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libjsoncpp25 amd64 1.9.5-6build1 [82.8 kB]
+#15 7.776 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 librhash0 amd64 1.4.3-3build1 [129 kB]
+#15 7.932 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake-data all 3.28.3-1build7 [2,155 kB]
+#15 8.113 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake amd64 3.28.3-1build7 [11.2 MB]
+#15 8.684 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [328 kB]
+#15 8.850 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [118 kB]
+#15 9.008 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libjs-sphinxdoc all 7.2.6-6 [149 kB]
+#15 9.167 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.11 [2,345 kB]
+#15 9.409 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-dev amd64 3.12.3-1ubuntu0.11 [5,683 kB]
+#15 9.775 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3-dev amd64 3.12.3-0ubuntu2.1 [10.3 kB]
+#15 9.930 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3.12-dev amd64 3.12.3-1ubuntu0.11 [498 kB]
+#15 10.10 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-dev amd64 3.12.3-0ubuntu2.1 [26.7 kB]
+#15 10.23 debconf: delaying package configuration, since apt-utils is not installed
+#15 10.26 Fetched 23.2 MB in 3s (7,830 kB/s)
+#15 10.28 Selecting previously unselected package libuv1t64:amd64.
+#15 10.28 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#15 10.30 Preparing to unpack .../00-libuv1t64_1.48.0-1.1build1_amd64.deb ...
+#15 10.30 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
+#15 10.32 Selecting previously unselected package libarchive13t64:amd64.
+#15 10.33 Preparing to unpack .../01-libarchive13t64_3.7.2-2ubuntu0.5_amd64.deb ...
+#15 10.33 Unpacking libarchive13t64:amd64 (3.7.2-2ubuntu0.5) ...
+#15 10.35 Selecting previously unselected package libjsoncpp25:amd64.
+#15 10.35 Preparing to unpack .../02-libjsoncpp25_1.9.5-6build1_amd64.deb ...
+#15 10.35 Unpacking libjsoncpp25:amd64 (1.9.5-6build1) ...
+#15 10.37 Selecting previously unselected package librhash0:amd64.
+#15 10.37 Preparing to unpack .../03-librhash0_1.4.3-3build1_amd64.deb ...
+#15 10.37 Unpacking librhash0:amd64 (1.4.3-3build1) ...
+#15 10.39 Selecting previously unselected package cmake-data.
+#15 10.39 Preparing to unpack .../04-cmake-data_3.28.3-1build7_all.deb ...
+#15 10.40 Unpacking cmake-data (3.28.3-1build7) ...
+#15 10.95 Selecting previously unselected package cmake.
+#15 10.95 Preparing to unpack .../05-cmake_3.28.3-1build7_amd64.deb ...
+#15 10.95 Unpacking cmake (3.28.3-1build7) ...
+#15 11.10 Selecting previously unselected package libjs-jquery.
+#15 11.11 Preparing to unpack .../06-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
+#15 11.11 Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#15 11.13 Selecting previously unselected package libjs-underscore.
+#15 11.13 Preparing to unpack .../07-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
+#15 11.13 Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#15 11.15 Selecting previously unselected package libjs-sphinxdoc.
+#15 11.15 Preparing to unpack .../08-libjs-sphinxdoc_7.2.6-6_all.deb ...
+#15 11.15 Unpacking libjs-sphinxdoc (7.2.6-6) ...
+#15 11.17 Selecting previously unselected package libpython3.12t64:amd64.
+#15 11.17 Preparing to unpack .../09-libpython3.12t64_3.12.3-1ubuntu0.11_amd64.deb ...
+#15 11.17 Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#15 11.22 Selecting previously unselected package libpython3.12-dev:amd64.
+#15 11.23 Preparing to unpack .../10-libpython3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#15 11.23 Unpacking libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#15 11.37 Selecting previously unselected package libpython3-dev:amd64.
+#15 11.37 Preparing to unpack .../11-libpython3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#15 11.37 Unpacking libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#15 11.39 Selecting previously unselected package python3.12-dev.
+#15 11.39 Preparing to unpack .../12-python3.12-dev_3.12.3-1ubuntu0.11_amd64.deb ...
+#15 11.39 Unpacking python3.12-dev (3.12.3-1ubuntu0.11) ...
+#15 11.41 Selecting previously unselected package python3-dev.
+#15 11.41 Preparing to unpack .../13-python3-dev_3.12.3-0ubuntu2.1_amd64.deb ...
+#15 11.41 Unpacking python3-dev (3.12.3-0ubuntu2.1) ...
+#15 11.43 Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+#15 11.44 Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.11) ...
+#15 11.44 Setting up libjsoncpp25:amd64 (1.9.5-6build1) ...
+#15 11.44 Setting up librhash0:amd64 (1.4.3-3build1) ...
+#15 11.44 Setting up cmake-data (3.28.3-1build7) ...
+#15 11.45 Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+#15 11.46 Setting up libarchive13t64:amd64 (3.7.2-2ubuntu0.5) ...
+#15 11.46 Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+#15 11.46 Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
+#15 11.47 Setting up python3.12-dev (3.12.3-1ubuntu0.11) ...
+#15 11.47 Setting up libjs-sphinxdoc (7.2.6-6) ...
+#15 11.47 Setting up cmake (3.28.3-1build7) ...
+#15 11.47 Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
+#15 11.48 Setting up python3-dev (3.12.3-0ubuntu2.1) ...
+#15 11.48 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#15 11.52 **** install runtime packages ****
+#15 11.71 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+#15 11.85 Hit:2 http://security.ubuntu.com/ubuntu noble-security InRelease
+#15 11.86 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#15 12.01 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#15 12.07 Reading package lists...
+#15 12.86 Reading package lists...
+#15 13.68 Building dependency tree...
+#15 13.87 Reading state information...
+#15 14.04 ca-certificates is already the newest version (20240203).
+#15 14.04 0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
+#15 14.04 **** install your_spotify ****
+#15 14.24 yarn install v1.22.22
+#15 14.31 [1/4] Resolving packages...
+#15 14.36 [2/4] Fetching packages...
+#15 16.79 [3/4] Linking dependencies...
+#15 17.41 [4/4] Building fresh packages...
+#15 17.42 Done in 3.19s.
+#15 17.56 yarn cache v1.22.22
+#15 17.85 success Cleared cache.
+#15 17.85 Done in 0.29s.
+#15 20.84 
+#15 20.84 added 86 packages in 3s
+#15 20.84 
+#15 20.84 25 packages are looking for funding
+#15 20.84   run `npm fund` for details
+#15 20.84 npm notice
+#15 20.84 npm notice New major version of npm available! 10.9.4 -> 11.10.0
+#15 20.84 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.10.0
+#15 20.84 npm notice To update run: npm install -g npm@11.10.0
+#15 20.84 npm notice
+#15 20.91 **** cleanup ****
+#15 20.91 Reading package lists...
+#15 21.75 Building dependency tree...
+#15 21.95 Reading state information...
+#15 22.16 0 upgraded, 0 newly installed, 0 to remove and 24 not upgraded.
+#15 DONE 22.4s
+
+#16 [stage-3  8/10] COPY . /
+#16 DONE 0.1s
+
+#17 [stage-3  9/10] COPY ./root /
+#17 DONE 0.0s
+
+#18 [stage-3 10/10] WORKDIR /config
+#18 DONE 0.0s
+
+#19 exporting to image
+#19 exporting layers
+#19 exporting layers 6.9s done
+#19 exporting manifest sha256:e151064ca0faede7f3e49e52f5b8fdb1f43fa227341a9826638f90fb2128d31c done
+#19 exporting config sha256:79083550210b63a2e3d9ec191b918f5e509f10b46c77859f60c9c9112ee9625d done
+#19 exporting attestation manifest sha256:6d43e5c32b130e47305c6d570aad44a7b7a9324adbfcfabb97bbd74e225862ee done
+#19 exporting manifest list sha256:15b5ed44f1b78aa0c7847122276ddf35b016490a9c622515fa587def45bb8af8 done
+#19 naming to docker.io/library/your_spotify:1.14.0 done
+#19 unpacking to docker.io/library/your_spotify:1.14.0
+#19 unpacking to docker.io/library/your_spotify:1.14.0 2.0s done
+#19 DONE 8.9s
