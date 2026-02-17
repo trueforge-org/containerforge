@@ -26,7 +26,8 @@ RUN set -eux; \
     ln -svfT /target/usr/local/go /usr/local/go; \
     go version; \
     apt-get purge -y --auto-remove gnupg; \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*; \
+    mkdir -p /config && chown -R apps:apps /config
 
 FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
 
