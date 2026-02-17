@@ -92,7 +92,6 @@ USER apps
 ENV WORKDIR=/app \
     DD_LOG_FORMAT=text \
     DD_VERSION=$VERSION \
-    DD_REGISTRY_CUSTOM_TRUEFORGE_URL=https://oci.trueforge.org \
     DD_WATCHER_local_WATCHBYDEFAULT=false \
     DD_STORE_PATH=/config
 
