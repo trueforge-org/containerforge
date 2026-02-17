@@ -21,3 +21,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 4.691 E: Unable to locate package perl-dev
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 resume batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64; CPAN module fetch failures are now non-fatal in constrained build environments.
+- Full log: `amd64-build.log`

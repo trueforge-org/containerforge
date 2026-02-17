@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 4.702 E: Unable to locate package libcurl4-libssl-dev
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 resume batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after Ubuntu package-name updates and build dependency fix.
+- Full log: `amd64-build.log`

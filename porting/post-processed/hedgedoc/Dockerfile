@@ -14,8 +14,7 @@ RUN \
     echo "**** install build packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        fonts-noto \
-        icu-data-full && \
+        fonts-noto && \
     apt-get install -y --no-install-recommends --no-install-suggests \
         build-essential \
         libssl-dev \

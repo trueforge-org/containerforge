@@ -17,12 +17,14 @@ RUN \
     bison \
     build-essential \
     libconfuse-dev \
-    libcurl4-libssl-dev \
+    libcurl4-openssl-dev \
     libavcodec-dev \
+    libavfilter-dev \
     libavformat-dev \
     libavutil-dev \
     libflac-dev \
     flex \
+    gettext \
     libgettextpo-dev \
     libgnutls28-dev \
     gperf \
@@ -87,14 +89,14 @@ RUN \
     dbus \
     ffmpeg \
     libgnutls30 \
-    libjson-c3 \
-    libevent-2.1-7 \
+    libjson-c5 \
+    libevent-2.1-7t64 \
     libgcrypt20 \
-    libplist3 \
+    libplist-2.0-4 \
     libsodium23 \
-    libunistring2 \
+    libunistring5 \
     libuuid1 \
-    libwebsockets18 \
+    libwebsockets19t64 \
     libmxml1 \
     libprotobuf-c1 \
     libsqlite3-0 \

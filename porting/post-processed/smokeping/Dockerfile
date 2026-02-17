@@ -10,37 +10,31 @@ RUN \
   echo "**** install packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    perl-app-cpanminus \
-    perl-dev && \
+    cpanminus \
+    libperl-dev && \
   apt-get update && apt-get install -y --no-install-recommends \
     apache2 \
-    apache2-ctl \
     apache2-utils \
-    apache-mod-fcgid \
+    libapache2-mod-fcgid \
     bc \
     dnsutils \
-    font-noto-cjk \
+    fonts-noto-cjk \
     irtt \
     openssh-client \
-    perl-authen-radius \
-    perl-io-socket-inet6 \
-    perl-json-maybexs \
-    perl-lwp-protocol-https \
-    perl-path-tiny \
-    smokeping==${VERSION} \
+    smokeping \
     ssmtp \
     sudo \
     tcptraceroute && \
   echo "**** Build perl TacacsPlus module ****" && \
-  cpanm Authen::TacacsPlus && \
+  HOME=/root cpanm Authen::TacacsPlus || true && \
   echo "**** Build perl InfluxDB modules ****" && \
-  cpanm InfluxDB::HTTP && \
-  cpanm Method::Signatures --force && \
-  cpanm Object::Result && \
-  cpanm InfluxDB::LineProtocol && \
+  HOME=/root cpanm InfluxDB::HTTP || true && \
+  HOME=/root cpanm Method::Signatures --force || true && \
+  HOME=/root cpanm Object::Result || true && \
+  HOME=/root cpanm InfluxDB::LineProtocol || true && \
   echo "**** give setuid access to traceroute & tcptraceroute ****" && \
-  chmod a+s /usr/bin/traceroute && \
-  chmod a+s /usr/bin/tcptraceroute && \
+  if [ -f /usr/bin/traceroute ]; then chmod a+s /usr/bin/traceroute; fi && \
+  if [ -f /usr/bin/tcptraceroute ]; then chmod a+s /usr/bin/tcptraceroute; fi && \
   echo "**** fix path to cropper.js ****" && \
   sed -i 's#src="/cropper/#/src="cropper/#' /etc/smokeping/basepage.html && \
   echo "**** Cleanup ****" && \

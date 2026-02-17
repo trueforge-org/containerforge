@@ -17,7 +17,7 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     libjpeg-turbo8 \
-    libwebp-tools \
+    webp \
     nodejs \
     zlib1g && \
   echo "**** install mylar3 ****" && \
