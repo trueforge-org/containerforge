@@ -1,19 +1,20 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 4.94kB done
-#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 3)
-#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 6)
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 828B / 828B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 ...
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.96kB done
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 3)
+#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 6)
+#2 DONE 0.0s
 
-#3 [internal] load metadata for ghcr.io/trueforge-org/picons-builder:latest
-#3 ERROR: failed to authorize: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 CANCELED
+#4 [internal] load metadata for ghcr.io/trueforge-org/picons-builder:latest
+#4 ERROR: failed to authorize: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden
 ------
  > [internal] load metadata for ghcr.io/trueforge-org/picons-builder:latest:
 ------
@@ -29,4 +30,4 @@ Dockerfile:3
    4 |     
    5 |     
 --------------------
-ERROR: failed to build: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden
+ERROR: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden

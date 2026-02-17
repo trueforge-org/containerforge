@@ -46,11 +46,11 @@ RUN \
     pkgconf \
     pngquant \
     python3 \
-    sdl2-dev \
+    libsdl2-dev \
     uriparser-dev \
     x264-dev \
     x265-dev \
-    zlib-dev
+    zlib1g-dev
 
 RUN \
   echo "**** remove musl iconv.h and replace with gnu-iconv.h ****" && \
@@ -172,7 +172,7 @@ RUN \
     intel-media-driver \
     libvpx \
     libxml2 \
-    libxslt \
+    libxslt1.1 \
     linux-headers-generic \
     mesa-va-gallium \
     opus \

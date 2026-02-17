@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 global-fix validation pass)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Blocked by external 403 when pulling ghcr.io/trueforge-org/picons-builder base dependency.
+- Full log: `amd64-build.log`

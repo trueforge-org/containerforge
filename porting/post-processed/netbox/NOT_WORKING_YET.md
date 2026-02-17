@@ -32,3 +32,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Build/install remains constrained by long pip dependency resolution/network access in this environment.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 global-fix validation pass)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Still constrained by long pip dependency/index resolution network issues during install.
+- Full log: `amd64-build.log`

@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 55.10 E: Unable to locate package libhiredis0.14
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 global-fix validation pass)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Still failing in deep build chain; additional dependency/runtime adjustments remain.
+- Full log: `amd64-build.log`
