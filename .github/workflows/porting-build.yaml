@@ -1,0 +1,64 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Porting Build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    name: Plan
+    runs-on: ubuntu-latest
+    outputs:
+      containers: ${{ steps.containers.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
+
+      - name: Build Matrix
+        id: containers
+        run: |
+          matrix=$(find ./porting -mindepth 2 -maxdepth 3 -name docker-bake.hcl \
+            -not -path './porting/templates/*' \
+            -printf '%h\n' | sort | jq --raw-input --slurp --compact-output 'split("\n") | map(select(length > 0))')
+          echo "matrix=${matrix}" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Build ${{ matrix.container }}
+    needs: plan
+    if: ${{ needs.plan.outputs.containers != '[]' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        container: ${{ fromJSON(needs.plan.outputs.containers) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
+
+      - name: Build Container
+        run: |
+          log_file="${{ matrix.container }}/build.log"
+          (
+            cd "${{ matrix.container }}"
+            docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local
+          ) 2>&1 | tee "$log_file"
+
+      - name: Get Container Name
+        id: container
+        run: echo "name=$(basename '${{ matrix.container }}')" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Build Log
+        if: always()
+        uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
+        with:
+          name: ${{ steps.container.outputs.name }}-build-log
+          path: ${{ matrix.container }}/build.log
+          if-no-files-found: error
