@@ -156,12 +156,14 @@ jobs:
             *.labels.wud.watch=true
             *.labels.wud.watch.digest=true
             *.labels.wud.tag.include=^\d+\.\d+\.\d+(?:\.\d+)?$
+            *.labels.wud.compose.threshold=minor
             *.labels.wud.display.name=${{ inputs.app }}
             *.labels.wud.link.template=https://quay.io/repository/containerforge/${{ inputs.app }}?tab=tags
             *.labels.dd.watch=true
             *.labels.dd.watch.digest=true
             *.labels.dd.tag.include=^\d+\.\d+\.\d+(?:\.\d+)?$
             *.labels.dd.display.name=${{ inputs.app }}
+            *.labels.dd.compose.threshold=minor
             *.labels.dd.link.template=https://quay.io/repository/containerforge/${{ inputs.app }}?tab=tags
             *.labels.com.centurylinklabs.watchtower.enable=true
             *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }},push=${{ env.PUSH }},push-by-digest=true,name-canonical=true,compression=zstd,force-compression=true
