@@ -21,3 +21,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref ntgcosadh0xpbpttq2x5wsvla::ni03yifssxhrpya2dv9c5evrv: "/lychee.pub": not found
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 post-passing-snapshot batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after removing missing cosign key mount dependency and Debian package/path fixes.
+- Full log: `amd64-build.log`

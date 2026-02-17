@@ -5,366 +5,2020 @@
 #1 DONE 0.0s
 
 #2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 10.74kB done
+#2 transferring dockerfile: 10.77kB done
 #2 DONE 0.0s
 
 #3 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
-#3 DONE 0.3s
+#3 DONE 0.1s
 
-#4 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#4 DONE 0.3s
+#4 [internal] load metadata for ghcr.io/trueforge-org/python-node:3.13.12
+#4 DONE 0.1s
 
-#5 [internal] load .dockerignore
-#5 transferring context: 2B done
-#5 DONE 0.0s
+#5 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#5 DONE 0.2s
 
-#6 [buildstage 1/6] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#6 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#6 CACHED
+#6 [internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
 
-#7 [wwwstage 1/3] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
+#7 [nodebuilder 1/4] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c
 #7 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:b003160352643fa8b3341f2550c484d1ec754078df700f7a87948584e0a5939c 0.0s done
-#7 CACHED
+#7 DONE 0.0s
 
-#8 [internal] load build context
-#8 transferring context: 60.23kB 0.0s done
+#8 [wwwstage 1/3] FROM ghcr.io/trueforge-org/python-node:3.13.12@sha256:6d333e0771503ca08dcde722688d80d98436e3e390d1dc74c704e573e89dd050
+#8 resolve ghcr.io/trueforge-org/python-node:3.13.12@sha256:6d333e0771503ca08dcde722688d80d98436e3e390d1dc74c704e573e89dd050 0.0s done
 #8 DONE 0.0s
 
-#9 [nodebuilder 2/4] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*
-#9 0.204 **** install build deps ****
-#9 0.288 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#9 0.465 Get:2 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#9 0.589 Get:3 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#9 0.614 Get:4 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#9 0.691 Get:5 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#9 2.763 Get:6 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#9 2.895 Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#9 2.929 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#9 2.967 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#9 3.185 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#9 3.214 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#9 3.240 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#9 3.267 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#9 3.295 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#9 3.325 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#9 3.361 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#9 3.386 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#9 3.412 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#9 4.230 Fetched 36.1 MB in 4s (9,038 kB/s)
-#9 4.230 Reading package lists...
-#9 5.142 Reading package lists...
-#9 6.043 Building dependency tree...
-#9 6.299 Reading state information...
-#9 6.501 python3 is already the newest version (3.12.3-0ubuntu2.1).
-#9 6.501 python3 set to manually installed.
-#9 6.501 The following additional packages will be installed:
-#9 6.501   binutils binutils-common binutils-x86-64-linux-gnu bzip2 cmake-data cpp
-#9 6.501   cpp-13 cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev g++-13
-#9 6.501   g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc-13 gcc-13-base
-#9 6.501   gcc-13-x86-64-linux-gnu gcc-14-base gcc-x86-64-linux-gnu libarchive13t64
-#9 6.501   libasan8 libasyncns0 libatomic1 libbinutils libblkid-dev libbsd0 libcc1-0
-#9 6.501   libctf-nobfd0 libctf0 libdpkg-perl libffi-dev libflac12t64 libgcc-13-dev
-#9 6.501   libgcc-s1 libgirepository-2.0-0 libglib2.0-dev libglib2.0-dev-bin libgomp1
-#9 6.501   libgprofng0 libhwasan0 libisl23 libitm1 libjansson4 libjsoncpp25 liblsan0
-#9 6.501   libmount-dev libmp3lame0 libmpc3 libmpfr6 libmpg123-0t64 libogg0 libopus0
-#9 6.501   libpcre2-16-0 libpcre2-32-0 libpcre2-dev libpcre2-posix3 libpkgconf3
-#9 6.502   libpulse-mainloop-glib0 libpulse0 libquadmath0 librhash0 libselinux1-dev
-#9 6.502   libsepol-dev libsframe1 libsndfile1 libstdc++-13-dev libstdc++6 libtsan2
-#9 6.502   libubsan1 libuv1t64 libvorbis0a libvorbisenc2 libx11-6 libx11-data
-#9 6.502   libx11-xcb1 libxau6 libxcb1 libxdmcp6 lto-disabled-list patch pkgconf
-#9 6.502   pkgconf-bin python3-packaging uuid-dev zlib1g-dev
-#9 6.503 Suggested packages:
-#9 6.503   binutils-doc gprofng-gui bzip2-doc cmake-doc cmake-format elpa-cmake-mode
-#9 6.503   ninja-build cpp-doc gcc-13-locales cpp-13-doc debian-keyring g++-multilib
-#9 6.503   g++-13-multilib gcc-13-doc gcc-multilib manpages-dev autoconf automake
-#9 6.503   libtool flex bison gdb gcc-doc gcc-13-multilib gdb-x86-64-linux-gnu lrzip
-#9 6.503   bzr gir1.2-glib-2.0-dev libglib2.0-doc libgdk-pixbuf2.0-bin libxml2-utils
-#9 6.503   opus-tools pulseaudio libstdc++-13-doc make-doc ed diffutils-doc
-#9 6.503 Recommended packages:
-#9 6.503   fakeroot libalgorithm-merge-perl libfile-fcntllock-perl
-#9 6.503   liblocale-gettext-perl
-#9 6.610 The following NEW packages will be installed:
-#9 6.610   binutils binutils-common binutils-x86-64-linux-gnu build-essential bzip2
-#9 6.610   cmake cmake-data cpp cpp-13 cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu
-#9 6.610   dpkg-dev g++ g++-13 g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13
-#9 6.610   gcc-13-base gcc-13-x86-64-linux-gnu gcc-x86-64-linux-gnu libarchive13t64
-#9 6.610   libasan8 libasyncns0 libatomic1 libbinutils libblkid-dev libbsd0 libcc1-0
-#9 6.611   libctf-nobfd0 libctf0 libdpkg-perl libffi-dev libflac12t64 libgcc-13-dev
-#9 6.611   libgirepository-2.0-0 libglib2.0-dev libglib2.0-dev-bin libgomp1 libgprofng0
-#9 6.611   libhwasan0 libisl23 libitm1 libjansson4 libjsoncpp25 liblsan0 libmount-dev
-#9 6.611   libmp3lame0 libmpc3 libmpfr6 libmpg123-0t64 libogg0 libopus0 libpcre2-16-0
-#9 6.611   libpcre2-32-0 libpcre2-dev libpcre2-posix3 libpkgconf3 libpulse-dev
-#9 6.611   libpulse-mainloop-glib0 libpulse0 libquadmath0 librhash0 libselinux1-dev
-#9 6.611   libsepol-dev libsframe1 libsndfile1 libstdc++-13-dev libtsan2 libubsan1
-#9 6.611   libuv1t64 libvorbis0a libvorbisenc2 libx11-6 libx11-data libx11-xcb1 libxau6
-#9 6.611   libxcb1 libxdmcp6 lto-disabled-list make patch pkgconf pkgconf-bin
-#9 6.612   python3-packaging uuid-dev zlib1g-dev
-#9 6.612 The following packages will be upgraded:
-#9 6.613   gcc-14-base libgcc-s1 libstdc++6
-#9 6.662 3 upgraded, 87 newly installed, 0 to remove and 2 not upgraded.
-#9 6.662 Need to get 89.6 MB of archives.
-#9 6.662 After this operation, 309 MB of additional disk space will be used.
-#9 6.662 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]
-#9 6.689 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]
-#9 ...
+#9 [buildstage 1/6] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#9 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#9 DONE 0.0s
 
-#10 [wwwstage 2/3] RUN   echo "**** build clientside ****" &&   apt-get update && apt-get install -y --no-install-recommends bzip2 &&   export QT_QPA_PLATFORM=offscreen &&   export QT_QPA_FONTDIR=/usr/share/fonts &&   mkdir /src &&   cd /src &&   wget https://github.com/kasmtech/noVNC/tarball/46412d23aff1f45dffa83fafb04a683282c8db58 -O -     | tar  --strip-components=1 -xz &&   npm install --legacy-peer-deps --ignore-scripts
-#10 0.209 **** build clientside ****
-#10 0.287 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#10 0.472 Get:2 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#10 0.592 Get:3 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#10 0.649 Get:4 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#10 0.675 Get:5 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#10 2.202 Get:6 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#10 2.335 Get:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#10 2.368 Get:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#10 2.405 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#10 2.619 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#10 2.647 Get:11 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#10 2.677 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#10 2.701 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#10 2.733 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#10 2.764 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#10 2.791 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#10 2.817 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#10 2.843 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#10 3.708 Fetched 36.1 MB in 3s (10.4 MB/s)
-#10 3.708 Reading package lists...
-#10 4.612 Reading package lists...
-#10 5.506 Building dependency tree...
-#10 5.741 Reading state information...
-#10 5.956 Suggested packages:
-#10 5.956   bzip2-doc
-#10 5.983 The following NEW packages will be installed:
-#10 5.985   bzip2
-#10 6.030 0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.
-#10 6.030 Need to get 34.5 kB of archives.
-#10 6.030 After this operation, 112 kB of additional disk space will be used.
-#10 6.030 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
-#10 6.161 debconf: delaying package configuration, since apt-utils is not installed
-#10 6.200 Fetched 34.5 kB in 0s (918 kB/s)
-#10 6.215 Selecting previously unselected package bzip2.
-#10 6.215 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
-#10 6.231 Preparing to unpack .../bzip2_1.0.8-5.1build0.1_amd64.deb ...
-#10 6.232 Unpacking bzip2 (1.0.8-5.1build0.1) ...
-#10 6.257 Setting up bzip2 (1.0.8-5.1build0.1) ...
-#10 6.279 --2026-02-17 11:27:53--  https://github.com/kasmtech/noVNC/tarball/46412d23aff1f45dffa83fafb04a683282c8db58
-#10 6.282 Resolving github.com (github.com)... 140.82.112.3
-#10 6.283 Connecting to github.com (github.com)|140.82.112.3|:443... connected.
-#10 6.286 HTTP request sent, awaiting response... 302 Found
-#10 6.489 Location: https://codeload.github.com/kasmtech/noVNC/legacy.tar.gz/46412d23aff1f45dffa83fafb04a683282c8db58 [following]
-#10 6.489 --2026-02-17 11:27:53--  https://codeload.github.com/kasmtech/noVNC/legacy.tar.gz/46412d23aff1f45dffa83fafb04a683282c8db58
-#10 6.489 Resolving codeload.github.com (codeload.github.com)... 140.82.112.10
-#10 6.492 Connecting to codeload.github.com (codeload.github.com)|140.82.112.10|:443... connected.
-#10 6.496 HTTP request sent, awaiting response... 200 OK
-#10 6.661 Length: unspecified [application/x-gzip]
-#10 6.661 Saving to: ‘STDOUT’
-#10 6.661 
-#10 6.661      0K .......... .......... .......... .......... ..........  122M
-#10 6.661     50K .......... .......... .......... .......... .......... 26.2M
-#10 6.664    100K .......... .......... .......... .......... .......... 32.4M
-#10 6.665    150K .......... .......... .......... .......... ..........  113M
-#10 6.665    200K .......... .......... .......... .......... ..........  170M
-#10 6.665    250K .......... .......... .......... .......... .......... 1.89M
-#10 6.691    300K .......... .......... .......... .......... .......... 33.7M
-#10 6.693    350K .......... .......... .......... .......... .......... 26.2M
-#10 6.695    400K .......... .......... .......... .......... .......... 25.3M
-#10 6.696    450K .......... .......... .......... .......... .......... 3.57M
-#10 6.710    500K .......... .......... .......... .......... .......... 38.3M
-#10 6.711    550K .......... .......... .......... .......... ..........  289M
-#10 6.712    600K .......... .......... .......... .......... ..........  297M
-#10 6.730    650K .......... .......... .......... .......... .......... 2.59M
-#10 6.731    700K .......... .......... .......... .......... .......... 82.8M
-#10 6.731    750K .......... .......... .......... .......... ..........  105M
-#10 6.732    800K .......... .......... .......... .......... ..........  123M
-#10 6.732    850K .......... .......... .......... .......... ..........  185M
-#10 6.737    900K .......... .......... .......... .......... .......... 8.70M
-#10 6.738    950K .......... .......... .......... .......... ..........  137M
-#10 6.738   1000K .......... .......... .......... .......... .......... 2.21M
-#10 6.760   1050K .......... .......... .......... .......... ..........  211M
-#10 6.761   1100K .......... .......... .......... .......... ..........  221M
-#10 6.761   1150K .......... .......... .......... .......... ..........  266M
-#10 6.761   1200K .......... .......... .......... .......... ..........  125M
-#10 6.761   1250K .......... .......... .......... .......... .......... 2.03M
-#10 6.786   1300K .......... .......... .......... .......... ..........  151M
-#10 6.786   1350K .......... .......... .......... .......... ..........  281M
-#10 6.786   1400K .......... .......... .......... .......... .......... 90.0M
-#10 6.787   1450K .......... .......... .......... .......... ..........  144M
-#10 6.787   1500K .......... .......... .......... .......... .          63.6M=0.1s
-#10 6.788 
-#10 6.788 2026-02-17 11:27:53 (11.9 MB/s) - written to stdout [1578470]
-#10 6.788 
-#10 9.803 npm warn deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
-#10 10.41 npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
-#10 10.86 npm warn deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
-#10 11.00 npm warn deprecated rollup-plugin-node-resolve@5.2.0: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-node-resolve.
-#10 11.18 npm warn deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
-#10 11.98 npm warn deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
-#10 11.98 npm warn deprecated phantomjs-prebuilt@2.1.16: this package is now deprecated
-#10 12.22 npm warn deprecated nomnom@1.8.1: Package no longer supported. Contact support@npmjs.com for more info.
-#10 ...
+#10 [nodebuilder 4/4] RUN   echo "**** install node modules ****" &&   cd /kclient &&   npm install &&   rm -f package-lock.json
+#10 CACHED
 
-#9 [nodebuilder 2/4] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*
-#9 6.716 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]
-#9 6.741 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
-#9 6.767 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libjansson4 amd64 2.14-2build2 [32.8 kB]
-#9 6.792 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
-#9 6.818 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
-#9 6.842 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
-#9 6.868 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
-#9 6.893 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
-#9 6.918 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
-#9 6.945 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-common amd64 2.42-4ubuntu2.8 [240 kB]
-#9 6.971 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsframe1 amd64 2.42-4ubuntu2.8 [15.6 kB]
-#9 6.996 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbinutils amd64 2.42-4ubuntu2.8 [576 kB]
-#9 7.026 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf-nobfd0 amd64 2.42-4ubuntu2.8 [97.9 kB]
-#9 7.055 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf0 amd64 2.42-4ubuntu2.8 [94.5 kB]
-#9 7.081 Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgprofng0 amd64 2.42-4ubuntu2.8 [849 kB]
-#9 7.108 Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.42-4ubuntu2.8 [2,463 kB]
-#9 7.137 Get:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils amd64 2.42-4ubuntu2.8 [18.1 kB]
-#9 7.163 Get:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-base amd64 13.3.0-6ubuntu2~24.04.1 [51.6 kB]
-#9 7.190 Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libisl23 amd64 0.26-3build1.1 [680 kB]
-#9 7.216 Get:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr6 amd64 4.2.1-1build1.1 [353 kB]
-#9 7.241 Get:23 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpc3 amd64 1.3.1-1build1.1 [54.6 kB]
-#9 7.267 Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [10.7 MB]
-#9 7.351 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13 amd64 13.3.0-6ubuntu2~24.04.1 [1,042 B]
-#9 7.376 Get:26 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [5,326 B]
-#9 7.401 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp amd64 4:13.2.0-7ubuntu1 [22.4 kB]
-#9 7.426 Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04.1 [48.0 kB]
-#9 7.452 Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04.1 [148 kB]
-#9 7.478 Get:30 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.7 kB]
-#9 7.504 Get:31 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.5 kB]
-#9 7.529 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04.1 [3,027 kB]
-#9 7.569 Get:33 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,322 kB]
-#9 7.601 Get:34 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04.1 [2,772 kB]
-#9 7.642 Get:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1,184 kB]
-#9 7.675 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,641 kB]
-#9 7.708 Get:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [153 kB]
-#9 7.735 Get:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2,681 kB]
-#9 7.775 Get:39 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [21.1 MB]
-#9 7.931 Get:40 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13 amd64 13.3.0-6ubuntu2~24.04.1 [494 kB]
-#9 7.948 Get:41 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [1,212 B]
-#9 8.141 Get:42 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc amd64 4:13.2.0-7ubuntu1 [5,018 B]
-#9 8.233 Get:43 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2,420 kB]
-#9 8.990 Get:44 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [12.2 MB]
-#9 9.403 Get:45 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13 amd64 13.3.0-6ubuntu2~24.04.1 [16.0 kB]
-#9 9.497 Get:46 http://archive.ubuntu.com/ubuntu noble/main amd64 g++-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [964 B]
-#9 9.590 Get:47 http://archive.ubuntu.com/ubuntu noble/main amd64 g++ amd64 4:13.2.0-7ubuntu1 [1,100 B]
-#9 9.683 Get:48 http://archive.ubuntu.com/ubuntu noble/main amd64 make amd64 4.3-4.1build2 [180 kB]
-#9 9.781 Get:49 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdpkg-perl all 1.22.6ubuntu6.5 [269 kB]
-#9 9.876 Get:50 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
-#9 9.970 Get:51 http://archive.ubuntu.com/ubuntu noble/main amd64 patch amd64 2.7.6-7build3 [104 kB]
-#9 10.06 Get:52 http://archive.ubuntu.com/ubuntu noble/main amd64 lto-disabled-list all 47 [12.4 kB]
-#9 10.16 Get:53 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 dpkg-dev all 1.22.6ubuntu6.5 [1,074 kB]
-#9 10.26 Get:54 http://archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4,928 B]
-#9 10.36 Get:55 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libarchive13t64 amd64 3.7.2-2ubuntu0.5 [382 kB]
-#9 10.45 Get:56 http://archive.ubuntu.com/ubuntu noble/main amd64 libjsoncpp25 amd64 1.9.5-6build1 [82.8 kB]
-#9 10.55 Get:57 http://archive.ubuntu.com/ubuntu noble/main amd64 librhash0 amd64 1.4.3-3build1 [129 kB]
-#9 10.64 Get:58 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake-data all 3.28.3-1build7 [2,155 kB]
-#9 10.75 Get:59 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake amd64 3.28.3-1build7 [11.2 MB]
-#9 11.05 Get:60 http://archive.ubuntu.com/ubuntu noble/main amd64 libasyncns0 amd64 0.8-6build4 [11.3 kB]
-#9 11.15 Get:61 http://archive.ubuntu.com/ubuntu noble/main amd64 libogg0 amd64 1.3.5-3build1 [22.7 kB]
-#9 11.24 Get:62 http://archive.ubuntu.com/ubuntu noble/main amd64 libflac12t64 amd64 1.4.3+ds-2.1ubuntu2 [197 kB]
-#9 11.34 Get:63 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgirepository-2.0-0 amd64 2.80.0-6ubuntu3.8 [73.6 kB]
-#9 11.44 Get:64 http://archive.ubuntu.com/ubuntu noble/main amd64 libffi-dev amd64 3.4.6-1build1 [62.8 kB]
-#9 11.53 Get:65 http://archive.ubuntu.com/ubuntu noble/main amd64 python3-packaging all 24.0-1 [41.1 kB]
-#9 11.62 Get:66 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-dev-bin amd64 2.80.0-6ubuntu3.8 [138 kB]
-#9 11.72 Get:67 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 uuid-dev amd64 2.39.3-9ubuntu6.4 [33.5 kB]
-#9 11.82 Get:68 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libblkid-dev amd64 2.39.3-9ubuntu6.4 [204 kB]
-#9 11.91 Get:69 http://archive.ubuntu.com/ubuntu noble/main amd64 libsepol-dev amd64 3.5-2build1 [384 kB]
-#9 12.01 Get:70 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpcre2-16-0 amd64 10.42-4ubuntu2.1 [210 kB]
-#9 12.02 Err:71 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpcre2-32-0 amd64 10.42-4ubuntu2.1
-#9 12.02   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.02 Err:72 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpcre2-posix3 amd64 10.42-4ubuntu2.1
-#9 12.02   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.02 Err:73 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpcre2-dev amd64 10.42-4ubuntu2.1
-#9 12.02   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.03 Err:74 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libselinux1-dev amd64 3.5-2ubuntu2.1
-#9 12.03   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.03 Err:75 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmount-dev amd64 2.39.3-9ubuntu6.4
-#9 12.03   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.03 Err:76 http://archive.ubuntu.com/ubuntu noble/main amd64 libpkgconf3 amd64 1.8.1-2build1
-#9 12.03   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.03 Err:77 http://archive.ubuntu.com/ubuntu noble/main amd64 pkgconf-bin amd64 1.8.1-2build1
-#9 12.03   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.04 Err:78 http://archive.ubuntu.com/ubuntu noble/main amd64 pkgconf amd64 1.8.1-2build1
-#9 12.04   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.04 Err:79 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 zlib1g-dev amd64 1:1.3.dfsg-3.1ubuntu2.1
-#9 12.04   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.04 Ign:80 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-dev amd64 2.80.0-6ubuntu3.8
-#9 12.05 Err:81 http://archive.ubuntu.com/ubuntu noble/main amd64 libmp3lame0 amd64 3.100-6build1
-#9 12.05   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.05 Ign:82 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpg123-0t64 amd64 1.32.5-1ubuntu1.1
-#9 12.05 Err:83 http://archive.ubuntu.com/ubuntu noble/main amd64 libopus0 amd64 1.4-1build1
-#9 12.05   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.05 Err:84 http://archive.ubuntu.com/ubuntu noble/main amd64 libvorbis0a amd64 1.3.7-1build3
-#9 12.05   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.05 Err:85 http://archive.ubuntu.com/ubuntu noble/main amd64 libvorbisenc2 amd64 1.3.7-1build3
-#9 12.05   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.05 Ign:86 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsndfile1 amd64 1.2.2-1ubuntu5.24.04.1
-#9 12.06 Err:87 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-xcb1 amd64 2:1.8.7-1build1
-#9 12.06   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.06 Err:88 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpulse0 amd64 1:16.1+dfsg1-2ubuntu10.1
-#9 12.06   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.06 Err:89 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpulse-mainloop-glib0 amd64 1:16.1+dfsg1-2ubuntu10.1
-#9 12.06   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.07 Err:90 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 libpulse-dev amd64 1:16.1+dfsg1-2ubuntu10.1
-#9 12.07   403  Forbidden [IP: 91.189.92.24 80]
-#9 12.20 Get:80 http://security.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-dev amd64 2.80.0-6ubuntu3.8 [1,860 kB]
-#9 12.41 Get:82 http://security.ubuntu.com/ubuntu noble-updates/main amd64 libmpg123-0t64 amd64 1.32.5-1ubuntu1.1 [169 kB]
-#9 12.43 Get:86 http://security.ubuntu.com/ubuntu noble-updates/main amd64 libsndfile1 amd64 1.2.2-1ubuntu5.24.04.1 [209 kB]
-#9 12.45 Fetched 86.6 MB in 6s (14.9 MB/s)
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pcre2/libpcre2-32-0_10.42-4ubuntu2.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pcre2/libpcre2-posix3_10.42-4ubuntu2.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pcre2/libpcre2-dev_10.42-4ubuntu2.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libs/libselinux/libselinux1-dev_3.5-2ubuntu2.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/u/util-linux/libmount-dev_2.39.3-9ubuntu6.4_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pkgconf/libpkgconf3_1.8.1-2build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pkgconf/pkgconf-bin_1.8.1-2build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pkgconf/pkgconf_1.8.1-2build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/z/zlib/zlib1g-dev_1.3.dfsg-3.1ubuntu2.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/l/lame/libmp3lame0_3.100-6build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/o/opus/libopus0_1.4-1build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.7-1build3_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.7-1build3_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libx/libx11/libx11-xcb1_1.8.7-1build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_16.1%2bdfsg1-2ubuntu10.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse-mainloop-glib0_16.1%2bdfsg1-2ubuntu10.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/universe/p/pulseaudio/libpulse-dev_16.1%2bdfsg1-2ubuntu10.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-#9 12.45 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
-#9 ERROR: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+#11 [nodebuilder 3/4] RUN   echo "**** grab source ****" &&   mkdir -p /kclient &&   if [ -z ${KCLIENT_RELEASE+x} ]; then     KCLIENT_RELEASE=$(curl -sI -L "https://github.com/linuxserver/kclient/releases/latest" | awk -F/ '/^location:/ {print $NF}' | tr -d '\r');   fi &&   (curl -fL -o   /tmp/kclient.tar.gz     "https://github.com/linuxserver/kclient/archive/refs/tags/${KCLIENT_RELEASE}.tar.gz" || curl -fL -o   /tmp/kclient.tar.gz     "https://github.com/linuxserver/kclient/archive/refs/heads/master.tar.gz") &&   tar xf   /tmp/kclient.tar.gz -C     /kclient/ --strip-components=1
+#11 CACHED
 
-#10 [wwwstage 2/3] RUN   echo "**** build clientside ****" &&   apt-get update && apt-get install -y --no-install-recommends bzip2 &&   export QT_QPA_PLATFORM=offscreen &&   export QT_QPA_FONTDIR=/usr/share/fonts &&   mkdir /src &&   cd /src &&   wget https://github.com/kasmtech/noVNC/tarball/46412d23aff1f45dffa83fafb04a683282c8db58 -O -     | tar  --strip-components=1 -xz &&   npm install --legacy-peer-deps --ignore-scripts
-#10 CANCELED
+#12 [nodebuilder 2/4] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*
+#12 CACHED
+
+#13 [wwwstage 3/3] RUN   echo "**** organize output ****" &&   mkdir /build-out &&   cd /src &&   rm -rf node_modules/ &&   cp -R ./* /build-out/ &&   cd /build-out &&   rm *.md &&   rm AUTHORS &&   if [ -f index.html ]; then cp index.html vnc.html; elif [ -f vnc.html ]; then cp vnc.html index.html; fi &&   mkdir Downloads
+#13 CACHED
+
+#14 [wwwstage 2/3] RUN   echo "**** build clientside ****" &&   apt-get update && apt-get install -y --no-install-recommends bzip2 &&   export QT_QPA_PLATFORM=offscreen &&   export QT_QPA_FONTDIR=/usr/share/fonts &&   mkdir /src &&   cd /src &&   wget https://github.com/kasmtech/noVNC/tarball/46412d23aff1f45dffa83fafb04a683282c8db58 -O -     | tar  --strip-components=1 -xz &&   npm install --legacy-peer-deps --ignore-scripts
+#14 CACHED
+
+#15 [buildstage 2/6] COPY --from=wwwstage /build-out /www
+#15 CACHED
+
+#16 [stage-3 2/7] COPY --from=nodebuilder /kclient /kclient
+#16 CACHED
+
+#17 [internal] load build context
+#17 transferring context: 12.33kB done
+#17 DONE 0.0s
+
+#18 [buildstage 3/6] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         autoconf         automake         cmake         libudev-dev         xfonts-base         xfonts-75dpi         xfonts-100dpi         libdrm-dev         libepoxy-dev         libfreetype-dev         libjpeg-turbo8-dev         libjpeg-turbo8         libturbojpeg0-dev         libpciaccess-dev         libtool         libwebp-dev         libx11-dev         libxau-dev         libxcb1-dev         libxcursor-dev         libxdmcp-dev         libxext-dev         libxfont-dev         libxkbfile-dev         libxrandr-dev         libxshmfence-dev         libxtst-dev         libgl1-mesa-dev         libgl1-mesa-dri         meson         pkg-config         nettle-dev         libssl-dev         libpixman-1-dev         libpam0g-dev         procps         passwd         libwayland-dev         wayland-protocols         libxcb-util-dev         libxcb-image0-dev         libxcb-keysyms1-dev         libxcb-render-util0-dev         libxcb-icccm4-dev         xinit         x11-xkb-utils         xkb-data         xserver-xorg-core         xserver-xorg-dev         xtrans-dev &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*
+#18 0.155 **** install build deps ****
+#18 0.231 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#18 0.320 Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#18 0.345 Get:3 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#18 0.390 Get:4 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#18 0.480 Get:5 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#18 0.588 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#18 0.606 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#18 0.627 Get:8 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#18 0.645 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#18 0.667 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#18 0.687 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#18 0.709 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#18 0.726 Get:13 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#18 0.744 Get:14 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#18 0.969 Get:15 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#18 1.425 Get:16 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#18 1.525 Get:17 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#18 1.812 Get:18 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#18 1.930 Fetched 36.1 MB in 2s (20.7 MB/s)
+#18 1.930 Reading package lists...
+#18 2.673 Reading package lists...
+#18 3.417 Building dependency tree...
+#18 3.566 Reading state information...
+#18 3.729 procps is already the newest version (2:4.0.4-4ubuntu3.2).
+#18 3.729 passwd is already the newest version (1:4.13+dfsg1-4ubuntu3.2).
+#18 3.729 The following additional packages will be installed:
+#18 3.729   autotools-dev binutils binutils-common binutils-x86-64-linux-gnu bzip2
+#18 3.729   cmake-data cpp cpp-13 cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev
+#18 3.729   file g++ g++-13 g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13
+#18 3.729   gcc-13-base gcc-13-x86-64-linux-gnu gcc-14-base gcc-x86-64-linux-gnu
+#18 3.729   keyboard-configuration libarchive13t64 libasan8 libatomic1 libbinutils
+#18 3.729   libbrotli-dev libbsd0 libbz2-dev libcc1-0 libctf-nobfd0 libctf0 libdpkg-perl
+#18 3.729   libdrm-amdgpu1 libdrm-common libdrm-intel1 libdrm-nouveau2 libdrm-radeon1
+#18 3.729   libdrm2 libedit2 libegl-dev libegl-mesa0 libegl1 libepoxy0 libffi-dev
+#18 3.729   libfontenc-dev libfontenc1 libgbm1 libgcc-13-dev libgcc-s1 libgl-dev libgl1
+#18 3.729   libgles-dev libgles1 libgles2 libglvnd-core-dev libglvnd-dev libglvnd0
+#18 3.729   libglx-dev libglx-mesa0 libglx0 libgmp-dev libgmpxx4ldbl libgomp1
+#18 3.729   libgprofng0 libhwasan0 libice6 libisl23 libitm1 libjansson4 libjsoncpp25
+#18 3.729   libllvm20 liblocale-gettext-perl liblsan0 libmagic-mgc libmagic1t64 libmpc3
+#18 3.729   libmpfr6 libopengl-dev libopengl0 libpciaccess0 libpixman-1-0 libpkgconf3
+#18 3.729   libpng-dev libpthread-stubs0-dev libquadmath0 librhash0 libsensors-config
+#18 3.729   libsensors5 libsframe1 libsharpyuv-dev libsharpyuv0 libsm6 libstdc++-13-dev
+#18 3.729   libstdc++6 libtsan2 libturbojpeg libubsan1 libuv1t64 libvulkan1
+#18 3.729   libwayland-bin libwayland-client0 libwayland-cursor0 libwayland-egl1
+#18 3.729   libwayland-server0 libwebp7 libwebpdecoder3 libwebpdemux2 libwebpmux3
+#18 3.729   libx11-6 libx11-data libx11-xcb1 libxau6 libxaw7 libxcb-dri3-0 libxcb-glx0
+#18 3.729   libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-present0 libxcb-randr0
+#18 3.729   libxcb-render-util0 libxcb-render0 libxcb-render0-dev libxcb-shm0
+#18 3.729   libxcb-shm0-dev libxcb-sync1 libxcb-util1 libxcb-xfixes0 libxcb1 libxcursor1
+#18 3.729   libxcvt-dev libxcvt0 libxdmcp6 libxext6 libxfixes-dev libxfixes3 libxfont2
+#18 3.729   libxi-dev libxi6 libxkbfile1 libxmu6 libxmuu1 libxpm4 libxrandr2
+#18 3.729   libxrender-dev libxrender1 libxshmfence1 libxt6t64 libxtst6 libxxf86vm1
+#18 3.729   lto-disabled-list m4 make mesa-common-dev mesa-libgallium ninja-build patch
+#18 3.730   pkgconf pkgconf-bin python3-setuptools udev x11-common x11proto-dev xauth
+#18 3.730   xfonts-encodings xfonts-utils xorg-sgml-doctools xserver-common zlib1g-dev
+#18 3.730 Suggested packages:
+#18 3.730   autoconf-archive gnu-standards autoconf-doc gettext binutils-doc gprofng-gui
+#18 3.730   bzip2-doc cmake-doc cmake-format elpa-cmake-mode cpp-doc gcc-13-locales
+#18 3.730   cpp-13-doc debian-keyring g++-multilib g++-13-multilib gcc-13-doc
+#18 3.730   gcc-multilib manpages-dev flex bison gdb gcc-doc gcc-13-multilib
+#18 3.730   gdb-x86-64-linux-gnu lrzip bzr freetype2-doc gmp-doc libgmp10-doc
+#18 3.730   libmpfr-dev pciutils lm-sensors libssl-doc libstdc++-13-doc libtool-doc
+#18 3.730   gfortran | fortran95-compiler gcj-jdk libwayland-doc libx11-doc libxcb-doc
+#18 3.730   libxext-doc m4-doc make-doc ed diffutils-doc python-setuptools-doc xfs
+#18 3.730   | xserver xfonts-scalable
+#18 3.730 Recommended packages:
+#18 3.730   fakeroot libalgorithm-merge-perl bzip2-doc libfile-fcntllock-perl
+#18 3.730   libpng-tools libltdl-dev mesa-vulkan-drivers | vulkan-icd systemd-hwe-hwdb
+#18 3.730   xserver-xorg | xserver gnome-terminal | xterm | x-session-manager
+#18 3.730   | x-window-manager | x-terminal-emulator xcvt
+#18 3.932 The following NEW packages will be installed:
+#18 3.932   autoconf automake autotools-dev binutils binutils-common
+#18 3.932   binutils-x86-64-linux-gnu build-essential bzip2 cmake cmake-data cpp cpp-13
+#18 3.932   cpp-13-x86-64-linux-gnu cpp-x86-64-linux-gnu dpkg-dev file g++ g++-13
+#18 3.932   g++-13-x86-64-linux-gnu g++-x86-64-linux-gnu gcc gcc-13 gcc-13-base
+#18 3.932   gcc-13-x86-64-linux-gnu gcc-x86-64-linux-gnu keyboard-configuration
+#18 3.932   libarchive13t64 libasan8 libatomic1 libbinutils libbrotli-dev libbsd0
+#18 3.932   libbz2-dev libcc1-0 libctf-nobfd0 libctf0 libdpkg-perl libdrm-amdgpu1
+#18 3.932   libdrm-common libdrm-dev libdrm-intel1 libdrm-nouveau2 libdrm-radeon1
+#18 3.932   libdrm2 libedit2 libegl-dev libegl-mesa0 libegl1 libepoxy-dev libepoxy0
+#18 3.932   libffi-dev libfontenc-dev libfontenc1 libfreetype-dev libgbm1 libgcc-13-dev
+#18 3.932   libgl-dev libgl1 libgl1-mesa-dev libgl1-mesa-dri libgles-dev libgles1
+#18 3.932   libgles2 libglvnd-core-dev libglvnd-dev libglvnd0 libglx-dev libglx-mesa0
+#18 3.932   libglx0 libgmp-dev libgmpxx4ldbl libgomp1 libgprofng0 libhwasan0 libice6
+#18 3.932   libisl23 libitm1 libjansson4 libjpeg-turbo8 libjpeg-turbo8-dev libjsoncpp25
+#18 3.933   libllvm20 liblocale-gettext-perl liblsan0 libmagic-mgc libmagic1t64 libmpc3
+#18 3.933   libmpfr6 libopengl-dev libopengl0 libpam0g-dev libpciaccess-dev
+#18 3.933   libpciaccess0 libpixman-1-0 libpixman-1-dev libpkgconf3 libpng-dev
+#18 3.933   libpthread-stubs0-dev libquadmath0 librhash0 libsensors-config libsensors5
+#18 3.933   libsframe1 libsharpyuv-dev libsharpyuv0 libsm6 libssl-dev libstdc++-13-dev
+#18 3.933   libtool libtsan2 libturbojpeg libturbojpeg0-dev libubsan1 libudev-dev
+#18 3.933   libuv1t64 libvulkan1 libwayland-bin libwayland-client0 libwayland-cursor0
+#18 3.933   libwayland-dev libwayland-egl1 libwayland-server0 libwebp-dev libwebp7
+#18 3.933   libwebpdecoder3 libwebpdemux2 libwebpmux3 libx11-6 libx11-data libx11-dev
+#18 3.933   libx11-xcb1 libxau-dev libxau6 libxaw7 libxcb-dri3-0 libxcb-glx0
+#18 3.933   libxcb-icccm4 libxcb-icccm4-dev libxcb-image0 libxcb-image0-dev
+#18 3.933   libxcb-keysyms1 libxcb-keysyms1-dev libxcb-present0 libxcb-randr0
+#18 3.933   libxcb-render-util0 libxcb-render-util0-dev libxcb-render0
+#18 3.933   libxcb-render0-dev libxcb-shm0 libxcb-shm0-dev libxcb-sync1 libxcb-util-dev
+#18 3.933   libxcb-util1 libxcb-xfixes0 libxcb1 libxcb1-dev libxcursor-dev libxcursor1
+#18 3.933   libxcvt-dev libxcvt0 libxdmcp-dev libxdmcp6 libxext-dev libxext6
+#18 3.933   libxfixes-dev libxfixes3 libxfont-dev libxfont2 libxi-dev libxi6
+#18 3.933   libxkbfile-dev libxkbfile1 libxmu6 libxmuu1 libxpm4 libxrandr-dev libxrandr2
+#18 3.933   libxrender-dev libxrender1 libxshmfence-dev libxshmfence1 libxt6t64
+#18 3.933   libxtst-dev libxtst6 libxxf86vm1 lto-disabled-list m4 make mesa-common-dev
+#18 3.933   mesa-libgallium meson nettle-dev ninja-build patch pkg-config pkgconf
+#18 3.934   pkgconf-bin python3-setuptools udev wayland-protocols x11-common
+#18 3.934   x11-xkb-utils x11proto-dev xauth xfonts-100dpi xfonts-75dpi xfonts-base
+#18 3.934   xfonts-encodings xfonts-utils xinit xkb-data xorg-sgml-doctools
+#18 3.934   xserver-common xserver-xorg-core xserver-xorg-dev xtrans-dev zlib1g-dev
+#18 3.934 The following packages will be upgraded:
+#18 3.935   gcc-14-base libgcc-s1 libstdc++6
+#18 3.979 3 upgraded, 217 newly installed, 0 to remove and 2 not upgraded.
+#18 3.979 Need to get 163 MB of archives.
+#18 3.979 After this operation, 592 MB of additional disk space will be used.
+#18 3.979 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 liblocale-gettext-perl amd64 1.07-6ubuntu5 [15.8 kB]
+#18 3.998 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 xkb-data all 2.41-2ubuntu1.1 [397 kB]
+#18 4.017 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 keyboard-configuration all 1.226ubuntu1 [212 kB]
+#18 4.035 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-14-base amd64 14.2.0-4ubuntu2~24.04.1 [51.0 kB]
+#18 4.053 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++6 amd64 14.2.0-4ubuntu2~24.04.1 [792 kB]
+#18 4.071 Get:6 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-s1 amd64 14.2.0-4ubuntu2~24.04.1 [78.4 kB]
+#18 4.088 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#18 4.106 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 udev amd64 255.4-1ubuntu8.12 [1,874 kB]
+#18 4.126 Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libmagic-mgc amd64 1:5.45-3build1 [307 kB]
+#18 4.143 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libmagic1t64 amd64 1:5.45-3build1 [87.2 kB]
+#18 4.160 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 file amd64 1:5.45-3build1 [22.0 kB]
+#18 4.178 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm-common all 2.4.125-1ubuntu0.1~24.04.1 [9,174 B]
+#18 4.195 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm2 amd64 2.4.125-1ubuntu0.1~24.04.1 [41.3 kB]
+#18 4.212 Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#18 4.230 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libjansson4 amd64 2.14-2build2 [32.8 kB]
+#18 4.247 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libsensors-config all 1:3.6.0-9build1 [5,546 B]
+#18 4.264 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libsensors5 amd64 1:3.6.0-9build1 [26.6 kB]
+#18 4.281 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libuv1t64 amd64 1.48.0-1.1build1 [97.3 kB]
+#18 4.299 Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#18 4.316 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#18 4.336 Get:21 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#18 4.353 Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#18 4.371 Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#18 4.389 Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 libxext6 amd64 2:1.3.4-1build2 [30.4 kB]
+#18 4.406 Get:25 http://archive.ubuntu.com/ubuntu noble/main amd64 libxmuu1 amd64 2:1.1.3-3build2 [8,958 B]
+#18 4.423 Get:26 http://archive.ubuntu.com/ubuntu noble/main amd64 xauth amd64 1:1.1.2-1build1 [25.6 kB]
+#18 4.440 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 m4 amd64 1.4.19-4build1 [244 kB]
+#18 4.457 Get:28 http://archive.ubuntu.com/ubuntu noble/main amd64 autoconf all 2.71-3 [339 kB]
+#18 4.475 Get:29 http://archive.ubuntu.com/ubuntu noble/main amd64 autotools-dev all 20220109.1 [44.9 kB]
+#18 4.493 Get:30 http://archive.ubuntu.com/ubuntu noble/main amd64 automake all 1:1.16.5-1.3ubuntu1 [558 kB]
+#18 4.510 Get:31 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-common amd64 2.42-4ubuntu2.8 [240 kB]
+#18 4.528 Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsframe1 amd64 2.42-4ubuntu2.8 [15.6 kB]
+#18 4.545 Get:33 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbinutils amd64 2.42-4ubuntu2.8 [576 kB]
+#18 4.563 Get:34 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf-nobfd0 amd64 2.42-4ubuntu2.8 [97.9 kB]
+#18 4.581 Get:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libctf0 amd64 2.42-4ubuntu2.8 [94.5 kB]
+#18 4.598 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgprofng0 amd64 2.42-4ubuntu2.8 [849 kB]
+#18 4.616 Get:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.42-4ubuntu2.8 [2,463 kB]
+#18 4.636 Get:38 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 binutils amd64 2.42-4ubuntu2.8 [18.1 kB]
+#18 4.654 Get:39 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-base amd64 13.3.0-6ubuntu2~24.04.1 [51.6 kB]
+#18 4.671 Get:40 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libisl23 amd64 0.26-3build1.1 [680 kB]
+#18 4.689 Get:41 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpfr6 amd64 4.2.1-1build1.1 [353 kB]
+#18 4.707 Get:42 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libmpc3 amd64 1.3.1-1build1.1 [54.6 kB]
+#18 4.724 Get:43 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [10.7 MB]
+#18 4.789 Get:44 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 cpp-13 amd64 13.3.0-6ubuntu2~24.04.1 [1,042 B]
+#18 4.806 Get:45 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [5,326 B]
+#18 4.824 Get:46 http://archive.ubuntu.com/ubuntu noble/main amd64 cpp amd64 4:13.2.0-7ubuntu1 [22.4 kB]
+#18 4.841 Get:47 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcc1-0 amd64 14.2.0-4ubuntu2~24.04.1 [48.0 kB]
+#18 4.859 Get:48 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgomp1 amd64 14.2.0-4ubuntu2~24.04.1 [148 kB]
+#18 4.877 Get:49 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libitm1 amd64 14.2.0-4ubuntu2~24.04.1 [29.7 kB]
+#18 4.894 Get:50 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libatomic1 amd64 14.2.0-4ubuntu2~24.04.1 [10.5 kB]
+#18 4.912 Get:51 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libasan8 amd64 14.2.0-4ubuntu2~24.04.1 [3,027 kB]
+#18 4.940 Get:52 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 liblsan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,322 kB]
+#18 4.962 Get:53 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtsan2 amd64 14.2.0-4ubuntu2~24.04.1 [2,772 kB]
+#18 4.990 Get:54 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libubsan1 amd64 14.2.0-4ubuntu2~24.04.1 [1,184 kB]
+#18 5.012 Get:55 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libhwasan0 amd64 14.2.0-4ubuntu2~24.04.1 [1,641 kB]
+#18 5.043 Get:56 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libquadmath0 amd64 14.2.0-4ubuntu2~24.04.1 [153 kB]
+#18 5.061 Get:57 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgcc-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2,681 kB]
+#18 5.089 Get:58 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [21.1 MB]
+#18 5.212 Get:59 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 gcc-13 amd64 13.3.0-6ubuntu2~24.04.1 [494 kB]
+#18 5.215 Get:60 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [1,212 B]
+#18 5.230 Get:61 http://archive.ubuntu.com/ubuntu noble/main amd64 gcc amd64 4:13.2.0-7ubuntu1 [5,018 B]
+#18 5.248 Get:62 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libstdc++-13-dev amd64 13.3.0-6ubuntu2~24.04.1 [2,420 kB]
+#18 5.274 Get:63 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13-x86-64-linux-gnu amd64 13.3.0-6ubuntu2~24.04.1 [12.2 MB]
+#18 5.347 Get:64 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 g++-13 amd64 13.3.0-6ubuntu2~24.04.1 [16.0 kB]
+#18 5.356 Get:65 http://archive.ubuntu.com/ubuntu noble/main amd64 g++-x86-64-linux-gnu amd64 4:13.2.0-7ubuntu1 [964 B]
+#18 5.383 Get:66 http://archive.ubuntu.com/ubuntu noble/main amd64 g++ amd64 4:13.2.0-7ubuntu1 [1,100 B]
+#18 5.400 Get:67 http://archive.ubuntu.com/ubuntu noble/main amd64 make amd64 4.3-4.1build2 [180 kB]
+#18 5.417 Get:68 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdpkg-perl all 1.22.6ubuntu6.5 [269 kB]
+#18 5.436 Get:69 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 bzip2 amd64 1.0.8-5.1build0.1 [34.5 kB]
+#18 5.453 Get:70 http://archive.ubuntu.com/ubuntu noble/main amd64 patch amd64 2.7.6-7build3 [104 kB]
+#18 5.470 Get:71 http://archive.ubuntu.com/ubuntu noble/main amd64 lto-disabled-list all 47 [12.4 kB]
+#18 5.487 Get:72 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 dpkg-dev all 1.22.6ubuntu6.5 [1,074 kB]
+#18 5.508 Get:73 http://archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4,928 B]
+#18 5.526 Get:74 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libarchive13t64 amd64 3.7.2-2ubuntu0.5 [382 kB]
+#18 5.544 Get:75 http://archive.ubuntu.com/ubuntu noble/main amd64 libjsoncpp25 amd64 1.9.5-6build1 [82.8 kB]
+#18 5.561 Get:76 http://archive.ubuntu.com/ubuntu noble/main amd64 librhash0 amd64 1.4.3-3build1 [129 kB]
+#18 5.579 Get:77 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake-data all 3.28.3-1build7 [2,155 kB]
+#18 5.604 Get:78 http://archive.ubuntu.com/ubuntu noble/main amd64 cmake amd64 3.28.3-1build7 [11.2 MB]
+#18 5.678 Get:79 http://archive.ubuntu.com/ubuntu noble/main amd64 libbrotli-dev amd64 1.1.0-2build2 [353 kB]
+#18 5.682 Get:80 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbz2-dev amd64 1.0.8-5.1build0.1 [33.6 kB]
+#18 5.700 Get:81 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm-amdgpu1 amd64 2.4.125-1ubuntu0.1~24.04.1 [21.4 kB]
+#18 5.717 Get:82 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpciaccess0 amd64 0.17-3ubuntu0.24.04.2 [18.9 kB]
+#18 5.734 Get:83 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm-intel1 amd64 2.4.125-1ubuntu0.1~24.04.1 [63.8 kB]
+#18 5.752 Get:84 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm-radeon1 amd64 2.4.125-1ubuntu0.1~24.04.1 [20.8 kB]
+#18 5.769 Get:85 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm-nouveau2 amd64 2.4.125-1ubuntu0.1~24.04.1 [17.7 kB]
+#18 5.786 Get:86 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpciaccess-dev amd64 0.17-3ubuntu0.24.04.2 [22.0 kB]
+#18 5.804 Get:87 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdrm-dev amd64 2.4.125-1ubuntu0.1~24.04.1 [314 kB]
+#18 5.822 Get:88 http://archive.ubuntu.com/ubuntu noble/main amd64 libglvnd0 amd64 1.7.0-1build1 [69.6 kB]
+#18 5.992 Get:89 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libllvm20 amd64 1:20.1.2-0ubuntu1~24.04.2 [30.6 MB]
+#18 7.334 Get:90 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-xcb1 amd64 2:1.8.7-1build1 [7,800 B]
+#18 7.420 Get:91 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-dri3-0 amd64 1.15-1ubuntu2 [7,142 B]
+#18 7.505 Get:92 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-present0 amd64 1.15-1ubuntu2 [5,676 B]
+#18 7.591 Get:93 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-randr0 amd64 1.15-1ubuntu2 [17.9 kB]
+#18 7.676 Get:94 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-sync1 amd64 1.15-1ubuntu2 [9,312 B]
+#18 7.762 Get:95 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-xfixes0 amd64 1.15-1ubuntu2 [10.2 kB]
+#18 7.847 Get:96 http://archive.ubuntu.com/ubuntu noble/main amd64 libxshmfence1 amd64 1.3-1build5 [4,764 B]
+#18 7.933 Get:97 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 mesa-libgallium amd64 25.2.8-0ubuntu0.24.04.1 [10.8 MB]
+#18 8.220 Get:98 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgbm1 amd64 25.2.8-0ubuntu0.24.04.1 [34.2 kB]
+#18 8.306 Get:99 http://archive.ubuntu.com/ubuntu noble/main amd64 libwayland-client0 amd64 1.22.0-2.1build1 [26.4 kB]
+#18 8.391 Get:100 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-shm0 amd64 1.15-1ubuntu2 [5,756 B]
+#18 8.477 Get:101 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libegl-mesa0 amd64 25.2.8-0ubuntu0.24.04.1 [117 kB]
+#18 8.563 Get:102 http://archive.ubuntu.com/ubuntu noble/main amd64 libegl1 amd64 1.7.0-1build1 [28.7 kB]
+#18 8.648 Get:103 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-glx0 amd64 1.15-1ubuntu2 [24.8 kB]
+#18 8.734 Get:104 http://archive.ubuntu.com/ubuntu noble/main amd64 libxxf86vm1 amd64 1:1.1.4-1build4 [9,282 B]
+#18 8.819 Get:105 http://archive.ubuntu.com/ubuntu noble/main amd64 libvulkan1 amd64 1.3.275.0-1build1 [142 kB]
+#18 8.906 Get:106 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgl1-mesa-dri amd64 25.2.8-0ubuntu0.24.04.1 [37.9 kB]
+#18 8.991 Get:107 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libglx-mesa0 amd64 25.2.8-0ubuntu0.24.04.1 [110 kB]
+#18 9.077 Get:108 http://archive.ubuntu.com/ubuntu noble/main amd64 libglx0 amd64 1.7.0-1build1 [38.6 kB]
+#18 9.162 Get:109 http://archive.ubuntu.com/ubuntu noble/main amd64 libgl1 amd64 1.7.0-1build1 [102 kB]
+#18 9.247 Get:110 http://archive.ubuntu.com/ubuntu noble/main amd64 xorg-sgml-doctools all 1:1.11-1.1 [10.9 kB]
+#18 9.332 Get:111 http://archive.ubuntu.com/ubuntu noble/main amd64 x11proto-dev all 2023.2-1 [602 kB]
+#18 9.427 Get:112 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau-dev amd64 1:1.0.9-1build6 [9,570 B]
+#18 9.515 Get:113 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp-dev amd64 1:1.1.3-0ubuntu6 [26.5 kB]
+#18 9.600 Get:114 http://archive.ubuntu.com/ubuntu noble/main amd64 xtrans-dev all 1.4.0-1 [68.9 kB]
+#18 9.686 Get:115 http://archive.ubuntu.com/ubuntu noble/main amd64 libpthread-stubs0-dev amd64 0.4-1build3 [4,746 B]
+#18 9.772 Get:116 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1-dev amd64 1.15-1ubuntu2 [85.8 kB]
+#18 9.858 Get:117 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-dev amd64 2:1.8.7-1build1 [732 kB]
+#18 9.956 Get:118 http://archive.ubuntu.com/ubuntu noble/main amd64 libglx-dev amd64 1.7.0-1build1 [14.2 kB]
+#18 10.04 Get:119 http://archive.ubuntu.com/ubuntu noble/main amd64 libgl-dev amd64 1.7.0-1build1 [102 kB]
+#18 10.13 Get:120 http://archive.ubuntu.com/ubuntu noble/main amd64 libegl-dev amd64 1.7.0-1build1 [18.2 kB]
+#18 10.21 Get:121 http://archive.ubuntu.com/ubuntu noble/main amd64 libepoxy0 amd64 1.5.10-1build1 [220 kB]
+#18 10.30 Get:122 http://archive.ubuntu.com/ubuntu noble/main amd64 libepoxy-dev amd64 1.5.10-1build1 [132 kB]
+#18 10.39 Get:123 http://archive.ubuntu.com/ubuntu noble/main amd64 libfontenc1 amd64 1:1.1.8-1build1 [14.0 kB]
+#18 10.47 Get:124 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 zlib1g-dev amd64 1:1.3.dfsg-3.1ubuntu2.1 [894 kB]
+#18 10.57 Get:125 http://archive.ubuntu.com/ubuntu noble/main amd64 libfontenc-dev amd64 1:1.1.8-1build1 [15.6 kB]
+#18 10.66 Get:126 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpng-dev amd64 1.6.43-5ubuntu0.5 [265 kB]
+#18 10.75 Get:127 http://archive.ubuntu.com/ubuntu noble/main amd64 libfreetype-dev amd64 2.13.2+dfsg-1build3 [575 kB]
+#18 10.84 Get:128 http://archive.ubuntu.com/ubuntu noble/main amd64 libgles1 amd64 1.7.0-1build1 [11.6 kB]
+#18 10.93 Get:129 http://archive.ubuntu.com/ubuntu noble/main amd64 libgles2 amd64 1.7.0-1build1 [17.1 kB]
+#18 11.01 Get:130 http://archive.ubuntu.com/ubuntu noble/main amd64 libgles-dev amd64 1.7.0-1build1 [50.5 kB]
+#18 11.10 Get:131 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgmpxx4ldbl amd64 2:6.3.0+dfsg-2ubuntu6.1 [9,888 B]
+#18 11.18 Get:132 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgmp-dev amd64 2:6.3.0+dfsg-2ubuntu6.1 [340 kB]
+#18 11.27 Get:133 http://archive.ubuntu.com/ubuntu noble/main amd64 x11-common all 1:7.7+23ubuntu3 [21.7 kB]
+#18 11.36 Get:134 http://archive.ubuntu.com/ubuntu noble/main amd64 libice6 amd64 2:1.0.10-1build3 [41.4 kB]
+#18 11.44 Get:135 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#18 11.53 Get:136 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8-dev amd64 2.1.5-2ubuntu2 [295 kB]
+#18 11.62 Get:137 http://archive.ubuntu.com/ubuntu noble/main amd64 libopengl0 amd64 1.7.0-1build1 [32.8 kB]
+#18 11.70 Get:138 http://archive.ubuntu.com/ubuntu noble/main amd64 libopengl-dev amd64 1.7.0-1build1 [3,454 B]
+#18 11.79 Get:139 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpam0g-dev amd64 1.5.3-5ubuntu5.5 [114 kB]
+#18 11.87 Get:140 http://archive.ubuntu.com/ubuntu noble/main amd64 libpixman-1-0 amd64 0.42.2-1build1 [279 kB]
+#18 11.96 Get:141 http://archive.ubuntu.com/ubuntu noble/main amd64 libpixman-1-dev amd64 0.42.2-1build1 [296 kB]
+#18 12.05 Get:142 http://archive.ubuntu.com/ubuntu noble/main amd64 libpkgconf3 amd64 1.8.1-2build1 [30.7 kB]
+#18 12.14 Get:143 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#18 12.22 Get:144 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv-dev amd64 1.3.2-0.4build3 [16.0 kB]
+#18 12.31 Get:145 http://archive.ubuntu.com/ubuntu noble/main amd64 libsm6 amd64 2:1.2.3-1build3 [15.7 kB]
+#18 12.39 Get:146 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libssl-dev amd64 3.0.13-0ubuntu3.7 [2,407 kB]
+#18 12.52 Get:147 http://archive.ubuntu.com/ubuntu noble/main amd64 libtool all 2.4.7-7build1 [166 kB]
+#18 12.61 Get:148 http://archive.ubuntu.com/ubuntu noble/universe amd64 libturbojpeg amd64 1:2.1.5-2ubuntu2 [192 kB]
+#18 12.70 Get:149 http://archive.ubuntu.com/ubuntu noble/universe amd64 libturbojpeg0-dev amd64 1:2.1.5-2ubuntu2 [221 kB]
+#18 12.78 Get:150 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libudev-dev amd64 255.4-1ubuntu8.12 [22.0 kB]
+#18 12.87 Get:151 http://archive.ubuntu.com/ubuntu noble/main amd64 libwayland-cursor0 amd64 1.22.0-2.1build1 [10.4 kB]
+#18 12.95 Get:152 http://archive.ubuntu.com/ubuntu noble/main amd64 libwayland-egl1 amd64 1.22.0-2.1build1 [5,628 B]
+#18 13.04 Get:153 http://archive.ubuntu.com/ubuntu noble/main amd64 libwayland-server0 amd64 1.22.0-2.1build1 [33.9 kB]
+#18 13.12 Get:154 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#18 13.21 Get:155 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebpdecoder3 amd64 1.3.2-0.4build3 [114 kB]
+#18 13.30 Get:156 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebpdemux2 amd64 1.3.2-0.4build3 [12.4 kB]
+#18 13.41 Get:157 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebpmux3 amd64 1.3.2-0.4build3 [25.7 kB]
+#18 13.50 Get:158 http://archive.ubuntu.com/ubuntu noble/main amd64 libxt6t64 amd64 1:1.2.1-1.2build1 [171 kB]
+#18 13.58 Get:159 http://archive.ubuntu.com/ubuntu noble/main amd64 libxmu6 amd64 2:1.1.3-3build2 [47.6 kB]
+#18 13.67 Get:160 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#18 13.75 Get:161 http://archive.ubuntu.com/ubuntu noble/main amd64 libxaw7 amd64 2:1.0.14-1build2 [187 kB]
+#18 13.84 Get:162 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-render0 amd64 1.15-1ubuntu2 [16.2 kB]
+#18 13.93 Get:163 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-render0-dev amd64 1.15-1ubuntu2 [19.6 kB]
+#18 14.02 Get:164 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-shm0-dev amd64 1.15-1ubuntu2 [8,246 B]
+#18 14.10 Get:165 http://archive.ubuntu.com/ubuntu noble/main amd64 libxfixes3 amd64 1:6.0.0-2build1 [10.8 kB]
+#18 14.19 Get:166 http://archive.ubuntu.com/ubuntu noble/main amd64 libxrender1 amd64 1:0.9.10-1.1build1 [19.0 kB]
+#18 14.27 Get:167 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcursor1 amd64 1:1.2.1-1build1 [20.7 kB]
+#18 14.36 Get:168 http://archive.ubuntu.com/ubuntu noble/main amd64 libxrender-dev amd64 1:0.9.10-1.1build1 [26.3 kB]
+#18 14.44 Get:169 http://archive.ubuntu.com/ubuntu noble/main amd64 libxfixes-dev amd64 1:6.0.0-2build1 [12.1 kB]
+#18 14.53 Get:170 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcursor-dev amd64 1:1.2.1-1build1 [31.8 kB]
+#18 14.61 Get:171 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcvt0 amd64 0.1.2-1build1 [5,684 B]
+#18 14.70 Get:172 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcvt-dev amd64 0.1.2-1build1 [3,252 B]
+#18 14.78 Get:173 http://archive.ubuntu.com/ubuntu noble/main amd64 libxext-dev amd64 2:1.3.4-1build2 [83.5 kB]
+#18 14.87 Get:174 http://archive.ubuntu.com/ubuntu noble/main amd64 libxfont2 amd64 1:2.0.6-1build1 [93.0 kB]
+#18 14.96 Get:175 http://archive.ubuntu.com/ubuntu noble/main amd64 libxfont-dev amd64 1:2.0.6-1build1 [128 kB]
+#18 15.04 Get:176 http://archive.ubuntu.com/ubuntu noble/main amd64 libxi6 amd64 2:1.8.1-1build1 [32.4 kB]
+#18 15.13 Get:177 http://archive.ubuntu.com/ubuntu noble/main amd64 libxi-dev amd64 2:1.8.1-1build1 [194 kB]
+#18 15.21 Get:178 http://archive.ubuntu.com/ubuntu noble/main amd64 libxkbfile1 amd64 1:1.1.0-1build4 [70.0 kB]
+#18 15.30 Get:179 http://archive.ubuntu.com/ubuntu noble/main amd64 libxkbfile-dev amd64 1:1.1.0-1build4 [84.4 kB]
+#18 15.39 Get:180 http://archive.ubuntu.com/ubuntu noble/main amd64 libxrandr2 amd64 2:1.5.2-2build1 [19.7 kB]
+#18 15.47 Get:181 http://archive.ubuntu.com/ubuntu noble/main amd64 libxrandr-dev amd64 2:1.5.2-2build1 [26.4 kB]
+#18 15.56 Get:182 http://archive.ubuntu.com/ubuntu noble/main amd64 libxshmfence-dev amd64 1.3-1build5 [3,672 B]
+#18 15.65 Get:183 http://archive.ubuntu.com/ubuntu noble/main amd64 libxtst6 amd64 2:1.2.3-1.1build1 [12.6 kB]
+#18 15.73 Get:184 http://archive.ubuntu.com/ubuntu noble/main amd64 libxtst-dev amd64 2:1.2.3-1.1build1 [15.9 kB]
+#18 15.82 Get:185 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 mesa-common-dev amd64 25.2.8-0ubuntu0.24.04.1 [3,133 kB]
+#18 15.96 Get:186 http://archive.ubuntu.com/ubuntu noble/universe amd64 ninja-build amd64 1.11.1-2 [129 kB]
+#18 16.05 Get:187 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-setuptools all 68.1.2-2ubuntu1.2 [397 kB]
+#18 16.14 Get:188 http://archive.ubuntu.com/ubuntu noble/universe amd64 meson all 1.3.2-1ubuntu1 [604 kB]
+#18 16.23 Get:189 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 nettle-dev amd64 3.9.1-2.2build1.1 [1,154 kB]
+#18 16.38 Get:190 http://archive.ubuntu.com/ubuntu noble/main amd64 pkgconf-bin amd64 1.8.1-2build1 [20.7 kB]
+#18 16.41 Get:191 http://archive.ubuntu.com/ubuntu noble/main amd64 pkgconf amd64 1.8.1-2build1 [16.8 kB]
+#18 16.43 Get:192 http://archive.ubuntu.com/ubuntu noble/main amd64 pkg-config amd64 1.8.1-2build1 [7,264 B]
+#18 16.45 Get:193 http://archive.ubuntu.com/ubuntu noble/main amd64 x11-xkb-utils amd64 7.7+8build2 [170 kB]
+#18 16.51 Get:194 http://archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+#18 16.56 Get:195 http://archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+#18 16.58 Get:196 http://archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-100dpi all 1:1.0.5 [3,819 kB]
+#18 16.64 Get:197 http://archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-75dpi all 1:1.0.5 [3,370 kB]
+#18 16.67 Get:198 http://archive.ubuntu.com/ubuntu noble/main amd64 xfonts-base all 1:1.0.5+nmu1 [5,941 kB]
+#18 16.70 Get:199 http://archive.ubuntu.com/ubuntu noble/main amd64 xinit amd64 1.4.1-0ubuntu5 [16.7 kB]
+#18 16.72 Get:200 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.5 [34.6 kB]
+#18 16.74 Get:201 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-xorg-core amd64 2:21.1.12-1ubuntu1.5 [1,476 kB]
+#18 16.76 Get:202 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-xorg-dev amd64 2:21.1.12-1ubuntu1.5 [210 kB]
+#18 16.77 Get:203 http://archive.ubuntu.com/ubuntu noble/main amd64 libffi-dev amd64 3.4.6-1build1 [62.8 kB]
+#18 16.79 Get:204 http://archive.ubuntu.com/ubuntu noble/main amd64 libglvnd-core-dev amd64 1.7.0-1build1 [13.6 kB]
+#18 16.81 Get:205 http://archive.ubuntu.com/ubuntu noble/main amd64 libglvnd-dev amd64 1.7.0-1build1 [3,198 B]
+#18 16.83 Get:206 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgl1-mesa-dev amd64 25.2.8-0ubuntu0.24.04.1 [22.5 kB]
+#18 16.84 Get:207 http://archive.ubuntu.com/ubuntu noble/main amd64 libwayland-bin amd64 1.22.0-2.1build1 [20.6 kB]
+#18 16.86 Get:208 http://archive.ubuntu.com/ubuntu noble/main amd64 libwayland-dev amd64 1.22.0-2.1build1 [71.3 kB]
+#18 16.88 Get:209 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp-dev amd64 1.3.2-0.4build3 [367 kB]
+#18 16.90 Get:210 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-icccm4 amd64 0.4.1-1.1build3 [10.8 kB]
+#18 16.91 Get:211 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-icccm4-dev amd64 0.4.1-1.1build3 [11.3 kB]
+#18 16.93 Get:212 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-util1 amd64 0.4.0-1build3 [10.7 kB]
+#18 16.95 Get:213 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-image0 amd64 0.4.0-2build1 [10.8 kB]
+#18 16.96 Get:214 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-image0-dev amd64 0.4.0-2build1 [16.3 kB]
+#18 16.98 Get:215 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-keysyms1 amd64 0.4.0-1build4 [7,956 B]
+#18 17.00 Get:216 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-keysyms1-dev amd64 0.4.0-1build4 [7,030 B]
+#18 17.02 Get:217 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-render-util0 amd64 0.3.9-1build4 [9,608 B]
+#18 17.03 Get:218 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-render-util0-dev amd64 0.3.9-1build4 [67.4 kB]
+#18 17.05 Get:219 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb-util-dev amd64 0.4.0-1build3 [10.8 kB]
+#18 17.07 Get:220 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 wayland-protocols all 1.45-1~ubuntu0.24.04.1 [114 kB]
+#18 17.19 debconf: delaying package configuration, since apt-utils is not installed
+#18 17.22 Fetched 163 MB in 13s (12.4 MB/s)
+#18 17.23 Selecting previously unselected package liblocale-gettext-perl.
+#18 17.23 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#18 17.25 Preparing to unpack .../liblocale-gettext-perl_1.07-6ubuntu5_amd64.deb ...
+#18 17.25 Unpacking liblocale-gettext-perl (1.07-6ubuntu5) ...
+#18 17.27 Selecting previously unselected package xkb-data.
+#18 17.27 Preparing to unpack .../xkb-data_2.41-2ubuntu1.1_all.deb ...
+#18 17.27 Unpacking xkb-data (2.41-2ubuntu1.1) ...
+#18 17.34 Selecting previously unselected package keyboard-configuration.
+#18 17.35 Preparing to unpack .../keyboard-configuration_1.226ubuntu1_all.deb ...
+#18 17.35 Unpacking keyboard-configuration (1.226ubuntu1) ...
+#18 17.37 Preparing to unpack .../gcc-14-base_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 17.38 Unpacking gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#18 17.40 Setting up gcc-14-base:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 17.42 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16941 files and directories currently installed.)
+#18 17.43 Preparing to unpack .../libstdc++6_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 17.45 Unpacking libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#18 17.49 Setting up libstdc++6:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 17.51 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16941 files and directories currently installed.)
+#18 17.52 Preparing to unpack .../libgcc-s1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 17.52 Unpacking libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) over (14.2.0-4ubuntu2~24.04) ...
+#18 17.54 Setting up libgcc-s1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 17.57 Selecting previously unselected package libbsd0:amd64.
+#18 17.57 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16941 files and directories currently installed.)
+#18 17.58 Preparing to unpack .../000-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#18 17.58 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#18 17.60 Selecting previously unselected package udev.
+#18 17.60 Preparing to unpack .../001-udev_255.4-1ubuntu8.12_amd64.deb ...
+#18 17.61 Unpacking udev (255.4-1ubuntu8.12) ...
+#18 17.68 Selecting previously unselected package libmagic-mgc.
+#18 17.68 Preparing to unpack .../002-libmagic-mgc_1%3a5.45-3build1_amd64.deb ...
+#18 17.68 Unpacking libmagic-mgc (1:5.45-3build1) ...
+#18 17.72 Selecting previously unselected package libmagic1t64:amd64.
+#18 17.72 Preparing to unpack .../003-libmagic1t64_1%3a5.45-3build1_amd64.deb ...
+#18 17.72 Unpacking libmagic1t64:amd64 (1:5.45-3build1) ...
+#18 17.74 Selecting previously unselected package file.
+#18 17.74 Preparing to unpack .../004-file_1%3a5.45-3build1_amd64.deb ...
+#18 17.74 Unpacking file (1:5.45-3build1) ...
+#18 17.75 Selecting previously unselected package libdrm-common.
+#18 17.76 Preparing to unpack .../005-libdrm-common_2.4.125-1ubuntu0.1~24.04.1_all.deb ...
+#18 17.76 Unpacking libdrm-common (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 17.77 Selecting previously unselected package libdrm2:amd64.
+#18 17.77 Preparing to unpack .../006-libdrm2_2.4.125-1ubuntu0.1~24.04.1_amd64.deb ...
+#18 17.77 Unpacking libdrm2:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 17.79 Selecting previously unselected package libedit2:amd64.
+#18 17.79 Preparing to unpack .../007-libedit2_3.1-20230828-1build1_amd64.deb ...
+#18 17.79 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#18 17.81 Selecting previously unselected package libjansson4:amd64.
+#18 17.81 Preparing to unpack .../008-libjansson4_2.14-2build2_amd64.deb ...
+#18 17.81 Unpacking libjansson4:amd64 (2.14-2build2) ...
+#18 17.83 Selecting previously unselected package libsensors-config.
+#18 17.83 Preparing to unpack .../009-libsensors-config_1%3a3.6.0-9build1_all.deb ...
+#18 17.83 Unpacking libsensors-config (1:3.6.0-9build1) ...
+#18 17.84 Selecting previously unselected package libsensors5:amd64.
+#18 17.85 Preparing to unpack .../010-libsensors5_1%3a3.6.0-9build1_amd64.deb ...
+#18 17.85 Unpacking libsensors5:amd64 (1:3.6.0-9build1) ...
+#18 17.87 Selecting previously unselected package libuv1t64:amd64.
+#18 17.87 Preparing to unpack .../011-libuv1t64_1.48.0-1.1build1_amd64.deb ...
+#18 17.87 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
+#18 17.88 Selecting previously unselected package libxau6:amd64.
+#18 17.89 Preparing to unpack .../012-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#18 17.89 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#18 17.90 Selecting previously unselected package libxdmcp6:amd64.
+#18 17.90 Preparing to unpack .../013-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#18 17.90 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#18 17.92 Selecting previously unselected package libxcb1:amd64.
+#18 17.92 Preparing to unpack .../014-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#18 17.92 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#18 17.93 Selecting previously unselected package libx11-data.
+#18 17.93 Preparing to unpack .../015-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#18 17.94 Unpacking libx11-data (2:1.8.7-1build1) ...
+#18 17.99 Selecting previously unselected package libx11-6:amd64.
+#18 17.99 Preparing to unpack .../016-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#18 17.99 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#18 18.01 Selecting previously unselected package libxext6:amd64.
+#18 18.01 Preparing to unpack .../017-libxext6_2%3a1.3.4-1build2_amd64.deb ...
+#18 18.02 Unpacking libxext6:amd64 (2:1.3.4-1build2) ...
+#18 18.03 Selecting previously unselected package libxmuu1:amd64.
+#18 18.03 Preparing to unpack .../018-libxmuu1_2%3a1.1.3-3build2_amd64.deb ...
+#18 18.03 Unpacking libxmuu1:amd64 (2:1.1.3-3build2) ...
+#18 18.05 Selecting previously unselected package xauth.
+#18 18.05 Preparing to unpack .../019-xauth_1%3a1.1.2-1build1_amd64.deb ...
+#18 18.05 Unpacking xauth (1:1.1.2-1build1) ...
+#18 18.06 Selecting previously unselected package m4.
+#18 18.06 Preparing to unpack .../020-m4_1.4.19-4build1_amd64.deb ...
+#18 18.06 Unpacking m4 (1.4.19-4build1) ...
+#18 18.08 Selecting previously unselected package autoconf.
+#18 18.09 Preparing to unpack .../021-autoconf_2.71-3_all.deb ...
+#18 18.09 Unpacking autoconf (2.71-3) ...
+#18 18.12 Selecting previously unselected package autotools-dev.
+#18 18.12 Preparing to unpack .../022-autotools-dev_20220109.1_all.deb ...
+#18 18.12 Unpacking autotools-dev (20220109.1) ...
+#18 18.14 Selecting previously unselected package automake.
+#18 18.14 Preparing to unpack .../023-automake_1%3a1.16.5-1.3ubuntu1_all.deb ...
+#18 18.14 Unpacking automake (1:1.16.5-1.3ubuntu1) ...
+#18 18.18 Selecting previously unselected package binutils-common:amd64.
+#18 18.18 Preparing to unpack .../024-binutils-common_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.18 Unpacking binutils-common:amd64 (2.42-4ubuntu2.8) ...
+#18 18.20 Selecting previously unselected package libsframe1:amd64.
+#18 18.20 Preparing to unpack .../025-libsframe1_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.20 Unpacking libsframe1:amd64 (2.42-4ubuntu2.8) ...
+#18 18.22 Selecting previously unselected package libbinutils:amd64.
+#18 18.22 Preparing to unpack .../026-libbinutils_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.22 Unpacking libbinutils:amd64 (2.42-4ubuntu2.8) ...
+#18 18.25 Selecting previously unselected package libctf-nobfd0:amd64.
+#18 18.25 Preparing to unpack .../027-libctf-nobfd0_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.25 Unpacking libctf-nobfd0:amd64 (2.42-4ubuntu2.8) ...
+#18 18.26 Selecting previously unselected package libctf0:amd64.
+#18 18.27 Preparing to unpack .../028-libctf0_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.27 Unpacking libctf0:amd64 (2.42-4ubuntu2.8) ...
+#18 18.28 Selecting previously unselected package libgprofng0:amd64.
+#18 18.29 Preparing to unpack .../029-libgprofng0_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.29 Unpacking libgprofng0:amd64 (2.42-4ubuntu2.8) ...
+#18 18.31 Selecting previously unselected package binutils-x86-64-linux-gnu.
+#18 18.32 Preparing to unpack .../030-binutils-x86-64-linux-gnu_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.32 Unpacking binutils-x86-64-linux-gnu (2.42-4ubuntu2.8) ...
+#18 18.39 Selecting previously unselected package binutils.
+#18 18.39 Preparing to unpack .../031-binutils_2.42-4ubuntu2.8_amd64.deb ...
+#18 18.40 Unpacking binutils (2.42-4ubuntu2.8) ...
+#18 18.41 Selecting previously unselected package gcc-13-base:amd64.
+#18 18.42 Preparing to unpack .../032-gcc-13-base_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 18.42 Unpacking gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#18 18.43 Selecting previously unselected package libisl23:amd64.
+#18 18.43 Preparing to unpack .../033-libisl23_0.26-3build1.1_amd64.deb ...
+#18 18.44 Unpacking libisl23:amd64 (0.26-3build1.1) ...
+#18 18.46 Selecting previously unselected package libmpfr6:amd64.
+#18 18.46 Preparing to unpack .../034-libmpfr6_4.2.1-1build1.1_amd64.deb ...
+#18 18.46 Unpacking libmpfr6:amd64 (4.2.1-1build1.1) ...
+#18 18.49 Selecting previously unselected package libmpc3:amd64.
+#18 18.49 Preparing to unpack .../035-libmpc3_1.3.1-1build1.1_amd64.deb ...
+#18 18.49 Unpacking libmpc3:amd64 (1.3.1-1build1.1) ...
+#18 18.50 Selecting previously unselected package cpp-13-x86-64-linux-gnu.
+#18 18.51 Preparing to unpack .../036-cpp-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 18.51 Unpacking cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#18 18.64 Selecting previously unselected package cpp-13.
+#18 18.64 Preparing to unpack .../037-cpp-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 18.64 Unpacking cpp-13 (13.3.0-6ubuntu2~24.04.1) ...
+#18 18.66 Selecting previously unselected package cpp-x86-64-linux-gnu.
+#18 18.66 Preparing to unpack .../038-cpp-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#18 18.66 Unpacking cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#18 18.68 Selecting previously unselected package cpp.
+#18 18.68 Preparing to unpack .../039-cpp_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#18 18.68 Unpacking cpp (4:13.2.0-7ubuntu1) ...
+#18 18.70 Selecting previously unselected package libcc1-0:amd64.
+#18 18.70 Preparing to unpack .../040-libcc1-0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.70 Unpacking libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.72 Selecting previously unselected package libgomp1:amd64.
+#18 18.72 Preparing to unpack .../041-libgomp1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.72 Unpacking libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.74 Selecting previously unselected package libitm1:amd64.
+#18 18.74 Preparing to unpack .../042-libitm1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.74 Unpacking libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.75 Selecting previously unselected package libatomic1:amd64.
+#18 18.76 Preparing to unpack .../043-libatomic1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.76 Unpacking libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.77 Selecting previously unselected package libasan8:amd64.
+#18 18.77 Preparing to unpack .../044-libasan8_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.77 Unpacking libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.83 Selecting previously unselected package liblsan0:amd64.
+#18 18.83 Preparing to unpack .../045-liblsan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.84 Unpacking liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.87 Selecting previously unselected package libtsan2:amd64.
+#18 18.87 Preparing to unpack .../046-libtsan2_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.87 Unpacking libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.92 Selecting previously unselected package libubsan1:amd64.
+#18 18.92 Preparing to unpack .../047-libubsan1_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.92 Unpacking libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.95 Selecting previously unselected package libhwasan0:amd64.
+#18 18.95 Preparing to unpack .../048-libhwasan0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.95 Unpacking libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 18.99 Selecting previously unselected package libquadmath0:amd64.
+#18 18.99 Preparing to unpack .../049-libquadmath0_14.2.0-4ubuntu2~24.04.1_amd64.deb ...
+#18 18.99 Unpacking libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 19.00 Selecting previously unselected package libgcc-13-dev:amd64.
+#18 19.01 Preparing to unpack .../050-libgcc-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 19.01 Unpacking libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#18 19.09 Selecting previously unselected package gcc-13-x86-64-linux-gnu.
+#18 19.10 Preparing to unpack .../051-gcc-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 19.10 Unpacking gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#18 19.34 Selecting previously unselected package gcc-13.
+#18 19.34 Preparing to unpack .../052-gcc-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 19.34 Unpacking gcc-13 (13.3.0-6ubuntu2~24.04.1) ...
+#18 19.36 Selecting previously unselected package gcc-x86-64-linux-gnu.
+#18 19.36 Preparing to unpack .../053-gcc-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#18 19.36 Unpacking gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#18 19.38 Selecting previously unselected package gcc.
+#18 19.38 Preparing to unpack .../054-gcc_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#18 19.38 Unpacking gcc (4:13.2.0-7ubuntu1) ...
+#18 19.40 Selecting previously unselected package libstdc++-13-dev:amd64.
+#18 19.40 Preparing to unpack .../055-libstdc++-13-dev_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 19.40 Unpacking libstdc++-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#18 19.61 Selecting previously unselected package g++-13-x86-64-linux-gnu.
+#18 19.61 Preparing to unpack .../056-g++-13-x86-64-linux-gnu_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 19.61 Unpacking g++-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#18 19.75 Selecting previously unselected package g++-13.
+#18 19.75 Preparing to unpack .../057-g++-13_13.3.0-6ubuntu2~24.04.1_amd64.deb ...
+#18 19.75 Unpacking g++-13 (13.3.0-6ubuntu2~24.04.1) ...
+#18 19.76 Selecting previously unselected package g++-x86-64-linux-gnu.
+#18 19.76 Preparing to unpack .../058-g++-x86-64-linux-gnu_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#18 19.76 Unpacking g++-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#18 19.78 Selecting previously unselected package g++.
+#18 19.78 Preparing to unpack .../059-g++_4%3a13.2.0-7ubuntu1_amd64.deb ...
+#18 19.78 Unpacking g++ (4:13.2.0-7ubuntu1) ...
+#18 19.80 Selecting previously unselected package make.
+#18 19.80 Preparing to unpack .../060-make_4.3-4.1build2_amd64.deb ...
+#18 19.80 Unpacking make (4.3-4.1build2) ...
+#18 19.81 Selecting previously unselected package libdpkg-perl.
+#18 19.82 Preparing to unpack .../061-libdpkg-perl_1.22.6ubuntu6.5_all.deb ...
+#18 19.82 Unpacking libdpkg-perl (1.22.6ubuntu6.5) ...
+#18 19.85 Selecting previously unselected package bzip2.
+#18 19.86 Preparing to unpack .../062-bzip2_1.0.8-5.1build0.1_amd64.deb ...
+#18 19.86 Unpacking bzip2 (1.0.8-5.1build0.1) ...
+#18 19.87 Selecting previously unselected package patch.
+#18 19.87 Preparing to unpack .../063-patch_2.7.6-7build3_amd64.deb ...
+#18 19.88 Unpacking patch (2.7.6-7build3) ...
+#18 19.89 Selecting previously unselected package lto-disabled-list.
+#18 19.89 Preparing to unpack .../064-lto-disabled-list_47_all.deb ...
+#18 19.89 Unpacking lto-disabled-list (47) ...
+#18 19.91 Selecting previously unselected package dpkg-dev.
+#18 19.91 Preparing to unpack .../065-dpkg-dev_1.22.6ubuntu6.5_all.deb ...
+#18 19.91 Unpacking dpkg-dev (1.22.6ubuntu6.5) ...
+#18 19.95 Selecting previously unselected package build-essential.
+#18 19.95 Preparing to unpack .../066-build-essential_12.10ubuntu1_amd64.deb ...
+#18 19.95 Unpacking build-essential (12.10ubuntu1) ...
+#18 19.97 Selecting previously unselected package libarchive13t64:amd64.
+#18 19.97 Preparing to unpack .../067-libarchive13t64_3.7.2-2ubuntu0.5_amd64.deb ...
+#18 19.97 Unpacking libarchive13t64:amd64 (3.7.2-2ubuntu0.5) ...
+#18 19.99 Selecting previously unselected package libjsoncpp25:amd64.
+#18 19.99 Preparing to unpack .../068-libjsoncpp25_1.9.5-6build1_amd64.deb ...
+#18 19.99 Unpacking libjsoncpp25:amd64 (1.9.5-6build1) ...
+#18 20.01 Selecting previously unselected package librhash0:amd64.
+#18 20.01 Preparing to unpack .../069-librhash0_1.4.3-3build1_amd64.deb ...
+#18 20.01 Unpacking librhash0:amd64 (1.4.3-3build1) ...
+#18 20.03 Selecting previously unselected package cmake-data.
+#18 20.03 Preparing to unpack .../070-cmake-data_3.28.3-1build7_all.deb ...
+#18 20.03 Unpacking cmake-data (3.28.3-1build7) ...
+#18 20.60 Selecting previously unselected package cmake.
+#18 20.61 Preparing to unpack .../071-cmake_3.28.3-1build7_amd64.deb ...
+#18 20.61 Unpacking cmake (3.28.3-1build7) ...
+#18 20.75 Selecting previously unselected package libbrotli-dev:amd64.
+#18 20.75 Preparing to unpack .../072-libbrotli-dev_1.1.0-2build2_amd64.deb ...
+#18 20.76 Unpacking libbrotli-dev:amd64 (1.1.0-2build2) ...
+#18 20.78 Selecting previously unselected package libbz2-dev:amd64.
+#18 20.78 Preparing to unpack .../073-libbz2-dev_1.0.8-5.1build0.1_amd64.deb ...
+#18 20.78 Unpacking libbz2-dev:amd64 (1.0.8-5.1build0.1) ...
+#18 20.79 Selecting previously unselected package libdrm-amdgpu1:amd64.
+#18 20.80 Preparing to unpack .../074-libdrm-amdgpu1_2.4.125-1ubuntu0.1~24.04.1_amd64.deb ...
+#18 20.80 Unpacking libdrm-amdgpu1:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 20.82 Selecting previously unselected package libpciaccess0:amd64.
+#18 20.82 Preparing to unpack .../075-libpciaccess0_0.17-3ubuntu0.24.04.2_amd64.deb ...
+#18 20.82 Unpacking libpciaccess0:amd64 (0.17-3ubuntu0.24.04.2) ...
+#18 20.84 Selecting previously unselected package libdrm-intel1:amd64.
+#18 20.84 Preparing to unpack .../076-libdrm-intel1_2.4.125-1ubuntu0.1~24.04.1_amd64.deb ...
+#18 20.84 Unpacking libdrm-intel1:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 20.86 Selecting previously unselected package libdrm-radeon1:amd64.
+#18 20.86 Preparing to unpack .../077-libdrm-radeon1_2.4.125-1ubuntu0.1~24.04.1_amd64.deb ...
+#18 20.86 Unpacking libdrm-radeon1:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 20.87 Selecting previously unselected package libdrm-nouveau2:amd64.
+#18 20.88 Preparing to unpack .../078-libdrm-nouveau2_2.4.125-1ubuntu0.1~24.04.1_amd64.deb ...
+#18 20.88 Unpacking libdrm-nouveau2:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 20.89 Selecting previously unselected package libpciaccess-dev:amd64.
+#18 20.89 Preparing to unpack .../079-libpciaccess-dev_0.17-3ubuntu0.24.04.2_amd64.deb ...
+#18 20.90 Unpacking libpciaccess-dev:amd64 (0.17-3ubuntu0.24.04.2) ...
+#18 20.91 Selecting previously unselected package libdrm-dev:amd64.
+#18 20.91 Preparing to unpack .../080-libdrm-dev_2.4.125-1ubuntu0.1~24.04.1_amd64.deb ...
+#18 20.91 Unpacking libdrm-dev:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 20.94 Selecting previously unselected package libglvnd0:amd64.
+#18 20.95 Preparing to unpack .../081-libglvnd0_1.7.0-1build1_amd64.deb ...
+#18 20.95 Unpacking libglvnd0:amd64 (1.7.0-1build1) ...
+#18 20.96 Selecting previously unselected package libllvm20:amd64.
+#18 20.97 Preparing to unpack .../082-libllvm20_1%3a20.1.2-0ubuntu1~24.04.2_amd64.deb ...
+#18 20.97 Unpacking libllvm20:amd64 (1:20.1.2-0ubuntu1~24.04.2) ...
+#18 21.43 Selecting previously unselected package libx11-xcb1:amd64.
+#18 21.43 Preparing to unpack .../083-libx11-xcb1_2%3a1.8.7-1build1_amd64.deb ...
+#18 21.44 Unpacking libx11-xcb1:amd64 (2:1.8.7-1build1) ...
+#18 21.46 Selecting previously unselected package libxcb-dri3-0:amd64.
+#18 21.46 Preparing to unpack .../084-libxcb-dri3-0_1.15-1ubuntu2_amd64.deb ...
+#18 21.46 Unpacking libxcb-dri3-0:amd64 (1.15-1ubuntu2) ...
+#18 21.48 Selecting previously unselected package libxcb-present0:amd64.
+#18 21.48 Preparing to unpack .../085-libxcb-present0_1.15-1ubuntu2_amd64.deb ...
+#18 21.48 Unpacking libxcb-present0:amd64 (1.15-1ubuntu2) ...
+#18 21.50 Selecting previously unselected package libxcb-randr0:amd64.
+#18 21.50 Preparing to unpack .../086-libxcb-randr0_1.15-1ubuntu2_amd64.deb ...
+#18 21.50 Unpacking libxcb-randr0:amd64 (1.15-1ubuntu2) ...
+#18 21.52 Selecting previously unselected package libxcb-sync1:amd64.
+#18 21.52 Preparing to unpack .../087-libxcb-sync1_1.15-1ubuntu2_amd64.deb ...
+#18 21.52 Unpacking libxcb-sync1:amd64 (1.15-1ubuntu2) ...
+#18 21.54 Selecting previously unselected package libxcb-xfixes0:amd64.
+#18 21.54 Preparing to unpack .../088-libxcb-xfixes0_1.15-1ubuntu2_amd64.deb ...
+#18 21.54 Unpacking libxcb-xfixes0:amd64 (1.15-1ubuntu2) ...
+#18 21.56 Selecting previously unselected package libxshmfence1:amd64.
+#18 21.56 Preparing to unpack .../089-libxshmfence1_1.3-1build5_amd64.deb ...
+#18 21.56 Unpacking libxshmfence1:amd64 (1.3-1build5) ...
+#18 21.57 Selecting previously unselected package mesa-libgallium:amd64.
+#18 21.58 Preparing to unpack .../090-mesa-libgallium_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 21.58 Unpacking mesa-libgallium:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 21.74 Selecting previously unselected package libgbm1:amd64.
+#18 21.74 Preparing to unpack .../091-libgbm1_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 21.74 Unpacking libgbm1:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 21.76 Selecting previously unselected package libwayland-client0:amd64.
+#18 21.76 Preparing to unpack .../092-libwayland-client0_1.22.0-2.1build1_amd64.deb ...
+#18 21.76 Unpacking libwayland-client0:amd64 (1.22.0-2.1build1) ...
+#18 21.78 Selecting previously unselected package libxcb-shm0:amd64.
+#18 21.78 Preparing to unpack .../093-libxcb-shm0_1.15-1ubuntu2_amd64.deb ...
+#18 21.78 Unpacking libxcb-shm0:amd64 (1.15-1ubuntu2) ...
+#18 21.80 Selecting previously unselected package libegl-mesa0:amd64.
+#18 21.80 Preparing to unpack .../094-libegl-mesa0_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 21.80 Unpacking libegl-mesa0:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 21.82 Selecting previously unselected package libegl1:amd64.
+#18 21.82 Preparing to unpack .../095-libegl1_1.7.0-1build1_amd64.deb ...
+#18 21.83 Unpacking libegl1:amd64 (1.7.0-1build1) ...
+#18 21.84 Selecting previously unselected package libxcb-glx0:amd64.
+#18 21.84 Preparing to unpack .../096-libxcb-glx0_1.15-1ubuntu2_amd64.deb ...
+#18 21.85 Unpacking libxcb-glx0:amd64 (1.15-1ubuntu2) ...
+#18 21.86 Selecting previously unselected package libxxf86vm1:amd64.
+#18 21.86 Preparing to unpack .../097-libxxf86vm1_1%3a1.1.4-1build4_amd64.deb ...
+#18 21.86 Unpacking libxxf86vm1:amd64 (1:1.1.4-1build4) ...
+#18 21.88 Selecting previously unselected package libvulkan1:amd64.
+#18 21.88 Preparing to unpack .../098-libvulkan1_1.3.275.0-1build1_amd64.deb ...
+#18 21.88 Unpacking libvulkan1:amd64 (1.3.275.0-1build1) ...
+#18 21.90 Selecting previously unselected package libgl1-mesa-dri:amd64.
+#18 21.90 Preparing to unpack .../099-libgl1-mesa-dri_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 21.91 Unpacking libgl1-mesa-dri:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 21.93 Selecting previously unselected package libglx-mesa0:amd64.
+#18 21.93 Preparing to unpack .../100-libglx-mesa0_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 21.94 Unpacking libglx-mesa0:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 21.95 Selecting previously unselected package libglx0:amd64.
+#18 21.96 Preparing to unpack .../101-libglx0_1.7.0-1build1_amd64.deb ...
+#18 21.96 Unpacking libglx0:amd64 (1.7.0-1build1) ...
+#18 21.97 Selecting previously unselected package libgl1:amd64.
+#18 21.97 Preparing to unpack .../102-libgl1_1.7.0-1build1_amd64.deb ...
+#18 21.98 Unpacking libgl1:amd64 (1.7.0-1build1) ...
+#18 21.99 Selecting previously unselected package xorg-sgml-doctools.
+#18 21.99 Preparing to unpack .../103-xorg-sgml-doctools_1%3a1.11-1.1_all.deb ...
+#18 21.99 Unpacking xorg-sgml-doctools (1:1.11-1.1) ...
+#18 22.01 Selecting previously unselected package x11proto-dev.
+#18 22.01 Preparing to unpack .../104-x11proto-dev_2023.2-1_all.deb ...
+#18 22.02 Unpacking x11proto-dev (2023.2-1) ...
+#18 22.06 Selecting previously unselected package libxau-dev:amd64.
+#18 22.07 Preparing to unpack .../105-libxau-dev_1%3a1.0.9-1build6_amd64.deb ...
+#18 22.07 Unpacking libxau-dev:amd64 (1:1.0.9-1build6) ...
+#18 22.08 Selecting previously unselected package libxdmcp-dev:amd64.
+#18 22.08 Preparing to unpack .../106-libxdmcp-dev_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#18 22.09 Unpacking libxdmcp-dev:amd64 (1:1.1.3-0ubuntu6) ...
+#18 22.10 Selecting previously unselected package xtrans-dev.
+#18 22.10 Preparing to unpack .../107-xtrans-dev_1.4.0-1_all.deb ...
+#18 22.10 Unpacking xtrans-dev (1.4.0-1) ...
+#18 22.12 Selecting previously unselected package libpthread-stubs0-dev:amd64.
+#18 22.12 Preparing to unpack .../108-libpthread-stubs0-dev_0.4-1build3_amd64.deb ...
+#18 22.12 Unpacking libpthread-stubs0-dev:amd64 (0.4-1build3) ...
+#18 22.14 Selecting previously unselected package libxcb1-dev:amd64.
+#18 22.14 Preparing to unpack .../109-libxcb1-dev_1.15-1ubuntu2_amd64.deb ...
+#18 22.14 Unpacking libxcb1-dev:amd64 (1.15-1ubuntu2) ...
+#18 22.16 Selecting previously unselected package libx11-dev:amd64.
+#18 22.16 Preparing to unpack .../110-libx11-dev_2%3a1.8.7-1build1_amd64.deb ...
+#18 22.16 Unpacking libx11-dev:amd64 (2:1.8.7-1build1) ...
+#18 22.19 Selecting previously unselected package libglx-dev:amd64.
+#18 22.19 Preparing to unpack .../111-libglx-dev_1.7.0-1build1_amd64.deb ...
+#18 22.19 Unpacking libglx-dev:amd64 (1.7.0-1build1) ...
+#18 22.20 Selecting previously unselected package libgl-dev:amd64.
+#18 22.21 Preparing to unpack .../112-libgl-dev_1.7.0-1build1_amd64.deb ...
+#18 22.21 Unpacking libgl-dev:amd64 (1.7.0-1build1) ...
+#18 22.23 Selecting previously unselected package libegl-dev:amd64.
+#18 22.23 Preparing to unpack .../113-libegl-dev_1.7.0-1build1_amd64.deb ...
+#18 22.23 Unpacking libegl-dev:amd64 (1.7.0-1build1) ...
+#18 22.25 Selecting previously unselected package libepoxy0:amd64.
+#18 22.25 Preparing to unpack .../114-libepoxy0_1.5.10-1build1_amd64.deb ...
+#18 22.25 Unpacking libepoxy0:amd64 (1.5.10-1build1) ...
+#18 22.27 Selecting previously unselected package libepoxy-dev:amd64.
+#18 22.27 Preparing to unpack .../115-libepoxy-dev_1.5.10-1build1_amd64.deb ...
+#18 22.27 Unpacking libepoxy-dev:amd64 (1.5.10-1build1) ...
+#18 22.29 Selecting previously unselected package libfontenc1:amd64.
+#18 22.29 Preparing to unpack .../116-libfontenc1_1%3a1.1.8-1build1_amd64.deb ...
+#18 22.29 Unpacking libfontenc1:amd64 (1:1.1.8-1build1) ...
+#18 22.31 Selecting previously unselected package zlib1g-dev:amd64.
+#18 22.31 Preparing to unpack .../117-zlib1g-dev_1%3a1.3.dfsg-3.1ubuntu2.1_amd64.deb ...
+#18 22.31 Unpacking zlib1g-dev:amd64 (1:1.3.dfsg-3.1ubuntu2.1) ...
+#18 22.33 Selecting previously unselected package libfontenc-dev:amd64.
+#18 22.33 Preparing to unpack .../118-libfontenc-dev_1%3a1.1.8-1build1_amd64.deb ...
+#18 22.33 Unpacking libfontenc-dev:amd64 (1:1.1.8-1build1) ...
+#18 22.35 Selecting previously unselected package libpng-dev:amd64.
+#18 22.35 Preparing to unpack .../119-libpng-dev_1.6.43-5ubuntu0.5_amd64.deb ...
+#18 22.35 Unpacking libpng-dev:amd64 (1.6.43-5ubuntu0.5) ...
+#18 22.37 Selecting previously unselected package libfreetype-dev:amd64.
+#18 22.37 Preparing to unpack .../120-libfreetype-dev_2.13.2+dfsg-1build3_amd64.deb ...
+#18 22.37 Unpacking libfreetype-dev:amd64 (2.13.2+dfsg-1build3) ...
+#18 22.41 Selecting previously unselected package libgles1:amd64.
+#18 22.41 Preparing to unpack .../121-libgles1_1.7.0-1build1_amd64.deb ...
+#18 22.41 Unpacking libgles1:amd64 (1.7.0-1build1) ...
+#18 22.43 Selecting previously unselected package libgles2:amd64.
+#18 22.43 Preparing to unpack .../122-libgles2_1.7.0-1build1_amd64.deb ...
+#18 22.43 Unpacking libgles2:amd64 (1.7.0-1build1) ...
+#18 22.44 Selecting previously unselected package libgles-dev:amd64.
+#18 22.45 Preparing to unpack .../123-libgles-dev_1.7.0-1build1_amd64.deb ...
+#18 22.45 Unpacking libgles-dev:amd64 (1.7.0-1build1) ...
+#18 22.47 Selecting previously unselected package libgmpxx4ldbl:amd64.
+#18 22.47 Preparing to unpack .../124-libgmpxx4ldbl_2%3a6.3.0+dfsg-2ubuntu6.1_amd64.deb ...
+#18 22.47 Unpacking libgmpxx4ldbl:amd64 (2:6.3.0+dfsg-2ubuntu6.1) ...
+#18 22.48 Selecting previously unselected package libgmp-dev:amd64.
+#18 22.49 Preparing to unpack .../125-libgmp-dev_2%3a6.3.0+dfsg-2ubuntu6.1_amd64.deb ...
+#18 22.49 Unpacking libgmp-dev:amd64 (2:6.3.0+dfsg-2ubuntu6.1) ...
+#18 22.51 Selecting previously unselected package x11-common.
+#18 22.51 Preparing to unpack .../126-x11-common_1%3a7.7+23ubuntu3_all.deb ...
+#18 22.51 Unpacking x11-common (1:7.7+23ubuntu3) ...
+#18 22.53 Selecting previously unselected package libice6:amd64.
+#18 22.53 Preparing to unpack .../127-libice6_2%3a1.0.10-1build3_amd64.deb ...
+#18 22.54 Unpacking libice6:amd64 (2:1.0.10-1build3) ...
+#18 22.55 Selecting previously unselected package libjpeg-turbo8:amd64.
+#18 22.55 Preparing to unpack .../128-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#18 22.55 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#18 22.57 Selecting previously unselected package libjpeg-turbo8-dev:amd64.
+#18 22.57 Preparing to unpack .../129-libjpeg-turbo8-dev_2.1.5-2ubuntu2_amd64.deb ...
+#18 22.57 Unpacking libjpeg-turbo8-dev:amd64 (2.1.5-2ubuntu2) ...
+#18 22.60 Selecting previously unselected package libopengl0:amd64.
+#18 22.60 Preparing to unpack .../130-libopengl0_1.7.0-1build1_amd64.deb ...
+#18 22.60 Unpacking libopengl0:amd64 (1.7.0-1build1) ...
+#18 22.61 Selecting previously unselected package libopengl-dev:amd64.
+#18 22.62 Preparing to unpack .../131-libopengl-dev_1.7.0-1build1_amd64.deb ...
+#18 22.62 Unpacking libopengl-dev:amd64 (1.7.0-1build1) ...
+#18 22.63 Selecting previously unselected package libpam0g-dev:amd64.
+#18 22.63 Preparing to unpack .../132-libpam0g-dev_1.5.3-5ubuntu5.5_amd64.deb ...
+#18 22.64 Unpacking libpam0g-dev:amd64 (1.5.3-5ubuntu5.5) ...
+#18 22.66 Selecting previously unselected package libpixman-1-0:amd64.
+#18 22.66 Preparing to unpack .../133-libpixman-1-0_0.42.2-1build1_amd64.deb ...
+#18 22.66 Unpacking libpixman-1-0:amd64 (0.42.2-1build1) ...
+#18 22.68 Selecting previously unselected package libpixman-1-dev:amd64.
+#18 22.68 Preparing to unpack .../134-libpixman-1-dev_0.42.2-1build1_amd64.deb ...
+#18 22.68 Unpacking libpixman-1-dev:amd64 (0.42.2-1build1) ...
+#18 22.70 Selecting previously unselected package libpkgconf3:amd64.
+#18 22.70 Preparing to unpack .../135-libpkgconf3_1.8.1-2build1_amd64.deb ...
+#18 22.70 Unpacking libpkgconf3:amd64 (1.8.1-2build1) ...
+#18 22.72 Selecting previously unselected package libsharpyuv0:amd64.
+#18 22.72 Preparing to unpack .../136-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#18 22.72 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#18 22.74 Selecting previously unselected package libsharpyuv-dev:amd64.
+#18 22.74 Preparing to unpack .../137-libsharpyuv-dev_1.3.2-0.4build3_amd64.deb ...
+#18 22.74 Unpacking libsharpyuv-dev:amd64 (1.3.2-0.4build3) ...
+#18 22.76 Selecting previously unselected package libsm6:amd64.
+#18 22.76 Preparing to unpack .../138-libsm6_2%3a1.2.3-1build3_amd64.deb ...
+#18 22.76 Unpacking libsm6:amd64 (2:1.2.3-1build3) ...
+#18 22.77 Selecting previously unselected package libssl-dev:amd64.
+#18 22.77 Preparing to unpack .../139-libssl-dev_3.0.13-0ubuntu3.7_amd64.deb ...
+#18 22.78 Unpacking libssl-dev:amd64 (3.0.13-0ubuntu3.7) ...
+#18 22.85 Selecting previously unselected package libtool.
+#18 22.85 Preparing to unpack .../140-libtool_2.4.7-7build1_all.deb ...
+#18 22.86 Unpacking libtool (2.4.7-7build1) ...
+#18 22.88 Selecting previously unselected package libturbojpeg:amd64.
+#18 22.88 Preparing to unpack .../141-libturbojpeg_1%3a2.1.5-2ubuntu2_amd64.deb ...
+#18 22.88 Unpacking libturbojpeg:amd64 (1:2.1.5-2ubuntu2) ...
+#18 22.90 Selecting previously unselected package libturbojpeg0-dev:amd64.
+#18 22.90 Preparing to unpack .../142-libturbojpeg0-dev_1%3a2.1.5-2ubuntu2_amd64.deb ...
+#18 22.90 Unpacking libturbojpeg0-dev:amd64 (1:2.1.5-2ubuntu2) ...
+#18 22.92 Selecting previously unselected package libudev-dev:amd64.
+#18 22.92 Preparing to unpack .../143-libudev-dev_255.4-1ubuntu8.12_amd64.deb ...
+#18 22.92 Unpacking libudev-dev:amd64 (255.4-1ubuntu8.12) ...
+#18 22.94 Selecting previously unselected package libwayland-cursor0:amd64.
+#18 22.94 Preparing to unpack .../144-libwayland-cursor0_1.22.0-2.1build1_amd64.deb ...
+#18 22.94 Unpacking libwayland-cursor0:amd64 (1.22.0-2.1build1) ...
+#18 22.96 Selecting previously unselected package libwayland-egl1:amd64.
+#18 22.96 Preparing to unpack .../145-libwayland-egl1_1.22.0-2.1build1_amd64.deb ...
+#18 22.96 Unpacking libwayland-egl1:amd64 (1.22.0-2.1build1) ...
+#18 22.98 Selecting previously unselected package libwayland-server0:amd64.
+#18 22.98 Preparing to unpack .../146-libwayland-server0_1.22.0-2.1build1_amd64.deb ...
+#18 22.98 Unpacking libwayland-server0:amd64 (1.22.0-2.1build1) ...
+#18 23.00 Selecting previously unselected package libwebp7:amd64.
+#18 23.00 Preparing to unpack .../147-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#18 23.00 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#18 23.02 Selecting previously unselected package libwebpdecoder3:amd64.
+#18 23.02 Preparing to unpack .../148-libwebpdecoder3_1.3.2-0.4build3_amd64.deb ...
+#18 23.02 Unpacking libwebpdecoder3:amd64 (1.3.2-0.4build3) ...
+#18 23.04 Selecting previously unselected package libwebpdemux2:amd64.
+#18 23.04 Preparing to unpack .../149-libwebpdemux2_1.3.2-0.4build3_amd64.deb ...
+#18 23.04 Unpacking libwebpdemux2:amd64 (1.3.2-0.4build3) ...
+#18 23.06 Selecting previously unselected package libwebpmux3:amd64.
+#18 23.06 Preparing to unpack .../150-libwebpmux3_1.3.2-0.4build3_amd64.deb ...
+#18 23.06 Unpacking libwebpmux3:amd64 (1.3.2-0.4build3) ...
+#18 23.08 Selecting previously unselected package libxt6t64:amd64.
+#18 23.08 Preparing to unpack .../151-libxt6t64_1%3a1.2.1-1.2build1_amd64.deb ...
+#18 23.08 Unpacking libxt6t64:amd64 (1:1.2.1-1.2build1) ...
+#18 23.10 Selecting previously unselected package libxmu6:amd64.
+#18 23.10 Preparing to unpack .../152-libxmu6_2%3a1.1.3-3build2_amd64.deb ...
+#18 23.10 Unpacking libxmu6:amd64 (2:1.1.3-3build2) ...
+#18 23.11 Selecting previously unselected package libxpm4:amd64.
+#18 23.12 Preparing to unpack .../153-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#18 23.12 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#18 23.14 Selecting previously unselected package libxaw7:amd64.
+#18 23.14 Preparing to unpack .../154-libxaw7_2%3a1.0.14-1build2_amd64.deb ...
+#18 23.14 Unpacking libxaw7:amd64 (2:1.0.14-1build2) ...
+#18 23.16 Selecting previously unselected package libxcb-render0:amd64.
+#18 23.16 Preparing to unpack .../155-libxcb-render0_1.15-1ubuntu2_amd64.deb ...
+#18 23.16 Unpacking libxcb-render0:amd64 (1.15-1ubuntu2) ...
+#18 23.18 Selecting previously unselected package libxcb-render0-dev:amd64.
+#18 23.18 Preparing to unpack .../156-libxcb-render0-dev_1.15-1ubuntu2_amd64.deb ...
+#18 23.18 Unpacking libxcb-render0-dev:amd64 (1.15-1ubuntu2) ...
+#18 23.19 Selecting previously unselected package libxcb-shm0-dev:amd64.
+#18 23.20 Preparing to unpack .../157-libxcb-shm0-dev_1.15-1ubuntu2_amd64.deb ...
+#18 23.20 Unpacking libxcb-shm0-dev:amd64 (1.15-1ubuntu2) ...
+#18 23.21 Selecting previously unselected package libxfixes3:amd64.
+#18 23.22 Preparing to unpack .../158-libxfixes3_1%3a6.0.0-2build1_amd64.deb ...
+#18 23.22 Unpacking libxfixes3:amd64 (1:6.0.0-2build1) ...
+#18 23.23 Selecting previously unselected package libxrender1:amd64.
+#18 23.23 Preparing to unpack .../159-libxrender1_1%3a0.9.10-1.1build1_amd64.deb ...
+#18 23.24 Unpacking libxrender1:amd64 (1:0.9.10-1.1build1) ...
+#18 23.25 Selecting previously unselected package libxcursor1:amd64.
+#18 23.25 Preparing to unpack .../160-libxcursor1_1%3a1.2.1-1build1_amd64.deb ...
+#18 23.25 Unpacking libxcursor1:amd64 (1:1.2.1-1build1) ...
+#18 23.27 Selecting previously unselected package libxrender-dev:amd64.
+#18 23.27 Preparing to unpack .../161-libxrender-dev_1%3a0.9.10-1.1build1_amd64.deb ...
+#18 23.27 Unpacking libxrender-dev:amd64 (1:0.9.10-1.1build1) ...
+#18 23.29 Selecting previously unselected package libxfixes-dev:amd64.
+#18 23.29 Preparing to unpack .../162-libxfixes-dev_1%3a6.0.0-2build1_amd64.deb ...
+#18 23.29 Unpacking libxfixes-dev:amd64 (1:6.0.0-2build1) ...
+#18 23.31 Selecting previously unselected package libxcursor-dev:amd64.
+#18 23.31 Preparing to unpack .../163-libxcursor-dev_1%3a1.2.1-1build1_amd64.deb ...
+#18 23.31 Unpacking libxcursor-dev:amd64 (1:1.2.1-1build1) ...
+#18 23.33 Selecting previously unselected package libxcvt0:amd64.
+#18 23.33 Preparing to unpack .../164-libxcvt0_0.1.2-1build1_amd64.deb ...
+#18 23.33 Unpacking libxcvt0:amd64 (0.1.2-1build1) ...
+#18 23.35 Selecting previously unselected package libxcvt-dev:amd64.
+#18 23.35 Preparing to unpack .../165-libxcvt-dev_0.1.2-1build1_amd64.deb ...
+#18 23.35 Unpacking libxcvt-dev:amd64 (0.1.2-1build1) ...
+#18 23.36 Selecting previously unselected package libxext-dev:amd64.
+#18 23.37 Preparing to unpack .../166-libxext-dev_2%3a1.3.4-1build2_amd64.deb ...
+#18 23.37 Unpacking libxext-dev:amd64 (2:1.3.4-1build2) ...
+#18 23.40 Selecting previously unselected package libxfont2:amd64.
+#18 23.40 Preparing to unpack .../167-libxfont2_1%3a2.0.6-1build1_amd64.deb ...
+#18 23.40 Unpacking libxfont2:amd64 (1:2.0.6-1build1) ...
+#18 23.42 Selecting previously unselected package libxfont-dev.
+#18 23.42 Preparing to unpack .../168-libxfont-dev_1%3a2.0.6-1build1_amd64.deb ...
+#18 23.42 Unpacking libxfont-dev (1:2.0.6-1build1) ...
+#18 23.44 Selecting previously unselected package libxi6:amd64.
+#18 23.44 Preparing to unpack .../169-libxi6_2%3a1.8.1-1build1_amd64.deb ...
+#18 23.44 Unpacking libxi6:amd64 (2:1.8.1-1build1) ...
+#18 23.46 Selecting previously unselected package libxi-dev:amd64.
+#18 23.46 Preparing to unpack .../170-libxi-dev_2%3a1.8.1-1build1_amd64.deb ...
+#18 23.46 Unpacking libxi-dev:amd64 (2:1.8.1-1build1) ...
+#18 23.48 Selecting previously unselected package libxkbfile1:amd64.
+#18 23.48 Preparing to unpack .../171-libxkbfile1_1%3a1.1.0-1build4_amd64.deb ...
+#18 23.48 Unpacking libxkbfile1:amd64 (1:1.1.0-1build4) ...
+#18 23.50 Selecting previously unselected package libxkbfile-dev:amd64.
+#18 23.50 Preparing to unpack .../172-libxkbfile-dev_1%3a1.1.0-1build4_amd64.deb ...
+#18 23.50 Unpacking libxkbfile-dev:amd64 (1:1.1.0-1build4) ...
+#18 23.52 Selecting previously unselected package libxrandr2:amd64.
+#18 23.52 Preparing to unpack .../173-libxrandr2_2%3a1.5.2-2build1_amd64.deb ...
+#18 23.52 Unpacking libxrandr2:amd64 (2:1.5.2-2build1) ...
+#18 23.54 Selecting previously unselected package libxrandr-dev:amd64.
+#18 23.54 Preparing to unpack .../174-libxrandr-dev_2%3a1.5.2-2build1_amd64.deb ...
+#18 23.54 Unpacking libxrandr-dev:amd64 (2:1.5.2-2build1) ...
+#18 23.56 Selecting previously unselected package libxshmfence-dev:amd64.
+#18 23.56 Preparing to unpack .../175-libxshmfence-dev_1.3-1build5_amd64.deb ...
+#18 23.56 Unpacking libxshmfence-dev:amd64 (1.3-1build5) ...
+#18 23.58 Selecting previously unselected package libxtst6:amd64.
+#18 23.58 Preparing to unpack .../176-libxtst6_2%3a1.2.3-1.1build1_amd64.deb ...
+#18 23.58 Unpacking libxtst6:amd64 (2:1.2.3-1.1build1) ...
+#18 23.59 Selecting previously unselected package libxtst-dev:amd64.
+#18 23.59 Preparing to unpack .../177-libxtst-dev_2%3a1.2.3-1.1build1_amd64.deb ...
+#18 23.60 Unpacking libxtst-dev:amd64 (2:1.2.3-1.1build1) ...
+#18 23.61 Selecting previously unselected package mesa-common-dev:amd64.
+#18 23.61 Preparing to unpack .../178-mesa-common-dev_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 23.61 Unpacking mesa-common-dev:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 23.67 Selecting previously unselected package ninja-build.
+#18 23.67 Preparing to unpack .../179-ninja-build_1.11.1-2_amd64.deb ...
+#18 23.67 Unpacking ninja-build (1.11.1-2) ...
+#18 23.69 Selecting previously unselected package python3-setuptools.
+#18 23.69 Preparing to unpack .../180-python3-setuptools_68.1.2-2ubuntu1.2_all.deb ...
+#18 23.69 Unpacking python3-setuptools (68.1.2-2ubuntu1.2) ...
+#18 23.74 Selecting previously unselected package meson.
+#18 23.75 Preparing to unpack .../181-meson_1.3.2-1ubuntu1_all.deb ...
+#18 23.75 Unpacking meson (1.3.2-1ubuntu1) ...
+#18 23.81 Selecting previously unselected package nettle-dev:amd64.
+#18 23.82 Preparing to unpack .../182-nettle-dev_3.9.1-2.2build1.1_amd64.deb ...
+#18 23.82 Unpacking nettle-dev:amd64 (3.9.1-2.2build1.1) ...
+#18 23.85 Selecting previously unselected package pkgconf-bin.
+#18 23.86 Preparing to unpack .../183-pkgconf-bin_1.8.1-2build1_amd64.deb ...
+#18 23.86 Unpacking pkgconf-bin (1.8.1-2build1) ...
+#18 23.87 Selecting previously unselected package pkgconf:amd64.
+#18 23.88 Preparing to unpack .../184-pkgconf_1.8.1-2build1_amd64.deb ...
+#18 23.88 Unpacking pkgconf:amd64 (1.8.1-2build1) ...
+#18 23.90 Selecting previously unselected package pkg-config:amd64.
+#18 23.90 Preparing to unpack .../185-pkg-config_1.8.1-2build1_amd64.deb ...
+#18 23.90 Unpacking pkg-config:amd64 (1.8.1-2build1) ...
+#18 23.92 Selecting previously unselected package x11-xkb-utils.
+#18 23.92 Preparing to unpack .../186-x11-xkb-utils_7.7+8build2_amd64.deb ...
+#18 23.92 Unpacking x11-xkb-utils (7.7+8build2) ...
+#18 23.94 Selecting previously unselected package xfonts-encodings.
+#18 23.94 Preparing to unpack .../187-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+#18 23.94 Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+#18 23.97 Selecting previously unselected package xfonts-utils.
+#18 23.97 Preparing to unpack .../188-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+#18 23.97 Unpacking xfonts-utils (1:7.7+6build3) ...
+#18 23.99 Selecting previously unselected package xfonts-100dpi.
+#18 24.00 Preparing to unpack .../189-xfonts-100dpi_1%3a1.0.5_all.deb ...
+#18 24.00 Unpacking xfonts-100dpi (1:1.0.5) ...
+#18 24.09 Selecting previously unselected package xfonts-75dpi.
+#18 24.09 Preparing to unpack .../190-xfonts-75dpi_1%3a1.0.5_all.deb ...
+#18 24.09 Unpacking xfonts-75dpi (1:1.0.5) ...
+#18 24.18 Selecting previously unselected package xfonts-base.
+#18 24.19 Preparing to unpack .../191-xfonts-base_1%3a1.0.5+nmu1_all.deb ...
+#18 24.19 Unpacking xfonts-base (1:1.0.5+nmu1) ...
+#18 24.29 Selecting previously unselected package xinit.
+#18 24.30 Preparing to unpack .../192-xinit_1.4.1-0ubuntu5_amd64.deb ...
+#18 24.30 Unpacking xinit (1.4.1-0ubuntu5) ...
+#18 24.31 Selecting previously unselected package xserver-common.
+#18 24.31 Preparing to unpack .../193-xserver-common_2%3a21.1.12-1ubuntu1.5_all.deb ...
+#18 24.32 Unpacking xserver-common (2:21.1.12-1ubuntu1.5) ...
+#18 24.33 Selecting previously unselected package xserver-xorg-core.
+#18 24.33 Preparing to unpack .../194-xserver-xorg-core_2%3a21.1.12-1ubuntu1.5_amd64.deb ...
+#18 24.34 Unpacking xserver-xorg-core (2:21.1.12-1ubuntu1.5) ...
+#18 24.37 Selecting previously unselected package xserver-xorg-dev.
+#18 24.37 Preparing to unpack .../195-xserver-xorg-dev_2%3a21.1.12-1ubuntu1.5_amd64.deb ...
+#18 24.37 Unpacking xserver-xorg-dev (2:21.1.12-1ubuntu1.5) ...
+#18 24.42 Selecting previously unselected package libffi-dev:amd64.
+#18 24.42 Preparing to unpack .../196-libffi-dev_3.4.6-1build1_amd64.deb ...
+#18 24.43 Unpacking libffi-dev:amd64 (3.4.6-1build1) ...
+#18 24.44 Selecting previously unselected package libglvnd-core-dev:amd64.
+#18 24.45 Preparing to unpack .../197-libglvnd-core-dev_1.7.0-1build1_amd64.deb ...
+#18 24.45 Unpacking libglvnd-core-dev:amd64 (1.7.0-1build1) ...
+#18 24.46 Selecting previously unselected package libglvnd-dev:amd64.
+#18 24.46 Preparing to unpack .../198-libglvnd-dev_1.7.0-1build1_amd64.deb ...
+#18 24.47 Unpacking libglvnd-dev:amd64 (1.7.0-1build1) ...
+#18 24.48 Selecting previously unselected package libgl1-mesa-dev:amd64.
+#18 24.48 Preparing to unpack .../199-libgl1-mesa-dev_25.2.8-0ubuntu0.24.04.1_amd64.deb ...
+#18 24.48 Unpacking libgl1-mesa-dev:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 24.50 Selecting previously unselected package libwayland-bin.
+#18 24.50 Preparing to unpack .../200-libwayland-bin_1.22.0-2.1build1_amd64.deb ...
+#18 24.50 Unpacking libwayland-bin (1.22.0-2.1build1) ...
+#18 24.52 Selecting previously unselected package libwayland-dev:amd64.
+#18 24.52 Preparing to unpack .../201-libwayland-dev_1.22.0-2.1build1_amd64.deb ...
+#18 24.52 Unpacking libwayland-dev:amd64 (1.22.0-2.1build1) ...
+#18 24.54 Selecting previously unselected package libwebp-dev:amd64.
+#18 24.54 Preparing to unpack .../202-libwebp-dev_1.3.2-0.4build3_amd64.deb ...
+#18 24.54 Unpacking libwebp-dev:amd64 (1.3.2-0.4build3) ...
+#18 24.57 Selecting previously unselected package libxcb-icccm4:amd64.
+#18 24.57 Preparing to unpack .../203-libxcb-icccm4_0.4.1-1.1build3_amd64.deb ...
+#18 24.57 Unpacking libxcb-icccm4:amd64 (0.4.1-1.1build3) ...
+#18 24.59 Selecting previously unselected package libxcb-icccm4-dev:amd64.
+#18 24.59 Preparing to unpack .../204-libxcb-icccm4-dev_0.4.1-1.1build3_amd64.deb ...
+#18 24.59 Unpacking libxcb-icccm4-dev:amd64 (0.4.1-1.1build3) ...
+#18 24.60 Selecting previously unselected package libxcb-util1:amd64.
+#18 24.61 Preparing to unpack .../205-libxcb-util1_0.4.0-1build3_amd64.deb ...
+#18 24.61 Unpacking libxcb-util1:amd64 (0.4.0-1build3) ...
+#18 24.62 Selecting previously unselected package libxcb-image0:amd64.
+#18 24.63 Preparing to unpack .../206-libxcb-image0_0.4.0-2build1_amd64.deb ...
+#18 24.63 Unpacking libxcb-image0:amd64 (0.4.0-2build1) ...
+#18 24.64 Selecting previously unselected package libxcb-image0-dev:amd64.
+#18 24.64 Preparing to unpack .../207-libxcb-image0-dev_0.4.0-2build1_amd64.deb ...
+#18 24.65 Unpacking libxcb-image0-dev:amd64 (0.4.0-2build1) ...
+#18 24.66 Selecting previously unselected package libxcb-keysyms1:amd64.
+#18 24.66 Preparing to unpack .../208-libxcb-keysyms1_0.4.0-1build4_amd64.deb ...
+#18 24.66 Unpacking libxcb-keysyms1:amd64 (0.4.0-1build4) ...
+#18 24.68 Selecting previously unselected package libxcb-keysyms1-dev:amd64.
+#18 24.68 Preparing to unpack .../209-libxcb-keysyms1-dev_0.4.0-1build4_amd64.deb ...
+#18 24.68 Unpacking libxcb-keysyms1-dev:amd64 (0.4.0-1build4) ...
+#18 24.70 Selecting previously unselected package libxcb-render-util0:amd64.
+#18 24.70 Preparing to unpack .../210-libxcb-render-util0_0.3.9-1build4_amd64.deb ...
+#18 24.70 Unpacking libxcb-render-util0:amd64 (0.3.9-1build4) ...
+#18 24.72 Selecting previously unselected package libxcb-render-util0-dev:amd64.
+#18 24.72 Preparing to unpack .../211-libxcb-render-util0-dev_0.3.9-1build4_amd64.deb ...
+#18 24.72 Unpacking libxcb-render-util0-dev:amd64 (0.3.9-1build4) ...
+#18 24.74 Selecting previously unselected package libxcb-util-dev:amd64.
+#18 24.74 Preparing to unpack .../212-libxcb-util-dev_0.4.0-1build3_amd64.deb ...
+#18 24.74 Unpacking libxcb-util-dev:amd64 (0.4.0-1build3) ...
+#18 24.76 Selecting previously unselected package wayland-protocols.
+#18 24.76 Preparing to unpack .../213-wayland-protocols_1.45-1~ubuntu0.24.04.1_all.deb ...
+#18 24.76 Unpacking wayland-protocols (1.45-1~ubuntu0.24.04.1) ...
+#18 24.81 Setting up libpixman-1-0:amd64 (0.42.2-1build1) ...
+#18 24.81 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#18 24.81 Setting up libwayland-server0:amd64 (1.22.0-2.1build1) ...
+#18 24.82 Setting up libpciaccess0:amd64 (0.17-3ubuntu0.24.04.2) ...
+#18 24.82 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#18 24.82 Setting up lto-disabled-list (47) ...
+#18 24.82 Setting up libpixman-1-dev:amd64 (0.42.2-1build1) ...
+#18 24.82 Setting up libpciaccess-dev:amd64 (0.17-3ubuntu0.24.04.2) ...
+#18 24.83 Setting up python3-setuptools (68.1.2-2ubuntu1.2) ...
+#18 25.23 Setting up libglvnd-core-dev:amd64 (1.7.0-1build1) ...
+#18 25.24 Setting up libpam0g-dev:amd64 (1.5.3-5ubuntu5.5) ...
+#18 25.24 Setting up libmagic-mgc (1:5.45-3build1) ...
+#18 25.24 Setting up libglvnd0:amd64 (1.7.0-1build1) ...
+#18 25.24 Setting up libuv1t64:amd64 (1.48.0-1.1build1) ...
+#18 25.25 Setting up libmagic1t64:amd64 (1:5.45-3build1) ...
+#18 25.25 Setting up binutils-common:amd64 (2.42-4ubuntu2.8) ...
+#18 25.25 Setting up x11-common (1:7.7+23ubuntu3) ...
+#18 25.34 invoke-rc.d: could not determine current runlevel
+#18 25.34 invoke-rc.d: policy-rc.d denied execution of start.
+#18 25.34 Setting up libsensors-config (1:3.6.0-9build1) ...
+#18 25.35 Setting up libwebpdecoder3:amd64 (1.3.2-0.4build3) ...
+#18 25.35 Setting up libctf-nobfd0:amd64 (2.42-4ubuntu2.8) ...
+#18 25.35 Setting up m4 (1.4.19-4build1) ...
+#18 25.36 Setting up xkb-data (2.41-2ubuntu1.1) ...
+#18 25.36 Setting up file (1:5.45-3build1) ...
+#18 25.36 Setting up libgomp1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.36 Setting up bzip2 (1.0.8-5.1build0.1) ...
+#18 25.36 Setting up libffi-dev:amd64 (3.4.6-1build1) ...
+#18 25.37 Setting up libpthread-stubs0-dev:amd64 (0.4-1build3) ...
+#18 25.37 Setting up libsframe1:amd64 (2.42-4ubuntu2.8) ...
+#18 25.37 Setting up libopengl0:amd64 (1.7.0-1build1) ...
+#18 25.37 Setting up ninja-build (1.11.1-2) ...
+#18 25.38 Setting up libjansson4:amd64 (2.14-2build2) ...
+#18 25.38 Setting up xtrans-dev (1.4.0-1) ...
+#18 25.38 Setting up libwayland-bin (1.22.0-2.1build1) ...
+#18 25.38 Setting up libfontenc1:amd64 (1:1.1.8-1build1) ...
+#18 25.39 Setting up autotools-dev (20220109.1) ...
+#18 25.39 Setting up libpkgconf3:amd64 (1.8.1-2build1) ...
+#18 25.39 Setting up libgmpxx4ldbl:amd64 (2:6.3.0+dfsg-2ubuntu6.1) ...
+#18 25.39 Setting up libgles2:amd64 (1.7.0-1build1) ...
+#18 25.39 Setting up gcc-13-base:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#18 25.40 Setting up libx11-data (2:1.8.7-1build1) ...
+#18 25.40 Setting up make (4.3-4.1build2) ...
+#18 25.40 Setting up libepoxy0:amd64 (1.5.10-1build1) ...
+#18 25.40 Setting up libmpfr6:amd64 (4.2.1-1build1.1) ...
+#18 25.41 Setting up libgles1:amd64 (1.7.0-1build1) ...
+#18 25.41 Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+#18 25.41 Setting up libquadmath0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.41 Setting up libssl-dev:amd64 (3.0.13-0ubuntu3.7) ...
+#18 25.42 Setting up libmpc3:amd64 (1.3.1-1build1.1) ...
+#18 25.42 Setting up libatomic1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.42 Setting up udev (255.4-1ubuntu8.12) ...
+#18 25.70 Creating group 'input' with GID 996.
+#18 25.70 Creating group 'sgx' with GID 995.
+#18 25.70 Creating group 'kvm' with GID 994.
+#18 25.70 Creating group 'render' with GID 993.
+#18 25.72 Setting up patch (2.7.6-7build3) ...
+#18 25.72 Setting up libjsoncpp25:amd64 (1.9.5-6build1) ...
+#18 25.72 Setting up libudev-dev:amd64 (255.4-1ubuntu8.12) ...
+#18 25.72 Setting up pkgconf-bin (1.8.1-2build1) ...
+#18 25.73 Setting up libsensors5:amd64 (1:3.6.0-9build1) ...
+#18 25.73 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#18 25.73 Setting up libdpkg-perl (1.22.6ubuntu6.5) ...
+#18 25.73 Setting up libvulkan1:amd64 (1.3.275.0-1build1) ...
+#18 25.74 Setting up autoconf (2.71-3) ...
+#18 25.74 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#18 25.74 Setting up libubsan1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.74 Setting up zlib1g-dev:amd64 (1:1.3.dfsg-3.1ubuntu2.1) ...
+#18 25.75 Setting up libturbojpeg:amd64 (1:2.1.5-2ubuntu2) ...
+#18 25.75 Setting up wayland-protocols (1.45-1~ubuntu0.24.04.1) ...
+#18 25.75 Setting up libxshmfence1:amd64 (1.3-1build5) ...
+#18 25.75 Setting up libhwasan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.76 Setting up librhash0:amd64 (1.4.3-3build1) ...
+#18 25.76 Setting up libasan8:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.76 Setting up libxcvt0:amd64 (0.1.2-1build1) ...
+#18 25.76 Setting up xorg-sgml-doctools (1:1.11-1.1) ...
+#18 25.77 Setting up cmake-data (3.28.3-1build7) ...
+#18 25.77 Setting up libwayland-egl1:amd64 (1.22.0-2.1build1) ...
+#18 25.77 Setting up libtsan2:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.78 Setting up libopengl-dev:amd64 (1.7.0-1build1) ...
+#18 25.78 Setting up libbinutils:amd64 (2.42-4ubuntu2.8) ...
+#18 25.78 Setting up libisl23:amd64 (0.26-3build1.1) ...
+#18 25.79 Setting up libsharpyuv-dev:amd64 (1.3.2-0.4build3) ...
+#18 25.80 Setting up libwebpmux3:amd64 (1.3.2-0.4build3) ...
+#18 25.80 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#18 25.80 Setting up libdrm-common (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 25.80 Setting up libarchive13t64:amd64 (3.7.2-2ubuntu0.5) ...
+#18 25.81 Setting up libxfont2:amd64 (1:2.0.6-1build1) ...
+#18 25.81 Setting up libcc1-0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.81 Setting up liblocale-gettext-perl (1.07-6ubuntu5) ...
+#18 25.81 Setting up libbrotli-dev:amd64 (1.1.0-2build2) ...
+#18 25.81 Setting up liblsan0:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.82 Setting up libitm1:amd64 (14.2.0-4ubuntu2~24.04.1) ...
+#18 25.82 Setting up libbz2-dev:amd64 (1.0.8-5.1build0.1) ...
+#18 25.82 Setting up libwayland-client0:amd64 (1.22.0-2.1build1) ...
+#18 25.82 Setting up libctf0:amd64 (2.42-4ubuntu2.8) ...
+#18 25.83 Setting up automake (1:1.16.5-1.3ubuntu1) ...
+#18 25.83 update-alternatives: using /usr/bin/automake-1.16 to provide /usr/bin/automake (automake) in auto mode
+#18 25.83 update-alternatives: warning: skip creation of /usr/share/man/man1/automake.1.gz because associated file /usr/share/man/man1/automake-1.16.1.gz (of link group automake) doesn't exist
+#18 25.83 update-alternatives: warning: skip creation of /usr/share/man/man1/aclocal.1.gz because associated file /usr/share/man/man1/aclocal-1.16.1.gz (of link group automake) doesn't exist
+#18 25.83 Setting up libice6:amd64 (2:1.0.10-1build3) ...
+#18 25.83 Setting up libjpeg-turbo8-dev:amd64 (2.1.5-2ubuntu2) ...
+#18 25.84 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#18 25.84 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#18 25.84 Setting up libgmp-dev:amd64 (2:6.3.0+dfsg-2ubuntu6.1) ...
+#18 25.84 Setting up libxcb-xfixes0:amd64 (1.15-1ubuntu2) ...
+#18 25.85 Setting up libxcvt-dev:amd64 (0.1.2-1build1) ...
+#18 25.85 Setting up nettle-dev:amd64 (3.9.1-2.2build1.1) ...
+#18 25.85 Setting up libxcb-render0:amd64 (1.15-1ubuntu2) ...
+#18 25.85 Setting up libxshmfence-dev:amd64 (1.3-1build5) ...
+#18 25.85 Setting up cpp-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#18 25.86 Setting up libxcb-glx0:amd64 (1.15-1ubuntu2) ...
+#18 25.86 Setting up libwebpdemux2:amd64 (1.3.2-0.4build3) ...
+#18 25.86 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#18 25.86 Setting up libpng-dev:amd64 (1.6.43-5ubuntu0.5) ...
+#18 25.87 Setting up libxcb-keysyms1:amd64 (0.4.0-1build4) ...
+#18 25.87 Setting up libfontenc-dev:amd64 (1:1.1.8-1build1) ...
+#18 25.87 Setting up meson (1.3.2-1ubuntu1) ...
+#18 26.58 Setting up libxcb-render-util0:amd64 (0.3.9-1build4) ...
+#18 26.58 Setting up libxcb-shm0:amd64 (1.15-1ubuntu2) ...
+#18 26.59 Setting up libxcb-icccm4:amd64 (0.4.1-1.1build3) ...
+#18 26.59 Setting up xfonts-utils (1:7.7+6build3) ...
+#18 26.59 Setting up libxcb-util1:amd64 (0.4.0-1build3) ...
+#18 26.59 Setting up pkgconf:amd64 (1.8.1-2build1) ...
+#18 26.60 Setting up libxcb-image0:amd64 (0.4.0-2build1) ...
+#18 26.60 Setting up libfreetype-dev:amd64 (2.13.2+dfsg-1build3) ...
+#18 26.60 Setting up libxcb-present0:amd64 (1.15-1ubuntu2) ...
+#18 26.60 Setting up libturbojpeg0-dev:amd64 (1:2.1.5-2ubuntu2) ...
+#18 26.61 Setting up xfonts-base (1:1.0.5+nmu1) ...
+#18 26.65 Setting up libgprofng0:amd64 (2.42-4ubuntu2.8) ...
+#18 26.66 Setting up libwebp-dev:amd64 (1.3.2-0.4build3) ...
+#18 26.66 Setting up libxcb-sync1:amd64 (1.15-1ubuntu2) ...
+#18 26.66 Setting up libllvm20:amd64 (1:20.1.2-0ubuntu1~24.04.2) ...
+#18 26.66 Setting up pkg-config:amd64 (1.8.1-2build1) ...
+#18 26.66 Setting up libdrm2:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 26.67 Setting up libgcc-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#18 26.67 Setting up libwayland-cursor0:amd64 (1.22.0-2.1build1) ...
+#18 26.67 Setting up libxcb-randr0:amd64 (1.15-1ubuntu2) ...
+#18 26.68 Setting up cmake (3.28.3-1build7) ...
+#18 26.68 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#18 26.68 Setting up libxkbfile1:amd64 (1:1.1.0-1build4) ...
+#18 26.68 Setting up xfonts-75dpi (1:1.0.5) ...
+#18 26.73 Setting up keyboard-configuration (1.226ubuntu1) ...
+#18 26.96 Your console font configuration will be updated the next time your system
+#18 26.96 boots. If you want to update it now, run 'setupcon' from a virtual console.
+#18 26.98 Setting up libsm6:amd64 (2:1.2.3-1build3) ...
+#18 26.98 Setting up libxmuu1:amd64 (2:1.1.3-3build2) ...
+#18 26.99 Setting up libstdc++-13-dev:amd64 (13.3.0-6ubuntu2~24.04.1) ...
+#18 26.99 Setting up binutils-x86-64-linux-gnu (2.42-4ubuntu2.8) ...
+#18 26.99 Setting up libdrm-amdgpu1:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 26.99 Setting up cpp-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#18 27.00 Setting up libxcb-dri3-0:amd64 (1.15-1ubuntu2) ...
+#18 27.00 Setting up libx11-xcb1:amd64 (2:1.8.7-1build1) ...
+#18 27.00 Setting up libdrm-nouveau2:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 27.00 Setting up xfonts-100dpi (1:1.0.5) ...
+#18 27.05 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#18 27.06 Setting up cpp-13 (13.3.0-6ubuntu2~24.04.1) ...
+#18 27.06 Setting up libxrender1:amd64 (1:0.9.10-1.1build1) ...
+#18 27.06 Setting up libdrm-radeon1:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 27.06 Setting up gcc-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#18 27.07 Setting up libdrm-intel1:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 27.07 Setting up libxext6:amd64 (2:1.3.4-1build2) ...
+#18 27.07 Setting up binutils (2.42-4ubuntu2.8) ...
+#18 27.07 Setting up libwayland-dev:amd64 (1.22.0-2.1build1) ...
+#18 27.08 Setting up dpkg-dev (1.22.6ubuntu6.5) ...
+#18 27.08 Setting up libxxf86vm1:amd64 (1:1.1.4-1build4) ...
+#18 27.08 Setting up libxfixes3:amd64 (1:6.0.0-2build1) ...
+#18 27.09 Setting up libxt6t64:amd64 (1:1.2.1-1.2build1) ...
+#18 27.09 Setting up gcc-13 (13.3.0-6ubuntu2~24.04.1) ...
+#18 27.10 Setting up libxrandr2:amd64 (2:1.5.2-2build1) ...
+#18 27.10 Setting up xauth (1:1.1.2-1build1) ...
+#18 27.11 Setting up cpp (4:13.2.0-7ubuntu1) ...
+#18 27.11 Setting up xinit (1.4.1-0ubuntu5) ...
+#18 27.12 Setting up mesa-libgallium:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 27.12 Setting up libdrm-dev:amd64 (2.4.125-1ubuntu0.1~24.04.1) ...
+#18 27.12 Setting up libxmu6:amd64 (2:1.1.3-3build2) ...
+#18 27.13 Setting up g++-13-x86-64-linux-gnu (13.3.0-6ubuntu2~24.04.1) ...
+#18 27.13 Setting up libxi6:amd64 (2:1.8.1-1build1) ...
+#18 27.13 Setting up gcc-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#18 27.13 Setting up libgbm1:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 27.14 Setting up libtool (2.4.7-7build1) ...
+#18 27.14 Setting up libxtst6:amd64 (2:1.2.3-1.1build1) ...
+#18 27.14 Setting up libxcursor1:amd64 (1:1.2.1-1build1) ...
+#18 27.14 Setting up libgl1-mesa-dri:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 27.15 Setting up libxaw7:amd64 (2:1.0.14-1build2) ...
+#18 27.15 Setting up gcc (4:13.2.0-7ubuntu1) ...
+#18 27.16 Setting up libegl-mesa0:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 27.16 Setting up libegl1:amd64 (1.7.0-1build1) ...
+#18 27.17 Setting up g++-x86-64-linux-gnu (4:13.2.0-7ubuntu1) ...
+#18 27.17 Setting up g++-13 (13.3.0-6ubuntu2~24.04.1) ...
+#18 27.17 Setting up libglx-mesa0:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 27.17 Setting up libglx0:amd64 (1.7.0-1build1) ...
+#18 27.18 Setting up x11-xkb-utils (7.7+8build2) ...
+#18 27.18 Setting up libgl1:amd64 (1.7.0-1build1) ...
+#18 27.18 Setting up g++ (4:13.2.0-7ubuntu1) ...
+#18 27.18 update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+#18 27.18 update-alternatives: warning: skip creation of /usr/share/man/man1/c++.1.gz because associated file /usr/share/man/man1/g++.1.gz (of link group c++) doesn't exist
+#18 27.19 Setting up build-essential (12.10ubuntu1) ...
+#18 27.19 Setting up xserver-common (2:21.1.12-1ubuntu1.5) ...
+#18 27.19 Setting up xserver-xorg-core (2:21.1.12-1ubuntu1.5) ...
+#18 27.20 Processing triggers for sgml-base (1.31) ...
+#18 27.21 Setting up x11proto-dev (2023.2-1) ...
+#18 27.22 Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+#18 27.79 Setting up libxau-dev:amd64 (1:1.0.9-1build6) ...
+#18 27.80 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#18 27.82 Setting up libxdmcp-dev:amd64 (1:1.1.3-0ubuntu6) ...
+#18 27.83 Setting up libxcb1-dev:amd64 (1.15-1ubuntu2) ...
+#18 27.83 Setting up libx11-dev:amd64 (2:1.8.7-1build1) ...
+#18 27.83 Setting up libxfixes-dev:amd64 (1:6.0.0-2build1) ...
+#18 27.83 Setting up libxcb-shm0-dev:amd64 (1.15-1ubuntu2) ...
+#18 27.84 Setting up libxcb-keysyms1-dev:amd64 (0.4.0-1build4) ...
+#18 27.84 Setting up libxcb-util-dev:amd64 (0.4.0-1build3) ...
+#18 27.84 Setting up libxcb-render0-dev:amd64 (1.15-1ubuntu2) ...
+#18 27.85 Setting up libxcb-icccm4-dev:amd64 (0.4.1-1.1build3) ...
+#18 27.85 Setting up libxext-dev:amd64 (2:1.3.4-1build2) ...
+#18 27.85 Setting up libxcb-render-util0-dev:amd64 (0.3.9-1build4) ...
+#18 27.85 Setting up libglx-dev:amd64 (1.7.0-1build1) ...
+#18 27.86 Setting up libxi-dev:amd64 (2:1.8.1-1build1) ...
+#18 27.86 Setting up libxrender-dev:amd64 (1:0.9.10-1.1build1) ...
+#18 27.86 Setting up libgl-dev:amd64 (1.7.0-1build1) ...
+#18 27.86 Setting up libxcb-image0-dev:amd64 (0.4.0-2build1) ...
+#18 27.87 Setting up libxtst-dev:amd64 (2:1.2.3-1.1build1) ...
+#18 27.87 Setting up libxkbfile-dev:amd64 (1:1.1.0-1build4) ...
+#18 27.87 Setting up libegl-dev:amd64 (1.7.0-1build1) ...
+#18 27.87 Setting up libxcursor-dev:amd64 (1:1.2.1-1build1) ...
+#18 27.88 Setting up libxfont-dev (1:2.0.6-1build1) ...
+#18 27.88 Setting up libepoxy-dev:amd64 (1.5.10-1build1) ...
+#18 27.88 Setting up libxrandr-dev:amd64 (2:1.5.2-2build1) ...
+#18 27.89 Setting up mesa-common-dev:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 27.89 Setting up libgles-dev:amd64 (1.7.0-1build1) ...
+#18 27.89 Setting up xserver-xorg-dev (2:21.1.12-1ubuntu1.5) ...
+#18 27.89 Setting up libglvnd-dev:amd64 (1.7.0-1build1) ...
+#18 27.90 Setting up libgl1-mesa-dev:amd64 (25.2.8-0ubuntu0.24.04.1) ...
+#18 DONE 29.2s
+
+#19 [buildstage 4/6] RUN   echo "**** skip custom libjpeg-turbo build (system package used) ****"
+#19 0.211 **** skip custom libjpeg-turbo build (system package used) ****
+#19 DONE 0.2s
+
+#20 [buildstage 5/6] RUN   echo "**** build kasmvnc ****" &&   git clone https://github.com/kasmtech/KasmVNC.git src &&   cd src &&   git checkout -f e04731870baebd2784983fb48197a2416c7d3519 &&   sed -i     -e '/find_package(FLTK/s@^@#@'     -e '/add_subdirectory(tests/s@^@#@'     CMakeLists.txt &&   cmake     -DCMAKE_BUILD_TYPE=RelWithDebInfo     -DBUILD_VIEWER:BOOL=OFF     -DENABLE_GNUTLS:BOOL=OFF     . &&   make -j4 &&   echo "**** build xorg ****" &&   XORG_VER="21.1.14" &&   wget --no-check-certificate     -O /tmp/xorg-server-${XORG_VER}.tar.gz     "https://www.x.org/archive/individual/xserver/xorg-server-${XORG_VER}.tar.gz" &&   tar --strip-components=1     -C unix/xserver     -xf /tmp/xorg-server-${XORG_VER}.tar.gz &&   cd unix/xserver &&   patch -Np1 -i ../xserver21.patch &&   patch -s -p0 < ../CVE-2022-2320-v1.20.patch &&   autoreconf -i &&   ./configure     --disable-config-hal     --disable-config-udev     --disable-dmx     --disable-dri     --disable-dri2     --disable-kdrive     --disable-static     --disable-xephyr     --disable-xinerama     --disable-xnest     --disable-xorg     --disable-xvfb     --disable-xwayland     --disable-xwin     --enable-dri3     --enable-glx     --prefix=/opt/kasmweb     --with-default-font-path="/usr/share/fonts/X11/misc,/usr/share/fonts/X11/cyrillic,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,built-ins"     --without-dtrace     --with-sha1=libcrypto     --with-xkb-bin-directory=/usr/bin     --with-xkb-output=/var/lib/xkb     --with-xkb-path=/usr/share/X11/xkb &&   find . -name "Makefile" -exec sed -i 's/-Werror=array-bounds//g' {} ; &&   make -j4
+#20 0.173 **** build kasmvnc ****
+#20 0.175 Cloning into 'src'...
+#20 0.820 Note: switching to 'e04731870baebd2784983fb48197a2416c7d3519'.
+#20 0.820 
+#20 0.820 You are in 'detached HEAD' state. You can look around, make experimental
+#20 0.820 changes and commit them, and you can discard any commits you make in this
+#20 0.820 state without impacting any branches by switching back to a branch.
+#20 0.820 
+#20 0.820 If you want to create a new branch to retain commits you create, you may
+#20 0.820 do so (now or later) by using -c with the switch command. Example:
+#20 0.820 
+#20 0.820   git switch -c <new-branch-name>
+#20 0.820 
+#20 0.820 Or undo this operation with:
+#20 0.820 
+#20 0.820   git switch -
+#20 0.820 
+#20 0.820 Turn off this advice by setting config variable advice.detachedHead to false
+#20 0.820 
+#20 0.820 HEAD is now at e047318 Merge branch 'feature/KASM-6760-latest-xorg' into 'master'
+#20 0.831 CMake Deprecation Warning at CMakeLists.txt:5 (cmake_minimum_required):
+#20 0.831   Compatibility with CMake < 3.5 will be removed from a future version of
+#20 0.831   CMake.
+#20 0.831 
+#20 0.831   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#20 0.831   CMake that the project does not need compatibility with older versions.
+#20 0.831 
+#20 0.831 
+#20 0.831 CMake Deprecation Warning at CMakeLists.txt:7 (cmake_policy):
+#20 0.831   The OLD behavior for policy CMP0022 will be removed from a future version
+#20 0.831   of CMake.
+#20 0.831 
+#20 0.831   The cmake-policies(7) manual explains that the OLD behaviors of all
+#20 0.831   policies are deprecated and that a policy should be set to OLD only under
+#20 0.831   specific short-term circumstances.  Projects should be ported to the NEW
+#20 0.831   behavior and not rely on setting a policy to OLD.
+#20 0.831 
+#20 0.831 
+#20 0.890 -- The C compiler identification is GNU 13.3.0
+#20 0.953 -- The CXX compiler identification is GNU 13.3.0
+#20 0.971 -- Detecting C compiler ABI info
+#20 1.055 -- Detecting C compiler ABI info - done
+#20 1.066 -- Check for working C compiler: /usr/bin/cc - skipped
+#20 1.067 -- Detecting C compile features
+#20 1.067 -- Detecting C compile features - done
+#20 1.078 -- Detecting CXX compiler ABI info
+#20 1.171 -- Detecting CXX compiler ABI info - done
+#20 1.182 -- Check for working CXX compiler: /usr/bin/c++ - skipped
+#20 1.183 -- Detecting CXX compile features
+#20 1.183 -- Detecting CXX compile features - done
+#20 1.186 -- CMAKE_BUILD_TYPE = RelWithDebInfo
+#20 1.186 -- VERSION = 0.9
+#20 1.186 -- BUILD_TIMESTAMP = 2026-02-17 15:12
+#20 1.186 -- WWWDIR = /usr/local/share/kasmvnc/www
+#20 1.187 -- 64-bit build
+#20 1.221 -- Found X11: /usr/include   
+#20 1.222 -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+#20 1.306 -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+#20 1.307 -- Looking for gethostbyname
+#20 1.386 -- Looking for gethostbyname - found
+#20 1.387 -- Looking for connect
+#20 1.467 -- Looking for connect - found
+#20 1.467 -- Looking for remove
+#20 1.546 -- Looking for remove - found
+#20 1.546 -- Looking for shmat
+#20 1.626 -- Looking for shmat - found
+#20 1.636 -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")  
+#20 1.650 -- Found PNG: /usr/lib/x86_64-linux-gnu/libpng.so (found version "1.6.43") 
+#20 1.659 -- Found JPEG: /usr/lib/x86_64-linux-gnu/libjpeg.so (found version "80") 
+#20 1.663 -- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1") 
+#20 1.664 -- Checking for module 'freetype2'
+#20 1.675 --   Found freetype2, version 26.1.20
+#20 1.706 -- Found freetype: /usr/include/freetype2  
+#20 1.706 -- Performing Test FOUND_LIBJPEG_TURBO
+#20 1.795 -- Performing Test FOUND_LIBJPEG_TURBO - Success
+#20 1.795 -- Looking for include file security/pam_appl.h
+#20 1.874 -- Looking for include file security/pam_appl.h - found
+#20 1.874 -- Looking for pam_start
+#20 1.954 -- Looking for pam_start - found
+#20 1.955 -- Performing Test COMPILER_SUPPORTS_SSE2
+#20 2.044 -- Performing Test COMPILER_SUPPORTS_SSE2 - Success
+#20 2.046 -- Creating static libtool control file for target os
+#20 2.048 -- Creating static libtool control file for target rdr
+#20 2.050 -- Creating static libtool control file for target network
+#20 2.052 -- Creating static libtool control file for target Xregion
+#20 2.053 -- Creating static libtool control file for target rfb
+#20 2.059 -- Creating static libtool control file for target unixcommon
+#20 2.063 -- Configuring done (1.2s)
+#20 2.109 -- Generating done (0.0s)
+#20 2.112 CMake Warning:
+#20 2.112   Manually-specified variables were not used by the project:
+#20 2.112 
+#20 2.112     BUILD_VIEWER
+#20 2.112 
+#20 2.112 
+#20 2.113 -- Build files have been written to: /config/src
+#20 2.164 [  0%] Building C object common/Xregion/CMakeFiles/Xregion.dir/Region.c.o
+#20 2.164 [  1%] Building CXX object common/os/CMakeFiles/os.dir/Mutex.cxx.o
+#20 2.165 [  1%] Building CXX object unix/tx/CMakeFiles/tx.dir/TXWindow.cxx.o
+#20 2.167 [  2%] Building CXX object common/network/CMakeFiles/network.dir/GetAPIMessager.cxx.o
+#20 2.252 [  2%] Building CXX object common/os/CMakeFiles/os.dir/Thread.cxx.o
+#20 2.370 [  3%] Building C object common/os/CMakeFiles/os.dir/w32tiger.c.o
+#20 2.397 [  4%] Building CXX object common/os/CMakeFiles/os.dir/os.cxx.o
+#20 2.488 [  5%] Linking CXX static library libos.a
+#20 2.554 [  6%] Linking C static library libXregion.a
+#20 2.580 [  6%] Built target os
+#20 2.593 [  7%] Building CXX object common/network/CMakeFiles/network.dir/Blacklist.cxx.o
+#20 2.634 [  7%] Built target Xregion
+#20 2.646 [  7%] Building CXX object common/network/CMakeFiles/network.dir/iceip.cxx.o
+#20 2.833 [  8%] Building CXX object unix/common/CMakeFiles/unixcommon.dir/randr.cxx.o
+#20 2.935 [  9%] Linking CXX static library libtx.a
+#20 2.989 [  9%] Built target tx
+#20 3.001 [ 10%] Building CXX object common/network/CMakeFiles/network.dir/Socket.cxx.o
+#20 3.241 [ 11%] Building C object unix/kasmvncpasswd/CMakeFiles/kasmvncpasswd.dir/kasmvncpasswd.c.o
+#20 3.381 [ 11%] Building C object unix/kasmvncpasswd/CMakeFiles/kasmvncpasswd.dir/kasmpasswd.c.o
+#20 3.498 [ 12%] Linking C executable kasmvncpasswd
+#20 3.506 [ 13%] Building C object unix/kasmxproxy/CMakeFiles/kasmxproxy.dir/xxhash.c.o
+#20 3.545 [ 14%] Building CXX object common/network/CMakeFiles/network.dir/TcpSocket.cxx.o
+#20 3.556 [ 14%] Built target kasmvncpasswd
+#20 3.568 [ 15%] Building CXX object common/network/CMakeFiles/network.dir/Udp.cxx.o
+#20 3.649 [ 15%] Linking CXX static library libunixcommon.a
+#20 3.731 [ 15%] Built target unixcommon
+#20 3.744 [ 15%] Building C object common/network/CMakeFiles/network.dir/cJSON.c.o
+#20 3.897 [ 16%] Building C object unix/kasmxproxy/CMakeFiles/kasmxproxy.dir/kasmxproxy.c.o
+#20 3.955 /config/src/unix/kasmxproxy/kasmxproxy.c: In function ‘main’:
+#20 3.955 /config/src/unix/kasmxproxy/kasmxproxy.c:278:48: warning: variable ‘s’ set but not used [-Wunused-but-set-variable]
+#20 3.955   278 |                                         Status s;
+#20 3.955       |                                                ^
+#20 3.973 /config/src/common/network/TcpSocket.cxx: In function ‘void openssl_threads()’:
+#20 3.973 /config/src/common/network/TcpSocket.cxx:578:23: warning: ‘int ERR_load_BIO_strings()’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 3.973   578 |   ERR_load_BIO_strings();
+#20 3.973       |   ~~~~~~~~~~~~~~~~~~~~^~
+#20 3.973 In file included from /usr/include/openssl/cryptoerr.h:17,
+#20 3.973                  from /usr/include/openssl/crypto.h:38,
+#20 3.973                  from /config/src/common/network/TcpSocket.cxx:45:
+#20 3.973 /usr/include/openssl/cryptoerr_legacy.h:31:27: note: declared here
+#20 3.973    31 | OSSL_DEPRECATEDIN_3_0 int ERR_load_BIO_strings(void);
+#20 3.973       |                           ^~~~~~~~~~~~~~~~~~~~
+#20 4.124 [ 16%] Linking C executable kasmxproxy
+#20 4.142 [ 16%] Building CXX object common/rdr/CMakeFiles/rdr.dir/BufferedInStream.cxx.o
+#20 4.196 [ 16%] Built target kasmxproxy
+#20 4.211 [ 17%] Building C object common/network/CMakeFiles/network.dir/jsonescape.c.o
+#20 4.222 [ 18%] Building CXX object common/rdr/CMakeFiles/rdr.dir/BufferedOutStream.cxx.o
+#20 4.311 [ 19%] Building CXX object common/rdr/CMakeFiles/rdr.dir/Exception.cxx.o
+#20 4.321 [ 19%] Building CXX object common/rdr/CMakeFiles/rdr.dir/FdInStream.cxx.o
+#20 4.422 [ 20%] Building C object common/network/CMakeFiles/network.dir/websocket.c.o
+#20 4.465 [ 21%] Building CXX object common/rdr/CMakeFiles/rdr.dir/FdOutStream.cxx.o
+#20 4.474 [ 21%] Building C object common/network/CMakeFiles/network.dir/websockify.c.o
+#20 4.556 /config/src/common/network/websocket.c: In function ‘gen_md5’:
+#20 4.556 /config/src/common/network/websocket.c:759:5: warning: ‘MD5_Init’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.556   759 |     MD5_Init(&c);
+#20 4.556       |     ^~~~~~~~
+#20 4.556 In file included from /config/src/common/network/websocket.c:36:
+#20 4.556 /usr/include/openssl/md5.h:49:27: note: declared here
+#20 4.556    49 | OSSL_DEPRECATEDIN_3_0 int MD5_Init(MD5_CTX *c);
+#20 4.556       |                           ^~~~~~~~
+#20 4.557 /config/src/common/network/websocket.c:760:5: warning: ‘MD5_Update’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.557   760 |     MD5_Update(&c, (void *)in, sizeof in);
+#20 4.557       |     ^~~~~~~~~~
+#20 4.557 /usr/include/openssl/md5.h:50:27: note: declared here
+#20 4.557    50 | OSSL_DEPRECATEDIN_3_0 int MD5_Update(MD5_CTX *c, const void *data, size_t len);
+#20 4.557       |                           ^~~~~~~~~~
+#20 4.557 /config/src/common/network/websocket.c:761:5: warning: ‘MD5_Final’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.557   761 |     MD5_Final((void *)target, &c);
+#20 4.557       |     ^~~~~~~~~
+#20 4.557 /usr/include/openssl/md5.h:51:27: note: declared here
+#20 4.557    51 | OSSL_DEPRECATEDIN_3_0 int MD5_Final(unsigned char *md, MD5_CTX *c);
+#20 4.557       |                           ^~~~~~~~~
+#20 4.557 /config/src/common/network/websocket.c: In function ‘gen_sha1’:
+#20 4.558 /config/src/common/network/websocket.c:773:5: warning: ‘SHA1_Init’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.558   773 |     SHA1_Init(&c);
+#20 4.558       |     ^~~~~~~~~
+#20 4.558 In file included from /usr/include/openssl/x509.h:41,
+#20 4.558                  from /usr/include/openssl/ssl.h:31,
+#20 4.558                  from /config/src/common/network/websocket.c:34:
+#20 4.558 /usr/include/openssl/sha.h:49:27: note: declared here
+#20 4.558    49 | OSSL_DEPRECATEDIN_3_0 int SHA1_Init(SHA_CTX *c);
+#20 4.558       |                           ^~~~~~~~~
+#20 4.558 /config/src/common/network/websocket.c:774:5: warning: ‘SHA1_Update’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.558   774 |     SHA1_Update(&c, headers->key1, strlen(headers->key1));
+#20 4.558       |     ^~~~~~~~~~~
+#20 4.559 /usr/include/openssl/sha.h:50:27: note: declared here
+#20 4.559    50 | OSSL_DEPRECATEDIN_3_0 int SHA1_Update(SHA_CTX *c, const void *data, size_t len);
+#20 4.559       |                           ^~~~~~~~~~~
+#20 4.559 /config/src/common/network/websocket.c:775:5: warning: ‘SHA1_Update’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.559   775 |     SHA1_Update(&c, HYBI_GUID, 36);
+#20 4.559       |     ^~~~~~~~~~~
+#20 4.559 /usr/include/openssl/sha.h:50:27: note: declared here
+#20 4.559    50 | OSSL_DEPRECATEDIN_3_0 int SHA1_Update(SHA_CTX *c, const void *data, size_t len);
+#20 4.559       |                           ^~~~~~~~~~~
+#20 4.560 /config/src/common/network/websocket.c:776:5: warning: ‘SHA1_Final’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 4.560   776 |     SHA1_Final(hash, &c);
+#20 4.560       |     ^~~~~~~~~~
+#20 4.560 /usr/include/openssl/sha.h:51:27: note: declared here
+#20 4.560    51 | OSSL_DEPRECATEDIN_3_0 int SHA1_Final(unsigned char *md, SHA_CTX *c);
+#20 4.560       |                           ^~~~~~~~~~
+#20 4.578 /config/src/common/network/websocket.c: In function ‘do_handshake’:
+#20 4.579 /config/src/common/network/websocket.c:1913:32: warning: pointer targets in passing argument 2 of ‘ws_b64_pton’ differ in signedness [-Wpointer-sign]
+#20 4.579  1913 |         len = ws_b64_pton(tmp, response, 256);
+#20 4.579       |                                ^~~~~~~~
+#20 4.579       |                                |
+#20 4.579       |                                char *
+#20 4.580 /config/src/common/network/websocket.c:369:57: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+#20 4.580   369 | int ws_b64_pton(const char * const src, unsigned char * dst, size_t dstlen) {
+#20 4.580       |                                         ~~~~~~~~~~~~~~~~^~~
+#20 4.592 /config/src/common/network/websocket.c: In function ‘ownerapi’:
+#20 4.593 /config/src/common/network/websocket.c:1613:9: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+#20 4.593  1613 |         write(wakeuppipe[1], "", 1);
+#20 4.593       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.594 /config/src/common/network/websockify.c: In function ‘do_proxy’:
+#20 4.594 /config/src/common/network/websockify.c:147:46: warning: pointer targets in passing argument 1 of ‘encode_hybi’ differ in signedness [-Wpointer-sign]
+#20 4.594   147 |                 cout_end = encode_hybi(ws_ctx->cin_buf, bytes,
+#20 4.594       |                                        ~~~~~~^~~~~~~~~
+#20 4.594       |                                              |
+#20 4.594       |                                              char *
+#20 4.594 In file included from /config/src/common/network/websockify.c:25:
+#20 4.594 /config/src/common/network/websocket.h:157:31: note: expected ‘const u_char *’ {aka ‘const unsigned char *’} but argument is of type ‘char *’
+#20 4.594   157 | int encode_hybi(u_char const *src, size_t srclength,
+#20 4.594       |                 ~~~~~~~~~~~~~~^~~
+#20 4.594 /config/src/common/network/websockify.c:150:47: warning: pointer targets in passing argument 1 of ‘encode_hixie’ differ in signedness [-Wpointer-sign]
+#20 4.594   150 |                 cout_end = encode_hixie(ws_ctx->cin_buf, bytes,
+#20 4.594       |                                         ~~~~~~^~~~~~~~~
+#20 4.594       |                                               |
+#20 4.594       |                                               char *
+#20 4.594 /config/src/common/network/websocket.h:152:32: note: expected ‘const u_char *’ {aka ‘const unsigned char *’} but argument is of type ‘char *’
+#20 4.594   152 | int encode_hixie(u_char const *src, size_t srclength,
+#20 4.594       |                  ~~~~~~~~~~~~~~^~~
+#20 4.595 /config/src/common/network/websockify.c:183:41: warning: pointer targets in passing argument 1 of ‘decode_hybi’ differ in signedness [-Wpointer-sign]
+#20 4.595   183 |                 len = decode_hybi(ws_ctx->tin_buf,
+#20 4.595       |                                   ~~~~~~^~~~~~~~~
+#20 4.595       |                                         |
+#20 4.595       |                                         char *
+#20 4.595 /config/src/common/network/websocket.h:159:32: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+#20 4.595   159 | int decode_hybi(unsigned char *src, size_t srclength,
+#20 4.595       |                 ~~~~~~~~~~~~~~~^~~
+#20 4.595 /config/src/common/network/websocket.c:1629:9: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+#20 4.595  1629 |         write(wakeuppipe[1], "", 1);
+#20 4.595       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.595 /config/src/common/network/websockify.c:185:41: warning: pointer targets in passing argument 3 of ‘decode_hybi’ differ in signedness [-Wpointer-sign]
+#20 4.595   185 |                                   ws_ctx->tout_buf, BUFSIZE-1,
+#20 4.595       |                                   ~~~~~~^~~~~~~~~~
+#20 4.595       |                                         |
+#20 4.595       |                                         char *
+#20 4.595 /config/src/common/network/websocket.h:160:25: note: expected ‘u_char *’ {aka ‘unsigned char *’} but argument is of type ‘char *’
+#20 4.595   160 |                 u_char *target, size_t targsize,
+#20 4.595       |                 ~~~~~~~~^~~~~~
+#20 4.595 /config/src/common/network/websockify.c:190:42: warning: pointer targets in passing argument 3 of ‘decode_hixie’ differ in signedness [-Wpointer-sign]
+#20 4.595   190 |                                    ws_ctx->tout_buf, BUFSIZE-1,
+#20 4.595       |                                    ~~~~~~^~~~~~~~~~
+#20 4.595       |                                          |
+#20 4.595       |                                          char *
+#20 4.595 /config/src/common/network/websocket.h:155:26: note: expected ‘u_char *’ {aka ‘unsigned char *’} but argument is of type ‘char *’
+#20 4.595   155 |                  u_char *target, size_t targsize,
+#20 4.595       |                  ~~~~~~~~^~~~~~
+#20 4.624 [ 23%] Building CXX object common/rdr/CMakeFiles/rdr.dir/HexInStream.cxx.o
+#20 4.624 [ 23%] Building CXX object common/rdr/CMakeFiles/rdr.dir/FileInStream.cxx.o
+#20 4.641 /config/src/common/network/websockify.c: In function ‘proxy_handler’:
+#20 4.642 /config/src/common/network/websockify.c:243:32: warning: ‘%s’ directive writing up to 127 bytes into a region of size 107 [-Wformat-overflow=]
+#20 4.642   243 |     sprintf(myaddr.sun_path, ".%s@%s_%lu.%lu", ws_ctx->user, ws_ctx->ip,
+#20 4.642       |                                ^~
+#20 4.643 /config/src/common/network/websockify.c:243:30: note: using the range [0, 18446744073709551615] for directive argument
+#20 4.643   243 |     sprintf(myaddr.sun_path, ".%s@%s_%lu.%lu", ws_ctx->user, ws_ctx->ip,
+#20 4.643       |                              ^~~~~~~~~~~~~~~~
+#20 4.643 /config/src/common/network/websockify.c:243:30: note: using the range [0, 18446744073709551615] for directive argument
+#20 4.643 In file included from /usr/include/stdio.h:980,
+#20 4.643                  from /config/src/common/network/websockify.c:10:
+#20 4.643 In function ‘sprintf’,
+#20 4.643     inlined from ‘proxy_handler’ at /config/src/common/network/websockify.c:243:5:
+#20 4.644 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 7 and 235 bytes into a destination of size 108
+#20 4.644    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 4.644       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.644    31 |                                   __glibc_objsize (__s), __fmt,
+#20 4.644       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.644    32 |                                   __va_arg_pack ());
+#20 4.644       |                                   ~~~~~~~~~~~~~~~~~
+#20 4.719 [ 24%] Building CXX object common/network/CMakeFiles/network.dir/webudp/CRC32.cpp.o
+#20 4.734 [ 24%] Building CXX object common/rdr/CMakeFiles/rdr.dir/HexOutStream.cxx.o
+#20 4.735 [ 25%] Building CXX object common/rdr/CMakeFiles/rdr.dir/InStream.cxx.o
+#20 4.760 In file included from /config/src/common/network/websocket.c:38:
+#20 4.760 /config/src/common/network/websocket.c: In function ‘servefile’:
+#20 4.761 /config/src/common/network/websocket.c:934:17: warning: ‘%s’ directive writing up to 4095 bytes into a region of size 1008 [-Wformat-overflow=]
+#20 4.761   934 |     handler_msg("Requested file '%s'\n", buf);
+#20 4.761       |                 ^~~~~~~~~~~~~~~~~~~~~~~  ~~~
+#20 4.761 /config/src/common/network/websocket.h:135:28: note: in definition of macro ‘gen_handler_msg’
+#20 4.761   135 |         sprintf(logbuf[1], __VA_ARGS__); \
+#20 4.761       |                            ^~~~~~~~~~~
+#20 4.761 /config/src/common/network/websocket.c:934:5: note: in expansion of macro ‘handler_msg’
+#20 4.761   934 |     handler_msg("Requested file '%s'\n", buf);
+#20 4.761       |     ^~~~~~~~~~~
+#20 4.761 /config/src/common/network/websocket.c:934:34: note: format string is defined here
+#20 4.761   934 |     handler_msg("Requested file '%s'\n", buf);
+#20 4.761       |                                  ^~
+#20 4.761 In file included from /usr/include/stdio.h:980,
+#20 4.761                  from /config/src/common/network/websocket.c:16:
+#20 4.761 In function ‘sprintf’,
+#20 4.761     inlined from ‘servefile’ at /config/src/common/network/websocket.c:934:5:
+#20 4.761 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 19 and 4114 bytes into a destination of size 1024
+#20 4.761    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 4.761       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.761    31 |                                   __glibc_objsize (__s), __fmt,
+#20 4.761       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.761    32 |                                   __va_arg_pack ());
+#20 4.761       |                                   ~~~~~~~~~~~~~~~~~
+#20 4.761 /config/src/common/network/websocket.c: In function ‘servefile’:
+#20 4.762 /config/src/common/network/websocket.c:935:29: warning: ‘__builtin___sprintf_chk’ may write a terminating nul past the end of the destination [-Wformat-overflow=]
+#20 4.762   935 |     sprintf(fullpath, "%s/%s", settings.httpdir, buf);
+#20 4.762       |                             ^
+#20 4.762 In function ‘sprintf’,
+#20 4.762     inlined from ‘servefile’ at /config/src/common/network/websocket.c:935:5:
+#20 4.762 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output 2 or more bytes (assuming 4097) into a destination of size 4096
+#20 4.762    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 4.762       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.762    31 |                                   __glibc_objsize (__s), __fmt,
+#20 4.762       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.762    32 |                                   __va_arg_pack ());
+#20 4.762       |                                   ~~~~~~~~~~~~~~~~~
+#20 4.763 /config/src/common/network/websocket.c: In function ‘servefile’:
+#20 4.763 /config/src/common/network/websocket.c:883:45: warning: ‘%s’ directive writing up to 12288 bytes into a region of size 4083 [-Wformat-overflow=]
+#20 4.763   883 |                 sprintf(buf, "<li><a href=\"%s\">%s</a></li>", enc,
+#20 4.763       |                                             ^~                 ~~~
+#20 4.763 In function ‘sprintf’,
+#20 4.763     inlined from ‘dirlisting’ at /config/src/common/network/websocket.c:883:10,
+#20 4.763     inlined from ‘servefile’ at /config/src/common/network/websocket.c:940:9:
+#20 4.763 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 25 and 12568 bytes into a destination of size 4096
+#20 4.763    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 4.763       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.763    31 |                                   __glibc_objsize (__s), __fmt,
+#20 4.763       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.763    32 |                                   __va_arg_pack ());
+#20 4.763       |                                   ~~~~~~~~~~~~~~~~~
+#20 4.763 /config/src/common/network/websocket.c: In function ‘servefile’:
+#20 4.764 /config/src/common/network/websocket.c:880:45: warning: ‘%s’ directive writing up to 12288 bytes into a region of size 4083 [-Wformat-overflow=]
+#20 4.764   880 |                 sprintf(buf, "<li><a href=\"%s/\">%s/</a></li>", enc,
+#20 4.764       |                                             ^~                   ~~~
+#20 4.764 In function ‘sprintf’,
+#20 4.764     inlined from ‘dirlisting’ at /config/src/common/network/websocket.c:880:10,
+#20 4.764     inlined from ‘servefile’ at /config/src/common/network/websocket.c:940:9:
+#20 4.764 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 27 and 12570 bytes into a destination of size 4096
+#20 4.764    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 4.764       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.764    31 |                                   __glibc_objsize (__s), __fmt,
+#20 4.764       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.764    32 |                                   __va_arg_pack ());
+#20 4.764       |                                   ~~~~~~~~~~~~~~~~~
+#20 4.781 [ 26%] Building CXX object common/rdr/CMakeFiles/rdr.dir/RandomStream.cxx.o
+#20 4.809 [ 27%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuArena.cpp.o
+#20 4.841 [ 28%] Building CXX object common/network/CMakeFiles/network.dir/webudp/Wu.cpp.o
+#20 4.865 /config/src/common/network/websocket.c: In function ‘decode_hixie’:
+#20 4.865 /config/src/common/network/websocket.c:450:30: warning: ‘%d’ directive output may be truncated writing between 1 and 10 bytes into a region of size 3 [-Wformat-truncation=]
+#20 4.865   450 |         snprintf(cntstr, 3, "%d", framecount);
+#20 4.865       |                              ^~
+#20 4.865 /config/src/common/network/websocket.c:450:29: note: directive argument in the range [2, 2147483647]
+#20 4.865   450 |         snprintf(cntstr, 3, "%d", framecount);
+#20 4.865       |                             ^~~~
+#20 4.865 In function ‘snprintf’,
+#20 4.865     inlined from ‘decode_hixie’ at /config/src/common/network/websocket.c:450:9:
+#20 4.865 /usr/include/x86_64-linux-gnu/bits/stdio2.h:54:10: note: ‘__builtin___snprintf_chk’ output between 2 and 11 bytes into a destination of size 3
+#20 4.865    54 |   return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+#20 4.865       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.865    55 |                                    __glibc_objsize (__s), __fmt,
+#20 4.865       |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.865    56 |                                    __va_arg_pack ());
+#20 4.865       |                                    ~~~~~~~~~~~~~~~~~
+#20 4.876 [ 28%] Building CXX object common/rdr/CMakeFiles/rdr.dir/TLSException.cxx.o
+#20 4.906 /config/src/common/network/websocket.c: In function ‘decode_hybi’:
+#20 4.906 /config/src/common/network/websocket.c:616:30: warning: ‘%d’ directive output may be truncated writing between 1 and 10 bytes into a region of size 3 [-Wformat-truncation=]
+#20 4.906   616 |         snprintf(cntstr, 3, "%d", framecount);
+#20 4.906       |                              ^~
+#20 4.907 /config/src/common/network/websocket.c:616:29: note: directive argument in the range [2, 2147483647]
+#20 4.907   616 |         snprintf(cntstr, 3, "%d", framecount);
+#20 4.907       |                             ^~~~
+#20 4.907 In function ‘snprintf’,
+#20 4.907     inlined from ‘decode_hybi’ at /config/src/common/network/websocket.c:616:9:
+#20 4.907 /usr/include/x86_64-linux-gnu/bits/stdio2.h:54:10: note: ‘__builtin___snprintf_chk’ output between 2 and 11 bytes into a destination of size 3
+#20 4.907    54 |   return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+#20 4.907       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.907    55 |                                    __glibc_objsize (__s), __fmt,
+#20 4.907       |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 4.907    56 |                                    __va_arg_pack ());
+#20 4.907       |                                    ~~~~~~~~~~~~~~~~~
+#20 4.912 [ 28%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuCrypto.cpp.o
+#20 4.923 [ 29%] Building CXX object common/rdr/CMakeFiles/rdr.dir/TLSInStream.cxx.o
+#20 4.957 [ 30%] Building CXX object common/rdr/CMakeFiles/rdr.dir/TLSOutStream.cxx.o
+#20 4.992 [ 31%] Building CXX object common/rdr/CMakeFiles/rdr.dir/ZlibInStream.cxx.o
+#20 5.006 In file included from /config/src/common/network/webudp/Wu.cpp:5:
+#20 5.006 /config/src/common/network/webudp/Wu.cpp: In function ‘void WuClientStart(const Wu*, WuClient*)’:
+#20 5.006 /config/src/common/network/webudp/Wu.cpp:145:57: warning: ‘EC_KEY* EC_KEY_new_by_curve_name(int)’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 5.006   145 |   SSL_set_tmp_ecdh(client->ssl, EC_KEY_new_by_curve_name(NID_X9_62_prime256v1));
+#20 5.006       |                                 ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+#20 5.006 In file included from /config/src/common/network/webudp/Wu.cpp:3:
+#20 5.006 /usr/include/openssl/ec.h:998:31: note: declared here
+#20 5.006   998 | OSSL_DEPRECATEDIN_3_0 EC_KEY *EC_KEY_new_by_curve_name(int nid);
+#20 5.006       |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.052 /config/src/common/network/webudp/WuCrypto.cpp: In constructor ‘WuCert::WuCert()’:
+#20 5.052 /config/src/common/network/webudp/WuCrypto.cpp:16:21: warning: ‘RSA* RSA_new()’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 5.052    16 |   RSA* rsa = RSA_new();
+#20 5.052       |              ~~~~~~~^~
+#20 5.052 In file included from /usr/include/openssl/x509.h:36,
+#20 5.052                  from /config/src/common/network/webudp/WuCrypto.h:3,
+#20 5.052                  from /config/src/common/network/webudp/WuCrypto.cpp:1:
+#20 5.052 /usr/include/openssl/rsa.h:206:28: note: declared here
+#20 5.052   206 | OSSL_DEPRECATEDIN_3_0 RSA *RSA_new(void);
+#20 5.052       |                            ^~~~~~~
+#20 5.053 /config/src/common/network/webudp/WuCrypto.cpp:25:22: warning: ‘int RSA_generate_key_ex(RSA*, int, BIGNUM*, BN_GENCB*)’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 5.053    25 |   RSA_generate_key_ex(rsa, 2048, n, NULL);
+#20 5.053       |   ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+#20 5.053 /usr/include/openssl/rsa.h:265:27: note: declared here
+#20 5.053   265 | OSSL_DEPRECATEDIN_3_0 int RSA_generate_key_ex(RSA *rsa, int bits, BIGNUM *e,
+#20 5.053       |                           ^~~~~~~~~~~~~~~~~~~
+#20 5.053 /config/src/common/network/webudp/WuCrypto.cpp:31:17: warning: ‘int BN_pseudo_rand(BIGNUM*, int, int, int)’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+#20 5.053    31 |   BN_pseudo_rand(serial, 64, 0, 0);
+#20 5.053       |   ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+#20 5.053 In file included from /usr/include/openssl/params.h:16,
+#20 5.053                  from /usr/include/openssl/evp.h:32,
+#20 5.053                  from /usr/include/openssl/x509.h:29:
+#20 5.053 /usr/include/openssl/bn.h:231:5: note: declared here
+#20 5.053   231 | int BN_pseudo_rand(BIGNUM *rnd, int bits, int top, int bottom);
+#20 5.053       |     ^~~~~~~~~~~~~~
+#20 5.083 In function ‘ownerapi’,
+#20 5.083     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.085 /config/src/common/network/websocket.c:1278:21: warning: ‘%s’ directive writing up to 4095 bytes into a region of size 1003 [-Wformat-overflow=]
+#20 5.085  1278 |         handler_msg("Requested owner api '%s' with args '%s'\n", path, args);
+#20 5.085       |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~
+#20 5.085 /config/src/common/network/websocket.h:135:28: note: in definition of macro ‘gen_handler_msg’
+#20 5.085   135 |         sprintf(logbuf[1], __VA_ARGS__); \
+#20 5.085       |                            ^~~~~~~~~~~
+#20 5.085 /config/src/common/network/websocket.c:1278:9: note: in expansion of macro ‘handler_msg’
+#20 5.085  1278 |         handler_msg("Requested owner api '%s' with args '%s'\n", path, args);
+#20 5.085       |         ^~~~~~~~~~~
+#20 5.085 /config/src/common/network/websocket.c: In function ‘do_handshake’:
+#20 5.086 /config/src/common/network/websocket.c:1278:43: note: format string is defined here
+#20 5.086  1278 |         handler_msg("Requested owner api '%s' with args '%s'\n", path, args);
+#20 5.086       |                                           ^~
+#20 5.087 In function ‘sprintf’,
+#20 5.087     inlined from ‘ownerapi’ at /config/src/common/network/websocket.c:1278:9,
+#20 5.087     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.087 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output 37 or more bytes (assuming 4132) into a destination of size 1024
+#20 5.087    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 5.087       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.087    31 |                                   __glibc_objsize (__s), __fmt,
+#20 5.087       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.087    32 |                                   __va_arg_pack ());
+#20 5.087       |                                   ~~~~~~~~~~~~~~~~~
+#20 5.088 In function ‘ownerapi’,
+#20 5.088     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.090 /config/src/common/network/websocket.c:1276:21: warning: ‘%s’ directive writing up to 4095 bytes into a region of size 1003 [-Wformat-overflow=]
+#20 5.090  1276 |         handler_msg("Requested owner api '%s' with args (skipped, includes password)\n", path);
+#20 5.090       |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~
+#20 5.090 /config/src/common/network/websocket.h:135:28: note: in definition of macro ‘gen_handler_msg’
+#20 5.090   135 |         sprintf(logbuf[1], __VA_ARGS__); \
+#20 5.090       |                            ^~~~~~~~~~~
+#20 5.090 /config/src/common/network/websocket.c:1276:9: note: in expansion of macro ‘handler_msg’
+#20 5.090  1276 |         handler_msg("Requested owner api '%s' with args (skipped, includes password)\n", path);
+#20 5.090       |         ^~~~~~~~~~~
+#20 5.090 /config/src/common/network/websocket.c: In function ‘do_handshake’:
+#20 5.091 /config/src/common/network/websocket.c:1276:43: note: format string is defined here
+#20 5.091  1276 |         handler_msg("Requested owner api '%s' with args (skipped, includes password)\n", path);
+#20 5.091       |                                           ^~
+#20 5.091 In function ‘sprintf’,
+#20 5.091     inlined from ‘ownerapi’ at /config/src/common/network/websocket.c:1276:9,
+#20 5.091     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.092 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 63 and 4158 bytes into a destination of size 1024
+#20 5.092    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 5.092       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.092    31 |                                   __glibc_objsize (__s), __fmt,
+#20 5.092       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.092    32 |                                   __va_arg_pack ());
+#20 5.092       |                                   ~~~~~~~~~~~~~~~~~
+#20 5.092 /config/src/common/network/websocket.c: In function ‘do_handshake’:
+#20 5.093 /config/src/common/network/websocket.c:1690:31: warning: ‘%s’ directive writing up to 255 bytes into a region of size between 0 and 4095 [-Wformat-overflow=]
+#20 5.093  1690 |             sprintf(path, "%s/%s", allpath, ent->d_name);
+#20 5.093       |                               ^~
+#20 5.094 In function ‘sprintf’,
+#20 5.094     inlined from ‘ownerapi’ at /config/src/common/network/websocket.c:1690:13,
+#20 5.094     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.094 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 2 and 4352 bytes into a destination of size 4096
+#20 5.094    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 5.094       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.094    31 |                                   __glibc_objsize (__s), __fmt,
+#20 5.094       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.094    32 |                                   __va_arg_pack ());
+#20 5.094       |                                   ~~~~~~~~~~~~~~~~~
+#20 5.095 In function ‘ownerapi_post’,
+#20 5.095     inlined from ‘ownerapi’ at /config/src/common/network/websocket.c:1245:20,
+#20 5.095     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.096 /config/src/common/network/websocket.c:1072:17: warning: ‘%s’ directive writing up to 4095 bytes into a region of size 998 [-Wformat-overflow=]
+#20 5.096  1072 |     handler_msg("Requested owner POST api '%s'\n", path);
+#20 5.096       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~
+#20 5.096 /config/src/common/network/websocket.h:135:28: note: in definition of macro ‘gen_handler_msg’
+#20 5.096   135 |         sprintf(logbuf[1], __VA_ARGS__); \
+#20 5.096       |                            ^~~~~~~~~~~
+#20 5.096 /config/src/common/network/websocket.c:1072:5: note: in expansion of macro ‘handler_msg’
+#20 5.096  1072 |     handler_msg("Requested owner POST api '%s'\n", path);
+#20 5.096       |     ^~~~~~~~~~~
+#20 5.097 /config/src/common/network/websocket.c: In function ‘do_handshake’:
+#20 5.098 /config/src/common/network/websocket.c:1072:44: note: format string is defined here
+#20 5.098  1072 |     handler_msg("Requested owner POST api '%s'\n", path);
+#20 5.098       |                                            ^~
+#20 5.098 In function ‘sprintf’,
+#20 5.098     inlined from ‘ownerapi_post’ at /config/src/common/network/websocket.c:1072:5,
+#20 5.098     inlined from ‘ownerapi’ at /config/src/common/network/websocket.c:1245:20,
+#20 5.098     inlined from ‘do_handshake’ at /config/src/common/network/websocket.c:1993:21:
+#20 5.098 /usr/include/x86_64-linux-gnu/bits/stdio2.h:30:10: note: ‘__builtin___sprintf_chk’ output between 29 and 4124 bytes into a destination of size 1024
+#20 5.098    30 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+#20 5.098       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.098    31 |                                   __glibc_objsize (__s), __fmt,
+#20 5.098       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#20 5.098    32 |                                   __va_arg_pack ());
+#20 5.098       |                                   ~~~~~~~~~~~~~~~~~
+#20 5.110 [ 31%] Building CXX object common/rdr/CMakeFiles/rdr.dir/ZlibOutStream.cxx.o
+#20 5.131 [ 32%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuHostEpoll.cpp.o
+#20 5.209 /config/src/common/network/webudp/Wu.cpp: In function ‘int32_t WuCreate(const char*, uint16_t, int, Wu**)’:
+#20 5.209 /config/src/common/network/webudp/Wu.cpp:579:10: warning: ‘char* __builtin_strncpy(char*, const char*, long unsigned int)’ specified bound 256 equals destination size [-Wstringop-truncation]
+#20 5.209   579 |   strncpy(ctx->host, host, sizeof(ctx->host));
+#20 5.209       |          ^
+#20 5.219 /config/src/common/network/webudp/WuHostEpoll.cpp:51:13: warning: ‘void HandleErrno(WuHost*, const char*)’ defined but not used [-Wunused-function]
+#20 5.219    51 | static void HandleErrno(WuHost* host, const char* description) {
+#20 5.219       |             ^~~~~~~~~~~
+#20 5.268 [ 34%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuNetwork.cpp.o
+#20 5.268 [ 34%] Linking CXX static library librdr.a
+#20 5.305 [ 34%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuPool.cpp.o
+#20 5.373 [ 34%] Built target rdr
+#20 5.378 [ 35%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuQueue.cpp.o
+#20 5.379 [ 36%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuRng.cpp.o
+#20 5.385 [ 37%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuSctp.cpp.o
+#20 5.464 [ 37%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuSdp.cpp.o
+#20 5.476 [ 38%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Blacklist.cxx.o
+#20 5.544 [ 39%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Congestion.cxx.o
+#20 5.548 [ 39%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CConnection.cxx.o
+#20 5.569 [ 40%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuString.cpp.o
+#20 5.626 [ 41%] Building CXX object common/network/CMakeFiles/network.dir/webudp/WuStun.cpp.o
+#20 5.812 [ 42%] Building C object common/network/CMakeFiles/network.dir/__/__/unix/kasmvncpasswd/kasmpasswd.c.o
+#20 5.831 [ 42%] Building CXX object common/network/CMakeFiles/network.dir/UnixSocket.cxx.o
+#20 5.849 [ 43%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CMsgHandler.cxx.o
+#20 5.933 [ 44%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CMsgReader.cxx.o
+#20 6.099 [ 45%] Linking CXX static library libnetwork.a
+#20 6.198 [ 45%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CMsgWriter.cxx.o
+#20 6.223 [ 45%] Built target network
+#20 6.230 [ 46%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CSecurityPlain.cxx.o
+#20 6.236 [ 47%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CSecurityStack.cxx.o
+#20 6.396 [ 48%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CSecurityVeNCrypt.cxx.o
+#20 6.545 [ 48%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CSecurityVncAuth.cxx.o
+#20 6.575 [ 49%] Building CXX object common/rfb/CMakeFiles/rfb.dir/ComparingUpdateTracker.cxx.o
+#20 6.798 [ 50%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Configuration.cxx.o
+#20 6.865 [ 50%] Building CXX object common/rfb/CMakeFiles/rfb.dir/ConnParams.cxx.o
+#20 6.878 [ 51%] Building CXX object common/rfb/CMakeFiles/rfb.dir/CopyRectDecoder.cxx.o
+#20 7.110 [ 52%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Cursor.cxx.o
+#20 7.149 [ 53%] Building CXX object common/rfb/CMakeFiles/rfb.dir/DecodeManager.cxx.o
+#20 7.361 [ 53%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Decoder.cxx.o
+#20 7.429 [ 54%] Building C object common/rfb/CMakeFiles/rfb.dir/d3des.c.o
+#20 7.496 [ 55%] Building CXX object common/rfb/CMakeFiles/rfb.dir/EncCache.cxx.o
+#20 7.549 [ 55%] Building CXX object common/rfb/CMakeFiles/rfb.dir/EncodeManager.cxx.o
+#20 7.568 [ 56%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Encoder.cxx.o
+#20 7.691 [ 57%] Building CXX object common/rfb/CMakeFiles/rfb.dir/HextileDecoder.cxx.o
+#20 7.785 [ 58%] Building CXX object common/rfb/CMakeFiles/rfb.dir/HextileEncoder.cxx.o
+#20 7.839 [ 58%] Building CXX object common/rfb/CMakeFiles/rfb.dir/JpegCompressor.cxx.o
+#20 7.862 /config/src/common/rfb/EncodeManager.cxx: In member function ‘void rfb::EncodeManager::writeRects(const rfb::Region&, const rfb::PixelBuffer*, const timeval*, bool)’:
+#20 7.862 /config/src/common/rfb/EncodeManager.cxx:1277:31: warning: comparison of integer expressions of different signedness: ‘unsigned int’ and ‘int’ [-Wsign-compare]
+#20 7.862  1277 |       if (framesSinceEncPrint >= rfb::Server::frameRate) {
+#20 7.862       |           ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+#20 8.180 [ 59%] Building CXX object common/rfb/CMakeFiles/rfb.dir/JpegDecompressor.cxx.o
+#20 8.304 [ 60%] Building CXX object common/rfb/CMakeFiles/rfb.dir/KeyRemapper.cxx.o
+#20 8.315 [ 60%] Building CXX object common/rfb/CMakeFiles/rfb.dir/LogWriter.cxx.o
+#20 8.461 [ 61%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Logger.cxx.o
+#20 8.546 [ 62%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Logger_file.cxx.o
+#20 8.665 [ 63%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Logger_stdio.cxx.o
+#20 8.675 [ 63%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Password.cxx.o
+#20 8.732 [ 64%] Building CXX object common/rfb/CMakeFiles/rfb.dir/PixelBuffer.cxx.o
+#20 8.770 [ 65%] Building CXX object common/rfb/CMakeFiles/rfb.dir/PixelFormat.cxx.o
+#20 9.038 [ 66%] Building CXX object common/rfb/CMakeFiles/rfb.dir/RREEncoder.cxx.o
+#20 9.038 [ 66%] Building CXX object common/rfb/CMakeFiles/rfb.dir/RREDecoder.cxx.o
+#20 9.441 [ 67%] Building CXX object common/rfb/CMakeFiles/rfb.dir/RawDecoder.cxx.o
+#20 9.444 [ 68%] Building CXX object common/rfb/CMakeFiles/rfb.dir/RawEncoder.cxx.o
+#20 9.690 [ 68%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Region.cxx.o
+#20 9.758 [ 69%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SConnection.cxx.o
+#20 9.802 [ 70%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SMsgHandler.cxx.o
+#20 9.911 In file included from /config/src/common/rfb/Region.cxx:31:
+#20 9.911 /config/src/common/rfb/Region.cxx: In member function ‘void rfb::Region::setExtentsAndOrderedRects(const rfb::ShortRect*, int, const rfb::ShortRect*)’:
+#20 9.911 /config/src/common/Xregion/Xlibint.h:43:24: warning: pointer ‘prevRects’ may be used after ‘void* realloc(void*, size_t)’ [-Wuse-after-free]
+#20 9.911    43 | #define Xfree(ptr) free((ptr))
+#20 9.911       |                    ~~~~^~~~~~~
+#20 9.911 /config/src/common/rfb/Region.cxx:127:7: note: in expansion of macro ‘Xfree’
+#20 9.911   127 |       Xfree(prevRects);
+#20 9.911       |       ^~~~~
+#20 9.912 /config/src/common/Xregion/Xlibint.h:45:36: note: call to ‘void* realloc(void*, size_t)’ here
+#20 9.912    45 | #define Xrealloc(ptr, size) realloc((ptr), (size))
+#20 9.912       |                             ~~~~~~~^~~~~~~~~~~~~~~
+#20 9.912 /config/src/common/rfb/Region.cxx:124:25: note: in expansion of macro ‘Xrealloc’
+#20 9.912   124 |     xrgn->rects = (BOX*)Xrealloc((char*)xrgn->rects, nRects * sizeof(BOX));
+#20 9.912       |                         ^~~~~~~~
+#20 10.04 [ 71%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SMsgReader.cxx.o
+#20 10.09 [ 71%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SMsgWriter.cxx.o
+#20 10.10 [ 72%] Building CXX object common/rfb/CMakeFiles/rfb.dir/ServerCore.cxx.o
+#20 10.23 [ 73%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Security.cxx.o
+#20 10.65 [ 73%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SecurityServer.cxx.o
+#20 10.67 [ 74%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SecurityClient.cxx.o
+#20 10.76 [ 75%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SelfBench.cxx.o
+#20 10.84 [ 76%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SSecurityPlain.cxx.o
+#20 10.94 [ 76%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SSecurityStack.cxx.o
+#20 11.17 [ 77%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SSecurityVncAuth.cxx.o
+#20 11.20 [ 78%] Building CXX object common/rfb/CMakeFiles/rfb.dir/SSecurityVeNCrypt.cxx.o
+#20 11.24 [ 78%] Building CXX object common/rfb/CMakeFiles/rfb.dir/ScaleFilters.cxx.o
+#20 11.42 [ 79%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Timer.cxx.o
+#20 11.59 [ 80%] Building CXX object common/rfb/CMakeFiles/rfb.dir/TightDecoder.cxx.o
+#20 11.67 [ 81%] Building CXX object common/rfb/CMakeFiles/rfb.dir/TightEncoder.cxx.o
+#20 11.69 [ 81%] Building CXX object common/rfb/CMakeFiles/rfb.dir/TightJPEGEncoder.cxx.o
+#20 12.14 [ 82%] Building CXX object common/rfb/CMakeFiles/rfb.dir/TightWEBPEncoder.cxx.o
+#20 12.17 [ 83%] Building CXX object common/rfb/CMakeFiles/rfb.dir/TightQOIEncoder.cxx.o
+#20 12.34 [ 84%] Building CXX object common/rfb/CMakeFiles/rfb.dir/UpdateTracker.cxx.o
+#20 12.46 [ 84%] Building CXX object common/rfb/CMakeFiles/rfb.dir/VNCSConnectionST.cxx.o
+#20 12.61 [ 85%] Building CXX object common/rfb/CMakeFiles/rfb.dir/VNCServerST.cxx.o
+#20 12.62 [ 86%] Building CXX object common/rfb/CMakeFiles/rfb.dir/ZRLEEncoder.cxx.o
+#20 12.79 [ 86%] Building CXX object common/rfb/CMakeFiles/rfb.dir/ZRLEDecoder.cxx.o
+#20 12.87 /config/src/common/rfb/VNCSConnectionST.cxx: In constructor ‘rfb::VNCSConnectionST::VNCSConnectionST(rfb::VNCServerST*, network::Socket*, bool)’:
+#20 12.87 /config/src/common/rfb/VNCSConnectionST.cxx:92:64: warning: comparison of integer expressions of different signedness: ‘long int’ and ‘long unsigned int’ [-Wsign-compare]
+#20 12.87    92 |   if (at && at - peerEndpoint.buf > 1 && at - peerEndpoint.buf < USERNAME_LEN) {
+#20 13.39 [ 87%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Watermark.cxx.o
+#20 13.70 [ 88%] Building CXX object common/rfb/CMakeFiles/rfb.dir/cpuid.cxx.o
+#20 13.75 [ 89%] Building CXX object common/rfb/CMakeFiles/rfb.dir/encodings.cxx.o
+#20 13.81 /config/src/common/rfb/Watermark.cxx: In function ‘bool drawtext(const char*, int16_t, const char*, uint8_t)’:
+#20 13.81 /config/src/common/rfb/Watermark.cxx:356:30: warning: format not a string literal, format string not checked [-Wformat-nonliteral]
+#20 13.81   356 |         size_t len = strftime(buf, PATH_MAX, fmt, tm);
+#20 13.81       |                      ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+#20 13.81 [ 89%] Building CXX object common/rfb/CMakeFiles/rfb.dir/util.cxx.o
+#20 13.97 /config/src/common/rfb/VNCSConnectionST.cxx: In constructor ‘rfb::VNCSConnectionST::VNCSConnectionST(rfb::VNCServerST*, network::Socket*, bool)’:
+#20 13.97 /config/src/common/rfb/VNCSConnectionST.cxx:86:12: warning: ‘char* __builtin_strncpy(char*, const char*, long unsigned int)’ specified bound 4096 equals destination size [-Wstringop-truncation]
+#20 13.97    86 |     strncpy(kasmpasswdpath, wexp.we_wordv[0], 4096);
+#20 13.97       |            ^
+#20 14.08 [ 90%] Building C object common/rfb/CMakeFiles/rfb.dir/xxhash.c.o
+#20 14.14 [ 91%] Building CXX object common/rfb/CMakeFiles/rfb.dir/Logger_syslog.cxx.o
+#20 14.24 [ 91%] Building CXX object common/rfb/CMakeFiles/rfb.dir/UnixPasswordValidator.cxx.o
+#20 14.40 [ 92%] Building C object common/rfb/CMakeFiles/rfb.dir/pam.c.o
+#20 14.47 [ 93%] Building CXX object common/rfb/CMakeFiles/rfb.dir/scale_sse2.cxx.o
+#20 14.59 [ 94%] Linking CXX static library librfb.a
+#20 14.76 [ 94%] Built target rfb
+#20 14.78 [ 95%] Building C object unix/vncconfig/CMakeFiles/vncconfig.dir/buildtime.c.o
+#20 14.78 [ 97%] Building C object unix/vncconfig/CMakeFiles/vncconfig.dir/vncExt.c.o
+#20 14.78 [ 97%] Building CXX object unix/vncpasswd/CMakeFiles/vncpasswd.dir/vncpasswd.cxx.o
+#20 14.78 [ 98%] Building CXX object unix/vncconfig/CMakeFiles/vncconfig.dir/vncconfig.cxx.o
+#20 14.81 [ 98%] Building CXX object unix/vncconfig/CMakeFiles/vncconfig.dir/QueryConnectDialog.cxx.o
+#20 14.96 [ 99%] Linking CXX executable vncpasswd
+#20 15.05 [ 99%] Built target vncpasswd
+#20 15.29 [100%] Linking CXX executable vncconfig
+#20 15.37 [100%] Built target vncconfig
+#20 15.39 **** build xorg ****
+#20 15.39 --2026-02-17 15:12:33--  https://www.x.org/archive/individual/xserver/xorg-server-21.1.14.tar.gz
+#20 15.39 Resolving www.x.org (www.x.org)... failed: No address associated with hostname.
+#20 15.39 wget: unable to resolve host address ‘www.x.org’
+#20 ERROR: process "/bin/bash -o pipefail -c echo \"**** build kasmvnc ****\" &&   git clone https://github.com/kasmtech/KasmVNC.git src &&   cd src &&   git checkout -f ${KASMVNC_COMMIT} &&   sed -i     -e '/find_package(FLTK/s@^@#@'     -e '/add_subdirectory(tests/s@^@#@'     CMakeLists.txt &&   cmake     -DCMAKE_BUILD_TYPE=RelWithDebInfo     -DBUILD_VIEWER:BOOL=OFF     -DENABLE_GNUTLS:BOOL=OFF     . &&   make -j4 &&   echo \"**** build xorg ****\" &&   XORG_VER=\"21.1.14\" &&   wget --no-check-certificate     -O /tmp/xorg-server-${XORG_VER}.tar.gz     \"https://www.x.org/archive/individual/xserver/xorg-server-${XORG_VER}.tar.gz\" &&   tar --strip-components=1     -C unix/xserver     -xf /tmp/xorg-server-${XORG_VER}.tar.gz &&   cd unix/xserver &&   patch -Np1 -i ../xserver21.patch &&   patch -s -p0 < ../CVE-2022-2320-v1.20.patch &&   autoreconf -i &&   ./configure     --disable-config-hal     --disable-config-udev     --disable-dmx     --disable-dri     --disable-dri2     --disable-kdrive     --disable-static     --disable-xephyr     --disable-xinerama     --disable-xnest     --disable-xorg     --disable-xvfb     --disable-xwayland     --disable-xwin     --enable-dri3     --enable-glx     --prefix=/opt/kasmweb     --with-default-font-path=\"/usr/share/fonts/X11/misc,/usr/share/fonts/X11/cyrillic,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,built-ins\"     --without-dtrace     --with-sha1=libcrypto     --with-xkb-bin-directory=/usr/bin     --with-xkb-output=/var/lib/xkb     --with-xkb-path=/usr/share/X11/xkb &&   find . -name \"Makefile\" -exec sed -i 's/-Werror=array-bounds//g' {} \\; &&   make -j4" did not complete successfully: exit code: 4
 ------
- > [nodebuilder 2/4] RUN     echo "**** install build deps ****" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*:
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/z/zlib/zlib1g-dev_1.3.dfsg-3.1ubuntu2.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/l/lame/libmp3lame0_3.100-6build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/o/opus/libopus0_1.4-1build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbis0a_1.3.7-1build3_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libv/libvorbis/libvorbisenc2_1.3.7-1build3_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/libx/libx11/libx11-xcb1_1.8.7-1build1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_16.1%2bdfsg1-2ubuntu10.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse-mainloop-glib0_16.1%2bdfsg1-2ubuntu10.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/universe/p/pulseaudio/libpulse-dev_16.1%2bdfsg1-2ubuntu10.1_amd64.deb  403  Forbidden [IP: 91.189.92.24 80]
-12.45 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+ > [buildstage 5/6] RUN   echo "**** build kasmvnc ****" &&   git clone https://github.com/kasmtech/KasmVNC.git src &&   cd src &&   git checkout -f e04731870baebd2784983fb48197a2416c7d3519 &&   sed -i     -e '/find_package(FLTK/s@^@#@'     -e '/add_subdirectory(tests/s@^@#@'     CMakeLists.txt &&   cmake     -DCMAKE_BUILD_TYPE=RelWithDebInfo     -DBUILD_VIEWER:BOOL=OFF     -DENABLE_GNUTLS:BOOL=OFF     . &&   make -j4 &&   echo "**** build xorg ****" &&   XORG_VER="21.1.14" &&   wget --no-check-certificate     -O /tmp/xorg-server-${XORG_VER}.tar.gz     "https://www.x.org/archive/individual/xserver/xorg-server-${XORG_VER}.tar.gz" &&   tar --strip-components=1     -C unix/xserver     -xf /tmp/xorg-server-${XORG_VER}.tar.gz &&   cd unix/xserver &&   patch -Np1 -i ../xserver21.patch &&   patch -s -p0 < ../CVE-2022-2320-v1.20.patch &&   autoreconf -i &&   ./configure     --disable-config-hal     --disable-config-udev     --disable-dmx     --disable-dri     --disable-dri2     --disable-kdrive     --disable-static     --disable-xephyr     --disable-xinerama     --disable-xnest     --disable-xorg     --disable-xvfb     --disable-xwayland     --disable-xwin     --enable-dri3     --enable-glx     --prefix=/opt/kasmweb     --with-default-font-path="/usr/share/fonts/X11/misc,/usr/share/fonts/X11/cyrillic,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,built-ins"     --without-dtrace     --with-sha1=libcrypto     --with-xkb-bin-directory=/usr/bin     --with-xkb-output=/var/lib/xkb     --with-xkb-path=/usr/share/X11/xkb &&   find . -name "Makefile" -exec sed -i 's/-Werror=array-bounds//g' {} ; &&   make -j4:
+14.78 [ 98%] Building CXX object unix/vncconfig/CMakeFiles/vncconfig.dir/vncconfig.cxx.o
+14.81 [ 98%] Building CXX object unix/vncconfig/CMakeFiles/vncconfig.dir/QueryConnectDialog.cxx.o
+14.96 [ 99%] Linking CXX executable vncpasswd
+15.05 [ 99%] Built target vncpasswd
+15.29 [100%] Linking CXX executable vncconfig
+15.37 [100%] Built target vncconfig
+15.39 **** build xorg ****
+15.39 --2026-02-17 15:12:33--  https://www.x.org/archive/individual/xserver/xorg-server-21.1.14.tar.gz
+15.39 Resolving www.x.org (www.x.org)... failed: No address associated with hostname.
+15.39 wget: unable to resolve host address ‘www.x.org’
 ------
-Dockerfile:177
+Dockerfile:97
 --------------------
- 176 |     
- 177 | >>> RUN \
- 178 | >>>     echo "**** install build deps ****" && \
- 179 | >>>     apt-get update && \
- 180 | >>>     apt-get install -y --no-install-recommends \
- 181 | >>>         build-essential \
- 182 | >>>         cmake \
- 183 | >>>         g++ \
- 184 | >>>         gcc \
- 185 | >>>         make \
- 186 | >>>         libpulse-dev \
- 187 | >>>         python3 && \
- 188 | >>>     apt-get clean && \
- 189 | >>>     rm -rf /var/lib/apt/lists/*
- 190 |     
+  96 |     
+  97 | >>> RUN \
+  98 | >>>   echo "**** build kasmvnc ****" && \
+  99 | >>>   git clone https://github.com/kasmtech/KasmVNC.git src && \
+ 100 | >>>   cd src && \
+ 101 | >>>   git checkout -f ${KASMVNC_COMMIT} && \
+ 102 | >>>   sed -i \
+ 103 | >>>     -e '/find_package(FLTK/s@^@#@' \
+ 104 | >>>     -e '/add_subdirectory(tests/s@^@#@' \
+ 105 | >>>     CMakeLists.txt && \
+ 106 | >>>   cmake \
+ 107 | >>>     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+ 108 | >>>     -DBUILD_VIEWER:BOOL=OFF \
+ 109 | >>>     -DENABLE_GNUTLS:BOOL=OFF \
+ 110 | >>>     . && \
+ 111 | >>>   make -j4 && \
+ 112 | >>>   echo "**** build xorg ****" && \
+ 113 | >>>   XORG_VER="21.1.14" && \
+ 114 | >>>   wget --no-check-certificate \
+ 115 | >>>     -O /tmp/xorg-server-${XORG_VER}.tar.gz \
+ 116 | >>>     "https://www.x.org/archive/individual/xserver/xorg-server-${XORG_VER}.tar.gz" && \
+ 117 | >>>   tar --strip-components=1 \
+ 118 | >>>     -C unix/xserver \
+ 119 | >>>     -xf /tmp/xorg-server-${XORG_VER}.tar.gz && \
+ 120 | >>>   cd unix/xserver && \
+ 121 | >>>   patch -Np1 -i ../xserver21.patch && \
+ 122 | >>>   patch -s -p0 < ../CVE-2022-2320-v1.20.patch && \
+ 123 | >>>   autoreconf -i && \
+ 124 | >>>   ./configure \
+ 125 | >>>     --disable-config-hal \
+ 126 | >>>     --disable-config-udev \
+ 127 | >>>     --disable-dmx \
+ 128 | >>>     --disable-dri \
+ 129 | >>>     --disable-dri2 \
+ 130 | >>>     --disable-kdrive \
+ 131 | >>>     --disable-static \
+ 132 | >>>     --disable-xephyr \
+ 133 | >>>     --disable-xinerama \
+ 134 | >>>     --disable-xnest \
+ 135 | >>>     --disable-xorg \
+ 136 | >>>     --disable-xvfb \
+ 137 | >>>     --disable-xwayland \
+ 138 | >>>     --disable-xwin \
+ 139 | >>>     --enable-dri3 \
+ 140 | >>>     --enable-glx \
+ 141 | >>>     --prefix=/opt/kasmweb \
+ 142 | >>>     --with-default-font-path="/usr/share/fonts/X11/misc,/usr/share/fonts/X11/cyrillic,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,built-ins" \
+ 143 | >>>     --without-dtrace \
+ 144 | >>>     --with-sha1=libcrypto \
+ 145 | >>>     --with-xkb-bin-directory=/usr/bin \
+ 146 | >>>     --with-xkb-output=/var/lib/xkb \
+ 147 | >>>     --with-xkb-path=/usr/share/X11/xkb && \
+ 148 | >>>   find . -name "Makefile" -exec sed -i 's/-Werror=array-bounds//g' {} \; && \
+ 149 | >>>   make -j4
+ 150 |     
 --------------------
-ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install build deps ****\" &&     apt-get update &&     apt-get install -y --no-install-recommends         build-essential         cmake         g++         gcc         make         libpulse-dev         python3 &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** build kasmvnc ****\" &&   git clone https://github.com/kasmtech/KasmVNC.git src &&   cd src &&   git checkout -f ${KASMVNC_COMMIT} &&   sed -i     -e '/find_package(FLTK/s@^@#@'     -e '/add_subdirectory(tests/s@^@#@'     CMakeLists.txt &&   cmake     -DCMAKE_BUILD_TYPE=RelWithDebInfo     -DBUILD_VIEWER:BOOL=OFF     -DENABLE_GNUTLS:BOOL=OFF     . &&   make -j4 &&   echo \"**** build xorg ****\" &&   XORG_VER=\"21.1.14\" &&   wget --no-check-certificate     -O /tmp/xorg-server-${XORG_VER}.tar.gz     \"https://www.x.org/archive/individual/xserver/xorg-server-${XORG_VER}.tar.gz\" &&   tar --strip-components=1     -C unix/xserver     -xf /tmp/xorg-server-${XORG_VER}.tar.gz &&   cd unix/xserver &&   patch -Np1 -i ../xserver21.patch &&   patch -s -p0 < ../CVE-2022-2320-v1.20.patch &&   autoreconf -i &&   ./configure     --disable-config-hal     --disable-config-udev     --disable-dmx     --disable-dri     --disable-dri2     --disable-kdrive     --disable-static     --disable-xephyr     --disable-xinerama     --disable-xnest     --disable-xorg     --disable-xvfb     --disable-xwayland     --disable-xwin     --enable-dri3     --enable-glx     --prefix=/opt/kasmweb     --with-default-font-path=\"/usr/share/fonts/X11/misc,/usr/share/fonts/X11/cyrillic,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,built-ins\"     --without-dtrace     --with-sha1=libcrypto     --with-xkb-bin-directory=/usr/bin     --with-xkb-output=/var/lib/xkb     --with-xkb-path=/usr/share/X11/xkb &&   find . -name \"Makefile\" -exec sed -i 's/-Werror=array-bounds//g' {} \\; &&   make -j4" did not complete successfully: exit code: 4

@@ -49,3 +49,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Still failing in build-deps install due transient archive fetch failure in this environment.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 post-passing-snapshot batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build now compiles KasmVNC but fails fetching xorg source due unresolved www.x.org host in this environment.
+- Full log: `amd64-build.log`

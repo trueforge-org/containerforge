@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.13.12
+FROM ghcr.io/trueforge-org/python-node:3.13.12 AS wwwstage
 
 ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
 USER root
@@ -50,6 +50,7 @@ RUN \
         libfreetype-dev \
         libjpeg-turbo8-dev \
         libjpeg-turbo8 \
+        libturbojpeg0-dev \
         libpciaccess-dev \
         libtool \
         libwebp-dev \

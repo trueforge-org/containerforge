@@ -13,3 +13,9 @@ This container remains in `/porting/post-processed` for now.
 - Command: `docker buildx bake --set image-local.platform=linux/amd64 image-local`
 - Result: FAIL
 - Reason: Uses Alpine-style `apt-get add/del --no-cache` commands, which fail on Debian/Ubuntu base images.
+
+## AMD64 build check (2026-02-17 post-passing-snapshot batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds in this batch without Dockerfile changes.
+- Full log: `amd64-build.log`

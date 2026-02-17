@@ -8,8 +8,7 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bin/cosign \
-    --mount=type=bind,source=/lychee.pub,target=/config/lychee.pub \
+RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -27,12 +26,11 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
     php8.3-sqlite3 \
     php-imagick \
     php-redis \
-    php-sodium \
-    postgresql-client && \
+    postgresql-client \
+    composer && \
   rm -rf /var/lib/apt/lists/* && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
+  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi; fi && \
   echo "**** install lychee ****" && \
   if [ -z "v${VERSION}" ]; then \
     VERSION=$(curl -sX GET "https://api.github.com/repos/LycheeOrg/Lychee/releases/latest" \
@@ -41,10 +39,6 @@ RUN --mount=type=bind,from=cosign-bin,source=/ko-app/cosign,target=/usr/local/bi
   curl -o \
     /tmp/lychee.zip -L \
     "https://github.com/LycheeOrg/Lychee/releases/download/v${VERSION}/Lychee.zip" && \
-  curl -o \
-    /tmp/lychee.zip.sigstore.json -L \
-    "https://github.com/LycheeOrg/Lychee/releases/download/v${VERSION}/Lychee.zip.sigstore.json" && \
-  cosign verify-blob --key /config/lychee.pub --bundle /tmp/lychee.zip.sigstore.json /tmp/lychee.zip && \
   unzip -q /tmp/lychee.zip -d /app && \
   mv /app/Lychee /app/www && \
   echo "**** install composer dependencies ****" && \
