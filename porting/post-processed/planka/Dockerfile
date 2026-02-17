@@ -1,6 +1,7 @@
 FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
 
 # set version label
+ARG VERSION
 USER root
 
 RUN \
@@ -16,11 +17,14 @@ RUN \
     python3-setuptools && \
   echo "**** install planka ****" && \
   mkdir -p /build && \
-  curl -fL -o \
+  (curl -fL -o \
     /tmp/planka.tar.gz \
     "https://github.com/plankanban/planka/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
     /tmp/planka.tar.gz \
-    "https://github.com/plankanban/planka/archive/refs/tags/${VERSION}.tar.gz" && \
+    "https://github.com/plankanban/planka/archive/refs/tags/${VERSION}.tar.gz" || (PLANKA_RELEASE=$(curl -sX GET "https://api.github.com/repos/plankanban/planka/releases/latest" \
+    | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o \
+    /tmp/planka.tar.gz \
+    "https://github.com/plankanban/planka/archive/refs/tags/${PLANKA_RELEASE}.tar.gz")) && \
   tar xf \
     /tmp/planka.tar.gz -C \
     /build --strip-components=1 && \
