@@ -38,8 +38,7 @@ RUN \
         libyaml-dev && \
     echo "**** install manyfold ****" && \
     mkdir -p /app/www && \
-    curl -sX GET "https://api.github.com/repos/manyfold3d/manyfold/git/matching-refs/tags/v${VERSION}" \
-        | jq -r '.[].object.sha' > /app/www/GIT_SHA && \
+    (curl -fsSL "https://api.github.com/repos/manyfold3d/manyfold/git/matching-refs/tags/v${VERSION}" | jq -r '.[0].object.sha' > /app/www/GIT_SHA || echo "unknown" > /app/www/GIT_SHA) && \
     curl -s -o \
         /tmp/manyfold.tar.gz -L \
         "https://github.com/manyfold3d/manyfold/archive/v${VERSION}.tar.gz" && \
@@ -51,7 +50,7 @@ RUN \
     corepack enable && \
     yarn install && \
     gem install foreman && \
-    RUBY=$(apt-get list ruby | grep -oP '.*-\K(\d\.\d\.\d)') && \
+    RUBY=$(ruby -e 'print RUBY_VERSION') && \
     sed -i "s/\d.\d.\d/${RUBY}/" .ruby-version && \
     bundle config set --local deployment 'true' && \
     bundle config set --local without 'development test' && \

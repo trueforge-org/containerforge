@@ -1,18 +1,126 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 3.14kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 826B / 826B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/baseimage-kasmvnc:arch
-#2 ERROR: failed to authorize: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fbaseimage-kasmvnc%3Apull&service=ghcr.io: 403 Forbidden
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 3.13kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/trueforge-org/node:22.22.0
+#3 DONE 0.2s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM ghcr.io/trueforge-org/node:22.22.0@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34
+#5 resolve ghcr.io/trueforge-org/node:22.22.0@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34 0.0s done
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 11.21kB 0.0s done
+#6 DONE 0.0s
+
+#7 [2/5] RUN   echo "**** install vanilla 32 bit packages from multilib ****" &&   echo '[multilib]' >> /etc/pacman.conf &&   echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf &&   pacman -Sy --noconfirm --needed     lib32-amdvlk     lib32-glibc     lib32-libva-intel-driver     lib32-libva-mesa-driver     lib32-libvdpau     lib32-mangohud     lib32-mesa-utils     lib32-mesa     lib32-vulkan-intel     lib32-vulkan-mesa-layers     lib32-vulkan-radeon     lib32-vulkan-swrast     libva-intel-driver     libva-utils     mesa-vdpau     vulkan-swrast &&   echo "**** add steam repos ****" &&   echo '[jupiter-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   echo '[holo-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   pacman -Syyu --noconfirm &&   echo "**** install packages ****" &&   pacman -Sy --noconfirm --needed     boost-libs     dmidecode     dolphin     firefox     fuse2     gamescope     gperftools     kate     konsole     lib32-gamescope     lib32-gcc-libs     lib32-libpulse     lib32-libunwind     lib32-mesa     lib32-opencl-mesa     lib32-renderdoc-minimal     mangohud     noto-fonts-cjk     plasma-desktop     sddm     steamdeck-kde-presets     steam-jupiter-stable     steamos-customizations     xdg-user-dirs     xorg-xwayland     zenity &&   echo "**** install sunshine ****" &&   cd /tmp &&   git clone https://aur.archlinux.org/sunshine.git &&   chown -R apps:apps sunshine &&   cd sunshine &&   sed -i '/CXXFLAGS/i sudo chown -R 911:1001 \/config' PKGBUILD &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo "**** install fix for games using source engine ****" &&   cd /tmp &&   git clone https://aur.archlinux.org/lib32-gperftools.git &&   chown -R apps:apps lib32-gperftools &&   cd lib32-gperftools &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo "**** steam tweaks ****" &&   sed -i 's/-steamdeck//g' /usr/bin/steam &&   echo "**** kde tweaks ****" &&   sed -i     -e 's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g'     -e 's#preferred://browser#applications:firefox.desktop#g'     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml &&   echo "**** cleanup ****" &&   rm -rf     /config/.cache     /config/.npm     /tmp/*     /var/cache/pacman/pkg/*     /var/lib/pacman/sync/*
+#7 0.185 **** install vanilla 32 bit packages from multilib ****
+#7 0.186 /bin/bash: line 1: pacman: command not found
+#7 ERROR: process "/bin/bash -o pipefail -c echo \"**** install vanilla 32 bit packages from multilib ****\" &&   echo '[multilib]' >> /etc/pacman.conf &&   echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf &&   pacman -Sy --noconfirm --needed     lib32-amdvlk     lib32-glibc     lib32-libva-intel-driver     lib32-libva-mesa-driver     lib32-libvdpau     lib32-mangohud     lib32-mesa-utils     lib32-mesa     lib32-vulkan-intel     lib32-vulkan-mesa-layers     lib32-vulkan-radeon     lib32-vulkan-swrast     libva-intel-driver     libva-utils     mesa-vdpau     vulkan-swrast &&   echo \"**** add steam repos ****\" &&   echo '[jupiter-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   echo '[holo-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   pacman -Syyu --noconfirm &&   echo \"**** install packages ****\" &&   pacman -Sy --noconfirm --needed     boost-libs     dmidecode     dolphin     firefox     fuse2     gamescope     gperftools     kate     konsole     lib32-gamescope     lib32-gcc-libs     lib32-libpulse     lib32-libunwind     lib32-mesa     lib32-opencl-mesa     lib32-renderdoc-minimal     mangohud     noto-fonts-cjk     plasma-desktop     sddm     steamdeck-kde-presets     steam-jupiter-stable     steamos-customizations     xdg-user-dirs     xorg-xwayland     zenity &&   echo \"**** install sunshine ****\" &&   cd /tmp &&   git clone https://aur.archlinux.org/sunshine.git &&   chown -R apps:apps sunshine &&   cd sunshine &&   sed -i '/CXXFLAGS/i sudo chown -R 911:1001 \\/config' PKGBUILD &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo \"**** install fix for games using source engine ****\" &&   cd /tmp &&   git clone https://aur.archlinux.org/lib32-gperftools.git &&   chown -R apps:apps lib32-gperftools &&   cd lib32-gperftools &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo \"**** steam tweaks ****\" &&   sed -i 's/-steamdeck//g' /usr/bin/steam &&   echo \"**** kde tweaks ****\" &&   sed -i     -e 's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g'     -e 's#preferred://browser#applications:firefox.desktop#g'     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml &&   echo \"**** cleanup ****\" &&   rm -rf     /config/.cache     /config/.npm     /tmp/*     /var/cache/pacman/pkg/*     /var/lib/pacman/sync/*" did not complete successfully: exit code: 127
 ------
- > [internal] load metadata for ghcr.io/trueforge-org/baseimage-kasmvnc:arch:
+ > [2/5] RUN   echo "**** install vanilla 32 bit packages from multilib ****" &&   echo '[multilib]' >> /etc/pacman.conf &&   echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf &&   pacman -Sy --noconfirm --needed     lib32-amdvlk     lib32-glibc     lib32-libva-intel-driver     lib32-libva-mesa-driver     lib32-libvdpau     lib32-mangohud     lib32-mesa-utils     lib32-mesa     lib32-vulkan-intel     lib32-vulkan-mesa-layers     lib32-vulkan-radeon     lib32-vulkan-swrast     libva-intel-driver     libva-utils     mesa-vdpau     vulkan-swrast &&   echo "**** add steam repos ****" &&   echo '[jupiter-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   echo '[holo-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   pacman -Syyu --noconfirm &&   echo "**** install packages ****" &&   pacman -Sy --noconfirm --needed     boost-libs     dmidecode     dolphin     firefox     fuse2     gamescope     gperftools     kate     konsole     lib32-gamescope     lib32-gcc-libs     lib32-libpulse     lib32-libunwind     lib32-mesa     lib32-opencl-mesa     lib32-renderdoc-minimal     mangohud     noto-fonts-cjk     plasma-desktop     sddm     steamdeck-kde-presets     steam-jupiter-stable     steamos-customizations     xdg-user-dirs     xorg-xwayland     zenity &&   echo "**** install sunshine ****" &&   cd /tmp &&   git clone https://aur.archlinux.org/sunshine.git &&   chown -R apps:apps sunshine &&   cd sunshine &&   sed -i '/CXXFLAGS/i sudo chown -R 911:1001 \/config' PKGBUILD &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo "**** install fix for games using source engine ****" &&   cd /tmp &&   git clone https://aur.archlinux.org/lib32-gperftools.git &&   chown -R apps:apps lib32-gperftools &&   cd lib32-gperftools &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo "**** steam tweaks ****" &&   sed -i 's/-steamdeck//g' /usr/bin/steam &&   echo "**** kde tweaks ****" &&   sed -i     -e 's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g'     -e 's#preferred://browser#applications:firefox.desktop#g'     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml &&   echo "**** cleanup ****" &&   rm -rf     /config/.cache     /config/.npm     /tmp/*     /var/cache/pacman/pkg/*     /var/lib/pacman/sync/*:
+0.185 **** install vanilla 32 bit packages from multilib ****
+0.186 /bin/bash: line 1: pacman: command not found
 ------
-Dockerfile:1
+Dockerfile:11
 --------------------
-   1 | >>> FROM ghcr.io/trueforge-org/baseimage-kasmvnc:arch
-   2 |     
-   3 |     # set version label
+  10 |     
+  11 | >>> RUN \
+  12 | >>>   echo "**** install vanilla 32 bit packages from multilib ****" && \
+  13 | >>>   echo '[multilib]' >> /etc/pacman.conf && \
+  14 | >>>   echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
+  15 | >>>   pacman -Sy --noconfirm --needed \
+  16 | >>>     lib32-amdvlk \
+  17 | >>>     lib32-glibc \
+  18 | >>>     lib32-libva-intel-driver \
+  19 | >>>     lib32-libva-mesa-driver \
+  20 | >>>     lib32-libvdpau \
+  21 | >>>     lib32-mangohud \
+  22 | >>>     lib32-mesa-utils \
+  23 | >>>     lib32-mesa \
+  24 | >>>     lib32-vulkan-intel \
+  25 | >>>     lib32-vulkan-mesa-layers \
+  26 | >>>     lib32-vulkan-radeon \
+  27 | >>>     lib32-vulkan-swrast \
+  28 | >>>     libva-intel-driver \
+  29 | >>>     libva-utils \
+  30 | >>>     mesa-vdpau \
+  31 | >>>     vulkan-swrast && \
+  32 | >>>   echo "**** add steam repos ****" && \
+  33 | >>>   echo '[jupiter-staging]' >> /etc/pacman.conf && \
+  34 | >>>   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf && \
+  35 | >>>   echo 'SigLevel = Never' >> /etc/pacman.conf && \
+  36 | >>>   echo '[holo-staging]' >> /etc/pacman.conf && \
+  37 | >>>   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf && \
+  38 | >>>   echo 'SigLevel = Never' >> /etc/pacman.conf && \
+  39 | >>>   pacman -Syyu --noconfirm && \
+  40 | >>>   echo "**** install packages ****" && \
+  41 | >>>   pacman -Sy --noconfirm --needed \
+  42 | >>>     boost-libs \
+  43 | >>>     dmidecode \
+  44 | >>>     dolphin \
+  45 | >>>     firefox \
+  46 | >>>     fuse2 \
+  47 | >>>     gamescope \
+  48 | >>>     gperftools \
+  49 | >>>     kate \
+  50 | >>>     konsole \
+  51 | >>>     lib32-gamescope \
+  52 | >>>     lib32-gcc-libs \
+  53 | >>>     lib32-libpulse \
+  54 | >>>     lib32-libunwind \
+  55 | >>>     lib32-mesa \
+  56 | >>>     lib32-opencl-mesa \
+  57 | >>>     lib32-renderdoc-minimal \
+  58 | >>>     mangohud \
+  59 | >>>     noto-fonts-cjk \
+  60 | >>>     plasma-desktop \
+  61 | >>>     sddm \
+  62 | >>>     steamdeck-kde-presets \
+  63 | >>>     steam-jupiter-stable \
+  64 | >>>     steamos-customizations \
+  65 | >>>     xdg-user-dirs \
+  66 | >>>     xorg-xwayland \
+  67 | >>>     zenity && \
+  68 | >>>   echo "**** install sunshine ****" && \
+  69 | >>>   cd /tmp && \
+  70 | >>>   git clone https://aur.archlinux.org/sunshine.git && \
+  71 | >>>   chown -R apps:apps sunshine && \
+  72 | >>>   cd sunshine && \
+  73 | >>>   sed -i '/CXXFLAGS/i sudo chown -R 911:1001 \/config' PKGBUILD && \
+  74 | >>>   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed && \
+  75 | >>>   usermod -G input apps && \
+  76 | >>>   echo "**** install fix for games using source engine ****" && \
+  77 | >>>   cd /tmp && \
+  78 | >>>   git clone https://aur.archlinux.org/lib32-gperftools.git && \
+  79 | >>>   chown -R apps:apps lib32-gperftools && \
+  80 | >>>   cd lib32-gperftools && \
+  81 | >>>   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed && \
+  82 | >>>   usermod -G input apps && \
+  83 | >>>   echo "**** steam tweaks ****" && \
+  84 | >>>   sed -i 's/-steamdeck//g' /usr/bin/steam && \
+  85 | >>>   echo "**** kde tweaks ****" && \
+  86 | >>>   sed -i \
+  87 | >>>     -e 's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g' \
+  88 | >>>     -e 's#preferred://browser#applications:firefox.desktop#g' \
+  89 | >>>     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml && \
+  90 | >>>   echo "**** cleanup ****" && \
+  91 | >>>   rm -rf \
+  92 | >>>     /config/.cache \
+  93 | >>>     /config/.npm \
+  94 | >>>     /tmp/* \
+  95 | >>>     /var/cache/pacman/pkg/* \
+  96 | >>>     /var/lib/pacman/sync/*
+  97 |     
 --------------------
-ERROR: failed to build: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fbaseimage-kasmvnc%3Apull&service=ghcr.io: 403 Forbidden
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install vanilla 32 bit packages from multilib ****\" &&   echo '[multilib]' >> /etc/pacman.conf &&   echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf &&   pacman -Sy --noconfirm --needed     lib32-amdvlk     lib32-glibc     lib32-libva-intel-driver     lib32-libva-mesa-driver     lib32-libvdpau     lib32-mangohud     lib32-mesa-utils     lib32-mesa     lib32-vulkan-intel     lib32-vulkan-mesa-layers     lib32-vulkan-radeon     lib32-vulkan-swrast     libva-intel-driver     libva-utils     mesa-vdpau     vulkan-swrast &&   echo \"**** add steam repos ****\" &&   echo '[jupiter-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   echo '[holo-staging]' >> /etc/pacman.conf &&   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf &&   echo 'SigLevel = Never' >> /etc/pacman.conf &&   pacman -Syyu --noconfirm &&   echo \"**** install packages ****\" &&   pacman -Sy --noconfirm --needed     boost-libs     dmidecode     dolphin     firefox     fuse2     gamescope     gperftools     kate     konsole     lib32-gamescope     lib32-gcc-libs     lib32-libpulse     lib32-libunwind     lib32-mesa     lib32-opencl-mesa     lib32-renderdoc-minimal     mangohud     noto-fonts-cjk     plasma-desktop     sddm     steamdeck-kde-presets     steam-jupiter-stable     steamos-customizations     xdg-user-dirs     xorg-xwayland     zenity &&   echo \"**** install sunshine ****\" &&   cd /tmp &&   git clone https://aur.archlinux.org/sunshine.git &&   chown -R apps:apps sunshine &&   cd sunshine &&   sed -i '/CXXFLAGS/i sudo chown -R 911:1001 \\/config' PKGBUILD &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo \"**** install fix for games using source engine ****\" &&   cd /tmp &&   git clone https://aur.archlinux.org/lib32-gperftools.git &&   chown -R apps:apps lib32-gperftools &&   cd lib32-gperftools &&   sudo -u apps makepkg -sAci --skipinteg --noconfirm --needed &&   usermod -G input apps &&   echo \"**** steam tweaks ****\" &&   sed -i 's/-steamdeck//g' /usr/bin/steam &&   echo \"**** kde tweaks ****\" &&   sed -i     -e 's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g'     -e 's#preferred://browser#applications:firefox.desktop#g'     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml &&   echo \"**** cleanup ****\" &&   rm -rf     /config/.cache     /config/.npm     /tmp/*     /var/cache/pacman/pkg/*     /var/lib/pacman/sync/*" did not complete successfully: exit code: 127

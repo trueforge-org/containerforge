@@ -46,3 +46,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Still fails in upstream webgrab archive URL retrieval/extraction flow.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch K)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails because WebGrab+ tarball URL cannot be resolved from upstream download pages for current version.
+- Full log: `amd64-build.log`

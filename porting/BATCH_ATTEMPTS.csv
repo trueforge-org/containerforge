@@ -80,3 +80,17 @@ timestamp,batch,app,result_at_record_time
 2026-02-17T15:12:57Z,batch-2026-02-17-j,lychee,PASS
 2026-02-17T15:12:57Z,batch-2026-02-17-j,synclounge,PASS
 2026-02-17T15:12:57Z,batch-2026-02-17-j,kasmvnc,FAIL
+2026-02-17T20:34:53Z,batch-2026-02-17-k,flexget,FAIL
+2026-02-17T20:34:53Z,batch-2026-02-17-k,manyfold,FAIL
+2026-02-17T20:34:53Z,batch-2026-02-17-k,webgrabplus,FAIL
+2026-02-17T20:34:53Z,batch-2026-02-17-k,davos,FAIL
+2026-02-17T20:34:53Z,batch-2026-02-17-k,ffmpeg,FAIL
+2026-02-17T20:42:29Z,batch-2026-02-17-l,beets,FAIL
+2026-02-17T20:42:29Z,batch-2026-02-17-l,bookstack,FAIL
+2026-02-17T20:42:29Z,batch-2026-02-17-l,dokuwiki,FAIL
+2026-02-17T20:42:29Z,batch-2026-02-17-l,piwigo,FAIL
+2026-02-17T20:42:29Z,batch-2026-02-17-l,ubooquity,FAIL
+2026-02-17T20:43:28Z,batch-2026-02-17-m,kasm,FAIL
+2026-02-17T20:43:28Z,batch-2026-02-17-m,oscam,FAIL
+2026-02-17T20:43:28Z,batch-2026-02-17-m,steamos,FAIL
+2026-02-17T20:43:28Z,batch-2026-02-17-m,tvheadend,FAIL

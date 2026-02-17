@@ -28,3 +28,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Source download fails because `piwigo.org` cannot be resolved in this environment.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch L)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails due unresolved host piwigo.org while fetching release zip.
+- Full log: `amd64-build.log`

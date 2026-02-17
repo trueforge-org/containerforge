@@ -1,5 +1,3 @@
-FROM ghcr.io/trueforge-org/python-node:3.13.12
-
 FROM ghcr.io/trueforge-org/python:3.13.12
 
 COPY --from=ghcr.io/astral-sh/uv:0.9.10@sha256:29bd45092ea8902c0bbb7f0a338f0494a382b1f4b18355df5be270ade679ff1d /uv /uvx /bin/
@@ -31,7 +29,7 @@ RUN \
     echo "**** install flexget ****" && \
     mkdir -p /run/flexget-temp /data && \
     mkdir -p /app/flexget && \
-    $SELECTION_PLACEHOLDER$ \
+    (curl -fL -o /tmp/flexget.tar.gz "https://github.com/Flexget/Flexget/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o /tmp/flexget.tar.gz "https://github.com/Flexget/Flexget/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o /tmp/flexget.tar.gz "https://github.com/Flexget/Flexget/archive/refs/heads/main.tar.gz") && \
     tar xf \
         /tmp/flexget.tar.gz -C \
         /app/flexget --strip-components=1 && \
@@ -53,9 +51,6 @@ RUN \
 # add local files
 USER apps
 COPY . /
-
-COPY --from=libtorrent /libtorrent-build/usr/lib/libtorrent-rasterbar.* /usr/lib/
-COPY --from=libtorrent /libtorrent-build/usr/lib/python3.12 /config/venv/lib/python3.12
 COPY ./root /
 
 

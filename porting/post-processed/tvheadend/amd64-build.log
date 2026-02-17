@@ -5,29 +5,30 @@
 #1 DONE 0.0s
 
 #2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 4.96kB done
-#2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 3)
+#2 transferring dockerfile: 4.94kB done
 #2 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 6)
 #2 DONE 0.0s
 
-#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#3 DONE 0.1s
+#3 [auth] library/piconsstage:pull token for registry-1.docker.io
+#3 DONE 0.0s
 
-#4 [internal] load metadata for ghcr.io/trueforge-org/picons-builder:latest
-#4 ERROR: failed to authorize: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden
+#4 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#4 DONE 0.1s
+
+#5 [internal] load metadata for docker.io/library/piconsstage:latest
+#5 ERROR: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
 ------
- > [internal] load metadata for ghcr.io/trueforge-org/picons-builder:latest:
+ > [internal] load metadata for docker.io/library/piconsstage:latest:
 ------
 
- [33m2 warnings found (use docker --debug to expand):
-[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 3)
- - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 6)
-Dockerfile:3
+ [33m1 warning found (use docker --debug to expand):
+[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 6)
+Dockerfile:18
 --------------------
-   1 |     ############## picons stage ##############
-   2 |     # built by https://github.com/linuxserver/picons-builder
-   3 | >>> FROM ghcr.io/trueforge-org/picons-builder as piconsstage
-   4 |     
-   5 |     
+  16 |     # copy patches and picons
+  17 |     COPY patches/ /tmp/patches/
+  18 | >>> COPY --from=piconsstage /picons.tar.bz2 /picons.tar.bz2
+  19 |     
+  20 |     RUN \
 --------------------
-ERROR: failed to solve: failed to fetch anonymous token: unexpected status from GET request to https://ghcr.io/token?scope=repository%3Atrueforge-org%2Fpicons-builder%3Apull&service=ghcr.io: 403 Forbidden
+ERROR: failed to solve: piconsstage: failed to resolve source metadata for docker.io/library/piconsstage:latest: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed

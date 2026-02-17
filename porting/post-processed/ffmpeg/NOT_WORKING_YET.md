@@ -26,3 +26,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Still fails while fetching/installing rust toolchain for this build flow.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch K)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in early heavy toolchain bootstrap path despite rust version fallback; upstream/toolchain step exits non-zero.
+- Full log: `amd64-build.log`

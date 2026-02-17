@@ -31,3 +31,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Build still fails in mp3gain/mp3val compilation section despite unzip/package fixes.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch L)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in upstream package/source download chain (network/external dependency resolution errors).
+- Full log: `amd64-build.log`

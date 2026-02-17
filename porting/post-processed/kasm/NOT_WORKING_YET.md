@@ -20,3 +20,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 0.515 curl: (6) Could not resolve host: nvidia.github.io
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch M)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build blocked by unresolved upstream host nvidia.github.io during NVIDIA repository/bootstrap step.
+- Full log: `amd64-build.log`

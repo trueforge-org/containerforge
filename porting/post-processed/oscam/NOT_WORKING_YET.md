@@ -21,3 +21,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 23.59   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: git.streamboard.tv
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch M)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build blocked by unresolved upstream host git.streamboard.tv while fetching source archive.
+- Full log: `amd64-build.log`

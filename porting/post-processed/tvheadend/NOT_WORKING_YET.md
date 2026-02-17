@@ -26,3 +26,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Blocked by external 403 when pulling ghcr.io/trueforge-org/picons-builder base dependency.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch M)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build blocked by registry authorization failure resolving piconsstage image (insufficient_scope/403-like auth error).
+- Full log: `amd64-build.log`

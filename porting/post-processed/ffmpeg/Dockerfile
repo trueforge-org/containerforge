@@ -127,7 +127,8 @@ RUN \
     zlib1g-dev && \
   mkdir -p /tmp/rust && \
   RUST_ARCH="$TARGETARCH" && if [ "$TARGETARCH" = "amd64" ]; then RUST_ARCH="x86_64"; elif [ "$TARGETARCH" = "arm64" ]; then RUST_ARCH="aarch64"; fi && \
-  RUST_VERSION=$(curl -fsX GET https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name') && \
+  RUST_VERSION=$(curl -fsX GET https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name' || echo "1.89.0") && \
+  RUST_VERSION=${RUST_VERSION#v} && \
   curl -fo /tmp/rust.tar.gz -L "https://static.rust-lang.org/dist/rust-${RUST_VERSION}-${RUST_ARCH}-unknown-linux-gnu.tar.gz" && \
   tar xf /tmp/rust.tar.gz -C /tmp/rust --strip-components=1 && \
   cd /tmp/rust && \

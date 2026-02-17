@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 0.153   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: vaemendis.net
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large batch L)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails due unresolved host vaemendis.net while fetching release zip.
+- Full log: `amd64-build.log`
