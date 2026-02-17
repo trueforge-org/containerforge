@@ -19,3 +19,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 13.51 E: Unable to locate package libxslt
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large-batch completion)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after runtime package normalization and venv pip path fix.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 completed large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds in this batch after runtime package normalization and venv pip usage.
+- Full log: `amd64-build.log`

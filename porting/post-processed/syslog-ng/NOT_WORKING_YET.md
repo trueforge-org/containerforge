@@ -20,3 +20,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 4.682 E: Unable to locate package syslog-ng-xml
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large-batch completion)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after syslog-ng plugin package-name migration and runtime lib updates.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 completed large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds in this batch after syslog-ng plugin/runtime package migration.
+- Full log: `amd64-build.log`

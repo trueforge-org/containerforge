@@ -20,3 +20,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 6.190 E: Unable to locate package zlib-dev
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large-batch completion)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after Ubuntu package-name normalization and venv pip path fix.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 completed large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds in this batch after package normalization and venv pip usage.
+- Full log: `amd64-build.log`

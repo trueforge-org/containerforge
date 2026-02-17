@@ -20,3 +20,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 6.103 E: Unable to locate package zstd-dev
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 large-batch completion)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in deep multi-source compile chain; requires larger upstream/toolchain adjustments.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 completed large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in deep multi-component compile chain; requires broader upstream/toolchain adjustments.
+- Full log: `amd64-build.log`
