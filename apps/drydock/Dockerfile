@@ -12,8 +12,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 WORKDIR /app
 
-USER root
-
 RUN mkdir -p /app/src && \
     curl -fsSL "https://github.com/trueforge-org/drydock/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1 && \
