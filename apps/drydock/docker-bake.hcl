@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=trueforge-org/drydock
-  default = "0.0.3"
+  default = "0.0.4"
 }
 
 variable "LICENSE" {
