@@ -26,3 +26,21 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Configured VERSION tarball lookup fails (HTTP 400/404), so source cannot be extracted.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continuous batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after VERSION handling and source fallback fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after VERSION/source fallback fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after VERSION/source fallback fixes.
+- Full log: `amd64-build.log`

@@ -25,3 +25,21 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Source tarball URL for configured VERSION resolves to HTTP 400 during fetch.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continuous batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build reaches dependency install but fails in frontend build (`node-sass`/node-gyp requiring distutils in this environment).
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in frontend dependency compilation (`node-sass`/node-gyp toolchain incompatibility).
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in frontend dependency compilation (`node-sass`/node-gyp toolchain incompatibility).
+- Full log: `amd64-build.log`

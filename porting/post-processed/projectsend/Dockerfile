@@ -9,21 +9,19 @@ USER root
 RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    php84-bcmath \
-    php84-bz2 \
-    php84-cli \
-    php84-dom \
-    php84-gd \
-    php84-gettext \
-    php84-gmp \
-    php84-mysqli \
-    php84-pdo \
-    php84-pdo_dblib \
-    php84-pdo_mysql \
-    php84-pecl-apcu \
-    php84-pecl-memcached \
-    php84-soap \
-    php84-xmlreader && \
+    php8.3-bcmath \
+    php8.3-bz2 \
+    php8.3-cli \
+    php8.3-xml \
+    php8.3-gd \
+    php8.3-mysql \
+    php8.3-gmp \
+    php8.3-mysql \
+    php8.3-sqlite3 \
+    php-apcu \
+    php-memcached \
+    php8.3-soap \
+    php8.3-xml && \
   echo "**** install projectsend ****" && \
   mkdir -p /app/www/public && \
   curl -fso \

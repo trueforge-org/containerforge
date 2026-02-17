@@ -127,9 +127,9 @@ RUN \
   usermod -aG sudo apps && \
   echo "**** proot-apps ****" && \
   mkdir /proot-apps/ && \
-  PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]') && \
-  curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
+  PAPPS_RELEASE=$(curl -sI -L "https://github.com/linuxserver/proot-apps/releases/latest" | awk -F/ '/^location:/ {print $NF}' | tr -d '\r') && \
+  PAPPS_ARCH="$TARGETARCH" && if [ "$TARGETARCH" = "amd64" ]; then PAPPS_ARCH="x86_64"; elif [ "$TARGETARCH" = "arm64" ]; then PAPPS_ARCH="aarch64"; fi && \
+  curl -fL "https://github.com/linuxserver/proot-apps/releases/latest/download/proot-apps-$PAPPS_ARCH.tar.gz" \
     | tar -xzf - -C /proot-apps/ && \
   echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
   echo "**** locales ****" && \

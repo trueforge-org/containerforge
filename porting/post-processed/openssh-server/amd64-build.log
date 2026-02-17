@@ -1,131 +1,189 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 844B done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 838B / 838B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.1s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 804B done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
 
-#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 11.02kB done
-#5 DONE 0.0s
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#5 CACHED
 
-#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     logrotate     netcat-openbsd &&   echo "**** install openssh-server ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh-client==${VERSION}     openssh-server-pam==${VERSION}     openssh-sftp-server==${VERSION} &&   echo "**** setup openssh environment ****" &&   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config &&   usermod --shell /bin/bash apps &&   rm -rf     /tmp/*     /config/.cache
-#6 0.147 **** install runtime packages ****
-#6 0.251 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.328 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.334 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.415 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 0.498 Get:5 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 0.542 Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 0.583 Get:7 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 0.664 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 0.754 Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 0.776 Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 0.912 Get:11 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 1.163 Get:12 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 1.203 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 1.318 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 1.458 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 1.538 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 1.657 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 1.737 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 2.040 Fetched 36.1 MB in 2s (19.4 MB/s)
-#6 2.040 Reading package lists...
-#6 2.793 Reading package lists...
-#6 3.529 Building dependency tree...
-#6 3.679 Reading state information...
-#6 3.818 The following additional packages will be installed:
-#6 3.819   libbsd0 libpopt0
-#6 3.819 Suggested packages:
-#6 3.819   bsd-mailx | mailx
-#6 3.843 The following NEW packages will be installed:
-#6 3.843   libbsd0 libpopt0 logrotate netcat-openbsd
-#6 3.936 0 upgraded, 4 newly installed, 0 to remove and 5 not upgraded.
-#6 3.936 Need to get 166 kB of archives.
-#6 3.936 After this operation, 510 kB of additional disk space will be used.
-#6 3.936 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
-#6 4.017 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libpopt0 amd64 1.19+dfsg-1build1 [28.6 kB]
-#6 4.096 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 logrotate amd64 3.21.0-2build1 [52.2 kB]
-#6 4.176 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 netcat-openbsd amd64 1.226-1ubuntu2 [44.3 kB]
-#6 4.275 debconf: delaying package configuration, since apt-utils is not installed
-#6 4.299 Fetched 166 kB in 0s (507 kB/s)
-#6 4.314 Selecting previously unselected package libbsd0:amd64.
-#6 4.314 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
-#6 4.326 Preparing to unpack .../libbsd0_0.12.1-1build1.1_amd64.deb ...
-#6 4.327 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
-#6 4.344 Selecting previously unselected package libpopt0:amd64.
-#6 4.345 Preparing to unpack .../libpopt0_1.19+dfsg-1build1_amd64.deb ...
-#6 4.346 Unpacking libpopt0:amd64 (1.19+dfsg-1build1) ...
-#6 4.360 Selecting previously unselected package logrotate.
-#6 4.361 Preparing to unpack .../logrotate_3.21.0-2build1_amd64.deb ...
-#6 4.362 Unpacking logrotate (3.21.0-2build1) ...
-#6 4.379 Selecting previously unselected package netcat-openbsd.
-#6 4.381 Preparing to unpack .../netcat-openbsd_1.226-1ubuntu2_amd64.deb ...
-#6 4.382 Unpacking netcat-openbsd (1.226-1ubuntu2) ...
-#6 4.401 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
-#6 4.403 Setting up libpopt0:amd64 (1.19+dfsg-1build1) ...
-#6 4.405 Setting up logrotate (3.21.0-2build1) ...
-#6 4.517 Created symlink /etc/systemd/system/timers.target.wants/logrotate.timer → /usr/lib/systemd/system/logrotate.timer.
-#6 4.521 Setting up netcat-openbsd (1.226-1ubuntu2) ...
-#6 4.524 update-alternatives: using /bin/nc.openbsd to provide /bin/nc (nc) in auto mode
-#6 4.525 update-alternatives: warning: skip creation of /usr/share/man/man1/nc.1.gz because associated file /usr/share/man/man1/nc_openbsd.1.gz (of link group nc) doesn't exist
-#6 4.525 update-alternatives: warning: skip creation of /usr/share/man/man1/netcat.1.gz because associated file /usr/share/man/man1/nc_openbsd.1.gz (of link group nc) doesn't exist
-#6 4.527 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
-#6 4.556 **** install openssh-server ****
-#6 4.664 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
-#6 4.735 Hit:2 http://security.ubuntu.com/ubuntu noble-security InRelease
-#6 4.737 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-#6 4.816 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
-#6 4.898 Reading package lists...
-#6 5.631 Reading package lists...
-#6 6.370 Building dependency tree...
-#6 6.512 Reading state information...
-#6 6.526 E: Unable to locate package openssh-client=
-#6 6.526 E: Unable to locate package openssh-server-pam=
-#6 6.526 E: Unable to locate package openssh-sftp-server=
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     logrotate     netcat-openbsd &&   echo \"**** install openssh-server ****\" &&   apt-get update && apt-get install -y --no-install-recommends     openssh-client==${VERSION}     openssh-server-pam==${VERSION}     openssh-sftp-server==${VERSION} &&   echo \"**** setup openssh environment ****\" &&   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config &&   usermod --shell /bin/bash apps &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100
-------
- > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     logrotate     netcat-openbsd &&   echo "**** install openssh-server ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh-client==${VERSION}     openssh-server-pam==${VERSION}     openssh-sftp-server==${VERSION} &&   echo "**** setup openssh environment ****" &&   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config &&   usermod --shell /bin/bash apps &&   rm -rf     /tmp/*     /config/.cache:
-4.664 Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
-4.735 Hit:2 http://security.ubuntu.com/ubuntu noble-security InRelease
-4.737 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-4.816 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#6 [internal] load build context
+#6 transferring context: 11.33kB done
+#6 DONE 0.0s
 
+#7 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     logrotate     netcat-openbsd &&   echo "**** install openssh-server ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh-client     openssh-server     openssh-sftp-server &&   echo "**** setup openssh environment ****" &&   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config &&   usermod --shell /bin/bash apps &&   rm -rf     /tmp/*     /config/.cache
+#7 0.145 **** install runtime packages ****
+#7 0.314 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.452 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.460 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.605 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 0.751 Get:5 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 0.897 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.125 Get:7 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.712 Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 1.776 Get:9 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.918 Get:10 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 2.065 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.190 Get:12 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 2.323 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.331 Get:14 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 2.536 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.756 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 2.900 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 3.045 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 3.064 Fetched 36.1 MB in 3s (12.5 MB/s)
+#7 3.064 Reading package lists...
+#7 3.807 Reading package lists...
+#7 4.551 Building dependency tree...
+#7 4.706 Reading state information...
+#7 4.847 The following additional packages will be installed:
+#7 4.848   libbsd0 libpopt0
+#7 4.848 Suggested packages:
+#7 4.848   bsd-mailx | mailx
+#7 4.873 The following NEW packages will be installed:
+#7 4.873   libbsd0 libpopt0 logrotate netcat-openbsd
+#7 5.031 0 upgraded, 4 newly installed, 0 to remove and 5 not upgraded.
+#7 5.031 Need to get 166 kB of archives.
+#7 5.031 After this operation, 510 kB of additional disk space will be used.
+#7 5.031 Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#7 5.175 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libpopt0 amd64 1.19+dfsg-1build1 [28.6 kB]
+#7 5.319 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 logrotate amd64 3.21.0-2build1 [52.2 kB]
+#7 5.463 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 netcat-openbsd amd64 1.226-1ubuntu2 [44.3 kB]
+#7 5.564 debconf: delaying package configuration, since apt-utils is not installed
+#7 5.591 Fetched 166 kB in 1s (284 kB/s)
+#7 5.606 Selecting previously unselected package libbsd0:amd64.
+#7 5.606 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 5.617 Preparing to unpack .../libbsd0_0.12.1-1build1.1_amd64.deb ...
+#7 5.619 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 5.637 Selecting previously unselected package libpopt0:amd64.
+#7 5.638 Preparing to unpack .../libpopt0_1.19+dfsg-1build1_amd64.deb ...
+#7 5.639 Unpacking libpopt0:amd64 (1.19+dfsg-1build1) ...
+#7 5.655 Selecting previously unselected package logrotate.
+#7 5.656 Preparing to unpack .../logrotate_3.21.0-2build1_amd64.deb ...
+#7 5.657 Unpacking logrotate (3.21.0-2build1) ...
+#7 5.678 Selecting previously unselected package netcat-openbsd.
+#7 5.680 Preparing to unpack .../netcat-openbsd_1.226-1ubuntu2_amd64.deb ...
+#7 5.680 Unpacking netcat-openbsd (1.226-1ubuntu2) ...
+#7 5.702 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 5.705 Setting up libpopt0:amd64 (1.19+dfsg-1build1) ...
+#7 5.708 Setting up logrotate (3.21.0-2build1) ...
+#7 5.823 Created symlink /etc/systemd/system/timers.target.wants/logrotate.timer → /usr/lib/systemd/system/logrotate.timer.
+#7 5.828 Setting up netcat-openbsd (1.226-1ubuntu2) ...
+#7 5.832 update-alternatives: using /bin/nc.openbsd to provide /bin/nc (nc) in auto mode
+#7 5.833 update-alternatives: warning: skip creation of /usr/share/man/man1/nc.1.gz because associated file /usr/share/man/man1/nc_openbsd.1.gz (of link group nc) doesn't exist
+#7 5.833 update-alternatives: warning: skip creation of /usr/share/man/man1/netcat.1.gz because associated file /usr/share/man/man1/nc_openbsd.1.gz (of link group nc) doesn't exist
+#7 5.835 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 5.866 **** install openssh-server ****
+#7 6.035 Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
+#7 6.035 Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+#7 6.175 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#7 6.318 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#7 6.377 Reading package lists...
+#7 7.116 Reading package lists...
+#7 7.847 Building dependency tree...
+#7 7.996 Reading state information...
+#7 8.130 The following additional packages will be installed:
+#7 8.130   libcbor0.10 libedit2 libfido2-1 libwrap0 ucf
+#7 8.131 Suggested packages:
+#7 8.131   keychain libpam-ssh monkeysphere ssh-askpass molly-guard ufw
+#7 8.131 Recommended packages:
+#7 8.131   xauth ncurses-term ssh-import-id
+#7 8.159 The following NEW packages will be installed:
+#7 8.159   libcbor0.10 libedit2 libfido2-1 libwrap0 openssh-client openssh-server
+#7 8.160   openssh-sftp-server ucf
+#7 8.317 0 upgraded, 8 newly installed, 0 to remove and 5 not upgraded.
+#7 8.317 Need to get 1,764 kB of archives.
+#7 8.317 After this operation, 6,797 kB of additional disk space will be used.
+#7 8.317 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#7 8.463 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libcbor0.10 amd64 0.10.2-1.2ubuntu2 [25.8 kB]
+#7 8.607 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libfido2-1 amd64 1.14.0-1build3 [83.5 kB]
+#7 8.752 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 openssh-client amd64 1:9.6p1-3ubuntu13.14 [906 kB]
+#7 8.926 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 openssh-sftp-server amd64 1:9.6p1-3ubuntu13.14 [37.3 kB]
+#7 9.070 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#7 9.214 Get:7 http://archive.ubuntu.com/ubuntu noble/main amd64 libwrap0 amd64 7.6.q-33 [47.9 kB]
+#7 9.358 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 openssh-server amd64 1:9.6p1-3ubuntu13.14 [510 kB]
+#7 9.474 debconf: delaying package configuration, since apt-utils is not installed
+#7 9.497 Fetched 1,764 kB in 1s (1,457 kB/s)
+#7 9.511 Selecting previously unselected package libedit2:amd64.
+#7 9.511 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16627 files and directories currently installed.)
+#7 9.523 Preparing to unpack .../0-libedit2_3.1-20230828-1build1_amd64.deb ...
+#7 9.525 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#7 9.541 Selecting previously unselected package libcbor0.10:amd64.
+#7 9.542 Preparing to unpack .../1-libcbor0.10_0.10.2-1.2ubuntu2_amd64.deb ...
+#7 9.543 Unpacking libcbor0.10:amd64 (0.10.2-1.2ubuntu2) ...
+#7 9.558 Selecting previously unselected package libfido2-1:amd64.
+#7 9.559 Preparing to unpack .../2-libfido2-1_1.14.0-1build3_amd64.deb ...
+#7 9.560 Unpacking libfido2-1:amd64 (1.14.0-1build3) ...
+#7 9.576 Selecting previously unselected package openssh-client.
+#7 9.578 Preparing to unpack .../3-openssh-client_1%3a9.6p1-3ubuntu13.14_amd64.deb ...
+#7 9.583 Unpacking openssh-client (1:9.6p1-3ubuntu13.14) ...
+#7 9.616 Selecting previously unselected package openssh-sftp-server.
+#7 9.618 Preparing to unpack .../4-openssh-sftp-server_1%3a9.6p1-3ubuntu13.14_amd64.deb ...
+#7 9.619 Unpacking openssh-sftp-server (1:9.6p1-3ubuntu13.14) ...
+#7 9.634 Selecting previously unselected package ucf.
+#7 9.636 Preparing to unpack .../5-ucf_3.0043+nmu1_all.deb ...
+#7 9.637 Moving old data out of the way
+#7 9.639 Unpacking ucf (3.0043+nmu1) ...
+#7 9.659 Selecting previously unselected package libwrap0:amd64.
+#7 9.661 Preparing to unpack .../6-libwrap0_7.6.q-33_amd64.deb ...
+#7 9.662 Unpacking libwrap0:amd64 (7.6.q-33) ...
+#7 9.679 Selecting previously unselected package openssh-server.
+#7 9.681 Preparing to unpack .../7-openssh-server_1%3a9.6p1-3ubuntu13.14_amd64.deb ...
+#7 9.686 Unpacking openssh-server (1:9.6p1-3ubuntu13.14) ...
+#7 9.718 Setting up libcbor0.10:amd64 (0.10.2-1.2ubuntu2) ...
+#7 9.721 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#7 9.723 Setting up libwrap0:amd64 (7.6.q-33) ...
+#7 9.728 Setting up ucf (3.0043+nmu1) ...
+#7 9.791 Setting up libfido2-1:amd64 (1.14.0-1build3) ...
+#7 9.794 Setting up openssh-client (1:9.6p1-3ubuntu13.14) ...
+#7 9.849 Setting up openssh-sftp-server (1:9.6p1-3ubuntu13.14) ...
+#7 9.851 Setting up openssh-server (1:9.6p1-3ubuntu13.14) ...
+#7 9.950 
+#7 9.950 Creating config file /etc/ssh/sshd_config with new version
+#7 9.981 Creating SSH2 RSA key; this may take some time ...
+#7 10.84 3072 SHA256:g4NbYmYhJQlbNvDkIFu38wmwR2Ac0k1SjrFyGwctwFc root@buildkitsandbox (RSA)
+#7 10.85 Creating SSH2 ECDSA key; this may take some time ...
+#7 10.85 256 SHA256:Hf3mR8amTqw6EM4Aud0ICAkmL9Zhp39/9RQG75ZA8UI root@buildkitsandbox (ECDSA)
+#7 10.86 Creating SSH2 ED25519 key; this may take some time ...
+#7 10.86 256 SHA256:op2nTewTp3J2nhVgzdIunVWgSvBY8N4lNgXT+q/9oGI root@buildkitsandbox (ED25519)
+#7 10.93 invoke-rc.d: could not determine current runlevel
+#7 10.93 invoke-rc.d: policy-rc.d denied execution of start.
+#7 11.04 Created symlink /etc/systemd/system/sockets.target.wants/ssh.socket → /usr/lib/systemd/system/ssh.socket.
+#7 11.04 Created symlink /etc/systemd/system/ssh.service.requires/ssh.socket → /usr/lib/systemd/system/ssh.socket.
+#7 11.12 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 11.15 **** setup openssh environment ****
+#7 11.15 usermod: no changes
+#7 DONE 11.2s
 
+#8 [3/5] COPY . /
+#8 DONE 0.0s
 
-6.526 E: Unable to locate package openssh-client=
-6.526 E: Unable to locate package openssh-server-pam=
-6.526 E: Unable to locate package openssh-sftp-server=
-------
-Dockerfile:9
---------------------
-   8 |     
-   9 | >>> RUN \
-  10 | >>>   echo "**** install runtime packages ****" && \
-  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  12 | >>>     logrotate \
-  13 | >>>     netcat-openbsd && \
-  14 | >>>   echo "**** install openssh-server ****" && \
-  15 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  16 | >>>     openssh-client==${VERSION} \
-  17 | >>>     openssh-server-pam==${VERSION} \
-  18 | >>>     openssh-sftp-server==${VERSION} && \
-  19 | >>>   echo "**** setup openssh environment ****" && \
-  20 | >>>   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
-  21 | >>>   usermod --shell /bin/bash apps && \
-  22 | >>>   rm -rf \
-  23 | >>>     /tmp/* \
-  24 | >>>     $HOME/.cache
-  25 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     logrotate     netcat-openbsd &&   echo \"**** install openssh-server ****\" &&   apt-get update && apt-get install -y --no-install-recommends     openssh-client==${VERSION}     openssh-server-pam==${VERSION}     openssh-sftp-server==${VERSION} &&   echo \"**** setup openssh environment ****\" &&   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config &&   usermod --shell /bin/bash apps &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 2.4s done
+#11 exporting manifest sha256:da52c51097fe0268da74d01fbd9a9cb536ac7f673f6277bb958ca9f6b07be00e done
+#11 exporting config sha256:8d42dc45f3bea232ff46113dc20fe717a642942ab7c4f1c68c1ea48bc5d274f3 done
+#11 exporting attestation manifest sha256:52a81a5f3b36d8bbe0e831aafba1b54e92f05750a14dd1e08b75c678157b4038 done
+#11 exporting manifest list sha256:a5c7fbc80fd749938f09ffdfc7044c775ebabcde314c3759467853c8575b4ee0 done
+#11 naming to docker.io/library/openssh-server:10.0_p1-r9 done
+#11 unpacking to docker.io/library/openssh-server:10.0_p1-r9
+#11 unpacking to docker.io/library/openssh-server:10.0_p1-r9 0.4s done
+#11 DONE 2.9s

@@ -10,7 +10,7 @@ USER root
 RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    haproxy==${VERSION} && \
+    haproxy && \
   apt-get remove -y --purge \
     curl && \
   rm -rf \

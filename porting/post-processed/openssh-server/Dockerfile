@@ -13,9 +13,9 @@ RUN \
     netcat-openbsd && \
   echo "**** install openssh-server ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    openssh-client==${VERSION} \
-    openssh-server-pam==${VERSION} \
-    openssh-sftp-server==${VERSION} && \
+    openssh-client \
+    openssh-server \
+    openssh-sftp-server && \
   echo "**** setup openssh environment ****" && \
   sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
   usermod --shell /bin/bash apps && \

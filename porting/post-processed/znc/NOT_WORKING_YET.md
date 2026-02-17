@@ -26,3 +26,21 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Configured VERSION branch is missing in upstream repo (`git clone --branch "${VERSION}"` fails).
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continuous batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after build dependency and runtime-package detection fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after dependency and runtime package detection fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after dependency and runtime package detection fixes.
+- Full log: `amd64-build.log`

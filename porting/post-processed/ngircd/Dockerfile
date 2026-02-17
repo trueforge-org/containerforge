@@ -9,8 +9,7 @@ USER root
 RUN \
   echo "**** install packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    ngircd==${VERSION} \
-    ngircd-doc==${VERSION} && \
+    ngircd && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*

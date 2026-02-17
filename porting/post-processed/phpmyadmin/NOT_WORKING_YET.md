@@ -22,3 +22,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 5.146 /bin/bash: line 1: /etc/php84/conf.d/phpmyadmin-misc.ini: No such file or directory
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails during release signature verification (GPG keyserver retrieval/verification path in this environment).
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails during upstream signature-verification path in this environment (GPG keyserver-dependent step).
+- Full log: `amd64-build.log`

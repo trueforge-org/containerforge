@@ -1,67 +1,373 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 3.19kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 834B / 834B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.1s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 3.27kB done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.3s
 
-#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 20.60kB done
-#5 DONE 0.0s
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#5 CACHED
 
-#6 [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf &&   echo "**** setup php opcache ****" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo "**** install phpmyadmin ****" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" &&   curl -s -o     "/tmp/phpmyadmin.tar.xz.asc" -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92" &&   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then     echo "File signature mismatch";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup
-#6 0.311 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 0.447 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.719 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 0.903 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 1.088 Get:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 1.104 Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 1.826 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 2.159 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 2.298 Get:9 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 2.299 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 2.459 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 2.600 Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 2.744 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 2.920 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 3.084 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 3.246 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 3.386 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 3.527 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 3.546 Fetched 36.1 MB in 3s (10.7 MB/s)
-#6 3.546 Reading package lists...
-#6 4.282 Reading package lists...
-#6 4.993 Building dependency tree...
-#6 5.131 Reading state information...
-#6 5.145 E: Unable to locate package gnupg-dirmngr
-#6 5.146 /bin/bash: line 1: /etc/php84/conf.d/session-strict.ini: No such file or directory
-#6 5.146 /bin/bash: line 1: /etc/php84/conf.d/phpmyadmin-misc.ini: No such file or directory
-#6 5.156 gpg: keyserver receive failed: Server indicated a failure
-#6 5.160 gpg: keyserver receive failed: Server indicated a failure
-#6 5.163 gpg: keyserver receive failed: Server indicated a failure
-#6 ERROR: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php84/php-fpm.conf &&   echo \"**** setup php opcache ****\" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo \"**** install phpmyadmin ****\" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz\" &&   curl -s -o     \"/tmp/phpmyadmin.tar.xz.asc\" -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/phpmyadmin.tar.xz.asc\" \"/tmp/phpmyadmin.tar.xz\"; then     echo \"File signature mismatch\";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i \"s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@\" \"/app/www/public/libraries/vendor_config.php\" &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup" did not complete successfully: exit code: 2
+#6 [internal] load build context
+#6 transferring context: 21.07kB done
+#6 DONE 0.0s
+
+#7 [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php8.3-bz2     php8.3-xml     php8.3-gd     php8.3-mysql     php8.3-opcache     php-uploadprogress &&   echo "**** configure php-fpm to pass env vars ****" &&   if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&   echo "**** setup php opcache ****" &&   mkdir -p /etc/php/8.3/cli/conf.d &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php/8.3/cli/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php/8.3/cli/conf.d/phpmyadmin-misc.ini &&   echo "**** install phpmyadmin ****" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     "https://files.phpmyadmin.net/phpMyAdmin/5.2.3/phpMyAdmin-5.2.3-all-languages.tar.xz" &&   curl -s -o     "/tmp/phpmyadmin.tar.xz.asc" -L     "https://files.phpmyadmin.net/phpMyAdmin/5.2.3/phpMyAdmin-5.2.3-all-languages.tar.xz.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92" &&   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then     echo "File signature mismatch";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup
+#7 0.604 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.615 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 1.269 Get:3 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 1.404 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 1.599 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 1.796 Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.909 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 2.311 Get:8 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 2.449 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 3.060 Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 3.222 Get:11 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 3.368 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 3.511 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 3.654 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 3.832 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 3.999 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 4.163 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 4.306 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 4.326 Fetched 36.1 MB in 4s (8,723 kB/s)
+#7 4.326 Reading package lists...
+#7 5.081 Reading package lists...
+#7 5.817 Building dependency tree...
+#7 5.965 Reading state information...
+#7 6.125 gpg is already the newest version (2.4.4-2ubuntu17.4).
+#7 6.125 gpg set to manually installed.
+#7 6.125 gpg-agent is already the newest version (2.4.4-2ubuntu17.4).
+#7 6.125 gpg-agent set to manually installed.
+#7 6.125 dirmngr is already the newest version (2.4.4-2ubuntu17.4).
+#7 6.125 0 upgraded, 0 newly installed, 0 to remove and 5 not upgraded.
+#7 6.293 Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
+#7 6.293 Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+#7 6.434 Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+#7 6.576 Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+#7 6.637 Reading package lists...
+#7 7.382 Reading package lists...
+#7 8.117 Building dependency tree...
+#7 8.271 Reading state information...
+#7 8.415 The following additional packages will be installed:
+#7 8.415   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3 libheif-plugin-aomdec
+#7 8.416   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#7 8.416   libsharpyuv0 libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6
+#7 8.416   libxcb1 libxdmcp6 libxpm4 php-common php8.3-cli php8.3-common php8.3-phpdbg
+#7 8.416   php8.3-readline php8.3-uploadprogress psmisc ucf
+#7 8.417 Suggested packages:
+#7 8.417   libgd-tools libheif-plugin-x265 libheif-plugin-ffmpegdec
+#7 8.417   libheif-plugin-jpegdec libheif-plugin-jpegenc libheif-plugin-j2kdec
+#7 8.417   libheif-plugin-j2kenc libheif-plugin-rav1e libheif-plugin-svtenc php-pear
+#7 8.417 Recommended packages:
+#7 8.417   libheif-plugin-aomenc libapache2-mod-php
+#7 8.531 The following NEW packages will be installed:
+#7 8.532   libaom3 libbsd0 libde265-0 libdeflate0 libedit2 libgd3 libheif-plugin-aomdec
+#7 8.532   libheif-plugin-libde265 libheif1 libjbig0 libjpeg-turbo8 libjpeg8 liblerc4
+#7 8.532   libsharpyuv0 libsodium23 libtiff6 libwebp7 libx11-6 libx11-data libxau6
+#7 8.533   libxcb1 libxdmcp6 libxpm4 php-common php-uploadprogress php8.3-bz2
+#7 8.533   php8.3-cli php8.3-common php8.3-gd php8.3-mysql php8.3-opcache php8.3-phpdbg
+#7 8.533   php8.3-readline php8.3-uploadprogress php8.3-xml psmisc ucf
+#7 8.693 0 upgraded, 37 newly installed, 0 to remove and 5 not upgraded.
+#7 8.693 Need to get 10.1 MB of archives.
+#7 8.693 After this operation, 38.3 MB of additional disk space will be used.
+#7 8.693 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 psmisc amd64 23.7-1build1 [179 kB]
+#7 8.837 Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 php-common all 2:93ubuntu2 [13.9 kB]
+#7 8.979 Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 ucf all 3.0043+nmu1 [56.5 kB]
+#7 9.122 Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-common amd64 8.3.6-0ubuntu0.24.04.6 [740 kB]
+#7 9.272 Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#7 9.415 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#7 9.557 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-opcache amd64 8.3.6-0ubuntu0.24.04.6 [372 kB]
+#7 9.703 Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-readline amd64 8.3.6-0ubuntu0.24.04.6 [13.4 kB]
+#7 9.846 Get:9 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsodium23 amd64 1.0.18-1ubuntu0.24.04.1 [161 kB]
+#7 9.989 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-cli amd64 8.3.6-0ubuntu0.24.04.6 [1,916 kB]
+#7 10.15 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-phpdbg amd64 8.3.6-0ubuntu0.24.04.6 [1,933 kB]
+#7 10.32 Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 php8.3-uploadprogress amd64 2.0.2+1.1.4-8ubuntu1 [10.1 kB]
+#7 10.46 Get:13 http://archive.ubuntu.com/ubuntu noble/universe amd64 php-uploadprogress amd64 2.0.2+1.1.4-8ubuntu1 [4,356 B]
+#7 10.60 Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libxau6 amd64 1:1.0.9-1build6 [7,160 B]
+#7 10.75 Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libxdmcp6 amd64 1:1.1.3-0ubuntu6 [10.3 kB]
+#7 10.89 Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libxcb1 amd64 1.15-1ubuntu2 [47.7 kB]
+#7 11.03 Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-data all 2:1.8.7-1build1 [115 kB]
+#7 11.18 Get:18 http://archive.ubuntu.com/ubuntu noble/main amd64 libx11-6 amd64 2:1.8.7-1build1 [650 kB]
+#7 11.32 Get:19 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libaom3 amd64 3.8.2-2ubuntu0.1 [1,941 kB]
+#7 11.49 Get:20 http://archive.ubuntu.com/ubuntu noble/main amd64 libde265-0 amd64 1.0.15-1build3 [166 kB]
+#7 11.63 Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libdeflate0 amd64 1.19-1build1.1 [43.9 kB]
+#7 11.77 Get:22 http://archive.ubuntu.com/ubuntu noble/main amd64 libsharpyuv0 amd64 1.3.2-0.4build3 [15.8 kB]
+#7 11.92 Get:23 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-aomdec amd64 1.17.6-1ubuntu4.2 [10.6 kB]
+#7 12.06 Get:24 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif-plugin-libde265 amd64 1.17.6-1ubuntu4.2 [8,174 B]
+#7 12.20 Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libheif1 amd64 1.17.6-1ubuntu4.2 [276 kB]
+#7 12.35 Get:26 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg-turbo8 amd64 2.1.5-2ubuntu2 [150 kB]
+#7 12.49 Get:27 http://archive.ubuntu.com/ubuntu noble/main amd64 libjpeg8 amd64 8c-2ubuntu11 [2,148 B]
+#7 12.63 Get:28 http://archive.ubuntu.com/ubuntu noble/main amd64 libjbig0 amd64 2.1-6.1ubuntu2 [29.7 kB]
+#7 12.78 Get:29 http://archive.ubuntu.com/ubuntu noble/main amd64 liblerc4 amd64 4.0.0+ds-4ubuntu2 [179 kB]
+#7 12.92 Get:30 http://archive.ubuntu.com/ubuntu noble/main amd64 libwebp7 amd64 1.3.2-0.4build3 [230 kB]
+#7 13.07 Get:31 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libtiff6 amd64 4.5.1+git230720-4ubuntu2.4 [199 kB]
+#7 13.21 Get:32 http://archive.ubuntu.com/ubuntu noble/main amd64 libxpm4 amd64 1:3.5.17-1build2 [36.5 kB]
+#7 13.35 Get:33 http://archive.ubuntu.com/ubuntu noble/main amd64 libgd3 amd64 2.3.3-9ubuntu5 [128 kB]
+#7 13.50 Get:34 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 php8.3-bz2 amd64 8.3.6-0ubuntu0.24.04.6 [11.5 kB]
+#7 13.64 Get:35 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-gd amd64 8.3.6-0ubuntu0.24.04.6 [31.1 kB]
+#7 13.78 Get:36 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-mysql amd64 8.3.6-0ubuntu0.24.04.6 [127 kB]
+#7 13.92 Get:37 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 php8.3-xml amd64 8.3.6-0ubuntu0.24.04.6 [126 kB]
+#7 14.03 debconf: delaying package configuration, since apt-utils is not installed
+#7 14.05 Fetched 10.1 MB in 5s (1,872 kB/s)
+#7 14.07 Selecting previously unselected package psmisc.
+#7 14.07 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 14.08 Preparing to unpack .../00-psmisc_23.7-1build1_amd64.deb ...
+#7 14.08 Unpacking psmisc (23.7-1build1) ...
+#7 14.10 Selecting previously unselected package php-common.
+#7 14.11 Preparing to unpack .../01-php-common_2%3a93ubuntu2_all.deb ...
+#7 14.11 Unpacking php-common (2:93ubuntu2) ...
+#7 14.13 Selecting previously unselected package ucf.
+#7 14.13 Preparing to unpack .../02-ucf_3.0043+nmu1_all.deb ...
+#7 14.13 Moving old data out of the way
+#7 14.13 Unpacking ucf (3.0043+nmu1) ...
+#7 14.15 Selecting previously unselected package php8.3-common.
+#7 14.15 Preparing to unpack .../03-php8.3-common_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 14.15 Unpacking php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.20 Selecting previously unselected package libbsd0:amd64.
+#7 14.21 Preparing to unpack .../04-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#7 14.21 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 14.22 Selecting previously unselected package libedit2:amd64.
+#7 14.22 Preparing to unpack .../05-libedit2_3.1-20230828-1build1_amd64.deb ...
+#7 14.22 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#7 14.24 Selecting previously unselected package php8.3-opcache.
+#7 14.24 Preparing to unpack .../06-php8.3-opcache_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 14.25 Unpacking php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.27 Selecting previously unselected package php8.3-readline.
+#7 14.27 Preparing to unpack .../07-php8.3-readline_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 14.27 Unpacking php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.28 Selecting previously unselected package libsodium23:amd64.
+#7 14.29 Preparing to unpack .../08-libsodium23_1.0.18-1ubuntu0.24.04.1_amd64.deb ...
+#7 14.29 Unpacking libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#7 14.30 Selecting previously unselected package php8.3-cli.
+#7 14.30 Preparing to unpack .../09-php8.3-cli_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 14.30 Unpacking php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.34 Selecting previously unselected package php8.3-phpdbg.
+#7 14.35 Preparing to unpack .../10-php8.3-phpdbg_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 14.35 Unpacking php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#7 14.39 Setting up psmisc (23.7-1build1) ...
+#7 14.39 Setting up php-common (2:93ubuntu2) ...
+#7 14.51 Created symlink /etc/systemd/system/timers.target.wants/phpsessionclean.timer → /usr/lib/systemd/system/phpsessionclean.timer.
+#7 14.53 Selecting previously unselected package php8.3-uploadprogress.
+#7 14.53 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16855 files and directories currently installed.)
+#7 14.54 Preparing to unpack .../00-php8.3-uploadprogress_2.0.2+1.1.4-8ubuntu1_amd64.deb ...
+#7 14.55 Unpacking php8.3-uploadprogress (2.0.2+1.1.4-8ubuntu1) ...
+#7 14.56 Selecting previously unselected package php-uploadprogress.
+#7 14.56 Preparing to unpack .../01-php-uploadprogress_2.0.2+1.1.4-8ubuntu1_amd64.deb ...
+#7 14.56 Unpacking php-uploadprogress (2.0.2+1.1.4-8ubuntu1) ...
+#7 14.57 Selecting previously unselected package libxau6:amd64.
+#7 14.58 Preparing to unpack .../02-libxau6_1%3a1.0.9-1build6_amd64.deb ...
+#7 14.58 Unpacking libxau6:amd64 (1:1.0.9-1build6) ...
+#7 14.59 Selecting previously unselected package libxdmcp6:amd64.
+#7 14.59 Preparing to unpack .../03-libxdmcp6_1%3a1.1.3-0ubuntu6_amd64.deb ...
+#7 14.59 Unpacking libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#7 14.61 Selecting previously unselected package libxcb1:amd64.
+#7 14.61 Preparing to unpack .../04-libxcb1_1.15-1ubuntu2_amd64.deb ...
+#7 14.61 Unpacking libxcb1:amd64 (1.15-1ubuntu2) ...
+#7 14.62 Selecting previously unselected package libx11-data.
+#7 14.62 Preparing to unpack .../05-libx11-data_2%3a1.8.7-1build1_all.deb ...
+#7 14.62 Unpacking libx11-data (2:1.8.7-1build1) ...
+#7 14.68 Selecting previously unselected package libx11-6:amd64.
+#7 14.68 Preparing to unpack .../06-libx11-6_2%3a1.8.7-1build1_amd64.deb ...
+#7 14.68 Unpacking libx11-6:amd64 (2:1.8.7-1build1) ...
+#7 14.70 Selecting previously unselected package libaom3:amd64.
+#7 14.70 Preparing to unpack .../07-libaom3_3.8.2-2ubuntu0.1_amd64.deb ...
+#7 14.70 Unpacking libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#7 14.74 Selecting previously unselected package libde265-0:amd64.
+#7 14.74 Preparing to unpack .../08-libde265-0_1.0.15-1build3_amd64.deb ...
+#7 14.74 Unpacking libde265-0:amd64 (1.0.15-1build3) ...
+#7 14.76 Selecting previously unselected package libdeflate0:amd64.
+#7 14.76 Preparing to unpack .../09-libdeflate0_1.19-1build1.1_amd64.deb ...
+#7 14.76 Unpacking libdeflate0:amd64 (1.19-1build1.1) ...
+#7 14.77 Selecting previously unselected package libsharpyuv0:amd64.
+#7 14.78 Preparing to unpack .../10-libsharpyuv0_1.3.2-0.4build3_amd64.deb ...
+#7 14.78 Unpacking libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 14.79 Selecting previously unselected package libheif-plugin-aomdec:amd64.
+#7 14.79 Preparing to unpack .../11-libheif-plugin-aomdec_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 14.79 Unpacking libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#7 14.81 Selecting previously unselected package libheif-plugin-libde265:amd64.
+#7 14.81 Preparing to unpack .../12-libheif-plugin-libde265_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 14.81 Unpacking libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#7 14.82 Selecting previously unselected package libheif1:amd64.
+#7 14.82 Preparing to unpack .../13-libheif1_1.17.6-1ubuntu4.2_amd64.deb ...
+#7 14.82 Unpacking libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#7 14.84 Selecting previously unselected package libjpeg-turbo8:amd64.
+#7 14.84 Preparing to unpack .../14-libjpeg-turbo8_2.1.5-2ubuntu2_amd64.deb ...
+#7 14.85 Unpacking libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 14.86 Selecting previously unselected package libjpeg8:amd64.
+#7 14.86 Preparing to unpack .../15-libjpeg8_8c-2ubuntu11_amd64.deb ...
+#7 14.86 Unpacking libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 14.88 Selecting previously unselected package libjbig0:amd64.
+#7 14.88 Preparing to unpack .../16-libjbig0_2.1-6.1ubuntu2_amd64.deb ...
+#7 14.88 Unpacking libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#7 14.91 Selecting previously unselected package liblerc4:amd64.
+#7 14.91 Preparing to unpack .../17-liblerc4_4.0.0+ds-4ubuntu2_amd64.deb ...
+#7 14.91 Unpacking liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#7 14.93 Selecting previously unselected package libwebp7:amd64.
+#7 14.93 Preparing to unpack .../18-libwebp7_1.3.2-0.4build3_amd64.deb ...
+#7 14.93 Unpacking libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 14.94 Selecting previously unselected package libtiff6:amd64.
+#7 14.95 Preparing to unpack .../19-libtiff6_4.5.1+git230720-4ubuntu2.4_amd64.deb ...
+#7 14.95 Unpacking libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#7 14.96 Selecting previously unselected package libxpm4:amd64.
+#7 14.97 Preparing to unpack .../20-libxpm4_1%3a3.5.17-1build2_amd64.deb ...
+#7 14.97 Unpacking libxpm4:amd64 (1:3.5.17-1build2) ...
+#7 14.98 Selecting previously unselected package libgd3:amd64.
+#7 14.98 Preparing to unpack .../21-libgd3_2.3.3-9ubuntu5_amd64.deb ...
+#7 14.98 Unpacking libgd3:amd64 (2.3.3-9ubuntu5) ...
+#7 15.00 Selecting previously unselected package php8.3-bz2.
+#7 15.00 Preparing to unpack .../22-php8.3-bz2_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 15.01 Unpacking php8.3-bz2 (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.02 Selecting previously unselected package php8.3-gd.
+#7 15.02 Preparing to unpack .../23-php8.3-gd_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 15.03 Unpacking php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.04 Selecting previously unselected package php8.3-mysql.
+#7 15.04 Preparing to unpack .../24-php8.3-mysql_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 15.05 Unpacking php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.07 Selecting previously unselected package php8.3-xml.
+#7 15.07 Preparing to unpack .../25-php8.3-xml_8.3.6-0ubuntu0.24.04.6_amd64.deb ...
+#7 15.07 Unpacking php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.10 Setting up libsharpyuv0:amd64 (1.3.2-0.4build3) ...
+#7 15.10 Setting up libaom3:amd64 (3.8.2-2ubuntu0.1) ...
+#7 15.10 Setting up libxau6:amd64 (1:1.0.9-1build6) ...
+#7 15.11 Setting up libsodium23:amd64 (1.0.18-1ubuntu0.24.04.1) ...
+#7 15.11 Setting up liblerc4:amd64 (4.0.0+ds-4ubuntu2) ...
+#7 15.11 Setting up libdeflate0:amd64 (1.19-1build1.1) ...
+#7 15.11 Setting up libjbig0:amd64 (2.1-6.1ubuntu2) ...
+#7 15.11 Setting up libx11-data (2:1.8.7-1build1) ...
+#7 15.12 Setting up ucf (3.0043+nmu1) ...
+#7 15.18 Setting up libjpeg-turbo8:amd64 (2.1.5-2ubuntu2) ...
+#7 15.18 Setting up libwebp7:amd64 (1.3.2-0.4build3) ...
+#7 15.18 Setting up libde265-0:amd64 (1.0.15-1build3) ...
+#7 15.19 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 15.19 Setting up libjpeg8:amd64 (8c-2ubuntu11) ...
+#7 15.19 Setting up libxdmcp6:amd64 (1:1.1.3-0ubuntu6) ...
+#7 15.19 Setting up libxcb1:amd64 (1.15-1ubuntu2) ...
+#7 15.20 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#7 15.20 Setting up php8.3-common (8.3.6-0ubuntu0.24.04.6) ...
+#7 15.30 
+#7 15.30 Creating config file /etc/php/8.3/mods-available/calendar.ini with new version
+#7 15.51 
+#7 15.51 Creating config file /etc/php/8.3/mods-available/ctype.ini with new version
+#7 15.71 
+#7 15.71 Creating config file /etc/php/8.3/mods-available/exif.ini with new version
+#7 15.92 
+#7 15.92 Creating config file /etc/php/8.3/mods-available/fileinfo.ini with new version
+#7 16.13 
+#7 16.13 Creating config file /etc/php/8.3/mods-available/ffi.ini with new version
+#7 16.34 
+#7 16.34 Creating config file /etc/php/8.3/mods-available/ftp.ini with new version
+#7 16.57 
+#7 16.57 Creating config file /etc/php/8.3/mods-available/gettext.ini with new version
+#7 16.80 
+#7 16.80 Creating config file /etc/php/8.3/mods-available/iconv.ini with new version
+#7 17.02 
+#7 17.02 Creating config file /etc/php/8.3/mods-available/pdo.ini with new version
+#7 17.23 
+#7 17.23 Creating config file /etc/php/8.3/mods-available/phar.ini with new version
+#7 17.45 
+#7 17.45 Creating config file /etc/php/8.3/mods-available/posix.ini with new version
+#7 17.67 
+#7 17.67 Creating config file /etc/php/8.3/mods-available/shmop.ini with new version
+#7 17.89 
+#7 17.89 Creating config file /etc/php/8.3/mods-available/sockets.ini with new version
+#7 18.10 
+#7 18.10 Creating config file /etc/php/8.3/mods-available/sysvmsg.ini with new version
+#7 18.32 
+#7 18.32 Creating config file /etc/php/8.3/mods-available/sysvsem.ini with new version
+#7 18.54 
+#7 18.54 Creating config file /etc/php/8.3/mods-available/sysvshm.ini with new version
+#7 18.76 
+#7 18.76 Creating config file /etc/php/8.3/mods-available/tokenizer.ini with new version
+#7 18.88 Setting up php8.3-mysql (8.3.6-0ubuntu0.24.04.6) ...
+#7 18.98 
+#7 18.98 Creating config file /etc/php/8.3/mods-available/mysqlnd.ini with new version
+#7 19.20 
+#7 19.20 Creating config file /etc/php/8.3/mods-available/mysqli.ini with new version
+#7 19.42 
+#7 19.42 Creating config file /etc/php/8.3/mods-available/pdo_mysql.ini with new version
+#7 19.54 Setting up php8.3-readline (8.3.6-0ubuntu0.24.04.6) ...
+#7 19.64 
+#7 19.64 Creating config file /etc/php/8.3/mods-available/readline.ini with new version
+#7 19.76 Setting up libtiff6:amd64 (4.5.1+git230720-4ubuntu2.4) ...
+#7 19.76 Setting up php8.3-bz2 (8.3.6-0ubuntu0.24.04.6) ...
+#7 19.86 
+#7 19.86 Creating config file /etc/php/8.3/mods-available/bz2.ini with new version
+#7 19.98 Setting up libx11-6:amd64 (2:1.8.7-1build1) ...
+#7 19.99 Setting up php8.3-xml (8.3.6-0ubuntu0.24.04.6) ...
+#7 20.09 
+#7 20.09 Creating config file /etc/php/8.3/mods-available/dom.ini with new version
+#7 20.31 
+#7 20.31 Creating config file /etc/php/8.3/mods-available/simplexml.ini with new version
+#7 20.52 
+#7 20.52 Creating config file /etc/php/8.3/mods-available/xml.ini with new version
+#7 20.74 
+#7 20.74 Creating config file /etc/php/8.3/mods-available/xmlreader.ini with new version
+#7 20.96 
+#7 20.96 Creating config file /etc/php/8.3/mods-available/xmlwriter.ini with new version
+#7 21.18 
+#7 21.18 Creating config file /etc/php/8.3/mods-available/xsl.ini with new version
+#7 21.31 Setting up php8.3-opcache (8.3.6-0ubuntu0.24.04.6) ...
+#7 21.41 
+#7 21.41 Creating config file /etc/php/8.3/mods-available/opcache.ini with new version
+#7 21.53 Setting up libxpm4:amd64 (1:3.5.17-1build2) ...
+#7 21.53 Setting up php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 21.54 update-alternatives: using /usr/bin/php8.3 to provide /usr/bin/php (php) in auto mode
+#7 21.54 update-alternatives: warning: skip creation of /usr/share/man/man1/php.1.gz because associated file /usr/share/man/man1/php8.3.1.gz (of link group php) doesn't exist
+#7 21.54 update-alternatives: using /usr/bin/phar8.3 to provide /usr/bin/phar (phar) in auto mode
+#7 21.54 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.1.gz because associated file /usr/share/man/man1/phar8.3.1.gz (of link group phar) doesn't exist
+#7 21.54 update-alternatives: using /usr/bin/phar.phar8.3 to provide /usr/bin/phar.phar (phar.phar) in auto mode
+#7 21.54 update-alternatives: warning: skip creation of /usr/share/man/man1/phar.phar.1.gz because associated file /usr/share/man/man1/phar.phar8.3.1.gz (of link group phar.phar) doesn't exist
+#7 21.64 
+#7 21.64 Creating config file /etc/php/8.3/cli/php.ini with new version
+#7 22.27 Setting up php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#7 22.27 update-alternatives: using /usr/bin/phpdbg8.3 to provide /usr/bin/phpdbg (phpdbg) in auto mode
+#7 22.27 update-alternatives: warning: skip creation of /usr/share/man/man1/phpdbg.1.gz because associated file /usr/share/man/man1/phpdbg8.3.1.gz (of link group phpdbg) doesn't exist
+#7 22.37 
+#7 22.37 Creating config file /etc/php/8.3/phpdbg/php.ini with new version
+#7 22.98 Setting up php8.3-uploadprogress (2.0.2+1.1.4-8ubuntu1) ...
+#7 23.05 Setting up php-uploadprogress (2.0.2+1.1.4-8ubuntu1) ...
+#7 23.06 Setting up libheif1:amd64 (1.17.6-1ubuntu4.2) ...
+#7 23.06 Setting up libgd3:amd64 (2.3.3-9ubuntu5) ...
+#7 23.06 Setting up php8.3-gd (8.3.6-0ubuntu0.24.04.6) ...
+#7 23.17 
+#7 23.17 Creating config file /etc/php/8.3/mods-available/gd.ini with new version
+#7 23.29 Setting up libheif-plugin-aomdec:amd64 (1.17.6-1ubuntu4.2) ...
+#7 23.29 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+#7 23.29 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 23.31 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+#7 23.31 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+#7 23.34 **** configure php-fpm to pass env vars ****
+#7 23.34 **** setup php opcache ****
+#7 23.34 **** install phpmyadmin ****
+#7 23.36 gpg: keyserver receive failed: Server indicated a failure
+#7 23.36 gpg: keyserver receive failed: Server indicated a failure
+#7 23.36 gpg: keyserver receive failed: Server indicated a failure
+#7 ERROR: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php8.3-bz2     php8.3-xml     php8.3-gd     php8.3-mysql     php8.3-opcache     php-uploadprogress &&   echo \"**** configure php-fpm to pass env vars ****\" &&   if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&   echo \"**** setup php opcache ****\" &&   mkdir -p /etc/php/8.3/cli/conf.d &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php/8.3/cli/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php/8.3/cli/conf.d/phpmyadmin-misc.ini &&   echo \"**** install phpmyadmin ****\" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz\" &&   curl -s -o     \"/tmp/phpmyadmin.tar.xz.asc\" -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/phpmyadmin.tar.xz.asc\" \"/tmp/phpmyadmin.tar.xz\"; then     echo \"File signature mismatch\";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i \"s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@\" \"/app/www/public/libraries/vendor_config.php\" &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup" did not complete successfully: exit code: 2
 ------
- > [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo "**** configure php-fpm to pass env vars ****" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf &&   echo "**** setup php opcache ****" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo "**** install phpmyadmin ****" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" &&   curl -s -o     "/tmp/phpmyadmin.tar.xz.asc" -L     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92" &&   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then     echo "File signature mismatch";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup:
-3.527 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-
-
-
-5.145 E: Unable to locate package gnupg-dirmngr
-5.146 /bin/bash: line 1: /etc/php84/conf.d/session-strict.ini: No such file or directory
-5.146 /bin/bash: line 1: /etc/php84/conf.d/phpmyadmin-misc.ini: No such file or directory
-5.156 gpg: keyserver receive failed: Server indicated a failure
-5.160 gpg: keyserver receive failed: Server indicated a failure
-5.163 gpg: keyserver receive failed: Server indicated a failure
+ > [2/5] RUN   apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php8.3-bz2     php8.3-xml     php8.3-gd     php8.3-mysql     php8.3-opcache     php-uploadprogress &&   echo "**** configure php-fpm to pass env vars ****" &&   if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&   echo "**** setup php opcache ****" &&   mkdir -p /etc/php/8.3/cli/conf.d &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php/8.3/cli/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php/8.3/cli/conf.d/phpmyadmin-misc.ini &&   echo "**** install phpmyadmin ****" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     "https://files.phpmyadmin.net/phpMyAdmin/5.2.3/phpMyAdmin-5.2.3-all-languages.tar.xz" &&   curl -s -o     "/tmp/phpmyadmin.tar.xz.asc" -L     "https://files.phpmyadmin.net/phpMyAdmin/5.2.3/phpMyAdmin-5.2.3-all-languages.tar.xz.asc" &&   export GNUPGHOME="$(mktemp -d)" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "3D06A59ECE730EB71B511C17CE752F178259BD92" &&   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then     echo "File signature mismatch";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" &&   echo "**** cleanup ****" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup:
+23.29 Setting up libheif-plugin-libde265:amd64 (1.17.6-1ubuntu4.2) ...
+23.29 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+23.31 Processing triggers for php8.3-cli (8.3.6-0ubuntu0.24.04.6) ...
+23.31 Processing triggers for php8.3-phpdbg (8.3.6-0ubuntu0.24.04.6) ...
+23.34 **** configure php-fpm to pass env vars ****
+23.34 **** setup php opcache ****
+23.34 **** install phpmyadmin ****
+23.36 gpg: keyserver receive failed: Server indicated a failure
+23.36 gpg: keyserver receive failed: Server indicated a failure
+23.36 gpg: keyserver receive failed: Server indicated a failure
 ------
 
  [33m1 warning found (use docker --debug to expand):
@@ -73,67 +379,65 @@ Dockerfile:15
   16 | >>>   apt-get update && apt-get install -y --no-install-recommends \
   17 | >>>     gpg \
   18 | >>>     gpg-agent \
-  19 | >>>     gnupg-dirmngr && \
+  19 | >>>     dirmngr && \
   20 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  21 | >>>     php84-bz2 \
-  22 | >>>     php84-dom \
-  23 | >>>     php84-gd \
-  24 | >>>     php84-mysqli \
-  25 | >>>     php84-opcache \
-  26 | >>>     php84-pecl-uploadprogress \
-  27 | >>>     php84-tokenizer && \
-  28 | >>>   echo "**** configure php-fpm to pass env vars ****" && \
-  29 | >>>   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
-  30 | >>>   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
-  31 | >>>   echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
-  32 | >>>   echo "**** setup php opcache ****" && \
-  33 | >>>   { \
-  34 | >>>       echo 'opcache.memory_consumption=128'; \
-  35 | >>>       echo 'opcache.interned_strings_buffer=8'; \
-  36 | >>>       echo 'opcache.max_accelerated_files=4000'; \
-  37 | >>>       echo 'opcache.revalidate_freq=2'; \
-  38 | >>>       echo 'opcache.fast_shutdown=1'; \
-  39 | >>>   } > /etc/php84/conf.d/opcache-recommended.ini; \
-  40 | >>>   \
-  41 | >>>   { \
-  42 | >>>       echo 'session.cookie_httponly=1'; \
-  43 | >>>       echo 'session.use_strict_mode=1'; \
-  44 | >>>   } > /etc/php84/conf.d/session-strict.ini; \
-  45 | >>>   \
-  46 | >>>   { \
-  47 | >>>       echo 'allow_url_fopen=Off'; \
-  48 | >>>       echo 'max_execution_time=${MAX_EXECUTION_TIME}'; \
-  49 | >>>       echo 'max_input_vars=10000'; \
-  50 | >>>       echo 'memory_limit=${MEMORY_LIMIT}'; \
-  51 | >>>       echo 'post_max_size=${UPLOAD_LIMIT}'; \
-  52 | >>>       echo 'upload_max_filesize=${UPLOAD_LIMIT}'; \
-  53 | >>>   } > /etc/php84/conf.d/phpmyadmin-misc.ini && \
-  54 | >>>   echo "**** install phpmyadmin ****" && \
-  55 | >>>   mkdir -p /app/www/public && \
-  56 | >>>   curl -s -o \
-  57 | >>>     /tmp/phpmyadmin.tar.xz -L \
-  58 | >>>     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" && \
-  59 | >>>   curl -s -o \
-  60 | >>>     "/tmp/phpmyadmin.tar.xz.asc" -L \
-  61 | >>>     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" && \
-  62 | >>>   export GNUPGHOME="$(mktemp -d)" && \
-  63 | >>>   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
-  64 | >>>       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
-  65 | >>>       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
-  66 | >>>       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" && \
-  67 | >>>   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then \
-  68 | >>>     echo "File signature mismatch"; \
-  69 | >>>     exit 1; \
-  70 | >>>   fi && \
-  71 | >>>   tar xf \
-  72 | >>>     /tmp/phpmyadmin.tar.xz -C \
-  73 | >>>     /app/www/public/ --strip-components=1 && \
-  74 | >>>   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" && \
-  75 | >>>   echo "**** cleanup ****" && \
-  76 | >>>   apt-get autoremove -y && \
-  77 | >>>   rm -rf \
-  78 | >>>     /tmp/* \
-  79 | >>>     /app/www/public/setup
-  80 |     
+  21 | >>>     php8.3-bz2 \
+  22 | >>>     php8.3-xml \
+  23 | >>>     php8.3-gd \
+  24 | >>>     php8.3-mysql \
+  25 | >>>     php8.3-opcache \
+  26 | >>>     php-uploadprogress && \
+  27 | >>>   echo "**** configure php-fpm to pass env vars ****" && \
+  28 | >>>   if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
+  29 | >>>   echo "**** setup php opcache ****" && \
+  30 | >>>   mkdir -p /etc/php/8.3/cli/conf.d && \
+  31 | >>>   { \
+  32 | >>>       echo 'opcache.memory_consumption=128'; \
+  33 | >>>       echo 'opcache.interned_strings_buffer=8'; \
+  34 | >>>       echo 'opcache.max_accelerated_files=4000'; \
+  35 | >>>       echo 'opcache.revalidate_freq=2'; \
+  36 | >>>       echo 'opcache.fast_shutdown=1'; \
+  37 | >>>   } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini; \
+  38 | >>>   \
+  39 | >>>   { \
+  40 | >>>       echo 'session.cookie_httponly=1'; \
+  41 | >>>       echo 'session.use_strict_mode=1'; \
+  42 | >>>   } > /etc/php/8.3/cli/conf.d/session-strict.ini; \
+  43 | >>>   \
+  44 | >>>   { \
+  45 | >>>       echo 'allow_url_fopen=Off'; \
+  46 | >>>       echo 'max_execution_time=${MAX_EXECUTION_TIME}'; \
+  47 | >>>       echo 'max_input_vars=10000'; \
+  48 | >>>       echo 'memory_limit=${MEMORY_LIMIT}'; \
+  49 | >>>       echo 'post_max_size=${UPLOAD_LIMIT}'; \
+  50 | >>>       echo 'upload_max_filesize=${UPLOAD_LIMIT}'; \
+  51 | >>>   } > /etc/php/8.3/cli/conf.d/phpmyadmin-misc.ini && \
+  52 | >>>   echo "**** install phpmyadmin ****" && \
+  53 | >>>   mkdir -p /app/www/public && \
+  54 | >>>   curl -s -o \
+  55 | >>>     /tmp/phpmyadmin.tar.xz -L \
+  56 | >>>     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz" && \
+  57 | >>>   curl -s -o \
+  58 | >>>     "/tmp/phpmyadmin.tar.xz.asc" -L \
+  59 | >>>     "https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc" && \
+  60 | >>>   export GNUPGHOME="$(mktemp -d)" && \
+  61 | >>>   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
+  62 | >>>       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
+  63 | >>>       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" \
+  64 | >>>       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys "$PHPMYADMIN_RELEASE_GPG_KEY" && \
+  65 | >>>   if ! gpg --batch -q --verify "/tmp/phpmyadmin.tar.xz.asc" "/tmp/phpmyadmin.tar.xz"; then \
+  66 | >>>     echo "File signature mismatch"; \
+  67 | >>>     exit 1; \
+  68 | >>>   fi && \
+  69 | >>>   tar xf \
+  70 | >>>     /tmp/phpmyadmin.tar.xz -C \
+  71 | >>>     /app/www/public/ --strip-components=1 && \
+  72 | >>>   sed -i "s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@" "/app/www/public/libraries/vendor_config.php" && \
+  73 | >>>   echo "**** cleanup ****" && \
+  74 | >>>   apt-get autoremove -y && \
+  75 | >>>   rm -rf \
+  76 | >>>     /tmp/* \
+  77 | >>>     /app/www/public/setup
+  78 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     gnupg-dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php84-bz2     php84-dom     php84-gd     php84-mysqli     php84-opcache     php84-pecl-uploadprogress     php84-tokenizer &&   echo \"**** configure php-fpm to pass env vars ****\" &&   sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf &&   if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi &&   echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php84/php-fpm.conf &&   echo \"**** setup php opcache ****\" &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php84/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php84/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php84/conf.d/phpmyadmin-misc.ini &&   echo \"**** install phpmyadmin ****\" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz\" &&   curl -s -o     \"/tmp/phpmyadmin.tar.xz.asc\" -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/phpmyadmin.tar.xz.asc\" \"/tmp/phpmyadmin.tar.xz\"; then     echo \"File signature mismatch\";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i \"s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@\" \"/app/www/public/libraries/vendor_config.php\" &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup" did not complete successfully: exit code: 2
+ERROR: failed to solve: process "/bin/bash -o pipefail -c apt-get update && apt-get install -y --no-install-recommends     gpg     gpg-agent     dirmngr &&   apt-get update && apt-get install -y --no-install-recommends     php8.3-bz2     php8.3-xml     php8.3-gd     php8.3-mysql     php8.3-opcache     php-uploadprogress &&   echo \"**** configure php-fpm to pass env vars ****\" &&   if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo \"env[PATH] = /usr/local/bin:/usr/bin:/bin\" >> /etc/php/8.3/fpm/php-fpm.conf; fi &&   echo \"**** setup php opcache ****\" &&   mkdir -p /etc/php/8.3/cli/conf.d &&   {       echo 'opcache.memory_consumption=128';       echo 'opcache.interned_strings_buffer=8';       echo 'opcache.max_accelerated_files=4000';       echo 'opcache.revalidate_freq=2';       echo 'opcache.fast_shutdown=1';   } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini;     {       echo 'session.cookie_httponly=1';       echo 'session.use_strict_mode=1';   } > /etc/php/8.3/cli/conf.d/session-strict.ini;     {       echo 'allow_url_fopen=Off';       echo 'max_execution_time=${MAX_EXECUTION_TIME}';       echo 'max_input_vars=10000';       echo 'memory_limit=${MEMORY_LIMIT}';       echo 'post_max_size=${UPLOAD_LIMIT}';       echo 'upload_max_filesize=${UPLOAD_LIMIT}';   } > /etc/php/8.3/cli/conf.d/phpmyadmin-misc.ini &&   echo \"**** install phpmyadmin ****\" &&   mkdir -p /app/www/public &&   curl -s -o     /tmp/phpmyadmin.tar.xz -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz\" &&   curl -s -o     \"/tmp/phpmyadmin.tar.xz.asc\" -L     \"https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz.asc\" &&   export GNUPGHOME=\"$(mktemp -d)\" &&   gpg --batch -q --keyserver keyserver.ubuntu.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver pgp.mit.edu --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keyserver.pgp.com --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\"       || gpg --batch -q --keyserver keys.openpgp.org --recv-keys \"$PHPMYADMIN_RELEASE_GPG_KEY\" &&   if ! gpg --batch -q --verify \"/tmp/phpmyadmin.tar.xz.asc\" \"/tmp/phpmyadmin.tar.xz\"; then     echo \"File signature mismatch\";     exit 1;   fi &&   tar xf     /tmp/phpmyadmin.tar.xz -C     /app/www/public/ --strip-components=1 &&   sed -i \"s@'configFile' =>.*@'configFile' => '/config/phpmyadmin/config.inc.php',@\" \"/app/www/public/libraries/vendor_config.php\" &&   echo \"**** cleanup ****\" &&   apt-get autoremove -y &&   rm -rf     /tmp/*     /app/www/public/setup" did not complete successfully: exit code: 2

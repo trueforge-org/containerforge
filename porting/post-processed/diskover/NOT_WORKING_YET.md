@@ -26,3 +26,21 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Diskover source tag download fails (HTTP 404) after release/tag fallback logic.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continuous batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after pip/venv and source fallback fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after venv/pip and source fallback fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after venv/pip and source fallback fixes.
+- Full log: `amd64-build.log`

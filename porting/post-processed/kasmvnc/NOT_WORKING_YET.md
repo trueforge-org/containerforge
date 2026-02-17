@@ -25,3 +25,21 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: kclient source extraction step still fails in build stage (tar extraction failure from release artifact).
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continuous batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build progresses further but still fails in KasmVNC build chain (additional upstream/toolchain issues remain).
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build progresses significantly but still fails in the KasmVNC/xorg build chain (additional upstream/toolchain issues).
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in the KasmVNC compile/xorg chain after multiple portability fixes; additional upstream-specific adaptation required.
+- Full log: `amd64-build.log`

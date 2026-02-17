@@ -24,6 +24,7 @@ RUN \
     ncurses-bin \
     php-sqlite3 \
     php-fpm \
+    python3-pip \
     python3 \
     python3-venv && \
   echo "**** configure php-fpm to pass env vars ****" && \
@@ -44,11 +45,11 @@ RUN \
     /app/ --strip-components=1 && \
   cd /app/diskover && \
   python3 -m venv /config/venv && \
-  python3 -m pip install -U --no-cache-dir \
+  /config/venv/bin/pip install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
-  python3 -m pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
     -r requirements.txt && \
   echo "**** cleanup ****" && \
   apt-get purge -y --auto-remove \

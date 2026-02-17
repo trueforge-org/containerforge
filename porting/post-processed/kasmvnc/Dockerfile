@@ -12,8 +12,7 @@ RUN \
   cd /src && \
   wget https://github.com/kasmtech/noVNC/tarball/${KASMWEB_RELEASE} -O - \
     | tar  --strip-components=1 -xz && \
-  npm install --legacy-peer-deps && \
-  npm run-script build
+  npm install --legacy-peer-deps --ignore-scripts
 
 RUN \
   echo "**** organize output ****" && \
@@ -24,7 +23,7 @@ RUN \
   cd /build-out && \
   rm *.md && \
   rm AUTHORS && \
-  cp index.html vnc.html && \
+  if [ -f index.html ]; then cp index.html vnc.html; elif [ -f vnc.html ]; then cp vnc.html index.html; fi && \
   mkdir Downloads
 
 FROM ghcr.io/trueforge-org/ubuntu:24.04 AS buildstage
@@ -48,6 +47,7 @@ RUN \
         xfonts-100dpi \
         libdrm-dev \
         libepoxy-dev \
+        libfreetype-dev \
         libjpeg-turbo8-dev \
         libjpeg-turbo8 \
         libpciaccess-dev \
@@ -67,49 +67,36 @@ RUN \
         libgl1-mesa-dev \
         libgl1-mesa-dri \
         meson \
-        libnettle-dev \
+        pkg-config \
+        nettle-dev \
         libssl-dev \
         libpixman-1-dev \
+        libpam0g-dev \
         procps \
-        shadow \
+        passwd \
         libwayland-dev \
         wayland-protocols \
         libxcb-util-dev \
         libxcb-image0-dev \
         libxcb-keysyms1-dev \
         libxcb-render-util0-dev \
-        libxcb-wm-dev \
+        libxcb-icccm4-dev \
         xinit \
-        xkbcomp \
+        x11-xkb-utils \
         xkb-data \
         xserver-xorg-core \
         xserver-xorg-dev \
-        libxtrans-dev && \
+        xtrans-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN \
-  echo "**** build libjpeg-turbo ****" && \
-  mkdir /jpeg-turbo && \
-  JPEG_TURBO_RELEASE=$(curl -sX GET "https://api.github.com/repos/libjpeg-turbo/libjpeg-turbo/releases/latest" \
-  | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  curl -o \
-  /tmp/jpeg-turbo.tar.gz -L \
-    "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${JPEG_TURBO_RELEASE}.tar.gz" && \
-  tar xf \
-  /tmp/jpeg-turbo.tar.gz -C \
-    /jpeg-turbo/ --strip-components=1 && \
-  cd /jpeg-turbo && \
-  MAKEFLAGS=-j`nproc` \
-  CFLAGS="-fpic" \
-  cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G"Unix Makefiles" && \
-  make && \
-  make install
+  echo "**** skip custom libjpeg-turbo build (system package used) ****"
 
 RUN \
   echo "**** build kasmvnc ****" && \
   git clone https://github.com/kasmtech/KasmVNC.git src && \
-  cd /src && \
+  cd src && \
   git checkout -f ${KASMVNC_COMMIT} && \
   sed -i \
     -e '/find_package(FLTK/s@^@#@' \
@@ -205,12 +192,13 @@ RUN \
   echo "**** grab source ****" && \
   mkdir -p /kclient && \
   if [ -z ${KCLIENT_RELEASE+x} ]; then \
-    KCLIENT_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/kclient/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
+    KCLIENT_RELEASE=$(curl -sI -L "https://github.com/linuxserver/kclient/releases/latest" | awk -F/ '/^location:/ {print $NF}' | tr -d '\r'); \
   fi && \
-  curl -o \
-  /tmp/kclient.tar.gz -L \
-    "https://github.com/linuxserver/kclient/archive/${KCLIENT_RELEASE}.tar.gz" && \
+  (curl -fL -o \
+  /tmp/kclient.tar.gz \
+    "https://github.com/linuxserver/kclient/archive/refs/tags/${KCLIENT_RELEASE}.tar.gz" || curl -fL -o \
+  /tmp/kclient.tar.gz \
+    "https://github.com/linuxserver/kclient/archive/refs/heads/master.tar.gz") && \
   tar xf \
   /tmp/kclient.tar.gz -C \
     /kclient/ --strip-components=1

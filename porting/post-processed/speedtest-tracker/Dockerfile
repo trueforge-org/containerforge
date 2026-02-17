@@ -9,15 +9,15 @@ ENV HOME=/config
 RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     grep \
-    php84-gd \
-    php84-intl \
-    php84-pdo_mysql \
-    php84-pdo_pgsql \
-    php84-pdo_sqlite \
-    php84-pecl-redis \
-    php84-tokenizer \
-    php84-xmlreader \
-    postgresql16-client \
+    composer \
+    php8.3-gd \
+    php8.3-intl \
+    php8.3-mysql \
+    php8.3-pgsql \
+    php8.3-sqlite3 \
+    php-redis \
+    php8.3-xml \
+    postgresql-client \
     ssmtp && \
   echo "*** install speedtest-cli ***" && \
   if [ -z ${CLI_VERSION+x} ]; then \
@@ -32,9 +32,7 @@ RUN \
     /tmp/speedtest-cli.tgz -C \
     /usr/bin && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
+  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
   echo "*** install speedtest-tracker ***" && \
   curl -o \
     /tmp/speedtest-tracker.tar.gz -L \
@@ -52,14 +50,15 @@ RUN \
     --no-cache && \
   npm ci && npm run build && \
   echo "**** setup php opcache ****" && \
+  mkdir -p /etc/php/8.3/cli/conf.d && \
   { \
     echo 'opcache.enable_cli=1'; \
-  } > /etc/php84/conf.d/opcache-recommended.ini; \
+  } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini; \
   { \
     echo 'post_max_size = 100M'; \
     echo 'upload_max_filesize = 100M'; \
     echo 'variables_order = EGPCS'; \
-  } > /etc/php84/conf.d/php-misc.ini && \
+  } > /etc/php/8.3/cli/conf.d/php-misc.ini && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

@@ -1,6 +1,7 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0 AS buildstage
 
 # build variables
+ARG VERSION
 USER root
 
 RUN \
@@ -19,7 +20,9 @@ RUN \
     "https://github.com/syncthing/syncthing/archive/refs/tags/${VERSION}.tar.gz" || (SYNCTHING_RELEASE=$(curl -sX GET "https://api.github.com/repos/syncthing/syncthing/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]') && curl -fL -o \
   /tmp/syncthing-src.tar.gz \
-    "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz")) && \
+    "https://github.com/syncthing/syncthing/archive/refs/tags/${SYNCTHING_RELEASE}.tar.gz") || curl -fL -o \
+  /tmp/syncthing-src.tar.gz \
+    "https://github.com/syncthing/syncthing/archive/refs/heads/main.tar.gz") && \
   tar xf \
   /tmp/syncthing-src.tar.gz -C \
     /tmp/sync --strip-components=1 && \

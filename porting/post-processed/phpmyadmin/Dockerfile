@@ -16,32 +16,30 @@ RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     gpg \
     gpg-agent \
-    gnupg-dirmngr && \
+    dirmngr && \
   apt-get update && apt-get install -y --no-install-recommends \
-    php84-bz2 \
-    php84-dom \
-    php84-gd \
-    php84-mysqli \
-    php84-opcache \
-    php84-pecl-uploadprogress \
-    php84-tokenizer && \
+    php8.3-bz2 \
+    php8.3-xml \
+    php8.3-gd \
+    php8.3-mysql \
+    php8.3-opcache \
+    php-uploadprogress && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php84/php-fpm.d/www.conf && \
-  if ! grep -qxF 'clear_env = no' /etc/php84/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php84/php-fpm.d/www.conf; fi && \
-  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php84/php-fpm.conf && \
+  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
   echo "**** setup php opcache ****" && \
+  mkdir -p /etc/php/8.3/cli/conf.d && \
   { \
       echo 'opcache.memory_consumption=128'; \
       echo 'opcache.interned_strings_buffer=8'; \
       echo 'opcache.max_accelerated_files=4000'; \
       echo 'opcache.revalidate_freq=2'; \
       echo 'opcache.fast_shutdown=1'; \
-  } > /etc/php84/conf.d/opcache-recommended.ini; \
+  } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini; \
   \
   { \
       echo 'session.cookie_httponly=1'; \
       echo 'session.use_strict_mode=1'; \
-  } > /etc/php84/conf.d/session-strict.ini; \
+  } > /etc/php/8.3/cli/conf.d/session-strict.ini; \
   \
   { \
       echo 'allow_url_fopen=Off'; \
@@ -50,7 +48,7 @@ RUN \
       echo 'memory_limit=${MEMORY_LIMIT}'; \
       echo 'post_max_size=${UPLOAD_LIMIT}'; \
       echo 'upload_max_filesize=${UPLOAD_LIMIT}'; \
-  } > /etc/php84/conf.d/phpmyadmin-misc.ini && \
+  } > /etc/php/8.3/cli/conf.d/phpmyadmin-misc.ini && \
   echo "**** install phpmyadmin ****" && \
   mkdir -p /app/www/public && \
   curl -s -o \

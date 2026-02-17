@@ -19,3 +19,15 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 4.533 /bin/bash: line 1: /etc/php84/conf.d/php-misc.ini: No such file or directory
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after php package/path fixes.
+- Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 auto-batch rerun)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Container builds correctly for linux/amd64 after php package/path fixes and syntax correction.
+- Full log: `amd64-build.log`

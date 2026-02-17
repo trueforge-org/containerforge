@@ -9,15 +9,13 @@ USER root
 RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    php84-ftp \
-    php84-gd \
-    php84-intl \
-    php84-ldap \
-    php84-mysqli \
-    php84-pdo_mysql \
-    php84-pdo_sqlite \
-    php84-sqlite3 \
-    php84-tokenizer && \
+    php8.3-ftp \
+    php8.3-gd \
+    php8.3-intl \
+    php8.3-ldap \
+    php8.3-mysql \
+    php8.3-sqlite3 \
+    php8.3-tokenizer && \
   echo "**** install xbackbone ****" && \
     mkdir -p /app/www/public && \
   curl -o \

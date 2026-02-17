@@ -1,80 +1,137 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 585B done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 827B / 827B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
-#2 DONE 0.1s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 580B done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/ubuntu:24.04
+#3 DONE 0.1s
 
-#4 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
-#4 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
-#4 CACHED
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
 
-#5 [internal] load build context
-#5 transferring context: 4.84kB done
-#5 DONE 0.0s
+#5 [1/5] FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454
+#5 resolve ghcr.io/trueforge-org/ubuntu:24.04@sha256:5348eb7725294e8090c15b7b495e517f82f4b31497d3bb9de71bbe37476e7454 0.0s done
+#5 CACHED
 
-#6 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
-#6 0.192 **** install runtime packages ****
-#6 0.358 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-#6 0.362 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#6 1.007 Get:3 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
-#6 1.090 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#6 1.174 Get:5 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
-#6 1.280 Get:6 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-#6 1.472 Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
-#6 1.976 Get:8 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
-#6 2.150 Get:9 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
-#6 2.719 Get:10 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
-#6 2.864 Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
-#6 3.026 Get:12 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
-#6 3.170 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
-#6 3.336 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-#6 3.500 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-#6 3.644 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-#6 3.822 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-#6 3.965 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
-#6 3.984 Fetched 36.1 MB in 4s (9,595 kB/s)
-#6 3.984 Reading package lists...
-#6 4.724 Reading package lists...
-#6 5.455 Building dependency tree...
-#6 5.598 Reading state information...
-#6 5.611 E: Unable to locate package openssh
-#6 5.611 E: Unable to locate package rsnapshot=
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100
-------
- > [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache:
-3.336 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
-3.500 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
-3.644 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
-3.822 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
-3.965 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#6 [internal] load build context
+#6 transferring context: 5.17kB done
+#6 DONE 0.0s
 
+#7 [2/5] RUN   echo "**** install runtime packages ****" &&   apt-get update && apt-get install -y --no-install-recommends     openssh-client     rsnapshot     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo "**** cleanup ****" &&   rm -rf     /tmp/*     /config/.cache
+#7 0.147 **** install runtime packages ****
+#7 0.332 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#7 0.497 Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#7 0.766 Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#7 0.873 Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#7 0.982 Get:5 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#7 1.138 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#7 1.279 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#7 1.425 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#7 1.910 Get:9 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#7 1.990 Get:10 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#7 2.082 Get:11 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#7 2.174 Get:12 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#7 2.247 Get:13 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#7 2.273 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#7 2.353 Get:15 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#7 2.432 Get:16 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#7 2.475 Get:17 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#7 2.680 Get:18 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#7 2.940 Fetched 36.1 MB in 3s (13.1 MB/s)
+#7 2.940 Reading package lists...
+#7 3.687 Reading package lists...
+#7 4.428 Building dependency tree...
+#7 4.582 Reading state information...
+#7 4.723 The following additional packages will be installed:
+#7 4.723   libbsd0 libcbor0.10 libedit2 libfido2-1 liblchown-perl libpopt0
+#7 4.724 Suggested packages:
+#7 4.724   keychain libpam-ssh monkeysphere ssh-askpass openssh-server
+#7 4.724   python3-braceexpand
+#7 4.724 Recommended packages:
+#7 4.724   xauth cron-daemon | anacron logrotate
+#7 4.777 The following NEW packages will be installed:
+#7 4.778   libbsd0 libcbor0.10 libedit2 libfido2-1 liblchown-perl libpopt0
+#7 4.779   openssh-client rsnapshot rsync
+#7 4.880 0 upgraded, 9 newly installed, 0 to remove and 5 not upgraded.
+#7 4.880 Need to get 1,740 kB of archives.
+#7 4.880 After this operation, 5,771 kB of additional disk space will be used.
+#7 4.880 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libpopt0 amd64 1.19+dfsg-1build1 [28.6 kB]
+#7 4.960 Get:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 rsync amd64 3.2.7-1ubuntu1.2 [436 kB]
+#7 5.041 Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libbsd0 amd64 0.12.1-1build1.1 [41.2 kB]
+#7 5.121 Get:4 http://archive.ubuntu.com/ubuntu noble/main amd64 libcbor0.10 amd64 0.10.2-1.2ubuntu2 [25.8 kB]
+#7 5.200 Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 libedit2 amd64 3.1-20230828-1build1 [97.6 kB]
+#7 5.280 Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libfido2-1 amd64 1.14.0-1build3 [83.5 kB]
+#7 5.359 Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 openssh-client amd64 1:9.6p1-3ubuntu13.14 [906 kB]
+#7 5.444 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 liblchown-perl amd64 1.01-4build4 [7,486 B]
+#7 5.524 Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 rsnapshot all 1.4.5-2 [114 kB]
+#7 5.635 debconf: delaying package configuration, since apt-utils is not installed
+#7 5.659 Fetched 1,740 kB in 1s (2,366 kB/s)
+#7 5.674 Selecting previously unselected package libpopt0:amd64.
+#7 5.674 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 5.686 Preparing to unpack .../0-libpopt0_1.19+dfsg-1build1_amd64.deb ...
+#7 5.688 Unpacking libpopt0:amd64 (1.19+dfsg-1build1) ...
+#7 5.705 Selecting previously unselected package rsync.
+#7 5.707 Preparing to unpack .../1-rsync_3.2.7-1ubuntu1.2_amd64.deb ...
+#7 5.709 Unpacking rsync (3.2.7-1ubuntu1.2) ...
+#7 5.732 Selecting previously unselected package libbsd0:amd64.
+#7 5.734 Preparing to unpack .../2-libbsd0_0.12.1-1build1.1_amd64.deb ...
+#7 5.735 Unpacking libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 5.750 Selecting previously unselected package libcbor0.10:amd64.
+#7 5.751 Preparing to unpack .../3-libcbor0.10_0.10.2-1.2ubuntu2_amd64.deb ...
+#7 5.752 Unpacking libcbor0.10:amd64 (0.10.2-1.2ubuntu2) ...
+#7 5.767 Selecting previously unselected package libedit2:amd64.
+#7 5.768 Preparing to unpack .../4-libedit2_3.1-20230828-1build1_amd64.deb ...
+#7 5.769 Unpacking libedit2:amd64 (3.1-20230828-1build1) ...
+#7 5.786 Selecting previously unselected package libfido2-1:amd64.
+#7 5.787 Preparing to unpack .../5-libfido2-1_1.14.0-1build3_amd64.deb ...
+#7 5.788 Unpacking libfido2-1:amd64 (1.14.0-1build3) ...
+#7 5.805 Selecting previously unselected package openssh-client.
+#7 5.806 Preparing to unpack .../6-openssh-client_1%3a9.6p1-3ubuntu13.14_amd64.deb ...
+#7 5.811 Unpacking openssh-client (1:9.6p1-3ubuntu13.14) ...
+#7 5.842 Selecting previously unselected package liblchown-perl.
+#7 5.844 Preparing to unpack .../7-liblchown-perl_1.01-4build4_amd64.deb ...
+#7 5.845 Unpacking liblchown-perl (1.01-4build4) ...
+#7 5.861 Selecting previously unselected package rsnapshot.
+#7 5.863 Preparing to unpack .../8-rsnapshot_1.4.5-2_all.deb ...
+#7 5.881 Unpacking rsnapshot (1.4.5-2) ...
+#7 5.907 Setting up libcbor0.10:amd64 (0.10.2-1.2ubuntu2) ...
+#7 5.910 Setting up liblchown-perl (1.01-4build4) ...
+#7 5.912 Setting up libfido2-1:amd64 (1.14.0-1build3) ...
+#7 5.914 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
+#7 5.917 Setting up libpopt0:amd64 (1.19+dfsg-1build1) ...
+#7 5.920 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
+#7 5.922 Setting up rsync (3.2.7-1ubuntu1.2) ...
+#7 5.938 invoke-rc.d: could not determine current runlevel
+#7 5.942 invoke-rc.d: policy-rc.d denied execution of start.
+#7 6.014 Setting up openssh-client (1:9.6p1-3ubuntu13.14) ...
+#7 6.069 Setting up rsnapshot (1.4.5-2) ...
+#7 6.091 Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+#7 6.124 **** cleanup ****
+#7 DONE 6.2s
 
+#8 [3/5] COPY . /
+#8 DONE 0.0s
 
-5.611 E: Unable to locate package openssh
-5.611 E: Unable to locate package rsnapshot=
-------
-Dockerfile:9
---------------------
-   8 |     
-   9 | >>> RUN \
-  10 | >>>   echo "**** install runtime packages ****" && \
-  11 | >>>   apt-get update && apt-get install -y --no-install-recommends \
-  12 | >>>     openssh \
-  13 | >>>     rsnapshot==${VERSION} \
-  14 | >>>     rsync && \
-  15 | >>>   rm -rf /etc/rsnapshot.conf && \
-  16 | >>>   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf && \
-  17 | >>>   echo "**** cleanup ****" && \
-  18 | >>>   rm -rf \
-  19 | >>>     /tmp/* \
-  20 | >>>     $HOME/.cache
-  21 |     
---------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install runtime packages ****\" &&   apt-get update && apt-get install -y --no-install-recommends     openssh     rsnapshot==${VERSION}     rsync &&   rm -rf /etc/rsnapshot.conf &&   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 100
+#9 [4/5] COPY ./root /
+#9 DONE 0.0s
+
+#10 [5/5] WORKDIR /config
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 2.3s done
+#11 exporting manifest sha256:c12b633a46e878c2656130d8e3bb2af25e9c6bc5832613a84b1e4a6a8ab8d35e done
+#11 exporting config sha256:45c22d31152dc385439b33ee1826bf5065d97511c58120f2b40d51dbf7d4e580 done
+#11 exporting attestation manifest sha256:15f1c36dcc0aaefdc9ef6e24084ade1aecdeebb414070ea84d63e40432cfbb68 done
+#11 exporting manifest list sha256:29a3bd4d7283d30c22bc8a4481d2319a9a7d932d9eaaf3dd3a31523b5269a067 done
+#11 naming to docker.io/library/rsnapshot:1.4.5-r0 done
+#11 unpacking to docker.io/library/rsnapshot:1.4.5-r0
+#11 unpacking to docker.io/library/rsnapshot:1.4.5-r0 0.4s done
+#11 DONE 2.8s

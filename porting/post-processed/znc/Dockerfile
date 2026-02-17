@@ -1,6 +1,7 @@
 
 FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
 ############## build stage ##############
+ARG VERSION
 USER root
 
 # package version
@@ -14,11 +15,14 @@ RUN \
     autoconf \
     automake \
     libboost-dev\
+    libboost-locale-dev \
     build-essential \
     libc-ares-dev \
     libsasl2-dev \
     gettext \
     libicu-dev \
+    libperl-dev \
+    pax-utils \
     libssl-dev \
     perl \
     python3-dev \
@@ -72,11 +76,11 @@ RUN \
 
 RUN \
   echo "**** determine runtime packages ****" && \
-  scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
+  (scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
     | sort -u \
     | xargs -r apt-get info --installed \
-    | sort -u \
+    | sort -u || true) \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
@@ -96,8 +100,8 @@ USER root
 RUN \
   echo "**** install runtime packages ****" && \
   RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
-  apt-get update && apt-get install -y --no-install-recommends \
-    ${RUNTIME_PACKAGES}
+  apt-get update && \
+  if [ -n "${RUNTIME_PACKAGES}" ]; then apt-get install -y --no-install-recommends ${RUNTIME_PACKAGES}; fi
 
 # copy local files
 USER apps
