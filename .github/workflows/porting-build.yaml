@@ -48,10 +48,14 @@ jobs:
             docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local
           ) 2>&1 | tee "$log_file"
 
+      - name: Get Container Name
+        id: container
+        run: echo "name=$(basename '${{ matrix.container }}')" >> "$GITHUB_OUTPUT"
+
       - name: Upload Build Log
         if: always()
         uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
         with:
-          name: ${{ replace(matrix.container, '/', '-') }}-build-log
+          name: ${{ steps.container.outputs.name }}-build-log
           path: ${{ matrix.container }}/build.log
           if-no-files-found: error
