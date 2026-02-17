@@ -52,6 +52,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
         with:
-          name: ${{ matrix.container }}-build-log
+          name: ${{ replace(matrix.container, '/', '-') }}-build-log
           path: ${{ matrix.container }}/build.log
           if-no-files-found: error
