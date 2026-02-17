@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 0.306 tar: Child returned status 1
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continued large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build now reaches Gradle bootstrap but fails with Java PKIX SSL trust-chain error while downloading Gradle distribution.
+- Full log: `amd64-build.log`

@@ -28,26 +28,28 @@ RUN \
         libmariadb3 && \
     echo "**** install healthchecks ****" && \
     mkdir -p /app/healthchecks && \
-    curl -o \
-        /tmp/healthchecks.tar.gz -L \
-        "https://github.com/healthchecks/healthchecks/archive/v${VERSION}.tar.gz" && \
+    (curl -fL -o \
+        /tmp/healthchecks.tar.gz \
+        "https://github.com/healthchecks/healthchecks/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
+        /tmp/healthchecks.tar.gz \
+        "https://github.com/healthchecks/healthchecks/archive/refs/tags/${VERSION}.tar.gz") && \
     tar xf \
         /tmp/healthchecks.tar.gz -C \
         /app/healthchecks/ --strip-components=1 && \
     echo "**** install pip packages ****" && \
     cd /app/healthchecks && \
     python3 -m venv /config/venv && \
-    pip install -U --no-cache-dir \
+    /config/venv/bin/pip install -U --no-cache-dir \
         pip \
         wheel && \
-    pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         apprise \
         minio \
         mysqlclient && \
-    pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
     cd /app/healthchecks && \
-    DEBUG=False python3 ./manage.py collectstatic --noinput && \
-    DEBUG=False python3 ./manage.py compress && \
+    DEBUG=False /config/venv/bin/python ./manage.py collectstatic --noinput && \
+    DEBUG=False /config/venv/bin/python ./manage.py compress && \
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove \
         build-essential \

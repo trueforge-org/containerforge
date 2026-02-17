@@ -19,3 +19,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: 12.23 tar: Child returned status 1
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 continued large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after GitHub tag URL fallback adjustments.
+- Full log: `amd64-build.log`

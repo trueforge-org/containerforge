@@ -5,8 +5,9 @@ ARG TARGETARCH
 
 RUN \
   echo "**** Install build requirements ****" && \
+  apt-get update && apt-get install -y --no-install-recommends ca-certificates ca-certificates-java && update-ca-certificates && \
   echo "**** Download Davos ****" && \
-  curl -o /tmp/davos.tar.gz -L "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" && \
+  (curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/${VERSION}.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/v${VERSION}.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/heads/master.tar.gz") && \
   echo "**** Build Davos For Release ****" && \
   mkdir -p /app/davos/ && \
   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 && \

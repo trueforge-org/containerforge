@@ -1,78 +1,305 @@
 #0 building with "default" instance using docker driver
 
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 1.06kB done
+#1 [internal] load local bake definitions
+#1 reading docker-bake.hcl 820B / 820B done
 #1 DONE 0.0s
 
-#2 [internal] load metadata for ghcr.io/trueforge-org/java8:8
-#2 DONE 0.7s
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.42kB done
+#2 DONE 0.0s
 
-#3 [internal] load .dockerignore
-#3 transferring context: 2B done
-#3 DONE 0.0s
+#3 [internal] load metadata for ghcr.io/trueforge-org/java8:8
+#3 DONE 0.1s
 
-#4 [internal] load build context
-#4 transferring context: 3.59kB done
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
 #4 DONE 0.0s
 
 #5 [buildstage 1/2] FROM ghcr.io/trueforge-org/java8:8@sha256:51c920918b599e01b2ec2e3aab81ab434c54349302de9ebfc44b0abe6794bfc4
 #5 resolve ghcr.io/trueforge-org/java8:8@sha256:51c920918b599e01b2ec2e3aab81ab434c54349302de9ebfc44b0abe6794bfc4 0.0s done
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 0B / 46.24MB 0.2s
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 11.53MB / 46.24MB 0.5s
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 16.78MB / 46.24MB 0.6s
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 24.12MB / 46.24MB 0.8s
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 32.51MB / 46.24MB 0.9s
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 39.85MB / 46.24MB 1.1s
-#5 sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 46.24MB / 46.24MB 1.2s done
-#5 extracting sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae
-#5 extracting sha256:019d7f3f08fd832c792950ff537fae7b423fdaf508c83b58994bd0b800277bae 0.2s done
-#5 DONE 1.4s
+#5 CACHED
 
-#6 [buildstage 2/2] RUN   echo "**** Install build requirements ****" &&   echo "**** Download Davos ****" &&   curl -o /tmp/davos.tar.gz -L "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" &&   echo "**** Build Davos For Release ****" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo "**** Copy Finished Jar ****" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar
-#6 0.192 **** Install build requirements ****
-#6 0.192 **** Download Davos ****
-#6 0.199   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-#6 0.200                                  Dload  Upload   Total   Spent    Left  Speed
-#6 0.200   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100     9  100     9    0     0     88      0 --:--:-- --:--:-- --:--:--    89
-#6 0.302 **** Build Davos For Release ****
-#6 0.305 tar: This does not look like a tar archive
-#6 0.306 
-#6 0.306 gzip: stdin: not in gzip format
-#6 0.306 tar: Child returned status 1
-#6 0.306 tar: Error is not recoverable: exiting now
-#6 ERROR: process "/bin/bash -o pipefail -c echo \"**** Install build requirements ****\" &&   echo \"**** Download Davos ****\" &&   curl -o /tmp/davos.tar.gz -L \"https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz\" &&   echo \"**** Build Davos For Release ****\" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo \"**** Copy Finished Jar ****\" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar" did not complete successfully: exit code: 2
+#6 [stage-1 2/5] RUN   apt-get update &&   apt-get install -y --no-install-recommends     libsqlite3-0 &&   chown -R apps:apps /app && chmod -R 755 /app &&   rm -rf /var/lib/apt/lists/*
+#6 CACHED
 
-#7 [stage-1 2/5] RUN   apt-get update &&   apt-get install -y --no-install-recommends     libsqlite3-0 &&   chown -R apps:apps /app && chmod -R 755 /app &&   rm -rf /var/lib/apt/lists/*
-#7 0.296 Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
-#7 0.380 Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-#7 CANCELED
+#7 [internal] load build context
+#7 transferring context: 1.91kB done
+#7 DONE 0.0s
+
+#8 [buildstage 2/2] RUN   echo "**** Install build requirements ****" &&   apt-get update && apt-get install -y --no-install-recommends ca-certificates ca-certificates-java && update-ca-certificates &&   echo "**** Download Davos ****" &&   (curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/2.2.2.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/v2.2.2.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/heads/master.tar.gz") &&   echo "**** Build Davos For Release ****" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo "**** Copy Finished Jar ****" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar
+#8 0.155 **** Install build requirements ****
+#8 0.466 Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+#8 0.600 Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+#8 1.155 Get:3 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1,205 kB]
+#8 1.359 Get:4 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+#8 1.547 Get:5 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+#8 1.737 Get:6 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+#8 1.820 Get:7 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [3,122 kB]
+#8 2.017 Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+#8 2.240 Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [34.8 kB]
+#8 2.383 Get:10 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,829 kB]
+#8 3.137 Get:11 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+#8 3.275 Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1,808 kB]
+#8 3.433 Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [2,218 kB]
+#8 3.596 Get:14 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [38.1 kB]
+#8 3.734 Get:15 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [3,330 kB]
+#8 3.908 Get:16 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [2,014 kB]
+#8 4.069 Get:17 http://archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [49.5 kB]
+#8 4.207 Get:18 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [34.6 kB]
+#8 4.225 Fetched 36.1 MB in 4s (8,932 kB/s)
+#8 4.225 Reading package lists...
+#8 4.966 Reading package lists...
+#8 5.698 Building dependency tree...
+#8 5.844 Reading state information...
+#8 6.005 ca-certificates is already the newest version (20240203).
+#8 6.005 The following NEW packages will be installed:
+#8 6.005   ca-certificates-java
+#8 6.157 0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.
+#8 6.157 Need to get 11.6 kB of archives.
+#8 6.157 After this operation, 43.0 kB of additional disk space will be used.
+#8 6.157 Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 ca-certificates-java all 20240118 [11.6 kB]
+#8 6.255 debconf: delaying package configuration, since apt-utils is not installed
+#8 6.276 Fetched 11.6 kB in 0s (79.4 kB/s)
+#8 6.292 Selecting previously unselected package ca-certificates-java.
+#8 6.292 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#8 6.305 Preparing to unpack .../ca-certificates-java_20240118_all.deb ...
+#8 6.307 Unpacking ca-certificates-java (20240118) ...
+#8 6.330 Setting up ca-certificates-java (20240118) ...
+#8 6.339 No JRE found. Skipping Java certificates setup.
+#8 6.356 Updating certificates in /etc/ssl/certs...
+#8 6.985 146 added, 0 removed; done.
+#8 6.985 Running hooks in /etc/ca-certificates/update.d...
+#8 6.996 Processing triggers for ca-certificates-java (20240118) ...
+#8 7.234 Adding debian:ACCVRAIZ1.pem
+#8 7.238 Adding debian:AC_RAIZ_FNMT-RCM.pem
+#8 7.255 Adding debian:AC_RAIZ_FNMT-RCM_SERVIDORES_SEGUROS.pem
+#8 7.260 Adding debian:Actalis_Authentication_Root_CA.pem
+#8 7.262 Adding debian:AffirmTrust_Commercial.pem
+#8 7.265 Adding debian:AffirmTrust_Networking.pem
+#8 7.266 Adding debian:AffirmTrust_Premium_ECC.pem
+#8 7.270 Adding debian:AffirmTrust_Premium.pem
+#8 7.272 Adding debian:Amazon_Root_CA_1.pem
+#8 7.276 Adding debian:Amazon_Root_CA_2.pem
+#8 7.277 Adding debian:Amazon_Root_CA_3.pem
+#8 7.279 Adding debian:Amazon_Root_CA_4.pem
+#8 7.283 Adding debian:ANF_Secure_Server_Root_CA.pem
+#8 7.285 Adding debian:Atos_TrustedRoot_2011.pem
+#8 7.287 Adding debian:Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem
+#8 7.292 Adding debian:Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem
+#8 7.296 Adding debian:Autoridad_de_Certificacion_Firmaprofesional_CIF_A62634068.pem
+#8 7.299 Adding debian:Baltimore_CyberTrust_Root.pem
+#8 7.302 Adding debian:BJCA_Global_Root_CA1.pem
+#8 7.304 Adding debian:BJCA_Global_Root_CA2.pem
+#8 7.307 Adding debian:Buypass_Class_2_Root_CA.pem
+#8 7.311 Adding debian:Buypass_Class_3_Root_CA.pem
+#8 7.314 Adding debian:CA_Disig_Root_R2.pem
+#8 7.316 Adding debian:Certainly_Root_E1.pem
+#8 7.319 Adding debian:Certainly_Root_R1.pem
+#8 7.322 Adding debian:Certigna.pem
+#8 7.329 Adding debian:Certigna_Root_CA.pem
+#8 7.332 Adding debian:certSIGN_Root_CA_G2.pem
+#8 7.335 Adding debian:certSIGN_ROOT_CA.pem
+#8 7.338 Adding debian:Certum_EC-384_CA.pem
+#8 7.342 Adding debian:Certum_Trusted_Network_CA_2.pem
+#8 7.344 Adding debian:Certum_Trusted_Network_CA.pem
+#8 7.348 Adding debian:Certum_Trusted_Root_CA.pem
+#8 7.351 Adding debian:CFCA_EV_ROOT.pem
+#8 7.353 Adding debian:CommScope_Public_Trust_ECC_Root-01.pem
+#8 7.354 Adding debian:CommScope_Public_Trust_ECC_Root-02.pem
+#8 7.358 Adding debian:CommScope_Public_Trust_RSA_Root-01.pem
+#8 7.361 Adding debian:CommScope_Public_Trust_RSA_Root-02.pem
+#8 7.364 Adding debian:Comodo_AAA_Services_root.pem
+#8 7.367 Adding debian:COMODO_Certification_Authority.pem
+#8 7.370 Adding debian:COMODO_ECC_Certification_Authority.pem
+#8 7.373 Adding debian:COMODO_RSA_Certification_Authority.pem
+#8 7.376 Adding debian:DigiCert_Assured_ID_Root_CA.pem
+#8 7.378 Adding debian:DigiCert_Assured_ID_Root_G2.pem
+#8 7.379 Adding debian:DigiCert_Assured_ID_Root_G3.pem
+#8 7.382 Adding debian:DigiCert_Global_Root_CA.pem
+#8 7.385 Adding debian:DigiCert_Global_Root_G2.pem
+#8 7.387 Adding debian:DigiCert_Global_Root_G3.pem
+#8 7.389 Adding debian:DigiCert_High_Assurance_EV_Root_CA.pem
+#8 7.391 Adding debian:DigiCert_TLS_ECC_P384_Root_G5.pem
+#8 7.394 Adding debian:DigiCert_TLS_RSA4096_Root_G5.pem
+#8 7.397 Adding debian:DigiCert_Trusted_Root_G4.pem
+#8 7.399 Adding debian:D-TRUST_BR_Root_CA_1_2020.pem
+#8 7.402 Adding debian:D-TRUST_EV_Root_CA_1_2020.pem
+#8 7.404 Adding debian:D-TRUST_Root_Class_3_CA_2_2009.pem
+#8 7.407 Adding debian:D-TRUST_Root_Class_3_CA_2_EV_2009.pem
+#8 7.408 Adding debian:emSign_ECC_Root_CA_-_C3.pem
+#8 7.410 Adding debian:emSign_ECC_Root_CA_-_G3.pem
+#8 7.413 Adding debian:emSign_Root_CA_-_C1.pem
+#8 7.415 Adding debian:emSign_Root_CA_-_G1.pem
+#8 7.417 Adding debian:Entrust.net_Premium_2048_Secure_Server_CA.pem
+#8 7.419 Adding debian:Entrust_Root_Certification_Authority_-_EC1.pem
+#8 7.422 Adding debian:Entrust_Root_Certification_Authority_-_G2.pem
+#8 7.425 Adding debian:Entrust_Root_Certification_Authority_-_G4.pem
+#8 7.428 Adding debian:Entrust_Root_Certification_Authority.pem
+#8 7.431 Adding debian:ePKI_Root_Certification_Authority.pem
+#8 7.433 Adding debian:e-Szigno_Root_CA_2017.pem
+#8 7.436 Adding debian:GDCA_TrustAUTH_R5_ROOT.pem
+#8 7.437 Adding debian:GlobalSign_ECC_Root_CA_-_R4.pem
+#8 7.439 Adding debian:GlobalSign_ECC_Root_CA_-_R5.pem
+#8 7.441 Adding debian:GlobalSign_Root_CA.pem
+#8 7.443 Adding debian:GlobalSign_Root_CA_-_R3.pem
+#8 7.446 Adding debian:GlobalSign_Root_CA_-_R6.pem
+#8 7.447 Adding debian:GlobalSign_Root_E46.pem
+#8 7.451 Adding debian:GlobalSign_Root_R46.pem
+#8 7.455 Adding debian:GLOBALTRUST_2020.pem
+#8 7.458 Adding debian:Go_Daddy_Class_2_CA.pem
+#8 7.461 Adding debian:Go_Daddy_Root_Certificate_Authority_-_G2.pem
+#8 7.465 Adding debian:GTS_Root_R1.pem
+#8 7.469 Adding debian:GTS_Root_R2.pem
+#8 7.471 Adding debian:GTS_Root_R3.pem
+#8 7.472 Adding debian:GTS_Root_R4.pem
+#8 7.474 Adding debian:HARICA_TLS_ECC_Root_CA_2021.pem
+#8 7.477 Adding debian:HARICA_TLS_RSA_Root_CA_2021.pem
+#8 7.479 Adding debian:Hellenic_Academic_and_Research_Institutions_ECC_RootCA_2015.pem
+#8 7.482 Adding debian:Hellenic_Academic_and_Research_Institutions_RootCA_2015.pem
+#8 7.485 Adding debian:HiPKI_Root_CA_-_G1.pem
+#8 7.490 Adding debian:Hongkong_Post_Root_CA_3.pem
+#8 7.493 Adding debian:IdenTrust_Commercial_Root_CA_1.pem
+#8 7.496 Adding debian:IdenTrust_Public_Sector_Root_CA_1.pem
+#8 7.499 Adding debian:ISRG_Root_X1.pem
+#8 7.500 Adding debian:ISRG_Root_X2.pem
+#8 7.503 Adding debian:Izenpe.com.pem
+#8 7.505 Adding debian:Microsec_e-Szigno_Root_CA_2009.pem
+#8 7.507 Adding debian:Microsoft_ECC_Root_Certificate_Authority_2017.pem
+#8 7.510 Adding debian:Microsoft_RSA_Root_Certificate_Authority_2017.pem
+#8 7.513 Adding debian:NAVER_Global_Root_Certification_Authority.pem
+#8 7.516 Adding debian:NetLock_Arany_=Class_Gold=_Főtanúsítvány.pem
+#8 7.518 Adding debian:OISTE_WISeKey_Global_Root_GB_CA.pem
+#8 7.520 Adding debian:OISTE_WISeKey_Global_Root_GC_CA.pem
+#8 7.522 Adding debian:QuoVadis_Root_CA_1_G3.pem
+#8 7.525 Adding debian:QuoVadis_Root_CA_2_G3.pem
+#8 7.528 Adding debian:QuoVadis_Root_CA_2.pem
+#8 7.531 Adding debian:QuoVadis_Root_CA_3_G3.pem
+#8 7.534 Adding debian:QuoVadis_Root_CA_3.pem
+#8 7.536 Adding debian:Sectigo_Public_Server_Authentication_Root_E46.pem
+#8 7.539 Adding debian:Sectigo_Public_Server_Authentication_Root_R46.pem
+#8 7.541 Adding debian:Secure_Global_CA.pem
+#8 7.543 Adding debian:SecureSign_RootCA11.pem
+#8 7.545 Adding debian:SecureTrust_CA.pem
+#8 7.547 Adding debian:Security_Communication_ECC_RootCA1.pem
+#8 7.549 Adding debian:Security_Communication_RootCA2.pem
+#8 7.551 Adding debian:Security_Communication_RootCA3.pem
+#8 7.553 Adding debian:Security_Communication_Root_CA.pem
+#8 7.555 Adding debian:SSL.com_EV_Root_Certification_Authority_ECC.pem
+#8 7.558 Adding debian:SSL.com_EV_Root_Certification_Authority_RSA_R2.pem
+#8 7.559 Adding debian:SSL.com_Root_Certification_Authority_ECC.pem
+#8 7.562 Adding debian:SSL.com_Root_Certification_Authority_RSA.pem
+#8 7.564 Adding debian:SSL.com_TLS_ECC_Root_CA_2022.pem
+#8 7.567 Adding debian:SSL.com_TLS_RSA_Root_CA_2022.pem
+#8 7.569 Adding debian:Starfield_Class_2_CA.pem
+#8 7.571 Adding debian:Starfield_Root_Certificate_Authority_-_G2.pem
+#8 7.573 Adding debian:Starfield_Services_Root_Certificate_Authority_-_G2.pem
+#8 7.576 Adding debian:SwissSign_Gold_CA_-_G2.pem
+#8 7.579 Adding debian:SwissSign_Silver_CA_-_G2.pem
+#8 7.581 Adding debian:SZAFIR_ROOT_CA2.pem
+#8 7.584 Adding debian:Telia_Root_CA_v2.pem
+#8 7.588 Adding debian:TeliaSonera_Root_CA_v1.pem
+#8 7.591 Adding debian:TrustAsia_Global_Root_CA_G3.pem
+#8 7.593 Adding debian:TrustAsia_Global_Root_CA_G4.pem
+#8 7.596 Adding debian:Trustwave_Global_Certification_Authority.pem
+#8 7.598 Adding debian:Trustwave_Global_ECC_P256_Certification_Authority.pem
+#8 7.599 Adding debian:Trustwave_Global_ECC_P384_Certification_Authority.pem
+#8 7.601 Adding debian:T-TeleSec_GlobalRoot_Class_2.pem
+#8 7.603 Adding debian:T-TeleSec_GlobalRoot_Class_3.pem
+#8 7.606 Adding debian:TUBITAK_Kamu_SM_SSL_Kok_Sertifikasi_-_Surum_1.pem
+#8 7.609 Adding debian:TunTrust_Root_CA.pem
+#8 7.611 Adding debian:TWCA_Global_Root_CA.pem
+#8 7.613 Adding debian:TWCA_Root_Certification_Authority.pem
+#8 7.616 Adding debian:UCA_Extended_Validation_Root.pem
+#8 7.619 Adding debian:UCA_Global_G2_Root.pem
+#8 7.620 Adding debian:USERTrust_ECC_Certification_Authority.pem
+#8 7.623 Adding debian:USERTrust_RSA_Certification_Authority.pem
+#8 7.624 Adding debian:vTrus_ECC_Root_CA.pem
+#8 7.627 Adding debian:vTrus_Root_CA.pem
+#8 7.629 Adding debian:XRamp_Global_CA_Root.pem
+#8 7.654 done.
+#8 7.660 done.
+#8 7.662 **** Download Davos ****
+#8 7.668   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#8 7.668                                  Dload  Upload   Total   Spent    Left  Speed
+#8 7.669   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#8 8.275 100  528k    0  528k    0     0   872k      0 --:--:-- --:--:-- --:--:--  872k
+#8 8.276 **** Build Davos For Release ****
+#8 8.386 Downloading https://services.gradle.org/distributions/gradle-2.14-bin.zip
+#8 8.656 
+#8 8.657 Exception in thread "main" javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+#8 8.657 	at sun.security.ssl.Alert.createSSLException(Alert.java:131)
+#8 8.657 	at sun.security.ssl.TransportContext.fatal(TransportContext.java:331)
+#8 8.657 	at sun.security.ssl.TransportContext.fatal(TransportContext.java:274)
+#8 8.657 	at sun.security.ssl.TransportContext.fatal(TransportContext.java:269)
+#8 8.657 	at sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1365)
+#8 8.657 	at sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1240)
+#8 8.658 	at sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1183)
+#8 8.658 	at sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:377)
+#8 8.658 	at sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:444)
+#8 8.658 	at sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:422)
+#8 8.658 	at sun.security.ssl.TransportContext.dispatch(TransportContext.java:182)
+#8 8.658 	at sun.security.ssl.SSLTransport.decode(SSLTransport.java:152)
+#8 8.658 	at sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1401)
+#8 8.658 	at sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1309)
+#8 8.658 	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:440)
+#8 8.658 	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:567)
+#8 8.658 	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:197)
+#8 8.658 	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1589)
+#8 8.658 	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1517)
+#8 8.658 	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:268)
+#8 8.658 	at org.gradle.wrapper.Download.downloadInternal(Download.java:58)
+#8 8.658 	at org.gradle.wrapper.Download.download(Download.java:44)
+#8 8.658 	at org.gradle.wrapper.Install$1.call(Install.java:61)
+#8 8.658 	at org.gradle.wrapper.Install$1.call(Install.java:48)
+#8 8.658 	at org.gradle.wrapper.ExclusiveFileAccessManager.access(ExclusiveFileAccessManager.java:65)
+#8 8.659 	at org.gradle.wrapper.Install.createDist(Install.java:48)
+#8 8.659 	at org.gradle.wrapper.WrapperExecutor.execute(WrapperExecutor.java:128)
+#8 8.659 	at org.gradle.wrapper.GradleWrapperMain.main(GradleWrapperMain.java:61)
+#8 8.659 Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+#8 8.659 	at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:456)
+#8 8.659 	at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:323)
+#8 8.659 	at sun.security.validator.Validator.validate(Validator.java:271)
+#8 8.659 	at sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:315)
+#8 8.659 	at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:223)
+#8 8.659 	at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:129)
+#8 8.659 	at sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1349)
+#8 8.659 	... 23 more
+#8 8.659 Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+#8 8.659 	at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:148)
+#8 8.659 	at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:129)
+#8 8.660 	at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:280)
+#8 8.660 	at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:451)
+#8 8.660 	... 29 more
+#8 ERROR: process "/bin/bash -o pipefail -c echo \"**** Install build requirements ****\" &&   apt-get update && apt-get install -y --no-install-recommends ca-certificates ca-certificates-java && update-ca-certificates &&   echo \"**** Download Davos ****\" &&   (curl -kfL -o /tmp/davos.tar.gz \"https://github.com/linuxserver/davos/archive/refs/tags/${VERSION}.tar.gz\" || curl -kfL -o /tmp/davos.tar.gz \"https://github.com/linuxserver/davos/archive/refs/tags/v${VERSION}.tar.gz\" || curl -kfL -o /tmp/davos.tar.gz \"https://github.com/linuxserver/davos/archive/refs/heads/master.tar.gz\") &&   echo \"**** Build Davos For Release ****\" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo \"**** Copy Finished Jar ****\" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar" did not complete successfully: exit code: 1
 ------
- > [buildstage 2/2] RUN   echo "**** Install build requirements ****" &&   echo "**** Download Davos ****" &&   curl -o /tmp/davos.tar.gz -L "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" &&   echo "**** Build Davos For Release ****" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo "**** Copy Finished Jar ****" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar:
-0.192 **** Install build requirements ****
-0.192 **** Download Davos ****
-100     9  100     9    0     0     88      0 --:--:-- --:--:-- --:--:--    89
-0.302 **** Build Davos For Release ****
-0.305 tar: This does not look like a tar archive
-0.306 
-0.306 gzip: stdin: not in gzip format
-0.306 tar: Child returned status 1
-0.306 tar: Error is not recoverable: exiting now
+ > [buildstage 2/2] RUN   echo "**** Install build requirements ****" &&   apt-get update && apt-get install -y --no-install-recommends ca-certificates ca-certificates-java && update-ca-certificates &&   echo "**** Download Davos ****" &&   (curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/2.2.2.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/v2.2.2.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/heads/master.tar.gz") &&   echo "**** Build Davos For Release ****" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo "**** Copy Finished Jar ****" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar:
+8.659 	at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:223)
+8.659 	at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:129)
+8.659 	at sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1349)
+8.659 	... 23 more
+8.659 Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+8.659 	at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:148)
+8.659 	at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:129)
+8.660 	at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:280)
+8.660 	at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:451)
+8.660 	... 29 more
 ------
 Dockerfile:6
 --------------------
    5 |     
    6 | >>> RUN \
    7 | >>>   echo "**** Install build requirements ****" && \
-   8 | >>>   echo "**** Download Davos ****" && \
-   9 | >>>   curl -o /tmp/davos.tar.gz -L "https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz" && \
-  10 | >>>   echo "**** Build Davos For Release ****" && \
-  11 | >>>   mkdir -p /app/davos/ && \
-  12 | >>>   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 && \
-  13 | >>>   cd /app/davos/ && \
-  14 | >>>   ./gradlew -Penv=release clean build && \
-  15 | >>>   echo "**** Copy Finished Jar ****" && \
-  16 | >>>   cp build/libs/*.jar /davos.jar && \
-  17 | >>>   chmod 755 /davos.jar
-  18 |     
+   8 | >>>   apt-get update && apt-get install -y --no-install-recommends ca-certificates ca-certificates-java && update-ca-certificates && \
+   9 | >>>   echo "**** Download Davos ****" && \
+  10 | >>>   (curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/${VERSION}.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/tags/v${VERSION}.tar.gz" || curl -kfL -o /tmp/davos.tar.gz "https://github.com/linuxserver/davos/archive/refs/heads/master.tar.gz") && \
+  11 | >>>   echo "**** Build Davos For Release ****" && \
+  12 | >>>   mkdir -p /app/davos/ && \
+  13 | >>>   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 && \
+  14 | >>>   cd /app/davos/ && \
+  15 | >>>   ./gradlew -Penv=release clean build && \
+  16 | >>>   echo "**** Copy Finished Jar ****" && \
+  17 | >>>   cp build/libs/*.jar /davos.jar && \
+  18 | >>>   chmod 755 /davos.jar
+  19 |     
 --------------------
-ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** Install build requirements ****\" &&   echo \"**** Download Davos ****\" &&   curl -o /tmp/davos.tar.gz -L \"https://github.com/linuxserver/davos/archive/${VERSION}.tar.gz\" &&   echo \"**** Build Davos For Release ****\" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo \"**** Copy Finished Jar ****\" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar" did not complete successfully: exit code: 2
+ERROR: failed to solve: process "/bin/bash -o pipefail -c echo \"**** Install build requirements ****\" &&   apt-get update && apt-get install -y --no-install-recommends ca-certificates ca-certificates-java && update-ca-certificates &&   echo \"**** Download Davos ****\" &&   (curl -kfL -o /tmp/davos.tar.gz \"https://github.com/linuxserver/davos/archive/refs/tags/${VERSION}.tar.gz\" || curl -kfL -o /tmp/davos.tar.gz \"https://github.com/linuxserver/davos/archive/refs/tags/v${VERSION}.tar.gz\" || curl -kfL -o /tmp/davos.tar.gz \"https://github.com/linuxserver/davos/archive/refs/heads/master.tar.gz\") &&   echo \"**** Build Davos For Release ****\" &&   mkdir -p /app/davos/ &&   tar xf /tmp/davos.tar.gz -C /app/davos/ --strip-components=1 &&   cd /app/davos/ &&   ./gradlew -Penv=release clean build &&   echo \"**** Copy Finished Jar ****\" &&   cp build/libs/*.jar /davos.jar &&   chmod 755 /davos.jar" did not complete successfully: exit code: 1

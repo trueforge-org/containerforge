@@ -18,9 +18,11 @@ RUN \
     echo "**** install librespeed ****" && \
     mkdir -p \
         /app/www/public && \
-    curl -o \
-        /tmp/librespeed.tar.gz -L \
-        "https://github.com/librespeed/speedtest/archive/${VERSION}.tar.gz" && \
+    (curl -fL -o \
+        /tmp/librespeed.tar.gz \
+        "https://github.com/librespeed/speedtest/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
+        /tmp/librespeed.tar.gz \
+        "https://github.com/librespeed/speedtest/archive/refs/tags/v${VERSION}.tar.gz") && \
     tar xf \
         /tmp/librespeed.tar.gz -C \
         /app/www/public --strip-components=1 && \
