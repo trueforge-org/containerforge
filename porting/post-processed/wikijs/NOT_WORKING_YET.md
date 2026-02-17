@@ -25,3 +25,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Build still fails in Wiki.js release fetch/install stage after package normalization.
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 next large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: PASS
+- Reason: Build succeeds after release download fallback logic and package normalization.
+- Full log: `amd64-build.log`

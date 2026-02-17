@@ -25,3 +25,9 @@ This container remains in `/porting/post-processed` for now.
 - Result: FAIL
 - Reason: Build still fails later in install flow (non-package issue remains after libfftw package correction).
 - Full log: `amd64-build.log`
+
+## AMD64 build check (2026-02-17 next large batch)
+- Command: `docker buildx bake --progress=plain --set image-local.platform=linux/amd64 image-local`
+- Result: FAIL
+- Reason: Build still fails in mp3gain/mp3val compilation section despite unzip/package fixes.
+- Full log: `amd64-build.log`

@@ -27,7 +27,7 @@ RUN \
     VERSION=$(curl -fsL https://webgrabplus.com/download/sw | grep -m1 /download/sw/v | sed 's|.*/download/sw/v\(.*\)">V.*|\1|'); \
   fi && \
   echo "Found Webgrabplus version ${VERSION}" && \
-  WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep '>Linux</a>' | sed 's|.*\(https://webgrab.*.gz\).*|\1|') && \
+  WEBGRAB_URL=$(curl -fsL https://webgrabplus.com/download/sw/v${VERSION} | grep -Eo 'https://[^"]+\\.gz' | head -n1) && \
   mkdir -p \
     /app/wg++ && \
   curl -o /tmp/wg++.tar.gz -L \
@@ -36,6 +36,7 @@ RUN \
     /tmp/wg++.tar.gz -C \
     /app/wg++ --strip-components=1 && \
   echo "**** download siteini.pack ****" && \
+  mkdir -p /defaults/ini && \
   curl -o \
     /tmp/ini.zip -L \
     https://www.webgrabplus.com/sites/default/files/download/ini/SiteIniPack_current.zip && \

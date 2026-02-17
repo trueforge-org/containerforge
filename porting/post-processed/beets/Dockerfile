@@ -14,6 +14,7 @@ RUN \
     libcairo2-dev \
     cargo \
     cmake \
+    unzip \
     libavcodec-dev \
     libavformat-dev \
     libavutil-dev \
@@ -64,8 +65,8 @@ RUN \
   cp -p mp3val /usr/bin && \
   echo "**** install pip packages ****" && \
   python3 -m venv /config/venv && \
-  pip install -U --no-cache-dir pip wheel && \
-  pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
+  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     beautifulsoup4 \
     beets==${VERSION} \
     beets-extrafiles \
