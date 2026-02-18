@@ -20,7 +20,7 @@ USER root
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        age bind9-dnsutils direnv fzf \
+        age bind9-dnsutils direnv fish fzf \
         gettext git gh iputils-ping \
         moreutils openssh-client openssl \
         sshfs fuse3 sq webp \
@@ -32,11 +32,6 @@ RUN apt-get update && \
         zstd \
         && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Add newest fish version
-RUN apt-add-repository ppa:fish-shell/release-4 && \
-    apt update && \
-    apt install -y  --no-install-recommends fish
 
 # Install dependencies and GitHub CLI
 RUN apt-get update && \
