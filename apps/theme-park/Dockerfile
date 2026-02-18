@@ -1,7 +1,7 @@
 
 
 # Builder stage
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:911cc57981370bafe55e08ba7d6e209d088a6a15f92fceacaee52fcc17226458 AS builder
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:a6e9da280c86f6604e3f9174989b76d6453f6f94d249163049783eeb80118370 AS builder
 ARG VERSION
 
 USER root
