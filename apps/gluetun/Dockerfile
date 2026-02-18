@@ -7,7 +7,7 @@ RUN git clone --depth 1 --branch "${VERSION}" https://github.com/qdm12/gluetun.g
     cd /src/gluetun && \
     go build -trimpath -ldflags="-s -w" -o /usr/local/bin/gluetun cmd/gluetun/main.go
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:6064d5af956ed39456b8c643d6434d9d5331f4d77c08230a413f6a1b253a1408
 
 USER root
 RUN apt-get update && \
