@@ -25,15 +25,11 @@ RUN \
     poppler-utils && \
   echo "**** install changedetection.io ****" && \
   mkdir -p /app/changedetection && \
-  if [ -z ${CHANGEDETECTON_RELEASE+x} ]; then \
-    CHANGEDETECTON_RELEASE=$(curl -sX GET "https://api.github.com/repos/dgtlmoon/changedetection.io/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
   (curl -fsL -o \
     /tmp/changedetection.tar.gz \
-    "https://github.com/dgtlmoon/changedetection.io/archive/refs/tags/${CHANGEDETECTON_RELEASE}.tar.gz" || curl -fsL -o \
+    "https://github.com/dgtlmoon/changedetection.io/archive/refs/tags/${VERSION}.tar.gz" || curl -fsL -o \
     /tmp/changedetection.tar.gz \
-    "https://github.com/dgtlmoon/changedetection.io/archive/refs/tags/v${CHANGEDETECTON_RELEASE#v}.tar.gz") && \
+    "https://github.com/dgtlmoon/changedetection.io/archive/refs/tags/v${VERSION#v}.tar.gz") && \
   tar xf \
     /tmp/changedetection.tar.gz -C \
     /app/changedetection/ --strip-components=1 && \

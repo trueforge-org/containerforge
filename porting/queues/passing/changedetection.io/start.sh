@@ -2,4 +2,4 @@
 
 
 cd /app/changedetection
-exec python3 /app/changedetection/changedetection.py -d /config
+exec /app/venv/bin/python /app/changedetection/changedetection.py -d /config
