@@ -1,5 +1,5 @@
 ## TODO pin version tag
-FROM ghcr.io/trueforge-org/node:rolling@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34
+FROM ghcr.io/trueforge-org/node:rolling@sha256:ec6290230c443c68f303007269be43b40a2260858c96cc9bf6e050c4668b38fd
 
 # set version label
 ARG VERSION
