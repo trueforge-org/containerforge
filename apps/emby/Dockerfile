@@ -19,8 +19,14 @@ RUN \
     && mv -t /app/bin/ /tmp/emby/opt/emby-server/* \
     && if [ "${TARGETARCH}" = "amd64" ]; then \
         patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/system/EmbyServer; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/bin/ffmpeg; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/bin/ffdetect; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/bin/ffprobe; \
     elif [ "${TARGETARCH}" = "arm64" ]; then \
         patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/system/EmbyServer; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/bin/ffmpeg; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/bin/ffdetect; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/bin/ffprobe; \
     else \
         echo "Error: Unsupported architecture: ${TARGETARCH}"; exit 1; \
     fi \
