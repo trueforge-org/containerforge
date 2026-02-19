@@ -15,3 +15,5 @@
 !compatibility.sh
 !upgrade.sh
 !/root
+!container-test.yaml
+!healthcheck.sh
