@@ -10,5 +10,5 @@ if [[ ! -f /config/config.ini ]]; then
     cp /defaults/config.ini /config/config.ini
 fi
 
-exec /app/venv/bin/python/app/sickgear/sickgear.py --datadir /config
+exec /app/venv/bin/python /app/sickgear/sickgear.py --datadir /config
 

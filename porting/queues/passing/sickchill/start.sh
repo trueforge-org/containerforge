@@ -15,5 +15,5 @@ done
 # permissions
 echo "Setting permissions"
 
-exec /app/venv/bin/python/app/venv/bin/SickChill --datadir /config
+exec /app/venv/bin/python /app/venv/bin/SickChill --datadir /config
 
