@@ -16,6 +16,6 @@ RUN curl -fsSL "https://github.com/Unpackerr/unpackerr/releases/download/v${VERS
 
 COPY . /
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

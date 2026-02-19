@@ -14,5 +14,5 @@ RUN echo "*** Installing go-yq ***" && \
     chown apps:apps /app/yq && \
     cp -f /app/yq /usr/bin/yq
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml

@@ -26,6 +26,6 @@ RUN apt-get update && \
 
 COPY . /
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

@@ -30,8 +30,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* $HOME/.cache
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 
 VOLUME /app

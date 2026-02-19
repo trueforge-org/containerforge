@@ -25,7 +25,7 @@ RUN YARN_VERSION=$(cat /YARN_VERSION.txt) && \
     && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg && \
     rm -rf /opthold/
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 CMD [ "node" ]

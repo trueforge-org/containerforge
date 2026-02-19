@@ -36,8 +36,8 @@ RUN set -ex; \
 
 COPY --from=go /config/go/bin/imaginary /usr/local/bin/imaginary
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 ENV MALLOC_ARENA_MAX=2
 

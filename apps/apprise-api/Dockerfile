@@ -37,9 +37,9 @@ RUN \
 
 # copy local files
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
-COPY container-test.yaml /container-test.yaml
 
 EXPOSE 8000
 HEALTHCHECK CMD ["/healthcheck.sh"]

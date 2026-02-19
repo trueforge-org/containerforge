@@ -2,6 +2,7 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:b4224a2abd8322eafc4c63ea85ad1cf5afe5d7e133d4ef5ee8a5409b4a22ef2a AS builder
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 # Install necessary build dependencies
 RUN set -eux; \
@@ -49,4 +50,3 @@ EXPOSE $PORT
 
 # Set default command to run the binary
 CMD ["./my-proxy-service"]
-COPY container-test.yaml /container-test.yaml

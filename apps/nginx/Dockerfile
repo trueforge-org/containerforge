@@ -30,7 +30,7 @@ RUN set -eux; \
 EXPOSE 8080
 STOPSIGNAL SIGQUIT
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 CMD ["nginx", "-c","/config/nginx.conf", "-g", "daemon off;"]

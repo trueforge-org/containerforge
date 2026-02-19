@@ -19,8 +19,8 @@ RUN set -eux; \
     wget -q -O /usr/local/bin/notify_push "https://github.com/nextcloud/notify_push/releases/download/v${VERSION}/notify_push-${TARGETARCH}-${TRIPLET}"; \
     chmod +x /usr/local/bin/notify_push;
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 # Copy files with correct permissions
 COPY --chmod=775 . /

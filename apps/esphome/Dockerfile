@@ -32,8 +32,8 @@ RUN set -eux; \
 # Copy application code
 COPY . /
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
 CMD ["dashboard", "/config"]

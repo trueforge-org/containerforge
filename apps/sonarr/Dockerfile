@@ -26,8 +26,8 @@ RUN apt-get update && \
 
 COPY . /
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
 HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${SONARR__SERVER__PORT}/"

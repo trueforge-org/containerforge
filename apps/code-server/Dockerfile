@@ -5,6 +5,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:a42a7b2fe3c044339769eca34c011337ec
 ARG VERSION
 ARG TARGETARCH
 USER root
+COPY container-test.yaml /container-test.yaml
 
 # environment settings
 
@@ -40,4 +41,3 @@ COPY . /
 
 # ports and volumes
 EXPOSE 8443
-COPY container-test.yaml /container-test.yaml

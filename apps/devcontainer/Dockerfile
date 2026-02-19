@@ -16,6 +16,7 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 LABEL dev.containers.features="common"
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 # Core dependencies (duplicates removed)
 RUN apt-get update && \
@@ -236,4 +237,3 @@ RUN /usr/bin/fish -c "curl -sL https://git.io/fisher | source; \
 RUN krew install pv-mounter \
     && krew install cnpg \
     && krew install df-pv
-COPY container-test.yaml /container-test.yaml

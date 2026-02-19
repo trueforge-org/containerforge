@@ -103,9 +103,9 @@ RUN set -eux; \
 
 # Switch to non-root user
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
-COPY container-test.yaml /container-test.yaml
 
 HEALTHCHECK CMD ["/healthcheck.sh"]
 COPY --chmod=0755 start.sh /start.sh

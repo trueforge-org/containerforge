@@ -37,7 +37,6 @@ USER root
 RUN mkdir -p /store && \
     chown -R apps:apps /app /store && chmod -R 755 /app /store
 
-COPY container-test.yaml /container-test.yaml
 USER apps
 
 # Copy app
@@ -52,6 +51,7 @@ COPY --from=dependencies  /app/src/ui/dist/ /app/ui
 COPY --chmod=0775 . /
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 ENV WORKDIR=/app \
     WUD_LOG_FORMAT=text \

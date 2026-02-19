@@ -44,5 +44,5 @@ RUN set -eux; \
     # https://openjdk.java.net/jeps/341
     java -Xshare:dump;
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml

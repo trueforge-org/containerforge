@@ -71,8 +71,8 @@ RUN \
     /root/.cache
 
 # add local files
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 COPY ./root /
 

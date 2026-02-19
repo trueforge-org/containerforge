@@ -29,8 +29,8 @@ RUN echo "**** install ombi ****" && \
     /var/tmp/*
 
 # add local files
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 # ports and volumes
 EXPOSE 3579

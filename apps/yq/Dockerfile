@@ -5,6 +5,7 @@ FROM ghcr.io/trueforge-org/python:3.13.12@sha256:cac0b51ee72888e75bf2ff4ae1a46be
 ARG VERSION
 ARG TARGETARCH
 USER root
+COPY container-test.yaml /container-test.yaml
 
 RUN echo "**** install app ****" && \
   python3 -m venv /app/venv && \
@@ -14,4 +15,3 @@ RUN echo "**** install app ****" && \
   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     yq=="${VERSION}" && \
   chown -R apps:apps /app && chmod -R 755 /app
-COPY container-test.yaml /container-test.yaml

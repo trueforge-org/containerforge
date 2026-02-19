@@ -18,8 +18,8 @@ RUN mkdir -p /app/bin && \
     chown -R root:root /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/* /app/bin/JackettUpdater*
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY --chmod=0775 . /
 

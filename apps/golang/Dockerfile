@@ -43,7 +43,7 @@ COPY --from=build --link /target/ /
 # Fix /config permission issues
 RUN install -d -o apps -g apps /config
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 WORKDIR /config

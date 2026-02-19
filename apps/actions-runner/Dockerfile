@@ -93,5 +93,5 @@ RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-
     && rm runner-container-hooks.zip \
     && chown -R apps:docker /home/runner/k8s
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml

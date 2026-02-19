@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV CNI_BIN_DIR=/host/opt/cni/bin
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -19,4 +20,3 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 
 CMD rsync -av --exclude=LICENSE --exclude=README.md /plugins/* $CNI_BIN_DIR
-COPY container-test.yaml /container-test.yaml

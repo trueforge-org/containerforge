@@ -20,8 +20,8 @@ EXPOSE 3030
 ARG IMAGE_STATS
 ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="3030/tcp,3030/udp"
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY . /
 

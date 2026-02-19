@@ -4,6 +4,7 @@ FROM tailscale/tailscale:${VERSION}@sha256:95e528798bebe75f39b10e74e7051cf51188e
 FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:a42a7b2fe3c044339769eca34c011337ec5ecdbb7ff3c2af30bc9105afb035b8
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -22,4 +23,3 @@ RUN mkdir /tailscale && ln -s /usr/local/bin/containerboot /tailscale/run.sh
 VOLUME ["/var/lib/tailscale"]
 
 CMD ["/usr/local/bin/containerboot"]
-COPY container-test.yaml /container-test.yaml

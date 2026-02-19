@@ -18,8 +18,8 @@ RUN pip3 install -U --no-cache-dir \
     /var/lib/apt/lists/* \
     /tmp/*
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY ./ /
 
 VOLUME /config

@@ -31,8 +31,8 @@ RUN \
   rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # copy local files
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY ./ /
 

@@ -28,8 +28,8 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /app/deemix-gui/dist/deemix-server-linux /app/deemix-server
 

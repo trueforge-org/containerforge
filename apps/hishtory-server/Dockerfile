@@ -27,8 +27,8 @@ FROM ghcr.io/trueforge-org/postgresql-client:rolling@sha256:e1ed0aeb4ecb455b14d1
 # set version label
 ARG VERSION
 ARG TARGETARCH
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /server /app/server
 COPY . /

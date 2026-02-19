@@ -38,8 +38,8 @@ RUN apt-get update \
 COPY . /
 
 # run as 568
-COPY container-test.yaml /container-test.yaml
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 WORKDIR /config
 VOLUME ["/config"]
