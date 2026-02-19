@@ -16,4 +16,5 @@ RUN curl -fsSL "https://github.com/kiranshila/Doplarr/releases/download/v${VERSI
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

@@ -23,5 +23,5 @@ BEETSDIR=/config
 export BEETSDIR
 FPCALC=/usr/bin/fpcalc
 export FPCALC
-/config/venv/bin/beet -v import -q "$1"
+/app/venv/bin/beet -v import -q "$1"
 

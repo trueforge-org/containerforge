@@ -34,6 +34,7 @@ RUN \
 
 # add local files
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 
 

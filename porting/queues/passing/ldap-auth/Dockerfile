@@ -23,11 +23,11 @@ RUN \
         python3 \
         python3-venv && \
     mkdir -p /config && \
-    python3 -m venv /config/venv && \
-    /config/venv/bin/pip install -U --no-cache-dir \
+    python3 -m venv /app/venv && \
+    /app/venv/bin/pip install -U --no-cache-dir \
         pip \
         wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir \
+    /app/venv/bin/pip install -U --no-cache-dir \
         cryptography \
         legacy-cgi \
         python-ldap=="${VERSION}" && \

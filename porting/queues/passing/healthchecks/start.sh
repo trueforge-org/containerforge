@@ -36,9 +36,9 @@ cp /defaults/uwsgi.ini /app/healthchecks/uwsgi.ini
 
 cd /app/healthchecks || exit
 
-python3 ./manage.py makemigrations
+/app/venv/bin/python ./manage.py makemigrations
 
-python3 ./manage.py migrate
+/app/venv/bin/python ./manage.py migrate
 
 if [[ -n "$SUPERUSER_EMAIL" ]] && [[ -n "$SUPERUSER_PASSWORD" ]]; then
 cat << EOF |  python3 /app/healthchecks/manage.py shell

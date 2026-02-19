@@ -38,11 +38,11 @@ RUN \
     /app/htpcmanager --strip-components=1 && \
   echo "**** install pip packages ****" && \
   sed -i -e '/psutil\|pyopenssl\|pySMART/d' /app/htpcmanager/requirements.txt && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /config/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r /app/htpcmanager/requirements.txt && \
+  /app/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r /app/htpcmanager/requirements.txt && \
   echo ${VERSION} > /app/htpcmanager/VERSION.txt && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \

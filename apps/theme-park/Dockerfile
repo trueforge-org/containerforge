@@ -1,7 +1,7 @@
 
 
 # Builder stage
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:cac0b51ee72888e75bf2ff4ae1a46be0b5310663584fc54d621d0476e573f5b8 AS builder
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42 AS builder
 ARG VERSION
 
 USER root
@@ -31,4 +31,5 @@ COPY --from=builder --chown=568:568 /tmp/css /usr/share/nginx/html/css/
 COPY --from=builder --chown=568:568 /tmp/resources /usr/share/nginx/html/resources/
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /usr/share/nginx/html

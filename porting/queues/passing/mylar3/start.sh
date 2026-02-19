@@ -9,6 +9,6 @@ if [[ ! -f /config/scripts/autoProcessComics.py ]]; then
     cp -pr /app/mylar3/post-processing/* /config/scripts/
 fi
 
-exec python3 /app/mylar3/Mylar.py --nolaunch \
+exec /app/venv/bin/python/app/mylar3/Mylar.py --nolaunch \
         --datadir /config/mylar
 

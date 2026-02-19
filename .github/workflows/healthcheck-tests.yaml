@@ -1,0 +1,30 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Healthcheck Tests
+
+on:
+  pull_request:
+    paths:
+      - include/healthcheck.sh
+      - scripts/test-healthcheck-positive.sh
+      - scripts/test-healthcheck-negative.sh
+      - testhelpers/container-test.schema.json
+  merge_group:
+
+jobs:
+  healthcheck:
+    name: Healthcheck Positive/Negative
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
+
+      - name: Run healthcheck script tests
+        run: |
+          chmod +x ./scripts/test-healthcheck-positive.sh ./scripts/test-healthcheck-negative.sh
+          ./scripts/test-healthcheck-positive.sh
+          ./scripts/test-healthcheck-negative.sh

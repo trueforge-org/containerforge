@@ -56,6 +56,7 @@ Use these rules as strict defaults when making changes in this repository.
 - `/tmp` is ephemeral (ramdisk-style) scratch space.
 - Ephemeral caches (for example `GOCACHE`, pip cache, npm cache, build scratch) MUST use `/tmp`, not `/config`.
 - Important system binaries (for example Go or Python) MAY be installed under `/usr/local` so `/app` remains empty for downstream `FROM` consumers.
+- You MUST include `COPY container-test.yaml /container-test.yaml` in Dockerfiles to enable container tests, and you MUST NOT remove it unless explicitly requested.
 
 ## 7) Base-image and downstream impact rules
 

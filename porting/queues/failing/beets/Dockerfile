@@ -64,9 +64,9 @@ RUN \
   make -f Makefile.linux && \
   cp -p mp3val /usr/bin && \
   echo "**** install pip packages ****" && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir pip wheel && \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     beautifulsoup4 \
     beets==${VERSION} \
     beets-extrafiles \

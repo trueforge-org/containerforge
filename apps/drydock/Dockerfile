@@ -88,6 +88,7 @@ COPY --from=app-build /app/src/app/package.json /app/package.json
 COPY --from=ui-build /app/src/ui/dist /app/ui
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 ENV WORKDIR=/app \
     DD_LOG_FORMAT=text \

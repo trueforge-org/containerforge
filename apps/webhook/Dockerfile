@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:cac0b51ee72888e75bf2ff4ae1a46be0b5310663584fc54d621d0476e573f5b8
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
 ARG TARGETARCH
 ARG VERSION
 
@@ -33,6 +33,9 @@ RUN set -eux; \
 
 # Copy local files
 COPY . /
+COPY --chmod=755 healthcheck.sh /healthcheck.sh
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config
+HEALTHCHECK CMD ["/healthcheck.sh"]

@@ -1,5 +1,5 @@
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:a42a7b2fe3c044339769eca34c011337ec5ecdbb7ff3c2af30bc9105afb035b8
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 
 ARG TARGETPLATFORM
 ARG VERSION
@@ -22,3 +22,4 @@ RUN apt-get update && \
     && update-ca-certificates
 
 USER apps
+COPY container-test.yaml /container-test.yaml

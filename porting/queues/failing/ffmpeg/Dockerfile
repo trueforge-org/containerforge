@@ -134,12 +134,12 @@ RUN \
   cd /tmp/rust && \
   ./install.sh && \
   cargo install bindgen-cli cargo-c cbindgen --locked && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
-  /config/venv/bin/pip install --no-cache-dir cmake==3.31.6 mako meson ninja packaging ply pyyaml
+  /app/venv/bin/pip install --no-cache-dir cmake==3.31.6 mako meson ninja packaging ply pyyaml
 
 # compile 3rd party libs
 RUN \

@@ -28,7 +28,7 @@ RUN \
   tar xf /tmp/mylar3.tar.gz -C \
     /app/mylar3/ --strip-components=1 && \
   cd /app/mylar3 && \
-  python3 -m venv /config/venv && \
+  python3 -m venv /app/venv && \
   pip install -U --no-cache-dir \
     pip \
     wheel && \
