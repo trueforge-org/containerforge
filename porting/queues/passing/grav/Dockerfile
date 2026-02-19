@@ -43,6 +43,7 @@ RUN \
     unzip -q \
         /tmp/grav.zip -d /tmp/grav && \
     mv /tmp/grav/grav-admin/* /app/www/public/ && \
+    chown -R apps:apps /app && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/* \

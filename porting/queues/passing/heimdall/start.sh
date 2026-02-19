@@ -43,9 +43,6 @@ ln -s /config/www/searchproviders.yaml /app/www/storage/app/searchproviders.yaml
 # tidy up install files & set permissions
 if [[ -f /app/set-perms ]]; then
     rm -rf /app/set-perms
-
-        /app/www \
-        /config
 fi
 
 # copy .env if not exists
@@ -58,5 +55,4 @@ fi
 # set queue driver to database
 sed -i 's/QUEUE_DRIVER=sync/QUEUE_DRIVER=database/' /config/www/.env
 
-exec php /app/www/artisan queue:work database --sleep=3 --tries=3
-
+exec php -S 0.0.0.0:80 -t /app/www/public

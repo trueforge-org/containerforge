@@ -32,6 +32,7 @@ RUN \
     tar xf \
         /tmp/grocy.tar.gz -C \
         /app/www/ --strip-components=1 && \
+    chown -R apps:apps /app && \
     mkdir -p /defaults/plugins && \
     cp -R /app/www/data/plugins \
         /defaults/plugins && \

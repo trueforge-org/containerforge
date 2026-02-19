@@ -10,6 +10,7 @@ RUN \
     echo "**** install runtime packages ****" && \
     apt-get update && \
     apt-get install -y \
+        php8.3-cli \
         php8.3-xml \
         php8.3-exif \
         php8.3-gmp \
@@ -31,6 +32,7 @@ RUN \
     tar xf \
         /tmp/freshrss.tar.gz -C \
         /app/www --strip-components=1 && \
+    chown -R apps:apps /app && \
     sed -i "s|'disable_update' => false,|'disable_update' => true,|g" \
         /app/www/config.default.php && \
     echo "**** cleanup ****" && \

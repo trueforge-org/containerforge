@@ -84,6 +84,8 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
+    libavahi-client3 \
+    libavahi-common3 \
     avahi-daemon \
     libconfuse2 \
     dbus \
@@ -91,6 +93,7 @@ RUN \
     libgnutls30 \
     libjson-c5 \
     libevent-2.1-7t64 \
+    libevent-pthreads-2.1-7t64 \
     libgcrypt20 \
     libplist-2.0-4 \
     libsodium23 \

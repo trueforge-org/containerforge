@@ -3,68 +3,25 @@
 
 # make our folders
 mkdir -p \
-    /var/run/dbus \
-    /run/dbus \
-    /config/dbase_and_logs \
-    /daapd-pidfolder
+    /config/dbase_and_logs
 
-
-if [[ -e /var/run/dbus.pid ]]; then
-    rm -f /var/run/dbus.pid
-fi
-
-if [[ -e /run/dbus/dbus.pid ]]; then
-    rm -f /run/dbus/dbus.pid
-fi
-
-dbus-uuidgen --ensure
-sleep 1
-
-# configure defaults copy of conf
-if [[ ! -e "/defaults/owntone.conf" ]]; then
-cp /etc/owntone.conf.orig /defaults/owntone.conf
-sed -i \
-    -e '/cache_path\ =/ s/# *//' \
-    -e '/db_path\ =/ s/# *//' \
-    -e s#ipv6\ =\ yes#ipv6\ =\ no#g \
-    -e s#My\ Music\ on\ %h#LS.IO\ Music#g \
-    -e s#/srv/music#/music#g \
-    -e 's/\(uid.*=\).*/\1 \"apps\"/g' \
-    -e s#/var/cache/owntone/cache.db#/config/dbase_and_logs/cache.db#g \
-    -e s#/var/cache/owntone/songs3.db#/config/dbase_and_logs/songs3.db#g \
-    -e s#/var/log/owntone.log#/config/dbase_and_logs/owntone.log#g \
-    -e '/trusted_networks\ =/ s/# *//' \
-    -e 's#trusted_networks = {.*#trusted_networks = { "lan" }#' \
-    -e '/admin_password\ =/ s/# *//' \
-    -e 's#admin_password = .*#admin_password = "changeme"#' \
-    /defaults/owntone.conf
-fi
-
-# symlink conf to /conf
 if [[ ! -f /config/owntone.conf ]]; then
-    cp /defaults/owntone.conf /config/owntone.conf
+    cp /etc/owntone.conf.orig /config/owntone.conf
+    sed -i \
+        -e '/cache_path\ =/ s/# *//' \
+        -e '/db_path\ =/ s/# *//' \
+        -e s#ipv6\ =\ yes#ipv6\ =\ no#g \
+        -e s#My\ Music\ on\ %h#LS.IO\ Music#g \
+        -e s#/srv/music#/music#g \
+        -e 's/\(uid.*=\).*/\1 \"apps\"/g' \
+        -e s#/var/cache/owntone/cache.db#/config/dbase_and_logs/cache.db#g \
+        -e s#/var/cache/owntone/songs3.db#/config/dbase_and_logs/songs3.db#g \
+        -e s#/var/log/owntone.log#/config/dbase_and_logs/owntone.log#g \
+        -e '/trusted_networks\ =/ s/# *//' \
+        -e 's#trusted_networks = {.*#trusted_networks = { "lan" }#' \
+        -e '/admin_password\ =/ s/# *//' \
+        -e 's#admin_password = .*#admin_password = "changeme"#' \
+        /config/owntone.conf
 fi
 
-if [[ ! -L /etc/owntone.conf && -f /etc/owntone.conf ]]; then
-    rm /etc/owntone.conf
-fi
-
-if [[ ! -L /etc/owntone.conf ]]; then
-    ln -s /config/owntone.conf /etc/owntone.conf
-fi
-
-until [[ -e /var/run/dbus/system_bus_socket ]]; do
-    sleep 1s
-done
-
-## TODO: we need to deal differently with multi-exec or not include this container
-## AVAHI in docker is an issue
-exec avahi-daemon --no-chroot
-
-exec dbus-daemon --system --nofork
-
-exec /usr/sbin/owntone -f \
-    -P /daapd-pidfolder/owntone.pid
-
-exed librespot --backend pipe --device /music/spotify -n forked-daapd --cache /tmp
-
+exec /usr/sbin/owntone -f -c /config/owntone.conf -P /config/owntone.pid

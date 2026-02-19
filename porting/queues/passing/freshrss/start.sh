@@ -33,4 +33,4 @@ if [[ -f /config/www/freshrss/data/config.php ]]; then
     sed -i "s|'disable_update' => false,|'disable_update' => true,|g" /config/www/freshrss/data/config.php
 fi
 
-## TODO: find exec
+exec php8.3 -S 0.0.0.0:80 -t /app/www/p

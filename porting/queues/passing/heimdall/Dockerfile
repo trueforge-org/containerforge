@@ -45,6 +45,7 @@ RUN \
     tar xf \
         /tmp/heimdall.tar.gz -C \
         /app/www-tmp --strip-components=1 && \
+    chown -R apps:apps /app && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/*

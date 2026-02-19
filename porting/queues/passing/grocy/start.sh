@@ -24,4 +24,4 @@ if [[ ! -f "/config/data/plugins/DemoBarcodeLookupPlugin.php" ]]; then
     cp -R /defaults/plugins /config/data
 fi
 
-## TODO: find exec
+exec php -S 0.0.0.0:80 -t /app/www/public

@@ -38,3 +38,4 @@ if [ -f "/config/diskover.cfg" ]; then
     done
 fi
 
+exec php8.3 -S 0.0.0.0:80 -t /app/diskover-web/public

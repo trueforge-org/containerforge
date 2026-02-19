@@ -45,4 +45,4 @@ shopt -u globstar dotglob
 
 sed -i 's/enable_auto_updates_check: true/enable_auto_updates_check: false/' /config/www/user/plugins/admin/admin.yaml
 
-## TODO: find exec
+exec php -S 0.0.0.0:80 -t /app/www/public
