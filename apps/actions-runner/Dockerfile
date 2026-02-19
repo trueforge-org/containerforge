@@ -22,9 +22,9 @@ RUN groupadd docker --gid 123 \
     && usermod -aG docker apps \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
     && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers \
-    mkdir -p /home/runner /config/helm /go /config/go /tmp/go \
-    chown -R apps:docker /home/runner /config/helm /go /tmp/go /config/go \
-    chmod -R 777 /home/runner /config/helm /go /tmp/go /config/go
+    mkdir -p /home/runner /config /config/helm /go /config/go /tmp/go \
+    chown -R apps:docker /home/runner /config /config/helm /go /tmp/go /config/go \
+    chmod -R 777 /home/runner /config /config/helm /go /tmp/go /config/go
 
 WORKDIR /home/runner
 
