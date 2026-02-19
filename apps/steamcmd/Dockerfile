@@ -2,6 +2,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf29
 
 ARG VERSION
 ARG VENDOR
+ARG STEAMCMD_VERSION
 
 USER root
 
@@ -10,7 +11,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     echo steamcmd steam/question select "I AGREE" | debconf-set-selections && \
     echo steamcmd steam/license note '' | debconf-set-selections && \
-    apt-get install -y --no-install-recommends steamcmd:i386 && \
+    apt-get install -y --no-install-recommends steamcmd:i386=${STEAMCMD_VERSION} && \
     ln -sf /usr/games/steamcmd /usr/local/bin/steamcmd && \
     rm -rf /var/lib/apt/lists/*
 

@@ -2,6 +2,7 @@
 timeoutSeconds: 120
 commands:
 - command: steamcmd +quit >/tmp/steamcmd-test.log 2>&1 || grep -q "Steamcmd needs to be online to update" /tmp/steamcmd-test.log
+- command: dpkg-query -W -f='${Version}' steamcmd:i386 | grep -Fx 0~20180105-5
 filePaths:
 - /usr/local/bin/steamcmd
 - /usr/games/steamcmd

@@ -8,6 +8,10 @@ variable "VERSION" {
   default = "1.0.0"
 }
 
+variable "STEAMCMD_VERSION" {
+  default = "0~20180105-5"
+}
+
 variable "LICENSE" {
   default = "AGPL-3.0-or-later"
 }
@@ -24,6 +28,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    STEAMCMD_VERSION = "${STEAMCMD_VERSION}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
