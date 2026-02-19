@@ -23,5 +23,5 @@ export FERNET_KEY=$(cat /run/.fernetkey)
 exec  python3 /app/ldap-backend-app.py \
                 --host 0.0.0.0 --port 9000
 
-exec /app/venv/bin/python/app/nginx-ldap-auth-daemon.py \
+exec /app/venv/bin/python /app/nginx-ldap-auth-daemon.py \
                 --host 0.0.0.0 --port 8888
