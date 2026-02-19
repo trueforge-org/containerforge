@@ -9,6 +9,7 @@ variable "VERSION" {
 }
 
 variable "STEAMCMD_SHA256" {
+  // renovate: datasource=custom.steamcmd depName=steamcmd-sha256 versioning=loose
   default = "cebf0046bfd08cf45da6bc094ae47aa39ebf4155e5ede41373b579b8f1071e7c"
 }
 

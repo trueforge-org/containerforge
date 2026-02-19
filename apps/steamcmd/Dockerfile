@@ -19,6 +19,8 @@ RUN dpkg --add-architecture i386 && \
         '' \
         'export HOME=/tmp/steamcmd' \
         'mkdir -p "${HOME}"' \
+        'mkdir -p /config/steamcmd' \
+        'cd /config/steamcmd' \
         '' \
         'exec /usr/local/share/steamcmd/steamcmd.sh "$@"' \
         > /usr/local/bin/steamcmd && \

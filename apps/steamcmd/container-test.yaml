@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
 commands:
-- command: steamcmd +quit >/tmp/steamcmd-test.log 2>&1 || true; grep -q "Update complete, launching" /tmp/steamcmd-test.log
+- command: steamcmd +quit >/tmp/steamcmd-online.log 2>&1 || true; grep -q "Update complete, launching" /tmp/steamcmd-online.log
+- command: test -d /config/steamcmd
 filePaths:
 - /usr/local/bin/steamcmd
 - /usr/local/share/steamcmd/steamcmd.sh
