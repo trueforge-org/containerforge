@@ -61,3 +61,4 @@ RUN chmod +x /usr/local/bin/hytale-downloader
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml

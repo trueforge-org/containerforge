@@ -24,5 +24,6 @@ COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b1002
 
 # Switch to non-root user
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 WORKDIR /config

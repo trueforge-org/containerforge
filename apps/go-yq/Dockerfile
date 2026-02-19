@@ -15,3 +15,4 @@ RUN echo "*** Installing go-yq ***" && \
     cp -f /app/yq /usr/bin/yq
 
 USER apps
+COPY container-test.yaml /container-test.yaml

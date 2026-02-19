@@ -18,4 +18,5 @@ RUN curl -fsSL "https://github.com/jesec/flood/releases/download/v${VERSION}/flo
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

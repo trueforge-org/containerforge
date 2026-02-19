@@ -44,5 +44,6 @@ COPY --from=build --link /target/ /
 RUN install -d -o apps -g apps /config
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 WORKDIR /config

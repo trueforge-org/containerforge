@@ -27,6 +27,7 @@ RUN apt-get update && \
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
 HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${READARR__SERVER__PORT}/"

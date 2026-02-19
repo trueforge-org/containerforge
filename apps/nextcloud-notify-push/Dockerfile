@@ -20,6 +20,7 @@ RUN set -eux; \
     chmod +x /usr/local/bin/notify_push;
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 # Copy files with correct permissions
 COPY --chmod=775 . /

@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY ./root/ /
 COPY ./ /
 

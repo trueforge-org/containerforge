@@ -16,6 +16,7 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 LABEL dev.containers.features="common"
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 # Core dependencies (duplicates removed)
 RUN apt-get update && \

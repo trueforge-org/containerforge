@@ -32,6 +32,7 @@ RUN \
     /tmp/*
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY ./ /
 
 VOLUME /config

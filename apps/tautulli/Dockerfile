@@ -41,4 +41,5 @@ RUN set -eux; \
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

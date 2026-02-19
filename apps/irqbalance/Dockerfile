@@ -4,6 +4,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf29
 ARG VERSION
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends irqbalance && \

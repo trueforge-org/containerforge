@@ -29,6 +29,7 @@ RUN apt-get update && \
       /app/.next/cache/*
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /app
 
 EXPOSE 5055

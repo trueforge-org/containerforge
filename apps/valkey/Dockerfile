@@ -18,6 +18,7 @@ COPY --chmod=0755 start.sh /start.sh
 ENV VALKEY_PORT=6379
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 HEALTHCHECK CMD ["/bin/sh", "-c", "/health/ping_liveness_local.sh 2"]
 

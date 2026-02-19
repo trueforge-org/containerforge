@@ -31,6 +31,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* $HOME/.cache
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 
 VOLUME /app

@@ -42,3 +42,4 @@ RUN set -eux; \
     java -Xshare:dump;
 
 USER apps
+COPY container-test.yaml /container-test.yaml

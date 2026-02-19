@@ -5,6 +5,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:3209530ed3169bb7c62c9010745abf292a
 ARG VERSION
 ARG TARGETARCH
 USER root
+COPY container-test.yaml /container-test.yaml
 
 # environment settings
 

@@ -26,5 +26,6 @@ RUN YARN_VERSION=$(cat /YARN_VERSION.txt) && \
     rm -rf /opthold/
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 CMD [ "node" ]

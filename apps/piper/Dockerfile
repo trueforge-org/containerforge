@@ -19,6 +19,7 @@ RUN pip3 install -U --no-cache-dir \
     /tmp/*
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY ./ /
 
 VOLUME /config

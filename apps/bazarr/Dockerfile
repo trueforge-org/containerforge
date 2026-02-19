@@ -49,6 +49,7 @@ COPY . /
 COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b10025e8bde8a04a2b2b2c6072fca6821da5747f7 /usr/bin/unrar-ubuntu /usr/bin/unrar
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
 CMD [""]

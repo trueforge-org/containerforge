@@ -31,5 +31,6 @@ EXPOSE 8080
 STOPSIGNAL SIGQUIT
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 CMD ["nginx", "-c","/config/nginx.conf", "-g", "daemon off;"]

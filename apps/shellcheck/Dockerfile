@@ -16,5 +16,6 @@ RUN \
     chown -R apps:apps /app && chmod -R 755 /app
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY ./ /

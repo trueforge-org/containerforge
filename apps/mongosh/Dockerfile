@@ -33,3 +33,4 @@ RUN apt-get -qq update \
     /var/tmp/
 
 USER apps
+COPY container-test.yaml /container-test.yaml
