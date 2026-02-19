@@ -1,5 +1,5 @@
 # Stage 1: Build imaginary binary
-FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:acbb7d5055789d4e4da6343772b3ce7b6215b13f726252c4dd59f3027f8b6eb1 as go
+FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:acbb7d5055789d4e4da6343772b3ce7b6215b13f726252c4dd59f3027f8b6eb1 AS build
 
 ARG VERSION
 ARG IMAGINARY_COMMIT=b632dae8cc321452c3f85bcae79c580b1ae1ed84
@@ -34,7 +34,7 @@ RUN set -ex; \
         poppler-utils; \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=go /config/go/bin/imaginary /usr/local/bin/imaginary
+COPY --from=build /config/go/bin/imaginary /usr/local/bin/imaginary
 
 USER apps
 COPY container-test.yaml /container-test.yaml
