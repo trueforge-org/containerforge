@@ -1,7 +1,7 @@
-FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:c6b8d0c9d68887250e839827375e930f691e4fd5320edddbaf68202af6238597 AS go
+FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:b4224a2abd8322eafc4c63ea85ad1cf5afe5d7e133d4ef5ee8a5409b4a22ef2a AS go
 
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:0c2ff68fa63566e2fcbe025b58c229a612b4eba0377a0dc77b4b820a7d0c2ffd
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
 
 ARG VERSION
 ARG TARGETARCH
@@ -16,6 +16,7 @@ ENV PATH="/usr/local/go/bin:${PATH}"
 LABEL dev.containers.features="common"
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 # Core dependencies (duplicates removed)
 RUN apt-get update && \

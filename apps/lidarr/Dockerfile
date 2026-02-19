@@ -1,12 +1,12 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
 
 ENV DOTNET_EnableDiagnostics=0 \
-    LIDARR__UPDATE__BRANCH=plugins \
+    LIDARR__UPDATE__BRANCH=develop \
     LIDARR__SERVER__PORT=8686
 
 ARG FPCALC_ARCH=${TARGETARCH/arm64/arm64}
@@ -35,6 +35,7 @@ RUN add-apt-repository universe && \
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
 HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${LIDARR__SERVER__PORT}/"

@@ -1,5 +1,5 @@
 ## TODO: set version tag
-FROM ghcr.io/trueforge-org/java17:rolling@sha256:d3955a776d3cd06efa166bd199b250fb819322c945aae55d14118e9f366c68f5
+FROM ghcr.io/trueforge-org/java17:rolling@sha256:e0734874aceb1a82892cd0b81208c6ca055dde89d8bcf6452b14d617393062dd
 
 # set version label
 ARG VERSION
@@ -34,6 +34,7 @@ RUN \
 
 # add local files
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY . /
 
 

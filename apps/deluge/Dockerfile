@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:0c2ff68fa63566e2fcbe025b58c229a612b4eba0377a0dc77b4b820a7d0c2ffd
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
 ARG VERSION
 
 ENV DELUGE_BIN="deluged" \
@@ -24,5 +24,6 @@ COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b1002
 
 # Switch to non-root user
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 WORKDIR /config

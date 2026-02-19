@@ -1,7 +1,7 @@
 
 
 # Builder stage
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:0c2ff68fa63566e2fcbe025b58c229a612b4eba0377a0dc77b4b820a7d0c2ffd AS builder
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42 AS builder
 ARG VERSION
 
 USER root
@@ -20,7 +20,7 @@ RUN set -eux; \
     grep -rl 'https://theme-park.dev' . | xargs sed -i 's|https\://theme-park.dev||g'
 
 # Nginx stage
-FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:2744563dac7125fc6542c7b9b06c9ba9a88fd992271bdc01b677d0c84280db53
+FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:7fae22df32b6ddcec0913bade894dedad1753c35723f4784320624527fcf1765
 ENV NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE=1
 
 USER root
@@ -31,4 +31,5 @@ COPY --from=builder --chown=568:568 /tmp/css /usr/share/nginx/html/css/
 COPY --from=builder --chown=568:568 /tmp/resources /usr/share/nginx/html/resources/
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /usr/share/nginx/html

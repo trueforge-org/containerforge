@@ -1,5 +1,5 @@
 ## TODO: pin version tag
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:c6b8d0c9d68887250e839827375e930f691e4fd5320edddbaf68202af6238597 AS builder
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:b4224a2abd8322eafc4c63ea85ad1cf5afe5d7e133d4ef5ee8a5409b4a22ef2a AS builder
 
 ARG TARGETARCH
 ARG VERSION
@@ -28,6 +28,7 @@ FROM ghcr.io/trueforge-org/postgresql-client:rolling@sha256:e1ed0aeb4ecb455b14d1
 ARG VERSION
 ARG TARGETARCH
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /server /app/server
 COPY . /

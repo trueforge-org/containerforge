@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:rolling@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34 AS dependencies
+FROM ghcr.io/trueforge-org/node:rolling@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c AS dependencies
 
 USER root
 
@@ -26,7 +26,7 @@ RUN mkdir -p /app/src && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-FROM ghcr.io/trueforge-org/node:rolling@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34
+FROM ghcr.io/trueforge-org/node:rolling@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c
 
 ARG VERSION
 
@@ -51,6 +51,7 @@ COPY --from=dependencies  /app/src/ui/dist/ /app/ui
 COPY --chmod=0775 . /
 
 USER root
+COPY container-test.yaml /container-test.yaml
 
 ENV WORKDIR=/app \
     WUD_LOG_FORMAT=text \

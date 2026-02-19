@@ -1,7 +1,7 @@
 
 
 
-FROM docker.io/library/ubuntu:24.04@sha256:25f37267ed09741eb764578a14df49a0c0bede9755fc8fc18a51b101985b924c
+FROM docker.io/library/ubuntu:24.04@sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9
 
 ARG VERSION
 ARG TARGETARCH
@@ -120,15 +120,18 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
 # Use a safe non-root user
 # Note: nobody:nogroup does not map to the same uid:gid on every (host/share) distro!
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 # Copy unrar binary from LinuxServer image
 COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b10025e8bde8a04a2b2b2c6072fca6821da5747f7 /usr/bin/unrar-ubuntu /usr/bin/unrar
 
 #Copy root files
 COPY --chmod=0775 . /
+COPY --chmod=0775  container-test.yaml /container-test.yaml
 
 WORKDIR /config
 
+HEALTHCHECK CMD ["/healthcheck.sh"]
 
 # PID 1 with tini, handoff to entrypoint
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]

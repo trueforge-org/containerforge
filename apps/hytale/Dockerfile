@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:64c55703df3b2702a78de6743459fb8b1e65f48576832951b91e21cdc9a0c9b8
+FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:4a780fcae9779f8a333464df5c150fc2995cf160c830b2bcd2e9585b9dd62c4a
 ARG VENDOR
 ARG VERSION
 
@@ -61,3 +61,4 @@ RUN chmod +x /usr/local/bin/hytale-downloader
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml

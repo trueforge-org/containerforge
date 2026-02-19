@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:22.22@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34
+FROM ghcr.io/trueforge-org/node:22.22@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c
 
 ARG VERSION
 
@@ -29,6 +29,7 @@ RUN apt-get update && \
       /app/.next/cache/*
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /app
 
 EXPOSE 5055

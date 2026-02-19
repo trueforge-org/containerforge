@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:c6b8d0c9d68887250e839827375e930f691e4fd5320edddbaf68202af6238597 AS builder
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:b4224a2abd8322eafc4c63ea85ad1cf5afe5d7e133d4ef5ee8a5409b4a22ef2a AS builder
 
 USER root
 
@@ -17,11 +17,12 @@ RUN cd watchtower && \
   GO111MODULE=on go test ./... -v && \
   chown -R apps:apps /app && chmod -R 755 /app
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 
 ENV WATCHTOWER_LABEL_ENABLE=true
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 # copy files from other container
 COPY --from=builder /app/watchtower/watchtower /app/watchtower

@@ -45,12 +45,12 @@ RUN \
     /tmp/diskover.tar.gz -C \
     /app/ --strip-components=1 && \
   cd /app/diskover && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
     -r requirements.txt && \
   echo "**** cleanup ****" && \
   apt-get purge -y --auto-remove \

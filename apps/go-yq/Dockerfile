@@ -1,5 +1,5 @@
 ## TODO: also make go-yq container
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:0c2ff68fa63566e2fcbe025b58c229a612b4eba0377a0dc77b4b820a7d0c2ffd
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
 
 # set version label
 ARG VERSION
@@ -15,3 +15,4 @@ RUN echo "*** Installing go-yq ***" && \
     cp -f /app/yq /usr/bin/yq
 
 USER apps
+COPY container-test.yaml /container-test.yaml

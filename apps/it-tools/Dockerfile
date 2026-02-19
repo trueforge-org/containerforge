@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/node:22.22@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34 AS builder
+FROM ghcr.io/trueforge-org/node:22.22@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c AS builder
 ARG VERSION
 WORKDIR /tmp
 ENV HOME=/tmp
@@ -12,7 +12,7 @@ RUN npm install -g corepack@latest \
     && pnpm install --prefer-offline \
     && pnpm build
 
-FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:2744563dac7125fc6542c7b9b06c9ba9a88fd992271bdc01b677d0c84280db53
+FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:7fae22df32b6ddcec0913bade894dedad1753c35723f4784320624527fcf1765
 USER root
 COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html
 
@@ -20,4 +20,5 @@ COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html
 COPY --chmod=755 ./ /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /usr/share/nginx/html

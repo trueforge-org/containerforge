@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 ARG TARGETARCH
 ARG VERSION
 
@@ -19,8 +19,14 @@ RUN \
     && mv -t /app/bin/ /tmp/emby/opt/emby-server/* \
     && if [ "${TARGETARCH}" = "amd64" ]; then \
         patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/system/EmbyServer; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/bin/ffmpeg; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/bin/ffdetect; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-x86-64.so.2 /app/bin/bin/ffprobe; \
     elif [ "${TARGETARCH}" = "arm64" ]; then \
         patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/system/EmbyServer; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/bin/ffmpeg; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/bin/ffdetect; \
+        patchelf --set-interpreter /app/bin/lib/ld-linux-aarch64.so.1 /app/bin/bin/ffprobe; \
     else \
         echo "Error: Unsupported architecture: ${TARGETARCH}"; exit 1; \
     fi \
@@ -33,4 +39,5 @@ RUN \
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

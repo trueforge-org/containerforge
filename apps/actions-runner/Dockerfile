@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/devcontainer:3.0.2@sha256:b64d406b9dd80dd4fe6e228a0bafe41a7b1d2da9c14c6051b035a1c672358603
+FROM ghcr.io/trueforge-org/devcontainer:3.0.2@sha256:f180323c710192928c0c5dc85cf59ba4763e0d53c4892938f7b07e4f849309db
 
 USER root
 
@@ -22,9 +22,9 @@ RUN groupadd docker --gid 123 \
     && usermod -aG docker apps \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
     && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers \
-    mkdir -p /home/runner /config/helm /go /config/go /tmp/go \
-    chown -R apps:docker /home/runner /config/helm /go /tmp/go /config/go \
-    chmod -R 777 /home/runner /config/helm /go /tmp/go /config/go
+    mkdir -p /home/runner /config /config/helm /go /config/go /tmp/go \
+    chown -R apps:docker /home/runner /config /config/helm /go /tmp/go /config/go \
+    chmod -R 777 /home/runner /config /config/helm /go /tmp/go /config/go
 
 WORKDIR /home/runner
 
@@ -94,3 +94,4 @@ RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-
     && chown -R apps:docker /home/runner/k8s
 
 USER apps
+COPY container-test.yaml /container-test.yaml

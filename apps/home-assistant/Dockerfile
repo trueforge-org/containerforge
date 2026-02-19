@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:0c2ff68fa63566e2fcbe025b58c229a612b4eba0377a0dc77b4b820a7d0c2ffd
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
 ARG TARGETARCH
 ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
 ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
@@ -73,6 +73,7 @@ RUN pip3 install --no-cache-dir psycopg2; \
     rm -rf /root/.cache /tmp/*
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 COPY --chmod=0775 . /
 
 WORKDIR /config

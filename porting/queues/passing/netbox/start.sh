@@ -57,7 +57,7 @@ exec /usr/sbin/uwsgi uwsgi.ini
 
 cd /app/netbox/netbox || exit 1
 
-python3 ./manage.py migrate
+/app/venv/bin/python ./manage.py migrate
 
 if [[ -n "$SUPERUSER_EMAIL" ]] && [[ -n "$SUPERUSER_PASSWORD" ]]; then
 cat << EOF |  python3 /app/netbox/netbox/manage.py shell

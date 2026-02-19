@@ -18,13 +18,13 @@ RUN \
         python3-venv && \
     echo "**** install runtime packages ****" && \
     echo "**** install app ****" && \
-    python3 -m venv /config/venv && \
-    /config/venv/bin/pip install -U --no-cache-dir \
+    python3 -m venv /app/venv && \
+    /app/venv/bin/pip install -U --no-cache-dir \
         pip \
         wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         limnoria=="${VERSION}" && \
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove \

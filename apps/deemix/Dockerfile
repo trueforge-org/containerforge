@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/node:22.22.0@sha256:c33b4f5d240fa3273f3a5181a59d9c69e0f9e00124306fecfac68bd243ad8c34 as builder
+FROM ghcr.io/trueforge-org/node:22.22.0@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -20,7 +20,7 @@ RUN yarn install-all
 
 RUN yarn dist-server
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -29,6 +29,7 @@ USER root
 WORKDIR /app
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /app/deemix-gui/dist/deemix-server-linux /app/deemix-server
 

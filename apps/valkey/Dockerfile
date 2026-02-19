@@ -1,5 +1,5 @@
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 
 ARG PACKAGE_VERSION
 
@@ -18,6 +18,7 @@ COPY --chmod=0755 start.sh /start.sh
 ENV VALKEY_PORT=6379
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 HEALTHCHECK CMD ["/bin/sh", "-c", "/health/ping_liveness_local.sh 2"]
 

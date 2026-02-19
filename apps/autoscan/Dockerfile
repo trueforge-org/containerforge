@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:c6b8d0c9d68887250e839827375e930f691e4fd5320edddbaf68202af6238597 as builder
+FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:b4224a2abd8322eafc4c63ea85ad1cf5afe5d7e133d4ef5ee8a5409b4a22ef2a as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -14,13 +14,14 @@ RUN mkdir /autoscan && \
     go build -o autoscan ./cmd/autoscan && \
     chmod 755 "/autoscan/autoscan"
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 
 EXPOSE 3030
 ARG IMAGE_STATS
 ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="3030/tcp,3030/udp"
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 
 COPY . /
 

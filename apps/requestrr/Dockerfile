@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -24,4 +24,5 @@ COPY . /
 EXPOSE 4545
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

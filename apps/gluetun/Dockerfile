@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:rolling@sha256:c6b8d0c9d68887250e839827375e930f691e4fd5320edddbaf68202af6238597 AS builder
+FROM ghcr.io/trueforge-org/golang:rolling@sha256:b4224a2abd8322eafc4c63ea85ad1cf5afe5d7e133d4ef5ee8a5409b4a22ef2a AS builder
 
 ARG VERSION
 
@@ -7,7 +7,7 @@ RUN git clone --depth 1 --branch "${VERSION}" https://github.com/qdm12/gluetun.g
     cd /src/gluetun && \
     go build -trimpath -ldflags="-s -w" -o /usr/local/bin/gluetun cmd/gluetun/main.go
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e96499687b5d1319878f006ab22dfdfcbfb7c059fc2d4538685636e026b71e87
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
 
 USER root
 RUN apt-get update && \
@@ -26,4 +26,5 @@ EXPOSE 8000/tcp 8888/tcp 8388/tcp 8388/udp
 HEALTHCHECK --interval=5s --timeout=5s --start-period=10s --retries=3 CMD ["/usr/local/bin/gluetun", "healthcheck"]
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 ENTRYPOINT ["/usr/local/bin/gluetun"]

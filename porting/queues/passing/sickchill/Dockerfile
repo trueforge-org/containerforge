@@ -24,12 +24,12 @@ RUN \
     libmediainfo0v5 \
     libxslt1.1 && \
   echo "**** install sickchill ****" && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     setuptools \
     wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
     certifi \
     sickchill=="${VERSION}" && \
   echo "**** clean up ****" && \

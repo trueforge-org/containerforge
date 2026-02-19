@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:0c2ff68fa63566e2fcbe025b58c229a612b4eba0377a0dc77b4b820a7d0c2ffd
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
 ARG TARGETARCH
 ARG QBARCH=${TARGETARCH/arm64/aarch64}
 ARG QBARCH=${QBARCH/amd64/x86_64}
@@ -41,4 +41,5 @@ COPY . /
 COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b10025e8bde8a04a2b2b2c6072fca6821da5747f7 /usr/bin/unrar-ubuntu /usr/bin/unrar
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:e729ea1407f3a59e9bf4a9a810b88b61c244236cf229d87551dd7235bbc63c9b
+FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:6b3e1bd1015409c669b4be72fec26bace52b313cc243562438d0d1ff51ce73b7
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -16,4 +16,5 @@ RUN curl -fsSL "https://github.com/kiranshila/Doplarr/releases/download/v${VERSI
 COPY . /
 
 USER apps
+COPY container-test.yaml /container-test.yaml
 WORKDIR /config

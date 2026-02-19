@@ -18,7 +18,7 @@ This container remains in `/porting/post-processed` for now.
 ## AMD64 build check (2026-02-16 rerun)
 - Command: `docker build --progress=plain --platform linux/amd64 -t porting-feed2toot:amd64 .`
 - Result: FAIL
-- Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install feed2toot ****\" &&   python3 -m venv /config/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/     feed2toot==\"${VERSION}\" &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 1
+- Reason: ERROR: failed to build: failed to solve: process "/bin/bash -o pipefail -c echo \"**** install feed2toot ****\" &&   python3 -m venv /app/venv &&   pip install -U --no-cache-dir     pip     wheel &&   pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/     feed2toot==\"${VERSION}\" &&   echo \"**** cleanup ****\" &&   rm -rf     /tmp/*     $HOME/.cache" did not complete successfully: exit code: 1
 - Full log: `amd64-build.log`
 
 ## AMD64 build check (2026-02-17 large batch + base-policy pass)

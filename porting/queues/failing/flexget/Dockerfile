@@ -11,7 +11,7 @@ USER root
 ENV HOME="/config" \
   PYTHONIOENCODING=utf-8 \
   TMPDIR=/run/flexget-temp \
-  UV_PROJECT_ENVIRONMENT=/config/venv \
+  UV_PROJECT_ENVIRONMENT=/app/venv \
   UV_COMPILE_BYTECODE=1 \
   UV_LINK_MODE=copy
 
@@ -34,7 +34,7 @@ RUN \
         /tmp/flexget.tar.gz -C \
         /app/flexget --strip-components=1 && \
     cd /app/flexget && \
-    uv venv /config/venv && \
+    uv venv /app/venv && \
     uv run scripts/bundle_webui.py && \
     uv sync --frozen --no-dev --no-cache --group=all && \
     uv pip install pip && \
