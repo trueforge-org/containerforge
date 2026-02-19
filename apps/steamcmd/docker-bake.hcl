@@ -8,8 +8,8 @@ variable "VERSION" {
   default = "1.0.0"
 }
 
-variable "STEAMCMD_VERSION" {
-  default = "0~20180105-5"
+variable "STEAMCMD_SHA256" {
+  default = "cebf0046bfd08cf45da6bc094ae47aa39ebf4155e5ede41373b579b8f1071e7c"
 }
 
 variable "LICENSE" {
@@ -28,7 +28,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
-    STEAMCMD_VERSION = "${STEAMCMD_VERSION}"
+    STEAMCMD_SHA256 = "${STEAMCMD_SHA256}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
