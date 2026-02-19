@@ -34,8 +34,9 @@ RUN \
   cd /app/www/public && \
   python3 -m venv /app/venv && \
   /app/venv/bin/pip install -U --no-cache-dir pip wheel && \
-  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
+  /app/venv/bin/pip install -U --no-cache-dir -r requirements.txt && \
+  /app/venv/bin/pip install -U --no-cache-dir mysqlclient && \
+  python3 -c "from pathlib import Path; p=Path('/app/venv/lib/python3.13/site-packages/dbsettings/group.py'); t=p.read_text(); p.write_text(t.replace('for attribute_name, attr in attrs.items():\\n', 'for attribute_name, attr in attrs.items():\\n            if attribute_name.startswith(\\\"__\\\") and attribute_name.endswith(\\\"__\\\"):\\n                continue\\n', 1))" && \
   ln -s /config/data /app/www/public/data && \
   ln -s /config/media /app/www/public/media && \
   echo "**** cleanup ****" && \

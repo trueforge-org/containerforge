@@ -28,6 +28,6 @@ export \
     SECRET_KEY="${SECRET_KEY:-$(cat /config/.secretkey)}"
 
 cd /app/www/public
-exec /app/venv/bin/gunicorn babybuddy.wsgi -b 127.0.0.1:3000 --log-level=info \
+exec /app/venv/bin/gunicorn babybuddy.wsgi -b 0.0.0.0:8000 --log-level=info \
     --worker-tmp-dir=/dev/shm --log-file=- \
     --workers=2 --threads=4 --worker-class=gthread

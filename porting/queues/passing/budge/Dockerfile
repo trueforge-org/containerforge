@@ -43,9 +43,6 @@ RUN \
   npm install && \
   npm run build && \
   npm prune --omit=dev && \
-  echo "**** overlay-fs bug workaround ****" && \
-  mv /app/www/public/frontend/node_modules /app/www/public/frontend/node_modules-tmp && \
-  mv /app/www/public/backend/node_modules /app/www/public/backend/node_modules-tmp && \
   echo "**** cleanup ****" && \
   npm cache clean --force && \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
