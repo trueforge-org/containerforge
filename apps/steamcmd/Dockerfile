@@ -19,21 +19,12 @@ RUN dpkg --add-architecture i386 && \
         '#!/usr/bin/env bash' \
         'set -euo pipefail' \
         '' \
-        'export HOME=/config' \
-        'export XDG_DATA_HOME=/config' \
-        'mkdir -p /config/steamcmd' \
-        'if [ ! -f /config/Steam/steamcmd/steamcmd.sh ]; then' \
-        '    mkdir -p /config/Steam/steamcmd/linux32' \
-        '    cp /usr/lib/games/steam/steamcmd.sh /config/Steam/steamcmd/' \
-        '    cp /usr/lib/games/steam/steamcmd /config/Steam/steamcmd/linux32/' \
-        'fi' \
-        'cd /config/steamcmd' \
-        '' \
-        'exec /config/Steam/steamcmd/steamcmd.sh "$@"' \
+        'exec /start.sh "$@"' \
         > /usr/local/bin/steamcmd && \
     chmod 0755 /usr/local/bin/steamcmd && \
     chown -R apps:apps /usr/local/share/steamcmd /usr/local/bin/steamcmd && \
     rm -rf /var/lib/apt/lists/*
 
+COPY --chmod=0755 start.sh /start.sh
 USER apps
 COPY container-test.yaml /container-test.yaml
