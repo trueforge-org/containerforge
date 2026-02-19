@@ -53,9 +53,13 @@ RUN \
     KEPUBIFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/pgaskin/kepubify/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
+  case "${TARGETARCH}" in \
+    arm64) KEPUBIFY_ARCH="arm64" ;; \
+    *) KEPUBIFY_ARCH="64bit" ;; \
+  esac; \
   curl -o \
     /usr/bin/kepubify -L \
-    https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit && \
+    https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-${KEPUBIFY_ARCH} && \
   rm -rf /etc/ImageMagick-6/policy.xml && \
   ln -s /defaults/policy.xml /etc/ImageMagick-6/policy.xml && \
   echo "**** cleanup ****" && \
