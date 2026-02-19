@@ -126,9 +126,11 @@ COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b1002
 
 #Copy root files
 COPY --chmod=0775 . /
+COPY --chmod=0775  container-test.yaml /container-test.yaml
 
 WORKDIR /config
 
+HEALTHCHECK CMD ["/healthcheck.sh"]
 
 # PID 1 with tini, handoff to entrypoint
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
