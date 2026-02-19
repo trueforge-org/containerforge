@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
+commands:
+- command: touch /config/testfile
+- command: mkdir -p /config/somedir && touch /config/somedir/somefile
 filePaths:
 - /usr/local/bin/yq
 - /bin/sh
