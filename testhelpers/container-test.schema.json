@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://trueforge-org.github.io/containerforge/container-test.schema.json",
   "title": "Container test configuration",
-  "description": "Schema for apps/*/container-test.yaml used by container test tooling. Define one or more check groups (http, tcp, commands, filePaths) for a container image.",
+  "description": "Schema for apps/*/container-test.yaml used by container test tooling. Define one or more check groups (http, tcp, commands, runtimeCommands, filePaths) for a container image.",
   "examples": [
     {
       "timeoutSeconds": 180,
@@ -100,6 +100,13 @@
         "$ref": "#/$defs/commandTestConfig"
       }
     },
+    "runtimeCommands": {
+      "type": "array",
+      "description": "Runtime command checks executed as `sh -c <command>`. Uses the same structure and behavior as commands.",
+      "items": {
+        "$ref": "#/$defs/commandTestConfig"
+      }
+    },
     "filePaths": {
       "type": "array",
       "description": "File existence checks. Each string is verified with `test -f` inside the container.",
@@ -134,6 +141,11 @@
     {
       "required": [
         "commands"
+      ]
+    },
+    {
+      "required": [
+        "runtimeCommands"
       ]
     },
     {
