@@ -24,4 +24,5 @@ if [[ ! -f /config/owntone.conf ]]; then
         /config/owntone.conf
 fi
 
-exec /usr/sbin/owntone -f -c /config/owntone.conf -P /config/owntone.pid
+exec /usr/sbin/owntone -f -c /config/owntone.conf -P /config/owntone.pid \
+    --mdns-no-rsp --mdns-no-daap --mdns-no-cname --mdns-no-web
