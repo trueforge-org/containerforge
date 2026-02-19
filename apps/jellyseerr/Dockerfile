@@ -1,2 +1,2 @@
-FROM ghcr.io/trueforge-org/seerr:2.7.3@sha256:4761d184b11e69bdc58f2dbffab8f57a36bab3ff3a454b5089ca3b590146812a
+FROM ghcr.io/trueforge-org/seerr:2.7.3@sha256:8dd31c70094db43d967a8921c0ce663df864a83980f840ef02b674acda55f00d
 COPY container-test.yaml /container-test.yaml
