@@ -65,7 +65,7 @@ check_command() {
         return 1
     fi
 
-    if [[ "${match_content}" == "true" ]] && [[ "${output}" != *"${expected_content}"* ]]; then
+    if [[ "${match_content,,}" == "true" ]] && [[ "${output}" != *"${expected_content}"* ]]; then
         return 1
     fi
 
