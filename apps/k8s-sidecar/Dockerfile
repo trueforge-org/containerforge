@@ -37,7 +37,6 @@ WORKDIR /app
 
 # Copy built app from builder
 COPY --from=builder /app /app
-COPY --from=builder /app/venv /app/venv
 
 ENV PATH="/app/venv/bin:$PATH"
 

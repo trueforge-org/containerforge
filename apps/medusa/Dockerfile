@@ -31,9 +31,9 @@ RUN \
         /app/medusa --strip-components=1 && \
     cd /app/medusa && \
     python3 -m venv /app/venv && \
-    pip install -U --no-cache-dir \
+    /app/venv/bin/pip install -U --no-cache-dir \
         setuptools && \
-    pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
     echo "**** clean up ****" && \
     apt-get purge -y --auto-remove \
         build-essential \
@@ -47,6 +47,8 @@ RUN \
 USER apps
 COPY container-test.yaml /container-test.yaml
 COPY . /
+
+ENV PATH="/app/venv/bin:$PATH"
 
 
 
