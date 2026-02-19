@@ -1,0 +1,51 @@
+# Sweep Status
+
+- Timestamp (UTC): 2026-02-19T13:52:09Z
+- Build: fail
+- Forgetool test: skip
+- Run status: not running
+- Timeout for build/test: 120 seconds
+
+## Last build log tail
+```
+#7 65.84 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d921bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 66.85 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d9216d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 68.85 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d921450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 72.85 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d9207d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 73.00 Collecting cryptography (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 14))
+#7 73.02   Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+#7 73.02 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1df90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 73.53 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1dd10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 74.53 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1f250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 76.53 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1f390>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 80.53 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d9207d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 80.55 Collecting feedparser (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 15))
+#7 80.57   Downloading feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
+#7 80.57 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1f250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 81.07 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1dd10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 82.08 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1df90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 84.08 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d9216d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 88.08 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920910>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 88.10 Collecting python-dateutil (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 16))
+#7 88.12   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#7 88.12 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d921bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 88.63 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d922210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 89.63 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d921d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 91.63 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 95.63 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 95.71 Collecting ddate (from -r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 17))
+#7 95.78   Downloading ddate-0.1.2-py2.py3-none-any.whl.metadata (3.9 kB)
+#7 95.79 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1f110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 96.29 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1e490>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 97.29 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 99.29 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 103.3 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d921d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 103.4 Collecting cffi>=2.0.0 (from cryptography->-r https://raw.githubusercontent.com/ProgVal/Limnoria/master/requirements.txt (line 14))
+#7 103.4   Downloading cffi-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#7 103.4 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8db1f250>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 103.9 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d921d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 104.9 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920690>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 106.9 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fbb8d920050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
+#7 CANCELED
+ERROR: failed to solve: Canceled: context canceled
+```
