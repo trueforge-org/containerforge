@@ -33,6 +33,9 @@ RUN set -eux; \
 
 # Copy local files
 COPY . /
+COPY --chmod=755 healthcheck.sh /healthcheck.sh
+COPY container-test.yaml /container-test.yaml
 
 USER apps
 WORKDIR /config
+HEALTHCHECK CMD ["/healthcheck.sh"]
