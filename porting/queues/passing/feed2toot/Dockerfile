@@ -11,11 +11,11 @@ ENV PYTHONIOENCODING=utf-8 \
     PYTHONUNBUFFERED=1
 
 RUN echo "**** install feed2toot ****" && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
     feed2toot=="${VERSION}" && \
   echo "**** cleanup ****" && \
   rm -rf \

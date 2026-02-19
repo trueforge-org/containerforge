@@ -38,18 +38,18 @@ RUN \
         /app/healthchecks/ --strip-components=1 && \
     echo "**** install pip packages ****" && \
     cd /app/healthchecks && \
-    python3 -m venv /config/venv && \
-    /config/venv/bin/pip install -U --no-cache-dir \
+    python3 -m venv /app/venv && \
+    /app/venv/bin/pip install -U --no-cache-dir \
         pip \
         wheel && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
         apprise \
         minio \
         mysqlclient && \
-    /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
     cd /app/healthchecks && \
-    DEBUG=False /config/venv/bin/python ./manage.py collectstatic --noinput && \
-    DEBUG=False /config/venv/bin/python ./manage.py compress && \
+    DEBUG=False /app/venv/bin/python ./manage.py collectstatic --noinput && \
+    DEBUG=False /app/venv/bin/python ./manage.py compress && \
     echo "**** cleanup ****" && \
     apt-get purge -y --auto-remove \
         build-essential \

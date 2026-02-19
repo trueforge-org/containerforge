@@ -37,12 +37,12 @@ RUN \
     /app/netbox/ --strip-components=1 && \
     echo "**** install pip packages ****" && \
   cd /app/netbox && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /config/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
-  /config/venv/bin/pip install --no-cache-dir django-auth-ldap && \
+  /app/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
+  /app/venv/bin/pip install --no-cache-dir django-auth-ldap && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

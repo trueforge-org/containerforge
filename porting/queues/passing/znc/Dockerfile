@@ -28,7 +28,7 @@ RUN \
     python3-dev \
     swig \
     tcl-dev && \
-  python3 -m venv /config/venv && \
+  python3 -m venv /app/venv && \
   pip install -U --no-cache-dir pip setuptools && \
   pip install -U --no-cache-dir cmake
 
