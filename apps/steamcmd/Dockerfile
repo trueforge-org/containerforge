@@ -17,12 +17,10 @@ RUN dpkg --add-architecture i386 && \
         '#!/usr/bin/env bash' \
         'set -euo pipefail' \
         '' \
-        'if [ ! -f /config/steamcmd/steamcmd.sh ]; then' \
-        '    mkdir -p /config/steamcmd' \
-        '    cp -a /usr/local/share/steamcmd/. /config/steamcmd/' \
-        'fi' \
+        'export HOME=/tmp/steamcmd' \
+        'mkdir -p "${HOME}"' \
         '' \
-        'exec /config/steamcmd/steamcmd.sh "$@"' \
+        'exec /usr/local/share/steamcmd/steamcmd.sh "$@"' \
         > /usr/local/bin/steamcmd && \
     chmod 0755 /usr/local/bin/steamcmd && \
     chown -R apps:apps /usr/local/share/steamcmd /usr/local/bin/steamcmd && \
