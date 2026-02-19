@@ -5,7 +5,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$(mktemp -d /tmp/healthcheck-negative-XXXXXX)"
 
 cleanup() {
-    docker rm -f hc-neg-tcp hc-neg-http hc-neg-commands hc-neg-filepaths >/dev/null 2>&1 || true
+    docker rm -f hc-neg-tcp hc-neg-http hc-neg-commands hc-neg-runtimecommands hc-neg-filepaths >/dev/null 2>&1 || true
     rm -rf "${TMP_DIR}"
 }
 trap cleanup EXIT
@@ -68,6 +68,12 @@ commands:
     expectedExitCode: 0
     expectedContent: definitely-not-in-output
     matchContent: true"
+build_case "runtimecommands" "timeoutSeconds: 120
+runtimeCommands:
+  - command: echo runtime-healthy
+    expectedExitCode: 0
+    expectedContent: definitely-not-in-runtime-output
+    matchContent: true"
 build_case "filepaths" "timeoutSeconds: 120
 filePaths:
   - /not/real/file"
@@ -75,6 +81,7 @@ filePaths:
 assert_unhealthy "tcp" "hc-neg-tcp"
 assert_unhealthy "http" "hc-neg-http"
 assert_unhealthy "commands" "hc-neg-commands"
+assert_unhealthy "runtimecommands" "hc-neg-runtimecommands"
 assert_unhealthy "filepaths" "hc-neg-filepaths"
 
 echo "All negative healthcheck cases became unhealthy as expected."
