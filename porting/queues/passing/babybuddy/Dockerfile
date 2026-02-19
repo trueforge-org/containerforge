@@ -32,10 +32,12 @@ RUN \
   mkdir -p /app/www/public && \
   tar xf /tmp/babybuddy.tar.gz -C /app/www/public --strip-components=1 && \
   cd /app/www/public && \
-  python3 -m venv /config/venv && \
-  /config/venv/bin/pip install -U --no-cache-dir pip wheel && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-  /config/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
+  python3 -m venv /app/venv && \
+  /app/venv/bin/pip install -U --no-cache-dir pip wheel && \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+  /app/venv/bin/pip install -U --no-cache-dir django-dbsettings==1.4.0 && \
+  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
+  rm -rf /app/www/public/data /app/www/public/media && \
   ln -s /config/data /app/www/public/data && \
   ln -s /config/media /app/www/public/media && \
   echo "**** cleanup ****" && \

@@ -1,0 +1,138 @@
+Welcome to a TrueForge ContainerForge container!
+
+If you are running into any issues, please file a support request on discord.
+
+Container Info:
+  * Running as: apps (UID: 568, GID: 568)
+  * Additional Groups: apps (GIDs: 568)
+  * Number of CPUs available: 4
+  * Memory limits (if cgroup available):
+        Total: 15993.6 MB
+
+Important Directories:
+  * /customscripts exists: no
+  * /customoverlay exists: no
+
+Useful Links:
+  * Repository: https://github.com/trueforge-org/containerforge
+  * Docs: https://trueforge.org
+  * Discord: https://discord.gg/tVsPTHWTtr
+  * Bugs or feature requests: open a GH issue
+  * Questions: discuss in Discord
+[entrypoint] No files found in /docker-entrypoint.d/, skipping
+[Entrypoint] Checking Device permissions for video devices...
+**** video permissions are good ****
+[Entrypoint] Checking Device permissions for sound devices...
+**** sound permissions are good ****
+[entrypoint] Info: Executing /start.sh
+**** No secret key found, generating one ****
+Operations to perform:
+  Apply all migrations: admin, auth, authtoken, axes, babybuddy, contenttypes, core, dbsettings, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying authtoken.0001_initial... OK
+  Applying authtoken.0002_auto_20160226_1747... OK
+  Applying authtoken.0003_tokenproxy... OK
+  Applying authtoken.0004_alter_tokenproxy_options... OK
+  Applying axes.0001_initial... OK
+  Applying axes.0002_auto_20151217_2044... OK
+  Applying axes.0003_auto_20160322_0929... OK
+  Applying axes.0004_auto_20181024_1538... OK
+  Applying axes.0005_remove_accessattempt_trusted... OK
+  Applying axes.0006_remove_accesslog_trusted... OK
+  Applying axes.0007_alter_accessattempt_unique_together... OK
+  Applying axes.0008_accessfailurelog... OK
+  Applying axes.0009_add_session_hash... OK
+  Applying babybuddy.0001_initial... OK
+  Applying babybuddy.0002_add_settings... OK
+  Applying babybuddy.0003_add_refresh_help_text... OK
+  Applying babybuddy.0004_settings_language... OK
+  Applying babybuddy.0005_auto_20190502_1701... OK
+  Applying babybuddy.0006_auto_20190502_1744... OK
+  Applying babybuddy.0007_auto_20190607_1422... OK
+  Applying babybuddy.0008_auto_20200120_0622... OK
+  Applying babybuddy.0009_settings_timezone... OK
+  Applying babybuddy.0010_auto_20200609_0649... OK
+  Applying babybuddy.0011_auto_20200813_0238... OK
+  Applying babybuddy.0012_auto_20201024_1847... OK
+  Applying babybuddy.0013_auto_20210411_1241... OK
+  Applying babybuddy.0014_settings_hide_empty... OK
+  Applying babybuddy.0015_alter_settings_timezone... OK
+  Applying babybuddy.0016_alter_settings_timezone... OK
+  Applying babybuddy.0017_settings_hide_age... OK
+  Applying babybuddy.0018_auto_20211017_2136... OK
+  Applying babybuddy.0019_alter_settings_timezone... OK
+  Applying babybuddy.0020_update_language_en_to_en_us... OK
+  Applying babybuddy.0021_alter_settings_language... OK
+  Applying babybuddy.0022_alter_settings_language... OK
+  Applying babybuddy.0023_alter_settings_timezone... OK
+  Applying babybuddy.0025_auto_20221023_0821... OK
+  Applying babybuddy.0026_alter_settings_timezone... OK
+  Applying babybuddy.0027_remove_standard_group... OK
+  Applying babybuddy.0028_alter_settings_language_alter_settings_timezone... OK
+  Applying babybuddy.0029_create_cache_table... OK
+  Applying babybuddy.0030_alter_settings_language_alter_settings_timezone... OK
+  Applying babybuddy.0031_alter_settings_timezone... OK
+  Applying babybuddy.0032_settings_pagination_count... OK
+  Applying babybuddy.0033_alter_settings_dashboard_refresh_rate_and_more... OK
+  Applying babybuddy.0034_alter_settings_language... OK
+  Applying babybuddy.0035_alter_settings_language... OK
+  Applying dbsettings.0001_initial... OK
+  Applying core.0001_initial... OK
+  Applying core.0002_auto_20171028_1257... OK
+  Applying core.0003_weight... OK
+  Applying core.0004_child_picture... OK
+  Applying core.0005_auto_20190416_2048... OK
+  Applying core.0006_auto_20190502_1701... OK
+  Applying core.0007_temperature... OK
+  Applying core.0008_auto_20190607_1422... OK
+  Applying core.0009_diaperchange_amount... OK
+  Applying core.0010_timer_child... OK
+  Applying core.0011_auto_20200214_1939... OK
+  Applying core.0012_auto_20200813_0238... OK
+  Applying core.0013_auto_20210415_0528... OK
+  Applying core.0014_alter_child_slug... OK
+  Applying core.0015_add_nap_field_for_sleep... OK
+  Applying core.0016_alter_sleep_napping... OK
+  Applying core.0017_alter_child_last_name... OK
+  Applying core.0018_bmi_headcircumference_height... OK
+  Applying core.0019_tag_tagged_note_tags... OK
+  Applying core.0020_bmi_tags_diaperchange_tags_feeding_tags_and_more... OK
+  Applying core.0021_pumping... OK
+  Applying core.0022_alter_default_date_and_time... OK
+  Applying core.0023_alter_tag_options_alter_bmi_tags_and_more... OK
+  Applying core.0024_alter_tag_slug... OK
+  Applying core.0025_pumping_tags... OK
+  Applying core.0026_alter_feeding_end_alter_feeding_start_and_more... OK
+  Applying core.0027_alter_timer_options_remove_timer_duration_and_more... OK
+  Applying core.0028_alter_sleep_options_remove_sleep_napping_sleep_nap... OK
+  Applying core.0029_alter_pumping_options_remove_pumping_time_and_more... OK
+  Applying core.0030_weightpercentile_weightpercentile_unique_age_sex... OK
+  Applying core.0031_note_image... OK
+  Applying core.0032_child_birth_time... OK
+  Applying core.0033_heightpercentile_and_more... OK
+  Applying core.0034_alter_tag_options... OK
+  Applying core.0035_recalculate_durations... OK
+  Applying sessions.0001_initial... OK
+Cache table 'cache_default' already exists.
+[2026-02-19 05:23:33 +0000] [7] [INFO] Starting gunicorn 23.0.0
+[2026-02-19 05:23:33 +0000] [7] [INFO] Listening at: http://0.0.0.0:8000 (7)
+[2026-02-19 05:23:33 +0000] [7] [INFO] Using worker: gthread
+[2026-02-19 05:23:33 +0000] [33] [INFO] Booting worker with pid: 33
+[2026-02-19 05:23:33 +0000] [34] [INFO] Booting worker with pid: 34
