@@ -14,11 +14,23 @@ fi
 
 cd /config/steamcmd
 
+STEAM_LOGIN_USER="${STEAM_USERNAME:-${STEAM_USER:-anonymous}}"
+STEAM_LOGIN_PASSWORD="${STEAM_PASSWORD:-}"
+
+LOGIN_ARGS=(+login anonymous)
+if [ "${STEAM_LOGIN_USER}" != "anonymous" ]; then
+    LOGIN_ARGS=(+login "${STEAM_LOGIN_USER}" "${STEAM_LOGIN_PASSWORD}")
+fi
+
+if [ "${STEAMCMD_PRE_UPDATE:-true}" = "true" ]; then
+    /config/Steam/steamcmd/steamcmd.sh "${LOGIN_ARGS[@]}" +quit
+fi
+
 if [ -n "${STEAM_APP_IDS:-}" ] && [ "${STEAMCMD_SKIP_APP_UPDATE:-false}" != "true" ]; then
     STEAM_INSTALL_DIR="${STEAM_INSTALL_DIR:-/config/steamapps}"
     mkdir -p "${STEAM_INSTALL_DIR}"
 
-    CMD_ARGS=(+login anonymous +force_install_dir "${STEAM_INSTALL_DIR}")
+    CMD_ARGS=("${LOGIN_ARGS[@]}" +force_install_dir "${STEAM_INSTALL_DIR}")
 
     IFS=',' read -r -a app_ids <<< "${STEAM_APP_IDS}"
     for app_id in "${app_ids[@]}"; do
