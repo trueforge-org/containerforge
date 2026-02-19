@@ -33,17 +33,15 @@ check_http() {
     local port="$1"
     local path="$2"
     local status_code="$3"
-    local status_line
     local received_status
+    local curl_exit
 
-    exec 3<>"/dev/tcp/127.0.0.1/${port}"
-    printf 'GET %s HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' "$path" >&3
-    IFS= read -r status_line <&3
-    exec 3>&-
-    exec 3<&-
+    set +e
+    received_status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:${port}${path}")"
+    curl_exit=$?
+    set -e
 
-    received_status="$(awk '{print $2}' <<<"${status_line}")"
-    if [[ "${received_status}" != "${status_code}" ]]; then
+    if [[ "${curl_exit}" -ne 0 ]] || [[ "${received_status}" != "${status_code}" ]]; then
         return 1
     fi
 
