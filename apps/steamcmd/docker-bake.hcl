@@ -5,12 +5,12 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "1.0.0"
+  // renovate: datasource=custom.steamcmd depName=steamcmd versioning=loose
+  default = "0~20180105-5"
 }
 
-variable "STEAMCMD_SHA256" {
-  // renovate: datasource=custom.steamcmd depName=steamcmd-sha256 versioning=loose
-  default = "cebf0046bfd08cf45da6bc094ae47aa39ebf4155e5ede41373b579b8f1071e7c"
+variable "IMAGE_VERSION" {
+  default = "1.0.0"
 }
 
 variable "LICENSE" {
@@ -29,7 +29,6 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
-    STEAMCMD_SHA256 = "${STEAMCMD_SHA256}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
@@ -40,7 +39,7 @@ target "image" {
 target "image-local" {
   inherits = ["image"]
   output = ["type=docker"]
-  tags = ["${APP}:${VERSION}"]
+  tags = ["${APP}:${IMAGE_VERSION}"]
 }
 
 target "image-all" {

@@ -2,6 +2,7 @@
 timeoutSeconds: 120
 commands:
 - command: steamcmd +quit >/tmp/steamcmd-online.log 2>&1 || true; grep -q "Update complete, launching" /tmp/steamcmd-online.log
+- command: test "$(dpkg-query -W steamcmd:i386 | cut -f2)" = $(cat /usr/local/share/steamcmd/.package-version)
 - command: test -d /config/steamcmd
 filePaths:
 - /usr/local/bin/steamcmd

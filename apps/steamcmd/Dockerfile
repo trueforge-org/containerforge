@@ -2,17 +2,19 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf29
 
 ARG VERSION
 ARG VENDOR
-ARG STEAMCMD_SHA256
 
 USER root
 
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates curl lib32gcc-s1 lib32stdc++6 && \
+    add-apt-repository multiverse && \
+    apt-get update && \
+    echo steamcmd steam/question select "I AGREE" | debconf-set-selections && \
+    echo steamcmd steam/license note '' | debconf-set-selections && \
+    apt-get install -y --no-install-recommends steamcmd:i386=${VERSION} && \
     mkdir -p /usr/local/share/steamcmd && \
-    curl -fsSL https://media.steampowered.com/client/steamcmd_linux.tar.gz -o /tmp/steamcmd_linux.tar.gz && \
-    echo "${STEAMCMD_SHA256}  /tmp/steamcmd_linux.tar.gz" | sha256sum -c - && \
-    tar -xzf /tmp/steamcmd_linux.tar.gz -C /usr/local/share/steamcmd && \
+    ln -sf /usr/games/steamcmd /usr/local/share/steamcmd/steamcmd.sh && \
+    printf '%s' "${VERSION}" > /usr/local/share/steamcmd/.package-version && \
     printf '%s\n' \
         '#!/usr/bin/env bash' \
         'set -euo pipefail' \
@@ -22,11 +24,10 @@ RUN dpkg --add-architecture i386 && \
         'mkdir -p /config/steamcmd' \
         'cd /config/steamcmd' \
         '' \
-        'exec /usr/local/share/steamcmd/steamcmd.sh "$@"' \
+        'exec /usr/games/steamcmd "$@"' \
         > /usr/local/bin/steamcmd && \
     chmod 0755 /usr/local/bin/steamcmd && \
     chown -R apps:apps /usr/local/share/steamcmd /usr/local/bin/steamcmd && \
-    rm -f /tmp/steamcmd_linux.tar.gz && \
     rm -rf /var/lib/apt/lists/*
 
 USER apps
