@@ -14,6 +14,8 @@ on:
 jobs:
   healthcheck:
     name: Healthcheck Positive/Negative
+    permissions:
+      contents: read
     runs-on:
       group: default
     steps:
