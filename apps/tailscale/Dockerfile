@@ -22,3 +22,4 @@ RUN mkdir /tailscale && ln -s /usr/local/bin/containerboot /tailscale/run.sh
 VOLUME ["/var/lib/tailscale"]
 
 CMD ["/usr/local/bin/containerboot"]
+COPY container-test.yaml /container-test.yaml

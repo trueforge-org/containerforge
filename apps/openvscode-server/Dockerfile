@@ -39,3 +39,4 @@ COPY /root /
 COPY . /
 # ports and volumes
 EXPOSE 3000
+COPY container-test.yaml /container-test.yaml

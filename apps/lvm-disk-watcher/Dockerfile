@@ -20,4 +20,5 @@ WORKDIR /app
 
 ENTRYPOINT ["/bin/bash", "/scripts/watch_lvm.sh"]
 
+COPY container-test.yaml /container-test.yaml
 USER apps

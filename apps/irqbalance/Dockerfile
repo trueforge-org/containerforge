@@ -10,3 +10,4 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 ENTRYPOINT ["/usr/sbin/irqbalance", "--foreground"]
+COPY container-test.yaml /container-test.yaml

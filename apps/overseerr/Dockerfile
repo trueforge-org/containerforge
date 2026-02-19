@@ -28,6 +28,7 @@ RUN apt-get update && \
       /app/server \
       /app/.next/cache/*
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /app
 

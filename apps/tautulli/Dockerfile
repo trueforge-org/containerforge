@@ -40,5 +40,6 @@ RUN set -eux; \
 # Copy local files
 COPY . /
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /config

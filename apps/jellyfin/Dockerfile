@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && chown -R apps:apps /app && chmod -R 755 /app \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 COPY ./root/ /
 COPY ./ /

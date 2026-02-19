@@ -27,6 +27,7 @@ RUN \
         $HOME/.cache
 
 # copy local files
+COPY container-test.yaml /container-test.yaml
 USER apps
 COPY . /
 COPY ./root /

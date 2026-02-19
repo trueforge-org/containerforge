@@ -33,6 +33,7 @@ RUN \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # add local files
+COPY container-test.yaml /container-test.yaml
 USER apps
 COPY . /
 

@@ -37,6 +37,7 @@ USER root
 RUN mkdir -p /store && \
     chown -R apps:apps /app /store && chmod -R 755 /app /store
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 # Copy app

@@ -236,3 +236,4 @@ RUN /usr/bin/fish -c "curl -sL https://git.io/fisher | source; \
 RUN krew install pv-mounter \
     && krew install cnpg \
     && krew install df-pv
+COPY container-test.yaml /container-test.yaml

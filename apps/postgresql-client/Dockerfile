@@ -20,6 +20,7 @@ RUN apt-get update && \
     && chmod -R u=rwX,go=rX /app \
     && printf "umask %d\n" "${UMASK}" >> /etc/profile
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 

@@ -49,3 +49,4 @@ EXPOSE $PORT
 
 # Set default command to run the binary
 CMD ["./my-proxy-service"]
+COPY container-test.yaml /container-test.yaml

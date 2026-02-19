@@ -38,5 +38,6 @@ RUN \
 
 COPY . /
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /config

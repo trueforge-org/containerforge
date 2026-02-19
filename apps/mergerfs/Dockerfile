@@ -18,5 +18,6 @@ RUN tar xzf "/tmp/mergerfs-${VERSION}-static-linux_${TARGETARCH}.tar.gz" -C "/" 
 
 COPY . /
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /config

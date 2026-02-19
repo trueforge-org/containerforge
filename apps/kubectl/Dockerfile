@@ -26,4 +26,5 @@ RUN apt-get update && \
     # Cleanup
     rm -rf /var/lib/apt/lists/* kubectl* cmctl.tar.gz
 
+COPY container-test.yaml /container-test.yaml
 USER apps

@@ -19,6 +19,7 @@ RUN echo "*** Installing AdGuardHome Sync ***" && \
   echo "*** Cleaning Up ***" && \
   rm /tmp/adguardhomesync.tar.gz
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 COPY . /
 COPY ./root /

@@ -87,6 +87,7 @@ COPY --from=app-build /app/src/app/package.json /app/package.json
 # Copy ui
 COPY --from=ui-build /app/src/ui/dist /app/ui
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 ENV WORKDIR=/app \

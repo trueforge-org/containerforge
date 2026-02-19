@@ -21,4 +21,5 @@ RUN apt-get update && \
     && printf "umask %d\n" "${UMASK}" >> /etc/profile \
     && update-ca-certificates
 
+COPY container-test.yaml /container-test.yaml
 USER apps

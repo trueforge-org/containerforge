@@ -12,4 +12,5 @@ RUN apt-get update && \
     && apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY container-test.yaml /container-test.yaml
 USER apps

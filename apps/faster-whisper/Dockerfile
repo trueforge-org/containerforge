@@ -31,6 +31,7 @@ RUN \
     /var/lib/apt/lists/* \
     /tmp/*
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 COPY ./ /
 

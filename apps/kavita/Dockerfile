@@ -38,3 +38,4 @@ COPY . /
 
 # ports and volumes
 EXPOSE 5000
+COPY container-test.yaml /container-test.yaml

@@ -14,6 +14,7 @@ RUN curl -fsSL "https://github.com/StuffAnThings/qbit_manage/archive/v${VERSION}
     chown -R apps:apps "/app"
 
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 COPY . /

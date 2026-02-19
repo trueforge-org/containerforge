@@ -23,5 +23,6 @@ COPY . /
 
 EXPOSE 4545
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /config

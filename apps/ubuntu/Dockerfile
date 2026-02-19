@@ -119,6 +119,7 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
 
 # Use a safe non-root user
 # Note: nobody:nogroup does not map to the same uid:gid on every (host/share) distro!
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 # Copy unrar binary from LinuxServer image

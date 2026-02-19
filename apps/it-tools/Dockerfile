@@ -19,5 +19,6 @@ COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html
 # Copy configuration files into container
 COPY --chmod=755 ./ /
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /usr/share/nginx/html

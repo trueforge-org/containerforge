@@ -15,6 +15,7 @@ RUN \
     chmod +x /usr/local/bin/shellcheck && \
     chown -R apps:apps /app && chmod -R 755 /app
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 COPY ./ /

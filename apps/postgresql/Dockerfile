@@ -71,6 +71,7 @@ RUN set -eux; \
 # Req from upstream (see: https://github.com/docker-library/postgres/blob/23987751b63ce745bd27b1119ab29dc4a1ffd728/Dockerfile-debian.template#L219)
 STOPSIGNAL SIGINT
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 COPY --chmod=0775 . /

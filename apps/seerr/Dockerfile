@@ -66,6 +66,7 @@ COPY --chown=apps:apps --from=prod-deps /app/node_modules ./node_modules
 # Fix permissions
 RUN chown -R apps:apps /app && chmod -R 755 /app
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 
 EXPOSE 5055

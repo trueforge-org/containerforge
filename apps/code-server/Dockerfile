@@ -40,3 +40,4 @@ COPY . /
 
 # ports and volumes
 EXPOSE 8443
+COPY container-test.yaml /container-test.yaml

@@ -23,6 +23,7 @@ RUN \
     /var/log/*
 
 # add local files
+COPY container-test.yaml /container-test.yaml
 USER apps
 COPY ./root/ /
 COPY ./ /

@@ -34,6 +34,7 @@ RUN add-apt-repository universe && \
 
 COPY . /
 
+COPY container-test.yaml /container-test.yaml
 USER apps
 WORKDIR /config
 
