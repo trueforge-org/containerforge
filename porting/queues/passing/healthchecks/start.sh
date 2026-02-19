@@ -6,8 +6,7 @@ if [[ ! -f "/config/local_settings.py" ]]; then
 fi
 
 if [[ -z ${SITE_ROOT} ]] && ! grep -q "^SITE_ROOT" /config/local_settings.py; then
-    echo "No SITE_ROOT provided, halting init"
-    sleep infinity
+    SITE_ROOT="http://localhost:8000"
 elif [[ -z ${SITE_ROOT} ]] && grep -q "^SITE_ROOT" /config/local_settings.py; then
     SITE_ROOT=$(grep -Po "^SITE_ROOT\s*=\s*\K(.*)" /config/local_settings.py | tr -d '"')
 fi
@@ -15,7 +14,7 @@ fi
 # Need to inject SITE_ROOT into CSRF_TRUSTED_ORIGINS if not specified by the user because it defaults to an empty list
 if [[ -z ${CSRF_TRUSTED_ORIGINS} ]] && ! grep -q "^CSRF_TRUSTED_ORIGINS" /config/local_settings.py; then
     CSRF_TRUSTED_ORIGINS=[\"${SITE_ROOT}\"]
-    echo "${CSRF_TRUSTED_ORIGINS}" > /run/s6/container_environment/CSRF_TRUSTED_ORIGINS
+    export CSRF_TRUSTED_ORIGINS
 fi
 
 if [[ -z ${SECRET_KEY} ]] && ! grep -q "^SECRET_KEY" /config/local_settings.py; then
@@ -31,17 +30,21 @@ fi
 if [[ ! -L "/app/healthchecks/hc.sqlite" ]]; then
     ln -s /config/hc.sqlite /app/healthchecks/hc.sqlite
 fi
+if [[ ! -f "/config/hc.sqlite" ]]; then
+    touch /config/hc.sqlite
+fi
+export DB_NAME="/config/hc.sqlite"
 
-cp /defaults/uwsgi.ini /app/healthchecks/uwsgi.ini
+cp /defaults/uwsgi.ini /tmp/uwsgi.ini
 
 cd /app/healthchecks || exit
 
-python3 ./manage.py makemigrations
+/app/venv/bin/python ./manage.py makemigrations
 
-python3 ./manage.py migrate
+/app/venv/bin/python ./manage.py migrate
 
 if [[ -n "$SUPERUSER_EMAIL" ]] && [[ -n "$SUPERUSER_PASSWORD" ]]; then
-cat << EOF |  python3 /app/healthchecks/manage.py shell
+cat << EOF |  /app/venv/bin/python /app/healthchecks/manage.py shell
 from django.contrib.auth.models import User;
 from hc.accounts.views import _make_user;
 
@@ -61,5 +64,4 @@ EOF
 fi
 
 cd /app/healthchecks
-exec /usr/sbin/uwsgi --ini uwsgi.ini
-
+exec /usr/bin/uwsgi --ini /tmp/uwsgi.ini

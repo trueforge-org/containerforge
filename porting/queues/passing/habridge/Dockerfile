@@ -19,7 +19,7 @@ RUN \
         /app && \
     curl -o \
         /app/ha-bridge.jar -L \
-        "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION:1}.jar"
+        "https://github.com/bwssytems/ha-bridge/releases/download/v${VERSION}/ha-bridge-${VERSION#v}.jar"
 
 # copy local files
 USER apps

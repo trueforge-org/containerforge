@@ -1,4 +1,4 @@
 # yaml-language-server: $schema=../../../../testhelpers/container-test.schema.json
 timeoutSeconds: 180
-commands:
-- command: test -x /start.sh
+tcp:
+- port: '8085'

@@ -34,9 +34,8 @@ fi
 
 # copy extra user-profiles
 for f in /config/config/local*.php; do
-    cp "${f}" /app/www/public/config/
-    chmod +r "/app/www/public/config/$(basename ${f})"
+    cp "${f}" /config/config/
+    chmod +r "/config/config/$(basename "${f}")"
 done
 
-
-## TODO: Where is the exec?
+exec php -S 0.0.0.0:80 -t /app/www/public
