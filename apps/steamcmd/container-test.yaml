@@ -1,7 +1,5 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 200
-commands:
-- command:  exec /start.sh
 filePaths:
 - /start.sh
 - /usr/local/bin/steamcmd
