@@ -1,10 +1,11 @@
 # Sweep Status
 
-- Timestamp (UTC): 2026-02-20T14:08:25Z
+- Timestamp (UTC): 2026-02-20T16:52:22Z
 - Build: ok
 - Forgetool test: fail
 - Run status: not running
-- Timeout for test: 300 seconds
+- Build command: docker buildx bake --set image-local.output=type=docker image-local
+- Timeout for build/test: 1800/420 seconds
 - Forgetool path: /tmp/forgetool-bin/forgetool
 
 ## Last test log tail
@@ -29,14 +30,14 @@
 ---
 Forgetool Version: dev
 ---
-[90m2026-02-20T14:08:24Z[0m [32mINF[0m [1mChecking if System Time is correct...[0m
-[90m2026-02-20T14:08:24Z[0m [32mINF[0m [1mSystem Time is correct...[0m
-[90m2026-02-20T14:08:24Z[0m [32mINF[0m [1mCluster name: main
+[90m2026-02-20T16:52:21Z[0m [32mINF[0m [1mChecking if System Time is correct...[0m
+[90m2026-02-20T16:52:21Z[0m [32mINF[0m [1mSystem Time is correct...[0m
+[90m2026-02-20T16:52:21Z[0m [32mINF[0m [1mCluster name: main
 [0m
-14:08:24 [34mℹ️ [INFO][0m 🧪 Wait checks: image=openssh-server:10.0_p1-r9 http=0 tcp=1
-14:08:24 [34mℹ️ [INFO][0m Wait checks container config: env=none
-14:08:24 [34mℹ️ [INFO][0m 🚀 Starting container: image=openssh-server:10.0_p1-r9 customizers=2
-14:08:25 [31m❌ [ERROR][0m Container start failed for image=openssh-server:10.0_p1-r9: generic container: create container: Error response from daemon: pull access denied for openssh-server, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
-check failed: generic container: create container: Error response from daemon: pull access denied for openssh-server, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
-[90m2026-02-20T14:08:25Z[0m [31mFTL[0m [1mFailed to execute command[0m [36merror=[0m[31m[1m"check failed: generic container: create container: Error response from daemon: pull access denied for openssh-server, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"[0m[0m
+16:52:21 [34mℹ️ [INFO][0m 🧪 Health check: image=openssh-server:10.0_p1-r9
+16:52:21 [34mℹ️ [INFO][0m Health check container config: env=none
+16:52:21 [34mℹ️ [INFO][0m 🚀 Starting container: image=openssh-server:10.0_p1-r9 customizers=1
+16:52:22 [31m❌ [ERROR][0m Container start failed for image=openssh-server:10.0_p1-r9: generic container: start container: started hook: wait until ready: container exited with code 127
+check failed: generic container: start container: started hook: wait until ready: container exited with code 127
+[90m2026-02-20T16:52:22Z[0m [31mFTL[0m [1mFailed to execute command[0m [36merror=[0m[31m[1m"check failed: generic container: start container: started hook: wait until ready: container exited with code 127"[0m[0m
 ```
