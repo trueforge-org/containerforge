@@ -33,6 +33,7 @@ RUN \
     pip \
     wheel && \
   /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
+  /app/venv/bin/pip install --no-cache-dir standard-imghdr && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
