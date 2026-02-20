@@ -4,7 +4,6 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:36c48bc0fd413c8ef2ae9761b1decc96fa
 ARG VERSION
 ARG TARGETARCH
 USER root
-COPY --chmod=0755 . /
 
 ARG TARGETARCH=${TARGETARCH/amd64/x64}
 

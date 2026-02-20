@@ -2,7 +2,6 @@
 FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:acbb7d5055789d4e4da6343772b3ce7b6215b13f726252c4dd59f3027f8b6eb1 AS builder
 
 USER root
-COPY --chmod=0755 . /
 
 # Install necessary build dependencies
 RUN set -eux; \

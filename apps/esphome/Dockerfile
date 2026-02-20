@@ -30,7 +30,6 @@ RUN set -eux; \
     rm -rf /tmp/*
 
 # Copy application code
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

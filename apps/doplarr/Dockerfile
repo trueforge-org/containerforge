@@ -13,7 +13,6 @@ RUN curl -fsSL "https://github.com/kiranshila/Doplarr/releases/download/v${VERSI
     chmod -R u=rwX,go=rX /app \
     && chown -R apps:apps /app
 
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

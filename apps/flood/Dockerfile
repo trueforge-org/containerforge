@@ -15,7 +15,6 @@ RUN curl -fsSL "https://github.com/jesec/flood/releases/download/v${VERSION}/flo
     chmod 755 "/app/flood" && \
     chown -R apps:apps /app
 
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

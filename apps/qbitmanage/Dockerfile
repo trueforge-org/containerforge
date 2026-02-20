@@ -15,7 +15,6 @@ RUN curl -fsSL "https://github.com/StuffAnThings/qbit_manage/archive/v${VERSION}
 
 
 USER apps
-COPY --chmod=0755 . /
 
 COPY --chmod=0755 . /
 

@@ -22,7 +22,6 @@ RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_${TARGETA
     chmod 755 "/app/duplicacy_web" \
     && chown -R apps:apps /app
 
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

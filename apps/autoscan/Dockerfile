@@ -21,7 +21,6 @@ ARG IMAGE_STATS
 ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="3030/tcp,3030/udp"
 
 USER apps
-COPY --chmod=0755 . /
 
 COPY --chmod=0755 . /
 

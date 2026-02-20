@@ -33,6 +33,5 @@ RUN set -eux; \
 
 USER apps
 COPY --chmod=0755 . /
-COPY --chmod=0755 . /
 WORKDIR /config
 HEALTHCHECK CMD ["/healthcheck.sh"]

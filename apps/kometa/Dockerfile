@@ -32,6 +32,5 @@ RUN apt-get update && \
 
 USER apps
 COPY --chmod=0755 . /
-COPY --chmod=0755 . /
 
 VOLUME /app

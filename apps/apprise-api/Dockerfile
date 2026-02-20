@@ -38,7 +38,6 @@ RUN \
 # copy local files
 USER apps
 COPY --chmod=0755 . /
-COPY --chmod=0755 . /
 
 EXPOSE 8000
 HEALTHCHECK CMD ["/healthcheck.sh"]

@@ -46,7 +46,6 @@ RUN \
 # copy local files
 USER apps
 COPY --chmod=0755 . /
-COPY --chmod=0755 . /
 
 ENV PATH="/app/venv/bin:$PATH"
 

@@ -28,7 +28,6 @@ RUN set -eux; \
     rm -rf /root/.cache /tmp/* /app/maps
 
 # Copy local files
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

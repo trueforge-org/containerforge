@@ -19,7 +19,6 @@ RUN mkdir "/app/bin" && \
     chmod -R u=rwX,go=rX "/app" && \
     chown -R apps:apps "/app"
 
-COPY --chmod=0755 . /
 
 EXPOSE 4545
 

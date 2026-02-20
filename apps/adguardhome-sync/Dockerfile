@@ -21,7 +21,6 @@ RUN echo "*** Installing AdGuardHome Sync ***" && \
 
 USER apps
 COPY --chmod=0755 . /
-COPY --chmod=0755 . /
 COPY ./root /
 
 EXPOSE 8080

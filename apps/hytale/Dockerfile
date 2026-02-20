@@ -58,7 +58,6 @@ EOF
 RUN chmod +x /usr/local/bin/hytale-downloader
 
 # Copy application files with correct ownership
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

@@ -36,7 +36,6 @@ RUN \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

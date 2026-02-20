@@ -29,7 +29,6 @@ USER root
 WORKDIR /app
 
 USER apps
-COPY --chmod=0755 . /
 
 COPY --from=builder /app/deemix-gui/dist/deemix-server-linux /app/deemix-server
 

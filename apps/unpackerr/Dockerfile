@@ -14,7 +14,6 @@ RUN curl -fsSL "https://github.com/Unpackerr/unpackerr/releases/download/v${VERS
     chmod -R u=rwX,go=rX /app && \
     chown -R apps:apps /app
 
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

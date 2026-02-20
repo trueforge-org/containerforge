@@ -38,7 +38,6 @@ RUN set -eux; \
     rm -rf /root/.cache /root/.cargo /tmp/*
 
 # Copy local files
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /

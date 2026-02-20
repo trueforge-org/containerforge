@@ -14,7 +14,6 @@ RUN mkdir -p /app/bin && \
     chown -R root:root /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-COPY --chmod=0755 . /
 
 USER apps
 COPY --chmod=0755 . /
