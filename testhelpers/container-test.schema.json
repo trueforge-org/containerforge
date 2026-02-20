@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://trueforge-org.github.io/containerforge/container-test.schema.json",
   "title": "Container test configuration",
-  "description": "Schema for apps/*/container-test.yaml used by container test tooling. Define one or more check groups (http, tcp, commands, runtimeCommands, filePaths) for a container image.",
+  "description": "Schema for apps/*/container-test.yaml used by container test tooling. Define one or more check groups (http, tcp, healthCommands, filePaths) for a container image.",
   "examples": [
     {
       "timeoutSeconds": 180,
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "commands": [
+      "healthCommands": [
         {
           "command": "/usr/local/bin/imaginary -version",
           "expectedExitCode": 1,
@@ -79,7 +79,7 @@
         "$ref": "#/$defs/tcpTestConfig"
       }
     },
-    "commands": {
+    "healthCommands": {
       "type": "array",
       "description": "Command checks executed as `sh -c <command>`. Useful for validating binaries, versions, behavior, and optional output matching.",
       "examples": [
@@ -96,13 +96,6 @@
           }
         ]
       ],
-      "items": {
-        "$ref": "#/$defs/commandTestConfig"
-      }
-    },
-    "runtimeCommands": {
-      "type": "array",
-      "description": "Runtime command checks executed as `sh -c <command>`. Uses the same structure and behavior as commands.",
       "items": {
         "$ref": "#/$defs/commandTestConfig"
       }
@@ -140,12 +133,7 @@
     },
     {
       "required": [
-        "commands"
-      ]
-    },
-    {
-      "required": [
-        "runtimeCommands"
+        "healthCommands"
       ]
     },
     {

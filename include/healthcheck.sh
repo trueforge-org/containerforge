@@ -110,10 +110,10 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
         continue
     fi
 
-    if [[ "${LINE}" =~ ^(http|tcp|commands|runtimeCommands|filePaths):$ ]]; then
+    if [[ "${LINE}" =~ ^(http|tcp|healthCommands|filePaths):$ ]]; then
         if [[ "${SECTION}" == "http" ]]; then
             flush_http
-        elif [[ "${SECTION}" == "commands" ]] || [[ "${SECTION}" == "runtimeCommands" ]]; then
+        elif [[ "${SECTION}" == "healthCommands" ]]; then
             flush_command
         fi
         SECTION="${BASH_REMATCH[1]}"
@@ -144,7 +144,7 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
                 CURRENT_HTTP_STATUS="$(normalize_value "${BASH_REMATCH[1]}")"
             fi
             ;;
-        commands | runtimeCommands)
+        healthCommands)
             if [[ "${LINE}" =~ ^-\ (.+)$ ]]; then
                 flush_command
                 CURRENT_COMMAND=""
@@ -173,7 +173,7 @@ done <"${CONFIG_PATH}"
 
 if [[ "${SECTION}" == "http" ]]; then
     flush_http
-elif [[ "${SECTION}" == "commands" ]] || [[ "${SECTION}" == "runtimeCommands" ]]; then
+elif [[ "${SECTION}" == "healthCommands" ]]; then
     flush_command
 fi
 
