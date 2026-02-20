@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://trueforge-org.github.io/containerforge/container-test.schema.json
-timeoutSeconds: 180
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+
 commands:
 - command: test -x /start.sh
