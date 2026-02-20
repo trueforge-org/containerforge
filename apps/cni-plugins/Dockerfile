@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV CNI_BIN_DIR=/host/opt/cni/bin
 
 USER root
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 container-test.yaml /container-test.yaml
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

@@ -27,4 +27,4 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* kubectl* cmctl.tar.gz
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 container-test.yaml /container-test.yaml

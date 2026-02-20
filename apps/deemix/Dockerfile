@@ -29,7 +29,7 @@ USER root
 WORKDIR /app
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 container-test.yaml /container-test.yaml
 
 COPY --from=builder /app/deemix-gui/dist/deemix-server-linux /app/deemix-server
 

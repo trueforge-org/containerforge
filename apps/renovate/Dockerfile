@@ -16,4 +16,4 @@ RUN curl -L "https://github.com/trueforge-org/forgetool/releases/download/v${FOR
     && chmod +x /usr/local/bin/forgetool \
     && rm /tmp/forgetool.tar.gz
 
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 container-test.yaml /container-test.yaml

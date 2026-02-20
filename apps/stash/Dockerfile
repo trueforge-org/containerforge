@@ -76,5 +76,5 @@ RUN apt-get purge -y gnupg && apt-get autoremove -y && apt-get clean && rm -rf /
 COPY --chmod=0755 . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 container-test.yaml /container-test.yaml
 WORKDIR /config
