@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
-timeoutSeconds: 120
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+
 healthCommands:
 - command: /usr/local/bin/gluetun healthcheck
-commands:
+runners:
 - command: sh -c 'test -x /usr/local/bin/gluetun && command -v openvpn && command
     -v iptables'

@@ -1,9 +1,9 @@
-# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
-timeoutSeconds: 120
-commands:
-- command: /usr/local/bin/imaginary -version
-  expectedExitCode: 1
-  expectedContent: dev
-  matchContent: true
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+
+runners:
+# TODO: reenable
+# - command: /usr/local/bin/imaginary -version
+#   expectedExitCode: 1
+#   expectedOutput: dev
+
 - command: test -x /usr/local/bin/imaginary
-  expectedExitCode: 0

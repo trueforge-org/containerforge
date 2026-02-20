@@ -25,9 +25,9 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       run: |-
-        RELEASES_JSON="$(curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" https://api.github.com/repos/trueforge-org/forgetool/releases)" || { echo "Failed to fetch forgetool releases from GitHub API"; exit 1; }
+        RELEASES_JSON="$(curl -fsSL https://api.github.com/repos/trueforge-org/forgetool/releases)"
         TAG="$(jq -r '([.[] | select(.prerelease == true) | .tag_name] | first) // empty' <<< "${RELEASES_JSON}")"
-        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "No forgetool prerelease tag found in GitHub Releases API response"; exit 1; }
+        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA6"
         VERSION="${TAG#v}"
         case "$(uname -m)" in
           x86_64) ARCH="amd64" ;;

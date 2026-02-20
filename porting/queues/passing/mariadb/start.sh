@@ -114,7 +114,7 @@ EONEWSQL
 #################################################################
 # No root password or too short a password, min of 4 characters #
 #    No root password will be set, this is not a good thing     #
-#   You shoud set one after initialisation with the commands:   #
+#   You shoud set one after initialisation with the runners:   #
 #                           mariadb                             #
 #      ALTER USER 'root'@'%' IDENTIFIED BY 'MyN3wP4ssw0rd';     #
 #                      flush privileges;                        #

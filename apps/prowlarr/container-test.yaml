@@ -1,5 +1,5 @@
-# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
-timeoutSeconds: 120
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+
 http:
 - port: '9696'
   path: /

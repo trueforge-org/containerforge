@@ -54,21 +54,21 @@ assert_healthy() {
     return 1
 }
 
-build_case "tcp" "timeoutSeconds: 120
+build_case "tcp" "
 tcp:
   - port: '8080'"
-build_case "http" "timeoutSeconds: 120
+build_case "http" "
 http:
   - port: '8080'
     path: /
     statusCode: 200"
-build_case "healthcommands" "timeoutSeconds: 120
+build_case "healthcommands" "
 healthCommands:
   - command: echo healthy
     expectedExitCode: 0
     expectedContent: healthy
     matchContent: true"
-build_case "filepaths" "timeoutSeconds: 120
+build_case "filepaths" "
 filePaths:
   - /existing-file"
 

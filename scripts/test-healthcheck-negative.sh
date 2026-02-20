@@ -54,21 +54,21 @@ assert_unhealthy() {
     return 1
 }
 
-build_case "tcp" "timeoutSeconds: 120
+build_case "tcp" "
 tcp:
   - port: '65535'"
-build_case "http" "timeoutSeconds: 120
+build_case "http" "
 http:
   - port: '8080'
     path: /
     statusCode: 404"
-build_case "healthcommands" "timeoutSeconds: 120
+build_case "healthcommands" "
 healthCommands:
   - command: echo healthy
     expectedExitCode: 0
     expectedContent: definitely-not-in-output
     matchContent: true"
-build_case "filepaths" "timeoutSeconds: 120
+build_case "filepaths" "
 filePaths:
   - /not/real/file"
 
