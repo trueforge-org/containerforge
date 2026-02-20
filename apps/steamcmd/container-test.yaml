@@ -2,7 +2,6 @@
 
 runners:
 - entrypoint: echo "application wont work, waiting 120 seconds" && sleep 120
-filePaths:
-- /start.sh
-- /usr/local/bin/steamcmd
-- /usr/local/share/steamcmd/steamcmd.sh
+- filePath: /start.sh
+- filePath: /usr/local/bin/steamcmd
+- filePath: /usr/local/share/steamcmd/steamcmd.sh

@@ -2,5 +2,4 @@
 
 runners:
 - entrypoint: echo "application wont work, waiting 120 seconds" && sleep 120
-filePaths:
-- /app/autoscan
+- filePath: /app/autoscan
