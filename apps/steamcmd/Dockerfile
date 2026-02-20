@@ -7,7 +7,7 @@ USER root
 
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    add-apt-repository multiverse && \
+    add-apt-repository -y multiverse && \
     apt-get update && \
     echo steamcmd steam/question select "I AGREE" | debconf-set-selections && \
     echo steamcmd steam/license note '' | debconf-set-selections && \
