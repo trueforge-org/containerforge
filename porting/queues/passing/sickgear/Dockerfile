@@ -29,8 +29,8 @@ RUN \
   /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /app/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
-  /app/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r recommended.txt && \
+  /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
+  /app/venv/bin/pip install --no-cache-dir -r recommended.txt && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

@@ -15,7 +15,7 @@ RUN echo "**** install feed2toot ****" && \
   /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+  /app/venv/bin/pip install -U --no-cache-dir \
     feed2toot=="${VERSION}" && \
   echo "**** cleanup ****" && \
   rm -rf \

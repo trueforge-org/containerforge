@@ -1,52 +1,13 @@
 # Sweep Status
 
-- Timestamp (UTC): 2026-02-19T19:10:22Z
-- Build: fail
-- Forgetool test: skip
+- Timestamp (UTC): 2026-02-20T13:05:44Z
+- Build: ok
+- Forgetool test: fail
 - Run status: not running
-- Timeout for build/test: 120 seconds
+- Timeout for build/test: 300/180 seconds
 - Forgetool path: /tmp/forgetool-bin/forgetool
 
-## Last build log tail
+## Last test log tail
 ```
-#7 67.39 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16b110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 69.39 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49950>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 73.39 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49810>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 73.55 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16b110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/lxml/
-#7 74.06 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16b4d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/lxml/
-#7 75.06 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16a210>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/lxml/
-#7 77.06 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/lxml/
-#7 81.06 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/lxml/
-#7 81.06 Collecting lxml!=5.2.0,!=5.2.1 (from -r recommended.txt (line 10))
-#7 81.08   Downloading lxml-6.0.2-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.6 kB)
-#7 81.08 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16aad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 81.58 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e169e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 82.58 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e169f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 84.59 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 88.59 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 88.81 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e169f90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/orjson/
-#7 89.31 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16b110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/orjson/
-#7 90.31 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16b4d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/orjson/
-#7 92.31 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49310>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/orjson/
-#7 96.31 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/orjson/
-#7 96.32 Collecting orjson (from -r recommended.txt (line 12))
-#7 96.33   Downloading orjson-3.11.7-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (41 kB)
-#7 96.34 Requirement already satisfied: pip in /app/venv/lib/python3.13/site-packages (from -r recommended.txt (line 13)) (26.0.1)
-#7 96.34 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db48cd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 96.84 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db48a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 97.84 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db48050>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 99.84 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49a90>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 103.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49d10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 104.3 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16aad0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/rapidfuzz/
-#7 104.8 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e16b110>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/rapidfuzz/
-#7 105.8 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92e169e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/rapidfuzz/
-#7 107.8 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49e50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/rapidfuzz/
-#7 111.8 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49bd0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /api/v4/projects/279215/packages/pypi/simple/rapidfuzz/
-#7 111.8 Collecting RapidFuzz<4.0.0 (from -r recommended.txt (line 14))
-#7 111.8   Downloading rapidfuzz-3.14.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (12 kB)
-#7 111.8 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db48a50>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 112.3 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db48e10>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 113.3 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7fc92db49450>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /ubuntu/
-#7 CANCELED
-ERROR: failed to solve: Canceled: context canceled
+bash: line 1: /tmp/forgetool-bin/forgetool: No such file or directory
 ```

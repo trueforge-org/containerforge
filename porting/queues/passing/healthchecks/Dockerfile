@@ -42,11 +42,11 @@ RUN \
     /app/venv/bin/pip install -U --no-cache-dir \
         pip \
         wheel && \
-    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ \
+    /app/venv/bin/pip install -U --no-cache-dir \
         apprise \
         minio \
         mysqlclient && \
-    /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
+    /app/venv/bin/pip install -U --no-cache-dir -r requirements.txt && \
     cd /app/healthchecks && \
     DEBUG=False /app/venv/bin/python ./manage.py collectstatic --noinput && \
     DEBUG=False /app/venv/bin/python ./manage.py compress && \

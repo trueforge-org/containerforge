@@ -38,7 +38,7 @@ RUN \
     pip \
     setuptools \
     wheel && \
-  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r /app/changedetection/requirements.txt && \
+  /app/venv/bin/pip install -U --no-cache-dir -r /app/changedetection/requirements.txt && \
   PLAYWRIGHT_PY_RELEASE=$(curl -sX GET "https://api.github.com/repos/microsoft/playwright-python/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   if [ -n "${PLAYWRIGHT_PY_RELEASE}" ]; then git clone --depth 1 --branch "${PLAYWRIGHT_PY_RELEASE}" https://github.com/microsoft/playwright-python /tmp/playwright-python; else git clone --depth 1 https://github.com/microsoft/playwright-python /tmp/playwright-python; fi && \
