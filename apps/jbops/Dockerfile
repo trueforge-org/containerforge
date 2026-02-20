@@ -31,4 +31,4 @@ RUN set -eux; \
 COPY --chmod=0755 . /
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /

@@ -73,7 +73,7 @@ RUN pip3 install --no-cache-dir psycopg2; \
     rm -rf /root/.cache /tmp/*
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 COPY --chmod=0775 . /
 
 WORKDIR /config

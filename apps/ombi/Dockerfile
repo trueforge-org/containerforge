@@ -30,7 +30,7 @@ RUN echo "**** install ombi ****" && \
 
 # add local files
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 COPY --chmod=0755 . /
 # ports and volumes
 EXPOSE 3579

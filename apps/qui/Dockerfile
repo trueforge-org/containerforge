@@ -23,5 +23,5 @@ COPY --chmod=0755 . /
 EXPOSE 7576
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config

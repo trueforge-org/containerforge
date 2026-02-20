@@ -29,7 +29,7 @@ RUN apt-get update && \
       /app/.next/cache/*
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /app
 
 EXPOSE 5055

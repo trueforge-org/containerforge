@@ -23,6 +23,6 @@ RUN wget "https://github.com/prometheus-community/smartctl_exporter/releases/dow
     rm -rf smartctl_exporter*
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 ENTRYPOINT ["/usr/local/bin/smartctl_exporter"]

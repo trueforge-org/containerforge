@@ -26,7 +26,7 @@ FROM ghcr.io/trueforge-org/postgresql-client:1.1.0@sha256:e1ed0aeb4ecb455b14d1fa
 ARG VERSION
 ARG TARGETARCH
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 COPY --from=builder /server /app/server
 COPY --chmod=0755 . /

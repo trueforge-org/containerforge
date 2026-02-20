@@ -72,7 +72,7 @@ RUN set -eux; \
 STOPSIGNAL SIGINT
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 COPY --chmod=0775 . /
 

@@ -51,7 +51,7 @@ COPY --from=dependencies  /app/src/ui/dist/ /app/ui
 COPY --chmod=0775 . /
 
 USER root
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 ENV WORKDIR=/app \
     WUD_LOG_FORMAT=text \

@@ -25,5 +25,5 @@ ENV VPN_SERVICE_PROVIDER=pia \
 EXPOSE 8000/tcp 8888/tcp 8388/tcp 8388/udp
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 ENTRYPOINT ["/usr/local/bin/gluetun"]

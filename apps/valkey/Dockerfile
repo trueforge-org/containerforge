@@ -18,7 +18,7 @@ COPY --chmod=0755 start.sh /start.sh
 ENV VALKEY_PORT=6379
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 
 EXPOSE 6379

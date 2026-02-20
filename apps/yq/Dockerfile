@@ -5,7 +5,7 @@ FROM ghcr.io/trueforge-org/python:3.13.12@sha256:3fa12464f1313ee6c634acc679d3b3f
 ARG VERSION
 ARG TARGETARCH
 USER root
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 RUN echo "**** install app ****" && \
   python3 -m venv /app/venv && \

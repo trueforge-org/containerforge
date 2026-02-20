@@ -31,5 +31,5 @@ COPY --from=builder --chown=568:568 /tmp/css /usr/share/nginx/html/css/
 COPY --from=builder --chown=568:568 /tmp/resources /usr/share/nginx/html/resources/
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /usr/share/nginx/html

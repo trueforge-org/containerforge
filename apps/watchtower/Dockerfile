@@ -22,7 +22,7 @@ FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:36c48bc0fd413c8ef2ae9761b1decc96f
 ENV WATCHTOWER_LABEL_ENABLE=true
 
 USER apps
-COPY --chmod=0755 container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 # copy files from other container
 COPY --from=builder /app/watchtower/watchtower /app/watchtower
