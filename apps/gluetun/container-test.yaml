@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
+healthCommands:
+- command: /usr/local/bin/gluetun healthcheck
 commands:
 - command: sh -c 'test -x /usr/local/bin/gluetun && command -v openvpn && command
     -v iptables'

@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:36c48bc0fd413c8ef2ae9761b1decc96fa8295f44407a9b7280bd137c2109355
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -30,4 +30,3 @@ USER apps
 COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
-HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${SONARR__SERVER__PORT}/"

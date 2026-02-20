@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:3fa12464f1313ee6c634acc679d3b3fd4ef8c8412eb1ccf2e8720012ae514d91
 
 ARG VERSION
 ARG YARN_VERSION
@@ -11,11 +11,11 @@ ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
 ENV HOME=/tmp/nodehome
 
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c /usr/local/bin/node /usr/local/bin/
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 /usr/local/bin/node /usr/local/bin/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 /usr/local/lib/node_modules/ /usr/local/lib/node_modules/
 
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c /YARN_VERSION.txt /YARN_VERSION.txt
-COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c /opt/ /opthold/
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 /YARN_VERSION.txt /YARN_VERSION.txt
+COPY --from=ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 /opt/ /opthold/
 
 RUN YARN_VERSION=$(cat /YARN_VERSION.txt) && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \

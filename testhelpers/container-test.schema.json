@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://trueforge-org.github.io/containerforge/container-test.schema.json",
   "title": "Container test configuration",
-  "description": "Schema for apps/*/container-test.yaml used by container test tooling. Define one or more check groups (http, tcp, commands, runtimeCommands, filePaths) for a container image.",
+  "description": "Schema for apps/*/container-test.yaml used by container test tooling. Define one or more check groups (http, tcp, healthCommands, commands, filePaths) for a container image. `commands` are executed as entrypoint overrides during testing, while `healthCommands` run as health checks against an already running container.",
   "examples": [
     {
       "timeoutSeconds": 180,
@@ -23,6 +23,16 @@
       ],
       "filePaths": [
         "/usr/local/bin/yq"
+      ]
+    },
+    {
+      "healthCommands": [
+        {
+          "command": "/usr/local/bin/imaginary -version",
+          "expectedExitCode": 1,
+          "expectedContent": "dev",
+          "matchContent": true
+        }
       ]
     },
     {
@@ -79,9 +89,9 @@
         "$ref": "#/$defs/tcpTestConfig"
       }
     },
-    "commands": {
+    "healthCommands": {
       "type": "array",
-      "description": "Command checks executed as `sh -c <command>`. Useful for validating binaries, versions, behavior, and optional output matching.",
+      "description": "Health check commands executed as `sh -c <command>` against an already running container. Useful for validating runtime behavior and optional output matching without overriding the container entrypoint.",
       "examples": [
         [
           {
@@ -100,9 +110,23 @@
         "$ref": "#/$defs/commandTestConfig"
       }
     },
-    "runtimeCommands": {
+    "commands": {
       "type": "array",
-      "description": "Runtime command checks executed as `sh -c <command>`. Uses the same structure and behavior as commands.",
+      "description": "Command checks executed as `sh -c <command>` using an entrypoint override during testing. Useful for validating binaries, versions, behavior, and optional output matching without starting the normal app process.",
+      "examples": [
+        [
+          {
+            "command": "test -x /usr/local/bin/imaginary",
+            "expectedExitCode": 0
+          },
+          {
+            "command": "/usr/local/bin/imaginary -version",
+            "expectedExitCode": 1,
+            "expectedContent": "dev",
+            "matchContent": true
+          }
+        ]
+      ],
       "items": {
         "$ref": "#/$defs/commandTestConfig"
       }
@@ -140,12 +164,12 @@
     },
     {
       "required": [
-        "commands"
+        "healthCommands"
       ]
     },
     {
       "required": [
-        "runtimeCommands"
+        "commands"
       ]
     },
     {

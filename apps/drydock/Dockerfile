@@ -1,5 +1,5 @@
 # Base stage - install system dependencies
-FROM ghcr.io/trueforge-org/node:rolling@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c AS base
+FROM ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 AS base
 
 USER root
 
@@ -96,7 +96,5 @@ ENV WORKDIR=/app \
     DD_STORE_PATH=/config
 
 WORKDIR /app
-
-HEALTHCHECK --interval=30s --timeout=5s CMD sh -c 'if [ -z "$DD_SERVER_ENABLED" ] || [ "$DD_SERVER_ENABLED" = "true" ]; then curl --fail http://localhost:${DD_SERVER_PORT:-3000}/health || exit 1; else exit 0; fi'
 
 CMD ["node", "dist/index.js"]

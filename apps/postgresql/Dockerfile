@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:3209530ed3169bb7c62c9010745abf292a4bcbe5b8757787aebcce488c09d520
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:36c48bc0fd413c8ef2ae9761b1decc96fa8295f44407a9b7280bd137c2109355
 
 ARG TARGETARCH
 ARG VENDOR
@@ -76,7 +76,6 @@ COPY container-test.yaml /container-test.yaml
 
 COPY --chmod=0775 . /
 
-HEALTHCHECK CMD pg_isready  -h  127.0.0.1  -p  5432  -U  ${POSTGRES_USER}  -d  ${POSTGRES_DB}
 
 EXPOSE 5432
 CMD ["postgres"]

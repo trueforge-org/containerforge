@@ -1,4 +1,6 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
+healthCommands:
+- command: /health/ping_liveness_local.sh 2
 tcp:
 - port: '6379'

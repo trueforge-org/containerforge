@@ -2,4 +2,4 @@
 timeoutSeconds: 120
 http:
 - port: '3000'
-  path: /
+  path: /health

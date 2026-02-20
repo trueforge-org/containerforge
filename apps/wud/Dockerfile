@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:rolling@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c AS dependencies
+FROM ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 AS dependencies
 
 USER root
 
@@ -26,7 +26,7 @@ RUN mkdir -p /app/src && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-FROM ghcr.io/trueforge-org/node:rolling@sha256:e03554fe5a09fa1914bbd02478cc590f1520bd0de4972529b226f430f6d0b84c
+FROM ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107
 
 ARG VERSION
 
@@ -60,4 +60,3 @@ ENV WORKDIR=/app \
 
 WORKDIR /app
 
-HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:3000/" ]

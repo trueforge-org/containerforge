@@ -1,20 +1,21 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "renovate"
+  default = "steamcmd"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=renovate/renovate
-  default = "43.27.0"
+  // renovate: datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu
+  default = "20180105-5"
 }
+
 
 variable "LICENSE" {
   default = "AGPL-3.0-or-later"
 }
 
 variable "SOURCE" {
-  default = "https://github.com/renovate/renovate"
+  default = "https://developer.valvesoftware.com/wiki/SteamCMD"
 }
 
 group "default" {
@@ -41,7 +42,6 @@ target "image-local" {
 target "image-all" {
   inherits = ["image"]
   platforms = [
-    "linux/amd64",
-    "linux/arm64"
+    "linux/amd64"
   ]
 }

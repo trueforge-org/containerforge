@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:d5ee44265ccc73d87135ab858d4cf4e793603f0efe7180d8b44acfe3af54db42
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:3fa12464f1313ee6c634acc679d3b3fd4ef8c8412eb1ccf2e8720012ae514d91
 
 # set version label
 ARG VERSION
@@ -53,9 +53,13 @@ RUN \
     KEPUBIFY_RELEASE=$(curl -sX GET "https://api.github.com/repos/pgaskin/kepubify/releases/latest" \
     | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
+  case "${TARGETARCH}" in \
+    arm64) KEPUBIFY_ARCH="arm64" ;; \
+    *) KEPUBIFY_ARCH="64bit" ;; \
+  esac; \
   curl -o \
     /usr/bin/kepubify -L \
-    https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-64bit && \
+    https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-${KEPUBIFY_ARCH} && \
   rm -rf /etc/ImageMagick-6/policy.xml && \
   ln -s /defaults/policy.xml /etc/ImageMagick-6/policy.xml && \
   echo "**** cleanup ****" && \

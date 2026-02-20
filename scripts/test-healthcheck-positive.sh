@@ -5,7 +5,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$(mktemp -d /tmp/healthcheck-positive-XXXXXX)"
 
 cleanup() {
-    docker rm -f hc-pos-tcp hc-pos-http hc-pos-commands hc-pos-runtimecommands hc-pos-filepaths >/dev/null 2>&1 || true
+    docker rm -f hc-pos-tcp hc-pos-http hc-pos-healthcommands hc-pos-filepaths >/dev/null 2>&1 || true
     rm -rf "${TMP_DIR}"
 }
 trap cleanup EXIT
@@ -62,17 +62,11 @@ http:
   - port: '8080'
     path: /
     statusCode: 200"
-build_case "commands" "timeoutSeconds: 120
-commands:
+build_case "healthcommands" "timeoutSeconds: 120
+healthCommands:
   - command: echo healthy
     expectedExitCode: 0
     expectedContent: healthy
-    matchContent: true"
-build_case "runtimecommands" "timeoutSeconds: 120
-runtimeCommands:
-  - command: echo runtime-healthy
-    expectedExitCode: 0
-    expectedContent: runtime-healthy
     matchContent: true"
 build_case "filepaths" "timeoutSeconds: 120
 filePaths:
@@ -80,8 +74,7 @@ filePaths:
 
 assert_healthy "tcp" "hc-pos-tcp"
 assert_healthy "http" "hc-pos-http"
-assert_healthy "commands" "hc-pos-commands"
-assert_healthy "runtimecommands" "hc-pos-runtimecommands"
+assert_healthy "healthcommands" "hc-pos-healthcommands"
 assert_healthy "filepaths" "hc-pos-filepaths"
 
 echo "All positive healthcheck cases became healthy as expected."
