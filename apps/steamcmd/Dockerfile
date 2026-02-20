@@ -21,8 +21,9 @@ RUN dpkg --add-architecture i386 && \
         '' \
         'exec /start.sh "$@"' \
         > /usr/local/bin/steamcmd && \
+    mkdir -p /config && \
     chmod 0755 /usr/local/bin/steamcmd && \
-    chown -R apps:apps /usr/local/share/steamcmd /usr/local/bin/steamcmd && \
+    chown -R apps:apps /usr/local/share/steamcmd /usr/local/bin/steamcmd /config && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --chmod=0755 start.sh /start.sh

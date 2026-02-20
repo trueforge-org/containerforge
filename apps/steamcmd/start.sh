@@ -4,7 +4,10 @@ set -euo pipefail
 export HOME=/config
 export XDG_DATA_HOME=/config
 
+STEAMCMD_TMP_DIR="/config/steamcmd/tmp"
+
 mkdir -p /config/steamcmd
+mkdir -p "${STEAMCMD_TMP_DIR}"
 
 if [ ! -f /config/Steam/steamcmd/steamcmd.sh ]; then
     mkdir -p /config/Steam/steamcmd/linux32
@@ -48,7 +51,7 @@ escape_steam_arg() {
 
 run_steamcmd_script() {
     local script_file
-    script_file="$(mktemp "${TMPDIR:-/tmp}/steamcmd-script.XXXXXX")"
+    script_file="$(mktemp "${STEAMCMD_TMP_DIR}/steamcmd-script.XXXXXX")"
     chmod 600 "${script_file}"
     trap 'rm -f "${script_file}"' EXIT INT TERM
 
