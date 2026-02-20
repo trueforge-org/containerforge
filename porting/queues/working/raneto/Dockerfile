@@ -33,8 +33,12 @@ RUN \
     's/upgradeInsecureRequests: \[\]/upgradeInsecureRequests: null/g' \
     app/index.js && \
   npm install --omit=dev && \
-  mkdir sessions && \
-  rm -f config/config.js && \
+  rm -rf /app/raneto/{content,config,sessions} && \
+  mkdir -p /config/{content,config,sessions} && \
+  chown -R apps:apps /config && \
+  ln -s /config/content /app/raneto/content && \
+  ln -s /config/config /app/raneto/config && \
+  ln -s /config/sessions /app/raneto/sessions && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
