@@ -15,10 +15,12 @@ RUN \
         php8.3-intl \
         php8.3-ldap \
         php8.3-mysql \
+        php8.3-sqlite3 \
         composer \
         php-redis \
         php8.3-zip \
-        php8.3-xml && \
+        php8.3-xml \
+        netcat-openbsd && \
     rm -rf /var/lib/apt/lists/* && \
     echo "**** configure php-fpm to pass env vars ****" && \
     if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
@@ -35,8 +37,11 @@ RUN \
         /app/www --strip-components=1 && \
     echo "**** install composer dependencies ****" && \
     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer install -d /app/www/ --no-dev --optimize-autoloader --no-interaction --no-scripts && \
+    COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev symfony/runtime --no-scripts && \
     COMPOSER_MEMORY_LIMIT=-1 php -d memory_limit=-1 /usr/bin/composer require -d /app/www/ --update-no-dev laminas/laminas-ldap --no-scripts && \
     /usr/bin/composer clearcache -d /app/www/ && \
+    rm -f /app/www/config/packages/local.yaml && \
+    ln -s /config/local.yaml /app/www/config/packages/local.yaml && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/* \
