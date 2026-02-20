@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
 
 runners:
-- command: test -x /app/duck.sh
-- command: test -f /defaults/logrotate.conf
-- command: bash -n /app/duck.sh
-- command: head -n 1 /app/duck.sh
+- entrypoint: test -x /app/duck.sh
+- entrypoint: test -f /defaults/logrotate.conf
+- entrypoint: bash -n /app/duck.sh
+- entrypoint: head -n 1 /app/duck.sh
   expectedOutput: '#!/usr/bin/env bash'
 

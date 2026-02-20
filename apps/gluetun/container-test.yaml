@@ -3,5 +3,5 @@
 healthCommands:
 - command: /usr/local/bin/gluetun healthcheck
 runners:
-- command: sh -c 'test -x /usr/local/bin/gluetun && command -v openvpn && command
+- entrypoint: sh -c 'test -x /usr/local/bin/gluetun && command -v openvpn && command
     -v iptables'
