@@ -2,7 +2,8 @@
 
 
 mkdir -p \
-    /app/netbox/netbox/static \
+    /config/static \
+    /config/media \
     /config/scripts
 
 declare -A NETBOX_CONF
@@ -38,22 +39,10 @@ if [[ ! -f "/config/configuration.py" ]]; then
     done
 fi
 
-if [[ ! -e "/config/media" ]]; then
-    mv /app/netbox/netbox/media /config/media
-fi
-
-rm -rf /app/netbox/netbox/media
-ln -sf /config/media /app/netbox/netbox/media
-
-ln -sf /config/configuration.py /app/netbox/netbox/netbox/configuration.py
-
 touch /config/ldap_config.py
-ln -sf /config/ldap_config.py /app/netbox/netbox/netbox/ldap_config.py
-
-mv /defaults/uwsgi.ini /app/netbox/netbox/uwsgi.ini > /dev/null 2>&1
 
 cd /app/netbox/netbox
-exec /usr/sbin/uwsgi uwsgi.ini
+exec /usr/bin/uwsgi --ini /defaults/uwsgi.ini
 
 cd /app/netbox/netbox || exit 1
 

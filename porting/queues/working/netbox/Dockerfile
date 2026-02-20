@@ -41,8 +41,15 @@ RUN \
   /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /app/venv/bin/pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ -r requirements.txt && \
+  /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
   /app/venv/bin/pip install --no-cache-dir django-auth-ldap && \
+  mkdir -p /config/{scripts,media,static} && \
+  chown -R apps:apps /config && \
+  rm -rf /app/netbox/netbox/{media,static} /app/netbox/netbox/netbox/{configuration.py,ldap_config.py} && \
+  ln -s /config/media /app/netbox/netbox/media && \
+  ln -s /config/static /app/netbox/netbox/static && \
+  ln -s /config/configuration.py /app/netbox/netbox/netbox/configuration.py && \
+  ln -s /config/ldap_config.py /app/netbox/netbox/netbox/ldap_config.py && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
