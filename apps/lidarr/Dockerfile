@@ -32,9 +32,8 @@ RUN add-apt-repository universe && \
     ln -s $(which ffprobe) /app/bin/ffprobe && \
     chown -R apps:apps /app && chmod -R 755 /app
 
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config
 

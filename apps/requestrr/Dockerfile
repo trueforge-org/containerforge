@@ -19,10 +19,9 @@ RUN mkdir "/app/bin" && \
     chmod -R u=rwX,go=rX "/app" && \
     chown -R apps:apps "/app"
 
-COPY . /
 
 EXPOSE 4545
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config

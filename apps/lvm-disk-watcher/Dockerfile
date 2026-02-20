@@ -21,4 +21,4 @@ WORKDIR /app
 ENTRYPOINT ["/bin/bash", "/scripts/watch_lvm.sh"]
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /

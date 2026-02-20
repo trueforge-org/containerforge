@@ -24,9 +24,8 @@ RUN apt-get update && \
     chown -R root:root /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/* /app/bin/Readarr.Update
 
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config
 

@@ -20,8 +20,7 @@ RUN echo "*** Installing AdGuardHome Sync ***" && \
   rm /tmp/adguardhomesync.tar.gz
 
 USER apps
-COPY container-test.yaml /container-test.yaml
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 EXPOSE 8080

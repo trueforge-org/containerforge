@@ -21,7 +21,7 @@ RUN apt-get update && \
     && printf "umask %d\n" "${UMASK}" >> /etc/profile
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 
 

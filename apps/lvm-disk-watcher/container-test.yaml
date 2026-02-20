@@ -1,4 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
 
-filePaths:
-- /app/watch_lvm.sh
+runners:
+- entrypoint: echo "application wont work, waiting 120 seconds" && sleep 120
+- filePath: /app/watch_lvm.sh

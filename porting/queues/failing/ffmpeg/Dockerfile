@@ -1063,7 +1063,7 @@ RUN \
   /usr/local/bin/ffmpeg -version
 
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 WORKDIR /config

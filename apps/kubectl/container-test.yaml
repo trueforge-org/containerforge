@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
 
 runners:
-- command: kubectl version --client
+- entrypoint: kubectl version --client
   expectedOutput: Client Version
 

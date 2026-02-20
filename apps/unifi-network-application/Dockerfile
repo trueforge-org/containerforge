@@ -36,7 +36,7 @@ RUN \
 
 # add local files
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 COPY ./root/ /
 COPY ./ /
 

@@ -38,8 +38,7 @@ RUN set -eux; \
     rm -rf /root/.cache /root/.cargo /tmp/*
 
 # Copy local files
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config

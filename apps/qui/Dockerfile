@@ -18,10 +18,9 @@ RUN curl -fsSL "https://github.com/autobrr/qui/releases/download/v${VERSION}/qui
     chmod +x "/app/qui" && \
     chown -R apps:apps "/app"
 
-COPY . /
 
 EXPOSE 7576
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config

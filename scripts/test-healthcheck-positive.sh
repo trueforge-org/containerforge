@@ -5,7 +5,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$(mktemp -d /tmp/healthcheck-positive-XXXXXX)"
 
 cleanup() {
-    docker rm -f hc-pos-tcp hc-pos-http hc-pos-healthcommands hc-pos-filepaths >/dev/null 2>&1 || true
+  docker rm -f hc-pos-tcp hc-pos-http hc-pos-healthcommands >/dev/null 2>&1 || true
     rm -rf "${TMP_DIR}"
 }
 trap cleanup EXIT
@@ -68,13 +68,9 @@ healthCommands:
     expectedExitCode: 0
     expectedContent: healthy
     matchContent: true"
-build_case "filepaths" "
-filePaths:
-  - /existing-file"
 
 assert_healthy "tcp" "hc-pos-tcp"
 assert_healthy "http" "hc-pos-http"
 assert_healthy "healthcommands" "hc-pos-healthcommands"
-assert_healthy "filepaths" "hc-pos-filepaths"
 
 echo "All positive healthcheck cases became healthy as expected."

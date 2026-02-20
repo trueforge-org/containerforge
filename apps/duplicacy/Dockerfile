@@ -22,10 +22,9 @@ RUN curl -fsSL "https://acrosync.com/duplicacy-web/duplicacy_web_linux_${TARGETA
     chmod 755 "/app/duplicacy_web" \
     && chown -R apps:apps /app
 
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 VOLUME ["/cache","/logs"]
 WORKDIR /config
 EXPOSE 3875

@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
-timeoutSeconds: 200
-filePaths:
-- /start.sh
-- /usr/local/bin/steamcmd
-- /usr/local/share/steamcmd/steamcmd.sh
+
+runners:
+- entrypoint: echo "application wont work, waiting 120 seconds" && sleep 120
+- filePath: /start.sh
+- filePath: /usr/local/bin/steamcmd
+- filePath: /usr/local/share/steamcmd/steamcmd.sh

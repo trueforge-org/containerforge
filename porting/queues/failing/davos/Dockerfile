@@ -33,7 +33,7 @@ RUN \
 
 USER apps
 COPY --from=buildstage /davos.jar /app/davos.jar
-COPY . /
+COPY --chmod=0755 . /
 
 # ports and volumes
 EXPOSE 8080

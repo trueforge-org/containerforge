@@ -30,10 +30,9 @@ RUN set -eux; \
     rm -rf /tmp/*
 
 # Copy application code
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config
 
 CMD ["dashboard", "/config"]

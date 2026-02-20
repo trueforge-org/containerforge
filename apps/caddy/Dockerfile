@@ -18,10 +18,9 @@ RUN wget -O - "https://github.com/caddyserver/xcaddy/releases/download/v${XCADDY
 FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:e5507376cb59a4669ad6179bc43e081b150558c96ab8e06b558e3b62c71241c8
 
 USER apps
-COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /caddy-bin "/app/caddy"
-COPY . /
+COPY --chmod=0755 . /
 
 EXPOSE 8080 8443
 WORKDIR /config

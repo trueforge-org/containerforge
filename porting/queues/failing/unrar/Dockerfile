@@ -41,7 +41,7 @@ USER root
 COPY --from=alpine-buildstage /usr/bin/unrar /usr/bin/unrar
 
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 
 WORKDIR /config
 VOLUME /config

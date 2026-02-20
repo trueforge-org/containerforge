@@ -13,8 +13,7 @@ RUN curl -fsSL "https://github.com/kiranshila/Doplarr/releases/download/v${VERSI
     chmod -R u=rwX,go=rX /app \
     && chown -R apps:apps /app
 
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config

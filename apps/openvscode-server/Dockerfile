@@ -4,7 +4,6 @@ FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:e5507376cb59a4669ad6179bc43e081b15
 ARG VERSION
 ARG TARGETARCH
 USER root
-COPY container-test.yaml /container-test.yaml
 
 ARG TARGETARCH=${TARGETARCH/amd64/x64}
 # environment settings
@@ -37,6 +36,6 @@ RUN \
 
 # add local files
 COPY /root /
-COPY . /
+COPY --chmod=0755 . /
 # ports and volumes
 EXPOSE 3000

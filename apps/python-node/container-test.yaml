@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
 
 runners:
-- command: python3 --version
-- command: node --version
-- command: npm --version
-- command: yarn --version
+- entrypoint: python3 --version
+- entrypoint: node --version
+- entrypoint: npm --version
+- entrypoint: yarn --version

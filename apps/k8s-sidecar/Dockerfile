@@ -31,7 +31,7 @@ RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
 FROM ghcr.io/trueforge-org/python:3.13.12@sha256:e879aa64214b6130482131137b547c582343eaad68518cef014fd33cf3439295
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 WORKDIR /app
 

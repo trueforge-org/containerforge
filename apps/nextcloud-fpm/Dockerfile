@@ -95,4 +95,4 @@ COPY --chmod=755 ./configure-scripts /configure-scripts
 RUN set -ex; \
     sed -i 's/exec "$@"//g' /entrypoint.sh; \
     cat /tmp/post-install.sh >> /entrypoint.sh
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /

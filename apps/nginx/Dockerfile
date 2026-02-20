@@ -31,6 +31,6 @@ EXPOSE 8080
 STOPSIGNAL SIGQUIT
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 
 CMD ["nginx", "-c","/config/nginx.conf", "-g", "daemon off;"]

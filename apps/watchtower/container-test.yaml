@@ -3,4 +3,4 @@
 healthCommands:
 - command: /app/watchtower --health-check
 runners:
-- command: /app/watchtower --health-check
+- entrypoint: /app/watchtower --health-check

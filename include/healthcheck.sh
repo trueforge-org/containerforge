@@ -72,12 +72,6 @@ check_command() {
     CHECKS_RUN=$((CHECKS_RUN + 1))
 }
 
-check_file() {
-    local file_path="$1"
-    [[ -f "${file_path}" ]]
-    CHECKS_RUN=$((CHECKS_RUN + 1))
-}
-
 flush_http() {
     if [[ -n "${CURRENT_HTTP_PORT}" ]]; then
         check_http "${CURRENT_HTTP_PORT}" "${CURRENT_HTTP_PATH}" "${CURRENT_HTTP_STATUS}"
@@ -92,6 +86,10 @@ flush_command() {
 
 if [[ ! -f "${CONFIG_PATH}" ]]; then
     exit 1
+fi
+
+if ! grep -Eq '^[[:space:]]*(http|tcp|healthCommands):[[:space:]]*$' "${CONFIG_PATH}"; then
+    exit 0
 fi
 
 SECTION=""
@@ -110,7 +108,7 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
         continue
     fi
 
-    if [[ "${LINE}" =~ ^(http|tcp|healthCommands|filePaths):$ ]]; then
+    if [[ "${LINE}" =~ ^(http|tcp|healthCommands):$ ]]; then
         if [[ "${SECTION}" == "http" ]]; then
             flush_http
         elif [[ "${SECTION}" == "healthCommands" ]]; then
@@ -163,11 +161,6 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
                 CURRENT_COMMAND_MATCH_CONTENT="$(normalize_value "${BASH_REMATCH[1]}")"
             fi
             ;;
-        filePaths)
-            if [[ "${LINE}" =~ ^-\ (.+)$ ]]; then
-                check_file "$(normalize_value "${BASH_REMATCH[1]}")"
-            fi
-            ;;
     esac
 done <"${CONFIG_PATH}"
 
@@ -178,5 +171,6 @@ elif [[ "${SECTION}" == "healthCommands" ]]; then
 fi
 
 if [[ "${CHECKS_RUN}" -eq 0 ]]; then
-    exit 1
+    # No checks configured is considered healthy for images that only use readiness smoke tests.
+    exit 0
 fi

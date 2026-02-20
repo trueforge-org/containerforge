@@ -28,4 +28,4 @@ RUN dpkg --add-architecture i386 && \
 
 COPY --chmod=0755 start.sh /start.sh
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /

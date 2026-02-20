@@ -58,7 +58,6 @@ EOF
 RUN chmod +x /usr/local/bin/hytale-downloader
 
 # Copy application files with correct ownership
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /

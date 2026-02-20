@@ -16,8 +16,7 @@ RUN \
 
 # add local files
 USER apps
-COPY container-test.yaml /container-test.yaml
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 WORKDIR /config

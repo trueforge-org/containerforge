@@ -31,11 +31,7 @@ RUN set -eux; \
     pip uninstall --yes uv; \
     rm -rf /tmp/*
 
-# Copy local files
-COPY . /
-COPY --chmod=755 healthcheck.sh /healthcheck.sh
-
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config
 HEALTHCHECK CMD ["/healthcheck.sh"]

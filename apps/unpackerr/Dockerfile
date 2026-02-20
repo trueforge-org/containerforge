@@ -14,8 +14,7 @@ RUN curl -fsSL "https://github.com/Unpackerr/unpackerr/releases/download/v${VERS
     chmod -R u=rwX,go=rX /app && \
     chown -R apps:apps /app
 
-COPY . /
 
 USER apps
-COPY container-test.yaml /container-test.yaml
+COPY --chmod=0755 . /
 WORKDIR /config
