@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=deb depName=steamcmd registryUrl=http://archive.ubuntu.com/ubuntu
+  // renovate: datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu
   default = "0~20180105-5"
 }
 
