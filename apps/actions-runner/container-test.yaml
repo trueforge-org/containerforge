@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
 
 runners:
-- command:  mkdir -p "/config/somedir" && touch "/config/somedir/somefile" && sleep 120 && touch "/config/testfile"
+- command:  echo "starting tests..." && mkdir -p "/config/somedir" && touch "/config/somedir/somefile" && sleep 120 && touch "/config/testfile" && echo "timeout..."
 
 filePaths:
 - /usr/local/bin/yq
