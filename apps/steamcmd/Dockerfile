@@ -14,7 +14,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get install -y --no-install-recommends steamcmd:i386=0~${VERSION} && \
     mkdir -p /usr/local/share/steamcmd && \
     ln -sf /usr/games/steamcmd /usr/local/share/steamcmd/steamcmd.sh && \
-    printf '%s' "${VERSION}" > /usr/local/share/steamcmd/.package-version && \
+    printf '%s' "0~${VERSION}" > /usr/local/share/steamcmd/.package-version && \
     printf '%s\n' \
         '#!/usr/bin/env bash' \
         'set -euo pipefail' \
