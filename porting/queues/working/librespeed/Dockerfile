@@ -10,6 +10,7 @@ RUN \
     echo "**** install packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
+        php-cli \
         php-gd \
         php-mysql \
         php-pgsql \
@@ -26,6 +27,11 @@ RUN \
     tar xf \
         /tmp/librespeed.tar.gz -C \
         /app/www/public --strip-components=1 && \
+    mkdir -p /config/www && \
+    cp -a /app/www/public /config/www/public && \
+    rm -rf /app/www/public && \
+    ln -s /config/www/public /app/www/public && \
+    chown -R apps:apps /config && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/*

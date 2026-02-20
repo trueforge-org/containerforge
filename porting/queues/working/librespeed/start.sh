@@ -3,22 +3,22 @@
 
 # make our folders
 mkdir -p \
-    /config/www/img
+    /config/www/public/img
 
 # create symlink to index.html
 if [[ ! -L /app/www/public/index.html ]]; then
-    ln -sf /config/www/index.html /app/www/public/index.html
+    ln -sf /config/www/public/index.html /app/www/public/index.html
 fi
 
 # update templates
-cp /app/www/public/examples/example*.html /config/www/
+cp /app/www/public/examples/example*.html /config/www/public/
 
 # use custom js files if exist
-if [[ -f /config/www/speedtest.js ]]; then
-    cp /config/www/speedtest.js /app/www/public/speedtest.js
+if [[ -f /config/www/public/speedtest.js ]]; then
+    cp /config/www/public/speedtest.js /app/www/public/speedtest.js
 fi
-if [[ -f /config/www/speedtest_worker.js ]]; then
-    cp /config/www/speedtest_worker.js /app/www/public/speedtest_worker.js
+if [[ -f /config/www/public/speedtest_worker.js ]]; then
+    cp /config/www/public/speedtest_worker.js /app/www/public/speedtest_worker.js
 fi
 
 # sets apikey for ipinfo.io, if it exists
@@ -30,11 +30,11 @@ fi
 # enables custom results page
 if [ "$CUSTOM_RESULTS" == "true" ]; then
     echo "custom results"
-    if [[ ! -e "/config/www/results/index.php" ]]; then
-        mkdir -p /config/www/results/
-        mv /app/www/public/results/index.php /config/www/results/index.php
+    if [[ ! -e "/config/www/public/results/index.php" ]]; then
+        mkdir -p /config/www/public/results/
+        mv /app/www/public/results/index.php /config/www/public/results/index.php
     fi
-    ln -sf /config/www/results/index.php /app/www/public/results/index.php
+    ln -sf /config/www/public/results/index.php /app/www/public/results/index.php
 fi
 
 # configure app settings
@@ -56,3 +56,5 @@ else
         "s|\$db_type.*|\$db_type = \'sqlite\';|g" \
         /app/www/public/results/telemetry_settings.php
 fi
+
+exec php -S 0.0.0.0:80 -t /app/www/public
