@@ -5,5 +5,4 @@ runners:
 # - command: /usr/local/bin/imaginary -version
 #   expectedExitCode: 1
 #   expectedOutput: dev
-
 - command: test -x /usr/local/bin/imaginary
