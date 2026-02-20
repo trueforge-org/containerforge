@@ -11,7 +11,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     echo steamcmd steam/question select "I AGREE" | debconf-set-selections && \
     echo steamcmd steam/license note '' | debconf-set-selections && \
-    apt-get install -y --no-install-recommends steamcmd:i386=${VERSION} && \
+    apt-get install -y --no-install-recommends steamcmd:i386=0~${VERSION} && \
     mkdir -p /usr/local/share/steamcmd && \
     ln -sf /usr/games/steamcmd /usr/local/share/steamcmd/steamcmd.sh && \
     printf '%s' "${VERSION}" > /usr/local/share/steamcmd/.package-version && \
