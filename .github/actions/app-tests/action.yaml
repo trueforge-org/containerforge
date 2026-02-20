@@ -27,7 +27,7 @@ runs:
       run: |-
         RELEASES_JSON="$(curl -fsSL https://api.github.com/repos/trueforge-org/forgetool/releases)"
         TAG="$(jq -r '([.[] | select(.prerelease == true) | .tag_name] | first) // empty' <<< "${RELEASES_JSON}")"
-        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA6"
+        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA7"
         VERSION="${TAG#v}"
         case "$(uname -m)" in
           x86_64) ARCH="amd64" ;;
