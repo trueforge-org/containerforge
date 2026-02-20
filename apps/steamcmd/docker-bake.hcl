@@ -9,9 +9,6 @@ variable "VERSION" {
   default = "20180105-5"
 }
 
-variable "IMAGE_VERSION" {
-  default = "1.0.0"
-}
 
 variable "LICENSE" {
   default = "AGPL-3.0-or-later"
