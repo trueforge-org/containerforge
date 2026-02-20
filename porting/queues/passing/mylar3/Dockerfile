@@ -29,10 +29,10 @@ RUN \
     /app/mylar3/ --strip-components=1 && \
   cd /app/mylar3 && \
   python3 -m venv /app/venv && \
-  pip install -U --no-cache-dir \
+  /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  pip install --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.19/ -r requirements.txt && \
+  /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
