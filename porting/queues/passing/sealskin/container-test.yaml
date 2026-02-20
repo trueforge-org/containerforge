@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../../../../testhelpers/container-test.schema.json
+# yaml-language-server: $schema=https://trueforge-org.github.io/containerforge/container-test.schema.json
 timeoutSeconds: 180
 tcp:
 - port: '8000'
