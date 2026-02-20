@@ -1,5 +1,4 @@
-
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:36c48bc0fd413c8ef2ae9761b1decc96fa8295f44407a9b7280bd137c2109355
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:36c48bc0fd413c8ef2ae9761b1decc96fa8295f44407a9b7280bd137c2109355
 
 # set version label
 ARG VERSION
@@ -7,8 +6,8 @@ ARG TARGETARCH
 USER root
 
 ENV \
-   MAKEFLAGS="-j4" \
-  ATTACHED_DEVICES_PERMS="/dev/dvb -type c"
+    MAKEFLAGS="-j4" \
+    ATTACHED_DEVICES_PERMS="/dev/dvb -type c"
 
 RUN \
   echo "**** install packages ****" && \
@@ -53,7 +52,8 @@ RUN \
 # add local files
 USER apps
 COPY container-test.yaml /container-test.yaml
-COPY ./ /
+COPY --chmod=0775 . /
 
 # ports and volumes
 EXPOSE 8875 554 1900/udp
+WORKDIR /config
