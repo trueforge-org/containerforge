@@ -10,6 +10,7 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     php8.3-ftp \
+    php8.3-cli \
     php8.3-gd \
     php8.3-intl \
     php8.3-ldap \
