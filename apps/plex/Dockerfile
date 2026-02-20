@@ -32,7 +32,7 @@ RUN \
     && apt-get clean \
     && rm -rf /etc/default/plexmediaserver /tmp/* /var/lib/apt/lists/* /var/tmp/
 
-COPY . /
+COPY --chmod=0755 . /
 
 USER apps
 COPY container-test.yaml /container-test.yaml

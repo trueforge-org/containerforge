@@ -35,7 +35,7 @@ RUN echo "**** install kavita ****" && \
     /var/tmp/*
 
 # add local files
-COPY . /
+COPY --chmod=0755 . /
 
 # ports and volumes
 EXPOSE 5000

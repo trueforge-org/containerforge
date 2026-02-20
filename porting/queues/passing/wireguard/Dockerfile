@@ -28,7 +28,7 @@ RUN \
 
 # add local files
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 # ports and volumes

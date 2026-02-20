@@ -24,7 +24,7 @@ RUN apt-get update && \
         | tar xzf - -C /usr/local/bin --strip-components 1 && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-COPY . /
+COPY --chmod=0755 . /
 
 USER apps
 COPY container-test.yaml /container-test.yaml

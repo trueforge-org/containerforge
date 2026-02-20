@@ -131,7 +131,7 @@ COPY --from=binbuilder /build-out/ /
 COPY --from=migrationbuilder /build-out/ /
 COPY --from=nodebuilder /emulatorjs/ /emulatorjs/
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 # ports

@@ -196,7 +196,7 @@ COPY --from=buildstage /tmp/comskip-build/usr/ /usr/
 COPY --from=buildstage /tmp/tvheadend-build/usr/ /usr/
 COPY --from=buildstage /picons /picons
 
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 # ports and volumes

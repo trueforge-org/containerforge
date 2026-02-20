@@ -29,6 +29,6 @@ USER apps
 COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /server /app/server
-COPY . /
+COPY --chmod=0755 . /
 
 EXPOSE 8080

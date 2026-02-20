@@ -26,7 +26,7 @@ RUN \
     /tmp/*
 
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 EXPOSE 5514/udp 6601/tcp 6514/tcp

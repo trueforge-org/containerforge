@@ -8,7 +8,7 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 
 WORKDIR /config
 VOLUME /config

@@ -15,7 +15,7 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 # Copy Go project files
-COPY . /
+COPY --chmod=0755 . /
 
 # Create necessary directories
 RUN mkdir -p /build /output && ls -la /build

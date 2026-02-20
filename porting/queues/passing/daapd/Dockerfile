@@ -108,7 +108,7 @@ RUN \
 # copy buildstage and local files
 COPY --from=buildstage /tmp/daapd-build/ /
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 
 
 # ports and volumes

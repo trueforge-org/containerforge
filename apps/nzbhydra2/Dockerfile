@@ -35,7 +35,7 @@ RUN apt-get update \
  && rm -rf /tmp_download/*
 
 # copy your repo
-COPY . /
+COPY --chmod=0755 . /
 
 # run as 568
 USER apps

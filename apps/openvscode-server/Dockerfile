@@ -37,6 +37,6 @@ RUN \
 
 # add local files
 COPY /root /
-COPY . /
+COPY --chmod=0755 . /
 # ports and volumes
 EXPOSE 3000

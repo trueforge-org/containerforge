@@ -73,7 +73,7 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
 # -----------------------------
 RUN apt-get purge -y gnupg && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
-COPY . /
+COPY --chmod=0755 . /
 
 USER apps
 COPY container-test.yaml /container-test.yaml

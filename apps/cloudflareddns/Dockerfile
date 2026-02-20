@@ -20,6 +20,6 @@ COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:195c3d07afc76e6db7119bd90
 # Fix shebang since container does not use s6-overlay
 RUN sed -i 's|#!/command/with-contenv bash|#!/usr/bin/env bash|g' /app/cloudflare-ddns.sh
 
-COPY . /
+COPY --chmod=0755 . /
 
 WORKDIR /config

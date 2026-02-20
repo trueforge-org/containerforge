@@ -58,7 +58,7 @@ RUN \
 COPY --from=buildstage /app/cells /app/
 
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 
 WORKDIR /config
 VOLUME /config

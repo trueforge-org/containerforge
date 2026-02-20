@@ -30,7 +30,7 @@ RUN set -eux; \
     rm -rf /tmp/*
 
 # Copy application code
-COPY . /
+COPY --chmod=0755 . /
 
 USER apps
 COPY container-test.yaml /container-test.yaml

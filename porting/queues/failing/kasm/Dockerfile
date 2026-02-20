@@ -110,7 +110,7 @@ RUN \
 
 # add init files
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 COPY ./root /
 
 # Ports and volumes

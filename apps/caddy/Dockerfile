@@ -21,7 +21,7 @@ USER apps
 COPY container-test.yaml /container-test.yaml
 
 COPY --from=builder /caddy-bin "/app/caddy"
-COPY . /
+COPY --chmod=0755 . /
 
 EXPOSE 8080 8443
 WORKDIR /config

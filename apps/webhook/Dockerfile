@@ -32,7 +32,7 @@ RUN set -eux; \
     rm -rf /tmp/*
 
 # Copy local files
-COPY . /
+COPY --chmod=0755 . /
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
 
 USER apps

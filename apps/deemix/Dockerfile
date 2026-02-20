@@ -35,7 +35,7 @@ COPY --from=builder /app/deemix-gui/dist/deemix-server-linux /app/deemix-server
 
 COPY --from=builder /app/deemix-gui/docker/ /app/
 
-COPY . /
+COPY --chmod=0755 . /
 
 EXPOSE 6595
 

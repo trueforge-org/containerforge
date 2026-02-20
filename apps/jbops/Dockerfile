@@ -28,7 +28,7 @@ RUN set -eux; \
     rm -rf /root/.cache /tmp/* /app/maps
 
 # Copy local files
-COPY . /
+COPY --chmod=0755 . /
 
 USER apps
 COPY container-test.yaml /container-test.yaml

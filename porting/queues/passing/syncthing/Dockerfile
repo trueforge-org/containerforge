@@ -51,7 +51,7 @@ RUN \
     /var/lib/syncthing
 
 USER apps
-COPY . /
+COPY --chmod=0755 . /
 
 # copy files from build stage and local files
 COPY --from=buildstage /tmp/sync/syncthing /usr/bin/
