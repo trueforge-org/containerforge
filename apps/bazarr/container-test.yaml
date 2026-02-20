@@ -2,4 +2,4 @@
 timeoutSeconds: 120
 http:
 - port: '6767'
-  path: /
+  path: /api/system/ping

@@ -30,4 +30,3 @@ USER apps
 COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
-HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${PROWLARR__SERVER__PORT}/"

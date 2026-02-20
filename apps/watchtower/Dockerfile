@@ -27,7 +27,6 @@ COPY container-test.yaml /container-test.yaml
 # copy files from other container
 COPY --from=builder /app/watchtower/watchtower /app/watchtower
 
-HEALTHCHECK CMD [ "/app/watchtower", "--health-check"]
 
 COPY --chmod=0775 . /
 

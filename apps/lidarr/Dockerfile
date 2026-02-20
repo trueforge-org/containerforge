@@ -38,4 +38,3 @@ USER apps
 COPY container-test.yaml /container-test.yaml
 WORKDIR /config
 
-HEALTHCHECK CMD curl --connect-timeout 15 --max-time 100 --silent --show-error --fail "http://localhost:${LIDARR__SERVER__PORT}/"

@@ -97,6 +97,4 @@ ENV WORKDIR=/app \
 
 WORKDIR /app
 
-HEALTHCHECK --interval=30s --timeout=5s CMD sh -c 'if [ -z "$DD_SERVER_ENABLED" ] || [ "$DD_SERVER_ENABLED" = "true" ]; then curl --fail http://localhost:${DD_SERVER_PORT:-3000}/health || exit 1; else exit 0; fi'
-
 CMD ["node", "dist/index.js"]

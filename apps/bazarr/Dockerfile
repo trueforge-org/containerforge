@@ -54,4 +54,3 @@ WORKDIR /config
 
 CMD [""]
 
-HEALTHCHECK CMD curl --request GET --silent --output /dev/null --show-error --fail http://127.0.0.1:${BAZARR__PORT}/api/system/ping

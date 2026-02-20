@@ -26,4 +26,3 @@ RUN crontab /app/crontab.txt
 # Optional: start cron in foreground when container runs
 # CMD ["cron", "-f"]
 
-HEALTHCHECK CMD [ "curl", "--connect-timeout", "15", "--max-time", "100", "--silent", "--show-error", "--fail", "http://localhost:8000/" ]
