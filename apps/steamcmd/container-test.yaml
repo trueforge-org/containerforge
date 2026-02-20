@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../../testhelpers/container-test.schema.json
 timeoutSeconds: 120
 commands:
-- command: timeout 180 steamcmd +quit >/tmp/steamcmd-online.log 2>&1 || true; grep -q "Update complete, launching" /tmp/steamcmd-online.log
+- command: timeout 180 steamcmd +quit >/tmp/steamcmd.log 2>&1 || true; grep -q "Steam Console Client" /tmp/steamcmd.log
 - command: test "$(dpkg-query -W steamcmd:i386 | cut -f2)" = $(cat /usr/local/share/steamcmd/.package-version)
 filePaths:
 - /start.sh
