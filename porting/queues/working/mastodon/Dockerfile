@@ -107,13 +107,16 @@ RUN \
         -o -name '*LICENSE*' \
         -o -name 'Rakefile' \
         -o -name '.*' \) \
-        -type f -delete
+        -type f -delete && \
+    rm -rf /app/www/tmp /app/www/public/system && \
+    ln -s /config/mastodon/tmp /app/www/tmp && \
+    ln -s /config/mastodon/public/system /app/www/public/system
 
 USER apps
 COPY . /
 COPY ./root /
 
-EXPOSE 80 443
+EXPOSE 3000
 
 VOLUME /config
 
