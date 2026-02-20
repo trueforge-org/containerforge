@@ -21,6 +21,7 @@ RUN \
     php-redis \
     composer \
     php8.3-common \
+    php8.3-cli \
     php8.3-xml \
     php8.3-zip \
     php-mcrypt && \
