@@ -12,9 +12,6 @@ if [ ! -f /config/Steam/steamcmd/steamcmd.sh ]; then
         cp /usr/local/share/steamcmd/steamcmd.sh /config/Steam/steamcmd/
         if [ -f /usr/local/share/steamcmd/linux32/steamcmd ]; then
             cp /usr/local/share/steamcmd/linux32/steamcmd /config/Steam/steamcmd/linux32/
-        else
-            echo "Error: /usr/local/share/steamcmd/linux32/steamcmd not found." >&2
-            exit 1
         fi
     elif [ -f /usr/lib/games/steam/steamcmd.sh ] && [ -f /usr/lib/games/steam/steamcmd ]; then
         cp /usr/lib/games/steam/steamcmd.sh /config/Steam/steamcmd/
