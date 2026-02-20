@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../../testhelpers/container-test.schema.json
-timeoutSeconds: 120
-commands:
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+
+runners:
 - command: mongosh --version
