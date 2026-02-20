@@ -36,7 +36,14 @@ if [ "${STEAM_LOGIN_USER}" != "anonymous" ]; then
 fi
 
 if [ "${STEAMCMD_PRE_UPDATE:-true}" = "true" ]; then
-    /config/Steam/steamcmd/steamcmd.sh "${LOGIN_ARGS[@]}" +quit
+    if ! /config/Steam/steamcmd/steamcmd.sh "${LOGIN_ARGS[@]}" +quit; then
+        if [ -n "${STEAM_APP_IDS:-}" ] && [ "${STEAMCMD_SKIP_APP_UPDATE:-false}" != "true" ]; then
+            echo "Error: SteamCMD pre-update failed while app initialization is enabled. Check SteamCMD output above for details." >&2
+            exit 1
+        else
+            echo "Warning: SteamCMD pre-update failed; continuing because no app initialization was requested." >&2
+        fi
+    fi
 fi
 
 if [ -n "${STEAM_APP_IDS:-}" ] && [ "${STEAMCMD_SKIP_APP_UPDATE:-false}" != "true" ]; then
