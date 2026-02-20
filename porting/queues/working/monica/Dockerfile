@@ -74,6 +74,12 @@ RUN \
   composer install \
     --no-dev \
     --no-interaction && \
+  mkdir -p /config/www/storage /config/www/cache && \
+  rm -rf /app/www/storage /app/www/bootstrap/cache /app/www/.env && \
+  ln -s /config/www/storage /app/www/storage && \
+  ln -s /config/www/cache /app/www/bootstrap/cache && \
+  ln -s /config/www/.env /app/www/.env && \
+  chown -R apps:apps /config && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
