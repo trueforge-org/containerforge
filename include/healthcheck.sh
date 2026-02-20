@@ -178,5 +178,6 @@ elif [[ "${SECTION}" == "healthCommands" ]]; then
 fi
 
 if [[ "${CHECKS_RUN}" -eq 0 ]]; then
-    exit 1
+    # No checks configured is considered healthy for images that only use readiness smoke tests.
+    exit 0
 fi
