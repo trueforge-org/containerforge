@@ -2,5 +2,5 @@
 
 runners:
 - command: kubectl version --client
-  expectedContent: Client Version
-  matchContent: true
+  expectedOutput: Client Version
+

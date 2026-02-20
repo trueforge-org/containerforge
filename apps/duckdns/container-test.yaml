@@ -5,5 +5,5 @@ runners:
 - command: test -f /defaults/logrotate.conf
 - command: bash -n /app/duck.sh
 - command: head -n 1 /app/duck.sh
-  expectedContent: '#!/usr/bin/env bash'
-  matchContent: true
+  expectedOutput: '#!/usr/bin/env bash'
+
