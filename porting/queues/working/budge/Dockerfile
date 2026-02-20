@@ -60,7 +60,7 @@ COPY . /
 COPY ./root /
 
 # ports and volumes
-EXPOSE 80 443
+EXPOSE 5000
 VOLUME /config
 
 WORKDIR /config
