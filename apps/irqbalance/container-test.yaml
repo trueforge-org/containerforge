@@ -1,6 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
 
-runners:
-- entrypoint: echo "application wont work, waiting 120 seconds" && sleep 120
+
 filePaths:
 - /usr/sbin/irqbalance
