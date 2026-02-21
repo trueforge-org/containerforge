@@ -82,7 +82,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: ${{ fromJson(needs.plan.outputs.platforms) }}
-    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
+    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'self-hosted' }}
     steps:
       - name: Checkout
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
@@ -190,7 +190,8 @@ jobs:
 
   merge:
     name: Merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     needs: build
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     outputs:
@@ -271,7 +272,8 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
       - name: Install Cosign
         uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
@@ -346,7 +348,8 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
 
       - name: Install Cosign
