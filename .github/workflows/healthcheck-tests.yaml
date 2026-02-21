@@ -16,7 +16,8 @@ jobs:
     name: Healthcheck Positive/Negative
     permissions:
       contents: read
-    runs-on: ubuntu-latest
+    runs-on:
+      group: default
     steps:
       - name: Checkout
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
