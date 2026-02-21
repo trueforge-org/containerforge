@@ -2,4 +2,5 @@
 
 runners:
 - entrypoint: echo "application wont work, waiting 120 seconds" && sleep 120
-- filePath: /app/qbit_manage.py
+filePaths:
+- /app/qbit_manage.py

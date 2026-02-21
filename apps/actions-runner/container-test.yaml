@@ -2,5 +2,6 @@
 
 runners:
 - entrypoint:  echo "starting tests..." && mkdir -p "/config/somedir" && touch "/config/somedir/somefile" && sleep 120 && touch "/config/testfile" && echo "timeout..."
-- filePath: /usr/local/bin/yq
-- filePath: /bin/sh
+filePaths:
+- /usr/local/bin/yq
+- /bin/sh
