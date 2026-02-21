@@ -82,7 +82,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: ${{ fromJson(needs.plan.outputs.platforms) }}
-    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
+    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - name: Checkout
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
