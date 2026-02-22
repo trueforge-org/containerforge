@@ -134,6 +134,7 @@ jobs:
       - name: Add Include Directory to Build Context
         run: |-
           rsync -a --progress ./include/ ./apps/${{ inputs.app }}/
+          chmod +x ./apps/${{ inputs.app }}/healthcheck.sh
 
       - name: Build App
         uses: docker/bake-action@1cf124c0da50acdcb82ef32c93262bfe09c7d069
