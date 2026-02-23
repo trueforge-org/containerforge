@@ -39,10 +39,7 @@ RUN \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
-    /root \
-    /tmp/* && \
-  mkdir -p / \
-    /root
+    /tmp/*
 
 # copy local files
 USER apps

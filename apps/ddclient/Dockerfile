@@ -43,7 +43,6 @@ RUN \
   apt-get purge -y --auto-remove build-essential && \
   rm -rf \
     /config/.cpanm \
-    /root/.cpanm \
     /tmp/* && \
   rm -rf /var/lib/apt/lists/*
 

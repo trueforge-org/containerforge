@@ -42,7 +42,6 @@ RUN \
   chmod 755 /usr/bin/kepubify && \
   echo "**** cleanup ****" && \
   rm -rf \
-    /root/.composer \
     /tmp/* && \
   apt-get clean && rm -rf /var/lib/apt/lists/*
 

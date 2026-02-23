@@ -18,10 +18,10 @@ if [[ -n "${SUDO_PASSWORD}" ]] || [[ -n "${SUDO_PASSWORD_HASH}" ]]; then
 fi
 
 
-cp -n /root/.bashrc /config/.bashrc
+cp -n /defaults/.bashrc /config/.bashrc
 
 
-cp -n /root/.profile /config/.profile
+cp -n /defaults/.profile /config/.profile
 
 chmod 700 /config/.ssh || true
 if [[ -n "$(ls -A /config/.ssh)" ]]; then

@@ -34,8 +34,7 @@ RUN \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
-    /tmp/* \
-    /root/.cache
+    /tmp/*
 
 # copy local files
 USER apps

@@ -37,10 +37,7 @@ RUN \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
-    /root \
-    /tmp/* && \
-  mkdir -p \
-    /root
+    /tmp/*
 
 # add local files
 USER apps

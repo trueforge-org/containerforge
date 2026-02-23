@@ -37,7 +37,6 @@ RUN \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
-    /root/.cache \
     /tmp/*
 
 # add local files

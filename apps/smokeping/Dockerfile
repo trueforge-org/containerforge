@@ -26,12 +26,12 @@ RUN \
     sudo \
     tcptraceroute && \
   echo "**** Build perl TacacsPlus module ****" && \
-  HOME=/root cpanm Authen::TacacsPlus || true && \
+  HOME=/tmp cpanm Authen::TacacsPlus || true && \
   echo "**** Build perl InfluxDB modules ****" && \
-  HOME=/root cpanm InfluxDB::HTTP || true && \
-  HOME=/root cpanm Method::Signatures --force || true && \
-  HOME=/root cpanm Object::Result || true && \
-  HOME=/root cpanm InfluxDB::LineProtocol || true && \
+  HOME=/tmp cpanm InfluxDB::HTTP || true && \
+  HOME=/tmp cpanm Method::Signatures --force || true && \
+  HOME=/tmp cpanm Object::Result || true && \
+  HOME=/tmp cpanm InfluxDB::LineProtocol || true && \
   echo "**** give setuid access to traceroute & tcptraceroute ****" && \
   if [ -f /usr/bin/traceroute ]; then chmod a+s /usr/bin/traceroute; fi && \
   if [ -f /usr/bin/tcptraceroute ]; then chmod a+s /usr/bin/tcptraceroute; fi && \
@@ -41,7 +41,6 @@ RUN \
   apt-get autoremove -y && \
   rm -rf \
     /tmp/* \
-    /root/.cpanm \
     /etc/apache2/httpd.conf
 
 # add local files
