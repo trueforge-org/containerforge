@@ -14,8 +14,8 @@
 !health/
 !compatibility.sh
 !upgrade.sh
-!/root
-!/etc
-!/usr
+!root/
+!etc/
+!usr/
 !container-test.yaml
 !healthcheck.sh
