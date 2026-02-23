@@ -1,4 +1,3 @@
-# ===== From ./processed/code-server/root/etc/s6-overlay//s6-rc.d/init-code-server/run =====
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
@@ -12,7 +11,6 @@ if [[ ! -f /config/.profile ]]; then
     cp /defaults/.profile /config/.profile
 fi
 
-# ===== From ./processed/code-server/root/etc/s6-overlay//s6-rc.d/svc-code-server/run =====
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
