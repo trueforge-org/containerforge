@@ -16,6 +16,6 @@
     "logsDirectory": "/config/logs"
   },
   "folders": {
-    "library": { "root": "/music" }
+    "library": { "root": "/config/music" }
   }
 }

@@ -2,8 +2,7 @@
 
 
 mkdir -p \
-    /config/{album-art,db,keys,logs,sync} \
-    /music
+    /config/{album-art,db,keys,logs,music,sync}
 
 # create keys
 if [[ ! -e /config/keys/certificate.pem ]]; then
@@ -42,4 +41,3 @@ PORT=$(jq -r '.port' /config/config.json)
 
 cd /app/mstream
 exec mstream -j /config/config.json
-
