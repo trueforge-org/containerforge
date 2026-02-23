@@ -47,8 +47,7 @@ RUN \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \
-    /var/tmp/* \
-    /root/.cache
+    /var/tmp/*
 
 # add local files
 USER apps

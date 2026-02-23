@@ -81,7 +81,28 @@
 #7 6.751 debconf: delaying package configuration, since apt-utils is not installed
 #7 6.782 Fetched 23.2 MB in 2s (15.1 MB/s)
 #7 6.799 Selecting previously unselected package libuv1t64:amd64.
-#7 6.799 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#7 6.799 (Reading database ...
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 20754 files and directories currently installed.)
 #7 6.814 Preparing to unpack .../00-libuv1t64_1.48.0-1.1build1_amd64.deb ...
 #7 6.819 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
 #7 6.839 Selecting previously unselected package libarchive13t64:amd64.
@@ -141,8 +162,12 @@
 #7 8.091 *** install your_spotify ***
 #7 8.097   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 #7 8.097                                  Dload  Upload   Total   Spent    Left  Speed
-#7 8.097   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-#7 8.640 100  577k    0  577k    0     0  1064k      0 --:--:-- --:--:-- --:--:-- 1064k
+#7 8.097
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#7 8.640
+100  577k    0  577k    0     0  1064k      0 --:--:-- --:--:-- --:--:-- 1064k
 #7 DONE 8.9s
 
 #8 [buildclient 1/1] RUN   echo "*** install your_spotify client ***" &&   cd /app/www &&   rm -rf /app/www/apps/server &&   yarnpkg --frozen-lockfile &&   cd /app/www/apps/client &&   yarnpkg build &&   rm -rf /app/www/node_modules &&   yarnpkg cache clean
@@ -191,25 +216,25 @@
 #8 122.9   npx update-browserslist-db@latest
 #8 122.9   Why you should do it regularly: https://github.com/browserslist/update-db#readme
 #8 123.9 Compiled successfully.
-#8 123.9 
+#8 123.9
 #8 123.9 File sizes after gzip:
-#8 123.9 
+#8 123.9
 #8 123.9   360.98 kB  build/static/js/main.95b331be.js
 #8 123.9   6.53 kB    build/static/css/main.04d1ef05.css
-#8 123.9 
+#8 123.9
 #8 123.9 The project was built assuming it is hosted at /.
 #8 123.9 You can control this with the homepage field in your package.json.
-#8 123.9 
+#8 123.9
 #8 123.9 The build folder is ready to be deployed.
 #8 123.9 You may serve it with a static server:
-#8 123.9 
+#8 123.9
 #8 123.9   npm install -g serve
 #8 123.9   serve -s build
-#8 123.9 
+#8 123.9
 #8 123.9 Find out more about deployment here:
-#8 123.9 
+#8 123.9
 #8 123.9   https://cra.link/deployment
-#8 123.9 
+#8 123.9
 #8 124.2 Done in 52.95s.
 #8 127.4 yarn cache v1.22.22
 #8 133.2 success Cleared cache.
@@ -289,7 +314,28 @@
 #15 10.23 debconf: delaying package configuration, since apt-utils is not installed
 #15 10.26 Fetched 23.2 MB in 3s (7,830 kB/s)
 #15 10.28 Selecting previously unselected package libuv1t64:amd64.
-#15 10.28 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20754 files and directories currently installed.)
+#15 10.28 (Reading database ...
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 20754 files and directories currently installed.)
 #15 10.30 Preparing to unpack .../00-libuv1t64_1.48.0-1.1build1_amd64.deb ...
 #15 10.30 Unpacking libuv1t64:amd64 (1.48.0-1.1build1) ...
 #15 10.32 Selecting previously unselected package libarchive13t64:amd64.
@@ -341,7 +387,7 @@
 #15 11.46 Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
 #15 11.46 Setting up libpython3.12-dev:amd64 (3.12.3-1ubuntu0.11) ...
 #15 11.47 Setting up python3.12-dev (3.12.3-1ubuntu0.11) ...
-#15 11.47 Setting up libjs-sphinxdoc (7.2.6-6) ...
+#15 11.47 Setting updoc (7.2.6-6) ...
 #15 11.47 Setting up cmake (3.28.3-1build7) ...
 #15 11.47 Setting up libpython3-dev:amd64 (3.12.3-0ubuntu2.1) ...
 #15 11.48 Setting up python3-dev (3.12.3-0ubuntu2.1) ...
@@ -367,9 +413,9 @@
 #15 17.56 yarn cache v1.22.22
 #15 17.85 success Cleared cache.
 #15 17.85 Done in 0.29s.
-#15 20.84 
+#15 20.84
 #15 20.84 added 86 packages in 3s
-#15 20.84 
+#15 20.84
 #15 20.84 25 packages are looking for funding
 #15 20.84   run `npm fund` for details
 #15 20.84 npm notice

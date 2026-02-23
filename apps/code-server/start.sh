@@ -1,18 +1,16 @@
-# ===== From ./processed/code-server/root/etc/s6-overlay//s6-rc.d/init-code-server/run =====
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
 mkdir -p /config/{extensions,data,workspace,.ssh}
 
 if [[ ! -f /config/.bashrc ]]; then
-    cp /root/.bashrc /config/.bashrc
+    cp /defaults/.bashrc /config/.bashrc
 fi
 
 if [[ ! -f /config/.profile ]]; then
-    cp /root/.profile /config/.profile
+    cp /defaults/.profile /config/.profile
 fi
 
-# ===== From ./processed/code-server/root/etc/s6-overlay//s6-rc.d/svc-code-server/run =====
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 

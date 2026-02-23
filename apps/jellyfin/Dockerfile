@@ -29,7 +29,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 USER apps
 COPY --chmod=0755 . /
-COPY ./root/ /
 COPY ./ /
 
 EXPOSE 8096 8920

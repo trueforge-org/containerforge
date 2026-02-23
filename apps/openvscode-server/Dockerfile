@@ -35,7 +35,6 @@ RUN \
     /var/tmp/*
 
 # add local files
-COPY /root /
 COPY --chmod=0755 . /
 # ports and volumes
 EXPOSE 3000

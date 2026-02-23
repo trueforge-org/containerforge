@@ -20,7 +20,7 @@ RUN echo "**** install ubooquity ****" && \
 # copy local files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # ports and volumes
 EXPOSE 2202 2203

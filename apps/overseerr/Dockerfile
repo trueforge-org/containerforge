@@ -23,7 +23,6 @@ RUN apt-get update && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf \
       /tmp/* \
-      /root/.cache \
       /app/src \
       /app/server \
       /app/.next/cache/*
