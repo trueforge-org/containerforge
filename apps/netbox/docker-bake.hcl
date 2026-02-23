@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=netbox-community/netbox versioning=loose
-  default = "4.4.6"
+  default = "4.4.10"
 }
 
 variable "LICENSE" {
