@@ -114,7 +114,7 @@ RUN \
 
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 EXPOSE 3000
 

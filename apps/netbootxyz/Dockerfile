@@ -31,7 +31,7 @@ RUN \
 # copy local files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # app runs on port 3000
 EXPOSE 3000

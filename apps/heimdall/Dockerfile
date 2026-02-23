@@ -53,7 +53,7 @@ RUN \
 # add local files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # ports and volumes
 EXPOSE 80 443

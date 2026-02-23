@@ -197,7 +197,7 @@ COPY --from=buildstage /tmp/tvheadend-build/usr/ /usr/
 COPY --from=buildstage /picons /picons
 
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # ports and volumes
 EXPOSE 9981 9982

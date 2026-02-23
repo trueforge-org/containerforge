@@ -91,7 +91,28 @@
 #7 7.203 debconf: delaying package configuration, since apt-utils is not installed
 #7 7.233 Fetched 3,063 kB in 2s (1,475 kB/s)
 #7 7.247 Selecting previously unselected package libbpf1:amd64.
-#7 7.247 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16577 files and directories currently installed.)
+#7 7.247 (Reading database ...
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 16577 files and directories currently installed.)
 #7 7.259 Preparing to unpack .../00-libbpf1_1%3a1.3.0-2build2_amd64.deb ...
 #7 7.260 Unpacking libbpf1:amd64 (1:1.3.0-2build2) ...
 #7 7.278 Selecting previously unselected package libmnl0:amd64.
@@ -172,7 +193,7 @@
 #7 7.827 Setting up libnfnetlink0:amd64 (1.0.2-2build1) ...
 #7 7.829 Setting up libbsd0:amd64 (0.12.1-1build1.1) ...
 #7 7.831 Setting up iputils-ping (3:20240117-1ubuntu0.1) ...
-#7 7.841 Setting up libbpf1:amd64 (1:1.3.0-2build2) ...
+#7 7.841 bbpf1:amd64 (1:1.3.0-2build2) ...
 #7 7.843 Setting up iproute2 (6.1.0-1ubuntu6.2) ...
 #7 7.925 Setting up libedit2:amd64 (3.1-20230828-1build1) ...
 #7 7.927 Setting up libnftnl11:amd64 (1.2.6-2build1) ...

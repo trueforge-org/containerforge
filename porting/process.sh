@@ -207,7 +207,7 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^ARGVERSION|d' \
             -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
             -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
-            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|COPY.*root.*|USER apps\nCOPY . /\n|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \
@@ -241,7 +241,7 @@ for df in "${dockerfiles[@]}"; do
             -e '\|^ARGVERSION|d' \
             -e '\|^ARG DEBIAN_FRONTEND="noninteractive"|d' \
             -e 's|\$TARGETARCHv8-.*^[aA ]*||g' \
-            -e 's|COPY.*root.*|USER apps\nCOPY . /\nCOPY ./root /|g' \
+            -e 's|COPY.*root.*|USER apps\nCOPY . /\n|g' \
             -e 's|ARG VERSION|ARG VERSION\nARG TARGETARCH\nUSER root|g' \
             -e 's|https://wheel-index.linuxserver.io/alpine-3.22/|https://wheel-index.linuxserver.io/ubuntu/|g' \
             -e 's|abc|apps|g' \

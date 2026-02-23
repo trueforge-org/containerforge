@@ -47,7 +47,7 @@ COPY --from=buildstage /app/pwndrop/ /app/pwndrop/
 # add local files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # ports and volumes
 EXPOSE 8080 4443

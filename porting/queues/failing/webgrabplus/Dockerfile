@@ -50,7 +50,7 @@ RUN \
 # copy files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # ports and volumes
 VOLUME /config

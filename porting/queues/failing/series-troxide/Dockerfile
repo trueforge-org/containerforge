@@ -33,7 +33,7 @@ ENV TITLE=Series-Troxie
 
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 RUN \
   echo "**** install deps ****" && \
@@ -59,7 +59,7 @@ RUN \
 # add local files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # ports and volumes
 EXPOSE 3000

@@ -58,7 +58,7 @@ Use these rules as strict defaults when making changes in this repository.
 - Important system binaries (for example Go or Python) MAY be installed under `/usr/local` so `/app` remains empty for downstream `FROM` consumers.
 - You MUST include `COPY --chmod=0755 . /` in Dockerfiles to enable container tests, and you MUST NOT remove it unless explicitly requested.
 - container-test.yaml has a json schema in `testhelpers/container-test-schema.json` that defines required properties for container tests. You MUST follow the schema when editing or adding container-test.yaml files.
-- root/ MUST ONLY be used for runtime copy-to-rootfs
+- root/ is a special folder for run-time copy and MUST ONLY be used for runtime copy-to-rootfs. It MUST NOT be used by agents.
 - app/, etc/ and defaults/ MUST be included at the same level as the docker-bake.hcl
 
 ## 7) Base-image and downstream impact rules

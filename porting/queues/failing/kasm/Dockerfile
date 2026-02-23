@@ -111,7 +111,7 @@ RUN \
 # add init files
 USER apps
 COPY --chmod=0755 . /
-COPY ./root /
+
 
 # Ports and volumes
 EXPOSE 3000 443
