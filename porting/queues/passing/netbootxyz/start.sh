@@ -38,33 +38,7 @@ if [[ ! -f /config/menus/remote/menu.ipxe ]]; then
     rm -f /tmp/menus.tar.gz
 fi
 
-# make our folders
-mkdir -p \
-    /assets \
-    /config/{nginx/site-confs,log/nginx} \
-    /run \
-    /var/lib/nginx/tmp/client_body \
-    /var/tmp/nginx
-
-# copy config files
-if [[ ! -f /config/nginx/nginx.conf ]]; then
-    cp /defaults/nginx.conf /config/nginx/nginx.conf
-fi
-
-if [[ ! -f /config/nginx/site-confs/default ]]; then
-    if [ -z ${NGINX_PORT+x} ]; then
-        NGINX_PORT=80
-    fi
-    sed -i "s/REPLACE_PORT/$NGINX_PORT/g" /defaults/default
-    cp /defaults/default /config/nginx/site-confs/default
-fi
-
-
-## TODO: Deal with multi-exec
-exec /usr/sbin/nginx -c /config/nginx/nginx.conf
-
-exec /usr/sbin/in.tftpd --foreground --listen --user apps --secure ${PORT_RANGE:+--port-range $PORT_RANGE} /config/menus
+mkdir -p /assets
 
 cd /app
 exec /usr/bin/node app.js
-
