@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+
+mkdir -p \
+    /config/static \
+    /config/media \
+    /config/scripts
+
+declare -A NETBOX_CONF
+NETBOX_CONF[ALLOWED_HOST]=${ALLOWED_HOST:-netbox.example.com}
+NETBOX_CONF[BASE_PATH]=${BASE_PATH:-}
+NETBOX_CONF[DB_NAME]=${DB_NAME:-netbox}
+NETBOX_CONF[DB_USER]=${DB_USER:-root}
+NETBOX_CONF[DB_PASSWORD]=${DB_PASSWORD:-}
+NETBOX_CONF[DB_HOST]=${DB_HOST:-postgres}
+NETBOX_CONF[DB_PORT]=${DB_PORT:-}
+NETBOX_CONF[REDIS_HOST]=${REDIS_HOST:-redis}
+NETBOX_CONF[REDIS_PORT]=${REDIS_PORT:-6379}
+NETBOX_CONF[REDIS_PASSWORD]=${REDIS_PASSWORD:-}
+NETBOX_CONF[REDIS_DB_TASK]=${REDIS_DB_TASK:-0}
+NETBOX_CONF[REDIS_DB_CACHE]=${REDIS_DB_CACHE:-1}
+NETBOX_CONF[REMOTE_AUTH_ENABLED]=${REMOTE_AUTH_ENABLED:-False}
+NETBOX_CONF[REMOTE_AUTH_BACKEND]=${REMOTE_AUTH_BACKEND:-netbox.authentication.RemoteUserBackend}
+NETBOX_CONF[REMOTE_AUTH_HEADER]=${REMOTE_AUTH_HEADER:-HTTP_REMOTE_USER}
+NETBOX_CONF[REMOTE_AUTH_AUTO_CREATE_USER]=${REMOTE_AUTH_AUTO_CREATE_USER:-False}
+NETBOX_CONF[REMOTE_AUTH_DEFAULT_GROUPS]=${REMOTE_AUTH_DEFAULT_GROUPS:-[]}
+NETBOX_CONF[REMOTE_AUTH_DEFAULT_PERMISSIONS]=${REMOTE_AUTH_DEFAULT_PERMISSIONS:-{}}
+
+cd /app/netbox/netbox || exit 1
+
+NETBOX_CONF[SECRET_KEY]=${SECRET_KEY:-$(python3 ./generate_secret_key.py)}
+
+if [[ ! -f "/config/configuration.py" ]]; then
+    cp /defaults/configuration.py /config/configuration.py
+
+    # sed in values or skip if value not set
+    for KEY in "${!NETBOX_CONF[@]}"; do \
+        sed -i 's|{{'$KEY'}}|'${NETBOX_CONF[$KEY]}'|g' /config/configuration.py
+    done
+fi
+
+touch /config/ldap_config.py
+
+cd /app/netbox/netbox
+exec /usr/bin/uwsgi --ini /defaults/uwsgi.ini
+
+cd /app/netbox/netbox || exit 1
+
+/app/venv/bin/python ./manage.py migrate
+
+if [[ -n "$SUPERUSER_EMAIL" ]] && [[ -n "$SUPERUSER_PASSWORD" ]]; then
+cat << EOF |  python3 /app/netbox/netbox/manage.py shell
+from users.models import Token, User;
+
+username = 'admin';
+password = '$SUPERUSER_PASSWORD';
+email = '$SUPERUSER_EMAIL';
+
+if not User.objects.filter(username='admin'):
+    User.objects.create_superuser(username, email, password);
+    print('Superuser created.');
+else:
+    print('Superuser creation skipped. Already exists.');
+EOF
+fi
+
+# build docs
+if [[ ! -e "/app/netbox/netbox/project-static/docs/index.html" ]]; then
+    cd /app/netbox || exit 1
+    echo "Building local documentation"
+    mkdocs build -q
+    cd /app/netbox/netbox || exit 1
+fi
+
+## TODO: find exec

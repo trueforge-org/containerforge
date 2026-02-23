@@ -1,0 +1,8 @@
+# Sweep Status
+
+- Timestamp (UTC): 2026-02-19T23:33:23Z
+- Build: ok
+- Forgetool test: ok
+- Run status: running
+- Timeout for build/test: 120 seconds
+- Forgetool path: /tmp/forgetool-bin/forgetool

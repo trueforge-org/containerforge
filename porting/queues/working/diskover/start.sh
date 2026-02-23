@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+
+# setup web
+mkdir -p \
+    /config/diskover-web.conf.d
+
+# touch db
+if [[ ! -e "/config/diskoverdb.sqlite3" ]]; then
+    touch /config/diskoverdb.sqlite3
+fi
+
+if [ -f "/config/diskover.cfg" ]; then
+    echo '
+******************************************************
+******************************************************
+*                                                    *
+*                                                    *
+*     We have detected that you have an existing     *
+*                                                    *
+*   diskover v1 config file. Version 1 is now EOL.   *
+*                                                    *
+*    If you would like to upgrade, please create a   *
+*                                                    *
+*   new /config directory. If you want to continue   *
+*                                                    *
+*  using version 1, specify the tag v1.5.0.13-ls33.  *
+*                                                    *
+*                More information at                 *
+*                                                    *
+* https://github.com/diskoverdata/diskover-community *
+*                                                    *
+*                                                    *
+******************************************************
+******************************************************'
+    while true; do
+        sleep 3600
+    done
+fi
+
+exec php8.3 -S 0.0.0.0:80 -t /app/diskover-web/public
