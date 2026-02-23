@@ -24,5 +24,25 @@ if [[ ! -f /config/owntone.conf ]]; then
         /config/owntone.conf
 fi
 
-exec /usr/sbin/owntone -f -c /config/owntone.conf -P /config/owntone.pid \
-    --mdns-no-rsp --mdns-no-daap --mdns-no-cname --mdns-no-web
+enable_mdns="${ENABLE_MDNS:-false}"
+
+owntone_args=(
+    -f
+    -c /config/owntone.conf
+    -P /config/owntone.pid
+)
+
+if [[ "${enable_mdns,,}" != "true" ]]; then
+    owntone_args+=(
+        --mdns-no-rsp
+        --mdns-no-daap
+        --mdns-no-cname
+        --mdns-no-web
+    )
+fi
+
+if [[ "$#" -gt 0 ]]; then
+    owntone_args+=("$@")
+fi
+
+exec /usr/sbin/owntone "${owntone_args[@]}"
