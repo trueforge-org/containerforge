@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=linuxserver/docker-fail2ban versioning=loose
-  default = "1.1.0-r2"
+  default = "1.1.0-r2-ls29"
 }
 
 variable "LICENSE" {
