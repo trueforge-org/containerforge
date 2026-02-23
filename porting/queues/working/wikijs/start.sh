@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 
-if [[ -z ${DB_TYPE} ]]; then
-    printf "sqlite" > /run/s6/container_environment/DB_TYPE
-fi
+export DB_TYPE="${DB_TYPE:-sqlite}"
 
 if [[ ! -f "/config/config.yml" ]]; then
     cp /defaults/config.yml /config/config.yml
