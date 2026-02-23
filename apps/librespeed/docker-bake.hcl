@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=librespeed/speedtest versioning=loose
-  default = "5.4.1"
+  default = "v5.5.1"
 }
 
 variable "LICENSE" {
