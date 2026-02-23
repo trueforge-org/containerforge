@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=diskoverdata/diskover-community versioning=loose
-  default = "2.3.3"
+  default = "2.3.5"
 }
 
 variable "LICENSE" {
