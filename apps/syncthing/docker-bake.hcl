@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=linuxserver/docker-syncthing versioning=loose
-  default = "2.0.11"
+  default = "v2.0.14-ls208"
 }
 
 variable "LICENSE" {
