@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=linuxserver/docker-lychee versioning=loose
-  default = "6.10.1"
+  default = "v6.10.4-ls18"
 }
 
 variable "LICENSE" {
