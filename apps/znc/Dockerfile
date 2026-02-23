@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:ec0d5db35e9cb896aa56dba7cacc1a97dede19debe52c217ed044e7a32f27536 AS buildstage
 ############## build stage ##############
 ARG VERSION
 USER root
