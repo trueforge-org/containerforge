@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=linuxserver/docker-ngircd versioning=loose
-  default = "27-r1"
+  default = "27-r1-ls163"
 }
 
 variable "LICENSE" {
