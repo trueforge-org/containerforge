@@ -16,5 +16,6 @@
 !upgrade.sh
 !/root
 !/etc
+!/usr
 !container-test.yaml
 !healthcheck.sh
