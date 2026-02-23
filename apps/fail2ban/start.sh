@@ -6,7 +6,9 @@ mkdir -p \
     /config/fail2ban/{action.d,filter.d,jail.d}
 
 # copy/update the fail2ban configs from /defaults to /config
-cp -R /defaults/fail2ban /config
+if [[ -d /defaults/fail2ban ]]; then
+    cp -R /defaults/fail2ban /config
+fi
 
 # symlink fail2ban configs to /config
 

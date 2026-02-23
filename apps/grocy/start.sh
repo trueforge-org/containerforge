@@ -21,7 +21,11 @@ if [[ ! -f "/config/data/config.php" ]]; then
 fi
 
 if [[ ! -f "/config/data/plugins/DemoBarcodeLookupPlugin.php" ]]; then
-    cp -R /defaults/plugins /config/data
+    if [[ -d /defaults/plugins ]]; then
+        cp -R /defaults/plugins /config/data
+    elif [[ -d /app/www/data/plugins ]]; then
+        cp -R /app/www/data/plugins /config/data
+    fi
 fi
 
 exec php -S 0.0.0.0:80 -t /app/www/public
