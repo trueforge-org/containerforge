@@ -29,9 +29,11 @@ RUN \
     pip \
     setuptools \
     wheel && \
-  /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine-3.20/ \
+  /app/venv/bin/pip install -U --no-cache-dir \
     certifi \
     sickchill=="${VERSION}" && \
+  /app/venv/bin/pip install -U --no-cache-dir 'stevedore<5' && \
+  /app/venv/bin/pip install -U --no-cache-dir 'setuptools<81' && \
   echo "**** clean up ****" && \
   apt-get autoremove -y && \
   rm -rf \
