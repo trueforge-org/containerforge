@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=linuxserver/docker-rsnapshot versioning=loose
-  default = "1.4.5-r0"
+  default = "1.4.5-r0-ls152"
 }
 
 variable "LICENSE" {
