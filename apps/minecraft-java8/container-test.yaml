@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+
+tcp:
+- port: "25565"
+
+healthCommands:
+- command: /app/mc-health

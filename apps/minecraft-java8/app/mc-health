@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+exec mc-monitor status --host "${MC_MONITOR_HOST:-127.0.0.1}" --port "${SERVER_PORT:-25565}"
