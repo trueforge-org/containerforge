@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/baseimage-kasmvnc:debianbookworm
+FROM containerforge/kasmvnc
 
 # set version label
 ARG VERSION
