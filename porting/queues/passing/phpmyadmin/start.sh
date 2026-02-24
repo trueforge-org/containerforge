@@ -24,14 +24,15 @@ if [[ ! -f /config/phpmyadmin/config.user.inc.php ]]; then
 fi
 
 if [[ ! -f /config/phpmyadmin/config.inc.php ]]; then
-    cp /defaults/config.inc.php /config/phpmyadmin/config.inc.php
+    cp /root/defaults/config.inc.php /config/phpmyadmin/config.inc.php
 fi
 
 if [[ ! -f /config/phpmyadmin/helpers.php ]]; then
-    cp /defaults/helpers.php /config/phpmyadmin/helpers.php
+    cp /root/defaults/helpers.php /config/phpmyadmin/helpers.php
 fi
 
 
+if [[ -w "/app/www/public" ]]; then
     # Set up themes
     if [[ -d "/config/themes" && ! -L "/app/www/public/themes" ]]; then
         cp -R /app/www/public/themes/* /config/themes
@@ -43,5 +44,7 @@ fi
     if [[ -d "/config/themes" && ! -L "/app/www/public/themes" ]]; then
         ln -s "/config/themes" "/app/www/public/themes"
     fi
+fi
 
-## TODO: find exec
+cd /app/www/public
+exec php -S 0.0.0.0:8080
