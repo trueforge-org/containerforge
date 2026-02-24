@@ -21,7 +21,7 @@ RUN \
   cargo install series-troxide
 
 # runtime
-FROM ghcr.io/trueforge-org/baseimage-kasmvnc:debianbookworm
+FROM containerforge/kasmvnc
 
 # set version label
 ARG VERSION
