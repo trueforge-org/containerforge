@@ -12,7 +12,7 @@ ENV HOME="/config" \
   MINETEST_GAME_PATH="/config/.minetest/games"
 
 # build variables
-ARG LDFLAGS="-lintl"
+ARG LDFLAGS=""
 
 RUN \
     echo "**** install build packages ****" && \
@@ -21,6 +21,7 @@ RUN \
         build-essential \
         libbz2-dev \
         cmake \
+        libcurl4-openssl-dev \
         doxygen \
         gettext \
         libgmp-dev \
@@ -96,6 +97,7 @@ RUN \
         "https://github.com/luanti-org/luanti/archive/${VERSION}.tar.gz" && \
     tar xf /tmp/luanti-src.tar.gz -C \
         /tmp/luanti --strip-components=1 && \
+    mkdir -p /defaults && \
     sed -i 's/# enable_ipv6 = true/enable_ipv6 = true/' /tmp/luanti/minetest.conf.example && \
     sed -i 's/# ipv6_server = false/ipv6_server = true/' /tmp/luanti/minetest.conf.example && \
     cp /tmp/luanti/minetest.conf.example /defaults/minetest.conf && \
@@ -130,6 +132,7 @@ RUN \
         build-essential \
         libbz2-dev \
         cmake \
+        libcurl4-openssl-dev \
         doxygen \
         gettext \
         libgmp-dev \
