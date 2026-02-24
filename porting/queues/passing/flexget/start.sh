@@ -26,7 +26,7 @@ if [[ -f "${FG_LOCK_FILE}" ]]; then
 fi
 
 if [[ ! -f "${FG_CONFIG_FILE}" ]]; then
-    cp /default/config.yml "${FG_CONFIG_FILE}"
+    cp /root/default/config.yml "${FG_CONFIG_FILE}"
 fi
 
 if [[ -n "${FG_WEBUI_PASSWORD}" ]]; then
@@ -36,12 +36,6 @@ if [[ -n "${FG_WEBUI_PASSWORD}" ]]; then
     fi
 fi
 
-if grep -qe ' /data ' /proc/mounts; then
-
-        /data
-fi
-
 cd /config
 exec /app/venv/bin/python /app/venv/bin/flexget \
             --loglevel "${FG_LOG_LEVEL:-info}" --logfile "${FG_LOG_FILE:-/config/.flexget/flexget.log}" -c "${FG_CONFIG_FILE:-/config/.flexget/config.yml}" daemon start --autoreload-config
-
