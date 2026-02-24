@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-wireguard versioning=loose
   default = "1.0.20250521-r0"
 }
 

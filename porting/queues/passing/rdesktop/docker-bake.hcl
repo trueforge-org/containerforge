@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-rdesktop versioning=loose
   default = "ubuntu-xfce-7a12df0e"
 }
 

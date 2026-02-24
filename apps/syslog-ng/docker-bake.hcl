@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-syslog-ng versioning=loose
   default = "4.10.2-r1-ls184"
 }
 

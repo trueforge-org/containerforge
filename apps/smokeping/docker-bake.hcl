@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-smokeping versioning=loose
   default = "2.9.0-r0-ls164"
 }
 
