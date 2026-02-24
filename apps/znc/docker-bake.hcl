@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=znc/znc versioning=loose
   default = "znc-1.10.1"
 }
 
