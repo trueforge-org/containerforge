@@ -114,6 +114,9 @@ RUN \
 # add init files
 USER apps
 COPY --chmod=0755 . /
+USER root
+RUN cp /root/gpuinfo.sh /gpuinfo.sh && chmod 0755 /gpuinfo.sh
+USER apps
 
 
 # Ports and volumes
