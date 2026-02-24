@@ -25,4 +25,4 @@ for CARD in $CARDS; do
 done
 
 # Print json string
-echo $JSON
+echo "$JSON"
