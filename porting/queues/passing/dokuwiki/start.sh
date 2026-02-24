@@ -30,34 +30,36 @@ if [[ ! -d /config/dokuwiki/lib/images/smileys ]]; then
     mkdir -p /config/dokuwiki/lib/images/smileys/local
 fi
 
-## Move user folders to persistent storage
-for i in "${USER_DIRECTORY[@]}"; do
-    if [[ ! -d /config/dokuwiki/"${i}" ]] && [[ -d /app/www/public/"${i}" ]]; then
-        mv /app/www/public/"${i}" /config/dokuwiki/"${i}"/
-    fi
-done
+if [[ -w /app/www/public ]]; then
+    ## Move user folders to persistent storage
+    for i in "${USER_DIRECTORY[@]}"; do
+        if [[ ! -d /config/dokuwiki/"${i}" ]] && [[ -d /app/www/public/"${i}" ]]; then
+            mv /app/www/public/"${i}" /config/dokuwiki/"${i}"/
+        fi
+    done
 
-# Update built-in plugins
-for i in /app/www/public/lib/plugins/*/; do
-    if [[ -d "/config/dokuwiki/lib/plugins/$(basename "${i}")" ]] && [[ -d "/app/www/public/lib/plugins/$(basename "${i}")" ]] && [[ ! -L "/app/www/public/lib/plugins" ]]; then
-        cp -R /app/www/public/lib/plugins/"$(basename "${i}")"/* /config/dokuwiki/lib/plugins/"$(basename "${i}")"
-    fi
-done
+    # Update built-in plugins
+    for i in /app/www/public/lib/plugins/*/; do
+        if [[ -d "/config/dokuwiki/lib/plugins/$(basename "${i}")" ]] && [[ -d "/app/www/public/lib/plugins/$(basename "${i}")" ]] && [[ ! -L "/app/www/public/lib/plugins" ]]; then
+            cp -R /app/www/public/lib/plugins/"$(basename "${i}")"/* /config/dokuwiki/lib/plugins/"$(basename "${i}")"
+        fi
+    done
 
-## Remove user folders
-for i in "${USER_DIRECTORY[@]}"; do
-    if [[ -d /app/www/public/"${i}" ]]; then
-        rm -rf /app/www/public/"${i}"
-    fi
-done
+    ## Remove user folders
+    for i in "${USER_DIRECTORY[@]}"; do
+        if [[ -d /app/www/public/"${i}" ]]; then
+            rm -rf /app/www/public/"${i}"
+        fi
+    done
 
-## Make Symlinks
-for i in "${USER_DIRECTORY[@]}"; do
-    if [[ ! -L /app/www/public/"${i}" ]]; then
-        ln -s /config/dokuwiki/"${i}" /app/www/public/"${i}"
-    fi
+    ## Make Symlinks
+    for i in "${USER_DIRECTORY[@]}"; do
+        if [[ ! -L /app/www/public/"${i}" ]]; then
+            ln -s /config/dokuwiki/"${i}" /app/www/public/"${i}"
+        fi
 
-done
+    done
+fi
 
 ## Make Symlinks from /app/www/public to /config/dokuwiki
 ## This is to make sure plugins that include files
@@ -82,7 +84,7 @@ fi
 
 ## Remove install.php once setup & enable pretty urls to work after setting .htaccess method in admin panel.
 if [[ -f /config/dokuwiki/conf/local.php ]]; then
-    if rm -rf /app/www/public/install.php; then
+    if [[ -w /app/www/public ]] && rm -rf /app/www/public/install.php; then
         echo "Existing install found, deleting install.php."
     fi
 
@@ -100,4 +102,5 @@ fi
 ## Backwards compatibility 2021/04/15
 sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
 
-## TODO: Missing exec
+cd /app/www/public
+exec php -S 0.0.0.0:8080
