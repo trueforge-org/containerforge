@@ -68,6 +68,7 @@ RUN \
     /wizard --strip-components=1 && \
   cd /wizard && \
   npm install && \
+  npm rebuild node-pty --build-from-source && \
   echo "**** add installer ****" && \
   curl -o \
     /tmp/kasm.tar.gz -L \
@@ -97,8 +98,10 @@ RUN \
   cp \
     /kasm_release/conf/database/seed_data/default_images_a* \
     /wizard/ && \
+  mkdir -p /opt/kasm/certs /opt/docker /opt/docker-plugins && \
   useradd -u 70 kasm_db && \
   useradd kasm && \
+  chown -R apps:apps /opt/kasm /opt/docker /opt/docker-plugins && \
   echo "**** cleanup ****" && \
   apt-get remove -y g++ gcc make && \
   apt-get -y autoremove && \
