@@ -14,7 +14,7 @@ case "${FG_CONFIG_FILE}" in
   *yaml)
     FG_LOCK_FILE="${FG_CONFIG_FILE/config.yaml/.config-lock}"
     ;;
-  default)
+  *)
     echo "invalid config file extension"
     exit 1
     ;;
