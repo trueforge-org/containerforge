@@ -2,7 +2,7 @@
 
 
 # check if ipfs is disabled
-if [ -z ${DISABLE_IPFS+x} ]; then
+if [[ -z ${DISABLE_IPFS+x} ]] && command -v ipfs >/dev/null 2>&1; then
 
     # ipfs migrate check on startup
     if [[ -d "/data/.ipfs" ]]; then
@@ -17,7 +17,7 @@ if [ -z ${DISABLE_IPFS+x} ]; then
 fi
 
 # link user data to frontend
-if [[ ! -L '/emulatorjs/frontend/user' ]]; then
+if [[ -w '/emulatorjs/frontend' ]] && [[ ! -L '/emulatorjs/frontend/user' ]]; then
     ln -s /data /emulatorjs/frontend/user
 fi
 
@@ -34,7 +34,9 @@ if [[ ! -f '/config/profile/profile.json' ]]; then
 fi
 
 # nginx mime types
-cp /defaults/mime.types /etc/nginx/mime.types
+if [[ -w /etc/nginx ]]; then
+    cp /defaults/mime.types /etc/nginx/mime.types
+fi
 
 # allow users to mount in ro rom dirs
 DIRS='3do atari2600 atari5200 atari7800 colecovision doom gba lynx n64 nes odyssey2 psx segaCD segaMD segaSaturn snes vb ws arcade atari5200 gb gbc jaguar msx nds ngp pce sega32x segaGG segaMS segaSG vectrex'
@@ -70,4 +72,3 @@ cd /emulatorjs
 HOME=/config
 ## TODO: What to do with this?
 exec node profile.js
-

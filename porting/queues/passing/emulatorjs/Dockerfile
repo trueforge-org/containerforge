@@ -52,6 +52,7 @@ RUN \
 FROM ghcr.io/trueforge-org/node:22.22.0 as nodebuilder
 
 USER root
+ARG VERSION
 
 RUN \
   echo "**** install build packages ****" && \
@@ -110,17 +111,13 @@ RUN \
     file \
     flac \
     nginx \
+    nodejs \
     p7zip-full \
     python3 \
     libsdl2-2.0-0 && \
   apt-get install -y --no-install-recommends \
     mame-tools && \
-  mkdir /data && \
-  echo "**** use pinned node ****" && \
-  curl -L \
-    https://github.com/thelamer/node-stash/raw/master/v16.20.2/$TARGETARCH/node -o \
-    /bin/node && \
-  chmod +x /bin/node && \
+  mkdir -p /data && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* && \
