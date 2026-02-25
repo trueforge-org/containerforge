@@ -23,22 +23,10 @@ if [[ -f /config/pydio.json ]]; then
     fi
 fi
 
-# permissions
-
-    /app \
-    /config
-
-
-
-
-
 if [[ -f /config/pydio.json ]]; then
     RUN_OPTS="start --log=production"
 else
     RUN_OPTS="configure --site_bind 0.0.0.0:8080 --site_external $EXTERNALURL --tls_cert_file /config/keys/cert.crt --tls_key_file /config/keys/cert.key"
 fi
 
-exec \
-
-         /app/cells ${RUN_OPTS}
-
+exec /app/cells ${RUN_OPTS}
