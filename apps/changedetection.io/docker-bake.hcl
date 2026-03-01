@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=dgtlmoon/changedetection.io versioning=loose
-  default = "0.54.2"
+  default = "0.54.3"
 }
 
 variable "LICENSE" {
