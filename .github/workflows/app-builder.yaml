@@ -116,7 +116,7 @@ jobs:
           app: ${{ inputs.app }}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@3227f5311cb93ffd14d13e65d8cc400d30f4dd8a
+        uses: docker/login-action@c4a8904a9352f06a99205f48f31f9f709c445c35
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
