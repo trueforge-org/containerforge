@@ -47,7 +47,7 @@ jobs:
           upstream-version: ${{ steps.app-options.outputs.version }}
 
       - name: Build App Metadata
-        uses: docker/metadata-action@cb50be45084dde2f4465550fdd9e0abf61483be1
+        uses: docker/metadata-action@538feedf4700b0f0df4f8fa03f182e561a72bc11
         id: meta
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
