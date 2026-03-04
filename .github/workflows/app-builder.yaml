@@ -137,7 +137,7 @@ jobs:
           chmod +x ./apps/${{ inputs.app }}/healthcheck.sh
 
       - name: Build App
-        uses: docker/bake-action@1e43cd9ec14883ee3108bef6f06f7f9a274763d9
+        uses: docker/bake-action@4cde8b2bc235593985e0e2b899a0f24f9162b85e
         id: bake
         with:
           files: |
