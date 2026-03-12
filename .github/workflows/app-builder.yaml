@@ -123,7 +123,7 @@ jobs:
           password: ${{ github.token }}
 
       - name: Download Bake Metadata
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ runner.temp }}
@@ -204,13 +204,13 @@ jobs:
           persist-credentials: false
 
       - name: Download Bake Metadata
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ runner.temp }}
 
       - name: Download Digests
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
         with:
           path: ${{ runner.temp }}/digests
           pattern: ${{ inputs.app }}-digests-*
