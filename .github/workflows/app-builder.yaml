@@ -441,7 +441,7 @@ jobs:
           to-app: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:sandbox
 
       - name: Post App Size Diff
-        uses: marocchino/sticky-pull-request-comment@aaf617804e8ce598ae82d38f1b107e812ab81ba0
+        uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987
         with:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           header: app-size-diff-${{ inputs.app }}
