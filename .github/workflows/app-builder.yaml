@@ -413,7 +413,7 @@ jobs:
           persist-credentials: false
 
       - name: Generate Token
-        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349
+        uses: actions/create-github-app-token@d2129bd463d4feb8723edeea9437baa7db58e41e
         id: app-token
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
