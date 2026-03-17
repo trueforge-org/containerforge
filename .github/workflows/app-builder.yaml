@@ -172,7 +172,6 @@ jobs:
             *.tags=
           source: .
           targets: image
-          workdir: ./apps/${{ inputs.app }}
 
       - name: Export Digest
         run: |-
