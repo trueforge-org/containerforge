@@ -14,9 +14,7 @@ RUN set -ex \
   \
   && apt-get update \
   # Development files for c-client mail API (used by IMAP)
-  && apt-get install -y --no-install-recommends \
-  libc-client-dev \
-  -t packages.sury.org php8.4-imap \
+  && apt-get install -y --no-install-recommends libc-client-dev \
   && apt-get dist-clean \
   \
   # Block the repository completely for future use
@@ -49,22 +47,27 @@ RUN set -ex; \
       echo "Skipping intel-media-va-driver-non-free on $TARGETARCH"; \
     fi; \
     # Optional package installation
-    savedAptMark="$(apt-mark showmanual)"; \
+savedAptMark="$(apt-mark showmanual)"; \
     \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         libbz2-dev \
         libkrb5-dev \
+        libc-client-dev \
+        libssl-dev \
         libsmbclient-dev \
         libmagickcore-dev \
     ; \
     \
-    docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
     docker-php-ext-install \
         bz2 \
-        imap \
         soap \
     ; \
+    \
+    pecl install imap \
+    && docker-php-ext-enable imap \
+    ; \
+    \
     pecl install smbclient; \
     docker-php-ext-enable smbclient; \
     \
