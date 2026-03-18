@@ -16,7 +16,7 @@ RUN set -ex \
   # Development files for c-client mail API (used by IMAP)
   && apt-get install -y --no-install-recommends \
   libc-client-dev \
-  php8.4-imap \
+  -t packages.sury.org php8.4-imap \
   && apt-get dist-clean \
   \
   # Block the repository completely for future use
