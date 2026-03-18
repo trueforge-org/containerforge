@@ -2,4 +2,4 @@
 
 http:
 - port: '5055'
-  path: /
+  path: /api/v1/status
