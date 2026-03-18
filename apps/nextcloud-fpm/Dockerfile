@@ -14,7 +14,9 @@ RUN set -ex \
   \
   && apt-get update \
   # Development files for c-client mail API (used by IMAP)
-  && apt-get install -y --no-install-recommends libc-client-dev \
+  && apt-get install -y --no-install-recommends \
+  libc-client-dev \
+  php-imap \
   && apt-get dist-clean \
   \
   # Block the repository completely for future use
@@ -24,9 +26,8 @@ RUN set -ex \
 
 RUN set -ex; \
     \
-    CODENAME="$(. /etc/os-release && echo $VERSION_CODENAME)" && \
-    echo "deb http://deb.debian.org/debian $CODENAME main contrib non-free non-free-firmware" \
-  > /etc/apt/sources.list.d/intel-graphics.list && \
+    echo "deb http://ftp.debian.org/debian $(cat /etc/os-release | grep VERSION_CODENAME | cut -d= -f2) non-free" >> \
+    /etc/apt/sources.list.d/intel-graphics.list && \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         jq \
