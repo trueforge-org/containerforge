@@ -52,7 +52,7 @@ RUN apt-get update && \
 
 # Download and install SOPS
 # renovate: datasource=github-releases depName=getsops/sops
-ENV SOPS_VERSION=3.12.1
+ENV SOPS_VERSION=3.12.2
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
     chmod +x /usr/local/bin/sops
