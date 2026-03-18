@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/postgres
-  default = "1.1.0"
+  default = "9.6.24"
 }
 
 variable "LICENSE" {
