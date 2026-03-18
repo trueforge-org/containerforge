@@ -24,8 +24,9 @@ RUN set -ex \
 
 RUN set -ex; \
     \
-    echo "deb http://ftp.debian.org/debian $(cat /etc/os-release | grep VERSION_CODENAME | cut -d= -f2) non-free" >> \
-    /etc/apt/sources.list.d/intel-graphics.list && \
+    CODENAME="$(. /etc/os-release && echo $VERSION_CODENAME)" && \
+    echo "deb http://deb.debian.org/debian $CODENAME main contrib non-free non-free-firmware" \
+  > /etc/apt/sources.list.d/intel-graphics.list && \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         jq \
