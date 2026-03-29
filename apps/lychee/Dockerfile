@@ -1,7 +1,7 @@
 ## Move to our an own container
 FROM ghcr.io/trueforge-org/node:22.22.0@sha256:57a4a36bdf735ecfef262feb3354be695eadba8d4bd73138444dadfcce23da02
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:1c874769d7dc656030d189c30532396d444ab56a283f2828480b4c8a06359ee8
+FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:8f6de6a5c28a657e36d1b7630580eaf27788aac5d0603d18d644a1ac1332f061
 
 # set version label
 ARG VERSION
