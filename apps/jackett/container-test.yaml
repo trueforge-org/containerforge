@@ -3,4 +3,4 @@
 http:
 - port: '9117'
   path: /
-  statusCode: 400
+  statusCode: 200
