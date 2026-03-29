@@ -3,3 +3,6 @@
 
 filePaths:
 - /entrypoint.sh
+
+mainRunner:
+  "cmd": "sleep 999"
