@@ -12,7 +12,7 @@ RUN npm install -g corepack@latest \
     && pnpm install --prefer-offline \
     && pnpm build
 
-FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:3638602333405b90e3492baf58c63dd1c96e5a1a84442102f11b16d9a2cf98da
+FROM ghcr.io/trueforge-org/nginx:1.24.0@sha256:be0e6f296bb058d874b8ed74ef9b40068146a22e9442c371d438151e9a9287ed
 USER root
 COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html
 
