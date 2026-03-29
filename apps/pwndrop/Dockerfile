@@ -34,7 +34,7 @@ echo "**** fetch source code ****" && \
   cp -r ./www /app/pwndrop/admin
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:8f6de6a5c28a657e36d1b7630580eaf27788aac5d0603d18d644a1ac1332f061
+FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:1685c0f458568fddff62e0fe0f0804de9d13469bd9fc967bc8c7bde606166969
 
 # set version label
 ARG VERSION
