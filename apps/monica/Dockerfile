@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:5232c62344c6305326b2f082e3666b7a66158b84d873d380a2157d175913b3d8
+FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:89addf1490f13750c80033b38f1522f42d0858c913b1be2bc3c484c9b32ca063
 
 ARG VERSION
 ARG TARGETARCH
