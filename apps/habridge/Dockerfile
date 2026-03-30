@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/java8:8@sha256:9365e4b5b189d386ef884c2d34bf0be144a02429beef8d0d0e17eceb475c2d16
+FROM ghcr.io/trueforge-org/java8:8@sha256:2912a2069e7a4ada1a5860750a76aaf9a7e226327a6a04d9088ff2732eb3c81e
 
 # set version label
 ARG VERSION
