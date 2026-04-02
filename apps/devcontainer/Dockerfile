@@ -89,7 +89,7 @@ ENV kubevalVersion=0.16.1
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ENV kubeconformVersion=0.7.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
-ENV conftestVersion=0.67.1
+ENV conftestVersion=0.68.0
 # renovate: datasource=github-releases depName=mikefarah/yq
 ENV goyqVersion=4.52.5
 # renovate: datasource=github-releases depName=rancher/cli
