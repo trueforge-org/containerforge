@@ -103,7 +103,7 @@ jobs:
           echo "PUSH=${PUSH}" >> $GITHUB_ENV
 
       - name: Get Target Architecture
-        uses: actions/github-script@450193c5abd4cdb17ba9f3ffcfe8f635c4bb6c2a
+        uses: actions/github-script@afff112e4f8b57c718168af75b89ce00bc8d091d
         id: target
         with:
           script: |-
