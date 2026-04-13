@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=custom.hotio depName=cloudflareddns versioning=loose
+  // renovate: datasource=docker depName=ghcr.io/hotio/cloudflareddns versioning=loose
   default = "3.0.0.4856"
 }
 
