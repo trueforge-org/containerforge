@@ -77,7 +77,7 @@ RUN apt-get update && \
 
 ### Kubernetes-Tools Installer
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ENV kubectlVersion=1.35.3
+ENV kubectlVersion=1.35.4
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
 # renovate: datasource=github-releases depName=helm/helm
