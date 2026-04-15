@@ -129,7 +129,7 @@ jobs:
           path: ${{ runner.temp }}
 
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@b609d6fb2f745916717a2ed24679332b18cc884f
+        uses: docker/setup-buildx-action@35d5669990ec77242c5a5926b41381a3f26fa947
 
       - name: Add Include Directory to Build Context
         run: |-
