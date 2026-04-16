@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:00bb62757540babe6b6ed56afef7816c6ab762f584fdfc0d0961cd53ea1de812
+FROM ghcr.io/trueforge-org/python:3.13.12@sha256:43a10c572aef8f97ad3c8cb4e0eff77fbc9068de95e1abecad0c4c0a8a843dbf
 
 ARG VERSION
 ARG YARN_VERSION
