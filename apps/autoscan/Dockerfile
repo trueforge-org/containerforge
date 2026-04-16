@@ -14,7 +14,7 @@ RUN mkdir /autoscan && \
     go build -o autoscan ./cmd/autoscan && \
     chmod 755 "/autoscan/autoscan"
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:b91efc25164fbe723a41eca66f239d8f6c008fd7d10ceda9d5ba0975104d0432
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:c5a3b56e4d22600d2b618d602d487732516cc067cb21969798210c3b12304842
 
 EXPOSE 3030
 ARG IMAGE_STATS
