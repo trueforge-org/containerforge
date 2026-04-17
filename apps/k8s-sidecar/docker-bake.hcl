@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=ghcr.io/kiwigrid/k8s-sidecar
-  default = "2.5.2"
+  default = "2.5.5"
 }
 
 variable "LICENSE" {
