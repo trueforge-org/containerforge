@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=ryanlelek/Raneto versioning=loose
-  default = "0.18.0"
+  default = "0.18.1"
 }
 
 variable "LICENSE" {
