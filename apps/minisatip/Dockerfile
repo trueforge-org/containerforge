@@ -15,6 +15,7 @@ RUN \
   apt-get update && \
   apt-get install --no-install-recommends -y \
     build-essential \
+    cmake \
     git \
     libdvbcsa-dev \
     libssl-dev \
@@ -31,11 +32,14 @@ RUN \
     /tmp/satip.tar.gz -C \
     /app/satip --strip-components=1 && \
   cd /app/satip && \
-  ./configure && \
-  make DDCI=1 && \
+  cmake -B build . && \
+  cmake --build build -- -j"$(nproc)" && \
+  mv /app/satip/build/minisatip /app/satip/minisatip && \
+  rm -rf /app/satip/build && \
   echo "**** clean up ****" && \
   apt-get -y purge \
     build-essential \
+    cmake \
     git \
     libssl-dev \
     linux-headers-generic \
