@@ -33,7 +33,7 @@ RUN \
     /app/satip --strip-components=1 && \
   cd /app/satip && \
   cmake -B build . && \
-  cmake --build build -- -j"$(nproc)" && \
+  cmake --build build -j"$(nproc)" && \
   mv /app/satip/build/minisatip /app/satip/minisatip && \
   rm -rf /app/satip/build && \
   echo "**** clean up ****" && \
