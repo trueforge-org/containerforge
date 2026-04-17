@@ -98,7 +98,7 @@ jobs:
 
       - name: Install forgetool
         run: |
-          VERSION="4.0.0-ALPHA21"
+          VERSION="4.0.0-ALPHA23"
           FILENAME="forgetool_${VERSION}_linux_amd64.tar.gz"
           URL="https://github.com/trueforge-org/forgetool/releases/download/v${VERSION}/${FILENAME}"
           mkdir -p temp
