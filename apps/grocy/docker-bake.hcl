@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=grocy/grocy versioning=loose
-  default = "4.5.0"
+  default = "4.6.0"
 }
 
 variable "LICENSE" {
