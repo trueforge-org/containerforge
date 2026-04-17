@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=gilbertchen/duplicacy
-  default = "1.8.0"
+  default = "v3.2.5"
 }
 
 variable "LICENSE" {
