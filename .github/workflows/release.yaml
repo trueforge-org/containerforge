@@ -96,16 +96,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install forgetool
-        run: |
-          VERSION="4.0.0-ALPHA23"
-          FILENAME="forgetool_${VERSION}_linux_amd64.tar.gz"
-          URL="https://github.com/trueforge-org/forgetool/releases/download/v${VERSION}/${FILENAME}"
-          mkdir -p temp
-          cd temp
-          curl -L -o "$FILENAME" "$URL"
-          tar -xzf "$FILENAME"
-          cd ..
+      - name: Setup Forgetool
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ inputs.token }}
+        run: |-
+          TAG=""
+          if RELEASES_JSON="$(curl -fsSL \
+            https://api.github.com/repos/trueforge-org/forgetool/releases)"; then
+            TAG="$(jq -r '[.[]
+              | select(.prerelease == true)
+              | .tag_name
+              | select(test("^(forgetool-)?v[0-9]+\\.[0-9]+\\.[0-9]+-ALPHA[0-9]+$"))
+              | {tag: ., alpha: (capture("ALPHA(?<n>[0-9]+)$").n | tonumber)}
+            ] | if length > 0 then max_by(.alpha).tag else empty end' <<< "${RELEASES_JSON}")"
+          fi
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA24"
+          VERSION="${TAG#v}"
+          VERSION="${VERSION#forgetool-v}"
+          case "$(uname -m)" in
+            x86_64) ARCH="amd64" ;;
+            aarch64) ARCH="arm64" ;;
+            *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64." && exit 1 ;;
+          esac
+          curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
+          mkdir -p "${RUNNER_TEMP}/forgetool-bin"
+          tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool || { echo "Failed to extract forgetool binary from archive"; exit 1; }
+          chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
+          echo "${RUNNER_TEMP}/forgetool-bin" >> "${GITHUB_PATH}"
 
       - name: Checkout website repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -117,7 +135,7 @@ jobs:
 
       - name: Generate container list
         run: |
-          ./temp/forgetool containers genlist ./apps
+          forgetool containers genlist ./apps
           mkdir -p website/containerforge/src/assets
           mv -f containers.json website/containerforge/src/assets/containers.json
 
@@ -157,7 +175,7 @@ jobs:
             gunzip "$JSON_FILE.gz" --force
           fi
 
-          ./temp/forgetool containers genchangelog "$REPO_PATH" "$TEMPLATE_PATH" "$OUTPUT_DIR"
+          forgetool containers genchangelog "$REPO_PATH" "$TEMPLATE_PATH" "$OUTPUT_DIR"
 
           gzip "$JSON_FILE" --best || echo "Compression failed, ignoring..."
 
