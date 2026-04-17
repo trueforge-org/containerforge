@@ -117,7 +117,7 @@ jobs:
 
       - name: Generate container list
         run: |
-          ./temp/forgetool containers gencontainerlist ./apps
+          ./temp/forgetool containers genlist ./apps
           mkdir -p website/containerforge/src/assets
           mv -f containers.json website/containerforge/src/assets/containers.json
 
