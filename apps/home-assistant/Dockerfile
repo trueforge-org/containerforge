@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:43a10c572aef8f97ad3c8cb4e0eff77fbc9068de95e1abecad0c4c0a8a843dbf
+FROM ghcr.io/trueforge-org/python:3.14.4@sha256:ad4dde9774b3433fdfd16a118973b00ebf41d716d9f8e666cc34c8e30c168c56
 ARG TARGETARCH
 ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
 ARG TARGETARCH=${TARGETARCH/arm64/aarch64}
