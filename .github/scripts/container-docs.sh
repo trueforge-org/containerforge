@@ -52,6 +52,10 @@ copy_new_docs() {
   cp -rf "apps/${app}/icon.webp" "website/containerforge/public/img/hotlink-ok/container-icons/${app}.webp" 2>/dev/null || :
   cp -rf "apps/${app}/icon-small.webp" "website/containerforge/public/img/hotlink-ok/container-icons-small/${app}.webp" 2>/dev/null || :
   cp -rf "apps/${app}/screenshots/"* "website/containerforge/public/img/hotlink-ok/container-screenshots/${app}/" 2>/dev/null || :
+  # Copy generated changelog to website docs
+  if [ -f "apps/${app}/app-changelog.md" ]; then
+    cp -f "apps/${app}/app-changelog.md" "$docs_base/${app}/CHANGELOG.md"
+  fi
 }
 
 check_and_fix_title() {
