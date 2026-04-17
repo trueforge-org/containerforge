@@ -127,12 +127,38 @@ jobs:
           # Fix sh files to always be executable
           find . -name '*.sh' | xargs chmod +x
 
+      - name: Get Changelog Format Version
+        run: |
+          ver="1"
+          rev="1"
+          key="changelog-format-$ver-rev-$rev"
+          echo "Cache Key is: $key"
+          echo "CHANGELOG_CACHE_KEY=$key" >> $GITHUB_ENV
+
+      - name: Cache Changelog
+        id: cache-changelog
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
+        with:
+          key: ${{ env.CHANGELOG_CACHE_KEY }}-${{ hashFiles('**/docker-bake.hcl') }}
+          path: changelog.json.gz
+          restore-keys: |
+            ${{ env.CHANGELOG_CACHE_KEY }}-${{ hashFiles('**/docker-bake.hcl') }}
+            ${{ env.CHANGELOG_CACHE_KEY }}-
+
       - name: Generate changelogs
         run: |
-          for app_dir in apps/*/docker-bake.hcl; do
-            app=$(basename "$(dirname "$app_dir")")
-            ./.github/scripts/changelog.sh "${app}"
-          done
+          export REPO_PATH="./"
+          export TEMPLATE_PATH="./templates/CHANGELOG.md.tmpl"
+          export OUTPUT_DIR="./changelogs"
+          export JSON_FILE="changelog.json"
+
+          if [ -f "$JSON_FILE.gz" ]; then
+            gunzip "$JSON_FILE.gz" --force
+          fi
+
+          ./temp/forgetool containers genchangelog "$REPO_PATH" "$TEMPLATE_PATH" "$OUTPUT_DIR"
+
+          gzip "$JSON_FILE" --best || echo "Compression failed, ignoring..."
 
       - name: Copy docs to website
         run: |
@@ -157,6 +183,15 @@ jobs:
           # Restore description-list.mdx
           if [ -f ./description-list.mdx ]; then
             mv -f ./description-list.mdx ./website/containerforge/src/content/docs/containers/description-list.mdx
+          fi
+
+          # Copy changelogs to docs
+          echo "Copying changelogs to docs"
+          mkdir -p ./changelogs
+          if [ -n "$(find ./changelogs -mindepth 1 -type d)" ]; then
+              cp -r ./changelogs/** ./website/containerforge/src/content/docs/containers/
+          else
+              echo "No directories in ./changelogs. Skipping copy."
           fi
 
           export DEBUG=false

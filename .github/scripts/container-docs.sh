@@ -46,16 +46,27 @@ remove_old_docs() {
 
 copy_new_docs() {
   local app="$1"
+  local charts_icon_base="https://raw.githubusercontent.com/trueforge-org/truecharts/refs/heads/master/charts/stable"
 
   echo "Copying new docs to website for ${app}"
   cp -rf "apps/${app}/docs/"* "$docs_base/${app}/" 2>/dev/null || :
-  cp -rf "apps/${app}/icon.webp" "website/containerforge/public/img/hotlink-ok/container-icons/${app}.webp" 2>/dev/null || :
-  cp -rf "apps/${app}/icon-small.webp" "website/containerforge/public/img/hotlink-ok/container-icons-small/${app}.webp" 2>/dev/null || :
-  cp -rf "apps/${app}/screenshots/"* "website/containerforge/public/img/hotlink-ok/container-screenshots/${app}/" 2>/dev/null || :
-  # Copy generated changelog to website docs
-  if [ -f "apps/${app}/app-changelog.md" ]; then
-    cp -f "apps/${app}/app-changelog.md" "$docs_base/${app}/CHANGELOG.md"
+
+  # Icon: use local if available, otherwise try to fetch from truecharts charts/stable
+  if [ -f "apps/${app}/icon.webp" ]; then
+    cp -rf "apps/${app}/icon.webp" "website/containerforge/public/img/hotlink-ok/container-icons/${app}.webp"
+  else
+    echo "No local icon.webp for ${app}, checking truecharts charts/stable..."
+    curl -fsSL "${charts_icon_base}/${app}/icon.webp" -o "website/containerforge/public/img/hotlink-ok/container-icons/${app}.webp" 2>/dev/null || echo "No chart icon found for ${app}, skipping..."
   fi
+
+  if [ -f "apps/${app}/icon-small.webp" ]; then
+    cp -rf "apps/${app}/icon-small.webp" "website/containerforge/public/img/hotlink-ok/container-icons-small/${app}.webp"
+  else
+    echo "No local icon-small.webp for ${app}, checking truecharts charts/stable..."
+    curl -fsSL "${charts_icon_base}/${app}/icon-small.webp" -o "website/containerforge/public/img/hotlink-ok/container-icons-small/${app}.webp" 2>/dev/null || echo "No chart icon-small found for ${app}, skipping..."
+  fi
+
+  cp -rf "apps/${app}/screenshots/"* "website/containerforge/public/img/hotlink-ok/container-screenshots/${app}/" 2>/dev/null || :
 }
 
 check_and_fix_title() {
