@@ -9,6 +9,7 @@ on:
     paths:
       - apps/**
       - .github/scripts/container-docs.sh
+      - .github/workflows/release.yaml
   workflow_dispatch:
     inputs:
       app:
@@ -116,7 +117,7 @@ jobs:
 
       - name: Generate container list
         run: |
-          ./temp/forgetool container gencontainerlist ./apps
+          ./temp/forgetool containers gencontainerlist ./apps
           mkdir -p website/containerforge/src/assets
           mv -f containers.json website/containerforge/src/assets/containers.json
 
