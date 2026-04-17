@@ -3,3 +3,6 @@
 
 filePaths:
 - /etc/os-release
+
+mainRunner:
+  "cmd": "sleep 999"
