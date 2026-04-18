@@ -73,7 +73,7 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 
@@ -81,6 +81,6 @@ COPY --chmod=0755 . /
 
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 8083
 VOLUME /config

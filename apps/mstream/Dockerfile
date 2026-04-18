@@ -36,12 +36,12 @@ RUN \
     /tmp/* \
     /tmp/.npm
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 3000
 VOLUME /config
 

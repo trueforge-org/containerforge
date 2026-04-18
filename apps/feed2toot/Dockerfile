@@ -6,7 +6,7 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-# environment settings
+# environment settings
 ENV PYTHONIOENCODING=utf-8 \
     PYTHONUNBUFFERED=1
 
@@ -22,7 +22,7 @@ RUN echo "**** install feed2toot ****" && \
     /tmp/* \
     $HOME/.cache
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 

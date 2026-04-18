@@ -14,7 +14,7 @@ if [[ -n "$CONTEXT_PATH" ]]; then
     CONTEXT_PATH="${CONTEXT_PATH#/}"
 fi
 
-# set url base to / if variable not set, readding leading slash if variable is set.
+# set url base to / if variable not set, readding leading slash if variable is set.
 URL_BASE="/${CONTEXT_PATH}"
 
 # add option to pass runtime arguments

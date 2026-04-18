@@ -50,12 +50,12 @@ RUN \
     $HOME/.cache \
     /tmp/*
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 8085
 VOLUME /config
 

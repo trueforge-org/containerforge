@@ -6,7 +6,7 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-# environment settings
+# environment settings
 
 ENV HOME="/config"
 
