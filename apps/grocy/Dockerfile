@@ -21,9 +21,10 @@ RUN \
         php8.5-ldap \
         php8.5-mbstring \
         php8.5-fpm \
-        composer \
         php8.5-xml \
         php8.5-sqlite3 && \
+    echo "**** install composer ****" && \
+    curl -fsSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     echo "**** configure php-fpm to pass env vars ****" && \
     if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && \
     echo "**** install grocy ****" && \
