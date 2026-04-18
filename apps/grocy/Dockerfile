@@ -9,19 +9,25 @@ RUN \
     echo "**** install build packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
+        software-properties-common \
+        gnupg2 && \
+    add-apt-repository ppa:ondrej/php -y && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
         yarn && \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
-        php8.3-gd \
-        php8.3-intl \
-        php8.3-ldap \
-        php8.3-opcache \
+        php8.5-gd \
+        php8.5-intl \
+        php8.5-ldap \
+        php8.5-opcache \
+        php8.5-fpm \
         composer \
-        php8.3-xml \
-        php8.3-sqlite3 \
-        php8.3-tokenizer && \
+        php8.5-xml \
+        php8.5-sqlite3 \
+        php8.5-tokenizer && \
     echo "**** configure php-fpm to pass env vars ****" && \
-    if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
+    if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && \
     echo "**** install grocy ****" && \
     mkdir -p /app/www && \
     curl -fL -o \
