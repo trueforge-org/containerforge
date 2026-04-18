@@ -10,9 +10,14 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
+    software-properties-common && \
+  add-apt-repository ppa:ondrej/php -y && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
     php8.4-xml \
     php8.4-gd \
     php8.4-intl \
+    php8.4-fpm \
     composer \
     php8.4-zip \
     php8.4-sqlite3 && \
