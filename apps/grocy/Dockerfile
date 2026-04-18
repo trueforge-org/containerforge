@@ -19,6 +19,7 @@ RUN \
         php8.5-gd \
         php8.5-intl \
         php8.5-ldap \
+        php8.5-mbstring \
         php8.5-fpm \
         composer \
         php8.5-xml \
