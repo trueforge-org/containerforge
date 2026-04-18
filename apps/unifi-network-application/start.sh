@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# create our folders
+# create our folders
 mkdir -p \
     /run/unifi/work/ROOT \
     /config/{data,logs}
 
-# create symlinks for config
+# create symlinks for config
 symlinks=( \
 /usr/lib/unifi/data \
 /usr/lib/unifi/logs )
@@ -63,7 +63,7 @@ if [[ ! -e /config/data/system.properties ]]; then
     fi
 fi
 
-# generate key
+# generate key
 if [[ ! -f /config/data/keystore ]]; then
     keytool -genkey -keyalg RSA -alias unifi -keystore /config/data/keystore \
     -storepass aircontrolenterprise -keypass aircontrolenterprise -validity 3650 \

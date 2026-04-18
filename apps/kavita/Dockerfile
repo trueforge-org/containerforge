@@ -7,7 +7,7 @@ USER root
 
 ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
-# environment settings
+# environment settings
 ENV HOME="/config" \
   COMPlus_EnableDiagnostics=0
 
