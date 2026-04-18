@@ -9,26 +9,33 @@ RUN \
     echo "**** install build packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        yarn && \
+        software-properties-common \
+        gnupg2 && \
+    add-apt-repository ppa:ondrej/php -y && \
+    apt-get update && \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
-        php8.3-gd \
-        php8.3-intl \
-        php8.3-ldap \
-        php8.3-opcache \
-        composer \
-        php8.3-xml \
-        php8.3-sqlite3 \
-        php8.3-tokenizer && \
+        php8.5-common \
+        php8.5-gd \
+        php8.5-intl \
+        php8.5-ldap \
+        php8.5-mbstring \
+        php8.5-fpm \
+        php8.5-xml \
+        php8.5-sqlite3 && \
+    echo "**** install composer ****" && \
+    curl -fsSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     echo "**** configure php-fpm to pass env vars ****" && \
-    if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && \
+    if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && \
     echo "**** install grocy ****" && \
     mkdir -p /app/www && \
-    curl -fL -o \
+    if ! curl -fL -o \
         /tmp/grocy.tar.gz \
-        "https://github.com/grocy/grocy/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
-        /tmp/grocy.tar.gz \
-        "https://github.com/grocy/grocy/archive/refs/tags/${VERSION}.tar.gz" && \
+        "https://github.com/grocy/grocy/archive/refs/tags/v${VERSION}.tar.gz"; then \
+        curl -fL -o \
+            /tmp/grocy.tar.gz \
+            "https://github.com/grocy/grocy/archive/refs/tags/${VERSION}.tar.gz"; \
+    fi && \
     tar xf \
         /tmp/grocy.tar.gz -C \
         /app/www/ --strip-components=1 && \
@@ -44,7 +51,8 @@ RUN \
     yarn cache clean && \
     echo "**** cleanup ****" && \
     apt-get remove -y --purge \
-        yarn && \
+        software-properties-common \
+        gnupg2 && \
     apt-get autoremove -y && \
     rm -rf \
         /tmp/* \
