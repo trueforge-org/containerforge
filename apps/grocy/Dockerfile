@@ -13,28 +13,29 @@ RUN \
         gnupg2 && \
     add-apt-repository ppa:ondrej/php -y && \
     apt-get update && \
-    apt-get install -y --no-install-recommends \
-        yarn && \
+    echo "**** install yarn ****" && \
+    npm install -g --omit=dev yarn@1.22.22 && \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
+        php8.5-common \
         php8.5-gd \
         php8.5-intl \
         php8.5-ldap \
-        php8.5-opcache \
         php8.5-fpm \
         composer \
         php8.5-xml \
-        php8.5-sqlite3 \
-        php8.5-tokenizer && \
+        php8.5-sqlite3 && \
     echo "**** configure php-fpm to pass env vars ****" && \
     if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf || echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && \
     echo "**** install grocy ****" && \
     mkdir -p /app/www && \
-    curl -fL -o \
+    if ! curl -fL -o \
         /tmp/grocy.tar.gz \
-        "https://github.com/grocy/grocy/archive/refs/tags/v${VERSION}.tar.gz" || curl -fL -o \
-        /tmp/grocy.tar.gz \
-        "https://github.com/grocy/grocy/archive/refs/tags/${VERSION}.tar.gz" && \
+        "https://github.com/grocy/grocy/archive/refs/tags/v${VERSION}.tar.gz"; then \
+        curl -fL -o \
+            /tmp/grocy.tar.gz \
+            "https://github.com/grocy/grocy/archive/refs/tags/${VERSION}.tar.gz"; \
+    fi && \
     tar xf \
         /tmp/grocy.tar.gz -C \
         /app/www/ --strip-components=1 && \
@@ -50,7 +51,8 @@ RUN \
     yarn cache clean && \
     echo "**** cleanup ****" && \
     apt-get remove -y --purge \
-        yarn && \
+        software-properties-common \
+        gnupg2 && \
     apt-get autoremove -y && \
     rm -rf \
         /tmp/* \
