@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=gilbertchen/duplicacy
-  default = "v3.2.5"
+  // renovate:ignore - duplicacy-web has separate versioning from duplicacy CLI and no GitHub releases
+  default = "1.8.0"
 }
 
 variable "LICENSE" {
