@@ -49,7 +49,7 @@ USER apps
 COPY --chmod=0755 . /
 COPY ./ /
 
-# ports and volumes
+# ports and volumes
 EXPOSE 7396
 
 VOLUME /config

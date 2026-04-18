@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# make folders
+# make folders
 mkdir -p \
     /config/log \
     /config/cache \
     /downloads \
     /books
 
-# copy config
+# copy config
 if [[ ! -e /config/config.ini ]]; then
     cp /defaults/config.ini /config/config.ini
 fi

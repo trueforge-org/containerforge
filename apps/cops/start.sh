@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 
-# create folders
+# create folders
 mkdir -p \
     /config/cache
-# create folders (COPS 3.x)
+# create folders (COPS 3.x)
 mkdir -p \
     /config/config
 

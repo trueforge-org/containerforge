@@ -40,7 +40,7 @@ RUN \
         /tmp/* && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# copy local files
+# copy local files
 USER apps
 COPY --chmod=0755 . /
 
