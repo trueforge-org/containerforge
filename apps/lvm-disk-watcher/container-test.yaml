@@ -3,3 +3,6 @@
 
 filePaths:
 - /app/watch_lvm.sh
+
+mainRunner:
+  "cmd": "sleep 999"
