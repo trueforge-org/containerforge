@@ -21,6 +21,4 @@ RUN mkdir -p /app/bin && \
 USER apps
 COPY --chmod=0755 . /
 
-COPY --chmod=0775 . /
-
 WORKDIR /config
