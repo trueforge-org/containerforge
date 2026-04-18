@@ -13,8 +13,6 @@ RUN \
         gnupg2 && \
     add-apt-repository ppa:ondrej/php -y && \
     apt-get update && \
-    echo "**** install yarn ****" && \
-    npm install -g --omit=dev yarn@1.22.22 && \
     echo "**** install runtime packages ****" && \
     apt-get install -y --no-install-recommends \
         php8.5-common \
