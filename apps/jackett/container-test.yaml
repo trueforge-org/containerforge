@@ -2,4 +2,4 @@
 
 http:
 - port: '9117'
-  path: /UI/Dashboard
+  path: /health
