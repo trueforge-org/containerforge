@@ -18,7 +18,7 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-ENTRYPOINT ["/bin/bash", "/scripts/watch_lvm.sh"]
+ENTRYPOINT ["/bin/bash", "/app/watch_lvm.sh"]
 
 USER apps
 COPY --chmod=0755 . /
