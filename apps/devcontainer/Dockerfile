@@ -107,7 +107,7 @@ ENV chartTestingVersion=3.14.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.50.18
 # renovate: datasource=github-releases depName=starship/starship
-ENV starshipVersion=1.24.2
+ENV starshipVersion=1.25.0
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
