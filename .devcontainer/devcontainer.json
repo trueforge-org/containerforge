@@ -3,6 +3,9 @@
   "name": "ContainerForge",
   "image": "oci.trueforge.org/containerforge/devcontainer:3.0.2@sha256:3ae2c17d5ae37b5d045902b0819809d290547557f89339e3d672ee2c07c062a2",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -20,7 +23,6 @@
         "timonwong.shellcheck",
         "formulahendry.code-runner",
         "streetsidesoftware.code-spell-checker",
-        "Codium.codium",
         "mhutchie.git-graph",
         "yzhang.markdown-all-in-one",
         "searKing.preview-vscode",
