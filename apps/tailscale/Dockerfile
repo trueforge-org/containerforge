@@ -1,7 +1,7 @@
 ARG VERSION=v1.96.5
 
 FROM tailscale/tailscale:${VERSION}@sha256:dbeff02d2337344b351afac203427218c4d0a06c43fc10a865184063498472a6 AS tailscale
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:c5a3b56e4d22600d2b618d602d487732516cc067cb21969798210c3b12304842
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:8b0b1f042b2fd6d7a2a8ad73e0b4470404cabfee1d209ae04fe6fcd2cc761152
 
 USER root
 COPY --chmod=0755 . /
