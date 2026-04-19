@@ -10,7 +10,7 @@ variable "VERSION" {
 }
 
 variable "NEO_VER" {
-  // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
+  // renovate: datasource=github-releases depName=intel/compute-runtime
   default = "26.09.37435.1"
 }
 
