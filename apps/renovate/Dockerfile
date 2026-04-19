@@ -7,7 +7,7 @@ FROM docker.io/renovate/renovate:${VERSION}-full
 ARG TARGETARCH
 ARG TARGETARCH=${TARGETARCH/arm64/ARM64}
 ARG TARGETARCH=${TARGETARCH/amd64/amd64}
-# renovate: datasource=github-releases depName=trueforge-org/forgetool
+# renovate: datasource=github-releases depName=trueforge-org/forgetool versioning=loose extractVersion=^v(?<version>.+)$
 ARG FORGETOOL_VERSION=4.0.0-ALPHA25
 
 # Download and set up the forgetool binary
