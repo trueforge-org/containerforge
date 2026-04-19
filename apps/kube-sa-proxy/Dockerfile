@@ -1,5 +1,5 @@
 # Stage 1 - Build the Go application
-FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:6254ca9674812e97fab64549c3deacf5f0092ed4bafbf361c5d43c8fd8fb1657 AS builder
+FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:178b2eb2e6e420b203758a3fbb51f1dd1a83e05fdbfc2c713df844ebb937add5 AS builder
 
 USER root
 
