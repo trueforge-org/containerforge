@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/env bash
 # shellcheck shell=bash
 
 mkdir -p /config/{extensions,data,workspace,.ssh}
@@ -10,9 +10,6 @@ fi
 if [[ ! -f /config/.profile ]]; then
     cp /defaults/.profile /config/.profile
 fi
-
-#!/usr/bin/with-contenv bash
-# shellcheck shell=bash
 
 if [[ -n "${PASSWORD}" ]] || [[ -n "${HASHED_PASSWORD}" ]]; then
     AUTH="password"
