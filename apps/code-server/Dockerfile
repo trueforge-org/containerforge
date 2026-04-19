@@ -37,5 +37,7 @@ RUN \
 # add local files
 COPY --chmod=0755 . /
 
+USER apps
+
 # ports and volumes
 EXPOSE 8443
