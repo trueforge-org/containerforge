@@ -21,7 +21,7 @@ variable "SETUPTOOLS_VERSION" {
 
 variable "WHEEL_VERSION" {
   // renovate: datasource=pypi depName=wheel
-  default = "0.46.3"
+  default = "0.47.0"
 }
 
 variable "LICENSE" {
