@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/Whisparr/Whisparr"
 ports:
-  []
+  - port: 6969
+    protocol: tcp
+    required: false
 env:
   - name: COMPlus_EnableDiagnostics
     default: "0"

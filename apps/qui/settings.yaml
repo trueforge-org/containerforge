@@ -1,9 +1,12 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/autobrr/qui"
 ports:
-  - port: 7576
+  - port: 7476
     protocol: tcp
+    required: false
+  - port: 7476
+    protocol: udp
     required: false
 env:
   - name: WEBUI_PORTS

@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/esphome/esphome"
 ports:
-  []
+  - port: 6052
+    protocol: tcp
+    required: false
 env:
   - name: ESPHOME_BUILD_PATH
     default: "/cache/build"

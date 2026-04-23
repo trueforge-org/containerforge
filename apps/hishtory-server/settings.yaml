@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/ddworken/hishtory"
 ports:
   - port: 8080
     protocol: tcp

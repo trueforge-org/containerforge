@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/Sonarr/Sonarr"
 ports:
-  []
+  - port: 8989
+    protocol: tcp
+    required: false
 env:
   - name: DOTNET_EnableDiagnostics
     default: "0"

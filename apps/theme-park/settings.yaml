@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/themepark-dev/theme.park"
 ports:
-  []
+  - port: 8080
+    protocol: tcp
+    required: false
 env:
   - name: NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE
     default: "1"

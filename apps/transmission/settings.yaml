@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/transmission/transmission"
 ports:
-  []
+  - port: 9091
+    protocol: tcp
+    required: false
 env:
   - name: HOME
     default: "/config"

@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/nzbgetcom/nzbget"
 ports:
-  []
+  - port: 6789
+    protocol: tcp
+    required: false
 env:
   - name: NZBGET__PORT
     default: "6789"

@@ -19,7 +19,7 @@ RUN curl -fsSL "https://github.com/autobrr/qui/releases/download/v${VERSION}/qui
     chown -R apps:apps "/app"
 
 
-EXPOSE 7576
+EXPOSE 7476
 
 USER apps
 COPY --chmod=0755 . /

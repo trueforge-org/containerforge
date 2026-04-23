@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/theotherp/nzbhydra2"
 ports:
-  []
+  - port: 5076
+    protocol: tcp
+    required: false
 env:
   - name: JAVA_TOOL_OPTIONS
     default: "-Xmx256M"

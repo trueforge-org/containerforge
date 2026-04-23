@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/MediaBrowser/Emby.Releases"
 ports:
-  []
+  - port: 8096
+    protocol: tcp
+    required: false
 env:
   - name: NVIDIA_DRIVER_CAPABILITIES
     default: "compute,video,utility"

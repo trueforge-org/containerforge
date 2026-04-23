@@ -110,7 +110,7 @@ jobs:
               | {tag: ., alpha: (capture("ALPHA(?<n>[0-9]+)$").n | tonumber)}
             ] | if length > 0 then max_by(.alpha).tag else empty end' <<< "${RELEASES_JSON}")"
           fi
-          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA28"
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA29"
           VERSION="${TAG#v}"
           VERSION="${VERSION#forgetool-v}"
           case "$(uname -m)" in

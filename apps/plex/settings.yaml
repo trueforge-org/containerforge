@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/plexinc/pms-docker"
 ports:
-  []
+  - port: 32400
+    protocol: tcp
+    required: false
 env:
   - name: Container
     default: "(${VENDOR})"

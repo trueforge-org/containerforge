@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../../settings.schema.json
 schema_version: 1
-upstream_env_url: ""
+upstream_env_url: "https://github.com/morpheus65535/bazarr"
 ports:
-  []
+  - port: 6767
+    protocol: tcp
+    required: false
 env:
   - name: BAZARR_PACKAGE_AUTHOR
     default: "${VENDOR}"
