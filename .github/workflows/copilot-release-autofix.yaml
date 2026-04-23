@@ -56,12 +56,20 @@ jobs:
 
             const failedBuildJobs = failedJobs.filter((job) => /^Build\s+/.test(job.name || ''));
             if (failedBuildJobs.length === 0) {
-              core.info('No failed container build jobs found (likely docs-only failure). Skipping.');
+              core.info('No failed container build jobs found. Skipping.');
+              return;
+            }
+
+            const buildStepFailedJobs = failedBuildJobs.filter((job) =>
+              (job.steps || []).some((step) => step.conclusion === 'failure' && step.name === 'Build App'),
+            );
+            if (buildStepFailedJobs.length === 0) {
+              core.info('Build jobs failed, but not in the Build App step (for example sign/attest). Skipping.');
               return;
             }
 
             const appMatches = new Set();
-            for (const job of failedBuildJobs) {
+            for (const job of buildStepFailedJobs) {
               const buildMatch = job.name.match(/Build\s+(.+?)(?:\s+\/|$)/);
               if (buildMatch && buildMatch[1]) {
                 appMatches.add(buildMatch[1].trim());
@@ -86,7 +94,7 @@ jobs:
               return;
             }
 
-            const failedJobLines = failedBuildJobs.slice(0, 20).map((job) => {
+            const failedJobLines = buildStepFailedJobs.slice(0, 20).map((job) => {
               const failedSteps = (job.steps || [])
                 .filter((step) => step.conclusion === 'failure')
                 .map((step) => `  - ${step.name}`)
