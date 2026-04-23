@@ -8,7 +8,6 @@ on:
       - main
     paths:
       - apps/**
-      - .github/scripts/container-docs.sh
       - .github/workflows/release.yaml
   workflow_dispatch:
     inputs:
@@ -111,7 +110,7 @@ jobs:
               | {tag: ., alpha: (capture("ALPHA(?<n>[0-9]+)$").n | tonumber)}
             ] | if length > 0 then max_by(.alpha).tag else empty end' <<< "${RELEASES_JSON}")"
           fi
-          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA24"
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA27"
           VERSION="${TAG#v}"
           VERSION="${VERSION#forgetool-v}"
           case "$(uname -m)" in
@@ -213,13 +212,11 @@ jobs:
               echo "No directories in ./changelogs. Skipping copy."
           fi
 
-          export DEBUG=false
-          export STRICT=true
-
-          for app_dir in apps/*/docker-bake.hcl; do
-            app=$(basename "$(dirname "$app_dir")")
-            ./.github/scripts/container-docs.sh "${app}"
-          done
+          forgetool containers gendocs \
+            --apps-dir apps \
+            --website-dir website \
+            --template templates/README.md.tmpl \
+            --icon-fallback-base-url https://raw.githubusercontent.com/trueforge-org/truecharts/refs/heads/master/charts/stable
 
       - name: Commit and push changes
         run: |
