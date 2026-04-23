@@ -180,8 +180,8 @@ RUN set -eux; \
     download_and_copy "chart-testing" "$chartTestingVersion"; \
     download_and_copy "k9s" "$k9sVersion"; \
     download_and_copy "starship" "$starshipVersion"; \
-    download_and_copy "forgetool" "$VERSION"; \
     download_and_copy "clustertool" "$clustertoolVersion"; \
+    download_and_copy "forgetool" "$VERSION"; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
         download_and_copy "kubeval" "$kubevalVersion"; \
     fi;
