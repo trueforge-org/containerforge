@@ -110,7 +110,7 @@ jobs:
               | {tag: ., alpha: (capture("ALPHA(?<n>[0-9]+)$").n | tonumber)}
             ] | if length > 0 then max_by(.alpha).tag else empty end' <<< "${RELEASES_JSON}")"
           fi
-          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA27"
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA28"
           VERSION="${TAG#v}"
           VERSION="${VERSION#forgetool-v}"
           case "$(uname -m)" in
@@ -181,36 +181,6 @@ jobs:
       - name: Copy docs to website
         run: |
           #!/bin/bash
-          echo "Making sure directories exist..."
-          mkdir -p website/containerforge/public/img/hotlink-ok/container-icons || echo "container-icons path already exists, continuing..."
-          mkdir -p website/containerforge/public/img/hotlink-ok/container-icons-small || echo "container-icons-small path already exists, continuing..."
-          mkdir -p website/containerforge/public/img/hotlink-ok/container-screenshots || echo "container-screenshots path already exists, continuing..."
-
-          # Save index.mdx if it exists (maintained separately by website repo)
-          if [ -f ./website/containerforge/src/content/docs/containers/index.mdx ]; then
-            mv -f ./website/containerforge/src/content/docs/containers/index.mdx ./index.mdx
-          fi
-
-          # Remove old container docs to clean up stale/deleted/renamed apps
-          echo "Removing old container docs..."
-          rm -rf ./website/containerforge/src/content/docs/containers
-
-          # Recreate the base directory
-          mkdir -p ./website/containerforge/src/content/docs/containers/
-
-          # Restore index.mdx
-          if [ -f ./index.mdx ]; then
-            mv -f ./index.mdx ./website/containerforge/src/content/docs/containers/index.mdx
-          fi
-
-          # Copy changelogs to docs
-          echo "Copying changelogs to docs"
-          mkdir -p ./changelogs
-          if [ -n "$(find ./changelogs -mindepth 1 -type d)" ]; then
-              cp -r ./changelogs/** ./website/containerforge/src/content/docs/containers/
-          else
-              echo "No directories in ./changelogs. Skipping copy."
-          fi
 
           forgetool containers gendocs \
             --apps-dir apps \
