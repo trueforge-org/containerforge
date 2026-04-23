@@ -500,12 +500,8 @@ jobs:
   notify:
     if: ${{ inputs.release && !cancelled() }}
     needs:
-      - plan
       - build
       - merge
-      - attest
-      - sign
-      - announce
     name: Notify
     runs-on:
       group: default
