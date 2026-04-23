@@ -108,6 +108,8 @@ ENV chartTestingVersion=3.14.0
 ENV k9sVersion=0.50.18
 # renovate: datasource=github-releases depName=starship/starship
 ENV starshipVersion=1.25.0
+# renovate: datasource=github-releases depName=trueforge-org/clustertool
+ENV clustertoolVersion=3.0.3
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
@@ -154,6 +156,7 @@ RUN set -eux; \
             k9s) url="https://github.com/derailed/k9s/releases/download/v${version}/k9s_Linux_${TARGETARCH}.tar.gz"; command_path_in_package="k9s"; ;; \
             starship) url="https://github.com/starship/starship/releases/download/v${version}/starship-${AARCH/arm64/aarch64}-unknown-linux-${CTYPE}.tar.gz"; command_path_in_package="starship"; ;; \
             forgetool) url="https://github.com/trueforge-org/forgetool/releases/download/v${version}/forgetool_${VERSION}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="forgetool"; ;; \
+            clustertool) url="https://github.com/trueforge-org/clustertool/releases/download/v${version}/clustertool_${VERSION}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="clustertool"; ;; \
             *) echo "Unknown tool: $tool"; exit 1 ;; \
         esac; \
         mkdir -p /tools/${tool}; \
@@ -178,6 +181,7 @@ RUN set -eux; \
     download_and_copy "k9s" "$k9sVersion"; \
     download_and_copy "starship" "$starshipVersion"; \
     download_and_copy "forgetool" "$VERSION"; \
+    download_and_copy "clustertool" "$clustertoolVersion"; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
         download_and_copy "kubeval" "$kubevalVersion"; \
     fi;
