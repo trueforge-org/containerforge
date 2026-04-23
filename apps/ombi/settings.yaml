@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 3579
+    protocol: tcp
+    required: false
+env:
+  - name: COMPlus_EnableDiagnostics
+    default: "0"
+    required: false
+  - name: HOME
+    default: "/config"
+    required: false
+volumes:
+  - path: /config
+    required: true

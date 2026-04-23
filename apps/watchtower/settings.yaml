@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: WATCHTOWER_LABEL_ENABLE
+    default: "true"
+    required: false
+  - name: WORKDIR
+    default: "/app"
+    required: false
+volumes:
+  - path: /config
+    required: true

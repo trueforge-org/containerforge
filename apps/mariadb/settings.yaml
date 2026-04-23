@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 3306
+    protocol: tcp
+    required: false
+env:
+  - name: DATADIR
+    default: "$MYSQL_DIR/databases"
+    required: false
+  - name: MYSQL_DIR
+    default: "/config"
+    required: false
+volumes:
+  - path: /config
+    required: true

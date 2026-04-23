@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: DD_LOG_FORMAT
+    default: "text"
+    required: false
+  - name: DD_STORE_PATH
+    default: "/config"
+    required: false
+  - name: DD_VERSION
+    default: "$VERSION"
+    required: false
+  - name: WORKDIR
+    default: "/app"
+    required: false
+volumes:
+  - path: /config
+    required: true

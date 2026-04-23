@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 80
+    protocol: tcp
+    required: false
+  - port: 443
+    protocol: tcp
+    required: false
+env:
+  - name: MEMORY_LIMIT
+    default: "512M"
+    required: false
+volumes:
+  - path: /config
+    required: true

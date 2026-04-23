@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+  - port: 8388
+    protocol: tcp
+    required: false
+  - port: 8388
+    protocol: udp
+    required: false
+  - port: 8888
+    protocol: tcp
+    required: false
+env:
+  - name: VPN_INTERFACE
+    default: "tun0"
+    required: false
+  - name: VPN_SERVICE_PROVIDER
+    default: "pia"
+    required: false
+  - name: VPN_TYPE
+    default: "openvpn"
+    required: false
+volumes:
+  - path: /config
+    required: true

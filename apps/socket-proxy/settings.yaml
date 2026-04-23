@@ -1,0 +1,93 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: ALLOW_RESTARTS
+    default: "0"
+    required: false
+  - name: ALLOW_START
+    default: "0"
+    required: false
+  - name: ALLOW_STOP
+    default: "0"
+    required: false
+  - name: AUTH
+    default: "0"
+    required: false
+  - name: BUILD
+    default: "0"
+    required: false
+  - name: COMMIT
+    default: "0"
+    required: false
+  - name: CONFIGS
+    default: "0"
+    required: false
+  - name: CONTAINERS
+    default: "0"
+    required: false
+  - name: DISTRIBUTION
+    default: "0"
+    required: false
+  - name: EVENTS
+    default: "1"
+    required: false
+  - name: EXEC
+    default: "0"
+    required: false
+  - name: IMAGES
+    default: "0"
+    required: false
+  - name: INFO
+    default: "0"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: NETWORKS
+    default: "0"
+    required: false
+  - name: NODES
+    default: "0"
+    required: false
+  - name: PING
+    default: "1"
+    required: false
+  - name: PLUGINS
+    default: "0"
+    required: false
+  - name: POST
+    default: "0"
+    required: false
+  - name: SECRETS
+    default: "0"
+    required: false
+  - name: SERVICES
+    default: "0"
+    required: false
+  - name: SESSION
+    default: "0"
+    required: false
+  - name: SOCKET_PATH
+    default: "/var/run/docker.sock"
+    required: false
+  - name: SWARM
+    default: "0"
+    required: false
+  - name: SYSTEM
+    default: "0"
+    required: false
+  - name: TASKS
+    default: "0"
+    required: false
+  - name: VERSION
+    default: "1"
+    required: false
+  - name: VOLUMES
+    default: "0"
+    required: false
+volumes:
+  - path: /config
+    required: true

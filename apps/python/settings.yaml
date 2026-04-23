@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: CRYPTOGRAPHY_DONT_BUILD_RUST
+    default: "1"
+    required: false
+  - name: PATH
+    default: "/usr/local/bin:$PATH"
+    required: false
+  - name: PIP_BREAK_SYSTEM_PACKAGES
+    default: "1"
+    required: false
+  - name: PIP_DISABLE_PIP_VERSION_CHECK
+    default: "1"
+    required: false
+  - name: PIP_NO_CACHE_DIR
+    default: "1"
+    required: false
+  - name: PIP_PREFER_BINARY
+    default: "1"
+    required: false
+  - name: PIP_ROOT_USER_ACTION
+    default: "ignore"
+    required: false
+  - name: PYTHONDONTWRITEBYTECODE
+    default: "1"
+    required: false
+  - name: PYTHONUNBUFFERED
+    default: "1"
+    required: false
+  - name: UV_EXTRA_INDEX_URL
+    default: "https://wheel-index.linuxserver.io/ubuntu/"
+    required: false
+  - name: UV_NO_CACHE
+    default: "true"
+    required: false
+  - name: UV_SYSTEM_PYTHON
+    default: "true"
+    required: false
+  - name: VENV_FOLDER
+    default: "/app/venv"
+    required: false
+  - name: https://pypi.org/simple"
+    default: "UV_INDEX_STRATEGY=\"unsafe-best-match"
+    required: false
+volumes:
+  - path: /config
+    required: true

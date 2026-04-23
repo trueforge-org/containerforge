@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  []
+volumes:
+  - path: /config
+    required: true

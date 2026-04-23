@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: KOPIA_CACHE_DIRECTORY
+    default: "/config/cache"
+    required: false
+  - name: KOPIA_CHECK_FOR_UPDATES
+    default: "false"
+    required: false
+  - name: KOPIA_CONFIG_PATH
+    default: "/config/repository.config"
+    required: false
+  - name: KOPIA_LOG_DIR
+    default: "/config/logs"
+    required: false
+  - name: KOPIA_PERSIST_CREDENTIALS_ON_CONNECT
+    default: "false"
+    required: false
+  - name: KOPIA_WEB_ENABLED
+    default: "true"
+    required: false
+  - name: KOPIA_WEB_PORT
+    default: "51515"
+    required: false
+volumes:
+  - path: /config
+    required: true

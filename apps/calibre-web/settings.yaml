@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 8083
+    protocol: tcp
+    required: false
+env:
+  - name: QTWEBENGINE_CHROMIUM_FLAGS
+    default: "--no-sandbox"
+    required: false
+volumes:
+  - path: /config
+    required: true

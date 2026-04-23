@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 554
+    protocol: tcp
+    required: false
+  - port: 1900
+    protocol: udp
+    required: false
+  - port: 8875
+    protocol: tcp
+    required: false
+env:
+  - name: -type
+    default: "c"
+    required: false
+  - name: ATTACHED_DEVICES_PERMS
+    default: "/dev/dvb"
+    required: false
+  - name: MAKEFLAGS
+    default: "-j4"
+    required: false
+volumes:
+  - path: /config
+    required: true

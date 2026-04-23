@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: COMPlus_EnableDiagnostics
+    default: "0"
+    required: false
+  - name: WHISPARR__SERVER__PORT
+    default: "6969"
+    required: false
+  - name: WHISPARR__UPDATE__BRANCH
+    default: "eros"
+    required: false
+volumes:
+  - path: /config
+    required: true

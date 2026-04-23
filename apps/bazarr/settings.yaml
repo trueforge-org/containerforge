@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: BAZARR_PACKAGE_AUTHOR
+    default: "${VENDOR}"
+    required: false
+  - name: BAZARR_PACKAGE_VERSION
+    default: "${VERSION}"
+    required: false
+  - name: BAZARR_VERSION
+    default: "${VERSION}"
+    required: false
+  - name: BAZARR__PORT
+    default: "6767"
+    required: false
+volumes:
+  - path: /config
+    required: true

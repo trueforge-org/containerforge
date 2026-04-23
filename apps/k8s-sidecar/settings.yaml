@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: PATH
+    default: "/app/venv/bin:$PATH"
+    required: false
+  - name: RELEASE_URL
+    default: "https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz"
+    required: false
+volumes:
+  - path: /config
+    required: true

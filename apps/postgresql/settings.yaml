@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 5432
+    protocol: tcp
+    required: false
+env:
+  - name: LANG
+    default: "en_US.UTF-8"
+    required: false
+  - name: LC_ALL
+    default: "en_US.UTF-8"
+    required: false
+  - name: PATH
+    default: "/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
+    required: false
+  - name: PGDATA
+    default: "/config/$PG_MAJOR"
+    required: false
+  - name: PG_MAJOR
+    default: "$PG_MAJOR"
+    required: false
+volumes:
+  - path: /config
+    required: true

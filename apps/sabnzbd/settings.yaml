@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: SABNZBD__ADDRESS
+    default: "[::]"
+    required: false
+  - name: SABNZBD__PORT
+    default: "8080"
+    required: false
+volumes:
+  - path: /config
+    required: true

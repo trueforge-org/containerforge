@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 80
+    protocol: tcp
+    required: false
+  - port: 443
+    protocol: tcp
+    required: false
+env:
+  - name: DATABASE
+    default: "/config/diskoverdb.sqlite3"
+    required: false
+  - name: DISKOVERDIR
+    default: "/config/diskover.conf.d/diskover/"
+    required: false
+  - name: ES_HOST
+    default: "elasticsearch"
+    required: false
+volumes:
+  - path: /config
+    required: true

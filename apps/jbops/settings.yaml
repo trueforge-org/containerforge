@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: JBOPS__SCRIPT_PATH
+    default: "fun/plexapi_haiku.py"
+    required: false
+  - name: PLEXAPI_CONFIG_PATH
+    default: "/config/config.ini"
+    required: false
+volumes:
+  - path: /config
+    required: true

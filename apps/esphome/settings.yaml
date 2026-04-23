@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: ESPHOME_BUILD_PATH
+    default: "/cache/build"
+    required: false
+  - name: ESPHOME_DATA_DIR
+    default: "/cache/data"
+    required: false
+  - name: HOME
+    default: "/config"
+    required: false
+  - name: PLATFORMIO_CORE_DIR
+    default: "/cache/pio"
+    required: false
+volumes:
+  - path: /config
+    required: true

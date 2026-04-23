@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: HOME
+    default: "/app"
+    required: false
+  - name: PYTHONIOENCODING
+    default: "utf-8"
+    required: false
+volumes:
+  - path: /app
+    required: false
+  - path: /config
+    required: true

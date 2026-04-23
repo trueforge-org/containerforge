@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 7576
+    protocol: tcp
+    required: false
+env:
+  - name: WEBUI_PORTS
+    default: "7476/tcp,7476/udp"
+    required: false
+volumes:
+  - path: /config
+    required: true

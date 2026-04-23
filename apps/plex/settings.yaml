@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: Container
+    default: "(${VENDOR})"
+    required: false
+  - name: NVIDIA_DRIVER_CAPABILITIES
+    default: "compute,video,utility"
+    required: false
+  - name: PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR
+    default: "/config/Library/Application"
+    required: false
+  - name: PLEX_MEDIA_SERVER_INFO_DEVICE
+    default: "Docker"
+    required: false
+  - name: PLEX_MEDIA_SERVER_INFO_VENDOR
+    default: "Docker"
+    required: false
+  - name: PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS
+    default: "6"
+    required: false
+  - name: Support"
+    default: "PLEX_MEDIA_SERVER_HOME=\"/usr/lib/plexmediaserver"
+    required: false
+volumes:
+  - path: /config
+    required: true

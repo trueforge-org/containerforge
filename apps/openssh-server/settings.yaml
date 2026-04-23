@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 2222
+    protocol: tcp
+    required: false
+env:
+  []
+volumes:
+  - path: /config
+    required: true

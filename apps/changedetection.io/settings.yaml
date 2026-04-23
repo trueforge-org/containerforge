@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: PYTHONUNBUFFERED
+    default: "1"
+    required: false
+volumes:
+  - path: /config
+    required: true

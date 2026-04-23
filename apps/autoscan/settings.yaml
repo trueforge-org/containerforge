@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 3030
+    protocol: tcp
+    required: false
+env:
+  - name: IMAGE_STATS
+    default: "${IMAGE_STATS}"
+    required: false
+  - name: WEBUI_PORTS
+    default: "3030/tcp,3030/udp"
+    required: false
+volumes:
+  - path: /config
+    required: true

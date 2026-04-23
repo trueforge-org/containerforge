@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: WEBHOOK__PORT
+    default: "9000"
+    required: false
+  - name: WEBHOOK__URLPREFIX
+    default: "hooks"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: BUDGE_DATABASE
+    default: "/config/budge.db"
+    required: false
+  - name: S6_STAGE2_HOOK
+    default: "/init-hook"
+    required: false
+volumes:
+  - path: /config
+    required: true

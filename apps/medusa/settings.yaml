@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 8081
+    protocol: tcp
+    required: false
+env:
+  - name: LANG
+    default: "en_US.UTF-8"
+    required: false
+  - name: PATH
+    default: "/app/venv/bin:$PATH"
+    required: false
+volumes:
+  - path: /config
+    required: true

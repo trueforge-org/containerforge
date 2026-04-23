@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: CNI_BIN_DIR
+    default: "/host/opt/cni/bin"
+    required: false
+  - name: DEBIAN_FRONTEND
+    default: "noninteractive"
+    required: false
+volumes:
+  - path: /config
+    required: true

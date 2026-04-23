@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 4040
+    protocol: tcp
+    required: false
+env:
+  - name: AIRSONIC_ADVANCED_HOME
+    default: "/app"
+    required: false
+  - name: AIRSONIC_ADVANCED_SETTINGS
+    default: "/config"
+    required: false
+  - name: LANG
+    default: "C.UTF-8"
+    required: false
+volumes:
+  - path: /config
+    required: true

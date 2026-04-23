@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 8200
+    protocol: tcp
+    required: false
+env:
+  - name: DUPLICATI__REQUIRE_DB_ENCRYPTION_KEY
+    default: "true"
+    required: false
+  - name: DUPLICATI__SERVER_DATAFOLDER
+    default: "/config"
+    required: false
+  - name: DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES
+    default: "*"
+    required: false
+  - name: DUPLICATI__WEBSERVICE_INTERFACE
+    default: "any"
+    required: false
+  - name: DUPLICATI__WEBSERVICE_PORT
+    default: "8200"
+    required: false
+  - name: HOME
+    default: "/config"
+    required: false
+volumes:
+  - path: /backups
+    required: false
+  - path: /config
+    required: true
+  - path: /source
+    required: false

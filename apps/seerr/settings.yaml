@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 5055
+    protocol: tcp
+    required: false
+env:
+  - name: NODE_ENV
+    default: "production"
+    required: false
+  - name: NODE_OPTIONS
+    default: "--max_old_space_size=2048"
+    required: false
+  - name: PATH
+    default: "$PNPM_HOME:$PATH"
+    required: false
+  - name: PNPM_HOME
+    default: "/pnpm"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: HOME
+    default: "/config"
+    required: false
+  - name: QBT_CONFIRM_LEGAL_NOTICE
+    default: "1"
+    required: false
+  - name: XDG_CONFIG_HOME
+    default: "/config"
+    required: false
+  - name: XDG_DATA_HOME
+    default: "/config"
+    required: false
+volumes:
+  - path: /config
+    required: true

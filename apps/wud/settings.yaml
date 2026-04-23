@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  []
+env:
+  - name: VERSION
+    default: "$VERSION"
+    required: false
+  - name: WORKDIR
+    default: "/app"
+    required: false
+  - name: WUD_LOG_FORMAT
+    default: "text"
+    required: false
+  - name: WUD_REGISTRY_CUSTOM_TRUEFORGE_URL
+    default: "https://oci.trueforge.org"
+    required: false
+  - name: WUD_WATCHER_local_WATCHBYDEFAULT
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true

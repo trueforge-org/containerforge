@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../settings.schema.json
+schema_version: 1
+upstream_env_url: ""
+ports:
+  - port: 80
+    protocol: tcp
+    required: false
+  - port: 443
+    protocol: tcp
+    required: false
+env:
+  - name: HOME
+    default: "/app"
+    required: false
+  - name: NODE_ENV
+    default: "production"
+    required: false
+volumes:
+  - path: /config
+    required: true
