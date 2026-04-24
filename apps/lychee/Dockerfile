@@ -1,5 +1,5 @@
 ## Move to our an own container
-FROM ghcr.io/trueforge-org/node:24.15.0@sha256:a338ab622f03a60ad8c300c29c843da42caf88a596d3e65d50693a8985004b9d
+FROM ghcr.io/trueforge-org/node:24.15.0@sha256:870297da9d7d92feb5ce87779f8531516cd5a3ccea0e4bb240a1dcd31f830575
 
 FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5fa3c2cf644e1cf005b5ee0feac4b0d0041f65850fb1991bef3926c45a9a371c
 
