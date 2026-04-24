@@ -1,7 +1,7 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "changedetection.io"
+  default = "changedetection"
 }
 
 variable "VERSION" {
