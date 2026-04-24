@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=falcondev-oss/github-actions-runner
-  default = "2.333.1"
+  // renovate: datasource=github-releases depName=actions/runner
+  default = "2.334.0"
 }
 
 variable "BUILDX_VERSION" {

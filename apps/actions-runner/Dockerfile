@@ -82,7 +82,7 @@ RUN set -eux; \
 # ---------------------------
 # Step 3: Download and extract GitHub Actions runner
 # ---------------------------
-RUN curl -fsSL -o runner.tar.gz "https://github.com/falcondev-oss/github-actions-runner/releases/download/v${VERSION}/actions-runner-${TARGETOS}-${RUNNER_ARCH}-${VERSION}.tar.gz" \
+RUN curl -fsSL -o runner.tar.gz "https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-${TARGETOS}-${RUNNER_ARCH}-${VERSION}.tar.gz" \
     && tar xzf runner.tar.gz && rm runner.tar.gz \
     && chown -R apps:docker /home/runner
 
@@ -93,6 +93,11 @@ RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-
     && unzip runner-container-hooks.zip -d ./k8s \
     && rm runner-container-hooks.zip \
     && chown -R apps:docker /home/runner/k8s
+
+
+# Modify runner binary to retain custom ACTIONS_RESULTS_URL
+# ref: https://gha-cache-server.falcondev.io/getting-started
+RUN sed -i 's/\x41\x00\x43\x00\x54\x00\x49\x00\x4F\x00\x4E\x00\x53\x00\x5F\x00\x52\x00\x45\x00\x53\x00\x55\x00\x4C\x00\x54\x00\x53\x00\x5F\x00\x55\x00\x52\x00\x4C\x00/\x41\x00\x43\x00\x54\x00\x49\x00\x4F\x00\x4E\x00\x53\x00\x5F\x00\x52\x00\x45\x00\x53\x00\x55\x00\x4C\x00\x54\x00\x53\x00\x5F\x00\x4F\x00\x52\x00\x4C\x00/g' /home/runner/bin/Runner.Worker.dll
 
 USER apps
 COPY --chmod=0755 . /
