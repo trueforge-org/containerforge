@@ -9,6 +9,6 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - nextcloud-fpm
-  - postgresql
-  - valkey
+  - image: nextcloud-fpm
+  - image: postgresql
+  - image: valkey

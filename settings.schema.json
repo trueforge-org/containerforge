@@ -108,20 +108,31 @@
     },
     "dependencies": {
       "type": "array",
-      "description": "Names of other containers in this repository that this container depends on at runtime",
-      "uniqueItems": true,
+      "description": "Other containers in this repository that this container depends on at runtime",
       "items": {
-        "type": "string",
-        "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        "$ref": "#/$defs/dependency"
       }
     },
     "opt_dependencies": {
       "type": "array",
-      "description": "Names of other containers in this repository that this container can optionally use at runtime",
-      "uniqueItems": true,
+      "description": "Other containers in this repository that this container can optionally use at runtime",
       "items": {
-        "type": "string",
-        "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        "$ref": "#/$defs/dependency"
+      }
+    }
+  },
+  "$defs": {
+    "dependency": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        }
       }
     }
   }

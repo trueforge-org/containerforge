@@ -13,3 +13,6 @@ env:
 volumes:
   - path: /config
     required: true
+opt_dependencies:
+  - image: postgresql
+  - image: mariadb
