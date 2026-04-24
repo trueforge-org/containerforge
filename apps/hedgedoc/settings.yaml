@@ -19,4 +19,4 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - image: postgresql
+  - name: postgresql

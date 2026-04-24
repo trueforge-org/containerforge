@@ -9,7 +9,7 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - image: postgresql
-  - image: valkey
+  - name: postgresql
+  - name: valkey
 opt_dependencies:
-  - image: memcache
+  - name: memcache

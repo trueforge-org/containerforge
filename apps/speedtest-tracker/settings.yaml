@@ -11,5 +11,5 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - image: postgresql
-  - image: mariadb
+  - name: postgresql
+  - name: mariadb
