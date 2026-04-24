@@ -109,11 +109,11 @@ jobs:
             TAG="$(jq -r '[.[]
               | select(.prerelease == true)
               | .tag_name
-              | select(test("^(forgetool-)?v[0-9]+\\.[0-9]+\\.[0-9]+-ALPHA[0-9]+$"))
-              | {tag: ., alpha: (capture("ALPHA(?<n>[0-9]+)$").n | tonumber)}
-            ] | if length > 0 then max_by(.alpha).tag else empty end' <<< "${RELEASES_JSON}")"
+              | select(test("^(forgetool-)?v[0-9]+\\.[0-9]+\\.[0-9]+-BETA[0-9]+$"))
+              | {tag: ., beta: (capture("BETA(?<n>[0-9]+)$").n | tonumber)}
+            ] | if length > 0 then max_by(.beta).tag else empty end' <<< "${RELEASES_JSON}")"
           fi
-          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA29"
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-BETA1"
           VERSION="${TAG#v}"
           VERSION="${VERSION#forgetool-v}"
           case "$(uname -m)" in
