@@ -8,3 +8,6 @@ env:
 volumes:
   - path: /config
     required: true
+dependencies:
+  - postgresql
+  - valkey

@@ -8,3 +8,7 @@ env:
 volumes:
   - path: /config
     required: true
+dependencies:
+  - nextcloud-fpm
+  - postgresql
+  - valkey
