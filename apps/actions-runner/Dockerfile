@@ -82,7 +82,7 @@ RUN set -eux; \
 # ---------------------------
 # Step 3: Download and extract GitHub Actions runner
 # ---------------------------
-RUN curl -fsSL -o runner.tar.gz "https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-${TARGETOS}-${RUNNER_ARCH}-${VERSION}.tar.gz" \
+RUN curl -fsSL -o runner.tar.gz "https://github.com/falcondev-oss/github-actions-runner/releases/download/v${VERSION}/actions-runner-${TARGETOS}-${RUNNER_ARCH}-${VERSION}.tar.gz" \
     && tar xzf runner.tar.gz && rm runner.tar.gz \
     && chown -R apps:docker /home/runner
 
