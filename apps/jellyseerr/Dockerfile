@@ -1,2 +1,2 @@
-FROM ghcr.io/trueforge-org/seerr:3.2.0@sha256:5f8a0b5bf26542a2e86052a3f19b5e9e890a5fe87b4c9b24244512638d80afdc
+FROM ghcr.io/trueforge-org/seerr:3.2.0@sha256:7197fe2c1397efac7e6d8d5ddd5fec2e3715425303d90eb4cdb2e5374f458213
 COPY --chmod=0755 . /
