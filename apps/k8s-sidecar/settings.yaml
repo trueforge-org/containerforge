@@ -4,11 +4,20 @@ upstream_env_url: "https://github.com/kiwigrid/k8s-sidecar"
 ports:
   []
 env:
-  - name: PATH
-    default: "/app/venv/bin:$PATH"
+  - name: FOLDER
+    default: "/tmp/"
     required: false
-  - name: RELEASE_URL
-    default: "https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz"
+  - name: LABEL
+    default: ""
+    required: false
+  - name: METHOD
+    default: "WATCH"
+    required: false
+  - name: NAMESPACE
+    default: "ALL"
+    required: false
+  - name: RESOURCE
+    default: "configmap"
     required: false
 volumes:
   - path: /config

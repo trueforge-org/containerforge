@@ -2,12 +2,27 @@
 schema_version: 1
 upstream_env_url: "https://github.com/MediaBrowser/Emby.Releases"
 ports:
+  - port: 1900
+    protocol: udp
+    required: false
+  - port: 7359
+    protocol: udp
+    required: false
   - port: 8096
     protocol: tcp
     required: false
 env:
   - name: NVIDIA_DRIVER_CAPABILITIES
     default: "compute,video,utility"
+    required: false
+  - name: PUBLISHED_SERVER_URL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

@@ -6,20 +6,17 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: LANG
-    default: "en_US.UTF-8"
+  - name: POSTGRES_DB
+    default: "postgres"
     required: false
-  - name: LC_ALL
-    default: "en_US.UTF-8"
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: true
+  - name: POSTGRES_USER
+    default: "postgres"
     required: false
-  - name: PATH
-    default: "/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
-    required: false
-  - name: PGDATA
-    default: "/config/$PG_MAJOR"
-    required: false
-  - name: PG_MAJOR
-    default: "$PG_MAJOR"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

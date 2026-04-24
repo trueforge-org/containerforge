@@ -4,7 +4,24 @@ upstream_env_url: "https://www.hotio.dev"
 ports:
   []
 env:
-  []
+  - name: API_KEY
+    default: ""
+    required: false
+  - name: EMAIL
+    default: ""
+    required: false
+  - name: INTERVAL
+    default: "300"
+    required: false
+  - name: SUBDOMAIN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ZONE
+    default: ""
+    required: false
 volumes:
   - path: /config
     required: true

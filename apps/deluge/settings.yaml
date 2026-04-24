@@ -2,18 +2,21 @@
 schema_version: 1
 upstream_env_url: "https://github.com/deluge-torrent/deluge"
 ports:
+  - port: 8112
+    protocol: tcp
+    required: false
   - port: 58846
     protocol: tcp
     required: false
 env:
-  - name: DELUGE_BIN
-    default: "deluged"
+  - name: DELUGE_LOGLEVEL
+    default: "info"
     required: false
-  - name: PYTHON_EGG_CACHE
-    default: "/config/plugins/.python-eggs"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: XDG_CONFIG_HOME
-    default: "/config"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

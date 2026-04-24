@@ -6,8 +6,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: THELOUNGE_HOME
-    default: "/config"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

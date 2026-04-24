@@ -4,7 +4,12 @@ upstream_env_url: "http://www.rsnapshot.org/"
 ports:
   []
 env:
-  []
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
 volumes:
   - path: /config
     required: true

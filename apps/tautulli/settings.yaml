@@ -6,8 +6,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: TAUTULLI_DOCKER
-    default: "True"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

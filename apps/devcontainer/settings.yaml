@@ -4,66 +4,7 @@ upstream_env_url: "https://trueforge.org"
 ports:
   []
 env:
-  - name: GOPATH
-    default: "/config/go"
-    required: false
-  - name: GOTOOLCHAIN
-    default: "local"
-    required: false
-  - name: PATH
-    default: "/usr/local/go/bin:${PATH}"
-    required: false
-  - name: SOPS_VERSION
-    default: "3.12.2"
-    required: false
-  - name: chartReleaserVersion
-    default: "1.8.1"
-    required: false
-  - name: chartTestingVersion
-    default: "3.14.0"
-    required: false
-  - name: conftestVersion
-    default: "0.68.2"
-    required: false
-  - name: goyqVersion
-    default: "4.53.2"
-    required: false
-  - name: helmVersion
-    default: "4.1.4"
-    required: false
-  - name: k9sVersion
-    default: "0.50.18"
-    required: false
-  - name: kubeScoreVersion
-    default: "1.20.0"
-    required: false
-  - name: kubeconformVersion
-    default: "0.7.0"
-    required: false
-  - name: kubectlVersion
-    default: "1.36.0"
-    required: false
-  - name: kubevalVersion
-    default: "0.16.1"
-    required: false
-  - name: kustomizeVersion
-    default: "5.8.0"
-    required: false
-  - name: oldhelmVersion
-    default: "3.12.1"
-    required: false
-  - name: rancherVersion
-    default: "2.14.0"
-    required: false
-  - name: skaffoldVersion
-    default: "2.18.3"
-    required: false
-  - name: starshipVersion
-    default: "1.25.0"
-    required: false
-  - name: tiltVersion
-    default: "0.37.1"
-    required: false
+  []
 volumes:
   - path: /config
     required: true

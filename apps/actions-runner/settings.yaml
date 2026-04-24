@@ -4,32 +4,23 @@ upstream_env_url: "https://github.com/actions/runner"
 ports:
   []
 env:
-  - name: ACTIONS_RUNNER_CONTAINER_HOOKS
-    default: "/home/runner/k8s/index.js"
+  - name: RUNNER_LABELS
+    default: ""
     required: false
-  - name: ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT
-    default: "1"
+  - name: RUNNER_NAME
+    default: ""
     required: false
-  - name: GOPATH
-    default: "/tmp/go"
+  - name: RUNNER_REPOSITORY_URL
+    default: ""
     required: false
-  - name: HOMEBREW_NO_ANALYTICS
-    default: "1"
+  - name: RUNNER_TOKEN
+    default: ""
     required: false
-  - name: HOMEBREW_NO_ENV_HINTS
-    default: "1"
+  - name: RUNNER_WORKDIR
+    default: "/tmp/runner/work"
     required: false
-  - name: HOMEBREW_NO_INSTALL_CLEANUP
-    default: "1"
-    required: false
-  - name: ImageOS
-    default: "ubuntu22"
-    required: false
-  - name: RUNNER_ALLOW_RUNASROOT
-    default: "1"
-    required: false
-  - name: RUNNER_MANUALLY_TRAP_SIG
-    default: "1"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

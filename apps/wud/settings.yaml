@@ -4,11 +4,8 @@ upstream_env_url: "https://github.com/trueforge-org/wud-plus"
 ports:
   []
 env:
-  - name: VERSION
-    default: "$VERSION"
-    required: false
-  - name: WORKDIR
-    default: "/app"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
   - name: WUD_LOG_FORMAT
     default: "text"

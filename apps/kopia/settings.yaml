@@ -4,17 +4,8 @@ upstream_env_url: "https://github.com/kopia/kopia"
 ports:
   []
 env:
-  - name: KOPIA_CACHE_DIRECTORY
-    default: "/config/cache"
-    required: false
   - name: KOPIA_CHECK_FOR_UPDATES
     default: "false"
-    required: false
-  - name: KOPIA_CONFIG_PATH
-    default: "/config/repository.config"
-    required: false
-  - name: KOPIA_LOG_DIR
-    default: "/config/logs"
     required: false
   - name: KOPIA_PERSIST_CREDENTIALS_ON_CONNECT
     default: "false"
@@ -22,8 +13,11 @@ env:
   - name: KOPIA_WEB_ENABLED
     default: "true"
     required: false
-  - name: KOPIA_WEB_PORT
-    default: "51515"
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

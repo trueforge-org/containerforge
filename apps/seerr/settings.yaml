@@ -6,17 +6,11 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: NODE_ENV
-    default: "production"
+  - name: LOG_LEVEL
+    default: "info"
     required: false
-  - name: NODE_OPTIONS
-    default: "--max_old_space_size=2048"
-    required: false
-  - name: PATH
-    default: "$PNPM_HOME:$PATH"
-    required: false
-  - name: PNPM_HOME
-    default: "/pnpm"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

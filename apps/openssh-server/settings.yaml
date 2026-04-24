@@ -6,7 +6,24 @@ ports:
     protocol: tcp
     required: false
 env:
-  []
+  - name: PASSWORD_ACCESS
+    default: "false"
+    required: false
+  - name: PUBLIC_KEY
+    default: ""
+    required: false
+  - name: SUDO_ACCESS
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: USER_NAME
+    default: "apps"
+    required: false
+  - name: USER_PASSWORD
+    default: ""
+    required: false
 volumes:
   - path: /config
     required: true

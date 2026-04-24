@@ -6,11 +6,26 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: HOME
-    default: "/app"
+  - name: DB_HOST
+    default: "postgresql"
     required: false
-  - name: NODE_ENV
-    default: "production"
+  - name: DB_NAME
+    default: ""
+    required: false
+  - name: DB_PASS
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_TYPE
+    default: "postgres"
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

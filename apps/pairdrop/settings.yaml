@@ -6,8 +6,11 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: NODE_ENV
-    default: "production"
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

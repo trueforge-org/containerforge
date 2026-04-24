@@ -4,11 +4,8 @@ upstream_env_url: "https://gitlab.com/chaica/feed2toot"
 ports:
   []
 env:
-  - name: PYTHONIOENCODING
-    default: "utf-8"
-    required: false
-  - name: PYTHONUNBUFFERED
-    default: "1"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

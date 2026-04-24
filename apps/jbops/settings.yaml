@@ -4,11 +4,8 @@ upstream_env_url: "https://github.com/blacktwin/JBOPS"
 ports:
   []
 env:
-  - name: JBOPS__SCRIPT_PATH
-    default: "fun/plexapi_haiku.py"
-    required: false
-  - name: PLEXAPI_CONFIG_PATH
-    default: "/config/config.ini"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

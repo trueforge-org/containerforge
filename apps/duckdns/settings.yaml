@@ -4,7 +4,15 @@ upstream_env_url: "https://duckdns.org/"
 ports:
   []
 env:
-  []
+  - name: SUBDOMAINS
+    default: ""
+    required: true
+  - name: TOKEN
+    default: ""
+    required: true
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

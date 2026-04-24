@@ -15,8 +15,14 @@ ports:
     protocol: udp
     required: false
 env:
-  - name: HOME
-    default: "/config"
+  - name: STGUIADDRESS
+    default: "0.0.0.0:8384"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

@@ -4,12 +4,7 @@ upstream_env_url: "https://github.com/containernetworking/plugins"
 ports:
   []
 env:
-  - name: CNI_BIN_DIR
-    default: "/host/opt/cni/bin"
-    required: false
-  - name: DEBIAN_FRONTEND
-    default: "noninteractive"
-    required: false
+  []
 volumes:
   - path: /config
     required: true

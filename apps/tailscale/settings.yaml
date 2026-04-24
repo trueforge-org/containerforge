@@ -4,7 +4,27 @@ upstream_env_url: "https://github.com/tailscale/tailscale"
 ports:
   []
 env:
-  []
+  - name: TS_ACCEPT_DNS
+    default: "false"
+    required: false
+  - name: TS_AUTHKEY
+    default: ""
+    required: false
+  - name: TS_EXTRA_ARGS
+    default: ""
+    required: false
+  - name: TS_HOSTNAME
+    default: ""
+    required: false
+  - name: TS_ROUTES
+    default: ""
+    required: false
+  - name: TS_USERSPACE
+    default: "true"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

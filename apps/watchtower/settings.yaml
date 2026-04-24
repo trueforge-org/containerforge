@@ -4,11 +4,11 @@ upstream_env_url: "https://github.com/trueforge-org/wud-plus"
 ports:
   []
 env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
   - name: WATCHTOWER_LABEL_ENABLE
     default: "true"
-    required: false
-  - name: WORKDIR
-    default: "/app"
     required: false
 volumes:
   - path: /config

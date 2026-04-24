@@ -4,8 +4,11 @@ upstream_env_url: "https://nextcloud.com"
 ports:
   []
 env:
-  - name: MALLOC_ARENA_MAX
-    default: "2"
+  - name: PORT
+    default: "9000"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

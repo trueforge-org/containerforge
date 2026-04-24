@@ -2,21 +2,21 @@
 schema_version: 1
 upstream_env_url: "https://github.com/esphome/esphome"
 ports:
+  - port: 5353
+    protocol: udp
+    required: false
   - port: 6052
     protocol: tcp
     required: false
 env:
-  - name: ESPHOME_BUILD_PATH
-    default: "/cache/build"
+  - name: ESPHOME_DASHBOARD_RELATIVE_URL
+    default: "/"
     required: false
-  - name: ESPHOME_DATA_DIR
-    default: "/cache/data"
+  - name: ESPHOME_DASHBOARD_USE_PING
+    default: "false"
     required: false
-  - name: HOME
-    default: "/config"
-    required: false
-  - name: PLATFORMIO_CORE_DIR
-    default: "/cache/pio"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

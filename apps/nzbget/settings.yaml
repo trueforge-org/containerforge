@@ -6,8 +6,17 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: NZBGET__PORT
-    default: "6789"
+  - name: NZBGET_PASS
+    default: "tegbzn6789"
+    required: false
+  - name: NZBGET_USER
+    default: "nzbget"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

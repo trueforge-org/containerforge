@@ -12,11 +12,11 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: HOME
-    default: "/app"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: NODE_ENV
-    default: "production"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config
