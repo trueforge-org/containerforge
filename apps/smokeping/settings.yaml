@@ -6,7 +6,15 @@ ports:
     protocol: tcp
     required: false
 env:
-  []
+  - name: MASTER_URL
+    default: ""
+    required: false
+  - name: SHARED_SECRET
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

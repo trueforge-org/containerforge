@@ -6,8 +6,41 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: PYTHONUNBUFFERED
-    default: "1"
+  - name: ALLOWED_HOSTS
+    default: "*"
+    required: false
+  - name: DEBUG
+    default: "False"
+    required: false
+  - name: DEFAULT_FROM_EMAIL
+    default: ""
+    required: false
+  - name: EMAIL_HOST
+    default: ""
+    required: false
+  - name: EMAIL_HOST_PASSWORD
+    default: ""
+    required: false
+  - name: EMAIL_HOST_USER
+    default: ""
+    required: false
+  - name: EMAIL_PORT
+    default: "587"
+    required: false
+  - name: EMAIL_USE_TLS
+    default: "true"
+    required: false
+  - name: SECRET_KEY
+    default: ""
+    required: true
+  - name: SITE_NAME
+    default: "Mychecks"
+    required: false
+  - name: SITE_ROOT
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

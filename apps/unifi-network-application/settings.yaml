@@ -15,8 +15,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: DEBIAN_FRONTEND
-    default: "noninteractive"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

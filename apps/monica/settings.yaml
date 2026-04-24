@@ -9,8 +9,17 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: MEMORY_LIMIT
-    default: "512M"
+  - name: APP_ENV
+    default: "production"
+    required: false
+  - name: APP_KEY
+    default: ""
+    required: true
+  - name: APP_URL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

@@ -6,11 +6,14 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: WEBHOOK__PORT
-    default: "9000"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
   - name: WEBHOOK__URLPREFIX
     default: "hooks"
+    required: false
+  - name: WEBHOOK__VERBOSE
+    default: "false"
     required: false
 volumes:
   - path: /config

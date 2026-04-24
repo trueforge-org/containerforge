@@ -6,11 +6,11 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: IMAGE_STATS
-    default: "${IMAGE_STATS}"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: WEBUI_PORTS
-    default: "3030/tcp,3030/udp"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

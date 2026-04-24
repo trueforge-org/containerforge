@@ -4,9 +4,7 @@ upstream_env_url: "https://hub.docker.com/_/node"
 ports:
   []
 env:
-  - name: HOME
-    default: "/tmp/nodehome"
-    required: false
+  []
 volumes:
   - path: /config
     required: true

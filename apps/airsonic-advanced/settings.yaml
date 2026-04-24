@@ -5,15 +5,15 @@ ports:
   - port: 4040
     protocol: tcp
     required: false
+  - port: 4041
+    protocol: tcp
+    required: false
 env:
-  - name: AIRSONIC_ADVANCED_HOME
-    default: "/app"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: AIRSONIC_ADVANCED_SETTINGS
-    default: "/config"
-    required: false
-  - name: LANG
-    default: "C.UTF-8"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

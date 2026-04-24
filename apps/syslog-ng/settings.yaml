@@ -12,7 +12,12 @@ ports:
     protocol: tcp
     required: false
 env:
-  []
+  - name: EXTRA_ARGS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

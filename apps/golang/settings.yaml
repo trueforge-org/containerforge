@@ -4,21 +4,7 @@ upstream_env_url: "https://hub.docker.com/_/go"
 ports:
   []
 env:
-  - name: GOCACHE
-    default: "/tmp/go-build"
-    required: false
-  - name: GOPATH
-    default: "/config/go"
-    required: false
-  - name: GOTOOLCHAIN
-    default: "local"
-    required: false
-  - name: HOME
-    default: "/config"
-    required: false
-  - name: PATH
-    default: "/usr/local/go/bin:$PATH"
-    required: false
+  []
 volumes:
   - path: /config
     required: true

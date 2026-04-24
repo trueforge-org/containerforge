@@ -5,12 +5,24 @@ ports:
   - port: 7396
     protocol: tcp
     required: false
-env:
-  - name: DEBIAN_FRONTEND
-    default: "noninteractive"
+  - port: 36330
+    protocol: tcp
     required: false
+env:
   - name: NVIDIA_DRIVER_CAPABILITIES
     default: "compute,video,utility"
+    required: false
+  - name: PASSKEY
+    default: ""
+    required: false
+  - name: TEAM
+    default: "0"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: USER
+    default: "Anonymous"
     required: false
 volumes:
   - path: /config

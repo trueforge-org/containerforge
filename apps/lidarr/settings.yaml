@@ -6,14 +6,11 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: DOTNET_EnableDiagnostics
-    default: "0"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: LIDARR__SERVER__PORT
-    default: "8686"
-    required: false
-  - name: LIDARR__UPDATE__BRANCH
-    default: "develop"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

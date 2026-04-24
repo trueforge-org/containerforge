@@ -6,8 +6,14 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: MAKEFLAGS
-    default: "-j4"
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ZNC_PASS
+    default: ""
+    required: false
+  - name: ZNC_USER
+    default: "admin"
     required: false
 volumes:
   - path: /config

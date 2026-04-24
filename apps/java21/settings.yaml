@@ -4,24 +4,7 @@ upstream_env_url: "https://github.com/adoptium/temurin21"
 ports:
   []
 env:
-  - name: JAVA_HOME
-    default: "/opt/java/openjdk"
-    required: false
-  - name: JRE_CACERTS_PATH
-    default: "$JAVA_HOME/lib/security/cacerts"
-    required: false
-  - name: LANG
-    default: "en_US.UTF-8"
-    required: false
-  - name: LANGUAGE
-    default: "en_US:en"
-    required: false
-  - name: LC_ALL
-    default: "en_US.UTF-8"
-    required: false
-  - name: PATH
-    default: "$JAVA_HOME/bin:$PATH"
-    required: false
+  []
 volumes:
   - path: /config
     required: true

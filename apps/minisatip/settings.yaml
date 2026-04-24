@@ -12,14 +12,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: -type
-    default: "c"
-    required: false
-  - name: ATTACHED_DEVICES_PERMS
-    default: "/dev/dvb"
-    required: false
-  - name: MAKEFLAGS
-    default: "-j4"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

@@ -6,11 +6,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: BUDGE_DATABASE
-    default: "/config/budge.db"
-    required: false
-  - name: S6_STAGE2_HOOK
-    default: "/init-hook"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

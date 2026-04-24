@@ -5,8 +5,19 @@ ports:
   - port: 6667
     protocol: tcp
     required: false
+  - port: 6697
+    protocol: tcp
+    required: false
 env:
-  []
+  - name: IRC_NETWORK_NAME
+    default: "ExampleNet"
+    required: false
+  - name: IRC_SERVER_NAME
+    default: "irc.example.net"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

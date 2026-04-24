@@ -6,9 +6,7 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: PORT
-    default: "3000"
-    required: false
+  []
 volumes:
   - path: /config
     required: true

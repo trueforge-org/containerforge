@@ -9,20 +9,17 @@ env:
   - name: DUPLICATI__REQUIRE_DB_ENCRYPTION_KEY
     default: "true"
     required: false
-  - name: DUPLICATI__SERVER_DATAFOLDER
-    default: "/config"
-    required: false
   - name: DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES
     default: "*"
     required: false
   - name: DUPLICATI__WEBSERVICE_INTERFACE
     default: "any"
     required: false
-  - name: DUPLICATI__WEBSERVICE_PORT
-    default: "8200"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: HOME
-    default: "/config"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /backups

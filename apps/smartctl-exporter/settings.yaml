@@ -6,7 +6,9 @@ ports:
     protocol: tcp
     required: false
 env:
-  []
+  - name: SMARTCTL_EXPORTER_LOG_LEVEL
+    default: "info"
+    required: false
 volumes:
   - path: /config
     required: true

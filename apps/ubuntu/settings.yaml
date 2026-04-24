@@ -4,23 +4,8 @@ upstream_env_url: "https://hub.docker.com/_/ubuntu"
 ports:
   []
 env:
-  - name: #
-    default: "Enable"
-    required: false
-  - name: DEBIAN_FRONTEND
-    default: "noninteractive"
-    required: false
   - name: NVIDIA_DRIVER_CAPABILITIES
     default: "compute,video,utility"
-    required: false
-  - name: detection
-    default: "of"
-    required: false
-  - name: dotnet
-    default: "running"
-    required: false
-  - name: in
-    default: "a"
     required: false
 volumes:
   - path: /config

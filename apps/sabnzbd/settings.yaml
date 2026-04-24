@@ -9,8 +9,14 @@ env:
   - name: SABNZBD__ADDRESS
     default: "[::]"
     required: false
-  - name: SABNZBD__PORT
-    default: "8080"
+  - name: SABNZBD__HOST_WHITELIST_ENTRIES
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

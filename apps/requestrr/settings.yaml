@@ -6,8 +6,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: WEBUI_PORTS
-    default: "4545/tcp,4545/udp"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

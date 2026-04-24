@@ -9,14 +9,17 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: DATABASE
-    default: "/config/diskoverdb.sqlite3"
-    required: false
-  - name: DISKOVERDIR
-    default: "/config/diskover.conf.d/diskover/"
-    required: false
   - name: ES_HOST
     default: "elasticsearch"
+    required: false
+  - name: ES_PASS
+    default: ""
+    required: false
+  - name: ES_USER
+    default: "elastic"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

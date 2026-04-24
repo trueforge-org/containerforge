@@ -4,7 +4,12 @@ upstream_env_url: "https://github.com/StuffAnThings/qbit_manage"
 ports:
   []
 env:
-  []
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
 volumes:
   - path: /config
     required: true

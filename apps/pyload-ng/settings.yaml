@@ -6,8 +6,17 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: HOME
-    default: "/config"
+  - name: PYLOAD_PASSWORD
+    default: "pyload"
+    required: false
+  - name: PYLOAD_USERNAME
+    default: "pyload"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

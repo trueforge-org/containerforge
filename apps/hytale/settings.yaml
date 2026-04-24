@@ -4,7 +4,9 @@ upstream_env_url: "https://www.hytale.com"
 ports:
   []
 env:
-  []
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

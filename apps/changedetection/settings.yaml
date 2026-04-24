@@ -6,8 +6,17 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: PYTHONUNBUFFERED
-    default: "1"
+  - name: BASE_URL
+    default: ""
+    required: false
+  - name: PLAYWRIGHT_DRIVER_URL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: USE_X_SETTINGS_FILE
+    default: ""
     required: false
 volumes:
   - path: /config

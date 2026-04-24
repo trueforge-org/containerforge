@@ -6,14 +6,20 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: APPRISE_ATTACH_DIR
-    default: "/attachments"
-    required: false
   - name: APPRISE_ATTACH_SIZE
     default: "0"
     required: false
-  - name: APPRISE_CONFIG_DIR
-    default: "/config"
+  - name: APPRISE_DEFAULT_THEME
+    default: "default"
+    required: false
+  - name: APPRISE_STATEFUL_MODE
+    default: "simple"
+    required: false
+  - name: LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

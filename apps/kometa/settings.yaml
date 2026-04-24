@@ -4,11 +4,23 @@ upstream_env_url: "https://github.com/Kometa-Team/Kometa"
 ports:
   []
 env:
-  - name: HOME
-    default: "/app"
+  - name: KOMETA_NO_MISSING
+    default: "false"
     required: false
-  - name: PYTHONIOENCODING
-    default: "utf-8"
+  - name: KOMETA_NO_VERIFY_SSL
+    default: "false"
+    required: false
+  - name: KOMETA_RUN
+    default: "false"
+    required: false
+  - name: KOMETA_TIMES
+    default: "05:00"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /app

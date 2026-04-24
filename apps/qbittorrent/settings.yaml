@@ -2,21 +2,24 @@
 schema_version: 1
 upstream_env_url: "https://github.com/qbittorrent/qBittorrent"
 ports:
+  - port: 6881
+    protocol: tcp
+    required: false
+  - port: 6881
+    protocol: udp
+    required: false
   - port: 8080
     protocol: tcp
     required: false
 env:
-  - name: HOME
-    default: "/config"
+  - name: QBT_WEBUI_PORT
+    default: "8080"
     required: false
-  - name: QBT_CONFIRM_LEGAL_NOTICE
-    default: "1"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
-  - name: XDG_CONFIG_HOME
-    default: "/config"
-    required: false
-  - name: XDG_DATA_HOME
-    default: "/config"
+  - name: UMASK
+    default: "002"
     required: false
 volumes:
   - path: /config

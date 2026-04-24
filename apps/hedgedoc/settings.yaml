@@ -6,14 +6,26 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: NODE_ENV
-    default: "production"
-    required: false
-  - name: PUPPETEER_SKIP_DOWNLOAD
+  - name: CMD_ALLOW_ANONYMOUS
     default: "true"
     required: false
-  - name: YARN_CACHE_FOLDER
-    default: "/tmp/.yarn"
+  - name: CMD_ALLOW_FREEURL
+    default: "false"
+    required: false
+  - name: CMD_DOMAIN
+    default: ""
+    required: false
+  - name: CMD_PROTOCOL_USESSL
+    default: "false"
+    required: false
+  - name: CMD_SESSION_SECRET
+    default: ""
+    required: false
+  - name: CMD_URL_ADDPORT
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

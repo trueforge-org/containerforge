@@ -9,7 +9,12 @@ ports:
     protocol: tcp
     required: false
 env:
-  []
+  - name: CADDY_INGRESS_NETWORKS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

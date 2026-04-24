@@ -6,11 +6,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: COMPlus_EnableDiagnostics
-    default: "0"
-    required: false
-  - name: HOME
-    default: "/config"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

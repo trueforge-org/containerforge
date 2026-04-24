@@ -6,7 +6,24 @@ ports:
     protocol: tcp
     required: false
 env:
-  []
+  - name: ALLOWED_HOSTS
+    default: "*"
+    required: false
+  - name: SECRET_KEY
+    default: ""
+    required: true
+  - name: SUPERUSER_EMAIL
+    default: ""
+    required: false
+  - name: SUPERUSER_NAME
+    default: "admin"
+    required: false
+  - name: SUPERUSER_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true

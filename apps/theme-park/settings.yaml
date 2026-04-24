@@ -6,8 +6,8 @@ ports:
     protocol: tcp
     required: false
 env:
-  - name: NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE
-    default: "1"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config

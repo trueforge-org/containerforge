@@ -9,14 +9,8 @@ env:
   - name: DD_LOG_FORMAT
     default: "text"
     required: false
-  - name: DD_STORE_PATH
-    default: "/config"
-    required: false
-  - name: DD_VERSION
-    default: "$VERSION"
-    required: false
-  - name: WORKDIR
-    default: "/app"
+  - name: TZ
+    default: "Etc/UTC"
     required: false
 volumes:
   - path: /config
