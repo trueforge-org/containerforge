@@ -1,25 +1,42 @@
 #!/usr/bin/env bash
 
-
 # set secret key if unset
 SECRET_FILE="/config/secret_key_base.txt"
-if [ -n "${SECRET_KEY_BASE}" ]; then
-  echo "**** SECRET_KEY_BASE set in environment. ****"
-elif [ -f "${SECRET_FILE}" ] && [ -s "${SECRET_FILE}" ]; then
-  export SECRET_KEY_BASE=$(cat "${SECRET_FILE}" | tr -d '[:space:]')
+if [[ -w /config ]]; then
+    # /config is writable, use it
+    if [ -n "${SECRET_KEY_BASE}" ]; then
+      echo "**** SECRET_KEY_BASE set in environment. ****"
+    elif [ -f "${SECRET_FILE}" ] && [ -s "${SECRET_FILE}" ]; then
+      export SECRET_KEY_BASE=$(cat "${SECRET_FILE}" | tr -d '[:space:]')
+    else
+      echo "**** SECRET_KEY_BASE not set, generating. ****"
+      KEY=$(ruby -r "securerandom" -e "puts SecureRandom.hex(64)")
+      echo "${KEY}" > "${SECRET_FILE}"
+      export SECRET_KEY_BASE="${KEY}"
+    fi
+    printf "%s" "${SECRET_KEY_BASE}" > /var/run/s6/container_environment/SECRET_KEY_BASE
+
+    mkdir -p /app/www/log /app/www/tmp
 else
-  echo "**** SECRET_KEY_BASE not set, generating. ****"
-  KEY=$(ruby -r "securerandom" -e "puts SecureRandom.hex(64)")
-  echo "${KEY}" > "${SECRET_FILE}"
-  export SECRET_KEY_BASE="${KEY}"
+    # /config is readonly, use /tmp
+    echo "Warning: /config is read-only, using /tmp for runtime data"
+    SECRET_FILE="/tmp/manyfold/secret_key_base.txt"
+    mkdir -p /tmp/manyfold /app/www/log /app/www/tmp
+
+    if [ -n "${SECRET_KEY_BASE}" ]; then
+      echo "**** SECRET_KEY_BASE set in environment. ****"
+    elif [ -f "${SECRET_FILE}" ] && [ -s "${SECRET_FILE}" ]; then
+      export SECRET_KEY_BASE=$(cat "${SECRET_FILE}" | tr -d '[:space:]')
+    else
+      echo "**** SECRET_KEY_BASE not set, generating. ****"
+      KEY=$(ruby -r "securerandom" -e "puts SecureRandom.hex(64)")
+      echo "${KEY}" > "${SECRET_FILE}"
+      export SECRET_KEY_BASE="${KEY}"
+    fi
+    printf "%s" "${SECRET_KEY_BASE}" > /var/run/s6/container_environment/SECRET_KEY_BASE 2>/dev/null || true
 fi
-printf "%s" "${SECRET_KEY_BASE}" > /var/run/s6/container_environment/SECRET_KEY_BASE
 
-mkdir -p \
-    /app/www/log \
-    /app/www/tmp
-
-printf %s "$(cat /app/www/GIT_SHA)" > /run/s6/container_environment/GIT_SHA
+printf %s "$(cat /app/www/GIT_SHA)" > /run/s6/container_environment/GIT_SHA 2>/dev/null || true
 
 # Remove old pid in the event of an unclean shutdown
 if [[ -f /app/www/tmp/pids/server.pid ]]; then
@@ -30,9 +47,8 @@ DB_SCHEME=$(awk -F":" '{print $1}' <<<"${DATABASE_URL}")
 
 if [[ ${DB_SCHEME} = "sqlite3" ]]; then
     DB_PATH=$(awk -F":" '{print $2}' <<<"${DATABASE_URL}")
-    touch "${DB_PATH}"
-
-        /config
+    mkdir -p "$(dirname "${DB_PATH}")" 2>/dev/null || true
+    touch "${DB_PATH}" 2>/dev/null || true
 elif [[ ${DB_SCHEME} = "postgresql" ]]; then
     DB_HOST=$(awk -F '@|:|/' '{print $6}' <<<"${DATABASE_URL}")
     DB_PORT=$(awk -F '@|:|/' '{print $7}' <<<"${DATABASE_URL}")
@@ -52,16 +68,20 @@ elif [[ ${DB_SCHEME} = "postgresql" ]]; then
         fi
     done
 else
-    export DATABASE_URL=sqlite3:/config/manyfold.sqlite3
-    printf "sqlite3:/config/manyfold.sqlite3" > /run/s6/container_environment/DATABASE_URL
+    if [[ -w /config ]]; then
+        export DATABASE_URL=sqlite3:/config/manyfold.sqlite3
+        printf "sqlite3:/config/manyfold.sqlite3" > /run/s6/container_environment/DATABASE_URL 2>/dev/null || true
+    else
+        export DATABASE_URL=sqlite3:/tmp/manyfold/manyfold.sqlite3
+        printf "sqlite3:/tmp/manyfold/manyfold.sqlite3" > /run/s6/container_environment/DATABASE_URL 2>/dev/null || true
+    fi
     echo "**** Missing or invalid DATABASE_URL, defaulting to sqlite. ****"
 fi
 
 cd /app/www/ || exit 1
 
 echo "**** Running Manyfold database init. ****"
- /usr/bin/bundle exec rails db:prepare:with_data
+/usr/bin/bundle exec rails db:prepare:with_data
 
 cd /app/www
 exec foreman start
-
