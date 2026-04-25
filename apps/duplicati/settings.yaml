@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.duplicati.com/"
+ports:
+  - port: 8200
+    protocol: tcp
+    required: false
+env:
+  - name: DUPLICATI__REQUIRE_DB_ENCRYPTION_KEY
+    default: "true"
+    required: false
+  - name: DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES
+    default: "*"
+    required: false
+  - name: DUPLICATI__WEBSERVICE_INTERFACE
+    default: "any"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /backups
+    required: false
+  - path: /config
+    required: true
+  - path: /source
+    required: false

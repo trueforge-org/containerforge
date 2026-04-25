@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://postgresql.org"
+ports:
+  - port: 5432
+    protocol: tcp
+    required: false
+env:
+  - name: POSTGRES_DB
+    default: "postgres"
+    required: false
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: true
+  - name: POSTGRES_USER
+    default: "postgres"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

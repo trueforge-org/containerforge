@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://duplicacy.com"
+ports:
+  - port: 3875
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /cache
+    required: false
+  - path: /config
+    required: true
+  - path: /logs
+    required: false

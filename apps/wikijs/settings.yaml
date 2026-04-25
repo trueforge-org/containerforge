@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Requarks/wiki"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: DB_HOST
+    default: "postgresql"
+    required: false
+  - name: DB_NAME
+    default: ""
+    required: false
+  - name: DB_PASS
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_TYPE
+    default: "postgres"
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql

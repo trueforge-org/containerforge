@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04
+FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5fa3c2cf644e1cf005b5ee0feac4b0d0041f65850fb1991bef3926c45a9a371c
 
 # set version label
 ARG VERSION
@@ -40,7 +40,7 @@ RUN \
         /tmp/* && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# copy local files
+# copy local files
 USER apps
 COPY --chmod=0755 . /
 

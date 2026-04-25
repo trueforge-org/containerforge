@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/python
-  default = "3.13.12"
+  default = "3.14.4"
 }
 
 variable "PIP_VERSION" {
@@ -16,12 +16,12 @@ variable "PIP_VERSION" {
 
 variable "SETUPTOOLS_VERSION" {
   // renovate: datasource=pypi depName=setuptools
-  default = "82.0.0"
+  default = "82.0.1"
 }
 
 variable "WHEEL_VERSION" {
   // renovate: datasource=pypi depName=wheel
-  default = "0.46.3"
+  default = "0.47.0"
 }
 
 variable "LICENSE" {

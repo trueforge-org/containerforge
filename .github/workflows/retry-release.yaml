@@ -46,17 +46,17 @@ jobs:
           persist-credentials: false
 
       - name: Generate Token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: app-token
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
 
       - name: Install regctl
-        uses: regclient/actions/regctl-installer@da9319db8e44e8b062b3a147e1dfb2f574d41a03 # main
+        uses: regclient/actions/regctl-installer@f3c6d87835906c175eb6ccfc18b348b69bb447e7 # main
 
       - name: Get Bake Options
         uses: ./.github/actions/app-options
@@ -79,7 +79,7 @@ jobs:
 
       - if: ${{ steps.app-options.outputs.version != steps.registry.outputs.version }}
         name: Find Pull Request
-        uses: juliangruber/find-pull-request-action@952b3bb1ddb2dcc0aa3479e98bb1c2d1a922f096 # v1.10.0
+        uses: juliangruber/find-pull-request-action@33d46d4ff90884bb23aaead16044125daaf733d8 # v1.11.0
         id: find-pull-request
         with:
           github-token: ${{ steps.app-token.outputs.token }}

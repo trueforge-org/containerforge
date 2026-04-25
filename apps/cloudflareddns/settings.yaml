@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.hotio.dev"
+ports:
+  []
+env:
+  - name: API_KEY
+    default: ""
+    required: false
+  - name: EMAIL
+    default: ""
+    required: false
+  - name: INTERVAL
+    default: "300"
+    required: false
+  - name: SUBDOMAIN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ZONE
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

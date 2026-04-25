@@ -5,7 +5,6 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-dokuwiki versioning=loose
   default = "2025-05-14b"
 }
 

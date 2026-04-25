@@ -2,3 +2,7 @@
 .private
 docker-bake.json
 .DS_Store
+containers.json
+temp/
+tmpwebsite/
+website/

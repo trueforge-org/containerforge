@@ -1,5 +1,5 @@
 # Base stage - install system dependencies
-FROM ghcr.io/trueforge-org/node:22.22.0@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 AS base
+FROM ghcr.io/trueforge-org/node:24.15.0@sha256:870297da9d7d92feb5ce87779f8531516cd5a3ccea0e4bb240a1dcd31f830575 AS base
 
 USER root
 
@@ -24,7 +24,7 @@ RUN apt-get update && \
 # Install trivy and cosign
 RUN ARCH=${TARGETARCH:-amd64} && \
     TRIVY_ARCH=$([ "$ARCH" = "arm64" ] && echo "ARM64" || echo "64bit") && \
-    curl -fsSL "https://github.com/aquasecurity/trivy/releases/download/v0.69.1/trivy_0.69.1_Linux-${TRIVY_ARCH}.tar.gz" \
+    curl -fsSL "https://github.com/aquasecurity/trivy/releases/download/v0.70.0/trivy_0.70.0_Linux-${TRIVY_ARCH}.tar.gz" \
         | tar xz -C /usr/local/bin trivy && \
     curl -fsSL "https://github.com/sigstore/cosign/releases/download/v2.4.1/cosign-linux-${ARCH}" -o /usr/local/bin/cosign && \
     chmod +x /usr/local/bin/cosign && \

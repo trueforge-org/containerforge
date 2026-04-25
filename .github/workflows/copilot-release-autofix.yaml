@@ -21,7 +21,7 @@ jobs:
       group: default
     steps:
       - name: Open issue and assign Copilot
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           RUN_ID: ${{ github.event.workflow_run.id }}
           RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
@@ -54,8 +54,22 @@ jobs:
               return;
             }
 
+            const failedBuildJobs = failedJobs.filter((job) => /^Build\s+/.test(job.name || ''));
+            if (failedBuildJobs.length === 0) {
+              core.info('No failed container build jobs found. Skipping.');
+              return;
+            }
+
+            const buildStepFailedJobs = failedBuildJobs.filter((job) =>
+              (job.steps || []).some((step) => step.conclusion === 'failure' && step.name === 'Build App'),
+            );
+            if (buildStepFailedJobs.length === 0) {
+              core.info('Build jobs failed, but not in the Build App step (for example sign/attest). Skipping.');
+              return;
+            }
+
             const appMatches = new Set();
-            for (const job of failedJobs) {
+            for (const job of buildStepFailedJobs) {
               const buildMatch = job.name.match(/Build\s+(.+?)(?:\s+\/|$)/);
               if (buildMatch && buildMatch[1]) {
                 appMatches.add(buildMatch[1].trim());
@@ -80,7 +94,7 @@ jobs:
               return;
             }
 
-            const failedJobLines = failedJobs.slice(0, 20).map((job) => {
+            const failedJobLines = buildStepFailedJobs.slice(0, 20).map((job) => {
               const failedSteps = (job.steps || [])
                 .filter((step) => step.conclusion === 'failure')
                 .map((step) => `  - ${step.name}`)

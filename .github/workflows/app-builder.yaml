@@ -47,7 +47,7 @@ jobs:
           upstream-version: ${{ steps.app-options.outputs.version }}
 
       - name: Build App Metadata
-        uses: docker/metadata-action@a60f0f62b5c12316066c8db464bfb2faafd7907b
+        uses: docker/metadata-action@deaa0dee567db6b95038c14152b037af85a8fe3b
         id: meta
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
@@ -68,7 +68,7 @@ jobs:
             type=raw,value=sha-${{ github.sha }},enable=${{ inputs.release }}
 
       - name: Upload Bake Metadata
-        uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ steps.meta.outputs.bake-file }}
@@ -103,7 +103,7 @@ jobs:
           echo "PUSH=${PUSH}" >> $GITHUB_ENV
 
       - name: Get Target Architecture
-        uses: actions/github-script@450193c5abd4cdb17ba9f3ffcfe8f635c4bb6c2a
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         id: target
         with:
           script: |-
@@ -116,20 +116,20 @@ jobs:
           app: ${{ inputs.app }}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@3227f5311cb93ffd14d13e65d8cc400d30f4dd8a
+        uses: docker/login-action@4a8376e001c7725687f0624d1c3698a3f6ab337e
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Download Bake Metadata
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ runner.temp }}
 
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@7c525be6cc8a882d5163ce04293cac18617c709f
+        uses: docker/setup-buildx-action@35d5669990ec77242c5a5926b41381a3f26fa947
 
       - name: Add Include Directory to Build Context
         run: |-
@@ -137,7 +137,7 @@ jobs:
           chmod +x ./apps/${{ inputs.app }}/healthcheck.sh
 
       - name: Build App
-        uses: docker/bake-action@1cf124c0da50acdcb82ef32c93262bfe09c7d069
+        uses: docker/bake-action@f1008e7fe95cd7b078b5b044b1d1402943fe06c1
         id: bake
         with:
           files: |
@@ -170,9 +170,8 @@ jobs:
             *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }},push=${{ env.PUSH }},push-by-digest=true,name-canonical=true,compression=zstd,force-compression=true
             *.platform=${{ matrix.platform }}
             *.tags=
-          source: .
+          source: ./apps/${{ inputs.app }}
           targets: image
-          workdir: ./apps/${{ inputs.app }}
 
       - name: Export Digest
         run: |-
@@ -181,7 +180,7 @@ jobs:
           echo "$DIGEST" > "${{ runner.temp }}/digests/${DIGEST#sha256:}"
 
       - name: Upload Digest
-        uses: actions/upload-artifact@47309c993abb98030a35d55ef7ff34b7fa1074b5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ inputs.app }}-digests-${{ steps.target.outputs.arch }}
           path: ${{ runner.temp }}/digests/*
@@ -204,27 +203,27 @@ jobs:
           persist-credentials: false
 
       - name: Download Bake Metadata
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
         with:
           name: ${{ inputs.app }}-bake-metadata
           path: ${{ runner.temp }}
 
       - name: Download Digests
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
         with:
           path: ${{ runner.temp }}/digests
           pattern: ${{ inputs.app }}-digests-*
           merge-multiple: true
 
       - name: Login to GHCR
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Login to Quay
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_CF_USER }}
@@ -273,47 +272,46 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     steps:
       - name: Install Cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
 
       - name: Login to GHCR
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Login to Quay
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_CF_USER }}
           password: ${{ secrets.QUAY_CF_TOKEN }}
 
       - name: Upload Dependency Snapshot to GHCR
-        uses: anchore/sbom-action@17ae1740179002c89186b61233e0f892c3118b11
+        uses: anchore/sbom-action@f0d33c151c04af6fcbf4363834e838fcc7c87783
         with:
           dependency-snapshot: true
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Upload Dependency Snapshot to Quay
-        uses: anchore/sbom-action@17ae1740179002c89186b61233e0f892c3118b11
+        uses: anchore/sbom-action@f0d33c151c04af6fcbf4363834e838fcc7c87783
         with:
           dependency-snapshot: true
           image: quay.io/containerforge/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Attestation for GHCR
-        uses: actions/attest-build-provenance@02a49bdc410a809733602220c6f6275925d6b578
+        uses: actions/attest-build-provenance@10334b5f1e684784025c3fc0a277c88c19089275
         with:
           push-to-registry: true
           subject-name: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
           subject-digest: ${{ needs.merge.outputs.digest }}
 
       - name: Attestation for Quay
-        uses: actions/attest-build-provenance@02a49bdc410a809733602220c6f6275925d6b578
+        uses: actions/attest-build-provenance@10334b5f1e684784025c3fc0a277c88c19089275
         with:
           push-to-registry: true
           subject-name: quay.io/containerforge/${{ inputs.app }}
@@ -354,17 +352,17 @@ jobs:
     steps:
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+        uses: sigstore/cosign-installer@cad07c2e89fa2edd6e2d7bab4c1aa38e53f76003 # v4.1.1
 
       - name: Login to GHCR
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: Login to Quay
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_CF_USER }}
@@ -413,7 +411,7 @@ jobs:
           persist-credentials: false
 
       - name: Generate Token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3
         id: app-token
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
@@ -441,7 +439,7 @@ jobs:
           to-app: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:sandbox
 
       - name: Post App Size Diff
-        uses: marocchino/sticky-pull-request-comment@5060d4700a91de252c87eeddd2da026382d9298a
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0
         with:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           header: app-size-diff-${{ inputs.app }}
@@ -466,7 +464,7 @@ jobs:
           persist-credentials: false
 
       - name: Generate Token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: app-token
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
@@ -485,7 +483,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Create Release
-        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
+        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
         with:
           body: |
             > [!NOTE]
@@ -501,12 +499,8 @@ jobs:
   notify:
     if: ${{ inputs.release && !cancelled() }}
     needs:
-      - plan
       - build
       - merge
-      - attest
-      - sign
-      - announce
     name: Notify
     runs-on:
       group: default

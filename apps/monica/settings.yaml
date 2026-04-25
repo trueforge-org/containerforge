@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/monicahq/monica"
+ports:
+  - port: 80
+    protocol: tcp
+    required: false
+  - port: 443
+    protocol: tcp
+    required: false
+env:
+  - name: APP_ENV
+    default: "production"
+    required: false
+  - name: APP_KEY
+    default: ""
+    required: true
+  - name: APP_URL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

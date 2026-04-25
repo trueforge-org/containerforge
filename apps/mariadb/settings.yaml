@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://mariadb.org/"
+ports:
+  - port: 3306
+    protocol: tcp
+    required: false
+env:
+  - name: MARIADB_DATABASE
+    default: ""
+    required: false
+  - name: MARIADB_PASSWORD
+    default: ""
+    required: false
+  - name: MARIADB_ROOT_PASSWORD
+    default: ""
+    required: true
+  - name: MARIADB_USER
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

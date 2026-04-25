@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/esphome/esphome"
+ports:
+  - port: 5353
+    protocol: udp
+    required: false
+  - port: 6052
+    protocol: tcp
+    required: false
+env:
+  - name: ESPHOME_DASHBOARD_RELATIVE_URL
+    default: "/"
+    required: false
+  - name: ESPHOME_DASHBOARD_USE_PING
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

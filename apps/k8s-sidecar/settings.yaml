@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/kiwigrid/k8s-sidecar"
+ports:
+  []
+env:
+  - name: FOLDER
+    default: "/tmp/"
+    required: false
+  - name: LABEL
+    default: ""
+    required: false
+  - name: METHOD
+    default: "WATCH"
+    required: false
+  - name: NAMESPACE
+    default: "ALL"
+    required: false
+  - name: RESOURCE
+    default: "configmap"
+    required: false
+volumes:
+  - path: /config
+    required: true

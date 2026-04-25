@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.syslog-ng.com/products/open-source-log-management/"
+ports:
+  - port: 5514
+    protocol: udp
+    required: false
+  - port: 6514
+    protocol: tcp
+    required: false
+  - port: 6601
+    protocol: tcp
+    required: false
+env:
+  - name: EXTRA_ARGS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

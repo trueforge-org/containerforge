@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15 AS buildstage
 ############## build stage ##############
 ARG VERSION
 USER root
@@ -84,7 +84,7 @@ RUN \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04
+FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:5fa3c2cf644e1cf005b5ee0feac4b0d0041f65850fb1991bef3926c45a9a371c
 
 # set version label
 ARG VERSION

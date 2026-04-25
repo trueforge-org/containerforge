@@ -1,5 +1,5 @@
 # ---------- BASE STAGE ----------
-FROM ghcr.io/trueforge-org/node:22.22@sha256:d02dc64dae5f37614c8f149fbddfe574f9f3d32e4538a274c98d36c7a2e98107 AS base
+FROM ghcr.io/trueforge-org/node:24.15@sha256:870297da9d7d92feb5ce87779f8531516cd5a3ccea0e4bb240a1dcd31f830575 AS base
 
 ARG VERSION
 
@@ -14,7 +14,8 @@ WORKDIR /app
 # Fetch Seerr source and enable corepack for pnpm
 RUN curl -L -o /tmp/seerr.tar.gz "https://github.com/seerr-team/seerr/archive/refs/tags/v${VERSION}.tar.gz" && \
     mkdir -p /app && \
-    tar xzf /tmp/seerr.tar.gz -C /app --strip-components=1
+    tar xzf /tmp/seerr.tar.gz -C /app --strip-components=1 && \
+    sed -i 's/^engine-strict=true$/engine-strict=false/' /app/.npmrc
 
 # ---------- CorePack stage ----------
 FROM base AS corepack

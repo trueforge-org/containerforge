@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:ec0d5db35e9cb896aa56dba7cacc1a97dede19debe52c217ed044e7a32f27536 AS builder
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15 AS builder
 WORKDIR /app
 ARG VERSION
 
@@ -14,21 +14,23 @@ RUN apt-get update && \
 # Create virtual environment and upgrade pip/setuptools
 RUN python -m venv /app/venv && /app/venv/bin/pip install --no-cache-dir -U pip setuptools
 
-# Download and extract only the src/ folder from the release
+# Download and extract the release. Upstream moved dependency metadata from
+# src/requirements.txt to a top-level pyproject.toml starting at 2.5.5, so we
+# stage the whole project for pip and copy the source files into /app for the
+# existing CMD to find.
 ENV RELEASE_URL="https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz"
-RUN curl -L https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz -o release.tar.gz && \
-    mkdir src_temp && \
-    tar -xzf release.tar.gz -C src_temp k8s-sidecar-${VERSION}/src && \
-    cp -r src_temp/k8s-sidecar-${VERSION}/src/* /app/ && \
-    rm -rf release.tar.gz src_temp
-
-# Install Python dependencies
-RUN /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
-    rm requirements.txt && \
+RUN curl -L https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}.tar.gz -o /tmp/release.tar.gz && \
+    mkdir -p /tmp/src_temp && \
+    tar -xzf /tmp/release.tar.gz -C /tmp/src_temp \
+        k8s-sidecar-${VERSION}/pyproject.toml \
+        k8s-sidecar-${VERSION}/src && \
+    /app/venv/bin/pip install --no-cache-dir /tmp/src_temp/k8s-sidecar-${VERSION} && \
+    cp -r /tmp/src_temp/k8s-sidecar-${VERSION}/src/* /app/ && \
+    rm -rf /tmp/release.tar.gz /tmp/src_temp && \
     # Remove tests and compiled Python files
     find /app/venv \( -type d -name test -o -name tests \) -o \( -type f -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:ec0d5db35e9cb896aa56dba7cacc1a97dede19debe52c217ed044e7a32f27536
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15
 
 USER apps
 COPY --chmod=0755 . /

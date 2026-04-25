@@ -6,12 +6,12 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=actions/runner
-  default = "2.331.0"
+  default = "2.334.0"
 }
 
 variable "BUILDX_VERSION" {
   // renovate: datasource=github-releases depName=docker/buildx
-  default = "0.31.1"
+  default = "0.33.0"
 }
 
 variable "RUNNER_CONTAINER_HOOKS_VERSION" {

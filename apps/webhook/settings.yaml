@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/adnanh/webhook"
+ports:
+  - port: 9000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: WEBHOOK__URLPREFIX
+    default: "hooks"
+    required: false
+  - name: WEBHOOK__VERBOSE
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true

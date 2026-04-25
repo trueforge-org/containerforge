@@ -1,7 +1,7 @@
-FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:48b8c4f16a22d675e504971c7a18b5384346a081b4c2f031923eb23f16c7d68d AS go
+FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:9ba735d304734ed1d4e7dbe5c9be0509e4f4b33772d58c856e438af8a37365c6 AS go
 
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:ec0d5db35e9cb896aa56dba7cacc1a97dede19debe52c217ed044e7a32f27536
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15
 
 ARG VERSION
 ARG TARGETARCH
@@ -52,7 +52,7 @@ RUN apt-get update && \
 
 # Download and install SOPS
 # renovate: datasource=github-releases depName=getsops/sops
-ENV SOPS_VERSION=3.12.1
+ENV SOPS_VERSION=3.12.2
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
     chmod +x /usr/local/bin/sops
@@ -77,11 +77,11 @@ RUN apt-get update && \
 
 ### Kubernetes-Tools Installer
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ENV kubectlVersion=1.35.1
+ENV kubectlVersion=1.36.0
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
 # renovate: datasource=github-releases depName=helm/helm
-ENV helmVersion=4.1.1
+ENV helmVersion=4.1.4
 # WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
 # renovate: datasource=github-releases depName=instrumenta/kubeval
@@ -89,15 +89,15 @@ ENV kubevalVersion=0.16.1
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ENV kubeconformVersion=0.7.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
-ENV conftestVersion=0.66.0
+ENV conftestVersion=0.68.2
 # renovate: datasource=github-releases depName=mikefarah/yq
-ENV goyqVersion=4.52.4
+ENV goyqVersion=4.53.2
 # renovate: datasource=github-releases depName=rancher/cli
-ENV rancherVersion=2.13.2
+ENV rancherVersion=2.14.0
 # renovate: datasource=github-releases depName=tilt-dev/tilt
-ENV tiltVersion=0.36.3
+ENV tiltVersion=0.37.2
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
-ENV skaffoldVersion=2.17.2
+ENV skaffoldVersion=2.19.0
 # renovate: datasource=github-releases depName=zegl/kube-score
 ENV kubeScoreVersion=1.20.0
 # renovate: datasource=github-releases depName=helm/chart-releaser
@@ -107,7 +107,9 @@ ENV chartTestingVersion=3.14.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.50.18
 # renovate: datasource=github-releases depName=starship/starship
-ENV starshipVersion=1.24.2
+ENV starshipVersion=1.25.0
+# renovate: datasource=github-releases depName=trueforge-org/clustertool
+ENV clustertoolVersion=3.0.3
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
@@ -153,7 +155,8 @@ RUN set -eux; \
             chart-testing) url="https://github.com/helm/chart-testing/releases/download/v${version}/chart-testing_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="ct"; rename="ct"; ;; \
             k9s) url="https://github.com/derailed/k9s/releases/download/v${version}/k9s_Linux_${TARGETARCH}.tar.gz"; command_path_in_package="k9s"; ;; \
             starship) url="https://github.com/starship/starship/releases/download/v${version}/starship-${AARCH/arm64/aarch64}-unknown-linux-${CTYPE}.tar.gz"; command_path_in_package="starship"; ;; \
-            forgetool) url="https://github.com/trueforge-org/forgetool/releases/download/v${version}/forgetool_${VERSION}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="forgetool"; ;; \
+            forgetool) url="https://github.com/trueforge-org/forgetool/releases/download/v${version}/forgetool_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="forgetool"; ;; \
+            clustertool) url="https://github.com/trueforge-org/clustertool/releases/download/v${version}/clustertool_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="clustertool"; ;; \
             *) echo "Unknown tool: $tool"; exit 1 ;; \
         esac; \
         mkdir -p /tools/${tool}; \
@@ -177,6 +180,7 @@ RUN set -eux; \
     download_and_copy "chart-testing" "$chartTestingVersion"; \
     download_and_copy "k9s" "$k9sVersion"; \
     download_and_copy "starship" "$starshipVersion"; \
+    download_and_copy "clustertool" "$clustertoolVersion"; \
     download_and_copy "forgetool" "$VERSION"; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
         download_and_copy "kubeval" "$kubevalVersion"; \

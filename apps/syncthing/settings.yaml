@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://syncthing.net"
+ports:
+  - port: 8384
+    protocol: tcp
+    required: false
+  - port: 21027
+    protocol: udp
+    required: false
+  - port: 22000
+    protocol: tcp
+    required: false
+  - port: 22000
+    protocol: udp
+    required: false
+env:
+  - name: STGUIADDRESS
+    default: "0.0.0.0:8384"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /config
+    required: true

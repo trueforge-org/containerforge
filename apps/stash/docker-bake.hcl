@@ -6,14 +6,14 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=stashapp/stash
-  default = "0.30.1"
+  default = "0.31.1"
 
 }
 
 
 variable "INTEL_CR_VERSION" {
   // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
-  default = "26.05.37020.3"
+  default = "26.14.37833.4"
 
 }
 

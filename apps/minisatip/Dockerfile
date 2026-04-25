@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:1c874769d7dc656030d189c30532396d444ab56a283f2828480b4c8a06359ee8
+FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:5fa3c2cf644e1cf005b5ee0feac4b0d0041f65850fb1991bef3926c45a9a371c
 
 # set version label
 ARG VERSION
@@ -15,6 +15,7 @@ RUN \
   apt-get update && \
   apt-get install --no-install-recommends -y \
     build-essential \
+    cmake \
     git \
     libdvbcsa-dev \
     libssl-dev \
@@ -31,11 +32,14 @@ RUN \
     /tmp/satip.tar.gz -C \
     /app/satip --strip-components=1 && \
   cd /app/satip && \
-  ./configure && \
-  make DDCI=1 && \
+  cmake -B build . && \
+  cmake --build build -j"$(nproc)" && \
+  mv /app/satip/build/minisatip /app/satip/minisatip && \
+  rm -rf /app/satip/build && \
   echo "**** clean up ****" && \
   apt-get -y purge \
     build-essential \
+    cmake \
     git \
     libssl-dev \
     linux-headers-generic \

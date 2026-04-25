@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:ec0d5db35e9cb896aa56dba7cacc1a97dede19debe52c217ed044e7a32f27536
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15
 
 # set version label
 ARG VERSION
@@ -51,11 +51,11 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 5299
 VOLUME /config

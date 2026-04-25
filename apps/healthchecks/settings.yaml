@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/healthchecks/healthchecks"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: ALLOWED_HOSTS
+    default: "*"
+    required: false
+  - name: DEBUG
+    default: "False"
+    required: false
+  - name: DEFAULT_FROM_EMAIL
+    default: ""
+    required: false
+  - name: EMAIL_HOST
+    default: ""
+    required: false
+  - name: EMAIL_HOST_PASSWORD
+    default: ""
+    required: false
+  - name: EMAIL_HOST_USER
+    default: ""
+    required: false
+  - name: EMAIL_PORT
+    default: "587"
+    required: false
+  - name: EMAIL_USE_TLS
+    default: "true"
+    required: false
+  - name: SECRET_KEY
+    default: ""
+    required: true
+  - name: SITE_NAME
+    default: "Mychecks"
+    required: false
+  - name: SITE_ROOT
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql

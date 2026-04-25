@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "changedetection.io"
+  default = "changedetection"
 }
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=dgtlmoon/changedetection.io versioning=loose
-  default = "0.54.1"
+  default = "0.54.10"
 }
 
 variable "LICENSE" {

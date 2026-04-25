@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://hub.docker.com/_/ubuntu"
+ports:
+  []
+env:
+  - name: NVIDIA_DRIVER_CAPABILITIES
+    default: "compute,video,utility"
+    required: false
+volumes:
+  - path: /config
+    required: true

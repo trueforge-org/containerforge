@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-projectsend versioning=loose
+  // renovate: datasource=github-releases depName=projectsend/projectsend versioning=loose
   default = "r1945"
 }
 

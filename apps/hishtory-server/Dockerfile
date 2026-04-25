@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.26.0@sha256:48b8c4f16a22d675e504971c7a18b5384346a081b4c2f031923eb23f16c7d68d AS builder
+FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:9ba735d304734ed1d4e7dbe5c9be0509e4f4b33772d58c856e438af8a37365c6 AS builder
 
 ARG TARGETARCH
 ARG VERSION
@@ -20,7 +20,7 @@ RUN \
   unset GOPATH; go mod download && \
   unset GOPATH; go build -o /server -ldflags "-X main.ReleaseVersion=v0.`cat VERSION`" backend/server/server.go
 
-FROM ghcr.io/trueforge-org/postgresql-client:1.1.0@sha256:e1ed0aeb4ecb455b14d1facd73e8ac3896aee97c70d6c09973f2ba8b62906b8d
+FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:c6cb150142d2a8aa1354dde4b4786345db800c5c58446e311ad6060edb299661
 
 # set version label
 ARG VERSION

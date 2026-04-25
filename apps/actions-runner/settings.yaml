@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/actions/runner"
+ports:
+  []
+env:
+  - name: RUNNER_LABELS
+    default: ""
+    required: false
+  - name: RUNNER_NAME
+    default: ""
+    required: false
+  - name: RUNNER_REPOSITORY_URL
+    default: ""
+    required: false
+  - name: RUNNER_TOKEN
+    default: ""
+    required: false
+  - name: RUNNER_WORKDIR
+    default: "/tmp/runner/work"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

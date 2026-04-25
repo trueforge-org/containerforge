@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=Unpackerr/unpackerr
-  default = "0.14.5"
+  default = "0.15.2"
 }
 
 variable "LICENSE" {

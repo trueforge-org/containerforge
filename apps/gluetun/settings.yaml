@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/qdm12/gluetun"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+  - port: 8388
+    protocol: tcp
+    required: false
+  - port: 8388
+    protocol: udp
+    required: false
+  - port: 8888
+    protocol: tcp
+    required: false
+env:
+  - name: DOT
+    default: "on"
+    required: false
+  - name: FIREWALL_OUTBOUND_SUBNETS
+    default: ""
+    required: false
+  - name: HTTPPROXY
+    default: "off"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: OPENVPN_PASSWORD
+    default: ""
+    required: false
+  - name: OPENVPN_USER
+    default: ""
+    required: false
+  - name: SERVER_COUNTRIES
+    default: ""
+    required: false
+  - name: SERVER_REGIONS
+    default: ""
+    required: false
+  - name: SHADOWSOCKS
+    default: "off"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: VPN_INTERFACE
+    default: "tun0"
+    required: false
+  - name: VPN_SERVICE_PROVIDER
+    default: "pia"
+    required: false
+  - name: VPN_TYPE
+    default: "openvpn"
+    required: false
+  - name: WIREGUARD_ADDRESSES
+    default: ""
+    required: false
+  - name: WIREGUARD_PRIVATE_KEY
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=grokability/snipe-it versioning=loose
-  default = "8.4.0"
+  default = "8.4.1"
 }
 
 variable "LICENSE" {

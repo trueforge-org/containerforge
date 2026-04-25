@@ -10,13 +10,12 @@ variable "VERSION" {
 }
 
 variable "NEO_VER" {
-  // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
-  default = "2018ww19-010806"
+  // renovate: datasource=github-releases depName=intel/compute-runtime
+  default = "26.09.37435.1"
 }
 
 variable "IGC2_VER" {
-  // renovate: datasource=github-releases depName=intel/intel-graphics-compiler
-  default = "2.28.4"
+  default = "2.30.1"
 }
 
 // Fixed Legacy value

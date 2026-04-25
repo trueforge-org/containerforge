@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:22.22.0
+FROM ghcr.io/trueforge-org/node:24.15.0@sha256:870297da9d7d92feb5ce87779f8531516cd5a3ccea0e4bb240a1dcd31f830575
 
 # set version label
 ARG VERSION
@@ -36,12 +36,12 @@ RUN \
     /tmp/* \
     /tmp/.npm
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 3000
 VOLUME /config
 

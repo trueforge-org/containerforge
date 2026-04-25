@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://ngircd.barton.de/"
+ports:
+  - port: 6667
+    protocol: tcp
+    required: false
+  - port: 6697
+    protocol: tcp
+    required: false
+env:
+  - name: IRC_NETWORK_NAME
+    default: "ExampleNet"
+    required: false
+  - name: IRC_SERVER_NAME
+    default: "irc.example.net"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

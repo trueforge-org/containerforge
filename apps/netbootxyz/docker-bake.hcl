@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-netbootxyz versioning=loose
+  // renovate: datasource=github-releases depName=netbootxyz/webapp versioning=loose
   default = "0.7.6"
 }
 

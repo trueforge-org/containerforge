@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/docker-kimai versioning=loose
-  default = "2.43.0"
+  // renovate: datasource=github-releases depName=kimai/kimai versioning=loose
+  default = "2.55.0"
 }
 
 variable "LICENSE" {

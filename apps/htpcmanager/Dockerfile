@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.13.12
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15
 
 # set version label
 ARG VERSION
@@ -50,12 +50,12 @@ RUN \
     $HOME/.cache \
     /tmp/*
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 8085
 VOLUME /config
 

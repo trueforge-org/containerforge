@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 
-# make folders
+# make folders
 mkdir -p \
     /config/configs
 
-# generate license file
+# generate license file
 if [[ ! -f /config/znc.pem ]]; then
     /usr/local/bin/znc -d /config -p
 fi
@@ -15,7 +15,7 @@ while [[ ! -f "/config/znc.pem" ]]; do
     sleep 2s
 done
 
-# copy config
+# copy config
 if [[ ! -f /config/configs/znc.conf ]]; then
     cp /defaults/znc.conf /config/configs/znc.conf
 fi

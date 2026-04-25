@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/plexinc/pms-docker"
+ports:
+  - port: 1900
+    protocol: udp
+    required: false
+  - port: 5353
+    protocol: udp
+    required: false
+  - port: 8324
+    protocol: tcp
+    required: false
+  - port: 32400
+    protocol: tcp
+    required: false
+  - port: 32410
+    protocol: udp
+    required: false
+  - port: 32412
+    protocol: udp
+    required: false
+  - port: 32413
+    protocol: udp
+    required: false
+  - port: 32414
+    protocol: udp
+    required: false
+  - port: 32469
+    protocol: tcp
+    required: false
+env:
+  - name: ADVERTISE_IP
+    default: ""
+    required: false
+  - name: ALLOWED_NETWORKS
+    default: ""
+    required: false
+  - name: NVIDIA_DRIVER_CAPABILITIES
+    default: "compute,video,utility"
+    required: false
+  - name: PLEX_CLAIM
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /config
+    required: true

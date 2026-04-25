@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# make folders if required
+# make folders if required
 mkdir -p \
     "${DATADIR}" \
     /config/log/mysql \

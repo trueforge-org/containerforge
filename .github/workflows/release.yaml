@@ -8,6 +8,7 @@ on:
       - main
     paths:
       - apps/**
+      - .github/workflows/release.yaml
   workflow_dispatch:
     inputs:
       app:
@@ -29,7 +30,7 @@ jobs:
       changed-files: ${{ steps.changed-files.outputs.changed_files }}
     steps:
       - name: Get Changed Files
-        uses: bjw-s-labs/action-changed-files@015416e33c709af88f84a4496f4030c1f0ef212e # v0.5.0
+        uses: bjw-s-labs/action-changed-files@a9a36fb08ce06db9b02fbd8026cc2c0945eb9841 # v0.6.0
         id: changed-files
         with:
           path: apps
@@ -47,7 +48,7 @@ jobs:
       apps: ${{ steps.apps.outputs.apps }}
     steps:
       - name: Get Apps
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         id: apps
         env:
           APPS: ${{ github.event_name == 'workflow_dispatch' && inputs.app || join(fromJSON(needs.prepare.outputs.changed-files), ' ') }}
@@ -81,11 +82,145 @@ jobs:
       app: ${{ matrix.app }}
       release: ${{ github.event_name == 'workflow_dispatch' && inputs.release || github.event_name == 'push' }}
 
+  container-docs:
+    if: ${{ !cancelled() && !contains(needs.build.result, 'failure') && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+    name: Container Docs
+    needs:
+      - build
+    runs-on:
+      group: default
+    concurrency:
+      group: container-docs
+      cancel-in-progress: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Forgetool
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ inputs.token }}
+        run: |-
+          TAG=""
+          if RELEASES_JSON="$(curl -fsSL \
+            https://api.github.com/repos/trueforge-org/forgetool/releases)"; then
+            TAG="$(jq -r '[.[]
+              | select(.prerelease == true)
+              | .tag_name
+              | select(test("^(forgetool-)?v[0-9]+\\.[0-9]+\\.[0-9]+-(ALPHA|BETA|RC)[0-9]+$"))
+              | . as $tag
+              | (capture("v(?<maj>[0-9]+)\\.(?<min>[0-9]+)\\.(?<pat>[0-9]+)-(?<pre>ALPHA|BETA|RC)(?<n>[0-9]+)$"))
+              | {
+                  tag: $tag,
+                  sort: [
+                    (.maj | tonumber),
+                    (.min | tonumber),
+                    (.pat | tonumber),
+                    (if .pre == "RC" then 3 elif .pre == "BETA" then 2 else 1 end),
+                    (.n | tonumber)
+                  ]
+                }
+            ] | if length > 0 then (max_by(.sort).tag) else empty end' <<< "${RELEASES_JSON}")"
+          fi
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-BETA1"
+          VERSION="${TAG#v}"
+          VERSION="${VERSION#forgetool-v}"
+          case "$(uname -m)" in
+            x86_64) ARCH="amd64" ;;
+            aarch64) ARCH="arm64" ;;
+            *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64." && exit 1 ;;
+          esac
+          curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
+          mkdir -p "${RUNNER_TEMP}/forgetool-bin"
+          tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool || { echo "Failed to extract forgetool binary from archive"; exit 1; }
+          chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
+          echo "${RUNNER_TEMP}/forgetool-bin" >> "${GITHUB_PATH}"
+
+      - name: Checkout website repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          repository: trueforge-org/websites
+          path: website
+          ref: main
+          token: "${{ secrets.BOT_TOKEN }}"
+
+      - name: Generate container list
+        run: |
+          forgetool containers genlist ./apps
+          mkdir -p website/containerforge/src/assets
+          mv -f containers.json website/containerforge/src/assets/containers.json
+
+      - name: Fix Pre-Commit issues
+        run: |
+          echo "Running pre-commit test-and-cleanup..."
+          pre-commit run --all ||:
+          # Fix sh files to always be executable
+          find . -name '*.sh' | xargs chmod +x
+
+      - name: Get Changelog Format Version
+        run: |
+          ver="1"
+          rev="1"
+          key="changelog-format-$ver-rev-$rev"
+          echo "Cache Key is: $key"
+          echo "CHANGELOG_CACHE_KEY=$key" >> $GITHUB_ENV
+
+      - name: Cache Changelog
+        id: cache-changelog
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
+        with:
+          key: ${{ env.CHANGELOG_CACHE_KEY }}-${{ hashFiles('**/docker-bake.hcl') }}
+          path: changelog.json.gz
+          restore-keys: |
+            ${{ env.CHANGELOG_CACHE_KEY }}-${{ hashFiles('**/docker-bake.hcl') }}
+            ${{ env.CHANGELOG_CACHE_KEY }}-
+
+      - name: Generate changelogs
+        run: |
+          export REPO_PATH="./"
+          export TEMPLATE_PATH="./templates/CHANGELOG.md.tmpl"
+          export OUTPUT_DIR="./changelogs"
+          export JSON_FILE="changelog.json"
+
+          if [ -f "$JSON_FILE.gz" ]; then
+            gunzip "$JSON_FILE.gz" --force
+          fi
+
+          forgetool containers genchangelog "$REPO_PATH" "$TEMPLATE_PATH" "$OUTPUT_DIR"
+
+          gzip "$JSON_FILE" --best || echo "Compression failed, ignoring..."
+
+      - name: Copy docs to website
+        run: |
+          #!/bin/bash
+
+          forgetool containers gendocs \
+            --apps-dir apps \
+            --website-dir website \
+            --template templates/README.md.tmpl \
+            --icon-fallback-base-url https://raw.githubusercontent.com/trueforge-org/truecharts/refs/heads/master/charts/stable
+
+      - name: Commit and push changes
+        run: |
+          cd website
+          git config user.name "TrueForge-Bot"
+          git config user.email "bot@trueforge.org"
+          # Ensure we rebase in case there are changes from other sources in-between
+          git stash push --include-untracked -m "autogenerated ContainerForge changes"
+          git pull --rebase origin main
+          git stash pop
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Update website with latest container docs"
+          git push origin main
+
   status:
     if: ${{ !cancelled() }}
     name: Build Success
     needs:
       - build
+      - container-docs
     runs-on:
       group: default
     steps:
@@ -98,3 +233,4 @@ jobs:
         if: ${{ !(contains(needs.*.result, 'failure')) }}
         run: |-
           echo "All jobs passed or skipped" && echo "${{ toJSON(needs.*.result) }}"
+

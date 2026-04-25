@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/devcontainer:3.0.2@sha256:b12e98ab6785a4441a6888171fa6766081e825a4805230c7f0c9c3aed989f8df
+FROM ghcr.io/trueforge-org/devcontainer:3.0.2@sha256:4fa30a999fa04f6051f9b95f551a37c1ff0ee338449f7ffe77124eb2e98285af
 
 USER root
 
@@ -93,6 +93,11 @@ RUN curl -fsSL -o runner-container-hooks.zip "https://github.com/actions/runner-
     && unzip runner-container-hooks.zip -d ./k8s \
     && rm runner-container-hooks.zip \
     && chown -R apps:docker /home/runner/k8s
+
+
+# Modify runner binary to retain custom ACTIONS_RESULTS_URL
+# ref: https://gha-cache-server.falcondev.io/getting-started
+RUN sed -i 's/\x41\x00\x43\x00\x54\x00\x49\x00\x4F\x00\x4E\x00\x53\x00\x5F\x00\x52\x00\x45\x00\x53\x00\x55\x00\x4C\x00\x54\x00\x53\x00\x5F\x00\x55\x00\x52\x00\x4C\x00/\x41\x00\x43\x00\x54\x00\x49\x00\x4F\x00\x4E\x00\x53\x00\x5F\x00\x52\x00\x45\x00\x53\x00\x55\x00\x4C\x00\x54\x00\x53\x00\x5F\x00\x4F\x00\x52\x00\x4C\x00/g' /home/runner/bin/Runner.Worker.dll
 
 USER apps
 COPY --chmod=0755 . /

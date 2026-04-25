@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Kometa-Team/Kometa"
+ports:
+  []
+env:
+  - name: KOMETA_NO_MISSING
+    default: "false"
+    required: false
+  - name: KOMETA_NO_VERIFY_SSL
+    default: "false"
+    required: false
+  - name: KOMETA_RUN
+    default: "false"
+    required: false
+  - name: KOMETA_TIMES
+    default: "05:00"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /app
+    required: false
+  - path: /config
+    required: true

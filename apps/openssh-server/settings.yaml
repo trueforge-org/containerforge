@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.openssh.com/"
+ports:
+  - port: 2222
+    protocol: tcp
+    required: false
+env:
+  - name: PASSWORD_ACCESS
+    default: "false"
+    required: false
+  - name: PUBLIC_KEY
+    default: ""
+    required: false
+  - name: SUDO_ACCESS
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: USER_NAME
+    default: "apps"
+    required: false
+  - name: USER_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

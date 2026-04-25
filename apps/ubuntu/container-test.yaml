@@ -1,5 +1,10 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containertest/container-test.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
 
 filePaths:
 - /entrypoint.sh
+- /etc/OpenCL/vendors/intel.icd
+- /etc/OpenCL/vendors/intel_legacy1.icd
+
+mainRunner:
+  "cmd": "sleep 999"

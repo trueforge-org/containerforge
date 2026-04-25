@@ -1,8 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
   "name": "ContainerForge",
-  "image": "oci.trueforge.org/containerforge/devcontainer:3.0.2@sha256:69e7c37f4493d584f09348b74a40e4a1acc7455d89f2553a84b1ec13578d69a2",
+  "image": "oci.trueforge.org/containerforge/devcontainer:3.0.2@sha256:4fa30a999fa04f6051f9b95f551a37c1ff0ee338449f7ffe77124eb2e98285af",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -20,7 +23,6 @@
         "timonwong.shellcheck",
         "formulahendry.code-runner",
         "streetsidesoftware.code-spell-checker",
-        "Codium.codium",
         "mhutchie.git-graph",
         "yzhang.markdown-all-in-one",
         "searKing.preview-vscode",

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nzbgetcom/nzbget"
+ports:
+  - port: 6789
+    protocol: tcp
+    required: false
+env:
+  - name: NZBGET_PASS
+    default: "tegbzn6789"
+    required: false
+  - name: NZBGET_USER
+    default: "nzbget"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /config
+    required: true

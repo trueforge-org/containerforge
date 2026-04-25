@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/alexjustesen/speedtest-tracker"
+ports:
+  []
+env:
+  - name: APP_KEY
+    default: ""
+    required: true
+  - name: APP_URL
+    default: ""
+    required: false
+  - name: DB_CONNECTION
+    default: "sqlite"
+    required: false
+  - name: DB_DATABASE
+    default: ""
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: ""
+    required: false
+  - name: DB_USERNAME
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+  - name: mariadb
