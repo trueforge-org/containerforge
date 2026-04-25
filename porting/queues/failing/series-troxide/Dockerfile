@@ -21,7 +21,7 @@ RUN \
   cargo install series-troxide
 
 # runtime
-FROM containerforge/kasmvnc
+FROM ghcr.io/trueforge-org/kasmvnc:1.3.3
 
 # set version label
 ARG VERSION
@@ -31,13 +31,15 @@ USER root
 # title
 ENV TITLE=Series-Troxie
 
+# copy binary from buildstage
+COPY --from=buildstage /root/.cargo/bin/series-troxide /usr/bin/series-troxide
+
 USER apps
 COPY --chmod=0755 . /
 
 
 RUN \
   echo "**** install deps ****" && \
-  chmod +x /usr/bin/series-troxide && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     libgtk-3-0 \

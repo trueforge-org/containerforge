@@ -1,4 +1,4 @@
-FROM containerforge/kasmvnc
+FROM ghcr.io/trueforge-org/kasmvnc:1.3.3
 
 # set version label
 ARG VERSION
@@ -17,7 +17,6 @@ RUN \
     curl -o /tmp/freetube.deb -L "${URL}" && \
     apt-get update && \
     apt-get install -y --no-install-recommends /tmp/freetube.deb && \
-    rm -f /usr/bin/freetube && \
     echo "**** cleanup ****" && \
     apt-get autoclean && \
     rm -rf /config/.cache /var/lib/apt/lists/* /var/tmp/* /tmp/*

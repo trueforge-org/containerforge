@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-
-## TODO: find exec
+exec /usr/bin/series-troxide
