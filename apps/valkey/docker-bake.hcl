@@ -27,6 +27,7 @@ group "default" {
 target "image" {
   inherits = ["docker-metadata-action"]
   args = {
+    VERSION = "${VERSION}"
     PACKAGE_VERSION = "${PACKAGE_VERSION}"
   }
   labels = {
