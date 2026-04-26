@@ -1,0 +1,17 @@
+mp3val.exe: main.obj mpegparse.obj out.obj report.obj crossapi.obj crc.obj
+	icl /O1 /GX /MD main.obj mpegparse.obj out.obj report.obj crossapi.obj crc.obj user32.lib /Femp3val.exe
+main.obj: main.cpp
+	icl /O1 /GX /MD /c main.cpp
+mpegparse.obj: mpegparse.cpp
+	icl /O1 /GX /MD /c mpegparse.cpp
+out.obj: out.cpp
+	icl /O1 /GX /MD /c out.cpp
+report.obj: report.cpp
+	icl /O1 /GX /MD /c report.cpp
+crossapi.obj: crossapi.cpp
+	icl /O1 /GX /MD /c crossapi.cpp
+crc.obj: crc.cpp crc.h
+	icl /O1 /GX /MD /c crc.cpp
+clean:
+	del *.exe
+	del *.obj

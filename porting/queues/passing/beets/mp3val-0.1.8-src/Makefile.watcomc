@@ -1,0 +1,17 @@
+mp3val.exe: main.obj mpegparse.obj out.obj report.obj crossapi.obj crc.obj
+	wcl386 -d0 -xd main.obj mpegparse.obj out.obj report.obj crossapi.obj crc.obj user32.lib -fe=mp3val.exe
+main.obj: main.cpp
+	wcl386 -d0 -xd -c main.cpp
+mpegparse.obj: mpegparse.cpp
+	wcl386 -d0 -xd -c mpegparse.cpp
+out.obj: out.cpp
+	wcl386 -d0 -xd -c out.cpp
+report.obj: report.cpp
+	wcl386 -d0 -xd -c report.cpp
+crossapi.obj: crossapi.cpp
+	wcl386 -d0 -xd -c crossapi.cpp
+crc.obj: crc.cpp crc.h
+	wcl386 -d0 -xd -c crc.cpp
+clean:
+	del *.exe
+	del *.obj
