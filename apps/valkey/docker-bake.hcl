@@ -5,11 +5,13 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "7.2.11"
+  // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
+  // renovate: datasource=repology depName=ubuntu_24_04/valkey versioning=loose
+  default = "7.2.12"
 }
 
 variable "PACKAGE_VERSION" {
-  default = "7.2.11+dfsg1-0ubuntu0.2"
+  default = "7.2.12+dfsg1-0ubuntu0.1"
 }
 
 variable "LICENSE" {
