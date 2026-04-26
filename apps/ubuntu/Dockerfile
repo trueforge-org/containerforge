@@ -98,10 +98,16 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
                   | sed -E 's/libigdgmm12_(.*)_amd64.deb/\1/'); \
     \
     # Derive IGC2_VER from the NEO release notes when not provided as build arg.
-    # Mirrors the upstream release body convention: "IGC v<x.y.z>".
+    # Matches the upstream release body reference, e.g.:
+    #   intel/intel-graphics-compiler@v2.30.1
+    # or the wget download URL for intel-igc-core-2.
     if [ -z "${IGC2_VER}" ]; then \
       IGC2_VER=$(echo "${NEO_RELEASE}" \
-                   | jq -r '.body | capture("IGC[[:space:]]*v?(?<igc>[0-9]+\\.[0-9]+\\.[0-9]+)")? | .igc // empty'); \
+                   | jq -r '.body | capture("intel-graphics-compiler@v(?<igc>[0-9]+\\.[0-9]+\\.[0-9]+)")? | .igc // empty'); \
+    fi; \
+    if [ -z "${IGC2_VER}" ]; then \
+      IGC2_VER=$(echo "${NEO_RELEASE}" \
+                   | jq -r '.body | capture("intel-graphics-compiler/releases/download/v(?<igc>[0-9]+\\.[0-9]+\\.[0-9]+)/")? | .igc // empty'); \
     fi; \
     if [ -z "${IGC2_VER}" ]; then \
       echo "Failed to determine IGC2_VER from NEO release ${NEO_VER}" >&2; \
