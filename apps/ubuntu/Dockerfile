@@ -9,7 +9,9 @@ ARG VENDOR
 
 # https://github.com/intel/compute-runtime/releases
 # >= Gen12 graphics (current)
-ARG IGC2_VER
+# IGC2_VER is derived from the NEO release notes at build time; can be
+# overridden by passing --build-arg IGC2_VER=<x.y.z>.
+ARG IGC2_VER=""
 ARG NEO_VER
 # <= Gen11 graphics (legacy)
 ARG IGC1_LEGACY_VER
@@ -86,11 +88,26 @@ RUN apt-get update \
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
     mkdir intel-compute-runtime && cd intel-compute-runtime; \
     \
+    # Fetch the NEO release once (used for GMMLIB version and IGC2 version discovery)
+    NEO_RELEASE=$(curl -s https://api.github.com/repos/intel/compute-runtime/releases/tags/${NEO_VER}); \
+    \
     # Fetch GMMLIB_VER from a specific NEO release
-    GMMLIB_VER=$(curl -s https://api.github.com/repos/intel/compute-runtime/releases/tags/${NEO_VER} \
+    GMMLIB_VER=$(echo "${NEO_RELEASE}" \
                   | jq -r '.assets[].name' \
                   | grep 'libigdgmm12_.*_amd64.deb' \
                   | sed -E 's/libigdgmm12_(.*)_amd64.deb/\1/'); \
+    \
+    # Derive IGC2_VER from the NEO release notes when not provided as build arg.
+    # Mirrors the upstream release body convention: "IGC v<x.y.z>".
+    if [ -z "${IGC2_VER}" ]; then \
+      IGC2_VER=$(echo "${NEO_RELEASE}" \
+                   | jq -r '.body | capture("IGC[[:space:]]*v?(?<igc>[0-9]+\\.[0-9]+\\.[0-9]+)")? | .igc // empty'); \
+    fi; \
+    if [ -z "${IGC2_VER}" ]; then \
+      echo "Failed to determine IGC2_VER from NEO release ${NEO_VER}" >&2; \
+      exit 2; \
+    fi; \
+    echo "Using IGC2_VER=${IGC2_VER} (NEO_VER=${NEO_VER})"; \
     \
     # Fetch IGC2_BUILD from a specific IGC2 release
     IGC2_BUILD=$(curl -s https://api.github.com/repos/intel/intel-graphics-compiler/releases/tags/v${IGC2_VER} \

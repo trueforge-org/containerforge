@@ -14,10 +14,6 @@ variable "NEO_VER" {
   default = "26.09.37435.1"
 }
 
-variable "IGC2_VER" {
-  default = "2.30.1"
-}
-
 // Fixed Legacy value
 variable "IGC1_LEGACY_VER" {
   default = "1.0.17537.24"
@@ -45,7 +41,6 @@ target "image" {
   args = {
     VERSION = "${VERSION}"
     NEO_VER = "${NEO_VER}"
-    IGC2_VER = "${IGC2_VER}"
     IGC1_LEGACY_VER = "${IGC1_LEGACY_VER}"
     NEO_LEGACY_VER = "${NEO_LEGACY_VER}"
   }
