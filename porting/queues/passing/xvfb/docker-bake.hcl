@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=docker depName=linuxserver/xvfb versioning=loose
   default = "alpine322-9d327c0f"
 }
 

@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=docker depName=linuxserver/steamos versioning=loose
   default = "2025-01-19"
 }
 

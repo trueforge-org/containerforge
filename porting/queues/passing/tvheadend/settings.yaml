@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.tvheadend.org/"
+ports:
+  - port: 9981
+    protocol: tcp
+    required: false
+  - port: 9982
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: RUN_OPTS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

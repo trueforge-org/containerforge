@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://owntone.github.io/owntone-server/"
+ports:
+  - port: 3689
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ENABLE_MDNS
+    default: "true"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /music
+    required: false

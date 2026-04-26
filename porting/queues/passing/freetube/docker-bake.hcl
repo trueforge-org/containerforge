@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=FreeTubeApp/FreeTube versioning=loose
   default = "215975145"
 }
 

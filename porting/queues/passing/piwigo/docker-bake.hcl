@@ -5,6 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=Piwigo/Piwigo versioning=loose
   default = "15.7.0"
 }
 

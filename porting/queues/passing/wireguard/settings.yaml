@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.wireguard.com/"
+ports:
+  - port: 51820
+    protocol: udp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: SERVERURL
+    default: "auto"
+    required: false
+  - name: SERVERPORT
+    default: "51820"
+    required: false
+  - name: PEERS
+    default: "1"
+    required: false
+  - name: PEERDNS
+    default: "auto"
+    required: false
+  - name: INTERNAL_SUBNET
+    default: "10.13.13.0"
+    required: false
+  - name: ALLOWEDIPS
+    default: "0.0.0.0/0"
+    required: false
+  - name: PERSISTENTKEEPALIVE_PEERS
+    default: ""
+    required: false
+  - name: LOG_CONFS
+    default: "true"
+    required: false
+  - name: USE_COREDNS
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
