@@ -6,7 +6,7 @@ ARG VENDOR
 ARG VERSION
 
 ENV DOTNET_EnableDiagnostics=0 \
-    WHISPARR__UPDATE__BRANCH=v2-develop \
+    WHISPARR__UPDATE__BRANCH=eros \
     WHISPARR__SERVER__PORT=6969
 
 USER root
@@ -17,7 +17,7 @@ RUN apt-get update && \
         sqlite3 \
     && \
     mkdir -p /app/bin && \
-    curl -fsSL "https://github.com/Whisparr/Whisparr/releases/download/v${VERSION}/Whisparr.${VERSION}.linux-${TARGETARCH/amd64/x64}.tar.gz" \
+    curl -fsSL "https://github.com/Whisparr/whisparr-eros/releases/download/v${VERSION}/Whisparr.eros.${VERSION}.linux-${TARGETARCH/amd64/x64}.tar.gz" \
         | tar xzf - -C /app/bin --strip-components=1 && \
     printf "UpdateMethod=docker\nBranch=%s\nPackageVersion=%s\nPackageAuthor=[%s](https://github.com/%s)\n" \
         "${WHISPARR__UPDATE__BRANCH}" "${VERSION}" "${VENDOR}" "${VENDOR}" > /app/package_info && \

@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "whisparr"
+  default = "whisparr-eros"
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=Whisparr/Whisparr versioning=loose extractVersion=^v(?<version>.+-release\..+)$
-  default = "2.2.0-release.108"
+  // renovate: datasource=github-releases depName=Whisparr/whisparr-eros versioning=loose extractVersion=^v(?<version>.+-release\..+)$
+  default = "3.3.3-release.683"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://github.com/Whisparr/Whisparr"
+  default = "https://github.com/Whisparr/whisparr-eros"
 }
 
 group "default" {
