@@ -9,7 +9,7 @@ USER root
 # hadolint ignore=DL3008,DL3015
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        "valkey-server=${VERSION}" \
+        "valkey-server=${PACKAGE_VERSION}" \
     && apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
