@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5fa3c2cf644e1cf005b5ee0feac4b0d0041f65850fb1991bef3926c45a9a371c AS build
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:fdcc4e24cd12eed53bb1338ab6dd5651f5326bcbb98920aa3e8f0c8f5c9b2458 AS build
 
 ENV PATH=/usr/local/go/bin:$PATH
 
@@ -28,7 +28,7 @@ RUN set -eux; \
     apt-get purge -y --auto-remove gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:5fa3c2cf644e1cf005b5ee0feac4b0d0041f65850fb1991bef3926c45a9a371c
+FROM ghcr.io/trueforge-org/ubuntu:24.4.0@sha256:fdcc4e24cd12eed53bb1338ab6dd5651f5326bcbb98920aa3e8f0c8f5c9b2458
 
 USER root
 
