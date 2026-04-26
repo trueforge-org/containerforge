@@ -61,7 +61,7 @@ RUN \
   curl -o /tmp/mp3val-src/mp3val.tar.gz -sL https://downloads.sourceforge.net/mp3val/mp3val-0.1.8-src.tar.gz && \
   cd /tmp/mp3val-src && \
   tar xzf /tmp/mp3val-src/mp3val.tar.gz --strip 1 && \
-  sed -i 's/open(szNewName,O_WRONLY|O_CREAT|O_TRUNC)/open(szNewName,O_WRONLY|O_CREAT|O_TRUNC,0644)/' crossapi.cpp && \
+  sed -i 's/od=open(szNewName,O_WRONLY|O_CREAT|O_TRUNC);/od=open(szNewName,O_WRONLY|O_CREAT|O_TRUNC,0644);/' crossapi.cpp && \
   make -f Makefile.linux && \
   cp -p mp3val /usr/bin && \
   echo "**** install pip packages ****" && \
