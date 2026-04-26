@@ -23,6 +23,7 @@ RUN \
     pkg-config \
     libfftw3-dev \
     libgirepository1.0-dev \
+    libgirepository-2.0-dev \
     libjpeg-dev \
     libpng-dev \
     libmpg123-dev \
