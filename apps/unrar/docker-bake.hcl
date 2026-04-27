@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=linuxserver/unrar versioning=loose
-  default = "7.1.10"
+  default = "7.2.4"
 }
 
 variable "LICENSE" {
