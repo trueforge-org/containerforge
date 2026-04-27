@@ -51,7 +51,8 @@ RUN \
     yarn install && \
     gem install foreman && \
     RUBY=$(ruby -e 'print RUBY_VERSION') && \
-    echo "${RUBY}" > .ruby-version && \
+    sed -i "s/\d.\d.\d/${RUBY}/" .ruby-version && \
+    bundle config set --local deployment 'true' && \
     bundle config set --local without 'development test' && \
     bundle config force_ruby_platform true && \
     bundle install && \

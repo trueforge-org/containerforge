@@ -1,3 +1,0 @@
-#!/bin/sh
-# Simplified config.guess for cross-compilation
-echo x86_64-pc-linux-gnu
