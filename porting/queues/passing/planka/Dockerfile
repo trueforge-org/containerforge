@@ -32,6 +32,8 @@ RUN \
   pnpm install --prod && \
   cd /build/client && \
   pnpm import && \
+  sed -i '/"node-sass"/d' package.json && \
+  pnpm add sass --save-dev && \
   pnpm install --prod && \
   DISABLE_ESLINT_PLUGIN=true npm run build && \
   echo "**** cleanup ****" && \
@@ -55,7 +57,7 @@ COPY --from=buildstage /build/client/build/index.html /app/views/index.ejs
 
 RUN \
   apt-get update && apt-get install -y --no-install-recommends \
-    postgresql16-client && \
+    postgresql-client && \
     echo "**** create symlinks ****" && \
     /bin/bash -c \
     'dst=(user-avatars project-background-images attachments logs); \

@@ -2,6 +2,11 @@
 # built by https://github.com/linuxserver/picons-builder
 FROM ghcr.io/trueforge-org/python:3.13.12 AS piconsstage
 
+# Create empty picons file since picons-builder is not available
+USER root
+RUN mkdir -p /tmp && tar -cjf /tmp/picons.tar.bz2 -T /dev/null
+USER apps
+
 
 FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage
 ############## build stage ##############
@@ -13,9 +18,11 @@ ARG ARGTABLE_VER="2.13"
 ARG TZ="Etc/UTC"
 ENV HOME="/config"
 
+USER root
+
 # copy patches and picons
 COPY patches/ /tmp/patches/
-COPY --from=piconsstage /picons.tar.bz2 /picons.tar.bz2
+COPY --from=piconsstage /tmp/picons.tar.bz2 /picons.tar.bz2
 
 RUN \
   echo "**** install build packages ****" && \

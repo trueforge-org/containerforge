@@ -1,0 +1,3 @@
+#!/bin/sh
+# Simplified config.sub for cross-compilation
+echo "$1"
