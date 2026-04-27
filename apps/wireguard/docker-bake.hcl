@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "tvheadend"
+  default = "wireguard"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=linuxserver/tvheadend versioning=loose
-  default = "00abbbb0"
+  // renovate: datasource=docker depName=linuxserver/wireguard versioning=loose
+  default = "1.0.20250521-r0"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://www.tvheadend.org/"
+  default = "https://www.wireguard.com/"
 }
 
 group "default" {

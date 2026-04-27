@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "tvheadend"
+  default = "ubooquity"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=linuxserver/tvheadend versioning=loose
-  default = "00abbbb0"
+  // renovate: datasource=docker depName=linuxserver/ubooquity versioning=loose
+  default = "3.1.0"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://www.tvheadend.org/"
+  default = "https://vaemendis.net/ubooquity/"
 }
 
 group "default" {

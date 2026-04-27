@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/plankanban/planka/"
+ports:
+  - port: 1337
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: DATABASE_URL
+    default: ""
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: SECRET_KEY
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

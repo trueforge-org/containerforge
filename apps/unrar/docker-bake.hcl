@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "tvheadend"
+  default = "unrar"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=linuxserver/tvheadend versioning=loose
-  default = "00abbbb0"
+  // renovate: datasource=docker depName=linuxserver/unrar versioning=loose
+  default = "7.1.10"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://www.tvheadend.org/"
+  default = "null"
 }
 
 group "default" {

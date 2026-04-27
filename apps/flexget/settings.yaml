@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "http://flexget.com/"
+ports:
+  - port: 5050
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: FG_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: FG_WEBUI_PASSWORD
+    default: ""
+    required: false
+  - name: FG_CONFIG_FILE
+    default: "/config/config.yml"
+    required: false
+volumes:
+  - path: /config
+    required: true

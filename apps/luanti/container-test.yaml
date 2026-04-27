@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# Note: app primarily exposes UDP; minimal smoke-test via process binary.
+filePaths:
+  - /app/start.sh

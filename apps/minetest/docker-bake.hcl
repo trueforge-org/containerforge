@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "tvheadend"
+  default = "minetest"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=linuxserver/tvheadend versioning=loose
-  default = "00abbbb0"
+  // renovate: datasource=github-releases depName=luanti-org/luanti versioning=loose
+  default = "5.10.0"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://www.tvheadend.org/"
+  default = "http://www.minetest.net/"
 }
 
 group "default" {

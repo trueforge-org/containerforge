@@ -1,12 +1,12 @@
 target "docker-metadata-action" {}
 
 variable "APP" {
-  default = "tvheadend"
+  default = "kasm"
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=linuxserver/tvheadend versioning=loose
-  default = "00abbbb0"
+  // renovate: datasource=github-releases depName=kasmtech/workspaces-images versioning=loose
+  default = "1.18.0"
 }
 
 variable "LICENSE" {
@@ -14,7 +14,7 @@ variable "LICENSE" {
 }
 
 variable "SOURCE" {
-  default = "https://www.tvheadend.org/"
+  default = "https://www.kasmweb.com/?utm_campaign=LinuxServer&utm_source=listing"
 }
 
 group "default" {

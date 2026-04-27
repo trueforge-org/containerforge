@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/phpmyadmin/phpmyadmin/"
+ports:
+  - port: 80
+    protocol: tcp
+    required: false
+  - port: 443
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: PMA_CONFIG_BASE64
+    default: ""
+    required: false
+  - name: PMA_USER_CONFIG_BASE64
+    default: ""
+    required: false
+  - name: MAX_EXECUTION_TIME
+    default: "600"
+    required: false
+  - name: MEMORY_LIMIT
+    default: "512M"
+    required: false
+  - name: UPLOAD_LIMIT
+    default: "8192K"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: mariadb

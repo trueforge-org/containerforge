@@ -10,7 +10,7 @@ ENV \
   DEBIAN_FRONTEND="noninteractive" \
   MAKEFLAGS="-j4" \
   CMAKE_POLICY_VERSION_MINIMUM="3.5" \
-  PATH="/root/.cargo/bin:${PATH}"
+  PATH="/app/venv/bin:/root/.cargo/bin:${PATH}"
 
 # versions
 ENV \

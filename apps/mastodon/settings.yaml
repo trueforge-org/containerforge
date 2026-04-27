@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mastodon/mastodon/"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: DATABASE_URL
+    default: ""
+    required: true
+  - name: REDIS_URL
+    default: ""
+    required: true
+  - name: SECRET_KEY_BASE
+    default: ""
+    required: true
+  - name: OTP_SECRET
+    default: ""
+    required: true
+  - name: ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY
+    default: ""
+    required: true
+  - name: ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT
+    default: ""
+    required: true
+  - name: ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY
+    default: ""
+    required: true
+  - name: RUN_DB_PREPARE
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
