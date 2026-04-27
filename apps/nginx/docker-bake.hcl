@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=repology depName=ubuntu_24_04/nginx versioning=loose
-  default = "1.24.0-2ubuntu7.6"
+  default = "1.24.0-2ubuntu7.7"
 }
 
 variable "LICENSE" {
