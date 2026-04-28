@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=mastodon/mastodon versioning=loose
-  default = "4.5.1"
+  default = "4.5.9"
 }
 
 variable "LICENSE" {
