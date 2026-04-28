@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=Yooooomi/your_spotify versioning=loose
-  default = "1.14.0"
+  default = "1.19.0"
 }
 
 variable "LICENSE" {
