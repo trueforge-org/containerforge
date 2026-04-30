@@ -107,7 +107,7 @@ ENV chartTestingVersion=3.14.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.50.18
 # renovate: datasource=github-releases depName=starship/starship
-ENV starshipVersion=1.25.0
+ENV starshipVersion=1.25.1
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
 ENV clustertoolVersion=3.0.3
 
