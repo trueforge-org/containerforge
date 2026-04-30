@@ -93,7 +93,7 @@ ENV conftestVersion=0.68.2
 # renovate: datasource=github-releases depName=mikefarah/yq
 ENV goyqVersion=4.53.2
 # renovate: datasource=github-releases depName=rancher/cli
-ENV rancherVersion=2.14.0
+ENV rancherVersion=2.14.1
 # renovate: datasource=github-releases depName=tilt-dev/tilt
 ENV tiltVersion=0.37.3
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
