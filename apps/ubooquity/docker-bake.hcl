@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=linuxserver/ubooquity versioning=loose
-  default = "3.1.0"
+  default = "131"
 }
 
 variable "LICENSE" {
