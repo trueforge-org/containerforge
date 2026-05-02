@@ -105,26 +105,10 @@ jobs:
         run: |-
           TAG=""
           if RELEASES_JSON="$(curl -fsSL \
-            https://api.github.com/repos/trueforge-org/forgetool/releases)"; then
-            TAG="$(jq -r '[.[]
-              | select(.prerelease == true)
-              | .tag_name
-              | select(test("^(forgetool-)?v[0-9]+\\.[0-9]+\\.[0-9]+-(ALPHA|BETA|RC)[0-9]+$"))
-              | . as $tag
-              | (capture("v(?<maj>[0-9]+)\\.(?<min>[0-9]+)\\.(?<pat>[0-9]+)-(?<pre>ALPHA|BETA|RC)(?<n>[0-9]+)$"))
-              | {
-                  tag: $tag,
-                  sort: [
-                    (.maj | tonumber),
-                    (.min | tonumber),
-                    (.pat | tonumber),
-                    (if .pre == "RC" then 3 elif .pre == "BETA" then 2 else 1 end),
-                    (.n | tonumber)
-                  ]
-                }
-            ] | if length > 0 then (max_by(.sort).tag) else empty end' <<< "${RELEASES_JSON}")"
+            https://api.github.com/repos/trueforge-org/forgetool/releases/latest)"; then
+            TAG="$(jq -r '.tag_name // empty' <<< "${RELEASES_JSON}")"
           fi
-          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-BETA1"
+          [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "Failed to determine latest forgetool release tag"; exit 1; }
           VERSION="${TAG#v}"
           VERSION="${VERSION#forgetool-v}"
           case "$(uname -m)" in
