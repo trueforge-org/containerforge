@@ -28,8 +28,8 @@ env:
     default: ""
     required: true
   - name: DB_PASS
-    default: ""
-    required: true
+    default: "MYMARIADBPASSWORD"
+    required: false
   - name: DB_DATABASE
     default: "bookstackapp"
     required: false
