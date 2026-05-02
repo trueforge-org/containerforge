@@ -14,4 +14,3 @@ volumes:
     required: true
 opt_dependencies:
   - name: postgresql
-  - name: mariadb
