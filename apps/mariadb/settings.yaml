@@ -10,10 +10,10 @@ env:
     default: ""
     required: false
   - name: MARIADB_PASSWORD
-    default: ""
+    default: "MYMARIADBPASSWORD"
     required: false
   - name: MARIADB_ROOT_PASSWORD
-    default: ""
+    default: "MYMARIADBROOTPASSWORD"
     required: true
   - name: MARIADB_USER
     default: ""

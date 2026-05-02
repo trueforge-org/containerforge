@@ -10,7 +10,7 @@ env:
     default: "postgres"
     required: false
   - name: POSTGRES_PASSWORD
-    default: ""
+    default: "MYPOSTGRESPASSWORD"
     required: true
   - name: POSTGRES_USER
     default: "postgres"
