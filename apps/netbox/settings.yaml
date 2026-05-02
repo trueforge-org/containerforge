@@ -19,7 +19,7 @@ env:
     default: "admin"
     required: false
   - name: SUPERUSER_PASSWORD
-    default: ""
+    default: "MYSUPERUSERPASSWORD"
     required: false
   - name: TZ
     default: "Etc/UTC"

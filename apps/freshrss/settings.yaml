@@ -10,13 +10,13 @@ ports:
     required: false
 env:
   - name: ADMIN_API_PASSWORD
-    default: ""
+    default: "MYADMINAPIPASSWORD"
     required: false
   - name: ADMIN_EMAIL
     default: ""
     required: false
   - name: ADMIN_PASSWORD
-    default: ""
+    default: "MYADMINPASSWORD"
     required: false
   - name: TZ
     default: "Etc/UTC"
@@ -26,4 +26,3 @@ volumes:
     required: true
 opt_dependencies:
   - name: postgresql
-  - name: mariadb
