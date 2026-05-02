@@ -7,7 +7,7 @@ ports:
     required: false
 env:
   - name: MARIADB_DATABASE
-    default: ""
+    default: "MYMARIADBDB"
     required: false
   - name: MARIADB_PASSWORD
     default: "MYMARIADBPASSWORD"
@@ -16,7 +16,7 @@ env:
     default: "MYMARIADBROOTPASSWORD"
     required: true
   - name: MARIADB_USER
-    default: ""
+    default: "MYMARIADBUSER"
     required: false
   - name: TZ
     default: "Etc/UTC"
