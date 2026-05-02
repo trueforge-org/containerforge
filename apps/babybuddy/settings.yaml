@@ -9,6 +9,9 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: DATABASE_URL
+    default: "postgres://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql:5432/MYPOSTGRESDB"
+    required: false
 volumes:
   - path: /config
     required: true

@@ -15,6 +15,18 @@ env:
   - name: UMASK
     default: "002"
     required: false
+  - name: SPRING_DATASOURCE_URL
+    default: "jdbc:postgresql://postgresql:5432/MYPOSTGRESDB"
+    required: false
+  - name: SPRING_DATASOURCE_USERNAME
+    default: "MYPOSTGRESUSER"
+    required: false
+  - name: SPRING_DATASOURCE_PASSWORD
+    default: "MYPOSTGRESPASSWORD"
+    required: false
+  - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+    default: "org.postgresql.Driver"
+    required: false
 volumes:
   - path: /config
     required: true

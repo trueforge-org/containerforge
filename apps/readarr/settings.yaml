@@ -12,6 +12,30 @@ env:
   - name: UMASK
     default: "002"
     required: false
+  - name: DB_TYPE
+    default: "sqlite"
+    required: false
+  - name: DB_HOST
+    default: "postgresql"
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_USER
+    default: "MYPOSTGRESUSER"
+    required: false
+  - name: DB_PASSWORD
+    default: "MYPOSTGRESPASSWORD"
+    required: false
+  - name: DB_DATABASE
+    default: "MYPOSTGRESDB"
+    required: false
+  - name: DB_LOGSDB
+    default: "MYPOSTGRESDB-log"
+    required: false
+  - name: DB_CACHEDB
+    default: "MYPOSTGRESDB-cache"
+    required: false
 volumes:
   - path: /config
     required: true

@@ -10,10 +10,10 @@ env:
     default: "Etc/UTC"
     required: false
   - name: DATABASE_URL
-    default: ""
+    default: "postgresql://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql:5432/MYPOSTGRESDB"
     required: true
   - name: REDIS_URL
-    default: ""
+    default: "redis://:MYVALKEYPASSWORD@valkey:6379"
     required: true
   - name: SECRET_KEY_BASE
     default: ""

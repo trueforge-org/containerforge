@@ -10,7 +10,7 @@ env:
     default: "postgresql"
     required: true
   - name: DB_NAME
-    default: ""
+    default: "MYPOSTGRESDB"
     required: true
   - name: DB_PASS
     default: "MYPOSTGRESPASSWORD"
@@ -22,7 +22,7 @@ env:
     default: "postgres"
     required: true
   - name: DB_USER
-    default: ""
+    default: "MYPOSTGRESUSER"
     required: true
   - name: TZ
     default: "Etc/UTC"

@@ -9,6 +9,9 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: HISHTORY_POSTGRES_DB
+    default: "postgresql://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql:5432/MYPOSTGRESDB"
+    required: true
 volumes:
   - path: /config
     required: true
