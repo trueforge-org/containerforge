@@ -163,7 +163,7 @@ RUN \
   cp /src/unix/xserver/hw/vnc/Xvnc.man man/man1/Xvnc.1 && \
   mkdir lib && \
   cd lib && \
-  ln -s /usr/lib/xorg/modules/dri dri && \
+  ln -s "/usr/lib/$(uname -m)-linux-gnu/dri" dri && \
   cd /src && \
   mkdir -p builder/www && \
   cp -ax /www/* builder/www/ && \
