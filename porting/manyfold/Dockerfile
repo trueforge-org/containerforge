@@ -48,10 +48,12 @@ RUN \
     cd /app/www && \
     npm install -g corepack && \
     corepack enable && \
+    sed -i 's#"packageManager": "yarn@3[^"]*"#"packageManager": "yarn@4.5.3"#' package.json && \
+    corepack prepare yarn@4.5.3 --activate && \
     yarn install && \
     gem install foreman && \
     RUBY=$(ruby -e 'print RUBY_VERSION') && \
-    sed -i "s/\d.\d.\d/${RUBY}/" .ruby-version && \
+    sed -i "s/[0-9]\+\.[0-9]\+\.[0-9]\+/${RUBY}/" .ruby-version && \
     bundle config set --local deployment 'true' && \
     bundle config set --local without 'development test' && \
     bundle config force_ruby_platform true && \

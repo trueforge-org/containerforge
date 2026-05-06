@@ -67,6 +67,7 @@ RUN \
         libxtst-dev \
         libgl1-mesa-dev \
         libgl1-mesa-dri \
+        libgbm-dev \
         meson \
         pkg-config \
         nettle-dev \
@@ -87,13 +88,15 @@ RUN \
         xkb-data \
         xserver-xorg-core \
         xserver-xorg-dev \
-        xtrans-dev && \
+        xtrans-dev \
+        xutils-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN \
   echo "**** skip custom libjpeg-turbo build (system package used) ****"
 
+WORKDIR /
 RUN \
   echo "**** build kasmvnc ****" && \
   git clone https://github.com/kasmtech/KasmVNC.git src && \

@@ -81,7 +81,6 @@ RUN \
     gcc \
     git \
     gperf \
-    i965-va-driver-shaders \
     libasound2-dev \
     libcairo2-dev \
     libclang-18-dev \
@@ -125,6 +124,9 @@ RUN \
     xxd \
     yasm \
     zlib1g-dev && \
+  if [ "$TARGETARCH" = "amd64" ]; then \
+    apt-get install --no-install-recommends -y i965-va-driver-shaders; \
+  fi && \
   mkdir -p /tmp/rust && \
   RUST_ARCH="$TARGETARCH" && if [ "$TARGETARCH" = "amd64" ]; then RUST_ARCH="x86_64"; elif [ "$TARGETARCH" = "arm64" ]; then RUST_ARCH="aarch64"; fi && \
   RUST_VERSION=$(curl -fsX GET https://api.github.com/repos/rust-lang/rust/releases/latest | jq -r '.tag_name' || echo "1.89.0") && \

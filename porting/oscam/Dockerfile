@@ -59,20 +59,20 @@ RUN \
   chmod 755 \
     /usr/sbin/pcscd && \
   echo "**** install PCSC drivers from Linuxserver S3 due to Cloudflare blocking curl download from source (original file at https://www3.hidglobal.com/sites/default/files/drivers/ifdokccid_linux_$TARGETARCH-v4.2.8.tar.gz) ****" && \
-  mkdir -p \
-    /tmp/omnikey && \
-  curl -o \
-    /tmp/omnikey.tar.gz -L \
-    "https://ci-tests.linuxserver.io/artifacts/ifdokccid_linux_$TARGETARCH-v4.2.8.tar.gz" && \
-  tar xzf \
-    /tmp/omnikey.tar.gz -C \
-    /tmp/omnikey --strip-components=2 && \
-  cd /tmp/omnikey && \
-  ./install && \
-  echo "**** fix group for card readers and add apps to dialout group ****" && \
-  groupmod -g 24 cron && \
-  groupmod -g 16 dialout && \
-  usermod -a -G 16 apps && \
+  if [ "$TARGETARCH" = "amd64" ]; then \
+    mkdir -p \
+      /tmp/omnikey && \
+    curl -o \
+      /tmp/omnikey.tar.gz -L \
+      "https://ci-tests.linuxserver.io/artifacts/ifdokccid_linux_$TARGETARCH-v4.2.8.tar.gz" && \
+    tar xzf \
+      /tmp/omnikey.tar.gz -C \
+      /tmp/omnikey --strip-components=2 && \
+    cd /tmp/omnikey && \
+    ./install; \
+  else \
+    echo "**** skipping omnikey PCSC drivers — not available for $TARGETARCH ****"; \
+  fi && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
