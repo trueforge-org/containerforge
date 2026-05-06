@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:24.06
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:0ddd714cd20cf10c41ba76066e9579cfc785579f1b801c3656b4bc0ceb151442
 
 # set version label
 ARG VERSION
