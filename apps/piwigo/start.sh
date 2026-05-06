@@ -77,4 +77,4 @@ if [[ ! -f "/config/www/local/config/config.inc.php" ]]; then
 fi
 
 cd /app/www/public
-exec php -S 0.0.0.0:8080
+exec php -S 0.0.0.0:80
