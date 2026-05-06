@@ -95,8 +95,6 @@ RUN \
   mkdir -p \
     /defaults/games && \
   cp -pr  /tmp/minetest/games/* /defaults/games/ && \
-  echo "**** set permissions ****" && \
-  chown -R apps:apps /defaults && chmod -R 755 /defaults && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
