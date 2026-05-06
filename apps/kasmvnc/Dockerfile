@@ -106,6 +106,12 @@ RUN \
     -e '/find_package(FLTK/s@^@#@' \
     -e '/add_subdirectory(tests/s@^@#@' \
     CMakeLists.txt && \
+  echo "**** Check turbojpeg files before removal ****" && \
+  ls -la /usr/lib/x86_64-linux-gnu/libturbojpeg* && \
+  echo "**** Remove static library ****" && \
+  rm -f /usr/lib/x86_64-linux-gnu/libturbojpeg.a && \
+  echo "**** Check turbojpeg files after removal ****" && \
+  ls -la /usr/lib/x86_64-linux-gnu/libturbojpeg* && \
   cmake \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DBUILD_VIEWER:BOOL=OFF \
