@@ -5,7 +5,7 @@ USER root
 RUN tar czf /picons.tar.bz2 -T /dev/null
 
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04 as buildstage
 ############## build stage ##############
 
 # package versions
@@ -143,7 +143,7 @@ RUN \
     /picons
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:24.04
+FROM ghcr.io/trueforge-org/ubuntu:26.04
 
 # set version label
 ARG VERSION
