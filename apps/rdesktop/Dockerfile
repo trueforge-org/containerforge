@@ -104,12 +104,16 @@ RUN \
     xserver-xorg-core \
     xserver-xorg-video-amdgpu \
     xserver-xorg-video-ati \
-    xserver-xorg-video-intel \
     xserver-xorg-video-nouveau \
-    xserver-xorg-video-qxl \
     xterm \
     xutils \
     zlib1g && \
+  if [ "$TARGETARCH" = "amd64" ]; then \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends \
+      xserver-xorg-video-intel \
+      xserver-xorg-video-qxl ; \
+  fi && \
   dpkg -i /xrdp.deb && \
   rm /xrdp.deb && \
   echo "**** openbox tweaks ****" && \
