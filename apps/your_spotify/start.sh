@@ -8,6 +8,6 @@ export CLIENT_ENDPOINT="${APP_URL}"
 export SPOTIFY_PUBLIC="${SPOTIFY_PUBLIC:-dummy_public}"
 export SPOTIFY_SECRET="${SPOTIFY_SECRET:-dummy_secret}"
 
-yarn --cwd /app/www/apps/server migrate
 cd /app/www/apps/server
-exec  yarn start
+npm run migrate
+exec npm run start

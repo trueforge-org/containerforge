@@ -27,25 +27,19 @@ FROM buildbase AS buildclient
 
 RUN \
   echo "*** install your_spotify client ***" && \
-  cd /app/www && \
-  rm -rf /app/www/apps/server && \
-  yarnpkg --frozen-lockfile && \
   cd /app/www/apps/client && \
-  yarnpkg build && \
-  rm -rf /app/www/node_modules && \
-  yarnpkg cache clean
+  npm ci && \
+  npm run build && \
+  npm cache clean --force
 
 FROM buildbase AS buildserver
 
 RUN \
   echo "*** install your_spotify server ***" && \
-  cd /app/www && \
-  rm -rf /app/www/apps/client && \
-  yarnpkg --frozen-lockfile && \
   cd /app/www/apps/server && \
-  yarnpkg build && \
-  rm -rf /app/www/node_modules && \
-  yarnpkg cache clean
+  npm ci && \
+  npm run build && \
+  npm cache clean --force
 
 FROM ghcr.io/trueforge-org/python-node:3.13.12
 
@@ -56,24 +50,18 @@ ARG TARGETARCH
 ENV HOME=/app
 
 COPY --from=buildclient /app/www/apps/client/build/ /app/www/apps/client/build/
-COPY --from=buildbase /app/www/package.json /app/www/package.json
-COPY --from=buildbase /app/www/yarn.lock /app/www/yarn.lock
-COPY --from=buildserver /app/www/apps/server/lib/ /app/www/apps/server/lib/
+COPY --from=buildserver /app/www/apps/server/build/ /app/www/apps/server/build/
 COPY --from=buildserver /app/www/apps/server/package.json /app/www/apps/server/package.json
+COPY --from=buildserver /app/www/apps/server/package-lock.json /app/www/apps/server/package-lock.json
 USER root
 RUN \
-  echo "**** install build packages ****" && \
-  apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    cmake \
-    python3-dev && \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && \
   echo "**** install your_spotify ****" && \
   cd /app/www/apps/server && \
-  yarnpkg --production --frozen-lockfile && \
-  yarnpkg cache clean && \
+  npm ci --omit=dev && \
+  npm cache clean --force && \
   npm install -g serve && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
