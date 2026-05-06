@@ -1010,7 +1010,7 @@ RUN \
     /buildout/etc/OpenCL/vendors/nvidia.icd
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:24.04
+FROM ghcr.io/trueforge-org/ubuntu:26.04
 
 # Add files from binstage
 COPY --from=buildstage /buildout/ /
