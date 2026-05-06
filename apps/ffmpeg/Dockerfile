@@ -5,6 +5,16 @@ ARG TARGETARCH
 ARG VERSION
 USER root
 
+# Set GNU architecture (x86_64/aarch64) from Docker TARGETARCH (amd64/arm64)
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+      echo "x86_64" > /tmp/gnu_arch; \
+    elif [ "$TARGETARCH" = "arm64" ]; then \
+      echo "aarch64" > /tmp/gnu_arch; \
+    else \
+      echo "$TARGETARCH" > /tmp/gnu_arch; \
+    fi
+ENV GNU_ARCH_FILE=/tmp/gnu_arch
+
 # common env
 ENV \
   DEBIAN_FRONTEND="noninteractive" \
@@ -16,7 +26,7 @@ ENV \
 ENV \
   AOM=v3.12.1 \
   FDKAAC=2.0.3 \
-  FFMPEG_HARD=8.0 \
+  FFMPEG=8.0 \
   FONTCONFIG=2.16.0 \
   FREETYPE=2.13.3 \
   FRIBIDI=1.0.16 \
@@ -248,7 +258,8 @@ RUN \
   cd /tmp/harfbuzz && \
   meson build && \
   ninja -C build install && \
-  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libharfbuzz*.so
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
+  strip -d /usr/local/lib/${GNU_ARCH}-linux-gnu/libharfbuzz*.so
 RUN \
   echo "**** grabbing kvazaar ****" && \
   mkdir -p /tmp/kvazaar && \
@@ -329,14 +340,15 @@ RUN \
     --buildtype=release \
     build && \
   ninja -C build install && \
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
   strip -d \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libEGL.so \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libGLdispatch.so \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libGLESv1_CM.so \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libGLESv2.so \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libGL.so \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libGLX.so \
-    /usr/local/lib/$TARGETARCH-linux-gnu/libOpenGL.so
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libEGL.so \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libGLdispatch.so \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libGLESv1_CM.so \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libGLESv2.so \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libGL.so \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libGLX.so \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/libOpenGL.so
 RUN \
   echo "**** grabbing libdrm ****" && \
   mkdir -p /tmp/libdrm && \
@@ -346,13 +358,14 @@ RUN \
 RUN \
   echo "**** compiling libdrm ****" && \
   cd /tmp/libdrm && \
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
   meson setup \
-    --prefix=/usr --libdir=/usr/local/lib/$TARGETARCH-linux-gnu \
+    --prefix=/usr --libdir=/usr/local/lib/${GNU_ARCH}-linux-gnu \
     -Dvalgrind=disabled \
     . build && \
   ninja -C build && \
   ninja -C build install && \
-  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libdrm*.so
+  strip -d /usr/local/lib/${GNU_ARCH}-linux-gnu/libdrm*.so
 RUN \
   echo "**** grabbing liblc3 ****" && \
   mkdir -p /tmp/liblc3 && \
@@ -463,12 +476,13 @@ RUN \
   echo "**** compiling IHD ****" && \
   mkdir -p /tmp/ihd/build && \
   cd /tmp/ihd/build && \
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
   cmake \
-    -DLIBVA_DRIVERS_PATH=/usr/local/lib/$TARGETARCH-linux-gnu/dri/ \
+    -DLIBVA_DRIVERS_PATH=/usr/local/lib/${GNU_ARCH}-linux-gnu/dri/ \
     .. && \
   make && \
   make install && \
-  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/dri/iHD_drv_video.so
+  strip -d /usr/local/lib/${GNU_ARCH}-linux-gnu/dri/iHD_drv_video.so
 RUN \
   echo "**** grabbing libvpl ****" && \
   mkdir -p /tmp/libvpl && \
@@ -613,7 +627,8 @@ RUN \
   echo "**** compiling rav1e ****" && \
   cd /tmp/rav1e && \
   cargo cinstall --release && \
-  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/librav1e.so
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
+  strip -d /usr/local/lib/${GNU_ARCH}-linux-gnu/librav1e.so
 RUN \
   echo "**** grabbing libdovi ****" && \
   mkdir -p /tmp/libdovi && \
@@ -625,7 +640,8 @@ RUN \
   echo "**** compiling libdovi ****" && \
   cd /tmp/libdovi/dolby_vision && \
   cargo cinstall --release && \
-  strip -d /usr/local/lib/$TARGETARCH-linux-gnu/libdovi.so
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
+  strip -d /usr/local/lib/${GNU_ARCH}-linux-gnu/libdovi.so
 RUN \
   echo "**** grabbing libplacebo ****" && \
   mkdir -p /tmp/libplacebo && \
@@ -774,9 +790,10 @@ RUN \
   cd /tmp/vulkan-loader && \
   mkdir -p build && \
   cd build && \
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
   cmake \
     -D CMAKE_BUILD_TYPE=Release \
-    -D VULKAN_HEADERS_INSTALL_DIR=/usr/local/lib/$TARGETARCH-linux-gnu \
+    -D VULKAN_HEADERS_INSTALL_DIR=/usr/local/lib/${GNU_ARCH}-linux-gnu \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     .. && \
   make && \
@@ -953,13 +970,14 @@ RUN \
   echo "**** arrange files ****" && \
   /usr/local/lib/rustlib/uninstall.sh && \
   ldconfig && \
+  GNU_ARCH=$(cat $GNU_ARCH_FILE) && \
   mkdir -p \
     /buildout/usr/local/bin \
     /buildout/usr/local/etc/fonts \
     /buildout/usr/local/lib/libmfx-gen \
     /buildout/usr/local/lib/mfx \
-    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri \
-    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/vdpau \
+    /buildout/usr/local/lib/${GNU_ARCH}-linux-gnu/dri \
+    /buildout/usr/local/lib/${GNU_ARCH}-linux-gnu/vdpau \
     /buildout/usr/local/share/vulkan \
     /buildout/usr/share/fonts \
     /buildout/usr/share/libdrm \
@@ -983,18 +1001,18 @@ RUN \
     /usr/local/lib/mfx/*.so \
     /buildout/usr/local/lib/mfx/ && \
   cp -a \
-    /usr/local/lib/$TARGETARCH-linux-gnu/lib*so* \
-    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/ && \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/lib*so* \
+    /buildout/usr/local/lib/${GNU_ARCH}-linux-gnu/ && \
   cp -a \
-    /usr/local/lib/$TARGETARCH-linux-gnu/dri/*.so \
-    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri/ && \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/dri/*.so \
+    /buildout/usr/local/lib/${GNU_ARCH}-linux-gnu/dri/ && \
   cp -a \
-    /usr/local/lib/$TARGETARCH-linux-gnu/vdpau/*.so \
-    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/vdpau/ && \
+    /usr/local/lib/${GNU_ARCH}-linux-gnu/vdpau/*.so \
+    /buildout/usr/local/lib/${GNU_ARCH}-linux-gnu/vdpau/ && \
   if [ "$TARGETARCH" = "amd64" ]; then \
     cp -a \
-      /usr/lib/$TARGETARCH-linux-gnu/dri/i965* \
-      /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri/; \
+      /usr/lib/${GNU_ARCH}-linux-gnu/dri/i965* \
+      /buildout/usr/local/lib/${GNU_ARCH}-linux-gnu/dri/; \
   fi && \
   cp -a \
     /usr/share/libdrm/amdgpu.ids \
@@ -1020,6 +1038,12 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
+# Create symlink from Docker TARGETARCH to GNU triplet for compatibility
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+      ln -sf x86_64-linux-gnu /usr/local/lib/amd64-linux-gnu; \
+    elif [ "$TARGETARCH" = "arm64" ]; then \
+      ln -sf aarch64-linux-gnu /usr/local/lib/arm64-linux-gnu; \
+    fi
 
 # hardware env
 ENV \
