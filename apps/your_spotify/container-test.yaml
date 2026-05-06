@@ -1,4 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-tcp:
-- port: '80'
+# your_spotify requires MongoDB to fully start, so we test for build artifacts and binaries
+filePaths:
+- /app/www/apps/server/build/index.js
+- /app/www/apps/client/build/index.html
+
+runners:
+- entrypoint: test -x /usr/local/bin/pnpm
+- entrypoint: test -x /usr/local/bin/serve
+- entrypoint: test -x /usr/local/bin/node
+
+mainRunner:
+  enabled: false
