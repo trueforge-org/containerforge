@@ -110,6 +110,7 @@ RUN \
   apt-get install -y --no-install-recommends \
     file \
     flac \
+    libcap2-bin \
     nginx \
     nodejs \
     p7zip-full \
@@ -118,6 +119,8 @@ RUN \
   apt-get install -y --no-install-recommends \
     mame-tools && \
   mkdir -p /data && \
+  echo "**** allow non-root nginx to bind low ports ****" && \
+  setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* && \
