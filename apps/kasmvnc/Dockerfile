@@ -238,6 +238,7 @@ ENV DISPLAY=:1 \
 
 # copy over build output
 COPY --from=nodebuilder /kclient /kclient
+RUN rm -f /usr/local/man
 COPY --from=buildstage /build-out/ /
 
 RUN \
