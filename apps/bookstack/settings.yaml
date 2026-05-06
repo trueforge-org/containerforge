@@ -33,6 +33,9 @@ env:
   - name: DB_DATABASE
     default: "bookstackapp"
     required: false
+  - name: QUEUE_CONNECTION
+    default: "database"
+    required: false
 volumes:
   - path: /config
     required: true
