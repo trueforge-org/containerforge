@@ -34,7 +34,7 @@ RUN \
         /tmp/flexget.tar.gz -C \
         /app/flexget --strip-components=1 && \
     cd /app/flexget && \
-    uv venv /app/venv && \
+    uv venv --clear /app/venv && \
     uv run scripts/bundle_webui.py && \
     uv sync --frozen --no-dev --no-cache --group=all && \
     uv pip install pip && \
