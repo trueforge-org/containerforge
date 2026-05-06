@@ -74,6 +74,7 @@ RUN \
         libssl-dev \
         libpixman-1-dev \
         libpam0g-dev \
+        libcrypt-dev \
         procps \
         passwd \
         libwayland-dev \
@@ -105,17 +106,13 @@ RUN \
   sed -i \
     -e '/find_package(FLTK/s@^@#@' \
     -e '/add_subdirectory(tests/s@^@#@' \
+    -e '/cmake_policy(SET CMP0022 OLD)/s@^@#@' \
     CMakeLists.txt && \
-  echo "**** Check turbojpeg files before removal ****" && \
-  ls -la /usr/lib/x86_64-linux-gnu/libturbojpeg* && \
-  echo "**** Remove static library ****" && \
-  rm -f /usr/lib/x86_64-linux-gnu/libturbojpeg.a && \
-  echo "**** Check turbojpeg files after removal ****" && \
-  ls -la /usr/lib/x86_64-linux-gnu/libturbojpeg* && \
   cmake \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DBUILD_VIEWER:BOOL=OFF \
     -DENABLE_GNUTLS:BOOL=OFF \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     . && \
   make -j4 && \
   echo "**** build xorg ****" && \
