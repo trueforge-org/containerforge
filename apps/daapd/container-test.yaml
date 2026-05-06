@@ -1,4 +1,4 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-filePaths:
-- /usr/sbin/owntone
+runners:
+- entrypoint: test -x /usr/sbin/owntone
