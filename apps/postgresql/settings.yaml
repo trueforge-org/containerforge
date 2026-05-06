@@ -7,13 +7,13 @@ ports:
     required: false
 env:
   - name: POSTGRES_DB
-    default: "postgres"
+    default: "MYPOSTGRESDB"
     required: false
   - name: POSTGRES_PASSWORD
-    default: ""
+    default: "MYPOSTGRESPASSWORD"
     required: true
   - name: POSTGRES_USER
-    default: "postgres"
+    default: "MYPOSTGRESUSER"
     required: false
   - name: TZ
     default: "Etc/UTC"

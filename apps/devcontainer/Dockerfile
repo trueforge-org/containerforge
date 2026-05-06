@@ -93,9 +93,9 @@ ENV conftestVersion=0.68.2
 # renovate: datasource=github-releases depName=mikefarah/yq
 ENV goyqVersion=4.53.2
 # renovate: datasource=github-releases depName=rancher/cli
-ENV rancherVersion=2.14.0
+ENV rancherVersion=2.14.1
 # renovate: datasource=github-releases depName=tilt-dev/tilt
-ENV tiltVersion=0.37.2
+ENV tiltVersion=0.37.3
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
 ENV skaffoldVersion=2.19.0
 # renovate: datasource=github-releases depName=zegl/kube-score
@@ -107,7 +107,7 @@ ENV chartTestingVersion=3.14.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.50.18
 # renovate: datasource=github-releases depName=starship/starship
-ENV starshipVersion=1.25.0
+ENV starshipVersion=1.25.1
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
 ENV clustertoolVersion=3.0.3
 

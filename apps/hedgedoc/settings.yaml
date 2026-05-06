@@ -27,6 +27,24 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: DB_HOST
+    default: "postgresql"
+    required: true
+  - name: DB_PORT
+    default: "5432"
+    required: true
+  - name: DB_USER
+    default: "MYPOSTGRESUSER"
+    required: true
+  - name: DB_PASS
+    default: "MYPOSTGRESPASSWORD"
+    required: true
+  - name: DB_NAME
+    default: "MYPOSTGRESDB"
+    required: true
+  - name: CMD_DB_DIALECT
+    default: "postgres"
+    required: true
 volumes:
   - path: /config
     required: true

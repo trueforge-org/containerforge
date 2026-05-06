@@ -8,22 +8,22 @@ ports:
 env:
   - name: DB_HOST
     default: "postgresql"
-    required: false
+    required: true
   - name: DB_NAME
-    default: ""
-    required: false
+    default: "MYPOSTGRESDB"
+    required: true
   - name: DB_PASS
-    default: ""
-    required: false
+    default: "MYPOSTGRESPASSWORD"
+    required: true
   - name: DB_PORT
     default: "5432"
-    required: false
+    required: true
   - name: DB_TYPE
     default: "postgres"
-    required: false
+    required: true
   - name: DB_USER
-    default: ""
-    required: false
+    default: "MYPOSTGRESUSER"
+    required: true
   - name: TZ
     default: "Etc/UTC"
     required: false

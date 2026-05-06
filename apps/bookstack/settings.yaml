@@ -25,13 +25,16 @@ env:
     default: "3306"
     required: false
   - name: DB_USER
-    default: ""
+    default: "MYMARIADBUSER"
     required: true
   - name: DB_PASS
-    default: ""
-    required: true
+    default: "MYMARIADBPASSWORD"
+    required: false
   - name: DB_DATABASE
-    default: "bookstackapp"
+    default: "MYMARIADBDB"
+    required: false
+  - name: QUEUE_CONNECTION
+    default: "database"
     required: false
 volumes:
   - path: /config

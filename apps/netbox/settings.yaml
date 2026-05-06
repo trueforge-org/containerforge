@@ -19,10 +19,40 @@ env:
     default: "admin"
     required: false
   - name: SUPERUSER_PASSWORD
-    default: ""
+    default: "MYSUPERUSERPASSWORD"
     required: false
   - name: TZ
     default: "Etc/UTC"
+    required: false
+  - name: DB_HOST
+    default: "postgresql"
+    required: true
+  - name: DB_PORT
+    default: "5432"
+    required: true
+  - name: DB_NAME
+    default: "MYPOSTGRESDB"
+    required: true
+  - name: DB_USER
+    default: "MYPOSTGRESUSER"
+    required: true
+  - name: DB_PASSWORD
+    default: "MYPOSTGRESPASSWORD"
+    required: true
+  - name: REDIS_HOST
+    default: "valkey"
+    required: true
+  - name: REDIS_PORT
+    default: "6379"
+    required: true
+  - name: REDIS_PASSWORD
+    default: "MYVALKEYPASSWORD"
+    required: true
+  - name: REDIS_DB_TASK
+    default: "0"
+    required: false
+  - name: REDIS_DB_CACHE
+    default: "1"
     required: false
 volumes:
   - path: /config

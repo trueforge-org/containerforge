@@ -10,7 +10,7 @@ env:
     default: "Etc/UTC"
     required: false
   - name: VALKEY_PASSWORD
-    default: ""
+    default: "MYVALKEYPASSWORD"
     required: false
 volumes:
   - path: /config

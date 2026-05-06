@@ -127,6 +127,8 @@ RUN \
     mkdir -p \
         /defaults/games && \
     cp -pr  /tmp/luanti/games/* /defaults/games/ && \
+    echo "**** set permissions ****" && \
+    chown -R apps:apps /defaults && chmod -R 755 /defaults && \
     echo "**** cleanup ****" && \
     apt-get remove --purge -y \
         build-essential \

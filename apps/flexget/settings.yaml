@@ -13,7 +13,7 @@ env:
     default: "info"
     required: false
   - name: FG_WEBUI_PASSWORD
-    default: ""
+    default: "MYFGWEBUIPASSWORD"
     required: false
   - name: FG_CONFIG_FILE
     default: "/config/config.yml"

@@ -7,6 +7,30 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: NX_POSTGRES_HOST
+    default: "postgresql"
+    required: true
+  - name: NX_POSTGRES_PORT
+    default: "5432"
+    required: true
+  - name: NX_POSTGRES_NAME
+    default: "MYPOSTGRESDB"
+    required: true
+  - name: NX_POSTGRES_USER
+    default: "MYPOSTGRESUSER"
+    required: true
+  - name: NX_POSTGRES_PASSWORD
+    default: "MYPOSTGRESPASSWORD"
+    required: true
+  - name: NX_REDIS_HOST
+    default: "valkey"
+    required: true
+  - name: NX_REDIS_PORT
+    default: "6379"
+    required: true
+  - name: NX_REDIS_PASS
+    default: "MYVALKEYPASSWORD"
+    required: true
 volumes:
   - path: /config
     required: true

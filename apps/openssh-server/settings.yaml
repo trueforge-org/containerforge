@@ -22,7 +22,7 @@ env:
     default: "apps"
     required: false
   - name: USER_PASSWORD
-    default: ""
+    default: "MYUSERPASSWORD"
     required: false
 volumes:
   - path: /config

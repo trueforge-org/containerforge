@@ -21,6 +21,24 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: DB_CONNECTION
+    default: "mysql"
+    required: true
+  - name: DB_HOST
+    default: "mariadb"
+    required: true
+  - name: DB_PORT
+    default: "3306"
+    required: true
+  - name: DB_DATABASE
+    default: "MYMARIADBDB"
+    required: true
+  - name: DB_USERNAME
+    default: "MYMARIADBUSER"
+    required: true
+  - name: DB_PASSWORD
+    default: "MYMARIADBPASSWORD"
+    required: true
 volumes:
   - path: /config
     required: true

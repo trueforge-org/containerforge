@@ -12,6 +12,9 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: DATABASE_URL
+    default: "mysql://MYMARIADBUSER:MYMARIADBPASSWORD@mariadb:3306/MYMARIADBDB"
+    required: true
 volumes:
   - path: /config
     required: true

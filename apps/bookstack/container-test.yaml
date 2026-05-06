@@ -1,5 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
 timeoutSeconds: 240
-tcp:
-- port: '80'
+mainRunner:
+  enabled: false
+
+runners:
+- entrypoint: test -f /app/www/artisan
+- entrypoint: test -x /app/www/artisan
+- entrypoint: php --version

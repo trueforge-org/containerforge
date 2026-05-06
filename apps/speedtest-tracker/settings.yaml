@@ -20,7 +20,7 @@ env:
     default: ""
     required: false
   - name: DB_PASSWORD
-    default: ""
+    default: "MYPOSTGRESPASSWORD"
     required: false
   - name: DB_PORT
     default: ""
@@ -36,4 +36,3 @@ volumes:
     required: true
 opt_dependencies:
   - name: postgresql
-  - name: mariadb

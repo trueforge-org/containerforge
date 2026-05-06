@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=Flexget/Flexget versioning=loose
-  default = "3.19.15"
+  default = "3.19.16"
 }
 
 variable "LICENSE" {
