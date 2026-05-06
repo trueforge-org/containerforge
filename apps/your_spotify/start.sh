@@ -9,5 +9,5 @@ export SPOTIFY_PUBLIC="${SPOTIFY_PUBLIC:-dummy_public}"
 export SPOTIFY_SECRET="${SPOTIFY_SECRET:-dummy_secret}"
 
 cd /app/www/apps/server
-npm run migrate
-exec npm run start
+pnpm migrate
+exec pnpm start
