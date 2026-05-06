@@ -1,73 +1,103 @@
-## Move to our an own container
-FROM ghcr.io/trueforge-org/node:24.15.0@sha256:4bca93d03032d86c7fe416b234838df556eb5d945e1d716dfc98b8fff38470ad
-
 FROM ghcr.io/trueforge-org/ubuntu:24.04@sha256:fdcc4e24cd12eed53bb1338ab6dd5651f5326bcbb98920aa3e8f0c8f5c9b2458
 
-# set version label
 ARG VERSION
 ARG TARGETARCH
+
+LABEL org.opencontainers.image.version="${VERSION}"
+LABEL org.opencontainers.image.source="https://lycheeorg.github.io/"
+
 USER root
 
-RUN \
-  echo "**** install runtime packages ****" && \
+# Install PHP 8.4 and dependencies
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+    software-properties-common \
+    gnupg2 && \
+  add-apt-repository ppa:ondrej/php && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     libimage-exiftool-perl \
     ffmpeg \
-    libgd-dev \
     imagemagick \
     jpegoptim \
-    php8.3-bcmath \
-    php8.3-xml \
-    php8.3-gd \
-    php8.3-intl \
-    php8.3-mysql \
-    php8.3-pgsql \
-    php8.3-sqlite3 \
+    php8.4-cli \
+    php8.4-fpm \
+    php8.4-bcmath \
+    php8.4-xml \
+    php8.4-dom \
+    php8.4-gd \
+    php8.4-intl \
+    php8.4-mysql \
+    php8.4-pgsql \
+    php8.4-sqlite3 \
+    php8.4-zip \
+    php8.4-ldap \
+    php8.4-curl \
+    php8.4-mbstring \
+    php8.4-opcache \
+    php8.4-redis \
     php-imagick \
-    php-redis \
     postgresql-client \
-    composer && \
+    unzip \
+    curl && \
   rm -rf /var/lib/apt/lists/* && \
-  echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi; fi && \
-  echo "**** install lychee ****" && \
-  if [ -z "v${VERSION}" ]; then \
-    VERSION=$(curl -sX GET "https://api.github.com/repos/LycheeOrg/Lychee/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
-  curl -o \
-    /tmp/lychee.zip -L \
-    "https://github.com/LycheeOrg/Lychee/releases/download/v${VERSION}/Lychee.zip" && \
-  unzip -q /tmp/lychee.zip -d /app && \
-  mv /app/Lychee /app/www && \
-  echo "**** install composer dependencies ****" && \
-  composer install \
-    -d /app/www \
-    --no-interaction \
-    --no-dev \
-    --prefer-dist && \
-  echo "**** remove bloat ****" && \
-  find . -wholename '*/[Tt]ests/*' -delete && \
-  find . -wholename '*/[Tt]est/*' -delete && \
-  rm -rf /app/www/storage/framework/cache/data/* && \
-  rm -rf /app/www/storage/framework/sessions/* && \
-  rm -rf /app/www/storage/framework/views/* && \
-  rm -rf /app/www/storage/logs/* && \
-  echo "**** cleanup ****" && \
-  rm -rf \
-    /tmp/* \
-    $HOME/.cache \
-    $HOME/.composer \
-    $HOME/.npm
+  echo "**** configure imagemagick policy ****" && \
+  sed -i '/<\/policymap>/i \  <policy domain="coder" rights="read|write" pattern="PDF" \/>' /etc/ImageMagick-6/policy.xml && \
+  echo "**** install composer ****" && \
+  curl -sS https://getcomposer.org/installer | php8.4 -- --install-dir=/usr/local/bin --filename=composer && \
+  update-alternatives --set php /usr/bin/php8.4
 
-# copy local files
-USER apps
+WORKDIR /app/www
+
+# Download and extract Lychee
+RUN curl -o /tmp/lychee.zip -L \
+    "https://github.com/LycheeOrg/Lychee/releases/download/v${VERSION}/Lychee.zip" && \
+  unzip -q /tmp/lychee.zip -d /tmp && \
+  cp -a /tmp/Lychee/. /app/www/ && \
+  rm -rf /tmp/lychee.zip /tmp/Lychee
+
+# Install composer dependencies
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-progress \
+    --prefer-dist \
+    --optimize-autoloader && \
+  echo "**** remove bloat ****" && \
+  find vendor \( -iname "*.md" -o -iname "test" -o -iname "tests" \) -exec rm -rf {} + 2>/dev/null || true && \
+  rm -rf /app/www/storage/framework/cache/data/* \
+    /app/www/storage/framework/sessions/* \
+    /app/www/storage/framework/views/* \
+    /app/www/storage/logs/*
+
+# Configure PHP
+RUN echo "upload_max_filesize=128M" > /etc/php/8.4/cli/conf.d/99-lychee.ini && \
+  echo "post_max_size=128M" >> /etc/php/8.4/cli/conf.d/99-lychee.ini && \
+  echo "memory_limit=1024M" >> /etc/php/8.4/cli/conf.d/99-lychee.ini && \
+  echo "max_execution_time=3000" >> /etc/php/8.4/cli/conf.d/99-lychee.ini
+
+# Set up directories and permissions
+RUN mkdir -p \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache \
+    public/dist \
+    /config && \
+  touch /app/www/public/dist/user.css \
+    /app/www/public/dist/custom.js && \
+  chown -R apps:apps /app /config && \
+  chmod -R 775 storage bootstrap/cache public/dist /config && \
+  chmod 644 /app/www/public/dist/user.css /app/www/public/dist/custom.js
+
+# Copy local files
 COPY --chmod=0755 . /
 
+USER apps
 
-# ports and volumes
-EXPOSE 80 443
+# Ports and volumes
+EXPOSE 8000
 VOLUME /config
 
 WORKDIR /config

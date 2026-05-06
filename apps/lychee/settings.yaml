@@ -2,10 +2,7 @@
 schema_version: 1
 upstream_env_url: "https://lycheeorg.github.io/"
 ports:
-  - port: 80
-    protocol: tcp
-    required: false
-  - port: 443
+  - port: 8000
     protocol: tcp
     required: false
 env:

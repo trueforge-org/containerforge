@@ -49,10 +49,24 @@ fi
 
 cd "${APP_DIR}"
 
+# Clear bootstrap cache
+rm -rf bootstrap/cache/*.php 2>/dev/null || true
+
 if grep -qPe '^APP_KEY=$' /config/.env; then
     php artisan key:generate --no-interaction
 fi
 
-php artisan migrate --force
+php artisan migrate --force 2>/dev/null || {
+    echo "⚠️  Migration failed, but continuing (database may not be configured yet)"
+}
 
-exec php artisan serve --host=0.0.0.0 --port=80
+# Clear and cache configuration
+php artisan config:clear 2>/dev/null || true
+php artisan config:cache 2>/dev/null || true
+php artisan route:clear 2>/dev/null || true
+php artisan route:cache 2>/dev/null || true
+php artisan view:clear 2>/dev/null || true
+php artisan view:cache 2>/dev/null || true
+
+# Start PHP development server on port 8000
+exec php -S 0.0.0.0:8000 -t public
