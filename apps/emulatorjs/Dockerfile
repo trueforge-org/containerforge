@@ -49,7 +49,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/node:22.22.0 as nodebuilder
+FROM ghcr.io/trueforge-org/node:22.22.1@sha256:f3730b32628892a22dfa85e96750e83ab5f3e85c6170915e19110c134ab649e8 as nodebuilder
 
 USER root
 ARG VERSION
@@ -97,7 +97,7 @@ RUN \
   npm install
 
 # runtime stage
-FROM ghcr.io/trueforge-org/python:3.13.12
+FROM ghcr.io/trueforge-org/python:3.13.13@sha256:d90e00c1ba6abf16c8d68d5e898657109371cd601270e3a3ae5b32782fe1cc15
 
 # set version label
 ARG VERSION
