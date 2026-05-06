@@ -28,7 +28,7 @@ FROM buildbase AS buildclient
 RUN \
   echo "*** install your_spotify client ***" && \
   cd /app/www/apps/client && \
-  npm ci && \
+  npm install && \
   npm run build && \
   npm cache clean --force
 
@@ -37,7 +37,7 @@ FROM buildbase AS buildserver
 RUN \
   echo "*** install your_spotify server ***" && \
   cd /app/www/apps/server && \
-  npm ci && \
+  npm install && \
   npm run build && \
   npm cache clean --force
 
@@ -60,7 +60,7 @@ RUN \
     ca-certificates && \
   echo "**** install your_spotify ****" && \
   cd /app/www/apps/server && \
-  npm ci --omit=dev && \
+  npm install --omit=dev && \
   npm cache clean --force && \
   npm install -g serve && \
   echo "**** cleanup ****" && \
