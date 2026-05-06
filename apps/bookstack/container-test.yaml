@@ -2,8 +2,9 @@
 
 timeoutSeconds: 240
 mainRunner:
-  env:
-    APP_KEY: base64:Aq0tpUFZ3gKeyOuOrG0Bsi81SegksJLEVPAwtUGjAf4=
-    QUEUE_CONNECTION: database
-tcp:
-- port: '80'
+  enabled: false
+
+runners:
+- entrypoint: test -f /app/www/artisan
+- entrypoint: test -x /app/www/artisan
+- entrypoint: php --version
