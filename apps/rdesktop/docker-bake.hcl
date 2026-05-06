@@ -41,7 +41,6 @@ target "image-local" {
 target "image-all" {
   inherits = ["image"]
   platforms = [
-    "linux/amd64",
-    "linux/arm64"
+    "linux/amd64"
   ]
 }
