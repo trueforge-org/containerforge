@@ -81,6 +81,7 @@ RUN \
 # copy local files
 USER apps
 COPY --chmod=0755 . /
+COPY --chmod=0755 root/ /
 
 
 # Ports and volumes

@@ -92,11 +92,13 @@ RUN \
 # environment settings
 ENV BEETSDIR="/config" \
 EDITOR="nano" \
-HOME="/config"
+HOME="/config" \
+PATH="/app/venv/bin:${PATH}"
 
 # copy local files
 USER apps
 COPY --chmod=0755 . /
+COPY --chmod=0755 root/ /
 
 
 # ports and volumes
