@@ -105,14 +105,14 @@ RUN \
     xserver-xorg-video-amdgpu \
     xserver-xorg-video-ati \
     xserver-xorg-video-nouveau \
+    xserver-xorg-video-qxl \
     xterm \
     xutils \
     zlib1g && \
   if [ "$TARGETARCH" = "amd64" ]; then \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
-      xserver-xorg-video-intel \
-      xserver-xorg-video-qxl ; \
+      xserver-xorg-video-intel ; \
   fi && \
   dpkg -i /xrdp.deb && \
   rm /xrdp.deb && \
