@@ -991,9 +991,11 @@ RUN \
   cp -a \
     /usr/local/lib/$TARGETARCH-linux-gnu/vdpau/*.so \
     /buildout/usr/local/lib/$TARGETARCH-linux-gnu/vdpau/ && \
-  cp -a \
-    /usr/lib/$TARGETARCH-linux-gnu/dri/i965* \
-    /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri/ && \
+  if [ "$TARGETARCH" = "amd64" ]; then \
+    cp -a \
+      /usr/lib/$TARGETARCH-linux-gnu/dri/i965* \
+      /buildout/usr/local/lib/$TARGETARCH-linux-gnu/dri/; \
+  fi && \
   cp -a \
     /usr/share/libdrm/amdgpu.ids \
     /buildout/usr/share/libdrm/ && \
