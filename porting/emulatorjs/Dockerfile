@@ -129,6 +129,7 @@ COPY --from=migrationbuilder /build-out/ /
 COPY --from=nodebuilder /emulatorjs/ /emulatorjs/
 USER apps
 COPY --chmod=0755 . /
+COPY --chmod=0755 root/ /
 
 
 # ports
