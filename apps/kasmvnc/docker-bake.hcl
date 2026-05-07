@@ -5,7 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "alpine321-89d8a445"
+  // renovate: datasource=github-releases depName=kasmtech/KasmVNC
+  default = "1.4.0"
 }
 
 variable "LICENSE" {
