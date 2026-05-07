@@ -73,6 +73,8 @@ RUN \
         libavformat-dev \
         libavutil-dev \
         libswscale-dev \
+        libcpuid-dev \
+        libtbb-dev \
         meson \
         pkg-config \
         nettle-dev \
