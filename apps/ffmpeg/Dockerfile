@@ -284,12 +284,9 @@ RUN \
 RUN \
   echo "**** compiling lame ****" && \
   cd /tmp/lame && \
-  cp \
-    /usr/share/automake-1.16/config.guess \
-    config.guess && \
-  cp \
-    /usr/share/automake-1.16/config.sub \
-    config.sub && \
+  AUTOMAKE_DIR=$(find /usr/share -maxdepth 1 -name 'automake-*' -type d | head -1) && \
+  cp ${AUTOMAKE_DIR}/config.guess config.guess && \
+  cp ${AUTOMAKE_DIR}/config.sub config.sub && \
   ./configure \
     --disable-frontend \
     --disable-static \
