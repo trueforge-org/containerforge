@@ -10,29 +10,32 @@ RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     grep \
     composer \
-    php8.3-gd \
-    php8.3-intl \
-    php8.3-mysql \
-    php8.3-pgsql \
-    php8.3-sqlite3 \
+    php8.5-curl \
+    php8.5-gd \
+    php8.5-intl \
+    php8.5-mysql \
+    php8.5-pgsql \
+    php8.5-sqlite3 \
     php-redis \
-    php8.3-xml \
+    php8.5-xml \
+    php8.5-zip \
     postgresql-client \
     ssmtp && \
   echo "*** install speedtest-cli ***" && \
   if [ -z ${CLI_VERSION+x} ]; then \
-    CLI_VERSION=$(curl -Ls https://packagecloud.io/ookla/speedtest-cli/debian/dists/bookworm/main/binary-$TARGETARCH/Packages \
+    CLI_VERSION=$(curl -fsSL https://packagecloud.io/ookla/speedtest-cli/debian/dists/bookworm/main/binary-$TARGETARCH/Packages \
     | sed -n '/Package: speedtest/,/Homepage:/p' \
-    | grep -oP 'Version: \K\S+' | cut -d. -f1-3); \
+    | grep -oP 'Version: \K\S+' | cut -d. -f1-3 | head -n1); \
   fi && \
-  curl -o \
-    /tmp/speedtest-cli.tgz -L \
-    "https://install.speedtest.net/app/cli/ookla-speedtest-${CLI_VERSION}-linux-$TARGETARCH.tgz" && \
+  case "$TARGETARCH" in amd64) CLI_ARCH=x86_64 ;; arm64) CLI_ARCH=aarch64 ;; *) CLI_ARCH="$TARGETARCH" ;; esac && \
+  curl -fL -o \
+    /tmp/speedtest-cli.tgz \
+    "https://install.speedtest.net/app/cli/ookla-speedtest-${CLI_VERSION}-linux-${CLI_ARCH}.tgz" && \
   tar xzf \
     /tmp/speedtest-cli.tgz -C \
     /usr/bin && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
+  if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.5/fpm/php-fpm.conf; fi && \
   echo "*** install speedtest-tracker ***" && \
   curl -o \
     /tmp/speedtest-tracker.tar.gz -L \
@@ -50,15 +53,15 @@ RUN \
     --no-cache && \
   npm ci && npm run build && \
   echo "**** setup php opcache ****" && \
-  mkdir -p /etc/php/8.3/cli/conf.d && \
+  mkdir -p /etc/php/8.5/cli/conf.d && \
   { \
     echo 'opcache.enable_cli=1'; \
-  } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini; \
+  } > /etc/php/8.5/cli/conf.d/opcache-recommended.ini; \
   { \
     echo 'post_max_size = 100M'; \
     echo 'upload_max_filesize = 100M'; \
     echo 'variables_order = EGPCS'; \
-  } > /etc/php/8.3/cli/conf.d/php-misc.ini && \
+  } > /etc/php/8.5/cli/conf.d/php-misc.ini && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
