@@ -311,7 +311,8 @@ RUN \
     ln -s /usr/local/lib/kasmvnc /usr/lib/kasmvncserver && \
     mkdir -p /var/lib/nginx/body /var/lib/nginx/fastcgi /var/lib/nginx/proxy /var/lib/nginx/scgi /var/lib/nginx/uwsgi && \
     chown -R apps:apps /var/lib/nginx && \
-    mkdir -p /etc/nginx/http.d && \
+    mkdir -p /etc/nginx/conf.d && \
+    chown -R apps:apps /etc/nginx/conf.d && \
     mkdir -p /var/log/nginx && \
     chown -R apps:apps /var/log/nginx && \
     sed -i 's|pid /run/nginx.pid;|pid /tmp/nginx.pid;|g' /etc/nginx/nginx.conf && \

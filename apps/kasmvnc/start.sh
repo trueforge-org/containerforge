@@ -101,10 +101,10 @@ if [ ! -z ${PASSWORD+x} ]; then
 fi
 
 # Copy nginx config to the right place if writable
-if [ -w /etc/nginx/http.d/ ]; then
-  cp ${NGINX_CONFIG} /etc/nginx/http.d/default.conf
-elif [ -d /etc/nginx/conf.d/ ] && [ -w /etc/nginx/conf.d/ ]; then
+if [ -w /etc/nginx/conf.d/ ]; then
   cp ${NGINX_CONFIG} /etc/nginx/conf.d/default.conf
+elif [ -d /etc/nginx/http.d/ ] && [ -w /etc/nginx/http.d/ ]; then
+  cp ${NGINX_CONFIG} /etc/nginx/http.d/default.conf
 fi
 
 # Set DISPLAY for X server
@@ -158,7 +158,7 @@ if pgrep -f "[n]ginx:" >/dev/null; then
 fi
 
 # Start nginx in background
-if [ -f /etc/nginx/http.d/default.conf ] || [ -f /etc/nginx/conf.d/default.conf ] || [ -f ${NGINX_CONFIG} ]; then
+if [ -f /etc/nginx/conf.d/default.conf ] || [ -f /etc/nginx/http.d/default.conf ] || [ -f ${NGINX_CONFIG} ]; then
   /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf &
 fi
 
