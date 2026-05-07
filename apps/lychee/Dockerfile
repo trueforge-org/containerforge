@@ -8,34 +8,27 @@ LABEL org.opencontainers.image.source="https://lycheeorg.github.io/"
 
 USER root
 
-# Install PHP 8.4 and dependencies
+# Install PHP 8.5 and dependencies
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-    software-properties-common \
-    gnupg2 && \
-  add-apt-repository ppa:ondrej/php && \
-  apt-get update && \
   apt-get install -y --no-install-recommends \
     libimage-exiftool-perl \
     ffmpeg \
     imagemagick \
     jpegoptim \
-    php8.4-cli \
-    php8.4-fpm \
-    php8.4-bcmath \
-    php8.4-xml \
-    php8.4-dom \
-    php8.4-gd \
-    php8.4-intl \
-    php8.4-mysql \
-    php8.4-pgsql \
-    php8.4-sqlite3 \
-    php8.4-zip \
-    php8.4-ldap \
-    php8.4-curl \
-    php8.4-mbstring \
-    php8.4-opcache \
-    php8.4-redis \
+    php8.5-cli \
+    php8.5-fpm \
+    php8.5-bcmath \
+    php8.5-xml \
+    php8.5-gd \
+    php8.5-intl \
+    php8.5-mysql \
+    php8.5-pgsql \
+    php8.5-sqlite3 \
+    php8.5-zip \
+    php8.5-ldap \
+    php8.5-curl \
+    php8.5-mbstring \
+    php8.5-redis \
     php-imagick \
     postgresql-client \
     unzip \
@@ -44,8 +37,8 @@ RUN apt-get update && \
   echo "**** configure imagemagick policy ****" && \
   sed -i '/<\/policymap>/i \  <policy domain="coder" rights="read|write" pattern="PDF" \/>' /etc/ImageMagick-6/policy.xml && \
   echo "**** install composer ****" && \
-  curl -sS https://getcomposer.org/installer | php8.4 -- --install-dir=/usr/local/bin --filename=composer && \
-  update-alternatives --set php /usr/bin/php8.4
+  curl -sS https://getcomposer.org/installer | php8.5 -- --install-dir=/usr/local/bin --filename=composer && \
+  update-alternatives --set php /usr/bin/php8.5
 
 WORKDIR /app/www
 
@@ -71,10 +64,10 @@ RUN composer install \
     /app/www/storage/logs/*
 
 # Configure PHP
-RUN echo "upload_max_filesize=128M" > /etc/php/8.4/cli/conf.d/99-lychee.ini && \
-  echo "post_max_size=128M" >> /etc/php/8.4/cli/conf.d/99-lychee.ini && \
-  echo "memory_limit=1024M" >> /etc/php/8.4/cli/conf.d/99-lychee.ini && \
-  echo "max_execution_time=3000" >> /etc/php/8.4/cli/conf.d/99-lychee.ini
+RUN echo "upload_max_filesize=128M" > /etc/php/8.5/cli/conf.d/99-lychee.ini && \
+  echo "post_max_size=128M" >> /etc/php/8.5/cli/conf.d/99-lychee.ini && \
+  echo "memory_limit=1024M" >> /etc/php/8.5/cli/conf.d/99-lychee.ini && \
+  echo "max_execution_time=3000" >> /etc/php/8.5/cli/conf.d/99-lychee.ini
 
 # Set up directories and permissions
 RUN mkdir -p \

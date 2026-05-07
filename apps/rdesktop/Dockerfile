@@ -85,7 +85,7 @@ RUN \
     libfuse2 \
     libx11-dev \
     libxfixes3 \
-    libxml2 \
+    libxml2-16 \
     libxrandr2 \
     locales-all \
     mesa-va-drivers \

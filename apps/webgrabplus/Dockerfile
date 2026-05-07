@@ -14,7 +14,7 @@ ENV HOME=/config
 RUN \
   echo "**** install packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    libicu74 \
+    libicu78 \
     iputils-ping && \
   echo "**** install dotnet sdk ****" && \
   mkdir -p /app/dotnet && \

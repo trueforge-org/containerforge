@@ -16,24 +16,23 @@ RUN \
     libjpeg-turbo-progs \
     mediainfo \
     php-apcu \
-    php8.3-cgi \
-    php8.3-common \
-    php8.3-curl \
-    php8.3-xml \
-    php8.3-exif \
-    php8.3-gd \
-    php8.3-ldap \
-    php8.3-mysql \
+    php8.5-cgi \
+    php8.5-common \
+    php8.5-curl \
+    php8.5-xml \
+    php8.5-gd \
+    php8.5-ldap \
+    php8.5-mysql \
     php-pear \
     php-imagick \
-    php8.3-xsl \
-    php8.3-zip \
+    php8.5-xsl \
+    php8.5-zip \
     poppler-utils \
     re2c && \
   echo "**** modify php-fpm process limits ****" && \
-  if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -i 's/pm.max_children = 5/pm.max_children = 32/' /etc/php83/php-fpm.d/www.conf; fi && \
+  if [ -f /etc/php85/php-fpm.d/www.conf ]; then sed -i 's/pm.max_children = 5/pm.max_children = 32/' /etc/php85/php-fpm.d/www.conf; fi && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php83/php-fpm.conf; fi && \
+  if [ -f /etc/php85/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php85/php-fpm.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php85/php-fpm.d/www.conf; then echo 'clear_env = no' >> /etc/php85/php-fpm.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php85/php-fpm.conf; fi && \
   echo "**** download piwigo ****" && \
   mkdir -p /app/www/public && \
   curl -o \
