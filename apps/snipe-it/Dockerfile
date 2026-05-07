@@ -36,7 +36,7 @@ RUN \
     /tmp/snipeit.tar.gz -C \
     /app/www/ --strip-components=1 && \
   cp /app/www/docker/docker.env /app/www/.env && \
-  composer install --no-dev -d /app/www && \
+  composer install --no-dev --ignore-platform-req=php -d /app/www && \
   echo "**** move storage directories to defaults ****" && \
   mkdir -p /defaults && \
   mv \
