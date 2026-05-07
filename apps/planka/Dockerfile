@@ -52,17 +52,15 @@ USER root
 
 COPY --from=buildstage /build/server/ /app
 COPY --from=buildstage /build/server/.env.sample /app/.env
-COPY --from=buildstage /build/client/build /app/public/
-COPY --from=buildstage /build/client/build/index.html /app/views/index.ejs
+COPY --from=buildstage /build/client/dist /app/public/
+COPY --from=buildstage /build/client/dist/index.html /app/views/index.ejs
 
 RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client && \
     echo "**** create symlinks ****" && \
-    /bin/bash -c \
-    'dst=(user-avatars project-background-images attachments logs); \
-    src=(public/user-avatars public/project-background-images private/attachments logs); \
-    for i in "${!src[@]}"; do rm -rf /app/"${src[i]}" && ln -s /config/"${dst[i]}" /app/"${src[i]}"; done'
+    rm -rf /app/data && \
+    ln -s /config/data /app/data
 
 # copy local files
 USER apps
