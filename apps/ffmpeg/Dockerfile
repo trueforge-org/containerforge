@@ -150,7 +150,7 @@ RUN \
     pip \
     setuptools \
     wheel && \
-  /app/venv/bin/pip install --no-cache-dir cmake==3.31.6 mako meson ninja packaging ply pyyaml
+  /app/venv/bin/pip install --no-cache-dir cmake==3.31.6 mako meson ninja packaging ply pycparser pyyaml
 
 # compile 3rd party libs
 RUN \
