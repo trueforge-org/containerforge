@@ -5,8 +5,9 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=repology depName=ubuntu_24_04/nginx versioning=loose
-  default = "1.24.0-2ubuntu7.7"
+  // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
+  // renovate: datasource=repology depName=ubuntu_26_04/nginx versioning=loose
+  default = "1.28.3-2ubuntu1"
 }
 
 variable "LICENSE" {
