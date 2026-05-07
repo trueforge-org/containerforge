@@ -5,7 +5,9 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "1.6.24-1build3"
+  // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
+  // renovate: datasource=repology depName=ubuntu_26_04/memcached versioning=loose
+  default = "1.6.40-1"
 }
 
 variable "LICENSE" {

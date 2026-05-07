@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python-node:3.14.4@sha256:511a1f4b55dcdad4d6b5f243bb119b68a08ab778347ffa35335052ad24441f48
+FROM ghcr.io/trueforge-org/python-node:3.14.4@sha256:f9fa725921ad7e5e85fee84f66a2e02f821501a5c66684e2cc9848be51e2048c
 
 # set version label
 ARG VERSION
@@ -20,6 +20,8 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     sqlite3 && \
+  echo "**** pin npm to v10 (npm v11 omits optional peer deps required by budge) ****" && \
+  npm install -g npm@10 && \
   echo "**** install budge ****" && \
   mkdir -p /app/www/public && \
   (curl -fL -o \
