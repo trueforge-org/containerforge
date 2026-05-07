@@ -2,7 +2,6 @@
 description: "Use when porting/rebuilding a Dockerfile into the ContainerForge layout under apps/<app>/. Triggers: 'port this Dockerfile', 'convert to containerforge', 'rebuild as forge container', 'add new app from Dockerfile', 'create app from existing Dockerfile'. Produces settings.yaml, start.sh, docker-bake.hcl, container-test.yaml, renovate annotations, builds, tests, and opens a PR adding the new app."
 name: "Container Porter"
 tools: [read, edit, search, execute, web, todo, agent]
-model: ["Claude Opus 4.7 (copilot)", "GPT-5.5 (copilot)"]
 argument-hint: "Path or URL to a Dockerfile (and optional app name)"
 user-invocable: true
 ---
