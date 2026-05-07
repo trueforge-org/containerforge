@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Create required runtime directories in /tmp
+mkdir -p /tmp/manyfold/tmp /tmp/manyfold/log
+
 # set secret key if unset
 SECRET_FILE="/config/secret_key_base.txt"
 if [[ -w /config ]]; then
@@ -16,12 +19,11 @@ if [[ -w /config ]]; then
     fi
     printf "%s" "${SECRET_KEY_BASE}" > /var/run/s6/container_environment/SECRET_KEY_BASE
 
-    mkdir -p /app/www/log /app/www/tmp
 else
     # /config is readonly, use /tmp
     echo "Warning: /config is read-only, using /tmp for runtime data"
     SECRET_FILE="/tmp/manyfold/secret_key_base.txt"
-    mkdir -p /tmp/manyfold /app/www/log /app/www/tmp
+    mkdir -p /tmp/manyfold
 
     if [ -n "${SECRET_KEY_BASE}" ]; then
       echo "**** SECRET_KEY_BASE set in environment. ****"

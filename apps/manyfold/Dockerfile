@@ -34,6 +34,7 @@ RUN \
         libffi-dev \
         libmariadb-dev \
         libpq-dev \
+        pkg-config \
         ruby-dev \
         libyaml-dev && \
     echo "**** install manyfold ****" && \
@@ -64,6 +65,9 @@ RUN \
     APP_VERSION=v${VERSION} \
     bundle exec rake assets:precompile && \
     rm db/schema.rb && \
+    rm -rf /app/www/tmp /app/www/log && \
+    ln -s /tmp/manyfold/tmp /app/www/tmp && \
+    ln -s /tmp/manyfold/log /app/www/log && \
     echo "**** cleanup ****" && \
     yarn cache clean && \
     apt-get purge -y --auto-remove \
@@ -71,6 +75,7 @@ RUN \
         libffi-dev \
         libmariadb-dev \
         libpq-dev \
+        pkg-config \
         ruby-dev \
         libyaml-dev && \
     apt-get clean && \
