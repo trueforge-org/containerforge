@@ -231,7 +231,7 @@ ENV DISPLAY=:1 \
     GOMP_SPINCOUNT=0 \
     HOME=/config \
     START_DOCKER=true \
-    PULSE_RUNTIME_PATH=/defaults \
+    PULSE_RUNTIME_PATH=/tmp/pulse \
     NVIDIA_DRIVER_CAPABILITIES=all
 
 # copy over build output
@@ -247,7 +247,8 @@ RUN \
         build-essential \
         libpulse-dev && \
     cd /kclient && \
-    npm rebuild && \
+    HOME=/tmp/npm-home npm rebuild && \
+    rm -rf /tmp/npm-home /config/.cache /config/.npm 2>/dev/null || true && \
     apt-get remove -y build-essential && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -273,6 +274,8 @@ RUN \
         libjpeg-turbo8 \
         libnotify-bin \
         libstdc++6 \
+        libcpuid18 \
+        libtbb12 \
         libwebp7 \
         libxfont2 \
         libxshmfence1 \
@@ -317,6 +320,11 @@ RUN \
     mkdir -p /var/log/nginx && \
     chown -R apps:apps /var/log/nginx && \
     sed -i 's|pid /run/nginx.pid;|pid /tmp/nginx.pid;|g' /etc/nginx/nginx.conf && \
+    sed -i \
+        -e 's|error_log /var/log/nginx/error.log;|error_log /tmp/nginx-error.log;|g' \
+        -e 's|access_log /var/log/nginx/access.log;|access_log /tmp/nginx-access.log;|g' \
+        -e 's|include /etc/nginx/conf.d/\*.conf;|include /etc/nginx/conf.d/*.conf;\n\tinclude /tmp/nginx-conf.d/*.conf;|g' \
+        /etc/nginx/nginx.conf && \
     echo "**** openbox tweaks ****" && \
     sed -i \
         -e 's/NLIMC/NLMC/g' \

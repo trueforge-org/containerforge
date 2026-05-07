@@ -100,12 +100,9 @@ if [ ! -z ${PASSWORD+x} ]; then
   sed -i "s|/etc/nginx/.htpasswd|/tmp/nginx/.htpasswd|g" ${NGINX_CONFIG}
 fi
 
-# Copy nginx config to the right place if writable
-if [ -w /etc/nginx/conf.d/ ]; then
-  cp ${NGINX_CONFIG} /etc/nginx/conf.d/default.conf
-elif [ -d /etc/nginx/http.d/ ] && [ -w /etc/nginx/http.d/ ]; then
-  cp ${NGINX_CONFIG} /etc/nginx/http.d/default.conf
-fi
+# Copy nginx config to a writable location (rootfs may be read-only)
+mkdir -p /tmp/nginx-conf.d
+cp ${NGINX_CONFIG} /tmp/nginx-conf.d/default.conf
 
 # Set DISPLAY for X server
 export DISPLAY=:1
@@ -158,7 +155,7 @@ if pgrep -f "[n]ginx:" >/dev/null; then
 fi
 
 # Start nginx in background
-if [ -f /etc/nginx/conf.d/default.conf ] || [ -f /etc/nginx/http.d/default.conf ] || [ -f ${NGINX_CONFIG} ]; then
+if [ -f /tmp/nginx-conf.d/default.conf ]; then
   /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf &
 fi
 
