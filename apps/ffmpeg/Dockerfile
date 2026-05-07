@@ -439,6 +439,7 @@ RUN \
 RUN \
   echo "**** compiling mesa ****" && \
   cd /tmp/mesa && \
+  which cbindgen || (echo "ERROR: cbindgen not found in PATH" && exit 1) && \
   meson setup \
     -Dprefix="/usr/local" \
     -Dbuildtype=release \
