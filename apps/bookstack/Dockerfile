@@ -13,21 +13,18 @@ RUN \
     fontconfig \
     mariadb-client \
     memcached \
-    php8.3-xml \
-    php8.3-curl \
-    php8.3-exif \
-    php8.3-gd \
-    php8.3-ldap \
-    php8.3-mysql \
-    php8.3-opcache \
-    php8.3-memcached \
-    php8.3-tokenizer \
-    php8.3-zip \
+    php8.5-xml \
+    php8.5-curl \
+    php8.5-gd \
+    php8.5-ldap \
+    php8.5-mysql \
+    php8.5-memcached \
+    php8.5-zip \
     composer \
     qtbase5-dev \
     fonts-freefont-ttf && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
+  if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php/8.5/fpm/php-fpm.conf; fi && \
   echo "**** fetch bookstack ****" && \
   mkdir -p\
     /app/www && \

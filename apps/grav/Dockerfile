@@ -11,29 +11,28 @@ RUN \
     apt-get install -y --no-install-recommends \
         busybox \
         libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static \
-        php8.3-fpm \
-        php8.3-common \
-        php8.3-xml \
-        php8.3-gd \
-        php8.3-intl \
-        php8.3-ldap \
-        php8.3-opcache \
-        php8.3-sqlite3 \
-        php8.3-apcu \
-        php8.3-yaml \
-        php8.3-redis && \
+        php8.5-fpm \
+        php8.5-common \
+        php8.5-xml \
+        php8.5-gd \
+        php8.5-intl \
+        php8.5-ldap \
+        php8.5-sqlite3 \
+        php8.5-apcu \
+        php8.5-yaml \
+        php8.5-redis && \
     rm -rf /var/lib/apt/lists/* && \
     echo "**** configure php-fpm to pass env vars ****" && \
-    if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php83/php-fpm.conf; fi && \
+    if [ -f /etc/php85/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php85/php-fpm.d/www.conf && grep -qxF 'clear_env = no' /etc/php85/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php85/php-fpm.d/www.conf && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php85/php-fpm.conf; fi && \
     echo "**** setup php opcache ****" && \
-    mkdir -p /etc/php83/conf.d && \
+    mkdir -p /etc/php85/conf.d && \
     { \
         echo 'opcache.memory_consumption=128'; \
         echo 'opcache.interned_strings_buffer=8'; \
         echo 'opcache.max_accelerated_files=4000'; \
         echo 'opcache.revalidate_freq=2'; \
         echo 'opcache.enable_cli=1'; \
-    } > /etc/php83/conf.d/php-opcache.ini && \
+    } > /etc/php85/conf.d/php-opcache.ini && \
     echo "*** Installing Grav ***" && \
     mkdir -p \
         /app/www/public && \
