@@ -24,6 +24,7 @@ When you touch any of these files, you MUST first load and follow the matching i
 | `apps/**/start.sh`, `apps/**/entrypoint.sh`, `apps/**/root/**/run` | [start-script.instructions.md](instructions/start-script.instructions.md) |
 | Any Python-based app (base `python` / `python-node`, or `/app/venv` present) | [python-runtime.instructions.md](instructions/python-runtime.instructions.md) |
 | Any Go-based app (Go build stage, or base `golang`) | [go-runtime.instructions.md](instructions/go-runtime.instructions.md) |
+| Any build/run/test work in `apps/<app>/` (all agents and AI runners) | [build-test-protocol.instructions.md](instructions/build-test-protocol.instructions.md) |
 
 These are the source of truth for runtime model (`/app` vs `/config` vs `/tmp`), `USER apps` rules, read-only-rootfs compatibility, base-image reuse, version alignment, renovate annotations, and per-language venv/build rules. Do NOT restate or reinterpret them here — read them.
 
@@ -31,6 +32,7 @@ These are the source of truth for runtime model (`/app` vs `/config` vs `/tmp`),
 
 - For any `docker-bake.hcl` or `Dockerfile` change: run `docker buildx bake --print` from the app directory. Must succeed.
 - For any container behavior change: container tests defined in `apps/<app>/container-test.yaml` must pass. Never weaken a test to make it pass — fix the real defect.
+- For any build/run/test work, follow the shared loop in [build-test-protocol.instructions.md](instructions/build-test-protocol.instructions.md): bake-print → build → run + log success check → test, with per-app commit cadence in PR mode and the documented narrow exception for database-dependent apps.
 
 ## Downstream impact
 

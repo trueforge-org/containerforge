@@ -15,6 +15,7 @@ You operate exclusively on `apps/<app>/`. **Ignore anything under `porting/`** �
 All file-shape, runtime, naming, layout, and validation rules live in:
 
 - [`.github/copilot-instructions.md`](../copilot-instructions.md) — universal rules + dispatch table
+- [`.github/instructions/build-test-protocol.instructions.md`](../instructions/build-test-protocol.instructions.md) — **shared build/run/test loop for all agents**
 - [`.github/instructions/dockerfile.instructions.md`](../instructions/dockerfile.instructions.md)
 - [`.github/instructions/docker-bake.instructions.md`](../instructions/docker-bake.instructions.md)
 - [`.github/instructions/settings-yaml.instructions.md`](../instructions/settings-yaml.instructions.md)
@@ -23,7 +24,7 @@ All file-shape, runtime, naming, layout, and validation rules live in:
 - [`.github/instructions/python-runtime.instructions.md`](../instructions/python-runtime.instructions.md)
 - [`.github/instructions/go-runtime.instructions.md`](../instructions/go-runtime.instructions.md)
 
-**You MUST read each instruction file before creating or editing the corresponding file type.** Do not paraphrase or rely on memory. If a rule here ever conflicts with an instruction file, the instruction file wins.
+**You MUST read each instruction file before creating or editing the corresponding file type.** Do not paraphrase or rely on memory. If a rule here ever conflicts with an instruction file, the instruction file wins. The build/run/test loop in this agent MUST follow `build-test-protocol.instructions.md` exactly.
 
 ## Hard constraints (orchestration-only)
 
