@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/java8:8@sha256:9f28e07657039ae41a6256dbcc748e4fb98620ed78d41f981327e51b51786c8d AS buildstage
+FROM ghcr.io/trueforge-org/java8:8@sha256:a9eccca0f33336677e54c570a470193449e2b5a9cc0657fa8465b36d634e794b AS buildstage
 USER root
 ARG VERSION
 ARG TARGETARCH
@@ -18,7 +18,7 @@ RUN \
   cp build/libs/*.jar /davos.jar && \
   chmod 755 /davos.jar
 
-FROM ghcr.io/trueforge-org/java8:8@sha256:9f28e07657039ae41a6256dbcc748e4fb98620ed78d41f981327e51b51786c8d
+FROM ghcr.io/trueforge-org/java8:8@sha256:a9eccca0f33336677e54c570a470193449e2b5a9cc0657fa8465b36d634e794b
 
 # set version label
 ARG VERSION
