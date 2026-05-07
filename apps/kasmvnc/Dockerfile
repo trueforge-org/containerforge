@@ -308,16 +308,16 @@ RUN \
     adduser apps wheel && \
     echo "**** proot-apps ****" && \
     mkdir /proot-apps/ && \
-    PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
+    (PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
         | awk '/tag_name/{print $4;exit}' FS='[""]') && \
     curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
         | tar -xzf - -C /proot-apps/ && \
-    echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
+    echo "${PAPPS_RELEASE}" > /proot-apps/pversion) || echo "proot-apps download failed, skipping" && \
     echo "**** kasm support ****" && \
-    useradd \
+    (id kasm-user >/dev/null 2>&1 || useradd \
         -u 1000 -U \
         -d /home/kasm-user \
-        -s /bin/bash kasm-user && \
+        -s /bin/bash kasm-user) && \
     echo "kasm-user:kasm" | chpasswd && \
     adduser kasm-user wheel && \
     mkdir -p /home/kasm-user && \
@@ -343,8 +343,8 @@ RUN \
     usermod -aG docker apps && \
     echo 'hosts: files dns' > /etc/nsswitch.conf && \
     echo "**** theme ****" && \
-    curl -s https://raw.githubusercontent.com/thelamer/lang-stash/master/theme.tar.gz \
-        | tar xzvf - -C /usr/share/themes/Clearlooks/openbox-3/ && \
+    (curl -s https://raw.githubusercontent.com/thelamer/lang-stash/master/theme.tar.gz \
+        | tar xzvf - -C /usr/share/themes/Clearlooks/openbox-3/) || echo "theme download failed, skipping" && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/* && \
