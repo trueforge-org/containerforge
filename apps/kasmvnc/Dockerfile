@@ -262,13 +262,13 @@ RUN \
         libjpeg-turbo8 \
         libnotify-bin \
         libstdc++6 \
-        libwebp6 \
+        libwebp7 \
         libxfont2 \
         libxshmfence1 \
-        mcookie \
+        util-linux \
         libgl1-mesa-dri \
         libgbm1 \
-        libgl1-mesa-glx \
+        libgl1 \
         mesa-vulkan-drivers \
         nginx \
         openbox \
@@ -288,17 +288,8 @@ RUN \
         xserver-xorg-video-intel \
         xserver-xorg-video-nouveau \
         xserver-xorg-video-qxl \
-        xkbcomp \
-        xkeyboard-config \
-        xterm \
-        cups-pdf && \
-    echo "**** printer config ****" && \
-    sed -i \
-        "s:^#Out.*:Out /home/kasm-user/PDF:" \
-        /etc/cups/cups-pdf.conf && \
-    sed -i \
-        's/^SystemGroup .*/SystemGroup lpadmin root/' \
-        /etc/cups/cups-files.conf && \
+        xkb-data \
+        xterm && \
     echo "**** filesystem setup ****" && \
     ln -s /usr/local/share/kasmvnc /usr/share/kasmvnc && \
     ln -s /usr/local/etc/kasmvnc /etc/kasmvnc && \
@@ -312,6 +303,7 @@ RUN \
     echo "**** user perms ****" && \
     echo "apps:apps" | chpasswd && \
     usermod -s /bin/bash apps && \
+    groupadd wheel && \
     echo '%wheel ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/wheel && \
     adduser apps wheel && \
     echo "**** proot-apps ****" && \
