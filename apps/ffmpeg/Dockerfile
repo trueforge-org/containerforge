@@ -1,5 +1,5 @@
 # build stage
-FROM ghcr.io/trueforge-org/python:3.13.12 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.14.4 AS buildstage
 
 ARG TARGETARCH
 ARG VERSION
