@@ -1,6 +1,20 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+# Planka requires PostgreSQL to fully start, so we test for build artifacts and binaries
 timeoutSeconds: 240
-http:
-- port: '1337'
-  path: /
+
+filePaths:
+- /app/app.js
+- /app/package.json
+- /app/views/index.ejs
+- /app/public/index.html
+- /app/public/assets
+
+runners:
+- entrypoint: test -x /usr/local/bin/node
+- entrypoint: test -x /usr/local/bin/npm
+- entrypoint: test -x /usr/bin/psql
+- entrypoint: node --version
+
+mainRunner:
+  enabled: false
