@@ -1,6 +1,6 @@
 ############## picons stage ##############
 # built by https://github.com/linuxserver/picons-builder
-FROM ghcr.io/trueforge-org/python:3.13.12 AS piconsstage
+FROM ghcr.io/trueforge-org/python:3.14.4 AS piconsstage
 USER root
 RUN tar czf /picons.tar.bz2 -T /dev/null
 
