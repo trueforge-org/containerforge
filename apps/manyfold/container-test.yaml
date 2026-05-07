@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql (opt_dependencies) and redis for sidekiq workers;
+# full functional test not feasible in single-container suite
+timeoutSeconds: 240
+filePaths:
+- /app/www/vendor/bundle/ruby/3.3.0/bin/foreman
+- /app/www/vendor/bundle/ruby/3.3.0/bin/bundle
