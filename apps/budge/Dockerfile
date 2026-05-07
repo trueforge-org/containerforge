@@ -20,6 +20,8 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     sqlite3 && \
+  echo "**** pin npm to v10 (npm v11 omits optional peer deps required by budge) ****" && \
+  npm install -g npm@10 && \
   echo "**** install budge ****" && \
   mkdir -p /app/www/public && \
   (curl -fL -o \
