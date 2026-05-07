@@ -199,7 +199,7 @@ RUN \
   echo "**** grab source ****" && \
   mkdir -p /kclient && \
   curl -fL -o /tmp/kclient.tar.gz \
-    "https://github.com/kasmtech/kclient/archive/refs/tags/${KCLIENT_RELEASE}.tar.gz" && \
+    "https://github.com/linuxserver/kclient/archive/refs/tags/${KCLIENT_RELEASE}.tar.gz" && \
   tar xf /tmp/kclient.tar.gz -C /kclient/ --strip-components=1
 
 RUN \

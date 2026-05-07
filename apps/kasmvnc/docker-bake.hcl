@@ -10,7 +10,7 @@ variable "VERSION" {
 }
 
 variable "KCLIENT_RELEASE" {
-  // renovate: datasource=github-releases depName=kasmtech/kclient
+  // renovate: datasource=github-tags depName=linuxserver/kclient
   default = "0.4.1"
 }
 
