@@ -22,14 +22,20 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     ncurses-bin \
-    php8.3-cli \
+    php-cli \
     php-sqlite3 \
     php-fpm \
     python3-pip \
     python3 \
     python3-venv && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php83/php-fpm.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php83/php-fpm.d/www.conf && grep -qxF 'clear_env = no' /etc/php83/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php83/php-fpm.d/www.conf && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php83/php-fpm.conf; fi && \
+  for f in /etc/php/*/fpm/pool.d/www.conf; do \
+    [ -f "$f" ] || continue; \
+    sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' "$f"; \
+    grep -qxF 'clear_env = no' "$f" || echo 'clear_env = no' >> "$f"; \
+    fpmconf="$(dirname "$(dirname "$f")")/php-fpm.conf"; \
+    [ -f "$fpmconf" ] && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> "$fpmconf"; \
+  done && \
   echo "**** install diskover ****" && \
   if [ -z ${DISKOVER_RELEASE+x} ]; then \
     DISKOVER_RELEASE=$(curl -sX GET "https://api.github.com/repos/diskoverdata/diskover-community/releases" \
