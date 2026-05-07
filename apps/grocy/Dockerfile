@@ -6,14 +6,8 @@ ARG TARGETARCH
 USER root
 
 RUN \
-    echo "**** install build packages ****" && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-        software-properties-common \
-        gnupg2 && \
-    add-apt-repository ppa:ondrej/php -y && \
-    apt-get update && \
     echo "**** install runtime packages ****" && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         php8.5-common \
         php8.5-gd \
@@ -50,9 +44,6 @@ RUN \
     yarn --production && \
     yarn cache clean && \
     echo "**** cleanup ****" && \
-    apt-get remove -y --purge \
-        software-properties-common \
-        gnupg2 && \
     apt-get autoremove -y && \
     rm -rf \
         /tmp/* \
