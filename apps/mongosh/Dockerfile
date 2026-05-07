@@ -11,18 +11,20 @@ WORKDIR /app
 # hadolint ignore=DL3008,DL3015,SC2086,SC2155,DL4001
 RUN apt-get -qq update \
   && \
-  apt-get -qq install -y gnupg; \
-  curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+  apt-get -qq install -y gnupg curl ca-certificates wget \
   && \
-  wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add - \
+  install -d -m 0755 /etc/apt/keyrings \
   && \
-  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list \
+  wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | gpg --dearmor -o /etc/apt/keyrings/mongodb-server-6.0.gpg \
+  && \
+  chmod 0644 /etc/apt/keyrings/mongodb-server-6.0.gpg \
+  && \
+  echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list \
   && \
   apt-get -qq update \
   && \
   apt-get -qq install -y \
     mongodb-mongosh \
-  && apt-get remove -y \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get autoremove -y \
   && apt-get clean \
