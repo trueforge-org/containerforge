@@ -16,8 +16,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,graphics,video,utility"
 # Container setup
 RUN \
   echo "**** install packages ****" && \
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-  echo "deb [arch=$TARGETARCH] https://download.docker.com/linux/ubuntu noble stable" > \
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+  echo "deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu noble stable" > \
     /etc/apt/sources.list.d/docker.list && \
   curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
@@ -27,6 +27,7 @@ RUN \
   echo "Package: docker-ce docker-ce-cli docker-ce-rootless-extras \
   Pin: version 5:28.* \
   Pin-Priority: 1001" > /etc/apt/preferences.d/docker && \
+  apt-get update && \
   apt-get install -y --no-install-recommends \
     btrfs-progs \
     build-essential \

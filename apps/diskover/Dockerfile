@@ -22,7 +22,7 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     ncurses-bin \
-    php8.3-cli \
+    php8.5-cli \
     php-sqlite3 \
     php-fpm \
     python3-pip \
