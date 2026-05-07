@@ -439,12 +439,12 @@ RUN \
 RUN \
   echo "**** compiling mesa ****" && \
   cd /tmp/mesa && \
-  which cbindgen || (echo "ERROR: cbindgen not found in PATH" && exit 1) && \
   meson setup \
     -Dprefix="/usr/local" \
     -Dbuildtype=release \
     -Dvideo-codecs=all \
     -Dc_args="-DC11_THREADS_H_HEADER_AVAILABLE=1" \
+    -Dgallium-drivers=v3d,vc4,freedreno,etnaviv,svga,tegra,virgl,lima,panfrost,llvmpipe,softpipe,iris,zink \
     builddir/ && \
   meson compile -C builddir/ && \
   meson install -C builddir/
