@@ -30,9 +30,7 @@ These are the source of truth for runtime model (`/app` vs `/config` vs `/tmp`),
 
 ## Validation gates (mandatory)
 
-- For any `docker-bake.hcl` or `Dockerfile` change: run `docker buildx bake --print` from the app directory. Must succeed.
-- For any container behavior change: container tests defined in `apps/<app>/container-test.yaml` must pass. Never weaken a test to make it pass — fix the real defect.
-- For any build/run/test work, follow the shared loop in [build-test-protocol.instructions.md](instructions/build-test-protocol.instructions.md): bake-print → build → run + log success check → test, with per-app commit cadence in PR mode and the documented narrow exception for database-dependent apps.
+For any build/run/test work in `apps/<app>/`, the build/run/test loop, log success criteria, round limit, PR-mode commit cadence, and database-dependent exception are defined in [build-test-protocol.instructions.md](instructions/build-test-protocol.instructions.md). Follow it exactly. Never weaken a test to make it pass — fix the real defect.
 
 ## Downstream impact
 
