@@ -443,6 +443,7 @@ RUN \
     -Dprefix="/usr/local" \
     -Dbuildtype=release \
     -Dvideo-codecs=all \
+    -Dc_args="-DC11_THREADS_H_HEADER_AVAILABLE=1" \
     builddir/ && \
   meson compile -C builddir/ && \
   meson install -C builddir/
