@@ -109,7 +109,7 @@ ENV k9sVersion=0.50.18
 # renovate: datasource=github-releases depName=starship/starship
 ENV starshipVersion=1.25.1
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
-ENV clustertoolVersion=3.0.3
+ENV clustertoolVersion=3.0.7
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
