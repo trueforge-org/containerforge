@@ -217,7 +217,7 @@ RUN \
   rm -f package-lock.json
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:26.04
+FROM ghcr.io/trueforge-org/python-node:3.14.4
 
 # set version label
 ARG VERSION
@@ -240,6 +240,21 @@ ENV DISPLAY=:1 \
 COPY --from=nodebuilder /kclient /kclient
 RUN rm -f /usr/local/man
 COPY --from=buildstage /build-out/ /
+
+# rebuild kclient native modules for current node version
+RUN \
+    echo "**** rebuild kclient for runtime node version ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        python3 \
+        libpulse-dev && \
+    cd /kclient && \
+    npm rebuild && \
+    apt-get remove -y build-essential python3 libpulse-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN \
     echo "**** install deps ****" && \
@@ -294,6 +309,12 @@ RUN \
     ln -s /usr/local/share/kasmvnc /usr/share/kasmvnc && \
     ln -s /usr/local/etc/kasmvnc /etc/kasmvnc && \
     ln -s /usr/local/lib/kasmvnc /usr/lib/kasmvncserver && \
+    mkdir -p /var/lib/nginx/body /var/lib/nginx/fastcgi /var/lib/nginx/proxy /var/lib/nginx/scgi /var/lib/nginx/uwsgi && \
+    chown -R apps:apps /var/lib/nginx && \
+    mkdir -p /etc/nginx/http.d && \
+    mkdir -p /var/log/nginx && \
+    chown -R apps:apps /var/log/nginx && \
+    sed -i 's|pid /run/nginx.pid;|pid /tmp/nginx.pid;|g' /etc/nginx/nginx.conf && \
     echo "**** openbox tweaks ****" && \
     sed -i \
         -e 's/NLIMC/NLMC/g' \
@@ -353,7 +374,8 @@ RUN \
 
 # add local files
 USER apps
-COPY --chmod=0755 . /
+COPY --chmod=0755 ./root/ /
+COPY --chmod=0755 start.sh /start.sh
 
 
 # ports and volumes
