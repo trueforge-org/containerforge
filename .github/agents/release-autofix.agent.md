@@ -20,7 +20,6 @@ If anything below appears to conflict with the protocol or an instruction file, 
 
 ## Agent-specific constraints (in addition to the protocol)
 
-- DO NOT bundle multiple apps into a single PR. **One app = one branch = one PR.**
 - DO NOT close the source issue. Only comment on it.
 - DO NOT `git push --force` or amend pushed commits.
 
