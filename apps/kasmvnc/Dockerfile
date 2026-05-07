@@ -1,6 +1,6 @@
 FROM ghcr.io/trueforge-org/python-node:3.14.4 AS wwwstage
 
-ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
+ARG KASM_NOVNC_VERSION
 USER root
 
 RUN \
@@ -10,7 +10,7 @@ RUN \
   export QT_QPA_FONTDIR=/usr/share/fonts && \
   mkdir /src && \
   cd /src && \
-  wget https://github.com/kasmtech/noVNC/tarball/${KASMWEB_RELEASE} -O - \
+  wget https://github.com/kasmtech/noVNC/tarball/${KASM_NOVNC_VERSION} -O - \
     | tar  --strip-components=1 -xz && \
   npm install --legacy-peer-deps --ignore-scripts
 
@@ -28,7 +28,8 @@ RUN \
 
 FROM ghcr.io/trueforge-org/ubuntu:26.04 AS buildstage
 
-ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
+ARG VERSION
+ARG XORG_VER
 USER root
 
 COPY --from=wwwstage /build-out /www
@@ -102,7 +103,7 @@ RUN \
   echo "**** build kasmvnc ****" && \
   git clone https://github.com/kasmtech/KasmVNC.git src && \
   cd src && \
-  git checkout -f ${KASMVNC_COMMIT} && \
+  git checkout -f "v${VERSION}" && \
   sed -i \
     -e '/find_package(FLTK/s@^@#@' \
     -e '/add_subdirectory(tests/s@^@#@' \
@@ -116,7 +117,6 @@ RUN \
     . && \
   make -j4 && \
   echo "**** build xorg ****" && \
-  XORG_VER="21.1.14" && \
   wget --no-check-certificate \
     -O /tmp/xorg-server-${XORG_VER}.tar.gz \
     "https://www.x.org/archive/individual/xserver/xorg-server-${XORG_VER}.tar.gz" && \
@@ -198,17 +198,9 @@ RUN \
 RUN \
   echo "**** grab source ****" && \
   mkdir -p /kclient && \
-  if [ -z ${KCLIENT_RELEASE+x} ]; then \
-    KCLIENT_RELEASE=$(curl -sI -L "https://github.com/linuxserver/kclient/releases/latest" | awk -F/ '/^location:/ {print $NF}' | tr -d '\r'); \
-  fi && \
-  (curl -fL -o \
-  /tmp/kclient.tar.gz \
-    "https://github.com/linuxserver/kclient/archive/refs/tags/${KCLIENT_RELEASE}.tar.gz" || curl -fL -o \
-  /tmp/kclient.tar.gz \
-    "https://github.com/linuxserver/kclient/archive/refs/heads/master.tar.gz") && \
-  tar xf \
-  /tmp/kclient.tar.gz -C \
-    /kclient/ --strip-components=1
+  curl -fL -o /tmp/kclient.tar.gz \
+    "https://github.com/kasmtech/kclient/archive/refs/tags/${KCLIENT_RELEASE}.tar.gz" && \
+  tar xf /tmp/kclient.tar.gz -C /kclient/ --strip-components=1
 
 RUN \
   echo "**** install node modules ****" && \
@@ -222,8 +214,8 @@ FROM ghcr.io/trueforge-org/python-node:3.14.4
 # set version label
 ARG VERSION
 ARG TARGETARCH
+ARG KASMBINS_RELEASE
 USER root
-ARG KASMBINS_RELEASE="1.15.0"
 LABEL "com.kasmweb.image"="true"
 
 # env
