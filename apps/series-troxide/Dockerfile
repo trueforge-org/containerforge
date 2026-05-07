@@ -1,5 +1,5 @@
 # buildstage
-FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04 as buildstage
 
 RUN \
   echo "**** install build deps ****" && \
