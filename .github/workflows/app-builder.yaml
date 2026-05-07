@@ -34,6 +34,27 @@ jobs:
         with:
           app: ${{ inputs.app }}
 
+      - name: Check Dockerfile (COPY --chmod=0755 . /)
+        if: ${{ steps.app-exists.outputs.exists == 'true' }}
+        run: |-
+          set -euo pipefail
+          dockerfile="apps/${{ inputs.app }}/Dockerfile"
+          if [[ ! -f "$dockerfile" ]]; then
+            echo "::error file=${dockerfile}::Dockerfile not found"
+            exit 1
+          fi
+          # Required by .github/instructions/dockerfile.instructions.md:
+          # "MUST include `COPY --chmod=0755 . /` so container tests work."
+          # Accept equivalent variants that still copy the whole app context to /:
+          #   - mode 0755 or 0775 (with or without leading 0)
+          #   - source `.` or `./`
+          # Reject narrowed sources (e.g. `root/`, single files) which break
+          # /container-test.yaml placement.
+          if ! grep -Eq '^[[:space:]]*COPY[[:space:]]+--chmod=0?7[57]5[[:space:]]+\.\/?[[:space:]]+/[[:space:]]*$' "$dockerfile"; then
+            echo "::error file=${dockerfile}::Missing required directive 'COPY --chmod=0755 . /' (or accepted variant copying the whole app context to /). See .github/instructions/dockerfile.instructions.md."
+            exit 1
+          fi
+
       - name: Get App Options
         uses: ./.github/actions/app-options
         id: app-options
