@@ -239,11 +239,10 @@ RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
-        python3 \
         libpulse-dev && \
     cd /kclient && \
     npm rebuild && \
-    apt-get remove -y build-essential python3 libpulse-dev && \
+    apt-get remove -y build-essential && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -262,7 +261,6 @@ RUN \
         fonts-noto \
         fonts-noto-color-emoji \
         fuse-overlayfs \
-        intel-media-va-driver \
         iproute2 \
         libgcc-s1 \
         libgomp1 \
@@ -292,11 +290,16 @@ RUN \
         xauth \
         xserver-xorg-video-amdgpu \
         xserver-xorg-video-ati \
-        xserver-xorg-video-intel \
         xserver-xorg-video-nouveau \
         xserver-xorg-video-qxl \
         xkb-data \
         xterm && \
+    if [ "$TARGETARCH" = "amd64" ]; then \
+        echo "**** install intel/x86 only deps ****" && \
+        apt-get install -y --no-install-recommends \
+            intel-media-va-driver \
+            xserver-xorg-video-intel ; \
+    fi && \
     echo "**** filesystem setup ****" && \
     ln -s /usr/local/share/kasmvnc /usr/share/kasmvnc && \
     ln -s /usr/local/etc/kasmvnc /etc/kasmvnc && \
@@ -320,13 +323,6 @@ RUN \
     groupadd wheel && \
     echo '%wheel ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/wheel && \
     adduser apps wheel && \
-    echo "**** proot-apps ****" && \
-    mkdir /proot-apps/ && \
-    (PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
-        | awk '/tag_name/{print $4;exit}' FS='[""]') && \
-    curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
-        | tar -xzf - -C /proot-apps/ && \
-    echo "${PAPPS_RELEASE}" > /proot-apps/pversion) || echo "proot-apps download failed, skipping" && \
     echo "**** kasm support ****" && \
     (id kasm-user >/dev/null 2>&1 || useradd \
         -u 1000 -U \
