@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.13.12 AS wwwstage
+FROM ghcr.io/trueforge-org/python-node:3.14.4 AS wwwstage
 
 ARG KASMWEB_RELEASE="46412d23aff1f45dffa83fafb04a683282c8db58"
 USER root
@@ -26,7 +26,7 @@ RUN \
   if [ -f index.html ]; then cp index.html vnc.html; elif [ -f vnc.html ]; then cp vnc.html index.html; fi && \
   mkdir Downloads
 
-FROM ghcr.io/trueforge-org/ubuntu:24.04 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04 AS buildstage
 
 ARG KASMVNC_COMMIT="e04731870baebd2784983fb48197a2416c7d3519"
 USER root
@@ -74,6 +74,7 @@ RUN \
         libssl-dev \
         libpixman-1-dev \
         libpam0g-dev \
+        libcrypt-dev \
         procps \
         passwd \
         libwayland-dev \
@@ -105,11 +106,13 @@ RUN \
   sed -i \
     -e '/find_package(FLTK/s@^@#@' \
     -e '/add_subdirectory(tests/s@^@#@' \
+    -e '/cmake_policy(SET CMP0022 OLD)/s@^@#@' \
     CMakeLists.txt && \
   cmake \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DBUILD_VIEWER:BOOL=OFF \
     -DENABLE_GNUTLS:BOOL=OFF \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     . && \
   make -j4 && \
   echo "**** build xorg ****" && \
@@ -163,7 +166,7 @@ RUN \
   cp /src/unix/xserver/hw/vnc/Xvnc.man man/man1/Xvnc.1 && \
   mkdir lib && \
   cd lib && \
-  ln -s /usr/lib/xorg/modules/dri dri && \
+  ln -s "/usr/lib/$(uname -m)-linux-gnu/dri" dri && \
   cd /src && \
   mkdir -p builder/www && \
   cp -ax /www/* builder/www/ && \
@@ -214,7 +217,7 @@ RUN \
   rm -f package-lock.json
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:24.04
+FROM ghcr.io/trueforge-org/python-node:3.14.4
 
 # set version label
 ARG VERSION
@@ -235,7 +238,23 @@ ENV DISPLAY=:1 \
 
 # copy over build output
 COPY --from=nodebuilder /kclient /kclient
+RUN rm -f /usr/local/man
 COPY --from=buildstage /build-out/ /
+
+# rebuild kclient native modules for current node version
+RUN \
+    echo "**** rebuild kclient for runtime node version ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        python3 \
+        libpulse-dev && \
+    cd /kclient && \
+    npm rebuild && \
+    apt-get remove -y build-essential python3 libpulse-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN \
     echo "**** install deps ****" && \
@@ -258,13 +277,13 @@ RUN \
         libjpeg-turbo8 \
         libnotify-bin \
         libstdc++6 \
-        libwebp6 \
+        libwebp7 \
         libxfont2 \
         libxshmfence1 \
-        mcookie \
+        util-linux \
         libgl1-mesa-dri \
         libgbm1 \
-        libgl1-mesa-glx \
+        libgl1 \
         mesa-vulkan-drivers \
         nginx \
         openbox \
@@ -284,21 +303,19 @@ RUN \
         xserver-xorg-video-intel \
         xserver-xorg-video-nouveau \
         xserver-xorg-video-qxl \
-        xkbcomp \
-        xkeyboard-config \
-        xterm \
-        cups-pdf && \
-    echo "**** printer config ****" && \
-    sed -i \
-        "s:^#Out.*:Out /home/kasm-user/PDF:" \
-        /etc/cups/cups-pdf.conf && \
-    sed -i \
-        's/^SystemGroup .*/SystemGroup lpadmin root/' \
-        /etc/cups/cups-files.conf && \
+        xkb-data \
+        xterm && \
     echo "**** filesystem setup ****" && \
     ln -s /usr/local/share/kasmvnc /usr/share/kasmvnc && \
     ln -s /usr/local/etc/kasmvnc /etc/kasmvnc && \
     ln -s /usr/local/lib/kasmvnc /usr/lib/kasmvncserver && \
+    mkdir -p /var/lib/nginx/body /var/lib/nginx/fastcgi /var/lib/nginx/proxy /var/lib/nginx/scgi /var/lib/nginx/uwsgi && \
+    chown -R apps:apps /var/lib/nginx && \
+    mkdir -p /etc/nginx/conf.d && \
+    chown -R apps:apps /etc/nginx/conf.d && \
+    mkdir -p /var/log/nginx && \
+    chown -R apps:apps /var/log/nginx && \
+    sed -i 's|pid /run/nginx.pid;|pid /tmp/nginx.pid;|g' /etc/nginx/nginx.conf && \
     echo "**** openbox tweaks ****" && \
     sed -i \
         -e 's/NLIMC/NLMC/g' \
@@ -308,20 +325,21 @@ RUN \
     echo "**** user perms ****" && \
     echo "apps:apps" | chpasswd && \
     usermod -s /bin/bash apps && \
+    groupadd wheel && \
     echo '%wheel ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/wheel && \
     adduser apps wheel && \
     echo "**** proot-apps ****" && \
     mkdir /proot-apps/ && \
-    PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
+    (PAPPS_RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/proot-apps/releases/latest" \
         | awk '/tag_name/{print $4;exit}' FS='[""]') && \
     curl -L https://github.com/linuxserver/proot-apps/releases/download/${PAPPS_RELEASE}/proot-apps-$TARGETARCH.tar.gz \
         | tar -xzf - -C /proot-apps/ && \
-    echo "${PAPPS_RELEASE}" > /proot-apps/pversion && \
+    echo "${PAPPS_RELEASE}" > /proot-apps/pversion) || echo "proot-apps download failed, skipping" && \
     echo "**** kasm support ****" && \
-    useradd \
+    (id kasm-user >/dev/null 2>&1 || useradd \
         -u 1000 -U \
         -d /home/kasm-user \
-        -s /bin/bash kasm-user && \
+        -s /bin/bash kasm-user) && \
     echo "kasm-user:kasm" | chpasswd && \
     adduser kasm-user wheel && \
     mkdir -p /home/kasm-user && \
@@ -347,8 +365,8 @@ RUN \
     usermod -aG docker apps && \
     echo 'hosts: files dns' > /etc/nsswitch.conf && \
     echo "**** theme ****" && \
-    curl -s https://raw.githubusercontent.com/thelamer/lang-stash/master/theme.tar.gz \
-        | tar xzvf - -C /usr/share/themes/Clearlooks/openbox-3/ && \
+    (curl -s https://raw.githubusercontent.com/thelamer/lang-stash/master/theme.tar.gz \
+        | tar xzvf - -C /usr/share/themes/Clearlooks/openbox-3/) || echo "theme download failed, skipping" && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/* && \
@@ -357,6 +375,7 @@ RUN \
 
 # add local files
 USER apps
+COPY --chmod=0755 ./root/ /
 COPY --chmod=0755 . /
 
 
