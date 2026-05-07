@@ -376,7 +376,7 @@ RUN \
 # add local files
 USER apps
 COPY --chmod=0755 ./root/ /
-COPY --chmod=0755 . /
+COPY --chmod=0755 start.sh /start.sh
 
 
 # ports and volumes
