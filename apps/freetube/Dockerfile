@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/kasmvnc:1.3.3
+FROM ghcr.io/trueforge-org/kasmvnc:1.4.0
 
 # set version label
 ARG VERSION
