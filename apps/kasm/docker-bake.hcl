@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=kasmtech/workspaces-images versioning=loose
-  default = "1.18.0"
+  // renovate: datasource=github-releases depName=kasmtech/kasm-install-wizard
+  default = "1.18.1"
 }
 
 variable "LICENSE" {
