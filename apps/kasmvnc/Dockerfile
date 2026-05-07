@@ -69,6 +69,10 @@ RUN \
         libgl1-mesa-dev \
         libgl1-mesa-dri \
         libgbm-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libavutil-dev \
+        libswscale-dev \
         meson \
         pkg-config \
         nettle-dev \
