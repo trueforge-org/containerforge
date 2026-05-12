@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=syncthing/syncthing versioning=loose
-  default = "2.0.16"
+  default = "2.1.0"
 }
 
 variable "LICENSE" {
