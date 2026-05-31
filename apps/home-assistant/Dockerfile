@@ -31,7 +31,7 @@ RUN set -eux; \
         iputils-ping \
         libcap2 \
         libftdi1 \
-        libgpiod2 \
+        libgpiod3 \
         libturbojpeg0-dev \
         libpulse0 \
         libstdc++6 \
