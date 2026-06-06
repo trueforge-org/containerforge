@@ -22,26 +22,17 @@ runs:
   steps:
     - name: Setup Forgetool
       shell: bash
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
       run: |-
-        TAG=""
-        if RELEASES_JSON="$(curl -fsSL \
-          https://api.github.com/repos/trueforge-org/forgetool/releases)"; then
-          TAG="$(jq -r '[.[]
-            | select(.prerelease == true)
-            | .tag_name
-            | select(test("^(forgetool-)?v[0-9]+\\.[0-9]+\\.[0-9]+-ALPHA[0-9]+$"))
-            | {tag: ., alpha: (capture("ALPHA(?<n>[0-9]+)$").n | tonumber)}
-          ] | if length > 0 then max_by(.alpha).tag else empty end' <<< "${RELEASES_JSON}")"
-        fi
-        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || TAG="v4.0.0-ALPHA7"
+        TAG="$(curl -fsSL \
+          https://api.github.com/repos/trueforge-org/forgetool/releases/latest \
+          | jq -r '.tag_name')"
+        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "Failed to determine latest stable forgetool release tag"; exit 1; }
         VERSION="${TAG#v}"
         VERSION="${VERSION#forgetool-v}"
         case "$(uname -m)" in
           x86_64) ARCH="amd64" ;;
-          aarch64) ARCH="arm64" ;;
-          *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64." && exit 1 ;;
+          aarch64|arm64) ARCH="arm64" ;;
+          *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64, arm64." && exit 1 ;;
         esac
         curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
         mkdir -p "${RUNNER_TEMP}/forgetool-bin"
