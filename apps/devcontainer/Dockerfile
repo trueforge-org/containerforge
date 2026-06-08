@@ -97,7 +97,7 @@ ENV rancherVersion=2.14.2
 # renovate: datasource=github-releases depName=tilt-dev/tilt
 ENV tiltVersion=0.37.3
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
-ENV skaffoldVersion=2.19.0
+ENV skaffoldVersion=2.21.0
 # renovate: datasource=github-releases depName=zegl/kube-score
 ENV kubeScoreVersion=1.20.0
 # renovate: datasource=github-releases depName=helm/chart-releaser
