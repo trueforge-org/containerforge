@@ -57,18 +57,6 @@ RUN ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin/ffmpeg && \
     ln -s /usr/lib/jellyfin-ffmpeg/vainfo /usr/bin/vainfo
 
 # -----------------------------
-# Intel Compute Runtime (x86 only)
-# -----------------------------
-RUN if [ "$TARGETARCH" = "amd64" ]; then \
-        mkdir /tmp/intel-compute-runtime && cd /tmp/intel-compute-runtime && \
-        curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "libigdgmm.*\.deb" >> list.txt && \
-        curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "intel-opencl-icd.*\.deb" >> list.txt && \
-        wget -i list.txt && \
-        dpkg -i *.deb || apt-get -f install -y && \
-        cd .. && rm -rf /tmp/*; \
-    fi
-
-# -----------------------------
 # Cleanup
 # -----------------------------
 RUN apt-get purge -y gnupg && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*

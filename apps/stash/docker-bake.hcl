@@ -10,13 +10,6 @@ variable "VERSION" {
 
 }
 
-
-variable "INTEL_CR_VERSION" {
-  // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
-  default = "26.14.37833.4"
-
-}
-
 variable "LICENSE" {
   default = "AGPL-3.0-or-later"
 }
