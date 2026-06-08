@@ -105,7 +105,7 @@ ENV chartReleaserVersion=1.8.1
 # renovate: datasource=github-releases depName=helm/chart-testing
 ENV chartTestingVersion=3.14.0
 # renovate: datasource=github-releases depName=derailed/k9s
-ENV k9sVersion=0.50.18
+ENV k9sVersion=0.51.0
 # renovate: datasource=github-releases depName=starship/starship
 ENV starshipVersion=1.25.1
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
