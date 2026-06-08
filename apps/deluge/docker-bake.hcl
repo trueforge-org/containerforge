@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // TODO: temporary disabled due to repology networking issues (it being in russia)
-  // renovatex: datasource=repology depName=alpine_edge/deluge
+  // repologydepName=alpine_edge/deluge
   default = "2.2.0"
 }
 

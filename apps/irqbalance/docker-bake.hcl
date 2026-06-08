@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // TODO: temporary disabled due to repology networking issues (it being in russia)
-  // renovatex: datasource=repology depName=alpine_3_22/irqbalance
+  // repologydepName=alpine_3_22/irqbalance
   default = "1.9.4-r1"
 }
 
