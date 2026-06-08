@@ -6,7 +6,8 @@ variable "APP" {
 
 variable "VERSION" {
   // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
-  // renovate: datasource=repology depName=ubuntu_26_04/memcached versioning=loose
+  // TODO: temporary disabled due to repology networking issues (it being in russia)
+  // renovatex: datasource=repology depName=ubuntu_26_04/memcached versioning=loose
   default = "1.6.40-1"
 }
 
