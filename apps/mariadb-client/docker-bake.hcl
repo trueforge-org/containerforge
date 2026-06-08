@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/mariadb
-  default = "12.2.2"
+  default = "12.3.2"
 }
 
 variable "LICENSE" {
