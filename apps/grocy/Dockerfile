@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:24.15.0@sha256:5d401829d5061483016ca171db4e1d540fc07ba5e4b8722a3b5f272c2b69ffae
+FROM ghcr.io/trueforge-org/node:24.16.0@sha256:054127dbde86feda9878cd8b6ccef97a4988a3f28f9e40bdc138c70cebb3f2ec
 
 # set version label
 ARG VERSION
@@ -6,14 +6,8 @@ ARG TARGETARCH
 USER root
 
 RUN \
-    echo "**** install build packages ****" && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-        software-properties-common \
-        gnupg2 && \
-    add-apt-repository ppa:ondrej/php -y && \
-    apt-get update && \
     echo "**** install runtime packages ****" && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         php8.5-common \
         php8.5-gd \
@@ -50,9 +44,6 @@ RUN \
     yarn --production && \
     yarn cache clean && \
     echo "**** cleanup ****" && \
-    apt-get remove -y --purge \
-        software-properties-common \
-        gnupg2 && \
     apt-get autoremove -y && \
     rm -rf \
         /tmp/* \

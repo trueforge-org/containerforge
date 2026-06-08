@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=oci.trueforge.org/containerforge/python
-  default = "3.14.4"
+  default = "3.14.5"
 }
 
 variable "LICENSE" {

@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:17312da6b52fe7ab6e3bdc8e4a1f99df63c2494b2bad4f4b634a9065d585898e
+FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:c21fcd861c5eccd1dec9c7b9a88647fc3a22585c3d7cf77ba48129844e7a584b
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -14,7 +14,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 USER apps
-COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:dbdb3f7854ce46ec52abd392920cd74a02b7d0b95543f16c94108cb864d6cec3 /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
+COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:4f28f3f0aedf2948809cfc246f83ab6297c9b6e15eac2638ebff9579dadfcd7f /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
 # Fix shebang since container does not use s6-overlay
 RUN sed -i 's|#!/command/with-contenv bash|#!/usr/bin/env bash|g' /app/cloudflare-ddns.sh

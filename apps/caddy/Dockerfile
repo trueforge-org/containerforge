@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:0cc15407a61022147e4025d6707343990c17f3e4026ea4c847e07ed8df165ea4 as builder
+FROM ghcr.io/trueforge-org/golang:1.26.4@sha256:4a2c04e418ee93091b29d04bc76d71ea1890228b7c2e6131663edf821bbc3450 as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -15,7 +15,7 @@ RUN wget -O - "https://github.com/caddyserver/xcaddy/releases/download/v${XCADDY
         --with github.com/caddy-dns/cloudflare && \
     chmod 755 "/caddy-bin"
 
-FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:17312da6b52fe7ab6e3bdc8e4a1f99df63c2494b2bad4f4b634a9065d585898e
+FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:c21fcd861c5eccd1dec9c7b9a88647fc3a22585c3d7cf77ba48129844e7a584b
 
 USER apps
 

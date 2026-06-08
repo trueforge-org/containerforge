@@ -5,7 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=repology depName=alpine_edge/deluge
+  // TODO: temporary disabled due to repology networking issues (it being in russia)
+  // repologydepName=alpine_edge/deluge
   default = "2.2.0"
 }
 

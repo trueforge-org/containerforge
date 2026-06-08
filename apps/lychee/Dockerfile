@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:17312da6b52fe7ab6e3bdc8e4a1f99df63c2494b2bad4f4b634a9065d585898e
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:c21fcd861c5eccd1dec9c7b9a88647fc3a22585c3d7cf77ba48129844e7a584b
 
 ARG VERSION
 ARG TARGETARCH
@@ -35,7 +35,7 @@ RUN apt-get update && \
     curl && \
   rm -rf /var/lib/apt/lists/* && \
   echo "**** configure imagemagick policy ****" && \
-  sed -i '/<\/policymap>/i \  <policy domain="coder" rights="read|write" pattern="PDF" \/>' /etc/ImageMagick-6/policy.xml && \
+  sed -i '/<\/policymap>/i \  <policy domain="coder" rights="read|write" pattern="PDF" \/>' /etc/ImageMagick-7/policy.xml && \
   echo "**** install composer ****" && \
   curl -sS https://getcomposer.org/installer | php8.5 -- --install-dir=/usr/local/bin --filename=composer && \
   update-alternatives --set php /usr/bin/php8.5

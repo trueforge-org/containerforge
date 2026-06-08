@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python-node:3.14.4@sha256:76826361c9c9419f65f2c7cf3b1f10defba433b96f2dfba1ca4aa77eea0638b2
+FROM ghcr.io/trueforge-org/python-node:3.14.5@sha256:1fbcb78a08a210a16c27cb2ad8cf9badaa996a3009462ecb66800125e2f995fe
 
 # set version label
 ARG VERSION
@@ -73,29 +73,17 @@ RUN \
   echo "**** add installer ****" && \
   curl -o \
     /tmp/kasm.tar.gz -L \
-    "https://github.com/kasmtech/kasm-install-wizard/releases/download/${VERSION}/kasm_release.tar.gz" && \
+    "https://kasm-static-content.s3.amazonaws.com/kasm_release_${VERSION}.tar.gz" && \
   tar xf \
     /tmp/kasm.tar.gz -C \
     / && \
   ALVERSION=$(cat /kasm_release/conf/database/seed_data/default_properties.yaml |awk '/alembic_version/ {print $2}') && \
-  curl -o \
-    /tmp/images.tar.gz -L \
-    "https://kasm-ci.s3.amazonaws.com/${VERSION}-images-combined.tar.gz" && \
-  tar xf \
-    /tmp/images.tar.gz -C \
-    / && \
   sed -i \
     '/alembic_version/s/.*/alembic_version: '${ALVERSION}'/' \
     /kasm_release/conf/database/seed_data/default_images_a* && \
   sed -i 's/-N -e -H/-N -B -e -H/g' /kasm_release/upgrade.sh && \
   echo "exit 0" > /kasm_release/install_dependencies.sh && \
-  /kasm_release/bin/utils/yq_$(uname -m) -i \
-    '.services.proxy.volumes += "/kasm_release/www/img/thumbnails:/srv/www/img/thumbnails"' \
-    /kasm_release/docker/docker-compose-all.yaml && \
   echo "**** copy assets ****" && \
-  cp \
-    /kasm_release/www/img/thumbnails/*.png /kasm_release/www/img/thumbnails/*.svg \
-    /wizard/public/img/thumbnails/ && \
   cp \
     /kasm_release/conf/database/seed_data/default_images_a* \
     /wizard/ && \

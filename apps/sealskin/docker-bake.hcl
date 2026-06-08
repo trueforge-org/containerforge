@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=selkies-project/sealskin versioning=loose
-  default = "0.1.38"
+  default = "0.1.39"
 }
 
 variable "LICENSE" {

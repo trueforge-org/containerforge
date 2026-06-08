@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:17312da6b52fe7ab6e3bdc8e4a1f99df63c2494b2bad4f4b634a9065d585898e
+FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:c21fcd861c5eccd1dec9c7b9a88647fc3a22585c3d7cf77ba48129844e7a584b
 
 ARG TARGETARCH
 ARG VERSION
@@ -55,18 +55,6 @@ RUN pip3 install --break-system-packages --no-cache-dir --upgrade \
 RUN ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/bin/ffmpeg && \
     ln -s /usr/lib/jellyfin-ffmpeg/ffprobe /usr/bin/ffprobe && \
     ln -s /usr/lib/jellyfin-ffmpeg/vainfo /usr/bin/vainfo
-
-# -----------------------------
-# Intel Compute Runtime (x86 only)
-# -----------------------------
-RUN if [ "$TARGETARCH" = "amd64" ]; then \
-        mkdir /tmp/intel-compute-runtime && cd /tmp/intel-compute-runtime && \
-        curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "libigdgmm.*\.deb" >> list.txt && \
-        curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "intel-opencl-icd.*\.deb" >> list.txt && \
-        wget -i list.txt && \
-        dpkg -i *.deb || apt-get -f install -y && \
-        cd .. && rm -rf /tmp/*; \
-    fi
 
 # -----------------------------
 # Cleanup

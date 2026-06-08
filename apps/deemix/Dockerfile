@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/node:24.15.0@sha256:5d401829d5061483016ca171db4e1d540fc07ba5e4b8722a3b5f272c2b69ffae as builder
+FROM ghcr.io/trueforge-org/node:24.16.0@sha256:054127dbde86feda9878cd8b6ccef97a4988a3f28f9e40bdc138c70cebb3f2ec as builder
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -20,7 +20,7 @@ RUN yarn install-all
 
 RUN yarn dist-server
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:17312da6b52fe7ab6e3bdc8e4a1f99df63c2494b2bad4f4b634a9065d585898e
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:c21fcd861c5eccd1dec9c7b9a88647fc3a22585c3d7cf77ba48129844e7a584b
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION

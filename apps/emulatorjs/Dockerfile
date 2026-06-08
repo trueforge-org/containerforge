@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:0cc15407a61022147e4025d6707343990c17f3e4026ea4c847e07ed8df165ea4 as migrationbuilder
+FROM ghcr.io/trueforge-org/golang:1.26.4@sha256:4a2c04e418ee93091b29d04bc76d71ea1890228b7c2e6131663edf821bbc3450 as migrationbuilder
 USER root
 
 RUN \
@@ -13,7 +13,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/golang:1.26.2@sha256:0cc15407a61022147e4025d6707343990c17f3e4026ea4c847e07ed8df165ea4 as binbuilder
+FROM ghcr.io/trueforge-org/golang:1.26.4@sha256:4a2c04e418ee93091b29d04bc76d71ea1890228b7c2e6131663edf821bbc3450 as binbuilder
 USER root
 
 RUN \
@@ -49,7 +49,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/node:24.15.0@sha256:5d401829d5061483016ca171db4e1d540fc07ba5e4b8722a3b5f272c2b69ffae as nodebuilder
+FROM ghcr.io/trueforge-org/node:24.16.0@sha256:054127dbde86feda9878cd8b6ccef97a4988a3f28f9e40bdc138c70cebb3f2ec as nodebuilder
 
 USER root
 ARG VERSION
@@ -97,7 +97,7 @@ RUN \
   npm install
 
 # runtime stage
-FROM ghcr.io/trueforge-org/python:3.14.4@sha256:f7d559cef2b714762b919fffffabb8892824a30cb61e3df293dcad6851a29a3b
+FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
 
 # set version label
 ARG VERSION

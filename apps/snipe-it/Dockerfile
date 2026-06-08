@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:17312da6b52fe7ab6e3bdc8e4a1f99df63c2494b2bad4f4b634a9065d585898e
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:c21fcd861c5eccd1dec9c7b9a88647fc3a22585c3d7cf77ba48129844e7a584b
 
 # set version label
 ARG VERSION
@@ -36,7 +36,7 @@ RUN \
     /tmp/snipeit.tar.gz -C \
     /app/www/ --strip-components=1 && \
   cp /app/www/docker/docker.env /app/www/.env && \
-  composer install --no-dev -d /app/www && \
+  composer install --no-dev --ignore-platform-req=php -d /app/www && \
   echo "**** move storage directories to defaults ****" && \
   mkdir -p /defaults && \
   mv \
