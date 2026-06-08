@@ -87,7 +87,7 @@ ENV oldhelmVersion=3.12.1
 # renovate: datasource=github-releases depName=instrumenta/kubeval
 ENV kubevalVersion=0.16.1
 # renovate: datasource=github-releases depName=yannh/kubeconform
-ENV kubeconformVersion=0.7.0
+ENV kubeconformVersion=0.8.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
 ENV conftestVersion=0.68.2
 # renovate: datasource=github-releases depName=mikefarah/yq
