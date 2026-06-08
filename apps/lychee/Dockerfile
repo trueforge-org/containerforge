@@ -35,7 +35,7 @@ RUN apt-get update && \
     curl && \
   rm -rf /var/lib/apt/lists/* && \
   echo "**** configure imagemagick policy ****" && \
-  sed -i '/<\/policymap>/i \  <policy domain="coder" rights="read|write" pattern="PDF" \/>' /etc/ImageMagick-6/policy.xml && \
+  sed -i '/<\/policymap>/i \  <policy domain="coder" rights="read|write" pattern="PDF" \/>' /etc/ImageMagick-7/policy.xml && \
   echo "**** install composer ****" && \
   curl -sS https://getcomposer.org/installer | php8.5 -- --install-dir=/usr/local/bin --filename=composer && \
   update-alternatives --set php /usr/bin/php8.5
