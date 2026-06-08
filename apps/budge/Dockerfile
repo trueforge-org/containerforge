@@ -34,6 +34,8 @@ RUN \
     /app/www/public/ --strip-components=1 && \
   echo "**** install backend ****" && \
   cd /app/www/public/backend && \
+  echo "**** bump bcrypt to v6 (v5 ships node-addon-api incompatible with Node 24, breaks arm64 source build) ****" && \
+  npm pkg set "dependencies.bcrypt=^6.0.0" && \
   npm install && \
   npm run build && \
   npm prune --omit=dev && \
