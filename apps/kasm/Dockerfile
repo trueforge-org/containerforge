@@ -16,7 +16,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,graphics,video,utility"
 # Container setup
 RUN \
   echo "**** install packages ****" && \
-  install -d -m 0755 /usr/share/keyrings && \
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
   echo "deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu noble stable" > \
     /etc/apt/sources.list.d/docker.list && \
@@ -28,6 +27,7 @@ RUN \
   echo "Package: docker-ce docker-ce-cli docker-ce-rootless-extras \
   Pin: version 5:28.* \
   Pin-Priority: 1001" > /etc/apt/preferences.d/docker && \
+  apt-get update && \
   apt-get install -y --no-install-recommends \
     btrfs-progs \
     build-essential \
