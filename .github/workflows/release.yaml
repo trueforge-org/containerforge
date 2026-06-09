@@ -105,6 +105,8 @@ jobs:
         run: |-
           TAG=""
           if RELEASES_JSON="$(curl -fsSL \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/trueforge-org/forgetool/releases/latest)"; then
             TAG="$(jq -r '.tag_name // empty' <<< "${RELEASES_JSON}")"
           fi
