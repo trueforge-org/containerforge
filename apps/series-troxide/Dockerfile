@@ -1,5 +1,5 @@
 # buildstage
-FROM ghcr.io/trueforge-org/ubuntu:24.04 as buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04 as buildstage
 
 RUN \
   echo "**** install build deps ****" && \
@@ -21,7 +21,7 @@ RUN \
   cargo install series-troxide
 
 # runtime
-FROM ghcr.io/trueforge-org/kasmvnc:1.3.3
+FROM ghcr.io/trueforge-org/kasmvnc:1.4.0
 
 # set version label
 ARG VERSION
