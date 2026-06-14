@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=alexjustesen/speedtest-tracker versioning=loose
-  default = "1.14.3"
+  default = "1.14.4"
 }
 
 variable "LICENSE" {
