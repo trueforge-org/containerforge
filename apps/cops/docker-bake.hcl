@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=mikespub-org/seblucas-cops versioning=loose
-  default = "4.3.5"
+  default = "4.5.2"
 }
 
 variable "LICENSE" {
