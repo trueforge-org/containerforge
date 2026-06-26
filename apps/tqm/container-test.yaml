@@ -3,3 +3,6 @@
 
 filePaths:
 - /app/bin/tqm
+
+mainRunner:
+  cmd: "sleep 999"
