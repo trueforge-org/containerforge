@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=kasmtech/kasm-install-wizard
-  default = "1.18.1"
+  default = "1.19.0"
 }
 
 variable "LICENSE" {
