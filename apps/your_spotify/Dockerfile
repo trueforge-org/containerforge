@@ -24,9 +24,11 @@ RUN \
   tar xzf \
     /tmp/your_spotify.tar.gz -C \
     /app/www/ --strip-components=1 && \
+  grep -q '^allowBuilds:' /app/www/pnpm-workspace.yaml || printf '\nallowBuilds:\n  core-js: true\n  unrs-resolver: true\n' >> /app/www/pnpm-workspace.yaml && \
   echo "*** install workspace dependencies ***" && \
   cd /app/www && \
-  pnpm install --frozen-lockfile
+  pnpm install \
+  --frozen-lockfile
 
 FROM buildbase AS buildclient
 
