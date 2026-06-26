@@ -4,7 +4,7 @@
   "image": "oci.trueforge.org/containerforge/devcontainer:4.1.1@sha256:813e3361258eabb7785e4a471e99f92f46f9b4d7729af6a362d9373255ca5fb4",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
   "features": {
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {"moby": false}
   },
   "customizations": {
     "vscode": {
