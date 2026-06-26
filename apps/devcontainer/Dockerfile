@@ -77,11 +77,11 @@ RUN apt-get update && \
 
 ### Kubernetes-Tools Installer
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ENV kubectlVersion=1.36.1
+ENV kubectlVersion=1.36.2
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
 # renovate: datasource=github-releases depName=helm/helm
-ENV helmVersion=4.2.0
+ENV helmVersion=4.2.2
 # WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
 # renovate: datasource=github-releases depName=instrumenta/kubeval
@@ -95,7 +95,7 @@ ENV goyqVersion=4.53.3
 # renovate: datasource=github-releases depName=rancher/cli
 ENV rancherVersion=2.14.2
 # renovate: datasource=github-releases depName=tilt-dev/tilt
-ENV tiltVersion=0.37.3
+ENV tiltVersion=0.37.4
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
 ENV skaffoldVersion=2.22.0
 # renovate: datasource=github-releases depName=zegl/kube-score
