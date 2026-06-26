@@ -24,7 +24,7 @@ RUN \
     libjpeg-turbo8 \
     libffi8 \
     libpq5 \
-    libxml2 \
+    libxml2-16 \
     libxslt1.1 \
     libmariadb3 && \
   echo "**** install babybuddy ****" && \
@@ -37,7 +37,7 @@ RUN \
   /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   /app/venv/bin/pip install -U --no-cache-dir django-dbsettings==1.4.0 && \
   /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
-  python3 -c "from pathlib import Path; p=Path('/app/venv/lib/python3.13/site-packages/dbsettings/group.py'); t=p.read_text(); p.write_text(t.replace('for attribute_name, attr in attrs.items():\\n', 'for attribute_name, attr in attrs.items():\\n            if attribute_name.startswith(\\\"__\\\") and attribute_name.endswith(\\\"__\\\"):\\n                continue\\n', 1))" && \
+  python3 -c "from pathlib import Path; p=Path('/app/venv/lib/python3.14/site-packages/dbsettings/group.py'); t=p.read_text(); p.write_text(t.replace('for attribute_name, attr in attrs.items():\\n', 'for attribute_name, attr in attrs.items():\\n            if attribute_name.startswith(\\\"__\\\") and attribute_name.endswith(\\\"__\\\"):\\n                continue\\n', 1))" && \
   rm -rf /app/www/public/data /app/www/public/media && \
   ln -s /config/data /app/www/public/data && \
   ln -s /config/media /app/www/public/media && \
