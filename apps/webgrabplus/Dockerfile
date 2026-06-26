@@ -6,7 +6,7 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-# package versions
+# package versions
 
 # environment variables.
 ENV HOME=/config
@@ -52,7 +52,7 @@ USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 VOLUME /config
 VOLUME /data
 

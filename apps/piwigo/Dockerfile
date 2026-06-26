@@ -44,12 +44,12 @@ RUN \
   rm -rf \
     /tmp/*
 
-# copy local files
+# copy local files
 USER apps
 COPY --chmod=0755 . /
 
 
-# ports and volumes
+# ports and volumes
 EXPOSE 80 443
 
 VOLUME /config

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 
-# make our folders
+# make our folders
 mkdir -p \
     /config/fonts
 
-# copy config
+# copy config
 if [[ ! -f /config/preferences.json ]]; then
     cp /defaults/preferences.json /config/preferences.json
 fi

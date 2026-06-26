@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# make our folders
+# make our folders
 mkdir -p \
     /config/www \
     /config/www/local/config \
@@ -71,7 +71,7 @@ if [[ -w /app/www/public ]]; then
     shopt -u globstar dotglob
 fi
 
-# copy config
+# copy config
 if [[ ! -f "/config/www/local/config/config.inc.php" ]]; then
     cp /app/www/public/include/config_default.inc.php /config/www/local/config/config.inc.php
 fi

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# make folders
+# make folders
 mkdir -p \
 	/config/oscam
 
