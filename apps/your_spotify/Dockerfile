@@ -26,7 +26,9 @@ RUN \
     /app/www/ --strip-components=1 && \
   echo "*** install workspace dependencies ***" && \
   cd /app/www && \
-  pnpm install --frozen-lockfile
+  pnpm install \
+  --frozen-lockfile \
+  --allow-build=core-js,unrs-resolver
 
 FROM buildbase AS buildclient
 
