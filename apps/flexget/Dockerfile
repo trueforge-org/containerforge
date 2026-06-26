@@ -7,7 +7,7 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-# environment settings
+# environment settings
 ENV HOME="/config" \
   PYTHONIOENCODING=utf-8 \
   TMPDIR=/run/flexget-temp \
@@ -48,7 +48,7 @@ RUN \
         /var/lib/apt/lists/*
 
 
-# add local files
+# add local files
 USER apps
 COPY --chmod=0755 . /
 

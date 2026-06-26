@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# make our folders
+# make our folders
 mkdir -p \
     /config/dbase_and_logs
 
