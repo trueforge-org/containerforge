@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=pydio/cells versioning=loose
-  default = "4.4.17"
+  default = "5.0.1"
 }
 
 variable "LICENSE" {
