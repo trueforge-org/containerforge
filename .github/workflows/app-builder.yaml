@@ -17,8 +17,7 @@ on:
 jobs:
   plan:
     name: Plan
-    runs-on:
-      group: default
+    runs-on: ubuntu-latest
     outputs:
       app-exists: ${{ steps.app-exists.outputs.exists }}
       platforms: ${{ steps.app-options.outputs.platforms }}
