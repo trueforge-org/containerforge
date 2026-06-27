@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
+FROM ghcr.io/trueforge-org/python:3.14.6@sha256:feedc096668b059bd1db605e99996089a746f34cb565f4ab067124d3425d9cf8
 ARG VENDOR
 ARG VERSION
 
@@ -15,7 +15,7 @@ WORKDIR /app
 # Install runtime and build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg \
-        libxml2 \
+    libxml2-16 \
         libpq5 \
         libxslt1.1 \
         mediainfo \
