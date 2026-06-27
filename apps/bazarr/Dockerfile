@@ -15,7 +15,7 @@ WORKDIR /app
 # Install runtime and build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg \
-        libxml2 \
+    libxml2-16 \
         libpq5 \
         libxslt1.1 \
         mediainfo \
