@@ -37,6 +37,7 @@ RUN \
     uv venv --clear /app/venv && \
     uv run scripts/bundle_webui.py && \
     uv sync --frozen --no-dev --no-cache --group=all && \
+    uv pip install --python /app/venv/bin/python --no-cache-dir "Flask-Compress<1.17" && \
     uv pip install pip && \
     echo "**** cleanup ****" && \
     apt-get remove --purge -y build-essential libffi-dev && \
