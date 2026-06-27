@@ -31,6 +31,10 @@ RUN \
     tar xf \
         /tmp/freshrss.tar.gz -C \
         /app/www --strip-components=1 && \
+    mv /app/www/data /app/www/data.bak && \
+    mv /app/www/extensions /app/www/extensions.bak && \
+    ln -s /config/www/freshrss/data /app/www/data && \
+    ln -s /config/www/freshrss/extensions /app/www/extensions && \
     chown -R apps:apps /app && \
     sed -i "s|'disable_update' => false,|'disable_update' => true,|g" \
         /app/www/config.default.php && \
