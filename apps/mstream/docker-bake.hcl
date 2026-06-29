@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=IrosTheBeggar/mStream versioning=loose
-  default = "6.14.0"
+  default = "6.15.1"
 }
 
 variable "LICENSE" {
