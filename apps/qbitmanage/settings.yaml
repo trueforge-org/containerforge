@@ -10,6 +10,15 @@ env:
   - name: UMASK
     default: "002"
     required: false
+  - name: QBT_CONFIG
+    default: ""
+    required: false
+  - name: QBT_CONFIG_DIR
+    default: ""
+    required: false
+  - name: ARGS
+    default: ""
+    required: false
 volumes:
   - path: /config
     required: true
