@@ -95,7 +95,7 @@ ENV goyqVersion=4.53.3
 # renovate: datasource=github-releases depName=rancher/cli
 ENV rancherVersion=2.14.2
 # renovate: datasource=github-releases depName=tilt-dev/tilt
-ENV tiltVersion=0.37.4
+ENV tiltVersion=0.37.5
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
 ENV skaffoldVersion=2.23.0
 # renovate: datasource=github-releases depName=zegl/kube-score
