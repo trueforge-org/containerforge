@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/tailscale/tailscale
-  default = "v1.98.4"
+  default = "v1.98.8"
 }
 
 variable "LICENSE" {
