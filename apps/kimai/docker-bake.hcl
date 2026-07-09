@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=kimai/kimai versioning=loose
-  default = "2.61.0"
+  default = "2.62.0"
 }
 
 variable "LICENSE" {
