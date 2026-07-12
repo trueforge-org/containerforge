@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=thelounge/thelounge versioning=loose
-  default = "4.5.1"
+  default = "4.5.2"
 }
 
 variable "LICENSE" {
