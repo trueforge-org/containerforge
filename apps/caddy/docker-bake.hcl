@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "XCADDY_VERSION" {
   // renovate: datasource=github-releases depName=caddyserver/xcaddy
-  default = "0.4.5"
+  default = "0.4.6"
 }
 
 variable "LICENSE" {
