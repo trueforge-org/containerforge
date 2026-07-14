@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.6@sha256:ec53f98750c3acd589a038d00430d6554f2530c9888dce3b3651a943a62d43b4 AS builder
+FROM ghcr.io/trueforge-org/python:3.14.6@sha256:ded45532b707cd6a04d07ec3be3feb9a128b6ee053eb6eb349c8c85eeeefbc9b AS builder
 WORKDIR /app
 ARG VERSION
 
@@ -30,7 +30,7 @@ RUN curl -L https://github.com/kiwigrid/k8s-sidecar/archive/refs/tags/${VERSION}
     # Remove tests and compiled Python files
     find /app/venv \( -type d -name test -o -name tests \) -o \( -type f -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
-FROM ghcr.io/trueforge-org/python:3.14.6@sha256:ec53f98750c3acd589a038d00430d6554f2530c9888dce3b3651a943a62d43b4
+FROM ghcr.io/trueforge-org/python:3.14.6@sha256:ded45532b707cd6a04d07ec3be3feb9a128b6ee053eb6eb349c8c85eeeefbc9b
 
 USER apps
 COPY --chmod=0755 . /
