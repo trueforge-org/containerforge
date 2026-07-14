@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=pypi depName=yq
-  default = "3.4.3"
+  default = "4.1.2"
 }
 
 variable "LICENSE" {
