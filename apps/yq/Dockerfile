@@ -1,5 +1,5 @@
 ## TODO: also make go-yq container
-FROM ghcr.io/trueforge-org/python:3.14.6@sha256:ded45532b707cd6a04d07ec3be3feb9a128b6ee053eb6eb349c8c85eeeefbc9b
+FROM ghcr.io/trueforge-org/python:3.14.6@sha256:05f202826a9a6c79df728a9e9e7ad325a0abd9c0430fb22d30583ef55e459329
 
 # set version label
 ARG VERSION
