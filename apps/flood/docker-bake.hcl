@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=jesec/flood
-  default = "4.14.3"
+  default = "4.15.0"
 }
 
 variable "LICENSE" {
