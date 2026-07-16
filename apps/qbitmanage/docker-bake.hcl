@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=StuffAnThings/qbit_manage
-  default = "v4.9.1"
+  default = "v4.10.0"
 }
 
 variable "LICENSE" {
