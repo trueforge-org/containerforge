@@ -3,3 +3,6 @@
 
 filePaths:
 - /usr/local/go/bin/go
+
+mainRunner:
+  cmd: "sleep 999"
