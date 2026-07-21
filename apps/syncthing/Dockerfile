@@ -35,7 +35,7 @@ RUN \
     build syncthing
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:c17d482490e086584ab0668a69494d9e9acd5cf95e1bcf500143dc63c1963ba3
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:2b0e3e5b096604f1f054edb5746abb22e6180ac4ae923d4f797ab697d4401eb0
 
 # set version label
 ARG VERSION
