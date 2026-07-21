@@ -5,9 +5,9 @@ ARG VERSION
 
 ENV \
     HOME="/config" \
-    PLATFORMIO_CORE_DIR=/cache/pio \
-    ESPHOME_BUILD_PATH=/cache/build \
-    ESPHOME_DATA_DIR=/cache/data
+    PLATFORMIO_CORE_DIR=/tmp/pio \
+    ESPHOME_BUILD_PATH=/tmp/build \
+    ESPHOME_DATA_DIR=/tmp/data
 
 USER root
 WORKDIR /app
@@ -26,7 +26,8 @@ RUN set -eux; \
     pip install uv; \
     uv pip install \
         setuptools \
-        "esphome[displays]==${VERSION}"; \
+        "esphome[displays]==${VERSION}" \
+        "esphome-device-builder==1.6.8"; \
     rm -rf /tmp/*
 
 # Copy application code
