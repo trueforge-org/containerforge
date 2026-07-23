@@ -1,6 +1,6 @@
 FROM ghcr.io/trueforge-org/python:3.14.6@sha256:dc837e172315d2788cac52caaa312815a494090d6630a619d844a1146539d75b
 
-COPY --from=ghcr.io/astral-sh/uv:0.11.31@sha256:ecd4de2f060c64bea0ff8ecb182ddf46ba3fcccdc8a60cfdbaf20d1a047d7437 /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.11.32@sha256:df4cae8f3a96d175e2e5f992e597550000edbe78fdc2594d5cd8de1a217f504c /uv /uvx /bin/
 
 # set version label
 ARG VERSION
