@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=beetbox/beets versioning=loose
-  default = "2.12.0"
+  default = "2.13.0"
 }
 
 variable "LICENSE" {
