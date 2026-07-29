@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=pylonide/pylon versioning=loose
-  default = "2.12.1"
+  default = "2.12.2"
 }
 
 variable "LICENSE" {
