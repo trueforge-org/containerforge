@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=qdm12/gluetun
-  default = "v3.41.2"
+  default = "v3.41.3"
 }
 
 variable "LICENSE" {
