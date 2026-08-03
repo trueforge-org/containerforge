@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=getgrav/grav versioning=loose
-  default = "2.0.14"
+  default = "2.0.15"
 }
 
 variable "LICENSE" {
