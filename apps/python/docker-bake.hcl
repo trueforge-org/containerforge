@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "PIP_VERSION" {
   // renovate: datasource=pypi depName=pip
-  default = "26.1.2"
+  default = "26.2.1"
 }
 
 variable "SETUPTOOLS_VERSION" {
