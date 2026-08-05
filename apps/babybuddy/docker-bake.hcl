@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=babybuddy/babybuddy versioning=loose
-  default = "2.9.2"
+  default = "2.10.0"
 }
 
 variable "LICENSE" {
