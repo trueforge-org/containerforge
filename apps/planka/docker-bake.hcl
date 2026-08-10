@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=plankanban/planka versioning=loose
-  default = "v2.2.0"
+  default = "v2.2.1"
 }
 
 variable "LICENSE" {
