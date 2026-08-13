@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.26.5@sha256:6cf588e51bcb16f488e7b3048fc218266322b2977c7898d00105e4b2ba5eed27 as buildstage
+FROM ghcr.io/trueforge-org/golang:1.26.6@sha256:27301be9b450af41f522451aca77642bbf9138692b87fe53947641171f696037 as buildstage
 USER root
 
 ARG VERSION
