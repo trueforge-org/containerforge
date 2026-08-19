@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:e855efee08935623aad3a45e3e554e52216b53d07105a9b3beb585ea1e78352c
+FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:b38871f263ef857659703bb26bc050cba109ada3fea7df1509ffadbf4b254aa1
 
 # Default to UTF-8 file.encoding
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' JAVA_HOME='/opt/java/openjdk'
