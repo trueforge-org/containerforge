@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.26.6@sha256:27301be9b450af41f522451aca77642bbf9138692b87fe53947641171f696037 AS go
+FROM ghcr.io/trueforge-org/golang:1.26.6@sha256:f19df8c8cfa1008eb8abea0f534889043b3c71d1f5f0ea1fef537c4a978857ac AS go
 
 # hadolint ignore=DL3007
 FROM ghcr.io/trueforge-org/python:3.14.6@sha256:7126ada2ea0c2086b0f078af562c413bbbbb44b946aeb70c3175386647e434fe
