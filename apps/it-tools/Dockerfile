@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/node:24.19@sha256:225eb6fc544ed2a7e052fc90395181505b118b0a0c5547b18e1b0207937843ba AS builder
+FROM ghcr.io/trueforge-org/node:24.19@sha256:e4a650bed011451239955d1f33ed35b5fe0e849a9a28d55fd8fb9f03439b27fd AS builder
 ARG VERSION
 WORKDIR /tmp
 ENV HOME=/tmp
