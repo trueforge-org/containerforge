@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=kasmtech/KasmVNC
-  default = "1.4.0"
+  default = "1.5.0"
 }
 
 variable "KCLIENT_RELEASE" {
