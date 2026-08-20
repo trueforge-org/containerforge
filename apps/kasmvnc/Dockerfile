@@ -183,7 +183,7 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-FROM ghcr.io/trueforge-org/node:24.19.0@sha256:225eb6fc544ed2a7e052fc90395181505b118b0a0c5547b18e1b0207937843ba AS nodebuilder
+FROM ghcr.io/trueforge-org/node:24.19.0@sha256:e4a650bed011451239955d1f33ed35b5fe0e849a9a28d55fd8fb9f03439b27fd AS nodebuilder
 ARG KCLIENT_RELEASE
 USER root
 
