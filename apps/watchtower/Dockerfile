@@ -17,7 +17,7 @@ RUN cd watchtower && \
   GO111MODULE=on go test ./... -v && \
   chown -R apps:apps /app && chmod -R 755 /app
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:bc182517d87eb71b9a71e11941223716611ebe6002864b1a28d03cca78fa5a35
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:24efb13c405c262ba2d501640e0a70e0454439ed722125055b11814ff49323db
 
 ENV WATCHTOWER_LABEL_ENABLE=true
 
