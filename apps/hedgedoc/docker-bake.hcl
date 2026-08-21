@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=hedgedoc/hedgedoc versioning=loose
-  default = "1.11.1"
+  default = "1.12.0"
 }
 
 variable "LICENSE" {
