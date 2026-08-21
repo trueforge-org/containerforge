@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=pymedusa/Medusa
-  default = "1.0.25"
+  default = "1.0.26"
 }
 
 variable "LICENSE" {
