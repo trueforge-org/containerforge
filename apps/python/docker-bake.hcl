@@ -16,7 +16,7 @@ variable "PIP_VERSION" {
 
 variable "SETUPTOOLS_VERSION" {
   // renovate: datasource=pypi depName=setuptools
-  default = "83.0.0"
+  default = "84.0.0"
 }
 
 variable "WHEEL_VERSION" {
