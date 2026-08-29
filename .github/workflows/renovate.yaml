@@ -38,7 +38,7 @@ jobs:
             { "autodiscoverFilter": "${{ github.event.repository.name }}" }
 
       - name: Await Renovate Completion
-        uses: Codex-/await-remote-run@3dbfaaf0bc13b34a0e521de425dfed17654f24d5 # v2.1.0
+        uses: Codex-/await-remote-run@bb04140a0965ec5532845d826a74dc5f075f891b # v3.0.0
         with:
           token: ${{ steps.app-token.outputs.token }}
           owner: ${{ github.repository_owner }}
