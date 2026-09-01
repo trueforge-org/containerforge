@@ -2,7 +2,7 @@ module my-proxy-service
 
 go 1.23.0
 
-toolchain go1.27.0
+toolchain go1.27.1
 
 require github.com/fsnotify/fsnotify v1.10.1
 
