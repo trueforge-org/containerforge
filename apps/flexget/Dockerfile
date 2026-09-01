@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python:3.14.6@sha256:7126ada2ea0c2086b0f078af562c413bbbbb44b946aeb70c3175386647e434fe
+FROM ghcr.io/trueforge-org/python:3.14.7@sha256:6953520edce0948129694710dd783055d0f2c0360d9c63cb06b9abab5d29ec1d
 
 COPY --from=ghcr.io/astral-sh/uv:0.12.8@sha256:d1cbaeadc234fe19c0d93daabcf5e98738cd93c6d1dd4918ef6aa30735feb23a /uv /uvx /bin/
 
