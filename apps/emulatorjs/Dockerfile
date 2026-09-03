@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.27.0@sha256:d04f61e6bcfb7f8224b1ed85c5b814fed4dd222d92e10d1c11c06fa8fd48e503 as migrationbuilder
+FROM ghcr.io/trueforge-org/golang:1.27.1@sha256:b068d80b5f6d257316b4f66ac5b2099f8ebbcd780855da5e80e4bccb3e9b18d8 as migrationbuilder
 USER root
 
 RUN \
@@ -13,7 +13,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/golang:1.27.0@sha256:d04f61e6bcfb7f8224b1ed85c5b814fed4dd222d92e10d1c11c06fa8fd48e503 as binbuilder
+FROM ghcr.io/trueforge-org/golang:1.27.1@sha256:b068d80b5f6d257316b4f66ac5b2099f8ebbcd780855da5e80e4bccb3e9b18d8 as binbuilder
 USER root
 
 RUN \
