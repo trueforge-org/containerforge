@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=linuxserver/webgrabplus versioning=loose
-  default = "5.6.0"
+  default = "5.6.1"
 }
 
 variable "LICENSE" {
