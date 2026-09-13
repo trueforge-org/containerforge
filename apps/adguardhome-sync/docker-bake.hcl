@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=bakito/adguardhome-sync
-  default = "0.9.2"
+  default = "0.9.3"
 }
 
 variable "LICENSE" {
