@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=renovate/renovate
-  default = "44.85.1"
+  default = "44.86.0"
 }
 
 variable "LICENSE" {
