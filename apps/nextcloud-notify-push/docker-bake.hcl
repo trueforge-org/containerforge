@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=nextcloud/notify_push
-  default = "1.4.0"
+  default = "1.4.1"
 }
 
 variable "LICENSE" {
