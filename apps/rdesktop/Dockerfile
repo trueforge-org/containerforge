@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1888fc219883c47800b75c40a586266ebb7362f9a13f697dbe894fb777a299bf AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:82ba374994be0491824b19f17ba1f47ffa97ba2feac1d6614285bb9d82e5b69b AS buildstage
 
 ARG XRDP_PULSE_VERSION=v0.7
 USER root
@@ -47,7 +47,7 @@ RUN \
   cp -ax ../xrdp_*.deb /buildout/xrdp.deb
 
 # runtime stage
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1888fc219883c47800b75c40a586266ebb7362f9a13f697dbe894fb777a299bf
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:82ba374994be0491824b19f17ba1f47ffa97ba2feac1d6614285bb9d82e5b69b
 
 # set version label
 ARG VERSION
