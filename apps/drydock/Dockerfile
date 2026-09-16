@@ -1,5 +1,5 @@
 # Base stage - install system dependencies
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:4d41ce032e813fe5e802e72ea9a22b6e985a3cb96d385f7206949252a122cc37 AS base
+FROM ghcr.io/trueforge-org/node:24.21.0@sha256:0a4a2fa98d1ad4ffe25454f056cc26647431d138b8e4c67ee4ea7f3d218813ff AS base
 
 USER root
 
