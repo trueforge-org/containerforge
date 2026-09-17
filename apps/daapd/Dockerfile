@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:fe30ffe7e0841a2e19f3a508d9ae62b594feada6829d9b78d21cd534a8e8ac8b AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:b9eec94d34f90961211014fb889f39593bf03b8bb77a354bef723e1e4c9cda25 AS buildstage
 ############## build stage ##############
 USER root
 ARG VERSION
@@ -73,7 +73,7 @@ RUN \
   rm -rf /tmp/daapd-build/var
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:fe30ffe7e0841a2e19f3a508d9ae62b594feada6829d9b78d21cd534a8e8ac8b
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:b9eec94d34f90961211014fb889f39593bf03b8bb77a354bef723e1e4c9cda25
 
 # set version label
 ARG VERSION
