@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "NEO_VER" {
   // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
-  default = "26.31.39395.13"
+  default = "26.35.39758.10"
 }
 
 // Fixed Legacy value
