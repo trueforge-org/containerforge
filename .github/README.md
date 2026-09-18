@@ -181,7 +181,7 @@ Containers in this repository may be deprecated for the following reasons:
 
 ## Difference with Home-Operations
 
-Some might ask how our repository differs from [home-operations]https://github.com/home-operations), which we forked and follow. Our repository goals differ in the following areas:
+Some might ask how our repository differs from [home-operations](https://github.com/home-operations), which we forked and follow. Our repository goals differ in the following areas:
 
 - We aim to include any containers, even if a good upstream is available. Comparable with [linuxserver.io](https://www.linuxserver.io/)
 
@@ -207,4 +207,4 @@ An exception to this, has been made for every document inside folders labeled as
 
 ## Credits
 
-This repository draws inspiration and ideas from the [home-operations]https://github.com/home-operations), [hotio.dev](https://hotio.dev/), and [linuxserver.io](https://www.linuxserver.io/) contributors.
+This repository draws inspiration and ideas from the [home-operations](https://github.com/home-operations), [hotio.dev](https://hotio.dev/), and [linuxserver.io](https://www.linuxserver.io/) contributors.
