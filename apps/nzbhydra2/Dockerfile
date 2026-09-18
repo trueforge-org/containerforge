@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:3fcdd307d83752dbcc7436d61c3d165a702b862f5797b9fa766eed53803e00bb
+FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:c2b3a73987170fa3ec1bf8404250068c925238b92d2e3ea756197ea31b924b28
 
 ARG VERSION
 
