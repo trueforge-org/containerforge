@@ -5,7 +5,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=jellyfin/jellyfin
+  // renovate: datasource=github-releases depName=jellyfin/jellyfin versioning=loose
   default = "12.0"
 }
 
