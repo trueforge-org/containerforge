@@ -45,7 +45,7 @@ RUN curl -fsSL -o /tmp/app.zip "https://github.com/morpheus65535/bazarr/releases
 # Copy local files
 
 # Copy unrar binary from LinuxServer image
-COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b10025e8bde8a04a2b2b2c6072fca6821da5747f7 /usr/bin/unrar-ubuntu /usr/bin/unrar
+COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:48c0ce2609bb3c35764956bbd9395e95b177421e3c74b3628c3676029f24f2e0 /usr/bin/unrar-ubuntu /usr/bin/unrar
 
 USER apps
 COPY --chmod=0755 . /
