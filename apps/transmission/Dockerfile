@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.6@sha256:7126ada2ea0c2086b0f078af562c413bbbbb44b946aeb70c3175386647e434fe
+FROM ghcr.io/trueforge-org/python:3.14.7@sha256:d534b660443e3e193750ab98d30402ce6c0de64cbbfe54862aecac1f2ceae18e
 ARG TARGETARCH
 ARG MINIJINJA_ARCH=${TARGETARCH/arm64/aarch64}
 ARG MINIJINJA_ARCH=${MINIJINJA_ARCH/amd64/x86_64}
