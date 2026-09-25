@@ -1,6 +1,6 @@
-ARG VERSION=v1.102.4
+ARG VERSION=v1.102.5
 
-FROM tailscale/tailscale:${VERSION}@sha256:2667499ed87ae29218f292556ba062918402dd5e92e93637af14867e4df12dd3 AS tailscale
+FROM tailscale/tailscale:${VERSION}@sha256:c507f3a2a6ab1cabd8d809b98edeb41edbd5c3fb6ad9632ffd098b4c7d0b4065 AS tailscale
 FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:5491a2f46a8408f4085d5b92ff59358bafd56e7f26058b30347bfdefa568ed8a
 
 USER root
