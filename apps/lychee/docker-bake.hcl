@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=LycheeOrg/Lychee versioning=loose
-  default = "7.9.0"
+  default = "7.10.0"
 }
 
 variable "LICENSE" {
