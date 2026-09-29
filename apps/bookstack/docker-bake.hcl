@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=BookStackApp/BookStack versioning=loose
-  default = "26.09"
+  default = "26.09.1"
 }
 
 variable "LICENSE" {
