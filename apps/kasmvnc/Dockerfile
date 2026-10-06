@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:834bcc557478352eaaae874ed8fa4d6a92b3a3d918d6981f248bcdbe6e0d8357 AS wwwstage
+FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:2f023f43f9135473e4565c52a00323ca5269fea75383724b4696d1073222cce1 AS wwwstage
 
 ARG KASM_NOVNC_VERSION
 USER root
@@ -215,7 +215,7 @@ RUN \
   rm -f package-lock.json
 
 # runtime stage
-FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:834bcc557478352eaaae874ed8fa4d6a92b3a3d918d6981f248bcdbe6e0d8357
+FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:2f023f43f9135473e4565c52a00323ca5269fea75383724b4696d1073222cce1
 
 # set version label
 ARG VERSION
