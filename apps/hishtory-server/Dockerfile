@@ -20,7 +20,7 @@ RUN \
   unset GOPATH; go mod download && \
   unset GOPATH; go build -o /server -ldflags "-X main.ReleaseVersion=v0.`cat VERSION`" backend/server/server.go
 
-FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:49adaadc8f6f77e750228e0a5c87c3b7e3883c4acb7b1a55efe921a15a0ecd45
+FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:d40ff61568601b7032a7e6892ca08e55f772d24b32a053d1c0c6b45a2c01ae93
 
 # set version label
 ARG VERSION
