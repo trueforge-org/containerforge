@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=Requarks/wiki versioning=loose
-  default = "2.5.315"
+  default = "3.0.0-beta.639"
 }
 
 variable "LICENSE" {
