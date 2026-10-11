@@ -1,71 +1,54 @@
-############## picons stage ##############
-# built by https://github.com/linuxserver/picons-builder
-FROM ghcr.io/trueforge-org/python:3.14.4 AS piconsstage
-USER root
-RUN tar czf /picons.tar.bz2 -T /dev/null
-
-
-FROM ghcr.io/trueforge-org/ubuntu:26.04 as buildstage
 ############## build stage ##############
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33 AS buildstage
 
-# package versions
-ARG ARGTABLE_VER="2.13"
-
-# environment settings
-ARG TZ="Etc/UTC"
-ENV HOME="/config"
-
-# copy patches and picons
-COPY patches/ /tmp/patches/
-COPY --from=piconsstage /picons.tar.bz2 /picons.tar.bz2
+ARG VERSION
+USER root
 
 RUN \
   echo "**** install build packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     automake \
-    bsd-compat-headers \
     build-essential \
+    bzip2 \
     cmake \
-    libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev \
-    file \
-    findutils \
     gettext \
-    gnu-libiconv-dev \
+    git \
+    libargtable2-dev \
+    libavcodec-dev \
+    libavdevice-dev \
+    libavfilter-dev \
+    libavformat-dev \
+    libavutil-dev \
     libdvbcsa-dev \
-    libgcrypt-dev \
+    libgcrypt20-dev \
     libhdhomerun-dev \
-    libtool \
-    libva-dev \
-    libvpx-dev \
-    libxml2-dev \
-    libxslt-dev \
-    linux-headers-generic \
+    libopus-dev \
+    libpcre2-dev \
+    libsdl2-dev \
     libssl-dev \
-    opus-dev \
-    patch \
-    pcre2-dev \
-    pkgconf \
+    libswresample-dev \
+    libswscale-dev \
+    libtool \
+    liburiparser-dev \
+    libva-dev \
+    libvorbis-dev \
+    libvpx-dev \
+    libx264-dev \
+    libx265-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    pkg-config \
     pngquant \
     python3 \
-    libsdl2-dev \
-    uriparser-dev \
-    x264-dev \
-    x265-dev \
+    wget \
     zlib1g-dev
 
 RUN \
-  echo "**** remove musl iconv.h and replace with gnu-iconv.h ****" && \
-  rm -rf /usr/include/iconv.h && \
-  cp /usr/include/gnu-libiconv/iconv.h /usr/include/iconv.h
-
-RUN \
   echo "**** compile tvheadend ****" && \
-  mkdir -p \
-    /tmp/tvheadend && \
   git clone https://github.com/tvheadend/tvheadend.git /tmp/tvheadend && \
   cd /tmp/tvheadend && \
-  git checkout ${VERSION} && \
+  git checkout "${VERSION}" && \
   ./configure \
     `#Encoding` \
     --disable-ffmpeg_static \
@@ -100,106 +83,69 @@ RUN \
     --prefix=/usr \
     --python=python3 \
     --sysconfdir=/config && \
-  make -j 2 && \
+  make -j "$(nproc)" && \
   make DESTDIR=/tmp/tvheadend-build install
 
 RUN \
-  echo "**** compile argtable2 ****" && \
-  ARGTABLE_VER1="${ARGTABLE_VER//./-}" && \
-  mkdir -p \
-    /tmp/argtable && \
-  curl -s -o \
-  /tmp/argtable-src.tar.gz -L \
-    "https://sourceforge.net/projects/argtable/files/argtable/argtable-${ARGTABLE_VER}/argtable${ARGTABLE_VER1}.tar.gz" && \
-  tar xf \
-  /tmp/argtable-src.tar.gz -C \
-    /tmp/argtable --strip-components=1 && \
-  cp /tmp/patches/config.* /tmp/argtable && \
-  cd /tmp/argtable && \
-  ./configure \
-    --prefix=/usr && \
-  make -j 2 && \
-  make check && \
-  make DESTDIR=/tmp/argtable-build install && \
-  echo "**** copy to /usr for comskip dependency ****" && \
-  cp -pr /tmp/argtable-build/usr/* /usr/
-
-RUN \
-  echo "***** compile comskip ****" && \
-  git clone https://github.com/erikkaashoek/Comskip /tmp/comskip && \
+  echo "**** compile comskip ****" && \
+  git clone --depth 1 https://github.com/erikkaashoek/Comskip /tmp/comskip && \
   cd /tmp/comskip && \
   ./autogen.sh && \
   ./configure \
     --bindir=/usr/bin \
     --sysconfdir=/config/comskip && \
-  make -j 2 && \
+  make -j "$(nproc)" && \
   make DESTDIR=/tmp/comskip-build install
 
 RUN \
-  echo "***** extract picons ****" && \
-  mkdir -p /picons && \
-  tar xf \
-    /picons.tar.bz2 -C \
-    /picons
+  echo "**** determine runtime packages ****" && \
+  ldd /tmp/tvheadend-build/usr/bin/tvheadend /tmp/comskip-build/usr/bin/comskip \
+    | awk '/=> \// { print $3 }' \
+    | sort -u \
+    | xargs -r realpath \
+    | xargs -r dpkg -S 2>/dev/null \
+    | cut -d: -f1 \
+    | sort -u \
+    > /tmp/runtime-packages
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:26.04
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33
 
-# set version label
 ARG VERSION
 ARG TARGETARCH
 USER root
 
-# environment settings
 ENV HOME="/config"
+
+COPY --from=buildstage /tmp/runtime-packages /tmp/runtime-packages
 
 RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
-    bsd-compat-headers \
+    $(cat /tmp/runtime-packages) \
     ffmpeg \
-    libavcodec60 \
-    libavdevice60 \
-    libavfilter9 \
-    libavformat60 \
-    libavutil58 \
-    libpostproc57 \
-    libswresample4 \
-    libswscale7 \
-    gnu-libiconv \
-    libdvbcsa1 \
-    libhdhomerun-libs \
-    libva \
-    libva-intel-driver \
-    intel-media-driver \
-    libvpx \
-    libxml2 \
-    libxslt1.1 \
-    linux-headers-generic \
-    mesa-va-gallium \
-    opus \
-    pcre2 \
+    i965-va-driver \
+    intel-media-va-driver \
+    libdatetime-format-strptime-perl \
+    libjson-perl \
+    libjson-xs-perl \
+    mesa-va-drivers \
     perl \
-    perl-datetime-format-strptime \
-    perl-json \
-    perl-json-xs \
-    py3-requests \
     python3 \
-    uriparser \
-    x264 \
-    x265 \
-    xmltv \
-    zlib
+    python3-requests \
+    xmltv && \
+  mkdir -p /picons && \
+  echo "**** cleanup ****" && \
+  apt-get clean && \
+  rm -rf \
+    /tmp/* \
+    /var/lib/apt/lists/*
 
-USER apps
-# copy local files and buildstage artifacts
-COPY --from=buildstage /tmp/argtable-build/usr/ /usr/
 COPY --from=buildstage /tmp/comskip-build/usr/ /usr/
 COPY --from=buildstage /tmp/tvheadend-build/usr/ /usr/
-COPY --from=buildstage /picons /picons
 
+USER apps
 COPY --chmod=0755 . /
-
 
 # ports and volumes
 EXPOSE 9981 9982
