@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:834bcc557478352eaaae874ed8fa4d6a92b3a3d918d6981f248bcdbe6e0d8357 AS buildbase
+FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:2f023f43f9135473e4565c52a00323ca5269fea75383724b4696d1073222cce1 AS buildbase
 
 # set version label
 ARG VERSION
@@ -44,7 +44,7 @@ RUN \
   cd /app/www/apps/server && \
   pnpm build
 
-FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:834bcc557478352eaaae874ed8fa4d6a92b3a3d918d6981f248bcdbe6e0d8357
+FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:2f023f43f9135473e4565c52a00323ca5269fea75383724b4696d1073222cce1
 
 ARG VERSION
 ARG TARGETARCH
@@ -57,6 +57,7 @@ COPY --from=buildserver /app/www/apps/server/build/ /app/www/apps/server/build/
 COPY --from=buildbase /app/www/pnpm-lock.yaml /app/www/pnpm-lock.yaml
 COPY --from=buildbase /app/www/package.json /app/www/package.json
 COPY --from=buildbase /app/www/pnpm-workspace.yaml /app/www/pnpm-workspace.yaml
+COPY --from=buildbase /app/www/apps/client/package.json /app/www/apps/client/package.json
 COPY --from=buildbase /app/www/apps/dev/package.json /app/www/apps/dev/package.json
 COPY --from=buildbase /app/www/apps/server/package.json /app/www/apps/server/package.json
 USER root
@@ -68,7 +69,7 @@ RUN \
   npm install -g pnpm serve && \
   echo "**** install production dependencies ****" && \
   cd /app/www && \
-  pnpm install --production --frozen-lockfile && \
+  pnpm install --production --frozen-lockfile --filter '@your_spotify/server...' && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
