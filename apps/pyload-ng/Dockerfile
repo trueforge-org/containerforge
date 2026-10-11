@@ -25,7 +25,8 @@ RUN set -eux; \
     \
     # Install Python packages
     pip install --no-cache-dir uv; \
-    uv pip install --pre "pyload-ng[all]==${VERSION}"; \
+    # flask-compress>=1.18 needs zstd, but the python base image is built without _zstd
+    uv pip install --pre "pyload-ng[all]==${VERSION}" "flask-compress<1.18"; \
     \
     # Create required directories with correct permissions
     mkdir -p /config /downloads; \
