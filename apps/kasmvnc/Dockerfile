@@ -72,6 +72,9 @@ RUN \
         libavcodec-dev \
         libavformat-dev \
         libavutil-dev \
+        libva-dev \
+        libfmt-dev \
+        libyuv-dev \
         libswscale-dev \
         libcpuid-dev \
         libtbb-dev \
@@ -183,7 +186,7 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:bf1dd21596188c3e2c7731be37699100bc9db0ae0a5384d24f8bcd1afce81665 AS nodebuilder
+FROM ghcr.io/trueforge-org/node:24.21.0@sha256:e92e30c6316daafa278d6430a23526a034781cf197a067e42b3345e091c1cef9 AS nodebuilder
 ARG KCLIENT_RELEASE
 USER root
 
@@ -275,6 +278,10 @@ RUN \
         libnotify-bin \
         libstdc++6 \
         libcpuid18 \
+        libfmt10 \
+        libva2 \
+        libva-drm2 \
+        libyuv0 \
         libtbb12 \
         libwebp7 \
         libxfont2 \
