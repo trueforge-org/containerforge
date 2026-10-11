@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b AS buildstage
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca AS buildstage
 ############## build stage ##############
 ARG VERSION
 USER root
@@ -36,7 +36,7 @@ RUN \
   echo "**** compile znc ****" && \
   mkdir -p \
     /tmp/znc && \
-  git clone --branch "${VERSION}" --depth 1 \
+  git clone --branch "znc-${VERSION}" --depth 1 \
     --recurse-submodules \
     https://github.com/znc/znc.git \
     /tmp/znc && \
@@ -76,15 +76,19 @@ RUN \
 
 RUN \
   echo "**** determine runtime packages ****" && \
-  (scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
-    | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+  (ldd /tmp/znc/usr/local/bin/znc /tmp/znc/usr/local/lib/znc/*.so 2>/dev/null \
+    | awk '/=> \// { print $3 }' \
     | sort -u \
-    | xargs -r apt-get info --installed \
+    | xargs -r realpath \
+    | xargs -r dpkg -S 2>/dev/null \
+    | cut -d: -f1 \
     | sort -u || true) \
+    >> /tmp/znc/packages && \
+  echo "libpython$(python3 -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')" \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:5cb91be3e738ebbd91b616dc8ec0dd21d25980038f39d6b941f30a0b106d1ecf
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33
 
 # set version label
 ARG VERSION

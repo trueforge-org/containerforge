@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=SickChill/SickChill versioning=loose
-  default = "2024.3.1"
+  default = "2026.10.8"
 }
 
 variable "LICENSE" {

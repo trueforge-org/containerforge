@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 ARG TARGETARCH
 ARG VENDOR
 ARG VERSION
@@ -8,7 +8,7 @@ ARG VERSION
 USER root
 WORKDIR /app
 
-RUN curl -fsSL "https://github.com/StuffAnThings/qbit_manage/archive/v${VERSION}.tar.gz" | tar xzf - -C "/app" --strip-components=1 && \
+RUN curl -fsSL "https://github.com/StuffAnThings/qbit_manage/archive/${VERSION}.tar.gz" | tar xzf - -C "/app" --strip-components=1 && \
     pip3 install --break-system-packages --no-cache-dir --upgrade "/app" && \
     chmod -R u=rwX,go=rX "/app" && \
     chown -R apps:apps "/app"

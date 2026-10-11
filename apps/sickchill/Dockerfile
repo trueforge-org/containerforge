@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 
 # set version label
 ARG VERSION
@@ -31,9 +31,7 @@ RUN \
     wheel && \
   /app/venv/bin/pip install -U --no-cache-dir \
     certifi \
-    sickchill=="${VERSION}" && \
-  /app/venv/bin/pip install -U --no-cache-dir 'stevedore<5' && \
-  /app/venv/bin/pip install -U --no-cache-dir 'setuptools<81' && \
+    "sickchill @ https://github.com/SickChill/SickChill/archive/refs/tags/${VERSION}.tar.gz" && \
   echo "**** clean up ****" && \
   apt-get autoremove -y && \
   rm -rf \

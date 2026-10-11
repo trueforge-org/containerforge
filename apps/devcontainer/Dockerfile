@@ -1,7 +1,7 @@
-FROM ghcr.io/trueforge-org/golang:1.26.4@sha256:670dd56d3e2b5c3d96e734fed538bb65c8c6ee76e629f48087769edb2b8c7047 AS go
+FROM ghcr.io/trueforge-org/golang:1.27.2@sha256:09378e1fe70dab0d285f71decacff4e28f1f7d28b2ae038e2ddb656900a72aa1 AS go
 
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 
 ARG VERSION
 ARG TARGETARCH
@@ -52,7 +52,7 @@ RUN apt-get update && \
 
 # Download and install SOPS
 # renovate: datasource=github-releases depName=getsops/sops
-ENV SOPS_VERSION=3.13.1
+ENV SOPS_VERSION=3.13.3
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
     chmod +x /usr/local/bin/sops
@@ -77,11 +77,11 @@ RUN apt-get update && \
 
 ### Kubernetes-Tools Installer
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ENV kubectlVersion=1.36.2
+ENV kubectlVersion=1.37.1
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
 # renovate: datasource=github-releases depName=helm/helm
-ENV helmVersion=4.2.2
+ENV helmVersion=4.3.0
 # WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
 # renovate: datasource=github-releases depName=instrumenta/kubeval
@@ -89,27 +89,27 @@ ENV kubevalVersion=0.16.1
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ENV kubeconformVersion=0.8.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
-ENV conftestVersion=0.68.2
+ENV conftestVersion=0.71.1
 # renovate: datasource=github-releases depName=mikefarah/yq
-ENV goyqVersion=4.53.3
+ENV goyqVersion=4.54.1
 # renovate: datasource=github-releases depName=rancher/cli
-ENV rancherVersion=2.14.2
+ENV rancherVersion=2.15.2
 # renovate: datasource=github-releases depName=tilt-dev/tilt
-ENV tiltVersion=0.37.4
+ENV tiltVersion=0.37.8
 # renovate: datasource=github-releases depName=GoogleContainerTools/skaffold
-ENV skaffoldVersion=2.22.0
+ENV skaffoldVersion=2.25.0
 # renovate: datasource=github-releases depName=zegl/kube-score
 ENV kubeScoreVersion=1.20.0
 # renovate: datasource=github-releases depName=helm/chart-releaser
 ENV chartReleaserVersion=1.8.1
 # renovate: datasource=github-releases depName=helm/chart-testing
-ENV chartTestingVersion=3.14.0
+ENV chartTestingVersion=3.15.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.51.0
 # renovate: datasource=github-releases depName=starship/starship
-ENV starshipVersion=1.25.1
+ENV starshipVersion=1.26.0
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
-ENV clustertoolVersion=3.0.9
+ENV clustertoolVersion=4.0.0
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}

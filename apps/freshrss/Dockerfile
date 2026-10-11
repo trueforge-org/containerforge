@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:5cb91be3e738ebbd91b616dc8ec0dd21d25980038f39d6b941f30a0b106d1ecf
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33
 
 # set version label
 ARG VERSION
@@ -31,6 +31,10 @@ RUN \
     tar xf \
         /tmp/freshrss.tar.gz -C \
         /app/www --strip-components=1 && \
+    mv /app/www/data /app/www/data.bak && \
+    mv /app/www/extensions /app/www/extensions.bak && \
+    ln -s /config/www/freshrss/data /app/www/data && \
+    ln -s /config/www/freshrss/extensions /app/www/extensions && \
     chown -R apps:apps /app && \
     sed -i "s|'disable_update' => false,|'disable_update' => true,|g" \
         /app/www/config.default.php && \

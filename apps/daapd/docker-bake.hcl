@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=owntone/owntone-server versioning=loose
-  default = "29.2"
+  default = "29.3"
 }
 
 variable "LICENSE" {

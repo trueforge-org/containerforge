@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=SergiX44/XBackBone versioning=loose
-  default = "3.8.1"
+  default = "3.8.2"
 }
 
 variable "LICENSE" {

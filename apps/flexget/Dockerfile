@@ -1,6 +1,6 @@
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 
-COPY --from=ghcr.io/astral-sh/uv:0.11.11@sha256:798712e57f879c5393777cbda2bb309b29fcdeb0532129d4b1c3125c5385975a /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.13.0@sha256:cdc6093146eb3ff6a40107b38f008b789e050e77ad87865e381d9917da55a168 /uv /uvx /bin/
 
 # set version label
 ARG VERSION
@@ -37,6 +37,7 @@ RUN \
     uv venv --clear /app/venv && \
     uv run scripts/bundle_webui.py && \
     uv sync --frozen --no-dev --no-cache --group=all && \
+    uv pip install --python /app/venv/bin/python --no-cache-dir "Flask-Compress<1.17" && \
     uv pip install pip && \
     echo "**** cleanup ****" && \
     apt-get remove --purge -y build-essential libffi-dev && \

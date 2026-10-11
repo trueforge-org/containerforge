@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.5@sha256:c78b9087f698cc79648152163f2916da56693f70dc4127a2b81a6c4b654a263b
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 ARG VENDOR
 ARG VERSION
 
@@ -15,7 +15,7 @@ WORKDIR /app
 # Install runtime and build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg \
-        libxml2 \
+    libxml2-16 \
         libpq5 \
         libxslt1.1 \
         mediainfo \
@@ -45,7 +45,7 @@ RUN curl -fsSL -o /tmp/app.zip "https://github.com/morpheus65535/bazarr/releases
 # Copy local files
 
 # Copy unrar binary from LinuxServer image
-COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:22e6e76f2f2372a7cd6e046b10025e8bde8a04a2b2b2c6072fca6821da5747f7 /usr/bin/unrar-ubuntu /usr/bin/unrar
+COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:48c0ce2609bb3c35764956bbd9395e95b177421e3c74b3628c3676029f24f2e0 /usr/bin/unrar-ubuntu /usr/bin/unrar
 
 USER apps
 COPY --chmod=0755 . /
