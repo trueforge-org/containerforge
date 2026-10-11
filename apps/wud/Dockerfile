@@ -14,15 +14,18 @@ WORKDIR /app
 
 USER root
 
-RUN mkdir -p /app/src && \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential python3 && \
+    mkdir -p /app/src && \
     curl -fsSL "https://github.com/getwud/wud/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1 && \
-    cd src \
-    && cd /app/src/app && npm ci \
-    && cd /app/src/e2e && npm ci \
-    && cd /app/src/ui && npm ci && npm run build \
-    && cp /app/src/app/package* /app/src && \
-    cd /app/src/ && npm ci --omit=dev --omit=optional --no-audit --no-fund && \
+    cd /app/src/app && \
+    npm ci --include=dev --omit=optional --no-audit --no-fund && \
+    npm run build && \
+    npm prune --omit=dev && \
+    cd /app/src/ui && \
+    npm ci --include=dev --omit=optional --no-audit --no-fund && \
+    npm run build && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
@@ -39,11 +42,11 @@ RUN mkdir -p /store && \
 
 USER apps
 
-# Copy app
-COPY --from=dependencies  /app/src/app/ /app
-
-## Copy node_modules
-COPY --from=dependencies /app/src/node_modules /app/node_modules
+# Copy app runtime artifacts
+COPY --from=dependencies /app/src/app/node_modules /app/node_modules
+COPY --from=dependencies /app/src/app/dist /app/dist
+COPY --from=dependencies /app/src/app/package.json /app/package.json
+COPY --from=dependencies /app/src/app/.pino-prettyrc.json /app/.pino-prettyrc.json
 
 # Copy ui
 COPY --from=dependencies  /app/src/ui/dist/ /app/ui
