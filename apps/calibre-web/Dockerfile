@@ -60,8 +60,9 @@ RUN \
   curl -o \
     /usr/bin/kepubify -L \
     https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-${KEPUBIFY_ARCH} && \
-  rm -rf /etc/ImageMagick-6/policy.xml && \
-  ln -s /defaults/policy.xml /etc/ImageMagick-6/policy.xml && \
+  IM_DIR=$(ls -d /etc/ImageMagick-* | head -n1) && \
+  rm -rf "${IM_DIR}/policy.xml" && \
+  ln -s /defaults/policy.xml "${IM_DIR}/policy.xml" && \
   echo "**** cleanup ****" && \
   apt-get -y purge \
     build-essential \
