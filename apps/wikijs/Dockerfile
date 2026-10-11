@@ -22,9 +22,12 @@ RUN \
     openssh-client && \
   echo "**** install wiki.js ****" && \
   mkdir -p /app/wiki && \
+  if [ -z "${WIKIJS_RELEASE:-}" ]; then \
+    WIKIJS_RELEASE=$(curl -sI -L "https://github.com/Requarks/wiki/releases/latest" | awk -F/ '/^location:/ {print $NF}' | tr -d '\r'); \
+  fi && \
   (curl -fL -o \
     /tmp/wiki.tar.gz \
-    "https://github.com/Requarks/wiki/releases/download/v${VERSION}/wiki-js.tar.gz" || curl -fL -o \
+    "https://github.com/Requarks/wiki/releases/download/${WIKIJS_RELEASE}/wiki-js.tar.gz" || curl -fL -o \
     /tmp/wiki.tar.gz \
     "https://github.com/Requarks/wiki/releases/latest/download/wiki-js.tar.gz") && \
   tar xf \
