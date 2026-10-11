@@ -73,6 +73,8 @@ RUN \
         libavformat-dev \
         libavutil-dev \
         libva-dev \
+        libfmt-dev \
+        libyuv-dev \
         libswscale-dev \
         libcpuid-dev \
         libtbb-dev \
@@ -276,6 +278,10 @@ RUN \
         libnotify-bin \
         libstdc++6 \
         libcpuid18 \
+        libfmt10 \
+        libva2 \
+        libva-drm2 \
+        libyuv0 \
         libtbb12 \
         libwebp7 \
         libxfont2 \
