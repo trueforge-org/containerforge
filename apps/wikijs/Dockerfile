@@ -5,7 +5,6 @@ FROM ghcr.io/trueforge-org/python-node:3.14.7@sha256:834bcc557478352eaaae874ed8f
 ARG VERSION
 ARG TARGETARCH
 USER root
-ARG WIKIJS_RELEASE
 
 # environment settings
 ENV HOME="/app"
@@ -22,14 +21,11 @@ RUN \
     openssh-client && \
   echo "**** install wiki.js ****" && \
   mkdir -p /app/wiki && \
-  if [ -z "${WIKIJS_RELEASE:-}" ]; then \
-    WIKIJS_RELEASE=$(curl -sI -L "https://github.com/Requarks/wiki/releases/latest" | awk -F/ '/^location:/ {print $NF}' | tr -d '\r'); \
-  fi && \
   (curl -fL -o \
     /tmp/wiki.tar.gz \
-    "https://github.com/Requarks/wiki/releases/download/${WIKIJS_RELEASE}/wiki-js.tar.gz" || curl -fL -o \
+    "https://github.com/Requarks/wiki/releases/download/v${VERSION}/wiki-js.tar.gz" || curl -fL -o \
     /tmp/wiki.tar.gz \
-    "https://github.com/Requarks/wiki/releases/latest/download/wiki-js.tar.gz") && \
+    "https://github.com/Requarks/wiki/releases/download/${VERSION}/wiki-js.tar.gz") && \
   tar xf \
     /tmp/wiki.tar.gz -C \
     /app/wiki/ && \
