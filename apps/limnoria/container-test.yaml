@@ -1,4 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-tcp:
-- port: '8080'
+# limnoria needs an interactively generated config (limnoria-wizard) before it
+# can start, so only verify the install instead of running the bot.
+runners:
+- entrypoint: /app/venv/bin/python -c "import supybot"
+- entrypoint: test -x /app/venv/bin/limnoria
+
+mainRunner:
+  enabled: false

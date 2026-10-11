@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.7@sha256:d534b660443e3e193750ab98d30402ce6c0de64cbbfe54862aecac1f2ceae18e
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 ARG VERSION
 
 ENV DELUGE_BIN="deluged" \
@@ -14,8 +14,13 @@ RUN apt-get update && \
         build-essential \
         geoip-database \
         p7zip-full \
-    # Deluge currently imports pkg_resources, removed in setuptools 81+.
-    && pip3 install --break-system-packages geoip2 libtorrent "setuptools<81" "deluge==${VERSION}" \
+        python3-libtorrent \
+    # PyPI has no libtorrent wheels for Python 3.14; expose Ubuntu's build to the image python
+    && ln -s "$(python3 -c 'import sys; import importlib.util as u; sys.path.insert(0, "/usr/lib/python3/dist-packages"); print(u.find_spec("libtorrent").origin)')" \
+        "$(python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')/" \
+    # Deluge currently imports pkg_resources (removed in setuptools 81+) and
+    # OpenSSL.crypto.X509Req (removed in pyOpenSSL 26.3).
+    && pip3 install --break-system-packages geoip2 "setuptools<81" "pyOpenSSL<26.3" "deluge==${VERSION}" \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Copy unrar binary from LinuxServer image

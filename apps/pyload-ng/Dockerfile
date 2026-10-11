@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/python:3.14.7@sha256:d534b660443e3e193750ab98d30402ce6c0de64cbbfe54862aecac1f2ceae18e
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 ARG VERSION
 
 ENV HOME="/config"
@@ -25,7 +25,8 @@ RUN set -eux; \
     \
     # Install Python packages
     pip install --no-cache-dir uv; \
-    uv pip install --pre "pyload-ng[all]==${VERSION}"; \
+    # flask-compress>=1.18 needs zstd, but the python base image is built without _zstd
+    uv pip install --pre "pyload-ng[all]==${VERSION}" "flask-compress<1.18"; \
     \
     # Create required directories with correct permissions
     mkdir -p /config /downloads; \

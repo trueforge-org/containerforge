@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-http:
+# By default the RPC whitelist only allows localhost, so HTTP responses differ
+# between the in-container healthcheck (301/200) and external tests (403).
+# Check that the web/RPC port is listening instead.
+tcp:
 - port: '9091'
-  path: /
-  statusCode: 403

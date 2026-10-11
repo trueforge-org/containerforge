@@ -7,8 +7,8 @@ variable "APP" {
 variable "VERSION" {
   // NOTE: Alpine version is tied to the version of the base image in the Dockerfile
   // TODO: temporary disabled due to repology networking issues (it being in russia)
-  // repologydepName=ubuntu_24_04/transmission versioning=loose
-  default = "4.0.5-1build5"
+  // repologydepName=ubuntu_26_04/transmission versioning=loose
+  default = "4.1.1"
 }
 
 variable "LICENSE" {

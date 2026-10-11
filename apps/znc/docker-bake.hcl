@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=znc/znc versioning=loose
-  default = "znc-1.10.1"
+  // renovate: datasource=github-tags depName=znc/znc extractVersion=^znc-(?<version>[0-9.]+)$
+  default = "1.10.3"
 }
 
 variable "LICENSE" {

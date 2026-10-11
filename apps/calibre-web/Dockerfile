@@ -1,7 +1,7 @@
 
 
 
-FROM ghcr.io/trueforge-org/python:3.14.7@sha256:d534b660443e3e193750ab98d30402ce6c0de64cbbfe54862aecac1f2ceae18e
+FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
 
 # set version label
 ARG VERSION
@@ -60,8 +60,9 @@ RUN \
   curl -o \
     /usr/bin/kepubify -L \
     https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-${KEPUBIFY_ARCH} && \
-  rm -rf /etc/ImageMagick-6/policy.xml && \
-  ln -s /defaults/policy.xml /etc/ImageMagick-6/policy.xml && \
+  IM_DIR=$(ls -d /etc/ImageMagick-* | head -n1) && \
+  rm -rf "${IM_DIR}/policy.xml" && \
+  ln -s /defaults/policy.xml "${IM_DIR}/policy.xml" && \
   echo "**** cleanup ****" && \
   apt-get -y purge \
     build-essential \

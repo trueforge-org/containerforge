@@ -43,6 +43,6 @@ fi
 
 CONF_FILE=$(find /config -maxdepth 1 -name '*.conf')
 
-exec limnoria \
+exec /app/venv/bin/limnoria \
         "${CONF_FILE}"
 

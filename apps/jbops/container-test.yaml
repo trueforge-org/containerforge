@@ -1,5 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-
+# The JBOPS scripts need a reachable Plex server, so don't run the container
+# itself; just verify the scripts and their dependencies are installed.
 filePaths:
 - /app/fun/plexapi_haiku.py
+
+runners:
+- entrypoint: /usr/local/bin/python -c "import plexapi"
+
+mainRunner:
+  enabled: false
