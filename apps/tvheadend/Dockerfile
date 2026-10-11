@@ -135,8 +135,6 @@ RUN \
     $(cat /tmp/runtime-packages) \
     bzip2 \
     ffmpeg \
-    i965-va-driver \
-    intel-media-va-driver \
     libdatetime-format-strptime-perl \
     libjson-perl \
     libjson-xs-perl \
@@ -145,6 +143,12 @@ RUN \
     python3 \
     python3-requests \
     xmltv && \
+  if [ "${TARGETARCH}" = "amd64" ]; then \
+    echo "**** install intel VA-API drivers (amd64 only) ****" && \
+    apt-get install -y --no-install-recommends \
+      i965-va-driver \
+      intel-media-va-driver; \
+  fi && \
   mkdir -p /picons && \
   echo "**** cleanup ****" && \
   apt-get clean && \
