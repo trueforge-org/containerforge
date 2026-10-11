@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/facebook/docusaurus"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: DOCUSAURUS_PORT
+    default: "3000"
+    required: false
+  - name: WEBSITE_NAME
+    default: "MyWebsite"
+    required: true
+  - name: TEMPLATE
+    default: "classic"
+    required: false
+  - name: RUN_MODE
+    default: "development"
+    required: false
+  - name: AUTO_UPDATE
+    default: "true"
+    required: false
+volumes:
+  - path: /config
+    required: true
