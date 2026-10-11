@@ -2,11 +2,17 @@
 
 # The JBOPS scripts need a reachable Plex server, so don't run the container
 # itself; just verify the scripts and their dependencies are installed.
-filePaths:
-- /app/fun/plexapi_haiku.py
-
+# With mainRunner disabled, filePaths would not be checked, so both checks are
+# runner output checks. forgetool splits cmd on whitespace (no shell quoting),
+# so commands are kept space-free, and the expected strings are built at
+# runtime so a traceback echoing the source cannot match.
 runners:
-- entrypoint: /usr/local/bin/python -c "import plexapi"
+- entrypoint: /usr/local/bin/python
+  cmd: "-c __import__('plexapi');print('plexapi'+'-ok')"
+  expectedOutput: plexapi-ok
+- entrypoint: /usr/local/bin/python
+  cmd: "-c print('script'+'-ok'*__import__('os').path.isfile('/app/fun/plexapi_haiku.py'))"
+  expectedOutput: script-ok
 
 mainRunner:
   enabled: false

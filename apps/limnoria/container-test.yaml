@@ -2,9 +2,15 @@
 
 # limnoria needs an interactively generated config (limnoria-wizard) before it
 # can start, so only verify the install instead of running the bot.
+# Runners only assert something when expectedOutput is set, and forgetool
+# splits cmd on whitespace (no shell quoting), so commands are kept space-free.
 runners:
-- entrypoint: /app/venv/bin/python -c "import supybot"
-- entrypoint: test -x /app/venv/bin/limnoria
+- entrypoint: /app/venv/bin/limnoria
+  cmd: --version
+  expectedOutput: running on Python
+- entrypoint: /app/venv/bin/python
+  cmd: "-c __import__('supybot');print('supybot'+'-ok')"
+  expectedOutput: supybot-ok
 
 mainRunner:
   enabled: false
