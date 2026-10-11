@@ -31,9 +31,7 @@ RUN \
     wheel && \
   /app/venv/bin/pip install -U --no-cache-dir \
     certifi \
-    sickchill=="${VERSION}" && \
-  /app/venv/bin/pip install -U --no-cache-dir 'stevedore<5' && \
-  /app/venv/bin/pip install -U --no-cache-dir 'setuptools<81' && \
+    "sickchill @ https://github.com/SickChill/SickChill/archive/refs/tags/${VERSION}.tar.gz" && \
   echo "**** clean up ****" && \
   apt-get autoremove -y && \
   rm -rf \

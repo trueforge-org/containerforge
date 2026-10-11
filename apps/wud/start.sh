@@ -33,4 +33,11 @@ if [[ "$COMPOSE_DIR" != "" ]]; then
     done
 fi
 
-node index "$@" | /app/node_modules/.bin/bunyan -L -o short
+if [[ "${WUD_LOG_FORMAT}" != "json" ]]; then
+    node dist/index "$@" | /app/node_modules/.bin/pino-pretty \
+        --translateTime "SYS:yyyy-mm-dd HH:MM:ss.l" \
+        --ignore pid,hostname,name,component \
+        --messageFormat '{if component}[{component}] {end}{msg}'
+else
+    exec node dist/index "$@"
+fi

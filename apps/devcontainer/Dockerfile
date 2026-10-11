@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.27.1@sha256:8d5743e0891a7ab4095c7dacc53ef0117a82da19a1bb3f957e3f62631496b23d AS go
+FROM ghcr.io/trueforge-org/golang:1.27.2@sha256:09378e1fe70dab0d285f71decacff4e28f1f7d28b2ae038e2ddb656900a72aa1 AS go
 
 # hadolint ignore=DL3007
 FROM ghcr.io/trueforge-org/python:3.14.8@sha256:c298a5e065ea46d0280a6f0e4b696c549d169a280e63ee6b49791865753112ca
@@ -89,7 +89,7 @@ ENV kubevalVersion=0.16.1
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ENV kubeconformVersion=0.8.0
 # renovate: datasource=github-releases depName=open-policy-agent/conftest
-ENV conftestVersion=0.71.0
+ENV conftestVersion=0.71.1
 # renovate: datasource=github-releases depName=mikefarah/yq
 ENV goyqVersion=4.54.1
 # renovate: datasource=github-releases depName=rancher/cli
@@ -103,7 +103,7 @@ ENV kubeScoreVersion=1.20.0
 # renovate: datasource=github-releases depName=helm/chart-releaser
 ENV chartReleaserVersion=1.8.1
 # renovate: datasource=github-releases depName=helm/chart-testing
-ENV chartTestingVersion=3.14.0
+ENV chartTestingVersion=3.15.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.51.0
 # renovate: datasource=github-releases depName=starship/starship
