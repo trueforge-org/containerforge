@@ -2,6 +2,8 @@
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33 AS buildstage
 
 ARG VERSION
+# renovate: datasource=git-refs depName=https://github.com/erikkaashoek/Comskip currentValue=master
+ARG COMSKIP_COMMIT="a140b6ac8bc8f596729e9052819affc779c3b377"
 USER root
 
 RUN \
@@ -88,8 +90,16 @@ RUN \
 
 RUN \
   echo "**** compile comskip ****" && \
-  git clone --depth 1 https://github.com/erikkaashoek/Comskip /tmp/comskip && \
+  git clone https://github.com/erikkaashoek/Comskip /tmp/comskip && \
   cd /tmp/comskip && \
+  git checkout "${COMSKIP_COMMIT}" && \
+  echo "**** patch comskip for FFmpeg 8 (AVCodecContext.ticks_per_frame removed) ****" && \
+  sed -i \
+    -e '/->ticks_per_frame = 1;/d' \
+    -e 's/is->\(dec_ctx\(par\)\{0,1\}\)->ticks_per_frame/TICKS_PER_FRAME(is->\1)/g' \
+    mpeg2dec.c && \
+  sed -i '1i #define TICKS_PER_FRAME(c) (((c)->codec_descriptor \&\& ((c)->codec_descriptor->props \& AV_CODEC_PROP_FIELDS)) ? 2 : 1)' \
+    mpeg2dec.c && \
   ./autogen.sh && \
   ./configure \
     --bindir=/usr/bin \
@@ -123,6 +133,7 @@ RUN \
   echo "**** install runtime packages ****" && \
   apt-get update && apt-get install -y --no-install-recommends \
     $(cat /tmp/runtime-packages) \
+    bzip2 \
     ffmpeg \
     i965-va-driver \
     intel-media-va-driver \
