@@ -19,10 +19,10 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         p7zip-full \
-        transmission-daemon="${VERSION}" \
-        transmission-cli="${VERSION}" \
-        transmission-common="${VERSION}" \
-    && rm -rf /var/lib/apt/lists/*; \
+        transmission-daemon="${VERSION}*" \
+        transmission-cli="${VERSION}*" \
+        transmission-common="${VERSION}*"; \
+    rm -rf /var/lib/apt/lists/*; \
     \
     # Download minijinja-cli
     curl -fsSL "https://github.com/mitsuhiko/minijinja/releases/download/2.8.0/minijinja-cli-${MINIJINJA_ARCH}-unknown-linux-gnu.tar.xz" \

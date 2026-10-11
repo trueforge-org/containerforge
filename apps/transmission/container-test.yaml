@@ -2,5 +2,4 @@
 
 http:
 - port: '9091'
-  path: /
-  statusCode: 403
+  path: /transmission/web/
