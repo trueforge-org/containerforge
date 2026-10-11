@@ -3,4 +3,8 @@
 
 runners:
 - entrypoint: test -f /usr/local/bin/python3
-- entrypoint: python3 -c "import compression.zstd"
+# forgetool splits cmd on whitespace (no shell quoting), so keep the code space-free;
+# build the expected string at runtime so a traceback echoing the source can't match
+- entrypoint: python3
+  cmd: "-c __import__('compression.zstd');print('zstd'+'-ok')"
+  expectedOutput: zstd-ok
