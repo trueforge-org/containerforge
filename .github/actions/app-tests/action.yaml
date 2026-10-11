@@ -22,8 +22,14 @@ runs:
   steps:
     - name: Setup Forgetool
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
       run: |-
-        TAG="$(curl -fsSL \
+        # Authenticate API calls: anonymous requests share a 60/hour per-IP rate
+        # limit and fail with 403 when many test jobs run in parallel.
+        TAG="$(curl -fsSL --retry 3 --retry-all-errors \
+          -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+          -H "Accept: application/vnd.github+json" \
           https://api.github.com/repos/trueforge-org/forgetool/releases/latest \
           | jq -r '.tag_name')"
         [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "Failed to determine latest stable forgetool release tag"; exit 1; }
@@ -34,7 +40,7 @@ runs:
           aarch64|arm64) ARCH="arm64" ;;
           *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64, arm64." && exit 1 ;;
         esac
-        curl -fsSL -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
+        curl -fsSL --retry 3 --retry-all-errors -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
         mkdir -p "${RUNNER_TEMP}/forgetool-bin"
         tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool || { echo "Failed to extract forgetool binary from archive"; exit 1; }
         chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
