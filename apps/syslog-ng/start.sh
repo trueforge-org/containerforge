@@ -31,5 +31,9 @@ cat <<-EOF
 ********************************************************
 EOF
 fi
+# syslog-ng-mod-python is built against Ubuntu's libpython; prefer it over the
+# base image's /usr/local python so the matching stdlib/extension modules load
+export LD_LIBRARY_PATH="/usr/lib/$(uname -m)-linux-gnu${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+
 exec 2>&1 \
          /usr/sbin/syslog-ng -F -f /config/syslog-ng.conf --persist-file /config/syslog-ng.persist --pidfile=/config/syslog-ng.pid --control=/config/syslog-ng.ctl --stderr --no-caps
