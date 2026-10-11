@@ -161,6 +161,7 @@ COPY --from=buildstage /tmp/tvheadend-build/usr/ /usr/
 
 USER apps
 COPY --chmod=0755 . /
+COPY --chmod=0755 root/ /
 
 # ports and volumes
 EXPOSE 9981 9982
