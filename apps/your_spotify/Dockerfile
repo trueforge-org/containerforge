@@ -57,6 +57,7 @@ COPY --from=buildserver /app/www/apps/server/build/ /app/www/apps/server/build/
 COPY --from=buildbase /app/www/pnpm-lock.yaml /app/www/pnpm-lock.yaml
 COPY --from=buildbase /app/www/package.json /app/www/package.json
 COPY --from=buildbase /app/www/pnpm-workspace.yaml /app/www/pnpm-workspace.yaml
+COPY --from=buildbase /app/www/apps/client/package.json /app/www/apps/client/package.json
 COPY --from=buildbase /app/www/apps/dev/package.json /app/www/apps/dev/package.json
 COPY --from=buildbase /app/www/apps/server/package.json /app/www/apps/server/package.json
 USER root
@@ -68,7 +69,7 @@ RUN \
   npm install -g pnpm serve && \
   echo "**** install production dependencies ****" && \
   cd /app/www && \
-  pnpm install --production --frozen-lockfile && \
+  pnpm install --production --frozen-lockfile --filter '@your_spotify/server...' && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \
