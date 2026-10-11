@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=autobrr/qui
-  default = "v1.31.1"
+  // renovate: datasource=github-releases depName=autobrr/qui extractVersion=^v(?<version>.+)$
+  default = "1.31.1"
 }
 
 variable "LICENSE" {
