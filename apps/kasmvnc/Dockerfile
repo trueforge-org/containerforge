@@ -72,6 +72,7 @@ RUN \
         libavcodec-dev \
         libavformat-dev \
         libavutil-dev \
+        libva-dev \
         libswscale-dev \
         libcpuid-dev \
         libtbb-dev \
