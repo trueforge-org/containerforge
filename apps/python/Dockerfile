@@ -42,6 +42,7 @@ RUN set -eux; \
         libsqlite3-dev \
         libgdbm-dev \
         liblzma-dev \
+        libzstd-dev \
         zlib1g-dev \
         dpkg-dev \
     ; \

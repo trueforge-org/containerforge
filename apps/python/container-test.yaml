@@ -3,3 +3,4 @@
 
 runners:
 - entrypoint: test -f /usr/local/bin/python3
+- entrypoint: python3 -c "import compression.zstd"
