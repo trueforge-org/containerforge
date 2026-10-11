@@ -16,11 +16,9 @@ RUN \
   echo "**** install app ****" && \
   mkdir -p \
     /app/sickgear/ && \
-  (curl -fL -o \
+  curl -fL -o \
     /tmp/sickgear.tar.gz \
-    "https://github.com/sickgear/sickgear/archive/refs/tags/${VERSION}.tar.gz" || curl -fL -o \
-    /tmp/sickgear.tar.gz \
-    "https://github.com/sickgear/sickgear/archive/refs/tags/v${VERSION}.tar.gz") && \
+    "https://github.com/sickgear/sickgear/archive/refs/tags/release_${VERSION}.tar.gz" && \
   tar xf \
     /tmp/sickgear.tar.gz -C \
     /app/sickgear/ --strip-components=1 && \

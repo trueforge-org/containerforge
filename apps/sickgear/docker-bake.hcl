@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=sickgear/sickgear versioning=loose
-  default = "release_3.34.5"
+  // renovate: datasource=github-releases depName=sickgear/sickgear extractVersion=^release_(?<version>.+)$
+  default = "3.36.8"
 }
 
 variable "LICENSE" {
