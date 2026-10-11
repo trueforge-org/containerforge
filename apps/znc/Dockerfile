@@ -36,7 +36,7 @@ RUN \
   echo "**** compile znc ****" && \
   mkdir -p \
     /tmp/znc && \
-  git clone --branch "${VERSION}" --depth 1 \
+  git clone --branch "znc-${VERSION}" --depth 1 \
     --recurse-submodules \
     https://github.com/znc/znc.git \
     /tmp/znc && \
@@ -76,11 +76,15 @@ RUN \
 
 RUN \
   echo "**** determine runtime packages ****" && \
-  (scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
-    | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+  (ldd /tmp/znc/usr/local/bin/znc /tmp/znc/usr/local/lib/znc/*.so 2>/dev/null \
+    | awk '/=> \// { print $3 }' \
     | sort -u \
-    | xargs -r apt-get info --installed \
+    | xargs -r realpath \
+    | xargs -r dpkg -S 2>/dev/null \
+    | cut -d: -f1 \
     | sort -u || true) \
+    >> /tmp/znc/packages && \
+  echo "libpython$(python3 -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')" \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
