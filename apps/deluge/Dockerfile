@@ -14,8 +14,12 @@ RUN apt-get update && \
         build-essential \
         geoip-database \
         p7zip-full \
+        python3-libtorrent \
+    # PyPI has no libtorrent wheels for Python 3.14; expose Ubuntu's build to the image python
+    && ln -s "$(python3 -c 'import sys; import importlib.util as u; sys.path.insert(0, "/usr/lib/python3/dist-packages"); print(u.find_spec("libtorrent").origin)')" \
+        "$(python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')/" \
     # Deluge currently imports pkg_resources, removed in setuptools 81+.
-    && pip3 install --break-system-packages geoip2 libtorrent "setuptools<81" "deluge==${VERSION}" \
+    && pip3 install --break-system-packages geoip2 "setuptools<81" "deluge==${VERSION}" \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Copy unrar binary from LinuxServer image
