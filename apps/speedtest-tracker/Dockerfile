@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:e92e30c6316daafa278d6430a23526a034781cf197a067e42b3345e091c1cef9
+FROM ghcr.io/trueforge-org/node:24.22.0@sha256:dcc5de347a84bfe9e114478ef48d5dfecb83c740b4e732930b9b451e56b1a4f8
 
 ARG VERSION
 ARG TARGETARCH
