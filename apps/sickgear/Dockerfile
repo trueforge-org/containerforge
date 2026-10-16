@@ -27,7 +27,8 @@ RUN \
   /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
+  # PIP_PREFER_BINARY would otherwise pick the CT3 0.0.0 shim (old Cheetah3, imports cgi) when no wheel exists
+  /app/venv/bin/pip install --no-cache-dir -r requirements.txt "CT3>=3.4" && \
   /app/venv/bin/pip install --no-cache-dir -r recommended.txt && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
