@@ -14,6 +14,7 @@ RUN \
     apt-get install -y --no-install-recommends \
         build-essential \
         cargo \
+        libcurl4-openssl-dev \
         libjpeg-dev \
         libffi-dev \
         default-libmysqlclient-dev \
@@ -54,6 +55,7 @@ RUN \
     apt-get purge -y --auto-remove \
         build-essential \
         cargo \
+        libcurl4-openssl-dev \
         libjpeg-dev \
         libffi-dev \
         default-libmysqlclient-dev \
