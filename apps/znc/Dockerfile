@@ -83,12 +83,11 @@ RUN \
     | xargs -r dpkg -S 2>/dev/null \
     | cut -d: -f1 \
     | sort -u || true) \
-    >> /tmp/znc/packages && \
-  echo "libpython$(python3 -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')" \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33
+# runtime needs the same source-built libpython/stdlib that modpython links against
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
 
 # set version label
 ARG VERSION
