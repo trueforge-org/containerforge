@@ -1,5 +1,6 @@
 
 
+# stay on python 3.14 until Ubuntu ships python3-libtorrent for 3.15 (no PyPI wheels)
 FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232
 ARG VERSION
 

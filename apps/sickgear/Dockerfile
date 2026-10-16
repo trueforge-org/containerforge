@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
 
 # set version label
 ARG VERSION
@@ -27,7 +27,8 @@ RUN \
   /app/venv/bin/pip install -U --no-cache-dir \
     pip \
     wheel && \
-  /app/venv/bin/pip install --no-cache-dir -r requirements.txt && \
+  # PIP_PREFER_BINARY would otherwise pick the CT3 0.0.0 shim (old Cheetah3, imports cgi) when no wheel exists
+  /app/venv/bin/pip install --no-cache-dir -r requirements.txt "CT3>=3.4" && \
   /app/venv/bin/pip install --no-cache-dir -r recommended.txt && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
