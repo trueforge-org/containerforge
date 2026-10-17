@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python-node:3.15.0@sha256:110f52ef43408fbbcb274ce9e8f3db463e811120224ca8781c22ebbdc27045b0 AS buildbase
+FROM ghcr.io/trueforge-org/python-node:3.15.0@sha256:cfc6750458b5b6f9b3ad4d2e55653608f09fcad3358967407eb9bdef0e3f8a3c AS buildbase
 
 # set version label
 ARG VERSION
@@ -44,7 +44,7 @@ RUN \
   cd /app/www/apps/server && \
   pnpm build
 
-FROM ghcr.io/trueforge-org/python-node:3.15.0@sha256:110f52ef43408fbbcb274ce9e8f3db463e811120224ca8781c22ebbdc27045b0
+FROM ghcr.io/trueforge-org/python-node:3.15.0@sha256:cfc6750458b5b6f9b3ad4d2e55653608f09fcad3358967407eb9bdef0e3f8a3c
 
 ARG VERSION
 ARG TARGETARCH
