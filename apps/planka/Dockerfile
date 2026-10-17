@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.15.0@sha256:cfc6750458b5b6f9b3ad4d2e55653608f09fcad3358967407eb9bdef0e3f8a3c AS buildstage
+FROM ghcr.io/trueforge-org/python-node:3.15.0@sha256:df6afe7f3d7c2d358e1be7d66ff0a3eb134cbc9795ebe5fbf5cda08a3df5ba74 AS buildstage
 
 # set version label
 ARG VERSION
