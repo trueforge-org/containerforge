@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=getwud/wud
-  default = "9.4.1"
+  default = "9.5.0"
 }
 
 variable "LICENSE" {
