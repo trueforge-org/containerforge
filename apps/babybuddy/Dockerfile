@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
 
 # set version label
 ARG VERSION
@@ -37,7 +37,7 @@ RUN \
   /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ -r requirements.txt && \
   /app/venv/bin/pip install -U --no-cache-dir django-dbsettings==1.4.0 && \
   /app/venv/bin/pip install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/ubuntu/ mysqlclient && \
-  python3 -c "from pathlib import Path; p=Path('/app/venv/lib/python3.14/site-packages/dbsettings/group.py'); t=p.read_text(); p.write_text(t.replace('for attribute_name, attr in attrs.items():\\n', 'for attribute_name, attr in attrs.items():\\n            if attribute_name.startswith(\\\"__\\\") and attribute_name.endswith(\\\"__\\\"):\\n                continue\\n', 1))" && \
+  /app/venv/bin/python3 -c "import sysconfig; from pathlib import Path; p=Path(sysconfig.get_paths()['purelib'], 'dbsettings', 'group.py'); t=p.read_text(); p.write_text(t.replace('for attribute_name, attr in attrs.items():\\n', 'for attribute_name, attr in attrs.items():\\n            if attribute_name.startswith(\\\"__\\\") and attribute_name.endswith(\\\"__\\\"):\\n                continue\\n', 1))" && \
   rm -rf /app/www/public/data /app/www/public/media && \
   ln -s /config/data /app/www/public/data && \
   ln -s /config/media /app/www/public/media && \

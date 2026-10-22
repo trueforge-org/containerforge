@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
 
 # set version label
 ARG VERSION
@@ -14,6 +14,7 @@ RUN \
     apt-get install -y --no-install-recommends \
         build-essential \
         cargo \
+        libcurl4-openssl-dev \
         libjpeg-dev \
         libffi-dev \
         default-libmysqlclient-dev \
@@ -54,6 +55,7 @@ RUN \
     apt-get purge -y --auto-remove \
         build-essential \
         cargo \
+        libcurl4-openssl-dev \
         libjpeg-dev \
         libffi-dev \
         default-libmysqlclient-dev \

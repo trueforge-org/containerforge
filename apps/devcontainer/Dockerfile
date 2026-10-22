@@ -1,7 +1,7 @@
 FROM ghcr.io/trueforge-org/golang:1.27.3@sha256:a510ab4fec09e8fc886a7d8dc005211b2c44a96a5d1a2b94f3c5e75ea7baa2ca AS go
 
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
 
 ARG VERSION
 ARG TARGETARCH

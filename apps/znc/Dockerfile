@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232 AS buildstage
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d AS buildstage
 ############## build stage ##############
 ARG VERSION
 USER root
@@ -83,12 +83,11 @@ RUN \
     | xargs -r dpkg -S 2>/dev/null \
     | cut -d: -f1 \
     | sort -u || true) \
-    >> /tmp/znc/packages && \
-  echo "libpython$(python3 -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')" \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:fbb8b286bdadd3cda896e800061cc867ad228255b76c968de072f2bf16794598
+FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
+
 
 # set version label
 ARG VERSION

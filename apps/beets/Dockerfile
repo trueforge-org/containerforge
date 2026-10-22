@@ -1,4 +1,5 @@
 
+# stay on python 3.14 until beets supports 3.15 (all releases declare Requires-Python <3.15)
 FROM ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232
 
 # set version label
