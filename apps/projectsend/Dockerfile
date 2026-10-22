@@ -26,7 +26,10 @@ RUN \
   mkdir -p /app/www/public && \
   curl -fso \
     /tmp/projectsend.zip -L \
-    "https://github.com/projectsend/projectsend/releases/download/v${VERSION}/projectsend-${VERSION}.zip" && \
+    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip" || \
+  curl -fso \
+    /tmp/projectsend.zip -L \
+    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip" && \
   unzip \
     /tmp/projectsend.zip -d \
     /app/www/public && \
