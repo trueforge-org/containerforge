@@ -119,7 +119,7 @@ docker_process_sql() {
 		query_runner+=( --dbname "$POSTGRES_DB" )
 	fi
 
-	PGHOST= PGHOSTADDR= "${query_runner[@]}" "$@"
+	PGHOST=/tmp PGHOSTADDR= "${query_runner[@]}" "$@"
 }
 
 docker_setup_db() {
@@ -198,7 +198,7 @@ docker_temp_server_start() {
 	if [ "$1" = 'postgres' ]; then
 		shift
 	fi
-	set -- "$@" -c listen_addresses='' -p "${PGPORT:-5432}"
+	set -- "$@" -c listen_addresses='' -c unix_socket_directories=/tmp -p "${PGPORT:-5432}"
 	NOTIFY_SOCKET= \
 	PGUSER="${PGUSER:-$POSTGRES_USER}" \
 	pg_ctl -D "$PGDATA" \
