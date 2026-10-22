@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/golang:1.27.2@sha256:09378e1fe70dab0d285f71decacff4e28f1f7d28b2ae038e2ddb656900a72aa1 AS go
+FROM ghcr.io/trueforge-org/golang:1.27.3@sha256:a510ab4fec09e8fc886a7d8dc005211b2c44a96a5d1a2b94f3c5e75ea7baa2ca AS go
 
 # hadolint ignore=DL3007
 FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
@@ -81,7 +81,7 @@ ENV kubectlVersion=1.37.1
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ENV kustomizeVersion=5.8.0
 # renovate: datasource=github-releases depName=helm/helm
-ENV helmVersion=4.3.0
+ENV helmVersion=4.3.1
 # WATCH OUT: this needs to be kept for backward compatibility with older helm charts
 ENV oldhelmVersion=3.12.1
 # renovate: datasource=github-releases depName=instrumenta/kubeval
@@ -107,7 +107,7 @@ ENV chartTestingVersion=3.15.0
 # renovate: datasource=github-releases depName=derailed/k9s
 ENV k9sVersion=0.51.0
 # renovate: datasource=github-releases depName=starship/starship
-ENV starshipVersion=1.26.0
+ENV starshipVersion=1.27.0
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
 ENV clustertoolVersion=4.0.0
 

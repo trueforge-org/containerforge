@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:e92e30c6316daafa278d6430a23526a034781cf197a067e42b3345e091c1cef9 AS dependencies
+FROM ghcr.io/trueforge-org/node:24.22.1@sha256:7b7273ef83088a8ce734cd4933fe3ab1c1faf478173d2d04cb3a22ea1e7a3bf7 AS dependencies
 
 USER root
 
@@ -29,7 +29,7 @@ RUN apt-get update && \
     chown -R apps:apps /app && chmod -R 755 /app && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:e92e30c6316daafa278d6430a23526a034781cf197a067e42b3345e091c1cef9
+FROM ghcr.io/trueforge-org/node:24.22.1@sha256:7b7273ef83088a8ce734cd4933fe3ab1c1faf478173d2d04cb3a22ea1e7a3bf7
 
 ARG VERSION
 

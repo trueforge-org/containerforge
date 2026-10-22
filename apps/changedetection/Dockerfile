@@ -1,5 +1,5 @@
 
-FROM ghcr.io/trueforge-org/python-node:3.14.8@sha256:feb6e44439ea272f47b46a1511960f58af5df8056811c83973e2edec9b18afca
+FROM ghcr.io/trueforge-org/python-node:3.15.1@sha256:1b8b9d9d1d3d933534d4389735f1d9798d8a31ded092cecd405608bbef9c0919
 
 ARG VERSION
 ARG TARGETARCH

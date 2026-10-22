@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.14.8@sha256:feb6e44439ea272f47b46a1511960f58af5df8056811c83973e2edec9b18afca AS buildstage
+FROM ghcr.io/trueforge-org/python-node:3.15.1@sha256:1b8b9d9d1d3d933534d4389735f1d9798d8a31ded092cecd405608bbef9c0919 AS buildstage
 
 # set version label
 ARG VERSION
@@ -44,7 +44,7 @@ RUN \
     $HOME/.npm \
     /tmp/*
 
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:e92e30c6316daafa278d6430a23526a034781cf197a067e42b3345e091c1cef9
+FROM ghcr.io/trueforge-org/node:24.22.1@sha256:7b7273ef83088a8ce734cd4933fe3ab1c1faf478173d2d04cb3a22ea1e7a3bf7
 
 ARG VERSION
 ARG TARGETARCH

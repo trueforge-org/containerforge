@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/python-node:3.14.8@sha256:feb6e44439ea272f47b46a1511960f58af5df8056811c83973e2edec9b18afca AS wwwstage
+FROM ghcr.io/trueforge-org/python-node:3.15.1@sha256:1b8b9d9d1d3d933534d4389735f1d9798d8a31ded092cecd405608bbef9c0919 AS wwwstage
 
 ARG KASM_NOVNC_VERSION
 USER root
@@ -26,7 +26,7 @@ RUN \
   if [ -f index.html ]; then cp index.html vnc.html; elif [ -f vnc.html ]; then cp vnc.html index.html; fi && \
   mkdir Downloads
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:ea16b55109312b5eda59cf3cdd576c10979b7532e0a9561de068b9679794ea33 AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:fbb8b286bdadd3cda896e800061cc867ad228255b76c968de072f2bf16794598 AS buildstage
 
 ARG VERSION
 ARG XORG_VER
@@ -186,7 +186,7 @@ RUN \
     -C /build-out/
 
 # nodejs builder
-FROM ghcr.io/trueforge-org/node:24.21.0@sha256:e92e30c6316daafa278d6430a23526a034781cf197a067e42b3345e091c1cef9 AS nodebuilder
+FROM ghcr.io/trueforge-org/node:24.22.1@sha256:7b7273ef83088a8ce734cd4933fe3ab1c1faf478173d2d04cb3a22ea1e7a3bf7 AS nodebuilder
 ARG KCLIENT_RELEASE
 USER root
 
@@ -218,7 +218,7 @@ RUN \
   rm -f package-lock.json
 
 # runtime stage
-FROM ghcr.io/trueforge-org/python-node:3.14.8@sha256:feb6e44439ea272f47b46a1511960f58af5df8056811c83973e2edec9b18afca
+FROM ghcr.io/trueforge-org/python-node:3.15.1@sha256:1b8b9d9d1d3d933534d4389735f1d9798d8a31ded092cecd405608bbef9c0919
 
 # set version label
 ARG VERSION
