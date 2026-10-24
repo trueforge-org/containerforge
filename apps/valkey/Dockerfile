@@ -7,7 +7,8 @@ ARG PACKAGE_VERSION
 USER root
 
 # hadolint ignore=DL3008,DL3015
-RUN apt-get update && \
+RUN test "${PACKAGE_VERSION%%-*}" = "${VERSION}" && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         "valkey-server=${PACKAGE_VERSION}" \
     && apt-get purge -y --auto-remove \
