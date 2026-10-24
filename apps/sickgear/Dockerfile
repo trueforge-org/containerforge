@@ -8,6 +8,8 @@ USER root
 
 # set python to use utf-8 rather than ascii.
 ENV PYTHONIOENCODING="UTF-8"
+# skip SickGear's exact-patch Python version gate (rejects e.g. 3.15.1)
+ENV PYT=1
 
 RUN \
   echo "**** install build packages ****" && \
