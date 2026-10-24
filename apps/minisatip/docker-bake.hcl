@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=catalinii/minisatip
-  default = "2.0.169"
+  default = "2.0.170"
 }
 
 variable "LICENSE" {
