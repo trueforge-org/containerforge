@@ -2,6 +2,8 @@
 
 FROM ghcr.io/trueforge-org/python:3.15.0@sha256:cc77b726944ed790a1b47a8dfc52868391e2558d09193e1524f5ca74e0ccad5d
 ARG VERSION
+# renovate: datasource=pypi depName=esphome-device-builder
+ARG ESPHOME_DEVICE_BUILDER_VERSION=1.26.0
 
 ENV \
     HOME="/config" \
@@ -27,7 +29,7 @@ RUN set -eux; \
     uv pip install \
         setuptools \
         "esphome[displays]==${VERSION}" \
-        "esphome-device-builder==1.6.8"; \
+        "esphome-device-builder==${ESPHOME_DEVICE_BUILDER_VERSION}"; \
     rm -rf /tmp/*
 
 # Copy application code
