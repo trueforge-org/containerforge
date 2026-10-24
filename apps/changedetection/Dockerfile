@@ -3,6 +3,8 @@ FROM ghcr.io/trueforge-org/python-node:3.15.1@sha256:3ae479227e69d69b2ddb0f94bf1
 
 ARG VERSION
 ARG TARGETARCH
+# renovate: datasource=pypi depName=playwright
+ARG PLAYWRIGHT_VERSION=1.64.1
 USER root
 
 ENV PYTHONUNBUFFERED=1
@@ -38,12 +40,8 @@ RUN \
     pip \
     setuptools \
     wheel && \
-  /app/venv/bin/pip install -U --no-cache-dir -r /app/changedetection/requirements.txt && \
-  PLAYWRIGHT_PY_RELEASE=$(curl -sX GET "https://api.github.com/repos/microsoft/playwright-python/releases/latest" \
-    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  if [ -n "${PLAYWRIGHT_PY_RELEASE}" ]; then git clone --depth 1 --branch "${PLAYWRIGHT_PY_RELEASE}" https://github.com/microsoft/playwright-python /tmp/playwright-python; else git clone --depth 1 https://github.com/microsoft/playwright-python /tmp/playwright-python; fi && \
-  cd /tmp/playwright-python && \
-  /app/venv/bin/pip install -U --no-cache-dir . && \
+  PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 /app/venv/bin/pip install -U --no-cache-dir -r /app/changedetection/requirements.txt && \
+  /app/venv/bin/pip install -U --no-cache-dir "playwright==${PLAYWRIGHT_VERSION}" && \
   PLAYWRIGHT_NODE=$(find /app/venv/lib -path '*/site-packages/playwright/driver/node' | head -n1) && \
   if [ -n "${PLAYWRIGHT_NODE}" ]; then rm -f "${PLAYWRIGHT_NODE}" && ln -s /usr/bin/node "${PLAYWRIGHT_NODE}"; fi && \
   # Force UTF-8 encoding for browser steps to prevent exception
