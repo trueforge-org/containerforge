@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/python
-  default = "3.15.1"
+  default = "3.15.2"
 }
 
 variable "PIP_VERSION" {
