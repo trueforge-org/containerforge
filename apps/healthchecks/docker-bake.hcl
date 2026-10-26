@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=healthchecks/healthchecks versioning=loose
-  default = "5.0.1"
+  default = "5.0.2"
 }
 
 variable "LICENSE" {
