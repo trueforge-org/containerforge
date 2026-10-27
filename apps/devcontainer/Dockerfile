@@ -124,12 +124,14 @@ ENV sternVersion=1.35.0
 ENV cnpgVersion=1.30.1
 # renovate: datasource=github-releases depName=cert-manager/cmctl
 ENV cmctlVersion=2.6.2
-# renovate: datasource=github-releases depName=vmware-tanzu/velero
+# renovate: datasource=github-releases depName=velero-io/velero
 ENV veleroVersion=1.18.4
 # renovate: datasource=github-releases depName=restic/restic
 ENV resticVersion=0.19.1
 # renovate: datasource=github-releases depName=kopia/kopia
 ENV kopiaVersion=0.23.1
+# renovate: datasource=github-releases depName=home-operations/flate
+ENV flateVersion=0.6.5
 
 ### Container image tools
 # renovate: datasource=docker depName=docker.io/library/docker versioning=docker
@@ -217,9 +219,10 @@ RUN set -eux; \
             stern) url="https://github.com/stern/stern/releases/download/v${version}/stern_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
             kubectl-cnpg) url="https://github.com/cloudnative-pg/cloudnative-pg/releases/download/v${version}/kubectl-cnpg_${version}_linux_${XARCH}.tar.gz"; ;; \
             cmctl) url="https://github.com/cert-manager/cmctl/releases/download/v${version}/cmctl_linux_${TARGETARCH}"; ;; \
-            velero) url="https://github.com/vmware-tanzu/velero/releases/download/v${version}/velero-v${version}-linux-${TARGETARCH}.tar.gz"; command_path_in_package="velero-v${version}-linux-${TARGETARCH}/velero"; ;; \
+            velero) url="https://github.com/velero-io/velero/releases/download/v${version}/velero-v${version}-linux-${TARGETARCH}.tar.gz"; command_path_in_package="velero-v${version}-linux-${TARGETARCH}/velero"; ;; \
             restic) url="https://github.com/restic/restic/releases/download/v${version}/restic_${version}_linux_${TARGETARCH}.bz2"; ;; \
             kopia) url="https://github.com/kopia/kopia/releases/download/v${version}/kopia-${version}-linux-${TARGETARCH/amd64/x64}.tar.gz"; command_path_in_package="kopia-${version}-linux-${TARGETARCH/amd64/x64}/kopia"; ;; \
+            flate) url="https://github.com/home-operations/flate/releases/download/v${version}/flate_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
             hadolint) url="https://github.com/hadolint/hadolint/releases/download/v${version}/hadolint-linux-${XARCH}"; ;; \
             crane) url="https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_${XARCH}.tar.gz"; ;; \
             cosign) url="https://github.com/sigstore/cosign/releases/download/v${version}/cosign-linux-${TARGETARCH}"; ;; \
@@ -269,6 +272,7 @@ RUN set -eux; \
     download_and_copy "velero" "$veleroVersion"; \
     download_and_copy "restic" "$resticVersion"; \
     download_and_copy "kopia" "$kopiaVersion"; \
+    download_and_copy "flate" "$flateVersion"; \
     download_and_copy "hadolint" "$hadolintVersion"; \
     download_and_copy "crane" "$craneVersion"; \
     download_and_copy "cosign" "$cosignVersion"; \
@@ -289,6 +293,8 @@ RUN set -eux; \
     for tool in flux talosctl talhelper helmfile kubecolor krew; do \
         ln -sf "/tools/bin/${tool}" "/usr/local/bin/${tool}"; \
     done; \
+    # kubectl finds plugins as kubectl-<name> on PATH, so this makes "kubectl krew" work \
+    ln -sf /tools/bin/krew /tools/bin/kubectl-krew; \
     # The fish config aliases task to go-task \
     ln -sf /tools/bin/task /tools/bin/go-task;
 
@@ -313,12 +319,9 @@ RUN mkdir -p "${HELM_PLUGINS}/unittest" && \
 ENV yamllintVersion=1.38.0
 # renovate: datasource=pypi depName=yamale
 ENV yamaleVersion=6.1.0
-# renovate: datasource=pypi depName=flux-local
-ENV fluxLocalVersion=8.4.0
 RUN pip install --no-cache-dir \
         "yamllint==${yamllintVersion}" \
-        "yamale==${yamaleVersion}" \
-        "flux-local==${fluxLocalVersion}"
+        "yamale==${yamaleVersion}"
 
 # Install homebrew
 # renovate: datasource=github-releases depName=Homebrew/brew
@@ -334,7 +337,7 @@ RUN mkdir -p /root/.config/fish/completions \
              /root/.config/fish/conf.d
 
 # Add completions only if the command exists
-RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl hubble crane cosign trivy velero cmctl docker kubectl-cnpg; do \
+RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl hubble crane cosign trivy velero cmctl docker kubectl-cnpg flate; do \
       if command -v "$tool" >/dev/null 2>&1; then \
         $tool completion fish > "/root/.config/fish/completions/${tool}.fish" || true; \
       fi; \

@@ -33,4 +33,5 @@ runners:
 - entrypoint: test -f /opt/helm/plugins/unittest/plugin.yaml
 - entrypoint: test -x /usr/local/bin/yamllint
 - entrypoint: test -x /usr/local/bin/yamale
-- entrypoint: test -x /usr/local/bin/flux-local
+- entrypoint: test -x /tools/bin/flate
+- entrypoint: test -L /tools/bin/kubectl-krew
