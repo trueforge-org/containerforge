@@ -1,5 +1,6 @@
 
-FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5
+# stay on python 3.14 until litellm supports 3.15 (all releases >=1.100 declare Requires-Python <3.15)
+FROM ghcr.io/trueforge-org/python-node:3.14.8@sha256:feb6e44439ea272f47b46a1511960f58af5df8056811c83973e2edec9b18afca
 
 ARG VERSION
 ARG TARGETARCH
