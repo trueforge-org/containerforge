@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
   "name": "ContainerForge",
-  "image": "oci.trueforge.org/containerforge/devcontainer:4.1.1@sha256:50f0643613d4a07bf7c2fcbe3f7d714b81f301d90231e731a3d1cc250652b25f",
+  "image": "oci.trueforge.org/containerforge/devcontainer:4.1.1@sha256:5e43b793e6070d568ea6c0e389b4788a0782decff1f6b0f701f9c83dd86d381b",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {"moby": false}
