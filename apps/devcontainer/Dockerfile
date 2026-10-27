@@ -224,10 +224,10 @@ RUN set -eux; \
             crane) url="https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_${XARCH}.tar.gz"; ;; \
             cosign) url="https://github.com/sigstore/cosign/releases/download/v${version}/cosign-linux-${TARGETARCH}"; ;; \
             trivy) url="https://github.com/aquasecurity/trivy/releases/download/v${version}/trivy_${version}_Linux-$([ "${TARGETARCH}" = "amd64" ] && echo 64bit || echo ARM64).tar.gz"; ;; \
-            shellcheck) url="https://github.com/koalaman/shellcheck/releases/download/v${version}/shellcheck-v${version}.linux.${AARCH}.tar.gz"; command_path_in_package="shellcheck-v${version}/shellcheck"; ;; \
-            docker) url="https://download.docker.com/linux/static/stable/${AARCH}/docker-${version}.tgz"; command_path_in_package="docker/docker"; ;; \
+            shellcheck) url="https://github.com/koalaman/shellcheck/releases/download/v${version}/shellcheck-v${version}.linux.${AARCH/arm64/aarch64}.tar.gz"; command_path_in_package="shellcheck-v${version}/shellcheck"; ;; \
+            docker) url="https://download.docker.com/linux/static/stable/${AARCH/arm64/aarch64}/docker-${version}.tgz"; command_path_in_package="docker/docker"; ;; \
             docker-buildx) url="https://github.com/docker/buildx/releases/download/v${version}/buildx-v${version}.linux-${TARGETARCH}"; ;; \
-            docker-compose) url="https://github.com/docker/compose/releases/download/v${version}/docker-compose-linux-${AARCH}"; ;; \
+            docker-compose) url="https://github.com/docker/compose/releases/download/v${version}/docker-compose-linux-${AARCH/arm64/aarch64}"; ;; \
             helm-docs) url="https://github.com/norwoodj/helm-docs/releases/download/v${version}/helm-docs_${version}_Linux_${XARCH}.tar.gz"; ;; \
             *) echo "Unknown tool: $tool"; exit 1 ;; \
         esac; \
