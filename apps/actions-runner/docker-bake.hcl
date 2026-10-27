@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=actions/runner
-  default = "2.338.1"
+  default = "2.338.2"
 }
 
 variable "BUILDX_VERSION" {
