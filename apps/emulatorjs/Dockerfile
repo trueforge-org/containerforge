@@ -49,7 +49,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/trueforge-org/node:24.22.1@sha256:7b7273ef83088a8ce734cd4933fe3ab1c1faf478173d2d04cb3a22ea1e7a3bf7 as nodebuilder
+FROM ghcr.io/trueforge-org/node:24.22.1@sha256:5b3efcfc48aa4e5f4a21e1e77615662772c45561c4021f663f456fc3227b5955 as nodebuilder
 
 USER root
 ARG VERSION
