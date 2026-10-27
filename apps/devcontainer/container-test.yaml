@@ -2,3 +2,35 @@
 
 runners:
 - entrypoint: test -x /tools/bin/forgetool
+- entrypoint: test -x /usr/local/bin/flux
+- entrypoint: test -x /usr/local/bin/talosctl
+- entrypoint: test -x /usr/local/bin/talhelper
+- entrypoint: test -x /usr/local/bin/helmfile
+- entrypoint: test -x /usr/local/bin/kubecolor
+- entrypoint: test -x /usr/local/bin/krew
+- entrypoint: test -x /tools/bin/task
+- entrypoint: test -x /tools/bin/go-task
+- entrypoint: test -x /tools/bin/cilium
+- entrypoint: test -x /tools/bin/hubble
+- entrypoint: test -x /tools/bin/stern
+- entrypoint: test -x /tools/bin/kubectl-cnpg
+- entrypoint: test -x /tools/bin/cmctl
+- entrypoint: test -x /tools/bin/velero
+- entrypoint: test -x /tools/bin/restic
+- entrypoint: test -x /tools/bin/kopia
+- entrypoint: test -x /tools/bin/docker
+- entrypoint: test -x /usr/local/lib/docker/cli-plugins/docker-buildx
+- entrypoint: test -x /usr/local/lib/docker/cli-plugins/docker-compose
+- entrypoint: test -x /tools/bin/hadolint
+- entrypoint: test -x /tools/bin/crane
+- entrypoint: test -x /tools/bin/cosign
+- entrypoint: test -x /tools/bin/trivy
+- entrypoint: test -x /tools/bin/shellcheck
+- entrypoint: test -x /tools/bin/helm-docs
+- entrypoint: test -f /etc/ct/chart_schema.yaml
+- entrypoint: test -f /etc/ct/lintconf.yaml
+- entrypoint: test -f /opt/helm/plugins/diff/plugin.yaml
+- entrypoint: test -f /opt/helm/plugins/unittest/plugin.yaml
+- entrypoint: test -x /usr/local/bin/yamllint
+- entrypoint: test -x /usr/local/bin/yamale
+- entrypoint: test -x /usr/local/bin/flux-local

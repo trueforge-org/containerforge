@@ -31,6 +31,7 @@ RUN apt-get update && \
         jo \
         moreutils \
         zstd \
+        bzip2 \
         && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -56,19 +57,6 @@ ENV SOPS_VERSION=3.13.3
 
 RUN wget https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -O /usr/local/bin/sops && \
     chmod +x /usr/local/bin/sops
-
-# Install additional CLI tools via jpillora scripts
-RUN for app in \
-    "budimanjojo/talhelper!!?as=talhelper&type=script" \
-    "fluxcd/flux2!!?as=flux&type=script" \
-    "helmfile/helmfile!!?as=helmfile&type=script" \
-    "kubecolor/kubecolor!!?as=kubecolor&type=script" \
-    "kubernetes-sigs/krew!!?as=krew&type=script" \
-    "siderolabs/talos!!?as=talosctl&type=script"; \
-  do \
-    echo "=== Installing ${app} ==="; \
-    curl -fsSL "https://i.jpillora.com/${app}" | bash; \
-  done
 
 # Install Pre-Commit
 RUN apt-get update && \
@@ -111,6 +99,64 @@ ENV starshipVersion=1.27.0
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
 ENV clustertoolVersion=4.0.0
 
+### Cluster maintenance tools
+# renovate: datasource=github-releases depName=fluxcd/flux2
+ENV fluxVersion=2.10.0
+# renovate: datasource=github-releases depName=siderolabs/talos
+ENV talosctlVersion=1.14.5
+# renovate: datasource=github-releases depName=budimanjojo/talhelper
+ENV talhelperVersion=3.1.17
+# renovate: datasource=github-releases depName=helmfile/helmfile
+ENV helmfileVersion=1.8.2
+# renovate: datasource=github-releases depName=kubecolor/kubecolor
+ENV kubecolorVersion=0.8.0
+# renovate: datasource=github-releases depName=kubernetes-sigs/krew
+ENV krewVersion=0.5.0
+# renovate: datasource=github-releases depName=go-task/task
+ENV taskVersion=3.54.0
+# renovate: datasource=github-releases depName=cilium/cilium-cli
+ENV ciliumVersion=0.20.1
+# renovate: datasource=github-releases depName=cilium/hubble
+ENV hubbleVersion=1.20.2
+# renovate: datasource=github-releases depName=stern/stern
+ENV sternVersion=1.35.0
+# renovate: datasource=github-releases depName=cloudnative-pg/cloudnative-pg
+ENV cnpgVersion=1.30.1
+# renovate: datasource=github-releases depName=cert-manager/cmctl
+ENV cmctlVersion=2.6.2
+# renovate: datasource=github-releases depName=vmware-tanzu/velero
+ENV veleroVersion=1.18.4
+# renovate: datasource=github-releases depName=restic/restic
+ENV resticVersion=0.19.1
+# renovate: datasource=github-releases depName=kopia/kopia
+ENV kopiaVersion=0.23.1
+
+### Container image tools
+# renovate: datasource=docker depName=docker.io/library/docker versioning=docker
+ENV dockerVersion=29.9.2
+# renovate: datasource=github-releases depName=docker/buildx
+ENV buildxVersion=0.38.1
+# renovate: datasource=github-releases depName=docker/compose
+ENV composeVersion=5.6.1
+# renovate: datasource=github-releases depName=hadolint/hadolint
+ENV hadolintVersion=2.15.1
+# renovate: datasource=github-releases depName=google/go-containerregistry
+ENV craneVersion=0.22.1
+# renovate: datasource=github-releases depName=sigstore/cosign
+ENV cosignVersion=3.1.4
+# renovate: datasource=github-releases depName=aquasecurity/trivy
+ENV trivyVersion=0.76.1
+# renovate: datasource=github-releases depName=koalaman/shellcheck
+ENV shellcheckVersion=0.11.0
+
+### Helm chart tools
+# renovate: datasource=github-releases depName=norwoodj/helm-docs
+ENV helmDocsVersion=1.14.2
+# renovate: datasource=github-releases depName=databus23/helm-diff
+ENV helmDiffVersion=3.15.15
+# renovate: datasource=github-releases depName=helm-unittest/helm-unittest
+ENV helmUnittestVersion=1.2.1
+
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
 
@@ -122,11 +168,13 @@ RUN set -eux; \
     mkdir -p /tools/bin; \
     download_and_extract() { \
         url=$1; dest_dir=$2; command_path=$3; \
-        curl -L "$url" -o temp_archive; \
+        curl -fL "$url" -o temp_archive; \
         if [[ "$url" == *.tar.gz || "$url" == *.tgz ]]; then \
             tar -xzf temp_archive -C "$dest_dir" --strip-components=$(dirname "$command_path" | grep -o "/" | wc -l) || tar -xvpf temp_archive -C "$dest_dir" --strip-components=$(dirname "$command_path" | grep -o "/" | wc -l); \
         elif [[ "$url" == *.zip ]]; then \
             unzip temp_archive -d "$dest_dir"; \
+        elif [[ "$url" == *.bz2 ]]; then \
+            bunzip2 -c temp_archive > "$dest_dir/$(basename "$command_path")"; \
         else \
             cp temp_archive "$dest_dir/$(basename "$command_path")"; \
         fi; \
@@ -157,6 +205,30 @@ RUN set -eux; \
             starship) url="https://github.com/starship/starship/releases/download/v${version}/starship-${AARCH/arm64/aarch64}-unknown-linux-${CTYPE}.tar.gz"; command_path_in_package="starship"; ;; \
             forgetool) url="https://github.com/trueforge-org/forgetool/releases/download/v${version}/forgetool_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="forgetool"; ;; \
             clustertool) url="https://github.com/trueforge-org/clustertool/releases/download/v${version}/clustertool_${version}_linux_${TARGETARCH}.tar.gz"; command_path_in_package="clustertool"; ;; \
+            flux) url="https://github.com/fluxcd/flux2/releases/download/v${version}/flux_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
+            talosctl) url="https://github.com/siderolabs/talos/releases/download/v${version}/talosctl-linux-${TARGETARCH}"; ;; \
+            talhelper) url="https://github.com/budimanjojo/talhelper/releases/download/v${version}/talhelper_linux_${TARGETARCH}.tar.gz"; ;; \
+            helmfile) url="https://github.com/helmfile/helmfile/releases/download/v${version}/helmfile_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
+            kubecolor) url="https://github.com/kubecolor/kubecolor/releases/download/v${version}/kubecolor_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
+            krew) url="https://github.com/kubernetes-sigs/krew/releases/download/v${version}/krew-linux_${TARGETARCH}.tar.gz"; command_path_in_package="krew-linux_${TARGETARCH}"; ;; \
+            task) url="https://github.com/go-task/task/releases/download/v${version}/task_linux_${TARGETARCH}.tar.gz"; ;; \
+            cilium) url="https://github.com/cilium/cilium-cli/releases/download/v${version}/cilium-linux-${TARGETARCH}.tar.gz"; ;; \
+            hubble) url="https://github.com/cilium/hubble/releases/download/v${version}/hubble-linux-${TARGETARCH}.tar.gz"; ;; \
+            stern) url="https://github.com/stern/stern/releases/download/v${version}/stern_${version}_linux_${TARGETARCH}.tar.gz"; ;; \
+            kubectl-cnpg) url="https://github.com/cloudnative-pg/cloudnative-pg/releases/download/v${version}/kubectl-cnpg_${version}_linux_${XARCH}.tar.gz"; ;; \
+            cmctl) url="https://github.com/cert-manager/cmctl/releases/download/v${version}/cmctl_linux_${TARGETARCH}"; ;; \
+            velero) url="https://github.com/vmware-tanzu/velero/releases/download/v${version}/velero-v${version}-linux-${TARGETARCH}.tar.gz"; command_path_in_package="velero-v${version}-linux-${TARGETARCH}/velero"; ;; \
+            restic) url="https://github.com/restic/restic/releases/download/v${version}/restic_${version}_linux_${TARGETARCH}.bz2"; ;; \
+            kopia) url="https://github.com/kopia/kopia/releases/download/v${version}/kopia-${version}-linux-${TARGETARCH/amd64/x64}.tar.gz"; command_path_in_package="kopia-${version}-linux-${TARGETARCH/amd64/x64}/kopia"; ;; \
+            hadolint) url="https://github.com/hadolint/hadolint/releases/download/v${version}/hadolint-linux-${XARCH}"; ;; \
+            crane) url="https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_${XARCH}.tar.gz"; ;; \
+            cosign) url="https://github.com/sigstore/cosign/releases/download/v${version}/cosign-linux-${TARGETARCH}"; ;; \
+            trivy) url="https://github.com/aquasecurity/trivy/releases/download/v${version}/trivy_${version}_Linux-$([ "${TARGETARCH}" = "amd64" ] && echo 64bit || echo ARM64).tar.gz"; ;; \
+            shellcheck) url="https://github.com/koalaman/shellcheck/releases/download/v${version}/shellcheck-v${version}.linux.${AARCH}.tar.gz"; command_path_in_package="shellcheck-v${version}/shellcheck"; ;; \
+            docker) url="https://download.docker.com/linux/static/stable/${AARCH}/docker-${version}.tgz"; command_path_in_package="docker/docker"; ;; \
+            docker-buildx) url="https://github.com/docker/buildx/releases/download/v${version}/buildx-v${version}.linux-${TARGETARCH}"; ;; \
+            docker-compose) url="https://github.com/docker/compose/releases/download/v${version}/docker-compose-linux-${AARCH}"; ;; \
+            helm-docs) url="https://github.com/norwoodj/helm-docs/releases/download/v${version}/helm-docs_${version}_Linux_${XARCH}.tar.gz"; ;; \
             *) echo "Unknown tool: $tool"; exit 1 ;; \
         esac; \
         mkdir -p /tools/${tool}; \
@@ -182,16 +254,78 @@ RUN set -eux; \
     download_and_copy "starship" "$starshipVersion"; \
     download_and_copy "clustertool" "$clustertoolVersion"; \
     download_and_copy "forgetool" "$VERSION"; \
+    download_and_copy "flux" "$fluxVersion"; \
+    download_and_copy "talosctl" "$talosctlVersion"; \
+    download_and_copy "talhelper" "$talhelperVersion"; \
+    download_and_copy "helmfile" "$helmfileVersion"; \
+    download_and_copy "kubecolor" "$kubecolorVersion"; \
+    download_and_copy "krew" "$krewVersion"; \
+    download_and_copy "task" "$taskVersion"; \
+    download_and_copy "cilium" "$ciliumVersion"; \
+    download_and_copy "hubble" "$hubbleVersion"; \
+    download_and_copy "stern" "$sternVersion"; \
+    download_and_copy "kubectl-cnpg" "$cnpgVersion"; \
+    download_and_copy "cmctl" "$cmctlVersion"; \
+    download_and_copy "velero" "$veleroVersion"; \
+    download_and_copy "restic" "$resticVersion"; \
+    download_and_copy "kopia" "$kopiaVersion"; \
+    download_and_copy "hadolint" "$hadolintVersion"; \
+    download_and_copy "crane" "$craneVersion"; \
+    download_and_copy "cosign" "$cosignVersion"; \
+    download_and_copy "trivy" "$trivyVersion"; \
+    download_and_copy "shellcheck" "$shellcheckVersion"; \
+    download_and_copy "helm-docs" "$helmDocsVersion"; \
+    download_and_copy "docker" "$dockerVersion"; \
+    download_and_copy "docker-buildx" "$buildxVersion"; \
+    download_and_copy "docker-compose" "$composeVersion"; \
+    # Docker CLI only (no daemon): use the host socket, or the daemon the actions-runner image adds \
+    mkdir -p /usr/local/lib/docker/cli-plugins; \
+    ln -sf /tools/bin/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx; \
+    ln -sf /tools/bin/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
         download_and_copy "kubeval" "$kubevalVersion"; \
-    fi;
+    fi; \
+    # Keep the paths these tools had when they were installed via jpillora (used by downstream images) \
+    for tool in flux talosctl talhelper helmfile kubecolor krew; do \
+        ln -sf "/tools/bin/${tool}" "/usr/local/bin/${tool}"; \
+    done; \
+    # The fish config aliases task to go-task \
+    ln -sf /tools/bin/task /tools/bin/go-task;
 
 ENV PATH="/tools/bin:${PATH}"
 
+# chart-testing needs its default configs (chart_schema.yaml, lintconf.yaml) in /etc/ct
+RUN mkdir -p /etc/ct && \
+    curl -fsSL "https://github.com/helm/chart-testing/releases/download/v${chartTestingVersion}/chart-testing_${chartTestingVersion}_linux_${TARGETARCH}.tar.gz" \
+        | tar -xzf - -C /etc/ct --strip-components=1 etc/
+
+# Helm plugins in a fixed location, so they work regardless of $HOME (devcontainer, actions-runner)
+ENV HELM_PLUGINS=/opt/helm/plugins
+RUN mkdir -p "${HELM_PLUGINS}/unittest" && \
+    curl -fsSL "https://github.com/databus23/helm-diff/releases/download/v${helmDiffVersion}/helm-diff-linux-${TARGETARCH}.tgz" \
+        | tar -xzf - -C "${HELM_PLUGINS}" && \
+    curl -fsSL "https://github.com/helm-unittest/helm-unittest/releases/download/v${helmUnittestVersion}/helm-unittest-linux-${TARGETARCH}-${helmUnittestVersion}.tgz" \
+        | tar -xzf - -C "${HELM_PLUGINS}/unittest" && \
+    chmod -R a+rwX /opt/helm
+
+# Python based tools (yamllint and yamale are required by chart-testing)
+# renovate: datasource=pypi depName=yamllint
+ENV yamllintVersion=1.38.0
+# renovate: datasource=pypi depName=yamale
+ENV yamaleVersion=6.1.0
+# renovate: datasource=pypi depName=flux-local
+ENV fluxLocalVersion=8.4.0
+RUN pip install --no-cache-dir \
+        "yamllint==${yamllintVersion}" \
+        "yamale==${yamaleVersion}" \
+        "flux-local==${fluxLocalVersion}"
+
 # Install homebrew
+# renovate: datasource=github-releases depName=Homebrew/brew
+ENV brewVersion=7.0.11
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
       mkdir -p /usr/local/Homebrew && \
-      curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C /usr/local/Homebrew && \
+      curl -fsSL "https://github.com/Homebrew/brew/archive/refs/tags/${brewVersion}.tar.gz" | tar xz --strip 1 -C /usr/local/Homebrew && \
       ln -s /usr/local/Homebrew/bin/brew /usr/local/bin/brew; \
     fi
 
@@ -200,13 +334,14 @@ RUN mkdir -p /root/.config/fish/completions \
              /root/.config/fish/conf.d
 
 # Add completions only if the command exists
-RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl; do \
+RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosctl hubble crane cosign trivy velero cmctl docker kubectl-cnpg; do \
       if command -v "$tool" >/dev/null 2>&1; then \
         $tool completion fish > "/root/.config/fish/completions/${tool}.fish" || true; \
       fi; \
     done && \
     gh completion --shell fish > /root/.config/fish/completions/gh.fish || true && \
     stern --completion fish > /root/.config/fish/completions/stern.fish || true && \
+    task --completion fish > /root/.config/fish/completions/task.fish || true && \
     yq shell-completion fish > /root/.config/fish/completions/yq.fish || true
 
 # Fish hooks, aliases and fish promt -> Needs to be done in one file in /etc/fish/config.fish
@@ -214,7 +349,7 @@ RUN for tool in cilium flux helm helmfile k9s kubectl kustomize talhelper talosc
 RUN printf '%s\n' \
     "if status is-interactive" \
     "    set -x KREW_ROOT $HOME/.krew" \
-    "    set -x PATH $KREW_ROOT/bin $PATH" \
+    "    fish_add_path -g \$KREW_ROOT/bin" \
     "    direnv hook fish | source" \
     "    starship init fish | source" \
     "end" \
@@ -229,15 +364,27 @@ RUN printf '%s\n' \
     > /etc/fish/config.fish
 
 # Install fisher plugins
-RUN /usr/bin/fish -c "curl -sL https://git.io/fisher | source; \
-    fisher install jorgebucaran/fisher; \
+# decors/fish-colored-man has no releases or tags, so it stays on its default branch
+# renovate: datasource=github-releases depName=jorgebucaran/fisher
+ENV fisherVersion=4.4.8
+# renovate: datasource=github-releases depName=edc/bass versioning=loose
+ENV bassVersion=v1.0
+# renovate: datasource=github-releases depName=jorgebucaran/autopair.fish
+ENV autopairVersion=1.0.4
+# renovate: datasource=github-tags depName=nickeb96/puffer-fish
+ENV pufferFishVersion=v1.1.0
+# renovate: datasource=github-releases depName=PatrickF1/fzf.fish versioning=loose
+ENV fzfFishVersion=v11.0
+RUN /usr/bin/fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/${fisherVersion}/functions/fisher.fish | source; \
+    fisher install jorgebucaran/fisher@${fisherVersion}; \
     fisher install decors/fish-colored-man; \
-    fisher install edc/bass; \
-    fisher install jorgebucaran/autopair.fish; \
-    fisher install nickeb96/puffer-fish; \
-    fisher install PatrickF1/fzf.fish"
+    fisher install edc/bass@${bassVersion}; \
+    fisher install jorgebucaran/autopair.fish@${autopairVersion}; \
+    fisher install nickeb96/puffer-fish@${pufferFishVersion}; \
+    fisher install PatrickF1/fzf.fish@${fzfFishVersion}"
 
-# Install kubectl plugins via krew
+# Install kubectl plugins via krew (cnpg is installed pinned as kubectl-cnpg above)
+ENV KREW_ROOT=/config/.krew
+ENV PATH="${KREW_ROOT}/bin:${PATH}"
 RUN krew install pv-mounter \
-    && krew install cnpg \
     && krew install df-pv
