@@ -101,7 +101,7 @@ ENV skaffoldVersion=2.25.0
 # renovate: datasource=github-releases depName=zegl/kube-score
 ENV kubeScoreVersion=1.20.0
 # renovate: datasource=github-releases depName=helm/chart-releaser
-ENV chartReleaserVersion=1.8.1
+ENV chartReleaserVersion=1.9.0
 # renovate: datasource=github-releases depName=helm/chart-testing
 ENV chartTestingVersion=3.15.0
 # renovate: datasource=github-releases depName=derailed/k9s
