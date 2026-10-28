@@ -42,7 +42,8 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/* && \
     echo "$PREV_MAJOR" >> /PREV_MAJOR
 
-ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
+ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH" \
+    PGHOST=/tmp
 
 # --- Install additions, extentions, other post-install deps and configure ---
 RUN apt-get update && \
@@ -78,4 +79,4 @@ COPY --chmod=0775 . /
 
 
 EXPOSE 5432
-CMD ["postgres"]
+CMD ["postgres", "-c", "unix_socket_directories=/tmp"]
