@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/devcontainer:4.1.1@sha256:35dcbb1cd0b4a40c90561ba065b3c193ba820d564005ce7a3d1e389c68743069
+FROM ghcr.io/trueforge-org/devcontainer:4.1.1@sha256:4dd0bc37fbfbe467262c3b5d8e6fa66ddc6a45843d9be620553f61dc5b16c5f8
 
 USER root
 
