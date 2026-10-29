@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=duplicati/duplicati versioning=loose
-  default = "2.4.0.1_stable_2026-10-07"
+  default = "2.4.1.0_stable_2026-10-29"
 }
 
 variable "LICENSE" {
