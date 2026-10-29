@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=luanti-org/luanti versioning=loose
-  default = "5.17.0"
+  default = "5.18.0"
 }
 
 variable "LICENSE" {
