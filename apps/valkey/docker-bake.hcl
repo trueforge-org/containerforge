@@ -8,11 +8,11 @@ variable "VERSION" {
   // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
   // TODO: temporary disabled due to repology networking issues (it being in russia)
   // repologydepName=ubuntu_26_04/valkey versioning=loose
-  default = "9.0.3"
+  default = "9.0.4"
 }
 
 variable "PACKAGE_VERSION" {
-  default = "9.0.3-0ubuntu2"
+  default = "9.0.4-0ubuntu0.2"
 }
 
 variable "LICENSE" {
