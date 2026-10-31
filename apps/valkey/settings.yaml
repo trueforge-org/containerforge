@@ -12,6 +12,12 @@ env:
   - name: VALKEY_PASSWORD
     default: "MYVALKEYPASSWORD"
     required: false
+  - name: VALKEY_DATA_DIR
+    default: "/config"
+    required: false
+  - name: VALKEY_APPENDONLY
+    default: "yes"
+    required: false
 volumes:
   - path: /config
     required: true
