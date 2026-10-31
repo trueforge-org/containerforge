@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+runners:
+- entrypoint: dig -v
+- entrypoint: tcpdump --version
+- entrypoint: nmap --version
+  expectedOutput: Nmap
+- entrypoint: curl --version
+  expectedOutput: curl
+- entrypoint: mtr --version
+- entrypoint: ip -V
+- entrypoint: grpcurl --version
+- entrypoint: fortio version
+- entrypoint: calicoctl version --client

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/traefik/whoami"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: WHOAMI_PORT_NUMBER
+    default: "8080"
+    required: false
+  - name: WHOAMI_NAME
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: false
