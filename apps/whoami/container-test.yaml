@@ -3,5 +3,3 @@
 http:
 - port: '8080'
   path: /health
-tcp:
-- port: '8080'
