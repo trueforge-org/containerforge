@@ -3,14 +3,16 @@ FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:205c6561352214872c61edea4909f29afe
 
 ARG TARGETPLATFORM
 ARG VERSION
+ARG PACKAGE_VERSION
 ARG UMASK=022
 
 USER root
 
 # hadolint ignore=DL3008,DL3015,SC2086,SC2155
-RUN apt-get update && \
+RUN test "${PACKAGE_VERSION%%-*}" = "${VERSION}" && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
-        postgresql-client \
+        "postgresql-client-${VERSION%%.*}=${PACKAGE_VERSION}" \
     && case "${TARGETPLATFORM}" in \
          'linux/amd64') export ARCH='linux-x64' ;; \
        esac \
