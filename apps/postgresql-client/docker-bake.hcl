@@ -5,8 +5,14 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=docker.io/library/postgres
-  default = "9.6.24"
+  // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
+  // TODO: temporary disabled due to repology networking issues (it being in russia)
+  // repologydepName=ubuntu_26_04/postgresql-18 versioning=loose
+  default = "18.6"
+}
+
+variable "PACKAGE_VERSION" {
+  default = "18.6-0ubuntu0.26.04.1"
 }
 
 variable "LICENSE" {
@@ -26,6 +32,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    PACKAGE_VERSION = "${PACKAGE_VERSION}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"
