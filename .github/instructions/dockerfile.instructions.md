@@ -22,6 +22,7 @@ applyTo: "apps/**/Dockerfile"
 ## Required directives
 
 - MUST include `COPY --chmod=0755 . /` so container tests work. Do NOT remove it unless explicitly requested.
+- `include/.dockerignore` is copied into each app's folder during the build, and it is an allow-list. `COPY . /` only copies the paths it lists, such as `start.sh`, `scripts/`, `defaults/`, `etc/` and `health/`. Any other file in the app's folder silently does not reach the image, so put extra files in one of those paths.
 
 ## Layout siblings
 
@@ -41,3 +42,10 @@ applyTo: "apps/**/Dockerfile"
 ## Version alignment
 
 - `ARG VERSION` (and similar) values MUST match the defaults declared in the sibling `docker-bake.hcl`.
+- The image MUST contain the version it is tagged with. An unpinned `apt-get install` gets whatever the base image's release has, so pin the package and check it against `VERSION`, as `apps/valkey/Dockerfile` does.
+
+## Downloaded software
+
+- Verify downloads against the checksum the upstream publishes, where it has one.
+- When extracting only some files from an upstream archive, also ship its license and third-party notices, for example in `/usr/share/licenses/<app>/`.
+- The `LICENSE` in `docker-bake.hcl` MUST be the license of the software in the image.
