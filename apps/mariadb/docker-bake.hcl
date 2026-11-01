@@ -5,7 +5,14 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  default = "11.4.8-r0"
+  // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
+  // TODO: temporary disabled due to repology networking issues (it being in russia)
+  // repologydepName=ubuntu_26_04/mariadb versioning=loose
+  default = "11.8.6"
+}
+
+variable "PACKAGE_VERSION" {
+  default = "1:11.8.6-5ubuntu0.1"
 }
 
 variable "LICENSE" {
@@ -24,6 +31,7 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    PACKAGE_VERSION = "${PACKAGE_VERSION}"
   }
   labels = {
     "org.opencontainers.image.source" = "${SOURCE}"

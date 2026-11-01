@@ -3,6 +3,7 @@ FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:205c6561352214872c61edea4909f29af
 
 # set version label
 ARG VERSION
+ARG PACKAGE_VERSION
 ARG TARGETARCH
 USER root
 
@@ -12,14 +13,18 @@ ENV DATADIR="$MYSQL_DIR/databases"
 
 RUN \
     echo "**** install runtime packages ****" && \
+    package_version="${PACKAGE_VERSION#*:}" && \
+    test "${package_version%%-*}" = "${VERSION}" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         logrotate \
-        mariadb-server \
-        mariadb-backup \
-        mariadb-client \
-        mariadb-common \
-        mariadb-server-core && \
+        "mariadb-server=${PACKAGE_VERSION}" \
+        "mariadb-backup=${PACKAGE_VERSION}" \
+        "mariadb-client=${PACKAGE_VERSION}" \
+        "mariadb-common=${PACKAGE_VERSION}" \
+        "mariadb-server-core=${PACKAGE_VERSION}" && \
+    mkdir -p /run/mysqld && \
+    chown apps:apps /run/mysqld && \
     echo "**** cleanup ****" && \
     apt-get clean && \
     rm -rf \

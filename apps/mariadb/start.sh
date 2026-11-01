@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
+# MARIADB_* are the documented names, MYSQL_* stay supported
+load_env() {
+    local name mariadb_name
+    for name in ROOT_PASSWORD USER PASSWORD DATABASE; do
+        mariadb_name="MARIADB_${name}"
+        if [[ -n "${!mariadb_name+x}" ]]; then
+            printf -v "MYSQL_${name}" '%s' "${!mariadb_name}"
+        fi
+    done
+}
+
+# Escape a value for a single quoted SQL string
+sql_string() {
+    local value="${1//\\/\\\\}"
+    printf '%s' "${value//\'/\'\'}"
+}
+
+load_env
+
 
 # make folders if required
 mkdir -p \
@@ -36,6 +55,7 @@ if [[ ! -d "${DATADIR}/mysql" ]]; then
     if [[ -f "/config/env" ]]; then
 
         source /config/env
+        load_env
     fi
 
     # make temp sql init file
@@ -49,7 +69,7 @@ EOSQL
     if [[ "${#MYSQL_ROOT_PASSWORD}" -lt "4" ]]; then
         MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
     else
-        MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
+        MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '$(sql_string "${MYSQL_ROOT_PASSWORD}")' ;"
     fi
 
     # Make sure all user and database settings are set and pass is more than 4 characters
@@ -60,8 +80,8 @@ EOSQL
         [[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
         read -r -d '' MYSQL_DB_SETUP <<-EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
-CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
+CREATE USER '$(sql_string "${MYSQL_USER}")'@'%' IDENTIFIED BY '$(sql_string "${MYSQL_PASSWORD}")';
+GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '$(sql_string "${MYSQL_USER}")'@'%';
 USE \`${MYSQL_DATABASE}\`;
 EOM
     fi
@@ -188,11 +208,28 @@ EOF
         sleep 5s
     fi
 fi
+
+# Apply the passwords on every start, so changing them also works on existing data
+syncSqlFile=/run/mysqld/sync-passwords.sql
+(
+    umask 077
+    : >"${syncSqlFile}"
+    if [[ "${#MYSQL_ROOT_PASSWORD}" -gt "3" ]]; then
+        echo "ALTER USER IF EXISTS 'root'@'%' IDENTIFIED BY '$(sql_string "${MYSQL_ROOT_PASSWORD}")';" >>"${syncSqlFile}"
+    fi
+    if [[ -n "${MYSQL_USER:-}" ]] && [[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
+        echo "ALTER USER IF EXISTS '$(sql_string "${MYSQL_USER}")'@'%' IDENTIFIED BY '$(sql_string "${MYSQL_PASSWORD}")';" >>"${syncSqlFile}"
+    fi
+)
+
+# The packaged config only listens on localhost, this has to be reachable by other containers
 /usr/bin/mariadbd-safe \
         --defaults-extra-file=/config/custom.cnf \
         --datadir="${DATADIR}" \
         --pid-file=/run/mysqld/mysqld.pid \
+        --init-file="${syncSqlFile}" \
         --skip-networking=OFF \
+        --bind-address='*' \
         --user=apps &
 
     wait
