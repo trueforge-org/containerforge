@@ -1,0 +1,22 @@
+<clickhouse>
+    <logger replace="replace">
+        <level>information</level>
+        <console>1</console>
+    </logger>
+    <listen_host from_env="CLICKHOUSE_LISTEN_HOST"/>
+    <listen_host from_env="CLICKHOUSE_LISTEN_HOST_IPV4"/>
+    <listen_try>1</listen_try>
+    <path>/config/data/</path>
+    <tmp_path>/config/data/tmp/</tmp_path>
+    <user_files_path>/config/data/user_files/</user_files_path>
+    <format_schema_path>/config/data/format_schemas/</format_schema_path>
+    <custom_cached_disks_base_directory>/config/data/caches/</custom_cached_disks_base_directory>
+    <user_directories replace="replace">
+        <users_xml>
+            <path>/config/users.xml</path>
+        </users_xml>
+        <local_directory>
+            <path>/config/data/access/</path>
+        </local_directory>
+    </user_directories>
+</clickhouse>

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://clickhouse.com/docs/operations/configuration-files"
+ports:
+  - port: 8123
+    protocol: http
+    required: false
+  - port: 9000
+    protocol: tcp
+    required: false
+env:
+  - name: CLICKHOUSE_DB
+    default: "MYCLICKHOUSEDB"
+    required: false
+  - name: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
+    default: "0"
+    required: false
+  - name: CLICKHOUSE_PASSWORD
+    default: "MYCLICKHOUSEPASSWORD"
+    required: true
+  - name: CLICKHOUSE_USER
+    default: "MYCLICKHOUSEUSER"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
