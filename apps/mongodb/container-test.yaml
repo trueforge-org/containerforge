@@ -5,3 +5,5 @@ tcp:
 
 filePaths:
 - /scripts/setup-users.js
+- /usr/share/licenses/mongodb/LICENSE-Community.txt
+- /usr/share/licenses/mongosh/LICENSE-mongosh
