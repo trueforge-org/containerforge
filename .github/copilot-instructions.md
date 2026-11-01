@@ -11,6 +11,12 @@
 - Never commit secrets, tokens, or `.env` files.
 - Ignore everything under `porting/` — it is legacy tooling and not part of any agent workflow.
 
+## Pull requests
+
+- Contributions need a signed [Contributor License Agreement](https://cla-assistant.io/trueforge-org/containerforge). Tell the user when you open a PR or prepare one for them. Only they can sign it, so never sign it for them. The `license/cla` check on the PR shows the status.
+- Put `🤖 This PR is AI generated.` in the Notes section of the PR description. Use it instead of a "Generated with ..." line or similar tool attribution.
+- Fill in [`PULL_REQUEST_TEMPLATE.md`](PULL_REQUEST_TEMPLATE.md), keeping its sections and checkboxes, and only check the boxes that apply. If you could not build or run the image, say so.
+
 ## Required reading per file type
 
 When you touch any of these files, you MUST first load and follow the matching instruction file:
@@ -50,3 +56,4 @@ For any build/run/test work in `apps/<app>/`, the build/run/test loop, log succe
 5. `/config` empty-start behavior works where required.
 6. Downstream `FROM` impact is documented in `apps/<app>/DOWNSTREAM_CHANGES.md` when applicable.
 7. `docker buildx bake --print` ran for any bake/Dockerfile change.
+8. The user was told about the CLA, and the PR description has the AI notice and uses the PR template.

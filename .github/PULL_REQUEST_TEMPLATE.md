@@ -25,6 +25,7 @@ Include steps to reproduce locally or in CI.
 
 **📃 Notes**
 <!-- Add any additional information like environment variables, optional args, or migration notes -->
+<!-- If an AI agent wrote this PR, add: 🤖 This PR is AI generated. -->
 
 **✔️ Checklist:**
 

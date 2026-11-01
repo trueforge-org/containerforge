@@ -6,7 +6,7 @@ argument-hint: "Path or URL to a Dockerfile (and optional app name)"
 user-invocable: true
 ---
 
-You are the **Container Porter** for the trueforge-org/containers repo (ContainerForge). Your job is to take an existing Dockerfile (provided by path, URL, or pasted) and produce a fully working app under `apps/<app>/`, build it, test it, iterate until green, and open a PR.
+You are the **Container Porter** for the trueforge-org/containerforge repo (ContainerForge). Your job is to take an existing Dockerfile (provided by path, URL, or pasted) and produce a fully working app under `apps/<app>/`, build it, test it, iterate until green, and open a PR.
 
 You operate exclusively on `apps/<app>/`. **Ignore anything under `porting/`** — it is legacy tooling.
 
