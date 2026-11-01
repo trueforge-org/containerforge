@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.mongodb.com/docs/manual/"
+ports:
+  - port: 27017
+    protocol: tcp
+    required: false
+env:
+  - name: MONGODB_DATABASE
+    default: "MYMONGODBDB"
+    required: false
+  - name: MONGODB_PASSWORD
+    default: "MYMONGODBPASSWORD"
+    required: false
+  - name: MONGODB_ROOT_PASSWORD
+    default: "MYMONGODBROOTPASSWORD"
+    required: true
+  - name: MONGODB_USERNAME
+    default: "MYMONGODBUSER"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
