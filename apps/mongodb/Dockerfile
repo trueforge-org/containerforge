@@ -19,8 +19,11 @@ RUN set -eux; \
     curl -fsSL -o /tmp/mongodb.tgz "${server_url}"; \
     echo "$(curl -fsSL "${server_url}.sha256" | cut -d ' ' -f 1)  /tmp/mongodb.tgz" | sha256sum -c -; \
     tar -xzf /tmp/mongodb.tgz -C /usr/local/bin --strip-components=2 --wildcards '*/bin/mongod'; \
+    mkdir -p /usr/share/licenses/mongodb /usr/share/licenses/mongosh; \
+    tar -xzf /tmp/mongodb.tgz -C /usr/share/licenses/mongodb --strip-components=1 --wildcards '*/LICENSE-Community.txt' '*/MPL-2' '*/THIRD-PARTY-NOTICES'; \
     curl -fsSL -o /tmp/mongosh.tgz "https://downloads.mongodb.com/compass/mongosh-${MONGOSH_VERSION}-linux-${shell_arch}.tgz"; \
     tar -xzf /tmp/mongosh.tgz -C /usr/local/bin --strip-components=2 --wildcards '*/bin/*'; \
+    tar -xzf /tmp/mongosh.tgz -C /usr/share/licenses/mongosh --strip-components=1 --wildcards '*/LICENSE-*' '*/THIRD_PARTY_NOTICES'; \
     mongod --version; \
     mongosh --version; \
     apt-get purge -y --auto-remove; \
