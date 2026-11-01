@@ -2,3 +2,6 @@
 
 tcp:
 - port: '27017'
+
+filePaths:
+- /scripts/setup-users.js
