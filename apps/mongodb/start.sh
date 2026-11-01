@@ -22,7 +22,7 @@ until mongosh --quiet --norc --host 127.0.0.1 --eval 'db.runCommand({ ping: 1 })
     sleep 1
 done
 
-if ! mongosh --quiet --norc --host 127.0.0.1 /setup-users.js; then
+if ! mongosh --quiet --norc --host 127.0.0.1 /scripts/setup-users.js; then
     echo "Setting up the MongoDB users failed"
     kill "${setup_pid}"
     wait "${setup_pid}"
