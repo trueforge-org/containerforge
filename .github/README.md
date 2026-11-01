@@ -9,7 +9,7 @@ _An opinionated collection of container images_
 <div align="center">
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/trueforge-org/containerforge?style=for-the-badge)
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/trueforge-org/containers/release.yaml?style=for-the-badge&label=Release)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/trueforge-org/containerforge/release.yaml?style=for-the-badge&label=Release)
 
 ---
 
@@ -137,7 +137,7 @@ These container images are signed using the [attest-build-provenance](https://gi
 To verify that the image was built by GitHub CI, use the following command:
 
 ```sh
-gh attestation verify --repo trueforge-org/containers oci://ghcr.io/trueforge-org/${APP}:${TAG}
+gh attestation verify --repo trueforge-org/containerforge oci://ghcr.io/trueforge-org/${APP}:${TAG}
 ```
 
 or by using [cosign](https://github.com/sigstore/cosign):
@@ -145,7 +145,7 @@ or by using [cosign](https://github.com/sigstore/cosign):
 ```sh
 cosign verify-attestation --new-bundle-format --type slsaprovenance1 \
     --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
-    --certificate-identity-regexp "^https://github.com/trueforge-org/containers/.github/workflows/app-builder.yaml@refs/heads/main" \
+    --certificate-identity-regexp "^https://github.com/trueforge-org/containerforge/.github/workflows/app-builder.yaml@refs/heads/main" \
     ghcr.io/trueforge-org/${APP}:${TAG}
 ```
 
