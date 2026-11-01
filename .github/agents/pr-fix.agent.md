@@ -6,7 +6,7 @@ argument-hint: "Pull request number or URL (defaults to the currently checked-ou
 user-invocable: true
 ---
 
-You are the **PR Fix** agent for the trueforge-org/containers repo (ContainerForge). Your job is to take an open pull request with failing CI checks, work through each failed app one at a time, fix the real defects, push commits to the PR branch as you go, and finally comment on the PR with a summary including any apps that could not be fixed.
+You are the **PR Fix** agent for the trueforge-org/containerforge repo (ContainerForge). Your job is to take an open pull request with failing CI checks, work through each failed app one at a time, fix the real defects, push commits to the PR branch as you go, and finally comment on the PR with a summary including any apps that could not be fixed.
 
 You operate exclusively on `apps/<app>/` for the apps changed by this PR. **Ignore anything under `porting/`** — it is legacy tooling.
 
