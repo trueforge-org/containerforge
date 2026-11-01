@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:49adaadc8f6f77e750228e0a5c87c3b7e3883c4acb7b1a55efe921a15a0ecd45
+FROM ghcr.io/trueforge-org/postgresql-client:9.6.24@sha256:65e2aaef5c5decd8ed06f5c41cb77de6406e44006d6f3db12d0faac3f88fa1c8
 
 ARG VERSION
 ARG TARGETARCH
@@ -7,6 +7,8 @@ ARG MONICA_RELEASE_GPG_KEY="BDAB0D0D36A00466A2964E85DE15667131EA6018"
 ENV MEMORY_LIMIT 512M
 
 
+# Monica's lock file caps nette/utils below PHP 8.4, and Ubuntu 26.04 only has 8.5.
+# [php+] ignores only that upper limit, all other requirements still apply.
 RUN \
   apt-get update && apt-get install -y --no-install-recommends \
     bzip2 \
@@ -16,23 +18,23 @@ RUN \
     memcached \
     composer \
     php-apcu \
-    php8.3-cli \
-    php8.3-bcmath \
-    php8.3-curl \
-    php8.3-xml \
-    php8.3-gd \
-    php8.3-gmp \
-    php8.3-intl \
+    php8.5-cli \
+    php8.5-bcmath \
+    php8.5-curl \
+    php8.5-xml \
+    php8.5-gd \
+    php8.5-gmp \
+    php8.5-intl \
     php-memcached \
-    php8.3-mysql \
+    php8.5-mysql \
     php-redis \
-    php8.3-common \
-    php8.3-soap \
-    php8.3-xml && \
+    php8.5-common \
+    php8.5-soap \
+    php8.5-xml && \
   echo "**** configure php-fpm to pass env vars ****" && \
-  if [ -f /etc/php/8.3/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.3/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.3/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.3/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php/8.3/fpm/php-fpm.conf; fi && \
+  if [ -f /etc/php/8.5/fpm/pool.d/www.conf ]; then sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php/8.5/fpm/pool.d/www.conf && if ! grep -qxF 'clear_env = no' /etc/php/8.5/fpm/pool.d/www.conf; then echo 'clear_env = no' >> /etc/php/8.5/fpm/pool.d/www.conf; fi && echo "env[PATH] = /usr/local/bin:/usr/bin:/bin:/" >> /etc/php/8.5/fpm/php-fpm.conf; fi && \
   echo "**** setup php opcache ****" && \
-  mkdir -p /etc/php/8.3/cli/conf.d && \
+  mkdir -p /etc/php/8.5/cli/conf.d && \
   { \
       echo '[opcache]'; \
       echo 'opcache.enable=1'; \
@@ -43,13 +45,13 @@ RUN \
       echo 'opcache.max_wasted_percentage=10'; \
       echo 'opcache.interned_strings_buffer=16'; \
       echo 'opcache.fast_shutdown=1'; \
-  } > /etc/php/8.3/cli/conf.d/opcache-recommended.ini; \
+  } > /etc/php/8.5/cli/conf.d/opcache-recommended.ini; \
   \
-  echo 'apc.enable_cli=1' >> /etc/php/8.3/cli/conf.d/docker-php-ext-apcu.ini; \
+  echo 'apc.enable_cli=1' >> /etc/php/8.5/cli/conf.d/docker-php-ext-apcu.ini; \
   \
   { \
       echo 'memory_limit=${MEMORY_LIMIT}'; \
-  } > /etc/php/8.3/cli/conf.d/memory-limit.ini && \
+  } > /etc/php/8.5/cli/conf.d/memory-limit.ini && \
   echo "**** install monica ****" && \
   mkdir -p /app/www && \
   curl -s -o \
@@ -73,7 +75,8 @@ RUN \
   cd /app/www && \
   composer install \
     --no-dev \
-    --no-interaction && \
+    --no-interaction \
+    --ignore-platform-req=php+ && \
   mkdir -p /config/www/storage /config/www/cache && \
   rm -rf /app/www/storage /app/www/bootstrap/cache /app/www/.env && \
   ln -s /config/www/storage /app/www/storage && \
