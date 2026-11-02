@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+healthCommands:
+- command: psql --quiet -h 127.0.0.1 -U postgres -d postgres -c 'CREATE EXTENSION IF NOT EXISTS timescaledb' --no-psqlrc
+tcp:
+- port: '5432'
+filePaths:
+- /start.sh
+- /usr/share/licenses/timescaledb/LICENSE
+- /usr/share/licenses/timescaledb/LICENSE-APACHE
+- /usr/share/licenses/timescaledb/LICENSE-TIMESCALE
