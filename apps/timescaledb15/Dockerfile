@@ -36,4 +36,7 @@ COPY --chmod=0755 . /
 EXPOSE 5432
 VOLUME /config
 
+# This base does not have the healthcheck of our other base images
+HEALTHCHECK CMD ["/healthcheck.sh"]
+
 CMD ["/start.sh"]

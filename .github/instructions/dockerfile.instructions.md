@@ -8,6 +8,7 @@ applyTo: "apps/**/Dockerfile"
 ## Runtime user
 
 - The final stage MUST end with `USER apps` (not `apps:apps`).
+- The exception are images based on the images of CloudNativePG, such as `timescaledb18`. They end with `USER 26`, as CloudNativePG runs them as that UID and the base has no `apps` user. They also have to declare `HEALTHCHECK CMD ["/healthcheck.sh"]`, which the base does not have.
 - Switch to `USER root` only for elevated install steps (e.g. `apt-get`), then switch back.
 - Assume upstream base images already run as `USER apps`.
 
