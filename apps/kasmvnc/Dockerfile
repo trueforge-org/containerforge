@@ -26,7 +26,7 @@ RUN \
   if [ -f index.html ]; then cp index.html vnc.html; elif [ -f vnc.html ]; then cp vnc.html index.html; fi && \
   mkdir Downloads
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:205c6561352214872c61edea4909f29afe9be1eee6c61430ce627ca757c137ed AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:a3ec289cfc10acc23a20cfb4fe5033c944ce3073dc4a53157c093ffb52f983b1 AS buildstage
 
 ARG VERSION
 ARG XORG_VER

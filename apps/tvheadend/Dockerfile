@@ -1,5 +1,5 @@
 ############## build stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:205c6561352214872c61edea4909f29afe9be1eee6c61430ce627ca757c137ed AS buildstage
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:a3ec289cfc10acc23a20cfb4fe5033c944ce3073dc4a53157c093ffb52f983b1 AS buildstage
 
 ARG VERSION
 # renovate: datasource=git-refs depName=https://github.com/erikkaashoek/Comskip currentValue=master
@@ -119,7 +119,7 @@ RUN \
     > /tmp/runtime-packages
 
 ############## runtime stage ##############
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:205c6561352214872c61edea4909f29afe9be1eee6c61430ce627ca757c137ed
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:a3ec289cfc10acc23a20cfb4fe5033c944ce3073dc4a53157c093ffb52f983b1
 
 ARG VERSION
 ARG TARGETARCH
