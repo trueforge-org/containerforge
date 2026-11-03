@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/oliver006/redis_exporter"
+ports:
+  - port: 9121
+    protocol: tcp
+    required: false
+env:
+  - name: REDIS_ADDR
+    default: "redis://localhost:6379"
+    required: false
+  - name: REDIS_USER
+    default: ""
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
