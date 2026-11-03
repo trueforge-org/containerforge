@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=oliver006/redis_exporter
-  default = "1.94.0"
+  default = "1.96.0"
 }
 
 variable "LICENSE" {
