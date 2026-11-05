@@ -147,7 +147,7 @@ ENV craneVersion=0.22.1
 # renovate: datasource=github-releases depName=sigstore/cosign
 ENV cosignVersion=3.1.4
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ENV trivyVersion=0.76.1
+ENV trivyVersion=0.76.2
 # renovate: datasource=github-releases depName=koalaman/shellcheck
 ENV shellcheckVersion=0.11.0
 
