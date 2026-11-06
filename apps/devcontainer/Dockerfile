@@ -117,7 +117,7 @@ ENV taskVersion=3.54.0
 # renovate: datasource=github-releases depName=cilium/cilium-cli
 ENV ciliumVersion=0.20.2
 # renovate: datasource=github-releases depName=cilium/hubble
-ENV hubbleVersion=1.20.2
+ENV hubbleVersion=1.20.4
 # renovate: datasource=github-releases depName=stern/stern
 ENV sternVersion=1.35.0
 # renovate: datasource=github-releases depName=cloudnative-pg/cloudnative-pg
