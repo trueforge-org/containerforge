@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/wg-easy/wg-easy"
+ports:
+  - port: 51820
+    protocol: udp
+    required: false
+  - port: 51821
+    protocol: tcp
+    required: false
+env:
+  - name: DEBUG
+    default: "Server,WireGuard,Database,CMD,Firewall"
+    required: false
+  - name: DISABLE_IPV6
+    default: "false"
+    required: false
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: INIT_ENABLED
+    default: "false"
+    required: false
+  - name: INSECURE
+    default: "false"
+    required: false
+  - name: PORT
+    default: "51821"
+    required: false
+volumes:
+  - path: /etc/wireguard
+    required: true
