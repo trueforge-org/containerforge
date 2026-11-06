@@ -1,11 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
 # narrowed: wg-easy exits when `wg-quick up` fails, and that needs NET_ADMIN and a privileged container,
-# so the web server on 51821 can not be probed in this unprivileged suite. Check the shipped binaries instead.
-filePaths:
-  - /app/server/index.mjs
-  - /app/server/database/migrations/0000_short_skin.sql
+# so the web server on 51821 can not be probed in this unprivileged suite. Check the shipped files and binaries instead.
+mainRunner:
+  enabled: false
+
 runners:
+- entrypoint: test -f /app/server/index.mjs
+- entrypoint: test -f /app/server/database/migrations/0000_short_skin.sql
 - entrypoint: wg --version
 - entrypoint: awg --version
 - entrypoint: node --version
