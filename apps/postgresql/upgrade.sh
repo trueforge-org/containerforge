@@ -59,7 +59,7 @@ echo "Checking upgrade compatibility of $OLD_VERSION to $TARGET_VERSION..."
   --new-bindir="$NEW_PG_BINARY" \
   --old-datadir="$OLD_PGDATA" \
   --new-datadir="$NEW_PGDATA" \
-  --socketdir /var/run/postgresql \
+  --socketdir /tmp \
   -U "$POSTGRES_USER" \
   --check
 
@@ -70,7 +70,7 @@ echo "Upgrading from $OLD_VERSION to $TARGET_VERSION using --link..."
   --new-bindir="$NEW_PG_BINARY" \
   --old-datadir="$OLD_PGDATA" \
   --new-datadir="$NEW_PGDATA" \
-  --socketdir /var/run/postgresql \
+  --socketdir /tmp \
   -U "$POSTGRES_USER" \
   --link
 
