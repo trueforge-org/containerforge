@@ -172,7 +172,13 @@ set_checksums() {
   echo "Checking checksums setting..."
   # Determine current checksum status via exit code
     STATUS="disabled"
-  if pg_checksums --check >/dev/null 2>&1; then
+  # pg_controldata is cheap and works on a running or crashed cluster,
+  # pg_checksums --check scans every data file and needs a clean shutdown.
+  local control cluster_state checksum_version
+  control="$(pg_controldata "$PGDATA" 2>/dev/null || true)"
+  cluster_state="$(sed -n 's/^Database cluster state: *//p' <<<"$control")"
+  checksum_version="$(sed -n 's/^Data page checksum version: *//p' <<<"$control")"
+  if [[ -n "$checksum_version" && "$checksum_version" != "0" ]]; then
     STATUS="enabled"
   fi
   if [[ "$ZFS_MODE" == "true" ]]; then
@@ -182,15 +188,25 @@ set_checksums() {
   echo "Current Checksums set to $STATUS"
   echo "Checking DB checksum setting..."
 
-  # Enable or disable if needed
-  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]]; then
+  local want_change="false"
+  if [[ "$POSTGRES_CHECKSUMS" == "true" && "$STATUS" == "disabled" ]] || \
+     [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
+    want_change="true"
+  fi
+
+  if [[ "$want_change" == "false" ]]; then
+    echo "Checksums setting match."
+  elif [[ "$cluster_state" != "shut down" && "$cluster_state" != "shut down in recovery" ]]; then
+    # pg_checksums refuses to run unless the cluster was shut down cleanly.
+    # Do not crash-loop: let postgres do crash recovery and retry next start.
+    echo "WARNING: cluster state is '${cluster_state:-unknown}', not cleanly shut down."
+    echo "WARNING: Checksum change to '$POSTGRES_CHECKSUMS' is deferred to the next clean start."
+  elif [[ "$POSTGRES_CHECKSUMS" == "true" ]]; then
     pg_checksums --enable -P
     echo "Not set, Checksums now enabled."
-  elif [[ "$POSTGRES_CHECKSUMS" == "false" && "$STATUS" == "enabled" ]]; then
+  else
     pg_checksums --disable -P
     echo "Set, Checksums now disabled."
-  else
-    echo "Checksums setting match."
   fi
 }
 
@@ -251,6 +267,11 @@ _pg_want_help() {
 }
 
 _main() {
+	# No command given (e.g. args overridden): fall back to the image default.
+	if [ "$#" -eq 0 ]; then
+		set -- postgres -c unix_socket_directories=/tmp
+	fi
+
 	if [ "${1:0:1}" = '-' ]; then
 		set -- postgres "$@"
 	fi
@@ -295,7 +316,13 @@ _main() {
 
             if [ -n "$UPGRADE_REQ" ]; then
             echo "Major Upgrade required, executing upgrade..."
-            source /upgrade.sh
+            export UPGRADE_REQ PGDATA_PARENT POSTGRES_USER POSTGRES_CHECKSUMS
+            if ! bash /upgrade.sh; then
+              echo "Upgrade from $UPGRADE_REQ to $PG_MAJOR failed, removing the new empty cluster so the next start retries." >&2
+              # Only the freshly created target dir, never the old data.
+              find "$PGDATA" -mindepth 1 -delete || :
+              exit 1
+            fi
             UPGRADECHECK="true"
             else
               export PGPASSWORD="${PGPASSWORD:-$POSTGRES_PASSWORD}"
