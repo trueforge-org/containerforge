@@ -35,3 +35,5 @@ runners:
 - entrypoint: test -x /usr/local/bin/yamale
 - entrypoint: test -x /tools/bin/flate
 - entrypoint: test -L /tools/bin/kubectl-krew
+- entrypoint: test -f /config/.vscode-server/extensions/extensions.json
+- entrypoint: sh -c 'ls -d /config/.vscode-server/extensions/anthropic.claude-code-*'

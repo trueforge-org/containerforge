@@ -391,3 +391,43 @@ ENV KREW_ROOT=/config/.krew
 ENV PATH="${KREW_ROOT}/bin:${PATH}"
 RUN krew install pv-mounter \
     && krew install df-pv
+
+# Pre-install the VS Code extensions from .devcontainer/devcontainer.json (keep both lists in sync).
+# The Dev Containers extension finds them in $HOME/.vscode-server/extensions and skips installing them.
+# The server is only used as an installer here, the editor still downloads its own server into the shared /vscode volume.
+# Extension versions are not pinned, as Renovate has no Marketplace datasource.
+# renovate: datasource=github-releases depName=microsoft/vscode
+ENV vscodeVersion=1.145.2
+RUN set -eux; \
+    arch="${TARGETARCH/amd64/x64}"; \
+    meta="$(curl -fsSL "https://update.code.visualstudio.com/api/versions/${vscodeVersion}/server-linux-${arch}/stable")"; \
+    url="$(echo "${meta}" | jq -r .url)"; \
+    sha="$(echo "${meta}" | jq -r .sha256hash)"; \
+    curl -fsSL "${url}" -o /tmp/vscode-server.tar.gz; \
+    echo "${sha}  /tmp/vscode-server.tar.gz" | sha256sum -c -; \
+    mkdir -p /tmp/vscode-server /config/.vscode-server/extensions; \
+    tar -xzf /tmp/vscode-server.tar.gz -C /tmp/vscode-server --strip-components=1; \
+    for ext in \
+        mitchdenny.ecdc \
+        EditorConfig.editorconfig \
+        PKief.material-icon-theme \
+        usernamehw.errorlens \
+        redhat.vscode-yaml \
+        ms-azuretools.vscode-docker \
+        hashicorp.hcl \
+        exiasr.hadolint \
+        golang.go \
+        joao-peterson.gotag \
+        eamodio.gitlens \
+        timonwong.shellcheck \
+        formulahendry.code-runner \
+        streetsidesoftware.code-spell-checker \
+        mhutchie.git-graph \
+        yzhang.markdown-all-in-one \
+        searKing.preview-vscode \
+        DavidAnson.vscode-markdownlint \
+        Anthropic.claude-code; do \
+        /tmp/vscode-server/bin/code-server --extensions-dir /config/.vscode-server/extensions --install-extension "${ext}"; \
+    done; \
+    chmod -R a+rwX /config/.vscode-server; \
+    rm -rf /tmp/vscode-server /tmp/vscode-server.tar.gz /config/.vscode-server/extensionsCache /config/.vscode-server/data
