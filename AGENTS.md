@@ -4,6 +4,8 @@ Instructions for AI coding agents working in ContainerForge, including OpenAI Co
 
 **Before editing or creating any file under `apps/<app>/`, read [`.github/copilot-instructions.md`](.github/copilot-instructions.md) and the matching files in [`.github/instructions/`](.github/instructions/), and follow them.** Despite its name, `copilot-instructions.md` applies to every agent. These files are the source of truth, so change the rules there and not here.
 
+Claude Code loads these files from `.claude/rules/`, which holds a symlink to each of them. Keep `paths:` in sync with `applyTo:`, and add a symlink with the same file name for every new instruction file.
+
 For any build, run or test work, follow [`.github/instructions/build-test-protocol.instructions.md`](.github/instructions/build-test-protocol.instructions.md).
 
 ## Repository

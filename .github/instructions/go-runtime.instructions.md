@@ -1,5 +1,7 @@
 ---
 description: "Use when working on Go-based ContainerForge apps (Dockerfiles using golang build stages or based on ghcr.io/trueforge-org/golang). Covers build-stage compilation, runtime-stage copy, go.mod/go.sum hygiene, empty /config behavior."
+paths:
+  - "apps/**"
 ---
 
 # Go Runtime Rules

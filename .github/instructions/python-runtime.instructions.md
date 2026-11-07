@@ -1,5 +1,7 @@
 ---
 description: "Use when working on Python-based ContainerForge apps (Dockerfiles based on ghcr.io/trueforge-org/python or python-node, or apps with /app/venv). Covers /app/venv read-only rule, /tmp/venv ephemeral, /config/venv persistent, seeding strategy, cache locations."
+paths:
+  - "apps/**"
 ---
 
 # Python Runtime Rules

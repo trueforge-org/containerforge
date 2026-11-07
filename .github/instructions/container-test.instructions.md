@@ -1,6 +1,8 @@
 ---
 description: "container-test.yaml rules: follow the JSON schema of forgetool, prefer real port/HTTP/file assertions, never weaken tests to make them pass."
 applyTo: "apps/**/container-test.yaml"
+paths:
+  - "apps/**/container-test.yaml"
 ---
 
 # container-test.yaml Rules (apps/**/container-test.yaml)

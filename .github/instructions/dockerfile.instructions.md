@@ -1,6 +1,8 @@
 ---
 description: "Dockerfile rules for ContainerForge apps: user/permissions, read-only-rootfs, /app vs /config vs /tmp, COPY --chmod, base image reuse, runtime user switching, downstream FROM consumers."
 applyTo: "apps/**/Dockerfile"
+paths:
+  - "apps/**/Dockerfile"
 ---
 
 # Dockerfile Rules (apps/**/Dockerfile)

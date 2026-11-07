@@ -1,6 +1,10 @@
 ---
 description: "start.sh / entrypoint rules for ContainerForge apps: idempotent startup, seed empty /config, never write to /app, use /tmp for ephemeral state."
 applyTo: "apps/**/start.sh, apps/**/entrypoint.sh, apps/**/root/**/run"
+paths:
+  - "apps/**/start.sh"
+  - "apps/**/entrypoint.sh"
+  - "apps/**/root/**/run"
 ---
 
 # Startup Script Rules
