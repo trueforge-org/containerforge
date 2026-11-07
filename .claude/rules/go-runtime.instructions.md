@@ -1,0 +1,1 @@
+../../.github/instructions/go-runtime.instructions.md

@@ -1,0 +1,1 @@
+../../.github/instructions/docker-bake.instructions.md

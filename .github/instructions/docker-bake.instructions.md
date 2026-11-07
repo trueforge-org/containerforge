@@ -1,6 +1,8 @@
 ---
 description: "docker-bake.hcl rules: VERSION/APP/LICENSE/SOURCE alignment with Dockerfile, renovate annotation comment, image/image-local/image-all targets, and validation via `docker buildx bake --print`."
 applyTo: "apps/**/docker-bake.hcl"
+paths:
+  - "apps/**/docker-bake.hcl"
 ---
 
 # docker-bake.hcl Rules (apps/**/docker-bake.hcl)

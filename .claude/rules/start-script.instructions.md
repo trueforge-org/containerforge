@@ -1,0 +1,1 @@
+../../.github/instructions/start-script.instructions.md

@@ -1,6 +1,8 @@
 ---
 description: "settings.yaml rules for ContainerForge apps: schema header, ports/env/volumes/dependencies declarations, and alignment with Dockerfile, container-test.yaml, and start.sh."
 applyTo: "apps/**/settings.yaml"
+paths:
+  - "apps/**/settings.yaml"
 ---
 
 # settings.yaml Rules (apps/**/settings.yaml)

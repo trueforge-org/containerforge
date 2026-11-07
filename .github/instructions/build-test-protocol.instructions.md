@@ -1,6 +1,8 @@
 ---
 description: "Standardised build, run, and test protocol for all ContainerForge agents and AI runners. Per-container loop: build → fix → run → parse logs → fix → test → fix. Defines log-success criteria and the narrow exception for database-dependent apps. Applies to any work touching apps/<app>/."
 applyTo: "apps/**"
+paths:
+  - "apps/**"
 ---
 
 # Build, Run & Test Protocol (apps/**)
