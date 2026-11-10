@@ -63,4 +63,5 @@ ENV DEXAFIX_LISTEN=:8080 \
 # network. 8081 is only used by `serve api`, 8082 only by `serve body`, see
 # docs/15-split-deployment.md, docs/16-workers.md and docs/17-body-service.md.
 EXPOSE 8080 8081 8082 8443 8443/udp
-
+ENTRYPOINT ["/dexafix"]
+CMD ["serve"]
