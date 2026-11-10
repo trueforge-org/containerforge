@@ -24,7 +24,7 @@ RUN echo "**** install DexaFix ****" && \
     cd /out/app && \
     curl -o \
         /tmp/dexafix.tar.gz -L \
-        "https://github.com/trueforge-org/dexafix/archive/v${VERSION}.tar.gz" && \
+        "https://github.com/trueforge-org/forgetool/releases/download/v${VERSION}/forgetool_${VERSION}_linux_${TARGETARCH}.tar.gz" && \
     tar xf \
         /tmp/dexafix.tar.gz -C \
         /out/app --strip-components=1 && \
@@ -63,5 +63,4 @@ ENV DEXAFIX_LISTEN=:8080 \
 # network. 8081 is only used by `serve api`, 8082 only by `serve body`, see
 # docs/15-split-deployment.md, docs/16-workers.md and docs/17-body-service.md.
 EXPOSE 8080 8081 8082 8443 8443/udp
-CMD ["serve"]
 
