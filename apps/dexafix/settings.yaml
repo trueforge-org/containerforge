@@ -5,8 +5,22 @@ ports:
   - port: 8080
     protocol: tcp
     required: false
+env:
+  - name: DEXAFIX_LISTEN
+    default: ":8080"
+    required: false
+  - name: DEXAFIX_INTERNAL_LISTEN
+    default: ":8081"
+    required: false
+  - name: DEXAFIX_DSN
+    default: "file:/config/dexafix.db"
+    required: false
+  - name: DEXAFIX_ENCRYPTION_KEY_FILE
+    default: "/config/dexafix.key"
+    required: false
 volumes:
   - path: /config
     required: true
 opt_dependencies:
   - name: postgresql
+  - name: valkey
