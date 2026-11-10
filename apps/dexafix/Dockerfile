@@ -27,7 +27,7 @@ RUN echo "**** install DexaFix ****" && \
         "https://github.com/trueforge-org/dexafix/archive/v${VERSION}.tar.gz" && \
     tar xf \
         /tmp/dexafix.tar.gz -C \
-        /out/app/www-tmp --strip-components=1 && \
+        /out/app --strip-components=1 && \
     chown -R apps:apps /app && \
     echo "**** cleanup ****" && \
     rm -rf \
