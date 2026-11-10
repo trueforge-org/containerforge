@@ -417,7 +417,6 @@ RUN set -eux; \
         hashicorp.hcl \
         exiasr.hadolint \
         golang.go \
-        joao-peterson.gotag \
         eamodio.gitlens \
         timonwong.shellcheck \
         formulahendry.code-runner \
