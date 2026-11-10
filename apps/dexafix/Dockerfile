@@ -42,6 +42,7 @@ COPY --from=data --chown=568:568 /out/app /app
 # by that user: with a bind mount run `chown 568:568 <dir>`; named volumes copy the image ownership.
 COPY --from=data --chown=568:568 /out/config /config
 COPY --from=data --chown=568:568 /out/secrets /secrets
+COPY --chmod=0755 . /
 USER 568:568
 WORKDIR /config
 VOLUME /config
