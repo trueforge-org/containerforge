@@ -27,7 +27,7 @@ RUN echo "**** install DexaFix ****" && \
         "https://github.com/trueforge-org/dexafix/releases/download/v${VERSION}/dexafix_${VERSION}_linux_${TARGETARCH}.tar.gz" && \
     tar -xzf \
         /tmp/dexafix.tar.gz -C \
-        /out/app --strip-components=1 && \
+        /out/app && \
     chown -R apps:apps /app && \
     echo "**** cleanup ****" && \
     rm -rf \
