@@ -21,7 +21,7 @@ RUN mkdir -p /out/config /out/secrets/api /out/secrets/web /out/secrets/worker /
     /out/secrets/db /out/secrets/dbsetup /out/secrets/valkey /out/app
 
 RUN echo "**** install DexaFix ****" && \
-    cd /out/app
+    cd /out/app && \
     curl -o \
         /tmp/dexafix.tar.gz -L \
         "https://github.com/trueforge-org/dexafix/archive/v${VERSION}.tar.gz" && \
@@ -32,7 +32,7 @@ RUN echo "**** install DexaFix ****" && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/*
-        
+
 
 FROM scratch
 
