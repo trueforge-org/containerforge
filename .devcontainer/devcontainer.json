@@ -16,7 +16,7 @@
       "moby": false
     },
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "26"
+      "version": "24"
     }
   },
   "customizations": {
@@ -55,7 +55,10 @@
         "ms-azuretools.vscode-docker",
         "hashicorp.hcl",
         "exiasr.hadolint",
+        "joao-peterson.gotag",
         "timonwong.shellcheck",
+        "Codium.codium",
+        "GitHub.copilot",
         "SimonSiefke.svg-preview",
         "ecmel.vscode-html-css",
         "hossaini.bootstrap-intellisense",
