@@ -5,7 +5,6 @@ ports:
   - port: 8080
     protocol: tcp
     required: false
-env:
 volumes:
   - path: /config
     required: true
