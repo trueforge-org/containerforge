@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "MONGOSH_VERSION" {
   // renovate: datasource=npm depName=mongosh
-  default = "2.14.1"
+  default = "2.14.2"
 }
 
 variable "LICENSE" {
