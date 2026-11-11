@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/library/node
-  default = "26.13.0"
+  default = "26.13.1"
 }
 
 variable "YARN_VERSION"{
