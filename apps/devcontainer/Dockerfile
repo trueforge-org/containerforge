@@ -139,7 +139,7 @@ ENV dockerVersion=29.9.3
 # renovate: datasource=github-releases depName=docker/buildx
 ENV buildxVersion=0.38.2
 # renovate: datasource=github-releases depName=docker/compose
-ENV composeVersion=5.7.0
+ENV composeVersion=5.7.1
 # renovate: datasource=github-releases depName=hadolint/hadolint
 ENV hadolintVersion=2.15.1
 # renovate: datasource=github-releases depName=google/go-containerregistry
