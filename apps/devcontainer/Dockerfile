@@ -397,7 +397,7 @@ RUN krew install pv-mounter \
 # The server is only used as an installer here, the editor still downloads its own server into the shared /vscode volume.
 # Extension versions are not pinned, as Renovate has no Marketplace datasource.
 # renovate: datasource=github-releases depName=microsoft/vscode
-ENV vscodeVersion=1.145.3
+ENV vscodeVersion=1.146.0
 RUN set -eux; \
     arch="${TARGETARCH/amd64/x64}"; \
     meta="$(curl -fsSL "https://update.code.visualstudio.com/api/versions/${vscodeVersion}/server-linux-${arch}/stable")"; \
