@@ -5,7 +5,7 @@ FROM ghcr.io/trueforge-org/python-node:3.14.8@sha256:feb6e44439ea272f47b46a15119
 ARG VERSION
 ARG TARGETARCH
 # renovate: datasource=pypi depName=playwright
-ARG PLAYWRIGHT_VERSION=1.65.0
+ARG PLAYWRIGHT_VERSION=1.65.1
 USER root
 
 ENV PYTHONUNBUFFERED=1
