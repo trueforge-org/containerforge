@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=trueforge-org/dexafix
-  default = "0.0.1"
+  default = "0.0.2"
 }
 
 variable "LICENSE" {
