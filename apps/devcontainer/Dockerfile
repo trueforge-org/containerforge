@@ -115,7 +115,7 @@ ENV krewVersion=0.5.0
 # renovate: datasource=github-releases depName=go-task/task
 ENV taskVersion=3.54.0
 # renovate: datasource=github-releases depName=cilium/cilium-cli
-ENV ciliumVersion=0.20.2
+ENV ciliumVersion=0.20.3
 # renovate: datasource=github-releases depName=cilium/hubble
 ENV hubbleVersion=1.20.4
 # renovate: datasource=github-releases depName=stern/stern
