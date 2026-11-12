@@ -10,7 +10,7 @@
 # /config directory with the right owner (scratch has no mkdir/chown).
 # /secrets/<name> are the mount points of the volumes `secrets init` fills (deploy/): a new named
 # volume copies the owner of its mount point, so the processes can read what init puts there.
-FROM --platform=$BUILDPLATFORM ghcr.io/trueforge-org/ubuntu:26.04@sha256:a3ec289cfc10acc23a20cfb4fe5033c944ce3073dc4a53157c093ffb52f983b1 AS data
+FROM --platform=$BUILDPLATFORM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f5810a8898e3c4010e9609799c2cc0ef871d42a7637fbdd77f2c62c1e67b495c AS data
 
 # set version label
 ARG VERSION
