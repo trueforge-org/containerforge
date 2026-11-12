@@ -44,7 +44,7 @@ RUN \
     $HOME/.npm \
     /tmp/*
 
-FROM ghcr.io/trueforge-org/node:24.22.2@sha256:ac184e4789c9d75d84a60bafc4ce892a1fbfbaca29bbd5d9303d74120664d283
+FROM ghcr.io/trueforge-org/node:26.13.1@sha256:9089d949e06c56f8eb6a948e0004bcd03a86094fe9c68b1d85c594518d45d517
 
 ARG VERSION
 ARG TARGETARCH
