@@ -3,7 +3,7 @@
 FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d
 ARG VERSION
 # renovate: datasource=pypi depName=esphome-device-builder
-ARG ESPHOME_DEVICE_BUILDER_VERSION=1.28.0
+ARG ESPHOME_DEVICE_BUILDER_VERSION=1.28.1
 
 ENV \
     HOME="/config" \
