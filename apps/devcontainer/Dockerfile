@@ -107,7 +107,7 @@ ENV talosctlVersion=1.14.5
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
 ENV talhelperVersion=3.1.17
 # renovate: datasource=github-releases depName=helmfile/helmfile
-ENV helmfileVersion=1.8.3
+ENV helmfileVersion=1.8.4
 # renovate: datasource=github-releases depName=kubecolor/kubecolor
 ENV kubecolorVersion=0.8.0
 # renovate: datasource=github-releases depName=kubernetes-sigs/krew
