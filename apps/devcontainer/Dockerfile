@@ -325,7 +325,7 @@ RUN pip install --no-cache-dir \
 
 # Install homebrew
 # renovate: datasource=github-releases depName=Homebrew/brew
-ENV brewVersion=7.0.12
+ENV brewVersion=7.0.13
 RUN if [ "${TARGETARCH}" = "amd64" ]; then \
       mkdir -p /usr/local/Homebrew && \
       curl -fsSL "https://github.com/Homebrew/brew/archive/refs/tags/${brewVersion}.tar.gz" | tar xz --strip 1 -C /usr/local/Homebrew && \
