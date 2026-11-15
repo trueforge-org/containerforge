@@ -54,7 +54,7 @@ RUN set -eux; \
 # Copy local files
 
 # Copy unrar binary from LinuxServer image
-COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:48c0ce2609bb3c35764956bbd9395e95b177421e3c74b3628c3676029f24f2e0 /usr/bin/unrar-ubuntu /usr/bin/unrar
+COPY --from=ghcr.io/linuxserver/unrar:latest@sha256:9f1d78bb7c2439ae5938f73c294b17dbc2b9f61b8260eae91bd0a004c1de2198 /usr/bin/unrar-ubuntu /usr/bin/unrar
 
 USER apps
 COPY --chmod=0755 . /
