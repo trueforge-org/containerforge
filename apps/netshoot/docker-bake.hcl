@@ -20,7 +20,7 @@ variable "FORTIO_VERSION" {
 
 variable "CALICOCTL_VERSION" {
   // renovate: datasource=github-releases depName=projectcalico/calico
-  default = "v3.33.0"
+  default = "v3.33.1"
 }
 
 variable "LICENSE" {
