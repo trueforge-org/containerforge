@@ -15,7 +15,7 @@ variable "GRPCURL_VERSION" {
 
 variable "FORTIO_VERSION" {
   // renovate: datasource=github-releases depName=fortio/fortio
-  default = "1.76.0"
+  default = "1.76.1"
 }
 
 variable "CALICOCTL_VERSION" {
