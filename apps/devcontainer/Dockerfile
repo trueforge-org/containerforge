@@ -135,7 +135,7 @@ ENV flateVersion=0.6.5
 
 ### Container image tools
 # renovate: datasource=docker depName=docker.io/library/docker versioning=docker
-ENV dockerVersion=29.9.3
+ENV dockerVersion=29.10.0
 # renovate: datasource=github-releases depName=docker/buildx
 ENV buildxVersion=0.39.0
 # renovate: datasource=github-releases depName=docker/compose
