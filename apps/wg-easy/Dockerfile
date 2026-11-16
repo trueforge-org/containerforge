@@ -31,7 +31,7 @@ FROM ghcr.io/trueforge-org/golang:1.27.4@sha256:00f64ec10e368246f73dd85badaeb493
 # renovate: datasource=github-releases depName=amnezia-vpn/amneziawg-tools
 ARG AWGTOOLS_BRANCH=v3.1.20260812
 # renovate: datasource=github-tags depName=amnezia-vpn/amneziawg-go
-ARG AWGGO_BRANCH=v3.1.20260828
+ARG AWGGO_BRANCH=v3.1.20261116
 
 USER root
 WORKDIR /build
