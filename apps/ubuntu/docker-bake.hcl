@@ -9,6 +9,16 @@ variable "VERSION" {
   default = "26.04"
 }
 
+variable "NODE_VERSION" {
+  // renovate: datasource=docker depName=docker.io/library/node
+  default = "26.13.1"
+}
+
+variable "YARN_VERSION"{
+  // renovate: datasource=npm depName=yarn
+  default = "1.22.22"
+}
+
 variable "NEO_VER" {
   // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
   default = "26.40.40196.8"
@@ -40,6 +50,8 @@ target "image" {
   inherits = ["docker-metadata-action"]
   args = {
     VERSION = "${VERSION}"
+    NODE_VERSION = "${NODE_VERSION}"
+    YARN_VERSION = "${YARN_VERSION}"
     NEO_VER = "${NEO_VER}"
     IGC1_LEGACY_VER = "${IGC1_LEGACY_VER}"
     NEO_LEGACY_VER = "${NEO_LEGACY_VER}"
