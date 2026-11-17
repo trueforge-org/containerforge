@@ -121,7 +121,7 @@ ENV hubbleVersion=1.20.4
 # renovate: datasource=github-releases depName=stern/stern
 ENV sternVersion=1.35.0
 # renovate: datasource=github-releases depName=cloudnative-pg/cloudnative-pg
-ENV cnpgVersion=1.30.1
+ENV cnpgVersion=1.30.2
 # renovate: datasource=github-releases depName=cert-manager/cmctl
 ENV cmctlVersion=2.6.2
 # renovate: datasource=github-releases depName=velero-io/velero
