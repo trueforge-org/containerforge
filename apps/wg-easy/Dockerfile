@@ -1,5 +1,5 @@
 # ---------- UI BUILD STAGE ----------
-FROM ghcr.io/trueforge-org/node:24.22@sha256:ac184e4789c9d75d84a60bafc4ce892a1fbfbaca29bbd5d9303d74120664d283 AS ui
+FROM ghcr.io/trueforge-org/node:26.13@sha256:ed253825019523201cd05d3e4086248649e8d236ccfd184ce6cb29f18bda5f00 AS ui
 
 ARG VERSION
 
@@ -19,7 +19,7 @@ RUN npm install --global corepack@latest && \
 
 # ---------- LIBSQL STAGE ----------
 # libsql has to be installed next to the server (https://github.com/nitrojs/nitro/issues/3328)
-FROM ghcr.io/trueforge-org/node:24.22@sha256:ac184e4789c9d75d84a60bafc4ce892a1fbfbaca29bbd5d9303d74120664d283 AS libsql
+FROM ghcr.io/trueforge-org/node:26.13@sha256:ed253825019523201cd05d3e4086248649e8d236ccfd184ce6cb29f18bda5f00 AS libsql
 
 USER root
 WORKDIR /build
@@ -48,7 +48,7 @@ RUN apt-get update && \
     sed -i 's|\[\[ $proto == -4 \]\] && cmd sysctl -q net\.ipv4\.conf\.all\.src_valid_mark=1|[[ $proto == -4 ]] \&\& [[ $(sysctl -n net.ipv4.conf.all.src_valid_mark) != 1 ]] \&\& cmd sysctl -q net.ipv4.conf.all.src_valid_mark=1|' amneziawg-tools/src/wg-quick/linux.bash
 
 # ---------- FINAL RUNTIME IMAGE ----------
-FROM ghcr.io/trueforge-org/node:24.22@sha256:ac184e4789c9d75d84a60bafc4ce892a1fbfbaca29bbd5d9303d74120664d283
+FROM ghcr.io/trueforge-org/node:26.13@sha256:ed253825019523201cd05d3e4086248649e8d236ccfd184ce6cb29f18bda5f00
 
 ARG VERSION
 
