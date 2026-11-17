@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=rhasspy/wyoming-piper
-  default = "2.5.3"
+  default = "2.5.4"
 }
 
 variable "LICENSE" {
