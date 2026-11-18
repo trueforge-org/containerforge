@@ -149,7 +149,6 @@ ARG TARGETARCH
 ARG TARGETARCH=${TARGETARCH/arm64/arm64}
 ARG TARGETARCH=${TARGETARCH/amd64/x64}
 
-ENV HOME=/app/nodehome
 
 RUN set -ex; \
   mkdir -p /app/nodehome; \
