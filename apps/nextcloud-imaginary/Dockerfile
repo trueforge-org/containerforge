@@ -1,5 +1,5 @@
 # Stage 1: Build imaginary binary
-FROM ghcr.io/trueforge-org/golang:1.27.4@sha256:3fdf573f133dd250e70a801cfc31b346d089f1001976830f7b3866449b7de54b as go
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348 as go
 
 ARG VERSION
 ARG IMAGINARY_COMMIT=b632dae8cc321452c3f85bcae79c580b1ae1ed84
@@ -20,7 +20,7 @@ RUN set -ex; \
     go install github.com/h2non/imaginary@${IMAGINARY_COMMIT}
 
 # Stage 2: Minimal runtime
-FROM ghcr.io/trueforge-org/golang:1.27.4@sha256:3fdf573f133dd250e70a801cfc31b346d089f1001976830f7b3866449b7de54b
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348
 
 USER root
 

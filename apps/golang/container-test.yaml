@@ -1,8 +1,0 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
-
-
-filePaths:
-- /usr/local/go/bin/go
-
-mainRunner:
-  cmd: "sleep 999"
