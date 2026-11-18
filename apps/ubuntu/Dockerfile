@@ -9,7 +9,7 @@ ARG TARGETARCH
 USER root
 
 RUN set -eux; \
-    url="https://dl.google.com/go/go${VERSION}.linux-${TARGETARCH}.tar.gz"; \
+    url="https://dl.google.com/go/go${GO_VERSION}.linux-${TARGETARCH}.tar.gz"; \
     wget -O go.tgz "$url"; \
     wget -O go.tgz.asc "$url.asc"; \
     GNUPGHOME="$(mktemp -d)"; export GNUPGHOME; \
