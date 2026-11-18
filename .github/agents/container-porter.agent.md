@@ -43,9 +43,9 @@ Pick the most appropriate ContainerForge base for the FINAL stage:
 | Generic Debian/Ubuntu userland | `ghcr.io/trueforge-org/ubuntu` |
 | Python | `ghcr.io/trueforge-org/python` |
 | Python + Node | `ghcr.io/trueforge-org/python-node` |
-| Go (final stage) | `ghcr.io/trueforge-org/golang` |
+| Go (final stage) | `ghcr.io/trueforge-org/ubuntu` |
 | Java 8/11/17/21/25 | `ghcr.io/trueforge-org/java<N>` |
-| Node | `ghcr.io/trueforge-org/node` |
+| Node | `ghcr.io/trueforge-org/ubuntu` |
 
 Then load the matching language-runtime instructions file (python-runtime / go-runtime) before writing the Dockerfile or `start.sh`.
 

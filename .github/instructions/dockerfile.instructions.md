@@ -16,7 +16,7 @@ paths:
 ## Filesystem (read-only-rootfs compatible)
 
 - `/app` is read-only at runtime. It MUST contain the application binary/assets and MUST NOT require write access.
-- `/config` is persistent storage, MAY be empty at container start. Apps using `ghcr.io/trueforge-org/golang` MUST run correctly with empty `/config`.
+- `/config` is persistent storage, MAY be empty at container start. Apps using `ghcr.io/trueforge-org/ubuntu` MUST run correctly with empty `/config`.
 - `/tmp` is ephemeral (ramdisk-style) scratch space. ALL build/runtime caches (`GOCACHE`, pip cache, npm cache, scratch) MUST go to `/tmp`, never `/config`.
 - Do NOT place temporary caches in `/config` unless persistence is explicitly required.
 - System binaries (Go, Python, etc.) MAY live under `/usr/local` so `/app` stays empty for downstream `FROM` consumers.

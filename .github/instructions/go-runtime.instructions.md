@@ -1,5 +1,5 @@
 ---
-description: "Use when working on Go-based ContainerForge apps (Dockerfiles using golang build stages or based on ghcr.io/trueforge-org/golang). Covers build-stage compilation, runtime-stage copy, go.mod/go.sum hygiene, empty /config behavior."
+description: "Use when working on Go-based ContainerForge apps (Dockerfiles using golang build stages or based on ghcr.io/trueforge-org/ubuntu). Covers build-stage compilation, runtime-stage copy, go.mod/go.sum hygiene, empty /config behavior."
 paths:
   - "apps/**"
 ---
@@ -18,5 +18,5 @@ paths:
 
 ## Runtime expectations
 
-- Apps using `ghcr.io/trueforge-org/golang` as the final stage MUST run correctly when `/config` is empty.
+- Apps using `ghcr.io/trueforge-org/ubuntu` as the final stage MUST run correctly when `/config` is empty.
 - `GOCACHE` and any other build/run caches MUST point at `/tmp`, never `/config`, never `/app`.
