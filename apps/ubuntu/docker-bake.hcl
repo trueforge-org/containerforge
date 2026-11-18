@@ -9,6 +9,12 @@ variable "VERSION" {
   default = "26.04"
 }
 
+variable "GO_VERSION" {
+  // renovate: datasource=docker depName=docker.io/library/golang
+  default = "1.27.4"
+}
+
+
 variable "NODE_VERSION" {
   // renovate: datasource=docker depName=docker.io/library/node
   default = "26.13.1"
@@ -52,6 +58,7 @@ target "image" {
     VERSION = "${VERSION}"
     NODE_VERSION = "${NODE_VERSION}"
     YARN_VERSION = "${YARN_VERSION}"
+    GO_VERSION = "${GO_VERSION}"
     NEO_VER = "${NEO_VER}"
     IGC1_LEGACY_VER = "${IGC1_LEGACY_VER}"
     NEO_LEGACY_VER = "${NEO_LEGACY_VER}"
