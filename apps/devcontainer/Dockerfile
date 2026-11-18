@@ -1,13 +1,8 @@
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348 AS go
-
 # hadolint ignore=DL3007
 FROM ghcr.io/trueforge-org/python:3.15.2
 
 ARG VERSION
 ARG TARGETARCH
-
-# Copy Go from the first stage
-COPY --from=go /usr/local/go /usr/local/go
 
 ENV GOTOOLCHAIN=local
 ENV GOPATH=/config/go
