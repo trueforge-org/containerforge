@@ -234,8 +234,6 @@ RUN set -eux; \
     apt-get purge -y --auto-remove gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=build --link /target/ /
-
 # Fix /config permission issues
 RUN install -d -o apps -g apps /config
 
