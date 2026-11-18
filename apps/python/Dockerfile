@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348
+FROM ghcr.io/trueforge-org/ubuntu:26.4
 
 # Environment variables
 ARG VERSION
