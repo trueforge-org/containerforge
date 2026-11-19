@@ -4,11 +4,28 @@ upstream_env_url: "https://github.com/actions/runner"
 ports:
   []
 env:
+  # The variables below are only read by /scripts/standalone.sh (docker compose mode).
+  # Kubernetes / ARC passes its own command and does not use them.
+  - name: RUNNER_DIND
+    default: "auto"
+    required: false
+  - name: RUNNER_DISABLE_UPDATE
+    default: "false"
+    required: false
+  - name: RUNNER_EPHEMERAL
+    default: "false"
+    required: false
+  - name: RUNNER_GROUP
+    default: ""
+    required: false
   - name: RUNNER_LABELS
     default: ""
     required: false
   - name: RUNNER_NAME
     default: ""
+    required: false
+  - name: RUNNER_REMOVE_ON_EXIT
+    default: "false"
     required: false
   - name: RUNNER_REPOSITORY_URL
     default: ""

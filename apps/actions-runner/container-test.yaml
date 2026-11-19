@@ -3,3 +3,4 @@
 runners:
 - entrypoint: test -f /usr/local/bin/yq
 - entrypoint: test -f /bin/sh
+- entrypoint: test -x /scripts/standalone.sh
