@@ -122,7 +122,7 @@ ENV cmctlVersion=2.6.2
 # renovate: datasource=github-releases depName=velero-io/velero
 ENV veleroVersion=1.18.4
 # renovate: datasource=github-releases depName=restic/restic
-ENV resticVersion=0.19.1
+ENV resticVersion=0.20.0
 # renovate: datasource=github-releases depName=kopia/kopia
 ENV kopiaVersion=0.23.1
 # renovate: datasource=github-releases depName=home-operations/flate
