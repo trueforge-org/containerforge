@@ -132,7 +132,7 @@ ENV flateVersion=0.6.5
 # renovate: datasource=docker depName=docker.io/library/docker versioning=docker
 ENV dockerVersion=29.10.0
 # renovate: datasource=github-releases depName=docker/buildx
-ENV buildxVersion=0.39.0
+ENV buildxVersion=0.39.1
 # renovate: datasource=github-releases depName=docker/compose
 ENV composeVersion=5.8.0
 # renovate: datasource=github-releases depName=hadolint/hadolint
