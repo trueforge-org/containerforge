@@ -126,7 +126,7 @@ ENV resticVersion=0.20.0
 # renovate: datasource=github-releases depName=kopia/kopia
 ENV kopiaVersion=0.23.1
 # renovate: datasource=github-releases depName=home-operations/flate
-ENV flateVersion=0.6.5
+ENV flateVersion=0.8.0
 
 ### Container image tools
 # renovate: datasource=docker depName=docker.io/library/docker versioning=docker
