@@ -106,5 +106,5 @@ RUN set -eux; \
 USER apps
 COPY --chmod=0755 . /
 
-HEALTHCHECK CMD ["/healthcheck.sh"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --start-interval=5s --retries=3 CMD ["/healthcheck.sh"]
 COPY --chmod=0755 start.sh /start.sh

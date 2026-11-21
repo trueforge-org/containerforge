@@ -3,6 +3,9 @@ set -euo pipefail
 
 CONFIG_PATH="${1:-${HEALTHCHECK_CONFIG:-/container-test.yaml}}"
 CHECKS_RUN=0
+# HEALTHCHECK_DRY_RUN=1 only parses the config and counts the checks, without probing anything.
+# It is used by scripts/test-healthcheck-apps.sh to find configs this parser cannot read.
+DRY_RUN="${HEALTHCHECK_DRY_RUN:-0}"
 
 trim() {
     local value="$1"
@@ -21,8 +24,68 @@ normalize_value() {
     printf '%s' "$value"
 }
 
-check_tcp() {
+# A probed port can be redirected with HEALTHCHECK_PORT_<configured port>=<actual port>, for apps
+# whose listen port is changed through the environment.
+resolve_port() {
     local port="$1"
+    local var
+    local override
+    if [[ "${port}" =~ ^[0-9]+$ ]]; then
+        var="HEALTHCHECK_PORT_${port}"
+        override="${!var:-}"
+        if [[ -n "${override}" ]]; then
+            if [[ ! "${override}" =~ ^[0-9]+$ ]]; then
+                echo "healthcheck.sh: ${var} must be a port number, got '${override}'" >&2
+                return 1
+            fi
+            port="${override}"
+        fi
+    fi
+    printf '%s' "${port}"
+}
+
+# Fallback for images without any probe: the main process must still be running. Containers start
+# under an init (tini), which stays alive on its own, so it also needs a live child process.
+process_alive() {
+    local stat rest state ppid pid file comm
+
+    [[ -r /proc/1/stat ]] || return 1
+    stat="$(</proc/1/stat)"
+    rest="${stat##*) }"
+    state="${rest%% *}"
+    [[ "${state}" != "Z" ]] || return 1
+
+    comm="$(</proc/1/comm)"
+    case "${comm}" in
+        tini|dumb-init|docker-init) ;;
+        *) return 0 ;;
+    esac
+
+    for file in /proc/[0-9]*/stat; do
+        pid="${file#/proc/}"
+        pid="${pid%/stat}"
+        if [[ "${pid}" == "1" || "${pid}" == "$$" ]]; then
+            continue
+        fi
+        # The process may exit while we scan. The redirect must sit on a group: $(<file) only reads the
+        # file when it is the whole command substitution.
+        { stat="$(<"${file}")"; } 2>/dev/null || continue
+        rest="${stat##*) }"
+        read -r state ppid _ <<<"${rest}"
+        if [[ "${ppid}" == "1" && "${state}" != "Z" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+check_tcp() {
+    local port
+    port="$(resolve_port "$1")" || return 1
+    if [[ "${DRY_RUN}" == "1" ]]; then
+        CHECKS_RUN=$((CHECKS_RUN + 1))
+        return 0
+    fi
     # Use `timeout` to avoid hanging beyond Docker's healthcheck timeout when
     # the remote side accepts the SYN but never completes the handshake.
     if ! timeout 5 bash -c "exec 3<>/dev/tcp/127.0.0.1/${port}" 2>/dev/null; then
@@ -32,11 +95,17 @@ check_tcp() {
 }
 
 check_http() {
-    local port="$1"
+    local port
     local path="$2"
     local status_code="$3"
     local received_status
     local curl_exit
+
+    port="$(resolve_port "$1")" || return 1
+    if [[ "${DRY_RUN}" == "1" ]]; then
+        CHECKS_RUN=$((CHECKS_RUN + 1))
+        return 0
+    fi
 
     set +e
     received_status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' --connect-timeout 5 --max-time 10 "http://127.0.0.1:${port}${path}")"
@@ -68,6 +137,11 @@ check_command() {
     local match_content="$4"
     local output
     local exit_code
+
+    if [[ "${DRY_RUN}" == "1" ]]; then
+        CHECKS_RUN=$((CHECKS_RUN + 1))
+        return 0
+    fi
 
     set +e
     output="$(sh -c "${command}" 2>&1)"
@@ -102,11 +176,20 @@ if [[ ! -f "${CONFIG_PATH}" ]]; then
 fi
 
 if ! grep -Eq '^[[:space:]]*(http|tcp|healthCommands):[[:space:]]*$' "${CONFIG_PATH}"; then
+    # No probe configured (readiness is only covered by the container tests): fall back to
+    # checking that the main process is still running, instead of always reporting healthy.
+    if [[ "${DRY_RUN}" == "1" ]]; then
+        echo "no-probe"
+        exit 0
+    fi
+    if ! process_alive; then
+        echo "healthcheck.sh: no probe configured and the main process is not running" >&2
+        exit 1
+    fi
     exit 0
 fi
 
 SECTION=""
-SECTION_SEEN=0
 CURRENT_HTTP_PORT=""
 CURRENT_HTTP_PATH="/"
 CURRENT_HTTP_STATUS=""
@@ -135,7 +218,6 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
             flush_command
         fi
         SECTION="${BASH_REMATCH[1]}"
-        SECTION_SEEN=1
         continue
     fi
 
@@ -192,13 +274,12 @@ elif [[ "${SECTION}" == "healthCommands" ]]; then
 fi
 
 if [[ "${CHECKS_RUN}" -eq 0 ]]; then
-    if [[ "${SECTION_SEEN}" -eq 1 ]]; then
-        # A section header was present but no individual check was parsed.
-        # This is almost always a malformed container-test.yaml and should
-        # be surfaced, but we keep the legacy exit-0 behavior so we don't
-        # flip otherwise-green images unhealthy on a parse issue alone.
-        echo "healthcheck.sh: warning: http/tcp/healthCommands section was present in ${CONFIG_PATH} but no checks were executed" >&2
-    fi
-    # No checks configured is considered healthy for images that only use readiness smoke tests.
-    exit 0
+    # A probe section is present but no check could be parsed. That is a broken container-test.yaml,
+    # and reporting healthy would hide it, so fail.
+    echo "healthcheck.sh: http/tcp/healthCommands section present in ${CONFIG_PATH} but no checks could be parsed" >&2
+    exit 1
+fi
+
+if [[ "${DRY_RUN}" == "1" ]]; then
+    echo "checks=${CHECKS_RUN}"
 fi

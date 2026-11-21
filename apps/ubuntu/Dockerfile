@@ -251,7 +251,7 @@ COPY --chmod=0775  container-test.yaml /container-test.yaml
 
 WORKDIR /config
 
-HEALTHCHECK CMD ["/healthcheck.sh"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --start-interval=5s --retries=3 CMD ["/healthcheck.sh"]
 
 # PID 1 with tini, handoff to entrypoint
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
