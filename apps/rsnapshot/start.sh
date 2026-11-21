@@ -15,6 +15,7 @@ if [[ ! -f /config/rsnapshot.conf ]]; then
     sed -i -E 's@^#cmd_rsnapshot_diff	/usr/local/bin/rsnapshot-diff$@cmd_rsnapshot_diff	/usr/bin/rsnapshot-diff@g' /config/rsnapshot.conf
     sed -i -E 's@^#logfile	/var/log/rsnapshot$@logfile	/config/rsnapshot.log@g' /config/rsnapshot.conf
     sed -i -E 's@^lockfile	/var/run/rsnapshot.pid$@lockfile	/config/rsnapshot.pid@g' /config/rsnapshot.conf
+    sed -i -E 's@^snapshot_root	/var/cache/rsnapshot/$@snapshot_root	/config/snapshots/@g' /config/rsnapshot.conf
     sed -i -E 's@^#link_dest	0$@link_dest	1@g' /config/rsnapshot.conf
     sed -i -E 's@^backup	/home/		localhost/$@backup	/data/		localhost/\n#backup	/home/		localhost/@g' /config/rsnapshot.conf
     sed -i -E 's@^backup	/etc/		localhost/$@#backup	/etc/		localhost/@g' /config/rsnapshot.conf

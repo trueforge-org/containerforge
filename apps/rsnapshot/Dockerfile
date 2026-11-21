@@ -12,7 +12,7 @@ RUN \
     openssh-client \
     rsnapshot \
     rsync && \
-  rm -rf /etc/rsnapshot.conf && \
+  mv /etc/rsnapshot.conf /etc/rsnapshot.conf.default && \
   ln -s /config/rsnapshot.conf /etc/rsnapshot.conf && \
   echo "**** cleanup ****" && \
   rm -rf \
