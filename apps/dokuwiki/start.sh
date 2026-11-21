@@ -74,6 +74,9 @@ for i in "${CORE_DIR[@]}"; do
 
 done
 
+mkdir -p /config/php
+touch /config/php/php-local.ini
+
 ## Bump php upload max filesize and post max size to 100MB by default
 if ! grep -qF 'upload_max_filesize' /config/php/php-local.ini; then
     echo 'upload_max_filesize = 100M' >> /config/php/php-local.ini
@@ -100,7 +103,7 @@ else
 fi
 
 ## Backwards compatibility 2021/04/15
-sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
+[[ -f /config/nginx/site-confs/default.conf ]] && sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
 
 cd /app/www/public
-exec php -S 0.0.0.0:8080
+exec php -S 0.0.0.0:80
