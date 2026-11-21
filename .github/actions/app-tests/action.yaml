@@ -1,7 +1,7 @@
 ---
 # yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 name: App Tests
-description: Takes an app, app image and token then runs app tests
+description: Takes an app and an app image, then runs the app tests with a pinned forgetool
 
 inputs:
   app:
@@ -11,40 +11,14 @@ inputs:
     description: Image
     required: true
   version:
-    description: Version
-    required: true
-  token:
-    description: GitHub Token
+    description: App version, exported to the tests as VERSION
     required: true
 
 runs:
   using: composite
   steps:
     - name: Setup Forgetool
-      shell: bash
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
-      run: |-
-        # Authenticate API calls: anonymous requests share a 60/hour per-IP rate
-        # limit and fail with 403 when many test jobs run in parallel.
-        TAG="$(curl -fsSL --retry 3 --retry-all-errors \
-          -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-          -H "Accept: application/vnd.github+json" \
-          https://api.github.com/repos/trueforge-org/forgetool/releases/latest \
-          | jq -r '.tag_name')"
-        [ -n "${TAG}" ] && [ "${TAG}" != "null" ] || { echo "Failed to determine latest stable forgetool release tag"; exit 1; }
-        VERSION="${TAG#v}"
-        VERSION="${VERSION#forgetool-v}"
-        case "$(uname -m)" in
-          x86_64) ARCH="amd64" ;;
-          aarch64|arm64) ARCH="arm64" ;;
-          *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64, arm64." && exit 1 ;;
-        esac
-        curl -fsSL --retry 3 --retry-all-errors -o "${RUNNER_TEMP}/forgetool.tar.gz" "https://github.com/trueforge-org/forgetool/releases/download/${TAG}/forgetool_${VERSION}_linux_${ARCH}.tar.gz" || { echo "Failed to download forgetool release ${TAG} for linux_${ARCH}"; exit 1; }
-        mkdir -p "${RUNNER_TEMP}/forgetool-bin"
-        tar -xzf "${RUNNER_TEMP}/forgetool.tar.gz" -C "${RUNNER_TEMP}/forgetool-bin" forgetool || { echo "Failed to extract forgetool binary from archive"; exit 1; }
-        chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
-        echo "${RUNNER_TEMP}/forgetool-bin" >> "${GITHUB_PATH}"
+      uses: ./.github/actions/setup-forgetool
 
     - name: Run Tests
       shell: bash
@@ -54,4 +28,6 @@ runs:
         VERSION: ${{ inputs.version }}
         TESTHELPERS_CONTAINER_LOGS: all
       run: |-
-        forgetool containers test --image "${TEST_IMAGE}" --config "./apps/${APP}/container-test.yaml"
+        set -o pipefail
+        mkdir -p "${RUNNER_TEMP}/test-logs"
+        forgetool containers test --image "${TEST_IMAGE}" --config "./apps/${APP}/container-test.yaml" 2>&1 | tee "${RUNNER_TEMP}/test-logs/${APP}.log"

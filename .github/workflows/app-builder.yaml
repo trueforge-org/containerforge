@@ -17,6 +17,7 @@ on:
 jobs:
   plan:
     name: Plan
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     outputs:
       app-exists: ${{ steps.app-exists.outputs.exists }}
@@ -102,6 +103,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: ${{ fromJson(needs.plan.outputs.platforms) }}
+    timeout-minutes: 90
     runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - name: Checkout
@@ -210,6 +212,7 @@ jobs:
 
   merge:
     name: Merge
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     needs: build
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
@@ -291,6 +294,7 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
       - name: Install Cosign
@@ -366,6 +370,7 @@ jobs:
     if: ${{ inputs.release }}
     needs:
       - merge
+    timeout-minutes: 20
     runs-on:
       group: default
     steps:
@@ -422,6 +427,7 @@ jobs:
     name: Test
     needs:
       - merge
+    timeout-minutes: 45
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -448,7 +454,15 @@ jobs:
           app: ${{ inputs.app }}
           image: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
           version: ${{ steps.app-options.outputs.version }}
-          token: ${{ github.token }}
+
+      - name: Upload Test Logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: ${{ inputs.app }}-test-logs
+          path: ${{ runner.temp }}/test-logs/
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Get App Size Diff
         uses: ./.github/actions/app-size-diff
@@ -474,6 +488,7 @@ jobs:
       - plan
       - attest
       - sign
+    timeout-minutes: 15
     runs-on:
       group: default
     steps:
@@ -521,6 +536,7 @@ jobs:
       - build
       - merge
     name: Notify
+    timeout-minutes: 10
     runs-on:
       group: default
     steps:

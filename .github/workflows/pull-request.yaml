@@ -9,6 +9,7 @@ on:
 jobs:
   prepare:
     name: Prepare
+    timeout-minutes: 10
     runs-on:
       group: default
     outputs:
@@ -54,6 +55,7 @@ jobs:
     name: Build Success
     needs:
       - build
+    timeout-minutes: 5
     runs-on:
       group: default
     steps:
