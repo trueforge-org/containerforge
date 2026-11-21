@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
@@ -211,7 +212,11 @@ def fetch_event_detail(plug_url):
         print(f"❌ Error fetching plug.events details from {plug_url}: {e}")
         return None, []
 
+OUTPUT_FILE = os.path.join(os.environ.get("OUTPUT_DIR", "/tmp/balfolk"), "balfolk.ics")
+
+
 def main():
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     events = fetch_balfolk_events()
 
     cal = Calendar()
@@ -226,6 +231,8 @@ def main():
         summary = None
         dtstart = None
         dtend = None
+        datetimes = []
+        summaries = []
 
         if ev["plug_url"]:
             plug_summary, ranges = fetch_event_detail(ev["plug_url"])
@@ -252,11 +259,11 @@ def main():
                 event.add("url", ev["plug_url"])
             cal.add_component(event)
 
-    with open("balfolk.ics", "wb") as f:
+    with open(OUTPUT_FILE, "wb") as f:
         f.write(cal.to_ical())
-    print("ICS file generated as balfolk.ics")
+    print(f"ICS file generated as {OUTPUT_FILE}")
 
-def validate_ics_file(filename="balfolk.ics"):
+def validate_ics_file(filename=OUTPUT_FILE):
     print("\nValidating ICS file...\n")
     try:
         with open(filename, "rb") as f:
@@ -304,4 +311,4 @@ def validate_ics_file(filename="balfolk.ics"):
 
 if __name__ == "__main__":
     main()
-    validate_ics_file("balfolk.ics")
+    validate_ics_file(OUTPUT_FILE)
