@@ -5,7 +5,10 @@ ARG VERSION
 ARG TARGETARCH
 USER root
 
-RUN mkdir -p /app && \
+# /secrets/<name> are the mount points of the volumes `secrets init` fills (deploy/): a new named
+# volume copies the owner of its mount point, so the processes can read what init puts there.
+RUN mkdir -p /app /secrets/api /secrets/web /secrets/worker /secrets/body \
+        /secrets/db /secrets/dbsetup /secrets/valkey && \
     echo "**** install DexaFix ****" && \
     curl -o \
         /tmp/dexafix.tar.gz -L \
@@ -13,7 +16,7 @@ RUN mkdir -p /app && \
     tar -xzf \
         /tmp/dexafix.tar.gz -C \
         /app && \
-    chown -R apps:apps /app && \
+    chown -R apps:apps /app /secrets && \
     echo "**** cleanup ****" && \
     rm -rf \
         /tmp/*
