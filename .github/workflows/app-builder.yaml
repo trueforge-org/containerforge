@@ -42,15 +42,10 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           REPO: ${{ github.repository }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |-
           # Fork PRs get a read-only token and no secrets: they are built and tested locally, never pushed.
           fork=false
           if [[ "${EVENT_NAME}" == "pull_request" && "${HEAD_REPO}" != "${REPO}" ]]; then
-            fork=true
-          fi
-          # TEMPORARY (removed before review): lets a same-repo PR exercise the fork path.
-          if [[ "${PR_TITLE}" == *"[simulate-fork]"* ]]; then
             fork=true
           fi
           echo "fork=${fork}" >> "${GITHUB_OUTPUT}"
