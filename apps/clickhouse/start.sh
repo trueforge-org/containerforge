@@ -11,16 +11,17 @@ for value in "${CLICKHOUSE_USER}" "${CLICKHOUSE_DB}"; do
     fi
 done
 
-# Without a password, nothing but this container can connect
+# The server always listens on all interfaces, so the published ports are reachable
+# Without a password, the user only accepts connections from inside this container
+export CLICKHOUSE_LISTEN_HOST="::"
+export CLICKHOUSE_LISTEN_HOST_IPV4="0.0.0.0"
 if [[ -n "${CLICKHOUSE_PASSWORD:-}" ]]; then
     password='<password from_env="CLICKHOUSE_PASSWORD"/>'
-    export CLICKHOUSE_LISTEN_HOST="::"
-    export CLICKHOUSE_LISTEN_HOST_IPV4="0.0.0.0"
+    networks='<ip>::/0</ip>'
 else
-    echo "CLICKHOUSE_PASSWORD is not set: ClickHouse only listens on localhost"
+    echo "CLICKHOUSE_PASSWORD is not set: the user [${CLICKHOUSE_USER}] only accepts connections from localhost"
     password='<password></password>'
-    export CLICKHOUSE_LISTEN_HOST="::1"
-    export CLICKHOUSE_LISTEN_HOST_IPV4="127.0.0.1"
+    networks='<ip>::1</ip><ip>127.0.0.1</ip>'
 fi
 
 # Written on every start, so changes also apply to existing data
@@ -33,7 +34,7 @@ cat >/config/users.xml <<EOXML
     <users>
         <${CLICKHOUSE_USER}>
             ${password}
-            <networks><ip>::/0</ip></networks>
+            <networks>${networks}</networks>
             <profile>default</profile>
             <quota>default</quota>
             <access_management>${CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT:-0}</access_management>
