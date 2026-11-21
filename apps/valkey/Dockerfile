@@ -11,6 +11,7 @@ RUN test "${PACKAGE_VERSION%%-*}" = "${VERSION}" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         "valkey-server=${PACKAGE_VERSION}" \
+        "valkey-tools=${PACKAGE_VERSION}" \
     && apt-get purge -y --auto-remove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
