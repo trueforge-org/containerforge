@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-mkdir -p /config/{content,config,sessions}
+mkdir -p /config/{content/pages,config,sessions}
 
 # upgrade support
 if [[ -f /config/config.default.js ]]; then
