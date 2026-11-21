@@ -24,7 +24,7 @@ load_env
 mkdir -p \
     "${DATADIR}" \
     /config/log/mysql \
-    /run/mysqld
+    /tmp/mysqld
 
 # copy custom cnf file
 if [[ ! -f /config/custom.cnf ]]; then
@@ -32,18 +32,18 @@ if [[ ! -f /config/custom.cnf ]]; then
 fi
 
 # remove orphan pid file
-if [[ -f /run/mysqld/mysqld.pid ]]; then
-    rm -f /run/mysqld/mysqld.pid
+if [[ -f /tmp/mysqld/mysqld.pid ]]; then
+    rm -f /tmp/mysqld/mysqld.pid
 fi
 
 
 # set start function used later
 start_mariadb() {
-    mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/run/mysqld/mysqld.pid --user=apps &
+    mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/tmp/mysqld/mysqld.pid --socket=/tmp/mysqld/mysqld.sock --user=apps &
     pid="$!"
     RET=1
     while [[ ${RET} -ne 0 ]]; do
-        mariadb -uroot -e "status" >/dev/null 2>&1
+        mariadb --socket=/tmp/mysqld/mysqld.sock -uroot -e "status" >/dev/null 2>&1
         RET=$?
         sleep 1
     done
@@ -111,7 +111,7 @@ EONEWSQL
         done
     fi
 
-        chmod -R 777 /config/log/mysql /run/mysqld
+        chmod -R 777 /config/log/mysql /tmp/mysqld
 
     # initialise database structure
 
@@ -121,7 +121,7 @@ EONEWSQL
     start_mariadb
 
     # shut down after apply sql commands, waiting for pid to stop
-    mariadb-admin -u root shutdown
+    mariadb-admin --socket=/tmp/mysqld/mysqld.sock -u root shutdown
     wait "${pid}"
     echo "Database Setup Completed"
 
@@ -152,7 +152,7 @@ EOFPASS
 fi
 
 # check logrotate permissions
-if mariadb-admin -uroot --local version >/dev/null 2>&1; then
+if mariadb-admin --socket=/tmp/mysqld/mysqld.sock -uroot --local version >/dev/null 2>&1; then
     echo "Logrotate is enabled"
 else
     cat <<-EOFPASS
@@ -186,7 +186,7 @@ fi
 # check for upgrades
 if [[ "${#MYSQL_ROOT_PASSWORD}" -gt "3" ]]; then
     # display a message about upgrading database if needed
-    if mariadb-upgrade -u root -p"${MYSQL_ROOT_PASSWORD}" --check-if-upgrade-is-needed >/dev/null 2>&1; then
+    if mariadb-upgrade --socket=/tmp/mysqld/mysqld.sock -u root -p"${MYSQL_ROOT_PASSWORD}" --check-if-upgrade-is-needed >/dev/null 2>&1; then
         cat <<-EOF
 
 
@@ -210,7 +210,7 @@ EOF
 fi
 
 # Apply the passwords on every start, so changing them also works on existing data
-syncSqlFile=/run/mysqld/sync-passwords.sql
+syncSqlFile=/tmp/mysqld/sync-passwords.sql
 (
     umask 077
     : >"${syncSqlFile}"
@@ -226,7 +226,8 @@ syncSqlFile=/run/mysqld/sync-passwords.sql
 /usr/bin/mariadbd-safe \
         --defaults-extra-file=/config/custom.cnf \
         --datadir="${DATADIR}" \
-        --pid-file=/run/mysqld/mysqld.pid \
+        --pid-file=/tmp/mysqld/mysqld.pid \
+        --socket=/tmp/mysqld/mysqld.sock \
         --init-file="${syncSqlFile}" \
         --skip-networking=OFF \
         --bind-address='*' \
