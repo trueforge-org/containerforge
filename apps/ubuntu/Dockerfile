@@ -238,7 +238,9 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 # Fix /config permission issues
-RUN install -d -o apps -g apps /config
+# Earlier build steps run as root with HOME=/config and leave .gnupg, .wget-hsts and go/ behind.
+# An empty volume mounted on /config is seeded from them, which breaks apps that scan or back up /config.
+RUN find /config -mindepth 1 -delete && install -d -o apps -g apps /config
 
 # Use a safe non-root user
 # Note: nobody:nogroup does not map to the same uid:gid on every (host/share) distro!
