@@ -1,6 +1,6 @@
 
 
-FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:c018d4dd39d4663c5a76018985546dd3e4d2bf2aa55610e5c29655e3af7a10b5
+FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d
 ARG VENDOR
 ARG VERSION
 
