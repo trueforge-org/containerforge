@@ -34,6 +34,9 @@ jobs:
     name: Build ${{ matrix.app }}
     needs:
       - prepare
+    concurrency:
+      group: pr-${{ matrix.app }}-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     uses: ./.github/workflows/app-builder.yaml
     permissions:
       attestations: write
