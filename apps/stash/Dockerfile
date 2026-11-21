@@ -2,6 +2,7 @@ FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:1e4ce94f2d255834fe7557fd2de50f2c02
 
 ARG TARGETARCH
 ARG VERSION
+ARG INTEL_CR_VERSION
 
 USER root
 WORKDIR /app
