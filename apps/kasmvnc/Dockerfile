@@ -214,7 +214,9 @@ RUN \
 RUN \
   echo "**** install node modules ****" && \
   cd /kclient && \
-  npm install && \
+  npm install --ignore-scripts && \
+  sed -i 's/callback->GetIsolate()/v8::Isolate::GetCurrent()/g' node_modules/pulseaudio2/src/*.cc && \
+  npm rebuild && \
   rm -f package-lock.json
 
 # runtime stage
