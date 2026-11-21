@@ -3,10 +3,12 @@
 DATADIR="/config/db"
 mkdir -p "${DATADIR}"
 
-# Without a root password, nothing is created and only this container can connect
+# Without a root password, no user is created. MongoDB listens on all interfaces with
+# authentication on, so remote clients can connect but cannot run anything, and only
+# connections from localhost may create the first user (localhost exception)
 if [[ -z "${MONGODB_ROOT_PASSWORD:-}" ]]; then
-    echo "MONGODB_ROOT_PASSWORD is not set: authentication stays off and MongoDB only listens on localhost"
-    exec mongod --dbpath "${DATADIR}" --bind_ip 127.0.0.1
+    echo "MONGODB_ROOT_PASSWORD is not set: authentication is on without users, so only localhost can create a user"
+    exec mongod --dbpath "${DATADIR}" --bind_ip_all --auth
 fi
 
 # Apply the users on every start, so changing a password also works on existing data
