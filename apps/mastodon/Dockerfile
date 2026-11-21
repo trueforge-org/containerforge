@@ -49,7 +49,7 @@ RUN \
     bundle config set --local without 'development test exclude' && \
     bundle config set silence_root_warning true && \
     bundle install -j"$(nproc)" --no-cache && \
-    npm install -g corepack && \
+    npm install -g --force corepack@latest && \
     corepack enable && \
     yarn workspaces focus --production @mastodon/mastodon && \
     ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=precompile_placeholder \
