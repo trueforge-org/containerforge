@@ -14,6 +14,12 @@ on:
         description: Release
         required: true
 
+# One run per app and PR: a newer push cancels the older test run, so two runs can
+# never test (or tag) each other's image. Releases get a unique group and never cancel.
+concurrency:
+  group: app-builder-${{ inputs.app }}-${{ inputs.release && github.run_id || github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ !inputs.release }}
+
 jobs:
   plan:
     name: Plan
@@ -67,6 +73,21 @@ jobs:
         with:
           upstream-version: ${{ steps.app-options.outputs.version }}
 
+      - name: Get Sandbox Tag
+        id: sandbox
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          SHA: ${{ github.sha }}
+        run: |-
+          # Unique per PR head, so concurrent runs can never overwrite each other's tag
+          if [[ "${EVENT_NAME}" == "pull_request" ]]; then
+            echo "tag=sandbox-pr${PR_NUMBER}-${PR_HEAD_SHA::7}" >> "${GITHUB_OUTPUT}"
+          else
+            echo "tag=sandbox-${SHA::7}" >> "${GITHUB_OUTPUT}"
+          fi
+
       - name: Build App Metadata
         uses: docker/metadata-action@deaa0dee567db6b95038c14152b037af85a8fe3b
         id: meta
@@ -85,7 +106,7 @@ jobs:
             type=semver,pattern={{major}},value=${{ steps.app-versions.outputs.semantic }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
             type=raw,value=${{ steps.app-versions.outputs.raw }},enable=${{ steps.app-versions.outputs.is-valid-semver && inputs.release }}
             type=raw,value=rolling,enable=${{ inputs.release }}
-            type=raw,value=${{ github.event_name == 'pull_request' && format('sandbox-pr{0}-{1}', github.event.pull_request.number, substring(github.event.pull_request.head.sha, 0, 7)) || format('sandbox-{0}', substring(github.sha, 0, 7)) }},enable=${{ ! inputs.release }}
+            type=raw,value=${{ steps.sandbox.outputs.tag }},enable=${{ ! inputs.release }}
             type=raw,value=sha-${{ github.sha }},enable=${{ inputs.release }}
 
       - name: Upload Bake Metadata
@@ -430,11 +451,16 @@ jobs:
 
   test:
     if: ${{ ! inputs.release }}
-    name: Test
+    name: Test (${{ matrix.platform }})
     needs:
+      - plan
       - merge
     timeout-minutes: 45
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJson(needs.plan.outputs.platforms) }}
+    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - name: Checkout
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
@@ -442,6 +468,7 @@ jobs:
           persist-credentials: false
 
       - name: Generate Token
+        if: ${{ strategy.job-index == 0 }}
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3
         id: app-token
         with:
@@ -465,19 +492,21 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          name: ${{ inputs.app }}-test-logs
+          name: ${{ inputs.app }}-test-logs-${{ strategy.job-index }}
           path: ${{ runner.temp }}/test-logs/
           if-no-files-found: ignore
           retention-days: 7
 
       - name: Get App Size Diff
+        if: ${{ strategy.job-index == 0 }}
         uses: ./.github/actions/app-size-diff
         id: app-size-diff
         with:
           from-app: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:rolling
-          to-app: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}:sandbox
+          to-app: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Post App Size Diff
+        if: ${{ strategy.job-index == 0 }}
         uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0
         with:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
