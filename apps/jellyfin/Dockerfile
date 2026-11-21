@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:fdcc4e24cd12eed53bb1338ab6dd5651f5326bcbb98920aa3e8f0c8f5c9b2458
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
 USER root
 
 ARG TARGETARCH
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libfreetype6 \
     && echo "**** add Jellyfin repo *****" \
     && curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | gpg --dearmor -o /usr/share/keyrings/jellyfin-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/jellyfin-archive-keyring.gpg] https://repo.jellyfin.org/ubuntu noble main" \
+    && echo "deb [signed-by=/usr/share/keyrings/jellyfin-archive-keyring.gpg] https://repo.jellyfin.org/ubuntu resolute main" \
          > /etc/apt/sources.list.d/jellyfin.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
