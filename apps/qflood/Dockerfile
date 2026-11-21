@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/qbittorrent:5.3.0@sha256:ace2c4bd3a4eb1f6a406ca328e35ea44dddd05088c94d987b57ace4c537cf0fd
+FROM ghcr.io/trueforge-org/qbittorrent:5.3.0@sha256:693653fcbbf8410ab05b18a58fb28a48e3162b191c8575ab69e7ccb0b79d9165
 
 ARG TARGETARCH
 ARG VERSION
