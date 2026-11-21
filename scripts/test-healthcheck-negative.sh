@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+BASE_IMAGE="${BASE_IMAGE:-ghcr.io/trueforge-org/python:3.13.12@sha256:cac0b51ee72888e75bf2ff4ae1a46be0b5310663584fc54d621d0476e573f5b8}"
+# SERVER_KIND picks the throwaway HTTP server the cases talk to: python (default) or node.
+# The redirect cases need python, so they are skipped for node.
+SERVER_KIND="${SERVER_KIND:-python}"
+case "${SERVER_KIND}" in
+    python) SERVER_CMD='["python3", "-m", "http.server", "8080", "--directory", "/www", "--bind", "127.0.0.1"]' ;;
+    node) SERVER_CMD='["node", "-e", "require(\"http\").createServer((q, r) => r.end(\"ok\")).listen(8080, \"127.0.0.1\")"]' ;;
+    *) echo "Unknown SERVER_KIND: ${SERVER_KIND}" >&2; exit 1 ;;
+esac
+
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$(mktemp -d /tmp/healthcheck-negative-XXXXXX)"
 
@@ -19,18 +29,19 @@ build_case() {
     cp "${REPO_ROOT}/include/healthcheck.sh" "${case_dir}/healthcheck.sh"
 
     cat >"${case_dir}/Dockerfile" <<'DOCKERFILE'
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:cac0b51ee72888e75bf2ff4ae1a46be0b5310663584fc54d621d0476e573f5b8
+ARG BASE_IMAGE=ghcr.io/trueforge-org/python:rolling
+FROM ${BASE_IMAGE}
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
 COPY container-test.yaml /container-test.yaml
 USER root
 RUN mkdir -p /www && printf 'ok\n' >/www/index.html && touch /existing-file && chown -R apps:apps /www /existing-file
 USER apps
 HEALTHCHECK --interval=1s --timeout=2s --retries=1 CMD ["/healthcheck.sh"]
-CMD ["python3", "-m", "http.server", "8080", "--directory", "/www", "--bind", "127.0.0.1"]
 DOCKERFILE
+    printf 'CMD %s\n' "${SERVER_CMD}" >>"${case_dir}/Dockerfile"
 
     printf '%s\n' "${yaml_content}" >"${case_dir}/container-test.yaml"
-    docker build -t "hc-neg:${case_name}" "${case_dir}" >/dev/null
+    docker build --build-arg "BASE_IMAGE=${BASE_IMAGE}" -t "hc-neg:${case_name}" "${case_dir}" >/dev/null
 }
 
 build_case_redirect() {
@@ -60,7 +71,8 @@ if __name__ == "__main__":
 PY
 
     cat >"${case_dir}/Dockerfile" <<'DOCKERFILE'
-FROM ghcr.io/trueforge-org/python:3.13.12@sha256:cac0b51ee72888e75bf2ff4ae1a46be0b5310663584fc54d621d0476e573f5b8
+ARG BASE_IMAGE=ghcr.io/trueforge-org/python:rolling
+FROM ${BASE_IMAGE}
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
 COPY --chmod=755 server.py /server.py
 COPY container-test.yaml /container-test.yaml
@@ -69,7 +81,7 @@ CMD ["python3", "/server.py"]
 DOCKERFILE
 
     printf '%s\n' "${yaml_content}" >"${case_dir}/container-test.yaml"
-    docker build -t "hc-neg:${case_name}" "${case_dir}" >/dev/null
+    docker build --build-arg "BASE_IMAGE=${BASE_IMAGE}" -t "hc-neg:${case_name}" "${case_dir}" >/dev/null
 }
 
 assert_unhealthy() {

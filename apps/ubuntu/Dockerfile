@@ -129,6 +129,9 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
          -LO https://github.com/intel/compute-runtime/releases/download/${NEO_LEGACY_VER}/intel-opencl-icd-legacy1_${NEO_LEGACY_VER}_amd64.deb; \
     \
     apt-get install --no-install-recommends --no-install-suggests -y ./*.deb; \
+    # amd64 only, so it cannot be a container-test filePaths entry (that also runs on arm64)
+    test -f /etc/OpenCL/vendors/intel.icd && test -f /etc/OpenCL/vendors/intel_legacy1.icd \
+        || { echo "Intel OpenCL ICD files are missing after installing the compute runtime" >&2; exit 1; }; \
     cd ..; \
     rm -rf intel-compute-runtime; \
     apt-get clean autoclean --yes; \
@@ -251,7 +254,7 @@ COPY --chmod=0775  container-test.yaml /container-test.yaml
 
 WORKDIR /config
 
-HEALTHCHECK CMD ["/healthcheck.sh"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --start-interval=5s --retries=3 CMD ["/healthcheck.sh"]
 
 # PID 1 with tini, handoff to entrypoint
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]

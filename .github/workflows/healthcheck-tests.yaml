@@ -5,17 +5,19 @@ name: Healthcheck Tests
 on:
   pull_request:
     paths:
-      - include/healthcheck.sh
-      - scripts/test-healthcheck-positive.sh
-      - scripts/test-healthcheck-negative.sh
+      - include/**
+      - scripts/test-healthcheck-*.sh
+      - apps/ubuntu/**
+      - apps/python/**
+      - .github/workflows/healthcheck-tests.yaml
   merge_group:
 
 jobs:
-  healthcheck:
-    name: Healthcheck Positive/Negative
+  apps:
+    name: Healthcheck config of every app
     permissions:
       contents: read
-    timeout-minutes: 30
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,8 +25,38 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Parse every container-test.yaml
+        run: ./scripts/test-healthcheck-apps.sh
+
+  healthcheck:
+    name: Healthcheck cases (${{ matrix.base }})
+    permissions:
+      contents: read
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The real bases, so a base change that breaks the script (or its tools) is caught.
+          - base: python
+            image: ghcr.io/trueforge-org/python:rolling
+            server: python
+          - base: ubuntu
+            image: ghcr.io/trueforge-org/ubuntu:rolling
+            server: node
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
+
       - name: Run healthcheck script tests
+        env:
+          BASE_IMAGE: ${{ matrix.image }}
+          SERVER_KIND: ${{ matrix.server }}
         run: |
-          chmod +x ./scripts/test-healthcheck-positive.sh ./scripts/test-healthcheck-negative.sh
+          chmod +x ./scripts/test-healthcheck-*.sh
           ./scripts/test-healthcheck-positive.sh
           ./scripts/test-healthcheck-negative.sh
+          ./scripts/test-healthcheck-extra.sh
