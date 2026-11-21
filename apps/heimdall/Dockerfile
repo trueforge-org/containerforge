@@ -40,10 +40,27 @@ RUN \
         /tmp/heimdall.tar.gz -L \
         "https://github.com/linuxserver/Heimdall/archive/v${VERSION}.tar.gz" && \
     mkdir -p \
-        /app/www-tmp && \
+        /app/www && \
     tar xf \
         /tmp/heimdall.tar.gz -C \
-        /app/www-tmp --strip-components=1 && \
+        /app/www --strip-components=1 && \
+    cp /app/www/storage/app/searchproviders.yaml /app/www/storage/app/searchproviders.yaml.orig && \
+    echo "**** link writable state to /config and /tmp ****" && \
+    for i in \
+        storage/app/public/avatars \
+        storage/app/public/backgrounds \
+        storage/app/public/icons \
+        storage/logs \
+        app/SupportedApps \
+        database/app.sqlite \
+        .env \
+        storage/app/searchproviders.yaml; do \
+        rm -rf "/app/www/${i}" && \
+        ln -s "/config/www/$(basename "${i}")" "/app/www/${i}"; \
+    done && \
+    rm -rf /app/www/storage/framework /app/www/bootstrap/cache && \
+    ln -s /tmp/heimdall/framework /app/www/storage/framework && \
+    ln -s /tmp/heimdall/bootstrap-cache /app/www/bootstrap/cache && \
     chown -R apps:apps /app && \
     echo "**** cleanup ****" && \
     rm -rf \
