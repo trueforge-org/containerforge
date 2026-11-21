@@ -14,6 +14,12 @@ on:
         description: Release
         required: true
 
+# One run per app and PR: a newer push cancels the older run, so two runs can never
+# test (or tag) each other's image. Release runs queue per app and never cancel.
+concurrency:
+  group: app-builder-${{ inputs.app }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   plan:
     name: Plan
