@@ -28,11 +28,32 @@ jobs:
     outputs:
       app-exists: ${{ steps.app-exists.outputs.exists }}
       platforms: ${{ steps.app-options.outputs.platforms }}
+      fork: ${{ steps.fork.outputs.fork }}
+      sandbox-tag: ${{ steps.sandbox.outputs.tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
         with:
           persist-credentials: false
+
+      - name: Detect Fork PR
+        id: fork
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          REPO: ${{ github.repository }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |-
+          # Fork PRs get a read-only token and no secrets: they are built and tested locally, never pushed.
+          fork=false
+          if [[ "${EVENT_NAME}" == "pull_request" && "${HEAD_REPO}" != "${REPO}" ]]; then
+            fork=true
+          fi
+          # TEMPORARY (removed before review): lets a same-repo PR exercise the fork path.
+          if [[ "${PR_TITLE}" == *"[simulate-fork]"* ]]; then
+            fork=true
+          fi
+          echo "fork=${fork}" >> "${GITHUB_OUTPUT}"
 
       - name: Check For Existing App
         uses: ./.github/actions/app-exists
@@ -133,13 +154,12 @@ jobs:
           persist-credentials: false
 
       - name: Check if Build is allowed (Non Forked Repo)
+        env:
+          FORK: ${{ needs.plan.outputs.fork }}
         run: |
-          # Default to push = true for main repo
+          # Default to push = true for main repo; fork PRs build to a local tar instead
           PUSH=true
-
-          # If PR comes from a fork, disable push
-          if [[ "${{ github.event_name }}" == "pull_request" ]] && \
-             [[ "${{ github.event.pull_request.head.repo.full_name }}" != "${{ github.repository }}" ]]; then
+          if [[ "${FORK}" == "true" ]]; then
             echo "Detected fork PR, disabling push"
             PUSH=false
           fi
@@ -210,19 +230,30 @@ jobs:
             *.labels.dd.compose.threshold=minor
             *.labels.dd.link.template=https://quay.io/repository/containerforge/${{ inputs.app }}?tab=tags
             *.labels.com.centurylinklabs.watchtower.enable=true
-            *.output=type=image,name=ghcr.io/${{ github.repository_owner }}/${{ inputs.app }},push=${{ env.PUSH }},push-by-digest=true,name-canonical=true,compression=zstd,force-compression=true
+            *.output=${{ env.PUSH == 'true' && format('type=image,name=ghcr.io/{0}/{1},push=true,push-by-digest=true,name-canonical=true,compression=zstd,force-compression=true', github.repository_owner, inputs.app) || format('type=docker,dest={0}/image.tar', runner.temp) }}
             *.platform=${{ matrix.platform }}
-            *.tags=
+            *.tags=${{ env.PUSH != 'true' && format('forkimage/{0}:test', inputs.app) || '' }}
           source: ./apps/${{ inputs.app }}
           targets: image
 
       - name: Export Digest
+        if: ${{ env.PUSH == 'true' }}
         run: |-
           mkdir -p ${{ runner.temp }}/digests
           DIGEST="${{ fromJSON(steps.bake.outputs.metadata).image['containerimage.digest'] }}"
           echo "$DIGEST" > "${{ runner.temp }}/digests/${DIGEST#sha256:}"
 
+      - name: Upload Image Tar (fork PR)
+        if: ${{ env.PUSH != 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: ${{ inputs.app }}-image-${{ steps.target.outputs.arch }}
+          path: ${{ runner.temp }}/image.tar
+          if-no-files-found: error
+          retention-days: 1
+
       - name: Upload Digest
+        if: ${{ env.PUSH == 'true' }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ inputs.app }}-digests-${{ steps.target.outputs.arch }}
@@ -235,8 +266,10 @@ jobs:
     name: Merge
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    needs: build
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    needs:
+      - plan
+      - build
+    if: ${{ needs.plan.outputs.fork != 'true' }}
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
     steps:
@@ -515,6 +548,102 @@ jobs:
             ${{ steps.app-size-diff.outputs.size-diff-markdown }}
 
 
+
+  test-fork:
+    if: ${{ ! inputs.release && needs.plan.outputs.fork == 'true' }}
+    name: Test fork (${{ matrix.platform }})
+    needs:
+      - plan
+      - build
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJson(needs.plan.outputs.platforms) }}
+    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
+
+      - name: Get Target Architecture
+        id: target
+        env:
+          PLATFORM: ${{ matrix.platform }}
+        run: echo "arch=${PLATFORM##*/}" >> "${GITHUB_OUTPUT}"
+
+      - name: Download Image Tar
+        uses: actions/download-artifact@484a0b528fb4d7bd804637ccb632e47a0e638317
+        with:
+          name: ${{ inputs.app }}-image-${{ steps.target.outputs.arch }}
+          path: ${{ runner.temp }}/image
+
+      - name: Load Image
+        run: docker load --input "${{ runner.temp }}/image/image.tar"
+
+      - name: Get App Options
+        uses: ./.github/actions/app-options
+        id: app-options
+        with:
+          app: ${{ inputs.app }}
+
+      - name: Run App Tests
+        uses: ./.github/actions/app-tests
+        with:
+          app: ${{ inputs.app }}
+          image: forkimage/${{ inputs.app }}:test
+          version: ${{ steps.app-options.outputs.version }}
+
+      - name: Upload Test Logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: ${{ inputs.app }}-test-logs-fork-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/test-logs/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  gate:
+    if: ${{ ! inputs.release && always() }}
+    name: Gate
+    needs:
+      - plan
+      - merge
+      - test
+      - test-fork
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require a passing test on every platform
+        env:
+          TEST: ${{ needs.test.result }}
+          TEST_FORK: ${{ needs.test-fork.result }}
+        run: |-
+          # A skipped test must never count as a pass: exactly one of the two test paths has to succeed.
+          if [[ "${TEST}" == "success" || "${TEST_FORK}" == "success" ]]; then
+            echo "Tests passed (test=${TEST}, test-fork=${TEST_FORK})"
+          else
+            echo "::error::Tests did not pass (test=${TEST}, test-fork=${TEST_FORK})"
+            exit 1
+          fi
+
+      - name: Login to GitHub Container Registry
+        if: ${{ needs.test.result == 'success' }}
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Mark Digest as Tested
+        if: ${{ needs.test.result == 'success' }}
+        env:
+          IMAGE: ghcr.io/${{ github.repository_owner }}/${{ inputs.app }}
+          DIGEST: ${{ needs.merge.outputs.digest }}
+          TAG: ${{ needs.plan.outputs.sandbox-tag }}-tested
+        run: |-
+          docker buildx imagetools create -t "${IMAGE}:${TAG}" "${IMAGE}@${DIGEST}"
 
   announce:
     if: ${{ inputs.release && needs.plan.outputs.app-exists != 'true' }}
