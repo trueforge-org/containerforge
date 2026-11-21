@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-Exec yq $@
+exec yq "$@"
