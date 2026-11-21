@@ -18,7 +18,14 @@ WORKDIR /app/deemix-gui
 
 RUN yarn install-all
 
-RUN yarn dist-server
+RUN case "${TARGETARCH}" in \
+        amd64) PKG_ARCH=x64 ;; \
+        arm64) PKG_ARCH=arm64 ;; \
+        *) echo "unsupported arch ${TARGETARCH}" >&2; exit 1 ;; \
+    esac && \
+    sed -i "s/node16-linux-x64/node16-linux-${PKG_ARCH}/" server/package.json && \
+    yarn dist-server && \
+    { [ -f dist/deemix-server-linux ] || mv dist/deemix-server-linux-${PKG_ARCH} dist/deemix-server-linux; }
 
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
 ARG TARGETARCH

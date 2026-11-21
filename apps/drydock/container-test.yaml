@@ -3,3 +3,9 @@
 http:
 - port: '3000'
   path: /health
+
+# Drydock 1.x refuses to register authentication on a fresh install without a choice, so /health stays 503.
+# The test opts in to anonymous access; the image itself does not enable it.
+mainRunner:
+  env:
+    DD_ANONYMOUS_AUTH_CONFIRM: "true"

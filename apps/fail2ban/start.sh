@@ -13,7 +13,6 @@ fi
 # symlink fail2ban configs to /config
 
 # permissions
-chmod -R 644 /etc/logrotate.d
 if [[ -f "/config/log/logrotate.status" ]]; then
     chmod 600 /config/log/logrotate.status
 fi
@@ -27,7 +26,7 @@ case "${VERBOSITY:-}" in
 *) ;;
 esac
 
-FAIL2BAN_ARGS+=("-x" "-f" "start")
+FAIL2BAN_ARGS+=("-s" "/tmp/fail2ban.sock" "-p" "/tmp/fail2ban.pid" "-x" "-f" "start")
 
 exec fail2ban-client "${FAIL2BAN_ARGS[@]}"
 

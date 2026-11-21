@@ -36,8 +36,9 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends \
       -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
       "postgresql-${PREV_MAJOR}" \
+      "postgresql-client-${PG_MAJOR}=${VERSION}*" \
       "postgresql-${PG_MAJOR}=${VERSION}*" \
-      postgresql-server-dev-${PG_MAJOR} && \
+      "postgresql-server-dev-${PG_MAJOR}=${VERSION}*" && \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/* && \
     echo "$PREV_MAJOR" >> /PREV_MAJOR

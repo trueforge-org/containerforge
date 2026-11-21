@@ -150,6 +150,9 @@ RUN \
       intel-media-va-driver; \
   fi && \
   mkdir -p /picons && \
+  echo "**** clear root-owned leftovers inherited from the base image /config ****" && \
+  find /config -mindepth 1 -delete && \
+  chown apps:apps /config && \
   echo "**** cleanup ****" && \
   apt-get clean && \
   rm -rf \

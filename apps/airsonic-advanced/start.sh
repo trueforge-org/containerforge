@@ -28,7 +28,7 @@ exec java \
                 -Dairsonic.defaultPodcastFolder=/podcasts \
                 -Dairsonic.home="${AIRSONIC_ADVANCED_SETTINGS}" \
                 -Djava.awt.headless=true \
-                -Djava.io.tmpdir="/run/tomcat.4040" \
+                -Djava.io.tmpdir=/tmp \
                 -Dserver.servlet.context-path="${URL_BASE}" \
                 -Dserver.host=0.0.0.0 \
                 -Dserver.port=4040 \

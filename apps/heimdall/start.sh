@@ -6,43 +6,14 @@ mkdir -p \
     /config/www/{avatars,backgrounds,icons,logs,SupportedApps} \
     /config/log/heimdall
 
-# install heimdall if necessary
-if [[ -d /app/www-tmp ]]; then
-    echo "New container detected, installing Heimdall"
-    mv /app/www-tmp /app/www
-    cp /app/www/storage/app/searchproviders.yaml /app/www/storage/app/searchproviders.yaml.orig
-    touch /app/set-perms
-fi
-
-# create symlinks
-symlinks=(
-    /app/www/storage/app/public/avatars
-    /app/www/storage/app/public/backgrounds
-    /app/www/storage/app/public/icons
-    /app/www/storage/logs
-    /app/www/app/SupportedApps
-    /app/www/database/app.sqlite
-    /app/www/.env
-)
-for i in "${symlinks[@]}"; do
-    if [[ -e "${i}" && ! -L "${i}" ]]; then
-        rm -rf "${i}"
-    fi
-    if [[ ! -L "${i}" ]]; then
-        ln -s /config/www/"$(basename "${i}")" "${i}"
-    fi
-done
+# writable laravel scratch dirs
+mkdir -p \
+    /tmp/heimdall/bootstrap-cache \
+    /tmp/heimdall/framework/{cache/data,sessions,testing,views}
 
 # copy searchproviders if not exists and symlink
 if [[ ! -f /config/www/searchproviders.yaml ]]; then
     cp /app/www/storage/app/searchproviders.yaml.orig /config/www/searchproviders.yaml
-fi
-rm -rf /app/www/storage/app/searchproviders.yaml
-ln -s /config/www/searchproviders.yaml /app/www/storage/app/searchproviders.yaml
-
-# tidy up install files & set permissions
-if [[ -f /app/set-perms ]]; then
-    rm -rf /app/set-perms
 fi
 
 # copy .env if not exists
