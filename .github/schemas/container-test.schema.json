@@ -1,0 +1,496 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trueforge-org.github.io/containerforge/container-test.schema.json",
+  "title": "Container test configuration",
+  "description": "Schema for apps/*/container-test.yaml consumed by testhelpers.RunChecksFromYAML.",
+  "examples": [
+    {
+      "http": [
+        {
+          "port": "8123",
+          "path": "/",
+          "statusCode": 200
+        }
+      ]
+    },
+    {
+      "tcp": [
+        {
+          "port": "8000"
+        }
+      ],
+      "filePaths": [
+        "/usr/local/bin/yq"
+      ]
+    },
+    {
+      "healthCommands": [
+        {
+          "command": "mycommand",
+          "expectedExitCode": 7,
+          "expectedContent": "ok",
+          "matchContent": true
+        }
+      ]
+    },
+    {
+      "timeoutSeconds": 240,
+      "mainRunner": {
+        "env": { "MAIN": "runner" }
+      },
+      "runners": [
+        {
+          "env": { "MY_VAR": "value" },
+          "entrypoint": "myapp",
+          "cmd": "--version",
+          "expectedOutput": "v1.0",
+          "exitCode": 0
+        }
+      ]
+    }
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "mainRunner": {
+      "$ref": "#/$defs/runnerConfig",
+      "description": "Optional dedicated main-runner configuration used only for health/file/http/tcp/healthCommands waits. mainRunner env/entrypoint/cmd are applied to that wait container, while expectedOutput/exitCode values are accepted but ignored.",
+      "examples": [
+        {
+          "env": { "MAIN": "runner" },
+          "entrypoint": "myapp",
+          "cmd": "--serve"
+        }
+      ]
+    },
+    "runners": {
+      "type": "array",
+      "description": "Runner definitions. Each runner specifies a container configuration (env, entrypoint/cmd) under which configured checks execute. When a runner sets expectedOutput, an output check is performed first. Wait checks run once on the dedicated main runner. When omitted, a single default runner is used.",
+      "default": [],
+      "examples": [
+        [
+          {
+            "env": { "MY_VAR": "value" },
+            "entrypoint": "myapp",
+            "cmd": "--version",
+            "expectedOutput": "v1.0",
+            "exitCode": 0
+          }
+        ]
+      ],
+      "items": {
+        "$ref": "#/$defs/runnerConfig"
+      }
+    },
+    "http": {
+      "type": "array",
+      "description": "HTTP readiness checks used for Container Health Checks in Containerforge. Each item waits for TCP listening on the same port first, then performs an HTTP request and validates status code.",
+      "examples": [
+        [
+          {
+            "port": "8123",
+            "path": "/",
+            "statusCode": 200
+          }
+        ]
+      ],
+      "items": {
+        "$ref": "#/$defs/httpTestConfig"
+      }
+    },
+    "tcp": {
+      "type": "array",
+      "description": "TCP readiness checks used for Container Health Checks in Containerforge. Each item waits for a TCP port to become reachable inside the started container.",
+      "examples": [
+        [
+          {
+            "port": "8000"
+          }
+        ]
+      ],
+      "items": {
+        "$ref": "#/$defs/tcpTestConfig"
+      }
+    },
+    "healthCommands": {
+      "type": "array",
+      "description": "Exec-based health commands used for Container Health Checks in Containerforge, executed against an already running container after health/file/http/tcp checks. Each item is a wait-for exec command and supports optional exit code and output matching.",
+      "examples": [
+        [
+          {
+            "command": "mycommand"
+          },
+          {
+            "command": "mycommand --check",
+            "expectedExitCode": 7,
+            "expectedContent": "ok",
+            "matchContent": true
+          }
+        ]
+      ],
+      "items": {
+        "$ref": "#/$defs/healthCommandTestConfig"
+      }
+    },
+    "filePaths": {
+      "type": "array",
+      "description": "File existence checks used for Container Health Checks in Containerforge. Each string is verified with `test -f` inside the container.",
+      "examples": [
+        [
+          "/usr/local/bin/yq",
+          "/bin/sh"
+        ]
+      ],
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S",
+        "description": "Absolute file path expected to exist in the container filesystem.",
+        "examples": [
+          "/usr/local/bin/yq",
+          "/bin/sh"
+        ]
+      }
+    },
+    "timeoutSeconds": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 180,
+      "description": "Optional timeout for main-runner waits and all runner standard/output checks in seconds. Values below 180 are accepted in YAML, but runtime enforces a 180-second minimum.",
+      "examples": [
+        180,
+        300
+      ]
+    },
+    "readOnlyRootfs": {
+      "type": "boolean",
+      "description": "Mounts the container root filesystem as read-only for all checks in the test suite.",
+      "examples": [
+        true
+      ]
+    },
+    "mounts": {
+      "type": "array",
+      "description": "Folders to mount from host tmp dirs into the container. A fresh temporary directory is created on the host for each entry and bind-mounted at the specified container path. Applies to every check run (http, tcp, filePaths, standard run).",
+      "examples": [
+        [
+          {
+            "path": "/config",
+            "chmod": "755",
+            "chown": "568:568"
+          }
+        ]
+      ],
+      "items": {
+        "$ref": "#/$defs/mountConfig"
+      }
+    }
+  },
+  "$defs": {
+    "runnerConfig": {
+      "title": "Runner config",
+      "description": "Configuration for a single runner. Each runner defines the container environment under which checks execute. Use entrypoint/cmd to override startup for this runner. When expectedOutput is set, an output check runs first and can optionally validate exitCode.",
+      "examples": [
+        {
+          "env": { "MY_VAR": "value" },
+          "entrypoint": "myapp",
+          "cmd": "--version",
+          "expectedOutput": "v1.0",
+          "exitCode": 0
+        },
+        {}
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "env": {
+          "type": "object",
+          "description": "Environment variables to set in the container for this runner.",
+          "propertyNames": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "additionalProperties": {
+            "type": "string"
+          },
+          "examples": [
+            { "MY_VAR": "value", "OTHER": "thing" }
+          ]
+        },
+        "entrypoint": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Override the container entrypoint for this runner.",
+          "examples": [
+            "myapp",
+            "/bin/sh"
+          ]
+        },
+        "cmd": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Override container args/CMD for this runner.",
+          "examples": [
+            "--version",
+            "-c \"echo hello\""
+          ]
+        },
+        "expectedOutput": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "When non-empty, run the container (with entrypoint/cmd if set) and assert this string appears in the output.",
+          "examples": [
+            "v1.2.3",
+            "Started successfully"
+          ]
+        },
+        "exitCode": {
+          "type": "integer",
+          "description": "Optional expected container exit code for the runner output check. When omitted, output checks default to exit code 0.",
+          "examples": [
+            0,
+            7
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "When explicitly false on mainRunner, skips all main health/wait/file/healthCommands checks entirely. Has no effect on entries in runners[]. Defaults to true when unset.",
+          "examples": [
+            false
+          ]
+        }
+      }
+    },
+    "httpTestConfig": {
+      "title": "HTTP test",
+      "description": "Configuration for a single HTTP readiness check used in Containerforge Container Health Checks.",
+      "examples": [
+        {
+          "port": "8123",
+          "path": "/",
+          "statusCode": 200
+        }
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "port"
+      ],
+      "properties": {
+        "port": {
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Container port number to probe (string form, e.g. \"8123\").",
+          "examples": [
+            "8123",
+            "8080"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "default": "/",
+          "description": "HTTP path requested on the port. Defaults to `/` when omitted.",
+          "examples": [
+            "/",
+            "/healthz"
+          ]
+        },
+        "statusCode": {
+          "type": "integer",
+          "description": "Expected HTTP status code. Runtime defaults to 200 when omitted.",
+          "examples": [
+            200,
+            400,
+            403
+          ]
+        }
+      }
+    },
+    "tcpTestConfig": {
+      "title": "TCP test",
+      "description": "Configuration for a single TCP listening check used in Containerforge Container Health Checks, using only a container port.",
+      "examples": [
+        {
+          "port": "8000"
+        }
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "port"
+      ],
+      "properties": {
+        "port": {
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Container port number to wait on (string form, e.g. \"8000\").",
+          "examples": [
+            "8000",
+            "8123"
+          ]
+        }
+      }
+    },
+    "commandTestConfig": {
+      "title": "Command test",
+      "description": "Configuration for a single command check executed as `sh -c <command>`.",
+      "examples": [
+        {
+          "command": "test -x /usr/local/bin/imaginary",
+          "expectedExitCode": 0
+        },
+        {
+          "command": "/usr/local/bin/imaginary -version",
+          "expectedExitCode": 1,
+          "expectedContent": "dev",
+          "matchContent": true
+        }
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command"
+      ],
+      "properties": {
+        "command": {
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Shell command to execute inside the container.",
+          "examples": [
+            "test -x /usr/local/bin/imaginary",
+            "/usr/local/bin/imaginary -version"
+          ]
+        },
+        "expectedExitCode": {
+          "type": "integer",
+          "description": "Expected command exit code. Runtime defaults to 0 when omitted.",
+          "examples": [
+            0,
+            1
+          ]
+        },
+        "expectedContent": {
+          "type": "string",
+          "description": "Expected substring in command output (container logs). Used only when matchContent is true.",
+          "examples": [
+            "dev",
+            "version"
+          ]
+        },
+        "matchContent": {
+          "type": "boolean",
+          "description": "Enable substring matching against command output. When true, expectedContent must be present in output.",
+          "examples": [
+            true,
+            false
+          ]
+        }
+      }
+    },
+    "healthCommandTestConfig": {
+      "title": "Health command test",
+      "description": "Configuration for a single exec-based health command used in Containerforge Container Health Checks. Commands are executed as `sh -c <command>` while the container is running.",
+      "examples": [
+        {
+          "command": "mycommand"
+        },
+        {
+          "command": "mycommand --check",
+          "expectedExitCode": 7,
+          "expectedContent": "ok",
+          "matchContent": true
+        }
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command"
+      ],
+      "properties": {
+        "command": {
+          "$ref": "#/$defs/nonEmptyString",
+          "description": "Shell command to execute inside the running container.",
+          "examples": [
+            "mycommand",
+            "mycommand --check"
+          ]
+        },
+        "expectedExitCode": {
+          "type": "integer",
+          "description": "Expected command exit code. Runtime defaults to 0 when omitted.",
+          "examples": [
+            0,
+            7
+          ]
+        },
+        "expectedContent": {
+          "type": "string",
+          "description": "Expected substring in command output. Used only when matchContent is true.",
+          "examples": [
+            "ok",
+            "ready"
+          ]
+        },
+        "matchContent": {
+          "type": "boolean",
+          "description": "Enable substring matching against command output.",
+          "examples": [
+            true,
+            false
+          ]
+        }
+      }
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "String that must contain at least one non-whitespace character.",
+      "examples": [
+        "8123",
+        "/"
+      ]
+    },
+    "mountConfig": {
+      "title": "Mount config",
+      "description": "Configuration for mounting a host tmp dir into the container at a specified path.",
+      "examples": [
+        {
+          "path": "/config",
+          "chmod": "755",
+          "chown": "568:568"
+        }
+      ],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^/\\S*",
+          "description": "Absolute path inside the container where the tmp dir is mounted.",
+          "examples": [
+            "/config",
+            "/data"
+          ]
+        },
+        "chmod": {
+          "type": "string",
+          "description": "Optional permissions for the tmp dir in octal notation (e.g. \"755\").",
+          "examples": [
+            "755",
+            "700"
+          ]
+        },
+        "chown": {
+          "type": "string",
+          "description": "Optional ownership for the tmp dir in \"uid:gid\" notation (e.g. \"568:568\").",
+          "examples": [
+            "568:568",
+            "1000:1000"
+          ]
+        }
+      }
+    }
+  }
+}
