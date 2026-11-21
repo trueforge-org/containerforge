@@ -5,6 +5,14 @@
     'github>trueforge-org/renovate-config:autoMergeLabels.json5',
     'github>trueforge-org/renovate-config:containerForge.json5',
   ],
+  customManagers: [
+    {
+      // Keeps the pinned forgetool release in the setup-forgetool action up to date.
+      customType: 'regex',
+      managerFilePatterns: ['/^\\.github/actions/setup-forgetool/action\\.yaml$/'],
+      matchStrings: ['# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\n\\s+default: (?<currentValue>\\S+)'],
+    },
+  ],
   ignorePaths: [
     'porting/**',
     '*.mise.toml*',
