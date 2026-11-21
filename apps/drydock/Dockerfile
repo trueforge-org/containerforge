@@ -93,8 +93,7 @@ COPY --chmod=0755 . /
 ENV WORKDIR=/app \
     DD_LOG_FORMAT=text \
     DD_VERSION=$VERSION \
-    DD_STORE_PATH=/config \
-    DD_ANONYMOUS_AUTH_CONFIRM=true
+    DD_STORE_PATH=/config
 
 WORKDIR /app
 
