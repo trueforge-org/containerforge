@@ -63,5 +63,11 @@ ENV DEXAFIX_LISTEN=:8080 \
 # network. 8081 is only used by `serve api`, 8082 only by `serve body`, see
 # docs/15-split-deployment.md, docs/16-workers.md and docs/17-body-service.md.
 EXPOSE 8080 8081 8082 8443 8443/udp
+
+# The image has no shell and no curl, so the shared /healthcheck.sh cannot run here: the binary
+# makes the GET request itself (`dexafix healthcheck URL`, exit 0 on 2xx).
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --start-interval=5s --retries=3 \
+  CMD ["/app/dexafix", "healthcheck", "http://127.0.0.1:8080/readyz"]
+
 ENTRYPOINT ["/app/dexafix"]
 CMD ["serve"]

@@ -22,6 +22,7 @@ FROM base AS corepack
 
 RUN PNPM_MAJOR=$(jq -r '.engines.pnpm' package.json | sed 's/^[^0-9]*\([0-9]\+\).*$/\1/') \
     && echo "pnpm engine set to: $PNPM_MAJOR" \
+    && npm install -g --force corepack@latest \
     && corepack enable \
     && corepack prepare "pnpm@$PNPM_MAJOR" --activate
 
@@ -53,7 +54,8 @@ RUN pnpm build \
 # ---------- FINAL RUNTIME IMAGE ----------
 FROM base
 
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    CONFIG_DIRECTORY=/config
 
 WORKDIR /app
 

@@ -4,13 +4,18 @@ ARG VERSION
 
 USER root
 
-ENV NODE_OPTIONS=--max_old_space_size=2048
+ENV NODE_OPTIONS=--max_old_space_size=2048 \
+    CONFIG_DIRECTORY=/config
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       python3 \
       build-essential && \
     rm -rf /var/lib/apt/lists/* && \
+    NODE_ARCH=$(dpkg --print-architecture | sed 's/amd64/x64/') && \
+    NODE_FILE=$(curl -fsSL https://nodejs.org/dist/latest-v20.x/SHASUMS256.txt | grep -o "node-v[0-9.]*-linux-${NODE_ARCH}\.tar\.xz" | head -1) && \
+    curl -fsSL "https://nodejs.org/dist/latest-v20.x/${NODE_FILE}" | tar -xJ -C /usr/local --strip-components=1 --no-same-owner --exclude=CHANGELOG.md --exclude=LICENSE --exclude=README.md && \
+    node --version && \
     curl -L -o /tmp/overseerr.tar.gz \
       "https://github.com/sct/overseerr/archive/refs/tags/v${VERSION}.tar.gz" && \
     mkdir -p /app && \

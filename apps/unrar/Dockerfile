@@ -20,7 +20,6 @@ RUN \
     /tmp/unrar.tar.gz -C \
     /tmp/unrar --strip-components=1 && \
   cd /tmp/unrar && \
-  sed -i 's|LDFLAGS=-pthread|LDFLAGS=-pthread -static|' makefile && \
   sed -i 's|CXXFLAGS=-march=native |CXXFLAGS=|' makefile && \
   make && \
   install -v -m755 unrar /usr/bin && \

@@ -45,5 +45,5 @@ fi
 
 # Run SealSkin
 cd /opt/sealskin/server
-exec /app/venv/bin/pythonmain.py
+exec /app/venv/bin/python main.py
 

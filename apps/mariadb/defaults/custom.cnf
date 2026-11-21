@@ -15,7 +15,7 @@
 # especially if they contain "#" chars...
 [client]
 port            = 3306
-socket          = /run/mysqld/mysqld.sock
+socket          = /tmp/mysqld/mysqld.sock
 
 default-character-set = utf8mb4
 
@@ -24,7 +24,7 @@ default-character-set = utf8mb4
 
 # This was formally known as [safe_mysqld]. Both versions are currently parsed.
 [mysqld_safe]
-socket          = /run/mysqld/mysqld.sock
+socket          = /tmp/mysqld/mysqld.sock
 nice            = 0
 
 [mysqld]
@@ -32,8 +32,8 @@ nice            = 0
 # * Basic Settings
 #
 user            = apps
-pid-file        = /run/mysqld/mysqld.pid
-socket          = /run/mysqld/mysqld.sock
+pid-file        = /tmp/mysqld/mysqld.pid
+socket          = /tmp/mysqld/mysqld.sock
 port            = 3306
 basedir         = /usr
 datadir         = /var/lib/mysql

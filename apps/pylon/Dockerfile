@@ -34,6 +34,7 @@ RUN \
     /app/pylon/.sessions && \
   echo "**** install node modules ****" && \
   npm install --prefix /app/pylon --ignore-scripts && \
+  npm rebuild node-pty --prefix /app/pylon && \
   echo "**** cleanup ****" && \
   apt-get autoremove -y && \
   rm -rf \

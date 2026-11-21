@@ -120,9 +120,13 @@ jobs:
 
       - name: Fix Pre-Commit issues
         run: |
-          echo "Running pre-commit test-and-cleanup..."
-          # The first run may rewrite files (and exit 1); the second run must be clean.
-          pre-commit run --all || pre-commit run --all
+          if [ -f .pre-commit-config.yaml ]; then
+            echo "Running pre-commit test-and-cleanup..."
+            # The first run may rewrite files (and exit 1); the second run must be clean.
+            pre-commit run --all || pre-commit run --all
+          else
+            echo "No .pre-commit-config.yaml in this repository, skipping pre-commit."
+          fi
           # Fix sh files to always be executable
           find . -name '*.sh' | xargs chmod +x
 

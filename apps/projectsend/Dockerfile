@@ -26,22 +26,10 @@ RUN \
   mkdir -p /app/www/public && \
   curl -fso \
     /tmp/projectsend.zip -L \
-    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION}.zip" || \
-  curl -fso \
-    /tmp/projectsend.zip -L \
-    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend.zip" && \
+    "https://github.com/projectsend/projectsend/releases/download/${VERSION}/projectsend-${VERSION#v}.zip" && \
   unzip \
     /tmp/projectsend.zip -d \
     /app/www/public && \
-  mv /app/www/public/upload /defaults/ && \
-  echo "**** download default lang files ****" && \
-  mkdir -p /defaults/lang && \
-  curl -fso \
-    /defaults/lang/en.mo -L \
-    "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.mo" && \
-  curl -fso \
-    /defaults/lang/en.po -L \
-    "https://raw.githubusercontent.com/projectsend/projectsend/refs/heads/develop/templates/default/lang/en.po" && \
   echo "**** cleanup ****" && \
     rm -rf \
     /tmp/*

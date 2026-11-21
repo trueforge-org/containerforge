@@ -3,3 +3,8 @@
 
 filePaths:
 - /usr/local/bin/shellcheck
+
+# shellcheck is a CLI: without arguments it prints its usage and exits (code 3), so the default entrypoint never becomes healthy.
+# Keep a container alive for the filePaths check.
+mainRunner:
+  cmd: sleep 999

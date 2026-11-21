@@ -55,6 +55,11 @@ RUN \
     /tmp/source/owntone --strip-components=1 && \
   export PATH="/tmp/source:$PATH" && \
   cd /tmp/source/owntone && \
+  echo "**** make mDNS optional when no avahi daemon is running ****" && \
+  sed -i \
+    -e '/^mdns_init(void)/,/^mdns_deinit/ s/return -1;/return 0;/' \
+    -e '/^mdns_\(register\|cname\|browse\)(/{n;s/^{$/{\n  if (!mdns_client)\n    return 0;/}' \
+    src/mdns_avahi.c && \
   autoreconf -i -v && \
   ./configure \
     --build=$CBUILD \

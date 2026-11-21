@@ -24,8 +24,8 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends gnupg curl ca-certificates jq wget python3-pip libvips-tools && \
     \
-    curl -fsSL https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | apt-key add - && \
-    echo "deb [arch=$TARGETARCH] https://repo.jellyfin.org/ubuntu noble main" > /etc/apt/sources.list.d/jellyfin.list && \
+    curl -fsSL https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | gpg --dearmor -o /usr/share/keyrings/jellyfin.gpg && \
+    echo "deb [arch=$TARGETARCH signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/ubuntu resolute main" > /etc/apt/sources.list.d/jellyfin.list && \
     apt-get update && \
     \
     # Install ffmpeg package

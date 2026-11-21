@@ -24,7 +24,7 @@ RUN \
   tar xf \
     /tmp/sealskin.tar.gz -C \
     /opt/sealskin --strip-components=1 && \
-  pip3 install -r /opt/sealskin/server/requirements.txt --break-system-packages && \
+  /app/venv/bin/pip install --no-cache-dir -r /opt/sealskin/server/requirements.txt && \
   cd /opt/sealskin/browser_extension && \
   zip -r /sealskin.zip * && \
   chown apps:apps /sealskin.zip && \
