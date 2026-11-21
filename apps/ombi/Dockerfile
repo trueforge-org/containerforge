@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:24.4@sha256:fdcc4e24cd12eed53bb1338ab6dd5651f5326bcbb98920aa3e8f0c8f5c9b2458
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
 
 # set version label
 ARG VERSION
@@ -21,6 +21,11 @@ RUN echo "**** install ombi ****" && \
   tar xzf /tmp/ombi-src.tar.gz -C \
     /app/ && \
   chmod +x /app/Ombi && \
+  mkdir -p /defaults && \
+  cp /app/ClientApp/dist/browser/index.html /defaults/index.html && \
+  rm -f /app/ClientApp/dist/browser/index.html && \
+  ln -s /tmp/index.html /app/ClientApp/dist/browser/index.html && \
+  chown -R apps:apps /defaults && \
   echo "**** clean up ****" && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   rm -rf \
