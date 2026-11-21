@@ -1,0 +1,37 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: Setup Forgetool
+description: Installs a pinned forgetool release after verifying it against the release checksums.txt
+
+inputs:
+  version:
+    description: forgetool release tag to install
+    required: false
+    # renovate: datasource=github-releases depName=trueforge-org/forgetool
+    default: v4.1.1
+
+runs:
+  using: composite
+  steps:
+    - name: Install forgetool
+      shell: bash
+      env:
+        TAG: ${{ inputs.version }}
+      run: |-
+        set -euo pipefail
+        VERSION="${TAG#v}"
+        case "$(uname -m)" in
+          x86_64) ARCH="amd64" ;;
+          aarch64|arm64) ARCH="arm64" ;;
+          *) echo "Unsupported uname architecture: $(uname -m). Supported uname values: x86_64, aarch64, arm64." && exit 1 ;;
+        esac
+        BASE="https://github.com/trueforge-org/forgetool/releases/download/${TAG}"
+        ARCHIVE="forgetool_${VERSION}_linux_${ARCH}.tar.gz"
+        DL="${RUNNER_TEMP}/forgetool-dl"
+        mkdir -p "${DL}" "${RUNNER_TEMP}/forgetool-bin"
+        curl -fsSL --retry 3 --retry-all-errors -o "${DL}/${ARCHIVE}" "${BASE}/${ARCHIVE}"
+        curl -fsSL --retry 3 --retry-all-errors -o "${DL}/checksums.txt" "${BASE}/checksums.txt"
+        (cd "${DL}" && grep -F " ${ARCHIVE}" checksums.txt | sha256sum -c -)
+        tar -xzf "${DL}/${ARCHIVE}" -C "${RUNNER_TEMP}/forgetool-bin" forgetool
+        chmod +x "${RUNNER_TEMP}/forgetool-bin/forgetool"
+        echo "${RUNNER_TEMP}/forgetool-bin" >> "${GITHUB_PATH}"
