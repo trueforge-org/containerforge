@@ -25,6 +25,8 @@ docker_create_db_directories() {
     mkdir -p "$PGDATA" || :
     chmod 00700 "$PGDATA" || :
 
+    chmod 03775 "/var/run/postgresql" || :
+
     local testfile="$PGDATA/.write_test_$$"
 
     if ! touch "$testfile" 2>/dev/null; then

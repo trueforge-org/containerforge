@@ -1,1 +1,1 @@
-0 * * * * OUTPUT_DIR=/tmp/balfolk python3 /app/balfolk_ical.py
+0 * * * * python3 /app/balfolk_ical.py

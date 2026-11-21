@@ -5,6 +5,14 @@ if [[ ! -f /config/client_secrets.json ]]; then
     echo "{}" > /config/client_secrets.json
 fi
 
+# check if kepubify is present and if so make executable
+if [[ -f /usr/bin/kepubify ]] && [[ ! -x /usr/bin/kepubify ]]; then
+    chmod +x /usr/bin/kepubify
+fi
+
+# Pre-stage some files & directories for permissions purposes
+mkdir -p /app/calibre-web/cps/cache
+
 export CALIBRE_DBPATH=/config
 
 if [[ ! -f /config/app.db ]]; then
@@ -18,7 +26,7 @@ EOS
 
   if [[ $? == 0 ]]; then
     echo "Successfully set kepubify paths in '/config/app.db'!"
-  else
+  elif [[ $? > 0 ]]; then
     echo "Could not set binary paths for '/config/app.db' (see errors above)."
   fi
 fi

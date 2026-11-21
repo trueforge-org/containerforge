@@ -60,9 +60,6 @@ RUN \
   curl -o \
     /usr/bin/kepubify -L \
     https://github.com/pgaskin/kepubify/releases/download/${KEPUBIFY_RELEASE}/kepubify-linux-${KEPUBIFY_ARCH} && \
-  chmod 0755 /usr/bin/kepubify && \
-  mkdir -p /app/calibre-web/cps/cache && \
-  chown -R apps:apps /app/calibre-web/cps/cache && \
   IM_DIR=$(ls -d /etc/ImageMagick-* | head -n1) && \
   rm -rf "${IM_DIR}/policy.xml" && \
   ln -s /defaults/policy.xml "${IM_DIR}/policy.xml" && \
