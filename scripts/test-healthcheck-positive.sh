@@ -29,7 +29,7 @@ build_case() {
     cp "${REPO_ROOT}/include/healthcheck.sh" "${case_dir}/healthcheck.sh"
 
     cat >"${case_dir}/Dockerfile" <<'DOCKERFILE'
-ARG BASE_IMAGE
+ARG BASE_IMAGE=ghcr.io/trueforge-org/python:rolling
 FROM ${BASE_IMAGE}
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
 COPY container-test.yaml /container-test.yaml
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 PY
 
     cat >"${case_dir}/Dockerfile" <<'DOCKERFILE'
-ARG BASE_IMAGE
+ARG BASE_IMAGE=ghcr.io/trueforge-org/python:rolling
 FROM ${BASE_IMAGE}
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
 COPY --chmod=755 server.py /server.py

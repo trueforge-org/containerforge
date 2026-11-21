@@ -35,7 +35,7 @@ build_case() {
 
     {
         cat <<'DOCKERFILE'
-ARG BASE_IMAGE
+ARG BASE_IMAGE=ghcr.io/trueforge-org/python:rolling
 FROM ${BASE_IMAGE}
 COPY --chmod=755 healthcheck.sh /healthcheck.sh
 COPY container-test.yaml /container-test.yaml
