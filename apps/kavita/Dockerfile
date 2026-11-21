@@ -24,6 +24,9 @@ RUN echo "**** install kavita ****" && \
   cp /app/config/appsettings-init.json /defaults/ && \
   rm -rf /app/config && \
   ln -s /config /app/config && \
+  cp /app/wwwroot/index.html /defaults/index.html && \
+  rm -f /app/wwwroot/index.html && \
+  ln -s /tmp/index.html /app/wwwroot/index.html && \
   chown -R apps:apps /app && chmod -R 755 /app && \
   chown -R apps:apps /config && chmod -R 755 /config && \
   chown -R apps:apps /defaults && chmod -R 755 /defaults && \

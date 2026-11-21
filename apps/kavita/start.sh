@@ -8,6 +8,9 @@ if [[ ! -f "/config/appsettings.json" ]]; then
     fi
 fi
 
+# Kavita rewrites index.html at runtime (base url); /app is read-only
+cp -f /defaults/index.html /tmp/index.html
+
 cd /app
-exec /app/Kavita $@
+exec /app/Kavita "$@"
 
