@@ -38,7 +38,7 @@ FROM base AS app-build
 USER root
 
 RUN mkdir -p /app/src && \
-    curl -fsSL "https://github.com/trueforge-org/drydock/archive/refs/tags/${VERSION}.tar.gz" \
+    curl -fsSL "https://github.com/CodesWhat/drydock/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1
 
 WORKDIR /app/src/app
@@ -56,7 +56,7 @@ FROM base AS ui-build
 USER root
 
 RUN mkdir -p /app/src && \
-    curl -fsSL "https://github.com/trueforge-org/drydock/archive/refs/tags/${VERSION}.tar.gz" \
+    curl -fsSL "https://github.com/CodesWhat/drydock/archive/refs/tags/${VERSION}.tar.gz" \
         | tar xzf - -C /app/src --strip-components=1
 
 WORKDIR /app/src/ui
@@ -93,7 +93,8 @@ COPY --chmod=0755 . /
 ENV WORKDIR=/app \
     DD_LOG_FORMAT=text \
     DD_VERSION=$VERSION \
-    DD_STORE_PATH=/config
+    DD_STORE_PATH=/config \
+    DD_ANONYMOUS_AUTH_CONFIRM=true
 
 WORKDIR /app
 
