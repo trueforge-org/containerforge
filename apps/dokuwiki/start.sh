@@ -103,7 +103,7 @@ else
 fi
 
 ## Backwards compatibility 2021/04/15
-[[ -f /config/nginx/site-confs/default.conf ]] && sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
+sed -i 's%location ~ /(conf/|bin/|inc/|install.php) { deny all; }%location ~ /(conf/|bin/|inc/|vendor/) { deny all; }%' /config/nginx/site-confs/default.conf
 
 cd /app/www/public
 exec php -S 0.0.0.0:80
