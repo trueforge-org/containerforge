@@ -12,7 +12,7 @@ RUN curl -fsSL -o /tmp/wg-easy.tar.gz "https://github.com/wg-easy/wg-easy/archiv
     rm -f /tmp/wg-easy.tar.gz
 
 WORKDIR /build/src
-RUN npm install --global corepack@latest && \
+RUN npm install --global --force corepack@latest && \
     corepack enable pnpm && \
     pnpm install --frozen-lockfile && \
     pnpm build
