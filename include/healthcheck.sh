@@ -231,11 +231,12 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
             ;;
         http)
             if [[ "${LINE}" =~ ^-[[:space:]]+(.+)$ ]]; then
+                ITEM="${BASH_REMATCH[1]}"
                 flush_http
                 CURRENT_HTTP_PORT=""
                 CURRENT_HTTP_PATH="/"
                 CURRENT_HTTP_STATUS=""
-                LINE="${BASH_REMATCH[1]}"
+                LINE="${ITEM}"
             fi
             if [[ "${LINE}" =~ ^port:[[:space:]]+(.+)$ ]]; then
                 CURRENT_HTTP_PORT="$(normalize_value "${BASH_REMATCH[1]}")"
@@ -247,12 +248,13 @@ while IFS= read -r RAW_LINE || [[ -n "${RAW_LINE}" ]]; do
             ;;
         healthCommands)
             if [[ "${LINE}" =~ ^-[[:space:]]+(.+)$ ]]; then
+                ITEM="${BASH_REMATCH[1]}"
                 flush_command
                 CURRENT_COMMAND=""
                 CURRENT_COMMAND_EXIT_CODE="0"
                 CURRENT_COMMAND_EXPECTED_CONTENT=""
                 CURRENT_COMMAND_MATCH_CONTENT="false"
-                LINE="${BASH_REMATCH[1]}"
+                LINE="${ITEM}"
             fi
             if [[ "${LINE}" =~ ^command:[[:space:]]+(.+)$ ]]; then
                 CURRENT_COMMAND="$(normalize_value "${BASH_REMATCH[1]}")"
