@@ -3,8 +3,6 @@
 
 filePaths:
 - /entrypoint.sh
-- /etc/OpenCL/vendors/intel.icd
-- /etc/OpenCL/vendors/intel_legacy1.icd
 
 mainRunner:
   "cmd": "sleep 999"

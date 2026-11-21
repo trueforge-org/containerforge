@@ -129,6 +129,9 @@ RUN if [ "${TARGETARCH}" = "amd64" ]; then \
          -LO https://github.com/intel/compute-runtime/releases/download/${NEO_LEGACY_VER}/intel-opencl-icd-legacy1_${NEO_LEGACY_VER}_amd64.deb; \
     \
     apt-get install --no-install-recommends --no-install-suggests -y ./*.deb; \
+    # amd64 only, so it cannot be a container-test filePaths entry (that also runs on arm64)
+    test -f /etc/OpenCL/vendors/intel.icd && test -f /etc/OpenCL/vendors/intel_legacy1.icd \
+        || { echo "Intel OpenCL ICD files are missing after installing the compute runtime" >&2; exit 1; }; \
     cd ..; \
     rm -rf intel-compute-runtime; \
     apt-get clean autoclean --yes; \
