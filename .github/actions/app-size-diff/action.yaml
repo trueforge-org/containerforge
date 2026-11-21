@@ -61,7 +61,7 @@ runs:
           const fromApp = process.env.FROM_APP;
           const toApp = process.env.TO_APP;
 
-          async function getSizes(app) {
+          async function getSizes(app, required) {
               try {
                   const { stdout } = execaSync("docker", ["manifest", "inspect", "-v", app]);
                   const manifests = _.castArray(JSON.parse(stdout.trim()));
@@ -86,13 +86,19 @@ runs:
                       .fromPairs()
                       .value();
               } catch (e) {
-                  core.error(`Failed to inspect ${app}: ${e.message}`);
+                  if (required) {
+                      // The image under test must be inspectable; silently treating it as 0 bytes hides a broken push.
+                      core.setFailed(`Failed to inspect ${app}: ${e.message}`);
+                  } else {
+                      // The baseline is legitimately missing for a brand-new app.
+                      core.warning(`Baseline ${app} not available (new app?): ${e.message}`);
+                  }
                   return {};
               }
           }
 
-          const fromSizes = await getSizes(fromApp);
-          const toSizes   = await getSizes(toApp);
+          const fromSizes = await getSizes(fromApp, false);
+          const toSizes   = await getSizes(toApp, true);
 
           const platforms = _(fromSizes)
               .keys()

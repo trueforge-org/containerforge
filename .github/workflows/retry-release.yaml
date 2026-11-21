@@ -13,6 +13,7 @@ permissions:
 jobs:
   apps:
     name: Get App Inventory
+    timeout-minutes: 10
     runs-on:
       group: default
     outputs:
@@ -30,6 +31,7 @@ jobs:
   retry:
     if: ${{ needs.apps.outputs.apps != '[]' }}
     name: Retry Release
+    timeout-minutes: 20
     runs-on:
       group: default
     needs:

@@ -16,6 +16,7 @@ permissions:
 jobs:
   test-version:
     name: Test Version (${{ inputs.version }})
+    timeout-minutes: 10
     runs-on:
       group: default
     steps:

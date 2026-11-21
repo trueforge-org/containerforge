@@ -121,7 +121,8 @@ jobs:
       - name: Fix Pre-Commit issues
         run: |
           echo "Running pre-commit test-and-cleanup..."
-          pre-commit run --all ||:
+          # The first run may rewrite files (and exit 1); the second run must be clean.
+          pre-commit run --all || pre-commit run --all
           # Fix sh files to always be executable
           find . -name '*.sh' | xargs chmod +x
 
@@ -156,7 +157,7 @@ jobs:
 
           forgetool containers genchangelog "$REPO_PATH" "$TEMPLATE_PATH" "$OUTPUT_DIR"
 
-          gzip "$JSON_FILE" --best || echo "Compression failed, ignoring..."
+          gzip "$JSON_FILE" --best || echo "::warning::Changelog cache compression failed, the cache will be rebuilt next run"
 
       - name: Copy docs to website
         run: |
