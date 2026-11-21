@@ -6,7 +6,7 @@ WORKDIR /tmp
 ENV HOME=/tmp
 USER root
 ADD https://github.com/CorentinTh/it-tools.git#${VERSION} .
-RUN npm install -g corepack@latest \
+RUN npm install -g --force corepack@latest \
     && corepack enable  \
     && corepack prepare pnpm@latest --activate \
     && pnpm install --prefer-offline \
