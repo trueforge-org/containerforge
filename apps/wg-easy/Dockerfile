@@ -1,5 +1,5 @@
 # ---------- UI BUILD STAGE ----------
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348 AS ui
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS ui
 
 ARG VERSION
 
@@ -19,14 +19,14 @@ RUN npm install --global corepack@latest && \
 
 # ---------- LIBSQL STAGE ----------
 # libsql has to be installed next to the server (https://github.com/nitrojs/nitro/issues/3328)
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348 AS libsql
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS libsql
 
 USER root
 WORKDIR /build
 RUN npm install --no-save --omit=dev libsql
 
 # ---------- AMNEZIAWG STAGE ----------
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348 AS awg
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS awg
 
 # renovate: datasource=github-releases depName=amnezia-vpn/amneziawg-tools
 ARG AWGTOOLS_BRANCH=v3.1.20260812
@@ -48,7 +48,7 @@ RUN apt-get update && \
     sed -i 's|\[\[ $proto == -4 \]\] && cmd sysctl -q net\.ipv4\.conf\.all\.src_valid_mark=1|[[ $proto == -4 ]] \&\& [[ $(sysctl -n net.ipv4.conf.all.src_valid_mark) != 1 ]] \&\& cmd sysctl -q net.ipv4.conf.all.src_valid_mark=1|' amneziawg-tools/src/wg-quick/linux.bash
 
 # ---------- FINAL RUNTIME IMAGE ----------
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:1e4ce94f2d255834fe7557fd2de50f2c021834c8eff14e43b84b70a768cd8348
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
 
 ARG VERSION
 
