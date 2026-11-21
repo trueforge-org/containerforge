@@ -1,0 +1,33 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Container Test Lint
+
+on:
+  pull_request:
+    paths:
+      - apps/*/container-test.yaml
+      - apps/*/settings.yaml
+      - scripts/lint_container_tests.py
+      - .github/schemas/container-test.schema.json
+      - .github/lint/container-test-baseline.json
+      - .github/workflows/container-test-lint.yaml
+  merge_group:
+
+jobs:
+  lint:
+    name: Validate container-test.yaml
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
+
+      - name: Install Dependencies
+        run: pip install --quiet "jsonschema==4.23.0" "PyYAML==6.0.2"
+
+      - name: Validate and Lint
+        run: python3 scripts/lint_container_tests.py
