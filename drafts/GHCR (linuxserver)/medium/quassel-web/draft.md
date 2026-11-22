@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (/config from chart)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this is only the web client, so a reachable Quassel core server must already exist elsewhere (inferred).
+- caveat: npm install and the frontend build run at image build time, which is slow and needs internet access (inferred).
+- caveat: the chart pins the linuxserver image at 2021.12.16, an old build of an upstream project with little recent activity (inferred).
+
 ## Fields
 ### Chart / Role
 
