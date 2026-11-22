@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: ffmpeg
-- python/pip: requirements from source (inferred)
+- python/pip: requirements from source (inferred) ([requirements.txt](https://github.com/jo-nike/clipplex/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

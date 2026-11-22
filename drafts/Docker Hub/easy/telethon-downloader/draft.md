@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: unzip (inferred)
-- python/pip: telethon, requirements.txt from upstream repo
+- python/pip: telethon, requirements.txt from upstream repo ([requirements.txt](https://github.com/jsavargas/telethon_downloader/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

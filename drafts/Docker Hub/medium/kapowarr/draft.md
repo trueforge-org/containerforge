@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: build-essential (inferred, for wheels with a Rust stage)
-- python/pip: requirements from Kapowarr release zip (inferred)
+- python/pip: requirements from Kapowarr release zip (inferred) ([requirements.txt](https://github.com/Casvt/Kapowarr/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: Kapowarr-release.zip (v1.3.2) release download
 

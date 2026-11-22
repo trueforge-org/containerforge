@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: upstream requirements.txt (inferred)
+- python/pip: upstream requirements.txt (inferred) ([requirements.txt](https://github.com/dchesterton/amcrest2mqtt/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

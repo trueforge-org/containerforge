@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: requirements from source (inferred)
+- python/pip: requirements from source (inferred) ([requirements.txt](https://github.com/simse/chronos/blob/HEAD/requirements.txt))
 - node/npm: yarn (UI build)
 - other: none
 

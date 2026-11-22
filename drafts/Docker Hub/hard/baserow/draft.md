@@ -38,7 +38,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: supervisor (inferred)
-- python/pip: Django backend requirements from repo (inferred)
+- python/pip: Django backend requirements from repo (inferred) ([embeddings/requirements.txt](https://github.com/baserow/baserow/blob/HEAD/embeddings/requirements.txt))
 - node/npm: frontend build deps (inferred)
 - other: Caddy binary (inferred)
 

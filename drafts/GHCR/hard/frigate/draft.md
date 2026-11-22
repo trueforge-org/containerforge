@@ -38,7 +38,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: ffmpeg, libgl1 (inferred), libusb-1.0-0 (inferred)
-- python/pip: frigate backend requirements (inferred)
+- python/pip: frigate backend requirements (inferred) ([docker/main/requirements.txt](https://github.com/blakeblackshear/frigate/blob/HEAD/docker/main/requirements.txt))
 - node/npm: web UI build (inferred)
 - other: none
 

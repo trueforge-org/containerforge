@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: server requirements (inferred)
+- python/pip: server requirements (inferred) ([requirements.txt](https://github.com/djedi/DailyNotes/blob/HEAD/requirements.txt))
 - node/npm: client build deps (inferred)
 - other: none
 

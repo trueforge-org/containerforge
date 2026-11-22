@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: build-essential, libxslt-dev, zlib1g-dev, libffi-dev, libssl-dev (inferred)
-- python/pip: uv (inferred), searxng upstream requirements
+- python/pip: uv (inferred), searxng upstream requirements ([requirements.txt](https://github.com/searxng/searxng/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

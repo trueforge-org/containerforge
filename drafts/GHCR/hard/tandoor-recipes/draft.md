@@ -39,7 +39,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: libpq5, nginx (inferred)
-- python/pip: Tandoor requirements (Django, gunicorn, psycopg; inferred)
+- python/pip: Tandoor requirements (Django, gunicorn, psycopg; inferred) ([requirements.txt](https://github.com/TandoorRecipes/recipes/blob/HEAD/requirements.txt))
 - node/npm: Vue frontend build (build stage only, inferred)
 - other: git clone or release source tag 2.7.6
 

@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: packages from upstream requirements.txt (inferred, names not in draft)
+- python/pip: packages from upstream requirements.txt (inferred, names not in draft) ([requirements.txt](https://github.com/jordanlambrecht/calendarr/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

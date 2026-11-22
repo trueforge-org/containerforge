@@ -37,7 +37,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: jbig2enc; ghostscript
-- python/pip: project requirements.txt (inferred)
+- python/pip: project requirements.txt (inferred) ([requirements.txt](https://github.com/maschhoff/pdfscanexplorer/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

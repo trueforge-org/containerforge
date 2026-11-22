@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: py-kms (inferred, from repo requirements.txt)
+- python/pip: py-kms (inferred, from repo requirements.txt) ([requirements.txt](https://github.com/Py-KMS-Organization/py-kms/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

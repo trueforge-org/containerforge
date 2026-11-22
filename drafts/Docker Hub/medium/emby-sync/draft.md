@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: requirements.txt packages, gunicorn
+- python/pip: requirements.txt packages, gunicorn ([requirements.txt](https://github.com/cameronurnes/emby-sync/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

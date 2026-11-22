@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: chromium (deb or tarball build, not snap; inferred)
-- python/pip: selenium, undetected-chromedriver, bottle, waitress (inferred from upstream requirements)
+- python/pip: selenium, undetected-chromedriver, bottle, waitress (inferred from upstream requirements) ([requirements.txt](https://github.com/FlareSolverr/FlareSolverr/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: release tarball v3.5.2
 

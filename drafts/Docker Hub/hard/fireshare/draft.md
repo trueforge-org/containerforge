@@ -38,7 +38,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: ffmpeg (inferred, CPU build via sibling)
-- python/pip: flask and fireshare requirements (inferred)
+- python/pip: flask and fireshare requirements (inferred) ([app/server/requirements.txt](https://github.com/fireshare-app/fireshare/blob/HEAD/app/server/requirements.txt))
 - node/npm: node (client build), React client npm deps (inferred)
 - other: fireshare v1.9.3 source (GitHub release)
 

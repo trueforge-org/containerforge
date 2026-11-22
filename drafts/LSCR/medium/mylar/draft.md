@@ -38,7 +38,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: unrar
-- python/pip: mylar3 requirements.txt (inferred)
+- python/pip: mylar3 requirements.txt (inferred) ([requirements.txt](https://github.com/MylarComics/mylar3/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: mylar3 v0.11.0 release tarball
 

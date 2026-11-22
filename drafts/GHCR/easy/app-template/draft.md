@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none (ca-certificates, curl inferred)
-- python/pip: packages from upstream requirements.txt (inferred, names not in draft)
+- python/pip: packages from upstream requirements.txt (inferred, names not in draft) ([src/requirements.txt](https://github.com/MiguelNdeCarvalho/speedtest-exporter/blob/HEAD/src/requirements.txt))
 - node/npm: none
 - other: Ookla speedtest CLI tarball per arch
 

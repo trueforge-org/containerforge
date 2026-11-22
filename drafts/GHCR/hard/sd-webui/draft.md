@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: git (inferred)
-- python/pip: torch and the web UI requirements (inferred)
+- python/pip: torch and the web UI requirements (inferred) ([requirements.txt](https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: git clone of AUTOMATIC1111/stable-diffusion-webui
 

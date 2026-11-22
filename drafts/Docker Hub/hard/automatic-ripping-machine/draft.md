@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: handbrake-cli, ffmpeg, abcde, lsdvd, eject (inferred)
-- python/pip: app requirements from repo (inferred)
+- python/pip: app requirements from repo (inferred) ([requirements.txt](https://github.com/automatic-ripping-machine/automatic-ripping-machine/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: MakeMKV built from source (inferred)
 

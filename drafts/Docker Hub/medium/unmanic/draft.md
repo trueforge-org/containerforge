@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: ffmpeg
-- python/pip: unmanic (repo wheel and requirements, inferred)
+- python/pip: unmanic (repo wheel and requirements, inferred) ([requirements.txt](https://github.com/Unmanic/unmanic/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

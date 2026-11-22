@@ -37,7 +37,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: requirements.txt from repo
+- python/pip: requirements.txt from repo ([requirements.txt](https://github.com/meisnate12/Plex-Meta-Manager/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

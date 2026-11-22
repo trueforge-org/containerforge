@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: requirements.txt from pinned l3uddz/traktarr commit
+- python/pip: requirements.txt from pinned l3uddz/traktarr commit ([requirements.txt](https://github.com/l3uddz/traktarr/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: source clone of l3uddz/traktarr (pinned commit)
 

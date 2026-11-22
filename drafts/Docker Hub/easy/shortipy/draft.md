@@ -35,7 +35,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: requirements.txt from fork (Flask), uwsgi (inferred)
+- python/pip: requirements.txt from fork (Flask), uwsgi (inferred) ([requirements.txt](https://github.com/maschhoff/shortipy/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 

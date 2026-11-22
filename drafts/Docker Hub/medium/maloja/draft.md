@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: none
-- python/pip: requirements.txt from maloja master source
+- python/pip: requirements.txt from maloja master source ([requirements.txt](https://github.com/krateng/maloja/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: maloja master source archive (v3.2.10 per upstream)
 

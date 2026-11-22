@@ -37,7 +37,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: dotnet-sdk-9.0, aspnetcore-runtime-9.0 (inferred, may need Microsoft feed)
-- python/pip: ingestion requirements from repo (inferred)
+- python/pip: ingestion requirements from repo (inferred) ([requirements.txt](https://github.com/iPromKnight/zilean/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: dotnet publish in SDK build stage, git clone of iPromKnight/zilean
 

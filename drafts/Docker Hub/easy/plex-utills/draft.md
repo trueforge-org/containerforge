@@ -36,7 +36,7 @@
 Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
 
 - apt: mediainfo, ffmpeg
-- python/pip: packages from repo requirements.txt (inferred)
+- python/pip: packages from repo requirements.txt (inferred) ([requirements.txt](https://github.com/jkirkcaldy/plex-utills/blob/HEAD/requirements.txt))
 - node/npm: none
 - other: none
 
