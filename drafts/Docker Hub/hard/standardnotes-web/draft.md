@@ -29,9 +29,9 @@
 
 ## Base container
 
-- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
-- **Runtime image**: nginx
-- **Alternative runtime image**: python-node
+- **Foundation**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`), which every ContainerForge runtime image is built on
+- **Runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
+- **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Static JavaScript bundle served by a web server, so nginx fits; Node is needed only at build time.
 
 ## Fields

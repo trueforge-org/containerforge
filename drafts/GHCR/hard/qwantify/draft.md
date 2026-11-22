@@ -26,9 +26,9 @@
 
 ## Base container
 
-- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Foundation**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`), which every ContainerForge runtime image is built on
 - **Runtime image**: none (ubuntu alone is enough)
-- **Alternative runtime image**: python-node
+- **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Runtime is unclear from the reason; the Go and Node build plus GPU desktop stack suggests ubuntu (guess).
 
 ## Fields

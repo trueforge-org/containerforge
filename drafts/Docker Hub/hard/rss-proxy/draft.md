@@ -26,9 +26,9 @@
 
 ## Base container
 
-- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
-- **Runtime image**: java17
-- **Alternative runtime image**: python-node
+- **Foundation**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`), which every ContainerForge runtime image is built on
+- **Runtime image**: [java17](https://github.com/trueforge-org/containerforge/tree/main/apps/java17) (`ghcr.io/trueforge-org/java17`)
+- **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Guess: a JVM server with a Node side and no Java version named, so java17 is used.
 
 ## Fields

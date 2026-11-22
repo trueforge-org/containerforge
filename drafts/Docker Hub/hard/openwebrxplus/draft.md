@@ -26,7 +26,7 @@
 
 ## Base container
 
-- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Foundation**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`), which every ContainerForge runtime image is built on
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Guess: the reason names only a compiled audio package on an unnamed base, so ubuntu is the default.
 

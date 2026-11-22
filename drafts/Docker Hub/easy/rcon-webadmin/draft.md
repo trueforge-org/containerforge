@@ -26,8 +26,8 @@
 
 ## Base container
 
-- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
-- **Runtime image**: python-node
+- **Foundation**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`), which every ContainerForge runtime image is built on
+- **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node web admin installed with npm, so the python-node base provides Node.js.
 
 ## Fields

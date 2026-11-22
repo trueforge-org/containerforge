@@ -26,9 +26,9 @@
 
 ## Base container
 
-- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Foundation**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`), which every ContainerForge runtime image is built on
 - **Runtime image**: none (ubuntu alone is enough)
-- **Alternative runtime image**: nginx
+- **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP app served by a web server and PHP-FPM, so PHP via apt on ubuntu.
 
 ## Fields
