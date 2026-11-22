@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.2fauth.app/
 - **Website**: https://2fauth.app/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Bubka/2fauth
+- **Container image**: https://hub.docker.com/r/2fauth/2fauth
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,18 @@
 - **Source repository**: https://github.com/jupyter/notebook
 - **Documentation**: https://docs.jupyter.org/en/latest/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/jupyter/docker-stacks
+- **Container image**: https://quay.io/jupyter/all-spark-notebook
+- **Container image**: https://quay.io/jupyter/base-notebook
+- **Container image**: https://quay.io/jupyter/datascience-notebook
+- **Container image**: https://quay.io/jupyter/minimal-notebook
+- **Container image**: https://quay.io/jupyter/pyspark-notebook
+- **Container image**: https://quay.io/jupyter/r-notebook
+- **Container image**: https://quay.io/jupyter/scipy-notebook
+- **Container image**: https://quay.io/jupyter/tensorflow-notebook
+
 ## Fields
 
 ### Chart / Role

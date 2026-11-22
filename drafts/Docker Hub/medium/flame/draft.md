@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/pawelmalak/flame
 - **Documentation**: https://github.com/pawelmalak/flame/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/pawelmalak/flame
+
 ## Fields
 
 ### Chart / Role

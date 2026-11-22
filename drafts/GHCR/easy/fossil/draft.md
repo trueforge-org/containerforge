@@ -21,6 +21,10 @@
 - **Website**: https://fossil-scm.org/
 - **Documentation**: https://fossil-scm.org/home/doc/trunk/www/permutedindex.html
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/nicholaswilde/fossil
+
 ## Fields
 
 ### Chart / Role

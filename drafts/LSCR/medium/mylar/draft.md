@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mylar
 - **Source repository**: https://github.com/MylarComics/mylar3
 
+## Potentially relevant resources
+
+- **Container image**: https://fleet.linuxserver.io/image?name=linuxserver/mylar3
+- **Source code repository**: https://github.com/linuxserver/docker-mylar3
+- **Source code repository**: https://github.com/mylar3/mylar3
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/clarklab/chowdown
 - **Website**: https://chowdown.io
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/gregyankovoy/chowdown
+
 ## Fields
 
 ### Chart / Role

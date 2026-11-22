@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-java
 - **Website**: https://www.minecraft.net/en-us/download/server
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/itzg/minecraft-server
+- **Source code repository**: https://github.com/itzg/docker-minecraft-server
+
 ## Fields
 
 ### Chart / Role

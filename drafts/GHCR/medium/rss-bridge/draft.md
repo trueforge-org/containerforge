@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/RSS-Bridge/rss-bridge
 - **Documentation**: https://rss-bridge.github.io/rss-bridge/index.html
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/rss-bridge/rss-bridge
+
 ## Fields
 
 ### Chart / Role

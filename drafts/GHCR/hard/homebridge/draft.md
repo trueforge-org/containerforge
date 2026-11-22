@@ -22,6 +22,11 @@
 - **Documentation**: https://homebridge.io/docs/
 - **Website**: https://homebridge.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/homebridge/homebridge
+- **Source code repository**: https://github.com/oznu/docker-homebridge
+
 ## Fields
 
 ### Chart / Role

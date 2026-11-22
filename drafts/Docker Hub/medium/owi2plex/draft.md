@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/owi2plex
 - **Source repository**: https://github.com/cvarelaruiz/owi2plex
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/alturismo/owi2plex
+- **Container image**: https://hub.docker.com/r/alturismo/owi2plex
+
 ## Fields
 
 ### Chart / Role

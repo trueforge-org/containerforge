@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/servas
 - **Source repository**: https://github.com/beromir/Servas
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/beromir/servas
+
 ## Fields
 
 ### Chart / Role

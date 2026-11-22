@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/pinry/pinry
 - **Documentation**: https://pinry.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/getpinry/pinry
+
 ## Fields
 
 ### Chart / Role

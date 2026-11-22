@@ -22,6 +22,10 @@
 - **Documentation**: https://www.debian.org/support
 - **Documentation**: https://www.debian.org/doc/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/debian-bullseye
+
 ## Fields
 
 ### Chart / Role

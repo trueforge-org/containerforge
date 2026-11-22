@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/gridcoin-community/Gridcoin-Research
 - **Website**: https://gridcoin.us/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/sublivion/gridcoinwalletgui
+
 ## Fields
 
 ### Chart / Role

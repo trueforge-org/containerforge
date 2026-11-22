@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cannery
 - **Source repository**: https://gitlab.com/shibaobun/cannery
 
+## Potentially relevant resources
+
+- **Website**: https://gitea.bubbletea.dev/shibao/cannery
+- **Container image**: https://hub.docker.com/r/shibaobun/cannery
+
 ## Fields
 
 ### Chart / Role

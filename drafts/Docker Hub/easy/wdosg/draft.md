@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wdosg
 - **Source repository**: https://github.com/SoulRaven80/wdosg
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/soulraven1980/wdosg
+
 ## Fields
 
 ### Chart / Role

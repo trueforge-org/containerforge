@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/socials
 - **Source repository**: https://github.com/diamkil/socials
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/diamkil/socials
+- **Container image**: https://registry.hub.docker.com/r/diamkil/socials
+
 ## Fields
 
 ### Chart / Role

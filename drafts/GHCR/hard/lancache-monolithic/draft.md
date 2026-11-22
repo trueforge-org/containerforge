@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/tpill90/steam-lancache-prefill
 - **Documentation**: https://lancache.net/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/lancache-prefill
+- **Source code repository**: https://github.com/lancachenet/monolithic
+- **Container image**: https://hub.docker.com/r/lancachenet/monolithic
+
 ## Fields
 
 ### Chart / Role

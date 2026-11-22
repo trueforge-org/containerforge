@@ -23,6 +23,11 @@
 - **Documentation**: https://kubernetes-csi.github.io/docs/snapshot-controller.html
 - **Website**: https://kubernetes-csi.github.io/docs/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/snapshot-controller/snapshot-controller
+- **Source code repository**: https://github.com/snapshot-controller/snapshot-controller-helm-chart
+
 ## Fields
 
 ### Chart / Role

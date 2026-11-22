@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/root-project/root
 - **Documentation**: https://root.cern/manual/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bgameiro/arch-cern-root
+- **Website**: https://root.cern
+
 ## Fields
 
 ### Chart / Role

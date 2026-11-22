@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mymediaforalexa
 - **Website**: https://www.mymediaalexa.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bizmodeller/mymediaforalexa
+- **Website**: https://www.mymediaalexa.com/home/docker#dockerhub
+
 ## Fields
 
 ### Chart / Role

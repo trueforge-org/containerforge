@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.luanti.org/
 - **Website**: https://www.luanti.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/minetest
+
 ## Fields
 
 ### Chart / Role

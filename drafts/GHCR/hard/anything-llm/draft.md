@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.anythingllm.com/
 - **Website**: https://anythingllm.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/mintplex-labs/anything-llm
+
 ## Fields
 
 ### Chart / Role

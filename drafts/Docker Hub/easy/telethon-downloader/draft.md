@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/telethon-downloader
 - **Source repository**: https://github.com/jsavargas/telethon_downloader
 
+## Potentially relevant resources
+
+- **Website**: https://docs.telethon.dev
+- **Container image**: https://hub.docker.com/r/jsavargas/telethon_downloader
+
 ## Fields
 
 ### Chart / Role

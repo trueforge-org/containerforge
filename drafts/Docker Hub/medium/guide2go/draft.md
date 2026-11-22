@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/guide2go
 - **Source repository**: https://github.com/mar-mei/guide2go
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/alturismo/guide2go
+- **Container image**: https://hub.docker.com/r/alturismo/guide2go
+
 ## Fields
 
 ### Chart / Role

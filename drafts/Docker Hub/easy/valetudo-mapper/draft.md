@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/rand256/valetudo-mapper
 - **Documentation**: https://valetudo.cloud/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/rand256/valetudo-mapper
+
 ## Fields
 
 ### Chart / Role

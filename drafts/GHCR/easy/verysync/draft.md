@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/verysync
 - **Source repository**: https://github.com/Jonnyan404/verysync
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jonnyan404/verysync
+
 ## Fields
 
 ### Chart / Role

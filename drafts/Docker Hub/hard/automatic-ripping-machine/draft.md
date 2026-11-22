@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/automatic-ripping-machine/automatic-ripping-machine
 - **Documentation**: https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/automaticrippingmachine/automatic-ripping-machine
+
 ## Fields
 
 ### Chart / Role

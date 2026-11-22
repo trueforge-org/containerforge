@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tubesync
 - **Source repository**: https://github.com/meeb/tubesync
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/meeb/tubesync
+- **Container image**: https://registry.hub.docker.com/r/ghcr.io/meeb/tubesync
+
 ## Fields
 
 ### Chart / Role

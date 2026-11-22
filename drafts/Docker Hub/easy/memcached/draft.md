@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.memcached.org
 - **Website**: https://memcached.org/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

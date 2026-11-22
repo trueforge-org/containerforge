@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/tagspaces/tagspaces
 - **Documentation**: https://docs.tagspaces.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/fardjad/tagspaces-lite-web
+
 ## Fields
 
 ### Chart / Role

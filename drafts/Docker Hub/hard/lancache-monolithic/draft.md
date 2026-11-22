@@ -23,6 +23,11 @@
 - **Documentation**: https://lancache.net/docs/
 - **Website**: https://lancache.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/lancache-prefill
+- **Container image**: https://hub.docker.com/r/lancachenet/monolithic
+
 ## Fields
 
 ### Chart / Role

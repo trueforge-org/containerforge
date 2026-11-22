@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/trango
 - **Source repository**: https://github.com/trango-io/trango-self-hosted
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/tak786/trango-self-hosted
+- **Website**: https://trango.io
+
 ## Fields
 
 ### Chart / Role

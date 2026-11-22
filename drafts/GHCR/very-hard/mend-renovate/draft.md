@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mend-renovate
 - **Documentation**: https://docs.renovatebot.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/mend/renovate-ce
+- **Source code repository**: https://github.com/mend/renovate-ce-ee
+
 ## Fields
 
 ### Chart / Role

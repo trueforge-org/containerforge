@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/node-red/node-red
 - **Documentation**: https://nodered.org/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/node-red/node-red
+- **Source code repository**: https://github.com/node-red/node-red-docker
+
 ## Fields
 
 ### Chart / Role

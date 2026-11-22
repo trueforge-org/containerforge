@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/monero-project/monero
 - **Website**: https://getmonero.org
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sethforprivacy/simple-monerod
+- **Source code repository**: https://github.com/kannix/monero-full-node
+
 ## Fields
 
 ### Chart / Role

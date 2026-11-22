@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/openspeedtest/Speed-Test
 - **Website**: https://openspeedtest.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/openspeedtest/latest
+
 ## Fields
 
 ### Chart / Role

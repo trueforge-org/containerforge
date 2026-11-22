@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/qwantify
 - **Source repository**: https://github.com/wanjohiryan/qwantify
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/wanjohiryan/qwantify
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rss-to-telegram
 - **Source repository**: https://github.com/BoKKeR/RSS-to-Telegram-Bot
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bokker/rss.to.telegram
+
 ## Fields
 
 ### Chart / Role

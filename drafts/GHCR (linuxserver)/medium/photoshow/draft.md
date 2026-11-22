@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photoshow
 - **Source repository**: https://github.com/thibaud-rohmer/PhotoShow
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/photoshow
+- **Source code repository**: https://github.com/linuxserver/docker-photoshow
+
 ## Fields
 
 ### Chart / Role

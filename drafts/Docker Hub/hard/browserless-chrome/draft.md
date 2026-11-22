@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/browserless/chrome
 - **Documentation**: https://docs.browserless.io/
 
+## Potentially relevant resources
+
+- **Website**: https://docs.browserless.io/docs/docker.html
+- **Container image**: https://hub.docker.com/r/browserless/chrome
+
 ## Fields
 
 ### Chart / Role

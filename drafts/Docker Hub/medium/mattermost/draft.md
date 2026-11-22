@@ -22,6 +22,12 @@
 - **Documentation**: https://docs.mattermost.com
 - **Website**: https://mattermost.com
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/mattermost/docker
+- **Source code repository**: https://github.com/mattermost/mattermost-server
+- **Container image**: https://hub.docker.com/r/mattermost/mattermost-enterprise-edition
+
 ## Fields
 
 ### Chart / Role

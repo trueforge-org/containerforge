@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kromgo
 - **Source repository**: https://github.com/home-operations/kromgo
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/home-operations/kromgo
+
 ## Fields
 
 ### Chart / Role

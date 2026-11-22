@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vlmcsd-kms-server
 - **Source repository**: https://github.com/Wind4/vlmcsd
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/mikolatero/docker-vlmcsd
+- **Container image**: https://hub.docker.com/r/mikolatero/vlmcsd
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/CTFd/CTFd
 - **Documentation**: https://docs.ctfd.io
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ctfd/ctfd
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/MiguelNdeCarvalho/speedtest-exporter
 - **Documentation**: https://docs.miguelndecarvalho.pt/projects/speedtest-exporter/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/miguelndecarvalho/speedtest-exporter
+
 ## Fields
 
 ### Chart / Role

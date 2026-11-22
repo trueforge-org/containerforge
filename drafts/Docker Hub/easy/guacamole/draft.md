@@ -22,6 +22,12 @@
 - **Documentation**: http://guacamole.apache.org/doc/gug/
 - **Website**: http://guacamole.apache.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/apache/guacamole-client
+- **Container image**: https://hub.docker.com/r/guacamole/guacamole
+- **Container image**: https://hub.docker.com/r/guacamole/guacd
+
 ## Fields
 
 ### Chart / Role

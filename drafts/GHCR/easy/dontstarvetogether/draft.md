@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dontstarvetogether
 - **Website**: https://www.klei.com/games/dont-starve-together
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+
 ## Fields
 
 ### Chart / Role

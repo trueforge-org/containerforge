@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spotweb
 - **Source repository**: https://github.com/spotweb/spotweb
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/joachimbaten/spotweb-docker
+- **Container image**: https://hub.docker.com/r/jbaten/spotweb
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://github.com/LunaMultiplayer/LunaMultiplayer/wiki
 - **Website**: https://lunamultiplayer.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/lunamultiplayer-ksp
+
 ## Fields
 
 ### Chart / Role

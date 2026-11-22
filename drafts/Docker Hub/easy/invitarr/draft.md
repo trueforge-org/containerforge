@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/invitarr
 - **Source repository**: https://github.com/Sleepingpirates/Invitarr
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/piratify/invitarr
+
 ## Fields
 
 ### Chart / Role

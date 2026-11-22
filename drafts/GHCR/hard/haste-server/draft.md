@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/haste-server
 - **Source repository**: https://github.com/nzzane/haste-server
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8s-at-home/haste-server
+- **Source code repository**: https://github.com/k8s-at-home/container-images
+- **Source code repository**: https://github.com/seejohnrun/haste-server
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/zerotier/ZeroTierOne
 - **Documentation**: https://docs.zerotier.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/zerotier/zerotier
+
 ## Fields
 
 ### Chart / Role

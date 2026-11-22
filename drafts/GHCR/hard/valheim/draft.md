@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/valheim
 - **Website**: https://www.valheimgame.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/lloesche/valheim-server
+- **Source code repository**: https://github.com/lloesche/valheim-server-docker
+
 ## Fields
 
 ### Chart / Role

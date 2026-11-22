@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homepage
 - **Source repository**: https://github.com/gethomepage/homepage
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/gethomepage/homepage
+- **Source code repository**: https://github.com/benphelps/homepage
+
 ## Fields
 
 ### Chart / Role

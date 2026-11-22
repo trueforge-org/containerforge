@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/universal-media-server
 - **Source repository**: https://github.com/UniversalMediaServer/UniversalMediaServer
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/universalmediaserver/ums
+- **Website**: https://www.universalmediaserver.com
+
 ## Fields
 
 ### Chart / Role

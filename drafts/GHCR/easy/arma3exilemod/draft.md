@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/arma3exilemod
 - **Website**: https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+
 ## Fields
 
 ### Chart / Role

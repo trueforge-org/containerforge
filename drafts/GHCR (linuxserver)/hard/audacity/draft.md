@@ -22,6 +22,11 @@
 - **Documentation**: https://manual.audacityteam.org/
 - **Website**: https://www.audacityteam.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/audacity
+- **Source code repository**: https://github.com/linuxserver/docker-audacity
+
 ## Fields
 
 ### Chart / Role

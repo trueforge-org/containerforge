@@ -22,6 +22,10 @@
 - **Documentation**: https://irine-sistiana.gitbook.io/mosdns-wiki/
 - **Documentation**: https://irine-sistiana.gitbook.io/mosdns-wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/601096721/mosdns
+
 ## Fields
 
 ### Chart / Role

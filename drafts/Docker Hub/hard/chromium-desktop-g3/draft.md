@@ -22,6 +22,11 @@
 - **Documentation**: https://www.chromium.org/developers/
 - **Website**: https://www.chromium.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/accetto/headless-drawing-g3
+- **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-chromium-g3
+
 ## Fields
 
 ### Chart / Role

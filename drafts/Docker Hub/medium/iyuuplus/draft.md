@@ -22,6 +22,10 @@
 - **Documentation**: http://doc.iyuu.cn/
 - **Website**: https://www.iyuu.cn/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/iyuucn/iyuuplus
+
 ## Fields
 
 ### Chart / Role

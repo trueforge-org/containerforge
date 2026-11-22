@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hassconfigurator
 - **Source repository**: https://github.com/danielperna84/hass-configurator
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/causticlab/hass-configurator-docker
+
 ## Fields
 
 ### Chart / Role

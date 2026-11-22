@@ -22,6 +22,10 @@
 - **Documentation**: https://farmOS.org/hosting/install
 - **Website**: https://farmOS.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/farmos/farmos
+
 ## Fields
 
 ### Chart / Role

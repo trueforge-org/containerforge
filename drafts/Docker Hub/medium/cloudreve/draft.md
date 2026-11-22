@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/cloudreve/Cloudreve
 - **Documentation**: https://docs.cloudreve.org/en
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/cloudreve/cloudreve
+
 ## Fields
 
 ### Chart / Role

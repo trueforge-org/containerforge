@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/binwiederhier/ntfy
 - **Documentation**: https://docs.ntfy.sh/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/binwiederhier/ntfy
+
 ## Fields
 
 ### Chart / Role

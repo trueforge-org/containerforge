@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/snippet-box
 - **Source repository**: https://github.com/pawelmalak/snippet-box
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/pawelmalak/snippet-box
+
 ## Fields
 
 ### Chart / Role

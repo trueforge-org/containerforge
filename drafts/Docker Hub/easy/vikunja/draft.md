@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/go-vikunja/vikunja
 - **Documentation**: https://vikunja.io/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/vikunja/vikunja
+
 ## Fields
 
 ### Chart / Role

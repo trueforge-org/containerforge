@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plexripper
 - **Source repository**: https://github.com/Reaparr/Reaparr
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/PlexRipper/PlexRipper
+- **Container image**: https://hub.docker.com/r/plexripper/plexripper
+
 ## Fields
 
 ### Chart / Role

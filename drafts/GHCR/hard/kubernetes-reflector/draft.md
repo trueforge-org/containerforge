@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kubernetes-reflector
 - **Source repository**: https://github.com/emberstack/kubernetes-reflector
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/emberstack/kubernetes-reflector
+
 ## Fields
 
 ### Chart / Role

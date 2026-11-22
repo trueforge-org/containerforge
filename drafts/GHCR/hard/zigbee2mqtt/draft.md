@@ -22,6 +22,10 @@
 - **Documentation**: https://www.zigbee2mqtt.io/
 - **Website**: https://www.zigbee2mqtt.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/koenkk/zigbee2mqtt
+
 ## Fields
 
 ### Chart / Role

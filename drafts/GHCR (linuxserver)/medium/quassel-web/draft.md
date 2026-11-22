@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quassel-web
 - **Source repository**: https://github.com/magne4000/quassel-webserver
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/quassel-web
+
 ## Fields
 
 ### Chart / Role

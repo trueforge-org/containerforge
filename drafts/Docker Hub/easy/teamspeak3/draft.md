@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/teamspeak3
 - **Website**: https://www.teamspeak.com/en/downloads/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/teamspeak
+- **Website**: https://www.teamspeak.com/en
+
 ## Fields
 
 ### Chart / Role

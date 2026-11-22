@@ -22,6 +22,10 @@
 - **Documentation**: https://bugs.quassel-irc.org/projects/1/wiki
 - **Website**: https://quassel-irc.org/about
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/quassel-core
+
 ## Fields
 
 ### Chart / Role

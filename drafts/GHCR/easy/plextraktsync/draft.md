@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Taxel/PlexTraktSync
 - **Documentation**: https://github.com/Taxel/PlexTraktSync/blob/main/README.md
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/taxel/plextraktsync
+
 ## Fields
 
 ### Chart / Role

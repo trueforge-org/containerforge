@@ -21,6 +21,13 @@
 - **Source repository**: https://github.com/grafana/grafana
 - **Documentation**: https://grafana.com/docs/grafana/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/kiwigrid/k8s-sidecar
+- **Source code repository**: https://github.com/bitnami/bitnami-docker-grafana
+- **Website**: https://grafana.com
+- **Container image**: https://hub.docker.com/r/grafana/grafana
+
 ## Fields
 
 ### Chart / Role

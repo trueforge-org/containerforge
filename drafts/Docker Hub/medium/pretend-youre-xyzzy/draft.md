@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pretend-youre-xyzzy
 - **Source repository**: https://github.com/ajanata/PretendYoureXyzzy
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Cyb3r-Jak3/DockerYourXyzzy
+- **Container image**: https://hub.docker.com/r/cyb3rjak3/dockeryourxyzzy
+
 ## Fields
 
 ### Chart / Role

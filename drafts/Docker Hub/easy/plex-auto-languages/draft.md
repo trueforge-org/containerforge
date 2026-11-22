@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-auto-languages
 - **Source repository**: https://github.com/RemiRigal/Plex-Auto-Languages
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/remirigal/plex-auto-languages
+- **Container image**: https://hub.docker.com/r/remirigal/plex-auto-languages
+
 ## Fields
 
 ### Chart / Role

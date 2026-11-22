@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/st-reborn-server
 - **Source repository**: https://github.com/tiltedphoques/TiltedEvolution
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/tiltedphoques/st-reborn-server
+
 ## Fields
 
 ### Chart / Role

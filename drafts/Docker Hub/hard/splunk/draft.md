@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.splunk.com/Documentation/Splunk
 - **Documentation**: https://help.splunk.com/en
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/splunk/splunk
+- **Website**: https://splunk.github.io/docker-splunk
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://github.com/DistroAV/DistroAV/wiki
 - **Website**: https://distroav.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/patrickstigler/docker-obs-ndi
+- **Container image**: https://hub.docker.com/r/patrickstigler/obs-ndi
+
 ## Fields
 
 ### Chart / Role

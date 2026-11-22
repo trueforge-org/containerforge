@@ -23,6 +23,10 @@
 - **Documentation**: https://yourls.org/docs
 - **Website**: https://yourls.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/yourls
+
 ## Fields
 
 ### Chart / Role

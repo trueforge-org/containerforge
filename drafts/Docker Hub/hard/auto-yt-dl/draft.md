@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/auto-yt-dl
 - No application links recorded in `docs/project-fireball.md`.
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/xXGuhuXx/auto-yt-dl
+- **Container image**: https://hub.docker.com/r/guhu007/auto-yt-dl
+
 ## Fields
 
 ### Chart / Role

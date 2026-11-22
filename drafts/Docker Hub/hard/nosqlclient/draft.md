@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nosqlclient
 - **Source repository**: https://github.com/nosqlclient/nosqlclient
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

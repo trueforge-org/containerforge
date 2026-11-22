@@ -21,6 +21,10 @@
 - **Website**: https://mediagoblin.org/
 - **Documentation**: https://docs.mediagoblin.org/en/stable/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mtlynch/mediagoblin
+
 ## Fields
 
 ### Chart / Role

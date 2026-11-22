@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dashy
 - **Source repository**: https://github.com/Lissy93/dashy
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/lissy93/dashy
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/icloud-photos-downloader/icloud_photos_downloader
 - **Documentation**: https://icloud-photos-downloader.github.io/icloud_photos_downloader/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/boredazfcuk/icloudpd
+
 ## Fields
 
 ### Chart / Role

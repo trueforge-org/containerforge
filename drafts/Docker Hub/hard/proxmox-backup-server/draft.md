@@ -22,6 +22,10 @@
 - **Documentation**: https://pbs.proxmox.com/docs/
 - **Website**: https://www.proxmox.com/en/products/proxmox-backup-server/overview
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ayufan/proxmox-backup-server
+
 ## Fields
 
 ### Chart / Role

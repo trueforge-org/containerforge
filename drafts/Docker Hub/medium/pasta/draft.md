@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pasta
 - **Source repository**: https://github.com/cglatot/pasta
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/cglatot/pasta
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://github.com/pyload/pyload/wiki
 - **Website**: https://pyload.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/pyload
+
 ## Fields
 
 ### Chart / Role

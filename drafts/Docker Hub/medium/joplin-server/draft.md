@@ -22,6 +22,11 @@
 - **Documentation**: https://joplinapp.org/help/
 - **Website**: https://joplinapp.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/laurent22/joplin/tree/dev/packages/server
+- **Container image**: https://hub.docker.com/r/joplin/server
+
 ## Fields
 
 ### Chart / Role

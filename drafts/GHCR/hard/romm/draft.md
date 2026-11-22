@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/rommapp/romm
 - **Documentation**: https://docs.romm.app
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/rommapp/romm
+- **Source code repository**: https://github.com/zurdi15/romm
+
 ## Fields
 
 ### Chart / Role

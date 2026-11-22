@@ -23,6 +23,12 @@
 - **Documentation**: https://github.com/Suwayomi/Suwayomi-Server/wiki
 - **Website**: https://suwayomi.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/suwayomi/tachidesk
+- **Source code repository**: https://github.com/Suwayomi/Tachidesk-Server
+- **Source code repository**: https://github.com/suwayomi/docker-tachidesk
+
 ## Fields
 
 ### Chart / Role

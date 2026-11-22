@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/itzg/mc-router
 - **Documentation**: https://github.com/itzg/mc-router/blob/main/README.md
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/itzg/mc-router
+
 ## Fields
 
 ### Chart / Role

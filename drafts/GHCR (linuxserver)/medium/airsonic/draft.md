@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/airsonic/airsonic
 - **Documentation**: https://airsonic.github.io/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/airsonic
+- **Source code repository**: https://github.com/k8s-at-home/charts/tree/master/charts/airsonic
+- **Source code repository**: https://github.com/linuxserver/docker-airsonic
+
 ## Fields
 
 ### Chart / Role

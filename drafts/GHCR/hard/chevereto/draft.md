@@ -22,6 +22,11 @@
 - **Documentation**: https://v4-docs.chevereto.com/
 - **Website**: https://chevereto.com/
 
+## Potentially relevant resources
+
+- **Website**: https://chevereto-free.github.io/setup/stable/environment.html#image-handling-variables
+- **Container image**: https://ghcr.io/rodber/chevereto-free
+
 ## Fields
 
 ### Chart / Role

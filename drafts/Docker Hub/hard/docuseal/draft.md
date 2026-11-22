@@ -22,6 +22,10 @@
 - **Documentation**: https://www.docuseal.com/docs/embedded
 - **Website**: https://www.docuseal.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/docuseal/docuseal
+
 ## Fields
 
 ### Chart / Role

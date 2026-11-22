@@ -22,6 +22,11 @@
 - **Documentation**: https://gitlab.com/xonotic/xonotic/-/wikis/home
 - **Website**: https://xonotic.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/xonotic
+- **Website**: https://www.xonotic.org
+
 ## Fields
 
 ### Chart / Role

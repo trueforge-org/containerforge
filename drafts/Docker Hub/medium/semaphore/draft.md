@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/semaphoreui/semaphore
 - **Documentation**: https://semaphoreui.com/docs/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/ansible-semaphore/semaphore
+- **Container image**: https://hub.docker.com/r/semaphoreui/semaphore
+
 ## Fields
 
 ### Chart / Role

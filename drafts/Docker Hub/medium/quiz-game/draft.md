@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quiz-game
 - **Source repository**: https://github.com/ASKJR/quiz-game
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/patrickstigler/quiz-game
+- **Container image**: https://registry.hub.docker.com/r/patrickstigler/quiz-game
+
 ## Fields
 
 ### Chart / Role

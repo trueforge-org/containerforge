@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/blog
 - **Source repository**: https://github.com/m1k1o/blog
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/nicholaswilde/docker-blog
+- **Container image**: https://hub.docker.com/r/m1k1o/blog
+
 ## Fields
 
 ### Chart / Role

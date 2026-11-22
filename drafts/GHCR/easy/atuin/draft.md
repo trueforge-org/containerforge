@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/atuinsh/atuin
 - **Documentation**: https://docs.atuin.sh/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/atuinsh/atuin
+
 ## Fields
 
 ### Chart / Role

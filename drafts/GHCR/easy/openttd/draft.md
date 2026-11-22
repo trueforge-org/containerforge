@@ -23,6 +23,10 @@
 - **Documentation**: https://wiki.openttd.org/en/
 - **Website**: https://www.openttd.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/openttdserver
+
 ## Fields
 
 ### Chart / Role

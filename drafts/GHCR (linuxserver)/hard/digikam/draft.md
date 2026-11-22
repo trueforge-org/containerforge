@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.digikam.org/
 - **Website**: https://www.digikam.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/digikam
+- **Source code repository**: https://github.com/linuxserver/docker-digikam
+
 ## Fields
 
 ### Chart / Role

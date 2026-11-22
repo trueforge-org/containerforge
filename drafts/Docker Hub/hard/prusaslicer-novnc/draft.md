@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/prusaslicer-novnc
 - **Source repository**: https://github.com/prusa3d/PrusaSlicer
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mikeah/prusaslicer-novnc
+- **Website**: https://www.prusa3d.com/prusaslicer
+
 ## Fields
 
 ### Chart / Role

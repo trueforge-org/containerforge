@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/raspberrymatic
 - **Source repository**: https://github.com/jens-maus/RaspberryMatic
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jens-maus/raspberrymatic
+- **Source code repository**: https://github.com/jens-maus/RaspberryMatic/pkgs/container/raspberrymatic
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/restic/rest-server
 - **Documentation**: https://restic.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/restic/rest-server
+
 ## Fields
 
 ### Chart / Role

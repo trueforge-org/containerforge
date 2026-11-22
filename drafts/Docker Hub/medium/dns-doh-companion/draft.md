@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dns-doh-companion
 - **Source repository**: https://github.com/cloudflare/cloudflared
 
+## Potentially relevant resources
+
+- **Website**: https://developers.cloudflare.com/1.1.1.1/dns-over-https/cloudflared-proxy
+- **Container image**: https://hub.docker.com/r/testdasi/simple-dns-doh
+
 ## Fields
 
 ### Chart / Role

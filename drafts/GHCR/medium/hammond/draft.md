@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hammond
 - **Source repository**: https://github.com/AlfHou/hammond
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/alfhou/hammond
+- **Source code repository**: https://github.com/alfhou/hammond/pkgs/container/hammond
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rflood
 - **Source repository**: https://github.com/rakshasa/rtorrent
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/hotio/rflood
+- **Container image**: https://hotio.dev/containers/rflood
+
 ## Fields
 
 ### Chart / Role

@@ -23,6 +23,10 @@
 - **Documentation**: https://support.ultimaker.com/s/topic/0TO5b000000Q4udGAC/manuals
 - **Website**: https://ultimaker.com/software/ultimaker-cura/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mikeah/cura-novnc
+
 ## Fields
 
 ### Chart / Role

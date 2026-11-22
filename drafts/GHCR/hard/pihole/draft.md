@@ -22,6 +22,12 @@
 - **Documentation**: https://docs.pi-hole.net/
 - **Website**: https://pi-hole.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/pi-hole/pihole
+- **Source code repository**: https://github.com/pi-hole
+- **Source code repository**: https://github.com/pi-hole/docker-pi-hole
+
 ## Fields
 
 ### Chart / Role

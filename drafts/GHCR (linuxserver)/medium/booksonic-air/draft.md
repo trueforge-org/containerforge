@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/popeen/Booksonic-Air
 - **Website**: https://booksonic.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/booksonic-air
+
 ## Fields
 
 ### Chart / Role

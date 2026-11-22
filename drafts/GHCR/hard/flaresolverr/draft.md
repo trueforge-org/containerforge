@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flaresolverr
 - **Source repository**: https://github.com/FlareSolverr/FlareSolverr
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/flaresolverr/flaresolverr
+
 ## Fields
 
 ### Chart / Role

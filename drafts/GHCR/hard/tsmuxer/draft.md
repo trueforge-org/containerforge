@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tsmuxer
 - **Source repository**: https://github.com/justdan96/tsMuxer
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/tsmuxer
+- **Source code repository**: https://github.com/jlesage/docker-tsmuxer
+
 ## Fields
 
 ### Chart / Role

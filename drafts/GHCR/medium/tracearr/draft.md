@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.tracearr.com
 - **Website**: https://tracearr.com
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/connorgallopo/tracearr
+- **Source code repository**: https://github.com/connorgallopo/Tracearr/blob/main/docker/docker-compose.yml
+
 ## Fields
 
 ### Chart / Role

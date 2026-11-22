@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/truenas-exporter
 - **Source repository**: https://github.com/prometheus/graphite_exporter
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Supporterino/truenas-graphite-to-prometheus/tree/main
+- **Container image**: https://hub.docker.com/r/prom/graphite-exporter
+
 ## Fields
 
 ### Chart / Role

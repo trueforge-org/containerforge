@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/tt-rss/tt-rss
 - **Website**: https://tt-rss.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tt-rss/tt-rss
+- **Container image**: https://ghcr.io/tt-rss/tt-rss-web-nginx
+- **Website**: https://git.tt-rss.org/fox/tt-rss
+
 ## Fields
 
 ### Chart / Role

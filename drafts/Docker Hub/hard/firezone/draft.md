@@ -22,6 +22,10 @@
 - **Documentation**: https://www.firezone.dev/kb
 - **Website**: https://www.firezone.dev
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/firezone/firezone
+
 ## Fields
 
 ### Chart / Role

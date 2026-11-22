@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.meshcentral.com/
 - **Website**: https://meshcentral.com
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ylianst/meshcentral
+
 ## Fields
 
 ### Chart / Role

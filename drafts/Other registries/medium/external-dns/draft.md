@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/kubernetes-sigs/external-dns
 - **Documentation**: https://kubernetes-sigs.github.io/external-dns/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

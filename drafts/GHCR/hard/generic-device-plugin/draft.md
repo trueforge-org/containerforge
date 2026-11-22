@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/generic-device-plugin
 - **Source repository**: https://github.com/squat/generic-device-plugin
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/squat/generic-device-plugin
+
 ## Fields
 
 ### Chart / Role

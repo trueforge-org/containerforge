@@ -20,6 +20,14 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/paperless-ngx
 - **Source repository**: https://github.com/apache/tika
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/paperless-ngx/paperless-ngx
+- **Source code repository**: https://github.com/paperless-ngx/paperless-ngx
+- **Container image**: https://hub.docker.com/r/apache/tika
+- **Container image**: https://hub.docker.com/r/gotenberg/gotenberg
+- **Website**: https://paperless-ngx.readthedocs.io/en/latest
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://help.dropbox.com/
 - **Website**: https://www.dropbox.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/otherguy/docker-dropbox
+- **Container image**: https://hub.docker.com/r/otherguy/dropbox
+
 ## Fields
 
 ### Chart / Role

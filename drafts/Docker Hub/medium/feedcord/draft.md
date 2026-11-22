@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/feedcord
 - **Source repository**: https://github.com/Qolors/FeedCord
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/qolors/feedcord
+
 ## Fields
 
 ### Chart / Role

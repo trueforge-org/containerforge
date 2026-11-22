@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/streamystats
 - **Source repository**: https://github.com/fredrikburmester/streamystats
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/fredrikburmester/streamystats-job-server
+- **Container image**: https://ghcr.io/fredrikburmester/streamystats-nextjs
+
 ## Fields
 
 ### Chart / Role

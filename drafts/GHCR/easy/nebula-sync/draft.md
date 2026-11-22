@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/lovelaze/nebula-sync
 - **Documentation**: https://github.com/lovelaze/nebula-sync/blob/main/README.md
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/lovelaze/nebula-sync
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,13 @@
 - **Source repository**: https://github.com/paperless-ngx/paperless-ngx
 - **Documentation**: https://github.com/paperless-ngx/paperless-ngx/tree/dev/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/paperless-ngx/paperless-ngx
+- **Container image**: https://hub.docker.com/r/apache/tika
+- **Container image**: https://hub.docker.com/r/gotenberg/gotenberg
+- **Website**: https://paperless-ngx.readthedocs.io/en/latest
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/invidious
 - **Source repository**: https://github.com/iv-org/invidious
 
+## Potentially relevant resources
+
+- **Website**: https://docs.invidious.io/installation/#docker
+- **Container image**: https://quay.io/invidious/invidious
+
 ## Fields
 
 ### Chart / Role

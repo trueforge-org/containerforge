@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/filebrowser
 - **Source repository**: https://github.com/filebrowser/filebrowser
 
+## Potentially relevant resources
+
+- **Website**: https://filebrowser.org/cli/filebrowser
+- **Container image**: https://hub.docker.com/r/filebrowser/filebrowser
+
 ## Fields
 
 ### Chart / Role

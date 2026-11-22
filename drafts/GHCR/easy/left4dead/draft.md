@@ -22,6 +22,11 @@
 - **Documentation**: https://developer.valvesoftware.com/wiki/Left_4_Dead_Dedicated_Server
 - **Website**: https://www.l4d.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

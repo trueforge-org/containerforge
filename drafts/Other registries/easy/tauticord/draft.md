@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tauticord
 - **Source repository**: https://codeberg.org/nwithan8/tauticord
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

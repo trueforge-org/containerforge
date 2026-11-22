@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dailynotes
 - **Source repository**: https://github.com/djedi/DailyNotes
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/m0ngr31/dailynotes
+
 ## Fields
 
 ### Chart / Role

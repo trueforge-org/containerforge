@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/slskd/slskd
 - **Documentation**: https://github.com/slskd/slskd/blob/master/docs/config.md
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/slskd/slskd
+- **Source code repository**: https://github.com/ansible-slskd/slskd
+
 ## Fields
 
 ### Chart / Role

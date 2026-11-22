@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spegel
 - **Source repository**: https://github.com/spegel-org/spegel
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/spegel-org/spegel
+
 ## Fields
 
 ### Chart / Role

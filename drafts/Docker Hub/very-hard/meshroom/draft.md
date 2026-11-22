@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/alicevision/Meshroom
 - **Documentation**: https://meshroom.readthedocs.io/en/stable/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/alicevision/meshroom
+- **Container image**: https://hub.docker.com/r/alicevision/meshroom
+
 ## Fields
 
 ### Chart / Role

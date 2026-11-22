@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fotosho
 - **Source repository**: https://github.com/advplyr/fotosho
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/advplyr/fotosho
+
 ## Fields
 
 ### Chart / Role

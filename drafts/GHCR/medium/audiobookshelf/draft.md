@@ -22,6 +22,10 @@
 - **Documentation**: https://www.audiobookshelf.org/docs
 - **Website**: https://www.audiobookshelf.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/advplyr/audiobookshelf
+
 ## Fields
 
 ### Chart / Role

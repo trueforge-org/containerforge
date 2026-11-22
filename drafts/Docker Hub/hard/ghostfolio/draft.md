@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/ghostfolio/ghostfolio
 - **Website**: https://ghostfol.io
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ghostfolio/ghostfolio
+
 ## Fields
 
 ### Chart / Role

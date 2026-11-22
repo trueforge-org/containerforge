@@ -22,6 +22,10 @@
 - **Documentation**: https://nginxproxymanager.com/setup/
 - **Website**: https://nginxproxymanager.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jc21/nginx-proxy-manager
+
 ## Fields
 
 ### Chart / Role

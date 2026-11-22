@@ -21,6 +21,12 @@
 - **Source repository**: https://git.mills.io/prologic/twtxt/releases
 - **Documentation**: https://twtxt.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/nicholaswilde/twtxt
+- **Source code repository**: https://github.com/nicholaswilde/docker-twtxt
+- **Source code repository**: https://github.com/prologic/twtxt
+
 ## Fields
 
 ### Chart / Role

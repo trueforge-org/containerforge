@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/teedy
 - **Source repository**: https://github.com/sismics/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/sismics/docs
+
 ## Fields
 
 ### Chart / Role

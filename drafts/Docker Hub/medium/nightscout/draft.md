@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/nightscout/cgm-remote-monitor
 - **Documentation**: https://nightscout.github.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/nightscout/cgm-remote-monitor-travis
+- **Container image**: https://registry.hub.docker.com/r/nightscout/cgm-remote-monitor-travis
+
 ## Fields
 
 ### Chart / Role

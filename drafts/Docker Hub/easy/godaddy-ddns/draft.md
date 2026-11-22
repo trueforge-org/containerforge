@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/godaddy-ddns
 - **Source repository**: https://github.com/jwater7/docker-godaddy-publicip-updater
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jwater7/godaddy-publicip-updater
+
 ## Fields
 
 ### Chart / Role

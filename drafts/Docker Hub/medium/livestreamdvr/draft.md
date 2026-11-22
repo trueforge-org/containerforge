@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/livestreamdvr
 - **Source repository**: https://github.com/MrBrax/LiveStreamDVR
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mrbrax/twitchautomator
+
 ## Fields
 
 ### Chart / Role

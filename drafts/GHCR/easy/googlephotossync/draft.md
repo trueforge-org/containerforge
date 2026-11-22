@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/gilesknap/gphotos-sync
 - **Documentation**: https://gilesknap.github.io/gphotos-sync
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/gilesknap/gphotos-sync
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.tandoor.dev/
 - **Website**: https://tandoor.dev
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tandoorrecipes/recipes
+- **Source code repository**: https://github.com/TandoorRecipes/recipes/pkgs/container/recipes
+
 ## Fields
 
 ### Chart / Role

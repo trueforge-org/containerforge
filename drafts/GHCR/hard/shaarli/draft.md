@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/shaarli/Shaarli
 - **Documentation**: https://shaarli.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/shaarli/shaarli
+
 ## Fields
 
 ### Chart / Role

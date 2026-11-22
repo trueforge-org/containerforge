@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/friendica/friendica
 - **Website**: https://friendi.ca
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/friendica
+
 ## Fields
 
 ### Chart / Role

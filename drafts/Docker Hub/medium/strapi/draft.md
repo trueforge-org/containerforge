@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/strapi/strapi
 - **Documentation**: https://docs.strapi.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/naskio/docker-strapi
+- **Container image**: https://hub.docker.com/r/vshadbolt/strapi
+
 ## Fields
 
 ### Chart / Role

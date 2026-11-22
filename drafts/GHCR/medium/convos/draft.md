@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/convos
 - **Source repository**: https://github.com/convos-chat/convos
 
+## Potentially relevant resources
+
+- **Website**: https://convos.chat
+- **Container image**: https://ghcr.io/convos-chat/convos
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mkvcleaver
 - **Website**: https://blogs.sapib.ca/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/mkvcleaver
+- **Source code repository**: https://github.com/jlesage/docker-mkvcleaver
+
 ## Fields
 
 ### Chart / Role

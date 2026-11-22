@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.hyperion-project.org
 - **Website**: https://hyperion-project.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/sirfragalot/hyperion.ng
+
 ## Fields
 
 ### Chart / Role

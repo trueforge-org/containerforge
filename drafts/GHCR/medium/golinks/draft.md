@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/golinks
 - **Source repository**: https://git.mills.io/prologic/golinks
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/nicholaswilde/golinks
+- **Source code repository**: https://github.com/nicholaswilde/docker-golinks
+- **Source code repository**: https://github.com/prologic/golinks
+
 ## Fields
 
 ### Chart / Role

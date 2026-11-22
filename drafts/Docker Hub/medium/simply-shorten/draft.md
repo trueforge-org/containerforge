@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/simply-shorten
 - **Source repository**: https://gitlab.com/draganczukp/simply-shorten
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/draganczukp/simply-shorten
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rss-proxy
 - **Source repository**: https://github.com/damoeb/rss-proxy
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/damoeb/rss-proxy
+
 ## Fields
 
 ### Chart / Role

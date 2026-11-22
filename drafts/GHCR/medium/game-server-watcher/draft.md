@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/game-server-watcher
 - **Source repository**: https://github.com/a-sync/game-server-watcher
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/a-sync/game-server-watcher
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://www.authelia.com/
 - **Website**: https://www.authelia.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/authelia/authelia
+- **Source code repository**: https://github.com/authelia/chartrepo
+
 ## Fields
 
 ### Chart / Role

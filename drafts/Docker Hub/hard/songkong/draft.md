@@ -21,6 +21,10 @@
 - **Website**: https://www.jthink.net/songkong/
 - **Documentation**: https://www.jthink.net/songkong/tutorial.jsp
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/songkong/songkong
+
 ## Fields
 
 ### Chart / Role

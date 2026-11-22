@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pastey
 - **Source repository**: https://github.com/Cesura/pastey
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/cesura/pastey
+
 ## Fields
 
 ### Chart / Role

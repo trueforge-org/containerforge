@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/distribution/distribution
 - **Documentation**: https://distribution.github.io/distribution/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/registry
+- **Container image**: https://registry.hub.docker.com/_/registry
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/bayang/jelu
 - **Documentation**: https://bayang.github.io/jelu-web/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/wabayang/jelu
+
 ## Fields
 
 ### Chart / Role

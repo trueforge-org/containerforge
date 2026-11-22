@@ -22,6 +22,12 @@
 - **Documentation**: https://www.chromium.org/developers/
 - **Website**: https://www.chromium.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/chromium
+- **Source code repository**: https://github.com/linuxserver/docker-chromium
+- **Website**: https://www.google.com/chrome
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bender
 - **Source repository**: https://github.com/jez500/bender
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jez500/bender
+
 ## Fields
 
 ### Chart / Role

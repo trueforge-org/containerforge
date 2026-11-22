@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/teslamate-org/teslamate
 - **Documentation**: https://docs.teslamate.org/
 
+## Potentially relevant resources
+
+- **Website**: https://docs.teslamate.org/docs/installation/docker
+- **Container image**: https://hub.docker.com/r/teslamate/teslamate
+
 ## Fields
 
 ### Chart / Role

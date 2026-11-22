@@ -22,6 +22,11 @@
 - **Documentation**: https://www.xwiki.org/xwiki/bin/view/Documentation/
 - **Website**: https://www.xwiki.org/xwiki/bin/view/Main/WebHome
 
+## Potentially relevant resources
+
+- **Container image**: https://gallery.ecr.aws/docker/library/xwiki
+- **Source code repository**: https://github.com/xwiki/xwiki-docker
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/sentriz/gonic
 - **Documentation**: https://github.com/sentriz/gonic/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sentriz/gonic
+
 ## Fields
 
 ### Chart / Role

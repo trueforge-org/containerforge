@@ -22,6 +22,10 @@
 - **Documentation**: http://guacamole.apache.org/doc/gug/
 - **Website**: http://guacamole.apache.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/guacamole/guacd
+
 ## Fields
 
 ### Chart / Role

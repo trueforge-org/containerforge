@@ -22,6 +22,10 @@
 - **Documentation**: https://doc.voce.chat/
 - **Website**: https://voce.chat/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/privoce/vocechat-server
+
 ## Fields
 
 ### Chart / Role

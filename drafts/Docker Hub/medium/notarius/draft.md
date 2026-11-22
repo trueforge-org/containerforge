@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/notarius
 - **Source repository**: https://github.com/agusalex/Notarius
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/agusalex/notarius
+
 ## Fields
 
 ### Chart / Role

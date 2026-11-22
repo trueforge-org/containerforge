@@ -22,6 +22,11 @@
 - **Documentation**: https://www.longvinter.com/links
 - **Website**: https://www.uuvana.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

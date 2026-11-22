@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/novnc/noVNC
 - **Documentation**: https://github.com/novnc/noVNC/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/nicholaswilde/novnc
+- **Website**: https://novnc.com
+
 ## Fields
 
 ### Chart / Role

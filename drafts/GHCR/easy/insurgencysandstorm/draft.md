@@ -22,6 +22,11 @@
 - **Website**: https://www.focus-entmt.com/games/insurgency-sandstorm
 - **Documentation**: https://developer.valvesoftware.com/wiki/Insurgency:_Sandstorm_Dedicated_Server
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

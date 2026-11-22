@@ -22,6 +22,10 @@
 - **Documentation**: https://manual.calibre-ebook.com/
 - **Website**: https://calibre-ebook.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/calibre
+
 ## Fields
 
 ### Chart / Role

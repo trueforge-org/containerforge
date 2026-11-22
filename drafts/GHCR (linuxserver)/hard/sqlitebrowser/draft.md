@@ -22,6 +22,11 @@
 - **Documentation**: https://github.com/sqlitebrowser/sqlitebrowser/wiki
 - **Website**: https://sqlitebrowser.org
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/sqlitebrowser
+- **Source code repository**: https://github.com/linuxserver/docker-sqlitebrowser
+
 ## Fields
 
 ### Chart / Role

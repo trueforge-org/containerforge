@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/agregarr
 - **Source repository**: https://github.com/agregarr/agregarr
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/agregarr/agregarr
+
 ## Fields
 
 ### Chart / Role

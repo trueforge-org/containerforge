@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quickshare
 - **Source repository**: https://github.com/ihexxa/quickshare
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/hexxa/quickshare
+
 ## Fields
 
 ### Chart / Role

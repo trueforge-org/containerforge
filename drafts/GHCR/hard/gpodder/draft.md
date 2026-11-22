@@ -22,6 +22,10 @@
 - **Documentation**: https://gpodder.github.io/docs/
 - **Website**: https://gpodder.github.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/xthursdayx/gpodder-docker
+
 ## Fields
 
 ### Chart / Role

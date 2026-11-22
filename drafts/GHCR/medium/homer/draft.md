@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homer
 - **Source repository**: https://github.com/homer-dashboard/homer
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/bastienwirtz/homer
+- **Source code repository**: https://github.com/bastienwirtz/homer
+
 ## Fields
 
 ### Chart / Role

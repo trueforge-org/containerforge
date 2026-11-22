@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/traccar/traccar
 - **Documentation**: https://www.traccar.org/documentation/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/traccar/traccar
+
 ## Fields
 
 ### Chart / Role

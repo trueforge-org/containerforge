@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/suistartpage
 - **Source repository**: https://github.com/CorneliousJD/SUI-Startpage
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/corneliousjd/sui-startpage
+
 ## Fields
 
 ### Chart / Role

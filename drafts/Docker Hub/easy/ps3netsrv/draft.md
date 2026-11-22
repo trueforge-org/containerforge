@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ps3netsrv
 - **Source repository**: https://github.com/aldostools/ps3netsrv
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/aldostools/webMAN-MOD/tree/master/_Projects_/ps3netsrv
+- **Container image**: https://hub.docker.com/r/shawly/ps3netsrv
+
 ## Fields
 
 ### Chart / Role

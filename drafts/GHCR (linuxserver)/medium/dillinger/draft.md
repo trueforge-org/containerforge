@@ -22,6 +22,10 @@
 - **Website**: https://www.dillinger.io/
 - **Website**: https://dillinger.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/dillinger
+
 ## Fields
 
 ### Chart / Role

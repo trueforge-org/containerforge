@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/udo-munk/z80pack
 - **Documentation**: https://www.icl1900.co.uk/unix4fun/z80pack
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/dlandon/z80pack
+- **Container image**: https://registry.hub.docker.com/r/dlandon/z80pack
+
 ## Fields
 
 ### Chart / Role

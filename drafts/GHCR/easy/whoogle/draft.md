@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/benbusby/whoogle-search
 - **Documentation**: https://github.com/benbusby/whoogle-search/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/benbusby/whoogle-search
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/gotson/komga
 - **Documentation**: https://komga.org/docs/introduction
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/gotson/komga
+- **Website**: https://komga.org
+
 ## Fields
 
 ### Chart / Role

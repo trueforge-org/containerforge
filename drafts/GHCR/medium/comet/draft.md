@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/comet
 - **Source repository**: https://github.com/g0ldyy/comet
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/g0ldyy/comet
+
 ## Fields
 
 ### Chart / Role

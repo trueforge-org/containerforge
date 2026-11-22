@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fivem
 - **Source repository**: https://github.com/citizenfx/fivem
 
+## Potentially relevant resources
+
+- **Website**: https://fivem.net
+- **Container image**: https://ghcr.io/ich777/fivemserver
+
 ## Fields
 
 ### Chart / Role

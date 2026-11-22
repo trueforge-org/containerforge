@@ -22,6 +22,10 @@
 - **Documentation**: https://electrum.readthedocs.io/
 - **Website**: https://electrum.org
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/electrum
+
 ## Fields
 
 ### Chart / Role

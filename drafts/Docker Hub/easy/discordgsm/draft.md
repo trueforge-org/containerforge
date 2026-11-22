@@ -22,6 +22,10 @@
 - **Documentation**: https://discordgsm.com/guide
 - **Website**: https://discordgsm.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/discordgsm/discord-game-server-monitor
+
 ## Fields
 
 ### Chart / Role

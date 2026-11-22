@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/mealie-recipes/mealie
 - **Documentation**: https://mealie.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/mealie-recipes/mealie
+
 ## Fields
 
 ### Chart / Role

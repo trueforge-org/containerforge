@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/mozilla-firefox/firefox
 - **Website**: https://www.firefox.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/accetto/headless-drawing-g3
+- **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-g3
+
 ## Fields
 
 ### Chart / Role

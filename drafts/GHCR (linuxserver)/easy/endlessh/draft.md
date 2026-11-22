@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/endlessh
 - **Source repository**: https://github.com/skeeto/endlessh
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/endlessh
+
 ## Fields
 
 ### Chart / Role

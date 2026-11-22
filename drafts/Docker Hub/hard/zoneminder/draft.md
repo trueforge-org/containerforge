@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/ZoneMinder/zoneminder
 - **Documentation**: https://zoneminder.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/dlandon/zoneminder.unraid
+- **Website**: https://zoneminder.com
+
 ## Fields
 
 ### Chart / Role

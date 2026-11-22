@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/fclairamb/solidping
 - **Documentation**: https://solidping.io/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/fclairamb/solidping
+- **Source code repository**: https://github.com/fclairamb/solidping/pkgs/container/solidping
+
 ## Fields
 
 ### Chart / Role

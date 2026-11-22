@@ -21,6 +21,13 @@
 - **Source repository**: https://github.com/gotenberg/gotenberg
 - **Documentation**: https://paperless-ngx.readthedocs.io/en/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/paperless-ngx/paperless-ngx
+- **Source code repository**: https://github.com/paperless-ngx/paperless-ngx
+- **Container image**: https://hub.docker.com/r/apache/tika
+- **Container image**: https://hub.docker.com/r/gotenberg/gotenberg
+
 ## Fields
 
 ### Chart / Role

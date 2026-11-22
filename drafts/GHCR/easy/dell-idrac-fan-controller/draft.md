@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dell-idrac-fan-controller
 - **Source repository**: https://github.com/tigerblue77/Dell_iDRAC_fan_controller_Docker
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tigerblue77/dell_idrac_fan_controller
+
 ## Fields
 
 ### Chart / Role

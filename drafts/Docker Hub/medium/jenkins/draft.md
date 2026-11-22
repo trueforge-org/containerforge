@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/jenkinsci/jenkins
 - **Documentation**: https://www.jenkins.io/doc/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/jenkinsci/docker
+- **Container image**: https://hub.docker.com/r/jenkins/jenkins
+
 ## Fields
 
 ### Chart / Role

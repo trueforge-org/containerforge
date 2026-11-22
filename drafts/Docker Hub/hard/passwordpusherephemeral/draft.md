@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.pwpush.com/
 - **Website**: https://eu.pwpush.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/pglombardo/pwpush-ephemeral
+
 ## Fields
 
 ### Chart / Role

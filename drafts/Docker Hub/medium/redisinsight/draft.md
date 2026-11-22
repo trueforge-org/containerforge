@@ -22,6 +22,10 @@
 - **Documentation**: https://redis.io/docs/latest/operate/redisinsight/
 - **Website**: https://redis.io/insight/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

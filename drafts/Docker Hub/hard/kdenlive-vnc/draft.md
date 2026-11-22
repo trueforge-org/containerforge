@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.kdenlive.org/en/
 - **Website**: https://kdenlive.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/JonathanTreffler/kdenlive-vnc-docker
+- **Container image**: https://hub.docker.com/r/tessypowder/docker-kdenlive
+
 ## Fields
 
 ### Chart / Role

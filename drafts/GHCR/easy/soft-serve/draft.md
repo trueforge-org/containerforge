@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/charmbracelet/soft-serve
 - **Website**: https://charm.land/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/charmbracelet/soft-serve
+
 ## Fields
 
 ### Chart / Role

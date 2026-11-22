@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/glauth/glauth
 - **Documentation**: https://glauth.github.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/glauth/glauth
+
 ## Fields
 
 ### Chart / Role

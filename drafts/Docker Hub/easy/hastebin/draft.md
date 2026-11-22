@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hastebin
 - **Source repository**: https://github.com/nzzane/haste-server
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/flippinturt/hastebin
+
 ## Fields
 
 ### Chart / Role

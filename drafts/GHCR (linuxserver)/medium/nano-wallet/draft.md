@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nano-wallet
 - **Source repository**: https://github.com/linuxserver/nano-wallet
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/nano-wallet
+
 ## Fields
 
 ### Chart / Role

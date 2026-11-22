@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/hoobs-org/HOOBS
 - **Website**: https://hoobs.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/hoobs/hoobs
+
 ## Fields
 
 ### Chart / Role

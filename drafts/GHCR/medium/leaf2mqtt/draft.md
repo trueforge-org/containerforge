@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/leaf2mqtt
 - **Source repository**: https://github.com/mitsumaui/leaf2mqtt
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8s-at-home/leaf2mqtt
+- **Source code repository**: https://github.com/k8s-at-home/container-images
+
 ## Fields
 
 ### Chart / Role

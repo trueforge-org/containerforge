@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/BLBurgess/adb-hass-androidtv
 - **Documentation**: https://www.home-assistant.io/integrations/androidtv/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/barnybbb/adb-hass-androidtv
+
 ## Fields
 
 ### Chart / Role

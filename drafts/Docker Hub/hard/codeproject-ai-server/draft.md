@@ -22,6 +22,10 @@
 - **Documentation**: https://codeproject.github.io/codeproject.ai/
 - **Website**: https://codeproject.github.io/codeproject.ai
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/codeproject/ai-server
+
 ## Fields
 
 ### Chart / Role

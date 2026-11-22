@@ -23,6 +23,12 @@
 - **Documentation**: https://wiki.kiwix.org/wiki/Kiwix-serve
 - **Website**: https://kiwix.org/en/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/kiwix/kiwix-serve
+- **Source code repository**: https://github.com/kiwix/kiwix-tools/blob/master/docker/server
+- **Website**: https://www.kiwix.org
+
 ## Fields
 
 ### Chart / Role

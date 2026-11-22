@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/webp-sh/webp_server_go
 - **Documentation**: https://docs.webp.sh/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/webpsh/webps
+
 ## Fields
 
 ### Chart / Role

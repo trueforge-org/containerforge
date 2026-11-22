@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chronos
 - **Source repository**: https://github.com/simse/chronos
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/simsemand/chronos
+
 ## Fields
 
 ### Chart / Role

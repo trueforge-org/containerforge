@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/csi-addons/kubernetes-csi-addons
 - **Website**: https://csi-addons.github.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/kubernetes-csi/external-snapshotter
+- **Container image**: https://quay.io/csiaddons/k8s-controller
+
 ## Fields
 
 ### Chart / Role

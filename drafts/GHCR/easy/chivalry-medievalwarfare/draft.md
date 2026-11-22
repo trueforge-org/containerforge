@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chivalry-medievalwarfare
 - **Website**: https://store.steampowered.com/search/?term=Chivalry+Medieval+Warfare
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

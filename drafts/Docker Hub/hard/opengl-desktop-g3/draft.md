@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/opengl-desktop-g3
 - **Source repository**: https://github.com/accetto/headless-drawing-g3
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-opengl-g3
+
 ## Fields
 
 ### Chart / Role

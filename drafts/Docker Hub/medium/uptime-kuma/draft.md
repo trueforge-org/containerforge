@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/louislam/uptime-kuma
 - **Documentation**: https://github.com/louislam/uptime-kuma/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/louislam/uptime-kuma
+
 ## Fields
 
 ### Chart / Role

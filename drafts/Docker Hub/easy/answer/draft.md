@@ -22,6 +22,10 @@
 - **Documentation**: https://answer.apache.org/docs/installation
 - **Website**: https://answer.apache.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/answerdev/answer
+
 ## Fields
 
 ### Chart / Role

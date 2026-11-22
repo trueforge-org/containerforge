@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/d8ahazard/FlexTV
 - **Documentation**: https://github.com/d8ahazard/FlexTV/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jcreynolds/flextv
+- **Container image**: https://registry.hub.docker.com/r/jcreynolds/flextv
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://wiki.inkscape.org/wiki/Main_Page
 - **Website**: https://inkscape.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/accetto/headless-drawing-g3
+- **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-inkscape-g3
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,13 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/multus-cni
 - **Source repository**: https://github.com/google/go-containerregistry
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8snetworkplumbingwg/multus-cni
+- **Container image**: https://ghcr.io/siderolabs/cni
+- **Source code repository**: https://github.com/k8snetworkplumbingwg/multus-cni
+- **Container image**: https://hub.docker.com/r/alpine/crane
+
 ## Fields
 
 ### Chart / Role

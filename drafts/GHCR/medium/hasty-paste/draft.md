@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hasty-paste
 - **Source repository**: https://github.com/enchant97/hasty-paste
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/enchant97/hasty-paste
+- **Source code repository**: https://github.com/enchant97/hasty-paste/blob/main/docs/install.md
+
 ## Fields
 
 ### Chart / Role

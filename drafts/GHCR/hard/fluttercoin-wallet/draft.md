@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fluttercoin-wallet
 - **Source repository**: https://github.com/ofeefee/fluttercoin
 
+## Potentially relevant resources
+
+- **Website**: https://fluttercoin.me
+- **Container image**: https://ghcr.io/ich777/fluttercoin
+
 ## Fields
 
 ### Chart / Role

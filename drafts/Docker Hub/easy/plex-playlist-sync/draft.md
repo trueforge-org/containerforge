@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-playlist-sync
 - **Source repository**: https://github.com/rnagabhyrava/plex-playlist-sync
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/rnagabhyrava/plexplaylistsync
+
 ## Fields
 
 ### Chart / Role

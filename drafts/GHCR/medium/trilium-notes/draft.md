@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/zadam/trilium
 - **Documentation**: https://docs.triliumnotes.org/user-guide/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/zadam/trilium
+
 ## Fields
 
 ### Chart / Role

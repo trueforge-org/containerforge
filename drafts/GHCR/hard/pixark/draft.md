@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pixark
 - **Website**: https://store.steampowered.com/app/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Website**: https://pixark.snail.com
+
 ## Fields
 
 ### Chart / Role

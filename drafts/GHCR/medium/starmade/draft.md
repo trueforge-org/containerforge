@@ -21,6 +21,10 @@
 - **Website**: https://www.star-made.org/
 - **Documentation**: https://starmadepedia.net
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/starmade-server
+
 ## Fields
 
 ### Chart / Role

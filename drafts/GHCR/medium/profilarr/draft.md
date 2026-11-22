@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Dictionarry-Hub/profilarr
 - **Documentation**: https://dictionarry.dev/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/dictionarry-hub/profilarr
+
 ## Fields
 
 ### Chart / Role

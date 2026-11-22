@@ -21,6 +21,11 @@
 - **Website**: https://www.ispyconnect.com/
 - **Documentation**: https://www.ispyconnect.com/docs/agent/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/doitandbedone/ispyagentdvr-docker
+- **Container image**: https://hub.docker.com/r/doitandbedone/ispyagentdvr
+
 ## Fields
 
 ### Chart / Role

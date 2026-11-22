@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nextpvr
 - **Website**: https://nextpvr.com
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/sub3/NextPVR/wiki/Install-Docker
+- **Container image**: https://hub.docker.com/r/nextpvr/nextpvr_amd64
+
 ## Fields
 
 ### Chart / Role

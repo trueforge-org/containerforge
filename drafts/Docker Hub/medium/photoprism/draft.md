@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.photoprism.app/
 - **Website**: https://photoprism.app
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/photoprism/photoprism
+
 ## Fields
 
 ### Chart / Role

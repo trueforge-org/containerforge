@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/Dispatcharr/Dispatcharr
 - **Documentation**: https://dispatcharr.github.io/Dispatcharr-Docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/dispatcharr/dispatcharr
+- **Source code repository**: https://github.com/Dispatcharr/Dispatcharr/blob/main/docker/docker-compose.aio.yml
+- **Container image**: https://hub.docker.com/_/alpine
+
 ## Fields
 
 ### Chart / Role

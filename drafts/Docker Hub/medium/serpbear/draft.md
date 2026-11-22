@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/serpbear
 - **Source repository**: https://github.com/towfiqi/serpbear
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/towfiqi/serpbear
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmocompiler
 - **Source repository**: https://github.com/benzino77/tasmocompiler
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/benzino77/tasmocompiler
+
 ## Fields
 
 ### Chart / Role

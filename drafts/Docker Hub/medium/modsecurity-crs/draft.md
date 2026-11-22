@@ -22,6 +22,11 @@
 - **Documentation**: https://www.coreruleset.org/docs/
 - **Website**: https://www.coreruleset.org
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/coreruleset/modsecurity-crs-docker
+- **Container image**: https://hub.docker.com/r/owasp/modsecurity-crs
+
 ## Fields
 
 ### Chart / Role

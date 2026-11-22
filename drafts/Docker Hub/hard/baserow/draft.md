@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/baserow/baserow
 - **Documentation**: https://baserow.io/docs/index
 
+## Potentially relevant resources
+
+- **Source code repository**: https://gitlab.com/bramw/baserow
+- **Container image**: https://hub.docker.com/r/baserow/baserow
+
 ## Fields
 
 ### Chart / Role

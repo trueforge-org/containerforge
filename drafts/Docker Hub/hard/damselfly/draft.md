@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/damselfly
 - **Source repository**: https://github.com/Webreaper/Damselfly
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/webreaper/damselfly
+
 ## Fields
 
 ### Chart / Role

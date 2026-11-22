@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/crazy-max/ddns-route53
 - **Documentation**: https://crazymax.dev/ddns-route53/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/crazymax/ddns-route53
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://nocodb.com/docs/product
 - **Website**: https://nocodb.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/nocodb/nocodb
+
 ## Fields
 
 ### Chart / Role

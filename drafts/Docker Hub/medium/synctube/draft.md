@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/synctube
 - **Source repository**: https://github.com/RblSb/SyncTube
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/littlestache/synctube
+
 ## Fields
 
 ### Chart / Role

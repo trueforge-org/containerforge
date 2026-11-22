@@ -23,6 +23,10 @@
 - **Documentation**: https://github.com/coturn/coturn/wiki
 - **Website**: https://coturn.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/stun-turn-server
+
 ## Fields
 
 ### Chart / Role

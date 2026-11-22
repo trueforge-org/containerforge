@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fileshelter
 - **Source repository**: https://github.com/epoupon/fileshelter
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/epoupon/fileshelter
+
 ## Fields
 
 ### Chart / Role

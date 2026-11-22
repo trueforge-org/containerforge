@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/core-keeper-dedicated-server
 - **Website**: https://store.steampowered.com/app/1963720/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/escapingnetwork/core-keeper-dedicated
+- **Container image**: https://hub.docker.com/r/escaping/core-keeper-dedicated
+
 ## Fields
 
 ### Chart / Role

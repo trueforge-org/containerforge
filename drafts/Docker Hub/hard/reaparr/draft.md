@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/reaparr
 - **Source repository**: https://github.com/Reaparr/Reaparr
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/reaparr/reaparr
+- **Container image**: https://hub.docker.com/r/reaparr/reaparr
+
 ## Fields
 
 ### Chart / Role

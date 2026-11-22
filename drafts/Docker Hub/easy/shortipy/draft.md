@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shortipy
 - **Source repository**: https://github.com/maschhoff/shortipy
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/knex666/shortipy
+
 ## Fields
 
 ### Chart / Role

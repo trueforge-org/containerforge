@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.papermerge.io/
 - **Website**: https://papermerge.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/ciur/papermerge
+- **Container image**: https://hub.docker.com/r/papermerge/papermerge
+
 ## Fields
 
 ### Chart / Role

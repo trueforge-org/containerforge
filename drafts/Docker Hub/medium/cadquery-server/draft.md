@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cadquery-server
 - **Source repository**: https://github.com/roipoussiere/cadquery-server
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/roipoussiere/cadquery
+- **Container image**: https://hub.docker.com/r/cadquery/cadquery-server
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/avidemux
 - **Website**: https://avidemux.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/avidemux
+- **Source code repository**: https://github.com/jlesage/docker-avidemux
+
 ## Fields
 
 ### Chart / Role

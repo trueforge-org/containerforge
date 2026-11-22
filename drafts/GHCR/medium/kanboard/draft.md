@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kanboard
 - **Source repository**: https://github.com/kanboard/kanboard
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/kanboard/kanboard
+
 ## Fields
 
 ### Chart / Role

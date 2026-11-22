@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xteve
 - **Source repository**: https://github.com/xteve-project/xTeVe
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8s-at-home/xteve
+- **Source code repository**: https://github.com/k8s-at-home/container-images
+
 ## Fields
 
 ### Chart / Role

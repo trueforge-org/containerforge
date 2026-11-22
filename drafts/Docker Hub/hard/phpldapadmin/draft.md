@@ -22,6 +22,11 @@
 - **Documentation**: https://github.com/leenooks/phpLDAPadmin/wiki
 - **Website**: https://phpldapadmin.org/
 
+## Potentially relevant resources
+
+- **Website**: https://gitlab.v2.rancher.geohub.space/g3s/i3s/i3s-helm-catalog
+- **Container image**: https://hub.docker.com/r/osixia/phpldapadmin
+
 ## Fields
 
 ### Chart / Role

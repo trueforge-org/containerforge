@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flashpaper
 - **Source repository**: https://github.com/AndrewPaglusch/FlashPaper
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/andrewpaglusch/flashpaper
+- **Source code repository**: https://github.com/andrewpaglusch/FlashPaper/pkgs/container/flashpaper
+
 ## Fields
 
 ### Chart / Role

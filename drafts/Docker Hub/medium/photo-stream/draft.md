@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photo-stream
 - **Source repository**: https://github.com/waschinski/photo-stream
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/waschinski/photo-stream
+
 ## Fields
 
 ### Chart / Role

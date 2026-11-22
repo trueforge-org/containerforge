@@ -21,6 +21,10 @@
 - **Website**: https://getchannels.com/
 - **Documentation**: https://getchannels.com/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/fancybits/channels-dvr
+
 ## Fields
 
 ### Chart / Role

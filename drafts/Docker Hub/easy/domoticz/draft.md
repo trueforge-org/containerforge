@@ -22,6 +22,10 @@
 - **Documentation**: https://wiki.domoticz.com/
 - **Website**: https://www.domoticz.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/domoticz/domoticz
+
 ## Fields
 
 ### Chart / Role

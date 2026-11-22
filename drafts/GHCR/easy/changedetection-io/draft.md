@@ -22,6 +22,11 @@
 - **Documentation**: https://changedetection.io/tutorials
 - **Website**: https://changedetection.io
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/dgtlmoon/changedetection.io
+- **Source code repository**: https://github.com/dgtlmoon/changedetection.io/tree/master
+
 ## Fields
 
 ### Chart / Role

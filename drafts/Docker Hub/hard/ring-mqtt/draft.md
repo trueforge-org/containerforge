@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/tsightler/ring-mqtt
 - **Documentation**: https://github.com/tsightler/ring-mqtt/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/tsightler/ring-mqtt
+
 ## Fields
 
 ### Chart / Role

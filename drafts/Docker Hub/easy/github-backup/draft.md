@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/github-backup
 - **Source repository**: https://github.com/lnxd/github-backup
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/lnxd/github-backup
+
 ## Fields
 
 ### Chart / Role

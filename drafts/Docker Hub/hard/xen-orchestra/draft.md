@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.xen-orchestra.com/
 - **Website**: https://xen-orchestra.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ronivay/xen-orchestra
+
 ## Fields
 
 ### Chart / Role

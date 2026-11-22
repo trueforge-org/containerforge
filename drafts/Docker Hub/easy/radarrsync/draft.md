@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/radarrsync
 - **Source repository**: https://github.com/Sperryfreak01/RadarrSync
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/dairefinn/RadarrSync
+- **Container image**: https://hub.docker.com/r/dmanius/radarrsync-docker
+
 ## Fields
 
 ### Chart / Role

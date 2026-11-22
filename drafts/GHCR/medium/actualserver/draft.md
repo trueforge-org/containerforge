@@ -22,6 +22,11 @@
 - **Documentation**: https://actualbudget.org/docs/
 - **Website**: https://actualbudget.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/actualbudget/actual
+- **Source code repository**: https://github.com/Kippenhof/docker-templates
+
 ## Fields
 
 ### Chart / Role

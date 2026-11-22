@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/rembo10/headphones
 - **Documentation**: https://github.com/rembo10/headphones/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/headphones
+- **Source code repository**: https://github.com/linuxserver/docker-headphones
+
 ## Fields
 
 ### Chart / Role

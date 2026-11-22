@@ -22,6 +22,10 @@
 - **Documentation**: https://community.bistudio.com/wiki/Arma_3_Dedicated_Server
 - **Website**: https://arma3.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+
 ## Fields
 
 ### Chart / Role

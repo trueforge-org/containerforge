@@ -22,6 +22,11 @@
 - **Documentation**: https://hexo.io/docs/
 - **Website**: https://hexo.io
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/fletchto99/hexo-dev-docker
+- **Container image**: https://hub.docker.com/r/fletchto99/hexo-dev-blog
+
 ## Fields
 
 ### Chart / Role

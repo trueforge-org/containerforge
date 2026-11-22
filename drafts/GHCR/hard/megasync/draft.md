@@ -22,6 +22,11 @@
 - **Documentation**: https://help.mega.io/installs-apps/desktop
 - **Website**: https://mega.io/desktop
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/megasync
+- **Source code repository**: https://github.com/ich777/docker-megasync
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vertex
 - **Source repository**: https://github.com/vertex-app/vertex
 
+## Potentially relevant resources
+
+- **Website**: https://gitlab.lswl.in/lswl/vertex
+- **Container image**: https://hub.docker.com/r/lswl/vertex
+
 ## Fields
 
 ### Chart / Role

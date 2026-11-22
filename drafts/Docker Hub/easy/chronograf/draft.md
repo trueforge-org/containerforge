@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/influxdata/chronograf
 - **Documentation**: https://docs.influxdata.com/chronograf/latest/introduction/installation/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/chronograf
+- **Website**: https://www.influxdata.com/time-series-platform/chronograf
+
 ## Fields
 
 ### Chart / Role

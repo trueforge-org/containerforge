@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clusterissuer
 - **Source repository**: https://github.com/docker-library/hello-world
 
+## Potentially relevant resources
+
+- **Website**: https://cert-manager.io
+- **Container image**: https://hub.docker.com/_/hello-world
+
 ## Fields
 
 ### Chart / Role

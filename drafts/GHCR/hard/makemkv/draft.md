@@ -21,6 +21,11 @@
 - **Website**: https://www.makemkv.com/
 - **Documentation**: https://forum.makemkv.com/forum/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/makemkv
+- **Source code repository**: https://github.com/jlesage/docker-makemkv
+
 ## Fields
 
 ### Chart / Role

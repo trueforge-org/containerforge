@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wifi-card
 - **Source repository**: https://github.com/bndw/wifi-card
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bndw/wifi-card
+
 ## Fields
 
 ### Chart / Role

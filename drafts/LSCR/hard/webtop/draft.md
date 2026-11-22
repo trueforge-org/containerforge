@@ -22,6 +22,13 @@
 - **Documentation**: https://docs.linuxserver.io/images/docker-webtop/
 - **Documentation**: https://docs.selkies.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://fleet.linuxserver.io/image?name=linuxserver/webtop
+- **Source code repository**: https://github.com/linuxserver/docker-webtop#readme
+- **Source code repository**: https://github.com/linuxserver/gclient
+- **Source code repository**: https://github.com/orgs/linuxserver/packages/container/package/webtop
+
 ## Fields
 
 ### Chart / Role

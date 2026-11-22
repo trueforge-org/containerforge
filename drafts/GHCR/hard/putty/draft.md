@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/putty
 - **Website**: https://www.putty.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/putty
+- **Source code repository**: https://github.com/jlesage/docker-putty
+
 ## Fields
 
 ### Chart / Role

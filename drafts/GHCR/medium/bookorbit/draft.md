@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bookorbit
 - **Source repository**: https://github.com/bookorbit/bookorbit
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/bookorbit/bookorbit
+
 ## Fields
 
 ### Chart / Role

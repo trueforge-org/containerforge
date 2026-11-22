@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/watchyourlan
 - **Source repository**: https://github.com/aceberg/WatchYourLAN
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/aceberg/watchyourlan
+
 ## Fields
 
 ### Chart / Role

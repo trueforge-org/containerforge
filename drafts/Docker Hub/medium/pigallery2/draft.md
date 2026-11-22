@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pigallery2
 - **Source repository**: https://github.com/bpatrik/pigallery2
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bpatrik/pigallery2
+
 ## Fields
 
 ### Chart / Role

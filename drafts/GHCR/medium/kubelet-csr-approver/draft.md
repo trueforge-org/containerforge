@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kubelet-csr-approver
 - **Source repository**: https://github.com/postfinance/kubelet-csr-approver
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/postfinance/kubelet-csr-approver
+- **Source code repository**: https://github.com/kubelet-csr-approver/kubelet-csr-approver
+
 ## Fields
 
 ### Chart / Role

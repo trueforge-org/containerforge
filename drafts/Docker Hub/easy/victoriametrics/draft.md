@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/VictoriaMetrics/VictoriaMetrics
 - **Documentation**: https://docs.victoriametrics.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/VictoriaMetrics/VictoriaMetrics/tree/master
+- **Container image**: https://hub.docker.com/r/victoriametrics/victoria-metrics
+
 ## Fields
 
 ### Chart / Role

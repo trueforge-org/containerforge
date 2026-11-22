@@ -22,6 +22,10 @@
 - **Documentation**: https://rmlint.readthedocs.io/en/master/
 - **Website**: https://rmlint.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bobbintb/docker-rmlint-unraid
+
 ## Fields
 
 ### Chart / Role

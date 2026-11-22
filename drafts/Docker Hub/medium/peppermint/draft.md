@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Peppermint-Lab/peppermint
 - **Website**: https://peppermint.sh/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/pepperlabs/peppermint
+
 ## Fields
 
 ### Chart / Role

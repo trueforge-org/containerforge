@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/external-service
 - **Website**: https://alpinelinux.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/alpine
+
 ## Fields
 
 ### Chart / Role

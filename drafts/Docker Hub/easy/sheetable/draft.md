@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sheetable
 - **Source repository**: https://github.com/SheetAble/SheetAble
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/SheetAble
+- **Container image**: https://hub.docker.com/r/vallezw/sheetable
+- **Website**: https://sheetable.net/docs
+
 ## Fields
 
 ### Chart / Role

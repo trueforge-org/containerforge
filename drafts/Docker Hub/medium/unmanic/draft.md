@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/unmanic
 - **Source repository**: https://github.com/Unmanic/unmanic
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/josh5/unmanic
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://www.redmine.org/projects/redmine/wiki
 - **Website**: https://www.redmine.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/redmine
+
 ## Fields
 
 ### Chart / Role

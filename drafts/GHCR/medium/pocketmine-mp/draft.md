@@ -22,6 +22,10 @@
 - **Documentation**: https://doc.pmmp.io/en/rtfd/installation.html
 - **Website**: https://pmmp.io
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/pmmp/pocketmine-mp
+
 ## Fields
 
 ### Chart / Role

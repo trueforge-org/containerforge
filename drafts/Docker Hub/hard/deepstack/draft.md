@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.deepstack.cc
 - **Website**: https://deepstack.cc
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/deepquestai/deepstack
+- **Website**: https://www.deepstack.cc
+
 ## Fields
 
 ### Chart / Role

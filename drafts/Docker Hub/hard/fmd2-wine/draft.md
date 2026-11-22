@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fmd2-wine
 - **Source repository**: https://github.com/dazedcat19/FMD2
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Banh-Canh/docker-FMD2
+- **Container image**: https://hub.docker.com/r/banhcanh/docker-fmd2
+
 ## Fields
 
 ### Chart / Role

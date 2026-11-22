@@ -22,6 +22,10 @@
 - **Documentation**: https://photostructure.com/docs/
 - **Website**: https://photostructure.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/photostructure/server
+
 ## Fields
 
 ### Chart / Role

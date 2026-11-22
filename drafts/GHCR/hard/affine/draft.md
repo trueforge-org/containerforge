@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.affine.pro/
 - **Website**: https://affine.pro/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/toeverything/affine
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clipplex
 - **Source repository**: https://github.com/jo-nike/clipplex
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jonnike/clipplex
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/lldap/lldap
 - **Documentation**: https://github.com/lldap/lldap/tree/main/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/lldap/lldap
+- **Source code repository**: https://github.com/nitnelave/lldap
+
 ## Fields
 
 ### Chart / Role

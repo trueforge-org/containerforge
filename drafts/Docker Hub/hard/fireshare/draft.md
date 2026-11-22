@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/fireshare-app/fireshare
 - **Website**: https://fireshare.net
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/ShaneIsrael/fireshare
+- **Container image**: https://hub.docker.com/r/shaneisrael/fireshare
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/CollaboraOnline/online
 - **Website**: https://collaboraonline.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/collabora/code
+
 ## Fields
 
 ### Chart / Role

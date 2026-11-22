@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/scrutiny
 - **Source repository**: https://github.com/AnalogJ/scrutiny
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/analogj/scrutiny
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/bbernhard/signal-cli-rest-api
 - **Documentation**: https://bbernhard.github.io/signal-cli-rest-api/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bbernhard/signal-cli-rest-api
+
 ## Fields
 
 ### Chart / Role

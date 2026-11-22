@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/external-ip
 - **Source repository**: https://github.com/xavier-hernandez/docker-external-ip
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/xavierh/external-ip
+
 ## Fields
 
 ### Chart / Role

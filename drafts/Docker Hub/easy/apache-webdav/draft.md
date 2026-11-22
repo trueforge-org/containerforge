@@ -22,6 +22,12 @@
 - **Documentation**: https://httpd.apache.org/docs/
 - **Website**: https://httpd.apache.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/mgutt/docker-apachewebdav
+- **Website**: https://httpd.apache.org/docs/2.4/mod/mod_dav.html
+- **Container image**: https://hub.docker.com/r/apachewebdav/apachewebdav
+
 ## Fields
 
 ### Chart / Role

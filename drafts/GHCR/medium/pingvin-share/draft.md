@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/stonith404/pingvin-share
 - **Documentation**: https://stonith404.github.io/pingvin-share/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/stonith404/pingvin-share
+
 ## Fields
 
 ### Chart / Role

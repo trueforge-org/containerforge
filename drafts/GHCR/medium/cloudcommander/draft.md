@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cloudcommander
 - **Source repository**: https://github.com/coderaiser/cloudcmd
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/coderaiser/cloudcmd
+
 ## Fields
 
 ### Chart / Role

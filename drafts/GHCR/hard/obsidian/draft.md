@@ -22,6 +22,12 @@
 - **Documentation**: https://help.obsidian.md/
 - **Website**: https://obsidian.md/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sytone/obsidian-remote
+- **Source code repository**: https://github.com/sytone/obsidian-remote
+- **Source code repository**: https://github.com/sytone/obsidian-remote/pkgs/container/obsidian-remote
+
 ## Fields
 
 ### Chart / Role

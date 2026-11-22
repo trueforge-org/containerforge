@@ -22,6 +22,11 @@
 - **Documentation**: https://s3tools.org/usage
 - **Website**: https://s3tools.org/s3cmd
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/joch/s3backup
+- **Container image**: https://registry.hub.docker.com/r/joch/s3backup
+
 ## Fields
 
 ### Chart / Role

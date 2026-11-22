@@ -22,6 +22,10 @@
 - **Documentation**: https://lemur.readthedocs.io/
 - **Documentation**: https://lemur.readthedocs.io/en/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/halianelf/lemur
+
 ## Fields
 
 ### Chart / Role

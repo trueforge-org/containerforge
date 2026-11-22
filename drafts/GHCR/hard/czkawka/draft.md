@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/czkawka
 - **Source repository**: https://github.com/qarmin/czkawka
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/czkawka
+- **Source code repository**: https://github.com/jlesage/docker-czkawka
+
 ## Fields
 
 ### Chart / Role

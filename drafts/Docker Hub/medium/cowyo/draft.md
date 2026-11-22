@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cowyo
 - **Source repository**: https://github.com/schollz/cowyo
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/schollz/cowyo
+
 ## Fields
 
 ### Chart / Role

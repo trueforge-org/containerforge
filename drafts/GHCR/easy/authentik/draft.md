@@ -23,6 +23,16 @@
 - **Source repository**: https://github.com/maxmind/geoipupdate
 - **Documentation**: https://docs.goauthentik.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/goauthentik/ldap
+- **Container image**: https://ghcr.io/goauthentik/proxy
+- **Container image**: https://ghcr.io/goauthentik/radius
+- **Container image**: https://ghcr.io/goauthentik/server
+- **Container image**: https://ghcr.io/kiwigrid/k8s-sidecar
+- **Container image**: https://ghcr.io/maxmind/geoipupdate
+- **Website**: https://goauthentik.io/docs
+
 ## Fields
 
 ### Chart / Role

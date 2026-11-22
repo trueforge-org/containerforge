@@ -20,6 +20,13 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/etesync
 - **Source repository**: https://github.com/etesync/server
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/etesync
+- **Source code repository**: https://github.com/victor-rds/docker-etebase
+- **Container image**: https://hub.docker.com/r/victorrds/etesync
+- **Website**: https://www.etesync.com
+
 ## Fields
 
 ### Chart / Role

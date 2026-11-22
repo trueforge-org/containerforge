@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/prpdf
 - **Source repository**: https://github.com/maschhoff/pdfscanexplorer
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/maschhoff/prpdf
+- **Container image**: https://hub.docker.com/r/knex666/prpdf
+
 ## Fields
 
 ### Chart / Role

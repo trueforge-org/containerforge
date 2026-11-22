@@ -22,6 +22,11 @@
 - **Documentation**: https://barotraumagame.com/wiki/Serversettings.xml
 - **Website**: https://barotraumagame.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

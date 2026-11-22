@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/cryptpad/cryptpad
 - **Documentation**: https://docs.cryptpad.org/en/
 
+## Potentially relevant resources
+
+- **Website**: https://cryptpad.fr
+- **Container image**: https://hub.docker.com/r/cryptpad/cryptpad
+
 ## Fields
 
 ### Chart / Role

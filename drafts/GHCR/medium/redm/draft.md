@@ -22,6 +22,11 @@
 - **Documentation**: http://docs.fivem.net/docs/
 - **Website**: https://redm.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/redmserver
+- **Website**: https://redm.gg
+
 ## Fields
 
 ### Chart / Role

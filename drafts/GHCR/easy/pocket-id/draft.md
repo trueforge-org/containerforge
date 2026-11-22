@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.pocket-id.org
 - **Website**: https://pocket-id.org
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/pocket-id/pocket-id
+
 ## Fields
 
 ### Chart / Role

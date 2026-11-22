@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nexus-oss
 - **Source repository**: https://github.com/sonatype/nexus-public
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/sonatype/nexus3
+
 ## Fields
 
 ### Chart / Role

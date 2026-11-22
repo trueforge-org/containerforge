@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmobackup
 - **Source repository**: https://github.com/danmed/TasmoBackupV1
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/danmed/tasmobackupv1
+
 ## Fields
 
 ### Chart / Role

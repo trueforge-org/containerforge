@@ -22,6 +22,11 @@
 - **Documentation**: http://airdcpp.net/docs/installation/installation.html
 - **Website**: http://airdcpp.net/
 
+## Potentially relevant resources
+
+- **Website**: https://airdcpp-web.github.io
+- **Container image**: https://hub.docker.com/r/gangefors/airdcpp-webclient
+
 ## Fields
 
 ### Chart / Role

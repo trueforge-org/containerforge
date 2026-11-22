@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/s3sync
 - **Source repository**: https://github.com/what-name/docker-s3sync
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/whatname/docker-s3sync
+
 ## Fields
 
 ### Chart / Role

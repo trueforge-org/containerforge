@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/OpenRA/OpenRA
 - **Website**: https://www.openra.net
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/rmoriz/openra
+
 ## Fields
 
 ### Chart / Role

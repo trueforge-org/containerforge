@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/commento-plusplus
 - **Source repository**: https://github.com/souramoo/commentoplusplus
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/souramoo/commentoplusplus
+
 ## Fields
 
 ### Chart / Role

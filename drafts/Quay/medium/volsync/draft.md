@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/backube/volsync
 - **Documentation**: https://volsync.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/backube/helm-charts
+- **Container image**: https://quay.io/backube/volsync
+
 ## Fields
 
 ### Chart / Role

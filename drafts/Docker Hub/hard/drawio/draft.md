@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/jgraph/drawio
 - **Website**: https://www.drawio.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jgraph/drawio
+
 ## Fields
 
 ### Chart / Role

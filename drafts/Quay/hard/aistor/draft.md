@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.min.io/aistor
 - **Documentation**: https://docs.min.io/aistor/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

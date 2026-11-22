@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/go-playground
 - **Source repository**: https://github.com/x1unix/go-playground
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/x1unix/go-playground
+
 ## Fields
 
 ### Chart / Role

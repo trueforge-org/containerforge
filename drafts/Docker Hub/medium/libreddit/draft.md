@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/libreddit
 - **Source repository**: https://github.com/libreddit/libreddit
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/spikecodes/libreddit
+- **Container image**: https://hub.docker.com/r/libreddit/libreddit
+
 ## Fields
 
 ### Chart / Role

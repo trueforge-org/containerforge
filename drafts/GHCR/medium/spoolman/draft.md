@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Donkie/Spoolman
 - **Documentation**: https://donkie.github.io/Spoolman/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/donkie/spoolman
+
 ## Fields
 
 ### Chart / Role

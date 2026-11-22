@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metube
 - **Source repository**: https://github.com/alexta69/metube
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/alexta69/metube
+
 ## Fields
 
 ### Chart / Role

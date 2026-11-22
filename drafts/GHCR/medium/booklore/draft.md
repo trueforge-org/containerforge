@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/booklore
 - **Source repository**: https://github.com/booklore-app/booklore
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/booklore-app/booklore
+
 ## Fields
 
 ### Chart / Role

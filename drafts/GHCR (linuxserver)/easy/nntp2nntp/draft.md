@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nntp2nntp
 - **Source repository**: https://github.com/linuxserver/nntp2nntp
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/nntp2nntp
+
 ## Fields
 
 ### Chart / Role

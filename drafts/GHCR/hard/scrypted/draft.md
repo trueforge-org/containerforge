@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.scrypted.app
 - **Website**: https://scrypted.app
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/koush/scrypted
+
 ## Fields
 
 ### Chart / Role

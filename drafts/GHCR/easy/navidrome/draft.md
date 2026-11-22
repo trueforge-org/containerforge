@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/navidrome/navidrome
 - **Documentation**: https://www.navidrome.org/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/navidrome/navidrome
+- **Source code repository**: https://github.com/deluan/navidrome
+
 ## Fields
 
 ### Chart / Role

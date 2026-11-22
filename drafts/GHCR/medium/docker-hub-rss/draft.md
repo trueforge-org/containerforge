@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/docker-hub-rss
 - **Source repository**: https://github.com/TheConnMan/docker-hub-rss
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/theconnman/docker-hub-rss
+
 ## Fields
 
 ### Chart / Role

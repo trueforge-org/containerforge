@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/rhasspy/wyoming-faster-whisper
 - **Documentation**: https://www.home-assistant.io/integrations/whisper/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/home-assistant/addons/tree/master/whisper
+- **Container image**: https://hub.docker.com/r/rhasspy/wyoming-whisper
+
 ## Fields
 
 ### Chart / Role

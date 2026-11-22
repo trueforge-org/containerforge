@@ -22,6 +22,10 @@
 - **Documentation**: https://www.pgadmin.org/docs/
 - **Website**: https://www.pgadmin.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/dpage/pgadmin4
+
 ## Fields
 
 ### Chart / Role

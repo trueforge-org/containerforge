@@ -22,6 +22,12 @@
 - **Documentation**: https://plausible.io/docs
 - **Website**: https://plausible.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/plausible/hosting
+- **Container image**: https://hub.docker.com/r/plausible/analytics
+- **Website**: https://plausible.io/docs/self-hosting
+
 ## Fields
 
 ### Chart / Role

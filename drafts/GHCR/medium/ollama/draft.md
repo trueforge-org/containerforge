@@ -22,6 +22,12 @@
 - **Documentation**: https://docs.openwebui.com/
 - **Website**: https://openwebui.com
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/open-webui/open-webui
+- **Source code repository**: https://github.com/ollama/ollama
+- **Container image**: https://hub.docker.com/r/ollama/ollama
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rustpad
 - **Source repository**: https://github.com/ekzhang/rustpad
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ekzhang/rustpad
+
 ## Fields
 
 ### Chart / Role

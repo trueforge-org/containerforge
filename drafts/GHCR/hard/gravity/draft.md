@@ -22,6 +22,10 @@
 - **Documentation**: https://gravity.beryju.io/docs/
 - **Website**: https://gravity.beryju.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/beryju/gravity
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/mickael-kerjean/filestash
 - **Documentation**: https://www.filestash.app/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/machines/filestash
+- **Website**: https://www.filestash.app
+
 ## Fields
 
 ### Chart / Role

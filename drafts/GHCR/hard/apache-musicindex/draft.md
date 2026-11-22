@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/apache-musicindex
 - **Website**: https://packages.ubuntu.com/resolute/libapache2-mod-musicindex
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8s-at-home/apache-musicindex
+
 ## Fields
 
 ### Chart / Role

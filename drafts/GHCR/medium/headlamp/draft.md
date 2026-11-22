@@ -20,6 +20,13 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/headlamp
 - **Source repository**: https://github.com/headlamp-k8s/headlamp
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/headlamp-k8s/headlamp
+- **Source code repository**: https://github.com/kubernetes-sigs/headlamp
+- **Source code repository**: https://github.com/trueforge-org/containers/tree/main/apps/node
+- **Website**: https://headlamp.dev
+
 ## Fields
 
 ### Chart / Role

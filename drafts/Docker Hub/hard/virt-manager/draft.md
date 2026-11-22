@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/virt-manager/virt-manager
 - **Website**: https://virt-manager.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mber5/virt-manager
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Website**: https://mkvtoolnix.download/
 - **Documentation**: https://mkvtoolnix.download/doc/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/mkvtoolnix
+- **Source code repository**: https://github.com/jlesage/docker-mkvtoolnix
+
 ## Fields
 
 ### Chart / Role

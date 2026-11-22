@@ -21,6 +21,13 @@
 - **Source repository**: https://github.com/blender/blender
 - **Documentation**: https://docs.blender.org/manual/en/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://fleet.linuxserver.io/image?name=linuxserver/blender
+- **Source code repository**: https://github.com/linuxserver/docker-blender#readme
+- **Source code repository**: https://github.com/orgs/linuxserver/packages/container/package/blender
+- **Website**: https://www.blender.org
+
 ## Fields
 
 ### Chart / Role

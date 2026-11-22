@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/corekeeper
 - **Website**: https://store.steampowered.com/app/1963720
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://steampowered.com
+
 ## Fields
 
 ### Chart / Role

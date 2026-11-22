@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/fluidd-core/fluidd
 - **Documentation**: https://docs.fluidd.xyz
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/fluidd-core/fluidd
+
 ## Fields
 
 ### Chart / Role

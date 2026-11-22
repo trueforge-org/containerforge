@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.gitea.com/
 - **Website**: https://about.gitea.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/go-gitea/gitea
+- **Website**: https://gitea.com/gitea/helm-chart
+
 ## Fields
 
 ### Chart / Role

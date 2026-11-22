@@ -21,6 +21,11 @@
 - **Website**: https://necessegame.com
 - **Documentation**: https://necessewiki.com
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

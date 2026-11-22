@@ -22,6 +22,12 @@
 - **Documentation**: https://docs.sia.tech/
 - **Website**: https://sia.tech
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/siafoundation/siad
+- **Source code repository**: https://github.com/SiaFoundation/siad/pkgs/container/siad
+- **Source code repository**: https://github.com/siafoundation/siad
+
 ## Fields
 
 ### Chart / Role

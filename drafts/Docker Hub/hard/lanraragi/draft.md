@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/Difegue/LANraragi
 - **Documentation**: https://sugoi.gitbook.io/lanraragi/v/dev
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/difegue/lanraragi
+- **Website**: https://sugoi.gitbook.io/lanraragi
+
 ## Fields
 
 ### Chart / Role

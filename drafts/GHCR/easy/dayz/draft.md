@@ -21,6 +21,11 @@
 - **Website**: https://store.steampowered.com/app/223350
 - **Documentation**: https://community.bistudio.com/wiki/DayZ:Hosting_a_Linux_Server
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Website**: https://www.bohemia.net/games/dayz
+
 ## Fields
 
 ### Chart / Role

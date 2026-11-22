@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sd-webui
 - **Source repository**: https://github.com/AUTOMATIC1111/stable-diffusion-webui
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/neggles/sd-webui-docker
+- **Source code repository**: https://github.com/ahmetoner/sd-webui-docker
+
 ## Fields
 
 ### Chart / Role

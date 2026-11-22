@@ -22,6 +22,10 @@
 - **Documentation**: https://www.flightaware.com/adsb/piaware/
 - **Website**: https://www.flightaware.com/adsb/piaware/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mikenye/piaware
+
 ## Fields
 
 ### Chart / Role

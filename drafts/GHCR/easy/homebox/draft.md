@@ -22,6 +22,10 @@
 - **Documentation**: https://homebox.software/en/
 - **Website**: https://homebox.software/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sysadminsmedia/homebox
+
 ## Fields
 
 ### Chart / Role

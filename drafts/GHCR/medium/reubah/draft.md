@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/reubah
 - **Source repository**: https://github.com/DenDianUgerah/reubah
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/dendianugerah/reubah
+- **Source code repository**: https://github.com/dendianugerah/reubah
+
 ## Fields
 
 ### Chart / Role

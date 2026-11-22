@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/genea-app/genea-app
 - **Website**: https://www.genea.app/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/biggiesize/genea-app
+
 ## Fields
 
 ### Chart / Role

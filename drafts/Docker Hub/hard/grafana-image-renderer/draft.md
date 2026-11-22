@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/grafana-image-renderer
 - **Source repository**: https://github.com/grafana/grafana-image-renderer
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/grafana/grafana-image-renderer/blob/master/docs/remote_rendering_using_docker.md
+- **Container image**: https://hub.docker.com/r/grafana/grafana-image-renderer
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Website**: https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
 - **Documentation**: https://developer.valvesoftware.com/wiki/Alien_Swarm:_Reactive_Drop
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://autobrr.com/introduction
 - **Website**: https://autobrr.com
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/autobrr/autobrr
+
 ## Fields
 
 ### Chart / Role

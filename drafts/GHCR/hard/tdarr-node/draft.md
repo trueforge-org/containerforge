@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/HaveAGitGat/Tdarr
 - **Documentation**: https://docs.tdarr.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/haveagitgat/tdarr_node
+
 ## Fields
 
 ### Chart / Role

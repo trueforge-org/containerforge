@@ -21,6 +21,11 @@
 - **Website**: https://ffmpeg.org/
 - **Documentation**: https://ffmpeg.org/documentation.html
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/snoopy86/ffmpeg
+- **Container image**: https://registry.hub.docker.com/r/snoopy86/ffmpeg
+
 ## Fields
 
 ### Chart / Role

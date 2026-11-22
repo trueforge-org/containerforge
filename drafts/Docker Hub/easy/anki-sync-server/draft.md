@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/ankicommunity/anki-sync-server-rs
 - **Documentation**: https://docs.ankiweb.net/sync-server.html
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/ankicommunity/anki-devops-services
+- **Container image**: https://hub.docker.com/r/ankicommunity/anki-sync-server-rs
+
 ## Fields
 
 ### Chart / Role

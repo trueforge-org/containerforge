@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kerio-connect
 - **Website**: https://www.kerio.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/chvb/docker-kerio-connect
+
 ## Fields
 
 ### Chart / Role

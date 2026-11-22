@@ -23,6 +23,10 @@
 - **Documentation**: https://adguard-dns.io/kb/adguard-home/getting-started/
 - **Website**: https://adguard.com/en/adguard-home/overview.html
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/adguard/adguardhome
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clarkson
 - **Source repository**: https://github.com/linuxserver/Clarkson
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/clarkson
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/embystat
 - **Source repository**: https://github.com/mregni/EmbyStat
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/embystat
+
 ## Fields
 
 ### Chart / Role

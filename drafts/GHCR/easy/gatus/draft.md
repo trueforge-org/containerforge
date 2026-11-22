@@ -23,6 +23,12 @@
 - **Documentation**: https://gatus.io/docs
 - **Website**: https://gatus.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/home-operations/gatus-sidecar
+- **Container image**: https://ghcr.io/twin/gatus
+- **Source code repository**: https://github.com/TwiN/gatus
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shorturl
 - **Source repository**: https://git.mills.io/prologic/shorturl
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/nicholaswilde/shorturl
+- **Source code repository**: https://github.com/nicholaswilde/docker-shorturl
+- **Source code repository**: https://github.com/prologic/shorturl
+
 ## Fields
 
 ### Chart / Role

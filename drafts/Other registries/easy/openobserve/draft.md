@@ -22,6 +22,10 @@
 - **Documentation**: https://openobserve.ai/docs/
 - **Website**: https://openobserve.ai/
 
+## Potentially relevant resources
+
+- **Container image**: https://gallery.ecr.aws/zinclabs/openobserve
+
 ## Fields
 
 ### Chart / Role

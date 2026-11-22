@@ -23,6 +23,10 @@
 - **Documentation**: https://docs.mixpost.app/
 - **Website**: https://mixpost.app/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/inovector/mixpost
+
 ## Fields
 
 ### Chart / Role

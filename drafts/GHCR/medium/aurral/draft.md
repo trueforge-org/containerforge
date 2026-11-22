@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/aurral
 - **Source repository**: https://github.com/lklynet/aurral
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/lklynet/aurral
+- **Source code repository**: https://github.com/lklynet/aurral/pkgs/container/aurral
+
 ## Fields
 
 ### Chart / Role

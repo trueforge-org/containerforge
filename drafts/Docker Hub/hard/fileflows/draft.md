@@ -21,6 +21,11 @@
 - **Website**: https://fileflows.com/
 - **Documentation**: https://fileflows.com/docs
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/revenz/FileFlows
+- **Container image**: https://hub.docker.com/r/revenz/fileflows
+
 ## Fields
 
 ### Chart / Role

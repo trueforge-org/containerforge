@@ -21,6 +21,11 @@
 - **Website**: https://openaudible.org/
 - **Documentation**: https://openaudible.org/documentation
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/openaudible/openaudible_docker
+- **Container image**: https://hub.docker.com/r/openaudible/openaudible
+
 ## Fields
 
 ### Chart / Role

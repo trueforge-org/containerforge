@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/memories-of-mars
 - **Website**: https://store.steampowered.com/search/?term=memories+of+mars
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Website**: https://memoriesofmars.com
+
 ## Fields
 
 ### Chart / Role

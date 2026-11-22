@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mango
 - **Source repository**: https://github.com/getmango/Mango
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/hkalexling/mango
+- **Container image**: https://hub.docker.com/r/hkalexling/mango
+
 ## Fields
 
 ### Chart / Role

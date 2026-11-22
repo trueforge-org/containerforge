@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ipmi-tools
 - **Source repository**: https://github.com/EdwardChamberlain/IPMI-Fan-Controller
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/edchamberlain/ipmi-tools
+
 ## Fields
 
 ### Chart / Role

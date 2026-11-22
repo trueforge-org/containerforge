@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Threadfin/Threadfin
 - **Documentation**: https://github.com/Threadfin/Threadfin/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/fyb3roptik/threadfin
+
 ## Fields
 
 ### Chart / Role

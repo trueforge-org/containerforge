@@ -22,6 +22,11 @@
 - **Documentation**: https://ioquake3.org/help/players-guide/
 - **Website**: https://ioquake3.org
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/quake3
+- **Website**: https://www.idsoftware.com
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Website**: https://store.steampowered.com/app/704450/
 - **Website**: https://www.beamdog.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/nwnee-server
+- **Website**: https://www.beamdog.com/games/neverwinter-nights-enhanced
+
 ## Fields
 
 ### Chart / Role

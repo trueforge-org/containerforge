@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mojopaste
 - **Source repository**: https://github.com/jhthorsen/app-mojopaste
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jhthorsen/mojopaste
+
 ## Fields
 
 ### Chart / Role

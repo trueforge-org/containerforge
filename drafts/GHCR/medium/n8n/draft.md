@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.n8n.io
 - **Website**: https://n8n.io
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/n8n-io/n8n
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://ikebukuro.tshock.co/
 - **Documentation**: https://tshock.readme.io/docs/getting-started
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/terrariaserver
+- **Website**: https://tshock.co
+
 ## Fields
 
 ### Chart / Role

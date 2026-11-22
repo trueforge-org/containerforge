@@ -22,6 +22,11 @@
 - **Documentation**: https://amule-org.github.io/docs
 - **Website**: https://amule-org.github.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ngosang/amule
+- **Source code repository**: https://github.com/ngosang/docker-amule
+
 ## Fields
 
 ### Chart / Role

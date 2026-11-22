@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/kmahyyg/ztncui-aio
 - **Documentation**: https://github.com/key-networks/ztncui-containerized
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/kmahyyg/ztncui-aio
+
 ## Fields
 
 ### Chart / Role

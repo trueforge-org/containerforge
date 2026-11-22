@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/import-ics
 - **Source repository**: https://github.com/Vilhjalmr26/import_ics
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/vilhjalmr26/import_ics
+
 ## Fields
 
 ### Chart / Role

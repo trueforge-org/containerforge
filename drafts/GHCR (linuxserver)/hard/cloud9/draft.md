@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/c9/core
 - **Website**: https://c9.github.io/core/
 
+## Potentially relevant resources
+
+- **Website**: https://aws.amazon.com/cloud9
+- **Container image**: https://ghcr.io/linuxserver/cloud9
+
 ## Fields
 
 ### Chart / Role

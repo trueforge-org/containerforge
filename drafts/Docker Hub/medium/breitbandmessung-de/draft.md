@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/breitbandmessung-de
 - **Source repository**: https://github.com/shneezin/breitbandmessung-node
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/shneezin/breitbandmessung-node
+
 ## Fields
 
 ### Chart / Role

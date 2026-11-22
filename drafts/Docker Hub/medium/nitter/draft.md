@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nitter
 - **Source repository**: https://github.com/zedeus/nitter
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/zedeus/nitter
+
 ## Fields
 
 ### Chart / Role

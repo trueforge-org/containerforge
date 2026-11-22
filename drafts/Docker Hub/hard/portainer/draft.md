@@ -22,6 +22,13 @@
 - **Documentation**: https://docs.portainer.io/
 - **Website**: https://www.portainer.io/
 
+## Potentially relevant resources
+
+- **Website**: https://docs.portainer.io/start/install-ce/server
+- **Website**: https://docs.portainer.io/start/install/server
+- **Container image**: https://hub.docker.com/r/portainer/portainer-ce
+- **Container image**: https://hub.docker.com/r/portainer/portainer-ee
+
 ## Fields
 
 ### Chart / Role

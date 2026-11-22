@@ -22,6 +22,11 @@
 - **Source repository**: https://github.com/timshel/vaultwarden
 - **Documentation**: https://github.com/dani-garcia/vaultwarden/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/dani-garcia/vaultwarden
+- **Container image**: https://ghcr.io/timshel/vaultwarden
+
 ## Fields
 
 ### Chart / Role

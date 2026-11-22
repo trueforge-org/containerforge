@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/Kozea/Radicale
 - **Documentation**: https://radicale.org/v3.html
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/tomsquest/docker-radicale
+- **Container image**: https://hub.docker.com/r/tomsquest/docker-radicale
+- **Website**: https://radicale.org
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jts3servermod
 - **Source repository**: https://github.com/galexrt/container-jts3servermod
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/galexrt/jts3servermod
+- **Website**: https://www.stefan1200.de/documentation/jts3servermod/readme.html
+- **Website**: https://www.stefan1200.de/forum/index.php?PHPSESSID=r0m44032akt9jk7903ru9ejv2f&topic=2.0
+
 ## Fields
 
 ### Chart / Role

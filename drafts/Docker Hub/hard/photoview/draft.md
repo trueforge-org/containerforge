@@ -22,6 +22,10 @@
 - **Documentation**: https://photoview.github.io/
 - **Website**: https://photoview.github.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/viktorstrate/photoview
+
 ## Fields
 
 ### Chart / Role

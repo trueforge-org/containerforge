@@ -22,6 +22,11 @@
 - **Documentation**: https://proton.me/support/mail/bridge
 - **Website**: https://proton.me/mail/bridge
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/shenxn/protonmail-bridge-docker
+- **Container image**: https://hub.docker.com/r/shenxn/protonmail-bridge
+
 ## Fields
 
 ### Chart / Role

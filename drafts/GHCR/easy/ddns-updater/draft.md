@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/qdm12/ddns-updater
 - **Documentation**: https://github.com/qdm12/ddns-updater/tree/master/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/qdm12/ddns-updater
+
 ## Fields
 
 ### Chart / Role

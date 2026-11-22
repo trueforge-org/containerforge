@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shapeshifter-obfuscator
 - **Source repository**: https://github.com/OperatorFoundation/shapeshifter-dispatcher
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/juchong/shapeshifter-docker
+- **Container image**: https://hub.docker.com/r/juchong/shapeshifter-docker
+
 ## Fields
 
 ### Chart / Role

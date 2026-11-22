@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/imgpush
 - **Source repository**: https://github.com/hauxir/imgpush
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/hauxir/imgpush
+
 ## Fields
 
 ### Chart / Role

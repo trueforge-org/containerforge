@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Wizarrrr/wizarr
 - **Documentation**: https://docs.wizarr.dev/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/wizarrrr/wizarr
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hetzner-ddns
 - **Source repository**: https://github.com/kutzilla/docker-hetzner-ddns
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/kutzilla/hetzner-ddns
+
 ## Fields
 
 ### Chart / Role

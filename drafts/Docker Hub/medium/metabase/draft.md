@@ -22,6 +22,10 @@
 - **Documentation**: https://www.metabase.com/docs/latest/
 - **Website**: https://www.metabase.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/metabase/metabase
+
 ## Fields
 
 ### Chart / Role

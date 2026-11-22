@@ -22,6 +22,10 @@
 - **Documentation**: https://shlink.io/documentation/
 - **Website**: https://shlink.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/shlinkio/shlink
+
 ## Fields
 
 ### Chart / Role

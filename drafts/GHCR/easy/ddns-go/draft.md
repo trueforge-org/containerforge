@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/jeessy2/ddns-go
 - **Documentation**: https://github.com/jeessy2/ddns-go/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jeessy2/ddns-go
+
 ## Fields
 
 ### Chart / Role

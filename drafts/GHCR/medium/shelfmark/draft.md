@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shelfmark
 - **Source repository**: https://github.com/calibrain/shelfmark
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/calibrain/shelfmark
+
 ## Fields
 
 ### Chart / Role

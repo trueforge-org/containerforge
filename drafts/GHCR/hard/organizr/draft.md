@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/causefx/Organizr
 - **Documentation**: https://docs.organizr.app/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/organizr/organizr
+
 ## Fields
 
 ### Chart / Role

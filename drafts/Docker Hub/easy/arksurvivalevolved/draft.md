@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/arkmanager/ark-server-tools
 - **Documentation**: https://github.com/arkmanager/ark-server-tools/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/drpsychick/arkserver
+
 ## Fields
 
 ### Chart / Role

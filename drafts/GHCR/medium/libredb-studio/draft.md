@@ -22,6 +22,11 @@
 - **Website**: https://libredb.org
 - **Website**: https://libredb.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/libredb/libredb-studio
+- **Source code repository**: https://github.com/libredb/libredb-studio/pkgs/container/libredb-studio
+
 ## Fields
 
 ### Chart / Role

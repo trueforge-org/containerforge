@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/sissbruecker/linkding
 - **Documentation**: https://linkding.link/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sissbruecker/linkding
+
 ## Fields
 
 ### Chart / Role

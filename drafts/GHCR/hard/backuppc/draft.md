@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/backuppc/backuppc
 - **Documentation**: https://backuppc.github.io/backuppc/
 
+## Potentially relevant resources
+
+- **Website**: https://backuppc.github.io/backuppc/index.html
+- **Container image**: https://ghcr.io/adferrand/backuppc
+- **Source code repository**: https://github.com/adferrand/docker-backuppc
+
 ## Fields
 
 ### Chart / Role

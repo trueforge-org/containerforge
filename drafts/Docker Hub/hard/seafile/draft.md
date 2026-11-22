@@ -22,6 +22,11 @@
 - **Documentation**: https://manual.seafile.com/
 - **Website**: https://www.seafile.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/seafileltd/seafile-mc
+- **Website**: https://seafile.com
+
 ## Fields
 
 ### Chart / Role

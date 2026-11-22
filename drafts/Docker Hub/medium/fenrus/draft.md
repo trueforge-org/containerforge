@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fenrus
 - **Source repository**: https://github.com/revenz/Fenrus
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/revenz/fenrus
+
 ## Fields
 
 ### Chart / Role

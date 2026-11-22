@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/k8snetworkplumbingwg/multus-cni
 - **Documentation**: https://k8snetworkplumbingwg.github.io/multus-cni/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8snetworkplumbingwg/multus-cni
+- **Container image**: https://ghcr.io/siderolabs/cni
+- **Container image**: https://hub.docker.com/r/alpine/crane
+
 ## Fields
 
 ### Chart / Role

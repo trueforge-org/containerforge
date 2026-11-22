@@ -22,6 +22,11 @@
 - **Documentation**: https://aria2.github.io/manual/en/html/
 - **Website**: https://aria2.github.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/p3terx/aria2-pro
+- **Source code repository**: https://github.com/P3TERX/Aria2-Pro-Docker
+
 ## Fields
 
 ### Chart / Role

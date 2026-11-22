@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tar1090
 - **Source repository**: https://github.com/wiedehopf/tar1090
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mikenye/tar1090
+
 ## Fields
 
 ### Chart / Role

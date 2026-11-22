@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Py-KMS-Organization/py-kms
 - **Documentation**: https://py-kms.readthedocs.io/en/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/py-kms-organization/py-kms
+
 ## Fields
 
 ### Chart / Role

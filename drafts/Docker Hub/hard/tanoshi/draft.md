@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tanoshi
 - **Source repository**: https://github.com/luigi311/tanoshi
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/faldez/tanoshi
+- **Container image**: https://hub.docker.com/r/faldez/tanoshi
+
 ## Fields
 
 ### Chart / Role

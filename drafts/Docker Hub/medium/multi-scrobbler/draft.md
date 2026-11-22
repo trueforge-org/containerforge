@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/FoxxMD/multi-scrobbler
 - **Documentation**: https://foxxmd.github.io/multi-scrobbler/configuration/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/foxxmd/multi-scrobbler
+
 ## Fields
 
 ### Chart / Role

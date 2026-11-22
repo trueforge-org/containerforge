@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/tphakala/birdnet-go
 - **Documentation**: https://github.com/tphakala/birdnet-go/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tphakala/birdnet-go
+
 ## Fields
 
 ### Chart / Role

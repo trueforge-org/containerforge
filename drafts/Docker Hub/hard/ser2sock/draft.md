@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ser2sock
 - **Source repository**: https://github.com/nutechsoftware/ser2sock
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/tenstartups/ser2sock
+- **Container image**: https://hub.docker.com/r/tenstartups/ser2sock
+
 ## Fields
 
 ### Chart / Role

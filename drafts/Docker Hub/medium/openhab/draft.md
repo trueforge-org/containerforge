@@ -22,6 +22,10 @@
 - **Documentation**: https://www.openhab.org/docs/
 - **Website**: https://www.openhab.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/openhab/openhab
+
 ## Fields
 
 ### Chart / Role

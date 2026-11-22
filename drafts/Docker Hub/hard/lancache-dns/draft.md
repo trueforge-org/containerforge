@@ -23,6 +23,10 @@
 - **Documentation**: https://lancache.net/docs/
 - **Website**: https://lancache.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/lancachenet/lancache-dns
+
 ## Fields
 
 ### Chart / Role

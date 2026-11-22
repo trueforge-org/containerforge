@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wyoming-openwakeword
 - **Source repository**: https://github.com/rhasspy/wyoming-openwakeword
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/home-assistant/addons/tree/master/openwakeword
+- **Container image**: https://hub.docker.com/r/rhasspy/wyoming-openwakeword
+
 ## Fields
 
 ### Chart / Role

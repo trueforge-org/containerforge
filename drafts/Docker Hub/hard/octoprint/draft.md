@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.octoprint.org/en/main/
 - **Website**: https://octoprint.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/octoprint/octoprint
+
 ## Fields
 
 ### Chart / Role

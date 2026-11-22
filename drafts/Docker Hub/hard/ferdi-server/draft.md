@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/ferdium/ferdium-server
 - **Website**: https://ferdium.org
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/getferdi/server
+- **Container image**: https://hub.docker.com/r/getferdi/ferdi-server
+
 ## Fields
 
 ### Chart / Role

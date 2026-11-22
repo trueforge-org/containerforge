@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bytestash
 - **Source repository**: https://github.com/jordan-dalby/ByteStash
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jordan-dalby/bytestash
+
 ## Fields
 
 ### Chart / Role

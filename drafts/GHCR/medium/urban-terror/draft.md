@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/FrozenSand/ioq3-for-UrbanTerror-4
 - **Website**: https://www.urbanterror.info/home/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/urbanterror
+- **Website**: https://www.urbanterror.info
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/evan-buss/openbooks
 - **Website**: https://evan-buss.github.io/openbooks/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/evan-buss/openbooks
+
 ## Fields
 
 ### Chart / Role

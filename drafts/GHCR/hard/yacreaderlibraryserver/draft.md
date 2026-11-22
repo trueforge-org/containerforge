@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/yacreaderlibraryserver
 - **Source repository**: https://github.com/YACReader/yacreader
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/xthursdayx/yacreaderlibrary-server-docker
+- **Website**: https://www.yacreader.com
+
 ## Fields
 
 ### Chart / Role

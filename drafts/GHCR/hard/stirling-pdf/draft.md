@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Stirling-Tools/Stirling-PDF
 - **Documentation**: https://docs.stirlingpdf.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/stirling-tools/s-pdf
+
 ## Fields
 
 ### Chart / Role

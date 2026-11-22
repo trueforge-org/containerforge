@@ -21,6 +21,11 @@
 - **Website**: https://www.observium.org/
 - **Documentation**: https://docs.observium.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/pvrmza/docker-observium
+- **Container image**: https://hub.docker.com/r/pvrmza/docker-observium
+
 ## Fields
 
 ### Chart / Role

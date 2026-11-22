@@ -22,6 +22,11 @@
 - **Documentation**: https://doublecmd.github.io/doc/en/help.html
 - **Website**: https://doublecmd.sourceforge.io
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/doublecommander
+- **Source code repository**: https://github.com/linuxserver/docker-doublecommander
+
 ## Fields
 
 ### Chart / Role

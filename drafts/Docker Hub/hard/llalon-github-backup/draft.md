@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/llalon-github-backup
 - **Source repository**: https://github.com/abusesa/github-backup
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/llalon/github-backup
+
 ## Fields
 
 ### Chart / Role

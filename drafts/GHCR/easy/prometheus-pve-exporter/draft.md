@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/prometheus-pve/prometheus-pve-exporter
 - **Documentation**: https://github.com/prometheus-pve/prometheus-pve-exporter/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/prometheus-pve/prometheus-pve-exporter
+- **Website**: https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus
+
 ## Fields
 
 ### Chart / Role

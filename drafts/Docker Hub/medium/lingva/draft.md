@@ -22,6 +22,10 @@
 - **Website**: https://lingva.ml
 - **Website**: https://lingva.ml/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/thedaviddelta/lingva-translate
+
 ## Fields
 
 ### Chart / Role

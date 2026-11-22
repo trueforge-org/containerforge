@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/satisfactory
 - **Source repository**: https://github.com/wolveix/satisfactory-server
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/wolveix/satisfactory-server
+
 ## Fields
 
 ### Chart / Role

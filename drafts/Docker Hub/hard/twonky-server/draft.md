@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/twonky-server
 - **Website**: https://www.twonky.com/download/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/H2CK/twonkyserver
+- **Container image**: https://hub.docker.com/r/dtjs48jkt/twonkyserver
+
 ## Fields
 
 ### Chart / Role

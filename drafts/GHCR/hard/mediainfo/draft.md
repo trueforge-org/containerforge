@@ -22,6 +22,11 @@
 - **Documentation**: https://mediaarea.net/en/MediaInfo/Support
 - **Website**: https://mediaarea.net/en/MediaInfo
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/mediainfo
+- **Source code repository**: https://github.com/jlesage/docker-mediainfo
+
 ## Fields
 
 ### Chart / Role

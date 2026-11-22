@@ -22,6 +22,11 @@
 - **Documentation**: https://alistgo.com/guide/
 - **Website**: https://alistgo.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Xhofe/alist
+- **Container image**: https://hub.docker.com/r/xhofe/alist-aria2
+
 ## Fields
 
 ### Chart / Role

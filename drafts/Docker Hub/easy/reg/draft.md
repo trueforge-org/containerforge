@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/distribution/distribution
 - **Documentation**: https://distribution.github.io/distribution/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/genuinetools/reg
+- **Source code repository**: https://github.com/k8s-at-home/container-images
+- **Container image**: https://hub.docker.com/_/registry
+
 ## Fields
 
 ### Chart / Role

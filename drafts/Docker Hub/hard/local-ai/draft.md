@@ -22,6 +22,11 @@
 - **Documentation**: https://localai.io/docs/
 - **Website**: https://localai.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/go-skynet/LocalAI
+- **Container image**: https://hub.docker.com/r/localai/localai
+
 ## Fields
 
 ### Chart / Role

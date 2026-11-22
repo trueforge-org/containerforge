@@ -21,6 +21,11 @@
 - **Website**: https://playvrising.com/
 - **Documentation**: https://github.com/StunlockStudios/vrising-dedicated-server-instructions
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://steampowered.com
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cryptofolio
 - **Source repository**: https://github.com/Xtrendence/cryptofolio
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/xtrendence/cryptofolio
+
 ## Fields
 
 ### Chart / Role

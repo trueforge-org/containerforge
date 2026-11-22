@@ -22,6 +22,10 @@
 - **Documentation**: https://dev.mysql.com/doc/workbench/en/
 - **Website**: https://www.mysql.com/products/workbench/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/moby/moby
 - **Website**: https://mobyproject.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/docker
+
 ## Fields
 
 ### Chart / Role

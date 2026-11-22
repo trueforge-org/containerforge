@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dumbassets
 - **Source repository**: https://github.com/DumbWareio/DumbAssets
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/DumbWareio/dumbassets
+- **Container image**: https://hub.docker.com/r/dumbwareio/dumbassets
+
 ## Fields
 
 ### Chart / Role

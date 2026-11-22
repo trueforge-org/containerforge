@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dashmachine
 - **Source repository**: https://github.com/rmountjoy92/DashMachine
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/rmountjoy/dashmachine
+
 ## Fields
 
 ### Chart / Role

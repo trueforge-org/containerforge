@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rdtclient
 - **Source repository**: https://github.com/rogerfar/rdt-client
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/p3terx/aria2-pro
+- **Container image**: https://ghcr.io/rogerfar/rdtclient
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/thunderbird
 - **Website**: https://www.thunderbird.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/thunderbird
+
 ## Fields
 
 ### Chart / Role

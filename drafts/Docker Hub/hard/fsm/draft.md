@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/OpenFactorioServerManager/factorio-server-manager
 - **Documentation**: https://github.com/OpenFactorioServerManager/factorio-server-manager/wiki/Installation-and-Usage
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ofsm/ofsm
+- **Container image**: https://registry.hub.docker.com/r/ofsm/ofsm
+
 ## Fields
 
 ### Chart / Role

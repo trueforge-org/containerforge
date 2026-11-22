@@ -23,6 +23,10 @@
 - **Documentation**: https://gate.minekube.com/
 - **Website**: https://minekube.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/minekube/gate
+
 ## Fields
 
 ### Chart / Role

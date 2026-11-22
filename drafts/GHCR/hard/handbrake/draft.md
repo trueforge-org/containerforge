@@ -22,6 +22,11 @@
 - **Documentation**: https://handbrake.fr/docs/
 - **Website**: https://handbrake.fr/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/handbrake
+- **Source code repository**: https://github.com/jlesage/docker-handbrake
+
 ## Fields
 
 ### Chart / Role

@@ -23,6 +23,10 @@
 - **Documentation**: https://yacy.net/download_installation/
 - **Website**: https://yacy.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/yacy/yacy_search_server
+
 ## Fields
 
 ### Chart / Role

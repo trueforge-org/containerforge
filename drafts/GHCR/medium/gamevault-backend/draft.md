@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gamevault-backend
 - **Source repository**: https://github.com/Phalcode/gamevault-backend
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/phalcode/gamevault-backend
+
 ## Fields
 
 ### Chart / Role

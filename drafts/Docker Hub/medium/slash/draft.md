@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slash
 - **Source repository**: https://github.com/yourselfhosted/slash
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/boojack/slash
+- **Container image**: https://hub.docker.com/r/yourselfhosted/slash
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metatube
 - **Source repository**: https://github.com/JVT038/MetaTube
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jvt038/metatube
+
 ## Fields
 
 ### Chart / Role

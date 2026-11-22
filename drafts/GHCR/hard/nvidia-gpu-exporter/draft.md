@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nvidia-gpu-exporter
 - **Source repository**: https://github.com/utkuozdemir/nvidia_gpu_exporter
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/utkuozdemir/nvidia_gpu_exporter
+
 ## Fields
 
 ### Chart / Role

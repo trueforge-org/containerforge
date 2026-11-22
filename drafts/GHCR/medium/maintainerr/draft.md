@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.maintainerr.info/
 - **Website**: https://maintainerr.info
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/maintainerr/maintainerr
+
 ## Fields
 
 ### Chart / Role

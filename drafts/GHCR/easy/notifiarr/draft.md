@@ -23,6 +23,10 @@
 - **Documentation**: https://notifiarr.wiki/
 - **Website**: https://notifiarr.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/notifiarr/notifiarr
+
 ## Fields
 
 ### Chart / Role

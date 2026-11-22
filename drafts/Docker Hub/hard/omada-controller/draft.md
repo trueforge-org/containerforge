@@ -22,6 +22,11 @@
 - **Documentation**: https://www.omadanetworks.com/en/support/
 - **Website**: https://www.omadanetworks.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/mbentley/docker-omada-controller
+- **Container image**: https://hub.docker.com/r/mbentley/omada-controller
+
 ## Fields
 
 ### Chart / Role

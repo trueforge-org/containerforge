@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metallb-config
 - **Source repository**: https://github.com/docker-library/hello-world
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/metallb/metallb
+- **Container image**: https://hub.docker.com/_/hello-world
+- **Website**: https://metallb.io
+
 ## Fields
 
 ### Chart / Role

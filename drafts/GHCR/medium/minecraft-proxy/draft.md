@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/PaperMC/Velocity
 - **Website**: https://papermc.io/software/velocity
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/itzg/mc-proxy
+- **Source code repository**: https://github.com/itzg/docker-mc-proxy
+
 ## Fields
 
 ### Chart / Role

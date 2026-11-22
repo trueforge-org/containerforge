@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/podgrab
 - **Source repository**: https://github.com/akhilrex/podgrab
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/akhilrex/podgrab
+
 ## Fields
 
 ### Chart / Role

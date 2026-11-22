@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/static
 - **Source repository**: https://git.mills.io/prologic/static
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/nicholaswilde/static
+- **Source code repository**: https://github.com/nicholaswilde/docker-static
+- **Source code repository**: https://github.com/prologic/static
+
 ## Fields
 
 ### Chart / Role

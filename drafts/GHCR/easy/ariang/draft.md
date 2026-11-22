@@ -22,6 +22,11 @@
 - **Documentation**: http://ariang.mayswind.net
 - **Website**: http://ariang.mayswind.net
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/leonismoe/ariang
+- **Source code repository**: https://github.com/leonismoe/docker-images
+
 ## Fields
 
 ### Chart / Role

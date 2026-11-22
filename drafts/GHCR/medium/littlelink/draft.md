@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/littlelink
 - **Source repository**: https://github.com/timothystewart6/littlelink-server
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/techno-tim/littlelink-server
+- **Source code repository**: https://github.com/sethcottle/littlelink
+- **Source code repository**: https://github.com/techno-tim/littlelink-server
+
 ## Fields
 
 ### Chart / Role

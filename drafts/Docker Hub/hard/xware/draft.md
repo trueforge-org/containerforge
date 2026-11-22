@@ -21,6 +21,10 @@
 - **Website**: https://www.xunlei.com/
 - **Documentation**: https://help.xunlei.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/caiguai/docker-xware
+
 ## Fields
 
 ### Chart / Role

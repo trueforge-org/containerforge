@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/keeweb
 - **Source repository**: https://github.com/keeweb/keeweb
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/antelle/keeweb
+
 ## Fields
 
 ### Chart / Role

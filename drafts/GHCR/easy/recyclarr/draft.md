@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/recyclarr/recyclarr
 - **Documentation**: https://recyclarr.dev/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/recyclarr/recyclarr
+- **Source code repository**: https://github.com/recyclarr/recyclarr/pkgs/container/recyclarr
+
 ## Fields
 
 ### Chart / Role

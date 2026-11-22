@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sonsoftheforest
 - **Website**: https://store.steampowered.com/app/1326470/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Source code repository**: https://github.com/ich777/docker-steamcmd-server/tree/sonsoftheforest
+
 ## Fields
 
 ### Chart / Role

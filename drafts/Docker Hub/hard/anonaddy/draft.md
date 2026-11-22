@@ -22,6 +22,11 @@
 - **Documentation**: https://addy.io/help/
 - **Website**: https://addy.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/anonaddy/docker
+- **Container image**: https://hub.docker.com/r/anonaddy/anonaddy
+
 ## Fields
 
 ### Chart / Role

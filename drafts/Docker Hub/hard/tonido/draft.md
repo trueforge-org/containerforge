@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tonido
 - **Website**: https://www.tonido.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/captinsano/tonido
+- **Container image**: https://registry.hub.docker.com/r/captinsano/tonido
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/blender/blender
 - **Documentation**: https://docs.blender.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/accetto/headless-drawing-g3
+- **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-blender-g3
+
 ## Fields
 
 ### Chart / Role

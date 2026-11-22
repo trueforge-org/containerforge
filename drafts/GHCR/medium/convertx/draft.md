@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/convertx
 - **Source repository**: https://github.com/C4illin/ConvertX
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/c4illin/convertx
+- **Source code repository**: https://github.com/c4illin/ConvertX
+
 ## Fields
 
 ### Chart / Role

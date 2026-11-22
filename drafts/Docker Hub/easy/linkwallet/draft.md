@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/linkwallet
 - **Source repository**: https://github.com/tardisx/linkwallet
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/tardisx/linkwallet
+
 ## Fields
 
 ### Chart / Role

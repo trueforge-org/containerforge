@@ -22,6 +22,11 @@
 - **Documentation**: https://www.odoo.com/documentation
 - **Website**: https://www.odoo.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://gallery.ecr.aws/docker/library/odoo
+- **Source code repository**: https://github.com/odoo/docker
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slink
 - **Source repository**: https://github.com/andrii-kryvoviaz/slink
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/anirdev/slink
+
 ## Fields
 
 ### Chart / Role

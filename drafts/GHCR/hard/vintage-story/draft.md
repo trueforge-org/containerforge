@@ -21,6 +21,10 @@
 - **Website**: https://www.vintagestory.at/
 - **Documentation**: https://wiki.vintagestory.at/index.php/Server_Config
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/vintagestory
+
 ## Fields
 
 ### Chart / Role

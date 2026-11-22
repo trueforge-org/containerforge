@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mininote
 - **Source repository**: https://github.com/muety/mininote
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/n1try/mininote
+
 ## Fields
 
 ### Chart / Role

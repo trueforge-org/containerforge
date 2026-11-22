@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/static-web-server/static-web-server
 - **Documentation**: https://static-web-server.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/static-web-server/static-web-server
+
 ## Fields
 
 ### Chart / Role

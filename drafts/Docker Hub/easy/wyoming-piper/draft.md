@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/rhasspy/wyoming-piper
 - **Documentation**: https://www.home-assistant.io/integrations/piper/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/home-assistant/addons/tree/master/piper
+- **Container image**: https://hub.docker.com/r/rhasspy/wyoming-piper
+
 ## Fields
 
 ### Chart / Role

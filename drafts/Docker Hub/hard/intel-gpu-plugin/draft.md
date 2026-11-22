@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/intel/intel-device-plugins-for-kubernetes
 - **Documentation**: https://intel.github.io/intel-device-plugins-for-kubernetes/0.36/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/intel
+- **Container image**: https://hub.docker.com/r/intel/intel-gpu-plugin
+
 ## Fields
 
 ### Chart / Role

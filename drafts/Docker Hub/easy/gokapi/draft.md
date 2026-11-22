@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Forceu/gokapi
 - **Documentation**: https://gokapi.readthedocs.io/en/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/f0rc3/gokapi
+
 ## Fields
 
 ### Chart / Role

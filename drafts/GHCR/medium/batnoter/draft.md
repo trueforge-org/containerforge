@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/batnoter
 - **Source repository**: https://github.com/batnoter/batnoter
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/batnoter/batnoter/batnoter-ui
+
 ## Fields
 
 ### Chart / Role

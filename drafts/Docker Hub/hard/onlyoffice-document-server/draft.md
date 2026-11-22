@@ -22,6 +22,11 @@
 - **Documentation**: https://helpcenter.onlyoffice.com/docs/
 - **Website**: https://www.onlyoffice.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/ONLYOFFICE/Docker-DocumentServer
+- **Container image**: https://hub.docker.com/r/onlyoffice/documentserver
+
 ## Fields
 
 ### Chart / Role

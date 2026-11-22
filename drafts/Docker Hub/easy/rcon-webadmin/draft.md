@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rcon-webadmin
 - **Source repository**: https://github.com/rcon-web-admin/rcon-web-admin
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/itzg/rcon
+
 ## Fields
 
 ### Chart / Role

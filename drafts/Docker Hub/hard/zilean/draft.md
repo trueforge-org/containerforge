@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/iPromKnight/zilean
 - **Documentation**: https://ipromknight.github.io/zilean/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ipromknight/zilean
+
 ## Fields
 
 ### Chart / Role

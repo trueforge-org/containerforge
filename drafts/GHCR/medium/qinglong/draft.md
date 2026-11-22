@@ -22,6 +22,10 @@
 - **Documentation**: https://qinglong.online/guide/getting-started/installation-guide
 - **Website**: https://qinglong.online
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/whyour/qinglong
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/storj-node
 - **Source repository**: https://github.com/storj/storj
 
+## Potentially relevant resources
+
+- **Website**: https://docs.storj.io/node
+- **Container image**: https://hub.docker.com/r/storjlabs/storagenode
+
 ## Fields
 
 ### Chart / Role

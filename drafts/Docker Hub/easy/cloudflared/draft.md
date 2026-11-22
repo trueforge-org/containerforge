@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/cloudflare/cloudflared
 - **Documentation**: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/cloudflare/cloudflared
+
 ## Fields
 
 ### Chart / Role

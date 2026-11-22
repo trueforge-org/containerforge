@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/nroi/flexo
 - **Documentation**: https://github.com/nroi/flexo/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/nroi/flexo
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://wordpress.org/documentation/
 - **Website**: https://wordpress.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bitnamisecure/wordpress
+- **Website**: https://www.wordpress.org
+
 ## Fields
 
 ### Chart / Role

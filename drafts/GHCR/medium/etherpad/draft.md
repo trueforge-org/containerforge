@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/etherpad
 - **Source repository**: https://github.com/ether/etherpad
 
+## Potentially relevant resources
+
+- **Website**: https://etherpad.org
+- **Container image**: https://ghcr.io/ether/etherpad
+- **Source code repository**: https://github.com/ether/etherpad-lite
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.craftycontrol.com/
 - **Website**: https://craftycontrol.com/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

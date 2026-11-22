@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/crypto-exchanges-gateway
 - **Source repository**: https://github.com/aloysius-pgast/crypto-exchanges-gateway
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/apendergast/crypto-exchanges-gateway
+
 ## Fields
 
 ### Chart / Role

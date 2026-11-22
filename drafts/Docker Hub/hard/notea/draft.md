@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/notea
 - **Source repository**: https://github.com/QingWei-Li/notea
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/diamkil/docker-notea
+- **Container image**: https://hub.docker.com/r/diamkil/notea
+- **Container image**: https://registry.hub.docker.com/r/diamkil/notea
+
 ## Fields
 
 ### Chart / Role

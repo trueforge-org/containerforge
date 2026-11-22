@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/pwm-project/pwm
 - **Website**: https://pwm-project.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/fjudith/pwm
+
 ## Fields
 
 ### Chart / Role

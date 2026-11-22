@@ -22,6 +22,12 @@
 - **Documentation**: http://phoscon.de/rest/
 - **Website**: https://phoscon.de/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/deconz-community/deconz-docker
+- **Source code repository**: https://github.com/dresden-elektronik/deconz-rest-plugin
+- **Source code repository**: https://github.com/marthoc/docker-deconz
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/wekan/wekan
 - **Documentation**: https://wekan.fi/install/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/wekanteam/wekan
+- **Website**: https://wekan.github.io
+
 ## Fields
 
 ### Chart / Role

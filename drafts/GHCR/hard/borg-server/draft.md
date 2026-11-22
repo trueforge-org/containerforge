@@ -22,6 +22,11 @@
 - **Documentation**: https://borgbackup.readthedocs.io/en/stable/
 - **Website**: https://www.borgbackup.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/anotherstranger/borg-server
+- **Source code repository**: https://github.com/AnotherStranger/docker-borg-backup
+
 ## Fields
 
 ### Chart / Role

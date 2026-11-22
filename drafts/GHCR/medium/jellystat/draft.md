@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jellystat
 - **Source repository**: https://github.com/CyferShepard/Jellystat
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/cyfershepard/jellystat
+
 ## Fields
 
 ### Chart / Role

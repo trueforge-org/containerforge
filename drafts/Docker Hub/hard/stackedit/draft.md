@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/benweet/stackedit
 - **Website**: https://stackedit.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/qmcgaw/stackedit
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/muse
 - **Source repository**: https://github.com/museofficial/muse
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/museofficial/muse
+
 ## Fields
 
 ### Chart / Role

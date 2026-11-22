@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/counterstrike2d
 - **Website**: https://www.cs2d.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/cs2dserver
+- **Steam store page**: https://www.steampowered.com
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Website**: https://www.minecraft.net/en-us/download/server/bedrock
 - **Documentation**: https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockserver/getting-started
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/itzg/minecraft-bedrock-server
+- **Source code repository**: https://github.com/itzg/docker-minecraft-server
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rstudio
 - **Source repository**: https://github.com/rstudio/rstudio
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/rocker-org/rstudio
+- **Source code repository**: https://github.com/rocker-org/rocker-versioned2
+
 ## Fields
 
 ### Chart / Role

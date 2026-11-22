@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/watcharr
 - **Source repository**: https://github.com/sbondCo/Watcharr
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sbondco/watcharr
+
 ## Fields
 
 ### Chart / Role

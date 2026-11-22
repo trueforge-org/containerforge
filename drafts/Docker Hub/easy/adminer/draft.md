@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/vrana/adminer
 - **Website**: https://www.adminer.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/_/adminer
+
 ## Fields
 
 ### Chart / Role

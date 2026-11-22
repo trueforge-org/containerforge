@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmoadmin
 - **Source repository**: https://github.com/TasmoAdmin/TasmoAdmin
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tasmoadmin/tasmoadmin
+
 ## Fields
 
 ### Chart / Role

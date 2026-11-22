@@ -22,6 +22,10 @@
 - **Documentation**: https://www.orcaslicer.com/wiki
 - **Website**: https://www.orcaslicer.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/orcaslicer
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/mailpile/Mailpile
 - **Website**: https://mailpile.is
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/rroemhild/mailpile
+- **Website**: https://www.mailpile.is
+
 ## Fields
 
 ### Chart / Role

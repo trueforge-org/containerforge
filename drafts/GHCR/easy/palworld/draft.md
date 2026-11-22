@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/palworld
 - **Website**: https://www.pocketpair.jp/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Source code repository**: https://github.com/ich777/docker-steamcmd-server/tree/palworld
+
 ## Fields
 
 ### Chart / Role

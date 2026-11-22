@@ -22,6 +22,10 @@
 - **Documentation**: https://bitmagnet.io/
 - **Website**: https://bitmagnet.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/bitmagnet-io/bitmagnet
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/bitcoin/bitcoin
 - **Website**: https://bitcoincore.org
 
+## Potentially relevant resources
+
+- **Website**: https://bitcoin.org
+- **Container image**: https://hub.docker.com/r/ofawx/bitcoind
+
 ## Fields
 
 ### Chart / Role

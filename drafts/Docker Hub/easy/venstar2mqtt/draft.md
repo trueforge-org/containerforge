@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/venstar2mqtt
 - **Source repository**: https://github.com/terafin/mqtt-venstar-bridge
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/terafin/mqtt-venstar-bridge
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/xmrig/xmrig
 - **Documentation**: https://xmrig.com/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/cooleye72/xmrig
+
 ## Fields
 
 ### Chart / Role

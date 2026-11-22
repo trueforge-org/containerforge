@@ -23,6 +23,10 @@
 - **Documentation**: https://docs.sftpgo.com/
 - **Website**: https://sftpgo.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/drakkan/sftpgo
+
 ## Fields
 
 ### Chart / Role

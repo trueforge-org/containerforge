@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/ipfs/kubo
 - **Documentation**: https://docs.ipfs.tech/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ipfs/kubo
+
 ## Fields
 
 ### Chart / Role

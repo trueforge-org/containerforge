@@ -22,6 +22,13 @@
 - **Source repository**: https://github.com/k8s-gateway/k8s_gateway
 - **Documentation**: https://0xerr0r.github.io/blocky/latest/
 
+## Potentially relevant resources
+
+- **Website**: https://0xerr0r.github.io/blocky
+- **Container image**: https://ghcr.io/0xerr0r/blocky
+- **Container image**: https://ghcr.io/k8s-gateway/k8s_gateway
+- **Source code repository**: https://github.com/Mozart409/blocky-frontend
+
 ## Fields
 
 ### Chart / Role

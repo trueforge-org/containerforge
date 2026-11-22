@@ -22,6 +22,11 @@
 - **Documentation**: https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers
 - **Website**: https://www.counter-strike.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Source code repository**: https://github.com/ich777/docker-steamcmd-server/tree/cs2
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/pdreker/fritz_exporter
 - **Documentation**: https://pdreker.github.io/fritz_exporter/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/pdreker/fritz_exporter
+
 ## Fields
 
 ### Chart / Role

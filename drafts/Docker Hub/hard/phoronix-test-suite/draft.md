@@ -22,6 +22,10 @@
 - **Documentation**: https://www.phoronix-test-suite.com/?k=docs
 - **Website**: https://phoronix-test-suite.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/phoronix/pts
+
 ## Fields
 
 ### Chart / Role

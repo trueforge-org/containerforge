@@ -21,6 +21,12 @@
 - **Source repository**: https://github.com/DIYgod/RSSHub
 - **Documentation**: https://docs.rsshub.app/
 
+## Potentially relevant resources
+
+- **Website**: https://docs.rsshub.app/en/install
+- **Container image**: https://hub.docker.com/r/browserless/chrome
+- **Container image**: https://hub.docker.com/r/diygod/rsshub
+
 ## Fields
 
 ### Chart / Role

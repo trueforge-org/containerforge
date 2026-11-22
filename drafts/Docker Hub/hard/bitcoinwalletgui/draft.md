@@ -22,6 +22,10 @@
 - **Documentation**: https://bitcoincore.org/en/doc/
 - **Website**: https://bitcoincore.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ulisses1478/bitcoinwallet-gui
+
 ## Fields
 
 ### Chart / Role

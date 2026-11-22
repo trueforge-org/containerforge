@@ -21,6 +21,13 @@
 - **Source repository**: https://github.com/WeblateOrg/weblate
 - **Documentation**: https://docs.weblate.org/
 
+## Potentially relevant resources
+
+- **Website**: https://docs.weblate.org/en/latest
+- **Source code repository**: https://github.com/WeblateOrg/docker
+- **Source code repository**: https://github.com/WeblateOrg/docker-compose
+- **Container image**: https://hub.docker.com/r/weblate/weblate
+
 ## Fields
 
 ### Chart / Role

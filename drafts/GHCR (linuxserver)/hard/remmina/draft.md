@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/remmina
 - **Source repository**: https://github.com/FreeRDP/Remmina
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/remmina
+- **Source code repository**: https://github.com/linuxserver/docker-remmina
+- **Website**: https://remmina.org
+
 ## Fields
 
 ### Chart / Role

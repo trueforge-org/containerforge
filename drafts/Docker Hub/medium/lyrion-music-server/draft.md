@@ -22,6 +22,10 @@
 - **Documentation**: https://lyrion.org/getting-started
 - **Website**: https://lyrion.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/lmscommunity/lyrionmusicserver
+
 ## Fields
 
 ### Chart / Role

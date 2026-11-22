@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rtorrent-rutorrent
 - **Source repository**: https://github.com/thde/rtorrent_exporter
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/crazy-max/rtorrent-rutorrent
+- **Container image**: https://ghcr.io/thde/rtorrent_exporter
+- **Source code repository**: https://github.com/crazy-max/docker-rtorrent-rutorrent
+
 ## Fields
 
 ### Chart / Role

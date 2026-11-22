@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/emby-sync
 - **Source repository**: https://github.com/cameronurnes/emby-sync
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/lastelement21/emby-sync
+
 ## Fields
 
 ### Chart / Role

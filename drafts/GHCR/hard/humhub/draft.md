@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/humhub/humhub
 - **Documentation**: https://docs.humhub.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/mriedmann/humhub-nginx
+- **Container image**: https://ghcr.io/mriedmann/humhub-phponly
+
 ## Fields
 
 ### Chart / Role

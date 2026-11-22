@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/gamer92000/sinusbot-docker
 - **Documentation**: https://sinusbot.github.io/docs/faq/general
 
+## Potentially relevant resources
+
+- **Website**: https://forum.sinusbot.com
+- **Container image**: https://ghcr.io/gamer92000/sinusbot-docker
+
 ## Fields
 
 ### Chart / Role

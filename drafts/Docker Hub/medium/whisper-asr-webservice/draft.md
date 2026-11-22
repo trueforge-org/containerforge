@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/ahmetoner/whisper-asr-webservice
 - **Documentation**: https://ahmetoner.github.io/whisper-asr-webservice/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/onerahmet/openai-whisper-asr-webservice
+
 ## Fields
 
 ### Chart / Role

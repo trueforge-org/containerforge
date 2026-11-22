@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/go-shiori/shiori
 - **Documentation**: https://github.com/go-shiori/shiori/blob/master/docs/index.md
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/go-shiori/shiori
+- **Source code repository**: https://github.com/go-shiori/shiori/pkgs/container/shiori
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/posterr
 - **Source repository**: https://github.com/petersem/posterr
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/petersem/posterr
+
 ## Fields
 
 ### Chart / Role

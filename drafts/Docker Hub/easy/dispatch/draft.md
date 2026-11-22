@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/khlieng/dispatch
 - **Website**: https://dispatch.khlieng.com
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/khlieng/dispatch
+
 ## Fields
 
 ### Chart / Role

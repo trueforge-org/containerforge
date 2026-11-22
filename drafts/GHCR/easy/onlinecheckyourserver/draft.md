@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/ich777/docker-online-check-pushover
 - **Documentation**: https://github.com/ich777/docker-online-check-pushover/blob/master/README.md
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/online-check-pushover
+
 ## Fields
 
 ### Chart / Role

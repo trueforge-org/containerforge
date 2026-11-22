@@ -22,6 +22,12 @@
 - **Documentation**: https://docs.kitchenowl.org
 - **Website**: https://kitchenowl.org
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/tombursch/kitchenowl
+- **Container image**: https://hub.docker.com/r/tombursch/kitchenowl-web
+- **Website**: https://tombursch.github.io/kitchenowl
+
 ## Fields
 
 ### Chart / Role

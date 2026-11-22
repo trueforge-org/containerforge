@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/mozilla-firefox/firefox
 - **Documentation**: https://support.mozilla.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/firefox
+- **Source code repository**: https://github.com/linuxserver/docker-firefox
+
 ## Fields
 
 ### Chart / Role

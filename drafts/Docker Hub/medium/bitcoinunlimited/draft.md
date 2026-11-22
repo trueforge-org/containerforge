@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/BitcoinUnlimited/BitcoinUnlimited
 - **Website**: https://www.bitcoinunlimited.info/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/amacneil/bitcoinunlimited
+
 ## Fields
 
 ### Chart / Role

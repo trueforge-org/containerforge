@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/AppDaemon/appdaemon
 - **Documentation**: https://appdaemon.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/acockburn/appdaemon
+
 ## Fields
 
 ### Chart / Role

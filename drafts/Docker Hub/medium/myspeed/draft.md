@@ -23,6 +23,10 @@
 - **Documentation**: https://docs.myspeed.dev/setup/linux
 - **Website**: https://myspeed.dev/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/germannewsmaker/myspeed
+
 ## Fields
 
 ### Chart / Role

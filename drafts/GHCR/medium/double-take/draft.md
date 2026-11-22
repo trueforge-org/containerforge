@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/double-take
 - **Source repository**: https://github.com/jakowenko/double-take
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/skrashevich/double-take
+
 ## Fields
 
 ### Chart / Role

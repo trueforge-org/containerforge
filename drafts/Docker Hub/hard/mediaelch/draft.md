@@ -23,6 +23,10 @@
 - **Documentation**: https://github.com/Komet/MediaElch/wiki
 - **Website**: https://www.mediaelch.de/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/masonxx/mediaelch
+
 ## Fields
 
 ### Chart / Role

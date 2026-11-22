@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pixapop
 - **Source repository**: https://github.com/bierdok
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/pixapop
+- **Source code repository**: https://github.com/bierdok/pixapop
+- **Source code repository**: https://github.com/linuxserver/docker-pixapop
+
 ## Fields
 
 ### Chart / Role

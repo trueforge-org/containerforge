@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/retrobot
 - **Source repository**: https://github.com/rossimo/retrobot
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/rossimo/retrobot
+
 ## Fields
 
 ### Chart / Role

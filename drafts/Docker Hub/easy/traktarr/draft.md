@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traktarr
 - **Source repository**: https://github.com/l3uddz/traktarr
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/eafxx/traktarr
+
 ## Fields
 
 ### Chart / Role

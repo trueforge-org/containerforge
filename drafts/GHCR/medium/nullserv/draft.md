@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nullserv
 - **Source repository**: https://github.com/bmrzycki/nullserv
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/k8s-at-home/nullserv
+
 ## Fields
 
 ### Chart / Role

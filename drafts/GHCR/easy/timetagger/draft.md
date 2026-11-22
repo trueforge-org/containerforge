@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/almarklein/timetagger
 - **Website**: https://timetagger.app/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/almarklein/timetagger
+
 ## Fields
 
 ### Chart / Role

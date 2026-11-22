@@ -22,6 +22,12 @@
 - **Documentation**: https://rustdesk.com/docs/en/self-host/
 - **Website**: https://rustdesk.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/rustdesk/rustdesk-server-s6
+- **Source code repository**: https://github.com/rustdesk/rustdesk-server
+- **Website**: https://rustdesk.com/de
+
 ## Fields
 
 ### Chart / Role

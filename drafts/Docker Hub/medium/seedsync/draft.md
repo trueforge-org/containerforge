@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/seedsync
 - **Source repository**: https://github.com/ipsingh06/seedsync
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ipsingh06/seedsync
+
 ## Fields
 
 ### Chart / Role

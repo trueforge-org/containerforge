@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/storm
 - **Source repository**: https://github.com/relvacode/storm
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/relvacode/storm
+- **Source code repository**: https://github.com/relvacode/storm/pkgs/container/storm
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/vexorian/dizquetv
 - **Documentation**: https://github.com/vexorian/dizquetv/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/vexorian/dizquetv
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/mozilla-services/syncserver
 - **Documentation**: https://mozilla-services.github.io/syncstorage-rs/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/crazy-max/firefox-syncserver
+- **Website**: https://moz-services-docs.readthedocs.io/en/latest/howtos/run-sync-1.5.html
+
 ## Fields
 
 ### Chart / Role

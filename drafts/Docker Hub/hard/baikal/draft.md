@@ -22,6 +22,11 @@
 - **Documentation**: https://sabre.io/baikal/
 - **Website**: https://sabre.io/baikal/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/ckulka/baikal-docker
+- **Container image**: https://hub.docker.com/r/ckulka/baikal
+
 ## Fields
 
 ### Chart / Role

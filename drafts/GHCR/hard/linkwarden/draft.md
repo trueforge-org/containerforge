@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.linkwarden.app/
 - **Website**: https://linkwarden.app/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linkwarden/linkwarden
+
 ## Fields
 
 ### Chart / Role

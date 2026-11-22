@@ -22,6 +22,11 @@
 - **Documentation**: https://afterlogic.com/docs
 - **Website**: https://afterlogic.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/afterlogic/docker-aurora-files
+- **Container image**: https://hub.docker.com/r/afterlogic/docker-aurora-files
+
 ## Fields
 
 ### Chart / Role

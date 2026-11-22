@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/acestream
 - **Website**: https://acestream.org/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/vstavrinov/acestream-service
+- **Container image**: https://hub.docker.com/r/vstavrinov/acestream-service
+
 ## Fields
 
 ### Chart / Role

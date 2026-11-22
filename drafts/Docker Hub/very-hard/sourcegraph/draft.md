@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/sourcegraph/sourcegraph
 - **Documentation**: https://sourcegraph.com/docs
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/sourcegraph/server
+
 ## Fields
 
 ### Chart / Role

@@ -23,6 +23,10 @@
 - **Documentation**: https://www.iopaint.com/install/download_model
 - **Website**: https://www.iopaint.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/cwq1913/lama-cleaner
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.firefly-iii.org/
 - **Website**: https://firefly-iii.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/fireflyiii/core
+
 ## Fields
 
 ### Chart / Role

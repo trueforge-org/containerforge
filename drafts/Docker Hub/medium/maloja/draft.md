@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/maloja
 - **Source repository**: https://github.com/krateng/maloja
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/krateng/maloja
+- **Website**: https://maloja.krateng.ch
+
 ## Fields
 
 ### Chart / Role

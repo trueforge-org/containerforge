@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plaxt
 - **Source repository**: https://github.com/XanderStrike/goplaxt
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/xanderstrike/goplaxt
+
 ## Fields
 
 ### Chart / Role

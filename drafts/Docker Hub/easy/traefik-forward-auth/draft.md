@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traefik-forward-auth
 - **Source repository**: https://github.com/thomseddon/traefik-forward-auth
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/thomseddon/traefik-forward-auth
+
 ## Fields
 
 ### Chart / Role

@@ -21,6 +21,11 @@
 - **Website**: https://jdownloader.org/
 - **Documentation**: https://support.jdownloader.org/en
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/jdownloader-2
+- **Source code repository**: https://github.com/jlesage/docker-jdownloader-2
+
 ## Fields
 
 ### Chart / Role

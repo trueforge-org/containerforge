@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/troddit
 - **Source repository**: https://github.com/burhan-syed/troddit
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/bsyed/troddit
+
 ## Fields
 
 ### Chart / Role

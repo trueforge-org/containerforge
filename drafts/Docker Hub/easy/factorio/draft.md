@@ -21,6 +21,11 @@
 - **Website**: https://factorio.com/
 - **Documentation**: https://wiki.factorio.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/factoriotools/factorio-docker
+- **Container image**: https://hub.docker.com/r/factoriotools/factorio
+
 ## Fields
 
 ### Chart / Role

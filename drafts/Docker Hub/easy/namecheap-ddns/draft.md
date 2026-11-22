@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/namecheap-ddns
 - **Source repository**: https://github.com/EdwardChamberlain/namecheap_ddns
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/edchamberlain/namecheap_ddns
+
 ## Fields
 
 ### Chart / Role

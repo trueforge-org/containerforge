@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/poznote
 - **Source repository**: https://github.com/timothepoznanski/poznote
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/timothepoznanski/poznote
+
 ## Fields
 
 ### Chart / Role

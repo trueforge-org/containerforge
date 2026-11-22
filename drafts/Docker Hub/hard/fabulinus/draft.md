@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.titanml.co/
 - **Website**: https://www.titanml.co/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/titanml/takeoff-communitys
+- **Container image**: https://hub.docker.com/r/tytn/fabulinus
+
 ## Fields
 
 ### Chart / Role

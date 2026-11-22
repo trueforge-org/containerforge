@@ -22,6 +22,10 @@
 - **Documentation**: https://traggo.net/install/
 - **Website**: https://traggo.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/traggo/server
+
 ## Fields
 
 ### Chart / Role

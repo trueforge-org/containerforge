@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/FlowiseAI/Flowise
 - **Documentation**: https://docs.flowiseai.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/flowiseai/flowise
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://homarr.dev/docs/
 - **Website**: https://homarr.dev/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/homarr-labs/homarr
+- **Source code repository**: https://github.com/ajnart/homarr
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slack-invite
 - **Source repository**: https://github.com/ninthwalker/slack-invite
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ninthwalker/slack-invite
+- **Source code repository**: httpss://github.com/ninthwalker/slack-invite
+
 ## Fields
 
 ### Chart / Role

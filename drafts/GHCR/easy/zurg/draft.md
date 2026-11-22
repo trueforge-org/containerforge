@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/debridmediamanager/zurg-public
 - **Documentation**: https://github.com/debridmediamanager/zurg-public/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/geek-cookbook/zurg
+
 ## Fields
 
 ### Chart / Role

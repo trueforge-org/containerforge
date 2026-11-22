@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.frigate.video
 - **Website**: https://frigate.video
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/blakeblackshear/frigate
+
 ## Fields
 
 ### Chart / Role

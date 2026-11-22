@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/qdirstat
 - **Source repository**: https://github.com/shundhammer/qdirstat
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/qdirstat
+- **Source code repository**: https://github.com/jlesage/docker-qdirstat
+
 ## Fields
 
 ### Chart / Role

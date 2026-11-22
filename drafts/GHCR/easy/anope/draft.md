@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/anope/anope
 - **Website**: https://www.anope.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/anope
+- **Website**: https://thelounge.chat
+
 ## Fields
 
 ### Chart / Role

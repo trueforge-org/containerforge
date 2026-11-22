@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/website-shot
 - **Source repository**: https://github.com/Flowko/website-shot
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/flowko1/website-shot
+
 ## Fields
 
 ### Chart / Role

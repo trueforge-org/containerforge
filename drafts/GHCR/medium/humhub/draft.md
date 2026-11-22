@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/humhub
 - **Source repository**: https://github.com/humhub/humhub
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/mriedmann/humhub-nginx
+- **Container image**: https://ghcr.io/mriedmann/humhub-phponly
+
 ## Fields
 
 ### Chart / Role

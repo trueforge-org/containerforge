@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/impostor-server
 - **Source repository**: https://github.com/AeonLucid/Impostor
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/aeonlucid/impostor
+
 ## Fields
 
 ### Chart / Role

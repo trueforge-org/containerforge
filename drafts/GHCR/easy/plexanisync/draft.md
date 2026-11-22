@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/RickDB/PlexAniSync
 - **Documentation**: https://github.com/RickDB/PlexAniSync/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/rickdb/plexanisync
+- **Source code repository**: https://github.com/RickDB/PlexAniSync/pkgs/container/plexanisync
+
 ## Fields
 
 ### Chart / Role

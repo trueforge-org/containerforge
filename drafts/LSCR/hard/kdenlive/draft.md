@@ -22,6 +22,12 @@
 - **Documentation**: https://docs.kdenlive.org/
 - **Website**: https://kdenlive.org
 
+## Potentially relevant resources
+
+- **Container image**: https://fleet.linuxserver.io/image?name=linuxserver/kdenlive
+- **Source code repository**: https://github.com/linuxserver/docker-kdenlive#readme
+- **Source code repository**: https://github.com/orgs/linuxserver/packages/container/package/kdenlive
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,10 @@
 - **Documentation**: https://metamanager.wiki/
 - **Documentation**: https://kometa.wiki/en/latest/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/meisnate12/plex-meta-manager
+
 ## Fields
 
 ### Chart / Role

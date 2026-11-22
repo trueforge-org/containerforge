@@ -21,6 +21,10 @@
 - **Website**: https://www.unix-ag.uni-kl.de/~bloch/acng/
 - **Documentation**: https://www.unix-ag.uni-kl.de/~bloch/acng/html/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/sameersbn/apt-cacher-ng
+
 ## Fields
 
 ### Chart / Role

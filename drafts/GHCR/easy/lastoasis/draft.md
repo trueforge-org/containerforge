@@ -21,6 +21,11 @@
 - **Website**: https://store.steampowered.com/app/903950/Last_Oasis/
 - **Website**: https://lastoasis.gg/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/steamcmd
+- **Steam store page**: https://store.steampowered.com
+
 ## Fields
 
 ### Chart / Role

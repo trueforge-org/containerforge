@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zwavejs2mqtt
 - **Source repository**: https://github.com/zwave-js/zwave-js-ui
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/zwave-js/zwave-js-ui
+
 ## Fields
 
 ### Chart / Role

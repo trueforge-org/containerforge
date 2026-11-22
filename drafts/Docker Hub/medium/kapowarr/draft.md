@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Casvt/Kapowarr
 - **Documentation**: https://casvt.github.io/Kapowarr
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mrcas/kapowarr
+
 ## Fields
 
 ### Chart / Role

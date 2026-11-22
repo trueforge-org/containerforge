@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Tzahi12345/YoutubeDL-Material
 - **Documentation**: https://github.com/Tzahi12345/YoutubeDL-Material/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tzahi12345/youtubedl-material
+
 ## Fields
 
 ### Chart / Role

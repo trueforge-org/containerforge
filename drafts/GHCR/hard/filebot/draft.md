@@ -21,6 +21,11 @@
 - **Website**: https://www.filebot.net/
 - **Documentation**: https://www.filebot.net/getting-started/index.html
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jlesage/filebot
+- **Source code repository**: https://github.com/jlesage/docker-filebot
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bentopdf
 - **Source repository**: https://github.com/alam00000/bentopdf
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/alam00000/bentopdf-simple
+
 ## Fields
 
 ### Chart / Role

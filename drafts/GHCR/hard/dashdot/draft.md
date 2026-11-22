@@ -22,6 +22,10 @@
 - **Documentation**: https://getdashdot.com/docs
 - **Website**: https://getdashdot.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/mauricenino/dashdot
+
 ## Fields
 
 ### Chart / Role

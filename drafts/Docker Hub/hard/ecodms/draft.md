@@ -22,6 +22,11 @@
 - **Documentation**: https://www.ecodms.de/de/download
 - **Website**: https://www.ecodms.de/de/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/ecodms/allinone-18.09
+- **Website**: https://www.ecodms.de/index.php/en
+
 ## Fields
 
 ### Chart / Role

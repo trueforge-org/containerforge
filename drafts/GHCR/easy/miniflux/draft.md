@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/miniflux/v2
 - **Documentation**: https://miniflux.app/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/miniflux/miniflux
+
 ## Fields
 
 ### Chart / Role

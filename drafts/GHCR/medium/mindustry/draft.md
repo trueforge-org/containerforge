@@ -22,6 +22,11 @@
 - **Documentation**: https://mindustrygame.github.io/wiki
 - **Website**: https://mindustrygame.github.io
 
+## Potentially relevant resources
+
+- **Website**: https://anuke.itch.io/mindustry
+- **Container image**: https://ghcr.io/ich777/mindustry-server
+
 ## Fields
 
 ### Chart / Role

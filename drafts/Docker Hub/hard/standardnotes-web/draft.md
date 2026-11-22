@@ -22,6 +22,11 @@
 - **Documentation**: https://standardnotes.com/help
 - **Website**: https://standardnotes.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/standardnotes/web
+- **Website**: https://standardnotes.org
+
 ## Fields
 
 ### Chart / Role

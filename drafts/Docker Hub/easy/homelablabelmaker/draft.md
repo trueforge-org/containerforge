@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/DavidSpek/homelablabelmaker
 - **Website**: https://homelablabelmaker.shurilla14.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/davidspek/homelablabelmaker
+
 ## Fields
 
 ### Chart / Role

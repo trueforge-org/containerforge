@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/maptiler/tileserver-gl
 - **Documentation**: https://tileserver.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/maptiler/tileserver-gl
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/broadcast-box
 - **Source repository**: https://github.com/Glimesh/broadcast-box
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/seaduboi/broadcast-box
+
 ## Fields
 
 ### Chart / Role

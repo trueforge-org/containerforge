@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-utills
 - **Source repository**: https://github.com/jkirkcaldy/plex-utills
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/jkirkcaldy/plex-utills
+
 ## Fields
 
 ### Chart / Role

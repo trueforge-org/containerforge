@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/unpoller
 - **Source repository**: https://github.com/unpoller/unpoller
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/unpoller/unpoller
+- **Source code repository**: https://github.com/unifi-poller/unifi-poller
+
 ## Fields
 
 ### Chart / Role

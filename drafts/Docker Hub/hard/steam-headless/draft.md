@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/steam-headless
 - **Website**: https://store.steampowered.com/about/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Steam-Headless/docker-steam-headless
+- **Container image**: https://hub.docker.com/r/josh5/steam-headless
+
 ## Fields
 
 ### Chart / Role

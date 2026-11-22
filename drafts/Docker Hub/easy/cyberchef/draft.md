@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/gchq/CyberChef
 - **Website**: https://gchq.github.io/CyberChef
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mpepping/cyberchef
+
 ## Fields
 
 ### Chart / Role

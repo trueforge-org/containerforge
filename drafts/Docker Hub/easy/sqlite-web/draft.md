@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sqlite-web
 - **Source repository**: https://github.com/coleifer/sqlite-web
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/coleifer/sqlite-web
+
 ## Fields
 
 ### Chart / Role

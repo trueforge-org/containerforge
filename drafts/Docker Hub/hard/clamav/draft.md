@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/Cisco-Talos/clamav
 - **Documentation**: https://docs.clamav.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/clamav/clamav
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/remotely
 - **Source repository**: https://github.com/immense/Remotely
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/immybot/remotely
+- **Website**: https://remotely.one
+
 ## Fields
 
 ### Chart / Role

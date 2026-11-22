@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/nicolargo/glances
 - **Documentation**: https://glances.readthedocs.io/en/develop/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/nicolargo/glances
+
 ## Fields
 
 ### Chart / Role

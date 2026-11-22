@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/damonlynch/rapid-photo-downloader
 - **Documentation**: https://damonlynch.net/rapid/documentation
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/rapidphotodownloader
+- **Website**: https://www.damonlynch.net/rapid
+
 ## Fields
 
 ### Chart / Role

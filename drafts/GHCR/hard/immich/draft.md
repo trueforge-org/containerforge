@@ -22,6 +22,11 @@
 - **Documentation**: https://docs.immich.app/
 - **Website**: https://immich.app/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/immich-app/immich-machine-learning
+- **Container image**: https://ghcr.io/immich-app/immich-server
+
 ## Fields
 
 ### Chart / Role

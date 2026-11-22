@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plant-it
 - **Source repository**: https://github.com/MDeLuise/plant-it
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/msdeluise/plant-it-server
+
 ## Fields
 
 ### Chart / Role

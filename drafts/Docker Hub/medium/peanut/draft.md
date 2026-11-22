@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/peanut
 - **Source repository**: https://github.com/Brandawg93/PeaNUT
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/brandawg93/peanut
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://wiki.filezilla-project.org/Documentation
 - **Website**: https://filezilla-project.org
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/filezilla
+- **Source code repository**: https://github.com/linuxserver/docker-filezilla
+
 ## Fields
 
 ### Chart / Role

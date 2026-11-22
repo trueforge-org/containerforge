@@ -22,6 +22,10 @@
 - **Documentation**: https://www.tinymediamanager.org/docs/
 - **Website**: https://www.tinymediamanager.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/tinymediamanager/tinymediamanager
+
 ## Fields
 
 ### Chart / Role

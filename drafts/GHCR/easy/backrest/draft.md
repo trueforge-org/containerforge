@@ -22,6 +22,10 @@
 - **Documentation**: https://garethgeorge.github.io/backrest/introduction/getting-started
 - **Website**: https://garethgeorge.github.io/backrest/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/garethgeorge/backrest
+
 ## Fields
 
 ### Chart / Role

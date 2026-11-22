@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rickroll
 - **Source repository**: https://github.com/modem7/docker-rickroll
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/modem7/docker-rickroll
+
 ## Fields
 
 ### Chart / Role

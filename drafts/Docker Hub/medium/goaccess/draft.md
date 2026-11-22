@@ -22,6 +22,10 @@
 - **Documentation**: https://goaccess.io/man
 - **Website**: https://goaccess.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/gregyankovoy/goaccess
+
 ## Fields
 
 ### Chart / Role

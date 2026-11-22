@@ -22,6 +22,10 @@
 - **Documentation**: https://wiki.archiveteam.org/index.php/ArchiveTeam_Warrior
 - **Website**: https://warriorhq.archiveteam.org/
 
+## Potentially relevant resources
+
+- No additional resources were listed in the TrueCharts chart sources.
+
 ## Fields
 
 ### Chart / Role

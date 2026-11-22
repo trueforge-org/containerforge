@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/Cog-Creators/Red-DiscordBot
 - **Documentation**: https://docs.discord.red/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/PhasecoreX/docker-red-discordbot
+- **Container image**: https://hub.docker.com/r/phasecorex/red-discordbot
+
 ## Fields
 
 ### Chart / Role

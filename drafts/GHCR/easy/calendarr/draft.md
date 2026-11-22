@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/calendarr
 - **Source repository**: https://github.com/jordanlambrecht/calendarr
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/jordanlambrecht/calendarr
+
 ## Fields
 
 ### Chart / Role

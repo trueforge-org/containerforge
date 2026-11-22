@@ -30,6 +30,20 @@
 - **Website**: https://gitlab.xfce.org/xfce
 - **Documentation**: https://neko.m1k1o.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/m1k1o/neko/brave
+- **Container image**: https://ghcr.io/m1k1o/neko/chromium
+- **Container image**: https://ghcr.io/m1k1o/neko/firefox
+- **Container image**: https://ghcr.io/m1k1o/neko/google-chrome
+- **Container image**: https://ghcr.io/m1k1o/neko/microsoft-edge
+- **Container image**: https://ghcr.io/m1k1o/neko/remmina
+- **Container image**: https://ghcr.io/m1k1o/neko/tor-browser
+- **Container image**: https://ghcr.io/m1k1o/neko/vivaldi
+- **Container image**: https://ghcr.io/m1k1o/neko/vlc
+- **Container image**: https://ghcr.io/m1k1o/neko/xfce
+- **Source code repository**: https://github.com/m1k1o/neko
+
 ## Fields
 
 ### Chart / Role

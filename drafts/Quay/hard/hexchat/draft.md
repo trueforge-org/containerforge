@@ -21,6 +21,13 @@
 - **Source repository**: https://github.com/hexchat/hexchat
 - **Documentation**: https://hexchat.readthedocs.io/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/binhex/documentation
+- **Website**: https://hexchat.github.io
+- **Container image**: https://quay.io/binhex/arch-hexchat
+- **Container image**: https://registry.hub.docker.com/r/binhex/arch-hexchat
+
 ## Fields
 
 ### Chart / Role

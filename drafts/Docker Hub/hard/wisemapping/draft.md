@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/wisemapping/wisemapping-open-source
 - **Website**: https://www.wisemapping.com/
 
+## Potentially relevant resources
+
+- **Website**: https://bitbucket.org/wisemapping/wisemapping-open-source/src/develop
+- **Container image**: https://hub.docker.com/r/wisemapping/wisemapping
+
 ## Fields
 
 ### Chart / Role

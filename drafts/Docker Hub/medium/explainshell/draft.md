@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/explainshell
 - **Source repository**: https://github.com/idank/explainshell
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/spaceinvaderone/explainshell
+
 ## Fields
 
 ### Chart / Role

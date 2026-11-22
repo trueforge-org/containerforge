@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ciao
 - **Source repository**: https://github.com/brotandgames/ciao
 
+## Potentially relevant resources
+
+- **Website**: https://brotandgames.com/ciao
+- **Container image**: https://hub.docker.com/r/brotandgames/ciao
+
 ## Fields
 
 ### Chart / Role

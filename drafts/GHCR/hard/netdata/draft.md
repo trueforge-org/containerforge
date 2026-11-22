@@ -22,6 +22,11 @@
 - **Documentation**: https://learn.netdata.cloud/
 - **Website**: https://www.netdata.cloud/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/netdata/netdata
+- **Source code repository**: https://github.com/netdata
+
 ## Fields
 
 ### Chart / Role

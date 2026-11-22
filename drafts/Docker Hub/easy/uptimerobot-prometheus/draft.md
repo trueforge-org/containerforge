@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/uptimerobot-prometheus
 - **Source repository**: https://github.com/lekpamartin/uptimerobot_exporter
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/k8s-at-home/charts/tree/master/charts/uptimerobot-prometheus
+- **Container image**: https://hub.docker.com/r/billimek/prometheus-uptimerobot-exporter
+
 ## Fields
 
 ### Chart / Role

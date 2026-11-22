@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fastcom-mqtt
 - **Source repository**: https://github.com/simonjenny/fastcom-mqtt
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/simonjenny/fastcom-mqtt
+
 ## Fields
 
 ### Chart / Role

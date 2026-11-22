@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/picoshare
 - **Source repository**: https://github.com/mtlynch/picoshare
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/mtlynch/picoshare
+
 ## Fields
 
 ### Chart / Role

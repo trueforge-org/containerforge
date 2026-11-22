@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.kde.org/?application=krusader
 - **Website**: https://krusader.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ich777/krusader
+
 ## Fields
 
 ### Chart / Role

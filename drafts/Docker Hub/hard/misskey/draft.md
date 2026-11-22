@@ -22,6 +22,10 @@
 - **Documentation**: https://misskey-hub.net/docs/
 - **Website**: https://misskey-hub.net/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/misskey/misskey
+
 ## Fields
 
 ### Chart / Role

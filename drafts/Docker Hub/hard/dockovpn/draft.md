@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/dockovpn/dockovpn
 - **Website**: https://dockovpn.io
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/alekslitvinenk/openvpn
+
 ## Fields
 
 ### Chart / Role

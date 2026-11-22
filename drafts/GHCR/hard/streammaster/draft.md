@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/streammaster
 - **Source repository**: https://github.com/carlreid/StreamMaster
 
+## Potentially relevant resources
+
+- **Website**: https://carlreid.github.io/StreamMaster
+- **Container image**: https://ghcr.io/carlreid/streammaster
+
 ## Fields
 
 ### Chart / Role

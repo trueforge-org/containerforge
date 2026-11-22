@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bwapp
 - **Website**: https://www.itsecgames.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/raesene/bwapp
+- **Website**: https://sourceforge.net/projects/bwapp
+
 ## Fields
 
 ### Chart / Role

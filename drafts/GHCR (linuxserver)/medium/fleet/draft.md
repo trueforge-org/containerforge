@@ -22,6 +22,10 @@
 - **Documentation**: https://fleetdm.com/docs
 - **Website**: https://fleetdm.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/fleet
+
 ## Fields
 
 ### Chart / Role

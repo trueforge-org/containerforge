@@ -22,6 +22,10 @@
 - **Documentation**: https://getontracks.org/manual
 - **Website**: https://getontracks.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/tracksapp/tracks
+
 ## Fields
 
 ### Chart / Role

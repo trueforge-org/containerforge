@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spaceengineers
 - **Website**: https://www.spaceengineersgame.com/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/Devidian/docker-spaceengineers
+- **Container image**: https://hub.docker.com/r/devidian/spaceengineers
+
 ## Fields
 
 ### Chart / Role

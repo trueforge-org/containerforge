@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/searxng/searxng
 - **Documentation**: https://docs.searxng.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/searxng/searxng
+
 ## Fields
 
 ### Chart / Role

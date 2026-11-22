@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/lrsjng/h5ai
 - **Website**: https://larsjung.de/h5ai/
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/awesometic/docker-h5ai
+- **Container image**: https://hub.docker.com/r/awesometic/h5ai
+
 ## Fields
 
 ### Chart / Role

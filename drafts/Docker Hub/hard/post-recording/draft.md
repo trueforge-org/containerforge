@@ -20,6 +20,11 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/post-recording
 - **Source repository**: https://github.com/erikkaashoek/Comskip
 
+## Potentially relevant resources
+
+- **Source code repository**: https://github.com/chacawaca/docker-post-recording
+- **Container image**: https://hub.docker.com/r/chacawaca/post-recording
+
 ## Fields
 
 ### Chart / Role

@@ -22,6 +22,11 @@
 - **Documentation**: https://goaccess.io/man
 - **Website**: https://goaccess.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/xavier-hernandez/goaccess-for-nginxproxymanager
+- **Source code repository**: https://github.com/xavier-hernandez/goaccess-for-nginxproxymanager
+
 ## Fields
 
 ### Chart / Role

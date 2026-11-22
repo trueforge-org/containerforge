@@ -21,6 +21,11 @@
 - **Source repository**: https://github.com/ErsatzTV/ErsatzTV
 - **Documentation**: https://ersatztv.org/docs/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ersatztv/ersatztv
+- **Source code repository**: https://github.com/jasongdove/ErsatzTV
+
 ## Fields
 
 ### Chart / Role

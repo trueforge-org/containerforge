@@ -23,6 +23,10 @@
 - **Documentation**: https://docs.archivebox.io/
 - **Website**: https://archivebox.io/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/archivebox/archivebox
+
 ## Fields
 
 ### Chart / Role

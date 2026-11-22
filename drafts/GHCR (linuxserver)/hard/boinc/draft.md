@@ -22,6 +22,10 @@
 - **Documentation**: https://github.com/BOINC/boinc/wiki/
 - **Website**: https://boinc.berkeley.edu/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/linuxserver/boinc
+
 ## Fields
 
 ### Chart / Role

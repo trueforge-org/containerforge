@@ -22,6 +22,10 @@
 - **Documentation**: https://docs.getoutline.com/
 - **Website**: https://www.getoutline.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/outlinewiki/outline
+
 ## Fields
 
 ### Chart / Role

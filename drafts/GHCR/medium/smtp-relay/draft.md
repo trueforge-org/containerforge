@@ -22,6 +22,11 @@
 - **Documentation**: https://www.exim.org/docs.html
 - **Website**: https://www.exim.org/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ix-ai/smtp
+- **Source code repository**: https://github.com/ix-ai/smtp
+
 ## Fields
 
 ### Chart / Role

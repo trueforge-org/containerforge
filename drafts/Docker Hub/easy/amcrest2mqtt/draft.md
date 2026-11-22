@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/amcrest2mqtt
 - **Source repository**: https://github.com/dchesterton/amcrest2mqtt
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/dchesterton/amcrest2mqtt
+
 ## Fields
 
 ### Chart / Role

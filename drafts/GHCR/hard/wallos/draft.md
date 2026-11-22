@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wallos
 - **Source repository**: https://github.com/ellite/Wallos
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/ellite/wallos
+
 ## Fields
 
 ### Chart / Role

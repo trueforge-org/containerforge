@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/chroma-core/chroma
 - **Documentation**: https://docs.trychroma.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/chroma-core/chroma
+
 ## Fields
 
 ### Chart / Role

@@ -20,6 +20,12 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/unifi
 - **Website**: https://ui.com/
 
+## Potentially relevant resources
+
+- **Container image**: https://ghcr.io/goofball222/unifi
+- **Source code repository**: https://github.com/jacobalberty/unifi-docker
+- **Website**: https://unifi-network.ui.com
+
 ## Fields
 
 ### Chart / Role

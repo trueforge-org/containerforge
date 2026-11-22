@@ -20,6 +20,10 @@
 - **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kodi-headless
 - **Source repository**: https://github.com/xbmc/xbmc
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/linuxserver/kodi-headless
+
 ## Fields
 
 ### Chart / Role

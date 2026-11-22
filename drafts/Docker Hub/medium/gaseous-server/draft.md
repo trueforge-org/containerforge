@@ -21,6 +21,10 @@
 - **Source repository**: https://github.com/gaseous-project/gaseous-server
 - **Documentation**: https://github.com/gaseous-project/gaseous-server/wiki
 
+## Potentially relevant resources
+
+- **Container image**: https://hub.docker.com/r/gaseousgames/gaseousserver
+
 ## Fields
 
 ### Chart / Role
