@@ -104,7 +104,7 @@ ENV talhelperVersion=3.1.17
 # renovate: datasource=github-releases depName=helmfile/helmfile
 ENV helmfileVersion=1.8.4
 # renovate: datasource=github-releases depName=kubecolor/kubecolor
-ENV kubecolorVersion=0.8.0
+ENV kubecolorVersion=0.9.0
 # renovate: datasource=github-releases depName=kubernetes-sigs/krew
 ENV krewVersion=0.5.0
 # renovate: datasource=github-releases depName=go-task/task
