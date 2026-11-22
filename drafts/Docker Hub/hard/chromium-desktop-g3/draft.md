@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://chromium.googlesource.com/chromium/src
+- **Documentation**: https://www.chromium.org/developers/
+- **Website**: https://www.chromium.org/
 
 ## Fields
 

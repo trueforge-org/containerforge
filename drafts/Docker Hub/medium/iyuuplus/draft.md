@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/ledccn/iyuuplus-dev
+- **Documentation**: http://doc.iyuu.cn/
+- **Website**: https://www.iyuu.cn/
 
 ## Fields
 

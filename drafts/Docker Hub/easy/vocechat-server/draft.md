@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Privoce/vocechat-server-rust
+- **Documentation**: https://doc.voce.chat/
+- **Website**: https://voce.chat/
 
 ## Fields
 

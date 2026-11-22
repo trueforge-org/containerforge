@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/obsidianmd/obsidian-releases
+- **Documentation**: https://help.obsidian.md/
+- **Website**: https://obsidian.md/
 
 ## Fields
 

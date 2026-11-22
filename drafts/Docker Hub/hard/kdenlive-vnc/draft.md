@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/KDE/kdenlive
+- **Documentation**: https://docs.kdenlive.org/en/
+- **Website**: https://kdenlive.org/
 
 ## Fields
 

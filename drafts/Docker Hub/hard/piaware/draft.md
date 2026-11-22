@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/flightaware/piaware
+- **Documentation**: https://www.flightaware.com/adsb/piaware/
+- **Website**: https://www.flightaware.com/adsb/piaware/
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/borgbackup/borg
+- **Documentation**: https://borgbackup.readthedocs.io/en/stable/
+- **Website**: https://www.borgbackup.org/
 
 ## Fields
 

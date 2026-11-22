@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://fileflows.com/
+- **Documentation**: https://fileflows.com/docs
 
 ## Fields
 

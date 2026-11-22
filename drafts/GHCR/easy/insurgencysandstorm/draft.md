@@ -17,6 +17,7 @@
 
 - **Website**: https://store.steampowered.com/app/581320/
 - **Website**: https://www.focus-entmt.com/games/insurgency-sandstorm
+- **Documentation**: https://developer.valvesoftware.com/wiki/Insurgency:_Sandstorm_Dedicated_Server
 
 ## Fields
 

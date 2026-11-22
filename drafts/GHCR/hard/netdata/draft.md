@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/netdata/netdata
+- **Documentation**: https://learn.netdata.cloud/
+- **Website**: https://www.netdata.cloud/
 
 ## Fields
 

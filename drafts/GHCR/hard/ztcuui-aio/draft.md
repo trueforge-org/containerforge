@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/kmahyyg/ztncui-aio
+- **Documentation**: https://github.com/key-networks/ztncui-containerized
 
 ## Fields
 

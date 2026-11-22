@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://gitlab.com/inkscape/inkscape
+- **Documentation**: https://wiki.inkscape.org/wiki/Main_Page
+- **Website**: https://inkscape.org/
 
 ## Fields
 

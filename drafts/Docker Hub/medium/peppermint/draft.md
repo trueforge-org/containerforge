@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Peppermint-Lab/peppermint
+- **Website**: https://peppermint.sh/
 
 ## Fields
 

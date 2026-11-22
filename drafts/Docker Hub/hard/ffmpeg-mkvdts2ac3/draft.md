@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://ffmpeg.org/
+- **Documentation**: https://ffmpeg.org/documentation.html
 
 ## Fields
 

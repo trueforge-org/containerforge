@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://www.dropbox.com/install
+- **Documentation**: https://help.dropbox.com/
+- **Website**: https://www.dropbox.com/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.makemkv.com/
+- **Documentation**: https://forum.makemkv.com/forum/
 
 ## Fields
 

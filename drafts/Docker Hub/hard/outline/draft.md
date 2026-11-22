@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/outline/outline
+- **Documentation**: https://docs.getoutline.com/
+- **Website**: https://www.getoutline.com/
 
 ## Fields
 

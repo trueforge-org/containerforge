@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/papermerge/papermerge-core
+- **Documentation**: https://docs.papermerge.io/
+- **Website**: https://papermerge.com/
 
 ## Fields
 

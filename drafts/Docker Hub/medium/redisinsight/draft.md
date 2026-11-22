@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/redis/RedisInsight
 - **Documentation**: https://redis.io/docs/latest/operate/redisinsight/
+- **Website**: https://redis.io/insight/
 
 ## Fields
 

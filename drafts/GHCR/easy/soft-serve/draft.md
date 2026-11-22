@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/charmbracelet/soft-serve
+- **Website**: https://charm.land/
 
 ## Fields
 

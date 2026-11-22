@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/Ultimaker/Cura
 - **Documentation**: https://github.com/Ultimaker/Cura/wiki/Getting-Started
+- **Documentation**: https://support.ultimaker.com/s/topic/0TO5b000000Q4udGAC/manuals
+- **Website**: https://ultimaker.com/software/ultimaker-cura/
 
 ## Fields
 

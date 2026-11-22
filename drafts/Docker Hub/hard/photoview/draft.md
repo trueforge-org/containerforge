@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/photoview/photoview
+- **Documentation**: https://photoview.github.io/
+- **Website**: https://photoview.github.io/
 
 ## Fields
 

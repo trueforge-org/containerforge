@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/misskey-dev/misskey
+- **Documentation**: https://misskey-hub.net/docs/
+- **Website**: https://misskey-hub.net/
 
 ## Fields
 

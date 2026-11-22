@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/meisnate12/Plex-Meta-Manager
 - **Documentation**: https://metamanager.wiki/
+- **Documentation**: https://kometa.wiki/en/latest/
 
 ## Fields
 

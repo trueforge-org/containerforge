@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/debridmediamanager/zurg-public
+- **Documentation**: https://github.com/debridmediamanager/zurg-public/wiki
 
 ## Fields
 

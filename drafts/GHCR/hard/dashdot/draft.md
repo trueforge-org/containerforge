@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/MauriceNino/dashdot
+- **Documentation**: https://getdashdot.com/docs
+- **Website**: https://getdashdot.com/
 
 ## Fields
 

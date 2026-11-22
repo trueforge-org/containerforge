@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.filebot.net/
+- **Documentation**: https://www.filebot.net/getting-started/index.html
 
 ## Fields
 

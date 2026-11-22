@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/traggo/server
+- **Documentation**: https://traggo.net/install/
+- **Website**: https://traggo.net/
 
 ## Fields
 

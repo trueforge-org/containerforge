@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/causefx/Organizr
+- **Documentation**: https://docs.organizr.app/
 
 ## Fields
 

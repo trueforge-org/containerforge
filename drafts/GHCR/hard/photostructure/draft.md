@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/photostructure/photostructure-for-servers
+- **Documentation**: https://photostructure.com/docs/
+- **Website**: https://photostructure.com/
 
 ## Fields
 

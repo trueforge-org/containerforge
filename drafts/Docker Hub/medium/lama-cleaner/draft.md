@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/Sanster/lama-cleaner
 - **Documentation**: https://lama-cleaner-docs.vercel.app
+- **Documentation**: https://www.iopaint.com/install/download_model
+- **Website**: https://www.iopaint.com/
 
 ## Fields
 

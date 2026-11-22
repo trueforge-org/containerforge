@@ -25,6 +25,7 @@
 - **Website**: https://vivaldi.com
 - **Website**: https://code.videolan.org/videolan/vlc
 - **Website**: https://gitlab.xfce.org/xfce
+- **Documentation**: https://neko.m1k1o.net/
 
 ## Fields
 

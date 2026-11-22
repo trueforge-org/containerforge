@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/TheDavidDelta/lingva-translate
 - **Website**: https://lingva.ml
+- **Website**: https://lingva.ml/
 
 ## Fields
 

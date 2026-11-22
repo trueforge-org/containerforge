@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Mintplex-Labs/anything-llm
+- **Documentation**: https://docs.anythingllm.com/
+- **Website**: https://anythingllm.com/
 
 ## Fields
 

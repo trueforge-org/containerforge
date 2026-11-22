@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/static-web-server/static-web-server
+- **Documentation**: https://static-web-server.net/
 
 ## Fields
 

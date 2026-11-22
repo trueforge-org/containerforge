@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/HandBrake/HandBrake
+- **Documentation**: https://handbrake.fr/docs/
+- **Website**: https://handbrake.fr/
 
 ## Fields
 

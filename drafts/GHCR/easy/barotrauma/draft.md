@@ -17,6 +17,7 @@
 
 - **Website**: https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
 - **Documentation**: https://barotraumagame.com/wiki/Serversettings.xml
+- **Website**: https://barotraumagame.com/
 
 ## Fields
 

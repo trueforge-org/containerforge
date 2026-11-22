@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/tsightler/ring-mqtt
+- **Documentation**: https://github.com/tsightler/ring-mqtt/wiki
 
 ## Fields
 

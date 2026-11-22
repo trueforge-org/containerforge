@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/openspeedtest/Speed-Test
+- **Website**: https://openspeedtest.com/
 
 ## Fields
 

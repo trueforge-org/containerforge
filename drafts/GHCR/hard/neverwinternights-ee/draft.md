@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/704450/
+- **Website**: https://www.beamdog.com/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://jdownloader.org/
+- **Documentation**: https://support.jdownloader.org/en
 
 ## Fields
 

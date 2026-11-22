@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/paperless-ngx/paperless-ngx
+- **Documentation**: https://github.com/paperless-ngx/paperless-ngx/tree/dev/docs
 
 ## Fields
 

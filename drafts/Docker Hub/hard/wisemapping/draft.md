@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/wisemapping/wisemapping-open-source
+- **Website**: https://www.wisemapping.com/
 
 ## Fields
 

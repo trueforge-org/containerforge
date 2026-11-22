@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/afterlogic/aurora-files
+- **Documentation**: https://afterlogic.com/docs
+- **Website**: https://afterlogic.com/
 
 ## Fields
 

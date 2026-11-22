@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/standardnotes/app
+- **Documentation**: https://standardnotes.com/help
+- **Website**: https://standardnotes.com/
 
 ## Fields
 

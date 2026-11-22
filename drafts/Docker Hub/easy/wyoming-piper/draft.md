@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/rhasspy/wyoming-piper
+- **Documentation**: https://www.home-assistant.io/integrations/piper/
 
 ## Fields
 

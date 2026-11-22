@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/730
+- **Documentation**: https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers
+- **Website**: https://www.counter-strike.net/
 
 ## Fields
 

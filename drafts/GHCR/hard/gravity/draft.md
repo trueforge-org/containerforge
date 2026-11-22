@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/BeryJu/gravity
+- **Documentation**: https://gravity.beryju.io/docs/
+- **Website**: https://gravity.beryju.io/
 
 ## Fields
 

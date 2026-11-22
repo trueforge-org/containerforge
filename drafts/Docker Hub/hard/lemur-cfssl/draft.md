@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/Netflix/lemur
 - **Documentation**: https://lemur.readthedocs.io/
+- **Documentation**: https://lemur.readthedocs.io/en/latest/
 
 ## Fields
 

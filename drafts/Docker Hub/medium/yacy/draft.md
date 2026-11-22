@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/yacy/yacy_search_server
 - **Documentation**: https://yacy.net/docs/
+- **Documentation**: https://yacy.net/download_installation/
+- **Website**: https://yacy.net/
 
 ## Fields
 

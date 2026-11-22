@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/500/Left_4_Dead/
+- **Documentation**: https://developer.valvesoftware.com/wiki/Left_4_Dead_Dedicated_Server
+- **Website**: https://www.l4d.com/
 
 ## Fields
 

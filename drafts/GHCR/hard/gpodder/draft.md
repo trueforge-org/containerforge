@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/gpodder/gpodder
+- **Documentation**: https://gpodder.github.io/docs/
+- **Website**: https://gpodder.github.io/
 
 ## Fields
 

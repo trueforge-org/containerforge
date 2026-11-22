@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/toeverything/AFFiNE
+- **Documentation**: https://docs.affine.pro/
+- **Website**: https://affine.pro/
 
 ## Fields
 

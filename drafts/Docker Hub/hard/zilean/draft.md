@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/iPromKnight/zilean
+- **Documentation**: https://ipromknight.github.io/zilean/
 
 ## Fields
 

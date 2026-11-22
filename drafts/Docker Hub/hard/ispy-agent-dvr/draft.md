@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.ispyconnect.com/
+- **Documentation**: https://www.ispyconnect.com/docs/agent/
 
 ## Fields
 

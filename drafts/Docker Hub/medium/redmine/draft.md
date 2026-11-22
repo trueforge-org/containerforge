@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/redmine/redmine
 - **Documentation**: https://www.redmine.org/projects/redmine/wiki
+- **Website**: https://www.redmine.org/
 
 ## Fields
 

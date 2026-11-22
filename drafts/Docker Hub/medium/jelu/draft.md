@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/bayang/jelu
+- **Documentation**: https://bayang.github.io/jelu-web/
 
 ## Fields
 

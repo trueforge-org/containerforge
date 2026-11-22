@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/FrozenSand/ioq3-for-UrbanTerror-4
+- **Website**: https://www.urbanterror.info/home/
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://www.ecodms.de/
+- **Documentation**: https://www.ecodms.de/de/download
+- **Website**: https://www.ecodms.de/de/
 
 ## Fields
 

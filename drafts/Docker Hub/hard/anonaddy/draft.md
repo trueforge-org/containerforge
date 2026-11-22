@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/anonaddy/anonaddy
+- **Documentation**: https://addy.io/help/
+- **Website**: https://addy.io/
 
 ## Fields
 

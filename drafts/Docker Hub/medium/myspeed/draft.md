@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/gnmyt/myspeed
 - **Website**: https://myspeed.dev
+- **Documentation**: https://docs.myspeed.dev/setup/linux
+- **Website**: https://myspeed.dev/
 
 ## Fields
 

@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/OpenTTD/OpenTTD
 - **Documentation**: https://wiki.openttd.org/
+- **Documentation**: https://wiki.openttd.org/en/
+- **Website**: https://www.openttd.org/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/teslamate-org/teslamate
+- **Documentation**: https://docs.teslamate.org/
 
 ## Fields
 

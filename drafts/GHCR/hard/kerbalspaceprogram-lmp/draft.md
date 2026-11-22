@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/LunaMultiplayer/LunaMultiplayer
+- **Documentation**: https://github.com/LunaMultiplayer/LunaMultiplayer/wiki
+- **Website**: https://lunamultiplayer.com/
 
 ## Fields
 

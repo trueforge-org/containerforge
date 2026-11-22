@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/plausible/analytics
+- **Documentation**: https://plausible.io/docs
+- **Website**: https://plausible.io/
 
 ## Fields
 

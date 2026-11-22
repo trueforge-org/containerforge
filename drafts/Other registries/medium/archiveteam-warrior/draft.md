@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/ArchiveTeam/warrior-code2
 - **Documentation**: https://wiki.archiveteam.org/index.php/ArchiveTeam_Warrior
+- **Website**: https://warriorhq.archiveteam.org/
 
 ## Fields
 

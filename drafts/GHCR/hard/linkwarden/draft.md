@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/linkwarden/linkwarden
+- **Documentation**: https://docs.linkwarden.app/
+- **Website**: https://linkwarden.app/
 
 ## Fields
 

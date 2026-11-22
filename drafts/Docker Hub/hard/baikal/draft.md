@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/sabre-io/Baikal
+- **Documentation**: https://sabre.io/baikal/
+- **Website**: https://sabre.io/baikal/
 
 ## Fields
 

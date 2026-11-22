@@ -17,6 +17,7 @@
 
 - **Website**: https://min.io/product/aistor
 - **Documentation**: https://docs.min.io/aistor
+- **Documentation**: https://docs.min.io/aistor/
 
 ## Fields
 

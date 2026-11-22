@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/apache/httpd
+- **Documentation**: https://httpd.apache.org/docs/
+- **Website**: https://httpd.apache.org/
 
 ## Fields
 

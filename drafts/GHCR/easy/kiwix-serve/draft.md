@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/kiwix/kiwix-tools
 - **Documentation**: https://kiwix-tools.readthedocs.org/en/latest/?badge=latest
+- **Documentation**: https://wiki.kiwix.org/wiki/Kiwix-serve
+- **Website**: https://kiwix.org/en/
 
 ## Fields
 

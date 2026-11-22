@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/AlistGo/alist
+- **Documentation**: https://alistgo.com/guide/
+- **Website**: https://alistgo.com/
 
 ## Fields
 

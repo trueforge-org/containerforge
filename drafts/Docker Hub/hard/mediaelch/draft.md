@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/Komet/MediaElch
 - **Documentation**: https://mediaelch.github.io/mediaelch-doc/about.html
+- **Documentation**: https://github.com/Komet/MediaElch/wiki
+- **Website**: https://www.mediaelch.de/
 
 ## Fields
 

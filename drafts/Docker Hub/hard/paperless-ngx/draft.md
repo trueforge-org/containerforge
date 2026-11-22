@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/gotenberg/gotenberg
+- **Documentation**: https://paperless-ngx.readthedocs.io/en/latest/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/rembo10/headphones
+- **Documentation**: https://github.com/rembo10/headphones/wiki
 
 ## Fields
 

@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/lancachenet/monolithic
 - **Documentation**: http://lancache.net/docs/containers/monolithic/
+- **Documentation**: https://lancache.net/docs/
+- **Website**: https://lancache.net/
 
 ## Fields
 

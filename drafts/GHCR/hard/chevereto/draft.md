@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/rodber/chevereto-free
+- **Documentation**: https://v4-docs.chevereto.com/
+- **Website**: https://chevereto.com/
 
 ## Fields
 

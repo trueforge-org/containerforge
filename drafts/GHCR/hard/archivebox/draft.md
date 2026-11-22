@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/ArchiveBox/ArchiveBox
 - **Documentation**: https://github.com/ArchiveBox/ArchiveBox/wiki
+- **Documentation**: https://docs.archivebox.io/
+- **Website**: https://archivebox.io/
 
 ## Fields
 

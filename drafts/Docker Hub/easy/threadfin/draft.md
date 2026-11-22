@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Threadfin/Threadfin
+- **Documentation**: https://github.com/Threadfin/Threadfin/wiki
 
 ## Fields
 

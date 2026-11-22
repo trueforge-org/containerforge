@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/homarr-labs/homarr
+- **Documentation**: https://homarr.dev/docs/
+- **Website**: https://homarr.dev/
 
 ## Fields
 

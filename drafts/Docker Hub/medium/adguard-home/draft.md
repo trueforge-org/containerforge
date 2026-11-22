@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/AdguardTeam/AdGuardHome
 - **Documentation**: https://adguard-dns.io/kb/adguard-home/overview/
+- **Documentation**: https://adguard-dns.io/kb/adguard-home/getting-started/
+- **Website**: https://adguard.com/en/adguard-home/overview.html
 
 ## Fields
 

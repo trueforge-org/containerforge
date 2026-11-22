@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/KDE/krusader
+- **Documentation**: https://docs.kde.org/?application=krusader
+- **Website**: https://krusader.org/
 
 ## Fields
 

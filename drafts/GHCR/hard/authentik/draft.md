@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/goauthentik/authentik
 - **Documentation**: https://docs.goauthentik.io
+- **Documentation**: https://docs.goauthentik.io/
+- **Website**: https://goauthentik.io/
 
 ## Fields
 

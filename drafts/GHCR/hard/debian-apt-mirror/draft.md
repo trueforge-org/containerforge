@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/apt-mirror/apt-mirror
+- **Documentation**: https://manpages.debian.org/trixie/apt-mirror/apt-mirror.1.en.html
 
 ## Fields
 

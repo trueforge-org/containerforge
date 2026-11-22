@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/ONLYOFFICE/DocumentServer
+- **Documentation**: https://helpcenter.onlyoffice.com/docs/
+- **Website**: https://www.onlyoffice.com/
 
 ## Fields
 

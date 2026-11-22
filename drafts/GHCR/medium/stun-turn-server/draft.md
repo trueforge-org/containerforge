@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/coturn/coturn
 - **Website**: https://coturn.github.io/
+- **Documentation**: https://github.com/coturn/coturn/wiki
+- **Website**: https://coturn.net/
 
 ## Fields
 

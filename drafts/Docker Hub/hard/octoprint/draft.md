@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/OctoPrint/OctoPrint
+- **Documentation**: https://docs.octoprint.org/en/main/
+- **Website**: https://octoprint.org/
 
 ## Fields
 

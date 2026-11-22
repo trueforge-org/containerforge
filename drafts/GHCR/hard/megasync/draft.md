@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/meganz/MEGAsync
+- **Documentation**: https://help.mega.io/installs-apps/desktop
+- **Website**: https://mega.io/desktop
 
 ## Fields
 

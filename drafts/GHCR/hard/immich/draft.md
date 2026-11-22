@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/immich-app/immich
+- **Documentation**: https://docs.immich.app/
+- **Website**: https://immich.app/
 
 ## Fields
 

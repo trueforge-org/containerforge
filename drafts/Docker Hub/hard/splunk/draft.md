@@ -17,6 +17,7 @@
 
 - **Website**: https://www.splunk.com/en_us/download/splunk-enterprise.html
 - **Documentation**: https://docs.splunk.com/Documentation/Splunk
+- **Documentation**: https://help.splunk.com/en
 
 ## Fields
 

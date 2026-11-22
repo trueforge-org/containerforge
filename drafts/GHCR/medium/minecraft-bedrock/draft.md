@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.minecraft.net/en-us/download/server/bedrock
+- **Documentation**: https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockserver/getting-started
 
 ## Fields
 

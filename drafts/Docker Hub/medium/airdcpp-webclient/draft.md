@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/airdcpp-web/airdcpp-webclient
+- **Documentation**: http://airdcpp.net/docs/installation/installation.html
+- **Website**: http://airdcpp.net/
 
 ## Fields
 

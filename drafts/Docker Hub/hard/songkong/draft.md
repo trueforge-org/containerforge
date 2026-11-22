@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.jthink.net/songkong/
+- **Documentation**: https://www.jthink.net/songkong/tutorial.jsp
 
 ## Fields
 

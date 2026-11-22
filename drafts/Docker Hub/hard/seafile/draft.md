@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/haiwen/seafile-server
+- **Documentation**: https://manual.seafile.com/
+- **Website**: https://www.seafile.com/
 
 ## Fields
 

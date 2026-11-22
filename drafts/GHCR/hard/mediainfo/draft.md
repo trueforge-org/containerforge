@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/MediaArea/MediaInfo
+- **Documentation**: https://mediaarea.net/en/MediaInfo/Support
+- **Website**: https://mediaarea.net/en/MediaInfo
 
 ## Fields
 

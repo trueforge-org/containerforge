@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/homebridge/homebridge
+- **Documentation**: https://homebridge.io/docs/
+- **Website**: https://homebridge.io/
 
 ## Fields
 

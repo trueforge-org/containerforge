@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/pawelmalak/flame
+- **Documentation**: https://github.com/pawelmalak/flame/wiki
 
 ## Fields
 

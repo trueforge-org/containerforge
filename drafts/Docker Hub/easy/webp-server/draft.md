@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/webp-sh/webp_server_go
+- **Documentation**: https://docs.webp.sh/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/gaseous-project/gaseous-server
+- **Documentation**: https://github.com/gaseous-project/gaseous-server/wiki
 
 ## Fields
 

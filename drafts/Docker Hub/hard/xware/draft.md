@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.xunlei.com/
+- **Documentation**: https://help.xunlei.com/
 
 ## Fields
 

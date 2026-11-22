@@ -17,6 +17,8 @@
 
 - **Source repository**: https://github.com/YOURLS/YOURLS
 - **Documentation**: https://docs.yourls.org
+- **Documentation**: https://yourls.org/docs
+- **Website**: https://yourls.org/
 
 ## Fields
 

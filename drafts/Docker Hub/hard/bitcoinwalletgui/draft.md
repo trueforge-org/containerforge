@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/bitcoin/bitcoin
+- **Documentation**: https://bitcoincore.org/en/doc/
+- **Website**: https://bitcoincore.org/
 
 ## Fields
 

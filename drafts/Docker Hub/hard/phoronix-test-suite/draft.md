@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/phoronix-test-suite/phoronix-test-suite
+- **Documentation**: https://www.phoronix-test-suite.com/?k=docs
+- **Website**: https://phoronix-test-suite.com/
 
 ## Fields
 

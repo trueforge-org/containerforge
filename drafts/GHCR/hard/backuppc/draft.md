@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/backuppc/backuppc
+- **Documentation**: https://backuppc.github.io/backuppc/
 
 ## Fields
 

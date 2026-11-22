@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/automatic-ripping-machine/automatic-ripping-machine
+- **Documentation**: https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki
 
 ## Fields
 

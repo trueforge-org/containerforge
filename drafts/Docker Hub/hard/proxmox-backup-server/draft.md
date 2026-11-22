@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/ayufan/pve-backup-server-dockerfiles
+- **Documentation**: https://pbs.proxmox.com/docs/
+- **Website**: https://www.proxmox.com/en/products/proxmox-backup-server/overview
 
 ## Fields
 

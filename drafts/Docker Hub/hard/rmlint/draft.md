@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/sahib/rmlint
+- **Documentation**: https://rmlint.readthedocs.io/en/master/
+- **Website**: https://rmlint.readthedocs.io/
 
 ## Fields
 

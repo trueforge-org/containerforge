@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/pi-hole/pi-hole
+- **Documentation**: https://docs.pi-hole.net/
+- **Website**: https://pi-hole.net/
 
 ## Fields
 

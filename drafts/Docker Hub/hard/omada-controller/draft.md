@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://www.tp-link.com/en/omada-sdn/
+- **Documentation**: https://www.omadanetworks.com/en/support/
+- **Website**: https://www.omadanetworks.com/
 
 ## Fields
 
