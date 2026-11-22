@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/pyload
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python download manager installed with pip on the python base.
+
 ## Fields
 
 ### Chart / Role

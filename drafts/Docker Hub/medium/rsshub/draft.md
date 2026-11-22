@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/browserless/chrome
 - **Container image**: https://hub.docker.com/r/diygod/rsshub
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app built with pnpm, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

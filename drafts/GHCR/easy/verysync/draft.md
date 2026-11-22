@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/jonnyan404/verysync
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: prebuilt linux tarballs with no language stated, so ubuntu.
+
 ## Fields
 
 ### Chart / Role

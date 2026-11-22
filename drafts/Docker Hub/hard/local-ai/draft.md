@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/go-skynet/LocalAI
 - **Container image**: https://hub.docker.com/r/localai/localai
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server from release binaries on ubuntu, CPU variant only.
+
 ## Fields
 
 ### Chart / Role

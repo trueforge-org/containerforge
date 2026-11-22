@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/doitandbedone/ispyagentdvr-docker
 - **Container image**: https://hub.docker.com/r/doitandbedone/ispyagentdvr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET vendor zip unpacked onto ubuntu with libgdiplus and ffmpeg.
+
 ## Fields
 
 ### Chart / Role

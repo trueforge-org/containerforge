@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/ofsm/ofsm
 - **Container image**: https://registry.hub.docker.com/r/ofsm/ofsm
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node manager that starts headless game servers.
+
 ## Fields
 
 ### Chart / Role

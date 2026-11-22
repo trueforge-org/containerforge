@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/hotio/rflood
 - **Container image**: https://hotio.dev/containers/rflood
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: rtorrent from apt plus a Node.js web UI, so Node is the second runtime.
+
 ## Fields
 
 ### Chart / Role

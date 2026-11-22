@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/k8s-at-home/container-images
 - **Container image**: https://hub.docker.com/_/registry
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Registry Go binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

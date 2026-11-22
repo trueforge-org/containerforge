@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/m0ngr31/dailynotes
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: python
+- **Reason**: Python and Node are both needed, so python-node provides both runtimes.
+
 ## Fields
 
 ### Chart / Role

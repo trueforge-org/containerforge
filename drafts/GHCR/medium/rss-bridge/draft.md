@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/rss-bridge/rss-bridge
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP web app run with PHP packages from apt.
+
 ## Fields
 
 ### Chart / Role

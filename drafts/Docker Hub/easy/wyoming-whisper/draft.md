@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/home-assistant/addons/tree/master/whisper
 - **Container image**: https://hub.docker.com/r/rhasspy/wyoming-whisper
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Wyoming server with faster-whisper installed from pip.
+
 ## Fields
 
 ### Chart / Role

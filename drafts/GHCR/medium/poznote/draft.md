@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/timothepoznanski/poznote
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Pure PHP application with PHP installed from Ubuntu apt.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/privoce/vocechat-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static musl Rust binary copied into /app.
+
 ## Fields
 
 ### Chart / Role

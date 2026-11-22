@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/wekanteam/wekan
 - **Website**: https://wekan.github.io
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js Meteor-style server bundle, which needs only node from python-node.
+
 ## Fields
 
 ### Chart / Role

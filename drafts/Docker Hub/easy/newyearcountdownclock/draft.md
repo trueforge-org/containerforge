@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/modem7/newyearcountdown
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static HTML and JS site served by nginx.
+
 ## Fields
 
 ### Chart / Role

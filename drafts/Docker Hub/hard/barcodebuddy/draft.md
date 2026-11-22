@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/f0rc3/barcodebuddy
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP web app with a Go supervisor binary, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

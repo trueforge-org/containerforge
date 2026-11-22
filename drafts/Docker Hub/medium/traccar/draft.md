@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/traccar/traccar
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: java21
+- **Reason**: The input says Java 17 or later is needed, so java17 is the minimum that fits.
+
 ## Fields
 
 ### Chart / Role

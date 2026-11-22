@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/davidspek/homelablabelmaker
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static label-maker files served by nginx.
+
 ## Fields
 
 ### Chart / Role

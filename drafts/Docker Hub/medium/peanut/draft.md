@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/brandawg93/peanut
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js app built with pnpm, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

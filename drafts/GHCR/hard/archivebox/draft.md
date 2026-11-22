@@ -27,6 +27,12 @@
 
 - **Container image**: https://ghcr.io/archivebox/archivebox
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python package installed with pip.
+
 ## Fields
 
 ### Chart / Role

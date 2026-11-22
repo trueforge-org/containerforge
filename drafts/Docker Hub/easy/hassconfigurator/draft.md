@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/causticlab/hass-configurator-docker
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web editor installed from PyPI with pip.
+
 ## Fields
 
 ### Chart / Role

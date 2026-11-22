@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/miniflux/miniflux
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary with release builds for amd64 and arm64.
+
 ## Fields
 
 ### Chart / Role

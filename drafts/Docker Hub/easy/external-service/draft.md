@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/_/alpine
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Placeholder minirootfs image with no application, so the ubuntu base plus a keepalive command suffices.
+
 ## Fields
 
 ### Chart / Role

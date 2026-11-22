@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/openspeedtest/latest
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static HTML and JavaScript served by a web server, so nginx is the main runtime.
+
 ## Fields
 
 ### Chart / Role

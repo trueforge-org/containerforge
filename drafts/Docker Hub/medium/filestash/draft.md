@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/machines/filestash
 - **Website**: https://www.filestash.app
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Go backend with a Node frontend build; ubuntu hosts the Go runtime and python-node covers the build side.
+
 ## Fields
 
 ### Chart / Role

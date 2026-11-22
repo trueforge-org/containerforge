@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/xanderstrike/goplaxt
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go OAuth bridge compiled from source with a modern Go toolchain.
+
 ## Fields
 
 ### Chart / Role

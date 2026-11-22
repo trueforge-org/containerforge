@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/edchamberlain/namecheap_ddns
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script that needs only requests, installed with pip.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/garethgeorge/backrest
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go release binaries run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

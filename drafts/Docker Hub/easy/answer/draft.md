@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/answerdev/answer
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go server binary with data under /config.
+
 ## Fields
 
 ### Chart / Role

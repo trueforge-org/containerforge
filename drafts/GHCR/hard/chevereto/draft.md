@@ -27,6 +27,12 @@
 - **Website**: https://chevereto-free.github.io/setup/stable/environment.html#image-handling-variables
 - **Container image**: https://ghcr.io/rodber/chevereto-free
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP via apt on ubuntu per the PHP rule.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/kubernetes-csi/external-snapshotter
 - **Container image**: https://quay.io/csiaddons/k8s-controller
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go Kubernetes controller compiled from source.
+
 ## Fields
 
 ### Chart / Role

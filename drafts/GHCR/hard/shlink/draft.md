@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/shlinkio/shlink
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP 8.5 app with composer deps and PHP extensions installed via apt.
+
 ## Fields
 
 ### Chart / Role

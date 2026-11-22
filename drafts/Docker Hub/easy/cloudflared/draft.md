@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/cloudflare/cloudflared
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single Go binary installed on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

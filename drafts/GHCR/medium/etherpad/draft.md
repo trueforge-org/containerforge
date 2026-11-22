@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ether/etherpad
 - **Source code repository**: https://github.com/ether/etherpad-lite
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server built with pnpm.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/pi-hole
 - **Source code repository**: https://github.com/pi-hole/docker-pi-hole
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: C DNS daemon with PHP web UI and cron, all installable via apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

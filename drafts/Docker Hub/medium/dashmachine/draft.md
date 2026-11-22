@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/rmountjoy/dashmachine
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web app with gunicorn from pip, so python fits.
+
 ## Fields
 
 ### Chart / Role

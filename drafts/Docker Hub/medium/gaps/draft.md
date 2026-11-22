@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/housewrecker/gaps
 
+## Base container
+
+- **Primary**: java11
+- **Alternative**: none
+- **Reason**: Java app with java11 named in the reason.
+
 ## Fields
 
 ### Chart / Role

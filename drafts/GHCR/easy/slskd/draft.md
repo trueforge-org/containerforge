@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/slskd/slskd
 - **Source code repository**: https://github.com/ansible-slskd/slskd
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET server in a release zip, on ubuntu per the .NET rule.
+
 ## Fields
 
 ### Chart / Role

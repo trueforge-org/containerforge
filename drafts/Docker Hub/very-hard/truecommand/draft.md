@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/ixsystems/truecommand
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: no redistributable artifact or source exists, so ubuntu is a default placeholder.
+
 ## Fields
 
 ### Chart / Role

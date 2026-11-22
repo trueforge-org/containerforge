@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/mriedmann/humhub-nginx
 - **Container image**: https://ghcr.io/mriedmann/humhub-phponly
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: nginx frontend serving static HumHub assets; the PHP-FPM half is a separate container.
+
 ## Fields
 
 ### Chart / Role

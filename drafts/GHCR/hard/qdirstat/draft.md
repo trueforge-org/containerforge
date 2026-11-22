@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jlesage/qdirstat
 - **Source code repository**: https://github.com/jlesage/docker-qdirstat
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt desktop tool installed from apt.
+
 ## Fields
 
 ### Chart / Role

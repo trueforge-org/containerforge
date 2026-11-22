@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/Dispatcharr/Dispatcharr/blob/main/docker/docker-compose.aio.yml
 - **Container image**: https://hub.docker.com/_/alpine
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: python-node
+- **Reason**: Python Django runtime; node is needed only for the frontend build.
+
 ## Fields
 
 ### Chart / Role

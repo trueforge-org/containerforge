@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/k8s-at-home/charts/tree/master/charts/uptimerobot-prometheus
 - **Container image**: https://hub.docker.com/r/billimek/prometheus-uptimerobot-exporter
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Pure Python exporter that needs requests, installed with pip.
+
 ## Fields
 
 ### Chart / Role

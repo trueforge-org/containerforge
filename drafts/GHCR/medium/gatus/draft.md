@@ -28,6 +28,12 @@
 - **Container image**: https://ghcr.io/twin/gatus
 - **Source code repository**: https://github.com/home-operations/gatus-sidecar
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single static Go binary built in a Go stage.
+
 ## Fields
 
 ### Chart / Role

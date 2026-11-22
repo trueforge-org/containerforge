@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/jlesage/jdownloader-2
 - **Source code repository**: https://github.com/jlesage/docker-jdownloader-2
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java app with no version named, so java17 is used by default.
+
 ## Fields
 
 ### Chart / Role

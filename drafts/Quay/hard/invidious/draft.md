@@ -25,6 +25,12 @@
 - **Website**: https://docs.invidious.io/installation/#docker
 - **Container image**: https://quay.io/invidious/invidious
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Crystal app compiled to a glibc binary on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

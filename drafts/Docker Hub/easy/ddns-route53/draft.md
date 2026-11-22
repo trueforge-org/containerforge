@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/crazymax/ddns-route53
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single Go binary run from the release tarball.
+
 ## Fields
 
 ### Chart / Role

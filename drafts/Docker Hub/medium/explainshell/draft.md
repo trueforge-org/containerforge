@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/spaceinvaderone/explainshell
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python web app installed by pip, so python fits.
+
 ## Fields
 
 ### Chart / Role

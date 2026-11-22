@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/toeverything/affine
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js monorepo with no Python needs; Rust napi is a build step.
+
 ## Fields
 
 ### Chart / Role

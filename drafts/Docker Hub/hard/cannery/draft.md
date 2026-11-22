@@ -25,6 +25,12 @@
 - **Website**: https://gitea.bubbletea.dev/shibao/cannery
 - **Container image**: https://hub.docker.com/r/shibaobun/cannery
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: Elixir app with no Elixir base, so ubuntu is the fallback.
+
 ## Fields
 
 ### Chart / Role

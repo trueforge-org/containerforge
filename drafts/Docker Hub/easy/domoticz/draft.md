@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/domoticz/domoticz
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt C++ release tarball installed on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

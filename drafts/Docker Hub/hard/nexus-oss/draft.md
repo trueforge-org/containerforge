@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/sonatype/nexus3
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java app with a bundled JRE and no version named, so java17 is the default.
+
 ## Fields
 
 ### Chart / Role

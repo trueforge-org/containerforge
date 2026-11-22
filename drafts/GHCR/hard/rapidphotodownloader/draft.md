@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ich777/rapidphotodownloader
 - **Website**: https://www.damonlynch.net/rapid
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: Python desktop app installed via apt, so the distro provides Python too.
+
 ## Fields
 
 ### Chart / Role

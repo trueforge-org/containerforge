@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/tombursch/kitchenowl-web
 - **Website**: https://tombursch.github.io/kitchenowl
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: No application details were given, so ubuntu is a guess.
+
 ## Fields
 
 ### Chart / Role

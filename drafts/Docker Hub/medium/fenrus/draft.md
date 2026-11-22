@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/revenz/fenrus
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: ASP.NET dashboard built with dotnet, so ubuntu provides dotnet.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/lancachenet/monolithic
 - **Container image**: https://hub.docker.com/r/lancachenet/monolithic
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Self-contained .NET tool and shell scripts, which fit ubuntu.
+
 ## Fields
 
 ### Chart / Role

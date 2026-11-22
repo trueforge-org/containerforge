@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/ankicommunity/anki-devops-services
 - **Container image**: https://hub.docker.com/r/ankicommunity/anki-sync-server-rs
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Rust server binary unpacked into /app on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

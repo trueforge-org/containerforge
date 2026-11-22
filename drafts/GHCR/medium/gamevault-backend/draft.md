@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/phalcode/gamevault-backend
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: TypeScript/Node server that the draft says runs on the node sibling.
+
 ## Fields
 
 ### Chart / Role

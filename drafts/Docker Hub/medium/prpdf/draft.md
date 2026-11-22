@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/maschhoff/prpdf
 - **Container image**: https://hub.docker.com/r/knex666/prpdf
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python tool with pip requirements on the python base, with jbig2enc and Ghostscript from apt.
+
 ## Fields
 
 ### Chart / Role

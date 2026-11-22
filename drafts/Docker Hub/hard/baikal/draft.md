@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/ckulka/baikal-docker
 - **Container image**: https://hub.docker.com/r/ckulka/baikal
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP CalDAV server served by nginx with php-fpm, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

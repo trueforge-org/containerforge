@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/anotherstranger/borg-server
 - **Source code repository**: https://github.com/AnotherStranger/docker-borg-backup
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python pip install of borgbackup is the main runtime; sshd comes from apt.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/ich777/steamcmd
 - **Steam store page**: https://www.steampowered.com
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: ubuntu
+- **Reason**: Steam dedicated server through SteamCMD, with Wine added.
+
 ## Fields
 
 ### Chart / Role

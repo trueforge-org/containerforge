@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/universalmediaserver/ums
 - **Website**: https://www.universalmediaserver.com
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java media server with no Java version named, so java17 is the default.
+
 ## Fields
 
 ### Chart / Role

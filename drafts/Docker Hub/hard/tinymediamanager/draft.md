@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/tinymediamanager/tinymediamanager
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: ubuntu
+- **Reason**: Java desktop app with no Java version named, so java17 is used.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/lklynet/aurral
 - **Source code repository**: https://github.com/lklynet/aurral/pkgs/container/aurral
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: ubuntu
+- **Reason**: Node.js pnpm monorepo; ffmpeg and cloudflared come from apt and release binaries.
+
 ## Fields
 
 ### Chart / Role

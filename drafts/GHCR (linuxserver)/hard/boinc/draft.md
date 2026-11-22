@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/boinc
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Headless client installed with apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

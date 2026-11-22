@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/adguard/adguardhome
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from upstream release tarballs on ubuntu.
+
 ## Fields
 
 ### Chart / Role

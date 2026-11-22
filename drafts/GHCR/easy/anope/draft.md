@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ich777/anope
 - **Website**: https://thelounge.chat
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: IRC services daemon installed from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

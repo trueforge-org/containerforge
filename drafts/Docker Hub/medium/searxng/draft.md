@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/searxng/searxng
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app installed with uv into a venv, and the input names the python sibling.
+
 ## Fields
 
 ### Chart / Role

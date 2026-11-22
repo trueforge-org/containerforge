@@ -25,6 +25,12 @@
 - **Website**: https://gitlab.lswl.in/lswl/vertex
 - **Container image**: https://hub.docker.com/r/lswl/vertex
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js web UI and daemon with npm build, so the node runtime in python-node covers it.
+
 ## Fields
 
 ### Chart / Role

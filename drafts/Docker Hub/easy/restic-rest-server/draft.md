@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/restic/rest-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go REST server from the release tarball.
+
 ## Fields
 
 ### Chart / Role

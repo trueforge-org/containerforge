@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/acockburn/appdaemon
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python home automation app installed with pip into /app.
+
 ## Fields
 
 ### Chart / Role

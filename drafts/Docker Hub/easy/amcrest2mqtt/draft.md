@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/dchesterton/amcrest2mqtt
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python bridge installed with pip into /app, configured by environment variables.
+
 ## Fields
 
 ### Chart / Role

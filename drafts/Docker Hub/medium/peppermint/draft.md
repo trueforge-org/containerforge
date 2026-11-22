@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/pepperlabs/peppermint
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node API and client build, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

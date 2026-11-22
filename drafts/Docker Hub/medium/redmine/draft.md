@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/_/redmine
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Ruby on Rails app with Ruby added on ubuntu, since no Ruby base exists.
+
 ## Fields
 
 ### Chart / Role

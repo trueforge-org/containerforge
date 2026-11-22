@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/home-assistant/addons/tree/master/piper
 - **Container image**: https://hub.docker.com/r/rhasspy/wyoming-piper
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Wyoming server for Piper TTS installed from pip.
+
 ## Fields
 
 ### Chart / Role

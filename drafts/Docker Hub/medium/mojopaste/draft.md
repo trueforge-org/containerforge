@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/jhthorsen/mojopaste
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Perl app installed with apt perl and cpanm on ubuntu.
+
 ## Fields
 
 ### Chart / Role

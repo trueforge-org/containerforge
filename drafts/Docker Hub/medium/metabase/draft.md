@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/metabase/metabase
 
+## Base container
+
+- **Primary**: java25
+- **Alternative**: none
+- **Reason**: The input names Java 25 and the java25 sibling for a jar.
+
 ## Fields
 
 ### Chart / Role

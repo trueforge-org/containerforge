@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/dillinger
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js editor built with npm, so python-node provides the runtime.
+
 ## Fields
 
 ### Chart / Role

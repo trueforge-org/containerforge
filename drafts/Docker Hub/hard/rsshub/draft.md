@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/browserless/chrome
 - **Container image**: https://hub.docker.com/r/diygod/rsshub
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js service driving a headless browser, so python-node provides the Node runtime.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/vilhjalmr26/import_ics
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web app installed with pip from requirements.txt.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ich777/redmserver
 - **Website**: https://redm.gg
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native x86_64 server runtime binaries with no language base needed.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/orgs/linuxserver/packages/container/package/blender
 - **Website**: https://www.blender.org
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop GUI application installed from the Blender tarball or apt.
+
 ## Fields
 
 ### Chart / Role

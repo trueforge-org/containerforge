@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/ONLYOFFICE/Docker-DocumentServer
 - **Container image**: https://hub.docker.com/r/onlyoffice/documentserver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor document server package installed on ubuntu, with its bundled web server and Node backend running as services.
+
 ## Fields
 
 ### Chart / Role

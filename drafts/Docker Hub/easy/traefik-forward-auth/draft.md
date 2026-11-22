@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/thomseddon/traefik-forward-auth
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Small Go binary from the release download.
+
 ## Fields
 
 ### Chart / Role

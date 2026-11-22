@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/leonismoe/ariang
 - **Source code repository**: https://github.com/leonismoe/docker-images
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static JavaScript web UI served by nginx from the release zip.
+
 ## Fields
 
 ### Chart / Role

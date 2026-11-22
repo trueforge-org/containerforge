@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/apache/tika
 - **Container image**: https://hub.docker.com/r/gotenberg/gotenberg
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go API built from source that wraps apt-installed document and PDF tools, so ubuntu is the runtime.
+
 ## Fields
 
 ### Chart / Role

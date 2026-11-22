@@ -25,6 +25,12 @@
 - **Website**: https://docs.storj.io/node
 - **Container image**: https://hub.docker.com/r/storjlabs/storagenode
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go storage node unpacked from the release zip.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/wanjohiryan/qwantify
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Runtime is unclear from the reason; the Go and Node build plus GPU desktop stack suggests ubuntu (guess).
+
 ## Fields
 
 ### Chart / Role

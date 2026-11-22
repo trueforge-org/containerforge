@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/webpsh/webps
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go standalone linux binaries copied into /app.
+
 ## Fields
 
 ### Chart / Role

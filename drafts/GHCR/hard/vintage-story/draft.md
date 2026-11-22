@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/ich777/vintagestory
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET game server with the dotnet runtime installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

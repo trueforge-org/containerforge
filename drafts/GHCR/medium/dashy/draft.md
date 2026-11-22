@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/lissy93/dashy
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Vue dashboard built with yarn and served by Node.js.
+
 ## Fields
 
 ### Chart / Role

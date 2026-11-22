@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/roipoussiere/cadquery
 - **Container image**: https://hub.docker.com/r/cadquery/cadquery-server
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python service installed by pip, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

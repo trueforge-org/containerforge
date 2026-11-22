@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/nicholaswilde/novnc
 - **Website**: https://novnc.com
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: python
+- **Reason**: Static noVNC files served by nginx; websockify is an optional Python proxy.
+
 ## Fields
 
 ### Chart / Role

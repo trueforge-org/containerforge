@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/bitmagnet-io/bitmagnet
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go release binary run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/qdm12/ddns-updater
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the release file run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

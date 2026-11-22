@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/autobrr/autobrr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary with embedded UI, run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

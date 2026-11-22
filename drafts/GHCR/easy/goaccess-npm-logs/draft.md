@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/xavier-hernandez/goaccess-for-nginxproxymanager
 - **Source code repository**: https://github.com/xavier-hernandez/goaccess-for-nginxproxymanager
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: GoAccess installed from the apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

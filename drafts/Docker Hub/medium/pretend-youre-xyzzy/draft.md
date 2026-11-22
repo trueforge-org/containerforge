@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/Cyb3r-Jak3/DockerYourXyzzy
 - **Container image**: https://hub.docker.com/r/cyb3rjak3/dockeryourxyzzy
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java web app with no Java version named, so java17 is the default.
+
 ## Fields
 
 ### Chart / Role

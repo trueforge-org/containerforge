@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jlesage/avidemux
 - **Source code repository**: https://github.com/jlesage/docker-avidemux
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt/C++ GUI compiled from source, so no runtime base applies.
+
 ## Fields
 
 ### Chart / Role

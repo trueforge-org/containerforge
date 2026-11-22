@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/PlexRipper/PlexRipper
 - **Container image**: https://hub.docker.com/r/plexripper/plexripper
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: ASP.NET backend on the .NET runtime, added on ubuntu per the default rule; Node is only used in the build.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/linuxserver/audacity
 - **Source code repository**: https://github.com/linuxserver/docker-audacity
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: desktop AppImage with no runtime language, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

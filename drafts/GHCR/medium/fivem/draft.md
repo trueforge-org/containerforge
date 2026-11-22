@@ -25,6 +25,12 @@
 - **Website**: https://fivem.net
 - **Container image**: https://ghcr.io/ich777/fivemserver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Runtime artifacts are fetched at runtime as a plain x86_64 Linux binary, so no language base is needed.
+
 ## Fields
 
 ### Chart / Role

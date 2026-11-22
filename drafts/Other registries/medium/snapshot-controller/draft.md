@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/snapshot-controller/snapshot-controller
 - **Source code repository**: https://github.com/snapshot-controller/snapshot-controller-helm-chart
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go Kubernetes controller compiled from source.
+
 ## Fields
 
 ### Chart / Role

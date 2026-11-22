@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/home-operations/kromgo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go service with a compiled binary; no language base needed at runtime.
+
 ## Fields
 
 ### Chart / Role

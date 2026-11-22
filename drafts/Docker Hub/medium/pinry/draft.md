@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/getpinry/pinry
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Django app installed with pip on the python base.
+
 ## Fields
 
 ### Chart / Role

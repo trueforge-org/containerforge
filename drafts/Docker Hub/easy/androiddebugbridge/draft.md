@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/barnybbb/adb-hass-androidtv
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Shell wrapper around adb, which is a single apt package on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

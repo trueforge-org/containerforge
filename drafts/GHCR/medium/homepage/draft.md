@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/gethomepage/homepage
 - **Source code repository**: https://github.com/benphelps/homepage
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js app built with node and run from the standalone output.
+
 ## Fields
 
 ### Chart / Role

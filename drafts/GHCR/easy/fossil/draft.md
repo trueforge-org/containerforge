@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/nicholaswilde/fossil
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single C binary installed from the apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

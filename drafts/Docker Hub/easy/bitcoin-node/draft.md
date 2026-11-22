@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/kylemanna/docker-bitcoind
 - **Container image**: https://hub.docker.com/r/kylemanna/bitcoind
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Official glibc release tarball of bitcoind unpacked into /app.
+
 ## Fields
 
 ### Chart / Role

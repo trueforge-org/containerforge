@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/ShaneIsrael/fireshare
 - **Container image**: https://hub.docker.com/r/shaneisrael/fireshare
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: python
+- **Reason**: Flask backend plus a Node-built React client, so python-node per the reason.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/raesene/bwapp
 - **Website**: https://sourceforge.net/projects/bwapp
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app on Apache and MySQL, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

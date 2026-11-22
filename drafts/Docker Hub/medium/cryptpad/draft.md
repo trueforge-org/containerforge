@@ -26,6 +26,12 @@
 - **Website**: https://cryptpad.fr
 - **Container image**: https://hub.docker.com/r/cryptpad/cryptpad
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server, so python-node fits.
+
 ## Fields
 
 ### Chart / Role

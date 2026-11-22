@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/k8s-at-home/apache-musicindex
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Apache with an apt-installed module, so no language runtime base is needed.
+
 ## Fields
 
 ### Chart / Role

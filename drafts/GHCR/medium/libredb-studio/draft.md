@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/libredb/libredb-studio
 - **Source code repository**: https://github.com/libredb/libredb-studio/pkgs/container/libredb-studio
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js app built with bun and run on the node sibling.
+
 ## Fields
 
 ### Chart / Role

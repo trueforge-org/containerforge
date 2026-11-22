@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/nicholaswilde/docker-static
 - **Source code repository**: https://github.com/prologic/static
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go static web server built into a single binary.
+
 ## Fields
 
 ### Chart / Role

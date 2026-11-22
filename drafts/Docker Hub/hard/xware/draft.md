@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/caiguai/docker-xware
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source x86 binary from a vendor tarball, so ubuntu hosts it.
+
 ## Fields
 
 ### Chart / Role

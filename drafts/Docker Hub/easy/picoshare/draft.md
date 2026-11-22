@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/mtlynch/picoshare
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

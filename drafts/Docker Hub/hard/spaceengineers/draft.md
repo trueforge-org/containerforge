@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/Devidian/docker-spaceengineers
 - **Container image**: https://hub.docker.com/r/devidian/spaceengineers
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: ubuntu
+- **Reason**: Dedicated game server downloaded with the Steam download tool, so steamcmd fits.
+
 ## Fields
 
 ### Chart / Role

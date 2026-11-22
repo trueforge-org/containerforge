@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/jez500/bender
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app built with npm, so python-node fits.
+
 ## Fields
 
 ### Chart / Role

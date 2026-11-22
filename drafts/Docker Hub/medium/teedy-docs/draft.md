@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/sismics/docs
 
+## Base container
+
+- **Primary**: java11
+- **Alternative**: none
+- **Reason**: The input names java11 for a Java WAR run on Jetty.
+
 ## Fields
 
 ### Chart / Role

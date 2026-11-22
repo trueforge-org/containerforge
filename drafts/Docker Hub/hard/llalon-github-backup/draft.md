@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/llalon/github-backup
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: backup script with no runtime base named.
+
 ## Fields
 
 ### Chart / Role

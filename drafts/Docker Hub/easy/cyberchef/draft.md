@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/mpepping/cyberchef
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static browser bundle served by nginx.
+
 ## Fields
 
 ### Chart / Role

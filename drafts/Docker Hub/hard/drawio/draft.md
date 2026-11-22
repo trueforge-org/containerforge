@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/jgraph/drawio
 
+## Base container
+
+- **Primary**: java11
+- **Alternative**: none
+- **Reason**: Java war deployed in a servlet container on JDK 11.
+
 ## Fields
 
 ### Chart / Role

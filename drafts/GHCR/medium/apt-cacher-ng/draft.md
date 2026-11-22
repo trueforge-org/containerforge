@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/sameersbn/apt-cacher-ng
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single daemon installed with apt.
+
 ## Fields
 
 ### Chart / Role

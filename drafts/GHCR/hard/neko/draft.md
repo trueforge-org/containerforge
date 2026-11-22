@@ -44,6 +44,12 @@
 - **Container image**: https://ghcr.io/m1k1o/neko/xfce
 - **Source code repository**: https://github.com/m1k1o/neko
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: No description given, so ubuntu is a guess.
+
 ## Fields
 
 ### Chart / Role

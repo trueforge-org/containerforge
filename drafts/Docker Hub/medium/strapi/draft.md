@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/naskio/docker-strapi
 - **Container image**: https://hub.docker.com/r/vshadbolt/strapi
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Strapi Node app whose admin build runs at image build time, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

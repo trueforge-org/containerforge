@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/laurent22/joplin/tree/dev/packages/server
 - **Container image**: https://hub.docker.com/r/joplin/server
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node server only, so python-node provides the node runtime.
+
 ## Fields
 
 ### Chart / Role

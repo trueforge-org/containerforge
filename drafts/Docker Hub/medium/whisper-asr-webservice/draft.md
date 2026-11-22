@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/onerahmet/openai-whisper-asr-webservice
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python FastAPI service installed with pip or poetry on the python base.
+
 ## Fields
 
 ### Chart / Role

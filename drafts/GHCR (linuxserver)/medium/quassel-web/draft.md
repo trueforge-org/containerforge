@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/quassel-web
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js webserver built with npm, so python-node provides the runtime.
+
 ## Fields
 
 ### Chart / Role

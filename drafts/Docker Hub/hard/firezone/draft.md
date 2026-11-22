@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/firezone/firezone
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: Elixir release with no Elixir base, so ubuntu is the fallback.
+
 ## Fields
 
 ### Chart / Role

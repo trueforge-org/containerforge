@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/xthursdayx/yacreaderlibrary-server-docker
 - **Website**: https://www.yacreader.com
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Compiled C++ Qt6 server built on ubuntu.
+
 ## Fields
 
 ### Chart / Role

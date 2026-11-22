@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/snoopy86/ffmpeg
 - **Container image**: https://registry.hub.docker.com/r/snoopy86/ffmpeg
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Directory watcher around apt ffmpeg with no language runtime needed.
+
 ## Fields
 
 ### Chart / Role

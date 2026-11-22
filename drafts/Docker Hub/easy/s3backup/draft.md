@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/joch/s3backup
 - **Container image**: https://registry.hub.docker.com/r/joch/s3backup
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Backup script that installs s3cmd with pip.
+
 ## Fields
 
 ### Chart / Role

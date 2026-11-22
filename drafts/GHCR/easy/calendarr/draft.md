@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/jordanlambrecht/calendarr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web app installed from requirements with pip.
+
 ## Fields
 
 ### Chart / Role

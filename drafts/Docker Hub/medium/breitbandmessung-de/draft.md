@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/shneezin/breitbandmessung-node
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: ubuntu
+- **Reason**: Node app with a headless browser from apt; python-node covers the Node runtime.
+
 ## Fields
 
 ### Chart / Role

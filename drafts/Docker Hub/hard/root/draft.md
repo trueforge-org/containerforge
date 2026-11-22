@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/bgameiro/arch-cern-root
 - **Website**: https://root.cern
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: C++ analysis framework installed from apt on ubuntu; the notebook server could use the python base as the alternative.
+
 ## Fields
 
 ### Chart / Role

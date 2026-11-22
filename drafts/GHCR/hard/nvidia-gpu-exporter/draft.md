@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/utkuozdemir/nvidia_gpu_exporter
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go exporter installed from a deb.
+
 ## Fields
 
 ### Chart / Role

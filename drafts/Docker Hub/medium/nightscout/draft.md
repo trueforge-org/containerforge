@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/nightscout/cgm-remote-monitor-travis
 - **Container image**: https://registry.hub.docker.com/r/nightscout/cgm-remote-monitor-travis
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node 22 app built with npm and webpack, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

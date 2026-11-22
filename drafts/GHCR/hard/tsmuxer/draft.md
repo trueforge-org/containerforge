@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jlesage/tsmuxer
 - **Source code repository**: https://github.com/jlesage/docker-tsmuxer
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt GUI with a prebuilt static binary, so ubuntu.
+
 ## Fields
 
 ### Chart / Role

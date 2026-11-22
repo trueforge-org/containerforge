@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/rnagabhyrava/plexplaylistsync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script installed from requirements with pip.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/ipsingh06/seedsync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app installed with pip into /app, and the input names the python sibling.
+
 ## Fields
 
 ### Chart / Role

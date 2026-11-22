@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/rustdesk/rustdesk-server
 - **Website**: https://rustdesk.com/de
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Two prebuilt Rust binaries from release zips.
+
 ## Fields
 
 ### Chart / Role

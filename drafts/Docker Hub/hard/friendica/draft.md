@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/_/friendica
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP web app on Apache, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

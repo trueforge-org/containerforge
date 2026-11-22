@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/calibre
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Qt tarball that bundles its own runtime, so ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

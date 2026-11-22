@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/pmmp/pocketmine-mp
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Runs a PHP phar on a PHP binary, and PHP is not a base; use PHP from apt.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/gabekangas/owncast
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server from the release zip, with ffmpeg from apt.
+
 ## Fields
 
 ### Chart / Role

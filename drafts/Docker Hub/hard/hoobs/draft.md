@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/hoobs/hoobs
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node runtime with plugins, so python-node per the reason.
+
 ## Fields
 
 ### Chart / Role

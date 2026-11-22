@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/ctfd/ctfd
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Flask app installed with pip and run by gunicorn.
+
 ## Fields
 
 ### Chart / Role

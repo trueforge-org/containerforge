@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/meisnate12/plex-meta-manager
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script app installed with pip requirements.
+
 ## Fields
 
 ### Chart / Role

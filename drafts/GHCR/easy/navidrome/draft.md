@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/navidrome/navidrome
 - **Source code repository**: https://github.com/deluan/navidrome
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go static binary with the web UI bundled.
+
 ## Fields
 
 ### Chart / Role

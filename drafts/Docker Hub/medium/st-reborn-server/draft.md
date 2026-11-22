@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/tiltedphoques/st-reborn-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Per-arch release tarball unpacked into /app with no compile.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/WeblateOrg/docker-compose
 - **Container image**: https://hub.docker.com/r/weblate/weblate
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python packages installed by pip for a web app, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

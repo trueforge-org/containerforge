@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/ekzhang/rustpad
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust server built with cargo on ubuntu, with node used only for the frontend build.
+
 ## Fields
 
 ### Chart / Role

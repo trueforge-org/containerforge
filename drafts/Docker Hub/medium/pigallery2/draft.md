@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/bpatrik/pigallery2
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app with native modules built with npm, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

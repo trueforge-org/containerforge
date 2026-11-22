@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/simonjenny/fastcom-mqtt
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with a headless browser and MQTT clients from apt; python-node covers the Node runtime.
+
 ## Fields
 
 ### Chart / Role

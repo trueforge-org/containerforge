@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/alfhou/hammond
 - **Source code repository**: https://github.com/alfhou/hammond/pkgs/container/hammond
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go API is the runtime process; the Node UI is only a build-stage dependency.
+
 ## Fields
 
 ### Chart / Role

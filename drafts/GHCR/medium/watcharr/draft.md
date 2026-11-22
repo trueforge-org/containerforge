@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/sbondco/watcharr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Go server is the runtime process; the node UI is compiled in a build stage.
+
 ## Fields
 
 ### Chart / Role

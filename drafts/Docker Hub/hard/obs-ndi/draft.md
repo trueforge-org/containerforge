@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/patrickstigler/docker-obs-ndi
 - **Container image**: https://hub.docker.com/r/patrickstigler/obs-ndi
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop streaming app installed from apt and a Linux package on ubuntu, so no language runtime is needed.
+
 ## Fields
 
 ### Chart / Role

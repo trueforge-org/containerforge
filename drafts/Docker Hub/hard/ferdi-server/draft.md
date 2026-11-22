@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/getferdi/server
 - **Container image**: https://hub.docker.com/r/getferdi/ferdi-server
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node server with a database.
+
 ## Fields
 
 ### Chart / Role

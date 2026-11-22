@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/mikeah/prusaslicer-novnc
 - **Website**: https://www.prusa3d.com/prusaslicer
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop slicer package installed from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/maintainerr/maintainerr
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js and TypeScript app run with node.
+
 ## Fields
 
 ### Chart / Role

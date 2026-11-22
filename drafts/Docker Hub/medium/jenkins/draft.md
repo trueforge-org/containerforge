@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/jenkinsci/docker
 - **Container image**: https://hub.docker.com/r/jenkins/jenkins
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: The input names Java 17 and the java17 sibling for a war file.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/akhilrex/podgrab
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go backend compiled from source on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

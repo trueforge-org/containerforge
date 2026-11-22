@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/linuxserver/kodi-headless
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Media app from apt with an Xvfb sibling.
+
 ## Fields
 
 ### Chart / Role

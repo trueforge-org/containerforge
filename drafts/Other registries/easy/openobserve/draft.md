@@ -26,6 +26,12 @@
 
 - **Container image**: https://gallery.ecr.aws/zinclabs/openobserve
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust single binary shipped as a prebuilt tarball.
+
 ## Fields
 
 ### Chart / Role

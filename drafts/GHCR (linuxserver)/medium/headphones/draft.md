@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/linuxserver/headphones
 - **Source code repository**: https://github.com/linuxserver/docker-headphones
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app run from source with pip dependencies on the python base.
+
 ## Fields
 
 ### Chart / Role

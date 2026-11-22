@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/pvrmza/docker-observium
 - **Container image**: https://hub.docker.com/r/pvrmza/docker-observium
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP source installed with PHP and a web server from ubuntu apt packages.
+
 ## Fields
 
 ### Chart / Role

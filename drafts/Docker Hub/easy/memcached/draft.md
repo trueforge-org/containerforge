@@ -26,6 +26,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: memcached installed from apt on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

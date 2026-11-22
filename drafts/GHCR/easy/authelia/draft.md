@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/authelia/authelia
 - **Source code repository**: https://github.com/authelia/chartrepo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server release binary run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

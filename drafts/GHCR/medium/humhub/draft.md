@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/mriedmann/humhub-nginx
 - **Container image**: https://ghcr.io/mriedmann/humhub-phponly
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP application that needs a PHP runtime from apt, with nginx as the web front end.
+
 ## Fields
 
 ### Chart / Role

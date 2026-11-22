@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/nicholaswilde/docker-twtxt
 - **Source code repository**: https://github.com/prologic/twtxt
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go twtxt server compiled into a single binary.
+
 ## Fields
 
 ### Chart / Role

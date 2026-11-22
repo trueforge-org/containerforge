@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/xthursdayx/gpodder-docker
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python core; the GUI is a desktop app.
+
 ## Fields
 
 ### Chart / Role

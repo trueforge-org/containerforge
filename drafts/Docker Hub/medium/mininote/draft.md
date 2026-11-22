@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/n1try/mininote
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node 22 webapp of pure JavaScript, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

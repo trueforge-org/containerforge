@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jens-maus/raspberrymatic
 - **Source code repository**: https://github.com/jens-maus/RaspberryMatic/pkgs/container/raspberrymatic
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Whole buildroot OS rootfs with its own init; no language base applies.
+
 ## Fields
 
 ### Chart / Role

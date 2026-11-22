@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/bobbintb/docker-rmlint-unraid
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop stack and cleanup tool installed from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

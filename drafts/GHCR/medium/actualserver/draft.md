@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/actualbudget/actual
 - **Source code repository**: https://github.com/Kippenhof/docker-templates
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js sync server with npm deps.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/ecodms/allinone-18.09
 - **Website**: https://www.ecodms.de/index.php/en
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: java17
+- **Reason**: Guess: vendor server packages for Ubuntu, with Java implied but no version named.
+
 ## Fields
 
 ### Chart / Role

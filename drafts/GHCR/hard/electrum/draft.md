@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/ich777/electrum
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python wallet core; the GUI is a desktop app.
+
 ## Fields
 
 ### Chart / Role

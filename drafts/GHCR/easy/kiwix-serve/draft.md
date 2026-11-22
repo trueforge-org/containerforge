@@ -29,6 +29,12 @@
 - **Source code repository**: https://github.com/kiwix/kiwix-tools/blob/master/docker/server
 - **Website**: https://www.kiwix.org
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: C++ binary from kiwix-tools, available on ubuntu via apt.
+
 ## Fields
 
 ### Chart / Role

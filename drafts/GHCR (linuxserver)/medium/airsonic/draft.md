@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/k8s-at-home/charts/tree/master/charts/airsonic
 - **Source code repository**: https://github.com/linuxserver/docker-airsonic
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: WAR app that the draft names to run on a java17 base.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/Supporterino/truenas-graphite-to-prometheus/tree/main
 - **Container image**: https://hub.docker.com/r/prom/graphite-exporter
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prometheus Go exporter binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

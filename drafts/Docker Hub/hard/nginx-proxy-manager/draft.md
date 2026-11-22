@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/jc21/nginx-proxy-manager
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: nginx
+- **Reason**: Node backend is the app runtime, with OpenResty frontend served by nginx.
+
 ## Fields
 
 ### Chart / Role

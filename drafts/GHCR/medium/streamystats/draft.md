@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/fredrikburmester/streamystats-job-server
 - **Container image**: https://ghcr.io/fredrikburmester/streamystats-nextjs
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: the draft has no image, binary or reason text, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

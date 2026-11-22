@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/corneliousjd/sui-startpage
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static start page served by nginx.
+
 ## Fields
 
 ### Chart / Role

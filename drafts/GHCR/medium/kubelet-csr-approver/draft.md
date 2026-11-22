@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/postfinance/kubelet-csr-approver
 - **Source code repository**: https://github.com/kubelet-csr-approver/kubelet-csr-approver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Small compiled Go controller binary.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/germannewsmaker/myspeed
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with a frontend build step, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/open-webui/open-webui
 - **Container image**: https://hub.docker.com/r/ollama/ollama
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary shipped as a release tarball with bundled libraries.
+
 ## Fields
 
 ### Chart / Role

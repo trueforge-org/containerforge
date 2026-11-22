@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/alturismo/owi2plex
 - **Container image**: https://hub.docker.com/r/alturismo/owi2plex
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python tool installed with pip; the cron wrappers need a supervisor, which is a packaging concern.
+
 ## Fields
 
 ### Chart / Role

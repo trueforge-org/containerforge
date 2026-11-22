@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/factoriotools/factorio-docker
 - **Container image**: https://hub.docker.com/r/factoriotools/factorio
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Headless server vendor tarball unpacked into /app.
+
 ## Fields
 
 ### Chart / Role

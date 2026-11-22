@@ -26,6 +26,12 @@
 - **Website**: https://aws.amazon.com/cloud9
 - **Container image**: https://ghcr.io/linuxserver/cloud9
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js IDE with a native node-pty build, so python-node provides the node runtime and build tools.
+
 ## Fields
 
 ### Chart / Role

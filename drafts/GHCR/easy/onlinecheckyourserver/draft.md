@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/ich777/online-check-pushover
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Shell script wrapper that needs only curl and the script itself.
+
 ## Fields
 
 ### Chart / Role

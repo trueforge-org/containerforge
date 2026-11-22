@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/mrbrax/twitchautomator
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Needs both a Python server and a Node client, and python-node covers both stacks.
+
 ## Fields
 
 ### Chart / Role

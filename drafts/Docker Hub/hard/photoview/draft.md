@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/viktorstrate/photoview
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go API with native image libraries built from source on ubuntu; Node is used only at build time for the UI.
+
 ## Fields
 
 ### Chart / Role

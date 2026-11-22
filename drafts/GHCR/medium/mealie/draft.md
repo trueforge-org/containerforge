@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/mealie-recipes/mealie
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: FastAPI app with the wheel installed on the python base.
+
 ## Fields
 
 ### Chart / Role

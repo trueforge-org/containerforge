@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/shenxn/protonmail-bridge-docker
 - **Container image**: https://hub.docker.com/r/shenxn/protonmail-bridge
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor .deb on amd64 and a Go build on arm64, both on ubuntu.
+
 ## Fields
 
 ### Chart / Role

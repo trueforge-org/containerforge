@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/linuxserver/docker-chromium
 - **Website**: https://www.google.com/chrome
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Browser installed from a Debian or apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

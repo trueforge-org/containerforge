@@ -24,6 +24,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: closed-source image with an unknown runtime, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

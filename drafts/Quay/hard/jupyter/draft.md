@@ -32,6 +32,12 @@
 - **Container image**: https://quay.io/jupyter/scipy-notebook
 - **Container image**: https://quay.io/jupyter/tensorflow-notebook
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Guess: the draft has no image, binary or reason text, so the Jupyter name suggests python.
+
 ## Fields
 
 ### Chart / Role

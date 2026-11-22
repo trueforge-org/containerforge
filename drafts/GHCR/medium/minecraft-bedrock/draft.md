@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/itzg/minecraft-bedrock-server
 - **Source code repository**: https://github.com/itzg/docker-minecraft-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native x86_64 server binary with no Java or Node runtime.
+
 ## Fields
 
 ### Chart / Role

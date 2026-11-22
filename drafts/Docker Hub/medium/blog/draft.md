@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/nicholaswilde/docker-blog
 - **Container image**: https://hub.docker.com/r/m1k1o/blog
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP blog with PHP and a web server from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

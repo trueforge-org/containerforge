@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/tigerblue77/dell_idrac_fan_controller
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Bash script using ipmitool from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

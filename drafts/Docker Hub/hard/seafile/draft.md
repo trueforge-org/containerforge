@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/seafileltd/seafile-mc
 - **Website**: https://seafile.com
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: Guess: a multi-process Python web stack described only as an ubuntu base, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

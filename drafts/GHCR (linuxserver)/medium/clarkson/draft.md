@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/clarkson
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app built with npm, so python-node provides the needed runtime.
+
 ## Fields
 
 ### Chart / Role

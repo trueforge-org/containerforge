@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/orcaslicer
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop AppImage with no scripting runtime, so ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

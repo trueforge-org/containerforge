@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/flowiseai/flowise
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app installed with npm, so python-node fits.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/fireflyiii/core
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Laravel PHP app, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

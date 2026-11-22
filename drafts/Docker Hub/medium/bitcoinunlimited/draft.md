@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/amacneil/bitcoinunlimited
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: C++ node built from source on ubuntu.
+
 ## Fields
 
 ### Chart / Role

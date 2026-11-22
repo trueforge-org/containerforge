@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-opengl-g3
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop image of a window manager, VNC and Mesa/VirtualGL installed with apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

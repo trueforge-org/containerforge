@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jlesage/mkvcleaver
 - **Source code repository**: https://github.com/jlesage/docker-mkvcleaver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Windows exe run under Wine, installed with apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

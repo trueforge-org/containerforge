@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/vallezw/sheetable
 - **Website**: https://sheetable.net/docs
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go backend binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

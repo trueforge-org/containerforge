@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/homebridge/homebridge
 - **Source code repository**: https://github.com/oznu/docker-homebridge
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js homebridge run under a process supervisor, so Node is the main runtime.
+
 ## Fields
 
 ### Chart / Role

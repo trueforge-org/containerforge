@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/outlinewiki/outline
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node monorepo with a frontend build, so the Node runtime in python-node fits.
+
 ## Fields
 
 ### Chart / Role

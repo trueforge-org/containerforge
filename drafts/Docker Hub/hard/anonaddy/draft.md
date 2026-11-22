@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/anonaddy/docker
 - **Container image**: https://hub.docker.com/r/anonaddy/anonaddy
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app needing php-fpm and mail services, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

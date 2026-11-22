@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/netdata/netdata
 - **Source code repository**: https://github.com/netdata
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt C monitoring agent installer, no language base needed.
+
 ## Fields
 
 ### Chart / Role

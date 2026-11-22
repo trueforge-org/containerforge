@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/DumbWareio/dumbassets
 - **Container image**: https://hub.docker.com/r/dumbwareio/dumbassets
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with Python from apt, so python-node covers both needs.
+
 ## Fields
 
 ### Chart / Role

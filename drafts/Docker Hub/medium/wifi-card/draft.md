@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/bndw/wifi-card
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: python-node
+- **Reason**: Static dist files served by nginx, with a node build stage that python-node can also provide.
+
 ## Fields
 
 ### Chart / Role

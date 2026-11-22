@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/advplyr/fotosho
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with the client built by npm, so python-node fits.
+
 ## Fields
 
 ### Chart / Role

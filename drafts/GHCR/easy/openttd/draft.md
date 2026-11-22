@@ -27,6 +27,12 @@
 
 - **Container image**: https://ghcr.io/ich777/openttdserver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Dedicated server from the official linux tarball.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/ronnieroller/media-roller
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: Go service built in a Go stage with yt-dlp from release; python is the alternative if the Python tooling must run from the base.
+
 ## Fields
 
 ### Chart / Role

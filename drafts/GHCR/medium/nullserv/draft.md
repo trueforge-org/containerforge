@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/k8s-at-home/nullserv
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Small static Go binary built in a Go stage.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/c4illin/convertx
 - **Source code repository**: https://github.com/c4illin/ConvertX
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Runs on bun with apt-installed converters and no bun base exists, so ubuntu is a guess.
+
 ## Fields
 
 ### Chart / Role

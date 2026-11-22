@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/spegel-org/spegel
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go binary from release tarballs.
+
 ## Fields
 
 ### Chart / Role

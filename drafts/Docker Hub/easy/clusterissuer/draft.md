@@ -25,6 +25,12 @@
 - **Website**: https://cert-manager.io
 - **Container image**: https://hub.docker.com/_/hello-world
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Placeholder static binary that needs no runtime, so the ubuntu base is enough.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/slechev/openwebrxplus-softmbe
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: the reason names only a compiled audio package on an unnamed base, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/lancachenet/lancache-dns
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: bind9 from apt plus a Go helper binary.
+
 ## Fields
 
 ### Chart / Role

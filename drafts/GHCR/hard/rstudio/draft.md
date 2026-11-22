@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/rocker-org/rstudio
 - **Source code repository**: https://github.com/rocker-org/rocker-versioned2
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: R and rserver installed from system packages, so ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

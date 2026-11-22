@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/lovelaze/nebula-sync
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary shipped in release tarballs.
+
 ## Fields
 
 ### Chart / Role

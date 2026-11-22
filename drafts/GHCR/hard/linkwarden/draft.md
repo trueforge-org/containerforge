@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linkwarden/linkwarden
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js Node.js monorepo is the main runtime; the Rust binary is an extra piece.
+
 ## Fields
 
 ### Chart / Role

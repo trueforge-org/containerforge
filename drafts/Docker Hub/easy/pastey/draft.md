@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/cesura/pastey
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Flask app installed with pip from requirements.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/mikeah/cura-novnc
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt desktop AppImage extracted and run behind a VNC sibling.
+
 ## Fields
 
 ### Chart / Role

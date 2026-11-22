@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/tenstartups/ser2sock
 - **Container image**: https://hub.docker.com/r/tenstartups/ser2sock
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: C serial bridge compiled with autotools on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -33,6 +33,12 @@
 - **Container image**: https://ghcr.io/maxmind/geoipupdate
 - **Website**: https://goauthentik.io/docs
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: the draft row has no image or binary details, so ubuntu is a default.
+
 ## Fields
 
 ### Chart / Role

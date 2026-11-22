@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/fancybits/channels-dvr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor Linux package with no language runtime needed.
+
 ## Fields
 
 ### Chart / Role

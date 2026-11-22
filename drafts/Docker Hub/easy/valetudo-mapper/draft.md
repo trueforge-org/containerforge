@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/rand256/valetudo-mapper
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app run with npm start and no Python needs.
+
 ## Fields
 
 ### Chart / Role

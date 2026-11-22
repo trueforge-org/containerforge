@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/shlinkio/shlink-web-client
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static SPA dist served by nginx.
+
 ## Fields
 
 ### Chart / Role

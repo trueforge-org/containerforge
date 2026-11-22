@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/petersem/posterr
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app installed with npm, so the python-node base provides the runtime.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/diamkil/notea
 - **Container image**: https://registry.hub.docker.com/r/diamkil/notea
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js Node app with no Python needs, so the Node runtime in python-node covers it; the extra bundled storage binary is a service-layout issue.
+
 ## Fields
 
 ### Chart / Role

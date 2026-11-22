@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/almarklein/timetagger
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python app installed with pip.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/gotenberg/gotenberg
 - **Website**: https://paperless-ngx.readthedocs.io/en/latest
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Django app on Python, with the frontend built at build time.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/masonxx/mediaelch
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt AppImage extracted and run under a desktop.
+
 ## Fields
 
 ### Chart / Role

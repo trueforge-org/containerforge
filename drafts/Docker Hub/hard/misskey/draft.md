@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/misskey/misskey
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node pnpm monorepo.
+
 ## Fields
 
 ### Chart / Role

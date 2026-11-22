@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/itzg/rcon
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node web admin installed with npm, so the python-node base provides Node.js.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/cwq1913/lama-cleaner
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app installed with pip, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/josh5/unmanic
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python app installed into /app on the python base, with ffmpeg from apt.
+
 ## Fields
 
 ### Chart / Role

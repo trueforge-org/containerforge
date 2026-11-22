@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/sissbruecker/linkding
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Django app installed from pip on the python base.
+
 ## Fields
 
 ### Chart / Role

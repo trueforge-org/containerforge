@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/ciur/papermerge
 - **Container image**: https://hub.docker.com/r/papermerge/papermerge
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python core installed with uv sync and apt OCR tools, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

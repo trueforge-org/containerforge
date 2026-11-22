@@ -25,6 +25,12 @@
 - **Website**: https://docs.telethon.dev
 - **Container image**: https://hub.docker.com/r/jsavargas/telethon_downloader
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python downloader installed with pip from requirements.txt.
+
 ## Fields
 
 ### Chart / Role

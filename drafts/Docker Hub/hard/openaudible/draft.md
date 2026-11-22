@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/openaudible/openaudible_docker
 - **Container image**: https://hub.docker.com/r/openaudible/openaudible
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source desktop app with a Linux package, run over a GUI base on ubuntu.
+
 ## Fields
 
 ### Chart / Role

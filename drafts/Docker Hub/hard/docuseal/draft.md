@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/docuseal/docuseal
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: Ruby app and Ruby is not a base, so ubuntu is the fallback.
+
 ## Fields
 
 ### Chart / Role

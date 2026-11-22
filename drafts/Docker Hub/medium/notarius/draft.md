@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/agusalex/notarius
 
+## Base container
+
+- **Primary**: java8
+- **Alternative**: none
+- **Reason**: The input names jre8 for a Java WAR run in a servlet container.
+
 ## Fields
 
 ### Chart / Role

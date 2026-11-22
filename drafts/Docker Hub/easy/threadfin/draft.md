@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/fyb3roptik/threadfin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the release downloads.
+
 ## Fields
 
 ### Chart / Role

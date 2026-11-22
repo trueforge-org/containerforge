@@ -26,6 +26,12 @@
 - **Source code repository**: https://gitlab.com/bramw/baserow
 - **Container image**: https://hub.docker.com/r/baserow/baserow
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: python-node
+- **Reason**: Django backend is the main runtime, with a Node frontend build.
+
 ## Fields
 
 ### Chart / Role

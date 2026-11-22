@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/tsightler/ring-mqtt
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with a service manager and a streaming binary, so python-node covers the Node runtime.
+
 ## Fields
 
 ### Chart / Role

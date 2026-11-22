@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/zedeus/nitter
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Nim source build producing a native binary, so ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

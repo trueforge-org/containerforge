@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/guacamole/guacamole
 - **Container image**: https://hub.docker.com/r/guacamole/guacd
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: guacd daemon installed from apt on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

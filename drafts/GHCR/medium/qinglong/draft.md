@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/whyour/qinglong
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js and TypeScript panel with Python helpers; draft names the python-node sibling.
+
 ## Fields
 
 ### Chart / Role

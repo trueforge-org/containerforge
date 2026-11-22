@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/minetest
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: C++ game server installed from apt on ubuntu, with no compile step.
+
 ## Fields
 
 ### Chart / Role

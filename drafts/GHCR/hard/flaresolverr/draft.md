@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/flaresolverr/flaresolverr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python service that drives a Chromium browser.
+
 ## Fields
 
 ### Chart / Role

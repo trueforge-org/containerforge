@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/coderaiser/cloudcmd
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js file manager installed from npm.
+
 ## Fields
 
 ### Chart / Role

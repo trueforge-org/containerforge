@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/Banh-Canh/docker-FMD2
 - **Container image**: https://hub.docker.com/r/banhcanh/docker-fmd2
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Windows app run under Wine with Wine installed from apt.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/bizmodeller/mymediaforalexa
 - **Website**: https://www.mymediaalexa.com/home/docker#dockerhub
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor .deb files unpacked with dpkg on ubuntu.
+
 ## Fields
 
 ### Chart / Role

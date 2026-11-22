@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/phoronix/pts
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP CLI installed from a package on ubuntu, with PHP from apt.
+
 ## Fields
 
 ### Chart / Role

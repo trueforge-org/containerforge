@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ich777/steamcmd
 - **Steam store page**: https://www.steampowered.com
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Dedicated server pulled from Steam by SteamCMD at start.
+
 ## Fields
 
 ### Chart / Role

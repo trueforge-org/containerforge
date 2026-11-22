@@ -27,6 +27,12 @@
 
 - **Container image**: https://ghcr.io/drakkan/sftpgo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the upstream release.
+
 ## Fields
 
 ### Chart / Role

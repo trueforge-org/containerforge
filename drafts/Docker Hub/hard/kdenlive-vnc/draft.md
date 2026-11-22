@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/JonathanTreffler/kdenlive-vnc-docker
 - **Container image**: https://hub.docker.com/r/tessypowder/docker-kdenlive
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Video editor and player from apt on a desktop.
+
 ## Fields
 
 ### Chart / Role

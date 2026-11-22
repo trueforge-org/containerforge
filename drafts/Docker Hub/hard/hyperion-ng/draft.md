@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/sirfragalot/hyperion.ng
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: C++ app installed from release .deb packages.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/jlesage/filebot
 - **Source code repository**: https://github.com/jlesage/docker-filebot
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: JVM application with no version named, so java17 is used by default.
+
 ## Fields
 
 ### Chart / Role

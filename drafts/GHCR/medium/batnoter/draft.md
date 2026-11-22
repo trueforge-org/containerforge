@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/batnoter/batnoter/batnoter-ui
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: python-node
+- **Reason**: Static UI build served by nginx; the node build runs only at build time.
+
 ## Fields
 
 ### Chart / Role

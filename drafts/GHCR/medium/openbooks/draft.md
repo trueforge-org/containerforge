@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/evan-buss/openbooks
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go binary.
+
 ## Fields
 
 ### Chart / Role

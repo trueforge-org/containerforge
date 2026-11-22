@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/whatname/docker-s3sync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Shell and pip wrapper that installs awscli with pip.
+
 ## Fields
 
 ### Chart / Role

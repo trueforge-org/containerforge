@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/knex666/shortipy
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Flask app installed with pip from requirements.txt.
+
 ## Fields
 
 ### Chart / Role

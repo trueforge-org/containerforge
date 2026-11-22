@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/sethforprivacy/simple-monerod
 - **Source code repository**: https://github.com/kannix/monero-full-node
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native monerod daemon shipped as official linux tarballs.
+
 ## Fields
 
 ### Chart / Role

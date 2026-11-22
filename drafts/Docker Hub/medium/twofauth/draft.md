@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/Bubka/2fauth
 - **Container image**: https://hub.docker.com/r/2fauth/2fauth
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app with PHP and extensions installed via apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

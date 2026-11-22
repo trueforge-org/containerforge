@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/koush/scrypted
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server that also needs Python plugin runtimes.
+
 ## Fields
 
 ### Chart / Role

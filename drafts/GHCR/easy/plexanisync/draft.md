@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/rickdb/plexanisync
 - **Source code repository**: https://github.com/RickDB/PlexAniSync/pkgs/container/plexanisync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python sync tool installed with pip.
+
 ## Fields
 
 ### Chart / Role

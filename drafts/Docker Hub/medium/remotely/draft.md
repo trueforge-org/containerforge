@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/immybot/remotely
 - **Website**: https://remotely.one
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: ASP.NET Core 8 app with the .NET 8 runtime added on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Website**: https://grafana.com
 - **Container image**: https://hub.docker.com/r/grafana/grafana
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go app shipped as a per-arch package unpacked into /app, so no language base is needed.
+
 ## Fields
 
 ### Chart / Role

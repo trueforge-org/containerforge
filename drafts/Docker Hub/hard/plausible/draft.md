@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/plausible/analytics
 - **Website**: https://plausible.io/docs/self-hosting
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Elixir is not provided by any base, so ubuntu is used with Elixir added to the build.
+
 ## Fields
 
 ### Chart / Role

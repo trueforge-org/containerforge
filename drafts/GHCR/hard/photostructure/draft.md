@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/photostructure/server
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server with npm native modules.
+
 ## Fields
 
 ### Chart / Role

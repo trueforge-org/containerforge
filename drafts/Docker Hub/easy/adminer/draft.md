@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/_/adminer
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single-file PHP app that needs only PHP from apt on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

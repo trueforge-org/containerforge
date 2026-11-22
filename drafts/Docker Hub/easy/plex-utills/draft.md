@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/jkirkcaldy/plex-utills
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python app installed with pip plus two apt packages, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

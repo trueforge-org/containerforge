@@ -29,6 +29,12 @@
 - **Container image**: https://ghcr.io/twin/gatus
 - **Source code repository**: https://github.com/TwiN/gatus
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go controller built with a golang stage and copied onto ubuntu.
+
 ## Fields
 
 ### Chart / Role

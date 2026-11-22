@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/remirigal/plex-auto-languages
 - **Container image**: https://hub.docker.com/r/remirigal/plex-auto-languages
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script installed from requirements with pip.
+
 ## Fields
 
 ### Chart / Role

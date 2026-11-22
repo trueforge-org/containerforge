@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/_/registry
 - **Container image**: https://registry.hub.docker.com/_/registry
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go registry binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

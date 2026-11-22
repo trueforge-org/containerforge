@@ -25,6 +25,12 @@
 - **Website**: https://convos.chat
 - **Container image**: https://ghcr.io/convos-chat/convos
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Perl app installed with apt perl and cpanm on ubuntu.
+
 ## Fields
 
 ### Chart / Role

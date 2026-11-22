@@ -27,6 +27,12 @@
 - **Website**: https://anuke.itch.io/mindustry
 - **Container image**: https://ghcr.io/ich777/mindustry-server
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: java21
+- **Reason**: Headless server runs from a Java jar; draft allows java17 or java21 and no version is pinned, so java17 is chosen.
+
 ## Fields
 
 ### Chart / Role

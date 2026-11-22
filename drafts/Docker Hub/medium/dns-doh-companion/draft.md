@@ -25,6 +25,12 @@
 - **Website**: https://developers.cloudflare.com/1.1.1.1/dns-over-https/cloudflared-proxy
 - **Container image**: https://hub.docker.com/r/testdasi/simple-dns-doh
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt tunnel binary wrapped by a shell script on ubuntu.
+
 ## Fields
 
 ### Chart / Role

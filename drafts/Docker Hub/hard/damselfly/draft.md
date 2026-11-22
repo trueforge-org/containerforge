@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/webreaper/damselfly
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET app built with dotnet publish.
+
 ## Fields
 
 ### Chart / Role

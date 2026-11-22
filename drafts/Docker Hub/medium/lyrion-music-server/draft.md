@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/lmscommunity/lyrionmusicserver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Perl server installed from the vendor .deb, so ubuntu with apt packages fits.
+
 ## Fields
 
 ### Chart / Role

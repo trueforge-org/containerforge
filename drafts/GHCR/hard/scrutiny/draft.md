@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/analogj/scrutiny
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go binaries plus smartmontools from apt.
+
 ## Fields
 
 ### Chart / Role

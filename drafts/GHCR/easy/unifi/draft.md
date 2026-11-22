@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/jacobalberty/unifi-docker
 - **Website**: https://unifi-network.ui.com
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java app with no version named, so java17 is used by default.
+
 ## Fields
 
 ### Chart / Role

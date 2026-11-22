@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/linuxserver/sqlitebrowser
 - **Source code repository**: https://github.com/linuxserver/docker-sqlitebrowser
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop GUI from an AppImage or apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

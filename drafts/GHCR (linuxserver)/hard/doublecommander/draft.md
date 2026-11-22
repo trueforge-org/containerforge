@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/linuxserver/doublecommander
 - **Source code repository**: https://github.com/linuxserver/docker-doublecommander
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop file manager installed as one apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

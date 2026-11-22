@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/museofficial/muse
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js bot that also needs yt-dlp via pip, so both python and node are required.
+
 ## Fields
 
 ### Chart / Role

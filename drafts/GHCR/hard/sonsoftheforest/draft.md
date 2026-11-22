@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/ich777/steamcmd
 - **Source code repository**: https://github.com/ich777/docker-steamcmd-server/tree/sonsoftheforest
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: ubuntu
+- **Reason**: Steam dedicated server through SteamCMD, with Wine added.
+
 ## Fields
 
 ### Chart / Role

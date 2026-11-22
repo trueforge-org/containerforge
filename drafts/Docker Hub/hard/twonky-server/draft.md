@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/H2CK/twonkyserver
 - **Container image**: https://hub.docker.com/r/dtjs48jkt/twonkyserver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source x86-64 server binary installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

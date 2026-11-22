@@ -27,6 +27,12 @@
 - **Website**: https://gitlab.v2.rancher.geohub.space/g3s/i3s/i3s-helm-catalog
 - **Container image**: https://hub.docker.com/r/osixia/phpldapadmin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP source installed on ubuntu with PHP from apt.
+
 ## Fields
 
 ### Chart / Role

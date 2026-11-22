@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/terafin/mqtt-venstar-bridge
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Pure JavaScript Node MQTT bridge installed with npm.
+
 ## Fields
 
 ### Chart / Role

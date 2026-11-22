@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/nano-wallet
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: nginx
+- **Reason**: Node.js build producing static files, so python-node builds them and nginx could serve them.
+
 ## Fields
 
 ### Chart / Role

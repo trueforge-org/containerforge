@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/coleifer/sqlite-web
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Flask web UI for SQLite installed with pip.
+
 ## Fields
 
 ### Chart / Role

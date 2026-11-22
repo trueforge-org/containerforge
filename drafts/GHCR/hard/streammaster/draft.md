@@ -25,6 +25,12 @@
 - **Website**: https://carlreid.github.io/StreamMaster
 - **Container image**: https://ghcr.io/carlreid/streammaster
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: ASP.NET app with nginx and ffmpeg, so the .NET runtime is installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

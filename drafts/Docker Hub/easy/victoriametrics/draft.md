@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/VictoriaMetrics/VictoriaMetrics/tree/master
 - **Container image**: https://hub.docker.com/r/victoriametrics/victoria-metrics
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from release tarballs, run as a single process.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/trueforge-org/containers/tree/main/apps/node
 - **Website**: https://headlamp.dev
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Runtime is the extracted Go server and static frontend, with no language base needed.
+
 ## Fields
 
 ### Chart / Role

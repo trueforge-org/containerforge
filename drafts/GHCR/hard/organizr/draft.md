@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/organizr/organizr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP web app, so PHP via apt on ubuntu with nginx as the web server.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/booksonic-air
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: WAR app with no Java version named, so java17 is used by default.
+
 ## Fields
 
 ### Chart / Role

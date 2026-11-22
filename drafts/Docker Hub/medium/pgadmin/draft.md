@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/dpage/pgadmin4
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web app installed from PyPI on the python base.
+
 ## Fields
 
 ### Chart / Role

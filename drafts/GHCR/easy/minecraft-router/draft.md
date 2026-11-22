@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/itzg/mc-router
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go binary with no runtime needs.
+
 ## Fields
 
 ### Chart / Role

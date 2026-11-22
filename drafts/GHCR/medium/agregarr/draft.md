@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/agregarr/agregarr
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node 20 app with prod deps copied into a node image.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/openhab/openhab
 
+## Base container
+
+- **Primary**: java21
+- **Alternative**: none
+- **Reason**: The input names java21 for a Java distro run from /app.
+
 ## Fields
 
 ### Chart / Role

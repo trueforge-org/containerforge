@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/gotson/komga
 - **Website**: https://komga.org
 
+## Base container
+
+- **Primary**: java21
+- **Alternative**: none
+- **Reason**: Spring Boot jar that the draft says should reuse the java21 sibling.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/ipromknight/zilean
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: .NET 9 app with dotnet from apt on ubuntu; the Python ingestion step is the alternative.
+
 ## Fields
 
 ### Chart / Role

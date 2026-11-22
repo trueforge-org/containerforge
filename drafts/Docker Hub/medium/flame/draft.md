@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/pawelmalak/flame
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with no native compile, so python-node fits.
+
 ## Fields
 
 ### Chart / Role

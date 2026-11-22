@@ -25,6 +25,12 @@
 - **Website**: https://fluttercoin.me
 - **Container image**: https://ghcr.io/ich777/fluttercoin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Headless fluttercoind binary from a release zip.
+
 ## Fields
 
 ### Chart / Role

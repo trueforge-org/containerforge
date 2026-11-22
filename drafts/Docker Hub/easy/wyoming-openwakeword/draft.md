@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/home-assistant/addons/tree/master/openwakeword
 - **Container image**: https://hub.docker.com/r/rhasspy/wyoming-openwakeword
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Wyoming server installed from pip.
+
 ## Fields
 
 ### Chart / Role

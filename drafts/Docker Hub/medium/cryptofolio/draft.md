@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/xtrendence/cryptofolio
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP web app with PHP from apt on ubuntu, served by a web server.
+
 ## Fields
 
 ### Chart / Role

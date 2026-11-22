@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/standardnotes/web
 - **Website**: https://standardnotes.org
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: python-node
+- **Reason**: Static JavaScript bundle served by a web server, so nginx fits; Node is needed only at build time.
+
 ## Fields
 
 ### Chart / Role

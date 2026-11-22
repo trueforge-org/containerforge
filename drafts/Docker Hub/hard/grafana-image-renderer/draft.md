@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/grafana/grafana-image-renderer/blob/master/docs/remote_rendering_using_docker.md
 - **Container image**: https://hub.docker.com/r/grafana/grafana-image-renderer
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go renderer driving a headless browser installed from apt.
+
 ## Fields
 
 ### Chart / Role

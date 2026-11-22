@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/k8s-at-home/container-images
 - **Source code repository**: https://github.com/seejohnrun/haste-server
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app with no Python needs, so python-node provides the runtime.
+
 ## Fields
 
 ### Chart / Role

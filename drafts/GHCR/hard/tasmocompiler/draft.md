@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/benzino77/tasmocompiler
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app that calls PlatformIO, a Python tool, so python-node covers both.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/lastelement21/emby-sync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app with a venv and gunicorn, so python fits.
+
 ## Fields
 
 ### Chart / Role

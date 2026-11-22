@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/glauth/glauth
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go LDAP server binary.
+
 ## Fields
 
 ### Chart / Role

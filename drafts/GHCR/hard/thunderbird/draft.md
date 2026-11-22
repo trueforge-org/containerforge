@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/ich777/thunderbird
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop mail client tarball needing GTK and fonts, so ubuntu.
+
 ## Fields
 
 ### Chart / Role

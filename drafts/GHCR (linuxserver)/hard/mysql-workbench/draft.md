@@ -26,6 +26,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop GUI installed from a deb package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

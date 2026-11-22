@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/boredazfcuk/icloudpd
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python CLI installed from PyPI with pip.
+
 ## Fields
 
 ### Chart / Role

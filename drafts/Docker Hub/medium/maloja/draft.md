@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/krateng/maloja
 - **Website**: https://maloja.krateng.ch
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python scrobbling server installed from requirements, and the input names the python sibling.
+
 ## Fields
 
 ### Chart / Role

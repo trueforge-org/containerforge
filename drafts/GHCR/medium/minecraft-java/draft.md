@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/itzg/minecraft-server
 - **Source code repository**: https://github.com/itzg/docker-minecraft-server
 
+## Base container
+
+- **Primary**: java21
+- **Alternative**: java25
+- **Reason**: Java server jar; draft suggests java21 or java25 and the image tags span several versions.
+
 ## Fields
 
 ### Chart / Role

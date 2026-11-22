@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/emberstack/kubernetes-reflector
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET controller, so the .NET runtime is installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

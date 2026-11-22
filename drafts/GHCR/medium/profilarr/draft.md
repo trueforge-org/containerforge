@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/dictionarry-hub/profilarr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Runs on a Deno runtime installed from its own release, which is not a listed base.
+
 ## Fields
 
 ### Chart / Role

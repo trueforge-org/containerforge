@@ -28,6 +28,12 @@
 - **Container image**: https://hub.docker.com/r/gotenberg/gotenberg
 - **Website**: https://paperless-ngx.readthedocs.io/en/latest
 
+## Base container
+
+- **Primary**: java21
+- **Alternative**: java25
+- **Reason**: Java tika-server jar; the input allows java21 or java25 and java21 is the conservative pick.
+
 ## Fields
 
 ### Chart / Role

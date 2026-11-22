@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/tphakala/birdnet-go
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary in release tarballs.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/foxxmd/multi-scrobbler
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: TypeScript Node app built in a build stage, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

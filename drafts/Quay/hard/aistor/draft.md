@@ -26,6 +26,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source vendor Linux binary run directly with no language base.
+
 ## Fields
 
 ### Chart / Role

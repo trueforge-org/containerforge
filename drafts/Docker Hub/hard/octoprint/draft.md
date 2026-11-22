@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/octoprint/octoprint
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python app installed by pip, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

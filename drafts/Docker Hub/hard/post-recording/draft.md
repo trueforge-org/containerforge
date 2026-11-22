@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/chacawaca/docker-post-recording
 - **Container image**: https://hub.docker.com/r/chacawaca/post-recording
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Compiled native tools and ffmpeg installed on ubuntu with no interpreted runtime.
+
 ## Fields
 
 ### Chart / Role

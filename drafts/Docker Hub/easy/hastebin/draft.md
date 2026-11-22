@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/flippinturt/hastebin
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node server installed with npm, and the python-node base provides Node.js.
+
 ## Fields
 
 ### Chart / Role

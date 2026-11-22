@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/node-red/node-red
 - **Source code repository**: https://github.com/node-red/node-red-docker
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app installed with npm, with no Python needs.
+
 ## Fields
 
 ### Chart / Role

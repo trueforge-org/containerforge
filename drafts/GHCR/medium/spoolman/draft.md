@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/donkie/spoolman
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app installed with pip into /app; the draft names the python sibling.
+
 ## Fields
 
 ### Chart / Role

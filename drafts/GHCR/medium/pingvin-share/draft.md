@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/stonith404/pingvin-share
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js frontend and NestJS backend, both Node.
+
 ## Fields
 
 ### Chart / Role

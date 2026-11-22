@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/damoeb/rss-proxy
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: python-node
+- **Reason**: Guess: a JVM server with a Node side and no Java version named, so java17 is used.
+
 ## Fields
 
 ### Chart / Role

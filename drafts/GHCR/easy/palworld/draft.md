@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/ich777/steamcmd
 - **Source code repository**: https://github.com/ich777/docker-steamcmd-server/tree/palworld
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Dedicated server pulled from Steam by SteamCMD at start.
+
 ## Fields
 
 ### Chart / Role

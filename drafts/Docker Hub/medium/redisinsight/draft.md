@@ -26,6 +26,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server with a React UI built in a node stage, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

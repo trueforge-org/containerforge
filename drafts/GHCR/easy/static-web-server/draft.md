@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/static-web-server/static-web-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust static file server binary, not an nginx setup.
+
 ## Fields
 
 ### Chart / Role

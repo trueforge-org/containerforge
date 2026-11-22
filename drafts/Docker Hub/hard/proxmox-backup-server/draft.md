@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/ayufan/proxmox-backup-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Debian packages installed with dpkg on ubuntu.
+
 ## Fields
 
 ### Chart / Role

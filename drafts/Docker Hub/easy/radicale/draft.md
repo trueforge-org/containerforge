@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/tomsquest/docker-radicale
 - **Website**: https://radicale.org
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python CalDAV/CardDAV server installed with pip into a venv.
+
 ## Fields
 
 ### Chart / Role

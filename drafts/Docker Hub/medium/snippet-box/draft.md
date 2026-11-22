@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/pawelmalak/snippet-box
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Old Node app with npm install and a React build, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

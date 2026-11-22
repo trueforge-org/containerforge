@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/tt-rss/tt-rss-web-nginx
 - **Website**: https://git.tt-rss.org/fox/tt-rss
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: the draft has no image, binary or reason text, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

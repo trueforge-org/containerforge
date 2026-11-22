@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/lldap/lldap
 - **Source code repository**: https://github.com/nitnelave/lldap
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust binary shipped in release tarballs, no runtime base needed.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/alicevision/meshroom
 - **Container image**: https://hub.docker.com/r/alicevision/meshroom
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Linux tarball with bundled libraries unpacked onto ubuntu.
+
 ## Fields
 
 ### Chart / Role

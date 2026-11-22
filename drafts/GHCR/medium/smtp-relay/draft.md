@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ix-ai/smtp
 - **Source code repository**: https://github.com/ix-ai/smtp
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Exim relay installed from one apt package.
+
 ## Fields
 
 ### Chart / Role

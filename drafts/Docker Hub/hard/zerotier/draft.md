@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/zerotier/zerotier
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Network daemon installed from its apt repository on ubuntu.
+
 ## Fields
 
 ### Chart / Role

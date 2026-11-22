@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/miguelndecarvalho/speedtest-exporter
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python exporter installed with pip from requirements.
+
 ## Fields
 
 ### Chart / Role

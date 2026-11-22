@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/tak786/trango-self-hosted
 - **Website**: https://trango.io
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: ubuntu
+- **Reason**: Node and Python runtimes cover most of the stack, with a C++ server that would need ubuntu as the alternative.
+
 ## Fields
 
 ### Chart / Role

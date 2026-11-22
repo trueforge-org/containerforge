@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/recyclarr/recyclarr
 - **Source code repository**: https://github.com/recyclarr/recyclarr/pkgs/container/recyclarr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET CLI on ubuntu per the .NET rule; runtime inclusion still to be confirmed.
+
 ## Fields
 
 ### Chart / Role

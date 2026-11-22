@@ -29,6 +29,12 @@
 - **Source code repository**: https://github.com/linuxserver/gclient
 - **Source code repository**: https://github.com/orgs/linuxserver/packages/container/package/webtop
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop environment with packages from apt; no single language runtime.
+
 ## Fields
 
 ### Chart / Role

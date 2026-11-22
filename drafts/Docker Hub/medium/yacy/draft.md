@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/r/yacy/yacy_search_server
 
+## Base container
+
+- **Primary**: java25
+- **Alternative**: java21
+- **Reason**: Upstream names Java 24, which is not a listed base; java25 is the newest available and runs Java 24 class files.
+
 ## Fields
 
 ### Chart / Role

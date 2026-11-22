@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/escapingnetwork/core-keeper-dedicated
 - **Container image**: https://hub.docker.com/r/escaping/core-keeper-dedicated
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Dedicated server downloaded as a Steam depot through SteamCMD.
+
 ## Fields
 
 ### Chart / Role

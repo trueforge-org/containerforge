@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/mend/renovate-ce
 - **Source code repository**: https://github.com/mend/renovate-ce-ee
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: ubuntu
+- **Reason**: Guess: the closed-source image is not public, so the open-source Node renovate package is assumed as the runtime.
+
 ## Fields
 
 ### Chart / Role

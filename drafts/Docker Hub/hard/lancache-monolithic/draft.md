@@ -28,6 +28,12 @@
 - **Container image**: https://ghcr.io/ich777/lancache-prefill
 - **Container image**: https://hub.docker.com/r/lancachenet/monolithic
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: nginx with overlay config is the main runtime.
+
 ## Fields
 
 ### Chart / Role

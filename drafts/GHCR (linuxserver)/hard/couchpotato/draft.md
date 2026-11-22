@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/couchpotato
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app that needs a Python 3 port, which fits the python base.
+
 ## Fields
 
 ### Chart / Role

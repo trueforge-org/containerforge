@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/blakeblackshear/frigate
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: python-node
+- **Reason**: Python backend; node is needed only for the web UI build.
+
 ## Fields
 
 ### Chart / Role

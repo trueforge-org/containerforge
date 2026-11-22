@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/zadam/trilium
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node server run from the bundled Node runtime and the node sibling.
+
 ## Fields
 
 ### Chart / Role

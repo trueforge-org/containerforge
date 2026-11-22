@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/sethcottle/littlelink
 - **Source code repository**: https://github.com/techno-tim/littlelink-server
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js app run from standalone output on the node sibling.
+
 ## Fields
 
 ### Chart / Role

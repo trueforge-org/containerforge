@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/p3terx/aria2-pro
 - **Source code repository**: https://github.com/P3TERX/Aria2-Pro-Docker
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single daemon installed from the apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

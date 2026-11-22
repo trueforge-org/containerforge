@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/fclairamb/solidping
 - **Source code repository**: https://github.com/fclairamb/solidping/pkgs/container/solidping
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary release built with bun UIs upstream.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python app with pip requirements installed into /app.
+
 ## Fields
 
 ### Chart / Role

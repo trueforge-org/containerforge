@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/ich777/krusader
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop file manager installed from apt packages.
+
 ## Fields
 
 ### Chart / Role

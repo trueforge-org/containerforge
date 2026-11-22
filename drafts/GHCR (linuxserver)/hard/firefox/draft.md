@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/linuxserver/firefox
 - **Source code repository**: https://github.com/linuxserver/docker-firefox
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Browser tarball unpacked onto ubuntu.
+
 ## Fields
 
 ### Chart / Role

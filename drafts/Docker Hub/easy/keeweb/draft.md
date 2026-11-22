@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/antelle/keeweb
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static web app files served by nginx.
+
 ## Fields
 
 ### Chart / Role

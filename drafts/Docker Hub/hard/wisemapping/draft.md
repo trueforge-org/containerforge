@@ -26,6 +26,12 @@
 - **Website**: https://bitbucket.org/wisemapping/wisemapping-open-source/src/develop
 - **Container image**: https://hub.docker.com/r/wisemapping/wisemapping
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: nginx
+- **Reason**: Java API built with Maven with no Java version named, so java17 is used; nginx serves the frontend.
+
 ## Fields
 
 ### Chart / Role

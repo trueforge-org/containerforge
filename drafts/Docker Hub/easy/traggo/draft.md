@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/traggo/server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

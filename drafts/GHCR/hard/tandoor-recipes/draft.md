@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/tandoorrecipes/recipes
 - **Source code repository**: https://github.com/TandoorRecipes/recipes/pkgs/container/recipes
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: nginx
+- **Reason**: Django app on Python, run with gunicorn and nginx together.
+
 ## Fields
 
 ### Chart / Role

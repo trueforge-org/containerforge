@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/piratify/invitarr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Discord bot installed with pip from requirements.
+
 ## Fields
 
 ### Chart / Role

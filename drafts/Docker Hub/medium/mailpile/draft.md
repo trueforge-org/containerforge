@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/rroemhild/mailpile
 - **Website**: https://www.mailpile.is
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Legacy Python app rebuilt in a Python 3 venv, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

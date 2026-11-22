@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/qolors/feedcord
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET 9 app with the dotnet runtime from ubuntu apt.
+
 ## Fields
 
 ### Chart / Role

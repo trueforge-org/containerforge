@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/sentriz/gonic
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go single binary with prebuilt release files, so no runtime base is needed.
+
 ## Fields
 
 ### Chart / Role

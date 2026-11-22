@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/reaparr/reaparr
 - **Container image**: https://hub.docker.com/r/reaparr/reaparr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: ASP.NET backend with the dotnet runtime from apt on ubuntu; the Node build is build-time only.
+
 ## Fields
 
 ### Chart / Role

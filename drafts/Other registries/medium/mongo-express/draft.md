@@ -24,6 +24,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js web UI built in a stage and run on the node runtime.
+
 ## Fields
 
 ### Chart / Role

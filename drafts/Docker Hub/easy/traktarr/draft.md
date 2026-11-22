@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/eafxx/traktarr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python app installed with pip -r requirements.txt.
+
 ## Fields
 
 ### Chart / Role

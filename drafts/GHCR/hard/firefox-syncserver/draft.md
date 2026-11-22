@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/crazy-max/firefox-syncserver
 - **Website**: https://moz-services-docs.readthedocs.io/en/latest/howtos/run-sync-1.5.html
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python 2.7 app, so the python base is the closest runtime; not portable as is.
+
 ## Fields
 
 ### Chart / Role

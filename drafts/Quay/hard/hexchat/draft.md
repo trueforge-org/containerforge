@@ -28,6 +28,12 @@
 - **Container image**: https://quay.io/binhex/arch-hexchat
 - **Container image**: https://registry.hub.docker.com/r/binhex/arch-hexchat
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop IRC client installed from the Ubuntu archive.
+
 ## Fields
 
 ### Chart / Role

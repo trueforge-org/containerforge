@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/boojack/slash
 - **Container image**: https://hub.docker.com/r/yourselfhosted/slash
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary with a node-built UI copied onto ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/drpsychick/arkserver
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Dedicated game server installed at runtime through SteamCMD.
+
 ## Fields
 
 ### Chart / Role

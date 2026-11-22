@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/x1unix/go-playground
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server built from source with a WASM and node-built UI; a plain Go binary runs on ubuntu.
+
 ## Fields
 
 ### Chart / Role

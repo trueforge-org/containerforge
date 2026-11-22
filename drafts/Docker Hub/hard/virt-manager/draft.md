@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/mber5/virt-manager
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop app installed from Debian apt packages on ubuntu.
+
 ## Fields
 
 ### Chart / Role

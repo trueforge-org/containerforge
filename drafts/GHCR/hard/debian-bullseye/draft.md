@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/ich777/debian-bullseye
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: Debian desktop image with no application runtime to pick.
+
 ## Fields
 
 ### Chart / Role

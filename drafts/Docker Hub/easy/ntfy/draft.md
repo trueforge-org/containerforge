@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/binwiederhier/ntfy
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go single binary from upstream release packages.
+
 ## Fields
 
 ### Chart / Role

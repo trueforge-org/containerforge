@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/tracksapp/tracks
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Ruby on Rails app with Ruby installed from Ubuntu apt.
+
 ## Fields
 
 ### Chart / Role

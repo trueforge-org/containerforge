@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/theconnman/docker-hub-rss
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Small Node.js app with production node_modules.
+
 ## Fields
 
 ### Chart / Role

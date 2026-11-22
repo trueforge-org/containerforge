@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/ich777/lunamultiplayer-ksp
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET server with no .NET base, so the runtime is installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

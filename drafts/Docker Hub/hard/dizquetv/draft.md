@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/vexorian/dizquetv
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app that runs as-is from its npm package.
+
 ## Fields
 
 ### Chart / Role

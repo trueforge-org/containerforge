@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/mattermost/mattermost-server
 - **Container image**: https://hub.docker.com/r/mattermost/mattermost-enterprise-edition
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server from an official release tarball unpacked into /app.
+
 ## Fields
 
 ### Chart / Role

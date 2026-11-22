@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/tzahi12345/youtubedl-material
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node backend with ffmpeg and python yt-dlp, so both python and node are needed.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/siderolabs/cni
 - **Container image**: https://hub.docker.com/r/alpine/crane
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go binaries from a release tarball.
+
 ## Fields
 
 ### Chart / Role

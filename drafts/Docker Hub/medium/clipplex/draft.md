@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/jonnike/clipplex
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web app with pip requirements and ffmpeg from apt, so python fits.
+
 ## Fields
 
 ### Chart / Role

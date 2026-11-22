@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/pdreker/fritz_exporter
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Prometheus exporter installed with pip.
+
 ## Fields
 
 ### Chart / Role

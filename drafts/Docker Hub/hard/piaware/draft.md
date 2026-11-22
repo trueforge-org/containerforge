@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/mikenye/piaware
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native feeder binaries and vendor packages installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

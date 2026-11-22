@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/shokoanime/server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET 8 app, so the dotnet runtime is installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

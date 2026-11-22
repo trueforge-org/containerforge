@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/vstavrinov/acestream-service
 - **Container image**: https://hub.docker.com/r/vstavrinov/acestream-service
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: nginx
+- **Reason**: Python search.py layer on top of a closed-source engine binary, with nginx as a thin front.
+
 ## Fields
 
 ### Chart / Role

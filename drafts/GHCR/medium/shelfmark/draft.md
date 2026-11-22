@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/calibrain/shelfmark
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python backend in a uv venv; the python base covers it.
+
 ## Fields
 
 ### Chart / Role

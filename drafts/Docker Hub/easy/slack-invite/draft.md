@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/ninthwalker/slack-invite
 - **Source code repository**: httpss://github.com/ninthwalker/slack-invite
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app installed with npm, so only Node.js is needed.
+
 ## Fields
 
 ### Chart / Role

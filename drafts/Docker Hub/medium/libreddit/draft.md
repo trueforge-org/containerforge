@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/spikecodes/libreddit
 - **Container image**: https://hub.docker.com/r/libreddit/libreddit
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust release binary runs directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

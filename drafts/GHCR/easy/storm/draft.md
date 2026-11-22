@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/relvacode/storm
 - **Source code repository**: https://github.com/relvacode/storm/pkgs/container/storm
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary shipped in release tarballs.
+
 ## Fields
 
 ### Chart / Role

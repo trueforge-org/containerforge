@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/biggiesize/genea-app
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static files served by nginx as the main runtime.
+
 ## Fields
 
 ### Chart / Role

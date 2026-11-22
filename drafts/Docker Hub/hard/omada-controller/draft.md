@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/mbentley/docker-omada-controller
 - **Container image**: https://hub.docker.com/r/mbentley/omada-controller
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: ubuntu
+- **Reason**: Java controller installed from a vendor package on ubuntu; no Java version is named, so java17 is used.
+
 ## Fields
 
 ### Chart / Role

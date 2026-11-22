@@ -25,6 +25,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go Kubernetes controller compiled from source.
+
 ## Fields
 
 ### Chart / Role

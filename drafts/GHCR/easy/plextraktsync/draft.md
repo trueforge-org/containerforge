@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/taxel/plextraktsync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python tool installed with pip.
+
 ## Fields
 
 ### Chart / Role

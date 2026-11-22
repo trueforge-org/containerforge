@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/intel
 - **Container image**: https://hub.docker.com/r/intel/intel-gpu-plugin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go device plugin binary with no language base needed beyond Go build output.
+
 ## Fields
 
 ### Chart / Role

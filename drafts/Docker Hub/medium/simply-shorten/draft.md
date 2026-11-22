@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/draganczukp/simply-shorten
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: The input says java17 replaces the EOL JDK 14.
+
 ## Fields
 
 ### Chart / Role

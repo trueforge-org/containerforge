@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/juchong/shapeshifter-docker
 - **Container image**: https://hub.docker.com/r/juchong/shapeshifter-docker
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary compiled from source on ubuntu.
+
 ## Fields
 
 ### Chart / Role

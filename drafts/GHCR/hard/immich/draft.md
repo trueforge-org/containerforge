@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/immich-app/immich-machine-learning
 - **Container image**: https://ghcr.io/immich-app/immich-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: No description given, so ubuntu is a guess.
+
 ## Fields
 
 ### Chart / Role

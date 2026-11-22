@@ -29,6 +29,12 @@
 - **Source code repository**: https://github.com/Suwayomi/Tachidesk-Server
 - **Source code repository**: https://github.com/suwayomi/docker-tachidesk
 
+## Base container
+
+- **Primary**: java21
+- **Alternative**: none
+- **Reason**: Java server JAR that the draft says runs on the java21 sibling.
+
 ## Fields
 
 ### Chart / Role

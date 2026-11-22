@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/simsemand/chronos
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: python-node
+- **Reason**: Python backend with a UI built at build time, so python fits.
+
 ## Fields
 
 ### Chart / Role

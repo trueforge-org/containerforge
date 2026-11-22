@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ich777/debian-mirror
 - **Website**: https://www.debian.org
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: apt-mirror with apache2 and cron, all apt packages.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/go-gitea/gitea
 - **Website**: https://gitea.com/gitea/helm-chart
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go release binary with embedded assets run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

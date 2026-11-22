@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/pocket-id/pocket-id
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single Go binary with the frontend embedded.
+
 ## Fields
 
 ### Chart / Role

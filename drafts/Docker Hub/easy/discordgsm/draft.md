@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/discordgsm/discord-game-server-monitor
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Discord bot installed with pip into /app.
+
 ## Fields
 
 ### Chart / Role

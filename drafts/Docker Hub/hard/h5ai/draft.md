@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/awesometic/docker-h5ai
 - **Container image**: https://hub.docker.com/r/awesometic/h5ai
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP file browser with nginx and php-fpm, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

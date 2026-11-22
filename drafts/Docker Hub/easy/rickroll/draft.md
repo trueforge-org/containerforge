@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/modem7/docker-rickroll
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static video page served by nginx.
+
 ## Fields
 
 ### Chart / Role

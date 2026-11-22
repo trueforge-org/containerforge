@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/aeonlucid/impostor
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET app with no language base, so the .NET runtime is added on ubuntu per the default rule.
+
 ## Fields
 
 ### Chart / Role

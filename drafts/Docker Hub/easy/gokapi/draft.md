@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/f0rc3/gokapi
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single Go binary from the release zip.
+
 ## Fields
 
 ### Chart / Role

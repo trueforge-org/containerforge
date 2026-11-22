@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/alturismo/guide2go
 - **Container image**: https://hub.docker.com/r/alturismo/guide2go
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go CLI compiled from source on ubuntu.
+
 ## Fields
 
 ### Chart / Role

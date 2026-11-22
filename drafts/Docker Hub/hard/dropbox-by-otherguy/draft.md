@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/otherguy/docker-dropbox
 - **Container image**: https://hub.docker.com/r/otherguy/dropbox
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source vendor daemon downloaded at runtime with no language runtime.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/alekslitvinenk/openvpn
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: OpenVPN and easy-rsa shell scripts installed from apt.
+
 ## Fields
 
 ### Chart / Role

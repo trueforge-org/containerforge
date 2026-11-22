@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/patrickstigler/quiz-game
 - **Container image**: https://registry.hub.docker.com/r/patrickstigler/quiz-game
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: python-node
+- **Reason**: Node build produces static files that nginx serves.
+
 ## Fields
 
 ### Chart / Role

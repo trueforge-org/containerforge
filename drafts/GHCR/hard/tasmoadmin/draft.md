@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/tasmoadmin/tasmoadmin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP app served by a web server and PHP-FPM, so PHP via apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

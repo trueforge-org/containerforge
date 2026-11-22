@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/squat/generic-device-plugin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go daemon compiled from source.
+
 ## Fields
 
 ### Chart / Role

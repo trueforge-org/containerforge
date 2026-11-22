@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/victorrds/etesync
 - **Website**: https://www.etesync.com
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python server installed by pip, so python fits.
+
 ## Fields
 
 ### Chart / Role

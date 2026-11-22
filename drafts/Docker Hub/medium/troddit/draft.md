@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/bsyed/troddit
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js app built with npm in a node stage, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

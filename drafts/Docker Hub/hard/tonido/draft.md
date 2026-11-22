@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/r/captinsano/tonido
 - **Container image**: https://registry.hub.docker.com/r/captinsano/tonido
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: closed-source vendor server on an unnamed legacy base, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

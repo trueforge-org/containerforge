@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/thedaviddelta/lingva-translate
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js Node app of pure JavaScript, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

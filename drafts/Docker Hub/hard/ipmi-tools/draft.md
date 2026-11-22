@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/edchamberlain/ipmi-tools
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python Flask app that shells out to ipmitool from apt.
+
 ## Fields
 
 ### Chart / Role

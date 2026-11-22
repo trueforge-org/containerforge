@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/k8snetworkplumbingwg/multus-cni
 - **Container image**: https://hub.docker.com/r/alpine/crane
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go CLI from the release tarball.
+
 ## Fields
 
 ### Chart / Role

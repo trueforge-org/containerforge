@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/nicolargo/glances
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Single pip install of glances in a venv under /app.
+
 ## Fields
 
 ### Chart / Role

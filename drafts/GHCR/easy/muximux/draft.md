@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/mescon/muximux
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary with the frontend embedded.
+
 ## Fields
 
 ### Chart / Role

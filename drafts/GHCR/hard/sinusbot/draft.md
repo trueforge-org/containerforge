@@ -26,6 +26,12 @@
 - **Website**: https://forum.sinusbot.com
 - **Container image**: https://ghcr.io/gamer92000/sinusbot-docker
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source bot installed from a vendor tarball with its own Qt runtime.
+
 ## Fields
 
 ### Chart / Role

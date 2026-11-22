@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/nocodb/nocodb
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app with native modules.
+
 ## Fields
 
 ### Chart / Role

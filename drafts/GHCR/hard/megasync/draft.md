@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ich777/megasync
 - **Source code repository**: https://github.com/ich777/docker-megasync
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt desktop client installed from a deb package.
+
 ## Fields
 
 ### Chart / Role

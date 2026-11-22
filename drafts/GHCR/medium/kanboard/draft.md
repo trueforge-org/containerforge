@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/kanboard/kanboard
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP app with PHP installed from apt and served through nginx.
+
 ## Fields
 
 ### Chart / Role

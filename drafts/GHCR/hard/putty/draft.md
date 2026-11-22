@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jlesage/putty
 - **Source code repository**: https://github.com/jlesage/docker-putty
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Compiled GTK terminal installed from an apt package.
+
 ## Fields
 
 ### Chart / Role

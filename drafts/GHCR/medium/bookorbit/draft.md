@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/bookorbit/bookorbit
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app built with pnpm.
+
 ## Fields
 
 ### Chart / Role

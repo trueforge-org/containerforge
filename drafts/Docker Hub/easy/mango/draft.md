@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/hkalexling/mango
 - **Container image**: https://hub.docker.com/r/hkalexling/mango
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static prebuilt binary from the GitHub release.
+
 ## Fields
 
 ### Chart / Role

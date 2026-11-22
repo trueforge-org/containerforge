@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/bitnamisecure/wordpress
 - **Website**: https://www.wordpress.org
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP on Apache installed from apt plus the wordpress.org tarball, so the ubuntu base provides PHP.
+
 ## Fields
 
 ### Chart / Role

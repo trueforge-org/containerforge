@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/zwave-js/zwave-js-ui
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js gateway shipped as prebuilt zips.
+
 ## Fields
 
 ### Chart / Role

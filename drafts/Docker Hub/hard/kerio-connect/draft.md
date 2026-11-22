@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/chvb/docker-kerio-connect
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor mail server .deb on ubuntu.
+
 ## Fields
 
 ### Chart / Role

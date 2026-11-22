@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/aldostools/webMAN-MOD/tree/master/_Projects_/ps3netsrv
 - **Container image**: https://hub.docker.com/r/shawly/ps3netsrv
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt release binary on amd64 and a small C build on arm64, with no interpreter needed.
+
 ## Fields
 
 ### Chart / Role

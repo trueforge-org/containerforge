@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/dani-garcia/vaultwarden
 - **Container image**: https://ghcr.io/timshel/vaultwarden
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: the draft has no image, binary or reason text, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

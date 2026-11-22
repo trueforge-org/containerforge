@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/thde/rtorrent_exporter
 - **Source code repository**: https://github.com/crazy-max/docker-rtorrent-rutorrent
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go Prometheus exporter tarball.
+
 ## Fields
 
 ### Chart / Role

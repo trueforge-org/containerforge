@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/farmos/farmos
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP Drupal app built with composer, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

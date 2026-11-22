@@ -27,6 +27,12 @@
 - **Container image**: https://gallery.ecr.aws/docker/library/odoo
 - **Source code repository**: https://github.com/odoo/docker
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python business suite installed from a .deb with many Python dependencies.
+
 ## Fields
 
 ### Chart / Role

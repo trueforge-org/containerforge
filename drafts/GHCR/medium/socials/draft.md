@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/diamkil/socials
 - **Container image**: https://registry.hub.docker.com/r/diamkil/socials
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app built with yarn and run with node.
+
 ## Fields
 
 ### Chart / Role

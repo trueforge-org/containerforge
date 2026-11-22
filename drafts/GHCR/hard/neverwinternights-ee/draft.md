@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ich777/nwnee-server
 - **Website**: https://www.beamdog.com/games/neverwinter-nights-enhanced
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed-source native server that needs i386 libraries, so ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

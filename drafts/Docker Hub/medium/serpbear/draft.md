@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/towfiqi/serpbear
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js Node 22 app built at image build time, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

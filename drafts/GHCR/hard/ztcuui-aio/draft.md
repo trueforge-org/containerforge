@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/kmahyyg/ztncui-aio
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: ubuntu
+- **Reason**: Node.js web UI is the main runtime, with Go helpers and a zerotier daemon alongside.
+
 ## Fields
 
 ### Chart / Role

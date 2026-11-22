@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/ansible-semaphore/semaphore
 - **Container image**: https://hub.docker.com/r/semaphoreui/semaphore
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: Go server from a release tarball; python is the alternative for the pip packages it bundles.
+
 ## Fields
 
 ### Chart / Role

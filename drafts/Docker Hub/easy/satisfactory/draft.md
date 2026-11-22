@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/wolveix/satisfactory-server
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Dedicated server downloaded at runtime through SteamCMD.
+
 ## Fields
 
 ### Chart / Role

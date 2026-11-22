@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/601096721/mosdns
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go DNS forwarder binary from the release zip.
+
 ## Fields
 
 ### Chart / Role

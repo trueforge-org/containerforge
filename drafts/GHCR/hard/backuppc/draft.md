@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/adferrand/backuppc
 - **Source code repository**: https://github.com/adferrand/docker-backuppc
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Perl app served by Apache; Perl has no base, so apt packages on ubuntu.
+
 ## Fields
 
 ### Chart / Role

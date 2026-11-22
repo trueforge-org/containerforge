@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/neggles/sd-webui-docker
 - **Source code repository**: https://github.com/ahmetoner/sd-webui-docker
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web UI with pip dependencies.
+
 ## Fields
 
 ### Chart / Role

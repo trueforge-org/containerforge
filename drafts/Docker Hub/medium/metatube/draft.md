@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/jvt038/metatube
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app that the input says runs on the python sibling with apt ffmpeg.
+
 ## Fields
 
 ### Chart / Role

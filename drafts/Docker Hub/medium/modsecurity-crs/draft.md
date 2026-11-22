@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/coreruleset/modsecurity-crs-docker
 - **Container image**: https://hub.docker.com/r/owasp/modsecurity-crs
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Apache with the web application firewall module from apt on ubuntu, since no Apache base exists.
+
 ## Fields
 
 ### Chart / Role

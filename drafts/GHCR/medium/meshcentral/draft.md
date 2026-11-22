@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/ylianst/meshcentral
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server with npm dependencies.
+
 ## Fields
 
 ### Chart / Role

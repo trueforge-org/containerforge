@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/dendianugerah/reubah
 - **Source code repository**: https://github.com/dendianugerah/reubah
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Compiled Go binary with assets built in a stage.
+
 ## Fields
 
 ### Chart / Role

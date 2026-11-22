@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/Xhofe/alist
 - **Container image**: https://hub.docker.com/r/xhofe/alist-aria2
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Release binary plus aria2 from apt, with no language runtime.
+
 ## Fields
 
 ### Chart / Role

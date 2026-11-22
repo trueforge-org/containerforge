@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/iyuucn/iyuuplus
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app that installs PHP via apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

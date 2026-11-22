@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/_/chronograf
 - **Website**: https://www.influxdata.com/time-series-platform/chronograf
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go single binary extracted from the vendor package.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/advplyr/audiobookshelf
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server with ffmpeg as an apt package.
+
 ## Fields
 
 ### Chart / Role

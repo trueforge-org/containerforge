@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/itzg/mc-proxy
 - **Source code repository**: https://github.com/itzg/docker-mc-proxy
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: java25
+- **Reason**: JVM proxy jar; draft suggests java17 or java25.
+
 ## Fields
 
 ### Chart / Role

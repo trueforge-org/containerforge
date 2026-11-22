@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ich777/quake3
 - **Website**: https://www.idsoftware.com
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native ioquake3 engine installed from apt.
+
 ## Fields
 
 ### Chart / Role

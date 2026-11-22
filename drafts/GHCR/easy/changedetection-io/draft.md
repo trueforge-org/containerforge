@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/dgtlmoon/changedetection.io
 - **Source code repository**: https://github.com/dgtlmoon/changedetection.io/tree/master
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Flask app installed with pip on the python base.
+
 ## Fields
 
 ### Chart / Role

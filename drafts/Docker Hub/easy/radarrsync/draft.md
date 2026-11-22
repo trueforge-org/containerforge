@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/dairefinn/RadarrSync
 - **Container image**: https://hub.docker.com/r/dmanius/radarrsync-docker
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script with pip requirements, run as one process.
+
 ## Fields
 
 ### Chart / Role

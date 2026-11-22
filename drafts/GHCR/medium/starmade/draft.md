@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/ich777/starmade-server
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java jar from the vendor; the draft gives no version, so java17 is used by default.
+
 ## Fields
 
 ### Chart / Role

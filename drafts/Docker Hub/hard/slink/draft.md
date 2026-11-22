@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/anirdev/slink
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP API with a static client on ubuntu, with the PHP runtime from apt.
+
 ## Fields
 
 ### Chart / Role

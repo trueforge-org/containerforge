@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ich777/xonotic
 - **Website**: https://www.xonotic.org
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native C dedicated server unpacked from the amd64 release.
+
 ## Fields
 
 ### Chart / Role

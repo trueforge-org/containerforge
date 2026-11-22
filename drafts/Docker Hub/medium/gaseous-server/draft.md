@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/gaseousgames/gaseousserver
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: ASP.NET Core 8 app with the dotnet runtime added on ubuntu.
+
 ## Fields
 
 ### Chart / Role

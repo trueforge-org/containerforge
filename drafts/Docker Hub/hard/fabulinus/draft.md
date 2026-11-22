@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/titanml/takeoff-communitys
 - **Container image**: https://hub.docker.com/r/tytn/fabulinus
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: closed-source inference server with no redistributable artifact.
+
 ## Fields
 
 ### Chart / Role

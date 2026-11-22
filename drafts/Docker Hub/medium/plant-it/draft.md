@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/msdeluise/plant-it-server
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Java server jar with no Java version named, so java17 is the default.
+
 ## Fields
 
 ### Chart / Role

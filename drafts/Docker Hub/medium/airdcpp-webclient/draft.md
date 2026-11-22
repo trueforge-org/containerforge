@@ -27,6 +27,12 @@
 - **Website**: https://airdcpp-web.github.io
 - **Container image**: https://hub.docker.com/r/gangefors/airdcpp-webclient
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: C++ daemon with a web UI on ubuntu; the Node runtime for extensions is the alternative.
+
 ## Fields
 
 ### Chart / Role

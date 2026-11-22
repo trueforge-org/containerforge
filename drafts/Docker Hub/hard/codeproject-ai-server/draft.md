@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/codeproject/ai-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python
+- **Reason**: .NET server installed from the vendor Ubuntu .deb, with Python modules as the alternative.
+
 ## Fields
 
 ### Chart / Role

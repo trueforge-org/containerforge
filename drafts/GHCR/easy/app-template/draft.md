@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/miguelndecarvalho/speedtest-exporter
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Prometheus exporter installed with pip into /app.
+
 ## Fields
 
 ### Chart / Role

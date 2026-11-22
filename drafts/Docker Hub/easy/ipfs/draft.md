@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/ipfs/kubo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go daemon unpacked from the official release tarball.
+
 ## Fields
 
 ### Chart / Role

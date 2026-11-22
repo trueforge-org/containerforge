@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/bbernhard/signal-cli-rest-api
 
+## Base container
+
+- **Primary**: java25
+- **Alternative**: ubuntu
+- **Reason**: The input names the java25 sibling for the JVM child process; the Go REST server makes ubuntu the alternative.
+
 ## Fields
 
 ### Chart / Role

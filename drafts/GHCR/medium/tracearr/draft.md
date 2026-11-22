@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/connorgallopo/tracearr
 - **Source code repository**: https://github.com/connorgallopo/Tracearr/blob/main/docker/docker-compose.yml
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app built with pnpm and run on the node sibling.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/jlesage/makemkv
 - **Source code repository**: https://github.com/jlesage/docker-makemkv
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor binaries built with make, so ubuntu covers it.
+
 ## Fields
 
 ### Chart / Role

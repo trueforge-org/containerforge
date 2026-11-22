@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/PhasecoreX/docker-red-discordbot
 - **Container image**: https://hub.docker.com/r/phasecorex/red-discordbot
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: java17
+- **Reason**: Python bot installed with pip; the full variant adds Java with no version named, so java17 is the alternative.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/skrashevich/double-take
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js API with a Vue frontend built in a build stage.
+
 ## Fields
 
 ### Chart / Role

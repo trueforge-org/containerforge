@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/nroi/flexo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust binary compiled with cargo.
+
 ## Fields
 
 ### Chart / Role

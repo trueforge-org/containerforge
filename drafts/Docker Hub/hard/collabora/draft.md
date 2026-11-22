@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/collabora/code
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Office server binaries with chroot jails and no language runtime.
+
 ## Fields
 
 ### Chart / Role

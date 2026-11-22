@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/maptiler/tileserver-gl
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js tile server installed with npm, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: In-memory data server installed from its official apt repo on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/ellite/wallos
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP 8.3 app with nginx and php-fpm, so PHP via apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

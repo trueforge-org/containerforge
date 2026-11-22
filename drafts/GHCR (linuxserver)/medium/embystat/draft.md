@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/embystat
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: ASP.NET app shipped as a self-contained release zip, which the ubuntu base can run.
+
 ## Fields
 
 ### Chart / Role

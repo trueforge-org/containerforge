@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/quassel-core
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt/C++ daemon installed with apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

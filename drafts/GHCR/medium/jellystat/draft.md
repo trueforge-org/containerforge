@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/cyfershepard/jellystat
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app built with npm and run on the node runtime.
+
 ## Fields
 
 ### Chart / Role

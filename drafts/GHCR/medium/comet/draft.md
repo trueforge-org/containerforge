@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/g0ldyy/comet
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python FastAPI app installed into a venv.
+
 ## Fields
 
 ### Chart / Role

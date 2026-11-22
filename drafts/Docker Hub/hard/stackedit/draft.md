@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/qmcgaw/stackedit
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static JavaScript editor served by a small web server, so nginx is the main runtime.
+
 ## Fields
 
 ### Chart / Role

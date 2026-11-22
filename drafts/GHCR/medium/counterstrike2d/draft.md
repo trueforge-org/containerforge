@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/ich777/cs2dserver
 - **Steam store page**: https://www.steampowered.com
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor server downloaded at runtime and unzipped with a start script.
+
 ## Fields
 
 ### Chart / Role

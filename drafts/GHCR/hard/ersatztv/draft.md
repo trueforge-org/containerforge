@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ersatztv/ersatztv
 - **Source code repository**: https://github.com/jasongdove/ErsatzTV
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET server with self-contained release tarballs.
+
 ## Fields
 
 ### Chart / Role

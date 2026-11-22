@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/splunk/splunk
 - **Website**: https://splunk.github.io/docker-splunk
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: a large vendor stack with bundled runtimes and no runtime named, so ubuntu is the default.
+
 ## Fields
 
 ### Chart / Role

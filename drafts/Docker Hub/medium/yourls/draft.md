@@ -27,6 +27,12 @@
 
 - **Container image**: https://hub.docker.com/_/yourls
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app with PHP installed from apt and the release copied into /app.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/dlandon/z80pack
 - **Container image**: https://registry.hub.docker.com/r/dlandon/z80pack
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Emulator built with make from source tarballs, so a build stage on ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

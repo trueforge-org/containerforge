@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/rmoriz/openra
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Release AppImage extracted on amd64 and C# built with the .NET SDK on arm64, both on ubuntu.
+
 ## Fields
 
 ### Chart / Role

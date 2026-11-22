@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/ulisses1478/docker-android
 - **Container image**: https://registry.hub.docker.com/r/ulisses1478/docker-android
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: emulator wrapper with no language runtime and an opaque base.
+
 ## Fields
 
 ### Chart / Role

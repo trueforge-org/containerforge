@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/ollama/ollama
 - **Container image**: https://hub.docker.com/r/ollama/ollama
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python 3.12 FastAPI app installed from PyPI with a prebuilt frontend.
+
 ## Fields
 
 ### Chart / Role

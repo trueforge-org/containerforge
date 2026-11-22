@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/bierdok/pixapop
 - **Source code repository**: https://github.com/linuxserver/docker-pixapop
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static JavaScript gallery served by nginx with no server runtime.
+
 ## Fields
 
 ### Chart / Role

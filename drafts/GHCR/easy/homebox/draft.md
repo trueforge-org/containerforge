@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/sysadminsmedia/homebox
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary with release tarballs and no sibling runtime.
+
 ## Fields
 
 ### Chart / Role

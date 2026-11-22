@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/gilesknap/gphotos-sync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python tool installed with pip, so the python base covers it.
+
 ## Fields
 
 ### Chart / Role

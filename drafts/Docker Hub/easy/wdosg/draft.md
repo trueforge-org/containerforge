@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/soulraven1980/wdosg
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app installed with npm and no build step.
+
 ## Fields
 
 ### Chart / Role

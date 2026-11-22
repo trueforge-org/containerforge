@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/ulisses1478/bitcoinwallet-gui
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Official daemon and GUI binaries running on a VNC desktop.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/wabayang/jelu
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: The input names the java17 sibling for a Spring Boot jar.
+
 ## Fields
 
 ### Chart / Role

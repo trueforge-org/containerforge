@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/_/docker
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static container engine binaries from tarballs with no language runtime.
+
 ## Fields
 
 ### Chart / Role

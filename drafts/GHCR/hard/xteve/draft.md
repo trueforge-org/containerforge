@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/k8s-at-home/xteve
 - **Source code repository**: https://github.com/k8s-at-home/container-images
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go binary unzipped into the image.
+
 ## Fields
 
 ### Chart / Role

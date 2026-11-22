@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/biospheere/promcord
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: java21
+- **Reason**: Upstream runs openjdk 16, and java17 is the nearest supported Java runtime.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/py-kms-organization/py-kms
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python server installed from requirements.txt.
+
 ## Fields
 
 ### Chart / Role

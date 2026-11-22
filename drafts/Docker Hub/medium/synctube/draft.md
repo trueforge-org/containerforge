@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/littlestache/synctube
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node-served app whose Haxe output is JavaScript, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

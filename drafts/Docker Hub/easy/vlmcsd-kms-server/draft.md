@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/mikolatero/docker-vlmcsd
 - **Container image**: https://hub.docker.com/r/mikolatero/vlmcsd
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single C daemon installed from apt or copied as a binary.
+
 ## Fields
 
 ### Chart / Role

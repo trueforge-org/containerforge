@@ -27,6 +27,12 @@
 
 - **Container image**: https://ghcr.io/minekube/gate
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go static binary released for amd64 and arm64.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/dlandon/zoneminder.unraid
 - **Website**: https://zoneminder.com
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Surveillance app installed from apt on ubuntu with its web server and PHP from apt.
+
 ## Fields
 
 ### Chart / Role

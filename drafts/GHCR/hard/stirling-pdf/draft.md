@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/stirling-tools/s-pdf
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Spring Boot Java app with no version named, so java17 is used by default.
+
 ## Fields
 
 ### Chart / Role

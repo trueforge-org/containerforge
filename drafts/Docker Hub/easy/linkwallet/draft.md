@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/tardisx/linkwallet
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

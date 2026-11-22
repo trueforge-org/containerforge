@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/meeb/tubesync
 - **Container image**: https://registry.hub.docker.com/r/ghcr.io/meeb/tubesync
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: nginx
+- **Reason**: Django app on Python, run with gunicorn, nginx and background workers.
+
 ## Fields
 
 ### Chart / Role

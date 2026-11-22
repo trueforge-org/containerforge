@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/halianelf/lemur
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python Flask app installed from pip, with the Go CFSSL service secondary.
+
 ## Fields
 
 ### Chart / Role

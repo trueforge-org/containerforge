@@ -28,6 +28,12 @@
 - **Website**: https://httpd.apache.org/docs/2.4/mod/mod_dav.html
 - **Container image**: https://hub.docker.com/r/apachewebdav/apachewebdav
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Apache httpd installed from apt on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

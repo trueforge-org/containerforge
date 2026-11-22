@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/accetto/headless-drawing-g3
 - **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-freecad-g3
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single apt package on a VNC desktop stack.
+
 ## Fields
 
 ### Chart / Role

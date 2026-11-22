@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/beromir/servas
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app with PHP installed via apt on ubuntu, run as one PHP server process.
+
 ## Fields
 
 ### Chart / Role

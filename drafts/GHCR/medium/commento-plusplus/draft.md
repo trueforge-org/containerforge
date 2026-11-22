@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/souramoo/commentoplusplus
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Go API binary runs on ubuntu; the node frontend is a build-time stage.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://gallery.ecr.aws/docker/library/xwiki
 - **Source code repository**: https://github.com/xwiki/xwiki-docker
 
+## Base container
+
+- **Primary**: java25
+- **Alternative**: none
+- **Reason**: Tomcat on JRE 25 running an XWiki WAR.
+
 ## Fields
 
 ### Chart / Role

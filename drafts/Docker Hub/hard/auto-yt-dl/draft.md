@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/xXGuhuXx/auto-yt-dl
 - **Container image**: https://hub.docker.com/r/guhu007/auto-yt-dl
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: no source or Dockerfile is available, so the runtime is unknown.
+
 ## Fields
 
 ### Chart / Role

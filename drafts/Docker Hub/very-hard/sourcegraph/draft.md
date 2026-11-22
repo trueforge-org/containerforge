@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/sourcegraph/server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: no public Dockerfile or binaries exist, so no runtime is clearly needed and ubuntu is a default.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/lloesche/valheim-server
 - **Source code repository**: https://github.com/lloesche/valheim-server-docker
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Native Steam dedicated server downloaded through SteamCMD.
+
 ## Fields
 
 ### Chart / Role

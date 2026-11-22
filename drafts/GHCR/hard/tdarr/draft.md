@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/haveagitgat/tdarr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Server, web UI and bundled ffmpeg and HandBrake tools on ubuntu.
+
 ## Fields
 
 ### Chart / Role

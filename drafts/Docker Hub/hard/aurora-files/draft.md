@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/afterlogic/docker-aurora-files
 - **Container image**: https://hub.docker.com/r/afterlogic/docker-aurora-files
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: PHP app with nginx and php-fpm, with PHP provided by apt.
+
 ## Fields
 
 ### Chart / Role

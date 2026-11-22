@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/jlesage/handbrake
 - **Source code repository**: https://github.com/jlesage/docker-handbrake
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: GTK app with handbrake-cli available from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/linuxserver/filezilla
 - **Source code repository**: https://github.com/linuxserver/docker-filezilla
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: GTK client installed as one apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

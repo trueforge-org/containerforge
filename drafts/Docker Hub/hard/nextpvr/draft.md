@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/sub3/NextPVR/wiki/Install-Docker
 - **Container image**: https://hub.docker.com/r/nextpvr/nextpvr_amd64
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Guess: vendor installer on ubuntu with no runtime base named.
+
 ## Fields
 
 ### Chart / Role

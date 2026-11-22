@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/wizarrrr/wizarr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Flask app managed with uv on the python base.
+
 ## Fields
 
 ### Chart / Role

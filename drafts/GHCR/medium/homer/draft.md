@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/bastienwirtz/homer
 - **Source code repository**: https://github.com/bastienwirtz/homer
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static dashboard files built once and served by a web server.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/linuxserver/docker-remmina
 - **Website**: https://remmina.org
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop client installed with apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/clamav/clamav
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Debian package install running clamd and freshclam daemons.
+
 ## Fields
 
 ### Chart / Role

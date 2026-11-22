@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/hexxa/quickshare
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the release zip.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/p3terx/aria2-pro
 - **Container image**: https://ghcr.io/rogerfar/rdtclient
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET server with a build-time Node client; the .NET runtime is installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

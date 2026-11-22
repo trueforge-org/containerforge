@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/ich777/steamcmd
 - **Steam store page**: https://steampowered.com
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: ubuntu
+- **Reason**: Unity server fetched through SteamCMD, with Xvfb for display.
+
 ## Fields
 
 ### Chart / Role

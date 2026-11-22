@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/haveagitgat/tdarr_node
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Bundled Node, ffmpeg and HandBrake tools installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

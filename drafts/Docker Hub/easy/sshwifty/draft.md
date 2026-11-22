@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/niruix/sshwifty
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary with embedded UI from the release tarball.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/guacamole/guacamole
 - **Container image**: https://hub.docker.com/r/guacamole/guacd
 
+## Base container
+
+- **Primary**: java21
+- **Alternative**: none
+- **Reason**: The input names jdk21 for a Java war run in a servlet container.
+
 ## Fields
 
 ### Chart / Role

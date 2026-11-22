@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/mtlynch/mediagoblin
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python app installed into a venv.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/jlesage/mediainfo
 - **Source code repository**: https://github.com/jlesage/docker-mediainfo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Compiled CLI and GUI tools installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

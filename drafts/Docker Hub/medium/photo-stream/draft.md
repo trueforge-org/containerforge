@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/waschinski/photo-stream
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Jekyll site built once and served as static files, so nginx serves it; ubuntu is the alternative if the build runs there.
+
 ## Fields
 
 ### Chart / Role

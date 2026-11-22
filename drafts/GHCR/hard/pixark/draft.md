@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/ich777/steamcmd
 - **Website**: https://pixark.snail.com
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: ubuntu
+- **Reason**: Steam dedicated server installed through SteamCMD, with Wine added on top.
+
 ## Fields
 
 ### Chart / Role

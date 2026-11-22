@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/danmed/tasmobackupv1
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: Pure PHP app with PHP from apt on ubuntu; nginx is the alternative web server.
+
 ## Fields
 
 ### Chart / Role

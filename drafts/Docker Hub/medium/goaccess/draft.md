@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/gregyankovoy/goaccess
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: goaccess is installed from apt on ubuntu, and nginx is the alternative if serving the HTML report becomes the main runtime.
+
 ## Fields
 
 ### Chart / Role

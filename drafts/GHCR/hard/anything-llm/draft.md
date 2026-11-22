@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/mintplex-labs/anything-llm
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js monorepo that also needs a Python collector.
+
 ## Fields
 
 ### Chart / Role

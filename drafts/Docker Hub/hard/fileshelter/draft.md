@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/epoupon/fileshelter
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native C++ build against glibc development packages.
+
 ## Fields
 
 ### Chart / Role

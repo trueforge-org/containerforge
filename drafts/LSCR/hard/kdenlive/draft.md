@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/linuxserver/docker-kdenlive#readme
 - **Source code repository**: https://github.com/orgs/linuxserver/packages/container/package/kdenlive
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop GUI video editor installed from the Ubuntu archive.
+
 ## Fields
 
 ### Chart / Role

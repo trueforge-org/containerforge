@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/Dispatcharr/Dispatcharr/blob/main/docker/docker-compose.aio.yml
 - **Container image**: https://hub.docker.com/_/alpine
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Plain Alpine userland helper image that only needs busybox tools, which the ubuntu base covers.
+
 ## Fields
 
 ### Chart / Role

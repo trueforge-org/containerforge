@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/seaduboi/broadcast-box
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Go server with a Node-built UI on ubuntu; the Node runtime for the build is the alternative.
+
 ## Fields
 
 ### Chart / Role

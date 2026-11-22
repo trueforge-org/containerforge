@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/_/hello-world
 - **Website**: https://metallb.io
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Placeholder static hello binary that needs no runtime.
+
 ## Fields
 
 ### Chart / Role

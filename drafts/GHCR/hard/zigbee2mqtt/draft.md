@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/koenkk/zigbee2mqtt
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app installed with pnpm.
+
 ## Fields
 
 ### Chart / Role

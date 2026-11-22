@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/songkong/songkong
 
+## Base container
+
+- **Primary**: java17
+- **Alternative**: none
+- **Reason**: Closed-source Java application with no Java version named, so java17 is used.
+
 ## Fields
 
 ### Chart / Role

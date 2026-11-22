@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/rommapp/romm
 - **Source code repository**: https://github.com/zurdi15/romm
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python FastAPI backend with static frontend files.
+
 ## Fields
 
 ### Chart / Role

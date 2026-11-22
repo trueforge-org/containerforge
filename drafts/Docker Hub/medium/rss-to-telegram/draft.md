@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/bokker/rss.to.telegram
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js bot built with npm, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

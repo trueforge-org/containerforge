@@ -27,6 +27,12 @@
 
 - **Container image**: https://ghcr.io/ich777/stun-turn-server
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Coturn installed from the Ubuntu apt package.
+
 ## Fields
 
 ### Chart / Role

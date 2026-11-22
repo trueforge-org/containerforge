@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/difegue/lanraragi
 - **Website**: https://sugoi.gitbook.io/lanraragi
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Guess: Perl and Node app built from source, and Perl has no base.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/alexta69/metube
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app installed with pip; ffmpeg comes from apt.
+
 ## Fields
 
 ### Chart / Role

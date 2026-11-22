@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/Steam-Headless/docker-steam-headless
 - **Container image**: https://hub.docker.com/r/josh5/steam-headless
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Steam desktop streaming client installed from Valve apt packages on ubuntu.
+
 ## Fields
 
 ### Chart / Role

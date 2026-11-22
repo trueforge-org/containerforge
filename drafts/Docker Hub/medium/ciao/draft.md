@@ -25,6 +25,12 @@
 - **Website**: https://brotandgames.com/ciao
 - **Container image**: https://hub.docker.com/r/brotandgames/ciao
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Ruby is not provided by any base, so ubuntu is used with Ruby from apt.
+
 ## Fields
 
 ### Chart / Role

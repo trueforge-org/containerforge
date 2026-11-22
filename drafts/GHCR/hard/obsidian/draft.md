@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/sytone/obsidian-remote
 - **Source code repository**: https://github.com/sytone/obsidian-remote/pkgs/container/obsidian-remote
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Electron app shipped as an AppImage and run on ubuntu.
+
 ## Fields
 
 ### Chart / Role

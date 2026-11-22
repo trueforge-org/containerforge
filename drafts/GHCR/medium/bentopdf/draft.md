@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/alam00000/bentopdf-simple
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: python-node
+- **Reason**: Vite-built static site served by nginx; node is only needed for the build.
+
 ## Fields
 
 ### Chart / Role

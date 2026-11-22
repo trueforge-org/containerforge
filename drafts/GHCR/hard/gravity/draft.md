@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/beryju/gravity
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go server compiled from source.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js file-sharing server run on the node sibling.
+
 ## Fields
 
 ### Chart / Role

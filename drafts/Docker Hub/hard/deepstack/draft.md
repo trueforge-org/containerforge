@@ -27,6 +27,12 @@
 - **Container image**: https://hub.docker.com/r/deepquestai/deepstack
 - **Website**: https://www.deepstack.cc
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python AI model stack is the bulk of the app, alongside a Go server.
+
 ## Fields
 
 ### Chart / Role

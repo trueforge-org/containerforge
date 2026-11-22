@@ -24,6 +24,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node bundle that needs a matching node runtime.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/linuxserver/docker-mylar3
 - **Source code repository**: https://github.com/mylar3/mylar3
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Python web app installed with pip in a venv; the unrar tool comes from apt.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/kutzilla/hetzner-ddns
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go updater with a small static build stage on ubuntu.
+
 ## Fields
 
 ### Chart / Role

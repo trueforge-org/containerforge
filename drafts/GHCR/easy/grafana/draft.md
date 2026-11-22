@@ -28,6 +28,12 @@
 - **Website**: https://grafana.com
 - **Container image**: https://hub.docker.com/r/grafana/grafana
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script app installed into a venv on the python base.
+
 ## Fields
 
 ### Chart / Role

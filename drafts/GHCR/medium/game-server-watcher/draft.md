@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/a-sync/game-server-watcher
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node 20 app with no other runtime needs, so the node-providing base fits.
+
 ## Fields
 
 ### Chart / Role

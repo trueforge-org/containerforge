@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/chroma-core/chroma
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python server installed with pip, using prebuilt wheels.
+
 ## Fields
 
 ### Chart / Role

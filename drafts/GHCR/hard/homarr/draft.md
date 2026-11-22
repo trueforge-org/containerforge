@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/homarr-labs/homarr
 - **Source code repository**: https://github.com/ajnart/homarr
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Next.js app on Node.js, with redis and nginx bundled as extra processes.
+
 ## Fields
 
 ### Chart / Role

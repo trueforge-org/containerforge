@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/linuxserver/photoshow
 - **Source code repository**: https://github.com/linuxserver/docker-photoshow
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: PHP gallery needing php-fpm beside nginx, which is installed from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

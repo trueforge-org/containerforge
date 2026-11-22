@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/fardjad/tagspaces-lite-web
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static web bundle served by nginx.
+
 ## Fields
 
 ### Chart / Role

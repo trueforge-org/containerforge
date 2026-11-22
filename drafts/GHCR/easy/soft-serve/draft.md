@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/charmbracelet/soft-serve
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go single binary with release packages.
+
 ## Fields
 
 ### Chart / Role

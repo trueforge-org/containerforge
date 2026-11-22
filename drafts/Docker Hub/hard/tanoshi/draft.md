@@ -25,6 +25,12 @@
 - **Source code repository**: https://github.com/faldez/tanoshi
 - **Container image**: https://hub.docker.com/r/faldez/tanoshi
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust toolchain is not provided by any base, so ubuntu is used with cargo from apt.
+
 ## Fields
 
 ### Chart / Role

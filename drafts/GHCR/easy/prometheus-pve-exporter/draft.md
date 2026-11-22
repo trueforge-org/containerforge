@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/prometheus-pve/prometheus-pve-exporter
 - **Website**: https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Pure Python exporter published on PyPI.
+
 ## Fields
 
 ### Chart / Role

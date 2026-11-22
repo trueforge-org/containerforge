@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/jlesage/czkawka
 - **Source code repository**: https://github.com/jlesage/docker-czkawka
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust binary built on ubuntu with no language runtime base.
+
 ## Fields
 
 ### Chart / Role

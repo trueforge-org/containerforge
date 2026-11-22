@@ -26,6 +26,12 @@
 - **Website**: https://docs.browserless.io/docs/docker.html
 - **Container image**: https://hub.docker.com/r/browserless/chrome
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js service that drives headless Chromium.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/atuinsh/atuin
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Rust server release binary run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

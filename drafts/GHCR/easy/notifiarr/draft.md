@@ -27,6 +27,12 @@
 
 - **Container image**: https://ghcr.io/notifiarr/notifiarr
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single Go binary fetched per architecture.
+
 ## Fields
 
 ### Chart / Role

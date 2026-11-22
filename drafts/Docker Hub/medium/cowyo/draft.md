@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/schollz/cowyo
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: python-node
+- **Reason**: Go backend with a Node frontend build; ubuntu hosts the Go binary and Node is used at build time.
+
 ## Fields
 
 ### Chart / Role

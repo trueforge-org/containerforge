@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/nicholaswilde/docker-golinks
 - **Source code repository**: https://github.com/prologic/golinks
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single static Go binary built in a Go stage.
+
 ## Fields
 
 ### Chart / Role

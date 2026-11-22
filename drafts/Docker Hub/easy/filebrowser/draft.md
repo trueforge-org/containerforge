@@ -25,6 +25,12 @@
 - **Website**: https://filebrowser.org/cli/filebrowser
 - **Container image**: https://hub.docker.com/r/filebrowser/filebrowser
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go binary from the release tarball.
+
 ## Fields
 
 ### Chart / Role

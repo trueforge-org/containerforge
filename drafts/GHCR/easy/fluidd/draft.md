@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/fluidd-core/fluidd
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static Vue UI served by nginx from the release zip.
+
 ## Fields
 
 ### Chart / Role

@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/SiaFoundation/siad/pkgs/container/siad
 - **Source code repository**: https://github.com/siafoundation/siad
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go daemon built from source into a binary.
+
 ## Fields
 
 ### Chart / Role

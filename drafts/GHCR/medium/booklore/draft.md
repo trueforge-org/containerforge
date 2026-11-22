@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/booklore-app/booklore
 
+## Base container
+
+- **Primary**: java25
+- **Alternative**: none
+- **Reason**: Spring Boot jar that the reason says runs on the java25 base.
+
 ## Fields
 
 ### Chart / Role

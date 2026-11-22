@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/automaticrippingmachine/automatic-ripping-machine
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python web app, with native ripping tools installed alongside.
+
 ## Fields
 
 ### Chart / Role

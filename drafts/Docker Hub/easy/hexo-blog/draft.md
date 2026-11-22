@@ -27,6 +27,12 @@
 - **Source code repository**: https://github.com/fletchto99/hexo-dev-docker
 - **Container image**: https://hub.docker.com/r/fletchto99/hexo-dev-blog
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Hexo static site tooling installed with npm, so only Node.js is needed.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/accetto/headless-drawing-g3
 - **Container image**: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-g3
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Desktop with a browser install on a VNC stack.
+
 ## Fields
 
 ### Chart / Role

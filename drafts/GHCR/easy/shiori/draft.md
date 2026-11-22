@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/go-shiori/shiori
 - **Source code repository**: https://github.com/go-shiori/shiori/pkgs/container/shiori
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the goreleaser release.
+
 ## Fields
 
 ### Chart / Role

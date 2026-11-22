@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/Feramance/Qbitrr
 - **Container image**: https://hub.docker.com/r/feramance/qbitrr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: python-node
+- **Reason**: Python package installed with pip, with a webui built in a node stage.
+
 ## Fields
 
 ### Chart / Role

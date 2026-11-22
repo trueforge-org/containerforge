@@ -29,6 +29,12 @@
 - **Container image**: https://hub.docker.com/r/portainer/portainer-ce
 - **Container image**: https://hub.docker.com/r/portainer/portainer-ee
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor binary extracted from an official image and installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

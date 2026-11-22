@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/gregyankovoy/chowdown
 
+## Base container
+
+- **Primary**: nginx
+- **Alternative**: ubuntu
+- **Reason**: Static site with no runtime code, served by nginx.
+
 ## Fields
 
 ### Chart / Role

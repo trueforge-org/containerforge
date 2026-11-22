@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/jordan-dalby/bytestash
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Express server on Node.js with a build-time React client.
+
 ## Fields
 
 ### Chart / Role

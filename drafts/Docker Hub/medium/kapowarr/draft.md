@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/mrcas/kapowarr
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app installed with pip into /app, which the input says fits the python sibling.
+
 ## Fields
 
 ### Chart / Role

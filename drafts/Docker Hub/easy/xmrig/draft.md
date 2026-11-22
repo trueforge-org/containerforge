@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/cooleye72/xmrig
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Single apt package on the ubuntu base.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/jeessy2/ddns-go
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from the release tarball run directly on ubuntu.
+
 ## Fields
 
 ### Chart / Role

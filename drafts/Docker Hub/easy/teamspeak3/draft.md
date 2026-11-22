@@ -25,6 +25,12 @@
 - **Container image**: https://hub.docker.com/_/teamspeak
 - **Website**: https://www.teamspeak.com/en
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Closed vendor server tarball unpacked into /app.
+
 ## Fields
 
 ### Chart / Role

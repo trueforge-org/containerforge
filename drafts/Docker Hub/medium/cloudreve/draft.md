@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/cloudreve/cloudreve
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary plus ffmpeg from apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

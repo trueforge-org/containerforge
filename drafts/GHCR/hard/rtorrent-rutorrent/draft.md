@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/thde/rtorrent_exporter
 - **Source code repository**: https://github.com/crazy-max/docker-rtorrent-rutorrent
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: nginx
+- **Reason**: Reason names ubuntu with apt rtorrent, PHP-FPM and nginx.
+
 ## Fields
 
 ### Chart / Role

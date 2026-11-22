@@ -26,6 +26,12 @@
 
 - No additional resources were listed in the TrueCharts chart sources.
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: java21
+- **Reason**: Python web panel installed from requirements; the Java stack is for spawned Minecraft servers, not the panel itself.
+
 ## Fields
 
 ### Chart / Role

@@ -26,6 +26,12 @@
 - **Container image**: https://hub.docker.com/r/jcreynolds/flextv
 - **Container image**: https://registry.hub.docker.com/r/jcreynolds/flextv
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app with pip requirements in /app.
+
 ## Fields
 
 ### Chart / Role

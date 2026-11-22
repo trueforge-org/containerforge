@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ngosang/amule
 - **Source code repository**: https://github.com/ngosang/docker-amule
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Daemon installed from the apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

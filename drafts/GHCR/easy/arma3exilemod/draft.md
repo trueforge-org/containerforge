@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/ich777/steamcmd
 
+## Base container
+
+- **Primary**: steamcmd
+- **Alternative**: none
+- **Reason**: Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+
 ## Fields
 
 ### Chart / Role

@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/lnxd/github-backup
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python script installed with pip into /app.
+
 ## Fields
 
 ### Chart / Role

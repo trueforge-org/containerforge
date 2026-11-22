@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/ronivay/xen-orchestra
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node monorepo built with yarn, so python-node provides the Node runtime.
+
 ## Fields
 
 ### Chart / Role

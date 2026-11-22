@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/nicholaswilde/docker-shorturl
 - **Source code repository**: https://github.com/prologic/shorturl
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go URL shortener built from source into a static binary.
+
 ## Fields
 
 ### Chart / Role

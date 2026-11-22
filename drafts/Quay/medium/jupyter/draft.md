@@ -33,6 +33,12 @@
 - **Container image**: https://quay.io/jupyter/scipy-notebook
 - **Container image**: https://quay.io/jupyter/tensorflow-notebook
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: JupyterLab installed with pip.
+
 ## Fields
 
 ### Chart / Role

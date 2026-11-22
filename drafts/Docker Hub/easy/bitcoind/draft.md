@@ -26,6 +26,12 @@
 - **Website**: https://bitcoin.org
 - **Container image**: https://hub.docker.com/r/ofawx/bitcoind
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Official glibc release tarball of Bitcoin Core copied into /app.
+
 ## Fields
 
 ### Chart / Role

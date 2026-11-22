@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/rogerfar/rdtclient
 - **Source code repository**: https://github.com/rogerfar/rdt-client
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: The aria2c daemon is an apt package on ubuntu.
+
 ## Fields
 
 ### Chart / Role

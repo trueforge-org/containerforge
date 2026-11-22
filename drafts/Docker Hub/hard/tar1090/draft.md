@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/mikenye/tar1090
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native decoder compiled on ubuntu with a web server and an aircraft database.
+
 ## Fields
 
 ### Chart / Role

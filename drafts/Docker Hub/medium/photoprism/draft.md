@@ -26,6 +26,12 @@
 
 - **Container image**: https://hub.docker.com/r/photoprism/photoprism
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from an upstream tarball chosen per TARGETARCH, with MariaDB as a separate service.
+
 ## Fields
 
 ### Chart / Role

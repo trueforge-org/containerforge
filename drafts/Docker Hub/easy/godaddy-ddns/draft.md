@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/jwater7/godaddy-publicip-updater
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python updater that pip installs its dependencies.
+
 ## Fields
 
 ### Chart / Role

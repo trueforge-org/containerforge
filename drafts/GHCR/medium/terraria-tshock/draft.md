@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/ich777/terrariaserver
 - **Website**: https://tshock.co
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: .NET 9 server run with the dotnet runtime from apt.
+
 ## Fields
 
 ### Chart / Role

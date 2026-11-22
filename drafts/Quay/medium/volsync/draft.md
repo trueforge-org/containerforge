@@ -26,6 +26,12 @@
 - **Source code repository**: https://github.com/backube/helm-charts
 - **Container image**: https://quay.io/backube/volsync
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go operator compiled from source with helper binaries built in stages.
+
 ## Fields
 
 ### Chart / Role

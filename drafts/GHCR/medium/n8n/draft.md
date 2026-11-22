@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/n8n-io/n8n
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js application installed from npm; python-node provides node.
+
 ## Fields
 
 ### Chart / Role

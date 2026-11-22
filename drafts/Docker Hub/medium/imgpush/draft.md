@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/hauxir/imgpush
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python app managed with uv from pyproject and a lock file, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

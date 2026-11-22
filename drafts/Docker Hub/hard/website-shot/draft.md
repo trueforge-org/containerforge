@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/flowko1/website-shot
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app built with yarn on the Node runtime, so python-node fits.
+
 ## Fields
 
 ### Chart / Role

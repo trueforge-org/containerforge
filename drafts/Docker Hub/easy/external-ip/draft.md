@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/xavierh/external-ip
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: ubuntu
+- **Reason**: Shell loop that depends on apprise installed with pip, so the python base fits.
+
 ## Fields
 
 ### Chart / Role

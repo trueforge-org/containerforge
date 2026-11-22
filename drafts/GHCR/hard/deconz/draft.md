@@ -28,6 +28,12 @@
 - **Source code repository**: https://github.com/dresden-elektronik/deconz-rest-plugin
 - **Source code repository**: https://github.com/marthoc/docker-deconz
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Vendor deb package installed on ubuntu.
+
 ## Fields
 
 ### Chart / Role

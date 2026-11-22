@@ -24,6 +24,12 @@
 
 - **Container image**: https://hub.docker.com/r/cglatot/pasta
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js app built with npm, so python-node provides node.
+
 ## Fields
 
 ### Chart / Role

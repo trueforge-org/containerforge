@@ -26,6 +26,12 @@
 - **Website**: https://docs.teslamate.org/docs/installation/docker
 - **Container image**: https://hub.docker.com/r/teslamate/teslamate
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Elixir release is not provided by any base, so ubuntu is used with Node only at build time.
+
 ## Fields
 
 ### Chart / Role

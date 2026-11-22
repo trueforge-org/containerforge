@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/benbusby/whoogle-search
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Flask app installed with pip.
+
 ## Fields
 
 ### Chart / Role

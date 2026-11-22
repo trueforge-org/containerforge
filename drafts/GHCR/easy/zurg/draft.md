@@ -25,6 +25,12 @@
 
 - **Container image**: https://ghcr.io/geek-cookbook/zurg
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Static Go binary in a linux zip.
+
 ## Fields
 
 ### Chart / Role

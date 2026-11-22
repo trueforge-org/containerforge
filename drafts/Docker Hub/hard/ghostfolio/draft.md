@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/ghostfolio/ghostfolio
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Nx monorepo with Angular and Nest backend on Node.
+
 ## Fields
 
 ### Chart / Role

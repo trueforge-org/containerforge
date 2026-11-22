@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/rossimo/retrobot
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node app installed with yarn.
+
 ## Fields
 
 ### Chart / Role

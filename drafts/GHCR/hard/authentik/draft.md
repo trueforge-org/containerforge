@@ -33,6 +33,12 @@
 - **Container image**: https://ghcr.io/maxmind/geoipupdate
 - **Website**: https://goauthentik.io/docs
 
+## Base container
+
+- **Primary**: python
+- **Alternative**: none
+- **Reason**: Python Django server is the main runtime.
+
 ## Fields
 
 ### Chart / Role

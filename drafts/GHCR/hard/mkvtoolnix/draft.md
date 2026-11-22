@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/jlesage/mkvtoolnix
 - **Source code repository**: https://github.com/jlesage/docker-mkvtoolnix
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Compiled C++ tools installed from apt.
+
 ## Fields
 
 ### Chart / Role

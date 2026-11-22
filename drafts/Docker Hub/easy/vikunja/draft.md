@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/vikunja/vikunja
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go binary from release archives, run from /app.
+
 ## Fields
 
 ### Chart / Role

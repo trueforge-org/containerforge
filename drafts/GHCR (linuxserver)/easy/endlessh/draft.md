@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/linuxserver/endlessh
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Small C tool installed with apt on ubuntu.
+
 ## Fields
 
 ### Chart / Role

@@ -25,6 +25,12 @@
 - **Container image**: https://ghcr.io/enchant97/hasty-paste
 - **Source code repository**: https://github.com/enchant97/hasty-paste/blob/main/docs/install.md
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Go backend is the runtime process; the node frontend is built in a builder stage.
+
 ## Fields
 
 ### Chart / Role

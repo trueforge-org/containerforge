@@ -26,6 +26,12 @@
 
 - **Container image**: https://ghcr.io/mauricenino/dashdot
 
+## Base container
+
+- **Primary**: python-node
+- **Alternative**: none
+- **Reason**: Node.js server dashboard.
+
 ## Fields
 
 ### Chart / Role

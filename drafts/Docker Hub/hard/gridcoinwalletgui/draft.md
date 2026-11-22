@@ -25,6 +25,12 @@
 
 - **Container image**: https://hub.docker.com/r/sublivion/gridcoinwalletgui
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt wallet on a VNC desktop, installed from packages.
+
 ## Fields
 
 ### Chart / Role

@@ -27,6 +27,12 @@
 - **Container image**: https://ghcr.io/linuxserver/digikam
 - **Source code repository**: https://github.com/linuxserver/docker-digikam
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Qt AppImage or apt package with no scripting runtime, so ubuntu fits.
+
 ## Fields
 
 ### Chart / Role

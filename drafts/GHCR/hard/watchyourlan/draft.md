@@ -24,6 +24,12 @@
 
 - **Container image**: https://ghcr.io/aceberg/watchyourlan
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Prebuilt Go web app that runs arp-scan from apt.
+
 ## Fields
 
 ### Chart / Role

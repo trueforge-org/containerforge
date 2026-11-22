@@ -26,6 +26,12 @@
 - **Container image**: https://ghcr.io/ich777/urbanterror
 - **Website**: https://www.urbanterror.info
 
+## Base container
+
+- **Primary**: ubuntu
+- **Alternative**: none
+- **Reason**: Native x86_64 dedicated server binary.
+
 ## Fields
 
 ### Chart / Role
