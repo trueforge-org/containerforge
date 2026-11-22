@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (desktop web UI, inferred), 3001/https (desktop web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mysql-workbench
+- non-root: no - chart runAsUser 0; draft GUI needs VNC/Xvfb and rootless rework
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: adds IPC_LOCK cap plus common root caps
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

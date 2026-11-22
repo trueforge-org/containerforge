@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 30000/udp (game client)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/minetest
+- non-root: possible - chart sets runAsUser 0 for linuxserver s6; draft runs apt luanti-server rootless
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft keeps state in /config
+- privileged: no - not set in values
+- other-security: none; UDP 30000 only
+- extra-persistence: /config/.minetest (pvc, subpath of /config; draft says /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

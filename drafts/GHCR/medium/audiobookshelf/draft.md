@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/audiobookshelf
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and runAsNonRoot false; chart passes PUID/fsGroup as UID/GID env, so uid can be set; port 80 needs a rootless change
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; /config, /metadata and audiobooks are pvc mounts
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /audiobooks and /metadata (pvc, chart-level)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

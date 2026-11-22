@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (KasmVNC web GUI, inferred), 3001/https (KasmVNC web GUI TLS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/openaudible
+- non-root: no - runAsUser 0 and runAsGroup 0, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: none (config is /config/OpenAudible, under /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

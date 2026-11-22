@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (nginx static files, inferred), 6080/http (websockify, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/novnc
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; nginx and websockify can run on unprivileged ports without root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; nginx needs writable cache and run paths, covered by the common /var/run and /tmp mounts
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none beyond common defaults (varrun is a common default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

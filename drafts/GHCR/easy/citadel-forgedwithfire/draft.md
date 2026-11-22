@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7777/udp (game, inferred), 27015/udp (steam query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/citadel-forgedwithfire
+- non-root: no - chart sets runAsUser 0, runAsGroup 0; SteamCMD wrapper runs as root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none in values
+- extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

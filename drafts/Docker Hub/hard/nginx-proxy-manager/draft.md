@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (proxy HTTP), 443/https (proxy HTTPS), 81/http (admin UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nginx-proxy-manager
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: web and websecure services on 80 and 443 (below 1024); mariadb dependency enabled
+- extra-persistence: /data (pvc, 256Gi); /etc/letsencrypt (pvc, 256Gi)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

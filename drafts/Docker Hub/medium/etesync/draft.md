@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/etesync
+- non-root: yes - chart sets runAsUser 373 and runAsGroup 373, fsGroup 373
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, no override in values
+- other-security: none (common drop ALL, seccomp RuntimeDefault)
+- extra-persistence: /data (pvc, app); /data/secret.txt (secret, read-only file)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

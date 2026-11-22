@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (web UI and streaming), 9090/tcp (CLI), 3483/tcp (SlimProto player control), 3483/udp (player discovery)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lyrion-music-server
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false; Perl server from .deb
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - common default, not overridden
+- other-security: none (ports 3483 tcp and udp, 9090 CLI)
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

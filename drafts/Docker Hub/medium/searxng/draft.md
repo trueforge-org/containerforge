@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/searxng
+- non-root: no - runAsUser 0, runAsGroup 0 override; s6 init with SETUID/SETGID
+- read-only-rootfs: possible - inherits default true, but app writes must go to /tmp (common default) and the chart config is /etc/searxng
+- privileged: no - common default privileged false, not overridden
+- other-security: capabilities add SETUID, SETGID; disableS6Caps true
+- extra-persistence: none beyond chart config /etc/searxng (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

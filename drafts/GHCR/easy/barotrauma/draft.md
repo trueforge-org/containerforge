@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27015/udp (game, inferred), 27015/tcp (game, inferred), 27016/udp (Steam query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/barotrauma
+- non-root: possible - chart runs the ich777 wrapper as runAsUser 0; draft plans a USER apps start script
+- read-only-rootfs: possible - chart sets false; draft keeps state in /config
+- privileged: no - default false, not overridden
+- other-security: none; UDP 27015 and 27016 ports
+- extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

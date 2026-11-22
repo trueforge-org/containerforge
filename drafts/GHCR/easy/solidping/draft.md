@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4000/http (web UI and API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/solidping
+- non-root: yes - no securityContext override, common 568 default
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not set
+- other-security: none
+- extra-persistence: /data (pvc); draft suggests /config or external DB
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred), 25/tcp (SMTP inbound, inferred), 587/tcp (SMTP submission, inferred), 143/tcp (IMAP, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/anonaddy
+- non-root: no - chart sets runAsUser 0, and postfix/dovecot ports 25/143 plus s6 init need root or NET_BIND_SERVICE
+- read-only-rootfs: possible - chart sets false; mail stack has several writable paths
+- privileged: no - not set, common default false
+- other-security: low ports 25, 587, 143 need NET_BIND_SERVICE or root
+- extra-persistence: mail spool and queue dirs (not in values; likely pvc or emptyDir); none beyond /config in values
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

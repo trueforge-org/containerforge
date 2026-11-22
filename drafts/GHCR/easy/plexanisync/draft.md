@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/plexanisync
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; draft is a pip-installed Python process with state in /config
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; state is in /config
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft (state in /config); chart mounts a settings.ini secret at /plexanisync/settings.ini
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

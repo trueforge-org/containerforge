@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/serpbear
+- non-root: yes - runAsUser 568 default, no root override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, not overridden; Next.js cache writes must go to /tmp
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /app/data (pvc, chart-defined; SQLite)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

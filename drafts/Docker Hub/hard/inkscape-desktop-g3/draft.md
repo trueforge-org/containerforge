@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6901/http (noVNC web desktop, inferred), 5901/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/inkscape-desktop-g3
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values (VNC and webui ports)
+- extra-persistence: /UNRAID_SHARE (pvc, chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

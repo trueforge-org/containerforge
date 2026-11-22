@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27016/udp (game), 27015/udp (steam query, inferred), 8766/udp (steam peer, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/spaceengineers
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: none (liveness, readiness and startup probes disabled; postStart runs sed on the config)
+- extra-persistence: /root/.steam (pvc, steam cache, root path), /appdata/space-engineers/plugins (pvc), /appdata/space-engineers/SpaceEngineersDedicated (pvc), /appdata/space-engineers/instances (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

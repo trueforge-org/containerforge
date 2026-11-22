@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI), 7227/tcp (RPC API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pyload
+- non-root: possible - chart sets runAsUser 0 for linuxserver; draft reuses pyload-ng sibling on python base
+- read-only-rootfs: possible - no override, chart default true; state in /config
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/fireshare
+- non-root: no - runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; CUDA/NVENC GPU variant needs device access per draft (not in values)
+- extra-persistence: /data, /processed, /videos, /images (chart persistence, type not shown)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

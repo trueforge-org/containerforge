@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred), 8443/https (web UI TLS, inferred), 8101/tcp (Karaf SSH console, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/openhab
+- non-root: no - runAsUser 0, runAsNonRoot false in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none; init script mounted from a configmap at /etc/cont-init.d/enable-console-logging.sh
+- extra-persistence: /openhab/addons and /openhab/userdata (pvc default, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

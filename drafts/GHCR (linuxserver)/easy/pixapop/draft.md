@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (static gallery via nginx, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pixapop
+- non-root: possible - chart sets runAsUser 0 for linuxserver; draft serves static files via nginx sibling
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; nginx cache/runtime paths not shown
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none known
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

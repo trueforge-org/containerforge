@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/birdnet-go
+- non-root: yes - no securityContext override, defaults 568 apply
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, no override
+- privileged: no - not set, default false
+- other-security: none in values; audio capture device (ALSA or USB mic) from the Reason is not shown, so device or group access is unconfirmed
+- extra-persistence: /data (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

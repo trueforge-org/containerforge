@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6080/http (noVNC web desktop, inferred), 5900/tcp (VNC, inferred), 8000/http (Electrum JSON-RPC daemon, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/electrum
+- non-root: no - chart forces runAsUser 0 and runAsGroup 0 (VNC desktop base)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: /electrum (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/clipplex
+- non-root: yes - no securityContext override, common default runAsUser 568
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true, writes go to pvc and /tmp
+- privileged: no - common default false, no override in values
+- other-security: none (common drop ALL, seccomp RuntimeDefault)
+- extra-persistence: /app/app/static/media (pvc, clips)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (Firefox Sync storage API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/firefox-syncserver
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: allowPrivilegeEscalation true (overrides default false)
+- extra-persistence: none (/config only)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6379/tcp (redis protocol)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/redis
+- non-root: possible - chart sets runAsGroup 0; no runAsUser override seen
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; redis needs a writable data dir
+- privileged: no - not set, common default false
+- other-security: none seen
+- extra-persistence: /bitnami/redis (pvc, chart's own; draft points data at /config); /health (configmap with probe scripts)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

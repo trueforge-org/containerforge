@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/muximux
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; the Go binary serves on an unprivileged port
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; config is written to the chart's /app/data volume
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft (config in /config); chart mounts /app/data (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

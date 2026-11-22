@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6555/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/embystat
+- non-root: possible - chart runAsUser 0 for linuxserver; draft is an ASP.NET release zip on ubuntu
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; database in /config
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

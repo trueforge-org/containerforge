@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/phoronix-test-suite
+- non-root: no - runAsUser 0 and runAsGroup 0, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /var/lib/phoronix-test-suite (pvc), /var/lib/phoronix-test-suite/test-results (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

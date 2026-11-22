@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5121/udp (game, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/neverwinternights-ee
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; UDP 5121 game port
+- extra-persistence: /nwnee (serverfiles, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

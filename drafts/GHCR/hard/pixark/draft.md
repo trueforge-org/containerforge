@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7777/udp (game, inferred), 27015/udp (Steam query, inferred), 27020/tcp (RCON, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pixark
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0 in top-level securityContext
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; game ports 7777 and 27015 UDP, RCON TCP
+- extra-persistence: /serverdata/serverfiles (serverfiles, pvc chart default); /serverdata/steamcmd (steamcmd, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/chronos
+- non-root: no - chart sets runAsNonRoot false and runAsUser/runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, no override in values
+- other-security: none beyond root override
+- extra-persistence: /chronos (pvc, chronos)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

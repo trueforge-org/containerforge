@@ -53,6 +53,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8888/http (Jupyter server, all rows), 4040/http (Spark UI, row 4 pyspark, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/jupyter
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; NB_UID/NB_GID/NB_UMASK derived from PUID/fsGroup/UMASK
+- extra-persistence: /home/jovyan/work (chart-added, pvc); draft's home dir at /config does not match the chart mount
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

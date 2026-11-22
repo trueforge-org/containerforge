@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8866/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nextpvr
+- non-root: possible - no securityContext override, common runAsUser 568; draft says the app needs root
+- read-only-rootfs: possible - no override, common default true; draft expects root-era paths
+- privileged: unknown - no privileged flag or device mount in values; draft says TV tuner hardware access
+- other-security: nextpvr-udp service (UDP); no capabilities or devices in values
+- extra-persistence: /recordings (pvc); /buffer (pvc). /config is the chart's own mount.
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

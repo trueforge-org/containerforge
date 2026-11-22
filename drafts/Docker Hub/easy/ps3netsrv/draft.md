@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 38008/tcp (PS3 game-folder network share)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ps3netsrv
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft has no root step
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft needs only /tmp writable
+- privileged: no - not set, common default false
+- other-security: none (port 38008 only)
+- extra-persistence: /games (pvc, chart's own mount; draft mounts it read-only)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

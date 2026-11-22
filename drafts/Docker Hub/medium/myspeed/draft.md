@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5216/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/myspeed
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - privileged not set; allowPrivilegeEscalation overridden to true
+- other-security: allowPrivilegeEscalation true (common default false)
+- extra-persistence: /myspeed/data (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

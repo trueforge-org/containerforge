@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (inference API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/deepstack
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: gpuImage variant needs GPU device access (not in values)
+- extra-persistence: /datastore, /modelstore/detection (chart persistence, type not shown)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

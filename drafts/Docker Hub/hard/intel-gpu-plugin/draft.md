@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/intel-gpu-plugin
+- non-root: possible - no override, common runAsUser 568; /dev/dri access usually needs root or a matching device group
+- read-only-rootfs: yes - no override, common default true
+- privileged: no - not set, common default false; host device mounts are present
+- other-security: hostPath device mounts (/dev/dri, /sys/class/drm read-only, /var/lib/kubelet/device-plugins); DaemonSet workload
+- extra-persistence: /dev/dri (device, hostPath); /sys/class/drm (device, hostPath); /var/lib/kubelet/device-plugins (hostPath)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

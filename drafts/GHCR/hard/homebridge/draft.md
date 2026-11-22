@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8581/http (web UI), 51826/tcp (HomeKit HAP, inferred), 5353/udp (mDNS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/homebridge
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (s6 init)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: /homebridge (config dir, not /config; type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

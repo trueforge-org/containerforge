@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5800/http (noVNC web desktop, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/meshroom
+- non-root: possible - chart forces runAsNonRoot false and runAsUser 0; the draft gives no reason for root, but the chart's explicit override suggests upstream expects it
+- read-only-rootfs: possible - chart sets false; draft writes its workspace to /config and needs /tmp
+- privileged: unknown - no privileged setting in values; GPU use depends on NVIDIA runtime, and common NVIDIA_CAPS=all applies
+- other-security: NVIDIA GPU access (common containerOptions NVIDIA_CAPS all); no devices or hostPath in values
+- extra-persistence: /data pvc (chart; draft uses /config workspace, so remap)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

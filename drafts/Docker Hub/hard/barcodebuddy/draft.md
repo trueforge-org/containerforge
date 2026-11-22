@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/barcodebuddy
+- non-root: possible - chart sets runAsUser 0; web server and Go supervisor need a non-root layout
+- read-only-rootfs: possible - chart sets false; draft moves state to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4000/http (Phoenix web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/cannery
+- non-root: yes - no securityContext override, runAsUser 568 default
+- read-only-rootfs: yes - default readOnlyRootFilesystem true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /var/cannery/uploads (pvc, chart mount)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

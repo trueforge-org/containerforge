@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7777/udp (game), 7777/tcp (server API), 15000/udp (beacon, inferred), 15777/udp (query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/satisfactory
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; SteamCMD downloads the server at runtime
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; saves go to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /tmp/dumps (emptyDir, chart's own); /config (pvc, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

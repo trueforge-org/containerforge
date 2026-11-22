@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lingva
+- non-root: possible - chart forces runAsUser 0; Next.js app can run non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft says the yarn build must move to image build time
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: none (persistence: {})
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

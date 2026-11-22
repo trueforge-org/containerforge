@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 23231/tcp (SSH git server), 9418/tcp (git protocol), 23232/http (git over HTTP), 23233/http (stats, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/soft-serve
+- non-root: no - chart sets runAsNonRoot false, runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /soft-serve (pvc, config key), /.ssh (pvc, root-level path), /repos (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

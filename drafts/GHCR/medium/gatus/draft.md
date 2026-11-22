@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (status page and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gatus
+- non-root: yes - no container override, common default runAsUser 568
+- read-only-rootfs: yes - common default true; config is a configmap at /config/config.yaml and SQLite is under /config
+- privileged: no - common default false, no override
+- other-security: pod sysctl net.ipv4.ping_group_range "0 2147483647" (a safe sysctl); no capabilities, devices or hostPath
+- extra-persistence: none beyond /config (configmap and optional sidecar pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

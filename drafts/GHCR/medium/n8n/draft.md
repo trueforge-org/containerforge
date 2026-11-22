@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5678/http (web UI and webhooks)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/n8n
+- non-root: no - runAsUser 0, runAsNonRoot false; fsGroup 1000 overrides the pod default
+- read-only-rootfs: no - readOnlyRootFilesystem false
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /data (pvc). Draft says state goes to /config, the chart uses /data.
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/metatube
+- non-root: possible - chart forces runAsUser 0
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /database (pvc), /downloads (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/libreddit
+- non-root: yes - no securityContext override, common runAsUser 568 default
+- read-only-rootfs: yes - common readOnlyRootFilesystem true default; draft needs only /tmp, which is a common default
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: none (configmap only, env config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

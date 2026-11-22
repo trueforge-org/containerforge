@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8089/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/channels-dvr
+- non-root: possible - no securityContext override, runAsUser 568 default; tuner and network device access may need more
+- read-only-rootfs: yes - default readOnlyRootFilesystem true
+- privileged: no - not set, common default false; tuner device access (draft) is not in values
+- other-security: tuner and network device access (draft, not in values)
+- extra-persistence: /shares/DVR (pvc, recordings; chart mount)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

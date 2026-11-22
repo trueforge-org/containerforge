@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7777/udp (game), 7778/udp (game raw, inferred), 27015/udp (query, inferred), 27020/tcp (rcon, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/arksurvivalevolved
+- non-root: possible - runAsUser 1001 override, but runAsNonRoot false and SteamCMD install plus chown needs root-like caps
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set; allowPrivilegeEscalation true
+- other-security: capabilities add AUDIT_WRITE, CHOWN, FOWNER, DAC_OVERRIDE, SETGID, SETUID; allowPrivilegeEscalation true; fsGroup 1001
+- extra-persistence: /arkserver, /ark, /ark/backup, /ark/staging, /home/steam/.steam/steamapps, /arkserver/ShooterGame/Saved/clusters, /arkserver/ShooterGame/Saved, /arkserver/ShooterGame (pvc default); /arkconfig (configmap); /var/spool/cron/crontabs (emptyDir)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/filebrowser
+- non-root: yes - no securityContext override, common default runAsUser 568
+- read-only-rootfs: yes - no override, common default true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /database (database volume, pvc default); /data (data volume, pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

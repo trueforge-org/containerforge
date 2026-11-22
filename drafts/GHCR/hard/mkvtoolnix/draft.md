@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5800/http (noVNC web UI), 5900/tcp (VNC)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mkvtoolnix
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: capabilities add NET_BIND_SERVICE and KILL
+- extra-persistence: /storage (pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI), 1491/tcp (sonic search, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/archivebox
+- non-root: no - chart sets runAsNonRoot false, runAsUser 0, runAsGroup 0; entrypoint chowns /data to PUID:PGID
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /data (pvc), /opt/archivebox (pvc, config key), /home/archivebox (pvc, home key)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

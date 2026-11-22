@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7474/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/autobrr
+- non-root: yes - no securityContext override, so runAsUser 568 default
+- read-only-rootfs: yes - default true; data in /config
+- privileged: no - default false
+- other-security: none
+- extra-persistence: /config/config.toml configmap mount (chart-own, read-only, not a data path)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

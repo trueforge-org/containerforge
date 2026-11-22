@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4711/http (amuleweb web interface), 4662/tcp (eMule TCP), 4672/udp (eMule UDP)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/amule
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; apt amuled needs no root
+- read-only-rootfs: possible - chart sets false; draft keeps state in /config
+- privileged: no - default false, not overridden
+- other-security: none; chart ships placeholder WEBUI_PWD and GUI_PWD (set real secrets)
+- extra-persistence: /downloads pvc (chart; draft mounts a downloads path)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dispatcharr
+- non-root: no - chart sets runAsUser 0, runAsGroup 0; init helper chowns data to 999 and runs postgres
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: init container (alpine) chowns /data/db to 999:999; chart runs embedded PostgreSQL (DISPATCHARR_ENV aio)
+- extra-persistence: /data (data volume, pvc default); /var/run/postgresql (postgres-run, type not set, likely pvc or emptyDir). Draft Reason describes the Alpine helper, not the Dispatcharr app, so the spec's rationale does not match the chart
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

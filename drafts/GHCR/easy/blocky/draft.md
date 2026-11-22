@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 53/udp (DNS), 53/tcp (DNS), 4000/http (web UI and API, inferred), 53/udp (k8s_gateway CoreDNS, inferred), 53/tcp (k8s_gateway CoreDNS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/blocky
+- non-root: possible - no securityContext override, so runAsUser 568 default; DNS on port 53 needs a high port or CAP_NET_BIND_SERVICE, and the draft leaves this open
+- read-only-rootfs: yes - default true; draft needs only config and cache paths
+- privileged: no - default false
+- other-security: CAP_NET_BIND_SERVICE only if DNS stays on port 53 (chart drops ALL by default); k8sgateway sidecar runs with chart defaults
+- extra-persistence: none (PostgreSQL and redis are external)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

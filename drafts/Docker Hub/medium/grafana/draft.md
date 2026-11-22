@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/grafana
+- non-root: yes - no runAs override, common default runAsUser 568 (init container download-dashboards runs on ubuntu image, its security context not checked)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, no override in values
+- other-security: none (common drop ALL, seccomp RuntimeDefault)
+- extra-persistence: /var/lib/grafana (pvc); /app/tmp (emptyDir); /tmp/dashboards (emptyDir); /etc/grafana/provisioning/{datasources,alerts,plugins,notifiers} (emptyDir); /etc/grafana/grafana.ini and ldap.toml (configmap)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

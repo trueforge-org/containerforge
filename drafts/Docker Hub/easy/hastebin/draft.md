@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7777/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/hastebin
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; Node server likely needs no root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /app/data (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

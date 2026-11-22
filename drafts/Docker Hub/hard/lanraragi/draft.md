@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI and API), 6379/tcp (bundled Redis, internal)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lanraragi
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values (LRR_UID is templated from PUID, which values do not set)
+- extra-persistence: /home/koyomi/lanraragi/database (pvc); /home/koyomi/lanraragi/content (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

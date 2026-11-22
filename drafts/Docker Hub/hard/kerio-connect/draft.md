@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 25/tcp (SMTP, inferred), 465/tcp (SMTPS, inferred), 587/tcp (SMTP submission, inferred), 110/tcp (POP3, inferred), 995/tcp (POP3S, inferred), 143/tcp (IMAP, inferred), 993/tcp (IMAPS, inferred), 80/http (webmail, inferred), 443/https (webmail and admin, inferred), 4040/https (admin, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kerio-connect
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; mail ports 25, 110, 143, 465, 587, 993, 995 are below 1024 and need root or NET_BIND_SERVICE, which values do not add
+- extra-persistence: /backup (pvc, chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

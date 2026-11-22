@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9998/http (Tika server, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/paperless-ngx
+- non-root: no - runAsUser 0, runAsNonRoot false in values (USERMAP_UID env is derived from PUID)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /data, /consume, /media (pvc default, chart's own); the draft needs only /tmp beyond these
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

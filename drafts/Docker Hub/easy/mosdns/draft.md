@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 53/udp (DNS), 53/tcp (DNS), 8080/http (API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mosdns
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; DNS on port 53 needs NET_BIND_SERVICE (drop ALL default) unless remapped
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: exposes port 53 tcp/udp; non-root binding needs NET_BIND_SERVICE add or a high port
+- extra-persistence: none beyond /etc/mosdns (chart's own, pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

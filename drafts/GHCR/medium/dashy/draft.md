@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web dashboard)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dashy
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and runAsNonRoot false; draft runs as the non-root apps user
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; config in /config, icons on pvc mount
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /app/public/item-icons (pvc, chart-level)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

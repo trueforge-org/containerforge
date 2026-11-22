@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (portal, inferred), 443/https (portal, inferred), 51820/udp (WireGuard)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/firezone
+- non-root: no - runAsUser 0, runAsGroup 0, PUID 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: capabilities add NET_ADMIN, SYS_MODULE
+- extra-persistence: /var/firezone (chart persistence, type not shown)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

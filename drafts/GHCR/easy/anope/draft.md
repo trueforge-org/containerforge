@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/anope
+- non-root: possible - chart sets runAsUser and runAsGroup 0; draft runs as user apps
+- read-only-rootfs: possible - chart sets false; draft keeps DB and conf in /config
+- privileged: no - default false, not overridden
+- other-security: none; service disabled, IRC link is outbound only
+- extra-persistence: /anope pvc (chart; draft maps to /config, so remap)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

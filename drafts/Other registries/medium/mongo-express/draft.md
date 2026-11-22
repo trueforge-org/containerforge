@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8081/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mongo-express
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: none (draft's npm cache in /tmp is a common default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

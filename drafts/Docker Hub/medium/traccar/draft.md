@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8082/http (web UI and API), 5055/tcp (inferred, example device port; server opens many device ports)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/traccar
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none in values (device ports listed in draft, not in values)
+- extra-persistence: /opt/traccar/data (pvc, chart-defined)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred), 34197/udp (Factorio game), 27015/tcp (inferred, RCON)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/fsm
+- non-root: no - runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: none in values (persistence: {}); saves and mods move to /config per draft
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

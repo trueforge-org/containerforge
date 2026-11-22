@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5100/http (Rails web app, inferred), 5000/http (public gateway, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/passwordpusherephemeral
+- non-root: no - runAsUser 0 and runAsGroup 0, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: none in values
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

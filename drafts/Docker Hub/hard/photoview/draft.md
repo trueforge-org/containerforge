@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/photoview
+- non-root: yes - common runAsUser 568 default, no root override in values
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true, no override
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /cache (pvc), /photos (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

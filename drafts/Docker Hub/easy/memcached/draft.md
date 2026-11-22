@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 11211/tcp (memcache protocol)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/memcached
+- non-root: yes - no securityContext override, common default 568; memcached runs unprivileged on 11211
+- read-only-rootfs: yes - common default true, no override
+- privileged: no - common default false
+- other-security: none
+- extra-persistence: none (in-memory cache; no persistence in values)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

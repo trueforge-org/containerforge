@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/clusterissuer
+- non-root: possible - values define no workload or securityContext; common defaults would apply only if a container is rendered
+- read-only-rootfs: possible - same reason as non-root
+- privileged: unknown - no container in values
+- other-security: none in values
+- extra-persistence: none in values
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

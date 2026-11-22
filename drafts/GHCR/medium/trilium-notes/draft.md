@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/trilium-notes
+- non-root: no - top-level container override runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: yes - readOnlyRootFilesystem not overridden, common default true applies; data lives in /home/node
+- privileged: no - not set, common default false
+- other-security: pod fsGroup 1000 (overrides common 568)
+- extra-persistence: none beyond chart's own config at /home/node
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

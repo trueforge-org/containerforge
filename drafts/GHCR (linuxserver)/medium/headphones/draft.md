@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8181/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/headphones
+- non-root: possible - chart runAsUser 0 for linuxserver; draft runs Python app from source on python base
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; config and DB in /config
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

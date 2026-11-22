@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and redirects)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/golinks
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and runAsNonRoot false; simple Go binary can run unprivileged
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; data is a pvc mount at /data
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /data (pvc, chart-level)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

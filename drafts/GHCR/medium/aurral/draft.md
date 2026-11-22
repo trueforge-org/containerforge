@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3001/http (web UI and API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/aurral
+- non-root: yes - common default runAsUser 568, no root override
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; writes go to /config and emptyDir /var/cache
+- privileged: no - common default false, no override
+- other-security: none
+- extra-persistence: /var/cache (emptyDir, chart-level)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

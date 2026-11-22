@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6901/http (noVNC web desktop, inferred), 5901/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/chromium-desktop-g3
+- non-root: possible - chart sets runAsUser 0; Chromium sandbox and VNC stack need rework
+- read-only-rootfs: possible - chart sets false; desktop writes to home paths
+- privileged: no - not set, common default false
+- other-security: none in values; Chromium sandbox may need no-sandbox or namespace flags (draft)
+- extra-persistence: /UNRAID_SHARE (pvc, chart mount)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

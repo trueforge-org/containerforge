@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6800/http (JSON-RPC), 6888/tcp (BitTorrent, inferred), 6888/udp (DHT and peers, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/aria2
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0 (s6 init); draft drops s6 and runs aria2c as one process on ports 6800 and 6888
+- read-only-rootfs: possible - chart sets false; draft keeps config and session in /config
+- privileged: no - default false, not overridden
+- other-security: none; RPC_SECRET default is a placeholder in values
+- extra-persistence: downloads path (draft mounts one; not in chart values, likely a pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

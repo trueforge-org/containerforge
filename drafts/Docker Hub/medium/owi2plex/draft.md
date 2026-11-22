@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/owi2plex
+- non-root: no - runAsUser 0, runAsGroup 0 in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /owi2plex and /TVH (pvc default, purpose not shown in values)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

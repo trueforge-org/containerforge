@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8081/http (web UI and REST API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nexus-oss
+- non-root: yes - chart sets runAsUser 200, runAsGroup 200 (pod fsGroup 200), not root
+- read-only-rootfs: possible - no override, common default true; draft says the image uses root-era paths
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: /nexus-data (pvc, chart default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

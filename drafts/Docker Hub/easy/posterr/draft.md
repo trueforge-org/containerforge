@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/posterr
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; Node app likely needs no root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /usr/src/app/public/custom (pvc), /usr/src/app/config (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

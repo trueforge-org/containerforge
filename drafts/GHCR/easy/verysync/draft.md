@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8886/http (web UI, inferred), 22330/tcp (sync, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/verysync
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0
+- read-only-rootfs: yes - no readOnlyRootFilesystem override, common default true
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /data (pvc), /Sync (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4326/http (web admin UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rcon-webadmin
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes config to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /opt/rcon-web-admin/db (pvc, chart's own; draft expects config in /config, so mismatch)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

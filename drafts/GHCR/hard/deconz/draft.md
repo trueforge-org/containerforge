@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (REST API and Phoscon web app), 443/https (inferred), 8080/http (WebSocket, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/deconz
+- non-root: no - chart forces runAsUser 0 and runAsGroup 0 (vendor package runs as root)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: capabilities add NET_BIND_SERVICE; USB or serial radio device from the Reason is not shown in values
+- extra-persistence: /opt/deCONZ (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

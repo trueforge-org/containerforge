@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2000/tcp (serial-to-socket bridge, default raw socket port, inferred; user-configurable)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ser2sock
+- non-root: yes - common runAsUser 568 default, no root override in values
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true, no override
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: none (config is /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

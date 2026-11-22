@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27015/udp (game server), 27016/udp (query) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/corekeeper
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and readOnlyRootFilesystem false; draft says the root wrapper is dropped, SteamCMD and Xvfb may still need root-adjacent setup
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; server files and steamcmd are pvc mounts
+- privileged: no - common default false, no chart override
+- other-security: none (UDP game ports 27015 and 27016 only)
+- extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-level; draft says /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

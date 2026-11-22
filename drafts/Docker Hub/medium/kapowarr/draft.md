@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5656/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kapowarr
+- non-root: possible - chart forces runAsUser 0 and runAsGroup 0; python app could run as non-root
+- read-only-rootfs: yes - readOnlyRootFilesystem not overridden, so common default true; writes go to volumes
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /app/temp_downloads (pvc), /comics-1 (pvc, media), /app/db (pvc, state path instead of /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

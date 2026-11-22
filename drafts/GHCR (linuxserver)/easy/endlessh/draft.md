@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2222/tcp (SSH tarpit)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/endlessh
+- non-root: possible - chart sets runAsUser 0 for linuxserver s6; draft builds from ubuntu apt and runs one unprivileged process
+- read-only-rootfs: possible - no override, chart default true; draft writes only /tmp
+- privileged: no - not set in values
+- other-security: none; root override would add common root caps
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ddns-updater
+- non-root: yes - no container securityContext override, so common runAsUser 568 applies
+- read-only-rootfs: yes - no override, so common readOnlyRootFilesystem true applies
+- privileged: no - common default false, not overridden
+- other-security: none in values
+- extra-persistence: /updater/data (pvc, chart-defined; draft expects /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

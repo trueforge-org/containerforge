@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/website-shot
+- non-root: yes - chart sets runAsUser 1000, runAsGroup 1000
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: none (Chromium needs writable /tmp, which the common defaults cover)
+- extra-persistence: /usr/src/website-shot/screenshots (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

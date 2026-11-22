@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pigallery2
+- non-root: no - runAsUser 0, runAsGroup 0 in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /app/data/db, /app/data/images/, /app/data/tmp (pvc default, chart's own; the tmp mount is not the common /tmp)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

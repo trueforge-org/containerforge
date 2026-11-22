@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27015/udp (game, inferred), 27016/udp (query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/unturned
+- non-root: no - chart sets runAsNonRoot false, runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /serverdata/serverfiles (pvc), /serverdata/steamcmd (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

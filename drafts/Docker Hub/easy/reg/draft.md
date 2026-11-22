@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (registry API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/reg
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: yes - default readOnlyRootFilesystem true; storage writes go to /config mount
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none (/config is the chart's own mount)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

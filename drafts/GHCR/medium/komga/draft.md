@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 25600/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/komga
+- non-root: yes - runAsUser 568 default, no container override
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /data (pvc, library data)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

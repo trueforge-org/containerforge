@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (seahub web UI), 443/https (TLS, inferred), 8082/http (fileserver, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/seafile
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /shared/seafile (pvc, under the common /shared mount)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

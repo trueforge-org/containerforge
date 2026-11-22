@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2302/udp (game, inferred), 2303/udp (Steam query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/arma3
+- non-root: possible - chart runs the ich777 wrapper as runAsUser 0; draft plans a USER apps start script
+- read-only-rootfs: possible - chart sets false; draft keeps game data in /config and caches in /tmp
+- privileged: no - default false, not overridden
+- other-security: none; UDP and TCP game and query ports 2302 to 2306
+- extra-persistence: /serverdata/.local/share (profiles pvc), /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); the profiles path may need its own mount
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

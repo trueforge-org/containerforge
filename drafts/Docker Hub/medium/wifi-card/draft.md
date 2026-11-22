@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (static web app via nginx)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/wifi-card
+- non-root: no - runAsUser 0, runAsGroup 0 overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1411/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pocket-id
+- non-root: yes - no securityContext override, common runAsUser 568; single Go binary with SQLite in /config
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; SQLite lives on a volume
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft (SQLite in /config); chart mounts /app/data (pvc default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

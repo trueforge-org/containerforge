@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8090/http (web UI, inferred), 8092/https (web UI TLS, inferred), 19444/tcp (JSON server, inferred), 19400/tcp (FlatBuffers server, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/hyperion-ng
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: possible - chart does not override, so default true; draft says it needs USB and LED hardware
+- privileged: unknown - values set no privileged flag or device mount; draft implies hardware access that values do not show
+- other-security: none in values (four service ports: JSON, FlatBuffers, boblight)
+- extra-persistence: /root/.hyperion (pvc, chart default; runs as root path)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

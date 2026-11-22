@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/poznote
+- non-root: yes - main container inherits runAsUser 568; only the prepare-runtime init container sets root
+- read-only-rootfs: yes - main inherits readOnlyRootFilesystem true; writable paths are emptyDir
+- privileged: no - not set, common default false
+- other-security: root init container (prepare-runtime, chown step); no capabilities, devices or host networking
+- extra-persistence: /run, /var/lib/nginx, /var/log (emptyDir); data at /var/www/html/data is the chart's own
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (Flask web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ipmi-tools
+- non-root: possible - no override, common runAsUser 568; /dev/ipmi* access may need root or a device group
+- read-only-rootfs: yes - no override, common default true; writes go to /data
+- privileged: unknown - values show no privileged flag or /dev/ipmi mount; draft says the host IPMI device is needed
+- other-security: none in values; host IPMI device passthrough is not shown
+- extra-persistence: /data (pvc, chart default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lama-cleaner
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false; caches are under /root/.cache, so non-root needs a home or cache path change
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; model caches go to volumes
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /root/.cache/torch (pvc), /root/.cache/huggingface (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

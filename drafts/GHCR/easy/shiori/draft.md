@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/shiori
+- non-root: yes - no securityContext override, common 568 default
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not set
+- other-security: none
+- extra-persistence: /data (pvc); chart mounts /data, draft keeps data in /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

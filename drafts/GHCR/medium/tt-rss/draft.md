@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/tcp (php-fpm FastCGI, internal), 80/http (nginx web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/tt-rss
+- non-root: no - top-level container override runAsUser 0 applies to app, nginx and updater
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: nginx-conf configmap mount; external PostgreSQL (cnpg)
+- extra-persistence: none beyond chart's own html at /var/www/html and config at /opt/tt-rss/config.d
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8787/http (RStudio Server web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rstudio
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0; GROUPID from fsGroup
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; draft notes rserver spawns per-user sessions with PAM
+- extra-persistence: /home/rstudio/.config/rstudio (config, pvc chart default); /home/rstudio/workspace (workspace, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

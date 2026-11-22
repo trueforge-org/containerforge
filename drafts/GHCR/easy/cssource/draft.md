@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27015/tcp (rcon), 27015/udp (game and query), 27020/udp (SourceTV, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/cssource
+- non-root: no - chart sets runAsUser 0, runAsGroup 0; SteamCMD wrapper runs as root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none in values
+- extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (OCI registry mirror, inferred), 9090/http (metrics, inferred), 5001/tcp (libp2p bootstrap, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/spegel
+- non-root: no - runAsUser 0, runAsGroup 0, pod fsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: DaemonSet with hostPath access to the containerd socket and host config dirs; hostNetwork not set in values
+- extra-persistence: containerd socket (hostPath, Socket), containerd content dir (hostPath, Directory), containerd registry config dir (hostPath, DirectoryOrCreate)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

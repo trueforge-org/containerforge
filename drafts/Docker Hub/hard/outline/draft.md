@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web app and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/outline
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /var/lib/outline/data (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

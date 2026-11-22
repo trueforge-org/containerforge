@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (metrics, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/generic-device-plugin
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false
+- read-only-rootfs: yes - chart sets readOnlyRootFilesystem true
+- privileged: yes - chart sets privileged true
+- other-security: hostPath /dev and /var/lib/kubelet/device-plugins; device args to the plugin
+- extra-persistence: /dev (hostPath /dev), /var/lib/kubelet/device-plugins (hostPath)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

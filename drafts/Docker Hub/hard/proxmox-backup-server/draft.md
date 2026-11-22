@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8007/https (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/proxmox-backup-server
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /etc/proxmox-backup (pvc), /var/lib/proxmox-backup (emptyDir), /var/log/proxmox-backup (emptyDir), /run (emptyDir)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

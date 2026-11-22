@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8443/https (web panel), 8000/http (web panel HTTP, inferred), 25565/tcp (Minecraft game port of spawned servers, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/crafty-4
+- non-root: yes - chart sets runAsUser 1000, runAsGroup 1000 (not 568, but not root)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; ports 25565/tcp and 19132/udp for game servers
+- extra-persistence: /crafty/app/config, /crafty/servers, /crafty/logs, /crafty/import, /crafty/backups (chart-added, pvc); draft says server data goes under /config, which mismatches
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI), 443/https (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/zoneminder
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: capability KILL added on main container; camera device access (Reason) is not declared in values
+- extra-persistence: /var/cache/zoneminder (pvc, datapath); varrun persistence disabled
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

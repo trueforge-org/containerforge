@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and HLS stream), 1935/tcp (RTMP ingest)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/owncast
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; RTMP on 1935 is unprivileged
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: exposes RTMP 1935 tcp
+- extra-persistence: /app/data (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

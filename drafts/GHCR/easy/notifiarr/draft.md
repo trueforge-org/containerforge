@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5454/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/notifiarr
+- non-root: yes - no securityContext override, common runAsUser 568; single Go binary
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; the chart writes to /config and /tmpdir
+- privileged: no - no privileged key in values; common default false
+- other-security: hostPath /etc/machine-id mounted read-only
+- extra-persistence: hostPath /etc/machine-id (read-only file); emptyDir /tmpdir (medium Memory)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

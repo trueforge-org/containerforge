@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (static web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/homelablabelmaker
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; static nginx can run unprivileged on a high port
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: none in values; nginx cache path would need emptyDir if rootfs stays read-only (inferred, not in values)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

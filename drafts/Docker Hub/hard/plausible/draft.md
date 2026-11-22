@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/plausible
+- non-root: yes - workload containers set runAsUser 1000 and runAsGroup 1000
+- read-only-rootfs: no - workload containers set readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: none in values
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (library web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kiwix-serve
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; the draft's binary only serves ZIM files and needs no root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes only to /config and /tmp
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft (uses /config); chart mounts /data (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

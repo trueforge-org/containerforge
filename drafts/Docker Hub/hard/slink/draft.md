@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI and API, inferred), 6379/tcp (redis, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/slink
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: none
+- extra-persistence: /app/var/data (pvc, database), /app/slink/images (pvc, images)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

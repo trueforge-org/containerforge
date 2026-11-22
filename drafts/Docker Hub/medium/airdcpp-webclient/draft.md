@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5600/http (web UI), 21248/tcp (ADC transfers, inferred), 21248/udp (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/airdcpp-webclient
+- non-root: yes - no securityContext override, so common default 568 applies
+- read-only-rootfs: yes - no override, so common default true
+- privileged: no - default false, no override
+- other-security: none
+- extra-persistence: /.airdcpp (pvc, config dir; the Reason says it must move to /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

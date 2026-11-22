@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (health endpoint, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/grafana
+- non-root: yes - only readOnlyRootFilesystem is overridden, so common runAsUser 568 applies (chart is grafana, draft is the k8s-sidecar image)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: podOptions automountServiceAccountToken true; rbac and serviceAccount blocks present (sidecar watches the Kubernetes API)
+- extra-persistence: /var/lib/grafana (pvc); emptyDir at /app/tmp, /tmp/dashboards and provisioning dirs; configmap mounts for grafana.ini and ldap.toml
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

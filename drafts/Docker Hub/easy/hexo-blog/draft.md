@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4000/http (hexo dev server)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/hexo-blog
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; static site tooling likely needs no root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: none beyond /config (chart's own)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 18080/tcp (P2P), 18081/http (RPC)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/monero-node
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; monerod itself does not need root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; chain data is written to the chart's blockchain volume
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: large chain volume; chart mounts /home/monero/.bitmonero (pvc default), draft expects /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

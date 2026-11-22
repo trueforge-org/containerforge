@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/namecheap-ddns
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; Python script likely needs no root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: none (persistence {} in chart)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

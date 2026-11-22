@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 25565/tcp (game), 25575/tcp (RCON)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/minecraft-java
+- non-root: possible - runAsUser 568 default, no override; draft mentions itzg helper tools, which may expect a root start
+- read-only-rootfs: yes - default true, not overridden; world data is on the /data mount
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /data (pvc, world and config). Draft says /config, the chart uses /data.
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

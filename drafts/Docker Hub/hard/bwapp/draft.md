@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (Apache web app, inferred), 3306/tcp (MySQL, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/bwapp
+- non-root: no - chart sets runAsUser 0, and draft says the image runs as root with an Apache and MySQL stack needing rework
+- read-only-rootfs: possible - chart sets false; draft says read-only rootfs needs substantial rework
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: unknown - chart persistence is {}; MySQL data dir would need writable storage (not in values)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

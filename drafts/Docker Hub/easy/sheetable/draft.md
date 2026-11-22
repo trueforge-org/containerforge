@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sheetable
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: yes - default readOnlyRootFilesystem true; app writes to its /app/config mount
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /app/config (pvc, chart's own; draft does not mention it)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

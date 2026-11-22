@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/clarkson
+- non-root: possible - chart runAsUser 0 for linuxserver; draft is an npm-built Node app on python-node
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; npm build output location not shown
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none (chart persistence is empty; MariaDB is a sibling dependency)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

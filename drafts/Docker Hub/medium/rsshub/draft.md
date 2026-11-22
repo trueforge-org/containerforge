@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1200/http (web UI and feeds)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rsshub
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: none (no persistence block in values)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

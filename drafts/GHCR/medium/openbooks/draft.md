@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/openbooks
+- non-root: yes - runAsUser 568 default, no container override
+- read-only-rootfs: no - readOnlyRootFilesystem false
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /books/books (pvc); /books/logs (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

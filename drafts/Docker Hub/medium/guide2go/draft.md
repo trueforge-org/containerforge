@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/guide2go
+- non-root: possible - chart forces runAsUser 0; Go CLI writing to /config needs no root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes only to /config
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /guide2go (pvc), /TVH (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

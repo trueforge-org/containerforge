@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5901/tcp (VNC, inferred), 6901/http (noVNC web desktop, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/opengl-desktop-g3
+- non-root: no - runAsUser 0 and runAsGroup 0, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /UNRAID_SHARE (pvc, internalshare)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

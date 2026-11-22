@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7777/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/haste-server
+- non-root: yes - no securityContext override, defaults 568 apply
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, no override
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

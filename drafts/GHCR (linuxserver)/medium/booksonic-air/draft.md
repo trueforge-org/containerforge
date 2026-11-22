@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4040/http (web UI and API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/booksonic-air
+- non-root: possible - chart runAsUser 0 for linuxserver s6; draft replaces the s6 wrapper and runs WAR on java
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; temp in /tmp, state in /config
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

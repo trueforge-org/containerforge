@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6500/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rdtclient
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0, including the aria2 sidecar
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false, including the aria2 sidecar
+- privileged: no - not set in values
+- other-security: none in values; aria2 sidecar runs as root
+- extra-persistence: /data/db (db, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

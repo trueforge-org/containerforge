@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 22300/http (API and web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/joplin-server
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false; Node server can run non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; pm2 may need a writable home
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

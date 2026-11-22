@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8090/http (web UI and API), 8443/https (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/yacy
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft gives no root need; ports 8090/8443 are high
+- read-only-rootfs: possible - chart sets false; draft writes many files, all must land in /config or /tmp
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /opt/yacy_search_server/DATA pvc (chart appdata; draft keeps data under /config, so remap)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

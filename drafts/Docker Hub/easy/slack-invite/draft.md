@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/slack-invite
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft is a Node app
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft has no persistent state beyond /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

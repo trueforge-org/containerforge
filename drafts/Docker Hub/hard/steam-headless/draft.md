@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8083/http (noVNC web UI, inferred), 8084/https (inferred), 47984/tcp (game streaming, inferred), 47990/tcp (streaming web API, inferred), 47998-48000/udp (streaming, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/steam-headless
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false, privileged true
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: yes - chart sets container privileged true
+- other-security: privileged; no GPU or /dev/input devices declared in values (Reason says GPU and input devices are needed)
+- extra-persistence: /home/default (pvc, home), /mnt/games (pvc), /var/lib/flatpak (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

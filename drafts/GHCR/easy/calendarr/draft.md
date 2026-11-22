@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web app, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/calendarr
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; the draft's pip-installed Python app needs no root
+- read-only-rootfs: possible - chart sets false; draft keeps the DB in /config, but logs and footers need writable paths
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /app/logs pvc and /app/custom_footers pvc (chart; draft does not name them)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

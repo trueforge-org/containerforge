@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9998/tcp (fluttercoind JSON-RPC, inferred), 9999/tcp (P2P, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/fluttercoin-wallet
+- non-root: no - chart forces runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: /fluttercoin (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

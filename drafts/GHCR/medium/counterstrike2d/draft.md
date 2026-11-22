@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 36963/udp (game server) (inferred), 36963/tcp (server port) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/counterstrike2d
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and readOnlyRootFilesystem false; draft wrapper runs as root and unzips a vendor download
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; server files are a pvc mount
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /serverdata/serverfiles (pvc, chart-level)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

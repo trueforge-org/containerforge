@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (REST API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/restic-rest-server
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft is a single Go process
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes repos to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /data (pvc, chart's own; draft expects repositories in /config, so mismatch)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

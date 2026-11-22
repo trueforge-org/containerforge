@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 10300/tcp (Wyoming protocol, STT)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/wyoming-whisper
+- non-root: yes - no securityContext override, runAsUser 568 default
+- read-only-rootfs: possible - default true, but the model cache needs a writable path (chart mounts /.cache/huggingface)
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /.cache/huggingface (pvc) unless HF_HOME is pointed at /config or /tmp
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

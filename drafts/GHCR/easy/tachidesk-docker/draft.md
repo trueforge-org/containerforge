@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4567/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/tachidesk-docker
+- non-root: yes - no runAs override, common 568 default
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /home/suwayomi/.local/share/Tachidesk (pvc), /home/suwayomi/.local/share/Tachidesk/downloads (pvc), /home/suwayomi/.local/share/Tachidesk/local (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

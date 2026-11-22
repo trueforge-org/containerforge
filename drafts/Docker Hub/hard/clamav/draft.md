@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3310/tcp (clamd)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/clamav
+- non-root: possible - chart sets runAsUser 0; clamd and freshclam can run as the clamav user but need a layout change
+- read-only-rootfs: possible - chart sets false; signature DB on pvc, socket needs a writable path
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /var/lib/clamav (pvc, writable signature DB); /logs (pvc, chart mount); /scandir (pvc, read-only scan target)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

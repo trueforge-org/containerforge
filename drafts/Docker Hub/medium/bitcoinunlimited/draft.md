@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8333/tcp (p2p), 8332/tcp (rpc, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/bitcoinunlimited
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: none
+- extra-persistence: /data (pvc, chain data; Reason says it must go to /config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

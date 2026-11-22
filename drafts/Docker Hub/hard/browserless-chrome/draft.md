@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (browser API and debugger)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/browserless-chrome
+- non-root: yes - no securityContext override, runAsUser 568 default
+- read-only-rootfs: yes - default readOnlyRootFilesystem true; Chrome writes to /tmp, /dev/shm and /downloads
+- privileged: no - not set, common default false
+- other-security: none in values; Chrome sandbox flags not set (draft notes sandbox handling needed)
+- extra-persistence: /downloads (pvc) and /metrics (pvc), both chart mounts
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

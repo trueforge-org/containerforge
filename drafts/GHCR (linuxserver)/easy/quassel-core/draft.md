@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4242/tcp (Quassel core protocol)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/quassel-core
+- non-root: possible - chart sets runAsUser 0 for linuxserver; draft is one apt daemon
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft's own build
+- privileged: no - not set in values
+- other-security: none; ident port 10113 exposed
+- extra-persistence: none (chart uses CNPG PostgreSQL; draft says database in /config, which conflicts)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

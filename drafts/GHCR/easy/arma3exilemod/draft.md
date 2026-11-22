@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2302/udp (game, inferred), 2303/udp (Steam query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/arma3exilemod
+- non-root: possible - chart runs as runAsUser 0; the chart also bundles MariaDB (port 3306, MARIA_DB_ROOT_PWD), which the draft does not mention and which needs its own user
+- read-only-rootfs: possible - chart sets false; draft keeps game data in /config
+- privileged: no - default false, not overridden
+- other-security: bundled MariaDB in the game container per chart env and port 3306; chart ships a MARIA_DB_ROOT_PWD placeholder
+- extra-persistence: /serverdata/.local/share (profiles pvc), /serverdata/serverfiles and /serverdata/steamcmd pvc (chart)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

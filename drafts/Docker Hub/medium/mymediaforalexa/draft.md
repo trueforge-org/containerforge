@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 52051/http (web UI) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mymediaforalexa
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; writes go to /datadir
+- privileged: no - common default, not overridden
+- other-security: none in values (draft's host network need is not set in values)
+- extra-persistence: /datadir (pvc), /medialibrary (pvc, media)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

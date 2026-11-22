@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4822/tcp (guacd proxy protocol)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/guacd
+- non-root: yes - chart sets runAsUser 1000, runAsGroup 1001
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: none in guacd values; recordings and drive mounts (pvc) are added by the guacamole chart's targetSelector
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

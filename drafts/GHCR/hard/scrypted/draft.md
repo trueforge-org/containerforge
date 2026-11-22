@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 10443/https (web UI, inferred), 11080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/scrypted
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: unknown - not set in values; only nvidiaImage variant shown, no privileged flag
+- other-security: none in values (camera and GPU device access from the draft are not in values)
+- extra-persistence: /server/volume, /media/external (chart paths, type not set)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

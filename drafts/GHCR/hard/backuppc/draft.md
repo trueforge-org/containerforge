@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (BackupPC web UI via Apache), 443/https (inferred), 22/tcp (sshd for backup clients)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/backuppc
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (root-owned backup storage)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values (sshd and rsync per Reason are not shown)
+- extra-persistence: /etc/backuppc, /home/backuppc, /data/backuppc (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

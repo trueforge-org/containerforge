@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (WebDAV, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/apache-webdav
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: PUMASK "0000" env (world-writable umask for created files)
+- extra-persistence: /var/lib/dav/data (data volume, pvc default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3456/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/vikunja
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0, but a Go binary needs no root
+- read-only-rootfs: possible - chart sets false; draft keeps state in /config
+- privileged: no - not set, common default false
+- other-security: capabilities add NET_BIND_SERVICE (chart)
+- extra-persistence: /app/vikunja/files (pvc, uploads) unless moved under /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

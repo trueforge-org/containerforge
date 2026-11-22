@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (static web wallet via nginx, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nano-wallet
+- non-root: possible - chart runAsUser 0 for linuxserver; draft builds static files on node base and serves from /app
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; caches in /tmp per draft
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

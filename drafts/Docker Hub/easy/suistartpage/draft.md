@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (nginx static page)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/suistartpage
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; nginx on a non-root port would need checking
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes runtime files to /tmp
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /usr/share/nginx/html (pvc, chart's own; draft copies the site to /app, so mismatch)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

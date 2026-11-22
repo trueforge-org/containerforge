@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (flood web UI, inferred), 6881/tcp (BitTorrent peer, inferred), 6881/udp (DHT, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rflood
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; draft suggests BitTorrent TCP and UDP 6881 (inferred)
+- extra-persistence: none beyond chart /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

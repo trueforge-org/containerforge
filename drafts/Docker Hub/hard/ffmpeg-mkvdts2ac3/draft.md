@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ffmpeg-mkvdts2ac3
+- non-root: no - runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: /copy, /output, /watch (chart persistence, type not shown; /config is the chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

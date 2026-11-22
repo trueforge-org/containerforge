@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/weblate
+- non-root: possible - runAsUser 1000 override, but runAsGroup 0 and fsGroup 1000
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: pod fsGroup 1000
+- extra-persistence: /app/data (pvc, primary data), /app/cache (emptyDir)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

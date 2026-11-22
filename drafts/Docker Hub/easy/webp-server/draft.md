@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3333/http (image server)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/webp-server
+- non-root: possible - chart sets runAsUser 0, but a Go binary on port 3333 needs no root
+- read-only-rootfs: possible - chart sets false; draft writes cache to /tmp and config to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /opt/pics (pvc, read-only source images) if served from there; /opt/exhaust (pvc, cache) only if cache is not moved off to /tmp
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

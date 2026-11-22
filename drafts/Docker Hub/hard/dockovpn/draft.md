@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1194/udp (OpenVPN)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dockovpn
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, but allowPrivilegeEscalation true
+- other-security: capabilities add NET_ADMIN, NET_RAW, MKNOD; allowPrivilegeEscalation true; /dev/net/tun per draft (not in values)
+- extra-persistence: /opt/Dockovpn_data (chart persistence, type not shown)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

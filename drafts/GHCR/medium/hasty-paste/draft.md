@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI and API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/hasty-paste
+- non-root: yes - common default runAsUser 568, no root override
+- read-only-rootfs: yes - common default true; data is a pvc mount
+- privileged: no - common default false, no override
+- other-security: none
+- extra-persistence: none beyond the chart's /opt/hasty-paste/data pvc (draft keeps uploads under /config, so the path differs)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

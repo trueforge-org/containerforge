@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/wdosg
+- non-root: yes - runAsUser 568 default, no root override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /app/database and /app/wdosglibrary (pvc, both mounted by chart) unless the app is pointed at /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

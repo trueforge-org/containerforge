@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (static UI via nginx) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/batnoter
+- non-root: possible - chart sets runAsUser/runAsGroup 0; draft says unprivileged nginx setup still needs work
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; nginx needs writable temp paths
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

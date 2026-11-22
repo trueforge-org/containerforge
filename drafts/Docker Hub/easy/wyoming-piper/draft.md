@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 10200/tcp (Wyoming protocol, TTS)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/wyoming-piper
+- non-root: yes - no securityContext override, runAsUser 568 default
+- read-only-rootfs: yes - default readOnlyRootFilesystem true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none beyond /config (chart mounts /data as pvc; draft keeps voices in /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

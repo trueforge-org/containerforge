@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/reubah
+- non-root: yes - no securityContext override, common default runAsUser 568
+- read-only-rootfs: yes - no override, common default true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /app/tmp (emptyDir); /tmp is common and also emptyDir
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

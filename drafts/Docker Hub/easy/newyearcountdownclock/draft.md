@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (static web page, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/newyearcountdownclock
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; static nginx can run unprivileged
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: none in values (persistence {}); nginx cache paths not in values
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

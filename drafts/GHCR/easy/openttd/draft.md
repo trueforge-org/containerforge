@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3979/tcp (game), 3979/udp (game), 3977/tcp (admin, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/openttd
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; the dedicated server runs without root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes game data and graphics to /config
+- privileged: no - no privileged key in values; common default false
+- other-security: none (game ports only)
+- extra-persistence: none for the draft (uses /config); chart mounts /serverdata/serverfiles (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

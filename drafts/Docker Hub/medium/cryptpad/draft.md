@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI), 3001/http (sandbox origin, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/cryptpad
+- non-root: no - chart sets runAsNonRoot false and runAsUser/runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, no override in values
+- other-security: none beyond root override
+- extra-persistence: /cryptpad/blob, /cryptpad/block, /cryptpad/customize, /cryptpad/data, /cryptpad/datastore (all pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

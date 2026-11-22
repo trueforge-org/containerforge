@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI), 50000/tcp (agent JNLP)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/jenkins
+- non-root: yes - chart sets runAsUser 1000, runAsGroup 1000, fsGroup 1000
+- read-only-rootfs: yes - readOnlyRootFilesystem override is commented out, so common default true applies; JENKINS_HOME is a volume
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /var/jenkins_home (pvc, JENKINS_HOME; chart uses this instead of /config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

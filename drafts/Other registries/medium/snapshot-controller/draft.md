@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (metrics, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/snapshot-controller
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; no runtime state
+- privileged: no - not set, common default false
+- other-security: none in container security; webhook service disabled in values
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

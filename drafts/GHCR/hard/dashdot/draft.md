@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3001/http (web dashboard)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dashdot
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: yes - chart sets privileged true and allowPrivilegeEscalation true
+- other-security: capabilities add SYS_ADMIN, SYS_RAWIO; hostPath "/" and /dev/mem mounted
+- extra-persistence: /mnt/host (hostPath /), /dev/mem (hostPath /dev/mem)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

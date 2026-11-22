@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (Apache web, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/wordpress
+- non-root: possible - runAsUser 568 default, but chart overrides runAsGroup 0 (bitnami-style image); draft runs Apache on a high port
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft moves wp-content to /config and PID/logs to /tmp
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /bitnami/wordpress pvc (chart config mount; draft maps wp-content to /config, so remap rather than add)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8091/http (web UI), 3000/http (Z-Wave JS websocket server)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/zwavejs2mqtt
+- non-root: possible - no root override, common runAsUser 568; USB serial access needs a device group not in values
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft is a Node app from prebuilt zips
+- privileged: no - not set in values
+- other-security: none in values; serial device mapping per draft only
+- extra-persistence: /usr/src/app/store (pvc, chart config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

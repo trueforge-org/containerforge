@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4181/http (auth endpoint)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/traefik-forward-auth
+- non-root: yes - no security override, common default 568
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, no override
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

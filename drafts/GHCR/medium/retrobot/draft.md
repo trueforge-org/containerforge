@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/retrobot
+- non-root: yes - no securityContext override, common default runAsUser 568
+- read-only-rootfs: yes - no override, common default true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none beyond chart's own data at /retrobot/data
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

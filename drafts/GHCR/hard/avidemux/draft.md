@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5800/http (noVNC web desktop), 5900/tcp (VNC)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/avidemux
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (GUI base)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: capabilities add NET_BIND_SERVICE, KILL
+- extra-persistence: /storage (type not set, likely pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

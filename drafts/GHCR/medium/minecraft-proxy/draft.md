@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 25577/tcp (proxy game port)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/minecraft-proxy
+- non-root: possible - runAsUser 568 default, no override; itzg helper tools may expect a root start
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /server (pvc); /plugins (pvc)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8191/http (FlareSolverr API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/flaresolverr
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (upstream runs as root)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: none beyond /config (browser profile in /tmp uses the common default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

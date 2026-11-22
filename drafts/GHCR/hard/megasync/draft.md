@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (noVNC web UI, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/megasync
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: hostpath key mounted at /mnt/host; no type set in values, so it defaults to pvc, though the name suggests hostPath (verify)
+- extra-persistence: /data (data, pvc chart default); /mnt/host (hostpath, type unclear, possibly hostPath)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

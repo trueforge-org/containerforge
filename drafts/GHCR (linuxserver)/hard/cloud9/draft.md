@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (Cloud9 web IDE, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/cloud9
+- non-root: no - chart runAsUser 0; draft keeps linuxserver cloud9 base
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: unknown - draft adds docker-ce and compose tooling that may need privileges; chart does not set privileged
+- other-security: root, so common root caps added; docker socket access per draft only
+- extra-persistence: /code (pvc, chart code)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

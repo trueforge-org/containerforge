@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (KasmVNC web GUI, inferred), 3001/https (KasmVNC web GUI TLS, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/obs-ndi
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: capabilities add NET_BIND_SERVICE, KILL on main container
+- extra-persistence: none (configpath is /config/obs-studio, under /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

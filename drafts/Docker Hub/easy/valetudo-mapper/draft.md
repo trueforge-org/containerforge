@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/valetudo-mapper
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft says it runs as the apps user
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; cache goes to /tmp
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

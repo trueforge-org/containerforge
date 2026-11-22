@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9798/http (Prometheus metrics, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/app-template
+- non-root: yes - no securityContext override, so runAsUser 568 default
+- read-only-rootfs: yes - default readOnlyRootFilesystem true; draft writes nothing at runtime beyond /tmp
+- privileged: no - default false
+- other-security: none; redis, mariadb and mongodb disabled
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

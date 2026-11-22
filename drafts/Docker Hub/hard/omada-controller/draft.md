@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8043/https (controller web UI), 8088/http (controller HTTP, inferred), 8843/https (portal HTTPS, inferred), 29810/udp (device discovery, inferred), 29811/tcp (device adoption, inferred), 29812/tcp (device management, inferred), 29813/tcp (device upgrade, inferred), 29814/tcp (device management, inferred), 27017/tcp (bundled MongoDB, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/omada-controller
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /opt/tplink/EAPController/data (pvc), /opt/tplink/EAPController/work (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

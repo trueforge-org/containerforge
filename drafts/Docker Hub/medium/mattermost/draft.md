@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8065/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mattermost
+- non-root: yes - no securityContext override, common runAsUser 568 default
+- read-only-rootfs: yes - common readOnlyRootFilesystem true default; all writable state is on chart volumes
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /mattermost/config (pvc, instead of /config), /mattermost/data (pvc), /mattermost/logs (pvc), /mattermost/plugins (pvc), /mattermost/client/plugins (pvc), /mattermost/bleve-indexes (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

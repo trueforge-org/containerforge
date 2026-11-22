@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4000/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/teslamate
+- non-root: yes - no runAsUser override in values, so common default 568 applies
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: none
+- extra-persistence: none (external PostgreSQL via CNPG; grafana configmap only)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

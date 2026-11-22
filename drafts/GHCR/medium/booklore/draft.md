@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6060/http (web UI and API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/booklore
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and readOnlyRootFilesystem false; Spring Boot jar should run as non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; data is a pvc mount, temp in /tmp
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /bookdrop (pvc, chart-level); /app/data (pvc, chart-level, draft may move data to /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

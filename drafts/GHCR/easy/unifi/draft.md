@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8443/https (web UI and API), 8080/tcp (device inform), 8843/https (guest portal), 8880/http (guest portal HTTP redirect), 6789/tcp (speed test), 3478/udp (STUN), 10001/udp (device discovery)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/unifi
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none; service ports are not hostNetwork
+- extra-persistence: /usr/lib/unifi/data (pvc), /usr/lib/unifi/olddata (pvc, config key), /usr/lib/unifi/logs (emptyDir), /usr/lib/unifi/cert (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

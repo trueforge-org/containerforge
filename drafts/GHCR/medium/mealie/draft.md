@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mealie
+- non-root: yes - runAsUser 568 default, no container override
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /app/data (pvc); /nltk_data (emptyDir, 5Gi)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

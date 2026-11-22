@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI), 2222/tcp (ssh, optional)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gitea
+- non-root: possible - main container runAsUser 1000 and runAsGroup 1000 (not 568); init container 1-init-directories runs runAsUser 0
+- read-only-rootfs: yes - no container override, so common readOnlyRootFilesystem true applies
+- privileged: no - common default false, not overridden
+- other-security: pod fsGroup 1000; init container runs as root
+- extra-persistence: /data (pvc, chart-defined; draft expects /config) and /var/lib/gitea (emptyDir, chart-defined)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8090/http (web UI), 3478/udp (TURN, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ispy-agent-dvr
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: unknown - no privileged flag in values; draft says camera and hardware-acceleration device access, not shown in values
+- other-security: LoadBalancer services for main and turn; WebRTC port range 0-10
+- extra-persistence: /agent/Media/XML (pvc); /agent/Media/WebServerRoot/Media (pvc); /agent/Commands (pvc); /agent/ffmpeg6 (pvc). None is /config.
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 55123/http (web UI), 1984/http (go2rtc API and web, inferred), 8554/tcp (RTSP streaming, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ring-mqtt
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /data (pvc), /data/config.json (configmap)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

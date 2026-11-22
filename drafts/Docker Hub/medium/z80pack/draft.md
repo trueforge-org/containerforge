@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web terminal, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/z80pack
+- non-root: possible - chart sets runAsUser and runAsGroup 0; emulator and web terminal run fine on a high port
+- read-only-rootfs: possible - chart sets false; draft keeps state in /config
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: none (only /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

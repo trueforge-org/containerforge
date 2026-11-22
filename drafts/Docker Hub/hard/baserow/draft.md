@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/baserow
+- non-root: possible - chart sets runAsUser 0; Caddy and supervisord need rework
+- read-only-rootfs: possible - chart sets false; data lives on the pvc
+- privileged: no - not set, common default false
+- other-security: capabilities add NET_BIND_SERVICE and KILL (chart, container level; drop ALL overridden)
+- extra-persistence: /baserow/data (pvc, chart mount)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

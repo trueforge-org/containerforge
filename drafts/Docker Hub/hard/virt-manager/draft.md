@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6080/http (noVNC web UI, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/virt-manager
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: unknown - no privileged key in values, but /dev/kvm and libvirt socket mounts suggest host access may need it
+- other-security: /dev/kvm device mount; host libvirt socket mount (/var/run/libvirt/libvirt-sock, hostPath-like)
+- extra-persistence: /dev/kvm (device), /var/lib/libvirt/images (pvc), /var/run/libvirt/libvirt-sock (socket from host), /root (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 53/udp (DNS), 53/tcp (DNS), 80/http (web UI and API), 443/https (web UI, TLS)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pihole
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0; PIHOLE_UID and GID remap from PUID and fsGroup
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values, but allowPrivilegeEscalation true
+- other-security: capabilities add NET_ADMIN, SETFCAP, SETPCAP, KILL, SYS_TIME, SYS_NICE; allowPrivilegeEscalation true; port 53 DNS (UDP and TCP) needs low-port binding
+- extra-persistence: /etc/pihole (config, pvc chart default); /etc/dnsmasq.d (dnsmasq, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3142/http (apt proxy cache)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/apt-cacher-ng
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and runAsNonRoot false; daemon normally drops to its own user on port 3142
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; cache is a pvc mount
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /var/cache/apt-cacher-ng (pvc, chart-level)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

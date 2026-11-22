@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API), 8189/udp (WebRTC media)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/broadcast-box
+- non-root: no - chart sets container runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, no override in values
+- other-security: UDP service port 60006 (no capability or hostNetwork override)
+- extra-persistence: none (no persistence section, common defaults only)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

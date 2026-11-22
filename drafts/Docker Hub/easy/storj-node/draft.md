@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 28967/tcp (node public port), 28967/udp (node public port), 14002/http (dashboard)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/storj-node
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; draft notes identity permissions need a check
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /app/identity (pvc, chart's own); /app/config (pvc, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

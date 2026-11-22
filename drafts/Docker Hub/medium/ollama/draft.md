@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 11434/http (API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ollama
+- non-root: no - runAsUser 0, runAsNonRoot false in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none in values; ROCm/CUDA variants may need GPU device access, not shown in values
+- extra-persistence: /app/backend/data (data, pvc default) for the optional UI sidecar; /root/.ollama is the chart's config mount
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

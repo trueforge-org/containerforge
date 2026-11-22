@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9001/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/etherpad
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and runAsNonRoot false; Node server on 9001 should run unprivileged
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; chart mounts /opt/etherpad-lite/var while draft writes settings to /config
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /opt/etherpad-lite/var (pvc, chart-level; draft says /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

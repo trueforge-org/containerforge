@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 34400/http (web UI and playlist API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/threadfin
+- non-root: yes - no runAs override, common default 568; draft says it runs non-root
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, no override
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /home/threadfin/conf (pvc, chart's own; draft expects /config, so mismatch); /tmp/threadfin (emptyDir)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

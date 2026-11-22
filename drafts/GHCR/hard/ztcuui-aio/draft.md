@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3443/https (ztncui web UI), 9993/udp (zerotier-one peer traffic)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ztcuui-aio
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false; draft runs zerotier daemon plus web UI under s6
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (draft needs /dev/net/tun, not shown in values)
+- other-security: root, so common adds CHOWN,SETUID,SETGID,FOWNER,DAC_OVERRIDE caps; /dev/net/tun per draft only
+- extra-persistence: /var/lib/zerotier-one (pvc), /etc/zt-mkworld (pvc), /opt/key-networks/ztncui/etc (pvc, chart config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (selkies desktop web UI, inferred), 3001/https (selkies desktop web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/audacity
+- non-root: no - chart runAsUser 0; draft keeps Selkies desktop base with AppImage
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false; desktop stack
+- privileged: no - not set in values
+- other-security: root, so common adds CHOWN,SETUID,SETGID,FOWNER,DAC_OVERRIDE caps; FUSE per draft
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

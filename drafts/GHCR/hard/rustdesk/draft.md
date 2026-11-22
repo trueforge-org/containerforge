@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 21115/tcp (hbbs NAT test, inferred), 21116/tcp (hbbs ID/heartbeat), 21116/udp (hbbs ID/heartbeat), 21117/tcp (hbbr relay), 21118/http (hbbs web client, inferred), 21119/http (hbbr web client, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rustdesk
+- non-root: no - runAsUser 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /data (chart path, type not set)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

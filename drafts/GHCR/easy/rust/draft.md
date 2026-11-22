@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 28015/udp (game), 28016/tcp (rcon, inferred), 28082/tcp (companion app, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rust
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0 (SteamCMD wrapper runs as root)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /serverdata/serverfiles (pvc), /serverdata/steamcmd (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

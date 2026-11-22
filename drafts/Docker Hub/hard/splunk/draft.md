@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI), 8089/https (management API), 9997/tcp (forwarder receiving)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/splunk
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: none
+- extra-persistence: /opt/splunk/etc/ (pvc), /opt/splunk/var (pvc), /splunkdata (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

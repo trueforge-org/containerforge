@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (metrics, inferred), 8081/http (health probe, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kubelet-csr-approver
+- non-root: yes - runAsUser 568 default, no container override
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not overridden
+- other-security: cluster-scoped RBAC rules and a ServiceAccount (not container security)
+- extra-persistence: none (no persistence block)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

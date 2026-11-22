@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/picoshare
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default true, no override; writes go to /data
+- privileged: no - common default false
+- other-security: none
+- extra-persistence: /data (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

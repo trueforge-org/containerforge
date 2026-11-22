@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3030/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/traggo
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: yes - default readOnlyRootFilesystem true; data goes to its mount
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /opt/traggo/data (pvc, chart's own; draft expects /config, so mismatch)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

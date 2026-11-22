@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4200/http (inferred, web UI and websocket)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/synctube
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /usr/src/app/user (pvc, chart-defined storageconfig)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

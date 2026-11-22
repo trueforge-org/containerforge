@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (nginx front, inferred), 6878/http (engine HTTP API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/acestream
+- non-root: possible - chart runs as uid 1000 (not 568); draft nginx on port 80 would need a port change
+- read-only-rootfs: possible - chart sets false; nginx and engine need writable temp paths
+- privileged: unknown - not set in values; closed-source engine behaviour unverified
+- other-security: none in values
+- extra-persistence: none in values; engine data path unknown
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

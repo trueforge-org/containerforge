@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred), 8086/http (embedded InfluxDB, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/scrutiny
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: yes - chart sets privileged true and allowPrivilegeEscalation true
+- other-security: capabilities add SYS_RAWIO, SYS_ADMIN; hostPath /run/udev (readOnly)
+- extra-persistence: /opt/scrutiny/config, /opt/scrutiny/influxdb (chart paths), /run/udev (hostPath, read-only)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

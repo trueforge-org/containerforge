@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8971/https (authenticated web UI via nginx), 5000/http (internal unauthenticated web API), 8554/tcp (RTSP restream), 8555/tcp (WebRTC), 8555/udp (WebRTC)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/frigate
+- non-root: no - chart forces runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values; camera device passthrough from the Reason is not shown
+- extra-persistence: /media (type not set, likely pvc)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

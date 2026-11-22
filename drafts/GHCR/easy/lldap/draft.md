@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3890/tcp (LDAP), 17170/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lldap
+- non-root: yes - no runAs override, common runAsUser 568; single Rust binary, no root wrapper needed
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; the database is the only write target
+- privileged: no - no privileged key in values; common default false
+- other-security: none (LDAP port only)
+- extra-persistence: none for the draft (database in /config); chart mounts /data (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

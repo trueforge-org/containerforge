@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9980/http (inferred, CODE server; TLS usually terminated by a proxy)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/collabora
+- non-root: possible - runAsUser 1001 override, non-root but not 568
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, but allowPrivilegeEscalation true
+- other-security: capabilities add CHOWN, FOWNER, SYS_CHROOT, MKNOD; allowPrivilegeEscalation true; chroot jails per draft
+- extra-persistence: none shown in values
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

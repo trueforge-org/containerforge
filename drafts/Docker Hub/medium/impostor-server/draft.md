@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 22023/udp (game server), 22023/tcp (REST API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/impostor-server
+- non-root: yes - common runAsUser 568 default, no root override in values
+- read-only-rootfs: yes - common readOnlyRootFilesystem true default, no override; state in /config
+- privileged: no - common default, not overridden
+- other-security: none (UDP 22023 game port only)
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

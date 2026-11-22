@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4533/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/navidrome
+- non-root: yes - no securityContext override, common runAsUser 568; single static binary
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; data and cache go to a volume and /tmp
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft; chart mounts /data and /music (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

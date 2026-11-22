@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27015/udp (game, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/core-keeper-dedicated-server
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /home/steam/core-keeper-data (datafiles, pvc default); /home/steam/core-keeper-dedicated (serverfiles, pvc default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (selkies web desktop, inferred), 3001/https (selkies web desktop TLS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rmlint
+- non-root: no - runAsUser 0 and runAsGroup 0, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /root (pvc, searchlocation for scanning)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

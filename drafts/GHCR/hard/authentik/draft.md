@@ -54,6 +54,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (web UI and API), 9443/https (web UI and API, TLS)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/authentik
+- non-root: possible - main and worker set runAsUser 1000 (not 568); geoip sidecar forces runAsUser 0
+- read-only-rootfs: possible - readOnlyRootFilesystem not overridden (default true); multi-process Django, Go and Rust sidecars
+- privileged: no - not set, default false
+- other-security: geoip sidecar runs root with capabilities.disableS6Caps true; no hostNetwork or hostPath
+- extra-persistence: /templates, /blueprints/custom, /certs, /geoip, /usr/share/GeoIP, /data (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

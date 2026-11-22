@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1880/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/node-red
+- non-root: yes - no securityContext override, common runAsUser 568; draft runs one non-root Node process
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; flows and palette installs go to a volume
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft (flows in /config); chart mounts /data (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

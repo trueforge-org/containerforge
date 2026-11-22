@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5800/http (inferred, noVNC web client), 5900/tcp (inferred, VNC)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/fmd2-wine
+- non-root: no - runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; KasmVNC desktop per draft
+- extra-persistence: /app/FMD2/lua, /app/FMD2/userdata, /app/FMD2/data, /downloads (chart persistence, type not shown; /config/.wine is under /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

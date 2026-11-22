@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/tar1090
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override in values
+- other-security: none in values; SDR device access (Reason) is not declared, so it is unknown how the chart would provide it
+- extra-persistence: none (persistence {}); readsb decoder and aircraft database may need writable paths (not shown in values)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

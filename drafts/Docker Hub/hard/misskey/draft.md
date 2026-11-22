@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/misskey
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false (pod fsGroup 33)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: pod fsGroup 33; cnpg and redis dependencies enabled
+- extra-persistence: /misskey/files (pvc); /misskey/.config (configmap, chart-added)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8888/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/unmanic
+- non-root: yes - runAsUser 568 default, no root override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, not overridden; temp writes under /tmp
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /library (pvc); /tmp/unmanic/remote_library (pvc); /tmp/unmanic (emptyDir)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

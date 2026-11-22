@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 17442/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/youtubedl-material
+- non-root: no - top-level container override runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: pod fsGroup 1000; a PUID 1000 sits under an unrecognised top-level security key, not securityContext; MongoDB subchart enabled
+- extra-persistence: none beyond chart's own appdata, users, subscriptions, audio and video under /app
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sqlite-web
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft is a Flask UI
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /data (pvc, chart's own; draft mounts the database under /config, so mismatch)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

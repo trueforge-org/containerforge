@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 10578/udp (game server)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/st-reborn-server
+- non-root: yes - runAsUser 568 default, no root override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, not overridden
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /home/server/Data, /home/server/logs (pvc, chart-defined); /home/server/config is chart config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

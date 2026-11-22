@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/homer
+- non-root: yes - runAsUser and runAsGroup 1000 override, no root
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /www/assets (pvc, chart's config mount)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

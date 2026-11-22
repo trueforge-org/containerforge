@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (open-webui web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ollama
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - readOnlyRootFilesystem false
+- privileged: no - default false, not overridden; no GPU or NVIDIA settings in values
+- other-security: none
+- extra-persistence: /root/.ollama (pvc); /app/backend/data (pvc). Draft says model and cache dirs go to /config and /tmp, the chart mounts /root/.ollama.
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

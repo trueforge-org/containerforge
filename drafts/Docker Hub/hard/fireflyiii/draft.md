@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/fireflyiii
+- non-root: possible - runAsUser 33, runAsGroup 33 override, non-root but not 568
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: /var/www/html/storage/upload (chart persistence, type not shown)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

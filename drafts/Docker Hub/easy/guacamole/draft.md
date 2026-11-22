@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/guacamole
+- non-root: yes - main and init containers set runAsUser 1001, guacd 1000, no root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false on main, init and guacd containers
+- privileged: no - common default false, not overridden
+- other-security: none beyond the rootfs override
+- extra-persistence: /var/lib/guacamole/recordings (pvc), /var/lib/guacamole/drive (pvc, guacd), /tc-init (emptyDir, seed scripts), seed scripts via configmap
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

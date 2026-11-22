@@ -65,6 +65,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (neko web UI, inferred), 52000-52100/udp (WebRTC media, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/neko
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; WebRTC TCP and UDP ports come from the mux service
+- extra-persistence: /home/neko/Downloads (downloads, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

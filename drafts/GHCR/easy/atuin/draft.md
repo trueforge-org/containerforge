@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8888/http (sync server API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/atuin
+- non-root: yes - chart sets runAsUser and runAsGroup 1000; draft's release binary runs non-root (ContainerForge USER apps default is 568, so use that)
+- read-only-rootfs: yes - no override, so default true; config in /config (ATUIN_CONFIG_DIR)
+- privileged: no - default false
+- other-security: none
+- extra-persistence: none (PostgreSQL is the external cluster)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

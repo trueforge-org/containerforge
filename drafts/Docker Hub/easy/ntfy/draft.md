@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ntfy
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default true, no override; writes go to persistence
+- privileged: no - common default false
+- other-security: none
+- extra-persistence: /etc/ntfy (pvc, config, auth and firebase files), /var/cache/ntfy (pvc, cache)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

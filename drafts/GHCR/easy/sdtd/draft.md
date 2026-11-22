@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 26900/udp (game), 26901/udp (Steam query, inferred), 8081/tcp (telnet admin, inferred), 8080/http (web panel, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sdtd
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0 (SteamCMD wrapper runs as root)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /serverdata/serverfiles (pvc), /serverdata/steamcmd (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

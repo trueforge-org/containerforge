@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dell-idrac-fan-controller
+- non-root: yes - no securityContext override, so common runAsUser 568 applies; draft needs no root
+- read-only-rootfs: yes - no override, so common readOnlyRootFilesystem true applies
+- privileged: no - common default false, not overridden
+- other-security: none in values (service disabled, probes disabled, no host access)
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

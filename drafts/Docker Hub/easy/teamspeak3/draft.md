@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9987/udp (voice), 30033/tcp (file transfer), 10011/tcp (server query)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/teamspeak3
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; server writes to its data mounts
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /var/ts3server (pvc, chart's own; draft expects data in /config, so mismatch); /var/run/ts3server (pvc, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

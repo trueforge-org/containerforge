@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/metabase
+- non-root: yes - no securityContext override, common runAsUser 568 default
+- read-only-rootfs: yes - common readOnlyRootFilesystem true default; state goes to PostgreSQL and /plugins volume
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /plugins (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

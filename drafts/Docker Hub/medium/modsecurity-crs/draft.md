@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (proxied web server), 443/https (TLS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/modsecurity-crs
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false; Apache binds 80 and 443, so non-root needs a port change
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; Apache writes to emptyDir paths
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /modsecurity/data (emptyDir), /modsecurity/temp (emptyDir), /modsecurity/upload (emptyDir)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

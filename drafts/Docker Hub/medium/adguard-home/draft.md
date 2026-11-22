@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (setup web UI), 80/http (web UI, inferred), 443/https (web UI, inferred), 53/tcp (dns), 53/udp (dns), 853/tcp (DNS over TLS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/adguard-home
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false, no override
+- other-security: DNS services on port 53 (targetPort 53); root user is set, so binding works but a rootless run would need a capability or port remap
+- extra-persistence: /opt/adguardhome/conf (pvc, config), /opt/adguardhome/work (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

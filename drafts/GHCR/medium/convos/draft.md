@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/convos
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and readOnlyRootFilesystem false; Perl app should run as non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; chart mounts /data while draft sets CONVOS_HOME to /config
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /data (pvc, chart-level; draft says /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

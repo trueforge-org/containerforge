@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (nginx web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/aurora-files
+- non-root: possible - chart sets runAsUser 0; nginx on port 80 needs root or a port change
+- read-only-rootfs: possible - chart sets false; draft says the app writes into its own tree
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: unknown - chart persistence is {}; app upload or data path not in values
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

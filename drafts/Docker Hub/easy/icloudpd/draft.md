@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/icloudpd
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false, and passes user_id 0 to the app; app may run non-root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: capabilities add NET_RAW, NET_ADMIN
+- extra-persistence: /home/apps/iCloud (pvc, data); /config is the chart's own
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

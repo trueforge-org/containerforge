@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9993/udp (peer transport)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/zerotier
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - default false; NET_ADMIN is added instead
+- other-security: capability NET_ADMIN added; hostPath /dev/net/tun mounted
+- extra-persistence: /var/lib/zerotier-one (pvc, config), /dev/net/tun (hostPath device)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

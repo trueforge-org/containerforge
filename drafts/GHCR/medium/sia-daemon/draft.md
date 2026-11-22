@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9980/http (API), 9981/tcp (gateway, inferred), 9982/tcp (host, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sia-daemon
+- non-root: no - container override runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none beyond chart's own datadirectory at /sia-data
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8073/http (web UI and websocket)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/openwebrxplus
+- non-root: no - runAsUser 0, runAsNonRoot false, no override
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values (default false)
+- other-security: USB hostPath /dev/bus/usb for SDR (chart has it disabled by default)
+- extra-persistence: /var/lib/openwebrx (pvc), /etc/openwebrx (pvc), /usr/lib/python3/dist-packages/htdocs/plugins (pvc)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8787/http (web UI) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/iyuuplus
+- non-root: possible - chart forces runAsUser 0 and runAsNonRoot false; PHP app could run as non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /IYUU/db (pvc, config path used by chart instead of /config), /torrents (pvc), /BT_backup (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

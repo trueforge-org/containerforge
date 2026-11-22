@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (health endpoint, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gatus
+- non-root: yes - no container securityContext override, so common runAsUser 568 applies
+- read-only-rootfs: yes - no override, so common readOnlyRootFilesystem true applies; config is a read-only configmap
+- privileged: no - common default false, not overridden
+- other-security: pod sysctl net.ipv4.ping_group_range "0 2147483647" (may need the kubelet to allow it); rbac and serviceAccount for the sidecar
+- extra-persistence: /config (chart configmain mount, pvc); no extra paths
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

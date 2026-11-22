@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (static web UI served by nginx, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ariang
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; the static web UI on port 8080 needs no root
+- read-only-rootfs: possible - chart sets false; draft unpacks to /app and serves from /tmp, with no state
+- privileged: no - default false, not overridden
+- other-security: chart adds SYS_CHROOT and allowPrivilegeEscalation true; the draft's static server likely needs neither, so drop them
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

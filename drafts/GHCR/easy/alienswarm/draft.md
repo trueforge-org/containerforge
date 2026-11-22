@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 27015/udp (game and query), 27015/tcp (rcon, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/alienswarm
+- non-root: possible - chart runs the ich777 wrapper as runAsUser 0; draft plans a USER apps start script and SteamCMD needs only lib32 libs
+- read-only-rootfs: possible - chart sets false; draft keeps game data in /config and caches in /tmp
+- privileged: no - default false, not overridden
+- other-security: none; UDP 27015 game port and TCP 27015 RCON port
+- extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); draft keeps these under /config, so likely none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

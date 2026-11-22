@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (FastAPI add-on) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/comet
+- non-root: yes - common default runAsUser 568, no root override
+- read-only-rootfs: yes - common default true; cache is an emptyDir at /.cache
+- privileged: no - common default false, no override
+- other-security: none
+- extra-persistence: /.cache (emptyDir, chart-level); /data (pvc, chart-level; draft uses /app with caches in /tmp)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

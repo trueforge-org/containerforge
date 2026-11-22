@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6543/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/webnut
+- non-root: possible - chart sets runAsUser 0, but the Python web UI on port 6543 needs no root
+- read-only-rootfs: possible - chart sets false; draft writes config only to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

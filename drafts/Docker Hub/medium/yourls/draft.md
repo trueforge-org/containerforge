@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web app, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/yourls
+- non-root: possible - chart sets runAsUser and runAsGroup 0; PHP on a high port needs no root
+- read-only-rootfs: possible - chart sets false; draft copies release to /app and keeps config in /config
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: none (DB is the mariadb sibling; no other chart persistence)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

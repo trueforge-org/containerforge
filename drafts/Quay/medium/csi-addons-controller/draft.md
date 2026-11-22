@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (metrics, inferred), 8081/http (health probe, inferred), 9443/https (webhook, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/csi-addons-controller
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; no runtime state
+- privileged: no - not set, common default false
+- other-security: none in container security; automountServiceAccountToken true; broad cluster-wide RBAC for PVCs and csiaddons resources
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

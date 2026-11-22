@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8181/http (API and web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/zilean
+- non-root: yes - no securityContext override, so common default 568 applies
+- read-only-rootfs: yes - no override, so common default true; writes go to /app/data persistence
+- privileged: no - default false, no override
+- other-security: none
+- extra-persistence: /app/data (pvc, DB and ingest data)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

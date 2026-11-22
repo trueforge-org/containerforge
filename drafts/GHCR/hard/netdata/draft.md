@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 19999/http (dashboard and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/netdata
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: capabilities add SYS_PTRACE; pod fsGroup 201; ClusterRole rules; hostPath reads of /proc, /sys, /dev, /etc/passwd, /etc/group, /etc/os-release
+- extra-persistence: /etc/netdata (config, pvc chart default); /var/lib/netdata (lib, pvc chart default); /var/cache/netdata (cache, pvc chart default); hostPath /proc, /sys, /dev, /etc/passwd, /etc/group, /etc/os-release (read-only host access)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

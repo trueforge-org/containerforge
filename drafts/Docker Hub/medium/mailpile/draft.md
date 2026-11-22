@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 33411/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mailpile
+- non-root: possible - chart forces runAsUser 0; state paths are under /root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /root/.local/share/Mailpile (pvc), /root/.gnupg (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

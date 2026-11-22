@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3218/http (web editor)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/hassconfigurator
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; a Python web editor may not need root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /hass-config (pvc); /config is the chart's own
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

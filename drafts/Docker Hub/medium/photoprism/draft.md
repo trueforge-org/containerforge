@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2342/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/photoprism
+- non-root: no - runAsUser 0, runAsNonRoot false in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /photoprism_temp (emptyDir), /photoprism/originals and /photoprism/import (pvc default), /assets (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

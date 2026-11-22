@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (selkies web desktop, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gpodder
+- non-root: no - chart forces runAsUser 0 and runAsGroup 0 (selkies desktop base)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: /downloads (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

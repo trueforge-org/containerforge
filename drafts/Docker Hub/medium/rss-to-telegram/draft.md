@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rss-to-telegram
+- non-root: no - runAsUser 0, runAsGroup 0 overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: none (state in chart's /config only)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

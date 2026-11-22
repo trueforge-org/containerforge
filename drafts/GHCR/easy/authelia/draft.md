@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9091/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/authelia
+- non-root: yes - no securityContext override, so runAsUser 568 default
+- read-only-rootfs: yes - default true; config in /config, and configuration.yaml is a read-only secret mount
+- privileged: no - default false
+- other-security: none
+- extra-persistence: none (the /configuration.yaml secret mount is chart-own, not a data path)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

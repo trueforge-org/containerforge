@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/metallb-config
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default true, no override
+- privileged: no - common default false
+- other-security: none in values
+- extra-persistence: none
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

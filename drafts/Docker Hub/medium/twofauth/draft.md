@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/twofauth
+- non-root: yes - runAsUser 1000, runAsGroup 1000 override (non-root, not 568)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /2fauth (pvc, chart config volume)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (cache HTTP), 443/https (cache HTTPS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lancache-monolithic
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; HTTPS service on 443 is below 1024
+- extra-persistence: /data/cache (pvc); /data/logs (pvc); /data/prefill (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

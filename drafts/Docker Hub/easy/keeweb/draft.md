@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (static web app, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/keeweb
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; static nginx can run unprivileged
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: /etc/nginx/external (pvc); nginx cache paths not in values
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

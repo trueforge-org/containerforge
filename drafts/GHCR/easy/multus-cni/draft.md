@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/multus-cni
+- non-root: no - chart runs privileged installer containers as runAsUser 0 and writes host CNI directories
+- read-only-rootfs: possible - common default readOnlyRootFilesystem true, but the hostPath mounts must be writable
+- privileged: yes - chart sets privileged true on its installer containers
+- other-security: hostNetwork true, hostPID true, hostPath mounts of / , /run, /run/netns, /run/k8s.cni.cncf.io, /var/lib/kubelet, /opt/cni/bin, /etc/cni/net.d, /var/lib/cni/multus
+- extra-persistence: hostPath /opt/cni/bin (the draft's target), /etc/cni/net.d, /var/lib/cni/multus, and the host paths above (hostPath)
+- confidence: medium (the chart's privileged workloads may use a different image than this file-only bundle)
+
 ## Fields
 ### Chart / Role
 

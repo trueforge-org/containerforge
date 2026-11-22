@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dizquetv
+- non-root: possible - no securityContext override, common default 568 applies; app is a Node process
+- read-only-rootfs: possible - common default true, no override; app state sits on /home/node/app/.dizquetv persistence
+- privileged: no - not set, common default false
+- other-security: nvidiaImage variant needs GPU runtime (not in values)
+- extra-persistence: /home/node/app/.dizquetv (chart persistence, type not shown)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4001/tcp (swarm), 4001/udp (swarm QUIC), 5001/http (API), 8080/http (gateway)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/ipfs
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; IPFS repo could be owned by 568 via fsGroup
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none in values (swarm ports 4001 tcp/udp, 5001, 8080 published)
+- extra-persistence: /data/ipfs (pvc, repo), /export (pvc), /ipfs (pvc), /ipns (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

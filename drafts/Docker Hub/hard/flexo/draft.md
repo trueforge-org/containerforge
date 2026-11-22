@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7878/http (inferred, Arch mirror cache)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/flexo
+- non-root: possible - no securityContext override, common default 568 applies
+- read-only-rootfs: possible - common default true, no override; cache at /var/cache/flexo and /tmp per draft
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: /var/cache/flexo as emptyDir (chart persistence, size 10Gi)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

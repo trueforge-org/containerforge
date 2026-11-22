@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (desktop web UI, inferred), 3001/https (desktop web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/chromium
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0; draft keeps Selkies desktop base
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values; draft says browser sandbox may need privileges
+- other-security: root, so common root caps added; /dev/shm covered by common default
+- extra-persistence: /config/.cache (emptyDir, chart browsercache)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

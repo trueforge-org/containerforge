@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (metrics, inferred), 8081/http (health probe, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/volsync
+- non-root: yes - no securityContext override, common default 568 (operator)
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true for the operator; no runtime state
+- privileged: unknown - --scc-name=volsync-privileged-mover makes data movers use a privileged SCC; operator's own privilege not set in values
+- other-security: none in operator container; cluster-wide RBAC incl. use of the privileged-mover SCC and PV updates
+- extra-persistence: none (cluster-only)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

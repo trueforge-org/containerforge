@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9898/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/backrest
+- non-root: yes - no securityContext override, so runAsUser 568 default
+- read-only-rootfs: yes - default true; draft writes only to /config and /tmp, both chart-mounted
+- privileged: no - default false
+- other-security: none
+- extra-persistence: /data pvc (BACKREST_DATA in chart; draft does not name it) and /cache pvc (chart; draft uses /tmp)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

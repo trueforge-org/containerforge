@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI and API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/imgpush
+- non-root: possible - chart forces runAsUser 0; Python web app writing to mounted volumes
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; writes go to /cache and /images volumes
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /cache (pvc), /images (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

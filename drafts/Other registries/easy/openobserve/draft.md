@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5080/http (web UI and HTTP API), 5081/tcp (gRPC ingest, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/openobserve
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; state goes to the /data PVC
+- privileged: no - not set, common default false
+- other-security: none in values
+- extra-persistence: /data (chart-added, pvc); draft says data dir is /config, chart uses /data, so this mismatches
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

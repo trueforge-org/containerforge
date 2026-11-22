@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (API and web docs)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/whisper-asr-webservice
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /root/.cache/pip, /root/.cache/poetry, /root/.cache/whisper (pvc, chart-defined model and cache paths)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/livestreamdvr
+- non-root: possible - chart forces runAsUser 0; app writes under its data dirs, which need ownership for non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; writes go to data volumes
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /usr/local/share/twitchautomator/data/config (pvc, config), .../data/cache (pvc), .../data/logs (pvc), .../data/storage (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

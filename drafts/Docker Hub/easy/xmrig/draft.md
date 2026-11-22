@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (optional HTTP API, off by default, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/xmrig
+- non-root: possible - chart sets runAsUser 0, but xmrig runs unprivileged and draft keeps config in /config
+- read-only-rootfs: possible - chart sets false; draft writes only to /config
+- privileged: no - not set, common default false
+- other-security: none in values (huge-page tuning would need extra settings, not set)
+- extra-persistence: none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

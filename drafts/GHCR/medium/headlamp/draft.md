@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4466/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/headlamp
+- non-root: yes - runAsUser 568 default, no container override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true; writes go to emptyDir mounts
+- privileged: no - default false, not overridden
+- other-security: none; download-plugins init container is not overridden either
+- extra-persistence: /.config (emptyDir, Memory); /headlamp/plugins (emptyDir, Memory); plugins.yaml configmap at plugin path (read-only)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

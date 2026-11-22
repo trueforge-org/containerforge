@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (Rails web app)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/redmine
+- non-root: yes - runAsUser and runAsGroup 999, fsGroup 999 in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: fsGroup 999 (pod)
+- extra-persistence: /usr/src/redmine/files (pvc default); bundle and tmp per draft under /tmp
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

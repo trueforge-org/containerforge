@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9600/tcp (game, inferred), 9600/udp (game, inferred), 8081/http (server HTTP, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/assettocorsa
+- non-root: possible - chart runs the ich777 wrapper as runAsUser 0; draft plans a USER apps start script
+- read-only-rootfs: possible - chart sets false; draft keeps state in /config
+- privileged: no - default false, not overridden
+- other-security: none; TCP and UDP ports 9600, plus 8772, 50041 and 8081
+- extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

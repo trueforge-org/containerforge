@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/multus-cni
+- non-root: no - chart runs as DaemonSet with runAsUser 0 and writes host CNI paths
+- read-only-rootfs: no - writes to hostPath CNI directories and host run paths
+- privileged: yes - talos-plugin-installer init container sets privileged true
+- other-security: hostNetwork true; hostPID true; capabilities drop in init container; hostPath mounts of /opt/cni/bin, /etc/cni/net.d, /var/lib/cni/multus, / (hostroot), /run, /var/run/netns, /run/k8s.cni.cncf.io, /var/lib/kubelet
+- extra-persistence: hostPath x8 as listed under other-security (chart host mounts; no pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

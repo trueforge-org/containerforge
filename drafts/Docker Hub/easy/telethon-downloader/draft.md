@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/telethon-downloader
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft is pip-installed Python
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; session and downloads go to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /download and /watch (pvc, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

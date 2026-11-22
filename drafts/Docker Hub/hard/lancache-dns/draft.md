@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 53/udp (DNS), 53/tcp (DNS)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lancache-dns
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; DNS port 53 is below 1024 and needs root or NET_BIND_SERVICE, which values do not add
+- extra-persistence: none (no persistence section in values)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

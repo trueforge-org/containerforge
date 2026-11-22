@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/vocechat-server
+- non-root: yes - runAsUser 568 default, no root override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none beyond /config (chart mounts /home/vocechat-server/data as pvc; draft keeps SQLite in /config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8069/http (web UI), 8072/http (websocket and longpolling, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/odoo
+- non-root: yes - chart sets runAsUser 1000, runAsGroup 1000 (not 568, but not root)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none in values; odoo.conf mounted read-only from a configmap; CNPG postgres dependency
+- extra-persistence: /var/lib/odoo and /mnt/extra-addons (chart-added, pvc); odoo.conf (configmap, read-only)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

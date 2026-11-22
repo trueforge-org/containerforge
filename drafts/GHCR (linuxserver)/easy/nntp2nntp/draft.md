@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1119/tcp (NNTP proxy, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nntp2nntp
+- non-root: possible - chart sets runAsUser 0 for linuxserver; draft is a single pip-installed python process on the python base
+- read-only-rootfs: possible - no override, chart default true; draft keeps state in /config
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web file manager)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/cloudcommander
+- non-root: possible - chart sets runAsUser/runAsGroup 0 and readOnlyRootFilesystem false; /root is mounted as appdata, which a uid 568 process may not be able to write
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; file manager needs writable mounts
+- privileged: no - common default false, no chart override
+- other-security: none
+- extra-persistence: /root (pvc, chart-level appdata); /UNRAID (pvc, chart-level mountpath for user files)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

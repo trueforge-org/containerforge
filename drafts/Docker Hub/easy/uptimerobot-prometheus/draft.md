@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9705/http (Prometheus metrics, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/uptimerobot-prometheus
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; draft writes only to /tmp
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

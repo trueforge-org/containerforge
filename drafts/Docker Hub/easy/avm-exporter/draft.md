@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9787/http (metrics, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/avm-exporter
+- non-root: yes - no securityContext override, common default runAsUser 568
+- read-only-rootfs: yes - no override, common default true (exporter config is mounted read-only from configmap)
+- privileged: no - not set, common default false
+- other-security: none (the `devices` key is exporter app config for FRITZ!Box targets, not host device passthrough)
+- extra-persistence: /exporter/config.yaml (configmap)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

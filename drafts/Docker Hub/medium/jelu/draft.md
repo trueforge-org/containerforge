@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 11111/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/jelu
+- non-root: possible - chart forces runAsUser 0; Spring Boot jar can run as non-root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; writes to data paths
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /database (pvc), /files/images (pvc), /files/imports (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

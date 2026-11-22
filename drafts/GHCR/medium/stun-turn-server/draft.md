@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3478/udp (STUN/TURN), 3478/tcp (STUN/TURN), 5349/tcp (TURN over TLS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/stun-turn-server
+- non-root: no - container override runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: UDP service on 5349 alongside TCP 5349; relay port range not in values; no hostNetwork
+- extra-persistence: none beyond chart's own config at /stun-turn
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

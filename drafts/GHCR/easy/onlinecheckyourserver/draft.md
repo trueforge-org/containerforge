@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/onlinecheckyourserver
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; the draft runs a shell script as apps
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; the script writes little beyond /config
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none (chart has persistence: {} and the draft uses /config)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

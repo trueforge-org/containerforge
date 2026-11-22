@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2375/tcp (inferred, Docker daemon API without TLS), 2376/tcp (inferred, Docker daemon API with TLS)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/docker
+- non-root: no - runAsUser 0, runAsGroup 0, fsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: yes - privileged true
+- other-security: hostNetwork true; allowPrivilegeEscalation true; dockerd needs cgroups and root
+- extra-persistence: /var/lib/docker, /certs/client (chart persistence, type not shown)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

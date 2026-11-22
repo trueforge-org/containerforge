@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3333/http (web UI and API), 3334/udp (DHT crawler, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/bitmagnet
+- non-root: yes - no securityContext override, so runAsUser 568 default
+- read-only-rootfs: yes - default true; PostgreSQL is external
+- privileged: no - default false
+- other-security: none; TCP and UDP torrent ports 3334 and 3333 are above 1024
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

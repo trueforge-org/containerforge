@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/automatic-ripping-machine
+- non-root: no - chart sets runAsUser 0 and an install init container chowns dirs as root; optical drive work needs root
+- read-only-rootfs: no - chart sets false and the app writes to /home/arm and /etc/arm/config
+- privileged: unknown - allowPrivilegeEscalation true is set, privileged is not; draft needs optical device access
+- other-security: allowPrivilegeEscalation true (chart); optical drive devices (draft, not in values)
+- extra-persistence: /home/arm (pvc, ripped output and state); /etc/arm/config (pvc, chart mount)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

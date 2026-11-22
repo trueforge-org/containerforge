@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7979/http (metrics, inferred), 8080/http (health check, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/external-dns
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; no runtime state
+- privileged: no - not set, common default false
+- other-security: none in container security; chart creates a broad cluster-wide ClusterRole for reading cluster resources
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

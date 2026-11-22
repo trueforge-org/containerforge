@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 25565/tcp (Minecraft proxy), 25564/http (API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/minecraft-router
+- non-root: yes - no securityContext override, common runAsUser 568; static Go binary on a high port
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; no state beyond routing config
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8766/udp (game, inferred), 9700/udp (Steam auth, inferred), 27016/udp (Steam query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sonsoftheforest
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /serverdata/steamcmd, /serverdata/serverfiles (chart paths, type not set); configmap mounted at /serverdata/serverfiles/userdata/dedicatedserver.cfg
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

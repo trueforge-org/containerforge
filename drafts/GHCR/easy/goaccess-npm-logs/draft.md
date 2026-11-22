@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7880/http (realtime report, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/goaccess-npm-logs
+- non-root: no - chart sets runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: hostpath1 volume name suggests a hostPath mount, type not set in values
+- extra-persistence: /opt/log, read-only (hostPath or pvc, type not set in values; draft says read from a shared volume)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9835/http (metrics)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nvidia-gpu-exporter
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0; needs GPU device access
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: yes - container sets privileged true
+- other-security: privileged; hostPath device and driver mounts for /dev/nvidiactl, /dev/nvidia0, /usr/bin/nvidia-smi, libnvidia-ml.so and libnvidia-ml.so.1
+- extra-persistence: hostPath x5 (GPU devices, nvidia-smi and nvidia-ml libraries as listed under other-security); no pvc
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

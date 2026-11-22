@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6567/udp (game), 6567/tcp (game, inferred), 8080/http (gotty web console from ich777 wrapper, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/mindustry
+- non-root: no - runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - readOnlyRootFilesystem false
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /mindustry (pvc). Draft says saves go to /config, the chart mounts /mindustry.
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

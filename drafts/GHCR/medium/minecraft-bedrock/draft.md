@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 19132/udp (game)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/minecraft-bedrock
+- non-root: possible - runAsUser 568 default, no override; draft mentions itzg entrypoint-demoter, which may expect a root start
+- read-only-rootfs: yes - default true, not overridden; server data is on the /data mount
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /data (pvc, server data and worlds). Draft says /config, the chart uses /data.
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

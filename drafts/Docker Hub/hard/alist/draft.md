@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5244/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/alist
+- non-root: possible - chart sets runAsUser 0; release binary can run unprivileged, but aria2 in the same image needs a supervisor split
+- read-only-rootfs: possible - chart sets false; draft says read-only needs supervisor rework
+- privileged: no - not set, common default false
+- other-security: aria2 sub-service enabled in chart (port 6800)
+- extra-persistence: /opt/alist/data (pvc) unless moved under /config
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

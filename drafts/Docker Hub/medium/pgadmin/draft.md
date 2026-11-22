@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI, inferred), 443/https (web UI TLS, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pgadmin
+- non-root: yes - runAsNonRoot true, runAsUser and runAsGroup 5050 in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: fsGroup 5050 (pod)
+- extra-persistence: none beyond chart's config mount at /var/lib/pgadmin
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5800/http (noVNC web client, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/tsmuxer
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: main container adds capabilities NET_BIND_SERVICE, KILL
+- extra-persistence: /storage (chart path, type not set)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

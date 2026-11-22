@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/nebula-sync
+- non-root: yes - no securityContext override, common runAsUser 568; single Go binary
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; state is only in /tmp or /config
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

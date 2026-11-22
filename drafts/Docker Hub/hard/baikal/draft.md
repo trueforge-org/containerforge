@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (CalDAV/CardDAV web, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/baikal
+- non-root: possible - chart sets runAsUser 0; nginx on port 80 needs root or a port change, and php-fpm needs rework
+- read-only-rootfs: possible - chart sets false; draft says read-only config handling needs rework
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /var/www/baikal/config (pvc, chart mount; draft uses /config); /var/www/baikal/Specific (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

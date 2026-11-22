@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/commento-plusplus
+- non-root: yes - common default runAsUser 568, no root override
+- read-only-rootfs: yes - common default true; no chart persistence override, draft is a single Go process
+- privileged: no - common default false, no override
+- other-security: none
+- extra-persistence: none (PostgreSQL is external)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

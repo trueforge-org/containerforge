@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 25565/tcp (Minecraft proxy)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/minecraft-gate
+- non-root: yes - no securityContext override, common runAsUser 568; Go static binary with config in /config
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true; config is on /config and /tmp is common
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none (chart's config-file configmap at /config.yml is the chart's own)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

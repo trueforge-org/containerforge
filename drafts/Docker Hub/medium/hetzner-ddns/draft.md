@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/hetzner-ddns
+- non-root: possible - chart forces runAsUser 0; outbound API client needs no root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; config file only
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: none (persistence: {})
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

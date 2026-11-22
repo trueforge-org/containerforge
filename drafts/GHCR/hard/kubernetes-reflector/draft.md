@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (health endpoint, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kubernetes-reflector
+- non-root: yes - chart sets runAsNonRoot true and inherits runAsUser 568 default
+- read-only-rootfs: yes - chart sets readOnlyRootFilesystem true
+- privileged: no - not set in values
+- other-security: automountServiceAccountToken true; ClusterRole rules for reading and watching secrets and configmaps across namespaces (API access, not a host capability)
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

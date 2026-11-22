@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (web UI), 443/https (web UI, TLS), 2001/tcp (BidCos RF XML-RPC, inferred), 2010/tcp (HmIP XML-RPC, inferred), 8181/http (JSON-RPC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/raspberrymatic
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0; buildroot OS with its own init
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: unknown - not set in values; host /sys and /lib/modules mounts suggest elevated access
+- other-security: hostPath mounts /run/udev/control, /lib/modules and /sys; no caps or hostNetwork seen in values
+- extra-persistence: /run/udev/control, /lib/modules, /sys (hostPath); /usr/local (config, pvc chart default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

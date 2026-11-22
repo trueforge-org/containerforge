@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5232/http (CalDAV/CardDAV)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/radicale
+- non-root: yes - chart sets runAsUser 2999 and runAsGroup 2999, not root
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, no override; writes go to mounts
+- privileged: no - not set, common default false
+- other-security: capabilities add SETUID, SETGID, KILL (drop ALL otherwise)
+- extra-persistence: /data (pvc, chart's own; draft expects data in /config, so mismatch); /config/config and /config/users (configmap)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

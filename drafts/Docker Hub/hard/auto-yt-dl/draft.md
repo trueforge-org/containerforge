@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/auto-yt-dl
+- non-root: possible - chart sets runAsUser 0; runtime unknown because no upstream source
+- read-only-rootfs: possible - chart sets false; runtime unknown
+- privileged: no - not set, common default false
+- other-security: hostpath1 mount to /app/Downloads (chart; type not stated in values)
+- extra-persistence: /app/data (pvc); /app/Downloads (hostPath or pvc, type not set in values)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

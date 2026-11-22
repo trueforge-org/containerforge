@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (S3 API), 9001/http (web console, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/incubator/aistor
+- non-root: yes - no securityContext override, common default 568
+- read-only-rootfs: possible - common default readOnlyRootFilesystem true, but MinIO writes to /data (pvc) and reads a license file and optional certs
+- privileged: no - not set, common default false
+- other-security: none in container security; license key from a secret mounted at /minio.license
+- extra-persistence: /data (chart-added, pvc); /etc/minio/certs (chart-added, only when tls enabled, type not set so default pvc); /minio.license (secret); draft says data goes under /config, which mismatches
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

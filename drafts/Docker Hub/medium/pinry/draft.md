@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (Django via gunicorn, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/pinry
+- non-root: no - runAsUser 0, runAsNonRoot false in values
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, not overridden
+- other-security: none
+- extra-persistence: none beyond /data (pvc default, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

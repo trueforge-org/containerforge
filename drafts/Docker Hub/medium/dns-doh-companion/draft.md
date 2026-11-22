@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 53/udp (DNS), 53/tcp (DNS)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/dns-doh-companion
+- non-root: no - chart sets container runAsUser 0 and runAsGroup 0; port 53 also needs root or a remap
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default false, no override in values
+- other-security: service on port 53 udp and tcp (privileged port)
+- extra-persistence: none (persistence {})
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

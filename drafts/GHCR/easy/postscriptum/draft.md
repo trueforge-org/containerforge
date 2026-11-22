@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 10002/udp (game), 10001/udp (query, inferred), 27015/udp (Steam, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/postscriptum
+- non-root: possible - chart sets runAsUser 0 and runAsGroup 0; draft plans a USER apps start script
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; SteamCMD writes under the chart's /serverdata mounts
+- privileged: no - no privileged key in values; common default false
+- other-security: none (game ports only)
+- extra-persistence: none for the draft (uses /config and /tmp); chart mounts /serverdata/serverfiles and /serverdata/steamcmd (pvc default)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

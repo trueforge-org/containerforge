@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7575/http (web UI), 6379/tcp (bundled Redis, internal, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/homarr
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (root entrypoint drops privileges per Reason)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none in values
+- extra-persistence: /appdata (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

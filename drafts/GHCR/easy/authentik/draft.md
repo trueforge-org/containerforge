@@ -54,6 +54,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (proxy outpost, inferred), 9443/https (proxy outpost, inferred), 3389/tcp (LDAP outpost, inferred), 6636/tcp (LDAPS outpost, inferred), 1812/udp (RADIUS outpost), none (k8s-sidecar, geoipupdate)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/authentik
+- non-root: yes - outpost-relevant containers set runAsUser 1000 (chart override); draft outpost is a static binary; the geoip sidecar runs as root but is not in the draft
+- read-only-rootfs: yes - readOnlyRootFilesystem is commented out, so default true; draft is stateless with no writable paths
+- privileged: no - default false
+- other-security: the chart's geoip sidecar runs root with disableS6Caps; not in the draft's outpost rows
+- extra-persistence: none for the outpost rows (chart /certs and /geoip mounts belong to server and geoip)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (nextjs web UI, inferred), 3001/http (job server API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/streamystats
+- non-root: no - top-level container override runAsUser 0 applies to main and jobserver; init container also root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false for main (init container sets true, but it runs as root)
+- privileged: no - not set, common default false
+- other-security: root prepare-runtime init container doing chown -R 568:568; needs Postgres (cnpg block)
+- extra-persistence: /run/nginx, /var/lib/nginx, /var/log (created by init; volume type not set in values); data at /var/www/html/data is the chart's own
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

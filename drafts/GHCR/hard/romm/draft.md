@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/romm
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; external Postgres and Valkey are chart dependencies
+- extra-persistence: /romm/library (library, pvc chart default); /romm/resources (resources, pvc chart default); /romm/config (config, pvc chart default); /romm/assets (assets, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

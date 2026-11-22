@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8333/tcp (bitcoin P2P, inferred), 6080/http (noVNC web, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/bitcoinwalletgui
+- non-root: possible - chart sets runAsUser 0; VNC desktop stack would need rework
+- read-only-rootfs: possible - chart sets false; desktop writes to home paths
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /headless/.bitcoin/ (pvc, blockchain data, large; chart mount)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

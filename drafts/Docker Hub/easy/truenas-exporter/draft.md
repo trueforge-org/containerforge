@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9108/http (Prometheus metrics), 9109/tcp (graphite ingest), 9109/udp (graphite ingest)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/truenas-exporter
+- non-root: yes - no runAs override, common default 568
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, no override
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /config/graphite_mapping.conf (configmap, chart's own)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

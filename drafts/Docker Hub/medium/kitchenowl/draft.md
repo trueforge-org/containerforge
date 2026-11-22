@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API) (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kitchenowl
+- non-root: yes - no securityContext override, common runAsUser 568 default
+- read-only-rootfs: yes - common readOnlyRootFilesystem true default; nginx config is an emptyDir (frontend only)
+- privileged: no - common default, not overridden
+- other-security: none
+- extra-persistence: /data (pvc, backend data path), /etc/nginx/conf.d (emptyDir, frontend nginx only)
+- confidence: low - draft has no app details, so ubuntu base is a guess; chart is frontend plus backend
+
 ## Fields
 ### Chart / Role
 

@@ -50,6 +50,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9000/http (web UI), 9443/https (web UI TLS), 8000/tcp (edge agent tunnel)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/portainer
+- non-root: yes - common runAsUser 568 default, no root override in values
+- read-only-rootfs: yes - common default readOnlyRootFilesystem true, no override
+- privileged: no - not set in values (default false)
+- other-security: none
+- extra-persistence: /data (pvc), /.cache (emptyDir)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1688/tcp (KMS activation)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/kms
+- non-root: possible - chart sets runAsUser 0 and runAsNonRoot false; the draft is one Python process on an unprivileged port, so it needs no root
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; the server writes no files
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 53842/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gokapi
+- non-root: yes - common default runAsUser 568, no override
+- read-only-rootfs: yes - common default true, no override; writes go to persistence
+- privileged: no - common default false
+- other-security: none
+- extra-persistence: /app/config (pvc), /app/data (pvc); chart's own, not common defaults
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

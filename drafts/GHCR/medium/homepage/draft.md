@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/homepage
+- non-root: yes - runAsUser 568 default, no container override
+- read-only-rootfs: yes - default true, not overridden
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /app/config (pvc); many read-only configmap subPath mounts under /app/config and /dummy-config. Draft says config is under /config, the chart uses /app/config.
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

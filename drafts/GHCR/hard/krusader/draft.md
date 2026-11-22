@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (noVNC web UI, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/krusader
+- non-root: no - chart sets runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values
+- extra-persistence: /krusader (containerpath, pvc chart default); /mnt/user (datapath, pvc chart default, type not set)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

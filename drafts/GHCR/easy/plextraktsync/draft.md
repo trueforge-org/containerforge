@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/plextraktsync
+- non-root: possible - chart sets runAsNonRoot false and runAsUser 0; draft is a pip-installed Python tool with state in /config
+- read-only-rootfs: possible - chart sets readOnlyRootFilesystem false; token and state are in /config
+- privileged: no - no privileged key in values; common default false
+- other-security: none
+- extra-persistence: none for the draft (state in /config); chart mounts /app/config (pvc default) and runs a CronJob
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

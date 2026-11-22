@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/changedetection-io
+- non-root: yes - no securityContext override, so runAsUser 568 default
+- read-only-rootfs: yes - default true; browser fetchers are separate and not in the image
+- privileged: no - default false
+- other-security: none
+- extra-persistence: /datastore pvc (chart; the app's data path, so remap or keep it as a mount)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

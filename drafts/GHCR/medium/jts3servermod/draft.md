@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9987/udp (TeamSpeak voice), 10011/tcp (ServerQuery), 30033/tcp (file transfer)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/jts3servermod
+- non-root: yes - runAsUser and runAsGroup 3000 override, no root
+- read-only-rootfs: no - readOnlyRootFilesystem false
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: /jts3servermod/logs (pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI and API, inferred), 53/tcp (DNS), 53/udp (DNS), 67/udp (DHCP), 69/udp (TFTP, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gravity
+- non-root: no - chart forces runAsUser 0 and runAsGroup 0 (network DHCP and DNS server)
+- read-only-rootfs: possible - readOnlyRootFilesystem not overridden (default true), but root and network needs may conflict
+- privileged: no - not set, default false
+- other-security: privileged ports 53 and 67 from the Reason are not shown; hostNetwork not set in values
+- extra-persistence: /data (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

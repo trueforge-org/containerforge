@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 1787/http (web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/photostructure
+- non-root: no - chart sets runAsNonRoot false, runAsUser 0 and runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values
+- extra-persistence: /ps/library (library, pvc chart default); /ps/logs (logs, pvc chart default); /ps/tmp (tempscratchdisk, pvc chart default); /ps/config (config, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

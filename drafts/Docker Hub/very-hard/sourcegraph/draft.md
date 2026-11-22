@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 7080/http (web UI), 7443/https (inferred), 3178/tcp (gitserver, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sourcegraph
+- non-root: possible - chart sets runAsUser and runAsGroup 0; the draft cannot be rebuilt, so this is only a runtime guess
+- read-only-rootfs: no - chart sets false and the app writes state to /var/opt/sourcegraph and /etc/sourcegraph
+- privileged: unknown - not in values
+- other-security: extra service ports 2633 (admin console) and 3370 (grafana); no caps or hostNetwork shown
+- extra-persistence: /var/opt/sourcegraph pvc and /etc/sourcegraph pvc (chart)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

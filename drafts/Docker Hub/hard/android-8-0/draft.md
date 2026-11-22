@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6080/http (noVNC web, inferred), 5555/tcp (adb, inferred), 5900/tcp (VNC, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/android-8-0
+- non-root: no - chart sets runAsUser 0, and /dev/kvm access is the draft's stated blocker
+- read-only-rootfs: possible - chart sets false; emulator state location not described
+- privileged: unknown - draft says privileged setup is needed for KVM; not set in values
+- other-security: /dev/kvm device passthrough (draft, not in values)
+- extra-persistence: unknown - chart persistence is {}; emulator disk storage not described
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

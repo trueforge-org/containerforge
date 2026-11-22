@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (ruTorrent web UI via nginx, inferred), 5000/tcp (rTorrent SCGI, inferred), 50000/tcp (BitTorrent peer, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rtorrent-rutorrent
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false (PUID 33 does not change this)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /data, /downloads, /passwd (chart paths, type not set)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

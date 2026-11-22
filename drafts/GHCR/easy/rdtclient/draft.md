@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 6500/http (rdtclient web UI, inferred), 6800/http (aria2 RPC), 6888/tcp (BitTorrent)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rdtclient
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false (container and workload securityContext)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: none
+- extra-persistence: /data/db (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

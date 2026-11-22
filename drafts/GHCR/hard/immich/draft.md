@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 2283/http (server web UI and API), 3003/http (machine-learning service, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/immich
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: capabilities.disableS6Caps true on main container; no hostNetwork
+- extra-persistence: emptyDir at /mlcache and /microcache (ML and microservice caches); upload dirs under /usr/src/app/upload (library, upload, backups, thumbs, profile, encoded-video; type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

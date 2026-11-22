@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/lancache-monolithic
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none beyond root; service ports 10279 and 10280 map to container 80 and 443
+- extra-persistence: /data/cache (config, pvc chart default); /data/logs (logs, pvc chart default); /data/prefill (prefill, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

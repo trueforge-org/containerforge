@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8087/http (web UI, inferred), 9987/udp (TeamSpeak voice, inferred), 10101/tcp (TeamSpeak query, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/sinusbot
+- non-root: no - runAsUser 0, runAsGroup 0
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: /opt/sinusbot/data, /opt/sinusbot/scripts (chart paths, type not set)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

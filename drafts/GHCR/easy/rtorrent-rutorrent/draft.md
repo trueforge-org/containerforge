@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (ruTorrent web UI, inferred), 9135/http (rtorrent exporter metrics, inferred), 45000/tcp (BitTorrent peer, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/rtorrent-rutorrent
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false; PUID 33 is set but the start is root
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: PUID 33 env only; exportarr sidecar is a separate container (ghcr.io/thde/rtorrent_exporter)
+- extra-persistence: /data (pvc), /downloads (pvc), /passwd (pvc); chart has no /config
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

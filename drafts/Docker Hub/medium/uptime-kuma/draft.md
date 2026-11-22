@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3001/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/uptime-kuma
+- non-root: no - PUID 0, runAsUser 0, runAsGroup 0, runAsNonRoot false overrides
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, not overridden
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /app/data (pvc, chart config)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

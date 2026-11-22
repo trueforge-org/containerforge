@@ -49,6 +49,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8000/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/paperless-ngx
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0; relies on USERMAP_UID and USERMAP_GID remapping
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: none in values; gotenberg and tika are separate sidecar deployments, not part of this draft
+- extra-persistence: /data (data, pvc chart default); /consume (consume, pvc chart default); /media (media, pvc chart default)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

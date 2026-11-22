@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/leaf2mqtt
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - readOnlyRootFilesystem false
+- privileged: no - default false, not overridden
+- other-security: none
+- extra-persistence: none (no persistence block in values)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 22/tcp (sshd for borg clients)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/borg-server
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (sshd front end)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: capabilities add SYS_CHROOT, KILL; BORG_UID taken from PUID
+- extra-persistence: /var/lib/docker-borg, /home/borg/backups, /home/borg/.ssh (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

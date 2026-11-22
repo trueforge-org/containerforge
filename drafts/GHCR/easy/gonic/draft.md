@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 4747/http (web UI and subsonic API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/gonic
+- non-root: no - chart sets runAsNonRoot false, runAsUser 0, runAsGroup 0
+- read-only-rootfs: yes - no readOnlyRootFilesystem override, so common true applies
+- privileged: no - common default false, not overridden
+- other-security: none in values
+- extra-persistence: /data, /cache, /playlists, /podcast, /music (pvc, chart-defined; draft expects /config and read-only music, but chart mounts music without readOnly)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

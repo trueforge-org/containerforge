@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 9001/http (web UI), 5001/http (inferred, media streaming), 1900/udp (SSDP discovery)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/universal-media-server
+- non-root: no - runAsUser 0, runAsGroup 0 overrides
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /root/.config/UMS/ (pvc, chart config); /media (pvc, chart-defined)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

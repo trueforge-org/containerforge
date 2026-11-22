@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5050/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/couchpotato
+- non-root: possible - chart runAsUser 0 for linuxserver; draft is a Python 3 port on python base
+- read-only-rootfs: possible - no override, chart default true; state in /config
+- privileged: no - not set in values
+- other-security: none
+- extra-persistence: none
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

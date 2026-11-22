@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: none (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/venstar2mqtt
+- non-root: possible - chart forces runAsUser 0, but a Node MQTT client needs no root
+- read-only-rootfs: possible - chart sets false; draft writes only to /config
+- privileged: no - not set, common default false
+- other-security: none
+- extra-persistence: none
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/wekan
+- non-root: yes - runAsUser 568 default, no root override
+- read-only-rootfs: yes - default readOnlyRootFilesystem true, not overridden; WRITABLE_PATH is /data
+- privileged: no - common default privileged false, not overridden
+- other-security: none
+- extra-persistence: /data (pvc, chart-defined)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

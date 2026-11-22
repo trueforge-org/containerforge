@@ -47,6 +47,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 5000/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/fileflows
+- non-root: no - runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: yes - privileged true
+- other-security: privileged true; allowPrivilegeEscalation true; hardware encoding device access per draft (not in values)
+- extra-persistence: /app/Data, /app/Logs, /temp, /media (chart persistence, type not shown)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 8080/http (OpenAI-compatible API and web UI)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/local-ai
+- non-root: no - chart sets runAsUser 0, runAsGroup 0, runAsNonRoot false
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: unknown - no privileged flag in values; CUDA image variants may need GPU device access, which values do not show
+- other-security: none in values beyond the CUDA image variants
+- extra-persistence: /models (pvc); /images (pvc)
+- confidence: high
+
 ## Fields
 ### Chart / Role
 

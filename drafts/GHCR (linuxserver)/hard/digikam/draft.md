@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 3000/http (desktop web UI, inferred), 3001/https (desktop web UI, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/digikam
+- non-root: no - chart runAsUser 0; draft keeps Selkies desktop base with Qt AppImage
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set in values
+- other-security: root, so common root caps added
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

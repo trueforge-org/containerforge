@@ -48,6 +48,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (Apache web app, inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/chevereto
+- non-root: no - chart forces runAsUser 0 and runAsNonRoot false (Apache and PHP)
+- read-only-rootfs: no - chart sets readOnlyRootFilesystem false
+- privileged: no - not set, default false
+- other-security: fsGroup 33 at pod level; none otherwise
+- extra-persistence: /var/www/html/images/, /var/www/html/content/ (type not set, likely pvc)
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 

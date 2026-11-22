@@ -45,6 +45,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 80/http (inferred), 443/https (inferred)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/truecommand
+- non-root: no - chart sets runAsNonRoot false and runAsUser 0; draft says it runs as root and expects host-level access
+- read-only-rootfs: no - chart sets false
+- privileged: unknown - not in values; draft implies host-level access, which may need privilege
+- other-security: host-level access per draft reason; no devices or hostPath in values
+- extra-persistence: /data pvc (chart)
+- confidence: low
+
 ## Fields
 ### Chart / Role
 

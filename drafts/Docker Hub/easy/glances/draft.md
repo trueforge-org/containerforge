@@ -46,6 +46,18 @@ Ports the software is likely to listen on inside the container (container side, 
 
 - ports: 61208/http (web UI and API)
 
+## Security expectations
+
+What the TrueCharts values.yaml (expanded from the common library defaults) suggests for this container. These are expectations to verify, not guarantees.
+
+- chart: charts/stable/glances
+- non-root: yes - securityContext.container sets runAsUser 1000, runAsGroup 1000, PUID 1000 with no root override
+- read-only-rootfs: yes - no override, common default true (Glances writes only to /tmp, which is a common default)
+- privileged: no - not set, common default false
+- other-security: hostPID and hostNetwork are commented out in values, so not enabled; enabling them would be needed for task and network stats
+- extra-persistence: none
+- confidence: medium
+
 ## Fields
 ### Chart / Role
 
