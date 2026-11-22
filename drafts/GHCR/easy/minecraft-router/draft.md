@@ -12,11 +12,12 @@
 - **Chart**: minecraft-router
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-router
 - **Source repository**: https://github.com/itzg/mc-router
 - **Documentation**: https://github.com/itzg/mc-router/blob/main/README.md
 

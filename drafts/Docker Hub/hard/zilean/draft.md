@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: zilean
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zilean
 - **Source repository**: https://github.com/iPromKnight/zilean
 - **Documentation**: https://ipromknight.github.io/zilean/
 
@@ -63,7 +64,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: .NET 9 app published in a dotnet SDK stage plus a Python pip step for ingestion. ContainerForge has no .NET base, so we would add a dotnet runtime and build stage, and it needs an external PostgreSQL through CNPG, which makes it a multi-part stack.
+- **Reason**: .NET 9 app published in a dotnet SDK stage plus a Python pip step for ingestion. ContainerForge has no .NET base, so we would add a dotnet runtime and build stage, and it needs an external PostgreSQL through PostgreSQL, which makes it a multi-part stack.
 
 ### amd64 / arm64
 
@@ -85,8 +86,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

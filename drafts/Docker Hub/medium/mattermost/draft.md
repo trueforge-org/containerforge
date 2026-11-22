@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: mattermost
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mattermost
 - **Source repository**: https://github.com/mattermost/mattermost
 - **Documentation**: https://docs.mattermost.com
 - **Website**: https://mattermost.com
@@ -62,7 +63,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Go server with bundled webapp shipped as an official release tarball, so unpack it into /app on containerforge-ubuntu with data and plugins under /config. PostgreSQL comes externally via CNPG; the bundled enterprise features and plugin dirs need writable paths redirected.
+- **Reason**: Go server with bundled webapp shipped as an official release tarball, so unpack it into /app on containerforge-ubuntu with data and plugins under /config. PostgreSQL comes externally via PostgreSQL; the bundled enterprise features and plugin dirs need writable paths redirected.
 
 ### amd64 / arm64
 
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

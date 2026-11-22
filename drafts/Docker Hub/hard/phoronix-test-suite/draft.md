@@ -12,11 +12,12 @@
 - **Chart**: phoronix-test-suite
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/phoronix-test-suite
 - **Source repository**: https://github.com/phoronix-test-suite/phoronix-test-suite
 - **Documentation**: https://www.phoronix-test-suite.com/?k=docs
 - **Website**: https://phoronix-test-suite.com/

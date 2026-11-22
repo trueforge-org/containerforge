@@ -12,11 +12,12 @@
 - **Chart**: wekan
 - **Rows**: 1
 - **Hard dependency containers**: yes (mongodb)
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wekan
 - **Source repository**: https://github.com/wekan/wekan
 - **Documentation**: https://wekan.fi/install/
 
@@ -83,7 +84,7 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 

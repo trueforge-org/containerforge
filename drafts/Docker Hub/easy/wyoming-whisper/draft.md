@@ -12,11 +12,12 @@
 - **Chart**: wyoming-whisper
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wyoming-whisper
 - **Source repository**: https://github.com/rhasspy/wyoming-faster-whisper
 - **Documentation**: https://www.home-assistant.io/integrations/whisper/
 

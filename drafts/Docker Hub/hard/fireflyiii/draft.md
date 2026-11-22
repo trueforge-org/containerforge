@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: fireflyiii
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: yes (valkey)
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: yes (valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fireflyiii
 - **Source repository**: https://github.com/firefly-iii/firefly-iii
 - **Documentation**: https://docs.firefly-iii.org/
 - **Website**: https://firefly-iii.org/
@@ -82,8 +83,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: valkey ✅, postgresql (CNPG) ✅
+- **Dependency containers**: valkey ✅, postgresql ✅

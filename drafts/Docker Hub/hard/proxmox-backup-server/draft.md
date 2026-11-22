@@ -12,11 +12,12 @@
 - **Chart**: proxmox-backup-server
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/proxmox-backup-server
 - **Source repository**: https://github.com/ayufan/pve-backup-server-dockerfiles
 - **Documentation**: https://pbs.proxmox.com/docs/
 - **Website**: https://www.proxmox.com/en/products/proxmox-backup-server/overview

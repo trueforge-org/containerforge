@@ -12,11 +12,12 @@
 - **Chart**: protonmail-bridge
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/protonmail-bridge
 - **Source repository**: https://github.com/ProtonMail/proton-bridge
 - **Documentation**: https://proton.me/support/mail/bridge
 - **Website**: https://proton.me/mail/bridge

@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: n8n
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: yes (valkey)
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: yes (valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/n8n
 - **Source repository**: https://github.com/n8n-io/n8n
 - **Documentation**: https://docs.n8n.io
 - **Website**: https://n8n.io
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: valkey ✅, postgresql (CNPG) ✅
+- **Dependency containers**: valkey ✅, postgresql ✅

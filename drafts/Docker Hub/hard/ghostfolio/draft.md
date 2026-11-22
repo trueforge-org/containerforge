@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: ghostfolio
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG), valkey)
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql, valkey)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ghostfolio
 - **Source repository**: https://github.com/ghostfolio/ghostfolio
 - **Website**: https://ghostfol.io
 
@@ -61,7 +62,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Large Nx monorepo with an Angular frontend and Nest backend, built in a node stage. Needs prisma migrations plus postgres (cnpg) and valkey, so it is several services in one stack. Heavy build and runtime moving parts.
+- **Reason**: Large Nx monorepo with an Angular frontend and Nest backend, built in a node stage. Needs prisma migrations plus postgres (PostgreSQL) and valkey, so it is several services in one stack. Heavy build and runtime moving parts.
 
 ### amd64 / arm64
 
@@ -81,8 +82,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: valkey ✅, postgresql (CNPG) ✅
+- **Dependency containers**: valkey ✅, postgresql ✅

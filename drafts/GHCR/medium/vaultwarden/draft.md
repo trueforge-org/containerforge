@@ -12,11 +12,12 @@
 - **Chart**: vaultwarden
 - **Rows**: 2
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vaultwarden
 - **Source repository**: https://github.com/dani-garcia/vaultwarden
 - **Source repository**: https://github.com/timshel/vaultwarden
 - **Documentation**: https://github.com/dani-garcia/vaultwarden/wiki
@@ -96,11 +97,11 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
 ❌ means it is missing too.
 
-- Row 1: **Dependency containers**: postgresql (CNPG) ✅, vaultwarden (betaImage) ❌
+- Row 1: **Dependency containers**: postgresql ✅, vaultwarden (betaImage) ❌
 - Row 2: **Dependency containers**: -

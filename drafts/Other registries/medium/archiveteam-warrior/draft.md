@@ -12,11 +12,12 @@
 - **Chart**: archiveteam-warrior
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/archiveteam-warrior
 - **Source repository**: https://github.com/ArchiveTeam/warrior-code2
 - **Documentation**: https://wiki.archiveteam.org/index.php/ArchiveTeam_Warrior
 - **Website**: https://warriorhq.archiveteam.org/

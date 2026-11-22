@@ -11,12 +11,13 @@
 - **Difficulty**: easy
 - **Chart**: atuin
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/atuin
 - **Source repository**: https://github.com/atuinsh/atuin
 - **Documentation**: https://docs.atuin.sh/
 
@@ -61,7 +62,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Rust atuin-server binary, and upstream publishes linux server tarballs, so ubuntu can install the release binary with no compile. It is a single process, and the PostgreSQL database is the external cnpg cluster here.
+- **Reason**: Rust atuin-server binary, and upstream publishes linux server tarballs, so ubuntu can install the release binary with no compile. It is a single process, and the PostgreSQL database is the external PostgreSQL cluster here.
 
 ### amd64 / arm64
 
@@ -81,8 +82,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

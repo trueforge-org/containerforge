@@ -12,11 +12,12 @@
 - **Chart**: redisinsight
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/redisinsight
 - **Source repository**: https://github.com/redis/RedisInsight
 - **Documentation**: https://redis.io/docs/latest/operate/redisinsight/
 - **Website**: https://redis.io/insight/

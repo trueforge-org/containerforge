@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: linkwarden
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/linkwarden
 - **Source repository**: https://github.com/linkwarden/linkwarden
 - **Documentation**: https://docs.linkwarden.app/
 - **Website**: https://linkwarden.app/
@@ -64,7 +65,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Yarn monorepo Next.js app plus a Rust monolith binary built with cargo, needing Postgres via CNPG and Prisma migrations at start. Several toolchains, a database and a large stack make it hard. The image is rootful in the source Dockerfile.
+- **Reason**: Yarn monorepo Next.js app plus a Rust monolith binary built with cargo, needing Postgres via PostgreSQL and Prisma migrations at start. Several toolchains, a database and a large stack make it hard. The image is rootful in the source Dockerfile.
 
 ### amd64 / arm64
 
@@ -84,8 +85,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

@@ -12,11 +12,12 @@
 - **Chart**: photoprism
 - **Rows**: 1
 - **Hard dependency containers**: yes (mariadb)
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photoprism
 - **Source repository**: https://github.com/photoprism/photoprism
 - **Documentation**: https://docs.photoprism.app/
 - **Website**: https://photoprism.app
@@ -82,7 +83,7 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 

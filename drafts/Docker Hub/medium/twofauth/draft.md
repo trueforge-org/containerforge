@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: twofauth
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/twofauth
 - **Source repository**: https://github.com/Bubka/2FAuth
 - **Documentation**: https://docs.2fauth.app/
 - **Website**: https://2fauth.app/
@@ -62,7 +63,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Laravel PHP app: composer builds the vendor tree and the app is copied in. On containerforge-ubuntu we would apt install PHP with the needed extensions, run composer in a build stage, and keep storage writable under /config and /tmp. External Postgres via cnpg.
+- **Reason**: Laravel PHP app: composer builds the vendor tree and the app is copied in. On containerforge-ubuntu we would apt install PHP with the needed extensions, run composer in a build stage, and keep storage writable under /config and /tmp. External Postgres via PostgreSQL.
 
 ### amd64 / arm64
 
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

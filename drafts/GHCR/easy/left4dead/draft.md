@@ -12,11 +12,12 @@
 - **Chart**: left4dead
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/left4dead
 - **Website**: https://store.steampowered.com/app/500/Left_4_Dead/
 - **Documentation**: https://developer.valvesoftware.com/wiki/Left_4_Dead_Dedicated_Server
 - **Website**: https://www.l4d.com/

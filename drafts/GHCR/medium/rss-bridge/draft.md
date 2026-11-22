@@ -12,11 +12,12 @@
 - **Chart**: rss-bridge
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rss-bridge
 - **Source repository**: https://github.com/RSS-Bridge/rss-bridge
 - **Documentation**: https://rss-bridge.github.io/rss-bridge/index.html
 

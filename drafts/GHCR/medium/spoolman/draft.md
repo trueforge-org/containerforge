@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: spoolman
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spoolman
 - **Source repository**: https://github.com/Donkie/Spoolman
 - **Documentation**: https://donkie.github.io/Spoolman/
 
@@ -61,7 +62,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Python 3.14 app installed by pip (uv venv) into /app; reuse the python ContainerForge sibling and keep SQLite data under /config, or use external Postgres via cnpg. Mostly pure-Python dependencies, one process, and the upstream root entrypoint needs a small path change for non-root use.
+- **Reason**: Python 3.14 app installed by pip (uv venv) into /app; reuse the python ContainerForge sibling and keep SQLite data under /config, or use external Postgres via PostgreSQL. Mostly pure-Python dependencies, one process, and the upstream root entrypoint needs a small path change for non-root use.
 
 ### amd64 / arm64
 
@@ -81,8 +82,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

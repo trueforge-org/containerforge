@@ -12,11 +12,12 @@
 - **Chart**: plex-meta-manager
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-meta-manager
 - **Source repository**: https://github.com/meisnate12/Plex-Meta-Manager
 - **Documentation**: https://metamanager.wiki/
 - **Documentation**: https://kometa.wiki/en/latest/

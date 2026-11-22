@@ -12,11 +12,12 @@
 - **Chart**: anonaddy
 - **Rows**: 1
 - **Hard dependency containers**: yes (mariadb, valkey)
-- **Soft dependency containers**: yes (valkey)
+- **Optional dependency containers**: yes (valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/anonaddy
 - **Source repository**: https://github.com/anonaddy/anonaddy
 - **Documentation**: https://addy.io/help/
 - **Website**: https://addy.io/
@@ -84,7 +85,7 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 

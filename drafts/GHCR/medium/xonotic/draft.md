@@ -12,11 +12,12 @@
 - **Chart**: xonotic
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xonotic
 - **Source repository**: https://gitlab.com/xonotic/xonotic
 - **Documentation**: https://gitlab.com/xonotic/xonotic/-/wikis/home
 - **Website**: https://xonotic.org/

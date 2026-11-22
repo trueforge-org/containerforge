@@ -12,11 +12,12 @@
 - **Chart**: immich
 - **Rows**: 2
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/immich
 - **Source repository**: https://github.com/immich-app/immich
 - **Documentation**: https://docs.immich.app/
 - **Website**: https://immich.app/
@@ -69,7 +70,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- Row 1: **Reason**: Large stack: a Node/TypeScript server, web and CLI built with pnpm from source, plus Postgres (CNPG), Valkey and a separate machine-learning service with CUDA variants. Several services and a GPU variant, root in the source image, and a rootless rework make it hard.
+- Row 1: **Reason**: Large stack: a Node/TypeScript server, web and CLI built with pnpm from source, plus Postgres, Valkey and a separate machine-learning service with CUDA variants. Several services and a GPU variant, root in the source image, and a rootless rework make it hard.
 - Row 2: **Reason**: Python 3.13 service installed with uv from the v3.4.1 source on the python sibling, with large model and onnxruntime wheels. CPU build works on amd64 and arm64; OpenVINO and CUDA variants are amd64 only. Models cache in /config or /tmp.
 
 ### amd64 / arm64
@@ -97,11 +98,11 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
 ❌ means it is missing too.
 
-- Row 1: **Dependency containers**: valkey ✅, postgresql (CNPG) ✅, immich-machine-learning (mlImage, mlCudaImage, mlOpenvinoImage…) ❌
+- Row 1: **Dependency containers**: valkey ✅, postgresql ✅, immich-machine-learning (mlImage, mlCudaImage, mlOpenvinoImage…) ❌
 - Row 2: **Dependency containers**: -

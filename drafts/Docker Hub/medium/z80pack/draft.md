@@ -12,11 +12,12 @@
 - **Chart**: z80pack
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/z80pack
 - **Source repository**: https://github.com/udo-munk/z80pack
 - **Documentation**: https://www.icl1900.co.uk/unix4fun/z80pack
 

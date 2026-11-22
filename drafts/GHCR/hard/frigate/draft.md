@@ -12,11 +12,12 @@
 - **Chart**: frigate
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/frigate
 - **Source repository**: https://github.com/blakeblackshear/frigate
 - **Documentation**: https://docs.frigate.video
 - **Website**: https://frigate.video

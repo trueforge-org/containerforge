@@ -12,11 +12,12 @@
 - **Chart**: pocketmine-mp
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pocketmine-mp
 - **Source repository**: https://github.com/pmmp/PocketMine-MP
 - **Documentation**: https://doc.pmmp.io/en/rtfd/installation.html
 - **Website**: https://pmmp.io

@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: paperless-ngx
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG), valkey)
-- **Soft dependency containers**: yes (gotenberg (gotenbergImage), tika (tikaImage))
+- **Hard dependency containers**: yes (postgresql, valkey)
+- **Optional dependency containers**: yes (gotenberg (gotenbergImage), tika (tikaImage))
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/paperless-ngx
 - **Source repository**: https://github.com/paperless-ngx/paperless-ngx
 - **Documentation**: https://github.com/paperless-ngx/paperless-ngx/tree/dev/docs
 
@@ -81,10 +82,10 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
 ❌ means it is missing too.
 
-- **Dependency containers**: valkey ✅, postgresql (CNPG) ✅, gotenberg (gotenbergImage) ❌, tika (tikaImage) ❌
+- **Dependency containers**: valkey ✅, postgresql ✅, gotenberg (gotenbergImage) ❌, tika (tikaImage) ❌

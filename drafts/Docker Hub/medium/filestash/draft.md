@@ -12,11 +12,12 @@
 - **Chart**: filestash
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/filestash
 - **Source repository**: https://github.com/mickael-kerjean/filestash
 - **Documentation**: https://www.filestash.app/docs/
 

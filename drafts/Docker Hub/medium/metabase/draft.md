@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: metabase
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metabase
 - **Source repository**: https://github.com/metabase/metabase
 - **Documentation**: https://www.metabase.com/docs/latest/
 - **Website**: https://www.metabase.com
@@ -62,7 +63,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Java 25 runtime needed, which the java25 sibling already provides. Copy the upstream metabase.jar uberjar into /app and run it as apps with the database in cnpg Postgres and state in /config. Jar is pure JVM, so no compile step.
+- **Reason**: Java 25 runtime needed, which the java25 sibling already provides. Copy the upstream metabase.jar uberjar into /app and run it as apps with the database in PostgreSQL Postgres and state in /config. Jar is pure JVM, so no compile step.
 
 ### amd64 / arm64
 
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

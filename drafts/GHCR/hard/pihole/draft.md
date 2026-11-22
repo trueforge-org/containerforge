@@ -12,11 +12,12 @@
 - **Chart**: pihole
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pihole
 - **Source repository**: https://github.com/pi-hole/pi-hole
 - **Documentation**: https://docs.pi-hole.net/
 - **Website**: https://pi-hole.net/

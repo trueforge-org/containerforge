@@ -11,12 +11,13 @@
 - **Difficulty**: easy
 - **Chart**: gitea
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: yes (memcache)
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: yes (memcache)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gitea
 - **Source repository**: https://github.com/go-gitea/gitea
 - **Documentation**: https://docs.gitea.com/
 - **Website**: https://about.gitea.com/
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: memcache ✅, postgresql (CNPG) ✅
+- **Dependency containers**: memcache ✅, postgresql ✅

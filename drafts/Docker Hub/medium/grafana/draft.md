@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: grafana
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: yes (k8s-sidecar (sidecarImage))
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: yes (k8s-sidecar (sidecarImage))
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/grafana
 - **Source repository**: https://github.com/grafana/grafana
 - **Documentation**: https://grafana.com/docs/grafana/latest/
 
@@ -83,8 +84,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅, k8s-sidecar (sidecarImage) ✅
+- **Dependency containers**: postgresql ✅, k8s-sidecar (sidecarImage) ✅

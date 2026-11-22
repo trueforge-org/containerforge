@@ -12,11 +12,12 @@
 - **Chart**: local-ai
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/local-ai
 - **Source repository**: https://github.com/mudler/LocalAI
 - **Documentation**: https://localai.io/docs/
 - **Website**: https://localai.io/

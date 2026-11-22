@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: papermerge
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG), valkey)
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql, valkey)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/papermerge
 - **Source repository**: https://github.com/papermerge/papermerge-core
 - **Documentation**: https://docs.papermerge.io/
 - **Website**: https://papermerge.com/
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: valkey ✅, postgresql (CNPG) ✅
+- **Dependency containers**: valkey ✅, postgresql ✅

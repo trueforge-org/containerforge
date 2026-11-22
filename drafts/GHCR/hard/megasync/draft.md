@@ -12,11 +12,12 @@
 - **Chart**: megasync
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/megasync
 - **Source repository**: https://github.com/meganz/MEGAsync
 - **Documentation**: https://help.mega.io/installs-apps/desktop
 - **Website**: https://mega.io/desktop

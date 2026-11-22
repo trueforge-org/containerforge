@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: authentik
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: yes (geoipupdate (geoipImage), ldap (ldapImage), radius (radiusImage), proxy (proxyImage), k8s-sidecar (sidecarImage))
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: yes (geoipupdate (geoipImage), ldap (ldapImage), radius (radiusImage), proxy (proxyImage), k8s-sidecar (sidecarImage))
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/authentik
 - **Source repository**: https://github.com/goauthentik/authentik
 - **Documentation**: https://docs.goauthentik.io
 - **Documentation**: https://docs.goauthentik.io/
@@ -83,10 +84,10 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
 ❌ means it is missing too.
 
-- **Dependency containers**: postgresql (CNPG) ✅, geoipupdate (geoipImage) ❌, ldap (ldapImage) ❌, radius (radiusImage) ❌, proxy (proxyImage) ❌, k8s-sidecar (sidecarImage) ✅
+- **Dependency containers**: postgresql ✅, geoipupdate (geoipImage) ❌, ldap (ldapImage) ❌, radius (radiusImage) ❌, proxy (proxyImage) ❌, k8s-sidecar (sidecarImage) ✅

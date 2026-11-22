@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: commento-plusplus
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/commento-plusplus
 - **Source repository**: https://github.com/souramoo/commentoplusplus
 
 ## Fields
@@ -62,7 +63,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Commento++ has a Go API and a node-built frontend, both built from source, and the release tarball is source-level rather than a binary. It is a single process that needs PostgreSQL from CNPG. The build stages and the old alpine:3.13 base are the main work.
+- **Reason**: Commento++ has a Go API and a node-built frontend, both built from source, and the release tarball is source-level rather than a binary. It is a single process that needs PostgreSQL from PostgreSQL. The build stages and the old alpine:3.13 base are the main work.
 
 ### amd64 / arm64
 
@@ -84,8 +85,8 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

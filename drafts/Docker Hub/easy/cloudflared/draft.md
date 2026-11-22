@@ -12,11 +12,12 @@
 - **Chart**: cloudflared
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cloudflared
 - **Source repository**: https://github.com/cloudflare/cloudflared
 - **Documentation**: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/
 

@@ -12,11 +12,12 @@
 - **Chart**: pocket-id
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pocket-id
 - **Source repository**: https://github.com/pocket-id/pocket-id
 - **Documentation**: https://docs.pocket-id.org
 - **Website**: https://pocket-id.org

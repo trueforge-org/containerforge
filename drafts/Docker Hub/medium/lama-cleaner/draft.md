@@ -12,11 +12,12 @@
 - **Chart**: lama-cleaner
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lama-cleaner
 - **Source repository**: https://github.com/Sanster/lama-cleaner
 - **Documentation**: https://lama-cleaner-docs.vercel.app
 - **Documentation**: https://www.iopaint.com/install/download_model

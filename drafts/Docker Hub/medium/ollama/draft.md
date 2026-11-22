@@ -12,11 +12,12 @@
 - **Chart**: ollama
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: yes (open-webui (uiImage))
+- **Optional dependency containers**: yes (open-webui (uiImage))
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ollama
 - **Source repository**: https://github.com/ollama/ollama
 - **Documentation**: https://docs.ollama.com
 - **Website**: https://ollama.com
@@ -84,7 +85,7 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ❌ means it is missing too.
 

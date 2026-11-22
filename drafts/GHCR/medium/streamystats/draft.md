@@ -12,11 +12,12 @@
 - **Chart**: streamystats
 - **Rows**: 2
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/streamystats
 - **Source repository**: https://github.com/fredrikburmester/streamystats
 
 ## Fields
@@ -97,11 +98,11 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
 ❌ means it is missing too.
 
-- Row 1: **Dependency containers**: postgresql (CNPG) ✅, streamystats-job-server (jobServerImage) ❌
+- Row 1: **Dependency containers**: postgresql ✅, streamystats-job-server (jobServerImage) ❌
 - Row 2: **Dependency containers**: -

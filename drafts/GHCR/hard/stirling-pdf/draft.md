@@ -12,11 +12,12 @@
 - **Chart**: stirling-pdf
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/stirling-pdf
 - **Source repository**: https://github.com/Stirling-Tools/Stirling-PDF
 - **Documentation**: https://docs.stirlingpdf.com/
 

@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: blog
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/blog
 - **Source repository**: https://github.com/m1k1o/blog
 
 ## Fields
@@ -60,7 +61,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: Simple PHP blog copied into php:8.5-apache with PHP extensions installed in the Dockerfile. ContainerForge has no PHP base, so we would apt install php and apache and run on port 8080 rootless. It uses an external Postgres via CNPG and is one web process with config in /config.
+- **Reason**: Simple PHP blog copied into php:8.5-apache with PHP extensions installed in the Dockerfile. ContainerForge has no PHP base, so we would apt install php and apache and run on port 8080 rootless. It uses an external Postgres via PostgreSQL and is one web process with config in /config.
 
 ### amd64 / arm64
 
@@ -80,8 +81,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

@@ -12,11 +12,12 @@
 - **Chart**: arma3
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/arma3
 - **Website**: https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
 - **Documentation**: https://community.bistudio.com/wiki/Arma_3_Dedicated_Server
 - **Website**: https://arma3.com/

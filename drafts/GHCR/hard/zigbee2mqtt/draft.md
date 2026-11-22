@@ -12,11 +12,12 @@
 - **Chart**: zigbee2mqtt
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zigbee2mqtt
 - **Source repository**: https://github.com/Koenkk/zigbee2mqtt
 - **Documentation**: https://www.zigbee2mqtt.io/
 - **Website**: https://www.zigbee2mqtt.io/

@@ -11,12 +11,13 @@
 - **Difficulty**: hard
 - **Chart**: baserow
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG), valkey)
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql, valkey)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/baserow
 - **Source repository**: https://github.com/baserow/baserow
 - **Documentation**: https://baserow.io/docs/index
 
@@ -61,7 +62,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: All-in-one image running a Django backend, a web frontend, Caddy and supervisord-managed workers in one container. It is a multi-service stack that needs cnpg postgres and valkey siblings and rootless rework for Caddy and supervisor. The code is arch-neutral Python and JS.
+- **Reason**: All-in-one image running a Django backend, a web frontend, Caddy and supervisord-managed workers in one container. It is a multi-service stack that needs PostgreSQL postgres and valkey siblings and rootless rework for Caddy and supervisor. The code is arch-neutral Python and JS.
 
 ### amd64 / arm64
 
@@ -81,8 +82,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: valkey ✅, postgresql (CNPG) ✅
+- **Dependency containers**: valkey ✅, postgresql ✅

@@ -12,11 +12,12 @@
 - **Chart**: cura-novnc
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cura-novnc
 - **Source repository**: https://github.com/Ultimaker/Cura
 - **Documentation**: https://github.com/Ultimaker/Cura/wiki/Getting-Started
 - **Documentation**: https://support.ultimaker.com/s/topic/0TO5b000000Q4udGAC/manuals

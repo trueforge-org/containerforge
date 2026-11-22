@@ -12,11 +12,12 @@
 - **Chart**: guacamole
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/guacamole
 - **Source repository**: https://github.com/apache/guacamole-server
 - **Documentation**: http://guacamole.apache.org/doc/gug/
 - **Website**: http://guacamole.apache.org/
@@ -86,6 +87,6 @@ The value is `no` when that image is not published for the architecture or is a 
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 - **Dependency containers**: -

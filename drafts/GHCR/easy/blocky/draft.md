@@ -12,11 +12,12 @@
 - **Chart**: blocky
 - **Rows**: 2
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/blocky
 - **Source repository**: https://github.com/0xERR0R/blocky
 - **Source repository**: https://github.com/k8s-gateway/k8s_gateway
 - **Documentation**: https://0xerr0r.github.io/blocky/latest/
@@ -94,11 +95,11 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
 ❌ means it is missing too.
 
-- Row 1: **Dependency containers**: valkey ✅, postgresql (CNPG) ✅, k8s_gateway (k8sgatewayImage) ❌
+- Row 1: **Dependency containers**: valkey ✅, postgresql ✅, k8s_gateway (k8sgatewayImage) ❌
 - Row 2: **Dependency containers**: -

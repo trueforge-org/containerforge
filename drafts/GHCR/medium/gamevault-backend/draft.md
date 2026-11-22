@@ -11,12 +11,13 @@
 - **Difficulty**: medium
 - **Chart**: gamevault-backend
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql (CNPG))
-- **Soft dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gamevault-backend
 - **Source repository**: https://github.com/Phalcode/gamevault-backend
 
 ## Fields
@@ -60,7 +61,7 @@ Where we can fetch the ready-made executable for each architecture ourselves: a 
 
 ### Reason
 
-- **Reason**: GameVault backend is a TypeScript/Node server built with pnpm in a build stage and run on the node sibling. It is one process that needs a PostgreSQL database (CNPG in the chart) and writable upload storage that must move to /config. The build step is the main effort.
+- **Reason**: GameVault backend is a TypeScript/Node server built with pnpm in a build stage and run on the node sibling. It is one process that needs a PostgreSQL database (PostgreSQL in the chart) and writable upload storage that must move to /config. The build step is the main effort.
 
 ### amd64 / arm64
 
@@ -80,8 +81,8 @@ A separate option, always filled in, whatever the `amd64`/`arm64` columns say. I
 
 ### Dependency containers
 
-Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+Other containers the chart needs (Chart.yaml dependencies, PostgreSQL, sidecars).
 
 ✅ means ContainerForge already has an app for it.
 
-- **Dependency containers**: postgresql (CNPG) ✅
+- **Dependency containers**: postgresql ✅

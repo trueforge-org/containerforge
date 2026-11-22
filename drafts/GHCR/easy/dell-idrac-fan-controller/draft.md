@@ -12,11 +12,12 @@
 - **Chart**: dell-idrac-fan-controller
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Soft dependency containers**: no
+- **Optional dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
 
+- **TrueCharts chart**: https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dell-idrac-fan-controller
 - **Source repository**: https://github.com/tigerblue77/Dell_iDRAC_fan_controller_Docker
 
 ## Fields
