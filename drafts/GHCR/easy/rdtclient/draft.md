@@ -1,1 +1,21 @@
 # rdtclient
+
+## How to read the tables
+
+- **Chart / Role**: the TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
+- **Container**: the image and tag the chart uses today.
+- **Dockerfile**: the file that builds that image, traced from image labels and upstream repos. `-` means no public Dockerfile could be found.
+- **Application source**: the application's own source repository or project page.
+- **Application binary**: where we can fetch the ready-made executable for each architecture ourselves: a release asset link, or `apt:`/`pip:`/`npm:` (package), or `-` when there is none. It never points at a container image.
+- **Difficulty**: `easy` (prebuilt binary, close sibling or steamcmd game server), `medium` (a Node/Python/Java/PHP/.NET stack ContainerForge already has, or a modest build), `hard` (several services, musl-only, GPU, root/privileged, desktop/VNC, large stack, no public Dockerfile, or rework needed for rootless/read-only), `very-hard` (closed source with no redistributable artifact, or kernel/host-level tools).
+- **amd64 / arm64** (one of `yes`, `compile`, `no`): how we get the application for that architecture.
+  - `yes`: we can fetch a ready-made executable ourselves, outside any `COPY --from`: a release asset, an official package, a pip/npm package, a JAR or a vendor download. Interpreted apps count as `yes`.
+  - `compile`: there is no such executable, but the source is open and we can build it reliably ourselves.
+  - `no`: neither works for that architecture, for example closed-source software where the vendor only ships an amd64 executable.
+  - A trailing `*` means the claim could not be confirmed against the upstream source, so it is a best judgement and should be rechecked before porting.
+- **copy-from amd64 / copy-from arm64**: a separate option, always filled in, whatever the `amd64`/`arm64` columns say. It is a link to the container image the binary can be copied out of with `COPY --from=<image>` (the upstream Dockerfile compiled it, not us), or `no` when that image is not published for the architecture or is a musl (alpine) build, which does not run on glibc Ubuntu. A path in backticks is where the binary sits inside the image. `no*` means the registry could not be queried, so the architecture is unconfirmed.
+- **Dependency containers** (main row only): other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars). ✅ means ContainerForge already has an app for it, ❌ means it is missing too.
+
+| Chart | Role | Container | Dockerfile | Application source | Application binary | Difficulty | Reason | amd64 | arm64 | copy-from amd64 | copy-from arm64 | Dependency containers |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| rdtclient | sidecar (aria2Image) | `ghcr.io/p3terx/aria2-pro:latest` | [Dockerfile](https://github.com/P3TERX/Aria2-Pro-Docker/blob/4ec58da/Dockerfile) | [source](https://github.com/aria2/aria2) | [amd64](https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0-win-64bit-build1.zip) | easy | The aria2c daemon is a single process that Ubuntu packages as an apt package, so one apt install on containerforge-ubuntu covers the binary. Config and session files go in /config, and downloads go to a mounted path. The s6 supervision and the curl-piped installer in upstream can be dropped. | yes | yes | no | no | - |
