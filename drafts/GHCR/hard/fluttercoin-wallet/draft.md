@@ -1,0 +1,1 @@
+# fluttercoin-wallet
