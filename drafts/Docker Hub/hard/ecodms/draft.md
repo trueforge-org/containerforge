@@ -34,8 +34,16 @@
 - **Alternative runtime image**: [java17](https://github.com/trueforge-org/containerforge/tree/main/apps/java17) (`ghcr.io/trueforge-org/java17`)
 - **Reason**: Guess: vendor server packages for Ubuntu, with Java implied but no version named.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: postgresql (inferred), openjdk-17-jre-headless (inferred)
+- python/pip: none
+- node/npm: none
+- other: ecoDMS vendor server packages (Ubuntu/Debian, amd64 only per spec)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

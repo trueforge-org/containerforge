@@ -30,8 +30,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Next.js Node 22 app built at image build time, so python-node provides node.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: build-essential, python3 (inferred, only if the sqlite native module compiles)
+- python/pip: none
+- node/npm: none
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

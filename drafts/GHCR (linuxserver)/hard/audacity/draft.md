@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Guess: desktop AppImage with no runtime language, so ubuntu is the default.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libfuse2 (inferred, AppImage) | none
+- python/pip: none | none
+- node/npm: none | none
+- other: amd64 and arm64 AppImage download
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

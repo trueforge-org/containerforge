@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Qt/C++ GUI compiled from source, so no runtime base applies.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: avidemux3-qt5 (inferred), xvfb, kasmvnc (desktop layer)
+- python/pip: none
+- node/npm: none
+- other: compile Qt/C++ from SourceForge tarball
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

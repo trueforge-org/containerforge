@@ -32,8 +32,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node build produces static files that nginx serves.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: project deps and build (static JS output)
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

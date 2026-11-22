@@ -30,8 +30,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python backend in a uv venv; the python base covers it.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unnamed converter and download tools (not named in draft)
+- python/pip: uv (inferred), Python backend deps from repo
+- node/npm: node + npm (inferred, frontend build stage)
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

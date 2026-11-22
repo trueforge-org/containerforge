@@ -38,8 +38,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Guess: the draft has no image, binary or reason text, so the Jupyter name suggests python.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: notebook (pip:notebook), jupyterlab, pyspark (row 4), tensorflow (row 7), numpy, pandas, matplotlib, scipy (inferred)
+- node/npm: none
+- other: conda/mamba envs (inferred), Apache Spark and Java 17+ tarball (row 4), R with IRkernel (row 5), Julia (row 2), Scala/Toree (row 1)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

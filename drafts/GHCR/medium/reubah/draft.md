@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Compiled Go binary with assets built in a stage.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: node + npm (inferred, build stage for assets)
+- other: Go toolchain and Go modules
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

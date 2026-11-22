@@ -31,8 +31,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Jekyll site built once and served as static files, so nginx serves it; ubuntu is the alternative if the build runs there.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ruby-full (inferred); build-essential (inferred)
+- python/pip: none
+- node/npm: none
+- other: Ruby bundler and Jekyll gems (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

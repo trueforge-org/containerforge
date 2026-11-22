@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: Node backend is the app runtime, with OpenResty frontend served by nginx.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: openresty (inferred, needs upstream repo), certbot (inferred), supervisor or s6 (inferred)
+- python/pip: none
+- node/npm: yarn, backend deps (inferred)
+- other: frontend built bundle from v2.17.1 source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

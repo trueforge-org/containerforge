@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP CalDAV server served by nginx with php-fpm, with PHP provided by apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: nginx, php-fpm and PHP extensions such as sqlite3, xml, mbstring, curl (inferred)
+- python/pip: none
+- node/npm: none
+- other: none (release zip 0.13.0 is pure PHP)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

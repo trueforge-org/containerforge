@@ -31,8 +31,16 @@
 - **Alternative runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Go service built in a Go stage with yt-dlp from release; python is the alternative if the Python tooling must run from the base.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg (static build in upstream; apt ffmpeg from ffmpeg sibling)
+- python/pip: yt-dlp (release)
+- node/npm: none
+- other: Go toolchain (go build from source); deno (binary download, for yt-dlp JS)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

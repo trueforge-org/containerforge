@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Placeholder static binary that needs no runtime, so the ubuntu base is enough.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: hello-world static binary from docker-library repo
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

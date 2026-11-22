@@ -35,8 +35,16 @@
 - **Alternative runtime image**: [java25](https://github.com/trueforge-org/containerforge/tree/main/apps/java25) (`ghcr.io/trueforge-org/java25`)
 - **Reason**: Java tika-server jar; the input allows java21 or java25 and java21 is the conservative pick.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: Apache Tika tika-server jar download
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

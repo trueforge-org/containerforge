@@ -34,8 +34,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Go API built from source that wraps apt-installed document and PDF tools, so ubuntu is the runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: chromium (non-snap, inferred), libreoffice (inferred), qpdf, pdftk, libimage-exiftool-perl (inferred), fonts-liberation (inferred)
+- python/pip: none
+- node/npm: none
+- other: Go toolchain to build gotenberg from source (inferred), Go modules
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

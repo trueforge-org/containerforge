@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP gallery needing php-fpm beside nginx, which is installed from apt on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-fpm, php-gd (inferred), nginx (inferred)
+- python/pip: none
+- node/npm: none
+- other: PhotoShow PHP source from GitHub release v2
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

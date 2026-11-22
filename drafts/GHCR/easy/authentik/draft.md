@@ -39,8 +39,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Guess: the draft row has no image or binary details, so ubuntu is a default.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: jq (inferred, geoipupdate entrypoint), ca-certificates (inferred, proxy)
+- python/pip: kubernetes, requests (inferred, k8s-sidecar)
+- node/npm: none
+- other: authentik-outpost ldap, proxy and radius release binaries; geoipupdate release tarball; k8s-sidecar source tarball
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

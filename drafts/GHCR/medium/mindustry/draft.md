@@ -34,8 +34,16 @@
 - **Alternative runtime image**: [java21](https://github.com/trueforge-org/containerforge/tree/main/apps/java21) (`ghcr.io/trueforge-org/java21`)
 - **Reason**: Headless server runs from a Java jar; draft allows java17 or java21 and no version is pinned, so java17 is chosen.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: server-release.jar release download; JVM from java17 sibling
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

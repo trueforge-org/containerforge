@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python desktop app installed via apt, so the distro provides Python too.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: rapid-photo-downloader, python3-pyqt5 (inferred), exiv2 (inferred), novnc (inferred), fluxbox (inferred), xvfb (inferred)
+- python/pip: none (python supplied by apt)
+- node/npm: none
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

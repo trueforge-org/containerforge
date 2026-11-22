@@ -31,8 +31,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP app served by a web server and PHP-FPM, so PHP via apt on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-fpm, php-cli, php-xml, php-mbstring, php-curl, php-json, nginx (inferred)
+- python/pip: none
+- node/npm: none (release tarball is prebuilt, inferred)
+- other: none (release tarball tasmoadmin_v5.0.0.tar.gz)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

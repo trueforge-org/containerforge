@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [java21](https://github.com/trueforge-org/containerforge/tree/main/apps/java21) (`ghcr.io/trueforge-org/java21`)
 - **Reason**: Single jar that the draft allows on java17 or java21, and java17 is picked as the default.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none | none
+- python/pip: none | none
+- node/npm: none | none
+- other: fleet-2.3.3.jar release asset (runs on java17 or java21 base)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

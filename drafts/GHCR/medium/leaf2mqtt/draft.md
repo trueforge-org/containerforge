@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Dart app is compiled ahead-of-time to a native binary.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: Dart SDK (inferred, AOT compile stage)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

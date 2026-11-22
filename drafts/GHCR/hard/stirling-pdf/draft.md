@@ -31,8 +31,16 @@
 - **Runtime image**: [java17](https://github.com/trueforge-org/containerforge/tree/main/apps/java17) (`ghcr.io/trueforge-org/java17`)
 - **Reason**: Spring Boot Java app with no version named, so java17 is used by default.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libreoffice, tesseract-ocr, ocrmypdf, ghostscript, qpdf, unpaper, pngquant, poppler-utils (inferred for the last four)
+- python/pip: none
+- node/npm: none
+- other: Java 17 runtime from java17 base; Stirling-PDF JAR from release (AppImage not usable in a container)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

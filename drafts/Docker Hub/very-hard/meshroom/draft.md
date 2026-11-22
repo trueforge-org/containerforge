@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Prebuilt Linux tarball with bundled libraries unpacked onto ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libgl1 (inferred)
+- python/pip: none
+- node/npm: none
+- other: Meshroom 2025.1.0 Linux tarball (amd64 only, bundles CUDA libs)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

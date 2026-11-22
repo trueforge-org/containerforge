@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [java21](https://github.com/trueforge-org/containerforge/tree/main/apps/java21) (`ghcr.io/trueforge-org/java21`)
 - **Reason**: Python web panel installed from requirements; the Java stack is for spawned Minecraft servers, not the panel itself.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: crafty-4 requirements.txt (inferred)
+- node/npm: none
+- other: crafty-4 v4.11.1 source; Java runtime via java21 sibling base (not apt)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

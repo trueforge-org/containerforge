@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP app with PHP installed via apt on ubuntu, run as one PHP server process.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-cli, php-mysql, php-xml, php-mbstring, php-curl, php-zip, php-intl (inferred)
+- python/pip: none
+- node/npm: nodejs, npm (inferred) for asset build
+- other: composer (inferred); spec conflicts (apt PHP vs FrankenPHP copy), check upstream
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

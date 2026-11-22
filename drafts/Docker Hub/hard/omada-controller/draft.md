@@ -34,8 +34,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Java controller installed from a vendor package on ubuntu; no Java version is named, so java17 is used.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: TP-Link Omada controller .deb (vendor, installed by install.sh), Java 17 (java17 base), MongoDB service (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

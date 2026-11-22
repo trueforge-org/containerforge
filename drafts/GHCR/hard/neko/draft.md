@@ -50,8 +50,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: No description given, so ubuntu is a guess.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: firefox-esr, chromium, remmina, vlc, xfce4, brave-browser (Brave repo), microsoft-edge-stable (Microsoft repo, amd64 only), xorg, openbox, pulseaudio, supervisor (inferred, neko base)
+- python/pip: none
+- node/npm: none
+- other: google-chrome .deb (dl.google.com), vivaldi .deb, tor-browser tarball (torproject)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

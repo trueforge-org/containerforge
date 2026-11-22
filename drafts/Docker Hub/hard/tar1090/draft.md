@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Native decoder compiled on ubuntu with a web server and an aircraft database.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: build-essential, librtlsdr-dev, libusb-1.0-0-dev, libncurses-dev, nginx (inferred)
+- python/pip: none
+- node/npm: none
+- other: git clone of wiedehopf/tar1090 and readsb source (compiled)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

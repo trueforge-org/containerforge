@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Compiled native tools and ffmpeg installed on ubuntu with no interpreted runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg, ccextractor, build-essential (inferred), git (inferred), autoconf (inferred), automake (inferred)
+- python/pip: none
+- node/npm: none
+- other: comskip built from git (V0.83 source), s6-overlay
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

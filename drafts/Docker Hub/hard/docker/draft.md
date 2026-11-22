@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Static container engine binaries from tarballs with no language runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: iptables, pigz (inferred), xfsprogs (inferred), e2fsprogs (inferred)
+- python/pip: none
+- node/npm: none
+- other: static docker-29.10.0 tarball (amd64 and arm64; bundles dockerd, containerd, runc)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

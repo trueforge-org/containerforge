@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: Reason names ubuntu with apt rtorrent, PHP-FPM and nginx.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: rtorrent, nginx, php-fpm (inferred for nginx/php-fpm)
+- python/pip: none
+- node/npm: none
+- other: ruTorrent web UI files (git clone or release download, inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

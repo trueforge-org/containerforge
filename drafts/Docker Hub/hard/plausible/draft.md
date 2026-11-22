@@ -34,8 +34,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Elixir is not provided by any base, so ubuntu is used with Elixir added to the build.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: elixir (inferred), erlang-dev (inferred)
+- python/pip: none
+- node/npm: nodejs (inferred, asset build)
+- other: Elixir/Phoenix mix release build, ClickHouse as separate service
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

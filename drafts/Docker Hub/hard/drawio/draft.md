@@ -31,8 +31,16 @@
 - **Runtime image**: [java11](https://github.com/trueforge-org/containerforge/tree/main/apps/java11) (`ghcr.io/trueforge-org/java11`)
 - **Reason**: Java war deployed in a servlet container on JDK 11.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: tomcat9 (inferred), chromium (inferred, export server headless browser)
+- python/pip: none
+- node/npm: node, npm (inferred, to build draw.war from source)
+- other: jgraph/drawio v32.7.4 source build (draw.war); JDK 11 from java11 runtime image
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Go static binary released for amd64 and arm64.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: release binary (gate_0.82.0_linux_amd64 / _arm64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

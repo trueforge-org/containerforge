@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Guess: a large vendor stack with bundled runtimes and no runtime named, so ubuntu is the default.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: ansible (inferred)
+- node/npm: none
+- other: Splunk Enterprise amd64 tgz from download.splunk.com
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

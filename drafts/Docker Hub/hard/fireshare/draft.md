@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Flask backend plus a Node-built React client, so python-node per the reason.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg (inferred, CPU build via sibling)
+- python/pip: flask and fireshare requirements (inferred)
+- node/npm: node (client build), React client npm deps (inferred)
+- other: fireshare v1.9.3 source (GitHub release)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

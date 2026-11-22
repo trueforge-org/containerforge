@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Native x86_64 server runtime binaries with no language base needed.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ca-certificates (inferred), curl (inferred)
+- python/pip: none
+- node/npm: none
+- other: gotty (inferred, web terminal in wrapper), RedM server artifacts fetched at runtime (x86_64 only)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

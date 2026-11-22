@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Laravel PHP app, with PHP provided by apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-fpm, php-cli, php-pgsql, php-redis, php-bcmath, php-curl, php-gd, php-intl, php-mbstring, php-xml, php-zip, nginx, cron (inferred)
+- python/pip: none
+- node/npm: none
+- other: FireflyIII v6.2.21 release tarball; s6-overlay (inferred) for multi-process supervision
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -34,8 +34,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Django app on Python, with the frontend built at build time.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: tesseract-ocr, ghostscript, imagemagick, libmagic1 (inferred), poppler-utils (inferred)
+- python/pip: uv, project deps from release tarball (inferred)
+- node/npm: pnpm (frontend built at build time)
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

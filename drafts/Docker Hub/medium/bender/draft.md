@@ -30,8 +30,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node app built with npm, so python-node fits.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: node (python-node sibling), repo npm deps via npm install and npm run build
+- other: git clone of jez500/bender tag 1.0.3 (version needs checking)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

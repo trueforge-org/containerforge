@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Native monerod daemon shipped as official linux tarballs.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: monero CLI release tarball (monero-linux-x64 / armv8, v0.18.5.4)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

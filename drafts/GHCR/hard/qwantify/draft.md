@@ -31,8 +31,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Runtime is unclear from the reason; the Go and Node build plus GPU desktop stack suggests ubuntu (guess).
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: xvfb (inferred), X display stack (inferred)
+- python/pip: none
+- node/npm: node, npm (inferred, Node build)
+- other: Go toolchain (inferred, Go build)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

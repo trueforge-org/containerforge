@@ -31,8 +31,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Pure Python app installed into a venv.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, libjpeg-dev, libpng-dev, libffi-dev (inferred)
+- python/pip: mediagoblin 0.15.0 requirements in venv (inferred)
+- node/npm: none
+- other: sr.ht source tarball v0.15.0
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

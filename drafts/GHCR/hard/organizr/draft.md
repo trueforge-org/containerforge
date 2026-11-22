@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP web app, so PHP via apt on ubuntu with nginx as the web server.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-fpm, php-curl, php-xml, php-mbstring, php-sqlite3 (inferred), nginx (inferred)
+- python/pip: none
+- node/npm: none
+- other: Organizr 1.90 source release (PHP, interpreted)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

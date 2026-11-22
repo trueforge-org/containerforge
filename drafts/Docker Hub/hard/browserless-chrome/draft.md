@@ -32,8 +32,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node.js service that drives headless Chromium.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: chrome runtime libs such as libnss3, libgbm1, libasound2t64, fonts-liberation (inferred)
+- python/pip: none
+- node/npm: browserless app deps (inferred)
+- other: Chrome stable .deb from vendor (not snap chromium)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

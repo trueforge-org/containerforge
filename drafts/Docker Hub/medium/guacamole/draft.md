@@ -32,8 +32,16 @@
 - **Runtime image**: [java21](https://github.com/trueforge-org/containerforge/tree/main/apps/java21) (`ghcr.io/trueforge-org/java21`)
 - **Reason**: The input names jdk21 for a Java war run in a servlet container.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: tomcat10 (inferred)
+- python/pip: none
+- node/npm: none
+- other: guacamole-1.6.0.war (release download); guacd is a separate service, not in this image
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

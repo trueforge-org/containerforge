@@ -31,8 +31,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node.js app that runs as-is from its npm package.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg (inferred, needed for streaming)
+- python/pip: none
+- node/npm: dizquetv 1.7.0 npm package (runs as-is; node from python-node runtime)
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

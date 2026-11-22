@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP via apt on ubuntu per the PHP rule; nginx is the alternative web frontend.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-fpm, php-curl, curl, nginx (inferred)
+- python/pip: none
+- node/npm: none
+- other: composer (inferred), FlashPaper v2.6.0 source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

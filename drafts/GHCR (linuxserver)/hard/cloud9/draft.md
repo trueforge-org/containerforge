@@ -32,8 +32,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node.js IDE with a native node-pty build, so python-node provides the node runtime and build tools.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none (python-node base provides build tools) | none
+- python/pip: none | none
+- node/npm: c9/core deps and node-pty native build (inferred)
+- other: source build of c9/core
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

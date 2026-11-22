@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Guess: Ruby app and Ruby is not a base, so ubuntu is the fallback.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: postgresql-client (inferred), libvips (inferred)
+- python/pip: none
+- node/npm: node (asset build, inferred)
+- other: Ruby 3.x runtime and bundler gems (inferred, ruby:alpine upstream); docusealco/docuseal 3.3.8 source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

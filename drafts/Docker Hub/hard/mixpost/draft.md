@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Laravel PHP app, with PHP provided by apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-cli, php-fpm, php-mysql, php-redis, php-curl, php-mbstring, php-xml, php-zip, php-gd (inferred), nginx (inferred), supervisor (inferred)
+- python/pip: none
+- node/npm: none
+- other: composer for Laravel deps (inferred), source from v2.6.0 tag
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

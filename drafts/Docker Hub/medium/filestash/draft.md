@@ -33,8 +33,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Go backend with a Node frontend build; ubuntu hosts the Go runtime and python-node covers the build side.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: frontend build deps (inferred)
+- other: go toolchain (compile), node toolchain, git clone of unpinned master (pin a commit)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

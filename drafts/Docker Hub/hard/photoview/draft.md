@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Go API with native image libraries built from source on ubuntu; Node is used only at build time for the UI.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libheif-dev (inferred), libdlib-dev (inferred), libraw-dev (inferred), ffmpeg, darktable, build-essential (inferred)
+- python/pip: none
+- node/npm: nodejs (inferred, build-time UI only)
+- other: Go toolchain and Go modules (cgo)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

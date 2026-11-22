@@ -34,8 +34,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Static JavaScript web UI served by nginx from the release zip.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unzip (inferred)
+- python/pip: none
+- node/npm: none
+- other: AriaNg 1.3.13 release zip (nginx runtime from base)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

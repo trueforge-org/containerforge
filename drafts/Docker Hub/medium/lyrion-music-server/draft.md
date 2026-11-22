@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Perl server installed from the vendor .deb, so ubuntu with apt packages fits.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: vendor .deb from lyrion.org installed with apt/dpkg (not a repo package)
+- python/pip: none
+- node/npm: none
+- other: Perl runtime pulled by the vendor .deb
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

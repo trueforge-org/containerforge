@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Perl app installed with apt perl and cpanm on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: perl, cpanminus (cpanm)
+- python/pip: none
+- node/npm: none
+- other: CPAN modules (Mojolicious and deps) via cpanm; app-mojopaste source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

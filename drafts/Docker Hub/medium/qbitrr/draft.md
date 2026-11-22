@@ -33,8 +33,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Python package installed with pip, with a webui built in a node stage.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: qbitrr (pip install .[fast]); qbitrr2 (arm64)
+- node/npm: webui build (inferred)
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

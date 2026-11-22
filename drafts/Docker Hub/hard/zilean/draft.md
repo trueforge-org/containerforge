@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: .NET 9 app with dotnet from apt on ubuntu; the Python ingestion step is the alternative.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: dotnet-sdk-9.0, aspnetcore-runtime-9.0 (inferred, may need Microsoft feed)
+- python/pip: ingestion requirements from repo (inferred)
+- node/npm: none
+- other: dotnet publish in SDK build stage, git clone of iPromKnight/zilean
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

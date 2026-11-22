@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Elixir release is not provided by any base, so ubuntu is used with Node only at build time.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: elixir, erlang-dev, build-essential, git (inferred), nodejs, npm (build-time, inferred)
+- python/pip: none
+- node/npm: npm for asset build (inferred)
+- other: Hex/rebar mix deps (inferred), teslamate v4.5.0 source build
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

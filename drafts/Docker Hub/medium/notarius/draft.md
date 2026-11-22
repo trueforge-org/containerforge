@@ -30,8 +30,16 @@
 - **Runtime image**: [java8](https://github.com/trueforge-org/containerforge/tree/main/apps/java8) (`ghcr.io/trueforge-org/java8`)
 - **Reason**: The input names jre8 for a Java WAR run in a servlet container.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: Maven WAR build from source (inferred); Tomcat (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

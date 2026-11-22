@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Desktop GUI from an AppImage or apt package on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: sqlitebrowser (arm64 per spec; amd64 could use it too) | none
+- python/pip: none | none
+- node/npm: none | none
+- other: amd64 AppImage download (libfuse2 if used, inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

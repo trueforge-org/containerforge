@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: C++ app installed from release .deb packages.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: Hyperion release .deb installed via dpkg, deps resolved by apt (inferred)
+- python/pip: none
+- node/npm: none
+- other: Hyperion 2.2.0 .deb per arch from release
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Native C++ build against glibc development packages.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: cmake, build-essential, libwt-dev, libboost-dev, libsqlite3-dev (all inferred, Wt and Boost build deps)
+- python/pip: none
+- node/npm: none
+- other: compile epoupon/fileshelter 6.4.0 source with CMake on glibc Ubuntu
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

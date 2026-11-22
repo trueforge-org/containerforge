@@ -31,8 +31,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node manager that starts headless game servers.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: node runtime and FSM npm deps (inferred, from python-node base)
+- other: Factorio headless server (vendor download, needs account, x86_64 only); FSM 0.10.1 release zip (amd64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

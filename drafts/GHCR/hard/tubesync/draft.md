@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: Django app on Python, run with gunicorn, nginx and background workers.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg, nginx (inferred)
+- python/pip: Django requirements, gunicorn, yt-dlp (inferred)
+- node/npm: none
+- other: source checkout of tag v0.19.1; s6-overlay (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

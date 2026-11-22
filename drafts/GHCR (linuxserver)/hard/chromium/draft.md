@@ -34,8 +34,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Browser installed from a Debian or apt package on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: chromium (inferred; Ubuntu's package is a snap, so Debian repo or other source) | none
+- python/pip: none | none
+- node/npm: none | none
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

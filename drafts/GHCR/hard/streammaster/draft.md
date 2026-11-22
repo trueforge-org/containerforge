@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: ASP.NET app with nginx and ffmpeg, so the .NET runtime is installed on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg, nginx, aspnetcore-runtime-9.0 (inferred)
+- python/pip: none
+- node/npm: none
+- other: .NET 9 SDK at build time for dotnet publish (inferred); no release binary
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

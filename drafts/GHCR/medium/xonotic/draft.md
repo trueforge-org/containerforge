@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Native C dedicated server unpacked from the amd64 release.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unzip (inferred), build-essential (inferred), libsdl2-dev (inferred), libcurl4-openssl-dev (inferred) (arm64 compile only)
+- python/pip: none
+- node/npm: none
+- other: Xonotic 0.8.6 zip download (amd64); source compile (arm64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -33,8 +33,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python app installed with pip, so the python base fits.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libgl1, libglib2.0-0 (inferred, opencv runtime)
+- python/pip: lama-cleaner (pip package, pulls torch CPU stack)
+- node/npm: none
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

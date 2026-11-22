@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Office server binaries with chroot jails and no language runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: coolwsd, code-brand (inferred), libreoffice-core (inferred), libcap2-bin (inferred)
+- python/pip: none
+- node/npm: none
+- other: Collabora apt repo packages (vendor pipeline), chroot jail setup
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

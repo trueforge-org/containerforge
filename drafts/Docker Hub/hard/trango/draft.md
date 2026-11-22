@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Node and Python runtimes cover most of the stack, with a C++ server that would need ubuntu as the alternative.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: nginx, build-essential, cmake, libboost-all-dev (inferred)
+- python/pip: flask and repo requirements (inferred)
+- node/npm: nodejs 12 via python-node, repo npm deps (inferred)
+- other: git clone of trango-io/trango-self-hosted, C++ discovery server build
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

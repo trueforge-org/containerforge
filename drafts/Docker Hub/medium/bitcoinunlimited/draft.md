@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: C++ node built from source on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: build-essential, autoconf, automake, libtool, pkg-config, libboost-all-dev, libssl-dev, libevent-dev, libdb++-dev, libsqlite3-dev, libzmq3-dev (inferred)
+- python/pip: none
+- node/npm: none
+- other: git clone of BitcoinUnlimited source, C++ build from source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

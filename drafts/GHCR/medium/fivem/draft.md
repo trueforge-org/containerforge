@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Runtime artifacts are fetched at runtime as a plain x86_64 Linux binary, so no language base is needed.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unzip
+- python/pip: none
+- node/npm: none
+- other: Cfx.re runtime artifact fetched at runtime (x86_64 only); gotty binary (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

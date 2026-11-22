@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Qt desktop AppImage extracted and run behind a VNC sibling.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: cura (arm64 only, 5.0.0), libgl1 (inferred), libegl1 (inferred), libxkbcommon0 (inferred)
+- python/pip: none
+- node/npm: none
+- other: Cura 5.8.1 AppImage extracted on amd64 (no FUSE); kasmvnc sibling
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

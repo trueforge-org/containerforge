@@ -30,8 +30,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python FastAPI app installed into a venv.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none (build tools only if an arm64 wheel is missing (inferred))
+- python/pip: project dependencies via uv into venv (inferred)
+- node/npm: none
+- other: uv; Rust toolchain only if some deps compile (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

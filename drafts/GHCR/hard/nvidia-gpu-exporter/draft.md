@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Prebuilt Go exporter installed from a deb.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: nvidia-gpu-exporter v1.19.0 .deb release asset; host nvidia-smi driver at runtime
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

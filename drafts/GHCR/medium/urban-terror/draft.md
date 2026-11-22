@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Native x86_64 dedicated server binary.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: a few unnamed runtime libs (not named in draft)
+- python/pip: none
+- node/npm: none
+- other: UrbanTerror43_ded.tar.gz download (amd64); game data fetched at start; arm64 needs source compile
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

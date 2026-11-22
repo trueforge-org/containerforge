@@ -31,8 +31,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node app with a service manager and a streaming binary, so python-node covers the Node runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: ffmpeg (inferred)
+- python/pip: none
+- node/npm: ring-mqtt npm app (interpreted), node runtime from python-node
+- other: go2rtc binary (streaming), s6-overlay, bashio
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

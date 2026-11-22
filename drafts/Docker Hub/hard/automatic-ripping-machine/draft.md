@@ -31,8 +31,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python web app, with native ripping tools installed alongside.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: handbrake-cli, ffmpeg, abcde, lsdvd, eject (inferred)
+- python/pip: app requirements from repo (inferred)
+- node/npm: none
+- other: MakeMKV built from source (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

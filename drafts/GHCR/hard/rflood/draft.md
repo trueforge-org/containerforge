@@ -32,8 +32,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: rtorrent from apt plus a Node.js web UI, so Node is the second runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: rtorrent, nodejs (inferred)
+- python/pip: none
+- node/npm: flood web UI (inferred, reuse flood sibling)
+- other: none
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

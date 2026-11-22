@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Windows app run under Wine with Wine installed from apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: wine, wine64 (inferred), p7zip-full (inferred, to extract the .7z), winetricks (inferred)
+- python/pip: none
+- node/npm: none
+- other: FMD2 2.0.34.5 Windows 7z release (amd64 only; Wine prefix in /config); linuxserver KasmVNC base
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

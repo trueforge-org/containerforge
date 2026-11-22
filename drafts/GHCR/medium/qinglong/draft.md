@@ -32,8 +32,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node.js and TypeScript panel with Python helpers; draft names the python-node sibling.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: cron (inferred) | none
+- python/pip: helper packages, names not in draft (python-node base provides python)
+- node/npm: pnpm (inferred), Node/TypeScript deps from repo
+- other: git clone of source at build time
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

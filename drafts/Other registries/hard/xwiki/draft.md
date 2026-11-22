@@ -33,8 +33,16 @@
 - **Runtime image**: [java25](https://github.com/trueforge-org/containerforge/tree/main/apps/java25) (`ghcr.io/trueforge-org/java25`)
 - **Reason**: Tomcat on JRE 25 running an XWiki WAR.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: none
+- other: XWiki 18.9.0 WAR (maven), PostgreSQL JDBC jar, LibreOffice tarball, Tomcat 10 on java25 base
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

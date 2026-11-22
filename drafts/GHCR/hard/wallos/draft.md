@@ -31,8 +31,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP 8.3 app with nginx and php-fpm, so PHP via apt on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php8.3-fpm, php8.3-cli, php8.3-sqlite3, php8.3-curl, php8.3-gd, php8.3-xml, php8.3-mbstring, php8.3-zip, nginx, cron (inferred)
+- python/pip: none
+- node/npm: none
+- other: none (release tag v5.11.2 source)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

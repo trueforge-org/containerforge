@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Closed-source bot installed from a vendor tarball with its own Qt runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: bzip2, libglib2.0-0, libnss3, libxcomposite1, libxdamage1, libxtst6, libxkbcommon0, libpulse0 (inferred)
+- python/pip: none
+- node/npm: none
+- other: vendor tarball (sinusbot-1.1f-amd64.tar.bz2) with its install script, amd64 only
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

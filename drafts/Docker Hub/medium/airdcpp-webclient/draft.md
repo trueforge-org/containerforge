@@ -34,8 +34,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: C++ daemon with a web UI on ubuntu; the Node runtime for extensions is the alternative.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: cmake, build-essential, libboost-all-dev, libssl-dev, libcurl4-openssl-dev, libsqlite3-dev, libbz2-dev, zlib1g-dev, libicu-dev, libminiupnpc-dev, libnatpmp-dev (inferred, arm64 build only), nodejs (inferred, for extensions)
+- python/pip: none
+- node/npm: none
+- other: airdcpp portable tarball (amd64), CMake source build (arm64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

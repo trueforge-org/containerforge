@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: ASP.NET Core 8 app with the dotnet runtime added on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: aspnetcore-runtime-8.0 (inferred)
+- python/pip: none
+- node/npm: none
+- other: .NET 8 SDK for dotnet publish at build (compile from source)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

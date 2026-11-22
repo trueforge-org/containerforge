@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Steam desktop streaming client installed from Valve apt packages on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: steam (Valve repo .deb), xvfb, x11vnc (inferred)
+- python/pip: none
+- node/npm: none
+- other: Valve steam_latest.deb download (amd64 only)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

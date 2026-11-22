@@ -33,8 +33,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Django backend is the main runtime, with a Node frontend build.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: supervisor (inferred)
+- python/pip: Django backend requirements from repo (inferred)
+- node/npm: frontend build deps (inferred)
+- other: Caddy binary (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

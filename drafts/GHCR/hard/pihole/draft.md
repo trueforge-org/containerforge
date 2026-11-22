@@ -34,8 +34,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: C DNS daemon with PHP web UI and cron, all installable via apt on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: lighttpd, php-cgi, php-sqlite3, php-xml (inferred), sqlite3 (inferred), cron, curl (inferred), dnsutils (inferred)
+- python/pip: none
+- node/npm: none
+- other: pihole-FTL v6.9 release binary (amd64/arm64); pi-hole shell scripts (GitHub, inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

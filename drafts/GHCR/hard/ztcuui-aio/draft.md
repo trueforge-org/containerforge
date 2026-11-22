@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Node.js web UI is the main runtime, with Go helpers and a zerotier daemon alongside.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: zerotier-one (inferred) | none
+- python/pip: none | none
+- node/npm: ztncui web UI deps (inferred) | none
+- other: Go toolchain to build helpers from source (inferred); compiled from source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

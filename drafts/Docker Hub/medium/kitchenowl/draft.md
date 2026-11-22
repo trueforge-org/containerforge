@@ -34,8 +34,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: No application details were given, so ubuntu is a guess.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: nginx (inferred, web row 1 only)
+- python/pip: uv; Flask backend deps, Python 3.14 (row 2 backend)
+- node/npm: none
+- other: kitchenowl_Web.tar.gz prebuilt web bundle (row 1); v0.8.1 source tarball (row 2)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

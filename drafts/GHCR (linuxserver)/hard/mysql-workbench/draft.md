@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Desktop GUI installed from a deb package on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: dependencies of the Oracle deb (inferred, Ubuntu 24.04 deb on 26.04) | none
+- python/pip: none | none
+- node/npm: none | none
+- other: Oracle amd64 .deb only (no arm64); dpkg install
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

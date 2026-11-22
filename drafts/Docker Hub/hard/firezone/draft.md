@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Guess: Elixir release with no Elixir base, so ubuntu is the fallback.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none at runtime (postgres from sibling); build stage only: erlang-base, elixir (inferred)
+- python/pip: none
+- node/npm: node for Phoenix asset build (inferred)
+- other: Erlang/OTP and Elixir toolchain via mix (build stage, inferred); mix release of firezone 0.7.36
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

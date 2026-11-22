@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Prebuilt release binary on amd64 and a small C build on arm64, with no interpreter needed.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unzip (inferred), gcc, meson, ninja-build (inferred)
+- python/pip: none
+- node/npm: none
+- other: amd64 release zip; arm64 C source build
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

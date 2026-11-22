@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: ASP.NET backend with the dotnet runtime from apt on ubuntu; the Node build is build-time only.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: dotnet-sdk-10.0 (inferred), aspnetcore-runtime-10.0 (inferred), gpac or ffmpeg (helpers)
+- python/pip: none
+- node/npm: none
+- other: Bun (frontend build), dotnet publish per RID
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -31,8 +31,16 @@
 - **Runtime image**: [java17](https://github.com/trueforge-org/containerforge/tree/main/apps/java17) (`ghcr.io/trueforge-org/java17`)
 - **Reason**: Java jar from the vendor; the draft gives no version, so java17 is used by default.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: curl (inferred), unzip (inferred)
+- python/pip: none
+- node/npm: none
+- other: StarMade server jar downloaded from vendor at runtime (java17 base)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

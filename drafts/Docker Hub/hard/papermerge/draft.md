@@ -33,8 +33,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python core installed with uv sync and apt OCR tools, so the python base fits.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: tesseract-ocr (inferred), OCR tools (inferred)
+- python/pip: papermerge-core deps via uv sync (uv tool inferred)
+- node/npm: none
+- other: uv (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

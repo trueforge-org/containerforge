@@ -33,8 +33,16 @@
 - **Alternative runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Guess: Perl and Node app built from source, and Perl has no base.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: perl, imagemagick (inferred), redis-server (inferred)
+- python/pip: none
+- node/npm: npm deps for frontend build (inferred)
+- other: CPAN modules via cpanm, source build via install-everything.sh
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

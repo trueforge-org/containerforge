@@ -33,8 +33,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node server only, so python-node provides the node runtime.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none
+- python/pip: none
+- node/npm: yarn (monorepo build, inferred); pm2 and tini (inferred, per upstream image)
+- other: Joplin yarn monorepo source (laurent22/joplin v3.7.6), packages/server
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

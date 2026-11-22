@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: .NET server with a build-time Node client; the .NET runtime is installed on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unzip (inferred), aspnetcore runtime (Microsoft repo, inferred)
+- python/pip: none
+- node/npm: npm packages for the build-time web client (inferred)
+- other: RealDebridClient.zip v2.0.143 release; aria2-pro sidecar (image, not a package)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

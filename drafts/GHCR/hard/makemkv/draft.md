@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Vendor binaries built with make, so ubuntu covers it.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: make, gcc, g++, libssl-dev (inferred), libexpat1-dev (inferred)
+- python/pip: none
+- node/npm: none
+- other: makemkv-bin and makemkv-oss vendor tarballs (makemkv.com)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

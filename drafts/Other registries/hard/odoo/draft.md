@@ -34,8 +34,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Python business suite installed from a .deb with many Python dependencies.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: postgresql-client, wkhtmltopdf, fonts-noto-cjk, libpq-dev (inferred)
+- python/pip: odoo 20.0 Python dependencies (inferred)
+- node/npm: less, rtlcss (inferred, asset build)
+- other: nightly odoo_20.0.latest_all.deb; PostgreSQL is a separate dependency
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

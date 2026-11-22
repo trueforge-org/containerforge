@@ -32,8 +32,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Steam dedicated server through SteamCMD, with Wine added.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: wine64, xvfb, lib32gcc-s1 (inferred)
+- python/pip: none
+- node/npm: none
+- other: SteamCMD from apps/steamcmd base; Wine prefix in /config or /tmp
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

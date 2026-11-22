@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: C++ analysis framework installed from apt on ubuntu; the notebook server could use the python base as the alternative.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: root-system (inferred package name for CERN ROOT)
+- python/pip: jupyter (notebook server, inferred)
+- node/npm: none
+- other: CERN ROOT v6.40.04 release tarball (ubuntu26.04 build) as an alternative
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

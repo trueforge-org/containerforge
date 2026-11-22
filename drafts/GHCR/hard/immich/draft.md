@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: No description given, so ubuntu is a guess.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libgomp1 (inferred, ML row onnxruntime)
+- python/pip: ML row: uv plus machine-learning/ deps (inferred)
+- node/npm: server row: pnpm (inferred), Node/TS server, web and CLI build
+- other: uv (ML row install tool); server row from v3.4.2 source
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP on Apache installed from apt plus the wordpress.org tarball, so the ubuntu base provides PHP.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: apache2, libapache2-mod-php, php, php-mysql (inferred), php-gd (inferred), php-curl (inferred), php-xml (inferred), php-mbstring (inferred)
+- python/pip: none
+- node/npm: none
+- other: wordpress.org tarball (latest.tar.gz)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

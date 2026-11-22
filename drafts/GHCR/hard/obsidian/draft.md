@@ -34,8 +34,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Electron app shipped as an AppImage and run on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libfuse2 (inferred, for AppImage)
+- python/pip: none
+- node/npm: none
+- other: Obsidian v1.15.1 .deb (amd64) and AppImage (arm64) from GitHub releases
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

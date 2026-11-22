@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Closed-source x86 binary from a vendor tarball, so ubuntu hosts it.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: lib32stdc++6, libc6-i386 (inferred)
+- python/pip: none
+- node/npm: none
+- other: xware.tar.bz vendor tarball from the upstream repo (x86 only)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

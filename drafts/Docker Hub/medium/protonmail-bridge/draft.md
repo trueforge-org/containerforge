@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Vendor .deb on amd64 and a Go build on arm64, both on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: pass (inferred); gnupg (inferred); libsecret-1-0 (inferred)
+- python/pip: none
+- node/npm: none
+- other: vendor .deb (amd64); Go toolchain for make build-nogui (arm64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

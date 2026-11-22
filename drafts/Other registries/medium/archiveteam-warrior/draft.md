@@ -32,8 +32,16 @@
 - **Runtime image**: [python](https://github.com/trueforge-org/containerforge/tree/main/apps/python) (`ghcr.io/trueforge-org/python`)
 - **Reason**: Python web app pip-installed into /app on the python base.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: git (inferred, clone at build)
+- python/pip: warrior-code2 requirements (inferred)
+- node/npm: none
+- other: git clone of warrior-code2 at a pinned revision
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

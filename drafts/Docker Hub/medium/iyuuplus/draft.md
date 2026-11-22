@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP app that installs PHP via apt on ubuntu.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-cli, php-curl, php-mbstring, php-xml, php-zip, php-sqlite3 (inferred)
+- python/pip: none
+- node/npm: none
+- other: composer (PHP deps, inferred); source archive ledccn/iyuuplus-dev (HEAD, unpinned)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

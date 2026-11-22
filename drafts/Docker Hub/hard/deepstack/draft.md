@@ -34,8 +34,16 @@
 - **Alternative runtime image**: [ubuntu](https://github.com/trueforge-org/containerforge/tree/main/apps/ubuntu) (`ghcr.io/trueforge-org/ubuntu`)
 - **Reason**: Python AI model stack is the bulk of the app, alongside a Go server.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libgl1 (inferred), libglib2.0-0 (inferred)
+- python/pip: torch (CPU), torchvision, opencv-python-headless, numpy, pillow (all inferred from legacy 2022 AI stack)
+- node/npm: none
+- other: Go toolchain (inferred) to build server on arm64; amd64 binary `/app/server` from copy-from image (path unverified)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

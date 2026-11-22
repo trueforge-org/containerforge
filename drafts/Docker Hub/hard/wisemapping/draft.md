@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: Java API built with Maven with no Java version named, so java17 is used; nginx serves the frontend.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: nginx (inferred)
+- python/pip: none
+- node/npm: node, npm for frontend build (inferred)
+- other: Maven build of Java API from source, JDK 17 via java17 base
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

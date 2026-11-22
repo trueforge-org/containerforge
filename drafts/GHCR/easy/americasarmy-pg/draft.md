@@ -31,8 +31,16 @@
 - **Runtime image**: [steamcmd](https://github.com/trueforge-org/containerforge/tree/main/apps/steamcmd) (`ghcr.io/trueforge-org/steamcmd`)
 - **Reason**: Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: none (steamcmd base provides lib32 libs)
+- python/pip: none
+- node/npm: none
+- other: SteamCMD via steamcmd base; AA Proving Grounds server pulled from Steam at start
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

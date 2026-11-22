@@ -31,8 +31,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Crystal app compiled to a glibc binary on the ubuntu base.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libssl-dev, libxml2-dev, libyaml-dev, libgmp-dev, libpcre2-dev, zlib1g-dev (inferred, build libs)
+- python/pip: none
+- node/npm: none
+- other: Crystal toolchain tarball (linux-x86_64 / linux-aarch64), shards
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

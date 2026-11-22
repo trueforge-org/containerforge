@@ -33,8 +33,16 @@
 - **Alternative runtime image**: [nginx](https://github.com/trueforge-org/containerforge/tree/main/apps/nginx) (`ghcr.io/trueforge-org/nginx`)
 - **Reason**: PHP file browser with nginx and php-fpm, with PHP provided by apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: nginx, php-fpm, php-cli, php-gd (inferred), supervisor (inferred)
+- python/pip: none
+- node/npm: none
+- other: h5ai 0.30.0 zip from release
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

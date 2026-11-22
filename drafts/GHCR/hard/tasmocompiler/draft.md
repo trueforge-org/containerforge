@@ -30,8 +30,16 @@
 - **Runtime image**: `ghcr.io/trueforge-org/python-node`
 - **Reason**: Node.js app that calls PlatformIO, a Python tool, so python-node covers both.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: git, python3-venv (inferred)
+- python/pip: platformio (inferred)
+- node/npm: project dependencies from the tasmocompiler repo (inferred)
+- other: git checkout of tag v14.0.3; PlatformIO toolchains download at runtime
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

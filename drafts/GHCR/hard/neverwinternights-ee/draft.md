@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Closed-source native server that needs i386 libraries, so ubuntu fits.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libc6:i386, libstdc++6:i386 (inferred, i386 multiarch), libsndio .deb workaround (inferred)
+- python/pip: none
+- node/npm: none
+- other: Beamdog NWN:EE server files fetched at runtime (vendor download, amd64 only)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: .NET vendor zip unpacked onto ubuntu with libgdiplus and ffmpeg.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libgdiplus, ffmpeg, tzdata
+- python/pip: none
+- node/npm: none
+- other: vendor zip per arch (Agent_Linux64, Agent_LinuxARM64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

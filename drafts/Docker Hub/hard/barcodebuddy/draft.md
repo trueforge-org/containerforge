@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP web app with a Go supervisor binary, with PHP provided by apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: nginx, php-fpm and PHP extensions (inferred)
+- python/pip: none
+- node/npm: none
+- other: PHP app fetched from git; Go supervisor built in a golang stage
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: .NET 9 app with the dotnet runtime from ubuntu apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: dotnet-runtime-9.0 (inferred)
+- python/pip: none
+- node/npm: none
+- other: .NET 9 SDK for dotnet publish at build (inferred)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

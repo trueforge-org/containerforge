@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Prebuilt Go web app that runs arp-scan from apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: arp-scan
+- python/pip: none
+- node/npm: none
+- other: prebuilt Go binary from release (arm64/amd64 .apk files, extract binary; not an apt package)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

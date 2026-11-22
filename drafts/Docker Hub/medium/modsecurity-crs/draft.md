@@ -33,8 +33,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Apache with the web application firewall module from apt on ubuntu, since no Apache base exists.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: libapache2-mod-security2, apache2 (inferred)
+- python/pip: none
+- node/npm: none
+- other: OWASP CRS release tarball (coreruleset)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

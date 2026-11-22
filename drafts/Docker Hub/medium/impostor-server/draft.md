@@ -30,8 +30,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: .NET app with no language base, so the .NET runtime is added on ubuntu per the default rule.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: dotnet runtime 10.0 (inferred, unless release bundle is self-contained)
+- python/pip: none
+- node/npm: none
+- other: Impostor-Server release tarball (linux-x64 / linux-arm64)
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -32,8 +32,16 @@
 - **Runtime image**: [java8](https://github.com/trueforge-org/containerforge/tree/main/apps/java8) (`ghcr.io/trueforge-org/java8`)
 - **Reason**: Draft says it runs on Java 8.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: unzip (inferred)
+- python/pip: none
+- node/npm: none
+- other: vendor zip from stefan1200.de at build time (pinned URL + checksum); Java runtime comes from java8 sibling
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).

@@ -32,8 +32,16 @@
 - **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP Drupal app built with composer, with PHP provided by apt.
 
-## Fields
+## Package requirements
 
+Packages the Dockerfile will most likely need, inferred from this spec. `(inferred)` marks a guess.
+
+- apt: php-fpm, php-cli, php-pgsql, php-gd, php-xml, php-mbstring, php-curl, php-zip, php-intl (inferred), nginx (inferred), git (inferred)
+- python/pip: none
+- node/npm: none
+- other: composer (Drupal deps, inferred); farmOS 3.5.11 release tarball
+
+## Fields
 ### Chart / Role
 
 The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
