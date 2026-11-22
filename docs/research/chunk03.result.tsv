@@ -1,0 +1,40 @@
+Docker Hub/easy/teamspeak3/draft.md			Fetch of docs.teamspeak.com failed (DNS not found); www.teamspeak.com rate-limited, not confirmed
+Docker Hub/easy/telethon-downloader/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/threadfin/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/traefik-forward-auth/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/traggo/draft.md			traggo.net not confirmed (WebFetch rate-limited)
+Docker Hub/easy/traktarr/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/truenas-exporter/draft.md			not found (source_url points to prometheus/graphite_exporter, which does not match the chart name)
+Docker Hub/easy/tvhproxy/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/uptimerobot-prometheus/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/valetudo-mapper/draft.md	https://valetudo.cloud/		Fetched https://valetudo.cloud/ : page states "These are the Valetudo Docs" and links to github.com/Hypfer/Valetudo
+Docker Hub/easy/venstar2mqtt/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/victoriametrics/draft.md	https://docs.victoriametrics.com/		Fetched https://docs.victoriametrics.com/ : "Welcome to VictoriaMetrics Docs", official site
+Docker Hub/easy/vikunja/draft.md	https://vikunja.io/docs/		Fetched https://vikunja.io/docs/ : "Documentation", Vikunja technical documentation
+Docker Hub/easy/vlmcsd-kms-server/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/vocechat-server/draft.md			docs.voce.chat not confirmed (WebFetch rate-limited)
+Docker Hub/easy/wdosg/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/webnut/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/easy/webp-server/draft.md			webp.sh not confirmed (WebFetch rate-limited)
+Docker Hub/easy/wyoming-openwakeword/draft.md			not found (home-assistant.io check rate-limited)
+Docker Hub/easy/wyoming-piper/draft.md			not found (home-assistant.io check rate-limited)
+Docker Hub/easy/wyoming-whisper/draft.md			not found (home-assistant.io check rate-limited)
+Docker Hub/easy/xmrig/draft.md	https://xmrig.com/docs		Fetched https://xmrig.com/docs : page title "XMRig", Documentation section
+Docker Hub/hard/acestream/draft.md			acestream.org not confirmed (WebFetch rate-limited)
+Docker Hub/hard/alist/draft.md			alist.nn.ci redirects to alistgo.com; redirect target not verified (WebFetch rate-limited)
+Docker Hub/hard/android-8-0/draft.md			not found (not checked; source_url is the AOSP docs site itself)
+Docker Hub/hard/anonaddy/draft.md			docs.anonaddy.com returned an empty placeholder page, not confirmed
+Docker Hub/hard/aurora-files/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/hard/auto-yt-dl/draft.md			not found (no source_url given; not checked)
+Docker Hub/hard/automatic-ripping-machine/draft.md			not confirmed (WebFetch rate-limited)
+Docker Hub/hard/baikal/draft.md			sabre.io/baikal not confirmed (WebFetch rate-limited)
+Docker Hub/hard/barcodebuddy/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/hard/baserow/draft.md	https://baserow.io/docs/index		Fetched https://baserow.io/docs/index : "Table of contents", Baserow documentation index
+Docker Hub/hard/bitcoinwalletgui/draft.md			not confirmed (bitcoin.org rate-limited)
+Docker Hub/hard/blender-desktop-g3/draft.md	https://docs.blender.org/		Fetched https://docs.blender.org/ : "Blender Documentation - blender.org"
+Docker Hub/hard/browserless-chrome/draft.md	https://docs.browserless.io/		Fetched https://docs.browserless.io/ : "Browserless Documentation" (official status not explicit on page)
+Docker Hub/hard/bwapp/draft.md			itsecgames.com not confirmed (WebFetch rate-limited)
+Docker Hub/hard/cannery/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/hard/channels-dvr/draft.md	https://getchannels.com/docs/		Fetched https://getchannels.com/docs/ : "Channels Support - Support Articles", operated by Fancy Bits LLC
+Docker Hub/hard/chromium-desktop-g3/draft.md			not found (not checked, WebFetch rate-limited)
+Docker Hub/hard/clamav/draft.md	https://docs.clamav.net/		Fetched https://docs.clamav.net/ : "Introduction - ClamAV Documentation"

@@ -1,0 +1,89 @@
+GHCR/medium/fivem/draft.md	ubuntu		Runtime artifacts are fetched at runtime as a plain x86_64 Linux binary, so no language base is needed.
+GHCR/medium/game-server-watcher/draft.md	python-node		Node 20 app with no other runtime needs, so the node-providing base fits.
+GHCR/medium/gamevault-backend/draft.md	python-node		TypeScript/Node server that the draft says runs on the node sibling.
+GHCR/medium/gatus/draft.md	ubuntu		Single static Go binary built in a Go stage.
+GHCR/medium/golinks/draft.md	ubuntu		Single static Go binary built in a Go stage.
+GHCR/medium/hammond/draft.md	ubuntu		Go API is the runtime process; the Node UI is only a build-stage dependency.
+GHCR/medium/hasty-paste/draft.md	ubuntu		Go backend is the runtime process; the node frontend is built in a builder stage.
+GHCR/medium/headlamp/draft.md	ubuntu		Runtime is the extracted Go server and static frontend, with no language base needed.
+GHCR/medium/homepage/draft.md	python-node		Next.js app built with node and run from the standalone output.
+GHCR/medium/homer/draft.md	nginx	ubuntu	Static dashboard files built once and served by a web server.
+GHCR/medium/humhub/draft.md	ubuntu	nginx	PHP application that needs a PHP runtime from apt, with nginx as the web front end.
+GHCR/medium/jellystat/draft.md	python-node		Node app built with npm and run on the node runtime.
+GHCR/medium/jts3servermod/draft.md	java8		Draft says it runs on Java 8.
+GHCR/medium/kanboard/draft.md	ubuntu	nginx	PHP app with PHP installed from apt and served through nginx.
+GHCR/medium/komga/draft.md	java21		Spring Boot jar that the draft says should reuse the java21 sibling.
+GHCR/medium/kromgo/draft.md	ubuntu		Go service with a compiled binary; no language base needed at runtime.
+GHCR/medium/kubelet-csr-approver/draft.md	ubuntu		Small compiled Go controller binary.
+GHCR/medium/leaf2mqtt/draft.md	ubuntu		Dart app is compiled ahead-of-time to a native binary.
+GHCR/medium/libredb-studio/draft.md	python-node		Next.js app built with bun and run on the node sibling.
+GHCR/medium/linkding/draft.md	python		Django app installed from pip on the python base.
+GHCR/medium/littlelink/draft.md	python-node		Next.js app run from standalone output on the node sibling.
+GHCR/medium/maintainerr/draft.md	python-node		Node.js and TypeScript app run with node.
+GHCR/medium/mealie/draft.md	python		FastAPI app with the wheel installed on the python base.
+GHCR/medium/meshcentral/draft.md	python-node		Node.js server with npm dependencies.
+GHCR/medium/metube/draft.md	python		Python app installed with pip; ffmpeg comes from apt.
+GHCR/medium/mindustry/draft.md	java17	java21	Headless server runs from a Java jar; draft allows java17 or java21 and no version is pinned, so java17 is chosen.
+GHCR/medium/minecraft-bedrock/draft.md	ubuntu		Native x86_64 server binary with no Java or Node runtime.
+GHCR/medium/minecraft-java/draft.md	java21	java25	Java server jar; draft suggests java21 or java25 and the image tags span several versions.
+GHCR/medium/minecraft-proxy/draft.md	java17	java25	JVM proxy jar; draft suggests java17 or java25.
+GHCR/medium/muse/draft.md	python-node		Node.js bot that also needs yt-dlp via pip, so both python and node are required.
+GHCR/medium/n8n/draft.md	python-node		Node.js application installed from npm; python-node provides node.
+GHCR/medium/nullserv/draft.md	ubuntu		Small static Go binary built in a Go stage.
+GHCR/medium/ollama/draft.md	python		Python 3.12 FastAPI app installed from PyPI with a prebuilt frontend.
+GHCR/medium/openbooks/draft.md	ubuntu		Static Go binary.
+GHCR/medium/pingvin-share/draft.md	python-node		Next.js frontend and NestJS backend, both Node.
+GHCR/medium/pocketmine-mp/draft.md	ubuntu		Runs a PHP phar on a PHP binary, and PHP is not a base; use PHP from apt.
+GHCR/medium/podgrab/draft.md	ubuntu		Go backend compiled from source on the ubuntu base.
+GHCR/medium/poznote/draft.md	ubuntu		Pure PHP application with PHP installed from Ubuntu apt.
+GHCR/medium/profilarr/draft.md	ubuntu		Runs on a Deno runtime installed from its own release, which is not a listed base.
+GHCR/medium/qinglong/draft.md	python-node		Node.js and TypeScript panel with Python helpers; draft names the python-node sibling.
+GHCR/medium/quake3/draft.md	ubuntu		Native ioquake3 engine installed from apt.
+GHCR/medium/redm/draft.md	ubuntu		Native x86_64 server runtime binaries with no language base needed.
+GHCR/medium/retrobot/draft.md	python-node		Node app installed with yarn.
+GHCR/medium/reubah/draft.md	ubuntu		Compiled Go binary with assets built in a stage.
+GHCR/medium/rss-bridge/draft.md	ubuntu		PHP web app run with PHP packages from apt.
+GHCR/medium/shelfmark/draft.md	python		Python backend in a uv venv; the python base covers it.
+GHCR/medium/shorturl/draft.md	ubuntu		Go URL shortener built from source into a static binary.
+GHCR/medium/sia-daemon/draft.md	ubuntu		Go daemon built from source into a binary.
+GHCR/medium/smtp-relay/draft.md	ubuntu		Exim relay installed from one apt package.
+GHCR/medium/socials/draft.md	python-node		Node app built with yarn and run with node.
+GHCR/medium/spoolman/draft.md	python		Python app installed with pip into /app; the draft names the python sibling.
+GHCR/medium/starmade/draft.md	java17		Java jar from the vendor; the draft gives no version, so java17 is used by default.
+GHCR/medium/static/draft.md	ubuntu		Go static web server built into a single binary.
+GHCR/medium/streamystats/draft.md	ubuntu		Guess: the draft has no image, binary or reason text, so ubuntu is the default.
+GHCR/medium/stun-turn-server/draft.md	ubuntu		Coturn installed from the Ubuntu apt package.
+GHCR/medium/terraria-tshock/draft.md	ubuntu		.NET 9 server run with the dotnet runtime from apt.
+GHCR/medium/tracearr/draft.md	python-node		Node app built with pnpm and run on the node sibling.
+GHCR/medium/tracks/draft.md	ubuntu		Ruby on Rails app with Ruby installed from Ubuntu apt.
+GHCR/medium/trilium-notes/draft.md	python-node		Node server run from the bundled Node runtime and the node sibling.
+GHCR/medium/tt-rss/draft.md	ubuntu		Guess: the draft has no image, binary or reason text, so ubuntu is the default.
+GHCR/medium/twtxt/draft.md	ubuntu		Go twtxt server compiled into a single binary.
+GHCR/medium/urban-terror/draft.md	ubuntu		Native x86_64 dedicated server binary.
+GHCR/medium/vaultwarden/draft.md	ubuntu		Guess: the draft has no image, binary or reason text, so ubuntu is the default.
+GHCR/medium/watcharr/draft.md	ubuntu	python-node	Go server is the runtime process; the node UI is compiled in a build stage.
+GHCR/medium/wizarr/draft.md	python		Flask app managed with uv on the python base.
+GHCR/medium/xonotic/draft.md	ubuntu		Native C dedicated server unpacked from the amd64 release.
+GHCR/medium/youtubedl-material/draft.md	python-node		Node backend with ffmpeg and python yt-dlp, so both python and node are needed.
+GHCR/very-hard/mend-renovate/draft.md	python-node	ubuntu	Guess: the closed-source image is not public, so the open-source Node renovate package is assumed as the runtime.
+LSCR/hard/blender/draft.md	ubuntu		Desktop GUI application installed from the Blender tarball or apt.
+LSCR/hard/kdenlive/draft.md	ubuntu		Desktop GUI video editor installed from the Ubuntu archive.
+LSCR/hard/webtop/draft.md	ubuntu		Desktop environment with packages from apt; no single language runtime.
+LSCR/medium/mylar/draft.md	python	ubuntu	Python web app installed with pip in a venv; the unrar tool comes from apt.
+Other registries/easy/openobserve/draft.md	ubuntu		Rust single binary shipped as a prebuilt tarball.
+Other registries/easy/tauticord/draft.md	python	ubuntu	Python app with pip requirements installed into /app.
+Other registries/hard/odoo/draft.md	python	ubuntu	Python business suite installed from a .deb with many Python dependencies.
+Other registries/hard/xwiki/draft.md	java25		Tomcat on JRE 25 running an XWiki WAR.
+Other registries/medium/archiveteam-warrior/draft.md	python		Python web app pip-installed into /app on the python base.
+Other registries/medium/crafty-4/draft.md	python	java21	Python web panel installed from requirements; the Java stack is for spawned Minecraft servers, not the panel itself.
+Other registries/medium/external-dns/draft.md	ubuntu		Go Kubernetes controller compiled from source.
+Other registries/medium/mongo-express/draft.md	python-node		Node.js web UI built in a stage and run on the node runtime.
+Other registries/medium/send/draft.md	python-node		Node.js file-sharing server run on the node sibling.
+Other registries/medium/snapshot-controller/draft.md	ubuntu		Go Kubernetes controller compiled from source.
+Quay/hard/aistor/draft.md	ubuntu		Closed-source vendor Linux binary run directly with no language base.
+Quay/hard/hexchat/draft.md	ubuntu		Desktop IRC client installed from the Ubuntu archive.
+Quay/hard/invidious/draft.md	ubuntu		Crystal app compiled to a glibc binary on the ubuntu base.
+Quay/hard/jupyter/draft.md	python		Guess: the draft has no image, binary or reason text, so the Jupyter name suggests python.
+Quay/medium/csi-addons-controller/draft.md	ubuntu		Go Kubernetes controller compiled from source.
+Quay/medium/jupyter/draft.md	python		JupyterLab installed with pip.
+Quay/medium/volsync/draft.md	ubuntu		Go operator compiled from source with helper binaries built in stages.

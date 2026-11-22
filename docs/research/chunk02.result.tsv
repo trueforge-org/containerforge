@@ -1,0 +1,40 @@
+Docker Hub/easy/invitarr/draft.md				not found
+Docker Hub/easy/ipfs/draft.md	https://docs.ipfs.tech/		docs.ipfs.tech fetched, titled "IPFS Docs"
+Docker Hub/easy/keeweb/draft.md				not found (only GitHub repo and app.keeweb.info web app, no docs site)
+Docker Hub/easy/kitana/draft.md				not found
+Docker Hub/easy/linkwallet/draft.md				not found
+Docker Hub/easy/mango/draft.md				not found (repo archived, no docs site in search; getmango.app did not resolve)
+Docker Hub/easy/memcached/draft.md	https://docs.memcached.org	https://memcached.org/	memcached.org fetched; its Docs menu links to docs.memcached.org (docs host fetch was rate-limited, link seen on official site)
+Docker Hub/easy/metallb-config/draft.md				not found (source_url is docker-library/hello-world, does not match the app)
+Docker Hub/easy/mosdns/draft.md	https://irine-sistiana.gitbook.io/mosdns-wiki/		mosdns wiki fetched, titled "mosdns wiki", links to the project GitHub
+Docker Hub/easy/multus-cni/draft.md				not found (source_url is google/go-containerregistry, does not match the app)
+Docker Hub/easy/namecheap-ddns/draft.md				not found
+Docker Hub/easy/newyearcountdownclock/draft.md				not found
+Docker Hub/easy/ntfy/draft.md	https://docs.ntfy.sh/		docs.ntfy.sh fetched, titled "Getting started"
+Docker Hub/easy/owncast/draft.md	https://owncast.online/docs/	https://owncast.online/	owncast.online/docs fetched, titled "Welcome | Owncast"
+Docker Hub/easy/pastey/draft.md				not found
+Docker Hub/easy/picoshare/draft.md				not found (README only)
+Docker Hub/easy/plex-auto-languages/draft.md				not found
+Docker Hub/easy/plex-playlist-sync/draft.md				not found
+Docker Hub/easy/plex-utills/draft.md				not found
+Docker Hub/easy/posterr/draft.md				not found
+Docker Hub/easy/ps3netsrv/draft.md				not found
+Docker Hub/easy/quickshare/draft.md				not found (README only)
+Docker Hub/easy/radarrsync/draft.md				not found
+Docker Hub/easy/radicale/draft.md	https://radicale.org/v3.html		radicale.org/v3.html fetched, titled "Radicale v3 Documentation"
+Docker Hub/easy/rcon-webadmin/draft.md				not found (GitHub repo only)
+Docker Hub/easy/redis/draft.md				not found (redis.io/docs/latest returned 404)
+Docker Hub/easy/reg/draft.md	https://distribution.github.io/distribution/		distribution.github.io fetched, titled "Distribution Registry"
+Docker Hub/easy/restic-rest-server/draft.md	https://restic.readthedocs.io/		search result: restic manual REST server section; rest-server itself documented only in its README
+Docker Hub/easy/rickroll/draft.md				not found
+Docker Hub/easy/s3backup/draft.md	https://s3tools.org/usage	https://s3tools.org/s3cmd	s3tools.org fetched; Usage page linked from the site
+Docker Hub/easy/s3sync/draft.md				not found
+Docker Hub/easy/satisfactory/draft.md				not found
+Docker Hub/easy/sheetable/draft.md				not found
+Docker Hub/easy/shortipy/draft.md				not found
+Docker Hub/easy/slack-invite/draft.md				not found
+Docker Hub/easy/sqlite-web/draft.md				not found (README only)
+Docker Hub/easy/sshwifty/draft.md				not found
+Docker Hub/easy/storj-node/draft.md				not verified (docs.storj.io redirects to storj.dev; storj.dev fetch was rate-limited)
+Docker Hub/easy/suistartpage/draft.md				not found
+Docker Hub/easy/tagspaces/draft.md	https://docs.tagspaces.org/		docs.tagspaces.org fetched, titled "TagSpaces Documentation"

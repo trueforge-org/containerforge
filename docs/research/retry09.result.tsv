@@ -1,0 +1,19 @@
+GHCR/easy/sftpgo/draft.md	https://docs.sftpgo.com/	https://sftpgo.com/	docs.sftpgo.com 200 (curl); sftpgo.com 200 (curl), differs from source repo
+GHCR/easy/soft-serve/draft.md		https://charm.land/	No separate docs site; github wiki redirects to repo so left empty. charm.land 200 (curl; charm.sh redirects to it), Charm homepage listing Soft Serve
+GHCR/easy/solidping/draft.md			No docs or homepage confirmed: solidping.com TLS handshake failed in curl and WebFetch; only the GitHub repo was reachable
+GHCR/easy/static-web-server/draft.md	https://static-web-server.net/		static-web-server.net 200 (curl); project site carries the docs, same as homepage so website left empty
+GHCR/easy/survivethenights/draft.md			Only the Steam store page (source_url) is known; no official docs or separate homepage confirmed
+GHCR/easy/tachidesk-docker/draft.md	https://github.com/Suwayomi/Suwayomi-Server/wiki	https://suwayomi.org/	Suwayomi wiki 200 (curl); suwayomi.org 200 (curl); suwayomi.org/docs returned 404
+GHCR/easy/timetagger/draft.md		https://timetagger.app/	No docs page confirmed (timetagger.app/docs 404; repo has no wiki); homepage timetagger.app 200 (curl), separate from source repo
+GHCR/easy/unifi/draft.md			help.ui.com returned 403 to curl and WebFetch so docs could not be confirmed; ui.com is the source_url itself so website left empty
+GHCR/easy/unpoller/draft.md			unpoller.com/docs/ 404 and repo wiki redirects to repo; no docs confirmed; unpoller.com 200 (curl) recorded as website
+GHCR/easy/verysync/draft.md			verysync.com/www.verysync.com unreachable (TLS certificate error in curl, WebFetch error); only GitHub repo reachable
+GHCR/easy/whoogle/draft.md	https://github.com/benbusby/whoogle-search/wiki		Project GitHub wiki 200 (curl); no separate homepage
+GHCR/easy/zurg/draft.md	https://github.com/debridmediamanager/zurg-public/wiki		Project GitHub wiki 200 (curl); no separate homepage
+GHCR/hard/affine/draft.md	https://docs.affine.pro/	https://affine.pro/	docs.affine.pro 200 and affine.pro 200 (curl)
+GHCR/hard/anything-llm/draft.md	https://docs.anythingllm.com/	https://anythingllm.com/	docs.anythingllm.com 200 and anythingllm.com 200 (curl)
+GHCR/hard/archivebox/draft.md	https://docs.archivebox.io/	https://archivebox.io/	docs.archivebox.io 200 (curl, redirects to a versioned path) and archivebox.io 200 (curl)
+GHCR/hard/authentik/draft.md	https://docs.goauthentik.io/	https://goauthentik.io/	docs.goauthentik.io 200 and goauthentik.io 200 (curl)
+GHCR/hard/backuppc/draft.md	https://backuppc.github.io/backuppc/		Project docs site backuppc.github.io/backuppc 200 (curl); it serves as both docs and homepage, so website left empty
+GHCR/hard/birdnet-go/draft.md	https://github.com/tphakala/birdnet-go/wiki		README has no docs site; project wiki (user guides, installation, FAQ) 200 (curl) and linked from README via WebFetch
+GHCR/hard/borg-server/draft.md	https://borgbackup.readthedocs.io/en/stable/	https://www.borgbackup.org/	borgbackup.readthedocs.io/en/stable 200 and www.borgbackup.org 200 (curl)

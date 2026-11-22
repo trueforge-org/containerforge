@@ -1,0 +1,40 @@
+GHCR/easy/prometheus-pve-exporter/draft.md	https://github.com/prometheus-pve/prometheus-pve-exporter/wiki		README (fetched) points to the project wiki for docs; no separate homepage linked
+GHCR/easy/pvk-ii/draft.md			not found: source_url is a bare Steam store path with no app id
+GHCR/easy/rdtclient/draft.md			not found: source_url points to aria2, not rogerfar/rdt-client; the project only documents in its GitHub README and Docker Hub page
+GHCR/easy/recyclarr/draft.md	https://recyclarr.dev/		recyclarr.dev loaded and confirmed as Recyclarr docs; README links it
+GHCR/easy/rtorrent-rutorrent/draft.md			not found: source_url is rtorrent_exporter (not ruTorrent); no official docs linked
+GHCR/easy/rust/draft.md			not found: rust.facepunch.com is the source; no docs or wiki linked from it
+GHCR/easy/sdtd/draft.md			not found: source_url is a bare Steam store path; search found only community wikis
+GHCR/easy/sftpgo/draft.md	https://docs.sftpgo.com/latest/		docs.sftpgo.com/latest loaded and confirmed as SFTPGo docs; sftpgo.com homepage linked from README but not load-verified (rate limit)
+GHCR/easy/shiori/draft.md	https://github.com/go-shiori/shiori/blob/master/docs/index.md		README (fetched) says all docs are in the docs folder; docs/index.md is the entry point
+GHCR/easy/shlink-web-client/draft.md	https://shlink.io/documentation	https://shlink.io	shlink.io loaded and confirmed as Shlink project site; its Documentation nav links /documentation
+GHCR/easy/slskd/draft.md	https://github.com/slskd/slskd/blob/master/docs/config.md		README (fetched) links docs/ folder; slskd.org homepage not load-verified (fetch returned unrelated content)
+GHCR/easy/soft-serve/draft.md			no dedicated docs site: only repo README and docker.md/systemd.md; project is sunsetting; charm.sh not confirmed as project homepage
+GHCR/easy/solidping/draft.md	https://solidping.io/docs/		solidping.io/docs loaded and confirmed as SolidPing docs; www.solidping.io linked from README but not load-verified (DNS/rate limit)
+GHCR/easy/speedtest-exporter/draft.md	https://docs.miguelndecarvalho.pt/projects/speedtest-exporter/		docs page loaded and confirmed; it is the only docs/homepage link in the README
+GHCR/easy/static-web-server/draft.md			README links static-web-server.net as docs and homepage; not load-verified (rate limit)
+GHCR/easy/stationeers/draft.md			not found: stationeers.net returned empty content; no official docs confirmed
+GHCR/easy/storm/draft.md			not found: README has no homepage or project docs (only third-party Deluge and Docker links)
+GHCR/easy/survivethenights/draft.md			Steam page (fetched) names the developer site survivethenights.net; not load-verified (rate limit)
+GHCR/easy/tachidesk-docker/draft.md	https://github.com/Suwayomi/Suwayomi-Server/wiki/Configuring-Tachidesk-Server		README (fetched) links project GitHub wiki for configuration and troubleshooting; no separate docs site
+GHCR/easy/timetagger/draft.md			README (fetched) lists docs at timetagger.readthedocs.io and site at timetagger.app; neither load-verified (rate limit/DNS)
+GHCR/easy/unifi/draft.md			ui.com loaded and confirmed as Ubiquiti site; its Support link (help.ui.com) not load-verified; source is ui.com so no separate website
+GHCR/easy/unpoller/draft.md			README (fetched) links unpoller.com for docs and homepage; not load-verified (rate limit)
+GHCR/easy/unturned/draft.md			not found: unturned.net redirects to a parked domain sale page
+GHCR/easy/verysync/draft.md			README (fetched) links verysync.com as official site; not load-verified (rate limit); no docs site linked
+GHCR/easy/whoogle/draft.md	https://github.com/benbusby/whoogle-search/wiki		README (fetched) links project wiki; repo is archived; no separate docs site
+GHCR/easy/zurg/draft.md			README (fetched) links notes.debridmediamanager.com/zurg docs and zurg.debridmediamanager.com; not load-verified (rate limit)
+GHCR/hard/affine/draft.md			README (fetched) links docs.affine.pro and affine.pro; not load-verified (rate limit)
+GHCR/hard/anything-llm/draft.md			README (fetched) links docs.anythingllm.com and anythingllm.com; not load-verified (rate limit/DNS)
+GHCR/hard/apache-musicindex/draft.md			Ubuntu package page (fetched) lists upstream homepage hacks.slashdirt.org/musicindex; not load-verified
+GHCR/hard/archivebox/draft.md	https://github.com/ArchiveBox/ArchiveBox/wiki		README (fetched) links the main documentation wiki; archivebox.io homepage not load-verified (rate limit)
+GHCR/hard/authentik/draft.md	https://docs.goauthentik.io		docs.goauthentik.io loaded and confirmed as authentik documentation; goauthentik.io homepage not load-verified (rate limit)
+GHCR/hard/avidemux/draft.md			not found: avidemux.org lists only mirrors and a forum, no official docs
+GHCR/hard/backuppc/draft.md			README (fetched) links backuppc.github.io/backuppc as docs and homepage; not load-verified (rate limit/DNS)
+GHCR/hard/birdnet-go/draft.md	https://github.com/tphakala/birdnet-go/wiki		README (fetched) documentation section links project wiki; no separate homepage
+GHCR/hard/borg-server/draft.md			README (fetched) links borgbackup.readthedocs.io and borgbackup.org; neither load-verified (rate limit)
+GHCR/hard/chevereto/draft.md			README (fetched) links docs.chevereto.com and chevereto.com; not load-verified (rate limit)
+GHCR/hard/czkawka/draft.md			not found: README states there is no official website; only repo READMEs and Flathub listing
+GHCR/hard/dashdot/draft.md			README (fetched) links getdashdot.com/docs and getdashdot.com; not load-verified (rate limit)
+GHCR/hard/debian-apt-mirror/draft.md			README (fetched) links apt-mirror.github.io; not load-verified (DNS); no separate homepage verified
+GHCR/hard/debian-bullseye/draft.md	https://www.debian.org/support		debian.org/support loaded and confirmed as Debian user support and documentation page; source is debian.org so no separate website

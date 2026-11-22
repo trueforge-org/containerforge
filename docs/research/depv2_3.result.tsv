@@ -1,0 +1,27 @@
+GHCR/hard/rtorrent-rutorrent/draft.md		rtorrent_exporter	values.yaml: exporter is a metrics-only sidecar (metrics.main), not needed to run rutorrent.
+GHCR/hard/shlink/draft.md		postgresql, valkey	README lists SQLite as a supported engine; chart hard-wires postgres and enables redis. Redis optionality not verified upstream.
+GHCR/hard/streammaster/draft.md		postgresql	Upstream docker-compose.yml runs the image alone with no database service; chart sets POSTGRES_* env. Verified via docker-compose.yml.
+GHCR/hard/tandoor-recipes/draft.md		postgresql	Chart sets DB_ENGINE postgres; upstream SQLite default from memory, not fetched.
+GHCR/hard/watchyourlan/draft.md		postgresql	README config table: USE_DB defaults to sqlite, postgres is an option.
+GHCR/medium/booklore/draft.md	mariadb		README DATABASE_URL is jdbc:mariadb; MariaDB is the only engine shown.
+GHCR/medium/bookorbit/draft.md	postgresql		README requires PostgreSQL data path; chart enables postgres with extensions (pgvector). Postgres-only from README.
+GHCR/medium/comet/draft.md		postgresql	README lists SQLite / PostgreSQL support; chart sets DATABASE_TYPE postgresql. Default engine not verified, so unresolved.
+GHCR/medium/commento-plusplus/draft.md	postgresql		README: self-hosting needs a PostgreSQL server (COMMENTO_POSTGRES).
+GHCR/medium/etherpad/draft.md		postgresql	README: dirtyDB is for testing only, production should use a dedicated DB, so an embedded default exists.
+GHCR/medium/gamevault-backend/draft.md	postgresql		Upstream docker-compose.yml runs postgres:16 with DB_HOST/DB_USERNAME; chart sets DB_SYSTEM POSTGRESQL.
+GHCR/medium/gatus/draft.md		postgresql, gatus-sidecar	Chart uses postgres only when its postgresql settings are enabled (default true); gatus default SQLite from memory. Sidecar is optional.
+GHCR/medium/humhub/draft.md	one of: mariadb, mysql	valkey, humhub-nginx	Chart wires mariadb. Upstream MySQL/MariaDB-only and redis-optional are from memory, not fetched, so unresolved. nginx is a sidecar.
+GHCR/medium/jellystat/draft.md	postgresql		Chart sets POSTGRES_* unconditionally; Jellystat is postgres-only from upstream knowledge, not fetched.
+GHCR/medium/kanboard/draft.md		postgresql	Chart sets DB_DRIVER postgres; upstream SQLite default from memory, not fetched.
+GHCR/medium/mealie/draft.md		postgresql	values/_secrets.tpl: postgres only when chart postgres enabled; SQLite default upstream from memory.
+GHCR/medium/meshcentral/draft.md		postgresql	Chart secret always sets settings.postgres; values.yaml comment says NeDB is the default embedded database.
+GHCR/medium/n8n/draft.md		postgresql, valkey	Chart sets DB_TYPE postgresdb; SQLite default and redis only for queue mode, from upstream knowledge (not fetched).
+GHCR/medium/spoolman/draft.md		postgresql	Chart sets SPOOLMAN_DB_TYPE postgres; chart comment lists sqlite as an option (sqlite default from memory).
+GHCR/medium/tracearr/draft.md	postgresql, valkey		README: images require external DB and Redis (Docker tags "requires external DB/Redis").
+GHCR/medium/youtubedl-material/draft.md		mongodb	README: json file-based default, MongoDB for scale. Chart forces ytdl_use_local_db false, so the chart needs it.
+Other registries/hard/odoo/draft.md	postgresql		Chart wires postgres only; Odoo is postgres-only from upstream knowledge, not fetched.
+Other registries/hard/xwiki/draft.md	postgresql		Image is the postgres-tomcat variant; upstream docs say HSQLDB embedded is not for production. Whether standalone HSQLDB counts is unresolved.
+Other registries/medium/mongo-express/draft.md	mongodb		README: web admin UI for MongoDB; nothing works without a mongo server.
+Other registries/medium/send/draft.md	valkey		README: Redis server required (only optional for development).
+Quay/hard/invidious/draft.md	postgresql		Chart wires postgres unconditionally; Invidious is postgres-only from upstream knowledge, not fetched.
+Quay/medium/jupyter/draft.md		minimal-notebook, r-notebook, scipy-notebook, tensorflow-notebook, datascience-notebook, pyspark-notebook, all-spark-notebook	values.yaml: these are alternative image flavours chosen via imageSelector, not runtime dependencies.

@@ -1,0 +1,40 @@
+Docker Hub/medium/wordpress/draft.md	https://wordpress.org/documentation/	https://wordpress.org	Docs: wordpress.org/documentation fetched (WordPress docs index). Website: wordpress.org in search results (Meet WordPress).
+Docker Hub/medium/yacy/draft.md	https://yacy.net/docs/		Docs: yacy.net/docs in search results (YaCy documentation hub). Homepage not verified.
+Docker Hub/medium/yourls/draft.md	https://docs.yourls.org		Docs: docs.yourls.org in search results, described as official YOURLS documentation. yourls.org not verified.
+Docker Hub/medium/z80pack/draft.md	https://www.icl1900.co.uk/unix4fun/z80pack		Docs: upstream GitHub README names this site as the full documentation (search results).
+Docker Hub/very-hard/meshroom/draft.md	https://meshroom.readthedocs.io/en/stable/		Docs: stable Meshroom docs on Read the Docs in search results. meshroom-manual.readthedocs.io (work in progress) was fetched but not used. AliceVision homepage not recorded.
+Docker Hub/very-hard/sourcegraph/draft.md	https://sourcegraph.com/docs		Docs: fetched sourcegraph.com/docs, titled "Sourcegraph docs".
+Docker Hub/very-hard/truecommand/draft.md	https://www.truenas.com/docs/truecommand/		Docs: TrueNAS TrueCommand docs in search results (version 3.0 guide and release notes). source_url empty in input.
+GHCR (linuxserver)/easy/endlessh/draft.md			not found (no official docs beyond the GitHub repo).
+GHCR (linuxserver)/easy/minetest/draft.md	https://docs.luanti.org/		Docs: docs.luanti.org in search results as Luanti (formerly Minetest) documentation. minetest.net/wiki.minetest.net not verified (wiki redirects to docs.luanti.org).
+GHCR (linuxserver)/easy/nntp2nntp/draft.md			not found.
+GHCR (linuxserver)/easy/pixapop/draft.md			not found. Only the deprecated linuxserver image docs were found, which cover the image rather than the upstream app.
+GHCR (linuxserver)/easy/pyload/draft.md	https://github.com/pyload/pyload/wiki		Docs: project wiki in search results. pyload.net was mentioned in search results but not verified, so not recorded as website.
+GHCR (linuxserver)/easy/quassel-core/draft.md	https://bugs.quassel-irc.org/projects/1/wiki	https://quassel-irc.org/about	Docs: Quassel project wiki in search results. Website: quassel-irc.org/about in search results.
+GHCR (linuxserver)/hard/audacity/draft.md	https://manual.audacityteam.org/	https://www.audacityteam.org/	Docs: Audacity Reference Manual fetched. Website: audacityteam.org in search results.
+GHCR (linuxserver)/hard/boinc/draft.md	https://github.com/BOINC/boinc/wiki/	https://boinc.berkeley.edu/	Docs: BOINC project wiki in search results (user manual moved there in 2024). boinc.berkeley.edu/wiki returned 404 on fetch. Website: BOINC homepage fetched.
+GHCR (linuxserver)/hard/calibre/draft.md	https://manual.calibre-ebook.com/	https://calibre-ebook.com/	Docs: calibre User Manual fetched. Website: calibre-ebook.com in search results (help page).
+GHCR (linuxserver)/hard/chromium/draft.md			not found. chromium.org developer hub is developer-facing, not user docs. Site not verified.
+GHCR (linuxserver)/hard/cloud9/draft.md			not found. c9 docs links from the archived c9/core repo were not verified.
+GHCR (linuxserver)/hard/couchpotato/draft.md			not found. The couchpotatoserver.readthedocs.io page is a placeholder.
+GHCR (linuxserver)/hard/digikam/draft.md	https://docs.digikam.org/	https://www.digikam.org/	Docs: digiKam Manual fetched. Website: www.digikam.org in search results.
+GHCR (linuxserver)/hard/doublecommander/draft.md	https://doublecmd.github.io/doc/en/help.html	https://doublecmd.sourceforge.io	Docs: Double Commander help pages in search results. Website: doublecmd.sourceforge.io named as project homepage in search results (Debian help page, LinuxLinks).
+GHCR (linuxserver)/hard/filezilla/draft.md	https://wiki.filezilla-project.org/Documentation	https://filezilla-project.org	Docs: FileZilla Wiki Documentation page in search results. Website: filezilla-project.org in search results.
+GHCR (linuxserver)/hard/firefox/draft.md	https://support.mozilla.org/		Docs: support.mozilla.org in search results (Mozilla Firefox support knowledge base). mozilla.org homepage not seen.
+GHCR (linuxserver)/hard/mysql-workbench/draft.md	https://dev.mysql.com/doc/workbench/en/	https://www.mysql.com/products/workbench/	Docs: MySQL Workbench Manual fetched. Website: mysql.com product page in search results.
+GHCR (linuxserver)/hard/orcaslicer/draft.md	https://www.orcaslicer.com/wiki	https://www.orcaslicer.com/	Docs: official OrcaSlicer wiki in search results. Website: www.orcaslicer.com in search results, stated by the project as an official site.
+GHCR (linuxserver)/hard/remmina/draft.md			not found. remmina.org was not reachable through search results.
+GHCR (linuxserver)/hard/sqlitebrowser/draft.md	https://github.com/sqlitebrowser/sqlitebrowser/wiki	https://sqlitebrowser.org	Docs: project wiki in search results. Website: sqlitebrowser.org homepage in search results, which links to the wiki.
+GHCR (linuxserver)/medium/airsonic/draft.md	https://airsonic.github.io/docs		Docs: admin docs at airsonic.github.io/docs, linked from the YunoHost package README in search results. These are for original Airsonic, not Advanced-specific.
+GHCR (linuxserver)/medium/booksonic-air/draft.md			not found. Only the GitHub README was found, which points to booksonic.org (not verified).
+GHCR (linuxserver)/medium/clarkson/draft.md			not found.
+GHCR (linuxserver)/medium/dillinger/draft.md		https://www.dillinger.io/	Website: www.dillinger.io in search results ("Online Markdown Editor with Live Preview"). No separate docs site found.
+GHCR (linuxserver)/medium/embystat/draft.md			not found. Only GitHub and third-party guides were found.
+GHCR (linuxserver)/medium/fleet/draft.md	https://fleetdm.com/docs	https://fleetdm.com/	Docs: fleetdm.com/docs/get-started in search results. Website: fleetdm.com in search results.
+GHCR (linuxserver)/medium/headphones/draft.md			not found. Search did not return the project docs (GitHub wiki unverified).
+GHCR (linuxserver)/medium/nano-wallet/draft.md			not found. docs.nano.org covers node and protocol development, not wallet user docs.
+GHCR (linuxserver)/medium/photoshow/draft.md			not found. Only the GitHub repo was found.
+GHCR (linuxserver)/medium/quassel-web/draft.md			not found. Only the GitHub README was found.
+GHCR/easy/alienswarm-reactivedrop/draft.md	https://developer.valvesoftware.com/wiki/Alien_Swarm:_Reactive_Drop		Docs: Valve wiki Reactive Drop page in search results. It has no up-to-date server guide.
+GHCR/easy/alienswarm/draft.md	https://developer.valvesoftware.com/wiki/Alien_Swarm_Dedicated_Server		Docs: Valve wiki Alien Swarm Dedicated Server page in search results (flagged as outdated).
+GHCR/easy/americasarmy-pg/draft.md			not found.

@@ -1,0 +1,40 @@
+Docker Hub/medium/kitchenowl/draft.md	https://docs.kitchenowl.org	https://kitchenowl.org	docs.kitchenowl.org named as official docs in search; kitchenowl.org loads (title "KitchenOwl"). WebFetch rate-limited, verified with curl (HTTP 200)
+Docker Hub/medium/lama-cleaner/draft.md	https://lama-cleaner-docs.vercel.app		Docs site loads (title "Index – Lama Cleaner", HTTP 200). Search snippet hints the project was renamed to IOpaint; not verified. Docs site doubles as homepage, so no website_url
+Docker Hub/medium/libreddit/draft.md			not found: no official docs site located (only GitHub README and libreddit-instances repo)
+Docker Hub/medium/lingva/draft.md		https://lingva.ml	not found: no docs site. lingva.ml loads (title "Lingva.ml"), named as the official instance in search results; not confirmed from the README
+Docker Hub/medium/livestreamdvr/draft.md			not found: search returned only third-party listings
+Docker Hub/medium/lyrion-music-server/draft.md	https://lyrion.org/getting-started	https://lyrion.org	getting-started page loads (title "Getting Started with LMS - Lyrion Music Server", HTTP 200); homepage title "Home - Lyrion Music Server"
+Docker Hub/medium/mailpile/draft.md		https://mailpile.is	homepage loads (title "Mailpile: e-mail that protects your privacy"). No user docs site found; upstream README says development is paused
+Docker Hub/medium/maloja/draft.md			not found: only API.md in the GitHub repo; maloja.io did not respond
+Docker Hub/medium/mattermost/draft.md	https://docs.mattermost.com	https://mattermost.com	docs.mattermost.com named as official docs in search, HTTP 200 (title not parsed); mattermost.com loads (HTTP 200, title "Mattermost")
+Docker Hub/medium/media-roller/draft.md			not found: search returned only Jellyfin/Plex/Sonos background
+Docker Hub/medium/metabase/draft.md	https://www.metabase.com/docs/latest/	https://www.metabase.com	docs page loads (title "Metabase documentation"); homepage HTTP 200
+Docker Hub/medium/metatube/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/mininote/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/modsecurity-crs/draft.md	https://www.coreruleset.org/docs/	https://www.coreruleset.org	docs page loads (title "CRS Documentation", HTTP 200); homepage HTTP 200
+Docker Hub/medium/mojopaste/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/multi-scrobbler/draft.md	https://foxxmd.github.io/multi-scrobbler/configuration/		Configuration docs confirmed: /multi-scrobbler/docs/configuration redirects to /multi-scrobbler/configuration/ (HTTP 200 via curl -L)
+Docker Hub/medium/mymediaforalexa/draft.md			not found: homepage is the source_url; /help is an ASP.NET API help page, not user documentation
+Docker Hub/medium/myspeed/draft.md		https://myspeed.dev	homepage loads (title "MySpeed - Automated Speedtests"). No separate docs site found
+Docker Hub/medium/nightscout/draft.md	https://nightscout.github.io/		docs site loads (title "Welcome to Nightscout — Nightscout Documentation"). Docs site doubles as homepage
+Docker Hub/medium/nitter/draft.md			not found: docs.nitter.net did not respond
+Docker Hub/medium/notarius/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/ollama/draft.md	https://docs.ollama.com	https://ollama.com	docs page loads (title "Ollama documentation - Ollama"); homepage HTTP 200
+Docker Hub/medium/openhab/draft.md	https://www.openhab.org/docs/	https://www.openhab.org	docs page loads (title "Introduction | openHAB"); homepage HTTP 200
+Docker Hub/medium/openra/draft.md		https://www.openra.net	homepage HTTP 200. No docs page verified
+Docker Hub/medium/owi2plex/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/paperless-ngx/draft.md			not verified: docs.paperless-ngx.com and paperless-ngx.com returned a Cloudflare 403 challenge, so they could not be confirmed
+Docker Hub/medium/pasta/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/peanut/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/peppermint/draft.md			not verified: peppermint.sh returned a 403 challenge and docs.peppermint.sh did not respond
+Docker Hub/medium/pgadmin/draft.md	https://www.pgadmin.org/docs/	https://www.pgadmin.org	docs page loads (title "Documentation"); homepage title "pgAdmin - PostgreSQL Tools"
+Docker Hub/medium/photo-stream/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/photoprism/draft.md	https://docs.photoprism.app/	https://photoprism.app	docs page loads (title "Features - PhotoPrism"); homepage HTTP 200
+Docker Hub/medium/pigallery2/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/pinry/draft.md	https://pinry.readthedocs.io/		docs site loads (title "Welcome to Read the Docs — Pinry latest documentation"). Docs site doubles as homepage
+Docker Hub/medium/plant-it/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/plaxt/draft.md			not found: only the GitHub repo was located
+Docker Hub/medium/plex-meta-manager/draft.md	https://metamanager.wiki/		wiki loads (title "Home - Kometa Wiki"). Upstream appears to be the renamed Kometa project; the link is not confirmed as the same project
+Docker Hub/medium/plexripper/draft.md			not found: only the GitHub repo (Reaparr/Reaparr) was located
+Docker Hub/medium/portainer/draft.md	https://docs.portainer.io/	https://www.portainer.io	docs page loads (title "Welcome | Portainer Documentation"); homepage HTTP 200
+Docker Hub/medium/pretend-youre-xyzzy/draft.md			not found: only the GitHub repo was located

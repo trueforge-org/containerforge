@@ -1,0 +1,89 @@
+Docker Hub/medium/vertex/draft.md	python-node		Node.js web UI and daemon with npm build, so the node runtime in python-node covers it.
+Docker Hub/medium/wekan/draft.md	python-node		Node.js Meteor-style server bundle, which needs only node from python-node.
+Docker Hub/medium/whisper-asr-webservice/draft.md	python		Python FastAPI service installed with pip or poetry on the python base.
+Docker Hub/medium/wifi-card/draft.md	nginx	python-node	Static dist files served by nginx, with a node build stage that python-node can also provide.
+Docker Hub/medium/wordpress/draft.md	ubuntu		PHP on Apache installed from apt plus the wordpress.org tarball, so the ubuntu base provides PHP.
+Docker Hub/medium/yacy/draft.md	java25	java21	Upstream names Java 24, which is not a listed base; java25 is the newest available and runs Java 24 class files.
+Docker Hub/medium/yourls/draft.md	ubuntu		PHP app with PHP installed from apt and the release copied into /app.
+Docker Hub/medium/z80pack/draft.md	ubuntu		Emulator built with make from source tarballs, so a build stage on ubuntu fits.
+Docker Hub/very-hard/meshroom/draft.md	ubuntu		Prebuilt Linux tarball with bundled libraries unpacked onto ubuntu.
+Docker Hub/very-hard/sourcegraph/draft.md	ubuntu		Guess: no public Dockerfile or binaries exist, so no runtime is clearly needed and ubuntu is a default.
+Docker Hub/very-hard/truecommand/draft.md	ubuntu		Guess: no redistributable artifact or source exists, so ubuntu is a default placeholder.
+GHCR (linuxserver)/easy/endlessh/draft.md	ubuntu		Small C tool installed with apt on ubuntu.
+GHCR (linuxserver)/easy/minetest/draft.md	ubuntu		C++ game server installed from apt on ubuntu, with no compile step.
+GHCR (linuxserver)/easy/nntp2nntp/draft.md	python		Python NNTP proxy installed with pip on the python base.
+GHCR (linuxserver)/easy/pixapop/draft.md	nginx	ubuntu	Static JavaScript gallery served by nginx with no server runtime.
+GHCR (linuxserver)/easy/pyload/draft.md	python		Python download manager installed with pip on the python base.
+GHCR (linuxserver)/easy/quassel-core/draft.md	ubuntu		Qt/C++ daemon installed with apt on ubuntu.
+GHCR (linuxserver)/hard/audacity/draft.md	ubuntu		Guess: desktop AppImage with no runtime language, so ubuntu is the default.
+GHCR (linuxserver)/hard/boinc/draft.md	ubuntu		Headless client installed with apt on ubuntu.
+GHCR (linuxserver)/hard/calibre/draft.md	ubuntu		Prebuilt Qt tarball that bundles its own runtime, so ubuntu fits.
+GHCR (linuxserver)/hard/chromium/draft.md	ubuntu		Browser installed from a Debian or apt package on ubuntu.
+GHCR (linuxserver)/hard/cloud9/draft.md	python-node		Node.js IDE with a native node-pty build, so python-node provides the node runtime and build tools.
+GHCR (linuxserver)/hard/couchpotato/draft.md	python		Python app that needs a Python 3 port, which fits the python base.
+GHCR (linuxserver)/hard/digikam/draft.md	ubuntu		Qt AppImage or apt package with no scripting runtime, so ubuntu fits.
+GHCR (linuxserver)/hard/doublecommander/draft.md	ubuntu		Desktop file manager installed as one apt package on ubuntu.
+GHCR (linuxserver)/hard/filezilla/draft.md	ubuntu		GTK client installed as one apt package on ubuntu.
+GHCR (linuxserver)/hard/firefox/draft.md	ubuntu		Browser tarball unpacked onto ubuntu.
+GHCR (linuxserver)/hard/mysql-workbench/draft.md	ubuntu		Desktop GUI installed from a deb package on ubuntu.
+GHCR (linuxserver)/hard/orcaslicer/draft.md	ubuntu		Desktop AppImage with no scripting runtime, so ubuntu fits.
+GHCR (linuxserver)/hard/remmina/draft.md	ubuntu		Desktop client installed with apt on ubuntu.
+GHCR (linuxserver)/hard/sqlitebrowser/draft.md	ubuntu		Desktop GUI from an AppImage or apt package on ubuntu.
+GHCR (linuxserver)/medium/airsonic/draft.md	java17		WAR app that the draft names to run on a java17 base.
+GHCR (linuxserver)/medium/booksonic-air/draft.md	java17		WAR app with no Java version named, so java17 is used by default.
+GHCR (linuxserver)/medium/clarkson/draft.md	python-node		Node.js app built with npm, so python-node provides the needed runtime.
+GHCR (linuxserver)/medium/dillinger/draft.md	python-node		Node.js editor built with npm, so python-node provides the runtime.
+GHCR (linuxserver)/medium/embystat/draft.md	ubuntu		ASP.NET app shipped as a self-contained release zip, which the ubuntu base can run.
+GHCR (linuxserver)/medium/fleet/draft.md	java17	java21	Single jar that the draft allows on java17 or java21, and java17 is picked as the default.
+GHCR (linuxserver)/medium/headphones/draft.md	python		Python app run from source with pip dependencies on the python base.
+GHCR (linuxserver)/medium/nano-wallet/draft.md	python-node	nginx	Node.js build producing static files, so python-node builds them and nginx could serve them.
+GHCR (linuxserver)/medium/photoshow/draft.md	ubuntu	nginx	PHP gallery needing php-fpm beside nginx, which is installed from apt on ubuntu.
+GHCR (linuxserver)/medium/quassel-web/draft.md	python-node		Node.js webserver built with npm, so python-node provides the runtime.
+GHCR/easy/alienswarm-reactivedrop/draft.md	steamcmd		Dedicated server fetched through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/alienswarm/draft.md	steamcmd		Dedicated server fetched through SteamCMD, so the steamcmd base fits.
+GHCR/easy/americasarmy-pg/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/amule/draft.md	ubuntu		Daemon installed from the apt package on ubuntu.
+GHCR/easy/anope/draft.md	ubuntu		IRC services daemon installed from apt on ubuntu.
+GHCR/easy/app-template/draft.md	python		Python Prometheus exporter installed with pip into /app.
+GHCR/easy/aria2/draft.md	ubuntu		Single daemon installed from the apt package on ubuntu.
+GHCR/easy/ariang/draft.md	nginx	ubuntu	Static JavaScript web UI served by nginx from the release zip.
+GHCR/easy/arma3/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/arma3exilemod/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/assettocorsa/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/atuin/draft.md	ubuntu		Rust server release binary run directly on ubuntu.
+GHCR/easy/authelia/draft.md	ubuntu		Go server release binary run directly on ubuntu.
+GHCR/easy/authentik/draft.md	ubuntu		Guess: the draft row has no image or binary details, so ubuntu is a default.
+GHCR/easy/autobrr/draft.md	ubuntu		Go binary with embedded UI, run directly on ubuntu.
+GHCR/easy/avorion/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/backrest/draft.md	ubuntu		Go release binaries run directly on ubuntu.
+GHCR/easy/barotrauma/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/bitmagnet/draft.md	ubuntu		Go release binary run directly on ubuntu.
+GHCR/easy/blocky/draft.md	ubuntu		Guess: the draft row has no image or binary details, so ubuntu is a default.
+GHCR/easy/calendarr/draft.md	python		Python web app installed from requirements with pip.
+GHCR/easy/changedetection-io/draft.md	python		Python Flask app installed with pip on the python base.
+GHCR/easy/chivalry-medievalwarfare/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/chroma/draft.md	python		Python server installed with pip, using prebuilt wheels.
+GHCR/easy/citadel-forgedwithfire/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/colonysurvival/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/conanexiles/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/craftopia/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/cs2/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/csgo/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/cssource/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/cstrike1-6/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/cstrikeconditionzero/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/ctfd/draft.md	python		Python Flask app installed with pip and run by gunicorn.
+GHCR/easy/dayofdefeatsource/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/daysofwar/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/dayz/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/ddns-go/draft.md	ubuntu		Go binary from the release tarball run directly on ubuntu.
+GHCR/easy/ddns-updater/draft.md	ubuntu		Go binary from the release file run directly on ubuntu.
+GHCR/easy/dell-idrac-fan-controller/draft.md	ubuntu		Bash script using ipmitool from apt on ubuntu.
+GHCR/easy/dontstarvetogether/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/fistfuloffrags/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/fluidd/draft.md	nginx	ubuntu	Static Vue UI served by nginx from the release zip.
+GHCR/easy/fossil/draft.md	ubuntu		Single C binary installed from the apt package on ubuntu.
+GHCR/easy/garrysmod/draft.md	steamcmd		Dedicated server pulled through SteamCMD at start, so the steamcmd base fits.
+GHCR/easy/gatus/draft.md	ubuntu		Go controller built with a golang stage and copied onto ubuntu.
+GHCR/easy/gitea/draft.md	ubuntu		Go release binary with embedded assets run directly on ubuntu.
+GHCR/easy/goaccess-npm-logs/draft.md	ubuntu		GoAccess installed from the apt package on ubuntu.

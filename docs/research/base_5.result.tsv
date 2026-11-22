@@ -1,0 +1,89 @@
+GHCR/easy/gonic/draft.md	ubuntu		Go single binary with prebuilt release files, so no runtime base is needed.
+GHCR/easy/googlephotossync/draft.md	python		Python tool installed with pip, so the python base covers it.
+GHCR/easy/grafana/draft.md	python		Python script app installed into a venv on the python base.
+GHCR/easy/halflife2deathmatch/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/homebox/draft.md	ubuntu		Go binary with release tarballs and no sibling runtime.
+GHCR/easy/hurtworld/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/insurgencysandstorm/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/kiwix-serve/draft.md	ubuntu		C++ binary from kiwix-tools, available on ubuntu via apt.
+GHCR/easy/kms/draft.md	python		Pure Python server installed from requirements.txt.
+GHCR/easy/lastoasis/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/left4dead/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/lldap/draft.md	ubuntu		Rust binary shipped in release tarballs, no runtime base needed.
+GHCR/easy/longvinter/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/memories-of-mars/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/minecraft-gate/draft.md	ubuntu		Go static binary released for amd64 and arm64.
+GHCR/easy/minecraft-router/draft.md	ubuntu		Static Go binary with no runtime needs.
+GHCR/easy/miniflux/draft.md	ubuntu		Go binary with release builds for amd64 and arm64.
+GHCR/easy/monero-node/draft.md	ubuntu		Native monerod daemon shipped as official linux tarballs.
+GHCR/easy/mordhau/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/multus-cni/draft.md	ubuntu		Static Go CNI plugin binaries delivered as files, no runtime needed.
+GHCR/easy/muximux/draft.md	ubuntu		Go binary with the frontend embedded.
+GHCR/easy/navidrome/draft.md	ubuntu		Go static binary with the web UI bundled.
+GHCR/easy/nebula-sync/draft.md	ubuntu		Go binary shipped in release tarballs.
+GHCR/easy/necesse/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/node-red/draft.md	python-node		Node.js app installed with npm, with no Python needs.
+GHCR/easy/notifiarr/draft.md	ubuntu		Single Go binary fetched per architecture.
+GHCR/easy/novnc/draft.md	nginx	python	Static noVNC files served by nginx; websockify is an optional Python proxy.
+GHCR/easy/onlinecheckyourserver/draft.md	ubuntu		Shell script wrapper that needs only curl and the script itself.
+GHCR/easy/openttd/draft.md	ubuntu		Dedicated server from the official linux tarball.
+GHCR/easy/palworld/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/pavlovvr/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/plexanisync/draft.md	python		Pure Python sync tool installed with pip.
+GHCR/easy/plextraktsync/draft.md	python		Pure Python tool installed with pip.
+GHCR/easy/pocket-id/draft.md	ubuntu		Single Go binary with the frontend embedded.
+GHCR/easy/postscriptum/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/prometheus-pve-exporter/draft.md	python		Pure Python exporter published on PyPI.
+GHCR/easy/pvk-ii/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/rdtclient/draft.md	ubuntu		The aria2c daemon is an apt package on ubuntu.
+GHCR/easy/recyclarr/draft.md	ubuntu		.NET CLI on ubuntu per the .NET rule; runtime inclusion still to be confirmed.
+GHCR/easy/rtorrent-rutorrent/draft.md	ubuntu		Static Go Prometheus exporter tarball.
+GHCR/easy/rust/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/sdtd/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/sftpgo/draft.md	ubuntu		Go binary from the upstream release.
+GHCR/easy/shiori/draft.md	ubuntu		Go binary from the goreleaser release.
+GHCR/easy/shlink-web-client/draft.md	nginx	ubuntu	Static SPA dist served by nginx.
+GHCR/easy/slskd/draft.md	ubuntu		.NET server in a release zip, on ubuntu per the .NET rule.
+GHCR/easy/soft-serve/draft.md	ubuntu		Go single binary with release packages.
+GHCR/easy/solidping/draft.md	ubuntu		Go binary release built with bun UIs upstream.
+GHCR/easy/speedtest-exporter/draft.md	python		Python exporter installed with pip from requirements.
+GHCR/easy/static-web-server/draft.md	ubuntu		Rust static file server binary, not an nginx setup.
+GHCR/easy/stationeers/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/storm/draft.md	ubuntu		Go binary shipped in release tarballs.
+GHCR/easy/survivethenights/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/tachidesk-docker/draft.md	java21		Java server JAR that the draft says runs on the java21 sibling.
+GHCR/easy/timetagger/draft.md	python		Pure Python app installed with pip.
+GHCR/easy/unifi/draft.md	java17		Java app with no version named, so java17 is used by default.
+GHCR/easy/unpoller/draft.md	ubuntu		Go binary in release tarballs.
+GHCR/easy/unturned/draft.md	steamcmd		Dedicated server pulled from Steam by SteamCMD at start.
+GHCR/easy/verysync/draft.md	ubuntu		Guess: prebuilt linux tarballs with no language stated, so ubuntu.
+GHCR/easy/whoogle/draft.md	python		Python Flask app installed with pip.
+GHCR/easy/zurg/draft.md	ubuntu		Static Go binary in a linux zip.
+GHCR/hard/affine/draft.md	python-node		Node.js monorepo with no Python needs; Rust napi is a build step.
+GHCR/hard/anything-llm/draft.md	python-node		Node.js monorepo that also needs a Python collector.
+GHCR/hard/apache-musicindex/draft.md	ubuntu		Apache with an apt-installed module, so no language runtime base is needed.
+GHCR/hard/archivebox/draft.md	python		Python package installed with pip.
+GHCR/hard/authentik/draft.md	python		Python Django server is the main runtime.
+GHCR/hard/avidemux/draft.md	ubuntu		Qt/C++ GUI compiled from source, so no runtime base applies.
+GHCR/hard/backuppc/draft.md	ubuntu		Perl app served by Apache; Perl has no base, so apt packages on ubuntu.
+GHCR/hard/birdnet-go/draft.md	ubuntu		Go binary in release tarballs.
+GHCR/hard/borg-server/draft.md	python		Python pip install of borgbackup is the main runtime; sshd comes from apt.
+GHCR/hard/chevereto/draft.md	ubuntu		PHP via apt on ubuntu per the PHP rule.
+GHCR/hard/czkawka/draft.md	ubuntu		Rust binary built on ubuntu with no language runtime base.
+GHCR/hard/dashdot/draft.md	python-node		Node.js server dashboard.
+GHCR/hard/debian-apt-mirror/draft.md	ubuntu		apt-mirror with apache2 and cron, all apt packages.
+GHCR/hard/debian-bullseye/draft.md	ubuntu		Guess: Debian desktop image with no application runtime to pick.
+GHCR/hard/deconz/draft.md	ubuntu		Vendor deb package installed on ubuntu.
+GHCR/hard/dispatcharr/draft.md	python	python-node	Python Django runtime; node is needed only for the frontend build.
+GHCR/hard/electrum/draft.md	python		Pure Python wallet core; the GUI is a desktop app.
+GHCR/hard/ersatztv/draft.md	ubuntu		.NET server with self-contained release tarballs.
+GHCR/hard/filebot/draft.md	java17		JVM application with no version named, so java17 is used by default.
+GHCR/hard/firefox-syncserver/draft.md	python		Python 2.7 app, so the python base is the closest runtime; not portable as is.
+GHCR/hard/flaresolverr/draft.md	python		Python service that drives a Chromium browser.
+GHCR/hard/flashpaper/draft.md	ubuntu	nginx	PHP via apt on ubuntu per the PHP rule; nginx is the alternative web frontend.
+GHCR/hard/fluttercoin-wallet/draft.md	ubuntu		Headless fluttercoind binary from a release zip.
+GHCR/hard/frigate/draft.md	python	python-node	Python backend; node is needed only for the web UI build.
+GHCR/hard/generic-device-plugin/draft.md	ubuntu		Go daemon compiled from source.
+GHCR/hard/gpodder/draft.md	python		Pure Python core; the GUI is a desktop app.
+GHCR/hard/gravity/draft.md	ubuntu		Go server compiled from source.
+GHCR/hard/handbrake/draft.md	ubuntu		GTK app with handbrake-cli available from apt on ubuntu.

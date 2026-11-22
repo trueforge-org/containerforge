@@ -1,0 +1,40 @@
+Docker Hub/hard/kdenlive-vnc/draft.md			not found: README links kdenlive.org (not loaded, rate-limited); no docs site linked
+Docker Hub/hard/kerio-connect/draft.md			not found: kerio.com redirects to gfi.ai; no Kerio Connect docs link confirmed
+Docker Hub/hard/kodi-headless/draft.md			docs.kodi.tv and kodi.wiki returned 403 to fetch; kodi.tv candidate from README not loaded
+Docker Hub/hard/lancache-dns/draft.md	http://lancache.net/docs/containers/dns/		Docs page loaded (title Lancache-DNS | LanCache.NET); project site http://www.lancache.net linked from README, not loaded
+Docker Hub/hard/lancache-monolithic/draft.md	http://lancache.net/docs/containers/monolithic/		Docs page loaded (title Monolithic | LanCache.NET); project site not loaded
+Docker Hub/hard/lanraragi/draft.md	https://sugoi.gitbook.io/lanraragi/v/dev		Docs loaded (title LANraragi Documentation); linked demo site is not a project homepage, left empty
+Docker Hub/hard/lemur-cfssl/draft.md	https://lemur.readthedocs.io/		Docs loaded (heading Lemur); README lists no separate project website
+Docker Hub/hard/llalon-github-backup/draft.md			not found: README has no docs or project site link
+Docker Hub/hard/local-ai/draft.md	https://localai.io/docs/	https://localai.io/	Docs loaded (title LocalAI documentation); localai.io is the official project site linked from README and About
+Docker Hub/hard/mediaelch/draft.md	https://mediaelch.github.io/mediaelch-doc/about.html		Docs loaded (title About - MediaElch 2.12.0 documentation); README lists no separate project site
+Docker Hub/hard/mediagoblin/draft.md	https://docs.mediagoblin.org/en/stable/	https://mediagoblin.org/	Docs loaded (title Welcome to GNU MediaGoblin's documentation); homepage loaded
+Docker Hub/hard/misskey/draft.md			docs page misskey-hub.net/docs/for-admin/install/guides/ returned 404; misskey-hub.net candidate not loaded
+Docker Hub/hard/mixpost/draft.md	https://docs.mixpost.app/lite/		Docs loaded (title Mixpost Lite Hosting Guide); mixpost.app candidate not loaded
+Docker Hub/hard/nextpvr/draft.md			not found: wiki link on nextpvr.com is relative and unresolved; source_url is the project homepage
+Docker Hub/hard/nexus-oss/draft.md			not found: README links no documentation site; help.sonatype.com not linked
+Docker Hub/hard/nginx-proxy-manager/draft.md	https://nginxproxymanager.com/setup/	https://nginxproxymanager.com	Docs loaded (title Full Setup Instructions | Nginx Proxy Manager); site linked from README About section
+Docker Hub/hard/nocodb/draft.md			docs.nocodb.com and nocodb.com candidates from README not loaded (rate-limited)
+Docker Hub/hard/nosqlclient/draft.md			www.nosqlclient.com/docs and www.nosqlclient.com candidates from README not loaded (rate-limited)
+Docker Hub/hard/notea/draft.md			not found: README has no official docs or project site
+Docker Hub/hard/obs-ndi/draft.md	https://github.com/DistroAV/DistroAV/wiki		Wiki home loaded (title Home DistroAV Wiki); distroav.org candidate not loaded
+Docker Hub/hard/observium/draft.md	https://docs.observium.org/	https://www.observium.org/	Docs loaded (title Introduction - Observium); homepage loaded
+Docker Hub/hard/octoprint/draft.md			docs.octoprint.org and octoprint.org candidates from README not loaded (rate-limited)
+Docker Hub/hard/omada-controller/draft.md			support.omadanetworks.com candidate not loaded; source_url redirects to omadanetworks.com product page, which loaded
+Docker Hub/hard/onlyoffice-document-server/draft.md			helpcenter.onlyoffice.com and onlyoffice.com candidates from README not loaded (rate-limited)
+Docker Hub/hard/openaudible/draft.md	https://openaudible.org/documentation		Docs loaded (title OpenAudible Documentation and User Guide); source_url is the official homepage
+Docker Hub/hard/opengl-desktop-g3/draft.md			accetto.github.io/user-guide-g3 candidate from README not loaded (rate-limited)
+Docker Hub/hard/openspeedtest/draft.md			openspeedtest.com candidate from README not loaded; README links no docs site
+Docker Hub/hard/openwebrxplus/draft.md			fms.komkon.org/OWRX and openwebrx.de candidates from README not loaded (rate-limited)
+Docker Hub/hard/outline/draft.md			docs.getoutline.com and getoutline.com candidates from README not loaded (rate-limited)
+Docker Hub/hard/paperless-ngx/draft.md			source_url points to gotenberg, not paperless-ngx; gotenberg.dev/docs candidate not loaded (rate-limited)
+Docker Hub/hard/papermerge/draft.md			docs.papermerge.io/latest and papermerge.dev candidates from README not loaded (rate-limited)
+Docker Hub/hard/passwordpusherephemeral/draft.md			docs.pwpush.com and pwpush.com candidates from README not loaded (rate-limited)
+Docker Hub/hard/phoronix-test-suite/draft.md			phoronix-test-suite.com and repo documentation candidates from README not loaded
+Docker Hub/hard/photoview/draft.md			photoview.github.io candidate from README not loaded
+Docker Hub/hard/phpldapadmin/draft.md	https://github.com/leenooks/phpLDAPadmin/wiki		Wiki home loaded (title Home leenooks/phpLDAPadmin Wiki); phpldapadmin.org candidate not loaded
+Docker Hub/hard/piaware/draft.md			flightaware.com/adsb/piaware candidate from README not loaded
+Docker Hub/hard/plausible/draft.md			plausible.io/docs and plausible.io candidates from README not loaded (rate-limited)
+Docker Hub/hard/portainer/draft.md			docs.portainer.io and portainer.io candidates from README not loaded (rate-limited)
+Docker Hub/hard/post-recording/draft.md			kaashoek.com/comskip candidate from README not loaded
+Docker Hub/hard/proxmox-backup-server/draft.md			pbs.proxmox.com/docs/ candidate not loaded (rate-limited); source_url is a community repo

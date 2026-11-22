@@ -1,0 +1,40 @@
+GHCR/hard/deconz/draft.md	http://phoscon.de/rest/	https://phoscon.de/	rest/ fetched 200: deCONZ REST API reference (developer API docs only, plain http, 2018 footer); phoscon.de fetched 200 (official Phoscon landing page)
+GHCR/hard/dispatcharr/draft.md	https://dispatcharr.github.io/Dispatcharr-Docs		docs site fetched 200, title "Dispatcharr Docs"; found via search as the official docs
+GHCR/hard/electrum/draft.md	https://electrum.readthedocs.io/	https://electrum.org	readthedocs index fetched 200 ("Welcome to the Electrum Documentation!"); electrum.org fetched 200 (official homepage)
+GHCR/hard/ersatztv/draft.md	https://ersatztv.org/docs/		docs page fetched 200 (legacy ErsatzTV docs intro; current docs status unclear); homepage not fetched
+GHCR/hard/filebot/draft.md			not verified: filebot.net/manpage.html returned 301 to forum.filebot.net/cli.html (not followed); cli.html not fetched
+GHCR/hard/firefox-syncserver/draft.md	https://mozilla-services.github.io/syncstorage-rs/		fetched 200 (mdBook docs for successor syncstorage-rs); original syncserver repo is retired and points there
+GHCR/hard/flaresolverr/draft.md			not found: only the GitHub README was located in search
+GHCR/hard/flashpaper/draft.md			not found: only the GitHub README was located in search
+GHCR/hard/fluttercoin-wallet/draft.md			not found: no official Fluttercoin wallet site located in search
+GHCR/hard/frigate/draft.md	https://docs.frigate.video	https://frigate.video	docs.frigate.video fetched 200 ("Introduction | Frigate"); frigate.video fetched 200 (marketing homepage)
+GHCR/hard/generic-device-plugin/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/gpodder/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/gravity/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/handbrake/draft.md			not verified: candidate handbrake.fr/docs not fetched (rate limit)
+GHCR/hard/haste-server/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/homarr/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/homebridge/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/humhub/draft.md	https://docs.humhub.org/		fetched 200 ("HumHub Documentation", admin and development sections)
+GHCR/hard/immich/draft.md			not researched: no source_url given and stopped after WebFetch rate limit
+GHCR/hard/jdownloader2/draft.md			not verified: candidate jdownloader.org/knowledgebase not fetched (rate limit)
+GHCR/hard/kerbalspaceprogram-lmp/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/krusader/draft.md			not verified: candidate krusader.org not fetched (rate limit)
+GHCR/hard/kubernetes-reflector/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/lancache-monolithic/draft.md	https://lancache.net/docs		fetched 200 ("Quickstart | LanCache.NET"); homepage not fetched
+GHCR/hard/linkwarden/draft.md			not verified: candidate docs.linkwarden.app not fetched (rate limit)
+GHCR/hard/makemkv/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/mediainfo/draft.md			not verified: candidate mediaarea.net MediaInfo support page not fetched (rate limit)
+GHCR/hard/megasync/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/mkvcleaver/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/mkvtoolnix/draft.md			not verified: candidate mkvtoolnix.download/docs.html not fetched (rate limit)
+GHCR/hard/multus-cni/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/neko/draft.md			not verified: candidate neko.m1k1o.net docs not fetched (rate limit)
+GHCR/hard/netdata/draft.md			not verified: candidate learn.netdata.cloud not fetched (rate limit)
+GHCR/hard/neverwinternights-ee/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/nvidia-gpu-exporter/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/obsidian/draft.md			not verified: candidate help.obsidian.md not fetched (rate limit)
+GHCR/hard/organizr/draft.md			not verified: candidate docs.organizr.app not fetched (rate limit)
+GHCR/hard/paperless-ngx/draft.md			not verified: candidate docs.paperless-ngx.com not fetched (rate limit)
+GHCR/hard/photostructure/draft.md			not researched: stopped after WebFetch rate limit
+GHCR/hard/pihole/draft.md			not verified: candidate docs.pi-hole.net not fetched (rate limit)

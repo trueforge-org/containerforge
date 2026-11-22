@@ -1,0 +1,89 @@
+Docker Hub/easy/valetudo-mapper/draft.md	python-node		Node.js app run with npm start and no Python needs.
+Docker Hub/easy/venstar2mqtt/draft.md	python-node		Pure JavaScript Node MQTT bridge installed with npm.
+Docker Hub/easy/victoriametrics/draft.md	ubuntu		Go binary from release tarballs, run as a single process.
+Docker Hub/easy/vikunja/draft.md	ubuntu		Go binary from release archives, run from /app.
+Docker Hub/easy/vlmcsd-kms-server/draft.md	ubuntu		Single C daemon installed from apt or copied as a binary.
+Docker Hub/easy/vocechat-server/draft.md	ubuntu		Static musl Rust binary copied into /app.
+Docker Hub/easy/wdosg/draft.md	python-node		Node.js app installed with npm and no build step.
+Docker Hub/easy/webnut/draft.md	python		Python web UI installed from pip into /app.
+Docker Hub/easy/webp-server/draft.md	ubuntu		Go standalone linux binaries copied into /app.
+Docker Hub/easy/wyoming-openwakeword/draft.md	python		Python Wyoming server installed from pip.
+Docker Hub/easy/wyoming-piper/draft.md	python		Python Wyoming server for Piper TTS installed from pip.
+Docker Hub/easy/wyoming-whisper/draft.md	python		Python Wyoming server with faster-whisper installed from pip.
+Docker Hub/easy/xmrig/draft.md	ubuntu		Single apt package on the ubuntu base.
+Docker Hub/hard/acestream/draft.md	python	nginx	Python search.py layer on top of a closed-source engine binary, with nginx as a thin front.
+Docker Hub/hard/alist/draft.md	ubuntu		Release binary plus aria2 from apt, with no language runtime.
+Docker Hub/hard/android-8-0/draft.md	ubuntu		Guess: emulator wrapper with no language runtime and an opaque base.
+Docker Hub/hard/anonaddy/draft.md	ubuntu		PHP app needing php-fpm and mail services, with PHP provided by apt.
+Docker Hub/hard/aurora-files/draft.md	ubuntu		PHP app with nginx and php-fpm, with PHP provided by apt.
+Docker Hub/hard/auto-yt-dl/draft.md	ubuntu		Guess: no source or Dockerfile is available, so the runtime is unknown.
+Docker Hub/hard/automatic-ripping-machine/draft.md	python		Python web app, with native ripping tools installed alongside.
+Docker Hub/hard/baikal/draft.md	ubuntu		PHP CalDAV server served by nginx with php-fpm, with PHP provided by apt.
+Docker Hub/hard/barcodebuddy/draft.md	ubuntu		PHP web app with a Go supervisor binary, with PHP provided by apt.
+Docker Hub/hard/baserow/draft.md	python	python-node	Django backend is the main runtime, with a Node frontend build.
+Docker Hub/hard/bitcoinwalletgui/draft.md	ubuntu		Official daemon and GUI binaries running on a VNC desktop.
+Docker Hub/hard/blender-desktop-g3/draft.md	ubuntu		Single apt package on a VNC desktop stack.
+Docker Hub/hard/browserless-chrome/draft.md	python-node		Node.js service that drives headless Chromium.
+Docker Hub/hard/bwapp/draft.md	ubuntu		PHP app on Apache and MySQL, with PHP provided by apt.
+Docker Hub/hard/cannery/draft.md	ubuntu		Guess: Elixir app with no Elixir base, so ubuntu is the fallback.
+Docker Hub/hard/channels-dvr/draft.md	ubuntu		Vendor Linux package with no language runtime needed.
+Docker Hub/hard/chromium-desktop-g3/draft.md	ubuntu		Desktop with browser .deb packages on a VNC stack.
+Docker Hub/hard/clamav/draft.md	ubuntu		Debian package install running clamd and freshclam daemons.
+Docker Hub/hard/codeproject-ai-server/draft.md	ubuntu	python	.NET server installed from the vendor Ubuntu .deb, with Python modules as the alternative.
+Docker Hub/hard/collabora/draft.md	ubuntu		Office server binaries with chroot jails and no language runtime.
+Docker Hub/hard/cura-novnc/draft.md	ubuntu		Qt desktop AppImage extracted and run behind a VNC sibling.
+Docker Hub/hard/damselfly/draft.md	ubuntu		.NET app built with dotnet publish.
+Docker Hub/hard/deepstack/draft.md	python	ubuntu	Python AI model stack is the bulk of the app, alongside a Go server.
+Docker Hub/hard/dizquetv/draft.md	python-node		Node.js app that runs as-is from its npm package.
+Docker Hub/hard/docker/draft.md	ubuntu		Static container engine binaries from tarballs with no language runtime.
+Docker Hub/hard/dockovpn/draft.md	ubuntu		OpenVPN and easy-rsa shell scripts installed from apt.
+Docker Hub/hard/docuseal/draft.md	ubuntu		Guess: Ruby app and Ruby is not a base, so ubuntu is the fallback.
+Docker Hub/hard/drawio/draft.md	java11		Java war deployed in a servlet container on JDK 11.
+Docker Hub/hard/dropbox-by-otherguy/draft.md	ubuntu		Closed-source vendor daemon downloaded at runtime with no language runtime.
+Docker Hub/hard/ecodms/draft.md	ubuntu	java17	Guess: vendor server packages for Ubuntu, with Java implied but no version named.
+Docker Hub/hard/fabulinus/draft.md	ubuntu		Guess: closed-source inference server with no redistributable artifact.
+Docker Hub/hard/factorioservermanager/draft.md	python-node		Node manager that starts headless game servers.
+Docker Hub/hard/farmos/draft.md	ubuntu		PHP Drupal app built with composer, with PHP provided by apt.
+Docker Hub/hard/ferdi-server/draft.md	python-node		Node server with a database.
+Docker Hub/hard/ffmpeg-mkvdts2ac3/draft.md	ubuntu		Directory watcher around apt ffmpeg with no language runtime needed.
+Docker Hub/hard/fileflows/draft.md	ubuntu		.NET vendor Linux download on ubuntu with ffmpeg.
+Docker Hub/hard/fileshelter/draft.md	ubuntu		Native C++ build against glibc development packages.
+Docker Hub/hard/fireflyiii/draft.md	ubuntu		Laravel PHP app, with PHP provided by apt.
+Docker Hub/hard/firefox-desktop-g3/draft.md	ubuntu		Desktop with a browser install on a VNC stack.
+Docker Hub/hard/fireshare/draft.md	python-node	python	Flask backend plus a Node-built React client, so python-node per the reason.
+Docker Hub/hard/firezone/draft.md	ubuntu		Guess: Elixir release with no Elixir base, so ubuntu is the fallback.
+Docker Hub/hard/flexo/draft.md	ubuntu		Rust binary compiled with cargo.
+Docker Hub/hard/flextv/draft.md	python		Python app with pip requirements in /app.
+Docker Hub/hard/fmd2-wine/draft.md	ubuntu		Windows app run under Wine with Wine installed from apt.
+Docker Hub/hard/freecad-desktop-g3/draft.md	ubuntu		Single apt package on a VNC desktop stack.
+Docker Hub/hard/friendica/draft.md	ubuntu		PHP web app on Apache, with PHP provided by apt.
+Docker Hub/hard/fsm/draft.md	python-node		Node manager that starts headless game servers.
+Docker Hub/hard/genea/draft.md	nginx	ubuntu	Static files served by nginx as the main runtime.
+Docker Hub/hard/ghostfolio/draft.md	python-node		Nx monorepo with Angular and Nest backend on Node.
+Docker Hub/hard/grafana-image-renderer/draft.md	ubuntu		Go renderer driving a headless browser installed from apt.
+Docker Hub/hard/gridcoinwalletgui/draft.md	ubuntu		Qt wallet on a VNC desktop, installed from packages.
+Docker Hub/hard/h5ai/draft.md	ubuntu	nginx	PHP file browser with nginx and php-fpm, with PHP provided by apt.
+Docker Hub/hard/hoobs/draft.md	python-node		Node runtime with plugins, so python-node per the reason.
+Docker Hub/hard/hyperion-ng/draft.md	ubuntu		C++ app installed from release .deb packages.
+Docker Hub/hard/inkscape-desktop-g3/draft.md	ubuntu		Single apt package on a VNC desktop stack.
+Docker Hub/hard/intel-gpu-plugin/draft.md	ubuntu		Go device plugin binary with no language base needed beyond Go build output.
+Docker Hub/hard/ipmi-tools/draft.md	python	ubuntu	Python Flask app that shells out to ipmitool from apt.
+Docker Hub/hard/ispy-agent-dvr/draft.md	ubuntu		.NET vendor zip unpacked onto ubuntu with libgdiplus and ffmpeg.
+Docker Hub/hard/kdenlive-vnc/draft.md	ubuntu		Video editor and player from apt on a desktop.
+Docker Hub/hard/kerio-connect/draft.md	ubuntu		Vendor mail server .deb on ubuntu.
+Docker Hub/hard/kodi-headless/draft.md	ubuntu		Media app from apt with an Xvfb sibling.
+Docker Hub/hard/lancache-dns/draft.md	ubuntu		bind9 from apt plus a Go helper binary.
+Docker Hub/hard/lancache-monolithic/draft.md	nginx	ubuntu	nginx with overlay config is the main runtime.
+Docker Hub/hard/lanraragi/draft.md	ubuntu	python-node	Guess: Perl and Node app built from source, and Perl has no base.
+Docker Hub/hard/lemur-cfssl/draft.md	python	ubuntu	Python Flask app installed from pip, with the Go CFSSL service secondary.
+Docker Hub/hard/llalon-github-backup/draft.md	ubuntu		Guess: backup script with no runtime base named.
+Docker Hub/hard/local-ai/draft.md	ubuntu		Go server from release binaries on ubuntu, CPU variant only.
+Docker Hub/hard/mediaelch/draft.md	ubuntu		Qt AppImage extracted and run under a desktop.
+Docker Hub/hard/mediagoblin/draft.md	python		Pure Python app installed into a venv.
+Docker Hub/hard/misskey/draft.md	python-node		Node pnpm monorepo.
+Docker Hub/hard/mixpost/draft.md	ubuntu		Laravel PHP app, with PHP provided by apt.
+Docker Hub/hard/nextpvr/draft.md	ubuntu		Guess: vendor installer on ubuntu with no runtime base named.
+Docker Hub/hard/nexus-oss/draft.md	java17		Java app with a bundled JRE and no version named, so java17 is the default.
+Docker Hub/hard/nginx-proxy-manager/draft.md	python-node	nginx	Node backend is the app runtime, with OpenResty frontend served by nginx.
+Docker Hub/hard/nocodb/draft.md	python-node		Node app with native modules.
+Docker Hub/hard/nosqlclient/draft.md	python-node		Node bundle that needs a matching node runtime.

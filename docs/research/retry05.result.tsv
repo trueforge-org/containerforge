@@ -1,0 +1,19 @@
+Docker Hub/hard/seafile/draft.md	https://manual.seafile.com/	https://www.seafile.com/	docs: manual.seafile.com 200 (curl); website: www.seafile.com 200, differs from GitHub source
+Docker Hub/hard/ser2sock/draft.md			no official docs or homepage found beyond GitHub source; left empty
+Docker Hub/hard/slink/draft.md			not confirmed; no official docs or homepage verified beyond GitHub source
+Docker Hub/hard/songkong/draft.md	https://www.jthink.net/songkong/tutorial.jsp		tutorial page 200 (curl) linked from official jthink.net SongKong page; source_url is the same site so website empty
+Docker Hub/hard/spaceengineers/draft.md			official site spaceengineersgame.com is the source_url; no official docs site confirmed (spaceengineers.wiki.gg is community, not used)
+Docker Hub/hard/splunk/draft.md	https://help.splunk.com/en		help.splunk.com/en 200 (curl); docs.splunk.com returned 403 to curl and WebFetch; website empty since splunk.com is same site as source_url
+Docker Hub/hard/spotweb/draft.md			spotweb.nl is a domain-for-sale page (WebFetch), not official; no docs site confirmed
+Docker Hub/hard/stackedit/draft.md		https://stackedit.io/	app site stackedit.io 200 (curl), differs from GitHub source; no separate docs site confirmed
+Docker Hub/hard/standardnotes-web/draft.md	https://standardnotes.com/help	https://standardnotes.com/	help/self-hosting pages 200 (curl); homepage standardnotes.com 200; both differ from GitHub source
+Docker Hub/hard/steam-headless/draft.md			only GitHub wiki/repo found (200); source_url is Steam store, not docs; no official docs site confirmed
+Docker Hub/hard/tanoshi/draft.md			not verified; no official docs or homepage confirmed in this pass
+Docker Hub/hard/tar1090/draft.md			only GitHub repo documentation exists; left empty
+Docker Hub/hard/tasmobackup/draft.md			not verified; no official docs or homepage confirmed in this pass
+Docker Hub/hard/teslamate/draft.md	https://docs.teslamate.org/		docs.teslamate.org 200 (curl); teslamate.org redirects to the GitHub repo so no separate website
+Docker Hub/hard/tonido/draft.md			tonido.com homepage 200 but it is the source_url site and shows no confirmed docs page (help paths 404 or unresolved)
+Docker Hub/hard/trango/draft.md			trango.io returned a bare directory index; trango-self-hosted is a GitHub repo; no official docs confirmed
+Docker Hub/hard/twonky-server/draft.md			twonky.com 200 but same site as source_url; no support/docs path confirmed (twonky.com/support 404)
+Docker Hub/hard/virt-manager/draft.md		https://virt-manager.org/	project site virt-manager.org 200 (curl), differs from GitHub source; /documentation/ returned 404 so no docs page confirmed
+Docker Hub/hard/website-shot/draft.md			only GitHub repo found; left empty

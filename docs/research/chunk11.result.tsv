@@ -1,0 +1,40 @@
+GHCR/easy/amule/draft.md	https://amule-org.github.io/docs	https://amule-org.github.io/	docs site fetched (aMule Documentation); homepage linked from README About section
+GHCR/easy/anope/draft.md			not found: wiki.anope.org returned 403 and anope.org could not be fetched (rate-limited); repo docs/README has no docs site
+GHCR/easy/app-template/draft.md	https://docs.miguelndecarvalho.pt/projects/speedtest-exporter/		docs site fetched (Speedtest Exporter docs), linked from source README
+GHCR/easy/aria2/draft.md	https://aria2.github.io/manual/en/html/	https://aria2.github.io/	aria2 manual fetched (Aria2 Manual 1.37.0); homepage linked from README
+GHCR/easy/ariang/draft.md	http://ariang.mayswind.net	http://ariang.mayswind.net	project site fetched (AriaNg documentation), linked from README
+GHCR/easy/arma3/draft.md	https://community.bistudio.com/wiki/Arma_3_Dedicated_Server		Bohemia Interactive wiki page from search results; fetch rate-limited so not opened
+GHCR/easy/arma3exilemod/draft.md			not found: only the base Arma 3 server guide applies, Exile is a third-party mod
+GHCR/easy/assettocorsa/draft.md			not found: search returned only third-party guides; Kunos docs not located
+GHCR/easy/atuin/draft.md	https://docs.atuin.sh/		docs.atuin.sh fetched (redirects to /latest/, Atuin docs); docs link from README
+GHCR/easy/authelia/draft.md	https://www.authelia.com/	https://www.authelia.com/	site fetched (Authelia homepage and documentation), linked from README
+GHCR/easy/authentik/draft.md	https://docs.goauthentik.io/		docs.goauthentik.io fetched (authentik documentation); found via search
+GHCR/easy/autobrr/draft.md	https://autobrr.com/introduction	https://autobrr.com	docs fetched (autobrr Introduction), linked from README
+GHCR/easy/avorion/draft.md			not found: only an unofficial Fandom wiki and hosting-provider guides surfaced
+GHCR/easy/backrest/draft.md	https://garethgeorge.github.io/backrest/introduction/getting-started	https://garethgeorge.github.io/backrest/	docs fetched (Backrest Getting Started), project site linked from README About section
+GHCR/easy/barotrauma/draft.md	https://barotraumagame.com/wiki/Serversettings.xml		official Barotrauma wiki page from search results; fetch rate-limited so not opened
+GHCR/easy/bitmagnet/draft.md	https://bitmagnet.io/	https://bitmagnet.io/	site fetched (bitmagnet home), which links to its setup and guides pages
+GHCR/easy/blocky/draft.md	https://0xerr0r.github.io/blocky/latest/		Blocky documentation fetched (Welcome, Blocky), linked from README
+GHCR/easy/calendarr/draft.md			not found: README links only to Docker, Slack and GitHub pages, no project docs site
+GHCR/easy/changedetection-io/draft.md	https://changedetection.io/tutorials	https://changedetection.io	tutorials index fetched (changedetection.io); project site linked from README About section
+GHCR/easy/chivalry-medievalwarfare/draft.md			not found: only a Steam store page is known
+GHCR/easy/chroma/draft.md	https://docs.trychroma.com/		docs fetched (Chroma Introduction), linked from README
+GHCR/easy/citadel-forgedwithfire/draft.md			not found: only a Steam store page is known
+GHCR/easy/colonysurvival/draft.md			not found: only a Steam store page is known
+GHCR/easy/conanexiles/draft.md			not found: only a Steam store page is known
+GHCR/easy/craftopia/draft.md			not found: only a Steam store page is known
+GHCR/easy/cs2/draft.md			not found: Valve CS2 server page not opened (fetch rate-limited); only a Steam store page is known
+GHCR/easy/csgo/draft.md			not found: only a Steam store page is known
+GHCR/easy/cssource/draft.md			not found: only a Steam store page is known
+GHCR/easy/cstrike1-6/draft.md			not found: only a Steam store page is known
+GHCR/easy/cstrikeconditionzero/draft.md			not found: only a Steam store page is known
+GHCR/easy/ctfd/draft.md	https://docs.ctfd.io		docs site fetched (CTFd Docs), linked from README
+GHCR/easy/dayofdefeatsource/draft.md			not found: only a Steam store page is known
+GHCR/easy/daysofwar/draft.md			not found: only a Steam store page is known
+GHCR/easy/dayz/draft.md	https://community.bistudio.com/wiki/DayZ:Hosting_a_Linux_Server		Bohemia Interactive wiki hosting guide from search results; fetch rate-limited so not opened
+GHCR/easy/ddns-go/draft.md	https://github.com/jeessy2/ddns-go/wiki		project wiki fetched (ddns-go Home), linked from README; no separate docs site
+GHCR/easy/ddns-updater/draft.md	https://github.com/qdm12/ddns-updater/tree/master/docs		repo docs folder fetched (per-provider docs), linked from README; no separate docs site
+GHCR/easy/dell-idrac-fan-controller/draft.md			not found: README has no project docs site; only Dell KB articles and forum links
+GHCR/easy/dontstarvetogether/draft.md			not found: Klei docs not located; only community wikis surfaced
+GHCR/easy/fistfuloffrags/draft.md			not found: only a Steam store page is known
+GHCR/easy/fluidd/draft.md	https://docs.fluidd.xyz		docs site fetched (Fluidd documentation), linked from README

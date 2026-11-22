@@ -1,0 +1,89 @@
+Docker Hub/medium/go-playground/draft.md	ubuntu		Go server built from source with a WASM and node-built UI; a plain Go binary runs on ubuntu.
+Docker Hub/medium/goaccess/draft.md	ubuntu	nginx	goaccess is installed from apt on ubuntu, and nginx is the alternative if serving the HTML report becomes the main runtime.
+Docker Hub/medium/grafana/draft.md	ubuntu		Go app shipped as a per-arch package unpacked into /app, so no language base is needed.
+Docker Hub/medium/guacamole/draft.md	java21		The input names jdk21 for a Java war run in a servlet container.
+Docker Hub/medium/guide2go/draft.md	ubuntu		Go CLI compiled from source on ubuntu.
+Docker Hub/medium/hetzner-ddns/draft.md	ubuntu		Go updater with a small static build stage on ubuntu.
+Docker Hub/medium/imgpush/draft.md	python		Python app managed with uv from pyproject and a lock file, so the python base fits.
+Docker Hub/medium/impostor-server/draft.md	ubuntu		.NET app with no language base, so the .NET runtime is added on ubuntu per the default rule.
+Docker Hub/medium/iyuuplus/draft.md	ubuntu		PHP app that installs PHP via apt on ubuntu.
+Docker Hub/medium/jelu/draft.md	java17		The input names the java17 sibling for a Spring Boot jar.
+Docker Hub/medium/jenkins/draft.md	java17		The input names Java 17 and the java17 sibling for a war file.
+Docker Hub/medium/joplin-server/draft.md	python-node		Node server only, so python-node provides the node runtime.
+Docker Hub/medium/kapowarr/draft.md	python		Python app installed with pip into /app, which the input says fits the python sibling.
+Docker Hub/medium/kitchenowl/draft.md	ubuntu		No application details were given, so ubuntu is a guess.
+Docker Hub/medium/lama-cleaner/draft.md	python		Python app installed with pip, so the python base fits.
+Docker Hub/medium/libreddit/draft.md	ubuntu		Rust release binary runs directly on ubuntu.
+Docker Hub/medium/lingva/draft.md	python-node		Next.js Node app of pure JavaScript, so python-node provides node.
+Docker Hub/medium/livestreamdvr/draft.md	python-node		Needs both a Python server and a Node client, and python-node covers both stacks.
+Docker Hub/medium/lyrion-music-server/draft.md	ubuntu		Perl server installed from the vendor .deb, so ubuntu with apt packages fits.
+Docker Hub/medium/mailpile/draft.md	python		Legacy Python app rebuilt in a Python 3 venv, so the python base fits.
+Docker Hub/medium/maloja/draft.md	python		Python scrobbling server installed from requirements, and the input names the python sibling.
+Docker Hub/medium/mattermost/draft.md	ubuntu		Go server from an official release tarball unpacked into /app.
+Docker Hub/medium/media-roller/draft.md	ubuntu	python	Go service built in a Go stage with yt-dlp from release; python is the alternative if the Python tooling must run from the base.
+Docker Hub/medium/metabase/draft.md	java25		The input names Java 25 and the java25 sibling for a jar.
+Docker Hub/medium/metatube/draft.md	python		Python app that the input says runs on the python sibling with apt ffmpeg.
+Docker Hub/medium/mininote/draft.md	python-node		Node 22 webapp of pure JavaScript, so python-node provides node.
+Docker Hub/medium/modsecurity-crs/draft.md	ubuntu		Apache with the web application firewall module from apt on ubuntu, since no Apache base exists.
+Docker Hub/medium/mojopaste/draft.md	ubuntu		Perl app installed with apt perl and cpanm on ubuntu.
+Docker Hub/medium/multi-scrobbler/draft.md	python-node		TypeScript Node app built in a build stage, so python-node provides node.
+Docker Hub/medium/mymediaforalexa/draft.md	ubuntu		Vendor .deb files unpacked with dpkg on ubuntu.
+Docker Hub/medium/myspeed/draft.md	python-node		Node app with a frontend build step, so python-node provides node.
+Docker Hub/medium/nightscout/draft.md	python-node		Node 22 app built with npm and webpack, so python-node provides node.
+Docker Hub/medium/nitter/draft.md	ubuntu		Nim source build producing a native binary, so ubuntu fits.
+Docker Hub/medium/notarius/draft.md	java8		The input names jre8 for a Java WAR run in a servlet container.
+Docker Hub/medium/ollama/draft.md	ubuntu		Go binary shipped as a release tarball with bundled libraries.
+Docker Hub/medium/openhab/draft.md	java21		The input names java21 for a Java distro run from /app.
+Docker Hub/medium/openra/draft.md	ubuntu		Release AppImage extracted on amd64 and C# built with the .NET SDK on arm64, both on ubuntu.
+Docker Hub/medium/owi2plex/draft.md	python		Python tool installed with pip; the cron wrappers need a supervisor, which is a packaging concern.
+Docker Hub/medium/paperless-ngx/draft.md	java21	java25	Java tika-server jar; the input allows java21 or java25 and java21 is the conservative pick.
+Docker Hub/medium/pasta/draft.md	python-node		Node.js app built with npm, so python-node provides node.
+Docker Hub/medium/peanut/draft.md	python-node		Next.js app built with pnpm, so python-node provides node.
+Docker Hub/medium/peppermint/draft.md	python-node		Node API and client build, so python-node provides node.
+Docker Hub/medium/pgadmin/draft.md	python		Python web app installed from PyPI on the python base.
+Docker Hub/medium/photo-stream/draft.md	nginx	ubuntu	Jekyll site built once and served as static files, so nginx serves it; ubuntu is the alternative if the build runs there.
+Docker Hub/medium/photoprism/draft.md	ubuntu		Go binary from an upstream tarball chosen per TARGETARCH, with MariaDB as a separate service.
+Docker Hub/medium/pigallery2/draft.md	python-node		Node.js app with native modules built with npm, so python-node provides node.
+Docker Hub/medium/pinry/draft.md	python		Django app installed with pip on the python base.
+Docker Hub/medium/plant-it/draft.md	java17		Java server jar with no Java version named, so java17 is the default.
+Docker Hub/medium/plaxt/draft.md	ubuntu		Go OAuth bridge compiled from source with a modern Go toolchain.
+Docker Hub/medium/plex-meta-manager/draft.md	python		Python script app installed with pip requirements.
+Docker Hub/medium/plexripper/draft.md	ubuntu		ASP.NET backend on the .NET runtime, added on ubuntu per the default rule; Node is only used in the build.
+Docker Hub/medium/portainer/draft.md	ubuntu		Go server from upstream release tarballs unpacked into /app.
+Docker Hub/medium/pretend-youre-xyzzy/draft.md	java17		Java web app with no Java version named, so java17 is the default.
+Docker Hub/medium/promcord/draft.md	java17	java21	Upstream runs openjdk 16, and java17 is the nearest supported Java runtime.
+Docker Hub/medium/protonmail-bridge/draft.md	ubuntu		Vendor .deb on amd64 and a Go build on arm64, both on ubuntu.
+Docker Hub/medium/prpdf/draft.md	python	ubuntu	Python tool with pip requirements on the python base, with jbig2enc and Ghostscript from apt.
+Docker Hub/medium/pwm/draft.md	java8		The input names java8 for a Java WAR run in a servlet container.
+Docker Hub/medium/qbitrr/draft.md	python	python-node	Python package installed with pip, with a webui built in a node stage.
+Docker Hub/medium/quiz-game/draft.md	nginx	python-node	Node build produces static files that nginx serves.
+Docker Hub/medium/red-discordbot/draft.md	python	java17	Python bot installed with pip; the full variant adds Java with no version named, so java17 is the alternative.
+Docker Hub/medium/redisinsight/draft.md	python-node		Node.js server with a React UI built in a node stage, so python-node provides node.
+Docker Hub/medium/redmine/draft.md	ubuntu		Ruby on Rails app with Ruby added on ubuntu, since no Ruby base exists.
+Docker Hub/medium/remotely/draft.md	ubuntu		ASP.NET Core 8 app with the .NET 8 runtime added on ubuntu.
+Docker Hub/medium/rss-to-telegram/draft.md	python-node		Node.js bot built with npm, so python-node provides node.
+Docker Hub/medium/rsshub/draft.md	python-node		Node.js app built with pnpm, so python-node provides node.
+Docker Hub/medium/rustpad/draft.md	ubuntu		Rust server built with cargo on ubuntu, with node used only for the frontend build.
+Docker Hub/medium/searxng/draft.md	python		Python app installed with uv into a venv, and the input names the python sibling.
+Docker Hub/medium/seedsync/draft.md	python		Python app installed with pip into /app, and the input names the python sibling.
+Docker Hub/medium/semaphore/draft.md	ubuntu	python	Go server from a release tarball; python is the alternative for the pip packages it bundles.
+Docker Hub/medium/serpbear/draft.md	python-node		Next.js Node 22 app built at image build time, so python-node provides node.
+Docker Hub/medium/servas/draft.md	ubuntu		PHP app with PHP installed via apt on ubuntu, run as one PHP server process.
+Docker Hub/medium/shapeshifter-obfuscator/draft.md	ubuntu		Go binary compiled from source on ubuntu.
+Docker Hub/medium/signal-cli-rest-api/draft.md	java25	ubuntu	The input names the java25 sibling for the JVM child process; the Go REST server makes ubuntu the alternative.
+Docker Hub/medium/simply-shorten/draft.md	java17		The input says java17 replaces the EOL JDK 14.
+Docker Hub/medium/slash/draft.md	ubuntu		Go binary with a node-built UI copied onto ubuntu.
+Docker Hub/medium/snippet-box/draft.md	python-node		Old Node app with npm install and a React build, so python-node provides node.
+Docker Hub/medium/st-reborn-server/draft.md	ubuntu		Per-arch release tarball unpacked into /app with no compile.
+Docker Hub/medium/strapi/draft.md	python-node		Strapi Node app whose admin build runs at image build time, so python-node provides node.
+Docker Hub/medium/synctube/draft.md	python-node		Node-served app whose Haxe output is JavaScript, so python-node provides node.
+Docker Hub/medium/teedy-docs/draft.md	java11		The input names java11 for a Java WAR run on Jetty.
+Docker Hub/medium/teedy/draft.md	java11		The input names the java11 sibling for a Java WAR run on Jetty.
+Docker Hub/medium/tileserver-gl/draft.md	python-node		Node.js tile server installed with npm, so python-node provides node.
+Docker Hub/medium/traccar/draft.md	java17	java21	The input says Java 17 or later is needed, so java17 is the minimum that fits.
+Docker Hub/medium/troddit/draft.md	python-node		Next.js app built with npm in a node stage, so python-node provides node.
+Docker Hub/medium/tubearchivist-redisjson/draft.md	ubuntu		In-memory data server installed from its official apt repo on ubuntu.
+Docker Hub/medium/twofauth/draft.md	ubuntu		PHP app with PHP and extensions installed via apt on ubuntu.
+Docker Hub/medium/universal-media-server/draft.md	java17		Java media server with no Java version named, so java17 is the default.
+Docker Hub/medium/unmanic/draft.md	python	ubuntu	Python app installed into /app on the python base, with ffmpeg from apt.
+Docker Hub/medium/uptime-kuma/draft.md	python-node		Node app built with npm, so python-node provides node.

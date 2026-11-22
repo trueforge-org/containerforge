@@ -1,0 +1,19 @@
+Docker Hub/hard/ffmpeg-mkvdts2ac3/draft.md	https://ffmpeg.org/documentation.html		Confirmed HTTP 200 (curl). Homepage is source_url, so website empty.
+Docker Hub/hard/fileflows/draft.md	https://fileflows.com/docs		Confirmed HTTP 200 (curl). Homepage is source_url, so website empty.
+Docker Hub/hard/inkscape-desktop-g3/draft.md	https://wiki.inkscape.org/wiki/Main_Page	https://inkscape.org/	Wiki and inkscape.org confirmed HTTP 200. inkscape.org/doc/ redirects to the homepage, so not used.
+Docker Hub/hard/ispy-agent-dvr/draft.md	https://www.ispyconnect.com/docs/agent/		Confirmed HTTP 200 (redirects to /docs/agent/about). Homepage is source_url, so website empty.
+Docker Hub/hard/kdenlive-vnc/draft.md	https://docs.kdenlive.org/en/	https://kdenlive.org/	Both confirmed HTTP 200 (curl).
+Docker Hub/hard/kodi-headless/draft.md			Left empty. kodi.tv and kodi.wiki return HTTP 403 to both curl and WebFetch, so they could not be verified.
+Docker Hub/hard/lancache-dns/draft.md	https://lancache.net/docs/	https://lancache.net/	Both confirmed HTTP 200 (curl).
+Docker Hub/hard/lancache-monolithic/draft.md	https://lancache.net/docs/	https://lancache.net/	Both confirmed HTTP 200 (curl).
+Docker Hub/hard/lemur-cfssl/draft.md	https://lemur.readthedocs.io/en/latest/		Confirmed HTTP 200 (curl). No separate official homepage found, so website empty.
+Docker Hub/hard/mediaelch/draft.md	https://github.com/Komet/MediaElch/wiki	https://www.mediaelch.de/	Wiki confirmed HTTP 200 (it is the project's GitHub wiki, used as docs). mediaelch.de confirmed HTTP 200.
+Docker Hub/hard/misskey/draft.md	https://misskey-hub.net/docs/	https://misskey-hub.net/	Both confirmed HTTP 200 (curl).
+Docker Hub/hard/mixpost/draft.md	https://docs.mixpost.app/	https://mixpost.app/	Both confirmed HTTP 200 (curl).
+Docker Hub/hard/nocodb/draft.md	https://nocodb.com/docs/product	https://nocodb.com/	docs.nocodb.com redirects to nocodb.com/docs/product (HTTP 200). nocodb.com confirmed HTTP 200.
+Docker Hub/hard/nosqlclient/draft.md			Left empty. nosqlclient.com returns HTTP 403, and nosqlclient.com/docs redirected to an unrelated domain, so it was not used. No verified official site.
+Docker Hub/hard/obs-ndi/draft.md	https://github.com/DistroAV/DistroAV/wiki	https://distroav.org/	Wiki confirmed HTTP 200 (only project docs found; distroav.org/docs returns 404). distroav.org confirmed HTTP 200.
+Docker Hub/hard/octoprint/draft.md	https://docs.octoprint.org/en/main/	https://octoprint.org/	Both confirmed HTTP 200 (docs redirected to /en/main/).
+Docker Hub/hard/omada-controller/draft.md	https://www.omadanetworks.com/en/support/	https://www.omadanetworks.com/	tp-link.com link redirects to omadanetworks.com. Support page and homepage confirmed HTTP 200.
+Docker Hub/hard/onlyoffice-document-server/draft.md	https://helpcenter.onlyoffice.com/docs/	https://www.onlyoffice.com/	Both confirmed HTTP 200 (curl).
+Docker Hub/hard/opengl-desktop-g3/draft.md			Left empty. The only documentation found is the source GitHub README, and no separate docs site was found.

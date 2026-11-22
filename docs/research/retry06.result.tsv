@@ -1,0 +1,19 @@
+Docker Hub/hard/wisemapping/draft.md		https://www.wisemapping.com/	README names wisemapping.com as the hosted site (curl 200). No separate docs site; repo docs only, so docs left empty.
+Docker Hub/hard/xen-orchestra/draft.md	https://docs.xen-orchestra.com/	https://xen-orchestra.com/	README links official docs and project site (curl 200 for both).
+Docker Hub/hard/xware/draft.md	https://help.xunlei.com/		Xunlei customer service center linked from xunlei.com (curl 200). No dedicated product manual found; website equals source_url so left empty.
+Docker Hub/hard/zilean/draft.md	https://ipromknight.github.io/zilean/		README links documentation site (curl 200). No separate homepage.
+Docker Hub/medium/adguard-home/draft.md	https://adguard-dns.io/kb/adguard-home/getting-started/	https://adguard.com/en/adguard-home/overview.html	README links getting-started guide and project overview page (curl 200; overview redirected to /en/ path on adguard.com).
+Docker Hub/medium/airdcpp-webclient/draft.md	http://airdcpp.net/docs/installation/installation.html	http://airdcpp.net/	README links airdcpp-web.github.io docs and homepage; both redirect to airdcpp.net (same project) and return 200. Effective URLs recorded.
+Docker Hub/medium/bender/draft.md			README has no official docs or homepage; only the author's personal site, which is not project documentation. Left empty.
+Docker Hub/medium/bitcoinunlimited/draft.md		https://www.bitcoinunlimited.info/	README "Website" link (curl 200). No separate docs site.
+Docker Hub/medium/blog/draft.md			README has no official docs or homepage; only third-party links. Left empty.
+Docker Hub/medium/fenrus/draft.md			README has no docs or homepage link; only Patreon, .NET download, and Docker links. Left empty.
+Docker Hub/medium/flame/draft.md	https://github.com/pawelmalak/flame/wiki		README points to project GitHub wiki as its documentation (curl 200). No separate homepage.
+Docker Hub/medium/fotosho/draft.md			README has no docs or homepage; only the Docker Hub listing. Left empty.
+Docker Hub/medium/gaseous-server/draft.md	https://github.com/gaseous-project/gaseous-server/wiki		README points to project GitHub wiki as its documentation (curl 200). Repo serves as homepage, so website left empty.
+Docker Hub/medium/go-playground/draft.md			README names goplay.tools as homepage, but curl returned 403, so it is not confirmed. In-repo deployment docs only. Left empty.
+Docker Hub/medium/guide2go/draft.md			README has no project docs or homepage; only Schedules Direct and Go dependency links. Left empty.
+Docker Hub/medium/hetzner-ddns/draft.md			README has no official docs or homepage; only Hetzner DNS console and Docker Hub links. Left empty.
+Docker Hub/medium/imgpush/draft.md			README has no official docs or homepage; only third-party links. Left empty.
+Docker Hub/medium/iyuuplus/draft.md	http://doc.iyuu.cn/	https://www.iyuu.cn/	README links usage/API docs at doc.iyuu.cn and project blog at iyuu.cn (curl 200 for both).
+Docker Hub/medium/jelu/draft.md	https://bayang.github.io/jelu-web/		README labels this "Official documentation" (curl 200). No separate homepage.

@@ -1,0 +1,27 @@
+Docker Hub/medium/wekan/draft.md	mongodb		stable/wekan/values.yaml: mongodb enabled by default and MONGO_URL is set unconditionally; Wekan requires MongoDB.
+Docker Hub/medium/wordpress/draft.md	one of: mariadb, mysql		stable/wordpress/values.yaml: mariadb enabled and DB env wired; WordPress runs only on MySQL-family databases.
+Docker Hub/medium/yourls/draft.md	one of: mariadb, mysql		stable/yourls/values.yaml: mariadb enabled and YOURLS_DB_* env set unconditionally; YOURLS requires a MySQL-family database.
+GHCR (linuxserver)/easy/quassel-core/draft.md		postgresql	stable/quassel-core/values.yaml: postgresql block enabled and DB_BACKEND forced to PostgreSQL; app defaults to embedded SQLite, so optional per rule (chart as shipped forces PostgreSQL).
+GHCR (linuxserver)/medium/clarkson/draft.md	mariadb		stable/clarkson/values.yaml: mariadb enabled and MYSQL_HOST wired; upstream Clarkson requires MySQL 5.7 (web search, upstream unmaintained).
+GHCR (linuxserver)/medium/fleet/draft.md	mariadb		stable/fleet/values.yaml: mariadb enabled and DB password/JDBC secret wired; app is MySQL-based, engine support at app level not verified.
+GHCR/easy/app-template/draft.md		mariadb, valkey, mongodb	stable/app-template/values.yaml: redis (valkey), mariadb and mongodb all enabled: false by default; generic template, none required.
+GHCR/easy/atuin/draft.md	postgresql		stable/atuin/values.yaml: postgresql block enabled and ATUIN_DB_URI wired; Atuin server supports only PostgreSQL (app knowledge, not fetched).
+GHCR/easy/authelia/draft.md		postgresql, valkey	stable/authelia/values.yaml: postgresql and redis enabled by default; Authelia can use local SQLite storage and in-memory sessions, so both optional.
+GHCR/easy/bitmagnet/draft.md	postgresql		stable/bitmagnet/values.yaml: postgresql block enabled and POSTGRES_* env wired; bitmagnet requires PostgreSQL.
+GHCR/easy/ctfd/draft.md		valkey	stable/ctfd/values.yaml: redis enabled and REDIS_URL set; CTFd falls back to SQLite and filesystem cache without Redis (docs.ctfd.io via web search).
+GHCR/easy/gitea/draft.md		postgresql, memcached	stable/gitea/values.yaml: postgresql and memcached enabled; Gitea defaults to embedded SQLite and in-memory cache (app knowledge, not fetched).
+GHCR/easy/homebox/draft.md		postgresql	stable/homebox/values.yaml: postgresql enabled and HBOX_DATABASE_DRIVER forced to postgres; Homebox defaults to embedded SQLite.
+GHCR/easy/lldap/draft.md		postgresql	stable/lldap/values.yaml: postgresql enabled and LLDAP_database_url wired; LLDAP defaults to embedded SQLite.
+GHCR/easy/miniflux/draft.md	postgresql		stable/miniflux/values.yaml: postgresql enabled and DATABASE_URL wired; Miniflux supports PostgreSQL only.
+GHCR/easy/shiori/draft.md		postgresql	stable/shiori/values.yaml: postgresql enabled and SHIORI_DBMS=postgresql; Shiori defaults to embedded SQLite.
+GHCR/easy/solidping/draft.md		postgresql	stable/solidping/values.yaml: postgresql enabled and SP_DB_TYPE=postgres; third-party listing says SQLite is the default (search result only, official docs not fetched).
+GHCR/hard/affine/draft.md	postgresql	valkey	stable/affine/values.yaml: postgresql enabled and DATABASE_URL wired; AFFiNE needs pgvector PostgreSQL (docs.affine.pro via search). UNRESOLVED: official compose runs Redis but no page confirms it can be omitted; treated as optional.
+GHCR/hard/authentik/draft.md	postgresql	geoipupdate, ldap, radius, proxy, k8s-sidecar	stable/authentik/values.yaml: postgresql enabled; authentik requires PostgreSQL (app knowledge, not fetched); geoip, LDAP, RADIUS, proxy outposts and k8s sidecar are optional helpers.
+GHCR/hard/chevereto/draft.md	mariadb		stable/chevereto/values.yaml: mariadb enabled and wired; Chevereto requires a MySQL-family database (app knowledge, not fetched).
+GHCR/hard/dispatcharr/draft.md		alpine	stable/dispatcharr/values.yaml: alpine is only the setup-postgres-dirs init container preparing directories for the embedded PostgreSQL in the same pod; not a runtime service.
+GHCR/hard/firefox-syncserver/draft.md		postgresql	stable/firefox-syncserver/values.yaml: postgresql enabled and SQL URI wired; syncserver defaults to SQLite per Docker Hub image docs (web search), PostgreSQL optional.
+GHCR/hard/linkwarden/draft.md	postgresql		stable/linkwarden/values.yaml: postgresql enabled and DATABASE_URL wired; Linkwarden requires PostgreSQL (app knowledge, not fetched).
+GHCR/hard/multus-cni/draft.md		crane, cni	stable/multus-cni/values.yaml: crane and talos cni images used only by the talos-plugin-installer init container, which is conditional on installCni; multus runs without them.
+GHCR/hard/paperless-ngx/draft.md	valkey	postgresql, gotenberg, tika	stable/paperless-ngx/values.yaml: redis enabled; official config docs list Redis broker as required (web search). UNRESOLVED: sources conflict on default database (sqlite vs postgresql); database treated as optional, tika and gotenberg optional for office/email features.
+GHCR/hard/rdtclient/draft.md		aria2	stable/rdtclient/values.yaml: aria2 enabled by default; UNRESOLVED: web search found no rdt-client docs on whether a built-in downloader exists; treated as optional.
+GHCR/hard/romm/draft.md	one of: mariadb, mysql, postgresql	valkey	stable/romm/values.yaml: postgresql enabled and DB_* wired; RomM docs (docs.romm.app via search) list MariaDB, MySQL and PostgreSQL as supported. UNRESOLVED: Redis/Valkey role for background tasks vs embedded fallback unconfirmed; treated as optional.

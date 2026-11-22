@@ -1,0 +1,32 @@
+GHCR/medium/tracks/draft.md	https://getontracks.org/manual	https://getontracks.org/	Fetched getontracks.org/manual: title "Manual - Introduction - Tracks", links to TracksApp repo. Homepage domain from same manual; homepage not fetched.
+GHCR/medium/trilium-notes/draft.md	https://docs.triliumnotes.org/user-guide/		Search result docs.triliumnotes.org/user-guide (official Trilium User Guide). Root fetch redirected; not fetched directly.
+GHCR/medium/tt-rss/draft.md		https://tt-rss.org/	Search result tt-rss.org (official site). No user docs page confirmed; /docs/API-Reference.html is API-only, not recorded.
+GHCR/medium/twtxt/draft.md	https://twtxt.readthedocs.io/		Fetched twtxt.readthedocs.io: "Welcome to twtxt!", project twtxt.
+GHCR/medium/urban-terror/draft.md			not found. Search gave no official FrozenSand docs; urbanterror.info not verified.
+GHCR/medium/vaultwarden/draft.md	https://github.com/dani-garcia/vaultwarden/wiki		Fetched project wiki (title "Home"), states it is an unofficial Bitwarden server implementation by dani-garcia.
+GHCR/medium/watcharr/draft.md			not found. Searches returned no Watcharr documentation.
+GHCR/medium/wizarr/draft.md	https://docs.wizarr.dev/		Fetched docs.wizarr.dev: "Welcome to the Wizarr Documentation".
+GHCR/medium/xonotic/draft.md	https://gitlab.com/xonotic/xonotic/-/wikis/home	https://xonotic.org/	Search results: official GitLab wiki (wikis/home) and xonotic.org (FAQ/download pages). Not fetched directly.
+GHCR/medium/youtubedl-material/draft.md	https://github.com/Tzahi12345/YoutubeDL-Material/wiki		Search result: project GitHub wiki linked from README. Wiki not opened; no separate docs site found.
+GHCR/very-hard/mend-renovate/draft.md	https://docs.renovatebot.com/		Fetched docs.renovatebot.com: "Mend Renovate CLI Docs", links to renovatebot/renovate.
+LSCR/hard/blender/draft.md	https://docs.blender.org/manual/en/latest/		Fetched docs.blender.org manual: "Blender 5.3 Manual".
+LSCR/hard/kdenlive/draft.md	https://docs.kdenlive.org/	https://kdenlive.org	Fetched docs.kdenlive.org: "Kdenlive 26.08 Manual", which links to kdenlive.org (homepage link not fetched).
+LSCR/hard/webtop/draft.md	https://docs.linuxserver.io/images/docker-webtop/		Search result docs.linuxserver.io/images/docker-webtop (LinuxServer docs). Fetch was rate-limited.
+LSCR/medium/mylar/draft.md			not found. Search pointed to mylarcomics.com as official site in README, but it was not opened or verified.
+Other registries/easy/openobserve/draft.md	https://openobserve.ai/docs/	https://openobserve.ai/	Fetched openobserve.ai/docs: "OpenObserve Documentation". Homepage domain from same site; root not fetched.
+Other registries/easy/tauticord/draft.md			not found. Docs are in-repo files on Codeberg; not verified.
+Other registries/hard/odoo/draft.md	https://www.odoo.com/documentation	https://www.odoo.com/	Fetched odoo.com/documentation: "Odoo Documentation - Odoo 20.0". Homepage domain from same site; root not fetched.
+Other registries/hard/xwiki/draft.md	https://www.xwiki.org/xwiki/bin/view/Documentation/		Search result xwiki.org Documentation hub (official). Not fetched (rate-limited).
+Other registries/medium/archiveteam-warrior/draft.md	https://wiki.archiveteam.org/index.php/ArchiveTeam_Warrior		Search result: official ArchiveTeam wiki Warrior page. Not fetched (rate-limited).
+Other registries/medium/crafty-4/draft.md	https://docs.craftycontrol.com/	https://craftycontrol.com/	Fetched docs.craftycontrol.com: "Crafty Documentation", links to craftycontrol.com.
+Other registries/medium/external-dns/draft.md	https://kubernetes-sigs.github.io/external-dns/		Search result kubernetes-sigs.github.io/external-dns (official docs). Not fetched (rate-limited).
+Other registries/medium/mongo-express/draft.md			not found. No separate docs site; official README in GitHub repo only.
+Other registries/medium/send/draft.md			not found. No confirmed official docs page; GitLab README is the only source seen.
+Other registries/medium/snapshot-controller/draft.md	https://kubernetes-csi.github.io/docs/external-snapshotter.html		Search result kubernetes-csi.github.io external-snapshotter docs. Not fetched (rate-limited).
+Quay/hard/aistor/draft.md	https://docs.min.io/aistor		Search results: docs.min.io/aistor (MinIO AIStor documentation). Not fetched (rate-limited).
+Quay/hard/hexchat/draft.md	https://hexchat.readthedocs.io/		Search result hexchat.readthedocs.io (HexChat documentation). Website hexchat.github.io is ambiguous (project archived), so left empty.
+Quay/hard/invidious/draft.md			not found. Fetch of docs.invidious.io failed (connection refused); not confirmed.
+Quay/hard/jupyter/draft.md	https://docs.jupyter.org/en/latest/		Fetched docs.jupyter.org: "Project Jupyter Documentation".
+Quay/medium/csi-addons-controller/draft.md		https://csi-addons.github.io/	Search result csi-addons.github.io (project site for CSI-Addons spec). Repo docs/ not opened; docs left empty.
+Quay/medium/jupyter/draft.md	https://docs.jupyter.org/en/latest/		Fetched docs.jupyter.org: "Project Jupyter Documentation".
+Quay/medium/volsync/draft.md	https://volsync.readthedocs.io/		Fetched volsync.readthedocs.io: "VolSync" docs, links to backube/volsync.

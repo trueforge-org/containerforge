@@ -1,0 +1,17 @@
+GHCR/medium/minecraft-java/draft.md		left empty: help.minecraft.net and minecraft.net download page timed out (curl and WebFetch), could not confirm a docs site
+GHCR/medium/openbooks/draft.md		left empty: no official docs site found beyond the GitHub README
+GHCR/medium/shorturl/draft.md		left empty: only the git.mills.io source repository found, no separate docs or homepage
+GHCR/medium/static/draft.md		left empty: only the git.mills.io source repository found, no separate docs or homepage
+GHCR/medium/stun-turn-server/draft.md	https://github.com/coturn/coturn/wiki	https://coturn.net/	docs: coturn wiki (curl 200); website: coturn.net (curl 200)
+GHCR/medium/terraria-tshock/draft.md	https://tshock.readme.io/docs/getting-started		docs: tshock.readme.io (curl 200, redirects to getting-started); tshock.co redirects to GitHub so not used as website
+GHCR/medium/urban-terror/draft.md		https://www.urbanterror.info/home/	website: urbanterror.info (curl 200); no separate docs site confirmed
+GHCR/medium/youtubedl-material/draft.md	https://github.com/Tzahi12345/YoutubeDL-Material/wiki		docs: project GitHub wiki (curl 200); no separate homepage confirmed
+LSCR/hard/webtop/draft.md	https://docs.selkies.io/		docs: docs.selkies.io (curl 200, redirected from selkies-project.github.io/selkies); no separate homepage
+Other registries/easy/tauticord/draft.md		left empty: only the Codeberg repository found (curl 200), no separate docs site
+Other registries/hard/xwiki/draft.md	https://www.xwiki.org/xwiki/bin/view/Documentation/	https://www.xwiki.org/xwiki/bin/view/Main/WebHome	docs: xwiki.org documentation (curl 200); website: xwiki.org (curl 200)
+Other registries/medium/archiveteam-warrior/draft.md	https://wiki.archiveteam.org/index.php/ArchiveTeam_Warrior	https://warriorhq.archiveteam.org/	docs: ArchiveTeam wiki page (curl 200); website: warriorhq.archiveteam.org (curl 200)
+Other registries/medium/external-dns/draft.md	https://kubernetes-sigs.github.io/external-dns/		docs: external-dns site (curl 200); the source repo is the only other page
+Other registries/medium/mongo-express/draft.md		left empty: only the GitHub repository and README found (curl 200), no separate docs site
+Other registries/medium/snapshot-controller/draft.md	https://kubernetes-csi.github.io/docs/snapshot-controller.html	https://kubernetes-csi.github.io/docs/	docs: snapshot-controller page (curl 200); website: kubernetes-csi docs hub (curl 200)
+Quay/hard/aistor/draft.md	https://docs.min.io/aistor/		docs: docs.min.io/aistor (curl 200, redirected from docs.min.io/enterprise/aistor-object-store/); min.io product page equals source_url so no website
+Quay/hard/invidious/draft.md		left empty: docs.invidious.io and invidious.io timed out (curl) and WebFetch failed with ECONNREFUSED, could not confirm

@@ -1,0 +1,40 @@
+GHCR/hard/ztcuui-aio/draft.md
+GHCR/hard/zwavejs2mqtt/draft.md		not confirmed: zwave-js.github.io/zwave-js-ui appeared in search but WebFetch did not confirm it
+GHCR/medium/actualserver/draft.md	https://actualbudget.org/docs/	https://actualbudget.org/	docs Introduction page and homepage verified via WebFetch
+GHCR/medium/agregarr/draft.md		not found: search returned no official docs
+GHCR/medium/apt-cacher-ng/draft.md	https://www.unix-ag.uni-kl.de/~bloch/acng/html/		Apt-Cacher-NG User Manual verified via WebFetch; homepage is the source URL
+GHCR/medium/audiobookshelf/draft.md	https://www.audiobookshelf.org/docs	https://www.audiobookshelf.org/	docs Introduction page and homepage verified via WebFetch
+GHCR/medium/aurral/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/batnoter/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/bentopdf/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/booklore/draft.md		not confirmed: booklore-app.github.io/booklore-docs appeared in search but returned 404 on fetch
+GHCR/medium/bookorbit/draft.md		not confirmed: bookorbit.app and docs appeared in search but WebFetch was rate-limited
+GHCR/medium/bytestash/draft.md		not found: docs are the GitHub README and wiki only
+GHCR/medium/cloudcommander/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/comet/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/commento-plusplus/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/convertx/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/convos/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/corekeeper/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/counterstrike2d/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/dashy/draft.md		not confirmed: DNS lookup failed for dashy.to
+GHCR/medium/docker-hub-rss/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/double-take/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/etherpad/draft.md		not confirmed: DNS lookup failed for etherpad.org
+GHCR/medium/fivem/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/game-server-watcher/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/gamevault-backend/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/gatus/draft.md	https://gatus.io/docs	https://gatus.io	docs page titled "Docs | Gatus" and homepage titled "Gatus: The Most Advanced Status Page For Developers" fetched via WebFetch
+GHCR/medium/golinks/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/hammond/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/hasty-paste/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/headlamp/draft.md		not confirmed: DNS lookup failed for headlamp.dev
+GHCR/medium/homepage/draft.md		not confirmed: DNS lookup failed for gethomepage.dev
+GHCR/medium/homer/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/humhub/draft.md		not confirmed: DNS lookup failed for docs.humhub.org
+GHCR/medium/jellystat/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/jts3servermod/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/kanboard/draft.md		not confirmed: DNS lookup failed for docs.kanboard.org
+GHCR/medium/komga/draft.md	https://komga.org/docs/introduction		docs Introduction page verified via WebFetch; homepage not fetched
+GHCR/medium/kromgo/draft.md		not researched: stopped after network and rate-limit errors
+GHCR/medium/kubelet-csr-approver/draft.md		not researched: stopped after network and rate-limit errors

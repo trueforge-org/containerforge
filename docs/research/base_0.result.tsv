@@ -1,0 +1,89 @@
+Docker Hub/easy/adminer/draft.md	ubuntu		Single-file PHP app that needs only PHP from apt on the ubuntu base.
+Docker Hub/easy/amcrest2mqtt/draft.md	python		Python bridge installed with pip into /app, configured by environment variables.
+Docker Hub/easy/androiddebugbridge/draft.md	ubuntu		Shell wrapper around adb, which is a single apt package on the ubuntu base.
+Docker Hub/easy/anki-sync-server/draft.md	ubuntu		Prebuilt Rust server binary unpacked into /app on the ubuntu base.
+Docker Hub/easy/answer/draft.md	ubuntu		Prebuilt Go server binary with data under /config.
+Docker Hub/easy/apache-webdav/draft.md	ubuntu		Apache httpd installed from apt on the ubuntu base.
+Docker Hub/easy/appdaemon/draft.md	python		Pure Python home automation app installed with pip into /app.
+Docker Hub/easy/arksurvivalevolved/draft.md	steamcmd		Dedicated game server installed at runtime through SteamCMD.
+Docker Hub/easy/avm-exporter/draft.md	python		Python Prometheus exporter installed with pip.
+Docker Hub/easy/bitcoin-node/draft.md	ubuntu		Official glibc release tarball of bitcoind unpacked into /app.
+Docker Hub/easy/bitcoind/draft.md	ubuntu		Official glibc release tarball of Bitcoin Core copied into /app.
+Docker Hub/easy/chowdown/draft.md	nginx	ubuntu	Static site with no runtime code, served by nginx.
+Docker Hub/easy/chronograf/draft.md	ubuntu		Go single binary extracted from the vendor package.
+Docker Hub/easy/cloudflared/draft.md	ubuntu		Single Go binary installed on the ubuntu base.
+Docker Hub/easy/clusterissuer/draft.md	ubuntu		Placeholder static binary that needs no runtime, so the ubuntu base is enough.
+Docker Hub/easy/core-keeper-dedicated-server/draft.md	steamcmd		Dedicated server downloaded as a Steam depot through SteamCMD.
+Docker Hub/easy/cyberchef/draft.md	nginx	ubuntu	Static browser bundle served by nginx.
+Docker Hub/easy/ddns-route53/draft.md	ubuntu		Single Go binary run from the release tarball.
+Docker Hub/easy/discordgsm/draft.md	python		Python Discord bot installed with pip into /app.
+Docker Hub/easy/dispatch/draft.md	ubuntu		Prebuilt Go binary from the release tarball.
+Docker Hub/easy/dispatcharr/draft.md	ubuntu		Plain Alpine userland helper image that only needs busybox tools, which the ubuntu base covers.
+Docker Hub/easy/dockerregistry/draft.md	ubuntu		Go registry binary from the release tarball.
+Docker Hub/easy/domoticz/draft.md	ubuntu		Prebuilt C++ release tarball installed on the ubuntu base.
+Docker Hub/easy/external-ip/draft.md	python	ubuntu	Shell loop that depends on apprise installed with pip, so the python base fits.
+Docker Hub/easy/external-service/draft.md	ubuntu		Placeholder minirootfs image with no application, so the ubuntu base plus a keepalive command suffices.
+Docker Hub/easy/factorio/draft.md	ubuntu		Headless server vendor tarball unpacked into /app.
+Docker Hub/easy/filebrowser/draft.md	ubuntu		Static Go binary from the release tarball.
+Docker Hub/easy/github-backup/draft.md	python		Python script installed with pip into /app.
+Docker Hub/easy/glances/draft.md	python		Single pip install of glances in a venv under /app.
+Docker Hub/easy/glauth/draft.md	ubuntu		Static Go LDAP server binary.
+Docker Hub/easy/godaddy-ddns/draft.md	python		Python updater that pip installs its dependencies.
+Docker Hub/easy/gokapi/draft.md	ubuntu		Single Go binary from the release zip.
+Docker Hub/easy/guacamole/draft.md	ubuntu		guacd daemon installed from apt on the ubuntu base.
+Docker Hub/easy/guacd/draft.md	ubuntu		guacd daemon installed from apt on the ubuntu base.
+Docker Hub/easy/hassconfigurator/draft.md	python		Python web editor installed from PyPI with pip.
+Docker Hub/easy/hastebin/draft.md	python-node		Node server installed with npm, and the python-node base provides Node.js.
+Docker Hub/easy/hexo-blog/draft.md	python-node		Hexo static site tooling installed with npm, so only Node.js is needed.
+Docker Hub/easy/homelablabelmaker/draft.md	nginx	ubuntu	Static label-maker files served by nginx.
+Docker Hub/easy/icloudpd/draft.md	python		Python CLI installed from PyPI with pip.
+Docker Hub/easy/import-ics/draft.md	python		Python web app installed with pip from requirements.txt.
+Docker Hub/easy/invitarr/draft.md	python		Python Discord bot installed with pip from requirements.
+Docker Hub/easy/ipfs/draft.md	ubuntu		Go daemon unpacked from the official release tarball.
+Docker Hub/easy/keeweb/draft.md	nginx	ubuntu	Static web app files served by nginx.
+Docker Hub/easy/kitana/draft.md	python		Pure Python tool installed with pip -r requirements.txt.
+Docker Hub/easy/linkwallet/draft.md	ubuntu		Prebuilt Go binary from the release tarball.
+Docker Hub/easy/mango/draft.md	ubuntu		Static prebuilt binary from the GitHub release.
+Docker Hub/easy/memcached/draft.md	ubuntu		memcached installed from apt on the ubuntu base.
+Docker Hub/easy/metallb-config/draft.md	ubuntu		Placeholder static hello binary that needs no runtime.
+Docker Hub/easy/mosdns/draft.md	ubuntu		Go DNS forwarder binary from the release zip.
+Docker Hub/easy/multus-cni/draft.md	ubuntu		Static Go CLI from the release tarball.
+Docker Hub/easy/namecheap-ddns/draft.md	python		Python script that needs only requests, installed with pip.
+Docker Hub/easy/newyearcountdownclock/draft.md	nginx	ubuntu	Static HTML and JS site served by nginx.
+Docker Hub/easy/ntfy/draft.md	ubuntu		Go single binary from upstream release packages.
+Docker Hub/easy/owncast/draft.md	ubuntu		Go server from the release zip, with ffmpeg from apt.
+Docker Hub/easy/pastey/draft.md	python		Flask app installed with pip from requirements.
+Docker Hub/easy/picoshare/draft.md	ubuntu		Go binary from the release tarball.
+Docker Hub/easy/plex-auto-languages/draft.md	python		Python script installed from requirements with pip.
+Docker Hub/easy/plex-playlist-sync/draft.md	python		Python script installed from requirements with pip.
+Docker Hub/easy/plex-utills/draft.md	python	ubuntu	Python app installed with pip plus two apt packages, so the python base fits.
+Docker Hub/easy/posterr/draft.md	python-node		Node app installed with npm, so the python-node base provides the runtime.
+Docker Hub/easy/ps3netsrv/draft.md	ubuntu		Prebuilt release binary on amd64 and a small C build on arm64, with no interpreter needed.
+Docker Hub/easy/quickshare/draft.md	ubuntu		Go binary from the release zip.
+Docker Hub/easy/radarrsync/draft.md	python		Python script with pip requirements, run as one process.
+Docker Hub/easy/radicale/draft.md	python		Pure Python CalDAV/CardDAV server installed with pip into a venv.
+Docker Hub/easy/rcon-webadmin/draft.md	python-node		Node web admin installed with npm, so the python-node base provides Node.js.
+Docker Hub/easy/redis/draft.md	ubuntu		redis-server installed from apt on the ubuntu base.
+Docker Hub/easy/reg/draft.md	ubuntu		Registry Go binary from the release tarball.
+Docker Hub/easy/restic-rest-server/draft.md	ubuntu		Go REST server from the release tarball.
+Docker Hub/easy/rickroll/draft.md	nginx	ubuntu	Static video page served by nginx.
+Docker Hub/easy/s3backup/draft.md	python		Backup script that installs s3cmd with pip.
+Docker Hub/easy/s3sync/draft.md	python		Shell and pip wrapper that installs awscli with pip.
+Docker Hub/easy/satisfactory/draft.md	steamcmd		Dedicated server downloaded at runtime through SteamCMD.
+Docker Hub/easy/sheetable/draft.md	ubuntu		Go backend binary from the release tarball.
+Docker Hub/easy/shortipy/draft.md	python		Flask app installed with pip from requirements.txt.
+Docker Hub/easy/slack-invite/draft.md	python-node		Node app installed with npm, so only Node.js is needed.
+Docker Hub/easy/sqlite-web/draft.md	python		Flask web UI for SQLite installed with pip.
+Docker Hub/easy/sshwifty/draft.md	ubuntu		Go binary with embedded UI from the release tarball.
+Docker Hub/easy/storj-node/draft.md	ubuntu		Go storage node unpacked from the release zip.
+Docker Hub/easy/suistartpage/draft.md	nginx	ubuntu	Static start page served by nginx.
+Docker Hub/easy/tagspaces/draft.md	nginx	ubuntu	Static web bundle served by nginx.
+Docker Hub/easy/teamspeak3/draft.md	ubuntu		Closed vendor server tarball unpacked into /app.
+Docker Hub/easy/telethon-downloader/draft.md	python		Python downloader installed with pip from requirements.txt.
+Docker Hub/easy/threadfin/draft.md	ubuntu		Go binary from the release downloads.
+Docker Hub/easy/traefik-forward-auth/draft.md	ubuntu		Small Go binary from the release download.
+Docker Hub/easy/traggo/draft.md	ubuntu		Go server binary from the release tarball.
+Docker Hub/easy/traktarr/draft.md	python		Pure Python app installed with pip -r requirements.txt.
+Docker Hub/easy/truenas-exporter/draft.md	ubuntu		Prometheus Go exporter binary from the release tarball.
+Docker Hub/easy/tvhproxy/draft.md	python		Single Flask script installed with pip.
+Docker Hub/easy/uptimerobot-prometheus/draft.md	python	ubuntu	Pure Python exporter that needs requests, installed with pip.

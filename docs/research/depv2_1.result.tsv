@@ -1,0 +1,27 @@
+Docker Hub/hard/weblate/draft.md	postgresql, valkey		Upstream docs/admin/install.rst requires PostgreSQL 15+ and Valkey/Redis for cache and task queue; chart wires both unconditionally.
+Docker Hub/hard/wisemapping/draft.md	postgresql		Chart _configmap.tpl hard-wires the postgres JDBC driver with no alternative; UNVERIFIED: upstream engine support (bitbucket source not reachable).
+Docker Hub/hard/zilean/draft.md	postgresql		values.yaml enables postgres with no alternative and no toggle; UNVERIFIED: upstream README did not state engine support.
+Docker Hub/medium/blog/draft.md		postgresql	Upstream m1k1o/blog README: runs on SQLite by default, MySQL or Postgres optional; chart wires postgres only.
+Docker Hub/medium/cloudreve/draft.md		postgresql, valkey	Chart sets Database.Type postgres and Redis.Server in templates; UNVERIFIED: upstream sqlite default and optional Redis not confirmed in the fetched README.
+Docker Hub/medium/etesync/draft.md		postgresql, valkey	Upstream etebase_server/settings.py defaults to sqlite3 and sets Redis only when redis_uri is configured (chart values.yaml enables both).
+Docker Hub/medium/flowise/draft.md		postgresql	Upstream packages/server/src/DataSource.ts supports sqlite with local database.sqlite; docker/.env.example comments out DATABASE_TYPE; chart sets DATABASE_TYPE postgres.
+Docker Hub/medium/gaseous-server/draft.md	one of: mariadb, mysql		Upstream gaseous-project README: MariaDB preferred, MySQL supported, no embedded alternative; chart wires mariadb.
+Docker Hub/medium/grafana/draft.md		postgresql, k8s-sidecar	Upstream conf/defaults.ini uses sqlite3 by default (postgres via GF_DATABASE_TYPE optional); sidecar only provisions dashboards.
+Docker Hub/medium/guacamole/draft.md		postgresql, guacd	Upstream Guacamole can run without a DB via user-mapping; chart db-wait initContainer gates startup on postgres, so it is effectively needed in this chart. guacd is a separate remote-desktop backend; the web app starts without it.
+Docker Hub/medium/joplin-server/draft.md		postgresql	Upstream packages/server/README.md: SQLite is the default and PostgreSQL is for production use; chart wires postgres.
+Docker Hub/medium/mattermost/draft.md	postgresql		Upstream mattermost README states it relies on PostgreSQL; chart sets MM_SQLSETTINGS_DRIVERNAME postgres.
+Docker Hub/medium/metabase/draft.md		postgresql	Upstream docs/configuring-metabase/config-file.md lists h2 as the embedded engine (Metabase default when no DB is configured); chart wires postgres via MB_DB_TYPE.
+Docker Hub/medium/nitter/draft.md	valkey		Upstream README: Redis is required for caching; chart enables redis without a toggle.
+Docker Hub/medium/ollama/draft.md		open-webui	open-webui (uiImage) is a UI container in the same chart; the Ollama API runs without it.
+Docker Hub/medium/peppermint/draft.md	postgresql		Upstream README compose uses postgres as the only database; chart wires postgres unconditionally.
+Docker Hub/medium/photoprism/draft.md		mariadb	Chart sets PHOTOPRISM_DATABASE_DRIVER mysql; UNVERIFIED: upstream README did not mention the embedded SQLite default, decided from upstream knowledge.
+Docker Hub/medium/plant-it/draft.md	mariadb	valkey	Chart wires MySQL/MariaDB env (no alternative in upstream README); Redis role via CACHE_HOST not verified, treated as optional cache.
+Docker Hub/medium/portainer/draft.md		portainer-ee	values.yaml defines beImage (portainer-ee) but no chart template references it; the app runs as portainer-ce.
+Docker Hub/medium/redmine/draft.md		postgresql	Upstream docker-library README documents an SQLite3 mode (testing, not multi-user) with a database container recommended; chart wires postgres.
+Docker Hub/medium/rsshub/draft.md		valkey, chrome	Upstream lib/config.ts: CACHE_TYPE defaults to memory, so Redis is optional; browserless chrome is only needed for browser-based routes.
+Docker Hub/medium/semaphore/draft.md		postgresql	Upstream util/config.go: SEMAPHORE_DB_DIALECT defaults to sqlite; mysql and postgres are optional.
+Docker Hub/medium/servas/draft.md		mariadb	Upstream README: SQLite is the preferred mode and needs no DB container; MariaDB/MySQL are optional.
+Docker Hub/medium/strapi/draft.md		postgresql	Upstream README lists SQLite as a supported database alongside PostgreSQL and MySQL; chart sets DATABASE_CLIENT postgres. Default client not confirmed in fetched text.
+Docker Hub/medium/teedy/draft.md		postgresql	Upstream README: embedded H2 database is used when no PostgreSQL config is provided.
+Docker Hub/medium/traccar/draft.md		postgresql	Upstream setup/traccar.xml defaults to embedded H2 (database.driver org.h2.Driver); chart sets postgres driver.
+Docker Hub/medium/twofauth/draft.md		postgresql	Upstream config/database.php supports sqlite but defaults to mysql; chart wires pgsql. Optional is a judgment call since sqlite is an embedded engine the app accepts.

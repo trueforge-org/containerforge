@@ -1,0 +1,19 @@
+GHCR/easy/barotrauma/draft.md		https://barotraumagame.com/	docs empty: barotraumagame.com/wiki returns 403 to curl and WebFetch; homepage https://barotraumagame.com/ confirmed 200 via curl (website only)
+GHCR/easy/cs2/draft.md	https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers	https://www.counter-strike.net/	docs: Valve wiki page confirmed 200 via curl; website: counter-strike.net confirmed 200 via curl
+GHCR/easy/dayz/draft.md			empty: dayz.com 403 via curl and WebFetch; no other official site confirmed
+GHCR/easy/ddns-go/draft.md	https://github.com/jeessy2/ddns-go/wiki		docs: project GitHub wiki confirmed 200 via curl (no separate docs site); website empty (repo only)
+GHCR/easy/ddns-updater/draft.md	https://github.com/qdm12/ddns-updater		docs: GitHub repo/README confirmed 200 via curl; no other docs site found (wiki URL redirects to repo)
+GHCR/easy/gatus/draft.md	https://gatus.io/docs	https://gatus.io/	docs and homepage confirmed 200 via curl
+GHCR/easy/gitea/draft.md	https://docs.gitea.com/	https://about.gitea.com/	both confirmed 200 via curl
+GHCR/easy/gonic/draft.md	https://github.com/sentriz/gonic		docs: GitHub repo/README confirmed 200 via curl; gonic.sentriz.io does not resolve; no other docs site
+GHCR/easy/googlephotossync/draft.md	https://github.com/gilesknap/gphotos-sync		docs: GitHub repo confirmed 200 via curl; gilesknap.github.io/gphotos-sync returned 404
+GHCR/easy/hurtworld/draft.md			empty: hurtworld.com and www.hurtworld.com fail TLS handshake via curl; no official site confirmed
+GHCR/easy/insurgencysandstorm/draft.md	https://developer.valvesoftware.com/wiki/Insurgency:_Sandstorm_Dedicated_Server		docs: Valve wiki page confirmed 200 via curl; insurgencysandstorm.com returns 520 (curl and WebFetch), so website left empty
+GHCR/easy/kiwix-serve/draft.md	https://wiki.kiwix.org/wiki/Kiwix-serve	https://kiwix.org/en/	wiki page confirmed 200 via curl; kiwix.org confirmed 200 via curl (redirects to kiwix.org/en/)
+GHCR/easy/kms/draft.md	https://github.com/Py-KMS-Organization/py-kms		docs: GitHub repo/README confirmed 200 via curl; no other docs site found
+GHCR/easy/lastoasis/draft.md			empty: lastoasis.com does not resolve; www.lastoasis.com timed out; no official site confirmed
+GHCR/easy/left4dead/draft.md	https://developer.valvesoftware.com/wiki/Left_4_Dead_Dedicated_Server	https://www.l4d.com/	docs: Valve wiki page confirmed 200 via curl; website l4d.com confirmed 200 via curl
+GHCR/easy/minecraft-gate/draft.md	https://gate.minekube.com/	https://minekube.com/	docs confirmed 200 via curl; minekube.com confirmed 200 via curl (redirects to connect.minekube.com, company site)
+GHCR/easy/notifiarr/draft.md	https://notifiarr.wiki/	https://notifiarr.com/	both confirmed 200 via curl
+GHCR/easy/openttd/draft.md	https://wiki.openttd.org/en/	https://www.openttd.org/	both confirmed 200 via curl
+GHCR/easy/prometheus-pve-exporter/draft.md	https://github.com/prometheus-pve/prometheus-pve-exporter		docs: GitHub repo/README confirmed 200 via curl; prometheus-pve.github.io returned 404

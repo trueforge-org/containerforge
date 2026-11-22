@@ -1,0 +1,19 @@
+Docker Hub/medium/lama-cleaner/draft.md	https://www.iopaint.com/install/download_model	https://www.iopaint.com/	README links iopaint.com (homepage and install docs); both curl 200. Project renamed to IOPaint.
+Docker Hub/medium/lingva/draft.md		https://lingva.ml/	README lists lingva.ml as official instance (curl 200). No separate docs site; docs are in repo only, so docs empty.
+Docker Hub/medium/myspeed/draft.md	https://docs.myspeed.dev/setup/linux	https://myspeed.dev/	README links docs.myspeed.dev (Linux setup, curl 200) and myspeed.dev (curl 200).
+Docker Hub/medium/paperless-ngx/draft.md			source_url is apache/tika, not the paperless-ngx project, so mismatch noted. docs.paperless-ngx.com and paperless-ngx.com returned 403 to WebFetch and curl (also after retry); left empty.
+Docker Hub/medium/peppermint/draft.md		https://peppermint.sh/	README links peppermint.sh (curl 200 with browser UA; 403 without UA). docs.peppermint.sh does not resolve (DNS failure), so docs empty.
+Docker Hub/medium/plex-meta-manager/draft.md	https://kometa.wiki/en/latest/		README links kometa.wiki (Kometa wiki, hosted on Read the Docs; curl 200). Kometa wiki is the project's homepage too, so website empty.
+Docker Hub/medium/redisinsight/draft.md	https://redis.io/docs/latest/operate/redisinsight/	https://redis.io/insight/	README About links redis.io/insight/ (curl 200); docs page redis.io/docs/latest/operate/redisinsight/ (curl 200).
+Docker Hub/medium/redmine/draft.md	https://www.redmine.org/projects/redmine/wiki	https://www.redmine.org/	README links redmine.org as official website (curl 200); project wiki curl 200.
+Docker Hub/medium/yacy/draft.md	https://yacy.net/download_installation/	https://yacy.net/	README links yacy.net (curl 200) and its installation page (curl 200).
+Docker Hub/medium/yourls/draft.md	https://yourls.org/docs	https://yourls.org/	README cites docs.yourls.org, which redirects to yourls.org/docs (same project, curl 200); yourls.org curl 200.
+GHCR (linuxserver)/easy/minetest/draft.md	https://docs.luanti.org/	https://www.luanti.org/	Source is minetest/minetest; README links luanti.org (project renamed Luanti) and docs.luanti.org; both curl 200. minetest.net not linked.
+GHCR (linuxserver)/easy/pyload/draft.md		https://pyload.net/	README About links pyload.net (curl 200). No separate docs site found, docs empty.
+GHCR (linuxserver)/hard/chromium/draft.md	https://www.chromium.org/developers/	https://www.chromium.org/	Source is chromium.googlesource.com; README links chromium.org as project site (curl 200). Only developer docs exist, so docs points to developers index (curl 200).
+GHCR (linuxserver)/hard/cloud9/draft.md		https://c9.github.io/core/	README links c9.github.io/core (curl 200). docs.c9.io and c9.io redirect to AWS Cloud9, not project docs, so rejected; docs empty.
+GHCR (linuxserver)/medium/booksonic-air/draft.md		https://booksonic.org/	README links booksonic.org (curl 200). No separate docs site found, docs empty.
+GHCR (linuxserver)/medium/dillinger/draft.md		https://dillinger.io/	About section links dillinger.io (curl 200). No docs site in README, docs empty.
+GHCR (linuxserver)/medium/headphones/draft.md	https://github.com/rembo10/headphones/wiki		README links the project GitHub wiki for installation and usage (curl 200). No separate homepage, so website empty.
+GHCR/easy/anope/draft.md		https://www.anope.org/	README links anope.org and www.anope.org (curl 200). wiki.anope.org returned 403 (not confirmed), docs.anope.org does not resolve, so docs empty.
+GHCR/easy/arma3/draft.md		https://arma3.com/	source_url is Valve wiki (developer.valvesoftware.com returned 403). arma3.com is Bohemia Interactive official site (curl 200). community.bistudio.com dedicated server pages returned 403 (not confirmed), so docs empty.

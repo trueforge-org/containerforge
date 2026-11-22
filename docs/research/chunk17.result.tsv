@@ -1,0 +1,40 @@
+GHCR/medium/leaf2mqtt/draft.md			not found: README links only to GitHub repos and GitLab credits
+GHCR/medium/libredb-studio/draft.md		https://libredb.org	homepage linked in README About (libredb.org); no separate docs site, docs are in repo docs/
+GHCR/medium/linkding/draft.md	https://linkding.link/		linkding.link loaded (title "linkding | linkding"); linked from README
+GHCR/medium/littlelink/draft.md			not found: README links only to a live demo and a tutorial
+GHCR/medium/maintainerr/draft.md	https://docs.maintainerr.info/	https://maintainerr.info	docs.maintainerr.info loaded ("Introduction | Maintainerr Documentation"); homepage linked in README About
+GHCR/medium/mealie/draft.md	https://mealie.io/		mealie.io loaded, titled "Mealie documentation"; docs.mealie.io redirects there
+GHCR/medium/meshcentral/draft.md	https://docs.meshcentral.com/	https://meshcentral.com	docs.meshcentral.com loaded ("MeshCentral Documentation"); homepage linked in README
+GHCR/medium/metube/draft.md			not found: docs are the GitHub wiki only
+GHCR/medium/mindustry/draft.md	https://mindustrygame.github.io/wiki	https://mindustrygame.github.io	wiki loaded ("Welcome to the Mindustry Wiki"); homepage in repo About sidebar
+GHCR/medium/minecraft-bedrock/draft.md			not found: source URL is the official Mongang download page; docs fetch timed out
+GHCR/medium/minecraft-java/draft.md			not found: source URL is the official download page; fetch timed out
+GHCR/medium/minecraft-proxy/draft.md		https://papermc.io/software/velocity	papermc.io/software/velocity linked in README (not fetched); no docs page verified
+GHCR/medium/muse/draft.md			not found: README has no project site, only third-party links
+GHCR/medium/n8n/draft.md	https://docs.n8n.io	https://n8n.io	docs.n8n.io loaded ("n8n Docs"); n8n.io linked in README
+GHCR/medium/nullserv/draft.md			not found: README links only to golang.org and GitHub
+GHCR/medium/ollama/draft.md	https://docs.openwebui.com/	https://openwebui.com	source is open-webui; docs.openwebui.com loaded ("Open WebUI"); openwebui.com in repo About sidebar
+GHCR/medium/openbooks/draft.md		https://evan-buss.github.io/openbooks/	project site listed in repo About sidebar (not fetched separately); no docs site
+GHCR/medium/pingvin-share/draft.md	https://stonith404.github.io/pingvin-share/		documentation link in README; GitHub Pages site loads (title "Pingvin Share"), content thin
+GHCR/medium/pocketmine-mp/draft.md	https://doc.pmmp.io/en/rtfd/installation.html	https://pmmp.io	doc.pmmp.io installation page loaded ("Installation & Updating"); pmmp.io linked in README
+GHCR/medium/podgrab/draft.md			not found: README links only to GitHub, the author's socials and a donation page
+GHCR/medium/poznote/draft.md			not found: poznote.com linked in README but connection refused, so not recorded
+GHCR/medium/profilarr/draft.md	https://dictionarry.dev/		README points to dictionarry.dev for setup docs; loads (redirects to v2.dictionarry.dev, title "Dictionarry"), not explicitly Profilarr-titled
+GHCR/medium/qinglong/draft.md	https://qinglong.online/guide/getting-started/installation-guide	https://qinglong.online	guide page loaded (title "青龙文档"); qinglong.online linked in README and repo About
+GHCR/medium/quake3/draft.md	https://ioquake3.org/help/players-guide/	https://ioquake3.org	ioquake3.org linked in README (Player's Guide link, not fetched separately)
+GHCR/medium/redm/draft.md	http://docs.fivem.net/docs/	https://redm.net/	docs.fivem.net/docs loaded ("Home - Cfx Documentation") and linked in fivem README as shared docs; redm.net linked in README (not fetched)
+GHCR/medium/retrobot/draft.md			not found: README links only to RetroArch, Discord and Discord developer pages
+GHCR/medium/reubah/draft.md			not found: README has no external project site
+GHCR/medium/rss-bridge/draft.md	https://rss-bridge.github.io/rss-bridge/index.html		"Full documentation" link in README; loads (title "RSS-Bridge")
+GHCR/medium/shelfmark/draft.md			not found: README links only to third-party tools
+GHCR/medium/shorturl/draft.md			not found: README links only to Gitea, Bitcask and GoDoc; homepage check rate-limited
+GHCR/medium/sia-daemon/draft.md	https://docs.sia.tech/	https://sia.tech	docs.sia.tech loaded ("Welcome to Sia"); sia.tech linked in README
+GHCR/medium/smtp-relay/draft.md	https://www.exim.org/docs.html	https://www.exim.org/	"Full Documentation" and "Project Site" links in README (not fetched directly)
+GHCR/medium/socials/draft.md			not found: README links only to GitHub resources
+GHCR/medium/spoolman/draft.md	https://donkie.github.io/Spoolman/		loaded, but it is the REST API reference only (ReDoc); README links the wiki for other docs
+GHCR/medium/starmade/draft.md	https://starmadepedia.net	https://www.star-made.org/	star-made.org loaded (StarMade logo, trademark notice; likely official); starmadepedia.net wiki linked from it (not fetched)
+GHCR/medium/static/draft.md			not found: homepage check rate-limited; README not checked
+GHCR/medium/streamystats/draft.md			not found: source_url empty; repo README only links DOCKERLESS.md in the repo
+GHCR/medium/stun-turn-server/draft.md		https://coturn.github.io/	project homepage link in README Links section (not fetched separately); no docs site
+GHCR/medium/terraria-tshock/draft.md	https://ikebukuro.tshock.co/		"new TShock documentation" link in README (not fetched separately)
+GHCR/medium/tracearr/draft.md	https://docs.tracearr.com	https://tracearr.com	docs.tracearr.com loaded ("Tracearr Documentation"); tracearr.com linked in README

@@ -1,0 +1,89 @@
+GHCR/hard/haste-server/draft.md	python-node		Node.js app with no Python needs, so python-node provides the runtime.
+GHCR/hard/homarr/draft.md	python-node		Next.js app on Node.js, with redis and nginx bundled as extra processes.
+GHCR/hard/homebridge/draft.md	python-node		Node.js homebridge run under a process supervisor, so Node is the main runtime.
+GHCR/hard/humhub/draft.md	nginx	ubuntu	nginx frontend serving static HumHub assets; the PHP-FPM half is a separate container.
+GHCR/hard/immich/draft.md	ubuntu		No description given, so ubuntu is a guess.
+GHCR/hard/jdownloader2/draft.md	java17		Java app with no version named, so java17 is used by default.
+GHCR/hard/kerbalspaceprogram-lmp/draft.md	ubuntu		.NET server with no .NET base, so the runtime is installed on ubuntu.
+GHCR/hard/krusader/draft.md	ubuntu		Desktop file manager installed from apt packages.
+GHCR/hard/kubernetes-reflector/draft.md	ubuntu		.NET controller, so the .NET runtime is installed on ubuntu.
+GHCR/hard/lancache-monolithic/draft.md	ubuntu		Self-contained .NET tool and shell scripts, which fit ubuntu.
+GHCR/hard/linkwarden/draft.md	python-node		Next.js Node.js monorepo is the main runtime; the Rust binary is an extra piece.
+GHCR/hard/makemkv/draft.md	ubuntu		Vendor binaries built with make, so ubuntu covers it.
+GHCR/hard/mediainfo/draft.md	ubuntu		Compiled CLI and GUI tools installed on ubuntu.
+GHCR/hard/megasync/draft.md	ubuntu		Qt desktop client installed from a deb package.
+GHCR/hard/mkvcleaver/draft.md	ubuntu		Windows exe run under Wine, installed with apt on ubuntu.
+GHCR/hard/mkvtoolnix/draft.md	ubuntu		Compiled C++ tools installed from apt.
+GHCR/hard/multus-cni/draft.md	ubuntu		Prebuilt Go binaries from a release tarball.
+GHCR/hard/neko/draft.md	ubuntu		No description given, so ubuntu is a guess.
+GHCR/hard/netdata/draft.md	ubuntu		Prebuilt C monitoring agent installer, no language base needed.
+GHCR/hard/neverwinternights-ee/draft.md	ubuntu		Closed-source native server that needs i386 libraries, so ubuntu fits.
+GHCR/hard/nvidia-gpu-exporter/draft.md	ubuntu		Prebuilt Go exporter installed from a deb.
+GHCR/hard/obsidian/draft.md	ubuntu		Electron app shipped as an AppImage and run on ubuntu.
+GHCR/hard/organizr/draft.md	ubuntu	nginx	PHP web app, so PHP via apt on ubuntu with nginx as the web server.
+GHCR/hard/paperless-ngx/draft.md	python		Django app on Python, with the frontend built at build time.
+GHCR/hard/photostructure/draft.md	python-node		Node.js server with npm native modules.
+GHCR/hard/pihole/draft.md	ubuntu		C DNS daemon with PHP web UI and cron, all installable via apt on ubuntu.
+GHCR/hard/pixark/draft.md	steamcmd	ubuntu	Steam dedicated server installed through SteamCMD, with Wine added on top.
+GHCR/hard/putty/draft.md	ubuntu		Compiled GTK terminal installed from an apt package.
+GHCR/hard/qdirstat/draft.md	ubuntu		Qt desktop tool installed from apt.
+GHCR/hard/qwantify/draft.md	ubuntu	python-node	Runtime is unclear from the reason; the Go and Node build plus GPU desktop stack suggests ubuntu (guess).
+GHCR/hard/rapidphotodownloader/draft.md	ubuntu	python	Python desktop app installed via apt, so the distro provides Python too.
+GHCR/hard/raspberrymatic/draft.md	ubuntu		Whole buildroot OS rootfs with its own init; no language base applies.
+GHCR/hard/rdtclient/draft.md	ubuntu		.NET server with a build-time Node client; the .NET runtime is installed on ubuntu.
+GHCR/hard/rflood/draft.md	ubuntu	python-node	rtorrent from apt plus a Node.js web UI, so Node is the second runtime.
+GHCR/hard/romm/draft.md	python		Python FastAPI backend with static frontend files.
+GHCR/hard/rstudio/draft.md	ubuntu		R and rserver installed from system packages, so ubuntu fits.
+GHCR/hard/rtorrent-rutorrent/draft.md	ubuntu	nginx	Reason names ubuntu with apt rtorrent, PHP-FPM and nginx.
+GHCR/hard/rustdesk/draft.md	ubuntu		Two prebuilt Rust binaries from release zips.
+GHCR/hard/scrutiny/draft.md	ubuntu		Prebuilt Go binaries plus smartmontools from apt.
+GHCR/hard/scrypted/draft.md	python-node		Node.js server that also needs Python plugin runtimes.
+GHCR/hard/sd-webui/draft.md	python		Python web UI with pip dependencies.
+GHCR/hard/shaarli/draft.md	ubuntu	nginx	PHP app, so PHP via apt on ubuntu with nginx as the web server.
+GHCR/hard/shlink/draft.md	ubuntu		PHP 8.5 app with composer deps and PHP extensions installed via apt.
+GHCR/hard/shoko-server/draft.md	ubuntu		.NET 8 app, so the dotnet runtime is installed on ubuntu.
+GHCR/hard/sinusbot/draft.md	ubuntu		Closed-source bot installed from a vendor tarball with its own Qt runtime.
+GHCR/hard/sonsoftheforest/draft.md	steamcmd	ubuntu	Steam dedicated server through SteamCMD, with Wine added.
+GHCR/hard/spegel/draft.md	ubuntu		Prebuilt Go binary from release tarballs.
+GHCR/hard/stirling-pdf/draft.md	java17		Spring Boot Java app with no version named, so java17 is used by default.
+GHCR/hard/streammaster/draft.md	ubuntu	nginx	ASP.NET app with nginx and ffmpeg, so the .NET runtime is installed on ubuntu.
+GHCR/hard/tandoor-recipes/draft.md	python	nginx	Django app on Python, run with gunicorn and nginx together.
+GHCR/hard/tasmoadmin/draft.md	ubuntu	nginx	PHP app served by a web server and PHP-FPM, so PHP via apt on ubuntu.
+GHCR/hard/tasmocompiler/draft.md	python-node		Node.js app that calls PlatformIO, a Python tool, so python-node covers both.
+GHCR/hard/tdarr-node/draft.md	ubuntu		Bundled Node, ffmpeg and HandBrake tools installed on ubuntu.
+GHCR/hard/tdarr/draft.md	ubuntu		Server, web UI and bundled ffmpeg and HandBrake tools on ubuntu.
+GHCR/hard/theforest/draft.md	steamcmd	ubuntu	Steam dedicated server through SteamCMD, with Wine added.
+GHCR/hard/thunderbird/draft.md	ubuntu		Desktop mail client tarball needing GTK and fonts, so ubuntu.
+GHCR/hard/tsmuxer/draft.md	ubuntu		Qt GUI with a prebuilt static binary, so ubuntu.
+GHCR/hard/tubesync/draft.md	python	nginx	Django app on Python, run with gunicorn, nginx and background workers.
+GHCR/hard/v-rising/draft.md	steamcmd	ubuntu	Steam dedicated server through SteamCMD, with Wine added.
+GHCR/hard/valheim/draft.md	steamcmd		Native Steam dedicated server downloaded through SteamCMD.
+GHCR/hard/vintage-story/draft.md	ubuntu		.NET game server with the dotnet runtime installed on ubuntu.
+GHCR/hard/wallos/draft.md	ubuntu	nginx	PHP 8.3 app with nginx and php-fpm, so PHP via apt on ubuntu.
+GHCR/hard/watchyourlan/draft.md	ubuntu		Prebuilt Go web app that runs arp-scan from apt.
+GHCR/hard/xteve/draft.md	ubuntu		Prebuilt Go binary unzipped into the image.
+GHCR/hard/yacreaderlibraryserver/draft.md	ubuntu		Compiled C++ Qt6 server built on ubuntu.
+GHCR/hard/zigbee2mqtt/draft.md	python-node		Node.js app installed with pnpm.
+GHCR/hard/ztcuui-aio/draft.md	python-node	ubuntu	Node.js web UI is the main runtime, with Go helpers and a zerotier daemon alongside.
+GHCR/hard/zwavejs2mqtt/draft.md	python-node		Node.js gateway shipped as prebuilt zips.
+GHCR/medium/actualserver/draft.md	python-node		Node.js sync server with npm deps.
+GHCR/medium/agregarr/draft.md	python-node		Node 20 app with prod deps copied into a node image.
+GHCR/medium/apt-cacher-ng/draft.md	ubuntu		Single daemon installed with apt.
+GHCR/medium/audiobookshelf/draft.md	python-node		Node.js server with ffmpeg as an apt package.
+GHCR/medium/aurral/draft.md	python-node	ubuntu	Node.js pnpm monorepo; ffmpeg and cloudflared come from apt and release binaries.
+GHCR/medium/batnoter/draft.md	nginx	python-node	Static UI build served by nginx; the node build runs only at build time.
+GHCR/medium/bentopdf/draft.md	nginx	python-node	Vite-built static site served by nginx; node is only needed for the build.
+GHCR/medium/booklore/draft.md	java25		Spring Boot jar that the reason says runs on the java25 base.
+GHCR/medium/bookorbit/draft.md	python-node		Node.js app built with pnpm.
+GHCR/medium/bytestash/draft.md	python-node		Express server on Node.js with a build-time React client.
+GHCR/medium/cloudcommander/draft.md	python-node		Node.js file manager installed from npm.
+GHCR/medium/comet/draft.md	python		Python FastAPI app installed into a venv.
+GHCR/medium/commento-plusplus/draft.md	ubuntu	python-node	Go API binary runs on ubuntu; the node frontend is a build-time stage.
+GHCR/medium/convertx/draft.md	ubuntu	python-node	Runs on bun with apt-installed converters and no bun base exists, so ubuntu is a guess.
+GHCR/medium/convos/draft.md	ubuntu		Perl app installed with apt perl and cpanm on ubuntu.
+GHCR/medium/corekeeper/draft.md	steamcmd	ubuntu	Unity server fetched through SteamCMD, with Xvfb for display.
+GHCR/medium/counterstrike2d/draft.md	ubuntu		Vendor server downloaded at runtime and unzipped with a start script.
+GHCR/medium/dashy/draft.md	python-node		Vue dashboard built with yarn and served by Node.js.
+GHCR/medium/docker-hub-rss/draft.md	python-node		Small Node.js app with production node_modules.
+GHCR/medium/double-take/draft.md	python-node		Node.js API with a Vue frontend built in a build stage.
+GHCR/medium/etherpad/draft.md	python-node		Node.js server built with pnpm.

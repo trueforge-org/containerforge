@@ -1,0 +1,19 @@
+Docker Hub/easy/apache-webdav/draft.md	https://httpd.apache.org/docs/	https://httpd.apache.org/	docs and homepage confirmed 200 via curl; mod_dav page https://httpd.apache.org/docs/current/mod/mod_dav.html also 200 and confirmed by WebFetch
+Docker Hub/easy/ddns-route53/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/hastebin/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/mosdns/draft.md	https://irine-sistiana.gitbook.io/mosdns-wiki		linked from upstream README; 200 via curl (first attempt timed out, retry OK); no separate homepage
+Docker Hub/easy/teamspeak3/draft.md			support.teamspeak.com returned 403 to curl and WebFetch so docs cannot be confirmed; www.teamspeak.com is same site as source_url
+Docker Hub/easy/telethon-downloader/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/threadfin/draft.md	https://github.com/Threadfin/Threadfin/wiki		GitHub wiki returned 200 via curl; no other official docs found in upstream README (only GitHub wiki used, so docs_url is a GitHub page); threadfin.org not linked by upstream so not used
+Docker Hub/easy/traefik-forward-auth/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/traggo/draft.md	https://traggo.net/install/	https://traggo.net/	both 200 via curl; install page and homepage linked from upstream README
+Docker Hub/easy/traktarr/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/tvhproxy/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/uptimerobot-prometheus/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/venstar2mqtt/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/vlmcsd-kms-server/draft.md			upstream README empty on fetch; no official docs site confirmed
+Docker Hub/easy/vocechat-server/draft.md	https://doc.voce.chat/	https://voce.chat/	both 200 via curl; linked from upstream README
+Docker Hub/easy/wdosg/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/webnut/draft.md			no separate official docs site confirmed; source repo only
+Docker Hub/easy/webp-server/draft.md	https://docs.webp.sh/		200 via curl; linked from upstream README; https://webp.sh/ redirects to docs.webp.sh so no separate homepage recorded
+Docker Hub/easy/wyoming-openwakeword/draft.md			no separate official docs site confirmed; source repo only

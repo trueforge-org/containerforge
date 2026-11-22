@@ -1,0 +1,40 @@
+Docker Hub/easy/adminer/draft.md		https://www.adminer.org/	Official Website link in github.com/vrana/adminer README; no docs site found
+Docker Hub/easy/amcrest2mqtt/draft.md			not found: README links only third-party and library pages
+Docker Hub/easy/androiddebugbridge/draft.md	https://www.home-assistant.io/integrations/androidtv/		Home Assistant AndroidTV integration docs linked from BLBurgess/adb-hass-androidtv README
+Docker Hub/easy/anki-sync-server/draft.md	https://docs.ankiweb.net/sync-server.html		docs.ankiweb.net sync-server guide linked from ankicommunity/anki-sync-server-rs README
+Docker Hub/easy/answer/draft.md	https://answer.apache.org/docs/installation	https://answer.apache.org	Installation | Apache Answer page fetched; project site linked from answerdev/answer README
+Docker Hub/easy/apache-webdav/draft.md			not found: httpd.apache.org/docs/ is a generic server docs index, website not separately checked
+Docker Hub/easy/appdaemon/draft.md	https://appdaemon.readthedocs.io/		"Welcome to AppDaemon's documentation!" fetched; linked from AppDaemon README
+Docker Hub/easy/arksurvivalevolved/draft.md	https://github.com/arkmanager/ark-server-tools/wiki		Project wiki linked from ark-server-tools README; no dedicated docs site (GitHub wiki)
+Docker Hub/easy/avm-exporter/draft.md	https://pdreker.github.io/fritz_exporter/		Project docs linked from pdreker/fritz_exporter README
+Docker Hub/easy/bitcoin-node/draft.md		https://bitcoincore.org	Homepage linked from bitcoin/bitcoin README; docs only in repo doc folder, not an external site
+Docker Hub/easy/bitcoind/draft.md		https://bitcoincore.org	Homepage linked from bitcoin/bitcoin README; docs only in repo doc folder, not an external site
+Docker Hub/easy/chowdown/draft.md		https://chowdown.io	"Chowdown" homepage fetched; listed in clarklab/chowdown README and About
+Docker Hub/easy/chronograf/draft.md	https://docs.influxdata.com/chronograf/latest/introduction/installation/		Chronograf installation page on docs.influxdata.com linked from influxdata/chronograf README
+Docker Hub/easy/cloudflared/draft.md	https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/		Cloudflare Tunnel docs (cloudflared client) linked from cloudflare/cloudflared README
+Docker Hub/easy/clusterissuer/draft.md			not found: draft targets docker-library/hello-world, not a documented application
+Docker Hub/easy/core-keeper-dedicated-server/draft.md			not found: search returned only third-party guides; no official Pugstorm docs confirmed
+Docker Hub/easy/cyberchef/draft.md		https://gchq.github.io/CyberChef	Official website stated in gchq/CyberChef README; no user docs site (wiki pages are contributor docs)
+Docker Hub/easy/ddns-route53/draft.md	https://crazymax.dev/ddns-route53/		Documentation link in crazy-max/ddns-route53 README
+Docker Hub/easy/discordgsm/draft.md	https://discordgsm.com/guide	https://discordgsm.com	Guide pages and project site linked from DiscordGSM/GameServerMonitor README
+Docker Hub/easy/dispatch/draft.md		https://dispatch.khlieng.com	Project homepage ("Try it!") linked from khlieng/dispatch README; no docs site
+Docker Hub/easy/dispatcharr/draft.md	https://dispatcharr.github.io/Dispatcharr-Docs		"Home" page of Dispatcharr Docs fetched; source_url in input (alpinelinux.org) is wrong, project is github.com/Dispatcharr/Dispatcharr
+Docker Hub/easy/dockerregistry/draft.md	https://distribution.github.io/distribution/		Full documentation link in distribution/distribution README
+Docker Hub/easy/domoticz/draft.md	https://wiki.domoticz.com/	https://www.domoticz.com	Website and wiki linked from domoticz/domoticz README and About
+Docker Hub/easy/external-ip/draft.md			not found: README links only Docker Hub and Apprise
+Docker Hub/easy/external-service/draft.md			not found: source_url is alpinelinux.org, not an application
+Docker Hub/easy/factorio/draft.md	https://wiki.factorio.com/		Wiki link fetched from factorio.com; source_url is the official site itself so no website_url
+Docker Hub/easy/filebrowser/draft.md			not found: filebrowser.org redirects to the GitHub repo; docs only in repo docs folder
+Docker Hub/easy/github-backup/draft.md			not found: README has no project docs or homepage link
+Docker Hub/easy/glances/draft.md	https://glances.readthedocs.io/en/develop/		"Glances" docs fetched; linked as the complete documentation in nicolargo/glances README
+Docker Hub/easy/glauth/draft.md	https://glauth.github.io/		Documentation site linked from glauth/glauth README and its website badge
+Docker Hub/easy/godaddy-ddns/draft.md			not found: README links only GoDaddy developer keys page and an Unraid forum thread
+Docker Hub/easy/gokapi/draft.md	https://gokapi.readthedocs.io/en/latest/		"Gokapi" docs index fetched; setup and usage pages linked from Forceu/gokapi README
+Docker Hub/easy/guacamole/draft.md	http://guacamole.apache.org/doc/gug/	http://guacamole.apache.org/	Full manual and project website linked from apache/guacamole-server README
+Docker Hub/easy/guacd/draft.md	http://guacamole.apache.org/doc/gug/	http://guacamole.apache.org/	Full manual and project website linked from apache/guacamole-server README (same project as guacamole)
+Docker Hub/easy/hassconfigurator/draft.md			not found: README links only Home Assistant pages; project wiki is in-repo
+Docker Hub/easy/hastebin/draft.md			not found: hastebin.com is a public instance, not confirmed as the official project site
+Docker Hub/easy/hexo-blog/draft.md	https://hexo.io/docs/	https://hexo.io	Documentation and website linked from hexojs/hexo README
+Docker Hub/easy/homelablabelmaker/draft.md		https://homelablabelmaker.shurilla14.com/	Live site linked from DavidSpek/homelablabelmaker README and About; no docs site
+Docker Hub/easy/icloudpd/draft.md	https://icloud-photos-downloader.github.io/icloud_photos_downloader/		Documentation site linked from icloud-photos-downloader README and About
+Docker Hub/easy/import-ics/draft.md			not found: README contains no project documentation links

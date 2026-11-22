@@ -1,0 +1,19 @@
+GHCR/hard/mediainfo/draft.md	https://mediaarea.net/en/MediaInfo/Support	https://mediaarea.net/en/MediaInfo	docs and homepage HTTP 200 via curl
+GHCR/hard/megasync/draft.md	https://help.mega.io/installs-apps/desktop	https://mega.io/desktop	help and desktop pages HTTP 200 via curl
+GHCR/hard/mkvcleaver/draft.md			blogs.sapib.ca returns 403 to curl and WebFetch; no other official docs found, left empty
+GHCR/hard/mkvtoolnix/draft.md	https://mkvtoolnix.download/doc/		doc page HTTP 200 via curl; homepage is the source_url so website left empty
+GHCR/hard/multus-cni/draft.md	https://k8snetworkplumbingwg.github.io/multus-cni/		docs site HTTP 200 via curl; source repo is the GitHub project, so website left empty
+GHCR/hard/neko/draft.md	https://neko.m1k1o.net/		neko.m1k1o.net HTTP 200 via curl (documentation site per search); no source_url given, /docs/ returns 404 so the root is used; website left empty as it is the same site
+GHCR/hard/netdata/draft.md	https://learn.netdata.cloud/	https://www.netdata.cloud/	learn.netdata.cloud and www.netdata.cloud HTTP 200 via curl (learn site redirects to a docs page)
+GHCR/hard/neverwinternights-ee/draft.md		https://www.beamdog.com/	no official docs site confirmed; beamdog.com HTTP 200 (redirects to www) and named as official site by search; Beamdog is the publisher, so used as website only
+GHCR/hard/nvidia-gpu-exporter/draft.md	https://github.com/utkuozdemir/nvidia_gpu_exporter		GitHub repo HTTP 200; no separate docs site found, so the README is the only docs
+GHCR/hard/obsidian/draft.md	https://help.obsidian.md/	https://obsidian.md/	help redirects to obsidian.md/help/ (HTTP 200); obsidian.md HTTP 200 via curl
+GHCR/hard/organizr/draft.md	https://docs.organizr.app/		docs site HTTP 200 via curl; organizr.app homepage returns 521, so not confirmed and left empty
+GHCR/hard/paperless-ngx/draft.md	https://github.com/paperless-ngx/paperless-ngx/tree/dev/docs		docs.paperless-ngx.com and paperless-ngx.com return 403 to curl and WebFetch (not confirmed); official docs source folder in the project repo HTTP 200 used instead; website left empty
+GHCR/hard/photostructure/draft.md	https://photostructure.com/docs/	https://photostructure.com/	photostructure.com/docs/ and photostructure.com/ HTTP 200 via curl; /server/ also HTTP 200
+GHCR/hard/pihole/draft.md	https://docs.pi-hole.net/	https://pi-hole.net/	docs.pi-hole.net and pi-hole.net HTTP 200 via curl
+GHCR/hard/pixark/draft.md			no official site confirmed; search only returned wiki and store pages; snail games and pixark.com not reachable (403 / parked domain); left empty
+GHCR/hard/sinusbot/draft.md			sinusbot.com returns HTTP 500 on repeated curl and WebFetch attempts (retried after pause); not confirmed, left empty
+GHCR/hard/ztcuui-aio/draft.md	https://github.com/key-networks/ztncui-containerized		key-networks ztncui-containerized README HTTP 200 and named by the ztncui-aio project as its original documentation; no separate docs site, so the README is used; website left empty
+GHCR/medium/libredb-studio/draft.md		https://libredb.org/	libredb.org HTTP 200 via curl; docs paths /docs and /en/docs return 404, so no docs_url confirmed
+GHCR/medium/minecraft-bedrock/draft.md	https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockserver/getting-started		Microsoft Learn Bedrock dedicated server getting-started page HTTP 200 via curl; source_url is already the official download page, so website left empty

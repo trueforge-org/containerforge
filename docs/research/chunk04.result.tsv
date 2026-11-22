@@ -1,0 +1,40 @@
+Docker Hub/hard/codeproject-ai-server/draft.md	https://codeproject.github.io/codeproject.ai/	https://codeproject.github.io/codeproject.ai	Docs and project homepage both on codeproject.github.io, linked from the source README and About section
+Docker Hub/hard/collabora/draft.md		https://collaboraonline.com	Homepage linked in the About section of the source repo; no docs site in README (repo wiki/mirror only)
+Docker Hub/hard/cura-novnc/draft.md	https://github.com/Ultimaker/Cura/wiki/Getting-Started		Project wiki Getting Started page linked from the source README; no separate homepage found
+Docker Hub/hard/damselfly/draft.md			not found (README links only in-repo docs/ files and an email address)
+Docker Hub/hard/deepstack/draft.md	https://docs.deepstack.cc	https://deepstack.cc	Homepage and docs site both linked from the source README
+Docker Hub/hard/dizquetv/draft.md	https://github.com/vexorian/dizquetv/wiki		Wiki linked from source README for setup instructions; no homepage found
+Docker Hub/hard/docker/draft.md		https://mobyproject.org/	Homepage listed in About section of moby source repo; README has no docs site (only GitHub docs links)
+Docker Hub/hard/dockovpn/draft.md		https://dockovpn.io	Project website linked in README Resources section and About section
+Docker Hub/hard/docuseal/draft.md	https://www.docuseal.com/docs/embedded	https://www.docuseal.com	Homepage linked from source README; docs link is the official embedded-signing docs page (only docs page linked from README)
+Docker Hub/hard/drawio/draft.md		https://www.drawio.com	Homepage linked in source README; no dedicated docs site found
+Docker Hub/hard/dropbox-by-otherguy/draft.md			not found (WebFetch safety check rate-limited; not verified)
+Docker Hub/hard/ecodms/draft.md			not found (WebFetch safety check rate-limited; not verified)
+Docker Hub/hard/fabulinus/draft.md	https://docs.titanml.co/	https://www.titanml.co/	Docs and website linked from source README (takeoff-community)
+Docker Hub/hard/factorioservermanager/draft.md	https://github.com/OpenFactorioServerManager/factorio-server-manager/wiki/Installation-and-Usage		Installation and Usage wiki page linked from source README; no homepage found
+Docker Hub/hard/farmos/draft.md	https://farmOS.org/hosting/install	https://farmOS.org	Listed as "Official website" in README; install docs page linked from README
+Docker Hub/hard/ferdi-server/draft.md		https://ferdium.org	Homepage linked as Ferdium in source README; no docs site (only FAQ and recipe guide links)
+Docker Hub/hard/ffmpeg-mkvdts2ac3/draft.md			not found (WebFetch safety check rate-limited; not verified). source_url is the FFmpeg homepage itself
+Docker Hub/hard/fileflows/draft.md			not found (WebFetch safety check rate-limited; not verified)
+Docker Hub/hard/fileshelter/draft.md			not found (README points only to INSTALL.md in the repo)
+Docker Hub/hard/fireflyiii/draft.md	https://docs.firefly-iii.org/	https://firefly-iii.org/	"Read the docs" link and firefly-iii.org link from source README and About section
+Docker Hub/hard/firefox-desktop-g3/draft.md		https://www.firefox.com/	Homepage listed in About section of source repo; firefox-source-docs.mozilla.org is developer/contributor documentation, so not recorded as docs
+Docker Hub/hard/fireshare/draft.md		https://fireshare.net	Homepage listed in About section; docs are in-repo Markdown only
+Docker Hub/hard/firezone/draft.md	https://www.firezone.dev/kb	https://www.firezone.dev	Homepage and knowledge base (kb) linked from source README
+Docker Hub/hard/flexo/draft.md	https://github.com/nroi/flexo/wiki		Wiki linked from source README (Configuration section); no homepage found
+Docker Hub/hard/flextv/draft.md	https://github.com/d8ahazard/FlexTV/wiki		Wiki linked from source README (README notes it is outdated); no homepage found
+Docker Hub/hard/fmd2-wine/draft.md			not found (only in-repo docs/ files and a Discord link)
+Docker Hub/hard/freecad-desktop-g3/draft.md	https://wiki.freecad.org	https://www.freecad.org	Documentation and Website links from source README
+Docker Hub/hard/friendica/draft.md		https://friendi.ca	Homepage in About section and README; docs only as in-repo install.md, not a docs site
+Docker Hub/hard/fsm/draft.md	https://github.com/OpenFactorioServerManager/factorio-server-manager/wiki/Installation-and-Usage		Same project as factorioservermanager; Installation and Usage wiki page from source README
+Docker Hub/hard/genea/draft.md		https://www.genea.app/	Genea.app demo link in source README; no docs site found
+Docker Hub/hard/ghostfolio/draft.md		https://ghostfol.io	Homepage in About section; only FAQ pages found on the site, not recorded as docs
+Docker Hub/hard/grafana-image-renderer/draft.md			not found (only in-repo docs/sources/_index.md, no grafana.com docs link in README)
+Docker Hub/hard/gridcoinwalletgui/draft.md		https://gridcoin.us/	Project homepage linked in source README; docs are in-repo build/developer notes only
+Docker Hub/hard/h5ai/draft.md		https://larsjung.de/h5ai/	Project page linked in source README
+Docker Hub/hard/hoobs/draft.md		https://hoobs.org	Homepage in About section; no docs site in README
+Docker Hub/hard/hyperion-ng/draft.md	https://docs.hyperion-project.org	https://hyperion-project.org/	Official docs and homepage linked in source README
+Docker Hub/hard/inkscape-desktop-g3/draft.md			not found (WebFetch safety check rate-limited; not verified)
+Docker Hub/hard/intel-gpu-plugin/draft.md	https://intel.github.io/intel-device-plugins-for-kubernetes/0.36/		Versioned docs site linked from source README Overview; no homepage listed
+Docker Hub/hard/ipmi-tools/draft.md			not found (README has no docs or homepage link)
+Docker Hub/hard/ispy-agent-dvr/draft.md			not found (WebFetch safety check rate-limited; not verified). source_url is the iSpy homepage itself

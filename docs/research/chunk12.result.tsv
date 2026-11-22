@@ -1,0 +1,40 @@
+GHCR/easy/fossil/draft.md	https://fossil-scm.org/home/doc/trunk/www/permutedindex.html		Doc Index linked from fossil-scm.org homepage (fetched, loads)
+GHCR/easy/garrysmod/draft.md			not found: Steam store page only (loads), no official docs or site listed
+GHCR/easy/gatus/draft.md	https://gatus.io		Upstream TwiN/gatus About section links gatus.io; load check rate-limited
+GHCR/easy/gitea/draft.md	https://docs.gitea.com/		docs.gitea.com loads, titled Gitea Documentation; linked from README. gitea.com redirects to about.gitea.com, not verified
+GHCR/easy/goaccess-npm-logs/draft.md	https://goaccess.io/man	https://goaccess.io/	goaccess.io loads; man page linked from it (goaccess.io/man)
+GHCR/easy/gonic/draft.md	https://github.com/sentriz/gonic/wiki		Project GitHub wiki home loads (sub-pages showed load errors)
+GHCR/easy/googlephotossync/draft.md	https://gilesknap.github.io/gphotos-sync		Documentation link in official README; load check rate-limited
+GHCR/easy/grafana/draft.md	https://grafana.com/docs/grafana/latest/		grafana.com docs loads (Grafana OSS and Enterprise). Note: source_url is kiwigrid/k8s-sidecar, not Grafana itself
+GHCR/easy/halflife2deathmatch/draft.md			not found: Steam store page only, no official docs or site checked
+GHCR/easy/homebox/draft.md	https://homebox.software/en/	https://homebox.software/	Docs link in official README; direct fetch returned HTTP 403, not verified
+GHCR/easy/hurtworld/draft.md			Developer website from Steam store page (http://www.hurtworld.com); load check rate-limited. No docs found
+GHCR/easy/insurgencysandstorm/draft.md		https://www.focus-entmt.com/games/insurgency-sandstorm	Publisher game page linked from Steam store page; load check rate-limited. No docs found
+GHCR/easy/kiwix-serve/draft.md	https://kiwix-tools.readthedocs.org/en/latest/?badge=latest		Doc badge in kiwix-tools README; load check rate-limited
+GHCR/easy/kms/draft.md	https://py-kms.readthedocs.io/en/latest/		Docs link in py-kms README (readthedocs); load check rate-limited
+GHCR/easy/lastoasis/draft.md		https://lastoasis.gg/	Developer site from Steam store page; load check rate-limited. Steam "View the manual" points to a legacy gamepedia wiki, not recorded
+GHCR/easy/left4dead/draft.md			not checked: Steam store page is the only known official page
+GHCR/easy/lldap/draft.md	https://github.com/lldap/lldap/tree/main/docs		Repo docs folder linked from README (fetched); no dedicated docs site found
+GHCR/easy/longvinter/draft.md	https://www.longvinter.com/links	https://www.uuvana.com/	Manual link and publisher site from Steam store page; load check rate-limited
+GHCR/easy/memories-of-mars/draft.md			not found: Steam search showed no exact match for Memories of Mars
+GHCR/easy/minecraft-gate/draft.md	https://gate.minekube.com		Gate "Website & Documentation" per upstream README About section; load check rate-limited
+GHCR/easy/minecraft-router/draft.md	https://github.com/itzg/mc-router/blob/main/README.md		No docs site; README is the main documentation (fetched)
+GHCR/easy/miniflux/draft.md	https://miniflux.app/docs/		Docs link in upstream README (fetched); load check not done
+GHCR/easy/monero-node/draft.md		https://getmonero.org	Listed as official web resource in monero README (fetched). No dedicated user docs site found
+GHCR/easy/mordhau/draft.md		https://mordhau.com	mordhau.com loads; no docs or wiki links found
+GHCR/easy/multus-cni/draft.md			not found: source_url is containernetworking/plugins (CNI plugins), not Multus; cni.dev covers CNI, not Multus
+GHCR/easy/muximux/draft.md	https://github.com/mescon/Muximux/blob/main/docs/wiki/README.md		Project wiki in docs/wiki linked from repo (fetched)
+GHCR/easy/navidrome/draft.md	https://www.navidrome.org/docs		Docs site linked from upstream README; load check not done
+GHCR/easy/nebula-sync/draft.md	https://github.com/lovelaze/nebula-sync/blob/main/README.md		No docs site or wiki; README is the only documentation (fetched repo)
+GHCR/easy/necesse/draft.md	https://necessewiki.com	https://necessegame.com	necessegame.com loads and links the official wiki necessewiki.com; wiki load check rate-limited
+GHCR/easy/node-red/draft.md	https://nodered.org/docs/		Docs link in upstream README (fetched); load check not done
+GHCR/easy/notifiarr/draft.md	https://notifiarr.wiki		Wiki listed in upstream repo About section; load check rate-limited
+GHCR/easy/novnc/draft.md	https://github.com/novnc/noVNC/wiki		Wiki linked from upstream README (fetched). Project site novnc.com named in README, not fetched
+GHCR/easy/onlinecheckyourserver/draft.md	https://github.com/ich777/docker-online-check-pushover/blob/master/README.md		Only documentation is the repo README (fetched)
+GHCR/easy/openttd/draft.md	https://wiki.openttd.org/		Community wiki linked from OpenTTD README (fetched); load check rate-limited
+GHCR/easy/palworld/draft.md		https://www.pocketpair.jp/	pocketpair.jp loads; no Palworld docs or server guide links found
+GHCR/easy/pavlovvr/draft.md		https://www.vankrupt.com/	vankrupt.com loads; no docs or wiki links found
+GHCR/easy/plexanisync/draft.md	https://github.com/RickDB/PlexAniSync/wiki		Project wiki home linked from repo (fetched)
+GHCR/easy/plextraktsync/draft.md	https://github.com/Taxel/PlexTraktSync/blob/main/README.md		No wiki or docs site; README is the only user documentation (fetched)
+GHCR/easy/pocket-id/draft.md	https://docs.pocket-id.org	https://pocket-id.org	Docs link in upstream README and site in repo About section (fetched GitHub); load checks rate-limited
+GHCR/easy/postscriptum/draft.md			not found: postscriptum.com loads but has no docs, wiki or admin guide links; the site is the source

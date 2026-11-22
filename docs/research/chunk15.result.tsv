@@ -1,0 +1,40 @@
+GHCR/hard/pixark/draft.md
+GHCR/hard/putty/draft.md		not found: putty.org only links to the download page; official manual on chiark.greenend.org.uk not opened
+GHCR/hard/qdirstat/draft.md		not found
+GHCR/hard/qwantify/draft.md		not found
+GHCR/hard/rapidphotodownloader/draft.md	https://damonlynch.net/rapid/documentation		developer's documentation page (search result, not fetched)
+GHCR/hard/raspberrymatic/draft.md		not found: GitHub wiki seen only via a mirror, not opened
+GHCR/hard/rdtclient/draft.md		not found: only Docker Hub page found
+GHCR/hard/rflood/draft.md		not found
+GHCR/hard/romm/draft.md	https://docs.romm.app		docs.romm.app fetched (redirects to latest/); docs source rommapp/docs
+GHCR/hard/rstudio/draft.md		not found: docs.posit.co and search were rate-limited, not confirmed
+GHCR/hard/rtorrent-rutorrent/draft.md		not found
+GHCR/hard/rustdesk/draft.md	https://rustdesk.com/docs/en/self-host/	https://rustdesk.com/	self-host docs and rustdesk.com home (search results, not fetched)
+GHCR/hard/scrutiny/draft.md		not found: no docs site, only GitHub README and docs folder
+GHCR/hard/scrypted/draft.md	https://docs.scrypted.app	https://scrypted.app	docs.scrypted.app fetched; it links to scrypted.app
+GHCR/hard/sd-webui/draft.md		not found
+GHCR/hard/shaarli/draft.md	https://shaarli.readthedocs.io/		shaarli.readthedocs.io fetched, official docs
+GHCR/hard/shlink/draft.md	https://shlink.io/documentation/	https://shlink.io/	shlink.io/documentation fetched
+GHCR/hard/shoko-server/draft.md	https://docs.shokoanime.com/		docs.shokoanime.com fetched ("Shoko Docs")
+GHCR/hard/sinusbot/draft.md	https://sinusbot.github.io/docs/faq/general		SinusBot docs site (search result, not fetched; sinusbot.com fetch was rate-limited)
+GHCR/hard/sonsoftheforest/draft.md		not found
+GHCR/hard/spegel/draft.md		not found: spegel.dev search and fetch failed
+GHCR/hard/stirling-pdf/draft.md	https://docs.stirlingpdf.com/		docs.stirlingpdf.com fetched, official docs
+GHCR/hard/streammaster/draft.md		not found
+GHCR/hard/tandoor-recipes/draft.md	https://docs.tandoor.dev/	https://tandoor.dev	docs.tandoor.dev fetched; it links to tandoor.dev
+GHCR/hard/tasmoadmin/draft.md		not found
+GHCR/hard/tasmocompiler/draft.md		not found
+GHCR/hard/tdarr-node/draft.md	https://docs.tdarr.io/		docs.tdarr.io (search result; fetch showed a Tdarr docs redirect page)
+GHCR/hard/tdarr/draft.md	https://docs.tdarr.io/		docs.tdarr.io (search result; fetch showed a Tdarr docs redirect page)
+GHCR/hard/theforest/draft.md		not found: no official site found, search failed
+GHCR/hard/thunderbird/draft.md		not found: support.mozilla.org not confirmed, search rate-limited
+GHCR/hard/tsmuxer/draft.md		not found
+GHCR/hard/tubesync/draft.md		not found: wiki referenced but URL not opened
+GHCR/hard/v-rising/draft.md	https://github.com/StunlockStudios/vrising-dedicated-server-instructions		official Stunlock server instructions repo (search result)
+GHCR/hard/valheim/draft.md		not found: valheimgame.com search rate-limited
+GHCR/hard/vintage-story/draft.md	https://wiki.vintagestory.at/index.php/Server_Config		official Vintage Story wiki (search result)
+GHCR/hard/wallos/draft.md		not found: only GitHub README
+GHCR/hard/watchyourlan/draft.md		not found: only GitHub README and docs folder
+GHCR/hard/xteve/draft.md		not found: docs live in a separate repo, URL not opened
+GHCR/hard/yacreaderlibraryserver/draft.md		yacreader.com	no official docs site; yacreader.com tutorial points to repo docs
+GHCR/hard/zigbee2mqtt/draft.md	https://www.zigbee2mqtt.io/	https://www.zigbee2mqtt.io/	zigbee2mqtt.io fetched, "maintained by @Koenkk", docs guide
