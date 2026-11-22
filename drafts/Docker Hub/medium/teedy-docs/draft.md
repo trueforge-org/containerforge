@@ -1,5 +1,10 @@
 # teedy-docs
 
+## Instructions
+
+- The container folder structure should be the same as the ones under `/app/containername`.
+- All agentic rules for these files and folders also apply to their output.
+
 ## How to read the tables
 
 - **Chart / Role**: the TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
