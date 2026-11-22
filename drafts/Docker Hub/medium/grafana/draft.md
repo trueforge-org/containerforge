@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/grafana/grafana
+- **Documentation**: https://grafana.com/docs/grafana/latest/
 
 ## Fields
 

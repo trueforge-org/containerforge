@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://www.dresden-elektronik.de/funk/software/deconz.html
+- **Documentation**: http://phoscon.de/rest/
+- **Website**: https://phoscon.de/
 
 ## Fields
 

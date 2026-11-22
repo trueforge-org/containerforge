@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/laurent22/joplin
+- **Documentation**: https://joplinapp.org/help/
+- **Website**: https://joplinapp.org/
 
 ## Fields
 

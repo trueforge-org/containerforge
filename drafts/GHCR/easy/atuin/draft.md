@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/atuinsh/atuin
+- **Documentation**: https://docs.atuin.sh/
 
 ## Fields
 

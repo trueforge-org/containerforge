@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/wekan/wekan
+- **Documentation**: https://wekan.fi/install/
 
 ## Fields
 

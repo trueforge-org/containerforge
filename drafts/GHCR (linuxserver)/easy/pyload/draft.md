@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/pyload/pyload
+- **Documentation**: https://github.com/pyload/pyload/wiki
 
 ## Fields
 

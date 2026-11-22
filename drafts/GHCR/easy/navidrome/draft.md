@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/navidrome/navidrome
+- **Documentation**: https://www.navidrome.org/docs
 
 ## Fields
 

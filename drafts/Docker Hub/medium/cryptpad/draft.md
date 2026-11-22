@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/cryptpad/cryptpad
+- **Documentation**: https://docs.cryptpad.org/en/
 
 ## Fields
 

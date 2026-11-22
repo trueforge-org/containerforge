@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/actualbudget/actual
+- **Documentation**: https://actualbudget.org/docs/
+- **Website**: https://actualbudget.org/
 
 ## Fields
 

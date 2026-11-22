@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/openhab/openhab-distro
+- **Documentation**: https://www.openhab.org/docs/
+- **Website**: https://www.openhab.org
 
 ## Fields
 

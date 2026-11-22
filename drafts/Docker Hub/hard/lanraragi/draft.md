@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Difegue/LANraragi
+- **Documentation**: https://sugoi.gitbook.io/lanraragi/v/dev
 
 ## Fields
 

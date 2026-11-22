@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Cog-Creators/Red-DiscordBot
+- **Documentation**: https://docs.discord.red/
 
 ## Fields
 

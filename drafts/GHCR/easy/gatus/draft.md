@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/home-operations/gatus-sidecar
+- **Documentation**: https://gatus.io
 
 ## Fields
 

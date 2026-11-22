@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/restic/rest-server
+- **Documentation**: https://restic.readthedocs.io/
 
 ## Fields
 

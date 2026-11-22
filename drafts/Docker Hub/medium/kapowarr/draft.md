@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Casvt/Kapowarr
+- **Documentation**: https://casvt.github.io/Kapowarr
 
 ## Fields
 

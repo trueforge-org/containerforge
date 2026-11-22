@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/mayswind/AriaNg
+- **Documentation**: http://ariang.mayswind.net
+- **Website**: http://ariang.mayswind.net
 
 ## Fields
 

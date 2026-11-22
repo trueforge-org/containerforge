@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://filezilla-project.org/
+- **Documentation**: https://wiki.filezilla-project.org/Documentation
+- **Website**: https://filezilla-project.org
 
 ## Fields
 

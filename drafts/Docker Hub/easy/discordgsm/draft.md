@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/DiscordGSM/GameServerMonitor
+- **Documentation**: https://discordgsm.com/guide
+- **Website**: https://discordgsm.com
 
 ## Fields
 

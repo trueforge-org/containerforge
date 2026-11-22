@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/shaarli/Shaarli
+- **Documentation**: https://shaarli.readthedocs.io/
 
 ## Fields
 

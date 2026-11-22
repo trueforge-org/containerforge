@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/NginxProxyManager/nginx-proxy-manager
+- **Documentation**: https://nginxproxymanager.com/setup/
+- **Website**: https://nginxproxymanager.com
 
 ## Fields
 

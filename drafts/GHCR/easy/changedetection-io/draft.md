@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/dgtlmoon/changedetection.io
+- **Documentation**: https://changedetection.io/tutorials
+- **Website**: https://changedetection.io
 
 ## Fields
 

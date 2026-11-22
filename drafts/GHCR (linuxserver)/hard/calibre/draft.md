@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/kovidgoyal/calibre
+- **Documentation**: https://manual.calibre-ebook.com/
+- **Website**: https://calibre-ebook.com/
 
 ## Fields
 

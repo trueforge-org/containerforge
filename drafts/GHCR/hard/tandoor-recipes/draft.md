@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/TandoorRecipes/recipes
+- **Documentation**: https://docs.tandoor.dev/
+- **Website**: https://tandoor.dev
 
 ## Fields
 

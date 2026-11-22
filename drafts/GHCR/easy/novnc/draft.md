@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/novnc/noVNC
+- **Documentation**: https://github.com/novnc/noVNC/wiki
 
 ## Fields
 

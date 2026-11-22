@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/pinry/pinry
+- **Documentation**: https://pinry.readthedocs.io/
 
 ## Fields
 

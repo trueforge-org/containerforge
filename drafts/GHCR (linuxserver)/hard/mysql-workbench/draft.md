@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/mysql/mysql-workbench
+- **Documentation**: https://dev.mysql.com/doc/workbench/en/
+- **Website**: https://www.mysql.com/products/workbench/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/crazy-max/ddns-route53
+- **Documentation**: https://crazymax.dev/ddns-route53/
 
 ## Fields
 

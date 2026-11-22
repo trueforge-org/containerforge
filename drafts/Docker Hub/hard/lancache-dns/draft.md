@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/lancachenet/lancache-dns
+- **Documentation**: http://lancache.net/docs/containers/dns/
 
 ## Fields
 

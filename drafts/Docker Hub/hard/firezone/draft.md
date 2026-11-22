@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/firezone/firezone
+- **Documentation**: https://www.firezone.dev/kb
+- **Website**: https://www.firezone.dev
 
 ## Fields
 

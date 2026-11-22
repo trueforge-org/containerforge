@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/arkmanager/ark-server-tools
+- **Documentation**: https://github.com/arkmanager/ark-server-tools/wiki
 
 ## Fields
 

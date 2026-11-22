@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ahmetoner/whisper-asr-webservice
+- **Documentation**: https://ahmetoner.github.io/whisper-asr-webservice/
 
 ## Fields
 

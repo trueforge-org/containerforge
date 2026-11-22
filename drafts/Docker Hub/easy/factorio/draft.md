@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://factorio.com/
+- **Documentation**: https://wiki.factorio.com/
 
 ## Fields
 

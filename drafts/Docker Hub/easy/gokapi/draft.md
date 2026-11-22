@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Forceu/gokapi
+- **Documentation**: https://gokapi.readthedocs.io/en/latest/
 
 ## Fields
 

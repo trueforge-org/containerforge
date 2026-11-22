@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/gotson/komga
+- **Documentation**: https://komga.org/docs/introduction
 
 ## Fields
 

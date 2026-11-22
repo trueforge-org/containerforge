@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/sentriz/gonic
+- **Documentation**: https://github.com/sentriz/gonic/wiki
 
 ## Fields
 

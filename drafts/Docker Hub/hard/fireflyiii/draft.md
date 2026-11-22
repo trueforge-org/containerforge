@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/firefly-iii/firefly-iii
+- **Documentation**: https://docs.firefly-iii.org/
+- **Website**: https://firefly-iii.org/
 
 ## Fields
 

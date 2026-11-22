@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/memcached/memcached
+- **Documentation**: https://docs.memcached.org
+- **Website**: https://memcached.org/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/FoxxMD/multi-scrobbler
+- **Documentation**: https://foxxmd.github.io/multi-scrobbler/configuration/
 
 ## Fields
 

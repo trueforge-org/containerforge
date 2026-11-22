@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://necessegame.com
+- **Documentation**: https://necessewiki.com
 
 ## Fields
 

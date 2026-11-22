@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/portainer/portainer
+- **Documentation**: https://docs.portainer.io/
+- **Website**: https://www.portainer.io
 
 ## Fields
 

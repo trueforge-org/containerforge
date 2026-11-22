@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/semaphoreui/semaphore
+- **Documentation**: https://semaphoreui.com/docs/
 
 ## Fields
 

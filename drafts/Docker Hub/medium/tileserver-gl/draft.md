@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/maptiler/tileserver-gl
+- **Documentation**: https://tileserver.readthedocs.io/
 
 ## Fields
 

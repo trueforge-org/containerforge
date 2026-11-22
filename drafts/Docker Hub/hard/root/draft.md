@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/root-project/root
+- **Documentation**: https://root.cern/manual/
 
 ## Fields
 

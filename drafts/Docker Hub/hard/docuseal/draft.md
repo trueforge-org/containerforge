@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/docusealco/docuseal
+- **Documentation**: https://www.docuseal.com/docs/embedded
+- **Website**: https://www.docuseal.com
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/903950/Last_Oasis/
+- **Website**: https://lastoasis.gg/
 
 ## Fields
 

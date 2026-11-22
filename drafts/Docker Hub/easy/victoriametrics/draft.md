@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/VictoriaMetrics/VictoriaMetrics
+- **Documentation**: https://docs.victoriametrics.com/
 
 ## Fields
 

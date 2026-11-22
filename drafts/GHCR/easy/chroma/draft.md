@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/chroma-core/chroma
+- **Documentation**: https://docs.trychroma.com/
 
 ## Fields
 

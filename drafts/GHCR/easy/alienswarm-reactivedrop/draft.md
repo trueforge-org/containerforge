@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
+- **Documentation**: https://developer.valvesoftware.com/wiki/Alien_Swarm:_Reactive_Drop
 
 ## Fields
 

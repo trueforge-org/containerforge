@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/browserless/chrome
+- **Documentation**: https://docs.rsshub.app/
 
 ## Fields
 

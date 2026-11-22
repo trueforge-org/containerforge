@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/LMS-Community/slimserver
+- **Documentation**: https://lyrion.org/getting-started
+- **Website**: https://lyrion.org
 
 ## Fields
 

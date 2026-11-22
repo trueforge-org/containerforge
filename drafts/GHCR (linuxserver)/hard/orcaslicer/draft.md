@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/SoftFever/OrcaSlicer
+- **Documentation**: https://www.orcaslicer.com/wiki
+- **Website**: https://www.orcaslicer.com/
 
 ## Fields
 

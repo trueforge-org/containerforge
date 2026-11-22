@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/farmOS/farmOS
+- **Documentation**: https://farmOS.org/hosting/install
+- **Website**: https://farmOS.org
 
 ## Fields
 

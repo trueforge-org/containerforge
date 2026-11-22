@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/searxng/searxng
+- **Documentation**: https://docs.searxng.org/
 
 ## Fields
 

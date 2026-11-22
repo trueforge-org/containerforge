@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/miniflux/v2
+- **Documentation**: https://miniflux.app/docs/
 
 ## Fields
 

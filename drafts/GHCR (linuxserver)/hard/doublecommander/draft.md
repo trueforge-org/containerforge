@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/doublecmd/doublecmd
+- **Documentation**: https://doublecmd.github.io/doc/en/help.html
+- **Website**: https://doublecmd.sourceforge.io
 
 ## Fields
 

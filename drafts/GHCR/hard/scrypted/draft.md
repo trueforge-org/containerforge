@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/koush/scrypted
+- **Documentation**: https://docs.scrypted.app
+- **Website**: https://scrypted.app
 
 ## Fields
 

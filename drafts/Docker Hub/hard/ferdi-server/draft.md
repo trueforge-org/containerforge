@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ferdium/ferdium-server
+- **Website**: https://ferdium.org
 
 ## Fields
 

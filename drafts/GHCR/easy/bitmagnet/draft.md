@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/bitmagnet-io/bitmagnet
+- **Documentation**: https://bitmagnet.io/
+- **Website**: https://bitmagnet.io/
 
 ## Fields
 

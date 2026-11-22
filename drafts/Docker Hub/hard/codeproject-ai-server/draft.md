@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/codeproject/CodeProject.AI-Server
+- **Documentation**: https://codeproject.github.io/codeproject.ai/
+- **Website**: https://codeproject.github.io/codeproject.ai
 
 ## Fields
 

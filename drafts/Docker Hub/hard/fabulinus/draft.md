@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/titanml/takeoff-community
+- **Documentation**: https://docs.titanml.co/
+- **Website**: https://www.titanml.co/
 
 ## Fields
 

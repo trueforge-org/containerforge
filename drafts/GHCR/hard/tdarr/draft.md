@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/HaveAGitGat/Tdarr
+- **Documentation**: https://docs.tdarr.io/
 
 ## Fields
 

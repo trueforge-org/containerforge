@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/WordPress/WordPress
+- **Documentation**: https://wordpress.org/documentation/
+- **Website**: https://wordpress.org
 
 ## Fields
 

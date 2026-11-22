@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/blender/blender
+- **Documentation**: https://docs.blender.org/
 
 ## Fields
 

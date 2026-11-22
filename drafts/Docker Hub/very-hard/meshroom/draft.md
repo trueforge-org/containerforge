@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/alicevision/Meshroom
+- **Documentation**: https://meshroom.readthedocs.io/en/stable/
 
 ## Fields
 

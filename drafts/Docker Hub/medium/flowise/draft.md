@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/FlowiseAI/Flowise
+- **Documentation**: https://docs.flowiseai.com/
 
 ## Fields
 

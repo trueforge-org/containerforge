@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/TwiN/gatus
+- **Documentation**: https://gatus.io/docs
+- **Website**: https://gatus.io
 
 ## Fields
 

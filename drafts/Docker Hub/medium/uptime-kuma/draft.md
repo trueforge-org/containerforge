@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/louislam/uptime-kuma
+- **Documentation**: https://github.com/louislam/uptime-kuma/wiki
 
 ## Fields
 

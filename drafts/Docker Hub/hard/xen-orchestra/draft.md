@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/vatesfr/xen-orchestra
+- **Documentation**: https://docs.xen-orchestra.com/
 
 ## Fields
 

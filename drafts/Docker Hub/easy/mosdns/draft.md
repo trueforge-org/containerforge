@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/IrineSistiana/mosdns
+- **Documentation**: https://irine-sistiana.gitbook.io/mosdns-wiki/
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/hyperion-project/hyperion.ng
+- **Documentation**: https://docs.hyperion-project.org
+- **Website**: https://hyperion-project.org/
 
 ## Fields
 

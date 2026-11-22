@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Dispatcharr/Dispatcharr
+- **Documentation**: https://dispatcharr.github.io/Dispatcharr-Docs
 
 ## Fields
 

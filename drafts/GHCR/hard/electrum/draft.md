@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/spesmilo/electrum
+- **Documentation**: https://electrum.readthedocs.io/
+- **Website**: https://electrum.org
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://mediagoblin.org/
+- **Documentation**: https://docs.mediagoblin.org/en/stable/
 
 ## Fields
 

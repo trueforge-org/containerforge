@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/aria2/aria2
+- **Documentation**: https://aria2.github.io/manual/en/html/
+- **Website**: https://aria2.github.io/
 
 ## Fields
 

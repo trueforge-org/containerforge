@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/go-vikunja/vikunja
+- **Documentation**: https://vikunja.io/docs/
 
 ## Fields
 

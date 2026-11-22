@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/influxdata/chronograf
+- **Documentation**: https://docs.influxdata.com/chronograf/latest/introduction/installation/
 
 ## Fields
 

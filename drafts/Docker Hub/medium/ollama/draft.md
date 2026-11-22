@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/ollama/ollama
+- **Documentation**: https://docs.ollama.com
+- **Website**: https://ollama.com
 
 ## Fields
 

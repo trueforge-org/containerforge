@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/OpenFactorioServerManager/factorio-server-manager
+- **Documentation**: https://github.com/OpenFactorioServerManager/factorio-server-manager/wiki/Installation-and-Usage
 
 ## Fields
 

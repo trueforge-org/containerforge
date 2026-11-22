@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/jeessy2/ddns-go
+- **Documentation**: https://github.com/jeessy2/ddns-go/wiki
 
 ## Fields
 

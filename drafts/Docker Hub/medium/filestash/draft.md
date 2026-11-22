@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/mickael-kerjean/filestash
+- **Documentation**: https://www.filestash.app/docs/
 
 ## Fields
 

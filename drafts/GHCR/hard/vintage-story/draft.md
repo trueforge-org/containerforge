@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.vintagestory.at/
+- **Documentation**: https://wiki.vintagestory.at/index.php/Server_Config
 
 ## Fields
 

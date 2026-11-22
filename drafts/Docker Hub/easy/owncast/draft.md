@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/owncast/owncast
+- **Documentation**: https://owncast.online/docs/
+- **Website**: https://owncast.online/
 
 ## Fields
 

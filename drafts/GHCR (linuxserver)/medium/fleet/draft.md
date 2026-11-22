@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/linuxserver/fleet
+- **Documentation**: https://fleetdm.com/docs
+- **Website**: https://fleetdm.com/
 
 ## Fields
 

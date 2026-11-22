@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/pdreker/fritz_exporter
+- **Documentation**: https://pdreker.github.io/fritz_exporter/
 
 ## Fields
 

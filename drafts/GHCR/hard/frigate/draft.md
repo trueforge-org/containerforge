@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/blakeblackshear/frigate
+- **Documentation**: https://docs.frigate.video
+- **Website**: https://frigate.video
 
 ## Fields
 

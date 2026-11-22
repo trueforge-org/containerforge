@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/metabase/metabase
+- **Documentation**: https://www.metabase.com/docs/latest/
+- **Website**: https://www.metabase.com
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/DIYgod/RSSHub
+- **Documentation**: https://docs.rsshub.app/
 
 ## Fields
 

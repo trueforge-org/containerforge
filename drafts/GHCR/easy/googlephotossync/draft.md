@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/gilesknap/gphotos-sync
+- **Documentation**: https://gilesknap.github.io/gphotos-sync
 
 ## Fields
 

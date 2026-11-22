@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Stirling-Tools/Stirling-PDF
+- **Documentation**: https://docs.stirlingpdf.com/
 
 ## Fields
 

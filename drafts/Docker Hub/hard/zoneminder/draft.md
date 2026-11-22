@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ZoneMinder/zoneminder
+- **Documentation**: https://zoneminder.readthedocs.io/
 
 ## Fields
 

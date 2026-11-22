@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/inovector/mixpost
+- **Documentation**: https://docs.mixpost.app/lite/
 
 ## Fields
 

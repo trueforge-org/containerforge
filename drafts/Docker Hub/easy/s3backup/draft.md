@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/s3tools/s3cmd
+- **Documentation**: https://s3tools.org/usage
+- **Website**: https://s3tools.org/s3cmd
 
 ## Fields
 

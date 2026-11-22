@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Notifiarr/notifiarr
+- **Documentation**: https://notifiarr.wiki
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/allinurl/goaccess
+- **Documentation**: https://goaccess.io/man
+- **Website**: https://goaccess.io/
 
 ## Fields
 

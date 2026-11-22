@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/domoticz/domoticz
+- **Documentation**: https://wiki.domoticz.com/
+- **Website**: https://www.domoticz.com
 
 ## Fields
 

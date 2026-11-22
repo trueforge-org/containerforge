@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/fireshare-app/fireshare
+- **Website**: https://fireshare.net
 
 ## Fields
 

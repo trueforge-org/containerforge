@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/581320/
+- **Website**: https://www.focus-entmt.com/games/insurgency-sandstorm
 
 ## Fields
 

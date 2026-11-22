@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Py-KMS-Organization/py-kms
+- **Documentation**: https://py-kms.readthedocs.io/en/latest/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/glauth/glauth
+- **Documentation**: https://glauth.github.io/
 
 ## Fields
 

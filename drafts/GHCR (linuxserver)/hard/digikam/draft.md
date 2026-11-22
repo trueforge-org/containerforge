@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/KDE/digikam
+- **Documentation**: https://docs.digikam.org/
+- **Website**: https://www.digikam.org/
 
 ## Fields
 

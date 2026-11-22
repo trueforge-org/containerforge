@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/amule-org/amule
+- **Documentation**: https://amule-org.github.io/docs
+- **Website**: https://amule-org.github.io/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/gamer92000/sinusbot-docker
+- **Documentation**: https://sinusbot.github.io/docs/faq/general
 
 ## Fields
 

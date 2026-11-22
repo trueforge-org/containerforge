@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/coreruleset/coreruleset
+- **Documentation**: https://www.coreruleset.org/docs/
+- **Website**: https://www.coreruleset.org
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/TomBursch/kitchenowl
+- **Documentation**: https://docs.kitchenowl.org
+- **Website**: https://kitchenowl.org
 
 ## Fields
 

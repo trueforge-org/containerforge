@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/fluidd-core/fluidd
+- **Documentation**: https://docs.fluidd.xyz
 
 ## Fields
 

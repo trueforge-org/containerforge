@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/qdm12/ddns-updater
+- **Documentation**: https://github.com/qdm12/ddns-updater/tree/master/docs
 
 ## Fields
 

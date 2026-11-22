@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/mozilla-services/syncserver
+- **Documentation**: https://mozilla-services.github.io/syncstorage-rs/
 
 ## Fields
 

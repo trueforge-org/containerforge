@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/autobrr/autobrr
+- **Documentation**: https://autobrr.com/introduction
+- **Website**: https://autobrr.com
 
 ## Fields
 

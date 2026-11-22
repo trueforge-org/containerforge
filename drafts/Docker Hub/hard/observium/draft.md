@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.observium.org/
+- **Documentation**: https://docs.observium.org/
 
 ## Fields
 

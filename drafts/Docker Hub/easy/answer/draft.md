@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/answerdev/answer
+- **Documentation**: https://answer.apache.org/docs/installation
+- **Website**: https://answer.apache.org
 
 ## Fields
 

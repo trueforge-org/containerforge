@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/audacity/audacity
+- **Documentation**: https://manual.audacityteam.org/
+- **Website**: https://www.audacityteam.org/
 
 ## Fields
 

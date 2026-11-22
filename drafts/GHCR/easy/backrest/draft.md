@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/garethgeorge/backrest
+- **Documentation**: https://garethgeorge.github.io/backrest/introduction/getting-started
+- **Website**: https://garethgeorge.github.io/backrest/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/mozilla-firefox/firefox
+- **Documentation**: https://support.mozilla.org/
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/advplyr/audiobookshelf
+- **Documentation**: https://www.audiobookshelf.org/docs
+- **Website**: https://www.audiobookshelf.org/
 
 ## Fields
 

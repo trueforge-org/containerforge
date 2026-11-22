@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/RickDB/PlexAniSync
+- **Documentation**: https://github.com/RickDB/PlexAniSync/wiki
 
 ## Fields
 

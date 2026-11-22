@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/authelia/authelia
+- **Documentation**: https://www.authelia.com/
+- **Website**: https://www.authelia.com/
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/mudler/LocalAI
+- **Documentation**: https://localai.io/docs/
+- **Website**: https://localai.io/
 
 ## Fields
 

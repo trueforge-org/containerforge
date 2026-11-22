@@ -18,6 +18,7 @@
 - **Source repository**: https://github.com/goauthentik/authentik
 - **Source repository**: https://github.com/kiwigrid/k8s-sidecar
 - **Source repository**: https://github.com/maxmind/geoipupdate
+- **Documentation**: https://docs.goauthentik.io/
 
 ## Fields
 

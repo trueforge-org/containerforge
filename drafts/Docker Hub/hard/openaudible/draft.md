@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://openaudible.org/
+- **Documentation**: https://openaudible.org/documentation
 
 ## Fields
 

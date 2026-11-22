@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/cloudflare/cloudflared
+- **Documentation**: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/
 
 ## Fields
 

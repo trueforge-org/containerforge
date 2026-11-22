@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/intel/intel-device-plugins-for-kubernetes
+- **Documentation**: https://intel.github.io/intel-device-plugins-for-kubernetes/0.36/
 
 ## Fields
 

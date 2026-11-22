@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/mescon/Muximux
+- **Documentation**: https://github.com/mescon/Muximux/blob/main/docs/wiki/README.md
 
 ## Fields
 

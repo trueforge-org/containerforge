@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/FreeCAD/FreeCAD
+- **Documentation**: https://wiki.freecad.org
+- **Website**: https://www.freecad.org
 
 ## Fields
 

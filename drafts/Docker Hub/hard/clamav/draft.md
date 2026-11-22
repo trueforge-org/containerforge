@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Cisco-Talos/clamav
+- **Documentation**: https://docs.clamav.net/
 
 ## Fields
 

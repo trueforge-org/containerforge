@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/shlinkio/shlink
+- **Documentation**: https://shlink.io/documentation/
+- **Website**: https://shlink.io/
 
 ## Fields
 

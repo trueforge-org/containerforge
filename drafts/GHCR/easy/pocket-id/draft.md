@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/pocket-id/pocket-id
+- **Documentation**: https://docs.pocket-id.org
+- **Website**: https://pocket-id.org
 
 ## Fields
 

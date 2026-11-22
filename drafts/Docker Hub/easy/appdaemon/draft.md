@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/AppDaemon/appdaemon
+- **Documentation**: https://appdaemon.readthedocs.io/
 
 ## Fields
 

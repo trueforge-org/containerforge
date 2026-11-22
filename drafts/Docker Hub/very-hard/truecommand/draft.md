@@ -15,7 +15,7 @@
 
 ## Links
 
-- No application links recorded in `docs/project-fireball.md`.
+- **Documentation**: https://www.truenas.com/docs/truecommand/
 
 ## Fields
 

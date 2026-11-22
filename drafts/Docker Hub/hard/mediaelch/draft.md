@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Komet/MediaElch
+- **Documentation**: https://mediaelch.github.io/mediaelch-doc/about.html
 
 ## Fields
 

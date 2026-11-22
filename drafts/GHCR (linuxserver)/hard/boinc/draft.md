@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/BOINC/boinc
+- **Documentation**: https://github.com/BOINC/boinc/wiki/
+- **Website**: https://boinc.berkeley.edu/
 
 ## Fields
 

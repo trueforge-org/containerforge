@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/node-red/node-red
+- **Documentation**: https://nodered.org/docs/
 
 ## Fields
 

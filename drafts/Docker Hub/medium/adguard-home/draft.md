@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/AdguardTeam/AdGuardHome
+- **Documentation**: https://adguard-dns.io/kb/adguard-home/overview/
 
 ## Fields
 

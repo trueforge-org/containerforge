@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Feramance/qBitrr
+- **Documentation**: https://feramance.github.io/qBitrr/
 
 ## Fields
 

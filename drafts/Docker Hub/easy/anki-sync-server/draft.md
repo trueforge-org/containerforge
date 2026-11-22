@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ankicommunity/anki-sync-server-rs
+- **Documentation**: https://docs.ankiweb.net/sync-server.html
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/WeblateOrg/weblate
+- **Documentation**: https://docs.weblate.org/
 
 ## Fields
 

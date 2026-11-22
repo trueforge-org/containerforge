@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/sysadminsmedia/homebox
+- **Documentation**: https://homebox.software/en/
+- **Website**: https://homebox.software/
 
 ## Fields
 

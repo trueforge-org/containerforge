@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/kiwigrid/k8s-sidecar
+- **Documentation**: https://grafana.com/docs/grafana/latest/
 
 ## Fields
 

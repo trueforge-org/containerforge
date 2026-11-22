@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/genea-app/genea-app
+- **Website**: https://www.genea.app/
 
 ## Fields
 

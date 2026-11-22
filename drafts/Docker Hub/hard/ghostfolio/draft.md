@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ghostfolio/ghostfolio
+- **Website**: https://ghostfol.io
 
 ## Fields
 

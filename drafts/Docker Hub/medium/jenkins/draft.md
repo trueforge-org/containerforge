@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/jenkinsci/jenkins
+- **Documentation**: https://www.jenkins.io/doc/
 
 ## Fields
 

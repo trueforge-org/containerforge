@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/leenooks/phpLDAPadmin
+- **Documentation**: https://github.com/leenooks/phpLDAPadmin/wiki
 
 ## Fields
 

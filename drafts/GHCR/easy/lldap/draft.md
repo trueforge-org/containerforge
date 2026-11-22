@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/lldap/lldap
+- **Documentation**: https://github.com/lldap/lldap/tree/main/docs
 
 ## Fields
 

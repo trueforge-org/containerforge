@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/mailpile/Mailpile
+- **Website**: https://mailpile.is
 
 ## Fields
 

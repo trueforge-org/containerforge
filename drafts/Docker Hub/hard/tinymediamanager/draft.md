@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://gitlab.com/tinyMediaManager/tinyMediaManager
+- **Documentation**: https://www.tinymediamanager.org/docs/
+- **Website**: https://www.tinymediamanager.org/
 
 ## Fields
 

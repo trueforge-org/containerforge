@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/udo-munk/z80pack
+- **Documentation**: https://www.icl1900.co.uk/unix4fun/z80pack
 
 ## Fields
 

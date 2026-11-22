@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/apache/guacamole-client
+- **Documentation**: https://guacamole.apache.org/doc/gug/
 
 ## Fields
 

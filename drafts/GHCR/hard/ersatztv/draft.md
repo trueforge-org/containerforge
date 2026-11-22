@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ErsatzTV/ErsatzTV
+- **Documentation**: https://ersatztv.org/docs/
 
 ## Fields
 

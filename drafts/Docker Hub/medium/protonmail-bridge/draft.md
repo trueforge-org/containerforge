@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/ProtonMail/proton-bridge
+- **Documentation**: https://proton.me/support/mail/bridge
+- **Website**: https://proton.me/mail/bridge
 
 ## Fields
 

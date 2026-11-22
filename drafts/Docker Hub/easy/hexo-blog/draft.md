@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/hexojs/hexo
+- **Documentation**: https://hexo.io/docs/
+- **Website**: https://hexo.io
 
 ## Fields
 

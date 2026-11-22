@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/friendica/friendica
+- **Website**: https://friendi.ca
 
 ## Fields
 

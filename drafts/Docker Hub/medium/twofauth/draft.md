@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Bubka/2FAuth
+- **Documentation**: https://docs.2fauth.app/
+- **Website**: https://2fauth.app/
 
 ## Fields
 

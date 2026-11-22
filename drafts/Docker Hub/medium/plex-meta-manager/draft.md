@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/meisnate12/Plex-Meta-Manager
+- **Documentation**: https://metamanager.wiki/
 
 ## Fields
 

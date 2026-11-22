@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/go-gitea/gitea
+- **Documentation**: https://docs.gitea.com/
 
 ## Fields
 

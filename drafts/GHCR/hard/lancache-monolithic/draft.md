@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/tpill90/steam-lancache-prefill
+- **Documentation**: https://lancache.net/docs
 
 ## Fields
 

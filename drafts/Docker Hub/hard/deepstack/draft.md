@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/johnolafenwa/DeepStack
+- **Documentation**: https://docs.deepstack.cc
+- **Website**: https://deepstack.cc
 
 ## Fields
 

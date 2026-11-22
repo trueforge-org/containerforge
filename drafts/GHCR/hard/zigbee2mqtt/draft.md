@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Koenkk/zigbee2mqtt
+- **Documentation**: https://www.zigbee2mqtt.io/
+- **Website**: https://www.zigbee2mqtt.io/
 
 ## Fields
 

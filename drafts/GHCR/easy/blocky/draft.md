@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/0xERR0R/blocky
 - **Source repository**: https://github.com/k8s-gateway/k8s_gateway
+- **Documentation**: https://0xerr0r.github.io/blocky/latest/
 
 ## Fields
 

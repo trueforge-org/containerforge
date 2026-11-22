@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ShokoAnime/ShokoServer
+- **Documentation**: https://docs.shokoanime.com/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://playvrising.com/
+- **Documentation**: https://github.com/StunlockStudios/vrising-dedicated-server-instructions
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/sourcegraph/sourcegraph
+- **Documentation**: https://sourcegraph.com/docs
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/bbernhard/signal-cli-rest-api
+- **Documentation**: https://bbernhard.github.io/signal-cli-rest-api/
 
 ## Fields
 

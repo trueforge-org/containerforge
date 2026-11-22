@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/d8ahazard/FlexTV
+- **Documentation**: https://github.com/d8ahazard/FlexTV/wiki
 
 ## Fields
 

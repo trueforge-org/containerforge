@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/strapi/strapi
+- **Documentation**: https://docs.strapi.io/
 
 ## Fields
 

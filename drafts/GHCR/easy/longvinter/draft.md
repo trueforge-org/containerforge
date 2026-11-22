@@ -16,6 +16,8 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/1635450/Longvinter/
+- **Documentation**: https://www.longvinter.com/links
+- **Website**: https://www.uuvana.com/
 
 ## Fields
 

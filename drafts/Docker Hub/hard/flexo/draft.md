@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/nroi/flexo
+- **Documentation**: https://github.com/nroi/flexo/wiki
 
 ## Fields
 

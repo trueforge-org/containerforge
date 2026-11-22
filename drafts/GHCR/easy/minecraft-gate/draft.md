@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/minekube/gate
+- **Documentation**: https://gate.minekube.com
 
 ## Fields
 

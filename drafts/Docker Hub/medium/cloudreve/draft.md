@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/cloudreve/Cloudreve
+- **Documentation**: https://docs.cloudreve.org/en
 
 ## Fields
 

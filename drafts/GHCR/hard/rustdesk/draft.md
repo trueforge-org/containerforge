@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/rustdesk-org/rustdesk-server
+- **Documentation**: https://rustdesk.com/docs/en/self-host/
+- **Website**: https://rustdesk.com/
 
 ## Fields
 

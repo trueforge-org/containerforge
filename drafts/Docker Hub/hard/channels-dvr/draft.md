@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://getchannels.com/
+- **Documentation**: https://getchannels.com/docs/
 
 ## Fields
 

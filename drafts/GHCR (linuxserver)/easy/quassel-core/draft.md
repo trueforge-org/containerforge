@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/quassel/quassel
+- **Documentation**: https://bugs.quassel-irc.org/projects/1/wiki
+- **Website**: https://quassel-irc.org/about
 
 ## Fields
 

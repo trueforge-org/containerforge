@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/photoprism/photoprism
+- **Documentation**: https://docs.photoprism.app/
+- **Website**: https://photoprism.app
 
 ## Fields
 

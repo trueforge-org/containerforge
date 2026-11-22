@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://alpinelinux.org
+- **Documentation**: https://dispatcharr.github.io/Dispatcharr-Docs
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/ipfs/kubo
+- **Documentation**: https://docs.ipfs.tech/
 
 ## Fields
 

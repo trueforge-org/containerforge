@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/damonlynch/rapid-photo-downloader
+- **Documentation**: https://damonlynch.net/rapid/documentation
 
 ## Fields
 

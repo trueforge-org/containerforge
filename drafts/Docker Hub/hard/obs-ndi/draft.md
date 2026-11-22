@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/DistroAV/DistroAV
+- **Documentation**: https://github.com/DistroAV/DistroAV/wiki
 
 ## Fields
 

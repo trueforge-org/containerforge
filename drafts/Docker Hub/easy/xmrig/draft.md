@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/xmrig/xmrig
+- **Documentation**: https://xmrig.com/docs
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.unix-ag.uni-kl.de/~bloch/acng/
+- **Documentation**: https://www.unix-ag.uni-kl.de/~bloch/acng/html/
 
 ## Fields
 

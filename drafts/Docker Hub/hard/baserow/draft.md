@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/baserow/baserow
+- **Documentation**: https://baserow.io/docs/index
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/minetest/minetest
+- **Documentation**: https://docs.luanti.org/
 
 ## Fields
 

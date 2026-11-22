@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Kozea/Radicale
+- **Documentation**: https://radicale.org/v3.html
 
 ## Fields
 

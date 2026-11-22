@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://store.steampowered.com/app/223350
+- **Documentation**: https://community.bistudio.com/wiki/DayZ:Hosting_a_Linux_Server
 
 ## Fields
 

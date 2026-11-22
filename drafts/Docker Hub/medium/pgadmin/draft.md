@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/pgadmin-org/pgadmin4
+- **Documentation**: https://www.pgadmin.org/docs/
+- **Website**: https://www.pgadmin.org
 
 ## Fields
 

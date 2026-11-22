@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/airsonic/airsonic
+- **Documentation**: https://airsonic.github.io/docs
 
 ## Fields
 

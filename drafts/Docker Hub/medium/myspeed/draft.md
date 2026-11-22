@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/gnmyt/myspeed
+- **Website**: https://myspeed.dev
 
 ## Fields
 

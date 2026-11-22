@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/sqlitebrowser/sqlitebrowser
+- **Documentation**: https://github.com/sqlitebrowser/sqlitebrowser/wiki
+- **Website**: https://sqlitebrowser.org
 
 ## Fields
 

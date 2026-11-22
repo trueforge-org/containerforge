@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/nicolargo/glances
+- **Documentation**: https://glances.readthedocs.io/en/develop/
 
 ## Fields
 

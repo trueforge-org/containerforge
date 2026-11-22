@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/apache/guacamole-server
+- **Documentation**: http://guacamole.apache.org/doc/gug/
+- **Website**: http://guacamole.apache.org/
 
 ## Fields
 

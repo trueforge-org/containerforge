@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/mattermost/mattermost
+- **Documentation**: https://docs.mattermost.com
+- **Website**: https://mattermost.com
 
 ## Fields
 

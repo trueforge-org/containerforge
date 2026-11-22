@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/icloud-photos-downloader/icloud_photos_downloader
+- **Documentation**: https://icloud-photos-downloader.github.io/icloud_photos_downloader/
 
 ## Fields
 

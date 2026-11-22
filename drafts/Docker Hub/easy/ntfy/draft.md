@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/binwiederhier/ntfy
+- **Documentation**: https://docs.ntfy.sh/
 
 ## Fields
 
