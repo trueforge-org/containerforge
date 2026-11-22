@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream requirements.txt is pulled at build time, so the image depends on the upstream repo and pip index being reachable during build (inferred).
+- caveat: the script needs a config file with Radarr and Sonarr connection details and API keys; it must be created by hand and mounted (inferred).
+- caveat: it is a one-process script with no listening port, so it runs as a job or loop and gives no web UI for checking status (inferred).
+
 ## Fields
 ### Chart / Role
 

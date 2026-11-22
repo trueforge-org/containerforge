@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a reachable Proxmox VE API endpoint and a PVE user or API token with read rights, supplied through the config in /config (inferred)
+- caveat: the pip package is unpinned in the draft, so the exporter version can drift between builds (inferred)
+
 ## Fields
 ### Chart / Role
 

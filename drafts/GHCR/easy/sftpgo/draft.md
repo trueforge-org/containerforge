@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /srv/sftpgo/backups (pvc), /var/lib/sftpgo (pvc), /srv/sftpgo/data (pvc), /shareaccess (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft's /config layout does not match the upstream paths, since data lives under /var/lib/sftpgo and /srv/sftpgo, and the chart mounts four PVCs (data gotcha)
+- caveat: the .deb package installs to system paths such as /usr/bin and /etc, so it does not fit a /config-only layout without a custom config (inferred)
+- caveat: the first admin account is created in the web UI on first use (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

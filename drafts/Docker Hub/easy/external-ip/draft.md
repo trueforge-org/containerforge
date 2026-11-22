@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Notifications need an apprise target URL configured for a service such as email or chat (external service and account) (inferred).
+- caveat: The tool depends on public IP check services, so it needs outbound internet access and fails when they are unreachable (inferred).
+
 ## Fields
 ### Chart / Role
 

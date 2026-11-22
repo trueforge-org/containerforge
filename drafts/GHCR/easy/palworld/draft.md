@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (uses /config and /tmp); chart mounts /serverdata/steamcmd and /serverdata/serverfiles (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; arm64 is marked no.
+- caveat: first start downloads the Palworld dedicated server via SteamCMD (several GB); slow first start (inferred).
+- caveat: RCON and REST API need an admin password set in the server settings file before they can be used; the default must be changed (inferred).
+
 ## Fields
 ### Chart / Role
 

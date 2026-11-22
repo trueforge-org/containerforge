@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /public (pvc, chart key config); web root for served files
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft's amd64 link is the x86_64 illumos tarball, not a Linux build; a Linux gnu asset must be chosen instead (inferred from asset name)
+- caveat: the default port 80 is privileged, so a port above 1024 must be set for rootless runs (inferred)
+- caveat: there is no default web root content; files must be mounted or provided into the served path (manual setup)
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/koyomi/lanraragi/database (pvc); /home/koyomi/lanraragi/content (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: LANraragi bundles its own Redis server and Perl services, so several processes run in one container and the container's health depends on all of them.
+- caveat: The content folder must be mounted and the library is built from what is in it, so an empty or wrongly mapped mount gives an empty library (inferred).
+- caveat: The upstream tag format is `v.0.9.41` with a leading dot, which differs from the usual `vX.Y.Z` style.
+
 ## Fields
 ### Chart / Role
 

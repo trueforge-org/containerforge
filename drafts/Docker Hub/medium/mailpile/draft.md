@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.local/share/Mailpile (pvc), /root/.gnupg (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: upstream Mailpile is legacy and largely unmaintained, and the pip package is old; expect Python compatibility and security issues (inferred).
+- caveat: mail accounts are added and configured manually in the web UI after first start (inferred).
+
 ## Fields
 ### Chart / Role
 

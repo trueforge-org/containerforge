@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the original airsonic project is largely inactive, so the WAR release may lag and a fork may be preferable (upstream status) (inferred)
+- caveat: the music library must be mounted, and the database and state are written to /config on first start (data gotcha) (inferred)
+
 ## Fields
 ### Chart / Role
 

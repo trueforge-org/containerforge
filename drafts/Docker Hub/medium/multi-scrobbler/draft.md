@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: each source (Spotify, Last.fm, Plex, Jellyfin and similar) needs its own account or token configured before scrobbling works (inferred).
+- caveat: the pinned tag 0.21.1 will not pick up newer upstream releases until the draft changes (from draft).
+- caveat: the app writes its config and tokens to a state path that must be persisted (inferred).
+
 ## Fields
 ### Chart / Role
 

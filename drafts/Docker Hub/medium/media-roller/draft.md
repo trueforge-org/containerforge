@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /download (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: yt-dlp needs a JavaScript runtime (deno) and frequent updates to keep working with the sites it downloads from; the pinned version will go stale (from draft, inferred on the update need).
+- caveat: ffmpeg is needed for conversions, and media output needs a large disk (inferred).
+
 ## Fields
 ### Chart / Role
 

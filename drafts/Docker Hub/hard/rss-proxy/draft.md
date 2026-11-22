@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the wrapper only sets FROM the damoeb/feedless core image, so the real app is a JVM plus Node stack with headless browser rendering, which is large (spec).
+- caveat: there are no release assets, so the app can only be built or copied from the upstream image; the upstream tag is `latest`, which is rolling (inferred).
+
 ## Fields
 ### Chart / Role
 

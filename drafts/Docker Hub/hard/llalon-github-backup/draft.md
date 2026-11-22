@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/docker/backups (pvc); /home/docker/github-backup/config/ (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A GitHub token or account credentials must be supplied by the user before backups can run (inferred).
+- caveat: Backups of many repos grow large in /config and /backups, so storage use and GitHub API rate limits both matter (inferred).
+- caveat: The image is rebuilt from an upstream script with no tagged release, so its behavior can change when the master tarball changes.
+
 ## Fields
 ### Chart / Role
 

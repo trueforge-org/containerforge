@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (uses /config and /tmp); chart mounts /serverdata/serverfiles and /serverdata/steamcmd (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; arm64 is marked no.
+- caveat: first start pulls a multi-GB dedicated server through SteamCMD; needs internet and a long first start (inferred).
+- caveat: game port 27102/udp (and query 27131/udp) must be reachable from players; UDP forwarding needed.
+
 ## Fields
 ### Chart / Role
 

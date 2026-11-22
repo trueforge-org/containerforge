@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /database (database volume, pvc default); /data (data volume, pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: First start generates an admin password that is printed in the logs, so the initial login must be captured from there (inferred).
+- caveat: Data location conflicts. The Reason says database and config go to /config, but the chart uses /database and /data, so mount paths must be verified before porting (inferred).
+- caveat: Mounting data read-write gives the app write access to that data, so the mount should be scoped to the folders it should manage (inferred).
+
 ## Fields
 ### Chart / Role
 

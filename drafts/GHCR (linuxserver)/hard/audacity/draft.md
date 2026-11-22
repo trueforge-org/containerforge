@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream AppImage is 4.0.2 while the chart pins linuxserver version-3.0.2, so the version jump may change behaviour (inferred)
+- caveat: GUI is only reachable through the browser desktop, so the container is not useful headless (inferred)
+
 ## Fields
 ### Chart / Role
 

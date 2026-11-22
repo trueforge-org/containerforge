@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /dev (hostPath /dev), /var/lib/kubelet/device-plugins (hostPath)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it is a Kubernetes device plugin, so it has no use as a standalone container outside a cluster with the kubelet device-plugins socket (inferred).
+- caveat: no release binary is published for either architecture, so the image must be compiled from Go source on each build (compile).
+- caveat: the device list passed to the plugin is a config the user writes by hand, and the :latest tag can change the plugin behaviour (inferred).
+
 ## Fields
 ### Chart / Role
 

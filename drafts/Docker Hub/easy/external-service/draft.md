@@ -57,6 +57,12 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: This is a placeholder Alpine image with no application. It only keeps running, so there is nothing to configure or use beyond the keepalive (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/sites (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: farmOS is Drupal and needs an external database (PostgreSQL or MySQL), which is not listed as a dependency (inferred).
+- caveat: the Drupal sites folder must be writable, and the install is completed through the web installer on first run (manual setup, inferred).
+- caveat: the composer build pulls a large dependency tree, so the first build is slow (inferred).
+
 ## Fields
 ### Chart / Role
 

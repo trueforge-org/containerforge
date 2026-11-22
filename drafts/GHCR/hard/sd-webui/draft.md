@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data, /output (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: image generation needs a CUDA GPU; CPU-only hosts run very slowly or fail (inferred).
+- caveat: first start clones the web UI repo and downloads torch and model weights, several GB in total (inferred).
+- caveat: the upstream image has no arm64 copy source, so arm64 needs a build from git source (inferred).
+
 ## Fields
 ### Chart / Role
 

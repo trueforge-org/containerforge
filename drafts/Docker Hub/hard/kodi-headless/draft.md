@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond common (chart adds /config/.kodi, its own mount)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Headless Kodi still needs an X server (Xvfb) and an audio stack, so it is not a pure console service.
+- caveat: The web interface and JSON-RPC on 8080 must be enabled in the Kodi settings before use (inferred).
+- caveat: The arm64 support claim could not be fully confirmed upstream, so it needs a re-check before porting.
+
 ## Fields
 ### Chart / Role
 

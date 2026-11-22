@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/data (pvc, uploads)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the blog stores uploads under /var/www/html/data, so that path must be persistent and writable (inferred)
+- caveat: it needs an external PostgreSQL database and the database must exist before the first start (inferred)
+- caveat: the upstream image is tagged latest and built on php:8.5-apache, so the PHP version can change with the upstream build (inferred)
+
 ## Fields
 ### Chart / Role
 

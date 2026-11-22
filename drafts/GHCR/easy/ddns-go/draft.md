@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The DNS provider account and its API token or key must be set up by the user before any record can be updated (inferred).
+- caveat: Initial settings are normally entered through the web UI on port 9876, so manual setup is expected unless a config file is supplied (inferred).
+- caveat: The image is built from a release tarball and the draft config path is /config, but upstream writes its default config under the home directory, so the config path needs setting explicitly (inferred).
+
 ## Fields
 ### Chart / Role
 

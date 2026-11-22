@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles, /serverdata/steamcmd, and /serverdata/.klei/DoNotStarveTogether (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Hosting a shard requires a Klei cluster token from the user's Klei account, which must be supplied before the server will list (inferred).
+- caveat: arm64 is not supported; SteamCMD's 32-bit x86 bootstrap does not run on arm64, so the image is amd64 only.
+- caveat: The server is downloaded from Steam at start and the first start is slow; game ports are UDP (10999 game, 10998 and 27016 inferred), so UDP forwarding is needed.
+
 ## Fields
 ### Chart / Role
 

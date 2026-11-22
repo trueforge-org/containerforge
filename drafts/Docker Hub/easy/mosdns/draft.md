@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /etc/mosdns (chart's own, pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: DNS on port 53 needs NET_BIND_SERVICE or host networking for a non-root run, or the port must be remapped (inferred)
+- caveat: the rule and list files in /etc/mosdns must be created by hand, and some rule lists are downloaded at start, which needs internet (inferred)
+
 ## Fields
 ### Chart / Role
 

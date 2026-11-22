@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Flask app is installed from a fork's requirements.txt, so the build depends on that fork staying available and on its pinned dependencies (inferred).
+- caveat: the storage backend for short links is not confirmed by the spec; verify where link data is written and persist that path (inferred).
+- caveat: the app is served by uwsgi (inferred), so the port and bind address must match what the chart expects (inferred).
+
 ## Fields
 ### Chart / Role
 

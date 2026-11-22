@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc); draft suggests /config or external DB
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the default database backend is not stated in the draft; it should be confirmed whether /data or an external PostgreSQL is used (inferred)
+- caveat: the first admin setup is done in the web UI on first start (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 has no release binary, so the C# source is compiled with the .NET SDK, which makes the build slow.
+- caveat: Game content and mod assets are fetched on first run, so the first start needs internet (inferred).
+- caveat: The Docker Hub image rmoriz/openra is third-party, and the chart tracks its rolling latest tag.
+
 ## Fields
 ### Chart / Role
 

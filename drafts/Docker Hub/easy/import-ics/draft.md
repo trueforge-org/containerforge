@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /import_ics/ical_export (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the web app has no authentication by default, so it should not be exposed without a proxy in front of it (inferred)
+- caveat: the python 3.9 base and the repo's requirements.txt may pin old packages that need checking (inferred)
+- caveat: the export folder must be mounted, or the generated ICS files are lost on restart (inferred)
+
 ## Fields
 ### Chart / Role
 

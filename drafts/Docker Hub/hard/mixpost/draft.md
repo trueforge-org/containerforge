@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/storage/app (pvc); /var/www/html/storage/logs (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Mixpost needs an APP_KEY and a first-run setup, and social platform accounts need their own API keys before posting works (inferred).
+- caveat: Mixpost Pro features require a paid license, while Lite is free (inferred).
+- caveat: The image is pinned to v2.6.0, and the build source was not found, so the image must be rebuilt from the tagged source.
+
 ## Fields
 ### Chart / Role
 

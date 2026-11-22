@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/pihole (config, pvc chart default); /etc/dnsmasq.d (dnsmasq, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: DNS on port 53 (UDP and TCP) needs a low-port binding capability, and it conflicts with any host resolver already listening on 53 (inferred)
+- caveat: clients only benefit if the container's DNS port is reachable from the LAN, which usually means host networking or a published port (inferred)
+- caveat: blocklists are downloaded at runtime, so the first start needs internet access (inferred)
+
 ## Fields
 ### Chart / Role
 

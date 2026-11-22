@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own config mount /chroma/chroma (pvc); draft expects /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Server is installed with pip (chromadb) at build time, and the rust extension must come as a prebuilt wheel for both amd64 and arm64; a version without an arm64 wheel would break the arm64 build (inferred).
+- caveat: The chart pins image tag 1.5.9 but the draft installs chromadb unpinned, so the ContainerForge build can drift from the tested chart version (inferred).
+- caveat: The API listens on 8000 with no authentication by default, so it should only be reachable from trusted networks (inferred).
+
 ## Fields
 ### Chart / Role
 

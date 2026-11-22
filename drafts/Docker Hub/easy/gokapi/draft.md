@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/config (pvc), /app/data (pvc); chart's own, not common defaults
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the first start needs the admin and storage setup done in the web UI on port 53842 (inferred)
+- caveat: uploaded files live in the data volume; without a persistent mount for /app/data they are lost on restart (inferred)
+
 ## Fields
 ### Chart / Role
 

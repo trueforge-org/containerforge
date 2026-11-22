@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence section in values)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Port 53 on the host is often taken by systemd-resolved or another DNS server, so the host must free it or the port must be remapped (inferred).
+- caveat: Clients only benefit when their DNS points at this container, which is a network-wide change outside the container.
+- caveat: The image pulls cache-domains from git at build time, so the build needs internet access and the domain list can change between builds (inferred).
+
 ## Fields
 ### Chart / Role
 

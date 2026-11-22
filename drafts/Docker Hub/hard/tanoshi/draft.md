@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /tanoshi (chart's own config path)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the original faldez repo is gone, so the successor fork and its build steps must be verified against the old image before use (inferred)
+- caveat: the Rust build with a wasm frontend is long and needs a lot of RAM and disk (inferred)
+- caveat: the upstream image is tagged latest and the project is no longer maintained by its original author, so behavior may change (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a UniFi controller must be reachable, and a local read-only user account is needed for polling (account, inferred)
+- caveat: the source repository link appears under two names, unpoller/unpoller and unifi-poller/unifi-poller; the current upstream should be confirmed (upstream status, inferred)
+
 ## Fields
 ### Chart / Role
 

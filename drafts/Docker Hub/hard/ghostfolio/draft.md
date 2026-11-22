@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a reachable PostgreSQL database at start, and Prisma migrations must run against it before the UI works (inferred).
+- caveat: Valkey (Redis-compatible) is optional but expected by the chart; without it some caching or queue features may be off (inferred).
+- caveat: Nx monorepo build is large, so the first image build and pull are slow and heavy on RAM and disk (inferred).
+
 ## Fields
 ### Chart / Role
 

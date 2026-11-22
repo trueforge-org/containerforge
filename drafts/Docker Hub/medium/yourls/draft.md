@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (DB is the mariadb sibling; no other chart persistence)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The MariaDB sibling must be running and the database credentials set before the install step, and the admin user and password must be set up in the web UI or config (inferred).
+- caveat: Plugins and user content live in the app tree, so upgrading by replacing /app may drop them unless they are kept on a mounted path (inferred).
+
 ## Fields
 ### Chart / Role
 

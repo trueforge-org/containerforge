@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/data (pvc, sqlite DB and backups)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the backup database is SQLite under the data path, so the data volume must be backed up together with the devices it manages (inferred)
+- caveat: the app connects to Tasmota devices over the local network and needs them reachable from the container (inferred)
+- caveat: nginx and php-fpm run as separate processes in one container, which needs rework to run rootless (inferred)
+
 ## Fields
 ### Chart / Role
 

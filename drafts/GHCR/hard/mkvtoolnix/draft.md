@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the apt package is available, but the draft plans a source compile, so build time is long unless the apt route is taken (inferred)
+- caveat: files written under /storage will be owned by the container user, so host ownership and permissions must be planned (inferred)
+- caveat: the GUI is reached only through VNC or noVNC (inferred)
+
 ## Fields
 ### Chart / Role
 

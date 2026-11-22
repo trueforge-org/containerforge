@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cache/flexo as emptyDir (chart persistence, size 10Gi)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the cache is an emptyDir of 10Gi in the chart, so cached packages are lost whenever the pod restarts.
+- caveat: flexo is only useful once Arch clients are pointed at it, so client configuration is a manual step.
+
 ## Fields
 ### Chart / Role
 

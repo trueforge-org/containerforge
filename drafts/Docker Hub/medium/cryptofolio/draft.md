@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/api/data (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The upstream PHP 7.4 base is end of life, so the apt PHP version on ubuntu will differ and the app must be tested on the new version (inferred).
+- caveat: Price data comes from external crypto APIs, so the app needs outbound internet access at runtime (inferred).
+- caveat: Initial account setup is done through the web UI (manual setup, inferred).
+
 ## Fields
 ### Chart / Role
 

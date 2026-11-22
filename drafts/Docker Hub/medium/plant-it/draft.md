@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /uploads and /certificates (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB (or MySQL-compatible) and Valkey/Redis are required services and must be reachable before the server starts.
+- caveat: The first run needs a user account created in the UI or API before the app is usable (inferred).
+- caveat: The client files are served by a second web server, so the container must serve both the jar and the static client.
+
 ## Fields
 ### Chart / Role
 

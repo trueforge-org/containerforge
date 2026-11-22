@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: hostPath /opt/cni/bin, /etc/cni/net.d, /var/lib/cni/multus, /, /run, /run/k8s.cni.cncf.io, /var/run/netns, /var/lib/kubelet (all hostPath); daemon config via configmap
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the container set is a Kubernetes node component with privileged access and host paths, so it only works inside a cluster and not as a standalone Docker container
+- caveat: this container is a crane CLI sidecar; the Multus daemon itself is not built by this image
+
 ## Fields
 ### Chart / Role
 

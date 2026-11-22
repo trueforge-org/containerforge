@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /core_app/index_db (pvc), /core_app/media (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL and Valkey are both required before the web server and Celery workers can run.
+- caveat: OCR depends on tesseract and its language packs, which are not included by default and must be added for non-English documents (inferred).
+- caveat: the index and media paths (/core_app/index_db, /core_app/media) must be persistent, and the first admin user must be created by a command or the UI (inferred).
+
 ## Fields
 ### Chart / Role
 

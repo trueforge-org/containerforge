@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs a Plex token and the credentials of the source service that provides the playlists (inferred)
+- caveat: the chart pulls the upstream image as `:latest`, while the source release is v1.0.2
+
 ## Fields
 ### Chart / Role
 

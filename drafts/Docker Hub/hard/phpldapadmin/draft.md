@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (varrun disabled, common default only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: phpLDAPadmin needs an LDAP server to connect to; the container has no directory of its own (inferred).
+- caveat: the source comes from the phpLDAPadmin archive, so the osixia s6 init and config layout must be rebuilt for rootless use, and the upstream project has had slow maintenance (inferred).
+
 ## Fields
 ### Chart / Role
 

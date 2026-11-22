@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc); /app/public/assets (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Uploaded assets are written to /app/public/assets, which must be backed by persistent storage or uploads are lost on restart (inferred).
+- caveat: The trace confidence is low because the tag did not match cleanly (noted in the draft), so verify the upstream tag before building.
+- caveat: The upstream Alpine build installs python3 and pip; the ubuntu equivalents must be added and checked (inferred).
+
 ## Fields
 ### Chart / Role
 

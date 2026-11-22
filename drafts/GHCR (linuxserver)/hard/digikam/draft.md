@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the linuxserver image is amd64 only, and the arm64 AppImage or apt route is unverified (architecture) (inferred)
+- caveat: a photo library and its database are large and must be mounted to persist (data gotcha) (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (/config only)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Python 2.7 is end of life and the upstream syncserver project is no longer actively developed, so this image has no upstream security path (upstream status).
+- caveat: Firefox Sync needs HTTPS with a public host name, so a reverse proxy with a valid certificate is needed in front of the container (inferred).
+- caveat: the default storage is a local SQLite file, so the data path must be on a persistent volume and backed up (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Slack API token and workspace details are required, and the invite flow only works with an account that has permission to invite users (inferred).
+- caveat: the upstream project appears to be a low-activity Node app; check whether it is maintained before relying on it (inferred).
+- caveat: the source URL in the spec is malformed (`httpss://`), so correct it before using the link as a reference.
+
 ## Fields
 ### Chart / Role
 

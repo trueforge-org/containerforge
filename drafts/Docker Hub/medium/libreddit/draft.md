@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (configmap only, env config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: upstream libreddit is largely unmaintained and has broken as Reddit changed its API and access rules; expect breakage and check the upstream status before deploying (inferred).
+- caveat: arm64 needs a Rust/cargo build stage, which makes that build much slower than amd64 (from draft).
+- caveat: public instances are often blocked or rate-limited by Reddit, so self-hosted instances can fail to load content (inferred).
+
 ## Fields
 ### Chart / Role
 

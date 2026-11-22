@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/backuppc, /home/backuppc, /data/backuppc (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: backup storage is root-owned, so the mounted data paths must allow root writes and the container cannot run as a non-root user without rework (inferred).
+- caveat: the BackupPC admin password and the backup client SSH keys are set up by hand in the web UI or config files after first start (inferred).
+- caveat: the upstream install step was not traced, so the package list and the 4.4.0 tarball layout may change once it is checked.
+
 ## Fields
 ### Chart / Role
 

@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data, /consume, /media (pvc default, chart's own); the draft needs only /tmp beyond these
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: This is only the Tika sidecar; paperless-ngx itself is a separate container and must be set up to reach it.
+- caveat: The minimal tika-server jar has no OCR; the full variant needs tesseract and gdal/fonts, which change the image size and build (inferred).
+- caveat: Parsing large documents uses significant RAM and CPU (inferred).
+
 ## Fields
 ### Chart / Role
 

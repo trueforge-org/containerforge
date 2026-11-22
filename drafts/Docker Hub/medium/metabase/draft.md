@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /plugins (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app database defaults to an embedded H2 file in the data path, which is not suitable for multiple instances; PostgreSQL is recommended (inferred).
+- caveat: the first start can take several minutes while the app initializes, and it needs a few GB of RAM (inferred).
+- caveat: the setup wizard must be completed in the UI to create the admin account (inferred).
+
 ## Fields
 ### Chart / Role
 

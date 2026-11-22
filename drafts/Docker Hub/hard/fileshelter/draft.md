@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/fileshelter (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app is compiled from source against Wt and Boost, so the first build is long and needs substantial build-time RAM.
+- caveat: the native build on arm64 has not been checked against the upstream release (inferred).
+- caveat: web app data is under /var/fileshelter and must be mounted or shares are lost.
+
 ## Fields
 ### Chart / Role
 

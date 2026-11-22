@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.hyperion (pvc, chart default; runs as root path)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Hyperion drives USB and hardware LED devices, so without host device passthrough the main feature does not work at all.
+- caveat: No Dockerfile exists at the 2.2.0 tag, so the image provenance and its build steps are unverified.
+- caveat: Four service ports are exposed (JSON, FlatBuffers, boblight, web UI), so the network setup needs more than one port open.
+
 ## Fields
 ### Chart / Role
 

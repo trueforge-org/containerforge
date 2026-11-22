@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/ts3server (pvc, chart's own; draft expects data in /config, so mismatch); /var/run/ts3server (pvc, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image is amd64 only, since it uses the vendor glibc tar.bz2 build (inferred).
+- caveat: the vendor license must be accepted on first start, and the server admin token is printed in the logs and must be copied out by hand (inferred).
+- caveat: voice (9987/udp), file transfer (30033/tcp) and query (10011/tcp) ports must be reachable, and UDP forwarding is needed for voice (inferred).
+
 ## Fields
 ### Chart / Role
 

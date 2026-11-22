@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (external PostgreSQL via CNPG; grafana configmap only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs an external PostgreSQL database (TimescaleDB is not required, but a PostgreSQL instance must be set up first) (inferred)
+- caveat: it needs a Tesla account and API tokens, and the setup is done through the web UI after first start (inferred)
+- caveat: the Elixir build is long and needs Erlang and Elixir toolchains on both architectures (inferred)
+- caveat: Grafana is a separate service in the upstream stack and is not included in this image (inferred)
+
 ## Fields
 ### Chart / Role
 

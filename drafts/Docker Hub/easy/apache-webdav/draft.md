@@ -61,6 +61,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/dav/data (data volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Apache config file and any WebDAV user accounts must be created by hand, since the image has no usable default configuration (inferred).
+- caveat: The chart tracks `apachewebdav/apachewebdav:latest`, a rolling community image rather than an Apache release, so the upstream source is third-party (inferred).
+
 ## Fields
 ### Chart / Role
 

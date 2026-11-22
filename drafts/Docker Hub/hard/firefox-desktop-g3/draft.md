@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /UNRAID_SHARE (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Firefox profile data lives in the desktop home directory, so it must be persistent or bookmarks and logins are lost.
+- caveat: Firefox needs a larger /dev/shm than the Docker default (inferred), or it may crash.
+- caveat: the desktop image is amd64-tested upstream, so arm64 use is unverified (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: hostPath /etc/machine-id (read-only file); emptyDir /tmpdir (medium Memory)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the client needs a Notifiarr account and API key from notifiarr.com; the service does not work without them (external service).
+- caveat: the release is a .pkg.tar.zst Arch package, so the build needs zstd to unpack it (inferred).
+- caveat: the client reports to a cloud service and needs outbound internet access.
+
 ## Fields
 ### Chart / Role
 

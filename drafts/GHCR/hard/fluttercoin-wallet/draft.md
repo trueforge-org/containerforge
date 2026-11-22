@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /fluttercoin (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported at all, so arm64 hosts cannot run this image (upstream status).
+- caveat: only the headless fluttercoind runs here, so wallet setup and transactions are done over RPC or the command line, not a GUI (inferred).
+- caveat: the chart pins the rolling latest tag of a third-party image, and the first start may need a long chain sync (inferred).
+
 ## Fields
 ### Chart / Role
 

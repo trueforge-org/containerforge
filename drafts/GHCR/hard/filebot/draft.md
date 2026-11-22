@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage, /watch, /output (type not set, likely pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the GUI runs through VNC or noVNC, and the input and output folders (/watch, /storage, /output) must be mounted with matching ownership (inferred).
+- caveat: FileBot is a commercial tool and some features need a license key, so a free trial or paid key may be required (inferred).
+- caveat: the amd64 and arm64 artifacts are different package types (a .deb and a portable tarball), so the build steps differ by architecture (inferred).
+
 ## Fields
 ### Chart / Role
 

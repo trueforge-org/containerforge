@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/share/pwm (pvc default, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PWM needs an LDAP directory and a configuration file; the first launch uses a configuration password that must be set, or the setup UI stays locked (inferred).
+- caveat: The Tomcat setup adds moving parts (inferred), and the WAR needs Java 8 on the java8 sibling.
+- caveat: The upstream image is alpine-based and the chart tracks the alpine tag, so the rebuilt base may differ.
+
 ## Fields
 ### Chart / Role
 

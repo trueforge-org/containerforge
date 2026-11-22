@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, media)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Twonky server is closed-source and x86-64 only, so arm64 is not supported (inferred)
+- caveat: the vendor zip is pinned to 8.5.2 on a vendor download URL that may move or disappear (inferred)
+- caveat: a media library must be mounted in the container, and the server scans the whole path on first start, which can be slow (inferred)
+- caveat: UPnP/DLNA discovery on UDP 1900 needs host networking or multicast forwarding to be visible to clients on the LAN (inferred)
+
 ## Fields
 ### Chart / Role
 

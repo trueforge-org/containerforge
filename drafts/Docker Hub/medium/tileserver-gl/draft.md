@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined; map data, styles, fonts)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Map data, styles and fonts must be supplied by the user under /data; the server starts with no usable maps out of the box.
+- caveat: Vector tile rendering is CPU and memory heavy, and large map extracts need a lot of RAM (inferred).
+- caveat: Upstream image is pinned to v5.7.0 in the chart, so newer releases may change style and font handling.
+
 ## Fields
 ### Chart / Role
 

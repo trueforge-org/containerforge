@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles (serverfiles, pvc chart default); /serverdata/steamcmd (steamcmd, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported, because the dedicated server is a Windows build that runs under Wine
+- caveat: the server files are a large SteamCMD download, and Wine and Xvfb make the first start slow (inferred)
+- caveat: game ports 7777 and 27015 UDP and RCON on TCP 27020 must be published for players and admins (inferred)
+
 ## Fields
 ### Chart / Role
 

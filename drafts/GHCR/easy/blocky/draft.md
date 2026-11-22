@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (PostgreSQL and redis are external)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Two containers are needed: blocky and the k8s_gateway CoreDNS sidecar, and k8s_gateway only does useful work inside a Kubernetes cluster (inferred).
+- caveat: Blocky needs its config file and block lists in /config, and it downloads those block lists at runtime, so internet access is needed (inferred).
+- caveat: Clients must point at the host IP on port 53, which often collides with systemd-resolved or another resolver on the host (inferred).
+
 ## Fields
 ### Chart / Role
 

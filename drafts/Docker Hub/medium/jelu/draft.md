@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /database (pvc), /files/images (pvc), /files/imports (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: book metadata lookups need outbound internet access to external sources (inferred).
+- caveat: library data must sit on a persisted volume; the draft does not name the data path, so verify it (inferred).
+
 ## Fields
 ### Chart / Role
 

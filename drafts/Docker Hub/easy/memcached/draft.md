@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (in-memory cache; no persistence in values)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the default config of Ubuntu's memcached listens on localhost only, so it must be set to listen on the container interface for other containers to reach it (inferred)
+- caveat: memcached has no authentication and should stay on an internal network (inferred)
+- caveat: the cache is in memory and empty after every restart, by design
+
 ## Fields
 ### Chart / Role
 

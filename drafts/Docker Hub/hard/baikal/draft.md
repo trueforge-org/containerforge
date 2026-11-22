@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/baikal/config (pvc, chart mount; draft uses /config); /var/www/baikal/Specific (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Baikal config and data dirs (/var/www/baikal/config and Specific) are not under /config in the draft, so the first setup wizard writes to paths that must be mapped.
+- caveat: The first-run setup wizard in the web UI creates the admin account and the database; no config file is shipped with the image (inferred).
+- caveat: Needs nginx and php-fpm running together, so a supervisor or s6 layout is required; it cannot be a single-process image.
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/db, /var/www/html/images/uploads/logos (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no PHP runtime sibling exists, so PHP 8.3 must be installed on ubuntu and kept in sync by the user (inferred).
+- caveat: nginx, php-fpm and cron run in one container under a startup script, so a crash in one service may go unnoticed (inferred).
+- caveat: the SQLite database and logo uploads must be writable by the web user, and the first account is created through the UI (inferred).
+
 ## Fields
 ### Chart / Role
 

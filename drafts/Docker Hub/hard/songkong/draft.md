@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /music (pvc, media), /songkong (pvc, app state)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: closed-source vendor Linux download; the license terms and whether it may be redistributed inside an image must be checked before publishing
+- caveat: the vendor download is the only artifact, so the image depends on the vendor URL staying available (inferred)
+- caveat: the upstream image is tagged latest, so the version it runs can change without notice (inferred)
+- caveat: arm64 is not covered by any vendor artifact found in the spec, so arm64 is likely unsupported (inferred)
+
 ## Fields
 ### Chart / Role
 

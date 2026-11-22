@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /pictures, /thumbs (chart persistence, type not shown; /config is the chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there is no release binary for arm64, so arm64 must compile with the .NET SDK, which makes the build slow.
+- caveat: the app expects a PostgreSQL or other database sidecar, but none is listed as a dependency, so a database must be provided separately.
+- caveat: the chart uses the rolling latest tag, so upstream changes reach the image without a version pin.
+
 ## Fields
 ### Chart / Role
 

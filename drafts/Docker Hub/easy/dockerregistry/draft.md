@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/registry (datastoragepath, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The registry runs without authentication by default. Auth and a config.yml must be set up by hand before it is exposed (inferred).
+- caveat: Docker clients expect TLS for a remote registry, so an HTTPS front end or insecure-registry settings are needed for non-local use (inferred).
+- caveat: Storage is not reclaimed automatically. Deleted image layers need the garbage-collect command run by hand (inferred).
+
 ## Fields
 ### Chart / Role
 

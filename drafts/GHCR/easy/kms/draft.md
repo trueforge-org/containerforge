@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: py-kms is a KMS activation emulator; using it is only for licensed products and must follow local licensing rules (inferred).
+- caveat: KMS clients look for port 1688 (often via DNS SRV records); if the container is mapped to another port, clients need explicit configuration (inferred).
+- caveat: copy-from is no for both architectures, so the image must install py-kms with pip on the python base; the pinned release (v1.0.1) must be re-checked against the pip package.
+
 ## Fields
 ### Chart / Role
 

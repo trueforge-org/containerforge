@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/default (pvc, home), /mnt/games (pvc), /var/lib/flatpak (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the desktop stream needs privileged mode and GPU or input device access; without them the stream will not work (inferred)
+- caveat: Steam login and game ownership are needed to play, and games install from Steam over the internet (inferred)
+- caveat: the desktop stack is large and the first start is slow (inferred)
+- caveat: amd64 only, since Valve ships Steam only for x86-64 (inferred)
+
 ## Fields
 ### Chart / Role
 

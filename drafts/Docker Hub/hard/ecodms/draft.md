@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /srv/backup, /srv/data, /srv/restore, /srv/scaninput (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the ecoDMS server packages are amd64 only and closed source, so arm64 is not supported.
+- caveat: a vendor license or activation may be needed for production use (inferred).
+- caveat: the scan input, backup, data and restore folders (/srv/...) must each be mounted, and the admin setup is done in the web UI on first run (inferred).
+
 ## Fields
 ### Chart / Role
 

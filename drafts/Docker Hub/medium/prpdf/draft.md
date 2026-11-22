@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /Archiv/ (files, pvc default); /source/static/pdf/ (hostpath2, type not shown, name suggests hostPath)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Ghostscript version from apt may differ from the upstream 10.03.1 build, so output should be compared against upstream (from the draft).
+- caveat: The hostpath2 mount at /source/static/pdf may need a hostPath, which carries host-side ownership and permission constraints (inferred).
+- caveat: The Docker Hub image knex666/prpdf is a third-party build of the upstream tool.
+
 ## Fields
 ### Chart / Role
 

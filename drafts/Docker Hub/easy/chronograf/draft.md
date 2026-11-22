@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/chronograf (chronograf volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Chronograf is a UI for an InfluxDB server, so an InfluxDB data source must be added through the UI before it is useful (external service) (inferred).
+- caveat: InfluxData has moved Chronograf into maintenance mode, so upstream development is limited (inferred).
+- caveat: The chart uses `chronograf:latest`, a rolling tag, while the draft pins 1.11.7 (inferred).
+
 ## Fields
 ### Chart / Role
 

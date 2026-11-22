@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/.local/share/signal-cli (pvc, chart config via targetSelector)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Requires registering or linking a Signal account through the REST API before any message can be sent; the account is tied to a phone number.
+- caveat: Signal account state under /home/.local/share/signal-cli must persist, or the account must be re-registered and rate limits may apply.
+- caveat: The JVM child process needs enough memory; small RAM limits can cause the signal-cli process to be killed (inferred).
+
 ## Fields
 ### Chart / Role
 

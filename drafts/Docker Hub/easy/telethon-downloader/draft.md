@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /download and /watch (pvc, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Telegram API ID and hash are required, and the first run needs an interactive login with a phone code or 2FA password, which must be done in the container (inferred).
+- caveat: the session file holds the login and must be persisted, or the login has to be repeated after every recreate (inferred).
+- caveat: the upstream requirements.txt is installed at build time, so the image depends on the upstream repo staying available (inferred).
+
 ## Fields
 ### Chart / Role
 

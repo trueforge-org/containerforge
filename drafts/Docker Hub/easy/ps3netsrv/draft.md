@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /games (pvc, chart's own mount; draft mounts it read-only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 uses a prebuilt release zip; arm64 is a source build with gcc/meson, so arm64 support is untested (inferred).
+- caveat: the PS3 side needs a game-folder share on the network; the server only serves what is mounted under its games path, so that path must be mounted from the host (inferred).
+- caveat: port 38008/tcp must be reachable from the PS3 on the LAN, so host or bridged networking with the port published is needed (inferred).
+
 ## Fields
 ### Chart / Role
 

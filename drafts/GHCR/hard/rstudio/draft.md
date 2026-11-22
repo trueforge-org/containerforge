@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/rstudio/.config/rstudio (config, pvc chart default); /home/rstudio/workspace (workspace, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: RStudio Server logs in through PAM against system users, so each login user must exist inside the container, which is hard to do rootless (inferred)
+- caveat: the rstudio-server .deb is downloaded from posit.co at build time, so the build needs that site reachable (inferred)
+- caveat: per-user rsession processes write under /home/rstudio, which conflicts with a read-only rootfs (inferred)
+
 ## Fields
 ### Chart / Role
 

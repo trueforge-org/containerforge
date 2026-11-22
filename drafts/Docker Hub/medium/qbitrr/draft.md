@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /completed_downloads (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A running qBittorrent instance plus Sonarr or Radarr API keys are required, and they are entered in the config file the user creates (inferred).
+- caveat: arm64 uses a different package (pip qbitrr2), so amd64 and arm64 are not the same build path.
+- caveat: The web UI build needs the node stage, so the build is two-stage and takes longer (inferred).
+
 ## Fields
 ### Chart / Role
 

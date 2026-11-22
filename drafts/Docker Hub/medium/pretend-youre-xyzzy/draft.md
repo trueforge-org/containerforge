@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The image is third-party (cyb3rjak3/dockeryourxyzzy) built from the upstream PretendYoureXyzzy source, so provenance differs from the source repo.
+- caveat: The Maven build from source adds build time and needs internet access (inferred).
+- caveat: Game state and the card database live under /config; no other storage is needed.
+
 ## Fields
 ### Chart / Role
 

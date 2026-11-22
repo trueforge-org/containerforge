@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (chart's own)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: `hexo server` is a development server, not a production web host, and it needs writable site folders (inferred)
+- caveat: the first start runs npm install for the site's plugins, which needs internet and can be slow (inferred)
+
 ## Fields
 ### Chart / Role
 

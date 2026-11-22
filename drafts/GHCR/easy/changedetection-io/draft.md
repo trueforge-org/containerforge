@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /datastore pvc (chart; the app's data path, so remap or keep it as a mount)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Browser-based fetchers (JavaScript rendering) run in separate containers that are not in this image, so pages that need JavaScript will not be fetched without them.
+- caveat: The chart tag is pinned to 0.70.4 while the upstream tag is rolling, so upgrades must be chosen deliberately (inferred).
+- caveat: Notification and webhook targets have no default and must be entered in the UI before alerts are sent (inferred).
+
 ## Fields
 ### Chart / Role
 

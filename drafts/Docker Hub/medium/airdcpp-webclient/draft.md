@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /.airdcpp (pvc, config dir; the Reason says it must move to /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the arm64 build is compiled from source with Boost and other dev packages, which makes that architecture slow to build (inferred)
+- caveat: the amd64 build comes from a vendor portable tarball that is not version-pinned in the spec (inferred)
+- caveat: the ADC transfer port 21248 must be forwarded from the router for active transfers to work (inferred)
+
 ## Fields
 ### Chart / Role
 

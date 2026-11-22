@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (data volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Users' IRC logins and settings must be kept in persistent storage, and the draft's /config and the chart's /data paths disagree (inferred).
+- caveat: The upstream khlieng/dispatch project appears to have low recent activity, so its maintenance status should be checked (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /electrum (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the wallet is a GUI desktop app shown through noVNC, so there is no headless setup path in this image (inferred).
+- caveat: the wallet seed and password live under /electrum and must be backed up by the user, because losing that volume loses the funds (inferred).
+- caveat: the chart pins the third-party ich777 image at the rolling latest tag, and the wallet connects to public Electrum servers over the internet (inferred).
+
 ## Fields
 ### Chart / Role
 

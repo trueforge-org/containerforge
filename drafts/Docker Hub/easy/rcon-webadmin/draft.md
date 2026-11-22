@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/rcon-web-admin/db (pvc, chart's own; draft expects config in /config, so mismatch)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it only manages a game server that already exposes RCON, so the target server's RCON host, port and password must be supplied in its config (inferred).
+- caveat: the web admin has no bundled user management; access control has to come from the reverse proxy or an upstream auth setting (inferred).
+- caveat: the arm64 and amd64 status of the npm dependency tree is unverified; test the build on both (inferred).
+
 ## Fields
 ### Chart / Role
 

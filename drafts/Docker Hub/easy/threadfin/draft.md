@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/threadfin/conf (pvc, chart's own; draft expects /config, so mismatch); /tmp/threadfin (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the TV source (M3U or XMLTV playlist) and the web UI setup must be completed by hand after first start, since the container ships no configuration (inferred).
+- caveat: DVB or HDHomeRun discovery needs multicast or host networking, which is a manual network setting (inferred).
+- caveat: ffmpeg is optional and must be installed for transcoding features, so transcoding needs a larger image or extra packages (inferred).
+
 ## Fields
 ### Chart / Role
 

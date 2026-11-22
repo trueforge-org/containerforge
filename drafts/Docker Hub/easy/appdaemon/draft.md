@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /conf (conf volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a Home Assistant instance (or compatible endpoint) and a long-lived access token in the AppDaemon config (external service and account) (inferred).
+- caveat: The config and apps folders under /conf must exist and contain at least a minimal configuration before the first start (inferred).
+
 ## Fields
 ### Chart / Role
 

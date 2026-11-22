@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this is a placeholder hello-world image, not a MetalLB configuration; it prints a message and exits, so the container will not stay running
+- caveat: real MetalLB configuration is applied as Kubernetes resources to a cluster and does not run as a container
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence: {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Next.js app built from upstream main with no pinned tag, so the build can break when upstream changes.
+- caveat: Reddit's API access rules and rate limits apply; a registered app or a changed API policy can break the client (inferred).
+
 ## Fields
 ### Chart / Role
 

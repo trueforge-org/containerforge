@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/cache (config, pvc chart default); /data/logs (logs, pvc chart default); /data/prefill (prefill, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this image is a prefill helper sidecar for the lancache monolithic cache; on its own it prefills nothing useful
+- caveat: the tag is latest with no pinned upstream release, so behaviour can change between pulls (upstream status)
+- caveat: first start downloads SteamPrefill and other prefill tools at runtime and runs cron scheduling, so first start is slow and needs internet access (inferred)
+- caveat: prefilling Steam content generally needs a Steam account that owns the games (inferred)
+
 ## Fields
 ### Chart / Role
 

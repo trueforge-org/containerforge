@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs a reachable Tvheadend server and its URL and credentials supplied as configuration, so it is not standalone (inferred).
+- caveat: the source is a single Flask script from the upstream master zip, so the image tracks upstream master rather than a tagged release (inferred).
+
 ## Fields
 ### Chart / Role
 

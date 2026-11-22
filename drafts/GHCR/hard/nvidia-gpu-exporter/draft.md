@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: hostPath x5 (GPU devices, nvidia-smi and nvidia-ml libraries as listed under other-security); no pvc
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the container runs privileged and mounts host NVIDIA device nodes and libraries at fixed paths, so the host driver layout must match (inferred)
+- caveat: it only produces data on hosts with an NVIDIA GPU and a working nvidia-smi
+- caveat: the exporter listens on 9835 for metrics only, so it needs a Prometheus scrape or a similar consumer (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /IYUU/db (pvc, config path used by chart instead of /config), /torrents (pvc), /BT_backup (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the source is an unpinned HEAD archive, so rebuilds can change behavior without a version bump (from draft).
+- caveat: pushing and downloader integration need an IYUU account or token from iyuu.cn (inferred).
+- caveat: composer packages are fetched at build time; the build needs internet access (inferred).
+
 ## Fields
 ### Chart / Role
 

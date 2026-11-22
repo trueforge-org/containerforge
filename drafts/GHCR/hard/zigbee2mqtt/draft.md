@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart path, type not set)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Zigbee coordinator serial device path (for example /dev/ttyUSB0) must be set in configuration.yaml, and a wrong path means no devices are seen (inferred).
+- caveat: an MQTT broker is required and is an external service the user must run (inferred).
+- caveat: the pnpm-built dist is copied from CI onto an alpine image in upstream, so the ubuntu build must be reproduced from the release tarball (inferred).
+
 ## Fields
 ### Chart / Role
 

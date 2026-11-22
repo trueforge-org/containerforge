@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The DNS service binds to port 53, which needs root or a remapped port; on many hosts systemd-resolved already holds port 53 (inferred).
+- caveat: Cloudflare's cloudflared proxy-dns feature is deprecated (inferred), so the image may stop working or need a different upstream.
+- caveat: DNS needs both UDP and TCP exposed, and the container needs outbound access to Cloudflare endpoints (inferred).
+
 ## Fields
 ### Chart / Role
 

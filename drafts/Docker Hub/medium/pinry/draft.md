@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /data (pvc default, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upload and media storage under /data must be writable and sized for the images (inferred).
+- caveat: Admin account creation is a manual step (createsuperuser) that must be run after first start (inferred).
+- caveat: Django needs a secret key set through the environment; the default is not for production (inferred).
+
 ## Fields
 ### Chart / Role
 

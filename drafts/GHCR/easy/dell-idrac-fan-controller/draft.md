@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: It needs IPMI over LAN enabled on the Dell iDRAC and valid iDRAC credentials, so it only works with Dell PowerEdge servers that have an iDRAC (inferred for the supported hardware range).
+- caveat: The image tag is latest, a rolling tag, so the controller version can change between pulls (inferred).
+- caveat: Fan control affects server cooling, so the user should verify temperature behaviour after first start.
+
 ## Fields
 ### Chart / Role
 

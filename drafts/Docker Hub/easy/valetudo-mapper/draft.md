@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the mapper must reach a Valetudo-enabled robot vacuum on the LAN, so robot IP and network access are needed and the robot must be rooted with Valetudo (inferred).
+- caveat: the build uses the upstream master zip and npm install, so the image tracks upstream master and needs internet access at build time (inferred).
+
 ## Fields
 ### Chart / Role
 

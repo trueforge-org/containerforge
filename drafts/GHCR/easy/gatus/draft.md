@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /config (chart configmain mount, pvc); no extra paths
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: This is a sidecar, not a standalone app, and it expects to run next to a Gatus main container and a Kubernetes API to read its configuration (inferred).
+- caveat: Outside Kubernetes the controller has no config source to watch, so it will not do anything useful as a standalone container (inferred).
+- caveat: The image is built from source in a golang stage, so the build is slower and the tag must be kept in sync with the upstream sidecar version.
+
 ## Fields
 ### Chart / Role
 

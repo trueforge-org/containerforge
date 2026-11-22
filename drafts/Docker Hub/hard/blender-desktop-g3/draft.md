@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /srv/projects (pvc) and /UNRAID_SHARE (pvc), both chart mounts
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No GPU is configured, so Blender runs in software rendering and is slow for real work (inferred).
+- caveat: arm64 uses the apt blender package and amd64 uses a tarball, so the two arches may ship different Blender versions (inferred).
+- caveat: A VNC desktop is the only UI; the image does not expose Blender as a headless service.
+
 ## Fields
 ### Chart / Role
 

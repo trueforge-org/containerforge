@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /comics (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no Linux binary is published, so both amd64 and arm64 require a long C++ and Qt6 source build (inferred).
+- caveat: the comics library must be mounted at /comics and added in the server config, so this is manual setup (inferred).
+- caveat: the upstream Dockerfile used by the draft is a third-party project, so its maintenance status should be checked (inferred).
+
 ## Fields
 ### Chart / Role
 

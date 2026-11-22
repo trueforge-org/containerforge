@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc), /consume (pvc), /media (pvc); varrun disabled
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft covers only the gotenberg sidecar on port 3000; the paperless-ngx application it serves is a separate image with its own database and broker needs, which are not in this spec (inferred).
+- caveat: Ubuntu ships Chromium as a snap, so a non-snap Chromium must be installed, and the Chromium profile must go under /tmp (spec).
+- caveat: the image pulls in LibreOffice, Chromium and PDF tools, so it is a large image with long build and pull times.
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/log, read-only (hostPath or pvc, type not set in values; draft says read from a shared volume)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: It reads Nginx Proxy Manager logs from a shared volume, so the NPM container's log path must be mounted read-only into this container and kept in sync (inferred).
+- caveat: The image tag is latest, a rolling tag from a third-party image, so upstream changes can break the wrapper without notice (inferred).
+- caveat: The realtime report on port 7880 uses WebSocket, so a reverse proxy in front of it must forward upgrade headers (inferred).
+
 ## Fields
 ### Chart / Role
 

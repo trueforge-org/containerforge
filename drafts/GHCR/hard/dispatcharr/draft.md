@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/run/postgresql (socket dir, type not set); /data is the common app path
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart's alpine dependency is missing from ContainerForge, so the companion container must be rebuilt or replaced before the stack runs.
+- caveat: the app runs several processes (web, Celery, nginx, Redis or database helpers) and needs ffmpeg, so memory and CPU use are higher than a single Python service (inferred).
+- caveat: the upstream app depends on a project-owned base image that is not in this repo, so the base must be recreated locally before the first build.
+
 ## Fields
 ### Chart / Role
 

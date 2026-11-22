@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (chart has persistence: {} and the draft uses /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a Pushover account with an application token and user key before any notification is sent (external service).
+- caveat: the chart uses the rolling `latest` tag of the ich777 image; the draft's shell script has no release pin to match.
+- caveat: the script needs outbound internet access to check the server it monitors and to reach Pushover.
+
 ## Fields
 ### Chart / Role
 

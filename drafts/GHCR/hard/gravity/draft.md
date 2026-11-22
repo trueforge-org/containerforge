@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: DHCP and DNS need host networking or a LAN-reachable address, because bridge networking will not receive DHCP broadcasts (inferred).
+- caveat: ports 53, 67 and 69 are privileged, so the container needs root or NET_BIND_SERVICE, which conflicts with a rootless goal (inferred).
+- caveat: the upstream server binary is not published, so the image is only as good as the local Go build (compile).
+
 ## Fields
 ### Chart / Role
 

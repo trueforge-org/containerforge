@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/db (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app is a Meteor bundle copied from a 2020 image and needs a matching old Node runtime, so it is hard to keep working on a current base (inferred).
+- caveat: It needs a reachable MongoDB server to connect to, and it is only useful with a database to browse.
+- caveat: No upstream release artifact exists, so the bundle path inside the copy-from image is unverified.
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.config/mango (pvc), /root/mango (pvc)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart mounts data under /root, so a non-root run must move the config and library paths to a writable location (inferred)
+- caveat: the manga library must be mounted and scanned before any content shows, and scans of large libraries are slow (inferred)
+
 ## Fields
 ### Chart / Role
 

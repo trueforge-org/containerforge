@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /vaults (vaults, pvc chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Obsidian is closed-source and paid features such as Sync need an Obsidian account (inferred)
+- caveat: the arm64 build is an AppImage, which needs FUSE (libfuse2) and usually a privileged or fuse-enabled container (inferred)
+- caveat: the image comes from a third-party maintainer (sytone), not from Obsidian, and vaults must be created or opened in the UI (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chart pins `adminer:latest`, a rolling tag, while the spec pins release 6.3.1, so the running version can drift from the spec (inferred).
+- caveat: Adminer is only a UI. It needs network access to a separate database server (MySQL, PostgreSQL and similar), which is not bundled (inferred).
+
 ## Fields
 ### Chart / Role
 

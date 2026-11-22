@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/traggo/data (pvc, chart's own; draft expects /config, so mismatch)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the first admin user is created through the web UI on first start, so the instance is open until that step is done (inferred).
+- caveat: the SQLite database is written to a data path that must be persisted and is not under /config by default (inferred).
+
 ## Fields
 ### Chart / Role
 

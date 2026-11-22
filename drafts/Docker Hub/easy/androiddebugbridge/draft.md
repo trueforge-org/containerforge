@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs Android TV or Fire TV devices reachable on the network with ADB debugging enabled and the ADB key authorized on each device (inferred).
+- caveat: The ADB key material must persist under /config, or the device will prompt for authorization again after every restart (inferred).
+
 ## Fields
 ### Chart / Role
 

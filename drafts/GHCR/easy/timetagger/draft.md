@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/_timetagger (pvc, chart key config); draft keeps data in /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart stores data under /opt/_timetagger, while the draft keeps data in /config, so existing data needs to be moved (data gotcha)
+- caveat: credentials for the web UI are set by environment or config and must be configured before exposing the service (manual setup, inferred)
+- caveat: the pip package is unpinned in the draft, so the version can drift (inferred)
+
 ## Fields
 ### Chart / Role
 

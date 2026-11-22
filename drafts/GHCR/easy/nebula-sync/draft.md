@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs at least two reachable Pi-hole or AdGuard Home instances as source and target; it does nothing without them (external service).
+- caveat: credentials for those instances are supplied through environment variables or a config file; the first run fails if they are missing or wrong (inferred).
+
 ## Fields
 ### Chart / Role
 

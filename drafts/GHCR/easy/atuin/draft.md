@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (PostgreSQL is the external cluster)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: An external PostgreSQL database must exist and its URL must be set before the first start, and migrations run at startup (inferred).
+- caveat: The sync server needs user registration enabled in config, and each client must be pointed at the server address (inferred).
+- caveat: Upstream publishes separate linux tarballs per arch, so the draft should pin the release binary rather than rely on the rolling chart tag (inferred).
+
 ## Fields
 ### Chart / Role
 

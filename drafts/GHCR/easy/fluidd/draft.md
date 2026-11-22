@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond common defaults
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Fluidd is only a web UI, so it needs a reachable Moonraker or Klipper API endpoint on the network, configured by the user, before it shows any printer data (inferred).
+- caveat: The nginx sibling listens on port 80 by default, which a non-root container cannot bind without a port change (inferred).
+
 ## Fields
 ### Chart / Role
 

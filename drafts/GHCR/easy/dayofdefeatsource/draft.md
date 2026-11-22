@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported; SteamCMD's 32-bit x86 bootstrap does not run on arm64, so the image is amd64 only.
+- caveat: The image tag is dods, but the server is pulled and updated from Steam on each start, so first start and updates need internet access (inferred).
+- caveat: Game and rcon traffic use 27015 over TCP and UDP, and SourceTV uses 27020 UDP (inferred), so both protocols must be published.
+
 ## Fields
 ### Chart / Role
 

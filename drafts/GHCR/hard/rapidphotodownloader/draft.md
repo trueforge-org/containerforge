@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /rapidphotodownloader (datadir, pvc chart default); /media/destination (destinantionfolder, pvc chart default); /media/source (sourcefolder, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the GUI is reached only through noVNC or VNC, so a browser or VNC client is needed (inferred)
+- caveat: camera and card-reader imports need USB device passthrough, which the chart values do not show (inferred)
+- caveat: imported files keep the container user's ownership, so the source and destination mounts need checking (inferred)
+
 ## Fields
 ### Chart / Role
 

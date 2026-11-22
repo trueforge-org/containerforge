@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /dashmachine/dashmachine/user_data (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app writes its config and SQLite database inside its own folder, so paths must move to /config and /tmp to work with a read-only rootfs (noted in the draft, unverified).
+- caveat: Dashboard content is created through the web UI (manual setup, inferred).
+- caveat: The chart persists /dashmachine/dashmachine/user_data, which differs from the /config layout, so the mapping must be updated.
+
 ## Fields
 ### Chart / Role
 

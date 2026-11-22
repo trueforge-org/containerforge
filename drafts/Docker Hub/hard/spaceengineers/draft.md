@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.steam (pvc, steam cache, root path), /appdata/space-engineers/plugins (pvc), /appdata/space-engineers/SpaceEngineersDedicated (pvc), /appdata/space-engineers/instances (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the dedicated server runs under Wine, which is heavy in RAM and CPU and has a slow first start while SteamCMD downloads the game files (inferred)
+- caveat: the game download is large (several GB) and needs internet access on first start (inferred)
+- caveat: the game is Steam-licensed; the dedicated server is free to download, but the chart's upstream image depends on Steam and anonymous SteamCMD login (inferred)
+- caveat: amd64 only; Wine on arm64 is not expected to work (inferred)
+
 ## Fields
 ### Chart / Role
 

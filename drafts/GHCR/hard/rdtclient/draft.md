@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/db (db, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Real-Debrid account and API token must be entered in the UI before it does anything (account needed, inferred)
+- caveat: the aria2-pro sidecar it depends on is missing from ContainerForge, and it runs as root with a writable rootfs
+- caveat: download and data paths under /data must be mounted with enough space (resource needs, inferred)
+
 ## Fields
 ### Chart / Role
 

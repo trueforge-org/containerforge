@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /unRAID (pvc, vendor share path)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the vendor product is legacy, so stability and continued vendor support are uncertain (inferred)
+- caveat: the closed-source server is downloaded from a vendor site at build time, so the download URL must still work (inferred)
+- caveat: amd64 only; the vendor tarball is not published for arm64 (inferred)
+
 ## Fields
 ### Chart / Role
 

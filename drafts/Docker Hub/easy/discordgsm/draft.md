@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (config volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Hard dependency on PostgreSQL, which must be deployed and configured with the credentials the bot uses (external service).
+- caveat: Needs a Discord bot token and an app created in the Discord developer portal before the bot can post (account and API key) (inferred).
+- caveat: The bot must be able to reach each monitored game server for queries, so network reachability to those servers is required (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there is no public Dockerfile, so the image has to be rebuilt from the static Speed-Test assets and the result may not match upstream builds.
+- caveat: the upstream tag is `latest`, which is a rolling tag, so pinning a version is needed for reproducible builds.
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /UNRAID_SHARE (pvc, internalshare)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: real GPU acceleration needs /dev/dri passed into the container; without it, Mesa falls back to software rendering, which is much slower (inferred).
+- caveat: the desktop image is large in RAM and disk, and browsers inside it need extra shared memory (inferred).
+
 ## Fields
 ### Chart / Role
 

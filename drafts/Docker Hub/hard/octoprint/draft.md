@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /octoprint (pvc, chart data); varrun is a common default
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: printer access over serial/USB needs device mounts and dialout group access, so the container is not fully rootless and needs host-side device setup.
+- caveat: the first start has no admin account; create it in the web UI and finish the setup wizard (inferred).
+
 ## Fields
 ### Chart / Role
 

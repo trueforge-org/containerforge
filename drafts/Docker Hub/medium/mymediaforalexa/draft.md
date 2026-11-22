@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /datadir (pvc), /medialibrary (pvc, media)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app depends on Alexa and a vendor web account at mymediaalexa.com; the Alexa side is outside the container (inferred).
+- caveat: the software is distributed as closed-source vendor .deb files, so its license and update path are controlled by the vendor (inferred).
+
 ## Fields
 ### Chart / Role
 

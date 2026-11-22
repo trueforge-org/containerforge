@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /appdata (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the ROOT tarball is built for Ubuntu 26.04 with gcc 15.2, so it must match the ubuntu base or the apt root-system package will be used instead (spec).
+- caveat: the Jupyter notebook server on 8888 is a second process; it may start without authentication unless a token or password is set (inferred).
+- caveat: the ROOT build is large in disk and RAM, and the reference image is an Arch-based build, so the layout differs from the ubuntu target.
+
 ## Fields
 ### Chart / Role
 

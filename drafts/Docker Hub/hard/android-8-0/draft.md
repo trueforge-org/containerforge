@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: unknown - chart persistence is {}; emulator disk storage not described
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Requires /dev/kvm passthrough and an x86 host; it will not run on arm64 or on hosts without nested virtualization (inferred).
+- caveat: Android SDK and emulator images are large and download at build or first run, so expect a very large image and a long first start (inferred).
+- caveat: The emulator is opaque and has no public Dockerfile; treat the base as unverified until a build is tested.
+
 ## Fields
 ### Chart / Role
 

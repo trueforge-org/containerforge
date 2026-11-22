@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/FMD2/lua, /app/FMD2/userdata, /app/FMD2/data, /downloads (chart persistence, type not shown; /config/.wine is under /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported, and running the x86 Wine stack under emulation is not practical.
+- caveat: the Wine prefix lives under /config, so the first start builds the prefix and is slow (inferred).
+- caveat: downloads land in /downloads, which must be mounted and writable.
+
 ## Fields
 ### Chart / Role
 

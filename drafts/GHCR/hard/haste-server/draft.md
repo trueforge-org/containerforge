@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream Dockerfile is gone, so the wrapper config and storage layout are reverse engineered and may not match future upstream releases.
+- caveat: the default file storage can write into the app folder, which breaks a read-only rootfs and needs a writable path (inferred).
+- caveat: the source image is an archived third-party image at the rolling latest tag.
+
 ## Fields
 ### Chart / Role
 

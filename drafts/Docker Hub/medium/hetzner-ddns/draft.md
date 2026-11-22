@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence: {})
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a Hetzner DNS API token and the zone/record names set up front (inferred).
+- caveat: needs outbound internet access to the Hetzner API; no UI and no ports to expose (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /vertex (pvc, chart config volume)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream is a master branch zip with no pinned release, so builds can change without notice.
+- caveat: Torrent client web UI and daemon need to reach the trackers and peers; restricted networks or VPNs need explicit port forwarding (inferred).
+
 ## Fields
 ### Chart / Role
 

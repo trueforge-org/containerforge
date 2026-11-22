@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the ephemeral variant runs a web app, workers and a public gateway together, so several processes are needed in one container.
+- caveat: Ruby gems with native extensions are built at image build time, so the build needs a compiler toolchain (spec).
+- caveat: a public base URL or domain setting is likely needed for links to be generated correctly (inferred).
+
 ## Fields
 ### Chart / Role
 

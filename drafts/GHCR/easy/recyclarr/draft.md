@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the amd64 link is the musl-x64 build; it must be checked that it runs on glibc Ubuntu (inferred)
+- caveat: sync targets (Sonarr and Radarr instances with API keys) and the recyclarr.yml config are manual setup in /config (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/Dockovpn_data (chart persistence, type not shown)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the /dev/net/tun device must be passed through from the host, so the host needs TUN support.
+- caveat: the generated certificates and client configs live in /opt/Dockovpn_data, and losing that data means regenerating every client config.
+- caveat: OpenVPN runs on UDP 1194, so the port must be forwarded and TCP-only networks will not connect.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); draft keeps these under /config, so likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Alien Swarm dedicated server is downloaded through SteamCMD at the first start, which needs internet access and takes a while (inferred).
+- caveat: The SteamCMD base is 32-bit x86 only, so arm64 hosts cannot run it.
+- caveat: Game and RCON ports both use 27015, so host port mapping needs UDP and TCP forwarded (inferred).
+
 ## Fields
 ### Chart / Role
 

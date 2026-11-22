@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 uses the upstream static binary, while arm64 needs a CMake and g++ source build (inferred).
+- caveat: this is a Qt GUI app reached through VNC or noVNC, so output and input are manual, not a service endpoint.
+- caveat: upstream tsMuxer 2.7.0 is an old release, so upstream fixes may be rare (inferred).
+
 ## Fields
 ### Chart / Role
 

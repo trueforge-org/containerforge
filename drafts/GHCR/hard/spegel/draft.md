@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: containerd socket (hostPath, Socket), containerd content dir (hostPath, Directory), containerd registry config dir (hostPath, DirectoryOrCreate)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: spegel only works as a node-level DaemonSet on a containerd cluster; run standalone it does nothing useful (inferred).
+- caveat: nodes must be configured to use the mirror, so the registry mirror only helps after the containerd config is changed on each node (inferred).
+- caveat: arm64 is listed as available but is not tested on arm64 hosts.
+
 ## Fields
 ### Chart / Role
 

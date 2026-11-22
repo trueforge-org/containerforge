@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (pvc chart default); /output (pvc chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: ripping needs the optical drive passed into the container as a device, and the chart values do not show one (inferred)
+- caveat: MakeMKV needs a registration key or beta key entered in its UI, and keys expire and need renewing (inferred)
+- caveat: arm64 support rests on vendor tarballs from makemkv.com, and the build depends on that site being reachable (inferred)
+
 ## Fields
 ### Chart / Role
 

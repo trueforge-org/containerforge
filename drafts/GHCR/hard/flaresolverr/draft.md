@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (browser profile in /tmp uses the common default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image bundles Chromium, so it is large and the first start can be slow, and Ubuntu's snap Chromium cannot be used in this image (inferred).
+- caveat: challenge solving depends on the Chromium build and on Cloudflare behaviour, so solves can start failing after browser or site changes (inferred).
+- caveat: the container runs as root upstream and writes browser profiles, so the read-only rootfs needs the profile path moved to /tmp (inferred).
+
 ## Fields
 ### Chart / Role
 

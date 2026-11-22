@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/server/Data, /home/server/logs (pvc, chart-defined); /home/server/config is chart config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Game server for Skyrim Together, which requires a legally owned copy of Skyrim and the game's data files to be mounted or configured.
+- caveat: The UDP game port must be reachable from players; NAT or firewall rules are a common cause of "cannot connect" reports (inferred).
+- caveat: Libraries are not yet confirmed with ldd, so the read-only rootfs and rootless claims need testing before relying on them.
+
 ## Fields
 ### Chart / Role
 

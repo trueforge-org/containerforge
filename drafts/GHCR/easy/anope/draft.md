@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /anope pvc (chart; draft maps to /config, so remap)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No default services configuration is shipped, so services.conf and the link block to an IRC server must be written by hand before the daemon starts (inferred).
+- caveat: The IRC network to link to is external, so there must be a reachable IRC server for the services to attach to (inferred).
+- caveat: The apt package is 2.0.17 while the draft pins 2.0.20, so version drift needs checking if the pin matters (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the only interface is the GTK GUI through VNC or noVNC, so it is not a command-line SSH client (inferred)
+- caveat: saved sessions and keys live only under the chart /config mount, so without it they are lost on recreation (inferred)
+- caveat: the chart uses a source compile, and the apt putty package would avoid it (upstream status, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/tplink/EAPController/data (pvc), /opt/tplink/EAPController/work (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the controller is a vendor .deb that install.sh downloads from TP-Link at build time, so the build needs internet and depends on that vendor artifact.
+- caveat: MongoDB is bundled and listens on 27017; its data is in the EAPController data/work paths, so those must be persistent or the controller state is lost (inferred).
+- caveat: device discovery and adoption use UDP 29810 and several TCP ports; host networking or a LAN-reachable setup is likely needed (inferred).
+
 ## Fields
 ### Chart / Role
 

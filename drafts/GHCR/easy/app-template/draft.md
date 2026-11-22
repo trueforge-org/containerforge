@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Ookla speedtest CLI is fetched per architecture, so the build or start needs internet access to Ookla's download host (inferred).
+- caveat: The exporter has no UI and needs a Prometheus scraper to be useful, and each run consumes real bandwidth on the host (inferred).
+- caveat: The chart uses a pinned v3.5.4 image, so the draft's build must track that tag rather than latest.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (chart mounts data at /victoria-metrics-data as pvc; draft keeps data in /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Image is pinned to v1.156.0 cluster tarballs; the draft keeps data in /config, so check that the data path flag points there or it will write to the default path.
+- caveat: Single-process time-series DB with no auth by default; anyone who can reach port 8428 can read and write metrics (inferred).
+
 ## Fields
 ### Chart / Role
 

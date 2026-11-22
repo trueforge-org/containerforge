@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is a hard dependency, and Prisma migrations must run before the API starts (inferred).
+- caveat: The API (5003) and client UI (3000) are two listeners, so one container runs two services and needs a process manager (inferred).
+- caveat: Prisma engine binaries are fetched for each architecture at build time, so the build needs internet.
+- caveat: The chart tracks the rolling latest tag of the upstream image.
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none known
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the gallery only shows photos placed in the served path, so the image folder must be mounted or copied in; nginx does not handle uploads (inferred)
+- caveat: amd64 and arm64 claims are unconfirmed against upstream, so check that the release tarball exists for both arches before relying on it
+- caveat: confidence is low; the draft's PHP-write check is still open and the gallery may need writable thumbnail or cache paths (inferred)
+
 ## Fields
 ### Chart / Role
 

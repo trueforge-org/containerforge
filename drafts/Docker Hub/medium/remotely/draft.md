@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/AppData (pvc default, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Agents must reach the server at a public URL or hostname, so the server must be reachable from client machines (inferred).
+- caveat: The chart and draft use /app/AppData and /config differently; runtime data must be mapped to one location.
+- caveat: arm64 has no release binary, so the .NET 8 server must be compiled from source, which is a separate build path (inferred).
+- caveat: The first admin account is created through the setup wizard on first login (inferred).
+
 ## Fields
 ### Chart / Role
 

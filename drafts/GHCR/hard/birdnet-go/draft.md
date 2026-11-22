@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: live audio capture needs a host ALSA or USB microphone passed into the container; without the device the app runs but does not detect birds (inferred).
+- caveat: the release tarballs ship TFLite models, so the image and first start are large; arm64 hardware is not tested here (inferred).
+- caveat: the web UI port 8080 is inferred and should be checked against the release.
+
 ## Fields
 ### Chart / Role
 

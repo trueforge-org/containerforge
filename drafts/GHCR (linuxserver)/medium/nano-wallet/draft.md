@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the linuxserver fork's upstream source was not verified, so the code may differ from the original project (upstream status) (inferred)
+- caveat: the wallet needs access to a Nano node or RPC endpoint over the network (external service) (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,12 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: first start needs an admin account created in the web UI; the download directory must be mounted to keep files (manual setup)
+
 ## Fields
 ### Chart / Role
 

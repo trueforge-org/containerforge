@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc); /app/Downloads (hostPath or pvc, type not set in values)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No public source or Dockerfile is available and the upstream GitHub repo is gone, so the app behaviour cannot be verified before a port.
+- caveat: The Downloads folder is a host path in the chart, so output location and permissions depend on the host and may not work for a rootless user (inferred).
+- caveat: Downloading media from YouTube may breach the platform terms and local law; confirm the intended use before publishing.
+
 ## Fields
 ### Chart / Role
 

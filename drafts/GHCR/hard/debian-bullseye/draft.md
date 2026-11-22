@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /debian (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Debian bullseye is past regular support and its archive has moved to archive.debian.org, so apt sources must point there or installs will fail (inferred).
+- caveat: this is a desktop image with no application of its own; it is used through noVNC or VNC on port 6080 or 5900 (inferred).
+- caveat: the chart uses the rolling latest tag of a third-party image, so the Debian userland can change between pulls.
+
 ## Fields
 ### Chart / Role
 

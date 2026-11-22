@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart state volume /state (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream publishes no release assets, so the image depends on a source build from a git clone; the upstream ref should be pinned to avoid drift.
+- caveat: Works as a pluggable transport for Tor-style setups, so it only helps when a matching client and bridge are configured elsewhere (inferred).
+- caveat: Listener port and key material must match the client side exactly, and misconfiguration gives silent connection failures.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /nwnee (serverfiles, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the server files are a Beamdog vendor download fetched at runtime, so a valid NWN:EE licence or account is needed and first start is a large download (inferred)
+- caveat: the server is x86 only and needs i386 libraries, so arm64 hosts cannot run it (inferred)
+- caveat: the game uses UDP 5121, which must be reachable from players
+
 ## Fields
 ### Chart / Role
 

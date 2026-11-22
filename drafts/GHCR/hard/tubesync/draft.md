@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /downloads (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: media downloads use yt-dlp against YouTube, so downloads break when upstream sites change and yt-dlp needs frequent updates (inferred).
+- caveat: first start runs database migrations and s6 setup, so it is slow (inferred).
+- caveat: the chart uses the rolling latest tag, while the draft pins source tag v0.19.1, so the two may diverge.
+
 ## Fields
 ### Chart / Role
 

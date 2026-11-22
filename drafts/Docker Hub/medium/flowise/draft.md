@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (chart mounts /config/api, /config/logs, /config/secrets, /config/storage, all pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The npm global install produces a large dependency tree, so the image is big and the build is slow (inferred).
+- caveat: The default SQLite store must sit under /config, and Postgres is optional; the choice affects backup and migration (inferred).
+- caveat: The chart mounts several subdirectories under /config (api, logs, secrets, storage), so the same layout must be recreated for existing data.
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream server expects PostgreSQL for real use; SQLite-only setups are not a supported production path (inferred), so the optional DB must be provided.
+- caveat: the image is a large yarn monorepo build from source, so build time and disk use are high (inferred).
+- caveat: mail settings are needed for account signup and password reset, and must be set in the environment (inferred).
+
 ## Fields
 ### Chart / Role
 

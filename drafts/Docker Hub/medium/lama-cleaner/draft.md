@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.cache/torch (pvc), /root/.cache/huggingface (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the torch CPU stack makes the image very large, and RAM use is high for large images (inferred).
+- caveat: inpainting models are downloaded from the internet on first use, so the first start is slow and needs network access (inferred from upstream docs).
+- caveat: a GPU is optional but CPU inference is slow for large images (inferred).
+
 ## Fields
 ### Chart / Role
 

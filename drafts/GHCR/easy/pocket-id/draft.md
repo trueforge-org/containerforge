@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (SQLite in /config); chart mounts /app/data (pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: passkeys (WebAuthn) only work on a secure origin, so pocket-id needs HTTPS through a reverse proxy and the APP_URL set to the public address (inferred).
+- caveat: the chart stores data under /app/data while the draft uses /config for SQLite; existing data must be moved when switching paths (data gotcha).
+
 ## Fields
 ### Chart / Role
 

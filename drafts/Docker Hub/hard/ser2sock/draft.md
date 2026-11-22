@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (config is /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the real blocker is serial hardware: the serial device must be passed into the container, which is not rootless-friendly.
+- caveat: the port 2000 default is user-configurable, so the chosen port must be published and matched in the config (inferred).
+- caveat: the source is compiled with autotools, so the build needs the autotools toolchain; the reference image is an x86_64-only build (spec).
+
 ## Fields
 ### Chart / Role
 

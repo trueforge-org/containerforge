@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/share/nginx/html (pvc, chart's own; draft copies the site to /app, so mismatch)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the static site is built from an upstream master zip, so the image contents change with upstream and are not pinned to a release (inferred).
+- caveat: there is no state to persist; customisation is done by editing the site, so user changes are lost on rebuild (inferred).
+
 ## Fields
 ### Chart / Role
 

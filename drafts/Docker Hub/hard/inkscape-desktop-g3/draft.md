@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /UNRAID_SHARE (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Inkscape runs only inside an XFCE and VNC desktop, which is opened through a browser (noVNC) and needs a VNC password set before use (inferred).
+- caveat: The image is a full desktop stack and is large, so pulls and RAM use are heavy (inferred).
+- caveat: The chart's persistence path `/UNRAID_SHARE` is a host-specific name, so the mount needs remapping on other systems.
+
 ## Fields
 ### Chart / Role
 

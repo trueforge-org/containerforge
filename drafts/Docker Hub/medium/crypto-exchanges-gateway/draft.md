@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/crypto-exchanges-gateway/custom_config (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The gateway needs exchange API keys or accounts configured by the user before it serves useful data (inferred).
+- caveat: A config file must be created in the custom_config path before first start (manual setup, inferred).
+- caveat: Native npm modules may not build or run on arm64 (noted in the draft, unverified).
+
 ## Fields
 ### Chart / Role
 

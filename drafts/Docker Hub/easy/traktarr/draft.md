@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Trakt API key and client credentials are required, and a config.json (Sonarr and Radarr URLs and keys) must be created and mounted (inferred).
+- caveat: the source is a pinned commit of l3uddz/traktarr, so updates are manual and the pin must be bumped by hand (inferred).
+
 ## Fields
 ### Chart / Role
 

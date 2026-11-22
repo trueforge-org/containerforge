@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /configs/ (pvc), /prints/ (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the slicer runs as a GUI over a browser VNC session, so all use happens through the web desktop.
+- caveat: the apt package is prusa-slicer 2.9.4, which is older than 2.9.7 (spec), so the version may lag upstream fixes.
+- caveat: software OpenGL rendering through xvfb is slow for large models (inferred).
+
 ## Fields
 ### Chart / Role
 

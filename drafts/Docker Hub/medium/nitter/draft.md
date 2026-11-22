@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none writable (configmap mounts at /src/nitter.conf and /src/sessions.jsonl)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Valkey or Redis is a hard dependency and must run as a separate container (from draft).
+- caveat: Nitter relies on X guest sessions or account data, which upstream X changes often break; expect breakage and manual session setup (inferred).
+- caveat: the Nim source build is slow, and the builder stage adds build-time dependencies (from draft).
+
 ## Fields
 ### Chart / Role
 

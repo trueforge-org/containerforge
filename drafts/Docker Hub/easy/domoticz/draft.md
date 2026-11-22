@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/domoticz/userdata (config volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Serial or USB hardware (for example Z-Wave) is not passed through by default, so hardware plugins need device mounts that the draft leaves out (inferred).
+- caveat: The first start needs the web UI setup, and the userdata folder must be writable and persistent (inferred).
+
 ## Fields
 ### Chart / Role
 

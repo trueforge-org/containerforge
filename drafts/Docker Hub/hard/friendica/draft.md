@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart persistence, type not shown; /config is the chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB is a hard dependency and Valkey is optional, so both must be ready before Friendica starts.
+- caveat: the install is completed through the web installer, and the config file must be created in /config (manual setup).
+- caveat: federation needs a public HTTPS hostname behind a reverse proxy, otherwise remote servers cannot reach it (inferred).
+- caveat: background jobs need cron running in the container, so a process supervisor is needed (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft; chart mounts /data and /music (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the music library must be mounted into the container (chart uses /music); without a mounted library Navidrome has nothing to scan.
+- caveat: the draft's release assets are .deb packages, so the binary has to be extracted from the package at build time, not copied as a plain executable (inferred).
+- caveat: transcoding writes cache data, so /tmp or the cache volume may need significant space for large libraries (inferred).
+
 ## Fields
 ### Chart / Role
 

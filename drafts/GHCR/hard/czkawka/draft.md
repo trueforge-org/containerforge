@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage, /trash (type not set, likely pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the GUI runs over VNC or noVNC, and the CLI is the only path that works without a desktop session (inferred).
+- caveat: the amd64 binary is the HEIF, RAW and AVIF build, while the arm64 binary may lack those formats (inferred).
+- caveat: duplicate scans read every file in the mounted paths, so large libraries are slow and disk-heavy (inferred).
+
 ## Fields
 ### Chart / Role
 

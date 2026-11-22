@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart's own; draft mounts the database under /config, so mismatch)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the SQLite database file must be mounted into the container, and the mount must be writable if the UI is used to change data (inferred).
+- caveat: sqlite-web has no login by default, so it should sit behind an auth proxy or be restricted to a private network (inferred).
+
 ## Fields
 ### Chart / Role
 

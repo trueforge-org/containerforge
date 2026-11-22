@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /guide2go (pvc), /TVH (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no server or UI; it is a CLI that writes EPG/XMLTV output, so it needs a config file and a scheduled run, not a long-running port (inferred).
+- caveat: EPG data usually needs an account or API access with the upstream guide provider (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Requires a running MongoDB instance (mongodb sibling) before the server starts; the app cannot store data without it.
+- caveat: Upstream publishes no arm64 Docker image; the arm64 release is an AppImage, so arm64 testing is needed before use.
+- caveat: Meteor-based server bundles and an old Node version make upgrades slow and fragile (inferred).
+
 ## Fields
 ### Chart / Role
 

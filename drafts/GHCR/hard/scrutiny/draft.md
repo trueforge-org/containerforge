@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/scrutiny/config, /opt/scrutiny/influxdb (chart paths), /run/udev (hostPath, read-only)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: SMART data only appears when the host disks are passed into the container; without device access the collector reports nothing (inferred).
+- caveat: the embedded InfluxDB data and config paths must persist, otherwise history is lost on restart (inferred).
+- caveat: the omnibus web UI and collector are pinned to v0.10.0 while the image tag is v0.10.0-omnibus, so upgrades need a new tag (inferred).
+
 ## Fields
 ### Chart / Role
 

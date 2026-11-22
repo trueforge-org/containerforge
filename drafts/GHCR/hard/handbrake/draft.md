@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage, /output (type not set, likely pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the GUI runs through VNC or noVNC, and hardware encoding needs a VAAPI device passed into the container (inferred).
+- caveat: Ubuntu's apt handbrake packages can lag the 1.11.2 upstream release, so codec and preset behaviour may differ from the GUI build (inferred).
+- caveat: transcodes are CPU heavy and need scratch disk space in the output path (inferred).
+
 ## Fields
 ### Chart / Role
 

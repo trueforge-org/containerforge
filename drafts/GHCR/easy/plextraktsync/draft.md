@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (state in /config); chart mounts /app/config (pvc default) and runs a CronJob
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a Trakt account and a Trakt API application; the first run asks for interactive device authorisation (external service, inferred).
+- caveat: needs a reachable Plex server to sync from; the Plex token must be configured (external service).
+- caveat: the chart runs the tool as a CronJob, while the draft model is a single process; the container exits after each sync, so the run mode must be set to match (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined; playbook path)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs an external PostgreSQL database (or another supported DB) configured before the server starts; there is no bundled DB.
+- caveat: Bundled OpenTofu, Terraform, Terragrunt and Ansible tools are part of the expected toolset, so the image is large and needs those binaries and pip packages present.
+- caveat: Initial admin account must be created through the CLI or first-run setup; check the upstream docs for the exact step (inferred).
+
 ## Fields
 ### Chart / Role
 

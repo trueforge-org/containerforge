@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/opt/sourcegraph pvc and /etc/sourcegraph pvc (chart)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The upstream image is a large multi-service monolith, so it needs substantial CPU and RAM and may depend on services outside the single container (inferred).
+- caveat: No public Dockerfile exists, and the source is no longer open, so the image can only be run as published and cannot be rebuilt here.
+- caveat: Initial admin setup, licence and site configuration are done in the web UI after the first start (inferred).
+- caveat: Only amd64 images are published, so arm64 hosts cannot run it.
+
 ## Fields
 ### Chart / Role
 

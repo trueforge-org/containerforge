@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart's own; draft expects data in /config, so mismatch); /config/config and /config/users (configmap)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the default config and the collections storage path must be persisted, and users are normally set up through a htpasswd file that has to be created by hand (inferred).
+- caveat: clients need the CalDAV/CardDAV URL on port 5232, so a reverse proxy or published port must be configured for remote devices (inferred).
+
 ## Fields
 ### Chart / Role
 

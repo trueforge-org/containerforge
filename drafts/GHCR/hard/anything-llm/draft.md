@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/server/storage (pvc), /app/collector/hotdir (pvc), /app/collector/outputs (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the listed binaries are Electron desktop AppImages, not server builds, so the server image must come from source or from the upstream container (inferred)
+- caveat: an LLM provider API key, or a local model, is needed before chat and embedding work (external service or account, inferred)
+- caveat: the upstream container tag is latest, which is a rolling tag (upstream status)
+- caveat: the build is large and slow because of the Node monorepo and native LanceDB and sqlite deps (resource needs, inferred)
+
 ## Fields
 ### Chart / Role
 

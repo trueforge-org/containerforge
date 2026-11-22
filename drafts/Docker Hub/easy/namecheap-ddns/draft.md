@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {} in chart)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Dynamic DNS must be enabled per domain in the Namecheap account, and each host needs its own DDNS password (inferred)
+- caveat: the upstream repo has no release binary, so the image relies on the source repo and the requirements install (inferred)
+
 ## Fields
 ### Chart / Role
 

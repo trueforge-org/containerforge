@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/splunk/etc/ (pvc), /opt/splunk/var (pvc), /splunkdata (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Splunk Enterprise needs an accepted license on first run, and the license acceptance must be set through configuration (inferred)
+- caveat: the amd64 tarball is downloaded from download.splunk.com with a pinned version; the URL and checksum must be kept in step with the version (inferred)
+- caveat: Splunk Enterprise is heavy in RAM and disk, and the first start runs the ansible-based setup, which is slow (inferred)
+- caveat: amd64 only; the arm64 build is not available from the vendor (inferred)
+
 ## Fields
 ### Chart / Role
 

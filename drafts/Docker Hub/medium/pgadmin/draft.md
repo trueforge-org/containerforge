@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's config mount at /var/lib/pgadmin
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The first login needs the default admin email and password set through environment variables; without them the UI cannot be used (inferred).
+- caveat: Upstream runs as uid 5050 and the chart does not pin that, so the non-root user and file ownership under /var/lib/pgadmin need checking (inferred).
+- caveat: Binding ports 80 and 443 needs root or a capability; the draft must listen on an unprivileged port (inferred).
+
 ## Fields
 ### Chart / Role
 

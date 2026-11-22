@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /appdata (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the encryption key that protects stored credentials must persist in /config, or saved secrets become unreadable after a restart (inferred).
+- caveat: the first-run admin account is created in the browser, and bundled Redis and nginx run in the same container (inferred).
+- caveat: the release tarballs are named as alpine builds, so they are musl binaries and the glibc Ubuntu base may need a different source (inferred).
+
 ## Fields
 ### Chart / Role
 

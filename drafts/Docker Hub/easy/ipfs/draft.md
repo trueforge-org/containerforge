@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/ipfs (pvc, repo), /export (pvc), /ipfs (pvc), /ipns (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the swarm ports 4001 tcp and udp must be reachable from outside, or the node will connect to few peers (inferred)
+- caveat: the first start creates and fills a repo, and the repo grows large over time, so the storage must be sized for it (inferred)
+- caveat: the API bind address defaults to localhost, so exposing port 5001 needs a config change (inferred)
+
 ## Fields
 ### Chart / Role
 

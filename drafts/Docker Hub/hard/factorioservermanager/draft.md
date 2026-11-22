@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/factorio/config, /opt/factorio/mods, /opt/factorio/saves (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Factorio headless server is a vendor download that needs a Factorio account or token, so the server cannot start without it.
+- caveat: Factorio is x86_64 only, so arm64 is not supported.
+- caveat: saves and mods live under /opt/factorio, and the game needs UDP 34197 forwarded from the host.
+
 ## Fields
 ### Chart / Role
 

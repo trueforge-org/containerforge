@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (uses /config and /tmp); chart mounts /serverdata/serverfiles and /serverdata/steamcmd (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; arm64 is marked no, and the steamcmd base has no arm64 Hurtworld server.
+- caveat: first start downloads the dedicated server through SteamCMD into /config; large download, needs internet, slow first start (inferred).
+- caveat: game uses UDP 12871, so the host or router must forward UDP; a Steam query port is also expected (inferred).
+
 ## Fields
 ### Chart / Role
 

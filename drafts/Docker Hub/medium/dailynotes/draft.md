@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/config (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chart persists /app/config, while ContainerForge uses /config for state, so the data path must be remapped (inferred).
+- caveat: The Node client is built with npm in a builder stage and the Python server uses pip, so build time and image size are both significant (inferred).
+- caveat: The upstream source uses a date-based release tag (2026.10.29-00), so pin the release tarball explicitly and verify its checksum.
+
 ## Fields
 ### Chart / Role
 

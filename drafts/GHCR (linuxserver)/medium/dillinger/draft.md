@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream project has little recent release activity, so the pinned version may need manual review (upstream status) (inferred)
+- caveat: the frontend is built at image build time, so a new upstream version needs a full rebuild, not a runtime update (inferred)
+
 ## Fields
 ### Chart / Role
 

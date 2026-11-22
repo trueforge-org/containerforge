@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond common defaults (varrun is a common default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: noVNC is only a browser client; it needs a reachable VNC server to connect to, supplied by the user or another container (external service).
+- caveat: the chart uses a third-party image (nicholaswilde/novnc) pinned to version-1.2.0; the draft builds noVNC from the upstream tarball, so behaviour may differ.
+- caveat: websockify and nginx must both listen on unprivileged ports; the draft's ports (8080, 6080) are inferred and need checking.
+
 ## Fields
 ### Chart / Role
 

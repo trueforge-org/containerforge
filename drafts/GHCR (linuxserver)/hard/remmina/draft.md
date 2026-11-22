@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: remmina is a client, so it needs network reachability to the RDP or VNC targets it connects to (external services) (inferred)
+- caveat: GUI is only reachable through the browser desktop, not as a headless service (inferred)
+
 ## Fields
 ### Chart / Role
 

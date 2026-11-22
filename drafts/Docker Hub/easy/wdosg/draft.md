@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/database and /app/wdosglibrary (pvc, both mounted by chart) unless the app is pointed at /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Draft downloads a source tarball at build time, so the build needs internet access and a pinned tag (v1.3.9).
+- caveat: Upstream app paths /app/database and /app/wdosglibrary are not under /config by default; they must be redirected or they will be lost on read-only or non-persistent setups (inferred).
+
 ## Fields
 ### Chart / Role
 

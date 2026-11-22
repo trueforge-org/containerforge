@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/proxmox-backup (pvc), /var/lib/proxmox-backup (emptyDir), /var/log/proxmox-backup (emptyDir), /run (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the release tgz contains Debian trixie packages installed with dpkg on Ubuntu 26.04, so dependency drift is likely and the install may need fixes.
+- caveat: the proxy, API and scheduler daemons run as root upstream, and the datastore needs a large, persistent volume that is sized for backups (inferred).
+- caveat: the web UI on 8007 uses a self-signed certificate by default, so clients will show a trust warning until a real certificate is set (inferred).
+
 ## Fields
 ### Chart / Role
 

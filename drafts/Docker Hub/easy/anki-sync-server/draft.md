@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (chart config volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The sync server is driven by Anki clients that must be pointed at a custom sync URL. Users are created by hand, so initial account setup is manual (inferred).
+- caveat: Data location conflicts. The Reason says data is kept in /config, but the chart's data path is /app/data, so the write path must be verified before mounting (inferred).
+
 ## Fields
 ### Chart / Role
 

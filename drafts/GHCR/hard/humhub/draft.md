@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/localhost/htdocs/protected/config, /assets, /themes, /protected/modules, /uploads (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this nginx image only serves static assets, so a PHP-FPM companion (humhub-phponly) and a database must be running for the app to work.
+- caveat: the upload, config and theme paths must be mounted identically in both containers or the two halves will disagree (inferred).
+- caveat: the HumHub release version must match the PHP-FPM half, and a version mismatch breaks the app (inferred).
+
 ## Fields
 ### Chart / Role
 

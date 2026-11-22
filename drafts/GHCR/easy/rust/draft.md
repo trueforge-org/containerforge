@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles (pvc), /serverdata/steamcmd (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: first start downloads the Rust dedicated server from Steam, which is a large download and needs internet (inferred)
+- caveat: arm64 is not supported because the SteamCMD bootstrap is x86 only
+- caveat: server settings such as server.cfg and the rcon password are set by hand after the first start (inferred)
+
 ## Fields
 ### Chart / Role
 

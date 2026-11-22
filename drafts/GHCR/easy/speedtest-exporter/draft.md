@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Ookla speedtest CLI is downloaded at build time, and Ookla's licence terms restrict some redistribution (licensing, inferred)
+- caveat: every scrape runs a real speed test, which uses bandwidth and may count against an ISP quota; scrape interval matters (inferred)
+
 ## Fields
 ### Chart / Role
 

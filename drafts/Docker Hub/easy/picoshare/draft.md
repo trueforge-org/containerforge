@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: upload protection depends on setting a password through the environment; without it the share page is open (inferred)
+- caveat: litestream replication is optional and needs its own storage credentials if enabled (inferred)
+
 ## Fields
 ### Chart / Role
 

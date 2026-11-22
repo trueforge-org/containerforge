@@ -61,6 +61,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/guacamole/recordings (pvc), /var/lib/guacamole/drive (pvc, guacd), /tc-init (emptyDir, seed scripts), seed scripts via configmap
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: guacd is only the proxy daemon; a separate Guacamole web client (guacamole/guacamole) and its config are needed to use it, so the listed 8080 web UI belongs to that client, not to this image (inferred)
+- caveat: recordings and drive paths need writable persistent storage, and the rootfs must be writable for the guacd side (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, chart-defined)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream has no pinned tag and builds from repo HEAD, so the image can change without notice and old Node versions may fail to build.
+- caveat: Upstream is an older Node app with an old React client build; security updates and maintenance may be limited (inferred).
+
 ## Fields
 ### Chart / Role
 

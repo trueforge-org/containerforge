@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in guacd values; recordings and drive mounts (pvc) are added by the guacamole chart's targetSelector
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: guacd listens on 4822 only and has no web UI, so it is useless on its own and needs a Guacamole client to connect to it
+- caveat: the RDP, VNC or SSH target hosts must be reachable from the container network (inferred)
+
 ## Fields
 ### Chart / Role
 

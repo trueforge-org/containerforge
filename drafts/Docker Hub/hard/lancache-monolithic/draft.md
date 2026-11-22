@@ -62,6 +62,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/cache (pvc); /data/logs (pvc); /data/prefill (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The optional prefill image (`lancache-prefill`) is missing from ContainerForge and is fetched from a third-party GHCR path, so prefill is not ready to run.
+- caveat: Full use needs lancache-dns for DNS redirection, and clients must trust the HTTPS setup or downloads will fail (inferred).
+- caveat: Caching needs a very large disk for the cache directory, and it grows without a quota (inferred).
+- caveat: Ports 80 and 443 on the host must be free, which often conflicts with other web servers (inferred).
+
 ## Fields
 ### Chart / Role
 

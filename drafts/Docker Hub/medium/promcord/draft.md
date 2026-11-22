@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A Discord bot application and token must be created in the Discord developer portal, and the bot must be invited to a server before it does anything.
+- caveat: The upstream runs openjdk 16 and the draft moves to java17, so behaviour should be checked (from the draft).
+- caveat: The Prometheus metrics port must be scraped from the cluster or the metrics stay unused (inferred).
+
 ## Fields
 ### Chart / Role
 

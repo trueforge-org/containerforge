@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/guacamole/recordings (pvc, guacd sidecar), /var/lib/guacamole/drive (pvc, guacd sidecar), /tc-init (emptyDir, init seed)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: guacd is a separate service and must run as its own container; the web app cannot proxy RDP/VNC/SSH on its own (inferred from draft).
+- caveat: needs an external PostgreSQL database if the optional DB backend is used (inferred, the draft lists it as optional).
+- caveat: default admin account (guacadmin) must be changed in the UI after first start (inferred).
+
 ## Fields
 ### Chart / Role
 

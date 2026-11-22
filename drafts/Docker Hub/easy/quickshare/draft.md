@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /quickshare/root (pvc, chart's own; draft expects data in /config, so mismatch)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream UI and data files are not confirmed to live under /config, so verify the data directory is persisted before relying on uploads surviving a restart (inferred).
+- caveat: the port 3000 web UI is inferred from upstream defaults; confirm the listen port and any admin or user setup needed on first run (inferred).
+- caveat: uploaded files can be large, so size the data volume for the expected share volume (inferred).
+
 ## Fields
 ### Chart / Role
 

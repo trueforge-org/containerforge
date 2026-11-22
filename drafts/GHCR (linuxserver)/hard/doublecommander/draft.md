@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the file manager is only useful with host paths mounted in, and it sees only what is mounted (data gotcha) (inferred)
+- caveat: GUI is reachable only through the browser desktop, so it is not usable headless (inferred)
+
 ## Fields
 ### Chart / Role
 

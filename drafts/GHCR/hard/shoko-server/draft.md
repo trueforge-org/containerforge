@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/shoko/.shoko/ (appdata, chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 has no release binary, so the image must compile the dotnet publish from source, which makes builds slow.
+- caveat: media library paths must be mounted into the container and added in the Shoko UI, so this is manual setup (inferred).
+- caveat: anime metadata lookups depend on AniDB access, which may need a registered client or account (inferred).
+
 ## Fields
 ### Chart / Role
 

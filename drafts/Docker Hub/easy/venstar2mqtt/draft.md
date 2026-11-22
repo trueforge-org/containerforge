@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream is a GitHub master-branch zip with no release tags, so the build is not reproducible and can change without notice.
+- caveat: Needs a reachable Venstar thermostat on the LAN and a reachable MQTT broker, which the container does not provide (inferred).
+
 ## Fields
 ### Chart / Role
 

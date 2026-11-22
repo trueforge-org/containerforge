@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond common (chart adds /config, its own mount)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a reachable MariaDB server, and the database schema is created by an init step that must be run before the UI works (inferred).
+- caveat: Polling uses SNMP and cron, so the container needs network reach to the monitored devices and SNMP access on them (inferred).
+- caveat: The community build is a PHP tarball from observium.org, so updates depend on that site being reachable.
+
 ## Fields
 ### Chart / Role
 

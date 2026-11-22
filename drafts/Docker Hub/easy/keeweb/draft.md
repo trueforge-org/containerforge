@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/nginx/external (pvc); nginx cache paths not in values
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the amd64 link points to a Debian package and the arm64 link to a Windows zip, so the arm64 build source is wrong and needs fixing before porting
+- caveat: the chart pulls the upstream image as `:latest`, not a pinned version
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {}); readsb decoder and aircraft database may need writable paths (not shown in values)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs an SDR receiver (RTL-SDR or similar) plugged into the host and passed to the container; without it there is no data (inferred)
+- caveat: the aircraft database download and readsb decoder need writable paths and internet access on first start (inferred)
+- caveat: the decoder is compiled from source, so the build is slow and needs build tools (inferred)
+
 ## Fields
 ### Chart / Role
 

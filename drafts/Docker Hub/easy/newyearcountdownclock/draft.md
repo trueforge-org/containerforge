@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values (persistence {}); nginx cache paths not in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the countdown is computed in the visitor's browser, so the timezone is the viewer's, not a server setting (inferred)
+- caveat: the chart pulls the upstream image as `:latest`, not a pinned version
+
 ## Fields
 ### Chart / Role
 

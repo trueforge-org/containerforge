@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /bitcoin/.bitcoin (blockhainstorage volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chain data is large, and the first sync takes days and a lot of disk (inferred).
+- caveat: The Reason says the datadir is /config, but the chart uses /bitcoin/.bitcoin, so the data mount path must be settled before porting (inferred).
+- caveat: The source image kylemanna/bitcoind is an older community image that may be unmaintained (inferred).
+
 ## Fields
 ### Chart / Role
 

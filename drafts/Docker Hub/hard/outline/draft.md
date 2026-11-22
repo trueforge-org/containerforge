@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/outline/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL and Valkey are both required, and the app also needs an object storage backend for uploads (inferred).
+- caveat: Outline needs an authentication provider (such as OIDC or Slack) configured before anyone can sign in (inferred).
+- caveat: the build is a large Node monorepo with a big frontend build, so the first build is slow and memory-hungry (inferred).
+
 ## Fields
 ### Chart / Role
 

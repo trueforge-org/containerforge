@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc default, chart's own; the draft says /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A Discord bot token from the developer portal is required, and a first-run interactive setup (redbot-setup) must create the instance (inferred).
+- caveat: The draft says /config for data but the chart mounts /data, so the storage path needs reconciling.
+- caveat: The full variant needs Java for Lavalink audio and extra ports (2333), which also needs outbound internet for audio sources (inferred).
+
 ## Fields
 ### Chart / Role
 

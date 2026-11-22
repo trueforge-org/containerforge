@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /misskey/files (pvc); /misskey/.config (configmap, chart-added)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: There is no release artifact, so the image must be built from source, which is a long and RAM-heavy build (inferred).
+- caveat: Needs PostgreSQL and Valkey before it starts, and both must be reachable at first boot.
+- caveat: Federation and the web UI need a public domain with HTTPS to work properly (inferred).
+
 ## Fields
 ### Chart / Role
 

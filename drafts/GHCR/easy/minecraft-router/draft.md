@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: mc-router only routes traffic; it needs one or more reachable Minecraft backend servers, configured by hostname mapping (external service).
+- caveat: automatic backend discovery via Docker or Kubernetes APIs would need a socket or API access that a rootless container does not have (inferred).
+- caveat: the release tarball asset per architecture must be fetched and unpacked at build time; confirm the tar layout matches the draft's copy step (inferred).
+
 ## Fields
 ### Chart / Role
 

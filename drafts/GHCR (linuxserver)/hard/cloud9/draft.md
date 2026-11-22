@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /code (pvc, chart code)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: c9/core is an old project with little recent maintenance, so expect breakage in the Node toolchain (upstream status) (inferred)
+- caveat: the native node-pty build makes the image build slow and depends on the build toolchain staying available (inferred)
+
 ## Fields
 ### Chart / Role
 

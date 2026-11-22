@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /uploads and /logs (pvc, chart-defined; draft expects both under /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: CTFd uses a first-run setup wizard in the web UI to create the admin account and the CTF settings, so this is manual setup (inferred).
+- caveat: valkey is an optional external dependency for caching and sessions, and it must be deployed and configured separately if used (inferred).
+- caveat: The image tag is pinned to 3.8.9, but the Python dependencies are installed from the upstream requirements file, so a rebuild can pull newer package versions (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/Data, /app/Logs, /temp, /media (chart persistence, type not shown)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: hardware encoding needs the host GPU or device access, so transcoding speed depends on the host hardware.
+- caveat: transcoding needs a large temp area (/temp) and significant CPU and RAM (inferred).
+- caveat: the ffmpeg binary comes from a sibling container, so that container must be running for transcoding to work (inferred).
+
 ## Fields
 ### Chart / Role
 

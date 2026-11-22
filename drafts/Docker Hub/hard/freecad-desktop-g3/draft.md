@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /UNRAID_SHARE (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the desktop runs on the same VNC stack as the other drawing images, so a VNC or web client is needed to use FreeCAD.
+- caveat: /UNRAID_SHARE is the chart's persistence path, so projects must be saved inside a mounted path or they are lost.
+
 ## Fields
 ### Chart / Role
 

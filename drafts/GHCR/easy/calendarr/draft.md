@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/logs pvc and /app/custom_footers pvc (chart; draft does not name them)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Sonarr and Radarr URLs and API keys must be entered in the web UI or env before the calendar syncs anything (inferred).
+- caveat: The chart tag is rolling latest while the draft references release v1.5.2, so the build and the deployed version can drift (inferred).
+- caveat: The app depends on Python packages pulled from upstream requirements.txt, so new upstream releases can change the dependency set (inferred).
+
 ## Fields
 ### Chart / Role
 

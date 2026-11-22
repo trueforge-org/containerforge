@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.affine/config (pvc), /root/.affine/storage (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL and Valkey must run as separate containers before AFFiNE will start (second container, required)
+- caveat: there is no release binary, so the image must be built from source with a Node and Rust toolchain, which is a long build with high memory use (resource needs, inferred)
+- caveat: the draft's arm64 build is marked compile, so arm64 support is unproven (inferred)
+
 ## Fields
 ### Chart / Role
 

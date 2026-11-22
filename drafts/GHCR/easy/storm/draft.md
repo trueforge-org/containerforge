@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a debrid service account and API token are needed before storm can serve anything (account, inferred)
+- caveat: config must be created in /config by hand before the first start (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

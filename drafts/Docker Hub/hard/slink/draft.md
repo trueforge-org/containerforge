@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/var/data (pvc, database), /app/slink/images (pvc, images)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: first start runs redis, mercure and caddy together under s6-overlay; expect a slower start and several processes in one container (inferred)
+- caveat: uploaded images are stored under /app/slink/images and metadata under /app/var/data, so both paths need persistent storage (inferred)
+- caveat: the upstream image is built for amd64 and arm64 from a Dockerfile.prod; the arm64 build has not been verified here (inferred)
+
 ## Fields
 ### Chart / Role
 

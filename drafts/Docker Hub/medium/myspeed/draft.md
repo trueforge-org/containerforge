@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /myspeed/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: speed tests need outbound internet access and will use bandwidth on a schedule, so results depend on the host link (inferred).
+- caveat: the first run requires completing a setup wizard in the UI (inferred).
+- caveat: the draft targets Node 18, which is end of life upstream, so expect dependency and security friction (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc), /Sync (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream tarballs are committed binaries, and their redistribution terms still need to be confirmed (licensing, per draft)
+- caveat: the sync tool may self-update or write into its own install path at runtime, which would break a read-only rootfs (inferred)
+- caveat: the first admin account is set in the web UI on first use (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

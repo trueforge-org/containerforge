@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cannery/uploads (pvc, chart mount)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a PostgreSQL sibling and runs database migrations on first start; the app will not serve until they succeed (inferred).
+- caveat: No public Dockerfile was found, so the release has to be rebuilt from the GitLab source with Elixir and Erlang toolchains (inferred).
+- caveat: Uploaded images live under /var/cannery/uploads, which must be backed by persistent storage or they are lost on pod restart.
+
 ## Fields
 ### Chart / Role
 

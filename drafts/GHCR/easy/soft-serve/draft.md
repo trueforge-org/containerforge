@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /soft-serve (pvc, config key), /.ssh (pvc, root-level path), /repos (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the arm64 asset is an Alpine .apk, not a glibc tarball, so the arm64 binary must be extracted from it or built instead (inferred)
+- caveat: the first SSH key set through the initial admin keys is the only admin, so it must be configured before first use (manual setup, inferred)
+- caveat: SSH host keys are generated on first start in /config; losing /config changes the host identity (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /chronos (pvc, chronos)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream release is the old 0.2 tarball built for Python 3.7; upgrading the Python runtime may break dependencies and needs testing (inferred).
+- caveat: Upstream is not actively maintained (inferred), so future security fixes may not come from upstream.
+- caveat: Persistence in the chart is at /chronos, not /config, so the data path needs remapping (inferred).
+
 ## Fields
 ### Chart / Role
 

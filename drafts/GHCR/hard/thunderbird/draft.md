@@ -57,6 +57,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /thunderbird (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this is a desktop app reached through a VNC or noVNC session in the browser, so there is no headless service to point clients at.
+- caveat: mail accounts must be added by the user inside the app, so this is manual setup (inferred).
+- caveat: the download URL is the rolling thunderbird-latest link, so the build may change without a version bump.
+- caveat: amd64 only; Mozilla ships no arm64 tarball, so arm64 means a source build.
+
 ## Fields
 ### Chart / Role
 

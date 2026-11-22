@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/static (pvc, assets; init_assets writes here)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app is built with npm at build time and the version tag 1.0.3 is not matched to a commit, so the source must be checked (inferred)
+- caveat: the init_assets step writes into /app/static at start, so that path must be writable (inferred)
+- caveat: the upstream Dockerfile uses node:lts-alpine, so the built output may depend on musl-only tooling (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc), /data/config.json (configmap)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Ring account login, including the 2FA code, is needed on first start, and the token is stored in the data volume (inferred).
+- caveat: the image runs s6-overlay, go2rtc and bashio together, so making it rootless and read-only means reworking the startup scripts.
+- caveat: streaming uses go2rtc on 1984 and RTSP on 8554, so those ports must be reachable if camera streams are used (inferred).
+
 ## Fields
 ### Chart / Role
 

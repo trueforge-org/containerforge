@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (only /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No prebuilt binary is published, so both amd64 and arm64 need a source build, and copy-from is not available for arm64, which makes the build slower and less certain (inferred).
+- caveat: CP/M disk images are not bundled, so the user has to supply them under /config before the emulator does anything useful (inferred).
+- caveat: The upstream image is built on the phusion/runit init, which the draft drops, so the web terminal or console startup needs a replacement wrapper (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (type not set, likely pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the GUI is only reachable through noVNC or VNC in a browser or client; there is no headless or CLI path to use the editor.
+- caveat: the app is compiled from a SourceForge tarball, so the first build is long and the arm64 Qt build is untested (inferred).
+- caveat: video files must be placed under the mounted /storage path before the app can see them (inferred).
+
 ## Fields
 ### Chart / Role
 

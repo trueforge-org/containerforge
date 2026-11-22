@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there is no public Dockerfile, so the image is built from scratch and its build is unverified.
+- caveat: FlexTV is a Plex companion, so it needs network access to a Plex server and a Plex account or token (inferred).
+- caveat: pip requirements are not pinned in the spec, so arm64 builds may need compilers for some packages (inferred).
+
 ## Fields
 ### Chart / Role
 

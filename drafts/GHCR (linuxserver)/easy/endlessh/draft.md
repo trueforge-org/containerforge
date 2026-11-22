@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the tarpit listens on a high port (2222 per draft), so SSH on port 22 must be forwarded to it at the host or service level (inferred)
+- caveat: apt endlessh package version may lag the upstream source release (inferred)
+
 ## Fields
 ### Chart / Role
 

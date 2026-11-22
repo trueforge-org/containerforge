@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Uses a PostgreSQL database through CloudNativePG in the chart; running without it is not supported.
+- caveat: ffmpeg and tesseract add large OCR and video tooling, so image size and first-start time grow with OCR language packs (inferred).
+- caveat: Maven build runs outside the Dockerfile, so the upstream build must succeed before the image can be made.
+
 ## Fields
 ### Chart / Role
 

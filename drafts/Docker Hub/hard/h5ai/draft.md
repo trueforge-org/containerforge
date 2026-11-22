@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /h5ai (pvc, readOnly mount of the vendored code)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: h5ai has no built-in login, so it exposes every file under the mounted path to anyone who can reach the port; an auth layer in front is needed (inferred).
+- caveat: The browsed directory must be mounted into the container, and mount paths decide what is listed, so the mount layout matters (inferred).
+
 ## Fields
 ### Chart / Role
 

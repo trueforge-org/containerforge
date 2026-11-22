@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the export server needs a headless Chromium, which usually needs extra shared memory (inferred).
+- caveat: Tomcat writes work and temp files, so a read-only rootfs will break the web app unless those paths are writable (inferred).
+
 ## Fields
 ### Chart / Role
 

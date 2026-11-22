@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream project is small and early-stage, so the release cadence and support are uncertain (inferred)
+- caveat: the port 8080 and any login setup are inferred and need confirming in the running app (inferred)
+
 ## Fields
 ### Chart / Role
 

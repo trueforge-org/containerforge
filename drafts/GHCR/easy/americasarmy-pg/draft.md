@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The AA Proving Grounds server is pulled from Steam at first start, so the first run is large and needs internet access (inferred).
+- caveat: The port list in the draft is a guess and does not match the chart's default 27015 setup, so the ports need checking against the real server (inferred).
+- caveat: The image is amd64 only, because it depends on SteamCMD.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.local/share/ersatztv (root home path, type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: hardware transcoding needs a GPU device passed in (NVIDIA or VAAPI); the CPU path is not what the listed tags are built for (inferred).
+- caveat: the upstream tags are split by GPU vendor (nvidia, vaapi, and the plain release), so the wrong tag for the host device will not transcode.
+- caveat: the database and state live under a root home path rather than /config, so the /config-only persistence model does not hold (inferred).
+
 ## Fields
 ### Chart / Role
 

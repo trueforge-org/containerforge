@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /downloads (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the GUI is a selkies web desktop, so the gPodder interface is only reached through a browser session (inferred).
+- caveat: the app comes from the Ubuntu apt package, so its version is whatever the distro ships, not the latest upstream release (inferred).
+- caveat: the chart pins the third-party xthursdayx image at the rolling latest tag.
+
 ## Fields
 ### Chart / Role
 

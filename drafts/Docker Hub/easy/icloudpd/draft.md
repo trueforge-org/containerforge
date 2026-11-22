@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/apps/iCloud (pvc, data); /config is the chart's own
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the first run needs an interactive Apple ID login with two-factor code entry, and the session must be kept in /config (inferred)
+- caveat: sessions expire, so re-authentication will be needed from time to time (inferred)
+- caveat: the initial download of a large iCloud library can take a very long time and needs a lot of disk in the mounted path (inferred)
+
 ## Fields
 ### Chart / Role
 

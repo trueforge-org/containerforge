@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: ARP discovery only sees the LAN segment the container is attached to, so devices on other VLANs or subnets are not found (inferred).
+- caveat: upstream ships Alpine .apk packages rather than apt packages, so the binary must be extracted for ubuntu (from draft).
+- caveat: the PostgreSQL option is optional, and SQLite is the default storage path (inferred).
+
 ## Fields
 ### Chart / Role
 

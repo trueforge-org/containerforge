@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (uses /config and /tmp); chart mounts /serverdata/serverfiles and /serverdata/steamcmd (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; arm64 is marked no.
+- caveat: first start downloads the Left 4 Dead dedicated server via SteamCMD into /config; needs internet and a slow first start (inferred).
+- caveat: the draft uses the ich777 l4d tag, which is a rolling upstream tag; pin or verify the tag before relying on it.
+
 ## Fields
 ### Chart / Role
 

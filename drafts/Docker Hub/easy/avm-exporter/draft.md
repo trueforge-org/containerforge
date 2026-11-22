@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /exporter/config.yaml (configmap)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a FRITZ!Box reachable on the network with TR-064 enabled, plus a user account on the box (external service and account) (inferred).
+- caveat: The exporter needs its config.yaml supplied as a configmap or file. It is not created automatically, so the container may fail without it (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/suwayomi/.local/share/Tachidesk (pvc), /home/suwayomi/.local/share/Tachidesk/downloads (pvc), /home/suwayomi/.local/share/Tachidesk/local (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream tag is preview, which is a moving tag, so behaviour can change between pulls (upstream status)
+- caveat: the WebUI and extension sources are fetched at runtime from the internet, so first start is slow and needs network access (runtime download, inferred)
+- caveat: the chart mounts three paths under /home/suwayomi/.local/share/Tachidesk, so the draft's /config layout needs remapping (data gotcha)
+
 ## Fields
 ### Chart / Role
 

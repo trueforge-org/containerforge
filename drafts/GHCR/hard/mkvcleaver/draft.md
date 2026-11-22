@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported, because the app is a Windows exe run under Wine and no arm64 build exists
+- caveat: Wine prefix creation and Xvfb start make the first start slow, and the app is only usable through VNC or noVNC (inferred)
+- caveat: the Windows archives come from vendor sites, and the upstream source at blogs.sapib.ca is a personal blog, so long-term availability is uncertain (upstream status, inferred)
+
 ## Fields
 ### Chart / Role
 

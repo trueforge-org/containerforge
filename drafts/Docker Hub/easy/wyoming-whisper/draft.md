@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /.cache/huggingface (pvc) unless HF_HOME is pointed at /config or /tmp
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Faster-whisper model is fetched on first use into the Hugging Face cache, which the chart mounts at /.cache/huggingface; the draft redirects it to /tmp, so models re-download after restart (inferred).
+- caveat: Large-model transcription is CPU heavy and slow without a GPU; expect high RAM use for medium and larger models (inferred).
+
 ## Fields
 ### Chart / Role
 

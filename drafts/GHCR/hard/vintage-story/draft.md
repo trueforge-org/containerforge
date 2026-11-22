@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /vintagestory (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the server tarball is downloaded from vintagestory.at at runtime, so the first start needs internet.
+- caveat: amd64 only; the vendor ships no arm64 build, so arm64 is not possible.
+- caveat: the server config must be edited by hand in the data folder, so initial setup is manual (inferred).
+
 ## Fields
 ### Chart / Role
 

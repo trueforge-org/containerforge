@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (config in /config); chart mounts /app/data (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart stores config in /app/data, while the draft uses /config; an existing install must have its config copied to the new path before upgrading (data gotcha).
+- caveat: Muximux embeds other web apps in frames; mixed HTTP and HTTPS or blocked frame headers in those apps will break the embedded views (inferred).
+
 ## Fields
 ### Chart / Role
 

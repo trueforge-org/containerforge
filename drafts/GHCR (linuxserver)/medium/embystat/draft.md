@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a reachable Emby or Jellyfin server and its API key must be entered in the UI by hand (external service, manual setup) (inferred)
+- caveat: the arm64 zip name reads linux-arm-x64, which may be a mislabelled asset, so verify it is the right arch (inferred)
+- caveat: the source is a beta release (0.2.0-beta.30), so expect rough edges (upstream status)
+
 ## Fields
 ### Chart / Role
 

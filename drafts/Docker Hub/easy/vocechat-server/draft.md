@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (chart mounts /home/vocechat-server/data as pvc; draft keeps SQLite in /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream publishes no arm64 image for the copy-from path, so arm64 depends on the musl zip alone; expect to test arm64 separately.
+- caveat: First-run admin account and server settings are created in the web UI at port 3000; no config file is needed up front (inferred).
+
 ## Fields
 ### Chart / Role
 

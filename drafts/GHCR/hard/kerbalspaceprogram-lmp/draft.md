@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /lunamultiplayer (serverfiles, pvc chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 server binary link points to a release tag page, not a downloadable zip, so arm64 support is unverified (inferred)
+- caveat: the server is a .NET app with an apt-installed runtime; expect a slow first build and a multi-step install (inferred)
+- caveat: clients need a matching Kerbal Space Program install with the LMP plugin to connect; the server alone is not enough (inferred)
+
 ## Fields
 ### Chart / Role
 

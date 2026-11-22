@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /photo-stream/photos/original (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Jekyll site is built once at image build time, so new photos need a rebuild or a rebuild-on-change setup (inferred).
+- caveat: Ruby gems are fetched at build time, so the build needs internet (inferred).
+- caveat: Photos are read from /photo-stream/photos/original, which must be mounted for the site to show anything.
+
 ## Fields
 ### Chart / Role
 

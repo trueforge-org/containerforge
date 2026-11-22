@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /persist (pvc, chart storagedatabase; SQLite DB at /persist/rustpad_db.db)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Collaborative pads are stored in a SQLite file under /persist, so that volume must be mounted and writable or pads are lost on restart.
+- caveat: Output is a native binary, so the image is per-architecture and arm64 has not been tested.
+- caveat: Build is heavy (Rust toolchain plus Node frontend build), so the first image build is slow and needs significant disk and RAM (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (chart's /config is the chart's own)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs an external PostgreSQL server; the container does not start usefully without one.
+- caveat: the first admin account must be created through environment variables or the first-run UI; no default account is shipped (inferred).
+- caveat: the draft installs miniflux through apt, so the packaged version may lag the chart's 2.3.5 tag and must be checked on arm64 Ubuntu (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the release asset video.mp4 is downloaded or copied at build time, so the build needs internet access and the upstream release to remain available (inferred).
+- caveat: this is a novelty static page with no state, so there is nothing to back up or configure beyond the port (inferred).
+
 ## Fields
 ### Chart / Role
 

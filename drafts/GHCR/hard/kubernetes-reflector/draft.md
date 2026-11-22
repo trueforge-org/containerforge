@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it only does something inside a Kubernetes cluster; it needs a cluster API connection and a service account with cluster-wide secret and configmap read rights (inferred)
+- caveat: nothing is mirrored until source secrets or configmaps carry reflection annotations, so a default install looks idle
+- caveat: the chart pins 10.0.80 and the image is built from source, so arm64 builds depend on the upstream Dockerfile being maintained (inferred)
+
 ## Fields
 ### Chart / Role
 

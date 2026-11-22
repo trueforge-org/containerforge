@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /Config (pvc), /Downloads (pvc) (config is capitalised, not /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app is an ASP.NET 10 backend with a Bun and Nuxt frontend, built from source with dotnet publish per RID; the build is large.
+- caveat: the chart stores config and downloads under /Config and /Downloads with capital letters, not /config, so the paths must match the chart and the image (spec).
+- caveat: gpac or ffmpeg helpers must be installed for media processing, which adds packages on top of the dotnet runtime (spec).
+
 ## Fields
 ### Chart / Role
 

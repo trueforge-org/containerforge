@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /debian-mirror, /debian-mirror/data (large mirror storage, type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a full Debian mirror is tens to hundreds of gigabytes, and the first apt-mirror sync downloads everything selected, which can take many hours or days (inferred).
+- caveat: the mirror needs outbound internet to the upstream Debian archive, and cron-driven updates only run while the container is up (inferred).
+- caveat: the chart pins the third-party ich777 image at the rolling latest tag, so the image can change without a version bump.
+
 ## Fields
 ### Chart / Role
 

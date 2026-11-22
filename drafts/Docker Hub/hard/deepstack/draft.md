@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /datastore, /modelstore/detection (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: DeepStack is a legacy 2022 stack and appears unmaintained, so expect no upstream fixes (inferred).
+- caveat: the amd64 server path (/app/server) is unverified, and there is no arm64 build, so the image is amd64 only in practice.
+- caveat: the model stack is large and the GPU variant needs an NVIDIA runtime; models in /modelstore must be mounted to avoid re-downloads (inferred).
+
 ## Fields
 ### Chart / Role
 

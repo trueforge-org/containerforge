@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The build needs a Go toolchain with WebAssembly support and a Node UI build, so the first build is slow and large (inferred).
+- caveat: The service compiles and runs user-submitted Go code, so the sandbox and resource limits need review before exposing it (inferred).
+
 ## Fields
 ### Chart / Role
 

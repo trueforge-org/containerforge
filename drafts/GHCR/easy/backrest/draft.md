@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data pvc (BACKREST_DATA in chart; draft does not name it) and /cache pvc (chart; draft uses /tmp)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Backup source paths must be mounted into the container, and they must be readable by the non-root user for backups to work (inferred).
+- caveat: The web UI asks for a first user and password setup on first visit, and remote restic repositories need credentials entered in the UI (inferred).
+- caveat: The draft pins two release binaries, backrest and restic, which must be kept in step when either is upgraded (inferred).
+
 ## Fields
 ### Chart / Role
 

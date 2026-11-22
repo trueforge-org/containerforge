@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported; SteamCMD's 32-bit x86 bootstrap does not run on arm64, so the image is amd64 only.
+- caveat: The DayZ server is a very large Steam download that is updated on start, so the first start is slow and needs internet access (inferred size).
+- caveat: The server needs a serverDZ.cfg configuration file that the user must create or edit, so it does not start with a usable default config (inferred).
+- caveat: Game port 2302 and the Steam query ports 2303 and 2304 are UDP (inferred), so UDP forwarding is required.
+
 ## Fields
 ### Chart / Role
 

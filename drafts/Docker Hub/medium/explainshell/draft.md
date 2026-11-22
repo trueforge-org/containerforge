@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The explainshell database is downloaded at build or first start, which makes the first start large and dependent on internet access (inferred).
+- caveat: Caddy and the Python app are two processes, so a small supervisor is needed inside the container (inferred).
+- caveat: The image is tracked as `:latest`, so the database version may change between pulls.
+
 ## Fields
 ### Chart / Role
 

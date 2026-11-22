@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/netdata (config, pvc chart default); /var/lib/netdata (lib, pvc chart default); /var/cache/netdata (cache, pvc chart default); hostPath /proc, /sys, /dev, /etc/passwd, /etc/group, /etc/os-release (read-only host access)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: full host metrics need the host /proc, /sys and cgroups, with the host PID namespace, so many charts will be missing or wrong in a plain container (inferred)
+- caveat: the chart relies on hostPath read mounts for /proc, /sys and /dev, so Docker run needs those mounts and the rootfs cannot be read-only
+- caveat: the optional Netdata Cloud claim and the installer need outbound internet access (inferred)
+
 ## Fields
 ### Chart / Role
 

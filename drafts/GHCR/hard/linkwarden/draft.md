@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/data (data, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL must be running before start, and Prisma migrations run at start-up, so the first start is slow and fails if the database is not ready (inferred)
+- caveat: the auth and database secrets come only from secretKeyRef environment variables, so they must exist before the container starts
+- caveat: the Rust binary and Next.js build make arm64 builds from source long and heavy (inferred)
+
 ## Fields
 ### Chart / Role
 

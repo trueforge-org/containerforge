@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, 256Gi); /etc/letsencrypt (pvc, 256Gi)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The default admin login is created on first start and must be changed right away through the admin UI (inferred).
+- caveat: Let's Encrypt certificates need public DNS and inbound ports 80 and 443 reachable from the internet (inferred).
+- caveat: Ports 80, 443 and 81 on the host must be free, and a MariaDB database is expected for the normal setup.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /cache (pvc), /photos (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image is built with cgo against libheif, dlib, libraw and ffmpeg, so the build is heavy and must be done from source on containerforge-ubuntu.
+- caveat: the chart default is a read-only rootfs, so /cache must be a writable volume or thumbnail generation will fail (inferred).
+- caveat: photos are read from the /photos mount, so the host directory must be mounted with read permissions for the non-root user.
+
 ## Fields
 ### Chart / Role
 

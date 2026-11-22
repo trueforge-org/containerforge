@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /ps/library (library, pvc chart default); /ps/logs (logs, pvc chart default); /ps/tmp (tempscratchdisk, pvc chart default); /ps/config (config, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PhotoStructure is commercial software, so full use needs a licence key entered after the trial (inferred)
+- caveat: the library cache and temp scratch disk under /ps/tmp and /ps/library need large writable storage (resource needs, inferred)
+- caveat: the chart tag 2026.9.4-beta is a beta build, so stability is unconfirmed
+
 ## Fields
 ### Chart / Role
 

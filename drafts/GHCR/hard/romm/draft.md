@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /romm/library (library, pvc chart default); /romm/resources (resources, pvc chart default); /romm/config (config, pvc chart default); /romm/assets (assets, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: an external MariaDB, MySQL or PostgreSQL database is required, and it must exist before the first start (inferred)
+- caveat: the ROM library must be mounted and populated by the user, and optional metadata API keys must be entered manually (manual setup, inferred)
+- caveat: the admin account is set up in the web UI after first start (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

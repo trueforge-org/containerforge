@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/jenkins_home (pvc, JENKINS_HOME; chart uses this instead of /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: JENKINS_HOME must be on a persistent volume, or jobs, plugins and credentials are lost on each restart (inferred).
+- caveat: the initial admin password is written to the Jenkins home and logs on first start, and the setup wizard must be completed in the UI (inferred).
+- caveat: plugins are installed from the internet at runtime, so first setup is slow and needs network access (inferred).
+- caveat: agents connect on TCP 50000, which only matters if remote build agents are used (inferred).
+
 ## Fields
 ### Chart / Role
 

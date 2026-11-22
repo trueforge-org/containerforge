@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /UNRAID_SHARE (pvc, chart mount)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Chromium's sandbox needs namespace or no-sandbox flags in a locked-down container; the default run may crash without them (inferred).
+- caveat: The desktop runs through VNC and noVNC, so it is a full XFCE session and not a headless browser; it is heavy on RAM and CPU (inferred).
+- caveat: The Chromium build comes from vendor .deb packages, so the version must be pinned and rechecked on each release, since Ubuntu's chromium is a snap.
+
 ## Fields
 ### Chart / Role
 

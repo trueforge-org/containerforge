@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: mail spool and queue dirs (not in values; likely pvc or emptyDir); none beyond /config in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Email alias service: a working setup needs DNS records (MX, SPF, DKIM, DMARC) and a public IP with port 25 open, which the container cannot provide (inferred).
+- caveat: Needs the mariadb and valkey siblings, plus a first-run Laravel setup (key, database migration, admin user) before it serves mail (inferred).
+
 ## Fields
 ### Chart / Role
 

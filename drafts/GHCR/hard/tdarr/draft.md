@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/configs, /app/server, /app/logs, /temp (transcode-cache), /media (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: transcoding needs CPU or GPU headroom and a large scratch path in /temp, and the server and internal node share one image (inferred).
+- caveat: plugin and ffmpeg downloads may happen at runtime, so an offline host can fail on first use (inferred).
+- caveat: the Tdarr zip is fetched from tdarr.io at build time, so the build depends on that site being up (inferred).
+
 ## Fields
 ### Chart / Role
 

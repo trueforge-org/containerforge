@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /photos (pvc); /thumbnails (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream is built on old Node 12 era dependencies, so a compatible Node version must be found and tested (inferred).
+- caveat: The upstream project appears to have low recent activity (inferred), so future fixes may come from ContainerForge.
+- caveat: The photo library must be mounted with read access, and file ownership must match the non-root user (inferred).
+
 ## Fields
 ### Chart / Role
 

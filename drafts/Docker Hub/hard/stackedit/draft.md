@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no public Dockerfile was found, so the build has to be reconstructed from the upstream v5.14.0 source (inferred)
+- caveat: the app runs entirely in the browser, so the container only serves static files and has no server-side data (inferred)
+- caveat: the upstream image is tagged latest, so the version can change without notice (inferred)
+
 ## Fields
 ### Chart / Role
 

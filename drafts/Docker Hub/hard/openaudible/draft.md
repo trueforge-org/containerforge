@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (config is /config/OpenAudible, under /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; arm64 is not supported.
+- caveat: OpenAudible is closed-source and vendor-downloaded, and it will likely need an Audible account sign-in in the UI (inferred).
+- caveat: the GUI runs over a KasmVNC web desktop, so all setup happens through the browser session.
+
 ## Fields
 ### Chart / Role
 

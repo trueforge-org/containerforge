@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Barotrauma server is a Steam download at first start, so the first run is slow and needs internet access (inferred).
+- caveat: serversettings.xml is generated on first start and must then be edited by hand or through the server options (inferred).
+- caveat: Workshop mods are downloaded at runtime, so they depend on internet access and Steam availability (inferred).
+- caveat: The image is amd64 only, because it depends on SteamCMD.
+
 ## Fields
 ### Chart / Role
 

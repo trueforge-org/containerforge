@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/cura/, /prints/ (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 runs Cura 5.8.1 (AppImage) while arm64 runs the apt cura 5.0.0 package, so behaviour and features differ by architecture.
+- caveat: the desktop needs the kasmvnc sibling container, so the app does not work as a single container.
+- caveat: Cura settings and prints live in /home/cura and /prints, which must be mounted or they are lost on recreate.
+
 ## Fields
 ### Chart / Role
 

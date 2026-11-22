@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc); chart mounts /data, draft keeps data in /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart mounts /data but the draft keeps data in /config, so an existing TrueCharts database needs to be moved or remapped (data gotcha)
+- caveat: the default login is a well known default that must be changed in the UI after the first start (inferred)
+- caveat: the optional postgresql dependency is only needed if it is configured; the default store is SQLite (inferred)
+
 ## Fields
 ### Chart / Role
 

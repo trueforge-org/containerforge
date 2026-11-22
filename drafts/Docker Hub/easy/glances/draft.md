@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Some plugins (for example GPU, sensors and Docker) need extra Python packages or host access. The draft's plain pip install lacks these that the upstream full image includes (inferred).
+- caveat: Without host namespaces, Glances can only show metrics for the container itself, not for the host (inferred).
+
 ## Fields
 ### Chart / Role
 

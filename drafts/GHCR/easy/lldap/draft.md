@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (database in /config); chart mounts /data (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: first run needs secrets set in the config (JWT secret, admin password); defaults must be changed by the user before exposing the LDAP or web UI (inferred).
+- caveat: the database lives in /config by default; a PostgreSQL dependency (listed as optional) is only needed if the user chooses it.
+- caveat: arm64 uses the aarch64 release tarball from the same release; confirm it runs on Ubuntu arm64 (inferred).
+
 ## Fields
 ### Chart / Role
 

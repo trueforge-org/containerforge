@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /media (type not set, likely pvc)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: camera access needs a device or RTSP stream configured by the user, and a config file must be written in /config before frigate starts (inferred).
+- caveat: detection on CPU is slow, so a dedicated detector (USB Coral, GPU or similar) is practically required for real use (inferred).
+- caveat: the tensorrt tag needs an NVIDIA runtime on the host, and the arm64 path is a different build (inferred).
+
 ## Fields
 ### Chart / Role
 

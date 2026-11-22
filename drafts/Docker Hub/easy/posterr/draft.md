@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/src/app/public/custom (pvc), /usr/src/app/config (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs a Plex server URL and token and the image writes to paths inside the app folder, so a read-only rootfs or non-root run will break unless those paths are moved (inferred)
+- caveat: the arm64 link points to the release page rather than a binary, so the arm64 source needs checking
+
 ## Fields
 ### Chart / Role
 

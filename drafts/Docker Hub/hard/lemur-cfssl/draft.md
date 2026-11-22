@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart default); /config is the chart's own mount
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs an external PostgreSQL database; the chart expects one to be present before Lemur starts (inferred).
+- caveat: The CFSSL CA keys and Lemur's data live under /data, so losing that path means losing the certificate authority.
+- caveat: The first admin user is created by hand from the Lemur CLI, so setup is not done in the UI alone (inferred).
+
 ## Fields
 ### Chart / Role
 

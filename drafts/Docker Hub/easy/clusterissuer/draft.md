@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The image is hello-world, a placeholder. It prints a message and exits, so it does nothing useful as a running service and will restart-loop if the chart expects a long-running process (inferred).
+- caveat: The chart name suggests cert-manager, but the image has no relation to cert-manager. The mismatch must be resolved before porting (inferred).
+
 ## Fields
 ### Chart / Role
 

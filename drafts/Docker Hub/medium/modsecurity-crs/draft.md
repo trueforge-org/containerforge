@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /modsecurity/data (emptyDir), /modsecurity/temp (emptyDir), /modsecurity/upload (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this image protects a backend, so an upstream proxy target must be configured or it has nothing to filter (inferred).
+- caveat: CRS rules often cause false positives on real traffic, so a paranoia level and exclusions need tuning (inferred).
+- caveat: binding ports 80 and 443 as non-root needs a low-port setting or a higher port mapping (inferred, rootless constraint).
+
 ## Fields
 ### Chart / Role
 

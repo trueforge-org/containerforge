@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/zerotier-one (pvc, config), /dev/net/tun (hostPath device)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the container needs /dev/net/tun and NET_ADMIN to create a virtual network interface, so the host must allow both (inferred)
+- caveat: UDP 9993 must be reachable from the internet or the LAN for peers to connect, so port forwarding or host networking is usually needed (inferred)
+- caveat: the network identity and the controller config live in /var/lib/zerotier-one, which must be kept across restarts (inferred)
+
 ## Fields
 ### Chart / Role
 

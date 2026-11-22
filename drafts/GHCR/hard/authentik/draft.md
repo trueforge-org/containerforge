@@ -66,6 +66,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /templates, /blueprints/custom, /certs, /geoip, /usr/share/GeoIP, /data (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart needs PostgreSQL and several sidecars (geoipupdate, ldap, radius, proxy) that ContainerForge does not have yet, so this image alone does not make a working deployment.
+- caveat: the first start runs database migrations and the initial admin setup happens in the web UI (inferred).
+- caveat: the LDAP and proxy outposts are separate images with their own release binaries, so each needs its own port (inferred).
+
 ## Fields
 ### Chart / Role
 

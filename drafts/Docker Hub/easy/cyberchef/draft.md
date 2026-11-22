@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: CyberChef runs fully in the browser. The container only serves static files, so processing never happens on the server (inferred).
+- caveat: The version is fixed to the downloaded release zip, so updates need an image rebuild and there is no self-update (inferred).
+
 ## Fields
 ### Chart / Role
 

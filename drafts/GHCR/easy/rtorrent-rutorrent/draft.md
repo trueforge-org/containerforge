@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc), /downloads (pvc), /passwd (pvc); chart has no /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft only covers the rtorrent_exporter sidecar; the main rtorrent and ruTorrent image is not scoped by this draft, so the overview and the container do not match
+- caveat: the chart has no /config path and mounts /data, /downloads and /passwd, so the data layout must be remapped (data gotcha)
+- caveat: ruTorrent web login and user setup are manual steps in the UI (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Wake-word models are downloaded or selected at runtime; first start may need internet and the models stored under /config (inferred).
+- caveat: Only useful together with a Wyoming client such as Home Assistant on the same network; the container does nothing on its own.
+
 ## Fields
 ### Chart / Role
 

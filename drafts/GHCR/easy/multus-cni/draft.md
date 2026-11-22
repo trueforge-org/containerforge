@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: hostPath /opt/cni/bin (the draft's target), /etc/cni/net.d, /var/lib/cni/multus, and the host paths above (hostPath)
 - confidence: medium (the chart's privileged workloads may use a different image than this file-only bundle)
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: this is a file-delivery image, not a running service; it only copies CNI plugin binaries into a host path and is useful only on Kubernetes or Talos nodes.
+- caveat: the draft ships the containernetworking plugins only, not the Multus meta-plugin binary, so the Multus behaviour the chart expects may be missing (inferred).
+- caveat: the draft's arm64 and amd64 tarballs are the plugin bundle from containernetworking; the chart's siderolabs image is a different build (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: scrobbling clients must be pointed at the server and given an API key before anything is recorded (inferred).
+- caveat: a settings file may need to be created or edited in the data path before the first start (inferred).
+
 ## Fields
 ### Chart / Role
 

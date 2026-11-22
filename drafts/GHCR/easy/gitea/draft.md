@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined; draft expects /config) and /var/lib/gitea (emptyDir, chart-defined)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Gitea needs a database (PostgreSQL in the chart, or SQLite) and a first-run install wizard on the web UI to create the admin account, so manual setup is expected.
+- caveat: Git over SSH uses port 2222, which must be published separately if SSH access is wanted (inferred).
+- caveat: The draft config goes to /config while the upstream rootless image defaults to /data and /var/lib/gitea, so the data path needs verifying (inferred).
+
 ## Fields
 ### Chart / Role
 

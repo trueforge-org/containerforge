@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /export (pvc, messurementlogs)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Headless Chromium (Puppeteer) needs a writable /tmp and a non-root profile dir; the image will be large because of Chromium from apt (inferred).
+- caveat: Upstream image is tracked as `:latest`, so the build may drift without a version bump.
+- caveat: Measurement logs live under /export in the chart, so the ContainerForge data path must be mapped to a persisted location (inferred).
+
 ## Fields
 ### Chart / Role
 

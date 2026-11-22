@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root (pvc, searchlocation for scanning)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it wraps a linuxserver selkies desktop base that runs as root, so rootless and read-only operation needs significant rework.
+- caveat: the directories to scan must be mounted into the container with the right permissions, or the scan will miss files or fail to remove duplicates (inferred).
+- caveat: the reference image is a community Unraid-specific build, so the image is not an upstream rmlint release.
+
 ## Fields
 ### Chart / Role
 

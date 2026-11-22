@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values; engine data path unknown
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Ace Stream engine is closed source and amd64 only, so arm64 is not available; expect amd64-only support.
+- caveat: Needs an nginx front plus the engine and search layer in one image, so it is a multi-process setup that must be reworked for rootless operation.
+- caveat: Engine usage may fall under Ace Stream licence terms for redistribution; check before publishing (inferred).
+
 ## Fields
 ### Chart / Role
 

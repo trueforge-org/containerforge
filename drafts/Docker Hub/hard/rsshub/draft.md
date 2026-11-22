@@ -61,6 +61,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: browser-based routes need the browserless Chrome sidecar on port 3000; without it those feeds fail, so the sidecar must be deployed alongside (spec).
+- caveat: the browserless sidecar needs extra shared memory and sandbox settings to run Chrome, which are not part of a plain RSSHub deployment (inferred).
+
 ## Fields
 ### Chart / Role
 

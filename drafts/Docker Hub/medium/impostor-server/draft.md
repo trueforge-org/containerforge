@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the game server needs UDP 22023 reachable from clients; NAT or a host port mapping that only forwards TCP will break matchmaking (inferred).
+- caveat: the .NET runtime version must match the release bundle; a self-contained build may not need the apt runtime (inferred).
+
 ## Fields
 ### Chart / Role
 

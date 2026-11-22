@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/config (config volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The config file under /app/config must be written by hand, since the defaults are sample data and not production settings (inferred).
+- caveat: LDAPS on 636 needs a certificate that the user provides, and plain LDAP on 389 transmits credentials in clear text (inferred).
+- caveat: The chart's config path /app/config does not match the draft's /config, so the mount path must be settled before porting (inferred).
+
 ## Fields
 ### Chart / Role
 

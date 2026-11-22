@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/db (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart runs aria2 as a separate sidecar, but the draft installs aria2 as an apt package in one image; the two layouts need to be reconciled (inferred)
+- caveat: a Real-Debrid account and API key are needed before the client can download anything (inferred)
+- caveat: BitTorrent port 6888 needs to be reachable for good transfer speeds (inferred)
+
 ## Fields
 ### Chart / Role
 

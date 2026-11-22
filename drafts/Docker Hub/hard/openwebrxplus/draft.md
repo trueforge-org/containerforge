@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/openwebrx (pvc), /etc/openwebrx (pvc), /usr/lib/python3/dist-packages/htdocs/plugins (pvc)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: SDR hardware access needs the host USB bus (/dev/bus/usb) mounted, which the chart disables by default and which conflicts with a rootless setup.
+- caveat: the SoftMBE .deb packages are compiled from source for both architectures, so the build is slow and must be verified on each arch.
+- caveat: the upstream base image is amd64 only, which affects any arm64 build that copies from it (inferred).
+
 ## Fields
 ### Chart / Role
 

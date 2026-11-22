@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/steam/core-keeper-data (datafiles, pvc default); /home/steam/core-keeper-dedicated (serverfiles, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Only the x86-64 depot exists, so arm64 will not run natively (per the draft's amd64/arm64 values).
+- caveat: The first start downloads the server through SteamCMD and needs Steam access. This is a large download with a slow first start (inferred).
+- caveat: Data location conflicts. The Reason says saves are in /config, but the chart uses /home/steam/core-keeper-data and /home/steam/core-keeper-dedicated, so the mount paths must be verified (inferred).
+
 ## Fields
 ### Chart / Role
 

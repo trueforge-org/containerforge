@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no public Dockerfile was found and the bundle must be built from the monorepo with yarn, which is a long build (inferred)
+- caveat: the web client talks to external Standard Notes sync servers by default, so the container needs internet access to work fully (inferred)
+- caveat: the upstream tag is stable and not pinned to a version in the spec, so the build may drift (inferred)
+
 ## Fields
 ### Chart / Role
 

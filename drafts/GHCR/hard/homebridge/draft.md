@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /homebridge (config dir, not /config; type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: HomeKit discovery uses mDNS on 5353/udp and the HAP port, so bridge networking will hide accessories from the Home app unless host networking or a mDNS reflector is used (inferred).
+- caveat: plugins are installed at runtime from npm, so the container needs internet access and the first start is slow (inferred).
+- caveat: the homebridge-apt-pkg .deb is a vendor package and the chart pins a dated image tag, so the update path has to be checked by hand (inferred).
+
 ## Fields
 ### Chart / Role
 

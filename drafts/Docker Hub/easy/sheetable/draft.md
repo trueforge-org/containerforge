@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/config (pvc, chart's own; draft does not mention it)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs a reachable PostgreSQL database that must be created and configured before the app starts, so this is not a standalone container (inferred).
+- caveat: the database credentials and any app secret must be supplied as environment or config values; the setup flow is documented on the upstream site, not in the container (inferred).
+
 ## Fields
 ### Chart / Role
 

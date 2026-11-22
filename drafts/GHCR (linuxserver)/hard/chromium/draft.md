@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /config/.cache (emptyDir, chart browsercache)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Ubuntu ships chromium as a snap, so the build depends on a Debian package source that may not match the Ubuntu base (inferred)
+- caveat: the image tag is latest, a rolling tag, so browser versions change without notice (upstream status)
+- caveat: a browser plus desktop stack is memory and CPU heavy, so size the limits for it (resource needs) (inferred)
+
 ## Fields
 ### Chart / Role
 

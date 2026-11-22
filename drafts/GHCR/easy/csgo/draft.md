@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported; SteamCMD's 32-bit x86 bootstrap does not run on arm64, so the image is amd64 only.
+- caveat: The image tag is latest, a rolling tag, so the server version can change on any pull or restart (inferred for the rolling tag behaviour).
+- caveat: CS:GO was replaced by CS2 and its dedicated server is no longer actively maintained by Valve, so the upstream status is legacy (inferred).
+- caveat: A Game Server Login Token (GSLT) is normally needed for a public listing, and the user must supply it (inferred).
+
 ## Fields
 ### Chart / Role
 

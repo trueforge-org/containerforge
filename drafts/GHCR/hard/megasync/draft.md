@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (data, pvc chart default); /mnt/host (hostpath, type unclear, possibly hostPath)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the MEGA account login is entered in the GUI, so the container is not usable without a MEGA account (inferred)
+- caveat: the hostpath mount at /mnt/host has no type in the chart values and may behave as a PVC rather than a host path, so it must be verified (verify)
+- caveat: the client is closed-source Qt and needs a desktop over VNC, with no arm64 copy-from image available (inferred)
+
 ## Fields
 ### Chart / Role
 

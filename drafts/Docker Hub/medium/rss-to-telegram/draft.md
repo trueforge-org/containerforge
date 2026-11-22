@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (state in chart's /config only)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a Telegram bot token and target chat ID configured before any feed is delivered; the bot is an external account.
+- caveat: Upstream publishes no architecture-specific binary, so arm64 behaviour depends on the npm build step (inferred).
+
 ## Fields
 ### Chart / Role
 

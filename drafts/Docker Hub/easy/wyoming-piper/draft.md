@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (chart mounts /data as pvc; draft keeps voices in /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Voice models are downloaded at runtime to /config; first start needs internet and can be slow (inferred).
+- caveat: Piper needs the matching voice file for the configured language; a missing voice causes startup failure until one is supplied.
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/src/app/store (pvc, chart config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a USB Z-Wave controller must be passed through to the container, and the serial device must be accessible to the non-root user (inferred)
+- caveat: network keys and store data live in /usr/src/app/store; losing that volume means re-pairing every Z-Wave device (inferred)
+
 ## Fields
 ### Chart / Role
 

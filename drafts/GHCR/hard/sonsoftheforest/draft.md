@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/steamcmd, /serverdata/serverfiles (chart paths, type not set); configmap mounted at /serverdata/serverfiles/userdata/dedicatedserver.cfg
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Windows-only dedicated server runs under Wine and Xvfb, so the image is amd64 only and starts slowly (inferred).
+- caveat: SteamCMD downloads the server files, several GB, on first start, so the first start needs internet and time.
+- caveat: dedicatedserver.cfg is mounted from a configmap, so in-game or UI edits may be overwritten on restart (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart's own; draft expects repositories in /config, so mismatch)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the repository data directory must be persisted and sized for backups, and it is not under /config by default (inferred).
+- caveat: authentication is set up through an htpasswd file that must be created by hand, or the server must run with auth disabled (inferred).
+- caveat: clients must use the same restic repository password; the server does not hold it, so losing the client password makes backups unreadable (inferred).
+
 ## Fields
 ### Chart / Role
 

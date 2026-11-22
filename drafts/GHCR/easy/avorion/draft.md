@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Avorion server is a large Steam download at first start, so the first run is slow and needs internet access (inferred).
+- caveat: The first start generates a galaxy and needs an admin password set in the server config before the game can be administered (inferred).
+- caveat: The chart sets stdin and tty to true, so the console setup may hang or misbehave when the container runs detached (inferred).
+- caveat: The image is amd64 only, because it depends on SteamCMD.
+
 ## Fields
 ### Chart / Role
 

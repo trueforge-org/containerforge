@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /downloads (pvc) and /metrics (pvc), both chart mounts
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Chrome needs a larger /dev/shm than the default 64 MB or pages crash; set shm-size or mount an emptyDir for /dev/shm (inferred).
+- caveat: Without the sandbox flags the browser runs with reduced isolation; the draft notes sandbox handling as a required decision.
+- caveat: The image exposes an unauthenticated browser API by default unless a token is set, so do not expose port 3000 publicly (inferred).
+
 ## Fields
 ### Chart / Role
 

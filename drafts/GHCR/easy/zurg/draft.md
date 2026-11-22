@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc); config.yml and plex_update.sh are chart configmap mounts under /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Real-Debrid account and API token are needed before zurg can serve anything (account, inferred)
+- caveat: zurg is a closed-source binary, so its licence terms must be confirmed before redistribution (licensing, inferred)
+- caveat: config.yml and plex_update.sh come from chart configmaps under /config, so they must be created by hand for this image (manual setup)
+
 ## Fields
 ### Chart / Role
 

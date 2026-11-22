@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /games (games, pvc chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the CUDA base image is amd64 only, and the app needs an NVIDIA GPU with device access, so arm64 and GPU-less hosts will not work (inferred)
+- caveat: the Dockerfile is untraced, and the 20.04 base tag is an end-of-life Ubuntu release, so the image needs review before porting (inferred)
+- caveat: the games directory must be mounted and populated by the user (manual setup, inferred)
+
 ## Fields
 ### Chart / Role
 

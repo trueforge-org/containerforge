@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /photoprism_temp (emptyDir), /photoprism/originals and /photoprism/import (pvc default), /assets (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB is a separate service that must exist before first start; the UI setup and indexing depend on it.
+- caveat: Indexing originals and transcoding video use a lot of CPU and disk, and the first index can take hours (inferred).
+- caveat: Upstream defaults to /photoprism paths, so originals, storage and cache must be moved under /config and /tmp, and the originals directory must be mounted (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -66,6 +66,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the outpost rows (chart /certs and /geoip mounts belong to server and geoip)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The five rows are outpost containers that only work when they are connected to a running authentik server with an outpost token, so none of them runs alone (inferred).
+- caveat: Each outpost needs its token and the authentik server URL, which come from the authentik web UI after the server is set up (inferred).
+- caveat: The geoip sidecar needs a MaxMind account and licence key before it can download the database (inferred).
+
 ## Fields
 ### Chart / Role
 

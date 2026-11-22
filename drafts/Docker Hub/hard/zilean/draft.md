@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, DB and ingest data)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs an external PostgreSQL database and the ingest step (Python) must run before the search is useful (inferred)
+- caveat: the first ingest of the torrent index downloads a large amount of data, so the first run is slow and needs disk space (inferred)
+- caveat: the .NET 9 SDK and runtime are not in any ContainerForge base, so a Microsoft package feed may be needed at build time (inferred)
+
 ## Fields
 ### Chart / Role
 

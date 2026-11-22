@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Mozilla download URL resolves to the current Firefox release rather than the pinned 1160.0.1, so the version can drift (inferred)
+- caveat: arm64 Mozilla tarball is unverified in this build (architecture) (inferred)
+- caveat: browser plus desktop stack is memory heavy (resource needs) (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond common defaults (varrun enabled is a common default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The apt package version may lag upstream Fossil releases, so features in the upstream docs may not match the installed version.
+- caveat: Repositories and the first admin user are created by hand after start, so manual setup is expected (inferred).
+- caveat: The draft uses a third-party image (nicholaswilde) for the reference, so its maintenance status should be checked (inferred).
+
 ## Fields
 ### Chart / Role
 

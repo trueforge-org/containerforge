@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data, /processed, /videos, /images (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the video library is indexed on first start, so large libraries take a long time before the UI is complete (inferred).
+- caveat: the CPU ffmpeg path works without a GPU, but NVENC acceleration needs the NVIDIA stack on the host.
+- caveat: /data, /processed, /videos and /images must all be mounted, or processed output is lost.
+
 ## Fields
 ### Chart / Role
 

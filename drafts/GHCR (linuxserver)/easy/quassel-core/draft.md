@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (chart uses CNPG PostgreSQL; draft says database in /config, which conflicts)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart uses a CloudNativePG PostgreSQL dependency while the draft keeps the database in /config, so the backend choice must be settled before deployment (inferred)
+- caveat: the Ubuntu apt quassel-core version may lag the upstream 0.14.0 release (inferred)
+- caveat: the core needs an initial user created through a Quassel client; there is no web setup (manual setup)
+
 ## Fields
 ### Chart / Role
 

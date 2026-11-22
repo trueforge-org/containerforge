@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/src/app/user (pvc, chart-defined storageconfig)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream is published only as a source archive with no image-specific binary; the build needs haxe at build time.
+- caveat: The web UI and websocket listen on one port, so reverse proxies must forward websocket upgrades or live sync breaks (inferred).
+
 ## Fields
 ### Chart / Role
 

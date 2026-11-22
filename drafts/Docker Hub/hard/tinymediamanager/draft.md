@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, app data), /media/movies (pvc), /media/tvshows (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app is a Java desktop GUI, so it is used through a VNC or noVNC web view and not through a normal web UI (inferred)
+- caveat: the first start downloads metadata and artwork from the internet and can take a long time on large libraries (inferred)
+- caveat: the upstream image is pinned to 5.3.5, so later upstream versions must be checked before the container is updated (inferred)
+
 ## Fields
 ### Chart / Role
 

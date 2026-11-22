@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /hoobs (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: HOOBS installs plugins from npm at runtime, so it needs internet access and a slow first start (inferred).
+- caveat: HomeKit or Homebridge discovery relies on mDNS, which usually needs host networking or a multicast-capable network (inferred).
+- caveat: Initial setup and plugin choice happen in the HOOBS web UI, not in a config file the container creates (inferred).
+
 ## Fields
 ### Chart / Role
 

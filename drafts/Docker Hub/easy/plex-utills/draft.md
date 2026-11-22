@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /logs (pvc), /films (pvc, media library mount); /config is the chart's own
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the media library must be mounted at the same paths Plex uses, or the matching fails (inferred)
+- caveat: mediainfo and ffmpeg make the image large and the scans CPU and I/O heavy (inferred)
+
 ## Fields
 ### Chart / Role
 

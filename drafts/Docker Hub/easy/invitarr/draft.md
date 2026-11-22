@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/app/config (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Discord bot needs a bot token and a Discord server where it is invited, which is an account and setup step outside the container
+- caveat: the chart's state path (/app/app/config) differs from the /config convention, so the state location must be checked (inferred)
+
 ## Fields
 ### Chart / Role
 

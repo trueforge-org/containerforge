@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app needs a reachable MQTT broker, which is an external service the user must provide (inferred).
+- caveat: Headless Chrome for the speed test needs writable /tmp profiles and a non-root user; it also needs outbound internet access to run tests (inferred).
+- caveat: Node 14 is end of life, so the Node runtime must be upgraded and the puppeteer and fast-cli versions retested.
+
 ## Fields
 ### Chart / Role
 

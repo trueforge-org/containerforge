@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (configpath is /config/obs-studio, under /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; DistroAV ships no arm64 package, so arm64 is not supported.
+- caveat: the NDI runtime must be fetched from ndi.video separately, and it may carry its own license terms (inferred).
+- caveat: GUI is reached through KasmVNC; real GL acceleration needs more setup, and software rendering is slow (inferred).
+
 ## Fields
 ### Chart / Role
 

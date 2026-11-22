@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (chart persistence is empty; MariaDB is a sibling dependency)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a reachable MariaDB server is required before first start, and the mariadb sibling must be configured for it (external service)
+- caveat: the source tarball pinned to v1.1.2 may be stale relative to upstream (upstream status) (inferred)
+
 ## Fields
 ### Chart / Role
 

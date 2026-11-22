@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, chart-defined; SQLite)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Requires a Search Console or scraping API key (for example Scraping Robot or similar) for rank tracking; without it, keyword checks do not return results (inferred).
+- caveat: Read-only rootfs works only if all Next.js cache writes are redirected to /tmp; a missing redirect causes startup or runtime crashes.
+
 ## Fields
 ### Chart / Role
 

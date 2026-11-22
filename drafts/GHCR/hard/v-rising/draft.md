@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles, /serverdata/steamcmd (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Windows-only server runs under Wine and Xvfb, so the image is amd64 only and starts slowly (inferred).
+- caveat: SteamCMD downloads several GB of server files on first start.
+- caveat: the game ports UDP 9876 and 9877 must be reachable from the internet for players, so NAT or port forwarding is needed (inferred).
+
 ## Fields
 ### Chart / Role
 

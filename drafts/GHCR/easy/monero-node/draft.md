@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: large chain volume; chart mounts /home/monero/.bitmonero (pvc default), draft expects /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the blockchain is large (well over 100 GB, growing) and the initial sync can take days; the /config volume must be sized accordingly (inferred).
+- caveat: good peering needs inbound P2P on 18080/tcp; without it the node syncs slowly (inferred).
+- caveat: copy-from is no for both architectures, so the image depends on the release tarball from downloads.getmonero.org at build time.
+
 ## Fields
 ### Chart / Role
 

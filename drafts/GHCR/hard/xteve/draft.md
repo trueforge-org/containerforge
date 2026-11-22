@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: upstream xTeVe is archived, so bug fixes and new features are not expected.
+- caveat: no public Dockerfile exists for the k8s-at-home image, which is also archived, so the build depends on the prebuilt zips only.
+- caveat: IPTV playlist and EPG sources must be configured by the user in the web UI, so this is manual setup (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/zerotier-one (pvc), /etc/zt-mkworld (pvc), /opt/key-networks/ztncui/etc (pvc, chart config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs /dev/net/tun and a running zerotier-one daemon, so the host must allow TUN access (inferred)
+- caveat: three separate state paths (/var/lib/zerotier-one, /etc/zt-mkworld, /opt/key-networks/ztncui/etc) must all persist, or the ZeroTier identity and network config are lost (inferred)
+- caveat: Go helpers are compiled from source during the image build, so builds are slow and arm64 is untested (inferred)
+
 ## Fields
 ### Chart / Role
 

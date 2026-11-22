@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/docker/backups (backuplocation, pvc default); /home/docker/github-backup/config/ (config, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a GitHub personal access token with the right scopes, supplied as a secret (account and API key) (inferred).
+- caveat: The tool runs once per invocation, so scheduling needs an external cron or loop to run backups regularly (inferred).
+- caveat: The Reason cites an alpine 3.9 base, and the chart's backup paths under /home/docker do not match the /config layout in the draft (inferred).
+
 ## Fields
 ### Chart / Role
 

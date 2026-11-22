@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/lib/unifi/data (pvc), /usr/lib/unifi/olddata (pvc, config key), /usr/lib/unifi/logs (emptyDir), /usr/lib/unifi/cert (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft says it reuses the mongodb and unifi-network-application siblings, but lists no dependency containers, so the wiring must be fixed before testing (inferred)
+- caveat: device discovery on 10001/udp and STUN on 3478/udp need broadcast or host-level networking, which a bridged container may not provide (network needs, inferred)
+- caveat: the amd64 and arm64 support claims are marked unconfirmed in the draft and need rechecking
+
 ## Fields
 ### Chart / Role
 

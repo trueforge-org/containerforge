@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data, /downloads, /passwd (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: ruTorrent web UI files come from a git clone or release download at build time, so the image cannot be built offline (inferred).
+- caveat: rTorrent SCGI (5000) and BitTorrent peer (50000) ports must be reachable for peers to connect; the rtorrent_exporter dependency is not yet in ContainerForge.
+- caveat: the nginx and PHP-FPM split across ubuntu needs a supervisor layout, so first start may depend on both services coming up in order (inferred).
+
 ## Fields
 ### Chart / Role
 

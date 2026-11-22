@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart config /etc/searxng (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs settings.yaml under /etc/searxng on first start, and a secret key must be set or the instance refuses to run safely (inferred).
+- caveat: Upstream publishes no release binary; the image is built from source with uv, so first build downloads many Python packages from the internet.
+- caveat: Public search instances are often blocked by upstream engines, so results can be sparse without tuning engine settings (inferred).
+
 ## Fields
 ### Chart / Role
 

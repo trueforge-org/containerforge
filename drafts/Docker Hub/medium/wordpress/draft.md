@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /bitnami/wordpress pvc (chart config mount; draft maps wp-content to /config, so remap rather than add)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The external MariaDB or MySQL sibling must exist and be reachable before the first start, because WordPress cannot finish setup without it.
+- caveat: The site title and admin account are created in the browser setup wizard on first visit, so the container alone does not give a working site (inferred).
+- caveat: Core and plugin self-updates write into the app folder, which may fail on a read-only rootfs and needs a note for upgrades (inferred).
+
 ## Fields
 ### Chart / Role
 

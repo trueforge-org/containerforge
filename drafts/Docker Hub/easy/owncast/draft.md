@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: streaming needs RTMP port 1935 reachable from the streaming software, and the admin password must be changed in the UI on first login (inferred)
+- caveat: transcoding to HLS is CPU heavy and needs fast disk, and GPU use needs extra setup (inferred)
+
 ## Fields
 ### Chart / Role
 

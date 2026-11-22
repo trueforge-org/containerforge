@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/docker-borg, /home/borg/backups, /home/borg/.ssh (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: clients connect over SSH, so the host port 22 (or another mapped port) must reach the container and the sshd host keys must persist across restarts (inferred).
+- caveat: BORG_UID comes from PUID, and it must match the owner of any existing repositories or borg will refuse them (inferred).
+- caveat: sshd and borg run together in one image, so logs and restarts are shared between two services (inferred).
+
 ## Fields
 ### Chart / Role
 

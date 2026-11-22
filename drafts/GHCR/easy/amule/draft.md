@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /downloads pvc (chart; draft mounts a downloads path)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The web interface and eMule ports need to be reachable from outside, with TCP 4662 and UDP 4672 forwarded, or peer connectivity will be poor (inferred).
+- caveat: The apt amule-daemon package may lag upstream aMule, so features and fixes may be behind the release (inferred).
+- caveat: Downloads and incoming directories must be mounted and writable by the non-root user, or downloads fail (inferred).
+
 ## Fields
 ### Chart / Role
 

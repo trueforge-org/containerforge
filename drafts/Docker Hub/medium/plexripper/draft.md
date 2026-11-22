@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /Downloads (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The draft has no published binary, so the image is compiled from source for both ASP.NET and the Bun/Nuxt frontend, which makes the build slow.
+- caveat: The source link points to Reaparr/Reaparr while the image comes from PlexRipper/PlexRipper, so verify the correct upstream repo before pinning.
+- caveat: A Plex account and token are required to connect to a Plex server (inferred).
+
 ## Fields
 ### Chart / Role
 

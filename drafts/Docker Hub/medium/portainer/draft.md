@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /.cache (emptyDir); /data is the chart's own pvc
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Portainer locks its admin setup after a short window if no admin account is created on first start (inferred), so the first-run login must be done promptly.
+- caveat: Managing containers needs the Docker socket or an edge agent, which grants root-equivalent access on the host (inferred).
+- caveat: The chart's read-only root filesystem needs /data and /.cache writable, and the draft's base must allow that (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (data volume, pvc default); /var/run/postgresql (postgres-run, type not set, likely pvc or emptyDir). Draft Reason describes the Alpine helper, not the Dispatcharr app, so the spec's rationale does not match the chart
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The draft's Reason describes the Alpine init helper, not the Dispatcharr application, so the spec does not match what the chart deploys and must be rewritten before porting.
+- caveat: The chart runs an embedded PostgreSQL (aio mode), and the data lives under /data, which must be persistent (inferred).
+- caveat: The upstream image is on ghcr.io, not Docker Hub, so the source registry differs from the other drafts (inferred).
+
 ## Fields
 ### Chart / Role
 

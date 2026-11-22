@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/firezone (chart persistence, type not shown)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is a hard dependency, so it must be running before the portal starts.
+- caveat: WireGuard needs kernel support on the host (inferred), and the tunnel port 51820/udp must be forwarded.
+- caveat: version 0.7.36 is an older release, so upstream updates may not apply to this image (upstream status, inferred).
+
 ## Fields
 ### Chart / Role
 

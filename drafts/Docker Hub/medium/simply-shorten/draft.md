@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (DB under chart's /config/db)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Java 17 replaces the EOL JDK 14 used upstream, so behaviour on the newer runtime is not yet tested.
+- caveat: The image is currently published for amd64 only, so arm64 needs a fresh build from source before use.
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: KMS server only activates Windows and Office licences that are configured to use it; it is for licensed-volume environments and needs a reachable port 1688 (inferred).
+- caveat: Draft uses an unpinned or svn-tagged binary bundle and Debian apt package; version drift between the two install paths is likely (inferred).
+
 ## Fields
 ### Chart / Role
 

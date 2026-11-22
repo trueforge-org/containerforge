@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /headless/.bitcoin/ (pvc, blockchain data, large; chart mount)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Bitcoin Core syncs a full blockchain, which needs hundreds of GB of disk and many hours on first start (inferred).
+- caveat: The GUI runs on a VNC desktop, so access is through a browser or VNC client on the exposed ports; there is no headless mode in this image.
+- caveat: Wallet keys live inside the data path under /headless/.bitcoin; backups must be taken from there or funds may be lost.
+
 ## Fields
 ### Chart / Role
 

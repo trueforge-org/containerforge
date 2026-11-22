@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cache/zoneminder (pvc, datapath); varrun persistence disabled
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: camera access needs the host's video devices or network camera URLs configured inside the container (inferred)
+- caveat: the database is MariaDB or MySQL and must be set up before the first start (inferred)
+- caveat: the .deb package is pinned to 1.38.6 with a debug package name, so the package name must be checked on each upgrade (inferred)
+- caveat: video recording and motion detection are CPU and disk heavy and need a lot of storage for the event path (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /shares/DVR (pvc, recordings; chart mount)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Closed-source commercial product that needs a paid or trial licence from the vendor; the container cannot run without the account.
+- caveat: Tuner and network device discovery use multicast or broadcast on the LAN, so host networking is usually required for the tuner to be found (inferred).
+- caveat: Recording to /shares/DVR needs a large, writable share; the first scan of the guide data also takes time (inferred).
+
 ## Fields
 ### Chart / Role
 

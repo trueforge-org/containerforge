@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /owi2plex and /TVH (pvc default, purpose not shown in values)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Cron runs a second scheduled process next to the main service, so a supervisor is needed and the failure modes differ (inferred).
+- caveat: The tool needs an external TVHeadend or Plex-side source to read from, which is not part of this container (inferred).
+- caveat: The draft installs owi2plex from PyPI unpinned, so builds can drift (inferred).
+
 ## Fields
 ### Chart / Role
 

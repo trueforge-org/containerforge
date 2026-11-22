@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /server/volume, /media/external (chart paths, type not set)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: first start installs @scrypted/server and downloads plugins at runtime, so it needs internet and can be slow (inferred).
+- caveat: camera discovery and mDNS typically need host networking, which the chart values do not set (inferred).
+- caveat: amd64 and arm64 are marked as unconfirmed against upstream, so the arm64 claim should be rechecked before porting.
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /models (pvc); /images (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chart runs v2.28.0 images but the planned binary is v5.0.0, so the image and binary versions are not aligned and must be reconciled (inferred).
+- caveat: Model downloads at runtime are multi-gigabyte and make the first start slow; they need internet access or pre-loaded model files (inferred).
+- caveat: Only the CPU variant is planned, so GPU-accelerated models will not run in this container.
+
 ## Fields
 ### Chart / Role
 

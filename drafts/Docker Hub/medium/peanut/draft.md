@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PeaNUT reads from a NUT server (upsd) on the network, which must be running and reachable; it is not part of this container.
+- caveat: The Next.js build may need a lot of memory on small hosts (inferred).
+
 ## Fields
 ### Chart / Role
 

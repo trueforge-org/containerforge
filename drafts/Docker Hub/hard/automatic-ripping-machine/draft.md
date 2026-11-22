@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/arm (pvc, ripped output and state); /etc/arm/config (pvc, chart mount)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Ripping needs an optical drive mapped into the container (/dev/sr*) and usually a privileged or device-cgroup setup; it will not work without the host drive passed through (inferred).
+- caveat: MakeMKV is proprietary and needs a licence key for full use; check licence and redistribution terms before publishing an image (inferred).
+- caveat: Large, slow builds because MakeMKV and the native tools are compiled from source; expect a long build and a large image.
+
 ## Fields
 ### Chart / Role
 

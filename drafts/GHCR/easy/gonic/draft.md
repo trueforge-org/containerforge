@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data, /cache, /playlists, /podcast, /music (pvc, chart-defined; draft expects /config and read-only music, but chart mounts music without readOnly)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The first start scans the whole music library, so large libraries take a long time before the UI is usable (inferred).
+- caveat: The default admin account must be changed after first login, and it is created on the first run, so manual setup is expected (inferred).
+
 ## Fields
 ### Chart / Role
 

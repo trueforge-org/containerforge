@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app needs a running Emby server and an API key or account (external service, inferred).
+- caveat: Python 3.7 is end of life, so moving to a current Python requires compatibility testing of the pinned requirements (inferred).
+- caveat: The source repo (cameronurnes) differs from the Docker Hub owner (lastelement21), so verify which build is authoritative.
+
 ## Fields
 ### Chart / Role
 

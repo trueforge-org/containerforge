@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart mounts DB here, draft says /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The draft says the database lives under /config, but the chart mounts it at /data, so the data path must be confirmed before the chart mapping is reused.
+- caveat: The release ships only source archives, so the Go backend and Node frontend must be compiled at image build time.
+- caveat: Upstream activity is low (inferred), so long-term maintenance may fall to ContainerForge.
+
 ## Fields
 ### Chart / Role
 

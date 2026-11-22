@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (state in /config); chart mounts a settings.ini secret at /plexanisync/settings.ini
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a Plex server plus Plex and AniList or MyAnimeList credentials; the sync does nothing without them (external service).
+- caveat: the chart mounts settings.ini as a secret at /plexanisync/settings.ini, while the draft keeps state in /config; the settings file must be placed in the new location (data gotcha).
+- caveat: the draft installs the repo with pip, but the chart runs a PyInstaller build; output or dependency differences are possible (inferred).
+
 ## Fields
 ### Chart / Role
 

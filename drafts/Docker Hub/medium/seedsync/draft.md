@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /downloads (pvc, chart-defined)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream binary is an amd64 .deb only; arm64 requires a compile from source, which is not yet tested.
+- caveat: Background scan daemon polls the download share continuously, so it can be CPU and I/O heavy on large libraries (inferred).
+- caveat: Requires a seedbox or remote source (SFTP/SSH) with credentials configured in the UI before it does anything useful.
+
 ## Fields
 ### Chart / Role
 

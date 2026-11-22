@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app (pvc, data), /share (pvc), /downloads/incomplete (pvc), /downloads/complete (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Soulseek network account with username and password is needed before slskd can connect (account, inferred)
+- caveat: the .NET runtime may not be bundled in the release zip, so an apt .NET runtime may be needed (inferred)
+- caveat: the peer listener on 50300/tcp should be reachable for good connectivity (inferred)
+
 ## Fields
 ### Chart / Role
 

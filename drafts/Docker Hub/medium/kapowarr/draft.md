@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/temp_downloads (pvc), /comics-1 (pvc, media), /app/db (pvc, state path instead of /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: metadata lookups use ComicVine and usually need an API key set in the UI or config (inferred).
+- caveat: the app writes its database and state under its install folder on some paths, which may conflict with a read-only rootfs; verify the data path is /config (inferred).
+
 ## Fields
 ### Chart / Role
 

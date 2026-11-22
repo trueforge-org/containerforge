@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /mattermost/config (pvc, instead of /config), /mattermost/data (pvc), /mattermost/logs (pvc), /mattermost/plugins (pvc), /mattermost/client/plugins (pvc), /mattermost/bleve-indexes (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is a hard dependency and must run as an external container before Mattermost will start (from draft).
+- caveat: the Docker Hub reference is the Enterprise Edition image while the build uses the release tarball, so confirm which edition and license terms apply (inferred).
+- caveat: the site URL must be set correctly or links and integrations will break (inferred).
+
 ## Fields
 ### Chart / Role
 

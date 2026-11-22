@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/identity (pvc, chart's own); /app/config (pvc, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a storage node needs an identity, a wallet address and a registered email, and the identity files must be created and backed up before first start (inferred).
+- caveat: the node needs a large, persistent disk for stored data, and the public port must be reachable from the internet with inbound UDP and TCP forwarding (inferred).
+- caveat: the release is pulled at build time from the upstream zip, so the image tag tracks upstream releases and may need frequent rebuilds (inferred).
+
 ## Fields
 ### Chart / Role
 

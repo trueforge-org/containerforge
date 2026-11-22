@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /headless/.GridcoinResearch/ (pvc, chart default); /var/lib/boinc-client/ (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The wallet is a Qt GUI, so it is used only through the VNC or noVNC desktop, and the VNC password must be set up before first use (inferred).
+- caveat: amd64 comes from a flatpak bundle and arm64 from a .deb, so the two architectures need different install paths and the amd64 build is not a plain apt install.
+- caveat: First start syncs the Gridcoin chain, which is a large download and takes a long time (inferred).
+- caveat: The copy-from image for arm64 is not published, so arm64 has to be built from the .deb.
+
 ## Fields
 ### Chart / Role
 

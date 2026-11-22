@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.config/UMS/ (pvc, chart config); /media (pvc, chart-defined)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Discovery relies on SSDP over UDP 1900 and multicast, which usually needs host networking or a network that forwards multicast; in a bridged container, DLNA devices often do not find the server (inferred).
+- caveat: Upstream release is an AppImage for amd64 and a tarball for arm64, so the arm64 build path differs and needs its own testing.
+- caveat: Media transcoding uses ffmpeg, which needs enough CPU and RAM; hardware transcoding is not set up by default (inferred).
+
 ## Fields
 ### Chart / Role
 

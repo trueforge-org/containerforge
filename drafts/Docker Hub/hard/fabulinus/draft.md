@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /code/models (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the TitanML Takeoff server is closed source, so the image can only be pulled, not rebuilt, and an account or license may apply (licensing, inferred).
+- caveat: the GPU variant needs an NVIDIA runtime and device access.
+- caveat: models are stored in /code/models, and first start may download large model files (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/src/redmine/files (pvc default); bundle and tmp per draft under /tmp
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is an optional but expected dependency, and the chart points to CloudNativePG; the database must exist before first start.
+- caveat: The default admin login (admin/admin) must be changed at first use, and secret_key_base must be set from the environment (inferred).
+- caveat: Gem install with native extensions needs build packages and internet at build time (inferred).
+- caveat: copy-from arm64 is unconfirmed (registry could not be queried), so arm64 support is not verified.
+
 ## Fields
 ### Chart / Role
 

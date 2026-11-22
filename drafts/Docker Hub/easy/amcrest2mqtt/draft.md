@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a reachable MQTT broker and Amcrest camera(s) on the LAN, plus camera credentials supplied through environment variables (inferred).
+- caveat: The builder stage is on python:3.9-alpine, and Python 3.9 is end-of-life, so the base may need a version bump (inferred).
+
 ## Fields
 ### Chart / Role
 

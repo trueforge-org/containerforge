@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (/config is the chart's own mount)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the distribution registry needs a config.yml (storage, http listen, auth) that has to be created and mounted, since no complete default is assumed (inferred).
+- caveat: the source is the Go distribution registry, but the Docker Hub image it is compared with is the upstream registry image, so confirm which binary and config layout the chart expects (inferred).
+- caveat: pushing images needs TLS or an explicit insecure-registry setting on clients, which is a manual step (inferred).
+
 ## Fields
 ### Chart / Role
 

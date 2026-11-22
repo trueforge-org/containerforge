@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/.local/share (profiles pvc), /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); the profiles path may need its own mount
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Arma 3 dedicated server is a large Steam download at first start, so the first run is slow and needs internet access (inferred).
+- caveat: Server configuration files such as server.cfg and basic.cfg must be created by hand under /config before the server is usable (inferred).
+- caveat: Mods come from the Steam Workshop and are downloaded at runtime, so they depend on internet access and Steam availability (inferred).
+- caveat: The image is amd64 only, because it depends on SteamCMD.
+
 ## Fields
 ### Chart / Role
 

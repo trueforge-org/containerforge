@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /config/graphite_mapping.conf (configmap, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: TrueNAS must be configured to send graphite metrics to this container's port 9109, so the TrueNAS side needs manual reporting setup (inferred).
+- caveat: the spec names prometheus graphite_exporter as the source and a different community repo as a resource; confirm which binary the image runs before reporting version details (inferred).
+- caveat: graphite ingest on 9109 is TCP and UDP, so both must be reachable from TrueNAS (inferred).
+
 ## Fields
 ### Chart / Role
 

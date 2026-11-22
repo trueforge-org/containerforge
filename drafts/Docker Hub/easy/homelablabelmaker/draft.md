@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values; nginx cache path would need emptyDir if rootfs stays read-only (inferred, not in values)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app is a static label-maker site, so the port 8080 and the nginx layout are inferred and need checking against the running image
+- caveat: the image comes from a repo snapshot with no release tags, so updates are tied to commit hashes (inferred)
+
 ## Fields
 ### Chart / Role
 

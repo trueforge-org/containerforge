@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the tool needs a Plex server URL and token configured by hand before it does anything (inferred)
+- caveat: the upstream release is a zip of the source, so the install depends on the repo's requirements.txt resolving on the python base (inferred)
+
 ## Fields
 ### Chart / Role
 

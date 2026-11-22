@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: hostPath x8 as listed under other-security (chart host mounts; no pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it must run with host networking, host PID and several hostPath mounts such as /opt/cni/bin and /etc/cni/net.d, so it only works on a Kubernetes node
+- caveat: the Talos path needs a privileged init container, and the crane and cni dependency images are missing from ContainerForge
+- caveat: it cannot run rootless or with a read-only rootfs, because it writes to host CNI and run paths
+
 ## Fields
 ### Chart / Role
 

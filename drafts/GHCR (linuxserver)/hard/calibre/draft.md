@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Qt tarball is large, so the first start and the image pull will be slow (inferred)
+- caveat: the calibre content server on 8080 has to be enabled in the GUI before it serves anything (manual setup) (inferred)
+
 ## Fields
 ### Chart / Role
 

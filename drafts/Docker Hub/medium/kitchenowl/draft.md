@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, backend data path), /etc/nginx/conf.d (emptyDir, frontend nginx only)
 - confidence: low - draft has no app details, so ubuntu base is a guess; chart is frontend plus backend
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft combines an nginx web bundle and a Flask backend in one container, so two processes must be supervised correctly (from draft, inferred on process details).
+- caveat: Python 3.14 is named for the backend; confirm the base image provides it (inferred).
+- caveat: the backend stores data in a database under the data path; back up and persist it (inferred).
+
 ## Fields
 ### Chart / Role
 

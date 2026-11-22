@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data, /app/recipes (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is a hard dependency, so it must be running before the server starts.
+- caveat: the original getferdi/server repo is gone, so the image cannot be checked against source and may differ from the successor fork (upstream status).
+- caveat: data and recipes are stored in /app/data and /app/recipes, which must be persistent.
+
 ## Fields
 ### Chart / Role
 

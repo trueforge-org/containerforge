@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No upstream WAR is published in a form we can copy; the draft needs a Maven build stage plus Tomcat, and the Tomcat work and log paths must move to /tmp or /config (inferred).
+- caveat: Upstream is a small single-maintainer project pinned to a release tag (1.1-2); expect little upstream activity (inferred).
+
 ## Fields
 ### Chart / Role
 

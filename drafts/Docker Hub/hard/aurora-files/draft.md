@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: unknown - chart persistence is {}; app upload or data path not in values
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The vendor zip comes from afterlogic.org, not GitHub, so the build depends on that download link staying live and on a licence for the vendor code.
+- caveat: The app writes into its own tree, so a read-only /app will fail on upload or cache writes until those paths are moved to /config (inferred).
+
 ## Fields
 ### Chart / Role
 

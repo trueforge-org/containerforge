@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /agent/Media/XML (pvc); /agent/Media/WebServerRoot/Media (pvc); /agent/Commands (pvc); /agent/ffmpeg6 (pvc). None is /config.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Agent DVR is closed-source and fetched as a vendor zip per arch, so the build depends on the vendor download URL staying live (inferred).
+- caveat: Camera access needs the LAN and the TURN port range open, and the chart's `LoadBalancer` services assume a cluster that can hand out external IPs (inferred).
+- caveat: Some Agent DVR features may need a paid iSpy account or license (inferred).
+
 ## Fields
 ### Chart / Role
 

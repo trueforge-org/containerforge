@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs AWS credentials or an IAM role with Route53 permissions and an existing hosted zone (account and API key) (inferred).
+- caveat: The tool needs outbound internet access to detect the public IP, and it stores no inbound ports (inferred).
+
 ## Fields
 ### Chart / Role
 

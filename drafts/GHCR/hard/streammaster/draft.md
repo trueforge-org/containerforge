@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /config/tv-logos (under /config, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there is no release binary, so the image is built from source with a .NET SDK and dotnet publish, which lengthens builds (inferred).
+- caveat: the IPTV playlists and EPG sources must be added by the user in the web UI, so this is manual setup (inferred).
+- caveat: ffmpeg transcoding is CPU heavy and needs a fast scratch path (inferred).
+
 ## Fields
 ### Chart / Role
 

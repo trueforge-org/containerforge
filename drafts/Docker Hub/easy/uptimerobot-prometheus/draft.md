@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: an UptimeRobot API key is required and is passed as configuration, and the exporter only works while the key is valid (inferred).
+- caveat: the source is the upstream master zip, so the image tracks upstream master rather than a tagged release (inferred).
+
 ## Fields
 ### Chart / Role
 

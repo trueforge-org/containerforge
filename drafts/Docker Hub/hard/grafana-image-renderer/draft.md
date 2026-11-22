@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence is empty; /tmp is a common default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a Chromium install from a source other than Ubuntu's snap-based chromium package; the apt package choice is the main build risk (inferred).
+- caveat: Only works as a remote renderer for a Grafana instance, which must be configured with this container's URL; it does nothing on its own.
+- caveat: The chart tracks the `latest` tag, so the renderer version can change under the same config.
+
 ## Fields
 ### Chart / Role
 

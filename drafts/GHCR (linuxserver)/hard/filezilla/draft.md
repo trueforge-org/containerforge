@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: GUI-only FTP client; access is through the browser desktop, not a headless service (inferred)
+- caveat: saved site credentials and settings are stored under /config, so that path must persist (data gotcha) (inferred)
+
 ## Fields
 ### Chart / Role
 

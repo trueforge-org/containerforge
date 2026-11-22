@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /run/udev/control, /lib/modules, /sys (hostPath); /usr/local (config, pvc chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image is a full OpenCCU or buildroot OS rootfs with its own init, so it cannot run as an ordinary app container
+- caveat: HomeMatic radio and USB hardware need device passthrough, and the /sys and /lib/modules host mounts need a compatible host kernel (inferred)
+- caveat: the project was renamed to OpenCCU and the image tag is latest, so upstream churn is likely (upstream status, inferred)
+
 ## Fields
 ### Chart / Role
 

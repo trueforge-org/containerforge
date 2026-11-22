@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, data); /app/wwwroot/images (pvc, images)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The ASP.NET 10 app is compiled from source, so the first build is slow and needs enough RAM and disk for the .NET SDK (inferred).
+- caveat: Initial dashboard setup is done in the web UI (manual setup, inferred).
+- caveat: The draft says the Dockerfile copies a prebuilt build folder, so the build must be redone cleanly on both architectures.
+
 ## Fields
 ### Chart / Role
 

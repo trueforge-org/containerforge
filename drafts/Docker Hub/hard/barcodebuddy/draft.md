@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Go supervisor is built from source in a golang stage, so each arch needs its own compile and a longer build (inferred).
+- caveat: Barcode scanning needs a USB scanner or a camera device on the host, which the container does not provide (inferred).
+- caveat: The upstream image is alpine-based, so any musl-specific behaviour in PHP or the supervisor must be retested on Ubuntu.
+
 ## Fields
 ### Chart / Role
 

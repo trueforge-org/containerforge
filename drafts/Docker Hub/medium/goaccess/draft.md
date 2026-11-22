@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/log (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: GoAccess needs the web server access logs mounted read-only, and the file ownership must allow the non-root user to read them (inferred).
+- caveat: Serving the HTML report through nginx means two processes need a small supervisor (inferred).
+- caveat: The WebSocket real-time report port (7890) must be exposed for live updates to work (inferred).
+
 ## Fields
 ### Chart / Role
 

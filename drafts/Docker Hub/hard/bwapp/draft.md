@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: unknown - chart persistence is {}; MySQL data dir would need writable storage (not in values)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: bWAPP is a deliberately vulnerable web app; it must be isolated from untrusted networks and should not be exposed to the internet.
+- caveat: Upstream repo is archived and the download page is the only source, so the artifact can disappear or change without notice.
+- caveat: MySQL state needs a writable data path, and the first run must create the database through the bWAPP install page (inferred).
+
 ## Fields
 ### Chart / Role
 

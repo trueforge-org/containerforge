@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft depends on a flood web UI and rtorrent running together, and the hotio alpine base must be moved to glibc (inferred)
+- caveat: BitTorrent TCP and UDP 6881 must be reachable for peers and DHT to work (inferred)
+- caveat: the image tag is latest with no pinned release, so behaviour can change between pulls (upstream status)
+
 ## Fields
 ### Chart / Role
 

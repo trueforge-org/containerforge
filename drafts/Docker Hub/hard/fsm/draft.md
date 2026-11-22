@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values (persistence: {}); saves and mods move to /config per draft
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Factorio headless server needs a Factorio account or token, so the server cannot start without it.
+- caveat: Factorio is x86_64 only, so arm64 is not supported.
+- caveat: the chart has no persistence, so saves and mods are lost on recreate until they are moved to /config.
+
 ## Fields
 ### Chart / Role
 

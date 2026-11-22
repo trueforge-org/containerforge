@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/docker, /certs/client (chart persistence, type not shown)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: dockerd needs host cgroups, kernel storage drivers and networking, so restricted hosts may fail to start the daemon (inferred).
+- caveat: /var/lib/docker must be on persistent storage, because losing it removes every image and container inside.
+- caveat: images pulled inside this container are not shared with the host Docker daemon, so they are downloaded again per instance (inferred).
+
 ## Fields
 ### Chart / Role
 

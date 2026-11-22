@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (uses /config); chart mounts /serverdata/serverfiles (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the architectures differ in version: amd64 uses the official 15.3 tarball while arm64 uses the Ubuntu apt package (15.1), so players may see a version mismatch across hosts.
+- caveat: base graphics are downloaded at first start into /config; the server does not run correctly without them (inferred).
+- caveat: game port 3979 needs both TCP and UDP forwarding; the admin port 3977 should be restricted or password protected (inferred).
+
 ## Fields
 ### Chart / Role
 

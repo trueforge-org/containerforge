@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/configs, /app/logs, /temp (transcode-cache), /media (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the node must reach the Tdarr server on port 8266 and run the same major version, or it will not register (inferred).
+- caveat: the transcode cache needs fast local disk, and the cache path must be large enough for the largest media files (inferred).
+- caveat: no ports are exposed, so the node only makes outbound connections; this is fine for a worker, but debugging needs logs (inferred).
+
 ## Fields
 ### Chart / Role
 

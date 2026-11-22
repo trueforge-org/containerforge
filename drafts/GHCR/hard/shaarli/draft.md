@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/shaarli/cache, /var/www/shaarli/data (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the setup wizard and admin account are created through the web UI on first visit, so this is manual setup (inferred).
+- caveat: the data and cache folders must be writable by the PHP-FPM user, and file ownership mismatches show as blank pages (inferred).
+- caveat: PHP extensions and the nginx and PHP-FPM pair must be installed on ubuntu, since PHP is not a ContainerForge runtime (inferred).
+
 ## Fields
 ### Chart / Role
 

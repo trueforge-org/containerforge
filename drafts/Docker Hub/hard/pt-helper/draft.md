@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image is closed-source and its runtime, glibc compatibility and file layout are unverified, so it may not start after the app files are copied out.
+- caveat: redistribution terms are unknown, and the service likely needs an account with the tracker it helps with (inferred).
+
 ## Fields
 ### Chart / Role
 

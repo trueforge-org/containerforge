@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/grafana (pvc); /app/tmp (emptyDir); /tmp/dashboards (emptyDir); /etc/grafana/provisioning/{datasources,alerts,plugins,notifiers} (emptyDir); /etc/grafana/grafana.ini and ldap.toml (configmap)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The grafana-enterprise .deb is used by the chart; the enterprise build may require a license for enterprise-only features, while the open-source features work without one (inferred).
+- caveat: The first login uses an admin account whose password must be changed in the UI (manual setup, inferred).
+- caveat: The package installs under /usr/share/grafana by default, so unpacking into /app needs the paths and plugin directories rewritten (inferred).
+
 ## Fields
 ### Chart / Role
 

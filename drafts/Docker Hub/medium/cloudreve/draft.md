@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /cloudreve/data (pvc, config; chart's own mount, not /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The overview marks PostgreSQL and Valkey as optional, but the reason says they are needed; confirm whether the default SQLite setup is enough before wiring those dependencies.
+- caveat: The chart keeps data at /cloudreve/data, not /config, so the data path must be remapped (inferred).
+- caveat: ffmpeg and media tools from apt increase image size and first-start work for thumbnails (inferred).
+
 ## Fields
 ### Chart / Role
 

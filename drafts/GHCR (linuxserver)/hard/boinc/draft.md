@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image tag is latest, a rolling tag, so upstream changes arrive without notice (upstream status)
+- caveat: an account and project attachment must be configured in the GUI by hand (manual setup) (inferred)
+
 ## Fields
 ### Chart / Role
 

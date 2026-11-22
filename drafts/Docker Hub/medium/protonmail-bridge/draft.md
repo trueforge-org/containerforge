@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root (chart's config, pvc default); the draft's home directory must point at /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A paid Proton account is required, and the first login is an interactive step through the bridge CLI, not a config file.
+- caveat: The keychain needs pass and gpg in a headless container, and state must live under /config (inferred).
+- caveat: arm64 is built from source with Go (make build-nogui), so it is a separate and slower build path.
+
 ## Fields
 ### Chart / Role
 

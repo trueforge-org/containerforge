@@ -61,6 +61,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, primary data), /app/cache (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs external PostgreSQL and Valkey (redis) services, and both must be running before the first start (inferred)
+- caveat: the admin account and initial project setup are done in the web UI after first start (inferred)
+- caveat: nginx, uwsgi and celery run as separate processes under supervisor, so rootless operation needs changes to the process setup (inferred)
+- caveat: Weblate is pinned to 4.16.4 and upgrades must follow the upstream migration steps (inferred)
+
 ## Fields
 ### Chart / Role
 

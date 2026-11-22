@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/run/nginx (emptyDir, chart-defined)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs an external MariaDB instance (optional sibling) with credentials set before the first start; the app cannot store data without it.
+- caveat: Upstream release is pinned to v1.1.3 with no published arm64 build confirmed, so the arm64 claim needs rechecking before porting (inferred).
+- caveat: Mixed PHP and FrankenPHP signals in the spec mean the runtime choice is not settled and may change the setup steps (inferred).
+
 ## Fields
 ### Chart / Role
 

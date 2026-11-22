@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chain data; Reason says it must go to /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the full node syncs the whole blockchain on first start, which needs a lot of disk space and can take days (inferred)
+- caveat: the RPC and p2p ports must be forwarded for the node to receive peers from the internet (inferred)
+- caveat: the source is a 2018-era BCHunlimited tag with no release assets, so the C++ build must be reproduced from source (inferred)
+- caveat: the chain data path must be moved to /config so it survives restarts (inferred)
+
 ## Fields
 ### Chart / Role
 

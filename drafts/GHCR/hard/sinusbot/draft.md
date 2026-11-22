@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/sinusbot/data, /opt/sinusbot/scripts (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only; the vendor ships no arm64 build, so arm64 is not possible.
+- caveat: the closed-source bot needs its vendor tarball and install script at build time, and the full feature set requires a SinusBot license (inferred).
+- caveat: a TeamSpeak server must be available for the bot to connect to, and voice UDP 9987 must be reachable (inferred).
+
 ## Fields
 ### Chart / Role
 

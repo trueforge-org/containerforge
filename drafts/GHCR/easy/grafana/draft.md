@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/grafana (pvc); emptyDir at /app/tmp, /tmp/dashboards and provisioning dirs; configmap mounts for grafana.ini and ldap.toml
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: This is a Kubernetes sidecar that watches the Kubernetes API for ConfigMaps to load dashboards, so outside Kubernetes it has nothing to watch (inferred).
+- caveat: It needs a separate Grafana main container to load the dashboards it finds, so it cannot run on its own (inferred).
+- caveat: The sidecar image is not the Grafana image itself, so Grafana's own admin setup and data paths are handled by the main container, not this app.
+
 ## Fields
 ### Chart / Role
 

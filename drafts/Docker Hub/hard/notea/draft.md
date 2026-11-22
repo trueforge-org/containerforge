@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence is empty)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chart declares no persistence, so notes and the bundled MinIO data are lost on container restart unless a volume is added (inferred).
+- caveat: The notea app and MinIO run together under supervisor, so both must be healthy for the app to work.
+- caveat: The app is a prebuilt copy from a third-party image, so the code is not built from the upstream source here.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /copy, /output, /watch (chart persistence, type not shown; /config is the chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app is a watcher over /watch, /copy and /output, so those folders must be mounted and writable, and processed files are moved or rewritten.
+- caveat: the image has no ports, so HTTP health checks will not work and only process checks are possible (inferred).
+- caveat: the upstream image is a single-maintainer image with no public source, so its behaviour is unverified and the latest tag can change.
+
 ## Fields
 ### Chart / Role
 

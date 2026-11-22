@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The dedicated server downloads through SteamCMD at first start, and track and car content may need to be copied from a licensed Assetto Corsa install (inferred).
+- caveat: server_cfg.ini and entry_list.ini must be written by hand under /config before the server accepts players (inferred).
+- caveat: The image is amd64 only, because it depends on SteamCMD.
+
 ## Fields
 ### Chart / Role
 

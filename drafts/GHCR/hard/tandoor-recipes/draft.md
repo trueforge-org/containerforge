@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/recipes/mediafiles (type not set), /opt/recipes/staticfiles (emptyDir)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream docs recommend PostgreSQL; SQLite works for a single user but is not the default for larger installs (inferred).
+- caveat: Django needs a SECRET_KEY set by the user before first start, and the first run applies migrations and is slow (inferred).
+- caveat: the Vue frontend is built in a separate node stage, so rebuilds are needed for every upstream release (inferred).
+
 ## Fields
 ### Chart / Role
 

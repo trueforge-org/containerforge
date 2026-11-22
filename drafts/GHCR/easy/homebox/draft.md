@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined; draft expects SQLite in /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: SQLite is the default and is stored in /config; PostgreSQL is optional and needs an external database deployed and configured by the user (inferred).
+- caveat: The first user is registered through the web UI on port 7745, so manual setup is expected (inferred).
+
 ## Fields
 ### Chart / Role
 

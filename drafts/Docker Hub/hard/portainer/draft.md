@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc), /.cache (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Business Edition is license-restricted, so a valid Portainer license is needed for paid features and redistribution of the extracted binary is not allowed.
+- caveat: the container needs the Docker socket and a writable /data volume, which means host-level Docker access.
+- caveat: there is no arm64 build; the Community Edition may be the practical option if arm64 is needed (inferred).
+
 ## Fields
 ### Chart / Role
 

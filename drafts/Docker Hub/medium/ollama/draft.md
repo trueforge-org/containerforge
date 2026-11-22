@@ -61,6 +61,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/backend/data (data, pvc default) for the optional UI sidecar; /root/.ollama is the chart's config mount
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Model downloads are large (multi-GB per model) and happen at first pull, so the first start needs internet and disk under /config.
+- caveat: The arm64 tarball is the jetpack5 build for NVIDIA Jetson, which may not run on generic arm64 hosts (inferred).
+- caveat: The pinned 0.40.16 is an old release; newer models may need a newer ollama (inferred).
+- caveat: GPU (ROCm/CUDA) variants need device passthrough that the chart values do not show.
+
 ## Fields
 ### Chart / Role
 

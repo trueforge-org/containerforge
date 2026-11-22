@@ -57,6 +57,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /backup (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Closed-source and amd64-only, so arm64 hosts are not supported.
+- caveat: Kerio Connect is a licensed mail server, so a valid license or a trial key is needed to run it as a real mail host (inferred).
+- caveat: Mail use needs public DNS (MX and SPF records) and TLS certificates from the admin side, which are not part of the container (inferred).
+- caveat: The base OS is legacy (Ubuntu 14.04 in the spec), so the security and support status of the image is poor (inferred).
+
 ## Fields
 ### Chart / Role
 

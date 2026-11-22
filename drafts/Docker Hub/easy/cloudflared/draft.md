@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a Cloudflare account and a tunnel token, which is a secret that must be supplied through the environment (account and API key).
+- caveat: The tunnel needs outbound internet access. No inbound ports are needed, but the connector only works while it can reach Cloudflare (inferred).
+
 ## Fields
 ### Chart / Role
 

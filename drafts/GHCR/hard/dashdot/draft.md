@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /mnt/host (hostPath /), /dev/mem (hostPath /dev/mem)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the host stats only show the real host when the host /proc, /sys and disk paths are mounted; without those mounts the dashboard reports the container (inferred).
+- caveat: the project is a single-maintainer Node dashboard at v6.3.4, so its update pace and upstream status should be checked before relying on it.
+- caveat: the Node build runs on the python-node base, so the first image build is slower than the runtime start (inferred).
+
 ## Fields
 ### Chart / Role
 

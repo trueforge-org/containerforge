@@ -77,6 +77,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/neko/Downloads (downloads, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: each row is a separate browser or app container, and the main container needs the nine sidecar images to be built as well, all of which are missing
+- caveat: WebRTC media needs UDP ports 52000-52100 reachable from clients, which implies host networking or explicit port forwarding (inferred)
+- caveat: browsers need a large shared memory allocation (shm), which the chart values do not show (inferred)
+- caveat: Microsoft Edge is amd64 only, and the Tor Browser amd64 link points to a JSON update file rather than a binary, so the download path needs rework (inferred)
+
 ## Fields
 ### Chart / Role
 

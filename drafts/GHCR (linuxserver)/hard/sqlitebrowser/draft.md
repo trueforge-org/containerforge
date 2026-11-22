@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 uses an AppImage while arm64 uses the apt package, so the two architectures run different builds and may differ in version (inferred)
+- caveat: SQLite database files must be mounted into the container to be opened, and paths outside the mount are invisible (data gotcha) (inferred)
+
 ## Fields
 ### Chart / Role
 

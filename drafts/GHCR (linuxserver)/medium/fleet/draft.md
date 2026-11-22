@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (chart uses MariaDB sibling)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a reachable MariaDB server is required before first start (external service)
+- caveat: the first admin account is created in the web UI, and agents need a TLS endpoint to connect (manual setup) (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/deCONZ (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a USB ConBee or RaspBee radio, or its serial device, must be passed into the container, and without it the gateway has no radio (inferred).
+- caveat: the API and Phoscon web app need first-run unlock through the web UI, and the gateway may ask for a physical button press to pair (inferred).
+- caveat: the arm64 package is a Debian buster build, so compatibility with Ubuntu 26.04 is not tested (inferred).
+
 ## Fields
 ### Chart / Role
 

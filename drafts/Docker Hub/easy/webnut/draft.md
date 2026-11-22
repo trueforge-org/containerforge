@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The web UI needs a reachable external NUT server (upsd) and its host, user and password entered in the UI or config; it does not monitor a UPS on its own.
+- caveat: Installed from pip with no version pin in the draft, so the first build may pull a newer webnut release than the one the chart uses (inferred).
+
 ## Fields
 ### Chart / Role
 

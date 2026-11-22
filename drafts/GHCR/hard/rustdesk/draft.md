@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: hbbs and hbbr need inbound UDP 21116 and TCP 21117 reachable from clients, so NAT or port forwarding must be set up by the user (inferred).
+- caveat: the server key pair is generated on first start and must persist in /data, or clients will refuse to connect after a restart (inferred).
+- caveat: arm64 uses a separate release zip; that path is not verified on arm64 hardware (inferred).
+
 ## Fields
 ### Chart / Role
 

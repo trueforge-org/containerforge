@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /tmp/dumps (emptyDir, chart's own); /config (pvc, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the dedicated server is downloaded through SteamCMD on first start, which is a large download and makes the first start slow, and it needs internet access (inferred).
+- caveat: the image is amd64 only; the SteamCMD-based server does not run on arm64 (inferred).
+- caveat: the game state and save files are under the server data directory, which must be persisted, and the server needs several UDP and TCP ports open to the internet (inferred).
+
 ## Fields
 ### Chart / Role
 

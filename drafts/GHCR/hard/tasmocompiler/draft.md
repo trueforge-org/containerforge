@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values (PlatformIO home and cache need a writable path per the draft, but the chart does not set one)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PlatformIO downloads large toolchains at runtime on the first build, so the first build needs internet and several minutes (inferred).
+- caveat: the image tag is latest, which is rolling, while the draft pins release v14.0.3, so the two may diverge.
+- caveat: firmware builds are CPU heavy, so low-power hosts build slowly (inferred).
+
 ## Fields
 ### Chart / Role
 

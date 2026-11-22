@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cache/nginx (emptyDir, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the amd64 build uses an upstream .deb unpacked with dpkg, and the arm64 link points to a Mac zip, so arm64 is not supported as currently specified.
+- caveat: the web bundle is a lite web client that stores its data in the browser or mounted workspace, so the workspace path must be mounted and writable (inferred).
+- caveat: the upstream image is maintained by a third party (fardjad), so track its updates separately from the official TagSpaces releases (inferred).
+
 ## Fields
 ### Chart / Role
 

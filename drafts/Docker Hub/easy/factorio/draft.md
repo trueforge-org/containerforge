@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (only the chart's own /factorio volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Clients joining a multiplayer server need a licensed copy of Factorio, and the headless server needs a Factorio account or token for multiplayer use (licensing) (inferred).
+- caveat: Only amd64 is supported, so arm64 will not run (per the draft's amd64/arm64 values).
+- caveat: The first start downloads the headless tarball, and the server needs a reasonable amount of RAM and disk for saves (inferred).
+
 ## Fields
 ### Chart / Role
 

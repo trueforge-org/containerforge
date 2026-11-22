@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data/state (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Dockerfile clones an unpinned master branch, so the build is not reproducible until a commit is pinned.
+- caveat: Storage backends and user connections are configured through the UI or a config file, which is manual setup (inferred).
+- caveat: Several build toolchains (Go and Node) make the image slow to build and large (inferred).
+
 ## Fields
 ### Chart / Role
 

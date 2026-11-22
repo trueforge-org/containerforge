@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data/db, /app/data/images/, /app/data/tmp (pvc default, chart's own; the tmp mount is not the common /tmp)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Native sqlite and sharp modules are compiled per architecture, so arm64 builds may be slow or need extra packages (inferred).
+- caveat: The database and thumbnail paths under /app/data must be writable, and thumbnail generation uses CPU and RAM on large libraries (inferred).
+- caveat: The alpine variant was chosen; the debian variant is unverified (from the draft).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/phoronix-test-suite (pvc), /var/lib/phoronix-test-suite/test-results (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: benchmarks compile and download their test profiles at runtime, so the first run needs internet access and takes a long time (inferred).
+- caveat: results for hardware benchmarks reflect the host, and GPU or disk tests need the matching host devices passed in (inferred).
+- caveat: there are no ports, so the container is a CLI job runner and is not reached over the network.
+
 ## Fields
 ### Chart / Role
 

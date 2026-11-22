@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/local/tomcat/webapps/ROOT/WEB-INF/ (config persistence disabled, but init writes app.properties there, so a writable path is needed)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs external PostgreSQL, and the database schema and config are set up on first start (inferred)
+- caveat: the init step writes app.properties into the Tomcat webapp directory, so that path must stay writable (inferred)
+- caveat: the Java API is built from Maven source and the frontend from node, so both build stages are long (inferred)
+- caveat: the upstream image is tagged latest, so the version can change without notice (inferred)
+
 ## Fields
 ### Chart / Role
 

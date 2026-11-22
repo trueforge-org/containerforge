@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /shared/seafile (pvc, under the common /shared mount)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB is required, and an initial admin account must be created through the web UI or CLI on first run (inferred).
+- caveat: the official tarball is x86_64 only, so arm64 needs a source compile of ccnet, seafile and seahub (spec).
+- caveat: user files live under /shared/seafile, so that volume must be persistent and backed up.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream Dockerfile builds on ubuntu 18.04 and nodejs 12, which are old and no longer maintained (inferred)
+- caveat: the C++ discovery server is built with boost, so the build is long and needs many dev packages (inferred)
+- caveat: the upstream image is tagged latest, so the version can change without notice (inferred)
+
 ## Fields
 ### Chart / Role
 

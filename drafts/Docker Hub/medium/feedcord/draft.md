@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none data path; configmap file mounted at /app/config/appsettings.json (read-only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app needs a Discord bot token or webhook and RSS feed definitions before it posts anything (external service, inferred).
+- caveat: The config file is mounted read-only from a ConfigMap at /app/config/appsettings.json, so any write-back by the app would fail (inferred).
+- caveat: .NET 9 runtime and SDK must come from apt or Microsoft; the ubuntu base version must provide them (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /shows (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MediaElch is a Qt GUI and needs a VNC or X display, with the VNC password set before first use (inferred).
+- caveat: arm64 needs a Qt6 CMake build from source, which is a long build (inferred).
+- caveat: Metadata scraping needs internet access and may need API keys for the scraper sources (inferred).
+
 ## Fields
 ### Chart / Role
 

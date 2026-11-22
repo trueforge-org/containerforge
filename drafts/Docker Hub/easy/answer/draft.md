@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart data volume, pvc default); draft says data is under /config, chart uses /data
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The first run needs the setup wizard completed in the web UI before the instance is usable (inferred).
+- caveat: Data location conflicts. The Reason says config and data go under /config, while the chart uses /data, so confirm where Answer writes its config and uploads (inferred).
+- caveat: Upstream is an Apache Incubator project; the image is pinned to 1.2.0, so upgrades need a deliberate version bump (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /arkserver, /ark, /ark/backup, /ark/staging, /home/steam/.steam/steamapps, /arkserver/ShooterGame/Saved/clusters, /arkserver/ShooterGame/Saved, /arkserver/ShooterGame (pvc default); /arkconfig (configmap); /var/spool/cron/crontabs (emptyDir)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The ARK server binaries are x86_64 only, so arm64 is not supported (per the draft's amd64/arm64 values).
+- caveat: The first start downloads the full ARK server through SteamCMD, which is a very large download and a slow first start (inferred).
+- caveat: Expect high RAM use (commonly 8 GB or more) for a single map (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /database (pvc), /downloads (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: metadata sources are external sites, so lookups need internet access and may break when those sites change (inferred).
+- caveat: ffmpeg and libmagic are needed at runtime (from draft, inferred on the libmagic detail).
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/keystore (chart's config, pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A Trakt API application (client ID and secret) must be registered on Trakt, and the redirect URL must be a public HTTPS address reachable from Trakt.
+- caveat: There are no release binaries; the image is compiled from source with a modern Go toolchain (inferred).
+- caveat: The keystore under /app/keystore must persist, or users must re-authorise.
+
 ## Fields
 ### Chart / Role
 

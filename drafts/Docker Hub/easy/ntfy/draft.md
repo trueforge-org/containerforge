@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/ntfy (pvc, config, auth and firebase files), /var/cache/ntfy (pvc, cache)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: attachments, links and some clients need `base-url` set to the public address, or they point at the wrong host (inferred)
+- caveat: iOS push notifications go through the upstream ntfy.sh relay unless a self-hosted setup is configured (inferred)
+
 ## Fields
 ### Chart / Role
 

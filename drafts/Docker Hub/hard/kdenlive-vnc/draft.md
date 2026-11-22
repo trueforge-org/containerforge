@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /sharedContent (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Kdenlive is a GUI-only app, so it is used through VNC or noVNC with a password set before first use (inferred).
+- caveat: Video editing needs a lot of RAM and disk for media, so the container's resources must be sized well above a typical service (inferred).
+- caveat: The apt-installed Kdenlive version follows the distro, not the upstream release, so features and bugs track the base image (inferred).
+
 ## Fields
 ### Chart / Role
 

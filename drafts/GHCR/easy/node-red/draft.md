@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (flows in /config); chart mounts /data (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: flows, settings and palette installs are written to /config; a read-only config volume breaks palette installs (inferred).
+- caveat: the draft installs node-red with an unpinned `npm install`, while the chart uses 5.0.10; pin the version in the build to match the chart.
+- caveat: Node-RED ships with no login by default; the web UI on 1880 should be protected by a reverse proxy or the editor auth settings (inferred).
+
 ## Fields
 ### Chart / Role
 

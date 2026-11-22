@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none for the draft (uses /config); chart mounts /data (pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no ZIM content ships with the image; the user must place ZIM files in /config before kiwix-serve has anything to serve.
+- caveat: ZIM files are large (often many GB), so the /config volume needs enough disk (inferred).
+- caveat: arm64 is marked yes from the apt package; verify the apt kiwix-tools build exists and runs on arm64 Ubuntu (inferred).
+
 ## Fields
 ### Chart / Role
 

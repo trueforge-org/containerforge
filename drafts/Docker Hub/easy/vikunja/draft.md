@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/vikunja/files (pvc, uploads) unless moved under /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs an external PostgreSQL or SQLite-on-/config setup; the valkey sibling is optional and only helps caching (inferred).
+- caveat: Uploads default to /app/vikunja/files, so the draft must move them under /config or they will not persist (inferred).
+- caveat: The arm64 release link in the draft is an .apk and the amd64 one is a zip; the arm64 artifact must be rechecked before porting.
+
 ## Fields
 ### Chart / Role
 

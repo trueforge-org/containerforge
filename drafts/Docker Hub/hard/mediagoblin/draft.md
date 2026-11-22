@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/mediagoblin (pvc, chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MediaGoblin needs a database and a separate celery worker process next to the web app (inferred).
+- caveat: Media processing (ffmpeg, gstreamer) is heavy, so large uploads take CPU and time (inferred).
+- caveat: The source is a 0.15.0 tarball from sr.ht, not a registry image, so the build depends on that host being reachable.
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Reactive Drop server is a separate Steam download on first start, so the first run is slow and needs internet access (inferred).
+- caveat: The ich777 wrapper runs as root, so a USER apps start script may break SteamCMD writes to its home or cache paths (inferred).
+- caveat: The image is amd64 only, since it depends on the 32-bit SteamCMD bootstrap.
+
 ## Fields
 ### Chart / Role
 

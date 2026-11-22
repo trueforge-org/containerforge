@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: no public Dockerfile exists for the image, so it cannot be rebuilt from upstream source (upstream status, per draft)
+- caveat: the music library must be mounted read-only into the container and the module must be able to read it (data gotcha, inferred)
+- caveat: the Apache config must be rewritten for a read-only rootfs and a non-root user, which is manual work (inferred)
+
 ## Fields
 ### Chart / Role
 

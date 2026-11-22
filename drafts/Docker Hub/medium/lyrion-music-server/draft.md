@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: player discovery uses UDP 3483 broadcast, so host networking or a bridge that forwards broadcasts is needed for players to find the server (inferred).
+- caveat: the vendor .deb is installed at build time from lyrion.org, so the build depends on that download being available (from draft).
+- caveat: the first library scan of a large music collection can take a long time (inferred).
+
 ## Fields
 ### Chart / Role
 

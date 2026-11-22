@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/src/website-shot/screenshots (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Ubuntu ships Chromium as a snap, so a Chromium binary from another source must be installed, and it must match the puppeteer version (inferred)
+- caveat: headless Chromium is memory-hungry, so the container needs enough RAM for each screenshot job (inferred)
+- caveat: the app is Nuxt 2 with an old puppeteer, so the npm dependency tree may fail to install on newer Node versions (inferred)
+
 ## Fields
 ### Chart / Role
 

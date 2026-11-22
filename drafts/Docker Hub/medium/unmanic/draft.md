@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /library (pvc); /tmp/unmanic/remote_library (pvc); /tmp/unmanic (emptyDir)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Media transcoding is CPU and disk heavy; a large library needs substantial scratch space in /tmp/unmanic.
+- caveat: Hardware acceleration needs a GPU or device passthrough that is not part of the default setup (inferred).
+- caveat: Library cache and temporary files are split across /config and /tmp, so both must be writable and sized correctly.
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc), /opt/archivebox (pvc, config key), /home/archivebox (pvc, home key)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the full image pulls chromium, node, sonic and many extractors, so the image is multi-GB and archiving is CPU and disk heavy (resource needs, inferred)
+- caveat: the entrypoint chowns /data to PUID and PGID, so rootless runs need that path handled (known breakage with non-root, inferred)
+- caveat: data is written to /data, /opt/archivebox and /home/archivebox, not only /config (data gotcha)
+
 ## Fields
 ### Chart / Role
 

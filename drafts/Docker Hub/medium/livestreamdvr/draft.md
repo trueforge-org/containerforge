@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/local/share/twitchautomator/data/config (pvc, config), .../data/cache (pvc), .../data/logs (pvc), .../data/storage (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Twitch access needs a client ID and secret configured in the app (inferred).
+- caveat: recordings and VOD downloads can fill a large disk quickly, so the storage path needs plenty of space (inferred).
+- caveat: the draft pins a 2025-01-21 release zip rather than a tagged version, so it will not update without a draft change (from draft).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/xo-server (pvc), /var/lib/redis (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Xen Orchestra server must be reachable from the XenServer or XCP-ng hosts it manages, and the connection needs network access to those hosts (inferred)
+- caveat: the build is cloned from master and is not pinned, so it can break between builds (inferred)
+- caveat: the upstream image is tagged 5.213.0, but the source build is heavy and the dist is large (inferred)
+- caveat: Redis runs next to the app in the same container, so redis data needs its own persistent path (inferred)
+
 ## Fields
 ### Chart / Role
 

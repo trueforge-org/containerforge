@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /config/.minetest (pvc, subpath of /config; draft says /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: game traffic is UDP 30000 only, so the service must be exposed as UDP and HTTP checks will not reflect game health (inferred)
+- caveat: the apt package name differs by Ubuntu release (minetest-server vs luanti-server), so the install line may need changing (inferred)
+
 ## Fields
 ### Chart / Role
 

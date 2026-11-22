@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/node/app/.dizquetv (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: streaming needs ffmpeg, so the image is heavier than the Node app alone (inferred).
+- caveat: the nvidia variant needs an NVIDIA runtime and is amd64 only.
+- caveat: app state lives under /home/node/app/.dizquetv, so that path must be persistent or channel data is lost.
+
 ## Fields
 ### Chart / Role
 

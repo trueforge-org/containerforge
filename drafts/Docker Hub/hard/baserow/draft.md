@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /baserow/data (pvc, chart mount)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs PostgreSQL and valkey siblings; the all-in-one image will not start its backend without them.
+- caveat: Large multi-service image (Django, frontend, Caddy, supervisord workers) with a long first start while migrations run (inferred).
+- caveat: Caddy and supervisord run from the image; a rootless port 80 bind needs a port change or NET_BIND_SERVICE.
+
 ## Fields
 ### Chart / Role
 

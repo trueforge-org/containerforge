@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the project is old and its last release may not get fixes (upstream status) (inferred)
+- caveat: the Java version is not pinned in the spec, so java17 may not match the WAR (inferred)
+
 ## Fields
 ### Chart / Role
 

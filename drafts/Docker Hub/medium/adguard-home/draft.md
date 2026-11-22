@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/adguardhome/conf (pvc, config), /opt/adguardhome/work (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: DNS listens on port 53, which a non-root container cannot bind without a capability or a port remap (inferred)
+- caveat: the setup wizard on port 3000 must be completed once in the web UI before the service is usable (inferred)
+- caveat: the upstream image is tagged v0.107.80, so newer releases must be checked against the config format before upgrading (inferred)
+
 ## Fields
 ### Chart / Role
 

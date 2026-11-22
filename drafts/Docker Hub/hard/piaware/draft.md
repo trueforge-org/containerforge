@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (config is /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: an RTL-SDR USB dongle must be passed to the container, so the image is hardware-bound and needs host device access.
+- caveat: feeding FlightAware requires claiming the feeder with an account, which is a manual step done after first start (inferred).
+- caveat: the arm64 claim is marked as unconfirmed in the spec, so the arm64 build needs to be checked before relying on it.
+
 ## Fields
 ### Chart / Role
 

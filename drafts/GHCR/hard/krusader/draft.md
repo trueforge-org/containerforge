@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /krusader (containerpath, pvc chart default); /mnt/user (datapath, pvc chart default, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the only interface is a desktop over noVNC or VNC, so a browser or VNC client is needed (inferred)
+- caveat: fluxbox and Xvfb write session state under the home directory, which will conflict with a read-only rootfs (inferred)
+- caveat: host paths mounted under /mnt/user or other mounts keep their host ownership, so file permissions must be checked (inferred)
+
 ## Fields
 ### Chart / Role
 

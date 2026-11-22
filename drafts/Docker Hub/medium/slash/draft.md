@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/opt/slash (pvc, chart config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream tag used by the chart is a release candidate (1.0.0-rc.3), so expect pre-release behaviour and possible breaking changes between versions.
+- caveat: The Go binary and embedded React UI are built from source; there is no ready-made binary, so the first build is slow (inferred).
+
 ## Fields
 ### Chart / Role
 

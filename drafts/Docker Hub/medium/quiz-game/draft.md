@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app (chart's config, pvc default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Docker Hub image comes from a fork (patrickstigler/quiz-game) of ASKJR/quiz-game, so the draft must pin the upstream repo.
+- caveat: The output is static JavaScript, so questions and content are compiled in and changing them needs a rebuild (inferred).
+- caveat: The chart mounts /app as chart config, which can overlap with the static files served by nginx (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {}); service disabled in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Xunlei binary is closed-source, x86 only, and needs 32-bit i386 libraries (inferred)
+- caveat: the binary is shipped as a tarball committed to the upstream repo, so its origin and license must be checked before reuse (inferred)
+- caveat: the xware service depends on Xunlei cloud services, which may stop working or change without notice (inferred)
+- caveat: the upstream image is tagged latest and built on an old Debian release (inferred)
+
 ## Fields
 ### Chart / Role
 

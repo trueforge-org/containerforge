@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /srv/app (pvc, chart-defined app data)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Admin UI build runs at image build time, so the first start of the container is faster than the build; expect a long image build.
+- caveat: Needs a PostgreSQL database for real use; the default SQLite path is not suitable for production (inferred).
+- caveat: Strapi v5 requires writable cache directories, so anything outside /tmp and /config breaks on a read-only rootfs (inferred).
+
 ## Fields
 ### Chart / Role
 

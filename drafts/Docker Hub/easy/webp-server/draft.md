@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/pics (pvc, read-only source images) if served from there; /opt/exhaust (pvc, cache) only if cache is not moved off to /tmp
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Image cache goes to /tmp, so cached conversions are lost on restart and can fill tmpfs-backed storage on constrained hosts (inferred).
+- caveat: Source images must be mounted at the path the config expects (for example /opt/pics); with no mount the server returns no images.
+
 ## Fields
 ### Chart / Role
 

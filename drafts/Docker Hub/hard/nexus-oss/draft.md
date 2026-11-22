@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /nexus-data (pvc, chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Nexus generates an admin password on first start in a file under /nexus-data, so the admin login is not known until that file is read (inferred).
+- caveat: The JVM needs a large heap and RAM, so small hosts will be slow or fail to start (inferred).
+- caveat: The public Dockerfile is deprecated and pinned to an older Java build, so the image must be rebuilt from the tarball.
+
 ## Fields
 ### Chart / Role
 

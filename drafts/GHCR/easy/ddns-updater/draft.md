@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /updater/data (pvc, chart-defined; draft expects /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A DNS provider account with API credentials is required, and they must be supplied through the config file or environment variables before the updater can work (inferred).
+- caveat: The upstream image tag is v2.10.0, but the draft installs the release binary by TARGETARCH, so the tested version should be confirmed on both architectures (inferred).
+
 ## Fields
 ### Chart / Role
 

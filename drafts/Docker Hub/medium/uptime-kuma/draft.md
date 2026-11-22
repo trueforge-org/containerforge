@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, chart config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream tag is 1.23.17 with the debian variant; newer 2.x releases change the database and may need a manual migration path.
+- caveat: The data directory /app/data holds the SQLite database, so it must be on a persistent volume or monitor history is lost.
+- caveat: Network checks need outbound access from the container, and ICMP ping monitors may need extra capabilities on some hosts (inferred).
+
 ## Fields
 ### Chart / Role
 

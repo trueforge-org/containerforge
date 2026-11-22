@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream image uses a rolling `latest` tag from a haste-server fork, not a versioned release (inferred)
+- caveat: the in-memory store loses all pastes on restart; the file backend under /config must be chosen to keep them (inferred)
+
 ## Fields
 ### Chart / Role
 

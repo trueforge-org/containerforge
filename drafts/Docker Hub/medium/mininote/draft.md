@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: upstream activity is low, so treat the image as maintained only by its upstream commits (inferred).
+- caveat: the state storage location is not named in the draft; confirm where notes are stored and that it is on a persisted path (inferred).
+- caveat: the webpack build for Node 22 is slow and memory-heavy at image build time (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /configs, /usr/share/tessdata, /customFiles, /logs (chart paths, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: LibreOffice, tesseract and ocrmypdf make the image large, and OCR jobs need several GB of RAM (inferred).
+- caveat: the fat and ultra-lite tags include different tool sets, so features such as office conversion depend on which tag is used (inferred).
+- caveat: upstream ships an AppImage for amd64 that cannot run in a container, so the JAR path must be used instead (inferred).
+
 ## Fields
 ### Chart / Role
 

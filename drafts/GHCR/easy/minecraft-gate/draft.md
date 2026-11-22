@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (chart's config-file configmap at /config.yml is the chart's own)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Gate is only a proxy; it needs at least one reachable backend Minecraft server and a config file in /config that names those backends (external service).
+- caveat: the chart's image is the rolling `latest` tag, so the copy-from source is not version-pinned; pin to a release tag before building.
+- caveat: release asset URLs were not re-checked (GitHub returned 429 during the draft run), so the download links are unverified.
+
 ## Fields
 ### Chart / Role
 

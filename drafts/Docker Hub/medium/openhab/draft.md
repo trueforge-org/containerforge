@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /openhab/addons and /openhab/userdata (pvc default, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Java 21 is required, and several Karaf services share one JVM, so memory use is significant (inferred).
+- caveat: Bindings and add-ons are installed at runtime from the openHAB repositories, so the first start needs internet and takes a while (inferred).
+- caveat: Initial setup happens in the web UI onboarding wizard, not via config files.
+- caveat: The Karaf SSH console on 8101 should not be exposed without restriction (inferred).
+
 ## Fields
 ### Chart / Role
 

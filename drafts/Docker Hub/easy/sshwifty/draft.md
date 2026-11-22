@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the web SSH client has no built-in user accounts, so anyone who can reach the port can attempt SSH connections; protect it with a reverse proxy or network restriction (inferred).
+- caveat: the release tarball is the only build source, so arm64 availability depends on the upstream release providing that arch (inferred).
+
 ## Fields
 ### Chart / Role
 

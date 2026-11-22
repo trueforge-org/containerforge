@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it is a one-shot backup job, not a long-running service, so it has to be scheduled externally or run by a cron-like loop (inferred).
+- caveat: S3 endpoint, bucket and access keys must be supplied as s3cmd configuration, and the source paths must be mounted read-only into the container (inferred).
+- caveat: s3cmd config is normally written to the home directory, which is not writable under a read-only rootfs, so the config path needs a writable mount (inferred).
+
 ## Fields
 ### Chart / Role
 

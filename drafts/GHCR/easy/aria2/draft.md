@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: downloads path (draft mounts one; not in chart values, likely a pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The downloads path must be mounted and writable by the non-root user, or downloads will fail (inferred).
+- caveat: BitTorrent ports 6888 TCP and UDP need forwarding for good peer connectivity, and without them torrent speed drops sharply (inferred).
+- caveat: The AriaNg web front end is a separate container, so the RPC endpoint and browser connection need extra setup (inferred).
+
 ## Fields
 ### Chart / Role
 

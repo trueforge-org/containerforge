@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/db/sqlite (pvc, databaselocation)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app stores its SQLite database at /app/db/sqlite, which is outside /config, so the path must be remapped or symlinked for the empty-start behavior (inferred).
+- caveat: Ruby gems with native extensions need build-essential at build time (inferred).
+- caveat: Upstream image is tracked as `:latest`, so the Ruby and gem versions can change between pulls.
+
 ## Fields
 ### Chart / Role
 

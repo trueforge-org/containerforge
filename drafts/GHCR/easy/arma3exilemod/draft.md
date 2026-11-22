@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/.local/share (profiles pvc), /serverdata/serverfiles and /serverdata/steamcmd pvc (chart)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Exile mod files are not in the image and must be installed separately, and the draft does not say how (inferred).
+- caveat: The chart bundles a MariaDB process, which the draft ignores, so a separate database would need to be set up for the mod (inferred).
+- caveat: Expect a large first-start download and a long initial setup before the server runs (inferred).
+
 ## Fields
 ### Chart / Role
 

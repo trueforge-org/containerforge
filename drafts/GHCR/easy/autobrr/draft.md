@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /config/config.toml configmap mount (chart-own, read-only, not a data path)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The upstream release binaries are published as .apk packages, so the draft has to extract them on ubuntu rather than install them directly (inferred).
+- caveat: The first admin account is created in the web UI on first visit (inferred).
+- caveat: A chart-mounted config.toml is read-only, so settings changed in the UI may not persist across restarts (inferred).
+
 ## Fields
 ### Chart / Role
 

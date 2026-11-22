@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app writes data under /app, so it must be redirected to /config for the empty-start and read-only rootfs behavior (noted in the draft).
+- caveat: The chart persists /app/data, not /config, so existing user data must be migrated or mapped (inferred).
+- caveat: Access is protected by an admin password set through an environment variable (inferred), which must be provided at deploy time.
+
 ## Fields
 ### Chart / Role
 

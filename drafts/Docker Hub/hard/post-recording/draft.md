@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /backup (pvc), /watch (pvc) (config is /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: comskip is compiled from git (V0.83) and ffmpeg and ccextractor are copied from other images, so the build depends on several upstream images being available.
+- caveat: the upstream image is based on Ubuntu 20.04, which is end-of-life, so the base needs review when ported (inferred).
+- caveat: the s6 overlay runs several processes, and the /watch and /backup paths must be mounted with write access.
+
 ## Fields
 ### Chart / Role
 

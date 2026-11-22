@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Native npm modules are built for the target architecture, so the glibc Ubuntu runtime differs from the upstream node:alpine (musl) image (inferred).
+- caveat: The project is a small single-maintainer repo pinned to tag 3.0.0 (inferred).
+
 ## Fields
 ### Chart / Role
 

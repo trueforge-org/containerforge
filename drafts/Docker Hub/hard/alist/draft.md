@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/alist/data (pvc) unless moved under /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The image bundles aria2 with alist, so two services run together and the aria2 RPC secret must be set or it stays open on port 6800 (inferred).
+- caveat: Upstream tags move; the draft pins v3.41.0, so re-verify the release tarball URL on each version bump.
+
 ## Fields
 ### Chart / Role
 

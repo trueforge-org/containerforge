@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported; SteamCMD's 32-bit x86 bootstrap does not run on arm64, so the image is amd64 only.
+- caveat: A Game Server Login Token (GSLT) from Steam is normally needed to list the server publicly, and the user must supply it (inferred).
+- caveat: The CS2 dedicated server is a very large download fetched at start, so the first start can take a long time and needs a lot of disk (inferred size).
+- caveat: Game traffic uses UDP 27015 and the rcon uses TCP 27015, so both protocols must be published.
+
 ## Fields
 ### Chart / Role
 

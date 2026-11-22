@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/app/static/media (pvc, clips)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app talks to a Plex server, so it needs a reachable Plex instance and a Plex token before it is useful (inferred).
+- caveat: Clips are written to /app/app/static/media, which is not under /config, so the data path needs remapping (inferred).
+- caveat: The image tag is `latest` and unpinned; the source owner (jo-nike) differs from the Docker Hub owner (jonnike), so verify the build comes from the expected repo.
+
 ## Fields
 ### Chart / Role
 

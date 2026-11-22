@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: emptyDir at /mlcache and /microcache (ML and microservice caches); upload dirs under /usr/src/app/upload (library, upload, backups, thumbs, profile, encoded-video; type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: row 1 needs PostgreSQL with the vector extension and Valkey, and smart search and face recognition do not work without the machine-learning row (inferred).
+- caveat: the machine-learning service downloads large models on first use, so the first start needs disk space, internet access and time (inferred).
+- caveat: the CUDA and OpenVINO variants are amd64 only, so arm64 hosts get the CPU build only (inferred).
+
 ## Fields
 ### Chart / Role
 

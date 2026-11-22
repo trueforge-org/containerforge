@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/codeproject/ai, /app/modules (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Python modules download at runtime on first start, so the first start needs internet access and is slow.
+- caveat: the GPU tags (cuda11_7, cuda12_2) need an NVIDIA runtime and device access on the host (inferred).
+- caveat: module install directories must stay writable, so a read-only rootfs will break module installs (inferred).
+
 ## Fields
 ### Chart / Role
 

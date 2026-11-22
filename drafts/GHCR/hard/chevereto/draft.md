@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/images/, /var/www/html/content/ (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB must be reachable before the first start, and the admin account is created in the browser setup (inferred).
+- caveat: the app is PHP 7.4 (end of life) and the upstream project is small, so security fixes and PHP updates are unlikely to arrive (upstream status).
+- caveat: uploaded images and content grow without limit, so the mounted image and content paths need enough disk and a backup plan (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values (no persistence block)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is required and Valkey is optional, so a database must be running and configured before the server is usable.
+- caveat: the nginx, Node, converter and broker services run together under supervisord as root, and the first start can be slow while services initialise (inferred).
+- caveat: the document server needs a JWT secret and a matching base URL set before it works with clients (inferred).
+
 ## Fields
 ### Chart / Role
 

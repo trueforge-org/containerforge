@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd pvc (chart); likely none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Chivalry server is a Steam download at first start, so the first run is slow and needs internet access (inferred).
+- caveat: Server settings such as name, passwords and map rotation must be set by hand before the server is ready for players (inferred).
+- caveat: The draft's binary source says apt steamcmd while the chart uses the ich777 steamcmd base, so the SteamCMD install route needs confirming (inferred).
+- caveat: The image is amd64 only, because it depends on SteamCMD.
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, app); /data/secret.txt (secret, read-only file)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The server needs an admin account created with manage.py createsuperuser after first start (manual setup, inferred).
+- caveat: The image is a third-party build (victor-rds/docker-etebase) rather than the upstream etesync project, so verify the Dockerfile source before trusting it.
+- caveat: Clients need HTTPS through a reverse proxy, since the server does not terminate TLS itself (inferred).
+
 ## Fields
 ### Chart / Role
 

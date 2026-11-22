@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.cache/pip, /root/.cache/poetry, /root/.cache/whisper (pvc, chart-defined model and cache paths)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Models are downloaded at first run from the internet and can be several gigabytes, so the first start is slow and needs disk space in /root/.cache.
+- caveat: CPU-only torch wheels are used; GPU acceleration needs the separate CUDA image, which is out of scope for this draft.
+- caveat: Transcription on CPU is slow for long audio, so expect long request times without a GPU (inferred).
+
 ## Fields
 ### Chart / Role
 

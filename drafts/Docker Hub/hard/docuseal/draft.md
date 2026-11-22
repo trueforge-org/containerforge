@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is an optional dependency here, but the app needs a database to run, so one must exist before first start.
+- caveat: the upstream image is built from a Ruby and Node asset stack, so the first build is slow and large (inferred).
+- caveat: signed documents and uploads are stored under /data, so that path must be persistent.
+
 ## Fields
 ### Chart / Role
 

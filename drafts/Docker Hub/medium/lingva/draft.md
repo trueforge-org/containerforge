@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence: {})
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream project has low activity and public instances have gone offline; treat the image as unmaintained and check upstream first (inferred).
+- caveat: translations depend on outbound access to third-party translation endpoints; without internet the app does nothing useful (inferred).
+- caveat: Next.js is built at image build time, so the image build is slower than a plain copy (from draft).
+
 ## Fields
 ### Chart / Role
 

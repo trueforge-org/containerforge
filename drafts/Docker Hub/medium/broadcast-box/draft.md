@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence section, common defaults only)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: WebRTC media needs UDP reachable from clients; the draft lists 8189/udp but the chart security note names UDP 60006, so the real media port must be confirmed before publishing (inferred).
+- caveat: Behind NAT, WebRTC ICE needs the host's public address or a configured external IP, otherwise streams connect only on the LAN (inferred).
+- caveat: No release binary exists, so the Go and Node builds must succeed on both amd64 and arm64.
+
 ## Fields
 ### Chart / Role
 

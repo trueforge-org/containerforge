@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data pvc (chart)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Closed-source iXsystems product, so it can only be run from the published image and has no rebuild path.
+- caveat: It expects an iXsystems account and a connection to vendor cloud services, which may need internet access and sign-in (inferred).
+- caveat: Host-level access and root are expected, so the container may not run with rootless or read-only settings in practice (inferred).
+
 ## Fields
 ### Chart / Role
 

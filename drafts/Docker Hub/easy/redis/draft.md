@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /bitnami/redis (pvc, chart's own; draft points data at /config); /health (configmap with probe scripts)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Redis state (RDB or AOF) goes to its data directory, which is not under /config; mount that path or data is lost on recreate (inferred).
+- caveat: the default config binds to localhost and has no password, so a non-local bind needs `requirepass` or a protected network (inferred).
+- caveat: the apt redis-server version comes from the Ubuntu base, not from the upstream release, so the version can lag the upstream tag (inferred).
+
 ## Fields
 ### Chart / Role
 

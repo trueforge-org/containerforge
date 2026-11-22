@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/data (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: paste data is stored under /var/www/html/data, not /config, so the persistence path must be mounted explicitly or pastes are lost on rebuild (inferred).
+- caveat: the chart pins the rolling master tag of a third-party image, so the app version can change without warning.
+- caveat: nginx and PHP-FPM run together under a supervisor, so the container needs a process manager and the upstream project is small (inferred).
+
 ## Fields
 ### Chart / Role
 

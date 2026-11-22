@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /dev/dri (device, hostPath); /sys/class/drm (device, hostPath); /var/lib/kubelet/device-plugins (hostPath)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: This is a Kubernetes device plugin meant for a DaemonSet under kubelet, so it does nothing useful as a standalone container (inferred).
+- caveat: It needs the kubelet device-plugins socket directory on the host, which is not present on a plain Docker host (inferred).
+- caveat: It only helps on Intel GPU hardware; there are no ports and no UI to check it with.
+
 ## Fields
 ### Chart / Role
 

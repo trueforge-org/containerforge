@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.bitcoin/ (data volume, pvc default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The initial block download takes days and needs a large amount of disk, which grows over time (inferred).
+- caveat: RPC credentials must be set in bitcoin.conf or the environment by hand before RPC access works (inferred).
+- caveat: The arm64 build relies on the upstream aarch64 tarball, which is marked unconfirmed in the draft, so recheck before porting.
+
 ## Fields
 ### Chart / Role
 

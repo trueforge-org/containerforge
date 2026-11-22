@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /output (type not set, likely pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there is no headless mode in this image, so setup and downloads are done through the VNC or noVNC desktop (inferred).
+- caveat: JDownloader.jar is fetched from the vendor site and the app can self-update at runtime, so it needs internet access and the version can change (inferred).
+- caveat: Java with a Swing GUI uses a lot of memory, so the container needs more RAM than a typical service (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the tool needs a Plex URL and token and a hand-made config file in /config before it runs (inferred)
+- caveat: it changes audio and subtitle tracks on the Plex library, so it needs careful testing on a copy first (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A config.yml must be created by the user before the first run; the app does not create a working config by itself (inferred).
+- caveat: It needs a Plex token plus TMDb, TVDB or similar API keys, supplied by the user.
+- caveat: The first full run downloads metadata for the whole library and can take a long time (inferred).
+
 ## Fields
 ### Chart / Role
 

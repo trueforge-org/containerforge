@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (data, pvc chart default); /consume (consume, pvc chart default); /media (media, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Gotenberg and Tika are missing from ContainerForge, so Office document conversion will not work without them
+- caveat: OCR (tesseract, ghostscript, imagemagick) and first-run indexing are CPU and RAM heavy (resource needs, inferred)
+- caveat: the non-root path relies on USERMAP_UID and USERMAP_GID remapping, which must be set by the user (inferred)
+
 ## Fields
 ### Chart / Role
 

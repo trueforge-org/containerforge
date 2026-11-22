@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image was pushed by a personal account in 2021 and has no source, so its contents cannot be checked against a repo (upstream status).
+- caveat: the static front end may call a backend API that is not in the image (inferred), so the app may not work standalone.
+
 ## Fields
 ### Chart / Role
 

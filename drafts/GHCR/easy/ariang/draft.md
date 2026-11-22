@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The UI is static only, so it needs an aria2 RPC endpoint from a separate container, and the browser must be able to reach it (inferred).
+- caveat: Settings are stored in each browser's local storage, so they do not carry over between browsers or devices (inferred).
+- caveat: The chart tag is pinned to 1.3.13, so newer UI releases need a deliberate bump.
+
 ## Fields
 ### Chart / Role
 

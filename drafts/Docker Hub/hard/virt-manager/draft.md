@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /dev/kvm (device), /var/lib/libvirt/images (pvc), /var/run/libvirt/libvirt-sock (socket from host), /root (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: managing local virtual machines needs access to the host's libvirt socket and KVM device, which is a privileged setup (inferred)
+- caveat: the GUI is shown through a browser web view, so it is slower than a native desktop app (inferred)
+- caveat: arm64 support is not confirmed for the Debian package path used upstream (inferred)
+
 ## Fields
 ### Chart / Role
 

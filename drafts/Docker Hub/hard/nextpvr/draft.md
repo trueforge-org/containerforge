@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /recordings (pvc); /buffer (pvc). /config is the chart's own mount.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: TV tuner and capture hardware must be passed through to the container, which the chart does not provide (inferred).
+- caveat: No arm64 installer exists, so the container runs only on amd64 hosts.
+- caveat: NextPVR is set up through its own web UI, and the vendor installer is the only install source, so updates depend on the vendor download.
+
 ## Fields
 ### Chart / Role
 

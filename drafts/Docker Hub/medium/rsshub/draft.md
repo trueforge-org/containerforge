@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence block in values)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs a separate browserless Chrome container for JavaScript-rendered routes; without it those feeds fail (inferred).
+- caveat: Optional valkey cache is a companion service to deploy and wire up for good performance.
+- caveat: Feeds fetch upstream sites at request time, so expect outbound internet access and rate-limit or blocking errors from some sources.
+
 ## Fields
 ### Chart / Role
 

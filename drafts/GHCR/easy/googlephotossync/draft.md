@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (pvc, chart-defined; draft expects downloads under /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: A Google OAuth client must be created by the user in Google Cloud, and the first sign-in needs an interactive browser authorization before any download works (manual setup).
+- caveat: Google Photos API access has been restricted since 2025, so downloads of the full library may be limited by Google (inferred).
+- caveat: The amd64 and arm64 claims are marked as unconfirmed upstream (yes*), so both architectures need a build test.
+
 ## Fields
 ### Chart / Role
 

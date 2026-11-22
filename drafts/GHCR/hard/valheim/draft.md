@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /backups (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the closed-source server is downloaded from Steam at first start, which is a large download that needs Steam access (inferred).
+- caveat: amd64 only; the vendor ships no arm64 build, so arm64 is not possible.
+- caveat: BepInEx mods are downloaded at runtime and can break after a game update (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/traccar/data (pvc, chart-defined)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Server opens many device ports (TCP and UDP) that depend on the GPS devices in use; each protocol port must be published or the devices cannot connect.
+- caveat: Java 17 or later is required; the bundled runtime in the zip may differ from the sibling java17, so check which JRE is used (inferred).
+- caveat: Upstream release asset links were not confirmed, so the arm64 zip needs verifying before porting.
+
 ## Fields
 ### Chart / Role
 

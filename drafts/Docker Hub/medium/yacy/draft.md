@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/yacy_search_server/DATA pvc (chart appdata; draft keeps data under /config, so remap)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: YaCy peer discovery relies on UDP and multicast, so host networking or open ports may be needed for the node to join the network (inferred).
+- caveat: The first start creates a large index and data directory under /config, so disk use and startup time can be significant (inferred).
+- caveat: Upstream tarball versions change often and the chart tag is rolling latest, so the pinned release needs a deliberate choice (inferred).
+
 ## Fields
 ### Chart / Role
 

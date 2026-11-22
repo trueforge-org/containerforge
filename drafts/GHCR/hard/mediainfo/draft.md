@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the compiled GUI is reached only through VNC or noVNC, so a CLI-only use case needs a different image (inferred)
+- caveat: MediaInfoLib and ZenLib are compiled from GitHub source tarballs during the build, so builds depend on GitHub availability (inferred)
+- caveat: amd64 and arm64 support is marked as best judgement and has not been confirmed against upstream
+
 ## Fields
 ### Chart / Role
 

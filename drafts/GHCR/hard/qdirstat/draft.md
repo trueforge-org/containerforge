@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /storage (storage, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the disk usage viewer is GUI only, reached through VNC or noVNC (inferred)
+- caveat: scanning large trees reads everything under the mounted storage path, so the mount must be readable by the container user and large scans use significant RAM (inferred)
+
 ## Fields
 ### Chart / Role
 

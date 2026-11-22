@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /hass-config (pvc); /config is the chart's own
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the editor gives write access to the Home Assistant config files, so it must be behind authentication and not exposed openly (inferred)
+- caveat: edits only matter if the Home Assistant config directory is mounted at /hass-config; otherwise the editor works on an empty folder (inferred)
+- caveat: the upstream project appears to be unmaintained or archived, and the image tag is a fixed x86_64 build (inferred)
+
 ## Fields
 ### Chart / Role
 

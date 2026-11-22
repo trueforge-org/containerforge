@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (/config only)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Whoogle scrapes Google results, so search can break whenever Google changes its markup (upstream status, inferred)
+- caveat: no external service is needed, but the Flask app should be run as a single process on the python base with config in /config only (inferred)
+
 ## Fields
 ### Chart / Role
 

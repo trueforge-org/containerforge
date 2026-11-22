@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs PostgreSQL to store documents metadata; the bundled defaults are not enough for production use (inferred).
+- caveat: Document storage under /data must be on a writable persistent volume or uploads are lost on restart.
+- caveat: Runs with ffmpeg and tesseract, so large OCR or video jobs can use significant CPU and memory (inferred).
+
 ## Fields
 ### Chart / Role
 

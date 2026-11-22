@@ -59,6 +59,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data pvc (chart; draft uses /config workspace, so remap)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only, with no arm64 route, so the image will not run on arm64 hosts.
+- caveat: The tarball is about 14 GB, so the first start needs a very large download and a large disk for /config (inferred).
+- caveat: Useful only with an NVIDIA GPU and its CUDA runtime on the host; without it the pipeline will be very slow or fail (inferred).
+- caveat: The web desktop is served through noVNC, so a virtual display and graphics libraries are needed, and the first login may be the only visible setup step (inferred).
+
 ## Fields
 ### Chart / Role
 

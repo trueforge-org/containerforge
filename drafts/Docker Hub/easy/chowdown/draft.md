@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The site is built from the gh-pages zip, which is an unversioned branch snapshot, so there is no version pinning and content changes with upstream (inferred).
+- caveat: The build downloads from GitHub, so it needs internet access at build time. The upstream project is lightly maintained (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (data, pvc chart default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the admin account and the initial setup are done in the web UI after first start (manual setup, inferred)
+- caveat: the wrapper image takes its runtime from an untraced base, so the PHP and nginx versions in use are unknown (inferred)
+- caveat: Organizr upstream activity should be checked before porting, since the project may be slow-moving or unmaintained (upstream status, inferred)
+
 ## Fields
 ### Chart / Role
 

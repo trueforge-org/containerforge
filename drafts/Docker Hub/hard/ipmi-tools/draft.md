@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The app needs the host IPMI device (/dev/ipmi*) and the ipmi kernel modules loaded on the host, which the chart does not provide (inferred).
+- caveat: Fan control writes to the BMC, so a misconfigured fan curve can cause overheating or noise; test with monitoring first (inferred).
+- caveat: Upstream is a zip of a repo at a pinned commit, with no release or tagged image, so updates must be tracked by hand.
+
 ## Fields
 ### Chart / Role
 

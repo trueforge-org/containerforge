@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: It is a cryptominer; the upstream project has no public Dockerfile, so the image provenance must be reviewed before it is accepted under the project policy.
+- caveat: Huge-page tuning is not configured by default, so the hashrate will be lower than the upstream benchmark unless extra settings are supplied (inferred).
+- caveat: Mining pool address and wallet must be set in config; the container does nothing useful until they are.
+
 ## Fields
 ### Chart / Role
 

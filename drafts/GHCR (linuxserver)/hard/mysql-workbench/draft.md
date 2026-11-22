@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: amd64 only, because Oracle ships no arm64 deb (architecture)
+- caveat: needs a reachable MySQL or MariaDB server to connect to; the workbench itself stores nothing useful without one (external service) (inferred)
+- caveat: an Ubuntu 24.04 deb on 26.04 may hit dependency drift at install time (inferred)
+
 ## Fields
 ### Chart / Role
 

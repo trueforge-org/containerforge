@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (Postgres and Valkey are separate chart dependencies, not persistence)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a working install needs an external PostgreSQL and Valkey; the app will not run normally without them.
+- caveat: the first API key must be generated with the shlink CLI inside the container after the first start (inferred).
+- caveat: visit geolocation needs a MaxMind GeoLite2 license key supplied by the user (inferred).
+
 ## Fields
 ### Chart / Role
 

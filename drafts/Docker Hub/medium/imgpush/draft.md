@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /cache (pvc), /images (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the rembg extra pulls large ONNX dependencies and may download model weights on first background-removal use, so the image is big and the first request is slow (inferred).
+- caveat: uploaded images must live on a persisted path; the draft does not say which path is the data directory, so verify before relying on the mount (inferred).
+
 ## Fields
 ### Chart / Role
 

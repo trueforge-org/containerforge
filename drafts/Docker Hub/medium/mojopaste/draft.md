@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the CPAN build pulls many Perl modules at build time, so the image build needs internet and can be slow (from draft).
+- caveat: upstream activity is low; check upstream before relying on it long term (inferred).
+
 ## Fields
 ### Chart / Role
 

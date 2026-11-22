@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL and ClickHouse are both required, so the stack is several services and ClickHouse is memory-hungry (inferred).
+- caveat: the app needs a secret key base and a public base URL configured before it runs (inferred).
+- caveat: upstream publishes images only, so there is no standalone release binary and the Elixir mix release build must be done from source.
+
 ## Fields
 ### Chart / Role
 

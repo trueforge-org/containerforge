@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/example (pvc, read-only backup source mount, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it is a shell and pip wrapper around awscli, so it runs as a job and needs AWS credentials and a bucket supplied at runtime (inferred).
+- caveat: the sync source directory must be mounted into the container, and file ownership on the mount must match the non-root user (inferred).
+
 ## Fields
 ### Chart / Role
 

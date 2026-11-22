@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Replaces the old Redis 6.2 plus rejson image with Redis 8 from the official Redis apt repo; behaviour and module set change, so existing data may need migration (inferred).
+- caveat: The old image is amd64 only, so arm64 support depends on the new apt-based build and is not yet tested.
+- caveat: The chart expects data under /data, while the draft plans /config; the mount path must be reconciled or data is written to the wrong place.
+
 ## Fields
 ### Chart / Role
 

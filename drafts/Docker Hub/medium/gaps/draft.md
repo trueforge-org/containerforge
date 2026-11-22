@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/data (pvc, data)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Gaps needs a TMDb API key and usually a Plex or media server connection before it finds gaps (external service, inferred).
+- caveat: The chart image tag carries an x64 suffix, so the arm64 build must use the correct jar and base image (inferred).
+- caveat: The GapsAsJar release zip is downloaded at build time, so the build depends on that release staying available.
+
 ## Fields
 ### Chart / Role
 

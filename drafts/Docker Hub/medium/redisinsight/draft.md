@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data and /logs (pvc default, chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The first use requires accepting the EULA in the web UI, which is a manual step (inferred).
+- caveat: The UI has no auth by default, so it should sit behind a reverse proxy or access control (inferred).
+- caveat: The state directory under /data and logs under /logs must be writable, and the arm64 image is built from source with a two-stage Node build.
+
 ## Fields
 ### Chart / Role
 

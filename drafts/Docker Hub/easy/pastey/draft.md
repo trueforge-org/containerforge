@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart mounts /app/data but the spec says pastes go to /config, so the storage path must be confirmed (inferred)
+- caveat: the python 3.8 base in the spec is past end of life and the image pins two tags (0.5.1 and 0.5.1-slim) (inferred)
+
 ## Fields
 ### Chart / Role
 

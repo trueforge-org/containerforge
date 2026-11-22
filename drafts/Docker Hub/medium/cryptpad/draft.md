@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /cryptpad/blob, /cryptpad/block, /cryptpad/customize, /cryptpad/data, /cryptpad/datastore (all pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: CryptPad needs a second origin for its sandbox (port 3001) on a separate domain or subdomain; serving both origins from one host weakens isolation and may break features (inferred).
+- caveat: The frontend build is large and slow, so the first image build takes a long time (inferred).
+- caveat: The chart uses five separate PVC paths (blob, block, customize, data, datastore), so each must be mapped under the ContainerForge data layout.
+
 ## Fields
 ### Chart / Role
 

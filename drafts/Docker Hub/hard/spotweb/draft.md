@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (database is CNPG; no persistence block)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs an external PostgreSQL database, and the initial setup of the schema and admin user is done through the web UI (inferred)
+- caveat: the upstream Dockerfile clones spotweb develop at build time, so the source version is not pinned unless the build is changed (inferred)
+- caveat: PHP and the web server run as separate processes, which adds a second service to keep alive in one container (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: an OAuth or OIDC provider, client ID and secret, and a cookie secret must be configured before the forward-auth endpoint works, so it cannot run alone (inferred).
+- caveat: arm64 is a source build that needs the Go toolchain, so build time is longer on arm64 (inferred).
+
 ## Fields
 ### Chart / Role
 

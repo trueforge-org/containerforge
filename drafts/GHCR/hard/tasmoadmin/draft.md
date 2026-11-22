@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart path, type not set)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Tasmota devices must be reachable from the container on the LAN, and the device list and credentials are stored in /data (inferred).
+- caveat: the initial admin login must be set up in the web UI on first visit (inferred).
+- caveat: upstream is pinned to tarball v5.0.0 in the draft, so the release tarball URL must be updated for each upgrade (inferred).
+
 ## Fields
 ### Chart / Role
 

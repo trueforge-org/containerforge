@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/dropbox/.dropbox, /opt/dropbox/Dropbox (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Dropbox daemon is amd64 only and is downloaded at runtime, so arm64 is not supported and first start needs internet.
+- caveat: the account must be linked to the daemon through its web setup before any sync happens (manual setup, account needed).
+- caveat: the image tracks latest and the closed-source daemon updates without notice, so behaviour can change between pulls.
+
 ## Fields
 ### Chart / Role
 

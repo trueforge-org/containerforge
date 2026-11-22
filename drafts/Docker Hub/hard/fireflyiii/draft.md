@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/html/storage/upload (chart persistence, type not shown)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Valkey is a hard dependency and PostgreSQL is optional, so Valkey must be running before the app starts (inferred for PostgreSQL).
+- caveat: nginx, php-fpm and the scheduler run in one container, so a process supervisor is needed or cron jobs may not run (inferred).
+- caveat: the first run needs an app key and admin setup, which is done through configuration and the web UI (manual setup, inferred).
+
 ## Fields
 ### Chart / Role
 

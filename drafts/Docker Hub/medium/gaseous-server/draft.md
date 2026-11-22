@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.gaseous-server/Logs (pvc); /root/.gaseous-server/Data (pvc); /root/.gaseous-server (pvc, config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB or MySQL is a hard dependency and must be reachable with credentials before the app starts (external service).
+- caveat: Game metadata lookups may need an IGDB or similar API account (inferred).
+- caveat: The .NET 8 runtime must be installed on ubuntu and the app published from source, so the first build is slow (inferred).
+
 ## Fields
 ### Chart / Role
 

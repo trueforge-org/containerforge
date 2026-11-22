@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence: {})
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MongoDB is needed as an external service even though the draft lists no hard dependency; the container will not work without it (from draft, the Hard dependency flag is inconsistent).
+- caveat: the API secret must be set in the environment before first start; the app refuses to run or is insecure without it (inferred).
+- caveat: the upstream image name is a Travis CI test image, not a production image; check upstream status before deploying (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/app/data (pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The image is built in private CI, so the release binaries are the only public source and the build cannot be reproduced from the tag.
+- caveat: Without a database set in the config, NocoDB falls back to its default local storage, which is not durable (inferred).
+- caveat: Some NocoDB features may need an enterprise license (inferred).
+
 ## Fields
 ### Chart / Role
 

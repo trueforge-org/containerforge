@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence {})
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: cadquery and OCP are heavy native wheels; arm64 wheel availability depends on the chosen Python version, so the arm64 build may fail or be slow (inferred).
+- caveat: The image will be very large and the pip install will take a long time on first build (inferred).
+- caveat: Upstream image is tracked as `:latest`, so the pinned pip version of cadquery-server must be chosen explicitly.
+
 ## Fields
 ### Chart / Role
 

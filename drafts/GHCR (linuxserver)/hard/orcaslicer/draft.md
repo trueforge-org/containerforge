@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the AppImage needs libfuse2 or an extract-and-run mode, and the slicer GUI expects OpenGL, which may run slowly without GPU (inferred)
+- caveat: slicing is CPU and RAM heavy, so size limits for large models (resource needs) (inferred)
+
 ## Fields
 ### Chart / Role
 

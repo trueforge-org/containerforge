@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/clamav (pvc, writable signature DB); /logs (pvc, chart mount); /scandir (pvc, read-only scan target)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Freshclam needs internet access to update signatures on first start; until the database is downloaded, clamd does not scan (inferred).
+- caveat: Signature database is large and must be on writable storage under /var/lib/clamav, so a read-only rootfs needs that path mounted.
+- caveat: clamd and freshclam run as two daemons, so a single-process layout does not fit without a supervisor (inferred).
+
 ## Fields
 ### Chart / Role
 

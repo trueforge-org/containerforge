@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-defined; draft expects /config)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 is not supported; SteamCMD's 32-bit x86 bootstrap does not run on arm64, so the image is amd64 only.
+- caveat: The server files are downloaded from Steam on every start, so expect a slow first start and a large first download (inferred size).
+- caveat: Game and query ports are UDP (27004 and 27015, inferred), so UDP forwarding is needed for players to find the server.
+
 ## Fields
 ### Chart / Role
 

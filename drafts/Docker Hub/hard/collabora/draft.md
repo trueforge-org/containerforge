@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none shown in values
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image is large because it bundles the LibreOffice kit, so expect high disk and RAM use (inferred).
+- caveat: chroot jails need a writable path and the host must allow them, so a read-only rootfs or restricted runtime will fail (inferred).
+- caveat: TLS is usually terminated by a reverse proxy in front of port 9980, and the proxy must be set up before the server works from browsers (inferred).
+
 ## Fields
 ### Chart / Role
 

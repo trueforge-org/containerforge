@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: An external PostgreSQL database must be running and reachable before the first start, and migrations run on boot (inferred).
+- caveat: The DHT crawler is CPU, memory and bandwidth heavy, and it needs inbound UDP on 3334 to crawl usefully (inferred).
+- caveat: Upstream linux builds are published as .apk packages, so the draft has to extract them on ubuntu (inferred).
+
 ## Fields
 ### Chart / Role
 

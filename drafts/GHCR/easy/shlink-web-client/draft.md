@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the SPA has no backend of its own; it is useless until it is pointed at a running Shlink server, configured in the browser or in servers.json (external service)
+- caveat: the nginx sibling must serve the SPA with a fallback to index.html for client routes (inferred)
+
 ## Fields
 ### Chart / Role
 

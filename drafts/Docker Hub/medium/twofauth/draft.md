@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /2fauth (pvc, chart config volume)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Laravel app needs an APP_KEY and a database set up on first run; without them the web UI will not load.
+- caveat: Uses an external PostgreSQL database, so the database must exist and be reachable before the app starts (inferred).
+- caveat: Two-factor secrets are sensitive data; the /2fauth volume must be backed up or the stored codes are lost.
+
 ## Fields
 ### Chart / Role
 
