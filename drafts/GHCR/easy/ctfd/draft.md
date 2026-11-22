@@ -11,6 +11,8 @@
 - **Difficulty**: easy
 - **Chart**: ctfd
 - **Rows**: 1
+- **Hard dependency containers**: no
+- **Soft dependency containers**: yes (valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

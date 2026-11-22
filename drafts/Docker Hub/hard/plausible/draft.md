@@ -11,6 +11,8 @@
 - **Difficulty**: hard
 - **Chart**: plausible
 - **Rows**: 1
+- **Hard dependency containers**: yes (postgresql (CNPG), clickhouse)
+- **Soft dependency containers**: no
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
