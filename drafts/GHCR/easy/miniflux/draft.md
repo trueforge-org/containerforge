@@ -5,22 +5,79 @@
 - The container folder structure should be the same as the ones under `/app/containername`.
 - All agentic rules for these files and folders also apply to their output.
 
-## How to read the tables
+## Overview
 
-- **Chart / Role**: the TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
-- **Container**: the image and tag the chart uses today.
-- **Dockerfile**: the file that builds that image, traced from image labels and upstream repos. `-` means no public Dockerfile could be found.
-- **Application source**: the application's own source repository or project page.
-- **Application binary**: where we can fetch the ready-made executable for each architecture ourselves: a release asset link, or `apt:`/`pip:`/`npm:` (package), or `-` when there is none. It never points at a container image.
-- **Difficulty**: `easy` (prebuilt binary, close sibling or steamcmd game server), `medium` (a Node/Python/Java/PHP/.NET stack ContainerForge already has, or a modest build), `hard` (several services, musl-only, GPU, root/privileged, desktop/VNC, large stack, no public Dockerfile, or rework needed for rootless/read-only), `very-hard` (closed source with no redistributable artifact, or kernel/host-level tools).
-- **amd64 / arm64** (one of `yes`, `compile`, `no`): how we get the application for that architecture.
-  - `yes`: we can fetch a ready-made executable ourselves, outside any `COPY --from`: a release asset, an official package, a pip/npm package, a JAR or a vendor download. Interpreted apps count as `yes`.
-  - `compile`: there is no such executable, but the source is open and we can build it reliably ourselves.
-  - `no`: neither works for that architecture, for example closed-source software where the vendor only ships an amd64 executable.
-  - A trailing `*` means the claim could not be confirmed against the upstream source, so it is a best judgement and should be rechecked before porting.
-- **copy-from amd64 / copy-from arm64**: a separate option, always filled in, whatever the `amd64`/`arm64` columns say. It is a link to the container image the binary can be copied out of with `COPY --from=<image>` (the upstream Dockerfile compiled it, not us), or `no` when that image is not published for the architecture or is a musl (alpine) build, which does not run on glibc Ubuntu. A path in backticks is where the binary sits inside the image. `no*` means the registry could not be queried, so the architecture is unconfirmed.
-- **Dependency containers** (main row only): other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars). ✅ means ContainerForge already has an app for it, ❌ means it is missing too.
+- **Source**: GHCR
+- **Difficulty**: easy
+- **Chart**: miniflux
+- **Rows**: 1
+- **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
-| Chart | Role | Container | Dockerfile | Application source | Application binary | Difficulty | Reason | amd64 | arm64 | copy-from amd64 | copy-from arm64 | Dependency containers |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| miniflux | main | `ghcr.io/miniflux/miniflux:2.3.5` | [Dockerfile](https://github.com/miniflux/v2/blob/2.3.5/packaging/docker/alpine/Dockerfile) | [source](https://github.com/miniflux/v2) | binary: `apt:miniflux` | easy | Go RSS reader. Release binaries exist for linux amd64 and arm64, so copy the binary into /app on containerforge-ubuntu. It needs an external PostgreSQL (CNPG) rather than an in-image service, which keeps the port simple. | yes | yes | no | no | postgresql (CNPG) ✅ |
+## Fields
+
+### Chart / Role
+
+The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
+
+- **Chart**: miniflux
+- **Role**: main
+
+### Container
+
+The image and tag the chart uses today.
+
+- **Container**: `ghcr.io/miniflux/miniflux:2.3.5`
+
+### Dockerfile
+
+The file that builds that image, traced from image labels and upstream repos.
+
+- **Dockerfile**: [Dockerfile](https://github.com/miniflux/v2/blob/2.3.5/packaging/docker/alpine/Dockerfile)
+
+### Application source
+
+The application's own source repository or project page.
+
+- **Application source**: [source](https://github.com/miniflux/v2)
+
+### Application binary
+
+Where we can fetch the ready-made executable for each architecture ourselves: a release asset link, or `apt:`/`pip:`/`npm:` (package).
+
+- **Application binary**: binary: `apt:miniflux`
+
+### Difficulty
+
+`easy`: prebuilt binary, close sibling or steamcmd game server.
+
+- **Difficulty**: easy
+
+### Reason
+
+- **Reason**: Go RSS reader. Release binaries exist for linux amd64 and arm64, so copy the binary into /app on containerforge-ubuntu. It needs an external PostgreSQL (CNPG) rather than an in-image service, which keeps the port simple.
+
+### amd64 / arm64
+
+How we get the application for that architecture.
+
+- `yes`: we can fetch a ready-made executable ourselves, outside any `COPY --from`: a release asset, an official package, a pip/npm package, a JAR or a vendor download. Interpreted apps count as `yes`.
+
+- **amd64**: yes
+- **arm64**: yes
+
+### copy-from amd64 / copy-from arm64
+
+A separate option, always filled in, whatever the `amd64`/`arm64` columns say. It is a link to the container image the binary can be copied out of with `COPY --from=<image>` (the upstream Dockerfile compiled it, not us).
+
+The value is `no` when that image is not published for the architecture or is a musl (alpine) build, which does not run on glibc Ubuntu.
+
+- **copy-from amd64**: no
+- **copy-from arm64**: no
+
+### Dependency containers
+
+Other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars).
+
+✅ means ContainerForge already has an app for it.
+
+- **Dependency containers**: postgresql (CNPG) ✅

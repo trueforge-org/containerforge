@@ -5,22 +5,73 @@
 - The container folder structure should be the same as the ones under `/app/containername`.
 - All agentic rules for these files and folders also apply to their output.
 
-## How to read the tables
+## Overview
 
-- **Chart / Role**: the TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
-- **Container**: the image and tag the chart uses today.
-- **Dockerfile**: the file that builds that image, traced from image labels and upstream repos. `-` means no public Dockerfile could be found.
-- **Application source**: the application's own source repository or project page.
-- **Application binary**: where we can fetch the ready-made executable for each architecture ourselves: a release asset link, or `apt:`/`pip:`/`npm:` (package), or `-` when there is none. It never points at a container image.
-- **Difficulty**: `easy` (prebuilt binary, close sibling or steamcmd game server), `medium` (a Node/Python/Java/PHP/.NET stack ContainerForge already has, or a modest build), `hard` (several services, musl-only, GPU, root/privileged, desktop/VNC, large stack, no public Dockerfile, or rework needed for rootless/read-only), `very-hard` (closed source with no redistributable artifact, or kernel/host-level tools).
-- **amd64 / arm64** (one of `yes`, `compile`, `no`): how we get the application for that architecture.
-  - `yes`: we can fetch a ready-made executable ourselves, outside any `COPY --from`: a release asset, an official package, a pip/npm package, a JAR or a vendor download. Interpreted apps count as `yes`.
-  - `compile`: there is no such executable, but the source is open and we can build it reliably ourselves.
-  - `no`: neither works for that architecture, for example closed-source software where the vendor only ships an amd64 executable.
-  - A trailing `*` means the claim could not be confirmed against the upstream source, so it is a best judgement and should be rechecked before porting.
-- **copy-from amd64 / copy-from arm64**: a separate option, always filled in, whatever the `amd64`/`arm64` columns say. It is a link to the container image the binary can be copied out of with `COPY --from=<image>` (the upstream Dockerfile compiled it, not us), or `no` when that image is not published for the architecture or is a musl (alpine) build, which does not run on glibc Ubuntu. A path in backticks is where the binary sits inside the image. `no*` means the registry could not be queried, so the architecture is unconfirmed.
-- **Dependency containers** (main row only): other containers the chart needs (Chart.yaml dependencies, CNPG PostgreSQL, sidecars). ✅ means ContainerForge already has an app for it, ❌ means it is missing too.
+- **Source**: GHCR (linuxserver)
+- **Difficulty**: hard
+- **Chart**: doublecommander
+- **Rows**: 1
+- **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
-| Chart | Role | Container | Dockerfile | Application source | Application binary | Difficulty | Reason | amd64 | arm64 | copy-from amd64 | copy-from arm64 | Dependency containers |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| doublecommander | main | `ghcr.io/linuxserver/doublecommander:latest` | [Dockerfile](https://github.com/linuxserver/docker-doublecommander/blob/05e15297277457b38b1c99c2207185cf73873f15/Dockerfile) | [source](https://github.com/doublecmd/doublecmd) | [amd64](https://github.com/doublecmd/doublecmd/releases/download/v1.2.11/doublecmd-1.2.11.gtk2.x86_64.tar.xz) · [arm64](https://github.com/doublecmd/doublecmd/releases/download/v1.2.11/doublecmd-1.2.11.gtk2.aarch64.tar.xz) | hard | Qt/GTK desktop file manager shipped inside a Selkies desktop image that runs as root. The app is one apt package (doublecmd-gtk) that installs on containerforge-ubuntu for both arches, but a GUI desktop with a VNC stack needs a rootless rework for the read-only rootfs. | yes | yes | [ghcr.io/linuxserver/doublecommander:latest](https://ghcr.io/linuxserver/doublecommander) | [ghcr.io/linuxserver/doublecommander:latest](https://ghcr.io/linuxserver/doublecommander) | none |
+## Fields
+
+### Chart / Role
+
+The TrueCharts chart, and whether the container is the chart's `main` image or a `sidecar` (the chart's values key is shown).
+
+- **Chart**: doublecommander
+- **Role**: main
+
+### Container
+
+The image and tag the chart uses today.
+
+- **Container**: `ghcr.io/linuxserver/doublecommander:latest`
+
+### Dockerfile
+
+The file that builds that image, traced from image labels and upstream repos.
+
+- **Dockerfile**: [Dockerfile](https://github.com/linuxserver/docker-doublecommander/blob/05e15297277457b38b1c99c2207185cf73873f15/Dockerfile)
+
+### Application source
+
+The application's own source repository or project page.
+
+- **Application source**: [source](https://github.com/doublecmd/doublecmd)
+
+### Application binary
+
+Where we can fetch the ready-made executable for each architecture ourselves: a release asset link, or `apt:`/`pip:`/`npm:` (package).
+
+- **Application binary**: [amd64](https://github.com/doublecmd/doublecmd/releases/download/v1.2.11/doublecmd-1.2.11.gtk2.x86_64.tar.xz) · [arm64](https://github.com/doublecmd/doublecmd/releases/download/v1.2.11/doublecmd-1.2.11.gtk2.aarch64.tar.xz)
+
+### Difficulty
+
+`hard`: several services, musl-only, GPU, root/privileged, desktop/VNC, large stack, no public Dockerfile, or rework needed for rootless/read-only.
+
+- **Difficulty**: hard
+
+### Reason
+
+- **Reason**: Qt/GTK desktop file manager shipped inside a Selkies desktop image that runs as root. The app is one apt package (doublecmd-gtk) that installs on containerforge-ubuntu for both arches, but a GUI desktop with a VNC stack needs a rootless rework for the read-only rootfs.
+
+### amd64 / arm64
+
+How we get the application for that architecture.
+
+- `yes`: we can fetch a ready-made executable ourselves, outside any `COPY --from`: a release asset, an official package, a pip/npm package, a JAR or a vendor download. Interpreted apps count as `yes`.
+
+- **amd64**: yes
+- **arm64**: yes
+
+### copy-from amd64 / copy-from arm64
+
+A separate option, always filled in, whatever the `amd64`/`arm64` columns say. It is a link to the container image the binary can be copied out of with `COPY --from=<image>` (the upstream Dockerfile compiled it, not us).
+
+- **copy-from amd64**: [ghcr.io/linuxserver/doublecommander:latest](https://ghcr.io/linuxserver/doublecommander)
+- **copy-from arm64**: [ghcr.io/linuxserver/doublecommander:latest](https://ghcr.io/linuxserver/doublecommander)
+
+### Dependency containers
+
+- **Dependency containers**: none
