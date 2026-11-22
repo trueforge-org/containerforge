@@ -12,7 +12,7 @@
 - **Chart**: rdtclient
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Optional dependency containers**: yes (aria2 (aria2Image))
+- **Optional dependency containers**: yes (aria2)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

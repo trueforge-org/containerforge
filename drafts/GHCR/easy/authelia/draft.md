@@ -11,8 +11,8 @@
 - **Difficulty**: easy
 - **Chart**: authelia
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql)
-- **Optional dependency containers**: yes (valkey)
+- **Hard dependency containers**: no
+- **Optional dependency containers**: yes (postgresql, valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

@@ -11,7 +11,7 @@
 - **Difficulty**: hard
 - **Chart**: anonaddy
 - **Rows**: 1
-- **Hard dependency containers**: yes (mariadb, valkey)
+- **Hard dependency containers**: yes (mariadb)
 - **Optional dependency containers**: yes (valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 

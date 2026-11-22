@@ -11,8 +11,8 @@
 - **Difficulty**: medium
 - **Chart**: youtubedl-material
 - **Rows**: 1
-- **Hard dependency containers**: yes (mongodb)
-- **Optional dependency containers**: no
+- **Hard dependency containers**: no
+- **Optional dependency containers**: yes (mongodb)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

@@ -11,8 +11,8 @@
 - **Difficulty**: hard
 - **Chart**: ghostfolio
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql, valkey)
-- **Optional dependency containers**: no
+- **Hard dependency containers**: yes (postgresql)
+- **Optional dependency containers**: yes (valkey)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

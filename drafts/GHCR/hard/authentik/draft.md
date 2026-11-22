@@ -12,7 +12,7 @@
 - **Chart**: authentik
 - **Rows**: 1
 - **Hard dependency containers**: yes (postgresql)
-- **Optional dependency containers**: yes (geoipupdate (geoipImage), ldap (ldapImage), radius (radiusImage), proxy (proxyImage), k8s-sidecar (sidecarImage))
+- **Optional dependency containers**: yes (geoipupdate, ldap, radius, proxy, k8s-sidecar)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

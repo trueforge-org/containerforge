@@ -12,7 +12,7 @@
 - **Chart**: portainer
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Optional dependency containers**: yes (portainer-ee (beImage))
+- **Optional dependency containers**: yes (portainer-ee)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

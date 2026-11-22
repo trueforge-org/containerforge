@@ -11,8 +11,8 @@
 - **Difficulty**: hard
 - **Chart**: dispatcharr
 - **Rows**: 1
-- **Hard dependency containers**: yes (alpine (alpineImage))
-- **Optional dependency containers**: no
+- **Hard dependency containers**: no
+- **Optional dependency containers**: yes (alpine)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

@@ -12,7 +12,7 @@
 - **Chart**: jupyter
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Optional dependency containers**: no
+- **Optional dependency containers**: yes (minimal-notebook, r-notebook, scipy-notebook, tensorflow-notebook, datascience-notebook, pyspark-notebook, all-spark-notebook)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

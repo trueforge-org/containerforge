@@ -12,7 +12,7 @@
 - **Chart**: rsshub
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Optional dependency containers**: yes (valkey, chrome (browserlessImage))
+- **Optional dependency containers**: yes (valkey, chrome)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

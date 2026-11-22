@@ -12,7 +12,7 @@
 - **Chart**: rtorrent-rutorrent
 - **Rows**: 1
 - **Hard dependency containers**: no
-- **Optional dependency containers**: yes (rtorrent_exporter (exportarrImage))
+- **Optional dependency containers**: yes (rtorrent_exporter)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

@@ -11,8 +11,8 @@
 - **Difficulty**: medium
 - **Chart**: humhub
 - **Rows**: 1
-- **Hard dependency containers**: yes (mariadb)
-- **Optional dependency containers**: yes (valkey, humhub-nginx (nginxImage))
+- **Hard dependency containers**: yes (one of: mariadb, mysql)
+- **Optional dependency containers**: yes (valkey, humhub-nginx)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links

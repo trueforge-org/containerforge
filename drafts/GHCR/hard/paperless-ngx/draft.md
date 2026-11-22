@@ -11,8 +11,8 @@
 - **Difficulty**: hard
 - **Chart**: paperless-ngx
 - **Rows**: 1
-- **Hard dependency containers**: yes (postgresql, valkey)
-- **Optional dependency containers**: yes (gotenberg (gotenbergImage), tika (tikaImage))
+- **Hard dependency containers**: yes (valkey)
+- **Optional dependency containers**: yes (postgresql, gotenberg, tika)
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
 ## Links
