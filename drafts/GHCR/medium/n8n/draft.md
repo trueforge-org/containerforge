@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/n8n-io/n8n
+- **Documentation**: https://docs.n8n.io
+- **Website**: https://n8n.io
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/libredb/libredb-studio
+- **Website**: https://libredb.org
 
 ## Fields
 

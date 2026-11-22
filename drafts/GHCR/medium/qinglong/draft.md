@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/whyour/qinglong
+- **Documentation**: https://qinglong.online/guide/getting-started/installation-guide
+- **Website**: https://qinglong.online
 
 ## Fields
 

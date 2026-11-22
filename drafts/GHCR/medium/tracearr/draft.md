@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/connorgallopo/Tracearr
+- **Documentation**: https://docs.tracearr.com
+- **Website**: https://tracearr.com
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Pryaxis/TShock
+- **Documentation**: https://ikebukuro.tshock.co/
 
 ## Fields
 

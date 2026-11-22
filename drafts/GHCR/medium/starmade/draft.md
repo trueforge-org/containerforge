@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.star-made.org/
+- **Documentation**: https://starmadepedia.net
 
 ## Fields
 

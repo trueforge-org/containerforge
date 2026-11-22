@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/mealie-recipes/mealie
+- **Documentation**: https://mealie.io/
 
 ## Fields
 

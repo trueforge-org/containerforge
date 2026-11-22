@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Donkie/Spoolman
+- **Documentation**: https://donkie.github.io/Spoolman/
 
 ## Fields
 

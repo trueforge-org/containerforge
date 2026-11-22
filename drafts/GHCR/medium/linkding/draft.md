@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/sissbruecker/linkding
+- **Documentation**: https://linkding.link/
 
 ## Fields
 

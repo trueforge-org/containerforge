@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Ylianst/MeshCentral
+- **Documentation**: https://docs.meshcentral.com/
+- **Website**: https://meshcentral.com
 
 ## Fields
 

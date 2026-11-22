@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/ioquake/ioq3
+- **Documentation**: https://ioquake3.org/help/players-guide/
+- **Website**: https://ioquake3.org
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Exim/exim
+- **Documentation**: https://www.exim.org/docs.html
+- **Website**: https://www.exim.org/
 
 ## Fields
 

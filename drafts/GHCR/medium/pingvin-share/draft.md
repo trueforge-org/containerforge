@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/stonith404/pingvin-share
+- **Documentation**: https://stonith404.github.io/pingvin-share/
 
 ## Fields
 

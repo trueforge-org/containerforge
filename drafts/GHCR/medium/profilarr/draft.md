@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Dictionarry-Hub/profilarr
+- **Documentation**: https://dictionarry.dev/
 
 ## Fields
 

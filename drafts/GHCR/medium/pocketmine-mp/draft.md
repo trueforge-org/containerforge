@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/pmmp/PocketMine-MP
+- **Documentation**: https://doc.pmmp.io/en/rtfd/installation.html
+- **Website**: https://pmmp.io
 
 ## Fields
 

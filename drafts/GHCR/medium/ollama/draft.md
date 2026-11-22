@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/open-webui/open-webui
+- **Documentation**: https://docs.openwebui.com/
+- **Website**: https://openwebui.com
 
 ## Fields
 

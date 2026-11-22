@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Maintainerr/Maintainerr
+- **Documentation**: https://docs.maintainerr.info/
+- **Website**: https://maintainerr.info
 
 ## Fields
 

@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/SiaFoundation/siad
+- **Documentation**: https://docs.sia.tech/
+- **Website**: https://sia.tech
 
 ## Fields
 

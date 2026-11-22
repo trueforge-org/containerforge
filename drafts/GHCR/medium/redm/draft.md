@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/citizenfx/fivem
+- **Documentation**: http://docs.fivem.net/docs/
+- **Website**: https://redm.net/
 
 ## Fields
 

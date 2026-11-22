@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/Anuken/Mindustry
+- **Documentation**: https://mindustrygame.github.io/wiki
+- **Website**: https://mindustrygame.github.io
 
 ## Fields
 

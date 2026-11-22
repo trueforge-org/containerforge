@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/PaperMC/Velocity
+- **Website**: https://papermc.io/software/velocity
 
 ## Fields
 
