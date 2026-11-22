@@ -29,8 +29,9 @@
 
 ## Base container
 
-- **Primary**: nginx
-- **Alternative**: ubuntu
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: nginx
+- **Alternative runtime image**: ubuntu
 - **Reason**: Static JavaScript web UI served by nginx from the release zip.
 
 ## Fields

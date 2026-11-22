@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: java25
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java25
 - **Reason**: The input names Java 25 and the java25 sibling for a jar.
 
 ## Fields

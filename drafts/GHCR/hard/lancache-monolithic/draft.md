@@ -29,8 +29,8 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Self-contained .NET tool and shell scripts, which fit ubuntu.
 
 ## Fields

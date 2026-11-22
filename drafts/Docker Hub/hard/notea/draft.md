@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: python-node
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python-node
 - **Reason**: Next.js Node app with no Python needs, so the Node runtime in python-node covers it; the extra bundled storage binary is a service-layout issue.
 
 ## Fields

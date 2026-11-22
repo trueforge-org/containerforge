@@ -27,8 +27,8 @@
 
 ## Base container
 
-- **Primary**: steamcmd
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: steamcmd
 - **Reason**: Dedicated server pulled from Steam by SteamCMD at start.
 
 ## Fields

@@ -27,8 +27,9 @@
 
 ## Base container
 
-- **Primary**: python-node
-- **Alternative**: ubuntu
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python-node
+- **Alternative runtime image**: ubuntu
 - **Reason**: Node.js web UI is the main runtime, with Go helpers and a zerotier daemon alongside.
 
 ## Fields

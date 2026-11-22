@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: python-node
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python-node
 - **Reason**: Node.js server with a React UI built in a node stage, so python-node provides node.
 
 ## Fields

@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: java21
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java21
 - **Reason**: The input names java21 for a Java distro run from /app.
 
 ## Fields

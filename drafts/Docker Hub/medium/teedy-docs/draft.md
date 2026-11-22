@@ -26,8 +26,8 @@
 
 ## Base container
 
-- **Primary**: java11
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java11
 - **Reason**: The input names java11 for a Java WAR run on Jetty.
 
 ## Fields

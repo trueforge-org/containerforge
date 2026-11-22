@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: java17
-- **Alternative**: java21
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java17
+- **Alternative runtime image**: java21
 - **Reason**: Single jar that the draft allows on java17 or java21, and java17 is picked as the default.
 
 ## Fields

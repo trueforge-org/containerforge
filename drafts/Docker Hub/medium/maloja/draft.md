@@ -27,8 +27,8 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
 - **Reason**: Python scrobbling server installed from requirements, and the input names the python sibling.
 
 ## Fields

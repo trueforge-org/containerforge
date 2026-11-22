@@ -27,8 +27,8 @@
 
 ## Base container
 
-- **Primary**: python-node
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python-node
 - **Reason**: Node server run from the bundled Node runtime and the node sibling.
 
 ## Fields

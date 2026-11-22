@@ -27,8 +27,9 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: ubuntu
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
+- **Alternative runtime image**: ubuntu
 - **Reason**: Python tool with pip requirements on the python base, with jbig2enc and Ghostscript from apt.
 
 ## Fields

@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: java21
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
+- **Alternative runtime image**: java21
 - **Reason**: Python web panel installed from requirements; the Java stack is for spawned Minecraft servers, not the panel itself.
 
 ## Fields

@@ -29,8 +29,8 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: PHP on Apache installed from apt plus the wordpress.org tarball, so the ubuntu base provides PHP.
 
 ## Fields

@@ -29,8 +29,9 @@
 
 ## Base container
 
-- **Primary**: java25
-- **Alternative**: java21
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java25
+- **Alternative runtime image**: java21
 - **Reason**: Upstream names Java 24, which is not a listed base; java25 is the newest available and runs Java 24 class files.
 
 ## Fields

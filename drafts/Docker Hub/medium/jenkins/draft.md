@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: java17
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java17
 - **Reason**: The input names Java 17 and the java17 sibling for a war file.
 
 ## Fields

@@ -27,8 +27,8 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
 - **Reason**: Python app installed with pip into /app; the draft names the python sibling.
 
 ## Fields

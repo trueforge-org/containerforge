@@ -29,8 +29,8 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Vendor document server package installed on ubuntu, with its bundled web server and Node backend running as services.
 
 ## Fields

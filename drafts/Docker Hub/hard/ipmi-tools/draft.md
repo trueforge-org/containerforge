@@ -26,8 +26,9 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: ubuntu
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
+- **Alternative runtime image**: ubuntu
 - **Reason**: Python Flask app that shells out to ipmitool from apt.
 
 ## Fields

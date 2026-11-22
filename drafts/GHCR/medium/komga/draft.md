@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: java21
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java21
 - **Reason**: Spring Boot jar that the draft says should reuse the java21 sibling.
 
 ## Fields

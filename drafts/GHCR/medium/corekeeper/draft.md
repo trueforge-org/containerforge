@@ -27,8 +27,9 @@
 
 ## Base container
 
-- **Primary**: steamcmd
-- **Alternative**: ubuntu
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: steamcmd
+- **Alternative runtime image**: ubuntu
 - **Reason**: Unity server fetched through SteamCMD, with Xvfb for display.
 
 ## Fields

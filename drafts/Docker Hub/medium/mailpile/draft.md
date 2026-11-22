@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
 - **Reason**: Legacy Python app rebuilt in a Python 3 venv, so the python base fits.
 
 ## Fields

@@ -29,8 +29,8 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
 - **Reason**: Python pip install of borgbackup is the main runtime; sshd comes from apt.
 
 ## Fields

@@ -27,8 +27,8 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
 - **Reason**: Rust toolchain is not provided by any base, so ubuntu is used with cargo from apt.
 
 ## Fields

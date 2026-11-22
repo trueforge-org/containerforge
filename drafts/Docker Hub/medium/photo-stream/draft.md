@@ -26,8 +26,9 @@
 
 ## Base container
 
-- **Primary**: nginx
-- **Alternative**: ubuntu
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: nginx
+- **Alternative runtime image**: ubuntu
 - **Reason**: Jekyll site built once and served as static files, so nginx serves it; ubuntu is the alternative if the build runs there.
 
 ## Fields

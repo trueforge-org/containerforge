@@ -27,8 +27,9 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: python-node
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
+- **Alternative runtime image**: python-node
 - **Reason**: rtorrent from apt plus a Node.js web UI, so Node is the second runtime.
 
 ## Fields

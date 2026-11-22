@@ -29,8 +29,8 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
 - **Reason**: Pure Python CalDAV/CardDAV server installed with pip into a venv.
 
 ## Fields

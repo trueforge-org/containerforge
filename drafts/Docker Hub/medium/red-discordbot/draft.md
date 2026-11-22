@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: python
-- **Alternative**: java17
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python
+- **Alternative runtime image**: java17
 - **Reason**: Python bot installed with pip; the full variant adds Java with no version named, so java17 is the alternative.
 
 ## Fields

@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: python
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
+- **Alternative runtime image**: python
 - **Reason**: C++ analysis framework installed from apt on ubuntu; the notebook server could use the python base as the alternative.
 
 ## Fields

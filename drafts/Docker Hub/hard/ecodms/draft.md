@@ -29,8 +29,9 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: java17
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
+- **Alternative runtime image**: java17
 - **Reason**: Guess: vendor server packages for Ubuntu, with Java implied but no version named.
 
 ## Fields

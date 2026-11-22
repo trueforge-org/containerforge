@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: nginx
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
+- **Alternative runtime image**: nginx
 - **Reason**: goaccess is installed from apt on ubuntu, and nginx is the alternative if serving the HTML report becomes the main runtime.
 
 ## Fields

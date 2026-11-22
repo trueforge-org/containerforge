@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: python
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
+- **Alternative runtime image**: python
 - **Reason**: Go server from a release tarball; python is the alternative for the pip packages it bundles.
 
 ## Fields

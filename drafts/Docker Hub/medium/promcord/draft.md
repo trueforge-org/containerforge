@@ -26,8 +26,9 @@
 
 ## Base container
 
-- **Primary**: java17
-- **Alternative**: java21
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java17
+- **Alternative runtime image**: java21
 - **Reason**: Upstream runs openjdk 16, and java17 is the nearest supported Java runtime.
 
 ## Fields

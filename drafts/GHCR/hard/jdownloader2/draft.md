@@ -28,8 +28,8 @@
 
 ## Base container
 
-- **Primary**: java17
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java17
 - **Reason**: Java app with no version named, so java17 is used by default.
 
 ## Fields

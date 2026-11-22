@@ -28,8 +28,9 @@
 
 ## Base container
 
-- **Primary**: ubuntu
-- **Alternative**: nginx
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: none (ubuntu alone is enough)
+- **Alternative runtime image**: nginx
 - **Reason**: Reason names ubuntu with apt rtorrent, PHP-FPM and nginx.
 
 ## Fields

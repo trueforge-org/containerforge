@@ -27,8 +27,9 @@
 
 ## Base container
 
-- **Primary**: java21
-- **Alternative**: java25
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: java21
+- **Alternative runtime image**: java25
 - **Reason**: Java server jar; draft suggests java21 or java25 and the image tags span several versions.
 
 ## Fields

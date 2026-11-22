@@ -26,8 +26,8 @@
 
 ## Base container
 
-- **Primary**: python-node
-- **Alternative**: none
+- **Foundation**: ubuntu (`ghcr.io/trueforge-org/ubuntu:26.4`), which every ContainerForge runtime image is built on
+- **Runtime image**: python-node
 - **Reason**: Node app with a headless browser and MQTT clients from apt; python-node covers the Node runtime.
 
 ## Fields
