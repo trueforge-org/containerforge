@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles and /serverdata/steamcmd (pvc, chart-level; draft says /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the server files are downloaded through SteamCMD on first start, a large download that needs Steam access (spec).
+- caveat: the draft supports amd64 only, so arm64 hosts cannot run it (spec).
+- caveat: the Unity server runs under a virtual display (Xvfb), so the start script must provide that display (spec).
+
 ## Fields
 ### Chart / Role
 

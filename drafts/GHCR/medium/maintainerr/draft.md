@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs API keys and URLs for Plex, Sonarr, Radarr or similar services, entered in the UI (external service, account).
+- caveat: its rules can delete media files, so a misconfigured rule can remove content; dry-run or review should be used first (inferred).
+- caveat: native node modules are built during install, which may fail on arm64 until verified (architecture, inferred).
+
 ## Fields
 ### Chart / Role
 

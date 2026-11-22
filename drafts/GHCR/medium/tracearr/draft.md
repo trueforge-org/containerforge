@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs external PostgreSQL and Valkey or Redis before it can start, so both must be deployed with it (from the draft).
+- caveat: Requires connected media servers and their API access to function (inferred).
+
 ## Fields
 ### Chart / Role
 

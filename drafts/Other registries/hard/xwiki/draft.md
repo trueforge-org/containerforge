@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /usr/local/xwiki (chart-added, pvc); draft's /config is not what the chart mounts
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: requires a PostgreSQL server; the setup wizard must be completed in the UI on first start (manual setup)
+- caveat: LibreOffice for document conversion makes the image large and adds startup time (inferred)
+- caveat: Tomcat and the JVM need a generous memory allocation, likely 2 GB or more (inferred)
+- caveat: upgrading XWiki versions usually requires a database migration, so tags cannot be swapped blindly (inferred)
+
 ## Fields
 ### Chart / Role
 

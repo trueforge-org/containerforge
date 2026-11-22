@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own config at /home/node
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The arm64 build is a source compile on the node base, which is slow and needs build tools (from the draft).
+- caveat: The pod fsGroup is 1000 rather than the common 568, so existing data volumes need their ownership checked when moving from another setup (from the draft).
+- caveat: The first login sets the initial password through the web UI, which is a manual step (inferred).
+
 ## Fields
 ### Chart / Role
 

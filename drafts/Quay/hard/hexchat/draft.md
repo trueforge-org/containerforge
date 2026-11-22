@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: GUI client that needs a display session through VNC or noVNC; there is no headless mode (inferred)
+- caveat: IRC networks, nicks and servers must be configured in the UI or config files by the user (manual setup)
+- caveat: the copy source is a binhex rolling latest tag, so the base changes without notice (inferred)
+
 ## Fields
 ### Chart / Role
 

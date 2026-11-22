@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cache (emptyDir, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the cloudflared release binary is downloaded per architecture, so the build needs internet access and the binary version must be pinned (inferred).
+- caveat: the pnpm monorepo has separate frontend and backend builds, so the image build is large and slow (inferred).
+- caveat: the app depends on external music-library services and their API keys, which must be entered after start (inferred).
+
 ## Fields
 ### Chart / Role
 

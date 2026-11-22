@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /.cache (emptyDir, chart-level); /data (pvc, chart-level; draft uses /app with caches in /tmp)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is optional in the chart, and without it the add-on's default storage may not suit a long-running install (inferred).
+- caveat: Comet is a Stremio add-on that relies on external debrid and indexer services with their own API keys (inferred).
+- caveat: dependencies without an arm64 wheel would compile on arm64, which lengthens that build (spec).
+
 ## Fields
 ### Chart / Role
 

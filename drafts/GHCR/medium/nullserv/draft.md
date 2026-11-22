@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (only /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: clients must be pointed at the server by hand, for example through DNS or a resolver setting, before any effect is seen (manual setup, inferred).
+- caveat: the upstream repository the draft links has been removed, so the source and release mapping cannot be re-checked there (upstream status).
+
 ## Fields
 ### Chart / Role
 

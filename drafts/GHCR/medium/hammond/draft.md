@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /assets (pvc, chart-level)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: trace confidence is low because the tag was not matched, so the Dockerfile and version should be rechecked before porting (spec).
+- caveat: there are no release binaries, so the Go API and the Node UI must both be built on each architecture (spec).
+- caveat: the assets directory must be populated by the user, since the app does not ship its own content (inferred).
+
 ## Fields
 ### Chart / Role
 

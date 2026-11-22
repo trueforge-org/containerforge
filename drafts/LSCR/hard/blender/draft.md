@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the official Blender tarball is x64 only; arm64 relies on the Ubuntu apt blender package, which may be an older version than 5.0.1 (inferred)
+- caveat: GPU acceleration needs device passthrough; without it rendering runs on CPU and is slow (inferred)
+- caveat: desktop session needs a browser; large image and first start (inferred)
+
 ## Fields
 ### Chart / Role
 

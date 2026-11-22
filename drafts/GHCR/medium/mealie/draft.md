@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc); /nltk_data (emptyDir, 5Gi)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the first start downloads NLTK data and other assets, so it needs internet access and is slow on first run (runtime download, inferred).
+- caveat: the first user is created through the UI, and PostgreSQL is optional but SQLite is the default (manual setup, inferred).
+
 ## Fields
 ### Chart / Role
 

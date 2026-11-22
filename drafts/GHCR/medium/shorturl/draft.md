@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own data at /data
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The upstream source repository path returned 404 in the draft, so the source location and its upstream status must be confirmed before building.
+- caveat: The URL database must go under /config or /data, and it is lost if that path is not persisted (inferred).
+- caveat: A public base URL must be configured for generated short links to resolve correctly (inferred).
+
 ## Fields
 ### Chart / Role
 

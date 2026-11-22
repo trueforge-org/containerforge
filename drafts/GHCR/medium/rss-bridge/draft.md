@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own config at /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The container needs outbound internet access, since it fetches the feeds it converts.
+- caveat: The curl-impersonate helper binary is a separate dependency; its arm64 availability is not confirmed (inferred).
+- caveat: The config file under /config must be created or customised through the web UI before the bridges behave as expected (inferred).
+
 ## Fields
 ### Chart / Role
 

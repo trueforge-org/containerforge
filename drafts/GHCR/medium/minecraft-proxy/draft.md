@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /server (pvc); /plugins (pvc)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it is only useful with backend Minecraft servers that the operator has already set up and can reach (external service).
+- caveat: the proxy jar is fetched at runtime by the helper, so it needs internet on first start (runtime download).
+- caveat: the forwarding secret must match between the proxy and each backend server, which is a manual setup step (manual setup, inferred).
+
 ## Fields
 ### Chart / Role
 

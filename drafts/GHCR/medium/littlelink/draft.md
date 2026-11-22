@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence block in values)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the source link is a master branch archive and the image is `latest`, so the build is rolling and not pinned (upstream status).
+- caveat: three different source repositories are listed for this project; confirm which one the image comes from before porting (upstream status).
+- caveat: the profile content is set by a config file the operator must create (manual setup, inferred).
+
 ## Fields
 ### Chart / Role
 

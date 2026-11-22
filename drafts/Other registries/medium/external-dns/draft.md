@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: only works inside a Kubernetes cluster with a DNS provider and its credentials (for example a Secret) supplied (inferred)
+- caveat: needs cluster-wide RBAC to run, so it cannot be tested in plain Docker (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Port 25 must be remapped to a high port inside the container, and many hosts and ISPs block outbound port 25, so relaying to the internet may fail (inferred).
+- caveat: Upstream relay credentials or smarthost settings must be supplied by the user (inferred).
+- caveat: Spool and log directories must be moved to /tmp or /config for them to be writable and kept (from the draft).
+
 ## Fields
 ### Chart / Role
 

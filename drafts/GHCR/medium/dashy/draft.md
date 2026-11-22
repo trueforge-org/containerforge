@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/public/item-icons (pvc, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the dashboard shows nothing useful until a config file is written to /config by the user (inferred).
+- caveat: the Vue frontend build pulls many npm packages, so the first image build is slow (inferred).
+- caveat: the chart tag is latest while the draft binary is pinned to 4.9.0, so the two can drift apart (spec).
+
 ## Fields
 ### Chart / Role
 

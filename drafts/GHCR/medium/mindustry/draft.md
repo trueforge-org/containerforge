@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /mindustry (pvc). Draft says saves go to /config, the chart mounts /mindustry.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the ich777 wrapper adds a gotty web console on 8080; that gives shell-style access, so it must be protected or left unexposed (security, inferred).
+- caveat: the game uses UDP 6567 and clients must reach it directly, so NAT or firewall rules need UDP forwarding (network).
+- caveat: no arm64 image is published for the wrapper, so arm64 is untested (architecture).
+
 ## Fields
 ### Chart / Role
 

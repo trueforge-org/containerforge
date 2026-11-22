@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-level; draft moves state to /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the watched game servers must be reachable from the container over the network, since the watcher queries them directly (inferred).
+- caveat: notifications need a configured webhook or messaging account, which the user must set up (inferred).
+- caveat: the chart tag is pinned to v3.1.26, so newer upstream releases need a manual bump (inferred).
+
 ## Fields
 ### Chart / Role
 

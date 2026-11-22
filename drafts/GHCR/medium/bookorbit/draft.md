@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/book-dock and /books (pvc, chart-level); /data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is a hard dependency and must be provisioned before the container starts (spec).
+- caveat: there is no release artifact, so the pnpm build must run from source on each architecture (spec).
+- caveat: the book-dock and books folders must be mounted and populated by the user for imports to work (inferred).
+
 ## Fields
 ### Chart / Role
 

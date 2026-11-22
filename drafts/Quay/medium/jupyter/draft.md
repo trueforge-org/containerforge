@@ -66,6 +66,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/jovyan/work (chart-added, pvc); draft's home dir at /config does not match the chart mount
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Jupyter requires a token or password on first access; it must be retrieved from the logs or set by the user (inferred)
+- caveat: packages installed with pip are not pinned, so the notebook and JupyterLab versions may drift between builds (inferred)
+- caveat: the home directory is moved to /config, so user notebooks and installed packages live there, not in the image (inferred)
+
 ## Fields
 ### Chart / Role
 

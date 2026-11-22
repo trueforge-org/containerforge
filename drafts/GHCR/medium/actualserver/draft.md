@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-level mount; draft says /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the sync server is a web app that needs its own first-run setup in the browser (budget file and server password) (inferred).
+- caveat: upstream publishes per-arch AppImage binaries, so an alternative binary-based build exists if the yarn workspace build proves hard (inferred).
+- caveat: the chart tag is a specific calendar-style version (26.11.0), so upgrades must be tracked against the upstream release cadence (inferred).
+
 ## Fields
 ### Chart / Role
 

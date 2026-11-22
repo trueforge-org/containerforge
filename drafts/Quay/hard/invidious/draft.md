@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values; draft's static assets under /app are not mounted by the chart
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a running PostgreSQL server and a Crystal toolchain build, so first builds are slow and memory-hungry (inferred)
+- caveat: YouTube blocks or rate-limits instances, so outbound access and possibly companion or proxy services are needed (inferred)
+- caveat: upstream breaks often when YouTube changes its API, so expect updates to be needed (inferred)
+
 ## Fields
 ### Chart / Role
 

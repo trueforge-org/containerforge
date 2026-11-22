@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own serverfiles
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No game data ships with the image. The original Quake III pak files (pak0.pk3 and similar) must be supplied by the user from a legitimately owned copy.
+- caveat: Game traffic is UDP on 27960, so the host port must be forwarded as UDP, not only TCP.
+- caveat: The TrueCharts source image is tagged latest and is rolling, so behaviour can change between pulls (inferred from the draft's image tag).
+
 ## Fields
 ### Chart / Role
 

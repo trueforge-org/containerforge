@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the image is only the static UI, so a separate batnoter backend or service is probably needed for the app to work end to end (inferred).
+- caveat: the draft traced the repository HEAD rather than the v1.0.0 tag, so the built code may not match the release (spec).
+- caveat: the unprivileged nginx setup is not finished, so port and temp-path changes are still needed before a rootless run (inferred).
+
 ## Fields
 ### Chart / Role
 

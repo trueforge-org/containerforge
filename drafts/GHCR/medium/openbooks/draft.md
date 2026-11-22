@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /books/books (pvc); /books/logs (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: downloads come from IRC networks and DCC transfers, so the container needs outbound IRC access and results depend on those servers being online (network, external service).
+- caveat: arm64 has no release binary and must be compiled with Go and node, so arm64 is effectively untested (architecture).
+
 ## Fields
 ### Chart / Role
 

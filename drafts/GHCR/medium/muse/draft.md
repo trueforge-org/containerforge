@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (only /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a Discord bot token and a Discord server invite are required before the bot does anything (account or API key).
+- caveat: yt-dlp needs frequent updates to keep playing from YouTube, so playback breaks over time without updates (upstream status, inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence block)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it only makes sense inside a Kubernetes cluster with its RBAC and ServiceAccount, so standalone testing will not exercise it (external service).
+- caveat: its approval policy decides which kubelet certificate requests are signed; a loose policy approves too broadly, so the rules need review (inferred).
+- caveat: no public Dockerfile exists for the upstream image, so the build is reconstructed from source and may differ from v1.2.16 (upstream status).
+
 ## Fields
 ### Chart / Role
 

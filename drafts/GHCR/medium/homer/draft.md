@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /www/assets (pvc, chart's config mount)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the dashboard is driven by a config.yml the operator must create or mount; the default page is only a placeholder (manual setup, inferred).
+- caveat: there is no built-in login, so exposing it beyond the LAN needs a reverse proxy or auth in front (inferred).
+
 ## Fields
 ### Chart / Role
 

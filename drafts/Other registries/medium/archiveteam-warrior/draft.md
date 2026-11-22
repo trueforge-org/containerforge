@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none in values (no persistence block)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the warrior is a crawler that uses real outbound bandwidth; the user needs an internet connection with spare capacity (inferred)
+- caveat: the project is cloned from git at build time, so builds need network access and a pinned revision must be kept current (inferred)
+- caveat: upstream runs as root and writes into its app folder, so it may break on a read-only or non-root setup (inferred)
+
 ## Fields
 ### Chart / Role
 

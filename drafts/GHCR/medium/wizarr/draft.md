@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /run/nginx (emptyDir); /var/run is common and also emptyDir; database at /data/database is the chart's own
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The draft puts the SQLite database under /config, but the chart uses /data/database, so the two paths must be reconciled before porting (from the draft).
+- caveat: Media server connections and invitation links are set up in the UI on first run, which is a manual step (inferred).
+- caveat: uv caches are kept in /tmp, so the first start after a restart may re-download packages (inferred).
+
 ## Fields
 ### Chart / Role
 

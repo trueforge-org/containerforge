@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own config at /stun-turn
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Relay ports need a UDP port range exposed or mapped on the host, and TLS certificates must be supplied in /config by the user (inferred).
+- caveat: The server needs its public IP or realm configured correctly, or relay allocation fails (inferred).
+
 ## Fields
 ### Chart / Role
 

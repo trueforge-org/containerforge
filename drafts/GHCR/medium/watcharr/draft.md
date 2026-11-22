@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own data at /data
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The UI and server are both compiled from source at build time on both architectures, which makes builds slow (from the draft).
+- caveat: The first run asks for an admin account to be created in the UI, which is a manual step (inferred).
+- caveat: The Alternative runtime python-node base is listed in the draft, so the choice between it and ubuntu must be made before porting (from the draft).
+
 ## Fields
 ### Chart / Role
 

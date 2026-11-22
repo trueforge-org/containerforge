@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cache/apt-cacher-ng (pvc, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the cache only helps clients that are pointed at the proxy on port 3142, so each apt client needs manual configuration (inferred).
+- caveat: the cache grows with every package downloaded, so the cache volume needs enough disk (inferred).
+- caveat: the chart tag is latest, so the image can change under the same tag between pulls (inferred).
+
 ## Fields
 ### Chart / Role
 

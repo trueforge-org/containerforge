@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own config at /config and data at /data
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No release binaries exist, so amd64 and arm64 are both compiled from the tagged source, which takes time (from the draft).
+- caveat: A config file must be created before the server works properly, which is a manual step (inferred).
+- caveat: The public base URL must be set so that feed links resolve for other users (inferred).
+
 ## Fields
 ### Chart / Role
 

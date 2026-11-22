@@ -61,6 +61,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: only meaningful inside Kubernetes, and the VolumeSnapshot CRDs must be installed in the cluster before it starts (inferred)
+- caveat: compiled per architecture, so the arm64 build must be verified separately (inferred)
+
 ## Fields
 ### Chart / Role
 

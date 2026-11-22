@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /logs and /monitor (chart-added, pvc); draft says only /config is written, so these may not be needed
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a reachable Tautulli server and Discord credentials (bot token or webhook) created outside the container (inferred)
+- caveat: a config file must be created in /config before the app does anything useful (manual setup)
+- caveat: source is only on Codeberg, so the release tag and upstream availability are a dependency (inferred)
+
 ## Fields
 ### Chart / Role
 

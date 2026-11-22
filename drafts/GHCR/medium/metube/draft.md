@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /downloads (pvc). Draft says downloads go to /config or /tmp, the chart mounts /downloads.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: video extractors break whenever the site changes, so yt-dlp must be updated regularly or downloads fail (upstream status, inferred).
+- caveat: downloads are written to the mounted downloads folder, which needs enough disk and matching ownership for the non-root user (data, inferred).
+
 ## Fields
 ### Chart / Role
 

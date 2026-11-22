@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (draft's npm cache in /tmp is a common default)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: requires a reachable MongoDB instance and its connection details, which are not part of this container (manual setup)
+- caveat: the web UI has no login by default unless basic auth credentials are configured, so set them before exposing it (inferred)
+- caveat: the chart tag is latest, a rolling tag, so upgrades can change behaviour without a version change (inferred)
+
 ## Fields
 ### Chart / Role
 

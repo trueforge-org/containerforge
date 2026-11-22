@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own socials at /app/people
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The data file for people lives at /app/people, not under /config, so it must be explicitly mounted or it is lost on update (from the draft).
+- caveat: The source is built from the untagged main branch, so builds are rolling and not version-pinned (from the draft).
+
 ## Fields
 ### Chart / Role
 

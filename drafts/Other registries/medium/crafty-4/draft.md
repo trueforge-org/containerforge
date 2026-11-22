@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /crafty/app/config, /crafty/servers, /crafty/logs, /crafty/import, /crafty/backups (chart-added, pvc); draft says server data goes under /config, which mismatches
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: spawned Minecraft servers download server jars and need Java, so first start and server creation are slow and need network access (inferred)
+- caveat: game ports (25565/tcp and 19132/udp) must be published separately for clients to connect (inferred)
+- caveat: Minecraft server jars require the user to accept the Mojang EULA (inferred)
+
 ## Fields
 ### Chart / Role
 

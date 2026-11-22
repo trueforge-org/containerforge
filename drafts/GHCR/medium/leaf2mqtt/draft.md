@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence block in values)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs an MQTT broker and the operator's own vehicle-service account credentials, which are external to the container (external service, account, inferred).
+- caveat: the Dart AOT build depends on the Dart SDK version; the v0.6 mapping is unconfirmed, so SDK drift can break the build (upstream status).
+- caveat: there is no web UI or exposed port, so health can only be checked through logs (inferred).
+
 ## Fields
 ### Chart / Role
 

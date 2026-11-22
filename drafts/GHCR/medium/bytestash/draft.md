@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data/snippets (pvc, chart-level; draft keeps SQLite in /config, so the mount path differs)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the native sqlite module is compiled during install, so arm64 builds need build tools and take longer (inferred).
+- caveat: the first user account is created in the web UI on first start (inferred).
+- caveat: the draft is built from a GitHub source tarball rather than a published image, so the source archive URL must stay valid (inferred).
+
 ## Fields
 ### Chart / Role
 

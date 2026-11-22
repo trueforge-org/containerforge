@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, server data and worlds). Draft says /config, the chart uses /data.
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the operator must accept the Mojang EULA, which is a licensing requirement (licensing).
+- caveat: the server is x86_64 only; arm64 needs box64 emulation, which the draft does not cover, so treat it as amd64-only (architecture).
+- caveat: the server zip is downloaded from Mojang at start or build, so the first start needs internet and the URL can change (runtime download).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond the chart's /opt/hasty-paste/data pvc (draft keeps uploads under /config, so the path differs)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there are no release binaries, so the Go backend and the web frontend must both be built from source (spec).
+- caveat: paste data grows without limit unless the user configures retention, so the data volume needs monitoring (inferred).
+- caveat: creating pastes may be possible without any login by default, so access control must be set up deliberately (inferred).
+
 ## Fields
 ### Chart / Role
 

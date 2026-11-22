@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (/config from chart; varrun is a common default)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PHP source is fetched from the GitHub v2 release at build time, so the image build needs internet access (inferred).
+- caveat: php-fpm and nginx must both run in one container, so the start script has to supervise two processes (inferred).
+- caveat: the photo library must be mounted into the container, and thumbnails only persist if their cache path is on a mounted volume (inferred).
+
 ## Fields
 ### Chart / Role
 

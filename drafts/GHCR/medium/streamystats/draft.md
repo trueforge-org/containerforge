@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /run/nginx, /var/lib/nginx, /var/log (created by init; volume type not set in values); data at /var/www/html/data is the chart's own
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Needs an external PostgreSQL database and a media server (Jellyfin or Emby) with an API key to be useful (inferred).
+- caveat: Row 2 is a separate job-server image that is not yet in ContainerForge, so the two processes must be built and run together (from the draft).
+- caveat: Row 1 depends on the job-server being reachable, so the two containers must share a network or be linked (inferred).
+
 ## Fields
 ### Chart / Role
 

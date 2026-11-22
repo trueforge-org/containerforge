@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/localhost/htdocs/protected/config; /var/www/localhost/htdocs/assets; /var/www/localhost/htdocs/themes; /var/www/localhost/htdocs/protected/modules; /var/www/localhost/htdocs/uploads (all shared by main and nginx; pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs an external MariaDB or MySQL database before the first start, and the web installer must be completed in the browser (external service, manual setup).
+- caveat: php-fpm listens on 9000 for FastCGI only; a browser cannot reach it without the nginx sibling, so the pair must be deployed together (network).
+
 ## Fields
 ### Chart / Role
 

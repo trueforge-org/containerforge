@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/backend/backup-data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs an external PostgreSQL database and secrets set through environment variables before first start (external service, inferred).
+- caveat: the chart uses the untagged `latest` image, so the build is not reproducible and the upstream tag 1.1.12 may not match what is pulled (upstream status).
+
 ## Fields
 ### Chart / Role
 

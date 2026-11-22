@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: imagemagick, ffmpeg and pandoc make the image large, and some conversions are slow or memory-hungry (inferred).
+- caveat: the bun runtime and its dependencies are fetched at build time, so the build needs internet access (inferred).
+- caveat: the first account is created in the web UI, and uploads are kept under /app/data (inferred).
+
 ## Fields
 ### Chart / Role
 

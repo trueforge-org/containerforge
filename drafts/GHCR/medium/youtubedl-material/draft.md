@@ -58,6 +58,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own appdata, users, subscriptions, audio and video under /app
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The PUID 1000 value sits under an unrecognised top-level key rather than securityContext, so it is ignored and file ownership of /app data must be handled another way (from the draft).
+- caveat: yt-dlp and ffmpeg must be updated regularly, since YouTube changes often break downloads (inferred).
+- caveat: The chart copies from a nightly image dated 2024-10-01, which is stale, and the old Node 16 pin and pm2 need updating during the port (from the draft).
+- caveat: MongoDB is an optional subchart that the chart enables by default, so a database is deployed unless it is turned off (from the draft).
+
 ## Fields
 ### Chart / Role
 

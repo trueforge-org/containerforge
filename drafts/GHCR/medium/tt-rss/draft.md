@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own html at /var/www/html and config at /opt/tt-rss/config.d
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chart needs external PostgreSQL and a separate nginx image, so two containers and a database must be deployed together (from the draft).
+- caveat: Plugins are git-cloned at build time, so plugin updates require a rebuild of the image (from the draft).
+- caveat: The web tier source is a master-branch archive, so the version is not pinned (from the draft).
+
 ## Fields
 ### Chart / Role
 

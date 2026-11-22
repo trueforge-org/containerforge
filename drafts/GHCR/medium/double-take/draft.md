@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /.storage (pvc, chart-level; draft moves storage to /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the app needs a camera or NVR source plus a separate detector service for face recognition to produce results (inferred).
+- caveat: face recognition is CPU and RAM heavy, and a GPU helps but is not required (inferred).
+- caveat: the canvas module needs cairo and pango libraries, and arm64 may compile that module from source (spec).
+
 ## Fields
 ### Chart / Role
 

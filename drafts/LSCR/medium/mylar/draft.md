@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (varrun is a common default; /config is the chart's own)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: unrar is needed for archive extraction; its licence limits redistribution, so check it can be packaged (inferred)
+- caveat: metadata lookups need external services (for example ComicVine with an API key) that the user must supply (inferred)
+- caveat: release tarball v0.11.0 is pinned; upgrades mean a new tarball and requirements install (inferred)
+
 ## Fields
 ### Chart / Role
 

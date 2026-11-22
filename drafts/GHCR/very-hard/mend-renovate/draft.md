@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (no persistence block in values)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: closed-source Mend renovate-ce image; running it likely needs a Mend licence or account and the image may not be pullable anonymously (inferred)
+- caveat: the open-source renovate npm substitute is not the same product, so features and config may differ (inferred)
+- caveat: amd64 only, arm64 not available
+
 ## Fields
 ### Chart / Role
 

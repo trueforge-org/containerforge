@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/tmp (emptyDir); /tmp is common and also emptyDir
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: No release binary exists, so both amd64 and arm64 images are built from source with Go and npm at build time, which makes the build slow.
+- caveat: The source tag is main, which is rolling, so builds are not reproducible unless the commit is pinned.
+- caveat: Working files in /app/tmp are an emptyDir, so anything written there does not survive a pod or container restart (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc); /plugins (pvc). Draft says data and plugins go to /config, the chart uses /data and /plugins.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: arm64 has no PHP binary, so PHP 8.4 must be compiled from source, which takes a long time (architecture, resource).
+- caveat: Bedrock clients must match the server's protocol version, so the server version and client versions have to be kept in step (upstream status, inferred).
+
 ## Fields
 ### Chart / Role
 

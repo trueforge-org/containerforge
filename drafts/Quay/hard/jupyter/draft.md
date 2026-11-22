@@ -65,6 +65,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /home/jovyan/work (chart-added, pvc); draft's home dir at /config does not match the chart mount
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: each row is a separate multi-gigabyte image; TensorFlow and Spark rows are the largest (inferred)
+- caveat: the Spark row needs Java 17 or newer and a Spark tarball, which must be downloaded at build time (inferred)
+- caveat: the server token or password is needed on first access; the user must retrieve or set it (manual setup)
+- caveat: TensorFlow benefits from GPU passthrough, which is not configured here (inferred)
+
 ## Fields
 ### Chart / Role
 

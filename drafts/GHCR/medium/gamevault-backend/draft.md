@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /logs, /media and /games (pvc, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL must be ready before the backend starts, and the backend will not run without it (spec).
+- caveat: a separate GameVault client app is needed to browse the library, which this image does not provide (inferred).
+- caveat: the pnpm TypeScript build runs at image build time, so the first build is slow (inferred).
+
 ## Fields
 ### Chart / Role
 

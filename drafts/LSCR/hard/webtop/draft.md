@@ -62,6 +62,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft's copy-from is "no" because linuxserver's webtop tags include alpine (musl) variants, so the variant chosen decides whether it runs on the glibc Ubuntu base (inferred)
+- caveat: the desktop needs a large shared memory allocation (/dev/shm) to run browsers or apps smoothly (inferred)
+- caveat: many desktop variants and a large package set make the image big and slow to build and start (inferred)
+
 ## Fields
 ### Chart / Role
 

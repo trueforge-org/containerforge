@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/www/app/data (pvc); /etc/nginx/ssl (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the upstream image is built on Alpine, so PHP and its extensions must be reproduced from apt on Ubuntu, and the extension set is unverified (inferred).
+- caveat: the first login uses the default administrator account, which must be changed right away (manual setup, inferred).
+
 ## Fields
 ### Chart / Role
 

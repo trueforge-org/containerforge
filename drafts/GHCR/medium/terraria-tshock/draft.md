@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own serverfiles
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Terraria client version must match the TShock build (TShock 6.2.1 for Terraria 1.4.5.8), so players on a different version cannot join (from the draft).
+- caveat: The first start asks for world creation and TShock admin setup, which is a manual step through the console or the in-game login (inferred).
+- caveat: The .NET runtime package name in apt is inferred and must be checked for Ubuntu (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles (pvc, chart-level)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft supports amd64 only, so arm64 hosts cannot run it (spec).
+- caveat: the Cfx.re runtime artifact is fetched from runtime.fivem.net on start, and the draft uses the rolling master build (spec).
+- caveat: a server license key from the FiveM keymaster is required before the server will start (inferred).
+
 ## Fields
 ### Chart / Role
 

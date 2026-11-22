@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own serverfiles at /starmade
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The StarMade server jar is downloaded from the vendor at runtime, so first start is slow and needs internet access (from the draft).
+- caveat: Game server ports (TCP 4242 and possibly others) must be forwarded by the host (inferred).
+- caveat: The chart image is tagged latest, so server version can change without notice (inferred from the image tag).
+
 ## Fields
 ### Chart / Role
 

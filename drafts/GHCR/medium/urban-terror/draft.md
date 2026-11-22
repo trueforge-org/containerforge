@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own datadir at /urbanterror
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Game data is downloaded at first start into /config, so the first start is large and needs internet access (from the draft).
+- caveat: The arm64 image needs a source compile of the ioq3 fork, which is a separate and slower build (from the draft).
+- caveat: The chart image is tagged latest, so server version can change without notice (inferred from the image tag).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own data at /ql/data
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Source is git-cloned and built with pnpm at image build time, so the build needs network access and a repeatable clone point must be pinned (inferred).
+- caveat: Task scripts and their dependencies are typically installed at runtime from the web panel, so first start and each new task can be slow and need internet (inferred).
+- caveat: Cron and the web panel are separate processes that the entrypoint must supervise; they are not one service (inferred).
+
 ## Fields
 ### Chart / Role
 

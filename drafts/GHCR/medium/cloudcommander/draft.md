@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root (pvc, chart-level appdata); /UNRAID (pvc, chart-level mountpath for user files)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the web file manager has no login until one is configured, so it must not be exposed to untrusted networks without setting one (inferred).
+- caveat: node-pty may compile during npm install, which adds build time and can fail on arm64 (inferred).
+- caveat: the upstream image tag is old (19.23.2) and the chart uses an unpinned node base in the upstream build, so rebuilds may differ (spec).
+
 ## Fields
 ### Chart / Role
 

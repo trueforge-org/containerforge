@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/meshcentral/meshcentral-data, meshcentral-files, meshcentral-web, meshcentral-backup (pvc, 256Gi each); config.json secret at /opt/meshcentral/meshcentral-data/config.json (read-only). Draft says data under /config, the chart uses /opt/meshcentral.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: agents enroll against the server's host name, so a real DNS name or certificate hostname must be set in config.json before devices can connect (manual setup, inferred).
+- caveat: it binds to 443 and 80 by default, and rootless users cannot bind privileged ports without a sysctl or port remap (network, inferred).
+- caveat: first start generates certificates and a data directory, so it takes time and needs writable storage (runtime, inferred).
+
 ## Fields
 ### Chart / Role
 

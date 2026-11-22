@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, library data)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: library folders must be mounted into the container, and they should be mounted read-only if Komga is only reading them (data, inferred).
+- caveat: the Spring Boot JVM needs a good amount of RAM for large libraries, and thumbnail generation is CPU-heavy on first scan (resource, inferred).
+
 ## Fields
 ### Chart / Role
 

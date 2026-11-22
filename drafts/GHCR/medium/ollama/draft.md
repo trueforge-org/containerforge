@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /root/.ollama (pvc); /app/backend/data (pvc). Draft says model and cache dirs go to /config and /tmp, the chart mounts /root/.ollama.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart role is a sidecar running Open WebUI, so an Ollama server must be running and reachable as a separate service (external service).
+- caveat: model downloads are large and the RAM needed grows with the model, and GPU use depends on host hardware (resource, inferred).
+- caveat: the image is `latest`, so the Open WebUI version changes without notice (upstream status).
+
 ## Fields
 ### Chart / Role
 

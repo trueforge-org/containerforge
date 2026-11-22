@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond /config (configmap and optional sidecar pvc)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the chart's gatus-sidecar has no ContainerForge app yet, so the sidecar must be dropped or built separately (spec).
+- caveat: monitoring checks are defined in a YAML config file that the user must write to /config before the service does anything useful (spec).
+- caveat: the upstream project ships no binaries, so both architectures are compiled from Go source (spec).
+
 ## Fields
 ### Chart / Role
 

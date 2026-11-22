@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /audiobooks and /metadata (pvc, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: ffmpeg is needed at runtime, and transcoding or large library scans can use a lot of CPU and RAM (inferred).
+- caveat: initial admin user creation happens in the web UI on first start (inferred).
+- caveat: the library paths (audiobooks and metadata) must be mounted, and port 80 needs a rootless change before the container can run as non-root (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /logs (pvc, chart's own, default type); data at /data is the chart's own
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The chart can use either SQLite (under /config, default) or external PostgreSQL, and the choice must be made and documented; the PostgreSQL option needs its own service (from the draft).
+- caveat: The logs path is a persistent volume in the chart and must be mapped to a writable location in the image (inferred).
+- caveat: The upstream root entrypoint needs a path change to run as a non-root user (from the draft).
+
 ## Fields
 ### Chart / Role
 

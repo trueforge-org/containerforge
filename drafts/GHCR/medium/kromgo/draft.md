@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (config.yaml configmap at /config/config.yaml)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it needs a reachable Prometheus endpoint and a config.yaml the operator writes; without them it only returns errors (external service, manual setup).
+- caveat: upstream publishes container images only, so the Go binary has to be built here; the config format is tied to the 0.16.x release (upstream status, inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /jts3servermod/logs (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: it is a plug-in for a running TeamSpeak 3 server, so a TeamSpeak server must be reachable and configured separately (external service).
+- caveat: the vendor zip comes from a third-party site with an old 2024 tag; the download can disappear or change, so the pinned URL and checksum need periodic checking (upstream status).
+- caveat: UDP 9987 (voice) must be exposed for clients to connect; arm64 is not supported by the draft and should be treated as amd64-only until tested (architecture).
+
 ## Fields
 ### Chart / Role
 

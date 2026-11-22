@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/cache/nginx and /etc/nginx/tmp (emptyDir, chart-level)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the PDF tools run in the browser, so large files use the client machine's RAM and CPU rather than the container (inferred).
+- caveat: the draft uses the "simple" image variant, and the full variant with heavier features may need different build steps (inferred).
+- caveat: the release is pinned to v2.8.12 and the project releases often, so the version needs regular bumping (inferred).
+
 ## Fields
 ### Chart / Role
 

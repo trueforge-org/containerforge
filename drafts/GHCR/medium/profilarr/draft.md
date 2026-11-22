@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (config at /config is the chart's own)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Depends on a Deno runtime fetched from its own release, so the Deno version must match what upstream expects, and the download must be done for both amd64 and arm64 (inferred).
+- caveat: Profilarr is a sync tool for Radarr/Sonarr-style apps, so those services must be reachable and configured in its UI before it does anything useful (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own serverfiles
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: x86_64 only. No arm64 build exists, so arm64 hosts will not run this container.
+- caveat: The server artifacts are downloaded at runtime, so the first start is large and needs internet access (inferred).
+- caveat: RedM needs a Cfx.re license key and a txAdmin setup through its web UI on first run (inferred).
+
 ## Fields
 ### Chart / Role
 

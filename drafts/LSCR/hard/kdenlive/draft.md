@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's /config
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: video editing and rendering need substantial CPU, RAM and scratch disk (inferred)
+- caveat: hardware encoding or decoding needs device passthrough that the chart does not set (inferred)
+- caveat: arm64 kdenlive comes from the Ubuntu archive and may lag upstream (inferred)
+
 ## Fields
 ### Chart / Role
 

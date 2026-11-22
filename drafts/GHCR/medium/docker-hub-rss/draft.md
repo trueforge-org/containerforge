@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence is empty)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the draft builds from repository HEAD because no release is pinned, so builds are not reproducible (spec).
+- caveat: the service calls the Docker Hub API, so outbound internet access is required at runtime (inferred).
+- caveat: the chart tag is latest, so the image can change under the same tag (spec).
+
 ## Fields
 ### Chart / Role
 

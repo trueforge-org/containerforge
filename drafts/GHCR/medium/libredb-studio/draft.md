@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the listed binary is a desktop AppImage, which does not run as a server, so the container must be built from the Next.js source rather than that link (upstream status).
+- caveat: it connects to user-supplied databases, which must be reachable from the container, and credentials are entered in the UI (external service).
+
 ## Fields
 ### Chart / Role
 

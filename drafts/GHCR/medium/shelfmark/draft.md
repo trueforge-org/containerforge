@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own config at /config
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The apt converter and download tools are not named in the draft, so the image size and the list of tools need checking before porting (inferred).
+- caveat: Lite versus full image scope is unconfirmed, so the feature set users expect may differ (from the draft).
+- caveat: Download and indexer sources usually need to be configured through the UI or with API keys from the user (inferred).
+
 ## Fields
 ### Chart / Role
 

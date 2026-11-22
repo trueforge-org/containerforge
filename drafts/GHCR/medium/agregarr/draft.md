@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (/app/config from chart)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the yarn build needs internet access at image build time and the source is large, so the first build is slow (inferred).
+- caveat: media-server and request-service connections (for example Plex, Jellyfin or TMDB keys) must be entered in the UI after first start (inferred).
+- caveat: config lives under the /app/config mount, so that path must be provided or settings are lost on recreate (inferred).
+
 ## Fields
 ### Chart / Role
 

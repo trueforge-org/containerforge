@@ -61,6 +61,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /var/lib/odoo and /mnt/extra-addons (chart-added, pvc); odoo.conf (configmap, read-only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: requires a running PostgreSQL server; the database must exist before Odoo starts (manual setup)
+- caveat: the draft uses a nightly .deb, not a pinned release, so builds may not be reproducible and can break without notice (inferred)
+- caveat: Odoo 20.0 is a pre-release line, so verify it is stable enough before relying on it (inferred)
+- caveat: first start initialises the database and needs the web setup to be completed; the initial master password must be set (inferred)
+
 ## Fields
 ### Chart / Role
 

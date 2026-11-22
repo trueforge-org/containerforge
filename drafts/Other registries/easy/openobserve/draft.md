@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart-added, pvc); draft says data dir is /config, chart uses /data, so this mismatches
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: first start needs admin credentials set through environment variables; the default login must be changed in the UI or config (inferred)
+- caveat: ingestion volume can grow the data directory quickly, so plan disk space (inferred)
+- caveat: arm64 is a separate tarball, so the two architectures must be verified independently (inferred)
+
 ## Fields
 ### Chart / Role
 

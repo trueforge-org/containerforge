@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (only /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there is no upstream release binary, so the Go backend is compiled here and the bundled frontend may need a node build step the draft does not cover (inferred).
+- caveat: the trace confidence is low, so the upstream Dockerfile and build steps should be rechecked before porting (upstream status).
+- caveat: podcast downloads grow without limit, so the downloads folder needs enough disk (resource).
+
 ## Fields
 ### Chart / Role
 

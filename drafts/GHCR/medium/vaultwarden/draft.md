@@ -60,6 +60,15 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own data at /data
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The Rust build is long on both architectures, so builds are slow.
+- caveat: Bitwarden clients require HTTPS, so a TLS reverse proxy in front of the container is needed for normal use (inferred).
+- caveat: The admin panel needs an admin token set in the configuration, which is a manual step (inferred).
+- caveat: The sidecar row is a fork with SSO from a different author, so it is not the same code base as the main row (from the draft).
+
 ## Fields
 ### Chart / Role
 

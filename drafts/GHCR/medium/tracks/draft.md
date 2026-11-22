@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (persistence is empty)
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The draft describes Rails 3.3 on Ruby, which is very old, so the gem set and Ruby version may need a lot of work on Ubuntu (inferred).
+- caveat: An external database must be provided by the user; the draft does not name the supported engines (from the draft).
+- caveat: The chart image is tagged latest, so behaviour can change without notice (inferred from the image tag).
+
 ## Fields
 ### Chart / Role
 

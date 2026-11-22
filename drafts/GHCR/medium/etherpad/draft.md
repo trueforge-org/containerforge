@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/etherpad-lite/var (pvc, chart-level; draft says /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL is optional in the chart, and the default embedded database is not suited to a multi-user production install (inferred).
+- caveat: the admin UI build adds build time to the pnpm build (inferred).
+- caveat: an admin password must be set in the settings file before the admin UI is usable (inferred).
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /etc/linkding/data (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the first admin account has to be created from a shell inside the container (manual setup, inferred).
+- caveat: gunicorn and the background task runner are two processes, so a small supervisor or start script is needed; a single-process start hides one of them (inferred).
+
 ## Fields
 ### Chart / Role
 

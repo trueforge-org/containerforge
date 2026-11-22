@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (cluster-only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the operator needs its CRDs installed in the cluster; it does nothing standalone (inferred)
+- caveat: the privileged mover uses an OpenShift SCC by default, so non-OpenShift clusters need a different privileged configuration (inferred)
+- caveat: the operator release only carries kubectl plugin tarballs, so the helper binaries (rclone, restic, syncthing) must be built or fetched at image build time (inferred)
+
 ## Fields
 ### Chart / Role
 

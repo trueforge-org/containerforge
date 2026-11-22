@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /app/config (pvc); many read-only configmap subPath mounts under /app/config and /dummy-config. Draft says config is under /config, the chart uses /app/config.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: services, widgets and API keys are configured by hand in YAML files; nothing works until those files are written (manual setup).
+- caveat: recent Next.js builds check the Host header, so the host name must be allowed through an environment setting or the UI returns errors when reached by a new name (inferred).
+
 ## Fields
 ### Chart / Role
 

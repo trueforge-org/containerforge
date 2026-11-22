@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, world and config). Draft says /config, the chart uses /data.
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the operator must accept the Mojang EULA before the server starts (licensing).
+- caveat: the server jar is fetched at runtime by the helper, so first start needs internet and a large download, and the Java heap needs enough RAM (runtime download, resource).
+- caveat: the upstream tag list is long and ambiguous, so the pinned tag needs confirming (upstream status, inferred).
+
 ## Fields
 ### Chart / Role
 

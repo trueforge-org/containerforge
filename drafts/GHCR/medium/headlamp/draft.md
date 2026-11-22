@@ -60,6 +60,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /.config (emptyDir, Memory); /headlamp/plugins (emptyDir, Memory); plugins.yaml configmap at plugin path (read-only)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: needs a kubeconfig or in-cluster access supplied by the operator; the UI is empty without a reachable Kubernetes cluster (inferred).
+- caveat: the image is built from an Electron release tarball, so the first build downloads a large per-arch archive from GitHub (runtime download at build time).
+
 ## Fields
 ### Chart / Role
 

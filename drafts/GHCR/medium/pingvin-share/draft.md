@@ -58,6 +58,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /opt/app/backend/data (pvc); /opt/app/frontend/public/img (pvc)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the first run requires creating an admin account in the browser, and the database is created by Prisma migrations on first start (manual setup, inferred).
+- caveat: uploads and the database must be mounted and writable, and they grow with use, so plan disk space (data, resource).
+
 ## Fields
 ### Chart / Role
 

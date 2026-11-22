@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-level)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: there are no release binaries, so the Go source must be compiled on both architectures (spec).
+- caveat: short-link data is stored under /data, which must be mounted to survive restarts (spec).
+- caveat: the chart tag is a short commit-style tag (version-154c581) that could not be matched to an upstream release (inferred).
+
 ## Fields
 ### Chart / Role
 

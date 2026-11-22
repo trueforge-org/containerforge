@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /bookdrop (pvc, chart-level); /app/data (pvc, chart-level, draft may move data to /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: MariaDB is a hard dependency and must be created and reachable before the first start (spec).
+- caveat: there is no release binary, so the Gradle and Angular build must run at image build time on both architectures, which is slow (spec).
+- caveat: the Spring Boot service needs a sizeable heap, so small hosts may run out of memory (inferred).
+
 ## Fields
 ### Chart / Role
 

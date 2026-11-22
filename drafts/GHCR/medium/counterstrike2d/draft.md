@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /serverdata/serverfiles (pvc, chart-level)
 - confidence: low
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the CS2D server zip is downloaded from the vendor at runtime, so it needs internet access on every fresh start unless it is cached in /config (spec).
+- caveat: the server is closed-source freeware, so its vendor license terms apply and the download link may change (inferred).
+- caveat: the chart tag is latest, so the server version can change between pulls (spec).
+
 ## Fields
 ### Chart / Role
 

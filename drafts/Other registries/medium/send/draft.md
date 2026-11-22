@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /uploads (chart-added, pvc); draft says uploads go under /config, which mismatches
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Valkey or Redis is a hard dependency that must be running and reachable (inferred from the dependency list)
+- caveat: uploads are stored on disk and can fill the volume quickly; upload size limits need configuring (inferred)
+- caveat: the chart tag is latest, a rolling tag, and the upstream GitLab project has limited visible activity (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc, chart-level; draft says /config)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the Perl CPAN dependencies are installed with cpanm at build time, which is slow and needs internet access (inferred).
+- caveat: Convos is an IRC web client, so outbound access to the IRC networks it connects to must be allowed (inferred).
+- caveat: the first user is registered in the web UI after start (inferred).
+
 ## Fields
 ### Chart / Role
 

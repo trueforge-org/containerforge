@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (pvc). Draft says state goes to /config, the chart uses /data.
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: the N8N_ENCRYPTION_KEY must be set once and kept, since losing it makes stored credentials unreadable (data, inferred).
+- caveat: the npm install is large and slow, so builds take a long time and need enough RAM and disk (resource, inferred).
+
 ## Fields
 ### Chart / Role
 

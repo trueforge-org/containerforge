@@ -57,6 +57,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /run, /var/lib/nginx, /var/log (emptyDir); data at /var/www/html/data is the chart's own
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Draft lists only php-fpm; a web server (nginx or similar) in front of it is probably also needed (inferred).
+- caveat: Uploads and SQLite data sit under the chart's /var/www/html/data path, which must be moved to or mounted from /config so it survives image updates (inferred).
+
 ## Fields
 ### Chart / Role
 

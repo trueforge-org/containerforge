@@ -59,6 +59,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: /data (chart-added, pvc); /etc/minio/certs (chart-added, only when tls enabled, type not set so default pvc); /minio.license (secret); draft says data goes under /config, which mismatches
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: a MinIO AIStor licence key is required and is mounted from a secret at /minio.license; the container will not run without it (manual setup)
+- caveat: the vendor binary download on dl.min.io may need an account or licence, and redistribution in an image may be restricted (inferred)
+- caveat: a production setup needs several drives or nodes for erasure coding; a single drive is only good for testing (inferred)
+
 ## Fields
 ### Chart / Role
 

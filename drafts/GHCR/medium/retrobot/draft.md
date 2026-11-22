@@ -57,6 +57,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own data at /retrobot/data
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The bot needs its own API or bot token from the chat service it connects to, supplied by the user (inferred).
+- caveat: The upstream base is an old alpine:3.16, so the yarn install may need native build tools when ported to Ubuntu (inferred).
+- caveat: The image exposes no port, so a health check cannot rely on an HTTP endpoint (inferred).
+
 ## Fields
 ### Chart / Role
 

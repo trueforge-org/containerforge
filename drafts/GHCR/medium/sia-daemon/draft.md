@@ -61,6 +61,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own datadirectory at /sia-data
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: Upstream siad is a legacy daemon and has been superseded by newer Sia daemons, so long-term support is a concern (inferred).
+- caveat: A wallet seed must be created or imported through the API or UI on first run, which is a manual step (inferred).
+- caveat: Initial blockchain sync can take a long time and a lot of disk (inferred).
+
 ## Fields
 ### Chart / Role
 

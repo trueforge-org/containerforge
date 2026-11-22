@@ -58,6 +58,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none (PostgreSQL is external)
 - confidence: medium
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: PostgreSQL must be created and reachable before the first start (spec).
+- caveat: the upstream build stage uses an old alpine base (3.13), so that base must be replaced and the Go and Node stages verified (spec).
+- caveat: account confirmation and notification emails need an SMTP server that the user must configure (inferred).
+
 ## Fields
 ### Chart / Role
 

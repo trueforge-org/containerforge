@@ -60,6 +60,14 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none beyond chart's own serverfiles
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: The data pack is a large download from the upstream release, so the image and first start are heavy (inferred).
+- caveat: The arm64 build is a source compile with SDL2 and curl libraries, which is a separate and slower build (from the draft).
+- caveat: Game traffic is UDP on 26000, so the host port must be forwarded as UDP (from the draft).
+
 ## Fields
 ### Chart / Role
 

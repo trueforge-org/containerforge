@@ -59,6 +59,13 @@ What the TrueCharts values.yaml (expanded from the common library defaults) sugg
 - extra-persistence: none
 - confidence: high
 
+## Other potential caveats
+
+Things to watch for beyond the security settings. `(inferred)` marks a guess; treat these as things to verify.
+
+- caveat: only useful inside a Kubernetes cluster with a CSI driver and the csi-addons CRDs installed (inferred)
+- caveat: the webhook uses TLS, so a certificate must be provided, typically by cert-manager (inferred)
+
 ## Fields
 ### Chart / Role
 
