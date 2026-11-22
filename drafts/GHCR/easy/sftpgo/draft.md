@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/drakkan/sftpgo
+- **Documentation**: https://docs.sftpgo.com/latest/
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/tphakala/birdnet-go
+- **Documentation**: https://github.com/tphakala/birdnet-go/wiki
 
 ## Fields
 

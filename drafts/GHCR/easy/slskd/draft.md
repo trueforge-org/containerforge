@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/slskd/slskd
+- **Documentation**: https://github.com/slskd/slskd/blob/master/docs/config.md
 
 ## Fields
 

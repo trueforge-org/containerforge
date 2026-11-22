@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/go-shiori/shiori
+- **Documentation**: https://github.com/go-shiori/shiori/blob/master/docs/index.md
 
 ## Fields
 

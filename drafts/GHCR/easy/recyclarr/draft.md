@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/recyclarr/recyclarr
+- **Documentation**: https://recyclarr.dev/
 
 ## Fields
 

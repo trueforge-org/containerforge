@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Suwayomi/Suwayomi-Server
+- **Documentation**: https://github.com/Suwayomi/Suwayomi-Server/wiki/Configuring-Tachidesk-Server
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/MiguelNdeCarvalho/speedtest-exporter
+- **Documentation**: https://docs.miguelndecarvalho.pt/projects/speedtest-exporter/
 
 ## Fields
 

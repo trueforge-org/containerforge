@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/prometheus-pve/prometheus-pve-exporter
+- **Documentation**: https://github.com/prometheus-pve/prometheus-pve-exporter/wiki
 
 ## Fields
 

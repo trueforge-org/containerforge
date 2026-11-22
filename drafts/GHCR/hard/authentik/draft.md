@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/goauthentik/authentik
+- **Documentation**: https://docs.goauthentik.io
 
 ## Fields
 

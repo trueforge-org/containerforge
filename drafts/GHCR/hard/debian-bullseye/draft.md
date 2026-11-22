@@ -16,6 +16,7 @@
 ## Links
 
 - **Website**: https://www.debian.org/
+- **Documentation**: https://www.debian.org/support
 
 ## Fields
 

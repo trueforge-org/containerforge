@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/benbusby/whoogle-search
+- **Documentation**: https://github.com/benbusby/whoogle-search/wiki
 
 ## Fields
 

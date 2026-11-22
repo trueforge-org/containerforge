@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/fclairamb/solidping
+- **Documentation**: https://solidping.io/docs/
 
 ## Fields
 
