@@ -13,6 +13,19 @@
 - **Rows**: 10
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
+## Links
+
+- **Source repository**: https://github.com/mozilla-firefox/firefox
+- **Source repository**: https://github.com/brave/brave-browser
+- **Website**: https://www.chromium.org
+- **Website**: https://www.google.com/chrome/
+- **Website**: https://www.microsoft.com/edge
+- **Source repository**: https://github.com/FreeRDP/Remmina
+- **Website**: https://gitlab.torproject.org/tpo/applications/tor-browser
+- **Website**: https://vivaldi.com
+- **Website**: https://code.videolan.org/videolan/vlc
+- **Website**: https://gitlab.xfce.org/xfce
+
 ## Fields
 
 ### Chart / Role

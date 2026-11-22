@@ -13,6 +13,11 @@
 - **Rows**: 2
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
+## Links
+
+- **Source repository**: https://github.com/dani-garcia/vaultwarden
+- **Source repository**: https://github.com/timshel/vaultwarden
+
 ## Fields
 
 ### Chart / Role

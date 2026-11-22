@@ -13,6 +13,12 @@
 - **Rows**: 5
 - **About**: one chart from `docs/project-fireball.md`, the list of container images that TrueCharts uses and ContainerForge does not have yet.
 
+## Links
+
+- **Source repository**: https://github.com/goauthentik/authentik
+- **Source repository**: https://github.com/kiwigrid/k8s-sidecar
+- **Source repository**: https://github.com/maxmind/geoipupdate
+
 ## Fields
 
 ### Chart / Role
