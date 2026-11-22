@@ -17,6 +17,7 @@
 
 - **Source repository**: https://github.com/dani-garcia/vaultwarden
 - **Source repository**: https://github.com/timshel/vaultwarden
+- **Documentation**: https://github.com/dani-garcia/vaultwarden/wiki
 
 ## Fields
 

@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/xwiki/xwiki-platform
+- **Documentation**: https://www.xwiki.org/xwiki/bin/view/Documentation/
 
 ## Fields
 

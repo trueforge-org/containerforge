@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/openobserve/openobserve
+- **Documentation**: https://openobserve.ai/docs/
+- **Website**: https://openobserve.ai/
 
 ## Fields
 

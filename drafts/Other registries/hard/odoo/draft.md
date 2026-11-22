@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/odoo/odoo
+- **Documentation**: https://www.odoo.com/documentation
+- **Website**: https://www.odoo.com/
 
 ## Fields
 

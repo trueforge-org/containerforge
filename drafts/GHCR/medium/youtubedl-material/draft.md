@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Tzahi12345/YoutubeDL-Material
+- **Documentation**: https://github.com/Tzahi12345/YoutubeDL-Material/wiki
 
 ## Fields
 

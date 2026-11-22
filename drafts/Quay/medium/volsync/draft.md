@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/backube/volsync
+- **Documentation**: https://volsync.readthedocs.io/
 
 ## Fields
 

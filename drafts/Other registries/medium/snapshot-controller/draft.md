@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/kubernetes-csi/external-snapshotter
+- **Documentation**: https://kubernetes-csi.github.io/docs/external-snapshotter.html
 
 ## Fields
 

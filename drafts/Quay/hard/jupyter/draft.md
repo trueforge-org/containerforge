@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/jupyter/docker-stacks
+- **Documentation**: https://docs.jupyter.org/en/latest/
 
 ## Fields
 

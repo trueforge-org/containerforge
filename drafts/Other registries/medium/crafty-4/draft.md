@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://gitlab.com/crafty-controller/crafty-4
+- **Documentation**: https://docs.craftycontrol.com/
+- **Website**: https://craftycontrol.com/
 
 ## Fields
 

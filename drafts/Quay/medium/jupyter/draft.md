@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/jupyter/notebook
+- **Documentation**: https://docs.jupyter.org/en/latest/
 
 ## Fields
 

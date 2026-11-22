@@ -15,7 +15,7 @@
 
 ## Links
 
-- No application links recorded in `docs/project-fireball.md`.
+- **Documentation**: https://docs.renovatebot.com/
 
 ## Fields
 

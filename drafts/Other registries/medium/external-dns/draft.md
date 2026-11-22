@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/kubernetes-sigs/external-dns
+- **Documentation**: https://kubernetes-sigs.github.io/external-dns/
 
 ## Fields
 

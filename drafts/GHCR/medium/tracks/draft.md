@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://github.com/tracksapp/tracks
+- **Documentation**: https://getontracks.org/manual
+- **Website**: https://getontracks.org/
 
 ## Fields
 

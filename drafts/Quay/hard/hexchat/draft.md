@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/hexchat/hexchat
+- **Documentation**: https://hexchat.readthedocs.io/
 
 ## Fields
 

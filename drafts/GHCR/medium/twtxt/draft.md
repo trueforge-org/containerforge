@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://git.mills.io/prologic/twtxt/releases
+- **Documentation**: https://twtxt.readthedocs.io/
 
 ## Fields
 

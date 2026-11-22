@@ -16,6 +16,8 @@
 ## Links
 
 - **Source repository**: https://gitlab.com/xonotic/xonotic
+- **Documentation**: https://gitlab.com/xonotic/xonotic/-/wikis/home
+- **Website**: https://xonotic.org/
 
 ## Fields
 

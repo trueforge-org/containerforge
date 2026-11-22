@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/zadam/trilium
+- **Documentation**: https://docs.triliumnotes.org/user-guide/
 
 ## Fields
 

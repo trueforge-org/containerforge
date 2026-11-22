@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/selkies-project/selkies
+- **Documentation**: https://docs.linuxserver.io/images/docker-webtop/
 
 ## Fields
 

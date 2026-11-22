@@ -16,6 +16,7 @@
 ## Links
 
 - **Source repository**: https://github.com/Wizarrrr/wizarr
+- **Documentation**: https://docs.wizarr.dev/
 
 ## Fields
 
