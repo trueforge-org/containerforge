@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: npm for asset build (inferred)
 - other: Hex/rebar mix deps (inferred), teslamate v4.5.0 source build
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 4000/http (web UI)
+
 ## Fields
 ### Chart / Role
 

@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node (client build), React client npm deps (inferred)
 - other: fireshare v1.9.3 source (GitHub release)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (web UI, inferred)
+
 ## Fields
 ### Chart / Role
 

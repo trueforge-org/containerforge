@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: gotty (inferred, web terminal in wrapper), RedM server artifacts fetched at runtime (x86_64 only)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 30120/udp (game), 30120/tcp (game, inferred), 40120/http (txAdmin, inferred)
+
 ## Fields
 ### Chart / Role
 

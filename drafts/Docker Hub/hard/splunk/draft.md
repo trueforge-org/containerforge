@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Splunk Enterprise amd64 tgz from download.splunk.com
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8000/http (web UI), 8089/https (management API), 9997/tcp (forwarder receiving)
+
 ## Fields
 ### Chart / Role
 

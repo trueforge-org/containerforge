@@ -44,6 +44,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: upstream release tarball (prebuilt UI, no build)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9000/http (web UI), 9443/https (web UI TLS), 8000/tcp (edge agent tunnel)
+
 ## Fields
 ### Chart / Role
 

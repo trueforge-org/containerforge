@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node (python-node sibling), repo npm deps via npm install and npm run build
 - other: git clone of jez500/bender tag 1.0.3 (version needs checking)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none | none
 - other: fleet-2.3.3.jar release asset (runs on java17 or java21 base)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (fleet server web UI and API)
+
 ## Fields
 ### Chart / Role
 

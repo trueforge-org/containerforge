@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Collabora apt repo packages (vendor pipeline), chroot jail setup
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9980/http (inferred, CODE server; TLS usually terminated by a proxy)
+
 ## Fields
 ### Chart / Role
 

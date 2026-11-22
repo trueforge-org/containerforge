@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: bun (inferred) for frontend build
 - other: .NET 8 SDK/runtime (ASP.NET 8) built from source
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8000/http (web UI and API, inferred)
+
 ## Fields
 ### Chart / Role
 

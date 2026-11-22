@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: npm ci and webpack build (Node 22)
 - other: cgm-remote-monitor v15.0.9 source; MongoDB needed as an external service (not a package here)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 1337/http (web UI and API)
+
 ## Fields
 ### Chart / Role
 

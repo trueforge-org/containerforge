@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: crafty-4 v4.11.1 source; Java runtime via java21 sibling base (not apt)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8443/https (web panel), 8000/http (web panel HTTP, inferred), 25565/tcp (Minecraft game port of spawned servers, inferred)
+
 ## Fields
 ### Chart / Role
 

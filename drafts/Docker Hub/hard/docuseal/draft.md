@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node (asset build, inferred)
 - other: Ruby 3.x runtime and bundler gems (inferred, ruby:alpine upstream); docusealco/docuseal 3.3.8 source
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (web UI)
+
 ## Fields
 ### Chart / Role
 

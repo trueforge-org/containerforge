@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: dotnet publish in SDK build stage, git clone of iPromKnight/zilean
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8181/http (API and web UI, inferred)
+
 ## Fields
 ### Chart / Role
 

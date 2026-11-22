@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: closed-source Ace Stream engine (vendor Linux x86_64 download, amd64 only)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (nginx front, inferred), 6878/http (engine HTTP API, inferred)
+
 ## Fields
 ### Chart / Role
 

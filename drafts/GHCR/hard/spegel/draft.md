@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: prebuilt Go binary from release tarballs
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5000/http (OCI registry mirror, inferred), 9090/http (metrics, inferred), 5001/tcp (libp2p bootstrap, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: ztncui web UI deps (inferred) | none
 - other: Go toolchain to build helpers from source (inferred); compiled from source
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3443/https (ztncui web UI), 9993/udp (zerotier-one peer traffic)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Java 17 runtime (java17 base); jenkins.war 2.544 from get.jenkins.io
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (web UI), 50000/tcp (agent JNLP)
+
 ## Fields
 ### Chart / Role
 

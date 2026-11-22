@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: web UI build (inferred)
 - other: none
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8971/https (authenticated web UI via nginx), 5000/http (internal unauthenticated web API), 8554/tcp (RTSP restream), 8555/tcp (WebRTC), 8555/udp (WebRTC)
+
 ## Fields
 ### Chart / Role
 

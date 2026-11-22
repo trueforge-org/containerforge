@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none | none
 - other: prebuilt Qt .txz tarball (bundles its own runtime), amd64 and arm64
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (desktop web UI, inferred), 3001/https (desktop web UI, inferred), 8080/http (calibre content server, inferred)
+
 ## Fields
 ### Chart / Role
 

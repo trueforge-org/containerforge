@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: server-release.jar release download; JVM from java17 sibling
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 6567/udp (game), 6567/tcp (game, inferred), 8080/http (gotty web console from ich777 wrapper, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node for Phoenix asset build (inferred)
 - other: Erlang/OTP and Elixir toolchain via mix (build stage, inferred); mix release of firezone 0.7.36
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (portal, inferred), 443/https (portal, inferred), 51820/udp (WireGuard)
+
 ## Fields
 ### Chart / Role
 

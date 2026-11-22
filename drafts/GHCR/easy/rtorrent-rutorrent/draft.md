@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: rtorrent_exporter Go release tarball
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (ruTorrent web UI, inferred), 9135/http (rtorrent exporter metrics, inferred), 45000/tcp (BitTorrent peer, inferred)
+
 ## Fields
 ### Chart / Role
 

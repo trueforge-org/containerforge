@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: Vue frontend build (build stage only, inferred)
 - other: git clone or release source tag 2.7.6
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (gunicorn/nginx web UI, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: traccar release zip (bundled runtime)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8082/http (web UI and API), 5055/tcp (inferred, example device port; server opens many device ports)
+
 ## Fields
 ### Chart / Role
 

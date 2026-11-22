@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: kubo release tarball (Go binary)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 4001/tcp (swarm), 4001/udp (swarm QUIC), 5001/http (API), 8080/http (gateway)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: slskd .NET release zip (.NET runtime bundling unconfirmed)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5030/http (web UI), 5031/https (web UI over TLS, optional), 50300/tcp (peer listener)
+
 ## Fields
 ### Chart / Role
 

@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: npm (inferred, frontend assets)
 - other: Go toolchain (inferred, builder stage)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (badge endpoint, inferred), 8888/http (metrics, inferred)
+
 ## Fields
 ### Chart / Role
 

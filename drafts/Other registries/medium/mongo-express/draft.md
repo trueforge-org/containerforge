@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: mongo-express npm dependencies (inferred, build stage)
 - other: mongo-express v1.1.0-rc-4 source
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8081/http (web UI)
+
 ## Fields
 ### Chart / Role
 

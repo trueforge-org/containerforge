@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: npm install of release source (deps from package.json, inferred)
 - other: release source tarball
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 4326/http (web admin UI, inferred)
+
 ## Fields
 ### Chart / Role
 

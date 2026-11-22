@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: nodejs, npm (inferred) for asset build
 - other: composer (inferred); spec conflicts (apt PHP vs FrankenPHP copy), check upstream
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (inferred, FrankenPHP web server)
+
 ## Fields
 ### Chart / Role
 

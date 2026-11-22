@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: BackupPC 4.4.0 release tarball
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (BackupPC web UI via Apache), 443/https (inferred), 22/tcp (sshd for backup clients)
+
 ## Fields
 ### Chart / Role
 

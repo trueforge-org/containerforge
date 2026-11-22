@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: Node 22 yarn monorepo (inferred)
 - other: Rust toolchain for napi modules (source build)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3010/http (web UI and API)
+
 ## Fields
 ### Chart / Role
 

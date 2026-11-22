@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: OpenRA AppImage (amd64); .NET SDK source build (arm64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 1234/tcp (game server, inferred)
+
 ## Fields
 ### Chart / Role
 

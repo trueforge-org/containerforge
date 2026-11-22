@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: pihole-FTL v6.9 release binary (amd64/arm64); pi-hole shell scripts (GitHub, inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 53/udp (DNS), 53/tcp (DNS), 80/http (web UI and API), 443/https (web UI, TLS)
+
 ## Fields
 ### Chart / Role
 

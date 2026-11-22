@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: TShock 6.2.1 release zip download (amd64 and arm64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 7777/tcp (game server), 7878/http (TShock REST API, inferred)
+
 ## Fields
 ### Chart / Role
 

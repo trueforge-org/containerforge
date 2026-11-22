@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: CERN ROOT v6.40.04 release tarball (ubuntu26.04 build) as an alternative
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8888/http (Jupyter notebook server, inferred)
+
 ## Fields
 ### Chart / Role
 

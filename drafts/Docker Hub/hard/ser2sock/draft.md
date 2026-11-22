@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: ser2sock source compiled with autotools (nutechsoftware)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 2000/tcp (serial-to-socket bridge, default raw socket port, inferred; user-configurable)
+
 ## Fields
 ### Chart / Role
 

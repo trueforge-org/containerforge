@@ -59,6 +59,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: google-chrome .deb (dl.google.com), vivaldi .deb, tor-browser tarball (torproject)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (neko web UI, inferred), 52000-52100/udp (WebRTC media, inferred)
+
 ## Fields
 ### Chart / Role
 

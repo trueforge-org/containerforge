@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node, yarn (build-time, inferred)
 - other: git clone of standardnotes/app monorepo, packages/web build
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (web UI, inferred)
+
 ## Fields
 ### Chart / Role
 

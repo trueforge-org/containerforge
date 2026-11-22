@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: netdata gz.run static installer (x86_64/aarch64 release assets)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 19999/http (dashboard and API)
+
 ## Fields
 ### Chart / Role
 

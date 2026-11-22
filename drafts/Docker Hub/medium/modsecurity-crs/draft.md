@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: OWASP CRS release tarball (coreruleset)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (proxied web server), 443/https (TLS, inferred)
+
 ## Fields
 ### Chart / Role
 

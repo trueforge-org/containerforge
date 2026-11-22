@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: prebuilt hbbs/hbbr Rust binaries from release zips
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 21115/tcp (hbbs NAT test, inferred), 21116/tcp (hbbs ID/heartbeat), 21116/udp (hbbs ID/heartbeat), 21117/tcp (hbbr relay), 21118/http (hbbs web client, inferred), 21119/http (hbbr web client, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: UrbanTerror43_ded.tar.gz download (amd64); game data fetched at start; arm64 needs source compile
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 27960/udp (game server)
+
 ## Fields
 ### Chart / Role
 

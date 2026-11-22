@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: pnpm (inferred), Next.js app deps and build
 - other: none
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 7575/http (web UI), 6379/tcp (bundled Redis, internal, inferred)
+
 ## Fields
 ### Chart / Role
 

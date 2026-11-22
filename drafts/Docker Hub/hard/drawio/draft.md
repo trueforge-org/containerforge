@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node, npm (inferred, to build draw.war from source)
 - other: jgraph/drawio v32.7.4 source build (draw.war); JDK 11 from java11 runtime image
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (Tomcat, draw.io web app), 8000/http (inferred, export server)
+
 ## Fields
 ### Chart / Role
 

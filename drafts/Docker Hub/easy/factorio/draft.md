@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Factorio headless vendor tarball (amd64 only)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 34197/udp (game), 27015/tcp (rcon)
+
 ## Fields
 ### Chart / Role
 

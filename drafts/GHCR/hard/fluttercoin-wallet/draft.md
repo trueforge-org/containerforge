@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: fluttercoind headless release zip (amd64 only)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9998/tcp (fluttercoind JSON-RPC, inferred), 9999/tcp (P2P, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: vendor zip per arch (Agent_Linux64, Agent_LinuxARM64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8090/http (web UI), 3478/udp (TURN, inferred)
+
 ## Fields
 ### Chart / Role
 

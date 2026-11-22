@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: composer for Laravel deps (inferred), source from v2.6.0 tag
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (web UI, inferred), 9000/tcp (PHP-FPM, internal, inferred)
+
 ## Fields
 ### Chart / Role
 

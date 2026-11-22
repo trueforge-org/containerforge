@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: DistroAV x86_64 .deb (amd64 only), NDI runtime from ndi.video
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (KasmVNC web GUI, inferred), 3001/https (KasmVNC web GUI TLS, inferred), 5900/tcp (VNC, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Firefox tarball from download.mozilla.org (amd64 and arm64); kasmvnc or xvfb sibling
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 6901/http (noVNC web desktop, inferred), 5901/tcp (VNC, inferred)
+
 ## Fields
 ### Chart / Role
 

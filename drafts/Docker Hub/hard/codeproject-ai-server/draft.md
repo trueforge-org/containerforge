@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: CodeProject.AI vendor Ubuntu .deb per arch (.NET 9 server, Python modules download at runtime)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 32168/http (web UI and API)
+
 ## Fields
 ### Chart / Role
 

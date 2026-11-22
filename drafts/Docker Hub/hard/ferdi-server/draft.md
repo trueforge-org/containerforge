@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node runtime and ferdium-server npm deps (inferred, successor fork)
 - other: none
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3333/http (API and web UI)
+
 ## Fields
 ### Chart / Role
 

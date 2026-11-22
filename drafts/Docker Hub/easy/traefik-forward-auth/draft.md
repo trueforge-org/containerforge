@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Go toolchain for arm64 source build; amd64 release binary
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 4181/http (auth endpoint)
+
 ## Fields
 ### Chart / Role
 

@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: CS2D server zip downloaded from vendor at runtime
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 36963/udp (game server) (inferred), 36963/tcp (server port) (inferred)
+
 ## Fields
 ### Chart / Role
 

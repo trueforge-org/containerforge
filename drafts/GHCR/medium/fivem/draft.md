@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Cfx.re runtime artifact fetched at runtime (x86_64 only); gotty binary (inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 30120/tcp (game server), 30120/udp (game server), 40120/http (txAdmin) (inferred), 8080/http (gotty web terminal) (inferred)
+
 ## Fields
 ### Chart / Role
 

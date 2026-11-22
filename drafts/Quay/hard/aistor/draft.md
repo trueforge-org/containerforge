@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: MinIO AIStor vendor linux binary per arch from dl.min.io
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9000/http (S3 API), 9001/http (web console, inferred)
+
 ## Fields
 ### Chart / Role
 

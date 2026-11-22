@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node 18 deps and frontend build (inferred)
 - other: MySpeed-1.0.9.zip release download
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5216/http (web UI and API)
+
 ## Fields
 ### Chart / Role
 

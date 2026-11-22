@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: vendor .deb (amd64); Go toolchain for make build-nogui (arm64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 1143/tcp (IMAP, inferred), 1025/tcp (SMTP, inferred)
+
 ## Fields
 ### Chart / Role
 

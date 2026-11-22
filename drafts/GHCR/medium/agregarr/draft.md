@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: yarn build deps, prod node_modules (inferred)
 - other: yarn
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (web UI) (inferred)
+
 ## Fields
 ### Chart / Role
 

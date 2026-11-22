@@ -44,6 +44,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: blocky release tarball per arch; k8s_gateway (CoreDNS build) release tarball per arch
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 53/udp (DNS), 53/tcp (DNS), 4000/http (web UI and API, inferred), 53/udp (k8s_gateway CoreDNS, inferred), 53/tcp (k8s_gateway CoreDNS, inferred)
+
 ## Fields
 ### Chart / Role
 

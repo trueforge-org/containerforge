@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: homebridge (inferred plugins)
 - other: homebridge-apt-pkg .deb (vendor), s6-overlay (inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8581/http (web UI), 51826/tcp (HomeKit HAP, inferred), 5353/udp (mDNS, inferred)
+
 ## Fields
 ### Chart / Role
 

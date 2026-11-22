@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: FMD2 2.0.34.5 Windows 7z release (amd64 only; Wine prefix in /config); linuxserver KasmVNC base
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5800/http (inferred, noVNC web client), 5900/tcp (inferred, VNC)
+
 ## Fields
 ### Chart / Role
 

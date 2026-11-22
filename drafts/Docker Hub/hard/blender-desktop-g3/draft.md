@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: blender-5.0.1 tarball from download.blender.org (amd64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 6901/http (noVNC web desktop, inferred), 5901/tcp (VNC, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node + npm/pnpm (inferred, Next.js standalone build); bun (inferred, row 2 job-server compile)
 - other: bun toolchain for `bun build --compile`; external Postgres
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (nextjs web UI, inferred), 3001/http (job server API, inferred)
+
 ## Fields
 ### Chart / Role
 

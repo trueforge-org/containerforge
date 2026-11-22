@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: less, rtlcss (inferred, asset build)
 - other: nightly odoo_20.0.latest_all.deb; PostgreSQL is a separate dependency
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8069/http (web UI), 8072/http (websocket and longpolling, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Velocity or BungeeCord jar fetched at runtime by itzg mc-image-helper; JVM from java17 or java25 sibling
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 25577/tcp (proxy game port)
+
 ## Fields
 ### Chart / Role
 

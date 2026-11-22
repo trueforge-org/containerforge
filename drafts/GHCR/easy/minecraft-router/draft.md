@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: release tarball (mc-router_1.56.5_linux_<arch>.tar.gz)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 25565/tcp (Minecraft proxy), 25564/http (API, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: frontend build to static files (inferred)
 - other: romm 5.4.1 source release
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (web UI and API, inferred)
+
 ## Fields
 ### Chart / Role
 

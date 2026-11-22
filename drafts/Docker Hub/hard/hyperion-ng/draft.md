@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Hyperion 2.2.0 .deb per arch from release
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8090/http (web UI, inferred), 8092/https (web UI TLS, inferred), 19444/tcp (JSON server, inferred), 19400/tcp (FlatBuffers server, inferred)
+
 ## Fields
 ### Chart / Role
 

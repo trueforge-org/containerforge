@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: ZoneMinder 1.38.6 .deb download (amd64 and arm64 release assets, debug package name)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (web UI), 443/https (inferred)
+
 ## Fields
 ### Chart / Role
 

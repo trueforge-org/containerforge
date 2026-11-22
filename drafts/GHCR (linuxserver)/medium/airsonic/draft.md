@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none | none
 - other: airsonic.war release download (runs on java17 base)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 4040/http (web UI and Subsonic API)
+
 ## Fields
 ### Chart / Role
 

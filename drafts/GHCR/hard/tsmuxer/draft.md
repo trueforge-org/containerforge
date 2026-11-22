@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: tsMuxer-2.7.0-linux.zip static binary (amd64); arm64 needs cmake and g++ source build (inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5800/http (noVNC web client, inferred), 5900/tcp (VNC, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: rstudio-server .deb from posit.co (no Ubuntu archive package)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8787/http (RStudio Server web UI)
+
 ## Fields
 ### Chart / Role
 

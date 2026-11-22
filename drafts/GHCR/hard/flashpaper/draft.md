@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: composer (inferred), FlashPaper v2.6.0 source
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (nginx and PHP-FPM web app, inferred)
+
 ## Fields
 ### Chart / Role
 

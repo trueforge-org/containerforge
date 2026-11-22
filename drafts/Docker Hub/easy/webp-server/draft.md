@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: release binary webp-server-linux-{amd64,arm64} 0.16.2
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3333/http (image server)
+
 ## Fields
 ### Chart / Role
 

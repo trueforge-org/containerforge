@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: yarn, puppeteer (inferred), repo npm deps
 - other: headless Chromium binary from a non-snap source (inferred), git clone of Flowko/website-shot
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (inferred)
+
 ## Fields
 ### Chart / Role
 

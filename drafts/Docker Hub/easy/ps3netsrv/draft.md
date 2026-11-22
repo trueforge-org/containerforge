@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: amd64 release zip; arm64 C source build
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 38008/tcp (PS3 game-folder network share)
+
 ## Fields
 ### Chart / Role
 

@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: static docker-29.10.0 tarball (amd64 and arm64; bundles dockerd, containerd, runc)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 2375/tcp (inferred, Docker daemon API without TLS), 2376/tcp (inferred, Docker daemon API with TLS)
+
 ## Fields
 ### Chart / Role
 

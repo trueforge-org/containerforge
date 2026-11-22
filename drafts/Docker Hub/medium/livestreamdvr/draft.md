@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: client deps (inferred)
 - other: LiveStreamDVR release zip (2025-01-21 build)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (web UI) (inferred)
+
 ## Fields
 ### Chart / Role
 

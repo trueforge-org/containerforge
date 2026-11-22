@@ -47,6 +47,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: conda/mamba envs (inferred), Apache Spark and Java 17+ tarball (row 4), R with IRkernel (row 5), Julia (row 2), Scala/Toree (row 1)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8888/http (Jupyter server, all rows), 4040/http (Spark UI, row 4 pyspark, inferred)
+
 ## Fields
 ### Chart / Role
 

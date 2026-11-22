@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: vendor .deb (amd64 only, arm64 no)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 25/tcp (SMTP, inferred), 465/tcp (SMTPS, inferred), 587/tcp (SMTP submission, inferred), 110/tcp (POP3, inferred), 995/tcp (POP3S, inferred), 143/tcp (IMAP, inferred), 993/tcp (IMAPS, inferred), 80/http (webmail, inferred), 443/https (webmail and admin, inferred), 4040/https (admin, inferred)
+
 ## Fields
 ### Chart / Role
 

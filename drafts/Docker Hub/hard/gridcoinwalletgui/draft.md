@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: amd64 flatpak bundle from release (not apt)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5900/tcp (VNC, inferred), 6080/http (noVNC web desktop, inferred)
+
 ## Fields
 ### Chart / Role
 

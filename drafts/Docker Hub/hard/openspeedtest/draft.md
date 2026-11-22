@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Speed-Test static web assets (no public Dockerfile), served by nginx
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8080/http (nginx static web UI), 8443/https (nginx TLS, inferred)
+
 ## Fields
 ### Chart / Role
 

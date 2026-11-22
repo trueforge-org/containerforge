@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: node runtime and FSM npm deps (inferred, same image as factorioservermanager)
 - other: Factorio headless server (vendor download, needs account, x86_64 only); FSM 0.10.1 release zip (amd64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (web UI, inferred), 34197/udp (Factorio game), 27015/tcp (inferred, RCON)
+
 ## Fields
 ### Chart / Role
 

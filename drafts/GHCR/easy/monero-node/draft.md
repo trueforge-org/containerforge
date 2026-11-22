@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: monero CLI release tarball (monero-linux-x64 / armv8, v0.18.5.4)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 18080/tcp (P2P), 18081/http (RPC)
+
 ## Fields
 ### Chart / Role
 

@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: ruTorrent web UI files (git clone or release download, inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (ruTorrent web UI via nginx, inferred), 5000/tcp (rTorrent SCGI, inferred), 50000/tcp (BitTorrent peer, inferred)
+
 ## Fields
 ### Chart / Role
 

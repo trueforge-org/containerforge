@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: ring-mqtt npm app (interpreted), node runtime from python-node
 - other: go2rtc binary (streaming), s6-overlay, bashio
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 55123/http (web UI), 1984/http (go2rtc API and web, inferred), 8554/tcp (RTSP streaming, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: server row: pnpm (inferred), Node/TS server, web and CLI build
 - other: uv (ML row install tool); server row from v3.4.2 source
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 2283/http (server web UI and API), 3003/http (machine-learning service, inferred)
+
 ## Fields
 ### Chart / Role
 

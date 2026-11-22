@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: nodejs, npm (inferred) for frontend build
 - other: crates from Cargo.lock (inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3030/http (web UI and websocket)
+
 ## Fields
 ### Chart / Role
 

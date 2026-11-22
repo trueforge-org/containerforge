@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Perl runtime pulled by the vendor .deb
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9000/http (web UI and streaming), 9090/tcp (CLI), 3483/tcp (SlimProto player control), 3483/udp (player discovery)
+
 ## Fields
 ### Chart / Role
 

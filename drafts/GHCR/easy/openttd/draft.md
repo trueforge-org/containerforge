@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: openttd 15.3 linux-generic amd64 tarball
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3979/tcp (game), 3979/udp (game), 3977/tcp (admin, inferred)
+
 ## Fields
 ### Chart / Role
 

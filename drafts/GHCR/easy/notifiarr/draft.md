@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: release binary in .pkg.tar.zst per arch (notifiarr-0.10.0-3573-x86_64 / aarch64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 5454/http (web UI)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: vendor tarball (sinusbot-1.1f-amd64.tar.bz2) with its install script, amd64 only
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8087/http (web UI, inferred), 9987/udp (TeamSpeak voice, inferred), 10101/tcp (TeamSpeak query, inferred)
+
 ## Fields
 ### Chart / Role
 

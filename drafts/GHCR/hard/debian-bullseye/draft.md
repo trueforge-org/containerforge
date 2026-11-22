@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: debootstrap bullseye rootfs (inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 6080/http (noVNC web desktop, inferred), 5900/tcp (VNC, inferred)
+
 ## Fields
 ### Chart / Role
 

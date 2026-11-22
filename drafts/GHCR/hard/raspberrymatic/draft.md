@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: OpenCCU buildroot OS zip release (amd64/arm64), full rootfs
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (web UI), 443/https (web UI, TLS), 2001/tcp (BidCos RF XML-RPC, inferred), 2010/tcp (HmIP XML-RPC, inferred), 8181/http (JSON-RPC, inferred)
+
 ## Fields
 ### Chart / Role
 

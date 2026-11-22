@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: UniFi vendor .deb (dpkg install), java17 sibling runtime; mongodb and unifi-network-application siblings
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8443/https (web UI and API), 8080/tcp (device inform), 8843/https (guest portal), 8880/http (guest portal HTTP redirect), 6789/tcp (speed test), 3478/udp (STUN), 10001/udp (device discovery)
+
 ## Fields
 ### Chart / Role
 

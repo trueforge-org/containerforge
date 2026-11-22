@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: bitmagnet release binary per arch
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3333/http (web UI and API), 3334/udp (DHT crawler, inferred)
+
 ## Fields
 ### Chart / Role
 

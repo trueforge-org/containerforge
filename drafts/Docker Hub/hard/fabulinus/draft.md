@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: none (closed-source TitanML Takeoff server, no redistributable artifact)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (inferred, Takeoff inference server), 8000/http (inferred, Takeoff management API)
+
 ## Fields
 ### Chart / Role
 

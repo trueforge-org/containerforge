@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: bWAPP zip from sourceforge
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (Apache web app, inferred), 3306/tcp (MySQL, inferred)
+
 ## Fields
 ### Chart / Role
 

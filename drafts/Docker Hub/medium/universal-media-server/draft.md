@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: UMS release tarball or AppImage (JRE from java17 sibling)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9001/http (web UI), 5001/http (inferred, media streaming), 1900/udp (SSDP discovery)
+
 ## Fields
 ### Chart / Role
 

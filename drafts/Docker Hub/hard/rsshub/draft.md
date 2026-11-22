@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: rsshub npm app (inferred), node runtime from python-node
 - other: none (headless Chrome comes from the browserless sidecar base)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 1200/http (RSSHub web and feed API), 3000/http (browserless Chrome sidecar API)
+
 ## Fields
 ### Chart / Role
 

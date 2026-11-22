@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Twonky 8.5.2 x86-64 glibc vendor zip download
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9000/http (web UI), 1900/udp (UPnP/DLNA discovery)
+
 ## Fields
 ### Chart / Role
 

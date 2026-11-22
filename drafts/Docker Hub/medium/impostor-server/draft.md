@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Impostor-Server release tarball (linux-x64 / linux-arm64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 22023/udp (game server), 22023/tcp (REST API) (inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: AriaNg 1.3.13 release zip (nginx runtime from base)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 80/http (static web UI served by nginx, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: Next.js app deps via npm (inferred)
 - other: MinIO binary, prebuilt cinwell/notea app copy
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (web UI), 9000/http (bundled MinIO API, inferred)
+
 ## Fields
 ### Chart / Role
 

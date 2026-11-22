@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: vendor zip from stefan1200.de at build time (pinned URL + checksum); Java runtime comes from java8 sibling
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9987/udp (TeamSpeak voice), 10011/tcp (ServerQuery), 30033/tcp (file transfer)
+
 ## Fields
 ### Chart / Role
 

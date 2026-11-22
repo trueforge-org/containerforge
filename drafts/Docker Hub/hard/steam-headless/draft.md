@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Valve steam_latest.deb download (amd64 only)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8083/http (noVNC web UI, inferred), 8084/https (inferred), 47984/tcp (game streaming, inferred), 47990/tcp (streaming web API, inferred), 47998-48000/udp (streaming, inferred)
+
 ## Fields
 ### Chart / Role
 

@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: dizquetv 1.7.0 npm package (runs as-is; node from python-node runtime)
 - other: none
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8000/http (web UI and API)
+
 ## Fields
 ### Chart / Role
 

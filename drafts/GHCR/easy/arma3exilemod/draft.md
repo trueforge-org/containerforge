@@ -39,6 +39,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: SteamCMD via steamcmd base; server pulled from Steam at start
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 2302/udp (game, inferred), 2303/udp (Steam query, inferred)
+
 ## Fields
 ### Chart / Role
 

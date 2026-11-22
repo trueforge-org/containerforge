@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: Mojang bedrock server zip (amd64 only, download at build or start); itzg set-property and entrypoint-demoter release binaries
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 19132/udp (game)
+
 ## Fields
 ### Chart / Role
 

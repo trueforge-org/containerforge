@@ -43,6 +43,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: TP-Link Omada controller .deb (vendor, installed by install.sh), Java 17 (java17 base), MongoDB service (inferred)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 8043/https (controller web UI), 8088/http (controller HTTP, inferred), 8843/https (portal HTTPS, inferred), 29810/udp (device discovery, inferred), 29811/tcp (device adoption, inferred), 29812/tcp (device management, inferred), 29813/tcp (device upgrade, inferred), 29814/tcp (device management, inferred), 27017/tcp (bundled MongoDB, inferred)
+
 ## Fields
 ### Chart / Role
 

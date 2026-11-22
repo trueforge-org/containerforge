@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: sftpgo Go release tarball or .deb (amd64/arm64)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 2022/tcp (SFTP), 8080/http (web admin and WebDAV)
+
 ## Fields
 ### Chart / Role
 

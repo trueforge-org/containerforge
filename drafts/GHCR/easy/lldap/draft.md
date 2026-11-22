@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: release tarball (amd64-lldap.tar.gz / aarch64-lldap.tar.gz)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3890/tcp (LDAP), 17170/http (web UI)
+
 ## Fields
 ### Chart / Role
 

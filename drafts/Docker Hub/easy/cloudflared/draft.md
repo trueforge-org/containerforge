@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: cloudflared release binary (spec links .pkg assets, which are macOS; Linux asset name to verify)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 20241/http (metrics, inferred)
+
 ## Fields
 ### Chart / Role
 

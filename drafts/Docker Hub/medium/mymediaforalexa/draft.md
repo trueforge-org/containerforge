@@ -40,6 +40,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: vendor .deb amd64 and arm64 (bizmodeller S3)
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 52051/http (web UI) (inferred)
+
 ## Fields
 ### Chart / Role
 

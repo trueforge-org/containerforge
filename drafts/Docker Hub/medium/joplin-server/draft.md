@@ -42,6 +42,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: yarn (monorepo build, inferred); pm2 and tini (inferred, per upstream image)
 - other: Joplin yarn monorepo source (laurent22/joplin v3.7.6), packages/server
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 22300/http (API and web UI)
+
 ## Fields
 ### Chart / Role
 

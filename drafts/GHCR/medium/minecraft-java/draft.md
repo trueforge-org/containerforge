@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: server jar fetched at runtime by itzg mc-image-helper; RCON and helper tools (release downloads); JVM from java21 or java25 sibling
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 25565/tcp (game), 25575/tcp (RCON)
+
 ## Fields
 ### Chart / Role
 

@@ -41,6 +41,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none | none
 - other: Oracle amd64 .deb only (no arm64); dpkg install
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 3000/http (desktop web UI, inferred), 3001/https (desktop web UI, inferred)
+
 ## Fields
 ### Chart / Role
 

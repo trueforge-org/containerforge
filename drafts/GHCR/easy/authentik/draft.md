@@ -48,6 +48,12 @@ Packages the Dockerfile will most likely need, inferred from this spec. `(inferr
 - node/npm: none
 - other: authentik-outpost ldap, proxy and radius release binaries; geoipupdate release tarball; k8s-sidecar source tarball
 
+## Ports
+
+Ports the software is likely to listen on inside the container (container side, not host-forwarded). `(inferred)` marks a guess.
+
+- ports: 9000/http (proxy outpost, inferred), 9443/https (proxy outpost, inferred), 3389/tcp (LDAP outpost, inferred), 6636/tcp (LDAPS outpost, inferred), 1812/udp (RADIUS outpost), none (k8s-sidecar, geoipupdate)
+
 ## Fields
 ### Chart / Role
 
