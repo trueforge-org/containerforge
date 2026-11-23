@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=FreshRSS/FreshRSS versioning=loose
-  default = "1.30.4"
+  default = "1.31.0"
 }
 
 variable "LICENSE" {
