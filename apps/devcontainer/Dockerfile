@@ -120,7 +120,7 @@ ENV cnpgVersion=1.30.2
 # renovate: datasource=github-releases depName=cert-manager/cmctl
 ENV cmctlVersion=2.6.2
 # renovate: datasource=github-releases depName=velero-io/velero
-ENV veleroVersion=1.18.4
+ENV veleroVersion=1.19.0
 # renovate: datasource=github-releases depName=restic/restic
 ENV resticVersion=0.20.0
 # renovate: datasource=github-releases depName=kopia/kopia
