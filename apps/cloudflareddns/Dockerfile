@@ -14,7 +14,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 USER apps
-COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:a69c7592e55293b319a6367dd386ed01244bb10572c1d9fd807c64a0953f86aa /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
+COPY --from=ghcr.io/hotio/cloudflareddns:latest@sha256:4934aafba426b2e44e8c17937f58dedc06adc85bb1df7c307bef2b419a4b3436 /app/cloudflare-ddns.sh /app/cloudflare-ddns.sh
 
 # Fix shebang since container does not use s6-overlay
 RUN sed -i 's|#!/command/with-contenv bash|#!/usr/bin/env bash|g' /app/cloudflare-ddns.sh
