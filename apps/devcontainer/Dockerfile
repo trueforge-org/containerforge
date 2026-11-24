@@ -98,7 +98,7 @@ ENV clustertoolVersion=4.0.0
 # renovate: datasource=github-releases depName=fluxcd/flux2
 ENV fluxVersion=2.10.1
 # renovate: datasource=github-releases depName=siderolabs/talos
-ENV talosctlVersion=1.14.6
+ENV talosctlVersion=1.14.7
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
 ENV talhelperVersion=3.1.17
 # renovate: datasource=github-releases depName=helmfile/helmfile
