@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=projectsend/projectsend versioning=loose
-  default = "v2.9.0"
+  default = "v2.10.0"
 }
 
 variable "LICENSE" {
