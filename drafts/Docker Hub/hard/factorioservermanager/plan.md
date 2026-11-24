@@ -28,13 +28,13 @@ Corrections to the draft: FSM is a prebuilt Go binary (not Node), so the base is
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Glibc is required by Factorio and the FSM binary, which ubuntu provides (the upstream comment says the same). `curl`, `jq`, `tar`, `xz-utils` are already in the base. `unzip` is not in the base package list: install it (verify with `command -v unzip` before adding). Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu) and `apps/steamcmd` (game server download at runtime).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Glibc is required by Factorio and the FSM binary, which ubuntu provides (the upstream comment says the same). `curl`, `jq`, `tar`, `xz-utils` are already in the base. `unzip` and `xz-utils` are also in the base (`apps/ubuntu/Dockerfile` installs them), so no apt step is needed. Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu) and `apps/steamcmd` (game server download at runtime).
 
 ## 4. Dockerfile
 
 1. `FROM` as in section 3; `ARG VERSION`, `ARG TARGETARCH`; `USER root`.
 2. Fail fast on arm64: `test "${TARGETARCH}" = "amd64" || { echo "FSM and Factorio are x86_64 only"; exit 1; }`.
-3. `apt-get install -y --no-install-recommends unzip` (only if absent), clean lists.
+3. No apt packages: `curl`, `jq`, `tar`, `xz-utils`, `unzip` come from the base.
 4. Download the zip to `/tmp`, verify with `echo "c0777636aa521d71700bb8fd69a496b8f4964c0d495ba87c292f293f1003bde7  /tmp/fsm.zip" | sha256sum -c -` (keep the hash in an `ARG FSM_SHA256` and bump it with each VERSION), `unzip` to `/tmp/x`, `mv /tmp/x/factorio-server-manager /app/fsm`.
 5. License: the zip has no license file, so fetch `https://raw.githubusercontent.com/OpenFactorioServerManager/factorio-server-manager/${VERSION}/LICENSE` (UNVERIFIED path) into `/usr/share/licenses/factorioservermanager/LICENSE`. If that path 404s, fetch it from the tag archive instead.
 6. `chown -R apps:apps /app && chmod -R 755 /app`; `rm -rf /tmp/*`.
@@ -104,7 +104,7 @@ filePaths:
 - /app/fsm/factorio-server-manager
 - /app/fsm/app/index.html
 ```
-Timeout is larger than the default because first start downloads Factorio (about 100+ MB, UNVERIFIED size); the web UI starts after the download because `start.sh` runs it first. If CI has no network, make the download non-fatal (`|| echo warn`) so the UI still starts; decide during the build step. Port 34197/udp has no probe: it is only opened when a game server is started from the UI (comment this in the file). The test runs without env vars, so `RCON_PASS` handling is checked by hand (section 11).
+Timeout is larger than the default because first start downloads Factorio (about 100+ MB, UNVERIFIED size); the web UI starts after the download because `start.sh` runs it first. If CI has no network, make the download non-fatal (`|| echo warn`) so the UI still starts; decide during the build step. Port 34197/udp has no probe: the container-test schema offers only `tcp` and `http` checks (see container-test.instructions.md), and the game port is only opened when a server is started from the UI. Add a YAML comment in the file stating this, and verify the port by hand in section 11. The test runs without env vars, so `RCON_PASS` handling is checked by hand (section 11).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
