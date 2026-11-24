@@ -39,7 +39,12 @@ Cannot be written faithfully: the code is not public. Only an extraction from `g
 
 ## 5. docker-bake.hcl
 
-Not applicable until a source and version exist. It would use `APP=auto-yt-dl`, `SOURCE` of the real repo, `LICENSE` of that repo, and the 4 standard targets plus default group as in `apps/bazarr/docker-bake.hcl`. A Renovate comment is only possible with a real tagged upstream.
+Not applicable until a source and version exist. It would use `APP=auto-yt-dl`, `SOURCE` of the real repo, `LICENSE` of that repo, and the 4 standard targets plus default group as in `apps/bazarr/docker-bake.hcl`. A Renovate comment is only possible with a real tagged upstream. If a public source appears, the file would carry this shape (placeholders, UNVERIFIED: no upstream exists today):
+
+```hcl
+// renovate: datasource=github-releases depName=<owner>/<repo>
+variable "VERSION" { default = "<x.y.z>" }
+```
 
 ## 6. settings.yaml
 
