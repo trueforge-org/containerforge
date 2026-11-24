@@ -1,0 +1,66 @@
+# fabulinus — implementation plan
+> Source: ./draft.md · Target: apps/fabulinus/ · Difficulty: hard (BLOCKED, do not implement) · Role: main · Verified on 2026-11-24
+
+**Recommendation: do not build this container.** There is no redistributable artifact (closed-source server, image last pushed 2023-11-17, GPU variant, root by default). The sections below record what was verified and what a build would need if TitanML ever publishes a redistributable artifact. Nothing below should be created under `apps/` until the blockers in section 10 are resolved.
+
+## 1. Verified upstream facts
+
+| Item | Value |
+| --- | --- |
+| Version | None. Docker Hub tags are `latest`, `latest-cpu`, `<git-sha>-cpu`, `buildcache-cpu/gpu`; newest push 2023-11-17 (draft tag `latest-cpu, latest-gpu` matches) |
+| Renovate | Not applicable: no versioned artifact. A docker datasource on `tytn/fabulinus` would only see hash tags |
+| License | UNVERIFIED: no license text found. `titanml/takeoff-community` has only `.github`, `.gitignore`, `README.md` (docs repo, no source). Treat as proprietary |
+| Source URL | https://github.com/titanml/takeoff-community (docs/README only). The draft's second link `takeoff-communitys` is a typo and was not used |
+| Per-arch downloads | None. Hub tags published for amd64 only (draft: arm64 `no`) |
+| Checksum source | None |
+| Upstream Dockerfile | None public (draft: `-`). Hub description: "server component of the TitanML Takeoff server", started through the `iris` launcher (`pip install titan-iris`), example `iris takeoff --model tiiuae/falcon-7b-instruct --device cpu --port 8000` |
+| Ports | 8000 shown in the Hub example (`--port 8000`). The draft's 3000 and 8000 are inferred. UNVERIFIED which ports the image listens on |
+| Paths | `/code/models` per the TrueCharts chart. UNVERIFIED otherwise |
+
+## 2. Target layout
+
+Not applicable: the container is blocked, so no `apps/fabulinus/` should be created. If unblocked, the layout would be the standard five files (`Dockerfile`, `docker-bake.hcl`, `settings.yaml`, `container-test.yaml`, `start.sh`); no `defaults/`, `etc/`, `health/` and no `DOWNSTREAM_CHANGES.md` (nothing uses it as a base).
+
+## 3. Base image
+
+Conditional: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft says ubuntu alone is enough, but the real stack (Python inference, torch, CUDA) is unknown, so python or a CUDA base may be needed. Closest sibling: `apps/faster-whisper` (ML inference, not GPU-specific).
+
+## 4. Dockerfile
+
+Not applicable: there is nothing legitimate to download. `COPY --from=tytn/fabulinus:latest-cpu` is not acceptable: the image is closed-source, untagged by version, runs as root, and ContainerForge could not verify its license, checksum or contents. If a vendor artifact appears the steps would be the usual ones: `ARG VERSION`/`TARGETARCH`, download plus checksum verify to `/app`, license files to `/usr/share/licenses/fabulinus/`, `ENV HOME=/config` with caches in `/tmp`, `COPY --chmod=0755 . /`, `EXPOSE`, `VOLUME /config`, final `USER apps`.
+
+## 5. docker-bake.hcl
+
+Not applicable (blocked). If unblocked: `APP="fabulinus"`, `VERSION` with a `// renovate:` comment matching the real source, `LICENSE` set to the real license (not `Proprietary` unless redistribution is permitted), `SOURCE="https://github.com/titanml/takeoff-community"`, and the four standard targets plus `group "default"`.
+
+## 6. settings.yaml
+
+Not applicable (blocked). Do not invent ports or env vars. The only facts available are the Hub example's `--port 8000` and the model path `/code/models`.
+
+## 7. start.sh
+
+Not applicable (blocked). A future script would need: model directory in `/config/models` (not `/code/models`), `HOME`/HuggingFace caches in `/tmp` (or `/config` if model persistence is intended), bind `0.0.0.0`, `exec` the server.
+
+## 8. container-test.yaml
+
+Not applicable (blocked). Would need a tcp probe for every port in settings.yaml and a `filePaths` entry for the server entrypoint.
+
+## 9. Rootless and read-only-rootfs adaptations
+
+The draft's TrueCharts expectations (runAsUser 0, readOnlyRootFilesystem false, `/code/models` persistence, GPU device access) conflict with `USER apps` (568) and a read-only rootfs. Unknown write paths in a closed image cannot be remapped safely. GPU access cannot be satisfied by an unprivileged CPU-only ubuntu image.
+
+## 10. Risks, caveats and open questions
+
+- BLOCKER: closed-source, no redistributable artifact, no public Dockerfile, no license information.
+- BLOCKER: stale. Last Hub push 2023-11-17, README says the Takeoff pro edition is sold separately (contact email). A "community edition" license may forbid redistribution. UNVERIFIED.
+- BLOCKER: GPU variant (`latest-gpu`) needs NVIDIA runtime; the draft marks both amd64 and arm64 as `no`.
+- Draft caveat "first start may download large model files" is plausible but UNVERIFIED.
+- Suggested action: close the item as `won't port` or ask TitanML for terms; alternatives are maintained inference servers (for example a vLLM or llama.cpp image) if the chart is still needed.
+
+## 11. Build and test steps
+
+Not applicable: do not build. If unblocked, follow the protocol for `apps/fabulinus`: `docker buildx bake --print`; `docker buildx bake --set image-local.platform=linux/amd64 image-local`; `docker run --rm -d --name fabulinus-probe --read-only --tmpfs /tmp -v fabulinus-probe-config:/config fabulinus:<version>`; `forgetool containers test --image fabulinus:<version> --config ./apps/fabulinus/container-test.yaml`. Readiness signal: UNVERIFIED (unknown logs).
+
+## 12. PR checklist
+
+No PR should be opened. If it is ever unblocked: branch `feat/add-fabulinus`, commit and PR title `feat(fabulinus): add new container`, PR template filled in, Notes section containing `🤖 This PR is AI generated.`, and tell the user about the CLA (https://cla-assistant.io/trueforge-org/containerforge; only the user can sign it). Untested: everything (nothing was built or run).
