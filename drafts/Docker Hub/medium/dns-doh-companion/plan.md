@@ -64,7 +64,7 @@ A static Go binary needs nothing beyond ubuntu (curl is already present in the b
 4. `USER apps`
 5. `COPY --chmod=0755 . /`
 6. `EXPOSE 5053/tcp 5053/udp`
-7. `VOLUME /config`. Nothing is written there, but it is kept for consistency with the siblings and to satisfy the repo convention. If this is judged pointless, drop it together with the `volumes` entry in section 6.
+7. `VOLUME /config`. Nothing is written there, but it is kept for consistency with the siblings and to satisfy the repo convention. The repo requires `VOLUME /config`, so keep it together with the `volumes` entry in section 6.
 
 Verify with `cloudflared --version` at build time (`RUN /app/cloudflared --version | grep -q "${VERSION}"`) so the image provably contains the tagged version.
 
@@ -119,12 +119,14 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-volumes: []
+volumes:
+  - path: /config
+    required: false
 ```
 
 `DOH_UPSTREAMS` is a wrapper variable defined and read by `start.sh` (space-separated list). It is not an upstream cloudflared variable. The other two are real upstream variables, read by cloudflared.
 
-Dependencies: none, so no `dependencies` or `opt_dependencies` block. If the schema requires `volumes` to be non-empty, list `/config` with `required: false` and keep `VOLUME /config`.
+Dependencies: none, so no `dependencies` or `opt_dependencies` block. `/config` is listed (`required: false`) because the Dockerfile keeps `VOLUME /config`; nothing is written there.
 
 The port is 5053 rather than the draft's 53 (unprivileged, since the image runs as `apps`). Map host port 53 to container 5053 at deploy time.
 
@@ -166,7 +168,7 @@ tcp:
 healthCommands:
 - command: grep -qi ':13BD ' /proc/net/udp /proc/net/udp6
 - command: /app/cloudflared --version
-  expectedContent: "2026.1.2"
+  expectedContent: "2026.1.2"   # UNVERIFIED: no app in apps/ uses expectedContent/matchContent; check the forgetool schema, else drop these two keys (the Dockerfile build-time grep already proves the version)
   matchContent: true
 
 filePaths:

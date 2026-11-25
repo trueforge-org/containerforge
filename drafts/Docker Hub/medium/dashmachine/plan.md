@@ -76,10 +76,10 @@ RUN rm -rf /app/dashmachine/dashmachine/user_data && \
 ```dockerfile
 RUN chown -R apps:apps /app/dashmachine && chmod -R 755 /app/dashmachine && \
     mkdir -p /usr/share/licenses/dashmachine && \
-    cp /app/dashmachine/LICENSE /usr/share/licenses/dashmachine/LICENSE
+    cp /app/dashmachine/License.md /usr/share/licenses/dashmachine/License.md
 ```
 
-   UNVERIFIED: a `LICENSE` file exists in the tree (the fetch returned 404 at `be50c2e7`). If absent, ship the README statement and do not invent a license file; then set `LICENSE` in bake to the confirmed id.
+   The license file on `master` is `License.md` (GitHub contents API; GitHub reports SPDX `GPL-3.0`, so `-only` vs `-or-later` is still unconfirmed). Presence at the pinned tag/commit is UNVERIFIED (the `LICENSE` fetch returned 404 at `be50c2e7` because the name is `License.md`). If absent, ship the README statement and do not invent a license file; then set `LICENSE` in bake to the confirmed id.
 7. Tail:
 
 ```dockerfile
@@ -187,7 +187,7 @@ filePaths:
 - `timeoutSeconds: 180` is the most common value across `apps/*/container-test.yaml`.
 - `http` path `/` is UNVERIFIED: the app may redirect to a login page (302). Use the path that returns 200 on a fresh `/config`. Do not weaken the probe to pass.
 - No env-gated code paths. `CONTEXT_PATH` is optional and the default is tested. A `CONTEXT_PATH` run is an extra manual check (section 11).
-- Add the LICENSE file to `filePaths` only if it is present (section 4 step 6).
+- Add `/usr/share/licenses/dashmachine/License.md` to `filePaths` once it is confirmed present at the pinned tag (section 4 step 6).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

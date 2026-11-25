@@ -39,7 +39,7 @@ Why: vendor binary on ubuntu (draft). Closest sibling: `apps/adguardhome-sync` (
 
 ## 4. Dockerfile
 
-1. `FROM` above; `ARG VERSION`, `ARG TARGETARCH`; `USER root`.
+1. `FROM` above; `ARG VERSION`, `ARG TARGETARCH`, `ARG XWARE_REF` (full commit sha), `ARG XWARE_SHA256`; `USER root`. `VERSION` (short sha), `XWARE_REF` and `XWARE_SHA256` must all match the `docker-bake.hcl` defaults.
 2. Fail early on non-amd64: `RUN test "${TARGETARCH}" = "amd64"` (the binaries are i386-only; `image-all` must be amd64 only, see section 5).
 3. `apt-get update && apt-get install -y --no-install-recommends libc6-i386 lib32z1 && rm -rf /var/lib/apt/lists/*` (package names for 26.04 UNVERIFIED; `libncursesw5`/`libprocps0` from the upstream Debian wheezy debs are likely unnecessary because the binaries need only libc, check with `ldd` using `LD_TRACE_LOADED_OBJECTS=1 /lib/ld-linux.so.2 ./portal`).
 4. Download and verify:

@@ -43,7 +43,7 @@ No `defaults/` or `etc/` are needed if the config comes from the environment. Ad
 1. Build stage `FROM <python-node> AS build`, `ARG VERSION`, `USER root`.
 2. `apt-get install -y --no-install-recommends build-essential python3 git sqlite3`. `build-essential` and `python3` are needed to compile `sqlite3` (native). `git` is needed for the `git+https` dependency (`bittrex-signalr-client`). Remove `build-essential` in the same layer after `npm install`, as `apps/budge` does.
 3. `ENV HOME=/tmp NPM_CONFIG_CACHE=/tmp/npm-cache`. Node's cache and build output go to `/tmp`.
-4. Fetch and unpack: `curl -fL https://github.com/aloysius-pgast/crypto-exchanges-gateway/archive/refs/tags/${VERSION}.tar.gz | tar xz -C /app/crypto-exchanges-gateway --strip-components=1`.
+4. Fetch and unpack (create the directory first with `mkdir -p /app/crypto-exchanges-gateway`): `curl -fL https://github.com/aloysius-pgast/crypto-exchanges-gateway/archive/refs/tags/${VERSION}.tar.gz | tar xz -C /app/crypto-exchanges-gateway --strip-components=1`.
 5. In `/app/crypto-exchanges-gateway`: `npm install` (not `--unsafe-perm` unless the build fails without it, UNVERIFIED), then `npm run build` for the UI (UNVERIFIED: check the scripts in `package.json`). Then `npm prune --omit=dev`, and remove `/tmp/*`.
 6. Copy the upstream license into `/usr/share/licenses/crypto-exchanges-gateway/` (file name UNVERIFIED).
 7. Final stage: the same `python-node` base. If the build stage is kept in one stage, skip this. Otherwise `COPY --from=build /app/crypto-exchanges-gateway /app/crypto-exchanges-gateway` and `COPY --from=build /usr/share/licenses/ /usr/share/licenses/`. Build-time `node_modules` must match the final Node version, so one stage is safer for the first attempt.

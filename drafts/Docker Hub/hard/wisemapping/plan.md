@@ -89,7 +89,7 @@ env:
     default: "wisemapping"
     required: false
   - name: WISEMAPPING_DB_PASSWORD
-    default: "MYPOSTGRESPASSWORD"
+    default: ""
     required: false
 volumes:
   - path: /config
@@ -107,7 +107,7 @@ dependencies:
 - Render `/tmp/wisemapping/application.yml` only when `WISEMAPPING_DB_URL` is set, referencing the password through a Spring placeholder (`password: ${WISEMAPPING_DB_PASSWORD}`) so the secret never lands in a file or the process list. Contents mirror the Postgres overlay (driver `org.postgresql.Driver`, `sql.init` platform `postgresql`, `mode always`, `ddl-auto validate`, dialect, `prepareThreshold 0`); URL/user via placeholders too. If it is empty, log a warning: `WISEMAPPING_DB_URL not set, using embedded in-memory HSQLDB (data is lost on restart)`.
 - Copy `/config/application.yml` support: pass `-Dspring.config.additional-location=optional:file:/tmp/wisemapping/,optional:file:/config/` so a user file overrides the generated one.
 - Start nginx in the background: `nginx -c /etc/nginx/nginx.conf -g 'daemon off;' &` (config from `etc/nginx/nginx.conf`: `listen 8080;`, `pid /tmp/nginx/nginx.pid;`, all `*_temp_path` in `/tmp/nginx`, `error_log /dev/stderr;`, `access_log /dev/stdout;`, root `/app/www`, upstream copy of upstream `nginx.conf` locations with `proxy_pass http://127.0.0.1:8081`, keep the `sub_filter` strings that match `http://localhost:8080` because the backend still emits its default `app.site.*-base-url` values).
-- Trap `SIGTERM` to stop nginx; then final command: `exec java -XX:-UseBASE64Intrinsics ${JAVA_OPTS} -Dserver.port=8081 -Dspring.config.additional-location=... -jar /app/wisemapping-api.jar` (the `-XX:-UseBASE64Intrinsics` flag is copied from upstream, which cites a mitigation for JDKs older than 27.0.1.1; Temurin 27.0.1.1 is used so it may be dropped, decide when implementing). Servers bind `0.0.0.0` via nginx; the API on 8081 is internal.
+- `exec` replaces the shell, so a `trap` would be lost; nginx is a child and stops with the container. Final command: `exec java -XX:-UseBASE64Intrinsics ${JAVA_OPTS} -Dserver.port=8081 -Dspring.config.additional-location=... -jar /app/wisemapping-api.jar` (the `-XX:-UseBASE64Intrinsics` flag is copied from upstream, which cites a mitigation for JDKs older than 27.0.1.1; Temurin 27.0.1.1 is used so it may be dropped, decide when implementing). Servers bind `0.0.0.0` via nginx; the API on 8081 is internal.
 
 ## 8. container-test.yaml
 
@@ -125,7 +125,7 @@ filePaths:
 - /usr/share/licenses/wisemapping/LICENSE.md
 ```
 
-`timeoutSeconds`: Spring Boot plus HSQLDB seeding is slow; copy the value from `apps/nzbhydra2/container-test.yaml` or `apps/airsonic-advanced/container-test.yaml` (use the larger, add margin). Because `start.sh` falls back to HSQLDB with no env, the test runs functionally and the DB-narrowing exception is NOT used. If nginx is up but Java crashed, the container exits, so the probe fails correctly. Add an `/api/restful/app/config` http probe only if it returns 200 (UNVERIFIED).
+`timeoutSeconds`: Spring Boot plus HSQLDB seeding is slow; neither `apps/nzbhydra2/container-test.yaml` nor `apps/airsonic-advanced/container-test.yaml` sets one, so pick a value such as 180 and tune it after the first run (UNVERIFIED). Because `start.sh` falls back to HSQLDB with no env, the test runs functionally and the DB-narrowing exception is NOT used. If nginx is up but Java crashed, the container exits, so the probe fails correctly. Add an `/api/restful/app/config` http probe only if it returns 200 (UNVERIFIED).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

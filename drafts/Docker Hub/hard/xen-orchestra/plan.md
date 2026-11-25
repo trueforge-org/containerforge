@@ -61,7 +61,7 @@ apps/xen-orchestra/
   ```
 - Extra variable `XO_REF` (commit sha), passed as arg with `VERSION`; `VALKEY_PACKAGE_VERSION` if pinned.
 - `LICENSE` = `AGPL-3.0-or-later`, `SOURCE` = `https://github.com/vatesfr/xen-orchestra/`
-- Targets `docker-metadata-action`, `image`, `image-local`, `image-all`, group `default`, per `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`. The Dockerfile must assert the built xo-server version equals `VERSION` (`node -p "require('./package.json').version"` in `packages/xo-server` and `test` it) so the tag matches the contents.
+- Targets `docker-metadata-action`, `image`, `image-local`, `image-all`, group `default`, per `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`. The Dockerfile should assert the built xo-server version equals `VERSION` (`node -p "require('./package.json').version"` in `packages/xo-server` and `test` it) so the tag matches the contents. Caveat: the HEAD sha in section 1 reports xo-server `5.214.0`, not `5.213.0`, so the assertion would fail; either pick the commit whose xo-server version is `5.213.0` (UNVERIFIED which) or set `VERSION` to the version of the pinned commit.
 
 ## 6. settings.yaml
 
@@ -95,7 +95,7 @@ HTTPS (`HTTPS_PORT`, `CERT_PATH`, `KEY_PATH`, `REDIRECT_TO_HTTPS`) is left out o
 ## 7. start.sh
 
 - `set -euo pipefail`, `mkdir -p /config/data /config/redis /config/.config/xo-server /tmp/xo`.
-- Render `/config/.config/xo-server/config.toml` from `/defaults/config.toml.tmpl` with `envsubst '${HTTP_PORT} ${REDIS_URI}'` only when the file is missing (never overwrite user edits). Template: `datadir = '/config/data'`, `[[http.listen]] port = ${HTTP_PORT}` (no `hostname` key, so it listens on all addresses), `[redis] uri = '${REDIS_URI}'`.
+- Render `/config/.config/xo-server/config.toml` from `/defaults/config.toml.tmpl` with `envsubst '${HTTP_PORT} ${REDIS_URI}'` (start.sh must `export REDIS_URI` first) only when the file is missing (never overwrite user edits). Template: `datadir = '/config/data'`, `[[http.listen]] port = ${HTTP_PORT}` (no `hostname` key, so it listens on all addresses), `[redis] uri = '${REDIS_URI}'`.
 - Redis: if `XO_REDIS_URI` is empty, start `valkey-server --bind 127.0.0.1 --port 6379 --dir /config/redis --appendonly yes --daemonize no &` and wait with `valkey-cli ping`; set `REDIS_URI=redis://127.0.0.1:6379/0`. Otherwise `REDIS_URI=$XO_REDIS_URI` (no password is written to files unless the user supplies it in that URI).
 - Because `exec` replaces the shell, a trap cannot stop valkey. Instead run valkey with `--appendonly yes` so an abrupt stop loses at most one second of data, and use `tini` (in base) as PID 1 so the orphaned valkey receives the termination signal.
 - Final command: `cd /app/xen-orchestra/packages/xo-server && exec node dist/cli.mjs` (upstream monit starts `forever ... dist/cli.mjs`; `forever` dropped). Embedded valkey runs in the background; use `wait -n` only if xo-server is not exec'd, otherwise accept that a valkey crash is detected by xo-server connection errors.

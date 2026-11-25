@@ -187,8 +187,8 @@ If `run.sh` needs root (`PUID`/`PGID` chown, writes under `/app`), replace it wi
 mkdir -p /config
 cd /app || exit 1
 
-python3 verify_env.py || exit 1
-python3 verify_data_migrations.py || exit 1
+/app/venv/bin/python verify_env.py || exit 1
+/app/venv/bin/python verify_data_migrations.py || exit 1
 
 exec /app/venv/bin/python server.py
 ```
