@@ -6,14 +6,14 @@
 | Item | Value |
 | --- | --- |
 | Version | Upstream `ninthwalker/slack-invite` has **no releases or tags**. Latest and only relevant commit: `5f3a5f26499974c94e83f2b6f4c5db843f3e278b` (2017-03-10). `package.json` says `slack-invite-automation` `0.1.0`. The draft tag `latest` maps to this commit. |
-| Renovate | `datasource=git-refs depName=https://github.com/ninthwalker/slack-invite currentValue=master versioning=loose`, `VERSION` = full commit SHA. Copy the exact annotation form from an existing `apps/*/docker-bake.hcl` using `datasource=git-refs` (UNVERIFIED which form Renovate honours for SHA defaults). With a 2017 head the value will never change. |
-| License | **UNVERIFIED.** The fork has no `LICENSE` file (raw `/master/LICENSE` returns 404) and `package.json` has no `license` field. The original `outsideris/slack-invite-automation` (now archived) is MIT. Use `MIT` in the bake file, with a PR note, or reject the app if the owner will not accept an unlicensed fork. |
+| Renovate | `datasource=git-refs depName=https://github.com/ninthwalker/slack-invite currentValue=master`, `VERSION` = full commit SHA, the form in `apps/tvheadend/docker-bake.hcl` (UNVERIFIED whether Renovate bumps a SHA bake default this way). With a 2017 head the value is unlikely to change. |
+| License | MIT: the repo has `LICENSE.md` with the MIT text (Copyright (c) 2015 "Outsider" Jeonghoon Byun); GitHub also reports `MIT`. `package.json` has no `license` field. SPDX `MIT`. |
 | Source URL | https://github.com/ninthwalker/slack-invite (the draft's `httpss://` link is a typo) |
 | Download | `https://github.com/ninthwalker/slack-invite/archive/${VERSION}.tar.gz` (source tarball by commit) |
 | Checksum | None published; commit SHA pins the content. |
 | Upstream Dockerfile | https://github.com/ninthwalker/slack-invite/blob/master/Dockerfile reviewed: `FROM node:onbuild`, `EXPOSE 7879`, `COPY . /slack-invite`, `RUN npm install`, `CMD ./bin/www`. |
 | Dependencies (package.json) | body-parser, cookie-parser, debug, dotenv ^2, express ^4.13, i18n ^0.7, jade ^1.11, morgan, request, serve-favicon. Start: `node ./bin/www`. |
-| Env vars (config.js, README) | `COMMUNITY_NAME` (default `YOUR-TEAM-NAME`), `SLACK_URL` (default `YOUR-TEAM.slack.com`), `SLACK_TOKEN` (default `YOUR-ACCESS-TOKEN`), `INVITE_TOKEN` (optional, default none), `LOCALE` (default `en`; de, en, es, fr, ja, ko, pl, pt, pt-BR, tr, zh-CN, zh-TW), plus `PORT` (`bin/www`, default `7879`) |
+| Env vars (config.js, README) | `COMMUNITY_NAME` (default `YOUR-TEAM-NAME`), `SLACK_URL` (default `YOUR-TEAM.slack.com`), `SLACK_TOKEN` (default `YOUR-ACCESS-TOKEN`), `INVITE_TOKEN` (optional, default none), `LOCALE` (default `en`; de, en, es, fr, ja, ko, pl, pt, pt-BR, ru, tr, zh-CN, zh-TW), plus `PORT` (`bin/www`, default `7879`) |
 | Port | **7879/http** (Dockerfile, `bin/www`). The draft's `3000` is wrong (inferred). `server.listen(port)` with no host, so it binds all interfaces. |
 | State | None persisted. `i18n.configure({directory: __dirname + '/locales', autoReload: true})` can write missing keys to `locales/` (see section 9). |
 | API used | `POST https://<SLACK_URL>/api/users.admin.invite` with legacy token. |
@@ -50,15 +50,15 @@ Why: this is the repo's only Node-capable base (the draft names it). Check `node
    rm -rf /tmp/npm-cache /tmp/* /root/.npm
    chown -R root:root /app && chmod -R 755 /app
    ```
-   Verify the `sed` result with `grep -n updateFiles app.js` in the same RUN (`grep -q`) so the build fails if upstream changes. Also write a short `/usr/share/licenses/slack-invite/NOTICE` only if a LICENSE exists in the tarball (it does not at this commit; do not invent one).
+   Verify the `sed` result with `grep -q 'updateFiles: false' app.js` in the same RUN so the build fails if upstream changes. In the same RUN, `cp /app/slack-invite/LICENSE.md /usr/share/licenses/slack-invite/`.
 3. `ENV NODE_ENV=production HOME=/config npm_config_cache=/tmp/npm-cache`.
 4. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 7879`, `VOLUME /config`, `WORKDIR /config`.
 
 ## 5. docker-bake.hcl
 
 - `APP = "slack-invite"`
-- `VERSION` with the git-refs renovate comment, default `"5f3a5f26499974c94e83f2b6f4c5db843f3e278b"`; Dockerfile `ARG VERSION` consumes it.
-- `LICENSE = "MIT"` (see section 1: UNVERIFIED for this fork; resolve before merge)
+- `VERSION` preceded by `// renovate: datasource=git-refs depName=https://github.com/ninthwalker/slack-invite currentValue=master` (form of `apps/tvheadend/docker-bake.hcl`), default `"5f3a5f26499974c94e83f2b6f4c5db843f3e278b"`; Dockerfile `ARG VERSION` consumes it.
+- `LICENSE = "MIT"` (from `LICENSE.md`, section 1)
 - `SOURCE = "https://github.com/ninthwalker/slack-invite/"`
 - Standard targets: `docker-metadata-action`, `image` (args.VERSION, OCI source/licenses labels), `image-local` (`type=docker`, tag `${APP}:${VERSION}`), `image-all` (linux/amd64 and linux/arm64), `group "default" { targets = ["image-local"] }`.
 - Run `docker buildx bake --print`.
@@ -142,7 +142,7 @@ The index page renders from the defaults, so no env is needed. Set `timeoutSecon
 
 - **Likely non-functional against current Slack.** The app calls `users.admin.invite`, an undocumented endpoint that Slack retired for legacy tokens (UNVERIFIED current status; check Slack's changelog). Invite creation probably fails with an error such as `invalid_auth`/`method_deprecated`. The container will still start and render the page.
 - The project is dead: last commit 2017-03-10, original (`outsideris/slack-invite-automation`) is archived. Dependencies are very old (jade 1.11, request, i18n 0.7, express 4.13 range) with known CVEs; `npm install` gives whatever semver allows.
-- No license file in the fork (section 1).
+- The app's `request.post` callback runs `JSON.parse(body)` without a try (`routes/index.js`): a non-JSON reply from `SLACK_URL` throws and is likely to end the node process.
 - The draft's malformed link and port `3000` are corrected (7879).
 - Draft caveat about the Slack token: it is required for real use; `INVITE_TOKEN` gives minimal protection against abuse. There is no rate limit.
 - Build only needs the network; arm64 has no native modules, so no arm64 blocker.
@@ -161,12 +161,12 @@ docker logs -f slack-invite-probe
 forgetool containers test --image slack-invite:<VERSION> --config ./apps/slack-invite/container-test.yaml
 docker rm -f slack-invite-probe; docker volume rm slack-invite-probe-config
 ```
-Readiness signal: process stays up and port 7879 answers `GET /` with 200 (node prints nothing on start unless `DEBUG=*`; `bin/www` logs `Listening on port 7879` only with `DEBUG=slack-invite-automation:server`, UNVERIFIED). Manual check: `curl -s localhost:7879/ | grep -i community`, then a `POST /invite` with a fake token and confirm it reports `Failed!` and does not crash or write to `/app`.
+Readiness signal: process stays up and port 7879 answers `GET /` with 200 (`bin/www` logs `Listening on port 7879` only with `DEBUG=slack-invite:server`; without it nothing is printed until a request is logged by `morgan`). Manual check: `curl -s localhost:7879/ | grep -i community`, then a `POST /invite` with a fake token and check whether it reports `Failed!` or crashes on a non-JSON reply (section 10); it must not write to `/app`. The automated test never reaches this path.
 
 ## 12. PR checklist
 
 - Branch `feat/add-slack-invite`, commit and PR title `feat(slack-invite): add new container`, target `main`.
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; put `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign it).
-- State honestly what is untested: actual Slack invites, Node compatibility of 2017 dependencies, arm64 build, license of the fork, renovate behaviour on a SHA.
+- State honestly what is untested: actual Slack invites, Node compatibility of 2017 dependencies, arm64 build, renovate behaviour on a SHA.
 - Do not tick "Built container locally" unless it was built.

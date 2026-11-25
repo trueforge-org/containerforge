@@ -7,7 +7,7 @@
 |---|---|
 | Version | No releases or tags upstream. Pin the last commit on `master`: `fb4094a047d25cd21352c0849b5b623171e7974c` (short `fb4094a`, 2020-05-20, "Update README.md"; the draft's Dockerfile link points at this same commit). The draft's `master.zip` link is floating, so do not use it. |
 | Renovate | `datasource=git-refs depName=https://github.com/CorneliousJD/SUI-Startpage currentValue=master` (same pattern as `apps/tvheadend`). The last commit is from 2020, so the repo is effectively dormant. |
-| License | Unlicense (`LICENSE` begins "This is free and unencumbered software released into the public domain"). The repo also has a `License.md`. UNVERIFIED: its content was not read, so it may differ. SPDX: `Unlicense`. |
+| License | Unlicense (`LICENSE` begins "This is free and unencumbered software released into the public domain"). The repo also has a `License.md`, which is blank at the pinned commit. GitHub reports `Unlicense`. SPDX: `Unlicense`. |
 | Source URL | https://github.com/CorneliousJD/SUI-Startpage |
 | Download (both arches, arch-independent static site) | `https://github.com/CorneliousJD/SUI-Startpage/archive/<full-sha>.tar.gz` (HTTP 200 checked) |
 | Checksum source | None published (no release assets). Integrity comes from pinning the full commit SHA in the URL. |
@@ -53,8 +53,8 @@ It is a static site, so no runtime beyond nginx is needed. Closest siblings: `ap
    rm -rf /tmp/sui /tmp/sui.tar.gz
    ```
    Never `chmod 777` (upstream does). Copy only the served files, so `Dockerfile`, `start.sh` and `README.md` stay out.
-5. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html` (same ending as `apps/theme-park`).
-6. No `EXPOSE` or `CMD` of its own, since both are inherited (the nginx base declares `EXPOSE 8080`). Add `EXPOSE 8080` only if `docker inspect` of the base does not show it. No `VOLUME`: there is no state, and the base seeds nginx config under `/config`.
+5. `USER apps`, `COPY --chmod=0755 . /`, `VOLUME /config`, `WORKDIR /usr/share/nginx/html` (`apps/theme-park` ending plus the volume).
+6. No `EXPOSE` or `CMD` of its own, since both are inherited (`apps/nginx/Dockerfile` declares `EXPOSE 8080` and the `CMD`). The site itself has no state; `VOLUME /config` holds the nginx config that the base seeds (the nginx base does not declare the volume).
 7. No apt packages (the draft's `unzip` guess is not needed because upstream publishes a tarball).
 
 ## 5. docker-bake.hcl
@@ -127,8 +127,7 @@ The HTTP probe covers the only port in `settings.yaml`. `timeoutSeconds` is omit
 - The draft says the image content is unpinned master. This is resolved by pinning the commit SHA. The repo has been dormant since 2020, so there will be no updates, and renovate `git-refs` will stay quiet.
 - The draft says port 80. It is 8080 with the ContainerForge nginx base, so document this for chart migration.
 - The user's changes are lost on rebuild unless they mount their own `apps.json`, `links.json` or `providers.json` (draft caveat). Mounting over a read-only path is fine.
-- UNVERIFIED: the content of `License.md` versus `LICENSE`. Read both while implementing and confirm that `Unlicense` is right.
-- UNVERIFIED: the file list at the pinned commit. Run `tar tzf` while implementing and adjust the `cp` list if files are missing.
+- `index.html` loads jQuery, Handlebars, Iconify and a Google Font from public CDNs, so the browser needs internet access; the automated test does not cover this.
 - No blockers: no arm64 problem (static files), no GPU, no privileged mode.
 
 ## 11. Build and test steps
@@ -137,10 +136,10 @@ The HTTP probe covers the only port in `settings.yaml`. `timeoutSeconds` is omit
 cd apps/suistartpage
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
-docker run --rm -d --name suistartpage-probe --read-only --tmpfs /tmp \
+docker run --rm -d --name suistartpage-probe --read-only --tmpfs /tmp -p 8080:8080 \
   -v suistartpage-probe-config:/config suistartpage:<VERSION>
 docker logs -f suistartpage-probe          # no fatal errors, nginx stays up
-curl -fsS http://localhost:8080/ | head    # publish -p 8080:8080 for this check
+curl -fsS http://localhost:8080/ | head
 docker rm -f suistartpage-probe; docker volume rm suistartpage-probe-config
 forgetool containers test --image suistartpage:<VERSION> --config ./apps/suistartpage/container-test.yaml
 ```

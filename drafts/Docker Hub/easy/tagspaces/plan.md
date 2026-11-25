@@ -52,8 +52,8 @@ It is a static bundle, so nothing else is needed. Closest sibling: `apps/theme-p
    rm -rf /tmp/ts /tmp/ts.zip /tmp/SHA256SUMS.txt
    ```
    The `grep` anchors on the file name, because `SHA256SUMS.txt` also lists `tagspaces-pro-web-*.zip`. Keep the zip's own `LICENSE.txt` and the `*.LICENSE.txt` notices in the served tree, since they belong to the bundled code.
-5. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html`.
-6. Inherit `EXPOSE 8080` and `CMD` from the base (add `EXPOSE 8080` if `docker inspect` shows it missing). No `VOLUME` of its own (the base uses `/config`). No arch mapping is needed (`TARGETARCH` is not used) and no apt packages are needed.
+5. `USER apps`, `COPY --chmod=0755 . /`, `VOLUME /config`, `WORKDIR /usr/share/nginx/html`.
+6. Inherit `EXPOSE 8080` and `CMD` from the base (add `EXPOSE 8080` if `docker inspect` shows it missing). `VOLUME /config` (step 5) is needed because the base seeds nginx config there but does not declare the volume. No arch mapping is needed (`TARGETARCH` is not used) and no apt packages are needed.
 
 ## 5. docker-bake.hcl
 
@@ -126,7 +126,7 @@ The HTTP probe covers the only port. No env is required, and no database is invo
 - Version drift: the draft pinned 6.0.2 from a third-party image, which is now archived. The plan tracks upstream releases (6.15.1) directly.
 - The web bundle is a PWA with a service worker (`sw.js`) and, in browsers, needs a secure context (HTTPS or localhost) for some features. Mention this in the PR.
 - UNVERIFIED: whether upstream's web zip expects specific nginx headers or a SPA fallback. The upstream docker image uses the default nginx config, so the base `default.conf` should be enough. Test by loading the page in a browser.
-- UNVERIFIED: the AGPL SPDX variant (see section 1) and whether any proprietary Pro component is in the non-Pro web zip. `LICENSING.md` in upstream defines the boundary and should be read at implementation time.
+- UNVERIFIED: the AGPL SPDX variant (see section 1; `package.json` says `AGPL-3.0` and `LICENSING.md` says "version 3 (AGPL-3.0)"; source file headers were not read). `LICENSING.md` states that Lite builds contain only the AGPL core. UNVERIFIED that the non-Pro web zip counts as a Lite build in that sense (the contents were not audited).
 - No blockers (no GPU, no privileged mode, no musl-only code).
 
 ## 11. Build and test steps

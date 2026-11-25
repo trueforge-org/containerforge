@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version | Upstream has **no releases and no tags** (Releases section empty, 49 commits). Latest commit on `master`: `52afd093cbca282d834bf389023a0bdc69055aae` (2025-05-25), the same commit the draft's Dockerfile link points to (`52afd09`). Pin that commit. Draft chart tag is `knex666/shortipy:latest`, which is built from this repo. |
-| Renovate | `datasource=git-refs depName=https://github.com/maschhoff/shortipy currentValue=master versioning=loose` with `VERSION` = full commit SHA (same pattern as `apps/*` using `datasource=git-refs`, for example tvheadend). UNVERIFIED: whether Renovate bumps a SHA held in a bake default for this exact annotation, so check an existing app (grep `datasource=git-refs` in `apps/*/docker-bake.hcl`) and copy its form. |
+| Renovate | `datasource=git-refs depName=https://github.com/maschhoff/shortipy currentValue=master` with `VERSION` = full commit SHA, the form in `apps/tvheadend/docker-bake.hcl`. UNVERIFIED: whether Renovate actually bumps a SHA held in a bake default with this annotation (the shared custom manager was not inspected). |
 | License | GPL-3.0 (LICENSE.md, "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007"). SPDX `GPL-3.0-only` (UNVERIFIED if "or later"; README does not say). |
 | Source URL | https://github.com/maschhoff/shortipy (the draft says "fork of maschhoff/shortipy by knex666": the knex666 image is built from the maschhoff repo, so use maschhoff directly) |
 | Download | Source tarball: `https://github.com/maschhoff/shortipy/archive/${VERSION}.tar.gz` (git archive of a commit; pip packages `flask` 3.1.3 and `uWSGI` 2.0.31 are current on PyPI) |
@@ -34,7 +34,7 @@ No other files. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-Why: Flask + uWSGI need Python and a compiler (uWSGI builds from sdist). The python base is built from source with headers in `/usr/local` and already installs `build-essential` in its own layers (`apps/python/Dockerfile`), but those layers may not persist: check with `docker run --rm --entrypoint sh <python-image> -c 'which gcc'`. If `gcc` is missing, add `build-essential` in a `USER root` apt step and purge it afterwards. Closest sibling: `apps/bazarr` (python base, source into `/app/bin`, pip install, `exec python`).
+Why: Flask + uWSGI need Python and a compiler (uWSGI builds from sdist; PyPI has no wheel for 2.0.31). `apps/python/Dockerfile` installs `build-essential` and never purges it (it only removes the apt lists) and builds Python into `/usr/local` with headers, so no extra apt step is expected (UNVERIFIED against the published image digest; confirm with `docker run --rm --entrypoint sh <python-image> -c 'which gcc'`). Closest sibling: `apps/bazarr` (python base, source into `/app/bin`, pip install, `exec python`).
 
 ## 4. Dockerfile
 
@@ -49,13 +49,13 @@ Why: Flask + uWSGI need Python and a compiler (uWSGI builds from sdist). The pyt
    rm -rf /app/shortipy/data /app/shortipy/.github /root/.cache /tmp/*
    chown -R root:root /app && chmod -R 755 /app
    ```
-   Python base sets `PIP_BREAK_SYSTEM_PACKAGES=1`, `PIP_NO_CACHE_DIR=1`, so system `pip` works like in bazarr. Per the python-runtime rule, do not write into `/app/venv`; installing into system site-packages under `/usr/local` keeps `/app/venv` untouched. (If the base's `/app/venv` is the intended interpreter, use `/app/venv/bin/pip` at build time only; check `ls /app/venv` in the base first, UNVERIFIED.)
+   Python base sets `PIP_BREAK_SYSTEM_PACKAGES=1`, `PIP_NO_CACHE_DIR=1`, so system `pip` works at build time (bazarr installs into system site-packages with `uv`). `apps/python/Dockerfile` creates `/app/venv` but does not put it on `PATH`, so this install leaves it untouched.
 4. `ENV PYTHONDONTWRITEBYTECODE=1` (already in base), `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 4321`, `VOLUME /config`, `WORKDIR /config`.
 
 ## 5. docker-bake.hcl
 
 - `APP = "shortipy"`
-- `VERSION` preceded by the git-refs renovate comment (see section 1), default `"52afd093cbca282d834bf389023a0bdc69055aae"`. The Dockerfile `ARG VERSION` consumes it, so aligned. If a human-readable tag is wanted, the image tag becomes the SHA; acceptable for an untagged project.
+- `VERSION` preceded by `// renovate: datasource=git-refs depName=https://github.com/maschhoff/shortipy currentValue=master` (the form used by `apps/tvheadend/docker-bake.hcl`), default `"52afd093cbca282d834bf389023a0bdc69055aae"`. The Dockerfile `ARG VERSION` consumes it, so aligned. If a human-readable tag is wanted, the image tag becomes the SHA; acceptable for an untagged project.
 - `LICENSE = "GPL-3.0-only"`, `SOURCE = "https://github.com/maschhoff/shortipy/"`
 - Standard targets: `docker-metadata-action`, `image` (args.VERSION + OCI source/licenses labels), `image-local` (`type=docker`, `${APP}:${VERSION}`), `image-all` (amd64, arm64), `group "default" = ["image-local"]`.
 - Run `docker buildx bake --print`.
@@ -143,7 +143,7 @@ filePaths:
 - No releases or tags: renovate cannot follow versions, only the `master` head. Upstream is low activity (last commit 2025-05-25).
 - JSON file DB without locking and short codes are random 4-digit numbers (`randint(1111,9999)`), so collisions and races are possible. No authentication, anyone reaching the port can add links.
 - `redirect()` accepts any stored URL (open redirect by design).
-- uWSGI builds from source: needs gcc and Python headers at build time (arm64 as well, no wheel). If the base lacks them add and purge `build-essential`.
+- uWSGI builds from source: needs gcc and Python headers at build time (arm64 as well, no wheel). If the base lacks them add and purge `build-essential`. UNVERIFIED: that uWSGI 2.0.31 compiles against Python 3.15 (not built); this is the main build risk.
 - `chmod-socket` from upstream `app.ini` is irrelevant (no unix socket), dropped.
 - No arm64 blocker expected.
 
@@ -167,5 +167,5 @@ Readiness signal: uWSGI log lines `WSGI app 0 ... ready` and `spawned uWSGI work
 - Branch `feat/add-shortipy`, commit and PR title `feat(shortipy): add new container`, target `main`.
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign it).
-- Do not tick "Built container locally" or others unless done. Untested unless run: arm64 build, write-then-restart persistence, renovate git-refs behaviour, gcc availability in the base.
+- Do not tick "Built container locally" or others unless done. Untested unless run: arm64 build, write-then-restart persistence, renovate git-refs behaviour, gcc availability in the base, uWSGI on Python 3.15.
 - Pre-completion: `bake --print` passes, VERSION aligned between bake and Dockerfile, read-only rootfs run with empty `/config` is clean.

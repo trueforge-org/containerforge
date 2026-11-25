@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version | `1.166.4` (GitHub release `v1.166.4`, the latest stable; `v1.167.1-rc` is a release candidate and must not be used). Matches the draft's `v1.166.4`. |
-| Renovate | `datasource=github-releases depName=storj/storj versioning=semver extractVersion=^v(?<version>.+)$`. UNVERIFIED: that Renovate skips `-rc` prereleases on this repo (Renovate ignores releases flagged "prerelease" by default; storj also tags `-rc` as GitHub releases, so check that they are flagged). |
+| Renovate | `datasource=github-releases depName=storj/storj versioning=semver extractVersion=^v(?<version>.+)$`. The `-rc` releases are flagged "prerelease" on GitHub (checked v1.167.1-rc, v1.167.0-rc, v1.166.0-rc), which Renovate ignores by default. |
 | License | AGPL-3.0 (repo LICENSE is "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"). SPDX `AGPL-3.0-only` (UNVERIFIED whether "or later"). |
 | Source URL | https://github.com/storj/storj/ |
 | Download (amd64) | https://github.com/storj/storj/releases/download/v1.166.4/storagenode_linux_amd64.zip (HTTP 206 checked) |
@@ -61,7 +61,7 @@ Why: the Go binaries are static enough for glibc (upstream runs them on Debian),
 ## 5. docker-bake.hcl
 
 - `APP = "storj-node"`
-- `VERSION` preceded by `// renovate: datasource=github-releases depName=storj/storj extractVersion=^v(?<version>.+)$`, default `"1.166.4"`
+- `VERSION` preceded by `// renovate: datasource=github-releases depName=storj/storj versioning=semver extractVersion=^v(?<version>.+)$`, default `"1.166.4"`
 - `LICENSE = "AGPL-3.0-only"`, `SOURCE = "https://github.com/storj/storj/"`
 - Targets: `docker-metadata-action`, `image` (args.VERSION, OCI source and licenses labels), `image-local` (`type=docker`, `${APP}:${VERSION}`), `image-all` (`linux/amd64`, `linux/arm64`), `group "default" { targets = ["image-local"] }`.
 - Run `docker buildx bake --print`.
@@ -129,9 +129,9 @@ exec /app/storagenode run "${args[@]}"
 ```
 - Idempotent: `setup` only runs while `config.yaml` is absent; the identity is never generated or overwritten (the 4 files are the node's identity and must be backed up).
 - Nothing written to `/app`; cache/temp in `/tmp` (Go's default).
-- Public port binds all interfaces by default (`--server.address :28967`, UNVERIFIED default); the dashboard is forced to `0.0.0.0:14002`, so check it from outside the container.
+- Public port binds all interfaces by default (`setup` writes `server.address` `:28967` and the private API on `127.0.0.1:7778`, `cmd/storagenode/cmd_setup.go`); the dashboard is forced to `0.0.0.0:14002`, so check it from outside the container.
 - Wallet, email and the address are passed as flags, not written to the process list beyond the node's own flags (they are not secrets). Never print the identity keys.
-- UNVERIFIED: that `storagenode setup` is happy to run when `/config/storage` is empty and the identity is already there, and that it accepts the identity dir flag as written. Validate with a real identity.
+- `setup` refuses only when `config.yaml` already exists, loads the identity, writes `config.yaml`, then creates the databases and the storage verification file (`cmd_setup.go`). If it fails after writing `config.yaml`, the next start skips `setup` and `run` fails: remove `config.yaml` by hand after a failed first start. Upstream runs `setup` only on an explicit `SETUP=true`; auto-running it is a deliberate difference for the maintainers to accept (a missing separate storage mount on a fresh config volume would be initialised silently). UNVERIFIED: the full flow with a real identity.
 - The idle `sleep infinity` branch is a deliberate design choice: see section 8 and 10.
 
 ## 8. container-test.yaml

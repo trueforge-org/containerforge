@@ -14,7 +14,7 @@
 | Upstream Dockerfile | https://github.com/coleifer/sqlite-web/blob/8c72947e63d6363f7b090801965e8321200283ba/docker/Dockerfile reviewed: `python:3-alpine3.23` (musl), builds SQLite from source with extra CFLAGS (FTS3/4/5, JSON1, STAT4, ...), `pip install flask peewee pygments cython gevent`, then the repo; `EXPOSE 8080`, `VOLUME /data`, `WORKDIR /data`, `ENTRYPOINT ["sqlite_wsgi", "-H", "0.0.0.0"]`. |
 | Console scripts | `sqlite_web` (Flask dev server) and `sqlite_wsgi` (gevent WSGI server, needs `gevent`) |
 | CLI options (README) | `-p/--port` (default 8080), `-H/--host` (default 127.0.0.1), `-P/--password` (prompt), `-r/--read-only`, `-R/--rows-per-page`, `-Q`, `-T`, `-B`, `-e/--extension`, `-s/--startup-hook`, `-f/--foreign-keys`, `-u/--url-prefix`, `-L/--enable-load`, `-U/--upload-dir`, `-F/--enable-filesystem`, `-c/--ssl-cert`, `-k/--ssl-key`, `-a/--ad-hoc`, `-q`, `-l/--log-file`, `-d`, `-b/-x` |
-| Env vars | Only `SQLITE_WEB_PASSWORD` (README and `sqlite_web.py`; when set, no prompt and password login is enabled). No env var for the database path or port. |
+| Env vars | Only `SQLITE_WEB_PASSWORD` (`sqlite_web.py` at 0.8.2). **It is read only when the `-P/--password` flag is also given**; the env var alone leaves the UI without a login. With `-P` and the var set there is no prompt; with `-P` and no var it prompts on stdin. No env var for the database path or port. |
 | Port | 8080/http (draft correct, also README) |
 | Data | Database file path is a positional argument; the upstream image uses `/data`. The draft mounts under `/config`. |
 
@@ -34,7 +34,7 @@ No `defaults/`, `etc/` or `health/`. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-Why: pure-Python Flask app. The base python is built with `--enable-loadable-sqlite-extensions` and `libsqlite3-dev` (`apps/python/Dockerfile`), so the stdlib `sqlite3` module is available. Closest sibling: `apps/bazarr` (python base, `pip install`, `exec python`). Check that `gevent` has wheels for Python 3.15; otherwise it needs a compiler at build time (UNVERIFIED; fallback below).
+Why: pure-Python Flask app. The base python is built with `--enable-loadable-sqlite-extensions` and `libsqlite3-dev` (`apps/python/Dockerfile`), so the stdlib `sqlite3` module is available. Closest sibling: `apps/bazarr` (python base, `pip install`, `exec python`). PyPI has cp315 manylinux x86_64 and aarch64 wheels for `gevent` 26.9.0 and `greenlet` 3.5.6, so no compiler is expected.
 
 ## 4. Dockerfile
 
@@ -46,7 +46,7 @@ Why: pure-Python Flask app. The base python is built with `--enable-loadable-sql
    curl -fsSL -o /usr/share/licenses/sqlite-web/LICENSE "https://raw.githubusercontent.com/coleifer/sqlite-web/${VERSION}/LICENSE"
    rm -rf /root/.cache /tmp/*
    ```
-   Uses system site-packages under `/usr/local` as bazarr does (`PIP_BREAK_SYSTEM_PACKAGES=1` set by the base); do not touch `/app/venv`. `/app` stays empty, which is fine because nothing application-specific must live there. If `gevent` has no wheel and needs a compiler, add `build-essential` via apt first (check whether the base keeps it) and purge afterwards; if gevent cannot be built, drop the extra and use `sqlite_web` instead of `sqlite_wsgi` (note it in the PR).
+   Uses system site-packages under `/usr/local` as bazarr does (`PIP_BREAK_SYSTEM_PACKAGES=1` set by the base); do not touch `/app/venv`. `/app` stays empty, which is fine because nothing application-specific must live there. `gevent` is installed unpinned from its cp315 wheels. If it fails at runtime, fall back to `sqlite_web` (Flask server) and note it in the PR.
 3. `ENV PYTHONDONTWRITEBYTECODE=1 HOME=/config` (the first is already in the base).
 4. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, `WORKDIR /config`.
 
@@ -103,13 +103,15 @@ mkdir -p "$(dirname "${DB}")"
 import sqlite3, sys
 sqlite3.connect(sys.argv[1]).close()
 PY
-# SQLITE_WEB_PASSWORD, when set, is read by the app itself (not on the command line)
+# The app reads SQLITE_WEB_PASSWORD only when -P is passed. The password itself stays off the command line.
+AUTH=()
+[ -n "${SQLITE_WEB_PASSWORD:-}" ] && AUTH=(-P)
 # shellcheck disable=SC2086
-exec sqlite_wsgi -H 0.0.0.0 -p "${SQLITE_WEB_PORT:-8080}" ${SQLITE_WEB_ARGS:-} "${DB}"
+exec sqlite_wsgi -H 0.0.0.0 -p "${SQLITE_WEB_PORT:-8080}" "${AUTH[@]}" ${SQLITE_WEB_ARGS:-} "${DB}"
 ```
-- Idempotent: an existing database is never touched. `/config` empty is handled by creating an empty database (an empty file is a valid SQLite database). UNVERIFIED: whether `sqlite_web` needs the file to already exist; creating it avoids the question.
+- Idempotent: an existing database is never touched. `/config` empty is handled by creating an empty database (an empty file is a valid SQLite database). In normal mode peewee would create a missing file; creating it first also covers `-r` (read-only), which exits if the file is missing (`initialize_dataset`).
 - Binds `0.0.0.0` (upstream default is `127.0.0.1`, which would make the UI unreachable from other containers).
-- Password stays in env, not in `-P` flags or the process list.
+- `-P` is a value-less switch, so the password stays in env and out of the process list. Never add `-P` when the variable is empty: the app would prompt on stdin and fail. Say so for `SQLITE_WEB_ARGS` in the docs.
 - No writes under `/app`; the cache dir is `/tmp` if anything needs one. Note `SQLITE_WEB_ARGS` is word-split on purpose (for `-r`, `-u /prefix/`, `-F`).
 - Final process: `exec sqlite_wsgi`.
 
@@ -140,9 +142,9 @@ The test runs without env vars, so the password path (`SQLITE_WEB_PASSWORD`) is 
 - No authentication unless `SQLITE_WEB_PASSWORD` is set; the UI can run arbitrary SQL, and with `-L`/`-F` it can load or browse files. Keep those options off by default, document the password env, and put it behind an auth proxy or private network (draft caveat).
 - The database must be writable for edits; bind-mounted single files break SQLite journaling, so mount a directory.
 - The upstream image compiles SQLite with FTS5, JSON1, STAT4 and more; the python base builds against Ubuntu's `libsqlite3` (Ubuntu's build enables FTS5 and JSON). Features that need a custom SQLite build may differ (low risk).
-- `gevent` on Python 3.15 and `peewee>=4` compatibility: UNVERIFIED until built. Fallback is the Flask server (`sqlite_web`).
+- `gevent` and `peewee>=4` runtime behaviour on Python 3.15: UNVERIFIED until built. Fallback is the Flask server (`sqlite_web`).
 - `sqlite_web` uses the PyPI package, not the GitHub archive; the draft's "copied source" is equivalent.
-- No arm64 blocker (pure Python wheel; `gevent` builds or has an aarch64 wheel, UNVERIFIED).
+- No arm64 blocker (pure Python wheel; `gevent` and `greenlet` publish cp315 aarch64 wheels).
 
 ## 11. Build and test steps
 
@@ -157,7 +159,7 @@ docker logs -f sqlite-web-probe
 forgetool containers test --image sqlite-web:0.8.2 --config ./apps/sqlite-web/container-test.yaml
 docker rm -f sqlite-web-probe; docker volume rm sqlite-web-probe-config
 ```
-Readiness signal: the gevent server stays up and prints its listening line (`Serving on http://0.0.0.0:8080` or similar, UNVERIFIED exact text), and `curl -fsS localhost:8080/` returns the page. Extra manual checks: restart with the same volume and confirm tables created through the UI persist; run once with `-e SQLITE_WEB_PASSWORD=x` and confirm a login page; connect from a second container to prove it is not localhost-only.
+Readiness signal: the gevent server stays up and prints `Serving on 0.0.0.0:8080` (`sqlite_web/wsgi_server.py`), and `curl -fsS localhost:8080/` returns the page. Extra manual checks: restart with the same volume and confirm tables created through the UI persist; run once with `-e SQLITE_WEB_PASSWORD=x` and confirm a login page (mandatory: the automated test cannot catch a missing `-P`); connect from a second container to prove it is not localhost-only.
 
 ## 12. PR checklist
 

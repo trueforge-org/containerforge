@@ -6,8 +6,8 @@
 | Item | Value |
 | --- | --- |
 | Version | `0.4.13-beta-release` (released 2026-11-24 as GitHub tag/release `0.4.13-beta-release-prebuild`, marked Latest). The draft links `0.4.12-beta-release`, which is now one release behind. 0.4.13 fixes two critical security issues (credentials kept in browser localStorage; unbounded WebSocket message size), so do not pin 0.4.12. |
-| Renovate | `datasource=github-releases depName=nirui/sshwifty versioning=loose extractVersion=^(?<version>.+)-prebuild$` (the release tag is `<version>-prebuild`, and `VERSION` keeps the `0.4.13-beta-release` part). UNVERIFIED: that every release has the `-prebuild` suffix and that no other tag styles are published as releases; check the releases list once more when writing the bake file. |
-| License | AGPL (LICENSE.md is GNU AFFERO GENERAL PUBLIC LICENSE Version 3; README: "licensed under AGPL"). SPDX `AGPL-3.0-only` (UNVERIFIED whether "or later" applies; the README does not say). |
+| Renovate | `datasource=github-releases depName=nirui/sshwifty versioning=loose extractVersion=^(?<version>.+)-prebuild$` (the release tag is `<version>-prebuild`, and `VERSION` keeps the `0.4.13-beta-release` part). The recent releases (0.4.6 to 0.4.13) all use the `-prebuild` suffix and are not flagged prerelease. UNVERIFIED: older tag styles and the Renovate behaviour itself. |
+| License | AGPL v3 or later: the header of `sshwifty.go` at the release tag says "either version 3 of the License, or (at your option) any later version" (`LICENSE.md` is the AGPL v3 text). SPDX `AGPL-3.0-or-later`. |
 | Source URL | https://github.com/nirui/sshwifty/ (the draft says `niruix/sshwifty`, which is only the Docker Hub user; the GitHub owner is `nirui`) |
 | amd64 | https://github.com/nirui/sshwifty/releases/download/0.4.13-beta-release-prebuild/sshwifty_0.4.13-beta-release_linux_amd64.tar.gz (HTTP 206 checked) |
 | arm64 | https://github.com/nirui/sshwifty/releases/download/0.4.13-beta-release-prebuild/sshwifty_0.4.13-beta-release_linux_arm64.tar.gz (HTTP 206 checked) |
@@ -63,7 +63,7 @@ Why: static Go binary, no runtime packages. `curl`, `tar`, `ca-certificates` are
 
 - `APP = "sshwifty"`
 - `VERSION`, preceded by `// renovate: datasource=github-releases depName=nirui/sshwifty versioning=loose extractVersion=^(?<version>.+)-prebuild$`, default `"0.4.13-beta-release"`
-- `LICENSE = "AGPL-3.0-only"`, `SOURCE = "https://github.com/nirui/sshwifty/"`
+- `LICENSE = "AGPL-3.0-or-later"`, `SOURCE = "https://github.com/nirui/sshwifty/"`
 - Targets: `docker-metadata-action`, `image` (args.VERSION and OCI source/licenses labels), `image-local` (`type=docker`, tag `${APP}:${VERSION}`), `image-all` (`linux/amd64`, `linux/arm64`), `group "default" { targets = ["image-local"] }`.
 - Run `docker buildx bake --print`. If the odd `-beta-release` version string makes the image tag awkward, keep it anyway so `VERSION` equals the Dockerfile `ARG`.
 
@@ -95,13 +95,23 @@ env:
   - {name: SSHWIFTY_DOCKER_TLSCERT, default: "", required: false}
   - {name: SSHWIFTY_DOCKER_TLSCERTKEY, default: "", required: false}
   - {name: SSHWIFTY_CONFIG, default: "", required: false}
+  - {name: SSHWIFTY_HOOK_BEFORE_CONNECTING, default: "", required: false}
+  - {name: SSHWIFTY_HOOKTIMEOUT, default: "", required: false}
+  - {name: SSHWIFTY_PINNEDSSHHOSTFINGERPRINTS, default: "", required: false}
+  - {name: SSHWIFTY_INITIALTIMEOUT, default: "", required: false}
+  - {name: SSHWIFTY_READTIMEOUT, default: "", required: false}
+  - {name: SSHWIFTY_WRITETIMEOUT, default: "", required: false}
+  - {name: SSHWIFTY_HEARTBEATTIMEOUT, default: "", required: false}
+  - {name: SSHWIFTY_READDELAY, default: "", required: false}
+  - {name: SSHWIFTY_WRITEELAY, default: "", required: false}
+  - {name: SSHWIFTY_DEBUG, default: "", required: false}
   - {name: TZ, default: "Etc/UTC", required: false}
 volumes:
   - path: /config
     required: false
 dependencies: []
 ```
-Write the env entries in the multi-line form siblings use. Only add upstream-read variables (all above are in the upstream Dockerfile/README). Timeouts, hooks and fingerprint variables can be added the same way if desired. `/config` is only for an optional config file, hence `required: false`.
+Write the env entries in the multi-line form siblings use. The list covers the variables read in `sshwifty.go` and `loader_enviro.go` (the two `SSHWIFTY_DOCKER_*` ones are handled by `start.sh`, as by the upstream wrapper). When a config file is used, the other env vars are ignored. `/config` is only for an optional config file, hence `required: false`.
 
 ## 7. start.sh
 
@@ -147,7 +157,7 @@ Runs with no env, so env-only defaults are tested. `GET /` serves the embedded U
 - Upstream runtime writes: only the TLS temp files written by the upstream wrapper (`/tmp/cert`, `/tmp/certkey`), which we keep in `/tmp`. The app has no database or log files.
 - Binary in `/app` is read-only, owned by `apps` (568); port 8182 is unprivileged. The chart's `runAsNonRoot false` / `runAsUser 0` is not needed.
 - `/config` holds only an optional `sshwifty.conf.json`; there is no extra persistence (draft: none).
-- Upstream's default config search also looks in the user's home and `/etc`; `HOME=/config` keeps the home lookup on `/config` (UNVERIFIED which default paths are searched).
+- Without `SSHWIFTY_CONFIG` the app searches `<user home>/.config/sshwifty.conf.json`, `/etc/sshwifty.conf.json` and `sshwifty.conf.json` next to the binary (`application/configuration/loader_file.go`), then falls back to env vars. The home comes from Go's `user.Current()`, which normally reads the passwd entry rather than `HOME` (UNVERIFIED for this static binary), so rely on the explicit `SSHWIFTY_CONFIG` set in `start.sh`, not on `HOME`.
 
 ## 10. Risks, caveats and open questions
 
@@ -156,7 +166,6 @@ Runs with no env, so env-only defaults are tested. `GET /` serves the embedded U
 - 0.4.13 introduces CORS/`Origin` handling changes and "empty `AllowedOrigins` is not verified"; behind a proxy set `SSHWIFTY_ALLOWEDORIGINS` as needed (UNVERIFIED exact semantics).
 - Version string `0.4.13-beta-release` and the `-prebuild` tag make the Renovate regex fragile; verify with a dry run.
 - Draft says arm64 depends on upstream: confirmed, `linux_arm64` is published and listed in `SUM.sha512`.
-- Licence "AGPL" without version qualifier (section 1).
 - The docs mention `SSHWIFTY_WRITEELAY` (typo in upstream); keep the exact spelling.
 
 ## 11. Build and test steps
