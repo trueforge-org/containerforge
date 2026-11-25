@@ -48,7 +48,7 @@ Not needed: `defaults/` (Muximux creates its config on first start, UNVERIFIED f
    ```
    The awk line rewrites the checksum entry to point at the downloaded file. If the awk result is empty, the check must fail the build (`sha256sum -c` on empty input exits 0, so also add a `test -s` guard on the awk output).
 4. Install: `install -m 0755 /tmp/muximux /app/muximux`, then `chown -R apps:apps /app` (the `apps` user owns `/app` per the existing siblings, read-only at runtime).
-5. License: the upstream LICENSE comes from the repo, not the release asset. `curl -fsSL -o /usr/share/licenses/muximux/LICENSE https://raw.githubusercontent.com/mescon/Muximux/v3.7.4/LICENSE` (mkdir first). Use the tag path so the license matches the binary.
+5. License: the upstream LICENSE comes from the repo, not the release asset. `curl -fsSL -o /usr/share/licenses/muximux/LICENSE https://raw.githubusercontent.com/mescon/Muximux/${VERSION}/LICENSE` (mkdir first). Use the tag path so the license matches the binary.
 6. `rm -f /tmp/muximux /tmp/checksums.txt`.
 7. Environment:
    ```dockerfile
@@ -159,7 +159,7 @@ filePaths:
 | `/app/data` (`--data`, config and state) | `--data /config` in start.sh |
 | `XDG_DATA_HOME=/app/data` (Caddy certs, ACME state) | `XDG_DATA_HOME=/config` (persistent, as the draft expects) |
 | Caddy cache (if any) | `XDG_CACHE_HOME=/tmp` |
-| `PUID` / `PGID` and `su-exec` privilege drop | Removed. Runtime user is `apps` (568). Volume ownership must match `apps` (chart runs as 568 in the draft; see section 10). |
+| `PUID` / `PGID` and `su-exec` privilege drop | Removed. Runtime user is `apps` (568). Volume ownership must match `apps` (the chart runs as UID 0 per the draft, so existing volumes may be root-owned; see section 10). |
 | `/app` | Read-only at runtime; binary only. |
 
 Draft expectations reconciled: the chart runs as UID 0 with `runAsNonRoot false`, but the image itself runs as `apps` and needs no root at runtime. `readOnlyRootFilesystem` is compatible with `--read-only --tmpfs /tmp`. Not privileged, no host mounts.

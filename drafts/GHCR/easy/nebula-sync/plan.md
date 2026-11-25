@@ -10,7 +10,7 @@
 | License | MIT (https://raw.githubusercontent.com/lovelaze/nebula-sync/main/LICENSE). Use `LICENSE = "MIT"` in bake. |
 | Source URL | https://github.com/lovelaze/nebula-sync |
 | Per-arch download | amd64: https://github.com/lovelaze/nebula-sync/releases/download/v0.11.3/nebula-sync_0.11.3_linux_amd64.tar.gz · arm64: https://github.com/lovelaze/nebula-sync/releases/download/v0.11.3/nebula-sync_0.11.3_linux_arm64.tar.gz |
-| Checksum source | `checksums.txt` release asset (name confirmed in the release API). Its line format is `UNVERIFIED: checksums.txt contents were not fetched`; read the file once before writing the `sha256sum` step. |
+| Checksum source | `checksums.txt` release asset (name confirmed in the release API). Fetched for v0.11.3: lines are `<sha256>  nebula-sync_0.11.3_linux_amd64.tar.gz` (two spaces; amd64 `00da0bbf149e860b7262d133568214fc1809b1625d95ecd6f56eded9ed7aef84`, arm64 `67b978edf4e98e663c3a288510fdfd6f575e38bed9686aa468c59e147aacb33a`). It also lists darwin and linux_386 assets. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/lovelaze/nebula-sync/v0.11.3/Dockerfile: builder `golang:1.26-alpine`, `CGO_ENABLED=0`, `-trimpath -w -s`, `-X …/version.Version=$VERSION`; final `FROM scratch`; `USER 1001`; `ENV API_ENABLED=true`; `HEALTHCHECK` runs `nebula-sync healthcheck`; `ENTRYPOINT ["nebula-sync"]`, `CMD ["run"]`; no EXPOSE, no VOLUME. |
 | Binary type | Static Go binary (CGO off), so it runs on glibc Ubuntu. No musl issue. |
 | Ports | UNVERIFIED: the README does not state a listen port, and upstream has no EXPOSE. Only the optional `API_ENABLED` server is mentioned by name. |
@@ -45,13 +45,13 @@ Files in `apps/nebula-sync/`:
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Download the release tarball for `TARGETARCH` into `/tmp`. Map `TARGETARCH` to the release name: `amd64` → `linux_amd64`, `arm64` → `linux_arm64`. Use `curl -fL` and `-o /tmp/nebula-sync.tar.gz`.
-3. Download `checksums.txt` for the same tag and verify the tarball with `grep " nebula-sync_${VERSION}_linux_${arch}.tar.gz$" checksums.txt | sha256sum -c -`. Mark this step as not yet tested, since the file format is UNVERIFIED.
+3. Download `checksums.txt` for the same tag and verify the tarball with `grep " nebula-sync_${VERSION}_linux_${arch}.tar.gz$" checksums.txt | sha256sum -c -`. Format confirmed (section 1); the step itself is not yet run. Add a `test -s` guard so an empty grep result fails the build.
 4. Extract only the binary (`tar xzf … -C /app nebula-sync`). Check the tarball's member list first, since it may also hold LICENSE and README.
 5. Ship the license under `/usr/share/licenses/nebula-sync/` (MIT, from the upstream LICENSE, fetched from the tag, not from `main`).
 6. `chown -R apps:apps /app && chmod -R 755 /app`, then `rm -f /tmp/nebula-sync.tar.gz`.
 7. `ENV API_ENABLED=true`, mirroring upstream. Upstream sets it, so it is safe to keep. Document it in `settings.yaml` only if the app reads it (see section 6).
 8. `USER apps`, `COPY --chmod=0755 . /`.
-9. `VOLUME /config` only if start.sh writes state there. Current plan: no writes, so skip. Final decision after section 7 review.
+9. `VOLUME /config` (repo rule; the image must run with an empty `/config` even though nothing is written there).
 
 Keep `COPY --chmod=0755 . /` as the required directive.
 
@@ -115,14 +115,16 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-volumes: []
+volumes:
+  - path: /config
+    required: false
 dependencies: []
 ```
 
 Notes:
 
 - `required: true` env vars need a non-empty default or handling in `start.sh`. `PRIMARY` and `REPLICAS` have no safe default, so the rule in `settings-yaml.instructions.md` conflicts with the app. Resolve this in section 10 before writing the file.
-- `volumes`: none, since no state is written. If an empty-`/config` requirement applies, add `/config` as `required: true` and seed nothing.
+- `volumes`: `/config` is declared (matches `VOLUME /config`); nothing is written there and nothing is seeded.
 - Do not add the selective-sync variables by default. List only what `start.sh` or the app reads.
 
 ## 7. start.sh
@@ -157,9 +159,8 @@ filePaths:
 ## 10. Risks, caveats and open questions
 
 - **Required env with no default.** `PRIMARY`, `REPLICAS` and `FULL_SYNC` are all required, so the container cannot start without them. The protocol's run step (step 3) needs a "still running" process and readiness log, which needs valid env. Plan: run step 3 manually with real-looking test values (e.g. `PRIMARY=http://127.0.0.1:1|x`) and expect a failed connection, not a clean start. Decide the readiness signal before writing the test.
-- **`CRON` unset means one-shot.** Without `CRON` the README implies the process runs once and exits, which fails the "still running" criterion. Decide whether to default `CRON` in `start.sh` or leave the container as a one-shot job. Do not invent a default silently.
+- **`CRON` unset means one-shot.** README lists a `CRON` default of `0 * * * *` in its env table (UNVERIFIED whether that is applied when unset). If instead unset means one-shot, the README implies the process runs once and exits, which fails the "still running" criterion. Decide whether to default `CRON` in `start.sh` or leave the container as a one-shot job. Do not invent a default silently.
 - **Port.** UNVERIFIED. Upstream has `HEALTHCHECK` with `nebula-sync healthcheck`, and `API_ENABLED=true`, but no port. Confirm with a run, or the upstream source in `v0.11.3`, before adding `ports` and a `tcp` probe.
-- **Checksum format.** UNVERIFIED: `checksums.txt` contents not fetched. Confirm the line format before writing the `sha256sum` step.
 - **Pi-hole/AdGuard dependency.** The container does nothing useful without external instances. Expect the first run to fail on connection; this is by design.
 - **Credentials in env.** `PRIMARY` contains a password. Support `PRIMARY_FILE` and `REPLICAS_FILE` for Docker secrets, and keep the env path documented as the less safe option. Do not echo the value in `start.sh` logs.
 - **`settings.yaml` vs required env.** See section 6. Needs a decision.

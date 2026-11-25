@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | **v0.18.5.4** (tag `v0.18.5.4`, published 2026-10-17, not prerelease). Matches chart image `ghcr.io/sethforprivacy/simple-monerod:v0.18.5.4`. Source: `gh api repos/monero-project/monero/releases/latest`; chart: https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/monero-node/values.yaml |
 | Renovate | `datasource=github-releases depName=monero-project/monero versioning=loose`. Same annotation the upstream wrapper uses (https://github.com/sethforprivacy/simple-monerod-docker/blob/08e993d/Dockerfile, line 1). |
-| License | UNVERIFIED: Monero's `LICENSE` and SPDX identifier were not fetched. Confirm at https://github.com/monero-project/monero/blob/v0.18.5.4/LICENSE before pinning `LICENSE` in bake. |
+| License | BSD-3-Clause (master `LICENSE` text read: "Copyright (c) 2014-2024, The Monero Project. All rights reserved." followed by the BSD terms; UNVERIFIED that the v0.18.5.4 tag is identical). Website https://getmonero.org. |
 | Source URL | https://github.com/monero-project/monero |
 | Upstream image Dockerfile reviewed | https://github.com/sethforprivacy/simple-monerod-docker/blob/08e993d/Dockerfile: builds a static monerod from source (`MONERO_BRANCH=v0.18.5.4`, `MONERO_COMMIT_HASH=85f036ba7019cd36f08e8a38a27c37ea7b522618`) on `alpine:3.24.4`; final stage has `ENTRYPOINT /entrypoint.sh` (root PID 1, drops to `PUID`/`PGID`, default 1000, via su-exec), `HEALTHCHECK /healthcheck.sh`, `HOME=/home/monero`, `EXPOSE 18080 18089`, and `CMD --rpc-restricted-bind-ip=0.0.0.0 --rpc-restricted-bind-port=18089 --no-igd --no-zmq --enable-dns-blocklist --ban-list=/home/monero/ban_list.txt`. We do not copy the source build; we use the official tarball. |
 | Per-arch download (confirmed, HTTP 200) | amd64: https://downloads.getmonero.org/cli/monero-linux-x64-v0.18.5.4.tar.bz2 (Content-Length 85037503) · arm64: https://downloads.getmonero.org/cli/monero-linux-armv8-v0.18.5.4.tar.bz2 (Content-Length 74776406). Both are listed in the release body. |
@@ -91,7 +91,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED-SPDX"   // replace with the confirmed SPDX id before the first build
+  default = "BSD-3-Clause"
 }
 
 variable "SOURCE" {

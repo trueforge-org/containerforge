@@ -36,7 +36,7 @@ Files in `apps/node-red/`:
 ## 3. Base image
 
 - Draft says runtime image `ghcr.io/trueforge-org/python-node`. The protocol table maps Node-only apps to `ghcr.io/trueforge-org/ubuntu`, and Node-RED needs no Python.
-- Decision needed: Node-RED needs Node 24 (the upstream base). The ContainerForge `ubuntu` base has no Node, so the build must install it. The only ContainerForge base in this repo that ships Node is `python-node` (used by `apps/budge` and `apps/changedetection`). Its Node version is UNVERIFIED.
+- Decision needed: Node-RED needs Node 24 (the upstream base). The ContainerForge `ubuntu` base has no Node, so the build must install it. The only ContainerForge base in this repo that ships Node is `python-node` (used by `apps/budge` and `apps/changedetection`). Its Node version is UNVERIFIED as a pin; a comment in `apps/budge/Dockerfile` refers to "Node 24" on this base, which matches upstream's `node:24`. The `python-node` image has no `apps/python-node` folder in this repo, so the digest comes from `apps/budge/Dockerfile` (confirmed identical).
 - Recommended: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (the digest from the brief), since it is the existing Node base in the repo and avoids a second Node install. Record the Node version in the PR.
 - Closest sibling: `apps/budge` (python-node, npm install of an app, `USER root` for install then `apps`).
 
@@ -111,7 +111,7 @@ filePaths:
 ```
 
 - `tcp` probe for `1880` covers the declared port (section 6). An `http` probe on `/` is an option once the UI is confirmed; keep `tcp` as the minimum.
-- `timeoutSeconds`: use the sibling value (`apps/budge`) once confirmed.
+- `timeoutSeconds`: `apps/budge/container-test.yaml` sets none; leave it unset or choose a value after the first run.
 - No env vars are needed for the test.
 
 ## 9. Rootless and read-only-rootfs adaptations
@@ -144,7 +144,7 @@ From `apps/node-red/`:
    docker logs -f node-red-probe
    docker rm -f node-red-probe; docker volume rm node-red-probe-config
    ```
-   Expected readiness signal: Node-RED's startup line (e.g. "Server now running at http://127.0.0.1:1880/", UNVERIFIED wording until seen in a run). Confirm the wording from the first real log.
+   Also confirm Node-RED binds all interfaces (check `uiHost` in the seeded `settings.js` and curl from outside the container). Expected readiness signal: Node-RED's startup line (e.g. "Server now running at http://127.0.0.1:1880/", UNVERIFIED wording until seen in a run). Confirm the wording from the first real log.
 4. `forgetool containers test --image node-red:5.0.10 --config ./apps/node-red/container-test.yaml`
 5. Clean up scratch containers and volumes.
 

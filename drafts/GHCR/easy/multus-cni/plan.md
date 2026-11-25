@@ -58,7 +58,7 @@ Scope check (blocker for the PR, see section 10): `apps/cni-plugins` covers the 
 
    VOLUME /config
    ```
-   No `EXPOSE`. No `VOLUME /config` needed unless start.sh writes there (it does not, see section 7). Keep `COPY --chmod=0755 . /` (required).
+   No `EXPOSE`. `VOLUME /config` is kept as the repo rule requires it, although start.sh does not write there (see section 7). Keep `COPY --chmod=0755 . /` (required).
 
 ## 5. docker-bake.hcl
 
@@ -187,7 +187,7 @@ Manual install check (copy branch, not covered by the test):
 
 ```sh
 mkdir -p /tmp/cni-bin-check
-docker run --rm --read-only --tmpfs /tmp -v /tmp/cni-bin-check:/host/opt/cni/bin multus-cni:v1.10.0 ./start.sh
+docker run --rm --read-only --tmpfs /tmp -v /tmp/cni-bin-check:/host/opt/cni/bin multus-cni:v1.10.0 /start.sh
 ```
 
 Expected readiness signal: "Installed CNI plugins to /host/opt/cni/bin" in logs, and the container stays up (the `sleep infinity` path). If `sleep infinity` is changed (section 7), expect exit 0 instead.

@@ -37,17 +37,17 @@ Files in `apps/necesse/`:
 
 - Runtime base: `ghcr.io/trueforge-org/steamcmd` (`apps/steamcmd`). The draft's choice is confirmed: that image provides `steamcmd` and `start.sh` that installs apps from `STEAM_APP_IDS`.
 - Its own base: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
-- Pin the steamcmd image by the digest in `apps/steamcmd/docker-bake.hcl`/Dockerfile (copy the FROM line from `apps/steamcmd/Dockerfile`).
+- Pin the steamcmd image by tag and digest. `apps/steamcmd/docker-bake.hcl` records only `VERSION` (`20180105-5build1`), no image digest; its Dockerfile pins the ubuntu digest above (with tag `26.4`). The published steamcmd image digest is UNVERIFIED (take it from the registry at build time). Alternative: rebuild the steamcmd install block on the ubuntu base as `apps/mordhau`'s plan does.
 - Closest sibling: `apps/steamcmd` itself. No other game-server sibling confirmed.
 
 ## 4. Dockerfile
 
 Minimal, because `apps/steamcmd` already provides SteamCMD and `start.sh`:
 
-1. `ARG VERSION`, `ARG TARGETARCH`.
+1. `ARG VERSION`.
 2. `FROM ghcr.io/trueforge-org/steamcmd:<VERSION>@sha256:…` (digest copied from the steamcmd build output, or the image built from `apps/steamcmd`).
 3. `USER root` only if apt is needed. Expect none.
-4. `COPY --chmod=0755 start.sh /start.sh` (game-specific install and run logic) and `USER apps`.
+4. Game-specific run logic goes in `scripts/necesse.sh` (an allow-listed path, copied by `COPY . /`), not `start.sh`: `COPY . /` of a `start.sh` would overwrite the base image's `/start.sh`, which holds the SteamCMD install logic. The entrypoint stays the base `/start.sh` or a wrapper that calls it (UNVERIFIED: how the base hands over to a game command; its last line is `exec steamcmd.sh "$@"`). Then `USER apps`.
 5. `ENV` only defaults the game needs. Use `GAME_PORT`/`PORT` only if confirmed.
 6. `EXPOSE 14159/udp` only once confirmed.
 7. `VOLUME /config` (the steamcmd base already writes `/config`).
@@ -97,7 +97,7 @@ dependencies: []
 ## 7. start.sh
 
 - `set -euo pipefail`.
-- Export `HOME=/config` and `XDG_DATA_HOME=/config`, and use `/tmp` for caches (SteamCMD scratch via the base's `STEAMCMD_TMP_DIR`, which is `/config/steamcmd/tmp` in the base: decide whether to override it to `/tmp` and record the decision).
+- Export `HOME=/config` and `XDG_DATA_HOME=/config`, and use `/tmp` for caches (the base hard-codes `STEAMCMD_TMP_DIR="/config/steamcmd/tmp"` inside its `start.sh`, so it is not overridable by env: moving it to `/tmp` needs a change in the base or accepting `/config`; record the decision).
 - Install or update the server: `STEAM_APP_IDS` is passed to the base `start.sh`, which runs `app_update <id>` into `STEAM_INSTALL_DIR` (default `/config/steamapps`). Set `STEAM_INSTALL_DIR=/config/necesse`. Do not write under `/app`.
 - After install, run the Necesse server binary from the install dir with `exec`. The binary path and arguments are UNVERIFIED (not confirmed from the ich777 start.sh or the game docs).
 - Idempotent: SteamCMD re-runs with `validate` only when `STEAM_APP_VALIDATE=true`.

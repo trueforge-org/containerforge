@@ -49,7 +49,7 @@ Not needed: `defaults/` (Navidrome creates its database on first start, UNVERIFI
    ```
    Add a `test -s` guard on the awk output so an empty match fails the build (`sha256sum -c` on empty input exits 0).
 4. Extract the binary only: `tar xzf /tmp/navidrome.tar.gz -C /app navidrome` (member name UNVERIFIED: confirm with `tar tzf` at build time; the deb path has the same unknown). Then `chmod 0755 /app/navidrome` and `chown apps:apps /app/navidrome`.
-5. License: `mkdir -p /usr/share/licenses/navidrome && curl -fsSL -o /usr/share/licenses/navidrome/LICENSE https://raw.githubusercontent.com/navidrome/navidrome/v0.64.2/LICENSE`. Use the tag path so the license matches the binary. If the archive ships its own LICENSE, prefer that copy (UNVERIFIED).
+5. License: `mkdir -p /usr/share/licenses/navidrome && curl -fsSL -o /usr/share/licenses/navidrome/LICENSE https://raw.githubusercontent.com/navidrome/navidrome/${VERSION}/LICENSE`. Use the tag path so the license matches the binary. If the archive ships its own LICENSE, prefer that copy (UNVERIFIED).
 6. `rm -f /tmp/navidrome.tar.gz /tmp/navidrome_checksums.txt`.
 7. Environment (no `HOME` change needed; data lives in `/config`):
    ```dockerfile
