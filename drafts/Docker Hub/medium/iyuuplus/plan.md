@@ -9,7 +9,7 @@
 | Renovate | Proposed `datasource=git-refs depName=https://github.com/ledccn/iyuuplus-dev currentValue=master` (precedent: `apps/tvheadend`). The commit SHA to pin is UNVERIFIED: it was not fetched. |
 | License | MIT (https://github.com/ledccn/iyuuplus-dev and https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/LICENSE) |
 | Source URL | https://github.com/ledccn/iyuuplus-dev |
-| Download | Only `https://github.com/ledccn/iyuuplus-dev/archive/HEAD.zip` (unpinned). No release assets. A commit-pinned archive `https://github.com/ledccn/iyuuplus-dev/archive/${VERSION}.tar.gz` is the proposed form (same as `apps/fenrus`), but the commit is UNVERIFIED. |
+| Download | Only `https://github.com/ledccn/iyuuplus-dev/archive/HEAD.zip` (unpinned). No release assets. A commit-pinned archive `https://github.com/ledccn/iyuuplus-dev/archive/${VERSION}.tar.gz` is the proposed form (same as `apps/tvheadend`), but the commit is UNVERIFIED. |
 | Checksum source | UNVERIFIED: none for a source archive. The pinned commit SHA is the content address. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/docker/Dockerfile. `FROM alpine:3.21` (not Debian or Ubuntu). Installs s6-overlay, PHP 8.3 with extensions, nginx, nginx-mod-http-headers-more, Composer, and mariadb with mariadb-client. Creates `/iyuu`. Optional apk mirror rewrite (`ARG package_url`). `COPY --chmod=755 ./rootfs /`. `ENTRYPOINT ["/init"]` (s6-overlay). No `CMD`. Runs as root. |
 | Port | `EXPOSE 8780` (upstream). The draft's `8787` is inferred and conflicts with upstream. Use 8780 unless the app says otherwise (UNVERIFIED). |

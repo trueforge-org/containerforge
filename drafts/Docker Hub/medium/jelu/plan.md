@@ -9,8 +9,8 @@
 | Renovate | Proposed `datasource=github-releases depName=bayang/jelu versioning=semver`. UNVERIFIED: the repo renovate config was not checked against this value. |
 | License | MIT (https://raw.githubusercontent.com/bayang/jelu/main/LICENSE) |
 | Source URL | https://github.com/bayang/jelu |
-| Download | `https://github.com/bayang/jelu/releases/download/v0.88.4/jelu-0.88.4.jar`. UNVERIFIED: the release page reports "Assets 3" but the asset list did not load, so the file name is not confirmed. The jar is Java bytecode, so one file serves amd64 and arm64. |
-| Checksum source | UNVERIFIED: none checked. Look for a `.sha256` asset on the release before pinning. Otherwise none is published. |
+| Download | `https://github.com/bayang/jelu/releases/download/v0.88.4/jelu-0.88.4.jar`. Asset name confirmed through the releases API (`jelu-0.88.4.jar`). The jar is Java bytecode, so one file serves amd64 and arm64. |
+| Checksum source | No `.sha256` asset. The GitHub release API digest for `jelu-0.88.4.jar` is `sha256:824446732a02f2c6296c3278c3664e6973f2612b9fd5228a3f7c63ffb533276e`. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/bayang/jelu/2aba1840c9d823851a5d219dcf9802e1a194a4e2/Dockerfile (draft commit). `FROM eclipse-temurin:17-jre-noble`, single stage, Calibre 8.4.0 under `/opt/calibre` on amd64/arm64 (apt Calibre elsewhere), Goodreads plugin v1.8.2, copies pre-extracted Spring Boot layers, `EXPOSE 11111`, `ENTRYPOINT ["java", "-jar", "jelu.jar", "--spring.config.additional-location=optional:file:/config/"]`, runs as root. |
 | Port | 11111/tcp, HTTP web UI and API (README and upstream `EXPOSE`). |
 | Env (real) | Upstream `ENV`: `JELU_DATABASE_PATH=/database/`, `JELU_FILES_IMAGES=/files/images/`, `JELU_FILES_IMPORTS=/files/imports/`, `JELU_METADATA_CALIBRE_PATH=/usr/bin/fetch-ebook-metadata`, `LC_ALL`, `QTWEBENGINE_DISABLE_SANDBOX`. README also documents `JELU_DATABASE_JOURNALMODE` (example `wal`, default UNVERIFIED). Spring Boot maps `JELU_*` variables to `jelu.*` properties. |
@@ -57,7 +57,7 @@ RUN mkdir -p /app /usr/share/licenses/jelu \
  && rm -rf /tmp/*
 ```
 
-   The tag path for the LICENSE is UNVERIFIED. The facts confirm only the `main` branch URL, so if the tag is missing, fetch from `main` and note it. If a `.sha256` asset is found on the release (section 1), verify it with `echo "<sha>  /app/jelu.jar" | sha256sum -c -`.
+   The tag path for the LICENSE is UNVERIFIED. The facts confirm only the `main` branch URL, so if the tag is missing, fetch from `main` and note it. Verify the jar with `echo "824446732a02f2c6296c3278c3664e6973f2612b9fd5228a3f7c63ffb533276e  /app/jelu.jar" | sha256sum -c -` (refresh the hash on every `VERSION` bump).
 4. Do not install Calibre (see section 10). Do not set `JELU_METADATA_CALIBRE_PATH`.
 5. Tail:
 
@@ -178,14 +178,14 @@ filePaths:
 
 ## 10. Risks, caveats and open questions
 
-- The release jar name and URL are UNVERIFIED (section 1). This is the main blocker. Confirm the asset list before writing the Dockerfile.
+- The release jar name is confirmed (section 1); the checksum must be refreshed on each version bump.
 - Upstream builds the image from pre-extracted Spring Boot layers, not from the release jar. Check that the release jar starts the same way (UNVERIFIED).
 - Calibre: upstream bundles `fetch-ebook-metadata` (Calibre 8.4.0, large and arch-specific under `/opt/calibre`). The plan leaves it out: book metadata lookups that need it will not work. Confirm that jelu starts without `JELU_METADATA_CALIBRE_PATH` set (UNVERIFIED). Adding Calibre is a separate decision. The Calibre download URL is not in the facts file.
 - Upstream `JELU_METADATA_CALIBRE_PATH=/usr/bin/...` points at an apt install that this image does not have, so it must not be set here.
 - Book metadata lookups need outbound internet (draft caveat).
 - Dependencies: none (SQLite embedded). No database container.
 - arm64: the Docker Hub image has amd64, arm64 and arm/v7 (upstream). This build's arm64 is not tested.
-- Blockers: none confirmed beyond the unverified jar asset and checksum.
+- Blockers: none confirmed.
 
 ## 11. Build and test steps
 
@@ -210,5 +210,5 @@ docker rm -f jelu-probe; docker volume rm jelu-probe-config
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep its sections, and check only the boxes that apply.
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it. The `license/cla` check shows status.
-- Say in the PR what was not tested: the jar asset and its checksum, the start without Calibre, the `--read-only` run, the arm64 build, and the HTTP probe.
+- Say in the PR what was not tested: the start without Calibre, the `--read-only` run, the arm64 build, and the HTTP probe.
 - `docker buildx bake --print` passes; bake `VERSION` equals Dockerfile `ARG VERSION`; no assertion was weakened.

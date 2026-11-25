@@ -10,7 +10,7 @@
 | License | MIT (https://raw.githubusercontent.com/jenkinsci/jenkins/master/LICENSE.txt). The release page did not confirm it, so treat as MIT. |
 | Source URL | https://github.com/jenkinsci/jenkins |
 | Download | `https://get.jenkins.io/war/2.544/jenkins.war` (redirects to a mirror). The draft's `updates.jenkins.io` URL was not fetched directly. The WAR is arch-neutral. Java 17 is the runtime, per architecture. |
-| Checksum source | `https://get.jenkins.io/war/2.544/jenkins.war.sha256` (redirect). The value `58d2c25c42859d0423329221629c9d4f99e68d68cb50d7c61f4474c27938a973` came from a third-party mirror (`mirror.netone.nl`), so it is NOT verified. Fetch the value from get.jenkins.io before pinning. |
+| Checksum source | `https://get.jenkins.io/war/2.544/jenkins.war.sha256` (redirect). The value `58d2c25c42859d0423329221629c9d4f99e68d68cb50d7c61f4474c27938a973` was read from `https://get.jenkins.io/war/2.544/jenkins.war.sha256` on 2026-11-25 and matches the earlier mirror value. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/jenkinsci/docker/2.544/debian/Dockerfile. Base `debian:trixie-20251117-slim`. Two stages: `jlink` builds a trimmed JRE, the controller copies it to `/opt/java/openjdk`. Downloads the WAR with `curl -fsSL`, then `sha256sum -c --strict`. `ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/jenkins.sh"]`. `USER jenkins` (uid/gid 1000). |
 | Upstream WAR_SHA | The Dockerfile hard-codes `fcf13a8ebbe69d678608cc4b3885ece7d7e697d6da4c3691025a06968ddef228`. It does NOT match the 2.544 mirror checksum above. UNVERIFIED which version it belongs to. Do not reuse it. |
 | Upstream fallback | `ARG JENKINS_VERSION=${JENKINS_VERSION:-2.534}` is the upstream default, which differs from 2.544. Pass the version explicitly. |
@@ -89,7 +89,7 @@ variable "VERSION" {
 
 variable "WAR_SHA256" {
   // Not managed by renovate: update together with VERSION, from get.jenkins.io/war/<version>/jenkins.war.sha256
-  default = "UNVERIFIED-fetch-from-get.jenkins.io"
+  default = "58d2c25c42859d0423329221629c9d4f99e68d68cb50d7c61f4474c27938a973"
 }
 
 variable "LICENSE" {
@@ -202,7 +202,7 @@ filePaths:
 
 ## 10. Risks, caveats and open questions
 
-- Checksum: the `WAR_SHA` in upstream (`fcf13a…`) does not match the mirror checksum for 2.544 (`58d2c2…`). Fetch the value from get.jenkins.io, confirm it matches the WAR, and only then pin it. Do not pin the mirror value without checking it.
+- Checksum: the `WAR_SHA` in upstream (`fcf13a…`) belongs to another version (upstream default is 2.534). The pinned value `58d2c2…` comes from get.jenkins.io for 2.544.
 - Renovate cannot bump `WAR_SHA256`. Every version bump is a manual two-value change. Consider a renovate `customManager` in a follow-up, which is out of scope here.
 - Version: 2.544 is the chart's pin, not confirmed as the LTS or latest stable line. Check the LTS update-center before choosing the final version (UNVERIFIED).
 - JRE: upstream builds a `jlink` JRE. The java17 base is a full runtime (see section 3). Check that Jenkins starts and that the `jlink` module list is not needed (UNVERIFIED).
@@ -212,7 +212,7 @@ filePaths:
 - The setup wizard must be completed in the UI on first start (draft caveat). The initial admin password is in `/config/secrets/initialAdminPassword` and in the logs.
 - Dependencies: none.
 - arm64: upstream publishes `jenkins/jenkins:2.544-jdk17` for amd64 and arm64. This build's arm64 is not tested.
-- Blockers: none confirmed beyond the checksum and the JRE question.
+- Blockers: none confirmed beyond the JRE question.
 
 ## 11. Build and test steps
 
@@ -237,5 +237,5 @@ docker rm -f jenkins-probe; docker volume rm jenkins-probe-config
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep its sections, and check only the boxes that apply.
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it. The `license/cla` check shows status.
-- Say in the PR what was not tested: the checksum fetched from get.jenkins.io, the LTS choice, the `--read-only` run, the agent port, the arm64 build, and the `/login` HTTP probe.
+- Say in the PR what was not tested: the LTS choice, the `--read-only` run, the agent port, the arm64 build, and the `/login` HTTP probe.
 - `docker buildx bake --print` passes; bake `VERSION` and `WAR_SHA256` equal the Dockerfile `ARG` values; no assertion was weakened.

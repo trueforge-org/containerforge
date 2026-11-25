@@ -67,7 +67,7 @@ UNVERIFIED: whether the upstream builder runs a TypeScript build of `packages/se
 
 5. Move the result into the runtime layout and make it writable only for build: `mkdir -p /app/joplin && cp -a /tmp/joplin/. /app/joplin/`, then `chown -R apps:apps /app/joplin && chmod -R 755 /app/joplin`.
 6. License file: `mkdir -p /usr/share/licenses/joplin-server && cp /tmp/joplin/LICENSE /usr/share/licenses/joplin-server/LICENSE`. Clear `/tmp/*`.
-7. Final stage: `USER apps`, `COPY --chmod=0755 . /`, `ENV NODE_ENV=production RUNNING_IN_DOCKER=1`, `WORKDIR /app/joplin/packages/server`, `EXPOSE 22300`, `VOLUME /config`.
+7. Final stage `FROM <python-node>` (same digest), `ARG VERSION`, `COPY --from=build --chown=apps:apps /app/joplin /app/joplin` plus the license directory, then `USER apps`, `COPY --chmod=0755 . /`, `ENV NODE_ENV=production RUNNING_IN_DOCKER=1`, `WORKDIR /app/joplin/packages/server`, `EXPOSE 22300`, `VOLUME /config`.
 
 Only the `ENV` values listed as verified in section 1 go into the Dockerfile. Do not add `APP_NAME` or `LICENSE_REQUIRED` values until their values are confirmed.
 
@@ -82,7 +82,7 @@ VOLUME /config
 WORKDIR /app/joplin/packages/server
 ```
 
-Node packages must be in the final image. `node_modules` is needed at runtime, so the final stage must copy the pruned tree from the build stage (or build in place). Use `COPY --from=build --chown=apps:apps /app/joplin /app/joplin`.
+`node_modules` is needed at runtime, which is why the final stage copies the pruned tree from the build stage (step 7). The runtime native libraries (cairo, pango, jpeg, gif, rsvg runtime packages) must also be installed in the final stage; exact names UNVERIFIED.
 
 Version alignment: `ARG VERSION` must equal the `VERSION` default in `docker-bake.hcl` (`3.7.6` in this plan).
 

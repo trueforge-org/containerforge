@@ -10,7 +10,7 @@
 | License | AGPL-3.0 (root `LICENSE`, GNU AFFERO GPL v3: https://raw.githubusercontent.com/Casvt/Kapowarr/V1.3.2/LICENSE). No "or later" clause checked. |
 | Source URL | https://github.com/Casvt/Kapowarr |
 | Download | `https://github.com/Casvt/Kapowarr/releases/download/V1.3.2/Kapowarr-release.zip`, confirmed on https://github.com/Casvt/Kapowarr/releases/expanded_assets/V1.3.2. Arch-neutral Python source zip, so one download serves amd64 and arm64. |
-| Checksum source | None: no `.sha256` asset on the release page. UNVERIFIED for any other checksum source. Pin the tag over HTTPS and record the zip SHA-256 in the PR. |
+| Checksum source | No `.sha256` asset. The GitHub release API digest for `Kapowarr-release.zip` is `sha256:b90ce35f767627ce609025f7eeb1fc31b3cab4e9e975ca9c7d79c84bbd32f05b`; verify the download against it in the Dockerfile (`sha256sum -c`) and refresh it on each `VERSION` bump. |
 | Upstream Dockerfile reviewed | Tag `V1.0.0-beta-4`: https://raw.githubusercontent.com/Casvt/Kapowarr/V1.0.0-beta-4/Dockerfile. Base `python:3.8-slim-buster` (EOL), `WORKDIR /app`, `pip3 install -r requirements.txt`, `COPY . .`, `EXPOSE 5656`, `STOPSIGNAL SIGINT`, `CMD ["python3", "/app/Kapowarr.py"]`, no `USER` line (runs as root). The V1.3.2 Dockerfile was not fetched. |
 | Requirements | https://raw.githubusercontent.com/Casvt/Kapowarr/V1.3.2/requirements.txt: `flask ~=3.0`, `waitress ~=3.0`, `aiohttp ~=3.9`, `cryptography >=46.0.5`, `flask-socketio ~=5.3`, `cron-converter`, `bencoding`, `beautifulsoup4`, `requests[socks]`. No apt packages named. Draft's `build-essential` is inferred, not confirmed. |
 | Port | 5656 (upstream `EXPOSE` in beta-4, chart service `main`: https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kapowarr/values.yaml). |
@@ -62,10 +62,10 @@ RUN set -eux; \
 - `python -m zipfile -e` avoids an `unzip` apt package. `bazarr` installs `unzip` explicitly, but this base has not been checked for it.
 - The zip layout (where `requirements.txt` and `Kapowarr.py` sit) is UNVERIFIED. Run `python -m zipfile -l` on the downloaded file in the build and adjust the paths.
 - The base already installs `build-essential` in its own build stage (`apps/python/Dockerfile`). Do not add it again. Check whether the package is still present in the base image before relying on it for a wheel build.
-- No checksum: UNVERIFIED. Pin the tag and record the zip digest in the PR.
+- Checksum: add `echo "b90ce35f767627ce609025f7eeb1fc31b3cab4e9e975ca9c7d79c84bbd32f05b  /tmp/kapowarr.zip" | sha256sum -c -` after the download (value from section 1).
 - `chown -R apps:apps /app` at build time only. At runtime `/app` is read-only.
 
-3. Final stage: `USER apps`, `COPY --chmod=0755 . /`.
+3. Single stage image; the tail below ends the file.
 4. Tail:
 
 ```dockerfile
@@ -212,7 +212,7 @@ Draft expectations reconciled:
 - Data path (blocker until checked): the upstream V1.3.2 path for `db` and `temp_downloads` is not verified. Read `Kapowarr.py` and the database module in the V1.3.2 zip before writing `start.sh` (section 9).
 - Python 3.15 with Kapowarr V1.3.2 and its requirements: UNVERIFIED. The `cryptography >=46.0.5` pin needs a wheel for each arch on Python 3.15. If none exists, the 3.14 fallback in section 3 applies.
 - Zip layout: UNVERIFIED (section 4).
-- Checksum: none published. Pinning the tag only.
+- Checksum: only the GitHub API asset digest exists (section 1); it must be refreshed by hand on each bump. Renovate `loose` with the uppercase `V` tag prefix handling is UNVERIFIED (may need `extractVersion=^V(?<version>.+)$`).
 - Version jump: the chart uses `v1.0.0-beta-4`, the plan uses `V1.3.2`. The database may need a migration from beta-4. UNVERIFIED. The PR should state whether an existing beta-4 database starts on V1.3.2.
 - ComicVine needs an API key, set in the UI (inferred). Not testable in a single container.
 - `build-essential` is inferred, not confirmed (section 1). Add build packages only if a wheel build fails.
@@ -244,4 +244,4 @@ Readiness signals (expected, UNVERIFIED until a run): the process stays up, the 
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it. The `license/cla` check shows the status.
 - Confirm `docker buildx bake --print` passes and bake `VERSION` (`1.3.2`) equals the Dockerfile `ARG VERSION`.
-- Untested to state honestly in the PR: the `V1.3.2` zip layout, the data path, Python 3.15 compatibility, arm64 wheel for `cryptography`, runtime on `--read-only`, the `http` status code, the beta-4 database upgrade, and the checksum (none published).
+- Untested to state honestly in the PR: the `V1.3.2` zip layout, the data path, Python 3.15 compatibility, arm64 wheel for `cryptography`, runtime on `--read-only`, the `http` status code, the beta-4 database upgrade.
