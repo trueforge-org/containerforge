@@ -27,12 +27,11 @@ apps/tinymediamanager/
   docker-bake.hcl
   settings.yaml
   container-test.yaml
-  start.sh            # thin wrapper: prepares /config, then execs the kasmvnc start script
   defaults/autostart  # openbox autostart that launches tinyMediaManager (overrides kasmvnc's default)
-  defaults/extra.txt  # not needed if baked in Dockerfile; omit unless build step prefers COPY
 ```
+No own `start.sh` (it would overwrite the base `/start.sh`, see section 7); `extra.txt` is written in the Dockerfile.
 - `defaults/autostart` is needed because kasmvnc seeds `/config/.config/openbox/autostart` from `/defaults/autostart` when missing.
-- No `root/` directory (reserved). `DOWNSTREAM_CHANGES.md` is not needed for this app (nothing builds FROM it). Consuming `kasmvnc` as a FROM base means `apps/kasmvnc/DOWNSTREAM_CHANGES.md` should be checked and extended by the implementer, because kasmvnc's own `COPY . /` brings its start.sh and defaults; see risks.
+- No `root/` directory (reserved). `DOWNSTREAM_CHANGES.md` is not needed for this app (nothing builds FROM it). Consuming `kasmvnc` as a FROM base means `apps/kasmvnc/DOWNSTREAM_CHANGES.md` (does not exist yet) should be created by the implementer, because kasmvnc's own `COPY . /` brings its start.sh and defaults; see risks.
 
 ## 3. Base image
 
@@ -49,12 +48,10 @@ Steps:
 3. Download and verify:
 ```dockerfile
 RUN set -eux; \
-    case "${TARGETARCH}" in \
-      amd64) SHA=5901310291318bbbf0768d79dc859b4e8bb3151806fb00231c5b8ddd81aac24e ;; \
-      arm64) SHA=807a0183aae39bdc936af791b7c89ceee5576f0ffaefc709664c5174f3dcff37 ;; \
-      *) echo "unsupported arch ${TARGETARCH}" >&2; exit 1 ;; \
-    esac; \
-    curl -fsSL -o /tmp/tmm.tar.xz "https://archive.tinymediamanager.org/v${VERSION}/tinyMediaManager-${VERSION}-linux-${TARGETARCH}.tar.xz"; \
+    case "${TARGETARCH}" in amd64|arm64) ;; *) echo "unsupported arch ${TARGETARCH}" >&2; exit 1 ;; esac; \
+    URL="https://archive.tinymediamanager.org/v${VERSION}/tinyMediaManager-${VERSION}-linux-${TARGETARCH}.tar.xz"; \
+    curl -fsSL -o /tmp/tmm.tar.xz "${URL}"; \
+    SHA="$(curl -fsSL "${URL}.sha256")"; \
     echo "${SHA}  /tmp/tmm.tar.xz" | sha256sum -c -; \
     mkdir -p /app /usr/share/licenses/tinymediamanager; \
     tar -xJf /tmp/tmm.tar.xz -C /app; \
@@ -64,9 +61,9 @@ RUN set -eux; \
     chown -R root:root /app/tinyMediaManager && chmod -R a+rX /app/tinyMediaManager; \
     rm -f /tmp/tmm.tar.xz
 ```
-(Better: read the sha256 from the upstream `.sha256` file at build time and compare; hard-coded values above go stale on every renovate bump, so implement it as `curl ...sha256` and `echo "$(cat file)  tmm.tar.xz" | sha256sum -c -`.) Whether `extra.txt` takes one option per line and whether `.userdir` removal is needed is UNVERIFIED (docs only say "extra.txt in the tinyMediaManager folder" and `.userdir` text says "REMOVE THIS IF YOU WANT A PORTABLE VERSION"); verify in the run step.
+(The checksum is read from the upstream `.sha256` file at build time, so nothing hard-coded goes stale on a Renovate bump. The hashes in section 1 are for 5.3.5 only, for cross-checking. The `.sha256` URL pattern is documented in section 1; the download URLs use `${VERSION}` and `${TARGETARCH}` consistently, and upstream's file names use `amd64`/`arm64`, matching Docker's TARGETARCH values.) Whether `extra.txt` takes one option per line and whether `.userdir` removal is needed is UNVERIFIED (docs only say "extra.txt in the tinyMediaManager folder" and `.userdir` text says "REMOVE THIS IF YOU WANT A PORTABLE VERSION"); verify in the run step.
 4. `ENV HOME=/config` is already set by the kasmvnc base; keep `TZ` default via the base. Add `ENV TMM_HOME=/app/tinyMediaManager`.
-5. `USER apps`, then `COPY --chmod=0755 . /` (this lands `defaults/autostart` in `/defaults/`, overriding kasmvnc's default, and `start.sh`).
+5. `USER apps`, then `COPY --chmod=0755 . /` (this lands `defaults/autostart` in `/defaults/`, overriding kasmvnc's default).
 6. `EXPOSE 3000 3001`, `VOLUME /config`, `WORKDIR /config`.
 The final line before `CMD`/end must leave `USER apps` as the last `USER` directive.
 
@@ -108,12 +105,11 @@ volumes:
 
 ## 7. start.sh
 
-Goal: prepare `/config` and hand off to the base start script.
-- `mkdir -p /config/data` (tmm data, only when missing).
-- Seeding of `/config/.config/openbox/autostart` is done by the base script from `/defaults/autostart`; our `defaults/autostart` contains one line: `/app/tinyMediaManager/tinyMediaManager &` followed by nothing else (tmm is the visible window; openbox maximizes it).
-- Do not write to `/app`. The JRE, `lib/` and `launcher.yml` stay read-only; data goes to `/config/data` through `extra.txt` (build-time); caches: `-Dtmm.cachefolder=/tmp/tmm-cache` can be appended to `extra.txt` if the cache is large (UNVERIFIED that the folders can be split).
-- Idempotent; no passwords stored in files; `PASSWORD` is handled by the base nginx htpasswd in /tmp.
-- Final line: `exec /start.sh.kasmvnc-orig` is NOT possible, since `COPY . /` would overwrite `/start.sh`. Resolution: do not ship our own `start.sh`; rely on the base `/start.sh` and only ship `defaults/autostart`. If a wrapper is required, install it under a different name (for example `/scripts/tmm-prepare.sh` called from `autostart`), because the allow-list copies `scripts/`. So the final layout drops `start.sh` and adds `scripts/tmm-prepare.sh` (mkdir `/config/data`); `autostart` runs `/scripts/tmm-prepare.sh; exec /app/tinyMediaManager/tinyMediaManager`. The container's PID 1 handoff stays with the base `node index.js`.
+No own `start.sh`: `COPY . /` would overwrite the base image's `/start.sh` (kasmvnc's, which handles `PASSWORD`, `CUSTOM_USER`, ports, nginx and seeds `/config/.config/openbox/autostart` from `/defaults/autostart` only when missing). The base script is the entrypoint chain and stays PID 1 handoff (`node index.js` in kasmvnc).
+- `defaults/autostart` (one shell line, run by openbox): `mkdir -p /config/data && /app/tinyMediaManager/tinyMediaManager &`. It replaces kasmvnc's `xterm` default because `apps/tinymediamanager/defaults/` lands on `/defaults/` after the base `COPY`. Idempotent.
+- Do not write to `/app`. The JRE, `lib/` and `launcher.yml` stay read-only; data goes to `/config/data` through `extra.txt` (build-time); `-Dtmm.cachefolder=/tmp/tmm-cache` can be appended to `extra.txt` if the cache is large (UNVERIFIED that the folders can be split).
+- `PASSWORD` is handled by the base nginx htpasswd in `/tmp`; note the base checks `${PASSWORD+x}`, so a set-but-empty `PASSWORD` enables auth with an empty password; leave the variable unset by default (settings.yaml lists it as documentation only).
+- No secrets are baked.
 
 ## 8. container-test.yaml
 

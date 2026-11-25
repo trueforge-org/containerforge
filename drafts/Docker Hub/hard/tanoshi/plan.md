@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | `0.40.0` (tag/release `v0.40.0`, published 2026-10-23; previous tags v0.39.4, v0.39.3). Draft tag is `faldez/tanoshi:latest`, the original repo `faldez/tanoshi` is gone; the maintained successor is `luigi311/tanoshi` (not archived, MIT). |
-| Renovate | `datasource=github-releases depName=luigi311/tanoshi versioning=semver` with the leading `v` handled in the Dockerfile (`v${VERSION}`), as apps/adguardhome-sync does. |
+| Renovate | `datasource=github-releases depName=luigi311/tanoshi versioning=semver` with the leading `v` handled in the Dockerfile (`v${VERSION}`), as apps/adguardhome-sync does (its Dockerfile uses `v${VERSION}` in the download URL). |
 | License | MIT (GitHub API `spdx_id: MIT`) |
 | Source | https://github.com/luigi311/tanoshi |
 | Release assets (v0.40.0) | `tanoshi-app`, `tanoshi-cli`, `Tanoshi_0.40.0_amd64.AppImage`, `_aarch64.AppImage`, `.deb` (amd64, arm64), flatpaks, `.msi`. These are Tauri desktop/CLI artifacts. UNVERIFIED: no asset named `tanoshi` (the server binary) exists, so the web server has to be compiled (matches draft: compile/compile). |
@@ -40,7 +40,7 @@ apps/tanoshi/
 4. Source: `ADD https://github.com/luigi311/tanoshi.git#v${VERSION} /src`, `WORKDIR /src`; `cd crates/tanoshi-web && trunk build --release`; `cargo build -p tanoshi --release --locked`.
 5. Runtime stage: `ARG VERSION`, `USER root`, apt `ca-certificates libssl3t64 libxml2 libnettle8t64 tini` only if the base lacks them (check first; upstream names `libssl3` and `libxml2-dev`, resolve the real package names on 26.04); pin nothing unless an apt package defines the version.
 6. `COPY --from=builder /tmp/target/release/tanoshi /app/tanoshi`, `chmod 755`; `COPY --from=builder /src/LICENSE /usr/share/licenses/tanoshi/LICENSE`.
-7. `ENV TANOSHI_HOME=/config HOME=/config TANOSHI_LOG=info`, `EXPOSE 8080`, `VOLUME /config`, `COPY --chmod=0755 . /`, last: `USER apps`, `COPY --chmod=0755 . /`.
+7. `ENV TANOSHI_HOME=/config HOME=/config TANOSHI_LOG=info`, `EXPOSE 8080`, `VOLUME /config`, `COPY --chmod=0755 . /`, last: `USER apps`, `COPY --chmod=0755 . /`. `tini` at `/usr/bin/tini` is already in the ubuntu base (its ENTRYPOINT uses it); verify the path before relying on it in start.sh.
 8. Per Dockerfile rules the Rust build is in its own stage; nothing compiled in the runtime stage.
 
 ## 5. docker-bake.hcl
@@ -70,7 +70,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/luigi
 #!/usr/bin/env bash
 set -euo pipefail
 export TANOSHI_HOME="${TANOSHI_HOME:-/config}"
-mkdir -p "$TANOSHI_HOME"/{plugins,downloads,cache,manga}
+mkdir -p "$TANOSHI_HOME"/{plugins,downloads,manga} /tmp/tanoshi-cache
 if [ ! -s "$TANOSHI_HOME/config.yml" ]; then
   umask 077
   cat > "$TANOSHI_HOME/config.yml" <<EOF
@@ -80,12 +80,12 @@ database_path: "$TANOSHI_HOME/tanoshi.db"
 plugin_path: "$TANOSHI_HOME/plugins"
 local_path: "$TANOSHI_HOME/manga"
 download_path: "$TANOSHI_HOME/downloads"
-cache_path: "$TANOSHI_HOME/cache"
+cache_path: "/tmp/tanoshi-cache"
 EOF
 fi
 exec /usr/bin/tini -- /app/tanoshi --config "$TANOSHI_HOME/config.yml"
 ```
-Idempotent, never overwrites an existing config, nothing written to `/app`. UNVERIFIED: that the server binds 0.0.0.0 (the `base_url`/`port` semantic); verify with a connection from outside the container, and add the bind setting if config exposes one. Cache dir could alternatively be `/tmp/tanoshi-cache` (preferred if the app tolerates loss; caches belong in `/tmp`): use `/tmp` for `cache_path` instead of `/config` and drop it from the mkdir.
+Idempotent, never overwrites an existing config, nothing written to `/app`. UNVERIFIED: that the server binds 0.0.0.0 (the `base_url`/`port` semantic); verify with a connection from outside the container, and add the bind setting if config exposes one. The cache lives in `/tmp/tanoshi-cache` (caches belong in `/tmp`, recreated on every start by the mkdir above); UNVERIFIED that the app tolerates losing it.
 
 ## 8. container-test.yaml
 

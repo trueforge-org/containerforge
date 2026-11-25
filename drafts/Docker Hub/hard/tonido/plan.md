@@ -38,7 +38,7 @@ No `defaults/`, `etc/` or `root/`. No `DOWNSTREAM_CHANGES.md` (nothing builds fr
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Guard: `RUN test "${TARGETARCH}" = "amd64"` so an arm64 build fails clearly (bake `image-all` must then be restricted to `linux/amd64`).
 3. apt: `libjpeg8` (name in 26.04 UNVERIFIED; `libjpeg-turbo8` is the likely provider); `fontconfig` is already in the base; `tmux` is not needed (upstream installed it for no documented reason).
-4. Download, no upstream checksum so pin ours: `curl -fsSL -o /tmp/tonido.tar.gz "${TONIDO_URL}"` then `echo "${TONIDO_SHA256}  /tmp/tonido.tar.gz" | sha256sum -c -` (both as `ARG`s with bake variables; values UNVERIFIED because the URL is dead). `tar -xzf /tmp/tonido.tar.gz -C /app`, license/terms files to `/usr/share/licenses/tonido/`.
+4. Download, no upstream checksum so pin ours: `curl -fsSL -o /tmp/tonido.tar.gz "${TONIDO_URL}"` then `echo "${TONIDO_SHA256}  /tmp/tonido.tar.gz" | sha256sum -c -` (both as `ARG`s with bake variables; values UNVERIFIED because the URL is dead). `mkdir -p /app && tar -xzf /tmp/tonido.tar.gz -C /app`, license/terms files to `/usr/share/licenses/tonido/`.
 5. `ENV LD_LIBRARY_PATH=/app/tonido HOME=/config` (upstream path was `/usr/local/tonido`; the archive's top directory name is UNVERIFIED).
 6. `chown -R root:root /app && chmod -R a+rX /app`.
 7. `USER apps` as the last user directive, then `COPY --chmod=0755 . /`.
@@ -88,7 +88,7 @@ mkdir -p /config
 export HOME=/config LD_LIBRARY_PATH=/app/tonido
 exec /app/tonido/tonidoconsole /config
 ```
-- `tonidoconsole <dir>` is the only invocation seen upstream (runit script); the second argument is the data directory, so state goes to `/config`. Bind address/`0.0.0.0` behaviour UNVERIFIED (check with `ss -ltn` from outside the container).
+- `tonidoconsole <dir>` is the only invocation seen upstream (runit script); the only argument is the data directory, so state goes to `/config`. Bind address/`0.0.0.0` behaviour UNVERIFIED (check with `ss -ltn` from outside the container).
 - Idempotent, nothing written to `/app`, caches stay in `/config` only because Tonido keeps its own profile there (cannot be split: UNVERIFIED).
 
 ## 8. container-test.yaml

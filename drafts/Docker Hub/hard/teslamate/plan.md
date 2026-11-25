@@ -32,7 +32,7 @@ No defaults/ (no seeded config files). No root/. No DOWNSTREAM_CHANGES.md.
 ## 3. Base image
 
 - Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
-- Builder: `FROM elixir:1.20.4-otp-29 AS builder` (the exact image upstream uses; Debian trixie, glibc, multi-arch). The release bundles ERTS built against Debian trixie glibc/OpenSSL, run on Ubuntu 26.04 (newer glibc, so compatible; UNVERIFIED OpenSSL 3 soname match, `libssl3t64` is also what upstream installs). No ContainerForge Elixir base exists.
+- Builder: `FROM elixir:1.20.4-otp-29 AS builder` (the exact image upstream uses, tag verified on Docker Hub; Debian trixie, glibc, multi-arch; it is not a ContainerForge image, so pin its digest at implementation time, UNVERIFIED which digest). The release bundles ERTS built against Debian trixie glibc/OpenSSL, run on Ubuntu 26.04 (newer glibc, so compatible; UNVERIFIED OpenSSL 3 soname match, `libssl3t64` is also what upstream installs). No ContainerForge Elixir base exists.
 - Closest siblings: `apps/it-tools` (builder + final stage with npm assets), `apps/postgresql` for the dependency.
 
 ## 4. Dockerfile
@@ -61,7 +61,7 @@ Standard four targets (`docker-metadata-action`, `image`, `image-local`, `image-
 
 Header + `schema_version: 1`, `upstream_env_url: "https://github.com/teslamate-org/teslamate"`.
 - ports: `4000` tcp `required: false`.
-- env (names exactly as upstream): `TZ` `Etc/UTC`; `DATABASE_HOST` `postgresql` (required true); `DATABASE_PORT` `5432`; `DATABASE_NAME` `teslamate` (required true); `DATABASE_USER` `teslamate` (required true); `DATABASE_PASS` `""` (required true: no safe default; start.sh exits with a clear message when empty, see below, so give it a placeholder default like the postgresql sibling `MYPOSTGRESPASSWORD`); `ENCRYPTION_KEY` `""` (required true; start.sh generates and persists one in `/config` when unset, so non-empty requirement is met by generation); `MQTT_HOST` `mosquitto`; `MQTT_PORT` `1883`; `DISABLE_MQTT` `false`; `VIRTUAL_HOST` `localhost`; `CHECK_ORIGIN` `false`; `PORT` `4000`; `TESLA_API_HOST`/`POLLING_*` are not listed (leave to upstream defaults).
+- env (names exactly as upstream): `TZ` `Etc/UTC`; `DATABASE_HOST` `postgresql` (required true); `DATABASE_PORT` `5432`; `DATABASE_NAME` `teslamate` (required true); `DATABASE_USER` `teslamate` (required true); `DATABASE_PASS` `MYPOSTGRESPASSWORD` (required true; placeholder default matching `apps/postgresql/settings.yaml`, which users must override; start.sh does not validate it); `ENCRYPTION_KEY` `""` (required true; start.sh generates and persists one in `/config` when unset, so non-empty requirement is met by generation); `MQTT_HOST` `mosquitto`; `MQTT_PORT` `1883`; `DISABLE_MQTT` `false`; `VIRTUAL_HOST` `localhost`; `CHECK_ORIGIN` `false`; `PORT` `4000`; `TESLA_API_HOST`/`POLLING_*` are not listed (leave to upstream defaults).
 - volumes: `/config` required true (holds the generated encryption key).
 - dependencies: `postgresql` ✅ (apps/postgresql exists), `mosquitto` ✅ (apps/mosquitto exists; skippable with `DISABLE_MQTT=true`). Grafana is a separate upstream service, not an apps/ dependency.
 

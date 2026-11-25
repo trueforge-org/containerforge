@@ -34,7 +34,7 @@ No root/ (reason: reserved). No DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` (nginx already runs rootless with temp dirs in `/tmp`; draft lists it as the alternative to plain ubuntu). Add PHP-FPM from apt. Closest siblings: `apps/bookstack` (PHP 8.5 packages on ubuntu 26.04, apt `php8.5-*` names), `apps/it-tools` / `apps/nginx` (nginx config copy mechanism).
+`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` (nginx already runs rootless with temp dirs in `/tmp`; draft lists it as the alternative to plain ubuntu). Add PHP-FPM from apt. The nginx base entrypoint already seeds `/config/nginx.conf` from `/defaults/nginx.conf` (`cp -n`, `apps/nginx/docker-entrypoint.d/03-copyconfig.sh`), and this app's `defaults/nginx.conf` replaces the base file in the image, so the nginx copy line in start.sh is only a safety net; its `include /config/sites/*.conf` pattern is the base's, so the new `defaults/nginx.conf` must carry the 8080 server block itself (and the base `default.conf` must not also listen on 8080). Closest siblings: `apps/bookstack` (PHP 8.5 packages on ubuntu 26.04, apt `php8.5-*` names), `apps/it-tools` / `apps/nginx` (nginx config copy mechanism).
 
 ## 4. Dockerfile
 
@@ -73,6 +73,7 @@ Header + `schema_version: 1`, `upstream_env_url: "https://github.com/danmed/Tasm
 set -euo pipefail
 mkdir -p /config/data/backups /tmp/php /tmp/nginx-temp /tmp/nginx-cache
 [ -f /config/nginx.conf ] || cp /defaults/nginx.conf /config/nginx.conf
+[ -f /config/php-fpm.conf ] || cp /defaults/php-fpm.conf /config/php-fpm.conf
 if [ ! -f /config/data/config.inc.php ]; then cp /app/www/config.inc.php.example /config/data/config.inc.php; fi
 # apply env on every start without sed (special characters in passwords)
 php -r '...rewrite $DBType, $DBServer, $DBUser, $DBPassword, $DBName assignments in config.inc.php from DBTYPE, MYSQL_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD, DBNAME with var_export...'

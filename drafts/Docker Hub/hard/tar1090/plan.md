@@ -25,7 +25,7 @@ apps/tar1090/
   settings.yaml
   container-test.yaml
   start.sh
-  etc/nginx/tar1090.conf    # nginx server on 8080 serving html + /data -> /tmp/run
+  defaults/default.conf     # nginx server block on 8080 serving html + /data -> /tmp/run (overrides the base image's /defaults/default.conf, which the nginx base copies to /config/sites/ via docker-entrypoint.d/03-copyconfig.sh)
   defaults/config.js        # tar1090 html config seeded to /config when missing
 ```
 No root/. No DOWNSTREAM_CHANGES.md.
@@ -36,8 +36,8 @@ Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820
 
 ## 4. Dockerfile
 
-1. Builder: `ARG VERSION` (3.14.1827 label) and `ARG TAR1090_REF` (commit SHA), `USER root`, apt `build-essential git pkg-config librtlsdr-dev libusb-1.0-0-dev libncurses-dev zlib1g-dev libzstd-dev`. Clone `wiedehopf/readsb` at a pinned ref, `make RTLSDR=yes -j"$(nproc)"`; the exact make flags are UNVERIFIED, check the readsb README.
-2. Fetch tar1090: `ADD https://github.com/wiedehopf/tar1090.git#${TAR1090_REF} /src`; download `aircraft.csv.gz` from `wiedehopf/tar1090-db` (branch `csv`) at build time (UNVERIFIED URL; upstream does it with `gzip -t` check) into the html dir.
+1. Builder: `ARG VERSION` (the commit SHA, same value as the bake `VERSION`; `3.14.1827` is informational only), `USER root`, apt `build-essential git pkg-config librtlsdr-dev libusb-1.0-0-dev libncurses-dev zlib1g-dev libzstd-dev`. Clone `wiedehopf/readsb` at a pinned ref, `make RTLSDR=yes -j"$(nproc)"`; the exact make flags are UNVERIFIED, check the readsb README.
+2. Fetch tar1090: `ADD https://github.com/wiedehopf/tar1090.git#${VERSION} /src`; download `aircraft.csv.gz` from `wiedehopf/tar1090-db` (branch `csv`) at build time (UNVERIFIED URL; upstream does it with `gzip -t` check) into the html dir.
 3. Final: `USER root`, apt `librtlsdr0 libusb-1.0-0 libncurses6 libzstd1 jq` (only those missing in the nginx base; pin none unless version-defining). `COPY --from=builder /src/readsb/readsb /usr/local/bin/readsb`; `COPY --from=builder /src/html /app/tar1090/html`; `COPY --from=builder /src/tar1090.sh /app/tar1090/tar1090.sh`.
 4. Licenses: `/usr/share/licenses/tar1090/` with tar1090 `LICENSE` and readsb `LICENSE`.
 5. `ENV HOME=/tmp`, `EXPOSE 8080`, `VOLUME /config`, `COPY --chmod=0755 . /`, then final `USER apps` and `COPY --chmod=0755 . /`.
@@ -54,7 +54,7 @@ variable "VERSION" {
 variable "LICENSE" { default = "GPL-2.0-or-later" }
 variable "SOURCE"  { default = "https://github.com/wiedehopf/tar1090" }
 ```
-Image tag from a SHA is ugly; alternative is `VERSION = "3.14.1827"` with a second variable `TAR1090_REF` carrying the renovate comment and passed as an extra arg. Choose the second if the maintainers want a semver tag. Standard four targets plus `group "default"`. `docker buildx bake --print`.
+Image tag from a SHA is ugly; alternative is `VERSION = "3.14.1827"` with a second variable `TAR1090_REF` carrying the renovate comment and passed as an extra build arg (then the Dockerfile needs `ARG TAR1090_REF` and the ADD uses it). Default in this plan: SHA as `VERSION`, one ARG, no second variable. Standard four targets plus `group "default"`. `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -66,7 +66,7 @@ Header + `schema_version: 1`, `upstream_env_url: "https://github.com/wiedehopf/t
 
 ## 7. start.sh
 
-- `set -euo pipefail`; `mkdir -p /config/globe_history /tmp/run/readsb /tmp/run/tar1090 /tmp/nginx-temp`; seed `/config/config.js` from `/defaults/config.js` only if missing; link or `alias` it in nginx.
+- `set -euo pipefail`; `mkdir -p /config/globe_history /tmp/run/readsb /tmp/run/tar1090 /tmp/nginx-temp`; seed `/config/config.js` from `/defaults/config.js` only if missing; link or `alias` it in nginx. `/config/nginx.conf` and `/config/sites/default.conf` are seeded by the nginx base entrypoint (`docker-entrypoint.d/03-copyconfig.sh`, `cp -n`), whose `nginx.conf` includes `/config/sites/*.conf`; start.sh must not add a second server block on 8080.
 - Start `readsb --net --write-json /tmp/run/readsb --write-globe-history /config/globe_history --net-api-port 0` plus `--net-connector "$READSB_NET_CONNECTOR"` or `--device-type "$READSB_DEVICE_TYPE"` when set (flag names UNVERIFIED against the pinned readsb help output). Without input it idles and serves an empty map.
 - Start the history writer `tar1090.sh /tmp/run/tar1090 /tmp/run/readsb` in the background (UNVERIFIED argument order; read the script header), with `INTERVAL`, `HISTORY_SIZE` exported.
 - Final `exec nginx -c /config/nginx.conf -g 'daemon off;'` listening on `0.0.0.0:8080`; use `trap` to kill background children on exit.
@@ -110,7 +110,7 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name tar1090-probe --read-only --tmpfs /tmp -v tar1090-probe-config:/config tar1090:9e1b6a48dcb7c4104f3f967f808df45e8f53d44c
 docker logs -f tar1090-probe
-forgetool containers test --image tar1090:<version> --config ./apps/tar1090/container-test.yaml
+forgetool containers test --image tar1090:9e1b6a48dcb7c4104f3f967f808df45e8f53d44c --config ./apps/tar1090/container-test.yaml
 docker rm -f tar1090-probe; docker volume rm tar1090-probe-config
 ```
 Expected: readsb and nginx both running (no `exited` message), `curl -f localhost:8080/` returns the tar1090 page, `curl -f localhost:8080/data/aircraft.json` returns JSON (path UNVERIFIED).

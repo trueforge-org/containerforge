@@ -41,7 +41,7 @@ No `start.sh`: the nginx base image's entrypoint runs `docker-entrypoint.d/*`. N
 2. Fetch source: `ADD https://github.com/standardnotes/app.git#@standardnotes/web@${VERSION} .` (UNVERIFIED that the `@` and `/` in the ref work in BuildKit's git ADD syntax; fallback: `git clone --depth 1 --branch "@standardnotes/web@${VERSION}"`, which needs `git` from apt, check the base first).
 3. `corepack enable && corepack prepare yarn@3.2.1 --activate` (version from `packageManager`), then `yarn install --immutable` and `yarn build:web`. Check the Node version in the base is 22 (`.nvmrc` 22.14.0); if not, install Node 22 in the builder only.
 4. Runtime stage (nginx base): `USER root`, `COPY --from=builder --chown=568:568 /tmp/packages/web/dist/ /usr/share/nginx/html` (the UID/GID used by it-tools), license: `COPY --from=builder /tmp/LICENSE /usr/share/licenses/standardnotes-web/LICENSE` (UNVERIFIED file name at repo root).
-5. `COPY --chmod=0755 . /` (applies defaults/ and docker-entrypoint.d/), `EXPOSE 8080`, `VOLUME /config`, final `USER apps` followed by `COPY --chmod=0755 . /` exactly as in apps/it-tools, `WORKDIR /usr/share/nginx/html`.
+5. Still as root: `COPY --chmod=0755 . /` (applies defaults/ and docker-entrypoint.d/), `EXPOSE 8080`, `VOLUME /config`. Then final `USER apps`, `COPY --chmod=0755 . /` (as in apps/it-tools, whose Dockerfile ends with that pair) and `WORKDIR /usr/share/nginx/html`; USER apps stays the last user instruction.
 6. No apt packages in the runtime stage. Caches stay in `/tmp` (builder only).
 
 ## 5. docker-bake.hcl
@@ -73,7 +73,7 @@ Not applicable: no start.sh. `docker-entrypoint.d/10-copyconfig.sh` (idempotent,
 mkdir -p /config/sites
 [ -f /config/sites/default.conf ] || cp /defaults/default.conf /config/sites/default.conf
 ```
-Server binds `listen 8080` and `listen [::]:8080` (all interfaces). The nginx base's CMD (`nginx -c /config/nginx.conf -g "daemon off;"`) is the final foreground process. UNVERIFIED: that the nginx base's `/config/nginx.conf` includes `/config/sites/*.conf`; confirm in `apps/nginx/defaults/nginx.conf`.
+Server binds `listen 8080` and `listen [::]:8080` (all interfaces). The nginx base's CMD (`nginx -c /config/nginx.conf -g "daemon off;"`) is the final foreground process. Verified: `apps/nginx/defaults/nginx.conf` line 9 has `include /config/sites/*.conf;`.
 
 ## 8. container-test.yaml
 
@@ -122,4 +122,4 @@ Expected: container stays running, nginx starts without `emerg` or permission er
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; put `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign it).
 - Pre-completion: bake --print OK, VERSION aligned between Dockerfile ARG and bake, final `USER apps`, `COPY --chmod=0755 . /` present, empty `/config` start works.
-- Untested (planning only): the yarn build, the git ADD ref syntax, the renovate filter, the arm64 build, the nginx config include path. State this in the PR; do not tick "Built container locally" unless done.
+- Untested (planning only): the yarn build, the git ADD ref syntax, the renovate filter, the arm64 build, (the nginx include path is verified in apps/nginx/defaults/nginx.conf). State this in the PR; do not tick "Built container locally" unless done.
