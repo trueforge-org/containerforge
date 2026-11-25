@@ -9,7 +9,7 @@
 | Renovate | datasource=github-releases, depName=leenooks/phpLDAPadmin, versioning=semver |
 | License | CONFLICT: repo LICENSE file reported GPL-2.0, `composer.json` says MIT. UNVERIFIED which is authoritative; use `GPL-2.0-only` in bake pending a read of the LICENSE file, and ship the LICENSE file. |
 | Source URL | https://github.com/leenooks/phpLDAPadmin/ |
-| Download | Source tarball, same for both arches: `https://github.com/leenooks/phpLDAPadmin/archive/refs/tags/${VERSION}.tar.gz` (API tarball confirmed; tags have no `v` prefix). No release assets. Then `composer install --no-dev`. |
+| Download | Source tarball, same for both arches: `https://github.com/leenooks/phpLDAPadmin/archive/refs/tags/${VERSION}.tar.gz` (API tarball confirmed; tags have no `v` prefix). No release assets. Then `composer install --no-dev`. Draft's `apt:phpldapadmin` binary (PLA 1.x from distro) is not used: the plan targets PLA v2 from the source tag. |
 | Checksum | None published. |
 | Requirements | `composer.json`: php `^8.5`, ext-fileinfo, ext-ldap, ext-iconv, ext-openssl. |
 | Upstream image | `phpldapadmin/phpldapadmin` served by FrankenPHP, runs non-root, listens on 8080 (`SERVER_NAME` default `:8080`). Upstream Dockerfile not reviewed (UNVERIFIED location). |
@@ -34,7 +34,7 @@
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. `apt-get install -y --no-install-recommends php8.5-cli php8.5-fpm php8.5-ldap php8.5-xml php8.5-mbstring php8.5-curl php8.5-zip php8.5-memcached nginx composer unzip` (package names mirror bookstack; UNVERIFIED which are strictly needed). Not pinned: PHP is not the app version.
 3. `mkdir -p /app/www`; `curl -fL -o /tmp/pla.tar.gz https://github.com/leenooks/phpLDAPadmin/archive/refs/tags/${VERSION}.tar.gz`; `tar xzf /tmp/pla.tar.gz -C /app/www --strip-components=1`; `cd /app/www && COMPOSER_HOME=/tmp/composer composer install --no-dev --optimize-autoloader`. If the repo ships built front-end assets (UNVERIFIED) no node is needed; otherwise add a node build stage.
-4. Replace writable Laravel dirs with symlinks to /tmp or /config as bookstack does: `storage/framework/sessions`, `storage/framework/cache`, `storage/framework/views`, `storage/logs`, `bootstrap/cache` -> `/tmp/pla/...` (ephemeral) and `.env` -> `/tmp/pla/.env` or env-only.
+4. Replace writable Laravel dirs with symlinks as `apps/bookstack` does (it links into `/config`; here the targets are /tmp or /config): `storage/framework/sessions`, `storage/framework/cache`, `storage/framework/views`, `storage/logs`, `bootstrap/cache` -> `/tmp/pla/...` (ephemeral) and `.env` -> `/tmp/pla/.env` or env-only.
 5. Licenses: `cp /app/www/LICENSE /usr/share/licenses/phpldapadmin/`.
 6. nginx and php-fpm configs from `etc/` copied via `COPY . /` (pid, logs, temp paths in /tmp, listen 8080, fpm socket in /tmp).
 7. `ENV HOME=/config COMPOSER_HOME=/tmp/composer`.

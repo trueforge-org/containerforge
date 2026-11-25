@@ -7,9 +7,9 @@
 |---|---|
 | Version | 10.8.4 (latest GitHub release, tag `v10.8.4`, published 2022-07-03). Draft pins the same .deb. |
 | Renovate | datasource=github-releases, depName=phoronix-test-suite/phoronix-test-suite, versioning=semver |
-| License | GPL-3.0-or-later. UNVERIFIED: LICENSE file fetch returned 404 (path differs); confirm in the repo before PR. |
+| License | GitHub license API reports `GPL-3.0` for the repo. UNVERIFIED: whether sources say "or later" (plan uses `GPL-3.0-or-later`; use `GPL-3.0-only` if the file headers do not grant it); confirm before PR. |
 | Source URL | https://github.com/phoronix-test-suite/phoronix-test-suite |
-| Download | Arch-independent PHP: `https://github.com/phoronix-test-suite/phoronix-test-suite/releases/download/v10.8.4/phoronix-test-suite-10.8.4.tar.gz` (same file for amd64 and arm64). A `_all.deb` also exists; use the tarball so nothing needs root-level install/sudo. |
+| Download | Arch-independent PHP: `https://github.com/phoronix-test-suite/phoronix-test-suite/releases/download/v10.8.4/phoronix-test-suite-10.8.4.tar.gz` (same file for amd64 and arm64). Release assets (checked via GitHub API) are exactly this tarball and `phoronix-test-suite_10.8.4_all.deb`; use the tarball so nothing needs root-level install/sudo. |
 | Checksum | None published on the release. UNVERIFIED: record the sha256 in the Dockerfile after downloading once, or accept no verification and say so in the PR. |
 | Upstream Dockerfile | None. Only `deploy/docker/ubuntu-pts-docker-build.sh`, reviewed: ubuntu:20.04, packages unzip php-cli apt-utils mesa-utils php-xml git-core apt-file sudo; no ENTRYPOINT, `CMD ["/phoronix-test-suite/phoronix-test-suite","shell"]`; no VOLUME; sets `PTS_USER_PATH_OVERRIDE` and `PTS_DOWNLOAD_CACHE_OVERRIDE` (the only env vars confirmed). |
 | Ports | None. CLI job runner. |
@@ -32,7 +32,7 @@ No `root/`, no `defaults/` (nothing to seed), no DOWNSTREAM_CHANGES.md (not used
 1. `ARG VERSION`, `ARG TARGETARCH` (arch not needed for the download; kept for consistency).
 2. `USER root` for installs only.
 3. `apt-get install -y --no-install-recommends php-cli php-xml php-zip php-curl php-gd unzip build-essential cmake autoconf` (UNVERIFIED which PHP extensions PTS requires; php-cli and php-xml confirmed by upstream script, rest inferred). Not pinned: PHP is not the app version. Clean `/var/lib/apt/lists`.
-4. `curl -fL -o /tmp/pts.tar.gz https://github.com/phoronix-test-suite/phoronix-test-suite/releases/download/v${VERSION}/phoronix-test-suite-${VERSION}.tar.gz`; verify sha256 if one is recorded; `tar xzf ... -C /app --strip-components=1`.
+4. `curl -fL -o /tmp/pts.tar.gz https://github.com/phoronix-test-suite/phoronix-test-suite/releases/download/v${VERSION}/phoronix-test-suite-${VERSION}.tar.gz`; verify sha256 if one is recorded; `mkdir -p /app && tar xzf ... -C /app --strip-components=1`.
 5. Licenses: `mkdir -p /usr/share/licenses/phoronix-test-suite && cp /app/COPYING /usr/share/licenses/phoronix-test-suite/` (UNVERIFIED file name in tarball; check).
 6. `chown -R apps:apps /app && chmod -R 755 /app`.
 7. `ENV HOME=/config PTS_USER_PATH_OVERRIDE=/config/pts PTS_DOWNLOAD_CACHE_OVERRIDE=/config/download-cache` (persistent test profiles/results, per the draft's /var/lib persistence). Compile scratch via `TMPDIR=/tmp`.

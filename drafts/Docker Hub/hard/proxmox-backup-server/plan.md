@@ -45,7 +45,7 @@ Fits as the draft says (dpkg on ubuntu), but the debs target Debian trixie, so d
 4. Do not run the tgz `./install` script (it expects systemd and a host).
 5. Remove systemd units/cron that cannot run; keep the binaries `/usr/sbin/proxmox-backup-api`, `proxmox-backup-proxy`, `proxmox-backup-manager`, `proxmox-backup-client`, and the web UI under `/usr/share/javascript/proxmox-backup` (UNVERIFIED paths; list with `dpkg -L`).
 6. Licence files: `mkdir -p /usr/share/licenses/proxmox-backup-server && cp /usr/share/doc/proxmox-backup*/copyright ...`.
-7. State redirects (root stage): replace `/etc/proxmox-backup`, `/var/lib/proxmox-backup`, `/var/log/proxmox-backup` with symlinks to `/config/etc`, `/config/lib`, `/config/log`, and `/run/proxmox-backup` to `/tmp/run`. Do `rm -rf` the package-created dirs first (UNVERIFIED that PBS follows symlinks and tolerates its own ownership checks; see section 9).
+7. State redirects (root stage): first copy the package-installed `/etc/proxmox-backup` and `/var/lib/proxmox-backup` to `/defaults/etc-proxmox-backup` and `/defaults/lib-proxmox-backup` (`defaults/` is the allow-listed runtime path; these copies are made in the image, not shipped from the repo), then replace `/etc/proxmox-backup`, `/var/lib/proxmox-backup`, `/var/log/proxmox-backup` with symlinks to `/config/etc`, `/config/lib`, `/config/log`, and `/run/proxmox-backup` to `/tmp/run`. Do `rm -rf` the package-created dirs first (UNVERIFIED that PBS follows symlinks and tolerates its own ownership checks; see section 9).
 8. `ENV TZ=Etc/UTC HOME=/config`.
 9. Cleanup: `apt-get clean`, remove `/var/lib/apt/lists/*` and `/tmp/*`.
 10. `USER apps`

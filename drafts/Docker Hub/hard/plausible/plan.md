@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | v3.2.2 (latest GitHub release of plausible/analytics, 2026-11-23). Draft tag v2.0.0 is outdated. |
-| Renovate | datasource=github-releases, depName=plausible/analytics, versioning=semver (tags are `vX.Y.Z`; strip `v` with extractVersion if the repo convention requires) |
+| Renovate | datasource=github-releases, depName=plausible/analytics, versioning=semver (tags are `vX.Y.Z`; add `extractVersion=^v(?<version>.+)$` to the bake comment since `VERSION` has no `v`) |
 | License | AGPL-3.0-only (LICENSE.md confirmed as GNU AGPL v3). |
 | Source URL | https://github.com/plausible/analytics/ |
 | Download | Source tarball for both arches: `https://github.com/plausible/analytics/archive/refs/tags/v${VERSION}.tar.gz`; compiled with `mix release plausible` (MIX_ENV `ce`). No binaries. |
@@ -41,7 +41,7 @@ Final: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270
 ```hcl
 variable "APP" { default = "plausible" }
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=plausible/analytics versioning=semver
+  // renovate: datasource=github-releases depName=plausible/analytics versioning=semver extractVersion=^v(?<version>.+)$
   default = "3.2.2"
 }
 variable "LICENSE" { default = "AGPL-3.0-only" }

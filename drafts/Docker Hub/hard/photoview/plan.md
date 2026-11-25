@@ -79,7 +79,7 @@ Schema header; `timeoutSeconds: 120`; `tcp: - port: '8080'`; `http: - port: '808
 
 - Heavy cgo build (libheif, dlib, libraw, ffmpeg) is slow, especially arm64 under QEMU; upstream `dependencies` image may be required.
 - glibc/library mismatch if build stages are Debian trixie and the final stage is ubuntu 26.04: prefer building the libs from the same ubuntu base, or verify with `ldd`.
-- `-march=native` patch must be kept or the arm64/amd64 binary may not run on other CPUs.
+- The go-face patch that drops `-march=native -lcblas` must be kept, or the binary may not run on other CPUs.
 - Node 18 UI build is EOL; may need newer Node.
 - Face recognition needs models in /app/data/models and CPU features; ffmpeg hardware acceleration not planned.
 - Version 2.4.0 is from 2024; check for unreleased fixes.

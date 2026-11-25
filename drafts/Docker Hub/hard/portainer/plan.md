@@ -1,5 +1,5 @@
 # portainer — implementation plan
-> Source: ./draft.md · Target: apps/portainer/ · Difficulty: hard (reduced to medium by switching to Community Edition) · Role: main · Verified on 2026-11-23
+> Source: ./draft.md · Target: apps/portainer/ · Difficulty: hard (reduced to medium by switching to Community Edition) · Role: sidecar (beImage) in the draft; this plan ports Portainer CE as the standalone main image · Verified on 2026-11-23
 
 ## 1. Verified upstream facts
 

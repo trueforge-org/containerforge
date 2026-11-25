@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | v11.1 (latest tag of flightaware/piaware, 2026-07-01; draft says v10.0, outdated). dump1090-fa also v11.1 (2026-07-01). No GitHub Releases exist (releases/latest returns 404): tags only. |
-| Renovate | datasource=github-tags, depName=flightaware/piaware, versioning=loose (tags are `vX.Y`; use `extractVersion=^v(?<version>.+)$` if needed) |
+| Renovate | datasource=github-tags, depName=flightaware/piaware, versioning=loose (tags are `vX.Y`; `extractVersion=^v(?<version>.+)$` is required so bake `VERSION` has no `v`) |
 | License | BSD-2-Clause (piaware README). dump1090-fa is GPL-2.0-or-later (UNVERIFIED) and is installed in the same image, so the combined image license needs review; use `BSD-2-Clause` for APP and document dump1090 separately. |
 | Source URL | https://github.com/flightaware/piaware/ |
 | Download | Source only. Upstream (sdr-enthusiasts Dockerfile) builds from tags: piaware (`make install`), tcllauncher, piaware-web, dump1090 (`RTLSDR=yes`, outputs dump1090, view1090, faup1090), mlat-client (pip), beast-splitter. Per-arch: compile on the build host, no per-arch URLs. |
@@ -27,7 +27,7 @@ No `root/`; no DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage; build stage also ubuntu with build-essential. No s6: replace with `start.sh` running a small supervisor (bash `wait -n`). Closest sibling for multi-process: `apps/bookstack` (start.sh with background processes); for compiled-from-source: none exact.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage; build stage also ubuntu with build-essential. No s6: replace with `start.sh` starting helpers in the background and `exec`-ing piaware (section 7). No sibling with a multi-process `start.sh` was confirmed (`apps/bookstack/start.sh` ends in a single `exec`); compiled-from-source: none exact. UNVERIFIED precedent.
 
 ## 4. Dockerfile
 
@@ -43,7 +43,7 @@ No `root/`; no DOWNSTREAM_CHANGES.md.
 ```hcl
 variable "APP" { default = "piaware" }
 variable "VERSION" {
-  // renovate: datasource=github-tags depName=flightaware/piaware versioning=loose
+  // renovate: datasource=github-tags depName=flightaware/piaware versioning=loose extractVersion=^v(?<version>.+)$
   default = "11.1"
 }
 variable "LICENSE" { default = "BSD-2-Clause" }
@@ -61,7 +61,7 @@ Header, `schema_version: 1`, `upstream_env_url: "https://github.com/flightaware/
 
 ## 7. start.sh
 
-`mkdir -p /config/piaware /tmp/piaware /tmp/run`; `cp -n /defaults/piaware.conf /config/piaware/piaware.conf`; point piaware at the config with `-configfile` (UNVERIFIED flag; upstream writes /etc/piaware.conf which is read-only); start dump1090-fa (`--net --write-json /tmp/run/dump1090`) and the web server on 0.0.0.0:8080, run piaware, supervise with `wait -n`; final `exec` of piaware (`exec piaware -p /tmp/run/piaware.pid -plainlog`; flags UNVERIFIED). With no RTL-SDR device present dump1090 logs errors; start.sh must not crash-loop: if no `/dev/bus/usb` device and no `RECEIVER_HOST`, run only the web server and log that clearly (open question). Feeder claiming is manual after first start.
+`mkdir -p /config/piaware /tmp/piaware /tmp/run`; `cp -n /defaults/piaware.conf /config/piaware/piaware.conf`; point piaware at the config with `-configfile` (UNVERIFIED flag; upstream writes /etc/piaware.conf which is read-only); start dump1090-fa (`--net --write-json /tmp/run/dump1090`) and the web server on 0.0.0.0:8080, start those two in the background with a `trap` that stops them on TERM/INT; the last line is `exec` of piaware in the foreground (`exec piaware -p /tmp/run/piaware.pid -plainlog`; flags UNVERIFIED), so no `wait -n` loop is used and a dead background helper is detected only by piaware's own checks (open question). With no RTL-SDR device present dump1090 logs errors; start.sh must not crash-loop: if no `/dev/bus/usb` device and no `RECEIVER_HOST`, run only the web server and log that clearly (open question). Feeder claiming is manual after first start.
 
 ## 8. container-test.yaml
 
@@ -76,7 +76,7 @@ Schema header; `timeoutSeconds: 120`; `tcp` probes for `8080`, `30003`, `30005` 
 
 - Hardware-bound: RTL-SDR USB passthrough required; no hardware means no meaningful run.
 - Version drift: draft v10.0 vs latest v11.1; piaware, dump1090, tcllauncher and mlat-client versions must be aligned (UNVERIFIED compatibility matrix).
-- Multi-process image without s6; needs a minimal supervisor.
+- Multi-process image without s6; only a `trap`-based background start with a foreground `exec` (section 7).
 - piaware assumes root/systemd; porting rootless is the largest risk. arm64 claim `yes*` unconfirmed.
 - Feeder claiming requires a FlightAware account (manual).
 - Multiple licenses (BSD-2, GPL-2+) in one image.

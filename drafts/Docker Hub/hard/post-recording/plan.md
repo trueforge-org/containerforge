@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | Comskip `V0.83` (GitHub release, published 2025-02-28). Draft tag `chacawaca/post-recording:latest` is unversioned, so the Comskip tag is the image version. |
-| Renovate | `datasource=github-releases depName=erikkaashoek/Comskip versioning=loose` (tag has a capital `V`) |
+| Renovate | `datasource=github-releases depName=erikkaashoek/Comskip versioning=loose extractVersion=^V(?<version>.+)$` (tag has a capital `V`; the Dockerfile URL adds it back) |
 | License | Comskip: GPL (check `LICENSE` in the tarball; use `GPL-2.0-or-later` only after confirming). UNVERIFIED: GitHub licence page not read. The wrapper repo `chacawaca/docker-post-recording` shows no licence. |
 | Source URL | https://github.com/erikkaashoek/Comskip/ |
 | Download URLs | Source tarball, same for both arches (it is compiled): `https://github.com/erikkaashoek/Comskip/archive/refs/tags/V${VERSION}.tar.gz`. The release has NO binary assets (assets list is empty). |
@@ -27,7 +27,8 @@ apps/post-recording/
   container-test.yaml
   start.sh            # replaces s6-overlay: watch loop + conversion
   defaults/comskip.ini   # seeded into /config when missing (copy from upstream rootfs/ after review)
-  scripts/convert.sh     # per-file conversion, called by start.sh (keeps start.sh small)
+  scripts/watch.sh       # the watch loop, exec'd by start.sh
+  scripts/convert.sh     # per-file conversion, called by watch.sh
 ```
 No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
@@ -51,7 +52,7 @@ Fits: compiled native tools plus ffmpeg, no interpreted runtime, and it replaces
 10. `USER apps`
 11. `COPY --chmod=0755 . /`
 12. `VOLUME /config` (also document `/watch` and `/backup` in settings.yaml). No `EXPOSE`.
-13. `CMD ["/start.sh"]` only if sibling apps do; `apps/valkey` uses it. `start.sh` ends with `exec`.
+13. `CMD ["/start.sh"]` only if sibling apps do; `apps/valkey` uses `CMD ["/start.sh"]`, so follow it. `start.sh` ends with `exec`.
 
 ## 5. docker-bake.hcl
 
@@ -59,8 +60,8 @@ Fits: compiled native tools plus ffmpeg, no interpreted runtime, and it replaces
 target "docker-metadata-action" {}
 variable "APP"     { default = "post-recording" }
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=erikkaashoek/Comskip versioning=loose
-  default = "0.83"   // if Renovate returns "V0.83", keep the Dockerfile URL as V${VERSION#V}; decide when building
+  // renovate: datasource=github-releases depName=erikkaashoek/Comskip versioning=loose extractVersion=^V(?<version>.+)$
+  default = "0.83"   // Dockerfile URL uses V${VERSION}
 }
 variable "LICENSE" { default = "GPL-2.0-or-later" }   // UNVERIFIED, confirm from LICENSE file
 variable "SOURCE"  { default = "https://github.com/erikkaashoek/Comskip/" }
@@ -74,21 +75,31 @@ Plus `group "default"`, `target "image"` (args VERSION, labels source/licenses),
 schema_version: 1
 upstream_env_url: "https://github.com/erikkaashoek/Comskip/"
 ports: []
-env: TZ(Etc/UTC), DELETE_TS(1), SUBTITLES(0), CONVERSION_FORMAT(mp4), SOURCE_EXT(ts), POST_PROCESS(comchap), SOURCE_STABLE_TIME(10), SOURCE_MIN_DURATION(10), UMASK(022) - all required: false
-volumes: /config (required true), /watch (required true), /backup (required false)
-dependencies: none
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # likewise (default, required: false): DELETE_TS=1, SUBTITLES=0, CONVERSION_FORMAT=mp4, SOURCE_EXT=ts,
+  # POST_PROCESS=comchap, SOURCE_STABLE_TIME=10, SOURCE_MIN_DURATION=10, UMASK=022
+volumes:
+  - path: /config
+    required: true
+  - path: /watch
+    required: true
+  - path: /backup
+    required: false
 ```
-Write the `env` block as proper `- name/default/required` entries. Drop `PUID`/`PGID`/`UMASK=000` from upstream: the image is rootless (see section 9); document that choice. `ports: []` is allowed only if siblings use it; otherwise omit the key. UNVERIFIED: schema accepts empty ports.
+Write every listed variable as a full `- name/default/required` entry (the comment above is shorthand). Dependencies: none. Drop `PUID`/`PGID`/`UMASK=000` from upstream: the image is rootless (see section 9); document that choice. Siblings `apps/steamcmd` and `apps/irqbalance` write the empty list as `ports:` then `[]` on the next line; copy that form.
 
 ## 7. start.sh
 
 - `#!/usr/bin/env bash`, `set -euo pipefail`. `umask "${UMASK:-022}"`.
 - Seed `/config/comskip.ini` from `/defaults/comskip.ini` only if missing; `mkdir -p /config/logs`.
-- Verify `/watch` exists and is writable; log a clear error and exit 1 if not.
-- Loop (replace s6): `inotifywait -m -r -e close_write,moved_to --format '%w%f' /watch` piped to a reader that, per file matching `*.${SOURCE_EXT}`, waits `SOURCE_STABLE_TIME` seconds of unchanged size, skips files shorter than `SOURCE_MIN_DURATION` (ffprobe), then runs `/scripts/convert.sh`. Also do one startup sweep so existing files get processed.
+- If `/watch` is missing or not writable, log a clear warning and idle (`exec sleep infinity`) instead of exiting, so the container test (no mounts) still passes.
+- Loop (replace s6), implemented in `/scripts/watch.sh`: `inotifywait -m -r -e close_write,moved_to --format '%w%f' /watch` piped to a reader that, per file matching `*.${SOURCE_EXT}`, waits `SOURCE_STABLE_TIME` seconds of unchanged size, skips files shorter than `SOURCE_MIN_DURATION` (ffprobe), then runs `/scripts/convert.sh`. Also do one startup sweep so existing files get processed.
 - `convert.sh`: ffmpeg copy-remux to `${CONVERSION_FORMAT}`, optional `ccextractor` for `.srt` when `SUBTITLES=0`, then `${POST_PROCESS}` (`comchap` or `comcut`), then apply `DELETE_TS` (0 delete, 1 keep, 2 move to `/backup`). Temp files under `/tmp`, never `/config`.
 - Honour `/config/custom.sh` and `/hooks` only if they exist (upstream feature; confirm semantics from `rootfs/`).
-- Final line: `exec` the watch loop function (use `exec inotifywait ... | while ...` is not possible; instead run the loop in the foreground of the script with `trap 'kill 0' TERM INT`).
+- Final line of `start.sh`: `exec /scripts/watch.sh`. `watch.sh` runs the loop in the foreground with `trap 'kill 0' TERM INT`.
 
 ## 8. container-test.yaml
 
@@ -99,13 +110,14 @@ The app has no ports, so there is no tcp/http probe to add (settings.yaml `ports
 timeoutSeconds: 120
 filePaths:
 - /start.sh
+- /scripts/watch.sh
 - /scripts/convert.sh
 - /usr/local/bin/comskip
 - /usr/local/bin/comchap
 - /usr/bin/ffmpeg
 - /usr/share/licenses/post-recording
 ```
-Tests run with no env and no `/watch` mount: `start.sh` must not exit if `/watch` is missing in the test run (create `/tmp/watch` fallback, or log and `sleep infinity`-style idle). UNVERIFIED: how forgetool treats a container without ports; confirm against a sibling with no port (`apps/steamcmd`, `apps/irqbalance`).
+Tests run with no env and no `/watch` mount: `start.sh` idles instead of exiting when `/watch` is missing (section 7). UNVERIFIED: how forgetool treats a container without ports; confirm against a sibling with no port (`apps/steamcmd`, `apps/irqbalance`).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
