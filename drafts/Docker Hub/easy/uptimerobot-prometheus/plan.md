@@ -39,7 +39,7 @@ Upstream itself builds on Python 3.15, so the 3.15 base matches. The draft's alt
 2. `RUN mkdir -p /app/exporter /usr/share/licenses/uptimerobot-prometheus`; `curl -fsSL -o /app/exporter/exporter.py https://raw.githubusercontent.com/lekpamartin/uptimerobot_exporter/${UPTIMEROBOT_COMMIT}/files/exporter.py`; same for `LICENSE` into `/usr/share/licenses/uptimerobot-prometheus/LICENSE`.
 3. `/app/venv/bin/pip install --no-cache-dir requests` (pure Python, same on both architectures; pin the version found at implementation time against the PyPI latest, 2.34.2 on 2026-11-23, and keep it in sync).
 4. `chown -R root:root /app/exporter && chmod -R a+rX /app/exporter`.
-5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 9705`. No `VOLUME` (stateless; see section 9). No apt packages (the draft's `unzip` is unnecessary).
+5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 9705`, `VOLUME /config` (required by the repo Dockerfile rules; nothing is written there, the app is stateless). No apt packages (the draft's `unzip` is unnecessary).
 
 ## 5. docker-bake.hcl
 - `APP = "uptimerobot-prometheus"`
@@ -51,7 +51,7 @@ Upstream itself builds on Python 3.15, so the 3.15 base matches. The draft's alt
 Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/lekpamartin/uptimerobot_exporter"`.
 - ports: `9705` tcp (required true).
 - env (names as above, defaults equal to `start.sh` and upstream): `UPTIMEROBOT_API_KEY` (default `""`, `required: false` because the image must start without it, see section 7), `UPTIMEROBOT_SERVER_NAME` (`0.0.0.0`), `UPTIMEROBOT_SERVER_PORT` (`9705`), `UPTIMEROBOT_CACHE_TTL` (`60`), `UPTIMEROBOT_RESPONSE_TIMES` (`false`), `UPTIMEROBOT_RESPONSE_TIME_WINDOW` (`3600`), `UPTIMEROBOT_API_URL` (`https://api.uptimerobot.com/v3`), `TZ` (`Etc/UTC`).
-- volumes: `[]` (stateless).
+- volumes: `/config` / `required: false` (declared for the repo rule; nothing is stored).
 - dependencies: none (external service uptimerobot.com).
 
 ## 7. start.sh
@@ -82,7 +82,7 @@ Probe `/` rather than `/metrics`: upstream's own healthcheck uses `/` because it
 
 ## 9. Rootless and read-only-rootfs adaptations
 - Upstream writes nothing: only in-memory caches. Bytecode is disabled and `HOME=/tmp`. The draft says "writes only to /tmp": no write is needed at all.
-- Draft expectations (UID 568, rootfs writable false in the chart): `USER apps` plus a read-only rootfs works. No extra persistence, so no `/config` volume.
+- Draft expectations (UID 568, rootfs writable false in the chart): `USER apps` plus a read-only rootfs works. No extra persistence; `/config` is declared as a volume but unused.
 
 ## 10. Risks, caveats and open questions
 - The draft's source is stale: the old billimek image ran an older script. The v3 API exporter at master needs a v3-capable API key; document that.
@@ -103,7 +103,7 @@ curl -fsS http://<container-ip>:9705/
 docker rm -f uptimerobot-prometheus-probe
 forgetool containers test --image uptimerobot-prometheus:20261115 --config ./apps/uptimerobot-prometheus/container-test.yaml
 ```
-No `/config` volume is declared, so the "fresh /config volume" part of the protocol is not applicable. Readiness signal: the server start log line (text UNVERIFIED) and `/` answering 200.
+`/config` is declared but unused, so mount an empty one only to confirm the start is clean. Readiness signal: the server start log line (text UNVERIFIED) and `/` answering 200.
 
 ## 12. PR checklist
 - Branch `feat/add-uptimerobot-prometheus`, commit `feat(uptimerobot-prometheus): add new container`, target `main`.

@@ -145,7 +145,7 @@ Draft expectations (non-root possible, read-only possible, not privileged, no ex
 - `path` and `url` are npm packages that shadow Node built-ins; they install fine but are an upstream smell.
 - The app aborts without `MQTT_HOST`/`VENSTAR_HOST`/`TOPIC_PREFIX`. The idle-with-message choice in start.sh is deliberate so the image test passes; confirm maintainers prefer idling to a crash loop.
 - `MQTT_HOST` must be a URL such as `mqtt://broker:1883` (passed to `mqtt.connect`).
-- Needs a Venstar thermostat with its local API enabled and an MQTT broker, neither of which is provided. No `mosquitto` app was checked as a dependency.
+- Needs a Venstar thermostat with its local API enabled and an MQTT broker, neither of which is provided. `apps/mosquitto` exists as an MQTT broker, but it is not a hard dependency (any reachable broker works), so no `dependencies:` entry.
 - No arm64 blocker: pure JavaScript.
 - Renovate `git-refs` PRs will propose a new SHA for every upstream commit.
 

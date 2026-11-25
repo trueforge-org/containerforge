@@ -25,7 +25,7 @@ Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh, defau
 2. Final stage python-node: `USER root`; apt: `supervisor gettext xmlsec1 libpq5 postgresql-client` (postgresql-client version must be compatible with the pg server, UNVERIFIED), `tini` only if not in base; Caddy binary copied from ghcr.io/trueforge-org/caddy image or downloaded (Caddy 2.11.4 upstream; check apps/caddy Dockerfile for the pattern).
 3. COPY --from=build backend, premium, enterprise (only if license allows), web-frontend build to /app/baserow.
 4. Licenses to /usr/share/licenses/baserow/.
-5. ENV: `DATA_DIR=/config`, `BASEROW_PLUGIN_DIR=/config/plugins`, `UV_CACHE_DIR=/tmp/baserow_uv_cache`, `PYTHONUNBUFFERED=1`, `DJANGO_SETTINGS_MODULE=baserow.config.settings.base`, `PYTHONPATH` for backend/premium/enterprise src, `HOME=/config`, `PYTHONPYCACHEPREFIX=/tmp/pycache`.
+5. ENV: `DATA_DIR=/config`, `BASEROW_PLUGIN_DIR=/config/plugins`, `UV_CACHE_DIR=/tmp/baserow_uv_cache`, `PYTHONUNBUFFERED=1`, `DJANGO_SETTINGS_MODULE=baserow.config.settings.base`, `PYTHONPATH` for backend/premium/enterprise src, `HOME=/config`, `PYTHONPYCACHEPREFIX=/tmp/pycache`, `XDG_DATA_HOME=/config/caddy`, `XDG_CONFIG_HOME=/tmp` (matches section 9).
 6. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`.
 
 ## 5. docker-bake.hcl

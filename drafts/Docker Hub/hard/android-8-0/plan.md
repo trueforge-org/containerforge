@@ -41,7 +41,7 @@ Reason: the draft says "ubuntu alone". A source-built image would install JDK, A
 
 Only an outline is credible, since no upstream recipe exists for the 8.0 image:
 
-1. `ARG VERSION` (Android API level, e.g. `26` for 8.0), `ARG TARGETARCH`; `RUN test "${TARGETARCH}" = "amd64"`.
+1. `ARG VERSION` (must equal the bake default `8.0.0`) and a separate `ARG ANDROID_API=26` for the API level, `ARG TARGETARCH`; `RUN test "${TARGETARCH}" = "amd64"`.
 2. `USER root`: install `openjdk` (check the Android `sdkmanager` Java requirement, UNVERIFIED), `unzip`, `libpulse0`, `libgl1`, `xvfb`, `x11vnc`, `novnc`, `websockify`, `supervisor`-free equivalents (see section 7). Verify each against the base before adding.
 3. Fetch the Android command-line tools from `https://dl.google.com/android/repository/` (exact filename and checksum UNVERIFIED: the Google repository XML lists a sha1 per archive; fetch it at plan-execution time) and extract to `/app/android-sdk`.
 4. Use `sdkmanager` with `--sdk_root=/app/android-sdk` to install `platform-tools`, `emulator` and `system-images;android-26;default;x86_64` (package id UNVERIFIED). This requires accepting the Android SDK licence; ship the licence texts to `/usr/share/licenses/android-8-0/`.

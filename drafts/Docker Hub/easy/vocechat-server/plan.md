@@ -62,8 +62,8 @@ variable "VERSION" {
   // renovate: datasource=github-releases depName=Privoce/vocechat-server-rust versioning=semver
   default = "0.5.41"
 }
-variable "SHA256_AMD64" { default = "<digest of the x86_64 zip>" }
-variable "SHA256_ARM64" { default = "<digest of the aarch64 zip>" }
+variable "SHA256_AMD64" { default = "a5ec5106a2eb2433aed60777cd2a53b23236f28974d16264161c00e28845e049" }  // GitHub asset digest for v0.5.41 (read via the releases API)
+variable "SHA256_ARM64" { default = "04f51c9656f0c040892c73562ef63794752e7d0fa610683052e10a0b3e4e73ac" }
 variable "LICENSE" { default = "LicenseRef-Big-Time-Public-License" }  // UNVERIFIED
 variable "SOURCE"  { default = "https://github.com/Privoce/vocechat-server-rust" }
 ```

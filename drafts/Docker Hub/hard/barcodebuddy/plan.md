@@ -6,9 +6,9 @@
 |---|---|
 | Version | 1.9.0.1 (tag `v1.9.0.1`, published 25 Sep; draft chart tag is `latest`) |
 | Renovate | datasource=github-releases, depName=Forceu/barcodebuddy, versioning=loose (4-part version) |
-| License | AGPL-3.0 (UNVERIFIED: not re-read from the LICENSE file this session; confirm before writing LICENSE, use SPDX `AGPL-3.0-only` or `-or-later` per the file header) |
+| License | AGPL-3.0 (GitHub SPDX `AGPL-3.0`; UNVERIFIED: not re-read from the LICENSE file this session; confirm before writing LICENSE, use SPDX `AGPL-3.0-only` or `-or-later` per the file header) |
 | Source | https://github.com/Forceu/barcodebuddy |
-| Download | https://github.com/Forceu/barcodebuddy/archive/refs/tags/v${VERSION}.tar.gz (source tarball, arch-neutral PHP; avoids git in the image). Release assets exist (2) but names did not render: UNVERIFIED |
+| Download | https://github.com/Forceu/barcodebuddy/archive/refs/tags/v${VERSION}.tar.gz (source tarball, arch-neutral PHP; avoids git in the image). The latest release shows no uploaded assets via the GitHub API; the source tarball is used |
 | Checksum | none published: UNVERIFIED; pin by tag over HTTPS |
 | Upstream Dockerfile reviewed | Forceu/barcodebuddy-docker @527c3c6 (alpine 3.24 + php85, golang:1.27-alpine supervisor stage) |
 | Ports | 80 and 443 exposed upstream; web UI on 80. Websocket server is proxied by nginx (internal port UNVERIFIED) |

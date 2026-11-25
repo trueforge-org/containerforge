@@ -8,7 +8,7 @@
 | Renovate | datasource=github-releases, depName=sabre-io/Baikal, versioning=semver (tags are bare `0.13.0`, no `v`) |
 | License | GPL-3.0-only (composer.json `license` field, 0.13.0) |
 | Source | https://github.com/sabre-io/Baikal |
-| Download (arch-neutral, pure PHP) | https://github.com/sabre-io/Baikal/releases/download/0.13.0/baikal-0.13.0.zip (URL from draft; asset list did not render on the release page, so the file name is UNVERIFIED until the first build downloads it) |
+| Download (arch-neutral, pure PHP) | https://github.com/sabre-io/Baikal/releases/download/0.13.0/baikal-0.13.0.zip (asset `baikal-0.13.0.zip` confirmed on the 0.13.0 release via the GitHub API) |
 | Checksum | UNVERIFIED: release page did not show a checksum asset; if none exists, pin by HTTPS tag download only and say so in the PR |
 | PHP requirement | php ^8.2 with dom, pdo, zlib (composer.json) |
 | Upstream Dockerfile reviewed | ckulka/baikal-docker nginx.dockerfile @06c5398: nginx base, PHP 8.1 from Sury, pool user nginx, socket /var/run/php-fpm.sock, volumes /var/www/baikal/config and /var/www/baikal/Specific, entrypoint.d script chowns files, no EXPOSE (nginx listens on 80), no env vars for nginx variant except BAIKAL_SKIP_CHOWN |
@@ -33,7 +33,7 @@ No root/. No DOWNSTREAM_CHANGES.md (not used as a FROM base).
 3. Download: `curl -fL -o /tmp/baikal.zip "https://github.com/sabre-io/Baikal/releases/download/${VERSION}/baikal-${VERSION}.zip"`; `unzip` to /tmp, move the `baikal` folder to /app/www.
 4. Persistent dirs: remove the shipped /app/www/config and /app/www/Specific and replace with symlinks `/app/www/config -> /config/config` and `/app/www/Specific -> /config/Specific` (same pattern as apps/bookstack symlinks). Keep a pristine copy of the shipped dirs at /defaults/baikal-skel for seeding (copy to /defaults before symlinking).
 5. Licenses: `mkdir -p /usr/share/licenses/baikal && cp /app/www/LICENSE* /usr/share/licenses/baikal/` (and vendor/sabre license files).
-6. nginx rootless edits, as in apps/kasmvnc: `sed` nginx.conf to `pid /tmp/nginx.pid;`, error/access log to /tmp or stderr, and add `include /tmp/nginx-conf.d/*.conf;`; `mkdir -p /var/lib/nginx/{body,fastcgi,proxy,scgi,uwsgi}` and chown to apps (or point temp paths at /tmp in the rendered conf).
+6. nginx rootless edits, as in apps/kasmvnc: `sed` nginx.conf to `pid /tmp/nginx.pid;`, error/access log to /tmp or stderr, and add `include /tmp/nginx-conf.d/*.conf;`; also remove the distro default site (`/etc/nginx/sites-enabled/default`, `conf.d/default.conf` if present) so nginx does not try to bind port 80 as non-root; `mkdir -p /var/lib/nginx/{body,fastcgi,proxy,scgi,uwsgi}` and chown to apps (or point temp paths at /tmp in the rendered conf).
 7. `chown -R apps:apps /app`, apt cleanup, `rm -rf /var/lib/apt/lists/* /tmp/*`.
 8. `ENV HOME=/config`; `USER apps`; `COPY --chmod=0755 . /`; `EXPOSE 8080`; `VOLUME /config`; `WORKDIR /config`.
 
@@ -80,7 +80,7 @@ Draft expected runAsUser 0 and read-only=false; this plan runs as apps with read
 - Draft caveat confirmed: nginx plus php-fpm in one container; two processes handled in start.sh, not a supervisor.
 - Wizard writes baikal.yaml and removes the install guard in Specific; verify that writing through the symlinks works with PHP open_basedir (none by default).
 - Upgrade note from 0.13.0 release: back up before upgrading (SQLite sharing fix).
-- Checksum asset and exact zip name UNVERIFIED. License is GPL-3.0-only, not "or-later".
+- Checksum asset UNVERIFIED (the release lists only `baikal-0.13.0.zip`, no checksum file seen). License is GPL-3.0-only, not "or-later".
 - Version drift: draft/chart 0.10.1 vs upstream 0.13.0; data created with 0.10.x must be upgraded through Baikal's own web upgrade page.
 - No blockers (pure PHP, both arches).
 

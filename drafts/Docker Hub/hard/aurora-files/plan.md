@@ -13,7 +13,7 @@
 | Checksum | None published by the vendor. The URL is a moving "latest", so a pinned sha256 would break on every upstream release. Mitigation: assert the extracted `VERSION` starts with `${VERSION}`, and record the observed sha256 in the PR description. |
 | Upstream Dockerfile reviewed | `afterlogic/docker-aurora-files` Dockerfile (Alpine 3.24.3, php83 + php83-fpm, nginx, supervisor, mysql-client; `wget` of the zip into `/var/www/html`; `COPY afterlogic.php`; `EXPOSE 80`; no VOLUME, no ENV; HEALTHCHECK `curl http://127.0.0.1/fpm-ping`). |
 | PHP extensions needed | fileinfo, mysqli, pdo, pdo_mysql, pdo_sqlite, iconv, mbstring, curl, dom, xml, gd, exif, zip, xmlwriter, xmlreader, session. |
-| Ports | `80` (nginx). Draft agrees. |
+| Ports | Upstream image: `80` (nginx). Draft says 80. This image uses `8080` instead because it runs as non-root and must not bind below 1024 (deliberate deviation from the draft). |
 | Env vars | The upstream image defines none. `afterlogic.php` hardcodes DB host `db:3306`, name `afterlogic`, login `afterlogic`, password `docker_Bundle`. Our env vars below are our own design, applied through the same Aurora settings API. |
 | Config and data | `data/` under the web root must be writable. Settings are in `data/settings/config.json`. nginx upstream config denies `/data`. Admin panel at `/adminpanel/`. |
 | Distribution note | The draft says Alpine/musl; our image is Ubuntu glibc with apt PHP, so there is no musl issue. |
@@ -54,7 +54,7 @@ Reason: draft says ubuntu alone is enough; PHP, nginx and php-fpm come from apt.
 6. nginx and php-fpm run unprivileged: config, pid, temp paths and fpm socket all under `/tmp` (set in the templates, not via env).
 7. `ENV TZ=Etc/UTC PHP_INI_SCAN_DIR` only if required to load `etc/php/aurora.ini`; otherwise copy it into `/etc/php/8.5/fpm/conf.d/` during the root step.
 8. Cleanup: `rm -rf /tmp/* /var/lib/apt/lists/*`.
-9. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 80`, `VOLUME /config`, `WORKDIR /config`. (`COPY . /` places `start.sh`, `etc/`, `defaults/` via the allow-list.) Note: port 80 as non-root needs `net.ipv4.ip_unprivileged_port_start=0` or cap_net_bind_service; check how `apps/bookstack` and `apps/nginx` handle it before choosing 80 vs 8080. Keep 80 if siblings do.
+9. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, `WORKDIR /config`. (`COPY . /` places `start.sh`, `etc/`, `defaults/` via the allow-list.) Port 8080 is used because binding port 80 as non-root is not allowed.
 
 ## 5. docker-bake.hcl
 
@@ -77,7 +77,7 @@ Plus `group "default" { targets = ["image-local"] }`, `image` (args `VERSION`, l
 schema_version: 1
 upstream_env_url: "https://github.com/afterlogic/aurora-files"
 ports:
-  - {port: 80, protocol: tcp, required: true}
+  - {port: 8080, protocol: tcp, required: true}
 env:
   - {name: TZ, default: "Etc/UTC", required: false}
   - {name: DB_HOST, default: "", required: false}     # empty = leave Aurora default
@@ -97,7 +97,7 @@ The DB_* names are our own, mapped onto Aurora's `DBHost/DBName/DBLogin/DBPasswo
 `#!/usr/bin/env bash`, `set -euo pipefail`.
 1. `mkdir -p /config/data /tmp/nginx /tmp/php/sessions`.
 2. First run only (when `/config/data/settings/config.json` is missing): render `defaults/afterlogic-init.php` and run `php /app/www/afterlogic.php`-style init, which calls `\Aurora\System\Api::Init(true)` then `SetValue('DBHost'...)` from `DB_HOST:DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` read via `getenv()` (never interpolated into shell or PHP source, so special characters are safe), then `Save()` and `SyncModulesConfigs()`. Skip the DB part when `DB_HOST` is empty. Idempotent: do not overwrite an existing `config.json`.
-3. Render the nginx config from the template into `/tmp/nginx/nginx.conf` (listen `0.0.0.0:80`, root `/app/www`, `location ~ /data { deny all; }`, fastcgi to `unix:/tmp/php/fpm.sock`, `client_max_body_size 0`, temp paths under `/tmp`, logs to stdout/stderr).
+3. Render the nginx config from the template into `/tmp/nginx/nginx.conf` (listen `0.0.0.0:8080`, root `/app/www`, `location ~ /data { deny all; }`, fastcgi to `unix:/tmp/php/fpm.sock`, `client_max_body_size 0`, temp paths under `/tmp`, logs to stdout/stderr).
 4. Start `php-fpm8.5 -F -y /tmp/php/php-fpm.conf` in the background (socket and pid in `/tmp`, `clear_env = no`), then `exec nginx -c /tmp/nginx/nginx.conf -g 'daemon off;'`. Because fpm is backgrounded, add a `trap` that kills it and have the script exit if fpm dies (poll with `wait -n` before exec is not possible, so use a small watcher or run nginx in the foreground and fpm under `trap 'kill $FPM_PID' EXIT`). No supervisor or s6.
 5. Never write to `/app`.
 
@@ -107,14 +107,16 @@ The DB_* names are our own, mapped onto Aurora's `DBHost/DBName/DBLogin/DBPasswo
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 timeoutSeconds: 120
 tcp:
-- port: '80'
-http:        # use the sibling schema field names; probe GET / expecting 200 or 30x
+- port: '8080'
+http:
+- port: '8080'
+  path: /      # UNVERIFIED: status the app returns on / without a DB; probe expects 200
 filePaths:
 - /app/www/afterlogic.php   # check actual file name in the unzipped tree
 - /app/www/system/autoload.php
 - /usr/share/licenses/aurora-files
 ```
-Check `apps/it-tools/container-test.yaml` for the exact `http` schema fields. The test runs without env vars, so the DB seeding path is only checked through a manual run. If the app returns an error page without a DB, keep the TCP probe plus `filePaths` and add the narrowed comment `# narrowed: requires external mariadb; full functional test not feasible in single-container suite` only if the three exception criteria hold (they do not if SQLite works).
+The test runs without env vars, so the DB seeding path is only checked through a manual run. If the app returns an error page without a DB, keep the TCP probe plus `filePaths` and add the narrowed comment `# narrowed: requires external mariadb; full functional test not feasible in single-container suite` only if the three exception criteria hold (they do not if SQLite works).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -135,7 +137,7 @@ Draft expectations: chart runs as UID 0, `readOnlyRootFilesystem: false`, no ext
 - Draft inferred that the app writes into its own tree. Upstream only chowns `data/`; further writes (cache, compiled templates) must be found in a real run with `--read-only` and remapped.
 - Running two processes in one container with a bash trap is less robust than a supervisor; accept for now.
 - DB requirement (MySQL vs SQLite) is UNVERIFIED; the upstream compose pairs it with MySQL on host `db`.
-- Port 80 unprivileged binding (see section 4).
+- Port 80 is replaced by 8080 (non-root); existing chart users must remap the service port.
 - Draft confidence is low; this plan raised it by reading the upstream Dockerfile, but nothing was built.
 - No hard blockers: arm64 works (PHP), no GPU, no privileged mode.
 
@@ -149,11 +151,11 @@ docker volume create aurora-files-probe-config
 docker run --rm -d --name aurora-files-probe --read-only --tmpfs /tmp \
   -v aurora-files-probe-config:/config aurora-files:9.8.7
 docker logs -f aurora-files-probe
-curl -i http://<container-ip>:80/            # from another container, not only localhost
+curl -i http://<container-ip>:8080/            # from another container, not only localhost
 forgetool containers test --image aurora-files:9.8.7 --config ./apps/aurora-files/container-test.yaml
 docker rm -f aurora-files-probe; docker volume rm aurora-files-probe-config
 ```
-Readiness signal: nginx started with no `[emerg]`, php-fpm `ready to handle connections`, port 80 open, and `/config/data/settings` populated. Then also run once with `DB_*` pointed at `apps/mariadb` to exercise the seeding path the test cannot cover.
+Readiness signal: nginx started with no `[emerg]`, php-fpm `ready to handle connections`, port 8080 open, and `/config/data/settings` populated. Then also run once with `DB_*` pointed at `apps/mariadb` to exercise the seeding path the test cannot cover.
 
 ## 12. PR checklist
 

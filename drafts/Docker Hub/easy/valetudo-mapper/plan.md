@@ -52,7 +52,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/rand2
 - ports: `3000` tcp (map image/raw API; `required: false`, it is only open when `webserver.enabled` is true in the config, which the seeded default does).
 - env: `TZ` (`Etc/UTC`, `required: false`) only. The app reads no env vars; MQTT broker, robot identifier and map settings live in `/config/config.json`. State this in the PR rather than inventing env vars.
 - volumes: `/config` (required true; `config.json`).
-- dependencies: `mosquitto` ✅ (`apps/mosquitto` exists; an MQTT broker is required at runtime, not necessarily this one).
+- opt_dependencies: `mosquitto` ✅ (`apps/mosquitto` exists; an MQTT broker is required at runtime, but any broker works, and the draft lists no hard dependency).
 
 ## 7. start.sh
 ```bash
