@@ -91,6 +91,8 @@ mkdir -p "$FLEXO_CACHE_DIRECTORY" "$(dirname "$FLEXO_MIRRORLIST_FALLBACK_FILE")"
 exec /usr/bin/flexo
 ```
 
+The block is a sketch: the `...` lines are placeholders and must be written out in full (every `FLEXO_MIRRORS_AUTO_*` default and a complete `export` list) before use.
+
 Key rules: because setting any `FLEXO_*` var switches flexo to env-only mode, start.sh MUST export every required variable with defaults (taken from upstream `flexo.toml`), otherwise it panics on `unwrap()`. Env values are TOML-parsed, so quote strings consistently; validate or escape user input for `FLEXO_CUSTOM_REPO` (space separated `name@url`, split on `@`). Idempotent: only `mkdir -p`. Nothing written to `/app`; `/tmp/flexo/uncacheable` lives in `/tmp` (hard-coded upstream). Listens on `0.0.0.0`. `/usr/bin/flexo_purge_cache` is invoked by flexo itself and needs `FLEXO_CACHE_DIRECTORY` and `FLEXO_NUM_VERSIONS_RETAIN` exported, which this script guarantees.
 
 ## 8. container-test.yaml

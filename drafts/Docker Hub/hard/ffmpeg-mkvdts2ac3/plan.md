@@ -31,7 +31,7 @@ The Hub image `snoopy86/ffmpeg` has no public source (amd64 only, last pushed 20
 1. `ARG VERSION`, `ARG PACKAGE_VERSION`, `ARG MKVDTS2AC3_VERSION`, `ARG MKVDTS2AC3_SHA256`, `ARG TARGETARCH`; `USER root`.
 2. Version guard like `apps/valkey`, adjusted for the apt epoch: `p="${PACKAGE_VERSION#*:}"; test "${p%%-*}" = "${VERSION}"` (PACKAGE_VERSION `7:8.0.1-3ubuntu2`).
 3. `apt-get update && apt-get install -y --no-install-recommends "ffmpeg=${PACKAGE_VERSION}" mkvtoolnix inotify-tools rsync` then `rm -rf /var/lib/apt/lists/*`. Do not pin mkvtoolnix and inotify-tools (they are not the tagged version). If the pinned ffmpeg no longer exists in the archive when building (security update), the build fails on purpose; Renovate must bump `PACKAGE_VERSION`.
-4. Download `mkvdts2ac3` tarball, verify `echo "${MKVDTS2AC3_SHA256}  /tmp/m.tar.gz" | sha256sum -c -`, extract only `mkvdts2ac3.sh` and `LICENSE.txt`: `tar xzf /tmp/m.tar.gz -C /tmp --strip-components=1`; `install -m 0755 /tmp/mkvdts2ac3.sh /app/mkvdts2ac3.sh`; `mkdir -p /usr/share/licenses/ffmpeg-mkvdts2ac3 && cp /tmp/LICENSE.txt /usr/share/licenses/ffmpeg-mkvdts2ac3/mkvdts2ac3-LICENSE.txt` (Apache license text must ship because only part of the archive is extracted). Also copy `/usr/share/doc/ffmpeg/copyright` and `/usr/share/doc/mkvtoolnix/copyright` references (Ubuntu already ships them under `/usr/share/doc`; no extra copy needed).
+4. Download `mkvdts2ac3` tarball, verify `echo "${MKVDTS2AC3_SHA256}  /tmp/m.tar.gz" | sha256sum -c -`, extract only `mkvdts2ac3.sh` and `LICENSE.txt`: `tar xzf /tmp/m.tar.gz -C /tmp --strip-components=1 --wildcards '*/mkvdts2ac3.sh' '*/LICENSE.txt'`; `install -m 0755 /tmp/mkvdts2ac3.sh /app/mkvdts2ac3.sh`; `mkdir -p /usr/share/licenses/ffmpeg-mkvdts2ac3 && cp /tmp/LICENSE.txt /usr/share/licenses/ffmpeg-mkvdts2ac3/mkvdts2ac3-LICENSE.txt` (Apache license text must ship because only part of the archive is extracted). Also copy `/usr/share/doc/ffmpeg/copyright` and `/usr/share/doc/mkvtoolnix/copyright` references (Ubuntu already ships them under `/usr/share/doc`; no extra copy needed).
 5. `chown -R apps:apps /app`, `rm -rf /tmp/*`.
 6. `ENV HOME=/config TMPDIR=/tmp`; `USER apps`; `COPY --chmod=0755 . /`; no `EXPOSE` (no ports); `VOLUME /config`; `WORKDIR /config`. Declare `VOLUME` only for `/config`: `/watch`, `/output`, `/copy` are user mounts documented in settings.yaml (they are created with `mkdir -p` if absent but writable only when mounted).
 
@@ -65,7 +65,7 @@ script="${script:-mkvdts2ac3.sh}"; fmt="${output_format:-mkv}"
 IFS=';' read -r -a ff_params <<< "${parameters:-}"
 IFS=';' read -r -a mk_params <<< "${mkvdts2ac3_params:-}"
 export script fmt   # used by /scripts/process-file.sh; arrays are re-read from env there
-process() { /scripts/process-file.sh "$1"; }
+process() { /scripts/process-file.sh "$1" || echo "failed: $1" >&2; }
 # process files already present (idempotent restart)
 find /watch -type f \( -iname '*.mkv' -o -iname '*.avi' -o -iname '*.mp4' \) -print0 | while IFS= read -r -d '' f; do process "$f"; done
 exec inotifywait -m -r -e close_write -e moved_to --format '%w%f' /watch | while IFS= read -r f; do process "$f"; done

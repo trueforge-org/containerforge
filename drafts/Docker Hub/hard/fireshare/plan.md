@@ -6,12 +6,12 @@
 
 | Item | Value |
 | --- | --- |
-| Version | 1.9.4 (tag `v1.9.4`, published 2026-11-22, GitHub "Latest"). Draft says 1.9.3; use 1.9.4 |
+| Version | 1.9.4 (tag `v1.9.4`, published 2026-11-22, GitHub "Latest"). Draft says 1.9.3; use 1.9.4 (re-checked 2026-11-25: GitHub "Latest" is now v1.9.5, published 2026-11-24, so bump `VERSION` to 1.9.5 if building now; the facts below were read for 1.9.4 and not re-read for 1.9.5) |
 | Renovate | `datasource=github-releases depName=fireshare-app/fireshare versioning=semver` |
 | License | GPL-3.0 (GitHub API; repo `LICENSE`). Bake `GPL-3.0-only` (UNVERIFIED only vs or-later) |
 | Source URL | https://github.com/fireshare-app/fireshare (the draft's second link `ShaneIsrael/fireshare` is the old location) |
 | Artifacts | No binary release assets (release lists none via API). Build from source tag `https://github.com/fireshare-app/fireshare/archive/refs/tags/v${VERSION}.tar.gz`; same for amd64 and arm64 |
-| Checksum source | None published for source tarballs. Tag pin only; Git tag `v1.9.4` resolves to commit `8a321df459ecf3bc0ab00b97e416d7104797cdf1` (record, optionally check after download with `git`-less comparison is not possible, so UNVERIFIED) |
+| Checksum source | None published for source tarballs. Tag pin only; Git tag `v1.9.4` resolves to commit `8a321df459ecf3bc0ab00b97e416d7104797cdf1` (confirmed via the GitHub API on 2026-11-25; a tarball cannot be compared against it without git, so the tarball content is not checksum-verified) |
 | Upstream Dockerfiles reviewed | `Dockerfile` (CUDA, source-built ffmpeg, not usable) and `Dockerfile.lite` (python:3.14-slim-bookworm, `ffmpeg` from apt, nginx-extras, supervisor, gosu; client built in `node:24-slim` with `npm ci && npm run build`, server installed with `pip install /app/server`). Lite is the template for this port |
 | Python | upstream runs 3.14; `app/server/requirements.txt` pins old versions (e.g. Flask 3.1.1). Use python-node 3.14.8 like `apps/changedetection` does, not 3.15.2 (UNVERIFIED that the pins build on 3.15) |
 | Layout | Server `app/server` (module `fireshare`, `FLASK_APP=/app/server/fireshare:create_app()`), client build output `/app/build`, nginx template `app/nginx/prod.conf`, migrations in `/migrations`, gunicorn config `/app/server/gunicorn.conf.py`, gunicorn binds `127.0.0.1:5000`, nginx serves on `FIRESHARE_PORT` (default 80) |

@@ -43,13 +43,13 @@ apps/firefox-desktop-g3/
 4. Download and verify:
    ```
    case "$TARGETARCH" in amd64) FF_ARCH=linux-x86_64;; arm64) FF_ARCH=linux-aarch64;; esac
-   curl -fL -o /tmp/ff.tar.xz "https://archive.mozilla.org/pub/firefox/releases/${VERSION}/${FF_ARCH}/en-US/firefox-${VERSION}.tar.xz"
+   curl -fL -o /tmp/firefox-${VERSION}.tar.xz "https://archive.mozilla.org/pub/firefox/releases/${VERSION}/${FF_ARCH}/en-US/firefox-${VERSION}.tar.xz"
    curl -fL -o /tmp/SHA256SUMS "https://archive.mozilla.org/pub/firefox/releases/${VERSION}/SHA256SUMS"
    (cd /tmp && grep " ${FF_ARCH}/en-US/firefox-${VERSION}.tar.xz\$" SHA256SUMS | sed "s#${FF_ARCH}/en-US/##" | sha256sum -c -)
-   mkdir -p /app && tar xJf /tmp/ff.tar.xz -C /app    # creates /app/firefox
+   mkdir -p /app && tar xJf /tmp/firefox-${VERSION}.tar.xz -C /app    # creates /app/firefox
    ```
 5. Licenses: copy `/app/firefox/LICENSE`-style files if present (UNVERIFIED names; Mozilla tarballs ship `about:license` from omni.ja, so also write a short `/usr/share/licenses/firefox-desktop-g3/NOTICE` pointing to https://www.mozilla.org/MPL/2.0/ and the Firefox source URL).
-6. Policy file: `mkdir -p /app/firefox/distribution` (policies come from `defaults/policies.json` via COPY, placed at `/app/firefox/distribution/policies.json`, so ship it in a path allowed by `.dockerignore`, e.g. `defaults/` then `cp` in the Dockerfile).
+6. Policy file: `mkdir -p /app/firefox/distribution` (policies come from `defaults/policies.json`, which `.dockerignore` allows; install it with an explicit `COPY defaults/policies.json /app/firefox/distribution/policies.json` placed before the final `COPY --chmod=0755 . /`, because a `cp` from `/defaults` would run before that late COPY and fail).
 7. `ln -s /app/firefox/firefox /usr/local/bin/firefox`; `chown -R apps:apps /app/firefox` is unnecessary (read-only); keep root-owned 755.
 8. No extra `ENV` needed: `HOME=/config` is already set in the base. Do not set `MOZ_DISABLE_CONTENT_SANDBOX` by default (see risks).
 9. `rm -rf /tmp/* /var/lib/apt/lists/*`; `USER apps`; `COPY --chmod=0755 . /`; `EXPOSE 3000 3001`; `VOLUME /config`; `WORKDIR /config`.
