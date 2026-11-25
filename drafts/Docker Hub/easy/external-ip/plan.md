@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version | Upstream has no GitHub releases. Only tag `v0.0.1` (commit `b249ecf`, old, predates IPIFY support). The draft's chart image is `xavierh/external-ip:latest`, built from the `main` HEAD commit `3be417fe91ba6ab1be2eeb1c2ee218d01470a185` (2026-09-05, "Add Support to Use IPIFY"). Plan pins that commit. |
-| Renovate | `datasource=git-refs depName=https://github.com/xavier-hernandez/docker-external-ip versioning=loose` (same style as `apps/imaginary`, which also pins a git ref). Whether to use the short or full SHA as `VERSION` is an open question (section 10). |
+| Renovate | `datasource=git-refs depName=https://github.com/xavier-hernandez/docker-external-ip currentValue=main` (same style as `apps/tvheadend`: full commit SHA as `VERSION`). |
 | License | MIT (`LICENSE`, "Copyright (c) 2022 Xavier"; GitHub SPDX `MIT`) |
 | Source | https://github.com/xavier-hernandez/docker-external-ip |
 | Artifact | Shell scripts only: `scripts/start.sh`, `scripts/lib/ipv4.sh`, `scripts/lib/notify.sh`. Archive URL `https://github.com/xavier-hernandez/docker-external-ip/archive/<commit>.tar.gz` (arch independent). Apprise from PyPI (2.3.0 now, BSD-2-Clause, requires python>=3.9). |
@@ -60,14 +60,14 @@ The draft prefers the python base for `apprise`; the alternative is plain ubuntu
 ```hcl
 variable "APP" { default = "external-ip" }
 variable "VERSION" {
-  // renovate: datasource=git-refs depName=https://github.com/xavier-hernandez/docker-external-ip versioning=loose
+  // renovate: datasource=git-refs depName=https://github.com/xavier-hernandez/docker-external-ip currentValue=main
   default = "3be417fe91ba6ab1be2eeb1c2ee218d01470a185"
 }
 variable "LICENSE" { default = "MIT" }
 variable "SOURCE"  { default = "https://github.com/xavier-hernandez/docker-external-ip" }
 ```
 
-Because the image tag would be a 40 character SHA, consider `3be417f` (the archive URL accepts short SHAs too) so the tag is readable; keep the Dockerfile `ARG VERSION` identical. Standard `docker-metadata-action`, `group "default"`, `image` (args `VERSION`), `image-local`, `image-all` blocks copied from `apps/imaginary/docker-bake.hcl` or `apps/adguardhome-sync/docker-bake.hcl`. APPRISE_VERSION lives in the Dockerfile as an ARG default (like the PLAYWRIGHT precedent), so only `VERSION` is passed from bake. Validate with `docker buildx bake --print`.
+Keep the full SHA (as `apps/tvheadend`), so renovate can update it; the Dockerfile uses the same value through `ARG VERSION`. Standard `docker-metadata-action`, `group "default"`, `image` (args `VERSION`), `image-local`, `image-all` blocks copied from `apps/adguardhome-sync/docker-bake.hcl`. APPRISE_VERSION lives in the Dockerfile as an ARG default (like the PLAYWRIGHT precedent), so only `VERSION` is passed from bake. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -75,26 +75,75 @@ Because the image tag would be a 40 character SHA, consider `3be417f` (the archi
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
 schema_version: 1
 upstream_env_url: "https://github.com/xavier-hernandez/docker-external-ip"
-ports: []
+ports:
+  []
 env:
-  - { name: DELAY, default: "5m", required: false }
-  - { name: PROVIDER, default: "CLOUDFLARE", required: false }
-  - { name: NOTIFICATION_TYPE, default: "", required: false }
-  - { name: RECOVERY_ALERT, default: "False", required: false }
-  - { name: SAVE_IP, default: "False", required: false }
-  - { name: PUSHOVER_TOKEN, default: "", required: false }
-  - { name: PUSHOVER_USER, default: "", required: false }
-  - { name: PUSHOVER_TITLE, default: "EXTERNAL IP", required: false }
-  - { name: APPRISE_TITLE, default: "EXTERNAL IP", required: false }
-  - { name: APPRISE_1, default: "", required: false }   # up to APPRISE_10, list each in block style as siblings do
-  - { name: TZ, default: "Etc/UTC", required: false }
+  - name: DELAY
+    default: "5m"
+    required: false
+  - name: PROVIDER
+    default: "CLOUDFLARE"
+    required: false
+  - name: NOTIFICATION_TYPE
+    default: ""
+    required: false
+  - name: RECOVERY_ALERT
+    default: "False"
+    required: false
+  - name: SAVE_IP
+    default: "False"
+    required: false
+  - name: PUSHOVER_TOKEN
+    default: ""
+    required: false
+  - name: PUSHOVER_USER
+    default: ""
+    required: false
+  - name: PUSHOVER_TITLE
+    default: "EXTERNAL IP"
+    required: false
+  - name: APPRISE_TITLE
+    default: "EXTERNAL IP"
+    required: false
+  - name: APPRISE_1
+    default: ""
+    required: false
+  - name: APPRISE_2
+    default: ""
+    required: false
+  - name: APPRISE_3
+    default: ""
+    required: false
+  - name: APPRISE_4
+    default: ""
+    required: false
+  - name: APPRISE_5
+    default: ""
+    required: false
+  - name: APPRISE_6
+    default: ""
+    required: false
+  - name: APPRISE_7
+    default: ""
+    required: false
+  - name: APPRISE_8
+    default: ""
+    required: false
+  - name: APPRISE_9
+    default: ""
+    required: false
+  - name: APPRISE_10
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
-    required: true     # only used when SAVE_IP=True; keep required: false if the schema/siblings prefer
-dependencies: []
+    required: false
 ```
 
-Write the entries in the multi-line block style of `apps/bazarr/settings.yaml` and expand `APPRISE_2` to `APPRISE_10`. All names are verified against `start.sh`/`notify.sh`. Defaults match `start.sh`. Mark `/config` `required: false` (state is only needed with `SAVE_IP`), which differs from sibling convention; decide when writing. No ports.
+All names are verified against `start.sh`/`notify.sh`. Defaults match `start.sh`. `/config` is `required: false` because state is only needed with `SAVE_IP`. No ports and no dependencies.
 
 ## 7. start.sh
 
@@ -102,7 +151,8 @@ Own script, same behavior as upstream's loop with the saved-IP path moved and th
 
 ```bash
 #!/usr/bin/env bash
-set -uo pipefail
+set -o pipefail
+# no "set -u": the sourced upstream notify.sh reads unset NOTIFICATION_TYPE, *_TITLE and APPRISE_n
 
 source /app/scripts/lib/ipv4.sh
 source /app/scripts/lib/notify.sh
@@ -144,7 +194,7 @@ while :; do
 done
 ```
 
-The change/recovery block mirrors upstream's `start.sh` at the pinned commit (diff against it when writing; recovery alert only when `RECOVERY_ALERT` is true, now case-insensitive). Add `trap 'exit 0' TERM INT` before the loop. Rules: idempotent; state only in `/config/ip.saved` and only when `SAVE_IP` is true (empty `/config` is fine, nothing seeded); no writes to `/app`; secrets (`PUSHOVER_TOKEN`, `APPRISE_*` URLs) are used only via `curl -F`/`apprise` arguments as upstream does, and never logged (note `curl -F token=...` shows the token in the process list; acceptable only because upstream does it, flag in the PR or switch to `curl --form-string` read from env, open question); the loop is the main process so `exec` is not applicable. To get signals through (`sleep` blocks TERM), run `sleep "${sleep_for}" & wait $!` and add `trap 'exit 0' TERM INT` (tini from the base handles PID 1). No `exec` possible because it is a loop; state this in a comment. No network listener, so bind-address rule is not applicable.
+The change/recovery block mirrors upstream's `start.sh` at the pinned commit (diff against it when writing; recovery alert only when `RECOVERY_ALERT` is true, now case-insensitive). Add `trap 'exit 0' TERM INT` before the loop. Rules: idempotent; state only in `/config/ip.saved` and only when `SAVE_IP` is true (empty `/config` is fine, nothing seeded); no writes to `/app`; secrets (`PUSHOVER_TOKEN`, `APPRISE_*` URLs) are used only via `curl -F`/`apprise` arguments as upstream does, and never logged (note that upstream's `curl -F token=...` and the `apprise <url>` argument show the secrets in the process list, against the start-script rule; patch the fetched `notify.sh` so Pushover fields reach curl through `--config -` on stdin, and check whether apprise can read URLs from a `--config` file under `/tmp` (UNVERIFIED), which would itself put a secret in a file; otherwise flag it in the PR); the loop is the main process so `exec` is not applicable. To get signals through (`sleep` blocks TERM), run `sleep "${sleep_for}" & wait $!` and add `trap 'exit 0' TERM INT` (tini from the base handles PID 1). No `exec` possible because it is a loop; state this in a comment. No network listener, so bind-address rule is not applicable.
 
 ## 8. container-test.yaml
 
@@ -176,12 +226,12 @@ Draft expectations: UID 0, writable rootfs, no persistence. Here UID 568, read-o
 
 ## 10. Risks, caveats and open questions
 
-- No upstream releases: renovate git-refs will propose new commits; the image version equals a commit SHA. Maintainer should confirm that naming (short vs full SHA).
+- No upstream releases: renovate git-refs will propose new commits from `main`; the image version and tag are the full commit SHA.
 - `curl -k` in the ipify provider disables TLS verification; consider removing it (diverges from upstream).
 - Needs outbound internet and public IP services (draft caveat); `dig` to port 53 may be blocked by cluster egress rules.
 - `apprise` needs a target URL (account at the notification service); no secrets are baked in.
 - Draft says "pip into /app and a /config state file": implemented as the base venv plus `/config/ip.saved`.
-- Upstream's `PUSHOVER_TOKEN` appears in the process list via `curl -F`.
+- Upstream's `PUSHOVER_TOKEN` and the Apprise URLs appear in the process list (see section 7); decide how to handle this before the PR.
 - Pure shell app, so no architecture issue; Apprise wheels and `bind9-dnsutils` exist for arm64 (UNVERIFIED for arm64 builds).
 
 ## 11. Build and test steps
@@ -190,11 +240,11 @@ Draft expectations: UID 0, writable rootfs, no persistence. Here UID 568, read-o
 cd apps/external-ip
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
-docker run --rm -d --name external-ip-probe --read-only --tmpfs /tmp -e DELAY=30s -e SAVE_IP=True -v external-ip-probe-config:/config external-ip:3be417f
+docker run --rm -d --name external-ip-probe --read-only --tmpfs /tmp -e DELAY=30s -e SAVE_IP=True -v external-ip-probe-config:/config external-ip:3be417fe91ba6ab1be2eeb1c2ee218d01470a185
 docker logs -f external-ip-probe     # expect "Starting..." then "IP: <your public IPv4> [CHANGE]"
 docker exec external-ip-probe cat /config/ip.saved
 docker exec external-ip-probe apprise --version
-forgetool containers test --image external-ip:3be417f --config ./apps/external-ip/container-test.yaml
+forgetool containers test --image external-ip:3be417fe91ba6ab1be2eeb1c2ee218d01470a185 --config ./apps/external-ip/container-test.yaml
 docker rm -f external-ip-probe; docker volume rm external-ip-probe-config
 ```
 

@@ -101,31 +101,67 @@ ports:
   - port: 9191
     protocol: tcp
     required: true
-env:        # block style as in apps/bazarr; names below are all read by upstream
-  - DISPATCHARR_PORT        default "9191"
-  - DISPATCHARR_LOG_LEVEL   default "info"
-  - DISPATCHARR_TIME_ZONE   default "Etc/UTC"
-  - POSTGRES_HOST           default "postgresql"   required true
-  - POSTGRES_PORT           default "5432"
-  - POSTGRES_DB             default "dispatcharr"
-  - POSTGRES_USER           default "dispatch"
-  - POSTGRES_PASSWORD       default "secret"       required true   # upstream's own default
-  - REDIS_HOST              default "valkey"       required true
-  - REDIS_PORT              default "6379"
-  - REDIS_PASSWORD          default ""
-  - UWSGI_WORKERS           default "4"
-  - CELERY_MAX_WORKERS      default "6"
-  - CELERY_MIN_WORKERS      default "1"
-  - DISPATCHARR_SETUP_ALLOWED_IP   default ""
-  - DISPATCHARR_TRUSTED_PROXIES    default ""
-  - TZ                      default "Etc/UTC"
+env:
+  - name: DISPATCHARR_PORT
+    default: "9191"
+    required: false
+  - name: DISPATCHARR_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: DISPATCHARR_TIME_ZONE
+    default: "Etc/UTC"
+    required: false
+  - name: POSTGRES_HOST
+    default: "postgresql"
+    required: true
+  - name: POSTGRES_PORT
+    default: "5432"
+    required: false
+  - name: POSTGRES_DB
+    default: "dispatcharr"
+    required: false
+  - name: POSTGRES_USER
+    default: "dispatch"
+    required: false
+  - name: POSTGRES_PASSWORD
+    default: "secret"
+    required: true
+  - name: REDIS_HOST
+    default: "valkey"
+    required: true
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: UWSGI_WORKERS
+    default: "4"
+    required: false
+  - name: CELERY_MAX_WORKERS
+    default: "6"
+    required: false
+  - name: CELERY_MIN_WORKERS
+    default: "1"
+    required: false
+  - name: DISPATCHARR_SETUP_ALLOWED_IP
+    default: ""
+    required: false
+  - name: DISPATCHARR_TRUSTED_PROXIES
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: true
 dependencies:
-  - postgresql ✅
-  - valkey ✅
+  - name: postgresql
+  - name: valkey
 ```
+
+- `apps/postgresql` ✅ and `apps/valkey` ✅ exist. `POSTGRES_PASSWORD` defaults to upstream's own `secret`; tell users to change it.
 
 Notes: `POSTGRES_HOST` and `REDIS_HOST` defaults must be what `start.sh` uses; the "required true needs non-empty default" rule is satisfied. `valkey` is Redis compatible; UNVERIFIED that Dispatcharr (redis-py 8, channels-redis, celery) works against Valkey, so the dependency stays open until tested (no `redis` app exists in `apps/`). `PUID`, `PGID`, `USE_LEGACY_NUMPY`, `DISPATCHARR_ENV` are deliberately not exposed (not supported rootless). Add TLS/Redis-SSL variables only if you test them. Extend from the verified list in section 1.
 
@@ -144,7 +180,7 @@ export POSTGRES_DB="${POSTGRES_DB:-dispatcharr}" POSTGRES_USER="${POSTGRES_USER:
 export POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-secret}"
 export REDIS_HOST="${REDIS_HOST:-valkey}" REDIS_PORT="${REDIS_PORT:-6379}"
 export DISPATCHARR_PORT="${DISPATCHARR_PORT:-9191}" DISPATCHARR_LOG_LEVEL="${DISPATCHARR_LOG_LEVEL:-info}"
-export DISPATCHARR_TIME_ZONE="${DISPATCHARR_TIME_ZONE:-${TZ:-UTC}}"
+export DISPATCHARR_TIME_ZONE="${DISPATCHARR_TIME_ZONE:-${TZ:-Etc/UTC}}"
 export UWSGI_WORKERS="${UWSGI_WORKERS:-4}" CELERY_MAX_WORKERS="${CELERY_MAX_WORKERS:-6}" CELERY_MIN_WORKERS="${CELERY_MIN_WORKERS:-1}"
 
 mkdir -p /config/{backups,logos,cache/logos,cache/sd_posters,recordings,uploads/m3us,uploads/epgs,m3us,epgs,plugins,models,scripts,logs} /tmp/nginx
@@ -153,8 +189,9 @@ mkdir -p /config/{backups,logos,cache/logos,cache/sd_posters,recordings,uploads/
 Then:
 
 - Secret: `[ -f /config/jwt ] || ( umask 077; python -c 'import secrets;print(secrets.token_urlsafe(64))' > /config/jwt.tmp && mv /config/jwt.tmp /config/jwt )`; `export DJANGO_SECRET_KEY="$(tr -d '\r\n' < /config/jwt)"`. Never echo it.
+- Order for the `web` role: render and start nginx first (see below), then run the waits, so port 9191 opens even without a database (it answers 502 until uwsgi is up).
 - Wait loops: PostgreSQL `until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -q; do sleep 1; done` (apt `postgresql-client`, or a `/dev/tcp` loop); Redis `python /app/scripts/wait_for_redis.py` (upstream script). Waiting is the log signal in a DB-less test (section 8). The DB password is applied by the external postgres app on its own start, nothing to do here.
-- `role web`: render nginx: `sed "s/NGINX_PORT/${DISPATCHARR_PORT}/g" /app/docker/nginx.conf > /tmp/dispatcharr-site.conf` (and drop the `listen [::]:` line if `ip -6 addr` shows no inet6, as upstream does); `nginx -c /etc/dispatcharr/nginx.conf -e /tmp/nginx/error.log &` where our `etc/dispatcharr/nginx.conf` sets `pid /tmp/nginx.pid; error_log /dev/stderr;`, `http { client_body_temp_path /tmp/nginx/body; proxy_temp_path /tmp/nginx/proxy; fastcgi_temp_path /tmp/nginx/fastcgi; uwsgi_temp_path /tmp/nginx/uwsgi; scgi_temp_path /tmp/nginx/scgi; include /etc/nginx/mime.types; include /tmp/dispatcharr-site.conf; }` plus `events {}`; check what else upstream's site fragment expects from the Debian main `nginx.conf` (it uses `$sd_poster_cache_key` maps and `proxy_cache_path` which are `http` level directives, so the fragment goes directly inside `http`). Then `python manage.py migrate --noinput`, then `exec uwsgi --ini /app/docker/uwsgi.modular.ini --disable-logging` (drop `--disable-logging` when `DISPATCHARR_DEBUG=true`). nginx runs in the background, uwsgi is the `exec`'d main process; if nginx dies, add a small `wait -n` supervisor instead of `exec` (open question: `exec` vs `wait -n`; prefer the supervisor so a dead nginx restarts the container).
+- `role web`: render nginx: `sed "s/NGINX_PORT/${DISPATCHARR_PORT}/g" /app/docker/nginx.conf > /tmp/dispatcharr-site.conf` (and drop the `listen [::]:` line if `ip -6 addr` shows no inet6, as upstream does); `nginx -c /etc/dispatcharr/nginx.conf -e /tmp/nginx/error.log &` where our `etc/dispatcharr/nginx.conf` sets `pid /tmp/nginx.pid; error_log /dev/stderr;`, `http { client_body_temp_path /tmp/nginx/body; proxy_temp_path /tmp/nginx/proxy; fastcgi_temp_path /tmp/nginx/fastcgi; uwsgi_temp_path /tmp/nginx/uwsgi; scgi_temp_path /tmp/nginx/scgi; include /etc/nginx/mime.types; include /tmp/dispatcharr-site.conf; }` plus `events {}`; check what else upstream's site fragment expects from the Debian main `nginx.conf` (it uses `$sd_poster_cache_key` maps and `proxy_cache_path` which are `http` level directives, so the fragment goes directly inside `http`). Then `python manage.py migrate --noinput`, then `exec uwsgi --ini /app/docker/uwsgi.modular.ini --disable-logging` (drop `--disable-logging` when `DISPATCHARR_DEBUG=true`). nginx runs in the background, uwsgi is the `exec`'d main process; if nginx dies, add a small `wait -n` supervisor instead of `exec` (open question: `exec` vs `wait -n`; use a `wait -n` supervisor that runs uwsgi and nginx as children and forwards TERM/INT, so a dead nginx restarts the container; this is a deliberate exception to the final-`exec` SHOULD rule).
 - `role celery`: wait for `/config/jwt` and `python manage.py migrate --check`, then reproduce `entrypoint.celery.sh`: `celery -A dispatcharr beat -l info &`, DVR worker, prefork autoscale worker with `--autoscale=${CELERY_MAX_WORKERS},${CELERY_MIN_WORKERS}` copied from the tag's script; final worker `exec`'d. Take the exact commands from `docker/entrypoint.celery.sh` at the tag.
 - Binds: nginx listens on all interfaces (`listen NGINX_PORT`), uwsgi http 0.0.0.0:5656 and daphne 0.0.0.0:8001 are internal. All writes are under `/config` (via `/data` symlink) and `/tmp`; nothing in `/app`.
 
@@ -167,6 +204,8 @@ DB exception: Dispatcharr has hard `dependencies` on `postgresql` and `valkey`, 
 
 # narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
 timeoutSeconds: 180
+tcp:
+- port: '9191'
 filePaths:
 - /app/manage.py
 - /app/frontend/dist/index.html
@@ -176,7 +215,7 @@ filePaths:
 - /usr/share/licenses/dispatcharr/LICENSE
 ```
 
-Port 9191 is in `settings.yaml`, so a probe is expected; nginx only starts after the DB and Redis waits. Option: let `start.sh` start nginx before the waits so `tcp: 9191` can pass (it would serve 502 until uwsgi is up); decide when implementing. If nginx starts first, add `tcp: [{port: '9191'}]` (a real port probe, still narrow). Never replace with no-op assertions. Verify `frontend/dist/index.html` name after the first build. Because the python base ships `HEALTHCHECK` reading `/container-test.yaml`, ensure the file list assertions pass.
+`start.sh` starts nginx before the DB and Redis waits (section 7), so the `tcp: 9191` probe is a real, narrow check. No HTTP probe, because nginx answers 502 without the database. Never replace with no-op assertions. Verify the `frontend/dist/index.html` name after the first build. Because the python base ships `HEALTHCHECK` reading `/container-test.yaml`, ensure the file list assertions pass.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -224,7 +263,7 @@ docker run --rm -d --name dispatcharr-probe --network dispatcharr-probe --read-o
   -e POSTGRES_HOST=dispatcharr-pg -e REDIS_HOST=dispatcharr-valkey -v dispatcharr-probe-config:/config -p 9191:9191 dispatcharr:v0.34.1
 docker logs -f dispatcharr-probe     # expect waits succeed, "Applying ... OK" migrations, uwsgi "spawned uWSGI worker", nginx up
 curl -fsS http://127.0.0.1:9191/ | head
-docker run --rm -d --name dispatcharr-celery --network dispatcharr-probe --read-only --tmpfs /tmp -e POSTGRES_HOST=dispatcharr-pg -e REDIS_HOST=dispatcharr-valkey -v dispatcharr-probe-config:/config dispatcharr:v0.34.1 /start.sh celery
+docker run --rm -d --name dispatcharr-celery --network dispatcharr-probe --read-only --tmpfs /tmp -e POSTGRES_HOST=dispatcharr-pg -e REDIS_HOST=dispatcharr-valkey -v dispatcharr-probe-config:/config dispatcharr:v0.34.1 celery   # entrypoint.sh passes args to /start.sh
 forgetool containers test --image dispatcharr:v0.34.1 --config ./apps/dispatcharr/container-test.yaml
 docker rm -f dispatcharr-probe dispatcharr-celery dispatcharr-pg dispatcharr-valkey; docker volume rm dispatcharr-probe-config; docker network rm dispatcharr-probe
 ```

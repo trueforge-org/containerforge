@@ -119,6 +119,11 @@ seed() { # $1 source under /app, $2 destination under userdata
 seed /app/plugins/examples          "${USERDATA}/plugins/examples"
 seed /app/www/templates             "${USERDATA}/www/templates"
 seed /app/scripts/dzVents/examples  "${USERDATA}/scripts/dzVents/examples"
+# bundled plugins (everything under plugins/ except examples): copy only the missing ones
+for plugin in /app/plugins/*/; do
+  name="$(basename "${plugin}")"
+  [ "${name}" = "examples" ] || seed "${plugin%/}" "${USERDATA}/plugins/${name}"
+done
 
 ARGS=(-www "${WWW_PORT:-8080}" -sslwww "${SSL_PORT:-0}" -noupdates -userdata "${USERDATA}/" \
       -dbase "${DATABASE_PATH:-/config/domoticz.db}")
@@ -130,7 +135,7 @@ cd /app
 exec /app/domoticz "${ARGS[@]}" ${EXTRA_CMD_ARG:-}
 ```
 
-Notes: `-wwwbind` already defaults to `0.0.0.0`, so the web UI is reachable from other containers (verify with a request from outside). Bundled plugins other than `examples` (upstream also syncs them): copy each missing directory under `/app/plugins/*/` the same way, in a small loop. UNVERIFIED which of `plugins/`, `scripts/` and `www/templates` Domoticz expects under `-userdata` versus `-approot`; the upstream entrypoint copies them there, so mirror it and check the log for "file not found" lines. Upstream's `customstart.sh` and Python venv are left out (see section 10).
+Notes: `-wwwbind` already defaults to `0.0.0.0`, so the web UI is reachable from other containers (verify with a request from outside). The loop covers bundled plugins other than `examples` (for example `AwoxSMP`). Upstream additionally updates their files when the image is newer (`rsync --update`); our copy-if-missing does not, so bundled plugin updates need the user to delete the old directory. UNVERIFIED which of `plugins/`, `scripts/` and `www/templates` Domoticz expects under `-userdata` versus `-approot`; the upstream entrypoint copies them there, so mirror it and check the log for "file not found" lines. Upstream's `customstart.sh` and Python venv are left out (see section 10).
 
 ## 8. container-test.yaml
 

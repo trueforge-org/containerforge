@@ -15,7 +15,7 @@
 | Tarball content | `registry` (static Go binary: no NEEDED libraries per `readelf -d`), `LICENSE`, `README.md` |
 | Upstream library Dockerfile | Reviewed (`distribution/distribution-library-image`): `alpine:3.24`, installs `ca-certificates`, extracts `registry` to `/bin/`, copies `config-example.yml` to `/etc/distribution/config.yml`, `ENV OTEL_TRACES_EXPORTER=none`, `VOLUME /var/lib/registry`, `EXPOSE 5000`, entrypoint `/entrypoint.sh`, `CMD ["/etc/distribution/config.yml"]`. |
 | Entrypoint | `entrypoint.sh`: if `$1` ends in `.yaml` or `.yml` then `registry serve "$@"`; if `$1` is `serve`, `garbage-collect`, `help` or starts with `-` then `registry "$@"`; then `exec "$@"`. |
-| Config example | `config-example.yml` in the library image repo (read 2026-11-23): `version: 0.1`, `log.fields.service: registry`, `storage.cache.blobdescriptor: inmemory`, `storage.filesystem.rootdirectory: /var/lib/registry`, `http.addr: :5000`, `health.storagedriver` (enabled, interval 10s, threshold 3). Its `log.level` was `debug` in the output I read (UNVERIFIED whether that is current); re-read the file when implementing. |
+| Config example | `config-example.yml` in the library image repo (read 2026-11-23): `version: 0.1`, `log.fields.service: registry`, `storage.cache.blobdescriptor: inmemory`, `storage.filesystem.rootdirectory: /var/lib/registry`, `http.addr: :5000`, `health.storagedriver` (enabled, interval 10s, threshold 3). It also sets `log.level: debug`, `log.fields.environment: development`, `storage.delete.enabled: true` and a debug server on `:5001` (re-read 2026-11-25). Our seeded config (section 7) deliberately differs: no debug server, `info` logging, deletes off by default. |
 | Env overrides | `REGISTRY_<SECTION>_<KEY>` with underscores for nesting, e.g. `REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY` (from the configuration docs). The docs advise a base config file plus env tweaks. |
 | Endpoints | Port 5000. `GET /v2/` is the API version check (Registry HTTP API V2; UNVERIFIED in this session, confirm in the run). Debug server (`http.debug.addr`, `/debug/health`) is off unless configured. |
 
@@ -108,10 +108,10 @@ set -euo pipefail
 mkdir -p /config/data
 [ -f /config/config.yml ] || cp /defaults/config.yml /config/config.yml
 
-exec /app/registry serve "${REGISTRY_CONFIG:-/config/config.yml}"
+exec /app/registry serve /config/config.yml
 ```
 
-`defaults/config.yml` (derived from upstream `config-example.yml` at the tag, with the path changed):
+`defaults/config.yml` (derived from the library image repo's `config-example.yml`, reduced and with the path changed):
 
 ```yaml
 version: 0.1
@@ -133,7 +133,7 @@ health:
     threshold: 3
 ```
 
-`:5000` binds all interfaces. Do not name a custom env `REGISTRY_CONFIG` unless declared in `settings.yaml` (it is the script's own optional override; either declare it or drop it, prefer dropping). Never write to `/app`. Upload staging lives under the root directory, so it is on `/config`.
+`:5000` binds all interfaces. Do not add a script-only `REGISTRY_*` variable: the registry parses that prefix as configuration overrides. Never write to `/app`. Upload staging lives under the root directory, so it is on `/config`.
 
 ## 8. container-test.yaml
 
@@ -170,6 +170,7 @@ Draft/chart expectations: runs as UID 0 with a writable rootfs, data on `/var/li
 - Deleted layers need `registry garbage-collect /config/config.yml` by hand; `exec` into the container works because the binary is at `/app/registry`.
 - `storage.delete.enabled` default is false (docs), so deletions via the API fail until enabled. Settings expose it.
 - Draft sizes it as "easy": confirmed (static binary with checksums).
+- The official `registry` image enables `storage.delete` in its example config; users who delete through the API must set `REGISTRY_STORAGE_DELETE_ENABLED=true` here.
 - Chart's data path `/var/lib/registry` differs from this image's `/config/data`; migration needed.
 
 ## 11. Build and test steps

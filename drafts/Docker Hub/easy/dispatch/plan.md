@@ -15,9 +15,9 @@
 | Binary | Static Go ELF (no NEEDED libraries, checked with `readelf -d`), frontend embedded. Tarball content: `dispatch` only. Works on glibc Ubuntu. |
 | Upstream Dockerfile | Reviewed: builds on `golang:alpine`, runtime `alpine`, `EXPOSE 80/tcp`, `VOLUME ["/data"]`, `ENTRYPOINT ["/dispatch"]`, `CMD ["--dir=/data"]`. |
 | CLI flags (`commands/dispatch.go`) | Persistent: `--dir` (config and data), `--data`, `--conf`, `--reset-config`. Root: `-a/--address`, `-p/--port` (default 80), `--dev`, `-v/--version`. |
-| Config | `config.toml` inside `--dir`. If missing, the app writes the embedded `config.default.toml` (mode 0600). Defaults that matter: `port = 80`, `identd = true` (binds port 113), `[https] enabled = true, port = 443` (self-signed or Let's Encrypt), `[auth] anonymous = true, login = true, registration = true`. The config file is watched and reloaded live. |
+| Config | `config.toml` inside `--dir`. If missing, the app writes the embedded `config.default.toml` (mode 0600). Defaults that matter (file at tag `v0.7`): `address = ""`, `port = 80`, `[https] enabled = true, port = 443` (own cert or Let's Encrypt), `[auth] anonymous = true, login = true, registration = true`. The `v0.7` file and server code have no identd or DCC feature. The config file is watched and reloaded live. |
 | Env vars | None found: no `AutomaticEnv`/`SetEnvPrefix` in the code (search returned 0). All configuration is flags and `config.toml`. |
-| Ports | 80 HTTP (default), 443 HTTPS (default on), 113 identd (default on). All three are privileged, so the plan overrides them in a seeded config. |
+| Ports | 80 HTTP (default), 443 HTTPS (default on). Both are privileged, so the plan overrides them with the flag and a seeded config. |
 | Data | boltdb, bleve indexes, logs and uploaded certs under `--dir`. |
 | Project health | Last push 2023-01-06, last release 2020-05-08, not archived. Frozen upstream. |
 
@@ -54,7 +54,7 @@ Pattern of `apps/adguardhome-sync/Dockerfile` with a checksum step and license:
    - `curl -fsSL -o /tmp/checksums.txt "https://github.com/khlieng/dispatch/releases/download/${VERSION}/checksums.txt"`
    - Verify: `(cd /tmp && grep " dispatch_${VERSION#v}_linux_${A}.tar.gz\$" checksums.txt | sed 's#  .*#  dispatch.tar.gz#' | sha256sum -c -)`.
 4. `tar xzf /tmp/dispatch.tar.gz -C /app dispatch` (tarball is flat, only `dispatch`).
-5. License (not in the tarball): `mkdir -p /usr/share/licenses/dispatch && curl -fsSL -o /usr/share/licenses/dispatch/LICENSE "https://raw.githubusercontent.com/khlieng/dispatch/${VERSION}/LICENSE"`. UNVERIFIED: that `LICENSE` exists at tag `v0.7` (it is in master's tree); if the fetch fails, use `master` and note it.
+5. License (not in the tarball): `mkdir -p /usr/share/licenses/dispatch && curl -fsSL -o /usr/share/licenses/dispatch/LICENSE "https://raw.githubusercontent.com/khlieng/dispatch/${VERSION}/LICENSE"`. `LICENSE` exists at tag `v0.7` (MIT).
 6. `chown -R apps:apps /app && chmod -R 755 /app`; `rm /tmp/dispatch.tar.gz /tmp/checksums.txt`.
 7. `USER apps`; `COPY --chmod=0755 . /`; `EXPOSE 8080`; `VOLUME /config`.
 
@@ -93,7 +93,7 @@ volumes:
     required: true
 ```
 
-Only `TZ` (read by the Go runtime). Do not invent `DISPATCH_*` variables; the app reads none. Port 8080 matches the seeded `port` and the flag in `start.sh`. No dependencies. Port 443 and 113 are not listed because the seeded config disables them.
+Only `TZ` (read by the Go runtime). Do not invent `DISPATCH_*` variables; the app reads none. Port 8080 matches the seeded `port` and the flag in `start.sh`. No dependencies. Port 443 is not listed because the seeded config disables HTTPS.
 
 ## 7. start.sh
 
@@ -109,7 +109,7 @@ cd /config
 exec /app/dispatch --dir=/config --address=0.0.0.0 --port=8080
 ```
 
-`defaults/config.toml` is upstream `config.default.toml` (v0.7) with three edits: `port = 8080`, `identd = false`, `[https] enabled = false`. TLS and ident are left to a reverse proxy; users can re-enable them in `/config/config.toml` (ports above 1024 only). Keep the rest of the upstream defaults. Take the file content from the upstream tag at implementation time (UNVERIFIED that the `v0.7` tag file equals master; diff before copying). Because the config file is read with viper, check that `address` in the file does not override `--address` (flags win in viper, UNVERIFIED for this build).
+`defaults/config.toml` is upstream `config.default.toml` (v0.7) with two edits: `port = 8080`, `[https] enabled = false`. TLS is left to a reverse proxy; users can re-enable them in `/config/config.toml` (ports above 1024 only). Keep the rest of the upstream defaults. Take the file content from the `v0.7` tag. The flags are bound to viper (`commands/dispatch.go`), and an explicitly set flag takes precedence over the config file, so `--address` and `--port` win.
 
 ## 8. container-test.yaml
 
@@ -135,7 +135,7 @@ Every port in `settings.yaml` (8080) has a probe. No env vars are needed to star
 | --- | --- |
 | `/data` (chart volume, upstream `--dir=/data`) | `--dir=/config`. The draft says `/config`, the chart `/data`; use `/config` and document the migration (move `/data` contents). |
 | `config.toml` auto-write | Pre-seeded from `/defaults`, and `/config` is writable. |
-| Ports 80, 443, 113 | Port 8080 via flag and config; HTTPS and identd off, so no privileged bind as UID 568. |
+| Ports 80, 443 | Port 8080 via flag and config; HTTPS off, so no privileged bind as UID 568. |
 | Let's Encrypt cache `<dir>/letsencrypt` | Only if the user turns it on; under `/config`. |
 | Home dir (`go-homedir` default dir) | Not used because `--dir` is explicit; `HOME=/config` anyway. |
 
@@ -146,8 +146,7 @@ Chart expectations (UID 0, writable rootfs) are not carried over: runs as `apps`
 - Upstream is frozen (last release 2020, last commit 2023): old Go dependencies, no security updates. Renovate will never move it. Flag in the PR.
 - Users' IRC logins and settings live in `/config` (bolt DB). Anonymous access is on by default in upstream config; consider setting `auth.anonymous = false` in `defaults/config.toml` (open question, changes upstream default).
 - Behind a reverse proxy the client uses WebSockets on the same port; nothing to change in the image.
-- DCC (`dcc.enabled`) downloads files; location UNVERIFIED (probably under the data dir, so `/config`). Check after the first run that nothing writes outside `/config` and `/tmp`.
-- identd disabled means some IRC networks that require ident may show `~user`. Acceptable.
+- Check after the first run that nothing writes outside `/config` and `/tmp`.
 - Checksum values come from the release's `checksums.txt`, fine but they are published by the same account as the binaries.
 
 ## 11. Build and test steps
@@ -163,7 +162,7 @@ forgetool containers test --image dispatch:v0.7 --config ./apps/dispatch/contain
 docker rm -f dispatch-probe; docker volume rm dispatch-probe-config
 ```
 
-Also restart with the same volume and confirm `/config/config.toml` is not overwritten, and that `docker exec dispatch-probe ss -ltn` shows only 8080 (no 80/443/113).
+Also restart with the same volume and confirm `/config/config.toml` is not overwritten, and that `docker exec dispatch-probe ss -ltn` shows only 8080 (no 80/443; `ss` may not be in the base, then probe the ports from another container).
 
 ## 12. PR checklist
 
