@@ -62,7 +62,7 @@ Not included (see section 9): the TeamSpeak client install, TTS install, and the
 
 - Schema header and `schema_version: 1`, `upstream_env_url: https://github.com/gamer92000/sinusbot-docker`.
 - `ports`: 8087/tcp, http, `required: true`. No other ports until confirmed.
-- `env`: `UID` (default 9987), `GID` (default 9987), `OVERRIDE_PASSWORD` (default empty, not required). Only names the upstream entrypoint reads. Defaults must match the new start.sh.
+- `env`: `OVERRIDE_PASSWORD` (default empty, not required), as read by the upstream entrypoint. `UID`/`GID` are not listed: the new start.sh does not read them (no `setpriv`; `UID` is also a read-only shell variable). Defaults must match the new start.sh.
 - `volumes`: `/config` (persistent data and config).
 - `dependencies`: none.
 
@@ -94,7 +94,7 @@ Not included (see section 9): the TeamSpeak client install, TTS install, and the
 | yt-dlp self-update and cache | `/tmp` or disabled; UNVERIFIED whether the bot needs yt-dlp at all |
 | chown of the app directory | removed |
 | setpriv drop to UID/GID | removed; the process runs as `apps` |
-| root user | `apps`, with UID/GID from env only if a host mapping needs it |
+| root user | `apps` (fixed; no UID/GID env) |
 
 Draft security expectations to reconcile: upstream runAsUser 0, readOnlyRootFilesystem false, no privileged. The target is rootless and read-only, so the chart's expectations are not applied.
 

@@ -8,7 +8,7 @@
 | Latest stable | v0.8.1 (not prerelease) | `gh api repos/spegel-org/spegel/releases/tags/v0.8.1` |
 | Release date | 2026-10-28 | same |
 | Renovate | datasource `github-releases`, depName `spegel-org/spegel`, versioning `semver` (derived, not checked against a renovate config) | — |
-| License | UNVERIFIED: the license API and repo page were not fetched (403) | — |
+| License | MIT (GitHub SPDX id) | `gh api repos/spegel-org/spegel/license` |
 | Assets | `spegel_0.8.1_linux_amd64.tar.gz`, `spegel_0.8.1_linux_arm64.tar.gz`, `spegel_0.8.1_linux_arm.tar.gz`, `spegel_0.8.1_checksums.txt` | https://github.com/spegel-org/spegel/releases/download/v0.8.1/ |
 | Checksums | amd64 `3e2d2886f1cc846f3439156dea9a4bd003b73fc9ee9e8f96462c153add71f049`; arm64 `469de3a23b37cc7bbac33bb64d2fa2135bacab42b4b231d9d545a4affdd6b9f5`; arm `14344539f7fd373a94387fbfa45087db7a56960c9fbe03d2dbf7ee6651e79181` | https://github.com/spegel-org/spegel/releases/download/v0.8.1/spegel_0.8.1_checksums.txt |
 | Upstream Dockerfile (commit 7e2e042) | `FROM gcr.io/distroless/static:nonroot`; `ARG TARGETOS`, `ARG TARGETARCH`; `COPY ./dist/spegel_${TARGETOS}_${TARGETARCH}/spegel /`; `ENTRYPOINT ["/spegel"]`; `USER root:root`; no EXPOSE, VOLUME or ENV | https://raw.githubusercontent.com/spegel-org/spegel/7e2e042/Dockerfile |
@@ -47,7 +47,7 @@ No `defaults/` or `etc/` are expected. Do not use `root/`. No `DOWNSTREAM_CHANGE
 
 ## 5. docker-bake.hcl
 
-- `APP = "spegel"`, `SOURCE = "https://github.com/spegel-org/spegel"`, `LICENSE` UNVERIFIED until the upstream license is confirmed.
+- `APP = "spegel"`, `SOURCE = "https://github.com/spegel-org/spegel"`, `LICENSE = "MIT"`.
 - `variable "VERSION"` default `"0.8.1"` with the renovate comment: `// renovate: datasource=github-releases depName=spegel-org/spegel versioning=semver`.
 - Four standard targets and `group "default" { targets = ["image-local"] }`. `image-all` builds amd64 and arm64 (arm64 is a release asset, but it is untested on arm64 hosts).
 - Validate with `docker buildx bake --print`.
@@ -88,7 +88,7 @@ Draft security expectations to reconcile: upstream runAsUser 0, readOnlyRootFile
 
 - Blocker: spegel is a node-level DaemonSet that writes containerd registry config and needs the containerd socket via hostPath. A rootless, read-only image cannot do this inside the container. The deployer must provide the hostPath mounts and possibly root. Decide with the user whether this container should exist at all in ContainerForge.
 - Caveat: standalone spegel does nothing useful without a containerd cluster and per-node mirror config (inferred in the draft).
-- UNVERIFIED: ports (5000, 9090, 5001), CLI flags, env vars, license, and whether a config file is needed.
+- UNVERIFIED: ports (5000, 9090, 5001), CLI flags, env vars, and whether a config file is needed.
 - arm64 is a release asset but untested on arm64 hosts (draft). Build it, but do not claim arm64 support until tested.
 - Checksum verification is available (checksums file), so it is not a risk.
 
@@ -96,10 +96,10 @@ Draft security expectations to reconcile: upstream runAsUser 0, readOnlyRootFile
 
 1. `cd apps/spegel && docker buildx bake --print`
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`
-3. `docker run --rm -d --name spegel-probe --read-only --tmpfs /tmp -v spegel-probe-config:/config <image>:0.8.1`
+3. `docker run --rm -d --name spegel-probe --read-only --tmpfs /tmp <image>:0.8.1`
 4. `docker logs -f spegel-probe`. Expected signal: the process stays up and logs its startup line (UNVERIFIED). Without containerd it may exit with an error. That would be a real finding, not a build error. Record it and decide with the user before changing assertions.
 5. `forgetool containers test --image <image>:0.8.1 --config ./apps/spegel/container-test.yaml`
-6. Clean up: `docker rm -f spegel-probe; docker volume rm spegel-probe-config`.
+6. Clean up: `docker rm -f spegel-probe`.
 
 ## 12. PR checklist
 

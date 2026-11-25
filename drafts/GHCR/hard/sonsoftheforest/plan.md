@@ -34,7 +34,7 @@ Do not use `root/`. Add `DOWNSTREAM_CHANGES.md` only if this app becomes a FROM 
 
 ## 3. Base image
 
-- Runtime: `FROM ghcr.io/trueforge-org/steamcmd:<pinned>@<digest>` if the local sibling's FROM is kept. Copy its exact line from `apps/steamcmd/Dockerfile`, not the upstream FROM line. The sibling is `apps/steamcmd`, so the base already provides SteamCMD.
+- Runtime: `FROM ghcr.io/trueforge-org/steamcmd:<tag>` (tag from `apps/steamcmd/docker-bake.hcl` `VERSION`; digest UNVERIFIED, not available in the repo). `apps/steamcmd/Dockerfile` itself is `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, so the alternative is that ubuntu line plus the same `steamcmd` apt install. Conflict to resolve: `apps/steamcmd` ships its own `/start.sh` and `/usr/local/bin/steamcmd` execs `/start.sh`; a child image that overwrites `/start.sh` breaks that wrapper, so name this app's script differently or call `/usr/games/steamcmd` directly.
 - Wine and Xvfb are not in the base and must be added in the Dockerfile.
 - Closest sibling: `apps/steamcmd`.
 
@@ -78,7 +78,7 @@ Do not use `root/`. Add `DOWNSTREAM_CHANGES.md` only if this app becomes a FROM 
 
 - forgetool schema header from a sibling app.
 - Probes for every port in settings.yaml. With no confirmed ports, use only a `filePaths` check until they are confirmed. Do not invent a probe.
-- `filePaths`: `/app/start.sh`, and `/config/steamcmd` once the first-start code path is confirmed.
+- `filePaths`: `/start.sh`, and `/config/steamcmd` once the first-start code path is confirmed.
 - `timeoutSeconds`: generous, because the first start downloads several GB. Copy a sibling's value for a large download, or mark as UNVERIFIED.
 - Tests run with no env vars, so the `VALIDATE` and login paths are not tested. Note this in a comment.
 

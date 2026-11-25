@@ -159,7 +159,7 @@ filePaths:
 - /usr/share/licenses/shoko-server/LICENSE
 ```
 
-- `timeoutSeconds: 300` matches the upstream `HEALTHCHECK` `--start-period=5m`. Sibling-family startup reference: .NET apps in `apps/sonarr` use a long timeout; confirm the exact value against that sibling when writing.
+- `timeoutSeconds: 300` matches the upstream `HEALTHCHECK` `--start-period=5m`. UNVERIFIED: no sibling sets a comparable timeout (`apps/sonarr/container-test.yaml` sets none); tune on the first run.
 - The tcp and http probes cover the one settings.yaml port (8111). The probe path is the upstream healthcheck endpoint, so it is a real assertion.
 - No env-gated code paths: the test runs without env vars, and `SHOKO_HOME` falls back to `/config/Shoko.CLI`.
 

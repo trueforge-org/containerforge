@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | Latest stable v3.5.0, published 2026-11-22 (https://api.github.com/repos/Stirling-Tools/Stirling-PDF/releases/latest). Draft and chart pin 3.4.0 (`ghcr.io/stirling-tools/s-pdf:3.4.0`); plan targets 3.5.0 unless the user wants the chart version. |
 | Renovate | `datasource=github-releases depName=Stirling-Tools/Stirling-PDF versioning=semver`. The tag has a `v` prefix; strip it in the Dockerfile (`${VERSION#v}`) if the asset path needs the bare number. The asset path uses the tag as-is. |
-| License | GitHub API reports `NOASSERTION` (https://api.github.com/repos/Stirling-Tools/Stirling-PDF). SPDX **UNVERIFIED**: the repo LICENSE file was not fetched. Blocker: confirm before filling `LICENSE` in docker-bake.hcl. |
+| License | GitHub API reports `NOASSERTION`. The repo `LICENSE` file starts with `MIT License` (Copyright 2025 Stirling PDF Inc.) but carves out `app/proprietary/`, `app/saas/` and `engine/` under their own licenses. Whether the release JAR contains those parts is UNVERIFIED; needs a human decision before `LICENSE` is set (plan uses `MIT`). |
 | Source URL | https://github.com/Stirling-Tools/Stirling-PDF |
 | Download (arch-neutral) | https://github.com/Stirling-Tools/Stirling-PDF/releases/download/v3.5.0/Stirling-PDF.jar (328255525 bytes, sha256 `53e2cd9fd3b8b8beaaab7e6c2c929c80f6f355326418e6703790ed412e2afca9`, GitHub asset digest). Same for amd64 and arm64. |
 | Other assets | `Stirling-PDF-server.jar` (sha256 `172cd530c5f4ae549a27116e737ae51f18d1c84c1270cb69e5cb86ebc699cf1f`), `Stirling-PDF-with-login.jar`, `Stirling-PDF-linux-x86_64.AppImage` (amd64 only, sha256 `c51ec24e64d0cf0acb3b6eff6bf40a2c4363bfb04151693a211a1e46868e7d45`, not usable in a container per draft). No arm64 AppImage. |
@@ -40,7 +40,7 @@ No `defaults/` or `etc/` needed unless the start script ships default config (de
 1. `ARG VERSION` (tag with `v`, for example `v3.5.0`) and `ARG TARGETARCH`. Keep the default in sync with `docker-bake.hcl`.
 2. `USER root`, then one `apt-get install -y --no-install-recommends` for the tool packages that the base does not already provide. Check each name against the java25 base first (`dpkg -l`). Candidate list (UNVERIFIED for 3.5.0): `tesseract-ocr`, `ocrmypdf`, `ghostscript`, `qpdf`, `unpaper`, `pngquant`, `poppler-utils`. Do not add LibreOffice unless the 3.5.0 JAR needs it; the fat/office variant is a separate decision (see section 10). Clean `/var/lib/apt/lists/*`.
 3. Download the JAR with `curl -fsSL -o /app/Stirling-PDF.jar https://github.com/Stirling-Tools/Stirling-PDF/releases/download/${VERSION}/Stirling-PDF.jar`, then `echo "53e2cd9f...afca9  /app/Stirling-PDF.jar" | sha256sum -c -` for v3.5.0. Keep the checksum next to `VERSION` so a bump updates both (the Renovate bump will need a manual checksum update; note in the PR).
-4. Ship the license: `install -Dm644 LICENSE /usr/share/licenses/stirling-pdf/LICENSE` (fetch the LICENSE file from the tag, UNVERIFIED until the license is confirmed).
+4. Ship the license: `install -Dm644 LICENSE /usr/share/licenses/stirling-pdf/LICENSE` (fetch the LICENSE file from the tag; also ship the `proprietary`/`saas`/`engine` license files if the JAR includes those parts, UNVERIFIED).
 5. Environment, all under `/tmp` or `/config`: `ENV HOME=/config TMPDIR=/tmp TEMP=/tmp TMP=/tmp STIRLING_TEMPFILES_DIRECTORY=/tmp/stirling-pdf DBUS_SESSION_BUS_ADDRESS=/dev/null ORT_DISABLE_TELEMETRY=1`. Do not set `PUID`/`PGID`.
 6. `EXPOSE 8080`, `VOLUME ["/config"]`, `WORKDIR /config`.
 7. `USER apps`, then `COPY --chmod=0755 . /`. Keep this line last so `start.sh` lands in the image.
@@ -62,7 +62,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"   // set to the SPDX id once the LICENSE file is confirmed
+  default = "MIT"   // UNVERIFIED: repo LICENSE is MIT with proprietary carve-outs, see section 10
 }
 
 variable "SOURCE" {
@@ -70,7 +70,7 @@ variable "SOURCE" {
 }
 ```
 
-Then `group "default" { targets = ["image-local"] }`, `image` (args `VERSION`, labels `source` and `licenses`), `image-local` (`output = ["type=docker"]`, tags `${APP}:${VERSION}`), `image-all` (`linux/amd64`, `linux/arm64`). Run `docker buildx bake --print` before any build. The `LICENSE` placeholder must not ship.
+Then `group "default" { targets = ["image-local"] }`, `image` (args `VERSION`, labels `source` and `licenses`), `image-local` (`output = ["type=docker"]`, tags `${APP}:${VERSION}`), `image-all` (`linux/amd64`, `linux/arm64`). Run `docker buildx bake --print` before any build. Confirm the `LICENSE` value before shipping (section 10).
 
 ## 6. settings.yaml
 
@@ -133,7 +133,7 @@ Security expectations from the draft are **not** adopted: the chart's `runAsUser
 
 ## 10. Risks, caveats and open questions
 
-- **Blocker, license:** GitHub reports `NOASSERTION`. Confirm the SPDX id before shipping `LICENSE`.
+- **Blocker, license:** GitHub reports `NOASSERTION`; the repo LICENSE is MIT with carve-outs for `app/proprietary/`, `app/saas/` and `engine/`. Confirm whether the release JAR contains those parts and which SPDX id is accurate before shipping `LICENSE`.
 - **Blocker, base image:** upstream ships on `stirlingtools/stirling-pdf-base:1.1.1`, which we did not fetch. The apt tool list is therefore inferred (draft and section 4). Verify each package installs on the java25 base before a bake.
 - **Version drift:** the draft and chart pin 3.4.0; 3.5.0 is current. Office conversion changed in 3.5.x (LibreOffice replaced), so a 3.4.0 port and a 3.5.0 port need different tool lists.
 - **Fat vs ultra-lite:** the draft's caveat stands. A slim image without LibreOffice is the default plan; add office conversion only if required, and document the image size.
@@ -162,4 +162,4 @@ Expected output: image builds, JAR checksum passes, startup log has no fatal lin
 - Notes section: `🤖 This PR is AI generated.`
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; the `license/cla` check shows status).
 - Say what was not tested. If the image was not built or run, do not check "Built container locally".
-- Do not commit the `UNVERIFIED` license or the unverified apt list as facts; list them as open items in the PR.
+- Do not commit the unverified license carve-out question or the unverified apt list as facts; list them as open items in the PR.
