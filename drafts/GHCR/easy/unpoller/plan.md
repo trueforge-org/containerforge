@@ -13,8 +13,8 @@
 | Download arm64 | https://github.com/unpoller/unpoller/releases/download/v5.10.1/unpoller_5.10.1_linux_arm64.tar.gz |
 | Checksum source | https://github.com/unpoller/unpoller/releases/download/v5.10.1/unpoller_5.10.1_checksums.txt (also `.sig`). Confirmed: `72d09990174f305347d00f4ca618c23242307ba9c542285688b525523e005fd3` (amd64), `71c77a3636f0a58d7bbe28df07c656947dabad26f0c3b831f661e4197aa378f1` (arm64) |
 | Upstream Dockerfile reviewed | Tag v5.10.1 `Dockerfile` (read via `gh api`): busybox builder copies `examples/up.conf.example` to `/etc/unpoller/up.conf`, plus `unpoller_manual.html` and `README.html`; final `gcr.io/distroless/static-debian13`, `COPY ${TARGETPLATFORM}/unpoller /usr/bin/unpoller`, `HEALTHCHECK CMD ["/usr/bin/unpoller", "--health"]`, `ENTRYPOINT ["/usr/bin/unpoller"]`. No USER, EXPOSE, VOLUME or ENV. |
-| Port | 9130 (metrics), from the draft. UNVERIFIED: not confirmed on a fetched upstream page. |
-| Env vars | UNVERIFIED: upstream configuration docs were not fetched. Do not list any env var until confirmed. |
+| Port | 9130/tcp (metrics): `examples/up.conf.example` at v5.10.1 has `[prometheus] http_listen = "0.0.0.0:9130"`. |
+| Env vars | Upstream maps config keys to env vars with the prefix `UP` (`ENVConfigPrefix = "UP"` in `pkg/poller/config.go`). The individual variable names are UNVERIFIED; do not list any until confirmed. |
 | Config file | `/etc/unpoller/up.conf` is shipped by upstream as the example config. The `--config` flag name is UNVERIFIED (confirm with `unpoller --help` in step 11). |
 
 ## 2. Target layout
@@ -141,7 +141,7 @@ volumes:
 dependencies: []
 ```
 
-- Port 9130 is from the draft (UNVERIFIED upstream); keep it `required: true` only after confirming the default metrics port.
+- Port 9130 is confirmed by the upstream example config (section 1).
 - `env`: list only the variables confirmed from upstream docs (none fetched). Do not invent names. A `UniFi controller URL, user and password` will be required by the app; if these come from env, they need entries with `required: true` and a `start.sh` mapping, and they cannot be given a default.
 - `dependencies: []`: no ContainerForge app is needed. The UniFi controller is an external service (draft caveat).
 

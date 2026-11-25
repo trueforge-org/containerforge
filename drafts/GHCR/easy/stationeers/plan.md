@@ -26,7 +26,7 @@
 - `apps/stationeers/docker-bake.hcl`
 - `apps/stationeers/settings.yaml`
 - `apps/stationeers/container-test.yaml`
-- `apps/stationeers/start.sh`
+- `apps/stationeers/start.sh` (or `scripts/stationeers-start.sh`, see section 4: a top-level `start.sh` would replace the base's `/start.sh`)
 
 No `defaults/` yet: the default `settings.xml` content is UNVERIFIED, so it is not seeded (section 10). No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
@@ -38,7 +38,7 @@ Runtime base: `FROM ghcr.io/trueforge-org/steamcmd:<tag>` (the ContainerForge `a
 
 1. Header: `ARG VERSION` (the steamcmd package version used by the base, or the Stationeers branch name), `USER root` only if a package install is needed. None is needed (steamcmd base has `lib32`).
 2. No `apt-get` (base provides everything).
-3. `ENV HOME=/config` (inherits from steamcmd), `ENV STEAM_APP_IDS=600760`, `ENV STEAM_INSTALL_DIR=/config/stationeers`. These are read by `apps/steamcmd/start.sh`, so the download happens at start without any custom download logic.
+3. `ENV HOME=/config` (inherits from steamcmd), `ENV STEAM_APP_IDS=600760`, `ENV STEAM_INSTALL_DIR=/config/stationeers`. `apps/steamcmd/start.sh` reads these, but this app's own `start.sh` is copied to `/start.sh` by `COPY . /` and replaces the base's script (which `/usr/local/bin/steamcmd` execs). To keep the base script, ship this app's launcher as `scripts/stationeers-start.sh` (the `.dockerignore` allow-list includes `scripts/`) instead of `start.sh`, and have it run `/start.sh +quit` first: the base only installs when its first argument starts with `+` (a non-`+` argument is exec'd immediately). Decide before implementing.
 4. `COPY --chmod=0755 . /`, `USER apps`.
 5. Tail:
 
@@ -119,7 +119,7 @@ dependencies: []
 
 - `#!/usr/bin/env bash`, `set -euo pipefail`.
 - Do not use the ich777 `start.sh` (it needs root). Run the Stationeers server as `apps` with `cd "${STEAM_INSTALL_DIR}"`.
-- Wait for the server to exist: if the server binary is missing under `${STEAM_INSTALL_DIR}`, exit with a clear message (the base's `steamcmd` `start.sh` already downloads when `STEAM_APP_IDS` is set; a missing binary means the download failed).
+- Download step: the launcher must not overwrite the base `/start.sh` (see section 4). Run `/start.sh +quit` to trigger the `STEAM_APP_IDS` install, then exec the server. If the server binary is still missing afterwards, exit with a clear message.
 - `mkdir -p "${STEAM_INSTALL_DIR}"`, and `export HOME=/config` and `XDG_DATA_HOME=/config` so Steam state stays in `/config` (matches `apps/steamcmd`).
 - Launch: `exec "${STEAM_INSTALL_DIR}/<server binary>" ${GAME_PARAMS}` (the binary name and whether it lives in `rocketstation_DedicatedServer` or similar is UNVERIFIED; take it from the ich777 `start-server.sh` before implementing).
 - Do not write to the install dir except via SteamCMD. Caches to `/tmp`.

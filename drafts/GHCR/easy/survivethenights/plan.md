@@ -25,7 +25,7 @@
 - `apps/survivethenights/docker-bake.hcl`
 - `apps/survivethenights/settings.yaml`
 - `apps/survivethenights/container-test.yaml`
-- `apps/survivethenights/start.sh` (the game start wrapper; needed because the chart runs a game-specific command)
+- `apps/survivethenights/scripts/survivethenights-start.sh` (the game start wrapper; not a top-level `start.sh`, which would replace the base's `/start.sh` through `COPY . /`)
 
 No `defaults/`, `etc/`, `health/` needed (SteamCMD writes its own state into `/config`). No `root/` (never touched by agents). No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
@@ -41,7 +41,7 @@ Why: it already has the 32-bit SteamCMD (`steamcmd:i386`), the `lib32` runtime, 
 
 1. `ARG VERSION` / `ARG VENDOR` are not needed for the game; keep only what the base needs.
 2. Final stage: `FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`.
-3. `COPY --chmod=0755 start.sh /start.sh` (the base's `start.sh` is at `/start.sh`; overriding it is NOT allowed: put the game logic in a separate file, e.g. `/usr/local/bin/survivethenights-start`, to avoid breaking the base `steamcmd` contract).
+3. Do not copy a `start.sh` over `/start.sh` (the base's script, which `/usr/local/bin/steamcmd` execs). The `.dockerignore` allow-list includes `scripts/`, so `COPY --chmod=0755 . /` delivers `scripts/survivethenights-start.sh` to `/scripts/survivethenights-start.sh`; that is the entrypoint to use.
 4. `USER root` only if a package install is needed. The draft needs none (lib32 comes from the base).
 5. `USER apps`, then `COPY --chmod=0755 . /`.
 6. `VOLUME /config`, and `ENV STEAM_INSTALL_DIR=/config/serverfiles` with the Steam app ID supplied at run time through `STEAM_APP_IDS` (UNVERIFIED app ID: do not bake a guessed ID).
@@ -100,7 +100,7 @@ dependencies: []
 
 Rules applied: only variables the start script reads are listed (`STEAM_APP_IDS`, `STEAM_USERNAME` come from the base). `required: true` on `STEAM_APP_IDS` needs a default or first-run handling: an empty default is only acceptable if `start.sh` fails clearly when it is missing (see section 7). Ports stay empty until verified, so no port without a probe.
 
-## 7. start.sh
+## 7. scripts/survivethenights-start.sh
 
 ```bash
 #!/usr/bin/env bash
@@ -114,13 +114,14 @@ fi
 export STEAM_INSTALL_DIR="${STEAM_INSTALL_DIR:-/config/serverfiles}"
 export STEAM_APP_VALIDATE="${STEAM_APP_VALIDATE:-false}"
 
-# Base start (/start.sh) installs/updates the app into STEAM_INSTALL_DIR, then runs its arguments.
-# With no args it would start steamcmd interactively; pass the server binary instead.
-exec /start.sh "${STEAM_INSTALL_DIR}/<SERVER_BINARY>" "$@"   # UNVERIFIED binary name and arguments
+# Base /start.sh installs/updates STEAM_APP_IDS only when its first argument starts with "+";
+# a non-"+" first argument is exec'd immediately without installing (apps/steamcmd/start.sh).
+/start.sh +quit
+exec "${STEAM_INSTALL_DIR}/<SERVER_BINARY>" "$@"   # UNVERIFIED binary name and arguments
 ```
 
 Notes:
-- The base `start.sh` installs the app only when `STEAM_APP_IDS` is set, and only then `exec`s the command. Its non-`+` argument path execs straight away, so the install happens before the `exec` only through the `+` arguments path. Verify the exact sequence by reading `apps/steamcmd/start.sh` before writing this: the install step is in the base's flow (`app_update` into `STEAM_INSTALL_DIR`). If the base cannot run install and then a server command in one start, this start script must call the base's install step directly and then `exec` the server, rather than passing the server as an argument.
+- Verified in `apps/steamcmd/start.sh`: a non-`+` first argument is `exec`ed straight away (no install), while a `+` argument runs the `app_update` loop first and then `exec`s `steamcmd.sh`. Hence the `/start.sh +quit` step above.
 - `<SERVER_BINARY>` and its launch arguments are UNVERIFIED (not fetched). Do not guess.
 - No writes to `/app` (none used). Caches stay where the base puts them.
 - Seeding: nothing to seed; SteamCMD fills `/config` on first start.

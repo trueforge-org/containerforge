@@ -10,11 +10,11 @@
 | License | GPL-3.0 (GitHub API `repos/almarklein/timetagger/license`, `spdx_id` GPL-3.0; PyPI `license` field `GPL-3.0`). |
 | Source URL | https://github.com/almarklein/timetagger |
 | Download | `pip install timetagger==${VERSION}` from PyPI (pure Python, no native build). |
-| Checksum source | PyPI file hashes for the `timetagger-26.1.3` wheel/sdist (hash values UNVERIFIED: not fetched). pip verifies hashes when `--require-hashes` is used; plan uses that. |
+| Checksum source | PyPI file hashes for the `timetagger-26.1.3` wheel/sdist (hash values UNVERIFIED: not fetched). The plan does not use `--require-hashes` (see section 4); hashes UNVERIFIED. |
 | Upstream Dockerfile reviewed | `deploy/repo.nonroot.Dockerfile` @ `681720d84c94be660f30947db4b23e52d36cbe32` (2026-02-02): https://raw.githubusercontent.com/almarklein/timetagger/681720d84c94be660f30947db4b23e52d36cbe32/deploy/repo.nonroot.Dockerfile. Base `python:3.13-slim-bookworm`; `groupadd -g 1000 timetagger` and `useradd -r -u 1000 -m -g timetagger timetagger`; `mkdir /opt/timetagger`; `USER 1000`; `WORKDIR /opt/timetagger`; `COPY . /opt/timetagger`; `pip install --no-cache-dir install pip --upgrade`; `pip install uvicorn uvloop httptools`; `pip install --no-cache-dir --no-warn-script-location -e .`; `CMD ["python", "-m", "timetagger"]`. No `ENV`, `ARG`, `VOLUME`, `EXPOSE`, `ENTRYPOINT`. |
-| Port | UNVERIFIED: the upstream image has no `EXPOSE`. The draft's `8080` is inferred; the chart's port must be confirmed (README or the server's default bind, not fetched). |
-| Env vars (real) | UNVERIFIED: the upstream nonroot Dockerfile sets none. The timetagger server's own configuration variables are not confirmed (README not fetched in this run). |
-| Data path | Upstream nonroot image: app at `/opt/timetagger`. Chart stores data at `/opt/_timetagger` (chart key `config`, draft). Plan keeps data in `/config` (draft). The server's data-dir variable is UNVERIFIED. |
+| Port | 8080/tcp: the upstream image has no `EXPOSE`, but `timetagger/_config.py` at v26.1.3 defaults `bind` to `127.0.0.1:8080`. That is localhost only, so `TIMETAGGER_BIND=0.0.0.0:8080` is required in the container. |
+| Env vars (real, `timetagger/_config.py` v26.1.3) | `TIMETAGGER_BIND` (default `127.0.0.1:8080`), `TIMETAGGER_DATADIR` (default `~/_timetagger`), `TIMETAGGER_LOG_LEVEL` (`info`), `TIMETAGGER_CREDENTIALS` (`user:bcrypthash,...`, empty default), `TIMETAGGER_PROXY_AUTH_ENABLED`, `TIMETAGGER_PROXY_AUTH_TRUSTED`, `TIMETAGGER_PROXY_AUTH_HEADER`, `TIMETAGGER_PATH_PREFIX` (`/timetagger/`), `TIMETAGGER_APP_REDIRECT`. The upstream nonroot Dockerfile sets none. |
+| Data path | Upstream nonroot image: app at `/opt/timetagger`. Chart stores data at `/opt/_timetagger` (chart key `config`, draft). Plan keeps data in `/config` (draft) via `TIMETAGGER_DATADIR=/config/timetagger`. |
 | arm64 | Yes: pure Python package; the base `python` image provides the interpreter for both arches. |
 | Dependencies | None. Extras installed upstream: `uvicorn`, `uvloop`, `httptools` (ASGI server, unpinned upstream). |
 | Python version | Upstream `python:3.13-slim-bookworm`. `requires_python >=3.6.0` (PyPI). The ContainerForge `python` base is 3.15.2; compatibility with 3.15 is UNVERIFIED and must be tested in the build. |
@@ -51,7 +51,7 @@ Why: the python base already ships `/app/venv` (read-only at runtime per the pyt
 5. License: `timetagger` installs its own `LICENSE` in site-packages `dist-info`; copy it to `/usr/share/licenses/timetagger/LICENSE` in the same step (`find /app/venv -name 'LICENSE*' -path '*timetagger*'`). UNVERIFIED file path until built.
 6. `chown -R apps:apps /app && chmod -R 755 /app`.
 7. `USER apps`, then `COPY --chmod=0755 . /`.
-8. `EXPOSE 8080` only after the port is verified (section 1).
+8. `EXPOSE 8080`.
 9. `VOLUME /config`.
 
 Do not copy the upstream `COPY . /opt/timetagger` source tree: the PyPI package is used instead (the draft says "installed with pip from the repo copy into /app"; the PyPI route avoids the `-e .` editable install and keeps `/app` read-only). If the repo copy is kept for any reason, put it under `/app` read-only and reference it there, never under `/config`.
@@ -88,10 +88,19 @@ Then `image`, `image-local` (`${APP}:${VERSION}`), `image-all` (`linux/amd64`, `
 schema_version: 1
 upstream_env_url: "https://github.com/almarklein/timetagger"
 ports:
-  - port: 8080          # UNVERIFIED: confirm the server's listen port before keeping this
+  - port: 8080
     protocol: tcp
     required: false
 env:
+  - name: TIMETAGGER_BIND
+    default: "0.0.0.0:8080"
+    required: false
+  - name: TIMETAGGER_DATADIR
+    default: "/config/timetagger"
+    required: false
+  - name: TIMETAGGER_CREDENTIALS
+    default: ""
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -101,7 +110,7 @@ volumes:
 dependencies: []
 ```
 
-Only `TZ` is listed; the timetagger configuration variables are UNVERIFIED and must not be invented. Credentials for the web UI are configured by the server (draft: manual setup; how is UNVERIFIED), so no credential env var is listed until confirmed. The port must match `container-test.yaml` (section 8).
+The `TIMETAGGER_*` names come from `_config.py` (section 1). `TIMETAGGER_CREDENTIALS` is a bcrypt hash list (not a plain password), empty by default; per `__main__.py`, login without credentials only works from localhost, so users must set it (or proxy auth) before exposing the service. The port must match `container-test.yaml` (section 8).
 
 ## 7. start.sh
 
@@ -113,8 +122,8 @@ set -euo pipefail
 export HOME=/config
 mkdir -p /config/timetagger
 
-# Server data directory variable: UNVERIFIED name, set only after confirmed from the README
-# export TIMETAGGER_DATA_DIR=/config/timetagger
+export TIMETAGGER_BIND="${TIMETAGGER_BIND:-0.0.0.0:8080}"
+export TIMETAGGER_DATADIR="${TIMETAGGER_DATADIR:-/config/timetagger}"
 
 exec /app/venv/bin/python -m timetagger
 ```
@@ -122,7 +131,7 @@ exec /app/venv/bin/python -m timetagger
 Notes:
 - Idempotent: only `mkdir -p`; nothing to seed (the server creates its own data).
 - No writes to `/app`. Caches are not written (`PIP_NO_CACHE_DIR` is set by the base).
-- Bind address: the server must listen on `0.0.0.0` for other containers. The default bind is UNVERIFIED (not fetched); check it in the run log and set the upstream's bind option only if it defaults to localhost.
+- Bind address: upstream defaults to `127.0.0.1:8080`, hence the `TIMETAGGER_BIND` default above.
 - `exec` for signal handling.
 - Data migration: the chart stores data under `/opt/_timetagger`. Existing data must be copied to `/config/timetagger` by the user; this is a note for the PR, not part of the start script.
 
@@ -143,7 +152,7 @@ filePaths:
 - /usr/share/licenses/timetagger/LICENSE
 ```
 
-- The `tcp` and `http` probes use the port from `settings.yaml`; both are UNVERIFIED until the port is confirmed. If the server returns a non-200 on `/`, keep the probe only with the code it actually returns (UNVERIFIED).
+- The `tcp` and `http` probes use the port from `settings.yaml`. If the server returns a non-200 on `/`, keep the probe only with the code it actually returns (UNVERIFIED).
 - `timeoutSeconds: 120` matches the python sibling precedent (check `apps/bazarr/container-test.yaml`-style values before merging).
 - No DB, no narrowed assertions.
 - The test runs without env vars, so credentials-required code paths are not tested: if the server refuses to start without them, add that path to `filePaths` and test it by hand (protocol step 3).
@@ -153,7 +162,7 @@ filePaths:
 | Upstream/chart write path | Remap |
 | --- | --- |
 | `/opt/timetagger` (app source and `-e .` install, upstream) | `/app/venv` (installed package, read-only at runtime) |
-| `/opt/_timetagger` (chart data PVC, `config` key) | `/config/timetagger` via `HOME=/config` and `start.sh`; user copies existing data once |
+| `/opt/_timetagger` (chart data PVC, `config` key) | `/config/timetagger` via `TIMETAGGER_DATADIR`; user copies existing data once |
 | pip cache, build scratch | `/tmp` (base sets `PIP_NO_CACHE_DIR=1`; no cache is written at run time) |
 | uvicorn/uvloop/httptools | Installed in `/app/venv` at build time |
 
@@ -161,9 +170,8 @@ Security expectations (draft, chart values): non-root (chart `runAsUser 1000`, `
 
 ## 10. Risks, caveats and open questions
 
-- Port 8080 is inferred by the draft (not in the upstream image). Confirm before settings or tests use it.
-- The server's env var names and bind default are UNVERIFIED (README not fetched). Do not list env vars until confirmed.
-- Web UI credentials: how they are set is UNVERIFIED. Until confirmed, the container starts with the server's default (state this in the PR).
+- Port 8080 and the env var names are confirmed from `_config.py` (section 1); the default bind is localhost-only, so `TIMETAGGER_BIND` is set in `start.sh`.
+- Web UI credentials: `TIMETAGGER_CREDENTIALS` (bcrypt hashes); without it only localhost login works. State this in the PR.
 - The draft's "pip package is unpinned" caveat: the plan pins `timetagger==26.1.3` and pins the extras after the first build.
 - Python 3.15 compatibility with `timetagger` 26.1.3 is UNVERIFIED: the upstream image uses 3.13. If the first build fails on 3.15, record the failure and the version tested, do not silently switch base.
 - Data migration from `/opt/_timetagger` to `/config/timetagger` is a user action (draft caveat).

@@ -40,7 +40,7 @@ Why not java21 (the draft's choice): the upstream image is built on Temurin 25, 
 1. `ARG VERSION` (`2.4.2373`, `v`-less or tag form matched to the bake), `ARG TARGETARCH` (unused for the JAR, kept only if needed).
 2. `FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8...` (section 3).
 3. `USER root`.
-4. Download and verify the JAR:
+4. `mkdir -p /app/tachidesk` first (the download below writes into it), then download and verify the JAR:
    ```dockerfile
    RUN set -eux; \
        curl -fsSL -o /app/tachidesk/Suwayomi-Server.jar \
@@ -52,7 +52,7 @@ Why not java21 (the draft's choice): the upstream image is built on Temurin 25, 
    ```
    Verify the checksum line format against the real `Checksums.sha256` first (the release file lists names; UNVERIFIED for the exact format).
 5. License: `COPY` or `curl` of the repo `LICENSE` (MPL-2.0) to `/usr/share/licenses/tachidesk-docker/LICENSE` (the JAR alone is a third-party bundle: ship its notices too). Source for the text: the repo at tag `v2.4.2373` (UNVERIFIED: not fetched).
-6. `mkdir -p /app/tachidesk` and `chown -R apps:apps /app && chmod -R 755 /app` (sibling precedent: `apps/adguardhome-sync`).
+6. `chown -R apps:apps /app && chmod -R 755 /app` (sibling precedent: `apps/adguardhome-sync`).
 7. `apt-get` is not needed (base has curl, tar, unzip; `tini` is not required: the ContainerForge base handles PID 1 through `start.sh`'s `exec`). Do not install `tini` unless the process model needs it.
 8. `ENV HOME=/config` (data goes to `/config`, not `/home/suwayomi`) and `ENV MALLOC_ARENA_MAX=2` (matches upstream).
 9. `USER apps`, then `COPY --chmod=0755 . /`.
@@ -154,7 +154,7 @@ filePaths:
 
 | Upstream/chart write path | Remap |
 | --- | --- |
-| `/home/suwayomi/.local/share/Tachidesk` (data) | `/config/Tachidesk` via `HOME=/config` (confirm server path) |
+| `/home/suwayomi/.local/share/Tachidesk` (data) | With `HOME=/config` the default data dir would be `/config/.local/share/Tachidesk` (XDG default under HOME), not `/config/Tachidesk`. UNVERIFIED; confirm the real path on the first run and make `start.sh`, the `mkdir` and the paths below agree. |
 | `/home/suwayomi/.local/share/Tachidesk/downloads` (chart PVC) | `/config/Tachidesk/downloads` (same root; no separate mount needed) |
 | `/home/suwayomi/.local/share/Tachidesk/local` (chart PVC) | `/config/Tachidesk/local` |
 | `/home/suwayomi/startup/tachidesk_latest.jar` (upstream image) | `/app/tachidesk/Suwayomi-Server.jar` (baked in, read-only) |
