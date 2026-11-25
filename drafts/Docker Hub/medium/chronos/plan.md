@@ -38,7 +38,7 @@ No `defaults/` needed (app creates its db and migrates). No `root/`. No `DOWNSTR
 
 ## 4. Dockerfile
 
-1. Stage `ui` (ubuntu base, `USER root`, `HOME=/tmp`): download and extract the tag tarball to `/build/chronos`; `cd chronos-ui && yarn install && NODE_OPTIONS=--openssl-legacy-provider yarn build` (webpack 4 / vue-cli 4.3 need the legacy OpenSSL provider on modern Node; whether Node 26 still supports it is UNVERIFIED, otherwise fall back to a pinned older Node via a `node` image stage). Caches: `YARN_CACHE_FOLDER=/tmp/yarn`.
+1. Stage `ui` (ubuntu base, `ARG VERSION` repeated in this stage, `USER root`, `HOME=/tmp`): download and extract the tag tarball to `/build/chronos`; `cd chronos-ui && yarn install && NODE_OPTIONS=--openssl-legacy-provider yarn build` (webpack 4 / vue-cli 4.3 need the legacy OpenSSL provider on modern Node; whether Node 26 still supports it is UNVERIFIED, otherwise fall back to a pinned older Node via a `node` image stage). Caches: `YARN_CACHE_FOLDER=/tmp/yarn`.
 2. Final stage `FROM <python base>`, `ARG VERSION`, `USER root`.
 3. `ENV CHRONOS_PATH=/config PYTHONPATH=/app/chronos HOME=/config PIP_CACHE_DIR=/tmp/pip`.
 4. Download the tarball again (or `COPY --from=ui /build/chronos /app/chronos`) and keep `/app/chronos/chronos-ui/dist`; delete `chronos-ui/node_modules`, `tests`, `.git*`.

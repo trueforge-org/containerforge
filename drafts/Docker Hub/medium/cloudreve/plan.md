@@ -141,14 +141,16 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - name: postgresql   # exists in apps/ ✅
-  - name: valkey       # exists in apps/ ✅
+  - name: postgresql
+    required: false
+  - name: valkey
+    required: false
 ```
 The draft says PostgreSQL and Valkey are dependencies; upstream defaults to SQLite and an empty Redis server, so they are optional (`opt_dependencies`), resolving the draft's contradiction. Note that the `.` in env names follows upstream; the `__` form is equivalent.
 
 ## 7. start.sh
 
-1. `mkdir -p /config/data` and `cd /config` (Cloudreve resolves `data/conf.ini`, `data/cloudreve.db`, uploads and temp relative to cwd; Docker upstream does the same with `/cloudreve/data`).
+1. `export TMPDIR=/tmp`, `mkdir -p /config/data` and `cd /config` (Cloudreve resolves `data/conf.ini`, `data/cloudreve.db`, uploads and temp relative to cwd; Docker upstream does the same with `/cloudreve/data`).
 2. Do not write `conf.ini`: first start generates it. Do not template secrets into files; DB password stays in `CR_CONF_Database.Password` (read by the app each start, so changed passwords apply on existing data).
 3. Binds `:5212` (all interfaces) by default.
 4. `exec /app/cloudreve` (add `-c "${CLOUDREVE_CONF:-/config/data/conf.ini}"` only if testing shows it is needed; default location is already `data/conf.ini`).

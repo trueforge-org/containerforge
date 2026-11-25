@@ -132,9 +132,10 @@ volumes:
   - path: /media
     required: false
 opt_dependencies:
-  - name: plex   # apps/plex exists ✅
+  - name: plex
+    required: false
 ```
-`PLEX_URL`/`PLEX_TOKEN` are functionally mandatory but marked `required: false` because the app starts without them (it reads them lazily per request) and the container test runs with no env; no empty `required: true` without default. Plex is an external server the user already runs, so it is listed as `opt_dependencies: - name: plex` (an `apps/plex` image exists ✅) rather than a hard dependency.
+`PLEX_URL`/`PLEX_TOKEN` are functionally mandatory but marked `required: false` because the app starts without them (it reads them lazily per request) and the container test runs with no env; no empty `required: true` without default. Plex is an external server the user already runs, so it is listed as `opt_dependencies: - name: plex` (`apps/plex` exists) rather than a hard dependency.
 
 ## 7. start.sh
 

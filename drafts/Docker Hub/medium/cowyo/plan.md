@@ -35,14 +35,14 @@ No `defaults/`, `etc/`, `health/` or `root/`: nothing needs seeding or config fi
 
 - Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
 - Frontend build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, because it provides Node (sibling `apps/budge` notes Node 24 in this base). The Node version in the base is UNVERIFIED and must be read with `node --version` during the build.
-- Go build stage: the ubuntu base with `golang-go` from apt, as `apps/pwndrop` does. Whether the 26.04 archive's Go satisfies `go 1.26.5` is UNVERIFIED (see section 10).
+- Go build stage: the ubuntu base, which already ships Go 1.27.4 (as `apps/hishtory-server` uses it); no apt `golang-go`.
 - Closest siblings: `apps/pwndrop` (Go compiled on ubuntu, build stage then runtime stage) and `apps/adguardhome-sync` (single-binary app on ubuntu, `/app` layout, `EXPOSE`, `VOLUME /config`).
 
 ## 4. Dockerfile
 
 1. Frontend stage `FROM <python-node> AS frontend`, `ARG VERSION`, `USER root`. Fetch the source into `/tmp/src`, `cd` into the frontend directory named by the upstream Dockerfile (UNVERIFIED: read it from the `v3.0.1` tag), then `npm ci` and `npm run build`. Clean `/tmp` and npm caches.
 2. Go build stage `FROM <ubuntu> AS build`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-   - `apt-get install -y --no-install-recommends golang-go ca-certificates` (`curl` and `tar` are in the base).
+   - Do not install `golang-go`: the ubuntu base already ships Go (`GO_VERSION` 1.27.4 in `apps/ubuntu/docker-bake.hcl`, which satisfies `go 1.26.5`), as `apps/hishtory-server` relies on. `curl` and `tar` are in the base.
    - `curl -fL https://github.com/schollz/cowyo/archive/refs/tags/v${VERSION}.tar.gz | tar xz -C /tmp/src --strip-components=1`.
    - Copy the built frontend into the path the Go code embeds (UNVERIFIED: read from the upstream `go:embed` directive): `COPY --from=frontend /tmp/src/<build output> /tmp/src/<embed path>`.
    - `ENV CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH GOCACHE=/tmp/go-cache GOPATH=/tmp/go`, then `cd /tmp/src && go build -trimpath -ldflags="-s -w" -o /app/cowyo/cowyo2 .`.
@@ -164,7 +164,7 @@ Blockers (the plan cannot finish until each is resolved):
 Other caveats:
 
 - The draft's `/config` data path is supported as a remap through `SQLITE_PATH`, not by upstream. The chart's `/data` mount is a chart matter.
-- Go toolchain: `go.mod` needs `go 1.26.5`. If the 26.04 `golang-go` is older, either use the official Go tarball with its published checksum (not fetched) or stop. Do not let the build download a toolchain at build time without a checksum.
+- Go toolchain: `go.mod` needs `go 1.26.5`; the ubuntu base ships 1.27.4. Do not let the build download a toolchain at build time without a checksum.
 - Node version for the frontend: UNVERIFIED. `node:24` is upstream, and the base is assumed to provide Node 24 (from `apps/budge`), so verify.
 - Frontend output path and embed path: UNVERIFIED (not in the fetched facts).
 - `v3.0.1` tag contents: UNVERIFIED that the tag is `cowyo2` and that its Dockerfile matches `main`.
