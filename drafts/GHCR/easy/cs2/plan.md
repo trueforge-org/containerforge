@@ -41,7 +41,7 @@ No `defaults/`, `etc/`, `health/`, `scripts/` or `root/` needed: the wrapper's s
 4. `mkdir -p /config/serverfiles /config/steamcmd`; `chown -R apps:apps /config`.
 5. `ENV HOME=/config XDG_DATA_HOME=/config GAME_PORT=27015 GAME_ID=730 GAME_PARAMS="" VALIDATE="" STEAMCMD_DIR=/config/steamcmd SERVER_DIR=/config/serverfiles UMASK=002`.
 6. `USER apps`, `COPY --chmod=0755 . /`.
-7. `EXPOSE 27015/udp 27015/tcp 27020/tcp` (the tcp rcon port per chart; UNVERIFIED whether the game needs a separate tcp listener on 27015).
+7. `EXPOSE 27015/udp 27020/tcp` (the tcp rcon port per chart; UNVERIFIED whether the game really listens on tcp 27020).
 8. `VOLUME /config`.
 9. `WORKDIR /config`.
 
@@ -64,9 +64,6 @@ ports:
   - port: 27015
     protocol: udp
     required: true
-  - port: 27015
-    protocol: tcp
-    required: false
   - port: 27020
     protocol: tcp
     required: false
@@ -76,6 +73,9 @@ env:
     required: false
   - name: GAME_PARAMS
     default: ""
+    required: false
+  - name: GAME_PORT
+    default: "27015"
     required: false
   - name: VALIDATE
     default: ""
@@ -92,11 +92,11 @@ Env: `GAME_PARAMS` and `VALIDATE` are the ones the upstream reads. Confirm the e
 
 1. `set -euo pipefail`; `export HOME=/config`.
 2. `mkdir -p /config/steamcmd /config/serverfiles`; idempotent.
-3. SteamCMD (`/usr/local/share/steamcmd/steamcmd.sh`) runs `+force_install_dir /config/serverfiles +login anonymous +app_update 730 [validate] +quit` (credentials from `STEAM_USERNAME`/`STEAM_PASSWORD` if set, same convention as `apps/steamcmd`). Note: how `apps/steamcmd/start.sh` handles `+` args was not fully read (UNVERIFIED): read the rest of that file first and reuse its helper rather than invent a new one.
+3. SteamCMD runs from `/config/Steam/steamcmd/steamcmd.sh`, seeded from `/usr/local/share/steamcmd/` when missing (SteamCMD self-updates, so it cannot run from the read-only `/usr`), and runs `+force_install_dir /config/serverfiles +login anonymous +app_update 730 [validate] +quit` (credentials from `STEAM_USERNAME`/`STEAM_PASSWORD` if set, same convention as `apps/steamcmd`). `apps/steamcmd/start.sh` already seeds SteamCMD and runs `+runscript` for login and `STEAM_APP_IDS`; reuse that logic rather than invent a new one. Our `start.sh` replaces the base `/start.sh` (which `/usr/local/bin/steamcmd` execs), so decide on a rename.
 4. Copy `steamclient.so` (or the sdk64 libs) from `/config/serverfiles` into `/config/.steam/sdk64/` (mirrors upstream `${DATA_DIR}/.steam/sdk64`).
 5. `export LD_LIBRARY_PATH=/config/serverfiles/bin/linuxsteamrt64:${LD_LIBRARY_PATH:-}`.
 6. Final: `exec /config/serverfiles/game/bin/linuxsteamrt64/cs2 -dedicated -port ${GAME_PORT} ${GAME_PARAMS}`. The `-dedicated` and `-port` flags are upstream-observed only via `GAME_PARAMS` (UNVERIFIED that `-port` is the exact flag; verify with `cs2 -help` during the build test).
-7. No writes to `/app`. Caches in `/config`; `/tmp` only for temp files.
+7. No writes to `/app`. Caches and temp files go to `/tmp` (`TMPDIR=/tmp`); only game and SteamCMD files persist in `/config`.
 8. Bind 0.0.0.0 (CS2 default).
 
 ## 8. container-test.yaml

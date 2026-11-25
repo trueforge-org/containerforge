@@ -12,7 +12,7 @@
 | Download | SteamCMD at first start into `/config/serverfiles`. No prebuilt binary fetched at build time. |
 | Checksum source | None on the fetched path. SteamCMD `validate` checks depots. UNVERIFIED for the bootstrap download. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile: `FROM ich777/debian-baseimage:bullseye_amd64`; 32-bit libs `lib32gcc-s1 lib32stdc++6 lib32z1`; `ENV USER=steam UID=99 GID=100 DATA_DIR=/serverdata GAME_PORT=27015 VALIDATE="" UMASK=000 USERNAME="" PASSWRD="" DATA_PERM=770`; `ENTRYPOINT ["/opt/scripts/start.sh"]`; no VOLUME, EXPOSE or CMD. |
-| Upstream start scripts reviewed | Same ich777 flow as cs2 (`usermod`, `su ${USER}`, SteamCMD `+login`, `+force_install_dir`, `+app_update ${GAME_ID} [validate]`). The Source server launch binary for app 232330 is UNVERIFIED: the fetched `start-server.sh` was the cs2 branch and hard-codes `game/bin/linuxsteamrt64/cs2`. The cssource branch's binary (`srcds_run` or `srcds_linux`) was not fetched. |
+| Upstream start scripts reviewed | Same ich777 flow as cs2 (`usermod`, `su ${USER}`, SteamCMD `+login`, `+force_install_dir`, `+app_update ${GAME_ID} [validate]`). The chart image tag is `latest`, which is the upstream `master` branch (no `cssource` branch exists in the repo, branch list checked). Its `scripts/start-server.sh` launches `${SERVER_DIR}/srcds_run -game ${GAME_NAME} ${GAME_PARAMS} -console +port ${GAME_PORT}` and copies `linux32/*` into `${DATA_DIR}/.steam/sdk32`. |
 | Port | `main` 27015/udp (game and query), `tcprcon` 27015/tcp (rcon), per chart `charts/stable/cssource/values.yaml`. Matches draft. |
 | Env vars (real) | Chart: `GAME_ID=232330`, `GAME_NAME=cstrike`, `GAME_PARAMS=-secure +maxplayers 32 +map de_dust2`, `GAME_PORT=27015`, `PASSWRD` (secret), `USERNAME=""`, `VALIDATE="false"`. Upstream env set as in cs2. |
 | Data path | Upstream `/serverdata`; ours `/config/serverfiles` and `/config/steamcmd`. Chart persists `/serverdata/serverfiles` and `/serverdata/steamcmd`. |
@@ -82,10 +82,10 @@ dependencies: []
 ## 7. start.sh
 
 1. `set -euo pipefail`; `export HOME=/config`; create `/config/serverfiles`, `/config/steamcmd`.
-2. SteamCMD via `/usr/local/share/steamcmd/steamcmd.sh`: `+force_install_dir /config/serverfiles +login anonymous +app_update 232330 [validate] +quit`. Support `STEAM_USERNAME`/`STEAM_PASSWORD` as `apps/steamcmd` does. Read the rest of `apps/steamcmd/start.sh` first (UNVERIFIED past line 80).
-3. Copy the Steam sdk64 client library into `/config/.steam/sdk64/`.
-4. `export LD_LIBRARY_PATH=/config/serverfiles/bin:${LD_LIBRARY_PATH:-}` (exact dir UNVERIFIED for cssource).
-5. Final: `exec` the srcds launcher from `/config/serverfiles` with `-port ${GAME_PORT}` and `${GAME_PARAMS}` (exact binary UNVERIFIED).
+2. SteamCMD via `/config/Steam/steamcmd/steamcmd.sh` (seeded from `/usr/local/share/steamcmd/` when missing, as `apps/steamcmd/start.sh` does; SteamCMD self-updates so it cannot run from the read-only `/usr`): `+force_install_dir /config/serverfiles +login anonymous +app_update 232330 [validate] +quit`. Support `STEAM_USERNAME`/`STEAM_PASSWORD` as `apps/steamcmd` does. Reuse its seeding and `+runscript` logic.
+3. Copy `linux32/*` from SteamCMD into `/config/.steam/sdk32/` when `steamclient.so` is missing (upstream master `start-server.sh` does this).
+4. No `LD_LIBRARY_PATH` export: `srcds_run` sets its own library path (UNVERIFIED, confirm in the run).
+5. Final: `cd /config/serverfiles` then `exec ./srcds_run -game cstrike ${GAME_PARAMS} -console +port ${GAME_PORT}` (as upstream master `start-server.sh`; a build-time run must still confirm it works for app 232330).
 6. No writes to `/app`. Idempotent. Bind 0.0.0.0.
 
 ## 8. container-test.yaml
@@ -108,10 +108,10 @@ Probes: tcp on 27015 only if the server listens in the test window (UNVERIFIED; 
 ## 10. Risks, caveats and open questions
 
 - Draft caveats confirmed: arm64 not supported; rolling `latest` tag (chart pins digest); game and rcon both on 27015 (udp game, tcp rcon per chart).
-- Launch binary for app 232330 is UNVERIFIED: blocker until the cssource branch's start script is read.
+- Launch binary `srcds_run` comes from upstream master; whether the installed server still works with it is UNVERIFIED until a run.
 - Chart `GAME_PARAMS` (`-secure +maxplayers 32 +map de_dust2`) validity on the current build is UNVERIFIED.
 - Chart persistence mapped to `/config`; no migration.
-- Blockers: launch binary UNVERIFIED; base digest UNVERIFIED.
+- Blockers: base digest UNVERIFIED; no arm64.
 
 ## 11. Build and test steps
 

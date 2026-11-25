@@ -9,7 +9,7 @@
 | Chart image today | `ghcr.io/ich777/steamcmd:cstrikeczero@sha256:18707ecd07b955187f556665ef65cf4847a300f9f972869b12882e2896fda44a` | same values.yaml, line 5 |
 | Upstream wrapper | ich777/docker-steamcmd-server, same as cstrike1-6 (master, last push 2026-07-18, no SPDX license) | `gh api repos/ich777/docker-steamcmd-server` |
 | Upstream Dockerfile | `FROM ich777/debian-baseimage:bullseye_amd64`, `lib32gcc-s1 lib32stdc++6 lib32z1`, ENTRYPOINT `/opt/scripts/start.sh` | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile |
-| Upstream start-server | `steamcmd +login anonymous +force_install_dir <SERVER_DIR> +app_update ${GAME_ID} [validate] +quit`, then `srcds_run -game ${GAME_NAME} ${GAME_PARAMS} -console +port ${GAME_PORT}` | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start-server.sh |
+| Upstream start-server | `steamcmd +login anonymous +force_install_dir <SERVER_DIR> +app_update ${GAME_ID} [validate] +quit`, then `srcds_run` on master but `hlds_run -game ${GAME_NAME} ${GAME_PARAMS} -console +port ${GAME_PORT}` on the `cstrikeczero` branch (verified), which the chart image tag `cstrikeczero` uses | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/cstrikeczero/scripts/start-server.sh |
 | SteamCMD download | `http://media.steampowered.com/client/steamcmd_linux.tar.gz` (plain HTTP, no checksum) | start-server.sh |
 | Ports | 27015/tcp (rcon), 27015/udp (game and query) | chart values.yaml lines 21-31 |
 | Upstream write paths | `/serverdata/serverfiles`, `/serverdata/steamcmd`, `/serverdata/.steam/sdk32` | Dockerfile ENV, start-server.sh |
@@ -75,14 +75,14 @@ Do not expose `GAME_ID` or `GAME_MOD` as env vars: they are fixed in start.sh (s
 
 ## 7. start.sh
 
-Same as cstrike1-6 (`set -euo pipefail`, `HOME=/config`, `XDG_CACHE_HOME=/tmp`, seed `/config` only when missing, copy steamcmd from `/usr/local/share/steamcmd`, `+runscript` with a `/tmp` file for the login, `app_update 90` with `validate` when `VALIDATE=true`, copy `linux32/*` into `/config/.steam/sdk32` when missing, `exec ./srcds_run -game czero ${GAME_PARAMS} -console +port ${GAME_PORT}`).
+Same as cstrike1-6 (`set -euo pipefail`, `HOME=/config`, `XDG_CACHE_HOME=/tmp`, seed `/config` only when missing, copy steamcmd from `/usr/local/share/steamcmd`, `+runscript` with a `/tmp` file for the login, `app_update 90` with `validate` when `VALIDATE=true`, copy `linux32/*` into `/config/.steam/sdk32` when missing, `exec ./hlds_run -game czero ${GAME_PARAMS} -console +port ${GAME_PORT}`).
 
 Differences:
 
 - Install the mod before updating: `+app_set_config 90 mod czero` before `+app_update 90`. This is the upstream chart's `GAME_MOD` value. Check the order against a real run (`UNVERIFIED`).
 - Pass the game arguments as an array. Never `eval`.
 - Use `GAME_NAME=czero` (fixed) for `-game`.
-- Expected first-run log: steamcmd prints `Success! App '90' fully installed` (`UNVERIFIED` exact text), then srcds starts.
+- Expected first-run log: steamcmd prints `Success! App '90' fully installed` (`UNVERIFIED` exact text), then hlds starts.
 
 ## 8. container-test.yaml
 
@@ -91,7 +91,6 @@ Differences:
 
 filePaths:
   - /start.sh
-  - /usr/local/bin/steamcmd
   - /usr/local/share/steamcmd/steamcmd.sh
 tcp:
   - port: '27015'
@@ -138,7 +137,7 @@ From `apps/cstrikeconditionzero/`:
      -v cstrikeconditionzero-probe-config:/config ${APP}:${VERSION}
    docker logs -f cstrikeconditionzero-probe
    ```
-   Pass: container stays up, install completes, srcds reports it is listening on 27015 (`UNVERIFIED` exact text). Cleanup: `docker rm -f` and `docker volume rm`.
+   Pass: container stays up, install completes, hlds reports it is listening on 27015 (`UNVERIFIED` exact text). Cleanup: `docker rm -f` and `docker volume rm`.
 4. `forgetool containers test --image <image>:<version> --config ./apps/cstrikeconditionzero/container-test.yaml`.
 5. Round limit 10.
 

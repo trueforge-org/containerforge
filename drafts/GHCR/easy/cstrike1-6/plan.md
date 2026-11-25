@@ -11,7 +11,7 @@
 | Upstream Dockerfile | `FROM ich777/debian-baseimage:bullseye_amd64`, installs `lib32gcc-s1 lib32stdc++6 lib32z1`, ENTRYPOINT `/opt/scripts/start.sh`, runs as root wrapper | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile |
 | Upstream start | Remaps UID/GID, chowns `/serverdata`, runs `start-server.sh` as user `steam` | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start.sh |
 | SteamCMD download | `http://media.steampowered.com/client/steamcmd_linux.tar.gz` (plain HTTP, no checksum in the wrapper) | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start-server.sh |
-| Game install | `steamcmd +login anonymous +force_install_dir <SERVER_DIR> +app_update 90 [validate] +quit`, then `srcds_run -game cstrike <GAME_PARAMS> -console +port <GAME_PORT>` | same start-server.sh |
+| Game install | `steamcmd +login anonymous +force_install_dir <SERVER_DIR> +app_update 90 [validate] +quit`, then `hlds_run -game cstrike <GAME_PARAMS> -console +port <GAME_PORT>` (the `cstrike1.6` branch of start-server.sh uses `hlds_run`; verified) | same start-server.sh |
 | License | Steam EULA for the game server (not checked on a fetched page: `UNVERIFIED: Steam EULA text not fetched`). Wrapper: none declared | GitHub API |
 | Renovate | `UNVERIFIED: no versioned upstream artifact; the image tag is a variant tag. Plan uses the apt steamcmd package (see section 3), which the sibling apps/steamcmd already pins with datasource=deb` | apps/steamcmd/docker-bake.hcl (local) |
 | Ports | 27015/tcp (rcon) and 27015/udp (game and query) | chart values.yaml lines 21-31 |
@@ -29,14 +29,14 @@ Files in `apps/cstrike1-6/`:
 - `docker-bake.hcl`: required.
 - `settings.yaml`: required.
 - `container-test.yaml`: required.
-- `start.sh`: required, it performs the SteamCMD install and launches srcds. Copied via the allow-list in `include/.dockerignore` (`start.sh` is allowed).
+- `start.sh`: required, it performs the SteamCMD install and launches hlds_run. Copied via the allow-list in `include/.dockerignore` (`start.sh` is allowed).
 - `defaults/`, `etc/`, `scripts/`, `health/`: not needed. The Dockerfile uses `COPY --chmod=0755 start.sh /start.sh` plus `COPY --chmod=0755 . /`, as apps/steamcmd does.
 - `root/`: never used.
 - `DOWNSTREAM_CHANGES.md`: not needed, this app is not a `FROM` base.
 
 ## 3. Base image
 
-- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (brief's ubuntu line).
+- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the repo ubuntu base, same digest as `apps/steamcmd`).
 - Why: the upstream wrapper runs on Debian with the ich777 base, which is not a ContainerForge base. ContainerForge already packages SteamCMD in `apps/steamcmd`, so this app follows the same install path.
 - Why not `ghcr.io/trueforge-org/steamcmd` as FROM: no sibling uses it as FROM (grep of `apps/*/Dockerfile` finds no `FROM ghcr.io/trueforge-org/steamcmd`), and its published tag is `UNVERIFIED`. The plan copies the install steps from `apps/steamcmd/Dockerfile` instead.
 - Closest sibling: `apps/steamcmd` (same steamcmd install, `USER apps`, `COPY --chmod=0755 . /`).
@@ -140,7 +140,7 @@ Behaviour to implement (bash, `set -euo pipefail`):
 5. On update failure, exit non-zero with a clear error (matching apps/steamcmd).
 6. Copy `linux32/*` into `/config/.steam/sdk32/` when `steamclient.so` is missing (upstream step).
 7. Apply `GAME_PARAMS` and `GAME_PORT` from env. Quote arguments with an array, not `eval`.
-8. `cd /config/serverfiles` and `exec ./srcds_run -game cstrike ${GAME_PARAMS} -console +port ${GAME_PORT}`. The `exec` makes the server PID 1 handoff.
+8. `cd /config/serverfiles` and `exec ./hlds_run -game cstrike ${GAME_PARAMS} -console +port ${GAME_PORT}` (GoldSrc app 90 ships `hlds_run`, as in the upstream `cstrike1.6` branch). The `exec` makes the server PID 1 handoff.
 9. Listen on all interfaces. srcds binds to `0.0.0.0` by default; check the first boot log (see section 11).
 10. Do not write to `/app`. All state, downloads, and steamcmd caches go to `/config` (the game files, which must persist) or `/tmp` (scratch).
 
@@ -151,7 +151,6 @@ Behaviour to implement (bash, `set -euo pipefail`):
 
 filePaths:
   - /start.sh
-  - /usr/local/bin/steamcmd
   - /usr/local/share/steamcmd/steamcmd.sh
 tcp:
   - port: '27015'
@@ -186,7 +185,7 @@ tcp:
 
 10.3 Steam EULA and `LICENSE` value: not confirmed (`UNVERIFIED`).
 
-10.4 `srcds_run` may need extra 32-bit libs beyond `lib32gcc-s1 lib32stdc++6 lib32z1`. Confirm in the run.
+10.4 `hlds_run` may need extra 32-bit libs beyond `lib32gcc-s1 lib32stdc++6 lib32z1`. Confirm in the run.
 
 10.5 GSLT: the draft says a Game Server Login Token may be needed for a public listing. Not verified on any fetched page (`UNVERIFIED`). If needed, add `STEAM_GSLT` as an env var, passed as `+sv_setsteamaccount`, and document it.
 
@@ -208,7 +207,7 @@ From `apps/cstrike1-6/`, per `build-test-protocol.instructions.md`:
      -v cstrike1-6-probe-config:/config ${APP}:${VERSION}
    docker logs -f cstrike1-6-probe
    ```
-   Pass: process stays up, log shows `Update Server` completing and srcds reporting it is listening on port 27015 (readiness signal to confirm on first run, `UNVERIFIED` exact text), and no fatal error. Cleanup: `docker rm -f cstrike1-6-probe; docker volume rm cstrike1-6-probe-config`.
+   Pass: process stays up, log shows `Update Server` completing and hlds reporting it is listening on port 27015 (readiness signal to confirm on first run, `UNVERIFIED` exact text), and no fatal error. Cleanup: `docker rm -f cstrike1-6-probe; docker volume rm cstrike1-6-probe-config`.
 4. `forgetool containers test --image <image>:<version> --config ./apps/cstrike1-6/container-test.yaml`.
 5. Round limit: 10 rounds, then record `unfixable`.
 
