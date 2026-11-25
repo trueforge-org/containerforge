@@ -1,5 +1,5 @@
 # soft-serve — implementation plan
-> Source: ./draft.md · Target: apps/soft-serve/ · Difficulty: easy · Role (main) · Verified on 2026-11-25
+> Source: ./draft.md · Target: apps/soft-serve/ · Difficulty: easy · Role: main · Verified on 2026-11-25
 
 ## 1. Verified upstream facts
 
@@ -11,7 +11,7 @@
 | Source URL | https://github.com/charmbracelet/soft-serve |
 | Download amd64 | `https://github.com/charmbracelet/soft-serve/releases/download/v0.12.4/soft-serve_0.12.4_Linux_x86_64.tar.gz` (sha256 `bcf2e49bd95c34946708a7efe8ed5040125f84ed213bbc1a4a59982811af636b`) |
 | Download arm64 | `https://github.com/charmbracelet/soft-serve/releases/download/v0.12.4/soft-serve_0.12.4_Linux_arm64.tar.gz` (sha256 `9f70fbd02577abcad05c9bf2c91cf22f6026f92da6ae0f834dcead65271153eb`). This is a glibc-compatible tarball. The draft's arm64 link (`soft-serve_0.12.4_aarch64.apk`) is an Alpine package and is not used. |
-| Checksum source | `https://github.com/charmbracelet/soft-serve/releases/download/v0.12.4/checksums.txt` (also `checksums.txt.sigstore.json` for signature verification, UNVERIFIED whether we verify the signature). |
+| Checksum source | (both sha256 values above match `checksums.txt`, checked 2026-11-25) `https://github.com/charmbracelet/soft-serve/releases/download/v0.12.4/checksums.txt` (also `checksums.txt.sigstore.json` for signature verification, UNVERIFIED whether we verify the signature). |
 | Upstream Dockerfile reviewed | https://github.com/charmbracelet/soft-serve/blob/v0.12.4/Dockerfile: `FROM alpine:latest`, `WORKDIR /soft-serve`, `VOLUME /soft-serve`, `ENV SOFT_SERVE_DATA_PATH=/soft-serve SOFT_SERVE_INITIAL_ADMIN_KEYS="" CI=1`, `EXPOSE 23231/tcp 23232/tcp 23233/tcp 9418/tcp`, `ENTRYPOINT ["/usr/local/bin/soft","serve"]`, apk installs `git bash openssh`, `COPY soft /usr/local/bin/soft`. No `USER` line, so upstream runs as root. |
 | Ports (real) | 23231/tcp SSH (git over SSH and TUI), 23232/tcp HTTP, 23233/tcp stats, 9418/tcp git protocol. Confirmed by the upstream Dockerfile and docker.md. |
 | Env vars (real) | `SOFT_SERVE_DATA_PATH` (data dir, default `/soft-serve` in image), `SOFT_SERVE_INITIAL_ADMIN_KEYS` (newline-joined public keys, first admin), `SOFT_SERVE_DEFAULT_REPO` (README), `SOFT_SERVE_NAME`, `SOFT_SERVE_CONFIG_LOCATION` (README), `SOFT_SERVE_SSH_LISTEN_ADDR`, `SOFT_SERVE_SSH_PUBLIC_URL`, `SOFT_SERVE_SSH_ENABLED`, `SOFT_SERVE_GIT_LISTEN_ADDR`, `SOFT_SERVE_GIT_ENABLED` (from `pkg/config/config.go` and the README), `CI=1` (upstream workaround for slow docker TTY). HTTP and stats listen var names are inferred from the same pattern (`SOFT_SERVE_HTTP_LISTEN_ADDR`, `SOFT_SERVE_STATS_LISTEN_ADDR`), UNVERIFIED in code. |
@@ -153,14 +153,14 @@ filePaths:
 | --- | --- |
 | `/soft-serve` (repos, ssh host key, `known_hosts`, sqlite) | `SOFT_SERVE_DATA_PATH=/config/soft-serve`, persistent `/config` volume |
 | `$HOME` (git global config, ssh client files) | `HOME=/tmp`. Ephemeral and read-only-rootfs safe. |
-| Upstream runs as root (`runAsUser 0`, `runAsNonRoot false` in the chart) | `USER apps`. Port 23231 (not 22) and 9418 are above 1024 only for 23231. 9418 needs `net.ipv4.ip_unprivileged_port_start` or cap; UNVERIFIED that 9418 binds as `apps`. Open risk, see section 10. |
+| Upstream runs as root (`runAsUser 0`, `runAsNonRoot false` in the chart) | `USER apps`. All four ports (23231, 23232, 23233, 9418) are above 1024, so `apps` can bind them without extra capabilities. |
 
 Chart expectations to reconcile: draft says non-root no and read-only rootfs no. Our image runs as `apps` and is read-only compatible, so the chart values must be overridden when it is ported.
 
 ## 10. Risks, caveats and open questions
 
 - Draft caveat confirmed: the upstream arm64 artifact is an Alpine `.apk`. This plan uses the glibc `Linux_arm64.tar.gz` instead, so the caveat is resolved.
-- Port 9418 (git protocol) is below 1024 on the standard port, but the Dockerfile exposes 9418 to a non-root user. Binding 9418 as `apps` needs the sysctl or a `--cap-add`. UNVERIFIED whether the Kubernetes/TrueCharts setup allows it. Option: keep 9418 in settings and document that it needs `ip_unprivileged_port_start`.
+- Port 9418 (git protocol) is above 1024, so no sysctl or capability is needed. The git daemon is enabled by default upstream (UNVERIFIED: confirm 9418 opens in the first run, otherwise drop its tcp probe and mark the port optional).
 - First admin key: the first key in `SOFT_SERVE_INITIAL_ADMIN_KEYS` is the only admin. It must be set before first use (manual setup).
 - SSH host keys are generated on first start in `/config/soft-serve/ssh`. Losing `/config` changes the host identity.
 - `CI=1` is an upstream workaround for slow TTY in docker. It is kept as an env default in the Dockerfile.
@@ -190,4 +190,4 @@ forgetool containers test --image soft-serve:0.12.4 --config ./apps/soft-serve/c
 - PR body uses `.github/PULL_REQUEST_TEMPLATE.md`, keeps its sections and checkboxes, and only ticks boxes that apply.
 - Notes section includes `🤖 This PR is AI generated.`.
 - Tell the user the CLA is needed: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; the `license/cla` check shows status).
-- State what is untested: the arm64 build, SSH admin flow, and the 9418 bind as non-root, unless verified.
+- State what is untested: the arm64 build, SSH admin flow, and whether 9418 opens by default, unless verified.

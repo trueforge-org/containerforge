@@ -61,7 +61,7 @@ Blocker: the Steam app id must be confirmed before a build. Do not start the bui
 
 - Schema header as for siblings.
 - `filePaths`: `/start.sh`, `/usr/local/bin/steamcmd`, `/usr/local/share/steamcmd/steamcmd.sh`.
-- `tcp` probe on the game port, with `timeoutSeconds` from a sibling.
+- No `tcp` probe for 26900/26901: both are UDP and the `tcp` check cannot test UDP. Stated reason for the missing probe. Probe 8081/tcp and 8080/tcp only if the server is started in a run test (UNVERIFIED that they open). `timeoutSeconds` from a sibling.
 - The full first-start download cannot run in CI, so the test covers the file paths and the start-script path up to the download step. Narrowing is noted in the file.
 
 ## 9. Rootless and read-only-rootfs adaptations

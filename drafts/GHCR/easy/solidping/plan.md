@@ -1,16 +1,16 @@
 # solidping — implementation plan
-> Source: ./draft.md · Target: apps/solidping/ · Difficulty: easy · Role (main) · Verified on 2026-11-25
+> Source: ./draft.md · Target: apps/solidping/ · Difficulty: easy · Role: main · Verified on 2026-11-25
 
 ## 1. Verified upstream facts
 
 | Item | Value |
 | --- | --- |
-| Version to build | `0.54.1` (GitHub release `v0.54.1`, published 2026-11-23). **The draft pins `0.52.0`, which is out of date.** Use `0.54.1`. Source: `gh api repos/fclairamb/solidping/releases/latest`. |
+| Version to build | `0.54.1` (GitHub release `v0.54.1`, published 2026-11-23). **The draft pins `0.52.0`, which is out of date.** Use `0.54.1`. NOTE: release `v0.55.0` was published 2026-11-25 (after this plan's research); the human must choose 0.54.1 or 0.55.0, and if 0.55.0 is chosen every hash and doc fact here must be re-checked (its amd64 sha256 is `c1313cd1682fb4bcef72dae4c99614d3a238b87280843430932a1b3fd61dccd5`, arm64 `a6864b067ae08360507914dcc9b4b73404e4ddf7e6a62b789512314542b35454`). Source: `gh api repos/fclairamb/solidping/releases/latest`. |
 | Renovate | `datasource=github-releases depName=fclairamb/solidping versioning=semver` |
 | License | AGPL-3.0. https://github.com/fclairamb/solidping/blob/main/LICENSE |
 | Source URL | https://github.com/fclairamb/solidping |
-| Download amd64 | `https://github.com/fclairamb/solidping/releases/download/v0.54.1/solidping-linux-amd64.gz` (sha256 `83f22819e7cdb26c01d3a7980eebe74fa2cccbb7af294d241b6eacb2e37eee74`) |
-| Download arm64 | `https://github.com/fclairamb/solidping/releases/download/v0.54.1/solidping-linux-arm64.gz` (sha256 `07d6501ce5798cca4fbd2aefc98c8b72309b157ea40b3a92e0139c43f1967bf3`) |
+| Download amd64 | `https://github.com/fclairamb/solidping/releases/download/v0.54.1/solidping-linux-amd64.gz` (sha256 `1f5e661e29000105c2c6c993fe964674b2670f976bf472f5a06ac595c8901f33`) |
+| Download arm64 | `https://github.com/fclairamb/solidping/releases/download/v0.54.1/solidping-linux-arm64.gz` (sha256 `94524f93772d43515162f6c72a4e72819df832ac75d7c3b48c44a3924c05da39`) |
 | Checksum source | `https://github.com/fclairamb/solidping/releases/download/v0.54.1/solidping-checksums.txt` (also `sp-checksums.txt`, same values). |
 | Upstream Dockerfile reviewed | https://github.com/fclairamb/solidping/blob/5e35c5e4a02b63f3e15c48ade8e6bbe4b5b4e070/Dockerfile (commit pinned by the draft; the v0.54.1 Dockerfile is UNVERIFIED as identical). Multi-stage: node:26-alpine + bun builds the web UIs, golang:1.27.4-trixie builds with `CGO_ENABLED=0` (pure-Go SQLite), final `gcr.io/distroless/base-debian13:nonroot` as UID 65532. `ENV SP_DB_TYPE=sqlite SP_DB_DIR=/data SP_FILESTORAGE_LOCAL_ROOT=/data/files`, `VOLUME /data`, `EXPOSE 4000`, `HEALTHCHECK CMD ["/app/solidping","healthcheck"]`, `ENTRYPOINT ["/app/solidping","serve"]`. |
 | Ports (real) | 4000/tcp (web UI, API, healthcheck). Confirmed by the upstream Dockerfile. Health endpoint `/api/mgmt/health` (from the Dockerfile comment). |
@@ -57,11 +57,11 @@ variable "VERSION" {
   // renovate: datasource=github-releases depName=fclairamb/solidping versioning=semver
   default = "0.54.1"
 }
-variable "LICENSE" { default = "AGPL-3.0-only" }
+variable "LICENSE" { default = "AGPL-3.0" }
 variable "SOURCE" { default = "https://github.com/fclairamb/solidping" }
 ```
 
-LICENSE is `AGPL-3.0`. The `-only` suffix is UNVERIFIED (the repo's LICENSE file says AGPL-3.0, and the SPDX id needs to match the file). Check `gh api repos/fclairamb/solidping/license` before committing. Four standard targets and the default group copied from `apps/adguardhome-sync`.
+LICENSE is `AGPL-3.0`, the SPDX id GitHub reports for the repo (no `-only`/`-or-later` suffix is claimed). Four standard targets and the default group copied from `apps/adguardhome-sync`.
 
 ## 6. settings.yaml
 
@@ -104,7 +104,7 @@ volumes:
 dependencies: []
 ```
 
-`postgresql` is optional, so it is not in `dependencies`. The sample `opt_dependencies` entry is listed as an option in the settings file if the schema accepts it (UNVERIFIED that the forgetool schema has `opt_dependencies`; the protocol names it). `SP_DB_URL` is not required for the default SQLite setup.
+`postgresql` is optional, so it is not in `dependencies`; list it under `opt_dependencies` (`- name: postgresql`), the key sibling apps such as `apps/babybuddy` use. `SP_DB_URL` is not required for the default SQLite setup.
 
 ## 7. start.sh
 

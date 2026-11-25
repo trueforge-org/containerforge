@@ -1,5 +1,5 @@
 # speedtest-exporter — implementation plan
-> Source: ./draft.md · Target: apps/speedtest-exporter/ · Difficulty: easy · Role (main) · Verified on 2026-11-25
+> Source: ./draft.md · Target: apps/speedtest-exporter/ · Difficulty: easy · Role: main · Verified on 2026-11-25
 
 ## 1. Verified upstream facts
 
@@ -46,7 +46,7 @@ Note: the draft says "python base" and lists the ubuntu base as the foundation. 
 5. Ookla CLI: map `TARGETARCH` (`amd64` -> `x86_64`, `arm64` -> `aarch64`). `curl -fsSL -o /tmp/speedtest.tgz "https://install.speedtest.net/app/cli/ookla-speedtest-${SPEEDTEST_VERSION}-linux-${ARCH}.tgz"`, `tar xzf /tmp/speedtest.tgz -C /tmp speedtest`, `install -m 0755 /tmp/speedtest /usr/local/bin/speedtest`. Verify the checksum before extracting: UNVERIFIED (no published checksum; record the sha256 of the downloaded file in the PR and pin it).
 6. Ship licenses: the Ookla tarball may contain `*.md` or `LICENSE` files (UNVERIFIED). Copy any that exist to `/usr/share/licenses/speedtest-exporter/` (or `/usr/share/licenses/ookla-speedtest/`), and copy the exporter's `LICENSE` from the source tag. The Ookla licence terms must be read by the maintainer before shipping (see section 10).
 7. `chown -R apps:apps /app && chmod -R 755 /app`, `rm -rf /tmp/*`.
-8. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 9798`, `ENV SPEEDTEST_PORT=9798`.
+8. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 9798`, `VOLUME /config` (unused by the app, kept per the repo Dockerfile rules), `ENV SPEEDTEST_PORT=9798`.
 
 `ARG VERSION` must match `docker-bake.hcl`.
 
@@ -58,11 +58,11 @@ variable "VERSION" {
   // renovate: datasource=github-releases depName=MiguelNdeCarvalho/speedtest-exporter versioning=semver
   default = "3.5.4"
 }
-variable "LICENSE" { default = "GPL-3.0-only" }
+variable "LICENSE" { default = "GPL-3.0" }
 variable "SOURCE" { default = "https://github.com/MiguelNdeCarvalho/speedtest-exporter" }
 ```
 
-The `v` prefix comes from the tag only; `VERSION` is `3.5.4`. The `-only` suffix on GPL is UNVERIFIED: check `gh api repos/MiguelNdeCarvalho/speedtest-exporter/license` and use the SPDX id it reports. Four standard targets and the default group copied from `apps/adguardhome-sync`.
+The `v` prefix comes from the tag only; `VERSION` is `3.5.4`. `GPL-3.0` is the SPDX id GitHub reports for the repo (checked 2026-11-25); no `-only` suffix is claimed. Note the Ookla CLI in the image is proprietary (section 10), so the image is not purely GPL. Four standard targets and the default group copied from `apps/adguardhome-sync`.
 
 ## 6. settings.yaml
 
@@ -90,11 +90,13 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-volumes: []
+volumes:
+  - path: /config
+    required: false
 dependencies: []
 ```
 
-- No `/config` volume: the app is stateless and writes nothing. Confirm the image needs no `/config` on the read-only rootfs (see section 9).
+- `/config` is declared but optional: the app is stateless and writes nothing there (see section 9).
 - `SPEEDTEST_SERVER` default is empty, which means the CLI picks the server.
 - `TZ` is the ContainerForge convention, not an upstream var.
 
@@ -125,14 +127,13 @@ http:
   path: /
 filePaths:
 - /app/exporter.py
-- /app/requirements.txt
 - /usr/local/bin/speedtest
 ```
 
 - Port 9798 has a `tcp` and an `http` probe. The `/` index returns 200 (`mainPage()`).
 - `checkForBinary()` exits 1 if `speedtest` is missing or is not the Ookla CLI. The `http` probe only succeeds if the exporter started, so this check runs implicitly.
 - The test runs with no env. `SPEEDTEST_SERVER` and `SPEEDTEST_TIMEOUT` are not exercised. No required env path exists.
-- `/app/requirements.txt` is removed by the Dockerfile (section 4 step 4), so drop it from `filePaths`. Use `/app/exporter.py` only.
+- `/app/requirements.txt` is removed by the Dockerfile (section 4 step 4), so it is not in `filePaths`.
 - `timeoutSeconds` 120 is UNVERIFIED against a sibling.
 
 ## 9. Rootless and read-only-rootfs adaptations

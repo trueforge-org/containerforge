@@ -14,7 +14,7 @@
 | Checksum source | `checksums.txt` on the same release: https://github.com/go-shiori/shiori/releases/download/v1.8.0/checksums.txt. Linux lines: `20552c4d91c720dc9786d73a7f5b68abd9ed32addb177861f89ea5d4e5937d3f  shiori_Linux_x86_64_1.8.0.tar.gz`, `ebfb94cc5ab955f379ec3af0b7194191f3989096ad37e7cb59e9ef3c12528fba  shiori_Linux_aarch64_1.8.0.tar.gz` |
 | Upstream Dockerfile reviewed | https://github.com/go-shiori/shiori/blob/v1.8.0/Dockerfile. Builder `alpine:3.19` copies a prebuilt `dist/shiori_${TARGETOS}_${TARGETARCH}${TARGETVARIANT}/shiori`; final `FROM scratch`; `ENV PORT=8080`, `ENV SHIORI_DIR=/shiori`, `EXPOSE ${PORT}`, `ENTRYPOINT ["/usr/bin/shiori"]`, `CMD ["server"]`. No `USER`, no `VOLUME`. We take only the binary and ignore the scratch image. |
 | Env vars (real) | Verified in `docs/Configuration.md` (v1.8.0) and `internal/config/config.go`: `SHIORI_DIR` (data dir, default current dir), `SHIORI_HTTP_PORT` (8080), `SHIORI_HTTP_ADDRESS` (`:`), `SHIORI_HTTP_ROOT_PATH` (`/`), `SHIORI_HTTP_SERVE_WEB_UI` (True), `SHIORI_HTTP_SECRET_KEY` (session key), `SHIORI_HTTP_ACCESS_LOG` (True), `SHIORI_DATABASE_URL` (optional; SQLite default), `SHIORI_DEVELOPMENT` (False). |
-| Hostname variable | `config.go` marks `SHIORI_HOSTNAME` as `required` (line 110) but the docs do not list it. UNVERIFIED: its default and effect. Resolve on the first run (section 10). |
+| Hostname variable | `config.go` marks `SHIORI_HOSTNAME` as `required` (line 110) but the docs do not list it. `config.go` (line 185) fills it from the process's OS `HOSTNAME` variable, which Docker sets for every container, so no extra env var is needed. Confirm on the first run (section 10). |
 | Secret key behaviour | Docs say `SHIORI_HTTP_SECRET_KEY` is required. `config.go` only logs a warning and uses a random key when it is unset, which invalidates sessions on every restart. |
 | Default login | UNVERIFIED: not confirmed on a fetched page. Do not document a default username or password. |
 | Ports | 8080/tcp (HTTP web UI and API) |
@@ -41,7 +41,7 @@ No `defaults/`, `etc/` or `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.m
 1. `FROM <ubuntu>`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Map the arch: `amd64` to `x86_64`, `arm64` to `aarch64`. Only these two are built. Use a shell `case` with `exit 1` for any other value.
 3. Download the tarball and `checksums.txt` into `/tmp`. Verify with `grep " shiori_Linux_${ARCH}_${VERSION}.tar.gz$" checksums.txt | sha256sum -c -`. A failed check must fail the build.
-4. `tar xzf ... -C /tmp shiori` then `install -m 0755 /tmp/shiori /app/shiori`. Also copy the upstream `LICENSE` to `/usr/share/licenses/shiori/` (download from the same tag, or note it in the tarball if present; UNVERIFIED whether the tarball ships a LICENSE).
+4. `tar xzf ... -C /tmp shiori` then `install -D -m 0755 /tmp/shiori /app/shiori`. Also copy the upstream `LICENSE` to `/usr/share/licenses/shiori/` (download from the same tag, or note it in the tarball if present; UNVERIFIED whether the tarball ships a LICENSE).
 5. `rm -rf /tmp/*` to clean up (`apt-get` is not needed: the binary is static and the base already has CA certificates and tzdata; UNVERIFIED that the base has both, check at build time).
 6. `ENV SHIORI_DIR=/config HOME=/config SHIORI_HTTP_PORT=8080`. `/config` is the data dir, so SQLite and archives land there. Caches must not go to `/config`; Go does not need one at runtime.
 7. `chown -R apps:apps /app`, `chmod -R 755 /app`.
@@ -78,6 +78,7 @@ Do not set `ENTRYPOINT` to `/usr/bin/shiori`; the start script owns the command 
 ```
 #!/usr/bin/env bash
 set -eu
+umask 077
 # secret key: use env value; otherwise persist a random one in /config so sessions survive restarts
 if [ -z "${SHIORI_HTTP_SECRET_KEY:-}" ]; then
   if [ ! -s /config/.secret_key ]; then
@@ -90,7 +91,7 @@ exec /app/shiori server
 ```
 
 - Read the key with `cat`, never pass it as an argument, so it stays out of the process list.
-- Use `umask 077` before writing the key file.
+- `umask 077` is set at the top of the script, before the key file is written.
 - Empty `/config` works: the key file is created on first start.
 - Do not write to `/app`.
 - Bind: `SHIORI_HTTP_ADDRESS` default `:` (all interfaces). Verified in docs.
@@ -118,7 +119,7 @@ Add an `http` probe on `/` with port 8080 for the web UI, using the sibling `ngi
 
 ## 10. Risks, caveats and open questions
 
-- `SHIORI_HOSTNAME` is `required` in `config.go` but undocumented. Run the binary with a fresh `/config` to see whether it refuses to start without it, then decide the default. Do not invent it.
+- `SHIORI_HOSTNAME` is `required` in `config.go` but undocumented; it is read from the OS `HOSTNAME` variable, which Docker always sets. Confirm on the first run that the server starts, and do not add an env var for it.
 - Default login: UNVERIFIED. Check the first-run log or docs before documenting it.
 - The secret key default: random key persisted in `/config/.secret_key`. Documented upstream as required, so this is a deliberate choice, flagged for review.
 - arm64 is available in the release, but only amd64 is verified by a run. Test arm64 after amd64 passes.

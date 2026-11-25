@@ -87,7 +87,9 @@ Idempotent, works with empty `/config`:
 #!/usr/bin/env bash
 set -eu
 umask "${SLSKD_UMASK:-0022}"
-mkdir -p /config/downloads /config/incomplete
+export SLSKD_DOWNLOADS_DIR="${SLSKD_DOWNLOADS_DIR:-/config/downloads}"
+export SLSKD_INCOMPLETE_DIR="${SLSKD_INCOMPLETE_DIR:-/config/incomplete}"
+mkdir -p "${SLSKD_DOWNLOADS_DIR}" "${SLSKD_INCOMPLETE_DIR}"
 exec /app/slskd
 ```
 

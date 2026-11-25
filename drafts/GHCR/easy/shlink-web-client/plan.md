@@ -25,9 +25,9 @@
 - `apps/shlink-web-client/Dockerfile`
 - `apps/shlink-web-client/docker-bake.hcl`
 - `apps/shlink-web-client/settings.yaml`
-- `apps/shlink-web-client/start.sh`
+- `apps/shlink-web-client/docker-entrypoint.d/10-shlink.sh` (same pattern as `apps/it-tools/docker-entrypoint.d/10-copyconfig.sh`; no separate `start.sh`, the nginx base's entrypoint runs these scripts and then its `CMD`)
 - `apps/shlink-web-client/container-test.yaml`
-- `apps/shlink-web-client/defaults/nginx.conf` and `defaults/sites/shlink.conf` (seeded into `/config` at start, see section 7)
+- `apps/shlink-web-client/defaults/default.conf` (the site config; replaces the nginx base's `default.conf` exactly as `apps/it-tools` does, because the base's `default.conf` also has `listen 8080 default_server` and two default servers on one port make nginx fail). The base's `defaults/nginx.conf` is reused, not shipped again.
 
 No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). No `root/`.
 
@@ -35,7 +35,7 @@ No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). No `root/`.
 
 Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. The draft names nginx as the runtime image, and the nginx sibling already runs as `apps` with a `/config` seeded config and `/tmp` writable paths. Build stage (only for unzip and checksum): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Closest sibling: `apps/nginx` (static server on nginx) and `apps/it-tools` (static SPA on nginx).
 
-The nginx sibling's Dockerfile is the pattern: `USER root` for installs, `USER apps`, `COPY --chmod=0755 . /`. Its `CMD` reads `/config/nginx.conf`, so the start script must seed that file.
+The nginx sibling's Dockerfile is the pattern: `USER root` for installs, `USER apps`, `COPY --chmod=0755 . /`. Its `CMD` reads `/config/nginx.conf`, which the base's `docker-entrypoint.d/03-copyconfig.sh` seeds (`cp -n`) together with `/config/sites/default.conf`.
 
 ## 4. Dockerfile
 
@@ -45,7 +45,7 @@ The nginx sibling's Dockerfile is the pattern: `USER root` for installs, `USER a
    - `COPY --from=fetch /tmp/dist /app/www` (read-only at runtime, owned by `apps:apps`, `chmod -R 755`).
    - `COPY --chmod=0755 defaults/ /defaults/` is handled by `COPY . /`; do not duplicate.
    - `ENV TZ=Etc/UTC`
-3. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, `CMD ["/start.sh"]`.
+3. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`. Keep the base's `CMD` (nginx with `/config/nginx.conf`); do not override it.
 
 The upstream `servers.json` write into the web root is not copied: the web root is read-only (section 9).
 
@@ -70,15 +70,14 @@ The upstream `servers.json` write into the web root is not copied: the web root 
 - `volumes`: `/config`, `required: true`.
 - `dependencies`: none.
 
-## 7. start.sh
+## 7. docker-entrypoint.d/10-shlink.sh
 
-Idempotent, runs with empty `/config`:
+Idempotent, runs with empty `/config`, never writes to `/app`. The base's entrypoint runs it before nginx starts and then `exec`s the `CMD`, so no `start.sh` is needed (UNVERIFIED: confirm the ubuntu base entrypoint runs `/docker-entrypoint.d/*` as `apps` and execs the CMD; `apps/it-tools` relies on it).
 
-1. Seed `/config/nginx.conf` and `/config/sites/shlink.conf` from `/defaults/` only if missing (`cp -n`). Do not overwrite user files.
-2. Generate servers.json only when `SHLINK_SERVER_URL` and `SHLINK_SERVER_API_KEY` are both set, writing it to `/config/servers.json` via `umask 077` and a printf with each value escaped (do not interpolate raw values into JSON; use `jq -n --arg` if available in the base, UNVERIFIED, otherwise a checked fallback). If not set, write `[]`. Never overwrite an existing `/config/servers.json` that the user edited: only regenerate when the env values are set.
-3. `exec nginx -c /config/nginx.conf -g "daemon off;"`.
+1. `mkdir -p /config/sites`, then copy `/defaults/default.conf` to `/config/sites/default.conf` (overwrite, as `apps/it-tools` does, so the base's seeded default site is replaced; this script sorts after `03-copyconfig.sh`).
+2. Generate `/config/servers.json` only when `SHLINK_SERVER_URL` and `SHLINK_SERVER_API_KEY` are both set, with `umask 077`, escaping each value (do not interpolate raw values into JSON; use `jq -n --arg` if available in the base, UNVERIFIED, otherwise a checked fallback). If they are not set and the file is missing, write `[]`. Never overwrite a `/config/servers.json` the user edited unless the env values are set.
 
-The nginx site (`defaults/sites/shlink.conf`) has `listen 8080 default_server`, `root /app/www`, the SPA fallback from upstream, and `location = /servers.json { alias /config/servers.json; }`. The `/config/sites/*.conf` include comes from the nginx sibling's `nginx.conf` (`include /config/sites/*.conf;`), so the site file must be under `/config/sites/`.
+The site (`defaults/default.conf`) has `listen 8080 default_server` (and the `[::]` form), `root /app/www`, the upstream SPA fallback `try_files $uri $uri/ /index.html$is_args$args`, and `location = /servers.json { alias /config/servers.json; }`. The `include /config/sites/*.conf;` comes from the nginx sibling's `nginx.conf`.
 
 ## 8. container-test.yaml
 
@@ -109,7 +108,7 @@ The `http` probe checks `/` returns the SPA index. Optionally add `path: /server
 - Version: draft says 4.9.0; plan pins 4.9.1. Chart upgrade is a user decision.
 - No upstream checksum for the dist zip. The pinned SHA256 proves integrity against the value at pin time only. Document this in the PR.
 - The SPA does nothing without a Shlink server. Caveat from the draft: servers are configured in the browser or via `servers.json`.
-- `apps/nginx` `CMD` reads `/config/nginx.conf`; the shlink start script must seed it or the app fails to start with an empty `/config`. Verify on the first run.
+- Two `default_server` blocks on 8080 would break nginx; the plan replaces the base's `default.conf` with its own (as `apps/it-tools` does). Verify on the first run with an empty `/config`.
 - Blockers: none. No musl, GPU, privileged or arm64 gaps.
 
 ## 11. Build and test steps
