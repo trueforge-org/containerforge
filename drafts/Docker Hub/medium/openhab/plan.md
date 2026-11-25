@@ -65,7 +65,7 @@ RUN set -eux; \
   curl -fsSL -o /tmp/openhab/openhab.tar.gz \
     "https://github.com/openhab/openhab-distro/releases/download/${VERSION}/openhab-${VERSION}.tar.gz"; \
   tar -xzf /tmp/openhab/openhab.tar.gz -C /app/openhab; \
-  find /app/openhab -name '*.bat' -o -name '*.ps1' -o -name '*.psm1' -delete; \
+  find /app/openhab \( -name '*.bat' -o -name '*.ps1' -o -name '*.psm1' \) -delete; \
   mv /app/openhab/conf /defaults/conf; \
   ln -s /config/addons /app/openhab/addons; \
   chown -R root:root /app/openhab /defaults; \

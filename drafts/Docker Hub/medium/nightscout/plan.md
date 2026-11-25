@@ -79,7 +79,7 @@ Build and run on glibc Ubuntu through `python-node`. Do not `COPY --from=node:22
    WORKDIR /app/nightscout
    ```
 
-   Add `VOLUME /config` only if step 1 of section 11 finds persistent state (section 9).
+   `VOLUME /config` is kept regardless (repo rule), even though the chart has no persistence.
 
 ## 5. docker-bake.hcl
 
@@ -140,6 +140,9 @@ env:
     required: false
   - name: TZ
     default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
     required: false
 dependencies:
   - name: mongodb

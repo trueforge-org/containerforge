@@ -14,7 +14,7 @@
 | Download | `https://github.com/agusalex/Notarius/releases/download/1.1-2/ROOT.war` (only release asset). The WAR is architecture-neutral. |
 | Checksum source | None published with the release. Record the sha256 of the downloaded file in the plan at build time; this is not an upstream checksum. |
 | Upstream Dockerfile reviewed | https://github.com/agusalex/Notarius/blob/master/Dockerfile: `FROM tomcat:jre8-alpine` (single stage, musl), removes `/usr/local/tomcat/webapps/`, copies `target/Notarius-1.0.3-SNAPSHOT.war` to `webapps/ROOT.war`. Needs a Maven build; there is no WAR in the repo. No USER, EXPOSE, ENTRYPOINT or VOLUME (tomcat image defaults). |
-| Port | 8080 is Tomcat's default connector port in the tarball that we ship (verified at build time in `conf/server.xml`). The WAR itself does not declare a port (UNVERIFIED). |
+| Port | 8080 is Tomcat's default connector port (UNVERIFIED in the shipped `conf/server.xml`; check at build time). The WAR itself does not declare a port (UNVERIFIED). |
 | Env vars | None read by the WAR is verified. No env vars are listed in settings.yaml. |
 | Data and log paths | UNVERIFIED: whether the WAR writes data anywhere. Tomcat writes logs, work and temp under its base directory. |
 | Chart | TrueCharts `charts/stable/notarius` 11.0.0. Service `main` disabled, probes disabled, `runAsUser 0`, `runAsGroup 0`, `readOnlyRootFilesystem false`. |
@@ -57,7 +57,7 @@ RUN set -eux; \
 
    Use the tomcat-9 path only if the WAR needs Servlet 3.x/4.x on Java 8 (UNVERIFIED). Confirm before the build.
 
-4. WAR: `mkdir -p /app/notarius && curl -fL -o /app/notarius/ROOT.war "https://github.com/agusalex/Notarius/releases/download/1.1-2/ROOT.war"`, then `sha256sum` recorded in the plan (no upstream checksum).
+4. WAR: `mkdir -p /app/notarius && curl -fL -o /app/notarius/ROOT.war "https://github.com/agusalex/Notarius/releases/download/${VERSION}/ROOT.war"`, then `sha256sum` recorded in the plan (no upstream checksum).
 5. Licenses: `COPY` the Notarius `LICENSE` (file name UNVERIFIED, check the repo root) to `/usr/share/licenses/notarius/LICENSE`, and the Tomcat `LICENSE` from the tarball to `/usr/share/licenses/tomcat/LICENSE`.
 6. `chmod -R 755 /app` (root-owned, read-only at runtime).
 7. `ENV CATALINA_HOME=/app/tomcat CATALINA_TMPDIR=/tmp`.

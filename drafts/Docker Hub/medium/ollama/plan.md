@@ -59,14 +59,14 @@ RUN set -eux; \
     cd /tmp && grep " ollama-linux-${ollama_arch}.tar.zst\$" sha256sum.txt | sha256sum -c -
 ```
 
-   The file is downloaded under its upstream name, so `sha256sum -c` matches the list entry. Then extract from `/tmp/ollama-linux-${ollama_arch}.tar.zst` in step 5.
+   The file is downloaded under its upstream name, so `sha256sum -c` matches the list entry. Then extract from `/tmp/ollama-linux-${ollama_arch}.tar.zst` in step 5. Shell variables do not persist between `RUN` layers, so steps 2, 4 and 5 must be one `RUN` (or repeat the `case`).
 
 5. Extract to `/app/ollama` (keeps the upstream `bin/` and `lib/` sibling layout, so the bundled libraries resolve relative to the binary; the relative lookup is inferred from the upstream `/bin` + `/lib/ollama` layout, and the tarball's internal layout is UNVERIFIED):
 
 ```dockerfile
 RUN mkdir -p /app/ollama \
- && tar --zstd -xf /tmp/ollama.tar.zst -C /app/ollama \
- && rm -f /tmp/ollama.tar.zst /tmp/sha256sum.txt \
+ && tar --zstd -xf /tmp/ollama-linux-${ollama_arch}.tar.zst -C /app/ollama \
+ && rm -f /tmp/ollama-linux-${ollama_arch}.tar.zst /tmp/sha256sum.txt \
  && chmod -R 755 /app/ollama
 ```
 
