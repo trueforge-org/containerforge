@@ -53,7 +53,7 @@ Note: the draft proposed java17. Upstream says 21, so java21 is the faithful cho
    - `mv /tmp/server.jar /app/plant-it/backend/app.jar`
    - `tar xzf /tmp/client.tar.gz -C /app/plant-it/frontend/build/web`
    - `chown -R apps:apps /app && chmod -R 755 /app`
-6. Licence: `mkdir -p /usr/share/licenses/plant-it && curl -fL -o /usr/share/licenses/plant-it/LICENSE https://raw.githubusercontent.com/MDeLuise/plant-it/0.10.0/LICENSE.txt`. The tag must be pinned to `${VERSION}` (not `main`).
+6. Licence: `mkdir -p /usr/share/licenses/plant-it && curl -fL -o /usr/share/licenses/plant-it/LICENSE https://raw.githubusercontent.com/MDeLuise/plant-it/${VERSION}/LICENSE.txt`. The tag is pinned to `${VERSION}` (not `main`).
 7. Clean `/tmp` downloads.
 8. Env defaults (only the ones the image itself sets): `ENV HOME=/config`. Caches and temp in `/tmp` (`JAVA_TOOL_OPTIONS=-Xmx512M` optional, decide from memory tests; `-Djava.io.tmpdir=/tmp` needed with read-only rootfs).
 9. Tail:
@@ -136,6 +136,7 @@ Env: only TZ is confirmed. Add DB and Redis variables once `start.sh` and the ba
 timeoutSeconds: 180
 tcp:
 - port: '8080'
+- port: '3000'   # UNVERIFIED: drop together with the settings.yaml 3000 entry if start.sh does not bind it
 http:
 - port: '8080'
   path: /
@@ -145,7 +146,7 @@ filePaths:
 - /usr/share/licenses/plant-it/LICENSE
 ```
 
-Timeout: 180 is the sibling Java value (most common timeout among siblings). Every port in settings.yaml gets a probe; add a tcp probe for 3000 if it is kept. The `http /` probe may return non-200 until the DB is reachable; the DB-dependency exception (build-test-protocol) applies: `# narrowed: requires external mariadb and valkey; full functional test not feasible in single-container suite`. Narrowing must keep real assertions (port open, file existence).
+Timeout: 180 is the sibling Java value (most common timeout among siblings). Every port in settings.yaml gets a probe (3000 included above). The `http /` probe may return non-200 until the DB is reachable; the DB-dependency exception (build-test-protocol) applies: `# narrowed: requires external mariadb and valkey; full functional test not feasible in single-container suite`. Narrowing must keep real assertions (port open, file existence).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -176,7 +177,7 @@ From `apps/plant-it`:
 3. `docker volume create plant-it-probe-config`
 4. `docker run --rm -d --name plant-it-probe --read-only --tmpfs /tmp -v plant-it-probe-config:/config plant-it:0.10.0`
 5. `docker logs -f plant-it-probe` until a readiness line appears (expected: Spring Boot "Started ..." or nginx start with no fatal). The DB is not running, so the container may log connection retries; this counts as positive only with the process still alive (protocol exception).
-6. `forgetool containers test --image plant-it:0.10.0 --config ./container-test.yaml`
+6. `forgetool containers test --image plant-it:0.10.0 --config ./apps/plant-it/container-test.yaml`
 7. Clean up: `docker rm -f plant-it-probe; docker volume rm plant-it-probe-config`.
 
 Arm64 only if an amd64-specific failure appears.

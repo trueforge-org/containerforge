@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | No GitHub releases (`releases/latest` returns 404). Pin the commit fetched: `1607349dea8ce7fb3b8e7ccfb0370d8103d31d61` (committed 2024-11-13). Chart uses mutable `xanderstrike/goplaxt:latest`, which is that same push (Docker Hub last pushed 2024-11-13). |
-| Renovate | UNVERIFIED for this repo (no releases). Use `// renovate: datasource=git-refs depName=https://github.com/XanderStrike/goplaxt currentValue=master` (precedent `apps/fenrus` plan; confirm against the existing repo convention before writing). |
+| Renovate | UNVERIFIED for this repo (no releases). Use `// renovate: datasource=git-refs depName=https://github.com/XanderStrike/goplaxt currentValue=master` (precedent `apps/tvheadend/docker-bake.hcl`, which uses the same `git-refs` form). |
 | License | MIT (https://api.github.com/repos/XanderStrike/goplaxt/license, LICENSE.txt) |
 | Source URL | https://github.com/XanderStrike/goplaxt |
 | Download | Source tarball `https://github.com/XanderStrike/goplaxt/archive/${VERSION}.tar.gz` with VERSION = commit SHA. No release binary. |
@@ -165,7 +165,7 @@ From `apps/plaxt`:
 3. `docker volume create plaxt-probe-config`
 4. `docker run --rm -d --name plaxt-probe --read-only --tmpfs /tmp -v plaxt-probe-config:/config plaxt:<VERSION>`
 5. `docker logs -f plaxt-probe`: expected readiness line is the server's listen message on port 8000 (UNVERIFIED exact text; read it from the source). The process must still be running.
-6. `forgetool containers test --image plaxt:<VERSION> --config ./container-test.yaml`
+6. `forgetool containers test --image plaxt:<VERSION> --config ./apps/plaxt/container-test.yaml`
 7. Clean up: `docker rm -f plaxt-probe; docker volume rm plaxt-probe-config`.
 
 Arm64 only if an amd64-specific failure appears (the build may fail on arm64 with the upstream `GOARCH` hard-code; that is the reason to use `TARGETARCH`).

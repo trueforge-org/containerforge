@@ -167,7 +167,7 @@ filePaths:
 - /usr/share/licenses/pinry/LICENSE
 ```
 
-Port 8000 has both `tcp` and `http` probes. The test runs with no env vars, so a missing `DJANGO_SECRET` path (if it refuses to start) must be checked by hand per the protocol. `timeoutSeconds: 120` follows the Django/Python sibling family (UNVERIFIED, confirm against `apps/bazarr`).
+Port 8000 has both `tcp` and `http` probes. The test runs with no env vars, so a missing `DJANGO_SECRET` path (if it refuses to start) must be checked by hand per the protocol. `timeoutSeconds: 120` is UNVERIFIED as a fit: `apps/bazarr` sets no `timeoutSeconds`; sibling `apps/changedetection` uses 180, so use 180 if startup is slow.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

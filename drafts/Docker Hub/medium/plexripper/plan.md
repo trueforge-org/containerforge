@@ -21,7 +21,7 @@
 | Data/config write paths | UNVERIFIED: the in-app config, SQLite/DB and download paths. Upstream only declares the volumes above. |
 | User | None in upstream (runs as root). |
 | Dependencies | No database service in the upstream Dockerfile. The Plex server connection needs a user-supplied Plex token at runtime (UNVERIFIED in fetched sources; draft inference). |
-| apt on Ubuntu 26.04 | UNVERIFIED: whether `dotnet-sdk-8.0` and `aspnetcore-runtime-8.0` exist in the 26.04 archive. Fenrus uses `dotnet-sdk-10.0` from the same archive, but 8.0 availability was not checked. |
+| apt on Ubuntu 26.04 | UNVERIFIED: whether `dotnet-sdk-8.0` and `aspnetcore-runtime-8.0` exist in the 26.04 archive. `apps/webgrabplus` installs dotnet from the same archive, but 8.0 availability was not checked. |
 
 ## 2. Target layout
 
@@ -35,7 +35,7 @@ No `defaults/`, `etc/`, `health/`, `root/` needed (the app creates its own state
 
 ## 3. Base image
 
-Build stages and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Ubuntu base is glibc, which .NET needs, and upstream's alpine base is not used. Closest siblings: `apps/sonarr` (dotnet app on the ubuntu base, `/config` as WORKDIR) and `apps/fenrus` (dotnet build stage plus runtime stage on ubuntu 26.04).
+Build stages and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Ubuntu base is glibc, which .NET needs, and upstream's alpine base is not used. Closest siblings: `apps/sonarr` (dotnet app on the ubuntu base, `/config` as WORKDIR) and `apps/webgrabplus` (dotnet on the ubuntu base).
 
 Frontend build (bun): upstream uses `oven/bun:1.1.45-alpine` (musl). Use a bun binary on the ubuntu build stage instead, or a glibc bun image (UNVERIFIED: which tag; check it exists before pinning). Node is not needed in the final image.
 
@@ -43,7 +43,7 @@ Frontend build (bun): upstream uses `oven/bun:1.1.45-alpine` (musl). Use a bun b
 
 1. Stage `frontend`: `FROM <ubuntu> AS frontend`. Install bun (pinned to `1.1.45` to match upstream; source of the binary and its checksum UNVERIFIED). Copy the repo's frontend subtree, `bun install --frozen-lockfile`, `bun run generate --fail-on-error`. Set `NUXT_HOST=0.0.0.0`, `NUXT_PUBLIC_IS_DOCKER=true`.
 2. Stage `backend`: `FROM <ubuntu> AS backend`, `ARG VERSION`, `ARG INFORMATIONAL_VERSION`, `USER root`. Install the .NET 8 SDK (`apt-get install dotnet-sdk-8.0` if the archive has it, otherwise `dotnet-install.sh --channel 8.0` with its checksum or pinned SDK UNVERIFIED). Then `DOTNET_CLI_HOME=/tmp`, `DOTNET_CLI_TELEMETRY_OPTOUT=1`, `DOTNET_NOLOGO=1`, `NUGET_PACKAGES=/tmp/nuget`.
-3. Source: `curl -fL https://github.com/PlexRipper/PlexRipper/archive/refs/tags/${VERSION}.tar.gz`, where `VERSION` is the tag without `v` (the tag is `v0.40.0`; confirm the tarball name). Extract with `--strip-components=1` to `/tmp/src`. Put the frontend output where the backend expects it (UNVERIFIED: the upstream Dockerfile copies it, the exact path was not visible in the summary; check the Dockerfile at the pinned tag).
+3. Source: `curl -fL https://github.com/PlexRipper/PlexRipper/archive/refs/tags/v${VERSION}.tar.gz`, where `VERSION` is the tag without `v` (bake `0.40.0`, tag `v0.40.0`; confirm the tarball name). Extract with `--strip-components=1` to `/tmp/src`. Put the frontend output where the backend expects it (UNVERIFIED: the upstream Dockerfile copies it, the exact path was not visible in the summary; check the Dockerfile at the pinned tag).
 4. `cd /tmp/src && dotnet restore "src/WebAPI/WebAPI.csproj" --locked-mode`, then `dotnet publish "src/WebAPI/WebAPI.csproj" -c Release -o /tmp/publish /p:AssemblyVersion=${VERSION} /p:InformationalVersion=${INFORMATIONAL_VERSION}`.
 5. Stage `final`: `FROM <ubuntu>`, `USER root`. Install the ASP.NET Core 8 runtime (`aspnetcore-runtime-8.0` from apt if available, or `dotnet-install.sh --runtime aspnetcore --channel 8.0` into `/usr/local/share/dotnet`, with checksums). Install only packages missing from the base (`libicu-dev` is already there). Clean apt lists.
 6. `mkdir -p /app/plexripper`, `COPY --from=backend /tmp/publish/ /app/plexripper/`, copy the frontend build output to the path the backend serves (see step 3). License: `COPY --from=backend /tmp/src/LICENSE /usr/share/licenses/plexripper/LICENSE` (path UNVERIFIED).
@@ -96,7 +96,7 @@ WORKDIR /config
 - `tcp` probe on `7000` (every port in `settings.yaml` needs a probe).
 - `http` probe on `7000` at `/` (the UI). Use a path confirmed to return 200 after the first start; `/` if unsure (UNVERIFIED).
 - `filePaths`: `/app/plexripper/<assembly>.dll` and the frontend entry file, to prove the build ran.
-- `timeoutSeconds`: take the value from `apps/sonarr/container-test.yaml` (dotnet siblings). A first start may compile or migrate data, so allow headroom.
+- `timeoutSeconds`: `apps/sonarr/container-test.yaml` sets none, so pick 180 (the most common repo value). A first start may compile or migrate data, so allow headroom.
 - The test runs without env vars. The Plex token and server settings are not required to start, so no `filePaths` for required-env paths are expected. Verify in step 11.
 
 ## 9. Rootless and read-only-rootfs adaptations

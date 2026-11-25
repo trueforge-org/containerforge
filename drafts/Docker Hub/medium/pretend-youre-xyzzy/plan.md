@@ -5,10 +5,10 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | No GitHub releases (https://api.github.com/repos/ajanata/PretendYoureXyzzy/releases/latest returns 404). Source only. Latest upstream commit state not pinned in this run. The chart image is `cyb3rjak3/dockeryourxyzzy:on-demand-v2.1.1`, built from the Cyb3r-Jak3 Dockerfile. The version to pin is UNVERIFIED: pin a commit SHA of `ajanata/PretendYoureXyzzy` (`master`, last push 2026-10-23) and record it in `VERSION`. |
+| Version to build | No GitHub releases (https://api.github.com/repos/ajanata/PretendYoureXyzzy/releases/latest returns 404). Source only. Candidate pin: `master` HEAD `10525012c69c76d902148828ff946545563faf80` (committed 2026-10-23, read via the GitHub commits API in this run). The chart image is `cyb3rjak3/dockeryourxyzzy:on-demand-v2.1.1`, built from the Cyb3r-Jak3 Dockerfile. The version to pin is UNVERIFIED: pin a commit SHA of `ajanata/PretendYoureXyzzy` (`master`, last push 2026-10-23) and record it in `VERSION`. |
 | Repository state | `ajanata/PretendYoureXyzzy`: archived=true, last push 2026-10-23, license BSD-2-Clause (https://api.github.com/repos/ajanata/PretendYoureXyzzy). The README says the project is retired and not maintained. |
 | Packaging repo | `Cyb3r-Jak3/DockerYourXyzzy`: BSD-2-Clause, not archived, last push 2026-06-23, no releases (https://api.github.com/repos/Cyb3r-Jak3/DockerYourXyzzy). Its Dockerfile at `fade38c9e0b94c1294360a1f4697ab167dbd3d09` was reviewed (https://raw.githubusercontent.com/Cyb3r-Jak3/DockerYourXyzzy/fade38c9e0b94c1294360a1f4697ab167dbd3d09/Dockerfile, summary via WebFetch). |
-| Renovate | UNVERIFIED: no release tags. Use `datasource=git-refs depName=https://github.com/ajanata/PretendYoureXyzzy currentValue=master` (precedent `apps/tvheadend`, per the fenrus plan). Pin a SHA in `VERSION`. |
+| Renovate | UNVERIFIED: no release tags. Use `datasource=git-refs depName=https://github.com/ajanata/PretendYoureXyzzy currentValue=master` (precedent `apps/tvheadend/docker-bake.hcl`). Pin a SHA in `VERSION`. |
 | License | BSD-2-Clause (GitHub SPDX). |
 | Source URL | https://github.com/ajanata/PretendYoureXyzzy |
 | Binary | None. No prebuilt WAR is published. Build from source (Maven). |
@@ -39,10 +39,10 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). Keep the schema head
 
 Draft: `java17` runtime. Recommended: the Java stack that matches what upstream was run on, which is JDK 11 with Tomcat 10.1. Pick between two options after the first build, not before:
 
-- Option A (recommended for the first build): `FROM ghcr.io/trueforge-org/java11:<tag>@<digest>`. Copy the `FROM` line from `apps/java11/Dockerfile`. JDK 11 matches the Cyb3r image, and the Tomcat runtime is installed separately.
+- Option A (recommended for the first build): `FROM ghcr.io/trueforge-org/java11:<tag>@<digest>`. No downstream app uses `ghcr.io/trueforge-org/java11` yet (UNVERIFIED tag and digest): take them from the published java11 image for `apps/java11` (bake `VERSION` `11.0.29+7`) and copy the form used by `apps/doplarr` for java21. `apps/java11/Dockerfile` itself is built `FROM` the ubuntu base, so do not copy its `FROM` line. JDK 11 matches the Cyb3r image, and the Tomcat runtime is installed separately.
 - Option B (draft default): `apps/java17`. Use only if the build fails on JDK 11 (the project's Maven and javac target are UNVERIFIED).
 
-Build stage: `FROM ghcr.io/trueforge-org/java<N>` as the build image too (it has JDK; confirm `javac` and `mvn` are in it, or install Maven in the build stage). Closest siblings: `apps/nzbhydra2` and `apps/airsonic-advanced` (Java apps with the same layout). Check their `Dockerfile` for the Tomcat/Jetty pattern before writing.
+Build stage: `FROM ghcr.io/trueforge-org/java<N>` as the build image too (it has JDK; confirm `javac` and `mvn` are in it, or install Maven in the build stage). Closest siblings: `apps/nzbhydra2` and `apps/airsonic-advanced` (Java apps on the java base). Whether either uses a Tomcat or Jetty pattern is UNVERIFIED; check their `Dockerfile` before writing.
 
 ## 4. Dockerfile
 
@@ -93,7 +93,7 @@ Tomcat's `CATALINA_BASE` under `/config` is a writable tree, so `start.sh` seeds
 - `tcp` probe on `8080`.
 - `http` probe on `8080` at `/` (the app's welcome page). Use a path confirmed on a running container (UNVERIFIED).
 - `filePaths`: `/app/tomcat/webapps/ROOT.war` (or the exploded `ROOT/` dir), `/app/tomcat/bin/catalina.sh`.
-- `timeoutSeconds`: from `apps/nzbhydra2` or `apps/airsonic-advanced` (Java siblings). Tomcat with a WAR deploy takes time, so allow headroom.
+- `timeoutSeconds`: those Java siblings (`apps/nzbhydra2`, `apps/airsonic-advanced`) set none; other Java apps (`apps/davos`, `apps/ubooquity`) use 180, so use 180. Tomcat with a WAR deploy takes time, so allow headroom.
 - The test runs with no env. The app must start on an empty `/config`. There is no env path to hide.
 
 ## 9. Rootless and read-only-rootfs adaptations

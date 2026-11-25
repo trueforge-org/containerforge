@@ -15,6 +15,7 @@
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/meisnate12/Plex-Meta-Manager/v1.21.0/Dockerfile. `FROM python:3.11-slim-buster`; `ARG BRANCH_NAME=master`; `ENV TINI_VERSION v0.19.0`, `ENV PMM_DOCKER True`; apt build deps (`gcc g++ libxml2-dev libxslt-dev libz-dev libjpeg62-turbo-dev zlib1g-dev wget curl`) installed then purged; `tini` downloaded to `/tini`; `COPY requirements.txt`, `pip3 install --no-cache-dir --upgrade --requirement /requirements.txt`; `COPY . /`; `ENTRYPOINT ["/tini", "-s", "python3", "plex_meta_manager.py", "--"]`; `VOLUME /config`; no USER (root); no EXPOSE. |
 | Env vars | Upstream image sets `PMM_DOCKER=True`, `TINI_VERSION`, `BRANCH_NAME` (build arg). User-facing runtime env vars: UNVERIFIED (not in the Dockerfile). |
 | Ports | None (no EXPOSE, no listener expected). Matches the draft. |
+| Docs | https://metamanager.wiki/ and https://kometa.wiki/en/latest/ (carried over from the draft; not fetched). |
 | Data paths | `/config` (VOLUME). Holds the user `config.yml` (created by the user, draft caveat, UNVERIFIED that the app reads `/config/config.yml`). |
 | arm64 | Docker Hub `meisnate12/plex-meta-manager:v1.21.0` has amd64 and arm64 images (https://hub.docker.com/v2/repositories/meisnate12/plex-meta-manager/tags). Source install is arch-neutral except for wheels with native code (`lxml`, `Pillow`, `PyYAML` etc.), which need arm64 wheels or the build deps. |
 | copy-from | Not used. The upstream image is the app plus its Python tree; this plan installs from source instead, as the draft's reason states. |
@@ -41,7 +42,7 @@ Note the upstream image is Debian buster (3.11-slim-buster, EOL). The ContainerF
 ## 4. Dockerfile
 
 1. `FROM <python base> AS runtime`, `ARG VERSION` (matches bake), `ARG TARGETARCH`, `USER root`.
-2. Fetch the pinned source: `curl -fL -o /tmp/pmm.tar.gz https://github.com/Kometa-Team/Kometa/archive/refs/tags/${VERSION}.tar.gz`, verify sha256 recorded in the build, then `tar xzf /tmp/pmm.tar.gz -C /app/plex-meta-manager --strip-components=1`.
+2. `mkdir -p /app/plex-meta-manager`. Fetch the pinned source: `curl -fL -o /tmp/pmm.tar.gz https://github.com/Kometa-Team/Kometa/archive/refs/tags/${VERSION}.tar.gz`, verify sha256 recorded in the build, then `tar xzf /tmp/pmm.tar.gz -C /app/plex-meta-manager --strip-components=1`.
 3. Native wheels: install build deps only if a wheel is missing for arm64 (`apt-get install -y --no-install-recommends gcc g++ libxml2-dev libxslt-dev zlib1g-dev libjpeg-dev`), then purge them in the same layer. Do not install `tzdata` or `wget` if the base has them.
 4. Install requirements into the venv: `/app/venv/bin/pip install --no-cache-dir -r /app/plex-meta-manager/requirements.txt`. Pip cache in `/tmp` (`PIP_CACHE_DIR=/tmp/pip`). Do not write to `/app/venv` at runtime (only at build).
 5. `ENV PMM_DOCKER=True HOME=/config`. Caches to `/tmp`.
@@ -130,7 +131,7 @@ Notes:
 
 ## 8. container-test.yaml
 
-No ports, so no tcp or http probes. Use the form of a sibling with no network listener (search `apps/*/container-test.yaml` for one without `tcp:` or `http:` at build time and copy its shape, UNVERIFIED key names for process checks in forgetool).
+No ports, so no tcp or http probes. Use the form of a sibling with no network listener (for example `apps/autoscan/container-test.yaml` or `apps/actions-runner/container-test.yaml`, which have no `tcp:` or `http:`; copy its shape, UNVERIFIED key names for process checks in forgetool).
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
@@ -141,7 +142,7 @@ filePaths:
 - /usr/share/licenses/plex-meta-manager/LICENSE
 ```
 
-Test runs without env vars and without a `config.yml`, so the app will exit or log the missing config. The protocol's readiness check (process still running, positive signal in logs) does not fit a run that exits without config: either supply a minimal config through a fresh `/config` volume in the local run (protocol step 3), or narrow the test with the protocol's rules and say so. Do not invent a passing assertion. Timeout 120 is a guess from a Python sibling; confirm with `apps/bazarr/container-test.yaml`.
+Test runs without env vars and without a `config.yml`, so the app will exit or log the missing config. The protocol's readiness check (process still running, positive signal in logs) does not fit a run that exits without config: either supply a minimal config through a fresh `/config` volume in the local run (protocol step 3), or narrow the test with the protocol's rules and say so. Do not invent a passing assertion. Timeout 120 is UNVERIFIED: `apps/bazarr` sets no `timeoutSeconds`; the repo values are 120 to 600 (180 most common).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -173,7 +174,7 @@ From `apps/plex-meta-manager`:
 3. `docker volume create plex-meta-manager-probe-config`
 4. `docker run --rm -d --name plex-meta-manager-probe --read-only --tmpfs /tmp -v plex-meta-manager-probe-config:/config plex-meta-manager:v1.21.0`
 5. `docker logs -f plex-meta-manager-probe`: with an empty `/config`, expect the "no config" message and a clean exit or a wait state. Record which. The protocol's pass criteria need a process still running plus a readiness signal, so run once with a minimal `config.yml` seeded into the volume (test data only, no secrets) to observe the real readiness line (UNVERIFIED text).
-6. `forgetool containers test --image plex-meta-manager:v1.21.0 --config ./container-test.yaml`
+6. `forgetool containers test --image plex-meta-manager:v1.21.0 --config ./apps/plex-meta-manager/container-test.yaml`
 7. Clean up: `docker rm -f plex-meta-manager-probe; docker volume rm plex-meta-manager-probe-config`.
 
 ## 12. PR checklist

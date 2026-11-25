@@ -170,7 +170,7 @@ filePaths:
 - /usr/share/licenses/pigallery2/LICENSE
 ```
 
-Port 8080 has both a `tcp` and an `http` probe. `timeoutSeconds: 120` follows the sibling Node apps (UNVERIFIED: confirm against `apps/changedetection`). The file path `index.js` is UNVERIFIED: the upstream entrypoint is `./src/backend/index`, so the built file may be `.js` or compiled. Check after the build.
+Port 8080 has both a `tcp` and an `http` probe. `timeoutSeconds: 120` is a starting value; the sibling `apps/changedetection` uses 180, so raise it to 180 if startup is slow. The file path `index.js` is UNVERIFIED: the upstream entrypoint is `./src/backend/index`, so the built file may be `.js` or compiled. Check after the build.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

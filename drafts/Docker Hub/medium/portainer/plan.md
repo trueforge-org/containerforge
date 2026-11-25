@@ -17,6 +17,7 @@
 | Tarball layout | Top-level `portainer/`, containing `portainer/portainer` (the binary), `portainer/public/` (UI assets), `portainer/mustache-templates/`. Extract with `--strip-components=1`. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/portainer/portainer/505380c8eecff08cf513c457494bde91634db9ff/build/linux/Dockerfile (summary via WebFetch). It does `FROM portainer/base AS production`, `EXPOSE 9000`, `EXPOSE 9443`, `EXPOSE 8000`, `VOLUME /data`, `WORKDIR /`, `ENTRYPOINT ["/portainer"]`, no `USER`, no `ENV`, `ARG GIT_COMMIT`, `ARG BUILD_DATE`. |
 | Ports | 9000/tcp (HTTP UI), 9443/tcp (HTTPS UI), 8000/tcp (edge agent tunnel). Source: upstream `EXPOSE`. |
+| Docs | https://docs.portainer.io/ , https://docs.portainer.io/start/install-ce/server , https://www.portainer.io (carried over from the draft; not fetched). |
 | Data path | `/data` (upstream `VOLUME /data`). Our image uses `/config`, see section 9. |
 | Env vars | UNVERIFIED: the upstream Dockerfile sets none. Portainer CLI flags (`--data`, `--bind`, `--bind-https`, `--tunnel-port`, `--admin-password-file`, `--http-disabled`) and any matching env names were not confirmed on a fetched page in this run. Confirm with `/app/portainer --help` in the built image before writing `settings.yaml` `env`. |
 | Binary architectures | amd64 and arm64 tarballs exist. Also ppc64le, arm (v7) and Windows tarballs, out of scope. |
@@ -39,7 +40,7 @@ No `defaults/`, `etc/`, `health/`, `root/` needed (the app creates its own data 
 
 ## 4. Dockerfile
 
-1. `ARG VERSION`, `ARG TARGETARCH`, `ARG VENDOR`, `USER root`, `WORKDIR /app`.
+1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`, `WORKDIR /app`.
 2. Map the arch: `amd64 -> amd64`, `arm64 -> arm64`. Use `${TARGETARCH}` directly (the release names match).
 3. Download and verify, in one `RUN`:
    ```sh
@@ -78,7 +79,8 @@ Sample `RUN` ordering: keep `USER root` only for the download and extract, then 
 - `#!/bin/sh`, `set -eu` (match the sibling Go-binary app style).
 - Create `/config/portainer` (or the chosen data directory) only if missing. Never write under `/app`.
 - Caches and temp: `TMPDIR=/tmp`. Portainer's own caches (if any) under `/tmp`, not `/config` (UNVERIFIED: which cache paths the binary uses; the draft's `/.cache` is a chart-side emptyDir, not confirmed).
-- Start command: `exec /app/portainer --data /config/portainer --bind 0.0.0.0:9000 --bind-https 0.0.0.0:9443 --tunnel-port 8000` (flag names UNVERIFIED, use exactly what `--help` prints for `2.45.4`; no admin password on the command line).
+- Working directory: the tarball puts `public/` next to the binary and upstream runs from `/` with the binary beside `public/`, so the binary is expected to find its UI assets relative to the current directory (UNVERIFIED: confirm the asset flag or default in `--help`). The Dockerfile ends with `WORKDIR /config`, so `start.sh` must `cd /app` before the exec (or pass the real assets flag).
+- Start command: `cd /app && exec /app/portainer --data /config/portainer --bind 0.0.0.0:9000 --bind-https 0.0.0.0:9443 --tunnel-port 8000` (flag names UNVERIFIED, use exactly what `--help` prints for `2.45.4`; no admin password on the command line).
 - Bind all interfaces (`0.0.0.0`), as the start-script rule requires.
 - Final line `exec` so the binary is PID 1 handoff.
 
@@ -88,7 +90,7 @@ Sample `RUN` ordering: keep `USER root` only for the download and extract, then 
 - `tcp` probe for `9000` and `8000`. `9443` gets a TCP probe too (the coverage minimum says every port in `settings.yaml` needs a probe), but if TLS is not enabled in the test it may not listen. Check at build time and leave it only if it listens without certs (UNVERIFIED).
 - `http` probe on `9000` at `/api/status` (Portainer status endpoint, UNVERIFIED path: confirm from a running container) or `/`. Use the path that returns 200 without setup.
 - `filePaths`: `/app/portainer` (binary), `/app/public/index.html` (UI).
-- `timeoutSeconds`: from `apps/sonarr` or a Go sibling. Portainer starts in seconds.
+- `timeoutSeconds`: `apps/sonarr` sets none; use 120 (Portainer starts in seconds).
 - The test runs with no env. Portainer must start with an empty `/config`. The admin first-run window is a runtime concern, not a test one (UNVERIFIED window length from the draft).
 
 ## 9. Rootless and read-only-rootfs adaptations
