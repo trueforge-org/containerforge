@@ -48,7 +48,7 @@ Why: standalone Go binary plus system libvips. Closest sibling: `apps/adguardhom
    - `curl -fsSL -o /app/webp-server "https://github.com/webp-sh/webp_server_go/releases/download/${VERSION}/webp-server-linux-${TARGETARCH}"`
    - Verify against the upstream checksum if one exists (see section 1).
    - `chmod 0755 /app/webp-server && chown -R apps:apps /app`
-   - `mkdir -p /opt/pics && chown apps:apps /opt/pics` (empty mount point for source images)
+   - `mkdir -p /opt/pics /usr/share/licenses/webp-server && chown apps:apps /opt/pics` (empty mount point for source images)
    - `readelf -d /app/webp-server | grep NEEDED` (build-time sanity, remove once known)
    - License: fetch `https://raw.githubusercontent.com/webp-sh/webp_server_go/${VERSION}/LICENSE` to `/usr/share/licenses/webp-server/LICENSE`.
 4. `ENV GOCACHE=/tmp/go-build WEBP_EXHAUST_PATH=/tmp/exhaust` (caches in `/tmp`).

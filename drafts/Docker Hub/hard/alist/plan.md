@@ -53,7 +53,7 @@ Alist is a static-ish Go release binary, so no language runtime is needed. Close
        chown -R apps:apps /app && chmod -R 755 /app && rm -f /tmp/alist.tar.gz /tmp/md5.txt
    ```
 5. Only the `alist` binary is extracted, so the AGPL `LICENSE` is shipped separately to `/usr/share/licenses/alist/`.
-6. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 5244 6800`, `VOLUME /config`.
+6. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 5244` (6800 is not exposed or listed in `settings.yaml` while aria2 is opt-in), `VOLUME /config`.
 7. Do not add `INSTALL_FFMPEG`; it is an upstream opt-in and out of scope.
 
 ## 5. docker-bake.hcl

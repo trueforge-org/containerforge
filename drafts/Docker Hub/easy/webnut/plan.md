@@ -52,7 +52,7 @@ Why: pure Python web app, matches the draft. The base provides `/app/venv`, `pip
    - `/app/venv/bin/pip install --no-cache-dir -e /app/webNUT` (editable, same as upstream wrapper, so `production.ini` and templates stay in `/app/webNUT`). Alternative if editable installs misbehave on a read-only tree: non-editable install plus copy of `production.ini`.
    - `cp /app/webNUT/LICENSE /usr/share/licenses/webnut/LICENSE`
    - `chown -R apps:apps /app && chmod -R 755 /app && rm -rf /tmp/* /root/.cache`
-4. `COPY defaults/config.py /app/webNUT/webnut/config.py` before the chown step (it replaces the need for an `/app` write at runtime).
+4. `COPY defaults/config.py /app/webNUT/webnut/config.py` (placed before the `RUN` of step 3 would fail as the tree does not exist yet, so use `COPY --chown=apps:apps --chmod=0644` after that `RUN`) (it replaces the need for an `/app` write at runtime).
 5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 6543`, `VOLUME /config`, `WORKDIR /config`.
 
 `defaults/config.py` (no secret ever lands on disk; the app reads the environment at import time):
@@ -71,16 +71,16 @@ UNVERIFIED: whether `nut2-notl` expects `port` as int or str (upstream example u
 
 ```hcl
 variable "APP" { default = "webnut" }
-variable "VERSION" {
+variable "VERSION" { default = "0.0.1" }
+variable "COMMIT" {
   // renovate: datasource=git-refs depName=https://github.com/rshipp/webNUT currentValue=main
-  default = "0.0.1"
+  default = "31f6d4a4d6f3e2db4f076924c882eaa913223a0c"
 }
-variable "COMMIT" { default = "31f6d4a4d6f3e2db4f076924c882eaa913223a0c" }
 variable "LICENSE" { default = "BSD-3-Clause" }
 variable "SOURCE"  { default = "https://github.com/rshipp/webNUT" }
 ```
 
-Because Renovate's git-refs datasource tracks the digest, attach the comment to `COMMIT` rather than `VERSION` when implementing (VERSION is a static label). `target "image"` passes `VERSION` and `COMMIT` as args. Standard targets as in `apps/adguardhome-sync/docker-bake.hcl`: `docker-metadata-action`, `image`, `image-local`, `image-all` (amd64, arm64), `group "default"`. Run `docker buildx bake --print`.
+The Renovate comment sits on `COMMIT` (git-refs tracks the commit); `VERSION` is a static label. `target "image"` passes `VERSION` and `COMMIT` as args. Standard targets as in `apps/adguardhome-sync/docker-bake.hcl`: `docker-metadata-action`, `image`, `image-local`, `image-all` (amd64, arm64), `group "default"`. Run `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
