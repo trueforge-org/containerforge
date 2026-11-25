@@ -9,12 +9,12 @@ Naming note: the draft folder is `multus-cni`, but the image is the `crane` CLI 
 |---|---|
 | Version | `0.22.1` (tag `v0.22.1`, Latest; chart uses `alpine/crane:0.22.1`, same) |
 | Renovate | `datasource=github-releases depName=google/go-containerregistry versioning=semver` |
-| License | Apache-2.0 (UNVERIFIED by file read; well known for go-containerregistry, confirm with the shipped LICENSE) |
+| License | Apache-2.0 (GitHub license API; the release tarball ships `LICENSE`) |
 | Source URL | https://github.com/google/go-containerregistry |
 | amd64 asset | https://github.com/google/go-containerregistry/releases/download/v0.22.1/go-containerregistry_Linux_x86_64.tar.gz |
 | arm64 asset | https://github.com/google/go-containerregistry/releases/download/v0.22.1/go-containerregistry_Linux_arm64.tar.gz |
-| Checksum source | `checksums.txt` in the same release (verified in asset list; also `multiple.intoto.jsonl` provenance). Line format assumed goreleaser standard `<sha256>  <file>` (UNVERIFIED). |
-| Archive contents | goreleaser builds `crane`, `gcrane`, `krane` (verified from `.goreleaser.yml`, CGO off, static). Exact tar layout/LICENSE inclusion UNVERIFIED, check with `tar tzf`. |
+| Checksum source | `checksums.txt` in the same release (verified in asset list; also `multiple.intoto.jsonl` provenance). Line format `<sha256>  <file>` (verified). |
+| Archive contents | goreleaser builds `crane`, `gcrane`, `krane` (verified from `.goreleaser.yml`, CGO off, static). The amd64 tarball holds `crane`, `gcrane`, `krane`, `LICENSE`, `README.md` at its root (inspected; arm64 UNVERIFIED). `crane version` prints the ldflags value `{{.Version}}`, i.e. `0.22.1` without `v` (from `.goreleaser.yml` and `version.go`). |
 | Upstream Dockerfile reviewed | `alpine-docker/crane/Dockerfile` (named in draft): NOT fetched, UNVERIFIED. Not needed; we install the release tarball. |
 | Ports / env / data | None. crane is a CLI; reads `~/.docker/config.json` (or `DOCKER_CONFIG`) for registry auth (standard crane behavior, UNVERIFIED in this session). |
 | Other assets | `go-containerregistry-0.22.1.tar.gz` (source), many OS/arch tarballs |
@@ -47,7 +47,7 @@ Why: static Go CLI, glibc irrelevant, `curl`, `tar`, `ca-certificates`, `bash`, 
    - `curl -fsSL -o /tmp/crane.tar.gz "$base/go-containerregistry_Linux_${A}.tar.gz"`; `curl -fsSL -o /tmp/checksums.txt "$base/checksums.txt"`.
    - Verify: `cd /tmp && grep " go-containerregistry_Linux_${A}.tar.gz\$" checksums.txt | sha256sum -c -`.
    - Extract only the CLI: `mkdir /tmp/crane && tar xzf /tmp/crane.tar.gz -C /tmp/crane`, `install -m 0755 /tmp/crane/crane /usr/local/bin/crane` (binary under `/usr/local/bin` so `/app` stays empty for downstream consumers; allowed by the Dockerfile rules).
-   - License: `mkdir -p /usr/share/licenses/crane`; copy `LICENSE*` from the tarball, else `curl` `https://raw.githubusercontent.com/google/go-containerregistry/v${VERSION}/LICENSE`. Only part of the archive is extracted, so shipping the license is required.
+   - License: `mkdir -p /usr/share/licenses/crane`; `cp /tmp/crane/LICENSE /usr/share/licenses/crane/`. Only part of the archive is extracted, so shipping the license is required.
    - `rm -rf /tmp/*`.
 3. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /config`.
 4. No `EXPOSE` (no port). `VOLUME /config` (registry credentials under `$HOME/.docker`).
@@ -96,19 +96,22 @@ Idempotent, writes nothing, no config seeding needed. Without arguments it print
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
 # crane is a CLI with no port or long-running process; verify the install instead.
-filePaths:
-- /usr/local/bin/crane
-- /usr/share/licenses/crane
+# forgetool skips filePaths when mainRunner is disabled, so files are checked by runners.
 runners:
 - entrypoint: /usr/local/bin/crane
-  cmd: version
-  expectedOutput: 0.22.1
+  cmd: --help
+  expectedOutput: tool for managing container images
+  exitCode: 0
+- entrypoint: /usr/bin/ls
+  cmd: /usr/share/licenses/crane/LICENSE
+  expectedOutput: /usr/share/licenses/crane/LICENSE
+  exitCode: 0
 
 mainRunner:
   enabled: false
 ```
 
-Pattern copied from `apps/limnoria/container-test.yaml` (runners + disabled mainRunner; cmd kept space-free). No ports in settings.yaml, so no tcp probe is required. `expectedOutput` text (`crane version` prints the version) is UNVERIFIED; confirm and keep the assertion real.
+Pattern based on `apps/limnoria/container-test.yaml` (runners + disabled mainRunner; cmd kept space-free). No ports in settings.yaml, so no tcp probe is required. The version string is not asserted here, because a hard-coded version would fail on every Renovate bump; check `crane version` by hand (section 11). The `--help` text comes from `cmd/crane/cmd/root.go` (printed output UNVERIFIED until run).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -120,7 +123,8 @@ Pattern copied from `apps/limnoria/container-test.yaml` (runners + disabled main
 - Draft caveat: Kubernetes node component only; this image is just a CLI helper.
 - Open: confirm what command the chart runs in the sidecar and whether it needs `sh`, `cp`, `tar` (present in ubuntu base) or root to write to hostPath.
 - Open: app name `crane` vs `multus-cni`.
-- Tarball layout/checksum format UNVERIFIED; first build round must `tar tzf` and fix extraction paths.
+- arm64 tarball contents UNVERIFIED (amd64 layout and checksum format verified).
+- The build-test protocol expects a container that stays running; a CLI image exits, so only the `sleep` run and the runners apply.
 - No blockers: static, both arches published.
 
 ## 11. Build and test steps
@@ -143,4 +147,4 @@ Readiness signal: `crane version` prints `0.22.1` and exits 0; with no arguments
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`; `🤖 This PR is AI generated.` in Notes; check only applicable boxes.
 - CLA notice for the user: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Confirm bake VERSION == Dockerfile ARG, `bake --print`, `USER apps`, checksum verified, license shipped.
-- Untested at planning time: build, arm64, tarball layout, `expectedOutput`, the chart's actual sidecar command.
+- Untested at planning time: build, arm64, the test runners, the chart's actual sidecar command.

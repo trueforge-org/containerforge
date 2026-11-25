@@ -5,15 +5,15 @@
 
 | Item | Value |
 |---|---|
-| Version | No releases or tags upstream (README lists only `latest`). Pin the draft's commit `a1c6bede2351d2912dcd25e7d15e30f82be6b12f`. Whether it is still master HEAD is UNVERIFIED (134 commits on master; the last-commit date was not shown). Re-check HEAD at implementation time. |
+| Version | No releases or tags upstream. Pin master HEAD `393458057f1380dd0f83bed447c6ac740e342a08` (2026-11-14, checked 2026-11-25). The draft's commit `a1c6bede2351d2912dcd25e7d15e30f82be6b12f` is 5 commits older; the diff touches only `.gitattributes` and `.github/workflows/`, so `src/` and `conf/` are identical. |
 | Renovate | `datasource=git-refs depName=https://github.com/modem7/Docker-NewYearCountdown currentValue=master` |
-| License | MIT (LICENSE in repo root). The countdown code is credited to patrickgold/newyear-countdown; its license is UNVERIFIED, check before shipping. SPDX `MIT`. |
+| License | MIT (LICENSE in repo root), SPDX `MIT`. The countdown is credited to patrickgold/newyear-countdown, which GitHub also reports as MIT. |
 | Source URL | https://github.com/modem7/Docker-NewYearCountdown |
 | Download | `https://github.com/modem7/Docker-NewYearCountdown/archive/<sha>.tar.gz` (source archive; static files, arch-independent) |
 | Checksum source | None; commit SHA pin only. |
 | Layout | `src/` (`index.html`, `countdown.html`, `countdown.js`, `countdown.css`, `countdown.scss`, `favicon.svg`), `conf/nginx-site.conf`, `Dockerfile`, `LICENSE`, `README.md`. |
 | Upstream Dockerfile | `nginxinc/nginx-unprivileged` alpine, copies `src/` to `/usr/share/nginx/html/`, `conf/nginx-site.conf` to `/etc/nginx/conf.d/default.conf`, EXPOSE 8080, healthcheck `curl 127.0.0.1:8080/healthz`, runs as UID 101. |
-| nginx-site.conf | listen 8080, `/healthz` returns 200, `try_files`, static asset `expires 5d`, 404 -> `/index.html`, security headers (nosniff, X-Frame-Options DENY, no-referrer, CSP same-origin with inline script/style), gzip level 6. |
+| nginx-site.conf | listen 8080, `location /healthz` returns 200, `location /` uses `try_files $uri $uri/ =404`, `error_page 404 /index.html`, static asset `expires 5d`, security headers (nosniff, X-Frame-Options DENY, no-referrer, CSP `default-src 'self'` with inline script/style), gzip level 6. `index.html` is a meta refresh to `countdown.html`; no external URLs were found in the HTML, JS or CSS. |
 | Ports | 8080/tcp (HTTP). The draft's 8080 matches. |
 | Env | None read by the app. |
 
@@ -26,7 +26,6 @@ apps/newyearcountdownclock/
   settings.yaml
   container-test.yaml
   defaults/default.conf     # site config adapted from upstream conf/nginx-site.conf
-  docker-entrypoint.d/10-copyconfig.sh   # only if the base's 03 script does not already seed it (see section 7)
 ```
 
 No `start.sh`: the nginx base runs `nginx -c /config/nginx.conf` through the ubuntu entrypoint (same as `apps/it-tools`, which has no start.sh). No `root/`. No `DOWNSTREAM_CHANGES.md`.
@@ -47,14 +46,14 @@ Why: static site, exactly what `apps/it-tools` and `apps/theme-park` do. `curl` 
    - `cp /tmp/src/LICENSE /usr/share/licenses/newyearcountdownclock/`
    - `chown -R 568:568 /usr/share/nginx/html && chmod -R 755 /usr/share/nginx/html`; `rm -rf /tmp/src`.
    - Do not copy `countdown.scss` if size matters (harmless otherwise).
-3. `COPY --chmod=0755 . /` (brings `defaults/` and `docker-entrypoint.d/` from the allow-list).
-4. `USER apps`; `COPY --chmod=0755 . /` as the final directive pair; `WORKDIR /usr/share/nginx/html` (like it-tools).
+3. `USER apps`; `COPY --chmod=0755 . /` (brings `defaults/` from the allow-list; overrides the base's `/defaults/default.conf`).
+4. `WORKDIR /usr/share/nginx/html` (like it-tools).
 5. `EXPOSE 8080` is inherited from the base; repeat for clarity. `VOLUME /config`.
 6. No `CMD`: inherit the base `CMD ["nginx","-c","/config/nginx.conf","-g","daemon off;"]`.
 
 ## 5. docker-bake.hcl
 
-`APP=newyearcountdownclock`; `VERSION` default `"a1c6bede2351d2912dcd25e7d15e30f82be6b12f"` (update if HEAD moved) preceded by `// renovate: datasource=git-refs depName=https://github.com/modem7/Docker-NewYearCountdown currentValue=master`; `LICENSE="MIT"`; `SOURCE="https://github.com/modem7/Docker-NewYearCountdown"`. Four standard targets plus `group "default"` per `apps/it-tools/docker-bake.hcl`. Validate with `docker buildx bake --print`.
+`APP=newyearcountdownclock`; `VERSION` default `"393458057f1380dd0f83bed447c6ac740e342a08"` (update if HEAD moved) preceded by `// renovate: datasource=git-refs depName=https://github.com/modem7/Docker-NewYearCountdown currentValue=master`; `LICENSE="MIT"`; `SOURCE="https://github.com/modem7/Docker-NewYearCountdown"`. Four standard targets plus `group "default"` per `apps/it-tools/docker-bake.hcl`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -79,7 +78,7 @@ volumes:
 
 ## 7. start.sh
 
-Not applicable: no `start.sh` is shipped (nginx base entrypoint, see `apps/it-tools`). Config seeding is handled by the `docker-entrypoint.d` scripts, which must stay idempotent:
+Not applicable: no `start.sh` is shipped (nginx base entrypoint, see `apps/it-tools`). Config seeding is handled by the base's `docker-entrypoint.d/03-copyconfig.sh`, so this app adds no script:
 
 `defaults/default.conf` (own file, content adapted from upstream `conf/nginx-site.conf`, verified behaviors only):
 
@@ -90,13 +89,16 @@ server {
     server_name _;
     root /usr/share/nginx/html;
 
-    location = /healthz { access_log off; return 200; }
-    location / { try_files $uri $uri/ /index.html; }
+    index index.html;
+    error_page 404 /index.html;
+
+    location /healthz { return 200; }
+    location / { try_files $uri $uri/ =404; }
     # plus the upstream gzip block, `expires 5d` asset location and security headers
 }
 ```
 
-Because the base's `03-copyconfig.sh` does `cp -n /defaults/default.conf /config/sites/default.conf` and our `COPY . /` overrides `/defaults/default.conf`, the file is seeded only when missing. Verify this in round 1; if the base script does not run first, add `docker-entrypoint.d/10-copyconfig.sh` doing `mkdir -p /config/sites && cp -n /defaults/default.conf /config/sites/default.conf` (use `cp -n`, unlike it-tools which overwrites on every start). Copy the full upstream header values (CSP etc.) from `conf/nginx-site.conf` at the pinned commit rather than from this summary.
+Because the base's `03-copyconfig.sh` does `cp -n /defaults/default.conf /config/sites/default.conf` and our `COPY . /` overrides `/defaults/default.conf`, the file is seeded only when missing. Verify this in round 1. Because of `cp -n`, a later change to the shipped `default.conf` does not reach an existing `/config`. Copy the full upstream header values (CSP etc.) from `conf/nginx-site.conf` at the pinned commit rather than from this summary.
 
 ## 8. container-test.yaml
 
@@ -110,6 +112,7 @@ http:
   path: /healthz
 filePaths:
 - /usr/share/nginx/html/index.html
+- /usr/share/nginx/html/countdown.html
 - /usr/share/nginx/html/countdown.js
 ```
 
@@ -119,14 +122,13 @@ Port 8080 is the only port in settings.yaml and has an HTTP probe. Timeout: ngin
 
 - nginx writes: pid `/tmp/nginx.pid`, temp and cache dirs under `/tmp` (set in the base's `/config/nginx.conf`), logs to stdout/stderr. Site content in `/usr/share/nginx/html` is read-only at runtime.
 - Draft says chart runs as UID 0 with writable rootfs: not needed. Run as `apps` (568), port 8080 (unprivileged), read-only rootfs OK. No extra persistence.
-- Upstream CSP/headers keep working; confirm that the page needs no external hosts (UNVERIFIED), otherwise adjust CSP.
+- Upstream CSP/headers can be kept: no external hosts were found in the page sources (browser behaviour UNVERIFIED).
 
 ## 10. Risks, caveats and open questions
 
 - Draft caveats: the countdown uses the visitor's browser timezone; the chart pulled `:latest`, which we replace with a pinned commit.
-- Upstream has no releases, so the version is a commit SHA that renovate will bump; confirm the draft commit is HEAD.
+- Upstream has no releases, so the version is a commit SHA. UNVERIFIED: whether the shared Renovate setup bumps it from this `git-refs` comment (same style as `apps/tvheadend`).
 - The nginx base's config seeding behavior is assumed from `apps/nginx` and `apps/it-tools` sources; check on first run.
-- Third-party license of the original countdown (patrickgold/newyear-countdown) UNVERIFIED.
 - No blockers (static files, arch independent).
 
 ## 11. Build and test steps
@@ -152,4 +154,4 @@ Readiness: entrypoint prints the copyconfig lines and "Executing" for the nginx 
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`; put `🤖 This PR is AI generated.` in Notes; check only applicable boxes.
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Confirm VERSION alignment, `bake --print`, `USER apps`, license shipped, 8080 probed.
-- Untested at planning time: docker build, arm64, config seeding by the base scripts, CSP behavior in a browser, current upstream HEAD.
+- Untested at planning time: docker build, arm64, config seeding by the base scripts, CSP behavior in a browser.

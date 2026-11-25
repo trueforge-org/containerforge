@@ -5,17 +5,17 @@
 
 | Item | Value |
 |---|---|
-| Version | `2.38.1` (tag `v2.38.1`, Latest; security release; draft tag `v2.38.1`, same) |
+| Version | `2.38.2` (tag `v2.38.2`, Latest, published 2026-11-24, security release). The draft tag `v2.38.1` is one release older. |
 | Renovate | `datasource=github-releases depName=binwiederhier/ntfy versioning=semver` |
-| License | Dual: upstream image labels say "Apache-2.0, GPL-2.0". Use SPDX `Apache-2.0 OR GPL-2.0-only` (UNVERIFIED exact SPDX expression; confirm from the repo LICENSE files). |
+| License | Dual Apache-2.0 / GPLv2 (README; repo has `LICENSE` and `LICENSE.GPLv2`; upstream image label "Apache-2.0, GPL-2.0"). SPDX `Apache-2.0 OR GPL-2.0-only` (UNVERIFIED: `-only` versus `-or-later`). |
 | Source URL | https://github.com/binwiederhier/ntfy |
 | Docs | https://docs.ntfy.sh/ |
-| amd64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.1/ntfy_2.38.1_linux_amd64.tar.gz (the draft names the `.deb`; the tarball is also published, verified in the asset list) |
-| arm64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.1/ntfy_2.38.1_linux_arm64.tar.gz |
-| Checksum source | `checksums.txt` in the same release (verified present). Line format assumed `<sha256>  <file>` (UNVERIFIED). |
-| Tarball layout | UNVERIFIED. Expected: one top folder with `ntfy`, `LICENSE`/`README`, `server/server.yml`, `client/`. Check with `tar tzf` and adjust. |
-| Upstream Dockerfile reviewed | `v2.38.1/Dockerfile`: alpine, installs only tzdata, copies the prebuilt `ntfy` to `/usr/bin`, EXPOSE 80/tcp, `ENTRYPOINT ["ntfy"]`, no USER (root), no VOLUME. Command is `ntfy serve`. |
-| Config | Config file normally `/etc/ntfy/server.yml`; every option can be set via `NTFY_<OPTION>` env (dashes to underscores), verified for `NTFY_BASE_URL`, `NTFY_AUTH_DEFAULT_ACCESS`, `NTFY_DATABASE_URL`. |
+| amd64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.2/ntfy_2.38.2_linux_amd64.tar.gz (the draft names the `.deb`; the tarball is also published, verified in the asset list) |
+| arm64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.2/ntfy_2.38.2_linux_arm64.tar.gz |
+| Checksum source | `checksums.txt` in the same release, `<sha256>  <file>` lines (verified; amd64 hash matched). |
+| Tarball layout | amd64 inspected: top folder `ntfy_<ver>_linux_amd64/` with `ntfy` (statically linked), `LICENSE` (no `LICENSE.GPLv2`), `README.md`, `server/`, `client/`. arm64 UNVERIFIED. |
+| Upstream Dockerfile reviewed | `v2.38.2/Dockerfile`: alpine, installs only tzdata, copies the prebuilt `ntfy` to `/usr/bin`, EXPOSE 80/tcp, `ENTRYPOINT ["ntfy"]`, no USER (root), no VOLUME. Command is `ntfy serve`. |
+| Config | Default config file `/etc/ntfy/server.yml`; `--config`/`-c` overrides it. Env names verified in `cmd/serve.go`: `NTFY_BASE_URL`, `NTFY_LISTEN_HTTP`, `NTFY_CACHE_FILE`, `NTFY_AUTH_FILE`, `NTFY_AUTH_DEFAULT_ACCESS`, `NTFY_ATTACHMENT_CACHE_DIR`, `NTFY_BEHIND_PROXY`, `NTFY_UPSTREAM_BASE_URL`, `NTFY_CONFIG_FILE`. `attachment-cache-dir` requires `base-url` and may also be an `s3://` URL. |
 | Defaults (from server.yml) | `listen-http` `:80`; `cache-file` unset (in-memory, 12h); `auth-file` unset (auth off); `attachment-cache-dir` unset (attachments off; needs `base-url`); `behind-proxy` false; `web-root` `/`; `auth-default-access` `read-write`. |
 | Package paths | Debian/RPM suggest `/var/cache/ntfy/cache.db` and `/var/lib/ntfy/user.db` (we remap to `/config`). |
 | Ports | 80/tcp upstream; we use 8080 (see section 9). |
@@ -47,14 +47,14 @@ Why: single static-ish Go binary; ubuntu already has `curl`, `tar`, `tzdata`, `c
    - `base="https://github.com/binwiederhier/ntfy/releases/download/v${VERSION}"`; file `ntfy_${VERSION}_linux_${TARGETARCH}.tar.gz`.
    - `curl -fsSL -o /tmp/ntfy.tar.gz "$base/<file>"`, `curl -fsSL -o /tmp/checksums.txt "$base/checksums.txt"`, then `cd /tmp && grep " <file>\$" checksums.txt | sha256sum -c -`.
    - `mkdir -p /tmp/ntfy && tar xzf /tmp/ntfy.tar.gz --strip-components=1 -C /tmp/ntfy`; `install -m 0755 /tmp/ntfy/ntfy /app/ntfy`.
-   - Licenses: `mkdir -p /usr/share/licenses/ntfy`; copy `LICENSE*` from the tarball if present, otherwise fetch `LICENSE` (Apache-2.0) and `LICENSE.GPLv2` from `https://raw.githubusercontent.com/binwiederhier/ntfy/v${VERSION}/` (file names UNVERIFIED). Required because only part of the archive is extracted.
+   - Licenses: `mkdir -p /usr/share/licenses/ntfy`; copy `LICENSE` from the tarball and fetch `LICENSE.GPLv2` from `https://raw.githubusercontent.com/binwiederhier/ntfy/v${VERSION}/LICENSE.GPLv2`. Required because only part of the archive is extracted.
    - `chown -R apps:apps /app && chmod -R 755 /app`; `rm -rf /tmp/*`.
 3. `USER apps`; `COPY --chmod=0755 . /`.
 4. `EXPOSE 8080`; `VOLUME /config`.
 
 ## 5. docker-bake.hcl
 
-`APP=ntfy`; `VERSION` with `// renovate: datasource=github-releases depName=binwiederhier/ntfy versioning=semver` default `"2.38.1"`; `LICENSE="Apache-2.0 OR GPL-2.0-only"`; `SOURCE="https://github.com/binwiederhier/ntfy"`. Standard four targets and `group "default"` copied from `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`.
+`APP=ntfy`; `VERSION` with `// renovate: datasource=github-releases depName=binwiederhier/ntfy versioning=semver` default `"2.38.2"`; `LICENSE="Apache-2.0 OR GPL-2.0-only"`; `SOURCE="https://github.com/binwiederhier/ntfy"`. Standard four targets and `group "default"` copied from `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -93,7 +93,7 @@ volumes:
     required: true
 ```
 
-The `NTFY_*` names for base-url is verified; the rest follow the verified naming rule and the verified option names in server.yml, but confirm each in the `ntfy serve --help` output (it prints the env var next to each flag, UNVERIFIED) before finalizing, since a wrong name is silently ignored. Keep `NTFY_ATTACHMENT_CACHE_DIR` empty by default because upstream requires `base-url` to enable attachments. `dependencies`: none (draft: no hard or optional dependency containers).
+The `NTFY_*` names above are verified against `cmd/serve.go`. Keep `NTFY_ATTACHMENT_CACHE_DIR` empty by default because upstream requires `base-url` to enable attachments. `dependencies`: none (draft: no hard or optional dependency containers).
 
 ## 7. start.sh
 
@@ -106,7 +106,7 @@ export NTFY_CACHE_FILE="${NTFY_CACHE_FILE:-/config/cache.db}"
 export NTFY_AUTH_FILE="${NTFY_AUTH_FILE:-/config/user.db}"
 
 mkdir -p "$(dirname "${NTFY_CACHE_FILE}")" "$(dirname "${NTFY_AUTH_FILE}")"
-if [[ -n "${NTFY_ATTACHMENT_CACHE_DIR:-}" ]]; then
+if [[ "${NTFY_ATTACHMENT_CACHE_DIR:-}" == /* ]]; then   # may also be an s3:// URL
   mkdir -p "${NTFY_ATTACHMENT_CACHE_DIR}"
 fi
 
@@ -129,12 +129,14 @@ Idempotent; no writes to `/app`; state only in `/config`; binds `:8080` (all int
 http:
 - port: '8080'
   path: /
+- port: '8080'
+  path: /v1/health
 filePaths:
 - /app/ntfy
 - /usr/share/licenses/ntfy
 ```
 
-Covers the only port. `/v1/health` is a documented ntfy health endpoint in current docs (UNVERIFIED in this session); once confirmed, add a second `http` probe with that path. No env needed for the default path. No database exception.
+Covers the only port. `/v1/health` exists in `server/server.go`. No env needed for the default path. No database exception.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -144,9 +146,9 @@ Covers the only port. `/v1/health` is a documented ntfy health endpoint in curre
 
 ## 10. Risks, caveats and open questions
 
-- Draft caveats: set `base-url` to the public address for attachments/links; iOS push uses the upstream ntfy.sh relay unless `upstream-base-url` is configured (UNVERIFIED env name, do not add it).
+- Draft caveats: set `base-url` to the public address for attachments/links; the draft says iOS push goes through the ntfy.sh relay unless self-hosted; the related option is `upstream-base-url` (`NTFY_UPSTREAM_BASE_URL`, requires `base-url`). UNVERIFIED: its exact relay behaviour; it is not set or listed by default.
 - Behind a reverse proxy set `NTFY_BEHIND_PROXY=true` (otherwise all clients share one rate limit).
-- Tarball layout, checksum format and license file names UNVERIFIED; first build round fixes them.
+- arm64 tarball layout UNVERIFIED.
 - Open: whether to set `auth-file` by default (current plan: yes, harmless) or leave auth fully off until the user opts in.
 - No blockers: Go, linux amd64+arm64 tarballs exist.
 
@@ -157,15 +159,14 @@ cd apps/ntfy
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name ntfy-probe --read-only --tmpfs /tmp \
-  -v ntfy-probe-config:/config ntfy:2.38.1
+  -v ntfy-probe-config:/config ntfy:2.38.2
 docker logs -f ntfy-probe
 # from outside: curl -fsS http://<container-ip>:8080/ ; publish test: curl -d hi http://<container-ip>:8080/test
-docker exec ntfy-probe /app/ntfy serve --help | grep -i NTFY_   # confirm env names
-forgetool containers test --image ntfy:2.38.1 --config ./apps/ntfy/container-test.yaml
+forgetool containers test --image ntfy:2.38.2 --config ./apps/ntfy/container-test.yaml
 docker rm -f ntfy-probe; docker volume rm ntfy-probe-config
 ```
 
-Expected readiness signal: a log line like `Listening on :8080` (verified phrasing for the default is "Listening on :80", so expect the 8080 equivalent), process alive, no fatal errors. Restart on the same volume to confirm cache/auth DB reuse.
+Expected readiness signal: a log line like `Listening on :8080` (from `server/server.go`: `Listening on :8080[http], ntfy 2.38.2, log level is INFO`), process alive, no fatal errors. Restart on the same volume to confirm cache/auth DB reuse.
 
 ## 12. PR checklist
 
@@ -173,4 +174,4 @@ Expected readiness signal: a log line like `Listening on :8080` (verified phrasi
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`; `🤖 This PR is AI generated.` in Notes; check only applicable boxes.
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Confirm VERSION alignment, `bake --print`, `USER apps`, checksum verified, both license texts shipped.
-- Untested at planning time: build, arm64, tarball layout, env var names beyond the verified ones, `/v1/health`, behavior with auth DB enabled.
+- Untested at planning time: build, arm64 (including its tarball layout), the `/v1/health` probe, behavior with auth DB enabled.

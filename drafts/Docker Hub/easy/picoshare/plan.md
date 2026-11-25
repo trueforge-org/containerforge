@@ -74,21 +74,41 @@ ports:
     protocol: tcp
     required: false
 env:
-  - PORT                       default "4001"  required false
-  - PS_SHARED_SECRET           default ""      required false   # if empty and no file: start.sh generates /config/shared_secret
-  - PS_SHARED_SECRET_FILE      default ""      required false
-  - PS_BEHIND_PROXY            default ""      required false
-  - LITESTREAM_BUCKET          default ""      required false
-  - LITESTREAM_ENDPOINT        default ""      required false
-  - LITESTREAM_ACCESS_KEY_ID   default ""      required false
-  - LITESTREAM_SECRET_ACCESS_KEY default ""    required false
-  - LITESTREAM_PATH            default "db"    required false
-  - LITESTREAM_RETENTION       default "72h"   required false
+  - name: PORT
+    default: "4001"
+    required: false
+  - name: PS_SHARED_SECRET   # if empty and no file: start.sh generates /config/shared_secret
+    default: ""
+    required: false
+  - name: PS_SHARED_SECRET_FILE
+    default: ""
+    required: false
+  - name: PS_BEHIND_PROXY
+    default: ""
+    required: false
+  - name: LITESTREAM_BUCKET
+    default: ""
+    required: false
+  - name: LITESTREAM_ENDPOINT
+    default: ""
+    required: false
+  - name: LITESTREAM_ACCESS_KEY_ID
+    default: ""
+    required: false
+  - name: LITESTREAM_SECRET_ACCESS_KEY
+    default: ""
+    required: false
+  - name: LITESTREAM_PATH
+    default: "db"
+    required: false
+  - name: LITESTREAM_RETENTION
+    default: "72h"
+    required: false
 volumes:
   - path: /config
     required: true
 ```
-Write the env list in the sibling block form (`- name:` / `default:` / `required:`). `required` is false for the secret because `start.sh` handles the missing case. No `dependencies`.
+`required` is false for the secret because `start.sh` handles the missing case. No `dependencies`.
 
 ## 7. start.sh
 
@@ -124,12 +144,15 @@ Secrets never go in the log or process list (file based). `PORT` and `PS_BEHIND_
 
 tcp:
 - port: '4001'
+http:
+- port: '4001'
+  path: /
 filePaths:
 - /app/picoshare
 - /app/litestream
 - /usr/share/licenses/picoshare/LICENSE
 ```
-The test runs without env vars, which works only because `start.sh` generates the secret. The Litestream branch (`LITESTREAM_BUCKET` set) is not reachable from the test, so it is covered by the `/app/litestream` file check and must be exercised by hand per the protocol. An `http` probe on `/` can be added after step 3 confirms the status code (an unauthenticated visit may redirect; UNVERIFIED).
+The test runs without env vars, which works only because `start.sh` generates the secret. The Litestream branch (`LITESTREAM_BUCKET` set) is not reachable from the test, so it is covered by the `/app/litestream` file check and must be exercised by hand per the protocol. In the source, an unauthenticated `GET /` renders the index page; it redirects to HTTPS only when the request has `X-Forwarded-Proto: http` (200 status not yet confirmed by a run).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -149,7 +172,8 @@ Draft reconciliation: non-root and read-only rootfs match the chart (UID 568 vs 
 - Upstream repo is archived and has moved (codefloe.com). The GitHub release v1.5.5 exists today (2026-11-16), but later releases and Renovate's `github-releases` tracking may stop. UNVERIFIED: whether the new home publishes GitHub-compatible releases.
 - Litestream replication needs S3-compatible credentials; only one container may use a replica path. Litestream is held at 0.3.13, and a `renovate.json` rule is not required because the version is not annotated.
 - No upstream checksum for the picoshare tarball (HTTPS only); do not hard-code the GitHub digest because Renovate bumps would break the build.
-- UNVERIFIED: whether picoshare needs write access outside `/config` and `/tmp` (none found in `main.go`).
+- Uploads: `handlers/upload.go` calls `ParseMultipartForm` with 1 MiB of memory, so larger uploads are spooled to temp files in `/tmp` (Go default temp dir) before they reach SQLite. A RAM-backed or small `/tmp` limits the upload size; document the needed `/tmp` space and test a large upload.
+- UNVERIFIED: whether picoshare needs write access outside `/config` and `/tmp` (not found in the files reviewed).
 - amd64 and arm64 tarballs exist; the binary is Go with no musl concern.
 
 ## 11. Build and test steps
@@ -173,5 +197,5 @@ Extra manual runs: (1) `-e PS_SHARED_SECRET=testpass` and log in on `:4001`; (2)
 - Use `.github/PULL_REQUEST_TEMPLATE.md` with sections and checkboxes kept; tick only what applies.
 - `🤖 This PR is AI generated.` in the Notes section.
 - Tell the user about the CLA at https://cla-assistant.io/trueforge-org/containerforge; only the user can sign (`license/cla` check shows status).
-- State what is untested: arm64 build and run, the litestream replicate/restore path, upload of large files on a read-only rootfs, whether `/` returns 200. Do not tick "Built container locally" unless it was built.
+- State what is untested: arm64 build and run, the litestream replicate/restore path, upload of large files on a read-only rootfs (`/tmp` size), whether `/` returns 200. Do not tick "Built container locally" unless it was built.
 - Pre-completion: `docker buildx bake --print` OK, version aligned, rootless, read-only rootfs, empty `/config` start, no weakened tests.

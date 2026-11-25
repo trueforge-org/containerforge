@@ -16,7 +16,7 @@
 | Port | `5000` (`config.listen_port`, env `PASTEY_LISTEN_PORT`). Server is the Flask dev server (`app.run`). |
 | Listen address | `0.0.0.0` default (`PASTEY_LISTEN_ADDRESS`) |
 | Data path | `PASTEY_DATA_DIRECTORY` (upstream image sets `/app/data`, code default `./data`). One file per paste. |
-| Env vars read by `app.py` | `PASTEY_DATA_DIRECTORY`, `PASTEY_LISTEN_ADDRESS`, `PASTEY_LISTEN_PORT`, `PASTEY_USE_WHITELIST` (True), `PASTEY_RESTRICT_PASTING` (False), `PASTEY_GUESS_THRESHOLD`, `PASTEY_RECENT_PASTES` (10), `PASTEY_WHITELIST_CIDR` (`127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16`, comma separated), `PASTEY_BLACKLIST_CIDR` (empty), `PASTEY_BEHIND_PROXY` (False), `PASTEY_DEFAULT_THEME` (Light), `PASTEY_PURGE_INTERVAL` (3600), `PASTEY_FORCE_SHOW_RECENT` (False), `PASTEY_IGNORE_GUESS`, `PASTEY_SHOW_CLI_BUTTON` (True), `PASTEY_FORCE_HTTPS_LINKS` (False), `PASTEY_OVERRIDE_DOMAIN` (empty), `PASTEY_MINIMUM_URL_LENGTH` (5). Rate limit (`5/hour`) has no env var, only `config.py`. |
+| Env vars read by `app.py` | `PASTEY_DATA_DIRECTORY`, `PASTEY_LISTEN_ADDRESS`, `PASTEY_LISTEN_PORT`, `PASTEY_USE_WHITELIST` (True), `PASTEY_RESTRICT_PASTING` (False), `PASTEY_GUESS_THRESHOLD`, `PASTEY_RECENT_PASTES` (10), `PASTEY_WHITELIST_CIDR` (`127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16`, comma separated), `PASTEY_BLACKLIST_CIDR` (empty), `PASTEY_BEHIND_PROXY` (False), `PASTEY_DEFAULT_THEME` (Light), `PASTEY_PURGE_INTERVAL` (3600), `PASTEY_FORCE_SHOW_RECENT` (False), `PASTEY_IGNORE_GUESS`, `PASTEY_SHOW_CLI_BUTTON` (True), `PASTEY_FORCE_HTTPS_LINKS` (False), `PASTEY_OVERRIDE_DOMAIN` (empty), `PASTEY_MINIMUM_URL_LENGTH` (5). `pastey/routes.py` also reads `PASTEY_RATE_LIMIT` (default `5/hour`). |
 | Other facts | `app.py` uses `from distutils.util import strtobool` (module removed in Python 3.12) and `Limiter(app, key_func=..., storage_uri="memory://")` (positional `app`, Flask-Limiter 2.x style). `from __main__ import app, limiter` means it must be started as `python app.py`. |
 
 ## 2. Target layout
@@ -43,7 +43,7 @@ Why: Flask app installed with pip, no apt packages and no Node. Closest sibling:
 2. `ENV HOME=/config PASTEY_DATA_DIRECTORY=/config/data` (base already sets `PIP_NO_CACHE_DIR`, `PYTHONDONTWRITEBYTECODE`, `PIP_BREAK_SYSTEM_PACKAGES`).
 3. One `RUN` that:
    - `curl -fsSL -o /tmp/pastey.tar.gz "https://github.com/Cesura/pastey/archive/refs/tags/${VERSION}.tar.gz"`; `mkdir -p /app/pastey && tar xzf ... -C /app/pastey --strip-components=1`.
-   - `cd /app/pastey && ./patch_no_tensorflow.sh` (slim variant: removes guesslang, TensorFlow and the AUTO option; needs no AVX). The script is `sed`-based and silent on a miss, so add `! grep -q guesslang app.py requirements.txt` after it (build fails if the patch did not apply).
+   - `cd /app/pastey && ./patch_no_tensorflow.sh` (slim variant: removes guesslang, TensorFlow and the AUTO option; needs no AVX). The script is `sed`-based and silent on a miss, so add `! grep -Eq '^[^#]*guesslang' app.py requirements.txt` after it (the script comments lines out rather than deleting them, so only uncommented matches may fail the build).
    - Python 3.15 compat patches (all `sed`, each followed by a `grep` assert):
      - `sed -i -E 's/^(Flask|Flask-Limiter|cryptography)~=.*/\1/' requirements.txt` (the 2022 pins `Flask 2.2`, `cryptography 3.4.7` are not expected to build or run on Python 3.15 / OpenSSL 3; UNVERIFIED, see section 10).
      - `sed -i 's/^    app,$/    app=app,/' app.py` (makes `Limiter(...)` keyword-only, valid for Flask-Limiter 2.x to 4.x).
@@ -76,7 +76,7 @@ ports:
   - port: 5000
     protocol: tcp
     required: false
-env:        # every var below is read by app.py; defaults match start.sh / upstream config.py
+env:        # every var below is read by app.py or pastey/routes.py; defaults match start.sh / upstream config.py
   - {name: PASTEY_DATA_DIRECTORY, default: "/config/data", required: false}
   - {name: PASTEY_LISTEN_ADDRESS, default: "0.0.0.0", required: false}
   - {name: PASTEY_LISTEN_PORT, default: "5000", required: false}
@@ -93,6 +93,7 @@ env:        # every var below is read by app.py; defaults match start.sh / upstr
   - {name: PASTEY_FORCE_HTTPS_LINKS, default: "False", required: false}
   - {name: PASTEY_OVERRIDE_DOMAIN, default: "", required: false}
   - {name: PASTEY_MINIMUM_URL_LENGTH, default: "5", required: false}
+  - {name: PASTEY_RATE_LIMIT, default: "5/hour", required: false}
 volumes:
   - path: /config
     required: true
@@ -162,7 +163,7 @@ docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create pastey-probe-config
 docker run --rm -d --name pastey-probe --read-only --tmpfs /tmp \
   -v pastey-probe-config:/config pastey:0.5.1
-docker logs -f pastey-probe     # expect: "USING THE FOLLOWING CONFIGURATION" then "Running on http://0.0.0.0:5000"
+docker logs -f pastey-probe     # expect: "USING THE FOLLOWING CONFIGURATION" then the Flask "Running on ..." lines (exact text UNVERIFIED)
 curl -fsS http://<container-ip>:5000/ -o /dev/null -w '%{http_code}\n'   # from another container/host port
 docker rm -f pastey-probe; docker volume rm pastey-probe-config
 forgetool containers test --image pastey:0.5.1 --config ./apps/pastey/container-test.yaml

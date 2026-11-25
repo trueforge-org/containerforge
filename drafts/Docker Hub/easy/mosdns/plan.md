@@ -7,7 +7,7 @@
 |---|---|
 | Version | `5.3.4` (git tag `v5.3.4`, marked Latest on GitHub; draft tag `v5.3.4`, same). Release notes: Go 1.25 build, forward plugin UDP retry after 1s. |
 | Renovate | `datasource=github-releases depName=IrineSistiana/mosdns versioning=semver` (tags carry a `v` prefix; if renovate strips it wrongly add `extractVersion=^v(?<version>.+)$`) |
-| License | GPL-3.0 (LICENSE at tag v5.3.4 is "GNU General Public License, Version 3"), SPDX `GPL-3.0-only` (UNVERIFIED: whether files say "or later") |
+| License | SPDX `GPL-3.0-or-later` (LICENSE is GPL version 3; source file headers at v5.3.4 say "either version 3 of the License, or (at your option) any later version") |
 | Source URL | https://github.com/IrineSistiana/mosdns |
 | Docs | https://irine-sistiana.gitbook.io/mosdns-wiki/ |
 | amd64 asset | https://github.com/IrineSistiana/mosdns/releases/download/v5.3.4/mosdns-linux-amd64.zip |
@@ -15,10 +15,12 @@
 | Release assets (verified list) | darwin/freebsd/linux (amd64, arm-5/6/7, arm64, mips64le, mipsle, ppc64le)/windows zips only |
 | Checksum source | None published (no `.sha256`/`checksums.txt` in the asset list). Cannot verify; document in Dockerfile comment. |
 | Upstream Dockerfile reviewed | Draft points at `Sagit-chu/mosdns-container/Dockerfile` (third-party, clones and compiles). Not used; we use the release zip. UNVERIFIED: its content was not fetched. |
-| Command line | `mosdns start -c <config> -d <workdir>` (from the wiki page and the draft; UNVERIFIED flag spelling, confirm with `mosdns start --help` at build time) |
+| Command line | `mosdns start -c <config> -d <workdir>` (verified in `coremain/run.go` at v5.3.4; `-d` changes the working directory before the config is loaded) |
 | Config format | YAML with top-level `log`, `api`, `include`, `plugins` (verified from wiki). Plugins init in file order; `sequence` entries use `matches`/`exec`. |
-| API | `api.http` defaults to `127.0.0.1:8080` and is marked experimental in the wiki. The draft's "8080/http (API, inferred)" is therefore NOT a default listener. |
+| API | The HTTP API only starts when `api.http` is set (`coremain/mosdns.go`). The draft's "8080/http (API, inferred)" is therefore NOT a default listener. |
 | Config/data paths | No fixed path; config is whatever `-c` points to, `-d` is the working dir. Rule/list files are referenced by path from the config. |
+| Zip contents | Root of the zip: `mosdns` (statically linked on amd64), `config.yaml` (example, listens on `127.0.0.1:53`), `README.md`, `LICENSE` (amd64 zip inspected; arm64 UNVERIFIED) |
+| Listener default | `udp_server` and `tcp_server` default `listen` to `127.0.0.1:53` (source), so the config must set `0.0.0.0` |
 | Verified example plugins | `sequence` with `cache 1024`, `has_resp` -> `accept`, `forward https://8.8.8.8/dns-query`; `udp_server`/`tcp_server` with `entry` + `listen`. |
 
 ## 2. Target layout
@@ -49,7 +51,7 @@ Why: static-ish Go binary from a release zip, no runtime language needed. `unzip
    - `curl -fsSL -o /tmp/mosdns.zip "https://github.com/IrineSistiana/mosdns/releases/download/v${VERSION}/mosdns-linux-${ARCH}.zip"`.
    - No upstream checksum exists; leave a comment saying so (do not invent one).
    - `unzip -q /tmp/mosdns.zip -d /tmp/mosdns`, `install -m 0755 /tmp/mosdns/mosdns /app/mosdns`.
-   - License: `mkdir -p /usr/share/licenses/mosdns`; copy `LICENSE*` from the zip if present, otherwise `curl -fsSL -o /usr/share/licenses/mosdns/LICENSE https://raw.githubusercontent.com/IrineSistiana/mosdns/v${VERSION}/LICENSE`. UNVERIFIED: whether the zip ships LICENSE.
+   - License: `mkdir -p /usr/share/licenses/mosdns`; `cp /tmp/mosdns/LICENSE /usr/share/licenses/mosdns/` (the zip ships it).
    - `chown -R apps:apps /app && chmod -R 755 /app`; `rm -rf /tmp/mosdns /tmp/mosdns.zip`.
 3. `USER apps`
 4. `COPY --chmod=0755 . /`
@@ -68,7 +70,7 @@ variable "VERSION" {
   default = "5.3.4"
 }
 
-variable "LICENSE" { default = "GPL-3.0-only" }
+variable "LICENSE" { default = "GPL-3.0-or-later" }
 variable "SOURCE"  { default = "https://github.com/IrineSistiana/mosdns" }
 ```
 
@@ -102,7 +104,7 @@ volumes:
     required: true
 ```
 
-`MOSDNS_PORT` and `MOSDNS_UPSTREAM` are ContainerForge wrapper variables (mosdns itself reads no env vars); they are only used by `start.sh` to render the first-run config, so say that in a YAML comment is not possible per schema; document it in the PR. `dependencies:` omitted: none. Use only `ports` listed here; if `MOSDNS_PORT` is changed the declared port no longer matches, mention in PR notes.
+`MOSDNS_PORT` and `MOSDNS_UPSTREAM` are ContainerForge wrapper variables read by `start.sh` only (UNVERIFIED: that mosdns itself reads no env vars). They are used only to render the first-run config, so changing them later has no effect on an existing `/config/config.yaml`; say so in a YAML comment and in the PR. `dependencies:` omitted: none. Use only `ports` listed here; if `MOSDNS_PORT` is changed the declared port no longer matches, mention in PR notes.
 
 ## 7. start.sh
 
@@ -157,16 +159,17 @@ Notes: seeds only when `/config/config.yaml` is missing/empty (idempotent, never
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-timeoutSeconds: 60
+timeoutSeconds: 180
 tcp:
 - port: '5353'
 filePaths:
 - /app/mosdns
+- /usr/share/licenses/mosdns/LICENSE
 - /start.sh
 - /defaults/config.yaml
 ```
 
-`timeoutSeconds` value: use the default unless a sibling needs more; adguardhome-sync sets none. Every port in settings.yaml has a probe: the TCP one (5353/tcp); the UDP listener shares the same config block and is checked by hand in section 11 (`dig @127.0.0.1 -p 5353 example.com`), since the schema's probes are tcp/http. The test runs with no env vars, which is fine: defaults render a working config. No database exception applies.
+`timeoutSeconds` 180 is forgetool's minimum (lower values are raised to it). Every port in settings.yaml has a probe: the TCP one (5353/tcp); the UDP listener shares the same config block and is checked by hand in section 11 (`dig @127.0.0.1 -p 5353 example.com`), since the schema's probes are tcp/http. The test runs with no env vars, which is fine: defaults render a working config. No database exception applies.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -179,7 +182,7 @@ filePaths:
 - Draft caveat: rule/list files must be created by hand and some lists are downloaded at start (needs internet). The default config avoids lists so the empty-start works offline except for upstream DNS-over-HTTPS.
 - No upstream checksum for the zip, so integrity rests on HTTPS + pinned version.
 - Default upstream `https://8.8.8.8/dns-query` is copied from the wiki example; confirm that this is the desired default (privacy), or switch to a neutral option.
-- `-c`/`-d` flags and zip layout (binary at the zip root named `mosdns`) are UNVERIFIED (assets listing worked, contents not). Check with `unzip -l` in round 1.
+- `-c`/`-d` flags and the amd64 zip layout are verified; the arm64 zip contents are UNVERIFIED.
 - The API (8080) is not enabled; add it only if needed, binding `0.0.0.0` explicitly.
 - No blockers: linux arm64 + amd64 assets exist, Go binary, no GPU/privilege need.
 
@@ -198,7 +201,7 @@ forgetool containers test --image mosdns:5.3.4 --config ./apps/mosdns/container-
 docker rm -f mosdns-probe; docker volume rm mosdns-probe-config
 ```
 
-Expected readiness signal: a mosdns log line showing the udp/tcp servers started on `0.0.0.0:5353` (exact text UNVERIFIED), container still running, no fatal errors. Restart once with the same volume to prove idempotency. Cap at 10 rounds.
+Expected readiness signal: the log lines `udp server started` and `tcp server started` with the 5353 address (message text from source; exact formatting UNVERIFIED), container still running, no fatal errors. Restart once with the same volume to prove idempotency. Cap at 10 rounds.
 
 ## 12. PR checklist
 
@@ -206,4 +209,4 @@ Expected readiness signal: a mosdns log line showing the udp/tcp servers started
 - Fill `.github/PULL_REQUEST_TEMPLATE.md` keeping all sections; check only boxes that apply. Put `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; `license/cla` shows status).
 - Confirm: bake VERSION == Dockerfile ARG, `bake --print` ok, `USER apps`, `COPY --chmod=0755 . /`, license files shipped, every settings.yaml port probed.
-- Untested at planning time: any docker build, arm64 runtime, the rendered config's validity, zip contents/flags, UDP query path.
+- Untested at planning time: any docker build, arm64 runtime, the rendered config's validity, arm64 zip contents, UDP query path.

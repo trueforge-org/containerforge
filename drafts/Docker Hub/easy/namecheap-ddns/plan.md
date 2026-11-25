@@ -13,8 +13,8 @@
 | Checksum source | None published. Pinning a full commit SHA is the integrity anchor. |
 | Layout | repo root: `src/` (`config.py`, `main.py`, `dockerfile`), `LICENSE`, `README.md`. |
 | Upstream Dockerfile reviewed | `src/dockerfile`: `FROM python:3.11-slim`, `COPY src/ /app/`, `RUN pip install requests`, runs the main script with unbuffered Python. |
-| Env vars (verified) | `APP_HOST`, `APP_DOMAIN`, `APP_PASSWORD` (required, `;`-separated lists of equal length), `APP_UPDATE_TIME` (seconds, default 60 per code; README says the IP is checked every 3 seconds, a discrepancy, trust the code and re-verify), `APP_LOG_LEVEL` (default `INFO`). |
-| Behavior | Infinite loop; one HTTP GET per target to `dynamicdns.park-your-domain.com/update`; writes no files; exits if required vars missing or list lengths differ. |
+| Env vars (verified) | `APP_HOST`, `APP_DOMAIN`, `APP_PASSWORD` (required, `;`-separated lists of equal length), `APP_UPDATE_TIME` (seconds, default 60), `APP_LOG_LEVEL` (default `INFO`). |
+| Behavior | Infinite loop: one HTTPS GET per target to `dynamicdns.park-your-domain.com/update`, then sleeps `APP_UPDATE_TIME`. There is no IP change detection (the README's "every 3 seconds, on change" does not match `main.py`). Writes no files. On missing vars or unequal list lengths it logs an error and calls `exit()` (exit code 0). |
 | Python deps | `requests` only. Upstream version pin: none. |
 | Ports | None. |
 
@@ -42,8 +42,8 @@ Why: pure-Python script needing `requests`; the base ships `/app/venv` (read-onl
 1. `ARG VERSION`; `USER root`; `ENV HOME=/config PYTHONUNBUFFERED=1`.
 2. One `RUN set -eux`:
    - `mkdir -p /app/namecheap-ddns /usr/share/licenses/namecheap-ddns`
-   - `curl -fsSL "https://github.com/EdwardChamberlain/namecheap_ddns/archive/${VERSION}.tar.gz" | tar xz --strip-components=1 -C /tmp/src` (create `/tmp/src` first), then `cp /tmp/src/src/main.py /tmp/src/src/config.py /app/namecheap-ddns/` (do not copy `src/dockerfile`) and `cp /tmp/src/LICENSE /usr/share/licenses/namecheap-ddns/`.
-   - `/app/venv/bin/pip install --no-cache-dir "requests==${REQUESTS_VERSION}"` with `ARG REQUESTS_VERSION` and a `# renovate: datasource=pypi depName=requests` comment above it. Pick the current stable at implementation time (UNVERIFIED now). Keep the pin in the Dockerfile as an ARG default (sibling `changedetection` does the same with PLAYWRIGHT_VERSION).
+   - `mkdir -p /tmp/src`, `curl -fsSL -o /tmp/src.tar.gz "https://github.com/EdwardChamberlain/namecheap_ddns/archive/${VERSION}.tar.gz"`, `tar xzf /tmp/src.tar.gz --strip-components=1 -C /tmp/src` (no pipe, so a failed download fails the build), then `cp /tmp/src/src/main.py /tmp/src/src/config.py /app/namecheap-ddns/` (do not copy `src/dockerfile`) and `cp /tmp/src/LICENSE /usr/share/licenses/namecheap-ddns/`.
+   - `/app/venv/bin/pip install --no-cache-dir "requests==${REQUESTS_VERSION}"` with `ARG REQUESTS_VERSION` and a `# renovate: datasource=pypi depName=requests` comment above it. Default `2.34.2` (latest on PyPI on 2026-11-25); re-check at implementation time. Keep the pin in the Dockerfile as an ARG default (sibling `changedetection` does the same with PLAYWRIGHT_VERSION).
    - `chown -R apps:apps /app/namecheap-ddns && chmod -R 755 /app/namecheap-ddns`; `rm -rf /tmp/src`.
 3. `USER apps`; `COPY --chmod=0755 . /`; `WORKDIR /config`.
 4. No `EXPOSE`. `VOLUME /config` (kept for contract consistency; the app writes no state).
@@ -113,14 +113,16 @@ Notes: only the app's own env (`APP_*`) is passed through; the password stays in
 
 # No port exists and the app exits without APP_* variables (the test cannot set env),
 # so the main process is disabled and the install is verified instead.
-filePaths:
-- /app/namecheap-ddns/main.py
-- /app/namecheap-ddns/config.py
-- /start.sh
+# forgetool skips filePaths when mainRunner is disabled, so files are checked by a runner.
 runners:
 - entrypoint: /app/venv/bin/python
   cmd: "-c __import__('requests');print('requests'+'-ok')"
   expectedOutput: requests-ok
+  exitCode: 0
+- entrypoint: /usr/bin/ls
+  cmd: /app/namecheap-ddns/main.py /app/namecheap-ddns/config.py /start.sh /usr/share/licenses/namecheap-ddns/LICENSE
+  expectedOutput: /app/namecheap-ddns/main.py
+  exitCode: 0
 
 mainRunner:
   enabled: false
@@ -138,9 +140,10 @@ Pattern from `apps/limnoria/container-test.yaml` (space-free cmd). The required-
 
 - Draft caveats: Dynamic DNS must be enabled per domain in Namecheap; each host uses its own DDNS password (not the account password).
 - No releases: the version is a commit; renovate git-refs will bump it. Tag is a 40-char SHA, which is unusual; consider shortening in CI if the repo expects semver-like tags.
-- The password is part of the request URL; a failed request's exception text could show it in logs. Consider running with `APP_LOG_LEVEL` not DEBUG and mention in docs; do not patch upstream code.
-- README says every 3 seconds, code default is 60 s: UNVERIFIED which is right; settings default follows the code reading.
-- `requests` version and Python 3.15 compatibility UNVERIFIED.
+- SECURITY: the password is part of the request URL (not URL-encoded), and `main.py` logs the exception text at ERROR level. `requests` HTTP and connection errors normally include the URL, so the password can appear in logs at any normal log level; DEBUG logging of `urllib3` also logs request paths. Needs a maintainer decision (accept and document, or patch at build time / report upstream). The secrets rule in start-script.instructions.md applies.
+- README says every 3 seconds and only on change; the code sends every target every 60 s by default. Settings follow the code.
+- Python 3.15 compatibility UNVERIFIED.
+- UNVERIFIED: whether the shared Renovate setup updates a 40-char SHA from this `git-refs` comment (same comment style as `apps/tvheadend`).
 - `docs`: the upstream image is `latest` only; no migration concerns.
 
 ## 11. Build and test steps
@@ -160,7 +163,7 @@ forgetool containers test --image namecheap-ddns:<sha> --config ./apps/namecheap
 docker rm -f namecheap-ddns-probe; docker volume rm namecheap-ddns-probe-config
 ```
 
-Readiness signal: the app's start log message (exact text UNVERIFIED), process still running, errors limited to expected per-target update failures from the dummy credentials (the loop catches them).
+Readiness signal: the log message `Starting Script`, process still running, errors limited to expected per-target update failures from the dummy credentials (the loop catches them).
 
 ## 12. PR checklist
 
@@ -168,4 +171,4 @@ Readiness signal: the app's start log message (exact text UNVERIFIED), process s
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`; `🤖 This PR is AI generated.` in Notes; only applicable boxes checked.
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Confirm bake VERSION == Dockerfile default, `bake --print` ok, `USER apps`, license shipped to `/usr/share/licenses/namecheap-ddns/`.
-- Untested at planning time: build, runtime with real Namecheap credentials, arm64, Python 3.15 compatibility, `requests` pin.
+- Untested at planning time: build, runtime with real Namecheap credentials, arm64, Python 3.15 compatibility, `requests` pin, the test runners.
