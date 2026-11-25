@@ -36,7 +36,7 @@ Reuse the steamcmd app as the base so the SteamCMD bootstrap is not duplicated: 
 
 1. `ARG VERSION`, `FROM` the steamcmd image above.
 2. `USER root` only if any apt step is needed. Palworld needs 32-bit libs (`lib32gcc-s1`), which `apps/steamcmd` already installs through `steamcmd:i386`, so check first and skip if present. `libc++1` is needed by the server; add it only if the steamcmd image lacks it (UNVERIFIED).
-3. `COPY --chmod=0755 start.sh /start.sh`, `COPY --chmod=0755 . /` (repo rule), `USER apps` last.
+3. The steamcmd base already ships its own wrapper at `/start.sh`, and `COPY --chmod=0755 . /` would overwrite it with palworld's `start.sh` (and `/usr/local/bin/steamcmd` execs `/start.sh`). So, as `root` and before the final `COPY`, copy the base wrapper aside: `RUN cp /start.sh /usr/local/share/steamcmd/steamcmd-init.sh`. Then `COPY --chmod=0755 . /` (repo rule), `USER apps` last. Palworld's `start.sh` lands at `/start.sh` and calls `steamcmd-init.sh`.
 4. `ENV HOME=/config XDG_DATA_HOME=/config STEAM_INSTALL_DIR=/config/palworld STEAM_APP_IDS=2394010`.
 5. Tail:
 
@@ -101,14 +101,15 @@ set -euo pipefail
 export HOME=/config
 install_dir="${STEAM_INSTALL_DIR:-/config/palworld}"
 
-# 1. Install or update the server through the steamcmd wrapper (first argument starts with +,
-#    so the steamcmd script runs the install instead of exec'ing it; STEAMCMD_PRE_UPDATE=false
-#    skips a second anonymous login).
-STEAMCMD_PRE_UPDATE=false /start.sh "+force_install_dir ${install_dir}" "+login anonymous" \
-  "+app_update 2394010 validate" "+quit"
+# 1. Install or update the server through the copied steamcmd wrapper. It reads STEAM_APP_IDS,
+#    STEAM_INSTALL_DIR and STEAM_APP_VALIDATE, installs, then runs `steamcmd.sh +quit`.
+#    (Do not call /start.sh: that is this script. A first argument not starting with + is exec'd
+#    by the wrapper before any install.)
+STEAMCMD_PRE_UPDATE=false STEAM_APP_IDS=2394010 STEAM_INSTALL_DIR="${install_dir}" STEAM_APP_VALIDATE=true \
+  /usr/local/share/steamcmd/steamcmd-init.sh +quit
 ```
 
-Then exec the server binary: `exec "${install_dir}/PalServer.sh" -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS` (the path `PalServer.sh` and these flags are UNVERIFIED; confirm from the installed tree and the server's documented launch options before finalising). Rules: idempotent (a re-run only updates), `/config` is seeded only by SteamCMD, no writes to `/app`, caches go to `/tmp`, `exec` the server for signal handoff, and bind to `0.0.0.0` (the server bind address is UNVERIFIED and must be checked against its config). Note: `/start.sh` with a first argument not starting with `+` execs it directly, so the install arguments must start with `+`, as shown.
+Then exec the server binary: `exec "${install_dir}/PalServer.sh" -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS` (the path `PalServer.sh` and these flags are UNVERIFIED; confirm from the installed tree and the server's documented launch options before finalising). Rules: idempotent (a re-run only updates), `/config` is seeded only by SteamCMD, no writes to `/app`, caches go to `/tmp`, `exec` the server for signal handoff, and bind to `0.0.0.0` (the server bind address is UNVERIFIED and must be checked against its config). Note: the wrapper `exec`s any first argument that does not start with `+` before installing, so the install trigger arguments must start with `+` (`+quit`, as shown).
 
 ## 8. container-test.yaml
 

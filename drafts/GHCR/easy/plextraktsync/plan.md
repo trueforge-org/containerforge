@@ -67,12 +67,6 @@ upstream_env_url: "https://github.com/Taxel/PlexTraktSync"
 ports:
   []
 env:
-  - name: PUID
-    default: "1000"
-    required: false
-  - name: PGID
-    default: "1000"
-    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -83,7 +77,7 @@ dependencies:
   []
 ```
 
-`PUID` and `PGID` are read by the upstream entrypoint only. ContainerForge runs rootless, so they are not read by `start.sh`; list them only if the image honours them (UNVERIFIED: decide before merge; the rule "do not invent env vars the app does not read" applies, so the default is to omit them). Upstream config env vars `PTS_*` are set in the image and should not be user-facing unless confirmed.
+`PUID` and `PGID` are read by the upstream entrypoint only. ContainerForge runs rootless and `start.sh` does not read them, so they are omitted from `settings.yaml`. Upstream config env vars `PTS_*` are set in the image and should not be user-facing unless confirmed.
 
 ## 7. start.sh
 

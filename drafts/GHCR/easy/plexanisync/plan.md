@@ -78,13 +78,13 @@ env:
     required: false
   - name: PLEX_TOKEN
     default: ""
-    required: true
+    required: false
   - name: ANI_USERNAME
     default: ""
-    required: true
+    required: false
   - name: ANI_TOKEN
     default: ""
-    required: true
+    required: false
   - name: INTERVAL
     default: "3600"
     required: false
@@ -98,7 +98,7 @@ dependencies:
   []
 ```
 
-`required: true` with an empty default is a schema conflict for the rule "required env needs a non-empty default or start.sh handling". Resolve by having `start.sh` read them and not failing the startup (see section 7), and confirm the forgetool schema accepts `required: true` with an empty default (UNVERIFIED). Upstream `PLEX_URL` default is `http://127.0.0.1:32400`; keep it as-is.
+Credentials are `required: false` with an empty default, because the settings rule forbids `required: true` with an empty default unless `start.sh` generates or handles it, and the image must start without env vars (test runs with none). `start.sh` reads them and warns, but does not fail startup (see section 7); document in the PR that they are needed for a real sync. Upstream `PLEX_URL` default is `http://127.0.0.1:32400`; keep it as-is.
 
 ## 7. start.sh
 
@@ -143,7 +143,6 @@ Draft expectations reconciled: chart runs as UID 0 with writable root; the image
 - Draft says `pip install` from repo; upstream installs `requirements.txt` plus a copy of the tree. Match upstream, not the draft.
 - Chart runs a PyInstaller build; the image is plain Python. Output may differ (inferred, draft caveat).
 - Settings file gotcha: the chart mounts `settings.ini` as a secret at `/plexanisync/settings.ini`. Users must move it to `/config/settings.ini`.
-- `required: true` on empty-default env vars: schema check needed (section 6).
 - PID 1: the loop is the main process. Prefer `exec` on the final Python call only if the loop is removed; otherwise use the base's init if present (UNVERIFIED which init the python base uses).
 - arm64: pure Python, no arch-specific code; expected to work (not built).
 

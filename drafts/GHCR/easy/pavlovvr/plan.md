@@ -36,7 +36,7 @@ Reuse the steamcmd app as the base so the SteamCMD bootstrap is not duplicated: 
 
 1. `ARG VERSION`, `FROM` the steamcmd image above.
 2. `USER root` only if any apt step is needed. The 32-bit libs and `libc++1` come from `apps/steamcmd` (`steamcmd:i386`); check the base first and add `libc++1` only if it is missing (UNVERIFIED).
-3. `COPY --chmod=0755 start.sh /start.sh`, `COPY --chmod=0755 . /` (repo rule), `USER apps` last.
+3. The steamcmd base already ships its own wrapper at `/start.sh`, and `COPY --chmod=0755 . /` would overwrite it with pavlovvr's `start.sh` (and `/usr/local/bin/steamcmd` execs `/start.sh`). So, as `root` and before the final `COPY`, copy the base wrapper aside: `RUN cp /start.sh /usr/local/share/steamcmd/steamcmd-init.sh`. Then `COPY --chmod=0755 . /` (repo rule), `USER apps` last. Pavlovvr's `start.sh` lands at `/start.sh` and calls `steamcmd-init.sh`.
 4. `ENV HOME=/config XDG_DATA_HOME=/config STEAM_INSTALL_DIR=/config/pavlovvr STEAM_APP_IDS=622970`.
 5. Tail:
 
@@ -101,13 +101,14 @@ set -euo pipefail
 export HOME=/config
 install_dir="${STEAM_INSTALL_DIR:-/config/pavlovvr}"
 
-# 1. Install or update the server through the steamcmd wrapper (arguments start with +, so the
-#    steamcmd script runs the install; STEAMCMD_PRE_UPDATE=false avoids a second anonymous login).
-STEAMCMD_PRE_UPDATE=false /start.sh "+force_install_dir ${install_dir}" "+login anonymous" \
-  "+app_update 622970 validate" "+quit"
+# 1. Install or update the server through the copied steamcmd wrapper. It reads STEAM_APP_IDS,
+#    STEAM_INSTALL_DIR and STEAM_APP_VALIDATE, installs, then runs `steamcmd.sh +quit`.
+#    (Do not call /start.sh: that is this script.)
+STEAMCMD_PRE_UPDATE=false STEAM_APP_IDS=622970 STEAM_INSTALL_DIR="${install_dir}" STEAM_APP_VALIDATE=true \
+  /usr/local/share/steamcmd/steamcmd-init.sh +quit
 ```
 
-Then exec the server: the launch script name and its flags are UNVERIFIED (not fetched from the Pavlov docs or the upstream `start.sh`). Confirm from the installed tree before finalising. Rules: idempotent (a re-run only updates), `/config` is seeded only by SteamCMD, no writes to `/app`, caches go to `/tmp`, `exec` the server for signal handoff, and bind to `0.0.0.0` (bind address UNVERIFIED). `/start.sh` with a first argument not starting with `+` execs it directly, so install arguments must start with `+`, as shown.
+Then exec the server: the launch script name and its flags are UNVERIFIED (not fetched from the Pavlov docs or the upstream `start.sh`). Confirm from the installed tree before finalising. Rules: idempotent (a re-run only updates), `/config` is seeded only by SteamCMD, no writes to `/app`, caches go to `/tmp`, `exec` the server for signal handoff, and bind to `0.0.0.0` (bind address UNVERIFIED). The wrapper `exec`s any first argument that does not start with `+` before installing, so the trigger argument must start with `+` (`+quit`, as shown).
 
 ## 8. container-test.yaml
 
