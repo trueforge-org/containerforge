@@ -39,7 +39,7 @@ Build and runtime on the same base, so node is available in both stages:
 FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5
 ```
 
-Upstream's runtime is distroless, which is not a ContainerForge base. The python-node base gives node and npm, and `apps/budge` shows a node build on it. The `python-node` base must provide Node `>=24.14.0`: NOT VERIFIED (node version of `python-node:3.15.2` not checked). If it is lower, the base has to change (use the `ubuntu` base plus a node install, or a newer python-node), and that is a blocker to raise with the user. Closest sibling: `apps/budge` (python-node, build with npm, `USER apps`, `WORKDIR`, `VOLUME /config`).
+Upstream's runtime is distroless, which is not a ContainerForge base. The python-node base gives node and npm, and `apps/budge` shows a node build on it. `apps/python-node` does not exist in this repo, so the base's Node version cannot be read from a Dockerfile here; `apps/budge`'s comment says Node 24 (UNVERIFIED for this tag). The `python-node` base must provide Node `>=24.14.0`: NOT VERIFIED (node version of `python-node:3.15.2` not checked). If it is lower, the base has to change (use the `ubuntu` base plus a node install, or a newer python-node), and that is a blocker to raise with the user. Closest sibling: `apps/budge` (python-node, build with npm, `USER apps`, `WORKDIR`, `VOLUME /config`).
 
 ## 4. Dockerfile
 
@@ -55,7 +55,7 @@ Upstream's runtime is distroless, which is not a ContainerForge base. The python
    RUN npm ci --omit=dev && npm cache clean --force
    ```
    Upstream scripts are kept by name, so the build matches upstream. Set `npm_config_cache` to `/tmp` (rules: caches never in `/config`). The `test:parallel` step can be run in the build stage, but it is optional; do not skip it silently (decide before implementing, UNVERIFIED test runtime).
-3. Copy the runtime artifacts to `/app` in the final stage: `package.json`, `src/backend`, `src/core`, `node_modules`, `dist` (if produced by `build:parallel`, UNVERIFIED path), and `docsite/build` only if the app serves it (UNVERIFIED).
+3. Final stage (`FROM <python-node>` again, `ARG VERSION` re-declared because ARGs do not cross stages): `COPY --from=build` the runtime artifacts to `/app`: `package.json`, `src/backend`, `src/core`, `node_modules`, `dist` (if produced by `build:parallel`, UNVERIFIED path), and `docsite/build` only if the app serves it (UNVERIFIED).
 4. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/multi-scrobbler/LICENSE`.
 5. `chown -R apps:apps /app` and `chmod -R 755 /app`, as in `apps/budge`.
 6. `ENV CONFIG_DIR=/config LOGS_DIR=/config/logs DATA_DIR=/config NODE_ENV=production IS_DOCKER=true COLORED_STD=true PORT=9078 TZ=Etc/UTC HOME=/config APP_VERSION=${VERSION}`.

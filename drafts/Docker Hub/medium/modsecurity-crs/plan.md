@@ -9,7 +9,7 @@
 | Renovate | `datasource=github-releases depName=coreruleset/coreruleset versioning=semver` (suggested; repo renovate config and annotation style not checked, UNVERIFIED) |
 | License | Apache-2.0 for CRS (GitHub SPDX). ModSecurity engine license from the apt package: UNVERIFIED. |
 | Source URL | https://github.com/coreruleset/coreruleset |
-| Download (CRS) | `https://github.com/coreruleset/coreruleset/archive/refs/tags/v${VERSION}.tar.gz` (tag `v4.31.0`). Upstream image uses the same tarball plus `.asc`. Exact asset URL for 4.31.0 not re-fetched (UNVERIFIED). |
+| Download (CRS) | `https://github.com/coreruleset/coreruleset/archive/refs/tags/v${VERSION}.tar.gz` (tag `v4.31.0`). Upstream image uses the same tarball plus `.asc`. The signature asset is `https://github.com/coreruleset/coreruleset/releases/download/v4.31.0/coreruleset-4.31.0.tar.gz.asc` (release assets listed via the GitHub API; that the archive tarball matches it is UNVERIFIED). |
 | Download (ModSecurity engine) | apt `libapache2-mod-security2` on Ubuntu 26.04. Version and arm64 availability: UNVERIFIED (not checked). |
 | Per-arch | CRS is interpreted rules, identical on amd64 and arm64. Apache and ModSecurity come from apt per architecture (UNVERIFIED for arm64 package). |
 | Checksum source | CRS: GPG signature `.asc` verified against https://coreruleset.org/security.asc (as upstream `apache/Dockerfile` does). ModSecurity: apt signature (automatic). |
@@ -54,11 +54,11 @@ Fits because Apache and ModSecurity are available from the Ubuntu archive, so no
        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
    ```
    The apt packages are the engine, not the CRS app, so `VERSION` alignment does not apply to them. Pin them anyway, as `apps/valkey` does. Check that `gnupg` is not already in the base first.
-4. Enable modules at build time (root): `a2enmod proxy proxy_http headers remoteip unique_id security2` (module list UNVERIFIED against the Ubuntu package).
+4. Enable modules at build time (root): `a2enmod proxy proxy_http headers remoteip unique_id security2` (module list UNVERIFIED against the Ubuntu package). Apache `ServerRoot`/`User` handling as non-root (no `User www-data` directive) lives in the repo `etc/` config.
 5. Fetch CRS, verify, unpack to `/app/owasp-crs`:
    ```sh
    curl -fsSL -o /tmp/crs.tar.gz "https://github.com/coreruleset/coreruleset/archive/refs/tags/v${VERSION}.tar.gz"
-   curl -fsSL -o /tmp/crs.tar.gz.asc "https://github.com/coreruleset/coreruleset/archive/refs/tags/v${VERSION}.tar.gz.asc"  # UNVERIFIED: asset exists for 4.31.0
+   curl -fsSL -o /tmp/crs.tar.gz.asc "https://github.com/coreruleset/coreruleset/releases/download/v${VERSION}/coreruleset-${VERSION}.tar.gz.asc"  # asset exists for 4.31.0 (checked via release API); it signs the source archive. The archive/ URL does not serve .asc
    curl -fsSL -o /tmp/security.asc https://coreruleset.org/security.asc
    gpg --import /tmp/security.asc && gpg --verify /tmp/crs.tar.gz.asc /tmp/crs.tar.gz
    mkdir -p /app/owasp-crs && tar xzf /tmp/crs.tar.gz -C /app/owasp-crs --strip-components=1

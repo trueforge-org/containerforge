@@ -211,7 +211,7 @@ volumes:
 ```bash
 #!/usr/bin/env bash
 
-mkdir -p /config /downloads
+mkdir -p /config /config/migrations /downloads
 
 export PORT="${PORT:-5000}"
 export HOST="${HOST:-0.0.0.0}"

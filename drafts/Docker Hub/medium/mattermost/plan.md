@@ -67,6 +67,8 @@ RUN set -eux; \
     chown -R root:root /app && chmod -R 755 /app
 ```
 
+   Ship the license: after unpacking, `mkdir -p /usr/share/licenses/mattermost` and copy the tarball's license file (file name UNVERIFIED; check the tarball root, e.g. `NOTICE.txt`/`LICENSE.txt`) to `/usr/share/licenses/mattermost/LICENSE`, since `container-test.yaml` asserts that path.
+
    `/config/client-plugins` is a new path name, so the client-plugins symlink target is a choice, not upstream behaviour. Symlink targets are created by `start.sh` (`mkdir -p`), not in the image.
 5. Tail (same as siblings):
 

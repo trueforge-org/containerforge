@@ -73,6 +73,7 @@ VOLUME /config
 WORKDIR /config
 ```
 
+- Draft lists apt `libgl1` and `libglib2.0-0` (inferred, opencv runtime). They are not in the `RUN` above. UNVERIFIED whether the base or the `opencv-python-headless` wheel already covers them; if the import fails, add an `apt-get install -y --no-install-recommends libgl1 libglib2.0-0` step as root and clean apt lists.
 - The `dist-info` LICENSE path is UNVERIFIED: confirm with `pip show -f IOPaint` in the build. If the wheel does not ship a LICENSE, fetch it from the upstream tag instead.
 - `/app` is owned by root and read-only for `apps`, as in `apps/bazarr`.
 - `TORCH_HOME` and `HF_HOME` point at `/config` on purpose: the chart persists model caches, so persistence is required. This is the one exception to the "caches in `/tmp`" rule, and it is a decision (section 10).

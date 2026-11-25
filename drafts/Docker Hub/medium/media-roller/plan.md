@@ -81,8 +81,8 @@ COPY --from=build /tmp/src/LICENSE /usr/share/licenses/media-roller/LICENSE
 4. yt-dlp, pinned, arch-independent zipapp, checksum-verified (renovate-annotated separately from the app VERSION):
 
 ```dockerfile
-ARG YTDLP_VERSION=2026.11.23
 # renovate: datasource=github-releases depName=yt-dlp/yt-dlp versioning=semver
+ARG YTDLP_VERSION=2026.11.23
 RUN set -eux; \
     curl -fsSL -o /usr/local/bin/yt-dlp \
         "https://github.com/yt-dlp/yt-dlp/releases/download/${YTDLP_VERSION}/yt-dlp"; \

@@ -52,6 +52,8 @@ RUN echo "*** Installing Metabase ***" && \
   chown -R apps:apps /app && chmod -R 755 /app
 ```
 
+   Add a build-time symlink in the same `RUN` (as root): `ln -s /config/plugins /app/metabase/plugins`, so the section 9 remap exists (the plugins path is UNVERIFIED). `start.sh` only creates the target `/config/plugins`.
+
    `METABASE_JAR_SHA256` is an `ARG` with no published source. The value has to be computed from a verified download (download twice from the same URL, compare, then pin). This is a caveat, not a verified checksum.
 6. Optional RDS CA bundle (upstream downloads it for AWS RDS SSL): include only if a user needs RDS SSL. Not needed for the default H2 path. UNVERIFIED that the download URL still works.
 7. License: `/usr/share/licenses/metabase/` with the upstream `LICENSE` file, fetched from `https://raw.githubusercontent.com/metabase/metabase/v${VERSION}/<license file>` (file name UNVERIFIED).
@@ -222,7 +224,7 @@ filePaths:
 | Upstream write path | Remap |
 | --- | --- |
 | H2 database (upstream default in the data path, `/metabase.db/...` per docs) | Set the H2 path to `/config` with the H2 variable (section 7). |
-| `plugins/` (chart `/plugins` PVC; path UNVERIFIED for the jar) | Build-time symlink `/app/metabase/plugins` -> `/config/plugins`, created in `start.sh` if missing. Same pattern as `apps/fenrus`. |
+| `plugins/` (chart `/plugins` PVC; path UNVERIFIED for the jar) | Build-time symlink `/app/metabase/plugins` -> `/config/plugins`, target created by `start.sh`. Same pattern as the fenrus plan (`data` symlink). |
 | Java temp | `/tmp` via `-Djava.io.tmpdir=/tmp`. |
 | `HOME` | `/config` as in sibling apps (UNVERIFIED that Metabase writes to `HOME`). |
 | Anything else | UNVERIFIED: check the logs on `--read-only --tmpfs /tmp` and fix any further write path with a symlink into `/config`. |
