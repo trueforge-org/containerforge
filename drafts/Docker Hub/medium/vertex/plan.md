@@ -13,9 +13,9 @@
 | Checksum source | None published. The tarball is content-addressed by commit SHA. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/vertex-app/vertex/master/docker/Dockerfile: two stages on `lswl/vertex-base:latest` (Alpine: `apk add gcc g++ python3 cmake make npm libc-dev`), `npm install --global npm@8.19.4`, `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci --omit=dev`, `EXPOSE 3000`, `CMD ["bash", "/app/vertex/docker/start.sh"]`, no `VOLUME`, no `USER`. |
 | Port | 3000/tcp (EXPOSE 3000). |
-| Env vars (real) | Only `TZ=Asia/Shanghai` is set by the upstream Dockerfile. Other variables are UNVERIFIED: `docker/start.sh` and `app/` config were not read in this run. |
+| Env vars (real) | Upstream Dockerfile sets `TZ=Asia/Shanghai`. Upstream `docker/start.sh` reads `PORT` (default 3000), `REDISPORT` (default 6379), `PUID`, `PGID`, `TZ`. Other app env vars are UNVERIFIED. |
 | Data paths (upstream) | `/vertex` (created and `chown`ed to user `vt`), symlinked from `/app/vertex/app/data`, `/app/vertex/app/db`, `/app/vertex/logs`, `/app/vertex/torrents`, and `/app/vertex/app/config` (moved to `config_backup`, then `ln -s /vertex/config`). |
-| Local services | Upstream appends `bind 127.0.0.1` and `daemonize yes` to `/app/redis.conf`, so the upstream image runs a local redis. UNVERIFIED: whether `start.sh` starts redis, and which package provides it on Ubuntu. |
+| Local services | Upstream appends `bind 127.0.0.1` and `daemonize yes` to `/app/redis.conf`, and `docker/start.sh` runs `/usr/bin/redis-server /app/redis.conf --port $REDISPORT`, so a local redis is required. UNVERIFIED: which package provides it on Ubuntu 26.04. |
 | Browser | Upstream links `/usr/bin/chromium` to `/usr/bin/chromium-browser` (Puppeteer download skipped). UNVERIFIED: whether the app needs chromium at runtime for the features the chart uses. |
 | apt | UNVERIFIED for Ubuntu 26.04 package names (`redis-server`, `chromium` availability). Check before pinning. |
 
@@ -92,39 +92,51 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: REDISPORT
+    default: "6379"
+    required: false
 volumes:
   - path: /config
     required: true
 ```
 
-Port 3000 is confirmed by the upstream `EXPOSE`. Add env vars only after reading the app config and `start.sh` (UNVERIFIED: none confirmed in this run). Dependencies: none for the runtime plan (redis is bundled, not a sibling); add a `dependencies` entry only if redis is provided by another ContainerForge app (none found in this plan).
+Port 3000 is confirmed by the upstream `EXPOSE`. Add env vars `PORT` (default `3000`) and `REDISPORT` (default `6379`), which upstream `docker/start.sh` reads and which `start.sh` here defaults identically. Dependencies: none (redis runs inside the container, not as a sibling app).
 
 ## 7. start.sh
 
-Plan (to be validated when written):
+Based on the upstream `docker/start.sh` (read from the master branch via the GitHub contents API; the pinned commit may differ). Upstream seeds `/vertex/data/*` subfolders (`rss client server rule/{delete,rss,race,raceSet,link} push script watch/set site irc race setting douban/set`), `/vertex/db`, `/vertex/torrents`, `/vertex/logs`; copies `config_backup/sql.db` to `/vertex/db/sql.db` when missing; copies `config_backup/*.yaml` to `/vertex/config/` and `config.example.yaml` to `config.yaml` when missing; seeds `setting.json`, `link-mapping.json`, `bulk-link-history.json` and `data/setting/*.json` (`torrent-history-setting`, `torrent-mix-setting`, `site-push-setting`, `torrent-push-setting`, `proxy`) from `config_backup`; then starts `Xvfb :99`, `redis-server /app/redis.conf --port $REDISPORT` and `node app/app.js` as user `vt` (PUID/PGID via `usermod`, `chown -R`, `/etc/hosts` rewrite, `/app/localtime`). Port comes from env `PORT` (default 3000), redis port from `REDISPORT` (default 6379).
+
+Sketch for the image (not a copy of upstream):
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Persistent state under /config, created only when missing
-mkdir -p /config/data /config/db /config/logs /config/torrents /config/config
-# Seed the default config only when missing or empty (do not overwrite user state)
-if [ ! -s /config/config/config.json ] && [ -d /app/vertex/app/config_backup ]; then
-  cp -rn /app/vertex/app/config_backup/. /config/config/
+b=/app/vertex/app/config_backup
+mkdir -p /config/db /config/logs /config/torrents /config/config /config/data/setting /tmp/redis
+# ...mkdir the remaining /config/data/* subfolders listed above (mkdir -p is idempotent)
+[ -f /config/db/sql.db ] || cp "$b/sql.db" /config/db/sql.db
+if [ ! -f /config/config/config.yaml ]; then
+  cp "$b"/*.yaml /config/config/
+  cp /config/config/config.example.yaml /config/config/config.yaml
 fi
+# seed setting.json, link-mapping.json, bulk-link-history.json and data/setting/*.json only when missing (as upstream)
 
-# The symlinks /app/vertex/app/{data,db,config} -> /config/... are created at build
-# time in the Dockerfile (section 4, step 5), not here, because /app is read-only.
-
+export PORT="${PORT:-3000}" REDISPORT="${REDISPORT:-6379}"
+redis-server --bind 127.0.0.1 --port "$REDISPORT" --dir /tmp/redis --daemonize yes
 cd /app/vertex
-exec node app/index.js --port 3000
+exec node app/app.js
 ```
 
 Notes on this sketch:
-- The entry point and the `node` command are UNVERIFIED. Read `/app/vertex/docker/start.sh` and `package.json` `scripts.start` from the pinned tarball before writing the real file. The upstream `CMD` is `bash /app/vertex/docker/start.sh`.
-- `/app` is read-only at runtime, so the upstream symlinks (`/app/vertex/app/data -> /vertex/...`) must exist at build time pointing into `/config`. Create them in the Dockerfile `RUN` step (they are dangling until `start.sh` creates `/config/...`), as the `apps/fenrus` plan does. Do not create them in `start.sh`.
-- If redis is used, `start.sh` starts `redis-server /app/redis.conf` (or a `/tmp` config) before the app. Use `/tmp` for redis data (`dir /tmp`).
+- Upstream entry is `node app/app.js` (package.json `main`), not `app/index.js`; there is no `--port` flag, the port is the `PORT` env var. `package.json` has no `start` script.
+- The app depends on redis (`connect-redis` in `package.json`; upstream runs a local redis on `REDISPORT`), so redis is NOT optional. Redis must run with data under `/tmp` (rootfs is read-only) and bound to localhost. Package name for Ubuntu 26.04 (`redis-server`) is UNVERIFIED. `/app/redis.conf` comes from `lswl/vertex-base`, not from this repo, so pass the settings on the command line as above.
+- Upstream also starts `Xvfb :99` with `DISPLAY=:99` and chromium for browser-based features; whether this image needs them is UNVERIFIED (add `xvfb` and `chromium` only if a feature requires them).
+- Upstream rewrites `/etc/hosts` from `/vertex/data/hosts` and runs `usermod`/`chown`: both need root and are dropped here (rootless image).
+- `/app` is read-only at runtime, so the upstream symlinks (`/app/vertex/app/data`, `db`, `config`, `/app/vertex/logs`, `torrents`) must exist at build time pointing into `/config`, created in the Dockerfile `RUN` (dangling until `start.sh` creates the targets), after `mv app/config app/config_backup`. Do not create them in `start.sh`.
 - Bind `0.0.0.0` (see section 10 for the bind check).
 
 ## 8. container-test.yaml
@@ -150,7 +162,7 @@ Add `filePaths` for `/app/vertex/package.json` and `/usr/share/licenses/vertex/L
 | `/app/vertex/app/config_backup` | Seeded into `/config/config` when missing; never written in `/app` |
 | `/etc/localtime` symlink | Not needed; use `TZ` env |
 | `/usr/bin/chromium` symlink | Not needed unless the chart features need it (UNVERIFIED) |
-| `/app/redis.conf` append | Do not write it; if redis is used, pass a config under `/tmp` |
+| `/app/redis.conf` append | Do not write it; redis is started with command-line options and data under `/tmp/redis` |
 | npm cache | `/tmp/npm-cache` at build time; none at runtime |
 
 Draft security expectations reconciled: the chart runs as UID 0 with `readOnlyRootFilesystem: false`. The image runs as `apps` (568) with `--read-only --tmpfs /tmp`, so `/config` is the only writable persistent path. Not privileged. The draft's "extra-persistence: /vertex" maps to `/config`, so existing data needs `/vertex/*` content moved to `/config/*` (document in the PR).
@@ -159,7 +171,7 @@ Draft security expectations reconciled: the chart runs as UID 0 with `readOnlyRo
 
 - No upstream release: builds change with every master push. Renovate on commits is noisy. Mitigation: pin the SHA and let renovate propose bumps.
 - Upstream Dockerfile is Alpine (`lswl/vertex-base`, `apk`). Node native modules compiled on glibc (`python-node`) may differ. Verify `npm ci` succeeds on amd64 and arm64 (UNVERIFIED for arm64).
-- Redis and chromium: whether the app needs them at runtime is UNVERIFIED. If yes, add the apt packages (pinned) and the start order in `start.sh`.
+- Redis is required (upstream `start.sh` starts it); chromium and Xvfb are started/linked upstream and whether the app needs them at runtime is UNVERIFIED. Add the apt packages (pinned) and the start order in `start.sh`.
 - Torrent daemon: peers and trackers need inbound ports. The container listens on 3000 only in this plan; BitTorrent ports are UNVERIFIED and not declared in settings.yaml.
 - Blockers: none confirmed. No musl-only binary, no GPU, not privileged. Redis/chromium are the main unknowns.
 

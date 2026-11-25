@@ -5,14 +5,14 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | No tags and no GitHub releases (`gh api repos/bndw/wifi-card/releases/latest` returns 404). Pin the commit the draft already names: `7a990dd2411f6c8758ad696bf737b509f9672953` (Dockerfile source). Latest master commit: UNVERIFIED (not fetched). |
+| Version to build | No tags and no GitHub releases (`gh api repos/bndw/wifi-card/releases/latest` returns 404). Pin the commit the draft already names: `7a990dd2411f6c8758ad696bf737b509f9672953` (Dockerfile source). The default branch `master` HEAD equals this commit (checked via the GitHub API on 2026-11-25). |
 | Renovate | UNVERIFIED: no release or tag. Use `datasource=git-refs depName=https://github.com/bndw/wifi-card currentValue=master` (precedent `apps/fenrus`, `apps/tvheadend`). |
 | License | MIT (GitHub API `license.spdx_id` = `MIT`, https://github.com/bndw/wifi-card) |
 | Source URL | https://github.com/bndw/wifi-card |
 | Download | Source zip `https://github.com/bndw/wifi-card/archive/refs/heads/master.zip` (HTTP 200, `application/zip`). Pinning to the commit is preferred: `https://github.com/bndw/wifi-card/archive/${VERSION}.tar.gz`. Arch-neutral static source, no per-arch binary. |
 | Checksum source | None published (no release). The commit-pinned archive is content-addressed. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/bndw/wifi-card/7a990dd2411f6c8758ad696bf737b509f9672953/Dockerfile: stage 1 `node:24-alpine` (`corepack enable`, `yarn install --immutable`, prettier check on `./src`, project build to `/app/dist`); stage 2 `nginx:stable-alpine` copies `dist` to `/usr/share/nginx/html`. No EXPOSE, USER, VOLUME, ENV, ENTRYPOINT or nginx config. |
-| Build script name | UNVERIFIED: the upstream `yarn` build script is not confirmed (read `package.json` from the archive in step 4). |
+| Build script name | `yarn build` (`vite build`, output `dist/`), confirmed in upstream `package.json` and the upstream Dockerfile (`RUN yarn build`, `COPY --from=builder /app/dist`). `packageManager` is `yarn@4.18.0` (corepack). |
 | Port | 80 (nginx default, from upstream stage 2). ContainerForge nginx listens on 8080 (see section 3), so the container port is 8080. |
 | Env vars | None read at runtime (static frontend). The draft's "runtime settings baked in at build" caveat is inferred, UNVERIFIED against the source. |
 | Data paths | None (static frontend, no server state). |
@@ -24,7 +24,7 @@
 - `apps/wifi-card/docker-bake.hcl`
 - `apps/wifi-card/settings.yaml`
 - `apps/wifi-card/container-test.yaml`
-- `apps/wifi-card/start.sh` (small: starts nginx in the foreground on `/config`-independent paths; only needed if the nginx base does not already do it, see section 7)
+- `apps/wifi-card/start.sh` is NOT needed (the nginx base CMD already runs nginx in the foreground, see section 7)
 
 No `defaults/`, `etc/` or `health/` needed unless the nginx site config must change (then add `etc/nginx/...` with the reason). No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
@@ -40,7 +40,7 @@ Rationale for not using `node:24-alpine` (upstream): musl build stage; Container
 1. Build stage: `FROM <python-node digest> AS build`, `ARG VERSION`, `USER root`.
 2. `ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 YARN_CACHE_FOLDER=/tmp/yarn`. Caches to `/tmp` only.
 3. `curl -fL https://github.com/bndw/wifi-card/archive/${VERSION}.tar.gz | tar xz -C /tmp/src --strip-components=1` (VERSION = commit SHA).
-4. `cd /tmp/src && corepack enable && yarn install --immutable && yarn <build script>` (script name UNVERIFIED, read `package.json`). Output `/tmp/src/dist`.
+4. `cd /tmp/src && corepack enable && yarn install --immutable && yarn build`. Output `/tmp/src/dist`.
 5. Final stage: `FROM <nginx digest>`, `USER root` only if needed for the copy/chmod.
 6. `COPY --from=build /tmp/src/dist/ /usr/share/nginx/html/` (exact nginx web root confirmed by base image config: UNVERIFIED, check `nginx -T` in step 11).
 7. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/wifi-card/LICENSE`.
@@ -54,7 +54,7 @@ EXPOSE 8080
 VOLUME /config
 ```
 
-Do not set `VOLUME /config` if the app has no state; keep it only if the chart mounts it (settings section 6 lists `/config` as required; decide in review, UNVERIFIED need).
+Keep `VOLUME /config`: the `apps/nginx` base starts `nginx -c /config/nginx.conf` (seeded from its `defaults/`), so `/config` is used by nginx itself even though the app has no state. Follow `apps/it-tools` (same nginx base and digest, copies the dist to `/usr/share/nginx/html`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html`).
 
 ## 5. docker-bake.hcl
 
@@ -92,18 +92,11 @@ volumes:
 dependencies: []
 ```
 
-No runtime env vars are confirmed; do not invent any. `/config` only if kept (see section 4). Dependencies: none (draft confirms no hard or optional dependency containers).
+No runtime env vars are confirmed; do not invent any. `/config` is listed because the nginx base reads `/config/nginx.conf` (section 4). Dependencies: none (draft confirms no hard or optional dependency containers).
 
 ## 7. start.sh
 
-Only if the nginx base needs a wrapper. Minimal:
-
-```bash
-#!/usr/bin/env bash
-exec nginx -g 'daemon off;'
-```
-
-No writes to `/app`, no `/config` seeding (no state). Nginx temp and cache dirs go to `/tmp` (the nginx base already maps them, see `apps/nginx/Dockerfile`). Bind to 0.0.0.0 (nginx default `listen 8080;` in the base config: confirm in step 11).
+No `start.sh`: the `apps/nginx` base has `CMD ["nginx", "-c", "/config/nginx.conf", "-g", "daemon off;"]` and seeds `/config/nginx.conf` from its own defaults (`apps/it-tools` ships no `start.sh` either). Skip this file unless the build shows the base config does not serve `/usr/share/nginx/html` on 8080 (then add `defaults/` as `apps/it-tools` does, with the reason). No writes to `/app`. Nginx temp and cache dirs are `/tmp/nginx-temp` and `/tmp/nginx-cache` in the base. Bind and web root: confirm in step 11.
 
 ## 8. container-test.yaml
 
@@ -127,7 +120,7 @@ The `index.html` path is a file the build output must contain. UNVERIFIED that `
 
 | Upstream write path | Remap |
 | --- | --- |
-| nginx temp/cache (`/var/cache/nginx`, pid file) | `/tmp` via the nginx base (`apps/nginx/Dockerfile` sets `/tmp/nginx-temp`, `/tmp/nginx-cache`). Confirm pid path in the base config. |
+| nginx temp/cache (`/var/cache/nginx`, pid file) | `/tmp` via the nginx base (`apps/nginx/Dockerfile` creates `/tmp/nginx-temp`, `/tmp/nginx-cache`). Confirm pid path in the base config. |
 | Static web root | Read-only copy under `/usr/share/nginx/html`, written at build only. |
 | Yarn/Node caches | `/tmp` (build stage only, not in the final image). |
 
@@ -138,7 +131,6 @@ Reconciling the draft's security expectations: the chart runs as UID 0 with `rea
 - No release or tag: Renovate tracks master commits, which creates churn. Pin the commit; accept churn or add a schedule limit.
 - Static frontend: any runtime config must be built in. Confirm in the source whether a config file is read at runtime (UNVERIFIED).
 - Upstream builder is musl (`node:24-alpine`). The glibc build on python-node may differ in Yarn/Node behaviour. Build the commit and check the output.
-- Upstream `dist` directory name and build script are UNVERIFIED (not in the fetched Dockerfile).
 - No blockers identified: not privileged, no GPU, arm64 is not a concern for an arch-neutral static build (confirm by `bake` `image-all`).
 
 ## 11. Build and test steps

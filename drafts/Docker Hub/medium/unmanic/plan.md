@@ -34,7 +34,7 @@ No `defaults/`, `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `F
 
 Fits because unmanic is a pure Python app: the python base provides `/app/venv`, which is installed into at build time (python-runtime rule: read-only at runtime, writable only during the build). Closest sibling: `apps/changedetection` (Python venv under `/app/venv`, `/config` as WORKDIR and VOLUME, `EXPOSE`). `apps/bazarr` is the other Python sibling (`ffmpeg` from apt, `USER apps`). UNVERIFIED: the python base's Ubuntu release and whether `ffmpeg` is in its apt index. Upstream needs Python tooling: `apps/changedetection` is the reference for `python3-venv` if the base lacks it.
 
-Requires-Python for unmanic 0.4.1 vs 3.15: UNVERIFIED (not checked against the wheel METADATA in the facts). Check with `/app/venv/bin/python -c` after install; if the wheel does not support 3.15, switch to the python 3.14 base as `apps/changedetection` does, and say so in the PR.
+PyPI `requires_python` for unmanic 0.4.1 is `>=3.8` (https://pypi.org/pypi/unmanic/0.4.1/json), so 3.15 is not excluded by metadata; dependency wheels on 3.15 are UNVERIFIED. Check with `/app/venv/bin/python -c` after install; if the wheel does not support 3.15, switch to a 3.14 base (`apps/changedetection` uses `python-node:3.14.8`), and say so in the PR.
 
 ## 4. Dockerfile
 

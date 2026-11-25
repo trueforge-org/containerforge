@@ -16,9 +16,9 @@
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/wekan/wekan/v13.20/Dockerfile: stage `bundle` on `debian:trixie` downloads the per-arch zip and `.sha256sum`, checks it, verifies `bundle/node` is an ELF for the target CPU, and moves node to `/usr/local/bin/node`; runtime stage `debian:trixie`, `USER wekan`, `WORKDIR /build`, `EXPOSE $PORT` (`PORT=8080`), `CMD ["bash", "/build/wekan-entrypoint.sh"]`, `STOPSIGNAL SIGKILL`, no `VOLUME`. |
 | Bundled Node | The release zip ships its own `node` binary. Upstream `NODE_VERSION=v26.13.1` (env). So no separate Node runtime is needed. |
 | Env vars (real, from the Dockerfile) | `PORT=8080`, `WRITABLE_PATH=/data`, `DEBUG=false`, `DDP_TRANSPORT=sockjs`, `PASSWORD_LOGIN_ENABLED=true`, `BROWSER_POLICY_ENABLED=true`, `MATOMO_DO_NOT_TRACK=true`, `OAUTH2_ENABLED=false`, `LDAP_ENABLE=false`, `SAML_ENABLED=false`, `CAS_ENABLED=false`, `BIGEVENTS_PATTERN=NONE`, `NOTIFY_ON_ASSIGN=true`, `EMAIL_NOTIFICATION_TIMEOUT=30000`, plus about 200 more (LDAP, OAuth, SAML, logout, retention, inbound email). Upstream has two misspelled names (`ACCOUNTS_LOCKOUT_UNKNOWN_USERS_FAILURES_BERORE`, `LDAP_AUTHENTIFICATION`) that must not be copied into `settings.yaml` as if they were real. |
-| Mongo URL env | UNVERIFIED: the MongoDB connection variable (`MONGO_URL`) is not in the fetched Dockerfile excerpt. Confirm in the wekan docs (https://wekan.fi/install/) or the bundle before writing `settings.yaml`. |
+| Mongo URL env | `MONGO_URL` (and `MONGO_URL_FILE`, a file holding the URL) are read by `releases/ferretdb/wekan-entrypoint.sh` at v13.20. `WEKAN_DB=mongodb` or `ferretdb` selects the backend (`ferretdb` starts the bundled FerretDB with SQLite on 127.0.0.1:27017; unset means external MongoDB on amd64/arm64). The entrypoint has no default `MONGO_URL` for MongoDB mode, so `start.sh` must require or default it (section 7). |
 | Data path | `WRITABLE_PATH=/data` (env). Upstream creates `/data` owned by `wekan`. |
-| Entrypoint | `/build/wekan-entrypoint.sh` (copied from `releases/ferretdb/wekan-entrypoint.sh`). UNVERIFIED: whether the entrypoint starts FerretDB or only uses MongoDB. Read it from the release before writing `start.sh`. |
+| Entrypoint | `/build/wekan-entrypoint.sh` (from `releases/ferretdb/wekan-entrypoint.sh`). Read at v13.20: it hardcodes `/build/ferretdb`, `/build/.ferretdb-default`, `/build/node`, `/build/sqlite-recovery.mjs`, so it only works with the bundle at `/build`. It sets `DDP_TRANSPORT`, `NODE_OPTIONS`, `GOMEMLIMIT`, optionally starts FerretDB, then starts the app (tail not read). |
 | apt | Upstream runtime installs `file libatomic1`. Ubuntu package names UNVERIFIED for 26.04. |
 
 ## 2. Target layout
@@ -50,7 +50,7 @@ Reason: the release bundle carries its own Node binary, so `python-node` (the dr
 6. Runtime stage `FROM <ubuntu>`, `USER root`:
    - `useradd` is not needed: the base already runs as `apps`. Do not create the upstream `wekan` user.
    - `apt-get install -y --no-install-recommends file libatomic1` (pin against the Ubuntu archive, verify present in base first).
-   - Copy the unpacked bundle from the build stage into `/app/wekan` (read-only at runtime, not `/build`): unpack to `/out/app/wekan` in the build stage, then `COPY --from=bundle /out/app/wekan /app/wekan`. Use `/app/wekan/node` (or `/usr/local/bin/node` if the entrypoint expects it; UNVERIFIED which path it uses).
+   - Copy the unpacked bundle from the build stage into `/app/wekan` (read-only at runtime). CONFLICT to resolve at build time: the upstream entrypoint hardcodes `/build/...`, so either put the bundle at `/build` and drop `/app/wekan`, or write an own `start.sh` that does not call the upstream entrypoint: unpack to `/out/app/wekan` in the build stage, then `COPY --from=bundle /out/app/wekan /app/wekan`. Use `/app/wekan/node` (or `/usr/local/bin/node` if the entrypoint expects it; UNVERIFIED which path it uses).
    - `install -D /tmp/wekan-bundle/LICENSE /usr/share/licenses/wekan/LICENSE` (UNVERIFIED that the zip contains LICENSE; copy the repo LICENSE from the source tarball if not).
    - `chown -R apps:apps /app/wekan && chmod -R 755 /app/wekan`.
    - Remove the upstream `/usr/bin/pebble` deletion step only if the file exists in the base (it is not expected in ubuntu).
@@ -100,6 +100,15 @@ env:
   - name: ROOT_URL
     default: ""
     required: false
+  - name: MONGO_URL
+    default: ""
+    required: false
+  - name: WEKAN_DB
+    default: "mongodb"
+    required: false
+  - name: WRITABLE_PATH
+    default: "/config/data"
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -110,7 +119,7 @@ dependencies:
   - mongodb
 ```
 
-`ROOT_URL` is an assumed Meteor variable, not confirmed (UNVERIFIED; remove it if the fetched bundle does not read it). Port 8080 and `PORT` are confirmed. Add `MONGO_URL` only once it is confirmed (section 1). Do not list the misspelled names. Dependency: `mongodb` exists as `apps/mongodb` (mark ✅ in `draft.md` context). `mongodb` is a hard dependency, so the narrow DB exception in the protocol may apply (section 8).
+`ROOT_URL` is an assumed Meteor variable, not confirmed (UNVERIFIED; remove it if the fetched bundle does not read it). Port 8080 and `PORT` are confirmed. `MONGO_URL` and `WEKAN_DB` are confirmed from the upstream entrypoint (section 1); `MONGO_URL` is empty by default, so the container needs it set at runtime. Do not list the misspelled names. Dependency: `mongodb` exists as `apps/mongodb` (mark ✅ in `draft.md` context). `mongodb` is a hard dependency, so the narrow DB exception in the protocol may apply (section 8).
 
 ## 7. start.sh
 
@@ -129,7 +138,7 @@ cd /app/wekan
 exec bash /app/wekan/wekan-entrypoint.sh
 ```
 
-- The real command depends on `wekan-entrypoint.sh` (UNVERIFIED: its contents were not read). If the entrypoint starts `node main.js` from `/build`, keep the same relative layout under `/app/wekan` and keep `WORKDIR` consistent.
+- The upstream `wekan-entrypoint.sh` was read (v13.20): it requires the bundle at `/build` (see section 1), so `/app/wekan/wekan-entrypoint.sh` as written above will not work unchanged. Resolve by using `/build` as the bundle path (replace `/app/wekan` throughout), or by replacing the entrypoint logic in `start.sh`. With `WEKAN_DB=mongodb` (default) `start.sh` must export `MONGO_URL` from env (`MONGO_URL_FILE` is supported upstream); do not bake credentials.
 - Nothing is written to `/app`. The entrypoint must not write into the bundle; if it does, the read-only test will show it.
 - Bind to all interfaces: wekan listens on `0.0.0.0` by default in the Meteor bundle (UNVERIFIED); confirm with the readiness log and an external curl (section 11).
 - Use `exec` so the process gets signals (upstream `STOPSIGNAL SIGKILL` is kept only if needed).

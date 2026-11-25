@@ -59,7 +59,7 @@ Reason: no language runtime image is needed. PHP and its extensions come from Ub
 9. Tail:
 
 ```dockerfile
-ENV LOG_CHANNEL=daily LOG_LEVEL=info DB_CONNECTION=pgsql WEBAUTHN_NAME=2FAuth \
+ENV LOG_CHANNEL=daily LOG_LEVEL=info DB_CONNECTION=sqlite DB_DATABASE=/config/database/database.sqlite WEBAUTHN_NAME=2FAuth \
     APP_CONFIG_CACHE=/tmp/bootstrap/config.php APP_ROUTES_CACHE=/tmp/bootstrap/routes.php \
     APP_EVENTS_CACHE=/tmp/bootstrap/events.php APP_SERVICES_CACHE=/tmp/bootstrap/services.php \
     APP_PACKAGES_CACHE=/tmp/bootstrap/packages.php
@@ -73,7 +73,7 @@ WORKDIR /config
 CMD ["/start.sh"]
 ```
 
-`DB_CONNECTION` default is set in `settings.yaml` (section 6). It is decided here as `pgsql` because the chart uses external PostgreSQL, and the upstream image default `sqlite` is kept by the test (section 8), which runs with no env.
+`DB_CONNECTION` defaults to the upstream value `sqlite` (database under `/config/database`), so the image starts with no env, as the container test requires. Users set `DB_CONNECTION=pgsql` plus `DB_HOST` etc. for the chart's external PostgreSQL setup.
 
 ## 5. docker-bake.hcl
 
@@ -153,23 +153,23 @@ env:
     default: "false"
     required: false
   - name: DB_CONNECTION
-    default: "pgsql"
-    required: true
+    default: "sqlite"
+    required: false
   - name: DB_HOST
     default: ""
-    required: true
+    required: false
   - name: DB_PORT
     default: "5432"
     required: false
   - name: DB_DATABASE
-    default: "MYPOSTGRESDB"
+    default: "/config/database/database.sqlite"
     required: false
   - name: DB_USERNAME
-    default: "MYPOSTGRESUSER"
-    required: true
+    default: ""
+    required: false
   - name: DB_PASSWORD
-    default: "MYPOSTGRESPASSWORD"
-    required: true
+    default: ""
+    required: false
   - name: WEBAUTHN_NAME
     default: "2FAuth"
     required: false
@@ -181,7 +181,7 @@ opt_dependencies:
 ```
 
 - `APP_KEY` is `required: false` because `start.sh` generates it on first start when empty (section 7). The `settings.yaml` schema allows this only with a generating `start.sh`.
-- `DB_CONNECTION` is `pgsql` by default. The upstream image default `sqlite` is not used here, because the chart's model is an external database. `DB_HOST` has no default and must be set by the user; `required: true` is accepted because the schema allows an empty default with a documented requirement (UNVERIFIED against the schema; check `forgetool` schema at build time).
+- `DB_CONNECTION` is `sqlite` by default (the upstream default), so the container starts with no env. For PostgreSQL the user sets `DB_CONNECTION=pgsql`, `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`; no credentials are baked in. `start.sh` must also accept the `*_FILE` variants (UNVERIFIED which upstream supports beyond those in section 1).
 - `postgresql` is listed under `opt_dependencies`, not `dependencies`. It is optional: SQLite remains usable, so the DB-dependency exception in the build protocol does not apply.
 
 ## 7. start.sh
@@ -197,7 +197,7 @@ mkdir -p "$CONFIG_DIR/storage" "$CONFIG_DIR/database" /tmp/bootstrap /tmp/nginx 
 
 # Seed storage from the pristine tree only when missing or empty (never overwrite user state)
 if [ -z "$(ls -A "$CONFIG_DIR/storage" 2>/dev/null)" ]; then
-  cp -a "$APP_DIR/storage.pristine/." "$CONFIG_DIR/storage/"
+  cp -a /usr/share/twofauth/storage.pristine/. "$CONFIG_DIR/storage/"
 fi
 
 # .env: create once; generate APP_KEY when no key exists
@@ -209,18 +209,22 @@ if ! grep -q '^APP_KEY=base64:' "$CONFIG_DIR/.env" && [ -z "${APP_KEY:-}" ]; the
   export APP_KEY
 fi
 
+# SQLite file must exist before migrating
+if [ "${DB_CONNECTION:-sqlite}" = "sqlite" ]; then touch "${DB_DATABASE:-/config/database/database.sqlite}"; fi
+
 # Migrations on every start (idempotent)
 php "$APP_DIR/artisan" migrate --force
 
-php-fpm8.5 -y /tmp/php-fpm/php-fpm.conf -F &
-exec nginx -c /tmp/nginx/nginx.conf -g 'daemon off;'
+# UNVERIFIED: /tmp/supervisord.conf is never created above; start.sh must first copy it from the template in defaults/ (e.g. cp /defaults/supervisord.conf /tmp/supervisord.conf), and the pristine storage copy must be made in the Dockerfile before the symlink replaces storage/.
+# Two processes: run under supervisord (see the note below); a bare "&" plus exec nginx would leave php-fpm unsupervised.
+exec supervisord -n -c /tmp/supervisord.conf
 ```
 
 - Notes:
-  - The upstream runs migrations in its entrypoint. Migrations run on every start here, which is idempotent. Verify the exact upstream command at build time (UNVERIFIED).
+  - UNVERIFIED that the upstream entrypoint runs migrations (the reviewed entrypoint summary in section 1 does not mention it). Migrations run on every start here, which is idempotent. Verify the exact upstream command at build time (UNVERIFIED).
   - `APP_KEY`: the env value wins over the generated key. A key generated on first start is stored in `/config/.env`. The `APP_KEY` env handling is UNVERIFIED against the upstream entrypoint's `file_env APP_KEY` path, so mirror `file_env` for `APP_KEY_FILE` and the other `*_FILE` variables.
-  - `storage.pristine` is a build-time copy of `storage/` in the image (must be created in the Dockerfile, not in `/app`, so it is copied with `COPY`). Put it at `/usr/share/twofauth/storage.pristine` and adjust the path.
-  - PHP-FPM and nginx are backgrounded and nginx is `exec`'d. Supervising two processes needs a supervisor or a `wait` loop. The upstream uses supervisord (v0.7.3). The writer must decide between shipping supervisord (a binary from apt or pinned release, with its checksum) and a small wait loop. Plan default: ship nginx and php-fpm under supervisord from apt, `exec supervisord -c /tmp/supervisord.conf`. Record the choice in the PR.
+  - `storage.pristine` is a build-time copy of `storage/` made in the Dockerfile before the symlink replaces `storage/`. Put it at `/usr/share/twofauth/storage.pristine` and use that path in `start.sh` instead of `$APP_DIR/storage.pristine`.
+  - Supervising two processes needs a supervisor or a `wait` loop. The upstream uses supervisord (v0.7.3). The writer must decide between shipping supervisord (a binary from apt or pinned release, with its checksum) and a small wait loop. Plan default: ship nginx and php-fpm under supervisord from apt, with `/tmp/supervisord.conf` generated from a template in `defaults/` (the `supervisor` apt package must be added in section 4 step 3). Record the choice in the PR.
   - Binds 0.0.0.0: nginx listens on `*:8000` (section 4 step 7 copies the upstream `listen 8000;`, which is all interfaces by default).
 
 ## 8. container-test.yaml
@@ -242,7 +246,7 @@ filePaths:
 
 - Probes: `tcp` and `http` on 8000 (coverage minimum).
 - UNVERIFIED: the HTTP status for `/` on a first start with no `APP_KEY`. If the app returns a non-200 without an app key, the writer narrows the `http` check to the status it returns, with a comment. Do not remove the probe.
-- Runs with no env: SQLite is not the default here (`DB_CONNECTION=pgsql`), so the first start needs PostgreSQL. This is the **hard** database requirement the protocol's narrow exception covers only if `postgresql` were a hard dependency. Here `postgresql` is an optional dependency, and the app can run without it only if SQLite is set. So the writer must **also** test the SQLite path: run once with `-e DB_CONNECTION=sqlite -e DB_DATABASE=/config/database/database.sqlite` and check the readiness log (section 11). Decide, before the PR, whether the default should be sqlite to keep the test real. If `DB_CONNECTION` default stays `pgsql`, the test must set the sqlite path through `filePaths` coverage, not by removing the probe.
+- Runs with no env: the default is SQLite under `/config/database`, so the test exercises a real start without PostgreSQL. The PostgreSQL path is a manual check (section 11).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -266,7 +270,7 @@ filePaths:
 - **arm64**: UNVERIFIED for the upstream image; the ubuntu base is multi-arch, so `image-all` should build, but it is not tested.
 - **Supervision**: two processes (nginx, php-fpm). The choice of supervisord or a wait loop is open (section 7).
 - **Secrets**: `APP_KEY` and the two-factor secrets are sensitive. The `/config` volume must be backed up, or stored codes are lost (draft caveat). Use `*_FILE` variables for secrets where supported.
-- **Database**: PostgreSQL is optional. The default in `settings.yaml` (`pgsql`) makes the container need a database, which is a behaviour change from the upstream default (`sqlite`). Decide before merge. This is the main open design choice.
+- **Database**: PostgreSQL is optional. The default stays upstream's `sqlite`; the PostgreSQL path is untested until run manually.
 - **Laravel cache env vars** (`APP_*_CACHE`) must match the Laravel version in 9.0.3. UNVERIFIED.
 - **Blockers**: none confirmed. Not musl-only (the upstream Alpine base is replaced), no GPU, no privileged need.
 
