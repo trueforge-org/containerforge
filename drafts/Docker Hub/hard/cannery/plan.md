@@ -55,7 +55,7 @@ dependencies: `- name: postgresql` (exists: apps/postgresql ✅).
 
 ## 8. container-test.yaml
 
-Narrowed per protocol exception (all three criteria hold: hard postgresql dependency, will not serve without DB, no sidecar primitive). Add the comment `# narrowed: requires external postgresql; full functional test not feasible in single-container suite`. Contents: `timeoutSeconds: 180`; `filePaths: - /app/bin/cannery`; `runners` for `test -x /app/bin/cannery`. The tcp probe on 4000 is kept only if the app opens the port before DB is up (it will not); so the automated port 4000 probe is replaced by the file check, and port 4000 is probed manually in step 3 (`curl -fsS http://localhost:4000/` against a running postgresql sidecar). Test runs with no env; required env is handled by start.sh generation, but `DATABASE_URL` default will not resolve.
+Narrowed per protocol exception (all three criteria hold: hard postgresql dependency, will not serve without DB, no sidecar primitive). Add the comment `# narrowed: requires external postgresql; full functional test not feasible in single-container suite`. Contents: `timeoutSeconds: 180`; `filePaths: - /app/bin/cannery`; `runners` for `test -x /app/bin/cannery`. The tcp probe on 4000 is kept only if the app opens the port before DB is up (it will not); so the automated port 4000 probe is replaced by the file check, and port 4000 is probed manually in the section 11 run against a throwaway postgresql (`curl -fsS http://localhost:4000/` against a running postgresql sidecar). Test runs with no env; required env is handled by start.sh generation, but `DATABASE_URL` default will not resolve.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

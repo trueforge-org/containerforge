@@ -38,7 +38,7 @@ Header, schema_version 1, upstream_env_url = SOURCE. ports: web desktop port (69
 Seed /config/.config/openbox/autostart from /defaults only if missing (launch `blender`), create /config/projects, set `XDG_RUNTIME_DIR` under /tmp, then `exec` the desktop stack entrypoint (kasmvnc's start or `Xvfb :1 & x11vnc & websockify`). Listen on all interfaces. No writes to /app.
 
 ## 8. container-test.yaml
-Header; `timeoutSeconds` copy from apps/kasmvnc (UNVERIFIED value, read the file; its test has none set so choose 120); `tcp` probe for each declared port; `filePaths`: /app/blender/blender (amd64) or /usr/bin/blender (arm64 variant, keep both with a conditional-free check by always symlinking /usr/local/bin/blender); `runners: - entrypoint: blender --version` (Blender runs headless for --version).
+Header; `timeoutSeconds: 120` (apps/kasmvnc/container-test.yaml sets none; 120 is a common value in sibling apps); `tcp` probe for each declared port; `filePaths`: /app/blender/blender (amd64) or /usr/bin/blender (arm64 variant, keep both with a conditional-free check by always symlinking /usr/local/bin/blender); `runners: - entrypoint: blender --version` (Blender runs headless for --version).
 
 ## 9. Rootless and read-only-rootfs adaptations
 | Upstream write path | Remap |

@@ -20,7 +20,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Not a sibling-by-family; closest siblings: `apps/steamcmd`-style multi-package Ubuntu apps; a kasmvnc/xvfb sibling mentioned in the draft does not exist in `apps/` (check with `ls apps | grep -i vnc` when porting).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Not a sibling-by-family; closest siblings: `apps/steamcmd`-style multi-package Ubuntu apps; the kasmvnc and xvfb siblings named in the draft DO exist (`apps/kasmvnc`, `apps/xvfb`); kasmvnc is published as a desktop/VNC stack with ports 3000/3001 and could be an alternative base (decide when porting; this plan keeps the TigerVNC/noVNC layout of the accetto image).
 
 ## 4. Dockerfile
 
@@ -45,7 +45,7 @@ Schema header, `schema_version: 1`, `upstream_env_url` = SOURCE. ports: `6901/tc
 1. `mkdir -p /config/.config /config/Downloads /tmp/runtime /tmp/.X11-unix`; copy defaults to `/config` only when missing.
 2. Create the VNC password file in `/config/.vnc/passwd` from `VNC_PW` (via `vncpasswd -f` with the password on stdin, not argv); generate a random one when unset.
 3. Start `Xvnc :1 -rfbport $VNC_PORT -geometry $VNC_RESOLUTION -depth $VNC_COL_DEPTH -SecurityTypes VncAuth -interface 0.0.0.0` in the background, wait for the X socket in `/tmp/.X11-unix`.
-4. Start `dbus-launch xfce4-session` (or the minimal wm), Chromium via the flags file with `--no-sandbox --disable-dev-shm-usage --user-data-dir=/config/chromium`, and `websockify --web /usr/share/novnc 6901 localhost:5901` in the background.
+4. Start `dbus-launch xfce4-session` (or the minimal wm), Chromium via the flags file with `--no-sandbox --disable-dev-shm-usage --user-data-dir=/config/chromium`, and `websockify --web /usr/share/novnc ${NOVNC_PORT:-6901} localhost:${VNC_PORT:-5901}` in the background.
 5. Final: `exec` websockify (or a small supervisor loop) as the foreground process; if any background child exits, exit non-zero so the container restarts. Binding on all interfaces.
 
 ## 8. container-test.yaml
