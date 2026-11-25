@@ -7,7 +7,7 @@
 |---|---|
 | Which upstream | The chart image `dmanius/radarrsync-docker` is built from the fork https://github.com/dairefinn/RadarrSync (its README says so), not from the draft's `Sperryfreak01/RadarrSync`. The fork reads **environment variables**; the original reads a `Config.txt` file. |
 | Version | The fork has no tags and no releases. Last commit `7546e59b7c6ca50f42460e919ebd86eb254a2c57` (2021-01-28); script `VER = '1.0.1'`. Original `Sperryfreak01/RadarrSync` has tags `v1.2.1`, `v1.2`, `v1.0` (the draft's `v1.0` link is a tag with no release). Recommended: the fork, pinned by commit (matches the chart's env contract). |
-| Renovate | UNVERIFIED how well it works for a commit pin: `// renovate: datasource=git-refs depName=https://github.com/dairefinn/RadarrSync` with `versioning=loose` and a branch `master`. The repo is stale, so in practice nothing will update. Acceptable; say so in the PR. |
+| Renovate | UNVERIFIED how well it works for a commit pin: `// renovate: datasource=git-refs depName=https://github.com/dairefinn/RadarrSync versioning=loose` (same form as `apps/nextcloud-imaginary`; default branch `master`). The repo is stale, so in practice nothing will update. Acceptable; say so in the PR. |
 | License | None found: the GitHub API reports no license for either repo, and `Sperryfreak01` has no `LICENSE` file at `v1.2.1`. UNVERIFIED legal status. Put `LICENSE` = `NOASSERTION` in bake and flag it in the PR. There is nothing to copy into `/usr/share/licenses/`. |
 | Source | https://github.com/dairefinn/RadarrSync (and original https://github.com/Sperryfreak01/RadarrSync) |
 | Download | `https://github.com/dairefinn/RadarrSync/archive/7546e59b7c6ca50f42460e919ebd86eb254a2c57.tar.gz`, sha256 `c156d253d0b4b89d5a60ae42f1b094f1f2a101835c0557f44502001f32127d97` (computed by me; GitHub does not publish checksums for archives). No per-arch artifact: pure Python. |
@@ -45,7 +45,7 @@ Python script with one pip dependency (`apps/feed2toot` and `apps/bazarr` do the
    - `curl -fsSL -o /tmp/radarrsync.tar.gz "https://github.com/dairefinn/RadarrSync/archive/${VERSION}.tar.gz"`
    - `echo "c156d2...7d97  /tmp/radarrsync.tar.gz" | sha256sum -c -` (pin the value as `ARG SHA256`, default equal to the bake variable)
    - `tar xzf ... -C /app/radarrsync --strip-components=1`
-   - install deps into the base venv: `/app/venv/bin/pip install --no-cache-dir -r /app/radarrsync/requirements.txt`. Decision to confirm at build time: `requests==2.20.0` (2018) may fail on Python 3.15 or pull vulnerable urllib3/chardet; if it does, relax it with `sed -i 's/==/>=/' /app/radarrsync/requirements.txt` before install (the script only uses `requests.Session().get/post`).
+   - install deps into the base venv: `/app/venv/bin/pip install --no-cache-dir -r /app/radarrsync/requirements.txt`. `requests==2.20.0` (2018) limits urllib3 to an old release that is expected not to import on current Python (UNVERIFIED on 3.15) and has known vulnerabilities, and a successful install would not reveal an import failure. Relax it with `sed -i 's/==/>=/' /app/radarrsync/requirements.txt` before install, then run `/app/venv/bin/python -c 'import requests'` in the same `RUN` (the script only uses `requests.Session().get/post`).
    - `chown -R apps:apps /app && chmod -R 755 /app`, `rm -rf /tmp/*`.
 4. No apt packages (none needed; do not re-install what the base has).
 5. `USER apps`, `COPY --chmod=0755 . /`, `VOLUME /config`, `WORKDIR /config`. No `EXPOSE` (no port).
@@ -129,12 +129,11 @@ Keeps the container alive without env (needed because the test runs without any)
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+# narrowed: needs two external Radarr servers; without env the container only waits.
 filePaths:
 - /app/radarrsync/RadarrSync.py
-runners:
-- entrypoint: test -x /start.sh
 ```
-`settings.yaml` has no ports, so no tcp/http probe is required. This mirrors `apps/feed2toot` (`runners` with `test -x /start.sh`). The required-env path (a real sync against two Radarr servers) cannot run in the test; check it by hand (section 11). Add `/app/venv/bin/python -c 'import requests'` as a second runner only if the forgetool schema accepts a command there (the sibling pattern uses `entrypoint`).
+`settings.yaml` has no ports, so no tcp/http probe is required. With `filePaths` and no probes, forgetool waits for the image healthcheck (`healthcheck.sh` then checks that the main process is alive, here the `sleep infinity` child) and checks the file. Do not copy the `runners: test -x /start.sh` pattern of `apps/feed2toot`: forgetool only asserts a runner's result when `expectedOutput` is set. An import check can be added as in `apps/jbops` (use `/app/venv/bin/python`, a space-free `cmd`, `expectedOutput`), but its runner also does a standard run of that command. The protocol's database exception does not apply (no DB dependency). The real sync cannot run in the test; check it by hand (section 11).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -148,7 +147,7 @@ runners:
 - **Likely functional blocker:** the script uses `/api/movie`, the Radarr v0.2 API. Current Radarr (`apps/radarr` is 7.x) serves `/api/v3`. The container will start but each sync will log an error (HTTP 404 or similar, then `sys.exit(0)`). UNVERIFIED against a live Radarr. Options: ship it as is (TrueCharts parity), or patch the URLs to `/api/v3` (the payload fields would also need checking: `profileId` was removed in v3). Ask the maintainers before porting.
 - No license on the upstream repo; redistribution rights are unclear.
 - Draft said the original needs a hand-made `Config.txt`; that applies to `Sperryfreak01`, not to the fork the chart actually uses. If the original is chosen instead, `start.sh` must write `Config.txt` from env into `/config` (not `/app`) before running, and the script reads it from the cwd.
-- Build depends on GitHub and the pip index; `requests==2.20.0` may not install on Python 3.15 (see section 4).
+- Build depends on GitHub and the pip index; the `requests` pin is relaxed (see section 4).
 - The fork is unmaintained (last commit 2021) and Renovate will not move it.
 
 ## 11. Build and test steps
@@ -176,5 +175,5 @@ Readiness signal: the "waiting" line (no env) or the script's own log line with 
 - Branch `feat/add-radarrsync`, commit and PR title `feat(radarrsync): add new container`, target `main`.
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; tick only what applies; `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- State untested: the live sync against Radarr (API version mismatch), arm64, the Python 3.15 install of the pinned `requests`, anything not built locally. Mention the missing upstream license and the stale fork.
+- State untested: the live sync against Radarr (API version mismatch), arm64, the relaxed `requests` install on Python 3.15, anything not built locally. Mention the missing upstream license and the stale fork.
 - Confirm `bake --print` passes; `VERSION` in bake equals the Dockerfile `ARG VERSION`; no `root/`.

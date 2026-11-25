@@ -10,7 +10,7 @@
 | License | `GPL-3.0-or-later` (`pyproject.toml`: "GNU GPL v3"; file headers: "either version 3 ... or (at your option) any later version") |
 | Source | https://github.com/Kozea/Radicale, docs https://radicale.org/v3.html |
 | Install | `pip install radicale` (pure Python wheel, so no per-arch URL). Dependencies: `defusedxml`, `libpass>=1.9.3`, `vobject>=0.9.6`. Extra `bcrypt` gives bcrypt htpasswd support. |
-| Checksum | PyPI hashes are checked by pip only with `--require-hashes`; plan relies on the exact `==3.9.2` pin. UNVERIFIED: the sha256 of the wheel (not fetched). |
+| Checksum | PyPI hashes are checked by pip only with `--require-hashes`; plan relies on the exact `==3.9.2` pin. PyPI lists the wheel `radicale-3.9.2-py3-none-any.whl` with sha256 `88a28c460af1f1c09745fefe1fb91aaf1b631499240eaaef5796a347b4c965ba`. |
 | Upstream Dockerfile reviewed | https://github.com/tomsquest/docker-radicale/blob/master/Dockerfile (tag 3.9.2.0 not fetched): `alpine:3`, venv at `/venv`, `pip install radicale==$VERSION passlib[bcrypt] argon2-cffi pytz ldap3`, config at `/config/config`, data `/data`, UID/GID 2999, `EXPOSE 5232`, `--config /config/config`. |
 | Defaults (`radicale/config.py`, v3.9.2) | `server.hosts = localhost:5232` (**not reachable from outside the container**), `auth.type = denyall` (since 3.5.0), `auth.htpasswd_filename = /etc/radicale/users`, `auth.htpasswd_encryption = autodetect`, `storage.filesystem_folder` (user must set), `rights.type = owner_only`. |
 | Env | Radicale reads `RADICALE_CONFIG` (path to the config file; DOCUMENTATION.md). All other settings are in the config file or CLI flags. There are no other env vars. |
@@ -41,7 +41,7 @@ Pure Python app; closest sibling `apps/feed2toot` (pip install into `/app/venv`)
 2. `ENV PYTHONUNBUFFERED=1 PYTHONIOENCODING=utf-8`. No apt packages (wheels cover amd64 and arm64; `bcrypt` ships manylinux wheels, UNVERIFIED for 3.15).
 3. `RUN` (still root, for ownership):
    - `/app/venv/bin/pip install --no-cache-dir "radicale[bcrypt]==${VERSION}"` into the base venv (read-only at runtime, written only at build).
-   - `mkdir -p /usr/share/licenses/radicale && curl -fsSL "https://raw.githubusercontent.com/Kozea/Radicale/v${VERSION}/COPYING.md" -o /usr/share/licenses/radicale/COPYING.md` (UNVERIFIED file name; if it differs, take the `LICENSE`/`COPYING*` file listed at the tag's root).
+   - `mkdir -p /usr/share/licenses/radicale && curl -fsSL "https://raw.githubusercontent.com/Kozea/Radicale/v${VERSION}/COPYING.md" -o /usr/share/licenses/radicale/COPYING.md` (`COPYING.md` exists at the root of tag `v3.9.2`).
    - `chown -R apps:apps /app && chmod -R 755 /app`; `rm -rf /tmp/* $HOME/.cache`.
 4. `ENV HOME=/config RADICALE_CONFIG=/config/config`.
 5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 5232`, `VOLUME /config`, `WORKDIR /config`.
@@ -84,7 +84,7 @@ volumes:
     required: true
 dependencies: []
 ```
-`RADICALE_CONFIG` is read by Radicale itself. `RADICALE_USER` and `RADICALE_PASSWORD` are read only by `start.sh` (image-level feature to create the first htpasswd user).
+`RADICALE_CONFIG` is read by Radicale itself. `RADICALE_USER` and `RADICALE_PASSWORD` are read only by `start.sh` (image-level feature to create or update one htpasswd user).
 
 ## 7. start.sh
 
@@ -96,20 +96,25 @@ mkdir -p /config/collections
 
 [[ -f /config/config ]] || cp /defaults/config /config/config
 
-# first user: only when the users file does not exist yet (never overwrite)
-if [[ ! -f /config/users ]]; then
-  : > /config/users
-  chmod 600 /config/users
-  if [[ -n "${RADICALE_USER:-}" && -n "${RADICALE_PASSWORD:-}" ]]; then
-    case "$RADICALE_USER" in *:*|*$'\n'*) echo "RADICALE_USER must not contain ':' or newlines" >&2; exit 1;; esac
-    /app/venv/bin/python - <<'PY' >> /config/users
+[[ -f /config/users ]] || install -m 600 /dev/null /config/users
+
+# when both vars are set, (re)apply that user on every start; other entries are kept
+if [[ -n "${RADICALE_USER:-}" && -n "${RADICALE_PASSWORD:-}" ]]; then
+  case "$RADICALE_USER" in *:*|*$'\n'*) echo "RADICALE_USER must not contain ':' or newlines" >&2; exit 1;; esac
+  /app/venv/bin/python - <<'PY'
 import os
 from passlib.hash import bcrypt
-print(f"{os.environ['RADICALE_USER']}:{bcrypt.hash(os.environ['RADICALE_PASSWORD'])}")
+path, user = "/config/users", os.environ["RADICALE_USER"]
+with open(path) as f:
+    lines = [l for l in f.read().splitlines() if l.split(":", 1)[0] != user]
+lines.append(f"{user}:{bcrypt.hash(os.environ['RADICALE_PASSWORD'])}")
+tmp = path + ".new"
+with open(os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600), "w") as f:
+    f.write("\n".join(lines) + "\n")
+os.replace(tmp, path)
 PY
-  else
-    echo "radicale: no users configured; set RADICALE_USER/RADICALE_PASSWORD or add bcrypt entries to /config/users" >&2
-  fi
+elif [[ ! -s /config/users ]]; then
+  echo "radicale: no users configured; set RADICALE_USER/RADICALE_PASSWORD or add bcrypt entries to /config/users" >&2
 fi
 
 exec /app/venv/bin/python -m radicale --config "${RADICALE_CONFIG:-/config/config}"
@@ -142,7 +147,7 @@ tcp:
 - port: '5232'
 filePaths:
 - /app/venv/bin/radicale
-- /usr/share/licenses/radicale
+- /usr/share/licenses/radicale/COPYING.md
 ```
 TCP is used because every HTTP path may need auth or redirect (UNVERIFIED which path returns 200 without login; try `/.web/` and switch to `http` if it does). The test has no env, so the user-creation branch is not covered; run it by hand with `-e RADICALE_USER -e RADICALE_PASSWORD` and `curl -u`.
 
@@ -157,8 +162,8 @@ TCP is used because every HTTP path may need auth or redirect (UNVERIFIED which 
 
 - Draft caveats: the htpasswd users file must exist (handled with seeded file and optional env user, but a user with no password env cannot log in, by design); clients need a published port or reverse proxy.
 - Without the seeded `[server] hosts` line the server only listens on localhost; this is the main trap.
-- Env-created users are only created on first start with an empty `/config/users`; changing `RADICALE_PASSWORD` later does nothing. Document `htpasswd` use.
-- UNVERIFIED: Python 3.15 compatibility of `vobject`, `libpass` and `bcrypt` wheels on arm64; license file name at the tag.
+- The env user is re-applied on every start, so a changed `RADICALE_PASSWORD` takes effect; removing the variables does not delete the user. Other users are managed by editing `/config/users`. UNVERIFIED: password length limits of `libpass` with the installed `bcrypt` (bcrypt only uses 72 bytes).
+- UNVERIFIED: Python 3.15 compatibility of `vobject`, `libpass` and `bcrypt` wheels on arm64.
 - No blockers (pure Python, glibc, both arches, no privilege).
 
 ## 11. Build and test steps
@@ -182,5 +187,5 @@ Also start once with no env and a fresh volume (expect the "no users configured"
 - Branch `feat/add-radicale`, commit and PR title `feat(radicale): add new container`, target `main`.
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; tick only what applies; `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- State untested items: arm64, Python 3.15 wheels, authenticated CalDAV/CardDAV requests, the license file download, anything not built locally.
+- State untested items: arm64, Python 3.15 wheels, authenticated CalDAV/CardDAV requests, the license file download step, anything not built locally.
 - Confirm `bake --print` passes; `VERSION` equals the Dockerfile `ARG`; no `root/`.

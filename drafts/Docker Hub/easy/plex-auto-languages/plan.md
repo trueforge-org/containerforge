@@ -69,21 +69,49 @@ ports:
   - port: 9880          # health/readiness JSON endpoint
     protocol: tcp
     required: false
-env:   # name / default / required, in sibling block form
-  - PLEX_URL                    ""         required false   # needed to do anything useful
-  - PLEX_TOKEN                  ""         required false
-  - PLEX_TOKEN_FILE             "/run/secrets/plex_token"  required false
-  - UPDATE_LEVEL                "show"     required false   # show | season
-  - UPDATE_STRATEGY             "next"     required false   # all | next
-  - TRIGGER_ON_PLAY             "true"     required false
-  - TRIGGER_ON_SCAN             "true"     required false
-  - TRIGGER_ON_ACTIVITY         "false"    required false
-  - REFRESH_LIBRARY_ON_SCAN     "true"     required false
-  - IGNORE_TAGS                 "PAL_IGNORE" required false # comma separated
-  - SCHEDULER_ENABLE            "true"     required false
-  - SCHEDULER_SCHEDULE_TIME     "02:00"    required false   # HH:MM
-  - NOTIFICATIONS_ENABLE        "false"    required false
-  - DEBUG                       "false"    required false
+env:
+  - name: PLEX_URL   # needed to do anything useful
+    default: ""
+    required: false
+  - name: PLEX_TOKEN
+    default: ""
+    required: false
+  - name: PLEX_TOKEN_FILE
+    default: "/run/secrets/plex_token"
+    required: false
+  - name: UPDATE_LEVEL   # show | season
+    default: "show"
+    required: false
+  - name: UPDATE_STRATEGY   # all | next
+    default: "next"
+    required: false
+  - name: TRIGGER_ON_PLAY
+    default: "true"
+    required: false
+  - name: TRIGGER_ON_SCAN
+    default: "true"
+    required: false
+  - name: TRIGGER_ON_ACTIVITY
+    default: "false"
+    required: false
+  - name: REFRESH_LIBRARY_ON_SCAN
+    default: "true"
+    required: false
+  - name: IGNORE_TAGS   # comma separated
+    default: "PAL_IGNORE"
+    required: false
+  - name: SCHEDULER_ENABLE
+    default: "true"
+    required: false
+  - name: SCHEDULER_SCHEDULE_TIME   # HH:MM
+    default: "02:00"
+    required: false
+  - name: NOTIFICATIONS_ENABLE
+    default: "false"
+    required: false
+  - name: DEBUG
+    default: "false"
+    required: false
 volumes:
   - path: /config
     required: true
@@ -124,7 +152,7 @@ filePaths:
 - /app/plex-auto-languages/main.py
 - /usr/share/licenses/plex-auto-languages/LICENSE
 ```
-Rationale: without env the container idles (no listener on 9880), so the main runner gets dummy values (the forgetool schema documents `mainRunner.env` as applied to the wait container) so the real code path starts and opens 9880 before it tries to reach Plex. UNVERIFIED: that `mainRunner.env` is honored by the CI forgetool version. Fallback if not: use the `apps/jbops` pattern (`mainRunner: {enabled: false}` plus `runners` with `entrypoint: /usr/local/bin/python`, `cmd: "-c __import__('plexapi');print('pal'+'-ok')"`, `expectedOutput: pal-ok`; keep cmd space-free) and drop the `tcp` probe, noting why.
+Rationale: without env the container idles (no listener on 9880), so the main runner gets dummy values. forgetool `main` applies `mainRunner.env` to the wait container (schema and `yaml_runner.go`), and `apps/drydock/container-test.yaml` uses it. `container-test.instructions.md` still says the test has no key to set env vars, so call this out in the PR. The probe only proves that the health server starts: with the dummy URL, v1.2.3 then logs a traceback (`_get_server` returns `None`, and `_get_logged_user` dereferences it), while the non-daemon health thread keeps the process and port 9880 alive (inferred from source, UNVERIFIED by a run). The no-env idle path is not tested. UNVERIFIED: that the forgetool version pinned in CI honors `mainRunner.env`. Fallback if not: use the `apps/jbops` pattern (`mainRunner: {enabled: false}` plus `runners` with `entrypoint: /usr/local/bin/python`, `cmd: "-c __import__('plexapi');print('pal'+'-ok')"`, `expectedOutput: pal-ok`; keep cmd space-free) and drop the `tcp` probe, noting why.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -140,7 +168,7 @@ Draft reconciliation: chart runs as UID 0 with writable rootfs, not needed. This
 ## 10. Risks, caveats and open questions
 
 - Draft caveat confirmed: needs a Plex URL and token; the app changes audio and subtitle tracks, so test only against a copy or a throwaway Plex library.
-- Behavior without config: upstream exits (the health thread is non-daemon so the process may linger with `/health` returning 400; UNVERIFIED). `start.sh` idles with a clear log line instead, so empty-start works and a missing config is visible in the logs.
+- Behavior without config or with an unreachable Plex server: the main thread dies with a traceback, but the non-daemon health thread should keep the process alive with `/health` returning 400 (from source, UNVERIFIED by a run). Restart policies will not notice; only the HTTP health status would. Env values are parsed with `yaml.safe_load`, so quote-sensitive values can change type (for example `SCHEDULER_SCHEDULE_TIME=12:00` is read by YAML 1.1 as an integer and fails validation; `02:00` stays a string). `start.sh` idles with a clear log line instead, so empty-start works and a missing config is visible in the logs.
 - The release is from 2023 while `master` has 2025 commits (`ignore_labels`, websocket fixes). Decision needed: stay on `v1.2.3` (Renovate-friendly) or pin a `master` commit. If `master` is chosen, the env var becomes `IGNORE_LABELS` and the settings table must change.
 - Python 3.15.2 is newer than anything upstream tests (3.8). If a dependency fails, fall back to the 3.14 python base (changedetection precedent).
 - No checksum for the source tarball. amd64 and arm64 identical; no musl, GPU or privileged needs.
@@ -158,7 +186,7 @@ docker run --rm -d --name plex-auto-languages-probe --read-only --tmpfs /tmp \
   -v plex-auto-languages-probe-config:/config plex-auto-languages:1.2.3
 docker logs plex-auto-languages-probe
 docker rm -f plex-auto-languages-probe
-# configured start with dummy Plex values (expect "The provided configuration has been successfully validated", port 9880 open, then Plex connection retries, no traceback)
+# configured start with dummy Plex values (expect "The provided configuration has been successfully validated" and port 9880 open; with this dummy URL a traceback is then expected, see section 10, so it does not meet protocol step 3; step 3 on the configured path needs a reachable Plex)
 docker run --rm -d --name plex-auto-languages-probe --read-only --tmpfs /tmp \
   -e PLEX_URL=http://127.0.0.1:32400 -e PLEX_TOKEN=test \
   -v plex-auto-languages-probe-config:/config plex-auto-languages:1.2.3

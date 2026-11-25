@@ -39,7 +39,7 @@ Used for both the build stage and the final stage. The binary is static on amd64
 ## 4. Dockerfile
 
 1. Build stage `FROM <ubuntu> AS build`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. `apt-get install -y --no-install-recommends build-essential unzip` (build stage only; arm64 needs the compiler, amd64 needs `unzip`; `dpkg-deb` and `curl` already come with the base). Clean `/var/lib/apt/lists`.
+2. `apt-get install -y --no-install-recommends build-essential` (build stage only, for the arm64 compile; `unzip`, `dpkg-deb` and `curl` already come with the base). Clean `/var/lib/apt/lists`.
 3. One `RUN` that does, by `TARGETARCH`:
    - `amd64`: download `ps3netsrv_${VERSION}_linux.zip`, verify its sha256 against the `digest` field of the GitHub release asset (`https://api.github.com/repos/aldostools/ps3netsrv/releases/tags/${VERSION}`, parsed with grep/sed), `unzip -j ... '*/ps3netsrv_ubuntu-latest_amd64.deb'`, `dpkg-deb -x` it, `install -D usr/local/bin/ps3netsrv /out/ps3netsrv`. Fallback if the API is rate-limited: pass the digest as a build arg (see section 10).
    - `arm64`: download the tag tarball, extract, `make -f Makefile.linux BUILD_DATE="${VERSION}"`, `install -D ps3netsrv /out/ps3netsrv`.
@@ -48,7 +48,7 @@ Used for both the build stage and the final stage. The binary is static on amd64
    - `COPY --from=build /out/ps3netsrv /app/ps3netsrv`
    - `COPY --from=build /out/LICENSE.TXT /usr/share/licenses/ps3netsrv/LICENSE.TXT`
    - `RUN chmod 0755 /app/ps3netsrv && mkdir -p /games && chown apps:apps /games` (an empty `/games` must exist so the server starts under test with nothing mounted).
-5. `ENV HOME=/tmp` is not needed (no home writes), so no extra ENV. Do not add `VOLUME /config`: the app keeps no state (see section 9). Declare `VOLUME /games` only if wanted; leave it out to avoid anonymous volumes.
+5. `ENV HOME=/tmp` is not needed (no home writes), so no extra ENV. Add `VOLUME /config` for repo consistency (the settings schema requires a `/config` volume), although the app keeps no state (see section 9). Declare `VOLUME /games` only if wanted; leave it out to avoid anonymous volumes.
 6. `USER apps`, then `COPY --chmod=0755 . /`, `EXPOSE 38008`.
 7. Do not pin apt versions: nothing is installed in the final stage.
 
@@ -84,11 +84,13 @@ env:
     default: ""
     required: false
 volumes:
+  - path: /config          # required by the schema; unused by the app
+    required: false
   - path: /games
     required: true
 dependencies: []
 ```
-The two env names are read by `start.sh` (they follow the shawly image; upstream itself takes positional args). `/config` is not listed because nothing is persisted. Dependencies: none.
+The two env names are read by `start.sh` (they follow the shawly image; upstream itself takes positional args). `/config` is listed only because the forgetool settings schema requires a `volumes` entry with path `/config`; nothing is persisted there. Dependencies: none.
 
 ## 7. start.sh
 
@@ -105,7 +107,7 @@ fi
 echo "Starting ps3netsrv on port ${port}, serving /games"
 exec /app/ps3netsrv "${args[@]}"
 ```
-Idempotent, writes nothing, no `/config` needed, binds all interfaces (the code uses `INADDR_ANY`). Stdout from a static binary under a pipe may be fully buffered, and `stdbuf` does not work on static binaries, so log lines can appear late. This is cosmetic. Readiness is judged by the open port.
+Idempotent, writes nothing, does not use `/config`, binds all interfaces (the code uses `INADDR_ANY`). Stdout from a static binary under a pipe may be fully buffered, and `stdbuf` does not work on static binaries, so log lines can appear late. This is cosmetic. Readiness is judged by the open port.
 
 ## 8. container-test.yaml
 
@@ -124,7 +126,7 @@ No env vars needed. No `timeoutSeconds` (sibling `adguardhome-sync` sets none; t
 
 - Upstream write paths: none by design. Remote mkdir/delete/create commands from the PS3 write into the games share (code in `process_mkdir_cmd` and friends). The draft mounts `/games` read-only, which makes those fail cleanly. A writable mount is the user's choice.
 - The chart runs UID/GID 0 with `readOnlyRootFilesystem: false`. The plan runs as `apps` (568) with a read-only rootfs and needs no root: the port is above 1024 and `/tmp` is not used. Mounted game folders must be readable by UID 568 (or group 568), which is a deployment note.
-- Privileged: no. Extra persistence: only `/games` (chart mount), not `/config`.
+- Privileged: no. Extra persistence: only `/games` (chart mount); `/config` stays empty.
 
 ## 10. Risks, caveats and open questions
 
@@ -146,7 +148,7 @@ docker exec ps3netsrv-probe bash -c 'exec 3<>/dev/tcp/127.0.0.1/38008 && echo op
 docker rm -f ps3netsrv-probe
 forgetool containers test --image ps3netsrv:20261110 --config ./apps/ps3netsrv/container-test.yaml
 ```
-Also run once with `-e PS3NETSRV_WHITELIST='192.168.1.*' -v <dir>:/games:ro`. There is no `/config` volume to create. Also try `--platform linux/arm64` once, to check the compile path. Readiness signal: process alive and port 38008 open.
+Also run once with `-e PS3NETSRV_WHITELIST='192.168.1.*' -v <dir>:/games:ro`. For the protocol run, also mount a fresh `-v ps3netsrv-probe-config:/config` and remove it afterwards. Also try `--platform linux/arm64` once, to check the compile path. Readiness signal: process alive and port 38008 open.
 
 ## 12. PR checklist
 

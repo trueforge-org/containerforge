@@ -44,7 +44,7 @@ Why: Python script with three pure-Python dependencies and no extra services. Cl
    - `curl -fsSL -o /tmp/pps.tar.gz "https://github.com/rnagabhyrava/plex-playlist-sync/archive/refs/tags/v${VERSION}.tar.gz"`
    - `mkdir -p /app/plex-playlist-sync && tar xzf /tmp/pps.tar.gz -C /app/plex-playlist-sync --strip-components=1` (entry point becomes `/app/plex-playlist-sync/plex-playlist-sync/run.py`)
    - `pip install -r /app/plex-playlist-sync/requirements.txt`
-   - `ln -s /config/data /data` (upstream writes CSVs to the hard-coded `/data`; the link is part of the image layer, the target is created at runtime)
+   - `rmdir /data && ln -s /config/data /data` (upstream writes CSVs to the hard-coded `/data`. The ubuntu base already creates `/data` as a directory, so it must be removed first; a plain `ln -s` would only create `/data/data`. The target is created at runtime)
    - `mkdir -p /usr/share/licenses/plex-playlist-sync && cp /app/plex-playlist-sync/LICENSE.md /usr/share/licenses/plex-playlist-sync/`
    - `rm -rf /tmp/* && chown -R root:root /app/plex-playlist-sync && chmod -R a+rX,go-w /app/plex-playlist-sync`
 4. `USER apps`; `COPY --chmod=0755 . /`.
@@ -66,20 +66,46 @@ No apt packages. `plexapi==4.11.2` is an exact pin from 2022 (pure Python); UNVE
 schema_version: 1
 upstream_env_url: "https://github.com/rnagabhyrava/plex-playlist-sync"
 ports: []
-env:    # name / default / required, in sibling block form
-  - PLEX_URL                   ""       required false   # needed to do anything useful
-  - PLEX_TOKEN                 ""       required false
-  - WRITE_MISSING_AS_CSV       "0"      required false
-  - APPEND_SERVICE_SUFFIX      "1"      required false
-  - ADD_PLAYLIST_POSTER        "1"      required false
-  - ADD_PLAYLIST_DESCRIPTION   "1"      required false
-  - APPEND_INSTEAD_OF_SYNC     "0"      required false
-  - SECONDS_TO_WAIT            "86400"  required false
-  - SPOTIFY_CLIENT_ID          ""       required false
-  - SPOTIFY_CLIENT_SECRET      ""       required false
-  - SPOTIFY_USER_ID            ""       required false
-  - DEEZER_USER_ID             ""       required false
-  - DEEZER_PLAYLIST_ID         ""       required false   # space separated
+env:
+  - name: PLEX_URL   # needed to do anything useful
+    default: ""
+    required: false
+  - name: PLEX_TOKEN
+    default: ""
+    required: false
+  - name: WRITE_MISSING_AS_CSV
+    default: "0"
+    required: false
+  - name: APPEND_SERVICE_SUFFIX
+    default: "1"
+    required: false
+  - name: ADD_PLAYLIST_POSTER
+    default: "1"
+    required: false
+  - name: ADD_PLAYLIST_DESCRIPTION
+    default: "1"
+    required: false
+  - name: APPEND_INSTEAD_OF_SYNC
+    default: "0"
+    required: false
+  - name: SECONDS_TO_WAIT
+    default: "86400"
+    required: false
+  - name: SPOTIFY_CLIENT_ID
+    default: ""
+    required: false
+  - name: SPOTIFY_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: SPOTIFY_USER_ID
+    default: ""
+    required: false
+  - name: DEEZER_USER_ID
+    default: ""
+    required: false
+  - name: DEEZER_PLAYLIST_ID   # space separated
+    default: ""
+    required: false
 volumes:
   - path: /config
     required: true
@@ -100,8 +126,8 @@ if [[ -z "${PLEX_URL:-}" || -z "${PLEX_TOKEN:-}" ]]; then
 fi
 
 export APPEND_INSTEAD_OF_SYNC="${APPEND_INSTEAD_OF_SYNC:-0}"
-cd /app/plex-playlist-sync/plex-playlist-sync   # run.py imports `utils.*`
-exec /usr/local/bin/python run.py
+cd /config                         # writable cwd (spotipy may write `.cache`); `utils.*` resolves from the script's directory
+exec /usr/local/bin/python /app/plex-playlist-sync/plex-playlist-sync/run.py
 ```
 Reason for idling: upstream would exit immediately (exit 0) when unconfigured, so the container could not satisfy the empty-start protocol or be tested. Secrets stay in env (the app reads env only; they are not echoed). Writes only under `/config`.
 
@@ -134,7 +160,7 @@ Hard-dependency-DB narrowing does not apply (the dependency is Plex, not a Conta
 |---|---|
 | `/data/<playlist>.csv` (hard-coded) | `/data` symlink to `/config/data`, directory created by `start.sh` |
 | `__pycache__` in `/app` | disabled by `PYTHONDONTWRITEBYTECODE` (base) |
-| spotipy token cache (`.cache` file in cwd) | cwd is `/app/...` (read-only). Client-credentials flow keeps tokens in memory; UNVERIFIED, watch for `.cache` write errors. If seen, set the working directory to `/config` and run via absolute path |
+| spotipy token cache (`.cache` file in cwd) | cwd is `/config`, so a cache file can be written (UNVERIFIED which spotipy version writes it for client credentials) |
 
 Draft reconciliation: chart runs UID 0 and writable rootfs, not needed. Extra persistence `/data` becomes `/config/data` (symlink keeps `-v ...:/data` working). Not privileged.
 

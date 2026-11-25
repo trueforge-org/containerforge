@@ -12,7 +12,7 @@
 | Download | `https://github.com/petersem/posterr/archive/refs/tags/v${VERSION}.tar.gz` (verified; 35 MB extracted; arch independent JS) |
 | Checksum | None published. HTTPS only. |
 | Upstream Dockerfile reviewed | `node:24.1.0-alpine`, `apk add tzdata net-tools`, `NODE_ENV=production`, `WORKDIR /usr/src/app`, `npm install --production && mv node_modules ../`, `COPY . .`, `EXPOSE 3000`, `HEALTHCHECK node healthcheck.js`, `CMD node index.js`. |
-| Runtime deps | `package.json` dependencies: axios, express, ejs, express-hbs, express-session, memorystore, plex-api, image-size, fs-extra, ... (no native addons identified; `request` is required by `classes/core/cache.js`, UNVERIFIED that it is installed transitively, check `npm ls request`). `package-lock.json` is present. |
+| Runtime deps | `package.json` dependencies: axios, express, ejs, express-hbs, express-session, memorystore, plex-api, image-size, fs-extra, ... (no native addons identified; `request` is required by `classes/core/cache.js`; it is not a direct dependency, but `package-lock.json` at the tag has `request@2.88.2` as a non-dev package). `package-lock.json` is present. |
 | Port | `PORT` env, default `3000` (`index.js`); also `app.listen(PORT)` on all interfaces. `BASEPATH` env sets a URL prefix (`/` treated as empty). Setup UI at `/settings`. |
 | Config | Stored in `config/settings.json` (relative to cwd), written by the web UI; created with defaults when missing (`classes/core/settings.js`). No env var for Plex URL or token. `TZ` is read by Node. |
 | Relative write paths (cwd) | `./config` (settings), `./saved` (+ `saved/imagecache`, `saved/mp3cache`: downloaded posters and TV theme mp3s), `./public/custom`, `./public/custom/pictures`, `./public/custom/pictures/default` (user pictures). `index.js` runs `fs.mkdirSync` for these at startup if they do not exist. |
@@ -35,7 +35,7 @@ No `defaults/` (the app creates its own settings file). No `DOWNSTREAM_CHANGES.m
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Why: the draft and the agent table specify the Node-capable base for npm apps (`apps/budge` uses the same image with Node 24 and `npm`). Python is unused here. Closest sibling: `apps/budge` (python-node, npm install, source under `/app/www/public`, `exec npm ...` in `start.sh`). UNVERIFIED: the Node major in the base image (budge's comments mention Node 24, matching upstream's `node:24`); confirm with `node --version` in the build step. If the Node version is too old for the dependencies, switch to `ghcr.io/trueforge-org/ubuntu` plus an installed Node.
+Why: the draft and the agent table specify the Node-capable base for npm apps (`apps/budge` uses the same image with Node 24 and `npm`). Python is unused here. Closest sibling: `apps/budge` (python-node, npm install, source under `/app/www/public`, `exec npm ...` in `start.sh`). UNVERIFIED: the Node major in this image (budge's comments mention Node 24, matching upstream's `node:24`); confirm with `node --version` in the build step. `apps/python-node` was deleted from the repo on 2026-11-17 (commit `ab442d1c6`), although apps still use the published image; `apps/ubuntu/Dockerfile` now installs Node itself (`NODE_VERSION` 26.13.1 in its bake file). Maintainers should decide whether a new app should use the plain `ubuntu` base instead (see section 10).
 
 ## 4. Dockerfile
 
@@ -47,7 +47,7 @@ Why: the draft and the agent table specify the Node-capable base for npm apps (`
    - `grep -q "\"version\": \"${VERSION}\"" /app/posterr/package.json` (guards version alignment)
    - `cd /app/posterr && npm ci --omit=dev` (lockfile exists; falls back to `npm install --omit=dev` only if `npm ci` rejects it). Do not run `npm` as `apps`; do not leave `~/.npm` behind.
    - Replace the writable dirs with symlinks (targets are created by `start.sh`):
-     `rm -rf config saved public/custom && ln -s /config/config config && ln -s /tmp/saved saved && ln -s /config/custom public/custom`
+     `mv public/custom /app/posterr-custom.default && rm -rf config saved && ln -s /config/config config && ln -s /tmp/saved saved && ln -s /config/custom public/custom`
    - `mkdir -p /usr/share/licenses/posterr && cp LICENSE /usr/share/licenses/posterr/`
    - `npm cache clean --force; rm -rf /tmp/* /root/.npm; chown -R root:root /app/posterr; chmod -R a+rX,go-w /app/posterr`
 4. `USER apps`; `COPY --chmod=0755 . /`.
@@ -101,10 +101,15 @@ mkdir -p \
   /tmp/saved/imagecache \
   /tmp/saved/mp3cache
 
+# seed the shipped custom files (custom.css) only when missing
+if [[ ! -f /config/custom/custom.css ]]; then
+  cp /app/posterr-custom.default/custom.css /config/custom/custom.css
+fi
+
 cd /app/posterr
 exec node index.js
 ```
-Idempotent, never writes under `/app`. Seeding only creates missing directories; the app creates `settings.json` itself when absent. Express binds all interfaces. `saved/` (image and mp3 cache) goes to `/tmp` as a cache; it is rebuilt after a restart. The directory targets must exist before node starts because `existsSync` on a dangling symlink is false and `mkdirSync` would then fail with `EEXIST`.
+Idempotent, never writes under `/app`. Seeding only creates missing directories and the shipped `custom.css` (the tag ships it in `public/custom`, which the symlink replaces); the app creates `settings.json` itself when absent. Express binds all interfaces. `saved/` (image and mp3 cache) goes to `/tmp` as a cache; it is rebuilt after a restart. The directory targets must exist before node starts because `existsSync` on a dangling symlink is false and `mkdirSync` would then fail with `EEXIST`.
 
 ## 8. container-test.yaml
 
@@ -141,10 +146,10 @@ Draft reconciliation: chart uses UID 0 and `readOnlyRootFilesystem: false`; this
 - Draft caveat confirmed: upstream writes inside the app folder; the symlink plan removes that. The draft's arm64 doubt is moot: we build from source tarball (JS only), so there is no per-arch binary.
 - Version mismatch in the draft (v1.15.0 binaries zip) vs the real current tag (v1.21.18). If maintainers prefer GitHub *releases*, Renovate will stay on 1.15.0, so `github-tags` is used.
 - UNVERIFIED: Node major in `python-node` and whether any transitive dependency needs a native build (add `build-essential python3` temporarily as `apps/budge` does if `npm ci` fails on arm64).
-- `classes/core/cache.js` requires `request`, which is not in the visible dependency list; verify it resolves after `npm ci` (otherwise add it, which is a source change to avoid).
+- `classes/core/cache.js` requires the deprecated `request` package, which is only present transitively (in the lockfile); install with `npm ci` so the lockfile is honored.
 - `/tmp` is a RAM tmpfs: a large poster cache consumes memory. Alternative is `/config/saved` (persistent), rejected because it is a cache.
 - Plex token is stored in plaintext in `/config/config/settings.json`.
-- Python half of the base image is unused (image size). A leaner option is `ghcr.io/trueforge-org/ubuntu` with installed Node, rejected to follow the draft and budge precedent.
+- Python half of the base image is unused, and `apps/python-node` no longer exists in the repo, so the pinned image may stop receiving updates. A leaner option is `ghcr.io/trueforge-org/ubuntu`, whose current Dockerfile already installs Node (UNVERIFIED that the pinned ubuntu digest includes it). Maintainer decision.
 - No source checksum.
 
 ## 11. Build and test steps

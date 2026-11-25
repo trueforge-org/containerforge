@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | The draft's release `0.21.12` (tag `cb1cde4f...`, 2021-12-07) is **not** what the image runs: it predates the web UI (no `main.py`/`version` at that tag). Docker `:latest` is built from `master` = commit `e945c0cb113b8ec3bb0b0f15c544f600e6e16d3f` (2023-02-02, `version` file reads `23.02.02`). Plan: `VERSION=23.02.02`, `COMMIT=e945c0cb113b8ec3bb0b0f15c544f600e6e16d3f`. Upstream is dormant since 2023-02. |
-| Renovate | No tag matches 23.02.02. Annotate `VERSION` with `datasource=github-tags depName=jkirkcaldy/plex-utills versioning=loose` (it will not propose the older 0.21.x tags as an upgrade only if a package rule ignores them; UNVERIFIED) and bump `COMMIT` by hand. Open question in section 10. |
+| Renovate | No tag matches 23.02.02. Annotate `VERSION` with `datasource=github-tags depName=jkirkcaldy/plex-utills versioning=loose` (the 0.21.x tags sort below `23.02.02`, so Renovate should propose nothing; the annotation is effectively inert, UNVERIFIED) and bump `COMMIT` by hand. Open question in section 10. |
 | License | `MIT` (GitHub API; `LICENSE`: "MIT License, Copyright (c) 2021 jkirkcaldy") |
 | Source | https://github.com/jkirkcaldy/plex-utills |
 | Download | `https://github.com/jkirkcaldy/plex-utills/archive/${COMMIT}.tar.gz` (verified HTTP 200; pure Python, arch independent) |
@@ -16,8 +16,8 @@
 | requirements.txt (unpinned) | `plexapi configparser numpy pillow imagehash schedule flask flask_script flask_sqlalchemy bootstrap-flask flask_apscheduler flask_wtf wtforms pymediainfo tautulli croniter opencv-python-headless flask_paginate gunicorn` (`tmdbv3api` commented out; imported by the code, PyPI `tmdbv3api 1.10.0` exists). `tzlocal` is imported but not listed (comes transitively via APScheduler; UNVERIFIED). |
 | Ports | `5000` (gunicorn, Flask UI at `/`, `/config`, `/films`, `/admin_config`). Port 80 (nginx) is not needed. |
 | Config | No env vars. All settings live in SQLite `/config/app.db`, edited through the web UI (Plex URL/token, libraries, TMDB key, Tautulli). `TZ` is honored via `tzlocal`. The draft's compose also passes `UID`/`GID`, but the code does not read them. |
-| Hard-coded paths | `/config/app.db`, `/config/backup/**`, `/logs/*.log` (RotatingFileHandler opened **at import time**), `/films` (media, read only), `/tmp/*_poster.png`, relative `app/static/default_db/default_app.db`, `app/img/...`, `./version` (needs cwd = source root). |
-| `/` route | Reads the `plex_utills` table; renders `migrate.html` or `index.html` depending on the `migrated` flag. Needs the DB to exist (`setup.table_check` creates it from the default DB on first import). |
+| Hard-coded paths | `/config/app.db`, `/config/backup/**`, `/logs/*.log` (RotatingFileHandler opened **at import time**), `/films` (media, read only), `/tmp/*_poster.png`, relative `app/static/default_db/default_app.db`, `app/img/...`, `./version` (needs cwd = source root). Also writes **inside the source tree**: `poster.png` (`app/api.py`), `tmdb_poster_restore.png` (`app/scripts.py`), `./app/static/img/tmp/` (`app/api.py`) and `app/support.zip` (`app/api.py`). |
+| `/` route | Reads the `plex_utills` table; renders `migrate.html` or `index.html` depending on the `migrated` flag. Needs the DB to exist (`table_check()`, called at module level in `main.py`, creates it from the default DB on first import). |
 
 ## 2. Target layout
 
@@ -46,6 +46,8 @@ Why: Python Flask app plus apt `mediainfo`. Closest sibling: `apps/bazarr` (pyth
    - `curl -fsSL -o /tmp/pu.tar.gz "https://github.com/jkirkcaldy/plex-utills/archive/${COMMIT}.tar.gz"`; `mkdir -p /app/plex-utills && tar xzf /tmp/pu.tar.gz -C /app/plex-utills --strip-components=1`.
    - `grep -qx "${VERSION}" /app/plex-utills/version` (fails the build if the `version` file does not match, keeping the image and tag aligned).
    - `pip install -r /app/plex-utills/requirements.txt tmdbv3api tzlocal` (use the PyPI `tmdbv3api`, pin `==1.10.0` after checking against the git HEAD the upstream image installs; UNVERIFIED that PyPI and git HEAD are API-identical).
+   - Move the writes into the source tree to `/tmp` (removing a symlink would fail on a read-only rootfs, so patch the paths, then `grep` that the new paths are present):
+     `sed -i 's#"poster.png"#"/tmp/poster.png"#; s#app/support\.zip#/tmp/support.zip#g' app/api.py` and `sed -i "s#'tmdb_poster_restore\.png'#'/tmp/tmdb_poster_restore.png'#g" app/scripts.py` (run in `/app/plex-utills`), then `rm -rf app/static/img/tmp && ln -s /tmp/pu-img-tmp app/static/img/tmp`. UNVERIFIED: that no other relative write exists (found by grep only).
    - `ln -s /config/logs /logs` (upstream hard-codes `/logs`; the target is created at runtime).
    - `mkdir -p /usr/share/licenses/plex-utills && cp /app/plex-utills/LICENSE /usr/share/licenses/plex-utills/`.
    - `rm -rf /tmp/* && chown -R root:root /app/plex-utills && chmod -R a+rX,go-w /app/plex-utills`.
@@ -93,14 +95,14 @@ Only `TZ` is read by the app (via `tzlocal`). `GUNICORN_THREADS` is an image-lev
 #!/usr/bin/env bash
 set -euo pipefail
 
-mkdir -p /config/logs /config/backup     # first-run dirs; /logs is a symlink to /config/logs
+mkdir -p /config/logs /config/backup /tmp/pu-img-tmp   # first-run dirs; /logs and app/static/img/tmp are symlinks
 
 cd /app/plex-utills                      # app opens app/static/default_db/... and ./version relatively
 exec /usr/local/bin/gunicorn --chdir /app/plex-utills main:app \
   -w 1 --threads "${GUNICORN_THREADS:-4}" -b 0.0.0.0:5000 \
   --worker-tmp-dir /tmp --access-logfile -
 ```
-Why `-w 1`: `app/schedule.py` starts an APScheduler and `app/__init__.py` opens the SQLite DB at import, so 9 workers (upstream) would run 9 schedulers and race on first-run DB creation. First-run DB seeding is done by the app itself (`setup.table_check` copies `default_app.db` to `/config/app.db` when missing), which only writes to `/config`. Binds `0.0.0.0`; logs also go to stdout via the app's stream handler plus gunicorn's access log.
+Why `-w 1`: `app/schedule.py` starts an APScheduler and `app/__init__.py` opens the SQLite DB at import, so 9 workers (upstream) would run 9 schedulers and race on first-run DB creation. First-run DB seeding is done by the app itself (`table_check()` in `main.py` copies `default_app.db` to `/config/app.db` when missing), which only writes to `/config`. Binds `0.0.0.0`; logs also go to stdout via the app's stream handler plus gunicorn's access log.
 
 ## 8. container-test.yaml
 
@@ -125,6 +127,8 @@ Port 5000 is the only declared port. An `http` probe on `/` can be added once st
 | `/logs/application_log.log`, `application_#log.log`, `script_log.log` (opened at import; crash if missing) | `/logs` symlink to `/config/logs`, directory created by `start.sh` before gunicorn |
 | `/logs/support.csv`, `/logs/system_info.txt` (support bundle) | same symlink |
 | `/tmp/*_poster.png` (poster temp files) | already `/tmp` |
+| `poster.png`, `tmdb_poster_restore.png`, `app/support.zip` (inside the source tree) | patched to `/tmp` at build |
+| `./app/static/img/tmp/` (poster previews) | symlink to `/tmp/pu-img-tmp`, created by `start.sh` |
 | `chmod 777` walk over `/config` (`main.py`/`setup.py`) | harmless when `apps` owns `/config` |
 | nginx logs `/var/log/plex_utills.log`, port 80 | nginx removed |
 | gunicorn worker heartbeat files | `--worker-tmp-dir /tmp` |
