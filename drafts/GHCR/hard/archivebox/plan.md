@@ -35,7 +35,7 @@ No `defaults/`, `etc/`, `health/` unless the start script needs a seed file (for
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-Fits: the pip wheel needs Python `>=3.13`, and 3.15 satisfies that. The base already provides pip. Closest sibling: `apps/bazarr` (pip install of an upstream release into a python base, `USER apps`, `COPY --chmod=0755 . /`).
+Fits: the pip wheel needs Python `>=3.13`, and 3.15 satisfies that. UNVERIFIED: that every archivebox dependency has a wheel for Python 3.15 (upstream targets 3.13). The base already provides pip. Closest sibling: `apps/bazarr` (pip install of an upstream release into a python base, `USER apps`, `COPY --chmod=0755 . /`).
 
 Node and Chromium are NOT in the python base. Whether ContainerForge needs them is an open question (section 10).
 
@@ -43,7 +43,7 @@ Node and Chromium are NOT in the python base. Whether ContainerForge needs them 
 
 1. `ARG VERSION`, `ARG VENDOR`.
 2. `FROM` the python base above.
-3. `ENV` block: `DATA_DIR=/config/data` (persistent index and archive), `HOME=/tmp` (ephemeral), `XDG_CONFIG_HOME=/config/xdg/config`, `XDG_CACHE_HOME=/tmp/cache`, `TMP_DIR=/tmp/archivebox`, `TZ=UTC`, `PYTHONDONTWRITEBYTECODE=1`, `PIP_CACHE_DIR=/tmp/pip`, `UV_CACHE_DIR=/tmp/uv`. Caches must stay in `/tmp` (dockerfile rules).
+3. `ENV` block: `DATA_DIR=/config/data` (persistent index and archive), `HOME=/tmp` (ephemeral), `XDG_CONFIG_HOME=/config/xdg/config`, `XDG_CACHE_HOME=/tmp/cache`, `TMP_DIR=/tmp/archivebox`, `TZ=UTC`, `PYTHONDONTWRITEBYTECODE=1`, `PIP_CACHE_DIR=/tmp/pip`, `UV_CACHE_DIR=/tmp/uv`, and `CONFIG_DIR=/tmp/archivebox/lib`, `ABXPKG_LIB_DIR=/tmp/archivebox/lib` (to match section 9; the names are from the upstream image, whether the pip package honours them is UNVERIFIED). Caches must stay in `/tmp` (dockerfile rules).
 4. `USER root`.
 5. apt: only packages not in the base. Candidates from the draft are `(inferred)`: `git`, `curl`, `ripgrep`, `chromium`. Install `chromium` only if the extractor set is kept (section 10). Pin each apt version against `VERSION` only where the package is the app itself (not the case here).
 6. `pip install --no-cache-dir "archivebox==${VERSION}"` using the wheel, verified first against the sha256 from `SHA256SUMS` (download to `/tmp`, `sha256sum -c`, then install). Remove `/tmp/*` afterwards.
@@ -128,7 +128,7 @@ http:
 - port: '5797'
   path: /health/
 filePaths:
-- /usr/local/bin/archivebox
+- /usr/local/bin/archivebox   # UNVERIFIED: console-script install path in the python base
 - /usr/share/licenses/archivebox/LICENSE
 ```
 

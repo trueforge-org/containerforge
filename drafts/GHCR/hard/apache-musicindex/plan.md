@@ -58,7 +58,7 @@
 
 - Header: `# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json` and `schema_version: 1`.
 - `upstream_env_url`: UNVERIFIED (use the Ubuntu package page `https://packages.ubuntu.com/resolute/libapache2-mod-musicindex` until a homepage is confirmed).
-- `ports`: `- port: 8080`, `protocol: http`, `required: true`. Note: the chart maps `10006` to `80`; the ContainerForge port is `8080` and the chart port mapping changes accordingly (UNVERIFIED how the chart library maps this).
+- `ports`: `- port: 8080`, `protocol: tcp` (settings.yaml uses `tcp`/`udp`, not `http`), `required: true`. Note: the chart maps `10006` to `80`; the ContainerForge port is `8080` and the chart port mapping changes accordingly (UNVERIFIED how the chart library maps this).
 - `env`: none confirmed. Do not invent names. Add `TZ` (default `Etc/UTC`, sibling convention).
 - `volumes`: none confirmed. The music library mount path is UNVERIFIED. Add `- path: /config` only if the module writes state there (UNVERIFIED).
 - `dependencies`: none.

@@ -66,7 +66,7 @@
 
 - Header: `# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json` and `schema_version: 1`.
 - `upstream_env_url: "https://github.com/Mintplex-Labs/anything-llm"`.
-- `ports`: `- port: 3001`, `protocol: http`, `required: true`.
+- `ports`: `- port: 3001`, `protocol: tcp` (settings.yaml uses `tcp`/`udp`, not `http`), `required: true`.
 - `env`:
   - `SERVER_PORT` (default `3001`, required false).
   - `STORAGE_DIR` (default `/config/storage`, required false).

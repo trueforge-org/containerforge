@@ -42,8 +42,8 @@ Fits because the verysync binary is statically linked, so the glibc Ubuntu base 
 2. Map the arch with a `case`: `amd64` → `amd64`, `arm64` → `arm64`, anything else → `echo "unsupported arch" && exit 1`.
 3. Pinned checksums as Dockerfile ARG defaults, bumped together with `VERSION`:
    `ARG SHA256_AMD64=8a4b347669cd33def98b3bf1888576c8dc786ed77485080901bba0101c4413bd` and `ARG SHA256_ARM64=708702fa19c321acb7e1aaa895a6f2cf8cb6189ab8ede6edf5049b61ad1f0ae0`.
-4. Download `https://raw.githubusercontent.com/Jonnyan404/verysync/<COMMIT>/files/verysync-linux-${ARCH}-${VERSION}.tar.gz` to `/tmp`. Prefer a commit SHA over `master` for `<COMMIT>`, found with `gh api repos/Jonnyan404/verysync/commits?path=files/verysync-linux-amd64-v2.33.2.tar.gz`. The commit is UNVERIFIED until the implementer resolves it. Either way the sha256 check is mandatory: `echo "${SHA256} /tmp/verysync.tar.gz" | sha256sum -c -`.
-5. `tar -xzf /tmp/verysync.tar.gz -C /tmp`, then `install -m 0755 /tmp/verysync-linux-${ARCH}-${VERSION}/verysync /app/verysync/verysync`. Binaries belong in `/app` (read-only at runtime).
+4. Download `https://raw.githubusercontent.com/Jonnyan404/verysync/<COMMIT>/files/verysync-linux-${ARCH}-v${VERSION}.tar.gz` to `/tmp` (the bake `VERSION` is `2.33.2` without `v`; the upstream file names carry the `v`). Prefer a commit SHA over `master` for `<COMMIT>`, found with `gh api repos/Jonnyan404/verysync/commits?path=files/verysync-linux-amd64-v2.33.2.tar.gz`. The commit is UNVERIFIED until the implementer resolves it. Either way the sha256 check is mandatory: `echo "${SHA256} /tmp/verysync.tar.gz" | sha256sum -c -`.
+5. `tar -xzf /tmp/verysync.tar.gz -C /tmp`, then `install -m 0755 /tmp/verysync-linux-${ARCH}-v${VERSION}/verysync /app/verysync/verysync` (create `/app/verysync` and `/usr/share/licenses/verysync` first with `mkdir -p`). Binaries belong in `/app` (read-only at runtime).
 6. Ship the license: `curl -fsSL https://raw.githubusercontent.com/Jonnyan404/verysync/<COMMIT>/LICENSE -o /usr/share/licenses/verysync/LICENSE` (same commit, same pin).
 7. `chown -R apps:apps /app && chmod -R 755 /app`, then `rm -rf /tmp/*`.
 8. Tail:
