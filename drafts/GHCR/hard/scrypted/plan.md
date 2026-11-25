@@ -80,7 +80,7 @@ Files in `apps/scrypted/`:
 
 - forgetool schema header.
 - `tcp` probe on each port listed in settings.yaml, with `timeoutSeconds` from a sibling node/python app.
-- `filePaths`: `/app/server/node_modules/@scrypted/server` (confirmed in image) and the `/config` seed path.
+- `filePaths`: `/app/server/node_modules/@scrypted/server` (UNVERIFIED: the install layout is unconfirmed until the first build) and no `/config` seed path unless `start.sh` creates one.
 - The test starts with no env vars: the server must start without any device or camera.
 
 ## 9. Rootless and read-only-rootfs adaptations
@@ -97,6 +97,7 @@ Files in `apps/scrypted/`:
 - Plugins download at first start; the first run needs internet and is slow. The test must not depend on plugin download.
 - Camera discovery and mDNS need host networking (inferred).
 - Arm64 and license SPDX are unverified.
+- The draft lists `full`, `lite` and `nvidia` image variants. This plan covers one CPU image only; the nvidia/CUDA variant is out of scope and not planned (UNVERIFIED whether a GPU image is wanted).
 - Blockers: privileged/hardware access; unknown ports and data paths; license SPDX unclear; base image choice.
 
 ## 11. Build and test steps

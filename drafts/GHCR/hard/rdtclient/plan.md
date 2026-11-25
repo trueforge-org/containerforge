@@ -137,7 +137,8 @@ Validate with `cd apps/rdtclient && docker buildx bake --print`.
 tcp:
 - port: '6500'
 http:
-- url: 'http://localhost:6500'
+- port: '6500'
+  path: /
 timeoutSeconds: 120  # UNVERIFIED: no .NET sibling to copy from; tune after the first run
 ```
 

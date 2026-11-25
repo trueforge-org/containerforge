@@ -89,7 +89,8 @@ Validate with `docker buildx bake --print`.
 tcp:
 - port: '3000'
 http:
-- url: 'http://localhost:3000'
+- port: '3000'
+  path: /
 runners:
 - entrypoint: /app/flood --help
 ```

@@ -169,6 +169,7 @@ Reconciled expectations from draft.md: the chart runs as UID 0 with `readOnlyRoo
 - Resolute arm64 `.deb` not individually verified: UNVERIFIED.
 - `r-base-core` on resolute: version and availability UNVERIFIED. If apt R is older than 4.6.2, the image no longer matches the chart's R version (a version mismatch to record, not hide).
 - rocker builds R from source (`install_R_source.sh`). This plan does not reproduce that; it is a deliberate deviation.
+- Docker tag problem: `+` is not a valid character in an image tag, so `${APP}:${VERSION}` with `2026.11.0+203` makes `image-local` fail. Either use a tag-safe VERSION (`2026.11.0-203`, matching the deb filename, and drop the `tr`) or tag with a sanitised value. Decide before the first bake (`docker buildx bake --print` will show the tag).
 - `--auth-none` and `--config-file` flags: UNVERIFIED against the installed deb.
 - Per-user rsession writes under `/home` may still fail on `--read-only`; expected to need `/config` remaps.
 
@@ -179,11 +180,11 @@ cd apps/rstudio
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name rstudio-probe --read-only --tmpfs /tmp \
-  -p 8787:8787 -v rstudio-probe-config:/config rstudio:2026.11.0+203
+  -p 8787:8787 -v rstudio-probe-config:/config rstudio:2026.11.0-203 # tag-safe; see section 10
 docker logs -f rstudio-probe
 curl -fsS http://localhost:8787/ >/dev/null && echo "reachable from host"
 docker rm -f rstudio-probe; docker volume rm rstudio-probe-config
-forgetool containers test --image rstudio:2026.11.0+203 --config ./apps/rstudio/container-test.yaml
+forgetool containers test --image rstudio:2026.11.0-203 # tag-safe; see section 10 --config ./apps/rstudio/container-test.yaml
 ```
 
 Expected readiness signal: rserver log line about listening on port 8787 (exact text UNVERIFIED), the process stays up, and `curl` from the host returns the RStudio login page or the auth-none redirect. Repeat with the same `/config` volume to confirm restart safety.

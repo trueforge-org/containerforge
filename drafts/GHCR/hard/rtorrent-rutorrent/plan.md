@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | Chart pins `ghcr.io/crazy-max/rtorrent-rutorrent:4.2.9-0.9.8_2-0.13.8_1`. Upstream Dockerfile (commit `1efb9e087f90f68ed132b3ffd419b29145a1838e`) pins ruTorrent `v4.2.9` at commit `e7c81203eff5d43f6f2757ba4b05573d22f11e35` and GeoIP2 plugin at `4ff2bde530bb8eef13af84e4413cedea97eda148`. rTorrent `0.9.8` comes from the Ubuntu archive (below). |
-| Renovate | UNVERIFIED: no renovate config fetched. Proposed: `datasource=github-releases depName=Novik/ruTorrent versioning=loose` for the ruTorrent version, with the commit as the pinned value. The composite image tag is not a single version. |
+| Renovate | UNVERIFIED: no renovate config fetched. Proposed: `datasource=git-refs depName=https://github.com/Novik/ruTorrent` (git-refs, since VERSION is a commit SHA; precedent: other apps' git-refs comments). The composite image tag is not a single version. |
 | License | rtorrent: GPL-2.0-only (`COPYING`, "Version 2, June 1991", https://raw.githubusercontent.com/rakshasa/rtorrent/master/COPYING). ruTorrent (Novik): UNVERIFIED (source not fetched). Upstream image license: UNVERIFIED. `LICENSE` in bake must be the license of the image as built, so confirm before bake. |
 | Source URL | https://github.com/rakshasa/rtorrent (rtorrent), https://github.com/Novik/ruTorrent (ruTorrent web UI), https://github.com/crazy-max/docker-rtorrent-rutorrent (upstream image) |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/crazy-max/docker-rtorrent-rutorrent/1efb9e087f90f68ed132b3ffd419b29145a1838e/Dockerfile. Alpine (`crazymax/alpine-s6:3.19-2.2.0.3`), `apk` packages (nginx, php82 + fpm, ffmpeg, mediainfo, sox, python3, py3-pip), `ENTRYPOINT ["/init"]`, `HEALTHCHECK CMD /usr/local/bin/healthcheck`, `VOLUME ["/data","/downloads","/passwd"]`, no `EXPOSE`, no `USER`, `PUID=1000` / `PGID=1000` create user `rtorrent`. |
@@ -64,11 +64,11 @@
    USER apps
    COPY --chmod=0755 . /
 
-   EXPOSE 80
+   EXPOSE 8080
    VOLUME /config
    VOLUME /downloads
    ```
-   `EXPOSE` lists only the web port (80). SCGI (5000) is internal to the container and is not exposed; peer port 50000 is exposed only if confirmed (section 10).
+   `EXPOSE` lists only the web port (8080; nginx cannot bind 80 as non-root). SCGI (5000) is internal to the container and is not exposed; peer port 50000 is exposed only if confirmed (section 10).
 
 ## 5. docker-bake.hcl
 
@@ -80,7 +80,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=Novik/ruTorrent versioning=loose
+  // renovate: datasource=git-refs depName=https://github.com/Novik/ruTorrent versioning=loose
   default = "e7c81203eff5d43f6f2757ba4b05573d22f11e35"
 }
 
@@ -102,7 +102,7 @@ variable "SOURCE" {
 schema_version: 1
 upstream_env_url: "https://github.com/rakshasa/rtorrent"
 ports:
-  - port: 80
+  - port: 8080
     protocol: tcp
     required: true
   - port: 50000
@@ -154,9 +154,9 @@ Notes: `/usr/local/bin/supervise` is not defined yet; choosing the supervisor is
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 timeoutSeconds: 120
 tcp:
-  - port: '80'
+  - port: '8080'
 http:
-  - port: '80'
+  - port: '8080'
     path: /rutorrent/
 filePaths:
   - /app/rutorrent/index.php
@@ -177,12 +177,12 @@ Every port in `settings.yaml` needs a probe: port 50000 is not listed in `settin
 | `/var/run`, nginx and PHP-FPM sockets | `/tmp` (sockets and pid files), set in `/etc` templates |
 | PHP session and temp | `/tmp` |
 
-Reconciled expectations from draft.md: the chart runs as UID 0 with `readOnlyRootFilesystem: false`, `runAsNonRoot: false`, and extra persistence `/data`, `/downloads`, `/passwd`. This plan uses `USER apps` with `--read-only --tmpfs /tmp`. rTorrent binds 5000 internally with no privilege needed. Port 80 needs `CAP_NET_BIND_SERVICE` if nginx binds directly, so nginx listens on 8080 internally or the port is changed (decision, section 10). Not privileged.
+Reconciled expectations from draft.md: the chart runs as UID 0 with `readOnlyRootFilesystem: false`, `runAsNonRoot: false`, and extra persistence `/data`, `/downloads`, `/passwd`. This plan uses `USER apps` with `--read-only --tmpfs /tmp`. rTorrent binds 5000 internally with no privilege needed. Port 80 is below 1024 and cannot be bound by `apps`, so nginx listens on 8080 (settings.yaml, EXPOSE and probes use 8080; the chart maps it to 80). Not privileged.
 
 ## 10. Risks, caveats and open questions
 
 - Blocker (multi-service): nginx, PHP-FPM and rtorrent need a supervisor. The supervisor choice (s6 as upstream, or a small script) is open and decides the start.sh shape.
-- Blocker (port 80 as non-root): decide between nginx on an unprivileged port (8080 internal, exposed as 80 by the chart) and keeping 80 with a capability. The plan picks unprivileged.
+- Blocker (port 80 as non-root): decide between nginx on an unprivileged port (8080) and keeping 80 with a capability. The plan picks 8080, as used in sections 4, 6, 8 and 9.
 - Ports 50000 (peer) and 5000 (SCGI): both draft inferences, not confirmed on a fetched page. Peer port needs to be reachable from other peers, so a NAT/port forwarding note is required.
 - `rtorrent` apt pin is confirmed (`0.9.8-1.1ubuntu2`). nginx and php-fpm versions are UNVERIFIED.
 - Alpine-based upstream vs ubuntu: behaviour differences (PHP 8.2 on alpine vs resolute's PHP version) are UNVERIFIED; the web UI must be tested.
@@ -198,7 +198,7 @@ cd apps/rtorrent-rutorrent
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name rtorrent-probe --read-only --tmpfs /tmp \
-  -p 8080:80 -v rtorrent-probe-config:/config -v rtorrent-probe-downloads:/downloads \
+  -p 8080:8080 -v rtorrent-probe-config:/config -v rtorrent-probe-downloads:/downloads \
   rtorrent-rutorrent:e7c81203eff5d43f6f2757ba4b05573d22f11e35
 docker logs -f rtorrent-probe
 curl -fsS http://localhost:8080/rutorrent/ >/dev/null && echo "web UI reachable"

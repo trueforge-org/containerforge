@@ -48,6 +48,7 @@
    ```
 3. Download the zip and verify it against the pinned sha256 (self-computed, see section 1):
    ```sh
+   ARCH="$(cat /tmp/rustdesk-arch)"   # shell variables do not persist across RUN steps; merge steps 2 and 3 into one RUN instead if preferred
    curl -fL -o /tmp/rustdesk.zip \
      "https://github.com/rustdesk/rustdesk-server/releases/download/${VERSION}/rustdesk-server-linux-${ARCH}.zip"
    echo "<sha256>  /tmp/rustdesk.zip" | sha256sum -c -
@@ -167,16 +168,15 @@ tcp:
   - port: '21116'
   - port: '21117'
   - port: '21115'
-http:
   - port: '21118'
-    path: /
+  - port: '21119'
 filePaths:
   - /app/rustdesk/hbbs
   - /app/rustdesk/hbbr
   - /usr/share/licenses/rustdesk/LICENSE
 ```
 
-Every port in `settings.yaml` needs a probe. UDP 21116 is not covered by the `tcp` probe, so add a UDP check only if forgetool supports one (UNVERIFIED); otherwise note the gap. `http` on 21118 is a guess (web client) and must be confirmed: if it does not return, drop it and mark the gap. `tcp` and `http` run inside the container, so they do not prove client reachability.
+Every port in `settings.yaml` needs a probe. UDP 21116 is not covered by the `tcp` probe, so add a UDP check only if forgetool supports one (UNVERIFIED); otherwise note the gap. 21118 and 21119 (web client) are probed with `tcp` only, since whether they answer plain HTTP is UNVERIFIED; if either does not listen without a client, drop its probe and state the reason. `tcp` and `http` run inside the container, so they do not prove client reachability.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

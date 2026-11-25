@@ -41,7 +41,7 @@ Files under `apps/romm/`:
 ## 3. Base image
 
 - `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` as the runtime (copy exactly from the brief). The python base already runs as `apps`, so no `USER` change is needed for the runtime.
-- Frontend build: a separate `node` build stage. Take its `FROM` line from an existing `apps/*/Dockerfile` that uses node, `UNVERIFIED` which one is current (check `apps/python-node` or `apps/changedetection`). Do not run `npm` in the runtime stage.
+- Frontend build: a separate `node` build stage. Use `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5 AS frontend-build`, as `apps/changedetection` and other node apps in this repo do (there is no `apps/python-node` folder). Do not run `npm` in the runtime stage.
 - The upstream `FROM python:...-alpine` and `nginx:...-alpine` are musl; they cannot be copied. The nginx binary is built from source in the upstream file with `ngx_http_zip_module`. Either reproduce that in a build stage on ubuntu or drop the zip module if not needed (`UNVERIFIED`).
 - Closest sibling: `apps/bazarr` (python backend), `apps/python` (base) and the python-runtime rules.
 - Base reuse: the ubuntu base is the foundation of python, so do not re-install packages `python` already has.
@@ -51,15 +51,15 @@ Files under `apps/romm/`:
 Step list:
 
 1. `ARG VERSION` (5.4.1), `ARG PIP_VERSION`, `ARG UV_VERSION`; `USER root` for installs.
-2. Frontend build stage: `FROM <node image pinned> AS frontend-build`, `npm ci --ignore-scripts --no-audit --no-fund` and `npm run build` from the 5.4.1 source tarball (`https://github.com/rommapp/romm/archive/refs/tags/5.4.1.tar.gz`). Verify the download against a pinned SHA256 (self-computed, since no upstream checksum is on the release).
+2. Frontend build stage: the node-capable `python-node` stage from section 3, `npm ci --ignore-scripts --no-audit --no-fund` and `npm run build` from the 5.4.1 source tarball (`https://github.com/rommapp/romm/archive/refs/tags/5.4.1.tar.gz`). Verify the download against a pinned SHA256 (self-computed, since no upstream checksum is on the release).
 3. Backend build stage: `uv sync --frozen --no-cache` into `/app/venv` (not `/src/.venv`). Store the venv under `/app/venv`, never write to it at runtime (python-runtime rule).
 4. APT packages, pinned where they matter and not already in the python base: `libmagic1`, `libarchive-tools`, `mariadb-client-core` or `libmariadb-dev` (check the sibling `bazarr`/`bookstack` for the set they install), `libpq5`, `tzdata`, `p7zip-full` (`7zip` on Alpine). `nodejs` is only needed if the rom_patcher runs at runtime (`UNVERIFIED`); otherwise build it in a build stage.
 5. Copy the backend source to `/app/backend`, frontend `dist` to `/app/frontend` (or nginx root), and the init scripts from `docker/init_scripts` into `/`.
 6. Valkey: the upstream image installs `valkey` into the runtime. Do not install it in romm; the chart uses the `apps/valkey` sibling. Remove it from the port.
 7. Set `ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONPATH=/app/backend PATH=/app/venv/bin:$PATH`. Do not bake `SCREENSCRAPER_DEV_*` into `ENV`; take them at runtime only.
-7. Cleanup: `rm -rf /var/lib/apt/lists/* /tmp/*`.
-8. `chown -R apps:apps /app`; `chmod -R 755 /app`. Keep `/app` read-only at runtime (the directory itself is owned by root in a build; check the sibling).
-9. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, `CMD ["/start.sh"]`.
+8. Cleanup: `rm -rf /var/lib/apt/lists/* /tmp/*`.
+9. `chown -R apps:apps /app`; `chmod -R 755 /app`. Keep `/app` read-only at runtime (the directory itself is owned by root in a build; check the sibling).
+10. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 10680` (matches the settings.yaml port; `UNVERIFIED` which port 5.4.1 binds), `VOLUME /config`, `CMD ["/start.sh"]`.
 
 Do not carry over `VOLUME ["/romm", "/redis-data"]`. Map `/romm/*` to `/config/...` in `start.sh` instead.
 
@@ -100,14 +100,14 @@ Validate with `docker buildx bake --print`.
 # narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
 tcp:
 - port: '10680'
-http:
-- url: 'http://localhost:10680'
 filePaths:
 - /app/venv/bin/python
 ```
 
+The `tcp` probe is kept because every settings.yaml port needs one, but it only passes if the server listens without env vars; if `start.sh` refuses to start without `ROMM_AUTH_SECRET_KEY`, the probe fails. Resolve by letting `start.sh` generate the key into `/config` on first run (settings.yaml option above), or drop the probe with a stated reason (UNVERIFIED which is chosen).
+
 - Every port in `settings.yaml` needs a probe.
-- The app needs `DB_PASSWD` and `ROMM_AUTH_SECRET_KEY` to start cleanly, so the test has no env vars and the process will not start past the secret check. This is the DB-dependency exception. Confirm the process stays alive and prints the secret-missing error, then add a `filePaths` entry for the error path. Do not weaken the check.
+- The app needs `DB_PASSWD` and `ROMM_AUTH_SECRET_KEY` to start cleanly, so the test has no env vars and the process may not start past the secret check. This is the DB-dependency exception (see the build and test protocol); run the env-set path by hand. Do not weaken the check.
 - `timeoutSeconds` is `UNVERIFIED`; choose a value from the python sibling (`apps/bazarr`).
 
 ## 9. Rootless and read-only-rootfs adaptations

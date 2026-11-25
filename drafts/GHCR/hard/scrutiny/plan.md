@@ -48,7 +48,7 @@ Files in `apps/scrutiny/`:
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`, `ENV HOME=/config`.
 2. Map `TARGETARCH` to the release suffix: `amd64` → `linux-amd64`, `arm64` → `linux-arm64`. Other arches fail the build explicitly.
-3. Download `scrutiny-web-linux-$ARCH` and `scrutiny-collector-metrics-linux-$ARCH` and `scrutiny-web-frontend.tar.gz` from the v0.10.0 release into `/tmp`. Verify against a checksum: UNVERIFIED, none published, so pin by version and record the sha256 of each asset in the Dockerfile after downloading them once (flag this in the PR).
+3. Download `scrutiny-web-linux-$ARCH` and `scrutiny-collector-metrics-linux-$ARCH` and `scrutiny-web-frontend.tar.gz` from `https://github.com/AnalogJ/scrutiny/releases/download/v${VERSION}/<asset>` into `/tmp` (VERSION is `0.10.0`; the tag carries a leading `v`). Verify against a checksum: UNVERIFIED, none published, so pin by version and record the sha256 of each asset in the Dockerfile after downloading them once (flag this in the PR).
 4. Install to `/app/bin` and `/app/web` (`/app` is read-only at runtime; these are written only at build time).
 5. apt: `smartmontools` (package version pinned against what the ubuntu 26.04 base offers; UNVERIFIED exact version). Do not install `curl` or `ca-certificates` if the base already has them.
 6. Ship licence in `/usr/share/licenses/scrutiny/` (MIT).
@@ -83,8 +83,8 @@ Files in `apps/scrutiny/`:
 ## 8. container-test.yaml
 
 - Keep the forgetool schema header used by sibling apps.
-- `tcp` probe on 8080 with a `timeoutSeconds` value taken from a sibling web app.
-- `filePaths`: the generated config path in `/config` and the binary `/app/bin/scrutiny-web`.
+- `tcp` probe on port `'8080'` with a `timeoutSeconds` value taken from a sibling web app.
+- `filePaths`: `/app/bin/scrutiny-collector-metrics` and (the generated config path in `/config` is UNVERIFIED, add only after a first run)  the binary `/app/bin/scrutiny-web`.
 - No env vars are set by the test; the no-device path must still start (smartctl finds no disks, so the collector logs and waits).
 
 ## 9. Rootless and read-only-rootfs adaptations
@@ -109,7 +109,7 @@ Files in `apps/scrutiny/`:
 
 1. `cd apps/scrutiny && docker buildx bake --print` (must exit 0).
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`.
-3. `docker run --rm -d --name scrutiny-probe --read-only --tmpfs /tmp -v scrutiny-probe-config:/config ghcr.io/trueforge-org/scrutiny:<version>` (use the local tag `scrutiny:<version>` from image-local), then `docker logs -f scrutiny-probe`.
+3. `docker run --rm -d --name scrutiny-probe --read-only --tmpfs /tmp -v scrutiny-probe-config:/config scrutiny:<version>` (the local tag from image-local), then `docker logs -f scrutiny-probe`.
 4. Readiness signal: a line containing `listening` or `Starting` on port 8080 and the process still running. No fatal/panic lines. The collector without disks may log a warning; treat it as non-fatal only if the web process keeps running.
 5. Test: `forgetool containers test --image scrutiny:<version> --config ./apps/scrutiny/container-test.yaml`.
 6. Cleanup: `docker rm -f scrutiny-probe; docker volume rm scrutiny-probe-config`.
