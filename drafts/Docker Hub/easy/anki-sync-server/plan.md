@@ -9,6 +9,8 @@
 | Renovate | `datasource=github-releases depName=ankicommunity/anki-sync-server-rs versioning=semver` |
 | License | AGPL-3.0-or-later (`Cargo.toml` `license = "AGPL-3.0-or-later"`, LICENSE is the GNU AGPL v3) |
 | Source URL | https://github.com/ankicommunity/anki-sync-server-rs |
+| Maintenance | The repository is **archived** on GitHub (last push 2023-11-23, checked 2026-11-25). No further releases or fixes. |
+| Start-up requirement | At 1.1.4 the server **panics and exits when `auth.db` holds no user** (`new_server` in `src/app_config.rs` returns "no user found on the server side" and `main` unwraps it). |
 | amd64 | `https://github.com/ankicommunity/anki-sync-server-rs/releases/download/1.1.4/ankisyncd_1.1.4_linux_x64.tar.gz` (sha256 `d16510d0a7b8b39d387b87883b23d865556d63bb51a6624a4eb3e3732da7e5ef`, computed 2026-11-23) |
 | arm64 | `.../ankisyncd_1.1.4_linux_arm64.tar.gz` (sha256 `20265cefc04eb1ec29c27ad1995a2e017e13cc3a461f11e671e476babe54f577`, computed 2026-11-23) |
 | Tarball contents | `ankisyncd_1.1.4_linux_<arch>/ankisyncd` and `ankisyncd.toml` only (no LICENSE inside) |
@@ -76,12 +78,28 @@ Why: prebuilt static Rust binary per arch (draft). Closest sibling: `apps/adguar
 
 ## 7. start.sh
 
+The server cannot start without a user (section 1), so `start.sh` creates a first user when none exists.
+
 ```bash
 #!/usr/bin/env bash
-mkdir -p /config
+set -eu
 [ -f /config/ankisyncd.toml ] || cp /defaults/ankisyncd.toml /config/ankisyncd.toml
 export MAX_SYNC_PAYLOAD_MEGS="${MAX_SYNC_PAYLOAD_MEGS:-1000}"
 cd /config
+
+users="$(/app/ankisyncd --config /config/ankisyncd.toml user --list)"
+if [ -z "$users" ]; then
+  export ANKISYNCD_USERNAME="${ANKISYNCD_USERNAME:-anki}"
+  if [ -z "${ANKISYNCD_PASSWORD:-}" ]; then
+    if [ ! -s /config/initial_password ]; then
+      (umask 077; od -An -N16 -tx1 /dev/urandom | tr -d ' \n' > /config/initial_password)
+    fi
+    ANKISYNCD_PASSWORD="$(cat /config/initial_password)"
+    export ANKISYNCD_PASSWORD
+    echo "[anki-sync-server] No users yet: creating '${ANKISYNCD_USERNAME}', password in /config/initial_password" >&2
+  fi
+fi
+
 exec /app/ankisyncd --config /config/ankisyncd.toml
 ```
 `defaults/ankisyncd.toml`:
@@ -98,7 +116,7 @@ ssl_enable = false
 cert_file = ""
 key_file = ""
 ```
-`ANKISYNCD_USERNAME` and `ANKISYNCD_PASSWORD` are read by the binary itself on every start (adds the user if missing; a changed password for an existing user is not applied, use `ankisyncd user` for that; this is upstream behaviour and the secrets stay in the environment, not in files or the process list). Do not `cp -n` over an existing user file. Idempotent; nothing is written to `/app`.
+The binary adds the exported user on start, so the password never goes on a command line. UNVERIFIED: the exact output of `user --list` (the source prints one username per line and nothing when empty). `ANKISYNCD_USERNAME` and `ANKISYNCD_PASSWORD` are read by the binary itself on every start (adds the user if missing; a changed password for an existing user is not applied, use `ankisyncd user` for that; this is upstream behaviour and the secrets stay in the environment, not in files or the process list). Do not `cp -n` over an existing user file. Idempotent; nothing is written to `/app`.
 
 ## 8. container-test.yaml
 
@@ -107,12 +125,16 @@ key_file = ""
 
 tcp:
 - port: '27701'
+http:
+- port: '27701'
+  path: /
+  statusCode: 200
 filePaths:
 - /app/ankisyncd
 - /defaults/ankisyncd.toml
 - /usr/share/licenses/anki-sync-server/LICENSE
 ```
-The server starts without users (users are created from env or `ankisyncd user -a`), so the tcp probe works with no env. An `http` probe is UNVERIFIED (which path returns what without auth is not documented); do not add one without checking against a running container. The user-from-env path cannot be tested by the harness; run it by hand (section 11). No DB dependency; no narrowing.
+With no env, `start.sh` creates the first user, so the server starts and the probes work. Without that step the binary panics. `GET /` returns 200 with the text `Anki Sync Server` (route `welcome` in `src/app_config.rs`). The user-from-env path cannot be tested by the harness; run it by hand (section 11). No DB dependency; no narrowing.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -121,10 +143,12 @@ The server starts without users (users are created from env or `ankisyncd user -
 | `/app` (`VOLUME /app`: `ankisyncd.toml`, `auth.db`, `collections/`) | `root_dir = "/config"`; `/app` only holds the binary. |
 | Config copy at `/app/ankisyncd.toml` | `/config/ankisyncd.toml` seeded from `/defaults`. |
 
-Draft expectations: chart runs as UID 0 with writable rootfs and persists `/app/data`; resolved by using `/config` as the one data volume (draft's own "Reason" text says `/config`). A user migrating from the chart must move `/app/data` content into `/config` (`auth.db`, `collections/`); document in the PR. Not privileged. Users are created manually (draft caveat) or via env.
+Draft expectations: chart runs as UID 0 with writable rootfs and persists `/app/data`; resolved by using `/config` as the one data volume (draft's own "Reason" text says `/config`). A user migrating from the chart must move `/app/data` content into `/config` (`auth.db`, `collections/`); document in the PR. Not privileged. Users come from env, from `ankisyncd user -a` (draft caveat), or from the first-start fallback in section 7.
 
 ## 10. Risks, caveats and open questions
 
+- **Decision needed:** upstream is archived. Decide whether to ship it at all, or instead package a maintained option such as the sync server built into Anki (https://docs.ankiweb.net/sync-server.html). UNVERIFIED: whether current Anki clients still work with the sync protocol in 1.1.4. Renovate will never find an update.
+- The auto-created `anki` user with a generated password is this plan's own workaround for the start-up panic; confirm it is wanted.
 - Draft: Anki clients must be pointed at the custom sync URL (e.g. `http://host:27701/`; AnkiDroid media sync uses `/msync`).
 - Draft: data location conflict `/app/data` vs `/config`: settled on `/config` (here, UNVERIFIED against an actual chart migration).
 - UNVERIFIED: the binary was only inspected (`readelf`), not run; confirm at runtime that it starts on glibc Ubuntu 26.04 for both arches, and that the tarball build is the same flavour (TLS feature) as the Docker image's. `ssl_enable` may not work if built without the `tls` feature; keep it false and use a reverse proxy.
@@ -139,7 +163,7 @@ cd apps/anki-sync-server
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name anki-sync-server-probe --read-only --tmpfs /tmp -v anki-sync-server-probe-config:/config anki-sync-server:1.1.4
-docker logs -f anki-sync-server-probe     # expect a listening line on 0.0.0.0:27701, no panic; /config/ankisyncd.toml and auth.db created
+docker logs -f anki-sync-server-probe     # expect "listening on 0.0.0.0:27701", no panic; /config/ankisyncd.toml, auth.db, collections/anki/ and initial_password created
 docker rm -f anki-sync-server-probe
 # user from env
 docker run --rm -d --name anki-sync-server-probe --read-only --tmpfs /tmp -e ANKISYNCD_USERNAME=test -e ANKISYNCD_PASSWORD=testpass123 -v anki-sync-server-probe-config:/config anki-sync-server:1.1.4

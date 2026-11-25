@@ -38,7 +38,7 @@ Why: Python bridge installed with pip (draft says python runtime image). Load `p
 ## 4. Dockerfile
 
 1. `FROM` above; `ARG VERSION`; `USER root`; `WORKDIR /app`.
-2. No apt packages (draft: none; all deps are pure-Python wheels, `build-essential` and `libffi-dev` are already in the python base's build stage list but are not needed at runtime; verify no source builds occur, else add the needed `-dev` packages in the same RUN and purge them).
+2. No apt packages (draft: none; all deps are pure-Python wheels, `build-essential` and `libffi-dev` are already installed in the python base image; verify no source builds occur, else add the needed `-dev` packages in the same RUN and purge them).
 3. Install app and deps:
    ```sh
    mkdir -p /app/amcrest2mqtt /usr/share/licenses/amcrest2mqtt && \
@@ -90,19 +90,24 @@ Behaviour: no env mapping is needed (the app reads the env directly); with missi
 
 ## 8. container-test.yaml
 
-The test runs without env vars and the app exits when they are missing, and there is no port, so only static assertions are possible (same pattern as `apps/cloudflareddns`):
+The test runs without env vars, the app exits when they are missing, and there is no port, so only one-shot runner assertions are possible. Checked against forgetool (`pkg/containers/test/yaml_runner.go`, `testhelpers.go`):
+- `filePaths` run on the main runner, which waits for the container to become healthy. This app exits at once, so the main runner must be disabled, and disabling it also skips `filePaths`.
+- A runner only checks the exit code and output when `expectedOutput` is set.
+- `entrypoint` is split on whitespace with no shell quoting, so no argument may contain a space or rely on quotes.
+
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-filePaths:
-- /app/amcrest2mqtt/src/amcrest2mqtt.py
-- /app/amcrest2mqtt/VERSION
-- /app/venv/bin/python
-- /usr/share/licenses/amcrest2mqtt/LICENSE
+mainRunner:
+  enabled: false
+
 runners:
-- entrypoint: /app/venv/bin/python -c "import amcrest, paho.mqtt.client, slugify"
+- entrypoint: ls /app/amcrest2mqtt/src/amcrest2mqtt.py /app/amcrest2mqtt/VERSION /usr/share/licenses/amcrest2mqtt/LICENSE
+  expectedOutput: /usr/share/licenses/amcrest2mqtt/LICENSE
+- entrypoint: /app/venv/bin/python -c print(__import__('amcrest')and(__import__('paho.mqtt.client'))and(__import__('slugify'))and'imports-ok')
+  expectedOutput: imports-ok
 ```
-The `runners` entrypoint quoting is UNVERIFIED with forgetool (other apps use `entrypoint: test -x /path`); if it does not parse, replace by `entrypoint: test -d /app/venv/lib` style checks, never by a no-op. This is not a database-dependent app and no narrowing comment applies; full functional testing needs a camera and a broker, which the single-container suite cannot provide. Add `timeoutSeconds` only if CI needs it.
+A missing file or a failed import gives a non-zero exit (the default expected exit code is 0). UNVERIFIED: not run with forgetool. After each runner output check forgetool also does a plain start with the same entrypoint. This is not a database-dependent app and no narrowing comment applies; full functional testing needs a camera and a broker, which the single-container suite cannot provide.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -117,6 +122,7 @@ Draft expectations: non-root UID 568 is kept; the draft's "app may write under /
 
 - Draft: needs an MQTT broker and Amcrest cameras plus credentials in env. One container per camera (upstream design).
 - Draft: Python 3.9 EOL in the upstream image. Pins (`amcrest 1.9.7`, `paho-mqtt 1.6.1`, `python-slugify 6.1.1`) are old; Python 3.15 compatibility is UNVERIFIED (pure Python, no declared `requires_python` cap, but runtime behaviour untested, e.g. `paho-mqtt` 1.6.1 callback API). Fallback is a 3.14 base as in `apps/changedetection`.
+- Upstream source at 1.0.16: with `MQTT_TLS_ENABLED=true` the app does not send `MQTT_USERNAME`/`MQTT_PASSWORD` (it only calls `tls_set`), although `MQTT_USERNAME` is still required, and all of CA, cert and key are expected. Document this.
 - Version files out of sync upstream (VERSION file 1.0.15 in tag 1.0.16): cosmetic.
 - Renovate: tags only, `github-tags`; confirm the repo's renovate config handles it.
 - Not blockers: not musl-only, no GPU, no privileged, arm64 is fine (pure Python). Upstream may be unmaintained; note in the PR.

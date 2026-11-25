@@ -29,6 +29,7 @@ apps/appdaemon/
   container-test.yaml
   start.sh
   defaults/appdaemon.yaml     # seeded into /config only when missing (copy of upstream conf/appdaemon.yaml.example)
+  defaults/apps.yaml          # comment-only seed for /config/apps/apps.yaml, copied only when missing
 ```
 
 - `defaults/` is on the `include/.dockerignore` allow-list, so `COPY --chmod=0755 . /` ships it as `/defaults/`.
@@ -109,7 +110,7 @@ Write the `env` list in the block style the siblings use (one `- name:` / `defau
 `#!/usr/bin/env bash`, `set -euo pipefail`. Rules: idempotent, no writes to `/app`, bind all interfaces.
 
 1. `mkdir -p /config/apps /config/dashboards`.
-2. Seed only when missing: `[ -f /config/appdaemon.yaml ] || [ -f /config/appdaemon.toml ] || cp /defaults/appdaemon.yaml /config/appdaemon.yaml`. Same guard for `/config/apps/apps.yaml` (upstream copies an example; seed a file containing only comments, see risk in section 10).
+2. Seed only when missing: `[ -f /config/appdaemon.yaml ] || [ -f /config/appdaemon.toml ] || cp /defaults/appdaemon.yaml /config/appdaemon.yaml`. Same guard for `/config/apps/apps.yaml` (upstream copies an example; seed `/defaults/apps.yaml`, which contains only comments, see risk in section 10).
 3. `defaults/appdaemon.yaml` is the upstream example verbatim (verified): `appdaemon:` latitude 0, longitude 0, elevation 30, time_zone, `plugins: HASS: {type: hass, ha_url:, token:, cert_verify: True}`, `http: url: http://0.0.0.0:5050`, `admin:`, `api:`, `hadashboard:`. `0.0.0.0` satisfies the bind-all rule.
 4. Apply env to the file on every start (only when set), using `yq` (present in the ubuntu base) with `strenv()` so values with `/ & \ "` do not break and the token never lands on a command line:
    ```bash

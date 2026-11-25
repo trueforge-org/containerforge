@@ -143,6 +143,7 @@ Draft security expectations: chart runs as UID 0 and `readOnlyRootFilesystem: fa
 - Adminer has a history of SSRF/auth issues when exposed publicly; do not expose without auth (documentation note, not a build change).
 - No upstream checksum; the `@version` grep is the only guard. A pinned sha256 would need a manual bump with each renovate PR, so it is not used.
 - UNVERIFIED: whether `php8.5-mbstring` is a separate package on Ubuntu 26.04; check with `apt-cache policy` in the build.
+- UNVERIFIED: SQLite logins. Adminer is understood to refuse logins without a password, and SQLite has none, so SQLite files may only work with a login plugin, which this plan does not ship. Check in a run before documenting SQLite as supported.
 - Not blockers: no musl, GPU, privileged mode or arm64 gaps (arch-neutral).
 
 ## 11. Build and test steps

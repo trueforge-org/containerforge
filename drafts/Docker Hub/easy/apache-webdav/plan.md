@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | 2.4.66 (Apache httpd as packaged in Ubuntu 26.04: `apache2 2.4.66-2ubuntu2.7`, security pocket, amd64 and arm64). The draft container `apachewebdav/apachewebdav:latest` is a rolling third-party image (mgutt/docker-apachewebdav, based on `httpd:2.4.43-alpine` in its current Dockerfile), so the image version is the httpd version we ship, not that wrapper's. |
-| Renovate | UNVERIFIED best option: `datasource=github-tags depName=apache/httpd versioning=loose` for `VERSION`; the Ubuntu package revision cannot be tracked by renovate here (the valkey sibling has its repology line commented out for the same reason). `PACKAGE_VERSION` is bumped by hand or by a future repology rule. |
+| Renovate | None active, following `apps/valkey` (its repology line is commented out). A `github-tags` rule on `apache/httpd` would bump `VERSION` to releases Ubuntu does not package and break the `VERSION`/`PACKAGE_VERSION` guard. Both are bumped by hand. UNVERIFIED: a working repology/deb rule for the Ubuntu revision. |
 | License | Apache-2.0 (httpd). The mgutt wrapper scripts and conf are MIT (derived from Bytemark, "Copyright (c) 2019 Bytemark Hosting"); they are not copied verbatim, only the behaviour is reimplemented, so bake `LICENSE` = `Apache-2.0`. |
 | Source URL | https://github.com/apache/httpd (docs https://httpd.apache.org/docs/2.4/mod/mod_dav.html) |
 | Binary | apt `apache2` (depends on `apache2-bin`, `apache2-data`, `apache2-utils`; `htpasswd` is in `apache2-utils`). Modules confirmed in the apache2 package file list: `dav.load`, `dav_fs.load`, `dav_lock.load`, `auth_digest.load`, `authn_file.load`, `headers.load`, `rewrite.load`; `/usr/sbin/apache2ctl`. |
@@ -59,7 +59,7 @@ Why: draft says httpd from apt on ubuntu. Closest sibling: `apps/valkey` (pinned
 - `VERSION` and `PACKAGE_VERSION`:
   ```hcl
   variable "VERSION" {
-    // renovate: datasource=github-tags depName=apache/httpd versioning=loose
+    // NOTE: Ubuntu version, tied to the base image; no active renovate comment (as apps/valkey)
     default = "2.4.66"
   }
   variable "PACKAGE_VERSION" {
@@ -96,7 +96,7 @@ Behaviour (write it as an idempotent bash script; render the config into `/tmp` 
 
 Template content (key directives; all paths writable):
 - `ServerRoot /etc/apache2`, `Listen 8080`, `ServerName ${SERVER_NAME}`, `PidFile /tmp/apache2/httpd.pid`, `DefaultRuntimeDir /tmp/apache2`, `Mutex file:/tmp/apache2 default`, no `User` or `Group` (running as non-root).
-- `LoadModule` lines from `/usr/lib/apache2/modules/` (relative to `ServerRoot` as `/usr/lib/apache2/modules/mod_X.so`): `mpm_event`, `authn_core`, `authn_file`, `authz_core`, `authz_user`, `authz_host`, `auth_basic`, `auth_digest`, `dav`, `dav_fs`, `alias`, `autoindex`, `dir`, `mime`, `setenvif`, `headers`, `log_config`, `unixd`, `env`, `reqtimeout`. `TypesConfig /etc/mime.types` if present (check).
+- `LoadModule` lines from `/usr/lib/apache2/modules/` (relative to `ServerRoot` as `/usr/lib/apache2/modules/mod_X.so`): `mpm_event`, `authn_core`, `authn_file`, `authz_core`, `authz_user`, `authz_host`, `auth_basic`, `auth_digest`, `dav`, `dav_fs`, `alias`, `autoindex`, `dir`, `mime`, `setenvif`, `headers`, `env`, `reqtimeout`. Do not add `LoadModule` for `log_config` or `unixd`: Debian's `apache2` builds them in, so there is no `.so` to load (UNVERIFIED for this exact package; confirm with `apache2 -l`). `TypesConfig /etc/mime.types` if present (check).
 - `ErrorLog /proc/self/fd/2`, `CustomLog /proc/self/fd/1 combined` (needs a `LogFormat` line defined in the template).
 - `DavLockDB /config/dav/DavLock`, `Alias ${LOCATION} "/data/"` (careful with `LOCATION=/`), `<Directory "/data/">` with `Dav On`, `Options +Indexes`, `DirectoryIndex disabled`, `AuthType ${AUTH_TYPE}`, `AuthName "${REALM}"`, `AuthUserFile ${AUTH_FILE}`, `<RequireAny>` with `Require valid-user` plus optional extra lines.
 - The `BrowserMatch ... redirect-carefully` lines and `RequestHeader edit Destination ^https http early` from the upstream conf (needed for common clients and TLS-terminating proxies).
@@ -119,7 +119,7 @@ filePaths:
 - /etc/apache-webdav/httpd.conf.template
 - /usr/share/licenses/apache-webdav/copyright
 ```
-With no env, the user file is empty, so every request must get a `401` challenge; that proves Apache, `mod_dav` auth and the config work. Whether the `http` check accepts a non-2xx `statusCode` is UNVERIFIED; if not, keep only `tcp`, never loosen to an always-true assertion. The credentialed path (`USERNAME`/`PASSWORD`, `PROPFIND`, `PUT`, `GET`) cannot run in the harness and must be run by hand (section 11). Not a DB-dependent app.
+With no env, the user file is empty, so every request must get a `401` challenge; that proves Apache, `mod_dav` auth and the config work. A non-2xx `statusCode` is supported: the forgetool schema takes any integer and `include/healthcheck.sh` requires an exact match when `statusCode` is set. The credentialed path (`USERNAME`/`PASSWORD`, `PROPFIND`, `PUT`, `GET`) cannot run in the harness and must be run by hand (section 11). Not a DB-dependent app.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -171,5 +171,5 @@ Success: Apache stays up on the read-only rootfs, 401 without credentials, 201 o
 - Branch `feat/add-apache-webdav`; commit and title `feat(apache-webdav): add new container`.
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`; Notes has `🤖 This PR is AI generated.`
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- Untested unless run: both arches, Basic and Digest auth flows, anonymous methods, real WebDAV clients (Windows, macOS, Linux), `PUMASK`, migration from the chart's `/var/lib/dav`, `forgetool` run (including whether `statusCode: 401` is accepted).
+- Untested unless run: both arches, Basic and Digest auth flows, anonymous methods, real WebDAV clients (Windows, macOS, Linux), `PUMASK`, migration from the chart's `/var/lib/dav`, `forgetool` run.
 - Standard checklist: minimal scope, instruction files followed, `VERSION` and `PACKAGE_VERSION` aligned with the Dockerfile guard, rootless and read-only, empty `/config` works, no downstream impact, `bake --print` ran.

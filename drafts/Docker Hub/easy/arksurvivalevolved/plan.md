@@ -11,7 +11,7 @@
 | License | MIT (arkmanager repo LICENSE, 2015 Fez Vrasta; confirmed by web search, repo LICENSE page itself returned 503). The ARK server files are Valve/Studio Wildcard EULA content and are not shipped. |
 | Source URLs | repo https://github.com/arkmanager/ark-server-tools, wiki https://github.com/arkmanager/ark-server-tools/wiki, tarball `https://github.com/arkmanager/ark-server-tools/archive/refs/tags/v1.6.69.tar.gz` (URL pattern standard for GitHub, not fetched) |
 | Per-arch | amd64 only. ARK server and SteamCMD binaries are x86 (draft: arm64 `no`). `image-all` must list only `linux/amd64` (as `apps/steamcmd`). |
-| Checksum | GitHub publishes none for the source tarball. Compute `sha256sum` of the tag tarball once during implementation and pin it as an `ARG` in the Dockerfile (value UNVERIFIED until then). Upstream's own installer pipes `netinstall.sh` into bash; we do not. |
+| Checksum | GitHub publishes none for the source tarball. The plan clones the release tag with git instead (section 5); this trusts the tag. Upstream's own installer pipes `netinstall.sh` into bash; we do not. |
 | Upstream Dockerfile reviewed | https://github.com/SickHub/arkserver/blob/394fd7aa4f6321e5665f9dbc7d1ff4600aa6386f/Dockerfile (FROM `drpsychick/steamcmd`, apt `curl cron bzip2 perl-modules lsof libc6-i386 rsync sudo`, user `steam`, passwordless sudo, volumes `/ark` and `/arkserver`, CMD `./run.sh`, HEALTH_SERVER on 8080) and its `scripts/run.sh` (summarized below) |
 | Upstream env (SickHub) | `am_ark_SessionName` (default "Ark Server"), `am_serverMap` (TheIsland), `am_ark_ServerAdminPassword`, `am_ark_MaxPlayers` (70), `am_ark_QueryPort` (27015), `am_ark_Port` (7778), `am_ark_RCONPort` (32330), `am_ark_AltSaveDirectoryName`, `am_arkwarnminutes` (15), `am_arkAutoUpdateOnStart`, `am_ark_GameModIds`, `ARKCLUSTER`, `BACKUP_ONSTART`, `VALIDATE_SAVE_EXISTS`, `LOG_RCONCHAT`, `HEALTH_SERVER(_PORT)`. Rule in `run.sh`: every other `am_*` var is copied into `arkmanager.cfg`. |
 | arkmanager config vars (tools/arkmanager.cfg v1.6.69) | `steamcmdroot` (/home/steam/steamcmd), `steamcmdexec` (steamcmd.sh), `appid` (376030), `arkbackupdir` (/home/steam/ARK-Backups), `logdir` (/var/log/arktools), `steamcmd_appinfocache`, `steamcmd_workshoplog`, `arkStagingDir`, `serverMap` (TheIsland). `arkserverroot` and the `ark_*Port` names were not in the fetched file (`ark_` prefix variables are instance-level; SickHub writes `arkserverroot` itself). |
@@ -43,14 +43,12 @@ FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>
 
 ## 4. Dockerfile
 
-1. `FROM` above; `ARG VERSION`, `ARG ARKMANAGER_SHA256`; `USER root`.
+1. `FROM` above; `ARG VERSION`; `USER root`.
 2. apt packages not in the ubuntu or steamcmd base (the base already has curl, tar, ca-certificates, unzip, git, jq, yq; verify with `dpkg -l`): `bzip2 lsof perl-modules rsync libc6-i386` (taken from the SickHub image; arkmanager shells out to these). No `cron` and no `sudo` (see below). One `apt-get update && install --no-install-recommends ... && rm -rf /var/lib/apt/lists/*`. Not pinned: they are not the app's version; the app version is the arkmanager tag.
-3. Install arkmanager from the tagged tarball with checksum:
+3. Install arkmanager from a clone of the release tag (`git` is in the base; no checksum variable, see section 5):
    ```dockerfile
    RUN set -eux; cd /tmp; \
-       curl -fsSL -o ast.tar.gz "https://github.com/arkmanager/ark-server-tools/archive/refs/tags/v${VERSION}.tar.gz"; \
-       echo "${ARKMANAGER_SHA256}  ast.tar.gz" | sha256sum -c -; \
-       mkdir ast && tar -xzf ast.tar.gz -C ast --strip-components=1; \
+       git clone --depth 1 --branch "v${VERSION}" https://github.com/arkmanager/ark-server-tools.git ast; \
        cd ast/tools && ./install.sh <apps-user> --prefix=... ; \
        mkdir -p /usr/share/licenses/arksurvivalevolved && cp /tmp/ast/LICENSE /usr/share/licenses/arksurvivalevolved/LICENSE; \
        rm -rf /tmp/*
@@ -71,7 +69,7 @@ variable "LICENSE" { default = "MIT" }
 variable "SOURCE"  { default = "https://github.com/arkmanager/ark-server-tools" }
 ```
 
-`ARKMANAGER_SHA256` as a second `variable` with its own renovate-less default is awkward (renovate would bump VERSION and leave a stale hash). Alternative: no hash variable; verify instead by cloning the tag over git (`git clone --depth 1 --branch v${VERSION}`), since git is in the base image; pick this if the hash approach would break renovate. Targets: standard four plus default group, with `image-all` platforms `["linux/amd64"]` only (as `apps/steamcmd`). Run `docker buildx bake --print`.
+No `ARKMANAGER_SHA256` variable: renovate would bump `VERSION` and leave a stale hash, so the Dockerfile clones the tag `v${VERSION}` with git (section 4). `extractVersion` in the renovate comment has precedent in `apps/code-server`. Targets: standard four plus default group, with `image-all` platforms `["linux/amd64"]` only (as `apps/steamcmd`). Run `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -99,9 +97,9 @@ Header and `schema_version: 1`, `upstream_env_url: "https://github.com/arkmanage
 
 1. `export HOME=/config XDG_DATA_HOME=/config`; dirs: `/config/server` (arkserverroot), `/config/backup`, `/config/staging`, `/config/log`, `/config/arkmanager`, plus `/tmp/arktools` for logs and lock files.
 2. Seed SteamCMD like `apps/steamcmd/start.sh`: if `/config/Steam/steamcmd/steamcmd.sh` is missing copy `/usr/local/share/steamcmd/steamcmd.sh` (and `linux32/steamcmd` when present) there. Do not copy the base's start.sh logic wholesale; only the seeding block.
-3. Config generation on every start (idempotent, values from env applied each time): start from `/defaults/arkmanager.cfg`, then append `arkserverroot="/config/server"`, `steamcmdroot="/config/Steam/steamcmd"`, `steamcmdexec="steamcmd.sh"`, `arkbackupdir="/config/backup"`, `arkStagingDir="/config/staging"`, `logdir="/tmp/arktools"`, `steamcmd_appinfocache`/`steamcmd_workshoplog` under `/config/Steam`, then one line per `am_*` env var written with proper quoting (`printf 'x="%s"'` after escaping `"`, `\`, `$`, backtick) so special characters in passwords or session names cannot break the shell-sourced file. Write to `/config/arkmanager/arkmanager.cfg` with `umask 077` (the admin password lives in it, never put it on a command line).
-4. How arkmanager finds that file is UNVERIFIED (user config `~/.arkmanager.cfg` = `/config/.arkmanager.cfg`, or `/etc/arkmanager/instances/*.cfg`, which is read-only). Read `tools/arkmanager` for the lookup order in v1.6.69 and write to the user-level path; do not write `/etc`.
-5. Admin password: if `am_ark_ServerAdminPassword` is empty, generate once (`tr -dc 'A-Za-z0-9' </dev/urandom | head -c 24`) into `/config/arkmanager/admin_password` (mode 600) and reuse it on later starts; log only the file path. Never ship a default like SickHub's `k3yb04rdc4t`.
+3. Config generation on every start (idempotent, values from env applied each time): start from `/defaults/arkmanager.cfg`, then append `arkserverroot="/config/server"`, `steamcmdroot="/config/Steam/steamcmd"`, `steamcmdexec="steamcmd.sh"`, `arkbackupdir="/config/backup"`, `arkStagingDir="/config/staging"`, `logdir="/tmp/arktools"`, `steamcmd_appinfocache`/`steamcmd_workshoplog` under `/config/Steam`, then one line per `am_*` env var, with the `am_` prefix stripped from the name (as upstream `run.sh` does: `am_serverMap` becomes `serverMap`), written with proper quoting (`printf 'x="%s"'` after escaping `"`, `\`, `$`, backtick) so special characters in passwords or session names cannot break the shell-sourced file. Write to `/config/.arkmanager.cfg` (the user config arkmanager reads) with `umask 077` (the admin password lives in it, never put it on a command line).
+4. Lookup order, checked in `tools/arkmanager` at v1.6.69: it sources `/etc/arkmanager/arkmanager.cfg`, then `${HOME}/.arkmanager.cfg` (here `/config/.arkmanager.cfg`). Do not write `/etc`. UNVERIFIED: whether an instance config is also required.
+5. Admin password: if `am_ark_ServerAdminPassword` is empty, generate once (`od -An -N12 -tx1 /dev/urandom | tr -d ' \n'`; a `tr </dev/urandom | head` pipe would abort under `pipefail`) into `/config/arkmanager/admin_password` (mode 600) and reuse it on later starts; log only the file path. Never ship a default like SickHub's `k3yb04rdc4t`.
 6. Install or update: if `/config/server/steamapps/appmanifest_376030.acf` is missing run `arkmanager install`; elif `am_arkAutoUpdateOnStart=true` run `arkmanager update --force --no-autostart` (flow copied from upstream `run.sh`). Failure of install must exit non-zero.
 7. Stale lock/pid files in `Saved` are removed at start (as upstream).
 8. Final command: `arkmanager start --no-background --verbose`. Upstream backgrounds it and traps TERM to run `arkmanager stop` (graceful world save). Do the same: `arkmanager start --no-background --verbose & pid=$!`, `trap 'arkmanager stop; wait "$pid"' TERM INT QUIT`, `wait "$pid"`. This is the one place where plain `exec` is replaced by trap and wait; justify in a comment. If testing shows `arkmanager start --no-background` handles TERM by itself, switch to `exec`.
@@ -110,7 +108,7 @@ Header and `schema_version: 1`, `upstream_env_url: "https://github.com/arkmanage
 
 ## 8. container-test.yaml
 
-The test runs with no env and starts the server, which first downloads the multi-GB game (long, needs network and disk) and listens on **UDP only** (tcp/http probes cannot see it; RCON TCP 27020 only opens after the server is up). Follow `apps/luanti` and `apps/bookstack`: do not run the main process, assert the installed files and tools.
+The test runs with no env and starts the server, which first downloads the multi-GB game (long, needs network and disk) and listens on **UDP only** (tcp/http probes cannot see it; RCON TCP 27020 only opens after the server is up). So do not run the main process; assert the installed files and tools with one-shot runners. Checked against forgetool (`yaml_runner.go`): `mainRunner.enabled: false` also skips `filePaths`, a runner only checks exit code and output when `expectedOutput` is set (so `apps/bookstack`-style runners without it assert little), and `entrypoint` is split on whitespace without shell quoting.
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
@@ -119,18 +117,14 @@ timeoutSeconds: 240
 mainRunner:
   enabled: false
 
-filePaths:
-- /usr/local/bin/arkmanager
-- /usr/local/share/steamcmd/steamcmd.sh
-- /defaults/arkmanager.cfg
-- /start.sh
-- /usr/share/licenses/arksurvivalevolved/LICENSE
-
 runners:
+- entrypoint: ls /usr/local/bin/arkmanager /usr/local/share/steamcmd/steamcmd.sh /defaults/arkmanager.cfg /start.sh /usr/share/licenses/arksurvivalevolved/LICENSE
+  expectedOutput: /usr/share/licenses/arksurvivalevolved/LICENSE
 - entrypoint: arkmanager --version
+  expectedOutput: "Version:"
 ```
 
-(`arkmanager --version` is UNVERIFIED; use `arkmanager useconfig`/`--help` if absent. Confirm `runners` syntax with the forgetool schema and `apps/bookstack/container-test.yaml`.) Deviation from "probe every port" is justified by UDP-only ports and the runtime download; state it in the PR.
+`--version` exists in `tools/arkmanager` at v1.6.69 and prints `Version: ...`; UNVERIFIED: that it exits 0 in this image. The install path `/usr/local/bin/arkmanager` depends on the `install.sh` options (section 4). The container healthcheck, with no probe configured, falls back to a process-alive check. Deviation from "probe every port" is justified by UDP-only ports and the runtime download; state it in the PR.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -151,9 +145,9 @@ runners:
 
 - amd64 only (draft caveat verified); `image-all` has one platform. Consider the repo CI behaviour for amd64-only apps (steamcmd precedent).
 - First start downloads the ARK server (very large, slow) and then needs 8 GB+ RAM per map (draft). Container tests and `docker run` probes must not wait for it; use a bounded probe (see section 11).
-- Unverified items to resolve by reading upstream during implementation: `install.sh` options, config lookup order, `--version` flag, RCON default port, arkmanager signal handling, whether `arkmanager` needs `lsof` and `perl-modules` at runtime, whether SteamCMD works with a copied-in tree under `/config/Steam` (works for `apps/steamcmd`).
+- Unverified items to resolve by reading upstream during implementation: `install.sh` options, whether an instance config is needed, the `--version` exit code, RCON default port, arkmanager signal handling, whether `arkmanager` needs `lsof` and `perl-modules` at runtime, whether SteamCMD works with a copied-in tree under `/config/Steam` (works for `apps/steamcmd`).
 - Steam EULA/license for SteamCMD and ARK files; nothing proprietary is baked into the image.
-- No renovate-friendly checksum for the arkmanager tarball (see section 5).
+- No checksum verification: the git tag is trusted (see section 5).
 - Base-image digest of `ghcr.io/trueforge-org/steamcmd` is unknown (section 3).
 - Cluster and mod features rely on extra volumes the user must mount.
 
@@ -169,7 +163,7 @@ docker logs -f arksurvivalevolved-probe
 ```
 
 - Expected readiness signal for the empty-volume run: config generated, SteamCMD seeded, then `arkmanager install` starts and SteamCMD prints "Update state ... downloading" lines, process still running, no traceback. Stop the probe after the download starts; a full install is a manual, optional step (ample disk, real network). If a game install is available, the full-readiness signal is arkmanager reporting the server running and the UDP query port answering (`arkmanager status`).
-- Check with `ss -lun` and `docker top` only after the server is up; check `/config` for the generated `arkmanager/arkmanager.cfg` mode 600.
+- Check with `ss -lun` and `docker top` only after the server is up; check `/config` for the generated `.arkmanager.cfg` mode 600.
 - Cleanup: `docker rm -f arksurvivalevolved-probe; docker volume rm arksurvivalevolved-probe-config`.
 - `forgetool containers test --image arksurvivalevolved:1.6.69 --config ./apps/arksurvivalevolved/container-test.yaml`.
 - Max 10 rounds.
@@ -180,5 +174,5 @@ docker logs -f arksurvivalevolved-probe
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; tick "New container/image" and only boxes that apply; `🤖 This PR is AI generated.` in Notes.
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; check `license/cla`).
 - Notes: amd64 only, runtime download of the game, volumes collapsed into `/config`, UID 568 migration, cron and sudo removed, UDP-only test deviation.
-- Untested until run: the full game install and server start, install.sh options, config lookup path, graceful stop, memory use. Say so honestly and do not tick "Verified image in staging" unless done.
+- Untested until run: the full game install and server start, install.sh options, instance config need, graceful stop, memory use. Say so honestly and do not tick "Verified image in staging" unless done.
 - Checklist: app-scoped, instructions read, `VERSION` aligned (1.6.69), rootless and read-only OK, empty `/config` OK, `bake --print` run. Add `apps/steamcmd/DOWNSTREAM_CHANGES.md` only if steamcmd itself changes.

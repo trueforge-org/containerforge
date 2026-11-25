@@ -17,7 +17,8 @@
 | Upstream Dockerfile reviewed | https://github.com/apache/answer/blob/v2.0.3/Dockerfile (golang:1.25-alpine builder, alpine runtime, `VOLUME /data`, `EXPOSE 80`, `ENTRYPOINT /entrypoint.sh`). The draft's link is the 1.2.0-era commit. |
 | Upstream entrypoint | `script/entrypoint.sh`: `/usr/bin/answer init`, `/usr/bin/answer upgrade`, `/usr/bin/answer run -C /data/`. |
 | Config (v2.0.3 `configs/config.yaml`) | `server.http.addr: 0.0.0.0:80`, sqlite at `/data/sqlite3/answer.db`, cache `/data/cache/cache.db`, `i18n.bundle_dir: /data/i18n`. |
-| Env vars (docs https://answer.apache.org/docs/env and source) | Install: `INSTALL_PORT` (80), `AUTO_INSTALL` (`true` enables env install). Auto-install (all required when enabled): `DB_TYPE` (`sqlite3`, `mysql`, `postgres`), `LANGUAGE`, `SITE_NAME`, `SITE_URL`, `CONTACT_EMAIL`, `ADMIN_NAME`, `ADMIN_PASSWORD` (8-32 chars), `ADMIN_EMAIL`, `EXTERNAL_CONTENT_DISPLAY` (`always_display` or `ask_before_display`). DB: `DB_FILE` (sqlite path), `DB_HOST`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`. Runtime overrides: `SITE_ADDR`, `SWAGGER_HOST`, `SWAGGER_ADDRESS_PORT`, `LOG_LEVEL` (DEBUG/INFO/WARN/ERROR), `LOG_PATH`; also `SKIP_REPLACE_I18N` (seen in source). No default documented for the runtime overrides. |
+| Env vars (docs https://answer.apache.org/docs/env and source) | Install: `INSTALL_PORT` (80), `AUTO_INSTALL` (**any non-empty value**, including `false`, enables env install; `internal/install/install_from_env.go`). Auto-install (needed when enabled): `DB_TYPE` (`sqlite3`, `mysql`, `postgres`), `LANGUAGE`, `SITE_NAME`, `SITE_URL`, `CONTACT_EMAIL`, `ADMIN_NAME`, `ADMIN_PASSWORD` (8-32 chars), `ADMIN_EMAIL`, `EXTERNAL_CONTENT_DISPLAY` (`always_display` or `ask_before_display`). DB: `DB_FILE` (sqlite path), `DB_HOST`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`. Runtime overrides: `SITE_ADDR`, `SWAGGER_HOST`, `SWAGGER_ADDRESS_PORT`, `LOG_LEVEL` (DEBUG/INFO/WARN/ERROR), `LOG_PATH`; also `SKIP_REPLACE_I18N`. No default documented for the runtime overrides. Clash: the ubuntu base sets `LANGUAGE=en_US:en`, which auto-install would read as the site language. |
+| Install behaviour (v2.0.3 source) | `init` returns at once when the config file exists and the DB tables exist. Otherwise it serves the install server on `INSTALL_PORT` (with `/healthz`, and `/` redirecting to `/install`). After `base-info` succeeds (wizard or env) the process calls `os.Exit(0)` after 1 s, so the script continues with `upgrade` and `run`. With `-C /config` the config is `/config/conf/config.yaml`, and the installer rewrites cache, i18n and upload paths to `/config/cache/cache.db`, `/config/i18n` and `/config/uploads`; only the DB path comes from the wizard or `DB_FILE`. |
 | Ports | 80 upstream (privileged, so remapped). 8080 chosen via `SITE_ADDR` and `INSTALL_PORT`. |
 
 ## 2. Target layout
@@ -54,7 +55,7 @@ Why: prebuilt static Go binary with embedded UI (draft). It is NOT compiled here
    chown -R root:root /app && rm -rf /tmp/*
    ```
    `TARGETARCH` values `amd64`/`arm64` match the asset names directly, no mapping needed. Do not copy the whole tarball: only the binary goes to `/app`, license files go to `/usr/share/licenses/answer/`.
-3. `ENV INSTALL_PORT=8080 SITE_ADDR=0.0.0.0:8080` (defaults must match `start.sh` and `settings.yaml`).
+3. `ENV INSTALL_PORT=8080 SITE_ADDR=0.0.0.0:8080 LANGUAGE=en_US` (`LANGUAGE` overrides the base's `en_US:en`; defaults must match `start.sh` and `settings.yaml`).
 4. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `WORKDIR /config`, `VOLUME /config`. Final `USER apps`.
 5. apt: none (`ca-certificates`, `tzdata` are in the base; draft says none).
 
@@ -74,7 +75,7 @@ Why: prebuilt static Go binary with embedded UI (draft). It is NOT compiled here
 
 - Header, `schema_version: 1`, `upstream_env_url: "https://github.com/apache/answer"`.
 - `ports`: `8080` tcp `required: false`.
-- `env` (all from section 1; `required: false`, defaults empty unless stated): `SITE_ADDR` "0.0.0.0:8080", `INSTALL_PORT` "8080", `AUTO_INSTALL` "", `DB_TYPE` "", `DB_FILE` "", `DB_HOST` "", `DB_NAME` "", `DB_USERNAME` "", `DB_PASSWORD` "", `LANGUAGE` "", `SITE_NAME` "", `SITE_URL` "", `CONTACT_EMAIL` "", `ADMIN_NAME` "", `ADMIN_PASSWORD` "", `ADMIN_EMAIL` "", `EXTERNAL_CONTENT_DISPLAY` "", `LOG_LEVEL` "", `LOG_PATH` "", `SWAGGER_HOST` "", `SWAGGER_ADDRESS_PORT` "", `TZ` "Etc/UTC".
+- `env` (all from section 1; `required: false`, defaults empty unless stated): `SITE_ADDR` "0.0.0.0:8080", `INSTALL_PORT` "8080", `AUTO_INSTALL` "", `DB_TYPE` "", `DB_FILE` "", `DB_HOST` "", `DB_NAME` "", `DB_USERNAME` "", `DB_PASSWORD` "", `LANGUAGE` "en_US", `SITE_NAME` "", `SITE_URL` "", `CONTACT_EMAIL` "", `ADMIN_NAME` "", `ADMIN_PASSWORD` "", `ADMIN_EMAIL` "", `EXTERNAL_CONTENT_DISPLAY` "", `LOG_LEVEL` "", `LOG_PATH` "", `SWAGGER_HOST` "", `SWAGGER_ADDRESS_PORT` "", `TZ` "Etc/UTC".
 - `volumes`: `/config` required true.
 - `opt_dependencies`: `postgresql` (exists; SQLite is the default and needs no sidecar, so it is not a hard dependency, contrary to the draft's dependency list). `dependencies:` stays absent.
 
@@ -86,10 +87,10 @@ export SITE_ADDR="${SITE_ADDR:-0.0.0.0:8080}"
 export INSTALL_PORT="${INSTALL_PORT:-8080}"
 mkdir -p /config
 
-# sqlite default for auto-install
-if [[ "${AUTO_INSTALL:-}" == "true" && "${DB_TYPE:-sqlite3}" == "sqlite3" ]]; then
+mkdir -p /config/sqlite3
+# sqlite default for auto-install (any non-empty AUTO_INSTALL enables it)
+if [[ -n "${AUTO_INSTALL:-}" && "${DB_TYPE:-sqlite3}" == "sqlite3" ]]; then
   export DB_TYPE="${DB_TYPE:-sqlite3}"
-  mkdir -p /config/sqlite3
   export DB_FILE="${DB_FILE:-/config/sqlite3/answer.db}"
 fi
 
@@ -98,7 +99,7 @@ cd /config
 /app/answer upgrade -C /config   # idempotent migration step (upstream does the same)
 exec /app/answer run -C /config
 ```
-Mirrors upstream `entrypoint.sh` with `/config` instead of `/data`. Safe with empty `/config`: before installation `init` serves the install wizard on port 8080 (so the port probe works), after the wizard the `run` step starts the app. `ADMIN_PASSWORD`, `DB_PASSWORD` stay in env (not echoed, not on the command line). UNVERIFIED details to confirm with a real run: (a) `init` returns immediately on an already installed `/config`; (b) the wizard writes `conf/config.yaml` under `/config` and uses `/config`-relative or absolute sqlite and upload paths (upstream expected `/data`; pick `/config/sqlite3` in the wizard text or via `DB_FILE`); (c) the process terminates cleanly on SIGTERM. If upstream turns out to write uploads to a fixed `/data/uploads`, a runtime symlink is impossible on a read-only rootfs, so create it at build time (for example `/data/uploads` pointing to `/config/uploads`) after checking where uploads really go.
+Mirrors upstream `entrypoint.sh` with `/config` instead of `/data`. With an empty `/config`, `init` serves the install server on 8080 (so the port probe works); once installation succeeds it exits 0 and the `run` step starts the app (section 1). `ADMIN_PASSWORD` and `DB_PASSWORD` stay in the environment (not echoed, not on the command line). In the wizard, a SQLite user must enter `/config/sqlite3/answer.db`; a path under `/data` is not writable on the read-only rootfs (UNVERIFIED: the wizard's pre-filled default). UNVERIFIED, confirm in a real run: signal handling while `init` is the foreground child of the script and after `exec`, and that nothing else writes to the `/data/...` paths of the sample config. If something does, fix its path in the config; do not assume a runtime symlink is possible.
 
 ## 8. container-test.yaml
 
@@ -107,12 +108,16 @@ Mirrors upstream `entrypoint.sh` with `/config` instead of `/data`. Safe with em
 
 tcp:
 - port: '8080'
+http:
+- port: '8080'
+  path: /healthz
+  statusCode: 200
 filePaths:
 - /app/answer
 - /usr/share/licenses/answer/LICENSE
 - /usr/share/licenses/answer/NOTICE
 ```
-No env is needed: with empty `/config` the install wizard listens on 8080. An `http` probe on `/` is UNVERIFIED (the install page may redirect to `/install`), so add `http` with `path: /install` only after confirming the status in a run. Not a hard DB dependency (SQLite default), so no narrowing exception; the PostgreSQL path is checked manually.
+No env is needed: with empty `/config` the install server listens on 8080 and answers `/healthz` with 200 (`internal/install/install_server.go` at v2.0.3). Not a hard DB dependency (SQLite default), so no narrowing exception; the PostgreSQL path is checked manually.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -129,7 +134,8 @@ Draft expectations: chart is non-root UID 568 with read-only rootfs and `/data` 
 
 - Draft: first run needs the web wizard (or `AUTO_INSTALL=true` plus all auto-install variables) before the instance is usable.
 - Draft: Apache Incubator pin 1.2.0 is stale; this plan targets 2.0.3. Major version jump: existing 1.x data may need `answer upgrade`; test a 1.x to 2.x migration before offering it to chart users (UNVERIFIED).
-- UNVERIFIED items in section 7 (init idempotency, data paths, signal handling).
+- UNVERIFIED items in section 7 (wizard default DB path, other `/data` writes, signal handling).
+- Do not set `AUTO_INSTALL=false`: it still triggers auto-install.
 - `SITE_URL` must match the externally visible URL, and `SITE_ADDR` must be set to match the port in `SITE_URL` after install (per docs).
 - Swagger UI is shown by default (`swaggerui.show: true` in the sample config); consider the note in the PR.
 - The Docker tag of upstream used Asia/Shanghai as default timezone; here `TZ` defaults to `Etc/UTC`.
