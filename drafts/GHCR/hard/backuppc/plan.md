@@ -46,7 +46,7 @@ Step list (one `FROM` for build and one for final, or one stage if the build onl
 1. `ARG VERSION=4.4.0`, `ARG TARGETARCH`, `ARG BACKUPPC_XS_VERSION=0.62`, `ARG RSYNC_BPC_COMMIT=1ad3f70`. `ARG VERSION` must equal the `docker-bake.hcl` default.
 2. `USER root`.
 3. Install apt packages (Ubuntu names, UNVERIFIED): `rsync`, `openssh-server`, `openssh-client`, `apache2-utils` or `lighttpd` (see section 10), `perl`, `libarchive-zip-perl`, `libxml-rss-perl`, `libcgi-pm-perl`, `libfile-listing-perl`, `libjson-xs-perl`, `libtime-parsedate-perl`, `samba-client`, `rrdtool`, `msmtp`, `par2`, `pigz`, `tzdata`. Use `--no-install-recommends` and `rm -rf /var/lib/apt/lists/*`. Do not reinstall anything the base already has (check `coreutils`, `curl`, `tini`, `ca-certificates`, `bash`).
-4. Build dependencies (`gcc`, `g++`, `make`, `autoconf`, `automake`, `libperl-dev`, `libacl1-dev`, `git`) in the same `RUN` and removed in that same `RUN`, so they do not persist in a layer.
+4. Build dependencies (`gcc`, `g++`, `make`, `autoconf`, `automake`, `libperl-dev`, `libacl1-dev`, `git`) in the same `RUN` as steps 5 to 10 (installed, used and purged in one `RUN`, so they do not persist in a layer).
 5. Clone and build BackupPC::XS: `git clone --depth 1 --branch "${BACKUPPC_XS_VERSION}" https://github.com/backuppc/backuppc-xs.git /tmp/backuppc-xs && cd /tmp/backuppc-xs && perl Makefile.PL && make -j"$(nproc)" && make test && make install`.
 6. Build rsync-bpc: `git clone https://github.com/backuppc/rsync-bpc.git /tmp/rsync-bpc && cd /tmp/rsync-bpc && git checkout "${RSYNC_BPC_COMMIT}" && ./configure --disable-md2man --disable-openssl --disable-xxhash --disable-zstd --disable-lz4 && make && make install`. Keep the disable flags from upstream.
 7. Download the BackupPC tarball and verify its SHA256: `curl -fL -o /tmp/BackupPC-${VERSION}.tar.gz "https://github.com/backuppc/backuppc/releases/download/${VERSION}/BackupPC-${VERSION}.tar.gz"` then `echo "<sha256>  /tmp/BackupPC-${VERSION}.tar.gz" | sha256sum -c -`. The SHA256 value must be computed once by hand from the file (not in this run; UNVERIFIED value).
@@ -159,7 +159,7 @@ Every `settings.yaml` port has a probe. The HTTP path `/` may return a login red
 | Upstream write path | Remap for this app |
 | --- | --- |
 | `/etc/backuppc` (VOLUME) | `/config/etc` (seeded by `start.sh`). |
-| `/home/backuppc` (VOLUME, WORKDIR, setup) | `/config/home`. Symlink `/home/backuppc` is NOT allowed (root-owned `/home`). Set BackupPC `$Conf{...}` paths in the seeded config instead. |
+| `/home/backuppc` (VOLUME, WORKDIR, setup) | `/config/home`. A build-time symlink `/home/backuppc -> /config/home` (created as root, as the fenrus-style plans do) is possible and may be simpler than rewriting paths; the app may also need `$Conf{TopDir}` set in the seeded config. Set BackupPC `$Conf{...}` paths in the seeded config instead. |
 | `/data/backuppc` (VOLUME, backup storage) | `/config/data` (root-owned storage is replaced by `apps` UID 568 ownership). Backups of large data need a bind mount; not decided here. |
 | `/etc/ssh/ssh_config` (StrictHostKeyChecking) | Not needed unless sshd is kept (section 10). Do not edit `/etc`. |
 | `/usr/sbin/sendmail` symlink | Not allowed in a read-only rootfs. Drop it or use `msmtp` via `PATH` in `start.sh`. |

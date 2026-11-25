@@ -42,19 +42,19 @@ No `defaults/`, `etc/`, `health/` needed. No `DOWNSTREAM_CHANGES.md` (not a `FRO
 3. Install runtime deps: `apt-get install -y --no-install-recommends curl sqlite3 libqt5core5a libqt5network5 libqt5serialport5 libqt5websockets5 libqt5sql5 libqt5gui5` (exact list is UNVERIFIED: derive it from `apt-get install -f` / `dpkg -I` on the amd64 deb; do not install packages the base already has). Skip gosu, TigerVNC, noVNC, websockify, openbox (not needed for the gateway; VNC/noVNC are out of scope for this app).
 4. Download the .deb with `curl -fL` to `/tmp/deconz.deb`, verify `sha256sum -c` against a pinned hash per arch (`ARG DECONZ_SHA256_AMD64`, `ARG DECONZ_SHA256_ARM64`). Compute the hashes from the downloaded files during implementation and record them with a comment; mark as own pin.
 5. `apt-get install -y /tmp/deconz.deb` (lets apt resolve deps), then `rm -f /tmp/deconz.deb`, clean apt lists.
-6. `setcap 'cap_net_bind_service=+ep' /usr/bin/deCONZ` (the binary path is UNVERIFIED; find it with `dpkg -L deconz` in the build) so the unprivileged user can bind port 80 and 443.
+6. No `setcap`: `USER apps` must not bind ports below 1024, so the image defaults to 8080 (web) and 8443 (websocket) and the chart maps them. Find the binary path with `dpkg -L deconz` in the build (UNVERIFIED; `/usr/bin/deCONZ` is assumed).
 7. Copy license files to `/usr/share/licenses/deconz/` if the .deb ships them (UNVERIFIED). Otherwise state the source of the license in `docker-bake.hcl` and PR.
-8. `ENV DECONZ_APPDATA_DIR=/config DECONZ_WEB_PORT=80 DECONZ_WS_PORT=443 DECONZ_UPNP=0 HOME=/config` (the app data path moves from `/opt/deCONZ` to `/config`, see section 9). Do not set a default VNC password (no VNC in this app).
+8. `ENV DECONZ_APPDATA_DIR=/config DECONZ_WEB_PORT=8080 DECONZ_WS_PORT=8443 DECONZ_UPNP=0 HOME=/config` (the app data path moves from `/opt/deCONZ` to `/config`, see section 9). Do not set a default VNC password (no VNC in this app).
 9. Tail:
 
 ```dockerfile
 COPY --chmod=0755 . /
-EXPOSE 80 443
+EXPOSE 8080 8443
 VOLUME /config
 USER apps
 ```
 
-`USER apps` is the final directive. `setcap` must run as root before the switch.
+`USER apps` is the final directive; root-only steps (apt, dpkg) run before it.
 
 ## 5. docker-bake.hcl
 
@@ -77,18 +77,18 @@ Four standard targets (`docker-metadata-action`, `image`, `image-local`, `image-
 schema_version: 1
 upstream_env_url: "https://github.com/dresden-elektronik/deconz-rest-plugin"
 ports:
-  - port: 80
+  - port: 8080
     protocol: tcp
     required: true
-  - port: 443
+  - port: 8443
     protocol: tcp
     required: false
 env:
   - name: DECONZ_WEB_PORT
-    default: "80"
+    default: "8080"
     required: false
   - name: DECONZ_WS_PORT
-    default: "443"
+    default: "8443"
     required: false
   - name: DECONZ_UPNP
     default: "0"
@@ -99,7 +99,7 @@ volumes:
 dependencies: []
 ```
 
-Only list env vars that `start.sh` or the app actually reads. Upstream `DECONZ_VNC_*` and `DECONZ_NOVNC_PORT` are dropped with VNC. Port 80 and 443 are the upstream EXPOSE values; confirm the numeric defaults of `DECONZ_WEB_PORT` and `DECONZ_WS_PORT` from the upstream `root/` scripts before merging (UNVERIFIED). Dependencies: none.
+Only list env vars that `start.sh` or the app actually reads. Upstream `DECONZ_VNC_*` and `DECONZ_NOVNC_PORT` are dropped with VNC. Upstream defaults are 80 and 443; this image moves them to 8080 and 8443 because it runs rootless. Confirm the numeric defaults of `DECONZ_WEB_PORT` and `DECONZ_WS_PORT` from the upstream `root/` scripts before merging (UNVERIFIED). Dependencies: none.
 
 ## 7. start.sh
 
@@ -110,8 +110,8 @@ set -euo pipefail
 mkdir -p /config
 export DECONZ_APPDATA_DIR=/config
 
-web_port="${DECONZ_WEB_PORT:-80}"
-ws_port="${DECONZ_WS_PORT:-443}"
+web_port="${DECONZ_WEB_PORT:-8080}"
+ws_port="${DECONZ_WS_PORT:-8443}"
 upnp="${DECONZ_UPNP:-0}"
 
 exec /usr/bin/deCONZ --dbg-info=1 --http-listen=0.0.0.0:"${web_port}" --ws-port="${ws_port}" --upnp="${upnp}" \
@@ -127,17 +127,17 @@ The flags above are UNVERIFIED: check the real option names with `deCONZ --help`
 
 timeoutSeconds: 120
 tcp:
-- port: '80'
-- port: '443'
+- port: '8080'
+- port: '8443'
 http:
-- port: '80'
+- port: '8080'
   path: /
 filePaths:
 - /usr/bin/deCONZ
 - /usr/share/licenses/deconz/LICENSE
 ```
 
-Every port in `settings.yaml` has a probe (80 tcp and http, 443 tcp). The http probe path and the expected status are UNVERIFIED; confirm with the running container before fixing the probe. Tests run with no env vars, so the defaults above are what gets exercised. `filePaths` must list the real binary path (UNVERIFIED, see section 4 step 6). Do not weaken the 443 probe if the gateway binds it late; wait instead by raising `timeoutSeconds`.
+Every port in `settings.yaml` has a probe (8080 tcp and http, 8443 tcp). The http probe path and the expected status are UNVERIFIED; confirm with the running container before fixing the probe. Tests run with no env vars, so the defaults above are what gets exercised. `filePaths` must list the real binary path (UNVERIFIED, see section 4 step 6). Do not weaken the 8443 probe if the gateway binds it late; wait instead by raising `timeoutSeconds`.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -149,7 +149,7 @@ Every port in `settings.yaml` has a probe (80 tcp and http, 443 tcp). The http p
 | `deconz` user UID 1000 | Use the ContainerForge `apps` user. Upstream UID is not kept. |
 | Device access (USB ConBee/RaspBee, `/dev/ttyACM*`) | Not a container-image concern. The chart must pass the device and add the host device group as a supplementary group. Document in the PR; do not add `privileged`. |
 
-Security reconciliation with the draft: draft expects `readOnlyRootFilesystem: false`, `runAsUser 0`. The target is `USER apps`, read-only rootfs compatible, `NET_BIND_SERVICE` capability kept for ports 80/443 (set by `setcap`, not by running as root). Privileged stays off.
+Security reconciliation with the draft: draft expects `readOnlyRootFilesystem: false`, `runAsUser 0`. The target is `USER apps`, read-only rootfs compatible, no extra capability: the gateway listens on 8080/8443, not 80/443. Privileged stays off.
 
 ## 10. Risks, caveats and open questions
 
@@ -169,7 +169,7 @@ From `apps/deconz/`:
 1. `docker buildx bake --print` (must exit 0).
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`.
 3. `docker volume create deconz-probe-config`
-   `docker run --rm -d --name deconz-probe --read-only --tmpfs /tmp -p 8080:80 -v deconz-probe-config:/config ghcr.io/trueforge-org/deconz:2.33.2`
+   `docker run --rm -d --name deconz-probe --read-only --tmpfs /tmp -p 8080:8080 -v deconz-probe-config:/config ghcr.io/trueforge-org/deconz:2.33.2`
    `docker logs -f deconz-probe` until idle. Readiness signal: the web/HTTP listener line (UNVERIFIED exact text; take it from the first real run). Pass also needs: process still running, no fatal errors.
 4. `forgetool containers test --image <image>:2.33.2 --config ./container-test.yaml`. If forgetool is unavailable, check the ports and files by hand.
 5. Cleanup: `docker rm -f deconz-probe; docker volume rm deconz-probe-config`.

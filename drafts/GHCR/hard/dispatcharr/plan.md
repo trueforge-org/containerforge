@@ -41,7 +41,7 @@ Two options:
 1. **Preferred if the upstream base is reproducible:** rebuild the upstream `base` stage on the ContainerForge `ubuntu` base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`), then add the app layer. Requires reading the upstream base Dockerfile first (`UNVERIFIED: not in this repo or fetched`).
 2. **Fallback:** `python-node` as the final stage, and add nginx, redis-server, ffmpeg and supervisor via apt in the final stage, with a `start.sh` that starts them.
 
-Closest sibling: `apps/bazarr` (Python), `apps/changedetection` (python-node + supervisor-like start), `apps/nginx` (nginx). Decide after the upstream base is read.
+Closest sibling: `apps/bazarr` (Python), `apps/changedetection` (python-node; it has no supervisor, only a `start.sh`), `apps/nginx` (nginx). Decide after the upstream base is read.
 
 ## 4. Dockerfile
 
@@ -134,12 +134,10 @@ env:
 volumes:
   - path: /config
     required: true
-  - path: /data
-    required: false
 dependencies: []
 ```
 
-Only env vars the app really reads are listed. The defaults match the compose file. Other compose variables are optional and can be added once `entrypoint.sh` is read. `/data` is listed only if the upstream entrypoint writes there and `/config` cannot be mapped to it (see section 9).
+Only env vars the app really reads are listed. The defaults match the compose file. Other compose variables are optional and can be added once `entrypoint.sh` is read. `/data` is not listed: it is remapped into `/config` (section 9).
 
 ## 7. start.sh
 

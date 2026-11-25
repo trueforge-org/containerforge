@@ -47,9 +47,13 @@ Draft proposes ubuntu alone. Proposed base: `ghcr.io/trueforge-org/nginx:1.28.3@
 
 ```dockerfile
 USER apps
+COPY --chmod=0755 . /
+
 EXPOSE 8080
 VOLUME /config
 ```
+
+Declare `ARG VERSION` (same value as bake `VERSION`, `0.5.4`) and use it for the apt pin check.
 
 ## 5. docker-bake.hcl
 

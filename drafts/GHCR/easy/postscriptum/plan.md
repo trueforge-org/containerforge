@@ -52,7 +52,7 @@ No `defaults/` unless the server needs a seed config (decide after the first dow
 
 - Schema header and `schema_version: 1`, `upstream_env_url: "https://www.postscriptum.com/"`.
 - `ports`: `10027` udp (required: true, game), `10037` udp (required: true, query).
-- `env`: `GAME_ID` is fixed (746200), `GAME_PARAMS` default `Port=10027 QueryPort=10037 -log`, `STEAM_APP_IDS` default `746200`, `STEAM_APP_VALIDATE` default `false`, `TZ` default `Etc/UTC`. Only vars that start.sh reads.
+- `env`: `GAME_ID` is fixed (746200), `GAME_PARAMS` default `Port=10027 QueryPort=10037 -log`, `STEAM_APP_VALIDATE` default `false` (`STEAM_APP_IDS` is read only by the base `/start.sh`, which this plan's own `start.sh` replaces, so do not list it; the app id 746200 is hard-coded in `start.sh`), `TZ` default `Etc/UTC`. Only vars that start.sh reads.
 - `volumes`: `/config` (required: true).
 - `dependencies`: none.
 

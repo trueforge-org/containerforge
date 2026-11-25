@@ -49,12 +49,12 @@ No `defaults/`, `etc/`, `health/` or `root/`: no seeded config and no extra file
 6. `ENV` only if needed. Do not set `HOME` to a path that is not writable.
 7. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 9135`, `CMD ["/start.sh"]`.
 
-Version alignment: `ARG VERSION` must be `1.3.2` (tarball name uses no `v`) with the bake `VERSION` `v1.3.2` normalised to `1.3.2` in the URL. Use `${VERSION}` for the file name and `v${VERSION}` for the release path.
+Version alignment: bake `VERSION` and `ARG VERSION` are both `1.3.2` (no `v`). Use `${VERSION}` for the file name and `v${VERSION}` for the release path.
 
 ## 5. docker-bake.hcl
 
 - `variable "APP" { default = "rtorrent-exporter" }`
-- `variable "VERSION" { // renovate: datasource=github-releases depName=thde/rtorrent_exporter versioning=semver` followed by `default = "1.3.2"` (decide `v` vs no-`v` once and keep it consistent with the Dockerfile).
+- `variable "VERSION" { // renovate: datasource=github-releases depName=thde/rtorrent_exporter versioning=semver` followed by `default = "1.3.2"` (no `v`; the Dockerfile adds the `v` in the release path).
 - `variable "LICENSE" { default = "Apache-2.0" }`
 - `variable "SOURCE" { default = "https://github.com/thde/rtorrent_exporter" }`
 - Four standard targets and the default group as in `apps/adguardhome-sync/docker-bake.hcl`: `docker-metadata-action`, `image`, `image-local`, `image-all`, `group "default"`.
@@ -76,7 +76,7 @@ env:
     required: false
   - name: RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI
     default: ""
-    required: true
+    required: false
   - name: RTORRENT_EXPORTER_LOG_LEVEL
     default: "info"
     required: false
@@ -84,14 +84,14 @@ volumes: []
 dependencies: []
 ```
 
-- `RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI` is required with no safe default. Its empty-default case is covered in section 9.
+- `RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI` has no safe default, so it is `required: false` with an empty default: the image must start without env (container-test rule), so `start.sh` warns and continues (sections 7 and 8). `RTORRENT_EXPORTER_LOG_LEVEL` is not in the README env list above (only `--log.level` is); UNVERIFIED that the binary reads it, so drop it unless confirmed.
 - No `/config`: the exporter is stateless, so `volumes` stays empty. Do not invent a volume.
 - Do not list `TZ` or other vars the binary does not read.
 
 ## 7. start.sh
 
 - Shebang `#!/usr/bin/env bash`, no writes outside `/tmp`.
-- If `RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI` is empty, print one clear error line and `exit 1`, so the failure is visible in the logs rather than a crash loop.
+- If `RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI` is empty, print one clear warning line and continue (the test run has no env and must still start; scrapes fail until it is set). Do not `exit 1`.
 - `exec /app/rtorrent_exporter` (the binary reads its own env vars, so no flags are needed).
 - Keep the listen address at `:9135` (all interfaces), as the standard requires.
 
@@ -105,9 +105,7 @@ tcp:
 ```
 
 - One `tcp` probe for port 9135, matching `settings.yaml`.
-- The test runs with no env vars, so the scrape URI is missing in the test. Two options, choose one and state it in the PR:
-  1. Expect the start.sh error path to exit 1 and assert that (a real check of the guard), or
-  2. Set a dummy scrape URI in a test-only env if forgetool supports env in the test file (UNVERIFIED; check the schema).
+- The test runs with no env vars and cannot set any, so the scrape URI is empty and the exporter must still listen on 9135 for the `tcp` probe to pass (UNVERIFIED that it starts without a scrape URI; confirm in the run, and if it exits, give the binary a harmless default URI in `start.sh` rather than weakening the probe).
 - Do not drop the probe to make a missing-env run pass.
 
 ## 9. Rootless and read-only-rootfs adaptations
@@ -129,10 +127,10 @@ tcp:
 
 1. `cd apps/rtorrent-exporter && docker buildx bake --print`
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`
-3. `docker run --rm -d --name rtorrent-exporter-probe --read-only --tmpfs /tmp -v rtorrent-exporter-probe-config:/config -e RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI=http://127.0.0.1:8000/RPC2/ rtorrent-exporter:<version>`
+3. `docker run --rm -d --name rtorrent-exporter-probe --read-only --tmpfs /tmp -e RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI=http://127.0.0.1:8000/RPC2/ rtorrent-exporter:<version>`
 4. `docker logs -f rtorrent-exporter-probe` and look for a `listening on` line on :9135 and no fatal error.
 5. `forgetool containers test --image rtorrent-exporter:<version> --config ./apps/rtorrent-exporter/container-test.yaml`
-6. Cleanup: `docker rm -f rtorrent-exporter-probe; docker volume rm rtorrent-exporter-probe-config`
+6. Cleanup: `docker rm -f rtorrent-exporter-probe`
 
 Readiness signal to expect: a listen log on port 9135 (exact text to confirm from the first run; UNVERIFIED).
 

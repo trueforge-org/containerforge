@@ -216,8 +216,8 @@ From `apps/dashdot/`:
 
 1. `docker buildx bake --print`
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`
-3. `docker run --rm -d --name dashdot-probe --read-only --tmpfs /tmp -v dashdot-probe-config:/config dashdot:6.3.4`, then `docker logs -f dashdot-probe`. Expected readiness signal: the server's listening line on port 3001 (**UNVERIFIED** text; read it from the first run), process still running, no stack trace.
-4. Clean up: `docker rm -f dashdot-probe; docker volume rm dashdot-probe-config`.
+3. `docker run --rm -d --name dashdot-probe --read-only --tmpfs /tmp dashdot:6.3.4` (no `/config` volume: the app declares none), then `docker logs -f dashdot-probe`. Expected readiness signal: the server's listening line on port 3001 (**UNVERIFIED** text; read it from the first run), process still running, no stack trace.
+4. Clean up: `docker rm -f dashdot-probe`.
 5. `forgetool containers test --image dashdot:6.3.4 --config ./apps/dashdot/container-test.yaml`. If forgetool is unavailable, check the same assertions by hand.
 6. arm64 only if amd64 fails in an arm64-specific way.
 

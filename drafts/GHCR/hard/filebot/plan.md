@@ -126,7 +126,7 @@ exec ./filebot.sh -script fn:amc --output "$output" --action "$action" --conflic
   --log-file /config/logs/amc.log "$input"
 ```
 
-The AMC command-line options above are UNVERIFIED against the FileBot docs (https://www.filebot.net/getting-started/index.html and the AMC script reference). Confirm with `./filebot.sh -script fn:amc --help` in the build step, and do not ship the line until it is confirmed. The loop interval (`AMC_INTERVAL`) is only used if AMC is run in a loop; FileBot AMC has its own interval handling (UNVERIFIED). Idempotent: `mkdir -p` only, no seeding. No writes to `/app`. Ends with `exec` so signals reach FileBot.
+The AMC command-line options above are UNVERIFIED against the FileBot docs (https://www.filebot.net/getting-started/index.html and the AMC script reference). Confirm with `./filebot.sh -script fn:amc --help` in the build step, and do not ship the line until it is confirmed. As written the script runs AMC once and the container exits, so `AMC_INTERVAL` has no effect: either wrap the call in `while true; do ...; sleep "$interval"; done` (then the last foreground loop replaces `exec`) or use FileBot's own watch mode (UNVERIFIED). Decide before implementing. Idempotent: `mkdir -p` only, no seeding. No writes to `/app`. Ends with `exec` in the single-run form so signals reach FileBot.
 
 ## 8. container-test.yaml
 

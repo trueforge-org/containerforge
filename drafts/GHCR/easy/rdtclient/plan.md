@@ -40,7 +40,7 @@ No `defaults/` unless an aria2 config file is seeded (decide in step 7). No `roo
 
 ## 4. Dockerfile
 
-1. `ARG VERSION`, `ARG PACKAGE_VERSION`. Check `"${PACKAGE_VERSION%%-*}" = "${VERSION}"` as valkey does, so the pinned apt version matches the declared version.
+1. `ARG VERSION`, `ARG PACKAGE_VERSION`. Check `"${PACKAGE_VERSION%%+*}" = "${VERSION}"` (valkey uses `%%-*`, which would leave `1.37.0+debian` here and fail), so the pinned apt version matches the declared version.
 2. `USER root`. `apt-get update && apt-get install -y --no-install-recommends "aria2=${PACKAGE_VERSION}"`, then `apt-get purge -y --auto-remove`, then `rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*`.
 3. Make the config dir a `/config` path (not `/app`). Aria2 needs `/config` for session and config, `/downloads` for output.
 4. `COPY --chmod=0755 start.sh /start.sh`.

@@ -66,7 +66,7 @@ Environment: `ENV HOME=/config` is not needed (no caches); pip cache is off (`PI
 
 1. `set -euo pipefail`.
 2. `mkdir -p /config`. If `/config/pve.yml` is missing, copy `/defaults/pve.yml` (template with placeholder token, never overwrite an existing file).
-3. `exec /app/venv/bin/pve_exporter --config.file=/config/pve.yml --web.listen-address=[::]:9221` (form `--flag=value` for argparse). Optional: pass `"$@"` for extra flags, with `[::]` bind so the server listens on all interfaces.
+3. `exec /app/venv/bin/pve_exporter --config.file=/config/pve.yml "--web.listen-address=[::]:9221"` (quote the address so bash does not glob `[::]`) (form `--flag=value` for argparse). Optional: pass `"$@"` for extra flags, with `[::]` bind so the server listens on all interfaces.
 4. No writes to `/app`. No cache.
 
 Note: the template token is a placeholder, so the exporter starts but scrapes fail until the user edits `/config/pve.yml`. This is expected behavior, not a test failure.

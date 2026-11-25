@@ -40,9 +40,9 @@ Closest siblings: `apps/xvfb` (display), `apps/kasmvnc` (VNC/noVNC stack), `apps
 
 ## 4. Dockerfile
 
-1. Build stage: `FROM ubuntu:26.04 AS build`, `ARG VERSION`, `USER root`. Clone or download `https://github.com/spesmilo/electrum/archive/refs/tags/${VERSION}.tar.gz`, verify against the pinned tag commit (`460c117…`).
+1. Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`, `ARG VERSION`, `USER root`. Clone or download `https://github.com/spesmilo/electrum/archive/refs/tags/${VERSION}.tar.gz`, verify against the pinned tag commit (`460c117…`).
 2. Install runtime apt packages in the final stage: `python3-pyqt5 libsecp256k1-2 python3-cryptography python3-venv` with `--no-install-recommends`. Pin apt versions where needed (`UNVERIFIED`: exact versions on 26.04).
-3. Install electrum into a venv under `/app/venv` (read-only at runtime, python-runtime rule), or use the apt `python3-electrum` package if it exists (`UNVERIFIED`).
+3. Install electrum into a venv under `/app/venv` (created with `--system-site-packages` so the apt `python3-pyqt5` is visible; UNVERIFIED; read-only at runtime, python-runtime rule), or use the apt `python3-electrum` package if it exists (`UNVERIFIED`).
 4. VNC and window manager: reuse the `apps/xvfb` and `apps/kasmvnc` pattern, or install `novnc`, `websockify`, `x11vnc` (or `tigervnc-standalone-server`) and `fluxbox` via apt. Pin versions.
 5. License: `COPY --from=build /tmp/src/LICENCE /usr/share/licenses/electrum/LICENSE`.
 6. ENV: `HOME=/config`, `XDG_CACHE_HOME=/tmp/.cache`, `DATA_DIR=/config/electrum`, `DISPLAY=:99`, `CUSTOM_RES_W=1024`, `CUSTOM_RES_H=768`, `CUSTOM_DEPTH=16`, `NOVNC_PORT=6080`.

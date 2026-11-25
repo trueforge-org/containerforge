@@ -170,7 +170,7 @@ Startup behaviour to implement:
 - Apply `CHEVERETO_DB_PASS` and the other DB values on every start, so a changed password still works on existing data.
 - Set `upload_max_filesize`, `post_max_size`, `max_execution_time` and `memory_limit` from the env, as upstream's `php.ini` does, into a file under `/tmp`, not `/app`.
 - Do not write to `/app/chevereto` at runtime. Sessions go to `/tmp`.
-- Launch Apache in the foreground: `exec apache2 -D FOREGROUND -f /app/apache/apache2.conf` (or the packaged config path, confirmed at build). Use `exec` so signals reach Apache.
+- Launch Apache in the foreground: `exec apache2 -D FOREGROUND` with the packaged config (the config path is UNVERIFIED, and Apache on PHP 7.4 built from source is not yet designed). Use `exec` so signals reach Apache.
 - Bind `0.0.0.0:8080` (Listen directive from section 4).
 
 Empty `/config` start must work: the install wizard runs in the browser, so no database write happens at start (UNVERIFIED; confirm with the app source).

@@ -12,7 +12,7 @@
 | Download (linux) | amd64: `https://github.com/tphakala/birdnet-go/releases/download/20261031/birdnet-go-linux-amd64-20261031.tar.gz` (121973025 bytes). arm64: `https://github.com/tphakala/birdnet-go/releases/download/20261031/birdnet-go-linux-arm64-20261031.tar.gz` (118559861 bytes). |
 | Checksum source | `checksums.txt` release asset. Confirmed lines (read via `gh api`): `c69a805ea92b359a1565deb05fc6b4cf97f72af71d87eb359a786ae5cb444bda  birdnet-go-linux-amd64-20261031.tar.gz`, `8a325fc1133804583d9c0f235cfd3b3d055b8558440c69268afde8d8ab85b132  birdnet-go-linux-arm64-20261031.tar.gz`. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/tphakala/birdnet-go/bc1e0de67d9a2292b4742a79f868a7720f8e6a12/Dockerfile. Build stage `golang:1.27-trixie`; runtime `debian:trixie-slim` (glibc). Runtime apt: `adduser`, `ca-certificates`, `libasound2`, `ffmpeg`, `procps`, `iproute2`, `curl`, `wget`, `tzdata`, `jq`, `gosu`, `tini`, `libnss-mdns`. Upstream runtime also downloads ONNX Runtime 1.25.1 (no checksum), TFLite C 2.17.1 (no checksum), OpenVINO 2026.2 (SHA256 checked), and amd64-only Intel NEO packages (SHA256 checked). ENTRYPOINT `/usr/bin/tini -s -- /usr/bin/entrypoint.sh /usr/bin/startup-wrapper.sh`; CMD `birdnet-go realtime`. |
-| Ports (real) | Upstream EXPOSE `80 443 8080 8090`. The default web UI port is UNVERIFIED beyond `EXPOSE`; the draft's `8080` is inferred. Upstream `HEALTHCHECK` reads `BIRDNET_WEBSERVER_PORT` and `BIRDNET_SECURITY_TLSPORT`. |
+| Ports (real) | Upstream EXPOSE `80 443 8080 8090`. Upstream Dockerfile comments name 8080 as the standard HTTP web interface port and its `HEALTHCHECK` probes `/health` on 8080 (checked); the draft's `8080` is therefore supported. Upstream `HEALTHCHECK` reads `BIRDNET_WEBSERVER_PORT` and `BIRDNET_SECURITY_TLSPORT`. |
 | Runtime env vars (real) | From Dockerfile comments (not `ENV` lines): `BIRDNET_UID`, `BIRDNET_GID` (default `1000`), `BIRDNET_STARTUP_FAIL_DELAY` (default `10`), `TZ`, `BIRDNET_MODELPATH`, `BIRDNET_WEBSERVER_PORT`, `BIRDNET_SECURITY_TLSPORT`. Entrypoint scripts not fetched: UNVERIFIED behavior. |
 | Volumes (upstream) | `VOLUME /config`, `VOLUME /data`, `WORKDIR /data`, `/data/clips` and `/data/models` created with mode `777`, models in `/models` (tflite on amd64, onnx on arm64). |
 | Upstream user | No `USER` set; `BIRDNET_UID`/`BIRDNET_GID` used by upstream entrypoint to run as that user (UNVERIFIED how). |
@@ -55,10 +55,11 @@ COPY --chmod=0755 . /
 
 EXPOSE 8080
 VOLUME /config
+VOLUME /data
 WORKDIR /config
 ```
 
-EXPOSE port is `8080` only in this plan (see section 10 for `80`, `443`, `8090`).
+Create `/data` owned by `apps` earlier in the build (as root) so the volume is writable on a read-only rootfs. `/app/birdnet-go/birdnet-go` assumes the tarball layout (UNVERIFIED). EXPOSE port is `8080` only in this plan (see section 10 for `80`, `443`, `8090`).
 
 ## 5. docker-bake.hcl
 
@@ -123,7 +124,7 @@ mkdir -p /config /data/clips /data/models /tmp/birdnet-go
 
 export BIRDNET_WEBSERVER_PORT="${BIRDNET_WEBSERVER_PORT:-8080}"
 cd /config
-exec birdnet-go realtime
+exec /app/birdnet-go/birdnet-go realtime
 ```
 
 Key points:

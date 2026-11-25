@@ -50,7 +50,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 - Schema header, `schema_version: 1`, `upstream_env_url` = SOURCE.
 - `ports`: `27015` udp (required: true, game), `27015` tcp (required: false, RCON).
-- `env`: `STEAM_APP_IDS` default `17575`, `STEAM_APP_VALIDATE` default `false`, `GAME_PARAMS` default `-maxplayers 18 +map bt_island`, `TZ` default `Etc/UTC`. Only vars start.sh reads. `PASSWRD` is a server password: read it from env, not from a file.
+- `env`: `STEAM_APP_VALIDATE` default `false`, `GAME_PARAMS` default `-maxplayers 18 +map bt_island`, `GAME_PORT` default `27015`, `TZ` default `Etc/UTC`. Only vars this plan's `start.sh` reads (`STEAM_APP_IDS` belongs to the base `/start.sh`, which is replaced; the app id 17575 is hard-coded). The wrapper's `USERNAME`/`PASSWRD` are the Steam login (anonymous is enough for this app, UNVERIFIED), not a game password; do not add them unless a login is needed, and then read the password from env only.
 - `volumes`: `/config` (required: true).
 - `dependencies`: none.
 
@@ -66,7 +66,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 - Schema header from `apps/steamcmd/container-test.yaml`.
 - `filePaths`: `/start.sh`, `/usr/local/share/steamcmd/steamcmd.sh`.
-- Probes: `tcp` on `27015` (RCON/TCP). The test runs with no env vars and no game content: the server only listens after the SteamCMD download. Use a long `timeoutSeconds` (sibling family value), and add the start-up path to `filePaths`. The UDP game port has no tcp probe (open question as in postscriptum).
+- Probes: `tcp` on `27015` (RCON/TCP; UNVERIFIED that the server listens on TCP 27015 in the unprovisioned test run, since the game is downloaded at start; if it does not, state the reason in the test file rather than weakening it). The test runs with no env vars and no game content: the server only listens after the SteamCMD download. Use a long `timeoutSeconds` (sibling family value), and add the start-up path to `filePaths`. The UDP game port has no tcp probe (open question as in postscriptum).
 - No DB dependency, so the database-dependent narrowing does not apply.
 
 ## 9. Rootless and read-only-rootfs adaptations

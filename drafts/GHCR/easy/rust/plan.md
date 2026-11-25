@@ -63,13 +63,13 @@ Blocker: the Steam app id must be confirmed before a build. Do not start the bui
 
 - Schema header as for siblings.
 - `filePaths`: `/start.sh`, `/usr/local/bin/steamcmd`, `/usr/local/share/steamcmd/steamcmd.sh`.
-- `tcp` probe on the game port, with `timeoutSeconds` from a sibling.
+- `tcp` probes on 28016 and 28082 (the game port 28015 is UDP and forgetool `tcp` cannot probe it; state that reason in the file, UNVERIFIED whether the schema has a UDP probe). The server only listens after the SteamCMD download, so these probes may not pass in CI without game content (UNVERIFIED); do not weaken them, resolve in the run step. `timeoutSeconds` from a sibling.
 - A full first-start download cannot run in CI, so the test checks the file paths and the start-script path up to the download step. Narrowing is noted in the file.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
 - Chart runs as root (`runAsUser 0`) and `readOnlyRootFilesystem: false`. Not copied. Target: `apps` user, read-only rootfs.
-- Chart PVCs `/serverdata/serverfiles` and `/serverdata/steamcmd` map to `/config/serverfiles` and `/config/steamcmd`.
+- Chart PVCs `/serverdata/serverfiles` and `/serverdata/steamcmd` map to `/config/steamapps` (server files, `STEAM_INSTALL_DIR`) and `/config/steamcmd` (SteamCMD state, as in `apps/steamcmd`).
 
 ## 10. Risks, caveats and open questions
 
