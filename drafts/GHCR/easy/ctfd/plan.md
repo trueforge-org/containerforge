@@ -57,7 +57,7 @@ Steps:
 8. `mkdir -p /config` and set the ownership for `apps`.
 9. `COPY --chmod=0755 start.sh /start.sh`.
 10. `ENV` defaults only when needed by the image (no secrets): `CTFD_LOG_DIR`, etc. are not needed; the runtime paths come from start.sh.
-11. `EXPOSE 8000/tcp`.
+11. `EXPOSE 8000/tcp` and `VOLUME /config`.
 12. `USER apps`, `COPY --chmod=0755 . /`, `ENTRYPOINT ["/start.sh"]`.
 
 `/app/venv` is the read-only venv from the base. Installing into it at build time follows `python-runtime.instructions.md` (the rule is about runtime writes). If the base's `/app/venv` is not the one used by the runtime, use it through `PATH`. Confirm in the build.

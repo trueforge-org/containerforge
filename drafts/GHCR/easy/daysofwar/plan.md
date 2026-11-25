@@ -46,6 +46,8 @@ ENV HOME=/config \
     XDG_DATA_HOME=/config \
     STEAM_INSTALL_DIR=/config/serverfiles
 
+USER root
+RUN cp /start.sh /usr/local/bin/steamcmd-base.sh
 COPY --chmod=0755 start.sh /start.sh
 
 USER apps
@@ -122,8 +124,9 @@ Requirements (start-script rules): idempotent, `app_update` on each start, write
 Plan:
 
 1. Install or update with the base SteamCMD start script:
-   `STEAM_APP_IDS="${STEAM_APP_IDS}" STEAM_INSTALL_DIR=/config/serverfiles /start.sh +quit`
-   The base only runs `app_update` when `STEAM_APP_IDS` is set and `STEAMCMD_SKIP_APP_UPDATE` is not `true`. A first argument starting with `+` does not `exec`, so the call returns after the update.
+   `STEAM_APP_IDS="${STEAM_APP_IDS}" STEAM_INSTALL_DIR=/config/serverfiles /usr/local/bin/steamcmd-base.sh +quit`
+   The app's own `start.sh` replaces the base `/start.sh` (and the base `/usr/local/bin/steamcmd` wrapper execs `/start.sh`), so the Dockerfile first copies the base script to `/usr/local/bin/steamcmd-base.sh`. Calling `/start.sh` here would recurse.
+   The base only runs `app_update` when `STEAM_APP_IDS` is set and `STEAMCMD_SKIP_APP_UPDATE` is not `true`. The base ends with `exec steamcmd.sh "$@"`, so run it as a child process (not `exec`) to return after `+quit`.
 2. `mkdir -p /config/serverfiles` when missing. Seed nothing else.
 3. `cd /config/serverfiles`, then start the server with `GAME_PARAMS`, `GAME_PORT` and `QUERY_PORT`, and `exec` it.
 

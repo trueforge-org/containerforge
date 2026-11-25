@@ -26,7 +26,7 @@ Behavior from upstream README (https://github.com/tigerblue77/Dell_iDRAC_fan_con
 - `apps/dell-idrac-fan-controller/settings.yaml`
 - `apps/dell-idrac-fan-controller/container-test.yaml`
 - `apps/dell-idrac-fan-controller/start.sh` (replaces upstream `supervisor.sh` as the entry point, or calls it)
-- `apps/dell-idrac-fan-controller/app/` only if the scripts are copied into `/app`. Otherwise use `etc/` or keep scripts in the image root via `COPY --chmod=0755 . /`. Decision: put scripts in `app/` so the image layout matches the upstream `/app` paths and `WORKDIR /app`. Check the `include/.dockerignore` allow-list: `app/` is allowed.
+- No `app/` directory in the app folder: the upstream scripts are fetched from the tag tarball in the Dockerfile into `/app` (section 4, step 3), so they are not committed under `apps/`.
 
 No `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 
@@ -53,7 +53,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
    The sha256 is computed once from the tag and pinned in the Dockerfile. Mark it UNVERIFIED until computed.
 4. Keep the license files: copy `LICENSE`, `LICENSE-COMMERCIAL.md`, `NOTICE` to `/usr/share/licenses/dell-idrac-fan-controller/`.
 5. `chmod 0755` on the scripts; `chown -R apps:apps /app && chmod -R 755 /app`.
-6. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /app`, no `EXPOSE` (no ports), `VOLUME /config` only if `/config` is used (not needed by upstream; see section 9).
+6. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /app`, no `EXPOSE` (no ports), `VOLUME /config` is still declared per the repo rule, although nothing is persisted (settings.yaml `volumes` stays empty because the app keeps no state; UNVERIFIED which choice reviewers prefer).
 7. Upstream `HEALTHCHECK` is optional. Skip it unless the health script works unchanged (it reads `/app` only).
 
 ## 5. docker-bake.hcl

@@ -34,7 +34,7 @@ No `defaults/`, `etc/` or `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.m
 
 ## 4. Dockerfile
 
-1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`, `ENV HOME=/config`.
+1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`, `ENV HOME=/config DATADIR=/config CONFIG_FILEPATH=/config/config.json BACKUP_DIRECTORY=/config` (settings.yaml defaults alone do not set the runtime env, so the image must).
 2. Download the binary for the arch, verify it, and install it:
    ```dockerfile
    RUN curl -fsSL -o /app/ddns-updater \

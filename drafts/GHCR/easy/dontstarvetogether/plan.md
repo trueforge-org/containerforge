@@ -45,8 +45,8 @@ No `defaults/`, `etc/` or `health/`: nothing needs seeding beyond what start.sh 
 3. Do not install `lib32*` packages again: the base already provides the 32-bit stack (check the base before adding anything).
 4. `ENV HOME=/config XDG_DATA_HOME=/config`. Caches to `/tmp` (`TMPDIR=/tmp`).
 5. `COPY --chmod=0755 start.sh /start.sh` is covered by `COPY --chmod=0755 . /` (allow-list in include/.dockerignore includes start.sh).
-6. `VOLUME`/`EXPOSE`: none in the Dockerfile; ports and volume go in settings.yaml.
-7. Final: `USER apps`.
+6. `VOLUME /config` in the Dockerfile (required by the repo rules; settings.yaml lists it too). `EXPOSE` only for ports confirmed in section 1.
+7. Final: `USER apps`, then `COPY --chmod=0755 . /` (this app's `start.sh` replaces the base `/start.sh`; the base `/usr/local/bin/steamcmd` wrapper execs `/start.sh`, so it no longer works as the base intended. Section 7 calls `steamcmd.sh` directly, so this is acceptable).
 
 ## 5. docker-bake.hcl
 
