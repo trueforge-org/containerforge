@@ -52,7 +52,7 @@ Route decision (open, section 10): build from source in a build stage. Upstream 
    ```
 4. `corepack enable pnpm` with `COREPACK_HOME=/tmp`, `PNPM_HOME=/tmp/pnpm-store`. Build in the upstream order: `sdk`, `plugin-sdk`, `server` (`server/bin`), `web`, `cli`. `SHARP_FORCE_GLOBAL_LIBVIPS=true` on the server build.
 5. Copy restic: `restic` and `restic-proxy` are upstream binaries (`COPY --from=` of their images, versions above). Use `restic` only if the server needs it at runtime: UNVERIFIED; if used, verify the release checksum from the upstream restic release (not fetched).
-6. Final stage `FROM <ubuntu>`, `USER root`: `apt-get install` the Node runtime and `libvips42`. Copy `/tmp/server-pruned` to `/app/immich/server`, `web` build to `/app/immich/web`, `cli` to `/app/immich/cli`. Symlink `/data` to `/config/data` (see section 9).
+6. Final stage `FROM <ubuntu>`, `USER root`: `apt-get install` the Node runtime, `tini` (start.sh uses it) and `libvips42`. Copy `/tmp/server-pruned` to `/app/immich/server`, `web` build to `/app/immich/web`, `cli` to `/app/immich/cli`. Symlink `/data` to `/config/data` (see section 9).
 7. Licence: copy `LICENSE` to `/usr/share/licenses/immich/LICENSE`.
 8. `ENV NODE_ENV=production IMMICH_MEDIA_LOCATION=/data` (variable name UNVERIFIED; read it from the source before setting), `PATH=/app/immich/server/bin:$PATH`, `HOME=/config`.
 9. `chown -R apps:apps /app/immich && chmod -R 755 /app/immich`.
@@ -146,8 +146,8 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - postgresql
-  - valkey
+  - name: postgresql
+  - name: valkey
 ```
 
 Env defaults match the compose file. `DB_PASSWORD` has `required: true` with an empty default, so `start.sh` must refuse to start with a clear message when it is unset (protocol: test runs with no env vars, so the `DB_PASSWORD`-required path goes to `filePaths`, see section 8). `DB_HOSTNAME`, `DB_PORT`, Redis host variables: add only after they are read from the source (UNVERIFIED, section 1). Both dependencies exist in ContainerForge (`apps/postgresql`, `apps/valkey`).

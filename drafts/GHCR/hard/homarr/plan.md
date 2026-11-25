@@ -16,7 +16,7 @@
 | Release assets | `build-debian-amd64.tar.gz` (sha256:120280ecdbd8af3fbfdeac3626a8f91f3541a0d34ccdb30bd2988f2ecad5157b), `build-debian-arm64.tar.gz` (sha256:b8e73aa11bc87bf4819c376484bfe393da901cd22623dce244a63e7a75f7d4d5), `build-alpine-amd64.tar.gz` (sha256:62a3ec033311bd1f393630130e529112deea0c48ebab223bf0dff5fd4b27a79e), `build-alpine-arm64.tar.gz` (sha256:b30f4c49382eff89ae945a18b70079b98ce8317bc88eaff9c692659c5eeee29b). Download base: `https://github.com/homarr-labs/homarr/releases/download/v2.13.1/<name>`. |
 | Download choice | **Correction to the draft:** use the Debian (glibc) tarballs. The draft's "musl-only" caveat does not apply to them. Alpine tarballs are not needed. |
 | Checksums | sha256 digests above from the GitHub release API. Verify each download against them. |
-| License | UNVERIFIED: SPDX not fetched (repo API returned 403 in this run). Confirm before setting `LICENSE`. |
+| License | Apache-2.0 (GitHub API SPDX, homarr-labs/homarr). |
 | Renovate | Proposed `datasource=github-releases depName=homarr-labs/homarr versioning=semver` (tag `v2.13.1`). Not checked against a live config. |
 | Ports | `7575/tcp` web UI (EXPOSE). Bundled Redis `6379` is internal (draft; not in Dockerfile, not exposed). |
 | Data | `/appdata` (VOLUME, `DB_URL=/appdata/db/db.sqlite`). Encryption key location: draft says `/config`; UNVERIFIED. |
@@ -73,7 +73,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"   // confirm the license before merge
+  default = "Apache-2.0"
 }
 
 variable "SOURCE" {
@@ -148,7 +148,6 @@ Add `filePaths` for the app entry and `/usr/share/licenses/homarr/LICENSE`. Do n
 - The first-run admin account is created in the browser (draft caveat).
 - Debian tarballs are the chosen build. Confirm the Debian build runs on `trixie-slim` or ubuntu 26.04 (glibc, UNVERIFIED).
 - Redis version differs from the upstream `redis:8.8.0-trixie`; pick the version packaged in the base and verify compatibility.
-- License unverified.
 - arm64 runtime not verified.
 
 ## 11. Build and test steps

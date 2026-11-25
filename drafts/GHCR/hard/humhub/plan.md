@@ -134,11 +134,11 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - name: postgresql
+  - name: mariadb
     required: false
 ```
 
-The database dependency is shown as `postgresql` only as a placeholder because the Dockerfile does not fix the engine (UNVERIFIED). Replace it with the real engine before commit, or drop the entry. `NGINX_UPSTREAM` must match the PHP-FPM companion's service name (section 10). Do not list `PHP_*` vars here: they belong to the PHP-FPM container.
+The database dependency is shown as `mariadb` (`apps/mariadb` exists; `apps/postgresql` also exists) only as a placeholder because the Dockerfile does not fix the engine: UNVERIFIED which engine HumHub supports. Replace it with the real engine before commit, or drop the entry. `NGINX_UPSTREAM` must match the PHP-FPM companion's service name (section 10). Do not list `PHP_*` vars here: they belong to the PHP-FPM container.
 
 ## 7. start.sh
 

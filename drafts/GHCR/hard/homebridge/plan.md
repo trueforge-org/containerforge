@@ -133,7 +133,7 @@ Port 8581 is the only confirmed port. 51826 (HAP) and 5353 (mDNS) are not listed
 ```bash
 #!/usr/bin/env bash
 
-mkdir -p /config/plugins /config/node_modules
+mkdir -p /config/node_modules /config/npm
 
 cd /config
 echo "Starting Homebridge on port 8581"

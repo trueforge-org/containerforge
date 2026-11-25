@@ -138,9 +138,9 @@ Rules applied: idempotent; writes only to `/config` and `/tmp`; no writes to `/a
 timeoutSeconds: 120
 filePaths:
 - /app/jdownloader/JDownloader.jar
-- /usr/bin/java
+- /opt/java/openjdk/bin/java
 runners:
-- entrypoint: /usr/bin/java -version
+- entrypoint: java -version
 ```
 
 The test runs with no env vars. Add a `tcp` probe for every port in `settings.yaml` (3129) only once the app is confirmed to listen on it without MyJDownloader configured (UNVERIFIED). Do not add GUI probes until the GUI stack is decided.

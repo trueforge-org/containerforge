@@ -33,9 +33,9 @@ No `defaults/`, `etc/` or `health/` unless the server needs a default `Config` f
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The draft's "no .NET base" note matches: no ContainerForge java or python base provides .NET, so the .NET runtime is installed with apt on ubuntu. The Fenrus plan confirms `aspnetcore-runtime-10.0` and `dotnet-sdk-10.0` exist in the Ubuntu 26.04 archive (amd64 and arm64, packages.ubuntu.com, 2026-11-23). Those package versions are for .NET 10, and the LMP 0.29.2 target version is UNVERIFIED (section 10).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The draft's "no .NET base" note matches: no ContainerForge java or python base provides .NET, so the .NET runtime is installed with apt on ubuntu. The Fenrus plan (a draft plan, not an existing app) states `aspnetcore-runtime-10.0` and `dotnet-sdk-10.0` exist in the Ubuntu 26.04 archive (amd64 and arm64, packages.ubuntu.com, 2026-11-23). Those package versions are for .NET 10, and the LMP 0.29.2 target version is UNVERIFIED (section 10).
 
-Closest sibling: `apps/webgrabplus` (dotnet runtime on ubuntu, `ENV HOME=/config`, `WORKDIR /config`).
+Closest sibling: `apps/webgrabplus` (dotnet runtime on ubuntu, `ENV HOME=/config`, `WORKDIR /config`; it installs .NET with `dotnet-install.sh` into `/app/dotnet`, not apt, so the apt route here is a deviation).
 
 ## 4. Dockerfile
 
@@ -60,7 +60,7 @@ Closest sibling: `apps/webgrabplus` (dotnet runtime on ubuntu, `ENV HOME=/config
      rm -f /tmp/lmp.zip && \
      chown -R root:root /app && chmod -R 755 /app
    ```
-5. Make the server's writable folders point at `/config`. Which folders the server writes to is UNVERIFIED; the symlink targets follow the same pattern as `apps/fenrus` (a build-time symlink to `/config/<dir>`, created dangling and filled by `start.sh`).
+5. Make the server's writable folders point at `/config`. Which folders the server writes to is UNVERIFIED; the symlink targets follow the same pattern as the planned fenrus app (`drafts/Docker Hub/medium/fenrus/plan.md`; `apps/fenrus` does not exist yet) (a build-time symlink to `/config/<dir>`, created dangling and filled by `start.sh`).
 6. `ENV HOME=/config DOTNET_CLI_HOME=/tmp DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1 DOTNET_BUNDLE_EXTRACT_BASE_DIR=/tmp`.
 7. License: `COPY` the LICENSE from the zip if present (UNVERIFIED that the zip has one), else from the upstream repo to `/usr/share/licenses/kerbalspaceprogram-lmp/LICENSE`.
 8. Tail:
