@@ -85,12 +85,12 @@ mkdir -p "$(dirname "${TRAGGO_DATABASE_CONNECTION}")"
 cd /config
 exec /app/traggo
 ```
-Idempotent, nothing written to `/app`, the DB is created by the app when missing, and the Go HTTP server listens on all interfaces (UNVERIFIED: confirm with a connection from the host during the run test, as the start-script rules require).
+Idempotent, nothing written to `/app`, the DB is created by the app when missing, and the Go HTTP server listens on all interfaces (`Addr: ":<port>"` in `server/server.go` at v0.8.3; still connect from outside the container during the run test).
 
 ## 8. container-test.yaml
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
-timeoutSeconds: 120
+timeoutSeconds: 180
 http:
 - port: '3030'
   path: /
@@ -102,7 +102,7 @@ The HTTP probe covers the only port in `settings.yaml`. The test runs with no en
 
 ## 9. Rootless and read-only-rootfs adaptations
 - Upstream writes `data/traggo.db` relative to the working directory: remapped to `/config/traggo.db` through env and `WORKDIR /config`.
-- No other write path is known (UNVERIFIED: check for SQLite `-wal`/`-journal` files, which sit next to the DB in `/config`, and for temp files in `/tmp`).
+- No other write path is known (UNVERIFIED: check for SQLite `-wal`/`-journal` files, which sit next to the DB in `/config`, and for temp files in `/tmp`). The app also reads optional config files: `.env*` next to the binary, `$HOME/.config/traggo/server.ini` and `/etc/traggo/server.ini`.
 - Draft expects non-root (568) and readOnlyRootFilesystem true: both hold with `USER apps` and `/config` + `/tmp` as the only writable paths. No extra `/data` persistence, the draft's "not under /config by default" caveat is solved by the env override.
 
 ## 10. Risks, caveats and open questions
@@ -117,12 +117,12 @@ cd apps/traggo
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name traggo-probe --read-only --tmpfs /tmp -v traggo-probe-config:/config traggo:0.8.3
-docker logs -f traggo-probe   # expect the server start / "Listening on" style line, no panic
+docker logs -f traggo-probe   # expect "Creating default user." and "Start listening", no panic
 curl -fsS http://<container-ip>:3030/ >/dev/null
 docker rm -f traggo-probe; docker volume rm traggo-probe-config
 forgetool containers test --image traggo:0.8.3 --config ./apps/traggo/container-test.yaml
 ```
-Readiness signal: the process stays up and port 3030 answers (the exact log line is UNVERIFIED, read it from the first run).
+Readiness signal: the log line `Start listening` (from `main.go`), the process stays up and port 3030 answers.
 
 ## 12. PR checklist
 - Branch `feat/add-traggo`, commit `feat(traggo): add new container`, target `main`.

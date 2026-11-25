@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Version | **2.3.0** (tag `v2.3.0`, marked Latest, commit `26e7995`, released 06 May; UNVERIFIED: the year was not shown, but `go.mod` dates from 2024). The draft's `latest` image tag is not pinned. |
+| Version | **2.3.0** (tag `v2.3.0`, marked Latest, commit `26e7995`, released 2024-05-06). The draft's `latest` image tag is not pinned. |
 | Renovate | `datasource=github-releases depName=thomseddon/traefik-forward-auth versioning=semver` |
 | License | MIT (`LICENSE.md`, copyright 2018 Thom Seddon). SPDX `MIT`. |
 | Source URL | https://github.com/thomseddon/traefik-forward-auth |
@@ -109,6 +109,36 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
+  - name: LOG_FORMAT
+    default: "text"
+    required: false
+  - name: CONFIG
+    default: ""
+    required: false
+  - name: COOKIE_NAME
+    default: "_forward_auth"
+    required: false
+  - name: CSRF_COOKIE_NAME
+    default: "_forward_auth_csrf"
+    required: false
+  - name: DEFAULT_ACTION
+    default: "auth"
+    required: false
+  - name: DOMAIN
+    default: ""
+    required: false
+  - name: LOGOUT_REDIRECT
+    default: ""
+    required: false
+  - name: MATCH_WHITELIST_OR_DOMAIN
+    default: "false"
+    required: false
+  - name: URL_PATH
+    default: "/_oauth"
+    required: false
+  - name: WHITELIST
+    default: ""
+    required: false
 volumes:
   - path: /config
     required: true
@@ -121,9 +151,9 @@ Add the provider variables (`PROVIDERS_GOOGLE_CLIENT_ID` and `_CLIENT_SECRET`, `
 `#!/usr/bin/env bash`:
 
 1. If `SECRET` is unset or empty, read `/config/secret`. If that file does not exist, create it with `umask 077` from `head -c 32 /dev/urandom | base64 | tr -d '\n'` (idempotent: never overwritten), log "generated a cookie secret in /config/secret", then `export SECRET=$(cat /config/secret)`. Without a stable secret every restart would sign out all users. Multiple replicas must be given the same `SECRET` explicitly.
-2. Unset any of the optional variables that are set to the empty string, because empty provider settings could be read as configured values (UNVERIFIED how the flag parser treats empty env values). In a loop: `for v in AUTH_HOST COOKIE_DOMAIN LOGOUT_REDIRECT ...; do [ -z "${!v-x}" ] && unset "$v"; done`.
+2. Unset any of the optional variables that are set to the empty string, because empty provider settings could be read as configured values (UNVERIFIED how the flag parser treats empty env values). In a loop over every optional name in section 6: `for v in AUTH_HOST COOKIE_DOMAIN LOGOUT_REDIRECT DOMAIN WHITELIST CONFIG "${!PROVIDERS_@}"; do [ -z "${!v-x}" ] && unset "$v"; done`.
 3. Do not put secrets on the command line (visible in the process list): all of them stay in env vars.
-4. `exec /app/traefik-forward-auth`. The upstream flags and env names are used as is, and the default port 4181 listens on all interfaces (UNVERIFIED: confirm from a second container).
+4. `exec /app/traefik-forward-auth`. The upstream flags and env names are used as is, and the default port 4181 listens on all interfaces (`ListenAndServe(":<port>")` in `cmd/main.go`; still confirm from a second container).
 
 ## 8. container-test.yaml
 
@@ -145,7 +175,7 @@ filePaths:
 - /usr/share/licenses/traefik-forward-auth/LICENSE.md
 ```
 
-The TCP probe covers 4181. UNVERIFIED: that the Google provider needs no network access at startup (the OIDC provider contacts the issuer at start, but Google does not). If the process still exits, narrow to the `filePaths` check and write the reason in a comment. The `SECRET` comes from `start.sh`, so the test needs none. Use the default timeout.
+The TCP probe covers 4181. The Google provider's `Setup()` only checks that the client ID and secret are set and builds static URLs, so it needs no network at startup (checked in the v2.3.0 source). `mainRunner.env` is in the forgetool schema and `apps/drydock` uses it, but see the maintainer decision in section 10. The `SECRET` comes from `start.sh`, so the test needs none. Use the default timeout.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -159,7 +189,8 @@ TrueCharts expectations reconciled: UID 568 and `readOnlyRootFilesystem true` ma
 
 ## 10. Risks, caveats and open questions
 
-- Cannot run alone: it needs an OAuth/OIDC provider, client ID and secret, and a cookie secret (draft caveat). With no provider config it may refuse to start (UNVERIFIED, see the test comment in section 8).
+- Cannot run alone: it needs an OAuth/OIDC provider, client ID and secret, and a cookie secret (draft caveat). With no provider config it exits at startup (`Validate()` ends in `log.Fatal`).
+- **Maintainer decision**: `container-test.instructions.md` says the test cannot set env vars and that an image MUST still start without them. This plan's image does not, and the test relies on `mainRunner.env`. Either accept that exception, or have `start.sh` idle with a clear message when no provider is configured and narrow the test to `filePaths` (no TCP probe).
 - arm64 is a source build. The release asset is 32-bit `arm`, so there is no release-binary route. Build time is longer than a download.
 - The project is lightly maintained (v2.3.0 is the latest tag). The upstream Dockerfile hard-codes `GOARCH=amd64`, which is why the `GOARCH=${TARGETARCH}` change is needed.
 - The Docker Hub `latest` tag used by TrueCharts is unpinned, so the target moves to the tagged `2.3.0`. Behaviour differences between `latest` and 2.3.0 are UNVERIFIED.

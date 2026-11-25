@@ -8,7 +8,7 @@
 | Version | `8.0.5`: the version of Ubuntu 26.04's apt packages. Latest upstream release is `8.12.0` (GitHub API), so the image will **lag upstream**. Bitnami's build in the draft is `8.10`. |
 | apt packages | `redis-server` and `redis-tools`, both `5:8.0.5-1ubuntu0.1` in `resolute-updates`/`-security` (also `5:8.0.5-1` in release), component `universe` (Launchpad API, amd64 and arm64). |
 | Renovate | Not usable for the Ubuntu package in this repo today. Copy the comment style of `apps/valkey/docker-bake.hcl` (a NOTE that the version is tied to the base image, and the disabled `repologydepName=ubuntu_26_04/redis` line). UNVERIFIED that the repology project name for Ubuntu 26.04 is `ubuntu_26_04/redis`. |
-| License | Redis 8 is tri-licensed: RSALv2, SSPLv1 or AGPLv3 at the user's choice (upstream `LICENSE.txt`; Debian's `copyright` for the 8.0.2 package says the same). SPDX expression for bake: `RSAL-2.0 OR SSPL-1.0 OR AGPL-3.0-only`. Be aware that this is not an OSI-only license; the maintainers may prefer `valkey` (BSD-3-Clause, already in `apps/valkey`). |
+| License | Redis 8 is tri-licensed: RSALv2, SSPLv1 or AGPLv3 at the user's choice (upstream `LICENSE.txt`; Debian's `copyright` for the 8.0.2 package says the same). SPDX expression for bake: `LicenseRef-RSALv2 OR SSPL-1.0 OR AGPL-3.0-only` (the SPDX license list has no RSAL identifier, so a `LicenseRef-` is used). Be aware that this is not an OSI-only license; the maintainers may prefer `valkey` (BSD-3-Clause, already in `apps/valkey`). |
 | Source | https://github.com/redis/redis |
 | Download | apt only (`apt:redis-server`), so no per-arch URL and no checksum step; apt verifies signatures. |
 | Upstream Dockerfile reviewed | The draft points to the Bitnami Dockerfile (`bitnami/redis/8.10/debian-12`), which is closed/unfetched here (UNVERIFIED), so it was not copied. The real model is `apps/valkey` in this repo. |
@@ -65,7 +65,7 @@ variable "VERSION" {
   default = "8.0.5"
 }
 variable "PACKAGE_VERSION" { default = "5:8.0.5-1ubuntu0.1" }
-variable "LICENSE" { default = "RSAL-2.0 OR SSPL-1.0 OR AGPL-3.0-only" }
+variable "LICENSE" { default = "LicenseRef-RSALv2 OR SSPL-1.0 OR AGPL-3.0-only" }
 variable "SOURCE"  { default = "https://github.com/redis/redis" }
 ```
 `target "image"` passes `VERSION` and `PACKAGE_VERSION` in `args`; standard `docker-metadata-action`, `image-local` (`${APP}:${VERSION}`), `image-all` (amd64 + arm64), `group "default"`. Validate with `docker buildx bake --print`.
@@ -105,7 +105,7 @@ Defaults equal the ones in `start.sh`. Unlike valkey, the password default is em
 Modelled on `apps/valkey/start.sh`, with these differences:
 - Variables `REDIS_PASSWORD`, `REDIS_PORT` (default 6379), `REDIS_DATA_DIR` (default `/config`), `REDIS_APPENDONLY` (default `yes`); `mkdir -p "$REDIS_DATA_DIR"`.
 - Build `args=(--port "$REDIS_PORT" --dir "$REDIS_DATA_DIR" --daemonize no --supervised no --logfile "" --protected-mode yes)`.
-- **No password:** bind `127.0.0.1 -::1` only and print `redis: no REDIS_PASSWORD set, listening on localhost only` (start-script rule for databases without a password).
+- **No password:** bind `127.0.0.1 -::1` only (as two arguments: `--bind 127.0.0.1 -::1`) and print `redis: no REDIS_PASSWORD set, listening on localhost only` (start-script rule for databases without a password).
 - **Password set:** `--bind 0.0.0.0`. The password is **not** put on the command line (valkey does, which is visible in the process list). Write `/tmp/redis-auth.conf` with `umask 077`, containing `requirepass "<escaped>"` where `\` and `"` are escaped (`${v//\\/\\\\}`, `${v//\"/\\\"}`), and pass it as the first positional argument: `exec redis-server /tmp/redis-auth.conf "${args[@]}" "$@"`. The password is applied on every start, so changing it works on existing data.
 - Keep valkey's AOF handling: if `REDIS_APPENDONLY=yes`, `$DATA/dump.rdb` exists and `$DATA/appendonlydir` does not, start with `--appendonly no` and enable AOF once the server answers `PONG` (`REDISCLI_AUTH` from env), so an existing RDB is not ignored. UNVERIFIED that Redis 8 has the same "ignores RDB when AOF is on and empty" behaviour as Valkey; keep the logic only after testing it, otherwise use `--appendonly "$REDIS_APPENDONLY"` directly.
 - Accept `$1 == /start.sh` and shift, as valkey does. Final line: `exec redis-server ...`.
@@ -151,10 +151,12 @@ docker run --rm -d --name redis-probe --read-only --tmpfs /tmp \
 docker logs -f redis-probe        # expect "Ready to accept connections" and the localhost-only notice
 docker exec redis-probe redis-cli ping    # PONG
 docker rm -f redis-probe
-docker run --rm -d --name redis-probe --read-only --tmpfs /tmp -v redis-probe-config:/config \
+docker network create redis-probe-net
+docker run --rm -d --name redis-probe --network redis-probe-net --read-only --tmpfs /tmp -v redis-probe-config:/config \
   -e REDIS_PASSWORD='p"a\ss word' redis:8.0.5
-docker run --rm --network container:redis-probe redis:8.0.5 redis-cli -a 'p"a\ss word' --no-auth-warning ping   # connect from outside the server process
-docker rm -f redis-probe; docker volume rm redis-probe-config
+# connect from another container; --entrypoint is needed, else the base entrypoint runs /start.sh
+docker run --rm --network redis-probe-net --entrypoint redis-cli redis:8.0.5 -h redis-probe -a 'p"a\ss word' --no-auth-warning ping
+docker rm -f redis-probe; docker volume rm redis-probe-config; docker network rm redis-probe-net
 forgetool containers test --image redis:8.0.5 --config ./apps/redis/container-test.yaml
 ```
 Then test restart with an existing `dump.rdb` and `REDIS_APPENDONLY=yes` (data must survive), and confirm `ps` shows no password on the command line.

@@ -7,7 +7,7 @@
 |---|---|
 | Latest stable | `v0.15.0` (GitHub release, published 2026-11-23, the day of verification). The draft says `0.14.0`; use 0.15.0 unless a maintainer prefers a soak period. Recheck the release notes before building. |
 | Renovate | `datasource=github-releases depName=restic/rest-server versioning=semver` |
-| License | BSD-2-Clause (README badge) |
+| License | BSD-2-Clause (GitHub API `license.spdx_id`) |
 | Source URL | https://github.com/restic/rest-server |
 | amd64 | https://github.com/restic/rest-server/releases/download/v0.15.0/rest-server_0.15.0_linux_amd64.tar.gz (sha256 `822e3d7211077305ec358a8c6548ef46307ae53f71bc6a4a6da72ac53e35e007`) |
 | arm64 | https://github.com/restic/rest-server/releases/download/v0.15.0/rest-server_0.15.0_linux_arm64.tar.gz (sha256 `1ed250ee1cc6229ca0d22085616292233d9714d4820bf5e4c37e1b29fc4de8ea`) |
@@ -18,7 +18,7 @@
 | Docker env (upstream image) | `DATA_DIRECTORY` (default `/data`), `PASSWORD_FILE` (default `/data/.htpasswd`), `OPTIONS` (extra flags), `DISABLE_AUTHENTICATION` (any value turns on `--no-auth`) |
 | Upstream entrypoint | `docker/entrypoint.sh`: adds `--no-auth` when `DISABLE_AUTHENTICATION` is set; otherwise creates `$PASSWORD_FILE` with `umask 027` if missing and warns when it is empty; then `exec rest-server --path "$DATA_DIRECTORY" --htpasswd-file "$PASSWORD_FILE" $OPTIONS`. |
 | Upstream Dockerfile reviewed | https://github.com/restic/rest-server/blob/master/Dockerfile (alpine, `apache2-utils`, `tzdata`, helpers `create_user`/`delete_user`, VOLUME `/data`, EXPOSE 8000). The upstream README states it runs as arbitrary user with `--read-only` when only `/data` is writable. |
-| Tarball contents | UNVERIFIED: expected `rest-server` binary plus `LICENSE`/`README`; list with `tar tzf` at build time and adjust the install lines. |
+| Tarball contents | Directory `rest-server_0.15.0_linux_<arch>/` with `rest-server`, `LICENSE`, `README.md`, `CHANGELOG.md` (listed for amd64; UNVERIFIED for arm64, same shape expected). |
 
 ## 2. Target layout
 
@@ -56,13 +56,12 @@ curl -fsSL -o "/tmp/${f}" "${base}/${f}"
 curl -fsSL -o /tmp/SHA256SUMS "${base}/SHA256SUMS"
 (cd /tmp && grep " ${f}\$" SHA256SUMS | sha256sum -c -)
 mkdir -p /tmp/rs /usr/share/licenses/restic-rest-server
-tar xzf "/tmp/${f}" -C /tmp/rs
-install -m 0755 "$(find /tmp/rs -name rest-server -type f | head -1)" /app/rest-server
-# copy LICENSE if present in the archive; otherwise fetch it from the tagged source
+tar xzf "/tmp/${f}" -C /tmp/rs --strip-components=1
+install -m 0755 /tmp/rs/rest-server /app/rest-server
+install -m 0644 /tmp/rs/LICENSE /usr/share/licenses/restic-rest-server/LICENSE
 chown -R apps:apps /app && chmod -R 755 /app
 rm -rf /tmp/rs /tmp/SHA256SUMS "/tmp/${f}"
 ```
-   If the archive has no LICENSE, fetch `https://raw.githubusercontent.com/restic/rest-server/v${VERSION}/LICENSE` into `/usr/share/licenses/restic-rest-server/`.
 6. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8000`, `VOLUME /config`.
 
 ## 5. docker-bake.hcl
@@ -132,7 +131,7 @@ exec /app/rest-server "${args[@]}" "${extra[@]}"
 ```
 - Binds all interfaces (`:8000`).
 - With an empty `.htpasswd` the server starts but rejects all logins (upstream behavior), so the no-env test still passes.
-- `create_user <name> [password]` runs `htpasswd -B` on `$PASSWORD_FILE` (prefer reading the password from stdin with `htpasswd -B -i` so it stays out of the process list); `delete_user <name>` runs `htpasswd -D`. Write these two scripts from scratch; upstream's `docker/create_user` was not fetched. The `${extra[@]}` expansion with an empty array needs `set +u` handling or `${extra[@]+"${extra[@]}"}` in bash.
+- `create_user <name> [password]` runs `htpasswd -B` on `$PASSWORD_FILE` (prefer reading the password from stdin with `htpasswd -B -i` so it stays out of the process list); `delete_user <name>` runs `htpasswd -D`. Model them on upstream `docker/create_user` and `docker/delete_user` at `v0.15.0`, which use `htpasswd -B` (interactive prompt), `htpasswd -B -b` (password argument, visible in the process list; replace with `-i`) and `htpasswd -D` on `$PASSWORD_FILE`. In the snippet use `"${extra[@]+"${extra[@]}"}"`-style guarding (`${extra[@]+"${extra[@]}"}`) for the empty array; bash 5 also accepts the plain form under `set -u`.
 
 ## 8. container-test.yaml
 
@@ -144,6 +143,7 @@ tcp:
 - port: '8000'
 filePaths:
 - /app/rest-server
+- /usr/share/licenses/restic-rest-server/LICENSE
 - /usr/local/bin/create_user
 - /usr/local/bin/delete_user
 ```
@@ -162,7 +162,7 @@ Port 8000 is the only port. No HTTP probe: with auth enabled `GET /` returns 401
 - Version drift: v0.15.0 was published the same day as this plan; confirm it is not yanked. The draft's 0.14.0 is the fallback (asset names have the same shape).
 - Only TLS-less HTTP is served by default; use `OPTIONS="--tls --tls-cert ... --tls-key ..."` with files in `/config`, or terminate TLS at an ingress.
 - `--private-repos` and `--append-only` are passed via `OPTIONS`; nothing is enabled by default.
-- UNVERIFIED: tarball file list; exact upstream `create_user` behavior.
+- UNVERIFIED: arm64 tarball file list.
 - No blockers: static binary, amd64 and arm64.
 
 ## 11. Build and test steps
@@ -173,8 +173,8 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name restic-rest-server-probe --read-only --tmpfs /tmp \
   -v restic-rest-server-probe-config:/config restic-rest-server:0.15.0
-docker logs -f restic-rest-server-probe   # expect the "no users" warning, then rest-server listening on :8000
-docker exec restic-rest-server-probe create_user testuser    # then back up with restic from a second container
+docker logs -f restic-rest-server-probe   # expect the "no users" warning, then "start server on [::]:8000"
+docker exec -it restic-rest-server-probe create_user testuser    # password prompt; then back up with restic from a second container
 docker rm -f restic-rest-server-probe; docker volume rm restic-rest-server-probe-config
 forgetool containers test --image restic-rest-server:0.15.0 --config ./apps/restic-rest-server/container-test.yaml
 ```
@@ -185,4 +185,4 @@ Also run once with `-e DISABLE_AUTHENTICATION=1` and `restic -r rest:http://host
 - Branch `feat/add-restic-rest-server`, commit and PR title `feat(restic-rest-server): add new container`, target `main`.
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; Notes contain `🤖 This PR is AI generated.`
 - CLA notice for the user: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- Untested until run: arm64, restic client round-trip, htpasswd helper scripts, `/data` migration path, and whether the tarball layout matches the install lines.
+- Untested until run: arm64, restic client round-trip, htpasswd helper scripts and the `/data` migration path.

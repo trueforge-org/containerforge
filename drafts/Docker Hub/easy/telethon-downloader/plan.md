@@ -10,7 +10,7 @@
 | License | GPL-3.0 (GitHub shows GPL-3.0 with `License.md`). UNVERIFIED: `-only` or `-or-later`. Use `GPL-3.0-only` unless `License.md` or the source headers say "or later". |
 | Source URL | https://github.com/jsavargas/telethon_downloader (default branch `main`) |
 | Source and arches | Pure Python source in `src/` (`app.py` is the entry point), so arch-independent: amd64 and arm64 both work. Extract it from the upstream image: `COPY --from=docker.io/jsavargas/telethon_downloader:${VERSION} /app/ ...`. The upstream Dockerfile (`FROM python`, `WORKDIR /app`, `COPY requirements.txt`, `COPY src .`) leaves `app.py`, the other modules and `requirements.txt` in `/app` (UNVERIFIED for 4.0.15: inspect with `docker run --rm --entrypoint ls ... /app`). |
-| Python deps | `requirements.txt`: `tgcrypto`, `telethon`, `requests`, `yt_dlp`, `youtube_dl`, all unpinned. `tgcrypto` is a C extension and may need a compiler if no wheel exists for the Python version. |
+| Python deps | `requirements.txt` on `main` (commit `ed9710a`, whose `app.py` says `VERSION = "4.0.15"`): `telethon`, `yt-dlp`, `qbittorrent-api`, `aiohttp`, all unpinned. The older `tgcrypto`, `requests` and `youtube_dl` entries are not in it. |
 | Checksum source | None (a pip install plus a container copy). Integrity comes from pinning the upstream image tag, and ideally its digest. |
 | Upstream Dockerfile reviewed | Commit `ed9710a`: `FROM python`, apt `ffmpeg unzip`, pip install, `VOLUME /download /watch /config`, `ENTRYPOINT ["python","app.py"]`. |
 | Ports | **None.** The bot is controlled through Telegram. The app opens no listening socket (`app.py` creates no server). The draft's `5000/http (inferred)` is wrong. |
@@ -35,22 +35,22 @@ apps/telethon-downloader/
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-It provides a read-only `/app/venv` (see `python-runtime.instructions.md`). Closest sibling: `apps/bazarr` (python base, apt `ffmpeg`, `/app`). Fallback: if `tgcrypto` or another dependency does not build on Python 3.15, fall back to a `python:3.14.x` base. The digest `sha256:feb6e444...` in `apps/changedetection` belongs to `python-node:3.14.8`, not to `python`, so look up the correct `python:3.14.x` digest before using it. UNVERIFIED: the upstream requirements were not tested on 3.15.
+It provides a read-only `/app/venv` (see `python-runtime.instructions.md`). Closest sibling: `apps/bazarr` (python base, apt `ffmpeg`, `/app`). Fallback: if a dependency does not install on Python 3.15, copy the `python:3.14.8` FROM line (with digest) from `apps/sabnzbd/Dockerfile`. UNVERIFIED: the upstream requirements were not tested on 3.15.
 
 ## 4. Dockerfile
 
 1. `FROM` the python base (above). `ARG VERSION`. Declare `ARG TARGETARCH` only if used.
 2. `USER root`.
-3. `apt-get install -y --no-install-recommends ffmpeg` (used by yt-dlp and for media handling; `unzip` is already in ubuntu, so skip it). Build tools for `tgcrypto` (`build-essential`, `python3-dev` or `libffi-dev` as needed) go in the same layer and are **purged in the same layer** (pattern from `apps/changedetection` and `apps/bazarr`). Drop them if `pip` finds wheels. Do not pin apt versions: neither package is the app itself.
+3. `apt-get install -y --no-install-recommends ffmpeg` (used by yt-dlp and for media handling; `unzip` is already in ubuntu, so skip it). No build tools are expected. If a wheel is missing for Python 3.15 (for example in the `aiohttp` dependency tree), add the build packages in the same layer and **purge them in the same layer**. Do not pin apt versions: neither package is the app itself.
 4. Copy the app from the upstream image and install dependencies:
    ```dockerfile
    COPY --from=docker.io/jsavargas/telethon_downloader:${VERSION} /app/ /app/telethon/
    RUN /app/venv/bin/pip install --no-cache-dir -r /app/telethon/requirements.txt
    ```
-   `ARG VERSION` must be declared before the first `FROM` (or use a named stage `FROM docker.io/jsavargas/telethon_downloader:${VERSION} AS upstream`, which is cleaner). Prefer `@sha256:` pinning of that stage once a digest is known (UNVERIFIED digest: read it at implementation time). Remove `requirements.txt` after the install only if nothing needs it.
+   `ARG VERSION` must be declared before the first `FROM` (or use a named stage `FROM docker.io/jsavargas/telethon_downloader:${VERSION} AS upstream`, which is cleaner). On 2026-11-25 the `4.0.15` multi-arch digest on Docker Hub was `sha256:f9ad5f0caff72301cefddad3c9e866d064d627a7054b5fa8ae7b0d6d07de4af2`. A digest overrides the tag, so only pin it if Renovate updates the digest together with `VERSION`; otherwise a version bump would keep copying the old code. Remove `requirements.txt` after the install only if nothing needs it.
 5. `chown -R root:root /app/telethon && chmod -R 755 /app/telethon` (read-only at runtime), `mkdir -p /download /watch` and `chown apps:apps` them (these paths are mount points).
 6. `ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 HOME=/config PIP_CACHE_DIR=/tmp/pip XDG_CACHE_HOME=/tmp/.cache` (yt-dlp keeps its cache under `XDG_CACHE_HOME`, so keep it out of `/config`).
-7. License: the repo has `License.md`. It is not copied by `COPY --from=...:/app/`, so fetch it at build time: `curl -fsSL https://raw.githubusercontent.com/jsavargas/telethon_downloader/main/License.md -o /usr/share/licenses/telethon-downloader/License.md` (UNVERIFIED: a raw `main` URL is not pinned to 4.0.15. If a tag or commit is available, use that).
+7. License: the repo has `License.md`. It is not copied by `COPY --from=...:/app/`, so fetch it at build time: `curl -fsSL https://raw.githubusercontent.com/jsavargas/telethon_downloader/ed9710a358ef6da97107073e64e6ae66e6ac2aff/License.md -o /usr/share/licenses/telethon-downloader/License.md` (pinned to the 4.0.15 commit; there is no git tag, so a version bump must update this commit by hand).
 8. `USER apps`, `COPY --chmod=0755 . /`, `VOLUME /config /download /watch`, `WORKDIR /config`. No `EXPOSE`.
 
 ## 5. docker-bake.hcl
@@ -104,6 +104,45 @@ env:
   - name: TORRENT_MODE
     default: "watch"
     required: false
+  - name: PATH_CONFIG
+    default: "/config/"
+    required: false
+  - name: TG_PROGRESS_DOWNLOAD
+    default: "True"
+    required: false
+  - name: PROGRESS_STATUS_SHOW
+    default: "10"
+    required: false
+  - name: QBT_HOST
+    default: ""
+    required: false
+  - name: QBT_PORT
+    default: "8080"
+    required: false
+  - name: QBT_USERNAME
+    default: ""
+    required: false
+  - name: QBT_PASSWORD
+    default: ""
+    required: false
+  - name: YOUTUBE_VIDEO_FOLDER
+    default: "/download/youtube/videos"
+    required: false
+  - name: YOUTUBE_AUDIO_FOLDER
+    default: "/download/youtube/audios"
+    required: false
+  - name: YOUTUBE_FORMAT_VIDEO
+    default: "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
+    required: false
+  - name: YOUTUBE_FORMAT_AUDIO
+    default: "bestaudio/best"
+    required: false
+  - name: YOUTUBE_DEFAULT_DOWNLOAD
+    default: "video"
+    required: false
+  - name: YOUTUBE_TIMEOUT_OPTION
+    default: "5"
+    required: false
 volumes:
   - path: /config
     required: true
@@ -113,7 +152,7 @@ volumes:
     required: false
 ```
 
-Format it as `apps/jbops/settings.yaml` does (`ports: []` on two lines). The four credential variables are `required: true` with an empty default, which the rules allow only when `start.sh` handles them: see section 7. Optional qBittorrent and YouTube variables can be added later (names are in section 1). `PUID` and `PGID` are deliberately omitted: the image always runs as UID 568. Dependencies: none. The draft says there is no hard container dependency, and qBittorrent is an optional external client. If it later becomes an optional dependency, check whether `apps/qbittorrent` exists first.
+Format it as `apps/jbops/settings.yaml` does (`ports: []` on two lines). The four credential variables are `required: true` with an empty default, which the rules allow only when `start.sh` handles them: see section 7. The app also accepts the unprefixed credential and download aliases (section 1); only one name of each pair is listed. `PUID` and `PGID` are deliberately omitted: the image always runs as UID 568. Dependencies: none. The draft says there is no hard container dependency. qBittorrent is an optional client (`TORRENT_MODE=qbittorrent`), so add `opt_dependencies:` with `- name: qbittorrent` ✅ (`apps/qbittorrent` exists).
 
 ## 7. start.sh
 
@@ -162,11 +201,11 @@ TrueCharts expectations reconciled: the chart runs as UID 0 with `readOnlyRootFi
 - The draft's port (5000/http) is wrong: the app has no web UI. Dropping it from `settings.yaml` removes the TCP probe requirement.
 - The login is by bot token, so the draft's interactive phone-code or 2FA caveat is not valid. Credentials come from @BotFather (`TG_BOT_TOKEN`) and my.telegram.org (`TG_API_ID`, `TG_API_HASH`).
 - **Version tracking**: only Docker tags carry versions, and the Git repo has no tags beyond 3.1.9. The plan therefore copies the source from the upstream image, which makes our build depend on that image staying on Docker Hub. UNVERIFIED alternative: pin a commit SHA with `datasource=git-refs` and download the archive.
-- **Unpinned dependencies**: `yt_dlp`, `youtube_dl`, `telethon` and `tgcrypto` float at build time, so builds are not reproducible (and `youtube_dl` is unmaintained). Consider a constraints file only if upstream accepts it.
-- **Python 3.15 compatibility** of `tgcrypto` and `youtube_dl` is UNVERIFIED. Test it first, and fall back to 3.14 (as `apps/changedetection` does for litellm).
+- **Unpinned dependencies**: `telethon`, `yt-dlp`, `qbittorrent-api` and `aiohttp` float at build time, so builds are not reproducible. Consider a constraints file only if upstream accepts it.
+- **Python 3.15 compatibility** of these requirements is UNVERIFIED. Test it first, and fall back to 3.14 if needed (see section 3).
 - The `AUTHORIZED_USER_ID` path-injection note: the add-folder flow does not sanitise folder names, so only trusted users should be authorised (upstream behaviour, not ours to patch).
 - The README documents the `TG_`-prefixed names, while `docker-compose.yml` uses the unprefixed ones. The code accepts both, so `start.sh` and `settings.yaml` must keep this consistent.
-- No blockers: no GPU, no privileged mode, arm64 works (pure Python, with `tgcrypto` possibly built from source).
+- No blockers: no GPU, no privileged mode, arm64 is expected to work (the app is pure Python and the upstream image is published for amd64 and arm64).
 
 ## 11. Build and test steps
 
@@ -177,7 +216,7 @@ docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name telethon-downloader-probe --read-only --tmpfs /tmp \
   -v telethon-downloader-probe-config:/config telethon-downloader:4.0.15
 docker logs -f telethon-downloader-probe     # expect the "credentials missing" line, container stays up
-docker exec telethon-downloader-probe /app/venv/bin/python -c "import telethon, yt_dlp, tgcrypto; print('ok')"
+docker exec telethon-downloader-probe /app/venv/bin/python -c "import telethon, yt_dlp, qbittorrentapi, aiohttp; print('ok')"
 docker rm -f telethon-downloader-probe; docker volume rm telethon-downloader-probe-config
 forgetool containers test --image telethon-downloader:4.0.15 --config ./apps/telethon-downloader/container-test.yaml
 ```

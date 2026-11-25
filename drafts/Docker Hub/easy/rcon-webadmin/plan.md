@@ -9,7 +9,7 @@
 | Renovate | `datasource=github-releases depName=rcon-web-admin/rcon-web-admin` (tags have no `v` prefix) |
 | License | `MIT` (`package.json` and GitHub both say MIT) |
 | Source | https://github.com/rcon-web-admin/rcon-web-admin (the maintained fork of brainfoolong's project) |
-| Download | `https://github.com/rcon-web-admin/rcon-web-admin/archive/0.14.1.tar.gz`, sha256 `b7e2dc23c2d10040214dd9c96f16ee7a9417a5a628ef2a1fae6cda25ad6bb59b` (computed by me; GitHub does not publish checksums, and archive tarballs are not guaranteed byte-stable). Pure JavaScript, so no per-arch artifact. |
+| Download | `https://github.com/rcon-web-admin/rcon-web-admin/archive/0.14.1.tar.gz`, sha256 `b7e2dc23c2d10040214dd9c96f16ee7a9417a5a628ef2a1fae6cda25ad6bb59b` (computed from the download, re-checked during verification; a Renovate bump must update it too; GitHub does not publish checksums, and archive tarballs are not guaranteed byte-stable). Pure JavaScript, so no per-arch artifact. |
 | Upstream Dockerfile reviewed | https://github.com/itzg/docker-rcon-web-admin/blob/484fba3/Dockerfile: `node:12`, tarball to `/opt`, `npm install`, `node src/main.js install-core-widgets`, `EXPOSE 4326 4327`, `VOLUME /opt/rcon-web-admin/db`, `ENV RWA_ENV=TRUE`, `ENTRYPOINT node src/main.js start`. |
 | Dependencies | `express ^4.17.1`, `fstream`, `lowdb >=0.14.0`, `unzipper ^0.10.5`, `ws`. `package-lock.json` (lockfileVersion 1) pins `lowdb 0.14.0`, which matters: an unlocked `npm install` could pull a newer ESM-only lowdb that breaks `require`. |
 | Ports | 4326 (web UI), 4327 (websocket, "port + 1"; both required, from `config.template.js`). Host defaults to all hostnames (`host: null`). |
@@ -33,13 +33,13 @@ No `defaults/`: the db seed is created at build time inside the image (section 4
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Matches the draft and the closest siblings `apps/wikijs` and `apps/raneto` (both install `nodejs`/`npm` from apt in the Dockerfile on a ubuntu-derived base). The python half of the base is unused; if the maintainers prefer, `ghcr.io/trueforge-org/ubuntu` as in `raneto` works the same way. No Python runtime rules apply (no venv use), but keep the base's `/app/venv` untouched.
+Matches the draft and the siblings `apps/thelounge` and `apps/budge` (same FROM line; `budge` runs `npm` without installing it, so the base provides Node.js). The python half of the base is unused. Note: `apps/python-node` was deleted from this repo (commit `ab442d1c6`, 2026-11-17), and the current `apps/ubuntu/Dockerfile` installs Node.js itself (`NODE_VERSION` in `apps/ubuntu/docker-bake.hcl`). Maintainers should confirm whether new apps should still use `python-node` or `ubuntu`. UNVERIFIED: that the pinned `ubuntu` digest already contains Node. No Python runtime rules apply (no venv use), but keep the base's `/app/venv` untouched.
 
 ## 4. Dockerfile
 
 1. `FROM` as above, `ARG VERSION`, `USER root`.
 2. `ENV NODE_ENV=production HOME=/tmp npm_config_cache=/tmp/.npm`.
-3. `apt-get install -y --no-install-recommends nodejs npm` (as `wikijs` does; check whether the base already has `node` and drop what is present, since the rule says not to reinstall). Pin versions only if the final image keeps them; the packages are used at runtime (`nodejs`), so check the installed version is a current LTS (engines `>=4`, upstream tested on 12; `env.js` uses optional `catch {}`, so Node >= 10).
+3. No apt packages: do not reinstall `nodejs`/`npm`, the base provides them (do not copy the apt step of `apps/wikijs`). Check `node --version` and `npm --version` in the base during the build (engines `>=4`, the reviewed upstream image uses 12; `env.js` uses optional `catch {}`, so Node >= 10). UNVERIFIED: the Node version in this base.
 4. One `RUN`:
    - `mkdir -p /app/rcon-web-admin`; `curl -fsSL -o /tmp/rwa.tar.gz https://github.com/rcon-web-admin/rcon-web-admin/archive/${VERSION}.tar.gz`; `echo "<sha256>  /tmp/rwa.tar.gz" | sha256sum -c -`; `tar xzf ... -C /app/rcon-web-admin --strip-components=1`.
    - `cd /app/rcon-web-admin && npm ci --omit=dev` (uses `package-lock.json`, so lowdb stays 0.14.0).
@@ -47,7 +47,6 @@ Matches the draft and the closest siblings `apps/wikijs` and `apps/raneto` (both
    - Seed handling: `mv db /app/db-seed && ln -s /config/db db` so the read-only tree points at the volume, while the built-time contents (anything the widget install wrote to `db/`, plus the shipped files) stay available as the first-run seed.
    - `mkdir -p /usr/share/licenses/rcon-web-admin && cp LICENSE /usr/share/licenses/rcon-web-admin/`.
    - `chown -R apps:apps /app && chmod -R 755 /app`; `rm -rf /tmp/* /root/.npm`.
-   - `apt-get purge` `npm` afterwards only if it was installed for the build and node itself does not need it.
 5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 4326 4327`, `VOLUME /config`, `WORKDIR /app/rcon-web-admin`.
 
 ## 5. docker-bake.hcl
@@ -152,6 +151,7 @@ The test runs without env, so the `RWA_PASSWORD` path (user and server creation)
 - Draft said "no bundled user management": true only without `RWA_ENV`; with env it creates one user from `RWA_USERNAME`/`RWA_PASSWORD`. The UI also has its own user admin (UNVERIFIED how first-run works without env).
 - Core widgets are fetched from GitHub `master` zips during the build, so builds are not reproducible and break if those repos disappear. Option: pin them by commit and verify checksums if the maintainers want that.
 - Passwords are stored with `saltedMd5`; this is weak and upstream's choice.
+- `src/main.js` calls `process.umask(0)`, so files the app creates under `/config/db` are world-writable. Decide whether to patch that line at build time.
 - Old software on a current Node: `npm ci` may warn on deprecated packages (`fstream`, `unzipper`) and lockfile v1; UNVERIFIED that every dependency runs on the Node version apt provides.
 - Upstream is dormant since 2020; Renovate will rarely fire.
 - No blockers (no musl-only part, no GPU, no privilege).

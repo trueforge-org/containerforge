@@ -7,7 +7,7 @@
 | --- | --- |
 | Version | No releases or tags. Pin the last commit `08096e664aca5b59059de7f609bd9e0aaba95191` (2018-01-08). The repo is ARCHIVED (read-only), so it will never change. Use the date `20180108` as `VERSION` and keep the commit in `TVHPROXY_COMMIT`, as `apps/nextcloud-imaginary` does |
 | Renovate | `datasource=git-refs depName=https://github.com/jkaberg/tvhProxy versioning=loose` on `TVHPROXY_COMMIT` (nothing will be proposed, the repo is archived) |
-| License | GitHub reports NOASSERTION. `LICENSE` text: "Copyright (c) 2016 by Joel Kaaberg and contributors... Some rights reserved. Redistribution and use in source and binary forms ... permitted provided that the following conditions are met" = BSD-3-Clause style (the Flask-style wording). Use SPDX `BSD-3-Clause` (UNVERIFIED: the clause list was read only as far as the first condition) |
+| License | GitHub reports NOASSERTION. `LICENSE` text: "Copyright (c) 2016 by Joel Kaaberg and contributors... Some rights reserved. Redistribution and use in source and binary forms ... permitted provided that the following conditions are met" followed by three conditions (source notice, binary notice, no endorsement). SPDX `BSD-3-Clause` (full file read 2026-11-25) |
 | Source | https://github.com/jkaberg/tvhProxy |
 | Download | `https://raw.githubusercontent.com/jkaberg/tvhProxy/<commit>/tvhProxy.py`, `.../templates/device.xml`, `.../LICENSE`, `.../requirements.txt` (arch independent) |
 | Checksum | UNVERIFIED: none published. A commit-pinned URL is immutable, so that is the integrity anchor |
@@ -35,14 +35,14 @@ Single Flask/gevent script. Closest sibling: `apps/bazarr` (venv install, `/app/
 ## 4. Dockerfile
 1. `ARG VERSION`, `ARG TVHPROXY_COMMIT` (default equal to the bake default), `USER root`, `ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 HOME=/tmp`.
 2. `RUN mkdir -p /app/tvhproxy/templates /usr/share/licenses/tvhproxy`, then `curl -fsSL` each of `tvhProxy.py` (to `/app/tvhproxy/`), `templates/device.xml` (to `/app/tvhproxy/templates/`) and `LICENSE` (to `/usr/share/licenses/tvhproxy/LICENSE`) from `https://raw.githubusercontent.com/jkaberg/tvhProxy/${TVHPROXY_COMMIT}/...`.
-3. `/app/venv/bin/pip install --no-cache-dir flask requests gevent` (wheels exist for amd64 and arm64, UNVERIFIED for cp315; if gevent has no wheel, add `build-essential` and purge it in the same layer).
+3. `/app/venv/bin/pip install --no-cache-dir flask requests gevent` (PyPI has cp315 manylinux wheels for x86_64 and aarch64 for gevent 26.9.0 and greenlet 3.5.6, checked 2026-11-25; if a later release has none, add `build-essential` and purge it in the same layer).
 4. `chown -R root:root /app/tvhproxy && chmod -R a+rX /app/tvhproxy`.
-5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 5004`, `WORKDIR /app/tvhproxy` (read-only, the app only reads it).
-No `VOLUME /config`: the app keeps no state (see section 6).
+5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 5004`, `VOLUME /config`, `WORKDIR /app/tvhproxy` (read-only, the app only reads it).
+The app keeps no state, but the settings schema requires a `/config` volume entry (see section 6).
 
 ## 5. docker-bake.hcl
 - `APP = "tvhproxy"`
-- `VERSION` default `"20180108"` with `// renovate: datasource=git-refs depName=https://github.com/jkaberg/tvhProxy versioning=loose` placed on the `TVHPROXY_COMMIT` variable (as in `apps/nextcloud-imaginary/docker-bake.hcl`), default the full commit sha above. Pass both through `args` in `image`.
+- `VERSION` default `"20180108"` and `TVHPROXY_COMMIT` default the full commit sha above, each preceded by `// renovate: datasource=git-refs depName=https://github.com/jkaberg/tvhProxy versioning=loose` (as in `apps/nextcloud-imaginary/docker-bake.hcl`). UNVERIFIED: how Renovate would treat the date-style `VERSION`; the repo is archived. Pass both through `args` in `image`.
 - `LICENSE = "BSD-3-Clause"`, `SOURCE = "https://github.com/jkaberg/tvhProxy"`
 - Standard four targets and default group. Validate with `docker buildx bake --print`.
 
@@ -50,8 +50,8 @@ No `VOLUME /config`: the app keeps no state (see section 6).
 Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/jkaberg/tvhProxy"`.
 - ports: `5004` tcp (required true).
 - env, all `required: false` and defaults identical to the script: `TVH_URL` (`http://test:test@localhost:9981`), `TVH_PROXY_URL` (`http://localhost`), `TVH_BINDADDR` (`""`), `TVH_TUNER_COUNT` (`"6"`), `TVH_WEIGHT` (`"300"`), `TVH_CHUNK_SIZE` (`"1048576"`), `TVH_PROFILE` (`pass`), `TZ` (`Etc/UTC`).
-- volumes: `[]` (stateless, nothing to mount).
-- dependencies: `tvheadend` ✅ (`apps/tvheadend` exists; it is a runtime dependency).
+- volumes: `- path: /config` with `required: false`. The app is stateless, but the schema requires at least one volume and requires `/config` to be listed, so `[]` is invalid.
+- dependencies: `- name: tvheadend` ✅ (`apps/tvheadend` exists; a Tvheadend server is needed at runtime for the channel list).
 
 ## 7. start.sh
 ```bash
@@ -64,7 +64,7 @@ The script reads its env directly. `TVH_BINDADDR` is empty by default, which bin
 ## 8. container-test.yaml
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
-timeoutSeconds: 120
+timeoutSeconds: 180
 http:
 - port: '5004'
   path: /discover.json
@@ -82,7 +82,7 @@ filePaths:
 ## 10. Risks, caveats and open questions
 - Needs a reachable Tvheadend (the sibling `apps/tvheadend`), set through `TVH_URL`; `TVH_PROXY_URL` must be the URL clients use to reach this container, or the HDHomeRun discovery advertises `http://localhost`.
 - Archived and unmaintained upstream, last change 2018, with a gevent/Flask codebase of that age (`from gevent import monkey` ordering, `Flask` templates). UNVERIFIED on Flask 3.x / Python 3.15; test `/discover.json` and `/device.xml`.
-- Licence is not machine-declared (see section 1), confirm the clause list before merging.
+- GitHub does not machine-detect the licence (see section 1); the text is the three-clause BSD licence.
 - The draft says "tracks upstream master": this plan pins the final commit instead.
 - No blockers (pure Python, no arm64 issue).
 
@@ -91,17 +91,17 @@ filePaths:
 cd apps/tvhproxy
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
-docker run --rm -d --name tvhproxy-probe --read-only --tmpfs /tmp tvhproxy:20180108
+docker run --rm -d --name tvhproxy-probe --read-only --tmpfs /tmp -v tvhproxy-probe-config:/config tvhproxy:20180108
 docker logs -f tvhproxy-probe
 curl -fsS http://<container-ip>:5004/discover.json
-docker rm -f tvhproxy-probe
+docker rm -f tvhproxy-probe; docker volume rm tvhproxy-probe-config
 forgetool containers test --image tvhproxy:20180108 --config ./apps/tvhproxy/container-test.yaml
 ```
-Run with a fresh named `/config` volume only if one is added (none is declared). Readiness signal: the process stays up and port 5004 answers `/discover.json` (the script prints no startup line, UNVERIFIED).
+Readiness signal: the process stays up and port 5004 answers `/discover.json` (the script prints no startup line).
 
 ## 12. PR checklist
 - Branch `feat/add-tvhproxy`, commit `feat(tvhproxy): add new container`, target `main`.
 - Fill in the PR template, check only the true boxes.
 - `🤖 This PR is AI generated.` in the Notes section.
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- State untested: the lineup path against a real Tvheadend, arm64, behaviour on Python 3.15 with current Flask/gevent, and the licence wording.
+- State untested: the lineup path against a real Tvheadend, arm64, and behaviour on Python 3.15 with current Flask/gevent.

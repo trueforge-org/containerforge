@@ -11,7 +11,7 @@
 | Source URL | https://github.com/s3tools/s3cmd |
 | Per-arch download | Not applicable: pure-Python PyPI package, installed with pip on both arches. |
 | Checksum source | pip index metadata; no separate upstream checksum. Optionally pin with `pip install --require-hashes` using hashes copied from https://pypi.org/project/s3cmd/2.4.0/#files (UNVERIFIED, not fetched). |
-| requires_python | Not specified in PyPI metadata. UNVERIFIED: compatibility with Python 3.15 (base image); check in the build step. |
+| requires_python | Not specified in PyPI metadata. Runtime dependencies: `python-dateutil`, `python-magic`. UNVERIFIED: compatibility with Python 3.15 (base image); check in the build step. |
 | Wrapper reviewed | https://github.com/joch/docker-s3backup/blob/87e6354/Dockerfile: `debian:jessie`, `cron python python-magic python-pip`, `pip install s3cmd`, `/data`, config at `/root/.s3cfg`, entrypoint `/run.sh start`. Last updated 2019. |
 | Wrapper env (README) | `ACCESS_KEY`, `SECRET_KEY`, `S3PATH`, `S3CMDPARAMS`, `CRON_SCHEDULE` (default `0 * * * *`). Volume: anything to back up mounted under `/data`. `run.sh` itself was not fetched, so the exact `s3cmd` invocation is UNVERIFIED (README says it uses `s3cmd sync`). |
 | Ports | None. |
@@ -38,7 +38,7 @@ The draft suggests ubuntu plus pip; the python base already provides `/app/venv`
 
 1. `ARG VERSION`, `USER root`.
 2. `ENV HOME=/config PIP_NO_CACHE_DIR=1` (pip cache must not land in `/config`; the base already sets `PIP_NO_CACHE_DIR=1`).
-3. apt: `python-magic` equivalent only if wanted. s3cmd works without it (MIME guessing falls back to `mimetypes`); UNVERIFIED. Prefer pip `python-magic` plus apt `libmagic1` only if the sync of unknown types needs it; default plan: no apt packages.
+3. apt: default plan is none. pip installs `python-magic` as a dependency of s3cmd; it needs the system `libmagic` library. UNVERIFIED: that s3cmd falls back to `mimetypes` cleanly without it; if `s3cmd --version` or a sync fails, add apt `libmagic1` (check the base first).
 4. Install into the bundled venv at build time as root:
 ```sh
 /app/venv/bin/pip install --no-cache-dir "s3cmd==${VERSION}"
@@ -119,19 +119,18 @@ if [ -z "${S3PATH:-}" ]; then
   echo "S3PATH is not set; nothing to back up. Idling." >&2
   exec sleep infinity
 fi
-# credentials come from env and are written to /tmp only (never /config, never argv)
-cat > "${CFG}" <<EOF
-[default]
-access_key = ${ACCESS_KEY:-}
-secret_key = ${SECRET_KEY:-}
-EOF
+# s3cmd reads AWS_* from the environment when the config has no access_key, so no secret goes into a file or argv
+printf '[default]\n' > "${CFG}"
+if [ -n "${ACCESS_KEY:-}" ]; then
+  export AWS_ACCESS_KEY_ID="${ACCESS_KEY}" AWS_SECRET_ACCESS_KEY="${SECRET_KEY:-}"
+fi
 read -r -a params <<< "${S3CMDPARAMS:-}"
-run_sync() { /app/venv/bin/s3cmd --config="${CFG}" sync "${SOURCE_DIR%/}/" "${S3PATH}" "${params[@]}"; }
-if [ "${RUN_ONCE:-false}" = "true" ]; then exec /app/venv/bin/s3cmd --config="${CFG}" sync "${SOURCE_DIR%/}/" "${S3PATH}" "${params[@]}"; fi
+run_sync() { /app/venv/bin/s3cmd --config="${CFG}" sync "${SOURCE_DIR%/}/" "${S3PATH}" ${params[@]+"${params[@]}"}; }
+if [ "${RUN_ONCE:-false}" = "true" ]; then exec /app/venv/bin/s3cmd --config="${CFG}" sync "${SOURCE_DIR%/}/" "${S3PATH}" ${params[@]+"${params[@]}"}; fi
 while true; do run_sync || echo "sync failed, retrying in ${INTERVAL_SECONDS}s" >&2; sleep "${INTERVAL_SECONDS}" & wait $!; done
 ```
-- Handle an empty `params` array safely under `set -u` (use `${params[@]+"${params[@]}"}`) and trap SIGTERM to kill the sleep.
-- UNVERIFIED: a secret containing `%` or special characters in the ini file (s3cmd uses Python `ConfigParser`, interpolation behavior to be tested); if a problem, fall back to the `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` env path if s3cmd supports it (UNVERIFIED).
+- The empty `params` array is guarded for `set -u`. Add a SIGTERM trap that kills the sleep.
+- Checked in `S3/Config.py` at `v2.4.0`: the `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` fallback applies when a config file is given and its `access_key` is empty, and an access key without a secret raises an error. Do not write secrets into the config file: s3cmd treats values that start with `$` as environment references. UNVERIFIED: secrets with special characters in a real run.
 - Custom endpoints (MinIO etc.) are passed via `S3CMDPARAMS` (for example `--host=... --host-bucket=...`), per s3cmd docs; not verified here.
 - The loop is sequential, so no lock file is needed (upstream sync wrapper had one).
 
@@ -149,7 +148,7 @@ No ports in `settings.yaml`, so no tcp/http probe. The test runs with no env, so
 ## 9. Rootless and read-only-rootfs adaptations
 
 - Draft/chart: runAsUser 0, readOnlyRootFilesystem false. Target: user `apps`, read-only rootfs.
-- Upstream writes `/root/.s3cfg` (home) and a cron/log file. Remap: config generated to `/tmp/s3cfg` with mode 600; `HOME=/config`; no cron, no log file (stdout only).
+- Upstream writes `/root/.s3cfg` (home) and a cron/log file. Remap: credential-free config generated to `/tmp/s3cfg` with mode 600; `HOME=/config`; no cron, no log file (stdout only).
 - Backup source mounted read-only at `/data` (draft caveat). The `apps` user must be able to read it; document that file ownership/permissions on the mount must allow it.
 - s3cmd keeps no persistent state, so `/config` is mostly unused; the volume is declared for convention (and `HOME`).
 
@@ -157,7 +156,7 @@ No ports in `settings.yaml`, so no tcp/http probe. The test runs with no env, so
 
 - It is a looping job, not a service. `RUN_ONCE=true` allows use as a Kubernetes CronJob. `CRON_SCHEDULE` is not supported; decide whether to add a rootless scheduler (for example supercronic) later.
 - Python 3.15 compatibility of s3cmd 2.4.0 (last released December 2023) is UNVERIFIED. If it fails, use `ghcr.io/trueforge-org/python` at a lower tag only if one exists, or install with apt `s3cmd` (pin the version and check it matches `VERSION`).
-- Credentials in env are visible to anyone who can inspect the container; prefer secret mounts. The generated `/tmp/s3cfg` is mode 600.
+- Credentials in env are visible to anyone who can inspect the container; prefer orchestrator secrets. The generated `/tmp/s3cfg` holds no credentials.
 - The wrapper image is unmaintained since 2019; this plan does not port its code, only its env names.
 - s3cmd with `--delete-removed` in `S3CMDPARAMS` can delete remote data; not a default.
 - No arm64 blockers (pure Python).

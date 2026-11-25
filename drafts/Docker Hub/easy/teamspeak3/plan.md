@@ -10,7 +10,7 @@
 | License | Proprietary vendor licence (`LICENSE` in the tarball: TeamSpeak Systems "General Business Terms" and EULA). No SPDX id exists, so use `LicenseRef-TeamSpeak-EULA`. The licence must be accepted on first start (`TS3SERVER_LICENSE=accept`). |
 | Source URL | https://www.teamspeak.com/en/downloads/ (docs: https://hub.docker.com/_/teamspeak) |
 | Download (amd64 only) | `https://files.teamspeak-services.com/releases/server/3.13.9/teamspeak3-server_linux_amd64-3.13.9.tar.bz2` (HTTP 200, 9.98 MB). No arm64 build is known: the `..._linux_arm64-3.13.9.tar.bz2` URL returns 404. |
-| Checksum source | None published for the glibc tarball (the `.sha256` URL returns 404). The Docker official image publishes a checksum only for the **alpine** tarball (`82f58acd...`), which is a different file. A locally computed hash for the amd64 file on 2026-11-24 is `35049b080d23b001d32079eff0be1404f2d9784fbc7457887422ec134c095d5a`. It is not vendor-published, so verify that it still matches the file before using it as a pin. |
+| Checksum source | The vendor download page (https://www.teamspeak.com/en/downloads/) publishes a SHA256 for each file. For "Linux Server 64-bit 3.13.9" it is `35049b080d23b001d32079eff0be1404f2d9784fbc7457887422ec134c095d5a` (checked 2026-11-25). There is no `.sha256` sidecar file, and the checksum in the Docker official image is for the different **alpine** tarball. |
 | Tarball layout | A top-level `teamspeak3-server_linux_amd64/` containing `ts3server` (ELF x86-64, dynamic, glibc), `libts3db_{sqlite3,mariadb,postgresql}.so`, `libts3_ssh.so` (a NEEDED library of `ts3server`), `redist/libmariadb.so.2`, `sql/`, `serverquerydocs/`, `doc/`, `tsdns/`, `LICENSE`, `3RD_PARTY_LICENSES`, `CHANGELOG`. |
 | Binary strings | The binary reads `TS3SERVER_LICENSE`, and a `.ts3server_license_accepted` file or the `license_accepted=1` parameter in the working directory, plus `inifile`, `createinifile` and `licensepath`. The allow-list file is `query_ip_allowlist.txt`. The older `query_ip_whitelist.txt` is also recognised. |
 | Upstream Dockerfile reviewed | `TeamSpeak-Systems/teamspeak-linux-docker-images/alpine/Dockerfile` and `entrypoint.sh`. It moves the `.so` files to `/usr/local/lib` and runs `ldconfig`, writes `/var/run/ts3server/ts3server.ini` and `ts3db.ini` from `TS3SERVER_*` env vars, and runs `ts3server inifile=...`. Data is under `/var/ts3server`. |
@@ -37,14 +37,14 @@ The vendor binary is glibc (`ld-linux-x86-64.so.2`, `libstdc++.so.6`), which fit
 
 ## 4. Dockerfile
 
-1. `FROM` ubuntu (above); `ARG VERSION`; `ARG TARGETARCH`.
+1. `FROM` ubuntu (above); `ARG VERSION`; `ARG TS3_SHA256=35049b080d23b001d32079eff0be1404f2d9784fbc7457887422ec134c095d5a` (vendor-published, see section 1); `ARG TARGETARCH`.
 2. `USER root`.
 3. `RUN apt-get update && apt-get install -y --no-install-recommends bzip2 libstdc++6 && rm -rf /var/lib/apt/lists/*`. `libstdc++6` is probably already present: check with `dpkg -l libstdc++6` and drop it if so. The only package that is not in the base for sure is `bzip2`. Do not pin: they are tools and not the app, so the version-alignment rule does not apply.
 4. Download and extract (amd64 only):
    ```sh
    [ "${TARGETARCH}" = "amd64" ] || { echo "teamspeak3 supports linux/amd64 only"; exit 1; }
    curl -fsSL -o /tmp/ts3.tar.bz2 "https://files.teamspeak-services.com/releases/server/${VERSION}/teamspeak3-server_linux_amd64-${VERSION}.tar.bz2"
-   # optional: echo "<sha256>  /tmp/ts3.tar.bz2" | sha256sum -c -   (see section 10)
+   echo "${TS3_SHA256}  /tmp/ts3.tar.bz2" | sha256sum -c -
    tar -xjf /tmp/ts3.tar.bz2 -C /app --strip-components=1
    mkdir -p /usr/share/licenses/teamspeak3
    cp /app/LICENSE /app/3RD_PARTY_LICENSES /usr/share/licenses/teamspeak3/
@@ -85,7 +85,7 @@ ports:
   - { port: 30033, protocol: tcp, required: false }
 env:
   - { name: TZ,                      default: "Etc/UTC",  required: false }
-  - { name: TS3SERVER_LICENSE,       default: "view",     required: true }   # must be "accept"
+  - { name: TS3SERVER_LICENSE,       default: "",         required: true }   # must be "accept"
   - { name: TS3SERVER_QUERY_PROTOCOLS, default: "raw",    required: false }
   - { name: TS3SERVER_QUERY_TIMEOUT, default: "300",      required: false }
   - { name: TS3SERVER_DEFAULT_VOICE_PORT, default: "9987", required: false }
@@ -98,7 +98,7 @@ volumes:
     required: true
 ```
 
-Write it in the block style of the sibling files (one key per line), not the inline style above. Only variables that `start.sh` writes into the ini are listed (see section 7). The binary itself reads `TS3SERVER_LICENSE`. `required: true` is handled in `start.sh`: with the default `view` the licence text is printed and the server does not start until the user sets `accept`. Optional extras (`TS3SERVER_SERVERADMIN_PASSWORD`, MariaDB/PostgreSQL via `TS3SERVER_DB_*`) are an open question, see section 10. No hard dependencies: SQLite is the default.
+Write it in the block style of the sibling files (one key per line), not the inline style above. Only variables that `start.sh` writes into the ini are listed (see section 7). The binary itself reads `TS3SERVER_LICENSE`. `required: true` with an empty default is handled in `start.sh`: unless the user sets `accept`, it logs what to set, and the server does not run (see sections 7 and 10). Optional extras (`TS3SERVER_SERVERADMIN_PASSWORD`, MariaDB/PostgreSQL via `TS3SERVER_DB_*`) are an open question, see section 10. No hard dependencies: SQLite is the default.
 
 ## 7. start.sh
 
@@ -158,7 +158,7 @@ filePaths:
 timeoutSeconds: 180
 ```
 
-Implementation notes: the libraries are moved to `/usr/local/lib` in the Dockerfile, hence the path above. The schema has no UDP probe, so `9987/udp` is not directly tested: the TCP probes cover the same process, and the readiness log line is checked by hand. `timeoutSeconds: 180` is the schema default and the floor, which matches slower siblings. UNVERIFIED: whether `mainRunner.env` is honoured the way `apps/drydock` relies on it (it uses the same mechanism, so it should be).
+Implementation notes: the libraries are moved to `/usr/local/lib` in the Dockerfile, hence the path above. The schema has no UDP probe, so `9987/udp` is not directly tested: the TCP probes cover the same process, and the readiness log line is checked by hand. `timeoutSeconds: 180` is the schema default and the floor, which matches slower siblings. `mainRunner.env` is part of the forgetool test schema and `apps/drydock` uses it. It conflicts with the wording of the container-test rules, see the maintainer decision in section 10.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -175,7 +175,8 @@ TrueCharts expectations reconciled: UID 568 matches the chart's default, read-on
 
 - **amd64 only**: the vendor ships no arm64 server. `image-all` must be amd64-only, and the Dockerfile fails fast on other arches. If CI requires multi-arch for every app, this is a blocker to discuss.
 - **Closed source and EULA**: redistributing the vendor binary in an image on ghcr.io may need legal review. The Docker official image is published by TeamSpeak Systems itself. UNVERIFIED: whether a third-party redistribution is allowed.
-- **Checksum**: the vendor publishes none for the glibc file, so a pin (`35049b08...`) would break on every renovate version bump. Recommended: no pin, and download over TLS only. State this in the PR.
+- **Checksum**: the Dockerfile rules require verification, because the vendor publishes a SHA256 on its download page. Renovate bumps only `VERSION`, so a version PR fails on the checksum until someone copies the new value from that page into `TS3_SHA256`. That failure is intended.
+- **Test and default startup (maintainer decision)**: `container-test.instructions.md` says the test cannot set env vars and that an image MUST still start without them. This server does not stay up without licence acceptance. The forgetool schema does have `mainRunner.env` (used by `apps/drydock`), but using it accepts the vendor licence in CI and does not satisfy the start-without-env rule. A maintainer must choose: allow this exception, or have `start.sh` idle until the licence is accepted and narrow the test to `filePaths` (no TCP probes).
 - **UDP 9987** cannot be probed by forgetool. Verify manually (`ss -lun` in the container).
 - First start prints the serveradmin password and privilege key in the logs, which the user must copy (draft caveat). The query port 10011 must not be exposed publicly.
 - Optional features deferred: MariaDB/PostgreSQL via `ts3db.ini` (the libraries are already in the tarball), `TS3SERVER_SERVERADMIN_PASSWORD`, `TS3SERVER_MACHINE_ID`, SSH query.
@@ -203,5 +204,5 @@ Also run once **without** `TS3SERVER_LICENSE` to confirm the licence message app
 - Fill in `.github/PULL_REQUEST_TEMPLATE.md` and check only the boxes that apply.
 - Put `🤖 This PR is AI generated.` in the Notes section.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge. Only the user can sign it.
-- State in the PR: amd64 only, no vendor checksum, proprietary licence label, and the UDP port not covered by the test.
+- State in the PR: amd64 only, the manual checksum update on version bumps, the licence acceptance in the test, proprietary licence label, and the UDP port not covered by the test.
 - Untested at planning time: the build, the read-only run, `forgetool containers test`, and the library lookup (`ldd` on the ubuntu base). Do not check "Built container locally" unless it was done.

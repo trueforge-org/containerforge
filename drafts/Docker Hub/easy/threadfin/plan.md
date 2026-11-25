@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Version | **1.2.37** (GitHub "Latest", tag `1.2.37` without a `v`, commit `c459dd5`, released 11 Sep; UNVERIFIED: the year was not shown). It matches the draft. |
+| Version | **1.2.37** (GitHub "Latest", tag `1.2.37` without a `v`, commit `c459dd5`, released 2025-09-11). It matches the draft. |
 | Renovate | `datasource=github-releases depName=Threadfin/Threadfin versioning=semver` |
 | License | MIT (GitHub shows "MIT license"; `LICENSE` at the tag returns 200). SPDX `MIT`. |
 | Source URL | https://github.com/Threadfin/Threadfin |
@@ -46,7 +46,7 @@ The Go binary is prebuilt and static (upstream uses `CGO_ENABLED=0`), so no Go s
 5. Download:
    ```sh
    curl -fsSL -o /app/threadfin "https://github.com/Threadfin/Threadfin/releases/download/${VERSION}/Threadfin_linux_${TARGETARCH}"
-   chmod 755 /app/threadfin && chown apps:apps /app/threadfin
+   chmod 755 /app/threadfin && chown root:root /app/threadfin
    mkdir -p /usr/share/licenses/threadfin
    curl -fsSL -o /usr/share/licenses/threadfin/LICENSE "https://raw.githubusercontent.com/Threadfin/Threadfin/${VERSION}/LICENSE"
    ```
@@ -107,7 +107,7 @@ The three `THREADFIN_*` names are the ones the upstream image's entrypoint reads
 3. `export TMPDIR=/tmp` (keeps scratch space in `/tmp`).
 4. `exec /app/threadfin -port="${THREADFIN_PORT}" -bind="${THREADFIN_BIND_IP_ADDRESS}" -config=/config -debug="${THREADFIN_DEBUG}"`.
 
-No writes to `/app`, no seeding is needed, and a restart is idempotent. The binary binds `0.0.0.0` by default, so other containers and clients can reach it (check with a request from a second container). No secrets are involved at first start (the web UI has its own user setup after startup).
+No writes to `/app`, no seeding is needed, and a restart is idempotent. `start.sh` passes `-bind=0.0.0.0` by default, so other containers and clients should reach it (check with a request from a second container). No secrets are involved at first start (the web UI has its own user setup after startup).
 
 ## 8. container-test.yaml
 
@@ -133,7 +133,7 @@ The probe covers the only declared port. UNVERIFIED: the UI path (`/web/` is the
 | `/home/threadfin/cache` | Inside `/config`. UNVERIFIED: confirm that the binary keeps its cache under `-config` and not under `$HOME`. |
 | `/tmp/threadfin` | `/tmp` (tmpfs) |
 | `/var/log/threadfin.log` (`THREADFIN_LOG`) | Not used: logs go to stdout. |
-| Self-update (`-branch`, a setting in the UI) | The binary in `/app` is read-only and owned by `apps`, so an in-place update fails or is blocked. Updates happen by image tag. |
+| Self-update (setting `ThreadfinAutoUpdate`, run at every start by `BinaryUpdate()`) | `/app` is root-owned and the rootfs is read-only, so the binary cannot be replaced. Updates happen by image tag. See section 10. |
 | UID 31337 in the upstream image | UID 568 (`USER apps`) |
 
 TrueCharts expectations reconciled: non-root and `readOnlyRootFilesystem true` both hold, and the chart's PVC at `/home/threadfin/conf` must be mounted at `/config` instead. The emptyDir `/tmp/threadfin` is covered by the `/tmp` tmpfs.
@@ -141,7 +141,7 @@ TrueCharts expectations reconciled: non-root and `readOnlyRootFilesystem true` b
 ## 10. Risks, caveats and open questions
 
 - No upstream checksum: the downloaded binary is verified only by TLS and the release tag.
-- UNVERIFIED: whether Threadfin tries to self-update or write next to its executable when it is read-only. Look for errors in the first-run logs, and disable the update setting by default if possible.
+- Self-update (checked in the 1.2.37 source): `ThreadfinAutoUpdate` defaults to `true`, and to `false` only if `/.dockerenv` exists. In Kubernetes that file is normally absent, so the app will try to download a newer release once one exists. UNVERIFIED: that the failed replacement on a read-only binary is harmless. Consider seeding or setting `ThreadfinAutoUpdate: false` in `/config/settings.json`, and test it.
 - VLC and the jellyfin ffmpeg are not included. Users who select VLC as a stream buffer will not find it. The distro `ffmpeg` is at `/usr/bin/ffmpeg`, so the buffer settings in the UI should point there.
 - The draft's ffmpeg caveat is covered: it is installed, which enlarges the image a little.
 - Discovery (HDHomeRun, DVB) needs multicast or host networking, which is a deployment concern.

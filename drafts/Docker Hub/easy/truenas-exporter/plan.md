@@ -79,7 +79,7 @@ Ports are listened on `:PORT`, so all interfaces. The `/defaults` branch is dead
 ## 8. container-test.yaml
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
-timeoutSeconds: 120
+timeoutSeconds: 180
 http:
 - port: '9108'
   path: /metrics
@@ -89,7 +89,7 @@ filePaths:
 - /usr/local/bin/graphite_exporter
 - /usr/share/licenses/truenas-exporter/LICENSE
 ```
-The UDP port has no probe type in forgetool (UNVERIFIED), so only the TCP side of 9109 is tested; note this in the PR. Without a mapping file the app still starts, so the no-env test passes. The mapping-file path is exercised manually (section 11).
+The forgetool test schema has no UDP probe type, so only the TCP side of 9109 is tested; note this in the PR. Without a mapping file the app still starts, so the no-env test passes. The mapping-file path is exercised manually (section 11).
 
 ## 9. Rootless and read-only-rootfs adaptations
 - The exporter keeps state in memory only and writes no files. The only read path is the mapping file in `/config`.

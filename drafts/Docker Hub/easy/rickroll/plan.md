@@ -6,8 +6,8 @@
 | Item | Value |
 |---|---|
 | Upstream | https://github.com/modem7/docker-rickroll (default branch `master`, last push 2026-11-14) |
-| Version | No product version exists. The repo has one release, `video-assets-v1` (assets only). Upstream image tag is `latest`. Proposal: pin a commit of `master` chosen at implementation time (UNVERIFIED: the commit SHA could not be fetched, GitHub API returned 403). |
-| Renovate | UNVERIFIED. Proposed `datasource=git-refs depName=https://github.com/modem7/docker-rickroll currentValue=master` with `VERSION` = the pinned commit SHA. Confirm that this renovate form is used elsewhere in the repo before copying it. |
+| Version | No product version exists. The repo has one release, `video-assets-v1` (assets only). Upstream image tag is `latest`. Proposal: pin a commit of `master`; HEAD on 2026-11-25 is `db8d928c7a6af1b7cd4b4b12653ef5f1ec161fee` (recheck at implementation time). |
+| Renovate | `datasource=git-refs depName=https://github.com/modem7/docker-rickroll currentValue=master` with `VERSION` = the pinned commit SHA (same comment form as `apps/tvheadend/docker-bake.hcl`). |
 | License | MIT (GitHub API `license.spdx_id`). The video content license is not stated, see section 10. |
 | Source URL | https://github.com/modem7/docker-rickroll |
 | Assets | Release `video-assets-v1` (published 2026-07-07): `video.mp4` 29,760,963 B sha256 `7fe57b3d2f695e13ff7431e094a74960ea4f6b847a0c4472ce5b414d7ca7937e`; `video-480p.mp4` 61 MB; `video-720p.mp4` 116 MB; `video-1080p.mp4` 224 MB sha256 `6ca8c737a5ecdea2228fdc0a2f48e1daf5ad52dfa8bede7aa2e6478122971108`; `video-2160p.mp4`; `video4k.mkv`. URL pattern `https://github.com/modem7/docker-rickroll/releases/download/video-assets-v1/<name>`. Architecture independent (static file), so no per-arch URLs. |
@@ -46,7 +46,7 @@ Optional builder stage on `ubuntu` is not needed: `curl` is available in the ngi
 1. Stage `video` (ubuntu base, `USER root`): `ARG VIDEO_NAME=video.mp4`, `ARG VIDEO_SHA256=7fe57b3d...937e`; `curl -fsSL -o /video.mp4 https://github.com/modem7/docker-rickroll/releases/download/video-assets-v1/${VIDEO_NAME}`; `echo "${VIDEO_SHA256}  /video.mp4" | sha256sum -c -`.
 2. Final stage `FROM` the nginx base, `ARG VERSION` (pinned commit SHA), `USER root`.
 3. `COPY --from=video --chown=568:568 /video.mp4 /usr/share/nginx/html/video.mp4` (read-only at runtime).
-4. Fetch the upstream `scripts/index/80-index.sh` at `${VERSION}` only if you want to track upstream; otherwise copy the adapted file from `docker-entrypoint.d/` (MIT notice must be kept). License file: `/usr/share/licenses/rickroll/LICENSE` fetched from `https://raw.githubusercontent.com/modem7/docker-rickroll/${VERSION}/LICENSE`.
+4. Fetch the upstream `scripts/index/80-index.sh` at `${VERSION}` only if you want to track upstream; otherwise copy the adapted file from `docker-entrypoint.d/` (MIT notice must be kept). License file: `/usr/share/licenses/rickroll/LICENSE` fetched from `https://raw.githubusercontent.com/modem7/docker-rickroll/${VERSION}/LICENCE.txt` (upstream spells it `LICENCE.txt`).
 5. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html`, `EXPOSE 8080`, `VOLUME /config` (as it-tools; the nginx base already sets `CMD`).
 - No apt packages.
 
@@ -56,12 +56,12 @@ Optional builder stage on `ubuntu` is not needed: `curl` is available in the ngi
 variable "APP" { default = "rickroll" }
 variable "VERSION" {
   // renovate: datasource=git-refs depName=https://github.com/modem7/docker-rickroll currentValue=master
-  default = "<pinned master commit SHA>"
+  default = "db8d928c7a6af1b7cd4b4b12653ef5f1ec161fee"
 }
 variable "LICENSE" { default = "MIT" }
 variable "SOURCE"  { default = "https://github.com/modem7/docker-rickroll" }
 ```
-Standard four targets and `group "default"` from `apps/it-tools/docker-bake.hcl`; `image-all` platforms amd64 + arm64. Check how it-tools sets VERSION/renovate and mirror it. Validate with `docker buildx bake --print`.
+Standard four targets and `group "default"` from `apps/it-tools/docker-bake.hcl`; `image-all` platforms amd64 + arm64. `apps/it-tools` uses a `github-releases` comment, so take the `git-refs` form from `apps/tvheadend`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -113,7 +113,8 @@ volumes:
 - `80-index.sh`: adapt upstream so it writes to `/tmp/html/index.html` (not `/usr/share/nginx/html`), keeps `set -eu`, and exits non-zero never on unset vars (use `${VAR:-default}`). Escape values for HTML/JS or document that env is trusted.
 - `defaults/default.conf`: server on `listen 8080 default_server; listen [::]:8080 default_server;`, `location = / { root /tmp/html; try_files /index.html =404; }`, `location = /video.mp4 { root /usr/share/nginx/html; }`; keep `/config/nginx.conf` from the base (seeded by the base's `03-copyconfig.sh` with `cp -n`). Use `location / { return 302 /; }` for other paths if desired.
 - UNVERIFIED: whether the ubuntu nginx package has `ngx_http_mp4_module`; do not use `mp4;`. Plain byte-range serving works for seeking.
-- UNVERIFIED: that the base entrypoint runs `/docker-entrypoint.d/*.sh` in numeric order for scripts in `apps/*/docker-entrypoint.d`. it-tools relies on this, so it should hold.
+- `apps/ubuntu/entrypoint.sh` runs the executable `/docker-entrypoint.d/*.sh` files in `sort -V` order, then `exec`s the CMD when there is no `/start.sh`. The base's `03-copyconfig.sh` runs first, and `COPY --chmod=0755` makes this app's scripts executable. `docker-entrypoint.d/` and `defaults/` are in the `.dockerignore` allow-list.
+- `80-index.sh` must `mkdir -p /tmp/html` (the tmpfs is empty at start). Drop upstream's final `exec "$@"`, and hard-code `/video.mp4` instead of reading `VIDEO_FILE`, because `settings.yaml` does not declare it.
 
 ## 8. container-test.yaml
 
@@ -127,6 +128,7 @@ http:
   path: /video.mp4
 filePaths:
 - /usr/share/nginx/html/video.mp4
+- /usr/share/licenses/rickroll/LICENSE
 ```
 Port 8080 is the only declared port. Test runs with default env, so the index page is generated with defaults.
 
@@ -152,7 +154,7 @@ Port 8080 is the only declared port. Test runs with default env, so the index pa
 cd apps/rickroll
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
-docker run --rm -d --name rickroll-probe --read-only --tmpfs /tmp -v rickroll-probe-config:/config rickroll:<VERSION>
+docker run --rm -d --name rickroll-probe -p 8080:8080 --read-only --tmpfs /tmp -v rickroll-probe-config:/config rickroll:<VERSION>
 docker logs -f rickroll-probe     # expect the nginx start with no "Permission denied" or "Read-only file system"
 curl -fsS http://localhost:8080/ | head   # reach it from another container as well
 curl -fsSI -H 'Range: bytes=0-99' http://localhost:8080/video.mp4   # expect 206
@@ -165,5 +167,5 @@ forgetool containers test --image rickroll:<VERSION> --config ./apps/rickroll/co
 - Branch `feat/add-rickroll`, commit and PR title `feat(rickroll): add new container`, target `main`.
 - PR template filled; Notes carry `🤖 This PR is AI generated.`
 - CLA notice for the user: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- State what is untested: renovate `git-refs` annotation, entrypoint script ordering, arm64, and anything not actually built or run.
+- State what is untested: renovate `git-refs` annotation, entrypoint scripts, arm64, and anything not actually built or run.
 - Mention the copyright question in the PR description so a maintainer decides.

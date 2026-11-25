@@ -5,10 +5,10 @@
 
 | Item | Value |
 |---|---|
-| Application | AWS CLI v1 from PyPI `awscli`, `info.version` `1.46.3` at fetch time (PyPI page was truncated, so confirm with `pip index versions awscli` at build time). `requires_python >=3.10`. |
+| Application | AWS CLI v1 from PyPI `awscli`, latest `1.46.3` (PyPI JSON API, uploaded 2026-11-05). `requires_python >=3.10`; the classifiers list Python up to 3.14, not 3.15. |
 | Renovate | `datasource=pypi depName=awscli versioning=pep440` |
 | License | Apache-2.0 (PyPI metadata). The wrapper repo `what-name/docker-s3sync` has no declared license (derived from `joch/docker-s3backup`, GPL-3.0); we do not copy its code, so the image LICENSE is Apache-2.0. |
-| Source URL | https://github.com/aws/aws-cli (v1 branch). UNVERIFIED: not fetched; confirm the URL before using it as `SOURCE`. The draft's source is the wrapper repo https://github.com/what-name/docker-s3sync (last push 2022-10-07). |
+| Source URL | https://github.com/aws/aws-cli (tag `1.46.3` has `__version__` 1.46.3; the default branch is `v2`). The draft's source is the wrapper repo https://github.com/what-name/docker-s3sync (last push 2022-10-07). |
 | Per-arch download | Not applicable: pure-Python package installed with pip (arm64 and amd64). AWS CLI v2 is not on PyPI; the draft says awscli via pip, so v1. |
 | Checksum source | pip index; optional `--require-hashes` from https://pypi.org/project/awscli/ (UNVERIFIED, not fetched). |
 | Wrapper reviewed | https://github.com/what-name/docker-s3sync/blob/6c971229927957435bfd04239ba21085235fdd95/Dockerfile (`debian:latest`, `cron python3 python3-magic python3-pip`, pip `setuptools wheel awscli`, `/data`, `/root/.aws`, entrypoint `/run.sh start`) and `run.sh`. |
@@ -59,7 +59,7 @@ variable "VERSION" {
 variable "LICENSE" { default = "Apache-2.0" }
 variable "SOURCE"  { default = "https://github.com/aws/aws-cli" }
 ```
-Standard four targets and `group "default"` copied from `apps/bazarr/docker-bake.hcl`; `image-all` amd64 + arm64. Validate with `docker buildx bake --print`. UNVERIFIED: the exact `1.46.3` default; recheck on PyPI when implementing.
+Standard four targets and `group "default"` copied from `apps/bazarr/docker-bake.hcl`; `image-all` amd64 + arm64. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 

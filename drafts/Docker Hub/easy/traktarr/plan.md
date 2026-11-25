@@ -12,7 +12,7 @@
 | Download | `https://github.com/l3uddz/traktarr/archive/refs/tags/${VERSION}.tar.gz` (architecture independent, pure Python) |
 | Checksum | UNVERIFIED: GitHub archives have no published checksum. Pin by tag only |
 | Upstream Dockerfile | `docker/Dockerfile`: `python:3.7-alpine3.10`, pip install `requirements.txt`, `ENTRYPOINT ["python","traktarr.py"]`, `VOLUME /config`, ENV `TRAKTARR_CONFIG=/config/config.json`, `TRAKTARR_CACHEFILE=/config/cache.db`, `TRAKTARR_LOGFILE=/config/traktarr.log` (reviewed) |
-| Requirements | `backoff==1.5.0 schedule==0.5.0 attrdict==2.0.0 click==6.7 requests~=2.20.0 pyfiglet cashier~=1.3 apprise~=0.8.2` |
+| Requirements | At tag 1.2.5: `backoff==1.5.0 schedule==0.5.0 attrdict==2.0.0 click==6.7 requests~=2.20.0 pyfiglet cashier~=1.3 apprise==0.7.7` |
 
 Behaviour checked in source: the three `TRAKTARR_*` env vars are real click `envvar`s. The app has NO web server and opens NO port (no `5555` anywhere in `traktarr.py`, `misc/config.py` or the README). The draft's "5555/http (inferred)" is wrong. `traktarr run` is the long-running mode (a `schedule` loop). On a missing config it writes a default `config.json` and exits 0 ("Please edit the default configuration before running again!"). It also exits after adding new config options on upgrade.
 
@@ -36,7 +36,7 @@ Pure Python app, base provides `/app/venv` (read-only at runtime, per the python
 ## 4. Dockerfile
 1. `ARG VERSION`, `USER root`, `ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 HOME=/tmp TRAKTARR_CONFIG=/config/config.json TRAKTARR_CACHEFILE=/config/cache.db TRAKTARR_LOGFILE=/config/traktarr.log`. (The cache file is app state such as the blacklist/cache, so it stays in `/config`; pip caches go to `/tmp`.)
 2. One `RUN`: `mkdir -p /app/traktarr /usr/share/licenses/traktarr`; `curl -fsSL "https://github.com/l3uddz/traktarr/archive/refs/tags/${VERSION}.tar.gz" | tar xz -C /app/traktarr --strip-components=1`; copy `LICENSE.md` to `/usr/share/licenses/traktarr/`.
-3. Dependencies: `sed -i 's/^attrdict==.*/attrdict3/' /app/traktarr/requirements.txt` then `/app/venv/bin/pip install --no-cache-dir -r /app/traktarr/requirements.txt`. Reason: `attrdict` 2.0.x imports `collections.Mapping`, removed in Python 3.10, so it cannot import on 3.15 (UNVERIFIED by running; attrdict3 2.0.2, MIT, is the maintained drop-in providing the same `attrdict` module, checked on PyPI). Other old pins (`click==6.7`, `requests~=2.20`, `apprise~=0.8.2`, `cashier`, `backoff==1.5.0`) are UNVERIFIED on 3.15: if the build or `--help` fails, relax them one by one and record each change in a comment. No build tools are expected; if a wheel must compile, add `build-essential` in the same layer and purge it after.
+3. Dependencies: `sed -i 's/^attrdict==.*/attrdict3/' /app/traktarr/requirements.txt` then `/app/venv/bin/pip install --no-cache-dir -r /app/traktarr/requirements.txt`. Reason: `attrdict` 2.0.x imports `collections.Mapping`, removed in Python 3.10, so it cannot import on 3.15 (UNVERIFIED by running; attrdict3 2.0.2, MIT, is the maintained drop-in providing the same `attrdict` module, checked on PyPI). Other old pins (`click==6.7`, `requests~=2.20`, `apprise==0.7.7`, `cashier`, `backoff==1.5.0`) are UNVERIFIED on 3.15: if the build or `--help` fails, relax them one by one and record each change in a comment. No build tools are expected; if a wheel must compile, add `build-essential` in the same layer and purge it after.
 4. `chown -R root:root /app/traktarr && chmod -R a+rX /app/traktarr`, remove `/root/.cache` and `/tmp/*`.
 5. `USER apps`, `COPY --chmod=0755 . /`, `VOLUME /config`, `WORKDIR /config`. No `EXPOSE` (no port).
 
@@ -51,7 +51,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/l3udd
 - ports: `ports: []` (the app opens no port).
 - env: `TRAKTARR_CONFIG` (`/config/config.json`), `TRAKTARR_CACHEFILE` (`/config/cache.db`), `TRAKTARR_LOGFILE` (`/config/traktarr.log`), `TZ` (`Etc/UTC`); all `required: false`. All are set in `start.sh` or read by the app.
 - volumes: `/config` (required true: `config.json`, cache, log).
-- dependencies: `sonarr` ✅ and `radarr` ✅ exist in `apps/` (optional at runtime, they are the targets traktarr adds media to; list them as dependencies). Trakt credentials are configured in `config.json`, not env.
+- opt_dependencies: `- name: sonarr` ✅ and `- name: radarr` ✅ (both exist in `apps/`; each is optional, they are the targets traktarr adds media to). Trakt credentials are configured in `config.json`, not env.
 
 ## 7. start.sh
 ```bash
@@ -61,20 +61,20 @@ export TRAKTARR_CACHEFILE="${TRAKTARR_CACHEFILE:-/config/cache.db}"
 export TRAKTARR_LOGFILE="${TRAKTARR_LOGFILE:-/config/traktarr.log}"
 cd /app/traktarr
 if [[ ! -f "${TRAKTARR_CONFIG}" ]]; then
-  # Let the app write its own default config, it exits 0 afterwards.
-  /app/venv/bin/python traktarr.py --help >/dev/null  # sanity import
-  /app/venv/bin/python traktarr.py run || true
+  # The app writes its own default config and exits 0. A real failure (import error) must not be hidden.
+  /app/venv/bin/python traktarr.py run || exit 1
+  [[ -f "${TRAKTARR_CONFIG}" ]] || exit 1
   echo "Default config written to ${TRAKTARR_CONFIG}. Add the Trakt, Sonarr and Radarr settings, then restart."
   exec sleep infinity   # keeps the container up so the user can edit the config (only on first start)
 fi
 exec /app/venv/bin/python traktarr.py run
 ```
-Notes: idempotent, the config is only seeded when missing, no write to `/app` (`__pycache__` is disabled by `PYTHONDONTWRITEBYTECODE`). The `sleep infinity` keeps the container running for the protocol's "still running" criterion and the container test, at the cost of an idle first start; the alternative is to exit 0 and let the orchestrator restart (UNVERIFIED which is preferred, flag in PR). Run `traktarr run` with `--run-now` only if the user adds it; no env wrapper is invented.
+Notes: idempotent, the config is only seeded when missing, no write to `/app` (`__pycache__` is disabled by `PYTHONDONTWRITEBYTECODE`). The `sleep infinity` keeps the container running for the protocol's "still running" criterion and the container test, at the cost of an idle first start; the alternative is to exit 0 and let the orchestrator restart (UNVERIFIED which is preferred, flag in PR). When an upgrade adds config options the app saves them and exits 0, so one restart is needed. Run `traktarr run` with `--run-now` only if the user adds it; no env wrapper is invented.
 
 ## 8. container-test.yaml
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
-timeoutSeconds: 120
+timeoutSeconds: 180
 filePaths:
 - /app/traktarr/traktarr.py
 - /config/config.json
@@ -95,7 +95,7 @@ No port exists, so no tcp/http probe (settings.yaml has `ports: []`). The test r
 - The draft's 5555 port is wrong: the container opens no port, so health checks are file/command based.
 - Python 3.15 vs 2018-era pins is the main risk (see section 4). Possible need for an older python base.
 - Unmaintained upstream (no release since 1.2.5; last commit 2023-03-14), so Renovate rarely fires. The draft's "pinned commit, manual bump" caveat becomes "tag 1.2.5".
-- Needs a Trakt client id/secret, plus Sonarr and Radarr URLs/API keys in `config.json`; first run generates the default and stops, and the Trakt OAuth step is interactive: document `docker exec -it ... python traktarr.py trakt-authentication` (the function is `trakt_authentication` in source; the click command name `trakt-authentication` is UNVERIFIED).
+- Needs a Trakt client id/secret, plus Sonarr and Radarr URLs/API keys in `config.json`; first run generates the default and stops, and the Trakt OAuth step is interactive: document `docker exec -it ... /app/venv/bin/python /app/traktarr/traktarr.py trakt_authentication` with the same `--config` env (the function is `trakt_authentication` and the pinned click 6.7 keeps the underscore; if click is relaxed to 7 or later the command becomes `trakt-authentication`. UNVERIFIED by running, check `--help`).
 - No blockers (no musl, GPU, privileged or arm64 issue; pure Python).
 
 ## 11. Build and test steps
@@ -105,11 +105,11 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name traktarr-probe --read-only --tmpfs /tmp -v traktarr-probe-config:/config traktarr:1.2.5
 docker logs -f traktarr-probe   # expect "Dumping default config to: /config/config.json" and the "Please edit" line
-# second run: edit /config/config.json with dummy values, restart, expect the validation errors for Trakt/Sonarr to be clean, non-crashing log lines
+# second run: restart on the same volume, expect "Automatic mode is now running." and a "Next job at" line (Trakt/Sonarr are only contacted when a job runs)
 docker rm -f traktarr-probe; docker volume rm traktarr-probe-config
 forgetool containers test --image traktarr:1.2.5 --config ./apps/traktarr/container-test.yaml
 ```
-Readiness signal: the default-config message on first start; on a configured start, the `schedule` loop logs after the Trakt/Sonarr validation.
+Readiness signal: the default-config message on first start; on a later start, `Automatic mode is now running.` followed by `Next job at ...`.
 
 ## 12. PR checklist
 - Branch `feat/add-traktarr`, commit `feat(traktarr): add new container`, target `main`.

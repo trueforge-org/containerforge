@@ -7,7 +7,7 @@
 |---|---|
 | Latest stable | `v3.1.2` (GitHub release, published 2026-09-24). Draft also says 3.1.2 (`registry:3`). |
 | Renovate | `datasource=github-releases depName=distribution/distribution versioning=semver` |
-| License | Apache-2.0 (as stated by the distribution-library-image page and the project; the archive ships a `LICENSE` file per the upstream releaser stage) |
+| License | Apache-2.0 (GitHub API `license.spdx_id`; the archive ships a `LICENSE` file per the upstream releaser stage) |
 | Source URL | https://github.com/distribution/distribution |
 | amd64 | https://github.com/distribution/distribution/releases/download/v3.1.2/registry_3.1.2_linux_amd64.tar.gz |
 | arm64 | https://github.com/distribution/distribution/releases/download/v3.1.2/registry_3.1.2_linux_arm64.tar.gz |
@@ -60,7 +60,7 @@ install -m 0644 /tmp/registry/LICENSE /usr/share/licenses/reg/LICENSE
 chown -R apps:apps /app && chmod -R 755 /app
 rm -rf /tmp/registry "/tmp/${f}" "/tmp/${f}.sha256"
 ```
-   If the `.sha256` file turns out to contain `hash  filename`, the `cut` handles it; if it is a bare hash, `cut` also works (verify at build).
+   The v3.1.2 `.sha256` assets are a bare hash (checked for both arches, and equal to the library-image pins); `cut` handles that.
 5. `USER apps`, then `COPY --chmod=0755 . /`.
 6. `EXPOSE 5000`, `VOLUME /config`.
 - No apt packages. Cache/HOME go to `/config`/`/tmp`; nothing is written to `/app`.
@@ -99,8 +99,9 @@ env:
 volumes:
   - path: /config
     required: true
+dependencies: []
 ```
-- Dependencies: none. (`dependencies:` omitted or empty like siblings.)
+- Dependencies: none.
 - `REGISTRY_*` overrides are not listed individually (they are open-ended); mention them in the PR notes.
 
 ## 7. start.sh
@@ -113,7 +114,7 @@ mkdir -p /config/data
 export OTEL_TRACES_EXPORTER="${OTEL_TRACES_EXPORTER:-none}"
 exec /app/registry serve /config/config.yml
 ```
-`defaults/config.yml` (own file, modeled on upstream `config-example.yml` but without the debug server and with rootless paths):
+`defaults/config.yml` (own file, modeled on the `config-example.yml` of `distribution-library-image` at the commit in section 1, but without the debug server and with rootless paths. The `cmd/registry/config-example.yml` in the `distribution` repo at `v3.1.2` is different: it enables htpasswd auth, so do not copy that one unchanged):
 ```yaml
 version: 0.1
 log:
@@ -135,7 +136,7 @@ health:
     interval: 10s
     threshold: 3
 ```
-`http.addr: :5000` binds all interfaces. Upstream's example uses `log.level: debug`; `info` is chosen for production. UNVERIFIED: `delete.enabled` default; keep as upstream example.
+`http.addr: :5000` binds all interfaces. That example uses `log.level: debug`; `info` is chosen for production. `delete.enabled: true` comes from the same example. With no auth this also lets any client delete images, so a maintainer should confirm it.
 
 ## 8. container-test.yaml
 
@@ -174,9 +175,9 @@ filePaths:
 cd apps/reg
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
-docker run --rm -d --name reg-probe --read-only --tmpfs /tmp -v reg-probe-config:/config reg:3.1.2
+docker run --rm -d --name reg-probe -p 5000:5000 --read-only --tmpfs /tmp -v reg-probe-config:/config reg:3.1.2
 docker logs -f reg-probe          # expect: "listening on [::]:5000"
-curl -fsS http://localhost:5000/v2/   # from a container on the same network, expect {} / 200
+curl -fsS http://localhost:5000/v2/   # through the published port (also try from another container); expect {} / 200
 docker rm -f reg-probe; docker volume rm reg-probe-config
 forgetool containers test --image reg:3.1.2 --config ./apps/reg/container-test.yaml
 ```
@@ -187,5 +188,5 @@ Extra manual check: push and pull one image to confirm uploads work on a read-on
 - Branch `feat/add-reg`, commit and PR title `feat(reg): add new container`, target `main`.
 - Fill `.github/PULL_REQUEST_TEMPLATE.md` keeping its sections; put `🤖 This PR is AI generated.` in Notes.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; the `license/cla` check shows status).
-- State honestly what is untested: arm64 build and run, `REGISTRY_*` env overrides, push/pull on read-only rootfs, `.sha256` file format, until actually executed.
+- State honestly what is untested: arm64 build and run, `REGISTRY_*` env overrides, push/pull on read-only rootfs, until actually executed.
 - Check boxes only for steps really done; "Built container locally" only if built.
