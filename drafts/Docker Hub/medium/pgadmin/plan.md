@@ -55,7 +55,7 @@ Fits because pgAdmin is a pure Python web app and the python base already provid
        && /app/pgadmin/venv/bin/pip install --no-cache-dir /tmp/pgadmin4.whl gunicorn \
        && rm -f /tmp/pgadmin4.whl
    ```
-   The exact PyPI wheel URL and sha256 must be read from the PyPI JSON (section 1, UNVERIFIED) before this step is written. Do NOT invent the hash.
+   UNVERIFIED: `/usr/local/bin/python` path and the hard-coded `python3.15` site-packages path in `start.sh`; the base already ships `/app/venv` (python-runtime rule: read-only, use directly), so installing into `/app/venv` at build time is the simpler alternative. The exact PyPI wheel URL and sha256 must be read from the PyPI JSON (section 1, UNVERIFIED) before this step is written. Do NOT invent the hash.
 5. Ship the license. The wheel's `LICENSE` (or the repo `LICENSE`) goes to `/usr/share/licenses/pgadmin/LICENSE`, `COPY` or `unzip` from the wheel dist-info (UNVERIFIED path inside the wheel).
 6. `ENV PIP_CACHE_DIR=/tmp/pip-cache` (rule: caches in `/tmp`). Clean `/tmp/*` and apt lists after install.
 7. Permissions: `chown -R root:root /app/pgadmin && chmod -R 755 /app/pgadmin` (bazarr pattern: runtime user cannot modify the app).
@@ -152,7 +152,7 @@ dependencies: []
 ```
 
 - Ports: 5050 only (our listener). Upstream 80/443 are not used; do not list them.
-- `PGADMIN_DEFAULT_EMAIL` and `PGADMIN_DEFAULT_PASSWORD` are UNVERIFIED names and defaults. Confirm the names in `pkg/docker/entrypoint.sh` before finalising. Defaults must match `start.sh` (rule). The `required: true` flag needs a non-empty default or a start-script fallback (settings rule); the default above is a placeholder that must be replaced by whatever `start.sh` seeds.
+- `PGADMIN_DEFAULT_EMAIL` and `PGADMIN_DEFAULT_PASSWORD` are UNVERIFIED names and defaults. Confirm the names in `pkg/docker/entrypoint.sh` before finalising. Defaults must match `start.sh` (rule). The `required: true` flag needs a non-empty default or a start-script fallback (settings rule); the defaults above are placeholders only. A baked default password is a shipped secret (start-script rule: no secrets in images): UNVERIFIED design, decide whether `start.sh` generates a random password on first run (logged once) or the variable is mandatory with no default.
 - `dependencies: []` (no ContainerForge app required).
 - Do not add env vars the app does not read.
 

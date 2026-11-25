@@ -7,12 +7,12 @@
 | --- | --- |
 | Version to build | 0.5.5 is the latest GitHub release (published 2024-11-14T23:42:34Z, not prerelease). Source: https://api.github.com/repos/Peppermint-Lab/peppermint/releases/latest. The release has NO assets (no binary, no checksum file). Repo `pushed_at` is 2025-09-21, so `main` has moved on since the release. Decision needed (section 10). |
 | Chart image | `docker.io/pepperlabs/peppermint:latest`. Docker Hub `latest` last pushed 2024-11-15T20:11:04Z, architectures amd64 and arm64. Stale, unversioned (https://hub.docker.com/v2/repositories/pepperlabs/peppermint/tags?page_size=5&ordering=last_updated). Do not copy from it. |
-| Renovate | Source build pinned by commit: `// renovate: datasource=git-refs depName=https://github.com/Peppermint-Lab/peppermint currentValue=main` (precedent: `apps/tvheadend`, `apps/fenrus`). If the decision is the 0.5.5 tag instead, use `datasource=github-releases depName=Peppermint-Lab/peppermint versioning=loose`. |
+| Renovate | Source build pinned by commit: `// renovate: datasource=git-refs depName=https://github.com/Peppermint-Lab/peppermint currentValue=main` (precedent: `apps/tvheadend`; `apps/fenrus` is only a planned app, not in `apps/`). If the decision is the 0.5.5 tag instead, use `datasource=github-releases depName=Peppermint-Lab/peppermint versioning=loose`. |
 | License | UNVERIFIED. GitHub API reports `NOASSERTION` (https://api.github.com/repos/Peppermint-Lab/peppermint). Read the repo `LICENSE` file and set SPDX before writing `docker-bake.hcl`. |
 | Source URL | https://github.com/Peppermint-Lab/peppermint |
 | Download | No prebuilt binary. Source archive `https://github.com/Peppermint-Lab/peppermint/archive/<commit-or-tag>.tar.gz`. Tag `0.5.5` archive URL is UNVERIFIED (the release exists, the tag not fetched). |
 | Per-arch download | Same source archive for amd64 and arm64. Node builds run per arch under `docker buildx`, no arch-specific download. |
-| Checksum source | None published. The archive is pinned by commit SHA (content-addressed), as `apps/fenrus` does. |
+| Checksum source | None published. The archive is pinned by commit SHA (content-addressed), (same approach as the fenrus plan; `apps/fenrus` does not exist yet). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/Peppermint-Lab/peppermint/ba6e2179f9409db76abeb9a3007a262160e24628/dockerfile (fetched). Builder: `FROM node:lts AS builder`, `apt-get install build-essential python3`, `npm i -g prisma`, `npm i -g typescript@latest --force`, `cd apps/api && npm install --production && npm i --save-dev @types/node && npm run build`, `cd apps/client && yarn install --production --ignore-scripts`, `yarn add --dev typescript @types/node`, `yarn build`. Runner: `FROM node:lts AS runner`, copies `apps/api`, `apps/client/.next/standalone`, `.next/static`, `public`, `ecosystem.config.js`; `EXPOSE 3000 5003`; `npm install -g pm2`; `CMD ["pm2-runtime", "ecosystem.config.js"]`. No `ENV`, `VOLUME`, `USER`, `ENTRYPOINT`, `WORKDIR` in the runner. Runs as root upstream. |
 | Ports | 3000 (client UI) and 5003 (API), from upstream `EXPOSE`. |
 | Env vars | UNVERIFIED. The upstream Dockerfile sets none. The real runtime variables (database URL, JWT or secret, client-to-API URL) must be read from `apps/api` and `apps/client` source at the chosen commit before `settings.yaml` is written. Do not guess. |
@@ -73,7 +73,7 @@ Foundation for build stage: the same python-node image, so the build and runtime
 
 ## 5. docker-bake.hcl
 
-Same shape as `apps/pgadmin/docker-bake.hcl` (four standard targets, default group, OCI labels). Key values:
+Same shape as `apps/adguardhome-sync/docker-bake.hcl` (`apps/pgadmin` does not exist yet; four standard targets, default group, OCI labels). Key values:
 
 ```hcl
 variable "APP" { default = "peppermint" }
@@ -174,7 +174,7 @@ filePaths:
 
 ## 10. Risks, caveats and open questions
 
-- Version choice (decision needed): the only GitHub release (0.5.5, 2024-11-14) has no binaries. The repo has moved on (pushed 2025-09-21). This plan proposes pinning a commit SHA on `main` (same as `apps/fenrus`). Reviewer must confirm the commit is one the upstream considers stable.
+- Version choice (decision needed): the only GitHub release (0.5.5, 2024-11-14) has no binaries. The repo has moved on (pushed 2025-09-21). This plan proposes pinning a commit SHA on `main` (a planned approach, see the fenrus plan; `apps/tvheadend` pins a branch). Reviewer must confirm the commit is one the upstream considers stable.
 - Chart image is stale: `pepperlabs/peppermint:latest` was last pushed 2024-11-15. The ContainerForge image will not match it. Document that in the PR.
 - Base choice conflict: python-node (draft and sibling pattern) vs ubuntu (porter table for Node). Reviewer decides; this plan assumes python-node.
 - Runtime env vars are unknown (section 1). Blocking: `settings.yaml` and `start.sh` cannot be finished until the source is read at the chosen commit.

@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | `v6.1.2`. GitHub release `v6.1.2` published 2026-10-19 (no release assets). Docker Hub `brandawg93/peanut` tags `6.1.2` and `latest` (last_updated 2026-10-28). Sources: https://api.github.com/repos/Brandawg93/PeaNUT/releases/latest (via `gh api`) and https://hub.docker.com/v2/repositories/brandawg93/peanut/tags?page_size=5&ordering=last_updated |
 | Draft tag | Draft and chart use `docker.io/brandawg93/peanut:6.1.2`. Same version. |
-| Renovate | `datasource=github-releases depName=Brandawg93/PeaNUT versioning=semver` (release tags exist). UNVERIFIED: the `v` prefix handling; check a sibling with a `v`-prefixed tag (`apps/budge` uses `v${VERSION}` fallback) and match it. |
+| Renovate | `datasource=github-releases depName=Brandawg93/PeaNUT versioning=semver` (release tags exist). UNVERIFIED: the `v` prefix handling; `apps/budge` does not use a `v`-prefixed VERSION: its Dockerfile tries `${VERSION}` and falls back to `v${VERSION}` for the tarball URL. Check how renovate treats the `v` here. |
 | License | Apache-2.0 (GitHub API `spdx_id`, https://api.github.com/repos/Brandawg93/PeaNUT via `gh api`). `LICENSE` in `docker-bake.hcl` = `Apache-2.0`. |
 | Source URL | https://github.com/Brandawg93/PeaNUT |
 | Download | No prebuilt binary and no release assets. Source tarball `https://github.com/Brandawg93/PeaNUT/archive/refs/tags/${VERSION}.tar.gz` (`VERSION=v6.1.2`), built with pnpm and Next.js. |
@@ -42,7 +42,7 @@ UNVERIFIED: whether `python-node:3.15.2` ships `corepack` (needed for `pnpm`). C
 ## 4. Dockerfile
 
 1. Build stage `FROM <python-node> AS build`, `ARG VERSION` (`v6.1.2`), `ARG TARGETARCH`, `USER root`.
-2. Download the pinned source tarball to `/tmp/src`:
+2. Download the pinned source tarball to `/tmp/src` (`mkdir -p /tmp/src` first):
    `curl -fsSL "https://github.com/Brandawg93/PeaNUT/archive/refs/tags/${VERSION}.tar.gz" | tar xz -C /tmp/src --strip-components=1`
 3. `ENV PNPM_HOME=/tmp/pnpm PATH=/tmp/pnpm:$PATH NEXT_TELEMETRY_DISABLED=1 NPM_CONFIG_CACHE=/tmp/npm-cache`. All caches in `/tmp`, never `/config` or `/app`.
 4. `cd /tmp/src && corepack enable && pnpm i --frozen-lockfile --ignore-scripts && pnpm run build`. The upstream `next-ws` script is also run (`pnpm run next-ws`) before `build`, matching upstream. UNVERIFIED: that `next-ws` exists in `package.json` at 7ad39fd. Check the `scripts` block when building.
@@ -132,7 +132,7 @@ target "image-all" {
 }
 ```
 
-Validate with `docker buildx bake --print` from `apps/peanut/`. The tag keeps its `v` prefix so the image tag matches the release tag. Alternatively strip the `v` in the image tag if sibling convention differs (check `apps/budge`).
+Validate with `docker buildx bake --print` from `apps/peanut/`. The tag keeps its `v` prefix so the image tag matches the release tag. Alternatively strip the `v` in the image tag if sibling convention differs (`apps/budge` uses no `v` in VERSION and falls back in the Dockerfile).
 
 ## 6. settings.yaml
 
@@ -213,7 +213,7 @@ filePaths:
 - `http` path `/`: UNVERIFIED that `/` returns 200 without a configured NUT server. Check in the build round. If the first-run redirect returns a non-200, use the status-returning route the app serves (confirm from the app source, do not guess).
 - `filePaths` cover the Next.js standalone server entry, the entrypoint, the static assets, and the license.
 - No DB dependency and no env var needed to start, so the default path is the path under test. The NUT server is not reachable in the test, and the app is expected to start and serve its UI without it (UNVERIFIED: confirm in step 11; if the app exits without a NUT server, record it as a blocker and check the protocol's DB-style narrowing does not apply, since NUT is not a ContainerForge dependency).
-- `timeoutSeconds: 120`: Next.js standalone start can be slow. Match `apps/budge` (same family) if it differs.
+- `timeoutSeconds: 120`: Next.js standalone start can be slow. `apps/budge` sets no `timeoutSeconds`; 120 is a plan choice.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

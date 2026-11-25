@@ -43,9 +43,9 @@ No `root/`, no `DOWNSTREAM_CHANGES.md` (not a `FROM` base). `etc/` is not needed
 1. Build stage `FROM <ubuntu digest> AS build`, `ARG VERSION`, `USER root`.
 2. `apt-get install -y --no-install-recommends ruby-full build-essential git libvips-dev` (the gems that need native code compile against it). Pin the Ruby package to the ubuntu 26.04 archive version and check it is at least the Ruby the Gemfile needs (UNVERIFIED: Gemfile not read). `rm -rf /var/lib/apt/lists/*`.
 3. `ENV GEM_HOME=/tmp/gems BUNDLE_PATH=/tmp/bundle BUNDLE_APP_CONFIG=/tmp/bundle-config GEM_PATH=/tmp/gems` so no cache writes land in the image or in `/config`.
-4. `RUN curl -fL "https://github.com/waschinski/photo-stream/archive/refs/tags/${VERSION}.tar.gz" | tar xz -C /tmp/src --strip-components=1`; fetch `curl` and `tar` from the base (already present, see base image rules).
+4. `RUN mkdir -p /tmp/src && curl -fL "https://github.com/waschinski/photo-stream/archive/refs/tags/${VERSION}.tar.gz" | tar xz -C /tmp/src --strip-components=1`; fetch `curl` and `tar` from the base (already present, see base image rules).
 5. `cd /tmp/src && bundle install && bundle exec jekyll build --destination /tmp/site` (build output only in `/tmp`, never `/app`).
-6. Final stage `FROM <nginx digest>`, `USER root`, `mkdir -p /app/site && cp -r /tmp/site/. /app/site/`, `chown -R apps:apps /app && chmod -R 755 /app`. The nginx sibling is not re-installed (base reuse rule).
+6. Final stage `FROM <nginx digest>`, `USER root`, `COPY --from=build /tmp/site/ /app/site/` (the build stage `/tmp` is not visible in the final stage, so a plain `cp` would fail), `chown -R apps:apps /app && chmod -R 755 /app`. The nginx sibling is not re-installed (base reuse rule).
 7. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/photo-stream/LICENSE` (UNVERIFIED: a LICENSE file is present; the GitHub API reports MIT).
 8. Tail:
 
@@ -149,7 +149,7 @@ fi
 exec nginx -c /config/nginx.conf -g "daemon off;"
 ```
 
-`/config/nginx.conf` is seeded only when missing, and it points `root` at `/app/site`. `exec` keeps signals. No write to `/app`. Caches stay in `/tmp`. The nginx sibling's `CMD` is replaced by this script, so the base's `/config/nginx.conf` contract is preserved. UNVERIFIED: whether the nginx sibling's `docker-entrypoint.d` or `defaults` already seed `/config/nginx.conf`; check `apps/nginx/defaults` and reuse rather than duplicate.
+`/config/nginx.conf` is seeded only when missing, and it points `root` at `/app/site`. `exec` keeps signals. No write to `/app`. Caches stay in `/tmp`. The nginx sibling's `CMD` is replaced by this script, so the base's `/config/nginx.conf` contract is preserved. Checked against the repo: `apps/nginx/defaults/nginx.conf` does `include /config/sites/*.conf` and its `default.conf` listens on 8080 with `root /usr/share/nginx/html`; `apps/it-tools` seeds `/config/sites/default.conf` from `/defaults/default.conf` via `docker-entrypoint.d/10-copyconfig.sh`. Prefer that pattern (ship `defaults/default.conf` with `root /app/site;` and a `docker-entrypoint.d` seed script, keep the base `CMD`) over a custom `start.sh` and a replacement `nginx.conf`. UNVERIFIED: what seeds `/config/nginx.conf` in the base (not found in `apps/nginx`).
 
 ## 8. container-test.yaml
 

@@ -34,7 +34,7 @@ No `defaults/`, `etc/` or `health/` (Tika needs no seeded state). No `root/`. No
 
 `FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:bba631340c8aefc1a10656a894475312bd89a9dd75d9e5da12c3098242f1e8f2`
 
-Fits because the app is a Java server jar, and the draft picks java21 as the conservative choice (java25 is the alternative: `ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d`). Upstream uses Java 17; java21 is the closest supported runtime that the base provides. Closest siblings: `apps/nzbhydra2` and `apps/airsonic-advanced` (Java apps on ContainerForge java bases).
+Fits because the app is a Java server jar, and the draft picks java21 as the conservative choice (java25 is the alternative: `ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d`). Upstream uses Java 17; java21 is the closest supported runtime that the base provides. Closest siblings: `apps/doplarr` (java21 base, same pinned digest) and `apps/hytale` (java25). `apps/nzbhydra2` and `apps/airsonic-advanced` use java17.
 
 Note: the `Dockerfile` must not use the upstream `ubuntu:jammy` base.
 
@@ -42,7 +42,7 @@ Note: the `Dockerfile` must not use the upstream `ubuntu:jammy` base.
 
 1. `ARG VERSION` and `ARG TARGETARCH` (no arch mapping is needed, the jar is noarch).
 2. `FROM` line from section 3, followed by `USER root` only for the download step.
-3. Download, verify and install in one `RUN`:
+3. First `mkdir -p /app/bin /tika-extras`, then download, verify and install in one `RUN`:
    - `apt-get install -y --no-install-recommends gnupg` only if GPG verification is kept in the build. Import the Tika KEYS file from `https://downloads.apache.org/tika/KEYS` (or archive mirror) and run `gpg --verify`. If the signature check cannot be pinned, use the `.sha512` file instead (`sha512sum -c`). Prefer the `.sha512` check, which needs no extra package.
    - `curl -fsSL -o /app/bin/tika-server.jar "https://archive.apache.org/dist/tika/${VERSION}/tika-server-standard-${VERSION}.jar"`
    - `curl -fsSL -o /tmp/tika.sha512 "https://archive.apache.org/dist/tika/${VERSION}/tika-server-standard-${VERSION}.jar.sha512"`, then `echo "$(cut -d' ' -f1 /tmp/tika.sha512)  /app/bin/tika-server.jar" | sha512sum -c -`. Check the file format of the `.sha512` file first (UNVERIFIED: its exact layout was not fetched).

@@ -42,7 +42,7 @@ UNVERIFIED: the Node major version in `python-node:3.15.2`. Check with `node -v`
 ## 4. Dockerfile
 
 1. Build stage `FROM <python-node> AS build`, `ARG VERSION`, `USER root`.
-2. Download the source tarball and unpack to `/tmp/src`:
+2. Download the source tarball and unpack to `/tmp/src` (run `mkdir -p /tmp/src` first, `tar -C` needs it to exist):
    `curl -fsSL "https://github.com/cglatot/pasta/archive/refs/tags/${VERSION}.tar.gz" | tar xz -C /tmp/src --strip-components=1`
 3. `ENV NPM_CONFIG_CACHE=/tmp/npm-cache` (npm cache in `/tmp`, rule).
 4. `cd /tmp/src && npm ci && npm run build`. Then `npm prune --omit=dev` (runtime needs only production deps; check after the build that `server/src` imports are satisfied).
@@ -207,7 +207,7 @@ filePaths:
 - `filePaths` cover the server entry, the built frontend, and the license.
 - No env var is needed to start. The test runs without any, so the path with the default config is the path under test.
 - No DB dependency: no narrowing exception applies.
-- `timeoutSeconds: 120`: match a sibling Node app of the same family (`apps/budge` uses its own value; check that file and use the same).
+- `timeoutSeconds: 120`: `apps/budge` sets no `timeoutSeconds`; 120 is a plan choice.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

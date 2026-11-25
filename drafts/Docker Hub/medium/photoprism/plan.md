@@ -48,7 +48,7 @@ Upstream image is built on `photoprism/develop:questing-slim`, not Ubuntu. We re
    - `libvips-tools` (thumbnail generation; draft inferred)
    - `libimage-exiftool-perl` (metadata; draft inferred)
    - `ca-certificates`, `curl` already in base (do not reinstall).
-   - Pin nothing unless the package is needed to match `VERSION` (apt versions are the toolchain, not the app; cf. `apps/fenrus` reasoning). Record the exact versions in the PR body.
+   - Pin nothing unless the package is needed to match `VERSION` (apt versions are the toolchain, not the app; same reasoning as the fenrus plan; `apps/fenrus` does not exist yet). Record the exact versions in the PR body.
 4. Fetch and verify the tarball for `TARGETARCH`:
    ```dockerfile
    RUN curl -fsSL -o /tmp/photoprism.tar.gz \
@@ -87,7 +87,7 @@ Upstream image is built on `photoprism/develop:questing-slim`, not Ubuntu. We re
 
 ## 5. docker-bake.hcl
 
-Same shape as `apps/adguardhome-sync/docker-bake.hcl` and `apps/pgadmin/docker-bake.hcl`.
+Same shape as `apps/adguardhome-sync/docker-bake.hcl`.
 
 ```hcl
 variable "APP" { default = "photoprism" }
@@ -113,7 +113,7 @@ ports:
     required: true
 env:
   - name: PHOTOPRISM_ADMIN_PASSWORD
-    default: "change-me"
+    default: "change-me"   # placeholder; UNVERIFIED design, a baked default password is a shipped secret
     required: true
   - name: PHOTOPRISM_SITE_URL
     default: "http://localhost:2342/"
