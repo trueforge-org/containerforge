@@ -9,7 +9,7 @@ The draft's binary link is wrong. The AppImage files in the release are the Elec
 | --- | --- |
 | Version to build | `3.10.2`. Latest release (https://github.com/redis/RedisInsight/releases/latest redirects to tag 3.10.2). Chart uses `3.10.1` (Hub, 2026-11-18). Draft binary link is `3.10.0`. |
 | Renovate | `// renovate: datasource=github-releases depName=redis/RedisInsight versioning=semver` (convention; not fetched) |
-| License | Repo LICENSE on `main` is Server Side Public License v1 (SSPL-1.0), https://raw.githubusercontent.com/RedisInsight/RedisInsight/main/LICENSE. GitHub API reports NOASSERTION. The LICENSE at the pinned tag is UNVERIFIED: check it before writing `docker-bake.hcl`. |
+| License | Repo LICENSE on `main` is Server Side Public License v1 (SSPL-1.0), https://raw.githubusercontent.com/RedisInsight/RedisInsight/main/LICENSE. GitHub API reports NOASSERTION. The LICENSE at tag `3.10.2` is also Server Side Public License Version 1 (checked on raw.githubusercontent.com). |
 | Source URL | https://github.com/redis/RedisInsight. Tag tarball `https://github.com/redis/RedisInsight/archive/refs/tags/3.10.2.tar.gz` |
 | Per-arch download | Not usable as a server binary. Release assets `Redis-Insight-linux-x86_64.AppImage` and `Redis-Insight-linux-arm64.AppImage` (https://github.com/redis/RedisInsight/releases/expanded_assets/3.10.2) are Electron desktop bundles. Build from the source tarball on both arches. |
 | Checksum source | None published (no `.sha256` in the release assets). Source tarball checksum: UNVERIFIED; compute and pin it in the Dockerfile during the build step. |
@@ -82,7 +82,7 @@ variable "SOURCE" {
 }
 ```
 
-`LICENSE` must match the license of the pinned tag (section 1). Then the four standard targets and the default group, copied from `apps/budge/docker-bake.hcl` (python-node precedent). Validate with `docker buildx bake --print`.
+`LICENSE` is `SSPL-1.0`, matching the LICENSE at the pinned tag (section 1). Then the four standard targets and the default group, copied from `apps/budge/docker-bake.hcl` (python-node precedent). Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -120,7 +120,8 @@ Only add env vars the app really reads (`RI_APP_FOLDER_ABSOLUTE_PATH` is set ups
 ## 8. container-test.yaml
 
 ```yaml
-# yaml-language-server: $schema=<same URL as siblings>
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
 timeoutSeconds: 120
 tcp:
   - port: '5540'
@@ -153,7 +154,7 @@ Draft expectations reconciled: chart runs as UID 0 with `runAsNonRoot: false`. T
 - **Telemetry:** `RI_SEGMENT_WRITE_KEY` is a build arg upstream. Leave it empty; do not bake a key.
 - **Auth:** the UI has no auth by default (upstream docs https://redis.io/docs/latest/operate/redisinsight/ not fetched: UNVERIFIED). Say so in the PR; users should put it behind a reverse proxy.
 - **EULA:** the first use asks for EULA acceptance in the UI (inferred from the draft; UNVERIFIED on a fetched page).
-- **Licence:** SSPL-1.0 on `main` (section 1). Confirm the tagged LICENSE before merging.
+- **Licence:** SSPL-1.0 on `main` and at tag `3.10.2` (section 1).
 - **Binary link:** the draft's AppImage link is a desktop bundle and is not used.
 
 ## 11. Build and test steps
@@ -177,5 +178,5 @@ Expected readiness signal: the Node server log with a line for listening on port
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep sections and checkboxes, check only applicable boxes.
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it. The `license/cla` check shows status.
-- Say what was not tested: build on arm64, the runtime HTTP check on `/`, and the license text at the pinned tag.
+- Say what was not tested: build on arm64, the runtime HTTP check on `/`, and the SSPL status for redistribution.
 - `docker buildx bake --print` must pass; bake `VERSION` equals Dockerfile `ARG VERSION`.

@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | 2.0.8 (GitHub tag `v2_0_8`, published 2025-02-22). Draft tag matches. Source: https://api.github.com/repos/pwm-project/pwm/releases/latest |
 | Renovate | `datasource=github-releases depName=pwm-project/pwm versioning=semver`. Tags use underscores (`v2_0_8`); the build derives the tag from `VERSION` (`2.0.8` -> `v2_0_8`). |
-| License | UNVERIFIED: GitHub reports `NOASSERTION` (license name "Other"). Read the repo `LICENSE` file and set `LICENSE` in `docker-bake.hcl` before building. |
+| License | Apache-2.0: GitHub reports `NOASSERTION`, but the repo `LICENSE` file is the Apache License 2.0 text under a short PWM copyright header (read from https://raw.githubusercontent.com/pwm-project/pwm/master/LICENSE). Use `Apache-2.0` for `LICENSE` in `docker-bake.hcl`. |
 | Source URL | https://github.com/pwm-project/pwm |
 | Binary assets | https://github.com/pwm-project/pwm/releases/download/v2_0_8/pwm-2.0.8.war (WAR, platform independent), `pwm-onejar-2.0.8.jar`, `pwm-docker-image-2.0.8.tar` (upstream image, not used). |
 | Checksum source | UNVERIFIED: no `.sha256` or checksum asset is listed on the release. Record the SHA-256 of the WAR at build time in the plan review, and say so in the PR. |
@@ -29,7 +29,7 @@
 
 ## 3. Base image
 
-Use the java8 base image as the `FROM` line, with its tag and digest copied from the existing java8 consumers in `apps/` (the `apps/java8` image itself is built from `ghcr.io/trueforge-org/ubuntu`, so do not copy its build). Confirm the exact tag and digest in `apps/java8/docker-bake.hcl` before writing it.
+`FROM ghcr.io/trueforge-org/java8:8@sha256:a245de24c11e3e79eec8dc598429a951c5bc71011f38a649d076816159b25ff5` (the tag and digest used by `apps/davos` and `apps/habridge`; the `apps/java8` image itself is built from `ghcr.io/trueforge-org/ubuntu`, so do not copy its build).
 
 Reason: the upstream WAR needs Java 8 (the draft's tomcat jre8 choice). The java8 sibling is Ubuntu-based Temurin 8 with `JAVA_HOME=/opt/java/openjdk`, so it covers the runtime without the alpine/musl image. Closest sibling for the Java web-app shape: `apps/airsonic-advanced` (WAR deployed under a Tomcat `/run` dir, `USER apps`), which uses java17; the pwm plan uses java8 because the WAR is built for Java 8.
 
@@ -72,7 +72,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"  // set from the repo LICENSE file before build
+  default = "Apache-2.0"
 }
 
 variable "SOURCE" {
@@ -145,7 +145,7 @@ Reconciled with the draft's security expectations: the chart runs as root (UID 0
 - Tomcat 9 vs. the sibling: the upstream image uses `tomcat:9-jre8-alpine`. Tomcat is not in the ContainerForge base, so the Dockerfile installs it from the Apache tarball. Its version and checksum are UNVERIFIED (not fetched). Blocker until they are confirmed.
 - Alternative (may be simpler): run `pwm-onejar-2.0.8.jar` directly with `java -jar` on the java8 base, which removes Tomcat entirely. UNVERIFIED: whether the one-jar starts a web server on a port and whether it needs a context path. Decide before writing the Dockerfile; check the pwm docs.
 - Checksum: no checksum asset is published. The WAR's SHA-256 must be recorded when the plan is implemented.
-- License: `NOASSERTION` upstream. Do not set `LICENSE` until the repo LICENSE file is read.
+- License: GitHub reports `NOASSERTION`, the repo `LICENSE` file is Apache-2.0 (section 1). Ship that file in `/usr/share/licenses/pwm/`.
 - The draft's `alpine` upstream image and the chart's `alpine` tag: the rebuilt image is glibc Ubuntu, so the runtime differs. The upstream JDBC drivers (MySQL, PostgreSQL, MongoDB, MariaDB) are only needed for external database backends. Leave them out of the image unless a user needs one, and say so in the PR.
 - arm64: no upstream image. The one-jar or WAR path is platform-independent; needs a real arm64 build to confirm (untested).
 - The draft's `/usr/share/pwm` path and the chart's `pvc` default are not the same as `/config/pwm`; migrating existing installs is a manual step to state in the PR.
@@ -172,5 +172,5 @@ Readiness signal: Tomcat logs `Server startup in [...] ms` and the pwm context d
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep sections, check only applicable boxes.
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA notice: a signed CLA is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it; the `license/cla` check shows status.
-- Untested to state honestly: the Tomcat install and checksum, the WAR checksum, the license, arm64, the http probe status code, and the upgrade path from `/usr/share/pwm`.
+- Untested to state honestly: the Tomcat install and checksum, the WAR checksum, arm64, the http probe status code, and the upgrade path from `/usr/share/pwm`.
 - `docker buildx bake --print` passes; bake `VERSION` equals the Dockerfile `ARG VERSION`; no test assertion weakened.

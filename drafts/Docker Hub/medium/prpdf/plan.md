@@ -40,7 +40,7 @@ Do not use `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 
 1. `ARG VERSION=1.0.2` (matches `docker-bake.hcl`), `ARG PIP_...` only if pinned constraints are used.
 2. `USER root` for apt installs only.
-3. `apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-deu poppler-utils qpdf ghostscript jbig2enc`, then `rm -rf /var/lib/apt/lists/*`. Replaces the upstream builder stage (no source compile). Versions: ghostscript and jbig2enc from apt will differ from upstream 10.03.1 and the git HEAD jbig2enc; pin the apt versions where apt provides them and check against the output (see section 10).
+3. `apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-deu poppler-utils qpdf ghostscript jbig2enc` (UNVERIFIED: the apt package name for jbig2enc on Ubuntu 26.04, check with `apt-cache policy`), then `rm -rf /var/lib/apt/lists/*`. Replaces the upstream builder stage (no source compile). Versions: ghostscript and jbig2enc from apt will differ from upstream 10.03.1 and the git HEAD jbig2enc; pin the apt versions where apt provides them and check against the output (see section 10).
 4. Download the source: `curl -fL https://github.com/maschhoff/pdfscanexplorer/archive/refs/tags/${VERSION}.tar.gz | tar xz -C /tmp/src --strip-components=1`. Verify the tag's commit SHA is recorded in the bake file.
 5. Install Python deps into `/app/venv` at build time (not at runtime): `/app/venv/bin/pip install -r /tmp/src/requirements.txt`. Pip cache is `/tmp` (base sets `PIP_NO_CACHE_DIR=1`). Python-runtime rule: `/app/venv` read-only at runtime, no runtime writes.
 6. Pin Python versions. The requirements file is unpinned. Either pin exact versions in a `constraints.txt` under `defaults/` and pass `-c`, or keep unpinned and record the resolved list in the PR. Preferred: constraints file (renovate can bump it). Decision in section 10.
@@ -49,7 +49,7 @@ Do not use `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 9. Add the upstream MIT `LICENSE` to `/usr/share/licenses/prpdf/`.
 10. `ENV FLASK_APP=prpdf.py FLASK_RUN_HOST=0.0.0.0 FLASK_RUN_PORT=5000` (see section 9 for port). `ENV WORKDIR=/app/prpdf`.
 11. `USER apps`, `COPY --chmod=0755 . /`, `COPY --chmod=0755 start.sh /start.sh`.
-12. `EXPOSE` the port from settings.yaml only after the port is confirmed.
+12. `EXPOSE` the port from settings.yaml only after the port is confirmed. End with `VOLUME /config`.
 
 ## 5. docker-bake.hcl
 

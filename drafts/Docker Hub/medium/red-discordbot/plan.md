@@ -39,7 +39,7 @@ Blocked choice. Two options:
 - **Option A (preferred, matches upstream):** `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with a pinned CPython 3.11 added in the build stage (for example a `uv`-managed or tarball-built 3.11 in `/usr/local`), then `/app/venv` created with it. The runtime then has no Python 3.15 dependency. The exact CPython 3.11 source and checksum are UNVERIFIED and must be pinned in the build.
 - **Option B:** `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. Not viable: Red 3.5.24 refuses Python 3.15 (`requires_python <3.12`).
 
-Closest sibling: `apps/python` (venv at `/app/venv`, read-only rule) and `apps/bazarr` (python venv pattern). Python rules apply: `/app/venv` is read-only; cogs' runtime installs go to `/config/venv`, seeded from `/app/venv` only when missing (python-runtime instructions).
+Closest sibling: `apps/python` (venv at `/app/venv`, read-only rule) and `apps/bazarr` (python venv pattern; note Option A does not use the python base, so the `/app/venv` layout must be recreated by hand). Python rules apply: `/app/venv` is read-only; cogs' runtime installs go to `/config/venv`, seeded from `/app/venv` only when missing (python-runtime instructions).
 
 ## 4. Dockerfile
 
@@ -112,7 +112,7 @@ volumes:
 dependencies: []
 ```
 
-Copy the exact schema header from a sibling (`apps/mastodon/settings.yaml` shows `schema_version: 1`; use the same `$schema` line as the siblings, not the one above if it differs). Only list env vars the app reads (names confirmed in section 1). `ports: []` because no port is confirmed (section 10). `dependencies: []`; PostgreSQL is only needed for `STORAGE_TYPE=postgres`, so it is not a hard dependency and goes under `opt_dependencies` if listed at all.
+The header above is the one used by sibling `settings.yaml` files. Only list env vars the app reads (names confirmed in section 1). `ports: []` because no port is confirmed (section 10). `dependencies: []`; PostgreSQL is only needed for `STORAGE_TYPE=postgres`, so it is not a hard dependency and goes under `opt_dependencies` if listed at all.
 
 ## 7. start.sh
 
@@ -127,7 +127,8 @@ Copy the exact schema header from a sibling (`apps/mastodon/settings.yaml` shows
 ## 8. container-test.yaml
 
 ```yaml
-# yaml-language-server: $schema=<same URL as siblings>
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
 timeoutSeconds: 180
 filePaths:
   - /app/venv/bin/redbot

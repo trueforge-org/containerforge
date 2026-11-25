@@ -34,7 +34,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 
 - Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The java17 image is a JRE only, so it cannot run Maven. Install a JDK and Maven from apt in this stage.
 - Final stage: `FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`. Nearest supported runtime to upstream Java 16.
-- Alternative: `ghcr.io/trueforge-org/java21:25.0.1@...` is not the nearest runtime. Use java17 unless the pom requires 21.
+- Alternative: `ghcr.io/trueforge-org/java21` (bake VERSION `21.0.8+9`; image tag form UNVERIFIED) is not the nearest runtime. Use java17 unless the pom requires 21.
 - Closest siblings: `apps/java17`, `apps/nzbhydra2` (Java app on java base, `/config` volume). `apps/java21` exists as the alternative.
 
 ## 4. Dockerfile
@@ -46,7 +46,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 5. `cd /tmp/src && mvn -B -DskipTests package`. Output: `target/promcord-*-SNAPSHOT-shaded.jar`.
 6. Final stage: `FROM <java17>`, `USER root`, `mkdir -p /app/promcord`, `COPY --from=build /tmp/src/target/promcord-*-SNAPSHOT-shaded.jar /app/promcord/promcord.jar`. Add the upstream license file to `/usr/share/licenses/promcord/`.
 7. `USER apps`, `COPY --chmod=0755 . /`, `COPY --chmod=0755 start.sh /start.sh`.
-8. No `EXPOSE` unless the metrics port is verified (section 10). No `VOLUME` in the Dockerfile (declared in settings.yaml).
+8. No `EXPOSE` unless the metrics port is verified (section 10). End the file with `VOLUME /config` (repo rule), also declared in settings.yaml.
 
 ## 5. docker-bake.hcl
 
@@ -63,7 +63,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 - `upstream_env_url: "https://github.com/nimarion/promcord"`
 - `ports`: empty until the metrics port is verified (section 10). Do not list 8080 or any guess.
 - `env`:
-  - `DISCORD_TOKEN`, `required: true`, no default. Decision pending (section 10): the token cannot have a default.
+  - `DISCORD_TOKEN`, `required: false`, empty default: the image must start without env vars (container tests set none), and a real token can never be a default. Whether the app tolerates an empty token is UNVERIFIED (section 10).
   - `TZ`, default `Etc/UTC`, `required: false` (sibling convention).
 - `volumes`: `/config`, `required: true`. Only if the jar writes state there (UNVERIFIED). Otherwise declare it anyway for sibling consistency and note it.
 - `dependencies`: none.

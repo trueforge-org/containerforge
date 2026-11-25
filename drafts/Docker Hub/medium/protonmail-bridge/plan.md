@@ -48,7 +48,7 @@ Do not use `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 7. `mkdir -p /app/protonmail-bridge`, copy binaries from build stage, and license files (GPL-3.0 `LICENSE`) to `/usr/share/licenses/protonmail-bridge/`.
 8. `ENV HOME=/config GNUPGHOME=/config/.gnupg PASSWORD_STORE_DIR=/config/.password-store` so the keychain lands in `/config` (decision in section 9).
 9. `USER apps`, `COPY --chmod=0755 . /`, `COPY --chmod=0755 start.sh /start.sh`.
-10. `EXPOSE` only the ports verified in section 10.
+10. `EXPOSE` only the ports verified in section 10. End with `VOLUME /config`.
 
 ## 5. docker-bake.hcl
 
