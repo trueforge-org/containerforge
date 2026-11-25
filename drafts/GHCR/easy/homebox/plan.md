@@ -118,7 +118,7 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - postgresql
+  - name: postgresql
 ```
 
 - Only add `HBOX_AUTH_API_KEY_PEPPER` if upstream proves it required for first start (UNVERIFIED: the chart marks it as a secret but the upstream behavior is not confirmed).

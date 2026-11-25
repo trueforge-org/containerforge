@@ -35,10 +35,11 @@ Runtime base `ghcr.io/trueforge-org/steamcmd` (`apps/steamcmd`): its `start.sh` 
 ## 4. Dockerfile
 
 1. `FROM ghcr.io/trueforge-org/steamcmd:<pinned tag>@sha256:<UNVERIFIED>`, `ARG VERSION`, `USER root` only if a step needs it.
-2. No apt installs: the base already has steamcmd and 32-bit libs. Do not repeat `apt-get install lib32*`.
-3. `ENV HOME=/config STEAM_INSTALL_DIR=/config/serverfiles`.
-4. No download in the Dockerfile. The server is fetched at start, through the base's SteamCMD path.
-5. Tail:
+2. Because `COPY --chmod=0755 . /` overwrites the base's `/start.sh` with this app's `start.sh`, first save the base script as root: `RUN cp /start.sh /usr/local/bin/steamcmd-base.sh` (before the tail `COPY`), and call that copy from `start.sh`. Calling `/start.sh` would recurse into itself.
+3. No apt installs: the base already has steamcmd and 32-bit libs. Do not repeat `apt-get install lib32*`.
+4. `ENV HOME=/config STEAM_INSTALL_DIR=/config/serverfiles`.
+5. No download in the Dockerfile. The server is fetched at start, through the base's SteamCMD path.
+6. Tail:
 
 ```dockerfile
 COPY --chmod=0755 . /
@@ -135,7 +136,7 @@ export STEAM_INSTALL_DIR="${STEAM_INSTALL_DIR:-/config/serverfiles}"
 # Install or update the dedicated server with the steamcmd base. "+quit" makes the base
 # run its own pre-update and app_update, then exit (base start.sh only execs steamcmd
 # when the first argument does not start with "+"). UNVERIFIED: confirm this path.
-/start.sh +quit
+/usr/local/bin/steamcmd-base.sh +quit
 
 cd "${STEAM_INSTALL_DIR}"
 exec ./<UNVERIFIED Hurtworld server binary> -port "${GAME_PORT:-12871}" ${GAME_PARAMS:-}
@@ -178,7 +179,7 @@ Chart security (verify, not guarantees): `runAsUser 0`, `readOnlyRootFilesystem 
 
 - Store vs server id: the draft's 393420 is the client. The chart's 405100 is the dedicated server, and it did not resolve on the Steam store API. Confirm with SteamCMD before writing `STEAM_APP_IDS`.
 - Launch binary and arguments unknown (section 7). Blocker until confirmed.
-- `/start.sh +quit` path: the base's behavior with a `+` argument is taken from its source; UNVERIFIED that it exits after the update.
+- `steamcmd-base.sh +quit` path: the base's behavior with a `+` argument is taken from its source; UNVERIFIED that it exits after the update.
 - arm64 is `no`. Only `image-local` amd64 is built and tested. `image-all` should be amd64 only.
 - Game ports are UDP. Players need UDP forwarding (draft caveat). No tcp probe possible (section 8).
 - First start is a large download (inferred).

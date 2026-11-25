@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | Upstream tag `3.8.2` (published 2026-03-02). The draft's `3.8.2` is confirmed as a tag. Source: https://api.github.com/repos/kiwix/kiwix-tools/releases/latest |
 | Version available via apt | Ubuntu resolute (26.04) universe ships `kiwix-tools 3.7.0-1.1build2`, not 3.8.2. **The apt route cannot give 3.8.2.** Source: https://packages.ubuntu.com/resolute/kiwix-tools |
-| Renovate (plan) | `datasource=github-releases depName=kiwix/kiwix-tools versioning=semver`. Only the apt build is shipped, so see the caveat in section 4: the image VERSION tracks the apt package until a source build is decided. Tags `r0.1` and `imported_from_kiwix` exist, so the semver filter matters. |
+| Renovate (plan) | `datasource=deb depName=kiwix-tools registryUrl=https://archive.ubuntu.com/ubuntu` (as in section 5; matches `apps/steamcmd`). Only the apt build is shipped, so the image VERSION tracks the apt package until a source build is decided (section 4). If a source build is chosen later, switch to `datasource=github-releases depName=kiwix/kiwix-tools versioning=semver` (tags `r0.1` and `imported_from_kiwix` exist, so the semver filter matters). |
 | License | GPL-3.0 (GitHub repo license field, `spdx_id` GPL-3.0). Source: https://api.github.com/repos/kiwix/kiwix-tools. The draft's Dockerfile label points to `openzim/kiwix-tools`; the repo's canonical name is `kiwix/kiwix-tools`. |
 | Source URL | https://github.com/kiwix/kiwix-tools |
 | Download | No release assets (empty asset list on 3.8.2). The binary comes from apt: `kiwix-tools` (amd64 and arm64 .deb, arm64 confirmed at https://packages.ubuntu.com/resolute/arm64/kiwix-tools/download). |
@@ -50,7 +50,7 @@ Step list:
 3. `apt-get update`, then `apt-get install -y --no-install-recommends kiwix-tools=${VERSION}` with `VERSION` pinned to the apt version (`3.7.0-1.1build2`), not the upstream tag.
 4. `mkdir -p /config`; `chown -R apps:apps /config` (follow the `apps/steamcmd` pattern).
 5. `rm -rf /var/lib/apt/lists/*`.
-6. `COPY --chmod=0755 start.sh /usr/local/bin/start.sh`. Keep the path that the test list expects; the test only needs `/start.sh` (see section 8), so copy to `/start.sh` for parity with `apps/steamcmd`.
+6. `COPY --chmod=0755 start.sh /start.sh` (the path the test list in section 8 expects, as in `apps/steamcmd`).
 7. `EXPOSE 8080` (informational; settings.yaml carries the port).
 8. `VOLUME /config`.
 9. `USER apps`.
@@ -71,7 +71,7 @@ USER apps
 COPY --chmod=0755 . /
 ```
 
-Caveat for the reviewer: `VERSION` here is the apt version (`3.7.0-1.1build2`), so the image is tagged `3.7.0`. The draft's `3.8.2` cannot be reached through apt. Decision needed (section 10).
+Caveat for the reviewer: `VERSION` here is the apt version (`3.7.0-1.1build2`; UNVERIFIED that the plain-apt version string matches exactly what the archive carries at build time), so the image is tagged `kiwix-serve:3.7.0-1.1build2` (`${APP}:${VERSION}`). The draft's `3.8.2` cannot be reached through apt. Decision needed (section 10).
 
 ## 5. docker-bake.hcl
 
@@ -185,12 +185,12 @@ From `apps/kiwix-serve/`, following `.github/instructions/build-test-protocol.in
    ```sh
    docker volume rm kiwix-serve-probe-config 2>/dev/null || true
    docker run --rm -d --name kiwix-serve-probe --read-only --tmpfs /tmp \
-     -v kiwix-serve-probe-config:/config kiwix-serve:3.7.0
+     -v kiwix-serve-probe-config:/config kiwix-serve:3.7.0-1.1build2
    docker logs -f kiwix-serve-probe
    docker rm -f kiwix-serve-probe; docker volume rm kiwix-serve-probe-config
    ```
    Expected readiness signal: `kiwix-serve` listening line on 8080 (exact text UNVERIFIED; read the log).
-4. `forgetool containers test --image kiwix-serve:3.7.0 --config ./apps/kiwix-serve/container-test.yaml`
+4. `forgetool containers test --image kiwix-serve:3.7.0-1.1build2 --config ./apps/kiwix-serve/container-test.yaml`
 5. Also run with a sample ZIM placed in a `/config` volume to confirm serving. A small ZIM is needed; not in the repo, so this step is manual and UNVERIFIED for now.
 6. arm64 run only if the amd64 step fails in an arm64-specific way.
 

@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | UNVERIFIED: no game build number or server version was confirmed from a fetched page. The draft's container tag is `ghcr.io/ich777/steamcmd:hl2dm`. Game content is pulled from Steam at start, so there is no pinned game version in the image. |
 | Renovate | UNVERIFIED: no renovate datasource fits a Steam game. The sibling `apps/steamcmd` pins a deb version (`datasource=deb`). For this app, pin the base `steamcmd` image version and use a plain `VERSION` that matches it; confirm the choice before writing. |
-| License (image) | UNVERIFIED: the ich777 repo license returned 404 (see facts file batch 052 and batch 047). Half-Life 2: Deathmatch and its dedicated server are Valve proprietary software (store page https://store.steampowered.com/app/320/ is a client listing; Valve licence not fetched). Do not set `LICENSE` to an open-source license without confirmation. |
+| License (image) | UNVERIFIED: the ich777 repo license returned 404 (UNVERIFIED: not re-checked in this verification). Half-Life 2: Deathmatch and its dedicated server are Valve proprietary software (store page https://store.steampowered.com/app/320/ is a client listing; Valve licence not fetched). Do not set `LICENSE` to an open-source license without confirmation. |
 | Source URL | https://store.steampowered.com/app/320/ (client listing, not a dedicated server). UNVERIFIED: the dedicated server Steam app ID. The store page does not state it, and the ich777 README covers CS:Source only (GAME_ID example 232330 belongs to CS:Source, not HL2DM). Do not reuse 232330. |
 | Download | Pulled by SteamCMD at start (`app_update <dedicated-server-app-id>`). No release asset. The sibling `apps/steamcmd/start.sh` already runs `STEAM_APP_IDS` through `app_update`. |
 | Checksum source | None from upstream. Steam content integrity is checked by `validate` (sibling `STEAM_APP_VALIDATE=true`). |
@@ -104,7 +104,7 @@ dependencies:
 
 Rules: idempotent, empty `/config` safe, no writes to `/app`, caches in `/tmp`, exec the final process.
 
-1. Prefer delegating to the sibling `apps/steamcmd/start.sh` logic: `STEAM_APP_IDS` and `STEAM_INSTALL_DIR` drive `app_update` into `/config/steamapps`. Keep `HOME=/config` as the sibling does.
+1. Prefer delegating to the sibling `apps/steamcmd/start.sh` logic. Note `COPY --chmod=0755 . /` overwrites the base's `/start.sh`, so the Dockerfile must first save it (`RUN cp /start.sh /usr/local/bin/steamcmd-base.sh`) and `start.sh` must call that copy, never `/start.sh` (it would recurse): `STEAM_APP_IDS` and `STEAM_INSTALL_DIR` drive `app_update` into `/config/steamapps`. Keep `HOME=/config` as the sibling does.
 2. Run `app_update <dedicated-server-app-id>` (validate only if `STEAM_APP_VALIDATE=true`). The sibling already validates the numeric app ID.
 3. Launch the server binary from `${STEAM_INSTALL_DIR}` with the flags the game uses (exact binary name and flags UNVERIFIED; the sibling wrapper does not know them). Add `+map`, `+maxplayers` only when verified.
 4. The first start downloads from Steam and may be slow; log a clear message and do not exit on the first download.
@@ -121,7 +121,7 @@ filePaths:
 - /usr/local/share/steamcmd/steamcmd.sh
 ```
 
-- Copy the steamcmd sibling's `filePaths` pattern. Add a `tcp` probe on 27015 only after the server is verified to bind it.
+- Copy the steamcmd sibling's `filePaths` pattern. Add a `tcp` probe on 27015 only after the server is verified to bind it. The two UDP ports (27015, 27005) cannot be probed with `tcp`/`http`; the stated reason is that the test has no running game server (the server is downloaded at start), so settings.yaml port-probe alignment is intentionally unmet until a probe is possible.
 - The test runs with no env vars, so `STEAM_APP_IDS` is unset; `start.sh` must not fail the test by requiring it. Put the app-ID-required code path in `filePaths` only and run it manually per section 11, per the protocol's "What the test can't see" rule.
 - `timeoutSeconds`: match the steamcmd sibling (the first start downloads from Steam).
 - No DB dependency, so the narrowed-test exception does not apply.

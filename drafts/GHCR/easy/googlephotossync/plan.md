@@ -61,7 +61,7 @@ Single stage is enough (no compilation). Steps:
    VOLUME /config
    ```
    Add `HEALTHCHECK` only if a usable probe exists; there is no listening port, so do not copy the python sibling's health check (`/healthcheck.sh` needs a port or HTTP target). Decide in section 8.
-7. Entrypoint: `ENTRYPOINT` is not needed when `start.sh` is the command. Keep `COPY --chmod=0755 start.sh /start.sh` as the sibling pattern, and end `start.sh` with `exec gphotos-sync ...`.
+7. Entrypoint: `ENTRYPOINT` is not needed when `start.sh` is the command. `start.sh` reaches `/start.sh` through `COPY --chmod=0755 . /` (no separate COPY), and end `start.sh` with `exec gphotos-sync ...`.
 8. No `EXPOSE`.
 
 ## 5. docker-bake.hcl
@@ -141,6 +141,7 @@ filePaths:
 - Draft caveat confirmed as a user step: a Google OAuth client must be created by the user in Google Cloud, and the first sign-in needs an interactive browser authorization. Not testable in CI.
 - Draft caveat (inferred, not verified): Google Photos API access is restricted, so full-library downloads may be limited. UNVERIFIED: no current Google documentation was fetched; treat as a runtime risk.
 - Upstream release is `3.2.5` from 2024-07-14, over a year old at the plan date. Check for a newer release before writing `VERSION` (the release listing returned only `3.2.5` as latest).
+- UNVERIFIED: the wheel's `Requires-Python` vs the base Python 3.15.2 was not checked; confirm at build.
 - Checksum: no upstream checksum asset. Document the gap in the PR.
 - Architecture: pure-Python wheel should work on both arches, but no arch-specific upstream claim is confirmed. Build and test both.
 - Exact CLI flags, config/download directory flags and env vars are UNVERIFIED (section 1). Do not add them to `settings.yaml` until confirmed on https://gilesknap.github.io/gphotos-sync.

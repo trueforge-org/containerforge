@@ -35,10 +35,11 @@ Runtime base `ghcr.io/trueforge-org/steamcmd` (`apps/steamcmd`): its `start.sh` 
 ## 4. Dockerfile
 
 1. `FROM ghcr.io/trueforge-org/steamcmd:<pinned tag>@sha256:<UNVERIFIED>`, `ARG VERSION`.
-2. No apt installs: steamcmd and the 32-bit libraries come from the base.
-3. `ENV HOME=/config STEAM_INSTALL_DIR=/config/serverfiles`.
-4. No download in the Dockerfile. The server is fetched at start by the base's SteamCMD path.
-5. Tail:
+2. Because `COPY --chmod=0755 . /` overwrites the base's `/start.sh` with this app's `start.sh`, first save the base script as root: `RUN cp /start.sh /usr/local/bin/steamcmd-base.sh` (before the tail `COPY`, with `USER root` then back), and call that copy from `start.sh`. Calling `/start.sh` would recurse into itself.
+3. No apt installs: steamcmd and the 32-bit libraries come from the base.
+4. `ENV HOME=/config STEAM_INSTALL_DIR=/config/serverfiles`.
+5. No download in the Dockerfile. The server is fetched at start by the base's SteamCMD path.
+6. Tail:
 
 ```dockerfile
 COPY --chmod=0755 . /
@@ -131,7 +132,7 @@ export STEAM_INSTALL_DIR="${STEAM_INSTALL_DIR:-/config/serverfiles}"
 
 # Install or update via the steamcmd base; "+quit" makes the base run its pre-update and
 # app_update, then exit. UNVERIFIED: confirm this path.
-/start.sh +quit
+/usr/local/bin/steamcmd-base.sh +quit
 
 cd "${STEAM_INSTALL_DIR}"
 exec ./<UNVERIFIED Insurgency Sandstorm server binary> ${GAME_PARAMS:-}
@@ -173,7 +174,7 @@ Chart security (verify, not guarantees): `runAsUser 0`, `readOnlyRootFilesystem 
 
 - Store vs server id: the draft's 581320 is the client. The chart's 581330 is the server, unconfirmed on the Steam store API. Confirm with SteamCMD before writing `STEAM_APP_IDS`.
 - Launch binary and arguments unknown (section 7). Blocker until confirmed.
-- `/start.sh +quit` path: from the base's source; UNVERIFIED that it exits after the update.
+- `steamcmd-base.sh +quit` path: from the base's source; UNVERIFIED that it exits after the update.
 - Multi-GB first download; needs internet and a long first start (inferred).
 - arm64 is `no`. `image-all` is amd64 only.
 - Game ports UDP; players need UDP forwarding. No tcp probe possible.

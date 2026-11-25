@@ -55,7 +55,7 @@ Steps:
    Runtime never writes `/app/venv`.
 5. Copy the upstream helper scripts (`docker/start.py`, `docker/entrypoint.py`, `docker/healthcheck.py`) into `/app/py-kms/docker/` or a dedicated path under `/app`. Do not use `/usr/bin` for scripts; the venv is the interpreter.
 6. `COPY --chmod=0755 start.sh /start.sh`.
-7. `EXPOSE 1688`, `USER apps`, and the final `COPY --chmod=0755 . /`.
+7. `EXPOSE 1688`, `VOLUME /config` (declared for repo convention; unused with `WEBUI=0`), `USER apps`, and the final `COPY --chmod=0755 . /`.
 8. Licence: copy the Unlicense text into `/usr/share/licenses/kms/` (the repo's `LICENSE` file; UNVERIFIED path inside the archive, check at build).
 
 Key snippet:
@@ -74,6 +74,7 @@ RUN PIP_CACHE_DIR=/tmp/pip /app/venv/bin/pip install --no-cache-dir \
       -r /app/py-kms/docker/docker-py3-kms-minimal/requirements.txt
 COPY --chmod=0755 start.sh /start.sh
 EXPOSE 1688
+VOLUME /config
 USER apps
 COPY --chmod=0755 . /
 ```
@@ -116,7 +117,7 @@ COPY --chmod=0755 . /
   - `LOGSIZE` default `""`, `required: false`
   - `TZ` default `"Etc/UTC"`, `required: false` (matches siblings)
   - `WEBUI` default `"0"` is NOT added: it selects a DB path and a web UI that is out of scope for this container (the minimal flavour).
-- `volumes`: none needed for `WEBUI=0`. If `WEBUI=1` is ever supported, add `/config` (out of scope for v1 of this plan).
+- `volumes`: `/config` with `required: false` (matches the Dockerfile `VOLUME /config`; nothing is written there with `WEBUI=0`; `WEBUI=1` support is out of scope for v1).
 - `dependencies`: none.
 
 ## 7. start.sh
@@ -160,7 +161,7 @@ Check before implementing: start.py and entrypoint.py hard-code `/usr/bin/python
 | `/usr/bin/entrypoint.py`, `start.py`, `healthcheck.py` (run by `/usr/bin/python3`) | `/app/py-kms/docker/*.py` run by `/app/venv/bin/python` |
 | `USER py-kms` (created by `adduser`) | `USER apps` |
 | `pip3 install --break-system-packages` (system Python) | venv install at build time under `/app/venv` (python-runtime rule) |
-| `WEBUI` DB under `/home/py-kms/db` | not used (`WEBUI=0`); no `/config` needed |
+| `WEBUI` DB under `/home/py-kms/db` | not used (`WEBUI=0`); `/config` is declared but unused |
 
 - `readOnlyRootFilesystem`: compatible. Nothing writes at runtime with `WEBUI=0`, plus `/tmp` (tmpfs) for scratch.
 - `privileged`: no. Port 1688 is unprivileged.
