@@ -80,7 +80,7 @@ variable "SOURCE" {
 }
 ```
 
-Use the four standard targets and the default group from `apps/adguardhome-sync`. Note: the GitHub `SPDX` value is `GPL-3.0`; use the same string as the sibling `LICENSE` convention after checking the licence file. Run `docker buildx bake --print`.
+Use the four standard targets and the default group from `apps/adguardhome-sync`. Note: the GitHub API `spdx_id` is `GPL-3.0`; UNVERIFIED whether `GPL-3.0-only` or `-or-later` applies: check the licence headers before setting `LICENSE`. Run `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -117,12 +117,15 @@ Plan (to be verified in round 1):
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 120
 tcp:
 - port: '19999'
-  timeoutSeconds: 120
+http:
+- port: '19999'
+  path: /api/v1/info
 ```
 
-Use an `http` check on `/api/v1/info` if the forgetool schema accepts it; match a sibling's `timeoutSeconds`. netdata's startup is slow, so the timeout should be larger than the sibling default. Every test runs with no env vars, which is fine here because there are no required env vars.
+The `http` check on `/api/v1/info` (path UNVERIFIED) is kept only if it returns 200 on the first run; match a sibling's `timeoutSeconds`. netdata's startup is slow, so the timeout should be larger than the sibling default. Every test runs with no env vars, which is fine here because there are no required env vars.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

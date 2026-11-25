@@ -66,7 +66,7 @@ The `apps` user must be able to run the Electron binary and the display server. 
 ## 6. settings.yaml
 
 - Header and `schema_version: 1`. `upstream_env_url: https://obsidian.md/` (or the obsidian-releases repo; pick one and match `SOURCE`).
-- `ports`: 8080 (http, required), and 8443 (https, only if HTTPS is implemented, otherwise omit, UNVERIFIED).
+- `ports`: 8080 (`protocol: tcp`, required; the web UI is covered by the http probe), and 8443 (tcp, only if HTTPS is implemented, otherwise omit, UNVERIFIED).
 - `env`: `CUSTOM_PORT` (default 8080), `TITLE`, and any variable `start.sh` reads. Do not list `PUID`, `PGID`, `CUSTOM_USER`, `PASSWORD` unless the port of that behaviour is implemented. Do not invent `DOCKER_MODS` or `INSTALL_PACKAGES`, because they are linuxserver mechanics that this image does not have.
 - `volumes`: `/config` (Obsidian settings) and `/vaults` (vaults). Both are listed because both are written.
 - `dependencies`: none.

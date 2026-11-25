@@ -125,7 +125,7 @@ env:
     default: "paperless"
     required: false
   - name: PAPERLESS_DBPASS
-    default: "paperless"
+    default: ""
     required: false
   - name: TZ
     default: "Etc/UTC"
@@ -140,6 +140,7 @@ dependencies:
 
 - `PAPERLESS_SECRET_KEY` is `required: true` with an empty default, so `start.sh` must generate and persist one under `/config` on first run (see section 7). The schema rule requires a non-empty default or start.sh handling; start.sh handling is the plan.
 - Only include env names the app reads. `PAPERLESS_OCR_LANGUAGE`, `PAPERLESS_URL` and `PAPERLESS_TIME_ZONE` are standard Paperless settings but are NOT in the fetched configuration page (only the data-path, bind, DB, Redis and USERMAP sections were fetched). Mark them UNVERIFIED and check against `docs/configuration.md` before committing, or drop them.
+- `PAPERLESS_DBPASS` default is empty (no baked password; upstream default `paperless` is not carried over, the user sets it with postgresql).
 - `dependencies: valkey, postgresql` are soft: SQLite works without postgresql, Valkey is needed for the Celery broker. Decide hard vs optional (`opt_dependencies`) with the user; the database-dependent exception in the protocol only applies if the DB is a hard dependency.
 
 ## 7. start.sh
@@ -175,10 +176,12 @@ Open points (section 10):
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 180
+tcp:
+- port: '8000'
 http:
 - port: '8000'
   path: /
-  timeoutSeconds: 180
 ```
 
 - Timeout 180s: first start runs migrations and index creation. Compare with `apps/bazarr` before finalising.

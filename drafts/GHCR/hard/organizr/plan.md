@@ -51,9 +51,9 @@ Steps (Option A):
 4. Ship the license to `/usr/share/licenses/organizr/` once confirmed.
 5. Move every write path off `/app`. Organizr writes its config, its database (sqlite) and its logs. These paths are UNVERIFIED and must be found in the source tree at build time (grep for writes in `/app/organizr`). Each one must point to `/config` through a symlink created in `start.sh`, or through the Organizr config option if one exists.
 6. `ENV HOME=/tmp`, and PHP session path `/tmp/php-sessions` (created at build time, owned by `apps`).
-7. `COPY --chmod=0755 . /`, `EXPOSE 80`, `VOLUME /config`, final `USER apps`.
+7. `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, final `USER apps`.
 
-Note on the port: nginx must listen on 80 as a non-root user. Ports below 1024 need `net.ipv4.ip_unprivileged_port_start` or a higher port. Choose 8080 internally if the rootless limit applies, and document the choice in settings.yaml. Decide at build time; this is an open point.
+Note on the port: nginx must listen on 80 as a non-root user. Ports below 1024 need `net.ipv4.ip_unprivileged_port_start` or a higher port. Use 8080 internally (repo rule: no bind below 1024 as non-root) and document the choice in settings.yaml; the upstream image's `EXPOSE 80` is therefore not carried over.
 
 ## 5. docker-bake.hcl
 
@@ -67,7 +67,7 @@ Note on the port: nginx must listen on 80 as a non-root user. Ports below 1024 n
 ## 6. settings.yaml
 
 - Header and `schema_version: 1`; `upstream_env_url: https://github.com/causefx/Organizr`.
-- `ports`: `port: 80` (http, required). If the port is changed for the rootless limit (section 4), use that port and keep the change consistent everywhere.
+- `ports`: `protocol: tcp`, `required: true`. The repo rule forbids binding below 1024 as non-root, so use 8080 (not 80) for nginx unless `ip_unprivileged_port_start` is confirmed, and keep the port consistent in the Dockerfile `EXPOSE`, `start.sh`, settings and container-test.
 - `env`: only variables `start.sh` reads. The upstream `fpm` and `branch` variables are upstream image variables. Do not list them unless the app itself reads them (UNVERIFIED).
 - `volumes`: `/config`.
 - `dependencies`: none.

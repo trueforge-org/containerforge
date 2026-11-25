@@ -104,12 +104,12 @@ To be written after the base is confirmed:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 120
 tcp:
 - port: '8080'
-  timeoutSeconds: 120
 ```
 
-Add a UDP check only if forgetool supports it. Every port in `settings.yaml` needs a probe.
+No udp probe: `emby` and `gluetun` list udp ports in `settings.yaml` and their tests use tcp only; the udp port 52000 is therefore not probed (reason: the test schema has only tcp/http checks as used by siblings).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

@@ -88,7 +88,7 @@ Note the `curl` installs run under `USER root`. The `/tmp` paths are scratch and
 
 - Header: the schema comment and `schema_version: 1` from the settings-yaml instructions.
 - `upstream_env_url: https://github.com/utkuozdemir/nvidia_gpu_exporter`
-- `ports`: `port: 9835`, `protocol: http`, `required: true`.
+- `ports`: `port: 9835`, `protocol: tcp` (the schema field is tcp/udp as in sibling settings; http is covered by the probe), `required: true`.
 - `env`: only the vars `start.sh` maps to app flags. Pending the flag names, which are UNVERIFIED. Expected: a backend selector (for example `COLLECT_BACKEND`, default `nvml`) and a listen address (default `0.0.0.0:9835`). Do not list `NVIDIA_DRIVER_CAPABILITIES`, because the app does not read it.
 - `volumes`: none. Write this as an explicit reason in the PR, because the exporter has no persistent state.
 - `dependencies`: none.
