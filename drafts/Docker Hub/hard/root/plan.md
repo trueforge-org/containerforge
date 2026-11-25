@@ -51,7 +51,7 @@ The release tarball is built for Ubuntu 26.04 with gcc 15.2, so it matches the u
    The tarball is expected to unpack into `root/` (UNVERIFIED, check with `tar tzf`). If the LICENSE path differs, fix the `cp`, and do not leave `|| true` in the final file.
 5. Jupyter in a read-only venv: `python3 -m venv /app/venv && /app/venv/bin/pip install --no-cache-dir notebook` (pin versions with `ARG JUPYTER_VERSION` and a `// renovate: datasource=pypi depName=notebook` line in the Dockerfile as in `apps/changedetection`). If PyROOT needs the system python, create the venv with `--system-site-packages`.
 6. `chown -R apps:apps /app && chmod -R 755 /app`.
-7. `ENV ROOTSYS=/app/root HOME=/config JUPYTER_CONFIG_DIR=/config/jupyter JUPYTER_DATA_DIR=/config/jupyter/data JUPYTER_RUNTIME_DIR=/tmp/jupyter IPYTHONDIR=/config/ipython PIP_CACHE_DIR=/tmp/pip XDG_CACHE_HOME=/tmp`.
+7. `ENV ROOTSYS=/app/root HOME=/config JUPYTER_CONFIG_DIR=/config/jupyter JUPYTER_DATA_DIR=/config/jupyter/data JUPYTER_RUNTIME_DIR=/tmp/jupyter IPYTHONDIR=/config/ipython PIP_CACHE_DIR=/tmp/pip XDG_CACHE_HOME=/tmp MPLCONFIGDIR=/tmp/mpl`.
 8. `USER apps`, then `COPY --chmod=0755 . /`.
 9. `EXPOSE 8888`, `VOLUME /config`, `WORKDIR /config`.
 

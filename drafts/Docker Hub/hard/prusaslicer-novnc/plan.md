@@ -101,7 +101,7 @@ filePaths:
 - /defaults/autostart
 - /usr/share/licenses/prusaslicer-novnc
 ```
-Timeout copied from sibling `apps/kasmvnc`'s style (check its value when porting). Ports 3000 and 3001 each have a probe.
+`apps/kasmvnc/container-test.yaml` sets no `timeoutSeconds`; 180 here is a choice for the slow GUI start (UNVERIFIED). Ports 3000 and 3001 each have a probe.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

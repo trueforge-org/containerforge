@@ -129,9 +129,9 @@ forgetool containers test --image rmlint:2.10.2 --config ./apps/rmlint/container
 docker rm -f rmlint-probe; docker volume rm rmlint-probe-config
 ```
 
-- Expected readiness signal: log line "rmlint ready: idle" and the container stays running (\`docker exec rmlint-probe rmlint --version\` works).
+- Expected readiness signal: log line "rmlint ready: idle" and the container stays running (`docker exec rmlint-probe rmlint --version` works).
 - Always start with an empty `/config` volume (fresh volume each round).
-- By-hand checks outside the test: run with \`-e RMLINT_ARGS="/data -o json:/config/rmlint.json"\` and a mounted directory containing duplicate files; check the report lands in /config as UID 568.
+- By-hand checks outside the test: run with `-e RMLINT_ARGS="/data -o json:/config/rmlint.json"` and a mounted directory containing duplicate files; check the report lands in /config as UID 568.
 - Only try arm64 if an amd64 build is green and a failure is arm64-specific.
 
 ## 12. PR checklist

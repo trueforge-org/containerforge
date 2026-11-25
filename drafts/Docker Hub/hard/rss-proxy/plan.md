@@ -31,7 +31,7 @@ No `defaults/` unless the feedless core needs a config file (UNVERIFIED). No `ro
 
 `FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`
 
-The core is a JVM app (Spring-style `APP_*` properties). UNVERIFIED: the Java version of `feedless:core-0.1.3`; if it needs 21 or 25, switch to `java21` (copy the FROM line from an existing apps/*/Dockerfile) or `java25` from the brief. The draft alternative `python-node` is not needed: the Node part is only the prebuilt static `public/` UI. Closest sibling: `apps/nzbhydra2` (jar on java17, `--datafolder /config`).
+The core is a JVM app (Spring-style `APP_*` properties). UNVERIFIED: the Java version of `feedless:core-0.1.3`; if it needs 21 or 25, switch to `java21` (`apps/java21` exists; copy the FROM line from an existing apps/*/Dockerfile that uses it). The draft alternative `python-node` is not needed: the Node part is only the prebuilt static `public/` UI. Closest sibling: `apps/nzbhydra2` (jar on java17, `--datafolder /config`).
 
 ## 4. Dockerfile
 
@@ -89,7 +89,7 @@ http:
 filePaths:
 - /app/rss-proxy.jar
 ```
-JVM apps are slow to start, so the timeout follows `apps/nzbhydra2`/`apps/changedetection` scale (180). The generated-secrets branch runs even without env vars, so it is covered by the test.
+JVM apps are slow to start, so 180 is chosen as a generous value (UNVERIFIED against sibling timeouts; compare `apps/nzbhydra2/container-test.yaml` when porting). The generated-secrets branch runs even without env vars, so it is covered by the test.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
