@@ -32,7 +32,7 @@ No `root/` (reserved). No `DOWNSTREAM_CHANGES.md` because nothing uses this imag
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/kasmvnc:1.5.2` (the version from `apps/kasmvnc/docker-bake.hcl`). Add `@sha256:...` from `docker buildx imagetools inspect ghcr.io/trueforge-org/kasmvnc:1.5.2`. UNVERIFIED: the digest and that the image is published on GHCR. Kasmvnc is Ubuntu 26.04 plus Xvnc, openbox, nginx and a Node `kclient` wrapper, so MediaElch only adds the app. Sibling for the GUI layer: `apps/kasmvnc` (uses `/defaults/autostart` copied to `/config/.config/openbox/autostart` on first run). For the prebuilt-binary part: `apps/adguardhome-sync`.
+`FROM ghcr.io/trueforge-org/kasmvnc:1.5.2` (the version from `apps/kasmvnc/docker-bake.hcl`). Add `@sha256:...` from `docker buildx imagetools inspect ghcr.io/trueforge-org/kasmvnc:1.5.2`. UNVERIFIED: the digest and that the image is published on GHCR. Kasmvnc is built on `python-node` (Ubuntu based) plus Xvnc, openbox, nginx and a Node `kclient` wrapper, so MediaElch only adds the app. Sibling for the GUI layer: `apps/kasmvnc` (uses `/defaults/autostart` copied to `/config/.config/openbox/autostart` on first run). For the prebuilt-binary part: `apps/adguardhome-sync`.
 
 ## 4. Dockerfile
 
