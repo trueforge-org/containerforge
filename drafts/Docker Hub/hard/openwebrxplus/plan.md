@@ -47,8 +47,8 @@ Do a spike first (section 10). Planned shape, route A (preferred, smallest delta
 5. Route B (fallback): build `csdr`, `pycsdr`, `owrx_connector`, `codecserver`, `digiham` from source in a builder stage against Python 3.14 (upstream repos by jketterl; versions and tags UNVERIFIED), then `pip install` `luarvique/openwebrx` into `/app/venv`. Large, and `owrx` uses `distutils.version.LooseVersion` (`owrx/version.py`), which does not exist on Python 3.12+ unless `setuptools` is installed; add `setuptools` into the venv.
 6. SoftMBE (mbelib) is patent-encumbered and is why upstream publishes a separate `-softmbe` image; ship it only if the maintainers accept that (open question in section 10). If kept, build `mbelib-neo` from `buildfiles/files/mbelib-neo-debian` of the docker-builder repo in a builder stage.
 7. License files: copy `/usr/share/doc/openwebrx/copyright` to `/usr/share/licenses/openwebrx/` and the same for each shipped third-party decoder.
-8. `ENV HOME=/tmp XDG_CACHE_HOME=/tmp/.cache TMPDIR=/tmp OPENWEBRX_DATA=/config`; write `/etc/openwebrx` writes away (section 9).
-9. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8073`, `VOLUME /config`, `WORKDIR /config`, `CMD ["/start.sh"]` (the ubuntu entrypoint execs `/start.sh`). Final `USER apps`.
+8. `ENV HOME=/tmp XDG_CACHE_HOME=/tmp/.cache TMPDIR=/tmp OPENWEBRX_DATA=/config`; `/etc/openwebrx` writes are redirected to `/config` (section 9).
+9. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8073`, `VOLUME /config`, `WORKDIR /config`. No `CMD`: the ubuntu `ENTRYPOINT` (`tini -- /entrypoint.sh`) execs `/start.sh` itself (a `CMD ["/start.sh"]` would pass it as an argument to itself).
 
 ## 5. docker-bake.hcl
 

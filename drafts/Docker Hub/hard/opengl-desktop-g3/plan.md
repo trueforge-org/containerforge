@@ -109,7 +109,7 @@ The env set equals `apps/kasmvnc/settings.yaml` minus nothing: these names are a
 
 ## 7. start.sh
 
-Idempotent, runs inside the base's init (same hook model as `apps/kasmvnc/start.sh`):
+CONFLICT: `COPY --chmod=0755 . /` would overwrite the base's `/start.sh` (apps/kasmvnc/start.sh seeds openbox config, starts nginx and ends with `cd /kclient; exec node index.js`). A replacement must either use another file name and chain to the base `/start.sh`, or reproduce all of the base logic (UNVERIFIED which is intended). Idempotent steps:
 1. `mkdir -p /config/.config/openbox /config/Desktop /tmp/.cache`.
 2. Seed `/config/.config/openbox/autostart` from `/defaults/autostart` only when missing (the base does this too; keep ours consistent). `defaults/autostart` starts `xterm` and prints `glxinfo -B` so users can see the renderer. Existing user state is never overwritten.
 3. Export `VGL_DISPLAY` only when `/dev/dri/renderD128` (or any `/dev/dri/card*`) exists and is readable; otherwise log `No /dev/dri, using software Mesa (llvmpipe)`.

@@ -40,7 +40,7 @@ Final stage `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4
 3. Replace writable app paths with symlinks created at build time: `rm -rf storage tmp log && ln -s /config/storage storage && ln -s /tmp/pwpush/tmp tmp && ln -s /tmp/pwpush/log log` (real directories are created by `start.sh`; `/config` and `/tmp` are empty at first start).
 4. Final stage (ubuntu 26.04, `USER root`): `COPY --from=build /usr/local /usr/local`, `COPY --from=build --chown=568:568 /app/passwordpusher /app/passwordpusher`; apt runtime packages not in the base: `libpq5 libmariadb3 libsqlite3-0 libyaml-0-2 libffi8 libjemalloc2 tzdata`. Copy `LICENSE` to `/usr/share/licenses/passwordpusher/LICENSE`.
 5. `ENV RAILS_ENV=production RACK_ENV=production RAILS_LOG_TO_STDOUT=true HTTP_PORT=8080 TARGET_PORT=5100 SOLID_QUEUE_SUPERVISOR_MODE=async LD_PRELOAD=/usr/lib/<multiarch>/libjemalloc.so.2 HOME=/tmp TMPDIR=/tmp BUNDLE_APP_CONFIG=/tmp/bundle BUNDLE_DEPLOYMENT=true BUNDLE_WITHOUT=development:test` (check the jemalloc path per arch, or drop `LD_PRELOAD`).
-6. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /app/passwordpusher`, `EXPOSE 8080 5100`, `VOLUME /config`, `CMD ["/start.sh"]`. The Dockerfile ends with `USER apps`.
+6. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /app/passwordpusher`, `EXPOSE 8080 5100`, `VOLUME /config`; no `CMD` (the ubuntu `ENTRYPOINT` execs `/start.sh`). The Dockerfile ends with `USER apps`.
 
 ## 5. docker-bake.hcl
 

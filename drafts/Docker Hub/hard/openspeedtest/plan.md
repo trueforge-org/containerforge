@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version | No release or tag exists (`/releases` empty, `/tags` returns `[]`). Pin the commit `f4263546f50694a154fdd27a03000390949068df` of `main` (2026-04-22, message "Updated"). Draft tag `latest` is rolling. |
-| Renovate | `datasource=git-refs depName=https://github.com/openspeedtest/Speed-Test versioning=loose` (same pattern as `apps/nextcloud-imaginary/docker-bake.hcl`, which pins a commit SHA). |
+| Renovate | `datasource=git-refs depName=https://github.com/openspeedtest/Speed-Test versioning=loose` (`datasource=git-refs` precedent: `apps/nextcloud-imaginary/docker-bake.hcl`, which pins a date-like version rather than a SHA, and `KASM_NOVNC_VERSION` in `apps/kasmvnc/docker-bake.hcl`, which pins a commit SHA). |
 | License | MIT (`License.md`, copyright OpenSpeedTest). SPDX `MIT`. |
 | Source URL | https://github.com/openspeedtest/Speed-Test |
 | Docker packaging | https://github.com/openspeedtest/Docker-Image (Dockerfile reviewed). It is public, so the draft's "no public Dockerfile" caveat is wrong. |
@@ -54,7 +54,7 @@ variable "VERSION" {
 variable "LICENSE" { default = "MIT" }
 variable "SOURCE"  { default = "https://github.com/openspeedtest/Speed-Test" }
 ```
-Plus `target "docker-metadata-action" {}`, `group "default" { targets = ["image-local"] }`, `target "image"` (args `VERSION`, labels source and licenses), `target "image-local"` (inherits image, `output = ["type=docker"]`, `tags = ["${APP}:${VERSION}"]`) and `target "image-all"` (linux/amd64, linux/arm64), copied from `apps/it-tools/docker-bake.hcl`. The image tag becomes the 40-char SHA; acceptable, matching how nextcloud-imaginary uses a SHA. Validate with `docker buildx bake --print`.
+Plus `target "docker-metadata-action" {}`, `group "default" { targets = ["image-local"] }`, `target "image"` (args `VERSION`, labels source and licenses), `target "image-local"` (inherits image, `output = ["type=docker"]`, `tags = ["${APP}:${VERSION}"]`) and `target "image-all"` (linux/amd64, linux/arm64), copied from `apps/it-tools/docker-bake.hcl`. The image tag becomes the 40-char SHA; acceptable (a SHA is used for `KASM_NOVNC_VERSION` in kasmvnc, though not as the image version: UNVERIFIED that a 40-char image tag is accepted by CI). Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -99,7 +99,7 @@ Port 8080 is the only port in settings.yaml and has an http probe. No `timeoutSe
 
 ## 10. Risks, caveats and open questions
 
-- No tags: renovate git-refs will open a PR for every commit on `main`; confirm the repo's renovate config handles `git-refs` for `datasource=git-refs` (precedent: nextcloud-imaginary, kasmvnc). UNVERIFIED: exact renovate behaviour for this repo, not run.
+- No tags: renovate git-refs will open a PR for every commit on `main`; confirm the repo's renovate config handles `git-refs` for `datasource=git-refs` (precedent: nextcloud-imaginary, kasmvnc `KASM_NOVNC_VERSION`). UNVERIFIED: exact renovate behaviour for this repo, not run.
 - HTTPS (3001 upstream) is dropped; terminate TLS at the ingress. The Speed-Test client talks to the same origin, so a reverse proxy must not buffer or gzip `/downloading` and `/upload`.
 - Accuracy depends on the proxy path and on `no-store` headers being kept; keep upstream's header block intact.
 - Draft blocker "no public Dockerfile" is resolved: the packaging Dockerfile is public and trivial.

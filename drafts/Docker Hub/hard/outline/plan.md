@@ -42,7 +42,7 @@ Builder and final stage both `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19c
 3. Final stage: `ENV NODE_ENV=production MALLOC_ARENA_MAX=2 PORT=3000 HOME=/tmp FILE_STORAGE_LOCAL_ROOT_DIR=/config/data`.
 4. `COPY --from=builder --chown=568:568` of `build`, `server`, `public`, `.sequelizerc`, `node_modules`, `package.json` into `/app/outline` (all read-only at runtime).
 5. License: `COPY --from=builder /tmp/outline/LICENSE /usr/share/licenses/outline/LICENSE`.
-6. `USER root` is only used for the `COPY --chown` and `mkdir`; then `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /app/outline`, `EXPOSE 3000`, `VOLUME /config`, `CMD ["/start.sh"]`. The final instruction sequence ends with `USER apps`.
+6. `USER root` is only used for the `COPY --chown` and `mkdir`; then `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /app/outline`, `EXPOSE 3000`, `VOLUME /config`; no `CMD` (the ubuntu `ENTRYPOINT` execs `/start.sh` itself). The final instruction sequence ends with `USER apps`.
 7. No apt in the final stage: `wget` (upstream healthcheck tool) is not needed, `include/healthcheck.sh` probes via `container-test.yaml`.
 
 ## 5. docker-bake.hcl

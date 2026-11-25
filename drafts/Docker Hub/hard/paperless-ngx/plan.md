@@ -42,7 +42,7 @@ Build stage and final stage on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2c
 4. `COPY --from=build --chmod=0755 /tmp/gotenberg /usr/bin/gotenberg`, same for `lok` to `/usr/bin/lok`.
 5. Files from the repo tarball (copy in the build stage, then `COPY --from=build`): `build/fonts.conf` -> `/etc/fonts/conf.d/100-gotenberg.conf`, `build/chromium-hyphen-data` -> `/opt/gotenberg/chromium-hyphen-data`, `build/chromium-policies` -> `/etc/chromium/policies/managed`, `build/capture-version.sh` -> `/opt/gotenberg/capture-version.sh`; license: `LICENSE` -> `/usr/share/licenses/gotenberg/LICENSE` and `lok`'s license.
 6. `ENV CHROMIUM_BIN_PATH=/usr/bin/chromium CHROMIUM_HYPHEN_DATA_DIR_PATH=/opt/gotenberg/chromium-hyphen-data LIBREOFFICE_BIN_PATH=/usr/lib/libreoffice/program/soffice.bin LOK_BIN_PATH=/usr/bin/lok GOTENBERG_VERSIONS_DIR_PATH=/opt/gotenberg/versions OTEL_TRACES_EXPORTER=none OTEL_METRICS_EXPORTER=none OTEL_LOGS_EXPORTER=none HOME=/tmp TMPDIR=/tmp LANG=C.UTF-8 LC_ALL=C.UTF-8`. Run `capture-version.sh` at build time for chromium, libreoffice and lok (as upstream) so nothing is written at runtime.
-7. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3000`, `VOLUME /config` (kept for uniformity), `CMD ["/start.sh"]`. Final `USER apps`.
+7. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3000`, `VOLUME /config` (kept for uniformity). No `CMD`: the ubuntu `ENTRYPOINT` execs `/start.sh`, which passes `"$@"` to gotenberg.
 
 ## 5. docker-bake.hcl
 

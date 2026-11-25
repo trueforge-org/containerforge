@@ -105,9 +105,9 @@ dependencies: []
 
 ## 7. start.sh
 
-Hook point: the base's `root/etc/s6` style init runs `/defaults/autostart` from openbox (do not replace the base entrypoint). `defaults/autostart` content: the base's `autostart` plus a line that launches the vendor binary (path from step 3 of section 4), e.g. `exec <openaudible-binary> &`. Because the base copies `/defaults/autostart` to `/config/.config/openbox/autostart` only when missing, existing users keep their file (document: delete it after an image update if the launch line changes).
+Hook point: the base (`apps/kasmvnc`, no s6; `/start.sh` runs nginx and kclient, `/kasminit` and openbox) runs `/defaults/autostart` from openbox (do not replace the base entrypoint). `defaults/autostart` content: the base's `autostart` plus a line that launches the vendor binary (path from step 3 of section 4), e.g. `exec <openaudible-binary> &`. Because the base copies `/defaults/autostart` to `/config/.config/openbox/autostart` only when missing, existing users keep their file (document: delete it after an image update if the launch line changes).
 
-`start.sh` (the repo's required file; invoked by the base `kasminit`, UNVERIFIED how the base calls `/start.sh`: apps/kasmvnc's own `start.sh` is the model) performs, idempotently:
+CONFLICT: `COPY --chmod=0755 . /` would overwrite the base's own `/start.sh` (apps/kasmvnc/start.sh, which seeds openbox config, starts nginx and `exec node index.js`). Do not ship a replacement `/start.sh` that drops that logic: either name this script differently and chain to the base `/start.sh` at the end, or copy the base's logic (UNVERIFIED which is intended). `start.sh` (the repo's required file; invoked by the base `kasminit`, UNVERIFIED how the base calls `/start.sh`: apps/kasmvnc's own `start.sh` is the model) performs, idempotently:
 1. `mkdir -p /config/OpenAudible /tmp/.cache`.
 2. First-run seeding: nothing else is copied; OpenAudible creates its own settings in `/config/OpenAudible`.
 3. Log `OpenAudible ${VERSION} (amd64)`; exit with an error line on non-amd64.
