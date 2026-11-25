@@ -34,7 +34,7 @@ The Go server needs a Go build stage (`FROM golang:1.17` equivalent, copy the ex
 
 Only one workable route exists because the weights are unreachable and the stack is frozen:
 
-1. `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`; `ARG VERSION`, `ARG TARGETARCH`; `USER root`.
+1. (Superseded by step 3: the ubuntu-based route is not workable; kept as the first idea.) `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`; `ARG VERSION`, `ARG TARGETARCH`; `USER root`.
 2. Stage `FROM docker.io/deepquestai/deepstack:cpu-${VERSION}@sha256:<digest> AS upstream` (digest UNVERIFIED: resolve with `docker buildx imagetools inspect`). `COPY --from=upstream /app/sharedfiles /app/sharedfiles`, `/app/intelligencelayer`, `/app/init.py`, `/app/server/server` (the compiled Go binary; path from `Dockerfile.cpu` WORKDIR `/app/server` + `go build`; draft says path unverified, check with `docker run --rm --entrypoint ls ... /app/server`).
 3. Python: the upstream image's Python 3.7 + torch 1.6 + site-packages live in the base's `/usr/local`. Copying them across distros is fragile. Alternative: build a venv with a Python 3.7-compatible interpreter, which Ubuntu 26.04 does not ship. Decision: this port needs either (a) `FROM docker.io/deepquestai/deepstack:cpu-2022.01.1` directly (Debian, root, Python 3.7), which breaks the "ubuntu base" convention, or (b) rewrite the intelligence layer for modern torch (out of scope). The plan therefore marks this as BLOCKED pending a maintainer decision (section 10) and sketches (a):
    - `FROM docker.io/deepquestai/deepstack:cpu-2022.01.1@sha256:<digest>` (UNVERIFIED digest), `USER root`, create `apps` user UID/GID 568 (`groupadd -g 568 apps && useradd -u 568 -g 568 -d /config -s /bin/bash apps`), `mkdir -p /config /datastore /deeptemp /modelstore/detection`, `chown -R apps:apps` on those, `chmod -R a+rX /app`.
@@ -53,7 +53,7 @@ variable "VERSION" {
 variable "LICENSE" { default = "Apache-2.0" }
 variable "SOURCE"  { default = "https://github.com/johnolafenwa/DeepStack" }
 ```
-The Dockerfile references `cpu-${VERSION}`. Standard four targets; `image-all` must be amd64 only (`platforms = ["linux/amd64"]`) because `cpu-2022.01.1` is amd64 only; document it. Run `docker buildx bake --print`.
+The Dockerfile references `cpu-${VERSION}`; UNVERIFIED that the renovate docker datasource with `loose` versioning handles the `cpu-` prefix of tags (may need `extractVersion`). Standard four targets; `image-all` must be amd64 only (`platforms = ["linux/amd64"]`) because `cpu-2022.01.1` is amd64 only; document it. Run `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -70,15 +70,13 @@ Header + `schema_version: 1`; `upstream_env_url: "https://github.com/johnolafenw
 set -e
 mkdir -p /config/datastore /tmp/deeptemp
 cd /app
-python3 /app/init.py            # creates faceembedding.db tables in DATA_DIR
-# Redis is started by the server binary itself? UNVERIFIED; if not, start it:
-# redis-server --port 6379 --bind 127.0.0.1 --dir /tmp --save "" --daemonize yes
+python3 /app/init.py            # creates faceembedding.db tables in DATA_DIR (UNVERIFIED: confirm init.py is idempotent)
+# Redis: UNVERIFIED whether the server binary starts it; if not, add before exec:
+# redis-server --port 6379 --bind 127.0.0.1 --dir /tmp --save "" --appendonly no --daemonize yes
 cd /app/server
-exec env DATA_DIR=/config/datastore TEMP_PATH=/tmp/deeptemp/ \
-  "VISION-DETECTION=${VISION_DETECTION_FLAG:-${VISION_DETECTION:-False}}" \
-  /app/server/server
+exec /app/server/server
 ```
-Hyphenated variables cannot be exported by bash by name; pass them through `env "NAME=value" cmd` (as above) or `docker run -e` which Docker allows. Simplest rule: `docker run -e VISION-DETECTION=True` already works because Docker sets the process environment directly, so `start.sh` must not re-map them; it should only `exec` the server. Keep this script minimal: `init.py`, optional Redis, `exec /app/server/server`. UNVERIFIED how upstream starts Redis and the Python workers (likely the Go server spawns `redis-server` and `python3 intelligencelayer/shared/*.py`); confirm by reading `server/server.go` `startRedis`-like functions and from a test run.
+Hyphenated variables cannot be exported by bash by name. Rule: `docker run -e VISION-DETECTION=True` already works because Docker sets the process environment directly, so `start.sh` must not re-map them; it should only `exec` the server. Keep this script minimal: `init.py`, optional Redis, `exec /app/server/server`. UNVERIFIED how upstream starts Redis and the Python workers (likely the Go server spawns `redis-server` and `python3 intelligencelayer/shared/*.py`); confirm by reading `server/server.go` `startRedis`-like functions and from a test run.
 
 ## 8. container-test.yaml
 

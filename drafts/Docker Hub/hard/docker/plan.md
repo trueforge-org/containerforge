@@ -79,7 +79,7 @@ Port 2375 only opens when `DOCKER_TLS_CERTDIR` is set empty (verified in upstrea
 ## 7. start.sh
 
 - `mkdir -p /config/docker-data /config/certs /tmp/run`.
-- If `DOCKER_TLS_CERTDIR` is non-empty, generate CA, server and client certs there only when missing (port the `_tls_generate_certs` logic from upstream `dockerd-entrypoint.sh`, adding `DOCKER_TLS_SAN`); otherwise listen on `tcp://0.0.0.0:2375` and log a warning that the API is unauthenticated.
+- If `DOCKER_TLS_CERTDIR` is non-empty, generate CA, server and client certs there only when missing (port the `_tls_generate_certs` logic from upstream `dockerd-entrypoint.sh`, adding `DOCKER_TLS_SAN`); otherwise (opt-in, `DOCKER_TLS_CERTDIR` set empty; port 2375 is not in `EXPOSE`/`settings.yaml`) listen on `tcp://0.0.0.0:2375` and log a warning that the API is unauthenticated.
 - Never write to `/app`. Data root `/config/docker-data` (draft expects `/var/lib/docker`; see 9).
 - `exec dockerd-rootless.sh --host=unix:///tmp/run/docker.sock --host=tcp://0.0.0.0:2376 --tlsverify --tlscacert ... --tlscert ... --tlskey ... --data-root /config/docker-data`; set `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"` like upstream. UNVERIFIED: exact flag set; `dockerd-rootless.sh` exists in the extras tarball (HTTP 200 for the tarball only).
 

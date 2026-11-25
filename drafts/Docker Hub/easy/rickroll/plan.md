@@ -47,7 +47,7 @@ Optional builder stage on `ubuntu` is not needed: `curl` is available in the ngi
 2. Final stage `FROM` the nginx base, `ARG VERSION` (pinned commit SHA), `USER root`.
 3. `COPY --from=video --chown=568:568 /video.mp4 /usr/share/nginx/html/video.mp4` (read-only at runtime).
 4. Fetch the upstream `scripts/index/80-index.sh` at `${VERSION}` only if you want to track upstream; otherwise copy the adapted file from `docker-entrypoint.d/` (MIT notice must be kept). License file: `/usr/share/licenses/rickroll/LICENSE` fetched from `https://raw.githubusercontent.com/modem7/docker-rickroll/${VERSION}/LICENCE.txt` (upstream spells it `LICENCE.txt`).
-5. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html`, `EXPOSE 8080`, `VOLUME /config` (as it-tools; the nginx base already sets `CMD`).
+5. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html`, `EXPOSE 8080`, `VOLUME /config` (it-tools has no `VOLUME` line; add it here; the nginx base already sets `CMD`).
 - No apt packages.
 
 ## 5. docker-bake.hcl

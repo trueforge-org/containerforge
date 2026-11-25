@@ -31,7 +31,7 @@ No `defaults/` (credentials come from env, nothing to seed). No `root/`, no `DOW
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-Pip package on the python base, install into `/app/venv`. Closest siblings: `apps/bazarr`, `apps/changedetection` (the venv install pattern). A sibling plan, `s3backup`, uses the same layout with s3cmd.
+Pip package on the python base, install into `/app/venv`. Closest siblings: `apps/changedetection` (same `python:3.15.2` FROM line, venv install) and `apps/bazarr` (`python-node` base; bake layout). A sibling plan, `s3backup`, uses the same layout with s3cmd.
 
 ## 4. Dockerfile
 

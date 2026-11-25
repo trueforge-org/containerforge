@@ -36,7 +36,7 @@ apps/reg/
 
 `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
 
-A static Go binary needs no runtime stack, so plain ubuntu is enough (`curl`, `tar`, `sha256sum` are already used the same way by `apps/adguardhome-sync`). Closest sibling: `apps/adguardhome-sync` (release tarball extracted to `/app`, config seeded from `defaults/`).
+A static Go binary needs no runtime stack, so plain ubuntu is enough (`curl` and `tar` are used the same way by `apps/adguardhome-sync`; it does not verify a checksum, this plan does). Closest sibling: `apps/adguardhome-sync` (release tarball extracted to `/app`, config seeded from `defaults/`).
 
 ## 4. Dockerfile
 
@@ -153,7 +153,7 @@ filePaths:
 - /app/registry
 - /usr/share/licenses/reg/LICENSE
 ```
-`GET /v2/` returns 200 with no auth configured (Distribution API version check). `timeoutSeconds` is a guess (adguardhome-sync has none; bookstack uses 180); keep 60 unless slow. No env needed, so everything runs in the test.
+`GET /v2/` returns 200 with no auth configured (Distribution API version check). `timeoutSeconds` is a guess (adguardhome-sync has none; bookstack uses 240); keep 60 unless slow. No env needed, so everything runs in the test.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

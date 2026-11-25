@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Version | `4.6.0` is the newest tag/release (2026-01-14, release body only "Update VERSION"); the draft used `4.5.3` (the zip it links). The repo `VERSION` file on master reads `4.5.3`, so UNVERIFIED which of the two is the correct stable; pick `4.5.3` unless the 4.6.0 release page shows the `Server-Dist-linux.zip` asset (its "Assets 2" list did not load). |
+| Version | `4.5.3` is the newest GitHub release and the only recent one with assets (`Server-Dist-linux.zip`, `Server-Dist-windows.zip`; checked via the releases API). `4.6.0` exists only as a tag with no release or assets, and the repo `VERSION` file on master reads `4.5.3`. Plan pins `4.5.3`. No `mcr.microsoft.com` FROM exists in `apps/` yet, so the SDK image digest is UNVERIFIED. |
 | Renovate | `datasource=github-releases depName=Webreaper/Damselfly versioning=loose` |
 | License | `GPL-3.0-only`. LICENSE is "GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007". UNVERIFIED whether "or later" applies; use `GPL-3.0-only` unless a source header says otherwise. |
 | Source | https://github.com/Webreaper/Damselfly |

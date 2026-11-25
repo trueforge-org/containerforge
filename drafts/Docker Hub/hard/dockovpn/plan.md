@@ -34,7 +34,7 @@ Preferred: fetch upstream `scripts/` and `config/` at the tag during build into 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `USER root`.
-2. `apt-get install -y --no-install-recommends openvpn easy-rsa iptables netcat-openbsd zip libcap2-bin` (pin openvpn/easy-rsa only if the image must state their versions; app `VERSION` is the dockovpn script tag, not the apt packages). Check none are in the base.
+2. `apt-get install -y --no-install-recommends openvpn easy-rsa iptables netcat-openbsd zip libcap2-bin iproute2` (iproute2 provides `ss` for the section 8 probe; pin openvpn/easy-rsa only if the image must state their versions; app `VERSION` is the dockovpn script tag, not the apt packages). Check none are in the base.
 3. `curl -fsSL https://github.com/dockovpn/dockovpn/archive/refs/tags/v${VERSION}.tar.gz`, extract `scripts/`, `config/`, `VERSION` into `/app/` (no checksum available; pin by tag). `ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa` if not provided by the Ubuntu package (UNVERIFIED).
 4. License: copy `LICENSE` from the tag archive to `/usr/share/licenses/dockovpn/`, plus OpenVPN/easy-rsa copyright from `/usr/share/doc`.
 5. Non-root capabilities: `setcap cap_net_admin,cap_net_raw+ep /usr/sbin/openvpn /usr/sbin/xtables-nft-multi` (UNVERIFIED that file caps work with the target runtime; they require the container bounding set to include NET_ADMIN and `allowPrivilegeEscalation` not blocking exec with file caps).

@@ -73,7 +73,7 @@ Header + `schema_version: 1`; `upstream_env_url: "https://github.com/codeproject
 #!/usr/bin/env bash
 set -e
 mkdir -p /config/settings /config/modules /config/runtimes /config/downloads/modules/packages /config/downloads/models /config/logs
-[ -d /config/preinstalled-modules ] || cp -a /app/server/../preinstalled-modules /config/preinstalled-modules 2>/dev/null || true
+[ -d /config/preinstalled-modules ] || cp -a /app/preinstalled-modules /config/preinstalled-modules 2>/dev/null || true
 export ASPNETCORE_URLS="${ASPNETCORE_URLS:-http://0.0.0.0:32168}"
 export ModuleOptions__ModulesDirPath=/config/modules
 export ModuleOptions__RuntimesDirPath=/config/runtimes
@@ -83,7 +83,7 @@ export TMPDIR=/tmp
 cd /app/server
 exec /app/dotnet/dotnet CodeProject.AI.Server.dll
 ```
-Idempotent. UNVERIFIED: that the server reads the `ModuleOptions__*` env overrides (standard ASP.NET configuration, `appsettings.json` keys confirmed) and where the logs directory is resolved (`LoggingDir: "logs"` relative to the root). If env overrides are ignored, fall back to a seeded `/config/appsettings.override.json`... only if the server loads it; otherwise this app is blocked for read-only `/app`. Do not use `start.sh` shipped by the vendor (it runs `open` and sleeps).
+Idempotent. UNVERIFIED: the `/app/preinstalled-modules` source path (the deb installs modules under `/app/server/modules`; the docs only name `/app/preinstalled-modules` for the Docker image); that the server reads the `ModuleOptions__*` env overrides (standard ASP.NET configuration, `appsettings.json` keys confirmed) and where the logs directory is resolved (`LoggingDir: "logs"` relative to the root). If env overrides are ignored, fall back to a seeded `/config/appsettings.override.json`... only if the server loads it; otherwise this app is blocked for read-only `/app`. Do not use `start.sh` shipped by the vendor (it runs `open` and sleeps).
 
 ## 8. container-test.yaml
 

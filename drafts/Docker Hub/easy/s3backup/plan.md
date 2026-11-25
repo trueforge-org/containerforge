@@ -32,7 +32,7 @@ apps/s3backup/
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-The draft suggests ubuntu plus pip; the python base already provides `/app/venv`, `pip` and the venv conventions in `python-runtime.instructions.md`. Closest siblings: `apps/bazarr` (python base) and `apps/changedetection` (pip install into `/app/venv`). Fallback if 3.15 breaks s3cmd: see section 10.
+The draft suggests ubuntu plus pip; the python base already provides `/app/venv`, `pip` and the venv conventions in `python-runtime.instructions.md`. Closest siblings: `apps/changedetection` (same `python:3.15.2` FROM line) and `apps/bazarr` (`python-node` base, `chown -R root:root /app` after the pip install). Fallback if 3.15 breaks s3cmd: see section 10.
 
 ## 4. Dockerfile
 

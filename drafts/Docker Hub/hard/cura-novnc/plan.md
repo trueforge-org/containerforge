@@ -40,7 +40,7 @@ apps/cura-novnc/
 3. amd64: `curl -fsSL -o /tmp/cura.AppImage "https://github.com/Ultimaker/Cura/releases/download/${VERSION}/UltiMaker-Cura-${VERSION}-linux-X64.AppImage"` and the `.asc`; verify with `gpg --verify` against the UltiMaker release key (UNVERIFIED key id: look it up from UltiMaker docs; otherwise pin a sha256 you compute). Then `chmod +x`, `./cura.AppImage --appimage-extract` in `/tmp`, `mv squashfs-root /app/cura`, and `sed -i 's/QT_QPA_PLATFORMTHEME=xdgdesktopportal/QT_QPA_PLATFORMTHEME=gtk3/' /app/cura/AppRun`. No FUSE needed.
 4. License: copy `LICENSE` (from the extracted tree or the source) to `/usr/share/licenses/cura-novnc/`.
 5. Arch switch: `if [ "$TARGETARCH" = "amd64" ]; then ...; else apt-get install cura; fi`. Provide a launcher `/usr/local/bin/cura` (create in the `RUN` via `ln -s /app/cura/AppRun /usr/local/bin/cura` on amd64; arm64 uses the apt-provided `/usr/bin/cura`).
-6. `ENV QT_QPA_PLATFORM=xcb LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=4.5 XDG_DOWNLOAD_DIR=/config/prints` (software GL for Xvnc, since kasmvnc has no GPU; the override values are UNVERIFIED, test Cura start).
+6. `ENV QT_QPA_PLATFORM=xcb LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=4.5 XDG_DOWNLOAD_DIR=/prints` (software GL for Xvnc, since kasmvnc has no GPU; the override values are UNVERIFIED, test Cura start).
 7. `mkdir -p /prints && chown apps:apps /prints`; `chown -R apps:apps /app/cura`; cleanup `rm -rf /tmp/* /var/lib/apt/lists/*`.
 8. `USER apps`, `COPY --chmod=0755 . /` (copies `defaults/autostart` over the base file), `EXPOSE 3000 3001`, `VOLUME /config`, `VOLUME /prints`. Keep base `WORKDIR /config`/entrypoint (inherited; do not redefine).
 
