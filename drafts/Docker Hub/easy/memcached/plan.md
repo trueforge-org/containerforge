@@ -77,7 +77,7 @@ tcp:
 - port: '11211'
 ```
 
-Nothing is weakened. `timeoutSeconds` stays at the default (memcached starts instantly). No env vars needed.
+Nothing is weakened. Note that the existing runner has no `expectedOutput`; the comment in `apps/limnoria/container-test.yaml` says such runners assert nothing, so the `tcp` probe is the real check. `timeoutSeconds` stays at the default (memcached starts instantly). No env vars needed.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -90,8 +90,8 @@ Nothing is weakened. `timeoutSeconds` stays at the default (memcached starts ins
 - **This draft is a duplicate of the existing `apps/memcache`.** The right action is to switch the chart to `ghcr.io/trueforge-org/memcache`, not to add a second image. Ask maintainers if a name `memcached` is required.
 - Bind address needs a real check from another container (UNVERIFIED, see section 1). If it listens on localhost only, add `-l 0.0.0.0` to `CMD`.
 - No authentication in the default setup (no SASL); keep it on an internal network, as the draft says.
-- Version drift: upstream is at 1.6.45, the Ubuntu 26.04 archive at 1.6.40 (security fixes are backported by Ubuntu with `ubuntu0.N` suffixes that the pin `1.6.40-1` does not take).
-- `apt-get install memcached=1.6.40-1` only works while that exact version stays in the archive; a move of the pin to the updates pocket version is a possible future fix.
+- Version drift: upstream is at 1.6.45, the Ubuntu 26.04 archive at 1.6.40 (Ubuntu publishes later updates with `ubuntu0.N` suffixes, which the pin `1.6.40-1` does not take).
+- UNVERIFIED (not checked against a build): `1.6.40-1` is the release-pocket version per the Launchpad note in section 1, so the pin installs the package without later Ubuntu updates. Moving the pin to the current updates-pocket version is a decision for maintainers.
 - Blockers: none (no musl, GPU, privileged or arm64 issue; apt covers both architectures).
 
 ## 11. Build and test steps

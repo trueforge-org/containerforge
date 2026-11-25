@@ -8,7 +8,7 @@
 | What the "app" is | The TrueCharts `metallb-config` chart renders MetalLB custom resources (`ipAddressPools`, `L2Advertisements`, BGP peers, communities; templates `_ipaddresspool.tpl`, `_l2advertisement.tpl`, `_bgpadvertisement.tpl`, `_peers.tpl`, `_community.tpl`). Its `values.yaml` sets `image.repository: hello-world`, `tag: latest@sha256:1e4c05b8...`, `workload.main.enabled: false`, `containers.main.enabled: false` and `service.main.enabled: false`. The image only satisfies the chart's required `image` value and is never run. |
 | Image content | `docker-library/hello-world`: `FROM scratch`, `COPY hello /`, `CMD ["/hello"]`. It prints a message and exits. |
 | Version | The upstream repo has no tags (`0` tags). HEAD is commit `522bcd2faf422c60b9d20e64d7cd6d56600aec97`, the same commit as the draft's Dockerfile link. |
-| Renovate | `datasource=git-refs depName=https://github.com/docker-library/hello-world` with the commit SHA as `VERSION` (renovate behaviour UNVERIFIED). |
+| Renovate | `datasource=git-refs depName=https://github.com/docker-library/hello-world currentValue=master` with the commit SHA as `VERSION` (same form as `apps/tvheadend`; renovate behaviour for this repo UNVERIFIED). |
 | License | `MIT` (`LICENSE`: "Copyright (c) 2014 Docker, Inc."). |
 | Source (`SOURCE`) | https://github.com/docker-library/hello-world |
 | amd64 download | `https://github.com/docker-library/hello-world/raw/522bcd2faf422c60b9d20e64d7cd6d56600aec97/amd64/hello`, sha256 `f4061a47648b7d8fffda5253cebff1d179df9457cfc7e539ad3e3bdc6872c341` (computed locally on 2026-11-23). |
@@ -65,7 +65,7 @@ No apt packages, so nothing to pin.
 - `APP` = `metallb-config`
 - `VERSION`:
   ```hcl
-  // renovate: datasource=git-refs depName=https://github.com/docker-library/hello-world
+  // renovate: datasource=git-refs depName=https://github.com/docker-library/hello-world currentValue=master
   default = "522bcd2faf422c60b9d20e64d7cd6d56600aec97"
   ```
 - `LICENSE` = `MIT`, `SOURCE` = `https://github.com/docker-library/hello-world`

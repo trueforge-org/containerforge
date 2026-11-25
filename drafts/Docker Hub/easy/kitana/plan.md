@@ -41,7 +41,7 @@ apps/kitana/
 FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d
 ```
 
-Pure Python tool, as the draft says. The base ships `/app/venv` (pip, setuptools and wheel pinned), `curl`, `unzip` and build tools. The 3.15 base is what is available; if the compatibility patches in section 4 do not hold, ask maintainers whether an older python base tag may be used (like `apps/changedetection`, which pins 3.14.8).
+Pure Python tool, as the draft says. The base ships `/app/venv` (pip, setuptools and wheel pinned), `curl`, `unzip` and build tools. The 3.15 base is what is available; if the compatibility patches in section 4 do not hold, ask maintainers whether an older python base tag may be used (several apps still pin `python:3.14.8`; `apps/changedetection` pins `python-node:3.14.8`).
 
 ## 4. Dockerfile
 
@@ -159,7 +159,7 @@ Draft expectations: the chart runs UID 0, writable rootfs, `/app/data` PVC. Ours
 - The base's `setuptools` is pinned by the python image; no `distutils` shim is relied on.
 - The draft's port `8000` is wrong; the real port is `31337`.
 - Draft caveat "needs a Plex server URL and token by hand" is partly right: users log in with Plex.TV in the UI, and the Plex server needs the Sub-Zero plugin; `-A` can supply a global token.
-- Upstream has `update_check` using PyGithub against GitHub; it only logs a notice when a newer release exists and needs outbound network (UNVERIFIED failure mode if offline).
+- Upstream runs `update_check` (PyGithub against GitHub) at start and every 6 hours. It shows a notice when a newer release exists. It is wrapped in `try/except`: on an unexpected error (for example no network) it prints `Update check failed` plus a traceback and carries on, so that traceback alone is not a startup failure (from the code; not run).
 - `Kitana.zip` asset naming may change; the checksum ARG must be refreshed with each version.
 - No musl, GPU, privileged or arm64 blockers (pure Python; wheel availability on aarch64 is UNVERIFIED).
 
@@ -172,7 +172,7 @@ docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create kitana-probe-config
 docker run --rm -d --name kitana-probe --read-only --tmpfs /tmp \
   -v kitana-probe-config:/config kitana:0.4.3-2
-docker logs -f kitana-probe      # expect "Starting SassCompilerPlugin", "Compiling ... static/sass", CherryPy "Serving on http://0.0.0.0:31337" and no traceback
+docker logs -f kitana-probe      # expect "Starting SassCompilerPlugin", "Compiling ... static/sass" (`kitana.py` publishes `compile_sass` after engine start), CherryPy "Serving on http://0.0.0.0:31337" and no traceback
 docker rm -f kitana-probe; docker volume rm kitana-probe-config
 forgetool containers test --image kitana:0.4.3-2 --config ./apps/kitana/container-test.yaml
 ```

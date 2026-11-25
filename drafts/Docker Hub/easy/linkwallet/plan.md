@@ -9,7 +9,7 @@
 | Renovate | `datasource=github-releases depName=tardisx/linkwallet versioning=semver`. The GitHub repo is archived (2025-05-23) and the README says the project moved to https://code.ppl.town/justin/linkwallet; the Forgejo releases page lists the same `v0.1.1` as latest, so there is currently nothing newer to track. |
 | License | `MIT` (GitHub reports MIT; the tarball ships `LICENSE`, "Copyright (c) 2022 Justin Hawkins"). |
 | Source (`SOURCE`) | https://github.com/tardisx/linkwallet |
-| Downloads | amd64: `https://github.com/tardisx/linkwallet/releases/download/v0.1.1/linkwallet_Linux_x86_64.tar.gz`. arm64: `https://github.com/tardisx/linkwallet/releases/download/v0.1.1/linkwallet_Linux_arm64.tar.gz`. Each tarball holds `linkwallet`, `LICENSE`, `README.md`. The amd64 binary is a statically linked, stripped ELF (checked with `file`); the arm64 one is UNVERIFIED but built by the same goreleaser run. |
+| Downloads | amd64: `https://github.com/tardisx/linkwallet/releases/download/v0.1.1/linkwallet_Linux_x86_64.tar.gz`. arm64: `https://github.com/tardisx/linkwallet/releases/download/v0.1.1/linkwallet_Linux_arm64.tar.gz`. Each tarball holds `linkwallet`, `LICENSE`, `README.md`. The amd64 binary is a statically linked, stripped ELF (checked with `file`); `.goreleaser.yaml` builds all architectures with `CGO_ENABLED=0`. The arm64 tarball hash also matches (re-checked 2026-11-25). |
 | Checksum source | Upstream `linkwallet_0.1.1_checksums.txt` in the release (sha256): amd64 `cc0710ac78a0b6a4d830b438ac4335593e6840234cb0feebdbfd29ad143ee9d4`, arm64 `ce4aa3c0e2494a8e02c4fa7949b5adf2fc3d5b18f109395c3efd0d648ea49f85`. I downloaded the amd64 tarball and its hash matches. |
 | CLI | `linkwallet -db-path <file>` is mandatory (`log.Fatal` when empty). The DB is a bolthold file at that path and a Bleve index at `<path>.bleve` (created if missing). |
 | Port / bind | README: default `8080`, change with the `PORT` environment variable. The server is `gin.Default().Run()`, which reads `PORT` and binds all interfaces. |
@@ -42,7 +42,7 @@ Static Go binary needs no runtime; `curl`, `tar` and `ca-certificates` (needed f
 ## 4. Dockerfile
 
 1. `FROM` as above; `ARG VERSION`; `ARG TARGETARCH`.
-2. `ARG LINKWALLET_SHA256_AMD64=cc0710ac78a0b6a4d830b438ac4335593e6840234cb0feebdbfd29ad143ee9d4` and `ARG LINKWALLET_SHA256_ARM64=ce4aa3c0e2494a8e02c4fa7949b5adf2fc3d5b18f109395c3efd0d648ea49f85` (they are pinned from the upstream checksum file and must be bumped with `VERSION`; as an alternative the build can fetch the checksums file and `grep` the right line, which needs no ARGs and is preferred if the maintainers agree).
+2. No checksum ARGs: the build fetches the release's checksum file (step 5), so a `VERSION` bump needs no hand-edited hashes.
 3. `USER root`.
 4. `ENV HOME=/config`.
 5. One `RUN set -eux` step:

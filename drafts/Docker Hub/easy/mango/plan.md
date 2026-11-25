@@ -65,7 +65,7 @@ No apt packages. `/data` is the manga library mount point; `/data` already exist
   default = "0.27.0"
   ```
 - `LICENSE` = `MIT`, `SOURCE` = `https://github.com/getmango/Mango`
-- Four standard targets and `group "default"` as in `apps/adguardhome-sync/docker-bake.hcl`, with one deliberate change: `image-all` uses `platforms = ["linux/amd64"]` only, because there is no arm64 binary. This differs from the standard two-platform layout; confirm with maintainers (section 10).
+- Four standard targets and `group "default"` as in `apps/adguardhome-sync/docker-bake.hcl`, with one deliberate change: `image-all` uses `platforms = ["linux/amd64"]` only, because there is no arm64 binary. This differs from the standard two-platform layout (precedent: `apps/steamcmd` and `apps/deluge` are amd64 only); confirm with maintainers (section 10).
 - `docker buildx bake --print` must pass.
 
 ## 6. settings.yaml
@@ -167,11 +167,12 @@ A `tcp` probe is used because the root URL probably redirects to the login page 
 | Upstream path (chart) | Remap |
 |---|---|
 | `~/.config/mango/config.yml` (`/root/.config/mango`) | `/config/config.yml` via `-c`. |
-| `~/mango/mango.db`, `queue.db`, `library.yml.gz`, `uploads`, `plugins` (`/root/mango`) | `/config/...` via env defaults and `HOME=/config`. |
+| DB: code default in v0.27.0 is `~/mango.db` (`src/config.cr`), not under `~/mango/`; an existing `config.yml` may name another path | `/config/mango.db` via `DB_PATH`. |
+| `~/mango/queue.db`, `library.yml.gz`, `uploads`, `plugins` (`/root/mango`) | `/config/...` via env defaults. |
 | `~/mango/library` | `/data` (read-mostly mount for the manga). |
 | temp files | `TMPDIR=/tmp`. |
 
-Draft expectations: the chart ran UID 0 with writable rootfs and two PVCs under `/root`. Ours runs as UID 568, read-only rootfs, not privileged, with `/config` (state) and `/data` (library). Existing databases from `/root/mango` can be moved into `/config` by the operator (file names are the same). The library mount must be readable by UID 568.
+Draft expectations: the chart ran UID 0 with writable rootfs and two PVCs under `/root`. Ours runs as UID 568, read-only rootfs, not privileged, with `/config` (state) and `/data` (library). To migrate, the operator moves the DB files (wherever the old `config.yml` points) into `/config`. An old `config.yml` stores expanded `/root/...` paths and wins over env, so its path options must be edited too. The library mount must be readable by UID 568.
 
 ## 10. Risks, caveats and open questions
 
