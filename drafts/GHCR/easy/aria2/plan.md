@@ -106,7 +106,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=aria2/aria2 versioning=loose
+  // renovate: datasource=github-releases depName=aria2/aria2 versioning=loose extractVersion=^release-(?<version>.*)$
   default = "1.37.0"
 }
 
@@ -204,15 +204,19 @@ mkdir -p /config /downloads
 [ -f /config/aria2.conf ] || cp /defaults/aria2.conf /config/aria2.conf
 [ -f /config/aria2.session ] || touch /config/aria2.session
 
+args=()
+[ -n "${RPC_SECRET:-}" ] && args+=("--rpc-secret=${RPC_SECRET}")
+
 exec aria2c \
     --conf-path=/config/aria2.conf \
     --rpc-listen-port="${RPC_PORT:-6800}" \
     --listen-port="${LISTEN_PORT:-6888}" \
-    --dir=/downloads
+    --dir=/downloads \
+    "${args[@]}"
 ```
 
 Notes:
-- `defaults/aria2.conf` must set `rpc-listen-all=true` (aria2 defaults to binding RPC on localhost only, which breaks use from other containers), `enable-rpc=true`, `save-session=/config/aria2.session`, `input-file=/config/aria2.session`, `dht-file-path=/config/dht.dat`, `dht-file-path6=/config/dht6.dat`, `rpc-secret` read from `RPC_SECRET` at start is NOT supported by aria2 config files, so `start.sh` must pass `--rpc-secret="${RPC_SECRET}"` only when set (add a conditional `args` array; do not write the secret to a file). Verify each option name against `aria2c --help` in the build.
+- `defaults/aria2.conf` must set `rpc-listen-all=true` (aria2 defaults to binding RPC on localhost only, which breaks use from other containers), `enable-rpc=true`, `save-session=/config/aria2.session`, `input-file=/config/aria2.session`, `dht-file-path=/config/dht.dat`, `dht-file-path6=/config/dht6.dat`, `rpc-secret` is not read from env by aria2, so `start.sh` passes `--rpc-secret` only when `RPC_SECRET` is set (the `args` array above; the secret is not written to a file; note it is visible in the process list, UNVERIFIED alternative). Verify each option name against `aria2c --help` in the build.
 - Do not run the upstream tracker download or the remote profile step. Trackers are optional; if wanted later, add them to `defaults/` rather than fetching at start.
 - `umask` line uses `UMASK` (only if the env is kept; see section 6).
 - Seeding only when missing, so user edits in `/config/aria2.conf` survive restarts.
@@ -233,7 +237,7 @@ http:
   path: /jsonrpc
 filePaths:
 - /usr/bin/aria2c
-- /config/aria2.conf
+- /defaults/aria2.conf
 - /usr/share/licenses/aria2/copyright
 ```
 

@@ -41,7 +41,7 @@ No `defaults/` needed unless a default `amule.conf` is shipped (it is generated 
 4. License files to `/usr/share/licenses/amule/`.
 5. `ENV HOME=/config` and caches to `/tmp`.
 6. `EXPOSE 4711/tcp 4712/tcp 4662/tcp 4665/udp 4672/udp`.
-7. `COPY --chmod=0755 . /` and `USER apps`.
+7. `VOLUME /config`, `COPY --chmod=0755 . /` and `USER apps`.
 8. Packages needed by the static build: UNVERIFIED. Run `ldd` on the extracted binaries and install only the missing runtime libs (the static build may still need libc, libstdc++ and libupnp: check).
 
 ## 5. docker-bake.hcl
@@ -63,7 +63,7 @@ No `defaults/` needed unless a default `amule.conf` is shipped (it is generated 
 ## 7. start.sh
 
 - Idempotent: create `/config/.aMule` and `/config/downloads` only when missing. Seed `amule.conf` only when missing.
-- If `WEBUI_PWD` or `GUI_PWD` is unset and no stored value exists, generate with `pwgen` and store under `/config` (not in logs). Apply the env values to the config on every start.
+- If `WEBUI_PWD` or `GUI_PWD` is unset and no stored value exists, generate with `/dev/urandom` (`pwgen` availability in the ubuntu base is UNVERIFIED) and store under `/config` (not in logs). Apply the env values to the config on every start.
 - Bind to `0.0.0.0` for the web interface and eMule ports. Check the default bind address in the generated config (UNVERIFIED).
 - Caches and temp to `/tmp`.
 - Final step: `exec amuled` with the config dir, so signals reach the daemon. Start `amuleweb` alongside only if the web interface is needed (check s6/cron need: upstream uses s6; plan a plain process model).

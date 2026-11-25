@@ -53,7 +53,7 @@ Two stages, following `apps/it-tools/Dockerfile`:
    - `USER root`, `COPY --from=build --chown=568:568 /tmp/dist/ /usr/share/nginx/html`, then `COPY --chmod=755 ./ /` for `defaults/` and `docker-entrypoint.d/`.
    - Licence: copy `/tmp/dist/LICENSE` from the build stage to `/usr/share/licenses/ariang/LICENSE` (`COPY --from=build` into that path). The web root keeps its own copy from the zip, which is harmless.
    - Keep the nginx base's own tmp/log symlinks; do not change them.
-   - `EXPOSE 8080`, `USER apps`, `COPY --chmod=0755 . /`.
+   - `EXPOSE 8080`, `VOLUME /config` (neither `apps/nginx` nor `apps/it-tools` declares it; add per repo rule), `USER apps`, `COPY --chmod=0755 . /`.
    - Do not set `CMD`/`ENTRYPOINT`: the nginx base already runs `nginx -c /config/nginx.conf -g "daemon off;"`.
 
 Key snippet (runtime stage tail):
@@ -62,6 +62,7 @@ Key snippet (runtime stage tail):
 USER apps
 COPY --chmod=0755 . /
 EXPOSE 8080
+VOLUME /config
 ```
 
 The `ARIANG_SHA256` ARG value is the sha256 in section 1.

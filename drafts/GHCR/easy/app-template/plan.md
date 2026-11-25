@@ -34,7 +34,7 @@ Note: the folder name is `app-template` (the TrueCharts chart name). The contain
 - `apps/speedtest-exporter/container-test.yaml`
 - `apps/speedtest-exporter/start.sh`
 
-No `defaults/`, `etc/`, `health/` needed (no config file to seed, no state). No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). No `/config` volume: the exporter keeps no state (see section 9).
+No `defaults/`, `etc/`, `health/` needed (no config file to seed, no state). No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). `/config` is declared as VOLUME but unused: the exporter keeps no state (see section 9).
 
 Note: `include/.dockerignore` is an allow-list. `COPY --chmod=0755 . /` only reaches `start.sh`. The app source (`src/exporter.py`) is fetched during the build from the tarball, so it does not need to be in the folder.
 
@@ -46,7 +46,7 @@ Python version note: upstream pins Flask 2.3.2 and Werkzeug 2.3.6 (2023 era) and
 
 ## 4. Dockerfile
 
-1. `ARG VERSION`, `ARG TARGETARCH`, `ARG SPEEDTEST_VERSION=1.2.0`, `USER root`.
+1. `ARG VERSION`, `ARG TARGETARCH`, `ARG SPEEDTEST_VERSION` (default comes from `docker-bake.hcl`, see section 5), `USER root`.
 2. Set `ENV` for runtime defaults and HOME:
 
 ```dockerfile
@@ -84,13 +84,13 @@ RUN set -eux; \
     cp /tmp/src/src/exporter.py /app/exporter.py; \
     mkdir -p /usr/share/licenses/speedtest-exporter; \
     cp /tmp/src/LICENSE /usr/share/licenses/speedtest-exporter/LICENSE; \
-    /usr/local/bin/python -m venv /app/venv; \
+    [ -x /app/venv/bin/pip ] || /usr/local/bin/python -m venv /app/venv; \
     /app/venv/bin/pip install --no-cache-dir -r /tmp/src/src/requirements.txt; \
     rm -rf /tmp/src /tmp/src.tgz /tmp/* ; \
     chown -R root:root /app && chmod -R 755 /app
 ```
 
-Notes for this step: create `/usr/share/licenses/speedtest-exporter` with `mkdir -p` before the `cp` (remove the `|| true` once the path exists, so a missing license fails the build). `pip` cache goes to `/tmp` via `PIP_CACHE_DIR=/tmp/pip` if the base does not already set it (the base sets `PIP_NO_CACHE_DIR=1`, which is fine). Use the `python` base's `/usr/local/bin/python` only if that is the interpreter it provides (check `which python` in the base during the first bake run).
+Notes for this step: create `/usr/share/licenses/speedtest-exporter` with `mkdir -p` before the `cp`. `pip` cache goes to `/tmp` via `PIP_CACHE_DIR=/tmp/pip` if the base does not already set it (the base sets `PIP_NO_CACHE_DIR=1`, which is fine). The python base already bundles `/app/venv` (UNVERIFIED that it contains pip; the line above reuses it and only creates one when missing). Use the `python` base's `/usr/local/bin/python` only if that is the interpreter it provides (check `which python` in the base during the first bake run).
 
 5. Tail:
 
@@ -100,9 +100,10 @@ COPY --chmod=0755 . /
 WORKDIR /app
 
 EXPOSE 9798
+VOLUME /config
 ```
 
-No `VOLUME /config`: the exporter keeps no persistent state. Add `VOLUME` only if a later change needs it.
+`VOLUME /config` is declared per the repo rule, although the exporter keeps no persistent state and writes nothing there.
 
 ## 5. docker-bake.hcl
 
@@ -184,11 +185,13 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-volumes: []
+volumes:
+  - path: /config
+    required: false
 dependencies: []
 ```
 
-Notes: `SPEEDTEST_SERVER` is optional with no default (empty means auto-select). `volumes: []` because no `/config` is used; if the schema rejects an empty list, omit the key (UNVERIFIED). `TZ` is listed only if the start script or the base uses it; drop it otherwise (do not invent env vars).
+Notes: `SPEEDTEST_SERVER` is optional with no default (empty means auto-select). `/config` is listed as optional because the Dockerfile declares it, though the app does not use it. `TZ` is listed only if the start script or the base uses it; drop it otherwise (do not invent env vars).
 
 ## 7. start.sh
 
@@ -261,7 +264,7 @@ forgetool containers test --image speedtest-exporter:v3.5.4 --config ./apps/spee
 docker rm -f speedtest-exporter-probe
 ```
 
-No `/config` volume is created (none is used), so there is no volume to remove. Readiness signal: `Starting Speedtest-Exporter on http://localhost:9798` (line 148 of `exporter.py`; the message says localhost but the bind is `0.0.0.0`). Also check the container stays up and that `curl -s http://localhost:9798/` returns the welcome page from inside the container.
+No named volume is created (`/config` is unused), so there is no volume to remove. Readiness signal: `Starting Speedtest-Exporter on http://localhost:9798` (line 148 of `exporter.py`; the message says localhost but the bind is `0.0.0.0`). Also check the container stays up and that `curl -s http://localhost:9798/` returns the welcome page from inside the container.
 
 Outside-container check (for the "not only localhost" rule): run with `-p 9798:9798` and curl from the host.
 

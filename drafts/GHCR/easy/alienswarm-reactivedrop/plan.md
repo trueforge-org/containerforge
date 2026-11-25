@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | No versioned upstream release. The Steam dedicated server (app 563560) is pulled at start, so the container version is the ContainerForge build of the steamcmd base. Steam build id: UNVERIFIED (Valve wiki returned HTTP 403). |
-| Renovate | Base only: `datasource=deb depName=steamcmd` (inherited pattern from `apps/steamcmd`). Game server: UNVERIFIED, no versioned source. |
+| Renovate | Base only: `datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu` (inherited pattern from `apps/steamcmd`). Game server: UNVERIFIED, no versioned source. |
 | License | Server: UNVERIFIED (proprietary Valve Steam content). Wrapper repo `ich777/docker-steamcmd-server` has no SPDX (GitHub `license: null`). Use `LICENSE` of ContainerForge's own steamcmd base (`AGPL-3.0-or-later`) for the image label only after confirming with the maintainer. |
 | Source URL | https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide (chart/draft link; wiki returned 403, UNVERIFIED) |
 | Steam app id | 563560 (`GAME_ID` in TrueCharts chart `charts/stable/alienswarm-reactivedrop/values.yaml`, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/alienswarm-reactivedrop/values.yaml) |
@@ -29,7 +29,7 @@
 - `apps/alienswarm-reactivedrop/container-test.yaml`
 - `apps/alienswarm-reactivedrop/start.sh`
 
-No `defaults/`, `etc/`, `health/`, `scripts/` (the steamcmd base already provides `/start.sh` and `/usr/local/bin/steamcmd`). No `root/`. `DOWNSTREAM_CHANGES.md` not needed (this app is not used as a `FROM` base).
+No `defaults/`, `etc/`, `health/`, `scripts/` (the steamcmd base provides `/usr/local/bin/steamcmd`; it also ships `/start.sh`, which this app's `start.sh` replaces, and the base wrapper `steamcmd` execs `/start.sh`, so keep the SteamCMD bootstrap logic or call SteamCMD directly: UNVERIFIED how best to reconcile). No `root/`. `DOWNSTREAM_CHANGES.md` not needed (this app is not used as a `FROM` base).
 
 ## 3. Base image
 
@@ -42,7 +42,7 @@ No `defaults/`, `etc/`, `health/`, `scripts/` (the steamcmd base already provide
 3. Copy the start script: `COPY --chmod=0755 start.sh /start.sh`, `USER apps`.
 4. `ENV HOME=/config`, `ENV XDG_DATA_HOME=/config` only if the base does not set them (check base first). Steam caches go to `/tmp` (`ENV TMPDIR=/tmp`), never `/config` (see Dockerfile rules).
 5. `EXPOSE 27015/udp 27015/tcp`.
-6. `VOLUME /config` only if the sibling pattern requires it (it does not in `apps/steamcmd`; the base already declares `/config`).
+6. `VOLUME /config` (required; `apps/steamcmd` only creates `/config` and does not declare VOLUME, so add it here).
 7. Final `COPY --chmod=0755 . /` (required directive) and `USER apps`.
 8. No apt packages, no pip, no npm needed.
 
@@ -78,7 +78,7 @@ No `defaults/`, `etc/`, `health/`, `scripts/` (the steamcmd base already provide
 
 - Header: the forgetool schema header used by `apps/steamcmd/container-test.yaml`.
 - `filePaths`: `/start.sh`, `/usr/local/bin/steamcmd`, `/usr/local/share/steamcmd/steamcmd.sh` (inherited from base), and the server launcher once confirmed.
-- Probes: `tcp` on 27015 (rcon) only. The game port 27015/udp cannot be probed with `tcp`: note in the PR and record as a known gap.
+- Probes: `tcp` on 27015 (rcon, inferred from chart; UNVERIFIED that the server listens) only. The game port 27015/udp cannot be probed with `tcp`: note in the PR and record as a known gap.
 - `timeoutSeconds`: large (first start downloads the server); match a sibling Steam app if one exists, else use a conservative value and say so.
 - Tests run without env vars, so the `PASSWRD` path must go to `filePaths` and be run manually per the build protocol.
 

@@ -43,7 +43,7 @@ No `defaults/`, `etc/`, `health/`, `scripts/`, `root/`. No `DOWNSTREAM_CHANGES.m
 3. `COPY --chmod=0755 start.sh /start.sh`, `USER apps`.
 4. Caches to `/tmp` (`ENV TMPDIR=/tmp`). `HOME` and `XDG_DATA_HOME` as in the base (`/config`).
 5. `EXPOSE 8778/udp 27015/udp` plus `7778/udp` once confirmed.
-6. Final `COPY --chmod=0755 . /` and `USER apps`.
+6. `VOLUME /config`, final `COPY --chmod=0755 . /` and `USER apps`. (The base `apps/steamcmd` has no `VOLUME`.) Note `start.sh` overwrites the base's `/start.sh`.
 7. No apt, pip or npm packages.
 
 ## 5. docker-bake.hcl

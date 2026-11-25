@@ -35,7 +35,7 @@ No `etc/`, `root/`, or `DOWNSTREAM_CHANGES.md` (not a FROM base). `defaults/` an
 
 `FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:<UNVERIFIED: digest of the published steamcmd image>`
 
-Why: `apps/steamcmd` already provides the 32-bit steamcmd install, `/usr/local/bin/steamcmd`, `HOME=/config`, `USER apps`, and the install logic (`STEAM_APP_IDS`, `STEAM_INSTALL_DIR`). Using it avoids reinstalling Steam and lib32 packages. The steamcmd image is amd64 only, which matches the game.
+Why: `apps/steamcmd` already provides the 32-bit steamcmd install, `/usr/local/bin/steamcmd`, `USER apps`, and (in its `/start.sh`, which this app overwrites) install logic using `STEAM_APP_IDS`, `STEAM_INSTALL_DIR`. Using it avoids reinstalling Steam and lib32 packages. The steamcmd image is amd64 only, which matches the game.
 
 - Note: `apps/steamcmd` must be published (or built locally) before this FROM line resolves. Its digest is not in the repo, so the value is UNVERIFIED and must be taken from the published tag.
 - Closest sibling: `apps/steamcmd` (the base itself). No other game server exists in `apps/`.
@@ -49,19 +49,18 @@ Single stage on the steamcmd base:
    - `USER root` only if a `mkdir`/`chown` for `/config/arma3` is needed (it is not: the base creates `/config` and `apps` owns it). Otherwise stay `USER apps`.
 3. `COPY --chmod=0755 . /` and `USER apps` as the last lines, as in `apps/steamcmd`.
 4. `EXPOSE 2302/udp 2303/udp 2304/udp 2305/udp 2306/udp`.
-5. `VOLUME`/`/config` is provided by the base.
-6. `ENV`: `HOME=/config` and `XDG_DATA_HOME=/config` are set by the base's start.sh; set `STEAM_INSTALL_DIR=/config/arma3` in `start.sh`, not in the Dockerfile.
-7. No ENTRYPOINT change needed: use `CMD ["/start.sh"]` only if the base has none (its Dockerfile has no CMD, so set `ENTRYPOINT ["/start.sh"]` in this image, which runs our start script with no extra args).
+5. `VOLUME /config` (the base `apps/steamcmd` only creates `/config`, it does not declare VOLUME).
+6. `ENV`: `HOME=/config` and `XDG_DATA_HOME=/config` are set by the base's start.sh; use `/config/arma3` as install dir in `start.sh`, not in the Dockerfile.
+7. The base Dockerfile has no ENTRYPOINT/CMD; set `ENTRYPOINT ["/start.sh"]` here, which now resolves to this app's `start.sh` (it replaces the base's file).
 
 Key snippet:
 
 ```dockerfile
 ARG VERSION
-COPY --chmod=0755 start.sh /start.sh
-COPY --chmod=0644 defaults/server.cfg /defaults/server.cfg
 USER apps
 COPY --chmod=0755 . /
 EXPOSE 2302/udp 2303/udp 2304/udp 2305/udp 2306/udp
+VOLUME /config
 ```
 
 ## 5. docker-bake.hcl
@@ -107,15 +106,6 @@ ports:
     protocol: udp
     required: false
 env:
-  - name: STEAM_USERNAME
-    default: "anonymous"
-    required: false
-  - name: STEAM_APP_IDS
-    default: "233780"
-    required: false
-  - name: STEAM_APP_VALIDATE
-    default: "false"
-    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -124,7 +114,7 @@ volumes:
     required: true
 ```
 
-- `STEAM_USERNAME`/`STEAM_PASSWORD` are read by the base; list only those this image really uses. The base reads `STEAM_USERNAME` (or `STEAM_USER`) and `STEAM_PASSWORD`; add `STEAM_PASSWORD` (`required: false`, no default) only if private Steam logins are supported.
+- Only names that this image's `start.sh` reads are listed. The base's `STEAM_*` variables are read by the base's `/start.sh`, which this app replaces, so they are not declared. Add `STEAM_USERNAME`/`STEAM_PASSWORD` only if `start.sh` is extended to read them.
 - Port protocols: UDP is per the chart's game ports; confirm with the Arma 3 docs (section 10).
 - `dependencies`: none (the server downloads from Steam; no database).
 
@@ -144,16 +134,15 @@ mkdir -p "${ARMA_DIR}"
 # Seed a minimal server.cfg only when missing (never overwrite user state)
 [ -f "${ARMA_DIR}/server.cfg" ] || cp /defaults/server.cfg "${ARMA_DIR}/server.cfg"
 
-# Install or update the server via the base's steamcmd wrapper.
-# Args starting with "+" make the base run steamcmd directly (no interactive shell).
-STEAMCMD_PRE_UPDATE=false STEAM_INSTALL_DIR="${ARMA_DIR}" \
-  /start.sh +force_install_dir "${ARMA_DIR}" +login anonymous +app_update 233780 +quit
+# Install or update the server by calling steamcmd directly. This image's start.sh
+# replaces the base's /start.sh (COPY . / puts it there), so never call /start.sh here.
+/usr/local/share/steamcmd/steamcmd.sh +force_install_dir "${ARMA_DIR}" +login anonymous +app_update 233780 +quit   # path from the base image: UNVERIFIED at runtime
 
 cd "${ARMA_DIR}"
 exec ./arma3server_x64 -config=server.cfg -port=2302   # binary name: UNVERIFIED
 ```
 
-- Notes: the base's `start.sh` runs `exec steamcmd.sh "$@"` when args begin with `+`, so the install is a one-shot call. Setting `STEAMCMD_PRE_UPDATE=false` avoids a second login. The `-mod=` and `-config=` flags come from the chart; the binary name and any further flags are UNVERIFIED.
+- Notes: the base's `/start.sh` (steamcmd bootstrap into `/config/Steam`, `STEAM_APP_IDS` handling) is overwritten by this app's `start.sh`, so the wrapper logic and its env vars (`STEAM_APP_IDS`, `STEAM_APP_VALIDATE`, `STEAMCMD_PRE_UPDATE`) are not available; this plan calls steamcmd directly and may need to copy the bootstrap to `/config/Steam` as the base does (UNVERIFIED whether `/usr/games/steamcmd` runs without it). The `-mod=` and `-config=` flags come from the chart; the binary name and any further flags are UNVERIFIED.
 - Use `exec` for the final server process (signal handling, PID 1 rule).
 - Bind: the Arma server listens on `-port`; it must bind on all interfaces (the server's default is expected to be all interfaces; UNVERIFIED, test from outside the container).
 - Cache: SteamCMD writes its own temp files under `/config/steamcmd/tmp` (the base's design). The protocol rule says caches go to `/tmp`: this is a known deviation to review; leaving it is the base's behaviour.
