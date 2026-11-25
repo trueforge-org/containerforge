@@ -11,7 +11,7 @@
 | Source URL | https://github.com/icloud-photos-downloader/icloud_photos_downloader |
 | Download (amd64) | `https://github.com/icloud-photos-downloader/icloud_photos_downloader/releases/download/v1.34.0/icloudpd-1.34.0-linux-amd64` |
 | Download (arm64) | `.../icloudpd-1.34.0-linux-arm64` |
-| **Draft error** | The draft links `icloud-1.33.1-linux-*`. Those files are a different tool ("Find My iPhone CLI", per upstream install docs). The right asset is `icloudpd-<version>-linux-<arch>`. Do not use the `musl` assets (musl builds, not for glibc ubuntu). |
+| **Draft error** | The draft links `icloud-1.33.1-linux-*`. Those files are a different tool ("Find My iPhone CommandLine Tool", per upstream `docs/authentication.md`). The right asset is `icloudpd-<version>-linux-<arch>`. Do not use the `musl` assets (musl builds, not for glibc ubuntu). |
 | Checksum | No checksum file in the release. The GitHub release page shows a sha256 digest per asset (amd64 `c1ae4002...3b02`, arm64 `a5d59bd7...8e6e`, to re-check at implementation); the same digest is exposed as `.assets[].digest` in the release API. |
 | Alternative | PyPI wheels (`pip install icloudpd==1.34.0`, `requires-python >=3.11,<3.16`). Binary chosen: no Python needed, single file. |
 | Upstream Dockerfile reviewed | Reference image `boredazfcuk/icloudpd` (shell-script heavy, runs as root with its own env var set) is not the app's own image and is not copied. Upstream's own docs: `docker run -v Photos:/data -v config:/config icloudpd/icloudpd icloudpd --directory /data --cookie-directory /config --username ... --watch-with-interval 3600`. |
@@ -74,7 +74,7 @@ Header and `schema_version: 1`, `upstream_env_url: "https://github.com/icloud-ph
 - volumes: `/config` required true (session cookies, keyring), `/data` required false (downloaded photos).
 - dependencies: none.
 
-No password variable on purpose: a password in env or args would show up in the process list. The password is entered once in the web UI and stored by the keyring provider (`keyrings-alt` file backend) under `/config`.
+No password variable on purpose: a password in env or args would show up in the process list. The password is entered once in the web UI and saved by the keyring provider in a plain-text file under `/config` (not encrypted, per upstream docs; protect the volume, or drop `keyring` from the providers).
 
 ## 7. start.sh
 
@@ -83,18 +83,23 @@ No password variable on purpose: a password in env or args would show up in the 
 1. Defaults: `: "${ICLOUDPD_WATCH_INTERVAL:=3600}"`, same for the two providers.
 2. `mkdir -p /config/cookies /data` (idempotent, no overwrite).
 3. If `ICLOUDPD_USERNAME` is empty: log `ICLOUDPD_USERNAME is not set; idling. Set it and restart.` and `exec sleep infinity` (clean start with empty `/config` and no env, as the test harness requires; no crash loop).
-4. Build the argument array: `--directory /data --cookie-directory /config/cookies --username "$ICLOUDPD_USERNAME" --watch-with-interval "$ICLOUDPD_WATCH_INTERVAL" --password-provider keyring --password-provider "$ICLOUDPD_PASSWORD_PROVIDER" --mfa-provider "$ICLOUDPD_MFA_PROVIDER"`. (Upstream rule: a console/webui provider must be last in the list; keyring first lets the saved password be reused.) Append `${ICLOUDPD_EXTRA_ARGS}` unquoted on purpose (word splitting), after validation that it contains no newline.
+4. Build the argument array: `--directory /data --cookie-directory /config/cookies --username "$ICLOUDPD_USERNAME" --watch-with-interval "$ICLOUDPD_WATCH_INTERVAL" --password-provider keyring --password-provider "$ICLOUDPD_PASSWORD_PROVIDER" (add the second one only when it is not `keyring`) --mfa-provider "$ICLOUDPD_MFA_PROVIDER"`. (Upstream rule: a console/webui provider must be last in the list; keyring first lets the saved password be reused.) Append `${ICLOUDPD_EXTRA_ARGS}` unquoted on purpose (word splitting), after validation that it contains no newline.
 5. Do not pass `--webui-host`; default is `0.0.0.0`, as required for use from other containers.
 6. `exec /app/icloudpd "${args[@]}"`.
 
-Nothing is written to `/app`. Session and keyring stay in `/config`, photos in `/data`, temp in `/tmp`. UNVERIFIED: the exact keyring file location on Linux with `keyrings-alt` (likely under `XDG_DATA_HOME`; set `XDG_DATA_HOME=/config/.local/share` in the script to be sure and check after the first login).
+Nothing is written to `/app`. Session and keyring stay in `/config`, photos in `/data`, temp in `/tmp`. Upstream `docs/authentication.md` (v1.34.0): without a desktop keyring the password is saved **unencrypted** in `~/.local/share/python_keyring/keyring_pass.cfg`, which with `HOME=/config` is under `/config`. UNVERIFIED: whether the binary honours `XDG_DATA_HOME`; check the file location after the first login.
 
 ## 8. container-test.yaml
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-timeoutSeconds: 120
+timeoutSeconds: 180
+mainRunner:
+  env:
+    ICLOUDPD_USERNAME: "test@example.com"
+tcp:
+- port: '8080'
 filePaths:
 - /app/icloudpd
 - /usr/share/licenses/icloudpd/LICENSE.md
@@ -104,7 +109,7 @@ healthCommands:
   matchContent: true
 ```
 
-Port 8080 rule: the web UI only opens after a username is set and the harness runs without env, so a `tcp` probe on 8080 would fail on the idle path. Preferred fix: add `mainRunner: env: { ICLOUDPD_USERNAME: "test@example.com" }` plus `tcp: [{port: '8080'}]` (the forgetool schema documents `mainRunner.env`; siblings such as `apps/bookstack` use `mainRunner` with `enabled: false`, so confirm the `env` form on a real run). UNVERIFIED that the web server starts before any Apple sign-in succeeds (docs say the web UI is what asks for the password, so it should). If that does not hold, keep the file above and run the 8080 path by hand per the protocol and say so in the PR. Never weaken or remove assertions to pass.
+The web UI only opens after a username is set, so the main runner sets a dummy one (`mainRunner.env` is in the forgetool container-test schema; no sibling was checked that uses it, so confirm on a real run). At v1.34.0 `base.py` starts the web server thread before the per-user loop, i.e. before any Apple sign-in, whenever a `webui` provider is selected; with an empty keyring no password is available to send to Apple. The `expectedContent` string must be bumped with `VERSION`. Caveat: the image's Docker `HEALTHCHECK` reads the same file without `mainRunner.env`, so a container idling without `ICLOUDPD_USERNAME` (or run without a `webui` provider) reports unhealthy because of the 8080 probe; accept and document this. The idle path itself is run by hand per the protocol. Never weaken or remove assertions to pass.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -122,6 +127,8 @@ Draft expectations: UID 0 and `NET_RAW`/`NET_ADMIN` caps in the chart are not ne
 - First run needs interactive 2FA (draft caveat). With the web UI provider this works headless; accounts with FIDO keys do not work with the web UI (upstream docs), and ADP needs `--adp-web-access` via `ICLOUDPD_EXTRA_ARGS`.
 - Apple sessions expire (about two months per upstream docs); the container then waits in the web UI for a new code.
 - Web UI has no login and is on all interfaces: do not expose 8080 publicly. Document in the PR.
+- The saved password is stored unencrypted under `/config` (upstream docs).
+- The web UI cannot request an SMS code and does not support FIDO keys (upstream docs); use a console `--auth-only` run with the same cookie directory.
 - Large initial syncs need large `/data` (draft caveat).
 - Upstream README says the project is "looking for a MAINTAINER" (issue 1305); long-term upkeep risk.
 - UNVERIFIED: PyInstaller binary works under `--read-only` with only `/tmp` writable, glibc compatibility with ubuntu 26.04 (expected fine, test on both arches).
@@ -147,4 +154,4 @@ Readiness: the idle line from `start.sh` (no env) with the process alive. Second
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, tick only applicable boxes.
 - Notes: `🤖 This PR is AI generated.`; mention the wrong `icloud-*` links in the draft.
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- Untested to state honestly: real Apple login and 2FA, arm64, FIDO/ADP paths, keyring file location, 8080 probe via `mainRunner` if not confirmed.
+- Untested to state honestly: real Apple login and 2FA, arm64, FIDO/ADP paths, keyring file location, 8080 probe via `mainRunner` until a `forgetool` run confirms it.

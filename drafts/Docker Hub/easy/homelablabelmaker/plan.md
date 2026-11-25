@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version | No releases or tags (`/releases/latest` redirects to the empty releases page). The draft pins commit `d52776c7bd405bf388f53a725a640f2c1a461ae4` (the Dockerfile link). Use that SHA as `VERSION`. UNVERIFIED: whether it is still the head of `master` (the commit feed shows last activity 2020-03-27, so very likely). |
+| Version | No releases or tags (`/releases/latest` redirects to the empty releases page). The draft pins commit `d52776c7bd405bf388f53a725a640f2c1a461ae4` (the Dockerfile link). Use that SHA as `VERSION`. It is the head of `master` (commit of 2020-03-27, checked through the GitHub API). |
 | Renovate | `// renovate: datasource=git-refs depName=https://github.com/DavidSpek/homelablabelmaker currentValue=master` (same style as `apps/tvheadend/docker-bake.hcl`). |
 | License | None found: no `LICENSE` file at the pinned commit (raw URL 404) and GitHub reports no license. UNVERIFIED, see section 10. |
 | Source URL | https://github.com/DavidSpek/homelablabelmaker (default branch `master`) |
@@ -42,7 +42,7 @@ Why: static files served by nginx, as the draft says. Closest sibling: `apps/it-
 2. Final stage (nginx): `USER root`; `COPY --from=builder --chown=568:568 /tmp/site/ /usr/share/nginx/html/`.
 3. Licenses: upstream ships none, so nothing to copy to `/usr/share/licenses/homelablabelmaker/`; add a one-line `NOTICE` there stating the source URL and commit so provenance is visible (create it in the RUN, not as a repo file).
 4. `COPY --chmod=0755 . /` (it-tools has it twice, once as root and once after `USER apps`; keep the one after `USER apps` mandatory, and keep the earlier one only if the sibling needs it, check at implementation).
-5. `USER apps`; `WORKDIR /usr/share/nginx/html`. EXPOSE 8080 and the nginx `CMD` are inherited from the base. No `VOLUME` needed beyond the inherited `/config`.
+5. `USER apps`; `WORKDIR /usr/share/nginx/html`. EXPOSE 8080 and the nginx `CMD` are inherited from the base. Add `VOLUME /config` (neither the nginx nor the ubuntu Dockerfile declares it).
 
 ## 5. docker-bake.hcl
 
@@ -118,8 +118,9 @@ The chart runs as UID 0 with a writable rootfs; here UID 568, `--read-only` with
 
 - **No license** in the repository: `LICENSE` in docker-bake.hcl cannot be filled truthfully. Ask upstream or the maintainer before publishing; this is the main blocker for merging.
 - No releases: updates follow `master` commits via renovate `git-refs` (draft caveat, confirmed).
-- UNVERIFIED: that `index.html` is self-contained (it may load fonts/scripts from CDNs; the image then needs internet in the browser, not in the container).
-- UNVERIFIED: the exact top-level file list at the pinned commit; adjust the `cp` list after unpacking (fail loudly on missing entries).
+- `index.html` is not self-contained: it loads Bootstrap, jQuery, tether and a validator script from public CDNs, and one image over plain `http://` from the upstream website. The browser needs internet access, the container does not.
+- `index.html` links to the CC BY-SA 4.0 license (badge). That may state the license of the site's content, but there is no license file and it is UNVERIFIED what it covers; ask the maintainer.
+- The top-level file list in section 1 matches the pinned commit; the `cp` step must still fail loudly on missing entries after a bump.
 - Draft port was marked inferred; confirmed correct for the nginx base.
 - No musl, GPU, privileged or arm64 issues.
 
@@ -143,4 +144,4 @@ Readiness: log lines `[10-copyconfig] Seeding ...` followed by nginx start witho
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`; tick only what applies.
 - Notes: `🤖 This PR is AI generated.` and the license question.
 - CLA notice for the user: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- Honest untested list: arm64 build, behaviour of external CDN assets, license status.
+- Honest untested list: arm64 build, behaviour of external CDN assets in a browser, license status.

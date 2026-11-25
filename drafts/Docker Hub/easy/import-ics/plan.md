@@ -11,7 +11,7 @@
 | License | None: `LICENSE` is 404 at the pinned commit; README names none. UNVERIFIED, see section 10. |
 | Source URL | https://github.com/Vilhjalmr26/import_ics |
 | Download | `https://github.com/Vilhjalmr26/import_ics/archive/<sha>.tar.gz` (pure Python, same for both arches). No checksum published; the commit SHA pins the content. |
-| Python deps | `import_ics/requirements.txt` is a single unpinned line: `caldav`. Code also imports `requests` (pulled in by caldav). Latest on PyPI today: caldav 3.7.0 (`>=3.10`), requests 2.34.2. |
+| Python deps | `import_ics/requirements.txt` is a single unpinned line: `caldav`. Code also imports `requests`, which caldav 3.7.0 does **not** depend on (its PyPI metadata lists `niquests`), so `requests` must be installed explicitly. Latest on PyPI today: caldav 3.7.0 (`>=3.10`), requests 2.34.2. |
 | Upstream Dockerfile reviewed | `dockerfile` at ec04d6c: `python:3.9.13-alpine3.16`, ENV `ICS_URL`, `ICS_USERNAME`, `ICS_PASSWORD`, `CRONTAB_SCHEDULE="0 0 * * *"`, `TZ=UTC`; copies `./import_ics` to `/import_ics`, moves `calendar_download_map.py` to `samples/`, symlinks `/config/calendar_download_map.py`, `entrypoint.sh` writes a crontab and runs `crond -f`. |
 | Env vars read | `ICS_URL`, `ICS_USERNAME`, `ICS_PASSWORD` (read by `import_ics.py` via `os.getenv`), `CRONTAB_SCHEDULE` (read by the upstream entrypoint), `TZ`. |
 | Paths | Relative to the working directory: `./ical_export/` (written by the download step, read by the importer) and `import calendar_download_map` (module with a `mapping = {"calendar name": "https://...ics"}` dict). README: manual `.ics` files go in `/config/ical_export`. |
@@ -97,9 +97,11 @@ filePaths:
 - /usr/local/bin/supercronic
 - /defaults/calendar_download_map.py
 healthCommands:
-- command: /app/venv/bin/python -c "import caldav, requests"
+- command: /app/venv/bin/python -c "import caldav, requests" && test -f /app/import_ics/import_ics.py
 - command: pgrep -x supercronic
 ```
+
+The first command must not end in a quote: `include/healthcheck.sh` strips a trailing quote from the value, which would break the in-image HEALTHCHECK.
 
 UNVERIFIED: `pgrep` exists in the base image (procps); if not, use `test -d /proc/1` style alternative or drop that line only after replacing it with an equal assertion. Env-dependent code (the actual import) is not testable without a CalDAV server; do that by hand per the protocol.
 

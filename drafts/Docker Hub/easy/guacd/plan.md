@@ -50,7 +50,7 @@ Two stages. Build stage:
 3. Download and verify: `curl -fsSL -o /tmp/gs.tgz "https://archive.apache.org/dist/guacamole/${VERSION}/source/guacamole-server-${VERSION}.tar.gz"`, `echo "${SHA256}  /tmp/gs.tgz" | sha256sum -c -`, `tar xzf /tmp/gs.tgz -C /tmp`.
 4. Build and install to a staging root: `cd /tmp/guacamole-server-${VERSION} && ./configure --prefix=/usr/local --disable-guaclog --disable-guacenc && make -j"$(nproc)" && make install DESTDIR=/target`. (`--disable-guaclog` as upstream does; `--disable-guacenc` also drops the ffmpeg dependency, both option names exist in `configure.ac`.) The FreeRDP plugin installs to `$(pkg-config --variable=libdir freerdp3)/freerdp3` under `/target`.
 5. License files: `install -D LICENSE NOTICE -t /target/usr/share/licenses/guacd/` (the tarball contains both, verified).
-6. Runtime package list, same idea as upstream `list-dependencies.sh`: `ldd /target/usr/local/sbin/guacd /target/usr/local/lib/libguac-client-*.so /target/usr/lib/*/freerdp3/*guac*.so` (adjust the glob to the real plugin path), take the resolved libraries outside `/target`, map with `dpkg -S`, `sort -u` into `/target/deps.txt`. Do not hard code library package names, because Ubuntu's `t64` renames are easy to get wrong.
+6. Runtime package list, same idea as upstream `list-dependencies.sh`: `ldd /target/usr/local/sbin/guacd /target/usr/local/lib/libguac-client-*.so /target/usr/lib/*/freerdp3/*guac*.so` (adjust the glob to the real plugin path), take the resolved libraries outside `/target`, map with `dpkg -S`, `sort -u` into `/target/deps.txt` (package names only). Run `ldd` with `LD_LIBRARY_PATH=/target/usr/local/lib`, otherwise the freshly staged `libguac` is reported as not found, and fail the build on any other `not found`. On a merged-`/usr` Ubuntu `ldd` can print `/lib/...` paths while the dpkg database records `/usr/lib/...` (or the reverse), so resolve each path with `readlink -f` and fail if `dpkg -S` finds no owner. Do not hard code library package names, because Ubuntu's `t64` renames are easy to get wrong.
 
 Final stage:
 
@@ -58,7 +58,7 @@ Final stage:
 8. `RUN apt-get update && xargs -a /deps.txt apt-get install -y --no-install-recommends fonts-dejavu-core fonts-liberation ghostscript && rm -f /deps.txt && rm -rf /var/lib/apt/lists/* && ldconfig` (fonts and ghostscript mirror the upstream runtime for SSH/telnet terminals and PDF printing; verify the package names exist). `ldconfig` makes `/usr/local/lib/libguac*.so` resolvable without `LD_LIBRARY_PATH`.
 9. `RUN install -d -o apps -g apps /var/lib/guacamole/recordings /var/lib/guacamole/drive`.
 10. `ENV HOME=/tmp LC_ALL=C.UTF-8` (HOME is read by the FreeRDP plugin and must be writable; `/tmp` is the scratch path).
-11. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 4822`, `VOLUME /var/lib/guacamole/recordings /var/lib/guacamole/drive`. `/config` is not used (guacd persists nothing), so no `VOLUME /config`; the base still provides an empty `/config`.
+11. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 4822`, `VOLUME /config /var/lib/guacamole/recordings /var/lib/guacamole/drive`. guacd persists nothing in `/config`; it is declared to match the repo convention and the settings schema.
 
 The `HEALTHCHECK` is inherited from the ubuntu base (`/healthcheck.sh` reads `/container-test.yaml`), so do not add a `nc` one.
 
@@ -87,16 +87,26 @@ ports:
     protocol: tcp
     required: true
 env:
-  - name: LOG_LEVEL        # default "info", required: false (trace|debug|info|warning|error)
-  - name: GUACD_LOG_LEVEL  # default "", required: false, deprecated upstream alias read as fallback
-  - name: TZ               # default "Etc/UTC", required: false
+  - name: LOG_LEVEL        # trace|debug|info|warning|error
+    default: "info"
+    required: false
+  - name: GUACD_LOG_LEVEL  # deprecated upstream alias read as fallback
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
-  - path: /var/lib/guacamole/recordings   # required: false, session recordings
-  - path: /var/lib/guacamole/drive        # required: false, RDP drive redirection
+  - path: /config                       # mandatory in the settings schema; guacd stores nothing there
+    required: false
+  - path: /var/lib/guacamole/recordings # session recordings
+    required: false
+  - path: /var/lib/guacamole/drive      # RDP drive redirection
+    required: false
 dependencies: []
 ```
 
-Use the block style (`name`, `default`, `required`) of `apps/bazarr/settings.yaml`. `/config` is intentionally not listed (nothing persisted there). No hard dependency; the consumer is a Guacamole web client, which is not a ContainerForge app yet (UNVERIFIED, no `apps/guacamole` exists).
+Use the block style (`name`, `default`, `required`) of `apps/bazarr/settings.yaml`. `/config` is listed because the settings schema requires a `/config` entry in `volumes`, although nothing is persisted there. No hard dependency; the consumer is a Guacamole web client, which is not a ContainerForge app yet (checked: there is no `apps/guacamole`).
 
 ## 7. start.sh
 
@@ -129,7 +139,7 @@ filePaths:
 - /usr/local/lib/libguac-client-vnc.so
 ```
 
-The TCP probe covers the only port in `settings.yaml`. The `filePaths` prove the protocol plugins were really built (a missing `-dev` package would silently disable a protocol at `configure` time). The plugin file names follow upstream's `libguac-client-*.so` glob and are UNVERIFIED individually. The test runs without env vars, which is the normal startup here, so nothing is skipped. Note the TCP check passes even if guacd were bound only to localhost; `-b 0.0.0.0` is therefore verified by hand in section 11. Timeout is a guess from sibling daemons (compiled binary, starts instantly).
+The TCP probe covers the only port in `settings.yaml`. The `filePaths` prove the protocol plugins were really built (a missing `-dev` package would silently disable a protocol at `configure` time). The plugin file names follow upstream's `libguac-client-*.so` glob and are UNVERIFIED individually. The test runs without env vars, which is the normal startup here, so nothing is skipped. Note the TCP check passes even if guacd were bound only to localhost; `-b 0.0.0.0` is therefore verified by hand in section 11. The compiled daemon starts instantly; note that forgetool enforces a 180 s minimum, so `60` has no effect beyond documentation.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -171,7 +181,7 @@ docker rm -f guacd-probe; docker volume rm guacd-probe-config
 forgetool containers test --image guacd:1.6.0 --config ./apps/guacd/container-test.yaml
 ```
 
-Expected readiness log (guacd, level info): `Guacamole proxy daemon (guacd) version 1.6.0 started` followed by `Listening on host 0.0.0.0, port 4822` (wording UNVERIFIED, from memory of upstream behaviour). The container must stay running and the second-container `nc` must succeed. Best end-to-end check (manual): run the Guacamole web client against it with a VNC or SSH target.
+Expected readiness log (guacd, level info): `Guacamole proxy daemon (guacd) version 1.6.0 started` followed by `Listening on host 0.0.0.0, port 4822` (format strings confirmed in `src/guacd/daemon.c` of the 1.6.0 tarball; the printed host is the resolved bound address). The container must stay running and the second-container `nc` must succeed. Best end-to-end check (manual): run the Guacamole web client against it with a VNC or SSH target.
 
 ## 12. PR checklist
 

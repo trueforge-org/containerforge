@@ -45,7 +45,7 @@ Why: the draft proposes `python-node`, but the ubuntu base already installs Node
 2. `ENV NPM_CONFIG_CACHE=/tmp/.npm NPM_CONFIG_UPDATE_NOTIFIER=false NPM_CONFIG_FUND=false NPM_CONFIG_AUDIT=false HOME=/tmp` for the build and runtime, and `ENV PATH=/app/hexo-cli/node_modules/.bin:$PATH`. Caches in `/tmp`, never `/config`. (Base sets `HOME=/config`; override it to `/tmp` so `npm`/`git` scratch never lands in `/config`.)
 3. `USER root`, then one RUN:
    - `mkdir -p /app/hexo-cli && npm install --prefix /app/hexo-cli --omit=dev hexo-cli@${VERSION}` (npm verifies the sha512 integrity of every tarball).
-   - Bake the starter: `hexo init /app/hexo-starter` (clones https://github.com/hexojs/hexo-starter and runs `npm install`), then `rm -rf /app/hexo-starter/.git`.
+   - Bake the starter: `hexo init --no-install /app/hexo-starter`, then `npm install --prefix /app/hexo-starter --omit=dev`, then `test -f /app/hexo-starter/node_modules/hexo/package.json`. Do not let `hexo init` install: in hexo-cli 4.3.2 (`lib/console/init.ts`) it prefers `yarn`, which the ubuntu base ships, and an install failure is only a warning, so the build would pass without `node_modules`. A failed `git clone` also only warns and copies the CLI's bundled assets instead, so decide whether that fallback is acceptable. `init` removes the `.git` directories itself.
    - License files: `mkdir -p /usr/share/licenses/hexo-blog && cp /app/hexo-cli/node_modules/hexo-cli/LICENSE /usr/share/licenses/hexo-blog/LICENSE-hexo-cli` and the same for `/app/hexo-starter/node_modules/hexo/LICENSE` (check the exact file names after install; fail the build if missing).
    - `chown -R apps:apps /app && chmod -R 755 /app`; `npm cache clean --force; rm -rf /tmp/* /tmp/.npm`.
    - No apt packages (git, curl, ca-certificates already in base). Nothing to pin.
@@ -89,13 +89,33 @@ volumes:
 
 ## 7. start.sh
 
-`#!/usr/bin/env bash`, `set -euo pipefail`.
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-1. Run from `/config`: `cd /config`.
-2. Seed only when the blog is missing: `if [ ! -f /config/_config.yml ]; then cp -a /app/hexo-starter/. /config/; fi` (copy hidden files too; `cp -a` keeps the relative `node_modules/.bin` links). Never overwrite an existing blog. If `/config` is non-empty without `_config.yml`, log a clear error and exit 1 instead of mixing files.
-3. If `HEXO_PLUGINS` is non-empty: `for p in ${HEXO_PLUGINS}; do ...; done` and run `npm install --no-audit --no-fund --prefix /config ${HEXO_PLUGINS}`. Do not force `@latest` on every start (reproducible starts; users can write `name@latest` themselves). Cache goes to `/tmp/.npm` through the ENV.
-4. `hexo clean` (removes `db.json` and `public/`; both are regenerated, both live in `/config`).
-5. `exec hexo server --cwd /config -p 8080 --draft` (`--draft` as in the reference image; `--debug` dropped to keep logs quiet). Do not pass `-i`, so hexo-server binds all interfaces.
+cd /config
+
+# Seed only when the blog is missing. Unrelated files (lost+found, tool dot-directories) are tolerated,
+# but a partial blog is not overwritten.
+if [ ! -f /config/_config.yml ]; then
+  if [ -e /config/package.json ] || [ -e /config/source ]; then
+    echo "ERROR: /config has blog files but no _config.yml; refusing to overwrite them." >&2
+    exit 1
+  fi
+  cp -a /app/hexo-starter/. /config/
+fi
+
+if [ -n "${HEXO_PLUGINS:-}" ]; then
+  read -r -a plugins <<< "${HEXO_PLUGINS}"
+  npm install --no-audit --no-fund --prefix /config "${plugins[@]}"
+fi
+
+# db.json and public/ are regenerated
+hexo clean --cwd /config
+exec hexo server --cwd /config -p 8080 --draft
+```
+
+`cp -a` copies hidden files and keeps the relative `node_modules/.bin` links (UNVERIFIED: that it does not fail on preserving attributes of a `/config` mount not owned by `apps`). Unlike the reference image, `@latest` is not forced on every start (users can write `name@latest` themselves). `--draft` as in the reference image; `--debug` dropped. No `-i`, so hexo-server binds all interfaces. The npm cache goes to `/tmp/.npm` through the ENV.
 
 The script writes only to `/config` and `/tmp`, never to `/app`.
 
@@ -133,7 +153,6 @@ Draft security expectations: TrueCharts runs as UID 0 with `readOnlyRootFilesyst
 - Draft port 4000 was inferred and is wrong for the reference image: use 8080.
 - Baked starter drifts: `hexo-starter` is cloned from its default branch at build time, so its content is not covered by the renovate `VERSION`. Accept, or pin a commit with a second `ARG` plus `git-refs` renovate annotation (open question for the maintainer).
 - Draft "python-node" base replaced by plain ubuntu (Node is in it). Confirm with the maintainer.
-- `hexo init` could fail when the base `HOME=/tmp` is not writable during build as root: it is writable as root. No issue expected; confirm in the build.
 - UNVERIFIED: exact license file names inside the installed npm packages; check after `npm install`.
 - No blockers (not musl-only, no GPU, no privileged, arm64 works).
 

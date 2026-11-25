@@ -1,5 +1,5 @@
 # guacamole — implementation plan
-> Source: ./draft.md · Target: apps/guacd/ (shared with `../guacd/plan.md`, no separate `apps/guacamole/`) · Difficulty: medium (draft says easy) · Role: sidecar (`guacdImage` of the `guacamole` chart) · Verified on 2026-11-23
+> Source: ./draft.md · Target: apps/guacd/ (shared with `../guacd/plan.md`, no separate `apps/guacamole/`) · Difficulty: medium (draft says easy) · Role: sidecar (`guacdImage` of the `guacamole` chart) · Verified on 2026-11-23 (checked again on 2026-11-25)
 
 This draft describes the same container as `../guacd/draft.md`: the chart `guacamole` only needs a guacd sidecar, and its image is the same `docker.io/guacamole/guacd:1.6.0` (same Dockerfile link, same reason text, same port). Building it twice would produce two identical images, so the plan is to build `apps/guacd` once, from `../guacd/plan.md`, and let the `guacamole` chart consume `ghcr.io/trueforge-org/guacd`. Every section below states what applies to this draft and points to the exact section of the guacd plan for the full text and snippets.
 
@@ -27,7 +27,7 @@ Same as guacd: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed
 
 ## 4. Dockerfile
 
-Use the two-stage Dockerfile in `../guacd/plan.md` section 4 unchanged: build stage (build dependencies, download plus `sha256sum -c`, `./configure --prefix=/usr/local --disable-guaclog --disable-guacenc`, `make install DESTDIR=/target`, license files, `ldd`/`dpkg -S` runtime package list), final stage (`COPY --from=build /target/ /`, runtime packages, `ldconfig`, `/var/lib/guacamole/{recordings,drive}` owned by `apps`, `ENV HOME=/tmp`, `COPY --chmod=0755 . /`, `EXPOSE 4822`, final `USER apps`). Nothing is added for the chart's `guacamole` side.
+Use the two-stage Dockerfile in `../guacd/plan.md` section 4 unchanged: build stage (build dependencies, download plus `sha256sum -c`, `./configure --prefix=/usr/local --disable-guaclog --disable-guacenc`, `make install DESTDIR=/target`, license files, `ldd`/`dpkg -S` runtime package list), final stage (`COPY --from=build /target/ /`, runtime packages, `ldconfig`, `/var/lib/guacamole/{recordings,drive}` owned by `apps`, `ENV HOME=/tmp`, `COPY --chmod=0755 . /`, `EXPOSE 4822`, `VOLUME /config` plus the two paths, final `USER apps`). Nothing is added for the chart's `guacamole` side.
 
 ## 5. docker-bake.hcl
 
@@ -35,7 +35,7 @@ Same as `../guacd/plan.md` section 5: `APP=guacd`, `VERSION=1.6.0` with the `git
 
 ## 6. settings.yaml
 
-Same as `../guacd/plan.md` section 6 (port 4822/tcp, env `LOG_LEVEL`, `GUACD_LOG_LEVEL`, `TZ`, volumes `/var/lib/guacamole/recordings` and `/var/lib/guacamole/drive`, `dependencies: []`). Do not list 8080: this container does not open it. For the chart side, the web client (a separate future app, UNVERIFIED that none exists: `apps/` has no `guacamole`) would list `guacd` as a dependency (✅ once `apps/guacd` exists).
+Same as `../guacd/plan.md` section 6 (port 4822/tcp, env `LOG_LEVEL`, `GUACD_LOG_LEVEL`, `TZ`, volumes `/config` (required by the settings schema, unused), `/var/lib/guacamole/recordings` and `/var/lib/guacamole/drive`, `dependencies: []`). Do not list 8080: this container does not open it. For the chart side, the web client (a separate future app; checked: there is no `apps/guacamole` or `apps/guacd` yet) would list `guacd` as a dependency (✅ once `apps/guacd` exists).
 
 ## 7. start.sh
 
@@ -52,7 +52,7 @@ Same table as `../guacd/plan.md` section 9. Reconciling this draft's expectation
 ## 10. Risks, caveats and open questions
 
 - Decision for the maintainers: ship one `guacd` app and have the `guacamole` chart row reference it, rather than a second identical image. If the tooling that tracks the project-fireball list needs an app named `guacamole`, that is a naming question, not a second Dockerfile.
-- The web client (`guacamole/guacamole`, Java/Tomcat, port 8080, needs a database or a user-mapping file and a `GUACD_HOSTNAME`) is not planned here. It would be a separate app on a `java*` base and needs its own plan and web verification (not done in this run). Until it exists the chart cannot be fully replaced.
+- The web client (`guacamole/guacamole`, Java/Tomcat, port 8080, needs a database or a user-mapping file and a `GUACD_HOSTNAME`) is not planned here. It would be a separate app and needs its own plan. Partial facts from web research on 2026-11-25: 1.6.0 is the latest release found, an architecture-independent `guacamole-1.6.0.war` is published with a `.sha256` on dlcdn.apache.org, and the upstream 1.6.0 Dockerfile runs it on `tomcat:9-jdk21`; its license was not confirmed there (UNVERIFIED). Until it exists the chart cannot be fully replaced.
 - All risks of `../guacd/plan.md` section 10 apply: no apt package in resolute, source build with Ubuntu's FreeRDP 3 (runtime behaviour UNVERIFIED), pinned checksum not renovated, guacd is unauthenticated and must stay on an internal network, arm64 compile time under emulation.
 
 ## 11. Build and test steps

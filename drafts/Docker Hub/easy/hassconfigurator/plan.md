@@ -79,53 +79,78 @@ ports:
   - port: 3218
     protocol: tcp
     required: true
-env:      # block style as apps/bazarr/settings.yaml: name / default / required
-  - HC_BASEPATH: "/hass-config"       # start.sh default
-  - HC_ENFORCE_BASEPATH: "true"       # start.sh default (upstream default false)
-  - HC_LISTENIP: "0.0.0.0"
-  - HC_PORT: "3218"
-  - HC_HASS_API: "None"               # start.sh default (upstream default http://127.0.0.1:8123/api/ makes no sense in a container)
-  - HC_LOGLEVEL: "info"
-  - HC_USERNAME: ""                   # not exported by start.sh when empty
-  - HC_PASSWORD: ""
-  - HC_ALLOWED_NETWORKS: ""
-  - HC_GIT: "false"
-  - TZ: "Etc/UTC"
+env:
+  - name: HC_BASEPATH  # start.sh default
+    default: "/hass-config"
+    required: false
+  - name: HC_ENFORCE_BASEPATH  # start.sh default (upstream default false)
+    default: "true"
+    required: false
+  - name: HC_LISTENIP
+    default: "0.0.0.0"
+    required: false
+  - name: HC_PORT
+    default: "3218"
+    required: false
+  - name: HC_HASS_API  # start.sh default (upstream default http://127.0.0.1:8123/api/ makes no sense in a container)
+    default: "None"
+    required: false
+  - name: HC_LOGLEVEL  # upstream default, read directly by the app
+    default: "info"
+    required: false
+  - name: HC_USERNAME
+    default: ""
+    required: false
+  - name: HC_PASSWORD
+    default: ""
+    required: false
+  - name: HC_ALLOWED_NETWORKS
+    default: ""
+    required: false
+  - name: HC_GIT  # upstream default
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
-  - path: /config          # required: true  (optional settings.conf, git config)
-  - path: /hass-config     # required: false (the Home Assistant config directory to edit)
+  - path: /config          # optional settings.conf, git config
+    required: true
+  - path: /hass-config     # the Home Assistant config directory to edit
+    required: false
 dependencies: []
 ```
 
-All `env` entries are `required: false`. The names are real `HC_*` keys from `load_settings()` (section 1); do not add others unless verified. Defaults equal what `start.sh` exports. `HC_USERNAME`, `HC_PASSWORD` and `HC_ALLOWED_NETWORKS` default to empty and are only exported when set (an exported empty string would be parsed as a value). The Home Assistant container is not a dependency: the editor works on any directory.
+All `env` entries are `required: false`. The names are real `HC_*` keys from `load_settings()` (section 1); do not add others unless verified. Defaults equal what `start.sh` exports. `HC_USERNAME`, `HC_PASSWORD` and `HC_ALLOWED_NETWORKS` default to empty and `start.sh` never exports them itself; per `load_settings()` an empty password becomes unset and an empty network list is discarded with a warning. The Home Assistant container is not a dependency: the editor works on any directory.
 
 ## 7. start.sh
 
 ```bash
 #!/usr/bin/env bash
 
-# Editor target: the Home Assistant config directory (mount it at /hass-config)
-export HC_BASEPATH="${HC_BASEPATH:-/hass-config}"
-export HC_ENFORCE_BASEPATH="${HC_ENFORCE_BASEPATH:-true}"
-export HC_LISTENIP="${HC_LISTENIP:-0.0.0.0}"
-export HC_PORT="${HC_PORT:-3218}"
-# Standalone mode unless a Home Assistant API URL is given (the default 127.0.0.1:8123 is the wrong container)
-export HC_HASS_API="${HC_HASS_API:-None}"
-
 args=()
 if [ -f /config/settings.conf ]; then
+  # HC_* env overrides the file, so export no defaults here or they would silently mask the user's settings
   args+=(/config/settings.conf)
+else
+  # Editor target: the Home Assistant config directory (mount it at /hass-config)
+  export HC_BASEPATH="${HC_BASEPATH:-/hass-config}"
+  export HC_ENFORCE_BASEPATH="${HC_ENFORCE_BASEPATH:-true}"
+  export HC_LISTENIP="${HC_LISTENIP:-0.0.0.0}"
+  export HC_PORT="${HC_PORT:-3218}"
+  # Standalone mode unless a Home Assistant API URL is given (the default 127.0.0.1:8123 is the wrong container)
+  export HC_HASS_API="${HC_HASS_API:-None}"
 fi
 
 if [ -z "${HC_USERNAME:-}" ] || [ -z "${HC_PASSWORD:-}" ]; then
-  echo "WARNING: HC_USERNAME/HC_PASSWORD are not set. Anyone who can reach port ${HC_PORT} can edit ${HC_BASEPATH}." >&2
+  echo "WARNING: HC_USERNAME/HC_PASSWORD are not set. Unless the settings file sets credentials, anyone who can reach the editor (port ${HC_PORT:-3218}) can edit files." >&2
 fi
 
 cd /config
 exec /app/venv/bin/hass-configurator "${args[@]}"
 ```
 
-Notes: nothing is seeded (a settings file is optional), so an empty `/config` works and a restart changes nothing; no write to `/app`; all state is in `/config` and `/hass-config`; scratch is `/tmp`. The password only travels in the environment, never on the command line. The listener is `0.0.0.0` (code default, exported explicitly). `exec` hands the process to the base `tini`. The `HC_*` variables override the settings file, because that is how upstream merges them.
+Notes: nothing is seeded (a settings file is optional), so an empty `/config` works and a restart changes nothing; no write to `/app`; all state is in `/config` and `/hass-config`; scratch is `/tmp`. The password only travels in the environment, never on the command line. The listener is `0.0.0.0` (code default, exported explicitly). `exec` hands the process to the base `tini`. The `HC_*` variables override the settings file, because that is how upstream merges them (checked in `load_settings()`). With a `settings.conf` the safer wrapper defaults (`HC_ENFORCE_BASEPATH`, standalone mode, base path) do not apply: the file or env must set them, and upstream defaults apply otherwise.
 
 ## 8. container-test.yaml
 
@@ -179,7 +204,7 @@ docker rm -f hass-configurator-probe; docker volume rm hass-configurator-probe-c
 forgetool containers test --image hass-configurator:0.7.0 --config ./apps/hass-configurator/container-test.yaml
 ```
 
-Also run once with `-e HC_USERNAME=a -e HC_PASSWORD=b` and check that `/` returns 401, and once with a `/config/settings.conf` mount. Expected readiness: the log shows the server listening (the app logs through `logging` at INFO, exact line UNVERIFIED), the container stays running, port 3218 answers, and there is no "Unable to import Git module" or `cgi` import error.
+Also run once with `-e HC_USERNAME=a -e HC_PASSWORD=b` and check that `/` returns 401, and once with a `/config/settings.conf` mount. Expected readiness: the log shows the server listening (`Listening on: http://0.0.0.0:3218`, logged at INFO in `configurator.py`), the container stays running, port 3218 answers, and there is no "Unable to import Git module" or `cgi` import error.
 
 ## 12. PR checklist
 
