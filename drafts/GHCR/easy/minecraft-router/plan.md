@@ -7,15 +7,15 @@
 | --- | --- |
 | Version to build | v1.56.5 (marked Latest, released 17 Nov; https://github.com/itzg/mc-router/releases/latest). Chart and draft use 1.56.5. Docker Hub `itzg/mc-router:1.56.5` pushed 2026-11-17 (https://hub.docker.com/v2/repositories/itzg/mc-router/tags/1.56.5). |
 | Renovate | `datasource=github-releases depName=itzg/mc-router versioning=semver` |
-| License | UNVERIFIED: repo LICENSE could not be fetched (raw main and blob URLs returned 404). Expected to be the upstream license; confirm before setting `LICENSE` in bake. |
+| License | MIT (GitHub API repo license SPDX `MIT`; the release tarball also ships `LICENSE.txt`). |
 | Source URL | https://github.com/itzg/mc-router |
 | Download amd64 | https://github.com/itzg/mc-router/releases/download/v1.56.5/mc-router_1.56.5_linux_amd64.tar.gz (confirmed asset name) |
 | Download arm64 | https://github.com/itzg/mc-router/releases/download/v1.56.5/mc-router_1.56.5_linux_arm64.tar.gz (confirmed asset name) |
-| Checksum source | `mc-router_1.56.5_checksums.txt` on the same release (name confirmed; hash values UNVERIFIED, file not fetched). |
-| Tar layout | UNVERIFIED: archive contents not listed. Upstream image copies `/mc-router` to root, so the binary is probably named `mc-router` at the archive root. Confirm with `tar -tzf` once downloaded at build time. |
+| Checksum source | `mc-router_1.56.5_checksums.txt` on the same release (name confirmed; line format checked: `<sha256>  <asset name>`; hash values read at build time). |
+| Tar layout | Checked on v1.56.5 amd64: archive root holds `LICENSE.txt`, `README.md` and `mc-router` (no subdirectory). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/itzg/mc-router/main/Dockerfile: builder golang:1.27.4 with `CGO_ENABLED=0` and cache mounts, final `cgr.dev/chainguard/static`, `ENTRYPOINT ["/mc-router"]`. No CMD, USER, EXPOSE, VOLUME or ENV. |
 | Ports | 25565/tcp (Minecraft proxy; draft and chart). API port 25564 is draft-inferred only: UNVERIFIED, not added. |
-| Env vars | None set by upstream image. mc-router's own flags/env: UNVERIFIED (README not fetched). Do not invent any. |
+| Env vars | None set by upstream image. README (main) documents flags with env equivalents, including `-port` (env name not checked), `-mapping` (env `MAPPING`), `-api-binding` (env `API_BINDING`) and a default server (env `DEFAULT`). Only add to settings.yaml those the start script uses. |
 | Dependencies | One or more reachable Minecraft backend servers (external). No database. |
 
 ## 2. Target layout
@@ -38,8 +38,8 @@ No `defaults/`, `etc/` or `health/` unless a verified config is needed. No `root
 2. Download and verify:
    - `curl -fL -o /tmp/mc-router.tar.gz "https://github.com/itzg/mc-router/releases/download/v${VERSION}/mc-router_${VERSION}_linux_${TARGETARCH}.tar.gz"`
    - `curl -fL -o /tmp/checksums.txt "https://github.com/itzg/mc-router/releases/download/v${VERSION}/mc-router_${VERSION}_checksums.txt"`
-   - `grep "mc-router_${VERSION}_linux_${TARGETARCH}.tar.gz" /tmp/checksums.txt | (cd /tmp && sha256sum -c -)` (line format confirmed at build time; UNVERIFIED).
-3. Extract only the binary: `tar xzf /tmp/mc-router.tar.gz -C /tmp mc-router` (the exact member path to confirm, section 1), then `install -m 0755 /tmp/mc-router /app/mc-router`.
+   - `grep "mc-router_${VERSION}_linux_${TARGETARCH}.tar.gz" /tmp/checksums.txt | (cd /tmp && sha256sum -c -)`.
+3. Extract only the binary: `tar xzf /tmp/mc-router.tar.gz -C /tmp mc-router LICENSE.txt`, then install `LICENSE.txt` to `/usr/share/licenses/minecraft-router/LICENSE` (dockerfile rule for partial extracts) (member path checked, section 1), then `install -m 0755 /tmp/mc-router /app/mc-router`.
 4. `chown -R apps:apps /app && chmod -R 755 /app`.
 5. Cleanup: `rm -rf /tmp/mc-router.tar.gz /tmp/mc-router /tmp/checksums.txt`.
 6. `ENV HOME=/config`. No cache paths are needed.
@@ -53,7 +53,7 @@ EXPOSE 25565
 VOLUME /config
 ```
 
-Use `VOLUME /config` only if the app writes state there; otherwise omit it (section 9). Keep `ARG VERSION` equal to the bake default.
+`VOLUME /config` is kept because the repo rules require it, even though the app keeps no state (settings.yaml lists no volume, section 6). Keep `ARG VERSION` equal to the bake default.
 
 ## 5. docker-bake.hcl
 
@@ -61,7 +61,7 @@ Same layout as `apps/adguardhome-sync/docker-bake.hcl`:
 
 - `APP` = `minecraft-router`
 - `VERSION` = `1.56.5`, preceded by `// renovate: datasource=github-releases depName=itzg/mc-router versioning=semver`
-- `LICENSE` = UNVERIFIED (set after the repo license is confirmed; do not guess)
+- `LICENSE` = `MIT` (section 1)
 - `SOURCE` = `https://github.com/itzg/mc-router`
 - targets: `docker-metadata-action`, `image`, `image-local`, `image-all` (`linux/amd64`, `linux/arm64`), `group "default"` (image-local)
 
@@ -132,9 +132,7 @@ filePaths:
 
 ## 10. Risks, caveats and open questions
 
-- UNVERIFIED: repo LICENSE (raw main and blob URLs returned 404). Required before setting `LICENSE`.
-- UNVERIFIED: tar member layout (binary name and path) and checksum line format. Confirm at build time before relying on the `tar` step.
-- UNVERIFIED: mc-router flags/env vars and default bind address. Settings `env` stays minimal until confirmed.
+- UNVERIFIED: mc-router default bind address and the env name for `-port`. Settings `env` stays minimal until confirmed.
 - UNVERIFIED: API port 25564 (draft-inferred). Not added to `ports`.
 - Docker/Kubernetes auto-discovery in the chart is not available in a rootless static setup. Document this as a feature gap in the PR.
 - Chart's `latest` and copy-from image `ghcr.io/itzg/mc-router:1.56.5` (Docker Hub confirms amd64, arm64, arm/v6 for 1.56.5) are not used as a source; the release tarball is.
@@ -164,5 +162,5 @@ forgetool containers test --image minecraft-router:1.56.5 --config ./container-t
 - Use `.github/PULL_REQUEST_TEMPLATE.md`; keep sections and checkboxes; check only what applies.
 - Notes section: `🤖 This PR is AI generated.`
 - CLA: tell the user to sign at https://cla-assistant.io/trueforge-org/containerforge; only they can sign it. The `license/cla` check shows status.
-- State what was not tested: arm64, checksum values, tar layout, routing behavior, LICENSE (see section 10).
+- State what was not tested: arm64, routing behavior, default bind (see section 10).
 - Do not check "Built container locally" unless the image was built and run.

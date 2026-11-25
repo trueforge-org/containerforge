@@ -12,7 +12,7 @@
 | Download amd64 | https://github.com/minekube/gate/releases/download/v0.82.3/gate_0.82.3_linux_amd64 (confirmed asset name, https://github.com/minekube/gate/releases/expanded_assets/v0.82.3) |
 | Download arm64 | https://github.com/minekube/gate/releases/download/v0.82.3/gate_0.82.3_linux_arm64 (confirmed asset name) |
 | Musl variants | `gate_0.82.3_linux_amd64_musl` / `_arm64_musl` exist. Not used: glibc Ubuntu base. |
-| Checksum source | `checksums.txt` on the same release (asset name confirmed). Hash values UNVERIFIED: file contents were not fetched. |
+| Checksum source | `checksums.txt` on the same release (asset name confirmed). Line format checked (`<sha256>  gate_0.82.3_linux_amd64`); hash values are read at build time. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/minekube/gate/master/Dockerfile: golang:1.27 build with `CGO_ENABLED=0`, distroless `gcr.io/distroless/base-debian12` final, `ENTRYPOINT ["/gate"]`, `VOLUME ["/var/cache/gate"]`, `XDG_CACHE_HOME=/var/cache/gate`. No USER, EXPOSE or CMD. The jre stage (eclipse-temurin) is a separate variant, not used. |
 | Ports | 25565/tcp (Minecraft proxy). Confirmed only by the draft (the upstream Dockerfile has no EXPOSE). |
 | Env vars | Upstream sets only `XDG_CACHE_HOME`. Gate's own config env vars: UNVERIFIED (README/config docs not fetched). Do not invent any. |
@@ -39,7 +39,7 @@ No `defaults/` unless a default config is confirmed (see section 10). No `root/`
 2. Download and verify in one step (no separate build stage: the upstream binary is used, not compiled here):
    - `curl -fL -o /tmp/gate "https://github.com/minekube/gate/releases/download/v${VERSION}/gate_${VERSION}_linux_${TARGETARCH}"`
    - `curl -fL -o /tmp/checksums.txt "https://github.com/minekube/gate/releases/download/v${VERSION}/checksums.txt"`
-   - `cd /tmp && grep " gate_${VERSION}_linux_${TARGETARCH}$" checksums.txt | sha256sum -c -` (confirm the checksum line format once the file is fetched at build time; UNVERIFIED).
+   - `cd /tmp && grep " gate_${VERSION}_linux_${TARGETARCH}$" checksums.txt | sha256sum -c -` (checked: `checksums.txt` for v0.82.3 uses `<sha256>  <asset name>` lines, so the grep works).
 3. `install -m 0755 /tmp/gate /app/gate`, then `chown -R apps:apps /app` and `chmod -R 755 /app`.
 4. License: Apache-2.0 is in the source tarball only. Fetch `LICENSE` from `https://raw.githubusercontent.com/minekube/gate/v${VERSION}/LICENSE` and install to `/usr/share/licenses/minekube-gate/LICENSE` (optional if the binary is shipped without notices, per dockerfile rule for downloads).
 5. Cleanup: `rm -f /tmp/gate /tmp/checksums.txt`.
@@ -160,7 +160,6 @@ filePaths:
 ## 10. Risks, caveats and open questions
 
 - Version: draft pinned v0.82.0; current stable is v0.82.3. Confirm the chosen tag before build. The chart's `latest` tag is rolling and must not be used.
-- UNVERIFIED: checksum hash values and checksum file line format (`checksums.txt` not fetched).
 - UNVERIFIED: Gate's config file name, default path, and whether it starts without a config. Without a verified default the empty-`/config` start may fail; the readiness check depends on this.
 - UNVERIFIED: Gate's own env vars (none are invented).
 - UNVERIFIED: LICENSE file at tag v0.82.3 (repo master LICENSE is Apache-2.0; the tag was not fetched).

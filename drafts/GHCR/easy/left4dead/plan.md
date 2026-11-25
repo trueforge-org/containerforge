@@ -124,7 +124,7 @@ Design (the file is `start.sh`, copied to the image root `/start.sh` by `COPY . 
 ## 9. Rootless and read-only-rootfs adaptations
 
 - Upstream runs as root and remaps UID/GID (`usermod`, `groupmod`, `chown -R ${UID}:${GID} ${DATA_DIR}`). Drop all of that. The container runs as `apps` (`USER apps`), and the steamcmd image already does the install as `apps`.
-- Upstream data paths `/serverdata/steamcmd` and `/serverdata/serverfiles` map to `/config/steamcmd` (steamcmd image default, `HOME=/config`) and `/config/serverfiles` (STEAM_INSTALL_DIR).
+- Upstream data paths `/serverdata/steamcmd` and `/serverdata/serverfiles` map to `/config/Steam/steamcmd` (steamcmd image seed path, `HOME=/config`) and `/config/serverfiles` (STEAM_INSTALL_DIR).
 - Caches (`/tmp`) are read-only-rootfs compatible when the run uses `--read-only --tmpfs /tmp`.
 - `privileged`: no. Security expectations from the draft: non-root possible (chart runAsUser 0 in TrueCharts; ContainerForge runs as `apps`), read-only rootfs possible (the install writes only under /config and /tmp).
 - `DATA_PERM`, `UMASK`, `USERNAME`, `PASSWRD`: upstream names. Do not list them unless the start script reads them.

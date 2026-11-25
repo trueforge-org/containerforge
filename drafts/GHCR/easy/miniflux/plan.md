@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | **2.3.5** (tag `2.3.5`, published 2026-11-02, not prerelease). Matches chart image `ghcr.io/miniflux/miniflux:2.3.5`. Source: `gh api repos/miniflux/v2/releases/latest`; chart: https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/miniflux/values.yaml |
 | Renovate | `datasource=github-releases depName=miniflux/v2 versioning=loose` (expected annotation). UNVERIFIED: no fetched page confirms the `versioning` value. |
-| License | UNVERIFIED: upstream `LICENSE` not fetched. Expected SPDX `Apache-2.0`; confirm at https://github.com/miniflux/v2/blob/2.3.5/LICENSE before pinning `LICENSE` in bake. |
+| License | Apache-2.0 (GitHub API repo license SPDX `Apache-2.0`; `LICENSE` exists at tag 2.3.5). |
 | Source URL | https://github.com/miniflux/v2 |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/miniflux/v2/main/packaging/docker/alpine/Dockerfile: build stage `FROM docker.io/library/golang:alpine3.23`, runtime `FROM docker.io/library/alpine:3.24`, `make miniflux`, binary at `/usr/bin/miniflux`, `CMD ["/usr/bin/miniflux"]`, no ENTRYPOINT, `USER 65534`, `EXPOSE 8080`, `ENV LISTEN_ADDR=0.0.0.0:8080`, no VOLUME. We do not copy that image; we use the release binary. |
 | Per-arch download (confirmed asset names, release 2.3.5) | amd64: https://github.com/miniflux/v2/releases/download/2.3.5/miniflux-linux-amd64 · arm64: https://github.com/miniflux/v2/releases/download/2.3.5/miniflux-linux-arm64. Both are plain Linux binaries, not archives. |
@@ -51,7 +51,7 @@ Single stage, no compilation:
    install -D -m 0755 /tmp/miniflux /app/miniflux/miniflux
    ```
    The `.sha256` file content is `<hash>  miniflux-linux-<arch>`; the hash is taken from it and checked against the downloaded file.
-4. License: fetch the upstream `LICENSE` at tag `2.3.5` to `/usr/share/licenses/miniflux/LICENSE` (UNVERIFIED until confirmed, see section 1).
+4. License: fetch the upstream `LICENSE` at tag `2.3.5` to `/usr/share/licenses/miniflux/LICENSE` (file exists at the tag, section 1).
 5. `chown -R apps:apps /app/miniflux && chmod -R 755 /app/miniflux`; `rm -f /tmp/miniflux /tmp/miniflux.sha256`.
 6. Tail (sibling pattern):
    ```dockerfile
@@ -80,7 +80,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "Apache-2.0"   // UNVERIFIED until LICENSE is read at tag 2.3.5
+  default = "Apache-2.0"
 }
 
 variable "SOURCE" {
@@ -187,7 +187,6 @@ filePaths:
 - **Env semantics** beyond the chart's use (e.g. whether `RUN_MIGRATIONS` runs before listen) are UNVERIFIED: miniflux.app/docs was not fetched.
 - **`/config` need.** The app stores nothing locally. If forgetool does not need a volume for stateless apps, drop it from settings.yaml and the Dockerfile.
 - **Draft's apt route** is replaced by the checksum-verified release binary.
-- **License** is UNVERIFIED (section 1).
 - **Blockers:** none for building. Runtime needs a PostgreSQL instance.
 
 ## 11. Build and test steps
@@ -219,4 +218,4 @@ From `apps/miniflux/` (protocol commands, `<app>` = `miniflux`):
 - PR body: template at `.github/PULL_REQUEST_TEMPLATE.md`, keeping its sections and checkboxes; check only what applies.
 - Notes section: `🤖 This PR is AI generated.`
 - CLA: tell the user to sign at https://cla-assistant.io/trueforge-org/containerforge; only the user can sign. The `license/cla` check shows status.
-- Not tested (state in the PR until done): arm64 build and run, the full functional test with PostgreSQL, LICENSE and renovate `versioning` confirmation, upstream env semantics. Do not check "Built container locally" unless the build ran.
+- Not tested (state in the PR until done): arm64 build and run, the full functional test with PostgreSQL, renovate `versioning` confirmation, upstream env semantics. Do not check "Built container locally" unless the build ran.

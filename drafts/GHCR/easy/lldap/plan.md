@@ -13,10 +13,10 @@
 | Checksum source | None: the release lists no checksum file among its five assets (expanded_assets page). Integrity rests on the pinned tag URL and TLS; record this in the PR. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/lldap/lldap/48a0a8d961f32bd8e3263b202053ce49a6c94781/.github/workflows/Dockerfile.ci.debian: FROM `localhost:5000/lldap/lldap:debian-base`; installs gosu 1.17 with signature check; COPY docker-entrypoint.sh; no EXPOSE, VOLUME, USER or ENTRYPOINT in that file. ContainerForge does not use it (gosu and the root wrapper are not needed). |
 | Upstream run model | README (https://raw.githubusercontent.com/lldap/lldap/v0.6.3/README.md): the default container starts as root to fix permissions, then drops to the given user; rootless images are recommended. Database is SQLite by default; MySQL/MariaDB and PostgreSQL are supported. |
-| Ports | UNVERIFIED: the draft's 3890/tcp (LDAP) and 17170/http (web UI) are not confirmed on any fetched page (the config template and docs/config returned 404; the README gives no numbers). Confirm from the extracted tarball's config template or docs during the build, before writing settings.yaml. |
-| Env vars | UNVERIFIED: no LLDAP_* names or defaults were retrieved. Do not list any until confirmed. Documented: the LDAP password comes from the configuration and is the same as the web UI login; default LDAP user DN `cn=admin,ou=people,dc=example,dc=com`. |
-| Data path | UNVERIFIED: the default SQLite path was not confirmed. Plan: point it at `/config` through the config file, once the config key is confirmed. |
-| Binary contents | UNVERIFIED: tarball file list not retrieved (binary name, frontend assets). Confirm with `tar tzf` at build time. |
+| Ports | 3890/tcp (LDAP, `ldap_port`) and 17170/tcp (web UI, `http_port`), both bound to `0.0.0.0` by default. Source: `lldap_config.docker_template.toml` at tag v0.6.3 (https://raw.githubusercontent.com/lldap/lldap/v0.6.3/lldap_config.docker_template.toml). |
+| Env vars | Per the v0.6.3 config template, every config key can be set as `LLDAP_<KEY>`; the template names `LLDAP_LDAP_PORT`, `LLDAP_JWT_SECRET` (or `LLDAP_JWT_SECRET_FILE`), `LLDAP_DATABASE_URL`, `LLDAP_KEY_FILE`, and `LLDAP_HEALTHCHECK_OPTIONS__*`. Other names (admin password, base DN) UNVERIFIED here; read them from the template before listing. Documented: the LDAP password comes from the configuration and is the same as the web UI login; default LDAP user DN `cn=admin,ou=people,dc=example,dc=com`. |
+| Data path | Template default `database_url = "sqlite:///data/users.db?mode=rwc"` (not writable under `/app`; no `/data` in this image). Override with `LLDAP_DATABASE_URL=sqlite:///config/users.db?mode=rwc` (or the config key). |
+| Binary contents | Checked by listing the v0.6.3 amd64 tarball: it has a top-level directory `amd64-lldap/` (arm64: `aarch64-lldap/` UNVERIFIED, assumed same pattern) holding `lldap`, `lldap_migration_tool`, `lldap_set_password` and `app/` (web assets, resolved relative to the working directory). No config template and no LICENSE inside. |
 | arm64 | Release has `aarch64-lldap.tar.gz`. Runs on Ubuntu arm64 is UNVERIFIED (test with the arm64 build if it is attempted). |
 
 ## 2. Target layout
@@ -26,7 +26,7 @@
 - `apps/lldap/settings.yaml`
 - `apps/lldap/container-test.yaml`
 - `apps/lldap/start.sh`
-- `apps/lldap/defaults/` only if a default `lldap_config.toml` must be seeded into `/config` (likely yes, see section 7; the reason is the config file is not in the release).
+- `apps/lldap/defaults/` only if a default `lldap_config.toml` must be seeded into `/config` (likely yes, see section 7; the reason is the config file is not in the tarball; copy `lldap_config.docker_template.toml` from the v0.6.3 tag and set `database_url` to a `/config` path).
 
 Never `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
@@ -48,12 +48,12 @@ Closest sibling: `apps/adguardhome-sync` (prebuilt tarball for `TARGETARCH`, ext
    esac
    ```
 3. Download and extract into `/app` at build time (root only for this step):
-   `curl -fL -o /tmp/lldap.tar.gz "https://github.com/lldap/lldap/releases/download/v${VERSION}/${LLDAP_ARCH}-lldap.tar.gz"`, then `tar xzf /tmp/lldap.tar.gz -C /app/`, then `rm /tmp/lldap.tar.gz`. Use `curl --fail` and `--proto '=https'`.
+   `curl -fL -o /tmp/lldap.tar.gz "https://github.com/lldap/lldap/releases/download/v${VERSION}/${LLDAP_ARCH}-lldap.tar.gz"`, then `tar xzf /tmp/lldap.tar.gz -C /app/ --strip-components=1` (the archive has a top-level `${LLDAP_ARCH}-lldap/` directory), so `/app/lldap` and `/app/app/` exist, then `rm /tmp/lldap.tar.gz`. Use `curl --fail` and `--proto '=https'`.
 4. No checksum to verify (see section 1). Record that in the PR.
 5. License: copy the repo's LICENSE to `/usr/share/licenses/lldap/LICENSE` (the tarball may not include it; fetch from the v0.6.3 tag: `https://raw.githubusercontent.com/lldap/lldap/v${VERSION}/LICENSE`, the same file checked in section 1).
 6. `chown -R apps:apps /app && chmod -R 755 /app` (as in the sibling).
 7. `USER apps`, `COPY --chmod=0755 . /`.
-8. `EXPOSE` the confirmed ports only (currently UNVERIFIED: 3890/tcp and 17170/tcp per draft). `VOLUME /config`.
+8. `EXPOSE 3890 17170`. `VOLUME /config`.
 9. `ENV` only the config path variable once the name is confirmed (section 1).
 
 ## 5. docker-bake.hcl
@@ -72,10 +72,10 @@ Closest sibling: `apps/adguardhome-sync` (prebuilt tarball for `TARGETARCH`, ext
 schema_version: 1
 upstream_env_url: "https://github.com/lldap/lldap"
 ports:
-  - port: 3890        # UNVERIFIED: confirm from config template before keeping
+  - port: 3890        # LDAP
     protocol: tcp
     required: true
-  - port: 17170       # UNVERIFIED: confirm from config template before keeping
+  - port: 17170       # web UI
     protocol: tcp
     required: true
 env:
@@ -86,9 +86,9 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - postgresql
+  - name: postgresql
 ```
-Rules: list only env names the app or start script reads (none beyond TZ until section 1 is confirmed). `opt_dependencies` key name must match a sibling's settings.yaml (not checked: confirm before writing). `postgresql` exists in apps/ (checked). The database secrets (JWT secret, admin password) are required by lldap per the draft; list them as env only once the real names are confirmed, with `required: true` and a start-script generated default (section 7).
+Rules: list only env names the app or start script reads (none beyond TZ until section 1 is confirmed). The `opt_dependencies` key with `- name: postgresql` matches siblings (e.g. `apps/freshrss/settings.yaml`); use the `- name:` form in the snippet too. `postgresql` exists in apps/ (checked). The database secrets (JWT secret, admin password) are required by lldap per the draft; list them as env only once the real names are confirmed, with `required: true` and a start-script generated default (section 7).
 
 ## 7. start.sh
 
@@ -97,13 +97,13 @@ Rules: list only env names the app or start script reads (none beyond TZ until s
 3. Secrets: if the JWT secret and admin password are not set, generate them once and keep them in `/config` (not in the process list, not in logs). Apply the admin password from env on every start only if an env var is set (password from env applied each start, per the start-script rules; confirm the mechanism with lldap's own CLI before writing).
 4. Bind address: lldap must listen on all interfaces (`0.0.0.0`), so set the listen host in the seeded config (UNVERIFIED key name) rather than relying on the default.
 5. Never write to `/app`. Temp files go to `/tmp`.
-6. End with `exec /app/lldap run --config-file /config/lldap_config.toml` (UNVERIFIED binary name and subcommand; read from the tarball at build time).
+6. End with `cd /app && exec /app/lldap run --config-file /config/lldap_config.toml` (binary name confirmed from the tarball; the `run` subcommand and flag are UNVERIFIED; `cd /app` is needed so the relative `app/` web assets resolve, UNVERIFIED `web_root` key).
 
 ## 8. container-test.yaml
 
 - Header: the forgetool `$schema` line used by `apps/adguardhome-sync/container-test.yaml`.
 - `filePaths`: `/app/lldap` (or the confirmed binary path) and `/start.sh` (or the confirmed start script path).
-- `tcp` probes: one for each confirmed port in settings.yaml (section 6). Probe timeout: copy `timeoutSeconds` from `apps/adguardhome-sync/container-test.yaml` (UNVERIFIED value; read the sibling at implementation time).
+- `tcp` probes: 3890 and 17170 (every settings.yaml port needs one). Probe timeout: copy `timeoutSeconds` from `apps/adguardhome-sync/container-test.yaml` (UNVERIFIED value; read the sibling at implementation time).
 - Test runs with no env vars. The admin/JWT generation path runs on the first start without env, so it is covered; the env-set path is not, and must be run by hand (see section 11).
 
 ## 9. Rootless and read-only-rootfs adaptations

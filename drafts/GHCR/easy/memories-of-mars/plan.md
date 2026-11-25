@@ -37,7 +37,7 @@ No `defaults/` or `etc/`. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 `FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`, taken from `apps/steamcmd` (its build produces `ghcr.io/trueforge-org/steamcmd`; the digest is UNVERIFIED and must be read from the published image at build time, not invented). Reasons:
 
 - It already provides SteamCMD (`/usr/local/bin/steamcmd`, `/usr/local/share/steamcmd/steamcmd.sh`), runs as `apps`, and creates `/config`.
-- Its `start.sh` supports `STEAM_APP_IDS` (numeric, comma-separated), `STEAM_INSTALL_DIR`, `STEAM_APP_VALIDATE`, and `STEAM_USERNAME`/`STEAM_PASSWORD` for login. These cover the install step, so no new SteamCMD logic is needed.
+- Its `start.sh` supports `STEAM_APP_IDS` (numeric, comma-separated), `STEAM_INSTALL_DIR`, `STEAM_APP_VALIDATE`, and `STEAM_USERNAME`/`STEAM_PASSWORD` for login. This app's own `start.sh` replaces it at `/start.sh` (see section 7), so the install logic must be carried into the new script; the env names stay the same.
 
 Fallback if the steamcmd image cannot be used: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus the apt setup from `apps/steamcmd/Dockerfile` (multiverse, `steamcmd:i386`). That duplicates the base, so prefer the steamcmd base.
 
@@ -111,10 +111,11 @@ if [ -z "${STEAM_APP_IDS}" ]; then
 fi
 
 # Install or update the dedicated server, then launch it.
-/usr/local/bin/steamcmd   # UNVERIFIED: exact launch command for the server binary, see section 10
+# TODO: self-contained SteamCMD install (see below), then the server launch.
+# UNVERIFIED: exact launch command for the server binary, see section 10
 ```
 
-- The install happens inside the steamcmd base's `start.sh` when `STEAM_APP_IDS` is set (its pre-update and `app_update` logic), so this script only sets env and launches the server.
+- Important: `COPY --chmod=0755 . /` copies this app's `start.sh` to `/start.sh`, OVERWRITING the base's SteamCMD helper, and `/usr/local/bin/steamcmd` in the base is a wrapper that does `exec /start.sh`. Calling `/usr/local/bin/steamcmd` from this script would therefore re-run itself in a loop. The script must be self-contained: seed `/config/Steam/steamcmd` from `/usr/local/share/steamcmd/` when missing and run `/config/Steam/steamcmd/steamcmd.sh +force_install_dir ${STEAM_INSTALL_DIR} +login anonymous +app_update ${STEAM_APP_IDS} +quit` itself (logic adapted from `apps/steamcmd/start.sh`), then launch the server. Replace the placeholder line above accordingly.
 - Launch command: UNVERIFIED. The server binary path under `${STEAM_INSTALL_DIR}` and its arguments are not confirmed. Do not guess it. Replace the placeholder above with `exec "${STEAM_INSTALL_DIR}/<server binary>" <args>` once confirmed, and keep `exec` so signals reach PID 1.
 - Writes: `/config` only (install dir and HOME). Caches and scratch go to `/tmp` (steamcmd base uses `/config/steamcmd/tmp`; note it in the PR as a deviation to review, since the rule says caches go to `/tmp`).
 - Bind: game server bind address: UNVERIFIED.
