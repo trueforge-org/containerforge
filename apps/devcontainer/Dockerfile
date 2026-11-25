@@ -140,7 +140,7 @@ ENV hadolintVersion=2.15.1
 # renovate: datasource=github-releases depName=google/go-containerregistry
 ENV craneVersion=0.22.1
 # renovate: datasource=github-releases depName=sigstore/cosign
-ENV cosignVersion=3.1.5
+ENV cosignVersion=3.1.6
 # renovate: datasource=github-releases depName=aquasecurity/trivy
 ENV trivyVersion=0.76.2
 # renovate: datasource=github-releases depName=koalaman/shellcheck
