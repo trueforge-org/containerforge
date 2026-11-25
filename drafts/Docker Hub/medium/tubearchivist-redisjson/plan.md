@@ -170,8 +170,22 @@ fi
 mkdir -p "$REDIS_DATA_DIR"
 
 args=(--bind 0.0.0.0 --port "$REDIS_PORT" --dir "$REDIS_DATA_DIR")
-# same dump.rdb / AOF handling as apps/valkey/start.sh
-args+=(--appendonly "$REDIS_APPENDONLY")
+
+# Same dump.rdb / AOF handling as apps/valkey/start.sh: an existing dump.rdb is ignored when the
+# server starts with AOF on and no AOF yet, so load the snapshot first and enable AOF once it is up.
+if [[ "$REDIS_APPENDONLY" == "yes" && -f "$REDIS_DATA_DIR/dump.rdb" && ! -d "$REDIS_DATA_DIR/appendonlydir" ]]; then
+  args+=(--appendonly no)
+  (
+    export REDISCLI_AUTH="$REDIS_PASSWORD"
+    until [[ "$(redis-cli -p "$REDIS_PORT" ping 2>/dev/null)" == "PONG" ]]; do
+      sleep 1
+    done
+    redis-cli -p "$REDIS_PORT" config set appendonly yes >/dev/null
+  ) &
+else
+  args+=(--appendonly "$REDIS_APPENDONLY")
+fi
+
 if [[ -n "$REDIS_PASSWORD" ]]; then
   args+=(--requirepass "$REDIS_PASSWORD")
 fi
@@ -180,8 +194,8 @@ exec redis-server "${args[@]}" "$@"
 ```
 
 - Seeds nothing: Redis creates its own files in `/config` on first start (the dir is created when missing).
-- Idempotent: the snapshot-then-AOF logic from `apps/valkey/start.sh` is copied, so existing RDB data is loaded on the first start with AOF on.
-- Passwords are applied on every start (`--requirepass` from the env).
+- Idempotent: the snapshot-then-AOF logic from `apps/valkey/start.sh` is included above, so existing RDB data is loaded on the first start with AOF on (UNVERIFIED that Redis 8 shares the valkey behaviour; test with a `dump.rdb` in `/config`).
+- Passwords are applied on every start (`--requirepass` from the env). This puts the password in the process list, as `apps/valkey/start.sh` does; UNVERIFIED whether a safer route (config file in `/tmp`) is wanted, since `redis-server` has no password env var.
 - Binds `0.0.0.0` so other containers can reach it (ContainerForge rule).
 - Writes nothing under `/app`. Caches and temp files go to `/tmp`.
 

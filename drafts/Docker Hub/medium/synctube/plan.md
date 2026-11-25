@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | No tagged release: `gh api repos/RblSb/SyncTube/releases/latest` returns 404. Pin a commit SHA. The draft's Dockerfile reference is commit `d22d837`; the repo's `master` was last pushed 2026-11-05. UNVERIFIED: whether `d22d837` is the newest commit or a stale one. Pick one SHA, use it as `VERSION`, and note the choice in the PR. Source: `gh api repos/RblSb/SyncTube`. |
+| Version to build | No tagged release: `gh api repos/RblSb/SyncTube/releases/latest` returns 404. Pin a commit SHA. The draft's Dockerfile reference is commit `d22d837`; the head of `master` is `d22d837ae76abe6df3d1dbce3eae0a52297a461b` (committed 2026-10-31, checked with `gh api repos/RblSb/SyncTube/commits/master`), so the draft's commit is the newest. Use that full SHA as `VERSION` and note it in the PR. Source: `gh api repos/RblSb/SyncTube`. |
 | Docker Hub tag | `littlestache/synctube:latest` only, last pushed 2021-12-04, amd64 only. The draft's container is a 2021 build and is not a usable reference for the current source. Source: https://hub.docker.com/v2/repositories/littlestache/synctube/tags?page_size=3 |
 | Renovate | UNVERIFIED: no release tags. Use `datasource=git-refs depName=https://github.com/RblSb/SyncTube currentValue=master` (the pattern in `apps/tvheadend`, also used in the fenrus plan). |
 | License | MIT (GitHub SPDX `MIT`). Source: `gh api repos/RblSb/SyncTube`. |
@@ -13,7 +13,7 @@
 | Download | Source archive by commit: `https://github.com/RblSb/SyncTube/archive/${VERSION}.tar.gz`. The draft lists `master.zip`; a commit-pinned tarball is preferred for reproducibility. |
 | Checksum source | None published upstream. The tarball is pinned by commit SHA (content-addressed). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/RblSb/SyncTube/d22d837/Dockerfile: `FROM haxe:4.3-alpine3.22`; `apk add nodejs npm git`; creates user and group `app` (UID/GID 1000) and `/app`; `USER 0` for setup; `npm ci`; `haxelib setup /app`, `haxelib install all --always`, `haxe build-all.hxml` in one `RUN`; `USER 1000`; `ENTRYPOINT [ "node", "build/server.js" ]`. No `CMD`, `EXPOSE`, `VOLUME`, `ENV`, or `WORKDIR` defined. |
-| Ports | UNVERIFIED: the upstream Dockerfile has no `EXPOSE`. The draft's `4200/http` is inferred. Find the listen port in the upstream config or server source (not fetched) before writing `settings.yaml`. |
+| Ports | The upstream Dockerfile has no `EXPOSE`, but upstream `default-config.json` sets `"port": 4200`, which confirms the draft's 4200 (the listen address was not checked). |
 | Env vars | UNVERIFIED: none fetched. Read the upstream config and README before listing any. |
 | Data and config paths | UNVERIFIED for upstream. The draft's `/usr/src/app/user` is a chart path (pvc), not an upstream path. The upstream Dockerfile does not set a data directory. |
 | arm64 | The Haxe output is JavaScript (arch-neutral), and the Node runtime is per arch from the `python-node` base, so arm64 is expected to work. UNVERIFIED: no arm64 build has been run. |
@@ -31,11 +31,11 @@ No `defaults/` unless the upstream config needs seeding (decide after reading th
 
 ## 3. Base image
 
-Runtime stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (the `FROM` line used by 13 existing apps, including `apps/budge` and `apps/changedetection`). It provides Node, which is what the upstream runs.
+Runtime stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (the `FROM` line used by 11 existing apps, including `apps/budge`; `apps/changedetection` uses the older `python-node:3.14.8` tag). It provides Node, which is what the upstream runs.
 
 Build stage: `haxe:4.3-alpine3.22`, the same image upstream uses. Its output is JavaScript, so the build stage's musl libc does not reach the final image. The build stage needs a digest: UNVERIFIED (not fetched; `docker buildx imagetools inspect haxe:4.3-alpine3.22` gives it). Do not invent one.
 
-Closest siblings: `apps/changedetection` and `apps/budge` (python-node with a Node app). Build-stage-then-runtime pattern: `apps/pwndrop`.
+Closest siblings: `apps/changedetection` and `apps/budge` (python-node with a Node app). Build-stage-then-runtime pattern: `apps/pwndrop` (both stages on ubuntu).
 
 ## 4. Dockerfile
 
@@ -65,7 +65,7 @@ COPY --from=build --chown=apps:apps /src/public /app/public
 # ... plus any other runtime folders the server reads (UNVERIFIED: list from the source tree)
 USER apps
 COPY --chmod=0755 . /
-EXPOSE <PORT>/tcp
+EXPOSE 4200/tcp
 VOLUME /config
 ```
 - The `ARG VERSION` must equal the bake default (section 5).
@@ -86,7 +86,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=git-refs depName=https://github.com/RblSb/SyncTube currentValue=master
-  default = "<COMMIT_SHA>"   // UNVERIFIED: choose the commit (section 1)
+  default = "d22d837ae76abe6df3d1dbce3eae0a52297a461b"
 }
 
 variable "LICENSE" {
@@ -135,7 +135,7 @@ Validate with `docker buildx bake --print` in `apps/synctube/`. The `VERSION` mu
 schema_version: 1
 upstream_env_url: "https://github.com/RblSb/SyncTube"
 ports:
-  - port: <PORT>           # UNVERIFIED: draft says 4200 (inferred); confirm from upstream config
+  - port: 4200             # upstream default-config.json
     protocol: tcp
     required: true
 env:
@@ -151,7 +151,7 @@ volumes:
 ```
 - The env list stays minimal: no upstream env var is confirmed (section 1). Add only those the upstream config or code reads.
 - `dependencies:` omitted (no database or other container).
-- Keep the port list to what the server actually binds. Replace `<PORT>` once confirmed; do not ship the placeholder.
+- Keep the port list to what the server actually binds. Replace `4200` once confirmed; do not ship the placeholder.
 
 ## 7. start.sh
 
@@ -178,15 +178,15 @@ exec node build/server.js
 
 timeoutSeconds: 60
 tcp:
-- port: '<PORT>'
+- port: '4200'
 http:
-- port: '<PORT>'
+- port: '4200'
   path: /
 filePaths:
 - /app/build/server.js
 - /app/package.json
 ```
-- `<PORT>` is the verified port (section 1 and 6). Do not ship the placeholder.
+- `4200` is the verified port (section 1 and 6). Do not ship the placeholder.
 - The `http` probe path `/` must return 200 on a fresh `/config`; confirm the status in the first run.
 - No env vars are needed to start (test runs with none), so no required-env code path exists.
 
@@ -222,7 +222,7 @@ docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name synctube-probe --read-only --tmpfs /tmp \
   -v synctube-probe-config:/config synctube:<VERSION>
 docker logs -f synctube-probe
-curl -fsS http://127.0.0.1:<PORT>/ -o /dev/null -w '%{http_code}\n'   # run from the host after -p mapping, or via docker exec
+curl -fsS http://127.0.0.1:4200/ -o /dev/null -w '%{http_code}\n'   # run from the host after -p mapping, or via docker exec
 docker rm -f synctube-probe; docker volume rm synctube-probe-config
 
 forgetool containers test --image synctube:<VERSION> --config ./apps/synctube/container-test.yaml

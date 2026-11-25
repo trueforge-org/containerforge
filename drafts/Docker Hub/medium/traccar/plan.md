@@ -15,7 +15,7 @@
 | Checksum source | UNVERIFIED: no checksum asset in the release listing. Record the zip's SHA-256 in the Dockerfile after the first download. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/traccar/traccar/master/docker/Dockerfile.alpine (master; the draft's pinned commit `45ae732` is the same path, not fetched at that commit). Stages: `FROM alpine AS package` (unzip `traccar-other-$VERSION.zip` to `/traccar`), `FROM eclipse-temurin:25-alpine AS jdk` (`jlink` JRE with `java.se`, `jdk.charsets`, `jdk.crypto.ec`, `jdk.net`, `jdk.unsupported`), `FROM alpine` (copy `/traccar` to `/opt/traccar` and the JRE to `/opt/traccar/jre`). No `apk add`, no `ENV`, no `EXPOSE`, no `VOLUME`, no `USER` (root). `WORKDIR /opt/traccar`. `ENTRYPOINT ["/opt/traccar/jre/bin/java","-XX:+ExitOnOutOfMemoryError"]`, `CMD ["-jar","tracker-server.jar","conf/traccar.xml"]`. |
 | Config | `setup/traccar.xml` (repo): `database.driver=org.h2.Driver`, `database.url=jdbc:h2:./data/database`, `database.user=sa`, `database.password` empty. Path is relative: the data directory is `./data` under the working directory. |
-| Web port | UNVERIFIED: `default.xml` fetch returned 404. The draft's 8082 is not confirmed by a fetched page. Confirm `web.port` from `src/main/resources/default.xml` at v6.17.0 before settings. |
+| Web port | 8082: `Keys.java` (`src/main/java/org/traccar/config/Keys.java`, master) defines `web.port` with default 8082 and `web.address` (no default). Matches the draft. The listen address default is UNVERIFIED. |
 | Device ports | Many TCP/UDP device protocol ports, set in config. Not fixed. Do not list device ports in `settings.yaml` unless they are enabled in the shipped config. |
 | Java | The draft says Java 17 or later. Upstream runs Temurin 25 (`jlink` runtime). |
 | Blockers | None confirmed. |
@@ -97,7 +97,7 @@ volumes:
     required: true
 ```
 
-- Port 8082 is the draft's web port and must be confirmed (section 1). Confirm it before merge.
+- Port 8082 is the default `web.port` in upstream `Keys.java` (section 1).
 - Device ports (5055 example, plus the protocol ports): do not list until the seeded config enables them. Listing an unopened port is forbidden by the settings rules.
 - No dependencies: the embedded H2 database is the default. PostgreSQL stays an optional, unlisted option until its wiring is verified (see section 10).
 
@@ -144,7 +144,7 @@ filePaths:
 - /defaults/traccar.xml
 ```
 
-- Port 8082 must match `settings.yaml` after the confirmation in section 1. Device ports are not probed (not in settings).
+- Port 8082 matches `settings.yaml`. Device ports are not probed (not in settings).
 - The HTTP probe path and status for the web UI are UNVERIFIED: confirm with `curl -i` in the build test and set the expected status.
 - `timeoutSeconds: 240`: the Java server takes a while to start its listeners; compare with `apps/nzbhydra2` and raise if needed.
 - No required-env code path (no env vars are read).
@@ -163,12 +163,12 @@ Draft expectations reconciled: the chart runs as root (UID 0) with read-only roo
 
 ## 10. Risks, caveats and open questions
 
-- Web port 8082 is not confirmed on a fetched page (section 1). Blocking for settings and tests until confirmed.
+- Web listen address: the port is confirmed (8082) but the default bind address of `web.address` is not; check from outside the container.
 - Zip contents: UNVERIFIED that `traccar-other` has no runtime and that the zip layout matches `conf/traccar.xml`. If it includes a runtime, the image still works with `java25`, but the file is bigger.
 - Java: upstream uses Temurin 25 (jlink); `java25` is the match. `java17` is the draft's minimum and is a fallback only after a verified run.
 - Device ports: each protocol port must be published by the user; they are not in `settings.yaml` until enabled in the seed. The draft's caveat stands.
-- Upstream runs as root. The image must run as `apps` with a writable `/config`. The seed and start script handle that. Verify the server does not need privileged ports below 1024 (the default device ports are above 1024, but confirm the web port).
-- PostgreSQL: optional per the draft and not used by default (embedded H2). Not wired in this plan; add an `opt_dependencies` entry only with verified wiring.
+- Upstream runs as root. The image must run as `apps` with a writable `/config`. The seed and start script handle that. Verify the server does not need privileged ports below 1024 (the default device ports are above 1024, but confirm the web port stays at 8082).
+- PostgreSQL: the draft lists `postgresql` as a dependency container (not hard); this plan leaves it out by default (embedded H2). Not wired in this plan; add an `opt_dependencies` entry only with verified wiring.
 - arm64: the "other" zip is the same asset for both arches (section 1); the arm64 runtime is the base image's JRE. Not verified on arm64 in this plan.
 - Blockers: none confirmed.
 
@@ -193,5 +193,5 @@ Readiness signals: the Java process stays up, the log shows the web server liste
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep sections, check only applicable boxes.
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA: contributions need a signed CLA (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it; the `license/cla` check shows status.
-- Untested to state honestly: the web port, the zip layout and checksum, the arm64 build and run, the `--read-only` start, and the device ports.
+- Untested to state honestly: the web bind address, the zip layout and checksum, the arm64 build and run, the `--read-only` start, and the device ports.
 - `docker buildx bake --print` passes; bake `VERSION` equals Dockerfile `ARG VERSION`; no assertion weakened.

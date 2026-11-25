@@ -5,8 +5,8 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | No git tag and no GitHub release (`gh api repos/burhan-syed/troddit/releases/latest` returns 404). Chart image `docker.io/bsyed/troddit:latest` is the only Docker Hub tag, last updated 2025-07-28 (https://hub.docker.com/v2/repositories/bsyed/troddit/tags). Upstream `package.json` version is `0.21.0` (https://raw.githubusercontent.com/burhan-syed/troddit/main/package.json). Plan pins a commit SHA: `eafe83d592014e68efb9b038ef9dd9a27cb69cc4` (the commit the draft traced the Dockerfile to). UNVERIFIED that this equals current `main` HEAD; confirm at build time. |
-| Renovate | `datasource=git-refs depName=https://github.com/burhan-syed/troddit currentValue=main` (precedent `apps/fenrus`). Renovate will propose every `main` push; see section 10. |
+| Version to build | No git tag and no GitHub release (`gh api repos/burhan-syed/troddit/releases/latest` returns 404). Chart image `docker.io/bsyed/troddit:latest` is the only Docker Hub tag, last updated 2025-07-28 (https://hub.docker.com/v2/repositories/bsyed/troddit/tags). Upstream `package.json` version is `0.21.0` (https://raw.githubusercontent.com/burhan-syed/troddit/main/package.json). Plan pins a commit SHA: `eafe83d592014e68efb9b038ef9dd9a27cb69cc4` (the commit the draft traced the Dockerfile to). It equals the current `main` HEAD (checked with `gh api repos/burhan-syed/troddit/commits/main`, committed 2025-07-28). |
+| Renovate | `datasource=git-refs depName=https://github.com/burhan-syed/troddit currentValue=main` (precedent `apps/tvheadend`). Renovate will propose every `main` push; see section 10. |
 | License | AGPL-3.0 (GitHub API `license.spdx_id`, https://api.github.com/repos/burhan-syed/troddit) |
 | Source URL | https://github.com/burhan-syed/troddit |
 | Download | Source archive `https://github.com/burhan-syed/troddit/archive/${VERSION}.tar.gz` (VERSION = commit SHA). No release assets exist. |
@@ -55,7 +55,6 @@ USER apps
 COPY --chmod=0755 . /
 EXPOSE 3000
 WORKDIR /app/troddit
-CMD ["/start.sh"]
 ```
 
 No `VOLUME`: the app keeps no state in `/config` (UNVERIFIED: nothing persistent found). If the writer finds persistent writes, add `VOLUME /config` and map them.
@@ -188,7 +187,7 @@ filePaths:
 
 ## 10. Risks, caveats and open questions
 
-- **No upstream tag or release.** Pinning a commit means Renovate opens a PR for every push to `main`. Accepted precedent: `apps/fenrus`. Alternative: pin the commit and disable updates until upstream tags a release.
+- **No upstream tag or release.** Pinning a commit means Renovate opens a PR for every push to `main`. Precedent for a `git-refs` pin: `apps/tvheadend`. Alternative: pin the commit and disable updates until upstream tags a release.
 - **Stale upstream.** Last push 2025-07-28. Dependencies (Next 13, next-pwa, Clerk 4) may not build on Node 22+ or on current Ubuntu. Build failures are real and must be fixed in the Dockerfile, not by pinning old tools without a reason.
 - **Node version** in `python-node:3.15.2` is UNVERIFIED (section 3). Blocker if below 16.14.
 - **Native modules**: UNVERIFIED which dependencies compile native code (`draft-js` and `hls.js` are pure JS, `@clerk` is JS). If a native build fails, install `build-essential` in the build stage only, and purge it afterwards.

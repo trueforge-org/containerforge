@@ -7,18 +7,18 @@
 | --- | --- |
 | Version to build | `1.12` (tag `v1.12`, published 2026-11-23). The draft pins `v1.11`, which is superseded. Source: `gh api repos/sismics/docs/releases/latest` |
 | Docker Hub tag | `sismics/docs:v1.12` (last pushed 2026-11-23) and `sismics/docs:latest` (same date). Source: https://hub.docker.com/v2/repositories/sismics/docs/tags?page_size=5 |
-| Renovate | `datasource=github-releases depName=sismics/docs versioning=semver` (tags carry a `v` prefix; the Dockerfile strips it when building the URL). |
+| Renovate | `datasource=github-releases depName=sismics/docs versioning=loose` (tags are two-part, such as `v1.12`, so `loose` rather than `semver`; the Dockerfile adds the `v` prefix when building the URL). |
 | License | GPL-2.0 (GitHub SPDX `GPL-2.0`). Source: `gh api repos/sismics/docs`. The bake `LICENSE` must be `GPL-2.0-only` or `GPL-2.0` to match the SPDX id; read the upstream `LICENSE` file to confirm the exact form before committing. |
 | Source URL | https://github.com/sismics/docs |
 | Release asset | `docs-web-1.12.war`: https://github.com/sismics/docs/releases/download/v1.12/docs-web-1.12.war . The release has no `tar.gz` asset; the draft's `v1.11` tarball URL does not apply to 1.12. |
 | Checksum source | UNVERIFIED: no checksum asset in the release listing. Compute the sha256 of the WAR once, pin it in the Dockerfile, and say so in the PR. Maven Central publishes Jetty checksums (see step 4). |
-| Upstream Dockerfile reviewed | https://raw.githubusercontent.com/sismics/docs/5b39c46/Dockerfile (the draft's commit). `FROM ubuntu:22.04`; ENV `JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/`, `JAVA_OPTIONS=-Dfile.encoding=UTF-8 -Xmx1g`, `JETTY_VERSION=11.0.20`, `JETTY_HOME=/opt/jetty`; apt installs `openjdk-11-jdk`, `ffmpeg`, `mediainfo`, `tesseract-ocr` plus many language packs; downloads Jetty 11.0.20 from Maven Central to `/opt/jetty`; `EXPOSE 8080`; `ADD docs.xml /app/webapps/docs.xml`; `ADD docs-web/target/docs-web-*.war /app/webapps/docs.war`; `WORKDIR /app`; `CMD ["java", "-jar", "/opt/jetty/start.jar"]`. No `USER` (runs as root), no `VOLUME`, no `ENTRYPOINT`. |
+| Upstream Dockerfile reviewed | https://raw.githubusercontent.com/sismics/docs/5b39c46/Dockerfile (the draft's commit). Reviewed at `v1.12` (checked against the raw file; the draft's commit `5b39c46` is the old `ubuntu:22.04`/JDK 11/Jetty 11.0.20 build and does NOT describe 1.12). At `v1.12`: `FROM ubuntu:26.04`; ENV `JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64/`, `JETTY_VERSION=12.1.6`; apt installs `openjdk-25-jdk`, `ffmpeg`, `mediainfo`, `tesseract-ocr` plus many language packs; downloads `jetty-home-12.1.6.tar.gz` from Maven Central to `/opt/jetty`; `EXPOSE 8080`; at build `cd /app && java -jar /opt/jetty/start.jar --add-modules=server,http,ee11-webapp,ee11-deploy` (creates the Jetty base in `/app`); `ADD docs.xml /app/webapps/docs.xml`; `ADD docs-web/target/docs-web-*.war /app/webapps/docs.war`; `WORKDIR /app`; `CMD ["java", "-jar", "/opt/jetty/start.jar"]`. No `USER` (runs as root), no `VOLUME`, no `ENTRYPOINT`. |
 | Ports | 8080/tcp (web UI and API). Not published automatically. |
 | Env vars | UNVERIFIED for app configuration: the upstream runtime env (database URL, data path) is not in the fetched Dockerfile. The image-level env is `LANG`, `LC_ALL`, `JAVA_HOME`, `JAVA_OPTIONS`, `JETTY_VERSION`, `JETTY_HOME`. Read the upstream docs configuration (not fetched) before adding app env vars. |
-| Data path | Draft chart persists `/data` (pvc). UNVERIFIED for upstream: the app's data-directory setting was not fetched. |
+| Data path | Upstream `docs.xml` sets `docs.home` to `/data`; the draft chart persists `/data` (pvc). This image remaps it to `/config/data`. |
 | Database | PostgreSQL is required (draft: CloudNativePG in the chart; running without it is not supported). UNVERIFIED: the DB connection keys the app reads. |
 | Maven build | The upstream Dockerfile expects `docs-web/target/docs-web-*.war`, built by Maven outside the Dockerfile. This plan takes the published release WAR instead, so no Maven step is needed. UNVERIFIED: that the release WAR is the same artifact the Dockerfile would build. |
-| `docs.xml` | Upstream copies `docs.xml` from the repo root into `webapps/`. The file was not fetched at tag `v1.12`. UNVERIFIED: its contents; fetch `https://raw.githubusercontent.com/sismics/docs/v1.12/docs.xml` before writing the Dockerfile. |
+| `docs.xml` | Upstream copies `docs.xml` from the repo root into `webapps/`. At `v1.12` it is an `ee11` `WebAppContext` (contextPath `/`, war `${jetty.data}/webapps/docs.war`) that sets the system property `docs.home` to `/data`. So the data path is `docs.home`, default `/data` in upstream; this image must set it to `/config/data` (edit the fetched `docs.xml` with `sed`). Source: `https://raw.githubusercontent.com/sismics/docs/v1.12/docs.xml`. |
 | arm64 | UNVERIFIED. The Docker Hub `latest` tag is a multi-arch index (media type OCI index), but only the amd64 entry appears in the tag metadata. Check the index with `docker buildx imagetools inspect sismics/docs:v1.12` before claiming arm64. Jetty and the WAR are arch-neutral; the apt packages (ffmpeg, tesseract) are available on arm64 in Ubuntu. |
 | Copy-from images | The draft says `sismics/docs:latest` for amd64. Not used: the image is an upstream Ubuntu 22.04 root image, and the WAR plus Jetty are reused from the release instead. Copy-from amd64 is `no` in practice. |
 
@@ -29,27 +29,27 @@
 - `apps/teedy-docs/settings.yaml`
 - `apps/teedy-docs/container-test.yaml`
 - `apps/teedy-docs/start.sh`
-- `apps/teedy-docs/docs.xml` is not an allowed path in `include/.dockerignore`, so place it in `apps/teedy-docs/etc/` (or `defaults/`) with a reason, and add it to the image with `COPY --chmod=0755 . /` (the allow-list includes `etc/`). Do not add `docs.xml` at the app root.
+- `apps/teedy-docs/app/webapps/docs.xml` (the Jetty context file, with `docs.home` set to `/config/data`). `docs.xml` at the app root is not in the `include/.dockerignore` allow-list, but `app/` is, so `COPY --chmod=0755 . /` puts it at `/app/webapps/docs.xml`, where Jetty deploys it.
 
 No `root/` directory. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-Runtime base: `ghcr.io/trueforge-org/java11:11.0.29+7` (version from `apps/java11/docker-bake.hcl`, `VERSION = "11.0.29+7"`). The digest is UNVERIFIED: no existing `apps/*/Dockerfile` in this repo uses `java11` as a `FROM` line, so there is no pinned digest to copy. Get it with `docker buildx imagetools inspect ghcr.io/trueforge-org/java11:11.0.29+7` and pin it.
+Runtime base: `ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d` (the `FROM` line used by `apps/hytale`). The draft's `java11` is superseded: upstream `v1.12` builds on JDK 25 and Jetty 12. Check that `25.0.1` still matches `apps/java25/docker-bake.hcl` (it currently says `25.0.1+8`) when writing the Dockerfile.
 
-Why it fits: the draft and upstream both use Java 11 (`openjdk-11-jdk` in upstream), and the java11 image ships a Temurin 11 JRE at `/opt/java/openjdk`, which is enough to run a WAR on Jetty. No JDK is needed at runtime (Maven build is not part of this image).
+Why it fits: upstream `v1.12` uses `openjdk-25-jdk`; the java25 image ships a Temurin 25 JRE at `/opt/java/openjdk`, which is enough to run a WAR on Jetty. No JDK is needed at runtime (the Maven build is not part of this image). UNVERIFIED: that a JRE is enough for Jetty 12 JSP/compiler needs of the WAR.
 
-Closest siblings: `apps/java17` consumers (`apps/airsonic-advanced`, `apps/nzbhydra2`) for the Java WAR-on-app-dir pattern. Java 11 is the only difference from them.
+Closest siblings: `apps/airsonic-advanced` and `apps/nzbhydra2` (java17 consumers) for the Java app-on-app-dir pattern; `apps/hytale` for the java25 `FROM`.
 
 ## 4. Dockerfile
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/java11:11.0.29+7@sha256:<UNVERIFIED>
+FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d
 
 ARG VERSION
 ARG TARGETARCH
 
-ENV JETTY_VERSION=11.0.20 \
+ENV JETTY_VERSION=12.1.6 \
     JETTY_HOME=/opt/jetty \
     JAVA_OPTIONS="-Dfile.encoding=UTF-8 -Xmx1g" \
     DEBIAN_FRONTEND=noninteractive \
@@ -84,17 +84,18 @@ RUN set -eux; \
     curl -fsSL -o /app/webapps/docs.war \
       "https://github.com/sismics/docs/releases/download/v${VERSION}/docs-web-${VERSION}.war"; \
     echo "<WAR_SHA256>  /app/webapps/docs.war" | sha256sum -c -; \
+    cd /app; java -jar /opt/jetty/start.jar --add-modules=server,http,ee11-webapp,ee11-deploy; \
     chown -R apps:apps /app; chmod -R 755 /app
 
 USER apps
 COPY --chmod=0755 . /
-# docs.xml comes from etc/ via the COPY above (see section 2)
+# /app/webapps/docs.xml comes from app/webapps/ via the COPY above (see section 2); its docs.home is /config/data
 
 WORKDIR /app
 EXPOSE 8080
 VOLUME /config
 ```
-- `<JETTY_SHA512>` and `<WAR_SHA256>` are placeholders. Maven Central publishes `.sha512` files next to each jar or tar.gz (UNVERIFIED that they exist for `jetty-home-11.0.20.tar.gz`; fetch `${url}.sha512` and check it). Compute the WAR sha256 once and pin it. Do not ship placeholders.
+- `<JETTY_SHA512>` and `<WAR_SHA256>` are placeholders. Maven Central publishes `.sha512` files next to each jar or tar.gz (`.sha1` is published for `jetty-home-12.1.6.tar.gz`, HTTP 200 checked; UNVERIFIED for `.sha512`; fetch and compare before pinning). Compute the WAR sha256 once and pin it. Do not ship placeholders.
 - `chown -R apps:apps /app` is done in the build (root), so `/app` is owned by the app user but not writable at runtime (`chmod 755`). Nothing writes to `/app` at runtime (section 7).
 - Jetty reads its modules from `/opt/jetty` at start. The `jetty` user from upstream is not created (ContainerForge runs as `apps`).
 - `ffmpeg`, `mediainfo`, `tesseract-ocr` and `tesseract-ocr-eng` are the packages the draft and upstream name. Upstream adds many `tesseract-ocr-*` language packs; this plan ships English only. Add more languages only on request, since each adds image size (draft caveat).
@@ -111,7 +112,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=sismics/docs versioning=semver
+  // renovate: datasource=github-releases depName=sismics/docs versioning=loose
   default = "1.12"
 }
 
@@ -192,24 +193,19 @@ dependencies:
 
 mkdir -p /config/data /config/logs
 
-# docs.xml is the Jetty context file; it is seeded only when missing
-if [[ ! -f /config/docs.xml ]]; then
-  cp /etc/teedy-docs/docs.xml /config/docs.xml
-fi
-
-cd /opt/jetty || exit 1
+cd /app || exit 1
 exec java \
   ${JAVA_OPTIONS} \
   -Djava.io.tmpdir=/tmp \
-  -Djetty.base=/tmp/jetty-base \
   -jar /opt/jetty/start.jar \
-  jetty.http.port=8080
+  jetty.http.port=8080 \
+  jetty.http.host=0.0.0.0
 ```
-- Idempotent: creates `/config/data` and `/config/logs`; seeds only `docs.xml`, and only when missing.
+- Idempotent: only creates `/config/data` and `/config/logs`; the Jetty context file `docs.xml` is baked into `/app/webapps/`.
 - `/app` is not written to at runtime (WAR is baked in).
 - `exec` so `java` gets signals.
-- UNVERIFIED: the exact Jetty invocation. The upstream `CMD` runs `start.jar` from `/opt/jetty` with `webapps/` under `/app`. Check that `jetty.base` set to `/tmp` still picks up `/app/webapps/docs.xml`, or set `jetty.base` to a directory under `/tmp` and add the context path explicitly. Test this in step 11.
-- Data directory: UNVERIFIED for upstream. If the app reads a data-directory setting, point it at `/config/data`. If it only uses a fixed path, symlink it to `/config/data` at start.
+- Jetty invocation: upstream runs `java -jar /opt/jetty/start.jar` with `/app` as the working directory and Jetty base (modules added at build time into `/app/start.d`). `start.sh` keeps that, so `jetty.base` stays `/app` (read-only). UNVERIFIED: that Jetty 12 starts with a read-only `/app` (work and temp dirs); test with `--read-only` in step 11, and if it fails set `-Djetty.base` to a copy under `/tmp`.
+- Data directory: upstream `docs.xml` sets `docs.home` to `/data`. Ship `app/webapps/docs.xml` with that value changed to `/config/data`. UNVERIFIED: how `jetty.data` resolves for `docs.war` (the upstream `docs.xml` uses `${jetty.data}/webapps/docs.war`); check on the first run that the WAR deploys.
 - Binding: Jetty `jetty.http.host` must be `0.0.0.0` for reachability from other containers. Set it explicitly in the start command (`jetty.http.host=0.0.0.0`), since Jetty's default may be all interfaces, but verify with `ss -ltn` rather than assume.
 - Database: must be reachable before the app starts. Do not wait in a loop in start.sh; the app should fail its own health if the DB is missing (UNVERIFIED behavior).
 
@@ -229,7 +225,7 @@ tcp:
 filePaths:
 - /app/webapps/docs.war
 - /opt/jetty/start.jar
-- /etc/teedy-docs/docs.xml
+- /app/webapps/docs.xml
 ```
 
 If it starts without the DB, use a full HTTP probe instead:
@@ -256,20 +252,20 @@ filePaths:
 | Upstream runs as root (no `USER`); chart `runAsUser 0` | Final `USER apps` (UID 568). Upstream's unused `jetty` user is not created. |
 | `/app/webapps/docs.war`, `/app/webapps/docs.xml` (upstream `ADD`) | Baked in build; `/app` read-only at runtime. |
 | `/data` (chart pvc) | Remapped to `/config/data` (created by `start.sh`). Existing chart users must move their data once the upstream data-directory setting is confirmed. |
-| Jetty temp and work (`jetty.base`) | `/tmp` (`-Djetty.base=/tmp/jetty-base`, `-Djava.io.tmpdir=/tmp`). |
+| Jetty temp and work | `/tmp` (`-Djava.io.tmpdir=/tmp`); `jetty.base` stays `/app` (UNVERIFIED read-only, see section 7). |
 | OCR and ffmpeg temp files | `/tmp` (set `java.io.tmpdir`; ffmpeg uses `/tmp` by default). |
 | Chart `readOnlyRootFilesystem false` | This image should run with `--read-only --tmpfs /tmp` if the upstream writes only to its data dir and temp. UNVERIFIED until step 11. |
 | Chart `privileged: false` | No change. |
 
 ## 10. Risks, caveats and open questions
 
-- **DB dependency (hard):** the app needs PostgreSQL. `apps/postgresql` exists. The DB connection keys and the schema-init behavior are UNVERIFIED (not fetched). Without them the `env:` list is incomplete.
-- **Jetty base and `docs.xml`:** the upstream `docs.xml` contents at `v1.12` were not fetched. Fetch and check it before writing `etc/docs.xml`. The `jetty.base` change in `start.sh` may hide `/app/webapps`; verify.
+- **DB dependency (hard):** the app needs PostgreSQL. `apps/postgresql` exists (the draft's own flags say no hard dependency container; the caveat says running without PostgreSQL is not supported, so reconcile on the first no-DB run: use `opt_dependencies` if it starts). The DB connection keys and the schema-init behavior are UNVERIFIED (not fetched). Without them the `env:` list is incomplete.
+- **Jetty base and `docs.xml`:** upstream `docs.xml` at `v1.12` hard-codes `docs.home=/data` and the WAR path `${jetty.data}/webapps/docs.war`; the copy in `app/webapps/` must set `/config/data` and its WAR path must be checked on the first run.
 - **Release WAR vs Maven build:** the release asset may differ from the build the upstream Dockerfile would make from the repo at the same tag. UNVERIFIED.
 - **Checksums:** upstream publishes none for the WAR. Pin sha256 after the first download and say so in the PR. Jetty checksum: fetch the Maven Central `.sha512` (UNVERIFIED that it is published for this file).
 - **Image size and first-start time:** ffmpeg and tesseract add size (draft caveat). English-only OCR keeps it smaller.
 - **arm64:** not confirmed on Docker Hub (section 1). Do not claim arm64 until built.
-- **Digest of java11 base:** UNVERIFIED (section 3).
+- **Digest of java25 base:** taken from `apps/hytale/Dockerfile`; re-check it against the current `apps/java25` build before pinning.
 - **Blockers:** no blocker confirmed for amd64. Hard DB dependency is the main risk. No GPU, no privileged need.
 
 ## 11. Build and test steps
@@ -303,6 +299,6 @@ Also test the no-DB start once, to decide the criterion-2 question in section 8.
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keeping sections and checkboxes; check only the boxes that apply.
 - Notes section includes `🤖 This PR is AI generated.`
 - CLA: contributions need a signed Contributor License Agreement (https://cla-assistant.io/trueforge-org/containerforge). Tell the user; only they can sign it, and the `license/cla` check shows status.
-- Say in the PR what was not tested: the arm64 build and run, the real DB connection (if not run with postgresql), the Jetty context when `jetty.base` is moved, and that the WAR checksum was computed locally.
+- Say in the PR what was not tested: the arm64 build and run, the real DB connection (if not run with postgresql), Jetty with a read-only `/app`, and that the WAR checksum was computed locally.
 - `docker buildx bake --print` passes; bake `VERSION` equals the Dockerfile `ARG VERSION`; the `dependencies:` entry on `postgresql` is in `settings.yaml`.
 - Downstream: no `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
