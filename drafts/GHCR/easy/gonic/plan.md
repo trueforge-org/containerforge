@@ -153,16 +153,16 @@ Decisions to confirm:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 180
 tcp:
 - port: '4747'
-  timeoutSeconds: 180
 
 filePaths:
 - /app/gonic/gonic
 ```
 
 - The test runs with no env vars and no mounts, so it exercises the defaults in `start.sh` and an empty `/music`.
-- `timeoutSeconds: 180` is the most common value across sibling tests. A first scan can be slow, but the scan is not started by the test (`GONIC_SCAN_AT_START_ENABLED` is not set), so 180 should be enough; confirm in step 3.
+- `timeoutSeconds` is a top-level key; 180 is the most common value across sibling tests. A first scan can be slow, but the scan is not started by the test (`GONIC_SCAN_AT_START_ENABLED` is not set), so 180 should be enough; confirm in step 3.
 - The `tcp` probe proves a listener inside the container only.
 
 ## 9. Rootless and read-only-rootfs adaptations

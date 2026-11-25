@@ -119,7 +119,7 @@ Validate with `cd apps/fossil && docker buildx bake --print`.
 ## 8. container-test.yaml
 
 - Header: the forgetool schema comment used by siblings.
-- `tcp`: `port: '8080'`, with a `timeoutSeconds` taken from `apps/valkey`.
+- `tcp`: `port: '8080'`, (`apps/valkey/container-test.yaml` sets no `timeoutSeconds`, so omit it unless the first run needs it).
 - `filePaths`: `/start.sh`, `/usr/bin/fossil`.
 - No HTTP probe unless a fixed path is confirmed. A TCP probe is enough for the port in `settings.yaml`.
 - No database dependency, so the narrowing exception does not apply.

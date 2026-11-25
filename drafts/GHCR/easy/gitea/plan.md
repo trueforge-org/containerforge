@@ -119,8 +119,8 @@ Then the standard `group "default"`, `image`, `image-local` (`${APP}:${VERSION}`
   - The `GITEA_*` variables are set by the upstream image. The binary reading them is UNVERIFIED on a fetched page, so confirm against the config cheat sheet before merging.
 - `volumes`: `- path: /config`, `required: true`.
 - `opt_dependencies` (the draft marks both as optional; the protocol's `dependencies:` is for hard dependencies):
-  - `postgresql` (apps/postgresql exists: ✅)
-  - `memcache` (apps/memcache exists: ✅; the draft's "memcached" maps to this app)
+  - `- name: postgresql`, `required: false` (apps/postgresql exists: ✅; `opt_dependencies` is used this way in `apps/babybuddy/settings.yaml`)
+  - `- name: memcache`, `required: false` (apps/memcache exists: ✅; the draft's "memcached" maps to this app)
 
 ## 7. start.sh
 
@@ -148,16 +148,16 @@ Points to decide and confirm:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 180
 tcp:
 - port: '3000'
-  timeoutSeconds: 180
 
 filePaths:
 - /app/gitea/gitea
 ```
 
 - `tcp` probe for port 3000 (required by the coverage minimum). Port 2222 is optional and not published by default; add a probe only if the port is made required.
-- `timeoutSeconds: 180` is the value used by most sibling tests (the most common value across `apps/*/container-test.yaml`, 20 entries).
+- `timeoutSeconds` is a top-level key (not per probe) and 180 is the most common sibling value (20 of 29 files that set it).
 - Test runs with no environment variables, so the first-run wizard path is what gets tested. The database-backed path (postgresql) is not tested here; no narrowing is needed because SQLite is the default and the database is optional.
 - Add an `http` probe for `/` only if the forgetool schema accepts it for this app (check the schema before adding).
 

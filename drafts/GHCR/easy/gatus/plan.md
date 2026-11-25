@@ -104,7 +104,7 @@ target "image-all" {
 - `ports`: `[]` (no confirmed port). Add a port only after the source confirms one.
 - `env`: `[]` (none confirmed). Add entries only after reading `cmd/gatus-sidecar`.
 - `volumes`: `[]`. The app is stateless; `/config` is not required by it. If the chart mounts `/config` anyway, add `/config` with `required: false`.
-- `dependencies`: none. Gatus main (`apps/gatus` is this app; the main Gatus image is `ghcr.io/twin/gatus`, not in this repo) is a chart-level peer, not a ContainerForge dependency. UNVERIFIED whether a Gatus app exists in `apps/`.
+- `dependencies`: none. Gatus main (`ghcr.io/twin/gatus`) is a chart-level peer, not a ContainerForge dependency. No Gatus main app exists in `apps/` (checked); `apps/gatus` is the new sidecar target.
 
 ## 7. start.sh
 

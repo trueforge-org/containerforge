@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | The draft has no version. The Ubuntu apt package to pin is `goaccess` `1:1.9.4-1` in suite `resolute` (Ubuntu 26.04, the base's release). Source: https://packages.ubuntu.com/resolute/goaccess. Upstream GoAccess is newer (tags `v1.12`, `v1.11`, `v1.10.2`, `v1.10.1`; no GitHub release object, so `releases/latest` returns 404). The wrapper builds GoAccess `1.10.2` from source. So the apt build is older than both. |
 | The draft's `latest` tag | `ghcr.io/xavier-hernandez/goaccess-for-nginxproxymanager:latest` is a rolling third-party tag. Its version is UNVERIFIED (no tag/digest page fetched). The plan does not use this image (see section 3). |
-| Renovate | UNVERIFIED. Apt packages have no confirmed renovate datasource. Use the same approach as `apps/valkey`: keep the version in `VERSION` with a `// NOTE` and a commented-out datasource line, and say so in the PR. |
+| Renovate | UNVERIFIED. `apps/steamcmd/docker-bake.hcl` uses `datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu`, which could be tried here (epoch handling UNVERIFIED). Otherwise use the same approach as `apps/valkey`: keep the version in `VERSION` with a `// NOTE` and a commented-out datasource line, and say so in the PR. |
 | License | Upstream GoAccess: MIT (GitHub API `license.spdx_id`: `MIT`, https://api.github.com/repos/allinurl/goaccess). Wrapper: MIT (https://api.github.com/repos/xavier-hernandez/goaccess-for-nginxproxymanager). |
 | Source URL | https://goaccess.io (project); https://github.com/allinurl/goaccess (source) |
 | Download | None needed: `apt-get install goaccess=<PACKAGE_VERSION>` from the ubuntu archive. No release file. |
@@ -111,7 +111,7 @@ Open point: the valkey precedent uses a commented-out `repologydepName=...` line
   - `port: 7880`, `protocol: tcp`, `required: false`. The conflict with the wrapper's `7890` (section 1) must be settled before merging; if the real port is different, change this and the test.
 - `env` (only names the start script or GoAccess reads; defaults match `start.sh`):
   - `TZ`, default `Etc/UTC`, `required: false` (sibling convention).
-  - Wrapper-style options that the plan supports (e.g. `EXCLUDE_IPS`, `LOG_TYPE` limited to `NPM`, `HTML_REFRESH`, `KEEP_LAST`, `PERSIST`), each with `required: false` and a default that matches `start.sh`. Do not list the wrapper's basic-auth variables: the plan does not implement them (section 10).
+  - `GOACCESS_LOG_DIR` (default `/opt/log`, `required: false`) is the only variable the sketch in section 7 reads. Wrapper options (`EXCLUDE_IPS`, `HTML_REFRESH`, `KEEP_LAST`, `PERSIST`) are listed only once `start.sh` implements them. Do not list the wrapper's basic-auth variables: the plan does not implement them (section 10).
 - `volumes`:
   - `- path: /config`, `required: true` (reports and state).
   - `- path: /opt/log`, `required: false`: a read-only mount of the NPM log directory. The image does not declare it as `VOLUME` (a read-only mount is chosen by the user), so the entry documents the expected mount.
@@ -161,16 +161,16 @@ Notes:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 180
 tcp:
 - port: '7880'
-  timeoutSeconds: 180
 
 filePaths:
 - /usr/bin/goaccess
 ```
 
 - The test runs with no environment variables and no `/opt/log` mount, so the empty-log path in `start.sh` is the one being tested. The NPM-log path is run by hand (section 11).
-- `timeoutSeconds: 180` is the most common value across sibling tests.
+- `timeoutSeconds` is a top-level key; 180 is the most common value across sibling tests.
 - A `tcp` check only proves the server listens inside the container, not that another container can reach it (per `container-test.instructions.md`).
 
 ## 9. Rootless and read-only-rootfs adaptations

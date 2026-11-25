@@ -46,7 +46,7 @@ No DOWNSTREAM_CHANGES.md: fluidd is not a FROM base.
 3. `ARG VERSION` is used in the download URL: `https://github.com/fluidd-core/fluidd/releases/download/v${VERSION}/fluidd.zip`. Check the tag form: the release tag is `v1.38.1`.
 4. Download and verify, as root for install steps only:
    - `USER root`
-   - `apt-get update && apt-get install --no-install-recommends -y unzip`, then `rm -rf /var/lib/apt/lists/*`. Check first that `unzip` is not already in the base (UNVERIFIED: not checked against the nginx base).
+   - No apt install needed: `apps/ubuntu/Dockerfile` already installs `unzip`, `curl` and `wget`, and nginx inherits from it (checked).
    - `curl -fsSL -o /tmp/fluidd.zip <URL>`, then `echo "<sha256>  /tmp/fluidd.zip" | sha256sum -c -`. Use the digest from section 1.
    - `unzip -q /tmp/fluidd.zip -d /usr/share/nginx/html && rm -f /tmp/fluidd.zip`. The zip layout (top-level `index.html` vs a `dist/` folder) is UNVERIFIED: check with `unzip -l` at build time and adjust the target path.
 5. Ship the licence: `/usr/share/licenses/fluidd/LICENSE` (GPL-3.0 text from the repo).
@@ -111,7 +111,7 @@ Not needed. The nginx sibling's entrypoint seeds `/config/nginx.conf` and `/conf
 - Port 80 in the upstream image: changed to 8080 here. Users who mapped 80 must update their mapping.
 - `cp -n` in the nginx entrypoint: an existing `/config/sites/default.conf` is not overwritten on upgrade, so future changes to the defaults do not reach existing installs. Note in the PR.
 - The upstream `ARG PORT` and `HEALTHCHECK` are not carried over: the healthz location exists in the template; the image HEALTHCHECK is not required by the protocol.
-- The `unzip` package and the zip layout are UNVERIFIED until the build; the target directory may need adjusting.
+- The zip layout is UNVERIFIED until the build; the target directory may need adjusting.
 - The nginx sibling's `VERSION` is `1.28.3-2ubuntu1.14` in its bake file; this plan's base is the image digest above, not a re-pinned apt version.
 - License identifier: confirm `GPL-3.0-only` vs `GPL-3.0` against the repo's convention before writing docker-bake.hcl.
 

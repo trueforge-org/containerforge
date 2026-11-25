@@ -8,7 +8,7 @@
 | Version to build | UNVERIFIED: no Garry's Mod server version was fetched. The game is installed by SteamCMD at start, so the container has no release tag. The draft's image tag `ghcr.io/ich777/steamcmd:garrysmod` is UNVERIFIED. Pin the image to a `VERSION` that is the steamcmd sibling version, and record the Steam build in the PR. |
 | Renovate | UNVERIFIED: no versioned source. Proposed: `datasource=docker depName=ghcr.io/trueforge-org/steamcmd` for the base (a ContainerForge image, so renovate tracks its tag). |
 | License | UNVERIFIED: the game is closed-source Valve software. The wrapper repo license is not confirmed. Use the license of the ContainerForge steamcmd base (`AGPL-3.0-or-later` in `apps/steamcmd/docker-bake.hcl`) and note in the PR that the game itself is proprietary. |
-| Source URL | https://store.steampowered.com/app/4020/ (draft). The Valve wiki page returned 403 and the store page names no dedicated server. Garry's Mod app ID `4020` is UNVERIFIED. |
+| Source URL | https://store.steampowered.com/app/4020/ (draft). The Valve wiki page returned 403 and the store page names no dedicated server. Garry's Mod app ID `4020` comes from the draft's store URL; that it is also the dedicated server app ID is UNVERIFIED. |
 | Download / arch | The game is pulled by SteamCMD at start (not a release asset). amd64 only: the upstream base is `ich777/debian-baseimage:bullseye_amd64` (https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile). arm64 is not available. |
 | Checksum source | None published. Steam content verification (the `validate` flag) is the only check. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile: `FROM ich777/debian-baseimage:bullseye_amd64`; apt installs `lib32gcc-s1 lib32stdc++6 lib32z1`; creates `/serverdata`, `/serverdata/steamcmd`, `/serverdata/serverfiles`; user `steam`; `ENTRYPOINT ["/opt/scripts/start.sh"]`. No EXPOSE, VOLUME, USER or CMD. |
@@ -114,7 +114,7 @@ target "image-all" {
 
 - Start from `apps/steamcmd/start.sh` (it already seeds `/config/Steam` and handles `+` arguments and anonymous login). Do not reimplement SteamCMD.
 - `export HOME=/config`, `mkdir -p /config/serverfiles /config/steamcmd`.
-- Install or update the server: `/usr/local/bin/steamcmd +force_install_dir /config/serverfiles +login "${STEAM_USERNAME}" ${STEAM_PASSWORD:+"${STEAM_PASSWORD}"} +app_update 4020 validate +quit`. App ID `4020` is UNVERIFIED (see section 1). Build the login arguments with the same escape rules as `apps/steamcmd`.
+- Install or update the server by calling the seeded SteamCMD directly: `/config/Steam/steamcmd/steamcmd.sh +force_install_dir /config/serverfiles +login "${STEAM_USERNAME}" ${STEAM_PASSWORD:+"${STEAM_PASSWORD}"} +app_update 4020 validate +quit`. App ID `4020` is UNVERIFIED (see section 1). Do NOT call `/usr/local/bin/steamcmd` here: that wrapper does `exec /start.sh`, and this image replaces `/start.sh`, so it would recurse. Seed `/config/Steam/steamcmd` from `/usr/local/share/steamcmd` first, as `apps/steamcmd/start.sh` does. Build the login arguments with the same escape rules as `apps/steamcmd`.
 - Run `exec /config/serverfiles/srcds_run -game garrysmod -console -port "${GAME_PORT}" ${GAME_PARAMS}`. The launcher path and `-game` name are UNVERIFIED for the Garry's Mod server layout.
 - Idempotent: the steamcmd update runs on every start (fine for Steam); the directory is seeded only when missing.
 - Never write to `/app`. Caches and temp files go to `/tmp` (`TMPDIR=/tmp`).
