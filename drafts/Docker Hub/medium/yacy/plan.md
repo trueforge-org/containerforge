@@ -32,9 +32,11 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d`. The draft's reasoning holds: upstream is JDK 24, and java25 is the newest listed base. Alternative: `ghcr.io/trueforge-org/java21:21` (copy its FROM line from `apps/java21/Dockerfile`) only if java25 fails the build or the run (UNVERIFIED).
+`FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d`. The draft's reasoning holds: upstream is JDK 24, and java25 is the newest listed base. Alternative: `ghcr.io/trueforge-org/java21:21.0.8@sha256:bba631340c8aefc1a10656a894475312bd89a9dd75d9e5da12c3098242f1e8f2` (as used by another app in this repo) only if java25 fails the build or the run (UNVERIFIED).
 
-Closest sibling: `apps/java25` pattern (JRE tarball into `/opt/java/openjdk`, `USER apps`), and the Java apps `apps/nzbhydra2` and `apps/airsonic-advanced` for the `/config` and `start.sh` pattern.
+Closest sibling: `apps/java25` pattern (JRE tarball into `/opt/java/openjdk`, `USER apps`), and the Java apps `apps/nzbhydra2` and `apps/airsonic-advanced` (both on `java17`, not java25) for the `/config` and `start.sh` pattern.
+
+`apps/java25` ships a JRE only (Temurin `jre` tarball), while upstream runs on a JDK image: UNVERIFIED that YaCy needs no `javac`/JDK modules at runtime.
 
 Not used: `eclipse-temurin:24-jdk-noble` (upstream). It is not a ContainerForge base, and Ubuntu noble is not the ubuntu 26.04 base.
 
@@ -49,7 +51,7 @@ Not used: `eclipse-temurin:24-jdk-noble` (upstream). It is not a ContainerForge 
    ```
    Where `VERSION` is the full name token from bake (see section 5). `${VERSION}` for the file name needs the timestamp and hash parts, so keep the full token `1.942_202608150808_f9c4b9700` as the version.
 3. Keep `LICENSE` from the tarball: `COPY` into `/usr/share/licenses/yacy/LICENSE` (inside the same RUN).
-4. Move the app to `/app/yacy_search_server`. Remove Windows and macOS launchers (`*.exe`, `*.dmg`) if they are in the tarball; they are not used.
+4. Move the app to `/app/yacy_search_server` (UNVERIFIED: the tarball's top-level directory name was not inspected; adapt the `mv`). Remove Windows and macOS launchers (`*.exe`, `*.dmg`) if they are in the tarball; they are not used.
 5. Data redirect: `ln -s /config/DATA /app/yacy_search_server/DATA` (dangling until start.sh creates it). Same pattern as the `fenrus` plan.
 6. Caches and temp: `ENV JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=/tmp`, `HOME=/tmp` or `/config` (HOME must not hold caches).
 7. Tail:

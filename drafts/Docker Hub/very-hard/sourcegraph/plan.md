@@ -59,7 +59,7 @@ schema_version: 1
 upstream_env_url: "https://github.com/sourcegraph/sourcegraph"
 ports:
   - port: 7080
-    protocol: http
+    protocol: tcp
     required: true
   - port: 2633
     protocol: tcp

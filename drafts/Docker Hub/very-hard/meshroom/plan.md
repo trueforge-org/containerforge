@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | v2025.1.0 (GitHub release published 2025-08-19, https://api.github.com/repos/alicevision/Meshroom/releases/tags/v2025.1.0). A `nightly` prerelease (2026-06-09) exists: do not pin it. |
-| Renovate | `datasource=github-releases depName=alicevision/Meshroom versioning=loose`. The tag has a `v` prefix; the nightly tag must be excluded (UNVERIFIED whether renovate excludes it by default). |
+| Renovate | `datasource=github-releases depName=alicevision/Meshroom versioning=loose extractVersion=^v(?<version>.+)$` (same `extractVersion` form as `apps/code-server`). The tag has a `v` prefix, stripped by `extractVersion`; the nightly tag must be excluded (UNVERIFIED whether renovate excludes it by default). |
 | License | MPL-2.0 per Zenodo record (https://zenodo.org/records/16887472, "License: Mozilla Public License 2.0"). GitHub reports `NOASSERTION` (https://api.github.com/repos/alicevision/Meshroom), so the repo LICENSE file is UNVERIFIED. |
 | Source URL | https://github.com/alicevision/Meshroom |
 | Binary (amd64) | `Meshroom-2025.1.0-Linux.tar.gz`, 14.3 GB, https://zenodo.org/records/16887472/files/Meshroom-2025.1.0-Linux.tar.gz (Zenodo record lists it; the Windows zip is not used). The GitHub release has no assets in the API response. |
@@ -41,7 +41,7 @@ The upstream tarball bundles its own libraries and CUDA 12 runtime, so the base 
    ```dockerfile
    RUN test "${TARGETARCH}" = "amd64" || { echo "meshroom: amd64 only"; exit 1; }
    ```
-3. Runtime libraries not in the bundle (UNVERIFIED list): `apt-get install -y --no-install-recommends libgl1 libglu1-mesa libxkbcommon0 libxrender1 libxi6 libsm6 libice6 xvfb` (pinned check against the bundle is UNVERIFIED; add only what `ldd` reports missing in step 3 of the protocol). Then `rm -rf /var/lib/apt/lists/*`.
+3. Runtime libraries not in the bundle (UNVERIFIED list): `apt-get install -y --no-install-recommends openssh-server libgl1 libglu1-mesa libxkbcommon0 libxrender1 libxi6 libsm6 libice6 xvfb` (pinned check against the bundle is UNVERIFIED; add only what `ldd` reports missing in step 3 of the protocol). Then `rm -rf /var/lib/apt/lists/*`.
 4. Fetch and verify the 14.3 GB tarball, unpack to `/app/meshroom`:
    ```dockerfile
    RUN curl -fL -o /tmp/meshroom.tar.gz \
@@ -52,7 +52,7 @@ The upstream tarball bundles its own libraries and CUDA 12 runtime, so the base 
        rm -f /tmp/meshroom.tar.gz
    ```
    The tarball is 14.3 GB: the build needs a large `/tmp` on the builder, so use a build stage (`FROM <ubuntu> AS build`) and `COPY --from=build /app/meshroom /app/meshroom` to keep the final layer tidy. UNVERIFIED: the builder disk is large enough.
-   `ARG VERSION` is `v2025.1.0`, but the tarball name is `2025.1.0`. Keep `VERSION` as the tag in `docker-bake.hcl` and strip the `v` in the Dockerfile, or use `2025.1.0` as `VERSION` and keep the `v` out of the renovate match.
+   Replace the literal `2025.1.0` in the URL and file name with `${VERSION}`. `VERSION` is `2025.1.0` (no `v`; the renovate `extractVersion` strips it). The Zenodo record id (`16887472`) is fixed per release and must be bumped by hand with the version (UNVERIFIED how renovate handles it).
 5. Licence: ship the MPL-2.0 text to `/usr/share/licenses/meshroom/LICENSE` if the tarball includes it, else add the upstream MPL-2.0 text from a fetched source (UNVERIFIED: not in the tarball listing, check after unpack).
 6. Mutable paths: Meshroom writes its cache and project files to the user's home. Set `ENV HOME=/config` and `XDG_CACHE_HOME=/tmp/cache`, `XDG_CONFIG_HOME=/config/.config`.
 7. Tail:
@@ -60,13 +60,13 @@ The upstream tarball bundles its own libraries and CUDA 12 runtime, so the base 
    USER apps
    COPY --chmod=0755 . /
 
-   EXPOSE 22
+   EXPOSE 2222
    VOLUME /config
 
    WORKDIR /app/meshroom
    ```
 
-Version alignment: `ARG VERSION` must match `docker-bake.hcl` (see step 4 note).
+Version alignment: `ARG VERSION` must match `docker-bake.hcl` (`2025.1.0`).
 
 ## 5. docker-bake.hcl
 
@@ -78,8 +78,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=alicevision/Meshroom versioning=loose
-  default = "v2025.1.0"
+  // renovate: datasource=github-releases depName=alicevision/Meshroom versioning=loose extractVersion=^v(?<version>.+)$
+  default = "2025.1.0"
 }
 
 variable "LICENSE" {
@@ -119,7 +119,7 @@ target "image-all" {
 }
 ```
 
-`image-all` lists only `linux/amd64` because there is no arm64 route. Validate with `cd apps/meshroom && docker buildx bake --print`. Note: `VERSION` `v2025.1.0` is stripped to `2025.1.0` for the tarball name in the Dockerfile (step 4).
+`image-all` lists only `linux/amd64` because there is no arm64 route. Validate with `cd apps/meshroom && docker buildx bake --print`. The Dockerfile uses `VERSION` directly for the tarball name (step 4).
 
 ## 6. settings.yaml
 
@@ -128,7 +128,7 @@ target "image-all" {
 schema_version: 1
 upstream_env_url: "https://github.com/alicevision/Meshroom"
 ports:
-  - port: 22
+  - port: 2222
     protocol: tcp
     required: true
 env:
@@ -143,15 +143,15 @@ volumes:
     required: true
 ```
 
-Rules: list only what the app reads. `NVIDIA_DRIVER_CAPABILITIES` is a runtime variable the NVIDIA runtime reads; confirm it is needed (UNVERIFIED; common in TrueCharts as `NVIDIA_CAPS`). `22` is the sshd port from the upstream Dockerfile; there is no 5800 entry.
+Rules: list only what the app reads. `NVIDIA_DRIVER_CAPABILITIES` is a runtime variable the NVIDIA runtime reads; confirm it is needed (UNVERIFIED; common in TrueCharts as `NVIDIA_CAPS`). Upstream sshd listens on 22 (Dockerfile `EXPOSE 22`, chart targetPort 22), but a non-root `apps` process cannot bind below 1024, so this image runs sshd on 2222 (`-p 2222`); there is no 5800 entry. Map service port 22 to 2222 and note the change from the chart's targetPort 22.
 
 ## 7. start.sh
 
 - `mkdir -p /config/meshroom /config/.config /tmp/cache`.
-- Start sshd on `0.0.0.0:22`: sshd needs `/run/sshd` and host keys in writable paths. Generate host keys into `/tmp/ssh` on each start (`ssh-keygen -A -f /tmp`) since `/etc` is read-only. UNVERIFIED that sshd accepts a `-h` key path; check `sshd -t` in step 3.
+- Start sshd on `0.0.0.0:2222` (`-p 2222`; ports below 1024 need root): sshd needs `/run/sshd` and host keys in writable paths. Generate host keys into `/tmp/ssh` on each start (`ssh-keygen -A -f /tmp`) since `/etc` is read-only. UNVERIFIED that sshd accepts a `-h` key path; check `sshd -t` in step 3.
 - Authentication: do not carry over `PermitRootLogin yes` and the fixed root password. Use key-based login for `apps` only, with `authorized_keys` in `/config/.ssh`. UNVERIFIED how the user will be seeded; decide in the PR.
 - Start the X11 display if GUI forwarding is expected: `Xvfb :99 -screen 0 1920x1080x24 &` in `/tmp` (only when `DISPLAY` is not set). UNVERIFIED.
-- `exec /usr/sbin/sshd -D -e` (or the sshd path after `apt install openssh-server`, which is not in the base: add `openssh-server` to the apt list in step 3 of the Dockerfile). UNVERIFIED package availability in the base.
+- `exec /usr/sbin/sshd -D -e -p 2222 -h /tmp/ssh/ssh_host_ed25519_key` (`openssh-server` is in the apt list in Dockerfile step 3; UNVERIFIED that it is not already in the base and that it installs on 26.04).
 - No writes to `/app`.
 
 ## 8. container-test.yaml
@@ -160,13 +160,13 @@ Rules: list only what the app reads. `NVIDIA_DRIVER_CAPABILITIES` is a runtime v
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 timeoutSeconds: 600
 tcp:
-- port: '22'
+- port: '2222'
 filePaths:
 - /app/meshroom/meshroom
 - /usr/share/licenses/meshroom/LICENSE
 ```
 
-- No `http` probe: sshd is not HTTP. The `tcp` probe on 22 is the readiness check.
+- No `http` probe: sshd is not HTTP. The `tcp` probe on 2222 is the readiness check.
 - `timeoutSeconds` is large because the image is about 14 GB to pull and unpack. UNVERIFIED: whether the CI runner has enough disk.
 - The GPU pipeline is not exercised (no NVIDIA runtime in CI). Narrowed: a GPU path is not testable in this suite.
 
@@ -178,7 +178,7 @@ filePaths:
 | `/tmp/Meshroom_build` (build only) | Not in the final image |
 | sshd host keys in `/etc/ssh` | `/tmp/ssh` (generated per start) |
 | `/data` (chart persistence `data`) | Not used: this plan uses `/config` as the single persistent path. Remap the chart's `/data` in the PR notes. |
-| Chart security | Chart runs root (runAsUser 0, runAsNonRoot false). The plan runs as `apps` on 22 with key-only ssh. Privileged is not set in the chart; the NVIDIA runtime needs `NVIDIA_*` env, and is host-side. |
+| Chart security | Chart runs root (runAsUser 0, runAsNonRoot false). The plan runs as `apps` on 2222 (no privileged port) with key-only ssh. Privileged is not set in the chart; the NVIDIA runtime needs `NVIDIA_*` env, and is host-side. |
 
 ## 10. Risks, caveats and open questions
 
@@ -190,7 +190,7 @@ filePaths:
 - Checksum: MD5 only (Zenodo). Use `md5sum -c` as in step 4.
 - Renovate: the nightly tag must not become the pin. UNVERIFIED that renovate excludes it.
 - Tarball bundles its own libs; compatibility with ubuntu 26.04 is UNVERIFIED.
-- Blockers: arm64 (none), 14 GB size, NVIDIA runtime. The app cannot be built or tested in the default CI without a large disk.
+- Blockers: 14 GB size, NVIDIA runtime. The app cannot be built or tested in the default CI without a large disk.
 
 ## 11. Build and test steps
 
@@ -206,7 +206,7 @@ docker rm -f meshroom-probe; docker volume rm meshroom-probe-config
 forgetool containers test --image meshroom:2025.1.0 --config ./apps/meshroom/container-test.yaml
 ```
 
-Expected readiness signal: sshd logs `Server listening on 0.0.0.0 port 22` (UNVERIFIED exact text; confirm in step 3). The container must stay running. The build is about 14 GB, so run it on a machine with enough disk.
+Expected readiness signal: sshd logs `Server listening on 0.0.0.0 port 2222` (UNVERIFIED exact text; confirm in step 3). The container must stay running. The build is about 14 GB, so run it on a machine with enough disk.
 
 ## 12. PR checklist
 

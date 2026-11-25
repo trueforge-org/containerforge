@@ -31,7 +31,7 @@
 - `apps/yourls/start.sh`
 - `apps/yourls/defaults/user/config.php` (seed template for `/config`, only when missing), reason: YOURLS needs a config file and the app tree must stay read-only.
 
-No `root/`, `etc/`, `health/`. No `DOWNSTREAM_CHANGES.md`: YOURLS is not a `FROM` base. Add `apps/yourls/defaults/` only if the seed template is kept as a file; otherwise generate it in `start.sh`.
+No `root/`, `etc/`, `health/`. No `DOWNSTREAM_CHANGES.md`: YOURLS is not a `FROM` base. If the seed template is generated in `start.sh` instead, drop `defaults/`.
 
 ## 3. Base image
 
@@ -136,19 +136,19 @@ env:
     default: "Etc/UTC"
     required: false
   - name: YOURLS_SITE
-    default: ""
+    default: "http://localhost:8080"
     required: true
   - name: YOURLS_DB_HOST
-    default: ""
+    default: "mariadb"
     required: true
   - name: YOURLS_DB_NAME
-    default: "yourls"
-    required: false
+    default: "MYMARIADBDB"
+    required: true
   - name: YOURLS_DB_USER
-    default: "yourls"
+    default: "MYMARIADBUSER"
     required: true
   - name: YOURLS_DB_PASS
-    default: ""
+    default: "MYMARIADBPASSWORD"
     required: true
   - name: YOURLS_DB_PREFIX
     default: "yourls_"
@@ -162,21 +162,20 @@ env:
 volumes:
   - path: /config
     required: true
-opt_dependencies:
+dependencies:
   - name: mariadb
 ```
 
-Rules: every name above is a `define()` constant from `config-sample.php`. `YOURLS_USER`/`YOURLS_PASS` are left out until confirmed (section 1). Port 8080 comes from the chart; confirm the nginx listen port in step 4 matches. `YOURLS_DB_HOST` and `YOURLS_DB_PASS` are `required: true` because the app cannot install without them, and `start.sh` must not fail on the empty-env test run (see section 8).
+Rules: every name above is a `define()` constant from `config-sample.php`. `YOURLS_USER`/`YOURLS_PASS` are left out until confirmed (section 1). Port 8080 comes from the chart; confirm the nginx listen port in step 4 matches. The required DB variables carry non-empty placeholder defaults mirroring `apps/mariadb` (settings rule: `required: true` needs a default), so `start.sh` can start on the no-env test run (see section 8).
 
-Dependencies: the draft lists mariadb as a hard dependency (YOURLS cannot install without a database), and apps/mariadb exists. Declare it as `dependencies: - name: mariadb` (hard), not `opt_dependencies`, and use the narrowed database-dependent test in section 8 per the build-test-protocol exception. The `opt_dependencies` block above must then be replaced by `dependencies`. UNVERIFIED: that forgetool accepts a `dependencies` key in this form; compare with a sibling that has a hard dependency before writing.
+Dependencies: the draft lists mariadb as a hard dependency (YOURLS cannot install without a database), and apps/mariadb exists. It is declared as `dependencies: - name: mariadb` (hard; same form as `apps/kimai` and `apps/monica`), not `opt_dependencies`, and section 8 uses the narrowed database-dependent test per the build-test-protocol exception.
 
 ## 7. start.sh
 
 Requirements:
 - `mkdir -p /config/yourls /config/yourls/user/plugins`. Seed `/config/yourls/user/config.php` from the template in `defaults/` only when the file is missing or empty, never overwrite it.
-- The `/app/yourls/user` directory is a build-time symlink to `/config/yourls/user` (section 4 step 5), so `/app` is never written at runtime. `start.sh` seeds `/config/yourls/user/config.php` from `defaults/` only when it is missing or empty.
+- The `/app/yourls/user` directory is a build-time symlink to `/config/yourls/user` (section 4 step 5), so `/app` is never written at runtime.
 - Apply DB and site settings from env on every start by rewriting the matching `define()` lines in `/config/yourls/user/config.php`. Escape `'` and `\` in values before writing. UNVERIFIED: that the app reads a symlinked `user/` directory without issue; test in step 3 of the protocol.
-- Apply DB and site settings from env on every start by writing the `define()` lines into `/config/yourls/user/config.php` with `sed` on the existing keys (never with a string that breaks on special characters: escape `'` and `\` in the values with `printf '%s' ... | sed`).
 - Start PHP-FPM with the socket in `/tmp`, then `exec nginx -g 'daemon off;'` (or the chosen web server) so signals reach nginx.
 - Bind `0.0.0.0:8080`.
 - No writes to `/app`. Caches and sockets under `/tmp`.

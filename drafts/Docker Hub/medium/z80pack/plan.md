@@ -36,8 +36,8 @@ Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed29
 
 ## 4. Dockerfile
 
-1. `ARG VERSION`, `ARG TARGETARCH`, `FROM <ubuntu> AS build`, `USER root`.
-2. Build stage: `apt-get install -y --no-install-recommends build-essential libncurses-dev libncursesw5-dev curl ca-certificates`. The X11 build is not needed for a headless console; use the plain `make` (no `WANT_SDL`) and document that the web terminal is the console.
+1. `FROM <ubuntu> AS build`, then `ARG VERSION`, `ARG TARGETARCH` (after `FROM`, so they are in scope), `USER root`.
+2. Build stage: `apt-get install -y --no-install-recommends build-essential libncurses-dev libncursesw5-dev curl ca-certificates`. The X11 build is not needed for a headless console; use the plain `make` (no `WANT_SDL`; the dlandon 1.37 image used `make -f Makefile.linux`, and whether 1.38 still has that file is UNVERIFIED) and document that the web terminal is the console.
 3. Fetch and build:
    ```dockerfile
    RUN curl -fL -o /tmp/z80pack.tar.gz "https://github.com/udo-munk/z80pack/archive/refs/tags/${VERSION}.tar.gz" && \
@@ -130,15 +130,12 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-  - name: Z80PACK_CONSOLE_USER
-    default: "vintage"
-    required: false
 volumes:
   - path: /config
     required: true
 ```
 
-Rules: list only variables the start script reads. `Z80PACK_CONSOLE_USER` is a name this plan introduces for the wrapper; it is not an upstream variable. Remove it if the wrapper does not read it. No password env var: the web terminal password must not be a fixed value; see section 10.
+Rules: list only variables the start script reads. `start.sh` reads no variable beyond `TZ`, so no other env is listed (an earlier `Z80PACK_CONSOLE_USER` was removed: the wrapper runs as the fixed `apps` user). No password env var: the web terminal password must not be a fixed value; see section 10.
 
 ## 7. start.sh
 
@@ -182,7 +179,7 @@ The emulator needs CP/M disk images that the user supplies under `/config`, so t
 - Fixed password in upstream Dockerfile (`vintage:computer`): do not reproduce it. Choose an auth method that is not a fixed password (for example shellinabox with no login, bound to localhost only, or a per-start random password written to the log). UNVERIFIED which is acceptable for the repo; decide in the PR. Binding to 0.0.0.0 with no auth is a risk.
 - No arm64 route confirmed: copy-from arm64 is `no` per the draft and the dlandon image platform was not fetched. Build from source on both architectures; arm64 build is UNVERIFIED until built.
 - CP/M disk images are not bundled. The emulator is useless without them. Document in the PR.
-- The shellinabox flags in section 7 are UNVERIFIED until checked against the installed binary.
+- The shellinabox flags in section 7 are UNVERIFIED until checked against the installed binary. UNVERIFIED too: `shellinaboxd` started as non-root with a `USER:GROUP` service spec (it normally needs root to switch user); if it fails, use a plain command service. The `shellinabox` package exists on Ubuntu resolute (packages.ubuntu.com).
 - The `make install` target and install prefix are UNVERIFIED.
 - Upstream image uses phusion/runit; it is dropped. The web terminal is started directly by `start.sh`.
 - Blockers: none that prevent a build. Auth design (above) is the main open item.

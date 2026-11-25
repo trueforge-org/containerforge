@@ -10,7 +10,7 @@
 | License | GPL-2.0-or-later (WordPress core). GitHub API reports `NOASSERTION` (https://github.com/WordPress/WordPress), so the SPDX id is UNVERIFIED for the bake `LICENSE`; confirm from `license.txt` in the tarball. |
 | Source URL | https://github.com/WordPress/WordPress |
 | Download | `https://downloads.wordpress.org/release/wordpress-7.1.5.zip` (HTTP 200, `application/zip`, 37245999 bytes). The draft's `https://wordpress.org/latest.tar.gz` is not what was checked; use the versioned zip. Arch-neutral PHP. |
-| Checksum source | `https://downloads.wordpress.org/release/wordpress-7.1.5.zip.sha1` (HTTP 200). The SHA-1 value was not read in this run (UNVERIFIED value). The version-check JSON has no MD5. Read the value in step 4 and verify with `sha1sum -c`. |
+| Checksum source | `https://downloads.wordpress.org/release/wordpress-7.1.5.zip.sha1` (HTTP 200). The file holds a bare SHA-1 (`d7d004a092a4e8f2b28dc8f4089a11fea9a38807`, read 2026-11-25, no filename). The version-check JSON has no MD5. Verify with `sha1sum -c` in the Dockerfile. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/bitnami/containers/9da424411c57f30d7bdc8409eabcce6e5709c9f3/bitnami/wordpress/7/debian-12/Dockerfile. Bitnami build on `bitnami/minideb:bookworm`, Stacksmith components (apache 2.4.71, php 8.4.28, wordpress 7.1.5-1), sha256-verified. EXPOSE 8080, 8443; USER 1001; ENTRYPOINT `/opt/bitnami/scripts/wordpress/entrypoint.sh`; CMD `/opt/bitnami/scripts/apache/run.sh`. No VOLUME. |
 | Ports | 8080 (HTTP), 8443 (HTTPS). Upstream confirms both; the draft's 8080 is kept. |
 | Env vars | Upstream Bitnami ENV is not reusable (it is Bitnami-specific: `APP_VERSION`, `BITNAMI_APP_NAME`, `OS_*`). ContainerForge reads its own names (see section 7). WordPress reads `WORDPRESS_*` only in Bitnami's scripts, which are not ported: UNVERIFIED which names ContainerForge should expose. |
@@ -39,7 +39,7 @@ The Bitnami base is not used: it is Debian/minideb with its own stack, so Contai
 1. `FROM <ubuntu> ` with `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Install, pinned to the archive for ubuntu 26.04 (check `apt-cache policy` in the build; do not guess versions):
    `apache2 libapache2-mod-php8.5 php8.5-mysql php8.5-gd php8.5-curl php8.5-xml php8.5-mbstring php8.5-zip php8.5-intl php8.5-imagick php8.5-opcache unzip`
-   The draft's `php-*` names are inferred. Packages are confirmed only by the `bookstack` pattern (`php8.5-*`): `libapache2-mod-php8.5` and `php8.5-mbstring`, `php8.5-intl`, `php8.5-imagick` are UNVERIFIED for this archive. Check each in the build and drop any that do not exist.
+   The draft's `php-*` names are inferred. Packages are confirmed only by the `bookstack` pattern (`php8.5-*`): `bookstack` uses no Apache at all, so `libapache2-mod-php8.5` and `php8.5-mbstring`, `php8.5-intl`, `php8.5-imagick` are UNVERIFIED for this archive. Check each in the build and drop any that do not exist.
 3. Fetch and verify the release:
    ```sh
    curl -fL -o /tmp/wordpress.zip https://downloads.wordpress.org/release/wordpress-${VERSION}.zip
@@ -47,7 +47,7 @@ The Bitnami base is not used: it is Debian/minideb with its own stack, so Contai
    (cd /tmp && echo "$(cut -d' ' -f1 wordpress.zip.sha1)  wordpress.zip" | sha1sum -c -)
    unzip -q /tmp/wordpress.zip -d /tmp/src && mv /tmp/src/wordpress/* /app/www/
    ```
-   The `.sha1` file format (single hash, or `hash  name`) is UNVERIFIED: read it in step 4 and adapt.
+   The `.sha1` file holds a bare hash, so the `cut` above is a no-op and is safe.
 4. Mirror bookstack: `mkdir -p /app/www`, move the WordPress core there, and symlink `wp-content` to `/config/wp-content`, which the draft requires. wp-content holds themes, plugins and uploads.
    `ln -s /config/wp-content /app/www/wp-content` after `rm -rf /app/www/wp-content` (the core ships one).
 5. Apache: `a2dissite 000-default`, set `Listen 8080`, `ServerName localhost`, `DocumentRoot /app/www`, `PidFile /tmp/apache2.pid`, `ErrorLog /dev/stderr`, `CustomLog /dev/stdout`. Place the vhost in `etc/apache2/sites-available/wordpress.conf` if it is not inline (`etc/` is in the dockerignore allow-list).
@@ -59,11 +59,11 @@ The Bitnami base is not used: it is Debian/minideb with its own stack, so Contai
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE 8080 8443
+EXPOSE 8080
 VOLUME /config
 ```
 
-`USER apps` means Apache must bind 8080 and 8443 without root (ports above 1024: no capability needed). The final `start.sh` runs `apache2 -DFOREGROUND` as `apps`, which needs the apache log, pid and lock dirs writable: move them to `/tmp` (see section 9).
+`USER apps` means Apache binds 8080 without root (above 1024). Port 8443 is not exposed or configured (no TLS vhost, no probe); upstream's 8443 is dropped on purpose. The final `start.sh` runs `apache2 -DFOREGROUND` as `apps`, which needs the apache log, pid and lock dirs writable: move them to `/tmp` (see section 9).
 
 ## 5. docker-bake.hcl
 
@@ -89,15 +89,12 @@ ports:
   - port: 8080
     protocol: tcp
     required: false
-  - port: 8443
-    protocol: tcp
-    required: false
 env:
   - name: TZ
     default: "Etc/UTC"
     required: false
   - name: WORDPRESS_DB_HOST
-    default: ""
+    default: "mariadb"
     required: true
   - name: WORDPRESS_DB_PORT
     default: "3306"
@@ -115,7 +112,7 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - mariadb
+  - name: mariadb
 ```
 
 The `WORDPRESS_DB_*` names are a ContainerForge choice, not upstream names: the names must match what `start.sh` reads. The MariaDB defaults mirror `apps/mariadb` and `apps/bookstack`. The draft lists mariadb as the hard dependency (`✅`); `mysql` is not available in ContainerForge and is not listed.
@@ -125,9 +122,9 @@ The `WORDPRESS_DB_*` names are a ContainerForge choice, not upstream names: the 
 Idempotent, runs as `apps`, writes only under `/config` and `/tmp`:
 
 1. `mkdir -p /config/wp-content` and seed `/config/wp-content` from the core default (`/app/www/wp-content` is the core copy, not used once symlinked: seed only when `/config/wp-content` is missing or empty).
-2. Write `/config/wp-config.php` only when missing. Read the DB values from `WORDPRESS_DB_*`. Passwords and hosts are applied each start (sed-free: generate the file from the env, escaping `'` and `\`).
+2. Regenerate `/config/wp-config.php` on every start from `WORDPRESS_DB_*` (so password and host changes apply), escaping `'` and `\`, and reuse the salts from step 3.
 3. Generate salts once and store them in `/config` (WordPress salts are per install).
-4. Symlink `/app/www/wp-config.php` to `/config/wp-config.php`, which is not a `/app` write at runtime since the symlink is in the image: confirm the layout (UNVERIFIED): if `/app/www` is read-only, the symlink must be created at build time, not in start.sh.
+4. The symlink `/app/www/wp-config.php` -> `/config/wp-config.php` is created at build time in the Dockerfile (dangling until start.sh writes the file), because `/app/www` is read-only at runtime.
 5. `exec apache2 -DFOREGROUND -f /tmp/apache2.conf` (or the default config with the `PidFile` and `Listen` settings above).
 
 Do not seed the setup wizard: WordPress finishes install in the browser on first visit (draft caveat, inferred; UNVERIFIED for this image).
@@ -169,7 +166,6 @@ Reconciling the draft's security expectations: the chart's `runAsUser 0` and `ru
 - The browser setup wizard creates the site title and admin account; the container alone does not provide a working site (draft caveat, inferred).
 - Bitnami's entrypoint logic (wp-config generation, DB wait, salt handling) is not ported; the ContainerForge `start.sh` must reproduce only what is needed (UNVERIFIED which parts).
 - PHP and Apache package names for ubuntu 26.04 are UNVERIFIED beyond the bookstack `php8.5-*` pattern.
-- The `.sha1` file format and the SHA-1 value are UNVERIFIED (not read in this run).
 - Upstream WordPress core: GPL-2.0-or-later (UNVERIFIED SPDX id; GitHub says NOASSERTION).
 - No blockers identified for arm64 (PHP and the zip are arch-neutral; confirm by bake `image-all` in step 11).
 

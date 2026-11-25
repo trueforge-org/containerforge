@@ -59,14 +59,14 @@ schema_version: 1
 upstream_env_url: "https://www.truenas.com/docs/truecommand/"
 ports:
   - port: 80
-    protocol: http
+    protocol: tcp
     required: true
 volumes:
   - path: /config
     required: true
 ```
 
-Env list is empty because no env var is verified (UNVERIFIED). The chart's `/data` path would need to map to `/config` (section 9). The draft's 443 port is not in the chart and is left out.
+Port 80 is a draft value only: a non-root `apps` process cannot bind below 1024, so a port would need an in-container remap (for example 8080) that the unmodified vendor image may not support (UNVERIFIED). Env list is empty because no env var is verified (UNVERIFIED). The chart's `/data` path would need to map to `/config` (section 9). The draft's 443 port is not in the chart and is left out.
 
 ## 7. start.sh
 

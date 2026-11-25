@@ -43,7 +43,7 @@ Open point: the 32-bit libraries (`lib32gcc-s1`, `lib32stdc++6`, `lib32z1`) are 
 1. The `steamcmd` base already provides SteamCMD and the 32-bit libs. Do not re-install them (dockerfile rule: base reuse).
 2. Build stage not needed: no compilation.
 3. Final stage:
-   - `ARG VERSION`, `USER root` only if a step needs it. Nothing in the planned steps does, so keep `USER apps` throughout.
+   - `ARG VERSION`, `USER root` only if a step needs it. Nothing in the planned steps does, so keep `USER apps` throughout. Note `COPY . /` also replaces the base image's `/start.sh` (see section 7).
    - `ENV HOME=/config XDG_DATA_HOME=/config`, with `STEAMCMD_DIR=/config/Steam/steamcmd` and `SERVER_DIR=/config/serverfiles` (`/config` is the only persistent path).
    - No `apt-get` step is planned. If a required lib is missing at build time, add a pinned `apt` package matching the base, and note it.
    - `COPY --chmod=0755 start.sh /start.sh`
@@ -100,7 +100,7 @@ env:
   - name: GAME_PORT
     default: "27015"
     required: false
-  - name: VALIDATE
+  - name: STEAM_APP_VALIDATE
     default: "false"
     required: false
   - name: TZ
@@ -111,7 +111,7 @@ volumes:
     required: true
 ```
 
-Notes: the names above must match what `start.sh` actually reads. The env names here are the upstream ich777 names; if `start.sh` is written on top of `apps/steamcmd`, the app-ID variable is `STEAM_APP_IDS` (the steamcmd app's own variable). Keep one naming scheme and document it. Dependencies: none. The port list matches the chart (27015 UDP and TCP).
+Notes: the names above must match what `start.sh` actually reads. `STEAM_APP_IDS` and `STEAM_APP_VALIDATE` are the names `apps/steamcmd/start.sh` already reads (not the ich777 `GAME_ID` and `VALIDATE`); `GAME_NAME`, `GAME_PARAMS` and `GAME_PORT` are kept from the chart. Dependencies: none. The port list matches the chart (27015 UDP and TCP).
 
 ## 7. start.sh
 
@@ -133,9 +133,12 @@ GAME_ID="${STEAM_APP_IDS:-635}"
 GAME_NAME="${GAME_NAME:-swarm}"
 GAME_PARAMS="${GAME_PARAMS:-+map lobby -maxplayers 4 +exec server.cfg}"
 GAME_PORT="${GAME_PORT:-27015}"
+VALIDATE_ARG=""; [ "${STEAM_APP_VALIDATE:-false}" = "true" ] && VALIDATE_ARG=" validate"
 SERVER_DIR="/config/serverfiles"
 mkdir -p "${SERVER_DIR}"
-# steamcmd install and app_update via the steamcmd base
+# this /start.sh replaces the base steamcmd /start.sh (COPY . /), so it must itself
+# seed /config/Steam/steamcmd from /usr/local/share/steamcmd (as the base script does)
+# and run: steamcmd.sh +force_install_dir ${SERVER_DIR} +login anonymous +app_update ${GAME_ID}${VALIDATE_ARG} +quit
 # ...
 cd "${SERVER_DIR}"
 exec ./srcds_run -game "${GAME_NAME}" ${GAME_PARAMS} -console +port "${GAME_PORT}"
@@ -156,7 +159,7 @@ filePaths:
 
 The probes are TCP on 27015 (the TCP RCON port). A UDP probe is not in the schema the sibling apps use, so the UDP port is checked by `settings.yaml` only (UNVERIFIED that forgetool supports UDP probes). The `timeoutSeconds` value is long because the first start downloads the game; it is a guess (UNVERIFIED), to be checked against sibling `apps/steamcmd` (which has no timeout set here).
 
-The test runs with no env vars, so `STEAM_APP_IDS` is unset and the download path does not run. Add a `filePaths` entry for any file that only exists after the download (for example `/config/serverfiles/srcds_run`) only if the test can reach it without network. Otherwise, note in `container-test.yaml` that the download path is not covered.
+The test runs with no env vars, but `start.sh` defaults `STEAM_APP_IDS` to `635`, so the game download does run during the test and needs network; the TCP 27015 probe only passes once `srcds_run` is up and listening on TCP (UNVERIFIED that srcds opens the TCP port without an rcon password). Do not add `filePaths` for downloaded files. If the CI cannot reach Steam, narrow the test to `filePaths` and say so in a comment.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
