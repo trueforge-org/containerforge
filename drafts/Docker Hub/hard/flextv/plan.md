@@ -78,12 +78,15 @@ Idempotent, never writes to /app.
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 timeoutSeconds: 120   # copy value from apps/bookstack-style PHP sibling after the first run
+tcp:
+- port: '8080'
 http:
 - port: '8080'
   path: /
-filePaths: ... (only if schema accepts; otherwise runner entrypoints `test -f /app/www/index.php`)
+filePaths:
+- /app/www/index.php
 ```
-Use `http` on `/` only if `index.php` answers 200 without a Plex token (UNVERIFIED); otherwise use `tcp: port 8080` plus runners `test -f /app/www/index.php` and `php --version`.
+Keep the `http` probe on `/` only if `index.php` answers 200 without a Plex token (UNVERIFIED); otherwise drop it and keep the `tcp` probe on 8080 (every settings.yaml port needs a probe).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

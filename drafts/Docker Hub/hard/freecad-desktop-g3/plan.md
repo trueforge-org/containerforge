@@ -36,7 +36,7 @@ Why: the draft says "the kasmvnc or xvfb sibling applies"; `apps/kasmvnc` exists
 
 1. `ARG VERSION`, `ARG TARGETARCH`; map `amd64 -> x86_64`, `arm64 -> aarch64`.
 2. `USER root`.
-3. apt (not already in kasmvnc base; verify with `dpkg -l`): `libpci3 libxss1 libxtst6 mesa-utils libgl1-mesa-dri libglu1-mesa libfuse2t64` (libfuse2 not needed when extracting). Not version-pinned (the image version is the AppImage, not an apt package).
+3. apt (not already in kasmvnc base; verify with `dpkg -l`): `libpci3 libxss1 libxtst6 mesa-utils libgl1-mesa-dri libglu1-mesa` (no libfuse2: the AppImage is extracted at build time). Not version-pinned (the image version is the AppImage, not an apt package).
 4. Download `https://github.com/FreeCAD/FreeCAD/releases/download/${VERSION}/FreeCAD_${VERSION}-Linux-${ARCH}-py311.AppImage` and the matching `.sha256`/`-SHA256.txt` file (name UNVERIFIED), `sha256sum -c`, `chmod +x`, then `./FreeCAD*.AppImage --appimage-extract && mv squashfs-root /app/freecad` (run as root during build, since FUSE is not available in the build or at runtime).
 5. `ln -s /app/freecad/AppRun /usr/local/bin/freecad`.
 6. Licenses to `/usr/share/licenses/freecad/` (from the extracted tree if present, else fetch `LICENSE` of the tag).

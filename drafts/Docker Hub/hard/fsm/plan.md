@@ -62,7 +62,7 @@ Why: glibc binary (upstream moved to Ubuntu for this); no Node or Python needed.
 ## 7. start.sh
 
 1. `mkdir -p /config/fsm-data /config/factorio`; Factorio install dir `/config/factorio` (writable and persistent; ~1 GB).
-2. If `/config/fsm-data/conf.json` is missing: `jq` from `/app/fsm/conf.json`, set `sqlite_database_file`, `log_file` to `/config/fsm-data/...`; set `rcon_pass` using `jq --arg` (not string interpolation, as upstream does, which breaks on quotes and echoes the secret in logs; do not echo it). Apply `RCON_PASS` on every start via `jq --arg` (idempotent).
+2. If `/config/fsm-data/conf.json` is missing: `jq` from `/app/fsm/conf.json`, set `sqlite_database_file`, `log_file` to `/config/fsm-data/...`; set `rcon_pass` using `jq --arg` (not string interpolation, as upstream does, which breaks on quotes and echoes the secret in logs; do not echo it). Apply `RCON_PASS` on every start via `jq --arg` (idempotent); when it is empty and `conf.json` has no `rcon_pass`, generate one (for example `head -c 18 /dev/urandom | base64`) and store it only in `conf.json`.
 3. If `/config/factorio/bin/x64/factorio` is missing: `curl -fL https://www.factorio.com/get-download/${FACTORIO_VERSION}/headless/linux64 -o /tmp/factorio.tar.xz`, extract with `--strip-components=1` into `/config/factorio`, delete the tar (upstream re-downloads every start; we only when missing). Download at runtime (not baked): redistribution terms UNVERIFIED.
 4. `cd /app/fsm` (UNVERIFIED if FSM needs its cwd to be the tree and writable; if it writes there, copy `/app/fsm` to `/tmp/fsm` first).
 5. `exec ./factorio-server-manager --conf /config/fsm-data/conf.json --dir /config/factorio --port "${PORT:-8080}"` plus a bind flag if one exists (must listen on 0.0.0.0).
