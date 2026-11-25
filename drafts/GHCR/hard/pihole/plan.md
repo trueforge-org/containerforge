@@ -36,7 +36,7 @@ Never `root/`. No `DOWNSTREAM_CHANGES.md`: not a `FROM` base.
 
 ## 3. Base image
 
-- `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (ubuntu alone, per the draft). Closest sibling for a PHP web UI plus a daemon: check `apps/dokuwiki` or `apps/grav` (PHP stack) and `apps/bookstack` (PHP stack) before writing. UNVERIFIED: which sibling has php-cgi on ubuntu.
+- `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (ubuntu alone, per the draft). `apps/dokuwiki`, `apps/grav` and `apps/bookstack` exist as PHP siblings. UNVERIFIED: which one uses php-cgi on ubuntu. (Both `ubuntu:26.04` and `ubuntu:26.4` tags with this digest are used in `apps/*/Dockerfile`.)
 - No Python or Node runtime needed.
 - The upstream Alpine base is NOT reused: the pi-hole scripts assume Alpine paths (`apk`, `busybox`). The plan rebuilds the layout on Ubuntu. Record this as the main risk.
 
@@ -54,8 +54,8 @@ Never `root/`. No `DOWNSTREAM_CHANGES.md`: not a `FROM` base.
 6. License: pi-hole core EUPL-1.2 text to `/usr/share/licenses/pihole/LICENSE`. Pi-hole FTL license (GPL-2.0 per the FTL repo) UNVERIFIED: not read.
 7. `ENV DNSMASQ_USER=pihole FTL_CMD=no-daemon PIHOLE_UID=1000 PIHOLE_GID=1000 HOME=/config` (no `PIHOLE_UID` mutation at runtime, see section 9).
 8. `COPY --chmod=0755 . /`, `USER apps`.
-9. `EXPOSE 53 53/tcp 53/udp 80 443`. Do not expose 67/udp and 123/udp unless the user needs DHCP or NTP (section 9).
-10. `VOLUME /config`. `ENTRYPOINT ["/start.sh"]` (or `CMD` as sibling apps do).
+9. `EXPOSE 53 53/tcp 53/udp 8080 8443`. Do not expose 67/udp and 123/udp unless the user needs DHCP or NTP (section 9).
+10. `VOLUME /config`. Do not set `ENTRYPOINT`: the base `ubuntu` image runs `tini` then `/entrypoint.sh`, which execs `/start.sh`.
 
 ## 5. docker-bake.hcl
 
@@ -100,10 +100,10 @@ ports:
   - port: 53
     protocol: udp
     required: false
-  - port: 80
+  - port: 8080
     protocol: tcp
     required: false
-  - port: 443
+  - port: 8443
     protocol: tcp
     required: false
 env:
@@ -166,16 +166,19 @@ exec /usr/local/bin/pihole-FTL no-daemon
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 180
+healthCommands:
+- command: dig +short +time=2 @127.0.0.1 pi.hole
 tcp:
 - port: '53'
-- port: '80'
+- port: '8080'
+- port: '8443'
 http:
-- port: '80'
+- port: '8080'
   path: /admin/
-  timeoutSeconds: 180
 ```
 
-- Every port in `settings.yaml` needs a probe (repo rule). `53/udp` needs a probe too: `tcp` checks do not test UDP. Add a `dig` check against 127.0.0.1 for `pi.hole` in `healthCommands`, using the image's `dig` (from `dnsutils`), or accept the gap in the PR. UNVERIFIED: forgetool's UDP probe support; check the schema before writing.
+- Every port in `settings.yaml` needs a probe (repo rule). `53/udp` is covered only by the `healthCommands` `dig` check (as in `apps/valkey/container-test.yaml`, `timeoutSeconds` is top-level); `tcp` checks do not test UDP. UNVERIFIED: forgetool's UDP probe support. Port 8443 (TLS) is only listed if lighttpd is configured for it; otherwise drop it from settings and test.
 - The test runs as `apps` with no privilege. A `tcp` probe on 53 only passes if the bind succeeds. If the bind fails (section 9), the test fails honestly: do not drop the probe.
 - Timeout 180s: FTL initialises the gravity database on first start. Compare with a sibling.
 - The HTTP probe path `/admin/` is UNVERIFIED against this build: confirm with a run.
@@ -188,7 +191,7 @@ http:
 | DNS on port 53 (tcp and udp) | Needs `NET_BIND_SERVICE` on the runtime side, OR host networking/port mapping to a high port (for example 5353) with an explicit decision. Cannot be done with `apps` alone. | Binding ports below 1024 needs a capability. This is a **blocker** for "DNS works as-is" (section 10). |
 | `/etc/pihole` (config, databases) | `/config/pihole` via a symlink from `/etc/pihole` (build time) or FTL's config dir env (UNVERIFIED) | Persistent state in `/config`. |
 | `/etc/dnsmasq.d` | `/config/dnsmasq.d` (`FTLCONF_misc_etc_dnsmasq_d=true` only if the user mounts custom files) | Optional persistent dnsmasq config. |
-| Web UI on port 80 and 443 | Bind to 8080 and 8443 (lighttpd `server.port`), and state it in `settings.yaml` (the port number in settings must match the probe). 80 and 443 need `NET_BIND_SERVICE` too. | Same bind limit as DNS. |
+| Web UI on port 80 and 443 | Bind to 8080 and 8443 (lighttpd `server.port`); `settings.yaml` and `container-test.yaml` use 8080/8443. 80 and 443 need `NET_BIND_SERVICE` too. | Same bind limit as DNS. |
 | `pihole` user (UID/GID 1000) | Use the base `apps` user; do not create `pihole`. Keep `DNSMASQ_USER=pihole` only if dnsmasq is used, and then create that user in the Dockerfile (root step). | `USER apps` is the rule. |
 | `/tmp` | All caches and scratch in `/tmp` (`TMPDIR=/tmp`). | Read-only rootfs. |
 | `cron` (gravity updates) | Not started by default. Decide: run gravity updates from `start.sh` on a timer, or leave updates manual (section 10). | cron needs root to read `/etc/crontab` and write `/var/spool/cron`. |
@@ -223,11 +226,11 @@ From `apps/pihole/`, one app only, in protocol order:
    ```sh
    docker volume create pihole-probe-config
    docker run --rm -d --name pihole-probe --read-only --tmpfs /tmp \
-     -p 127.0.0.1:8080:80 -v pihole-probe-config:/config pihole:2026.11.0
+     -p 127.0.0.1:8080:8080 -v pihole-probe-config:/config pihole:2026.11.0
    docker logs -f pihole-probe
    ```
    Pass signal: FTL reports it is listening and lighttpd is serving (exact text UNVERIFIED until run), process still running, no permission errors on port 53. Cleanup: `docker rm -f pihole-probe; docker volume rm pihole-probe-config`.
-4. `forgetool containers test --image pihole:2026.11.0 --config ./container-test.yaml` (if forgetool is unavailable, check port 80 and the `dig` query by hand). Run it via `haiku-triage`. Round limit: 10.
+4. `forgetool containers test --image pihole:2026.11.0 --config ./container-test.yaml` (if forgetool is unavailable, check port 8080 and the `dig` query by hand). Run it via `haiku-triage`. Round limit: 10.
 
 Expected to FAIL on port 53 without a capability or remap: that is the blocker in section 10, not a test to weaken.
 

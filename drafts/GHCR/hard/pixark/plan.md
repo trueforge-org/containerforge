@@ -34,12 +34,12 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
 
-Why: the upstream steamcmd image is Debian-based, but ContainerForge's rule is the ubuntu base. The closest sibling is `apps/steamcmd`, which installs `steamcmd` from apt on the same ubuntu base. Do not use `ghcr.io/trueforge-org/steamcmd` as `FROM` without a pinned digest from `apps/steamcmd`, which is not in this repo's bake file. Wine and Xvfb are added on top (see section 4).
+Why: the upstream steamcmd image is Debian-based, but ContainerForge's rule is the ubuntu base. The closest sibling is `apps/steamcmd`, which installs `steamcmd` from apt on the same ubuntu base. Do not use `ghcr.io/trueforge-org/steamcmd` as `FROM`: `apps/steamcmd/Dockerfile` has no published digest to pin and its `/start.sh` and `/usr/local/bin/steamcmd` wrapper would be overwritten by this app's `start.sh`. Repeat the install instead. Wine and Xvfb are added on top (see section 4).
 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. Install SteamCMD as `apps/steamcmd/Dockerfile` does: `dpkg --add-architecture i386`, `add-apt-repository -y multiverse`, debconf `I AGREE`, `apt-get install -y --no-install-recommends steamcmd:i386=0~${VERSION}` with `VERSION` pinned against `apps/steamcmd/docker-bake.hcl`. Use the same version string, not a new pin.
+2. Install SteamCMD as `apps/steamcmd/Dockerfile` does: `dpkg --add-architecture i386`, `add-apt-repository -y multiverse`, debconf `I AGREE`, `apt-get install -y --no-install-recommends steamcmd:i386=0~${VERSION}` with the package version `0~20180105-5build1` from `apps/steamcmd/docker-bake.hcl` (`VERSION` default `20180105-5build1`). Do not reuse `ARG VERSION` for this: the pixark bake `VERSION` is still UNVERIFIED (section 5) and must not be the steamcmd package version, so use a separate `ARG STEAMCMD_VERSION` with its own bake variable and renovate comment (`datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu`, as in `apps/steamcmd`).
 3. Install Wine and Xvfb: `apt-get install -y --no-install-recommends wine64 xvfb` (package names UNVERIFIED for ubuntu 26.04; check `apt-cache policy` in the build). Pin to versions that exist in the base release.
 4. `mkdir -p /config`, `chown -R apps:apps /config`, `rm -rf /var/lib/apt/lists/*`.
 5. `COPY --chmod=0755 start.sh /start.sh`, `USER apps`, `COPY --chmod=0755 . /`.
@@ -93,10 +93,10 @@ ports:
     required: false
 env:
   - name: GAME_PARAMS
-    default: "?MaxPlayers=10"
+    default: "?MaxPlayers=10"  # UNVERIFIED: not found in chart values, confirm
     required: false
   - name: SERVER_NAME
-    default: "PIXARKDocker"
+    default: "PIXARKDocker"  # UNVERIFIED: chart default not read
     required: false
   - name: MAP
     default: "CubeWorld_Light"
@@ -139,6 +139,8 @@ filePaths:
 - /start.sh
 - /usr/local/bin/steamcmd
 ```
+
+`/usr/local/bin/steamcmd` exists only if the Dockerfile recreates the wrapper that `apps/steamcmd/Dockerfile` writes; otherwise drop it (or use `/usr/games/steamcmd`, installed by the apt package).
 
 UDP ports are not covered by the schema's `tcp` probe. Add a `tcp` probe only if the server also opens TCP (UNVERIFIED). Note in the file that this is narrowed: the server needs a full SteamCMD download, so the test covers the startup path, not gameplay. `timeoutSeconds` is a large value because the first start downloads the server files.
 

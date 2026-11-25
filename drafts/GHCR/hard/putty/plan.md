@@ -8,7 +8,7 @@
 | Chart image | `ghcr.io/jlesage/putty:v26.09.1` (TrueCharts `charts/stable/putty`, draft) |
 | Latest upstream release | `v26.09.1`, published 2026-09-22 (`gh api repos/jlesage/docker-putty/releases/latest`). Tags `v26.08.3`, `v26.08.2` also exist. |
 | Renovate | `datasource=github-releases depName=jlesage/docker-putty` is for the upstream image, not the PuTTY software. PuTTY software version is `0.85` (default `PUTTY_VERSION` in the upstream Dockerfile). Renovate for the software: UNVERIFIED for the source host `the.earth.li` (no GitHub release); use `datasource=custom` only if a version feed is confirmed. |
-| License | PuTTY is MIT (`jlesage/docker-putty` repo license MIT, gh api). Put `LICENSE = "MIT"` in bake. |
+| License | PuTTY is MIT for PuTTY (PuTTY's own license is MIT-style; the `jlesage/docker-putty` repo license is MIT per gh api, which covers the packaging only). Put `LICENSE = "MIT"` in bake; confirm against `/usr/share/doc/putty/copyright` in the built image (UNVERIFIED). |
 | Source URL | https://www.putty.org/ (website, draft); source tarball `https://the.earth.li/~sgtatham/putty/0.85/putty-0.85.tar.gz` (from upstream `ARG PUTTY_URL`) |
 | Per-arch download | Source tarball, one for both arches. The upstream image is multi-arch via `tonistiigi/xx`. The draft's apt route avoids a compile. |
 | Checksum source | None in the upstream Dockerfile. PuTTY publishes checksums on its site (UNVERIFIED: not fetched). Verify the tarball if built from source. |
@@ -34,12 +34,12 @@ No `defaults/` or `etc/` unless the GUI session needs a config file (reason: UNV
 
 `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
 
-Why: the draft's app is a GTK terminal installed from apt, so the generic ubuntu base is enough (draft: "Runtime image: none"). The upstream jlesage base is Alpine and is not reused. Closest sibling: none for a GUI on ubuntu; check `apps/` for a VNC or noVNC sibling before the build.
+Why: the draft's app is a GTK terminal installed from apt, so the generic ubuntu base is enough (draft: "Runtime image: none"). The upstream jlesage base is Alpine and is not reused. Closest sibling: `apps/kasmvnc` (ubuntu 26.04 with noVNC, ports 3000/3001, `CUSTOM_PORT`, `PASSWORD`); it is a VNC server app, not a base, but its noVNC/VNC setup is the precedent to reuse. No other VNC or noVNC app exists in `apps/`.
 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. `apt-get update && apt-get install -y --no-install-recommends putty xvfb x11vnc novnc websockify` (package names UNVERIFIED for ubuntu 26.04; the desktop stack is needed to reach the GUI over VNC). Pin `putty` to the release version and check it against `VERSION` in bake, as `apps/valkey` does.
+2. `apt-get update && apt-get install -y --no-install-recommends putty xvfb x11vnc novnc websockify` (package names UNVERIFIED for ubuntu 26.04; the desktop stack is needed to reach the GUI over VNC). Pin `putty` to an exact apt version and check it against `VERSION` in bake, as `apps/valkey` does. The resolved Ubuntu 26.04 package version is UNVERIFIED and may not be `0.85`; set bake `VERSION` to the resolved package version.
 3. `rm -rf /var/lib/apt/lists/*`.
 4. `COPY --chmod=0755 start.sh /start.sh`, `USER apps`, `COPY --chmod=0755 . /`.
 5. `ENV HOME=/config`.
@@ -58,7 +58,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=UNVERIFIED depName=putty
-  default = "0.85"
+  default = "0.85" // UNVERIFIED: this is the upstream image's PUTTY_VERSION, not the Ubuntu apt package version
 }
 
 variable "LICENSE" {
@@ -98,7 +98,7 @@ Port list follows the GUI convention (UNVERIFIED). Only list env vars the start 
 
 ## 7. start.sh
 
-- Create `/config/putty` only when missing (saved sessions and keys live there).
+- Create `/config` subfolders only when missing; PuTTY saves sessions and keys in `/config/.putty` (HOME=/config).
 - Start `Xvfb :0` and `x11vnc` on 5900, `websockify` on 5800 to the noVNC web root, then `exec putty` (or a window manager wrapper, UNVERIFIED).
 - Bind VNC and noVNC to `0.0.0.0`.
 - Use `HOME=/config` so PuTTY stores sessions in `/config/.putty`; no writes to `/app`.

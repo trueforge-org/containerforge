@@ -49,13 +49,13 @@ Never `root/`. No `DOWNSTREAM_CHANGES.md`: not a `FROM` base for another contain
    - `npm install --omit=dev --no-audit --no-fund photostructure@${VERSION}` into `/opt/photostructure`. Verify the registry `integrity` for `${VERSION}` against the value pinned in the Dockerfile (ARG or comment, section 1).
    - Remove build packages: `apt-get purge -y build-essential python3 && apt-get autoremove -y`.
 3. Final stage `FROM <python-node>`, `USER root` for installs only:
-   - `apt-get install -y --no-install-recommends libjpeg-turbo-progs locales-all perl procps ripgrep tini tzdata wget` (versions not pinned: none of these are `apps/valkey`-style pinned tools; record resolved versions in the PR). `tini` is used as PID 1. `wget` for the health probe. Skip `passwd`/`usermod` tooling: the base runs as `apps`. Remove `/var/lib/apt/lists/*`.
+   - `apt-get install -y --no-install-recommends libjpeg-turbo-progs locales-all perl procps ripgrep tini tzdata wget` (versions not pinned: none of these are `apps/valkey`-style pinned tools; record resolved versions in the PR). `tini` and `wget` are already in the base `ubuntu` image (`apps/ubuntu/Dockerfile`), so drop them from this install line unless the python-node image lacks them (UNVERIFIED). Skip `passwd`/`usermod` tooling: the base runs as `apps`. Remove `/var/lib/apt/lists/*`.
    - `COPY --from=build --chown=root:root /opt/photostructure /opt/photostructure`.
    - `chmod -R 755 /opt/photostructure`.
    - License: `COPY` the npm package `LICENSE.md` to `/usr/share/licenses/photostructure/LICENSE.md`.
 4. `ENV PATH="/opt/photostructure:/opt/photostructure/tools:${PATH}" HOME=/config PS_CONFIG_DIR=/config/system PS_LIBRARY_DIR=/config/library PS_HTTP_PORT=1787 PS_LOG_STDOUT=1 PS_NO_PUID_CHOWN=1 PIXI_HOME=/config/pixi`. (Paths are ContainerForge decisions, see section 9; `PS_LIBRARY_DIR` location is the open point in section 10.)
 5. `COPY --chmod=0755 . /`, `USER apps`.
-6. `EXPOSE 1787`, `VOLUME /config`, `ENTRYPOINT ["/start.sh"]` or `CMD ["/start.sh"]` as sibling apps do (check `apps/sonarr`).
+6. `EXPOSE 1787`, `VOLUME /config`. Do not set `ENTRYPOINT`/`CMD`: the base `ubuntu` image already has `ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]`, which execs `/start.sh` (see `apps/ubuntu/Dockerfile`, `apps/budge/Dockerfile`).
 
 No `ARG` other than `VERSION` and `TARGETARCH`. Do not copy the upstream repo tree (it is not an npm artifact).
 
@@ -137,7 +137,7 @@ exec photostructure serve --host 0.0.0.0 --port "${PS_HTTP_PORT}"
 
 - `photostructure serve ...` is a placeholder command. The CLI flags and the `serve` subcommand are UNVERIFIED: not in the fetched docs. Check `photostructure --help` in the built image, or read `photostructure.js` in the npm package, before committing. The upstream image starts through `docker-entrypoint.sh`, which was not read.
 - Bind to `0.0.0.0` (other containers and the host reach it). UNVERIFIED: whether the server binds all interfaces by default.
-- Exec the final process so the signal chain works (tini is not used here: see section 9).
+- Exec the final process so the signal chain works (tini is PID 1 via the base entrypoint).
 - FFmpeg first-run consent is interactive in the upstream flow. Decide how `start.sh` answers it (default: leave the prompt to the web UI, never block startup). UNVERIFIED: whether a non-interactive env var exists.
 - Caches: `/tmp/photostructure` for scratch, `PIXI_HOME` under `/config/pixi` (persistent, large: the consent state lives there). Per the rule, caches MUST go to `/tmp`; the FFmpeg install is persistent by design, so set `PIXI_HOME` only if the user accepts ~700 MB in `/config`. Open question, section 10.
 
@@ -146,15 +146,17 @@ exec photostructure serve --host 0.0.0.0 --port "${PS_HTTP_PORT}"
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
+timeoutSeconds: 240
+tcp:
+- port: '1787'
 http:
 - port: '1787'
   path: /ping
-  timeoutSeconds: 240
 ```
 
 - Timeout 240s: first start initialises the library and may fetch FFmpeg. Check a sibling of the same family before finalising.
 - The test runs with no env vars: the default path (`/config/library`, port 1787) is tested. The FFmpeg install is a user action in the web UI, so it is not in the test.
-- Add a `tcp` probe for port 1787 as well, so a server that binds only `localhost` fails the check from outside (the protocol says `http` probes run against the container itself).
+- `timeoutSeconds` is a top-level key (as in `apps/changedetection/container-test.yaml`). The `tcp` probe covers the settings.yaml port.
 - UNVERIFIED: `/ping` returns 200 without a license. Confirm with a run; if it does not, use `tcp` only and say so.
 
 ## 9. Rootless and read-only-rootfs adaptations
@@ -172,7 +174,7 @@ http:
 | `chown` of library support dirs on start | Disabled (`PS_NO_PUID_CHOWN=1`) | The container runs as `apps`; chown at startup is not possible. |
 
 - The draft's security expectations (chart `runAsUser 0`, `runAsGroup 0`, `readOnlyRootFilesystem false`) are not carried over: ContainerForge runs as `apps` and expects read-only rootfs. The `apps` UID is set by the base; the library permissions must allow `apps` to write `/config`.
-- `tini` as PID 1: tini is installed (section 4) and may be used in the entrypoint, but `start.sh` already `exec`s. Decide one (section 10).
+- `tini` is PID 1 through the base image entrypoint; `start.sh` execs the app. Nothing to decide.
 - No `privileged`, no extra capabilities.
 
 ## 10. Risks, caveats and open questions

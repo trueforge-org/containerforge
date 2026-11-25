@@ -33,7 +33,7 @@ No `defaults/` or `etc/` unless the GUI needs a config file (reason: UNVERIFIED)
 
 `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
 
-Why: the app is a Qt desktop tool installed from apt (draft). The upstream jlesage Alpine base is not reused. Closest sibling: the same GUI-over-VNC pattern as `apps/putty` (this plan's sibling in the batch); no ubuntu VNC sibling was confirmed in `apps/`, so check before the build.
+Why: the app is a Qt desktop tool installed from apt (draft). The upstream jlesage Alpine base is not reused. Closest sibling: the same GUI-over-VNC pattern as `apps/putty` (this plan's sibling in the batch); `apps/kasmvnc` (ubuntu 26.04, noVNC on 3000/3001) is the only existing VNC precedent in `apps/`; reuse its setup where it fits.
 
 ## 4. Dockerfile
 
@@ -58,7 +58,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=shundhammer/qdirstat versioning=loose
-  default = "2.0.1"
+  default = "2.0.1" // UNVERIFIED: 2.0.1 is the upstream GitHub release; the Ubuntu apt package may differ
 }
 
 variable "LICENSE" {

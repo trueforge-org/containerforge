@@ -30,7 +30,7 @@
 - `apps/rapidphotodownloader/settings.yaml`: port 8080, env, `/config` volume.
 - `apps/rapidphotodownloader/container-test.yaml`: tcp and http probes on 8080.
 - `apps/rapidphotodownloader/start.sh`: first-run seeding, starts the X and VNC stack, then `exec`s the app.
-- `apps/rapidphotodownloader/defaults/fluxbox/` (only if a default fluxbox config is needed; reason: first-run seeding into `/config`, same as `apps/kasmvnc` `defaults/`). Start without it: omit unless the window manager needs a file to run.
+- `apps/rapidphotodownloader/defaults/fluxbox/` (only if a default fluxbox config is needed; reason: first-run seeding into `/config`; `apps/kasmvnc` has no `defaults/` dir, so there is no precedent to cite). Start without it: omit unless the window manager needs a file to run.
 
 No `root/` (reserved). No `etc/` unless a system file must change (not planned). No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
@@ -38,7 +38,7 @@ No `root/` (reserved). No `etc/` unless a system file must change (not planned).
 
 `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
 
-Fits because the 26.04 archive carries `rapid-photo-downloader` 0.9.37. The upstream image's `bullseye` base is replaced, not reused. Closest siblings: `apps/kasmvnc` (VNC stack on the ubuntu base) and `apps/xvfb` (apt `xvfb` on ubuntu 26.04). The Python alternative (`ghcr.io/trueforge-org/python`) is not used: the app is an apt-installed PyQt app and the distro provides Python.
+Fits because the 26.04 archive carries `rapid-photo-downloader` 0.9.37. The upstream image's `bullseye` base is replaced, not reused. Closest siblings (both exist): `apps/kasmvnc` (VNC stack on the ubuntu base) and `apps/xvfb` (installs apt `xvfb`, confirmed). The Python alternative (`ghcr.io/trueforge-org/python`) is not used: the app is an apt-installed PyQt app and the distro provides Python.
 
 ## 4. Dockerfile
 
@@ -60,7 +60,7 @@ EXPOSE 8080
 VOLUME /config
 ```
 
-`ENTRYPOINT` is not set: the image uses `start.sh` as `CMD ["/start.sh"]` so the test runner and users can override it (match the sibling pattern; check `apps/kasmvnc` for the exact form before committing).
+Set neither `ENTRYPOINT` nor `CMD`: the base `ubuntu` image's `ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]` execs `/start.sh` (see `apps/ubuntu/Dockerfile`, `apps/steamcmd/Dockerfile`).
 
 Key points: no `USER root` after the install step; no writes to `/app` (none is needed); the `apps` UID/GID come from the base.
 
@@ -116,7 +116,7 @@ target "image-all" {
 }
 ```
 
-`LICENSE` is `GPL-3.0`-family per the GitHub API (`GPL-3.0`). Use the value the repo states (`GPL-3.0` in `LICENSE` file; confirm the `-only` or `-or-later` wording in the repo's license header during build). `image-all` is only valid if arm64 is confirmed (section 1). Validate with `docker buildx bake --print`.
+`LICENSE` `GPL-3.0-only` is a guess within the GPL-3.0 family (GitHub API reports `GPL-3.0`); UNVERIFIED whether the source headers say `-only` or `-or-later`: confirm in `/usr/share/doc/rapid-photo-downloader/copyright` in the built image. `image-all` is only valid if arm64 is confirmed (section 1). Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -192,10 +192,9 @@ tcp:
 http:
 - port: '8080'
   path: /vnc.html
-  timeoutSeconds: 120
 ```
 
-Check the exact `http` schema against `apps/kasmvnc/container-test.yaml` (the sibling uses `tcp` only; an `http` check on `/vnc.html` is planned for a real readiness signal). `timeoutSeconds` is 120 because Xvfb, fluxbox and the app start in sequence; compare with sibling GUI images before settling on a value. No env vars are set by the test, so the default `RESOLUTION` path is the one exercised. Per the test rules, `filePaths` should check `/usr/share/novnc/vnc.html` exists (the noVNC index file the proxy serves) and `/usr/bin/rapid-photo-downloader` is executable.
+`timeoutSeconds` is a top-level key (see `apps/changedetection/container-test.yaml`), so add `timeoutSeconds: 120` above `tcp:`. `apps/kasmvnc/container-test.yaml` uses `tcp` only; the `http` form is as in `apps/caddy/container-test.yaml`. `timeoutSeconds` is 120 because Xvfb, fluxbox and the app start in sequence; compare with sibling GUI images before settling on a value. No env vars are set by the test, so the default `RESOLUTION` path is the one exercised. Per the test rules, `filePaths` should check `/usr/share/novnc/vnc.html` exists (the noVNC index file the proxy serves) and `/usr/bin/rapid-photo-downloader` is executable.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
