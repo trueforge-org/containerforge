@@ -35,14 +35,14 @@ Final file list: `Dockerfile`, `docker-bake.hcl`, `settings.yaml`, `container-te
 
 `FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`
 
-Why: Omada v6 runs on JRE 17 (`JAVA_HOME=/opt/java/openjdk` in the base). Closest sibling: `apps/unifi-network-application` (java controller + MongoDB, `/config/{data,logs}` symlinks) and `apps/nzbhydra2` (java17 base). MongoDB is embedded: copy the `mongod` extraction pattern from `apps/mongodb/Dockerfile`.
+Why: Omada v6 runs on JRE 17 (`JAVA_HOME=/opt/java/openjdk` in the base). Closest sibling: `apps/unifi-network-application` (java controller with `/config` symlinks; it uses an external MongoDB, not an embedded one) and `apps/nzbhydra2` (java17 base). MongoDB is embedded: copy the `mongod` extraction pattern from `apps/mongodb/Dockerfile`.
 
 ## 4. Dockerfile
 
 1. `FROM` above; `ARG VERSION`, `ARG TARGETARCH`, `ARG OMADA_URL` (default the resolved `static.tp-link.com` URL above; it embeds a build timestamp so it must be updated together with VERSION), `ARG OMADA_SHA256`, `ARG MONGODB_VERSION=8.0.38` (renovate: `datasource=github-tags depName=mongodb/mongo extractVersion=^r(?<version>\d+\.\d+\.\d+)$ versioning=semver`, restrict to 8.0 via `allowedVersions`); `USER root`.
-2. Apt (only what the base lacks, check first): `ca-certificates curl libcurl4t64 jsvc`-not needed; likely `libcurl4t64` for mongod and `procps`. No `gosu` (rootless).
+2. Apt (only what the base lacks, check first): `ca-certificates`, `curl`; likely `libcurl4t64` for mongod and `procps`. No `gosu` (rootless).
 3. MongoDB: `case "${TARGETARCH}" in amd64) server_arch=x86_64;; arm64) server_arch=aarch64;; esac`; download `https://fastdl.mongodb.org/linux/mongodb-linux-${server_arch}-ubuntu2404-${MONGODB_VERSION}.tgz`, verify with `${url}.sha256` exactly as `apps/mongodb/Dockerfile`, extract only `mongod` into `/usr/local/bin`, licence files to `/usr/share/licenses/mongodb/` (`LICENSE-Community.txt`, `MPL-2`, `THIRD-PARTY-NOTICES`), run `mongod --version`.
-4. Omada: `curl -fsSL -o /tmp/omada.tgz "${OMADA_URL}" && echo "${OMADA_SHA256}  /tmp/omada.tgz" | sha256sum -c -`; `tar xzf` to `/tmp/omada`; `cd /tmp/omada/Omada_Network_Application_*`; `mkdir -p /app/omada && cp -r bin data lib properties /app/omada/`; `cp -r /app/omada/properties /app/omada/properties.defaults`; `tar zcf /app/omada/data-html.tar.gz -C /app/omada/data html` then `rm -rf /app/omada/data` (keeps `/app` free of runtime state; entrypoint logic is reproduced in start.sh); assert the version: `grep -r "${VERSION}" /app/omada/lib` or the jar name contains `${VERSION}` (check exact artifact name during implementation, UNVERIFIED). Symlink `ln -s /app/omada /opt/tplink/EAPController` only if the app hard-codes that path (UNVERIFIED; the java classpath is passed explicitly so likely unnecessary).
+4. Omada: `curl -fsSL -o /tmp/omada.tgz "${OMADA_URL}" && echo "${OMADA_SHA256}  /tmp/omada.tgz" | sha256sum -c -`; `tar xzf` to `/tmp/omada`; `cd /tmp/omada/Omada_Network_Application_*`; `mkdir -p /app/omada && cp -r bin data lib properties /app/omada/`; `cp -r /app/omada/properties /app/omada/properties.defaults`; `tar zcf /app/omada/data-html.tar.gz -C /app/omada/data html` then `rm -rf /app/omada/data` (keeps `/app` free of runtime state; entrypoint logic is reproduced in start.sh); then create the build-time links `ln -s /config/data /app/omada/data`, `ln -s /config/logs /app/omada/logs`, `ln -s /tmp/omada-work /app/omada/work` (dangling until `start.sh` creates the targets); assert the version: `grep -r "${VERSION}" /app/omada/lib` or the jar name contains `${VERSION}` (check exact artifact name during implementation, UNVERIFIED). Symlink `ln -s /app/omada /opt/tplink/EAPController` only if the app hard-codes that path (UNVERIFIED; the java classpath is passed explicitly so likely unnecessary).
 5. Licence: copy any `LICENSE`/`EULA` text in the tarball to `/usr/share/licenses/omada-controller/` (presence UNVERIFIED); otherwise add a `README` note pointing at the TP-Link EULA URL.
 6. `chmod 755 /app/omada/bin/*`; `chown -R root:root /app`; `chmod -R a+rX /app`; `rm -rf /tmp/* /var/lib/apt/lists/*`.
 7. ENV: `HOME=/config`, `ROOTLESS=true`, `TZ=Etc/UTC`, `LANG`/`JAVA_HOME` inherited from java17.
@@ -112,6 +112,15 @@ ports:
   - port: 29817
     protocol: tcp
     required: false
+  - port: 19810
+    protocol: udp
+    required: false
+  - port: 27001
+    protocol: udp
+    required: false
+  - port: 29810
+    protocol: udp
+    required: false
 env:
   - name: MANAGE_HTTP_PORT
     default: "8088"
@@ -169,7 +178,7 @@ volumes:
     required: true
 dependencies: []
 ```
-UDP ports (19810, 27001, 29810) are real listeners but are left out of `ports:` because forgetool tcp/http probes cannot test them (UNVERIFIED whether the schema allows a `udp` probe); they are documented in `EXPOSE` and in section 10. Env names are those read by upstream's entrypoint, and `start.sh` must implement the same defaults. Only port env vars that `start.sh` really maps are listed. `dependencies: []` (MongoDB embedded; draft says none).
+UDP ports (19810, 27001, 29810) are listed with `protocol: udp` (as sibling `apps/emby/settings.yaml` does) but have no probe in `container-test.yaml`, because tcp/http probes cannot test UDP (stated reason; UNVERIFIED whether the test schema has a udp probe). Env names are those read by upstream's entrypoint, and `start.sh` must implement the same defaults. Only port env vars that `start.sh` really maps are listed. `dependencies: []` (MongoDB embedded; draft says none).
 
 ## 7. start.sh
 
@@ -207,7 +216,7 @@ filePaths:
 - /usr/share/licenses/mongodb/LICENSE-Community.txt
 - /start.sh
 ```
-Every TCP port in settings.yaml has a probe. Whether the controller actually opens all of 8843/8044/2981x on first start is UNVERIFIED (some bind only after the first-run wizard); if any is not open, drop it from both `settings.yaml` and the test, never from the test alone. `timeoutSeconds: 300` because the Java controller plus MongoDB start slowly (siblings use 180 to 240). No DB-narrowing exception (database is embedded).
+Every TCP port in settings.yaml has a probe; the UDP ports are intentionally not probed (see section 6). Whether the controller actually opens all of 8843/8044/2981x on first start is UNVERIFIED (some bind only after the first-run wizard); if any is not open, drop it from both `settings.yaml` and the test, never from the test alone. `timeoutSeconds: 300` because the Java controller plus MongoDB start slowly (siblings use 180 to 240). No DB-narrowing exception (database is embedded).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

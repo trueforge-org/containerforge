@@ -40,7 +40,7 @@ Why: PHP source app; Apache and PHP come from ubuntu apt (26.04 = PHP 8.5 per Ob
 
 1. `FROM` line above; `ARG VERSION`, `ARG TARGETARCH`, `ARG OBSERVIUM_SHA256=01f4bec0bb01c49afe07e26f2b3f79d4eeeabf412ce5f15193df4ed7fc77d715`; `USER root`.
 2. `RUN apt-get update && apt-get install -y --no-install-recommends` apache2 libapache2-mod-php8.5 php8.5-cli php8.5-mysql php8.5-gd php8.5-bcmath php8.5-mbstring php8.5-curl php8.5-opcache php-apcu php-pear snmp fping rrdtool whois mtr-tiny ipmitool graphviz imagemagick python3 python3-pymysql mariadb-client netcat-openbsd (check what ubuntu base already ships first; package names come from the Observium install doc and the pvrmza Dockerfile list). Apt packages are not the application, so they are not version-pinned; the app version is pinned by checksum (document this in a comment). Remove `/var/lib/apt/lists`.
-3. Download and verify: `curl -fsSL -o /tmp/observium.tgz https://www.observium.org/observium-community-latest.tar.gz && echo "${OBSERVIUM_SHA256}  /tmp/observium.tgz" | sha256sum -c -`; `mkdir -p /app/observium && tar xzf /tmp/observium.tgz -C /app --strip-components=1`... (tarball top dir is `observium/`, extract to `/app` so it lands at `/app/observium`). Then assert `grep -qx "Observium CE ${VERSION}" /app/observium/VERSION` so the image really contains the tagged version.
+3. Download and verify: `curl -fsSL -o /tmp/observium.tgz https://www.observium.org/observium-community-latest.tar.gz && echo "${OBSERVIUM_SHA256}  /tmp/observium.tgz" | sha256sum -c -`; `tar xzf /tmp/observium.tgz -C /app` with no `--strip-components` (tarball top dir is `observium/`, so it lands at `/app/observium`; `mkdir -p /app` only). Then assert the contents of `/app/observium/VERSION` contain `${VERSION}` so the image really contains the tagged version (exact file format UNVERIFIED, check when building).
 4. License files: `mkdir -p /usr/share/licenses/observium && cp /app/observium/LICENSE.COMMUNITY /usr/share/licenses/observium/`.
 5. Make the tree read-only-friendly: `ln -s /config/config.php /app/observium/config.php`; `rm -rf /app/observium/rrd /app/observium/logs && ln -s /config/rrd /app/observium/rrd && ln -s /config/logs /app/observium/logs`; `chown -R root:root /app && chmod -R a+rX /app`. Disable default apache site/modules by shipping own config (step 6). Remove `/etc/cron.d` use (no cron daemon).
 6. ENV: `HOME=/config`, `APACHE_RUN_DIR=/tmp/apache/run`, `APACHE_LOCK_DIR=/tmp/apache/lock`, `APACHE_LOG_DIR=/tmp/apache/log`, `PHP_INI_SCAN_DIR=` default (php.ini edits go through `php_admin_value` in the Apache config, not /etc).
@@ -90,7 +90,7 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - mariadb   # ✅ apps/mariadb exists
+  - name: mariadb   # ✅ apps/mariadb exists
 ```
 Write the env items in the block style used by sibling settings.yaml files (not flow style). Defaults must equal `start.sh` and the pvrmza names (`OBSERVIUM_db_*` are the names actually read by the wrapper; here `defaults/config.php` reads them with `getenv`). The 443 port is dropped: no TLS config exists (UNVERIFIED upstream).
 

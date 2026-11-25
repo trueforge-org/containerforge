@@ -5,11 +5,11 @@
 
 | Item | Value |
 |---|---|
-| Version | `2.0.1` (PyPI JSON, 2026-11-24). Draft tag `1.11.8` is outdated. `requires_python` `>=3.9,<3.16`. |
+| Version | `2.0.2` (PyPI JSON, uploaded 2026-11-25; 2.0.1 was the previous release). Draft tag `1.11.8` is outdated. `requires_python` `>=3.9,<3.16`. |
 | Renovate | `datasource=pypi depName=OctoPrint versioning=pep440` |
 | License | AGPL-3.0-or-later (PyPI metadata) |
 | Source URL | https://github.com/OctoPrint/OctoPrint (site https://octoprint.org) |
-| Per-arch download | Pure Python, no per-arch artifact. PyPI wheel `octoprint-2.0.1-py3-none-any.whl` sha256 `dc6e3e3acfbbdc469921a9d1998606fc62d64652830ba6b35b8d1a442072150c`; sdist `octoprint-2.0.1.tar.gz` sha256 `c5003c1fc76edd279ef09dd062e48042df8019551941ce907b51f2102b85edf1`. |
+| Per-arch download | Pure Python, no per-arch artifact. PyPI wheel `octoprint-2.0.2-py3-none-any.whl` sha256 `29cfe7e02a88dab1e5b0212d7120355eca5a10c5aa9ca7d15f1608c6ced3870d`; sdist `octoprint-2.0.2.tar.gz` sha256 `d87d6d67311e29b25651bc8de3a8c0f44a71cd12a20adc107967c5b888773078`. |
 | Checksum source | PyPI JSON `urls[].digests.sha256` (above). |
 | Upstream Dockerfile reviewed | https://github.com/OctoPrint/octoprint-docker/blob/32fdd6eae2a9a2c1f97f26cf4c7d3802cb0559db/Dockerfile : `python:3.10-slim-bullseye`, s6-overlay, haproxy front end on port 80, mjpg-streamer, `PIP_USER=true`, `PYTHONUSERBASE=/octoprint/plugins`, `VOLUME /octoprint`, `CAMERA_DEV=/dev/video0`, `MJPG_STREAMER_INPUT=-n -r 640x480`. Apt: avrdude, ffmpeg, imagemagick, v4l-utils, libjpeg62-turbo, libusb, openssh-client, etc. |
 | Port / paths | OctoPrint default `server.port` 5000; `server.host` unset binds all interfaces (docs.octoprint.org config.yaml). Settings dir defaults to `~/.octoprint`; relocated with the CLI `--basedir` option (flag name from OctoPrint CLI, not shown on the config page: UNVERIFIED, confirm with `octoprint --help`). |
@@ -31,7 +31,7 @@ No `defaults/` (OctoPrint creates `config.yaml` itself on first run; the first-r
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-Why: pure Python app, `/app/venv` bundled by the base, pip installs into it at build time (read-only at runtime). Closest siblings: `apps/bazarr`, `apps/changedetection` (pip into `/app/venv/bin/pip`). Fallback if a transitive dependency lacks Python 3.15 wheels (UNVERIFIED): pin `python:3.14.8@sha256:...` like changedetection does, with a comment. `python-runtime.instructions.md` applies: `/app/venv` read-only, caches in `/tmp`.
+Why: pure Python app, `/app/venv` bundled by the base, pip installs into it at build time (read-only at runtime). Closest siblings: `apps/bazarr`, `apps/changedetection` (pip into `/app/venv/bin/pip`). Fallback if a transitive dependency lacks Python 3.15 wheels (UNVERIFIED): pin a `python:3.14.x` digest (changedetection uses `python-node:3.14.8`), with a comment. `python-runtime.instructions.md` applies: `/app/venv` read-only, caches in `/tmp`.
 
 ## 4. Dockerfile
 
@@ -56,7 +56,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=pypi depName=OctoPrint versioning=pep440
-  default = "2.0.1"
+  default = "2.0.2"
 }
 
 variable "LICENSE" {
@@ -131,8 +131,8 @@ Probe covers port 5000 (tcp and http). `/` redirects to the setup wizard on firs
 ## 10. Risks, caveats and open questions
 
 - Serial/USB printer access needs device mounts and host-side permissions; cannot be tested in CI (no device).
-- Python 3.15 compatibility of OctoPrint 2.0.1 dependencies (UNVERIFIED); fallback to python 3.14.8 base.
-- OctoPrint 2.0.1 vs draft's 1.11.8: a major version, review release notes before pinning (UNVERIFIED breaking changes: config migration from 1.x).
+- Python 3.15 compatibility of OctoPrint 2.0.2 dependencies (UNVERIFIED); fallback to python 3.14.8 base.
+- OctoPrint 2.0.2 vs draft's 1.11.8: a major version, review release notes before pinning (UNVERIFIED breaking changes: config migration from 1.x).
 - First start has no admin account; the setup wizard creates it in the UI.
 - `ffmpeg`, `avrdude` and `imagemagick` are optional features; confirm the image size trade-off.
 - UNVERIFIED count: 6 (`--basedir` flag order, `OCTOPRINT_*` env, licence file path, `/` redirect behaviour, Python 3.15 wheels, webcam need).
@@ -144,9 +144,9 @@ cd apps/octoprint
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create octoprint-probe-config
-docker run --rm -d --name octoprint-probe --read-only --tmpfs /tmp -v octoprint-probe-config:/config octoprint:2.0.1
+docker run --rm -d --name octoprint-probe --read-only --tmpfs /tmp -v octoprint-probe-config:/config octoprint:2.0.2
 docker logs -f octoprint-probe
-forgetool containers test --image octoprint:2.0.1 --config ./apps/octoprint/container-test.yaml
+forgetool containers test --image octoprint:2.0.2 --config ./apps/octoprint/container-test.yaml
 docker rm -f octoprint-probe; docker volume rm octoprint-probe-config
 ```
 Expected readiness log: `Listening on http://0.0.0.0:5000` (OctoPrint server start line; exact wording UNVERIFIED) and no traceback. Also install a plugin through the UI once to confirm `/config/plugins` works on a read-only rootfs. Round limit 10; clean up between rounds.
@@ -154,6 +154,6 @@ Expected readiness log: `Listening on http://0.0.0.0:5000` (OctoPrint server sta
 ## 12. PR checklist
 
 - Branch `feat/add-octoprint`; commit and PR title `feat(octoprint): add new container`; target `main`.
-- Fill `.github/PULL_REQUEST_TEMPLATE.md` (keep sections, tick only applicable boxes); include source, version `2.0.1`, base `python:3.15.2`, ports/volumes; put `🤖 This PR is AI generated.` in Notes.
+- Fill `.github/PULL_REQUEST_TEMPLATE.md` (keep sections, tick only applicable boxes); include source, version `2.0.2`, base `python:3.15.2`, ports/volumes; put `🤖 This PR is AI generated.` in Notes.
 - CLA notice for the user: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Untested at plan time: all builds and runs, arm64 build, plugin install on read-only rootfs, serial/USB access, Python 3.15 dependency set. Say so in the PR.

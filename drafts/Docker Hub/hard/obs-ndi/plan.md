@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | DistroAV `6.2.2` (latest release, `releases/latest` redirects to tag `6.2.2`; deb built 2026-10-14). The draft's third-party image is stale: `patrickstigler/docker-obs-ndi` at `400fc92` installs obs-ndi 4.10.0 and libndi4 4.5.1 from the old `Palakis/obs-ndi` project (renamed DistroAV). |
-| Renovate | `datasource=github-releases depName=DistroAV/DistroAV versioning=loose` (tags are plain `6.2.2`). OBS from apt: `datasource=repology depName=ubuntu_26_04/obs-studio versioning=loose` (same pattern as `apps/mariadb` and `apps/valkey`). |
+| Renovate | `datasource=github-releases depName=DistroAV/DistroAV versioning=loose` (tags are plain `6.2.2`). OBS from apt: `datasource=repology depName=ubuntu_26_04/obs-studio versioning=loose` (the pattern appears only as a disabled TODO comment in `apps/mariadb` and `apps/valkey` because of repology networking issues, so it may not work in CI: UNVERIFIED, otherwise bump `OBS_VERSION` by hand). |
 | License | DistroAV: GPL v2 (the `LICENSE` file is "GNU GENERAL PUBLIC LICENSE Version 2, June 1991"); use `GPL-2.0-only` (whether source headers say "or later" is UNVERIFIED). OBS Studio is GPL-2.0-or-later. The NDI runtime is proprietary (NDI SDK License Agreement), see section 10. |
 | Source URL | https://github.com/DistroAV/DistroAV |
 | amd64 download | https://github.com/DistroAV/DistroAV/releases/download/6.2.2/distroav-6.2.2-x86_64-linux-gnu.deb (141050 bytes), sha256 `d953385aa3082612899111801a05f63970163737cf3ab71128f56c58917bb826` (computed by downloading). |

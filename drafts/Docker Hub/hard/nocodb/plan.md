@@ -46,7 +46,7 @@ No `defaults/` (the app seeds its own SQLite). No `root/`. No `DOWNSTREAM_CHANGE
      echo "${S}  /app/Noco" | sha256sum -c -; \
      chmod 0755 /app/Noco; chown -R root:root /app
    ```
-4. Licenses: the release does not ship license files; fetch `LICENSE.md` of the tag: `curl -fsSL -o /usr/share/licenses/nocodb/LICENSE.md https://raw.githubusercontent.com/nocodb/nocodb/${VERSION}/LICENSE.md` (tag URL UNVERIFIED for `2026.06.1`; fall back to `develop`).
+4. Licenses: the release does not ship license files; fetch `LICENSE.md` of the tag (`mkdir -p /usr/share/licenses/nocodb` first): `curl -fsSL -o /usr/share/licenses/nocodb/LICENSE.md https://raw.githubusercontent.com/nocodb/nocodb/${VERSION}/LICENSE.md` (tag URL UNVERIFIED for `2026.06.1`; fall back to `develop`).
 5. `ENV HOME=/tmp/home PORT=8080 NC_APP_DATA_DIR=/config` (caches and the packaged binary's extraction dir go to `/tmp`; data to `/config`).
 6. `USER apps` as the last user line, then `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, `WORKDIR /config`, `CMD ["/start.sh"]`.
 

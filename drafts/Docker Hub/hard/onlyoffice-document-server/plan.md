@@ -135,8 +135,8 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - postgresql   # ✅ apps/postgresql exists
-  - valkey       # ✅ apps/valkey exists
+  - name: postgresql   # ✅ apps/postgresql exists
+  - name: valkey       # ✅ apps/valkey exists
 ```
 Port 80 is replaced by 8080 (rootless); 443 dropped (TLS at the proxy). Every env name above is documented in the README; `start.sh` (via `scripts/render-config.sh`) must default `JWT_SECRET` to a random value persisted in `/config/ds/jwt_secret` when empty, which is why `required` is false. `DB_PWD` has a non-empty default so `required: true` is satisfied.
 
@@ -157,7 +157,6 @@ Never write to `/app` (unused) or `/var/www/onlyoffice/documentserver`; `/tmp` f
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-# narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
 timeoutSeconds: 300
 tcp:
 - port: '8080'
@@ -167,7 +166,7 @@ filePaths:
 - /usr/share/licenses/onlyoffice-document-server
 - /start.sh
 ```
-Probe for port 8080 is `tcp`; nginx listens even when the DB is down. The three narrowing criteria hold (hard `dependencies` on postgresql, `/healthcheck` and all editing fail without it, DB sidecar not available to `container-test.yaml` primitives), so only smoke assertions are used and the comment above is mandatory. File names under `server/` follow the vendor package layout (UNVERIFIED, verify after install; edit paths to the real binaries, do not drop the asserts). The run with a real PostgreSQL/Valkey is done manually in section 11 and must pass `curl http://localhost:8080/healthcheck`.
+Probe for port 8080 is `tcp`; nginx listens even when the DB is down. The database-dependent narrowing exception is NOT claimed: the server process and nginx start without a database (the tcp probe passes), so the exception's "will not start without it" criterion does not hold; the DB-gated paths (schema creation, `/healthcheck`, editing) are not covered by this suite and are run by hand in section 11. File names under `server/` follow the vendor package layout (UNVERIFIED, verify after install; edit paths to the real binaries, do not drop the asserts). The run with a real PostgreSQL/Valkey is done manually in section 11 and must pass `curl http://localhost:8080/healthcheck`.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -207,7 +206,7 @@ docker logs -f onlyoffice-document-server-probe
 forgetool containers test --image onlyoffice-document-server:10.0.0 --config ./apps/onlyoffice-document-server/container-test.yaml
 docker rm -f onlyoffice-document-server-probe; docker volume rm onlyoffice-document-server-probe-config
 ```
-Without a database the log may show "waiting for database"/connection retries; that counts as readiness only while the process stays alive and nginx answers on 8080 (protocol DB-dependent exception). Full run: start `postgresql` and `valkey` containers on one network (`DB_HOST`, `DB_PWD`, `REDIS_SERVER_HOST`), then expect `curl http://localhost:8080/healthcheck` to return `true` and `http://localhost:8080/` to serve the welcome page. Repeat with a changed `DB_PWD` to prove it is applied on restart. Round limit 10; clean scratch containers/volumes each round.
+Without a database the log may show "waiting for database"/connection retries; that counts as readiness only while the process stays alive and nginx answers on 8080 (no narrowing exception is claimed). Full run: start `postgresql` and `valkey` containers on one network (`DB_HOST`, `DB_PWD`, `REDIS_SERVER_HOST`), then expect `curl http://localhost:8080/healthcheck` to return `true` and `http://localhost:8080/` to serve the welcome page. Repeat with a changed `DB_PWD` to prove it is applied on restart. Round limit 10; clean scratch containers/volumes each round.
 
 ## 12. PR checklist
 
