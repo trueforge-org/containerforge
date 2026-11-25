@@ -88,7 +88,7 @@ filePaths:
 - /start.sh
 - /usr/local/bin/steamcmd
 ```
-The schema has no `udp` probe, so the UDP port 27016 is checked with a `healthCommands` `ss -lun` assertion. Risk: it only passes if the first-run SteamCMD download (several GB, internet) and Wine setup finish within the timeout; `timeoutSeconds: 600` copies the longest sibling value. If CI has no internet this assertion cannot pass: maintainers must decide between a longer timeout or narrowing the test, and it must not be turned into a no-op (see section 10).
+UNVERIFIED: that `ss` (iproute2) exists in the ubuntu base; if not, install `iproute2` in the Dockerfile or read `/proc/net/udp` instead. The schema has no `udp` probe, so the UDP port 27016 is checked with a `healthCommands` `ss -lun` assertion. Risk: it only passes if the first-run SteamCMD download (several GB, internet) and Wine setup finish within the timeout; `timeoutSeconds: 600` copies the longest sibling value. If CI has no internet this assertion cannot pass: maintainers must decide between a longer timeout or narrowing the test, and it must not be turned into a no-op (see section 10).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

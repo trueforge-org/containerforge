@@ -91,8 +91,8 @@ Bash, `set -euo pipefail`, idempotent.
 3. Start `valkey-server --bind 127.0.0.1 --port 6379 --dir /config/redis --daemonize no` in background (binds to loopback only; internal service, state in `/config/redis`).
 4. Start `php-fpm8.5 -F -y /defaults/php-fpm.conf` (pid, error log and socket under `/tmp/slink/php`).
 5. Run DB/schema init on every start (`php /app/api/bin/console doctrine:migrations:migrate --no-interaction` or the upstream `slink` wrapper, UNVERIFIED which command), then admin creation is handled by the app when `ADMIN_EMAIL` is set (per docs).
-6. Start `/app/caddy run --config /defaults/Caddyfile` bound to 0.0.0.0:8080 is not required (loopback is enough because only node talks to it), data dir `XDG_DATA_HOME=/config/caddy`.
-7. Final foreground: `node /app/client/server.js` listening on `0.0.0.0:3000` (`HOST=0.0.0.0 PORT=3000`). Because several processes run, the script does not `exec` the first one: it backgrounds the helpers, traps TERM/INT, and ends with `wait -n` so the container exits when any child dies (PID 1 is tini from the ubuntu entrypoint). The node client is the last launched process: `exec node /app/client/server.js` replaces the shell only if a small watchdog subshell kills the group on helper exit; otherwise use `wait -n`.
+6. Start `/app/caddy run --config /defaults/Caddyfile` in the background, bound to `127.0.0.1:8080` only (loopback; node and the health check talk to it), data dir `XDG_DATA_HOME=/config/caddy`. Whether Caddy is needed at all depends on the upstream Caddyfile (UNVERIFIED, see section 10).
+7. Final process: `HOST=0.0.0.0 PORT=3000`, node client at `/app/client/server.js`. Because several processes run, the script backgrounds the helpers, traps TERM/INT to kill them, runs node in the background too and ends with `wait -n` so the container exits when any child dies (PID 1 is tini from the ubuntu entrypoint). Plain `exec node` is only used if the helpers are dropped.
 
 ## 8. container-test.yaml
 
@@ -105,7 +105,7 @@ http:
 - port: '3000'
   path: /
 healthCommands:
-- command: wget -qO- http://127.0.0.1:8080/api/health
+- command: curl -fsS http://127.0.0.1:8080/api/health
 filePaths:
 - /start.sh
 - /app/client/server.js
