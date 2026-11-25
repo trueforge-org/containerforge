@@ -11,13 +11,13 @@
 | Source URL | https://github.com/nicolargo/glances |
 | Download | `pip install "glances[web]==4.5.9"`; same for amd64 and arm64. Requires Python >= 3.10; PyPI classifiers list 3.10 to 3.14, not 3.15. |
 | Extras (verified list) | `action, all, browser, cloud, containers, export, gpu, graph, mcp, raid, sensors, smart, snmp, sparklines, web, wifi`. Web UI and API need `web` (FastAPI, Uvicorn). |
-| Native dependency | `psutil` needs Python headers and gcc if no wheel exists for the interpreter (PyPI page). The python base keeps `build-essential` and dev libs, so a source build is possible; a wheel for Python 3.15 is UNVERIFIED. |
+| Native dependency | `psutil` needs Python headers and gcc if no wheel exists for the interpreter (PyPI page). The python base keeps `build-essential` and dev libs. psutil 7.2.2 (latest on PyPI, 2026-11-25) ships `cp36-abi3` manylinux wheels for x86_64 and aarch64, which also cover Python 3.15; confirm pip resolves to one. |
 | Checksum source | None for pip. |
 | Port | 61208/tcp web UI and REST API (`EXPOSE 61209 61208` in upstream Dockerfile; 61209 is XMLRPC). Docs run it with `GLANCES_OPT="-w"`. |
 | Env | `GLANCES_OPT` (upstream image CMD: `/venv/bin/python${PYTHON_VERSION} -m glances ${GLANCES_OPT}`), default usage `-w`. Password and username env vars are not documented; passwords come from `--password` (file under `~/.config/glances/glances.pwd`) or a `[passwords]` config block. |
 | Config | custom file via `-C <file>`; upstream image copies a default to `/etc/glances/glances.conf`. |
 | Upstream Dockerfile reviewed | `docker-files/ubuntu.Dockerfile` (stages base, build, buildminimal, buildfull, release; `full` adds `libzmq5 libvirt-clients`; base apt packages `python3 curl lm-sensors smartmontools net-tools tzdata`; runs as root, `# USER glances` commented out with the note that the Docker plugin would not work non-root). |
-| Health endpoint | UNVERIFIED. Use `/` for the probe; Glances v4 also exposes a status API under `/api/4/` (path not confirmed). |
+| Health endpoint | `/api/4/status` (GET/HEAD, no authentication, intended for health checks; `glances_restful_api.py` at `v4.5.9`). |
 
 ## 2. Target layout
 
@@ -142,8 +142,8 @@ fi
 exec /app/venv/bin/glances "${ARGS[@]}" ${GLANCES_OPT} "$@"
 ```
 - Idempotent, runs with empty `/config`, nothing written under `/app`, caches in `/tmp`.
-- All interfaces: Glances web mode binds `0.0.0.0` by default per its `--bind` default (UNVERIFIED; the docs page read does not mention `--bind`). Verify with a connection from a second container; if it binds to localhost add `-B 0.0.0.0` to the default `GLANCES_OPT` and to settings.
-- Glances log file location (`glances.log` under a temp or cache dir) is UNVERIFIED; the `XDG_CACHE_HOME=/tmp/.cache` default is meant to cover it; check with `--read-only`.
+- All interfaces: `-B/--bind` defaults to `0.0.0.0` (`glances/main.py` at `v4.5.9`). Still verify with a connection from a second container.
+- Log file: `glances/logger.py` uses `$XDG_CACHE_HOME/glances/glances.log` if that directory exists and is writable (else `~/.local/share/glances/`), so `start.sh` creates `/tmp/.cache` before launch; check with `--read-only`.
 - No secrets handled; a password, if wanted, goes through the config file or `--password` flag in `GLANCES_OPT` (documented upstream, UNVERIFIED for non-root).
 
 ## 8. container-test.yaml
@@ -153,14 +153,14 @@ exec /app/venv/bin/glances "${ARGS[@]}" ${GLANCES_OPT} "$@"
 
 http:
 - port: '61208'
-  path: /
+  path: /api/4/status
 filePaths:
 - /app/venv/bin/glances
 ```
 - Probe for the single declared port (HTTP, which implies the TCP wait).
 - The test runs with no env, so `GLANCES_OPT` defaults to `-w` and starts the web server.
 - `timeoutSeconds` omitted (180 s minimum applies; Glances starts in seconds).
-- If `/` is not 200 (e.g. it redirects), use the API route confirmed during the first run; do not weaken to a file check.
+- `/api/4/status` is the unauthenticated health route; do not weaken to a file check.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -180,7 +180,7 @@ Draft expectations: non-root yes (the chart uses 1000; this port uses 568, which
 - Draft caveat: plugins (GPU, sensors, Docker, SMART, RAID) need extra Python extras and host access; first version ships `web` only.
 - Draft caveat: without host namespaces only container metrics are visible. Mounting `/etc/os-release` read-only shows the host OS (upstream docs).
 - Docker plugin needs the Docker socket and group membership; a non-root `apps` user will not have it. The upstream Dockerfile comments say the same ("If used, the Glances Docker plugin do not work").
-- Python 3.15 is not a classifier of Glances 4.5.9 and `psutil` may have to compile; fallback base 3.14.8 (section 3).
+- Python 3.15 is not a classifier of Glances 4.5.9; fallback base 3.14.8 (section 3).
 - The draft tag (4.3.0.8) is old; this plan uses 4.5.9 (latest PyPI). The `all` extra pulls many heavy packages; not used.
 - Web UI and API are unauthenticated by default; expose only internally or add a password.
 - No blocker: both arches, glibc, no privileged mode needed.

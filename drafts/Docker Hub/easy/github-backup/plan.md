@@ -7,7 +7,7 @@
 |---|---|
 | Which project | The draft names `lnxd/github-backup` (Alpine 3.9, Unraid-oriented, repo archived 2022-09-06, MIT) but the binary field says `pip:github-backup`. The PyPI package `github-backup` is a different, maintained project: `josegonzalez/python-github-backup`. This plan ports the PyPI one and defines a thin wrapper `start.sh`. Confirm with maintainers (section 10). |
 | Version | `0.68.0` (PyPI, released 2026-11-09). Requires Python >= 3.11 (classifiers 3.11-3.14; 3.15 not listed). |
-| Renovate | `datasource=pypi depName=github-backup` (`apps/esphome` and 7 others use `datasource=pypi`). |
+| Renovate | `datasource=pypi depName=github-backup` (for example `apps/esphome` uses `datasource=pypi`). |
 | License | `MIT` (PyPI classifier and README). `LICENSE.txt` exists on the repo (starts "The MIT License (MIT) Copyright (c) 2013 Jose Diaz-Gonzalez"). |
 | Source URL | https://github.com/josegonzalez/python-github-backup |
 | Download | `pip install github-backup==0.68.0` from PyPI, same for both arches (pure Python, no declared dependencies). Needs `git` >= 1.9 at runtime (present in the ubuntu base). |
@@ -54,7 +54,7 @@ RUN set -eux; \
     /app/venv/bin/pip install --no-cache-dir "github-backup==${VERSION}"; \
     mkdir -p /usr/share/licenses/github-backup; \
     curl -fsSL -o /usr/share/licenses/github-backup/LICENSE.txt \
-      "https://raw.githubusercontent.com/josegonzalez/python-github-backup/${VERSION}/LICENSE.txt" || true; \
+      "https://raw.githubusercontent.com/josegonzalez/python-github-backup/${VERSION}/LICENSE.txt"; \
     chown -R root:root /app; chmod -R 755 /app; \
     rm -rf /root/.cache /tmp/*
 
@@ -67,7 +67,7 @@ VOLUME /config
 Notes:
 - Uses `/app/venv/bin/pip` directly (python base layout, same as `apps/changedetection`); `/app/venv` stays read-only at runtime. Verify `/app/venv/bin/github-backup` exists after build.
 - `apt-get` not needed: `git` is already in the ubuntu base. Optionally `openssl` is only needed for GitHub App tokens (not in scope).
-- The licence fetch relies on the upstream tag being exactly `0.68.0` (UNVERIFIED tag name); if the URL 404s, copy `LICENSE` from the installed package metadata (`/app/venv/lib/python*/site-packages/github_backup-*.dist-info/`) instead of failing silently. Do not keep `|| true` once the path is confirmed.
+- The upstream tag is `0.68.0` (no `v` prefix) and `LICENSE.txt` exists at that tag (checked 2026-11-25), so the licence fetch must fail the build if it breaks.
 - No `EXPOSE`: no ports.
 - Final `USER apps`; `COPY --chmod=0755 . /` kept.
 
@@ -153,10 +153,13 @@ if [ -z "${GITHUB_USER}" ] || [ -z "${GITHUB_TOKEN}" ]; then
   exec sleep infinity
 fi
 
-# Token goes through a 0600 file in /tmp (never on the command line / process list)
-umask 077
+export XDG_CACHE_HOME=/tmp/.cache
+read -r -a EXTRA_ARGS <<< "${BACKUP_ARGS}"
+
+# Token goes through a 0600 file in /tmp (never on the command line / process list).
+# umask is limited to a subshell so backup files keep the normal permissions.
 TOKEN_FILE=/tmp/github-token
-printf '%s' "${GITHUB_TOKEN}" > "${TOKEN_FILE}"
+( umask 077; printf '%s' "${GITHUB_TOKEN}" > "${TOKEN_FILE}" )
 unset GITHUB_TOKEN
 case "$(cat "${TOKEN_FILE}")" in
   github_pat_*) TOKEN_FLAG=(--token-fine "file://${TOKEN_FILE}") ;;
@@ -165,20 +168,30 @@ esac
 ORG_FLAG=(); [ "${GITHUB_ORGANIZATION}" = "true" ] && ORG_FLAG=(--organization)
 
 run_backup() {
-  # shellcheck disable=SC2086
-  /app/venv/bin/github-backup "${TOKEN_FLAG[@]}" "${ORG_FLAG[@]}" --output-directory "${OUTPUT_DIR}" ${BACKUP_ARGS} "${GITHUB_USER}"
+  /app/venv/bin/github-backup "${TOKEN_FLAG[@]}" "${ORG_FLAG[@]}" --output-directory "${OUTPUT_DIR}" "${EXTRA_ARGS[@]}" "${GITHUB_USER}"
 }
 
 if [ "${SCHEDULE}" = "0" ]; then
-  run_backup   # one-shot mode, container exits with the tool's status
-  exit $?
+  # one-shot mode, the container exits with the tool's status
+  exec /app/venv/bin/github-backup "${TOKEN_FLAG[@]}" "${ORG_FLAG[@]}" --output-directory "${OUTPUT_DIR}" "${EXTRA_ARGS[@]}" "${GITHUB_USER}"
 fi
+
+# A shell loop cannot exec the tool: trap signals and wait on child processes instead
+child=""
+trap '[ -n "${child}" ] && kill "${child}" 2>/dev/null; exit 0' TERM INT
+while true; do
+  run_backup &
+  child=$!
+  wait "${child}" || echo "[github-backup] run failed, retrying next cycle"
+  sleep "${SCHEDULE}" &
+  child=$!
+  wait "${child}"
+done
 ```
 Implementation notes for the final script:
-- `SCHEDULE=0` means run once then exit. Otherwise loop `while true; do run_backup || echo "[github-backup] run failed, retrying next cycle"; sleep "${SCHEDULE}"; done`. A backup failure must not kill the container.
-- The loop cannot `exec` the final process (a shell loop is the long-running process), so signals: add `trap 'exit 0' TERM INT` and run `sleep` in the background with `wait` so SIGTERM is handled promptly. Under `tini` as PID 1 this is acceptable.
+- `SCHEDULE=0` means run once then exit (with `exec`). Otherwise the loop keeps running; a backup failure must not kill the container. The loop is the long-running process, so it traps TERM/INT and `wait`s on children.
 - Idempotent: later runs update existing backups (upstream behaviour: repeated runs refresh and add repositories, as stated by lnxd's README for its own script; UNVERIFIED for the PyPI tool, test twice).
-- Never writes to `/app`; output in `/config/backups`; token file and git scratch in `/tmp`; `HOME=/config`, add `export XDG_CACHE_HOME=/tmp/.cache` before running.
+- Never writes to `/app`; output in `/config/backups`; token file and caches in `/tmp`; `HOME=/config`.
 - Special characters in env values are handled by quoting; the token is never written under `/config`.
 - Always start without env vars (container test): it idles and stays running.
 
@@ -193,7 +206,7 @@ filePaths:
 healthCommands:
 - command: /app/venv/bin/github-backup --help
 ```
-- No ports, so no tcp/http probes. The `healthCommands` entry actually executes the installed CLI (checks the Python 3.15 compatibility risk for real). Default `expectedExitCode` is assumed 0 (UNVERIFIED); set it explicitly only if the schema default differs.
+- No ports, so no tcp/http probes. The `healthCommands` entry actually executes the installed CLI (checks the Python 3.15 compatibility risk for real). `expectedExitCode` defaults to 0 (`.github/schemas/container-test.schema.json`).
 - The test runs without env vars, so the real backup path (token handling, loop) is NOT exercised; run it manually per section 11 with a read-only token.
 - `timeoutSeconds` omitted (180 s minimum applies).
 

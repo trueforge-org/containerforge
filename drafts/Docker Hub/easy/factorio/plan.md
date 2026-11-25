@@ -6,7 +6,7 @@
 | Item | Value |
 |---|---|
 | Version | `2.1.25` stable headless (https://factorio.com/api/latest-releases returned `{"stable":{"headless":"2.1.25"}}`). The draft only says `stable`. |
-| Renovate | No GitHub release for the game itself. UNVERIFIED best option: `datasource=github-tags depName=factoriotools/factorio-docker` (that repo tags image versions; tag format not checked) or a `custom.factorio` datasource reading `https://factorio.com/api/latest-releases` (`$.stable.headless`) which would need a new custom manager in the repo's renovate config (existing precedent: `custom.plex`, `custom.qbittorrent`). Ask maintainers; do not guess. |
+| Renovate | No GitHub release for the game itself. `factoriotools/factorio-docker` git tags have no 2.x versions (checked 2026-11-25), so `github-tags` does not work. Docker Hub `factoriotools/factorio` does have `2.1.25` (plus `-rootless`, `stable-*` variants), so use `datasource=docker depName=factoriotools/factorio`; it also offers experimental releases, so review each bump. Alternative: a `custom.factorio` datasource reading `https://factorio.com/api/latest-releases` (`$.stable.headless`) which would need a new custom manager in the repo's renovate config (existing precedent: `custom.plex`, `custom.qbittorrent`). Ask maintainers; do not guess. |
 | License | Proprietary (Wube). Not an SPDX id. Factorio ToS says it is "not a free software, copy-left or public domain software". Use `LicenseRef-Proprietary` in `LICENSE` (UNVERIFIED that the repo accepts it). See section 10 for redistribution. |
 | Source URL | https://factorio.com/ (draft). Packaging reference: https://github.com/factoriotools/factorio-docker (MIT). |
 | Download amd64 | `https://factorio.com/get-download/2.1.25/headless/linux64` (302 to `dl.factorio.com/releases/.../factorio-headless_linux_2.1.25.tar.xz`, 200, 61 MB) |
@@ -89,7 +89,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-tags depName=factoriotools/factorio-docker versioning=loose
+  // renovate: datasource=docker depName=factoriotools/factorio versioning=semver
   default = "2.1.25"
 }
 
@@ -101,7 +101,7 @@ variable "SOURCE" {
   default = "https://factorio.com/"
 }
 ```
-The renovate line is a placeholder pending the datasource decision in section 1. Standard `group "default"`, `image`, `image-local` (`factorio:${VERSION}`), `image-all` (amd64 and arm64) as in `apps/adguardhome-sync`. Validate with `docker buildx bake --print`.
+The Docker datasource may propose experimental releases (see section 1); maintainers may prefer a custom stable-only datasource. Standard `group "default"`, `image`, `image-local` (`factorio:${VERSION}`), `image-all` (amd64 and arm64) as in `apps/adguardhome-sync`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -149,6 +149,8 @@ These env names are defined by `start.sh` (mirroring the factoriotools image so 
 
 ## 7. start.sh
 
+Adapted from the upstream `docker-entrypoint.sh` (re-read 2026-11-25). Upstream generates a save only if that file does not already exist; keep that, or a restart with `GENERATE_NEW_SAVE=true` would overwrite the world.
+
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
@@ -168,25 +170,55 @@ mkdir -p "$CONFIG" "$SAVES" "$MODS" /config/scenarios /config/script-output
 
 # RCON password generated once, kept 0600 in /config
 if [ ! -f "$CONFIG/rconpw" ]; then
-  umask 077; uuidgen | tr -d '-' > "$CONFIG/rconpw"
+  ( umask 077; uuidgen | tr -d '-' > "$CONFIG/rconpw" )
 fi
-for f in server-settings:server-settings.example map-gen-settings:map-gen-settings.example map-settings:map-settings.example; do
-  dst="$CONFIG/${f%%:*}.json"; src="/app/data/${f##*:}.json"
-  [ -f "$dst" ] || cp "$src" "$dst"
+for f in server-settings map-gen-settings map-settings; do
+  [ -f "$CONFIG/$f.json" ] || cp "/app/data/$f.example.json" "$CONFIG/$f.json"
 done
 rm -f "$SAVES"/*.tmp.zip
-```
-then build `FLAGS` as the upstream entrypoint does (verified logic): `--config /config/config.ini --server-settings "$CONFIG/server-settings.json" --server-banlist ... --server-whitelist ... --server-adminlist ... --server-id ... --rcon-port "$RCON_PORT" --rcon-password "$(cat "$CONFIG/rconpw")" --mod-directory "$MODS"`, add `--port "$PORT"` (and `--bind "$BIND"` when set), generate a first save with `--create "$SAVES/${SAVE_NAME}.zip" --map-gen-settings ... --map-settings ...` (plus `--preset` when set) when no `*.zip` exists or `GENERATE_NEW_SAVE=true`, then use `--start-server-load-latest` when `LOAD_LATEST_SAVE=true`, else `--start-server "$SAVES/${SAVE_NAME}.zip"`. Final line:
-```bash
+
+SAVE_FILE="$SAVES/${SAVE_NAME%.zip}.zip"
+if [ -z "$(find "$SAVES" -name '*.zip' -print -quit)" ]; then
+  GENERATE_NEW_SAVE=true
+fi
+if [ "$GENERATE_NEW_SAVE" = "true" ] && [ ! -f "$SAVE_FILE" ]; then
+  CREATE=(--config /config/config.ini --create "$SAVE_FILE"
+          --map-gen-settings "$CONFIG/map-gen-settings.json"
+          --map-settings "$CONFIG/map-settings.json")
+  if [ -n "$PRESET" ]; then CREATE+=(--preset "$PRESET"); fi
+  /app/bin/x64/factorio "${CREATE[@]}"
+fi
+
+FLAGS=(--config /config/config.ini
+  --server-settings "$CONFIG/server-settings.json"
+  --server-banlist "$CONFIG/server-banlist.json"
+  --server-whitelist "$CONFIG/server-whitelist.json"
+  --use-server-whitelist
+  --server-adminlist "$CONFIG/server-adminlist.json"
+  --server-id "$CONFIG/server-id.json"
+  --mod-directory "$MODS"
+  --port "$PORT"
+  --rcon-port "$RCON_PORT"
+  --rcon-password "$(cat "$CONFIG/rconpw")")
+if [ -n "$BIND" ]; then FLAGS+=(--bind "$BIND"); fi
+
+if [ "$LOAD_LATEST_SAVE" = "true" ]; then
+  FLAGS+=(--start-server-load-latest)
+else
+  FLAGS+=(--start-server "$SAVE_FILE")
+fi
+
 exec /app/bin/x64/factorio "${FLAGS[@]}" "$@"
 ```
-Rules satisfied: runs with empty `/config`, seeds only when missing, nothing under `/app`, no `setpriv`/`usermod` (already non-root), `exec`. Open point: `--rcon-password` appears in the process list (inside the container's own PID namespace); factorio offers no password-file flag in what was read. `defaults/config.ini` content:
+UNVERIFIED: the file names for the ban, whitelist, admin and id files (upstream takes them from `server-config.sh`), and that an empty whitelist with `--use-server-whitelist` does not lock all players out; check both, or drop `--use-server-whitelist`, before shipping. Upstream also omits `--port` when `BIND` already contains a port; here keep `BIND` an address only.
+
+Rules satisfied: runs with empty `/config`, seeds only when missing, nothing under `/app`, no `setpriv`/`usermod` (already non-root), `exec`. Open point: `--rcon-password` appears in the process list (inside the container's own PID namespace); no password-file flag was found. `defaults/config.ini` content:
 ```
 [path]
 read-data=__PATH__executable__/../../data
 write-data=/config
 ```
-Keep the upstream relative `read-data` so it resolves to `/app/data` (verify on first run, UNVERIFIED), and `[other]` sections as defaults. The upstream entrypoint rewrites `write-data` with `sed -i`; here the seed already has the right value, so no in-place edits are needed.
+Keep the upstream relative `read-data` so it resolves to `/app/data` (verify on first run, UNVERIFIED). The upstream entrypoint rewrites `write-data` with `sed -i`; here the seed already has the right value, so no in-place edits are needed.
 
 ## 8. container-test.yaml
 
@@ -227,7 +259,7 @@ Draft expectations: chart runs UID 0 with writable root. This port is non-root (
 - Draft caveat: RAM and disk for saves; first-start map generation is CPU heavy.
 - Draft says "first start downloads the tarball": this plan downloads at build time instead.
 - UDP port cannot be probed by forgetool; only the RCON tcp port is tested.
-- Renovate datasource still to be decided (section 1).
+- Renovate: the Docker datasource tracks the third-party image tags, including experimental releases (section 1).
 - Space Age DLC handling (`DLC_SPACE_AGE`, `docker-dlc.sh`) is not read and is out of scope; do not add unverified env vars.
 
 ## 11. Build and test steps

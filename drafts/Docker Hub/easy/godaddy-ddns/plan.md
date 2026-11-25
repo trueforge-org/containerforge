@@ -5,8 +5,8 @@
 
 | Item | Value |
 | --- | --- |
-| Version | No release is usable as is. The repo has tags `releases/1.0.0` to `releases/1.0.4`, but the tag `releases/1.0.4` script lacks `int()` around `GET_IP_WAIT_SEC` and `UPDATE_INTERVAL_SEC` (diff against `master` verified), so a value set through env or the config file stays a string and `time.sleep()` fails. `master` HEAD is commit `ab3b048d7a369d816990ad624f58baf8a4c5b480` (2021-12-04), the commit the draft links, and fixes this. The plan pins that commit as `VERSION=ab3b048`. |
-| Renovate | `datasource=git-refs depName=https://github.com/jwater7/docker-godaddy-publicip-updater versioning=loose` (same style as the `external-ip` plan). The upstream has been idle since 2021-12, so bumps are unlikely. |
+| Version | No release is usable as is. The repo has tags `releases/1.0.0` to `releases/1.0.4`, but the tag `releases/1.0.4` script lacks `int()` around `GET_IP_WAIT_SEC` and `UPDATE_INTERVAL_SEC` (re-checked 2026-11-25), so a value set through env or the config file stays a string and `time.sleep()` fails. `master` HEAD is commit `ab3b048d7a369d816990ad624f58baf8a4c5b480` (2021-12-04), the commit the draft links, and fixes this. The plan pins that commit as `VERSION=ab3b048`. |
+| Renovate | `datasource=git-refs depName=https://github.com/jwater7/docker-godaddy-publicip-updater versioning=loose` (same line style as `apps/nextcloud-imaginary`). UNVERIFIED: `git-refs` treats the value as a ref name and tracks digests, so it may not manage a short SHA stored in `VERSION`; check with a Renovate dry run or use the `currentDigest=` form seen in `apps/kasmvnc`. The upstream has been idle since 2021-12, so bumps are unlikely. |
 | License | UNVERIFIED and probably none. `LICENSE` returns 404 and the repo page lists no license. The image also carries `pif` 0.8.2 (PyPI says "GPL 2.0/LGPL 2.1") and `godaddypy` (BSD classifier). See section 10, this is a blocker for a maintainer decision. |
 | Source | https://github.com/jwater7/docker-godaddy-publicip-updater |
 | Artifact | One file, `godaddy-publicip-updater.py`. URL: `https://raw.githubusercontent.com/jwater7/docker-godaddy-publicip-updater/ab3b048d7a369d816990ad624f58baf8a4c5b480/godaddy-publicip-updater.py`, sha256 `225cd4d453817b631242d356efe36dfa3930cb6af98f5c8e1db551a3d1e5402f` (computed on 2026-11-23 from that URL). The script is architecture independent. |
@@ -74,23 +74,39 @@ Then the standard blocks copied from `apps/adguardhome-sync/docker-bake.hcl`: `t
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
 schema_version: 1
 upstream_env_url: "https://github.com/jwater7/docker-godaddy-publicip-updater"
-ports: []
+ports:
+  []
 env:
-  - name: GODADDY_API_KEY        # default "", required: true (start.sh idles with a clear error if missing)
-  - name: GODADDY_API_SECRET     # default "", required: true
-  - name: GODADDY_DOMAINS        # default "", required: true, comma separated
-  - name: GODADDY_A_NAMES        # default "@", required: false
-  - name: UPDATE_INTERVAL_SEC    # default "900", required: false
-  - name: GET_IP_WAIT_SEC        # default "10", required: false
-  - name: UPDATER_CONFIG_FILE    # default "/config/config.json" (only used when the file exists), required: false
-  - name: TZ                     # default "Etc/UTC", required: false
+  - name: GODADDY_API_KEY
+    default: ""
+    required: true
+  - name: GODADDY_API_SECRET
+    default: ""
+    required: true
+  - name: GODADDY_DOMAINS
+    default: ""
+    required: true
+  - name: GODADDY_A_NAMES
+    default: "@"
+    required: false
+  - name: UPDATE_INTERVAL_SEC
+    default: "900"
+    required: false
+  - name: GET_IP_WAIT_SEC
+    default: "10"
+    required: false
+  - name: UPDATER_CONFIG_FILE
+    default: "/config/config.json"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
 volumes:
   - path: /config
     required: false
-dependencies: []
 ```
 
-Write it in the multi-line `name/default/required` block style of `apps/bazarr/settings.yaml`. The three required credentials have an empty `default`, which the settings rule allows only when `start.sh` handles the missing value (it does, section 7). `/config` is optional because it only holds the optional JSON file. No dependencies (no sibling containers needed).
+`GODADDY_DOMAINS` and `GODADDY_A_NAMES` are comma separated. `UPDATER_CONFIG_FILE` is only applied by `start.sh` when the file exists. The three required credentials have an empty `default`, which the settings rule allows only when `start.sh` handles the missing value (it does, section 7); they may also come from the JSON file. `/config` is optional because it only holds that file. `dependencies:` omitted (none).
 
 ## 7. start.sh
 
@@ -134,13 +150,12 @@ Notes:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-timeoutSeconds: 120
 filePaths:
 - /app/bin/godaddy-publicip-updater.py
 - /app/venv/bin/python
 ```
 
-No `tcp`/`http` probe because `settings.yaml` lists no ports. The test runs without env vars, so only the idle path executes; the credential path (script start, GoDaddy calls) can only be checked by hand in section 11. The paths-only style follows `apps/autoscan/container-test.yaml`. `timeoutSeconds` is a guess modelled on siblings (`apps/changedetection` uses 180); a no-port idle container needs less. This is not the DB-dependency exception and needs no narrowing comment.
+No `tcp`/`http` probe because `settings.yaml` lists no ports. The test runs without env vars, so only the idle path executes; the credential path (script start, GoDaddy calls) can only be checked by hand in section 11. The paths-only style follows `apps/autoscan/container-test.yaml`. `timeoutSeconds` is omitted: the runtime enforces a 180 s minimum anyway. This is not the DB-dependency exception and needs no narrowing comment.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

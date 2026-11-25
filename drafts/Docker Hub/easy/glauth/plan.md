@@ -12,7 +12,7 @@
 | Download amd64 | `https://github.com/glauth/glauth/releases/download/GLAuth-v2.5.5/glauth-linux-amd64` (raw binary, no archive) |
 | Download arm64 | `https://github.com/glauth/glauth/releases/download/GLAuth-v2.5.5/glauth-linux-arm64` |
 | Other assets | `386`, `arm-7`, `riscv64`, darwin, windows binaries. |
-| Checksum source | None published. The release assets list has no `.sha256` or checksum file (the `.sha256` URL returns 404). See section 10. |
+| Checksum source | No checksum file, but GitHub publishes a SHA-256 digest per release asset (API, checked 2026-11-25): amd64 `b0a27c536351010fd1ba90ce4930ff980f187ad015d9287c4731f9c109334dbe`, arm64 `d0a17af0cda75676f9a2d1378636562d01a2b5bb8ddc4fa34be87477525caa4d`. |
 | License file | `https://raw.githubusercontent.com/glauth/glauth/GLAuth-v2.5.5/LICENSE` returns 200. |
 | Upstream Dockerfile reviewed | `v2/docker/Dockerfile-standalone`: runs on `gcr.io/distroless/base-debian13` (glibc), copies `/app/glauth`, `/app/docker/start-standalone.sh`, `EXPOSE 389 636 5555`, `ENTRYPOINT dumb-init`. UNVERIFIED: that the binary is statically linked; it runs on distroless glibc, so Ubuntu glibc is fine. |
 | Upstream start script | `start-standalone.sh`: if `/app/config/config.cfg` is missing, copies `default-config-standalone.cfg` there, prints `/app/glauth --version`, then runs `/app/glauth -c /app/config/config.cfg`. |
@@ -48,14 +48,23 @@ FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50
 
 ARG VERSION
 ARG TARGETARCH
+# not renovated: update both with every VERSION bump
+ARG SHA256_AMD64=b0a27c536351010fd1ba90ce4930ff980f187ad015d9287c4731f9c109334dbe
+ARG SHA256_ARM64=d0a17af0cda75676f9a2d1378636562d01a2b5bb8ddc4fa34be87477525caa4d
 USER root
 
 ENV HOME=/config
 
 RUN set -eux; \
+    case "${TARGETARCH}" in \
+      amd64) sha="${SHA256_AMD64}" ;; \
+      arm64) sha="${SHA256_ARM64}" ;; \
+      *) echo "unsupported arch ${TARGETARCH}" >&2; exit 1 ;; \
+    esac; \
     mkdir -p /usr/share/licenses/glauth; \
     curl -fsSL -o /app/glauth \
       "https://github.com/glauth/glauth/releases/download/GLAuth-v${VERSION}/glauth-linux-${TARGETARCH}"; \
+    echo "${sha}  /app/glauth" | sha256sum -c -; \
     curl -fsSL -o /usr/share/licenses/glauth/LICENSE \
       "https://raw.githubusercontent.com/glauth/glauth/GLAuth-v${VERSION}/LICENSE"; \
     chown -R apps:apps /app; chmod -R 755 /app
@@ -63,12 +72,12 @@ RUN set -eux; \
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE 3893 3894 5555
+EXPOSE 3893 5555
 VOLUME /config
 ```
 Notes:
 - `TARGETARCH` equals the asset suffix (`amd64`, `arm64`); no mapping.
-- No checksum step because upstream publishes none (section 10). Do not invent one; HTTPS to GitHub releases is the integrity control. Optionally add `/app/glauth --version` as a build-time smoke check (`RUN /app/glauth --version`), which also catches a wrong-arch binary. This is the one extra step worth adding.
+- The binary is verified against the GitHub asset digests above. Optionally add `RUN /app/glauth --version` as a build-time smoke check, which also catches a wrong-arch binary.
 - No `apt-get`: nothing to install.
 - No Go toolchain, no `GOCACHE`; if a Go cache appears at runtime it must go to `/tmp`.
 - Final `USER apps`, `COPY --chmod=0755 . /` kept.
@@ -107,9 +116,6 @@ ports:
   - port: 3893
     protocol: tcp
     required: true
-  - port: 3894
-    protocol: tcp
-    required: false
   - port: 5555
     protocol: tcp
     required: false
@@ -125,7 +131,7 @@ volumes:
     required: true
 ```
 - `CONFIGFILE` is read by `start.sh` (same pattern as `adguardhome-sync`), not by glauth. This is an image-level variable.
-- 3894 (LDAPS) is listed because the user may enable it, but with the seed config it is NOT open, so `required: false` and no tcp probe for it (do not claim a port the container does not open by default). Alternatively drop it from `ports`; decide in review.
+- 3894 (LDAPS) is deliberately not listed (nor `EXPOSE`d): the seed config does not open it, and settings must not list closed ports. Users who enable LDAPS map the port themselves.
 - Service mapping of 389 to 3893 and 636 to 3894 is done by the chart, not here.
 - `dependencies:` none.
 
@@ -190,9 +196,10 @@ Draft expectations: chart sets UID 0 and `readOnlyRootFilesystem: false`; this p
 - Draft caveat: the config must be hand-written; the shipped seed is intentionally minimal and has no users, so a fresh container serves an empty directory.
 - Draft caveat: LDAPS needs a user-supplied certificate in `/config`; plain LDAP on 3893 sends credentials in clear text. Document both in the PR.
 - Draft caveat: chart config path `/app/config` vs `/config`; settled as `/config`, chart must be updated.
-- No upstream checksum for release binaries. If maintainers want integrity pinning, the sha256 can be taken from the GitHub asset digest (UNVERIFIED that these assets expose one) or computed once and pinned as an ARG, at the cost of a manual edit per bump.
+- The pinned SHA-256 ARGs are not renovated: a `VERSION` bump needs both digests updated by hand, or the build fails.
 - Draft lists `GLAuth-v2.5.4` URLs; use `2.5.5` (latest verified).
 - The REST API on 5555 has no TLS by default; consider defaulting `[api] enabled = false` for safety (then drop the 5555 probe and mark the port optional).
+- Config loading at the tag (`internal/toml/config.go`) requires an LDAP or LDAPS server section; no zero-user check was seen in a search of that file (still confirm by running). The binary also has `--check-config`.
 - No blocker: both arches exist, glibc base works, no privileged ports needed.
 
 ## 11. Build and test steps
@@ -218,5 +225,5 @@ Also restart the container on the same volume and confirm the config is not over
 - [ ] Notes contain `🤖 This PR is AI generated.`
 - [ ] Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; `license/cla` shows status).
 - [ ] `docker buildx bake --print` passed; `ARG VERSION` equals bake `VERSION` (`2.5.5`).
-- [ ] PR text mentions: ports 3893/3894/5555 (not 389/636), no sample users shipped, no upstream checksum.
+- [ ] PR text mentions: ports 3893/5555 by default (3894 only when LDAPS is enabled; not 389/636), no sample users shipped, manually pinned digests.
 - [ ] Untested until run: build on both arches, zero-user start, read-only start, cross-container LDAP bind, forgetool run. Do not tick "Built container locally" unless done.

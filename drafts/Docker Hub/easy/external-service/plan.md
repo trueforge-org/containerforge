@@ -14,7 +14,7 @@
 | Download URLs | Not needed. For reference only: amd64 `https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/x86_64/alpine-minirootfs-3.24.4-x86_64.tar.gz`, arm64 `https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/aarch64/alpine-minirootfs-3.24.4-aarch64.tar.gz`. Checksum files exist at the same paths with a `.sha256` suffix. |
 | Checksum source | Not applicable, nothing is downloaded. |
 | Upstream Dockerfile reviewed | https://github.com/alpinelinux/docker-alpine (`x86_64/Dockerfile`, pinned commit in the draft): `FROM scratch` + `ADD alpine-minirootfs-...tar.gz /` + `CMD ["/bin/sh"]`. No ports, env vars or volumes. |
-| Ports / env / paths | None. The chart only needs a pod that stays alive so its Service/Endpoints can point to an external address. UNVERIFIED: the chart's own command/args (not fetched), so the keepalive command is an assumption from the draft ("ubuntu base plus keepalive"). |
+| Ports / env / paths | None. The chart's purpose is a Service pointing to an external address. BLOCKER: the chart's `values.yaml` (read 2026-11-25 on `trueforge-org/truecharts` master) sets `workload.main.enabled: false` and comments the image as "Fake external service image" (`repository: alpine`). It only renders a Service of type `ExternalIP`, so by default no pod runs this image (see section 10). |
 
 ## 2. Target layout
 
@@ -102,7 +102,7 @@ volumes:
     required: false
 ```
 - `ports: []` (same form as `apps/python/settings.yaml`), because nothing listens.
-- `TZ` is read by the ubuntu base (`tzdata`) and used by `apps/adguardhome-sync/settings.yaml`. UNVERIFIED that `/entrypoint.sh` consumes it; if not, drop `env` to `[]` like `apps/python`.
+- `TZ` is read by the ubuntu base (`tzdata`) and used by `apps/adguardhome-sync/settings.yaml`. `/entrypoint.sh` does not read it; it only matters to libc/`tzdata` (log timestamps). Drop `env` to `[]` like `apps/python` if reviewers prefer.
 - `dependencies:` omitted: none.
 
 ## 7. start.sh
@@ -143,8 +143,9 @@ filePaths:
 
 ## 10. Risks, caveats and open questions
 
+- **Needs a maintainer decision before any work:** the chart disables its only workload (`workload.main.enabled: false`) and the image entry is labelled "Fake external service image". A ContainerForge image would normally never run. Decide whether to drop this port, or build the placeholder anyway so the chart's `image` field can point at ContainerForge.
 - Draft caveat: placeholder only, nothing to configure or use. Real behaviour (the chart's own command) is not verified.
-- The `3.24.4` tag from the chart is deliberately not reproduced; the chart's `image.tag` will point at this image's tag (`26.04`). Whoever migrates the chart must update the tag, and must not rely on an Alpine userland (musl, `apk`, BusyBox `sh`). UNVERIFIED whether the chart executes anything inside the pod besides the keepalive.
+- The `3.24.4` tag from the chart is deliberately not reproduced; the chart's `image.tag` will point at this image's tag (`26.04`). Whoever migrates the chart must update the tag, and must not rely on an Alpine userland (musl, `apk`, BusyBox `sh`). With the chart defaults nothing runs in a pod at all.
 - Open question: use `26.04` (honest to contents) or track Alpine `3.24.4`. The Dockerfile rules require the image to contain the version it is tagged with, so `26.04` is recommended.
 - Image is much larger than Alpine minirootfs (~5 MB vs the Ubuntu base). Accepted by the draft.
 - No blockers: no musl-only, GPU, privileged or arm64 limits (both arches build from the same base).
