@@ -88,14 +88,26 @@ ports:
   - port: 8080
     protocol: tcp
     required: false   # UNVERIFIED: list only once the listen default is confirmed in step 3
-env: []
+env:
+  - name: DOMAIN
+    default: "truecharts.org"
+    required: false
+  - name: LISTEN
+    default: "0.0.0.0:8080"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: PLUGIN_DIR
+    default: "/tmp/device-plugins"
+    required: false
 volumes:
   - path: /config
     required: true
 dependencies: []
 ```
 
-Env: none verified (the binary reads flags; do not invent env names). `required` flags stay false because the plugin needs args (`--domain`, `--device`), which are not env. Ports: keep 8080 only if step 3 shows the listener; otherwise remove it and drop the matching probe.
+Env: `DOMAIN`, `LISTEN`, `LOG_LEVEL`, `PLUGIN_DIR` are image-level names read only by `start.sh` (which maps them to the verified flags `--domain`, `--listen`, `--log-level`, `--plugin-directory`); the binary itself does not read them (UNVERIFIED whether it reads any env). Defaults match `start.sh`. `required` flags stay false because the plugin needs args (`--domain`, `--device`), which are not env. Ports: keep 8080 only if step 3 shows the listener; otherwise remove it and drop the matching probe.
 
 ## 7. start.sh
 

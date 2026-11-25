@@ -9,7 +9,7 @@
 | Renovate | `datasource=github-releases depName=AndrewPaglusch/FlashPaper versioning=semver` |
 | License | MIT (GitHub license API, `spdx_id` MIT) |
 | Source URL | https://github.com/AndrewPaglusch/FlashPaper |
-| Download | Source archive of the tag, `https://github.com/AndrewPaglusch/FlashPaper/archive/refs/tags/${VERSION}.tar.gz`. UNVERIFIED: the exact archive URL pattern was not fetched; it is the standard GitHub tag archive form. |
+| Download | Source archive of the tag, `https://github.com/AndrewPaglusch/FlashPaper/archive/refs/tags/v${VERSION}.tar.gz` (tag is `v2.6.1`, bake `VERSION` has no `v`). UNVERIFIED: the exact archive URL pattern was not fetched; it is the standard GitHub tag archive form. |
 | Per-arch binary | None. FlashPaper is PHP source, so the same tree runs on amd64 and arm64. |
 | Checksum source | None published on the release. Pin the tag's commit SHA in the Dockerfile and verify it after download (UNVERIFIED: the SHA of v2.6.1 was not read). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/AndrewPaglusch/FlashPaper/7c986b3f712563c085762eba68cf29f744acc7ea/docker/Dockerfile. This is the commit the draft cites. It is not the v2.6.1 tree. |
@@ -52,7 +52,7 @@ Keep the `ARG VERSION` and `ARG TARGETARCH` pattern from `apps/bookstack`. The `
 3. Remove `composer` from the plan. The upstream Dockerfile does not use it, and the draft's "composer (inferred)" is not confirmed.
 4. Download and extract the source:
    ```dockerfile
-   RUN curl -fsSL "https://github.com/AndrewPaglusch/FlashPaper/archive/refs/tags/${VERSION}.tar.gz" -o /tmp/flashpaper.tar.gz \
+   RUN curl -fsSL "https://github.com/AndrewPaglusch/FlashPaper/archive/refs/tags/v${VERSION}.tar.gz" -o /tmp/flashpaper.tar.gz \
     && mkdir -p /tmp/flashpaper-src \
     && tar -xzf /tmp/flashpaper.tar.gz -C /tmp/flashpaper-src --strip-components=1
    ```
@@ -120,7 +120,7 @@ target "image-all" {
 }
 ```
 
-Validate with `docker buildx bake --print` from `apps/flashpaper`. Note the `VERSION` value is without the `v` prefix; the Dockerfile must use the same value when it builds the tag URL (use `v${VERSION}` in the URL if the tag has the prefix, which it does: `v2.6.1`). Check which form the tag uses before the build.
+Validate with `docker buildx bake --print` from `apps/flashpaper`. Note the `VERSION` value is without the `v` prefix; the Dockerfile builds the tag URL as `v${VERSION}` (the tag is `v2.6.1`, confirmed by the releases API).
 
 ## 6. settings.yaml
 

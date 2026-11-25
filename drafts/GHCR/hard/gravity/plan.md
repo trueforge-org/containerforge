@@ -53,7 +53,7 @@ Closest sibling for the Go-build pattern: `apps/pwndrop` (build stage, `COPY --f
    ```
    `-a` from upstream is dropped unless needed; `BuildHash` uses the tag (UNVERIFIED: upstream uses `git rev-parse HEAD`, and no `.git` exists in a tarball).
 5. `final` stage: `USER root`, `apt-get install -y --no-install-recommends nmap bash-completion ca-certificates` (`bash` is in the base). `rm -rf /var/lib/apt/lists/*`.
-6. `COPY --from=build /tmp/out/gravity /app/gravity/gravity`, `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/gravity/LICENSE`. `chown -R apps:apps /app/gravity && chmod -R 755 /app/gravity`.
+6. `COPY --from=build /tmp/out/gravity /app/gravity/gravity`, `ln -s /config/data /data` (dangling until `start.sh` creates `/config/data`, see sections 6 and 9), `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/gravity/LICENSE`. `chown -R apps:apps /app/gravity && chmod -R 755 /app/gravity`.
 7. Tail:
    ```dockerfile
    USER apps

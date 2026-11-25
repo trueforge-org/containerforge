@@ -18,7 +18,7 @@
 | Linux assets for 1.11.2 | Only `HandBrake-1.11.2-source.tar.bz2` (+ `.sig`) and `HandBrake-1.11.2-x86_64.flatpak` (+ `.sig`). No standalone Linux binary for amd64 or arm64. |
 | Draft binary links | **Correction:** the draft's `HandBrake-1.11.2-x86_64-Win_GUI.zip` and `...-arm64-Win_GUI.zip` are Windows builds. They cannot be used on Linux. |
 | Checksums | Detached `.sig` files per asset. No sha256 digest field returned by the API for this release. Source tarball checksum file: UNVERIFIED. |
-| License | UNVERIFIED: SPDX not read in this run. HandBrake is GPL-2.0-only upstream (from memory of the project; not fetched). Confirm before setting `LICENSE`. |
+| License | UNVERIFIED: GitHub license API returns `NOASSERTION` for HandBrake/HandBrake. GPL-2.0 is from memory, not fetched. Read the repo `LICENSE` before setting `LICENSE` in bake. |
 | Renovate | Proposed `datasource=github-releases depName=HandBrake/HandBrake versioning=loose` (tags have no `v` prefix). Not checked against a live config. |
 | Ubuntu packages | Draft says `handbrake` and `handbrake-cli` exist in the Ubuntu archive. UNVERIFIED in this run (no archive index fetched). |
 | Source | https://github.com/HandBrake/HandBrake |
@@ -31,7 +31,7 @@
 - `apps/handbrake/settings.yaml`
 - `apps/handbrake/container-test.yaml`
 - `apps/handbrake/start.sh` (starts the GUI or the automated conversion watcher, and seeds `/config` on first run)
-- `defaults/` only if a seed file is needed (for example an openbox or GUI config, as `apps/kasmvnc` does). Reason: the upstream GUI needs an X session config. Never use `root/`.
+- `defaults/` only if a seed file is needed (for example an openbox or GUI config; `apps/kasmvnc` ships openbox config under `root/defaults/`, which is not to be copied). Reason: the upstream GUI needs an X session config. Never use `root/`.
 
 No `DOWNSTREAM_CHANGES.md` (nothing uses this as a `FROM` base).
 
@@ -39,7 +39,7 @@ No `DOWNSTREAM_CHANGES.md` (nothing uses this as a `FROM` base).
 
 `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
 
-Why: the upstream `jlesage/baseimage-gui` is Alpine. The GUI and VNC layer must come from a glibc base. Closest sibling for a GUI on ubuntu: `apps/kasmvnc` (ubuntu 26.04 build stage plus python-node web stage, openbox defaults in `defaults/`). Do not copy its `root/` tree.
+Why: the upstream `jlesage/baseimage-gui` is Alpine. The GUI and VNC layer must come from a glibc base. Closest sibling for a GUI on ubuntu: `apps/kasmvnc` (ubuntu 26.04 build stages, python-node final stage, openbox installed via apt; its openbox config lives in a legacy `root/defaults/` tree, which must not be copied: put any seed files in `defaults/` instead).
 
 ## 4. Dockerfile
 
@@ -61,7 +61,7 @@ EXPOSE 5900
 VOLUME /config
 ```
 
-Ports `5800` and `5900` are the upstream noVNC and VNC ports (draft, not confirmed in the Dockerfile; UNVERIFIED for this build). Only include `5900` if the GUI layer actually exposes VNC.
+`settings.yaml` lists only 5800; if `5900` is exposed it needs its own `settings.yaml` entry and `tcp` probe. Ports `5800` and `5900` are the upstream noVNC and VNC ports (draft, not confirmed in the Dockerfile; UNVERIFIED for this build). Only include `5900` if the GUI layer actually exposes VNC.
 
 ## 5. docker-bake.hcl
 
@@ -100,7 +100,7 @@ ports:
     required: false
 env:
   - name: AUTOMATED_CONVERSION
-    default: "0"
+    default: "0"   # upstream default is 1; the default here must match whatever start.sh implements (UNVERIFIED, start.sh not written)
     required: false
   - name: AUTOMATED_CONVERSION_PRESET
     default: "General/Very Fast 1080p30"
@@ -136,7 +136,7 @@ tcp:
 - port: '5800'
 ```
 
-Add a `tcp` probe for every port in `settings.yaml`. Add `filePaths` for `/usr/bin/HandBrakeCLI` (or the path actually installed) and `/usr/share/licenses/handbrake/LICENSE`. Timeout is from `apps/kasmvnc` (GUI family), UNVERIFIED.
+Add a `tcp` probe for every port in `settings.yaml`. Add `filePaths` for `/usr/bin/HandBrakeCLI` (or the path actually installed) and `/usr/share/licenses/handbrake/LICENSE`. `timeoutSeconds: 180` is a guess: `apps/kasmvnc` (GUI family) sets no `timeoutSeconds`, so UNVERIFIED.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

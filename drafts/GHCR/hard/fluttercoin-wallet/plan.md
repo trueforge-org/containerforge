@@ -46,9 +46,9 @@ Exact file list for `apps/fluttercoin-wallet/`:
 2. `USER root` for installs only. Install `unzip` only if `unzip` is missing from the base (UNVERIFIED: the base's package list was not read). Alternative: python3 `zipfile` is not in ubuntu base; prefer apt `unzip` with a pinned version checked against `VERSION`.
 3. Download and verify:
    ```dockerfile
-   ARG FLT_VERSION=0.7.5.22
    ARG FLT_SHA256=4d53d27e33c7467d89dd57a793aba99eec8fa94d3e24ff11b26dfecd37b33938
-   RUN curl -fsSL "https://github.com/ofeefee/fluttercoin/releases/download/v${FLT_VERSION}-flt/fluttercoin-64-linux-v${FLT_VERSION}.zip" -o /tmp/flt.zip \
+   RUN FLT_TAG="${VERSION}" && FLT_VERSION="${FLT_TAG%-flt}" && FLT_VERSION="${FLT_VERSION#v}" \
+    && curl -fsSL "https://github.com/ofeefee/fluttercoin/releases/download/${FLT_TAG}/fluttercoin-64-linux-v${FLT_VERSION}.zip" -o /tmp/flt.zip \
     && echo "${FLT_SHA256}  /tmp/flt.zip" | sha256sum -c - \
     && unzip -j /tmp/flt.zip fluttercoind -d /app/fluttercoin/bin \
     && chmod 0755 /app/fluttercoin/bin/fluttercoind
@@ -116,7 +116,7 @@ target "image-all" {
 ```
 
 - `image-all` is amd64-only: arm64 is not built (section 4). Do not list arm64.
-- `VERSION` is the tag. The Dockerfile derives `FLT_VERSION` by stripping `v` and `-flt`, so keep them in step; this is a version alignment point. Pass `FLT_VERSION` from bake too, or derive it in the Dockerfile and check it against the bake value.
+- `VERSION` is the tag. The Dockerfile consumes the tag through `ARG VERSION` and derives the zip version by stripping `v` and `-flt` in the same `RUN`, so there is a single source of truth.
 - Validate with `docker buildx bake --print` from `apps/fluttercoin-wallet`.
 
 ## 6. settings.yaml
