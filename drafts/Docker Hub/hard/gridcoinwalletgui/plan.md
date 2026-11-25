@@ -7,7 +7,7 @@
 | --- | --- |
 | Version | 5.5.3.0 (released 2026-11-20, latest). The draft links 5.5.2.0, which is outdated. |
 | Renovate | `datasource=github-releases depName=gridcoin-community/Gridcoin-Research versioning=loose` (4-part version, tags have no `v`) |
-| License | MIT (SPDX `MIT`; UNVERIFIED this session, confirm `COPYING` in the repo) |
+| License | MIT (GitHub API SPDX `MIT`, checked 2026-11-25) |
 | Source URL | https://github.com/gridcoin-community/Gridcoin-Research |
 | amd64 asset | Options on the release: `gridcoinresearch-5.5.3.0-x86_64.tar.gz` (sha256 `30d3e1755f99dbad3330e8858f44a0edf47596c6cf7ea34d96c52bf1d149dae5`), `gridcoin-5.5.3.0-x86_64.flatpak` (sha256 `3c61bc53...ce62f`), `gridcoinresearch-qt_5.5.3.0.trixie-1_amd64.deb` (sha256 `008dac730c8f25e2a6b1feb291c196bcaa41a8a4a39bd6cfb981102916245be4`) |
 | arm64 asset | `gridcoinresearch-qt_5.5.3.0.trixie-1_arm64.deb` (sha256 `ec0c24a8dc4a6350b084a34ead2e181617869db5d6c1ce979f10011ba934af0b`); bookworm variant `...bookworm-1_arm64.deb` (sha256 `8a551873ea0a652bf5750a2dd80ec233794344d884b3ead281c51235a02c1380`). Draft's `bookworm-2` name is stale. |
@@ -76,7 +76,7 @@ filePaths:
 - /usr/share/licenses/gridcoinwalletgui/COPYING
 ```
 
-Add a `filePaths` entry for the wallet binary once its name is confirmed. Timeout 180 is taken from the kasmvnc/changedetection family. Test runs without `PASSWORD`; the password-protected path must be exercised manually.
+Add a `filePaths` entry for the wallet binary once its name is confirmed. Timeout 180 is a guess (`apps/kasmvnc/container-test.yaml` sets none; UNVERIFIED). Test runs without `PASSWORD`; the password-protected path must be exercised manually.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

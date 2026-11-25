@@ -13,7 +13,7 @@
 | Upstream Dockerfile reviewed | `dockerfile` at that commit: `FROM tiangolo/meinheld-gunicorn-flask:python3.8`, `apt-get install ipmitool`, `pip install flask-wtf wtforms flask-bootstrap4`, `COPY ./app /app`. The base image serves `app/main.py` via gunicorn on port 80. `quickstart.py` maps `6060:80`. |
 | App layout | `app/main.py` (`from flaskr import app`; `app.run(host='0.0.0.0', debug=True)` only under `__main__`), `app/config.py`, `app/ipmitools.py`, `app/flaskr/`. |
 | Env vars (config.py) | `SECRET_KEY` (random `secrets.token_hex()` if unset), `APP_IPMI_HOST`, `APP_IPMI_USER`, `APP_IPMI_PASS` (each None if unset), `APP_LOG_LEVEL` (default `INFO`). |
-| How IPMI is reached | `ipmitools.py` builds an `ipmitool` command with host, user, password from config, so IPMI is used over the network (iDRAC/BMC, Dell raw commands `0x30 0x30 0x01 0x00/0x01`, `0x30 0x30 0x02 0xff <hex>`). README: "IPMI must be enabled in iDRAC", credentials via env or typed into the web GUI. The draft's claim that `/dev/ipmi*` is required is NOT supported by the code: UNVERIFIED which interface flag is used (`lanplus` vs `lan`), so check `ipmitools.py` when implementing. |
+| How IPMI is reached | `ipmitools.py` builds an `ipmitool` command with host, user, password from config, so IPMI is used over the network (iDRAC/BMC, Dell raw commands `0x30 0x30 0x01 0x00/0x01`, `0x30 0x30 0x02 0xff <hex>`). README: "IPMI must be enabled in iDRAC", credentials via env or typed into the web GUI. The draft's claim that `/dev/ipmi*` is required is NOT supported by the code: `ipmitools.py` at `main` uses `ipmitool -I lanplus -H ... -U ... -P ...` (network only, checked 2026-11-25). |
 | Ports | 5000/tcp when run via `python main.py`; the Docker base used 80. Port is not defined by the app when run under gunicorn; we choose 5000 (draft inferred 5000). |
 
 ## 2. Target layout
@@ -99,7 +99,7 @@ Port 5000 probed. `/` may redirect or need form data; adjust the path to a route
 ## 9. Rootless and read-only-rootfs adaptations
 
 - Chart: `runAsUser 568`, read-only rootfs, PVC `/data`. Our image: `USER apps`, read-only rootfs ok; writes only `/config/secret_key` and `/tmp`.
-- Draft expects `/dev/ipmi*` and host kernel modules; code review shows the app talks to the BMC over the network, so no device passthrough and no privileged mode is needed unless the user points `ipmitool` at a local interface. Reconcile in the PR: network IPMI only, `/dev/ipmi*` unsupported unless upstream code is changed (UNVERIFIED; if the code uses `-I open` this changes).
+- Draft expects `/dev/ipmi*` and host kernel modules; code review shows the app talks to the BMC over the network, so no device passthrough and no privileged mode is needed unless the user points `ipmitool` at a local interface. Reconcile in the PR: network IPMI only, `/dev/ipmi*` unsupported unless upstream code is changed (checked: the code uses `-I lanplus`, no `-I open`).
 - Python: `/app/venv` read-only; `PIP_CACHE_DIR` and bytecode off.
 
 ## 10. Risks, caveats and open questions

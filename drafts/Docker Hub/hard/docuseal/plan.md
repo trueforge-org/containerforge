@@ -82,10 +82,11 @@ Only `WORKDIR` is verified from the upstream Dockerfile. `DATABASE_URL` and `SEC
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 timeoutSeconds: 240
+tcp:
+  - port: '3000'
 http:
   - port: '3000'
-    path: /
-    statusCode: 200   # may be a 302 redirect to /setup; verify and use the real code
+    path: /   # may answer with a redirect to /setup; verify which status the probe accepts (UNVERIFIED)
 filePaths:
   - /app/bin/bundle
   - /usr/share/licenses/docuseal/LICENSE

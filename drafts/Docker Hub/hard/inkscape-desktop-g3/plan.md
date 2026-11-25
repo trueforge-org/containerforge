@@ -52,9 +52,11 @@ Draft says ubuntu alone is enough; the desktop stack comes from apt. Closest sib
 - Standard targets: `docker-metadata-action`, `image` (OCI `source`/`licenses` labels), `image-local` (`type=docker`, tag `${APP}:${VERSION}`), `image-all` (`linux/amd64`, `linux/arm64`), `group "default" { targets = ["image-local"] }`.
 - Validate: `docker buildx bake --print`.
 
-Renovate comment (disabled repology pattern copied from `valkey`, since renovate cannot track apt reliably; bump by hand with the base image):
+Renovate comment (disabled repology pattern copied from `apps/valkey/docker-bake.hcl`, since the repology lookup is temporarily off; bump by hand with the base image):
 ```hcl
-// renovate: datasource=repology depName=ubuntu_26_04/inkscape versioning=loose
+// NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile
+// TODO: temporary disabled due to repology networking issues
+// repologydepName=ubuntu_26_04/inkscape versioning=loose
 ```
 
 ## 6. settings.yaml

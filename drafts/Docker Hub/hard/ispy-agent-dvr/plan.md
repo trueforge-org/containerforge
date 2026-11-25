@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version | `8.3.2.0` is what the vendor's download API currently returns (`https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=Linux64&fromVersion=0` -> `Agent_Linux64_8_3_2_0.zip`; `platform=LinuxARM64` -> `Agent_LinuxARM64_8_3_2_0.zip`). The `Linux64` file returned HTTP 200, 77,815,131 bytes, last-modified 2026-11-24. The draft's TrueCharts tag `7.1.8.0` and the draft's links (`8_2_9_0`) are older. The ARM64 file was named by the API; a HEAD request was not run for it (UNVERIFIED reachable). |
+| Version | `8.3.2.0` is what the vendor's download API currently returns (`https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=Linux64&fromVersion=0` -> `Agent_Linux64_8_3_2_0.zip`; `platform=LinuxARM64` -> `Agent_LinuxARM64_8_3_2_0.zip`). The `Linux64` file returned HTTP 200, 77,815,131 bytes, last-modified 2026-11-24. The draft's TrueCharts tag `7.1.8.0` and the draft's links (`8_2_9_0`) are older. The ARM64 file also returned HTTP 200 (70,418,698 bytes) on a HEAD request 2026-11-25. |
 | Renovate | UNVERIFIED / none usable: the vendor has no GitHub releases and the product history page (https://www.ispyconnect.com/producthistory?productid=27) is not a renovate datasource. Plan a `// renovate:` comment only if a custom regex manager is added; otherwise bump `VERSION` by hand and say so in a plain comment. The community Docker image `ispysoftware/agentdvr` (tags `latest`, `stable`, `beta`; first official version `7.9.4.0`) could be tracked with `datasource=docker depName=ispysoftware/agentdvr versioning=loose` as a proxy; UNVERIFIED that its tags equal the zip versions. |
 | License | Proprietary, closed-source freeware. SPDX: `LicenseRef-Proprietary`. (The docker repo's GPL-3.0 covers only the Dockerfile.) Redistribution of the vendor zip in a public image: UNVERIFIED, must be checked against the vendor terms; downloading at build time into our image is still redistribution. |
 | Source URL | https://www.ispyconnect.com/ (docs: https://www.ispyconnect.com/docs/agent/) |
@@ -105,7 +105,7 @@ UDP ports 3478 and 50000-50100 are listed in settings.yaml; the test schema's tc
 - WebRTC/TURN needs UDP 3478 and 50000-50100 reachable; the chart's LoadBalancer services assume a cluster with external IPs (draft caveat).
 - Some features may need a paid iSpy account (draft caveat, inferred).
 - FFmpeg: vendor bundle vs apt `ffmpeg`; decide after inspecting the zip contents.
-- arm64 zip not HEAD-checked.
+- arm64 zip HEAD-checked OK (HTTP 200).
 
 ## 11. Build and test steps
 

@@ -7,7 +7,7 @@
 | --- | --- |
 | Version | 2.2.1 (tag `2.2.1`, published 2026-04-06, latest). The draft links 2.2.0. |
 | Renovate | `datasource=github-releases depName=hyperion-project/hyperion.ng versioning=loose` (tags have no `v`) |
-| License | MIT (SPDX `MIT`; UNVERIFIED this session, confirm repo LICENSE) |
+| License | MIT (GitHub API SPDX `MIT`, checked 2026-11-25) |
 | Source URL | https://github.com/hyperion-project/hyperion.ng |
 | amd64 URL | https://github.com/hyperion-project/hyperion.ng/releases/download/2.2.1/Hyperion-2.2.1-Linux-amd64.deb (sha256 `8e30585049421297455387564f8df2c87603f0f8557bc95abca102be27e872b9`) |
 | arm64 URL | https://github.com/hyperion-project/hyperion.ng/releases/download/2.2.1/Hyperion-2.2.1-Linux-arm64.deb (sha256 `ee5e9eaeeb4a6bc69174b15dcb316de274cc77dab93fc5c370905e04ca2f056b`) |

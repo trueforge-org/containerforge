@@ -47,9 +47,9 @@ Certbot, Let's Encrypt and the 8443 TLS connector are not carried over (needs ro
 
 `APP=drawio`, `VERSION=32.7.4`,
 ```hcl
-// renovate: datasource=github-releases depName=jgraph/drawio versioning=semver
+// renovate: datasource=github-releases depName=jgraph/drawio versioning=semver extractVersion=^v(?<version>.+)$
 ```
-(add `extractVersion` for the `v` prefix; the Dockerfile adds `v`), `LICENSE=Apache-2.0`, `SOURCE=https://github.com/jgraph/drawio`. Add `TOMCAT_VERSION` variable with its own renovate comment (datasource UNVERIFIED) and pass it in `args`. Four standard targets and `default` group; run `docker buildx bake --print`.
+(`extractVersion` strips the `v` prefix; the Dockerfile adds `v` back in the download URL), `LICENSE=Apache-2.0`, `SOURCE=https://github.com/jgraph/drawio`. Add `TOMCAT_VERSION` variable with its own renovate comment (datasource UNVERIFIED) and pass it in `args`. Four standard targets and `default` group; run `docker buildx bake --print`.
 
 ## 6. settings.yaml
 

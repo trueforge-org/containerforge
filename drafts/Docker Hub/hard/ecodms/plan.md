@@ -78,7 +78,7 @@ Upstream (Docker Hub) mounts `/srv/data`, `/srv/scaninput`, `/srv/backup`, `/srv
 ## 10. Risks, caveats and open questions
 
 - BLOCKER: closed-source commercial software; redistribution of vendor packages in a public GHCR image is unconfirmed, and a license/activation may be needed (draft caveat, inferred).
-- BLOCKER: no public Dockerfile; Docker Hub image is 18.09, about 3 years old. Current vendor build is 26.01 (amd64 Ubuntu 24.04 repo). A major version jump cannot be done directly from 16.09/14.08 per Docker Hub notes.
+- BLOCKER: no public Dockerfile; Docker Hub image is 18.09, about 3 years old. Current vendor build is 26.01 (amd64 Ubuntu 24.04 repo). Docker Hub notes reportedly say a major version jump cannot be done directly from 16.09/14.08 (UNVERIFIED, not re-read).
 - Multi-service bundle (PostgreSQL, Tomcat, indexing) with root-expecting postinst scripts; hard to make rootless and read-only.
 - No renovate datasource; versions change in the repo URL path.
 - Ubuntu 26.04 support by the vendor repo is unknown; only noble (24.04) and Debian 12/13 are listed.
