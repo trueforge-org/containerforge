@@ -88,7 +88,8 @@ env:
 volumes:
   - {path: /config, required: true}
 dependencies:
-  - mariadb   # ✅ apps/mariadb exists
+  - name: mariadb   # ✅ apps/mariadb exists
+    required: true
 ```
 `ZM_DB_*` are the real `zm.conf` keys; start.sh writes them to `/config/zm/conf.d/` (confirm key names against the shipped `/etc/zm/zm.conf`). `TZ` is read by PHP/apache setup in start.sh. Add `ZM_DB_PORT` only if confirmed.
 
@@ -108,13 +109,13 @@ timeoutSeconds: 240
 tcp:
   - port: '8080'
 # narrowed: requires external mariadb; full functional test not feasible in single-container suite
-http:  # probe of /zm/ only if schema accepts http (copy shape from a sibling that uses http)
+# http probe of /zm/ only if the schema shape is confirmed (copy from a sibling that uses http)
 filePaths:
   - /usr/share/zoneminder/www/index.php   # UNVERIFIED path
   - /usr/bin/zmpkg.pl
   - /usr/sbin/apache2
 ```
-Every settings.yaml port (8080) has a tcp probe. Timeout 240 copied from `apps/bookstack`. The DB-narrowing exception applies only if the 3 criteria hold; ZM web UI will show a DB error page without a DB but apache still listens, so keep the tcp probe real and the comment above. Drop the empty `http:` line if the schema shape is not confirmed.
+Every settings.yaml port (8080) has a tcp probe. Timeout 240 copied from `apps/bookstack`. The DB-narrowing exception applies only if the 3 criteria hold; ZM web UI will show a DB error page without a DB but apache still listens, so keep the tcp probe real and the comment above. The http probe is left as a comment until the schema shape is confirmed.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

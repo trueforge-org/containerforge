@@ -82,12 +82,13 @@ mkdir -p /config/data/{i,t,logs} /tmp/{nginx,sessions,php}
 cp /defaults/nginx.conf /tmp/nginx.conf
 cp /defaults/php-fpm.conf /tmp/php-fpm.conf
 php-fpm8.5 -y /tmp/php-fpm.conf -D
-exec nginx -c /tmp/nginx.conf -g 'daemon off;'
+exec nginx -e /dev/stderr -c /tmp/nginx.conf -g 'daemon off;'
 ```
 - `defaults/php-fpm.conf`: no `user`/`group` (already UID 568), `listen = /tmp/php-fpm.sock`, `clear_env = no` (needed so `BLOG_*` and `TZ` reach PHP), `php_admin_value[session.save_path] = /tmp/sessions`, `upload_max_filesize = 32M`, `post_max_size = 32M` (upstream `.htaccess` values), `error_log = /dev/stderr`, `pid = /tmp/php-fpm.pid`.
 - `defaults/nginx.conf`: `pid /tmp/nginx.pid;`, all `*_temp_path` and logs in `/tmp` or `/dev/stdout`/`/dev/stderr`, `listen 0.0.0.0:8080;`, `root /app/www;`, `client_max_body_size 32M;`, `fastcgi_pass unix:/tmp/php-fpm.sock` for `.php`, `index index.php`, and the `.htaccess` rules reproduced: `autoindex off`, `location ~ \.(db|ini|sql|log)$ { deny all; }` and `location ~ /\.(?!well-known) { deny all; }`, plus denial of `Dockerfile`, `docker-compose.yml`, `README.md`. Images and thumbnails are served statically from `data/i` and `data/t`.
 - Defaults match `settings.yaml`: the app reads `BLOG_*` directly, so start.sh passes nothing through.
 - Idempotent: only `mkdir -p` and rendering to `/tmp`. SQLite DB is created by the app in `/config/data/sqlite.db` on first request (UNVERIFIED that the app creates the schema itself; upstream "zero configuration" claim says yes).
+- `-e /dev/stderr` stops nginx from trying to open its compiled-in `/var/log/nginx/error.log` on the read-only rootfs before the config is parsed.
 - Optional warning at start if `BLOG_PASS` is still `demo`.
 - php-fpm runs as a daemon and nginx in the foreground via `exec`; if php-fpm dies the container keeps running (see section 10).
 
