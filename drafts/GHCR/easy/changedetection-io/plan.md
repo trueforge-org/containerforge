@@ -33,11 +33,11 @@ Not needed: `defaults/` (the app creates its datastore on first start), `etc/`, 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (brief base table). Upstream uses Python 3.11 on bookworm, so the Python version changes; the upstream `requirements.txt` must install on 3.15 (UNVERIFIED, first build decides). Closest sibling: `apps/changedetection` (same app, `/app/venv` layout, `start.sh` runs `changedetection.py -d /config`). Python-runtime rules apply.
+`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (brief base table). Upstream uses Python 3.11 on bookworm, so the Python version changes; the upstream `requirements.txt` must install on 3.15 (UNVERIFIED, first build decides). Closest sibling: `apps/changedetection` (same app, but it builds on `python-node:3.14.8` and installs under `/app/changedetection`, not this plan's `python:3.15.2` layout; `start.sh` runs `changedetection.py -d /config`). Python-runtime rules apply.
 
 ## 4. Dockerfile
 
-1. `ARG VERSION=0.70.4`. `USER root` for installs only.
+1. `ARG VERSION` (value from bake, no inline default). `USER root` for installs only.
 2. Install apt runtime packages from the upstream list that the base does not already provide: `libxslt1.1`, `poppler-utils`, `file`, `libglib2.0-0`, `libsm6`, `libxext6`, `libxrender-dev`, `locales`. Check against the base first (dockerfile rule: do not re-install what the base has). Run `apt-get clean && rm -rf /var/lib/apt/lists/*` in the same `RUN`.
 3. Locales: generate `en_US.UTF-8` only (the draft's and upstream's full list of 18 locales costs about 21 MB and is not needed for the base). Set `ENV LC_ALL=en_US.UTF-8`. Mention the trade-off in the PR.
 4. Download the tag archive to `/tmp`, verify SHA-256 (value recorded at build), extract, copy `changedetectionio/` to `/app/changedetectionio/` and `changedetection.py` to `/app/changedetection.py`, and `docs/api-spec.yaml` to `/app/docs/`.
@@ -64,7 +64,7 @@ Pins: `ARG VERSION` must equal `docker-bake.hcl` `VERSION`.
 
 - Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/dgtlmoon/changedetection.io"`.
 - `ports`: `5000` tcp, `required: true`.
-- `env`: `PORT` default `5000`; `LISTEN_HOST` default `0.0.0.0`; `BASE_URL` default `""`; `TZ` default `Etc/UTC`; `PLAYWRIGHT_DRIVER_URL` default `""`; `USE_X_SETTINGS_FILE` default `""` (same names as the sibling, which the sibling already reads). Every default must match what the app reads. No `EXTRA_PACKAGES` (not supported here, section 4 step 5 and section 10).
+- `env`: `PORT` default `5000`; `LISTEN_HOST` default `0.0.0.0`; `BASE_URL` default `""`; `TZ` default `Etc/UTC`; `PLAYWRIGHT_DRIVER_URL` default `""`; `USE_X_SETTINGS_FILE` default `""` (`BASE_URL`, `PLAYWRIGHT_DRIVER_URL`, `TZ`, `USE_X_SETTINGS_FILE` are the names `apps/changedetection/settings.yaml` lists; `PORT` and `LISTEN_HOST` are not in the sibling and come from upstream code, UNVERIFIED that `start.sh` defaults them are honoured). Every default must match what the app reads. No `EXTRA_PACKAGES` (not supported here, section 4 step 5 and section 10).
 - `volumes`: `/config`, `required: true`.
 - `dependencies`: none.
 

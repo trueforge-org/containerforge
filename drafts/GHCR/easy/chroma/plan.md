@@ -43,11 +43,11 @@ No `defaults/`, `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (chroma i
 2. `USER root`.
 3. `RUN /app/venv/bin/pip install --no-cache-dir "chromadb==${VERSION}"` at build time (installs into `/app/venv`, which is allowed at build time only; python-runtime rules forbid runtime mutation). No apt packages: the wheels are self-contained.
 4. Verify: `RUN /app/venv/bin/python -c "import chromadb; print(chromadb.__version__)"` and check it equals `${VERSION}`. This is the version-alignment check.
-5. `chown -R apps:apps /app` is already set by the base; re-run only if the install changes ownership.
+5. The base's `chown -R apps:apps /app` ran before this install, so files added by this `pip install` (as root) are root-owned. Root-owned `chmod -R 755 /app/venv` is fine for a read-only runtime (as `apps/bazarr` does with `chown -R root:root /app`); `chmod -R 755 /app/venv` after the install.
 6. `COPY --chmod=0755 start.sh /start.sh`.
 7. `USER apps`, `COPY --chmod=0755 . /`.
 8. `ENV IS_PERSISTENT=1 PERSIST_DIRECTORY=/config/chroma CHROMA_HOST_ADDR=0.0.0.0 CHROMA_HOST_PORT=8000 CHROMA_WORKERS=1 CHROMA_TIMEOUT_KEEP_ALIVE=30`, so the defaults match upstream.
-9. `EXPOSE 8000`, `CMD ["/start.sh"]`. `VOLUME /config` is the base's.
+9. `EXPOSE 8000`, `CMD ["/start.sh"]`. Add `VOLUME /config` explicitly (`apps/python/Dockerfile` has no `VOLUME` line).
 
 ## 5. docker-bake.hcl
 

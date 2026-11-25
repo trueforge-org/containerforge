@@ -40,10 +40,10 @@ No `defaults/`, `etc/`, `scripts/`, `health/` needed: the server config is writt
 
 1. `FROM ghcr.io/trueforge-org/steamcmd:<VERSION>@sha256:<digest>`, then `ARG VERSION` and `ARG VENDOR`.
 2. No apt installs. The base ships `lib32` support through `steamcmd:i386`; do not add packages (base image reuse rule).
-3. `COPY --chmod=0755 start.sh /start.sh` (as `apps/steamcmd` does), then `USER apps`.
-4. `COPY --chmod=0755 . /`, `EXPOSE 7000/udp 7010/udp 27015/udp`, `VOLUME /config` is provided by the base; keep it explicit only if sibling apps do.
+3. `COPY --chmod=0755 start.sh /start.sh` then `USER apps`. UNVERIFIED design flaw to resolve: this overwrites the base image's `/start.sh` (the SteamCMD wrapper that `/usr/local/bin/steamcmd` execs), so the plan's `start.sh` must reimplement the SteamCMD seeding (step 2 of section 7) or use a different file name.
+4. `COPY --chmod=0755 . /`, `EXPOSE 7000/udp 7010/udp 27015/udp`, add `VOLUME /config` explicitly (the `apps/steamcmd` Dockerfile has no `VOLUME` line, so it is not provided by the base).
 5. Final `USER apps`. No build stage, no downloads, no version to pin (the server version comes from Steam at runtime; `VERSION` in bake is the base version).
-6. `ENV HOME=/config` is inherited from the base; keep it.
+6. The `apps/steamcmd` Dockerfile sets no `ENV HOME`; set `ENV HOME=/config` here (start.sh also exports it).
 
 ## 5. docker-bake.hcl
 
@@ -105,9 +105,6 @@ env:
   - name: ADMIN_PWD
     default: ""
     required: false
-  - name: PASSWRD
-    default: ""
-    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -124,7 +121,7 @@ Plan (idempotent, empty `/config` safe, no writes to `/app`):
 
 1. `set -euo pipefail`; `export HOME=/config`; `SERVER_DIR=/config/serverfiles`, `STEAMCMD_DIR=/config/steamcmd` (base wrapper's SteamCMD location `/config/Steam/steamcmd` is used by `apps/steamcmd`; reuse it, do not duplicate).
 2. Seed SteamCMD only when missing, copying from `/usr/local/share/steamcmd` the same way as `apps/steamcmd/start.sh` does.
-3. `mkdir -p "${SERVER_DIR}"`; run SteamCMD: `+force_install_dir ${SERVER_DIR} +login anonymous +app_update ${GAME_ID} [validate] +quit` (anonymous login; `USERNAME` is not exposed, so no password handling here).
+3. `mkdir -p "${SERVER_DIR}"`; run SteamCMD: `+force_install_dir ${SERVER_DIR} +login anonymous +app_update ${GAME_ID} [validate] +quit` (anonymous login only; `USERNAME` and `PASSWRD` are not exposed, so no password handling here).
 4. Post-install: write `steam_appid.txt` with `219640` in `${SERVER_DIR}/Binaries/Linux/` only when missing; copy `steamclient.so` into `${SERVER_DIR}/Binaries/Linux/lib/` only when missing (both as the upstream does, both idempotent).
 5. Config: the upstream seds `ServerName` and `MessageOfTheDay`. Do not overwrite existing user config. Seed `UDKGame/Config/PCServer-UDKGame.ini` only if missing (UNVERIFIED that the game creates it on first run).
 6. `cd ${SERVER_DIR}/Binaries/Linux`; `exec ./UDKGameServer-Linux "${MAP}?adminpassword=${ADMIN_PWD}?steamsockets${GAME_PARAMS}" ${GAME_PARAMS_EXTRA}` (`exec` so signals reach the server). Quote the URL argument so spaces in `ADMIN_PWD` do not break it (see start-script rules on special characters).

@@ -38,12 +38,11 @@ Fits because the Barotrauma server is pulled through SteamCMD at start, and the 
 
 1. `ARG VERSION`, `FROM` the steamcmd base as in section 3. No `ARG TARGETARCH` needed: amd64 only.
 2. `USER root` is not needed: no install step. Keep the file minimal.
-3. `COPY --chmod=0755 start.sh /start.sh` (same as the steamcmd sibling), then `USER apps`.
+3. `COPY --chmod=0755 start.sh /start.sh` (UNVERIFIED design: this overwrites the base image's `/start.sh` SteamCMD wrapper, which `/usr/local/bin/steamcmd` and section 7 rely on; save the install logic under another path, for example `/usr/local/bin/steamcmd`, or name ours `/barotrauma-start.sh`), then `USER apps`.
 4. `ENV HOME=/config`, `XDG_DATA_HOME=/config`, `TMPDIR=/tmp`.
 5. Final:
 
 ```dockerfile
-ARG VERSION
 FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:<digest UNVERIFIED>
 ARG VERSION
 ENV HOME=/config XDG_DATA_HOME=/config TMPDIR=/tmp
@@ -94,8 +93,8 @@ ports:
   []
 env:
   - name: STEAM_APP_IDS
-    default: "UNVERIFIED"
-    required: true
+    default: ""
+    required: false
   - name: STEAM_INSTALL_DIR
     default: "/config/barotrauma"
     required: false

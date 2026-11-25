@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Draft pins container `ghcr.io/bitmagnet-io/bitmagnet:v0.10.1`. The latest GitHub release is `v0.10.0` (published 2025-03-02). `v0.10.1` was not found as a release. Plan uses `0.10.0` (verified). DECISION NEEDED: confirm `v0.10.1` is not a release before building 0.10.0. Source: https://api.github.com/repos/bitmagnet-io/bitmagnet/releases/latest (read with `gh api`). |
+| Version to build | Draft pins container `ghcr.io/bitmagnet-io/bitmagnet:v0.10.1`. The latest GitHub release is `v0.10.0` (published 2025-03-02). `v0.10.1` is not a stable release; only the prerelease `v0.10.1-beta.1` (2026-05-21) exists (re-checked via `gh api`). Plan uses `0.10.0` (verified). DECISION NEEDED: confirm `v0.10.1` is not a release before building 0.10.0. Source: https://api.github.com/repos/bitmagnet-io/bitmagnet/releases/latest (read with `gh api`). |
 | Renovate | `datasource=github-releases depName=bitmagnet-io/bitmagnet versioning=semver`. |
 | License | MIT (GitHub SPDX `MIT`). Source: https://api.github.com/repos/bitmagnet-io/bitmagnet |
 | Source URL | https://github.com/bitmagnet-io/bitmagnet |
@@ -88,7 +88,7 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - postgresql ✅
+  - name: postgresql
 ```
 
 - Port 3333 is UNVERIFIED (draft-inferred). Do not merge with it unless the upstream or docs confirm it. The UDP 3334 DHT port is left out: forgetool probes are tcp/http only, and the draft's 3334/udp is UNVERIFIED.
@@ -147,7 +147,7 @@ Upstream runs as root; this image does not.
 
 ## 10. Risks, caveats and open questions
 
-- Version mismatch (blocker until decided): the draft's `v0.10.1` tag is not a GitHub release. Build `0.10.0` or find the correct release. The chart tag must match what this image ships.
+- Version mismatch (blocker until decided): the draft's `v0.10.1` tag is not a stable GitHub release (only the prerelease `v0.10.1-beta.1` exists). Build `0.10.0` or find the correct release. The chart tag must match what this image ships.
 - Ports 3333 and 3334 are unverified; `EXPOSE` and `settings.yaml` ports wait for confirmation (docs.bitmagnet.io was not fetched).
 - DB variables, migrations on boot, and whether the app exits without a DB are UNVERIFIED. These decide the database narrowing in section 8.
 - DHT crawler is CPU, memory and bandwidth heavy and needs inbound UDP to be useful (draft, inferred). The UDP port cannot be probed by forgetool tcp/http, so it is documented only in the PR.

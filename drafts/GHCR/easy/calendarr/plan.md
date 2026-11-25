@@ -40,7 +40,7 @@ Not needed: `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 ## 4. Dockerfile
 
-1. Build step as `USER root` (base default is `apps`; switch only for installs). `ARG VERSION=1.5.2`. Download `https://github.com/jordanlambrecht/calendarr/archive/refs/tags/v${VERSION}.tar.gz` to `/tmp`, verify the SHA-256 recorded in the Dockerfile, extract to `/tmp/calendarr-src`.
+1. Build step as `USER root` (base default is `apps`; switch only for installs). `ARG VERSION` (value from bake, no inline default). Download `https://github.com/jordanlambrecht/calendarr/archive/refs/tags/v${VERSION}.tar.gz` to `/tmp`, verify the SHA-256 recorded in the Dockerfile, extract to `/tmp/calendarr-src`.
 2. Install pinned deps into the bundled venv at build time, not at runtime: `/app/venv/bin/pip install --no-cache-dir -r /tmp/calendarr-src/requirements.txt`. Set `PIP_CACHE_DIR=/tmp/pip-cache` so no cache lands in `/config` or `/app`. Remove `/tmp/calendarr-src` and `/tmp/pip-cache` in the same `RUN`.
 3. Copy `src/` to `/app/src/` (`cp -r /tmp/calendarr-src/src /app/src`). Copy the default footers to `/app/default_footers/` only if the build needs them; otherwise keep them in the app folder as `defaults/custom_footers` and copy into the image with `COPY --chmod=0755 . /` (step 7).
 4. Footer path: create the symlink at build time, `ln -s /config/custom_footers /app/custom_footers`. This works with read-only `/app` at runtime because the symlink is created in the image layer and only the target is written, in `/config`. Start script seeds the target (see section 7).

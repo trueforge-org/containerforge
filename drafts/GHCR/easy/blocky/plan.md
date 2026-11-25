@@ -36,7 +36,7 @@ Not needed: `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not used as 
 
 ## 4. Dockerfile
 
-1. `ARG VERSION=0.37.0`, `ARG TARGETARCH`. Map `amd64` to `x86_64` and `arm64` to `arm64` with a `case`. Fail the build on any other arch.
+1. `ARG VERSION` (no inline default; value comes from bake), `ARG TARGETARCH`. Map `amd64` to `x86_64` and `arm64` to `arm64` with a `case`. Fail the build on any other arch.
 2. `USER root` only for the install step. Download the tarball for the arch to `/tmp/blocky`, verify it with `echo "<sha256>  <file>" | sha256sum -c -` using the checksums in section 1, extract, then `install -m0755 blocky /app/blocky`.
 3. License: install the upstream `LICENSE` to `/usr/share/licenses/blocky/LICENSE`. UNVERIFIED whether the release tarball ships a LICENSE file; if not, fetch it from the source tag.
 4. Remove `/tmp/blocky*` in the same `RUN` so the layer stays small.
@@ -64,7 +64,7 @@ Pins: `VERSION` must equal `docker-bake.hcl` `VERSION`. The checksums must be up
 - `ports`:
   - `4000` tcp, `required: false` (HTTP API, metrics, DoH).
   - `5353` tcp, `required: false` (DNS over TCP, unprivileged default, see section 9).
-  - `5353` udp, `required: false` (DNS over UDP). UNVERIFIED whether the forgetool schema accepts a udp protocol; check a sibling DNS app first. If not accepted, document only the tcp entry and note it in section 10.
+  - `5353` udp, `required: false` (DNS over UDP). `protocol: udp` is used by sibling settings (for example `apps/emby/settings.yaml`, `apps/gluetun/settings.yaml`), so it is accepted; the container-test has no udp probe, so state that reason in the PR.
 - `env`: `BLOCKY_CONFIG_FILE`, default `/config/config.yml`, `required: false`. Only var actually read.
 - `volumes`: `/config`, `required: true`.
 - `dependencies`: none (valkey and postgresql in the chart are optional, not needed for the base image).

@@ -40,9 +40,9 @@ No `defaults/`, `etc/`, `scripts/`, `health/`, no `root/`, no `DOWNSTREAM_CHANGE
 
 1. `FROM ghcr.io/trueforge-org/steamcmd:<VERSION>@sha256:<digest>`; `ARG VERSION`, `ARG VENDOR`.
 2. No apt installs (base already ships SteamCMD and its i386 support).
-3. `COPY --chmod=0755 start.sh /start.sh`.
+3. `COPY --chmod=0755 start.sh /start.sh`. UNVERIFIED design flaw to resolve: this overwrites the base image's `/start.sh` (the SteamCMD wrapper that `/usr/local/bin/steamcmd` execs), so the plan's `start.sh` must reimplement the SteamCMD seeding (step 2 of section 7) or use a different file name.
 4. `USER apps`, `COPY --chmod=0755 . /`.
-5. `EXPOSE 7777/udp 27015/udp`.
+5. `EXPOSE 7777/udp 27015/udp`, `VOLUME /config` (the `apps/steamcmd` Dockerfile has no `VOLUME`), `ENV HOME=/config` (the base sets none).
 6. No build stage and no downloads. `VERSION` in bake tracks the base.
 
 ## 5. docker-bake.hcl
@@ -93,9 +93,6 @@ env:
   - name: VALIDATE
     default: "false"
     required: false
-  - name: PASSWRD
-    default: ""
-    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -104,7 +101,7 @@ volumes:
     required: true
 ```
 
-Dependencies: none. `GAME_ID` is written without the chart's trailing space. The chart's `PASSWRD` is a secret, so the default is empty. Do not list env vars the app does not read.
+Dependencies: none. `GAME_ID` is written without the chart's trailing space. The chart's `PASSWRD` secret is not listed because `start.sh` does not read it (section 7 step 6). Do not list env vars the app does not read.
 
 ## 7. start.sh
 
