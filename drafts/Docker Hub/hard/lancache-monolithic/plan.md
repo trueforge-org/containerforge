@@ -60,12 +60,12 @@ tcp:
 http:
 - port: '80'
   path: /lancache-heartbeat
-  statusCode: 204   # UNVERIFIED: read 90_lancache_heartbeat.conf for the real status
+  statusCode: 204   # UNVERIFIED: read 90_lancache_heartbeat.conf for the real status; also UNVERIFIED that the forgetool schema has a `statusCode` key (no sibling uses it)
 filePaths:
 - /app/cachedomains
 - /tmp/nginx/nginx.conf   # only if generated at start; otherwise move the check to a runner
 ```
-If the test harness reaches the container only after start, a `runners` entry `nginx -t -c /tmp/nginx/nginx.conf` is an alternative. Timeout 120 estimated from nginx siblings.
+If the test harness reaches the container only after start, a `runners` entry (UNVERIFIED key; siblings use `healthCommands`) `nginx -t -c /tmp/nginx/nginx.conf` is an alternative. Timeout 120 estimated from nginx siblings.
 
 ## 9. Rootless and read-only-rootfs adaptations
 - Ports 80 and 443 are below 1024: either setcap on nginx (needs `NET_BIND_SERVICE`) or listen on 8080/8443 inside and map outside. Upstream metrics already use 8080, so internal HTTP/HTTPS defaults must be chosen (open question).

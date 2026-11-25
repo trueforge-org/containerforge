@@ -66,7 +66,7 @@ healthCommands:
   expectedContent: PONG
   matchContent: true
 ```
-Timeout 180 is the schema default and an estimate (Perl startup plus Valkey).
+UNVERIFIED: `expectedContent`/`matchContent` keys (no sibling uses them; check the forgetool schema). Timeout 180 is an estimate (UNVERIFIED as a schema default) (Perl startup plus Valkey).
 
 ## 9. Rootless and read-only-rootfs adaptations
 - Upstream runs s6 as root then drops to `koyomi` (9001). Ours is `USER apps`; remove s6, `LRR_UID/GID`, permission autofix.

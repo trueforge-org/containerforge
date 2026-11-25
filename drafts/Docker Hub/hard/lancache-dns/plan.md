@@ -66,7 +66,7 @@ filePaths:
 - /usr/local/bin/dnstool
 - /app/cache-domains
 ```
-The UDP 53 path is covered by the dig health command (the schema has no udp probe). Timeout 120 is an estimate; compare with sibling apps.
+UNVERIFIED: no sibling container-test.yaml uses `expectedContent`/`matchContent`; check the forgetool schema for the key names (siblings only use `command`). The UDP 53 path is covered by the dig health command (the schema has no udp probe). Timeout 120 is an estimate; compare with sibling apps.
 
 ## 9. Rootless and read-only-rootfs adaptations
 - Port 53 as non-root: setcap on `named`; requires `NET_BIND_SERVICE` in the container bounding set (Docker default has it; Kubernetes `drop: ALL` needs it added back, or set `net.ipv4.ip_unprivileged_port_start=0`).

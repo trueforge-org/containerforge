@@ -55,7 +55,7 @@ Plus `docker-metadata-action`, `image` (args VERSION and PACKAGE_VERSION, OCI la
 - ports: 8080 tcp (web UI, JSON-RPC), 9090 tcp (websockets, upstream image), 9777 udp (event server); all `required: false`.
 - env: `TZ` default `Etc/UTC`. Add `KODI_WEB_USERNAME` / `KODI_WEB_PASSWORD` only if start.sh applies them to the seeded config (ContainerForge-defined, not read by Kodi itself). Upstream PUID/PGID are not applicable (rootless).
 - volumes: `/config` required (Kodi data in `/config/.kodi`).
-- dependencies: none (optional MariaDB for a shared library, via `advancedsettings.xml`; `mariadb` ✅ exists as apps/mariadb: UNVERIFIED, check `ls apps`).
+- dependencies: none (optional MariaDB for a shared library, via `advancedsettings.xml`; `apps/mariadb` exists, verified).
 
 ## 7. start.sh
 - `set -euo pipefail`; `mkdir -p /config/.kodi/userdata /tmp/runtime /tmp/cache`; `chmod 700 /tmp/runtime`.
@@ -74,7 +74,7 @@ tcp:
 http:
 - port: '8080'
   path: /
-  statusCode: 401   # web UI needs auth by default; adjust after run
+  statusCode: 401   # UNVERIFIED: no sibling uses `statusCode`; check the forgetool schema for the key name. Web UI auth default adjusts after run
 filePaths:
 - /usr/bin/kodi
 - /defaults/userdata/guisettings.xml

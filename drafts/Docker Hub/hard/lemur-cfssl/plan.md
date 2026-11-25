@@ -63,7 +63,7 @@ runners:
 - entrypoint: cfssl version
 - entrypoint: /app/venv/bin/lemur --help
 ```
-Port 8000 must also be probed (settings rule); keep `tcp: 8000` once the app stays alive while "waiting for database" (exception requires all three criteria: hard DB dependency yes, will not start without DB yes, sidecar DB not feasible: UNVERIFIED, try a DB first). 180 is the schema default; adjust from sibling.
+Port 8000 must also be probed (settings rule); keep `tcp: 8000` once the app stays alive while "waiting for database" (exception requires all three criteria: hard DB dependency yes, will not start without DB yes, sidecar DB not feasible: UNVERIFIED, try a DB first). 180 is an estimate (UNVERIFIED as a schema default); adjust from sibling.
 
 ## 9. Rootless and read-only-rootfs adaptations
 - Upstream (halianelf) runs as root with `/data` and `/config`. Ours: `USER apps`; CA and Lemur config live in `/config` (single persistence; `/data` is dropped).
