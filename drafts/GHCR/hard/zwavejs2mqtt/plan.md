@@ -19,7 +19,7 @@ Upstream Dockerfile summary (for reference only; we use the prebuilt zips, not i
 - `ENV NODE_ENV=production`, `ENV TAG_NAME=${image}`.
 - `EXPOSE 8091`, `CMD ["node", "server/bin/www"]`. No VOLUME, no USER (root).
 
-Real env vars, store path and port 3000: only `NODE_ENV` and `TAG_NAME` are confirmed on the Dockerfile. The draft's `/usr/src/app/store` path and the port 3000 websocket server are UNVERIFIED: not on a fetched page.
+Env vars confirmed from upstream `docs/guide/env-vars.md`: `PORT` (8091), `HOST`, `STORE_DIR`, `BACKUPS_DIR`, `ZWAVEJS_EXTERNAL_CONFIG` (default `<store_dir>/.config-db`), `ZWAVE_PORT`. The Dockerfile itself only sets `NODE_ENV` and `TAG_NAME`; upstream image `WORKDIR` is `/usr/src/app`. The draft's `/usr/src/app/store` is the chart path and the port 3000 websocket server is UNVERIFIED.
 
 ## 2. Target layout
 
@@ -46,7 +46,7 @@ Files in `apps/zwavejs2mqtt/`:
 3. Download with curl to `/tmp`, verify with `echo "<sha256>  <file>" | sha256sum -c -`. Pick the sha256 by arch, so the digests from section 1 are hard-coded in the Dockerfile.
 4. Extract with `unzip` to `/app` (install `unzip` with apt under root only if the base lacks it, and check that first).
 5. Ship license: copy the LICENSE from the zip if present, else from the source repo, to `/usr/share/licenses/zwavejs2mqtt/`. UNVERIFIED: zip contents not inspected.
-6. `ENV HOME=/config` and `ENV TMPDIR=/tmp` (ENV moves caches off `/config`).
+6. `ENV HOME=/config`, `ENV TMPDIR=/tmp`, `ENV STORE_DIR=/config/store`, `ENV NODE_ENV=production`.
 7. `rm` the downloaded zip from `/tmp`.
 8. `USER apps`, then `COPY --chmod=0755 . /`.
 9. `EXPOSE 8091` and `EXPOSE 3000` (3000 only if confirmed, see section 10), `VOLUME /config`.
@@ -68,7 +68,7 @@ Do not run `chown -R` on `/app` if the zip already gives correct ownership. Chec
 - Schema header and `schema_version: 1`.
 - `upstream_env_url: "https://github.com/zwave-js/zwave-js-ui"`.
 - `ports`: 8091/tcp, `required: false`.
-- `env`: only variables the app reads. `TZ` default `Etc/UTC`. Other variables are UNVERIFIED until the app's docs are fetched, so do not add them.
+- `env`: only variables the app reads. `TZ` default `Etc/UTC`, plus the documented `PORT` (default `8091`), `STORE_DIR` (default `/config/store`) and optionally `HOST` (empty). Do not add others without checking upstream `docs/guide/env-vars.md`.
 - `volumes`: `/config`, `required: true`.
 - `dependencies`: none.
 - Note: the draft's device passthrough is not a settings field. Document it in the plan, not in settings.
@@ -76,9 +76,9 @@ Do not run `chown -R` on `/app` if the zip already gives correct ownership. Chec
 ## 7. start.sh
 
 - `mkdir -p /config/store` only when missing, and do not touch existing files.
-- Point the app's store to `/config/store` through the env var or CLI flag. UNVERIFIED: the exact setting name. Check the upstream docs before writing it.
+- Point the app's store to `/config/store` with `STORE_DIR=/config/store` (documented in upstream `docs/guide/env-vars.md`: absolute path, default `<zui dir>/store`; `BACKUPS_DIR` defaults to `<store_dir>/backups`).
 - `cd /app` (read-only at runtime) and `exec node /app/server/bin/www` or the zip's real entry point. UNVERIFIED: the zip layout. Confirm after the first extraction.
-- Bind to `0.0.0.0` if the app exposes a bind option. UNVERIFIED.
+- `HOST` empty (default) binds all interfaces; `PORT` default 8091 (upstream env-vars doc). Do not set `HOST` to localhost.
 
 ## 8. container-test.yaml
 
@@ -101,7 +101,7 @@ Do not run `chown -R` on `/app` if the zip already gives correct ownership. Chec
 - Blocker: USB Z-Wave controller passthrough and serial permissions (hardware, not image-only).
 - Store data: losing `/config/store` means re-pairing all Z-Wave devices. Document the backup requirement.
 - Upstream Dockerfile runs as root and uses alpine; our Ubuntu base differs. Test that the zip's binaries run on glibc (they are Node JS, so should be fine; verify native `@serialport` bindings are present in the zip).
-- Port 3000 (websocket) and store path `/usr/src/app/store` come from the draft only. UNVERIFIED.
+- Port 3000 (websocket) comes from the draft only (UNVERIFIED). The draft's `/usr/src/app/store` is the chart path; this image uses `STORE_DIR=/config/store` instead, so existing users must move their data.
 - Node version in `python-node` may not match Node 24 expectations of the zip. Verify at first run.
 - Renovate config not checked.
 

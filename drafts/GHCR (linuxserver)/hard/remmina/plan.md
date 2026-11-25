@@ -39,7 +39,7 @@ Ubuntu 26.04 (resolute) carries the Remmina package, so no runtime image is need
 
 1. `ARG VERSION=1.4.43`, with the bake default matching it (section 5).
 2. `USER root`. Install in one layer, no recommends:
-   `apt-get install -y --no-install-recommends remmina=${VERSION}+dfsg-0ubuntu0.26.04.2 remmina-plugin-rdp remmina-plugin-vnc librsvg2-common`. Pin the exact version and check it against `VERSION` (dockerfile rule). Add the display stack packages from section 10 once chosen, UNVERIFIED for names and availability on resolute.
+   `apt-get update && apt-get install -y --no-install-recommends remmina=${VERSION}+dfsg-0ubuntu0.26.04.2 remmina-plugin-rdp remmina-plugin-vnc librsvg2-common`. Pin the exact version and check it against `VERSION` (dockerfile rule). Add the display stack packages from section 10 once chosen, UNVERIFIED for names and availability on resolute.
 3. `apt-get clean && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*`.
 4. Environment that moves state off read-only paths:
    `ENV XDG_CONFIG_HOME=/config/xdg XDG_CACHE_HOME=/tmp/cache XDG_RUNTIME_DIR=/tmp/runtime HOME=/config`.

@@ -54,14 +54,14 @@ Copy the sibling `apps/pyload-ng/Dockerfile` shape:
 
 - Schema header `# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json`, `schema_version: 1`.
 - `upstream_env_url: https://github.com/pyload/pyload`.
-- `ports`: 8000 (http, required), 7227 (tcp, required only if RPC is enabled; check the sibling's value).
+- `ports`: 8000 (tcp, as in the sibling). 7227 (RPC) is UNVERIFIED: the sibling declares only 8000 and its `defaults/pyload.cfg` has a remote port 7070 on localhost, not 7227; add 7227 only if confirmed.
 - `env`: only variables the app and start.sh really read. Check the sibling `settings.yaml` and `start.sh` first; do not invent names.
 - `volumes`: `/config` (state), `/downloads` (if kept).
 - `dependencies`: none.
 
 ## 7. start.sh
 
-- Idempotent. Seed `pyload.cfg` into `/config` only when missing (sibling copies `defaults/pyload.cfg`).
+- Idempotent. Seed `pyload.cfg` into `/config/settings/` only when missing (sibling copies `/defaults/pyload.cfg` there; sibling `start.sh` is `#!/usr/bin/env sh`, runs `python3 -m pyload --userdir /config --storagedir /downloads --tempdir /tmp/pyload`).
 - Never write to `/app`. Caches to `/tmp`.
 - Bind the web UI to `0.0.0.0`; check the bind address in the config, do not assume.
 - `exec` the final pyload process so signals reach it.
@@ -70,8 +70,8 @@ Copy the sibling `apps/pyload-ng/Dockerfile` shape:
 ## 8. container-test.yaml
 
 - forgetool header copied from sibling.
-- `tcp` probe on 8000 and, if declared, 7227. `timeoutSeconds` from `apps/pyload-ng/container-test.yaml`.
-- `filePaths` for `/config/pyload.cfg` (seeded file).
+- `tcp` probe on 8000 and, if declared, 7227. 
+- The sibling has only an http probe on 8000 and no `timeoutSeconds`/`filePaths`. The seeded config is at `/config/settings/pyload.cfg` (created at runtime by `start.sh`, not in the image), so do not list it in `filePaths`; use `/defaults/pyload.cfg` if a file check is wanted.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

@@ -37,7 +37,7 @@ Why: the app is one apt package on Ubuntu 26.04, which matches the base. Closest
 2. Install the pinned package, with no recommends:
    ```dockerfile
    RUN apt-get update && \
-     apt-get install -y --no-install-recommends filezilla=3.69.6-1 && \
+     apt-get install -y --no-install-recommends filezilla=${VERSION}-1 && \
      apt-get clean && rm -rf /var/lib/apt/lists/*
    ```
    Pin the version to the bake `VERSION` (`3.69.6`) and the full package version (`3.69.6-1`). If the bake and the package version are kept as separate values, the Dockerfile must still fail when they disagree; add a check `dpkg -s filezilla | grep -q "^Version: ${VERSION}-"`.
@@ -146,7 +146,7 @@ Security reconciliation (draft expectations to verify, not to copy):
 
 - **Blocker 1 (decision needed): display stack.** FileZilla is a GUI client. The upstream image provides it through a Selkies browser desktop, which ContainerForge does not have. Options: (a) Xvfb plus a remote-desktop server, following `apps/kasmvnc` and `apps/xvfb` (copy the pattern only; kasmvnc's `root/` tree is not used here). (b) Defer until a desktop base exists. Nothing should be built until this is chosen, because ports, probes and readiness depend on it.
 - **Credentials at rest:** saved site passwords are stored by FileZilla under `/config`. Document that the volume holds secrets. Do not log them or add them to `settings.yaml` defaults.
-- **Blocker 2: base arm64.** The Ubuntu package exists for arm64, but the linuxserver base dropped aarch64. Our base is Ubuntu 26.04 (`ghcr.io/trueforge-org/ubuntu`); arm64 is UNVERIFIED until built. Build arm64 only if the local `image-local` build fails there; otherwise say so in the PR.
+- **Blocker 2: base arm64.** The Ubuntu package exists for arm64, but the linuxserver base dropped aarch64. Our base is Ubuntu 26.04 (`ghcr.io/trueforge-org/ubuntu`); arm64 is UNVERIFIED until built. Try an arm64 build before claiming support; if it is not built, say so in the PR.
 - **License unknown:** do not set `LICENSE` until the copyright file is read. Upstream is expected to be GPL-2.0-or-later (UNVERIFIED).
 - **Version source:** the draft's `3.69.6` matches the Ubuntu archive package; the upstream release page was not fetched, so the "latest upstream" claim is UNVERIFIED.
 - **Renovate:** no datasource confirmed; the apt pin will need a manual or custom renovate rule.

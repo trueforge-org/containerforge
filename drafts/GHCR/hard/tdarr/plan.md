@@ -63,13 +63,13 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 - `upstream_env_url: "https://github.com/HaveAGitGat/Tdarr"`.
 - `ports`: 8265 (web UI, required), 8266 (server, required), 8267 (node, required: false unless the single image runs the internal node; decide in section 10).
 - `env`: `TZ` (default `Etc/UTC`), `UMASK` (default `002`), `webUIPort` (8265), `serverPort` (8266), `internalNode` (default `true`), `nodeName` (default `InternalNode`), `inContainer` (default `true`), `ffmpegVersion` (default `7`, only if the app reads it; UNVERIFIED). Do not list `PUID`/`PGID`, since they are not honoured in this image.
-- `volumes`: `/config` (`required: true`), and `/media` and `/temp` as needed (`/media` is a media mount, not a ContainerForge volume, so it is listed only if the schema allows it).
+- `volumes`: `/config` (`required: true`), and `/media` and `/tmp/transcode` as needed (`/media` is a media mount, not a ContainerForge volume, so it is listed only if the schema allows it).
 - `dependencies`: none.
 
 ## 7. start.sh
 
 1. Seed `/config` only when missing: create `/config/configs`, `/config/logs`, `/config/server` if absent, and point the app at them with the env or config knob found in the source (UNVERIFIED).
-2. Create `/tmp/home` and `/temp` as writable scratch (transcode cache sits under `/temp`; the chart mounts it, so keep `/temp` as the cache path).
+2. Create `/tmp/home` and `/tmp/transcode` as writable scratch (the rootfs is read-only and `apps` cannot create `/temp`; the transcode cache path is set to `/tmp/transcode` in the app config, mechanism UNVERIFIED; a user may mount a larger volume at `/tmp/transcode`).
 3. Start the server in the foreground: `exec /app/Tdarr_Server/Tdarr_Server` (binary name UNVERIFIED), and start the internal node only if `internalNode=true`, using `exec` for the last process.
 4. Read config only from the env vars in settings.yaml, with defaults matching the upstream compose example.
 
@@ -87,7 +87,7 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 
 - Upstream runs as root with PUID/PGID mapping (LinuxServer s6). Here the container runs as `apps`, so all writes go to `/config` or `/tmp`. Verify that ports 8265, 8266, 8267 are above 1024 (they are).
 - `/app` stays read-only at runtime. The upstream `/app/configs`, `/app/logs`, `/app/server` become `/config/configs`, `/config/logs`, `/config/server` through the knobs found in section 7.
-- `/temp` (transcode cache) and `HOME` go to `/tmp`, unless the transcode cache must persist, in which case it needs a `/config` path and the PR must say why.
+- `/temp` (transcode cache, remapped to `/tmp/transcode`) and `HOME` go to `/tmp`, unless the transcode cache must persist, in which case it needs a `/config` path and the PR must say why.
 - No privileged, no GPU device mapping in the base image. The draft's security expectations (runAsUser 0, readOnlyRootFilesystem false, extra persistence) describe the TrueCharts chart, not this image.
 
 ## 10. Risks, caveats and open questions

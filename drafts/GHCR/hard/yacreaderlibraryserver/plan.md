@@ -6,9 +6,9 @@
 | Item | Value | Source |
 | --- | --- | --- |
 | Upstream source tag | 10.4.0 (exists: https://github.com/YACReader/yacreader/releases/tag/10.4.0) | wrapper Dockerfile |
-| Release date | UNVERIFIED | — |
+| Release date | 2026-10-09 (GitHub API) | gh api |
 | renovate | `datasource=github-releases depName=YACReader/yacreader versioning=loose` (tag form is plain `10.4.0`, so `semver` may also work; confirm) | derived |
-| License | UNVERIFIED: LICENSE/COPYING paths tried at tag 10.4.0 returned 404. Must be checked before writing `docker-bake.hcl`. | — |
+| License | GPL-3.0 (GitHub SPDX for the repo; exact file name at the tag still to confirm) | gh api |
 | Source | https://github.com/YACReader/yacreader | draft |
 | Binary | None published for Linux (draft; upstream publishes source tarball plus macOS/Windows). | draft |
 | Wrapper Dockerfile | https://raw.githubusercontent.com/xthursdayx/yacreaderlibrary-server-docker/f1d5f1b9e32bc19d6ac06873e071ff67f332388a/Dockerfile. Base `ghcr.io/linuxserver/baseimage-ubuntu:resolute`. Build stage installs build-essential, cmake, ninja-build, qt6-base-dev, qt6-tools-dev, qt6-5compat-dev, qt6-l10n-tools, libpoppler-qt6-dev, libarchive-dev, libgl-dev, 7zip, git, curl, ca-certificates. Clones `--depth 1 --branch ${YACR_VERSION}`. Default `7zip` backend: fetches `7z2301-src.7z` from github.com/YACReader/yacreader-7z-deps, SHA-256 verified (`fc459c2314a032231c157fd3257906c070ceed11efd6ffa621c2dfebbbc31281`). CMake flags `-DBUILD_SERVER_STANDALONE=ON -DBUILD_TESTS=OFF -DPDF_BACKEND=poppler -DCMAKE_INSTALL_PREFIX=/app`. Runtime package list derived by `ldd` + `dpkg -S`. Runtime extras: kimageformat6-plugins, libqt6sql6-sqlite, qt6-image-formats-plugins, netcat-openbsd. ENV `HOME=/config`, `LC_ALL=en_US.UTF-8`, `PATH=/app/bin`. `EXPOSE 8080`, `VOLUME ["/config","/comics"]`. Healthcheck `GET /v2/version`. | wrapper Dockerfile |
@@ -50,7 +50,7 @@
 
 - `APP = "yacreaderlibraryserver"`.
 - `VERSION` with renovate annotation (`datasource=github-releases depName=YACReader/yacreader versioning=loose`), default `"10.4.0"`.
-- `LICENSE`: UNVERIFIED (must be set from the upstream LICENSE before merging).
+- `LICENSE = "GPL-3.0"` (GitHub SPDX; confirm against the LICENSE file at the tag).
 - `SOURCE = "https://github.com/YACReader/yacreader"`.
 - Standard targets and default group. Validate with `docker buildx bake --print`.
 
@@ -93,7 +93,6 @@
 - Backend: `libarchive` (chosen here) versus `7zip` (wrapper default, includes RAR5 support). Choosing `libarchive` may drop RAR5 support. Confirm the desired format support before finalising.
 - Port: draft says 62596; upstream says 8080. Use 8080.
 - Wrapper Dockerfile is third-party (`xthursdayx`); its maintenance is a risk. The plan does not depend on its base image; only its build steps and runtime package derivation are reused.
-- License UNVERIFIED (blocks `docker-bake.hcl`).
 - Locale and Qt plugin names UNVERIFIED for the trueforge ubuntu base.
 - No blocker beyond the build size and the license check.
 

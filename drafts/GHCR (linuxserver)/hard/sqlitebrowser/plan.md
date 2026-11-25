@@ -43,10 +43,10 @@ Two install paths, selected by `TARGETARCH`:
 1. `ARG VERSION=3.13.1`, `ARG TARGETARCH`, `ARG APPIMAGE_SHA256=<amd64 sha256, computed and recorded>`.
 2. `USER root`.
 3. amd64: download the AppImage to `/tmp/sqlitebrowser.AppImage`, verify the SHA-256, then extract it so no FUSE is needed at runtime: `./sqlitebrowser.AppImage --appimage-extract` (AppImages support this, UNVERIFIED for 3.13.1 on this base). Move `squashfs-root` to `/app/sqlitebrowser/` and link the binary to `/usr/local/bin/sqlitebrowser`.
-4. arm64: `apt-get install -y --no-install-recommends sqlitebrowser=3.13.1-1` and check the version matches `VERSION` (dockerfile rule). Pin the exact package version. If the arm64 version differs, stop and record it.
+4. arm64: `apt-get update && apt-get install -y --no-install-recommends sqlitebrowser=${VERSION}-1`, then `ln -s /usr/bin/sqlitebrowser /usr/local/bin/sqlitebrowser` so the `container-test.yaml` path holds on both arches (UNVERIFIED binary name `sqlitebrowser` in the apt package; confirm with `dpkg -L`), and check the version matches `VERSION` (dockerfile rule). Pin the exact package version. If the arm64 version differs, stop and record it.
 5. Shared runtime packages needed by Qt (UNVERIFIED which ones are missing on resolute). Install only what the first run reports missing, and record each one.
 6. `apt-get clean && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*`.
-7. License file: `/usr/share/licenses/sqlitebrowser/LICENSE` (MPL-2.0 and GPL-3.0 texts from the source repo, `LICENSE-MPL-2.0`, `LICENSE-GPL-3.0`).
+7. License file: `/usr/share/licenses/sqlitebrowser/LICENSE` (MPL-2.0 and GPL-3.0 texts from the source repo; the file names `LICENSE-MPL-2.0` and `LICENSE-GPL-3.0` are UNVERIFIED).
 8. Environment that moves state off read-only paths:
    `ENV XDG_CONFIG_HOME=/config/xdg XDG_CACHE_HOME=/tmp/cache XDG_RUNTIME_DIR=/tmp/runtime HOME=/config`.
 9. Tail:

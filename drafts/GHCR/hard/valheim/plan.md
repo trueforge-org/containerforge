@@ -31,14 +31,14 @@ No `defaults/` unless a config seed is needed. No `root/`. No `DOWNSTREAM_CHANGE
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`. No sibling Dockerfile in this repo uses the steamcmd image as a `FROM` yet, so the exact tag and digest must be taken from the `apps/steamcmd` build output after it is published; UNVERIFIED here. Fits because the base already provides SteamCMD and the `apps` user. Do not reinstall SteamCMD. Ubuntu is the underlying base of steamcmd, so no direct ubuntu FROM is needed.
+`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`. No sibling Dockerfile in this repo (checked with grep) uses the steamcmd image as a `FROM` yet, so the exact tag and digest must be taken from the `apps/steamcmd` build output after it is published; UNVERIFIED here. Fits because the base already provides SteamCMD and the `apps` user. Do not reinstall SteamCMD. Note: the base's `/usr/local/bin/steamcmd` wrapper does `exec /start.sh "$@"`, and this image replaces `/start.sh`, so call `/usr/games/steamcmd` (or `/usr/local/share/steamcmd/steamcmd.sh`) directly from `start.sh`, never `steamcmd`, or it recurses. Base steamcmd is 32-bit (`steamcmd:i386`) on Ubuntu 26.4. Ubuntu is the underlying base of steamcmd, so no direct ubuntu FROM is needed.
 
 ## 4. Dockerfile
 
 1. Single final stage (no build stage needed: the game server is downloaded at runtime, and the tooling is shell).
 2. `ARG VERSION` (tool version `1.4.1`, matching `docker-bake.hcl`). `USER root` only for `apt-get install -y --no-install-recommends` of the runtime libs the server needs: `libsdl2-2.0-0` (inferred from draft) and any 32-bit libs SteamCMD requires if needed (UNVERIFIED; upstream installs `libsdl2`, 32-bit libc, libstdc++, SDL2, libcurl from buster for i386). Confirm by running the server once.
 3. Create the data layout owned by `apps`: `install -d -o apps -g apps /config /tmp/valheim-cache` (no `/opt/valheim` writes at runtime, see section 9).
-4. Copy the start script and license: `COPY --chmod=0755 start.sh /start.sh`, license of the wrapper to `/usr/share/licenses/valheim/LICENSE` from the tooling repo.
+4. Copy the start script and license: `COPY --chmod=0755 start.sh /start.sh`, license of the wrapper to `/usr/share/licenses/valheim/LICENSE` from the tooling repo (UNVERIFIED: how it is fetched; also the wrapper tool `1.4.1` is not itself shipped, so the VERSION tag does not describe the game build).
 5. Environment: `ENV HOME=/config XDG_CACHE_HOME=/tmp/cache STEAMCMD_ARGS=validate`. Note the `STEAMCMD_ARGS` default must match the README.
 6. Tail:
 
@@ -46,11 +46,10 @@ No `defaults/` unless a config seed is needed. No `root/`. No `DOWNSTREAM_CHANGE
 USER apps
 COPY --chmod=0755 . /
 EXPOSE 2456-2458/udp
-EXPOSE 80/tcp
 VOLUME /config
 ```
 
-Do not expose supervisor 9001 unless the chosen start script uses it.
+Do not expose supervisor 9001 or status port 80 (privileged port for non-root, and the httpd is dropped).
 
 ## 5. docker-bake.hcl
 
@@ -77,9 +76,6 @@ ports:
   - port: 2457
     protocol: udp
     required: true
-  - port: 80
-    protocol: http
-    required: false
 env:
   - name: SERVER_PORT
     default: "2456"
@@ -108,12 +104,12 @@ volumes:
 dependencies: []
 ```
 
-Port 2458/udp (Steam query) is listed by upstream EXPOSE; add it only if the server actually binds it (UNVERIFIED). Server name, world and password variables are UNVERIFIED and must be read from the README table before writing `env:`. `SERVER_PASS_FILE` is a secret path, not a default. Do not invent env vars.
+Port 80 (upstream `STATUS_HTTP_PORT` busybox status page) is not listed: it is below 1024 for non-root and this plan drops the httpd. UDP ports have no tcp/http probe (reason in section 8). Port 2458/udp (Steam query) is listed by upstream EXPOSE; add it only if the server actually binds it (UNVERIFIED). Server name, world and password variables are UNVERIFIED and must be read from the README table before writing `env:`. `SERVER_PASS_FILE` is a secret path, not a default. Do not invent env vars.
 
 ## 7. start.sh
 
 - Idempotent: `install -d -m 0755 /config /config/worlds_local /config/backups /tmp/steam`. Never write to `/opt`, `/app` or `/usr`.
-- Install the server into `/config/valheim` (persistent, avoids a ~1 GB redownload per start) with `steamcmd +force_install_dir /config/valheim +login anonymous +app_update 896660 ${STEAMCMD_ARGS} +quit`. Run with `HOME=/tmp` so SteamCMD writes its state to `/tmp`. Use the `/tmp/steam` cache for the depot cache; document that a fresh `/config` redownloads.
+- Install the server into `/config/valheim` (persistent, avoids a ~1 GB redownload per start) with `/usr/games/steamcmd +force_install_dir /config/valheim +login anonymous +app_update 896660 ${STEAMCMD_ARGS} +quit`. Run with `HOME=/tmp` so SteamCMD writes its state to `/tmp`. Use the `/tmp/steam` cache for the depot cache; document that a fresh `/config` redownloads.
 - Read `SERVER_PORT` (default 2456), `CROSSPLAY`, `BACKUPS*` from the environment; write `/config/valheim` launch arguments; do not put the server password on the command line (use `SERVER_PASS_FILE` or the upstream env name, UNVERIFIED).
 - Launch `./valheim_server.x86_64 -name ... -port "${SERVER_PORT}" -world ... -savedir /config` with `exec` as the final command. Bind `0.0.0.0` (Valheim default).
 - Empty `/config` must work: first start downloads the server and creates `/config/worlds_local`.
@@ -121,7 +117,7 @@ Port 2458/udp (Steam query) is listed by upstream EXPOSE; add it only if the ser
 ## 8. container-test.yaml
 
 - Schema header from the siblings.
-- `filePaths`: `/start.sh`, `/usr/share/licenses/valheim/LICENSE`, and `/usr/local/bin/steamcmd` (inherited from the base; confirm path in `apps/steamcmd` container-test).
+- `filePaths`: `/start.sh`, `/usr/share/licenses/valheim/LICENSE`, and `/usr/local/bin/steamcmd` and `/usr/local/share/steamcmd/steamcmd.sh` (both listed in `apps/steamcmd/container-test.yaml`).
 - No `tcp` probe for UDP ports: a `tcp` probe does not test UDP. Use a process or log check for the game port if forgetool supports UDP probes (UNVERIFIED); otherwise narrow the test and say so in a comment.
 - Startup downloads ~1 GB from Steam, so `timeoutSeconds` must be large. The test runs without network guarantees: if the download fails, the test fails. Add a comment that Steam access is required (narrowed per `build-test-protocol` if the download cannot run in CI).
 - Empty-env run: the server path needs `/config` only; the password-required code path goes to `filePaths` and is run manually.
@@ -131,7 +127,7 @@ Port 2458/udp (Steam query) is listed by upstream EXPOSE; add it only if the ser
 - Upstream runs as root with `PUID`/`PGID` defaulting to 0. ContainerForge runs as `apps`. Drop `PUID`/`PGID`; the image user is fixed.
 - Writes: server install under `/config/valheim` (persistent), backups `/config/backups`, SteamCMD state and depot cache `/tmp/steam` (no `/config` cache), status/supervisor files under `/tmp`.
 - `/opt/valheim` in upstream is a data path; ContainerForge uses `/config/valheim`. Chart mount for `/opt/valheim` moves to `/config` (note for the chart repo).
-- `STATUS_HTTP_CONF` default `/config/httpd.conf` must be relocated if it is written at runtime.
+- `STATUS_HTTP_PORT` default 80 cannot be bound by `apps`; the status httpd is dropped (or must move to a port above 1024).
 - Chart `runAsUser 0`, `readOnlyRootFilesystem false` are expected to change: run with `--read-only --tmpfs /tmp`, verify the install and launch work.
 - Not privileged. `CAP_SYS_NICE` is optional upstream (for Steam CPU scheduling); do not grant it by default.
 

@@ -37,8 +37,8 @@ Files in `apps/zigbee2mqtt/`:
 ## 3. Base image
 
 - `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, as the draft proposes. Node is needed; the python part is unused.
-- Closest sibling: `apps/changedetection` or `apps/budge`.
-- Open question: the Node major in `python-node` must satisfy zigbee2mqtt 2.14.3 `engines`. UNVERIFIED: `package.json` engines not fetched. Check before the first build.
+- Closest siblings (both exist): `apps/changedetection`, `apps/budge`.
+- `package.json` at 2.14.3 declares `engines.node` `^22.2.0 || ^24 || <=26.2` and `packageManager` `pnpm@11.26.0` (GitHub API). Check the Node major in `python-node` falls in that range before the first build. The python-node base exists in the repo (used by `apps/changedetection`, `apps/thelounge`).
 
 ## 4. Dockerfile
 
@@ -46,7 +46,7 @@ Build from source in a build stage, then copy into the ubuntu runtime. The relea
 
 1. `FROM <python-node digest> AS build`. Install pnpm via `npm install -g pnpm@<version from packageManager>`, where the version is read from the source tree. Do not use a floating version.
 2. `ARG VERSION` and `ARG TARGETARCH`. Download `https://github.com/Koenkk/zigbee2mqtt/archive/refs/tags/${VERSION}.tar.gz` with curl to `/tmp`, verify the checksum (UNVERIFIED: no published checksum, so record the sha256 of the tarball in the Dockerfile after the first download and note it as self-computed), extract to `/tmp/src`.
-3. In `/tmp/src`: `pnpm install --frozen-lockfile --prod` then build `dist` as upstream CI does (UNVERIFIED: build script name; check `package.json` scripts).
+3. In `/tmp/src`: `pnpm install --frozen-lockfile --prod` then build `dist` as upstream CI does (`package.json` has `build`: `tsc && node index.js writehash`; this needs devDependencies, so install without `--prod` for the build, then prune).
 4. Final stage `FROM <ubuntu digest>` only if the python-node base is not used. Otherwise, stay on python-node and copy `/tmp/src` to `/app`.
    - Preferred: keep the python-node base, so Node is present. Then the runtime copy is `COPY --from=build --chown=apps:apps /tmp/src /app`. Because `/app` is read-only at runtime, do this as `USER root`, then `USER apps`.
 5. Ship the LICENSE to `/usr/share/licenses/zigbee2mqtt/`.
@@ -60,7 +60,7 @@ Do not compile Go here, since none is needed. Do not run `chown -R` on `/app` be
 
 - `variable "APP" { default = "zigbee2mqtt" }`
 - `variable "VERSION"` with `// renovate: datasource=github-releases depName=Koenkk/zigbee2mqtt versioning=semver` and `default = "2.14.3"`.
-- `variable "LICENSE" { default = "GPL-3.0-only" }`. The repo reports `GPL-3.0`, so use the SPDX id the repo reports, `GPL-3.0`, and confirm.
+- `variable "LICENSE" { default = "GPL-3.0" }` (the SPDX id GitHub reports for the repo).
 - `variable "SOURCE" { default = "https://github.com/Koenkk/zigbee2mqtt" }`
 - Standard targets: `docker-metadata-action`, `image`, `image-local`, `image-all`, `group "default"`.
 - Validate with `docker buildx bake --print`.
@@ -69,14 +69,14 @@ Do not compile Go here, since none is needed. Do not run `chown -R` on `/app` be
 
 - Schema header and `schema_version: 1`, `upstream_env_url: "https://github.com/Koenkk/zigbee2mqtt"`.
 - `ports`: 8080/tcp, `required: false`.
-- `env`: `TZ` default `Etc/UTC`. Add `NODE_ENV` only if `start.sh` sets it explicitly. Config-path env var: UNVERIFIED, do not add until the upstream docs are fetched.
+- `env`: `TZ` default `Etc/UTC`. Add `NODE_ENV` only if `start.sh` sets it explicitly. Add `ZIGBEE2MQTT_DATA` default `/config` (confirmed in upstream `docker-entrypoint.sh`).
 - `volumes`: `/config`, `required: true`.
-- `dependencies`: none in the image. The MQTT broker is an external service, not a ContainerForge dependency here, unless a sibling mosquitto app exists (check `apps/`).
+- `dependencies`: none in the image. The MQTT broker is an external service, not a ContainerForge dependency here, although `apps/mosquitto` exists in this repo and can serve as the broker.
 
 ## 7. start.sh
 
-- Seed `/config/configuration.yaml` from `/app/data/configuration.example.yaml` only when missing: `[ -f /config/configuration.yaml ] || cp /defaults/configuration.yaml /config/configuration.yaml`.
-- Point the app's data directory at `/config` through the upstream config key `data` or the `ZIGBEE2MQTT_DATA` variable. UNVERIFIED: the exact variable name; confirm in the upstream docs before writing it.
+- Seed `/config/configuration.yaml` from the shipped example only when missing: `[ -f /config/configuration.yaml ] || cp /defaults/configuration.yaml /config/configuration.yaml` (`defaults/` is copied to `/defaults` by `COPY . /`; source the file from `data/configuration.example.yaml` in the release tarball).
+- Point the app's data directory at `/config` with `ZIGBEE2MQTT_DATA=/config` (confirmed in upstream `docker/docker-entrypoint.sh` at 2.14.3; default is `/app/data`).
 - Never write to `/app`. Caches go to `/tmp`.
 - `cd /app` then `exec node index.js` (or `exec tini -- node index.js` if tini is available). Keep signals working.
 - Bind the frontend to `0.0.0.0`. Check the upstream `frontend.host` default; set it in the seeded config only when missing.

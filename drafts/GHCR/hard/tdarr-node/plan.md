@@ -46,7 +46,7 @@ Not used: `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` b
 5. Ship the license and notices to `/usr/share/licenses/tdarr-node/`.
 6. Symlink the node's writable folders to `/config`: `/app/tdarr-node/configs -> /config/configs`, `/app/tdarr-node/logs -> /config/logs`. Symlinks are created at build time; the target directories are created by `start.sh`.
 7. `ENV HOME=/config PUID=1000 PGID=1000 UMASK=002 TZ=Etc/UTC inContainer=true`. Use `NODE_PORT`, `SERVER_PORT` only if the node reads them (see section 1).
-8. `chown -R apps:apps /config` and keep `/app` owned by root (read-only at runtime).
+8. `mkdir -p /config /temp && chown apps:apps /config /temp` (so the `/temp` mount point exists on a read-only rootfs and is writable by `apps`), and keep `/app` owned by root (read-only at runtime).
 9. Tail:
 
 ```dockerfile
@@ -108,9 +108,9 @@ Only list env vars the node actually reads (see section 1, UNVERIFIED). Port 826
 
 Plan (no code yet, all items to verify):
 
-- `mkdir -p /config/configs /config/logs /config/transcode` on first start only; never overwrite existing files.
+- `mkdir -p /config/configs /config/logs` on every start (idempotent, `-p` never overwrites existing files); never overwrite existing files.
 - Set `serverIP`/`serverPort` from env with defaults.
-- Create the transcode dir and check it is writable; fail with a clear message if not.
+- Check that `/temp` (transcode cache, a volume or tmpfs created in the Dockerfile) is writable; fail with a clear message if not.
 - `cd /app/tdarr-node` and `exec ./Tdarr_Node` (binary name UNVERIFIED from the zip).
 - Do not write to `/app`. Caches go to `/tmp`.
 

@@ -39,12 +39,12 @@ No `root/` (never used). No `DOWNSTREAM_CHANGES.md` (not a FROM base). Upstream 
 ## 4. Dockerfile
 
 1. `FROM <ubuntu> AS build`: `ARG VERSION=5.11.2`; fetch `https://github.com/ellite/Wallos/archive/refs/tags/v${VERSION}.tar.gz` into `/tmp/src` with `curl -fL`, verify sha256 recorded at build time (no upstream checksum). Extract with `tar -xz --strip-components=1`.
-2. `USER root`, then `apt-get install -y --no-install-recommends php8.5-fpm php8.5-cli php8.5-sqlite3 php8.5-curl php8.5-gd php8.5-xml php8.5-mbstring php8.5-zip php8.5-intl nginx cron` (PHP 8.5 is the 26.04 version; 8.3 is not available, see section 10). Pin versions and check against the Wallos release notes (UNVERIFIED: whether Wallos 5.11.2 supports PHP 8.5).
+2. Final stage `FROM <ubuntu>` (separate from the build stage, which only fetches the source): `USER root`, then `apt-get install -y --no-install-recommends php8.5-fpm php8.5-cli php8.5-sqlite3 php8.5-curl php8.5-gd php8.5-xml php8.5-mbstring php8.5-zip php8.5-intl nginx cron` (PHP 8.5 is the 26.04 version; 8.3 is not available, see section 10). Pin versions and check against the Wallos release notes (UNVERIFIED: whether Wallos 5.11.2 supports PHP 8.5).
 3. Copy the app to `/app/wallos` (read-only at runtime): `COPY --from=build /tmp/src /app/wallos`, then `chmod -R a=rX /app/wallos` (no runtime writes).
 4. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/wallos/LICENSE`.
 5. `ENV HOME=/tmp` (cron and PHP sessions use `/tmp`).
 6. `COPY --chmod=0755 . /` then `USER apps`.
-7. `EXPOSE 80` (or the non-privileged port chosen in section 9) and `VOLUME /config`.
+7. `EXPOSE 8080` (non-root cannot bind port 80; see section 9) and `VOLUME /config`.
 
 Key note: upstream writes to `/var/www/html/db` and `images/uploads/logos`. Those paths must be redirected to `/config` (symlinks or `DB_PATH`-style config, whichever the app supports; the app's own path config is UNVERIFIED: read `includes/` in the tag before choosing).
 
@@ -84,16 +84,10 @@ Then the four standard targets from `apps/adguardhome-sync`, with `image-all` pl
 schema_version: 1
 upstream_env_url: "https://github.com/ellite/Wallos"
 ports:
-  - port: 80
+  - port: 8080
     protocol: tcp
     required: true
 env:
-  - name: PUID
-    default: "82"
-    required: false
-  - name: PGID
-    default: "82"
-    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -103,7 +97,7 @@ volumes:
 dependencies: []
 ```
 
-Port 80 must match the final port choice in section 9 (if changed, update `EXPOSE`, `settings.yaml`, the nginx config and `container-test.yaml` together). `PUID`/`PGID` are read by upstream startup and must be honored by `start.sh`, or removed from this file if the ContainerForge user model replaces them (decision for the PR).
+Port 8080 follows the section 9 recommendation (a non-root user cannot bind 80): `EXPOSE`, the nginx `listen`, `settings.yaml` and `container-test.yaml` must all say 8080. `PUID`/`PGID` (upstream, defaults 82) are dropped: the image user `apps` is fixed and `start.sh` runs unprivileged, so they cannot remap users.
 
 ## 7. start.sh
 
@@ -119,19 +113,19 @@ Port 80 must match the final port choice in section 9 (if changed, update `EXPOS
 
 Header: `# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json`
 
-- `http` probe on port 80 (or the chosen port), path `/` or `/health.php` (health.php exists upstream; verify it is served without login).
-- `tcp` probe on the same port.
+- `http` probe on port 8080, path `/` or `/health.php` (health.php exists upstream; verify it is served without login).
+- `tcp` probe on 8080.
 - `filePaths`: `/start.sh`, `/app/wallos/index.php` (confirm the entry file name in the tag).
 - `timeoutSeconds`: from a PHP sibling (`apps/bookstack` or `apps/nextcloud-fpm`; value UNVERIFIED).
-- Test runs with no env vars: `PUID`/`PGID` defaults must work, so the default path is the one tested.
+- Test runs with no env vars: the default path (no PUID/PGID) is the one tested.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
 - Upstream: runs as root (no USER), `runAsNonRoot: false`, `readOnlyRootFilesystem: false`, privileged unset (false), extra persistence `/var/www/html/db` and `/var/www/html/images/uploads/logos` (chart paths). Expectations to verify, not guarantees.
-- Port 80 under `USER apps` needs `CAP_NET_BIND_SERVICE` or a port above 1024. Decision for the PR: (a) keep port 80 and grant the capability (not allowed by default in ContainerForge: check siblings such as `apps/nginx` for how they handle it), or (b) use port 8080 (`EXPOSE 8080`, nginx `listen 8080`, `settings.yaml` port 8080, probe 8080). Recommend (b) unless a sibling shows (a) is the norm.
+- Port 80 under `USER apps` needs `CAP_NET_BIND_SERVICE` or a port above 1024. Decision for the PR: (a) keep port 80 and grant the capability (not allowed by default in ContainerForge: check siblings such as `apps/nginx` for how they handle it), or (b) use port 8080 (`EXPOSE 8080`, nginx `listen 8080`, `settings.yaml` port 8080, probe 8080). This plan uses (b) 8080 (a sibling precedent for (a) is UNVERIFIED).
 - Writable paths: `/config` (DB, uploads, logs) and `/tmp` (nginx temp, php sessions, cron scratch). Nothing else.
 - Read-only rootfs: `nginx` and `php-fpm` need `/tmp` for temp files; `/var/log` writes must go to stdout or `/tmp`.
-- PUID/PGID: the upstream remaps www-data. In ContainerForge the user is `apps`; map `PUID`/`PGID` to the `apps` user or drop the vars (section 6 decision).
+- PUID/PGID: the upstream remaps www-data. In ContainerForge the user is `apps`; the vars are dropped (section 6).
 
 ## 10. Risks, caveats and open questions
 

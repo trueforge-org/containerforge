@@ -25,7 +25,7 @@
 - `apps/tasmocompiler/settings.yaml`
 - `apps/tasmocompiler/container-test.yaml`
 - `apps/tasmocompiler/start.sh`
-- `apps/tasmocompiler/app/` holds the built Node tree, because `COPY . /` only copies allow-listed paths (`app/` is on the allow-list). No `defaults/`, `etc/` or `health/` unless the source needs them (UNVERIFIED).
+- No `app/` folder: the built Node tree reaches `/app/tasmocompiler` through `COPY --from=build` (section 4), not through `COPY . /`. No `defaults/`, `etc/` or `health/` unless the source needs them (UNVERIFIED).
 - No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
@@ -41,7 +41,7 @@ Fits because the app is Node and calls PlatformIO, a Python tool, so the python-
 3. `npm ci` and `npm run build` in the build stage, with `npm` cache under `/tmp` (`ENV npm_config_cache=/tmp/npm`).
 4. Do not copy the upstream "remove frontend packages" hack unless the backend needs it. Instead run `npm prune --omit=dev` after the build, to keep the image small without deleting packages by name. UNVERIFIED that this keeps the server working; test it.
 5. Final stage `FROM <python-node>`, `USER root` for installs only:
-   - PlatformIO into a venv that is not under `/config`: `python3 -m venv /app/venv-pio` is not allowed (`/app` is read-only). Put the venv in `/usr/local/lib/platformio-venv` and install `pioarduino==6.2.0` and `uv` there. Pinned version comes from the upstream Dockerfile.
+   - PlatformIO into a venv that is not under `/config`: a venv at `/app/venv-pio` is also valid at build time (read-only at runtime). This plan puts the venv in `/usr/local/lib/platformio-venv` and install `pioarduino==6.2.0` and `uv` there. Pinned version comes from the upstream Dockerfile.
    - `COPY --from=build` the built app into `/app/tasmocompiler/`.
    - License: `/usr/share/licenses/tasmocompiler/LICENSE`.
 6. `ENV PLATFORMIO_CORE_DIR=/tmp/platformio HOME=/tmp/home LC_ALL=C.UTF-8 LANG=C.UTF-8 PATH=/usr/local/lib/platformio-venv/bin:$PATH`. PlatformIO caches and toolchains go to `/tmp`, never `/config` (brief and protocol rule).

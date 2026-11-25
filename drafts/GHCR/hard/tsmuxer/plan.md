@@ -142,7 +142,7 @@ Ports 5800 and 5900 are inferred and must be confirmed against baseimage-gui doc
 - Schema header from the siblings (`# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json`).
 - `filePaths`: `/start.sh`, `/app/tsmuxer/tsMuxerGUI`, `/app/tsmuxer/tsmuxer` (confirm names), `/usr/share/licenses/tsmuxer/LICENSE`.
 - `tcp` probe for 5900. Add an `http` probe for 5800 once confirmed. Probes run inside the container, so they do not prove remote access.
-- `timeoutSeconds`: take the value from `apps/kasmvnc/container-test.yaml`.
+- `timeoutSeconds`: `apps/kasmvnc/container-test.yaml` sets none, so pick a value for Xvfb plus VNC startup (UNVERIFIED: value to be set after a live run).
 
 ## 9. Rootless and read-only-rootfs adaptations
 

@@ -37,7 +37,7 @@ No `defaults/` needed unless a default `serverconfig.json` is shipped; if added,
 ## 4. Dockerfile
 
 1. `FROM <ubuntu> ` (single stage; no build stage needed, the server is a downloaded tarball).
-2. `USER root`, then `apt-get update && apt-get install -y --no-install-recommends dotnet-runtime-10.0` and `rm -rf /var/lib/apt/lists/*`. Add `curl` only if the base lacks it (the base already carries curl and tar per the sibling plans; confirm before adding).
+2. `USER root`, then `apt-get update && apt-get install -y --no-install-recommends dotnet-runtime-10.0` and `rm -rf /var/lib/apt/lists/*`. The `start.sh` snippet needs `curl`, `jq` and `tar`; check which the base already has (`apps/ubuntu/Dockerfile`) and install `jq` if missing (UNVERIFIED).
 3. `ARG VERSION` matching `docker-bake.hcl`; `ENV VS_CHANNEL=stable STATIC_V=""` as defaults for `start.sh`.
 4. Install the license notice: `/usr/share/licenses/vintage-story/` only if a vendor license file is available; otherwise record the vendor EULA reference in the PR (UNVERIFIED that a license file is shipped in the tarball).
 5. Create no server files at build time. The server is downloaded to `/config` at start (read-only `/app` rule).
@@ -129,7 +129,7 @@ Only variables that `start.sh` actually reads are listed. Do not list `UID`, `GI
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 ```
 
-Then probes: one `tcp` probe to port 42420 (or `udp`, per the verified protocol) with `timeoutSeconds` set from a sibling game server (for example `apps/steamcmd`'s timing family, UNVERIFIED value). `filePaths`: `/start.sh`. Note: the test runs with no internet access guarantee, so a first-start download may not complete in CI; if the test cannot pass without network, narrow the test to the start script and config seeding and document it in the PR (per the protocol's narrow exception only if all three criteria hold; here there is no DB, so the exception does NOT apply, and a real network dependency must be stated, not hidden).
+Then probes: one `tcp` probe to port 42420 (or `udp`, per the verified protocol) with `timeoutSeconds` set UNVERIFIED (no sibling game server sets a reference value; `apps/steamcmd/container-test.yaml` has none). `filePaths`: `/start.sh`. Note: the test runs with no internet access guarantee, so a first-start download may not complete in CI; if the test cannot pass without network, narrow the test to the start script and config seeding and document it in the PR (per the protocol's narrow exception only if all three criteria hold; here there is no DB, so the exception does NOT apply, and a real network dependency must be stated, not hidden).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -154,7 +154,7 @@ cd apps/vintage-story
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name vintage-story-probe --read-only --tmpfs /tmp \
-  -v vintage-story-probe-config:/config ghcr.io/trueforge-org/vintage-story:1.22.7   # or the local tag from image-local
+  -v vintage-story-probe-config:/config vintage-story:1.22.7
 docker logs -f vintage-story-probe
 docker rm -f vintage-story-probe; docker volume rm vintage-story-probe-config
 forgetool containers test --image vintage-story:1.22.7 --config ./apps/vintage-story/container-test.yaml

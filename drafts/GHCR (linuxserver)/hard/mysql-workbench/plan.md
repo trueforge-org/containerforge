@@ -115,11 +115,11 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - mariadb
+  - name: mariadb
 ```
 
 - Port 3001 only if the display/web layer serves it (section 10).
-- `opt_dependencies: mariadb` (apps/mariadb exists): the workbench connects to a server but does not need one to start. Confirm the schema accepts `opt_dependencies` before using it (UNVERIFIED for this schema version).
+- `opt_dependencies` with `- name: mariadb` (apps/mariadb exists; the draft lists no dependency containers, so this is an addition of the plan, optional; format as in `apps/bookstack/settings.yaml`): the workbench connects to a server but does not need one to start. 
 - No Workbench-specific env vars are invented.
 
 ## 7. start.sh

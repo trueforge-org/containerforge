@@ -60,7 +60,7 @@ Do not set `SQLITE_TMPDIR` or `DENO_DIR` under `/config` unless the app needs pe
 
 ## 5. docker-bake.hcl
 
-Same shape as `apps/tsmuxer/docker-bake.hcl` in this plan (4 standard targets plus default group). Values:
+Same shape as `apps/adguardhome-sync/docker-bake.hcl` (4 standard targets plus default group). Values:
 
 - `APP` = `tubesync`
 - `VERSION` = `0.19.3` with `// renovate: datasource=github-releases depName=meeb/tubesync versioning=semver`

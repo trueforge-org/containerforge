@@ -1,7 +1,7 @@
 # quassel-core — implementation plan
-> Source: ./draft.md · Target: apps/quassel-core/ · Difficulty: easy (revised to medium, see blocker) · Role (main/sidecar): main · Verified on 2026-11-25
+> Source: ./draft.md · Target: apps/quassel-core/ · Difficulty: easy · Role (main/sidecar): main · Verified on 2026-11-25
 
-Blocker to resolve first: the draft assumes Ubuntu noble's apt package `quassel-core` installs for amd64 and arm64. That was NOT verified (packages.ubuntu.com was unreachable from this run). The upstream linuxserver image builds quassel 0.14.0 from source on Alpine with Qt5. If the noble apt package is missing or old, the Dockerfile must build from the upstream source tarball, which makes this a medium-difficulty build. Verify the apt package first (`apt-cache policy quassel-core` in the ubuntu base image, both arches).
+Note: the draft says Ubuntu noble, but the ContainerForge base is Ubuntu 26.04 (resolute). Checked on packages.ubuntu.com: `quassel-core` `1:0.14.0-4ubuntu2` exists in resolute for amd64 and arm64, so the apt path is viable and no source build is needed (difficulty stays easy). The source-build fallback below is kept only in case the package disappears.
 
 ## 1. Verified upstream facts
 
@@ -16,7 +16,7 @@ Blocker to resolve first: the draft assumes Ubuntu noble's apt package `quassel-
 | Per-arch download | Architecture-neutral source tarball `https://github.com/quassel/quassel/releases/download/0.14.0/quassel-0.14.0.tar.xz`, built per arch | release assets |
 | Upstream Dockerfile | linuxserver/docker-quassel-core@c995ed5491d2: `baseimage-alpine:3.20` (build and runtime); build stage apk: boost-dev, build-base, cmake, dbus-dev, icu-dev, openssl-dev, openldap-dev, qt5-qtbase-dev, qt5-qtscript-dev, qt5-qtbase-postgresql, qt5-qtbase-sqlite, qca-dev, zlib-dev; runtime apk: icu-libs, openssl, qt5-qtbase, qt5-qtbase-postgresql, qt5-qtbase-sqlite, qt5-qtscript, libqca-qt5, openldap; `EXPOSE 4242 10113`; `VOLUME /config`; `ENV HOME=/config` | https://raw.githubusercontent.com/linuxserver/docker-quassel-core/c995ed5491d2/Dockerfile |
 | Ports | 4242/tcp (core protocol), 10113 (ident) | upstream EXPOSE |
-| Ubuntu apt package | UNVERIFIED: version and arch availability on noble could not be fetched | packages.ubuntu.com unreachable |
+| Ubuntu apt package | `quassel-core` `1:0.14.0-4ubuntu2` in resolute (26.04), amd64 and arm64 (note the `1:` epoch) | https://packages.ubuntu.com/resolute/quassel-core |
 
 ## 2. Target layout
 
@@ -32,13 +32,13 @@ Blocker to resolve first: the draft assumes Ubuntu noble's apt package `quassel-
 
 ## 4. Dockerfile
 
-Preferred path (apt, if verified on noble for both arches):
+Preferred path (apt, verified on resolute for both arches):
 1. `ARG VERSION`, `ENV HOME=/config`, `USER root`.
-2. `apt-get install --no-install-recommends quassel-core=<pinned version>` (pin; check against `VERSION=0.14.0`; if noble ships a different version, the image would not contain the tagged version: stop and use the source path).
+2. `apt-get install --no-install-recommends quassel-core=<pinned version>` (pin as `1:0.14.0-4ubuntu2` including the epoch; upstream version part matches `VERSION=0.14.0`; if resolute ships a different version, the image would not contain the tagged version: stop and use the source path).
 3. `rm -rf /var/lib/apt/lists/*`.
 
 Fallback path (source build, if apt is missing or wrong version):
-1. Build stage on ubuntu base: apt install cmake, build-essential, qt6 or qt5 dev packages that exist on noble, libboost-dev, libssl-dev, libicu-dev, zlib1g-dev, libqca-qt5-dev (names UNVERIFIED on noble).
+1. Build stage on ubuntu base: apt install cmake, build-essential, qt6 or qt5 dev packages that exist on resolute, libboost-dev, libssl-dev, libicu-dev, zlib1g-dev, libqca-qt5-dev (names UNVERIFIED on resolute).
 2. Download `quassel-0.14.0.tar.xz` from the release; verify with `sha256sum -c` against `quassel-0.14.0.tar.xz.sha256sum`; build with cmake for core only (`-DWITH_CORE=ON -DWITH_QTCLIENT=OFF -DWITH_OIDENTD=OFF` etc., flags UNVERIFIED against 0.14.0).
 3. Runtime stage: copy the installed binary to `/usr/local/bin` or `/usr/bin` and runtime libs via apt.
 4. Ship the upstream license in `/usr/share/licenses/quassel-core/`.
@@ -75,7 +75,7 @@ Common steps:
 ## 8. container-test.yaml
 
 - forgetool header from sibling.
-- `tcp` probe on 4242 (and 10113 if declared). `timeoutSeconds` from a sibling daemon app.
+- `tcp` probe on 4242 (and 10113 if declared). `timeoutSeconds` from a sibling daemon app (UNVERIFIED which).
 - `filePaths`: `/config` directory existence after first start.
 
 ## 9. Rootless and read-only-rootfs adaptations
@@ -87,7 +87,7 @@ Common steps:
 
 ## 10. Risks, caveats and open questions
 
-- apt `quassel-core` on noble: UNVERIFIED (blocker). Could also mean the source build path.
+- apt `quassel-core` on resolute is `1:0.14.0-4ubuntu2` (verified); the Debian revision can change, so the pin needs maintenance.
 - Upstream release is from 2022; no newer stable tag exists on GitHub. Ubuntu package may be older.
 - Database backend choice (SQLite vs PostgreSQL) must be settled before deployment. Chart uses CNPG PostgreSQL.
 - Ident port 10113: needs confirming as a real listener.
@@ -109,4 +109,4 @@ Common steps:
 - PR body from `.github/PULL_REQUEST_TEMPLATE.md`; keep sections and checkboxes; check only what applies.
 - Notes section: `🤖 This PR is AI generated.`
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
-- State untested items (noble apt availability, arm64, forgetool run) honestly.
+- State untested items (arm64, forgetool run, runtime flags) honestly.

@@ -41,13 +41,13 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 1. `ARG VERSION` (tag, for example `2.7.8`, no `v`) and `ARG TARGETARCH`. Default matches `docker-bake.hcl`.
 2. Build stage `FROM <python base> AS build`, `USER root`: install build deps for the Python wheels (`gcc`, `libpq-dev`, `libjpeg-dev`, `zlib1g-dev`, `libxml2-dev`, `libxslt1-dev`, `libldap2-dev`, `libsasl2-dev`, `libffi-dev`, `libssl-dev`, `libwebp-dev` and so on, check each against the upstream requirements; UNVERIFIED list).
 3. `curl -fsSL https://github.com/TandoorRecipes/recipes/archive/refs/tags/${VERSION}.tar.gz | tar xz -C /tmp/src --strip-components=1`.
-4. Venv in `/tmp/venv`, not `/app`: `python -m venv /tmp/venv`, then `pip install --no-cache-dir wheel==0.48.0 setuptools_rust==1.13.0` and `pip install --no-cache-dir -r requirements.txt` (strip the `# Development` section as upstream does). Pip cache and build scratch go to `/tmp` (`PIP_CACHE_DIR=/tmp/pip`).
+4. Venv built in place at `/app/venv` (a copied venv breaks its shebangs and paths; sibling `apps/babybuddy` builds `/app/venv` in place; read-only and root-owned at runtime): `python -m venv /app/venv`, then `pip install --no-cache-dir wheel==0.48.0 setuptools_rust==1.13.0` and `pip install --no-cache-dir -r requirements.txt` (strip the `# Development` section as upstream does). Pip cache and build scratch go to `/tmp` (`PIP_CACHE_DIR=/tmp/pip`).
 5. Frontend: run the upstream frontend build if the source requires it (UNVERIFIED steps; do not guess). Copy the built static files into the image tree.
-6. Runtime stage, `USER root` for installs: `apt-get install -y --no-install-recommends nginx libpq5 tini gettext-base` (versions not pinned; check `VERSION` alignment is not applicable to apt). Use the base's own Python. Copy `/tmp/venv` to `/app/venv` (read-only at runtime, owned by root). Remove the default nginx config and point nginx at the templated config under `/tmp` (see section 9).
+6. Runtime stage, `USER root` for installs: `apt-get install -y --no-install-recommends nginx libpq5 tini gettext-base` (versions not pinned; check `VERSION` alignment is not applicable to apt). Use the base's own Python. Copy `/app/venv` from the build stage with `COPY --from=build /app/venv /app/venv` (same path, so the venv stays valid). Remove the default nginx config and point nginx at the templated config under `/tmp` (see section 9).
 7. License: `install -Dm644 LICENSE /usr/share/licenses/tandoor-recipes/LICENSE` (after confirmation).
 8. `ENV PYTHONUNBUFFERED=1 DOCKER=true`, `EXPOSE 8080`, `VOLUME ["/config"]`, `WORKDIR /app`.
-9. `ENTRYPOINT ["/usr/bin/tini","--","/app/start.sh"]` or the `start.sh` from this app, with `COPY --chmod=0755 . /` before it.
-10. `USER apps`, `COPY --chmod=0755 . /` as the last copy.
+9. `ENTRYPOINT ["/usr/bin/tini","--","/start.sh"]` (start.sh is copied to `/` by `COPY . /`).
+10. `USER apps`, then `COPY --chmod=0755 . /` as the last copy.
 
 Note: the upstream `chmod 1777` on `/opt/recipes/http.d` (so the non-root user can write templated nginx config) is not needed if the template goes to `/tmp`.
 

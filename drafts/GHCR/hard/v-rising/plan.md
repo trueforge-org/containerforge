@@ -55,7 +55,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu
+  // renovate: UNVERIFIED (no datasource tracks the Steam build id; the steamcmd deb datasource used by apps/steamcmd does NOT apply to this app)
   default = "UNVERIFIED-STEAM-BUILD"
 }
 
@@ -88,6 +88,15 @@ ports:
     protocol: udp
     required: true
 env:
+  - name: SAVE_NAME
+    default: "world1"
+    required: false
+  - name: GAME_PORT
+    default: "27015"
+    required: false
+  - name: QUERY_PORT
+    default: "27016"
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -97,13 +106,13 @@ volumes:
 dependencies: []
 ```
 
-Port numbers are the vendor's example values (`-gamePort`, `-queryPort`), not confirmed defaults. Match the chart's ports (UNVERIFIED) before finalizing. Do not list env vars the server does not read; the server takes its settings from JSON files and flags.
+Port numbers are the vendor's example values (`-gamePort`, `-queryPort`), not confirmed defaults. Match the chart's ports (UNVERIFIED) before finalizing. `SAVE_NAME`, `GAME_PORT` and `QUERY_PORT` are plan-defined `start.sh` variables (mapped to `-saveName`, `-gamePort`, `-queryPort`), not upstream env vars. UDP ports have no tcp/http probe (see section 8).
 
 ## 7. start.sh
 
 - `set -euo pipefail`; `DATA=/config/vrising`; `mkdir -p "$DATA/Settings" "$DATA/Saves"`.
 - Seed `ServerHostSettings.json` and `ServerGameSettings.json` into `$DATA/Settings` only when missing (never overwrite user edits).
-- Install/update: run SteamCMD for app 1829350 into `$DATA/server` (`+app_update 1829350 validate`). Use `/tmp` for SteamCMD caches. Idempotent: skip if already installed at the pinned build.
+- Install/update: run `/usr/games/steamcmd` directly (the base's `/usr/local/bin/steamcmd` wrapper does `exec /start.sh`, which this image replaces, so calling it would recurse): run SteamCMD for app 1829350 into `$DATA/server` (`+app_update 1829350 validate`). Use `/tmp` for SteamCMD caches. Idempotent: skip if already installed at the pinned build.
 - Launch: `exec wine64 "$DATA/server/VRisingServer.exe" -persistentDataPath "$DATA" -saveName "${SAVE_NAME:-world1}" -gamePort "${GAME_PORT:-27015}" -queryPort "${QUERY_PORT:-27016}"` inside `xvfb-run` if Xvfb is confirmed required (UNVERIFIED). Use `WINEPREFIX=/tmp/wine`.
 - Bind: game and query listen on all interfaces by default (UNVERIFIED; confirm in a real run).
 
