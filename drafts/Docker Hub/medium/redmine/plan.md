@@ -135,7 +135,7 @@ The DB env names above are a plan, not upstream names: verify each against the u
 ## 8. container-test.yaml
 
 ```yaml
-# yaml-language-server: $schema=<same URL as siblings>
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 # narrowed: requires external postgresql; full functional test not feasible in single-container suite
 timeoutSeconds: 180
 tcp:

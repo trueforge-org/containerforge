@@ -31,9 +31,8 @@
 - `apps/searxng/settings.yaml`
 - `apps/searxng/container-test.yaml`
 - `apps/searxng/start.sh` (replaces upstream `entrypoint.sh`; implements the seeding and secret rules below)
-- `apps/searxng/defaults/settings.template.yml` (copied from upstream `container/settings.template.yml`, with `ultrasecretkey` kept as the placeholder for `sed`). Needed because the template is seeded into `/config` on first start (reason: `start.sh` seeds it only when missing).
 
-No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
+No `defaults/`: the settings template is copied from the source tarball into `/app/searxng/settings.template.yml` at build time (Dockerfile step 6) and seeded by `start.sh`. No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
@@ -43,12 +42,12 @@ Python 3.15 compatibility of searxng's pinned deps is UNVERIFIED; the build roun
 
 ## 4. Dockerfile
 
-1. Single stage on the python base, as in `apps/bazarr`: `uv` installs into `/app/venv`, which the base already creates. No separate build stage is needed.
+1. Single stage on the python base, as in `apps/bazarr`: `uv` installs into `/app/venv`, which the base already creates (`apps/bazarr` installs `uv` with `pip` and uninstalls it afterwards; whether `uv` is already in the base is UNVERIFIED). No separate build stage is needed.
 2. `ARG VERSION`, `ARG SOURCE_REF` (full commit SHA, see section 5), `USER root`, `ENV UV_CACHE_DIR=/tmp/uv PIP_NO_CACHE_DIR=1`.
 3. Build dependencies (apt, only if needed for wheels that have no binary for the arch; UNVERIFIED list): `build-essential libffi-dev libxml2-dev libxslt1-dev libssl-dev`. Remove after install if added. Do not reinstall what the base has.
 4. Source: `curl -fL https://github.com/searxng/searxng/archive/${SOURCE_REF}.tar.gz | tar xz -C /tmp/searxng --strip-components=1`.
 5. Install into the existing venv: `uv pip install --python /app/venv/bin/python --requirements /tmp/searxng/requirements.txt --requirements /tmp/searxng/requirements-server.txt` (requirements-server.txt contents UNVERIFIED; upstream installs it).
-6. Copy app: `mkdir -p /app/searxng && cp -r /tmp/searxng/searx /app/searxng/searx`; `cp /tmp/searxng/container/settings.template.yml /app/searxng/settings.template.yml` (or use `defaults/`, see layout). `compileall` optional (upstream does it for speed; not required).
+6. Copy app: `mkdir -p /app/searxng && cp -r /tmp/searxng/searx /app/searxng/searx`; `cp /tmp/searxng/container/settings.template.yml /app/searxng/settings.template.yml` . `compileall` optional (upstream does it for speed; not required).
 7. Version marker: write `/app/searxng/searx/version_frozen.py` only if upstream's `version_frozen.py` is missing from the tarball (UNVERIFIED; upstream copies `./searx/version_frozen.py` from the repo). Set `__SEARXNG_VERSION` from `ARG VERSION`.
 8. Licence: `COPY --from`? Not needed; `cp /tmp/searxng/LICENSE /usr/share/licenses/searxng/LICENSE`.
 9. Cleanup: `rm -rf /tmp/searxng /tmp/uv`, `apt-get clean`, `rm -rf /var/lib/apt/lists/*`.
@@ -59,7 +58,7 @@ Python 3.15 compatibility of searxng's pinned deps is UNVERIFIED; the build roun
     - `GRANIAN_PROCESS_NAME=searxng GRANIAN_INTERFACE=wsgi GRANIAN_HOST=0.0.0.0 GRANIAN_PORT=8080 GRANIAN_WEBSOCKETS=false GRANIAN_BLOCKING_THREADS=4 GRANIAN_WORKERS_KILL_TIMEOUT=30s GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT=5m`. `GRANIAN_HOST` is `0.0.0.0` here, not upstream's `::`, so the app does not need IPv6 inside the container (decision recorded in section 10).
     - `SEARXNG_SETTINGS_PATH=/config/settings.yml` (UNVERIFIED name: upstream sets `__SEARXNG_SETTINGS_PATH`; the build round must confirm which one `searx/` reads. Set both if needed).
     - `SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt` (the python base already provides CA certs; keep if present).
-13. `EXPOSE 8080`, `VOLUME /config`, `ENTRYPOINT ["/start.sh"]` (or `CMD` via start.sh; match `apps/bazarr`'s `start.sh` pattern).
+13. `EXPOSE 8080`, `VOLUME /config`, no `ENTRYPOINT` or `CMD`: the ubuntu base entrypoint runs `exec /start.sh` when present.
 
 ## 5. docker-bake.hcl
 
@@ -124,7 +123,7 @@ volumes:
 dependencies: []
 ```
 
-Notes: `SEARXNG_SECRET` has an empty default, so `start.sh` must generate one on first start (see section 7). `SEARXNG_BIND_ADDRESS` is read by upstream (settings comment); the chart's `BIND_ADDRESS` is dropped. `INSTANCE_NAME` is not listed (UNVERIFIED that upstream reads it).
+Notes: `SEARXNG_SECRET` has an empty default, so `start.sh` must generate one on first start (see section 7). `SEARXNG_BIND_ADDRESS` appears in upstream's settings comments, but `start.sh` runs granian, which listens per `GRANIAN_HOST`/`GRANIAN_PORT`, so the variable may have no effect: UNVERIFIED, drop it from `settings.yaml` if the build round shows it is not read. The chart's `BIND_ADDRESS` is dropped. `INSTANCE_NAME` is not listed (UNVERIFIED that upstream reads it).
 
 ## 7. start.sh
 
@@ -165,7 +164,7 @@ Rules this implements:
 - Empty `/config` works: the template is copied; no other state is needed.
 - Restarts do not overwrite the file or the secret.
 - `SEARXNG_SECRET` (if set) overrides the file's key through upstream's env override (UNVERIFIED mechanism; the build round must confirm by checking that `searx` reads `SEARXNG_SECRET`). If the env is empty, the file's random key is used.
-- `SEARXNG_BASE_URL` and `SEARXNG_BIND_ADDRESS` are applied by upstream from env (settings comments).
+- `SEARXNG_BASE_URL` is applied by upstream from env (settings comments); `SEARXNG_BIND_ADDRESS` is UNVERIFIED (see section 6).
 - No write to `/app`. Caches go to `/tmp` (`__SEARXNG_DATA_PATH`, `UV_CACHE_DIR`).
 - The ubuntu/python base may not provide `base64` or `head` from coreutils: both are in coreutils (provided by the ubuntu base, UNVERIFIED that the minimal base includes them).
 - Upstream's `update-ca-certificates` and `chown` steps are not reproduced: the ContainerForge base handles CA certs, and `/config` is owned by `apps` at runtime (check `COPY --chmod`/ownership in the round).

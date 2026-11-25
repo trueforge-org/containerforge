@@ -90,7 +90,7 @@ The final stage is `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed2
 4. Export the Laravel cache env vars pointing at `/tmp`.
 5. `cd /app && php artisan migrate --force` (idempotent).
 6. `php artisan config:cache` and `php artisan view:cache` with the `/tmp` cache paths.
-7. `exec` the web server: `exec php-fpm -F` plus `exec nginx -g 'daemon off;'` as a process group, or use a single supervisor-free form (decision with section 3; UNVERIFIED which form is clean). `exec` must hand PID 1 to the server.
+7. Start the web stack: `php-fpm -F` cannot be `exec`ed together with nginx. Start php-fpm in the background (`php-fpm -D`, pid and socket under `/tmp`), then `exec nginx -g 'daemon off;'` so nginx is the final `exec`. Decide with section 3 (UNVERIFIED which form is clean).
 8. Bind on `0.0.0.0` only.
 
 ## 8. container-test.yaml

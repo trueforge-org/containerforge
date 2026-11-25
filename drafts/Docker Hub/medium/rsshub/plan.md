@@ -73,9 +73,8 @@ No `defaults/` (RSSHub has no required config files; it reads env). No `etc/`, `
     EXPOSE 1200
     VOLUME /config
     WORKDIR /app
-    ENTRYPOINT ["dumb-init", "--"]
-    CMD ["/start.sh"]
     ```
+    The ubuntu base already sets `ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]` (tini is PID 1), so no `dumb-init`, `ENTRYPOINT` or `CMD` is set here (same as `apps/changedetection`); the base `apps/ubuntu/entrypoint.sh` runs `exec /start.sh` when it is executable.
     `TZ` is `Asia/Shanghai` upstream; ContainerForge default is `Etc/UTC` (settings.yaml `TZ`). Keep `Etc/UTC` and let users override.
 
 ## 5. docker-bake.hcl
@@ -131,11 +130,11 @@ volumes:
     required: true
 dependencies: []
 opt_dependencies:
-  - valkey
+  - name: valkey
 ```
 
 Notes:
-- `opt_dependencies` lists `valkey` (optional cache, `apps/valkey` exists). Confirm the key name against sibling apps before writing (UNVERIFIED: check an existing `settings.yaml` that uses `opt_dependencies`).
+- `opt_dependencies` lists `valkey` (optional cache, `apps/valkey` exists). Key name and `- name:` shape confirmed against `apps/babybuddy/settings.yaml`.
 - `browserless/chrome` is not a ContainerForge app. Leave it out of `opt_dependencies` and document it in the PR (it is only needed for JS-rendered feeds).
 - `CHROMIUM_EXECUTABLE_PATH` default is empty, and `start.sh` fills it. Do not list env vars the app does not read: `LISTEN_INADDR_ANY` stays at its default (true), so omit it.
 - `/config` is listed for the required persistent path. RSSHub itself writes nothing there. Keep it because `HOME=/config` and `start.sh` need it, or drop it if the test shows no use (decide in step 11).
@@ -145,7 +144,7 @@ Notes:
 Requirements:
 - No writes to `/app` (read-only). Only `/config` (persistent) and `/tmp` (scratch).
 - Choose the Chromium path if the image has a system browser (arm64 distro chromium); leave it empty on amd64 when Playwright's cache is used.
-- `exec` the server so signals reach node. `dumb-init` is PID 1 (ENTRYPOINT).
+- `exec` the server so signals reach node. tini from the base entrypoint is PID 1.
 
 ```bash
 #!/usr/bin/env bash

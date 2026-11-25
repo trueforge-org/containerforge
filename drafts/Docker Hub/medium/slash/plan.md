@@ -100,7 +100,7 @@ volumes:
     required: true
 ```
 
-`SLASH_DRIVER` and `SLASH_DSN` are PostgreSQL options. `SLASH_DSN` is a secret, so it is `required: false` with no default. Dependencies: none required. Optional: `postgresql` (exists as `apps/postgresql`, marked as available) in `opt_dependencies` if the schema supports it (UNVERIFIED key name).
+`SLASH_DRIVER` and `SLASH_DSN` are PostgreSQL options. The `sqlite` default value for `SLASH_DRIVER` is UNVERIFIED (docs only show the PostgreSQL value; check `docs/install.md`). `SLASH_DSN` is a secret, so it is `required: false` with no default and is not listed with a baked value. Dependencies: none required. Optional: `postgresql` exists as `apps/postgresql`; per `settings-yaml.instructions.md` the `dependencies` list is for required apps, so leave it empty (an optional-dependency key is UNVERIFIED). `apps/pwndrop` uses an ubuntu build stage, not a Go builder stage, so it is a layout precedent only.
 
 ## 7. start.sh
 

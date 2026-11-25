@@ -40,7 +40,7 @@
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Set `ENV HOME=/config` only if needed; otherwise keep the base default. Put all caches under `/tmp`: `ANSIBLE_LOCAL_TEMP=/tmp/ansible`, `ANSIBLE_REMOTE_TEMP=/tmp/ansible`, `PIP_CACHE_DIR=/tmp/pip`.
-3. `apt-get install` only packages not already in the base: `bash curl git gnupg openssh-client rsync sshpass tar tini tzdata unzip wget zip jq python3 python3-venv` (pin the package versions where they come from apt and check them against the image; upstream also needs `mysql-client`, add it only if the chosen DB mode needs it). Use `--no-install-recommends` and clean `/var/lib/apt/lists/*`.
+3. `apt-get install` only packages not already in the base: `bash curl git gnupg openssh-client rsync sshpass tar tzdata unzip wget zip jq python3 python3-venv` (pin the package versions where they come from apt and check them against the image; upstream also needs `mysql-client`, add it only if the chosen DB mode needs it). Use `--no-install-recommends` and clean `/var/lib/apt/lists/*`.
 4. Download the Semaphore tarball for `${TARGETARCH}` (map `amd64` → `linux_amd64`, `arm64` → `linux_arm64`). Verify with `sha256sum -c` against the sha256 values in section 1. Extract `semaphore` and `server-wrapper` only if needed (the wrapper is in the repo, not in the tarball: UNVERIFIED that the tarball ships it; otherwise write `start.sh` to replace it).
 5. Install `semaphore` to `/usr/local/bin/semaphore`, mode 0755.
 6. Download OpenTofu, Terraform and Terragrunt for `${TARGETARCH}` using the versions in section 1. Verify each against its upstream checksum file (UNVERIFIED: checksum URLs not fetched; resolve before writing the Dockerfile, do not skip). Install to `/usr/local/bin/`.
@@ -48,7 +48,7 @@
 8. Set `ENV PATH="/app/ansible-venv/bin:${PATH}"`.
 9. `chown -R apps:apps /app` only for paths that must match the runtime user; `/app` stays read-only at runtime.
 10. `EXPOSE 3000`, `VOLUME /config`, `COPY --chmod=0755 . /`, final `USER apps`.
-11. Upstream uses `tini` as PID 1; keep it (`ENTRYPOINT ["/usr/bin/tini","--"]`) or let `start.sh` `exec` the server, which is the protocol default. Decide after reading `server-wrapper` (UNVERIFIED).
+11. Upstream uses `tini` as PID 1. The ubuntu base already ships tini and its entrypoint (`/usr/bin/tini -- /entrypoint.sh`) runs `exec /start.sh`, so set no `ENTRYPOINT` or `CMD`; `start.sh` `exec`s the server.
 12. License: copy the upstream `LICENSE` to `/usr/share/licenses/semaphore/LICENSE` from the source tarball or repo (fetch it at build time from `https://raw.githubusercontent.com/semaphoreui/semaphore/v2.20.23/LICENSE`, verified by a pinned sha256; UNVERIFIED: checksum not computed).
 
 ## 5. docker-bake.hcl
@@ -72,7 +72,7 @@
   - `TZ`, default `Etc/UTC`, `required: false`.
   - Do not list `SEMAPHORE_DB_PORT` unless start.sh reads it.
 - `volumes`: `/config`, `required: true`.
-- `dependencies`: none required. Optional: `postgresql` (`apps/postgresql` exists, ✅).
+- `dependencies`: omit. `opt_dependencies` with `- name: postgresql` (`apps/postgresql` exists; key shape as in `apps/babybuddy/settings.yaml`).
 
 ## 7. start.sh
 

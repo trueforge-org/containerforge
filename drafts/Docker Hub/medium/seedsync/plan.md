@@ -27,7 +27,7 @@
 - `apps/seedsync/settings.yaml`
 - `apps/seedsync/container-test.yaml`
 - `apps/seedsync/start.sh` (seeds `/config/settings.cfg` on first start; `exec`s seedsync)
-- `apps/seedsync/defaults/settings.cfg` (only if the default config cannot be generated at build time; see section 4 step 7). Reason: the default file must be seeded into `/config` when missing.
+- `apps/seedsync/defaults/settings.cfg` only as a fallback if the default config cannot be generated at build time (section 4 step 7 normally generates it into `/app/seedsync/defaults/settings.cfg` inside the image). Reason: the default file must be seeded into `/config` when missing.
 - `apps/seedsync/scripts/` only if the setup script is reused (reason: `.dockerignore` allow-list includes `scripts/`).
 
 No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).

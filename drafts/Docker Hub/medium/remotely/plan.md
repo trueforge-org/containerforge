@@ -47,9 +47,9 @@ No `defaults/` (the app writes its own DB on first start). No `etc/`, `health/`,
 3. amd64 path (`TARGETARCH=amd64`):
    - `curl -fL -o /tmp/remotely.zip "https://github.com/immense/Remotely/releases/download/${VERSION}/Remotely_Server_Linux-x64.zip"`.
    - Extract with `unzip` into `/app` (install `unzip` in the build stage only, then purge).
-   - The zip may be self-contained (776 MB). If it is not self-contained, install the aspnet 8 runtime (step 4). Whether it is self-contained is UNVERIFIED; check `Remotely_Server.runtimeconfig.json` after extraction for `includedFrameworks`.
+   - The zip may be self-contained (776 MB). If it is not self-contained, install the aspnet 8 runtime (step 7). Whether it is self-contained is UNVERIFIED; check `Remotely_Server.runtimeconfig.json` after extraction for `includedFrameworks`.
 4. arm64 path (`TARGETARCH=arm64`): no release asset. Build from source at the tag `${VERSION}` with the .NET 8 SDK: `dotnet publish Server/Server.csproj -c Release -r linux-arm64 --self-contained false -o /app`. Requires `dotnet-sdk-8.0` (UNVERIFIED availability on 26.04) or dotnet-install. This is a separate build path; mark arm64 as `compile` in the bake notes and test it separately.
-5. License: copy `LICENSE` from the source tree to `/usr/share/licenses/remotely/LICENSE`.
+5. License: copy `LICENSE` to `/usr/share/licenses/remotely/LICENSE`. The amd64 path has no source tree and whether the zip contains `LICENSE` is UNVERIFIED; if not, fetch `https://raw.githubusercontent.com/immense/Remotely/${VERSION}/LICENSE` (path UNVERIFIED).
 6. Permissions: `chown -R apps:apps /app && chmod -R 755 /app` (same as adguardhome-sync).
 7. Final stage (same ubuntu base, `USER root` to install only what runtime needs, then `USER apps`):
    - `apt-get install -y --no-install-recommends aspnetcore-runtime-8.0 curl` (only if not self-contained; `curl` is needed by the upstream HEALTHCHECK, which we skip, so drop it unless used).

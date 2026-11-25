@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | No GitHub releases and no tags used by Docker Hub (`latest`, last updated 2021-10-14). Pin the master commit `f501941a22ead0fccd196d109098e9b065205d98` (the commit the draft's Dockerfile link uses). The repo's last push is 2023-04-05. Source: https://api.github.com/repos/pawelmalak/snippet-box (via `gh api`). |
-| Renovate | `datasource=git-refs depName=https://github.com/pawelmalak/snippet-box currentValue=master` (precedent: `apps/fenrus`, `apps/tvheadend`) |
+| Renovate | `datasource=git-refs depName=https://github.com/pawelmalak/snippet-box currentValue=master` (precedent: `apps/tvheadend`; `apps/fenrus` does not exist yet, it is only a plan) |
 | License | MIT (GitHub API `license.spdx_id`) |
 | Source URL | https://github.com/pawelmalak/snippet-box |
 | Download | Source tarball `https://github.com/pawelmalak/snippet-box/archive/${VERSION}.tar.gz` (VERSION = commit SHA). No prebuilt binary; interpreted Node app built on the image. |
@@ -41,7 +41,7 @@ Final and build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0
 4. Server deps and build: `cd /app/snippet-box && npm install && npm run build && npm prune --omit=dev`. `npm run build` runs `build:client` (React) and `build:tsc`.
 5. Client deps are installed by `build:client` through `npm --prefix=client`. If `node-sass` fails on the chosen Node, stop and ask: the fix is a dependency change (`node-sass` to `sass`), which needs approval because it changes upstream code.
 6. Data redirect (build time, as root): `mkdir -p /config/data` is not possible at build time for a volume, so create the link: `ln -s /config/data /app/snippet-box/data`. `start.sh` creates `/config/data`.
-7. License: `cp LICENSE.md /usr/share/licenses/snippet-box/LICENSE.md` (upstream file is `LICENCE.md`; confirm the exact filename in the tarball before the COPY).
+7. License: `mkdir -p /usr/share/licenses/snippet-box && cp LICENCE.md /usr/share/licenses/snippet-box/LICENSE.md` (UNVERIFIED: upstream file is believed to be `LICENCE.md`; confirm the exact source filename in the tarball. The target name `LICENSE.md` matches `container-test.yaml`).
 8. Ownership: `chown -R apps:apps /app/snippet-box`, `chmod -R 755 /app/snippet-box`.
 9. Clean: `npm cache clean --force`, `apt-get purge -y --auto-remove build-essential python3-dev`, `rm -rf /tmp/* $HOME/.cache /var/lib/apt/lists/*`.
 10. Tail:

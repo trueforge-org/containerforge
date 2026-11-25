@@ -61,7 +61,7 @@ No `defaults/` (config comes from env). No `etc/`, `health/`, `root/`. No `DOWNS
    VOLUME /config
    WORKDIR /app
    ```
-   No `EXPOSE` (no ports). Upstream `ENTRYPOINT ["./start_bot.sh"]` is replaced by `start.sh` at `/`, via `CMD ["/start.sh"]` (or keep `ENTRYPOINT ["/start.sh"]`; decide once and match sibling apps).
+   No `EXPOSE` (no ports). Upstream `ENTRYPOINT ["./start_bot.sh"]` is replaced by `start.sh` at `/`: do not set `ENTRYPOINT` or `CMD`, because the base entrypoint (`apps/ubuntu/entrypoint.sh`) runs `exec /start.sh` when present. This also applies if `python-node` keeps that entrypoint (UNVERIFIED).
 
 ## 5. docker-bake.hcl
 
@@ -127,7 +127,7 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - valkey
+  - name: valkey
 ```
 
 Notes:
@@ -170,13 +170,13 @@ exec ./start_bot.sh
 
 # narrowed: requires external valkey (Redis) and a Telegram token; full functional test not feasible in single-container suite
 filePaths:
-- path: /app/dist/main.js
-- path: /config
+- /app/dist/main.js
+- /config
 ```
 
 - No `tcp` or `http` probes: `ports: []` in `settings.yaml`, so there is nothing to probe.
 - The test runs with no env. With no `TOKEN`/`CHATID`, the guard exits 1, so a plain start in the test would fail. Handle it: either (a) assert the guard's failure as the expected behaviour (a process-exit check), or (b) run the test with the test harness's env if forgetool supports it (UNVERIFIED). Do not weaken: treat the guard path as the real code path to test, and record the narrowed behaviour in a comment.
-- Confirm the `filePaths` schema key and file path (UNVERIFIED against forgetool schema, which was not fetched).
+- `filePaths` is a plain list of paths, as in sibling apps; `/app/dist/main.js` is UNVERIFIED (check the build output).
 - Database-dependency exception: applies (hard dependency on valkey, does not start without it, and a sidecar in `container-test.yaml` is not feasible with the available primitives). Add the required comment above. Protocol step 3 is mandatory: run with a `valkey` sidecar manually.
 - `timeoutSeconds`: start with 60 (Node app, no ports), tune after the first run.
 
