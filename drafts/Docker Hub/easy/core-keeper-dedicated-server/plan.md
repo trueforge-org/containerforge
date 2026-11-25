@@ -108,10 +108,10 @@ Flow (bash, `set -euo pipefail`):
 
 1. `export HOME=/config`; `SERVER_DIR=/config/server`; `DATA_DIR=/config/data`; `mkdir -p "$SERVER_DIR" "$DATA_DIR"`.
 2. Install or update (idempotent, only when needed):
-   `if [ "${SKIP_UPDATE:-false}" != "true" ] || [ ! -x "$SERVER_DIR/CoreKeeperServer" ]; then STEAM_APP_IDS=1007,1963720 STEAM_INSTALL_DIR="$SERVER_DIR" STEAMCMD_PRE_UPDATE=false /usr/local/bin/steamcmd-start.sh +quit; fi`
+   `if [ "${SKIP_UPDATE:-false}" != "true" ] || [ ! -x "$SERVER_DIR/CoreKeeperServer" ]; then STEAM_APP_IDS=1007,1963720 STEAM_INSTALL_DIR="$SERVER_DIR" STEAMCMD_PRE_UPDATE=false STEAM_APP_VALIDATE=true /usr/local/bin/steamcmd-start.sh +quit; fi`
    (uses the base image's `STEAM_APP_IDS`/`STEAM_INSTALL_DIR` logic, which does `force_install_dir`, `app_update <id>` per id, anonymous login. UNVERIFIED: that the extra `+@sSteamCmdForcePlatform*` arguments from upstream are not needed on this base. If the server download complains, run the app update with them through the base's script arguments.) Fail with a clear error if `CoreKeeperServer` is missing afterwards.
 3. `chmod +x "$SERVER_DIR/CoreKeeperServer"` only if not executable (the file lives in the writable `/config`).
-4. Build the argument array exactly like upstream: always `-batchmode -logfile /tmp/corekeeper.log -datapath /config/data`, then each non-empty variable of section 1 to its flag; `ACTIVATE_ALL_CONTENT=true` adds `-activateallcontent`. Quote every value (array, no `eval`), so spaces in `WORLD_NAME` and special characters in `PASSWORD` are safe. The password never goes into a file.
+4. Build the argument array exactly like upstream: always `-batchmode -logfile /tmp/corekeeper.log -datapath /config/data`, then each non-empty variable of section 1 to its flag; `ACTIVATE_ALL_CONTENT=true` adds `-activateallcontent`. Quote every value (array, no `eval`), so spaces in `WORLD_NAME` and special characters in `PASSWORD` are safe. The password never goes into a file written by `start.sh`. It is visible in the process list, because the server takes it only as the `-password` flag (as in the upstream wrapper); this deviates from the start-script rule and must be stated in the PR. Whether the server log echoes it is UNVERIFIED.
 5. `rm -f "$SERVER_DIR/GameID.txt" "$SERVER_DIR/GameInfo.txt"`; `mkdir -p -m 1777 /tmp/.X11-unix` (the tmpfs `/tmp` is empty at start; UNVERIFIED that Xvfb needs it); `touch /tmp/corekeeper.log`.
 6. `Xvfb :99 -screen 0 1x1x24 -nolisten tcp &`, `tail -n +1 -F /tmp/corekeeper.log &` (so logs reach `docker logs`).
 7. `export DISPLAY=:99 LD_LIBRARY_PATH="$SERVER_DIR/linux64:${LD_LIBRARY_PATH:-}"` (UNVERIFIED: where `steamclient.so` from app 1007 lands; upstream uses `<steamcmd>/linux64`, so verify with `find /config/server -name 'steamclient*'`).
@@ -137,6 +137,7 @@ filePaths:
 - /usr/bin/Xvfb
 ```
 
+- UNVERIFIED: the `filePaths` checks run against the main container, which starts `start.sh` and therefore a Steam download; without Steam access it exits and the checks may fail. If so, a maintainer must decide how to restructure the test (note that `mainRunner.enabled: false` skips `filePaths`, so they would have to become `runners`).
 - `settings.yaml` lists no ports, so no probe is missing. The real server path (Steam download, world creation, `GameID.txt`) is verified manually per section 11; the forgetool run passes no env vars and has no Steam access guarantee.
 - If the maintainers want a runtime assertion, a `healthCommands` entry that checks `pgrep -f CoreKeeperServer` could be added after the first successful manual run, but it would need Steam network access in CI (UNVERIFIED), so it is not planned.
 
@@ -157,7 +158,7 @@ Draft expectations reconciled: the chart runs as root with a writable rootfs; we
 
 - amd64 only (confirmed: x86-64 Steam depot, `arm64: no` in the draft). `image-all` must list only `linux/amd64`.
 - Needs outbound access to Steam at first start; the download is large and the first start is slow. A restart with `SKIP_UPDATE=true` avoids it.
-- Version tracking: neither renovate nor the Steam depot gives a version for `VERSION`; tag mirrors the base. Open question: acceptable to maintainers, or use a different scheme?
+- **Decision needed:** neither renovate nor the Steam depot gives a game version for `VERSION`, so the tag mirrors the base and `ARG VERSION` is not consumed by any build step. The image therefore does not contain the software version its name suggests. A maintainer must accept this or choose another scheme. Renovate would also bump `VERSION` and the `FROM` tag/digest separately; keep them aligned.
 - The draft's `27015/udp` is unverified and was dropped; Direct Connect port is user-defined.
 - UNVERIFIED during this pass (needs the first container run): extra shared libraries for the Unity server, the location of `steamclient.so`, whether `STEAM_APP_IDS` handling in the base script is enough without the platform-force arguments, Xvfb needing `/tmp/.X11-unix`, whether the log line for readiness is `Game ID: ...` (upstream says `GameID.txt` appears).
 - `steamcmd` base is an image of our own (`AGPL-3.0-or-later` label); the Valve SteamCMD licence applies to what it downloads.

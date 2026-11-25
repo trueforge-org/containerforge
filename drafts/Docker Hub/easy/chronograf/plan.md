@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Version | `1.11.7` (latest release, 2026-11-04; draft pins the same). The TrueCharts chart uses the rolling `chronograf:latest`. |
+| Version | Pin `1.11.7` (released 2026-11-04; draft pins the same). `1.11.8` was published on 2026-11-25 and its amd64/arm64 debs and `.asc` files return HTTP 200; see section 10. The TrueCharts chart uses the rolling `chronograf:latest`. |
 | Git tag format | `1.11.7` (no `v` prefix), verified with `git ls-remote --tags` |
 | Renovate | `datasource=github-releases depName=influxdata/chronograf` (default semver versioning is fine) |
 | License | `AGPL-3.0-or-later`. The repo `LICENSE` says "GNU Affero General Public License ... version 3 ... or (at your option) any later version". |
@@ -112,6 +112,21 @@ env:  # only variables Chronograf reads (verified in the config-options docs)
   - name: REPORTING_DISABLED
     default: "true"
     required: false
+  - name: CANNED_PATH
+    default: "/usr/share/chronograf/canned"
+    required: false
+  - name: RESOURCES_PATH
+    default: "/usr/share/chronograf/resources"
+    required: false
+  - name: TLS_CERTIFICATE
+    default: ""
+    required: false
+  - name: TLS_PRIVATE_KEY
+    default: ""
+    required: false
+  - name: CUSTOM_AUTO_REFRESH
+    default: ""
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -162,7 +177,7 @@ filePaths:
 
 - Covers the only port in `settings.yaml`. The test runs without env vars, which is fine because every variable has a default.
 - UNVERIFIED: the exact status code of `GET /` (Chronograf normally serves the SPA or redirects). If `forgetool` demands 200 and gets a redirect, add `statusCode` after checking with `curl -i` on the running container; do not weaken the assertion, only match the real value.
-- `timeoutSeconds: 120` is a guess based on `apps/luanti`; reduce after the first run.
+- `timeoutSeconds: 120` copies `apps/luanti`. The forgetool schema enforces a 180-second minimum, so lower values have no effect.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -178,6 +193,7 @@ Draft security expectations reconciled: the chart runs as UID 0 with a writable 
 ## 10. Risks, caveats and open questions
 
 - Chronograf needs an InfluxDB data source (or `INFLUXDB_URL`) before it is useful; the container itself starts without one.
+- `1.11.8` came out on 2026-11-25. When implementing, either take it (bake `VERSION`, URLs and tags in this plan change together; re-check the signature and deb layout) or keep 1.11.7 and let Renovate bump it. Section 1 deb contents and checksums were inspected for 1.11.7 only.
 - Maintenance-mode claim from the draft is UNVERIFIED (see section 1).
 - Chart uses `latest` while the image will be pinned to `1.11.7`; Renovate will bump it.
 - Keyserver availability during the build (GPG key fetch). Mitigation: retry the second keyserver; if both fail, fail the build instead of skipping verification.

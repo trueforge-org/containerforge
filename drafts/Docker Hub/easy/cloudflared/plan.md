@@ -51,7 +51,7 @@ The binary is a static Go executable, so plain ubuntu is enough. `curl`, `ca-cer
    - checksum: read the `Checksums:` block from the release page and compare, e.g.
      `expected="$(curl -fsSL "https://github.com/cloudflare/cloudflared/releases/tag/${VERSION}" | grep -o -E "cloudflared-linux-${TARGETARCH}: [0-9a-f]{64}" | head -n1 | cut -d' ' -f2)"`, fail if empty, then `echo "${expected}  /app/cloudflared" | sha256sum -c -`. This scraping is the only way to verify from upstream data without pinning hashes in the Dockerfile; if GitHub changes the page markup the build fails loudly (acceptable).
    - `chmod 0755 /app/cloudflared && chown -R apps:apps /app`
-   - licence: `mkdir -p /usr/share/licenses/cloudflared && curl -fsSLo /usr/share/licenses/cloudflared/LICENSE "https://raw.githubusercontent.com/cloudflare/cloudflared/${VERSION}/LICENSE"` (a raw binary is shipped, so the licence must be added separately; also add `https://raw.githubusercontent.com/cloudflare/cloudflared/${VERSION}/LICENSE.thirdparty` if it exists, UNVERIFIED).
+   - licence: `mkdir -p /usr/share/licenses/cloudflared && curl -fsSLo /usr/share/licenses/cloudflared/LICENSE "https://raw.githubusercontent.com/cloudflare/cloudflared/${VERSION}/LICENSE"` (a raw binary is shipped, so the licence must be added separately; the repo root at tag 2026.11.2 has only `LICENSE`. Third-party notices for the statically linked Go modules: UNVERIFIED, no notices file found in the repo root).
 5. `COPY --chmod=0755 . /`
 6. `EXPOSE 20241`
 7. `VOLUME /config` (kept for consistency with siblings; the token mode stores nothing, so the volume is only for an optional `config.yml`).
@@ -97,6 +97,9 @@ env:
     required: false
   - name: TUNNEL_TRANSPORT_PROTOCOL
     default: "auto"
+    required: false
+  - name: TUNNEL_EDGE_IP_VERSION
+    default: ""        # unset: cloudflared uses its own default
     required: false
   - name: TZ
     default: "Etc/UTC"

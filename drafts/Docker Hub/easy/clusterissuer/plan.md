@@ -8,7 +8,7 @@
 | What the "app" is | The TrueCharts `clusterissuer` chart (cert-manager ClusterIssuer helper, `description: Certificate management for Kubernetes`). Its `values.yaml` sets `image.repository: hello-world`, `tag: latest@sha256:1e4c05b8...`, and `workload.main.enabled: false`, `containers.main.enabled: false`, `service.main.enabled: false`. The image is never run by the chart; it only satisfies the chart's required `image` value. |
 | Image content | `docker-library/hello-world`: `FROM scratch`, `COPY hello /`, `CMD ["/hello"]`. It prints `Hello from Docker!` and exits. |
 | Version | No release tags in `docker-library/hello-world` (`git ls-remote --tags` is empty). HEAD is commit `522bcd2faf422c60b9d20e64d7cd6d56600aec97`, the same commit the draft links. |
-| Renovate | `datasource=git-refs depName=https://github.com/docker-library/hello-world` with the commit SHA as `VERSION`. UNVERIFIED that renovate's `git-refs` datasource tracks the default branch HEAD as wanted; confirm against another app in this repo or accept manual bumps. |
+| Renovate | `datasource=git-refs depName=https://github.com/docker-library/hello-world currentValue=master` with the commit SHA as `VERSION`. `currentValue=master` (the repo default branch) follows the `apps/tvheadend/docker-bake.hcl` pattern. A Renovate bump will not update the two hash ARGs, so such a PR fails to build until they are updated. |
 | License | `MIT` (the repo `LICENSE` starts "Copyright (c) 2014 Docker, Inc. Permission is hereby granted..."). The `hello` binary is built from `hello.c` in the same repo. |
 | Source (`SOURCE`, `upstream_env_url`) | https://github.com/docker-library/hello-world |
 | amd64 download | https://github.com/docker-library/hello-world/raw/522bcd2faf422c60b9d20e64d7cd6d56600aec97/amd64/hello (HTTP 200, static ELF x86-64, sha256 `f4061a47648b7d8fffda5253cebff1d179df9457cfc7e539ad3e3bdc6872c341`) |
@@ -58,10 +58,10 @@ No apt packages, so nothing to pin. The image contains exactly the commit named 
 - `APP` = `clusterissuer`
 - `VERSION`:
   ```hcl
-  // renovate: datasource=git-refs depName=https://github.com/docker-library/hello-world
+  // renovate: datasource=git-refs depName=https://github.com/docker-library/hello-world currentValue=master
   default = "522bcd2faf422c60b9d20e64d7cd6d56600aec97"
   ```
-  (renovate type UNVERIFIED, see section 1; the image tag will be the 40-char SHA, which is ugly but honest. If maintainers prefer, use the short SHA and `git-refs` with `versioning=loose`.)
+  (same pattern as `apps/tvheadend`, see section 1; the image tag will be the 40-char SHA, which is ugly but honest. If maintainers prefer, use the short SHA and `git-refs` with `versioning=loose`.)
 - `LICENSE` = `MIT`
 - `SOURCE` = `https://github.com/docker-library/hello-world`
 - Four standard targets plus `group "default"` as in `apps/adguardhome-sync/docker-bake.hcl`; `image-all` = `linux/amd64`, `linux/arm64`.
@@ -126,7 +126,7 @@ No `tcp`/`http` probe because `settings.yaml` lists no ports. Default `timeoutSe
 
 - **Recommendation: reconsider porting at all.** The chart's `workload.main.enabled`, container, probes and service are all `false`, so the image is never pulled for execution. The draft itself notes the name mismatch (cert-manager chart, hello-world image). A ContainerForge image for this adds maintenance (commit bumps plus hash bumps) for no runtime value. Ask the maintainers whether to skip this draft or to let the chart use `ghcr.io/trueforge-org/whoami` or similar existing placeholder instead.
 - If it is ported anyway, the image is a placeholder, not a certificate manager.
-- Renovate datasource for an untagged repo is UNVERIFIED (section 5).
+- Renovate bumps follow every `master` commit, including ones that do not change the binaries (section 1).
 - Hash ARGs must be updated with each `VERSION` bump.
 - No blockers technically: static binaries exist for amd64 and arm64.
 

@@ -7,8 +7,8 @@
 
 | Item | Value |
 |---|---|
-| Latest stable | Bitcoin Core 32.1 (released 2026-10-27; GitHub marks it Latest; 32.0 was never fully released). Draft version `32.1` matches. Newer maintenance releases 31.3 and 30.5 (2026-11-20) exist on older branches and are not the target. |
-| Renovate | `datasource=github-releases depName=bitcoin/bitcoin extractVersion=^v(?<version>.+)$` (tag format `v32.1` is UNVERIFIED, check the GitHub releases page; drop `extractVersion` if tags have no `v`) |
+| Latest stable | Bitcoin Core 32.1 (GitHub release published 2026-10-28; GitHub marks it Latest; 32.0 was never fully released). Draft version `32.1` matches. Newer maintenance releases 31.3 and 30.5 (2026-11-20) exist on older branches and are not the target. |
+| Renovate | `datasource=github-releases depName=bitcoin/bitcoin extractVersion=^v(?<version>.+)$` (tag format `v32.1` confirmed on GitHub releases) |
 | License | MIT (Bitcoin Core `COPYING`) |
 | Source | https://github.com/bitcoin/bitcoin (site https://bitcoincore.org) |
 | amd64 URL | https://bitcoincore.org/bin/bitcoin-core-32.1/bitcoin-32.1-x86_64-linux-gnu.tar.gz |
@@ -57,11 +57,11 @@ Upstream binaries are glibc (`linux-gnu`), so the ubuntu base is right; no runti
        tar -xzf "${FILE}" -C /app --strip-components=1; \
        rm -f /app/bin/bitcoin-qt /app/bin/test_bitcoin* ; \
        mkdir -p /usr/share/licenses/bitcoind; \
-       find /app -maxdepth 2 \( -name COPYING -o -name 'LICENSE*' -o -name 'README*' \) -exec cp {} /usr/share/licenses/bitcoind/ \; ; \
+       curl -fsSL -o /usr/share/licenses/bitcoind/COPYING "https://raw.githubusercontent.com/bitcoin/bitcoin/v${VERSION}/COPYING"; \
        chown -R apps:apps /app; chmod -R 755 /app; rm -rf /tmp/*
    ```
    - `SHA256SUMS` comes from the same host as the tarball, so this guards against corruption only. Optional hardening: verify `SHA256SUMS.asc` with the builder keys from bitcoin-core/guix.sigs (key list not fetched, UNVERIFIED).
-   - If no license file is in the tarball, download `https://raw.githubusercontent.com/bitcoin/bitcoin/v${VERSION}/COPYING` (tag format UNVERIFIED).
+   - `COPYING` is downloaded from the source tag (confirmed at `v32.1`) because the tarball contents are UNVERIFIED. If the tarball ships third-party notices, copy those too.
 3. No apt packages.
 4. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8333 8332`, `VOLUME /config`, `WORKDIR /config`. No ENTRYPOINT (base tini entrypoint runs `/start.sh`).
 
@@ -93,19 +93,22 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/bitco
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
-ARGS=(-datadir=/config -conf=/config/bitcoin.conf -printtoconsole -rpcbind=0.0.0.0)
+ARGS=(-datadir=/config -conf=/config/bitcoin.conf -printtoconsole)
 # bitcoind ignores a missing -conf file only if it is the default path; create it so a custom -conf never errors
 [ -f /config/bitcoin.conf ] || : > /config/bitcoin.conf
 if [ -n "${BITCOIN_RPCALLOWIP:-}" ]; then
+  ARGS+=(-rpcbind=0.0.0.0)
   IFS=',' read -r -a ips <<< "${BITCOIN_RPCALLOWIP}"
   for ip in "${ips[@]}"; do ARGS+=("-rpcallowip=${ip// /}"); done
+else
+  echo "BITCOIN_RPCALLOWIP is empty: JSON-RPC (8332) listens on localhost only."
 fi
 [ -n "${BITCOIN_RPCAUTH:-}" ] && ARGS+=("-rpcauth=${BITCOIN_RPCAUTH}")
 exec /app/bin/bitcoind "${ARGS[@]}" "$@"
 ```
 
 - Idempotent: only creates an empty `bitcoin.conf` when missing, never overwrites; no writes to `/app`; no caches needed.
-- P2P binds 0.0.0.0:8333 by default. `-rpcbind=0.0.0.0` makes the RPC listen on all interfaces, but access is still restricted by `-rpcallowip` (default localhost only) and by auth (cookie file in `/config/.cookie` unless `BITCOIN_RPCAUTH`). Other containers need `BITCOIN_RPCALLOWIP` (for example the pod CIDR) to connect. This is the secure default; say so in the log line start.sh prints.
+- P2P binds 0.0.0.0:8333 by default. Bitcoin Core ignores `-rpcbind` unless `-rpcallowip` is also set, so by default the RPC listens on localhost only, and `start.sh` logs this. With `BITCOIN_RPCALLOWIP` set (for example the pod CIDR), the RPC binds 0.0.0.0, restricted to those addresses and by auth (cookie file in `/config/.cookie`, or `BITCOIN_RPCAUTH`). This deviates from the start-script rule that servers listen on all interfaces; it is the secure default (comparable to the passwordless-database exception) and must be stated in the PR. A `bitcoin.conf` with its own `rpcbind`/`rpcallowip` also works.
 - No `rpcuser`/`rpcpassword` env: they would appear in the process list and are deprecated in favour of `rpcauth`.
 - Extra flags (`-prune=550`, `-testnet4`, `-txindex`) pass through `"$@"` (container args).
 - Final `exec` keeps bitcoind as the tini child so SIGTERM triggers a clean shutdown (bitcoind flushes the chainstate on SIGTERM; set the pod `terminationGracePeriodSeconds` high).
@@ -122,7 +125,7 @@ tcp:
 filePaths:
 - /app/bin/bitcoind
 - /app/bin/bitcoin-cli
-- /usr/share/licenses/bitcoind
+- /usr/share/licenses/bitcoind/COPYING
 ```
 
 `tcp` probes run inside the container, so the localhost-only RPC allow-list does not matter. The test needs no env vars. Note the first start begins an initial block download; it does not need network to open the ports, but if the sandbox has no network the node still listens (UNVERIFIED). Add `http` only after confirming that RPC answers a bare GET (it returns 401 without credentials; do not use).
@@ -143,12 +146,13 @@ filePaths:
 ## 10. Risks, caveats and open questions
 
 - Disk: mainnet chain is several hundred GB and grows; first sync takes days. Recommend `-prune` for tests.
-- Datadir conflict in the draft is settled as `/config`; chart ``/root/.bitcoin/`` must move to `/config`.
+- Datadir conflict in the draft is settled as `/config`; existing data on the chart path `/root/.bitcoin/` must move to `/config`.
 - RPC security: default allow-list is localhost; do not default `-rpcallowip=0.0.0.0/0`.
-- Tarball layout, license file location and release tag format are UNVERIFIED until the first build; adapt the `find` and renovate `extractVersion`.
+- Tarball layout is UNVERIFIED until the first build; confirm that `/app/bin/bitcoind` and `/app/bin/bitcoin-cli` exist after `--strip-components=1`.
+- `filePaths` uses `test -f`, so every entry must be a file, not a directory.
 - Bitcoin Core 32.x uses a custom HTTP server for RPC (release notes); older clients with sloppy headers may be rejected.
 - Bitcoin Core release tarballs include `libexec/` multiprocess binaries; they are kept (not needed, not harmful).
-- Duplicate of the `bitcoin-node` draft; only one of the two apps should be created. The draft also flags the arm64 tarball as unconfirmed, now confirmed present.
+- Duplicate of the `bitcoin-node` draft; only one of the two apps should be created (this plan is the proposed one; see the decision in `bitcoin-node`). The draft also flags the arm64 tarball as unconfirmed, now confirmed present.
 - No blockers: glibc tarball exists for amd64 and arm64, no GPU, no privileges.
 
 ## 11. Build and test steps
@@ -161,7 +165,7 @@ docker run --rm -d --name bitcoind-probe --read-only --tmpfs /tmp \
   -v bitcoind-probe-config:/config bitcoind:32.1 -prune=550
 docker logs -f bitcoind-probe
 # readiness: container still running; log shows "Bitcoin Core version v32.1", "Using the 'x86_64_shani'..." style init lines,
-# "init message: Loading block index" then "Done loading" (exact strings UNVERIFIED); ports 8333 and 8332 open; no "Error:" lines
+# "init message: Loading block index" then "Done loading" (exact strings UNVERIFIED); ports 8333 and 8332 open (8332 on localhost only by default); no "Error:" lines
 docker exec bitcoind-probe /app/bin/bitcoin-cli -datadir=/config getblockchaininfo   # cookie auth works
 docker rm -f bitcoind-probe; docker volume rm bitcoind-probe-config
 forgetool containers test --image bitcoind:32.1 --config ./apps/bitcoind/container-test.yaml

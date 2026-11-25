@@ -68,7 +68,7 @@ Builder stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed
    COPY --chmod=0755 . /
    WORKDIR /usr/share/nginx/html
    ```
-   Keep `COPY --chmod=0755 . /` (required). `EXPOSE 8080` and `VOLUME /config` are inherited from the nginx base; repeat them explicitly for clarity (as it-tools does implicitly). No `apt` in the final stage; the draft's `unzip` is not needed (tar.gz, and unzip is in the ubuntu base anyway).
+   Keep `COPY --chmod=0755 . /` (required). `EXPOSE 8080` is inherited from the nginx base. `apps/nginx/Dockerfile` declares no `VOLUME`, so add `VOLUME /config` here (and repeat `EXPOSE 8080` for clarity). No `apt` in the final stage; the draft's `unzip` is not needed (tar.gz, and unzip is in the ubuntu base anyway).
 3. `ARG VERSION` must be declared in the builder stage and equals the bake default (the commit SHA).
 
 ## 5. docker-bake.hcl

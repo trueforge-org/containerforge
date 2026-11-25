@@ -20,7 +20,7 @@
 | Env vars (config.py and docs) | `FRITZ_LISTEN_ADDRESS` (default `127.0.0.1`), `FRITZ_PORT`, `FRITZ_LOG_LEVEL`, `FRITZ_HOSTNAME` (default `fritz.box`), `FRITZ_NAME`, `FRITZ_USERNAME`, `FRITZ_PASSWORD`, `FRITZ_PASSWORD_FILE`, `FRITZ_HOST_INFO`, `FRITZ_WIFI_CLIENT_INFO`, `FRITZ_CONNECTION_TIMEOUT`, `FRITZ_USE_TLS`, `FRITZ_DEVICE_PORT`, `FRITZ_REMOTE_ACCESS`, `FRITZ_ALLOW_UNSAFE_MD5_PASSWORD`. Env mode supports exactly one device; several devices need a config file. |
 | Startup behaviour | With no `FRITZ_USERNAME` and no password (and no `--config`) the exporter logs "Invalid configuration" and **exits with status 1**. An empty config file also exits 1. |
 | Config file | YAML via `--config`; keys `exporter_port`, `listen_address`, `log_level`, `devices[]` (`name`, `hostname`, `username`, `password` or `password_file`, ...). Unknown keys are rejected. Passwords longer than 32 chars give 401. |
-| Metrics path | `/metrics` (Prometheus client default, UNVERIFIED in this exporter's source but standard for `start_http_server`) |
+| Metrics path | `/metrics` (`__main__.py` uses `prometheus_client.start_http_server`) |
 
 ## 2. Target layout
 
@@ -51,14 +51,11 @@ Pure Python, requires >=3.14, so the standard python base fits. Fallback if a de
 3. ```dockerfile
    RUN /app/venv/bin/pip install --no-cache-dir "fritz-exporter==${VERSION}" \
        && mkdir -p /usr/share/licenses/avm-exporter \
-       && cp "$(/app/venv/bin/python - <<'PY'
-   import importlib.metadata as m
-   print([f for f in m.distribution("fritz-exporter").files if "LICENSE" in f.name.upper()][0].locate())
-   PY
-   )" /usr/share/licenses/avm-exporter/LICENSE.md \
+       && curl -fsSL -o /usr/share/licenses/avm-exporter/LICENSE.md \
+            "https://raw.githubusercontent.com/pdreker/fritz_exporter/fritzexporter-v${VERSION}/LICENSE.md" \
        && chown -R apps:apps /app && chmod -R 755 /app && rm -rf /root/.cache /tmp/*
    ```
-   License path inside the wheel is UNVERIFIED; fall back to `https://raw.githubusercontent.com/pdreker/fritz_exporter/fritzexporter-v${VERSION}/LICENSE.md` (tag format confirmed from the draft's release URL).
+   `LICENSE.md` exists at tag `fritzexporter-v4.0.3` (checked 2026-11-25). Do not use a shell heredoc inside the continued `RUN` line; it breaks the Dockerfile parser.
 4. `ENV FRITZ_LISTEN_ADDRESS=0.0.0.0` (as upstream; required because the app defaults to 127.0.0.1) and `ENV HOME=/config`.
 5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 9787`, `VOLUME /config`, `WORKDIR /config`. No ENTRYPOINT (base tini entrypoint runs `/start.sh`).
 
@@ -92,6 +89,7 @@ Schema header and `schema_version: 1`, `upstream_env_url: "https://github.com/pd
   - `FRITZ_PASSWORD` `""`
   - `FRITZ_PASSWORD_FILE` `""`
   - `FRITZ_HOST_INFO` `false`, `FRITZ_WIFI_CLIENT_INFO` `false`
+  - `FRITZ_DEVICE_PORT` `""`, `FRITZ_REMOTE_ACCESS` `""` (read by `config.py`; unset means the app default)
   - `FRITZ_CONNECTION_TIMEOUT` `10`, `FRITZ_USE_TLS` `false`, `FRITZ_ALLOW_UNSAFE_MD5_PASSWORD` `false` (defaults from config.py: timeout 10, TLS off; others UNVERIFIED but they are only passed through when set)
   - Optional: `FRITZ_CONFIG_FILE` (our own name, read by start.sh, default `/config/config.yaml`).
 - volumes: `/config` (`required: false`; only needed for the config-file mode, nothing is persisted).
@@ -130,16 +128,17 @@ timeoutSeconds: 120
 mainRunner:
   enabled: false
 
-filePaths:
-- /app/venv/bin/python
-- /defaults/config.example.yaml
-- /usr/share/licenses/avm-exporter/LICENSE.md
-
 runners:
+- entrypoint: test -f /app/venv/bin/python
+- entrypoint: test -f /defaults/config.example.yaml
+- entrypoint: test -f /usr/share/licenses/avm-exporter/LICENSE.md
 - entrypoint: /app/venv/bin/python -m fritzexporter --version
+  expectedOutput: "4.0.3"
 ```
 
-(Same `mainRunner` + `runners` shape as `apps/bookstack/container-test.yaml`; confirm the exact `runners` syntax against the forgetool schema.) This is a deviation from "probe every port"; justify it in the PR. The port path is exercised by hand in section 11 with env vars set. `--version` exiting 0 is verified in `__main__.py`.
+No top-level `filePaths`: the forgetool schema says `mainRunner.enabled: false` skips all main-runner checks, including `filePaths`, so the file checks are runners. The `--version` output is the plain version (`print(__version__)`); confirm the string on the first build.
+
+(Same `mainRunner` + `runners` shape as `apps/bookstack/container-test.yaml`; `runners` syntax checked against the forgetool schema.) This is a deviation from "probe every port"; justify it in the PR. The port path is exercised by hand in section 11 with env vars set. `--version` exiting 0 is verified in `__main__.py`.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -150,7 +149,7 @@ runners:
 
 ## 10. Risks, caveats and open questions
 
-- Exits 1 without credentials (verified). Orchestrators will restart-loop until configured; this is upstream behaviour.
+- **Decision needed (blocker):** the exporter exits 1 without credentials (verified). `container-test.instructions.md` says an image MUST still start without env vars, and the build protocol requires the container to stay running on an empty `/config`. A maintainer must either accept this exception, or have `start.sh` log the missing settings and idle (`exec sleep infinity`, as `apps/duckdns` does) when unconfigured. Until decided, sections 7 and 8 describe the exit-1 variant, which does not pass protocol step 3.
 - Needs a FRITZ!Box with TR-064 enabled and a dedicated user; password length max 32.
 - Config file must set `listen_address: 0.0.0.0` or the port is unreachable from other pods (verified in docs).
 - cp315 wheels for pyyaml/other deps: UNVERIFIED, fall back to python 3.14.8 base if needed.
