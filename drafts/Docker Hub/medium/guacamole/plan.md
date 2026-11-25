@@ -40,7 +40,7 @@ No `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 `FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:bba631340c8aefc1a10656a894475312bd89a9dd75d9e5da12c3098242f1e8f2`
 
-Fits: Guacamole is a Java war, and ContainerForge has a Java 21 base, which matches the upstream `jdk21` runtime. The Java base is built on ubuntu, so Tomcat installs from apt on the same base. Closest siblings: `apps/airsonic-advanced` (war run on Tomcat from a java base, `USER apps`, `/config` state) and `apps/valkey` (pinned apt package and health dir).
+Fits: Guacamole is a Java war, and ContainerForge has a Java 21 base, which matches the upstream `jdk21` runtime. The Java base is built on ubuntu, so Tomcat installs from apt on the same base. Closest siblings: `apps/airsonic-advanced` (a war downloaded onto a java base, `USER apps`, `/config` state; it runs the war directly, not through a separately installed Tomcat, so it is only a partial precedent) and `apps/valkey` (pinned apt package and health dir).
 
 ## 4. Dockerfile
 
@@ -215,7 +215,7 @@ filePaths:
 - /usr/share/licenses/guacamole/LICENSE
 ```
 
-- `timeoutSeconds: 240` is taken from `apps/pwndrop/container-test.yaml`. Tomcat startup is UNVERIFIED for this image; confirm with the probe.
+- `timeoutSeconds: 240` is an upper-range value used by a few apps (`apps/pwndrop` sets no timeout). Tomcat startup is UNVERIFIED for this image; confirm with the probe.
 - The http probe on `/` is UNVERIFIED (depends on the `ROOT.war` decision in section 7).
 - `/defaults/guacamole.properties` comes from `COPY --chmod=0755 . /` with `defaults/` in the repo folder. The license path needs a matching `COPY --from` or a `LICENSE` file under `defaults/` in the Dockerfile step (section 4 step 5); add it in the Dockerfile, or drop the entry.
 - Run with no env vars (the test has none). The guacd-dependent paths are not exercised; document that in the PR.

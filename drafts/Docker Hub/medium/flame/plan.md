@@ -7,8 +7,8 @@
 | --- | --- |
 | Version to build | `2.4.0` (latest stable, GitHub release published 2026-04-24, https://api.github.com/repos/pawelmalak/flame/releases/latest). Draft chart tag `docker.io/pawelmalak/flame:2.4.0` matches. |
 | Docker Hub | Tags `2.4.0` and `latest` (2026-04-24) are linux/amd64 only. `multiarch` and `multiarch2.4.0` are amd64, arm64, arm/v7. Upstream build notes say the multiarch build failed under a 2 GB memory limit. |
-| Renovate | `datasource=docker depName=docker.io/pawelmalak/flame versioning=docker` (chart image). For the source build use `datasource=github-releases depName=pawelmalak/flame` in `docker-bake.hcl`, as the source is fetched from the tag. |
-| License | UNVERIFIED: no `LICENSE` file at raw.githubusercontent.com `master` or `main` (404), repo API returns 403. The bake `LICENSE` value must be confirmed from the tag before the build (open question, section 10). |
+| Renovate | `datasource=github-releases depName=pawelmalak/flame versioning=semver` in `docker-bake.hcl`, as the source is fetched from the tag (latest release `v2.4.0`). |
+| License | MIT (GitHub repo API `license.spdx_id` = `MIT`; the file at the repo root is `LICENSE.md`, not `LICENSE`). |
 | Source URL | https://github.com/pawelmalak/flame |
 | Download | Source tarball `https://github.com/pawelmalak/flame/archive/refs/tags/v${VERSION}.tar.gz`. No release assets (`assets = []`). Node app built from source, so there is no per-arch binary. |
 | Checksum source | None published (no assets). UNVERIFIED whether the git tag is signed. |
@@ -68,10 +68,10 @@ RUN echo "**** install flame ****" && \
   rm -rf /tmp/* $HOME/.cache /var/lib/apt/lists/*
 ```
 
-   - `npm install --omit=dev` mirrors the upstream `--production` flag. Use `npm ci` if the tag ships a lockfile (UNVERIFIED).
+   - `npm install --omit=dev` mirrors the upstream `--production` flag. The repo root has a `package-lock.json`, so `npm ci --omit=dev` is an option for the server (client lockfile UNVERIFIED).
    - The client build needs its own dependencies. Keep the upstream sequence exactly, then re-check the result.
    - `ln -s /config/data /app/flame/data` is created at build time, so `/app` stays unwritten at runtime. The link is dangling until `start.sh` creates `/config/data`.
-3. License: after extraction, `mkdir -p /usr/share/licenses/flame && cp /app/flame/LICENSE /usr/share/licenses/flame/LICENSE` (only once the LICENSE is confirmed, section 10).
+3. License: after extraction, `mkdir -p /usr/share/licenses/flame && cp /app/flame/LICENSE.md /usr/share/licenses/flame/LICENSE`.
 4. Final lines:
 
 ```dockerfile
@@ -101,7 +101,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"   // set to the SPDX id after confirming the upstream LICENSE
+  default = "MIT"
 }
 
 variable "SOURCE" {
@@ -175,7 +175,7 @@ filePaths:
 ```
 
 - One tcp and one http probe for port 5005 (the only port in `settings.yaml`).
-- `filePaths` covers the built client (`public`) and the license. Add the license only once it is present in the image.
+- `filePaths` covers the built client (`public`) and the license. The license is copied from `LICENSE.md` in the build step.
 - The http path `/` may return a login redirect or a non-200 status. Confirm the status on the first run and keep `path: /` only if it returns 200 (UNVERIFIED).
 - No `PASSWORD` code path is tested with env vars (the test has none). It is covered by the manual run in section 11.
 
@@ -193,13 +193,13 @@ Reconciling the draft's security expectations: the chart runs as UID 0, `readOnl
 
 ## 10. Risks, caveats and open questions
 
-- License: UNVERIFIED. The repo's `LICENSE` file was not found at `master` or `main`. Confirm the license from the `v2.4.0` tag before the bake `LICENSE` is set. Do not guess an SPDX id.
+- License: MIT per the GitHub API; the file is named `LICENSE.md`. Confirm the text in the `v2.4.0` tag during the build.
 - Admin password: the upstream image hardcodes `PASSWORD=flame_password`. This plan does not bake a default. Decide whether the app refuses to start without a password or uses its own default (UNVERIFIED).
 - Node version: upstream builds with `node:20`, the base ships Node 26.13.1. Compatibility UNVERIFIED. Fall back to a pinned Node only if the build fails.
 - Multi-arch: `2.4.0` on Docker Hub is amd64 only. The source build is arch-independent only if there are no native npm modules (UNVERIFIED). The memory note in the upstream README (multiarch build failed under 2 GB) means `image-all` may need more build RAM.
 - No checksum is published for the tarball. The download is pinned to the tag, so the tag itself is the trust anchor. Signed tag: UNVERIFIED.
 - `/app/data` change: existing TrueCharts data at `/app/data` must be mounted at `/config/data`.
-- Blockers: none of the musl-only, GPU, privileged or arm64-missing kind. The LICENSE and the password default are the only items to settle before a build.
+- Blockers: none of the musl-only, GPU, privileged or arm64-missing kind. The password default is the only item to settle before a build.
 
 ## 11. Build and test steps
 

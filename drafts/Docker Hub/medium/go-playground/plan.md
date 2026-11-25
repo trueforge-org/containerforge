@@ -40,14 +40,14 @@ No `defaults/`, `etc/` or `health/` needed (no config file is seeded; the app re
 - Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`
 - Final stage: the same line, `AS` omitted.
 
-No language runtime base fits: the app is a Go server plus a static UI, and it needs a Go toolchain at runtime, which the ubuntu base lacks. Closest sibling: `apps/pwndrop` (Go built in a build stage, `COPY --from=buildstage` into an ubuntu runtime stage).
+The ubuntu base already ships Go (`GO_VERSION` 1.27.4 at `/usr/local/go`, `GOTOOLCHAIN=local`), Node 26.13.1 and yarn 1.22.22 (`apps/ubuntu/docker-bake.hcl`, `apps/ubuntu/Dockerfile`), so it covers the runtime Go toolchain the server needs to compile user code. No separate language base is needed. Closest sibling: `apps/pwndrop` (Go built in a build stage, `COPY --from=buildstage` into an ubuntu runtime stage).
 
 ## 4. Dockerfile
 
 1. Build stage, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Toolchains (no version is verified in this run):
-   - Go: upstream uses 1.25. Preferred: `apt-get install golang-go` if the ubuntu 26.04 archive ships Go 1.25 or newer (UNVERIFIED). Otherwise download the official Go tarball for `${TARGETARCH}` and check its sha256 (source of checksum UNVERIFIED).
-   - Node 22 (upstream NODE_VERSION=22.22.0) with yarn (via `corepack`). Archive availability UNVERIFIED; if missing, install from the official Node tarball with a checksum.
+   - Go: upstream uses 1.25; the ubuntu base already provides Go 1.27.4 in `/usr/local/go`, so nothing is installed. Whether upstream builds with 1.27 is UNVERIFIED.
+   - Node and yarn: upstream uses Node 22.22.0; the base provides Node 26.13.1 and yarn 1.22.22. Whether the UI builds on Node 26 is UNVERIFIED; if not, install a Node 22 tarball with a checksum.
    - Install only what is missing. Do not install `curl` or `tar`; the base has them.
 3. Fetch the source, `ARG VERSION` is the tag:
    ```dockerfile
@@ -59,7 +59,7 @@ No language runtime base fits: the app is a Go server plus a static UI, and it n
 4. Build, following the upstream stages in order: `yarn build` with `VITE_WASM_BASE_URL=/wasm`; `go build` of the server; WASM analyzer build (`analyzer@v3.wasm`); `tools/pkgindexer` if upstream still needs it at runtime (UNVERIFIED which outputs the server reads). Set `GOCACHE=/tmp/go-cache`, `GOPATH=/tmp/go` and `GOMODCACHE=/tmp/go/pkg/mod` for every build step.
 5. Final stage: `FROM` the same ubuntu line.
    - Server, UI assets and WASM: `COPY --from=build` into `/app/go-playground/`. Keep upstream's relative layout so the server finds its static files (UNVERIFIED which paths it hard-codes; upstream uses `/opt/playground`, which must not be copied as is).
-   - Go toolchain: `COPY --from=build /usr/local/go /usr/local/go` (or the apt path if installed by apt). It is needed at runtime because the server compiles user code (the draft's main caveat).
+   - Go toolchain: already present in the final stage from the ubuntu base (`/usr/local/go`), so no copy is needed. It is needed at runtime because the server compiles user code (the draft's main caveat).
    - License: `COPY --from=build /tmp/go-playground/LICENSE /usr/share/licenses/go-playground/LICENSE`.
 6. Environment:
    ```dockerfile
@@ -78,8 +78,9 @@ No language runtime base fits: the app is a Go server plus a static UI, and it n
    COPY --chmod=0755 . /
 
    EXPOSE 8000
+   VOLUME /config
    ```
-   No `VOLUME /config` (the app persists nothing). See section 9.
+   `VOLUME /config` follows the repo rule although the app persists nothing; `/config` may stay empty. See section 9.
 8. Clean apt lists and `/tmp/*` in the build stage.
 
 ## 5. docker-bake.hcl
@@ -165,7 +166,7 @@ env:
 ```
 
 - Env names come from the upstream `ENV` lines. UNVERIFIED that the server reads each one. Keep only those the server reads.
-- No `volumes:` entry and no dependencies.
+- Add `volumes: [{path: /config, required: false}]` to match `VOLUME /config`. No dependencies.
 - Port 8000 matches upstream `EXPOSE` and `-addr=:8000`. The draft's 8080 is not used.
 
 ## 7. start.sh
@@ -199,7 +200,7 @@ filePaths:
 - /usr/share/licenses/go-playground/LICENSE
 ```
 
-- `timeoutSeconds: 240` is taken from `apps/pwndrop/container-test.yaml`, a Go sibling with a build stage. Build-time cost is not covered by the test.
+- `timeoutSeconds: 240` is an upper-range value used by a few apps (`apps/pwndrop` sets no timeout; 240 is UNVERIFIED as needed). Build-time cost is not covered by the test.
 - The http probe on `/` is UNVERIFIED: confirm it returns 200 before relying on it. Add the WASM file path once its name is confirmed (`analyzer@v3.wasm` is the expected name; UNVERIFIED for the install path).
 - No env vars are set by the test, so the defaults in `settings.yaml` are the only config that runs.
 
@@ -209,7 +210,7 @@ filePaths:
 | --- | --- |
 | Go build cache, module cache, GOPATH | `/tmp/go-cache`, `/tmp/go` via `ENV` (never `/config`, never `/app`). |
 | `go` run by the server to compile user code | Needs writable GOCACHE and GOPATH: both are in `/tmp`. Runs as `apps`. |
-| Server data and logs | None declared upstream. No `/config` volume, so nothing persists. |
+| Server data and logs | None declared upstream. `/config` is declared as a volume but unused. |
 | Static UI and WASM | Read-only under `/app/go-playground`. |
 | Go toolchain at `/usr/local/go` | Read-only at runtime; `go` writes only to GOCACHE and GOPATH. |
 
@@ -221,7 +222,7 @@ Reconciled draft expectations: the chart runs as root (`runAsUser 0`) with `read
 - Build-time cost: Go plus Node/yarn plus WASM. Large image; check disk in CI (draft caveat, still valid).
 - Security: the server compiles and runs user-submitted Go code. Sandboxing and CPU/memory limits are not in the upstream image (draft caveat, not verified upstream). Document that in the PR; do not add privileged settings.
 - Upstream final image is Alpine (musl). Ubuntu with the glibc Go toolchain must be checked by running `go version` and a compile inside the built image.
-- Node/yarn and Go versions are not in the ubuntu archive as verified facts; UNVERIFIED until built.
+- Go 1.27.4 and Node 26.13.1 come from the ubuntu base; compatibility with upstream's Go 1.25 and Node 22 is UNVERIFIED until built.
 - arm64: source build expected to work; not verified. Test `linux/arm64` only if the amd64 build fails for an arm64-specific reason (protocol).
 - Blocker check: none found (no musl-only binary, no GPU, no privileged need). The only open items are the unverified version, output paths and Go/Node availability.
 

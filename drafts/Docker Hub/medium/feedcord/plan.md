@@ -79,6 +79,9 @@ schema_version: 1
 upstream_env_url: "https://github.com/Qolors/FeedCord"
 ports: []
 env:
+  - name: CONFIGFILE
+    default: "/config/appsettings.json"
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -87,7 +90,7 @@ volumes:
     required: true
 ```
 
-No upstream env vars exist, so only `TZ` (honoured by .NET via tzdata in the base). `ports: []` because no port is opened. Dependencies: none (the Discord webhook is an external service, not a ContainerForge app).
+No upstream env vars exist, so only the wrapper variable `CONFIGFILE` (read by `start.sh`, passed as the single CLI argument) and `TZ` (honoured by .NET via tzdata in the base). `ports: []` because no port is opened. Dependencies: none (the Discord webhook is an external service, not a ContainerForge app).
 
 ## 7. start.sh
 
@@ -103,7 +106,7 @@ cd /app/feedcord
 exec /app/dotnet/dotnet /app/feedcord/FeedCord.dll "${CONFIGFILE:-/config/appsettings.json}"
 ```
 
-Idempotent, seeds only when missing, no writes to `/app`. `CONFIGFILE` is the same optional override that `adguardhome-sync/start.sh` uses; if kept, add it to settings.yaml `env` (default `/config/appsettings.json`, required false). The single CLI argument is the documented path override (`args.Length == 1`). No port to bind. With the seeded empty `Instances` the app starts and idles (hosted services only registered per instance); verify it does not exit (see section 10).
+Idempotent, seeds only when missing, no writes to `/app`. `CONFIGFILE` is the same optional override that `adguardhome-sync/start.sh` uses; it is listed in settings.yaml `env` (default `/config/appsettings.json`, required false). Note that the seed step above only covers the default path. The single CLI argument is the documented path override (`args.Length == 1`). No port to bind. With the seeded empty `Instances` the app starts and idles (hosted services only registered per instance); verify it does not exit (see section 10).
 
 ## 8. container-test.yaml
 

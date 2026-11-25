@@ -7,15 +7,15 @@
 | --- | --- |
 | Version to build | `3.1.4` (latest stable GitHub release, published 2026-07-29T15:51:25Z, https://api.github.com/repos/FlowiseAI/Flowise/releases/latest). npm publish date for `flowise@3.1.4`: UNVERIFIED (npm registry unreachable). Draft chart tag `docker.io/flowiseai/flowise:3.1.4` matches. |
 | Docker Hub | Tags `3.1.4` and `latest` (2026-07-29) are linux/amd64 and linux/arm64. |
-| Renovate | Chart image: `datasource=docker depName=docker.io/flowiseai/flowise versioning=docker`. Source install via npm: `datasource=npm depName=flowise versioning=npm`. |
+| Renovate | `datasource=npm depName=flowise versioning=npm` (the plan installs from npm, so the chart image datasource is not used). |
 | License | Apache-2.0 with exceptions. The `enterprise/` directory and files with their own copyright notice fall under a separate Commercial License. Third-party parts keep their own licenses (https://raw.githubusercontent.com/FlowiseAI/Flowise/main/LICENSE.md). Not a single SPDX id. The bake `LICENSE` must be decided (section 10). |
 | Source URL | https://github.com/FlowiseAI/Flowise |
 | Download | npm package `flowise@3.1.4`, `bin: {"flowise": "./bin/run"}`, license field "SEE LICENSE IN LICENSE.md". The bin and license values come from the server `package.json` at the pinned commit `a65f81bb43ef66d3ce734bf0dff4223ae8041c95`. The npm tarball itself is UNVERIFIED (registry unreachable). No GitHub release assets. Arch-independent npm install. |
 | Checksum source | npm `integrity` field: UNVERIFIED (registry unreachable). Docker images: none confirmed. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/FlowiseAI/Flowise/a65f81bb43ef66d3ce734bf0dff4223ae8041c95/docker/Dockerfile. `ARG NODE_VERSION=24`. Build stage `node:24-alpine`: `apk add git python3 py3-pip make g++ build-base cairo-dev pango-dev`, `ENV PUPPETEER_SKIP_DOWNLOAD=true`, `RUN npm install -g flowise`. Final stage: `apk add chromium ...`, `ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser`, copies `/usr/local/lib/node_modules` and `/usr/local/bin`, `USER node`, `ENTRYPOINT ["flowise","start"]`. No `EXPOSE`, `VOLUME`, `WORKDIR` or `CMD`. |
-| Port | UNVERIFIED. Draft says 3000, but the upstream Dockerfile has no `EXPOSE`, and the app's docs were not fetched. |
-| Env vars | UNVERIFIED: only the Dockerfile's `PUPPETEER_*` and `NODE_VERSION` were confirmed. App variables (database, port, login) must be read from docs.flowiseai.com before any are listed in `settings.yaml`. |
-| Data path | UNVERIFIED. The draft says a SQLite store under `/config`; not confirmed. |
+| Port | 3000 (`PORT=3000` in `packages/server/.env.example` at the pinned commit; matches the draft; the upstream Dockerfile has no `EXPOSE`). |
+| Env vars | From `packages/server/.env.example` at the pinned commit: `PORT`, `DATABASE_PATH`, `DATABASE_TYPE` (`postgres`), `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USER`, `DATABASE_PASSWORD`, `SECRETKEY_PATH`, `FLOWISE_SECRETKEY_OVERWRITE`, `LOG_PATH`, `LOG_LEVEL`, `BLOB_STORAGE_PATH`, `STORAGE_TYPE`. Dockerfile: `PUPPETEER_SKIP_DOWNLOAD`, `PUPPETEER_EXECUTABLE_PATH`. |
+| Data path | `DATABASE_PATH`, `SECRETKEY_PATH`, `LOG_PATH`, `BLOB_STORAGE_PATH` are configurable (the example shows `.../.flowise` style paths). The SQLite default location when `DATABASE_TYPE` is unset is UNVERIFIED. |
 | Dependencies | PostgreSQL is optional (draft; UNVERIFIED from fetched pages). Chromium is needed by Puppeteer at runtime in the upstream image. |
 | Copy-from | No. Upstream runtime is `node:24-alpine` (musl) with chromium, not usable on glibc Ubuntu. |
 
@@ -66,7 +66,7 @@ RUN echo "**** install flowise ****" && \
 USER apps
 COPY --chmod=0755 . /
 
-# ports and volumes (port and data path UNVERIFIED, see section 10)
+# ports and volumes
 EXPOSE 3000
 VOLUME /config
 ```
@@ -86,7 +86,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"   // Apache-2.0 with exceptions: decide the value (section 10)
+  default = "Apache-2.0"   // NEEDS HUMAN DECISION: Apache-2.0 with a Commercial License for enterprise/ (GitHub SPDX is NOASSERTION), see section 10
 }
 
 variable "SOURCE" {
@@ -103,22 +103,38 @@ Then the four standard targets and the default group, copied from `apps/budge/do
 schema_version: 1
 upstream_env_url: "https://github.com/FlowiseAI/Flowise"
 ports:
-  - port: 3000   # UNVERIFIED: confirm the port flowise listens on
+  - port: 3000
     protocol: tcp
     required: false
 env:
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: DATABASE_PATH
+    default: "/config"
+    required: false
+  - name: SECRETKEY_PATH
+    default: "/config/secrets"
+    required: false
+  - name: LOG_PATH
+    default: "/config/logs"
+    required: false
+  - name: BLOB_STORAGE_PATH
+    default: "/config/storage"
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
-  # Add app variables only after they are confirmed from the Flowise docs, with defaults that match start.sh.
+  # DATABASE_TYPE/DATABASE_HOST/DATABASE_PORT/DATABASE_NAME/DATABASE_USER/DATABASE_PASSWORD (postgres) are real
+  # upstream variables left out of the defaults; add them with empty defaults when the Postgres path is tested.
 volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - postgresql
+  - name: postgresql
 ```
 
-- `opt_dependencies: [postgresql]`: PostgreSQL is optional, and `apps/postgresql` exists (✅ in the draft). Use the `opt_dependencies` key the build protocol names. Confirm the key against the forgetool schema (UNVERIFIED).
+- `opt_dependencies: [postgresql]`: PostgreSQL is optional, and `apps/postgresql` exists (✅ in the draft). Same `opt_dependencies` list form as `apps/babybuddy/settings.yaml`.
 - No `dependencies` entry: flowise must start without PostgreSQL (SQLite default, UNVERIFIED).
 
 ## 7. start.sh
@@ -126,13 +142,19 @@ opt_dependencies:
 ```bash
 #!/usr/bin/env bash
 
-mkdir -p /config/storage
+export PORT="${PORT:-3000}"
+export DATABASE_PATH="${DATABASE_PATH:-/config}"
+export SECRETKEY_PATH="${SECRETKEY_PATH:-/config/secrets}"
+export LOG_PATH="${LOG_PATH:-/config/logs}"
+export BLOB_STORAGE_PATH="${BLOB_STORAGE_PATH:-/config/storage}"
+
+mkdir -p "$DATABASE_PATH" "$SECRETKEY_PATH" "$LOG_PATH" "$BLOB_STORAGE_PATH"
 
 cd /config
 exec /app/flowise/node_modules/.bin/flowise start
 ```
 
-- The directory names and the working directory are placeholders until the data path is confirmed (UNVERIFIED). Upstream sets no `WORKDIR` and uses `flowise start`.
+- The four path variables are real upstream variables (see section 1) and match the chart's `/config/secrets`, `/config/logs`, `/config/storage` layout; their defaults here equal the `settings.yaml` defaults. Upstream sets no `WORKDIR` and uses `flowise start`.
 - Idempotent: create only missing directories. Nothing is seeded into `/config`.
 - Never writes to `/app`. Caches go to `/tmp` (`NPM_CONFIG_CACHE` is build-time only; set `HOME` or the Flowise data env var to `/config` only after confirmation).
 - `exec` so the process gets signals.
@@ -145,7 +167,7 @@ exec /app/flowise/node_modules/.bin/flowise start
 
 timeoutSeconds: 300
 tcp:
-- port: '3000'   # UNVERIFIED port, must match settings.yaml
+- port: '3000'
 http:
 - port: '3000'
   path: /
@@ -173,7 +195,7 @@ Reconciling the draft's security expectations: the chart runs as UID 0, `readOnl
 ## 10. Risks, caveats and open questions
 
 - Chromium: upstream installs it with apk (Alpine). On Ubuntu 26.04 the package may be a snap wrapper that does not run in a container (UNVERIFIED). If there is no working chromium, decide between (a) installing a pinned browser, or (b) shipping without Puppeteer features and documenting it. Do not guess.
-- App env vars and port: not fetched. The port (draft 3000) and login/database variables are UNVERIFIED. Read docs.flowiseai.com before filling `settings.yaml` and `container-test.yaml`.
+- Port and path variables are confirmed from `.env.example`; login variables and the SQLite default location are not listed in `settings.yaml` (UNVERIFIED).
 - Data path: UNVERIFIED (draft says SQLite under `/config`).
 - License: Apache-2.0 with exceptions and a Commercial License for `enterprise/`. The bake `LICENSE` value and the license file to ship must be decided, and the `enterprise/` directory must not be presented as Apache-2.0. Check the packaged `LICENSE.md`.
 - npm integrity: UNVERIFIED (registry unreachable). Pin `flowise@3.1.4` exactly, and check the tarball hash on first install.

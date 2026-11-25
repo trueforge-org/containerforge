@@ -55,7 +55,7 @@ The draft chose python-node for the Node runtime; Python itself is not used. UNV
    - `chown -R apps:apps /app && chmod -R 755 /app`, `npm cache clean --force`, `apt-get clean`, `rm -rf /var/lib/apt/lists/* /tmp/*`
 5. `USER apps`
 6. `COPY --chmod=0755 . /`
-7. `WORKDIR /app/fastcom`. No `EXPOSE` (the app has no listening port). `VOLUME /config` is optional: nothing is persisted; keep it for consistency only if maintainers want it, else omit it and the `volumes` entry.
+7. `WORKDIR /app/fastcom`. No `EXPOSE` (the app has no listening port). `VOLUME /config` (required by the repo rules; nothing is persisted there).
 
 arm64: on `linux/arm64` the puppeteer download has no Chrome for Testing build (UNVERIFIED, see section 10). Do not claim arm64 support until a run proves it.
 
@@ -114,7 +114,9 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-volumes: []
+volumes:
+  - path: /config
+    required: false
 opt_dependencies:
   - name: mosquitto
 ```
@@ -206,7 +208,7 @@ filePaths:
 | MQTT credentials | Options file in `/tmp`, mode 0600, regenerated every start. |
 | Chart runs as root with writable rootfs | Runs as `apps`, read-only rootfs. The `--no-sandbox` Chrome flag is already set by fast-cli, so no root or user-namespace privilege is required. |
 
-No extra persistence (the draft expects none), so `/config` is unused.
+No extra persistence (the draft expects none), so `/config` is declared (`VOLUME /config`) but unused.
 
 ## 10. Risks, caveats and open questions
 

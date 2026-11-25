@@ -93,7 +93,7 @@ env:
     default: "false"
     required: false
   - name: ReverseProxySettings__KnownProxies
-    default: "[]"
+    default: ""
     required: false
   - name: TZ
     default: "Etc/UTC"
@@ -103,7 +103,7 @@ volumes:
     required: true
 ```
 
-Only the README-documented variables that matter most are listed; the `KnownIPv4Network`/`IPv6Network` variants are read the same way and may be added. Dependencies: none (embedded LiteDB). Draft port 3000 is confirmed by upstream `docker-entrypoint.sh`.
+The `KnownProxies` default is empty (UNVERIFIED which list syntax the app accepts; an empty value is not passed on). Only the README-documented variables that matter most are listed; the `KnownIPv4Network`/`IPv6Network` variants are read the same way and may be added. Dependencies: none (embedded LiteDB). Draft port 3000 is confirmed by upstream `docker-entrypoint.sh`.
 
 ## 7. start.sh
 

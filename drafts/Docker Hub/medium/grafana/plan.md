@@ -60,7 +60,7 @@ Fits: the app is a Go binary shipped as a `.deb` for each arch, with its own bun
    ```
 
    The build number `44555861735` is in the file name, so it must be set per release, not as a fixed value. Make it an `ARG` next to `VERSION`, and keep it in sync with `docker-bake.hcl`. The checksums are UNVERIFIED (section 1).
-3. Extract without installing: `dpkg-deb -x /tmp/grafana.deb /tmp/grafana-root`. Then move `usr/share/grafana` to `/app/grafana` and `etc/grafana` to `/tmp/etc-grafana` for the final stage. Remove the `.deb` and `/tmp/grafana-root` at the end of the stage.
+3. Extract without installing: `dpkg-deb -x /tmp/grafana.deb /tmp/grafana-root`. Leave the extracted tree in `/tmp/grafana-root`; the final stage copies `usr/share/grafana` and `etc/grafana` out of it (step 4). Remove the `.deb` only; `/tmp/grafana-root` is discarded with the build stage.
 4. Final stage: `FROM <ubuntu>`, `ARG VERSION`, `USER root`.
 
    ```dockerfile
@@ -163,7 +163,7 @@ ports:
     required: false
 env:
   - name: GF_SECURITY_ADMIN_PASSWORD
-    default: "MYGRAFANAPASSWORD"
+    default: ""
     required: false
   - name: TZ
     default: "Etc/UTC"
@@ -216,7 +216,7 @@ filePaths:
 - /usr/share/licenses/grafana/LICENSE
 ```
 
-- `timeoutSeconds: 240`: Grafana is a large Go app with a slow first start (the value comes from `apps/pwndrop`, the Go sibling, UNVERIFIED for Grafana's real startup time).
+- `timeoutSeconds: 240`: Grafana is a large Go app with a slow first start (240 is used by a few other apps; Grafana's real startup time is UNVERIFIED).
 - The http probe on `/` is UNVERIFIED for the status code a fresh install returns; confirm before relying on it. A health path such as `/api/health` is NOT in the facts, so do not use it without a check.
 - No env vars are set by the test; the default admin password is never needed to start.
 
