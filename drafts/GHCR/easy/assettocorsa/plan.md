@@ -139,6 +139,8 @@ dependencies:
 - `mkdir -p /config/steamcmd/tmp /config/serverfiles`.
 - Call the steamcmd sibling's entry (`/usr/local/bin/steamcmd`) with `+force_install_dir /config/serverfiles +login anonymous +app_update <GAME_ID> validate +quit` (`app_update` syntax is standard SteamCMD; confirm with the steamcmd sibling's script before writing).
 - Seed `/config/serverfiles/cfg/server_cfg.ini` and `entry_list.ini` only when missing (paths UNVERIFIED; confirm in the server docs).
+- UNVERIFIED / needs human: this app's `start.sh` is copied to `/start.sh` and replaces the steamcmd base's `/start.sh` (which bootstraps `/config/Steam/steamcmd`); `/usr/local/bin/steamcmd` execs `/start.sh`, so the call above would loop into this script. Rename the script or call `/config/Steam/steamcmd/steamcmd.sh` directly.
+- `dependencies: [steamcmd]` in settings.yaml is a build base, not a runtime dependency container (draft says none); UNVERIFIED whether it should be listed.
 - Do not write to `/app`. Scratch in `/tmp`.
 - Final line: `exec` the server binary from `/config/serverfiles` (the binary name and args UNVERIFIED).
 - Track and car content must be copied from a licensed Assetto Corsa install by the user (draft caveat, inferred). The script does not fetch them.

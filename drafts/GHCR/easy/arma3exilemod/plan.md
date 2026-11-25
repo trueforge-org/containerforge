@@ -28,7 +28,7 @@
 - `apps/arma3exilemod/start.sh` (install and launch; same design as `apps/arma3`)
 - `apps/arma3exilemod/defaults/server.cfg` (seeded only when missing)
 
-Add `apps/arma3exilemod/defaults/` only if the mod files come from the image (they do not; see section 10). No `root/`, no `DOWNSTREAM_CHANGES.md`.
+`defaults/server.cfg` holds only the base server config; ExileMod files are not shipped (see section 10). No `root/`, no `DOWNSTREAM_CHANGES.md`.
 
 Reuse: build this app from `apps/arma3` once that plan is implemented, and keep the two `start.sh` files the same except for the Exile-specific steps.
 
@@ -49,6 +49,7 @@ COPY --chmod=0644 defaults/server.cfg /defaults/server.cfg
 USER apps
 COPY --chmod=0755 . /
 EXPOSE 2302/udp 2303/udp 2304/udp 2305/udp 2306/udp
+VOLUME /config
 ENTRYPOINT ["/start.sh"]
 ```
 
@@ -138,6 +139,7 @@ cd "${ARMA_DIR}"
 exec ./arma3server_x64 -config=server.cfg -port=2302   # binary name and flags: UNVERIFIED
 ```
 
+- UNVERIFIED / needs human: this app's `start.sh` is copied to `/start.sh` and so replaces the steamcmd base's `/start.sh` (`apps/steamcmd/start.sh`, which bootstraps `/config/Steam/steamcmd` and handles `STEAM_APP_IDS`); the line above that calls `/start.sh` would then call itself. Rename the script (and keep the `COPY . /` allow-list in mind) or call `/config/Steam/steamcmd/steamcmd.sh` directly after the bootstrap. `apps/arma3` does not exist yet, so its plan is not a precedent.
 - Idempotent: seeds files only when missing; reinstalls via steamcmd each start (as the base does); no writes to `/app`.
 - If MariaDB is an external dependency, the start script waits for it (for example a TCP check on the DB host and port from env) and applies DB passwords from env on every start (start-script rule). Do this only after the DB env names are verified.
 - `exec` the final server process.

@@ -40,7 +40,7 @@ No `defaults/` needed unless the seeded config is kept as a file in the image; s
 2. `ARG VERSION`, `ARG TARGETARCH`, and per-arch checksum args `ARG SHA256_AMD64`, `ARG SHA256_ARM64` with the values above (kept in step with VERSION).
 3. `USER root`, then `apt-get install -y --no-install-recommends ca-certificates curl` only if the base does not already provide them (check first; do not reinstall). Pin any added apt version and check it against VERSION.
 4. Map arch: `amd64 -> x86_64` (tarball name), `arm64 -> arm64`.
-5. `curl -fL https://github.com/autobrr/autobrr/releases/download/v${VERSION}/autobrr_${VERSION}_linux_${ARCH}.tar.gz -o /tmp/autobrr.tgz`, check sha256 against the per-arch ARG, `tar -xzf /tmp/autobrr.tgz -C /tmp autobrr autobrrctl`, `install -m 0755 /tmp/autobrr /tmp/autobrrctl /app/`, then `rm -rf /tmp/autobrr*`.
+5. `curl -fL https://github.com/autobrr/autobrr/releases/download/v${VERSION}/autobrr_${VERSION}_linux_${ARCH}.tar.gz -o /tmp/autobrr.tgz`, check sha256 against the per-arch ARG, `tar -xzf /tmp/autobrr.tgz -C /tmp autobrr autobrrctl`, `install -d /app && install -m 0755 /tmp/autobrr /tmp/autobrrctl /app/`, then `rm -rf /tmp/autobrr*`.
 6. License: upstream LICENSE from the tag copied to `/usr/share/licenses/autobrr/LICENSE`.
 7. `ENV HOME=/config XDG_CONFIG_HOME=/config XDG_DATA_HOME=/config` (matches upstream; `/config` is the persistent path).
 8. Tail:

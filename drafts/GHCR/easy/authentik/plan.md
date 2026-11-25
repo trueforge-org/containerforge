@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | `2026.8.6` (release tag `version/2026.8.6`, published 2026-11-20). Draft tags match. Source: https://api.github.com/repos/goauthentik/authentik/releases/latest |
+| Version to build | `2026.8.6` (release tag `version/2026.8.6`), matching the draft tags. Note: GitHub `releases/latest` now returns `version/2026.8.7` (published 2026-11-25); decide whether to bump to 2026.8.7 and re-check asset names and sizes below. Source: https://api.github.com/repos/goauthentik/authentik/releases/latest |
 | Renovate | `datasource=github-releases depName=goauthentik/authentik versioning=loose` (tag prefix `version/`; use `extractVersion` `^version/(?<version>.+)$` if the tag is kept literal). UNVERIFIED: exact renovate regex against the bake file; check a sibling with a prefixed tag. |
 | License | Core is MIT (LICENSE: "Content outside of the above mentioned directories ... is available under the MIT license"). `enterprise/` is separately licensed, not in the outpost binaries. GitHub API reports `NOASSERTION`, so use `MIT` and note it. Source: https://api.github.com/repos/goauthentik/authentik/contents/LICENSE |
 | Source URL | https://github.com/goauthentik/authentik |
@@ -53,6 +53,7 @@ USER apps
 COPY --chmod=0755 . /
 
 EXPOSE 3389 6636 9300
+VOLUME /config
 WORKDIR /app
 ```
 
@@ -103,12 +104,13 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-volumes: []
-dependencies:
-  - authentik server (external, not a ContainerForge app; UNVERIFIED which env the outpost needs)
+volumes:
+  - path: /config
+    required: false
+dependencies: []   # the authentik server is external, not a ContainerForge app; UNVERIFIED which env the outpost needs
 ```
 
-The outpost token and server URL are required at runtime (UNVERIFIED names; add them as `required: true` with no default only after confirming the names). `volumes: []` because the outpost is stateless; the draft's `/config` expectation does not apply.
+The outpost token and server URL are required at runtime (UNVERIFIED names; add them as `required: true` with no default only after confirming the names). `/config` is declared (Dockerfile `VOLUME /config`) but unused; the outpost is stateless.
 
 ## 7. start.sh
 
@@ -150,7 +152,7 @@ Every port in `settings.yaml` has a probe (section 8 rule). The `tcp` probes run
 | `TMPDIR=/dev/shm/` | `/tmp` (tmpfs under `--read-only --tmpfs /tmp`) |
 | Runtime user `1000` | `apps` (USER apps) |
 | Healthcheck `/ldap healthcheck` | Not added to the image. Prefer the tcp probe in container-test.yaml. Adding a HEALTHCHECK is optional and not required by the brief. |
-| `/config` | Not used (no persistent state). Draft expectation "read-only friendly, no writable paths" is consistent with this. |
+| `/config` | Declared as `VOLUME` per repo rules but not written (no persistent state). Draft expectation "read-only friendly, no writable paths" is consistent with this. |
 
 Chart security expectations (non-root, read-only rootfs, not privileged): consistent with this plan, except the chart's user value (UNVERIFIED in the chart; draft says 1000 for outposts). Use `apps`.
 

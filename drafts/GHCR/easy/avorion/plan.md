@@ -117,6 +117,7 @@ SERVER_DIR=/config/serverfiles
 mkdir -p "${SERVER_DIR}"
 
 # Install or update the dedicated server (app id UNVERIFIED).
+# NOTE (needs human): /usr/local/bin/steamcmd execs /start.sh; if this app's start.sh replaces /start.sh, this call loops into itself. Rename this script or call /config/Steam/steamcmd/steamcmd.sh directly.
 /usr/local/bin/steamcmd +force_install_dir "${SERVER_DIR}" +login anonymous +app_update "${AVORION_APPID}" validate +quit
 
 # Seed the default server config only when missing.
