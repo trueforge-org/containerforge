@@ -108,7 +108,7 @@ schema_version: 1
 upstream_env_url: "https://www.makemkv.com/"
 ports:
   - port: 5800
-    protocol: http
+    protocol: tcp
     required: false
   - port: 5900
     protocol: tcp

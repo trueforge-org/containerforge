@@ -51,7 +51,7 @@ Why it fits: the upstream base is a Debian 12 noVNC image. ContainerForge has no
        curl -fsSL -o /tmp/megasync.deb "${REPO}/megasync_${VERSION}_${TARGETARCH}.deb"
    ```
    Both URLs were confirmed by HTTP 200 in this run. The arm64 deb comes from the Ubuntu 24.04 repo, so its runtime on ubuntu 26.04 is UNVERIFIED.
-3. Final stage `FROM <ubuntu>`, `USER root`. Install the deb with apt so its dependencies resolve: `apt-get install -y --no-install-recommends /tmp/megasync.deb`, then install the GUI runtime (Qt libs, xcb, mesa, fonts, `x11-xserver-utils`). Use upstream's list as the starting point, trimmed to what the deb does not already pull in. Package names on ubuntu 26.04 (Qt5 vs Qt6) are UNVERIFIED; check `apt-cache` in the build.
+3. Final stage `FROM <ubuntu>`, `USER root`. `COPY --from=megasync-fetch /tmp/megasync.deb /tmp/megasync.deb` (the final stage has no deb otherwise), then install the deb with apt so its dependencies resolve: `apt-get install -y --no-install-recommends /tmp/megasync.deb`, then install the GUI runtime (Qt libs, xcb, mesa, fonts, `x11-xserver-utils`). Use upstream's list as the starting point, trimmed to what the deb does not already pull in. Package names on ubuntu 26.04 (Qt5 vs Qt6) are UNVERIFIED; check `apt-cache` in the build.
 4. Do not reinstall anything already in the base. Clean apt lists in the same RUN.
 5. Remove the downloaded deb in the same layer: `rm -f /tmp/megasync.deb`.
 6. Licence: the MEGA client licence file from the deb (`/usr/share/doc/megasync/`) is copied to `/usr/share/licenses/megasync/` if present (UNVERIFIED that the deb ships one).
@@ -105,7 +105,7 @@ schema_version: 1
 upstream_env_url: "https://github.com/meganz/MEGAsync"
 ports:
   - port: 8080
-    protocol: http
+    protocol: tcp
     required: false
   - port: 5900
     protocol: tcp

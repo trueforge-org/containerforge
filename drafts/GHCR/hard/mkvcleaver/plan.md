@@ -118,9 +118,6 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-  - name: LANG
-    default: "en_US.UTF-8"
-    required: false
   - name: DISPLAY_WIDTH
     default: "1920"
     required: false
@@ -130,9 +127,6 @@ env:
   - name: VNC_PASSWORD
     default: ""
     required: false
-  - name: WEB_AUTHENTICATION
-    default: "0"
-    required: false
 volumes:
   - path: /config
     required: true
@@ -141,7 +135,7 @@ volumes:
 dependencies: []
 ```
 
-- Only list env vars that `start.sh` or the stack reads. Start from the list above and drop any the app does not read (rule: do not invent env vars). Keep `DISPLAY_WIDTH/HEIGHT` and `VNC_PASSWORD` because the stack reads them.
+- Only list env vars that `start.sh` or the stack reads. Start from the list above and drop any the app does not read (rule: do not invent env vars). Keep `DISPLAY_WIDTH/HEIGHT` and `VNC_PASSWORD` because the stack reads them. `LANG` and `WEB_AUTHENTICATION` are jlesage baseimage variables that the planned `start.sh` does not implement, so they were removed; add them back only if `start.sh` handles them.
 - `/storage` is the host media mount (README). List it because the app reads files from it; it is not required to start.
 - `dependencies: []` (no ContainerForge dependency).
 

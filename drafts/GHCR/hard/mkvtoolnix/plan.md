@@ -51,8 +51,8 @@ Do not create `root/`. Do not create `DOWNSTREAM_CHANGES.md` (not a `FROM` base)
 2. `USER root`.
 3. Add the MKVToolNix apt repo in one `RUN`:
    - `apt-get update && apt-get install -y --no-install-recommends ca-certificates wget gnupg`.
-   - `wget -O /etc/apt/keyrings/gpg-pub-moritzbunkus.gpg https://mkvtoolnix.download/gpg-pub-moritzbunkus.gpg`.
-   - `echo "deb [arch=${TARGETARCH_DEB} signed-by=/etc/apt/keyrings/gpg-pub-moritzbunkus.gpg] https://mkvtoolnix.download/ubuntu/ resolute main" > /etc/apt/sources.list.d/mkvtoolnix.download.list` (map `TARGETARCH` amd64/arm64 to the same apt names; arm64 line UNVERIFIED).
+   - `mkdir -p /etc/apt/keyrings`, then `wget -O /etc/apt/keyrings/gpg-pub-moritzbunkus.gpg https://mkvtoolnix.download/gpg-pub-moritzbunkus.gpg`.
+   - `echo "deb [arch=${TARGETARCH} signed-by=/etc/apt/keyrings/gpg-pub-moritzbunkus.gpg] https://mkvtoolnix.download/ubuntu/ resolute main" > /etc/apt/sources.list.d/mkvtoolnix.download.list` (map `TARGETARCH` amd64/arm64 to the same apt names; arm64 line UNVERIFIED).
    - Check the key fingerprint by hand once and record it in the PR.
 4. Install pinned packages: `apt-get install -y --no-install-recommends "mkvtoolnix=${MKVTOOLNIX_PACKAGE_VERSION}" "mkvtoolnix-gui=${MKVTOOLNIX_PACKAGE_VERSION}"` plus `xvfb x11vnc novnc websockify` (package names inferred; UNVERIFIED for `resolute`; `apps/xvfb` already installs `xvfb`). Pin the version like `apps/valkey` does, and check it against `VERSION` with `test "${PKG%%-*}" = "${VERSION}"` (repo rule: version alignment).
 5. `apt-get purge` build helpers (`wget`, `gnupg` if not needed), `apt-get clean`, `rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*`. Do not leave the repo list in `/etc/apt/sources.list.d` (remove it after install so the image does not drift).
@@ -112,9 +112,6 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-  - name: LANG
-    default: "en_US.UTF-8"
-    required: false
   - name: DISPLAY_WIDTH
     default: "1920"
     required: false
@@ -132,7 +129,7 @@ volumes:
 dependencies: []
 ```
 
-- Only list env vars that `start.sh` or the stack reads. Remove any that the chosen stack does not use.
+- Only list env vars that `start.sh` or the stack reads. Remove any that the chosen stack does not use (`LANG` was removed: the planned `start.sh` does not read it).
 - `/storage` is listed because the app reads and writes media there (README), not because it is needed to start.
 
 ## 7. start.sh
