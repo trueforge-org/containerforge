@@ -12,7 +12,7 @@
 | arm64 | https://bitcoincore.org/bin/bitcoin-core-32.1/bitcoin-32.1-aarch64-linux-gnu.tar.gz |
 | Checksum | https://bitcoincore.org/bin/bitcoin-core-32.1/SHA256SUMS (signed by SHA256SUMS.asc; verify the sha256 line, optionally the PGP signature) |
 | Upstream Dockerfile | none public (draft). Contents of tarball (bin/bitcoin-qt, bin/bitcoind, bin/bitcoin-cli, share/, COPYING): UNVERIFIED for 32.x layout, inspect after extract |
-| Ports | 8333/tcp P2P (draft, inferred; Bitcoin Core default mainnet), 6080 noVNC, 5900 VNC (draft, inferred) |
+| Ports | 8333/tcp P2P (draft, inferred; Bitcoin Core default mainnet), 6901 noVNC, 5901 VNC (Docker Hub run examples and chart; see context/dockerhub-ulisses1478-bitcoinwallet-gui.md) |
 | Data | datadir /headless/.bitcoin in the draft image; this image uses /config/.bitcoin via `-datadir` |
 | Env vars | Bitcoin Core reads none for this wrapper; VNC password var is image-defined (see section 6) |
 

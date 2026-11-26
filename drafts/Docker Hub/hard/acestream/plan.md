@@ -15,7 +15,7 @@
 | Upstream Dockerfile reviewed | `acestream-service/Dockerfile` at the draft commit and `vstavrinov/acestream-engine/Dockerfile` (base `python:3.10`). Engine start: `./start-engine --client-console --live-cache-type memory`. |
 | Engine internals | `start-engine` sets `LD_LIBRARY_PATH=${ROOT}/lib` and runs `acestreamengine`. `readelf -d` shows `NEEDED libpython3.10.so.1.0`; the `lib/` tree holds `cp310` wheels and `py3.10` eggs. It needs a CPython 3.10 shared library plus `pip install -r requirements.txt` (`pycryptodome lxml apsw psutil pynacl iso8601 aiohttp`). |
 | Real env vars | Only those the wrapper's CMD reads: `PORT` (nginx listen port, default 80), `ENTRY` (external host port used to rewrite stream URLs, default empty), `SCHEME` (`https` default or `http`), plus `TMP`, `PYTHONDONTWRITEBYTECODE`, `COLUMNS` as ENV. |
-| Ports | nginx front on `$PORT` (80 default; the chart sets 8008), engine HTTP API `6878` on localhost (nginx proxies it), gunicorn `search.py` on `127.0.0.1:3031`. Standard engine stream port `6868` is rewritten by nginx `sub_filter`. |
+| Ports | nginx front on `$PORT` (80 default; the chart sets 8008), engine HTTP API `6878` on localhost (nginx proxies it), gunicorn `search.py` on `0.0.0.0:3031` (upstream CMD, see context/github-vstavrinov-acestream-service.md). Standard engine stream port `6868` is rewritten by nginx `sub_filter`. |
 | Runtime paths | Everything lives in `/dev/shm` (`/dev/shm/.ACEStream`, `/dev/shm/tmp`, copied `/dev/shm/nginx`). The image runs as user `ace` (uid 1000 per chart). |
 
 ## 2. Target layout

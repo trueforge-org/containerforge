@@ -4,7 +4,7 @@
 ## 1. Verified upstream facts
 | Item | Value |
 |---|---|
-| Version | 2.24.4 (GitHub "Latest" release, published 3 Oct; matches chart tag) |
+| Version | 2.25.0 (GitHub "Latest" release, published 25 Nov, commit d9b80ce; matches chart tag; see context/github-automatic-ripping-machine-automatic-ripping-machine.md) |
 | Renovate | datasource=github-releases, depName=automatic-ripping-machine/automatic-ripping-machine, versioning=semver (tags bare) |
 | License | MIT (LICENSE file: Benjamin Bryan 2016, Andrew Sneed 2022). MakeMKV and HandBrake carry their own licenses (see section 10) |
 | Source | https://github.com/automatic-ripping-machine/automatic-ripping-machine |
@@ -31,7 +31,7 @@ Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh, defau
 7. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`, `WORKDIR /config`.
 
 ## 5. docker-bake.hcl
-APP=automatic-ripping-machine; VERSION "2.24.4" with `// renovate: datasource=github-releases depName=automatic-ripping-machine/automatic-ripping-machine versioning=semver`; LICENSE "MIT"; SOURCE "https://github.com/automatic-ripping-machine/automatic-ripping-machine". Standard targets + default group; image-all amd64+arm64 (arm64 stays unvalidated if MakeMKV is excluded). `docker buildx bake --print`.
+APP=automatic-ripping-machine; VERSION "2.25.0" with `// renovate: datasource=github-releases depName=automatic-ripping-machine/automatic-ripping-machine versioning=semver`; LICENSE "MIT"; SOURCE "https://github.com/automatic-ripping-machine/automatic-ripping-machine". Standard targets + default group; image-all amd64+arm64 (arm64 stays unvalidated if MakeMKV is excluded). `docker buildx bake --print`.
 
 ## 6. settings.yaml
 Header, schema_version 1, upstream_env_url = SOURCE. ports: 8080/tcp required false. env: TZ; ARM_UID and ARM_GID are consumed by the upstream init (my_init scripts), which this image does not run; do NOT list them unless start.sh implements them (the container runs as the fixed apps UID; mounts must be owned accordingly). volumes: /config required true (single root for arm.yaml, db, logs, media); document optional separate mounts /config/media and /config/music for large output. dependencies: none.
@@ -66,10 +66,10 @@ Draft expects root, rw rootfs and device access. Rootless is only partially poss
 cd apps/automatic-ripping-machine
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
-docker run --rm -d --name automatic-ripping-machine-probe --read-only --tmpfs /tmp -v automatic-ripping-machine-probe-config:/config automatic-ripping-machine:2.24.4
+docker run --rm -d --name automatic-ripping-machine-probe --read-only --tmpfs /tmp -v automatic-ripping-machine-probe-config:/config automatic-ripping-machine:2.25.0
 docker logs -f automatic-ripping-machine-probe   # expect Flask/waitress listening on 0.0.0.0:8080, DB created in /config, no permission errors
 docker rm -f automatic-ripping-machine-probe; docker volume rm automatic-ripping-machine-probe-config
-forgetool containers test --image automatic-ripping-machine:2.24.4 --config ./apps/automatic-ripping-machine/container-test.yaml
+forgetool containers test --image automatic-ripping-machine:2.25.0 --config ./apps/automatic-ripping-machine/container-test.yaml
 ```
 Manual optical-drive test requires a host drive: not part of the protocol.
 

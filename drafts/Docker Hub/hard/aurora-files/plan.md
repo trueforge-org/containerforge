@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version | `9.8.7` (`VERSION` file on `afterlogic/aurora-files` master reads `9.8.7.build9`). The draft names only `latest`. The vendor zip at https://afterlogic.org/download/aurora-files.zip is unversioned (HTTP 200, 79,848,196 bytes, last-modified 2026-10-26), so the zip's own `VERSION` file must be checked at build time. |
-| Renovate | `datasource=github-tags`, `depName=afterlogic/aurora-files`, `versioning=loose`. UNVERIFIED: the repo's Releases page is empty and I could not list its tags (GitHub API rate-limited). If there are no tags, drop Renovate for this app and bump `VERSION` by hand. |
+| Renovate | `datasource=github-tags`, `depName=afterlogic/aurora-files`, `versioning=loose`. Releases and tags do exist (latest tag `9.3.1`, 17 Mar, commit `8655ac5`, 10 releases listed; see context/github-afterlogic-aurora-files.md). They lag master's `VERSION` (`9.8.7.build9`), so a github-tags Renovate would track `9.3.1`; bump `VERSION` by hand if that is not acceptable. |
 | License | `AGPL-3.0` (repo README: AGPL-3.0, bundled modules carry their own licenses). SPDX for bake: `AGPL-3.0-only`. UNVERIFIED whether "or later". The draft's "licence for the vendor code" worry is answered by the AGPLv3 statement, but the afterlogic.org zip terms were not read. |
 | Source URL | https://github.com/afterlogic/aurora-files (docs https://afterlogic.com/docs) |
 | Downloads | Interpreted PHP, so one arch-independent artifact: `https://afterlogic.org/download/aurora-files.zip` (prebuilt, no composer or npm needed). Building from GitHub needs git, composer and npm plus several modules, so use the zip. |
