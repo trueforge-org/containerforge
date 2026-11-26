@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Version | `v11.6.0` is the latest tag and release (2026-11-20 build date inside the zip). The draft and the chart use `v11.5.0` (via `mpepping/cyberchef:v11.5.0`), which is one release behind. Use `v11.6.0`. |
+| Version | `v11.6.0` is the latest tag and release (2026-11-20 build date inside the zip). The draft uses `v11.5.0`, which is one release behind; the TrueCharts chart already uses `mpepping/cyberchef:v11.6.0`. Use `v11.6.0`. |
 | Tag format | `vX.Y.Z` (with `v`), like `apps/it-tools` |
 | Renovate | `datasource=github-releases depName=gchq/CyberChef` (default semver; the `v` prefix is kept) |
 | License | `Apache-2.0` (repo `LICENSE` is the Apache License 2.0) |
