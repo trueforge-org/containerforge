@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | 3.09.00 (GitHub latest release, published 2026-11-22: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest). Draft says 3.08.00; the TrueCharts chart already pins 3.09.00 (`ghcr.io/haveagitgat/tdarr_node:3.09.00@sha256:0b9a1a5217629930e4fe361047471c78f20a884bdd91f120960cca0a12613742`, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tdarr-node/values.yaml). Use 3.09.00. |
+| Version to build | 3.09.00 (GitHub latest release, published 2026-11-22: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest). A re-check on 2026-11-26 shows 3.10.00 published 2026-11-25, so confirm which one to build. Draft says 3.08.00; the TrueCharts chart already pins 3.09.00 (`ghcr.io/haveagitgat/tdarr_node:3.09.00@sha256:0b9a1a5217629930e4fe361047471c78f20a884bdd91f120960cca0a12613742`, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tdarr-node/values.yaml). Use 3.09.00. |
 | Renovate | `datasource=github-releases depName=HaveAGitGat/Tdarr versioning=loose` (UNVERIFIED: no renovate precedent checked in this run; tags are plain 3.x.y). |
 | License | UNVERIFIED: GitHub reports `NOASSERTION` for https://github.com/HaveAGitGat/Tdarr. Read the LICENSE file in the repo before setting `LICENSE`. |
 | Source URL | https://github.com/HaveAGitGat/Tdarr |
@@ -13,7 +13,7 @@
 | Download (arm64) | `https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/$VERSION/linux_arm64/Tdarr_Node_$DATE.zip` (same source). UNVERIFIED that the zip exists for 3.09.00 (not fetched). |
 | `$DATE` value | UNVERIFIED: the upstream Dockerfile takes `DATE` as a build arg from the upstream `tdarr_acc` base tag `base_${VERSION}_${DATE}`. The DATE for 3.09.00 was not found. tdarr.io/downloads returned no links and the GitHub release asset list returned no data (HTTP 403 on WebFetch). Resolve it before writing the Dockerfile. |
 | Checksum source | None: the upstream Dockerfile has no checksum step. Record the zip SHA-256 at build time and check it in the Dockerfile, or mark it as UNVERIFIED in the PR. |
-| Upstream Dockerfile reviewed | `docker/Dockerfile.final`: `FROM docker.io/haveagitgat/tdarr_acc:base_${VERSION}_${DATE}`; apt curl, unzip, mkvtoolnix, libtesseract-dev; `ENV WEB_UI_PORT=8265 SERVER_PORT=8266 NODE_PORT=8267 PUID=1000 PGID=1000 UMASK=002 TZ=Etc/UTC HOME=/home/Tdarr inContainer=true`; zip fetched only when MODULE is Tdarr_Server, saved to /tmp/Tdarr_Node.zip; no WORKDIR, VOLUME, USER or LABEL; `ENTRYPOINT ["/init"]`; EXPOSE 8267, 8265, 8266. |
+| Upstream Dockerfile reviewed | `docker/Dockerfile.final`: `FROM docker.io/haveagitgat/tdarr_acc:base_${VERSION}_${DATE}`; apt curl, unzip, mkvtoolnix, libtesseract-dev; `ENV WEB_UI_PORT=8265 SERVER_PORT=8266 NODE_PORT=8267 PUID=1000 PGID=1000 UMASK=002 TZ=Etc/UTC HOME=/home/Tdarr inContainer=true`; for MODULE=Tdarr_Node the node zip (`${BASE_LINK}/linux_x64/Tdarr_Node_$DATE.zip`, or `linux_arm64`) is saved to /tmp/Tdarr_Node.zip and unzipped to /app/Tdarr_Node excluding `*.exe`; no WORKDIR, VOLUME, USER or LABEL; `ENTRYPOINT ["/init"]`; EXPOSE 8267, 8265, 8266. |
 | Ports | Chart: node `serverPort` 8266, `serverIP` 0.0.0.0, chart `main` service disabled (values.yaml above). Upstream exposes 8265 (web UI, server only), 8266 (server), 8267 (node web port). A node-only container needs no listening port; see section 10. |
 | Env vars (real) | `NODE_PORT`, `SERVER_PORT`, `WEB_UI_PORT`, `PUID`, `PGID`, `UMASK`, `TZ`, `HOME`, `inContainer`, `BASE_LINK`, `MODULE_LINK`, `NODE_LINK`. The chart sets `serverIP` and `serverPort`, which the node reads from its own config (UNVERIFIED which of these env names the node binary reads). |
 | Data and config paths (chart) | `/app/configs`, `/app/logs`, `/temp` (transcode cache), `/media` (media mount). Upstream `HOME=/home/Tdarr`. |
@@ -45,7 +45,7 @@ Not used: `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` b
 4. Download the zip for `TARGETARCH` (amd64 to `linux_x64`, arm64 to `linux_arm64`) to `/tmp/Tdarr_Node.zip`. Verify its checksum (see section 1). Unzip into `/app/tdarr-node/`.
 5. Ship the license and notices to `/usr/share/licenses/tdarr-node/`.
 6. Symlink the node's writable folders to `/config`: `/app/tdarr-node/configs -> /config/configs`, `/app/tdarr-node/logs -> /config/logs`. Symlinks are created at build time; the target directories are created by `start.sh`.
-7. `ENV HOME=/config PUID=1000 PGID=1000 UMASK=002 TZ=Etc/UTC inContainer=true`. Use `NODE_PORT`, `SERVER_PORT` only if the node reads them (see section 1).
+7. `ENV HOME=/config UMASK=002 TZ=Etc/UTC inContainer=true` (no `PUID`/`PGID`: the runtime user is `apps`). Use `NODE_PORT`, `SERVER_PORT` only if the node reads them (see section 1).
 8. `mkdir -p /config /temp && chown apps:apps /config /temp` (so the `/temp` mount point exists on a read-only rootfs and is writable by `apps`), and keep `/app` owned by root (read-only at runtime).
 9. Tail:
 
@@ -68,7 +68,7 @@ variable "VERSION" {
   // renovate: datasource=github-releases depName=HaveAGitGat/Tdarr versioning=loose
   default = "3.09.00"
 }
-variable "LICENSE" { default = "NOASSERTION" } // replace with the SPDX id from the LICENSE file (section 1)
+variable "LICENSE" { default = "UNVERIFIED" } // NOASSERTION is not a license; set the SPDX id from the LICENSE file (section 1) before shipping
 variable "SOURCE" { default = "https://github.com/HaveAGitGat/Tdarr" }
 ```
 
@@ -80,10 +80,7 @@ Use the four standard targets and the default group from `apps/adguardhome-sync/
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
 schema_version: 1
 upstream_env_url: "https://github.com/HaveAGitGat/Tdarr"
-ports:
-  - port: 8266
-    protocol: tcp
-    required: false
+ports: []
 env:
   - name: serverIP
     default: "0.0.0.0"   # UNVERIFIED: confirm the env name the node reads
@@ -102,7 +99,7 @@ volumes:
 dependencies: []
 ```
 
-Only list env vars the node actually reads (see section 1, UNVERIFIED). Port 8266 is listed only if the node binds it; a worker that only makes outbound connections should have no `ports` entry. Decide that after the first run.
+Only list env vars the node actually reads (see section 1, UNVERIFIED). `ports` is empty because the draft lists no ports and 8266 is the server's port, which the node only connects to. If the first run shows the node binds 8267, add it with a `tcp` probe.
 
 ## 7. start.sh
 
@@ -126,7 +123,7 @@ filePaths:
 - /usr/share/licenses/tdarr-node/LICENSE
 ```
 
-If the node exposes a port (section 6), add a `tcp` probe for it. The node cannot run without a server, so a full functional test is not feasible in a single container. Per the protocol exception, if the app meets all three criteria, annotate with `# narrowed: requires external tdarr server; full functional test not feasible in single-container suite`. Otherwise the process must stay running with no fatal log line.
+`settings.yaml` lists no ports, so no tcp probe is needed; if a port is added there (section 6), add a matching `tcp` probe. The node cannot run without a server, so a full functional test is not feasible in a single container. Per the protocol exception, if the app meets all three criteria, annotate with `# narrowed: requires external tdarr server; full functional test not feasible in single-container suite`. Otherwise the process must stay running with no fatal log line.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

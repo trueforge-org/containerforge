@@ -79,7 +79,7 @@ VOLUME /config
 1. Seed `/config` only when missing: create `/config/data` if absent. Never overwrite existing user data.
 2. Render the nginx and php-fpm configs into `/tmp` (for example `/tmp/nginx.conf`, `/tmp/php-fpm.conf`), with the PID, socket and log paths under `/tmp`. Do not write to `/etc` or `/var/www`.
 3. Start php-fpm in the background, pointing at a unix socket in `/tmp`, then `exec nginx -c /tmp/nginx.conf -g 'daemon off;'` so nginx is PID 1 after the handoff. UNVERIFIED: whether a single process handoff is cleaner with a tiny supervisor; the brief prefers `exec`, so decide during the build and record it here.
-4. Point the app's data directory at `/config/data`. UNVERIFIED: the exact mechanism (env var, config constant or symlink). A build-time symlink from `/var/www/tasmoadmin/data` to `/config/data` is an option (precedent `apps/fenrus` plan: dangling until start.sh creates the target), as is telling the app the path by env or config. Check the app source first.
+4. Point the app's data directory at `/config/data`. UNVERIFIED: the exact mechanism (env var, config constant or symlink). A build-time symlink from `/var/www/tasmoadmin/data` to `/config/data` is an option (the symlink is dangling until start.sh creates the target; no existing `apps/` sibling was checked for this pattern, UNVERIFIED), as is telling the app the path by env or config. Check the app source first.
 
 ## 8. container-test.yaml
 

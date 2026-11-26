@@ -5,11 +5,11 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | 3.09.00 (latest release per GitHub API, published 2026-11-22). Source: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest . The chart pins `ghcr.io/haveagitgat/tdarr:3.08.00`, one version behind. |
+| Version to build | 3.09.00 (latest release at plan time, published 2026-11-22; a re-check on 2026-11-26 shows 3.10.00 published 2026-11-25, so confirm which one to build). Source: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest . The chart pins `ghcr.io/haveagitgat/tdarr:3.08.00`, one version behind. |
 | Renovate | `datasource=github-releases depName=HaveAGitGat/Tdarr versioning=semver` (best judgement; no renovate config checked for this app). |
 | License | UNVERIFIED: GitHub API reports `NOASSERTION` (not detected automatically). Read the LICENSE file in https://github.com/HaveAGitGat/Tdarr before setting `LICENSE` in docker-bake.hcl. |
 | Source URL | https://github.com/HaveAGitGat/Tdarr |
-| Download | Not on GitHub. Upstream Dockerfile.final downloads the module zip from a Backblaze bucket: `BASE_LINK="https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/$VERSION"`, then `/$MODULE` zip per arch (`linux_x64`, `linux_arm64`, `linux_arm`). UNVERIFIED: the exact per-arch zip filenames and that 3.09.00 exists in that bucket. tdarr.io/downloads did not expose links when fetched. |
+| Download | Not on GitHub. Upstream Dockerfile.final downloads the module zip from a Backblaze bucket: `BASE_LINK="https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/$VERSION"`, then `/$MODULE` zip per arch (`linux_x64`, `linux_arm64`, `linux_arm`). Per-arch filenames (Dockerfile.final at 9ec3117): `${BASE_LINK}/linux_x64/${MODULE}_$DATE.zip` (and `linux_arm64`, `linux_arm`), where `DATE` is a build arg tied to the upstream `tdarr_acc:base_${VERSION}_${DATE}` tag; its value for the target version is UNVERIFIED and blocks the URL. UNVERIFIED: that the target version exists in that bucket. tdarr.io/downloads did not expose links when fetched. |
 | Checksum source | None. Upstream Dockerfile.final performs no checksum or signature check (https://raw.githubusercontent.com/HaveAGitGat/Tdarr/9ec31178f6807861c207f8a65a1b8156e46c5b85/docker/Dockerfile.final). |
 | Upstream Dockerfile reviewed | Dockerfile.final: `FROM docker.io/haveagitgat/tdarr_acc:base_${VERSION}_${DATE}`; build args VERSION, DATE, MODULE (Tdarr_Server or Tdarr_Node); apt installs curl, unzip, mkvtoolnix, libtesseract-dev; downloads to `/app/$MODULE` (and `/app/Tdarr_Node` for the server); runs the binaries' built-in tests on `/app_test` then deletes it; `ENV WEB_UI_PORT=8265 SERVER_PORT=8266 NODE_PORT=8267 PUID=1000 PGID=1000 UMASK=002 TZ=Etc/UTC HOME=/home/Tdarr inContainer=true`; `EXPOSE ${NODE_PORT} ${WEB_UI_PORT} ${SERVER_PORT}`; `ENTRYPOINT ["/init"]`; no CMD, no USER, no VOLUME. |
 | Base image reviewed | https://raw.githubusercontent.com/HaveAGitGat/Tdarr/master/docker/Dockerfile.base : `FROM lsiobase/ubuntu:jammy` (LinuxServer.io, Ubuntu 22.04). Installs ffmpeg (jellyfin-ffmpeg 6 on x86, Ubuntu repo ffmpeg on arm), HandBrakeCLI (built from source on x86, Ubuntu repo on arm), mkvtoolnix, CCExtractor (git commit pin `35e73c1c90ce3ca69394d3523836bb1cdec28f11`), Intel GPU drivers on x86 only. Runs as root, user creation commented out. No checksums on downloads. |
@@ -42,7 +42,7 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 2. `apt-get install -y --no-install-recommends curl unzip ffmpeg handbrake-cli mkvtoolnix libtesseract-dev` (UNVERIFIED package names), then `rm -rf /var/lib/apt/lists/*`.
 3. Map `TARGETARCH` to the upstream names: `amd64` to `linux_x64`, `arm64` to `linux_arm64`. Skip `arm` (armv7) unless the build matrix includes it.
 4. Download and extract:
-   `curl -fL -o /tmp/Tdarr_Server.zip "https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/${VERSION}/<zip-name>"` (zip name UNVERIFIED), then `unzip` into `/app/Tdarr_Server` and `/app/Tdarr_Node`, excluding `*.exe`.
+   `curl -fL -o /tmp/Tdarr_Server.zip "https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/${VERSION}/<zip-name>"` (zip name `Tdarr_Server_$DATE.zip`, `DATE` UNVERIFIED; the node zip is `Tdarr_Node_$DATE.zip`), then `unzip` into `/app/Tdarr_Server` and `/app/Tdarr_Node`, excluding `*.exe`.
    Record the sha256 of each zip in the Dockerfile at build time; no upstream checksum exists.
 5. Do not copy upstream's in-build test run unless it is cheap; if kept, run it against a copy in `/tmp`, never against `/app`.
 6. Ensure the binaries are executable: `chmod -R 755 /app/Tdarr_Server /app/Tdarr_Node`.
@@ -61,7 +61,7 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 
 - Schema header and `schema_version: 1`.
 - `upstream_env_url: "https://github.com/HaveAGitGat/Tdarr"`.
-- `ports`: 8265 (web UI, required), 8266 (server, required), 8267 (node, required: false unless the single image runs the internal node; decide in section 10).
+- `ports`: 8265 (web UI, required), 8266 (server, required), 8267 (node, required: false unless the single image runs the internal node; decide when writing `start.sh`, section 7; if not probed, give the reason in `container-test.yaml`).
 - `env`: `TZ` (default `Etc/UTC`), `UMASK` (default `002`), `webUIPort` (8265), `serverPort` (8266), `internalNode` (default `true`), `nodeName` (default `InternalNode`), `inContainer` (default `true`), `ffmpegVersion` (default `7`, only if the app reads it; UNVERIFIED). Do not list `PUID`/`PGID`, since they are not honoured in this image.
 - `volumes`: `/config` (`required: true`), and `/media` and `/tmp/transcode` as needed (`/media` is a media mount, not a ContainerForge volume, so it is listed only if the schema allows it).
 - `dependencies`: none.
@@ -76,7 +76,7 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 ## 8. container-test.yaml
 
 - Schema header copied from the sibling.
-- `tcp` probes: 8265 (web UI) and 8266 (server). If the node port is in settings.yaml with `required: true`, add 8267.
+- `tcp` probes: 8265 (web UI) and 8266 (server). Port 8267 is listed in settings.yaml, so it also needs a tcp probe (8267) when the internal node runs by default (`internalNode=true`); if the node is not started in the test, state that reason in a comment instead (UNVERIFIED which applies).
 - `http` probe on `/` on 8265 (UNVERIFIED that it returns 200 without auth; compose sets `auth=true`, so assert the redirect or 401 and say so in a comment).
 - `timeoutSeconds`: take the value from the closest sibling with a large service (UNVERIFIED sibling).
 - `filePaths`: `/app/Tdarr_Server` binary and `/config/configs`.

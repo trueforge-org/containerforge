@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | Latest GitHub release 2.7.8, published 2026-11-24 (https://api.github.com/repos/TandoorRecipes/recipes/releases/latest). Chart pins 2.7.6 (published 2026-11-18, commit `89c07f26bb168221e41d409224976960cf344289`). Plan targets 2.7.8 unless the user wants the chart version. |
 | Renovate | `datasource=github-releases depName=TandoorRecipes/recipes versioning=semver`. Tags have no `v` prefix. |
-| License | GitHub API reports `NOASSERTION` (https://api.github.com/repos/TandoorRecipes/recipes). SPDX **UNVERIFIED**; the repo LICENSE was not fetched. Blocker: confirm before filling `LICENSE`. |
+| License | GitHub API reports `NOASSERTION` (https://api.github.com/repos/TandoorRecipes/recipes). The repo `LICENSE.md` begins with a "Commons Clause" License Condition v1.0 (no right to Sell the Software), so it is not a plain SPDX license; the underlying license text was not read (UNVERIFIED). Blocker: confirm before filling `LICENSE`, and check it allows redistribution as an image. |
 | Source URL | https://github.com/TandoorRecipes/recipes |
 | Download | No release assets (the release lists none). Build from `https://github.com/TandoorRecipes/recipes/archive/refs/tags/${VERSION}.tar.gz`. The tag's commit SHA is the pin (2.7.6 = `89c07f26bb168221e41d409224976960cf344289`; 2.7.8 SHA UNVERIFIED). |
 | Checksum source | None published. Pin by tag and record the commit SHA in the PR. |
@@ -41,7 +41,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 1. `ARG VERSION` (tag, for example `2.7.8`, no `v`) and `ARG TARGETARCH`. Default matches `docker-bake.hcl`.
 2. Build stage `FROM <python base> AS build`, `USER root`: install build deps for the Python wheels (`gcc`, `libpq-dev`, `libjpeg-dev`, `zlib1g-dev`, `libxml2-dev`, `libxslt1-dev`, `libldap2-dev`, `libsasl2-dev`, `libffi-dev`, `libssl-dev`, `libwebp-dev` and so on, check each against the upstream requirements; UNVERIFIED list).
 3. `curl -fsSL https://github.com/TandoorRecipes/recipes/archive/refs/tags/${VERSION}.tar.gz | tar xz -C /tmp/src --strip-components=1`.
-4. Venv built in place at `/app/venv` (a copied venv breaks its shebangs and paths; sibling `apps/babybuddy` builds `/app/venv` in place; read-only and root-owned at runtime): `python -m venv /app/venv`, then `pip install --no-cache-dir wheel==0.48.0 setuptools_rust==1.13.0` and `pip install --no-cache-dir -r requirements.txt` (strip the `# Development` section as upstream does). Pip cache and build scratch go to `/tmp` (`PIP_CACHE_DIR=/tmp/pip`).
+4. Venv built in place at `/app/venv` (a copied venv breaks its shebangs and paths; sibling `apps/babybuddy` builds `/app/venv` in place on the ubuntu base; read-only and root-owned at runtime): `python -m venv /app/venv`, then `pip install --no-cache-dir wheel==0.48.0 setuptools_rust==1.13.0` and `pip install --no-cache-dir -r requirements.txt` (strip the `# Development` section as upstream does). Pip cache and build scratch go to `/tmp` (`PIP_CACHE_DIR=/tmp/pip`).
 5. Frontend: run the upstream frontend build if the source requires it (UNVERIFIED steps; do not guess). Copy the built static files into the image tree.
 6. Runtime stage, `USER root` for installs: `apt-get install -y --no-install-recommends nginx libpq5 tini gettext-base` (versions not pinned; check `VERSION` alignment is not applicable to apt). Use the base's own Python. Copy `/app/venv` from the build stage with `COPY --from=build /app/venv /app/venv` (same path, so the venv stays valid). Remove the default nginx config and point nginx at the templated config under `/tmp` (see section 9).
 7. License: `install -Dm644 LICENSE /usr/share/licenses/tandoor-recipes/LICENSE` (after confirmation).
@@ -146,7 +146,7 @@ Security expectations from the draft (root, rootfs writable) are TrueCharts defa
 
 - **Blocker, frontend:** the Vue frontend build path is UNVERIFIED. The Dockerfile has no build step, so the port may need a separate build stage. Do not ship without knowing where the static files come from.
 - **Blocker, boot.sh:** not fetched. The rootless port depends on its env names, template paths and process model. Fetch it (`gh api`) before writing `start.sh`.
-- **Blocker, license:** NOASSERTION from the API.
+- **Blocker, license:** NOASSERTION from the API; the LICENSE.md starts with a Commons Clause condition.
 - **Python version:** upstream 3.14 Alpine; ContainerForge python 3.15.2. Check wheels for `requirements.txt` on 3.15.
 - **Postgres:** upstream recommends it; SQLite default for single user (draft, UNVERIFIED).
 - **Version drift:** chart pins 2.7.6, latest is 2.7.8. Chart's extra persistence paths must be remapped.

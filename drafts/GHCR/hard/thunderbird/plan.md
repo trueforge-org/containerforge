@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Thunderbird 161.0 (Mozilla redirect: https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/161.0/linux-x86_64/en-US/thunderbird-161.0.tar.xz, reached from https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US). Release date UNVERIFIED. The chart uses a rolling `ghcr.io/ich777/thunderbird:latest` (https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/thunderbird/values.yaml). Pin 161.0 and do not use the rolling link. |
+| Version to build | Thunderbird 161.0 (Mozilla redirect: https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/161.0/linux-x86_64/en-US/thunderbird-161.0.tar.xz, reached from https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US). 161.0 is the latest release per https://product-details.mozilla.org/1.0/thunderbird_versions.json (re-checked 2026-11-26); release date UNVERIFIED. The chart uses a rolling `ghcr.io/ich777/thunderbird:latest` (https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/thunderbird/values.yaml). Pin 161.0 and do not use the rolling link. |
 | Renovate | UNVERIFIED: no version feed checked. Mozilla publishes release directories under `releases/<version>/`; a custom regex or `datasource=custom` is needed. |
 | License | UNVERIFIED on a fetched page. Thunderbird is MPL-2.0 by common knowledge; confirm from the Mozilla source or the tarball's license file. |
 | Source URL | https://www.thunderbird.net/ (draft); source code at Mozilla hg. |
@@ -33,7 +33,7 @@ Files under `apps/thunderbird/`:
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Reason: draft and upstream both need a desktop stack (GTK3, fonts, X display). Sibling choice: `apps/kasmvnc` (desktop over VNC in a ContainerForge image) or `apps/xvfb`. Check both before writing; reuse the sibling's display and VNC/noVNC setup rather than copying the ich777 base.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Reason: draft and upstream both need a desktop stack (GTK3, fonts, X display). Sibling choice: `apps/kasmvnc` (desktop over VNC in a ContainerForge image) or `apps/xvfb`. Both exist in `apps/`. `apps/kasmvnc` exposes 3000 and 3001 (not 8080) and `apps/xvfb` has no noVNC, so the 8080 port in this plan only holds if a noVNC layer is added; align `settings.yaml`, `EXPOSE` and the probes with whichever display stack is chosen. Check both before writing; reuse the sibling's display and VNC/noVNC setup rather than copying the ich777 base.
 
 ## 4. Dockerfile
 

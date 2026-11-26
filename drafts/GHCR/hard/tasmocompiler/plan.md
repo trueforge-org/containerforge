@@ -10,7 +10,7 @@
 | License | MIT (GitHub API `spdx_id`). Source: https://api.github.com/repos/benzino77/tasmocompiler |
 | Source URL | https://github.com/benzino77/tasmocompiler |
 | Download | No release assets. The artifact is the source at git tag v14.0.3, for example `https://github.com/benzino77/tasmocompiler/archive/refs/tags/v14.0.3.tar.gz` (URL shape not fetched; UNVERIFIED that the archive endpoint is used). |
-| Checksum source | UNVERIFIED: none published. Git tag only. The tarball is pinned by tag and can be verified against the commit SHA `1c863599ac02b435ffb2e8aa907fff9da5829296` that the draft's Dockerfile link points to (UNVERIFIED that this SHA is the v14.0.3 tag target). |
+| Checksum source | UNVERIFIED: none published. Git tag only. The tarball is pinned by tag. The tag v14.0.3 resolves to commit `082abee9ea59cdc653fe107b086358e957670575` (GitHub API). The draft's Dockerfile link points to a different commit, `1c863599ac02b435ffb2e8aa907fff9da5829296`, so that Dockerfile is not the v14.0.3 one; re-read the Dockerfile at the v14.0.3 tag before porting. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/benzino77/tasmocompiler/1c863599ac02b435ffb2e8aa907fff9da5829296/Dockerfile : `FROM node:22-bookworm-slim`; apt installs python3, git, python3-setuptools, python3-pip, python3-venv; `npm install -g nodemon`; copies public, server, src, package.json, package-lock.json to `/tasmocompiler`; `npm ci`, `npm run build`, `chown -R node:node`; removes React/MUI frontend packages (comment calls it "a rather dirty hack"); as `node` creates `/home/node/.platformio/penv` with uv and `pioarduino==6.2.0`; `ENV LC_ALL=C.UTF-8 LANG=C.UTF-8 PATH=/home/node/.platformio/penv/bin:/home/node/.local/bin:$PATH`; `WORKDIR /tasmocompiler`; `USER node`; `EXPOSE 3000/tcp`; no VOLUME; `ENTRYPOINT ["nodemon", "server/app.js"]`, no CMD. |
 | Ports | 3000/tcp (upstream EXPOSE). Confirms the draft's 3000/http, with the protocol corrected to tcp for the probe. |
 | Env vars | Only `LC_ALL`, `LANG`, `PATH` are confirmed, and they are image env, not app config. UNVERIFIED: any app-level env var (server/app.js was not fetched). Do not list env vars in settings.yaml until the source is read. |
@@ -32,20 +32,20 @@
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Fits because the app is Node and calls PlatformIO, a Python tool, so the python-node base covers both. The draft's choice is kept. Closest sibling: `apps/changedetection` or `apps/budge` (python-node). UNVERIFIED: the Node major shipped in python-node:3.15.2; the upstream Dockerfile uses Node 22, so check it in the build and record it. If the base's Node is not 22, the `npm ci` step must still work, and the mismatch goes in section 10.
+Fits because the app is Node and calls PlatformIO, a Python tool, so the python-node base covers both. The draft's choice is kept. Closest siblings: `apps/budge` (same python-node:3.15.2 digest) and `apps/changedetection` (python-node:3.14.8). UNVERIFIED: the Node major shipped in python-node:3.15.2; the upstream Dockerfile uses Node 22, so check it in the build and record it. If the base's Node is not 22, the `npm ci` step must still work, and the mismatch goes in section 10.
 
 ## 4. Dockerfile
 
 1. Build stage `FROM <python-node> AS build`, `ARG VERSION`, `USER root`.
-2. Fetch the v14.0.3 source (tarball or git checkout at the tag). Verify against the upstream commit SHA (section 1 checksum note).
+2. Fetch the v14.0.3 source (tarball or git checkout at the tag). Verify against the tag's commit SHA `082abee9ea59cdc653fe107b086358e957670575` (section 1 checksum note).
 3. `npm ci` and `npm run build` in the build stage, with `npm` cache under `/tmp` (`ENV npm_config_cache=/tmp/npm`).
 4. Do not copy the upstream "remove frontend packages" hack unless the backend needs it. Instead run `npm prune --omit=dev` after the build, to keep the image small without deleting packages by name. UNVERIFIED that this keeps the server working; test it.
 5. Final stage `FROM <python-node>`, `USER root` for installs only:
-   - PlatformIO into a venv that is not under `/config`: a venv at `/app/venv-pio` is also valid at build time (read-only at runtime). This plan puts the venv in `/usr/local/lib/platformio-venv` and install `pioarduino==6.2.0` and `uv` there. Pinned version comes from the upstream Dockerfile.
+   - PlatformIO into a venv that is not under `/config`: a venv at `/app/venv-pio` is also valid at build time (read-only at runtime). This plan puts the venv in `/usr/local/lib/platformio-venv` and installs `pioarduino==6.2.0` and `uv` there. The pinned version comes from the upstream Dockerfile at the draft's commit, not re-checked at the v14.0.3 tag (UNVERIFIED).
    - `COPY --from=build` the built app into `/app/tasmocompiler/`.
    - License: `/usr/share/licenses/tasmocompiler/LICENSE`.
 6. `ENV PLATFORMIO_CORE_DIR=/tmp/platformio HOME=/tmp/home LC_ALL=C.UTF-8 LANG=C.UTF-8 PATH=/usr/local/lib/platformio-venv/bin:$PATH`. PlatformIO caches and toolchains go to `/tmp`, never `/config` (brief and protocol rule).
-7. Tail: `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3000`, `VOLUME /config` only if the app persists state (UNVERIFIED; see section 7), `WORKDIR /app/tasmocompiler`.
+7. Tail: `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3000`, `VOLUME /config` (declared regardless; whether the app persists state there is UNVERIFIED, see section 7), `WORKDIR /app/tasmocompiler`.
 
 ## 5. docker-bake.hcl
 
