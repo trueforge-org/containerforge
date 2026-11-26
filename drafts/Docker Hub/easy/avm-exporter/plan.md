@@ -13,7 +13,7 @@
 | Python requirement | `>=3.14`, so the current python 3.15.2 base is allowed |
 | Dependencies | attrs, defusedxml, fritzconnection, prometheus-client, pyyaml, requests |
 | Per-arch artifact | pure Python wheel, same for amd64 and arm64 (upstream publishes amd64, arm/v6, v7, arm64 images) |
-| Checksum | none published separately; pin `==4.0.3` |
+| Checksum | PyPI JSON API lists a sha256 per file: wheel `f52e54fca16b96564f363541c568d07fce1a01c233702aad181f8a3e5b12aade`, sdist `c4c7cb16de47f83b47c3c231db02d182bc10c36eb45b2890caa204c7465d18c2`; pin `==4.0.3` |
 | Upstream Dockerfile reviewed | https://github.com/pdreker/fritz_exporter/blob/09a957c03cd7c253ea8147d0aecd1a06a08b6bbe/Dockerfile (alpine python 3.14.8; wheel built with uv; `ENV FRITZ_LISTEN_ADDRESS=0.0.0.0`; `EXPOSE 9787`; `ENTRYPOINT python -m fritzexporter`; user 65534; creates `/etc/fritz`) |
 | Entry | `python -m fritzexporter [--config PATH] [--log-level LVL] [--version]` (from `__main__.py`) |
 | Port | 9787/tcp (`exporter_port`/`FRITZ_PORT`, default 9787, allowed range 1024-65535) |

@@ -12,7 +12,7 @@
 | Install | `pip install appdaemon==4.5.16` (pure wheel `py3-none-any`, so one artifact for amd64 and arm64) |
 | Python requirement | `>=3.10,<3.15` (pyproject and PyPI). **The current ContainerForge python base is 3.15.2 and cannot be used.** Use the existing `python:3.14.8` base (same one sabnzbd, home-assistant etc. use). |
 | Entry point | `appdaemon = "appdaemon.__main__:main"` (console script, ends up in `/app/venv/bin/appdaemon`) |
-| Checksum source | PyPI does not publish a separate checksum for a plain `pip install`. Pin the version with `==` (pip fetches over TLS from PyPI). Optional hardening: `--require-hashes` with the sha256 of the wheel, from the PyPI JSON API. |
+| Checksum source | The PyPI JSON API lists a sha256 per file (wheel `ca686e13faca3168bd717831f391a1c651752244d2b7f76b40a855b4bd4583e4` for 4.5.16); a plain `pip install` does not verify it by itself. Pin the version with `==` (pip fetches over TLS from PyPI). Optional hardening: `--require-hashes` with the sha256 of the wheel, from the PyPI JSON API. |
 | Upstream Dockerfile reviewed | https://github.com/AppDaemon/appdaemon/blob/239dd4b130f98a8053058fbe82d6cce9d62e919d/Dockerfile (alpine/musl, uv, `/conf` + `/certs` volumes, EXPOSE 5050, entrypoint `/start.sh`) and `scripts/start.sh` at tag 4.5.16 |
 | Port | 5050/tcp (dashboard, admin, API), from `http: url: http://0.0.0.0:5050` in `conf/appdaemon.yaml.example` |
 | Upstream env vars (read by upstream `start.sh`, not by the app) | `HA_URL`, `TOKEN`, `DASH_URL`, `HA_CERT_VERIFY`, `TIMEZONE`, `LATITUDE`, `LONGITUDE`, `ELEVATION`, plus MQTT ones (`MQTT_NAMESPACE`, `MQTT_CLIENT_HOST`, `MQTT_CLIENT_USER`, `MQTT_CLIENT_PASSWORD`). These are implemented by sed in the upstream script, so our `start.sh` must reimplement them. |
@@ -120,7 +120,7 @@ Write the `env` list in the block style the siblings use (one `- name:` / `defau
    ```
    Applies only when the file is YAML (skip with a log line if the user supplied `appdaemon.toml`). `yq -i` rewrites the file and drops comments in it; acceptable, document it.
 5. `export HOME=/config`; nothing needs `/tmp` caches (bytecode is disabled in the base), but export `XDG_CACHE_HOME=/tmp/.cache` for safety.
-6. Final: `exec /app/venv/bin/appdaemon -c /config "$@"` (matches upstream `appdaemon -c $CONF "$@"`; extra args such as `-D DEBUG` pass through).
+6. Final: `exec /app/venv/bin/appdaemon -c /config "$@"` (matches upstream's final `exec uv run --frozen appdaemon -c $CONF "$@"` without the `uv run` wrapper; extra args such as `-D DEBUG` pass through).
 7. No runtime `apk`/`pip install` of user `requirements.txt` (read-only `/app/venv`). Optional follow-up, not in v1: a persistent `/config/venv` seeded from `/app/venv` per `python-runtime.instructions.md` if users need extra libs.
 
 ## 8. container-test.yaml

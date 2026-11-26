@@ -138,7 +138,7 @@ Draft expectations: chart runs as UID 0 and a writable rootfs; both are dropped,
 
 ## 10. Risks, caveats and open questions
 
-- Draft: no usable default config upstream and users must be created by hand; here a generated config exists and an empty user file denies all access until `USERNAME` and `PASSWORD` or `/config/user.passwd` is supplied.
+- Draft: multiple users must be created by hand (upstream generates its config and a single user from env); here a generated config exists and an empty user file denies all access until `USERNAME` and `PASSWORD` or `/config/user.passwd` is supplied.
 - Draft: third-party rolling image, not an Apache release: replaced by Ubuntu's `apache2`; behaviour is reimplemented, so it may differ in details (index layout, Windows client quirks). Windows Mini-Redirector over plain HTTP requires `Digest` or a registry change; document it.
 - Version tracking: the Ubuntu security revision `2.4.66-2ubuntu2.7` will move; the build will fail loudly on a stale pin (by design), but renovate cannot automate it (UNVERIFIED repology option).
 - UNVERIFIED: apache2's non-root start with `-f` (the Debian `apache2ctl` envvars are bypassed; modules path, `Mutex` and `ScriptSock` for mod_cgid are not needed because cgid is not loaded); confirm no `AH00023`/permission errors in logs.
