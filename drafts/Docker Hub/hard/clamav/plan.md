@@ -7,11 +7,11 @@
 |---|---|
 | Version | 1.5.5 (release tag `clamav-1.5.5`, published 18 Nov; matches the draft) |
 | Renovate | `datasource=github-releases depName=Cisco-Talos/clamav extractVersion=^clamav-(?<version>.+)$ versioning=semver` |
-| License | GPL-2.0-only (COPYING.txt is GPLv2 plus an OpenSSL linking exception). SPDX for bake: `GPL-2.0-only` |
+| License | GPL-2.0 (COPYING.txt is GPLv2 plus an OpenSSL linking exception; the "only" vs "or later" choice is not settled by COPYING.txt). SPDX for bake: `GPL-2.0-only` is UNVERIFIED (clamav-docker's header says `GPL-2.0-or-later`, but that header is for the docker repo) |
 | Source URL | https://github.com/Cisco-Talos/clamav/ |
 | amd64 download | `https://github.com/Cisco-Talos/clamav/releases/download/clamav-${VERSION}/clamav-${VERSION}.linux.x86_64.deb` (from the draft) |
 | arm64 download | `https://github.com/Cisco-Talos/clamav/releases/download/clamav-${VERSION}/clamav-${VERSION}.linux.aarch64.deb` (from the draft) |
-| Checksum | UNVERIFIED: the release asset list did not load (GitHub API returned 403). Take the sha256 from the GitHub asset digest or https://www.clamav.net/downloads and pin it per arch in the Dockerfile |
+| Checksum | clamav.net publishes **no SHA256**: it publishes a detached `.sig` per .deb and a PGP key at `https://www.clamav.net/downloads/gpg_public_key`. Verify the `.sig`, then compute and pin sha256 per arch in the Dockerfile (the GitHub asset list did not load, so its digests are unconfirmed) |
 | Upstream Dockerfile | clamav-docker `clamav/1.5/debian/Dockerfile` reviewed: builds from source on `debian:13-slim`, install prefix `/usr`, config in `/etc/clamav`, user `clamav` UID/GID 1000, ports 3310 (clamd) and 7357 (milter), no VOLUME, runs as root unless `/init-unprivileged` is used |
 | Upstream env | `CLAMAV_NO_CLAMD`, `CLAMAV_NO_FRESHCLAMD`, `CLAMAV_NO_MILTERD` (default true), `FRESHCLAM_CHECKS` (default 1), `CLAMD_STARTUP_TIMEOUT` (default 1800), `TZ` |
 | Upstream paths | DB `/var/lib/clamav`, logs `/var/log/clamav`, socket `/tmp/clamd.sock`, clamd config `TCPSocket 3310`, `LocalSocket /tmp/clamd.sock` |
@@ -83,7 +83,7 @@ Draft expects runAsUser 0 and `/logs`, `/scandir`; we run non-root, read-only ro
 - clamd does not start until signatures exist; first start needs internet and a few minutes.
 - Two daemons in one container with no supervisor; background freshclam is not restarted if it dies.
 - .deb checksum and file layout UNVERIFIED (see section 1).
-- clamd memory use is high (about 1 to 2 GiB); advise limits.
+- Resources: docs.clamav.net asks for 3 GiB+ RAM and 5 GiB free disk (Docker: roughly 3-4 GiB RAM); advise limits accordingly.
 - Possible clamd config issue when the DB is replaced during reload; `NotifyClamd` uses the TCP/local socket.
 - No blockers (glibc, amd64 and arm64 both published).
 

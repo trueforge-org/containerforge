@@ -5,12 +5,12 @@
 
 | Item | Value |
 |---|---|
-| Version | UNVERIFIED: Channels DVR is closed source and rolling; the installer fetches "latest". The `fancybits/channels-dvr:latest` and `:tve` tags carry no semver. A version must be read from the downloaded server at build time |
+| Version | Channels DVR is closed source and rolling. `setup.sh` reads the current version from `https://cdn.channelsdvr.net/dvr/latest.txt` (override with `DVR_VERSION`). The `fancybits/channels-dvr:latest` and `:tve` tags carry no semver |
 | Renovate | Not applicable with a standard datasource. Use a pinned `VERSION` read from the vendor download manifest (UNVERIFIED URL) with a `custom.regex` manager, or leave Renovate off and rebuild on a schedule |
 | License | Proprietary, closed source, vendor EULA, needs a Channels subscription/trial. SPDX: `LicenseRef-Proprietary`. Redistribution of the binary inside a public image is UNVERIFIED (fancybits publishes its own image) |
 | Source URL | https://getchannels.com/dvr-server/ |
-| Download | Official script `curl -f -s https://getchannels.com/dvr/setup.sh \| DOWNLOAD_ONLY=1 sh` creates `./channels-dvr` and downloads the server (per community docs); Docker images use `DOWNLOAD_ONLY=1`. Direct per-arch URLs UNVERIFIED (the script resolves them) |
-| Checksum | UNVERIFIED: none known |
+| Download | Official script `curl -f -s https://getchannels.com/dvr/setup.sh \| DOWNLOAD_ONLY=1 sh` creates `./channels-dvr` and downloads the server (per community docs); Docker images use `DOWNLOAD_ONLY=1`. Per-version files on `https://cdn.channelsdvr.net/dvr`: `channels-dvr-$os-$arch`, `ffmpeg-$os-$arch`, `ffprobe-$os-$arch`, `comskip-$os-$arch`, `ffmpeg-dl-$os-$arch`, `$os-$arch.sha256` (the script resolves them; `DVR_OS`/`DVR_ARCH` override) |
+| Checksum | A per-version `$os-$arch.sha256` file exists on the CDN, but `setup.sh` downloads it and does NOT verify it; verify it yourself if you want a check |
 | Upstream Dockerfile | None public (draft: `-`). The fancybits/jonathanfinley community Dockerfiles exist but were not retrievable (404 for `fancybits/channels-dvr`); the community `jonathanfinley/channels-dvr_docker` Dockerfile was listed in search but not read |
 | Port | 8089/tcp web UI (draft). Docker doc: `--net=host`, `--device /dev/dri`, volumes `/channels-dvr` (server + data) and `/shares/DVR` (recordings) |
 
@@ -20,12 +20,12 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The server bundles ffmpeg/comskip itself (UNVERIFIED), no language runtime. Closest sibling: `apps/adguardhome-sync`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The server download bundles its own `ffmpeg`, `ffprobe`, `comskip` and `ffmpeg-dl` binaries (verified in `setup.sh`), no language runtime. Closest sibling: `apps/adguardhome-sync`.
 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. `mkdir -p /app && cd /app && curl -fsS https://getchannels.com/dvr/setup.sh | DOWNLOAD_ONLY=1 sh` (the script picks the arch; UNVERIFIED that it honours the target dir; if it always writes `./channels-dvr`, move it to `/app`). Runtime libs the binary needs (ffmpeg libs, `libva`, `intel-media-va-driver` for `/dev/dri`) are UNVERIFIED; check with `ldd` and add only missing apt packages.
+2. `mkdir -p /app && cd /app && curl -fsS https://getchannels.com/dvr/setup.sh | DOWNLOAD_ONLY=1 sh` (the script picks the arch; it has no target-dir option and always writes `./channels-dvr` under the current directory, which is `/app` here). Runtime libs the binary needs (ffmpeg libs, `libva`, `intel-media-va-driver` for `/dev/dri`) are UNVERIFIED; check with `ldd` and add only missing apt packages.
 3. Verify: no upstream checksum; fail the build if the binary does not run `--version` (UNVERIFIED flag), and record the version into `VERSION`-matching check.
 4. License: vendor EULA text to `/usr/share/licenses/channels-dvr/` if shipped, else a README note.
 5. `ENV HOME=/config`, plus `CHANNELS_DVR_DATA` only if upstream supports it (UNVERIFIED, see section 9).
@@ -43,11 +43,11 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://getchannels.com/
 
 1. `mkdir -p /config /shares/DVR` (ignore failure when the recordings path is a read-only mount).
 2. Seed nothing; the server creates its own data directory.
-3. `cd /app/channels-dvr` and `exec ./channels-dvr` with the data-dir argument/env pointing to `/config` (UNVERIFIED: the official image keeps data in `/channels-dvr` next to the executable). The server must listen on all interfaces (it does by default, UNVERIFIED).
+3. `cd /app/channels-dvr/latest` and `exec ./channels-dvr` (setup.sh puts the executable in `channels-dvr/<version>/` with a `latest` symlink) with the data-dir argument/env pointing to `/config` (UNVERIFIED: the official image keeps data in `/channels-dvr` next to the executable). The server must listen on all interfaces (it does by default, UNVERIFIED).
 
 ## 8. container-test.yaml
 
-Schema header, `timeoutSeconds: 180`. `tcp: - port: '8089'`; `http: - port: '8089' path: /` (UNVERIFIED path). `filePaths: - /app/channels-dvr/channels-dvr`. No env needed to start; licence activation happens in the UI.
+Schema header, `timeoutSeconds: 180`. `tcp: - port: '8089'`; `http: - port: '8089' path: /` (UNVERIFIED path). `filePaths: - /app/channels-dvr/latest/channels-dvr`. No env needed to start; licence activation happens in the UI.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -60,7 +60,7 @@ Schema header, `timeoutSeconds: 180`. `tcp: - port: '8089'`; `http: - port: '808
 
 - Possible blocker: closed-source redistribution rights and no version feed for Renovate.
 - Self-update and writable binary directory conflict with read-only rootfs.
-- Version identification and per-arch URLs UNVERIFIED; the vendor can change setup.sh.
+- Per-arch URLs and version source are known (section 1) but the vendor can change setup.sh; the sha256 is not verified by setup.sh.
 - Needs a paid or trial licence to be useful; tuners and host networking.
 - Hardware transcoding needs GPU device access (not required for startup).
 

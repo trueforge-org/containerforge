@@ -5,12 +5,12 @@
 
 | Item | Value |
 |---|---|
-| Version | UNVERIFIED: the download page shows no version number; files are under SourceForge `bWAPP/` (commonly `bWAPP_latest.zip`, believed 2.2). Pin the exact zip name and a checksum once fetched |
+| Version | 2.2: the SourceForge "Download Latest Version" button points to `bWAPP/bWAPPv2.2/bWAPPv2.2.zip` (15.1 MB, 2014-11-02). `bWAPP_latest.zip` sits at the `bWAPP/` root with the same size. The homepage shows no version number. Pin `bWAPPv2.2.zip` and a sha256 once computed |
 | Renovate | Not applicable: SourceForge has no supported datasource and the project is archived. Pin manually |
 | License | Creative Commons BY-NC-ND 4.0 (footer of itsecgames.com, MME BV). SPDX `CC-BY-NC-ND-4.0`. NoDerivatives and NonCommercial terms conflict with repackaging, patching and redistributing a public image: likely blocker |
 | Source URL | https://www.itsecgames.com/ |
 | Download | https://sourceforge.net/projects/bwapp/files/bWAPP/ (same zip for both archs, PHP is interpreted) |
-| Checksum | SourceForge shows MD5/SHA1 per file (UNVERIFIED); record sha256 yourself when porting |
+| Checksum | No MD5/SHA1 is shown on the SourceForge folder page; record sha256 yourself when porting |
 | Upstream Dockerfile | None (draft: `-`). Community image `raesene/bwapp` not reviewed |
 | Ports/env | 80/http (Apache) and 3306 (MySQL) in the draft image. App settings are in `admin/settings.php` (host, user, password, db); the install page `install.php` creates the DB. Default login `bee`/`bug` UNVERIFIED on this page |
 
@@ -35,7 +35,7 @@
 
 ## 5. docker-bake.hcl
 
-APP `bwapp`; VERSION from the pinned zip (UNVERIFIED, e.g. `2.2`) with a comment `// renovate: ...` noting no datasource (use `# no renovate datasource: SourceForge, archived`); LICENSE `CC-BY-NC-ND-4.0`; SOURCE `https://www.itsecgames.com/`. Four standard targets, default `image-local`. `docker buildx bake --print`.
+APP `bwapp`; VERSION `2.2` (from `bWAPPv2.2.zip`) with a comment `// renovate: ...` noting no datasource (use `# no renovate datasource: SourceForge, archived`); LICENSE `CC-BY-NC-ND-4.0`; SOURCE `https://www.itsecgames.com/`. Four standard targets, default `image-local`. `docker buildx bake --print`.
 
 ## 6. settings.yaml
 

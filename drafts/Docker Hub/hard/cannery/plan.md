@@ -7,11 +7,11 @@
 |---|---|
 | Version | 1.5.9 (tag, 2026-11-22). The draft says 1.5.8 (2026-11-19); use 1.5.9 |
 | Renovate | `datasource=gitlab-tags depName=shibaobun/cannery versioning=semver` |
-| License | AGPLv3 per the GitLab project page. SPDX: `AGPL-3.0-or-later` UNVERIFIED (only-vs-or-later not checked in LICENSE.md) |
+| License | AGPLv3 per the GitLab project page. SPDX: `AGPL-3.0-or-later` (README says "AGPLv3 or later"; LICENSE.md is the AGPL v3 text) |
 | Source URL | https://gitlab.com/shibaobun/cannery |
 | Download | No binary. Source tarball `https://gitlab.com/shibaobun/cannery/-/archive/${VERSION}/cannery-${VERSION}.tar.gz` (both archs, compile) |
 | Checksum | None published; pin the tag only |
-| Upstream Dockerfile | The raw `Dockerfile` URLs returned 404 (probed main, dev), so it was NOT reviewed. The draft's link is `.../-/blob/1.5.8/Dockerfile`; re-check with the tag when porting. README says the image `shibaobun/cannery` contains `/app/priv/random.sh` and `/app/priv/cloak_key.sh` |
+| Upstream Dockerfile | Reviewed via the raw tag URLs (`/-/raw/1.5.9/Dockerfile`, and 1.5.8 as in the draft). Upstream is multi-stage on Alpine/musl: `node:26.13.1-alpine3.24`, `hexpm/elixir:1.20.5-erlang-29.1.2-alpine-3.24.3`, runtime `alpine:latest`; `ENTRYPOINT ["/app/priv/docker-entrypoint.sh"]`, `CMD ["bin/cannery", "start"]`. README says the image `shibaobun/cannery` contains `/app/priv/random.sh` and `/app/priv/cloak_key.sh` |
 | Port | 4000 (README) |
 | Env (README) | required `HOST`, `SECRET_KEY_BASE`, `CLOAK_KEY`; `PORT` (4000), `DATABASE_URL` (default `ecto://postgres:postgres@cannery-db/cannery`), `ECTO_IPV6` (false), `POOL_SIZE` (10), `REGISTRATION` (`invite` default or `public`), `LOCALE` (`en_US`,`de`,`fr`,`es`), `DISABLE_EMAIL`, `SMTP_HOST`, `SMTP_PORT` (587), `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_SSL` (false), `EMAIL_FROM`, `EMAIL_NAME`, `UPLOADS_PATH` (default `/var/cannery/uploads`) |
 | Notes | First registered account becomes admin. Uploads must be outside static files and shared across app containers |
@@ -23,11 +23,11 @@
 ## 3. Base image
 
 Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (an Elixir release bundles ERTS, so no Erlang is needed at runtime; only libssl, libncurses, libstdc++ equivalents, UNVERIFIED).
-Build stage: an Elixir toolchain image or ubuntu plus apt `erlang`/`elixir`; required Elixir/OTP versions UNVERIFIED (read `mix.exs` `elixir:` and `.tool-versions` at the tag). Pin the builder by digest, and match the builder's glibc to the runtime (Ubuntu 26.04) to avoid ABI problems, so prefer an ubuntu 26.04 builder with apt/asdf toolchain. Closest sibling: none for Elixir; Go build-stage pattern of `COPY --from` applies.
+Build stage: an Elixir toolchain image or ubuntu plus apt `erlang`/`elixir`; required versions (verified at tag 1.5.9): Elixir `1.20.5` (exact pin in `mix.exs`), Erlang/OTP `29.1.2` (`.tool-versions`); asset build uses Node `26.13.1` with `npm ci` in `assets/`. Pin the builder by digest, and match the builder's glibc to the runtime (Ubuntu 26.04) to avoid ABI problems, so prefer an ubuntu 26.04 builder with apt/asdf toolchain. Closest sibling: none for Elixir; Go build-stage pattern of `COPY --from` applies.
 
 ## 4. Dockerfile
 
-1. Build stage: `ARG VERSION`; install `erlang`, `elixir`, `git`, `build-essential`, `nodejs/npm` only if assets need it (Phoenix 1.7 uses esbuild/tailwind via mix, downloaded at build; UNVERIFIED). Download the tag tarball, `MIX_ENV=prod mix deps.get --only prod && mix assets.deploy && mix release`. HEX/MIX caches in `/tmp` (`HEX_HOME`, `MIX_HOME`).
+1. Build stage: `ARG VERSION`; install `erlang`, `elixir`, `git`, `build-essential`, `nodejs/npm` only if assets need it (Phoenix 1.7 uses esbuild/tailwind via mix, downloaded at build; UNVERIFIED). Download the tag tarball (keep `vendor/`: the `cloak` and `cloak_ecto` deps are local paths; `heroicons` is fetched from GitHub at build), `MIX_ENV=prod mix deps.get --only prod && mix assets.deploy && mix release`. HEX/MIX caches in `/tmp` (`HEX_HOME`, `MIX_HOME`).
 2. Final stage: `USER root`; apt install runtime libs only (`libssl3`, `libncurses6`, `libstdc++6`; check before adding, UNVERIFIED). `COPY --from=build /build/_build/prod/rel/cannery /app`. Also copy `priv/random.sh` and `priv/cloak_key.sh` if they are not inside the release.
 3. License: `/usr/share/licenses/cannery/LICENSE.md`.
 4. `ENV HOME=/config RELEASE_TMP=/tmp UPLOADS_PATH=/config/uploads PORT=4000` (`RELEASE_TMP` is the standard mix release temp dir).
@@ -41,7 +41,7 @@ APP `cannery`; VERSION `1.5.9` with `// renovate: datasource=gitlab-tags depName
 
 Schema header, `schema_version: 1`, `upstream_env_url: "https://gitlab.com/shibaobun/cannery"`.
 ports: 4000/tcp.
-env: `HOST` (default `localhost`, required), `SECRET_KEY_BASE` (required; start.sh generates and stores one in `/config` when empty), `CLOAK_KEY` (required; same generation handling), `DATABASE_URL` (default `ecto://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql/cannery`, required), `PORT` `4000`, `POOL_SIZE` `10`, `REGISTRATION` `invite`, `LOCALE` `en_US`, `ECTO_IPV6` `false`, `DISABLE_EMAIL` `""`, `SMTP_*`, `EMAIL_FROM`, `EMAIL_NAME` (all optional, empty default), `UPLOADS_PATH` `/config/uploads`, `TZ`.
+env: `HOST` (no default; required in every environment, runtime.exs raises if unset), `SECRET_KEY_BASE` (required; start.sh generates and stores one in `/config` when empty), `CLOAK_KEY` (required; same generation handling), `DATABASE_URL` (default `ecto://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql/cannery`, required), `PORT` `4000`, `POOL_SIZE` `10`, `REGISTRATION` `invite`, `LOCALE` `en_US`, `ECTO_IPV6` `false`, `DISABLE_EMAIL` `""`, `SMTP_*`, `EMAIL_FROM`, `EMAIL_NAME` (all optional, empty default), `UPLOADS_PATH` `/config/uploads`, `TZ`.
 volumes: `/config` required.
 dependencies: `- name: postgresql` (exists: apps/postgresql ✅).
 
@@ -50,8 +50,8 @@ dependencies: `- name: postgresql` (exists: apps/postgresql ✅).
 1. `mkdir -p "${UPLOADS_PATH:-/config/uploads}"`.
 2. If `SECRET_KEY_BASE` is empty, read or create `/config/secret_key_base` (via `/app/priv/random.sh` or `openssl rand -base64 48`); same for `CLOAK_KEY` in `/config/cloak_key` (via `cloak_key.sh`). Never overwrite existing files; do not echo the values.
 3. Wait for DB (retry loop with `pg_isready` is not in base; use bash `/dev/tcp` against the host and port parsed from `DATABASE_URL`, bounded retries).
-4. Run migrations (command UNVERIFIED; typical `bin/cannery eval "Cannery.ReleaseTasks.migrate"`; confirm in the upstream Dockerfile/entrypoint).
-5. `exec /app/bin/cannery start` with `PHX_SERVER=true` if the release needs it (UNVERIFIED), binding 0.0.0.0 (UNVERIFIED how Cannery sets `ip`; the runtime.exs must be checked).
+4. No separate migrate command: prod sets `Cannery.Application` `automigrate: true`, so migrations run at app start (verified in runtime.exs).
+5. `exec /app/bin/cannery start`. `PHX_SERVER` is presence-only (any value enables the server). The prod endpoint binds the IPv6 any address `{0,0,0,0,0,0,0,0}` (verified in runtime.exs).
 
 ## 8. container-test.yaml
 
@@ -65,8 +65,8 @@ Narrowed per protocol exception (all three criteria hold: hard postgresql depend
 
 ## 10. Risks, caveats and open questions
 
-- Upstream Dockerfile unreviewed (404 on raw paths); entrypoint, migrate command and bind address are UNVERIFIED.
-- Elixir/OTP version and asset toolchain UNVERIFIED; build may need network access to hex.pm and GitHub for esbuild/tailwind.
+- Upstream Dockerfile reviewed (tags 1.5.8 and 1.5.9). Upstream runs Alpine/musl; this plan uses glibc Ubuntu, so the build and runtime must be tested on that basis. Entrypoint (`priv/docker-entrypoint.sh`), migrations (automatic) and bind address are verified.
+- Elixir `1.20.5` / OTP `29.1.2` verified; build needs network access to hex.pm, npm and GitHub (heroicons, rebar3) for esbuild/tailwind.
 - `CLOAK_KEY` loss makes stored authenticator secrets unreadable; document backing up `/config`.
 - Migrations on first start; need PostgreSQL reachable.
 - Both archs compile; arm64 is untested.

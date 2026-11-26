@@ -109,7 +109,7 @@ Use a generous `timeoutSeconds` (copy the largest value from `apps/webgrabplus` 
 
 ## 10. Risks, caveats and open questions
 
-- Version choice 4.5.3 vs 4.6.0 and the 4.6.0 asset list are UNVERIFIED (assets list failed to load, CI targets .NET 10).
+- Version choice 4.5.3 vs 4.6.0 and the 4.6.0 asset list are UNVERIFIED (assets list failed to load, CI targets .NET 10). The asset name `Server-Dist-linux.zip` conflicts with `scripts/makeserver.sh`, which produces `damselfly-server-linux-<version>.zip`; confirm the 4.5.3 asset name before writing the URL (see context/github-webreaper-damselfly.md).
 - arm64 needs a source compile with the .NET 10 SDK plus `wasm-tools` workload; slow, and the native ML dependency (ONNX Runtime, face detection) for linux-arm64 is UNVERIFIED. If it fails, ship amd64 only and set `image-all` to amd64 (document in the PR).
 - The 342 MB zip contains `Models`; contents (and whether `wwwroot/desktop` is in the server zip or separate `Desktop-Dist-*.zip`) not inspected. The Docker image adds `wwwroot/desktop` from the desktop zips; optional.
 - Upstream's published Docker image is rolling (`latest`); here we pin releases.

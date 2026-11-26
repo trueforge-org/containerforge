@@ -5,11 +5,11 @@
 
 | Item | Value |
 |---|---|
-| Version | Latest upstream release v2.64.3 (2026-11-23) in `browserless/browserless`. The draft's `browserless/chrome:1.61.1` is the legacy v1 image of the old `browserless/chrome` repo; v2 is the maintained line and ships as `ghcr.io/browserless/chromium`. Recommend 2.64.3 and note the jump |
+| Version | Latest upstream release v2.64.4 (2026-11-25) in `browserless/browserless`. The draft's `browserless/chrome:1.61.1` is the legacy v1 image of the old `browserless/chrome` repo; v2 is the maintained line and ships as `ghcr.io/browserless/chromium`. Recommend 2.64.4 and note the jump |
 | Renovate | `datasource=github-releases depName=browserless/browserless versioning=semver` |
-| License | UNVERIFIED (release page did not show it). v2 is believed to be SSPL-1.0 or commercial; v1 (`browserless/chrome`) was different. Check LICENSE in the repo before setting `LICENSE`, and confirm a public image is permitted |
+| License | `SSPL-1.0 OR Browserless Commercial License` (dual license; verified in LICENSE and package.json). A commercial license is required for closed-source commercial or CI use, so confirm a public image is permitted |
 | Source URL | https://github.com/browserless/browserless |
-| Download | Source tarball `https://github.com/browserless/browserless/archive/refs/tags/v${VERSION}.tar.gz`; browsers installed via npm/playwright at build (UNVERIFIED exact script names). Chrome stable .deb exists for amd64 only; arm64 Chrome stable does not, so use the bundled Chromium |
+| Download | Source tarball `https://github.com/browserless/browserless/archive/refs/tags/v${VERSION}.tar.gz`; browsers installed via `npm run install:browsers` (verified in package.json). Chrome stable .deb exists for amd64 only; arm64 Chrome stable does not, so use the bundled Chromium |
 | Checksum | None for the tarball; Chrome .deb has none published either |
 | Upstream Dockerfile | Raw `Dockerfile` URL on main returned 404 (file lives in `docker/` subfolders); NOT reviewed. The draft links the v1 `docker/chrome/Dockerfile` |
 | Env (search, docs.browserless.io open-source page) | `PORT` (3000), `HOST` (defaults to localhost; set 0.0.0.0), `TOKEN` (if unset all endpoints, including `/function`, are unauthenticated), `CONCURRENT` (10), `QUEUED`, `TIMEOUT` (ms, 30000). Official image runs as non-root `blessuser`; `--shm-size=2g` recommended |
@@ -20,7 +20,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` as the draft states (provides node/npm; required Node major for 2.64.3 UNVERIFIED, check `package.json` engines). If the Node version does not match, switch to `ghcr.io/trueforge-org/ubuntu` plus a Node install. Closest siblings: `apps/changedetection` (python-node plus playwright browsers), `apps/budge`.
+`FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` as the draft states (provides node/npm; Node `>=24` per `package.json` `engines` (verified for 2.64.4)). If the Node version does not match, switch to `ghcr.io/trueforge-org/ubuntu` plus a Node install. Closest siblings: `apps/changedetection` (python-node plus playwright browsers), `apps/budge`.
 
 ## 4. Dockerfile
 
@@ -34,7 +34,7 @@
 
 ## 5. docker-bake.hcl
 
-APP `browserless-chrome`; VERSION `2.64.3` with `// renovate: datasource=github-releases depName=browserless/browserless versioning=semver`; LICENSE per verification (UNVERIFIED, likely `SSPL-1.0`); SOURCE `https://github.com/browserless/browserless`. Four standard targets, default `image-local`. `docker buildx bake --print`.
+APP `browserless-chrome`; VERSION `2.64.4` with `// renovate: datasource=github-releases depName=browserless/browserless versioning=semver`; LICENSE `SSPL-1.0` (dual with commercial license, verified); SOURCE `https://github.com/browserless/browserless`. Four standard targets, default `image-local`. `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -44,7 +44,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/brows
 
 1. `mkdir -p /config/downloads /config/metrics /tmp/chrome-data`.
 2. If `TOKEN` is empty, generate one with `openssl rand -hex 24`, persist to `/config/token`, export it, and log that a token was generated (not its value). This keeps the unauthenticated `/function` endpoint closed by default; document the deviation.
-3. `cd /app && exec node build/index.js` (entrypoint UNVERIFIED; confirm in package.json `start`). Chrome flags: run as UID 568 with `--no-sandbox` only if the userns sandbox is unavailable; decide per runtime test, and pass via Browserless launch args (UNVERIFIED config).
+3. `cd /app && exec dumb-init -- node build/index.js` (upstream `scripts/start.sh` runs `dumb-init -- node build/index.js` and starts Xvfb when `DISPLAY` is unset; see context/github-browserless-browserless.md). Chrome flags: run as UID 568 with `--no-sandbox` only if the userns sandbox is unavailable; decide per runtime test, and pass via Browserless launch args (UNVERIFIED config).
 
 ## 8. container-test.yaml
 
@@ -73,9 +73,9 @@ cd apps/browserless-chrome
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create browserless-chrome-probe-config
-docker run --rm -d --name browserless-chrome-probe --read-only --tmpfs /tmp --shm-size=2g -v browserless-chrome-probe-config:/config browserless-chrome:2.64.3
+docker run --rm -d --name browserless-chrome-probe --read-only --tmpfs /tmp --shm-size=2g -v browserless-chrome-probe-config:/config browserless-chrome:2.64.4
 docker logs -f browserless-chrome-probe
-forgetool containers test --image browserless-chrome:2.64.3 --config ./apps/browserless-chrome/container-test.yaml
+forgetool containers test --image browserless-chrome:2.64.4 --config ./apps/browserless-chrome/container-test.yaml
 docker rm -f browserless-chrome-probe; docker volume rm browserless-chrome-probe-config
 ```
 Expected readiness: a log line that the HTTP server is listening on port 3000 (exact wording UNVERIFIED); a manual `curl localhost:3000/...` with the token must open a page and return output.
