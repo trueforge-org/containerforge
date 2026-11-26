@@ -14,7 +14,7 @@
 | Checksum source | None published (no assets). UNVERIFIED whether the git tag is signed. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/pawelmalak/flame/069b6690d9fa7a24a6e7727386ab85148c89b90e/.docker/Dockerfile. Builder `node:20`: `npm install --production`, client `npm install --production && npm run build`, `mv ./client/build/* ./public`, `rm -rf ./client`. Final `node:20-alpine`: `ENV NODE_ENV=production`, `ENV PASSWORD=flame_password`, `EXPOSE 5005`, `CMD ["sh","-c","chown -R node /app/data && node server.js"]`. No `USER` line (runs as root), no `VOLUME`. |
 | Port | 5005 (`EXPOSE 5005`, README `-p 5005:5005`). |
-| Env vars | `PASSWORD` (README examples use `change_me`, no default stated). `PASSWORD_FILE` (example `/run/secrets/password`); any variable can be read from a `_FILE` path, and the secret wins when both are set. `NODE_ENV=production` set by the upstream image. |
+| Env vars | `PASSWORD` (upstream Dockerfile sets default `flame_password`; Docker Hub run example uses `flame_password`). `PASSWORD_FILE` (example `/run/secrets/password`); any variable can be read from a `_FILE` path, and the secret wins when both are set. `NODE_ENV=production` set by the upstream image. |
 | Data path | `/app/data` (README `-v /path/to/data:/app/data`). No env var found that changes it (UNVERIFIED that none exists in server code). |
 | Dependencies | None (no database). Optional Docker socket mount in the README compose example, not needed. |
 | Copy-from | No. Upstream runtime is `node:20-alpine` (musl), which does not run on glibc Ubuntu. |
