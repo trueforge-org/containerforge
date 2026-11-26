@@ -17,7 +17,7 @@
 | Env vars (real) | `OLLAMA_HOST=0.0.0.0:11434` (Dockerfile ENV). `NVIDIA_VISIBLE_DEVICES=all`, `NVIDIA_DRIVER_CAPABILITIES=compute,utility`, `LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64` (Dockerfile ENV, for GPU variants only). |
 | Model/data path | Not stated in the Dockerfile. Ollama's default is `~/.ollama`; with `HOME=/config` that is `/config/.ollama`. The default for 0.40.x is UNVERIFIED. The chart mounts `/root/.ollama`. |
 | Dependencies | `open-webui` is an optional UI sidecar (`ghcr.io/open-webui/open-webui`), a separate Python stack. ❌ No `apps/open-webui` exists. |
-| Chart | TrueCharts `charts/stable/ollama` 11.0.2, appVersion 0.40.18. Security: `runAsUser 0`, `runAsNonRoot false`, `readOnlyRootFilesystem false`. |
+| Chart | TrueCharts `charts/stable/ollama` 11.0.3, appVersion 0.40.18. Security: `runAsUser 0`, `runAsNonRoot false`, `readOnlyRootFilesystem false`. |
 
 ## 2. Target layout
 

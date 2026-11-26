@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | `V1.3.2`, latest stable, published 2026-09-14 (https://github.com/Casvt/Kapowarr/releases/tag/V1.3.2). Draft and chart pin `v1.0.0-beta-4` (digest `sha256:951c583a...`, last pushed to Docker Hub 2024-01-03). Plan moves to `V1.3.2`. |
 | Renovate | `datasource=github-releases depName=Casvt/Kapowarr versioning=loose` (proposed; tag has an uppercase `V` prefix. No renovate annotation found in the chart, UNVERIFIED). |
-| License | AGPL-3.0 (root `LICENSE`, GNU AFFERO GPL v3: https://raw.githubusercontent.com/Casvt/Kapowarr/V1.3.2/LICENSE). No "or later" clause checked. |
+| License | GPL-3.0 (root `LICENSE`, GNU GENERAL PUBLIC LICENSE v3: https://raw.githubusercontent.com/Casvt/Kapowarr/V1.3.2/LICENSE). No "or later" clause checked. |
 | Source URL | https://github.com/Casvt/Kapowarr |
 | Download | `https://github.com/Casvt/Kapowarr/releases/download/V1.3.2/Kapowarr-release.zip`, confirmed on https://github.com/Casvt/Kapowarr/releases/expanded_assets/V1.3.2. Arch-neutral Python source zip, so one download serves amd64 and arm64. |
 | Checksum source | No `.sha256` asset. The GitHub release API digest for `Kapowarr-release.zip` is `sha256:b90ce35f767627ce609025f7eeb1fc31b3cab4e9e975ca9c7d79c84bbd32f05b`; verify the download against it in the Dockerfile (`sha256sum -c`) and refresh it on each `VERSION` bump. |
