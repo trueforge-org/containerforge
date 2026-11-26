@@ -126,7 +126,7 @@ Port 8080 is the only port in settings.yaml and has an HTTP probe. Timeout: ngin
 
 ## 10. Risks, caveats and open questions
 
-- Draft caveats: the countdown uses the visitor's browser timezone; the chart pulled `:latest`, which we replace with a pinned commit.
+- Draft caveats: the countdown uses the visitor's browser timezone; the chart pulled `:latest` pinned by digest (`sha256:7a3b00067ae17a7c8792f184a91542ed20218d690e65b370444d8a43ac3acf88`), which we replace with a pinned commit.
 - Upstream has no releases, so the version is a commit SHA. UNVERIFIED: whether the shared Renovate setup bumps it from this `git-refs` comment (same style as `apps/tvheadend`).
 - The nginx base's config seeding behavior is assumed from `apps/nginx` and `apps/it-tools` sources; check on first run.
 - No blockers (static files, arch independent).

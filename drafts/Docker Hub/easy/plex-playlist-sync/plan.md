@@ -12,7 +12,7 @@
 | Download | `https://github.com/rnagabhyrava/plex-playlist-sync/archive/refs/tags/v${VERSION}.tar.gz` (pure Python, arch independent) |
 | Checksum | None published. HTTPS only. |
 | Upstream Dockerfile reviewed | `python:3.10-alpine`, `ENV PYTHONUNBUFFERED 1`, `pip install -r requirements.txt`, `COPY . .`, `CMD python ./plex-playlist-sync/run.py` (source folder is `plex-playlist-sync/` inside the repo). |
-| requirements.txt | `spotipy>=2.18.0`, `plexapi==4.11.2`, `deezer-python>=2.3.0` |
+| requirements.txt | `spotipy>=2.18.0`, `plexapi>=4.7.0`, `deezer-python>=2.3.0` |
 | Ports | None. Pure client; loops forever (`time.sleep(SECONDS_TO_WAIT)`). |
 | Env vars read (`run.py`) | `PLEX_URL`, `PLEX_TOKEN`, `WRITE_MISSING_AS_CSV` (`"0"`), `APPEND_SERVICE_SUFFIX` (`"1"`), `ADD_PLAYLIST_POSTER` (`"1"`), `ADD_PLAYLIST_DESCRIPTION` (`"1"`), `APPEND_INSTEAD_OF_SYNC` (unset = false; `"1"` = true), `SECONDS_TO_WAIT` (`86400`; README example uses 84000), `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_USER_ID`, `DEEZER_USER_ID`, `DEEZER_PLAYLIST_ID` (space separated ids) |
 | Data path | Hard-coded `/data` (default arg of `_write_csv`/`_delete_csv` in `utils/plex.py`, `mkdir(parents=True)`): only used when `WRITE_MISSING_AS_CSV=1`. |
@@ -50,7 +50,7 @@ Why: Python script with three pure-Python dependencies and no extra services. Cl
 4. `USER apps`; `COPY --chmod=0755 . /`.
 5. `VOLUME /config`; `WORKDIR /config`. No `EXPOSE` (no port).
 
-No apt packages. `plexapi==4.11.2` is an exact pin from 2022 (pure Python); UNVERIFIED on Python 3.15.
+No apt packages. `plexapi>=4.7.0` is a lower bound only (pure Python); UNVERIFIED on Python 3.15.
 
 ## 5. docker-bake.hcl
 
@@ -168,7 +168,7 @@ Draft reconciliation: chart runs UID 0 and writable rootfs, not needed. Extra pe
 
 - Draft caveat confirmed: needs Plex token and, for Spotify, client id/secret/user id; Deezer needs only a profile id or playlist ids.
 - Draft note about the chart pulling `:latest` while the release is v1.0.2: upstream's image tag does not track releases; we pin `1.0.2`.
-- Repo archived since the last commit in 2022; no updates expected. `plexapi==4.11.2` is old; newer Plex servers may behave differently (UNVERIFIED).
+- Repo archived (GitHub API `archived: true`, `pushed_at` 2023-12-15); no updates expected. `plexapi>=4.7.0` is a lower bound, so pip installs the newest plexapi; newer Plex servers may behave differently (UNVERIFIED).
 - Exact license variant (GPL-3.0-only vs or-later) needs a check of `LICENSE.md`/file headers; GPL-3.0 text is shipped to `/usr/share/licenses/plex-playlist-sync/`.
 - The idle behavior (`sleep infinity` when unconfigured) hides a misconfiguration from restart policies; it is logged clearly. Alternative: exit 1 and accept that step 3 cannot show a running container.
 - Python 3.15 compat of the pinned/legacy dependencies is UNVERIFIED; fallback is the 3.14 python base.
