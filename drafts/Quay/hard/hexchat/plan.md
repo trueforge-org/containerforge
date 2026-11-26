@@ -174,21 +174,20 @@ chmod 700 /tmp/xdg
 export XDG_RUNTIME_DIR=/tmp/xdg DISPLAY=:1 HOME=/config
 
 # Store the VNC password for x11vnc in /config, not in the process list.
-if [[ ! -f /config/.vnc/passwd ]]; then
-  x11vnc -storepasswd "${VNC_PASSWORD}" /config/.vnc/passwd >/dev/null
-fi
+x11vnc -storepasswd "${VNC_PASSWORD}" /config/.vnc/passwd >/dev/null
 
 Xvfb :1 -screen 0 1280x800x24 &
 sleep 2
 openbox &
+hexchat &
 x11vnc -display :1 -forever -shared -rfbauth /config/.vnc/passwd -rfbport 5900 -quiet &
 exec websockify --web=/usr/share/novnc 6080 localhost:5900
 ```
 
-- Idempotent: the VNC password file is created only when missing (per the rule for seeding), and it is rewritten each start when `VNC_PASSWORD` changes (UNVERIFIED: decide whether the password is re-applied each start, as the rules ask for database passwords; the stored form is a hash, so re-store on every start).
+- Idempotent: the VNC password file is rewritten on every start from `VNC_PASSWORD`, so a changed password takes effect (the stored form is an obfuscated file, not written from a baked value).
 - `exec` the final long-running process (websockify) so signals reach PID 1 (the protocol's rule for start.sh). The background X and VNC processes are children and must be supervised; UNVERIFIED that this is acceptable, or use a small supervisor such as `s6`/`tini` with multiple processes (decide before build).
 - `/tmp/xdg` for XDG runtime, not `/config`.
-- Launch `hexchat` itself: add `hexchat &` after `openbox &` (not shown above to keep the plan short; confirm the exact launch line and that HexChat runs as user `apps`).
+- `hexchat &` is launched after `openbox &`; confirm the exact launch line and that HexChat runs as user `apps`.
 - Binds `0.0.0.0:6080` (websockify default binds all interfaces; confirm).
 
 ## 8. container-test.yaml

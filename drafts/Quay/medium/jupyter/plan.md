@@ -37,7 +37,7 @@ Fits because JupyterLab and notebook are pure Python packages, and the base ship
 
 ## 4. Dockerfile
 
-1. `ARG VERSION` and `ARG VENDOR` only, values matching `docker-bake.hcl`.
+1. `ARG VERSION` and `ARG JUPYTERLAB_VERSION`, values matching `docker-bake.hcl` (both passed via `image.args`). `ARG VENDOR` only if the sibling `apps/bazarr` Dockerfile uses it (UNVERIFIED).
 2. `ENV JUPYTER_PORT=8888` (same name as upstream, for start.sh).
 3. `USER root` only for installs, then back to `USER apps`.
 4. Install with uv into the base venv, caches in `/tmp`:

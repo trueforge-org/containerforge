@@ -48,7 +48,7 @@ Not needed: `etc/`, `scripts/`, `health/`, `app/`. `root/` must not be touched.
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`. Default in bake: `v2.20261114.0`.
-2. Stage `crystal` (`FROM 84codes/crystal:1.22.3-alpine@<digest>`): `apk add --no-cache sqlite-static yaml-static`; copy source via `curl -fL` from the tag tarball into `/tmp/invidious`; `shards install --production`; `crystal build ./src/invidious.cr --static --release --link-flags "-lxml2 -llzma -no-pie"` into `/tmp/invidious-bin`.
+2. Stage `build` (`FROM 84codes/crystal:1.22.3-alpine@<digest>`): `apk add --no-cache sqlite-static yaml-static`; copy source via `curl -fL` from the tag tarball into `/tmp/invidious`; `shards install --production`; `crystal build ./src/invidious.cr --static --release --link-flags "-lxml2 -llzma -no-pie"` into `/tmp/invidious-bin`.
    - OpenSSL: upstream builds OpenSSL statically because Alpine has no static libssl usable here. Keep the same pattern: `OPENSSL_VERSION` and `OPENSSL_SHA256` as ARGs, `sha256sum -c` before extract. Versions UNVERIFIED: copy from `docker/Dockerfile` in the pinned commit.
    - Build packages (`apk`): `curl perl linux-headers`, `libxml2-static`/`xz-static` for `-lxml2 -llzma` (UNVERIFIED package names).
 3. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:…`:
@@ -59,7 +59,7 @@ Not needed: `etc/`, `scripts/`, `health/`, `app/`. `root/` must not be touched.
    - `ENV HOME=/config`.
    - `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3000`, `VOLUME /config`.
    - Licence file: copy `LICENSE` from the source to `/usr/share/licenses/invidious/LICENSE`.
-   - `ENTRYPOINT ["/start.sh"]` is set in `start.sh` via `exec`; tini is optional (the `exec` in start.sh handles signals, so `tini` may be dropped to save an apt package). Decide during build.
+   - The base image already sets `ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]` (`apps/ubuntu/Dockerfile`), so do not install `tini` or set an ENTRYPOINT; UNVERIFIED how `/entrypoint.sh` hands over to `/start.sh`, check before writing the Dockerfile.
 
 ## 5. docker-bake.hcl
 

@@ -39,7 +39,7 @@ Seven rows, one per image. The protocol says one app per `apps/<app>/`, so the p
 
 Written for option A (`jupyter-minimal`), extended per row.
 
-1. `ARG VERSION`, `ARG TARGETARCH`. Bake default `notebook-X.Y.Z` (confirmed existing tag, see section 1).
+1. `ARG VERSION`, `ARG TARGETARCH`. Bake default `notebook-X.Y.Z` (UNVERIFIED that the tag exists, see section 1; pick it before writing the bake file). Note the pip install path (option A) pins the `notebook` PyPI version, so the image-tag form `notebook-X.Y.Z` must be mapped to a PyPI version in the Dockerfile.
 2. `USER root`. `apt-get install --no-install-recommends curl git nano-tiny tzdata unzip vim-tiny openssh-client less xclip`. Skip anything already in the python base (check with `dpkg -l`). `rm -rf /var/lib/apt/lists/*`.
 3. Python packages: `pip install --no-cache-dir notebook==<pinned>` with versions pinned to the upstream tag's `pip` set. Set `PIP_CACHE_DIR=/tmp/pip`.
 4. Rows with extras:

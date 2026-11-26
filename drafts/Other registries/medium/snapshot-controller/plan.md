@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | `v8.7.1` (latest release, published 2026-11-23): https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v8.7.1. The draft says `v8.7.0`; the TrueCharts chart runs `v8.7.1` (`registry.k8s.io/sig-storage/snapshot-controller:v8.7.1@sha256:d3c3893704c86f0fe428a6429c705b7103a653bea151db0fc5ab0fdb25bb2290`), so `v8.7.1` is the target. Tag commit `9aea5b81a82aa262567bb4345c1caf2510d026dc` (git ls-remote). |
-| Renovate | `datasource=github-releases depName=kubernetes-csi/external-snapshotter versioning=semver` (UNVERIFIED that no upstream renovate config overrides this; the tag format is plain `vX.Y.Z`, so the `v` prefix is handled as in `apps/adguardhome-sync`). |
+| Renovate | `datasource=github-releases depName=kubernetes-csi/external-snapshotter versioning=semver` (UNVERIFIED that no upstream renovate config overrides this; the tag format is plain `vX.Y.Z`, so the `v` prefix is kept in VERSION as in `apps/bazarr`). |
 | License | Apache-2.0 (GitHub API `repos/kubernetes-csi/external-snapshotter` `.license.spdx_id`; LICENSE at https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.7.0/LICENSE). |
 | Source URL | https://github.com/kubernetes-csi/external-snapshotter |
 | Download | None. No prebuilt binary is published; the controller is compiled from the tagged source (`cmd/snapshot-controller`). |

@@ -43,7 +43,7 @@ No `defaults/` or `etc/` are needed: no seeded config is shipped. `health/` only
 
 1. Build stage `FROM <ubuntu> AS download`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Map `TARGETARCH` to the vendor path: `amd64` to `linux-amd64`, `arm64` to `linux-arm64`. Fail the build for any other value.
-3. `curl -fL -o /tmp/minio "https://dl.min.io/aistor/minio/release/${ARCHDIR}/minio"`.
+3. `curl -fL -o /tmp/minio "https://dl.min.io/aistor/minio/release/${ARCHDIR}/minio"`. UNVERIFIED: this URL does not contain `${VERSION}`; it serves whatever release is current, so the build is not reproducible against the pinned `RELEASE.2026-09-19T17-05-25Z`. Check for a versioned path (e.g. `minio.<VERSION>`) or compare the checksum file name to `VERSION` and fail on mismatch.
 4. Verify: `curl -fL -o /tmp/minio.sha256sum "https://dl.min.io/aistor/minio/release/${ARCHDIR}/minio.sha256sum"`, then compare the first field to `sha256sum /tmp/minio`. Use an explicit comparison, not `sha256sum -c` (the file name in the sum file differs). Fail the build on mismatch.
 5. Install into the final stage: `mkdir -p /app/aistor && install -m 0755 /tmp/minio /app/aistor/minio`. Run `chown -R apps:apps /app/aistor`.
 6. License: place the vendor licence text (from the vendor page or the product terms) at `/usr/share/licenses/aistor/LICENSE`. UNVERIFIED: no licence file was fetched; the user must supply it or confirm the terms (section 10).
