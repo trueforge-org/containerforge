@@ -14,7 +14,7 @@
 | Stack | Nuxt 2 (`nuxt ^2.15.8`, webpack 4, `@nuxt/content`, express serverMiddleware `api/index.js`). Scripts: `build` = `nuxt build`, `start` = `nuxt start`. |
 | Upstream Dockerfile | reviewed (commit fd780e5): `node:lts-alpine` build stage (`npm install --frozen-lockfile`, `npm run build`), runtime copies `/app`, copies `/app/static` to `/app/static-default`, `ENV PORT 8080`, `INIT_ASSETS 1`, `VOLUME /app/static/`, entrypoint `entrypoint.sh` |
 | Port | **8080** (`nuxt.config.js`: `server: { port: 8080, host: '0.0.0.0' }`). The draft's inferred 3000 is wrong. |
-| Env | `INIT_ASSETS` (entrypoint.sh: default `1`; seed `static/` from `static-default` when `static/config.json` is missing). `PORT`, `GID`, `UID` appear in the upstream Dockerfile but the port is hard-coded in `nuxt.config.js`. |
+| Env | `INIT_ASSETS` (upstream Dockerfile `ENV INIT_ASSETS 1` is the default; entrypoint.sh only checks `== "1"`; seed `static/` from `static-default` when `static/config.json` is missing). `PORT`, `GID`, `UID` appear in the upstream Dockerfile but the port is hard-coded in `nuxt.config.js`. |
 | Write paths | `api/index.js` writes `static/config.json` (relative to cwd) on save, and reads `static/images` for the image list; `config.js`: `CONFIG_FILEPATH = 'static' + CONFIG_FILENAME` |
 
 ## 2. Target layout

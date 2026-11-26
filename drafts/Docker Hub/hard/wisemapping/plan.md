@@ -8,7 +8,7 @@
 | Version | `6.0.11` (Docker Hub `wisemapping/wisemapping:6.0.11`, pushed 2026-10-24; `latest` pushed 2026-10-29; frontend repo tag `6.0.11`). Draft says only `latest`. |
 | Version caveat | `wisemapping-open-source` has NO `6.x` tags or releases (newest tag `v5.0.10`; `develop` pom is `6.0.9-SNAPSHOT`). Docker images are built from `develop` plus frontend `FRONTEND_BRANCH`. Backend commit that matches image `6.0.11` is UNVERIFIED. |
 | Renovate | `datasource=github-tags depName=wisemapping/wisemapping-frontend versioning=loose` (tags `6.0.9`, `6.0.10`, `6.0.11`, no `v` prefix) |
-| License | WiseMapping Public License 1.0 (Apache-2.0 plus "powered by wisemapping" notice, `LICENSE.md`). No SPDX id: use `LicenseRef-WiseMapping-WPL-1.0` (GitHub shows NOASSERTION). Frontend repo license UNVERIFIED. |
+| License | WiseMapping Open License, Version 1.0 (Apache-2.0 plus "powered by wisemapping" notice, `LICENSE.md`). No SPDX id: use `LicenseRef-WiseMapping-WPL-1.0` (GitHub shows NOASSERTION). Frontend repo license UNVERIFIED. |
 | Source | https://github.com/wisemapping/wisemapping-open-source (backend `wise-api/`), https://github.com/wisemapping/wisemapping-frontend (UI) |
 | Downloads | Source tarballs: backend `https://github.com/wisemapping/wisemapping-open-source/archive/<BACKEND_REF>.tar.gz`, frontend `https://github.com/wisemapping/wisemapping-frontend/archive/refs/tags/${VERSION}.tar.gz`. JDK: Temurin 27 from `https://api.adoptium.net/v3/binary/latest/27/ga/linux/<x64\|aarch64>/jdk/hotspot/normal/eclipse` (also `jre`). Latest seen `jdk-27.0.1.1+4`; JRE x64 sha256 `9e15835ca3451a0089aac2c3667c009bc2743b9cb15030a14c6f5ec05f8d5aaf`. |
 | Checksum | Adoptium publishes sha256 per asset (API `checksum` field). None for the source tarballs. |
