@@ -6,7 +6,7 @@
 | Item | Value | Source |
 | --- | --- | --- |
 | Latest release | v4.5.0, published 2023-01-08 (no newer release; draft tag 4.5.0 matches) | https://api.github.com/repos/evan-buss/openbooks/releases/latest |
-| Renovate | UNVERIFIED: no renovate config checked for this repo. Planned: `datasource=github-releases depName=evan-buss/openbooks versioning=semver` (same as adguardhome-sync pattern) | — |
+| Renovate | UNVERIFIED: no renovate config checked for this repo. Planned: `datasource=github-releases depName=evan-buss/openbooks versioning=semver` (adguardhome-sync uses `datasource=github-releases depName=bakito/adguardhome-sync` without `versioning`) | — |
 | License | MIT (SPDX `MIT`) | https://api.github.com/repos/evan-buss/openbooks/license |
 | Source URL | https://github.com/evan-buss/openbooks | draft.md |
 | amd64 download | https://github.com/evan-buss/openbooks/releases/download/v4.5.0/openbooks_linux (raw static Linux binary, no archive) | releases API above |

@@ -48,7 +48,7 @@ Build stage `FROM <python-node> AS build`, final stage `FROM <python-node>`.
    - Store caches: `ENV npm_config_cache=/tmp/npm-cache PNPM_HOME=/tmp/pnpm`.
 3. Final stage (apt, root): install only what the base lacks from the upstream list: `git curl wget jq openssh-client procps netcat-openbsd unzip` (check each with `dpkg -s`; drop anything in the base). Pin nothing from apt (not a version-aligned package). Clean apt lists.
 4. Copy the built app: `COPY --from=build /tmp/ql /app/qinglong` (keeps `/app` read-only, runtime writes go to `/config`/`/tmp`).
-5. Permissions: `chown -R apps:apps /app && chmod -R 755 /app`. `ln -s /config/data /app/qinglong/data` is NOT used; instead `start.sh` points `QL_DIR` data at `/config`, see section 9.
+5. Permissions: `chown -R apps:apps /app && chmod -R 755 /app`. As root in the Dockerfile, replace the app's `data` directory with a dangling symlink: `rm -rf /app/qinglong/data && ln -s /config/data /app/qinglong/data`; `start.sh` creates `/config/data` (see sections 7 and 9).
 6. `ENV QL_DIR=/app/qinglong QL_CONTAINER=true HOME=/config LANG=C.UTF-8 PIP_CACHE_DIR=/tmp/pip NPM_CONFIG_PREFIX=/tmp/npm-global`.
 7. `LICENSE`: `COPY --from=build /tmp/ql/LICENSE /usr/share/licenses/qinglong/LICENSE`.
 8. Tail:
@@ -136,7 +136,7 @@ env:
     default: "false"
     required: false
   - name: QL_SCHEDULER
-    default: "system"
+    default: "node"
     required: false
 volumes:
   - path: /config
@@ -144,7 +144,7 @@ volumes:
 dependencies: []
 ```
 
-Only env vars the entrypoint really reads are listed (section 1). `ql_port`/`ql_grpc_port` are NOT added as env: their defaults are UNVERIFIED (in `share.sh`), so do not invent them; add them only after `share.sh` is read in the build step. `TZ` is not added: it is not read by the entrypoint (the base sets it, UNVERIFIED).
+Only env vars the entrypoint really reads are listed (section 1). Upstream auto-detects `QL_SCHEDULER` (`system` if a `crond` binary exists, else `node`); Ubuntu has no `crond` binary by default, so `node` is the default here and matches the non-root plan in section 7. `ql_port`/`ql_grpc_port` are NOT added as env: their defaults are UNVERIFIED (in `share.sh`), so do not invent them; add them only after `share.sh` is read in the build step. `TZ` is not added: it is not read by the entrypoint (the base sets it, UNVERIFIED).
 
 ## 7. start.sh
 

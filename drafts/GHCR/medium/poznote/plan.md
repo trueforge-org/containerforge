@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | Latest release `6.159.0`, published 2026-11-24T22:31:38Z (https://api.github.com/repos/timothepoznanski/poznote/releases/latest). The chart's tag `6.153.0` exists (published 2026-11-19T19:28:24Z). Pin `6.159.0`, the latest stable release. The chart's build (6.153.0) is the version the draft traced. Release has no assets. |
 | Renovate | `datasource=github-releases depName=timothepoznanski/poznote versioning=semver`. |
-| License | AGPL-3.0 (GitHub SPDX `AGPL-3.0`). Default branch `develop`. |
+| License | MIT (GitHub SPDX `MIT`; the license file in the repo is named `LICENCE`). Default branch `develop`. |
 | Source URL | https://github.com/timothepoznanski/poznote |
 | Download | Source tarball `https://github.com/timothepoznanski/poznote/archive/refs/tags/${VERSION}.tar.gz`. Interpreted PHP: no compiled binary. The upstream image copies `./src` into the web root. |
 | Checksum source | None published on the release page (no assets). Tarball is tag-addressed; record the SHA-256 we compute at build time in a comment (UNVERIFIED whether upstream publishes checksums). |
@@ -54,7 +54,7 @@ No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
    - supervisord: no `user` lines; logs under `/tmp`.
 6. Data path: the app's `data/` must live in `/config`. Use a symlink from the app folder to `/config/data`, as `apps/bookstack` does (`/app/poznote/data -> /config/data`). The link target is created by `start.sh`. `/app` stays read-only.
 7. `chown -R apps:apps /app/poznote` only if the app needs write access to its own tree (UNVERIFIED; the goal is read-only `/app`; prefer no chown and `/config`-based writes).
-8. License: `install -D /tmp/poznote/LICENSE /usr/share/licenses/poznote/LICENSE`.
+8. License: `install -D /tmp/poznote/LICENCE /usr/share/licenses/poznote/LICENSE`.
 9. Clean up: `rm -rf /tmp/* /var/lib/apt/lists/*`.
 10. Tail, same as `apps/bookstack`:
 
@@ -84,7 +84,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "AGPL-3.0"
+  default = "MIT"
 }
 
 variable "SOURCE" {

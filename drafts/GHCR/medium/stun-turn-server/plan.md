@@ -38,7 +38,7 @@ No `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM
 2. Pin check as in `apps/valkey`: `RUN test "${PACKAGE_VERSION%%-*}" = "${VERSION}"`, so the bake `VERSION` (`4.6.1`) matches the apt pin (`4.6.1-2build2`).
 3. `apt-get update && apt-get install -y --no-install-recommends "coturn=${PACKAGE_VERSION}" openssl`, then `apt-get purge -y --auto-remove`, `rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*`. Install `openssl` only when the base does not already provide it (check with `docker run --rm <base> which openssl`); the draft marks it inferred.
 4. Licence: `COPY` the coturn LICENSE from the package docs (`/usr/share/doc/coturn/copyright`, which the package ships) into `/usr/share/licenses/stun-turn-server/`. Do this in the RUN step, not by hand.
-5. `COPY --chmod=0755 start.sh /start.sh`.
+5. (no separate `COPY start.sh`: step 7 `COPY --chmod=0755 . /` already places `start.sh` at `/start.sh`.)
 6. `ENV` (no HOME move needed; the app writes only to `/config` and `/tmp`): `TURN_PORT=3478`, `TURN_TLS_PORT=5349`, `TURN_REALM=example.com`, `TURN_LISTEN_IP=0.0.0.0`.
 7. `USER apps`, `COPY --chmod=0755 . /`.
 8. `EXPOSE 3478/tcp 3478/udp 5349/tcp 5349/udp`, `VOLUME /config`, `CMD ["/start.sh"]`.
@@ -72,7 +72,7 @@ variable "LICENSE" { default = "BSD-3-Clause" }
 variable "SOURCE" { default = "https://github.com/coturn/coturn" }
 ```
 
-Renovate `datasource=deb` is UNVERIFIED for the Ubuntu archive; if it does not work, document the manual bump. Four standard targets and the `default` group copied from `apps/adguardhome-sync`; `PACKAGE_VERSION` passed through the `image` target `args`. Validate with `docker buildx bake --print` from `apps/stun-turn-server`.
+Renovate `datasource=deb` is UNVERIFIED for the Ubuntu archive. `apps/valkey/docker-bake.hcl` uses a repology comment (`depName=ubuntu_26_04/valkey versioning=loose`, currently disabled) for the same apt-pin case; follow it or document the manual bump. Four standard targets and the `default` group copied from `apps/adguardhome-sync`; `PACKAGE_VERSION` passed through the `image` target `args`. Validate with `docker buildx bake --print` from `apps/stun-turn-server`.
 
 ## 6. settings.yaml
 
@@ -91,6 +91,15 @@ ports:
     protocol: tcp
     required: false
 env:
+  - name: TURN_PORT
+    default: "3478"
+    required: false
+  - name: TURN_TLS_PORT
+    default: "5349"
+    required: false
+  - name: TURN_LISTEN_IP
+    default: "0.0.0.0"
+    required: false
   - name: TURN_REALM
     default: "example.com"
     required: false

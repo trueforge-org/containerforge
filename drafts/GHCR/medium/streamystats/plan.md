@@ -132,7 +132,7 @@ dependencies:
   - name: postgresql
 ```
 
-Row 1 depends on row 2 (`JOB_SERVER` URL is UNVERIFIED; do not invent it). Do not list `NODE_ENV`, `PORT`, `HOST` unless `start.sh` reads them from `settings.yaml` (they are image-level, not user config).
+Row 1 also depends on row 2, but `apps/streamystats-job-server` does not exist yet (this plan creates it), so do not list it under `dependencies:` until it lands; the job-server URL variable is UNVERIFIED, do not invent it. Do not list `NODE_ENV`, `PORT`, `HOST` unless `start.sh` reads them from `settings.yaml` (they are image-level, not user config).
 
 ## 7. start.sh
 

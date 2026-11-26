@@ -37,7 +37,7 @@ Single ubuntu stage is enough: the engine comes from apt, no build step.
 
 1. `ARG VERSION` (apt version of `ioquake3`, pinned; see section 10) and `ARG TARGETARCH`.
 2. `USER root`.
-3. `RUN apt-get update && apt-get install -y --no-install-recommends ioquake3=${VERSION} unzip && rm -rf /var/lib/apt/lists/*` (pin the package and check the pinned version against `VERSION` in `docker-bake.hcl`, as `apps/valkey` does). If the exact-version pin is not available on 26.04, record the chosen version and why.
+3. `RUN apt-get update && apt-get install -y --no-install-recommends ioquake3=${VERSION} unzip && rm -rf /var/lib/apt/lists/*` (pin the package and check the pinned version against `docker-bake.hcl`; `apps/valkey` passes the apt version as a separate `PACKAGE_VERSION` build arg next to `VERSION`). If the exact-version pin is not available on 26.04, record the chosen version and why.
 4. Do NOT install `lib32z1` or enable i386: the ubuntu base does not need i386 for the native engine (UNVERIFIED: confirm the engine runs without i386 libs on amd64).
 5. Do NOT download the id Software zips in the image. Game pak files are supplied by the user (see section 10). Remove the upstream download logic entirely.
 6. License: `COPY` or `install` the engine's `COPYING` file to `/usr/share/licenses/quake3/COPYING` (source of the GPL text: ioq3 repo, UNVERIFIED path).
@@ -155,14 +155,12 @@ Only variables the new `start.sh` reads are listed. `GAME_PARAMS` is kept only i
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
 timeoutSeconds: 60
-udp:
-- port: '27960'
 filePaths:
 - /usr/games/ioq3ded
 - /usr/share/licenses/quake3/COPYING
 ```
 
-- `udp` probe: confirm the forgetool schema supports a `udp` check; if not, use a `tcp` check only if the server also opens TCP (it does not, per draft), and record the gap. Do not invent a schema key.
+- No UDP probe: the container-test schema (checked 2026-11-26) has only `http`, `tcp`, `healthCommands`, `filePaths`, `mainRunner`, `runners`, `readOnlyRootfs`, `mounts`, `timeoutSeconds`, with no `udp` key. The server opens no TCP port, so port 27960/udp has no probe by design. State this gap in the PR; optionally add a `healthCommands` check once the syntax is read from the schema. Do not invent a schema key.
 - `filePaths` binary path is UNVERIFIED until `dpkg -L ioquake3` is run.
 - `timeoutSeconds` 60 is an estimate; align with sibling game server apps (`apps/steamcmd`).
 

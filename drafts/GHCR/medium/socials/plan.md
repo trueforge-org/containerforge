@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | Upstream has no releases (GitHub API `releases/latest` returns 404) and no tags. Chart uses the untagged `ghcr.io/diamkil/socials:main@sha256:ec22a94aad6850b2667c506dfec53cdd39b241f039c5a1187b569f3aefc2c75b` (https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/socials/values.yaml). This plan pins a commit SHA instead. Commit `2b7a17b519896cc18b775536d7f9016921df133a` (2022-02-21, "Removed minify") has the same Dockerfile as `main` (both fetched). UNVERIFIED: the current `main` HEAD SHA. Resolve it at build time with `gh api repos/diamkil/socials/commits/main --jq .sha` and pin that. Repo last pushed 2023-03-06. |
 | package.json version | `2.0.0` (https://raw.githubusercontent.com/diamkil/socials/2b7a17b519896cc18b775536d7f9016921df133a/package.json). Not used as `VERSION`, because it does not change per release. |
-| Renovate | `// renovate: datasource=git-refs depName=https://github.com/diamkil/socials currentValue=main` (precedent: `apps/fenrus`, `apps/tvheadend`). |
+| Renovate | `// renovate: datasource=git-refs depName=https://github.com/diamkil/socials currentValue=main` (precedent: `apps/tvheadend`; `apps/fenrus` is only a plan, not yet in `apps/`). |
 | License | `ISC` per package.json (`"license": "ISC"`). GitHub API reports no license (null). No `LICENSE` file found (URL 404). UNVERIFIED: the licence text. Bake `LICENSE` is `ISC`. |
 | Source URL | https://github.com/diamkil/socials |
 | Download | Source tarball `https://github.com/diamkil/socials/archive/${VERSION}.tar.gz` (VERSION = commit SHA). No release binary. |

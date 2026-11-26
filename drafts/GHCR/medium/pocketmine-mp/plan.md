@@ -183,7 +183,7 @@ filePaths:
 - /usr/share/licenses/pocketmine-mp/LICENSE
 ```
 
-- Coverage gap: the port is UDP. The `tcp` and `http` probes in the forgetool schema do not test UDP. Check the schema for a `udp` probe type first. If one exists, add a `udp` probe for port 19132. If not, state the gap in the PR and note it as a narrowed assertion (comment, per the build-test protocol). Do not drop the check silently.
+- Coverage gap: the port is UDP. The `tcp` and `http` probes in the forgetool schema do not test UDP. The container-test schema (checked 2026-11-26) has no `udp` key (only `http`, `tcp`, `healthCommands`, `filePaths`, `mainRunner`, `runners`, `readOnlyRootfs`, `mounts`, `timeoutSeconds`), so no UDP probe is possible. State the gap in the PR and note it as a narrowed assertion (comment, per the build-test protocol). Do not drop the check silently.
 - `timeoutSeconds` 180 is an estimate; the server start is slow. Compare with a sibling (UNVERIFIED).
 - No env vars are needed; plugin download code runs only when `POCKETMINE_PLUGINS` is set, so add `/config/plugins` checks to a separate test or run it manually (container-test instructions).
 

@@ -35,7 +35,7 @@ No `defaults/`, `etc/`, `root/`, or `health/` needed: the app creates its own co
 ## 3. Base image
 
 - Build stage and runtime stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
-- Reason: Go is compiled in the build stage and the binary is copied into the runtime stage. Ubuntu is the final base for Go apps (`apps/pwndrop`, `apps/webgrabplus`).
+- Reason: Go is compiled in the build stage and the binary is copied into the runtime stage. Ubuntu is the final base for Go apps (`apps/pwndrop`).
 - Closest sibling: `apps/pwndrop` (Go compiled from source in a `buildstage`, then `COPY --from=buildstage` into the ubuntu runtime stage).
 
 ## 4. Dockerfile
@@ -59,11 +59,11 @@ USER apps
 COPY --chmod=0755 . /
 
 EXPOSE 8080
-WORKDIR /config
+WORKDIR /app/podgrab
 VOLUME /config
 ```
 
-Note: `apps/pwndrop` runs from `/config` as `WORKDIR`. Podgrab reads `client` and `webassets` relative to its working directory (`WORKDIR /api` upstream). Set `WORKDIR /app/podgrab` for the binary and let `start.sh` change to `/config` only if the app writes relative paths there (UNVERIFIED; check in the build).
+Note: `apps/pwndrop` uses `WORKDIR /config`, but Podgrab reads `client` and `webassets` relative to its working directory (`WORKDIR /api` upstream), so this plan deliberately uses `WORKDIR /app/podgrab` (matching `start.sh`). Whether the app writes relative paths there is UNVERIFIED; check in the build.
 
 ## 5. docker-bake.hcl
 
@@ -141,7 +141,7 @@ exec /app/podgrab/podgrab
 
 - Idempotent: `mkdir -p` only; no seeding is needed because the app creates its own state.
 - Never writes to `/app`.
-- Listens on all interfaces: confirm that `main.go` binds `0.0.0.0:8080` (UNVERIFIED; check the source; if it binds localhost, patch the port via env only if the app supports it, otherwise stop and record a blocker).
+- Listens on all interfaces: `main.go` calls `r.Run()` (gin default, comment says 0.0.0.0:8080), checked in the pinned commit. Gin's `PORT` env override is not verified here.
 - `exec` hands PID 1 to the binary.
 
 ## 8. container-test.yaml

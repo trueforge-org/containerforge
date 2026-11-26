@@ -151,13 +151,13 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - postgresql
+  - name: postgresql
 ```
 
 - `SPOOLMAN_DEBUG_MODE` defaults to `FALSE`. The chart sets it `true`, which env.py documents as a security risk (accepts requests from any host). Do not copy the chart default.
 - `SPOOLMAN_UPDATE_CHECK` (default TRUE, contacts GitHub) is left at the upstream default. Decide and document (UNVERIFIED what the check calls).
 - The `SPOOLMAN_DB_*` variables are listed because the `postgres` option is supported. `SPOOLMAN_DB_PASSWORD_FILE` is read by env.py, so add it only if `start.sh` supports it.
-- Dependencies key: the draft marks PostgreSQL as optional. Use `opt_dependencies` (the protocol's term) and check that the schema accepts it (`settings.yaml` rule: names must match the schema).
+- Dependencies key: the draft marks PostgreSQL as optional. Use `opt_dependencies` with `- name: postgresql` entries, as `apps/babybuddy/settings.yaml` does.
 
 ## 7. start.sh
 
@@ -170,7 +170,7 @@ mkdir -p /config/data /config/logs /config/backups
 
 # SQLite cache directory is under the data dir; keep the real cache in /tmp
 mkdir -p /tmp/spoolman/cache
-if [ ! -e /config/data/cache ]; then ln -s /tmp/spoolman/cache /config/data/cache; fi
+ln -sfn /tmp/spoolman/cache /config/data/cache
 
 export SPOOLMAN_DIR_DATA="${SPOOLMAN_DIR_DATA:-/config/data}"
 export SPOOLMAN_DIR_LOGS="${SPOOLMAN_DIR_LOGS:-/config/logs}"
@@ -187,7 +187,7 @@ exec /app/venv/bin/uvicorn spoolman.main:app --host "${SPOOLMAN_HOST:-0.0.0.0}" 
 ```
 
 - Idempotent: directories are created only when missing, nothing existing is overwritten.
-- Nothing is written under `/app`. Spoolman's `get_cache_dir()` is `data_dir / "cache"`, so the symlink sends cache writes to `/tmp` (repo rule: caches in `/tmp`). The symlink is only created when no `cache` entry exists, so a restart does not replace it.
+- Nothing is written under `/app`. Spoolman's `get_cache_dir()` is `data_dir / "cache"`, so the symlink sends cache writes to `/tmp` (repo rule: caches in `/tmp`). `ln -sfn` recreates the link on every start, because `/tmp` is empty after a restart and the old link would dangle (a `[ ! -e ]` guard would fail with `File exists` under `set -e`).
 - `exec` makes uvicorn PID 1 (signal handling).
 - Upstream `PUID`/`PGID` and `gosu` are dropped: the container runs as `apps` (non-root, USER apps). Document in the PR that `PUID`/`PGID` are not supported.
 - Draft caveat "upstream root entrypoint needs a path change to run as non-root": the path change is the `/config` mapping above, plus removing the `gosu` branch.
@@ -212,7 +212,7 @@ filePaths:
 - Runs with no env vars: SQLite, default data dir under `/config`. That is the supported default path, so it is the one tested.
 - The PostgreSQL path needs a real database. Under the protocol's narrow exception, only if all three criteria hold (hard dependency, cannot start without DB, not feasible in one container). Here the DB is optional, so the exception does not apply. Do not narrow the test. Test PostgreSQL by hand per section 11.
 - `path: /` must return 200. UNVERIFIED: the root route of Spoolman serves the web UI with 200 when no DB is set. If not, use the documented API info route after checking it on the running image.
-- `/usr/share/licenses/spoolman/LICENSE` is written by the Dockerfile (step 2 of section 4). Add the copy from the zip if the zip includes a `LICENSE` (UNVERIFIED).
+- `/usr/share/licenses/spoolman/LICENSE` is not created by any Dockerfile step above. Add a step that copies it from the extracted zip if it includes a `LICENSE` (UNVERIFIED), otherwise drop this filePaths entry.
 
 ## 9. Rootless and read-only-rootfs adaptations
 

@@ -110,8 +110,8 @@ Do not list env names the app does not read. `DL_URL`, `UID`, `GID`, `DATA_PERM`
 ## 7. start.sh
 
 - `mkdir -p /config/runtime /config/StarMade`. Seed `/config/StarMade/server.cfg` from `/defaults/server.cfg` only when missing.
-- Download the Starter into `/config` only when missing (never into `/app`).
-- If `/config/StarMade` is missing, run the Starter once to fetch the game (`java -jar /config/StarMade-Starter.jar -nogui`), otherwise run it to update.
+- Do not download the Starter at runtime: it is baked at build time at `/app/starmade/StarMade-Starter.jar` (section 4, read-only). Never write into `/app`.
+- `cd /config`. If `/config/StarMade` is missing, run the Starter once to fetch the game (`java -jar /app/starmade/StarMade-Starter.jar -nogui`), otherwise run it to update. UNVERIFIED: that the Starter installs into the current directory and not next to the jar; check on a first run.
 - `cd /config/StarMade` and `exec java ${EXTRA_JVM_PARAMS} -Xmx${XMX_SIZE}M -Xms${XMS_SIZE}M -jar StarMade.jar -server ${GAME_PARAMS}`.
 - Use `/tmp` for temporary files (the upstream `basicjre.tar.gz` step is not needed on this base).
 - Do not `sleep infinity` on failure. Exit non-zero with a clear message so the failure is visible.

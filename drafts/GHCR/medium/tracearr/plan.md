@@ -8,7 +8,7 @@
 | Version to build | Upstream release **v3.2.1**, published 2026-11-18: https://github.com/connorgallopo/Tracearr/releases/tag/v3.2.1 . The release has no binary, only `openapi-v1.json`, `openapi-v2.json`, `release-notes.json`. The app is built from the tagged source. The draft's chart image tag `ghcr.io/connorgallopo/tracearr:3.2.1` matches. |
 | Upstream Dockerfile | Pinned commit: https://raw.githubusercontent.com/connorgallopo/Tracearr/a0037ccf60ceb3d26c9e0efbb2605fec47471322/docker/Dockerfile (WebFetch summary, not verbatim). |
 | Renovate | `datasource=github-releases depName=connorgallopo/Tracearr versioning=semver` (tags carry a `v` prefix; semver handles it). |
-| License | AGPL-3.0 (LABEL in the upstream Dockerfile). The repo API `license` field is `null`; whether a LICENSE file exists is UNVERIFIED. |
+| License | AGPL-3.0 (LABEL in the upstream Dockerfile). The repo API `license` field is `null`; a root `LICENSE` file exists at the repo root (gh contents listing); its text was not read, so the SPDX suffix is UNVERIFIED. |
 | Source URL | https://github.com/connorgallopo/Tracearr |
 | Download | No prebuilt binary. Source at the tag, built with pnpm and turbo in a build stage. |
 | Checksum source | Git tag (source). Release assets carry GitHub API digests (`openapi-v1.json` `sha256:98fa22d6…`, not an app binary). |
@@ -92,8 +92,8 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - postgresql
-  - valkey
+  - name: postgresql
+  - name: valkey
 ```
 
 The `env` list must name every variable the app reads. The Tracearr env names (database URL, Redis/Valkey URL, auth secrets, encryption key, base URL) are NOT confirmed: the upstream `.env.example` / config schema was not fetched. List them only after reading the source (UNVERIFIED). Do not invent names. The `dependencies` entries are the existing apps `postgresql` and `valkey`.
