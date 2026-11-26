@@ -8,7 +8,7 @@ Two rows: row 1 is the php-fpm app (main), row 2 is the nginx web tier. Plan bot
 | Item | Value |
 | --- | --- |
 | Version to build | No releases and no tags (https://api.github.com/repos/tt-rss/tt-rss/releases/latest returns 404). Default branch `main`, last push 2026-11-22. Pin a commit: app `03628f0aa3c4a86e960ddd61b5ba372cd3a27b50`, web-nginx `d62bcf96d01a7a2e750f6c9581ca462556e57281` (the commits the chart's images were built from). Draft's `master.zip` is not confirmed: UNVERIFIED. |
-| Renovate | UNVERIFIED: no tags, so `github-releases` does not apply. Use `datasource=git-refs depName=https://github.com/tt-rss/tt-rss currentValue=main` (precedent `apps/fenrus`). |
+| Renovate | UNVERIFIED: no tags, so `github-releases` does not apply. Use `datasource=git-refs depName=https://github.com/tt-rss/tt-rss currentValue=main` (precedent `apps/tvheadend`). |
 | License | GPL-3.0 (GitHub SPDX `GPL-3.0`, https://api.github.com/repos/tt-rss/tt-rss) |
 | Source URL | https://github.com/tt-rss/tt-rss |
 | Download (row 1) | Source archive `https://github.com/tt-rss/tt-rss/archive/<commit>.tar.gz` (UNVERIFIED: not fetched). No binary. The app is PHP: no compile step. |
@@ -55,7 +55,7 @@ Row 2 (nginx): `FROM` the ContainerForge nginx base (`apps/nginx`), template cop
 ## 5. docker-bake.hcl
 
 - `APP = "tt-rss"`, `SOURCE = "https://github.com/tt-rss/tt-rss"`, `LICENSE = "GPL-3.0-only"`.
-- `VERSION` (commit SHA) with a renovate annotation: `// renovate: datasource=git-refs depName=https://github.com/tt-rss/tt-rss currentValue=main` (UNVERIFIED: annotation style for commits; check `apps/fenrus`).
+- `VERSION` (commit SHA) with a renovate annotation: `// renovate: datasource=git-refs depName=https://github.com/tt-rss/tt-rss currentValue=main` (UNVERIFIED: annotation style for commits; check `apps/tvheadend`).
 - Standard targets: `docker-metadata-action`, `image`, `image-local`, `image-all`, `group "default" { targets = ["image-local"] }`.
 - Validate: `cd apps/tt-rss && docker buildx bake --print`.
 
@@ -74,7 +74,7 @@ Row 2 (nginx): `FROM` the ContainerForge nginx base (`apps/nginx`), template cop
 - Seed `/config/html` from the built source only when missing (`rsync` or `cp -n`).
 - Render `config.docker.php` into `/config/config.d/` only when missing; re-apply DB settings from env on every start.
 - Wait for PostgreSQL (`pg_isready` or a TCP check with a bounded timeout), then run schema init (idempotent, `php update.php --update-schema`) and start the background updater via `dcron` or a loop (UNVERIFIED: which the chart expects).
-- Final line: `exec php-fpm85 -F` (PID 1 handoff) with `php-fpm` from the Ubuntu package name.
+- Final line: `exec php-fpm -F` (PID 1 handoff; UNVERIFIED: the versioned binary name in the Ubuntu package, check `ls /usr/sbin/php-fpm*`).
 
 ## 8. container-test.yaml
 

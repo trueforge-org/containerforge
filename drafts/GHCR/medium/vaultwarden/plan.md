@@ -122,12 +122,12 @@ dependencies:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 300
 filePaths:
 - /app/vaultwarden
 - /app/web-vault
 tcp:
 - port: '8080'
-  timeoutSeconds: 300
 ```
 
 - Every port in settings.yaml has a tcp probe (8080).
