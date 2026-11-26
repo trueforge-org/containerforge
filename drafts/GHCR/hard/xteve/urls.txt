@@ -1,5 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xteve/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xteve/Chart.yaml
+# OTHER sources
 https://github.com/k8s-at-home/container-images
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xteve
 https://github.com/xteve-project/xTeVe
 https://github.com/xteve-project/xTeVe-Documentation/blob/master/en/configuration.md
 https://github.com/xteve-project/xTeVe-Downloads

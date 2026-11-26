@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zilean/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zilean/Chart.yaml
+https://hub.docker.com/v2/repositories/ipromknight/zilean/
+https://hub.docker.com/v2/repositories/ipromknight/zilean/tags?page_size=10
+# OTHER sources
 http://+:8181
 http://zilean:8181
 https://github.com/iPromKnight/zilean
 https://github.com/iPromKnight/zilean/blob/HEAD/requirements.txt
 https://github.com/iPromKnight/zilean/blob/ee5cbb7e41de282d8dd87f5a27e667a74370b196/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zilean
-https://hub.docker.com/r/ipromknight/zilean
 https://ipromknight.github.io/zilean

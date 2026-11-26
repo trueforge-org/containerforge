@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plextraktsync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plextraktsync/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/Taxel/PlexTraktSync/contents/Dockerfile?ref=5f951838eaea4466d078571cc548ac51d5ed2341
 https://api.github.com/repos/Taxel/PlexTraktSync/contents/entrypoint.sh?ref=5f951838eaea4466d078571cc548ac51d5ed2341
 https://api.github.com/repos/Taxel/PlexTraktSync/tags
@@ -5,5 +9,4 @@ https://files.pythonhosted.org/packages/8c/0b/f41a3a3695f7560185d252488a9d54f17c
 https://github.com/Taxel/PlexTraktSync
 https://github.com/Taxel/PlexTraktSync/blob/5f951838eaea4466d078571cc548ac51d5ed2341/Dockerfile
 https://github.com/Taxel/PlexTraktSync/blob/main/README.md
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plextraktsync
 https://pypi.org/pypi/plextraktsync/json

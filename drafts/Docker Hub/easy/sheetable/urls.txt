@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sheetable/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sheetable/Chart.yaml
+https://hub.docker.com/v2/repositories/vallezw/sheetable/
+https://hub.docker.com/v2/repositories/vallezw/sheetable/tags?page_size=10
+# OTHER sources
 https://api.openopus.org
 https://github.com/SheetAble
 https://github.com/SheetAble/SheetAble
 https://github.com/SheetAble/SheetAble/blob/v0.8.1/backend/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sheetable
-https://hub.docker.com/r/vallezw/sheetable
 https://pdf2png.sheetable.net/createthumbnail
 https://sheetable.net/docs
 https://sheetable.net/docs/configuration

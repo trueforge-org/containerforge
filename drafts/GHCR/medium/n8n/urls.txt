@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/n8n/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/n8n/Chart.yaml
+# OTHER sources
 https://docs.n8n.io
 https://github.com/n8n-io/n8n
 https://github.com/n8n-io/n8n/blob/n8n@3.3.0/docker/images/n8n/Dockerfile
 https://github.com/n8n-io/n8n/releases/tag/n8n%402.49.6
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/n8n
 https://n8n.io
 https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md
 https://raw.githubusercontent.com/n8n-io/n8n/master/docker/images/n8n/Dockerfile

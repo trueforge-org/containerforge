@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mindustry/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mindustry/Chart.yaml
+# OTHER sources
 https://anuke.itch.io/mindustry
 https://api.github.com/repos/Anuken/Mindustry
 https://api.github.com/repos/Anuken/Mindustry/releases/latest
 https://github.com/Anuken/Mindustry
 https://github.com/ich777/docker-mindustry/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mindustry
 https://mindustrygame.github.io
 https://mindustrygame.github.io/wiki
 https://raw.githubusercontent.com/Anuken/Mindustry/master/README.md
@@ -11,4 +14,3 @@ https://raw.githubusercontent.com/Anuken/Mindustry/master/build.gradle
 https://raw.githubusercontent.com/ich777/docker-mindustry/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-mindustry/master/scripts/start-server.sh
 https://raw.githubusercontent.com/ich777/docker-mindustry/master/scripts/start.sh
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mindustry/values.yaml

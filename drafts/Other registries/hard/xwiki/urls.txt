@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xwiki/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xwiki/Chart.yaml
+# OTHER sources
 https://downloads.apache.org/tomcat/tomcat-10/v10.1.62/bin/apache-tomcat-10.1.62.tar.gz.sha512
 https://gallery.ecr.aws/docker/library/xwiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xwiki
 https://github.com/xwiki/xwiki-docker
 https://github.com/xwiki/xwiki-docker/blob/589e96c134218b1e1d6dab64865aade428ae1106/18/postgres-tomcat/Dockerfile
 https://github.com/xwiki/xwiki-platform

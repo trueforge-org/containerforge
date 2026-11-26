@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jellystat/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jellystat/Chart.yaml
+# OTHER sources
 https://github.com/CyferShepard/Jellystat
 https://github.com/CyferShepard/Jellystat/blob/e0a38eeeff4c4bbaba60abad5f76e8a54415d1a8/Dockerfile
 https://github.com/CyferShepard/Jellystat/releases/tag/1.1.12
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jellystat
 https://raw.githubusercontent.com/CyferShepard/Jellystat/e0a38eeeff4c4bbaba60abad5f76e8a54415d1a8/Dockerfile
 https://raw.githubusercontent.com/CyferShepard/Jellystat/e0a38eeeff4c4bbaba60abad5f76e8a54415d1a8/docker-compose.yml
 https://raw.githubusercontent.com/CyferShepard/Jellystat/e0a38eeeff4c4bbaba60abad5f76e8a54415d1a8/entry.sh

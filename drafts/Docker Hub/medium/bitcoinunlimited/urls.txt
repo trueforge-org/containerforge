@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitcoinunlimited/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitcoinunlimited/Chart.yaml
+https://hub.docker.com/v2/repositories/amacneil/bitcoinunlimited/
+https://hub.docker.com/v2/repositories/amacneil/bitcoinunlimited/tags?page_size=10
+# OTHER sources
 https://github.com/BitcoinUnlimited/BitcoinUnlimited
 https://github.com/amacneil/docker-bitcoin/blob/master/unlimited/1.1.1.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bitcoinunlimited
 https://gitlab.com/bitcoinunlimited/BCHUnlimited
-https://hub.docker.com/r/amacneil/bitcoinunlimited
 https://www.bitcoinunlimited.info

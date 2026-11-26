@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/libredb-studio/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/libredb-studio/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/libredb/libredb-studio
 https://api.github.com/repos/libredb/libredb-studio/releases/latest
 https://github.com/libredb/libredb-studio
 https://github.com/libredb/libredb-studio/blob/58adba536f0283fecb7b761053cb2401dd7187eb/Dockerfile
 https://github.com/libredb/libredb-studio/pkgs/container/libredb-studio
 https://github.com/libredb/libredb-studio/releases/tag/1.3.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/libredb-studio
 https://libredb.org
 https://raw.githubusercontent.com/libredb/libredb-studio/58adba536f0283fecb7b761053cb2401dd7187eb/Dockerfile

@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hetzner-ddns/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hetzner-ddns/Chart.yaml
+https://hub.docker.com/v2/repositories/kutzilla/hetzner-ddns/
+https://hub.docker.com/v2/repositories/kutzilla/hetzner-ddns/tags?page_size=10
+# OTHER sources
 https://dns.hetzner.com/api/v1
 https://github.com/kutzilla/docker-hetzner-ddns
 https://github.com/kutzilla/docker-hetzner-ddns/blob/511c911/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hetzner-ddns
-https://hub.docker.com/r/kutzilla/hetzner-ddns
 https://status.hetzner.com/incident/c2146c42-6dd2-4454-916a-19f07e0e5a44

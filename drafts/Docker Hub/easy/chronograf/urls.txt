@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chronograf/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chronograf/Chart.yaml
+https://hub.docker.com/v2/repositories/library/chronograf/
+https://hub.docker.com/v2/repositories/library/chronograf/tags?page_size=10
+# OTHER sources
 https://dl.influxdata.com/chronograf/releases
 https://docs.influxdata.com/chronograf/latest/introduction/installation
 https://docs.influxdata.com/chronograf/v1/administration/config-options
 https://github.com/influxdata/chronograf
 https://github.com/influxdata/influxdata-docker/blob/f49180e6d0f4acee8c9f8672342cf4496d81b99b/chronograf/1.11/Dockerfile
 https://github.com/influxdata/influxdata-docker/blob/master/chronograf/1.11/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chronograf
-https://hub.docker.com/_/chronograf
 https://www.influxdata.com/time-series-platform/chronograf

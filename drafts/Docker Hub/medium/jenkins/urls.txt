@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jenkins/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jenkins/Chart.yaml
+https://hub.docker.com/v2/repositories/jenkins/jenkins/
+https://hub.docker.com/v2/repositories/jenkins/jenkins/tags?page_size=10
+# OTHER sources
 https://get.jenkins.io/war/2.544/jenkins.war
 https://github.com/jenkinsci/docker
 https://github.com/jenkinsci/docker/blob/2.544/debian/Dockerfile
 https://github.com/jenkinsci/jenkins
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jenkins
-https://hub.docker.com/r/jenkins/jenkins
 https://raw.githubusercontent.com/jenkinsci/docker/2.544/debian/Dockerfile
 https://raw.githubusercontent.com/jenkinsci/docker/master/README.md
 https://raw.githubusercontent.com/jenkinsci/jenkins/master/LICENSE.txt

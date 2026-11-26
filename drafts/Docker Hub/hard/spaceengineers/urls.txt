@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spaceengineers/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spaceengineers/Chart.yaml
+https://hub.docker.com/v2/repositories/devidian/spaceengineers/
+https://hub.docker.com/v2/repositories/devidian/spaceengineers/tags?page_size=10
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://developer.valvesoftware.com/wiki/SteamCMD
 https://github.com/Devidian/docker-spaceengineers
 https://github.com/Devidian/docker-spaceengineers/blob/26569e3284bd38fccbe60c0943e1bd8442193c23/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spaceengineers
-https://hub.docker.com/r/devidian/spaceengineers
 https://www.spaceengineersgame.com

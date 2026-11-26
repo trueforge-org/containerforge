@@ -1,6 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/passwordpusherephemeral/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/passwordpusherephemeral/Chart.yaml
+https://hub.docker.com/v2/repositories/library/ruby/
+https://hub.docker.com/v2/repositories/library/ruby/tags?page_size=10
+https://hub.docker.com/v2/repositories/pglombardo/pwpush-ephemeral/
+https://hub.docker.com/v2/repositories/pglombardo/pwpush-ephemeral/tags?page_size=10
+# OTHER sources
 https://docs.pwpush.com
 https://eu.pwpush.com
 https://github.com/pglombardo/PasswordPusher
 https://github.com/pglombardo/PasswordPusher/blob/0590f8d12e5a59f210542fb7d86348c6e7f06a85/containers/docker/pwpush-ephemeral/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/passwordpusherephemeral
-https://hub.docker.com/r/pglombardo/pwpush-ephemeral

@@ -1,5 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tonido/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tonido/Chart.yaml
+https://hub.docker.com/v2/repositories/captinsano/tonido/
+https://hub.docker.com/v2/repositories/captinsano/tonido/tags?page_size=10
+# OTHER sources
 https://github.com/captinsano/docker-containers/blob/bc771a38db8113da381410a5c3c3714172183bf5/Tonido/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tonido
-https://hub.docker.com/r/captinsano/tonido
-https://registry.hub.docker.com/r/captinsano/tonido
 https://www.tonido.com

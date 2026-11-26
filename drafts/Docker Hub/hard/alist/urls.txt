@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/alist/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/alist/Chart.yaml
+https://hub.docker.com/v2/repositories/xhofe/alist-aria2/
+https://hub.docker.com/v2/repositories/xhofe/alist-aria2/tags?page_size=10
+# OTHER sources
 https://alistgo.com
 https://alistgo.com/guide
 https://github.com/AlistGo/alist
 https://github.com/AlistGo/with_aria2/blob/12a215e1e1b1375f0512d4e2e310a35a4209e4de/Dockerfile
 https://github.com/Xhofe/alist
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/alist
-https://hub.docker.com/r/xhofe/alist-aria2

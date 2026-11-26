@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xware/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xware/Chart.yaml
+https://hub.docker.com/v2/repositories/caiguai/docker-xware/
+https://hub.docker.com/v2/repositories/caiguai/docker-xware/tags?page_size=10
+# OTHER sources
 https://github.com/caiguai/docker-xware
 https://github.com/caiguai/docker-xware/blob/master/Dockerfile
 https://github.com/caiguai/docker-xware/raw/2ea1f2f62c173d44beaef2a44005cc2696d2710c/xware.tar.bz
 https://github.com/caiguai/docker-xware/raw/master/xware.tar.bz
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xware
 https://help.xunlei.com
-https://hub.docker.com/r/caiguai/docker-xware
 https://www.xunlei.com

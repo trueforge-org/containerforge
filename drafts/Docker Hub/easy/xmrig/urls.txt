@@ -1,4 +1,8 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xmrig
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xmrig/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xmrig/Chart.yaml
+https://hub.docker.com/v2/repositories/cooleye72/xmrig/
+https://hub.docker.com/v2/repositories/cooleye72/xmrig/tags?page_size=10
+# OTHER sources
 https://github.com/xmrig/xmrig
-https://hub.docker.com/r/cooleye72/xmrig
 https://xmrig.com/docs

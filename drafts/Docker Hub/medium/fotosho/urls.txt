@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fotosho/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fotosho/Chart.yaml
+https://hub.docker.com/v2/repositories/advplyr/fotosho/
+https://hub.docker.com/v2/repositories/advplyr/fotosho/tags?page_size=10
+# OTHER sources
 https://github.com/advplyr/fotosho
 https://github.com/advplyr/fotosho/blob/master/Dockerfile
 https://github.com/advplyr/fotosho/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fotosho
-https://hub.docker.com/r/advplyr/fotosho
 https://raw.githubusercontent.com/advplyr/fotosho/master/Dockerfile
 https://raw.githubusercontent.com/advplyr/fotosho/master/package.json

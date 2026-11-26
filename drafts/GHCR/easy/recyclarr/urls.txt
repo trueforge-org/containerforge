@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/recyclarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/recyclarr/Chart.yaml
+# OTHER sources
 https://github.com/recyclarr/recyclarr
 https://github.com/recyclarr/recyclarr/blob/v8.8.1/Dockerfile
 https://github.com/recyclarr/recyclarr/pkgs/container/recyclarr
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/recyclarr
 https://raw.githubusercontent.com/recyclarr/recyclarr/v8.8.1/Dockerfile
 https://raw.githubusercontent.com/recyclarr/recyclarr/v8.8.1/docker/scripts/cron.sh
 https://raw.githubusercontent.com/recyclarr/recyclarr/v8.8.1/docker/scripts/entrypoint.sh
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/recyclarr/values.yaml
 https://recyclarr.dev

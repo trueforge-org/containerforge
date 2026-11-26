@@ -1,4 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spegel/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spegel/Chart.yaml
+# OTHER sources
 https://github.com/spegel-org/spegel
 https://github.com/spegel-org/spegel/blob/7e2e042/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spegel
 https://raw.githubusercontent.com/spegel-org/spegel/7e2e042/Dockerfile

@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pixapop/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pixapop/Chart.yaml
+# OTHER sources
 https://github.com/bierdok
 https://github.com/bierdok/pixapop
 https://github.com/linuxserver/docker-pixapop
 https://github.com/linuxserver/docker-pixapop/blob/932504b80918/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pixapop
 https://raw.githubusercontent.com/linuxserver/docker-pixapop/932504b80918/Dockerfile

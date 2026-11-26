@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/csgo/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/csgo/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/csgo
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://store.steampowered.com/app/740
 https://www.steampowered.com

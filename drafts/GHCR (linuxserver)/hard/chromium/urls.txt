@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chromium/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chromium/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/linuxserver/docker-chromium
 https://chromium.googlesource.com/chromium/src
 https://chromium.googlesource.com/chromium/src/+/main/LICENSE
 https://github.com/linuxserver/docker-chromium
 https://github.com/linuxserver/docker-chromium/blob/4ec00555069627093b9110daff841d363f9a95f8/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chromium
 https://raw.githubusercontent.com/linuxserver/docker-chromium/4ec00555069627093b9110daff841d363f9a95f8/Dockerfile
 https://www.chromium.org
 https://www.chromium.org/developers

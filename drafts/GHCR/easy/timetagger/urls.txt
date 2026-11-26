@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/timetagger/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/timetagger/Chart.yaml
+# OTHER sources
 https://github.com/almarklein/timetagger
 https://github.com/almarklein/timetagger/blob/681720d84c94be660f30947db4b23e52d36cbe32/deploy/repo.nonroot.Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/timetagger
 https://pypi.org/pypi/timetagger/json
 https://raw.githubusercontent.com/almarklein/timetagger/681720d84c94be660f30947db4b23e52d36cbe32/deploy/repo.nonroot.Dockerfile
 https://timetagger.app

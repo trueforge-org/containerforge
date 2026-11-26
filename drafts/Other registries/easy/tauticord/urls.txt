@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tauticord/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tauticord/Chart.yaml
+# OTHER sources
 https://codeberg.org/api/v1/repos/nwithan8/tauticord/raw/LICENSE
 https://codeberg.org/api/v1/repos/nwithan8/tauticord/releases/latest
 https://codeberg.org/nwithan8/tauticord
 https://codeberg.org/nwithan8/tauticord/raw/tag/6.2.0/Dockerfile
 https://codeberg.org/nwithan8/tauticord/releases/tag/6.2.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tauticord

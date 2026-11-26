@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/photo-stream/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/photo-stream/Chart.yaml
+https://hub.docker.com/v2/repositories/waschinski/photo-stream/
+https://hub.docker.com/v2/repositories/waschinski/photo-stream/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/waschinski/photo-stream
 https://api.github.com/repos/waschinski/photo-stream/releases/latest
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photo-stream
 https://github.com/waschinski/photo-stream
 https://github.com/waschinski/photo-stream/blob/4f4e0dd71bea2a1db063f03f6ba76ca1ffe02d29/Dockerfile
 https://github.com/waschinski/photo-stream/releases/tag/1.5.0
-https://hub.docker.com/r/waschinski/photo-stream
-https://hub.docker.com/v2/repositories/waschinski/photo-stream/tags/latest
 https://raw.githubusercontent.com/waschinski/photo-stream/4f4e0dd71bea2a1db063f03f6ba76ca1ffe02d29/Dockerfile

@@ -1,7 +1,9 @@
-https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/theforest
-https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
 https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/theforest/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/theforest/Chart.yaml
+# OTHER sources
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://store.steampowered.com/app/242760
 https://store.steampowered.com/app/556450
 https://www.steampowered.com

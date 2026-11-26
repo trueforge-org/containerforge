@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mixpost/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mixpost/Chart.yaml
+https://hub.docker.com/v2/repositories/inovector/mixpost/
+https://hub.docker.com/v2/repositories/inovector/mixpost/tags?page_size=10
+# OTHER sources
 https://docs.mixpost.app
 https://docs.mixpost.app/lite
 https://github.com/inovector/MixpostApp
 https://github.com/inovector/mixpost
 https://github.com/inovector/mixpost/releases/tag/2.6.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mixpost
-https://hub.docker.com/r/inovector/mixpost
 https://mixpost.app

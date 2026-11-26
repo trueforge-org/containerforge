@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mojopaste/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mojopaste/Chart.yaml
+https://hub.docker.com/v2/repositories/jhthorsen/mojopaste/
+https://hub.docker.com/v2/repositories/jhthorsen/mojopaste/tags?page_size=10
+# OTHER sources
 http://*:8080
 https://cpan.metacpan.org
 https://github.com/jhthorsen/app-mojopaste
 https://github.com/jhthorsen/app-mojopaste/blob/246642c/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mojopaste
-https://hub.docker.com/r/jhthorsen/mojopaste
 https://raw.githubusercontent.com/jhthorsen/app-mojopaste/246642c/Dockerfile
 https://raw.githubusercontent.com/jhthorsen/app-mojopaste/246642c/README.md

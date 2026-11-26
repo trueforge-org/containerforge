@@ -1,4 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/comet/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/comet/Chart.yaml
+# OTHER sources
 https://github.com/g0ldyy/comet
 https://github.com/g0ldyy/comet/blob/a3b75ecbefc494747c30ab484ff86c07c61585f0/Dockerfile
 https://github.com/g0ldyy/comet/releases/tag/v2.59.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/comet

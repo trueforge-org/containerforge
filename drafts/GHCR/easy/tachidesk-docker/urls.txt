@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tachidesk-docker/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tachidesk-docker/Chart.yaml
+# OTHER sources
 https://github.com/Suwayomi/Suwayomi-Server
 https://github.com/Suwayomi/Suwayomi-Server/wiki
 https://github.com/Suwayomi/Suwayomi-Server/wiki/Configuring-Tachidesk-Server
 https://github.com/Suwayomi/Tachidesk-Server
 https://github.com/suwayomi/docker-tachidesk
 https://github.com/suwayomi/docker-tachidesk/blob/7a2bdee0b5aab381f80a9186ef8c73507771050f/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tachidesk-docker
 https://raw.githubusercontent.com/suwayomi/docker-tachidesk/7a2bdee0b5aab381f80a9186ef8c73507771050f/Dockerfile
 https://suwayomi.org

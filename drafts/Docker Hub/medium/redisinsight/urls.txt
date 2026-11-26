@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/redisinsight/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/redisinsight/Chart.yaml
+https://hub.docker.com/v2/repositories/redislabs/redisinsight/
+https://hub.docker.com/v2/repositories/redislabs/redisinsight/tags?page_size=10
+# OTHER sources
 https://github.com/RedisInsight/RedisInsight/blob/ecd3e7452cac2438bf1a69df8b4e38fc973383dd/Dockerfile
 https://github.com/redis/RedisInsight
 https://github.com/redis/RedisInsight/releases/expanded_assets/3.10.2
 https://github.com/redis/RedisInsight/releases/latest
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/redisinsight
-https://hub.docker.com/v2/repositories/redislabs/redisinsight/tags?page_size=100&name=3.10
 https://raw.githubusercontent.com/RedisInsight/RedisInsight/ecd3e7452cac2438bf1a69df8b4e38fc973383dd/Dockerfile
 https://raw.githubusercontent.com/RedisInsight/RedisInsight/ecd3e7452cac2438bf1a69df8b4e38fc973383dd/docker-entry.sh
 https://raw.githubusercontent.com/RedisInsight/RedisInsight/main/LICENSE

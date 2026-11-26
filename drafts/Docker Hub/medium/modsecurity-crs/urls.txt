@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/modsecurity-crs/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/modsecurity-crs/Chart.yaml
+https://hub.docker.com/v2/repositories/owasp/modsecurity-crs/
+https://hub.docker.com/v2/repositories/owasp/modsecurity-crs/tags?page_size=10
+# OTHER sources
 https://github.com/coreruleset/coreruleset
 https://github.com/coreruleset/modsecurity-crs-docker
 https://github.com/coreruleset/modsecurity-crs-docker/blob/0148a7443cfa92c9d229b546c89378f548f45410/apache/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/modsecurity-crs
-https://hub.docker.com/r/owasp/modsecurity-crs
 https://raw.githubusercontent.com/coreruleset/modsecurity-crs-docker/0148a7443cfa92c9d229b546c89378f548f45410/apache/Dockerfile
 https://www.coreruleset.org
 https://www.coreruleset.org/docs

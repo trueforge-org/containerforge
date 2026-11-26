@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ecodms/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ecodms/Chart.yaml
+https://hub.docker.com/v2/repositories/ecodms/allinone-18.09/
+https://hub.docker.com/v2/repositories/ecodms/allinone-18.09/tags?page_size=10
+# OTHER sources
 http://www.ecodms.de/ecodms_260164
 http://www.ecodms.de/ecodms_260164/noble
 http://www.ecodms.de/gpg/ecodms.key
 https://ecodms.datamagic.at/download
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ecodms
-https://hub.docker.com/r/ecodms/allinone-18.09
 https://www.ecodms.de
 https://www.ecodms.de/de
 https://www.ecodms.de/de/download

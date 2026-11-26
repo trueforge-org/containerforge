@@ -1,3 +1,7 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/auto-yt-dl
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/auto-yt-dl/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/auto-yt-dl/Chart.yaml
+https://hub.docker.com/v2/repositories/guhu007/auto-yt-dl/
+https://hub.docker.com/v2/repositories/guhu007/auto-yt-dl/tags?page_size=10
+# OTHER sources
 https://github.com/xXGuhuXx/auto-yt-dl
-https://hub.docker.com/r/guhu007/auto-yt-dl

@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/etherpad/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/etherpad/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ether/etherpad/releases/latest
 https://etherpad.org
 https://github.com/ether/etherpad
 https://github.com/ether/etherpad-lite
 https://github.com/ether/etherpad/blob/844729c6b9e68d593da9928141e6e2daced53ec9/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/etherpad
 https://raw.githubusercontent.com/ether/etherpad/844729c6b9e68d593da9928141e6e2daced53ec9/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/etherpad/values.yaml

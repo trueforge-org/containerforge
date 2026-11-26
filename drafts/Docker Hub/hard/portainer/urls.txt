@@ -1,8 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/portainer/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/portainer/Chart.yaml
+https://hub.docker.com/v2/repositories/portainer/portainer-ce/
+https://hub.docker.com/v2/repositories/portainer/portainer-ce/tags?page_size=10
+https://hub.docker.com/v2/repositories/portainer/portainer-ee/
+https://hub.docker.com/v2/repositories/portainer/portainer-ee/tags?page_size=10
+# OTHER sources
 https://docs.portainer.io
 https://docs.portainer.io/start/install-ce/server
 https://docs.portainer.io/start/install/server
 https://github.com/portainer/portainer
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/portainer
-https://hub.docker.com/r/portainer/portainer-ce
-https://hub.docker.com/r/portainer/portainer-ee
 https://www.portainer.io

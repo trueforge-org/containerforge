@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/grafana-image-renderer/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/grafana-image-renderer/Chart.yaml
+https://hub.docker.com/v2/repositories/grafana/grafana-image-renderer/
+https://hub.docker.com/v2/repositories/grafana/grafana-image-renderer/tags?page_size=10
+# OTHER sources
 https://github.com/grafana/grafana-image-renderer
 https://github.com/grafana/grafana-image-renderer/blob/76ca73f6e1f00b46ee91524bbd91718545ea5943/Dockerfile
 https://github.com/grafana/grafana-image-renderer/blob/master/docs/remote_rendering_using_docker.md
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/grafana-image-renderer
-https://hub.docker.com/r/grafana/grafana-image-renderer

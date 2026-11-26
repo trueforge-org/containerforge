@@ -1,12 +1,17 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kitchenowl/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kitchenowl/Chart.yaml
+https://hub.docker.com/v2/repositories/tombursch/kitchenowl/
+https://hub.docker.com/v2/repositories/tombursch/kitchenowl/tags?page_size=10
+https://hub.docker.com/v2/repositories/tombursch/kitchenowl-web/
+https://hub.docker.com/v2/repositories/tombursch/kitchenowl-web/tags?page_size=10
+# OTHER sources
 https://docs.kitchenowl.org
 https://github.com/TomBursch/kitchenowl
 https://github.com/TomBursch/kitchenowl/blob/v0.8.1/backend/Dockerfile
 https://github.com/TomBursch/kitchenowl/blob/v0.8.1/kitchenowl/Dockerfile
 https://github.com/TomBursch/kitchenowl/releases/expanded_assets/v0.8.1
 https://github.com/TomBursch/kitchenowl/releases/tag/v0.8.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kitchenowl
-https://hub.docker.com/r/tombursch/kitchenowl
-https://hub.docker.com/r/tombursch/kitchenowl-web
 https://kitchenowl.org
 https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.8.1/LICENSE
 https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.8.1/backend/Dockerfile

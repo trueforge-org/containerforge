@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/prometheus-pve-exporter/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/prometheus-pve-exporter/Chart.yaml
+# OTHER sources
 https://github.com/prometheus-pve/prometheus-pve-exporter
 https://github.com/prometheus-pve/prometheus-pve-exporter/blob/9c46938/Dockerfile
 https://github.com/prometheus-pve/prometheus-pve-exporter/blob/main/pve.yml
 https://github.com/prometheus-pve/prometheus-pve-exporter/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/prometheus-pve-exporter
 https://grafana.com/grafana/dashboards/10347-proxmox-via-prometheus
 https://pypi.org/pypi/prometheus-pve-exporter/json
 https://raw.githubusercontent.com/prometheus-pve/prometheus-pve-exporter/main/Dockerfile

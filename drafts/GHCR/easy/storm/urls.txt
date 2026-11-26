@@ -1,5 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/storm/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/storm/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/relvacode/storm
 https://github.com/relvacode/storm
 https://github.com/relvacode/storm/blob/v1.3.0/Dockerfile
 https://github.com/relvacode/storm/pkgs/container/storm
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/storm

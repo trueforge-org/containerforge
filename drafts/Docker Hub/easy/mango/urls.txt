@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mango/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mango/Chart.yaml
+https://hub.docker.com/v2/repositories/hkalexling/mango/
+https://hub.docker.com/v2/repositories/hkalexling/mango/tags?page_size=10
+# OTHER sources
 https://github.com/getmango/Mango
 https://github.com/getmango/Mango/releases/tag/v0.27.0
 https://github.com/hkalexling/mango
 https://github.com/hkalexling/mango/blob/7a7d9eb/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mango
-https://hub.docker.com/r/hkalexling/mango

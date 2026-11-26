@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/photoshow/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/photoshow/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/linuxserver/docker-photoshow
 https://api.github.com/repos/linuxserver/docker-photoshow/contents/root/etc/cont-init.d/40-install
 https://api.github.com/repos/thibaud-rohmer/PhotoShow/commits/master
@@ -8,4 +12,3 @@ https://github.com/linuxserver/docker-photoshow
 https://github.com/linuxserver/docker-photoshow/blob/0cacdcb6c785/Dockerfile
 https://github.com/thibaud-rohmer/PhotoShow
 https://github.com/thibaud-rohmer/PhotoShow/releases/tag/v2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photoshow

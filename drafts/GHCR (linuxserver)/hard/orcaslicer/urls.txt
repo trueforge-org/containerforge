@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/orcaslicer/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/orcaslicer/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/OrcaSlicer/OrcaSlicer/releases/latest
 https://github.com/OrcaSlicer/OrcaSlicer
 https://github.com/SoftFever/OrcaSlicer
 https://github.com/linuxserver/docker-orcaslicer/blob/4b114d95b04b/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/orcaslicer
 https://raw.githubusercontent.com/linuxserver/docker-orcaslicer/4b114d95b04b/Dockerfile
 https://www.orcaslicer.com
 https://www.orcaslicer.com/wiki

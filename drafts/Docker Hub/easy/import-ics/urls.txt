@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/import-ics/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/import-ics/Chart.yaml
+https://hub.docker.com/v2/repositories/vilhjalmr26/import_ics/
+https://hub.docker.com/v2/repositories/vilhjalmr26/import_ics/tags?page_size=10
+# OTHER sources
 https://...ics
 https://example.com/dav.php
 https://github.com/Vilhjalmr26/import_ics
 https://github.com/Vilhjalmr26/import_ics/blob/HEAD/import_ics/requirements.txt
 https://github.com/Vilhjalmr26/import_ics/blob/ec04d6c/dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/import-ics
-https://hub.docker.com/r/vilhjalmr26/import_ics

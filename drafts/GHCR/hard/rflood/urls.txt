@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rflood/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rflood/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/rakshasa/rtorrent
 https://github.com/hotio/rflood/blob/194a3cbe1452/linux-amd64.Dockerfile
 https://github.com/jesec/flood
 https://github.com/rakshasa/rtorrent
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rflood
 https://hotio.dev/containers/rflood
 https://raw.githubusercontent.com/hotio/rflood/194a3cbe1452/linux-amd64.Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rflood/values.yaml

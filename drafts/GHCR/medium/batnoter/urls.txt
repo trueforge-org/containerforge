@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/batnoter/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/batnoter/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/batnoter/batnoter
 https://api.github.com/repos/batnoter/batnoter/releases/latest
 https://github.com/batnoter/batnoter
 https://github.com/batnoter/batnoter/blob/8722c3af2b81233f158ca17e4818b9251c8cc1d3/Dockerfile
 https://github.com/batnoter/batnoter/releases/tag/v1.0.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/batnoter

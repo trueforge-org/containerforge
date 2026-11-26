@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/reaparr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/reaparr/Chart.yaml
+https://hub.docker.com/v2/repositories/reaparr/reaparr/
+https://hub.docker.com/v2/repositories/reaparr/reaparr/tags?page_size=10
+# OTHER sources
 http://+:7000
 https://github.com/Reaparr/Reaparr
 https://github.com/Reaparr/Reaparr/blob/1e32ea55baa826a31cb4ceb3bdfd404bab2f3e11/docker/Dockerfile
 https://github.com/reaparr/reaparr
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/reaparr
-https://hub.docker.com/r/reaparr/reaparr

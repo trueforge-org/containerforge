@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sonsoftheforest/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sonsoftheforest/Chart.yaml
+# OTHER sources
 https://developer.valvesoftware.com/wiki/SteamCMD
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
 https://github.com/ich777/docker-steamcmd-server/tree/sonsoftheforest
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sonsoftheforest
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/sonsoftheforest/Dockerfile
 https://store.steampowered.com/app/1326470

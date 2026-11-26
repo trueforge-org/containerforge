@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/retrobot/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/retrobot/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/rossimo/retrobot
 https://github.com/rossimo/retrobot
 https://github.com/rossimo/retrobot/blob/d04ddd8/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/retrobot
 https://raw.githubusercontent.com/rossimo/retrobot/d04ddd8/Dockerfile
 https://registry.npmjs.org/retrobot/latest

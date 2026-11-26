@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tanoshi/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tanoshi/Chart.yaml
+https://hub.docker.com/v2/repositories/faldez/tanoshi/
+https://hub.docker.com/v2/repositories/faldez/tanoshi/tags?page_size=10
+# OTHER sources
 https://github.com/faldez/tanoshi
 https://github.com/luigi311/tanoshi
 https://github.com/luigi311/tanoshi.git
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tanoshi
-https://hub.docker.com/r/faldez/tanoshi

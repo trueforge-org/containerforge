@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wifi-card/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wifi-card/Chart.yaml
+https://hub.docker.com/v2/repositories/bndw/wifi-card/
+https://hub.docker.com/v2/repositories/bndw/wifi-card/tags?page_size=10
+# OTHER sources
 https://github.com/bndw/wifi-card
 https://github.com/bndw/wifi-card/blob/7a990dd2411f6c8758ad696bf737b509f9672953/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wifi-card
-https://hub.docker.com/r/bndw/wifi-card
 https://raw.githubusercontent.com/bndw/wifi-card/7a990dd2411f6c8758ad696bf737b509f9672953/Dockerfile

@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/drawio/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/drawio/Chart.yaml
+https://hub.docker.com/v2/repositories/jgraph/drawio/
+https://hub.docker.com/v2/repositories/jgraph/drawio/tags?page_size=10
+# OTHER sources
 https://archive.apache.org/dist/tomcat/tomcat-9
 https://github.com/jgraph/docker-drawio/blob/d2e740b/main/Dockerfile
 https://github.com/jgraph/drawio
 https://github.com/jgraph/drawio/releases/tag/v32.7.4
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/drawio
-https://hub.docker.com/r/jgraph/drawio
 https://www.drawio.com

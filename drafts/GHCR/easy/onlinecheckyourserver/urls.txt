@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/onlinecheckyourserver/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/onlinecheckyourserver/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ich777/docker-online-check-pushover/commits?per_page=1
 https://api.pushover.net/1/messages.json
 https://github.com/ich777/docker-online-check-pushover
 https://github.com/ich777/docker-online-check-pushover/blob/master/Dockerfile
 https://github.com/ich777/docker-online-check-pushover/blob/master/README.md
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/onlinecheckyourserver
 https://raw.githubusercontent.com/ich777/docker-online-check-pushover/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-online-check-pushover/master/README.md

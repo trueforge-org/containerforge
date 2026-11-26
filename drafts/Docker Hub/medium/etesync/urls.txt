@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/etesync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/etesync/Chart.yaml
+https://hub.docker.com/v2/repositories/victorrds/etesync/
+https://hub.docker.com/v2/repositories/victorrds/etesync/tags?page_size=10
+# OTHER sources
 https://github.com/etesync
 https://github.com/etesync/server
 https://github.com/etesync/server/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/etesync
 https://github.com/victor-rds/docker-etebase
 https://github.com/victor-rds/docker-etebase/blob/c06eb631/tags/base/Dockerfile
-https://hub.docker.com/r/victorrds/etesync
 https://www.etesync.com

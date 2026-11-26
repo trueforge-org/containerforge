@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/standardnotes-web/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/standardnotes-web/Chart.yaml
+https://hub.docker.com/v2/repositories/standardnotes/web/
+https://hub.docker.com/v2/repositories/standardnotes/web/tags?page_size=10
+# OTHER sources
 https://github.com/standardnotes/app
 https://github.com/standardnotes/app.git
 https://github.com/standardnotes/app/blob/main/packages/web/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/standardnotes-web
-https://hub.docker.com/r/standardnotes/web
 https://standardnotes.com
 https://standardnotes.com/help
 https://standardnotes.org

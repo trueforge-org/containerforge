@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fabulinus/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fabulinus/Chart.yaml
+https://hub.docker.com/v2/repositories/tytn/fabulinus/
+https://hub.docker.com/v2/repositories/tytn/fabulinus/tags?page_size=10
+# OTHER sources
 https://docs.titanml.co
 https://github.com/titanml/takeoff-community
 https://github.com/titanml/takeoff-communitys
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fabulinus
-https://hub.docker.com/r/tytn/fabulinus
 https://www.titanml.co

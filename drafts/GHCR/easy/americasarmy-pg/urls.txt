@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/americasarmy-pg/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/americasarmy-pg/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/americasarmy-pg
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start.sh
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/americasarmy-pg/values.yaml
 https://www.americasarmy.com

@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/h5ai/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/h5ai/Chart.yaml
+https://hub.docker.com/v2/repositories/awesometic/h5ai/
+https://hub.docker.com/v2/repositories/awesometic/h5ai/tags?page_size=10
+# OTHER sources
 https://github.com/awesometic/docker-h5ai
 https://github.com/awesometic/docker-h5ai/blob/master/Dockerfile
 https://github.com/lrsjng/h5ai
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/h5ai
-https://hub.docker.com/r/awesometic/h5ai
 https://larsjung.de/h5ai

@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fluidd/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fluidd/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/fluidd-core/fluidd
 https://api.github.com/repos/fluidd-core/fluidd/releases/latest
 https://docs.fluidd.xyz
 https://github.com/fluidd-core/fluidd
 https://github.com/fluidd-core/fluidd/blob/8823798fbd0e8dda5e1353b6beabef6024940717/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fluidd
 https://raw.githubusercontent.com/fluidd-core/fluidd/master/Dockerfile
 https://raw.githubusercontent.com/fluidd-core/fluidd/master/LICENSE
 https://raw.githubusercontent.com/fluidd-core/fluidd/master/server/nginx/default.conf.template

@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tubearchivist-redisjson/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tubearchivist-redisjson/Chart.yaml
+https://hub.docker.com/v2/repositories/redislabs/rejson/
+https://hub.docker.com/v2/repositories/redislabs/rejson/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/RedisJSON/RedisJSON/releases/latest
 https://api.github.com/repos/redis/redis/releases/latest
 https://github.com/RedisJSON/RedisJSON
 https://github.com/RedisJSON/RedisJSON/blob/9ca1c88acd9cadfcbc0e4f805ff3de473bd50b60/Dockerfile
 https://github.com/redis/redis
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tubearchivist-redisjson
-https://hub.docker.com/r/redislabs/rejson
 https://raw.githubusercontent.com/redis/redis/unstable/README.md
 https://redis.io

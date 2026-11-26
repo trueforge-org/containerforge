@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plexanisync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plexanisync/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/RickDB/PlexAniSync
 https://api.github.com/repos/RickDB/PlexAniSync/contents/Docker/PlexAniSync/run/runsync.sh?ref=v1.4.4
 https://api.github.com/repos/RickDB/PlexAniSync/contents/PlexAniSync.py?ref=v1.4.4
@@ -7,5 +11,4 @@ https://github.com/RickDB/PlexAniSync/blob/v1.4.4/Docker/PlexAniSync/Dockerfile
 https://github.com/RickDB/PlexAniSync/pkgs/container/plexanisync
 https://github.com/RickDB/PlexAniSync/releases/tag/v1.4.4
 https://github.com/RickDB/PlexAniSync/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plexanisync
 https://raw.githubusercontent.com/RickDB/PlexAniSync/v1.4.4/Docker/PlexAniSync/Dockerfile

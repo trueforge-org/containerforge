@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitmagnet/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitmagnet/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/bitmagnet-io/bitmagnet
 https://api.github.com/repos/bitmagnet-io/bitmagnet/releases/latest
 https://bitmagnet.io
 https://github.com/bitmagnet-io/bitmagnet
 https://github.com/bitmagnet-io/bitmagnet/blob/e31b30d7351c269dc801876f92ebc59d31fee545/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bitmagnet
 https://raw.githubusercontent.com/bitmagnet-io/bitmagnet/main/Dockerfile

@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wizarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wizarr/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/Wizarrrr/wizarr/contents/docker-entrypoint.sh?ref=936143363897efd3ca68568fdf6fdd9a0d63f559
 https://api.github.com/repos/Wizarrrr/wizarr/releases/latest
 https://docs.wizarr.dev
 https://docs.wizarr.dev/getting-started/installation.md
 https://github.com/Wizarrrr/wizarr
 https://github.com/Wizarrrr/wizarr/blob/936143363897efd3ca68568fdf6fdd9a0d63f559/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wizarr
 https://raw.githubusercontent.com/Wizarrrr/wizarr/936143363897efd3ca68568fdf6fdd9a0d63f559/Dockerfile

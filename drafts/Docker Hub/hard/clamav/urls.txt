@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/clamav/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/clamav/Chart.yaml
+https://hub.docker.com/v2/repositories/clamav/clamav/
+https://hub.docker.com/v2/repositories/clamav/clamav/tags?page_size=10
+# OTHER sources
 https://docs.clamav.net
 https://github.com/Cisco-Talos/clamav
 https://github.com/Cisco-Talos/clamav-docker/blob/0d44a2479470a57af03f1e212e764f1bee57fc8a/clamav/1.5/debian/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clamav
-https://hub.docker.com/r/clamav/clamav
 https://www.clamav.net/downloads/gpg_public_key

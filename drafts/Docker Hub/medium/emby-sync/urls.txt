@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/emby-sync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/emby-sync/Chart.yaml
+https://hub.docker.com/v2/repositories/lastelement21/emby-sync/
+https://hub.docker.com/v2/repositories/lastelement21/emby-sync/tags?page_size=10
+# OTHER sources
 http://emby.invalid
 https://github.com/cameronurnes/emby-sync
 https://github.com/cameronurnes/emby-sync/blob/63bd8b3/Dockerfile
 https://github.com/cameronurnes/emby-sync/blob/HEAD/requirements.txt
 https://github.com/cameronurnes/emby-sync/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/emby-sync
-https://hub.docker.com/r/lastelement21/emby-sync

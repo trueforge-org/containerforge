@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docuseal/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docuseal/Chart.yaml
+https://hub.docker.com/v2/repositories/docuseal/docuseal/
+https://hub.docker.com/v2/repositories/docuseal/docuseal/tags?page_size=10
+# OTHER sources
 https://github.com/docusealco/docuseal
 https://github.com/docusealco/docuseal/blob/a628dd30daafde9f2e7b9ef161a3a9b7c6f4d9fc/Dockerfile
 https://github.com/docusealco/docuseal/releases/tag/3.3.8
 https://github.com/docusealco/docuseal/releases/tag/3.4.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/docuseal
-https://hub.docker.com/r/docuseal/docuseal
 https://www.docuseal.com
 https://www.docuseal.com/docs/embedded

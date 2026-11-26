@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/littlelink/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/littlelink/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/timothystewart6/littlelink-server
 https://github.com/sethcottle/littlelink
 https://github.com/techno-tim/littlelink-server
 https://github.com/techno-tim/littlelink-server/blob/e7fa7dbb3178fcd963e6472f25e96a874f496a11/Dockerfile
 https://github.com/timothystewart6/littlelink-server
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/littlelink
 https://raw.githubusercontent.com/techno-tim/littlelink-server/e7fa7dbb3178fcd963e6472f25e96a874f496a11/Dockerfile
 https://raw.githubusercontent.com/timothystewart6/littlelink-server/main/README.md
 https://raw.githubusercontent.com/timothystewart6/littlelink-server/main/package.json

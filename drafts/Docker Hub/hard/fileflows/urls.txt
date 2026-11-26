@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fileflows/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fileflows/Chart.yaml
+https://hub.docker.com/v2/repositories/revenz/fileflows/
+https://hub.docker.com/v2/repositories/revenz/fileflows/tags?page_size=10
+# OTHER sources
 https://fileflows.com
 https://fileflows.com/docs
 https://fileflows.com/docs/installation/linux
 https://fileflows.com/downloads/tarxz
 https://github.com/revenz/FileFlows
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fileflows
-https://hub.docker.com/r/revenz/fileflows

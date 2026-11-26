@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/weblate/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/weblate/Chart.yaml
+https://hub.docker.com/v2/repositories/weblate/weblate/
+https://hub.docker.com/v2/repositories/weblate/weblate/tags?page_size=10
+# OTHER sources
 https://docs.weblate.org
 https://docs.weblate.org/en/latest
 https://github.com/WeblateOrg/docker
 https://github.com/WeblateOrg/docker-compose
 https://github.com/WeblateOrg/docker/blob/4.16.4-1/Dockerfile
 https://github.com/WeblateOrg/weblate
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/weblate
-https://hub.docker.com/r/weblate/weblate

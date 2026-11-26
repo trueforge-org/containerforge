@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/promcord/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/promcord/Chart.yaml
+https://hub.docker.com/v2/repositories/biospheere/promcord/
+https://hub.docker.com/v2/repositories/biospheere/promcord/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/nimarion/promcord
 https://api.github.com/repos/nimarion/promcord/releases/latest
 https://github.com/nimarion/promcord
 https://github.com/nimarion/promcord/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/promcord
-https://hub.docker.com/r/biospheere/promcord
-https://hub.docker.com/v2/repositories/biospheere/promcord/tags
 https://raw.githubusercontent.com/nimarion/promcord/master/Dockerfile
 https://raw.githubusercontent.com/nimarion/promcord/master/README.md

@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/filestash/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/filestash/Chart.yaml
+https://hub.docker.com/v2/repositories/machines/filestash/
+https://hub.docker.com/v2/repositories/machines/filestash/tags?page_size=10
+# OTHER sources
 https://github.com/mickael-kerjean/filestash
 https://github.com/mickael-kerjean/filestash/blob/master/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/filestash
-https://hub.docker.com/r/machines/filestash
 https://www.filestash.app
 https://www.filestash.app/docs

@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/genea/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/genea/Chart.yaml
+https://hub.docker.com/v2/repositories/biggiesize/genea-app/
+https://hub.docker.com/v2/repositories/biggiesize/genea-app/tags?page_size=10
+# OTHER sources
 https://github.com/genea-app/genea-app
 https://github.com/genea-app/genea-app.git
 https://github.com/genea-app/genea-app/releases
 https://github.com/genea-app/genea-app/tags
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/genea
-https://hub.docker.com/r/biggiesize/genea-app
 https://www.genea.app

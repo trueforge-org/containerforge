@@ -1,7 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/vaultwarden/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/vaultwarden/Chart.yaml
+https://hub.docker.com/v2/repositories/library/debian/
+https://hub.docker.com/v2/repositories/library/debian/tags?page_size=10
+https://hub.docker.com/v2/repositories/library/rust/
+https://hub.docker.com/v2/repositories/library/rust/tags?page_size=10
+# OTHER sources
 https://github.com/dani-garcia/vaultwarden
 https://github.com/dani-garcia/vaultwarden/blob/6ed6921cc2b0e03b4d74189574d2a5e71c512e97/docker/Dockerfile.debian
 https://github.com/dani-garcia/vaultwarden/wiki
 https://github.com/timshel/vaultwarden
 https://github.com/timshel/vaultwarden/blob/39febc27950fece51ded8b85c2d38838fe08237c/docker/Dockerfile.debian
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vaultwarden
 https://raw.githubusercontent.com/dani-garcia/vaultwarden/6ed6921cc2b0e03b4d74189574d2a5e71c512e97/docker/Dockerfile.debian

@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flowise/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flowise/Chart.yaml
+https://hub.docker.com/v2/repositories/flowiseai/flowise/
+https://hub.docker.com/v2/repositories/flowiseai/flowise/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/FlowiseAI/Flowise/releases/latest
 https://docs.flowiseai.com
 https://github.com/FlowiseAI/Flowise
 https://github.com/FlowiseAI/Flowise/blob/a65f81bb43ef66d3ce734bf0dff4223ae8041c95/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flowise
-https://hub.docker.com/r/flowiseai/flowise
 https://raw.githubusercontent.com/FlowiseAI/Flowise/a65f81bb43ef66d3ce734bf0dff4223ae8041c95/docker/Dockerfile
 https://raw.githubusercontent.com/FlowiseAI/Flowise/main/LICENSE.md

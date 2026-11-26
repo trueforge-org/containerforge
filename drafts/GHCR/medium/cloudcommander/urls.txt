@@ -1,4 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cloudcommander/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cloudcommander/Chart.yaml
+# OTHER sources
 https://bun.com/install
 https://github.com/coderaiser/cloudcmd
 https://github.com/coderaiser/cloudcmd/blob/ddf4726e4565ad8151aa391294a60ef3385d26b7/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cloudcommander

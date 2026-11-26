@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/muximux/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/muximux/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/mescon/Muximux/releases/latest
 https://github.com/mescon/Muximux
 https://github.com/mescon/Muximux/blob/290ad79c78c8/Dockerfile
 https://github.com/mescon/Muximux/blob/main/docs/wiki/README.md
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/muximux
 https://raw.githubusercontent.com/mescon/Muximux/main/Dockerfile
 https://raw.githubusercontent.com/mescon/Muximux/main/LICENSE

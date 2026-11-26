@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/linkwallet/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/linkwallet/Chart.yaml
+https://hub.docker.com/v2/repositories/tardisx/linkwallet/
+https://hub.docker.com/v2/repositories/tardisx/linkwallet/tags?page_size=10
+# OTHER sources
 https://code.ppl.town/justin/linkwallet
 https://github.com/tardisx/linkwallet
 https://github.com/tardisx/linkwallet/blob/59f70ae/Dockerfile
 https://github.com/tardisx/linkwallet/blob/main/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/linkwallet
-https://hub.docker.com/r/tardisx/linkwallet

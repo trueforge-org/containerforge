@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/maloja/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/maloja/Chart.yaml
+https://hub.docker.com/v2/repositories/krateng/maloja/
+https://hub.docker.com/v2/repositories/krateng/maloja/tags?page_size=10
+# OTHER sources
 https://github.com/krateng/maloja
 https://github.com/krateng/maloja/blob/HEAD/requirements.txt
 https://github.com/krateng/maloja/blob/v3.2.10/Containerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/maloja
-https://hub.docker.com/r/krateng/maloja
 https://maloja.krateng.ch

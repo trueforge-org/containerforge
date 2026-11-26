@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/collabora/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/collabora/Chart.yaml
+https://hub.docker.com/v2/repositories/collabora/code/
+https://hub.docker.com/v2/repositories/collabora/code/tags?page_size=10
+# OTHER sources
 https://cloud.example.com:443
 https://collaboraoffice.com/downloads/gpg/collaboraonline-release-keyring.gpg
 https://collaboraonline.com
 https://example.com:443
 https://github.com/CollaboraOnline/online
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/collabora
-https://hub.docker.com/r/collabora/code
 https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-deb
 https://www.collaboraonline.com/code

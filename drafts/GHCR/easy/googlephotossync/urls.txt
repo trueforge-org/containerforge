@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/googlephotossync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/googlephotossync/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/gilesknap/gphotos-sync/license
 https://api.github.com/repos/gilesknap/gphotos-sync/releases/latest
 https://gilesknap.github.io/gphotos-sync
 https://github.com/gilesknap/gphotos-sync
 https://github.com/gilesknap/gphotos-sync/blob/b50baadcd769c09f32b5f9c1020dc3b75540c6f1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/googlephotossync
 https://pypi.org/project/gphotos-sync
 https://raw.githubusercontent.com/gilesknap/gphotos-sync/master/Dockerfile

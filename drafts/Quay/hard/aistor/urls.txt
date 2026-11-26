@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/incubator/aistor/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/incubator/aistor/Chart.yaml
+# OTHER sources
 https://dl.min.io/aistor/minio/release/linux-amd64/minio
 https://dl.min.io/aistor/minio/release/linux-amd64/minio.sha256sum
 https://dl.min.io/aistor/minio/release/linux-arm64/minio
 https://dl.min.io/aistor/minio/release/linux-arm64/minio.sha256sum
 https://docs.min.io/aistor
-https://github.com/trueforge-org/truecharts/tree/master/charts/incubator/aistor
 https://min.io/product/aistor
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/incubator/aistor/values.yaml
 https://www.min.io/pricing

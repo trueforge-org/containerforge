@@ -1,10 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/meshroom/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/meshroom/Chart.yaml
+https://hub.docker.com/v2/repositories/alicevision/meshroom/
+https://hub.docker.com/v2/repositories/alicevision/meshroom/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/alicevision/Meshroom
 https://api.github.com/repos/alicevision/Meshroom/releases/tags/v2025.1.0
 https://github.com/alicevision/Meshroom
 https://github.com/alicevision/meshroom
 https://github.com/alicevision/meshroom/blob/v2025.1.0/docker/Dockerfile_ubuntu
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/meshroom
-https://hub.docker.com/r/alicevision/meshroom
 https://meshroom.readthedocs.io/en/stable
 https://raw.githubusercontent.com/alicevision/Meshroom/v2025.1.0/docker/Dockerfile_ubuntu
 https://zenodo.org/records/16887472

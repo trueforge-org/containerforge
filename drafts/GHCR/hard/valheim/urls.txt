@@ -1,10 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/valheim/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/valheim/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/community-valheim-tools/valheim-server-docker
 https://api.github.com/repos/community-valheim-tools/valheim-server-docker/contents/README.md
 https://api.github.com/repos/lloesche/valheim-server-docker/releases/latest
 https://github.com/community-valheim-tools/valheim-server-docker
 https://github.com/community-valheim-tools/valheim-server-docker/blob/0ab6cdcc16dd/Dockerfile
 https://github.com/lloesche/valheim-server-docker
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/valheim
 https://raw.githubusercontent.com/community-valheim-tools/valheim-server-docker/main/Dockerfile
 https://store.steampowered.com/app/896660
 https://www.valheimgame.com

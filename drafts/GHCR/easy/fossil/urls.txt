@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fossil/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fossil/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://fossil-scm.org
 https://fossil-scm.org/home/doc/trunk/www/changes.wiki
 https://fossil-scm.org/home/doc/trunk/www/permutedindex.html
 https://fossil-scm.org/home/uv/download.html
 https://github.com/nicholaswilde/docker-fossil/blob/ca99797/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fossil
 https://packages.ubuntu.com/resolute/fossil
 https://raw.githubusercontent.com/nicholaswilde/docker-fossil/ca99797/Dockerfile

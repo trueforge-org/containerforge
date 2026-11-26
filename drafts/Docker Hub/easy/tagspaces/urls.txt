@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tagspaces/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tagspaces/Chart.yaml
+https://hub.docker.com/v2/repositories/fardjad/tagspaces-lite-web/
+https://hub.docker.com/v2/repositories/fardjad/tagspaces-lite-web/tags?page_size=10
+# OTHER sources
 https://docs.tagspaces.org
 https://github.com/fardjad/tagspaces-lite-docker/blob/495b1805d716d826fdd70ddc558df4a700b364be/Dockerfile
 https://github.com/tagspaces/tagspaces
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tagspaces
-https://hub.docker.com/r/fardjad/tagspaces-lite-web

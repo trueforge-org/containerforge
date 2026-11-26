@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/metatube/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/metatube/Chart.yaml
+https://hub.docker.com/v2/repositories/jvt038/metatube/
+https://hub.docker.com/v2/repositories/jvt038/metatube/tags?page_size=10
+# OTHER sources
 https://github.com/JVT038/MetaTube
 https://github.com/JVT038/MetaTube/blob/879a385/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metatube
-https://hub.docker.com/r/jvt038/metatube
 https://raw.githubusercontent.com/JVT038/MetaTube/879a385/Dockerfile

@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/explainshell/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/explainshell/Chart.yaml
+https://hub.docker.com/v2/repositories/spaceinvaderone/explainshell/
+https://hub.docker.com/v2/repositories/spaceinvaderone/explainshell/tags?page_size=10
+# OTHER sources
 https://github.com/idank/explainshell
 https://github.com/idank/explainshell/blob/827ebe3/prod/docker/Dockerfile
 https://github.com/idank/explainshell/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/explainshell
-https://hub.docker.com/r/spaceinvaderone/explainshell

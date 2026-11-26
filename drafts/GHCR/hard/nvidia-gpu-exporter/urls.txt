@@ -1,4 +1,7 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nvidia-gpu-exporter
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/nvidia-gpu-exporter/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/nvidia-gpu-exporter/Chart.yaml
+# OTHER sources
 https://github.com/utkuozdemir/nvidia_gpu_exporter
 https://github.com/utkuozdemir/nvidia_gpu_exporter/blob/a6712afbab9ad620e7cc7897e11cd084147b5e96/Dockerfile
 https://github.com/utkuozdemir/nvidia_gpu_exporter/releases/expanded_assets/v1.19.0

@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lastoasis/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lastoasis/Chart.yaml
+# OTHER sources
 https://github.com/ich777/docker-steamcmd-server
 https://github.com/ich777/docker-steamcmd-server/blob/lastoasis/README.md
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lastoasis
 https://lastoasis.gg
 https://myrealm.lastoasis.gg
 https://store.steampowered.com

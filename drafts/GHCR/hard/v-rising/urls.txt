@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/v-rising/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/v-rising/Chart.yaml
+# OTHER sources
 https://github.com/StunlockStudios/vrising-dedicated-server-instructions
 https://github.com/ich777/docker-steamcmd-server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/v-rising
 https://playvrising.com
 https://raw.githubusercontent.com/StunlockStudios/vrising-dedicated-server-instructions/master/1.1.x-pc/INSTRUCTIONS.md
 https://steampowered.com

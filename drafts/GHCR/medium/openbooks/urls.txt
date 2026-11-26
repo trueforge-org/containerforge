@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openbooks/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openbooks/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/evan-buss/openbooks/license
 https://api.github.com/repos/evan-buss/openbooks/releases/latest
 https://evan-buss.github.io/openbooks
 https://github.com/evan-buss/openbooks
 https://github.com/evan-buss/openbooks/blob/045410c2787860e3ce79ae66954e6c1723d185c1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openbooks
 https://raw.githubusercontent.com/evan-buss/openbooks/045410c2787860e3ce79ae66954e6c1723d185c1/Dockerfile

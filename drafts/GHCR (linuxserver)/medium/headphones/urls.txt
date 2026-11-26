@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/headphones/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/headphones/Chart.yaml
+# OTHER sources
 https://github.com/linuxserver/docker-headphones
 https://github.com/linuxserver/docker-headphones/blob/2eda0d5edcbb/Dockerfile
 https://github.com/rembo10/headphones
 https://github.com/rembo10/headphones/releases/tag/v0.6.4
 https://github.com/rembo10/headphones/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/headphones
 https://raw.githubusercontent.com/linuxserver/docker-headphones/2eda0d5edcbb/Dockerfile
 https://raw.githubusercontent.com/rembo10/headphones/v0.6.4/LICENSE
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/headphones/values.yaml

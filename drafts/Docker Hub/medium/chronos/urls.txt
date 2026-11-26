@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chronos/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chronos/Chart.yaml
+https://hub.docker.com/v2/repositories/simsemand/chronos/
+https://hub.docker.com/v2/repositories/simsemand/chronos/tags?page_size=10
+# OTHER sources
 https://github.com/simse/chronos
 https://github.com/simse/chronos/blob/067532f/Dockerfile
 https://github.com/simse/chronos/blob/HEAD/requirements.txt
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chronos
-https://hub.docker.com/r/simsemand/chronos

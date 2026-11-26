@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openwebrxplus/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openwebrxplus/Chart.yaml
+https://hub.docker.com/v2/repositories/slechev/openwebrxplus-softmbe/
+https://hub.docker.com/v2/repositories/slechev/openwebrxplus-softmbe/tags?page_size=10
+# OTHER sources
 https://github.com/0xAF/openwebrxplus-docker-builder
 https://github.com/0xAF/openwebrxplus-docker-builder/blob/3ead881/buildfiles/Dockerfile-softmbe
 https://github.com/luarvique/openwebrx
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openwebrxplus
-https://hub.docker.com/r/slechev/openwebrxplus-softmbe
 https://luarvique.github.io/ppa/noble
 https://luarvique.github.io/ppa/noble/Packages
 https://luarvique.github.io/ppa/openwebrx-plus.gpg

@@ -1,6 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/apache-musicindex/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/apache-musicindex/Chart.yaml
+# OTHER sources
 http://hacks.slashdirt.org/musicindex
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/apache-musicindex
 https://packages.ubuntu.com/resolute/amd64/libapache2-mod-musicindex/download
 https://packages.ubuntu.com/resolute/arm64/libapache2-mod-musicindex/download
 https://packages.ubuntu.com/resolute/libapache2-mod-musicindex
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/apache-musicindex/values.yaml

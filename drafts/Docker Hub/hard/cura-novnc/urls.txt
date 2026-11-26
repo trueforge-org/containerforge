@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cura-novnc/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cura-novnc/Chart.yaml
+https://hub.docker.com/v2/repositories/mikeah/cura-novnc/
+https://hub.docker.com/v2/repositories/mikeah/cura-novnc/tags?page_size=10
+# OTHER sources
 https://github.com/Ultimaker/Cura
 https://github.com/Ultimaker/Cura/wiki/Getting-Started
 https://github.com/helfrichmichael/cura-novnc/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cura-novnc
-https://hub.docker.com/r/mikeah/cura-novnc
 https://support.ultimaker.com/s/topic/0TO5b000000Q4udGAC/manuals
 https://ultimaker.com/software/ultimaker-cura

@@ -1,4 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/putty/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/putty/Chart.yaml
+# OTHER sources
 https://github.com/jlesage/docker-putty
 https://github.com/jlesage/docker-putty/blob/v26.09.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/putty
 https://www.putty.org

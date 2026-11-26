@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/factorioservermanager/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/factorioservermanager/Chart.yaml
+https://hub.docker.com/v2/repositories/ofsm/ofsm/
+https://hub.docker.com/v2/repositories/ofsm/ofsm/tags?page_size=10
+# OTHER sources
 https://factorio.com/api/latest-releases
 https://github.com/OpenFactorioServerManager/factorio-server-manager
 https://github.com/OpenFactorioServerManager/factorio-server-manager/blob/master/docker/Dockerfile
 https://github.com/OpenFactorioServerManager/factorio-server-manager/wiki/Installation-and-Usage
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/factorioservermanager
-https://hub.docker.com/r/ofsm/ofsm

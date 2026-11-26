@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/namecheap-ddns/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/namecheap-ddns/Chart.yaml
+https://hub.docker.com/v2/repositories/edchamberlain/namecheap_ddns/
+https://hub.docker.com/v2/repositories/edchamberlain/namecheap_ddns/tags?page_size=10
+# OTHER sources
 https://github.com/EdwardChamberlain/namecheap_ddns
 https://github.com/EdwardChamberlain/namecheap_ddns/blob/421a554e5267e6405850f0fe302ff95600dc8539/src/dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/namecheap-ddns
-https://hub.docker.com/r/edchamberlain/namecheap_ddns

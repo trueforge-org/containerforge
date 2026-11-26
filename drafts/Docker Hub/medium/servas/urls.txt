@@ -1,3 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/servas/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/servas/Chart.yaml
+https://hub.docker.com/v2/repositories/beromir/servas/
+https://hub.docker.com/v2/repositories/beromir/servas/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/beromir/Servas/contents/.env.example?ref=088eaa3232f5d266e1e002c663797cdd2d8c77bb
 https://api.github.com/repos/beromir/Servas/contents/Dockerfile?ref=088eaa3232f5d266e1e002c663797cdd2d8c77bb
 https://api.github.com/repos/beromir/Servas/contents/Dockerfile?ref=v1.2.0
@@ -6,5 +12,3 @@ https://api.github.com/repos/beromir/Servas/license
 https://github.com/beromir/Servas
 https://github.com/beromir/Servas/blob/088eaa3232f5d266e1e002c663797cdd2d8c77bb/Dockerfile
 https://github.com/beromir/Servas/releases/tag/v1.1.3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/servas
-https://hub.docker.com/r/beromir/servas

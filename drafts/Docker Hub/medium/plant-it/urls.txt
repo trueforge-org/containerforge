@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plant-it/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plant-it/Chart.yaml
+https://hub.docker.com/v2/repositories/msdeluise/plant-it-server/
+https://hub.docker.com/v2/repositories/msdeluise/plant-it-server/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/MDeLuise/plant-it/license
 https://github.com/MDeLuise/plant-it
 https://github.com/MDeLuise/plant-it/blob/0.10.0/deployment/Dockerfile
 https://github.com/MDeLuise/plant-it/releases/tag/0.10.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plant-it
-https://hub.docker.com/r/msdeluise/plant-it-server
-https://hub.docker.com/v2/repositories/msdeluise/plant-it-server/tags
 https://raw.githubusercontent.com/MDeLuise/plant-it/0.10.0/deployment/Dockerfile

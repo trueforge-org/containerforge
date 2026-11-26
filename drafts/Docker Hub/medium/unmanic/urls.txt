@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/unmanic/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/unmanic/Chart.yaml
+https://hub.docker.com/v2/repositories/josh5/unmanic/
+https://hub.docker.com/v2/repositories/josh5/unmanic/tags?page_size=10
+# OTHER sources
 https://github.com/Unmanic/unmanic
 https://github.com/Unmanic/unmanic/blob/1c324b8/docker/Dockerfile
 https://github.com/Unmanic/unmanic/blob/HEAD/requirements.txt
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/unmanic
-https://hub.docker.com/r/josh5/unmanic
 https://pypi.org/pypi/unmanic/0.4.1/json
 https://raw.githubusercontent.com/Unmanic/unmanic/1c324b8/docker/Dockerfile

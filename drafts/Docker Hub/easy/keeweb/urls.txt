@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/keeweb/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/keeweb/Chart.yaml
+https://hub.docker.com/v2/repositories/antelle/keeweb/
+https://hub.docker.com/v2/repositories/antelle/keeweb/tags?page_size=10
+# OTHER sources
 https://github.com/keeweb/keeweb
 https://github.com/keeweb/keeweb/blob/v1.18.7/package/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/keeweb
-https://hub.docker.com/r/antelle/keeweb
 https://raw.githubusercontent.com/keeweb/keeweb/v1.18.7/LICENSE

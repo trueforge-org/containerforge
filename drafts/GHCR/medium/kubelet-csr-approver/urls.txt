@@ -1,3 +1,6 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kubelet-csr-approver/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kubelet-csr-approver/Chart.yaml
+# OTHER sources
 https://github.com/kubelet-csr-approver/kubelet-csr-approver
 https://github.com/postfinance/kubelet-csr-approver
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kubelet-csr-approver

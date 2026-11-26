@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/invidious/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/invidious/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/iv-org/invidious/releases/latest
 https://docs.invidious.io/installation
 https://github.com/iv-org/invidious
 https://github.com/iv-org/invidious/blob/4e9d20ddae3c23e4764df056d2e820aee04feef7/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/invidious
 https://raw.githubusercontent.com/iv-org/invidious/master/docker/Dockerfile

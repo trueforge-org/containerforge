@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jts3servermod/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jts3servermod/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/galexrt/container-jts3servermod
 https://github.com/galexrt/container-jts3servermod
 https://github.com/galexrt/container-jts3servermod/blob/4ecf611553251cdafcb9176aeff42c2edaa609e0/Dockerfile
 https://github.com/galexrt/container-jts3servermod/releases/tag/v20240301-172535-248
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jts3servermod
 https://raw.githubusercontent.com/galexrt/container-jts3servermod/4ecf611553251cdafcb9176aeff42c2edaa609e0/Dockerfile
 https://www.stefan1200.de/documentation/jts3servermod/readme.html
 https://www.stefan1200.de/forum/index.php?PHPSESSID=r0m44032akt9jk7903ru9ejv2f&topic=2.0

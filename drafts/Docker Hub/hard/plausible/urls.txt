@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plausible/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plausible/Chart.yaml
+https://hub.docker.com/v2/repositories/plausible/analytics/
+https://hub.docker.com/v2/repositories/plausible/analytics/tags?page_size=10
+# OTHER sources
 https://github.com/plausible/analytics
 https://github.com/plausible/analytics/blob/0621fc0a77cc50add00baddbdd59f378324da483/Dockerfile
 https://github.com/plausible/hosting
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plausible
-https://hub.docker.com/r/plausible/analytics
 https://plausible.io
 https://plausible.io/docs
 https://plausible.io/docs/self-hosting

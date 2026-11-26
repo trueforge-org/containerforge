@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/github-backup/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/github-backup/Chart.yaml
+https://hub.docker.com/v2/repositories/lnxd/github-backup/
+https://hub.docker.com/v2/repositories/lnxd/github-backup/tags?page_size=10
+# OTHER sources
 https://github.com/josegonzalez/python-github-backup
 https://github.com/lnxd/github-backup
 https://github.com/lnxd/github-backup/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/github-backup
-https://hub.docker.com/r/lnxd/github-backup

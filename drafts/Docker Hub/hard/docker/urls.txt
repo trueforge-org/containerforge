@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docker/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docker/Chart.yaml
+https://hub.docker.com/v2/repositories/library/docker/
+https://hub.docker.com/v2/repositories/library/docker/tags?page_size=10
+# OTHER sources
 https://download.docker.com/linux/static/stable/x86_64
 https://github.com/docker-library/docker/blob/70cd6b52204a3bf037510cb750e099c34b081bd4/29/dind/Dockerfile
 https://github.com/moby/moby
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/docker
-https://hub.docker.com/_/docker
 https://mobyproject.org
 https://raw.githubusercontent.com/moby/moby/master/LICENSE

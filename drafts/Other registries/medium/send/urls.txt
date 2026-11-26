@@ -1,4 +1,7 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/send
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/send/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/send/Chart.yaml
+# OTHER sources
 https://gitlab.com/api/v4/projects/timvisee%2Fsend/releases
 https://gitlab.com/api/v4/projects/timvisee%2Fsend/repository/files/Dockerfile/raw?ref=master
 https://gitlab.com/timvisee/send

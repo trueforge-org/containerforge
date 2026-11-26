@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/krusader/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/krusader/Chart.yaml
+# OTHER sources
 https://docs.kde.org/?application=krusader
 https://github.com/KDE/krusader
 https://github.com/ich777/docker-krusader/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/krusader
 https://krusader.org
 https://raw.githubusercontent.com/ich777/docker-krusader/master/Dockerfile

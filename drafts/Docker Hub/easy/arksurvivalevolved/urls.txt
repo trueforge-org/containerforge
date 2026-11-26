@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/arksurvivalevolved/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/arksurvivalevolved/Chart.yaml
+https://hub.docker.com/v2/repositories/drpsychick/arkserver/
+https://hub.docker.com/v2/repositories/drpsychick/arkserver/tags?page_size=10
+# OTHER sources
 https://github.com/SickHub/arkserver/blob/394fd7aa4f6321e5665f9dbc7d1ff4600aa6386f/Dockerfile
 https://github.com/arkmanager/ark-server-tools
 https://github.com/arkmanager/ark-server-tools.git
 https://github.com/arkmanager/ark-server-tools/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/arksurvivalevolved
-https://hub.docker.com/r/drpsychick/arkserver

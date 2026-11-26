@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/autobrr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/autobrr/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/autobrr/autobrr
 https://api.github.com/repos/autobrr/autobrr/releases/latest
 https://autobrr.com
 https://autobrr.com/introduction
 https://github.com/autobrr/autobrr
 https://github.com/autobrr/autobrr/blob/abad209f1e6a7041f27eadccc27a5468d1c555fc/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/autobrr
 https://raw.githubusercontent.com/autobrr/autobrr/abad209f1e6a7041f27eadccc27a5468d1c555fc/Dockerfile

@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pavlovvr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pavlovvr/Chart.yaml
+# OTHER sources
 https://github.com/ich777/docker-steamcmd-server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pavlovvr
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/pavlovvr/Dockerfile
 https://store.steampowered.com/app/622970
 https://www.steampowered.com

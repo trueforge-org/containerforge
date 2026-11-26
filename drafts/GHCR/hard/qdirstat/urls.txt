@@ -1,4 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/qdirstat/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/qdirstat/Chart.yaml
+# OTHER sources
 https://github.com/jlesage/docker-qdirstat
 https://github.com/jlesage/docker-qdirstat/blob/v26.09.1/Dockerfile
 https://github.com/shundhammer/qdirstat
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/qdirstat

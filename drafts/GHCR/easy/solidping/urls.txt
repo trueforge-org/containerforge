@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/solidping/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/solidping/Chart.yaml
+# OTHER sources
 https://github.com/fclairamb/solidping
 https://github.com/fclairamb/solidping/blob/5e35c5e4a02b63f3e15c48ade8e6bbe4b5b4e070/Dockerfile
 https://github.com/fclairamb/solidping/blob/main/LICENSE
 https://github.com/fclairamb/solidping/pkgs/container/solidping
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/solidping
 https://raw.githubusercontent.com/fclairamb/solidping/v0.54.1/LICENSE
 https://solidping.io/docs

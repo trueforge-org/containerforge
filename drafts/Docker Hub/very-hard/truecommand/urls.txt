@@ -1,7 +1,7 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/truecommand
-https://hub.docker.com/r/ixsystems/truecommand
-https://hub.docker.com/v2/repositories/ixsystems/truecommand/tags/3.3.0
-https://hub.docker.com/v2/repositories/ixsystems/truecommand/tags/?page_size=5
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/truecommand/Chart.yaml
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
 https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/truecommand/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/truecommand/Chart.yaml
+https://hub.docker.com/v2/repositories/ixsystems/truecommand/
+https://hub.docker.com/v2/repositories/ixsystems/truecommand/tags?page_size=10
+# OTHER sources
 https://www.truenas.com/docs/truecommand

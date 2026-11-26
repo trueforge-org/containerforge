@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/troddit/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/troddit/Chart.yaml
+https://hub.docker.com/v2/repositories/bsyed/troddit/
+https://hub.docker.com/v2/repositories/bsyed/troddit/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/burhan-syed/troddit
 https://api.github.com/repos/burhan-syed/troddit/contents/next.config.js
 https://github.com/burhan-syed/troddit
 https://github.com/burhan-syed/troddit/blob/eafe83d592014e68efb9b038ef9dd9a27cb69cc4/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/troddit
-https://hub.docker.com/r/bsyed/troddit
-https://hub.docker.com/v2/repositories/bsyed/troddit/tags
 https://raw.githubusercontent.com/burhan-syed/troddit/main/Dockerfile
 https://raw.githubusercontent.com/burhan-syed/troddit/main/package.json

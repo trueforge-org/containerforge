@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bender/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bender/Chart.yaml
+https://hub.docker.com/v2/repositories/jez500/bender/
+https://hub.docker.com/v2/repositories/jez500/bender/tags?page_size=10
+# OTHER sources
 https://github.com/jez500/bender
 https://github.com/jez500/bender/blob/fd780e5/Dockerfile
 https://github.com/jez500/bender/releases/tag/1.0.3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bender
-https://hub.docker.com/r/jez500/bender

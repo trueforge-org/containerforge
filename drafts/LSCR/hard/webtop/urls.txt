@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/webtop/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/webtop/Chart.yaml
+# OTHER sources
 https://docs.linuxserver.io/images/docker-webtop
 https://docs.selkies.io
 https://fleet.linuxserver.io/image?name=linuxserver/webtop
@@ -6,5 +10,4 @@ https://github.com/linuxserver/docker-webtop/blob/b1c6c9e22abe066d2d637377229de7
 https://github.com/linuxserver/gclient
 https://github.com/orgs/linuxserver/packages/container/package/webtop
 https://github.com/selkies-project/selkies
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/webtop
 https://raw.githubusercontent.com/linuxserver/docker-webtop/b1c6c9e22abe066d2d637377229de773dd45044f/Dockerfile

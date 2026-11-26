@@ -1,10 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shoko-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shoko-server/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ShokoAnime/ShokoServer/releases/latest
 https://docs.shokoanime.com
 https://dot.net/v1/dotnet-install.sh
 https://github.com/ShokoAnime/ShokoServer
 https://github.com/ShokoAnime/ShokoServer/blob/v5.3.3/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shoko-server
 https://raw.githubusercontent.com/ShokoAnime/ShokoServer/v5.3.3/Dockerfile
 https://raw.githubusercontent.com/ShokoAnime/ShokoServer/v5.3.3/LICENSE
 https://raw.githubusercontent.com/ShokoAnime/ShokoServer/v5.3.3/dockerentry.sh
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shoko-server/values.yaml

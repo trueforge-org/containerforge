@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rcon-webadmin/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rcon-webadmin/Chart.yaml
+https://hub.docker.com/v2/repositories/itzg/rcon/
+https://hub.docker.com/v2/repositories/itzg/rcon/tags?page_size=10
+# OTHER sources
 https://github.com/itzg/docker-rcon-web-admin/blob/484fba3/Dockerfile
 https://github.com/rcon-web-admin/rcon-web-admin
 https://github.com/rcon-web-admin/rcon-web-admin/releases/tag/0.14.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rcon-webadmin
-https://hub.docker.com/r/itzg/rcon

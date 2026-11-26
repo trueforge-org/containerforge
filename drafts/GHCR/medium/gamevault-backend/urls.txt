@@ -1,5 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gamevault-backend/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gamevault-backend/Chart.yaml
+# OTHER sources
 https://github.com/Phalcode/gamevault-backend
 https://github.com/Phalcode/gamevault-backend/blob/17.2.0/Dockerfile
 https://github.com/Phalcode/gamevault-backend/releases/tag/17.2.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gamevault-backend
 https://raw.githubusercontent.com/Phalcode/gamevault-backend/17.2.0/Dockerfile

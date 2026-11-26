@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/starmade/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/starmade/Chart.yaml
+# OTHER sources
 http://files.star-made.org/StarMade-Starter.jar
 https://files.star-made.org
 https://files.star-made.org/build
 https://github.com/ich777/docker-starmade
 https://github.com/ich777/docker-starmade/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/starmade
 https://raw.githubusercontent.com/ich777/docker-starmade/master/Dockerfile
 https://starmadepedia.net
 https://www.star-made.org

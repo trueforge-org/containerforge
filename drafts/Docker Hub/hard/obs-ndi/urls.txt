@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/obs-ndi/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/obs-ndi/Chart.yaml
+https://hub.docker.com/v2/repositories/patrickstigler/obs-ndi/
+https://hub.docker.com/v2/repositories/patrickstigler/obs-ndi/tags?page_size=10
+# OTHER sources
 https://distroav.org
 https://github.com/DistroAV/DistroAV
 https://github.com/DistroAV/DistroAV/wiki
 https://github.com/patrickstigler/docker-obs-ndi
 https://github.com/patrickstigler/docker-obs-ndi/blob/400fc92a0a6953feef3bee371f5e0c2cd23991e2/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/obs-ndi
-https://hub.docker.com/r/patrickstigler/obs-ndi

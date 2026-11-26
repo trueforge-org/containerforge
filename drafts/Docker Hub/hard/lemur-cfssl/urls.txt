@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lemur-cfssl/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lemur-cfssl/Chart.yaml
+https://hub.docker.com/v2/repositories/halianelf/lemur/
+https://hub.docker.com/v2/repositories/halianelf/lemur/tags?page_size=10
+# OTHER sources
 https://github.com/Netflix/lemur
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lemur-cfssl
-https://hub.docker.com/r/halianelf/lemur
 https://lemur.readthedocs.io
 https://lemur.readthedocs.io/en/latest

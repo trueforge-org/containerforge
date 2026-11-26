@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kiwix-serve/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kiwix-serve/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/kiwix/kiwix-tools
 https://api.github.com/repos/kiwix/kiwix-tools/releases/latest
 https://archive.ubuntu.com/ubuntu
@@ -5,7 +9,6 @@ https://github.com/kiwix/kiwix-tools
 https://github.com/kiwix/kiwix-tools/blob/3.8.2/docker/server/Dockerfile
 https://github.com/kiwix/kiwix-tools/blob/3.8.2/docker/server/start.sh
 https://github.com/kiwix/kiwix-tools/blob/master/docker/server
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kiwix-serve
 https://kiwix-tools.readthedocs.org/en/latest/?badge=latest
 https://kiwix.org/en
 https://packages.ubuntu.com/resolute/arm64/kiwix-tools/download

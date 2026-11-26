@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xonotic/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/xonotic/Chart.yaml
+# OTHER sources
 https://dl.xonotic.org
 https://dl.xonotic.org/xonotic-0.8.6.sha512
 https://github.com/ich777/docker-xonotic-server/blob/master/Dockerfile
 https://github.com/ich777/docker-xonotic-server/tree/master/scripts
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xonotic
 https://gitlab.com/xonotic/xonotic
 https://gitlab.com/xonotic/xonotic/-/wikis/home
 https://www.xonotic.org

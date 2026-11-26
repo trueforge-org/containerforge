@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/anything-llm/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/anything-llm/Chart.yaml
+# OTHER sources
 https://anythingllm.com
 https://api.github.com/repos/Mintplex-Labs/anything-llm
 https://docs.anythingllm.com
 https://github.com/Mintplex-Labs/anything-llm
 https://github.com/Mintplex-Labs/anything-llm/blob/eb498cf2c211/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/anything-llm
 https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/eb498cf2c211/docker/Dockerfile
 https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/eb498cf2c211/docker/docker-entrypoint.sh
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/anything-llm/values.yaml

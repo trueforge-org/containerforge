@@ -1,12 +1,16 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/paperless-ngx/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/paperless-ngx/Chart.yaml
+https://hub.docker.com/v2/repositories/apache/tika/
+https://hub.docker.com/v2/repositories/apache/tika/tags?page_size=10
+https://hub.docker.com/v2/repositories/gotenberg/gotenberg/
+https://hub.docker.com/v2/repositories/gotenberg/gotenberg/tags?page_size=10
+# OTHER sources
 https://archive.apache.org/dist/tika/3.4.0
 https://dlcdn.apache.org/tika/3.3.3/tika-server-standard-3.3.3.jar
 https://downloads.apache.org/tika/KEYS
 https://github.com/apache/tika
 https://github.com/apache/tika-docker/blob/master/minimal/Dockerfile
 https://github.com/paperless-ngx/paperless-ngx
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/paperless-ngx
-https://hub.docker.com/r/apache/tika
-https://hub.docker.com/r/gotenberg/gotenberg
-https://hub.docker.com/v2/repositories/apache/tika/tags?page_size=5&ordering=last_updated
 https://paperless-ngx.readthedocs.io/en/latest
 https://raw.githubusercontent.com/apache/tika-docker/master/minimal/Dockerfile

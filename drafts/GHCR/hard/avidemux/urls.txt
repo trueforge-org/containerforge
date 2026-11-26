@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/avidemux/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/avidemux/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/jlesage/docker-avidemux/releases/latest
 https://avidemux.org
 https://github.com/jlesage/docker-avidemux
 https://github.com/jlesage/docker-avidemux/blob/v26.09.1/Dockerfile
 https://github.com/jlesage/docker-baseimage-gui
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/avidemux
 https://raw.githubusercontent.com/jlesage/docker-avidemux/v26.09.1/Dockerfile

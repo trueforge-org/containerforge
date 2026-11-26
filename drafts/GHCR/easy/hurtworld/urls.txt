@@ -1,6 +1,8 @@
-https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/hurtworld/values.yaml
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hurtworld/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hurtworld/Chart.yaml
+# OTHER sources
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hurtworld
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://store.steampowered.com/api/appdetails?appids=393420
 https://store.steampowered.com/app/393420

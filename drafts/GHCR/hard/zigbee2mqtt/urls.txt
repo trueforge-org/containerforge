@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zigbee2mqtt/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zigbee2mqtt/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/Koenkk/zigbee2mqtt
 https://api.github.com/repos/Koenkk/zigbee2mqtt/releases/tags/2.14.3
 https://github.com/Koenkk/zigbee2mqtt
 https://github.com/Koenkk/zigbee2mqtt/blob/2.14.3/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zigbee2mqtt
 https://raw.githubusercontent.com/Koenkk/zigbee2mqtt/2.14.3/docker/Dockerfile
 https://www.zigbee2mqtt.io

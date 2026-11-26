@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/satisfactory/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/satisfactory/Chart.yaml
+https://hub.docker.com/v2/repositories/wolveix/satisfactory-server/
+https://hub.docker.com/v2/repositories/wolveix/satisfactory-server/tags?page_size=10
+# OTHER sources
 https://github.com/robtme/satisfactory-server
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/satisfactory
 https://github.com/wolveix/satisfactory-server
 https://github.com/wolveix/satisfactory-server/blob/89015af92e8d2c8c88a2bd07e214d85ca368c161/Dockerfile
-https://hub.docker.com/r/wolveix/satisfactory-server
 https://store.steampowered.com/app/1690800/Satisfactory_Dedicated_Server

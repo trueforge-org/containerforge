@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dashy/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dashy/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/Lissy93/dashy
 https://api.github.com/repos/lissy93/dashy/releases/latest
 https://github.com/Lissy93/dashy
 https://github.com/lissy93/dashy/blob/5a8dc18c1bce/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dashy
 https://raw.githubusercontent.com/Lissy93/dashy/master/Dockerfile

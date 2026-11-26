@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pingvin-share/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pingvin-share/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/stonith404/pingvin-share/license
 https://api.github.com/repos/stonith404/pingvin-share/releases/latest
 https://github.com/stonith404/pingvin-share
 https://github.com/stonith404/pingvin-share/blob/dd546b4f17a516ef696ea35b96bbac8ff5521e2a/Dockerfile
 https://github.com/stonith404/pingvin-share/releases/tag/v1.13.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pingvin-share
 https://raw.githubusercontent.com/stonith404/pingvin-share/dd546b4f17a516ef696ea35b96bbac8ff5521e2a/Dockerfile
 https://raw.githubusercontent.com/stonith404/pingvin-share/dd546b4f17a516ef696ea35b96bbac8ff5521e2a/scripts/docker/entrypoint.sh
 https://stonith404.github.io/pingvin-share

@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/megasync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/megasync/Chart.yaml
+# OTHER sources
 https://github.com/ich777/docker-megasync
 https://github.com/ich777/docker-megasync/blob/master/Dockerfile
 https://github.com/meganz/MEGAsync
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/megasync
 https://help.mega.io/installs-apps/desktop
 https://mega.io/desktop
 https://mega.nz/linux/repo/Debian_12/amd64

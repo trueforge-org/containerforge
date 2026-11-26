@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mediainfo/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mediainfo/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/jlesage/docker-mediainfo/releases/latest
 https://github.com/MediaArea/MediaInfo
 https://github.com/jlesage/docker-mediainfo
 https://github.com/jlesage/docker-mediainfo/blob/v26.10.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mediainfo
 https://mediaarea.net/en/MediaInfo
 https://mediaarea.net/en/MediaInfo/Support
 https://raw.githubusercontent.com/jlesage/docker-mediainfo/v26.10.1/Dockerfile

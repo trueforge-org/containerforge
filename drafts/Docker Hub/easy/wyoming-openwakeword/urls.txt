@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wyoming-openwakeword/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wyoming-openwakeword/Chart.yaml
+https://hub.docker.com/v2/repositories/rhasspy/wyoming-openwakeword/
+https://hub.docker.com/v2/repositories/rhasspy/wyoming-openwakeword/tags?page_size=10
+# OTHER sources
 https://github.com/home-assistant/addons/tree/master/openwakeword
 https://github.com/rhasspy/wyoming-openwakeword
 https://github.com/rhasspy/wyoming-openwakeword/blob/456fdcc4c4e2205f629f48127b49b7acf845666c/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wyoming-openwakeword
-https://hub.docker.com/r/rhasspy/wyoming-openwakeword

@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mininote/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mininote/Chart.yaml
+https://hub.docker.com/v2/repositories/n1try/mininote/
+https://hub.docker.com/v2/repositories/n1try/mininote/tags?page_size=10
+# OTHER sources
 https://github.com/muety/mininote
 https://github.com/muety/mininote/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mininote
-https://hub.docker.com/r/n1try/mininote
 https://raw.githubusercontent.com/muety/mininote/master/Dockerfile
 https://raw.githubusercontent.com/muety/mininote/master/README.md

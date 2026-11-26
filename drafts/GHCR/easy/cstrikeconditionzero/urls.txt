@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cstrikeconditionzero/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cstrikeconditionzero/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cstrikeconditionzero
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/cstrikeczero/scripts/start-server.sh
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cstrikeconditionzero/values.yaml
 https://store.steampowered.com/search/?term=Counter-Strike+Condition+Zero
 https://www.steampowered.com

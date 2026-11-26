@@ -1,10 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openobserve/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openobserve/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/openobserve/openobserve
 https://api.github.com/repos/openobserve/openobserve/releases/latest
 https://api.github.com/repos/openobserve/openobserve/releases/tags/v1.1.2
 https://gallery.ecr.aws/zinclabs/openobserve
 https://github.com/openobserve/openobserve
 https://github.com/openobserve/openobserve/blob/d16d693ba99bc20621a58b948ecbcad7ec7fa882/deploy/build/Dockerfile.tag.amd64
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openobserve
 https://openobserve.ai
 https://openobserve.ai/docs
 https://raw.githubusercontent.com/openobserve/openobserve/d16d693ba99bc20621a58b948ecbcad7ec7fa882/deploy/build/Dockerfile.tag.amd64

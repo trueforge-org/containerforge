@@ -1,7 +1,11 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wekan
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wekan/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/wekan/Chart.yaml
+https://hub.docker.com/v2/repositories/wekanteam/wekan/
+https://hub.docker.com/v2/repositories/wekanteam/wekan/tags?page_size=10
+# OTHER sources
 https://github.com/wekan/wekan
 https://github.com/wekan/wekan/blob/v13.20/Dockerfile
-https://hub.docker.com/r/wekanteam/wekan
 https://raw.githubusercontent.com/wekan/wekan/v13.20/Dockerfile
 https://wekan.fi/install
 https://wekan.github.io

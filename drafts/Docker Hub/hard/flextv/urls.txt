@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flextv/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flextv/Chart.yaml
+https://hub.docker.com/v2/repositories/jcreynolds/flextv/
+https://hub.docker.com/v2/repositories/jcreynolds/flextv/tags?page_size=10
+# OTHER sources
 https://github.com/d8ahazard/FlexTV
 https://github.com/d8ahazard/FlexTV/releases
 https://github.com/d8ahazard/FlexTV/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flextv
-https://hub.docker.com/r/jcreynolds/flextv
-https://registry.hub.docker.com/r/jcreynolds/flextv

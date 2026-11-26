@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shortipy/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shortipy/Chart.yaml
+https://hub.docker.com/v2/repositories/knex666/shortipy/
+https://hub.docker.com/v2/repositories/knex666/shortipy/tags?page_size=10
+# OTHER sources
 https://github.com/maschhoff/shortipy
 https://github.com/maschhoff/shortipy/blob/52afd09/Dockerfile
 https://github.com/maschhoff/shortipy/blob/HEAD/requirements.txt
 https://github.com/maschhoff/shortipy/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shortipy
-https://hub.docker.com/r/knex666/shortipy

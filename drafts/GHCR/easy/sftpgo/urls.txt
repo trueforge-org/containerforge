@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sftpgo/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sftpgo/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/drakkan/sftpgo
 https://api.github.com/repos/drakkan/sftpgo/releases/latest
 https://docs.sftpgo.com
 https://docs.sftpgo.com/latest
 https://github.com/drakkan/sftpgo
 https://github.com/drakkan/sftpgo/blob/62ae9ba3957e9ed52b44a4f885e805e2d7b35972/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sftpgo
 https://raw.githubusercontent.com/drakkan/sftpgo/main/Dockerfile
 https://sftpgo.com

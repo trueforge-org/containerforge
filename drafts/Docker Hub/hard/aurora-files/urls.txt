@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/aurora-files/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/aurora-files/Chart.yaml
+https://hub.docker.com/v2/repositories/afterlogic/docker-aurora-files/
+https://hub.docker.com/v2/repositories/afterlogic/docker-aurora-files/tags?page_size=10
+# OTHER sources
 https://afterlogic.com
 https://afterlogic.com/docs
 https://github.com/afterlogic/aurora-files
 https://github.com/afterlogic/aurora-files/releases
 https://github.com/afterlogic/docker-aurora-files
 https://github.com/afterlogic/docker-aurora-files/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/aurora-files
-https://hub.docker.com/r/afterlogic/docker-aurora-files

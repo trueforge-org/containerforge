@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/scrutiny/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/scrutiny/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/AnalogJ/scrutiny/license
 https://api.github.com/repos/AnalogJ/scrutiny/releases/latest
 https://github.com/AnalogJ/scrutiny
 https://github.com/AnalogJ/scrutiny/blob/3ae9db201f5c51751d4b6779593f90144a128bf0/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/scrutiny
 https://raw.githubusercontent.com/AnalogJ/scrutiny/3ae9db201f5c51751d4b6779593f90144a128bf0/docker/Dockerfile

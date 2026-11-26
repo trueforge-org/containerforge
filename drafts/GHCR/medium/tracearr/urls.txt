@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tracearr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tracearr/Chart.yaml
+# OTHER sources
 https://docs.tracearr.com
 https://github.com/connorgallopo/Tracearr
 https://github.com/connorgallopo/Tracearr/blob/a0037ccf60ceb3d26c9e0efbb2605fec47471322/docker/Dockerfile
 https://github.com/connorgallopo/Tracearr/blob/main/docker/docker-compose.yml
 https://github.com/connorgallopo/Tracearr/releases/tag/v3.2.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tracearr
 https://raw.githubusercontent.com/connorgallopo/Tracearr/a0037ccf60ceb3d26c9e0efbb2605fec47471322/docker/Dockerfile
 https://tracearr.com

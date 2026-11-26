@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/unturned/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/unturned/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ich777/docker-steamcmd-server
 https://archive.ubuntu.com/ubuntu
 https://github.com/ich777/docker-steamcmd-server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
 https://github.com/ich777/docker-steamcmd-server/tree/unturned
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/unturned
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/unturned/Dockerfile
 https://store.steampowered.com/app/1110390
 https://unturned.net

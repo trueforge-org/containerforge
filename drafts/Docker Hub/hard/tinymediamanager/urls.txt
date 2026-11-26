@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tinymediamanager/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tinymediamanager/Chart.yaml
+https://hub.docker.com/v2/repositories/tinymediamanager/tinymediamanager/
+https://hub.docker.com/v2/repositories/tinymediamanager/tinymediamanager/tags?page_size=10
+# OTHER sources
 https://archive.tinymediamanager.org/v5.3.5/tinyMediaManager-5.3.5-linux-amd64.tar.xz
 https://archive.tinymediamanager.org/v5.3.5/tinyMediaManager-5.3.5-linux-arm64.tar.xz
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tinymediamanager
 https://gitlab.com/tinyMediaManager/tinyMediaManager
 https://gitlab.com/tinyMediaManager/tinyMediaManager/-/blob/a2204fc/src/docker/Dockerfile.amd64
-https://hub.docker.com/r/tinymediamanager/tinymediamanager
 https://www.tinymediamanager.org
 https://www.tinymediamanager.org/docs
 https://www.tinymediamanager.org/docs/docker

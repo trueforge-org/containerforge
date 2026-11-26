@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/palworld/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/palworld/Chart.yaml
+# OTHER sources
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
 https://github.com/ich777/docker-steamcmd-server/tree/palworld
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/palworld
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/palworld/Dockerfile
 https://store.steampowered.com/app/2394010
 https://www.pocketpair.jp

@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/remotely/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/remotely/Chart.yaml
+https://hub.docker.com/v2/repositories/immybot/remotely/
+https://hub.docker.com/v2/repositories/immybot/remotely/tags?page_size=10
+# OTHER sources
 http://*:5000
 https://api.github.com/repos/immense/Remotely
 https://github.com/immense/Remotely
 https://github.com/immense/Remotely/blob/ec0d45d/Server/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/remotely
-https://hub.docker.com/r/immybot/remotely
 https://remotely.one

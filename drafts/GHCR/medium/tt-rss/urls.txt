@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tt-rss/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tt-rss/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/tt-rss/tt-rss
 https://api.github.com/repos/tt-rss/tt-rss/releases/latest
 https://git.tt-rss.org/fox/tt-rss
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tt-rss
 https://github.com/tt-rss/tt-rss
 https://github.com/tt-rss/tt-rss/blob/03628f0aa3c4a86e960ddd61b5ba372cd3a27b50/.docker/app/Dockerfile
 https://github.com/tt-rss/tt-rss/blob/d62bcf96d01a7a2e750f6c9581ca462556e57281/.docker/web-nginx/Dockerfile

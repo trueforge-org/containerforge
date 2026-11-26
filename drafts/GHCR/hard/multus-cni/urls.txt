@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/multus-cni/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/multus-cni/Chart.yaml
+https://hub.docker.com/v2/repositories/alpine/crane/
+https://hub.docker.com/v2/repositories/alpine/crane/tags?page_size=10
+# OTHER sources
 https://github.com/k8snetworkplumbingwg/multus-cni
 https://github.com/k8snetworkplumbingwg/multus-cni/blob/v4.3.2/images/Dockerfile.thick
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/multus-cni
-https://hub.docker.com/r/alpine/crane
 https://k8snetworkplumbingwg.github.io/multus-cni
 https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/v4.3.2/images/Dockerfile.thick

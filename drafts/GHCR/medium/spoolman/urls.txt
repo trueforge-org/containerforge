@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spoolman/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spoolman/Chart.yaml
+# OTHER sources
 https://donkie.github.io/Spoolman
 https://github.com/Donkie/Spoolman
 https://github.com/Donkie/Spoolman/blob/ff8efd517b76a4b2783f29c89e9b9fbcd8cd167b/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spoolman
 https://raw.githubusercontent.com/Donkie/Spoolman/ff8efd517b76a4b2783f29c89e9b9fbcd8cd167b/Dockerfile
 https://raw.githubusercontent.com/Donkie/Spoolman/ff8efd517b76a4b2783f29c89e9b9fbcd8cd167b/entrypoint.sh
 https://raw.githubusercontent.com/Donkie/Spoolman/ff8efd517b76a4b2783f29c89e9b9fbcd8cd167b/pyproject.toml
 https://raw.githubusercontent.com/Donkie/Spoolman/ff8efd517b76a4b2783f29c89e9b9fbcd8cd167b/spoolman/env.py
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spoolman/values.yaml

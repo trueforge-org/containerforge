@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/left4dead/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/left4dead/Chart.yaml
+# OTHER sources
 https://developer.valvesoftware.com/wiki/Left_4_Dead_Dedicated_Server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
 https://github.com/ich777/docker-steamcmd-server/tree/l4d
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/left4dead
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start.sh
 https://store.steampowered.com/app/500/Left_4_Dead

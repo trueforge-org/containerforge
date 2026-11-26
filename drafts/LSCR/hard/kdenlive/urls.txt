@@ -1,10 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kdenlive/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kdenlive/Chart.yaml
+# OTHER sources
 https://docs.kdenlive.org
 https://fleet.linuxserver.io/image?name=linuxserver/kdenlive
 https://github.com/KDE/kdenlive
 https://github.com/linuxserver/docker-kdenlive
 https://github.com/linuxserver/docker-kdenlive/blob/f39884e7d1d55d31dd0babb973c1cb0ea066d84f/Dockerfile
 https://github.com/orgs/linuxserver/packages/container/package/kdenlive
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kdenlive
 https://kdenlive.org
 https://packages.ubuntu.com/resolute/kdenlive
 https://raw.githubusercontent.com/linuxserver/docker-kdenlive/f39884e7d1d55d31dd0babb973c1cb0ea066d84f/Dockerfile

@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/linkwarden/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/linkwarden/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/linkwarden/linkwarden
 https://api.github.com/repos/linkwarden/linkwarden/releases/latest
 https://docs.linkwarden.app
 https://github.com/linkwarden/linkwarden
 https://github.com/linkwarden/linkwarden/blob/v2.17.0/Dockerfile
 https://github.com/linkwarden/linkwarden/releases/tag/v2.17.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/linkwarden
 https://linkwarden.app
 https://raw.githubusercontent.com/linkwarden/linkwarden/v2.17.0/Dockerfile

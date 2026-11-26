@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/acestream/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/acestream/Chart.yaml
+https://hub.docker.com/v2/repositories/vstavrinov/acestream-service/
+https://hub.docker.com/v2/repositories/vstavrinov/acestream-service/tags?page_size=10
+# OTHER sources
 https://acestream.org
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/acestream
 https://github.com/vstavrinov/acestream-service
 https://github.com/vstavrinov/acestream-service/blob/0fa3ec927b0599c213abcdd75e9a8a72211b5189/Dockerfile
 https://github.com/vstavrinov/acestream_search.git
-https://hub.docker.com/r/vstavrinov/acestream-service

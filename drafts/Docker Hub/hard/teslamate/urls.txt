@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/teslamate/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/teslamate/Chart.yaml
+https://hub.docker.com/v2/repositories/teslamate/teslamate/
+https://hub.docker.com/v2/repositories/teslamate/teslamate/tags?page_size=10
+# OTHER sources
 https://docs.teslamate.org
 https://docs.teslamate.org/docs/installation/docker
 https://github.com/teslamate-org/teslamate
 https://github.com/teslamate-org/teslamate.git
 https://github.com/teslamate-org/teslamate/blob/v4.5.0/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/teslamate
-https://hub.docker.com/r/teslamate/teslamate

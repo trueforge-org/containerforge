@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/steam-headless/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/steam-headless/Chart.yaml
+https://hub.docker.com/v2/repositories/josh5/steam-headless/
+https://hub.docker.com/v2/repositories/josh5/steam-headless/tags?page_size=10
+# OTHER sources
 https://github.com/Steam-Headless/docker-steam-headless
 https://github.com/Steam-Headless/docker-steam-headless/blob/824c88d/Dockerfile.debian
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/steam-headless
-https://hub.docker.com/r/josh5/steam-headless
 https://store.steampowered.com/about

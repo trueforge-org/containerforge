@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gaps/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gaps/Chart.yaml
+https://hub.docker.com/v2/repositories/housewrecker/gaps/
+https://hub.docker.com/v2/repositories/housewrecker/gaps/tags?page_size=10
+# OTHER sources
 https://github.com/JasonHHouse/gaps
 https://github.com/JasonHHouse/gaps/blob/v0.10.4/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gaps
-https://hub.docker.com/r/housewrecker/gaps
 https://raw.githubusercontent.com/JasonHHouse/gaps/v0.10.4/Dockerfile
 https://raw.githubusercontent.com/JasonHHouse/gaps/v0.10.4/LICENSE

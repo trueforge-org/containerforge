@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/imgpush/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/imgpush/Chart.yaml
+https://hub.docker.com/v2/repositories/hauxir/imgpush/
+https://hub.docker.com/v2/repositories/hauxir/imgpush/tags?page_size=10
+# OTHER sources
 http://unix:/tmp/imgpush.sock
 https://github.com/hauxir/imgpush
 https://github.com/hauxir/imgpush/blob/9a44956/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/imgpush
-https://hub.docker.com/r/hauxir/imgpush

@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/whisper-asr-webservice/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/whisper-asr-webservice/Chart.yaml
+https://hub.docker.com/v2/repositories/onerahmet/openai-whisper-asr-webservice/
+https://hub.docker.com/v2/repositories/onerahmet/openai-whisper-asr-webservice/tags?page_size=10
+# OTHER sources
 https://ahmetoner.github.io/whisper-asr-webservice
 https://download.pytorch.org/whl/cpu
 https://github.com/ahmetoner/whisper-asr-webservice
 https://github.com/ahmetoner/whisper-asr-webservice/blob/v1.10.0/Dockerfile
 https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.10.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/whisper-asr-webservice
-https://hub.docker.com/r/onerahmet/openai-whisper-asr-webservice
 https://raw.githubusercontent.com/ahmetoner/whisper-asr-webservice/v1.10.0/Dockerfile

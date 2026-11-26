@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ps3netsrv/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ps3netsrv/Chart.yaml
+https://hub.docker.com/v2/repositories/shawly/ps3netsrv/
+https://hub.docker.com/v2/repositories/shawly/ps3netsrv/tags?page_size=10
+# OTHER sources
 https://github.com/aldostools/ps3netsrv
 https://github.com/aldostools/webMAN-MOD/tree/master/_Projects_/ps3netsrv
 https://github.com/shawly/docker-ps3netsrv
 https://github.com/shawly/docker-ps3netsrv/blob/0585a23954e9b3ca27cc978ddc479af10e363ad1/alpine.Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ps3netsrv
-https://hub.docker.com/r/shawly/ps3netsrv

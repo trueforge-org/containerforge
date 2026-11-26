@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lama-cleaner/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lama-cleaner/Chart.yaml
+https://hub.docker.com/v2/repositories/cwq1913/lama-cleaner/
+https://hub.docker.com/v2/repositories/cwq1913/lama-cleaner/tags?page_size=10
+# OTHER sources
 https://download.pytorch.org/whl/cpu
 https://github.com/Sanster/IOPaint
 https://github.com/Sanster/lama-cleaner
 https://github.com/Sanster/lama-cleaner/blob/5114a46f5e6ad87f489e5dbbd98ac780bcee34fd/docker/CPUDockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lama-cleaner
-https://hub.docker.com/r/cwq1913/lama-cleaner
 https://lama-cleaner-docs.vercel.app
 https://www.iopaint.com
 https://www.iopaint.com/install/download_model

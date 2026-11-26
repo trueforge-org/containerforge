@@ -1,6 +1,10 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/go-playground
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/go-playground/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/go-playground/Chart.yaml
+https://hub.docker.com/v2/repositories/x1unix/go-playground/
+https://hub.docker.com/v2/repositories/x1unix/go-playground/tags?page_size=10
+# OTHER sources
 https://github.com/x1unix/go-playground
 https://github.com/x1unix/go-playground/blob/55b1467ad12c28578a54b80f4dd49f41a64e7a36/build/Dockerfile
 https://go.dev
-https://hub.docker.com/r/x1unix/go-playground
 https://raw.githubusercontent.com/x1unix/go-playground/master/build/Dockerfile

@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jdownloader2/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jdownloader2/Chart.yaml
+# OTHER sources
 https://github.com/jlesage/docker-jdownloader-2
 https://github.com/jlesage/docker-jdownloader-2/blob/v26.09.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jdownloader2
 https://installer.jdownloader.org/JDownloader.jar
 https://jdownloader.org
 https://raw.githubusercontent.com/jlesage/docker-jdownloader-2/v26.09.1/Dockerfile

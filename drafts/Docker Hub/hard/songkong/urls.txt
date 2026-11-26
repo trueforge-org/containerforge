@@ -1,5 +1,9 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/songkong
-https://hub.docker.com/r/songkong/songkong
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/songkong/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/songkong/Chart.yaml
+https://hub.docker.com/v2/repositories/songkong/songkong/
+https://hub.docker.com/v2/repositories/songkong/songkong/tags?page_size=10
+# OTHER sources
 https://www.jthink.net/songkong
 https://www.jthink.net/songkong/downloads/current/songkong-linux-headless-novm.tgz?val=82
 https://www.jthink.net/songkong/tutorial.jsp

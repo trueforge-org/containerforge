@@ -1,10 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chivalry-medievalwarfare/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chivalry-medievalwarfare/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ich777/docker-steamcmd-server/contents/Dockerfile?ref=chivalrymw
 https://api.github.com/repos/ich777/docker-steamcmd-server/contents/scripts/start-server.sh?ref=chivalrymw
-https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/chivalry-medievalwarfare/values.yaml
 https://archive.ubuntu.com/ubuntu
 https://github.com/ich777/docker-steamcmd-server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chivalry-medievalwarfare
 https://store.steampowered.com/api/appdetails?appids=220070
 https://store.steampowered.com/app/220070
 https://store.steampowered.com/search/?term=Chivalry+Medieval+Warfare

@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tasmobackup/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tasmobackup/Chart.yaml
+https://hub.docker.com/v2/repositories/danmed/tasmobackupv1/
+https://hub.docker.com/v2/repositories/danmed/tasmobackupv1/tags?page_size=10
+# OTHER sources
 https://github.com/danmed/TasmoBackupV1
 https://github.com/danmed/TasmoBackupV1/blob/59f8a66bafdc3cf5eb8255d58ceacbba33cd3bd1/Dockerfile
 https://github.com/danmed/TasmoBackupV1/releases/tag/1.08.01
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmobackup
-https://hub.docker.com/r/danmed/tasmobackupv1

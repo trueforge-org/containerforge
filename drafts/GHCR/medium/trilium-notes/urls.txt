@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/trilium-notes/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/trilium-notes/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/TriliumNext/Trilium
 https://api.github.com/repos/TriliumNext/Trilium/releases/latest
 https://docs.triliumnotes.org/user-guide
 https://github.com/TriliumNext/Trilium
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/trilium-notes
 https://github.com/zadam/trilium
 https://github.com/zadam/trilium/blob/51939b161c4754f1a5326e2f019ac6a217bea993/Dockerfile
 https://raw.githubusercontent.com/TriliumNext/Trilium/v0.107.0/apps/server/src/services/config.ts

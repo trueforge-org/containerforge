@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/debian-apt-mirror/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/debian-apt-mirror/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/apt-mirror/apt-mirror
 https://api.github.com/repos/apt-mirror/apt-mirror/releases/latest
 https://github.com/apt-mirror/apt-mirror
 https://github.com/ich777/docker-debian-mirror/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/debian-apt-mirror
 https://manpages.debian.org/trixie/apt-mirror/apt-mirror.1.en.html
 https://raw.githubusercontent.com/apt-mirror/apt-mirror/master/LICENSE
 https://raw.githubusercontent.com/ich777/docker-debian-mirror/master/Dockerfile

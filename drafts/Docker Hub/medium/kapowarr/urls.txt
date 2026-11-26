@@ -1,13 +1,15 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kapowarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kapowarr/Chart.yaml
+https://hub.docker.com/v2/repositories/mrcas/kapowarr/
+https://hub.docker.com/v2/repositories/mrcas/kapowarr/tags?page_size=10
+# OTHER sources
 https://casvt.github.io/Kapowarr
 https://github.com/Casvt/Kapowarr
 https://github.com/Casvt/Kapowarr/blob/HEAD/requirements.txt
 https://github.com/Casvt/Kapowarr/blob/V1.0.0-beta-4/Dockerfile
 https://github.com/Casvt/Kapowarr/releases/expanded_assets/V1.3.2
 https://github.com/Casvt/Kapowarr/releases/tag/V1.3.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kapowarr
-https://hub.docker.com/r/mrcas/kapowarr
-https://hub.docker.com/v2/repositories/mrcas/kapowarr/tags/v1.3.2
 https://raw.githubusercontent.com/Casvt/Kapowarr/V1.0.0-beta-4/Dockerfile
 https://raw.githubusercontent.com/Casvt/Kapowarr/V1.3.2/LICENSE
 https://raw.githubusercontent.com/Casvt/Kapowarr/V1.3.2/requirements.txt
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kapowarr/values.yaml

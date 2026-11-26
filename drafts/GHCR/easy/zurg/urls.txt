@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zurg/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zurg/Chart.yaml
+# OTHER sources
 https://github.com/debridmediamanager/zurg-public
 https://github.com/debridmediamanager/zurg-public/blob/main/README.md
 https://github.com/debridmediamanager/zurg-public/blob/main/docker-compose.yml
 https://github.com/debridmediamanager/zurg-public/wiki
 https://github.com/geek-cookbook/containers/blob/69a4d32bdba580ccb4e6578ea4e95507d55684b3/apps/zurg/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zurg

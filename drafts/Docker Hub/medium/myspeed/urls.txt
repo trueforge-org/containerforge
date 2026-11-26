@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/myspeed/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/myspeed/Chart.yaml
+https://hub.docker.com/v2/repositories/germannewsmaker/myspeed/
+https://hub.docker.com/v2/repositories/germannewsmaker/myspeed/tags?page_size=10
+# OTHER sources
 https://docs.myspeed.dev/setup/linux
 https://github.com/gnmyt/MySpeed/blob/development/Dockerfile
 https://github.com/gnmyt/myspeed
 https://github.com/gnmyt/myspeed/blob/7290a97522e5fdeca9e541bc3b6048a88ae20f9c/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/myspeed
-https://hub.docker.com/r/germannewsmaker/myspeed
 https://myspeed.dev

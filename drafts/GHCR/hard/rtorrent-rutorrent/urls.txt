@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rtorrent-rutorrent/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rtorrent-rutorrent/Chart.yaml
+# OTHER sources
 https://github.com/Novik/ruTorrent
 https://github.com/crazy-max/docker-rtorrent-rutorrent
 https://github.com/crazy-max/docker-rtorrent-rutorrent/blob/1efb9e087f90f68ed132b3ffd419b29145a1838e/Dockerfile
 https://github.com/rakshasa/rtorrent
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rtorrent-rutorrent
 https://packages.ubuntu.com/resolute/rtorrent
 https://raw.githubusercontent.com/crazy-max/docker-rtorrent-rutorrent/1efb9e087f90f68ed132b3ffd419b29145a1838e/Dockerfile
 https://raw.githubusercontent.com/rakshasa/rtorrent/master/COPYING

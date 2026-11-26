@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/damselfly/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/damselfly/Chart.yaml
+https://hub.docker.com/v2/repositories/webreaper/damselfly/
+https://hub.docker.com/v2/repositories/webreaper/damselfly/tags?page_size=10
+# OTHER sources
 https://github.com/Webreaper/Damselfly
 https://github.com/Webreaper/Damselfly/blob/e110926104cc93d3c87a9617ba7ab4ae70dbb216/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/damselfly
-https://hub.docker.com/r/webreaper/damselfly

@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/soft-serve/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/soft-serve/Chart.yaml
+# OTHER sources
 https://charm.land
 https://github.com/charmbracelet/soft-serve
 https://github.com/charmbracelet/soft-serve/blob/52ba4c852667ff464675b0876fcb1ca2da257dce/Dockerfile
 https://github.com/charmbracelet/soft-serve/blob/main/LICENSE
 https://github.com/charmbracelet/soft-serve/blob/v0.12.4/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/soft-serve
 https://raw.githubusercontent.com/charmbracelet/soft-serve/v0.12.4/LICENSE

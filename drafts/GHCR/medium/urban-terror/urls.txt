@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/urban-terror/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/urban-terror/Chart.yaml
+# OTHER sources
 http://www.urbanterror.info
 https://github.com/FrozenSand/ioq3-for-UrbanTerror-4
 https://github.com/ich777/docker-urbanterror/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/urban-terror
 https://raw.githubusercontent.com/ich777/docker-urbanterror/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-urbanterror/master/README.md
 https://www.urbanterror.info

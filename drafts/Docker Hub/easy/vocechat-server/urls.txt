@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/vocechat-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/vocechat-server/Chart.yaml
+https://hub.docker.com/v2/repositories/privoce/vocechat-server/
+https://hub.docker.com/v2/repositories/privoce/vocechat-server/tags?page_size=10
+# OTHER sources
 https://doc.voce.chat
 https://github.com/Privoce/vocechat-server-rust
 https://github.com/Privoce/vocechat-server-rust/blob/96c0aa5d100cc1c9090c004dbeb662ba3a08a6cd/build/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vocechat-server
-https://hub.docker.com/r/privoce/vocechat-server
 https://sh.voce.chat/web_client/v0.4.x
 https://voce.chat

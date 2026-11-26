@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/homelablabelmaker/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/homelablabelmaker/Chart.yaml
+https://hub.docker.com/v2/repositories/davidspek/homelablabelmaker/
+https://hub.docker.com/v2/repositories/davidspek/homelablabelmaker/tags?page_size=10
+# OTHER sources
 https://github.com/DavidSpek/homelablabelmaker
 https://github.com/DavidSpek/homelablabelmaker/blob/d52776c7bd405bf388f53a725a640f2c1a461ae4/Docker%20Files/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homelablabelmaker
 https://homelablabelmaker.shurilla14.com
-https://hub.docker.com/r/davidspek/homelablabelmaker

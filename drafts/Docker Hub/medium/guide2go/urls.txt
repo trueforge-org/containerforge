@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/guide2go/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/guide2go/Chart.yaml
+https://hub.docker.com/v2/repositories/alturismo/guide2go/
+https://hub.docker.com/v2/repositories/alturismo/guide2go/tags?page_size=10
+# OTHER sources
 https://github.com/alturismo/guide2go
 https://github.com/alturismo/guide2go/blob/master/Dockerfile
 https://github.com/mar-mei/guide2go
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/guide2go
-https://hub.docker.com/r/alturismo/guide2go

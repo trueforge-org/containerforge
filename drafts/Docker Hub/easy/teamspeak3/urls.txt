@@ -1,6 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/teamspeak3/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/teamspeak3/Chart.yaml
+https://hub.docker.com/v2/repositories/library/teamspeak/
+https://hub.docker.com/v2/repositories/library/teamspeak/tags?page_size=10
+https://hub.docker.com/v2/repositories/library/teamspeak/
+https://hub.docker.com/v2/repositories/library/teamspeak/tags?page_size=10
+# OTHER sources
 https://files.teamspeak-services.com/releases/server/3.13.9/teamspeak3-server_linux_amd64-3.13.9.tar.bz2
 https://github.com/TeamSpeak-Systems/teamspeak-linux-docker-images/blob/88586dc62959fd95700968a42eab6cf093cd9f86/alpine/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/teamspeak3
-https://hub.docker.com/_/teamspeak
 https://www.teamspeak.com/en
 https://www.teamspeak.com/en/downloads

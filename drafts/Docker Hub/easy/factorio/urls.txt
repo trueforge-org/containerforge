@@ -1,3 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/factorio/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/factorio/Chart.yaml
+https://hub.docker.com/v2/repositories/factoriotools/factorio/
+https://hub.docker.com/v2/repositories/factoriotools/factorio/tags?page_size=10
+# OTHER sources
 https://factorio.com
 https://factorio.com/api/latest-releases
 https://factorio.com/download/sha256sums
@@ -6,6 +12,4 @@ https://factorio.com/get-download/2.1.25/headless/linux64
 https://factorio.com/get-download/stable/headless/linux64
 https://github.com/factoriotools/factorio-docker
 https://github.com/factoriotools/factorio-docker/blob/446f2553eedb142eb6a25c670af7def2647ba24c/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/factorio
-https://hub.docker.com/r/factoriotools/factorio
 https://wiki.factorio.com

@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gridcoinwalletgui/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gridcoinwalletgui/Chart.yaml
+https://hub.docker.com/v2/repositories/sublivion/gridcoinwalletgui/
+https://hub.docker.com/v2/repositories/sublivion/gridcoinwalletgui/tags?page_size=10
+# OTHER sources
 https://github.com/gridcoin-community/Gridcoin-Research
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gridcoinwalletgui
 https://gridcoin.us
-https://hub.docker.com/r/sublivion/gridcoinwalletgui

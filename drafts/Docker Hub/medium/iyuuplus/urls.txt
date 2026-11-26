@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/iyuuplus/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/iyuuplus/Chart.yaml
+https://hub.docker.com/v2/repositories/iyuucn/iyuuplus/
+https://hub.docker.com/v2/repositories/iyuucn/iyuuplus/tags?page_size=10
+# OTHER sources
 http://doc.iyuu.cn
 https://github.com/ledccn/iyuuplus-dev
 https://github.com/ledccn/iyuuplus-dev/blob/HEAD/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/iyuuplus
-https://hub.docker.com/r/iyuucn/iyuuplus
 https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/LICENSE
 https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/docker/Dockerfile
 https://www.iyuu.cn

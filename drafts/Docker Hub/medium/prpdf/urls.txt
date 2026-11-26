@@ -1,3 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/prpdf/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/prpdf/Chart.yaml
+https://hub.docker.com/v2/repositories/knex666/prpdf/
+https://hub.docker.com/v2/repositories/knex666/prpdf/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/maschhoff/pdfscanexplorer
 https://api.github.com/repos/maschhoff/prpdf
 https://api.github.com/repos/maschhoff/prpdf/releases/latest
@@ -6,8 +12,5 @@ https://github.com/maschhoff/pdfscanexplorer/blob/HEAD/requirements.txt
 https://github.com/maschhoff/pdfscanexplorer/releases/tag/1.0.2
 https://github.com/maschhoff/prpdf
 https://github.com/maschhoff/prpdf/blob/132fcad/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/prpdf
-https://hub.docker.com/r/knex666/prpdf
-https://hub.docker.com/v2/repositories/knex666/prpdf/tags
 https://raw.githubusercontent.com/maschhoff/pdfscanexplorer/main/requirements.txt
 https://raw.githubusercontent.com/maschhoff/prpdf/main/Dockerfile

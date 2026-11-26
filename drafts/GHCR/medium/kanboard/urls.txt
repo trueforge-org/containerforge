@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kanboard/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kanboard/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/kanboard/kanboard
 https://api.github.com/repos/kanboard/kanboard/releases/tags/v1.2.58
 https://github.com/kanboard/kanboard
 https://github.com/kanboard/kanboard/blob/v1.2.57/Dockerfile
 https://github.com/kanboard/kanboard/releases/tag/v1.2.57
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kanboard
 https://raw.githubusercontent.com/kanboard/kanboard/v1.2.57/Dockerfile

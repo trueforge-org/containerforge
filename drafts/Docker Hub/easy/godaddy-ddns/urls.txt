@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/godaddy-ddns/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/godaddy-ddns/Chart.yaml
+https://hub.docker.com/v2/repositories/jwater7/godaddy-publicip-updater/
+https://hub.docker.com/v2/repositories/jwater7/godaddy-publicip-updater/tags?page_size=10
+# OTHER sources
 https://github.com/jwater7/docker-godaddy-publicip-updater
 https://github.com/jwater7/docker-godaddy-publicip-updater/blob/ab3b048/Dockerfile
 https://github.com/jwater7/docker-godaddy-publicip-updater/releases/tag/releases/1.0.4
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/godaddy-ddns
-https://hub.docker.com/r/jwater7/godaddy-publicip-updater
 https://raw.githubusercontent.com/jwater7/docker-godaddy-publicip-updater/ab3b048d7a369d816990ad624f58baf8a4c5b480/godaddy-publicip-updater.py

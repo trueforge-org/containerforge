@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/storj-node/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/storj-node/Chart.yaml
+https://hub.docker.com/v2/repositories/storjlabs/storagenode/
+https://hub.docker.com/v2/repositories/storjlabs/storagenode/tags?page_size=10
+# OTHER sources
 https://docs.storj.io/node
 https://github.com/storj/storagenode-docker/blob/main/Dockerfile
 https://github.com/storj/storj
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/storj-node
-https://hub.docker.com/r/storjlabs/storagenode
 https://raw.githubusercontent.com/storj/storagenode-docker/main/docker/entrypoint
 https://version.storj.io

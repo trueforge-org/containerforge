@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/homarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/homarr/Chart.yaml
+# OTHER sources
 https://github.com/ajnart/homarr
 https://github.com/homarr-labs/homarr
 https://github.com/homarr-labs/homarr/blob/v2.13.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homarr
 https://homarr.dev
 https://homarr.dev/docs
 https://raw.githubusercontent.com/homarr-labs/homarr/v2.13.1/Dockerfile

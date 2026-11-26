@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/adguard-home/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/adguard-home/Chart.yaml
+https://hub.docker.com/v2/repositories/adguard/adguardhome/
+https://hub.docker.com/v2/repositories/adguard/adguardhome/tags?page_size=10
+# OTHER sources
 https://adguard-dns.io/kb/adguard-home/getting-started
 https://adguard-dns.io/kb/adguard-home/overview
 https://adguard.com/en/adguard-home/overview.html
 https://github.com/AdguardTeam/AdGuardHome
 https://github.com/AdguardTeam/AdGuardHome/blob/003d6e1e15e04127f6d6d5e2f5c1aa843130752a/docker/build.Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/adguard-home
-https://hub.docker.com/r/adguard/adguardhome

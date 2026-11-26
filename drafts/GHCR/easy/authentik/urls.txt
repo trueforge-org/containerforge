@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/authentik/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/authentik/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/goauthentik/authentik/contents/LICENSE
 https://api.github.com/repos/goauthentik/authentik/releases/latest
 https://docs.goauthentik.io
@@ -9,5 +13,4 @@ https://github.com/kiwigrid/k8s-sidecar
 https://github.com/kiwigrid/k8s-sidecar/blob/2.14.3/Dockerfile
 https://github.com/maxmind/geoipupdate
 https://github.com/maxmind/geoipupdate/blob/v8.0.0/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/authentik
 https://goauthentik.io/docs

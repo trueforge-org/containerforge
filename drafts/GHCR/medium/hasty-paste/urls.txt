@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hasty-paste/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hasty-paste/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/enchant97/hasty-paste/releases/latest
 https://github.com/enchant97/hasty-paste
 https://github.com/enchant97/hasty-paste/blob/ad6a831789716dfdfde3a68e22ff5bb2ef1b0851/app/Dockerfile
 https://github.com/enchant97/hasty-paste/blob/main/docs/install.md
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hasty-paste
 https://raw.githubusercontent.com/enchant97/hasty-paste/ad6a831789716dfdfde3a68e22ff5bb2ef1b0851/app/Dockerfile

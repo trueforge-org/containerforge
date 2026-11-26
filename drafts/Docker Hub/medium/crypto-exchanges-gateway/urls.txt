@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/crypto-exchanges-gateway/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/crypto-exchanges-gateway/Chart.yaml
+https://hub.docker.com/v2/repositories/apendergast/crypto-exchanges-gateway/
+https://hub.docker.com/v2/repositories/apendergast/crypto-exchanges-gateway/tags?page_size=10
+# OTHER sources
 https://github.com/aloysius-pgast/crypto-exchanges-gateway
 https://github.com/aloysius-pgast/crypto-exchanges-gateway/blob/master/docker/Dockerfile
 https://github.com/aloysius-pgast/crypto-exchanges-gateway/releases/tag/1.13.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/crypto-exchanges-gateway
-https://hub.docker.com/r/apendergast/crypto-exchanges-gateway
 https://raw.githubusercontent.com/aloysius-pgast/crypto-exchanges-gateway/master/README.md
 https://raw.githubusercontent.com/aloysius-pgast/crypto-exchanges-gateway/master/docker/Dockerfile

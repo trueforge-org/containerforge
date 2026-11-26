@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mailpile/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mailpile/Chart.yaml
+https://hub.docker.com/v2/repositories/rroemhild/mailpile/
+https://hub.docker.com/v2/repositories/rroemhild/mailpile/tags?page_size=10
+# OTHER sources
 https://github.com/mailpile/Mailpile
 https://github.com/rroemhild/docker-mailpile/blob/be578abe73423e37c2b29efa26a28faebb5f89b3/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mailpile
-https://hub.docker.com/r/rroemhild/mailpile
 https://mailpile.is
 https://www.mailpile.is

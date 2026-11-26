@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/linkding/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/linkding/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/sissbruecker/linkding
 https://api.github.com/repos/sissbruecker/linkding/releases/latest
 https://github.com/sissbruecker/linkding
 https://github.com/sissbruecker/linkding/blob/24b5ad6/docker/default.Dockerfile
 https://github.com/sissbruecker/linkding/releases/tag/v1.47.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/linkding
 https://linkding.link
 https://raw.githubusercontent.com/sissbruecker/linkding/24b5ad6/docker/default.Dockerfile
 https://raw.githubusercontent.com/sissbruecker/linkding/v1.47.0/bootstrap.sh

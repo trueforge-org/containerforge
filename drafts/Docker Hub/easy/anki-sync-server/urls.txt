@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/anki-sync-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/anki-sync-server/Chart.yaml
+https://hub.docker.com/v2/repositories/ankicommunity/anki-sync-server-rs/
+https://hub.docker.com/v2/repositories/ankicommunity/anki-sync-server-rs/tags?page_size=10
+# OTHER sources
 http://anki-sync-server-probe:27701
 http://host:27701
 https://docs.ankiweb.net/sync-server.html
 https://github.com/ankicommunity/anki-devops-services
 https://github.com/ankicommunity/anki-sync-server-rs
 https://github.com/ankicommunity/anki-sync-server-rs/blob/1.1.4/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/anki-sync-server
-https://hub.docker.com/r/ankicommunity/anki-sync-server-rs

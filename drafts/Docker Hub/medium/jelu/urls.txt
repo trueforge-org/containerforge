@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jelu/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/jelu/Chart.yaml
+https://hub.docker.com/v2/repositories/wabayang/jelu/
+https://hub.docker.com/v2/repositories/wabayang/jelu/tags?page_size=10
+# OTHER sources
 https://bayang.github.io/jelu-web
 https://github.com/bayang/jelu
 https://github.com/bayang/jelu/blob/2aba1840c9d823851a5d219dcf9802e1a194a4e2/Dockerfile
 https://github.com/bayang/jelu/releases/latest
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jelu
-https://hub.docker.com/r/wabayang/jelu
 https://raw.githubusercontent.com/bayang/jelu/2aba1840c9d823851a5d219dcf9802e1a194a4e2/Dockerfile
 https://raw.githubusercontent.com/bayang/jelu/main/LICENSE

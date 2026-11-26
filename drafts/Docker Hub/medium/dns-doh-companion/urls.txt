@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dns-doh-companion/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dns-doh-companion/Chart.yaml
+https://hub.docker.com/v2/repositories/testdasi/simple-dns-doh/
+https://hub.docker.com/v2/repositories/testdasi/simple-dns-doh/tags?page_size=10
+# OTHER sources
 https://1.0.0.1/dns-query
 https://1.1.1.1/dns-query
 https://developers.cloudflare.com/1.1.1.1/dns-over-https/cloudflared-proxy
 https://github.com/cloudflare/cloudflared
 https://github.com/testdasi/simple-dns-doh/blob/354be66/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dns-doh-companion
-https://hub.docker.com/r/testdasi/simple-dns-doh

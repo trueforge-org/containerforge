@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/prusaslicer-novnc/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/prusaslicer-novnc/Chart.yaml
+https://hub.docker.com/v2/repositories/mikeah/prusaslicer-novnc/
+https://hub.docker.com/v2/repositories/mikeah/prusaslicer-novnc/tags?page_size=10
+# OTHER sources
 https://github.com/helfrichmichael/prusaslicer-novnc/blob/master/Dockerfile
 https://github.com/prusa3d/PrusaSlicer
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/prusaslicer-novnc
-https://hub.docker.com/r/mikeah/prusaslicer-novnc
 https://www.prusa3d.com/prusaslicer

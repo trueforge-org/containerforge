@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plex-utills/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plex-utills/Chart.yaml
+https://hub.docker.com/v2/repositories/jkirkcaldy/plex-utills/
+https://hub.docker.com/v2/repositories/jkirkcaldy/plex-utills/tags?page_size=10
+# OTHER sources
 https://github.com/AnthonyBloomer/tmdbv3api.git
 https://github.com/jkirkcaldy/plex-utills
 https://github.com/jkirkcaldy/plex-utills/blob/HEAD/requirements.txt
 https://github.com/jkirkcaldy/plex-utills/blob/e945c0c/Dockerfile
 https://github.com/jkirkcaldy/plex-utills/releases/tag/0.21.12
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-utills
-https://hub.docker.com/r/jkirkcaldy/plex-utills

@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/quake3/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/quake3/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ioquake/ioq3
 https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake3/linux/linuxq3apoint-1.32b-3.x86.run
 https://github.com/ich777/docker-quake3/blob/master/Dockerfile
 https://github.com/ioquake/ioq3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quake3
 https://ioquake3.org
 https://ioquake3.org/help/players-guide
 https://raw.githubusercontent.com/ich777/docker-quake3/master/Dockerfile

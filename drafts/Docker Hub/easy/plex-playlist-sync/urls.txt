@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plex-playlist-sync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/plex-playlist-sync/Chart.yaml
+https://hub.docker.com/v2/repositories/rnagabhyrava/plexplaylistsync/
+https://hub.docker.com/v2/repositories/rnagabhyrava/plexplaylistsync/tags?page_size=10
+# OTHER sources
 https://github.com/rnagabhyrava/plex-playlist-sync
 https://github.com/rnagabhyrava/plex-playlist-sync/blob/HEAD/requirements.txt
 https://github.com/rnagabhyrava/plex-playlist-sync/blob/c3333a506066c1294f67f297681fd2c342b4e2ff/Dockerfile
 https://github.com/rnagabhyrava/plex-playlist-sync/releases/tag/v1.0.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-playlist-sync
-https://hub.docker.com/r/rnagabhyrava/plexplaylistsync

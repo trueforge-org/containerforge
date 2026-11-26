@@ -1,5 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/leaf2mqtt/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/leaf2mqtt/Chart.yaml
+# OTHER sources
 https://github.com/k8s-at-home/container-images
 https://github.com/mitsumaui/leaf2mqtt
 https://github.com/mitsumaui/leaf2mqtt/blob/v0.6/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/leaf2mqtt
 https://raw.githubusercontent.com/mitsumaui/leaf2mqtt/v0.6/Dockerfile

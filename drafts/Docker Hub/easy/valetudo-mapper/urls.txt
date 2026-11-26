@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/valetudo-mapper/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/valetudo-mapper/Chart.yaml
+https://hub.docker.com/v2/repositories/rand256/valetudo-mapper/
+https://hub.docker.com/v2/repositories/rand256/valetudo-mapper/tags?page_size=10
+# OTHER sources
 https://github.com/rand256/valetudo-mapper
 https://github.com/rand256/valetudo-mapper/blob/54aba3534e9e797b9a22c0e134fa2706effd2e9d/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/valetudo-mapper
-https://hub.docker.com/r/rand256/valetudo-mapper
 https://valetudo.cloud

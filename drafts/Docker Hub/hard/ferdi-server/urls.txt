@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ferdi-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ferdi-server/Chart.yaml
+https://hub.docker.com/v2/repositories/getferdi/ferdi-server/
+https://hub.docker.com/v2/repositories/getferdi/ferdi-server/tags?page_size=10
+# OTHER sources
 https://ferdium.org
 https://github.com/ferdium/ferdium-recipes
 https://github.com/ferdium/ferdium-server
 https://github.com/ferdium/ferdium-server/releases
 https://github.com/getferdi/server
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ferdi-server
-https://hub.docker.com/r/getferdi/ferdi-server

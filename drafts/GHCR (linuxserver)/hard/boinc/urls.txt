@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/boinc/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/boinc/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/BOINC/boinc
 https://api.github.com/repos/BOINC/boinc/releases/latest
 https://boinc.berkeley.edu
 https://github.com/BOINC/boinc
 https://github.com/BOINC/boinc/wiki
 https://github.com/linuxserver/docker-boinc/blob/f7a1ea8759dae4d9fed9069d86d25aceca07acc2/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/boinc
 https://packages.ubuntu.com/search?keywords=boinc-client
 https://raw.githubusercontent.com/linuxserver/docker-boinc/master/Dockerfile

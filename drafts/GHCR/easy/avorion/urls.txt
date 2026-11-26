@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/avorion/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/avorion/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/avorion
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://www.steampowered.com

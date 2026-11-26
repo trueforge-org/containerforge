@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/halflife2deathmatch/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/halflife2deathmatch/Chart.yaml
+# OTHER sources
 https://developer.valvesoftware.com/wiki/Dedicated_Servers_List
 https://developer.valvesoftware.com/wiki/Half-Life_2:_Deathmatch_Dedicated_Server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/halflife2deathmatch
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
 https://store.steampowered.com/app/320
 https://www.steampowered.com

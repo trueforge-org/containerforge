@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/audacity/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/audacity/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/audacity/audacity
 https://api.github.com/repos/audacity/audacity/releases/latest
 https://github.com/audacity/audacity
 https://github.com/linuxserver/docker-audacity
 https://github.com/linuxserver/docker-audacity/blob/b0c6f0d2e0d8650f40ef6e5a8661baa2230a5812/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/audacity
 https://manual.audacityteam.org
 https://raw.githubusercontent.com/linuxserver/docker-audacity/master/Dockerfile
 https://www.audacityteam.org

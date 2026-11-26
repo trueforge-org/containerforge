@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/airdcpp-webclient/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/airdcpp-webclient/Chart.yaml
+https://hub.docker.com/v2/repositories/gangefors/airdcpp-webclient/
+https://hub.docker.com/v2/repositories/gangefors/airdcpp-webclient/tags?page_size=10
+# OTHER sources
 http://airdcpp.net
 http://airdcpp.net/docs/installation/installation.html
 https://airdcpp-web.github.io
 https://github.com/airdcpp-web/airdcpp-webclient
 https://github.com/gangefors/docker-airdcpp-webclient/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/airdcpp-webclient
-https://hub.docker.com/r/gangefors/airdcpp-webclient

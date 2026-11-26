@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/avm-exporter/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/avm-exporter/Chart.yaml
+https://hub.docker.com/v2/repositories/pdreker/fritz_exporter/
+https://hub.docker.com/v2/repositories/pdreker/fritz_exporter/tags?page_size=10
+# OTHER sources
 https://github.com/pdreker/fritz_exporter
 https://github.com/pdreker/fritz_exporter/blob/09a957c03cd7c253ea8147d0aecd1a06a08b6bbe/Dockerfile
 https://github.com/pdreker/fritz_exporter/releases/tag/fritzexporter-v4.0.3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/avm-exporter
-https://hub.docker.com/r/pdreker/fritz_exporter
 https://pdreker.github.io/fritz_exporter

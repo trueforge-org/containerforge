@@ -1,10 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/filebot/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/filebot/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/jlesage/docker-filebot/releases/tags/v26.09.2
 https://get.filebot.net/filebot/FileBot_5.3.0
 https://get.filebot.net/filebot/FileBot_5.3.0/FileBot_5.3.0-portable.tar.xz
 https://github.com/jlesage/docker-filebot
 https://github.com/jlesage/docker-filebot/blob/v26.09.2/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/filebot
-https://hub.docker.com/v2/repositories/jlesage/filebot/tags/v26.09.2
 https://raw.githubusercontent.com/jlesage/docker-filebot/master/LICENSE
 https://raw.githubusercontent.com/jlesage/docker-filebot/v26.09.2/Dockerfile
 https://www.filebot.net

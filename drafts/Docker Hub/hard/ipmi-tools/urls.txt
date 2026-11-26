@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ipmi-tools/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ipmi-tools/Chart.yaml
+https://hub.docker.com/v2/repositories/edchamberlain/ipmi-tools/
+https://hub.docker.com/v2/repositories/edchamberlain/ipmi-tools/tags?page_size=10
+# OTHER sources
 https://github.com/EdwardChamberlain/IPMI-Fan-Controller
 https://github.com/EdwardChamberlain/IPMI-Fan-Controller/blob/d1ea5f15163a5ca6a5e20d6ba5c9b2fea128b246/dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ipmi-tools
-https://hub.docker.com/r/edchamberlain/ipmi-tools

@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/netdata/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/netdata/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/netdata/netdata
 https://api.github.com/repos/netdata/netdata/releases/latest
 https://github.com/netdata
 https://github.com/netdata/netdata
 https://github.com/netdata/netdata/blob/v2.13.0/packaging/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/netdata
 https://learn.netdata.cloud
 https://raw.githubusercontent.com/netdata/netdata/v2.13.0/packaging/docker/Dockerfile
 https://www.netdata.cloud

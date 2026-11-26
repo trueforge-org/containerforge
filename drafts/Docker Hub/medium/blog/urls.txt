@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/blog/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/blog/Chart.yaml
+https://hub.docker.com/v2/repositories/m1k1o/blog/
+https://hub.docker.com/v2/repositories/m1k1o/blog/tags?page_size=10
+# OTHER sources
 https://github.com/m1k1o/blog
 https://github.com/m1k1o/blog/blob/f778915ab85f7ea86e1f35e60e5acecfbc90a15f/Dockerfile
 https://github.com/m1k1o/blog/releases/tag/v1.5.0
 https://github.com/nicholaswilde/docker-blog
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/blog
-https://hub.docker.com/r/m1k1o/blog

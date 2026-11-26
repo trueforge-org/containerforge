@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/adminer/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/adminer/Chart.yaml
+https://hub.docker.com/v2/repositories/library/adminer/
+https://hub.docker.com/v2/repositories/library/adminer/tags?page_size=10
+# OTHER sources
 https://github.com/TimWolla/docker-adminer/blob/6d83dde54e9e8a76c9e003eb494e296808a2a627/6/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/adminer
 https://github.com/vrana/adminer
-https://hub.docker.com/_/adminer
 https://www.adminer.org

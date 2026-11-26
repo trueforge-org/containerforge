@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/proxmox-backup-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/proxmox-backup-server/Chart.yaml
+https://hub.docker.com/v2/repositories/ayufan/proxmox-backup-server/
+https://hub.docker.com/v2/repositories/ayufan/proxmox-backup-server/tags?page_size=10
+# OTHER sources
 https://github.com/ayufan/pve-backup-server-dockerfiles
 https://github.com/ayufan/pve-backup-server-dockerfiles/blob/v4.2.0-1/dockerfiles/Dockerfile.build
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/proxmox-backup-server
-https://hub.docker.com/r/ayufan/proxmox-backup-server
 https://pbs.proxmox.com/docs
 https://www.proxmox.com/en/products/proxmox-backup-server/overview

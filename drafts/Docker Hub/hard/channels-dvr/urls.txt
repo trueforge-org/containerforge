@@ -1,3 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/channels-dvr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/channels-dvr/Chart.yaml
+https://hub.docker.com/v2/repositories/fancybits/channels-dvr/
+https://hub.docker.com/v2/repositories/fancybits/channels-dvr/tags?page_size=10
+# OTHER sources
 https://cdn.channelsdvr.net/dvr
 https://cdn.channelsdvr.net/dvr/latest.txt
 https://getchannels.com
@@ -5,5 +11,3 @@ https://getchannels.com/docs
 https://getchannels.com/dvr
 https://getchannels.com/dvr-server
 https://getchannels.com/dvr/setup.sh
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/channels-dvr
-https://hub.docker.com/r/fancybits/channels-dvr

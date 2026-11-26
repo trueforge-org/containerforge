@@ -1,6 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/embystat/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/embystat/Chart.yaml
+# OTHER sources
 https://github.com/linuxserver/docker-embystat/blob/5fa06c158344aeefbec98e0e211b34198f4f2063/Dockerfile
 https://github.com/mregni/EmbyStat
 https://github.com/mregni/EmbyStat/releases/tag/0.2.0-beta.30
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/embystat
 https://raw.githubusercontent.com/linuxserver/docker-embystat/5fa06c158344aeefbec98e0e211b34198f4f2063/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/embystat/values.yaml

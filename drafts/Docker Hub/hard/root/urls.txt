@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/root/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/root/Chart.yaml
+https://hub.docker.com/v2/repositories/bgameiro/arch-cern-root/
+https://hub.docker.com/v2/repositories/bgameiro/arch-cern-root/tags?page_size=10
+# OTHER sources
 http://...:8888
 https://github.com/BGameiro2000/dockerfile/blob/master/arch-cern-root/Dockerfile
 https://github.com/root-project/root
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/root
-https://hub.docker.com/r/bgameiro/arch-cern-root
 https://root.cern
 https://root.cern/manual

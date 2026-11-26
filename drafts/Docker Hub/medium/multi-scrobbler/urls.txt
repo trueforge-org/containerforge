@@ -1,10 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/multi-scrobbler/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/multi-scrobbler/Chart.yaml
+https://hub.docker.com/v2/repositories/foxxmd/multi-scrobbler/
+https://hub.docker.com/v2/repositories/foxxmd/multi-scrobbler/tags?page_size=10
+# OTHER sources
 https://docs.multi-scrobbler.app/installation
 https://foxxmd.github.io/multi-scrobbler/configuration
 https://github.com/FoxxMD/multi-scrobbler
 https://github.com/FoxxMD/multi-scrobbler/blob/d164f568a47874e7a8d33604db630e6edbfdcca6/Dockerfile
 https://github.com/FoxxMD/multi-scrobbler/releases/tag/0.21.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/multi-scrobbler
-https://hub.docker.com/r/foxxmd/multi-scrobbler
 https://raw.githubusercontent.com/FoxxMD/multi-scrobbler/0.21.1/.env.example
 https://raw.githubusercontent.com/FoxxMD/multi-scrobbler/0.21.1/README.md
 https://raw.githubusercontent.com/FoxxMD/multi-scrobbler/d164f568a47874e7a8d33604db630e6edbfdcca6/Dockerfile

@@ -1,12 +1,16 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/metube/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/metube/Chart.yaml
+https://hub.docker.com/v2/repositories/library/node/
+https://hub.docker.com/v2/repositories/library/node/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/alexta69/metube/releases/latest
 https://github.com/alexta69/metube
 https://github.com/alexta69/metube/blob/7746086e0e920925cb14c8f4843084e29548a877/Dockerfile
 https://github.com/alexta69/metube/releases/tag/2026.11.14
 https://github.com/alexta69/metube/releases/tag/2026.11.24
 https://github.com/jim60105/bgutil-ytdlp-pot-provider-rs/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metube
 https://raw.githubusercontent.com/alexta69/metube/master/Dockerfile
 https://raw.githubusercontent.com/alexta69/metube/master/README.md
 https://raw.githubusercontent.com/alexta69/metube/master/docker-entrypoint.sh
 https://raw.githubusercontent.com/alexta69/metube/master/pyproject.toml
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/metube/values.yaml

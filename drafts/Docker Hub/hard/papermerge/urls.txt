@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/papermerge/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/papermerge/Chart.yaml
+https://hub.docker.com/v2/repositories/papermerge/papermerge/
+https://hub.docker.com/v2/repositories/papermerge/papermerge/tags?page_size=10
+# OTHER sources
 https://docs.papermerge.io
 https://github.com/ciur/papermerge
 https://github.com/papermerge/papermerge-core
 https://github.com/papermerge/papermerge-core/blob/831c2e355cf5c841c4587fea19d89e9b46a92b79/docker/standard/Dockerfile
 https://github.com/papermerge/papermerge-core/releases/tag/3.5.3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/papermerge
-https://hub.docker.com/r/papermerge/papermerge
 https://papermerge.com

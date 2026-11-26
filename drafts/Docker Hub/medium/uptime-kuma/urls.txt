@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/uptime-kuma/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/uptime-kuma/Chart.yaml
+https://hub.docker.com/v2/repositories/louislam/uptime-kuma/
+https://hub.docker.com/v2/repositories/louislam/uptime-kuma/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/louislam/uptime-kuma/license
 https://github.com/louislam/uptime-kuma
 https://github.com/louislam/uptime-kuma/blob/1.23.17/docker/dockerfile
 https://github.com/louislam/uptime-kuma/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/uptime-kuma
-https://hub.docker.com/r/louislam/uptime-kuma
 https://raw.githubusercontent.com/louislam/uptime-kuma/1.23.17/docker/dockerfile
 https://raw.githubusercontent.com/louislam/uptime-kuma/2.5.12/docker/dockerfile

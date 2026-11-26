@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/codeproject-ai-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/codeproject-ai-server/Chart.yaml
+https://hub.docker.com/v2/repositories/codeproject/ai-server/
+https://hub.docker.com/v2/repositories/codeproject/ai-server/tags?page_size=10
+# OTHER sources
 https://codeproject.github.io/codeproject.ai
 https://codeproject.github.io/codeproject.ai/install/install_on_linux.html
 https://dot.net/v1/dotnet-install.sh
 https://github.com/codeproject/CodeProject.AI-Server
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/codeproject-ai-server
-https://hub.docker.com/r/codeproject/ai-server

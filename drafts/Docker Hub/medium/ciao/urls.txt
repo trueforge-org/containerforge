@@ -1,5 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ciao/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ciao/Chart.yaml
+https://hub.docker.com/v2/repositories/brotandgames/ciao/
+https://hub.docker.com/v2/repositories/brotandgames/ciao/tags?page_size=10
+https://hub.docker.com/v2/repositories/library/ruby/
+https://hub.docker.com/v2/repositories/library/ruby/tags?page_size=10
+# OTHER sources
 https://brotandgames.com/ciao
 https://github.com/brotandgames/ciao
 https://github.com/brotandgames/ciao/blob/2ae06d337c5f8e669273228852613575cdb91e2d/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ciao
-https://hub.docker.com/r/brotandgames/ciao

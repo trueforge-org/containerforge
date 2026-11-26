@@ -1,8 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/paperless-ngx/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/paperless-ngx/Chart.yaml
+https://hub.docker.com/v2/repositories/apache/tika/
+https://hub.docker.com/v2/repositories/apache/tika/tags?page_size=10
+https://hub.docker.com/v2/repositories/gotenberg/gotenberg/
+https://hub.docker.com/v2/repositories/gotenberg/gotenberg/tags?page_size=10
+# OTHER sources
 https://example.com
 https://github.com/gotenberg/gotenberg
 https://github.com/gotenberg/gotenberg/blob/da5d11a1bc50a46afe29e23fed471fa6ed3cf05e/build/Dockerfile
 https://github.com/paperless-ngx/paperless-ngx
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/paperless-ngx
-https://hub.docker.com/r/apache/tika
-https://hub.docker.com/r/gotenberg/gotenberg
 https://paperless-ngx.readthedocs.io/en/latest

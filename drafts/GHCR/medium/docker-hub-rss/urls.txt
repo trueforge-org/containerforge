@@ -1,7 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docker-hub-rss/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docker-hub-rss/Chart.yaml
+# OTHER sources
 https://github.com/TheConnMan/docker-hub-rss
 https://github.com/TheConnMan/docker-hub-rss/blob/5c8152db7d37641aa589e2e38a656823f8910d51/Dockerfile
 https://github.com/TheConnMan/docker-hub-rss/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/docker-hub-rss
 https://raw.githubusercontent.com/TheConnMan/docker-hub-rss/master/Dockerfile
 https://raw.githubusercontent.com/TheConnMan/docker-hub-rss/master/package.json
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/docker-hub-rss/values.yaml

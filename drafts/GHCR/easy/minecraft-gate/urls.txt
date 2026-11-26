@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/minecraft-gate/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/minecraft-gate/Chart.yaml
+# OTHER sources
 https://gate.minekube.com
 https://github.com/minekube/gate
 https://github.com/minekube/gate/blob/f47fd8c3ec6f/Dockerfile
 https://github.com/minekube/gate/releases/expanded_assets/v0.82.3
 https://github.com/minekube/gate/releases/latest
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-gate
 https://minekube.com
 https://raw.githubusercontent.com/minekube/gate/master/Dockerfile
 https://raw.githubusercontent.com/minekube/gate/master/LICENSE

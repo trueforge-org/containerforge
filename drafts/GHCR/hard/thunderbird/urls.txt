@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/thunderbird/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/thunderbird/Chart.yaml
+# OTHER sources
 https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/161.0/linux-x86_64/en-US/thunderbird-161.0.tar.xz
 https://download.mozilla.org/?product=thunderbird-latest&os=linux64&lang=en-US
 https://github.com/ich777/docker-thunderbird
 https://github.com/ich777/docker-thunderbird/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/thunderbird
 https://product-details.mozilla.org/1.0/thunderbird_versions.json
 https://raw.githubusercontent.com/ich777/docker-thunderbird/master/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/thunderbird/values.yaml
 https://www.thunderbird.net

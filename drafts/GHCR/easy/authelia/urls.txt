@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/authelia/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/authelia/Chart.yaml
+# OTHER sources
 https://github.com/authelia/authelia
 https://github.com/authelia/authelia/blob/8da42b2348b0351c6284a2940a9c5eec3d4cd3fd/Dockerfile
 https://github.com/authelia/chartrepo
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/authelia
 https://raw.githubusercontent.com/authelia/authelia/8da42b2348b0351c6284a2940a9c5eec3d4cd3fd/Dockerfile
 https://www.authelia.com

@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/freecad-desktop-g3/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/freecad-desktop-g3/Chart.yaml
+https://hub.docker.com/v2/repositories/accetto/ubuntu-vnc-xfce-freecad-g3/
+https://hub.docker.com/v2/repositories/accetto/ubuntu-vnc-xfce-freecad-g3/tags?page_size=10
+# OTHER sources
 https://github.com/FreeCAD/FreeCAD
 https://github.com/accetto/headless-drawing-g3
 https://github.com/accetto/headless-drawing-g3/blob/master/docker/Dockerfile.xfce.drawing.freecad
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/freecad-desktop-g3
-https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-freecad-g3
 https://wiki.freecad.org
 https://www.freecad.org

@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rss-proxy/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rss-proxy/Chart.yaml
+https://hub.docker.com/v2/repositories/damoeb/rss-proxy/
+https://hub.docker.com/v2/repositories/damoeb/rss-proxy/tags?page_size=10
+# OTHER sources
 https://github.com/damoeb/rss-proxy
 https://github.com/damoeb/rss-proxy/blob/d91dbde/Dockerfile
 https://github.com/damoeb/rss-proxy/blob/d91dbdef4051951fc7a6d209a23aea55b5f85a1d/Dockerfile
 https://github.com/damoeb/rss-proxy/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rss-proxy
-https://hub.docker.com/r/damoeb/rss-proxy

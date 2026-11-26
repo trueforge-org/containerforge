@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rustdesk/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rustdesk/Chart.yaml
+# OTHER sources
 https://github.com/rustdesk-org/rustdesk-server
 https://github.com/rustdesk-org/rustdesk-server/blob/1.1.16/docker/Dockerfile
 https://github.com/rustdesk/rustdesk-server
 https://github.com/rustdesk/rustdesk-server/releases/tag/1.1.16
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rustdesk
 https://raw.githubusercontent.com/rustdesk-org/rustdesk-server/1.1.16/docker/Dockerfile
 https://raw.githubusercontent.com/rustdesk/rustdesk-server/1.1.16/LICENSE
 https://rustdesk.com

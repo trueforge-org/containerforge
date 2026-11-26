@@ -1,10 +1,15 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/immich/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/immich/Chart.yaml
+https://hub.docker.com/v2/repositories/valkey/valkey/
+https://hub.docker.com/v2/repositories/valkey/valkey/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/immich-app/immich/contents/docker/docker-compose.yml?ref=v3.4.2
 https://api.github.com/repos/immich-app/immich/releases/tags/v3.4.2
 https://docs.immich.app
 https://github.com/immich-app/immich
 https://github.com/immich-app/immich/blob/v3.4.1/machine-learning/Dockerfile
 https://github.com/immich-app/immich/blob/v3.4.2/server/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/immich
 https://immich.app
 https://raw.githubusercontent.com/immich-app/immich/v3.4.1/machine-learning/Dockerfile
 https://raw.githubusercontent.com/immich-app/immich/v3.4.2/server/Dockerfile

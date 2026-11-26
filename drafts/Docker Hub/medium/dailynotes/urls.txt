@@ -1,10 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dailynotes/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dailynotes/Chart.yaml
+https://hub.docker.com/v2/repositories/m0ngr31/dailynotes/
+https://hub.docker.com/v2/repositories/m0ngr31/dailynotes/tags?page_size=10
+# OTHER sources
 https://github.com/djedi/DailyNotes
 https://github.com/djedi/DailyNotes/blob/9d1a3a7ea3597d93b2c8c4600437318a59eaa028/Dockerfile
 https://github.com/djedi/DailyNotes/blob/HEAD/requirements.txt
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dailynotes
-https://hub.docker.com/r/m0ngr31/dailynotes
-https://hub.docker.com/v2/repositories/m0ngr31/dailynotes/tags/latest
 https://raw.githubusercontent.com/djedi/DailyNotes/9d1a3a7ea3597d93b2c8c4600437318a59eaa028/Dockerfile
 https://raw.githubusercontent.com/djedi/DailyNotes/9d1a3a7ea3597d93b2c8c4600437318a59eaa028/LICENSE
 https://raw.githubusercontent.com/djedi/DailyNotes/9d1a3a7ea3597d93b2c8c4600437318a59eaa028/README.md
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dailynotes/values.yaml

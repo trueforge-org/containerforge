@@ -1,5 +1,9 @@
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bwapp
-https://hub.docker.com/r/raesene/bwapp
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bwapp/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bwapp/Chart.yaml
+https://hub.docker.com/v2/repositories/raesene/bwapp/
+https://hub.docker.com/v2/repositories/raesene/bwapp/tags?page_size=10
+# OTHER sources
 https://sourceforge.net/projects/bwapp
 https://sourceforge.net/projects/bwapp/files/bWAPP
 https://www.itsecgames.com

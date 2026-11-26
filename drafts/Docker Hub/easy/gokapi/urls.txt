@@ -1,7 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gokapi/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gokapi/Chart.yaml
+https://hub.docker.com/v2/repositories/curlimages/curl/
+https://hub.docker.com/v2/repositories/curlimages/curl/tags?page_size=10
+https://hub.docker.com/v2/repositories/f0rc3/gokapi/
+https://hub.docker.com/v2/repositories/f0rc3/gokapi/tags?page_size=10
+# OTHER sources
 http://.../setup
 https://github.com/Forceu/Gokapi
 https://github.com/Forceu/gokapi
 https://github.com/Forceu/gokapi/blob/9a4b289c604198c05589e34314e889d2c25386d8/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gokapi
 https://gokapi.readthedocs.io/en/latest
-https://hub.docker.com/r/f0rc3/gokapi

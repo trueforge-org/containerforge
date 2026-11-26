@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mattermost/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mattermost/Chart.yaml
+https://hub.docker.com/v2/repositories/mattermost/mattermost-enterprise-edition/
+https://hub.docker.com/v2/repositories/mattermost/mattermost-enterprise-edition/tags?page_size=10
+# OTHER sources
 https://docs.mattermost.com
 https://github.com/mattermost/docker
 https://github.com/mattermost/mattermost
 https://github.com/mattermost/mattermost-server
 https://github.com/mattermost/mattermost/blob/release-9.6/server/build/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mattermost
-https://hub.docker.com/r/mattermost/mattermost-enterprise-edition
 https://latest.mattermost.com/mattermost-enterprise-linux
 https://mattermost.com

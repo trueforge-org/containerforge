@@ -1,11 +1,15 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rsshub/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rsshub/Chart.yaml
+https://hub.docker.com/v2/repositories/browserless/chrome/
+https://hub.docker.com/v2/repositories/browserless/chrome/tags?page_size=10
+https://hub.docker.com/v2/repositories/diygod/rsshub/
+https://hub.docker.com/v2/repositories/diygod/rsshub/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/DIYgod/RSSHub
 https://docs.rsshub.app
 https://docs.rsshub.app/en/install
 https://github.com/DIYgod/RSSHub
 https://github.com/DIYgod/RSSHub/blob/c566e920fd386c19935954e1969ac8d7d3c8b5c4/Dockerfile
 https://github.com/DIYgod/RSSHub/releases/tag/v2026.11.20-8704.fcfe5ae
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rsshub
-https://hub.docker.com/r/browserless/chrome
-https://hub.docker.com/r/diygod/rsshub
-https://hub.docker.com/v2/repositories/diygod/rsshub/tags/latest
 https://raw.githubusercontent.com/DIYgod/RSSHub/c566e920fd386c19935954e1969ac8d7d3c8b5c4/Dockerfile

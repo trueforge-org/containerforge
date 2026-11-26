@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dayz/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dayz/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://community.bistudio.com/wiki/DayZ:Hosting_a_Linux_Server
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dayz
 https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dayz/values.yaml
 https://store.steampowered.com/app/223350
 https://www.bohemia.net/games/dayz

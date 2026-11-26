@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mosdns/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mosdns/Chart.yaml
+https://hub.docker.com/v2/repositories/601096721/mosdns/
+https://hub.docker.com/v2/repositories/601096721/mosdns/tags?page_size=10
+# OTHER sources
 https://8.8.8.8/dns-query
 https://github.com/IrineSistiana/mosdns
 https://github.com/Sagit-chu/mosdns-container/blob/HEAD/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mosdns
-https://hub.docker.com/r/601096721/mosdns
 https://irine-sistiana.gitbook.io/mosdns-wiki

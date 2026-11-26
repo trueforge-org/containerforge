@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mkvtoolnix/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mkvtoolnix/Chart.yaml
+# OTHER sources
 https://github.com/jlesage/docker-mkvtoolnix
 https://github.com/jlesage/docker-mkvtoolnix/blob/v26.10.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mkvtoolnix
 https://mkvtoolnix.download
 https://mkvtoolnix.download/doc
 https://mkvtoolnix.download/downloads.html

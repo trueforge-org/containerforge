@@ -1,12 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chroma/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chroma/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/chroma-core/chroma
 https://api.github.com/repos/chroma-core/chroma/contents/bin/docker_entrypoint.sh?ref=11f3c7435e71024aa0a2b53710a28d3289d922d1
 https://api.github.com/repos/chroma-core/chroma/contents/chromadb/config.py?ref=11f3c7435e71024aa0a2b53710a28d3289d922d1
 https://api.github.com/repos/chroma-core/chroma/releases/latest
-https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/chroma/values.yaml
 https://docs.trychroma.com
 https://github.com/chroma-core/chroma
 https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chroma
 https://pypi.org/pypi/chromadb/1.5.9/json
 https://pypi.org/pypi/chromadb/json
 https://raw.githubusercontent.com/chroma-core/chroma/11f3c7435e71024aa0a2b53710a28d3289d922d1/Dockerfile

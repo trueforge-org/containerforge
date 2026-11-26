@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zwavejs2mqtt/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zwavejs2mqtt/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/zwave-js/zwave-js-ui
 https://api.github.com/repos/zwave-js/zwave-js-ui/releases/tags/v11.27.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zwavejs2mqtt
 https://github.com/zwave-js/zwave-js-ui
 https://github.com/zwave-js/zwave-js-ui/blob/6aba3da40be776f8ee845de144477098978d3b74/docker/Dockerfile
 https://raw.githubusercontent.com/zwave-js/zwave-js-ui/6aba3da40be776f8ee845de144477098978d3b74/docker/Dockerfile

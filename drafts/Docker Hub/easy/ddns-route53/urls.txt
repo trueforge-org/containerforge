@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ddns-route53/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ddns-route53/Chart.yaml
+https://hub.docker.com/v2/repositories/crazymax/ddns-route53/
+https://hub.docker.com/v2/repositories/crazymax/ddns-route53/tags?page_size=10
+# OTHER sources
 https://crazymax.dev/ddns-route53
 https://crazymax.dev/ddns-route53/config
 https://crazymax.dev/ddns-route53/usage/cli
 https://github.com/crazy-max/ddns-route53
 https://github.com/crazy-max/ddns-route53/blob/d8e3a348afe6152e8919e9f2360ad4fec2a2b323/Dockerfile
 https://github.com/crazy-max/ddns-route53/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ddns-route53
-https://hub.docker.com/r/crazymax/ddns-route53

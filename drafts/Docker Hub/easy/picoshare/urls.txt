@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/picoshare/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/picoshare/Chart.yaml
+https://hub.docker.com/v2/repositories/mtlynch/picoshare/
+https://hub.docker.com/v2/repositories/mtlynch/picoshare/tags?page_size=10
+# OTHER sources
 http://...:4001
 https://github.com/mtlynch/picoshare
 https://github.com/mtlynch/picoshare/blob/v1.5.5/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/picoshare
-https://hub.docker.com/r/mtlynch/picoshare

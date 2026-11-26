@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/telethon-downloader/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/telethon-downloader/Chart.yaml
+https://hub.docker.com/v2/repositories/jsavargas/telethon_downloader/
+https://hub.docker.com/v2/repositories/jsavargas/telethon_downloader/tags?page_size=10
+# OTHER sources
 https://docs.telethon.dev
 https://github.com/jsavargas/telethon_downloader
 https://github.com/jsavargas/telethon_downloader/blob/HEAD/requirements.txt
 https://github.com/jsavargas/telethon_downloader/blob/ed9710a/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/telethon-downloader
-https://hub.docker.com/r/jsavargas/telethon_downloader
 https://raw.githubusercontent.com/jsavargas/telethon_downloader/ed9710a358ef6da97107073e64e6ae66e6ac2aff/License.md

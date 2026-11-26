@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lyrion-music-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lyrion-music-server/Chart.yaml
+https://hub.docker.com/v2/repositories/lmscommunity/lyrionmusicserver/
+https://hub.docker.com/v2/repositories/lmscommunity/lyrionmusicserver/tags?page_size=10
+# OTHER sources
 https://github.com/LMS-Community/slimserver
 https://github.com/LMS-Community/slimserver-platforms
 https://github.com/LMS-Community/slimserver-platforms/blob/d05c757/Docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lyrion-music-server
-https://hub.docker.com/r/lmscommunity/lyrionmusicserver
 https://lyrion.org
 https://lyrion.org/downloads
 https://lyrion.org/getting-started

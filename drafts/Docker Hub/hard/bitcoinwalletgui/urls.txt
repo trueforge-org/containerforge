@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitcoinwalletgui/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitcoinwalletgui/Chart.yaml
+https://hub.docker.com/v2/repositories/ulisses1478/bitcoinwallet-gui/
+https://hub.docker.com/v2/repositories/ulisses1478/bitcoinwallet-gui/tags?page_size=10
+# OTHER sources
 https://bitcoincore.org
 https://bitcoincore.org/bin/bitcoin-core-32.1/SHA256SUMS
 https://bitcoincore.org/en/doc
 https://github.com/bitcoin/bitcoin
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bitcoinwalletgui
-https://hub.docker.com/r/ulisses1478/bitcoinwallet-gui

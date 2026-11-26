@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/stun-turn-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/stun-turn-server/Chart.yaml
+# OTHER sources
 https://coturn.github.io
 https://coturn.net
 https://github.com/coturn/coturn
 https://github.com/coturn/coturn/releases/tag/docker/4.19.2-r0
 https://github.com/coturn/coturn/wiki
 https://github.com/ich777/docker-stun-turn-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/stun-turn-server
 https://packages.ubuntu.com/search?keywords=coturn&searchon=names&suite=all&section=all
 https://raw.githubusercontent.com/coturn/coturn/master/LICENSE

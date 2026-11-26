@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/trango/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/trango/Chart.yaml
+https://hub.docker.com/v2/repositories/tak786/trango-self-hosted/
+https://hub.docker.com/v2/repositories/tak786/trango-self-hosted/tags?page_size=10
+# OTHER sources
 https://$host:8443
 https://github.com/trango-io/trango-self-hosted
 https://github.com/trango-io/trango-self-hosted/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/trango
-https://hub.docker.com/r/tak786/trango-self-hosted
 https://trango.io

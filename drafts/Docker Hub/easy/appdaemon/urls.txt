@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/appdaemon/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/appdaemon/Chart.yaml
+https://hub.docker.com/v2/repositories/acockburn/appdaemon/
+https://hub.docker.com/v2/repositories/acockburn/appdaemon/tags?page_size=10
+# OTHER sources
 http://x:8123
 https://appdaemon.readthedocs.io
 https://github.com/AppDaemon/appdaemon
 https://github.com/AppDaemon/appdaemon/blob/239dd4b130f98a8053058fbe82d6cce9d62e919d/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/appdaemon
-https://hub.docker.com/r/acockburn/appdaemon

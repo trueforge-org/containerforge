@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/firefox-syncserver/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/firefox-syncserver/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/crazy-max/docker-firefox-syncserver/releases/latest
 https://api.github.com/repos/mozilla-services/syncserver
 https://github.com/crazy-max/docker-firefox-syncserver/blob/45fc9e0a5fa863fb109d5f4ae34b5d5e4656ee11/Dockerfile
 https://github.com/mozilla-services/syncserver
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/firefox-syncserver
 https://moz-services-docs.readthedocs.io/en/latest/howtos/run-sync-1.5.html
 https://mozilla-services.github.io/syncstorage-rs
 https://raw.githubusercontent.com/crazy-max/docker-firefox-syncserver/45fc9e0a5fa863fb109d5f4ae34b5d5e4656ee11/Dockerfile

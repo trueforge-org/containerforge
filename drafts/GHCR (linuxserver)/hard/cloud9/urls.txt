@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cloud9/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/cloud9/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/c9/core
 https://api.github.com/repos/c9/core/contents/package.json
 https://aws.amazon.com/cloud9
@@ -5,5 +9,4 @@ https://c9.github.io/core
 https://download.docker.com/linux/ubuntu
 https://github.com/c9/core
 https://github.com/linuxserver/docker-cloud9/blob/e8b635534987561f47ab7cc1c48e57c74f1c6d8a/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cloud9
 https://raw.githubusercontent.com/linuxserver/docker-cloud9/e8b635534987561f47ab7cc1c48e57c74f1c6d8a/Dockerfile

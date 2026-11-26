@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/traccar/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/traccar/Chart.yaml
+https://hub.docker.com/v2/repositories/traccar/traccar/
+https://hub.docker.com/v2/repositories/traccar/traccar/tags?page_size=10
+# OTHER sources
 https://github.com/traccar/traccar
 https://github.com/traccar/traccar/blob/45ae7321fe56688ca26f2f5b62e6dbb7a4737562/docker/Dockerfile.alpine
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traccar
-https://hub.docker.com/r/traccar/traccar
 https://raw.githubusercontent.com/traccar/traccar/master/docker/Dockerfile.alpine
 https://www.traccar.org/documentation

@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/local-ai/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/local-ai/Chart.yaml
+https://hub.docker.com/v2/repositories/localai/localai/
+https://hub.docker.com/v2/repositories/localai/localai/tags?page_size=10
+# OTHER sources
 https://github.com/go-skynet/LocalAI
 https://github.com/mudler/LocalAI
 https://github.com/mudler/LocalAI/blob/56f44d448ca585642de4ca13f0521c3096268f1f/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/local-ai
-https://hub.docker.com/r/localai/localai
 https://localai.io
 https://localai.io/docs

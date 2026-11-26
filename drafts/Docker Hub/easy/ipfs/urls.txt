@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ipfs/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ipfs/Chart.yaml
+https://hub.docker.com/v2/repositories/ipfs/kubo/
+https://hub.docker.com/v2/repositories/ipfs/kubo/tags?page_size=10
+# OTHER sources
 http://ipfs-probe:5001/api/v0/version
 https://docs.ipfs.tech
 https://github.com/ipfs/kubo
 https://github.com/ipfs/kubo/blob/v0.43.1/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ipfs
-https://hub.docker.com/r/ipfs/kubo

@@ -1,9 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/slash/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/slash/Chart.yaml
+https://hub.docker.com/v2/repositories/yourselfhosted/slash/
+https://hub.docker.com/v2/repositories/yourselfhosted/slash/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/yourselfhosted/slash
 https://github.com/boojack/slash
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slash
 https://github.com/yourselfhosted/slash
 https://github.com/yourselfhosted/slash/blob/489efa67f3752e0d55e3487f820394d973322a2f/Dockerfile
-https://hub.docker.com/r/yourselfhosted/slash
 https://raw.githubusercontent.com/yourselfhosted/slash/489efa67f3752e0d55e3487f820394d973322a2f/Dockerfile
 https://raw.githubusercontent.com/yourselfhosted/slash/main/docs/install.md
 https://raw.githubusercontent.com/yourselfhosted/slash/main/server/profile/profile.go

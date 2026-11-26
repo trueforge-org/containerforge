@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/remmina/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/remmina/Chart.yaml
+# OTHER sources
 https://github.com/FreeRDP/Remmina
 https://github.com/linuxserver/docker-remmina
 https://github.com/linuxserver/docker-remmina/blob/9c34e90f8d44/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/remmina
-https://hub.docker.com/v2/repositories/linuxserver/remmina/tags/1.4.43
 https://packages.ubuntu.com/resolute/remmina
 https://raw.githubusercontent.com/linuxserver/docker-remmina/9c34e90f8d44/Dockerfile
 https://remmina.org

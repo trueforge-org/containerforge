@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/profilarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/profilarr/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/Dictionarry-Hub/profilarr/releases/latest
 https://api.github.com/repos/denoland/deno/releases/tags/v2.9.8
 https://dictionarry.dev
 https://github.com/Dictionarry-Hub/profilarr
 https://github.com/Dictionarry-Hub/profilarr/blob/0583ee157985e8d69cb05f6047a3c4dda9f03b33/Dockerfile
 https://github.com/Dictionarry-Hub/profilarr/releases/tag/v2.3.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/profilarr
 https://raw.githubusercontent.com/Dictionarry-Hub/profilarr/0583ee157985e8d69cb05f6047a3c4dda9f03b33/Dockerfile

@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/stationeers/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/stationeers/Chart.yaml
+# OTHER sources
 https://archive.ubuntu.com/ubuntu
 https://developer.valvesoftware.com/wiki/SteamCMD
 https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/stationeers
 https://stationeers.net
 https://www.steampowered.com

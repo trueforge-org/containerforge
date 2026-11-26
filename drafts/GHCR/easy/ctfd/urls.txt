@@ -1,10 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ctfd/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ctfd/Chart.yaml
+# OTHER sources
 https://docs.ctfd.io
 https://github.com/CTFd/CTFd
 https://github.com/CTFd/CTFd/blob/5f345fbaa424e6a22b51addf7f27430927879ae2/Dockerfile
 https://github.com/CTFd/CTFd/blob/HEAD/requirements.txt
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ctfd
 https://raw.githubusercontent.com/CTFd/CTFd/3.8.9/Dockerfile
 https://raw.githubusercontent.com/CTFd/CTFd/3.8.9/LICENSE
 https://raw.githubusercontent.com/CTFd/CTFd/3.8.9/docker-entrypoint.sh
 https://raw.githubusercontent.com/CTFd/CTFd/3.8.9/requirements.txt
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ctfd/values.yaml

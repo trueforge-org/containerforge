@@ -1,10 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lancache-dns/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lancache-dns/Chart.yaml
+https://hub.docker.com/v2/repositories/lancachenet/lancache-dns/
+https://hub.docker.com/v2/repositories/lancachenet/lancache-dns/tags?page_size=10
+# OTHER sources
 http://lancache.net/docs/containers/dns
 https://github.com/lancachenet/dnstool
 https://github.com/lancachenet/lancache-dns
 https://github.com/lancachenet/lancache-dns/blob/6b4b60e/Dockerfile
 https://github.com/lancachenet/lancache-dns/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lancache-dns
 https://github.com/uklans/cache-domains
-https://hub.docker.com/r/lancachenet/lancache-dns
 https://lancache.net
 https://lancache.net/docs

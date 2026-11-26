@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flaresolverr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flaresolverr/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/FlareSolverr/FlareSolverr
 https://api.github.com/repos/FlareSolverr/FlareSolverr/releases/tags/v3.5.2
 https://github.com/FlareSolverr/FlareSolverr
 https://github.com/FlareSolverr/FlareSolverr/blob/93125d6ea6956906c8dfa29e169b2dc67d993dc3/Dockerfile
 https://github.com/FlareSolverr/FlareSolverr/blob/HEAD/requirements.txt
 https://github.com/FlareSolverr/FlareSolverr/releases/tag/v3.5.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flaresolverr
 https://raw.githubusercontent.com/FlareSolverr/FlareSolverr/93125d6ea6956906c8dfa29e169b2dc67d993dc3/Dockerfile

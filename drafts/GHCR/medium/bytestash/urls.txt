@@ -1,3 +1,6 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bytestash/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bytestash/Chart.yaml
+# OTHER sources
 https://github.com/jordan-dalby/ByteStash
 https://github.com/jordan-dalby/ByteStash/blob/eb4ecdfc30f2e7d1424137fa7fe3a9eed663218b/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bytestash

@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/filezilla/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/filezilla/Chart.yaml
+# OTHER sources
 https://filezilla-project.org
 https://github.com/linuxserver/docker-filezilla
 https://github.com/linuxserver/docker-filezilla/blob/ad89ad1bdd0f2bad2d7dd8a68a3f989c3449949f/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/filezilla
 https://packages.ubuntu.com/resolute/filezilla
 https://raw.githubusercontent.com/linuxserver/docker-digikam/fd0663bebb867b7dba24c63d14e0493e7d94c0b9/README.md
 https://raw.githubusercontent.com/linuxserver/docker-filezilla/ad89ad1bdd0f2bad2d7dd8a68a3f989c3449949f/Dockerfile

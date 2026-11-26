@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zoneminder/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/zoneminder/Chart.yaml
+https://hub.docker.com/v2/repositories/dlandon/zoneminder.unraid/
+https://hub.docker.com/v2/repositories/dlandon/zoneminder.unraid/tags?page_size=10
+# OTHER sources
 https://github.com/ZoneMinder/zoneminder
 https://github.com/dlandon/zoneminder.unraid/blob/ee9d87e8d1a6e539206f6412109593847eae2d84/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zoneminder
-https://hub.docker.com/r/dlandon/zoneminder.unraid
 https://zmrepo.zoneminder.com
 https://zmrepo.zoneminder.com/debian/release-1.38/resolute
 https://zoneminder.com

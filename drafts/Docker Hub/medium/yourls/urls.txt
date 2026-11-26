@@ -1,12 +1,15 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/yourls/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/yourls/Chart.yaml
+https://hub.docker.com/v2/repositories/library/yourls/
+https://hub.docker.com/v2/repositories/library/yourls/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/YOURLS/YOURLS
 https://api.github.com/repos/YOURLS/YOURLS/releases
 https://docs.yourls.org
 https://github.com/YOURLS/YOURLS
 https://github.com/YOURLS/containers/blob/ab773d7d9e7408f66b532736ceea60324b9f3e3f/images/yourls/Dockerfile.template
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/yourls
-https://hub.docker.com/_/yourls
 https://raw.githubusercontent.com/YOURLS/YOURLS/master/user/config-sample.php
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/yourls/values.yaml
 https://yourls.org
 https://yourls.org/docs
 https://yourls.org/docs/guide/requirements

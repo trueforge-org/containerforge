@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/backrest/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/backrest/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/garethgeorge/backrest
 https://api.github.com/repos/garethgeorge/backrest/releases/latest
 https://garethgeorge.github.io/backrest
@@ -5,5 +9,4 @@ https://garethgeorge.github.io/backrest/introduction/getting-started
 https://github.com/garethgeorge/backrest
 https://github.com/garethgeorge/backrest/blob/875c9cb51e626a75276a64da42c6a9ec0695010a/Dockerfile.alpine
 https://github.com/restic/restic/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/backrest
 https://raw.githubusercontent.com/garethgeorge/backrest/main/Dockerfile.alpine

@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/amcrest2mqtt/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/amcrest2mqtt/Chart.yaml
+https://hub.docker.com/v2/repositories/dchesterton/amcrest2mqtt/
+https://hub.docker.com/v2/repositories/dchesterton/amcrest2mqtt/tags?page_size=10
+# OTHER sources
 https://github.com/dchesterton/amcrest2mqtt
 https://github.com/dchesterton/amcrest2mqtt/blob/9917b41381c62ef32281c0f508caf3254cf76968/Dockerfile
 https://github.com/dchesterton/amcrest2mqtt/blob/HEAD/requirements.txt
 https://github.com/dchesterton/amcrest2mqtt/releases/tag/1.0.16
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/amcrest2mqtt
-https://hub.docker.com/r/dchesterton/amcrest2mqtt

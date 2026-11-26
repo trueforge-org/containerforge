@@ -1,8 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/qwantify/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/qwantify/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/wanjohiryan/qwantify
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/qwantify
 https://github.com/wanjohiryan/qwantify
 https://github.com/wanjohiryan/qwantify/blob/2d4c204c8902da9026fc15baf21eab0fedc0f0dd/gamevm/base/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/qwantify/values.yaml
 https://raw.githubusercontent.com/wanjohiryan/qwantify/master/docker/base/Dockerfile
 https://raw.githubusercontent.com/wanjohiryan/qwantify/master/docker/base/entrypoint.sh
 https://raw.githubusercontent.com/wanjohiryan/qwantify/master/gamevm/base/Dockerfile

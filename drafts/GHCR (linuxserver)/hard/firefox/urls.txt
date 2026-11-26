@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/firefox/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/firefox/Chart.yaml
+# OTHER sources
 https://archive.mozilla.org/pub/firefox/releases/161.0/SHA512SUMS
 https://archive.mozilla.org/pub/firefox/releases/161.0/linux-aarch64/en-US/firefox-161.0.tar.xz
 https://archive.mozilla.org/pub/firefox/releases/161.0/linux-x86_64/en-US/firefox-161.0.tar.xz
@@ -6,7 +10,6 @@ https://download.mozilla.org/?product=firefox-160.0.1-SSL&os=linux64-aarch64&lan
 https://github.com/linuxserver/docker-firefox
 https://github.com/linuxserver/docker-firefox/blob/1be26bbc8f8aa6fea0e94f46a68bbc660a030d47/Dockerfile
 https://github.com/mozilla-firefox/firefox
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/firefox
 https://product-details.mozilla.org/1.0/firefox_versions.json
 https://raw.githubusercontent.com/linuxserver/docker-firefox/1be26bbc8f8aa6fea0e94f46a68bbc660a030d47/Dockerfile
 https://support.mozilla.org

@@ -1,3 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/discordgsm/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/discordgsm/Chart.yaml
+https://hub.docker.com/v2/repositories/discordgsm/discord-game-server-monitor/
+https://hub.docker.com/v2/repositories/discordgsm/discord-game-server-monitor/tags?page_size=10
+# OTHER sources
 https://discordgsm.com
 https://discordgsm.com/guide
 https://discordgsm.com/guide/how-to-get-a-discord-bot-token
@@ -5,5 +11,3 @@ https://github.com/DiscordGSM/GameServerMonitor
 https://github.com/DiscordGSM/GameServerMonitor/blob/17d2e124a3d7a4b4cc4b64bada325f363fb162da/Dockerfile
 https://github.com/DiscordGSM/GameServerMonitor/blob/HEAD/requirements.txt
 https://github.com/DiscordGSM/GameServerMonitor/releases/tag/2.20.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/discordgsm
-https://hub.docker.com/r/discordgsm/discord-game-server-monitor

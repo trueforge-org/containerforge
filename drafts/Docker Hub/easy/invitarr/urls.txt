@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/invitarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/invitarr/Chart.yaml
+https://hub.docker.com/v2/repositories/piratify/invitarr/
+https://hub.docker.com/v2/repositories/piratify/invitarr/tags?page_size=10
+# OTHER sources
 https://github.com/Sleepingpirates/Invitarr
 https://github.com/Sleepingpirates/Invitarr/blob/HEAD/requirements.txt
 https://github.com/Sleepingpirates/Invitarr/blob/ce30f130dac51352fd5a1336c87c30cece79f085/Dockerfile
 https://github.com/faizyy01/Invitarr
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/invitarr
-https://hub.docker.com/r/piratify/invitarr

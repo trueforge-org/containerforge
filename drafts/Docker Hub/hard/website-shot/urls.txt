@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/website-shot/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/website-shot/Chart.yaml
+https://hub.docker.com/v2/repositories/flowko1/website-shot/
+https://hub.docker.com/v2/repositories/flowko1/website-shot/tags?page_size=10
+# OTHER sources
 https://github.com/Flowko/website-shot
 https://github.com/Flowko/website-shot/blob/72076a845f18d38522b696fd080dac3eda3cd781/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/website-shot
-https://hub.docker.com/r/flowko1/website-shot

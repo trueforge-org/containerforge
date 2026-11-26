@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openttd/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/openttd/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/OpenTTD/OpenTTD/releases/latest
 https://cdn.openttd.org/openttd-releases/15.3/openttd-15.3-linux-generic-amd64.tar.xz
 https://github.com/OpenTTD/OpenTTD
 https://github.com/ich777/docker-openttd-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openttd
 https://raw.githubusercontent.com/ich777/docker-openttd-server/master/Dockerfile
 https://wiki.openttd.org
 https://wiki.openttd.org/en

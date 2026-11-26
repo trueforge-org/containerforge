@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/vikunja/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/vikunja/Chart.yaml
+https://hub.docker.com/v2/repositories/vikunja/vikunja/
+https://hub.docker.com/v2/repositories/vikunja/vikunja/tags?page_size=10
+# OTHER sources
 https://github.com/go-vikunja/vikunja
 https://github.com/go-vikunja/vikunja/blob/v2.8.0/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vikunja
-https://hub.docker.com/r/vikunja/vikunja
 https://vikunja.io/docs

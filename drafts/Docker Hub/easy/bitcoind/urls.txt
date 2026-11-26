@@ -1,3 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitcoind/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/bitcoind/Chart.yaml
+https://hub.docker.com/v2/repositories/ofawx/bitcoind/
+https://hub.docker.com/v2/repositories/ofawx/bitcoind/tags?page_size=10
+# OTHER sources
 https://bitcoin.org
 https://bitcoincore.org
 https://bitcoincore.org/bin/bitcoin-core-32.1/SHA256SUMS
@@ -5,5 +11,3 @@ https://github.com/bitcoin/bitcoin
 https://github.com/kylemanna/docker-bitcoind
 https://github.com/ofawx/docker-bitcoind
 https://github.com/ofawx/docker-bitcoind/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bitcoind
-https://hub.docker.com/r/ofawx/bitcoind

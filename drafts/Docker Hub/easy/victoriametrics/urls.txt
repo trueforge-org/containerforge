@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/victoriametrics/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/victoriametrics/Chart.yaml
+https://hub.docker.com/v2/repositories/victoriametrics/victoria-metrics/
+https://hub.docker.com/v2/repositories/victoriametrics/victoria-metrics/tags?page_size=10
+# OTHER sources
 http://...:8428
 https://docs.victoriametrics.com
 https://github.com/VictoriaMetrics/VictoriaMetrics
 https://github.com/VictoriaMetrics/VictoriaMetrics/blob/v1.156.0/app/victoria-metrics/deployment/Dockerfile
 https://github.com/VictoriaMetrics/VictoriaMetrics/tree/master
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/victoriametrics
-https://hub.docker.com/r/victoriametrics/victoria-metrics
 https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/v1.157.0/LICENSE

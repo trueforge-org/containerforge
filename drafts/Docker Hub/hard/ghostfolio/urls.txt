@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ghostfolio/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/ghostfolio/Chart.yaml
+https://hub.docker.com/v2/repositories/ghostfolio/ghostfolio/
+https://hub.docker.com/v2/repositories/ghostfolio/ghostfolio/tags?page_size=10
+# OTHER sources
 http://..:3333
 https://ghostfol.io
 https://github.com/ghostfolio/ghostfolio
 https://github.com/ghostfolio/ghostfolio/blob/45d692301c1e9c0dca5bcc77cb06a9e408af019c/Dockerfile
 https://github.com/ghostfolio/ghostfolio/releases/tag/3.100.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ghostfolio
-https://hub.docker.com/r/ghostfolio/ghostfolio

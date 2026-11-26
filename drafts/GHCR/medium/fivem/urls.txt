@@ -1,9 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fivem/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fivem/Chart.yaml
+# OTHER sources
 https://docs.fivem.net/docs/server-download/?platform=legacy&os=linux
 https://fivem.net
 https://github.com/citizenfx/fivem
 https://github.com/ich777/docker-fivem-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fivem
 https://raw.githubusercontent.com/ich777/docker-fivem-server/master/Dockerfile
 https://raw.githubusercontent.com/ich777/docker-fivem-server/master/scripts/start.sh
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fivem/values.yaml
 https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master

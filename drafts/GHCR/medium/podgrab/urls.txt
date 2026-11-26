@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/podgrab/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/podgrab/Chart.yaml
+# OTHER sources
 https://github.com/akhilrex/podgrab
 https://github.com/akhilrex/podgrab/blob/032248091294dbf5b6a439a5afd93788a7cc647f/Dockerfile
 https://github.com/akhilrex/podgrab/tree/032248091294dbf5b6a439a5afd93788a7cc647f
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/podgrab
 https://go.dev/dl
 https://raw.githubusercontent.com/akhilrex/podgrab/032248091294dbf5b6a439a5afd93788a7cc647f/Dockerfile
 https://raw.githubusercontent.com/akhilrex/podgrab/032248091294dbf5b6a439a5afd93788a7cc647f/go.mod

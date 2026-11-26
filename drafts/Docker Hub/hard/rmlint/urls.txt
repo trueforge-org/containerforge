@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rmlint/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rmlint/Chart.yaml
+https://hub.docker.com/v2/repositories/bobbintb/docker-rmlint-unraid/
+https://hub.docker.com/v2/repositories/bobbintb/docker-rmlint-unraid/tags?page_size=10
+# OTHER sources
 https://github.com/bobbintb/docker-rmlint-unraid/blob/e0f6d3c0a2a98751545a5bce577b4703c056286e/Dockerfile
 https://github.com/sahib/rmlint
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rmlint
-https://hub.docker.com/r/bobbintb/docker-rmlint-unraid
 https://rmlint.readthedocs.io
 https://rmlint.readthedocs.io/en/master

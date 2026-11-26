@@ -1,10 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/signal-cli-rest-api/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/signal-cli-rest-api/Chart.yaml
+https://hub.docker.com/v2/repositories/bbernhard/signal-cli-rest-api/
+https://hub.docker.com/v2/repositories/bbernhard/signal-cli-rest-api/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/AsamK/signal-cli/releases/latest
 https://api.github.com/repos/bbernhard/signal-cli-rest-api/license
 https://api.github.com/repos/bbernhard/signal-cli-rest-api/releases
 https://bbernhard.github.io/signal-cli-rest-api
 https://github.com/bbernhard/signal-cli-rest-api
 https://github.com/bbernhard/signal-cli-rest-api/blob/0.101/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/signal-cli-rest-api
-https://hub.docker.com/r/bbernhard/signal-cli-rest-api
 https://raw.githubusercontent.com/bbernhard/signal-cli-rest-api/0.101/Dockerfile
 https://raw.githubusercontent.com/bbernhard/signal-cli-rest-api/0.101/LICENSE

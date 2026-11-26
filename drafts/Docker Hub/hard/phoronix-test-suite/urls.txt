@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/phoronix-test-suite/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/phoronix-test-suite/Chart.yaml
+https://hub.docker.com/v2/repositories/phoronix/pts/
+https://hub.docker.com/v2/repositories/phoronix/pts/tags?page_size=10
+# OTHER sources
 https://github.com/phoronix-test-suite/phoronix-test-suite
 https://github.com/phoronix-test-suite/phoronix-test-suite/blob/master/deploy/docker/ubuntu-pts-docker-build.sh
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/phoronix-test-suite
-https://hub.docker.com/r/phoronix/pts
 https://phoronix-test-suite.com
 https://www.phoronix-test-suite.com/?k=docs

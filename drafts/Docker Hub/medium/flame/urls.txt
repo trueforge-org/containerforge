@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flame/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/flame/Chart.yaml
+https://hub.docker.com/v2/repositories/pawelmalak/flame/
+https://hub.docker.com/v2/repositories/pawelmalak/flame/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/pawelmalak/flame/releases/latest
 https://github.com/pawelmalak/flame
 https://github.com/pawelmalak/flame/blob/069b6690d9fa7a24a6e7727386ab85148c89b90e/.docker/Dockerfile
 https://github.com/pawelmalak/flame/releases/tag/v2.4.0
 https://github.com/pawelmalak/flame/wiki
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flame
-https://hub.docker.com/r/pawelmalak/flame
 https://raw.githubusercontent.com/pawelmalak/flame/069b6690d9fa7a24a6e7727386ab85148c89b90e/.docker/Dockerfile

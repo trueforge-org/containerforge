@@ -1,7 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rdtclient/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rdtclient/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/rogerfar/rdt-client
 https://api.github.com/repos/rogerfar/rdt-client/releases/tags/v2.0.143
 https://github.com/rogerfar/rdt-client
 https://github.com/rogerfar/rdt-client/blob/a669bd3/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rdtclient
 https://raw.githubusercontent.com/rogerfar/rdt-client/a669bd3/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rdtclient/values.yaml

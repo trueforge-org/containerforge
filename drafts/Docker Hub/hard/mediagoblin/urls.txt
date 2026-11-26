@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mediagoblin/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/mediagoblin/Chart.yaml
+https://hub.docker.com/v2/repositories/mtlynch/mediagoblin/
+https://hub.docker.com/v2/repositories/mtlynch/mediagoblin/tags?page_size=10
+# OTHER sources
 https://docs.mediagoblin.org/en/stable
 https://git.sr.ht/~mediagoblin/mediagoblin
 https://github.com/mtlynch/mediagoblin/blob/master/Dockerfile-python3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mediagoblin
-https://hub.docker.com/r/mtlynch/mediagoblin
 https://mediagoblin.org

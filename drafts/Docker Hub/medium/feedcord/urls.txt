@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/feedcord/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/feedcord/Chart.yaml
+https://hub.docker.com/v2/repositories/qolors/feedcord/
+https://hub.docker.com/v2/repositories/qolors/feedcord/tags?page_size=10
+# OTHER sources
 https://dot.net/v1/dotnet-install.sh
 https://github.com/Qolors/FeedCord
 https://github.com/Qolors/FeedCord/blob/c9568b968505c2979b5123f9d84262fe0d65dd85/FeedCord/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/feedcord
-https://hub.docker.com/r/qolors/feedcord

@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/broadcast-box/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/broadcast-box/Chart.yaml
+https://hub.docker.com/v2/repositories/seaduboi/broadcast-box/
+https://hub.docker.com/v2/repositories/seaduboi/broadcast-box/tags?page_size=10
+# OTHER sources
 https://github.com/Glimesh/broadcast-box
 https://github.com/Glimesh/broadcast-box/blob/484a22832dcea141ff3ac984f2f038cacf8aa678/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/broadcast-box
-https://hub.docker.com/r/seaduboi/broadcast-box

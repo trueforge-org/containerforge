@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fluttercoin-wallet/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fluttercoin-wallet/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/ofeefee/fluttercoin/license
 https://api.github.com/repos/ofeefee/fluttercoin/releases/latest
 https://fluttercoin.me
 https://github.com/ich777/docker-fluttercoin/blob/master/Dockerfile
 https://github.com/ofeefee/fluttercoin
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fluttercoin-wallet
 https://raw.githubusercontent.com/ich777/docker-fluttercoin/master/Dockerfile
 https://raw.githubusercontent.com/ofeefee/fluttercoin/master/README.md

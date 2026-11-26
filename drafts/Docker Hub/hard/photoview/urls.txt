@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/photoview/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/photoview/Chart.yaml
+https://hub.docker.com/v2/repositories/viktorstrate/photoview/
+https://hub.docker.com/v2/repositories/viktorstrate/photoview/tags?page_size=10
+# OTHER sources
 https://github.com/photoview/photoview
 https://github.com/photoview/photoview/blob/f79d379e38241c687c55e9f899e30661fd9f115a/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photoview
-https://hub.docker.com/r/viktorstrate/photoview
 https://photoview.github.io

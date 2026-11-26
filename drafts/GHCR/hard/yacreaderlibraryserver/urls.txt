@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/yacreaderlibraryserver/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/yacreaderlibraryserver/Chart.yaml
+# OTHER sources
 https://github.com/YACReader/yacreader
 https://github.com/YACReader/yacreader.git
 https://github.com/YACReader/yacreader/releases/tag/10.4.0
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/yacreaderlibraryserver
 https://github.com/xthursdayx/yacreaderlibrary-server-docker/blob/f1d5f1b9e32bc19d6ac06873e071ff67f332388a/Dockerfile
 https://raw.githubusercontent.com/xthursdayx/yacreaderlibrary-server-docker/f1d5f1b9e32bc19d6ac06873e071ff67f332388a/Dockerfile
 https://raw.githubusercontent.com/xthursdayx/yacreaderlibrary-server-docker/f1d5f1b9e32bc19d6ac06873e071ff67f332388a/README.md

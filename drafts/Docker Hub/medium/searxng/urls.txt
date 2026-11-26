@@ -1,14 +1,19 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/searxng/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/searxng/Chart.yaml
+https://hub.docker.com/v2/repositories/searxng/base/
+https://hub.docker.com/v2/repositories/searxng/base/tags?page_size=10
+https://hub.docker.com/v2/repositories/searxng/searxng/
+https://hub.docker.com/v2/repositories/searxng/searxng/tags?page_size=10
+# OTHER sources
 https://docs.searxng.org
 https://github.com/searxng/searxng
 https://github.com/searxng/searxng/blob/1ebea4a073ec6011bae25c042d97308278184c83/container/Dockerfile
 https://github.com/searxng/searxng/blob/HEAD/requirements.txt
 https://github.com/searxng/searxng/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/searxng
-https://hub.docker.com/r/searxng/searxng
 https://raw.githubusercontent.com/searxng/base/main/Dockerfile
 https://raw.githubusercontent.com/searxng/searxng/1ebea4a073ec6011bae25c042d97308278184c83/container/Dockerfile
 https://raw.githubusercontent.com/searxng/searxng/master/container/entrypoint.sh
 https://raw.githubusercontent.com/searxng/searxng/master/container/settings.template.yml
 https://raw.githubusercontent.com/searxng/searxng/master/requirements.txt
 https://raw.githubusercontent.com/searxng/searxng/master/searx/settings.yml
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/searxng/values.yaml

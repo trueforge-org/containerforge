@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/twtxt/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/twtxt/Chart.yaml
+# OTHER sources
 https://git.mills.io/prologic/twtxt
 https://git.mills.io/prologic/twtxt/releases
 https://github.com/nicholaswilde/docker-twtxt
 https://github.com/nicholaswilde/docker-twtxt/blob/3618126/Dockerfile
 https://github.com/prologic/twtxt
 https://github.com/prologic/twtxt/archive/refs/tags
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/twtxt
 https://raw.githubusercontent.com/nicholaswilde/docker-twtxt/3618126/Dockerfile
 https://twtxt.readthedocs.io

@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/backuppc/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/backuppc/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/BackupPC/backuppc/releases/latest
 https://backuppc.github.io/backuppc
 https://backuppc.github.io/backuppc/index.html
@@ -6,5 +10,4 @@ https://github.com/adferrand/docker-backuppc/blob/cf90ead82e93b0af92f4d6d1f0ae28
 https://github.com/backuppc/backuppc
 https://github.com/backuppc/backuppc-xs.git
 https://github.com/backuppc/rsync-bpc.git
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/backuppc
 https://raw.githubusercontent.com/adferrand/docker-backuppc/cf90ead82e93b0af92f4d6d1f0ae28b6ff1c1a69/Dockerfile

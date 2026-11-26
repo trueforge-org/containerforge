@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/watchyourlan/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/watchyourlan/Chart.yaml
+# OTHER sources
 https://github.com/aceberg/WatchYourLAN
 https://github.com/aceberg/WatchYourLAN/blob/ca9f644bccba41cdb3db952b828137fa53c2f640/Dockerfile
 https://github.com/aceberg/WatchYourLAN/releases/tag/2.1.4
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/watchyourlan
 https://raw.githubusercontent.com/aceberg/WatchYourLAN/ca9f644bccba41cdb3db952b828137fa53c2f640/Dockerfile
 https://raw.githubusercontent.com/aceberg/WatchYourLAN/ca9f644bccba41cdb3db952b828137fa53c2f640/README.md
 https://raw.githubusercontent.com/aceberg/WatchYourLAN/main/LICENSE

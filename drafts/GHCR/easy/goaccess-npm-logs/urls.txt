@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/goaccess-npm-logs/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/goaccess-npm-logs/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/allinurl/goaccess
 https://api.github.com/repos/xavier-hernandez/goaccess-for-nginxproxymanager
 https://archive.ubuntu.com/ubuntu
 https://github.com/allinurl/goaccess
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/goaccess-npm-logs
 https://github.com/xavier-hernandez/goaccess-for-nginxproxymanager
 https://github.com/xavier-hernandez/goaccess-for-nginxproxymanager/blob/6044a67020e04752f962a76f95ff99f6cdb00701/Dockerfile
 https://goaccess.io

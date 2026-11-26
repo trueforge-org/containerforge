@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spotweb/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/spotweb/Chart.yaml
+https://hub.docker.com/v2/repositories/jbaten/spotweb/
+https://hub.docker.com/v2/repositories/jbaten/spotweb/tags?page_size=10
+# OTHER sources
 https://github.com/joachimbaten/spotweb-docker
 https://github.com/joachimbaten/spotweb-docker/blob/5c930ba/Dockerfile
 https://github.com/spotweb/spotweb
 https://github.com/spotweb/spotweb/releases/tag/1.5.4
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spotweb
-https://hub.docker.com/r/jbaten/spotweb

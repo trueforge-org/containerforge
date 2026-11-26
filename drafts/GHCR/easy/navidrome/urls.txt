@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/navidrome/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/navidrome/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/navidrome/navidrome/releases/latest
 https://github.com/deluan/navidrome
 https://github.com/navidrome/navidrome
 https://github.com/navidrome/navidrome/blob/101145742f47/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/navidrome
 https://raw.githubusercontent.com/navidrome/navidrome/master/Dockerfile
 https://raw.githubusercontent.com/navidrome/navidrome/master/LICENSE
 https://www.navidrome.org/docs

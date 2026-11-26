@@ -1,8 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dispatcharr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dispatcharr/Chart.yaml
+https://hub.docker.com/v2/repositories/library/alpine/
+https://hub.docker.com/v2/repositories/library/alpine/tags?page_size=10
+https://hub.docker.com/v2/repositories/library/alpine/
+https://hub.docker.com/v2/repositories/library/alpine/tags?page_size=10
+# OTHER sources
 https://alpinelinux.org
 https://dispatcharr.github.io/Dispatcharr-Docs
 https://download.pytorch.org/whl/cpu
 https://github.com/Dispatcharr/Dispatcharr
 https://github.com/Dispatcharr/Dispatcharr/blob/main/docker/docker-compose.aio.yml
 https://github.com/alpinelinux/docker-alpine/blob/v3.24/x86_64/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dispatcharr
-https://hub.docker.com/_/alpine

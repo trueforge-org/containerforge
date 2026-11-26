@@ -1,10 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lancache-monolithic/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/lancache-monolithic/Chart.yaml
+https://hub.docker.com/v2/repositories/lancachenet/monolithic/
+https://hub.docker.com/v2/repositories/lancachenet/monolithic/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/tpill90/steam-lancache-prefill
 https://api.github.com/repos/tpill90/steam-lancache-prefill/releases/latest
 https://github.com/ich777/docker-lancache-prefill/blob/master/Dockerfile
 https://github.com/lancachenet/monolithic
 https://github.com/tpill90/steam-lancache-prefill
 https://github.com/tpill90/steam-lancache-prefill/releases/tag/v3.7.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lancache-monolithic
-https://hub.docker.com/r/lancachenet/monolithic
 https://lancache.net/docs
 https://raw.githubusercontent.com/ich777/docker-lancache-prefill/master/Dockerfile

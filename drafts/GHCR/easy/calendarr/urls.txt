@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/calendarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/calendarr/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/jordanlambrecht/calendarr/license
 https://github.com/jordanlambrecht/calendarr
 https://github.com/jordanlambrecht/calendarr/blob/4da458fb9d59a787c6ae1819eb063ba91cfe83d1/Dockerfile
 https://github.com/jordanlambrecht/calendarr/blob/HEAD/requirements.txt
 https://github.com/jordanlambrecht/calendarr/blob/main/Dockerfile
 https://github.com/jordanlambrecht/calendarr/releases/tag/v1.5.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/calendarr

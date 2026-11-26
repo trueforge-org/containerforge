@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/livestreamdvr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/livestreamdvr/Chart.yaml
+https://hub.docker.com/v2/repositories/mrbrax/twitchautomator/
+https://hub.docker.com/v2/repositories/mrbrax/twitchautomator/tags?page_size=10
+# OTHER sources
 https://github.com/MrBrax/LiveStreamDVR
 https://github.com/MrBrax/LiveStreamDVR/blob/1cd7e8fa5b68e6c0cf9e657d1caa2cc74f7eb814/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/livestreamdvr
-https://hub.docker.com/r/mrbrax/twitchautomator

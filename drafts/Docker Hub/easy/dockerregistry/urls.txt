@@ -1,6 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dockerregistry/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dockerregistry/Chart.yaml
+https://hub.docker.com/v2/repositories/library/registry/
+https://hub.docker.com/v2/repositories/library/registry/tags?page_size=10
+# OTHER sources
 https://distribution.github.io/distribution
 https://github.com/distribution/distribution
 https://github.com/distribution/distribution-library-image/blob/775973b655bb4b11561db92a1cf50113148ce530/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dockerregistry
-https://hub.docker.com/_/registry
-https://registry.hub.docker.com/_/registry

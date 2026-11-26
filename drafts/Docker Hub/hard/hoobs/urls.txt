@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hoobs/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hoobs/Chart.yaml
+https://hub.docker.com/v2/repositories/hoobs/hoobs/
+https://hub.docker.com/v2/repositories/hoobs/hoobs/tags?page_size=10
+# OTHER sources
 https://github.com/hoobs-org/HOOBS
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hoobs
 https://hoobs.org
-https://hub.docker.com/r/hoobs/hoobs

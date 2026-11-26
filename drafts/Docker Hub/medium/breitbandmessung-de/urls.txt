@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/breitbandmessung-de/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/breitbandmessung-de/Chart.yaml
+https://hub.docker.com/v2/repositories/shneezin/breitbandmessung-node/
+https://hub.docker.com/v2/repositories/shneezin/breitbandmessung-node/tags?page_size=10
+# OTHER sources
 https://breitbandmessung.de/test
 https://github.com/shneezin/breitbandmessung-node
 https://github.com/shneezin/breitbandmessung-node/blob/4cd4038/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/breitbandmessung-de
-https://hub.docker.com/r/shneezin/breitbandmessung-node

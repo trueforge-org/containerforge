@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/phpldapadmin/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/phpldapadmin/Chart.yaml
+https://hub.docker.com/v2/repositories/osixia/phpldapadmin/
+https://hub.docker.com/v2/repositories/osixia/phpldapadmin/tags?page_size=10
+# OTHER sources
 https://github.com/leenooks/phpLDAPadmin
 https://github.com/leenooks/phpLDAPadmin/wiki
 https://github.com/osixia/docker-phpLDAPadmin/blob/master/image/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/phpldapadmin
 https://gitlab.v2.rancher.geohub.space/g3s/i3s/i3s-helm-catalog
-https://hub.docker.com/r/osixia/phpldapadmin
 https://phpldapadmin.org

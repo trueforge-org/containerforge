@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/glances/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/glances/Chart.yaml
+https://hub.docker.com/v2/repositories/nicolargo/glances/
+https://hub.docker.com/v2/repositories/nicolargo/glances/tags?page_size=10
+# OTHER sources
 http://glances-probe:61208
 https://github.com/nicolargo/glances
 https://github.com/nicolargo/glances/blob/e907519c4a446da33b6968dba8f1c3b84a3379df/docker-files/ubuntu.Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/glances
 https://glances.readthedocs.io/en/develop
-https://hub.docker.com/r/nicolargo/glances

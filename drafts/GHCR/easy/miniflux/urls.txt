@@ -1,6 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/miniflux/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/miniflux/Chart.yaml
+https://hub.docker.com/v2/repositories/library/alpine/
+https://hub.docker.com/v2/repositories/library/alpine/tags?page_size=10
+https://hub.docker.com/v2/repositories/library/golang/
+https://hub.docker.com/v2/repositories/library/golang/tags?page_size=10
+# OTHER sources
 https://github.com/miniflux/v2
 https://github.com/miniflux/v2/blob/2.3.5/packaging/docker/alpine/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/miniflux
 https://miniflux.app/docs
 https://raw.githubusercontent.com/miniflux/v2/main/packaging/docker/alpine/Dockerfile
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/miniflux/values.yaml

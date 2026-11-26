@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/actualserver/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/actualserver/Chart.yaml
+# OTHER sources
 https://actualbudget.org
 https://actualbudget.org/docs
 https://api.github.com/repos/actualbudget/actual
 https://github.com/Kippenhof/docker-templates
 https://github.com/actualbudget/actual
 https://github.com/actualbudget/actual/blob/1766241e3f4b3c578e424c4fa15f1eb83c0da17d/packages/sync-server/docker/alpine.Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/actualserver
 https://registry.npmjs.org/@actual-app/sync-server/26.11.0

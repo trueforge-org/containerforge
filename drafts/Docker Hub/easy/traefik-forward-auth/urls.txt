@@ -1,4 +1,8 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/traefik-forward-auth/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/traefik-forward-auth/Chart.yaml
+https://hub.docker.com/v2/repositories/thomseddon/traefik-forward-auth/
+https://hub.docker.com/v2/repositories/thomseddon/traefik-forward-auth/tags?page_size=10
+# OTHER sources
 https://github.com/thomseddon/traefik-forward-auth
 https://github.com/thomseddon/traefik-forward-auth/blob/83f06df/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traefik-forward-auth
-https://hub.docker.com/r/thomseddon/traefik-forward-auth

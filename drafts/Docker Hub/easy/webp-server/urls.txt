@@ -1,6 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/webp-server/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/webp-server/Chart.yaml
+https://hub.docker.com/v2/repositories/webpsh/webps/
+https://hub.docker.com/v2/repositories/webpsh/webps/tags?page_size=10
+# OTHER sources
 https://docs.webp.sh
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/webp-server
 https://github.com/webp-sh/webp_server_go
 https://github.com/webp-sh/webp_server_go/blob/5efe1bf88814f86588d4c0f030a12d071d7471ae/Dockerfile
 https://github.com/webp-sh/webp_server_go/releases/tag/0.16.2
-https://hub.docker.com/r/webpsh/webps

@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/streamystats/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/streamystats/Chart.yaml
+# OTHER sources
 https://github.com/fredrikburmester/streamystats
 https://github.com/fredrikburmester/streamystats/blob/4049ac60351575c68639fcf8db76a4f477df8ab2/apps/job-server/Dockerfile
 https://github.com/fredrikburmester/streamystats/blob/4049ac60351575c68639fcf8db76a4f477df8ab2/apps/nextjs-app/Dockerfile
 https://github.com/fredrikburmester/streamystats/releases/tag/v2.22.3
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/streamystats
 https://raw.githubusercontent.com/fredrikburmester/streamystats/4049ac60351575c68639fcf8db76a4f477df8ab2/apps/job-server/Dockerfile
 https://raw.githubusercontent.com/fredrikburmester/streamystats/4049ac60351575c68639fcf8db76a4f477df8ab2/apps/nextjs-app/Dockerfile

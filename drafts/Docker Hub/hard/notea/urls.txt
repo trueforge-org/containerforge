@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/notea/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/notea/Chart.yaml
+https://hub.docker.com/v2/repositories/diamkil/notea/
+https://hub.docker.com/v2/repositories/diamkil/notea/tags?page_size=10
+# OTHER sources
 https://dl.min.io/server/minio/release/linux-*/minio
 https://github.com/QingWei-Li/notea
 https://github.com/diamkil/docker-notea
 https://github.com/diamkil/docker-notea/blob/2dd83549e7ca50311c17b24d0b9900b26193392d/Dockerfile
 https://github.com/minio/minio
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/notea
-https://hub.docker.com/r/diamkil/notea
-https://registry.hub.docker.com/r/diamkil/notea

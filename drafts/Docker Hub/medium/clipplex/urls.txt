@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/clipplex/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/clipplex/Chart.yaml
+https://hub.docker.com/v2/repositories/jonnike/clipplex/
+https://hub.docker.com/v2/repositories/jonnike/clipplex/tags?page_size=10
+# OTHER sources
 https://github.com/jo-nike/clipplex
 https://github.com/jo-nike/clipplex/blob/8678972/Dockerfile
 https://github.com/jo-nike/clipplex/blob/HEAD/requirements.txt
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clipplex
-https://hub.docker.com/r/jonnike/clipplex

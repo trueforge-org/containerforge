@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shlink-web-client/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shlink-web-client/Chart.yaml
+# OTHER sources
 https://example.invalid
 https://github.com/shlinkio/shlink-web-client
 https://github.com/shlinkio/shlink-web-client/blob/develop/LICENSE
 https://github.com/shlinkio/shlink-web-client/blob/v4.9.0/Dockerfile
 https://github.com/shlinkio/shlink-web-client/blob/v4.9.1/Dockerfile
 https://github.com/shlinkio/shlink-web-client/blob/v4.9.1/config/docker/nginx.conf
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shlink-web-client
 https://shlink.io
 https://shlink.io/documentation

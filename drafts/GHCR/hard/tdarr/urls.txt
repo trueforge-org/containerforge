@@ -1,9 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tdarr/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tdarr/Chart.yaml
+https://hub.docker.com/v2/repositories/haveagitgat/tdarr_acc/
+https://hub.docker.com/v2/repositories/haveagitgat/tdarr_acc/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest
 https://docs.tdarr.io
 https://docs.tdarr.io/docs/installation/docker/run-compose
 https://github.com/HaveAGitGat/Tdarr
 https://github.com/HaveAGitGat/Tdarr/blob/9ec31178f6807861c207f8a65a1b8156e46c5b85/docker/Dockerfile.final
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tdarr
 https://raw.githubusercontent.com/HaveAGitGat/Tdarr/9ec31178f6807861c207f8a65a1b8156e46c5b85/docker/Dockerfile.final
 https://raw.githubusercontent.com/HaveAGitGat/Tdarr/master/docker/Dockerfile.base
 https://tdarr.io/downloads

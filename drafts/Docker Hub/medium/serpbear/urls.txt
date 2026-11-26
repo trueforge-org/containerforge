@@ -1,8 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/serpbear/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/serpbear/Chart.yaml
+https://hub.docker.com/v2/repositories/towfiqi/serpbear/
+https://hub.docker.com/v2/repositories/towfiqi/serpbear/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/towfiqi/serpbear/contents/Dockerfile?ref=v3.1.2
 https://api.github.com/repos/towfiqi/serpbear/contents/entrypoint.sh?ref=v3.1.2
 https://api.github.com/repos/towfiqi/serpbear/license
 https://github.com/towfiqi/serpbear
 https://github.com/towfiqi/serpbear/blob/v3.1.2/Dockerfile
 https://github.com/towfiqi/serpbear/releases/tag/v3.1.2
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/serpbear
-https://hub.docker.com/r/towfiqi/serpbear

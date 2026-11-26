@@ -1,8 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/guacamole/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/guacamole/Chart.yaml
+https://hub.docker.com/v2/repositories/guacamole/guacamole/
+https://hub.docker.com/v2/repositories/guacamole/guacamole/tags?page_size=10
+https://hub.docker.com/v2/repositories/guacamole/guacd/
+https://hub.docker.com/v2/repositories/guacamole/guacd/tags?page_size=10
+# OTHER sources
 https://dlcdn.apache.org/guacamole/1.6.0/binary/guacamole-1.6.0.war
 https://github.com/apache/guacamole-client
 https://github.com/apache/guacamole-client/blob/0537c89cd783681b986ff8f8c4e0b97ec6873371/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/guacamole
 https://guacamole.apache.org/doc/gug
-https://hub.docker.com/r/guacamole/guacamole
-https://hub.docker.com/r/guacamole/guacd
 https://raw.githubusercontent.com/apache/guacamole-client/1.6.0/Dockerfile

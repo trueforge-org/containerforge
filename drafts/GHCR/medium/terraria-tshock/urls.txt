@@ -1,7 +1,10 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/terraria-tshock/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/terraria-tshock/Chart.yaml
+# OTHER sources
 https://github.com/Pryaxis/TShock
 https://github.com/Pryaxis/TShock/releases/tag/v6.2.1
 https://github.com/ich777/docker-terraria-server/blob/tshock/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/terraria-tshock
 https://ikebukuro.tshock.co
 https://packages.ubuntu.com/search?keywords=dotnet-runtime-9.0&searchon=names&suite=all&section=all
 https://tshock.co

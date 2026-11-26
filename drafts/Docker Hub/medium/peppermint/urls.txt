@@ -1,10 +1,13 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/peppermint/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/peppermint/Chart.yaml
+https://hub.docker.com/v2/repositories/pepperlabs/peppermint/
+https://hub.docker.com/v2/repositories/pepperlabs/peppermint/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/Peppermint-Lab/peppermint
 https://api.github.com/repos/Peppermint-Lab/peppermint/releases/latest
 https://github.com/Peppermint-Lab/peppermint
 https://github.com/Peppermint-Lab/peppermint/blob/ba6e2179f9409db76abeb9a3007a262160e24628/dockerfile
 https://github.com/Peppermint-Lab/peppermint/releases/tag/0.5.5
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/peppermint
-https://hub.docker.com/r/pepperlabs/peppermint
-https://hub.docker.com/v2/repositories/pepperlabs/peppermint/tags?page_size=5&ordering=last_updated
 https://peppermint.sh
 https://raw.githubusercontent.com/Peppermint-Lab/peppermint/ba6e2179f9409db76abeb9a3007a262160e24628/dockerfile

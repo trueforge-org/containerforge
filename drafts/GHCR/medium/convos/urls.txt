@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/convos/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/convos/Chart.yaml
+# OTHER sources
 http://*:3000
 https://api.github.com/repos/convos-chat/convos
 https://api.github.com/repos/convos-chat/convos/tags
 https://convos.chat
 https://github.com/convos-chat/convos
 https://github.com/convos-chat/convos/blob/63572e5cc48d821e9fe0d85b84dcea4ec837b466/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/convos
 https://raw.githubusercontent.com/convos-chat/convos/63572e5cc48d821e9fe0d85b84dcea4ec837b466/Dockerfile

@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/scrypted/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/scrypted/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/koush/scrypted/license
 https://api.github.com/repos/koush/scrypted/releases/latest
 https://docs.scrypted.app
 https://github.com/koush/scrypted
 https://github.com/koush/scrypted/blob/main/install/docker/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/scrypted
 https://raw.githubusercontent.com/koush/scrypted/main/install/docker/Dockerfile
 https://registry.npmjs.org/@scrypted/server/latest
 https://scrypted.app

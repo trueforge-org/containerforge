@@ -1,7 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/radarrsync/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/radarrsync/Chart.yaml
+https://hub.docker.com/v2/repositories/dmanius/radarrsync-docker/
+https://hub.docker.com/v2/repositories/dmanius/radarrsync-docker/tags?page_size=10
+# OTHER sources
 https://github.com/Sperryfreak01/RadarrSync
 https://github.com/Sperryfreak01/RadarrSync/blob/HEAD/requirements.txt
 https://github.com/Sperryfreak01/RadarrSync/releases/tag/v1.0
 https://github.com/dairefinn/RadarrSync
 https://github.com/dairefinn/RadarrSync/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/radarrsync
-https://hub.docker.com/r/dmanius/radarrsync-docker

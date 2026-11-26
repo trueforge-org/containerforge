@@ -1,8 +1,11 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/redm/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/redm/Chart.yaml
+# OTHER sources
 http://docs.fivem.net/docs
 https://api.github.com/repos/citizenfx/fivem
 https://github.com/citizenfx/fivem
 https://github.com/ich777/docker-redm-server/blob/master/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/redm
 https://raw.githubusercontent.com/ich777/docker-redm-server/master/Dockerfile
 https://redm.gg
 https://redm.net

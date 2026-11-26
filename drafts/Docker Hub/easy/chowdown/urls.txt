@@ -1,5 +1,9 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chowdown/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/chowdown/Chart.yaml
+https://hub.docker.com/v2/repositories/gregyankovoy/chowdown/
+https://hub.docker.com/v2/repositories/gregyankovoy/chowdown/tags?page_size=10
+# OTHER sources
 https://chowdown.io
 https://github.com/clarklab/chowdown
 https://github.com/gregyankovoy/docker-chowdown/blob/9f355c82d5e74d0da93ec86d9cb32541ca6ca45c/Dockerfile
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chowdown
-https://hub.docker.com/r/gregyankovoy/chowdown

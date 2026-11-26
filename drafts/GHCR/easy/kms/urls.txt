@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kms/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/kms/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/Py-KMS-Organization/py-kms
 https://github.com/Py-KMS-Organization/py-kms
 https://github.com/Py-KMS-Organization/py-kms/blob/HEAD/requirements.txt
@@ -5,5 +9,4 @@ https://github.com/Py-KMS-Organization/py-kms/blob/b0e1615/docker/docker-py3-kms
 https://github.com/Py-KMS-Organization/py-kms/blob/b0e1615dec06293c927625006a99e6ec54a001aa/docker/docker-py3-kms-minimal/Dockerfile
 https://github.com/Py-KMS-Organization/py-kms/blob/v1.0.1/docker/start.py
 https://github.com/Py-KMS-Organization/py-kms/releases/tag/v1.0.1
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kms
 https://py-kms.readthedocs.io/en/latest

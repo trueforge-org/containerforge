@@ -1,9 +1,12 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/socials/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/socials/Chart.yaml
+https://hub.docker.com/v2/repositories/diamkil/socials/
+https://hub.docker.com/v2/repositories/diamkil/socials/tags?page_size=10
+# OTHER sources
 https://github.com/diamkil/socials
 https://github.com/diamkil/socials/blob/2b7a17b519896cc18b775536d7f9016921df133a/Dockerfile
 https://github.com/diamkil/socials/releases
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/socials
 https://raw.githubusercontent.com/diamkil/socials/2b7a17b519896cc18b775536d7f9016921df133a/Dockerfile
 https://raw.githubusercontent.com/diamkil/socials/2b7a17b519896cc18b775536d7f9016921df133a/package.json
 https://raw.githubusercontent.com/diamkil/socials/2b7a17b519896cc18b775536d7f9016921df133a/src/app.ts
-https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/socials/values.yaml
-https://registry.hub.docker.com/r/diamkil/socials

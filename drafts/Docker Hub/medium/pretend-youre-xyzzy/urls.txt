@@ -1,10 +1,14 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pretend-youre-xyzzy/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/pretend-youre-xyzzy/Chart.yaml
+https://hub.docker.com/v2/repositories/cyb3rjak3/dockeryourxyzzy/
+https://hub.docker.com/v2/repositories/cyb3rjak3/dockeryourxyzzy/tags?page_size=10
+# OTHER sources
 https://api.github.com/repos/Cyb3r-Jak3/DockerYourXyzzy
 https://api.github.com/repos/ajanata/PretendYoureXyzzy
 https://api.github.com/repos/ajanata/PretendYoureXyzzy/releases/latest
 https://github.com/Cyb3r-Jak3/DockerYourXyzzy
 https://github.com/Cyb3r-Jak3/DockerYourXyzzy/blob/fade38c9e0b94c1294360a1f4697ab167dbd3d09/Dockerfile
 https://github.com/ajanata/PretendYoureXyzzy
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pretend-youre-xyzzy
-https://hub.docker.com/r/cyb3rjak3/dockeryourxyzzy
 https://raw.githubusercontent.com/Cyb3r-Jak3/DockerYourXyzzy/fade38c9e0b94c1294360a1f4697ab167dbd3d09/Dockerfile
 https://raw.githubusercontent.com/ajanata/PretendYoureXyzzy/master/README.md

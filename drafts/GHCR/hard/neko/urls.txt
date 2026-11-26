@@ -1,3 +1,7 @@
+# REQUIRED (always fetch, one file each: truecharts-*.md, dockerhub-*.md)
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/neko/values.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/neko/Chart.yaml
+# OTHER sources
 https://api.github.com/repos/m1k1o/neko
 https://api.github.com/repos/m1k1o/neko/releases/latest
 https://aus1.torproject.org/torbrowser/update_3/release/download-linux-x86_64.json
@@ -21,7 +25,6 @@ https://github.com/m1k1o/neko/blob/92420ca8e4709c1ac49961c4bf5d3cc786d44f0d/apps
 https://github.com/m1k1o/neko/blob/92420ca8e4709c1ac49961c4bf5d3cc786d44f0d/apps/xfce/Dockerfile
 https://github.com/m1k1o/neko/releases
 https://github.com/mozilla-firefox/firefox
-https://github.com/trueforge-org/truecharts/tree/master/charts/stable/neko
 https://gitlab.torproject.org/tpo/applications/tor-browser
 https://gitlab.xfce.org/xfce
 https://neko.m1k1o.net
