@@ -18,4 +18,5 @@ Skipped: none.
 Failures: none hard; https://www.iyuu.cn returned no parseable content (recorded).
 
 ## plan.md corrections
-See below (port note).
+- plan.md line 15 (Port row): "The draft's `8787` is inferred and conflicts with upstream" -> nginx listens 8780 and proxies to 127.0.0.1:8787 (internal PHP app); 8787 is not a conflict. Source: https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/docker/rootfs/etc/nginx/nginx.conf (github-ledccn-iyuuplus-nginx.md).
+- Unverified: none checked against plan beyond the port row.
