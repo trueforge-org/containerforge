@@ -132,7 +132,7 @@ filePaths:
 | `/sia-data` (upstream VOLUME, `-d` flag) | `/config/sia` via `start.sh`. Keep the chart's `datadirectory` mapping in mind for downstream use. |
 | `/app` (binary) | Read-only at runtime. Build-time only. |
 | Go cache, temp | `/tmp`. |
-| Root user | Upstream runs as root. The image runs as `apps` (UID 1000). Ports 9980-9983 are above 1024, so no capability is needed. |
+| Root user | Upstream runs as root. The image runs as `apps` (UID 568). Ports 9980-9983 are above 1024, so no capability is needed. |
 | `SIA_WALLET_PASSWORD` in image ENV | Not set in the image. Read from env only at runtime. |
 
 ## 10. Risks, caveats and open questions

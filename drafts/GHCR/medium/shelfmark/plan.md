@@ -76,12 +76,6 @@ env:
   - name: INGEST_DIR
     default: "/books"
     required: false
-  - name: PUID
-    default: "1000"
-    required: false
-  - name: PGID
-    default: "1000"
-    required: false
   - name: LOG_LEVEL
     default: "INFO"
     required: false
@@ -96,7 +90,7 @@ volumes:
 dependencies: []
 ```
 
-Only variables the app reads are listed. `WIREGUARD_*` is left out until the WireGuard path is tested (R5).
+Only variables the app reads are listed. `PUID`/`PGID` are left out: only upstream's root `entrypoint.sh` reads them and it is not used. `WIREGUARD_*` is left out until the WireGuard path is tested (R5).
 
 ## 7. start.sh
 
@@ -137,7 +131,7 @@ filePaths:
 | `/books` (downloads) | `INGEST_DIR` default; optionally a volume. |
 | `/var/log/shelfmark` | Created at build, owned by `apps`. If the app rotates logs there at runtime with `--read-only` it must be a tmpfs or `/config` path; UNVERIFIED which it uses. Remap to `/config/logs` via env if the app allows it. |
 | uv / pip caches, `SeleniumBase` driver dir (full variant) | `/tmp`. Upstream makes the driver dir writable by UID 1000; set it under `/tmp` instead. |
-| `entrypoint.sh` (upstream runs as root and drops to PUID/PGID) | Not used. The image runs as `apps` (UID 1000). Upstream's `gosu` and `tor` handling is only needed for the WireGuard/Tor features; see R5. |
+| `entrypoint.sh` (upstream runs as root and drops to PUID/PGID) | Not used. The image runs as `apps` (UID 568), so `PUID`/`PGID` do not apply. Upstream's `gosu` and `tor` handling is only needed for the WireGuard/Tor features; see R5. |
 | iptables legacy setting | Only needed for WireGuard; skip. |
 
 ## 10. Risks, caveats and open questions

@@ -27,7 +27,7 @@
 - `apps/minecraft-proxy/settings.yaml`
 - `apps/minecraft-proxy/container-test.yaml`
 - `apps/minecraft-proxy/start.sh` (replaces `run-bungeecord.sh`, `health.sh` port logic is folded in when needed)
-- `templates/` only if the forwarding-secret template is copied; add `defaults/` only when a file must be seeded into `/config`, with the reason in the PR.
+- `templates/` is NOT copied into the image: `include/.dockerignore` is an allow-list without `templates/`. If the upstream templates are needed, place them under `defaults/` (copied to `/defaults`) and seed from there; add `defaults/` only when a file must be seeded into `/config`, with the reason in the PR.
 
 No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
@@ -126,7 +126,7 @@ volumes:
 - `#!/usr/bin/env bash`, `set -euo pipefail`.
 - `export SKIP_CHOWN_DATA=true SKIP_PRIVILEGE_DROP=true` (no root, no chown), `export TYPE="${TYPE:-BUNGEECORD}"`, `VELOCITY_VERSION`, `VELOCITY_BUILD_ID`, `MEMORY` defaults from `settings.yaml`.
 - `export HOME=/tmp TMPDIR=/tmp` so helper caches stay in `/tmp`.
-- `mkdir -p /config`; seed `/config` from `/templates` only when missing (never overwrite).
+- `mkdir -p /config`; seed `/config` from `/defaults` (see section 2) only when missing (never overwrite).
 - Validate `TYPE` against `BUNGEECORD|WATERFALL|VELOCITY|CUSTOM`; exit with a clear message otherwise.
 - `exec` the upstream `run-bungeecord.sh` (or the equivalent `/usr/bin/run-bungeecord.sh` for the chosen `TYPE`) so SIGTERM reaches the JVM. The upstream script was not re-read at 2026.11.2: UNVERIFIED which paths it hard-codes (`/server`, `/plugins`, `/config`) and whether `BUNGEE_HOME` covers all of them.
 
@@ -154,7 +154,7 @@ filePaths:
 | --- | --- |
 | `/server` (working dir, `config.yml`, jars, world/proxy data) | `/config` through `BUNGEE_HOME=/config`. |
 | `/plugins` (plugin jars) | `/config/plugins` (under `/config`; the separate upstream volume is not kept). |
-| `/config` (upstream sync source, README) | Seed from `/templates` into `/config` only when missing. Keep one writable volume. |
+| `/config` (upstream sync source, README) | Seed from `/defaults` into `/config` only when missing. Keep one writable volume. |
 | helper temp, `HOME`, cache | `/tmp` (`HOME=/tmp`, `TMPDIR=/tmp`). |
 | chown and UID remap (`PUID`, `PGID`, `SKIP_CHOWN_DATA`) | Disabled. Fixed UID 568 (`apps`). |
 

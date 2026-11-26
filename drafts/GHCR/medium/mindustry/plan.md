@@ -58,7 +58,7 @@ RUN set -eux; \
 ```
 
    The checksum is the GitHub asset digest for `v160.8`; it must change with `VERSION` (see section 10).
-5. Licence: `curl -fL -o /usr/share/licenses/mindustry/LICENSE "https://raw.githubusercontent.com/Anuken/Mindustry/v${VERSION}/LICENSE"` (URL pattern from the repo tag; UNVERIFIED that the file exists at that path for `v160.8`, check on the build). GPL-3.0 needs the licence shipped.
+5. Licence: `mkdir -p /usr/share/licenses/mindustry && curl -fL -o /usr/share/licenses/mindustry/LICENSE "https://raw.githubusercontent.com/Anuken/Mindustry/v${VERSION}/LICENSE"` (URL pattern from the repo tag; UNVERIFIED that the file exists at that path for `v160.8`, check on the build). GPL-3.0 needs the licence shipped.
 6. `chown -R root:root /app && chmod -R 755 /app` (the JAR is read-only at runtime; no write to `/app`).
 7. ENV: `HOME=/config`, `DATA_DIR=/config/mindustry` (used only by `start.sh`), `SRV_NAME=DockerMindustry`, `GAME_PARAMS=` (empty), `EXTRA_PARAMS=` (see section 7), `JAVA_TOOL_OPTIONS` not set (no default unless the heap needs one; open question, section 10).
 8. `EXPOSE 6567/tcp`, `EXPOSE 6567/udp`, `VOLUME /config`.

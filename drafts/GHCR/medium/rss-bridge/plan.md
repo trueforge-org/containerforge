@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | Latest stable release `2025-08-05` (published 2025-08-05T17:52:31Z, not prerelease) (https://api.github.com/repos/RSS-Bridge/rss-bridge/releases/latest). The draft's chart pin `2025-06-03` (published 2025-06-03T19:25:56Z) is one release behind. Decide the target and re-review the Dockerfile at that tag: the Dockerfile reviewed here is at commit `98e03011dbb80ea9cea3ef8c5e29a1778f169cc9`, which is not confirmed to be the `2025-08-05` tag. |
 | Renovate | `datasource=github-releases depName=RSS-Bridge/rss-bridge versioning=loose` (tags are dates, not semver; `loose` per the bake rule). |
-| License | UNVERIFIED: the repo license was not fetched in this run. Confirm from the repo `LICENSE` file or the GitHub API before setting `LICENSE`. |
+| License | Unlicense (GitHub API SPDX `Unlicense`, https://api.github.com/repos/RSS-Bridge/rss-bridge). |
 | Source URL | https://github.com/RSS-Bridge/rss-bridge |
 | Download | No release assets. The GitHub release `2025-06-03` has an empty `assets` array (https://api.github.com/repos/RSS-Bridge/rss-bridge/releases/tags/2025-06-03). Fetch the source archive `https://github.com/RSS-Bridge/rss-bridge/archive/refs/tags/${VERSION}.tar.gz`. PHP source, no compile step. |
 | Per-arch | Source is arch-neutral. The upstream Dockerfile picks the curl-impersonate archive by build arch (aarch64, armv7l, x86_64). arm64 is supported by design, not tested here. |
@@ -78,7 +78,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"
+  default = "Unlicense"
 }
 
 variable "SOURCE" {
@@ -86,7 +86,7 @@ variable "SOURCE" {
 }
 ```
 
-Set `LICENSE` to the verified SPDX id before the PR (section 1). Then the four standard targets and `group "default"` from `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`.
+`LICENSE` is the SPDX id from section 1. Then the four standard targets and `group "default"` from `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -129,17 +129,13 @@ mkdir -p /config/bridges /config/formats /tmp/nginx /tmp/php-fpm /tmp/sessions
 # nginx listen port from env, written under /tmp (not /etc)
 sed "s/listen 80;/listen ${HTTP_PORT};/" /etc/nginx/sites-enabled/default > /tmp/nginx-default.conf
 
-# symlink user-state paths the app reads from /app
-ln -sfn /config/config.ini.php /app/config.ini.php
-ln -sfn /config/whitelist.txt /app/whitelist.txt
-
 nginx -c /etc/nginx/nginx.conf -g "daemon off;" &
 exec php-fpm8.5 --nodaemonize --fpm-config /etc/php/8.5/fpm/php-fpm.conf
 ```
 
 Points to confirm before writing:
 
-- Symlinks into `/app` (`/app/config.ini.php`, `/app/whitelist.txt`) are created at runtime; `/app` is read-only at runtime, so these must be created at build time, pointing to `/config/...` (dangling until seeded). Verify that RSS-Bridge follows symlinks. Only do this if the app reads those paths from `/app`.
+- Symlinks into `/app` (`/app/config.ini.php`, `/app/whitelist.txt`) are NOT created in `start.sh`, because `/app` is read-only at runtime. Create them in the Dockerfile at build time, pointing to `/config/...` (dangling until seeded). Verify that RSS-Bridge follows symlinks. Only do this if the app reads those paths from `/app`.
 - Custom bridges/formats: upstream copies `/config/*Bridge.php` into `/app/bridges`. That copy cannot run on a read-only `/app`. Check whether RSS-Bridge can load bridges from an alternate directory (UNVERIFIED). If not, the feature needs a documented limitation, not a `/app` write.
 - `DEBUG` file: upstream writes `/app/DEBUG` to toggle debug. Map to `/config/DEBUG` only if the app reads it from `/config`; otherwise drop it and say so.
 - The `sed` line above assumes the nginx listen line is `listen 80;`. Check the shipped `etc/` config and use the real line.

@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | No release, tag or binary exists (README: no prebuilt release binaries). Pin a commit on `main`. Dockerfile reviewed at commit `04469cf95ea7105f9d60e4906eab5533fb70ccd1`. Chart image `ghcr.io/dendianugerah/reubah:main` (tag list UNVERIFIED). |
-| Renovate | `datasource=git-refs depName=https://github.com/DenDianUgerah/reubah currentValue=main` (same pattern as `apps/fenrus`). |
+| Renovate | `datasource=git-refs depName=https://github.com/DenDianUgerah/reubah currentValue=main` (precedent `apps/tvheadend`). |
 | License | MIT (https://api.github.com/repos/DenDianUgerah/reubah) |
 | Source URL | https://github.com/DenDianUgerah/reubah (draft also lists `dendianugerah/reubah`; GitHub is case-insensitive, use the draft's canonical casing). |
 | Download | Source archive `https://github.com/DenDianUgerah/reubah/archive/${VERSION}.tar.gz` (VERSION = commit SHA). Built for amd64 and arm64 from source. |
@@ -63,10 +63,11 @@ USER apps
 COPY --chmod=0755 . /
 
 EXPOSE 8081
+VOLUME /config
 WORKDIR /app
 ```
 
-`VOLUME /config` is not needed by upstream; add it only if the app persists state in `/config` (see section 9). The draft's `/app/tmp` emptyDir is not a ContainerForge path: scratch belongs in `/tmp`.
+Upstream has no VOLUME; `VOLUME /config` is kept for ContainerForge consistency and the app may not write there (see section 9). The draft's `/app/tmp` emptyDir is not a ContainerForge path: scratch belongs in `/tmp`.
 
 ## 5. docker-bake.hcl
 
@@ -114,7 +115,7 @@ dependencies: []
 ```
 
 - `PORT` is documented; keep only it until the source is read. Do not invent others.
-- `/config` is listed only if state is persisted there (section 9). Otherwise remove the volume entry and say so in the PR.
+- `/config` matches `VOLUME /config` in the Dockerfile; whether the app persists state there is UNVERIFIED (section 9).
 
 ## 7. start.sh
 

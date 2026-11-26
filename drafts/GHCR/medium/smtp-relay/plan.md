@@ -33,16 +33,17 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft's Debian base is replaced because the Exim package and the other ContainerForge apps are Ubuntu based. Closest sibling for a single apt daemon with config under `/etc`: `apps/valkey` (pinned apt version and `health/` dir). Most apps in `apps/` use this base (91 Dockerfiles).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft's Debian base is replaced because the Exim package and the other ContainerForge apps are Ubuntu based. Closest sibling for a single apt daemon with config under `/etc`: `apps/valkey` (pinned apt version and `health/` dir). Most apps in `apps/` use this base.
 
 ## 4. Dockerfile
 
 1. `ARG VERSION` (Exim package version, `4.99.1`), `ARG TARGETARCH`, `USER root`.
 2. `apt-get update && apt-get install -y --no-install-recommends exim4-daemon-light=4.99.1-1ubuntu1.5 ca-certificates`. Pin the package and verify the pin matches the `VERSION` default in `docker-bake.hcl` before the build (repository rule). Check first whether `ca-certificates` and `iproute2` (used by the entrypoint `ip addr` call) are already in the base, and install `iproute2` only if missing. Re-verify the pin at build time, because Ubuntu security updates change the `-1ubuntu1.N` suffix.
-3. Remove the apt lists and caches (`/var/lib/apt/lists/*`, `/var/cache/*`, `/tmp/*`) in the same `RUN`.
+3. License: copy the Exim copyright file into `/usr/share/licenses/smtp-relay/LICENSE` (source path, for example `/usr/share/doc/exim4-base/copyright`, UNVERIFIED; check with `dpkg -L`), because `container-test.yaml` checks that path.
+3b. Remove the apt lists and caches (`/var/lib/apt/lists/*`, `/var/cache/*`, `/tmp/*`) in the same `RUN`.
 4. Do not install `exim4-config` by hand unless the `exim4-daemon-light` dependency does not bring it in. UNVERIFIED: whether `exim4-daemon-light` pulls the Debian config package. Check with `apt-cache depends` in the build stage.
 5. Exim config. The runtime `/etc` is read-only for `apps`, so the config must be generated at build time or read from a path under `/config` or `/tmp` that start.sh writes. Preferred: generate the static base config at build time (`update-exim4.conf` with defaults, run as root), and in `start.sh` apply env-driven macros by passing them to exim with `-D` on the command line or by writing `/tmp/smtp-relay/exim4.conf.localmacros` and passing `-C` to exim. Exact mechanism to prove in a PoC (section 9).
-6. `COPY --chmod=0755 . /` is the final copy (not the one in step 7). Put the upstream helper scripts in `etc/` (allowed by `include/.dockerignore`), not in `root/`.
+6. `COPY --chmod=0755 . /` goes in the tail (step 8). Put the upstream helper scripts in `etc/` (allowed by `include/.dockerignore`), not in `root/`.
 7. `ENV PORT=2525 BIND_IP=0.0.0.0 BIND_IP6=::0 HOME=/config` (non-privileged port, see section 9).
 8. Tail:
 
@@ -93,6 +94,12 @@ env:
   - name: BIND_IP
     default: "0.0.0.0"
     required: false
+  - name: BIND_IP6
+    default: "::0"
+    required: false
+  - name: NET_DEV
+    default: "eth0"
+    required: false
   - name: DISABLE_IPV6
     default: "true"
     required: false
@@ -112,7 +119,7 @@ env:
     default: ""
     required: false
   - name: SMARTHOST_PORT
-    default: "587"
+    default: "25"
     required: false
   - name: SMARTHOST_USER
     default: ""

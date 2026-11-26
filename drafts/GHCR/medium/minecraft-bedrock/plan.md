@@ -11,7 +11,7 @@
 | License (upstream image repo) | MIT (GitHub API `license.spdx_id`, via gh api). |
 | License (game server) | Minecraft EULA, https://www.minecraft.net/en-us/eula. Not an open-source licence. The image must not redistribute the Mojang zip (see section 4). |
 | Source URL | https://github.com/itzg/docker-minecraft-bedrock-server (image source). Vendor page: https://www.minecraft.net/en-us/download/server/bedrock |
-| Helper release checksums (latest, from GitHub release `checksums.txt` or asset digest) | easy-add 0.8.20; entrypoint-demoter 0.5.4; set-property 0.2.0; mc-monitor 1.21.0; mc-server-runner 1.17.0. Full per-arch values are in `facts/129.md`: amd64 `set-property` `05166594474b95e349b4b10a1c3944135cdf39b135540e4375d5373f4a327ca2`, `mc-monitor` `1228beab448b3dcd94e7ca2120334283f2a4037f62c607c292d5fbab3f85169c`, `mc-server-runner` `ff0959ea8b37ea80da9c6b80d08be6283eb1b5616d2ee40a45322369ba93d65c`. Source: https://api.github.com/repos/itzg/<tool>/releases/latest |
+| Helper release checksums (latest, from GitHub release `checksums.txt` or asset digest) | easy-add 0.8.20; entrypoint-demoter 0.5.4; set-property 0.2.0; mc-monitor 1.21.0; mc-server-runner 1.17.0. Per-arch values: the cited `facts/129.md` does not exist in the repo (UNVERIFIED for arm64); amd64 `set-property` `05166594474b95e349b4b10a1c3944135cdf39b135540e4375d5373f4a327ca2`, `mc-monitor` `1228beab448b3dcd94e7ca2120334283f2a4037f62c607c292d5fbab3f85169c`, `mc-server-runner` `ff0959ea8b37ea80da9c6b80d08be6283eb1b5616d2ee40a45322369ba93d65c`. Source: https://api.github.com/repos/itzg/<tool>/releases/latest |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/Dockerfile: `FROM debian`; `build/install-packages`; `build/setup-arm64` (box64 on arm64, `BOX64_PACKAGE`); `EXPOSE 19132/tcp`, `19132/udp`, `19133/udp`; `VOLUME ["/data"]`; `ENTRYPOINT ["/opt/demoter-entry.sh"]` (runs as root, demotes); `VERSION=LATEST`, `SERVER_PORT=19132`, `SERVER_PORT_V6=19133`, `ENABLE_BDS_V6BIND_FIX=false`; `HEALTHCHECK` via `mc-monitor status-bedrock`; `bds-ipv6fix.so` from GitHub (no checksum). |
 | Entry script reviewed | https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/bedrock-entry.sh: `export HOME="${PWD}"`; `DOWNLOAD_DIR` defaults to `${PWD}/.downloads`; download links from `https://net.web.minecraft-services.net/api/v1.0/download/links` with fallback `https://raw.githubusercontent.com/kittizz/bedrock-server-downloads/refs/heads/main/bedrock-server-downloads.json`; `set-property --file server.properties --bulk /etc/bds-property-definitions.json`; final `exec mc-server-runner ... box64 ./"$SERVER"` (box64 only if `/usr/local/bin/box64` exists and `USE_BOX64`) or `exec mc-server-runner ... ./"$SERVER"`. |
 | Demoter wrapper | https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/demoter-entry.sh: launches `entrypoint-demoter --match /data --debug ...` as PID 1. Root-only design; not used in this plan (section 9). |
@@ -40,9 +40,9 @@ No `defaults/` (the entry script writes its own `server.properties`). No `etc/` 
 
 ## 4. Dockerfile
 
-1. `ARG VERSION` (pinned Bedrock version or `LATEST`; section 10), `ARG TARGETARCH`, plus the pinned helper versions and sha256 values:
+1. `ARG VERSION` (= bake `VERSION`, the image-recipe tag `2026.11.1`, not the Mojang version; the Mojang version is the runtime `ENV VERSION=LATEST`, section 10), `ARG TARGETARCH`, plus the pinned helper versions and sha256 values:
    - `ARG EASY_ADD_VERSION=0.8.20` is NOT needed: download the helper tarballs directly from their GitHub release with `curl`, and check each against its `checksums.txt`. This avoids `easy-add` in the image.
-   - `ARG SET_PROPERTY_VERSION=0.2.0` and `MC_SERVER_RUNNER_VERSION=1.17.0`, `MC_MONITOR_VERSION=1.21.0` with the amd64 sha256 values from section 1 (arm64 values are in `facts/129.md`).
+   - `ARG SET_PROPERTY_VERSION=0.2.0` and `MC_SERVER_RUNNER_VERSION=1.17.0`, `MC_MONITOR_VERSION=1.21.0` with the amd64 sha256 values from section 1 (arm64 values: UNVERIFIED, re-read from the release assets; the cited `facts/129.md` does not exist in the repo).
 2. `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb...`.
 3. `USER root`. Install only what the base lacks (check first): `bash`, `curl`, `unzip` and `ca-certificates` are expected in the base (UNVERIFIED: check with `which unzip jq`). The entry script uses `jq` (for the links lookup and XUID resolution; UNVERIFIED that the base ships `jq`). If missing, `apt-get install -y --no-install-recommends jq unzip` and `rm -rf /var/lib/apt/lists/*`.
 4. Helpers (amd64 only for the first PR, section 10):
@@ -57,7 +57,7 @@ RUN set -eux; \
 
    Repeat for `mc-server-runner` (`/usr/local/bin/mc-server-runner`, checksum from `mc-server-runner_${VER}_checksums.txt`) and `mc-monitor` (for the healthcheck, if used). Do not add `entrypoint-demoter`: it is root-only (section 9).
 
-5. Entry scripts: `COPY bedrock-entry.sh /opt/bedrock-entry.sh` and `COPY property-definitions.json /etc/bds-property-definitions.json` are NOT possible from the draft folder. Fetch both from upstream at a pinned commit in the same `RUN` with sha256 checks, or vendor them into `apps/minecraft-bedrock/` (it is an MIT script; copy with its licence notice). Decision in section 10; the plan's default is to vendor `bedrock-entry.sh` and `property-definitions.json` into `apps/minecraft-bedrock/etc/` (allowed by `.dockerignore` as `etc/`), with the MIT notice in `/usr/share/licenses/minecraft-bedrock/`. Note: `.dockerignore` only allows `etc/`, `root/`, `usr/`, not arbitrary top-level files.
+5. Entry scripts: `COPY bedrock-entry.sh /opt/bedrock-entry.sh` (upstream layout) and `COPY property-definitions.json /etc/bds-property-definitions.json` are NOT possible from the draft folder. Fetch both from upstream at a pinned commit in the same `RUN` with sha256 checks, or vendor them into `apps/minecraft-bedrock/` (it is an MIT script; copy with its licence notice). Decision in section 10; the plan's default is to vendor `bedrock-entry.sh` and `property-definitions.json` into `apps/minecraft-bedrock/etc/` (allowed by `.dockerignore` as `etc/`), with the MIT notice in `/usr/share/licenses/minecraft-bedrock/`. Note: `include/.dockerignore` is an allow-list (`start.sh`, `etc/`, `usr/`, `defaults/`, `scripts/` ...), not arbitrary top-level files. Files in `etc/` land under `/etc/`, so the entry script is installed at `/etc/bedrock-entry.sh` (not `/opt`) and made executable by `COPY --chmod=0755 . /`.
 6. Licence: `/usr/share/licenses/minecraft-bedrock/LICENSE` (MIT of the upstream image repo; https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/LICENSE, UNVERIFIED the URL path, check on the build). The Mojang EULA is not shipped; the user accepts it at runtime with `EULA=TRUE`.
 7. Ownership and runtime dirs: `mkdir -p /config`, `chown -R apps:apps /config` is NOT done in the image (the `/config` volume is created by Docker; `start.sh` makes the subdirectories). Make `/opt` read-only for the apps user: `chmod -R 755 /opt`.
 8. ENV: `HOME=/config`, `SERVER_PORT=19132`, `SERVER_PORT_V6=19133`, `ENABLE_BDS_V6BIND_FIX=false`, `USE_BOX64=false` (amd64 only), `DOWNLOAD_DIR=/tmp/bedrock-downloads`, `TMPDIR=/tmp`, `VERSION=LATEST`, `EULA=` (empty, must be set by the user), `TZ=Etc/UTC`.
@@ -163,7 +163,7 @@ export HOME=/config/bedrock
 export DOWNLOAD_DIR=/tmp/bedrock-downloads
 export TMPDIR=/tmp
 
-exec /opt/bedrock-entry.sh
+exec /etc/bedrock-entry.sh
 ```
 
 - Refuses to start without `EULA=TRUE` (clear message, non-zero exit). This is the required-env handling the rules ask for, and the test cannot run without it (section 8).
@@ -180,7 +180,7 @@ exec /opt/bedrock-entry.sh
 
 timeoutSeconds: 120
 filePaths:
-- /opt/bedrock-entry.sh
+- /etc/bedrock-entry.sh
 - /usr/local/bin/mc-server-runner
 - /usr/local/bin/set-property
 - /usr/share/licenses/minecraft-bedrock/LICENSE

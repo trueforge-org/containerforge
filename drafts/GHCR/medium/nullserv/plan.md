@@ -5,16 +5,16 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | No release confirmed. `https://api.github.com/repos/bmrzycki/nullserv/releases/latest` returned HTTP 404. The draft's `v1.3.0` is UNVERIFIED. The upstream master Dockerfile is reachable, so the repo exists in some form. Pin a commit SHA instead of a tag (see section 10). |
+| Version to build | No release confirmed. `https://api.github.com/repos/bmrzycki/nullserv/releases/latest` returned HTTP 404. The draft's `v1.3.0` is UNVERIFIED. The upstream master Dockerfile is reachable, so the repo exists in some form. Pin a commit SHA instead of a tag (see section 10). Repo root has a `VERSION` file containing `1.3.0` (matches the draft's `v1.3.0`) but no git tags (tags API empty); `master` HEAD at verification: `ed88d9708f99f4e6368eec89a31f9410db1055fb`. |
 | Chart image | `ghcr.io/k8s-at-home/nullserv:v1.3.0@sha256:0792c7e6d814bf292455da3f40aa5d56c465f2b5024e786ac3bf3dc3b16cc757` (TrueCharts values.yaml, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/nullserv/values.yaml). The k8s-at-home image is not checked for arm64 (UNVERIFIED). |
 | Renovate | `datasource=git-refs depName=https://github.com/bmrzycki/nullserv currentValue=master` (same pattern as `apps/tvheadend`, see `drafts/Docker Hub/medium/fenrus/plan.md`). |
-| License | UNVERIFIED: LICENSE file not fetched. Check the repo root before writing the bake file. |
+| License | Apache-2.0 (GitHub API `license.spdx_id`; a `LICENSE` file exists at the repo root). |
 | Source URL | https://github.com/bmrzycki/nullserv |
 | Download | None: no prebuilt binary is published (draft). Compile from source in a build stage. |
 | Checksum source | None published. The source is pinned by commit SHA (content-addressed). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/bmrzycki/nullserv/master/Dockerfile . `FROM golang:alpine AS build-env`, `WORKDIR /go/src/app`, `COPY . .`, `RUN ./mkbuildinfo.sh && CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-w -extldflags "-static"' -o nullserv *.go`, `FROM scratch`, `COPY --from=build-env /go/src/app/nullserv /`, `ENTRYPOINT ["/nullserv"]`. No USER, EXPOSE, ENV or CMD. |
-| Ports | Chart: service `main` port 10004 to targetPort 80; service `https` port 10005 to targetPort 443. The container port numbers 80 and 443 come from the chart (UNVERIFIED that the binary listens there). The draft's 8080 is contradicted by the chart. |
-| Env vars | None found in the Dockerfile. Any flag or env the Go code reads is UNVERIFIED (source `*.go` not fetched). |
+| Ports | Chart: service `main` port 10004 to targetPort 80; service `https` port 10005 to targetPort 443. The container port numbers 80 and 443 come from the chart (confirmed as the flag defaults 80 and 443 in `conf.go`). The draft's 8080 is contradicted by the chart. |
+| Env vars / flags | No env vars. `conf.go` defines flags: `-c` JSON config file, `-m` cache age, `-a` http address (default all), `-p` http port (default 80), `-A` https address (default all), `-P` https port (default 443), `-v` verbose. Ports are configurable, so non-root can use high ports. |
 | Data path | Chart mounts `/config` (persistence `config`). The binary's own writes are UNVERIFIED. |
 | Chart security | `runAsNonRoot: false`, `runAsUser: 0`, `runAsGroup: 0` (matches the draft). |
 
@@ -38,9 +38,9 @@ Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed29
 
 1. `FROM docker.io/library/golang:<pinned> AS build`, `ARG VERSION`, `WORKDIR /go/src/app`.
 2. Fetch the source at the pinned commit: `RUN curl -fL https://github.com/bmrzycki/nullserv/archive/${VERSION}.tar.gz | tar xz -C /go/src/app --strip-components=1`. `VERSION` is a commit SHA (40 hex characters, see section 5). Do not fetch `master` at build time.
-3. Build exactly as upstream does: `RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags '-w -extldflags "-static"' -o /out/nullserv *.go`. The `mkbuildinfo.sh` step runs only if the file exists in the archive (UNVERIFIED that it is needed).
+3. Build exactly as upstream does: `RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags '-w -extldflags "-static"' -o /out/nullserv *.go`. The `./mkbuildinfo.sh` step must run first (it generates `buildinfo.go` from `buildinfo.go.in`; both exist at master). Run `sh ./mkbuildinfo.sh` before `go build`; without git history it writes `unknown` for the commit info.
 4. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, `ARG VERSION`, `USER root`.
-5. `COPY --from=build /out/nullserv /app/nullserv` and `COPY --from=build /go/src/app/LICENSE /usr/share/licenses/nullserv/LICENSE` (only if the LICENSE file exists: UNVERIFIED).
+5. `COPY --from=build /out/nullserv /app/nullserv` and `COPY --from=build /go/src/app/LICENSE /usr/share/licenses/nullserv/LICENSE` (the file exists at the repo root).
 6. `chown -R apps:apps /app && chmod -R 755 /app`.
 7. Tail:
 
@@ -48,7 +48,7 @@ Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed29
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE <port from section 10>
+EXPOSE 8080 8443
 VOLUME /config
 ```
 
@@ -65,11 +65,11 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=git-refs depName=https://github.com/bmrzycki/nullserv currentValue=master
-  default = "<40-character commit SHA from master, resolved at build time>"
+  default = "ed88d9708f99f4e6368eec89a31f9410db1055fb"
 }
 
 variable "LICENSE" {
-  default = "<SPDX id from the upstream LICENSE file, UNVERIFIED>"
+  default = "Apache-2.0"
 }
 
 variable "SOURCE" {
@@ -77,7 +77,7 @@ variable "SOURCE" {
 }
 ```
 
-Then the `group "default"`, `target "image"`, `target "image-local"` and `target "image-all"` blocks copied verbatim from `apps/adguardhome-sync/docker-bake.hcl`. Fill `VERSION` with the commit SHA of `master` at the time of the PR (resolve it with `gh api repos/bmrzycki/nullserv/commits/master --jq .sha`; this is a read-only GET). Validate with `docker buildx bake --print` from `apps/nullserv`.
+Then the `group "default"`, `target "image"`, `target "image-local"` and `target "image-all"` blocks copied verbatim from `apps/adguardhome-sync/docker-bake.hcl`. `VERSION` is the `master` commit SHA found at verification; re-resolve it at PR time ( with `gh api repos/bmrzycki/nullserv/commits/master --jq .sha`; this is a read-only GET). Validate with `docker buildx bake --print` from `apps/nullserv`.
 
 ## 6. settings.yaml
 
@@ -86,7 +86,10 @@ Then the `group "default"`, `target "image"`, `target "image-local"` and `target
 schema_version: 1
 upstream_env_url: "https://github.com/bmrzycki/nullserv"
 ports:
-  - port: <port from section 10>
+  - port: 8080
+    protocol: tcp
+    required: false
+  - port: 8443
     protocol: tcp
     required: false
 env: []
@@ -99,13 +102,13 @@ volumes:
 
 ## 7. start.sh
 
-Not needed when the binary takes its port from a flag or env var that is set in the Dockerfile (`ENTRYPOINT ["/app/nullserv"]` with `CMD` for the flag). If a wrapper is needed for the port default, use:
+Not needed when the binary takes its port from a flag or env var that is set in the Dockerfile (`ENTRYPOINT ["/app/nullserv"]` with `CMD` for the flag). The binary's ports come from flags, so a wrapper is needed (or `ENTRYPOINT`/`CMD` with `-p 8080 -P 8443`). Use:
 
 ```bash
 #!/usr/bin/env bash
 
 cd /app
-exec /app/nullserv "$@"
+exec /app/nullserv -p 8080 -P 8443 "$@"
 ```
 
 Keep it idempotent: no writes to `/app`, no `/config` seeding (none needed while the app keeps no state). Listen on all interfaces; the binary's default bind address is UNVERIFIED.
@@ -117,12 +120,13 @@ Keep it idempotent: no writes to `/app`, no `/config` seeding (none needed while
 
 timeoutSeconds: 30
 tcp:
-- port: '<port from section 10>'
+- port: '8080'
+- port: '8443'
 filePaths:
 - /app/nullserv
 ```
 
-Every port in `settings.yaml` needs a `tcp` probe (section 6). If the chart's second port (443) is confirmed, add a second `tcp` probe for it. `timeoutSeconds` is a placeholder: copy a sibling Go value (`apps/dexafix` has none; choose a value that the small static binary needs, and confirm it on the first run). An http probe is added only if the source shows an HTTP handler (UNVERIFIED).
+Every port in `settings.yaml` has a `tcp` probe (8080 and 8443). `timeoutSeconds` is a placeholder: copy a sibling Go value (`apps/dexafix` has none; choose a value that the small static binary needs, and confirm it on the first run). An http probe is added only if the source shows an HTTP handler (UNVERIFIED).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
@@ -137,10 +141,10 @@ Draft expectations reconciled: chart runs as UID 0 (`runAsUser: 0`); this image 
 ## 10. Risks, caveats and open questions
 
 - **Version (blocker for the bake file):** no release exists (404). Use a pinned commit SHA. The draft's `v1.3.0` tag and the k8s-at-home image digest cannot be confirmed from the upstream source. Decide with the maintainer whether a commit-based app is acceptable (renovate bumps on every master push, noisy).
-- **Port (decision needed):** the chart maps 80 and 443. Non-root cannot bind those. Read the `*.go` source at the pinned SHA and choose a high port (for example 8080 or 8443) if the port is configurable; if it is hard-coded to 80/443, this is a blocker for rootless and needs a `setcap` or a different design, which is out of scope here.
+- **Port:** the chart maps 80 and 443; non-root cannot bind those. The ports are configurable (`-p`, `-P` flags in `conf.go`), so the plan uses 8080 (http) and 8443 (https) via `start.sh`. Chart users must retarget their service ports.
 - **Chart vs draft:** the draft's port 8080 is wrong per the chart; the chart uses 80/443. Treat the draft port as UNVERIFIED.
-- **Upstream removal:** the draft says the repo was removed. The Dockerfile at master was fetched, so the repo is reachable. The releases API is 404. Re-check the repo status before the PR.
-- **License:** UNVERIFIED. The bake `LICENSE` label must match the upstream LICENSE file.
+- **Upstream removal:** the draft says the repo was removed. The repo is reachable (not archived); the releases API is 404. Re-check the repo status before the PR.
+- **License:** Apache-2.0 per the GitHub API; confirm against the `LICENSE` text at the pinned SHA.
 - **Behaviour:** the draft says clients must be pointed at the server by hand (DNS or resolver), so the test can only prove that the server listens, not that it answers clients (see the tcp note in `.github/instructions/container-test.instructions.md`).
 - No blockers from musl (the build uses `CGO_ENABLED=0` on glibc Ubuntu), no GPU, no privileged need. arm64 is compiled natively by buildx.
 

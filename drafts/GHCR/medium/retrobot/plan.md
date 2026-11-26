@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | No release or tag found. Pin a commit on `master`. Draft commit `d04ddd8` (short SHA as written in the draft; full SHA UNVERIFIED). Chart image `ghcr.io/rossimo/retrobot:latest` (tag list UNVERIFIED). |
-| Renovate | `datasource=git-refs depName=https://github.com/rossimo/retrobot currentValue=master` (same pattern as `apps/fenrus`). |
+| Renovate | `datasource=git-refs depName=https://github.com/rossimo/retrobot currentValue=master` (precedent `apps/tvheadend`). |
 | License | MIT (https://api.github.com/repos/rossimo/retrobot) |
 | Source URL | https://github.com/rossimo/retrobot |
 | Download | Source archive `https://github.com/rossimo/retrobot/archive/${VERSION}.tar.gz` (VERSION = commit SHA). No prebuilt binary. Interpreted Node (TypeScript via `ts-node`). |

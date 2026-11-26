@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-Use the ContainerForge Java 21 runtime, matching the upstream default Java 21 image: `ghcr.io/trueforge-org/java21:21.0.8+9@sha256:<digest>`. The tag comes from `apps/java21/docker-bake.hcl` `VERSION`. The digest is UNVERIFIED: the brief's digest list has no java21 entry, so take it from the registry when the image is published. Alternative: `ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d` (matches upstream `2026.11.1-java25-graalvm`). Closest sibling: `apps/nzbhydra2` (Java runtime with `/config` and `USER apps`).
+Use the ContainerForge Java 21 runtime, matching the upstream default Java 21 image: `ghcr.io/trueforge-org/java21:21.0.8@sha256:bba631340c8aefc1a10656a894475312bd89a9dd75d9e5da12c3098242f1e8f2` (the tag and digest used by an existing `apps/*/Dockerfile`; `apps/java21/docker-bake.hcl` `VERSION` is `21.0.8+9`, image tag drops `+9`). Alternative: `ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d` (matches upstream `2026.11.1-java25-graalvm`). Closest sibling: `apps/nzbhydra2` (Java runtime with `/config` and `USER apps`).
 
 ## 4. Dockerfile
 

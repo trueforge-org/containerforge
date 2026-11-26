@@ -42,7 +42,7 @@ Build stage: use the same python-node base. Do not use the upstream Alpine image
 4. Install into a prefix under `/app`: `npm install -g --prefix /app/n8n n8n@${VERSION}` (or `npm install --prefix /app/n8n n8n@${VERSION}`). Use `--omit=dev` if the package lock allows it. Build-time writes to `/app` are fine; runtime writes are not.
 5. Drop what is not needed at runtime: `rm -rf /tmp/*` and `npm cache clean --force`.
 6. License: `mkdir -p /usr/share/licenses/n8n && cp /app/n8n/lib/node_modules/n8n/LICENSE.md /usr/share/licenses/n8n/` (path inside the npm tree is UNVERIFIED; locate it in the build with `find`).
-7. Final stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5 AS build` is the build stage, `FROM` the same image for the final stage, `ARG VERSION`, `USER root`.
+7. Final stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (no `AS`; same image as the build stage), `ARG VERSION`, `USER root`.
 8. `COPY --from=build /app/n8n /app/n8n` and `COPY --from=build /usr/share/licenses/n8n /usr/share/licenses/n8n`, then `chown -R apps:apps /app && chmod -R 755 /app`.
 9. `ENV HOME=/config N8N_RELEASE_TYPE=dev SHELL=/bin/sh NODE_ENV=production`. Set `HOME=/config` the same way `apps/adguardhome-sync` does, so n8n's `~/.n8n` lands in `/config/.n8n` (UNVERIFIED that this matches n8n's user folder logic; the user-folder variable is the alternative).
 10. Tail:
@@ -103,11 +103,11 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - postgresql
-  - valkey
+  - name: postgresql
+  - name: valkey
 ```
 
-Only `N8N_PORT` and `TZ` are listed. `N8N_PORT` is UNVERIFIED as an n8n variable name: confirm it on docs.n8n.io before adding it, and remove it if the app ignores it (the schema rule: do not invent env vars). `N8N_ENCRYPTION_KEY` must NOT get a default. If it is added, mark it `required: false` and generate it in `start.sh` on first run into `/config` (see section 7). Check whether `opt_dependencies` is the schema key the forgetool schema accepts: UNVERIFIED (use the key sibling apps with optional deps use, if different).
+Only `N8N_PORT` and `TZ` are listed. `N8N_PORT` is UNVERIFIED as an n8n variable name: confirm it on docs.n8n.io before adding it, and remove it if the app ignores it (the schema rule: do not invent env vars). `N8N_ENCRYPTION_KEY` must NOT get a default. If it is added, mark it `required: false` and generate it in `start.sh` on first run into `/config` (see section 7). `opt_dependencies` with `- name: <app>` entries is the shape used by `apps/babybuddy/settings.yaml` (verified).
 
 ## 7. start.sh
 
@@ -141,7 +141,7 @@ filePaths:
 - /usr/share/licenses/n8n
 ```
 
-`timeoutSeconds` is a placeholder: copy the value from `apps/budge/container-test.yaml` (it has no timeout line; use the python-node family default from `apps/changedetection/container-test.yaml`, UNVERIFIED value). An `http` probe on `/` is planned after confirming the path returns 200 on an empty `/config` (UNVERIFIED). No env var is set by the test; n8n must start without `N8N_ENCRYPTION_KEY`, so the first-run key path is covered by `filePaths` only.
+`timeoutSeconds: 180` matches `apps/changedetection/container-test.yaml` (`apps/budge/container-test.yaml` has no timeout line); adjust after the first run. An `http` probe on `/` is planned after confirming the path returns 200 on an empty `/config` (UNVERIFIED). No env var is set by the test; n8n must start without `N8N_ENCRYPTION_KEY`, so the first-run key path is covered by `filePaths` only.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
