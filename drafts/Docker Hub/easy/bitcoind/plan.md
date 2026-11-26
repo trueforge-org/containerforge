@@ -1,7 +1,7 @@
 # bitcoind — implementation plan
 > Source: ./draft.md · Target: apps/bitcoind/ · Difficulty: easy · Role: main · Verified on 2026-11-23
 
-> Note: the `bitcoin-node` draft describes the same software (same tarball, same ports). Build one image and let both charts use it. Decide the app name once (`bitcoind` matches the binary); if both names are wanted, do not duplicate the Dockerfile, publish one app only.
+> Note: the `bitcoin-node` chart uses the same software (same tarball, same ports). Its draft was removed; `bitcoin-node` is an alternate name for this app (see `docs/alternate-names.md`). Both charts use this one image.
 
 ## 1. Verified upstream facts
 
@@ -152,7 +152,7 @@ filePaths:
 - `filePaths` uses `test -f`, so every entry must be a file, not a directory.
 - Bitcoin Core 32.x uses a custom HTTP server for RPC (release notes); older clients with sloppy headers may be rejected.
 - Bitcoin Core release tarballs include `libexec/` multiprocess binaries; they are kept (not needed, not harmful).
-- Duplicate of the `bitcoin-node` draft; only one of the two apps should be created (this plan is the proposed one; see the decision in `bitcoin-node`). The draft also flags the arm64 tarball as unconfirmed, now confirmed present.
+- The `bitcoin-node` chart's draft was a duplicate and was removed; one app is built (`bitcoind`) and `bitcoin-node` is listed as an alternate name in `docs/alternate-names.md`. The draft also flags the arm64 tarball as unconfirmed, now confirmed present.
 - No blockers: glibc tarball exists for amd64 and arm64, no GPU, no privileges.
 
 ## 11. Build and test steps
