@@ -72,6 +72,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
+  // UNVERIFIED: GPL-2.0-or-later vs GPL-3.0-or-later; confirm from the repo before merging
   default = "GPL-2.0-or-later"
 }
 

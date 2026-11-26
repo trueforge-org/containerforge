@@ -51,6 +51,7 @@ Not applicable while blocked. The chart sets `runAsUser 0`, `runAsNonRoot false`
 
 - Blocker 1 (licence): the image is closed-source with a ToS that restricts redistribution. The Renovate CE docs say a licence key is needed. The draft's "terms restrict redistribution" is consistent with the README.
 - Blocker 2 (arm64): the manifest lists arm64, which contradicts the draft. A decision depends on whether the arm64 build runs, which is UNVERIFIED.
+- Existing sibling: `apps/renovate` already ships the open-source Renovate (`docker.io/renovate/renovate:${VERSION}-full`, bake VERSION 44.263.5, AGPL-3.0-or-later), so the substitute route would duplicate it.
 - Blocker 3 (substitute): the open-source npm `renovate` is a different product. Using it would mean a different app, not a port of `renovate-ce`.
 - The image's ports, env vars, entrypoint, config path and volumes are unconfirmed.
 - Draft caveats kept: a licence or account may be needed to pull or run (inferred; the manifest pull was anonymous, but running needs a licence key).

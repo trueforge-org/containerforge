@@ -119,16 +119,16 @@ volumes:
     required: true
 dependencies: []
 opt_dependencies:
-  - mongodb
+  - name: mongodb
 ```
 
-Notes: `ytdl_use_local_db` default and the data redirect must be confirmed against the app before the defaults are final (UNVERIFIED). `dependencies` is empty because MongoDB is optional. Check the schema for the key name `opt_dependencies` against a sibling app that uses it (UNVERIFIED for this repo's schema). Do not list env vars the app does not read.
+Notes: `ytdl_use_local_db` default and the data redirect must be confirmed against the app before the defaults are final (UNVERIFIED). `dependencies` is empty because MongoDB is optional. The `opt_dependencies` list-of-`name:` form matches siblings such as `apps/babybuddy/settings.yaml`. Do not list env vars the app does not read.
 
 ## 7. start.sh
 
 - `set -eu`; `mkdir -p /config/appdata /config/users /config/subscriptions /config/audio /config/video`.
 - Seed nothing unless the app needs a config file in `/config` and it is missing (UNVERIFIED; the app creates `default.json` itself with `write_ytdl_config`).
-- Symlink the upstream data paths into `/config` (these are the only write paths): `/app/appdata -> /config/appdata`, `/app/users -> /config/users`, `/app/subscriptions -> /config/subscriptions`, `/app/audio -> /config/audio`, `/app/video -> /config/video`. Create the symlinks in `start.sh` (or in the Dockerfile as dangling links), only if they do not already exist, so nothing is written under `/app`.
+- Symlink the upstream data paths into `/config` (these are the only write paths): `/app/appdata -> /config/appdata`, `/app/users -> /config/users`, `/app/subscriptions -> /config/subscriptions`, `/app/audio -> /config/audio`, `/app/video -> /config/video`. Create the symlinks in the Dockerfile at build time as dangling links (the rootfs is read-only at runtime, so `start.sh` must not create them under `/app`); `start.sh` only creates the `/config/*` targets.
 - Export `PATH` with the python venv first if used.
 - `exec` the node process, replacing `pm2`: `cd /app && exec node app.js` (entry file UNVERIFIED; check `backend/package.json` `main` or `npm start` script at v4.3.2 and use the same command).
 - Bind `0.0.0.0` (the app uses `ytdl_port` on all interfaces by default; confirm in code).
@@ -145,7 +145,7 @@ http:
 - port: '17442'
   path: /
 filePaths:
-- /app/backend
+- /app/backend  # UNVERIFIED: zip layout not inspected
 - /usr/bin/ffmpeg
 ```
 
@@ -155,7 +155,7 @@ Notes: the timeout is taken from the Node-based siblings (`apps/budge` uses the 
 
 | Upstream write path | Remap |
 | --- | --- |
-| `/app/appdata`, `/app/users`, `/app/subscriptions`, `/app/audio`, `/app/video` | symlinks into `/config/*` (created in `start.sh`) |
+| `/app/appdata`, `/app/users`, `/app/subscriptions`, `/app/audio`, `/app/video` | build-time symlinks into `/config/*` (targets created in `start.sh`) |
 | `PM2_HOME=/app/pm2` | removed; pm2 not used |
 | `npm_config_cache=/app/.npm` | `/tmp/npm` |
 | Chart `runAsUser 0` / `readOnlyRootFilesystem false` | this image runs as `apps` and passes `--read-only --tmpfs /tmp` (per protocol) |

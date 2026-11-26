@@ -20,6 +20,8 @@
 | Data path | Draft says `/config` for config and database. UNVERIFIED against upstream (the datadir flag was not fetched). |
 | Ubuntu archive | `unrar` for 26.04 not checked (UNVERIFIED). |
 
+> NOTE (checked in repo): `apps/mylar3` already exists (python base, `docker-bake.hcl` VERSION `0.8.3`, source `mylar3/mylar3`, port 8090, `--datadir /config/mylar`, seeds `/config/scripts`). This plan's `apps/mylar` (MylarComics/mylar3 v0.11.0) would duplicate it. Decide whether to bump `apps/mylar3` instead (needs human decision; draft's chart `mylar` maps to the same app). The existing `apps/mylar3/start.sh` is a verified precedent for the flags `--nolaunch` and `--datadir`.
+
 ## 2. Target layout
 
 - `apps/mylar/Dockerfile`

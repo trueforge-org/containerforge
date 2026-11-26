@@ -9,8 +9,8 @@
 | Renovate | `datasource=github-releases depName=openobserve/openobserve versioning=semver` (the standard for GitHub tags; the GitHub release API confirms the tag format `vX.Y.Z`) |
 | License | AGPL-3.0 (GitHub API `spdx_id`, https://api.github.com/repos/openobserve/openobserve) |
 | Source URL | https://github.com/openobserve/openobserve |
-| Download (amd64) | `https://downloads.openobserve.ai/releases/openobserve/v1.1.2/openobserve-v1.1.2-linux-amd64.tar.gz` returned HTTP 200 (`application/x-tar`, 147,627,958 bytes) on 2026-11-25. The same pattern for `v1.2.0` is UNVERIFIED: not checked. |
-| Download (arm64) | UNVERIFIED: `.../openobserve-v1.1.2-linux-arm64.tar.gz` (draft URL) was not checked. The upstream Dockerfile only builds `x86_64-unknown-linux-gnu`, so arm64 availability is unconfirmed. |
+| Download (amd64) | `https://downloads.openobserve.ai/releases/openobserve/v1.1.2/openobserve-v1.1.2-linux-amd64.tar.gz` returned HTTP 200 (`application/x-tar`, 147,627,958 bytes) on 2026-11-25. The `v1.2.0` amd64 URL also returned 200. |
+| Download (arm64) | `.../openobserve-v1.1.2-linux-arm64.tar.gz` and `v1.2.0` amd64/arm64 URLs all returned HTTP 200 on a HEAD check (same host pattern). Earlier note:  The upstream Dockerfile only builds `x86_64-unknown-linux-gnu`, so arm64 availability is now confirmed by the HEAD check only (runtime untested). |
 | Checksum source | UNVERIFIED: no checksum asset on the GitHub release (v1.1.2 and v1.2.0 list no assets; v1.2.0 lists only `openapi.json`). Checking the downloads host for a `.sha256` file is an open item. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/openobserve/openobserve/d16d693ba99bc20621a58b948ecbcad7ec7fa882/deploy/build/Dockerfile.tag.amd64. Stages: `node:24-trixie` (web build), `public.ecr.aws/zinclabs/rust:trixie-sccache` (`cargo build --profile release-prod --features mimalloc`), runtime `gcr.io/distroless/cc-debian13`. The runtime copies `/openobserve` and `liblzma.so.5`, `libz.so.1`, `libbz2.so.1.0` from the builder. It runs `/openobserve init-dir -p /data/` at build time, `CMD ["/openobserve"]`, and sets no `USER`, `EXPOSE`, `VOLUME` or `ENV` defaults. |
 | Ports | UNVERIFIED: 5080 (from the draft; not on a fetched page). The upstream Dockerfile does not `EXPOSE` anything. |
@@ -39,12 +39,12 @@ Fits because the binary is a glibc-linked Rust executable. The upstream runtime 
 1. `FROM` line above, `ARG VERSION`, `ARG TARGETARCH`, `USER root`, `ENV HOME=/config`.
 2. Download and extract (mirrors `adguardhome-sync`):
    ```dockerfile
-   RUN curl -fsSL -o /tmp/openobserve.tar.gz \
-       "https://downloads.openobserve.ai/releases/openobserve/${VERSION}/openobserve-${VERSION}-linux-${ARCH}.tar.gz" \
+   RUN mkdir -p /app && curl -fsSL -o /tmp/openobserve.tar.gz \
+       "https://downloads.openobserve.ai/releases/openobserve/${VERSION}/openobserve-${VERSION}-linux-${TARGETARCH}.tar.gz" \
     && tar xzf /tmp/openobserve.tar.gz -C /app/ \
     && rm /tmp/openobserve.tar.gz
    ```
-   where `ARCH` maps `TARGETARCH` (`amd64` -> `amd64`, `arm64` -> `arm64`), so the name matches the draft's asset pattern. Confirm the tarball's top-level layout (expected: a single `openobserve` binary) before writing the extract path.
+   `TARGETARCH` (`amd64`, `arm64`) matches the asset names directly, so no mapping is needed. Confirm the tarball's top-level layout (expected: a single `openobserve` binary) before writing the extract path.
 3. Shared-library check: run `ldd /app/openobserve` in the build stage. If `liblzma.so.5`, `libz.so.1` or `libbz2.so.1.0` are missing on Ubuntu 26.04, install the matching Ubuntu packages (`liblzma5`, `zlib1g`, `libbz2-1.0`), pinned against the base release, and do not copy them from the builder.
 4. Chown and permissions: `chown -R apps:apps /app && chmod -R 755 /app`, then `rm -rf /tmp/*`.
 5. Licence: the tarball has no licence file in the expected layout (UNVERIFIED). Source the AGPL-3.0 text from the repo's `LICENSE` file (https://github.com/openobserve/openobserve) and copy it to `/usr/share/licenses/openobserve/` as a build step, if the tarball does not ship one.
@@ -73,7 +73,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "AGPL-3.0-or-later"
+  default = "AGPL-3.0"
 }
 
 variable "SOURCE" {
@@ -81,7 +81,7 @@ variable "SOURCE" {
 }
 ```
 
-Then the four standard targets and the default group, copied from `apps/adguardhome-sync/docker-bake.hcl`. The `LICENSE` value is `AGPL-3.0` per the GitHub API (not `-or-later`), so set `LICENSE` to `AGPL-3.0`. Validate with `docker buildx bake --print`. `ARG VERSION` in the Dockerfile must equal `v1.2.0` (the tarball URL uses the `v` prefix, so the Dockerfile should use `${VERSION}` as is, and the `ARCH` mapping strips nothing).
+Then the four standard targets and the default group, copied from `apps/adguardhome-sync/docker-bake.hcl`. `LICENSE` is `AGPL-3.0` per the GitHub API (not `-or-later`). Validate with `docker buildx bake --print`. `ARG VERSION` in the Dockerfile must equal `v1.2.0` (the tarball URL uses the `v` prefix, so the Dockerfile should use `${VERSION}` as is, and no arch mapping is needed).
 
 ## 6. settings.yaml
 
@@ -142,11 +142,11 @@ Draft expectations reconciled: the draft says the data path is `/config`, which 
 
 ## 10. Risks, caveats and open questions
 
-- Version gate: `v1.2.0` is the latest stable tag, but its download URLs are UNVERIFIED. Before writing the bake file, confirm `https://downloads.openobserve.ai/releases/openobserve/v1.2.0/openobserve-v1.2.0-linux-amd64.tar.gz` and the arm64 equivalent return 200. If not, use `v1.1.2` (amd64 verified) and state it in the PR.
-- arm64: UNVERIFIED. Confirm the arm64 tarball exists. Do not claim arm64 support in the PR until then.
+- Version gate: `v1.2.0` is the latest stable tag, and its amd64 and arm64 download URLs returned 200 (HEAD check). Re-check at implementation time.
+- arm64: tarball URL exists (HEAD 200); runtime on arm64 is untested, so do not claim it as tested.
 - Checksum: no published checksum found. Note in the PR that the download is not checksum-verified unless a `.sha256` file is found on the downloads host.
 - Data-path variable and credentials: the draft says the first start needs admin credentials through environment variables. The variable names are UNVERIFIED and must come from the official docs (https://openobserve.ai/docs/) before they go into `settings.yaml`. Do not guess names.
-- Port: 5080 from the draft is UNVERIFIED. The upstream image has no `EXPOSE`.
+- Port: 5080 (and gRPC 5081, inferred in the draft) are UNVERIFIED and not carried into `settings.yaml` until confirmed. The upstream image has no `EXPOSE`.
 - Health endpoint: `/healthz` in section 8 is UNVERIFIED.
 - Disk use: ingestion grows the data directory quickly (draft caveat, not re-verified). Mention in the docs part of the PR.
 - Upstream image uses `/data`; the draft and chart use `/config`. Decision: `/config/data` (section 9).

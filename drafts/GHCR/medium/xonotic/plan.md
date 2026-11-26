@@ -28,7 +28,7 @@
 - `apps/xonotic/settings.yaml`
 - `apps/xonotic/container-test.yaml`
 - `apps/xonotic/start.sh`
-- `apps/xonotic/defaults/server.cfg` (the seed config, copied to `/config` only when missing; needed because the server config is the only user-editable file. Source for the seed: `data/server.cfg` from the zip; confirm the path in the extracted tree.)
+- No `apps/xonotic/defaults/` folder: the seed `server.cfg` is extracted from the zip in the build stage and copied to `/defaults/server.cfg` in the image (section 4 step 5; path in the zip UNVERIFIED), so `start.sh` copies it to `/config` only when missing.
 
 No `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
