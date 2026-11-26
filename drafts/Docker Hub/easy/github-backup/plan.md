@@ -220,7 +220,7 @@ healthCommands:
 | git global config / credential cache | `HOME=/config` (writable) or `GIT_CONFIG_GLOBAL=/tmp/gitconfig` if git insists on writing; check on run |
 | pip / wheel caches | build only, `PIP_NO_CACHE_DIR`; `/tmp` at runtime |
 
-Draft expectations: chart sets UID 0 and writable rootfs; this port runs as 568, read-only rootfs, not privileged. Chart's two PVCs (`backups`, `config`) collapse to `/config`; mount it on large storage. If the chart mounts a separate backup volume, point `OUTPUT_DIR` at it (its path must be writable by UID 568, UNVERIFIED chart behaviour).
+Draft expectations: chart sets UID 0 and writable rootfs; this port runs as 568, read-only rootfs, not privileged. Chart's two persistence entries (`backuplocation` at `/home/docker/backups`, `config` at `/home/docker/github-backup/config/`) collapse to `/config`; mount it on large storage. If the chart mounts a separate backup volume, point `OUTPUT_DIR` at it (its path must be writable by UID 568, UNVERIFIED chart behaviour).
 
 ## 10. Risks, caveats and open questions
 

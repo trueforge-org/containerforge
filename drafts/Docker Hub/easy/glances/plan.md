@@ -16,7 +16,7 @@
 | Port | 61208/tcp web UI and REST API (`EXPOSE 61209 61208` in upstream Dockerfile; 61209 is XMLRPC). Docs run it with `GLANCES_OPT="-w"`. |
 | Env | `GLANCES_OPT` (upstream image CMD: `/venv/bin/python${PYTHON_VERSION} -m glances ${GLANCES_OPT}`), default usage `-w`. Password and username env vars are not documented; passwords come from `--password` (file under `~/.config/glances/glances.pwd`) or a `[passwords]` config block. |
 | Config | custom file via `-C <file>`; upstream image copies a default to `/etc/glances/glances.conf`. |
-| Upstream Dockerfile reviewed | `docker-files/ubuntu.Dockerfile` (stages base, build, buildminimal, buildfull, release; `full` adds `libzmq5 libvirt-clients`; base apt packages `python3 curl lm-sensors smartmontools net-tools tzdata`; runs as root, `# USER glances` commented out with the note that the Docker plugin would not work non-root). |
+| Upstream Dockerfile reviewed | `docker-files/ubuntu.Dockerfile` (stages base, build, buildminimal, buildfull, release; `full` adds `libzmq5`; base apt packages `python3 curl lm-sensors wireless-tools smartmontools net-tools tzdata`; no USER instruction, so it runs as root; no commented-out USER line and no Docker plugin comment in the fetched file). |
 | Health endpoint | `/api/4/status` (GET/HEAD, no authentication, intended for health checks; `glances_restful_api.py` at `v4.5.9`). |
 
 ## 2. Target layout
@@ -179,7 +179,7 @@ Draft expectations: non-root yes (the chart uses 1000; this port uses 568, which
 
 - Draft caveat: plugins (GPU, sensors, Docker, SMART, RAID) need extra Python extras and host access; first version ships `web` only.
 - Draft caveat: without host namespaces only container metrics are visible. Mounting `/etc/os-release` read-only shows the host OS (upstream docs).
-- Docker plugin needs the Docker socket and group membership; a non-root `apps` user will not have it. The upstream Dockerfile comments say the same ("If used, the Glances Docker plugin do not work").
+- Docker plugin needs the Docker socket and group membership; a non-root `apps` user will not have it. The fetched upstream Dockerfile contains no such comment (see context/README.md corrections).
 - Python 3.15 is not a classifier of Glances 4.5.9; fallback base 3.14.8 (section 3).
 - The draft tag (4.3.0.8) is old; this plan uses 4.5.9 (latest PyPI). The `all` extra pulls many heavy packages; not used.
 - Web UI and API are unauthenticated by default; expose only internally or add a password.

@@ -1,95 +1,111 @@
-# factoriotools/factorio-docker
+# factoriotools/factorio-docker (GitHub)
 
-Source URL(s) + fetch date:
-- https://github.com/factoriotools/factorio-docker (repo, README via https://raw.githubusercontent.com/factoriotools/factorio-docker/master/README.md)
-- https://raw.githubusercontent.com/factoriotools/factorio-docker/446f2553eedb142eb6a25c670af7def2647ba24c/docker/Dockerfile (same as https://github.com/factoriotools/factorio-docker/blob/446f2553eedb142eb6a25c670af7def2647ba24c/docker/Dockerfile)
+**Source URL(s) + fetch date**
+- https://github.com/factoriotools/factorio-docker (linked from draft as source repository)
+- https://raw.githubusercontent.com/factoriotools/factorio-docker/446f2553eedb142eb6a25c670af7def2647ba24c/docker/Dockerfile (pinned commit from draft's Dockerfile link)
+- https://raw.githubusercontent.com/factoriotools/factorio-docker/446f2553eedb142eb6a25c670af7def2647ba24c/docker/docker-entrypoint.sh (404; the Dockerfile `COPY files/*.sh` puts it under `docker/files/`)
+- https://raw.githubusercontent.com/factoriotools/factorio-docker/446f2553eedb142eb6a25c670af7def2647ba24c/docker/files/docker-entrypoint.sh (fetched on retry)
+- https://raw.githubusercontent.com/factoriotools/factorio-docker/446f2553eedb142eb6a25c670af7def2647ba24c/README.md
+- https://raw.githubusercontent.com/factoriotools/factorio-docker/446f2553eedb142eb6a25c670af7def2647ba24c/LICENSE
 - Fetched 2026-11-26
 
-## What it is
-Community Docker packaging of the Factorio headless server. Image `factoriotools/factorio`. Upstream license per plan.md: MIT.
+**What it is**
+Community Docker packaging of the Factorio headless server. Downloads the vendor headless tarball at build time, verifies its sha256, and runs it with an entrypoint script that generates config and saves.
 
-## Install/build steps and build deps
-Upstream Dockerfile (two stages, verbatim key lines from the fetch):
-- Stage 1 `rcon-builder` on `debian:stable-slim`: `apt-get install build-essential`, copy `rcon/` to `/src`, `make` (builds RCON client).
-- Stage 2 on `debian:stable-slim`: installs `ca-certificates curl jq pwgen xz-utils procps gettext-base file util-linux`.
-- On aarch64 without `SHA256_ARM64`: also installs `unzip` and fetches box64 `v0.2.4` (`box64-GENERIC_ARM-RelWithDebInfo.zip` from ptitSeb/box64 releases) to `/bin/box64`.
-- Creates group/user `factorio` with `PGID`/`PUID` default 845.
-- Build args: `VERSION` (required), `SHA256` (required), `SHA256_ARM64` (optional), `PRESET`, `CURL_RETRIES` (default 8), `BOX64_VERSION`.
-- Download: `curl -sSL https://www.factorio.com/get-download/$VERSION/headless/$platform` where platform is `linux64` or `linux-arm64` (arm64 chosen when `uname -m` is aarch64 and `SHA256_ARM64` set). Archive `/tmp/factorio_headless_${platform}_$VERSION.tar.xz`, verified with `sha256sum -c`.
-- Extract with `tar xf ... --directory /opt`, `chmod ugo=rwx /opt/factorio`, symlink `/opt/factorio/bin/x64` to `arm64` if only arm64 exists, symlink `scenarios` and `saves` into `/opt/factorio`, `mkdir /opt/factorio/config/`, `chown -R factorio:factorio /opt/factorio /factorio`.
-- Copies scripts, `config.ini`, and the built `rcon` binary.
+**Install/build steps and build deps (Dockerfile)**
+- Two stages. Stage 1 `debian:stable-slim` builds `rcon` (`build-essential`, `make`) and copies `/src/rcon` to `/bin/rcon`.
+- Stage 2 `debian:stable-slim`. Packages: `ca-certificates curl jq pwgen xz-utils procps gettext-base file util-linux` (no recommends). On aarch64 with empty `SHA256_ARM64` it also installs `unzip` and fetches box64 (`v0.2.4`) (not used on native arm64 builds).
+- Build args: `USER=factorio`, `GROUP=factorio`, `PUID=845`, `PGID=845`, `BOX64_VERSION=v0.2.4`, `SHA256_ARM64` (empty), `PRESET`, `CURL_RETRIES=8`, `VERSION` (required), `SHA256` (required).
+- User: `groupadd --system --gid $PGID`, `useradd --system --uid $PUID --gid $PGID --no-create-home --shell /bin/sh`.
+- Download: platform `linux64` (x64) or `linux-arm64` (when aarch64 and `SHA256_ARM64` set). URL `https://www.factorio.com/get-download/$VERSION/headless/$platform`, `curl -sSL --retry $CURL_RETRIES`, archive `/tmp/factorio_headless_${platform}_$VERSION.tar.xz`.
+- Checksum: `echo "$sha256  $archive" | sha256sum -c`; exits 1 on mismatch.
+- Extract: `tar xf` into `/opt`, `chmod ugo=rwx /opt/factorio`. If `bin/arm64` exists and `bin/x64` does not, symlinks `x64` to `arm64`.
+- Symlinks `$SCENARIOS` and `$SAVES` into `/opt/factorio`, creates `/opt/factorio/config/`, `chown -R factorio:factorio /opt/factorio /factorio`.
+- COPY `files/*.sh` to `/`; `files/config.ini` to `/opt/factorio/config/config.ini`; rcon binary to `/bin/rcon`.
 
-## Runtime deps
-ca-certificates, curl, jq, pwgen (rconpw generation), xz-utils, procps, gettext-base, file, util-linux. On aarch64 without native arm64 archive: box64 + unzip.
+**Runtime deps**
+Debian packages above (curl, jq, pwgen, xz-utils, procps, gettext-base, file, util-linux). The entrypoint uses them.
 
-## Binaries/entrypoint/CLI flags
-- `ENTRYPOINT ["/docker-entrypoint.sh"]`. No CMD, no USER instruction (the image's final USER is not set in the Dockerfile; the entrypoint handles PUID/PGID).
-- Scenario entrypoint: `/scenario.sh` run with `--entrypoint` plus scenario name. `/scenario2map.sh` is deprecated.
-- `docker exec factorio rcon <cmd>` (2.0.18+). Image includes `jq`.
+**Binaries/entrypoint/CLI flags**
+- ENTRYPOINT `["/docker-entrypoint.sh"]`, no CMD.
+- Entrypoint behaviour (from docker/files/docker-entrypoint.sh):
+  - Shell `set -eoux pipefail`. Volume fixed at `/factorio`; `$CONFIG/rconpw` generated with `pwgen 15 1` if missing, kept if present.
+  - Deletes incomplete `*.tmp.zip` in `$SAVES`. If no `.zip` exists or `GENERATE_NEW_SAVE=true`, creates `$SAVE_FILE` with `/opt/factorio/bin/x64/factorio --create`, `--preset` if set, `--map-gen-settings "$CONFIG/map-gen-settings.json"`, `--map-settings "$CONFIG/map-settings.json"`. Skips creation if the file already exists.
+  - Copies missing `server-settings.json`, `map-gen-settings.json`, `map-settings.json` from `/opt/factorio/data/*.example.json`.
+  - `sed -i '/write-data=/c\write-data=\/factorio/' /opt/factorio/config/config.ini`.
+  - Server flags: `--server-settings`, `--server-banlist`, `--rcon-port`, `--server-whitelist`, `--rcon-password "$(cat rconpw)"`, `--server-id`, `--mod-directory`; `--use-server-whitelist` (bare flag) and `--server-adminlist` unless VERSION is 0.15.* or 0.16.*; `--console-log` if set; `--bind` if set; `--port` unless BIND already has a port; `--start-server-load-latest` when `LOAD_LATEST_SAVE=true`, else `--start-server "$SAVE_FILE"`. Ends with `exec ... factorio "${FLAGS[@]}" "$@"`.
+  - `docker-update-mods.sh` runs when enabled; `docker-dlc.sh` always runs.
+- HEALTHCHECK: `--interval=30s --timeout=10s --start-period=5m --retries=3 CMD ["/docker-healthcheck.sh"]`.
+- Server binary path: `/opt/factorio/bin/x64/factorio` (arm64 build at `bin/arm64`, symlinked to `x64`).
+- Entrypoint launches the server with the flags documented on the wiki (see docs-wiki-factorio-com.md), including `--config`, `--server-settings`, `--server-banlist`, `--server-whitelist`, `--use-server-whitelist`, `--server-adminlist`, `--server-id`, `--start-server-load-latest` or `--start-server`, `--port`, `--rcon-port`, `--rcon-password`, `--bind`, `--preset`, `--create`.
+- `rcon` helper binary at `/bin/rcon`.
 
-## Env vars
-| Variable | Default | Meaning |
+**Env vars (table, image defaults)**
+
+| Name | Default | Notes |
 | --- | --- | --- |
-| PORT | 34197 | UDP game port (ENV in Dockerfile) |
-| RCON_PORT | 27015 | RCON TCP port |
-| SAVES | /factorio/saves | saves dir (ENV) |
-| CONFIG | /factorio/config | config dir (ENV) |
-| MODS | /factorio/mods | mods dir (ENV) |
-| SCENARIOS | /factorio/scenarios | scenarios dir (ENV) |
-| SCRIPTOUTPUT | /factorio/script-output | script output dir (ENV) |
-| PUID / PGID | 845 | server user/group ID (regular images only) |
-| DLC_SPACE_AGE | true | toggles Space Age mods in mod-list.json (2.0.8+) |
-| PRESET | unset | map preset for a new map |
-| GENERATE_NEW_SAVE | false | generate a new save if none exists |
-| LOAD_LATEST_SAVE | true | load newest save; else load SAVE_NAME |
-| SAVE_NAME | _autosave1 | save name or absolute path |
-| BIND | unset | IP (v4/v6), optionally with port; port in BIND overrides PORT |
-| TOKEN / USERNAME | unset | factorio.com credentials, mod updates only |
-| UPDATE_MODS_ON_START | unset | update mods at start (needs credentials) |
-| UPDATE_IGNORE | unset | comma-separated mods to skip |
-| CONSOLE_LOG_LOCATION | unset | console log path |
-| SERVER_SETTINGS_FILE | $CONFIG/server-settings.json | settings file |
-| SERVER_ID_FILE | $CONFIG/server-id.json | identity file |
-| SERVER_ADMINLIST_FILE | $CONFIG/server-adminlist.json | admin list |
-| SERVER_BANLIST_FILE | $CONFIG/server-banlist.json | ban list |
-| SERVER_WHITELIST_FILE | $CONFIG/server-whitelist.json | whitelist |
+| `PORT` | `34197` | Game port, UDP. |
+| `RCON_PORT` | `27015` | RCON, TCP. |
+| `BIND` | unset | `IP[:PORT]`; explicit port overrides `PORT`. |
+| `SAVES` | `/factorio/saves` | ENV in image. |
+| `CONFIG` | `/factorio/config` | ENV in image. |
+| `MODS` | `/factorio/mods` | ENV in image. |
+| `SCENARIOS` | `/factorio/scenarios` | ENV in image. |
+| `SCRIPTOUTPUT` | `/factorio/script-output` | ENV in image. |
+| `SAVE_NAME` | `_autosave1` | |
+| `LOAD_LATEST_SAVE` | `true` | |
+| `GENERATE_NEW_SAVE` | `false` | |
+| `PRESET` | unset | Examples: default, rich-resources, marathon, death-world, death-world-marathon, rail-world, ribbon-world. |
+| `PUID` / `PGID` | `845` / `845` | Regular images only. |
+| `DLC_SPACE_AGE` | `true` | ENV in image. |
+| `TOKEN` / `USERNAME` | unset | factorio.com credentials for mod updates. |
+| `UPDATE_MODS_ON_START` | unset | |
+| `UPDATE_IGNORE` | unset | Comma-separated mod names. |
+| `CONSOLE_LOG_LOCATION` | unset | |
+| `SERVER_SETTINGS_FILE` | `$CONFIG/server-settings.json` | |
+| `SERVER_ID_FILE` | `$CONFIG/server-id.json` | |
+| `SERVER_ADMINLIST_FILE` | `$CONFIG/server-adminlist.json` | |
+| `SERVER_BANLIST_FILE` | `$CONFIG/server-banlist.json` | |
+| `SERVER_WHITELIST_FILE` | `$CONFIG/server-whitelist.json` | |
 
-All env values are compared as strings; quote YAML values. Factorio does not expand env vars inside its JSON files.
+**Ports**
+- `34197/udp` game (EXPOSE `$PORT/udp`)
+- `27015/tcp` RCON (EXPOSE `$RCON_PORT/tcp`); only opened when rcon is passed.
 
-## Ports
-- `34197/udp` game (`EXPOSE $PORT/udp`).
-- `27015/tcp` RCON (`EXPOSE $RCON_PORT/tcp`). Not publishing it disables outside RCON access; RCON still runs inside the container.
+**Volumes/paths and persistent data**
+- VOLUME `/factorio`, holding `config/` (map-gen-settings, map-settings, rconpw, server-settings, admin, ban and whitelist files), `mods/`, `saves/`.
+- The README's quick start mounts a host folder at `/factorio`.
 
-## Volumes/paths and persistent data
-- `VOLUME /factorio` (single volume). Contents: `config/` (map-gen-settings.json, map-settings.json, rconpw, server-adminlist.json, server-banlist.json, server-settings.json, server-whitelist.json, server-id.json), `mods/` (mod zips), `saves/` (e.g. `_autosave1.zip`), `scenarios/`, `script-output/`.
-- Game install is at `/opt/factorio` (not on the volume). Saves/scenarios are symlinked from /opt/factorio into /factorio.
-- Entrypoint examples under `/factorio/entrypoints`.
+**User/UID & permissions**
+- Regular image runs as `factorio` UID/GID 845 via ENTRYPOINT logic (PUID/PGID). Files should be owned by 845 in regular images.
+- Dockerfile has no `USER` instruction. The entrypoint runs as root only if `id -u` is 0: it remaps `factorio` with `usermod -o -u $PUID` / `groupmod -o -g $PGID`, runs `chown -R factorio:factorio /factorio`, then execs the server through `setpriv --reuid=factorio --regid=factorio --init-groups --`. If not root, it runs the binary as the current user with no `setpriv`.
+- Rootless variants (`-rootless` tag suffix, e.g. `stable-rootless`) run as UID 1000 and ignore PUID/PGID; labelled experimental.
 
-## User/UID and permissions
-- Regular image: starts as root, chowns `/factorio`, runs the server as `PUID:PGID` (845:845). Host dirs need `chown 845:845`.
-- Rootless image (`-rootless` tag): UID 1000, no PUID/PGID support, no runtime chown, dirs created with open permissions at build time, flagged experimental.
+**Config files and formats**
+- `files/config.ini` seeded to `/opt/factorio/config/config.ini`.
+- `server-settings.json`, `map-gen-settings.json`, `map-settings.json` generated under `$CONFIG` by the entrypoint from example files (per README: settings generated at `/opt/factorio/config/server-settings.json`).
 
-## Config files and formats
-- `server-settings.json` (main settings; `visibility.public` must be set explicitly for listing; `lan: true` for LAN), `map-gen-settings.json`, `map-settings.json`, `server-adminlist.json`, `server-banlist.json`, `server-whitelist.json`, `rconpw` (generated by pwgen if absent).
+**Healthcheck/readiness endpoints**
+`/docker-healthcheck.sh` (script not fetched). Start period 5 minutes.
 
-## Healthcheck/readiness
-- Dockerfile HEALTHCHECK: `/docker-healthcheck.sh`, interval 30s, timeout 10s, start period 5m, 3 retries.
-- Runs `rcon /players count` with 5-second timeout. Read-only, needs no published RCON port. Does not test external UDP connectivity. Docker reports starting/healthy/unhealthy and does not restart automatically. Disable with `healthcheck.disable: true` or `--no-healthcheck`.
+**Version/release info and asset naming**
+- Image build args `VERSION` and `SHA256` are required; version is supplied externally.
+- Vendor archive naming: `factorio-headless_linux_<version>.tar.xz` (x64) and `factorio-headless_linux-arm64_<version>.tar.xz` (arm64). Download page pattern: `https://www.factorio.com/get-download/<version>/headless/<linux64|linux-arm64>`.
+- Factorio 2.1+ has a native `linux-arm64` headless build; older versions run x64 under box64 (experimental).
 
-## Version/release info and asset naming
-- Docker Hub tags: `latest`, `stable`, `stable-<x.y.z>`, `<x.y.z>`, `0.x`, `0.x.y`, `0.x-z`; rootless variants end `-rootless`.
-- Archive naming used by the Dockerfile: `factorio_headless_<platform>_<VERSION>.tar.xz` for the download cache; upstream download URL pattern `https://www.factorio.com/get-download/<VERSION>/headless/<linux64|linux-arm64>`.
-- Build script: `python3 build.py --both` (dev only); `--changed-from GIT_REF` triggers rebuilds only for new versions or changed checksums.
-- The README lists `2.1.25` as a tag on Docker Hub; the Docker Hub page summary lists `latest` as 2.1.24 (see Gotchas).
-- Git tags of the repo: plan.md says none for 2.x (checked 2026-11-25); not re-verified here.
+**Arch support**
+x64 (`linux64`) and arm64 (`linux-arm64`, 2.1+ only, native). Older arm64 uses box64 emulation (experimental).
 
-## Arch support
-- amd64 (linux64) and arm64 (linux-arm64 native archive for 2.1+, per README and Docker Hub page). Older versions run x64 under box64 on arm64 (experimental, crashes/lag).
+**Gotchas**
+- Dockerfile uses `www.factorio.com`; plan.md uses `factorio.com` (redirect target).
+- Rootless and regular images differ in UID handling.
+- TrueCharts probes use the RCON TCP port, so RCON must be enabled for the chart's health checks to pass.
+- Container stop should use long timeout (`docker stop --timeout 120`) so large saves finish writing.
 
-## Gotchas
-- Plan.md section 1 notes the factorio.com get-download URL and the sha256sums page; both were consistent with this upstream Dockerfile (same URL pattern, same checksum approach).
-- Upstream runs the game from `/opt/factorio/bin/x64/factorio`; plan.md section "Archive layout" says the same (arm64 uses `bin/arm64` with `x64` symlink).
-- Upstream Dockerfile sets `EXPOSE 34197/udp 27015/tcp`; plan.md says RCON port is only open when `--rcon-port` is passed. These are compatible: EXPOSE is metadata; the plan's wording about the open port is a runtime-flag statement not made by upstream.
-- Upstream README says `PUID` and `PGID` apply to regular images only. Plan.md's env list omits PUID/PGID (intentional, per plan).
-- Changing PUID/PGID changes ownership of mounted data.
-- Allow a long stop timeout (`docker stop --timeout 120`) so the world saves.
+**License**
+LICENSE is the MIT License, "Copyright (c) 2016" (no holder named). This is the packaging repo; the game is proprietary and not covered by this license.
+
+**Contradictions with plan.md**
+- plan.md says the Docker Hub image has `2.1.25` and the factoriotools git tags have no 2.x. Git tags not checked here; Docker Hub listing fetched shows `latest` and `2.1.24` only (see dockerhub summary).
+- plan.md section 1 says this repo is MIT. Confirmed by LICENSE.
+- plan.md section 4 uses `https://factorio.com/get-download/...`; upstream uses `https://www.factorio.com/...`. Both are the same site, so not a correction.

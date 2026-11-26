@@ -146,7 +146,7 @@ The TCP probe covers the only port in `settings.yaml`. The `filePaths` prove the
 | Upstream write or privilege | Remap |
 | --- | --- |
 | Alpine user `guacd` UID 1000 | Base user `apps`. |
-| Chart `runAsUser 1000/runAsGroup 1001`, `readOnlyRootFilesystem: false` | Not needed. Everything is installed under `/usr/local` and `/usr/lib` at build time. |
+| Chart `runAsUser 1000/runAsGroup 1000`, `readOnlyRootFilesystem: false` | Not needed. Everything is installed under `/usr/local` and `/usr/lib` at build time. |
 | `$HOME` for FreeRDP | `HOME=/tmp`. |
 | Recordings (`/var/lib/guacamole/recordings`) and drive (`/var/lib/guacamole/drive`) | Real volumes owned by `apps`; on a read-only rootfs they must be mounted, otherwise those features fail (guacd logs the error). |
 | `/tc-init`, configmap seed scripts from the chart | Belong to the web client chart, not this image. |

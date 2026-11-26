@@ -1,38 +1,35 @@
-# Docker Hub: factoriotools/factorio
+# factoriotools/factorio (Docker Hub)
 
-Source URL(s) + fetch date:
+**Source URL(s) + fetch date**
 - https://hub.docker.com/r/factoriotools/factorio
 - Fetched 2026-11-26
 
-## What it is
-Dedicated Factorio server image (server only). Game is sold separately. Source: github.com/factoriotools/factorio-docker.
+**What it is**
+Dedicated Factorio server image. Server only; the game must be bought separately.
 
-## Architectures
-x64 and ARM64. ARM64 on 2.1+ uses native linux-arm64 headless build. Older versions use box64 emulation (experimental).
+**Tags**
+- `latest` and `2.1.24` are listed on the page.
+- Documented patterns: `stable`, `stable-x.y.z`, `0.x`, `0.x.y`, `0.x-z`. Rootless variants end in `-rootless`.
+- The listed latest tag digest starts `sha256:69d0bb4e0...`, about 123.3 MB. Last pushed about 10 days before fetch.
+- `2.1.25` is not shown in the fetched listing (the page lists only a recent tag, so this is not proof it is missing).
 
-## Tags
-- `latest` (page shows currently 2.1.24; the GitHub README fetch lists 2.1.25 as a tag; see Gotchas)
-- `stable` (version marked stable on factorio.com)
-- `stable-x.y.z`, `x.y.z`, rootless variants with `-rootless`
-- `0.x`, `0.x.y`, `0.x-z` (older branch tags)
+**Architectures**
+Not listed. The page notes that Factorio 2.1+ has a native arm64 build; older versions use x64 under box64.
 
-## Ports
-- 34197/udp game (changeable via PORT)
-- 27015/tcp RCON (optional)
+**Run/quick start**
+`docker run -d -p 34197:34197/udp -p 27015:27015/tcp -v /opt/factorio:/factorio --name factorio --restart=unless-stopped factoriotools/factorio` after `chown 845:845 /opt/factorio`.
 
-## Volumes
-Single `/factorio` volume with `config/`, `mods/`, `saves/`. Files owned by uid 845 unless PUID/PGID changed.
+**Env vars (listed on page)**
+`PUID`/`PGID` (845), `GENERATE_NEW_SAVE` (false), `LOAD_LATEST_SAVE` (true), `SAVE_NAME` (`_autosave1`), `PRESET`, `PORT` (34197 UDP), `BIND`, `RCON_PORT` (27015), `TOKEN`/`USERNAME` (mod updates), `UPDATE_MODS_ON_START`, `UPDATE_IGNORE`, `CONSOLE_LOG_LOCATION`, `DLC_SPACE_AGE` (true), `MODS`, `SERVER_SETTINGS_FILE`, `SERVER_ID_FILE`, `SERVER_ADMINLIST_FILE`, `SERVER_BANLIST_FILE`, `SERVER_WHITELIST_FILE`.
 
-## Usage
-- Quick start: create `/opt/factorio`, chown to 845, run with `-p 34197:34197/udp -p 27015:27015/tcp -v /opt/factorio:/factorio`. Edit `config/server-settings.json` then restart.
-- Stop with `docker stop --timeout 120`.
-- Console: `docker attach` or `docker exec factorio rcon /h` (2.0.18+).
-- Health check: `rcon /players count`, 30s interval, 3 retries, 5-minute start grace period.
-- Saves: newest loads by default. For specific map: `SAVE_NAME`, `LOAD_LATEST_SAVE=false`, `GENERATE_NEW_SAVE=true`, `PRESET` (e.g. death-world).
-- Mods: place in mods folder; `UPDATE_MODS_ON_START` needs username and token; `UPDATE_IGNORE` skips mods.
-- Scenarios: `/scenario.sh` entrypoint; `/scenario2map.sh` deprecated.
-- Upgrade: back up saves, remove container, pull, rerun with same volume.
-- Env var list matches the GitHub README summary (see github-factoriotools-factorio-docker.md).
+**Ports**
+34197/udp (game, required) and 27015/tcp (RCON, optional).
 
-## Gotchas
-- Page shows `latest` as 2.1.24 while the GitHub README fetch lists 2.1.25 as a tag. Not resolved by these fetches; plan.md section 1 says Docker Hub has 2.1.25.
+**Volumes**
+Single `/factorio` volume.
+
+**Source link**
+https://github.com/factoriotools/factorio-docker
+
+**Contradictions with plan.md**
+- plan.md section 1 says Docker Hub has `2.1.25` and `-rootless` and `stable-*` variants. The fetched page confirms the variant patterns and shows `2.1.24`, not `2.1.25`. Unverified for 2.1.25.

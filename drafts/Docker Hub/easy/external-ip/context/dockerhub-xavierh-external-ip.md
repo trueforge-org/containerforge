@@ -1,30 +1,26 @@
-# Docker Hub: xavierh/external-ip
+# xavierh/external-ip (Docker Hub)
 
-Source URL(s) + fetch date:
+**Source URL(s) + fetch date**
 - https://hub.docker.com/r/xavierh/external-ip
 - Fetched 2026-11-26
 
-## What it is
-Container that polls the public IP and sends a notification via Pushover or Apprise when it changes. Source: github.com/xavier-hernandez/docker-external-ip.
+**What it is**
+Docker Hub listing for the image used by the TrueCharts chart. Publisher `xavierh`, 10K+ pulls listed.
 
-## Install/build steps
-Prebuilt image only. The page has no build steps.
+**Install/build steps and build deps**
+`docker pull xavierh/external-ip`. Compose example in the page: service `external_ip`, `restart: always`, `TZ=America/New_York` in examples.
 
-## Env vars
-Same set as upstream README: TZ, RECOVERY_ALERT (default False), DELAY (default 5 minutes), PROVIDER (default cloudflare), NOTIFICATION_TYPE (PUSHOVER or APPRISE), PUSHOVER_TOKEN, PUSHOVER_USER, PUSHOVER_TITLE, APPRISE_TITLE, APPRISE_1..APPRISE_10, SAVE_IP. Details in github-xavier-hernandez-docker-external-ip.md.
+**Version/release info and asset naming**
+- Tags: only `latest` is listed (labelled the stable tag). Size about 37.8 MB.
+- Last pushed: about 3 months before fetch (page relative date).
+- Source repo linked: https://github.com/xavier-hernandez/docker-external-ip
 
-## Ports
-None documented.
-
-## Volumes/paths
-`/path/to/data:/stor-external-ip`, optional, required with SAVE_IP.
-
-## Version/release info
-Only the `latest` tag is listed ("stable"). Size about 37.8 MB. "Last updated about 3 months ago" at fetch time. Pull count shown as "10K+".
-
-## Arch support
+**Arch support**
 linux/amd64, linux/arm/v7, linux/arm64/v8.
 
-## Gotchas
-- Compose example in the page uses container_name `external_ip` and restart `always`.
-- Page gives no version numbers, so no version pin can be verified from this page.
+**Gotchas**
+- The image is published only as `latest`; no version tag is available to pin on Docker Hub.
+- TrueCharts values reference `latest@sha256:eae953728e95a9536d0c85b941bbc55b66c64f62713402bd8f1d182073b921a8` (see truecharts summary).
+
+**Contradictions with plan.md**
+None found. plan.md does not claim a Docker Hub tag other than `latest`.

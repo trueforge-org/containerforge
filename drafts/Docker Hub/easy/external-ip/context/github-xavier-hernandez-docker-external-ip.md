@@ -1,76 +1,90 @@
-# xavier-hernandez/docker-external-ip
+# xavier-hernandez/docker-external-ip (GitHub)
 
-Source URL(s) + fetch date:
-- https://github.com/xavier-hernandez/docker-external-ip (repo root)
-- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/master/README.md
-- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/Dockerfile (pinned commit from the draft)
+**Source URL(s) + fetch date**
+- https://github.com/xavier-hernandez/docker-external-ip
+- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/README.md
+- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/Dockerfile
+- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/scripts/start.sh
+- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/scripts/lib/ipv4.sh
+- https://raw.githubusercontent.com/xavier-hernandez/docker-external-ip/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/scripts/lib/notify.sh
 - https://github.com/xavier-hernandez/docker-external-ip/releases
 - Fetched 2026-11-26
 
-## What it is
-Shell-script loop that polls the public IP address and sends a notification (Pushover or Apprise) when it changes. Image is built from this repo.
+**What it is**
+Bash loop that looks up the public IPv4 address on a schedule (dig against Cloudflare, Google or OpenDNS, or curl against ipify) and sends a change or recovery notification through Pushover or Apprise. No compiled code, no listening service.
 
-## Install/build steps and build deps
-Dockerfile at commit 3be417fe91ba6ab1be2eeb1c2ee218d01470a185 (summary, the fetch did not return the verbatim text):
-1. Base `alpine:3.16.0`.
-2. `apk add` of `bash`, `curl`, `bind-tools` (provides `dig`), `py3-pip`, with no apk cache left behind.
-3. `pip install apprise` (not version-pinned; no `--no-cache-dir` in that step per the fetch summary).
-4. `WORKDIR /opt/ext`.
-5. `ADD /scripts scripts` (plain local copy).
-6. `CMD ["bash","/opt/ext/scripts/start.sh"]` (exec form). No ENTRYPOINT.
-- No EXPOSE, no VOLUME, no USER (runs as root upstream).
+**Install/build steps and build deps (upstream Dockerfile at the pinned commit)**
+- `FROM alpine:3.16.0`
+- `RUN apk add --no-cache bash curl bind-tools py3-pip`
+- `RUN pip install apprise`
+- `WORKDIR /opt/ext`
+- `ADD /scripts scripts`
+- `CMD ["bash", "/opt/ext/scripts/start.sh"]`
+- No USER, ENTRYPOINT, ENV, EXPOSE or VOLUME instruction.
 
-## Runtime deps
-- `bash`, `dig` (cloudflare, google, opendns providers), `curl` (ipify and pushover), `sleep`.
-- Apprise CLI for `NOTIFICATION_TYPE=APPRISE`.
-- Outbound internet access.
+**Runtime deps**
+- bash, curl, bind-tools (`dig`), apprise (pip) for the Apprise path. Pushover path uses curl only.
 
-## Binaries/entrypoint/CLI flags
-- No CLI flags. All config is through environment variables.
-- Entry: `bash /opt/ext/scripts/start.sh` (upstream). Loop: fetch IP, log it, tag `[CHANGE]` or `[RECOVERY]`, log `[Error or Invalid IP address]` on failure, sleep `DELAY`.
+**Binaries/entrypoint/CLI flags**
+- Entrypoint in upstream: `bash /opt/ext/scripts/start.sh`. Layout: `scripts/start.sh`, `scripts/lib/ipv4.sh`, `scripts/lib/notify.sh`.
+- Provider functions in `lib/ipv4.sh`:
+  - `cloudflare_ipv4`: `dig +short txt ch whoami.cloudflare @1.0.0.1`, quotes stripped.
+  - `google_ipv4`: `dig TXT +short o-o.myaddr.l.google.com @ns1.google.com`, quotes stripped.
+  - `opendns_ipv4`: `dig +short myip.opendns.com @resolver1.opendns.com`.
+  - `ipify_ipv4`: `curl -s -k https://api.ipify.org` (`-k` disables TLS verification).
+  - `valid_ipv4`: four dot-separated groups of 1 to 3 digits, each at most 255.
+- `lib/notify.sh`:
+  - PUSHOVER: `curl -s -F token=... -F user=... -F message=... -F title=... https://api.pushover.net/1/messages`
+  - APPRISE: loops `APPRISE_1`..`APPRISE_10`, runs `apprise -vv -t "$APPRISE_TITLE" -b "$msg" "<url>"` for each non-empty entry.
 
-## Env vars
-| Variable | Default | Meaning |
+**Env vars (table)**
+
+| Name | Default (upstream) | Notes |
 | --- | --- | --- |
-| `TZ` | unset | timezone for log timestamps |
-| `DELAY` | 5m | sleep interval; seconds, or suffix m/h/d |
-| `PROVIDER` | CLOUDFLARE | CLOUDFLARE, GOOGLE, OPENDNS, IPIFY |
-| `NOTIFICATION_TYPE` | none | PUSHOVER or APPRISE |
-| `PUSHOVER_TOKEN` | - | required when NOTIFICATION_TYPE=PUSHOVER |
-| `PUSHOVER_USER` | - | required when NOTIFICATION_TYPE=PUSHOVER |
-| `PUSHOVER_TITLE` | "EXTERNAL IP" | message title |
-| `APPRISE_TITLE` | "EXTERNAL IP" | message title |
-| `APPRISE_1`..`APPRISE_10` | - | Apprise URLs; `APPRISE_1` required with Apprise |
-| `RECOVERY_ALERT` | False | send an alert once the IP is retrieved again after a failure (True/False) |
-| `SAVE_IP` | unset | persist the IP to the volume (e.g. True) |
+| `DELAY` | `5m` | Sleep between checks; accepts seconds, m, h, d suffixes. Bad value falls back to 5m. |
+| `PROVIDER` | `CLOUDFLARE` | `CLOUDFLARE`, `GOOGLE`, `OPENDNS`, `IPIFY`; any other value uses Cloudflare. |
+| `NOTIFICATION_TYPE` | unset | `PUSHOVER` or `APPRISE`. |
+| `PUSHOVER_TOKEN` | unset | Required for Pushover. |
+| `PUSHOVER_USER` | unset | Required for Pushover. |
+| `PUSHOVER_TITLE` | `EXTERNAL IP` | Empty value is reset to the default in `notify`. |
+| `APPRISE_TITLE` | `EXTERNAL IP` | Same as above. |
+| `APPRISE_1` .. `APPRISE_10` | unset | Apprise URLs such as `pover://user@token`. |
+| `RECOVERY_ALERT` | `False` | Compared to literal `True` in start.sh. |
+| `SAVE_IP` | unset | Loaded when `${SAVE_IP^^}` is `TRUE`; saved only when equal to literal `True`. |
+| `TZ` | unset | Not read by the scripts; affects `date` only. |
 
-## Ports
-None documented or exposed.
+**Ports**
+None. The container only makes outbound requests.
 
-## Volumes/paths and persistent data
-- `/stor-external-ip` is the container path for the saved IP (`SAVE_IP`). Optional, required only if `SAVE_IP` is used.
+**Volumes/paths and persistent data**
+- Upstream saved-IP file: `/stor-external-ip/ip.saved`, used only when `SAVE_IP` is set. README shows `/path/to/data:/stor-external-ip` as the mount.
+- Upstream start.sh touches the file if missing when `SAVE_IP` is TRUE; it writes `echo ${ip} > ${savedIPFile}` on every successful lookup when `SAVE_IP` is `True`.
 
-## User/UID and permissions
-Not specified upstream; upstream Dockerfile has no USER (root).
+**User/UID & permissions**
+README gives no user details. Upstream Dockerfile has no USER, so it runs as root. The data directory must be writable if `SAVE_IP` is used.
 
-## Config files
-None. Environment variables only.
+**Config files and formats**
+None. Configuration is env only.
 
-## Healthcheck/readiness
-None documented.
+**Healthcheck/readiness endpoints**
+None.
 
-## Version/release info and asset naming
-- The releases page reports "There aren't any releases here." No releases, no tags listed on the page, no assets.
-- Docker Hub image `xavierh/external-ip` is tagged `latest` ("stable") only, per the Docker Hub page.
+**Version/release info and asset naming**
+- Releases page: "There aren't any releases here." No release assets exist, so no binary to download. Tags exist but were not listed in the fetch.
+- Source is consumed by commit SHA. Archive form `https://github.com/xavier-hernandez/docker-external-ip/archive/<commit>.tar.gz` (GitHub generated, not an uploaded asset).
+- License: the fetched start.sh and notify.sh pages show no license text. The repo LICENSE was not fetched in this run (the plan records MIT, unverified here).
 
-## Arch support
-linux/amd64, linux/arm/v7, linux/arm64/v8 (per Docker Hub page for the prebuilt image).
+**Arch support**
+Not stated in the repository. Published Docker Hub image lists amd64, arm/v7, arm64/v8 (see dockerhub summary). Script is shell plus pip apprise, so no arch-specific code.
 
-## Gotchas
-- Upstream IPIFY path uses `curl -s -k` (no TLS verification). Matches plan.md section 1 defect list.
-- Compose example in the upstream README uses the key `volume:`; the correct compose key is `volumes:`.
-- Upstream README example `RECOVERY_ALERT=True/False` is a placeholder; pick one value.
-- Pushover and Apprise are alternatives; `NOTIFICATION_TYPE` takes a single value.
-- Upstream README sample log shows `dig: couldn't get address ... not found` during DNS failure, which triggers error and recovery flow.
-- The Dockerfile fetched as alpine 3.16.0 with root; plan.md section 3 and 4 replace this with the ContainerForge python base, a venv install of apprise and a separate fetch of scripts. This is an intentional divergence, not a contradiction of the upstream source, but note the upstream Dockerfile does not match the plan on base or user.
-- Plan.md section 1 says the upstream has tag `v0.0.1` only; the releases page fetched here shows no tags. The README/release tab did not confirm the tag list, so this is unverified from this fetch.
+**Gotchas**
+- `ipify_ipv4` uses `curl -s -k`, so TLS verification is off.
+- Saved-IP load is case-insensitive (`^^`) but the save check is case-sensitive (`"True"`), so `SAVE_IP=true` loads but never saves.
+- `RECOVERY_ALERT` is compared case-sensitively to `True`.
+- `start.sh` is sourced from `$(dirname "$0")`; it has no `set -e`, and `sleep ${sleep}` is not backgrounded, so TERM is only handled by bash default.
+- Apprise URLs and the Pushover token are passed as command-line arguments (visible in the process list).
+- README compose example uses key `volume:` (typo for `volumes:`).
+
+**Contradictions with plan.md**
+- None of the env names, defaults or Dockerfile facts contradict plan.md.
+- plan.md says the upstream tag `v0.0.1` exists and is old; this fetch did not list tags, so it is unverified here.
