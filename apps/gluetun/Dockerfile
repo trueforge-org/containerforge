@@ -20,7 +20,9 @@ COPY --from=builder /usr/local/bin/gluetun /usr/local/bin/gluetun
 
 ENV VPN_SERVICE_PROVIDER=pia \
     VPN_TYPE=openvpn \
-    VPN_INTERFACE=tun0
+    VPN_INTERFACE=tun0 \
+    PPROF_BLOCK_PROFILE_RATE=0 \
+    PPROF_MUTEX_PROFILE_RATE=0
 
 EXPOSE 8000/tcp 8888/tcp 8388/tcp 8388/udp
 
