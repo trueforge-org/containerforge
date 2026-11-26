@@ -1,23 +1,31 @@
 # PyPI: hass-configurator
 
-**Source URL(s) + fetch date**
-- https://pypi.org/pypi/hass-configurator/json
-- Fetched 2026-11-26
+Source URL(s) + fetch date:
+- https://pypi.org/pypi/hass-configurator/json (fetched 2026-11-26)
 
-**Version info**
-- `info.version`: 0.7.0 (sdist `hass_configurator-0.7.0.tar.gz`, 213020 bytes, uploaded 2026-10-18 21:46:13)
-- `info.license`: MIT
-- `info.requires_python`: `>=3`
-- `info.requires_dist`: null (no dependencies listed in this metadata)
-- `info.summary`: "HASS Configurator"
-- Earlier releases: 0.6.0 (2026-04-07), 0.5.2 (2022-11-08), 0.5.1 (2022-09-08), 0.5.0 (2022-08-19), and 0.4.x and 0.3.x series.
-- Vulnerabilities list: empty.
+## What it is
+- Python package `hass-configurator`, the upstream editor (see github-danielperna84-hass-configurator.md).
 
-**Install**
-`pip install hass-configurator==0.7.0`.
+## Install/build steps and build deps
+- `pip install hass-configurator==<version>`.
+- Only an sdist is listed for 0.7.0 (no wheel), so pip builds from the tarball with setuptools.
+- PyPI JSON `requires_dist` is `null` for 0.7.0. The plan.md claim that setup.py requires `pyotp`, `gitpython`, `legacy-cgi` could NOT be confirmed from PyPI metadata (it may come from the sdist's setup.py). Unverified here.
 
-**Contradictions with plan.md**
-- plan.md section 1 says version 0.7.0 was uploaded 2026-10-18 (previous 0.6.0). Confirmed; the 0.6.0 date (2026-04-07) is consistent with "previous".
-- plan.md section 1 says the license is MIT and `requires_python` is not stated. Confirmed `>=3` (plan.md did not state a specific value).
-- plan.md section 1 says the dependencies are `pyotp`, `gitpython`, `legacy-cgi`, read from setup.py. The PyPI metadata here shows `requires_dist: null`. This conflicts with plan.md and is not resolved here (setup.py not fetched). Unverified; not edited.
-- plan.md section 1 says the sdist digest is `1a73aa09...`. Not checked in this run (the JSON digest field was not requested). Unverified.
+## Runtime deps
+- Not listed in PyPI metadata (see above). Optional at runtime: `gitpython` (GIT), `pyotp` (SESAME_TOTP_SECRET).
+- `requires_python`: `>=3`.
+
+## Version/release info and asset naming
+- Latest version: `0.7.0`, uploaded 2026-10-18T21:46:13Z. License: MIT.
+- Only file: sdist. Asset naming: `hass_configurator-<version>.tar.gz`.
+- sdist URL (canonical, from PyPI JSON): `https://files.pythonhosted.org/packages/5d/fb/71c9a9f61efaf11709242b62fade79c407175ca5904e6fe7a90d80dff257/hass_configurator-0.7.0.tar.gz`
+- sdist sha256: `1a73aa09eb1ee1ed7acdc4c55dc9147fedadf7a7a3947fd63e6ed832b082e44c` (matches plan.md).
+- Direct archive download (not fetched, skipped as a binary/archive): the `files.pythonhosted.org` file above. The legacy path that plan.md uses (`packages/source/h/hass-configurator/hass_configurator-<ver>.tar.gz`) is not the canonical URL PyPI returns; it was not tested here.
+- Project URLs: Documentation and Homepage `github.com/danielperna84/hass-configurator`; Download `https://github.com/danielperna84/hass-configurator/tarball/0.7.0` (archive, not fetched); Tracker `.../issues`.
+
+## Arch support
+- Pure Python sdist; identical on amd64 and arm64.
+
+## Gotchas
+- The PyPI release (2026-10-18) contradicts the draft's suggestion that the project is unmaintained: a current release exists.
+- plan.md section 4 curl URL (legacy `packages/source/h/...` path) differs from the canonical hashed path above. Listed as unverified in README.md, not edited.

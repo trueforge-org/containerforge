@@ -1,72 +1,93 @@
-# danielperna84/hass-configurator (GitHub, the application)
+# danielperna84/hass-configurator (upstream application)
 
-**Source URL(s) + fetch date**
-- https://github.com/danielperna84/hass-configurator (repo, draft source link)
-- https://raw.githubusercontent.com/danielperna84/hass-configurator/master/README.md
-- https://raw.githubusercontent.com/danielperna84/hass-configurator/master/hass_configurator/configurator.py
-- Fetched 2026-11-26. Branch `master` used (no tag was pinned for these reads; `v0.7.0` corresponds to the PyPI release).
+Source URL(s) + fetch date:
+- https://github.com/danielperna84/hass-configurator (README via https://raw.githubusercontent.com/danielperna84/hass-configurator/master/README.md, fetched 2026-11-26)
+- https://raw.githubusercontent.com/danielperna84/hass-configurator/master/hass_configurator/configurator.py (fetched 2026-11-26)
+- https://github.com/danielperna84/hass-configurator/releases (fetched 2026-11-26)
+- Followed sub-page: https://github.com/danielperna84/hass-configurator/wiki/Configuration (fetched 2026-11-26)
 
-**What it is**
-Small web app (file browser and text editor with Ace editor and YAML linting) for editing files on the machine it runs on, built for Home Assistant config. Upload/download, shell command execution, Git operations, SSL, standalone mode.
+## What it is
+- Python 3 web-based file editor for Home Assistant configuration. Browser UI; the server is a single Python process.
+- Standalone mode works without a Home Assistant instance. The README says the client needs internet access: JS libraries, CSS and fonts load from CDNs, so it does not work offline for the client.
+- Optional Home Assistant panel embedding via `panel_iframe`.
 
-**Install/build steps and build deps**
-Installed from PyPI (`pip install hass-configurator`). README says install methods are on the project's Wiki (not fetched). Python 3 only.
+## Install/build steps and build deps
+- Install from PyPI: `pip install hass-configurator` (package name `hass-configurator`). Entry point `hass-configurator` (CLI).
+- README does not give Docker instructions; the Wiki "Installation" page holds install methods (not followed).
+- Git integration needs GitPython (`GIT: True`). Config `ALLOWED_DOMAINS` etc. need no extra deps.
+- TOTP whitelisting (`SESAME_TOTP_SECRET`) requires `pyotp`.
 
-**Binaries/entrypoint/CLI flags**
-- Entry point `hass-configurator` (plan.md section 1). Optional positional argument: path to a JSON settings file.
-- Flags named in the README: `-s` / `--standalone` (don't fetch data from `HASS_API`; sets `HASS_API = None`). Plan.md's other flags (`--listen`, `--port`, `--basepath`, `--enforce`, `--git`) were not re-verified here.
+## Runtime deps
+- Python 3 (README). Optional: `gitpython` (GIT), `pyotp` (SESAME_TOTP_SECRET).
+- Client side: internet access for CDN assets.
 
-**Env vars (table; prefix `HC_`)**
+## Binaries/entrypoint/CLI flags
+- `hass-configurator [settings]`: optional positional path to a JSON settings file (`nargs='?'`). Missing file logs a warning and loading continues.
+- `-s` / `--standalone`: sets `HASS_API` to `None` (no Home Assistant fetch; hides the HA panel).
+- Other flags per the source/README: `--listen`, `--port`, `--basepath`, `--enforce`, `--git` (plan.md lists these; the summary of configurator.py did not re-verify each flag).
 
-| Name | Default | Notes |
+## Env vars
+Every environment variable starting with the prefix `HC_` (default; `ENV_PREFIX` can be set in the settings file, not via env) overrides the settings file value after the file is read. Type conversion: `true/false` (any case) become booleans, purely numeric strings become int, `none/null` become `None`; `ALLOWED_NETWORKS`, `BANNED_IPS`, `IGNORE_PATTERN` are comma-separated lists. The environment variable `HC_LOGLEVEL` is read at import time (default `info`); it is not a settings-file key.
+
+| Key (env `HC_` + key) | Default (source) | Notes (wiki) |
 | --- | --- | --- |
-| `HC_LISTENIP` | `0.0.0.0` | |
-| `HC_PORT` | `3218` | `PORT` is applied after `args.port` (overrides the CLI). |
-| `HC_BASEPATH` | `None` | Also sets where the prefs file goes. |
-| `HC_ENFORCE_BASEPATH` | `False` | |
-| `HC_HASS_API` | `http://127.0.0.1:8123/api/` | `None` means standalone. |
-| `HC_LOGLEVEL` | `info` | Mapped via `LOGLEVEL_MAPPING`. |
-| `HC_GIT` | `False` | |
-| `HC_USERNAME` | `None` | Auth only when set. |
-| `HC_PASSWORD` | `None` | Auth only when set. |
-| `HC_ALLOWED_NETWORKS`, `HC_BANNED_IPS`, `HC_IGNORE_PATTERN` | unset | Comma-separated lists. |
-| `HC_SSL_CERTIFICATE`, `HC_SSL_KEY` | unset | Switch the listener scheme to `https` when set. |
+| LISTENIP | `0.0.0.0` | `::` covers IPv6 |
+| PORT | `3218` | `0` = dynamic port |
+| BASEPATH | `None` | serve files from another location |
+| ENFORCE_BASEPATH | `False` | `True` locks the UI inside BASEPATH |
+| SSL_CERTIFICATE / SSL_KEY | `None` | https when set |
+| HASS_API | `http://127.0.0.1:8123/api/` | `None` = standalone |
+| HASS_WS_API | `None` (falls back to HASS_API) | websocket URL |
+| HASS_API_PASSWORD | `None` | api_password or long-lived token |
+| IGNORE_SSL | `False` | disables SSL verification toward HA API |
+| USERNAME / PASSWORD | `None` | basic auth only when both set; `{sha256}` hash prefix supported |
+| CREDENTIALS | `None` | deprecated `user:pass` form |
+| ALLOWED_NETWORKS | `[]` | comma list |
+| ALLOWED_DOMAINS | `[]` | DNS-matched client IPs |
+| BANNED_IPS | `[]` | comma list |
+| BANLIMIT | `0` | disabled |
+| GIT | `False` | needs GitPython; remotes added manually |
+| IGNORE_PATTERN | `[]` | hidden files in UI |
+| DIRSFIRST / HIDEHIDDEN | `False` | UI listing |
+| SESAME | `None` | secret path that whitelists the caller |
+| SESAME_TOTP_SECRET | `None` | needs pyotp |
+| VERIFY_HOSTNAME | `None` | 403 on hostname mismatch |
+| ENV_PREFIX | `HC_` | settings file only |
+| NOTIFY_SERVICE | `persistent_notification.create` | `False` disables |
+| LOGLEVEL | `info` | env `HC_LOGLEVEL`, read at import |
 
-Merge rule (`load_settings`): the settings file is read first; then every env var with the prefix `HC_` overwrites the matching key. The prefix itself can be changed by `ENV_PREFIX` in the settings file. Values: `true`/`false` become booleans, `none`/`None`/`null` become `None`, numeric strings become `int`.
+## Ports
+- `3218` (code default `PORT = 3218`, `LISTENIP = "0.0.0.0"`). Log line at startup: `Listening on: http(s)://<addr>:<port>`.
 
-**Ports**
-Listens on `HC_PORT` (3218 by default) on `HC_LISTENIP`.
+## Volumes/paths and persistent data
+- Settings file: optional JSON at the path passed as argument (upstream Docker convention: `/config/settings.conf`, see causticlab summary).
+- Writes: `.hass_configurator_prefs.json` (content `{"ui_theme": "auto"}`) into `BASEPATH` if set, else the current directory. The editor writes whatever files the user edits under BASEPATH. Git may write under `$HOME` (`~/.gitconfig`, `~/.ssh` for git remotes).
+- No install-time data paths in the package.
 
-**Volumes/paths and persistent data**
-- Prefs file `.hass_configurator_prefs.json` in `BASEPATH` (else the current directory). Default prefs `{"ui_theme": "auto"}`.
-- Edits go to whatever files are under the base path.
+## User/UID & permissions
+- None set by upstream; no privilege needed. Runs as whatever user starts it.
 
-**User/UID & permissions**
-Nothing upstream. Runs as whoever starts it.
+## Config files and formats
+- JSON settings file (`settings.conf`). Keys as in the table above. `None` becomes `null` in JSON.
+- Settings file keys can be overridden by env (see above).
 
-**Config files and formats**
-Optional JSON settings file (path given as the first argument). Keys match the `HC_` names without the prefix.
+## Healthcheck/readiness endpoints
+- No health endpoint documented. Readiness: the log line `Listening on: ...`, then HTTP `/` on the port.
 
-**Healthcheck/readiness endpoints**
-None documented. Startup log line: `Listening on: <http|https>://<address>:<port>` (`LOG.info`).
+## Version/release info and asset naming
+- Latest: `0.7.0` (marked Latest on the releases page; PyPI upload 2026-10-18; commit `dbc81a2`).
+- Recent releases: 0.6.0 (07 Apr), 0.5.2 (08 Nov), 0.5.1 (08 Sep), 0.5.0 (19 Aug), 0.4.1 (23 Apr), 0.4.0 (24 Feb), 0.3.9, 0.3.8, 0.3.7 (years not shown on the releases page).
+- Release assets: the page shows "Assets 2" per release, which is the automatic GitHub source archives (zip and tar.gz). No uploaded binary assets are visible. Use the PyPI sdist for the artifact (see the pypi summary).
+- Source tarball pattern on GitHub: `https://github.com/danielperna84/hass-configurator/tarball/<version>` (from PyPI project_urls). Not used; it is a direct archive download.
 
-**Version/release info and asset naming**
-PyPI `hass-configurator` 0.7.0 (see pypi summary). Source tags were not read.
+## Arch support
+- Pure Python; no arch-specific code in the sources read. amd64 and arm64 are the same.
 
-**Arch support**
-Pure Python; not stated per arch.
-
-**Gotchas**
-- Auth is off unless `HC_USERNAME`/`HC_PASSWORD` (or `CREDENTIALS`) are set. The README warns that forwarding a port without authentication or IP restrictions exposes the configuration to the web.
-- The UI fetches JavaScript libraries, CSS and fonts from CDNs; it does not work offline for the client (README).
-- The API endpoints `/api/restart`, `/api/check_config`, `/api/reload_*` build URLs from `HASS_API` without a check; with `None` they fail inside the `try` (reported in JSON).
-- README says it is "only available for Python 3".
-
-**Contradictions with plan.md**
-- plan.md section 1 says the defaults listed (LISTENIP, PORT, BASEPATH, ENFORCE_BASEPATH, HASS_API, LOGLEVEL, GIT, USERNAME, PASSWORD) match. Confirmed.
-- plan.md section 1 says env vars override the settings file. Confirmed.
-- plan.md section 1 says `HC_LOGLEVEL` default `info`. Confirmed.
-- plan.md section 1 says standalone mode when `HASS_API` is `None`. Confirmed.
-- plan.md section 1 says the prefs file is in `BASEPATH` or the current directory. Confirmed.
-- plan.md section 10 says the UI loads CDN assets and does not work offline. Confirmed by README.
-- plan.md section 1 lists `setup.py` dependencies `pyotp`, `gitpython`, `legacy-cgi`. setup.py was not fetched; PyPI metadata (see pypi summary) reports no `requires_dist`. Conflict left unverified.
+## Gotchas
+- Unauthenticated by default. The README warns that a forwarded port without authentication or IP blocking exposes the configuration to the web.
+- Auth active only when both `USERNAME` and `PASSWORD` are set.
+- `ALLOWED_NETWORKS` in standalone/container use needs care: the hass.io addon range is `172.30.0.0/16`.
+- `HASS_API` default points at `127.0.0.1:8123`, which is the wrong container; set `None` for standalone.
+- `LISTENPORT` is deprecated (use `PORT`).
+- Plan.md agreement: `HC_*` overrides the settings file, `HC_ENFORCE_BASEPATH` default `False` upstream, port 3218, listen `0.0.0.0`, `HC_LOGLEVEL` default `info`, and the prefs file location all match the source. No contradiction found.
+- Unverified: `legacy-cgi` in plan.md's setup.py claim could not be confirmed from the fetched sources (the PyPI JSON lists no `requires_dist` for 0.7.0). See the pypi summary.
