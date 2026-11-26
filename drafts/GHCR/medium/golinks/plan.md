@@ -44,7 +44,7 @@ Closest sibling: `apps/pwndrop` (Go built in an ubuntu build stage, copied into 
 2. Install the toolchain as pwndrop does: `apt-get install -y --no-install-recommends golang-go git` (version check: `go 1.13` in `go.mod` is old; the apt Go on 26.04 is newer and compatible; confirm with `go version` in the build log, UNVERIFIED for this exact version).
 3. Set build caches to `/tmp`: `ENV GOCACHE=/tmp/go-cache GOMODCACHE=/tmp/go-mod GOFLAGS=-mod=mod`.
 4. Fetch the tag: `curl -fL "https://git.mills.io/prologic/golinks/archive/${VERSION}.tar.gz" -o /tmp/golinks-src.tar.gz`, extract to `/tmp/golinks` with `--strip-components=1`. `VERSION` is `v0.0.7` (the tag includes the `v`).
-5. Build: `cd /tmp/golinks && CGO_ENABLED=0 go build -tags "netgo static_build" -trimpath -ldflags "-s -w" -o /app/golinks/golinks .`. Skip `rice embed-go` only if the embedded assets are already in the tree; otherwise run `go install github.com/GeertJohan/go.rice/rice@latest` and `rice embed-go` as the Makefile does (UNVERIFIED that the tarball includes the rice-generated files).
+5. Build: `cd /tmp/golinks && CGO_ENABLED=0 go build -tags "netgo static_build" -trimpath -ldflags "-s -w" -o /app/golinks/golinks .`. Skip `rice embed-go` only if the embedded assets are already in the tree; otherwise run `go install github.com/GeertJohan/go.rice/rice@v1.0.2` (pinned to the go.mod version, not `@latest`) and `rice embed-go` as the Makefile does (UNVERIFIED that the tarball includes the rice-generated files).
 6. License: `COPY --from=buildstage /tmp/golinks/LICENSE /usr/share/licenses/golinks/LICENSE` (copy in the final stage after extracting in the build stage, or copy in the build stage then `COPY --from`).
 7. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:...`, `ARG VERSION`, `USER root`.
 8. `COPY --from=buildstage /app/golinks/ /app/golinks/`, `chown -R apps:apps /app/golinks && chmod -R 755 /app/golinks`.
@@ -143,6 +143,9 @@ env:
   - name: SUGGESTURL
     default: "https://suggestqueries.google.com/complete/search?client=firefox&q=%s"
     required: false
+  - name: CONFIG
+    default: ""
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -152,7 +155,7 @@ volumes:
 dependencies: []
 ```
 
-Defaults match `start.sh`. `CONFIG` (path to a config file) is read by `start.sh` and is optional; list it only if the env is documented for users (it is in the upstream script, so add it with `required: false`, no default). The `DBPATH` default changes from `/search.db` to `/config/search.db`; this is the one deliberate deviation from upstream.
+Defaults match `start.sh`. `CONFIG` (path to a config file) is read by `start.sh`, listed with an empty default. The `DBPATH` default changes from `/search.db` to `/config/search.db`; this is the one deliberate deviation from upstream.
 
 ## 7. start.sh
 
@@ -196,7 +199,6 @@ tcp:
 http:
 - port: '8000'
   path: /
-  expected_status: 200
 ```
 
 - Every port in `settings.yaml` has a probe (8000).

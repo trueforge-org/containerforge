@@ -7,7 +7,7 @@
 | --- | --- |
 | Version | 17.2.0, published 2026-11-04T21:52:42Z, not a prerelease (`gh api repos/Phalcode/gamevault-backend/releases/latest`; https://github.com/Phalcode/gamevault-backend/releases/tag/17.2.0). |
 | Renovate | `datasource=github-releases depName=Phalcode/gamevault-backend versioning=semver` |
-| License | Repo license reported as NOASSERTION ("Other"). UNVERIFIED: the LICENSE file was not read. Bake `LICENSE` is blocked until it is. |
+| License | Repo license reported as NOASSERTION. The `LICENSE` file at tag 17.2.0 is Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (`CC-BY-NC-SA-4.0`); non-commercial terms, flag to the maintainers before publishing. |
 | Source URL | https://github.com/Phalcode/gamevault-backend |
 | Binary | None: the release has no assets. Build from source at tag `17.2.0`: `https://github.com/Phalcode/gamevault-backend/archive/refs/tags/17.2.0.tar.gz`. |
 | Checksum | None published. Pin the tag and verify the tarball. |
@@ -45,7 +45,7 @@ No `defaults/`, `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a FR
 3. Final stage `FROM <python-node>`:
    - PostgreSQL client: check the base first; install `postgresql-client` only if the app needs `psql`/`pg_dump` and the base lacks it (pin version if from apt).
    - `mkdir -p /app/gamevault-backend && COPY --from=build /tmp/src/dist /app/gamevault-backend/dist` and the prod `node_modules`, `package.json`.
-   - License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/gamevault-backend/LICENSE` (after verification, section 10).
+   - License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/gamevault-backend/LICENSE` .
 4. `ENV NODE_ENV=production SERVER_PORT=8080 HOME=/tmp TZ=Etc/UTC`. Do not carry PUID/PGID: the image runs as `apps`.
 5. `EXPOSE 8080`, `VOLUME /config`, `WORKDIR /app/gamevault-backend`.
 6. Final: `USER apps`, `COPY --chmod=0755 . /`.
@@ -139,7 +139,7 @@ Draft reconciled: draft says chart runs as UID 0 and `runAsNonRoot: false`. This
 
 ## 10. Risks, caveats and open questions
 
-- BLOCKER, license: repo reports NOASSERTION. Read the LICENSE file before setting bake `LICENSE` or copying it.
+- Needs human decision, license: the LICENSE file is CC-BY-NC-SA-4.0 (non-commercial), which may not allow redistribution as an image. Confirm before publishing.
 - BLOCKER, DB env names and upload path: not read from source. Read the config reference before writing `start.sh` and `settings.yaml`.
 - BLOCKER, node version: pnpm 11 vs `node:lts-slim`/`python-node` base. Check on the first build.
 - The chart's `/logs`, `/media` and `/games` mounts are named but not confirmed as used by the backend. Confirm which the backend writes.

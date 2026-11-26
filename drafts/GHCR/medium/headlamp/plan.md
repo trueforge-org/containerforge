@@ -23,8 +23,6 @@
 | Release tarball layout | UNVERIFIED: the draft says `resources/headlamp-server` and `resources/frontend` inside the Electron tarball. Not confirmed by a fetched page; confirm with `tar tzf` in step 2. |
 | Dependencies | none. Needs a Kubernetes cluster reachable by the operator (kubeconfig or in-cluster). |
 
-Facts file: `/tmp/claude-0/-workspaces-containers/0a36f05f-588d-4ed0-a93b-79dc278b47c9/scratchpad/facts/123.md` (headlamp section).
-
 ## 2. Target layout
 
 - `apps/headlamp/Dockerfile`
@@ -54,7 +52,7 @@ No `defaults/`, `etc/`, `health/`. No `root/`. No `DOWNSTREAM_CHANGES.md` (not a
    - `ENV HOME=/config XDG_CACHE_HOME=/tmp`.
    - `USER apps`, `COPY --chmod=0755 . /`.
    - `EXPOSE 4466`, `VOLUME /config`, `WORKDIR /app/headlamp`.
-   - `ENTRYPOINT ["/app/headlamp/start.sh"]` is not used: `start.sh` is the entrypoint via `CMD`-free `ENTRYPOINT` (see section 7).
+   - No `ENTRYPOINT`/`CMD` is set: the ubuntu base entrypoint (`tini -- /entrypoint.sh`) is kept and runs `/start.sh` (see section 7).
 3. Do not install apt packages; the base already has curl and tar.
 
 Upstream's `static-plugins` stage and `HEADLAMP_STATIC_PLUGINS_DIR` are dropped: they need `fetch-plugins.sh` and `build-manifest.json`, which are not in the release tarball (UNVERIFIED that the tarball does not already embed them).
@@ -104,7 +102,7 @@ exec ./headlamp-server -html-static-dir /app/headlamp/frontend -plugins-dir /con
 - Plugins move from `/headlamp/plugins` (read-only in our layout) to `/config/plugins`, which is persistent.
 - Nothing is written to `/app`.
 - `exec` for signal handover.
-- The image `ENTRYPOINT` is `/app/headlamp/start.sh` (set in the Dockerfile) or the `start.sh` at `/` per the `apps/adguardhome-sync` pattern. Pick the one that matches the sibling in step 4.
+- `COPY --chmod=0755 . /` places the script at `/start.sh`, which the ubuntu base `/entrypoint.sh` runs, as in `apps/adguardhome-sync`; do not override `ENTRYPOINT`.
 
 ## 8. container-test.yaml
 

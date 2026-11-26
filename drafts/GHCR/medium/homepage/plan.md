@@ -24,8 +24,6 @@
 | Host check | Next.js checks the Host header. The env name that allows extra hosts is UNVERIFIED (the expected name is `HOMEPAGE_ALLOWED_HOSTS`; confirm in the upstream docs/source before listing it). |
 | Dependencies | none. |
 
-Facts file: `/tmp/claude-0/-workspaces-containers/0a36f05f-588d-4ed0-a93b-79dc278b47c9/scratchpad/facts/123.md` (homepage section).
-
 ## 2. Target layout
 
 - `apps/homepage/Dockerfile`
@@ -47,11 +45,11 @@ No `defaults/` unless the app needs seeded YAML (see section 7). No `root/`. No 
 
 1. Stage `builder` from the python-node digest above:
    - `ARG VERSION`, `USER root`.
-   - `ENV NEXT_TELEMETRY_DISABLED=1 CI=true`? No: do not set `CI`, it changes the upstream build. Only `NEXT_TELEMETRY_DISABLED=1`.
+   - `ENV NEXT_TELEMETRY_DISABLED=1`. Do not set `CI=true`: the upstream Dockerfile skips install and build when `CI` is `true` (it expects a prebuilt app).
    - Fetch the tag source: `curl -fL https://github.com/gethomepage/homepage/archive/refs/tags/${VERSION}.tar.gz | tar xz -C /src --strip-components=1`.
    - `corepack enable`, `corepack prepare pnpm@latest --activate` (or the pnpm version pinned by the repo's `packageManager` field; read it in step 2).
    - In `/src`: `pnpm install --frozen-lockfile`, `pnpm run build` (produces `.next/standalone` and `.next/static`).
-   - Set upstream version metadata if the build reads it: `HOMEPAGE_VERSION`/`NEXT_PUBLIC_*` are UNVERIFIED; check the Dockerfile build args before wiring them.
+   - Set upstream version metadata if the build reads it: the upstream Dockerfile declares `ARG BUILDTIME`, `VERSION` and `REVISION` (confirmed at v2.8.0); how the build consumes them is UNVERIFIED, so check before wiring them.
 2. Final stage from the same python-node digest:
    - `USER root`.
    - `COPY --from=builder /src/.next/standalone /app`, `COPY --from=builder /src/.next/static /app/.next/static`, `COPY --from=builder /src/public /app/public`.
@@ -110,12 +108,12 @@ dependencies: []
 set -eu
 export HOSTNAME="${HOSTNAME:-0.0.0.0}"
 export PORT="${PORT:-3000}"
-mkdir -p /config/logs
+mkdir -p /config/logs /tmp/next-cache
 cd /app
 exec node server.js
 ```
 
-- Idempotent: `mkdir -p` only. Homepage creates its own default YAML on first start (UNVERIFIED; confirm in step 3 with an empty `/config`). If it does not, seed the upstream sample configs from `/defaults` into `/config` with `cp -n` (only when missing).
+- Idempotent: `mkdir -p` only (`/tmp/next-cache` is the target of the `.next/cache` symlink and must exist at runtime). Homepage creates its own default YAML on first start (UNVERIFIED; confirm in step 3 with an empty `/config`). If it does not, seed the upstream sample configs from `/defaults` into `/config` with `cp -n` (only when missing).
 - Never writes to `/app` except through the symlinks above (`/app/config` to `/config`).
 - `HOSTNAME` default `0.0.0.0` (the bind rule), not the upstream `::`.
 - `exec` for signal handover.

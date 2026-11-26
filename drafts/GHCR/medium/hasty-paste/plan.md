@@ -22,8 +22,6 @@
 | Install docs | UNVERIFIED: `docs/install.md` returns 404 at the pinned commit, and `docs/` on main is a Hugo site. The draft's install link is stale; do not cite it. |
 | apt | none needed (static Go binary, node build in a builder stage). |
 
-Facts file: `/tmp/claude-0/-workspaces-containers/0a36f05f-588d-4ed0-a93b-79dc278b47c9/scratchpad/facts/123.md` (hasty-paste section).
-
 ## 2. Target layout
 
 - `apps/hasty-paste/Dockerfile`
@@ -37,8 +35,8 @@ No `defaults/`, `etc/`, `health/` needed: the app creates its own database on fi
 ## 3. Base image
 
 - Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The ubuntu base is the required final-stage base for a static Go binary plus a static web bundle; no language runtime is needed at runtime.
-- Node build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, because it already ships Node (budge's Dockerfile notes Node 24). Reuse the node base and avoid a second `node:24-slim` pull. pnpm is enabled via corepack, as `apps/it-tools` does. UNVERIFIED: exact Node major in python-node; confirm with `node -v` in step 2.
-- Go build stage: upstream uses `golang:1.26-alpine`. No Go app exists under `apps/`, so there is no sibling pattern. Use `FROM golang:1.26-alpine@<digest>` (digest UNVERIFIED: resolve it in step 2 and pin it). The binary is static (`CGO_ENABLED=0`), so alpine as a build image is fine; it is not shipped.
+- Node build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, because it already ships Node (`apps/budge` uses it for a Node 24 build). Reuse the node base and avoid a second `node:24-slim` pull. pnpm is enabled via corepack, as `apps/it-tools` does (it installs corepack with npm first). UNVERIFIED: exact Node major in python-node; confirm with `node -v` in step 2.
+- Go build stage: upstream uses `golang:1.26-alpine`. Go apps in `apps/` such as `apps/pwndrop` build on the ubuntu base with apt `golang-go`; this plan instead follows the go-runtime rule (`FROM golang:<ver> AS build`). Use `FROM golang:1.26-alpine@<digest>` (digest UNVERIFIED: resolve it in step 2 and pin it). The binary is static (`CGO_ENABLED=0`), so alpine as a build image is fine; it is not shipped.
 - Closest siblings: `apps/it-tools` (node build stage, copy output into nginx final stage) and `apps/adguardhome-sync` (prebuilt binary in ubuntu with `ARG VERSION` and `TARGETARCH`).
 
 ## 4. Dockerfile
@@ -53,7 +51,7 @@ Build context: the upstream Dockerfile lives in `app/`, so the source tarball mu
 2. Stage `go-build` from the golang digest:
    - `ARG VERSION`, `ARG TARGETOS`, `ARG TARGETARCH`.
    - `GOCACHE=/tmp/go-cache`, `GOPATH=/tmp/go`, `GOMODCACHE=/tmp/go/pkg/mod` (never `/config`, never `/app`).
-   - `go tool sqlc generate && go tool templ generate`, then `CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /out/hasty-paste ./...` (use the same build path as upstream: `-o ./hasty-paste` in the app folder, copied to `/out`).
+   - `go tool sqlc generate && go tool templ generate`, then `CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /out/hasty-paste .` run in the app folder (upstream uses `go build -o ./hasty-paste`; do not use `./...` with `-o`).
 3. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@...`:
    - `USER root`.
    - `COPY --from=go-build --chmod=0755 /out/hasty-paste /app/hasty-paste`.

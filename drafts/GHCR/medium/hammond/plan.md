@@ -177,7 +177,6 @@ tcp:
 http:
 - port: '3000'
   path: /
-  expected_status: 200
 ```
 
 - Every port in `settings.yaml` has a probe (3000).

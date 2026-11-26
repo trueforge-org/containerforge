@@ -10,7 +10,7 @@
 | License | Apache-2.0 (GitHub SPDX `Apache-2.0`, https://api.github.com/repos/TwiN/gatus). |
 | Source URL | https://github.com/TwiN/gatus |
 | Module | `github.com/TwiN/gatus/v5`, `go 1.26.3` (https://api.github.com/repos/TwiN/gatus/contents/go.mod). |
-| Per-arch download | None. The release has zero assets. Build from the source tarball `https://github.com/TwiN/gatus/archive/refs/tags/${VERSION}.tar.gz` for amd64 and arm64. |
+| Per-arch download | None. The release has zero assets. Build from the source tarball `https://github.com/TwiN/gatus/archive/refs/tags/v${VERSION}.tar.gz` (bake `VERSION` is `5.38.0` without the `v`) for amd64 and arm64. |
 | Checksum source | None published on the release. The tarball is pinned by tag; verify the tag resolves to the expected commit (`d255d0cd4d69ce818574cfdb3a7e82407e6559d7` is the commit the draft traced, UNVERIFIED that v5.38.0 points at it). |
 | Upstream Dockerfile reviewed | https://api.github.com/repos/TwiN/gatus/contents/Dockerfile?ref=d255d0cd4d69ce818574cfdb3a7e82407e6559d7 : `golang:alpine` builder, `CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o gatus .`, final `FROM scratch`, copies the binary to `/gatus`, `config.yaml` to `/config/config.yaml`, the CA bundle. `ENV GATUS_CONFIG_PATH=""`, `GATUS_LOG_LEVEL="INFO"`, `PORT="8080"`, `EXPOSE ${PORT}`, `ENTRYPOINT ["/gatus"]`. No `USER`, no `VOLUME`. |
 | Port | 8080/tcp. The README config table gives `web.port` default `8080`. |
@@ -42,7 +42,7 @@ Closest sibling: `apps/pwndrop` (ubuntu build stage, then runtime stage with `CO
 ## 4. Dockerfile
 
 1. Build stage: `FROM <go-builder> AS buildstage` with `ARG VERSION` and `USER root`. Go version must satisfy `go 1.26.3`. The base is UNVERIFIED for this plan: use an official Go image tag that provides 1.26.x (for example `golang:1.26`-based, check the tag exists before pinning), or Ubuntu with a Go toolchain that is at least 1.26.3. Pin the digest once chosen.
-2. In the build stage: `curl -fL "https://github.com/TwiN/gatus/archive/refs/tags/${VERSION}.tar.gz" -o /tmp/gatus-src.tar.gz`, `tar xzf ... -C /tmp/gatus --strip-components=1`.
+2. In the build stage: `curl -fL "https://github.com/TwiN/gatus/archive/refs/tags/v${VERSION}.tar.gz" -o /tmp/gatus-src.tar.gz`, `tar xzf ... -C /tmp/gatus --strip-components=1`.
 3. Set build caches to `/tmp`: `ENV GOCACHE=/tmp/go-cache GOMODCACHE=/tmp/go-mod`.
 4. Build: `cd /tmp/gatus && CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /app/gatus/gatus .` (keeps the upstream `CGO_ENABLED=0` static build; `go mod tidy -diff` is a check only).
 5. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:...` with `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
@@ -142,10 +142,10 @@ volumes:
     required: true
 dependencies: []
 opt_dependencies:
-  - postgresql   # ✅ apps/postgresql exists
+  - name: postgresql   # ✅ apps/postgresql exists
 ```
 
-`GATUS_CONFIG_PATH` is read by the binary (README). Its default matches `start.sh`. `postgresql` is optional only, so it is not a hard `dependencies` entry. If the schema has no `opt_dependencies`, use the sibling convention (check `apps/bazarr/settings.yaml` for an optional dependency and copy it).
+`GATUS_CONFIG_PATH` is read by the binary (README). Its default matches `start.sh`. `postgresql` is optional only, so it is not a hard `dependencies` entry. `opt_dependencies` with `- name:` entries follows `apps/babybuddy/settings.yaml`.
 
 ## 7. start.sh
 
@@ -182,7 +182,6 @@ tcp:
 http:
 - port: '8080'
   path: /health
-  expected_status: 200
 ```
 
 - Every port in `settings.yaml` has a probe (8080).
@@ -195,6 +194,7 @@ http:
 - Upstream runs as root with a scratch image. Our final stage runs as `apps` (`USER apps`). The binary needs no privileges and binds to 8080 (above 1024).
 - Read-only rootfs: `/app` is not written at runtime. The config and sqlite data go to `/config`. Go caches are in `/tmp` at build time only.
 - Upstream chart security expectations (from the draft, `charts/stable/gatus`): non-root (runAsUser 568), readOnlyRootFilesystem true, privileged false. These match this plan.
+- Draft other-security: the chart sets pod sysctl `net.ipv4.ping_group_range "0 2147483647"` so ICMP checks work unprivileged. Not reproducible in the image; document that users running ICMP endpoints must set it (or `CAP_NET_RAW`) at runtime. UNVERIFIED which gatus needs.
 - Extra persistence: none beyond `/config`. The draft's sidecar pvc is out of scope.
 - Upstream `PORT` env is ignored unless confirmed (section 1).
 
