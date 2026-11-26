@@ -6,9 +6,9 @@
 | Item | Value | Source |
 | --- | --- | --- |
 | Latest version | 2.2.0.0200 (project info.json). The chart tag is `v2.2.0.200` (draft). Release date: UNVERIFIED. | https://github.com/xteve-project/xTeVe-Downloads/blob/master/info.json |
-| renovate | Upstream has no release tags on the GitHub repo that were visible. Use `datasource=github-releases depName=xteve-project/xTeVe-Downloads versioning=loose` only after confirming tags exist; UNVERIFIED. | derived |
+| renovate | `xteve-project/xTeVe-Downloads` has no GitHub releases and no tags (API returns none), so a `github-releases` annotation cannot track it. Version source is `info.json` (`2.2.0.0200`); a custom renovate datasource is needed, UNVERIFIED. | derived |
 | License | MIT, Copyright (c) 2019 marmei@xteve-project | https://raw.githubusercontent.com/xteve-project/xTeVe/master/LICENSE |
-| Source | https://github.com/xteve-project/xTeVe (archived per draft; not re-verified) | draft |
+| Source | https://github.com/xteve-project/xTeVe (draft says archived; the GitHub API for `xteve-project/xTeVe` returns `archived: false`, so the draft claim is not confirmed) | draft |
 | amd64 asset | `xteve_linux_amd64.zip` | https://github.com/xteve-project/xTeVe-Downloads (asset listing) |
 | arm64 asset | `xteve_linux_arm64.zip` | https://github.com/xteve-project/xTeVe-Downloads (asset listing) |
 | Download URLs | https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_amd64.zip and `.../xteve_linux_arm64.zip`. The raw URLs were not fetched; verify with a HEAD request at build time. | draft + listing |
@@ -38,7 +38,7 @@
 1. `ARG VERSION=2.2.0.200` (match bake; the zip is named without the version, so VERSION is only used for the tag).
 2. `ARG TARGETARCH`, `USER root`.
 3. Download: `curl -fsSL -o /tmp/xteve.zip "https://github.com/xteve-project/xTeVe-Downloads/raw/master/xteve_linux_${TARGETARCH}.zip"`. Note: the unpinned `master` URL is a risk. Record the byte size and SHA-256 at build time and verify on rebuild (no published checksum; state this in the PR).
-4. Install `unzip` via apt only if not in the base; check first (ubuntu base may already have it): UNVERIFIED.
+4. `unzip` is already installed in `apps/ubuntu/Dockerfile`, so do not add it.
 5. `unzip -o /tmp/xteve.zip -d /app` then `chmod 0755 /app/xteve`; `rm /tmp/xteve.zip`.
 6. Licence: `install -Dm644` of the MIT LICENSE from the upstream repo into `/usr/share/licenses/xteve/LICENSE` (fetch the file during the build).
 7. `ENV HOME=/config`, `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 34400` (UNVERIFIED), `VOLUME /config`.

@@ -78,7 +78,7 @@ schema_version: 1
 upstream_env_url: "https://github.com/meeb/tubesync"
 ports:
   - port: 4848
-    protocol: http
+    protocol: tcp
     required: true
 env:
   - name: TUBESYNC_HOSTS

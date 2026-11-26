@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | 1.22.7 (vendor stable channel, `http://api.vintagestory.at/stable.json`, first key). Release date: UNVERIFIED (not in the API response). Draft tag `latest` is not a version; pin 1.22.7. |
-| Renovate | UNVERIFIED: vendor JSON API has no renovate datasource. Proposed `// renovate: datasource=custom.vintagestory depName=vintagestory versioning=semver` needs a custom manager; confirm against an existing sibling that tracks a non-GitHub vendor before using it. |
+| Renovate | UNVERIFIED: vendor JSON API has no renovate datasource. Proposed `// renovate: datasource=custom.vintagestory depName=vintagestory versioning=semver` needs a custom manager; siblings use `datasource=custom.<name>` (e.g. `custom.plex` in `apps/plex`), so a matching custom manager must be added in the renovate config first. |
 | License | UNVERIFIED: closed-source server; no SPDX license on the vendor pages fetched. Use `LICENSE` = `LicenseRef-Proprietary` only after confirmation. |
 | Source URL | https://www.vintagestory.at/ (website); upstream packager https://github.com/ich777/docker-vintage-story |
 | Download (amd64) | https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_1.22.7.tar.gz (from `stable.json` `.linuxserver.urls.cdn`). Mirror: https://account.vintagestory.at/files/stable/vs_server_linux-x64_1.22.7.tar.gz |
@@ -37,7 +37,7 @@ No `defaults/` needed unless a default `serverconfig.json` is shipped; if added,
 ## 4. Dockerfile
 
 1. `FROM <ubuntu> ` (single stage; no build stage needed, the server is a downloaded tarball).
-2. `USER root`, then `apt-get update && apt-get install -y --no-install-recommends dotnet-runtime-10.0` and `rm -rf /var/lib/apt/lists/*`. The `start.sh` snippet needs `curl`, `jq` and `tar`; check which the base already has (`apps/ubuntu/Dockerfile`) and install `jq` if missing (UNVERIFIED).
+2. `USER root`, then `apt-get update && apt-get install -y --no-install-recommends dotnet-runtime-10.0` and `rm -rf /var/lib/apt/lists/*`. The `start.sh` snippet needs `curl`, `jq` and `tar`; `apps/ubuntu/Dockerfile` already installs `curl`, `jq` and `tar`, so install nothing extra for them.
 3. `ARG VERSION` matching `docker-bake.hcl`; `ENV VS_CHANNEL=stable STATIC_V=""` as defaults for `start.sh`.
 4. Install the license notice: `/usr/share/licenses/vintage-story/` only if a vendor license file is available; otherwise record the vendor EULA reference in the PR (UNVERIFIED that a license file is shipped in the tarball).
 5. Create no server files at build time. The server is downloaded to `/config` at start (read-only `/app` rule).

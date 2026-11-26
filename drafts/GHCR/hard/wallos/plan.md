@@ -5,11 +5,11 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | v5.11.2, published 2026-11-18 (GitHub API `repos/ellite/Wallos/releases/tags/v5.11.2`, prerelease false). Draft `ghcr.io/ellite/wallos:5.11.2` agrees. |
+| Version to build | v5.11.3, latest release published 2026-11-20 (GitHub API `repos/ellite/Wallos/releases/latest`, prerelease false). Draft pins 5.11.2 (older); this plan uses the newer 5.11.3. The Dockerfile/startup.sh review below was done at tag v5.11.2 and must be re-checked at v5.11.3. |
 | Renovate | `// renovate: datasource=github-releases depName=ellite/Wallos versioning=semver` |
 | License | GPL-3.0 (GitHub API `repos/ellite/Wallos` `license.spdx_id`). |
-| Source URL | https://github.com/ellite/Wallos ; release https://github.com/ellite/Wallos/releases/tag/v5.11.2 |
-| Download | Source only, no binary assets on the release (`assets: []`). Use the tag source archive (`https://github.com/ellite/Wallos/archive/refs/tags/v5.11.2.tar.gz`, UNVERIFIED URL shape, not fetched) or `git clone --branch v5.11.2`. |
+| Source URL | https://github.com/ellite/Wallos ; release https://github.com/ellite/Wallos/releases/tag/v5.11.3 |
+| Download | Source only, no binary assets on the release (`assets: []`). Use the tag source archive (`https://github.com/ellite/Wallos/archive/refs/tags/v5.11.3.tar.gz`, UNVERIFIED URL shape, not fetched) or `git clone --branch v5.11.3`. |
 | Per-arch | PHP (interpreted): amd64 and arm64 both possible. |
 | Checksum source | None published on the release. Record the tarball sha256 at build time. |
 | Upstream Dockerfile reviewed | https://github.com/ellite/Wallos/blob/v5.11.2/Dockerfile: `FROM php:8.3-fpm-alpine`, `WORKDIR /var/www/html`, `apk add` of dumb-init, shadow, sqlite-dev, nginx, dcron, tzdata, libzip-dev, icu-dev; `docker-php-ext-install` pdo, pdo_sqlite, calendar, gd, intl, zip; PHP-FPM pool `pm.max_children = 15`, `pm.max_requests = 500`; upload limit 256M; `COPY . .`; `COPY nginx.conf /etc/nginx/nginx.conf`; `COPY nginx.default.conf /etc/nginx/http.d/default.conf`; `COPY cronjobs /etc/cron.d/cronjobs`; `EXPOSE 80`; `ENTRYPOINT ["dumb-init", "--"]`; `CMD ["/var/www/html/startup.sh"]`; no USER (runs as root), no VOLUME, no ARG, no ENV. |
@@ -38,8 +38,8 @@ No `root/` (never used). No `DOWNSTREAM_CHANGES.md` (not a FROM base). Upstream 
 
 ## 4. Dockerfile
 
-1. `FROM <ubuntu> AS build`: `ARG VERSION=5.11.2`; fetch `https://github.com/ellite/Wallos/archive/refs/tags/v${VERSION}.tar.gz` into `/tmp/src` with `curl -fL`, verify sha256 recorded at build time (no upstream checksum). Extract with `tar -xz --strip-components=1`.
-2. Final stage `FROM <ubuntu>` (separate from the build stage, which only fetches the source): `USER root`, then `apt-get install -y --no-install-recommends php8.5-fpm php8.5-cli php8.5-sqlite3 php8.5-curl php8.5-gd php8.5-xml php8.5-mbstring php8.5-zip php8.5-intl nginx cron` (PHP 8.5 is the 26.04 version; 8.3 is not available, see section 10). Pin versions and check against the Wallos release notes (UNVERIFIED: whether Wallos 5.11.2 supports PHP 8.5).
+1. `FROM <ubuntu> AS build`: `ARG VERSION=5.11.3`; fetch `https://github.com/ellite/Wallos/archive/refs/tags/v${VERSION}.tar.gz` into `/tmp/src` with `curl -fL`, verify sha256 recorded at build time (no upstream checksum). Extract with `tar -xz --strip-components=1`.
+2. Final stage `FROM <ubuntu>` (separate from the build stage, which only fetches the source): `USER root`, then `apt-get install -y --no-install-recommends php8.5-fpm php8.5-cli php8.5-sqlite3 php8.5-curl php8.5-gd php8.5-xml php8.5-mbstring php8.5-zip php8.5-intl nginx cron` (PHP 8.5 is the 26.04 version; 8.3 is not available, see section 10). Pin versions and check against the Wallos release notes (UNVERIFIED: whether Wallos 5.11.3 supports PHP 8.5).
 3. Copy the app to `/app/wallos` (read-only at runtime): `COPY --from=build /tmp/src /app/wallos`, then `chmod -R a=rX /app/wallos` (no runtime writes).
 4. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/wallos/LICENSE`.
 5. `ENV HOME=/tmp` (cron and PHP sessions use `/tmp`).
@@ -59,7 +59,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=ellite/Wallos versioning=semver
-  default = "5.11.2"
+  default = "5.11.3"
 }
 
 variable "LICENSE" {
@@ -129,7 +129,7 @@ Header: `# yaml-language-server: $schema=https://raw.githubusercontent.com/truef
 
 ## 10. Risks, caveats and open questions
 
-- PHP version gap: upstream uses PHP 8.3; 26.04 ships PHP 8.5 and has no `php8.3-fpm` in its archive. Running 8.5 is untested with Wallos 5.11.2. Either test PHP 8.5, or add an external PHP 8.3 source (UNVERIFIED availability and supply chain). This is the main open question.
+- PHP version gap: upstream uses PHP 8.3; 26.04 ships PHP 8.5 and has no `php8.3-fpm` in its archive. Running 8.5 is untested with Wallos 5.11.3. Either test PHP 8.5, or add an external PHP 8.3 source (UNVERIFIED availability and supply chain). This is the main open question.
 - Multiple services in one container (nginx, php-fpm, cron): a crash in one can go unnoticed (the trap and `wait` must surface failures, and the healthcheck must test the app, not only the port).
 - SQLite and uploads must be writable by the web user; the first account is created through the UI.
 - Port 80 under non-root (section 9).
@@ -142,10 +142,10 @@ cd apps/wallos
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name wallos-probe --read-only --tmpfs /tmp \
-  -v wallos-probe-config:/config wallos:5.11.2
+  -v wallos-probe-config:/config wallos:5.11.3
 docker logs -f wallos-probe
 docker rm -f wallos-probe; docker volume rm wallos-probe-config
-forgetool containers test --image wallos:5.11.2 --config ./apps/wallos/container-test.yaml
+forgetool containers test --image wallos:5.11.3 --config ./apps/wallos/container-test.yaml
 ```
 
 Expected readiness signal: nginx and php-fpm both report started, the migrations finish without error, and the HTTP probe returns a 200 or 302 (wording UNVERIFIED until a real run). Empty `/config` must be tested each round.
