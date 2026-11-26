@@ -9,7 +9,7 @@
 | Latest stable | `v1.3.9` (tags sorted: v1.3.6 to v1.3.9; Docker Hub tags `latest`, v1.3.9, v1.3.8 ...) |
 | Renovate | `datasource=github-tags depName=SoulRaven80/wdosg versioning=semver` (tags carry a `v` prefix) |
 | License | GPL-3.0. The `LICENSE` file is the GNU GPL version 3 text. UNVERIFIED whether "only" or "or later" (no source header read); `package.json` says `ISC`, which conflicts, so the `LICENSE` file is taken as authoritative and the PR should note the conflict. Use `GPL-3.0-only` |
-| Source | `https://github.com/SoulRaven80/wdosg/archive/refs/tags/v1.3.9.tar.gz` (same for both arches; JS only, plus the native `better-sqlite3` dependency) |
+| Source | `https://github.com/SoulRaven80/wdosg/archive/refs/tags/v1.3.9.tar.gz` (same for both arches; JS only, plus the native `sqlite3` dependency) |
 | Checksum source | None published (no release assets). The pinned tag is the integrity anchor. Tag `v1.3.9` points to `5cc2cc88b08b722d63e68df8a061b47f7c2d22a4` |
 | Upstream Dockerfile | Reviewed (identical at `db267e9`, `v1.3.9` and master): `FROM node:23-alpine3.19`, `WORKDIR /app`, `COPY . .`, `RUN npm install`, `EXPOSE 3001`, `CMD ["node","index"]` |
 | Draft correction | The draft guesses port 3000. The real default is `3001` (`process.env.PORT \|\| 3001` in `index.js`, `EXPOSE 3001`, README compose example) |
@@ -18,7 +18,7 @@
 | Startup behavior | At v1.3.9, `index.js` calls `process.exit(1)` when `TWITCH_CLIENT_ID` or `TWITCH_CLIENT_SECRET` is empty. On master the same check only logs a warning and sets the ID to `DISABLED`. The release is therefore a crash without env, which matters for the empty-env container test |
 | Temp dir | `./tmp/` relative to the cwd (file upload temp dir, cleared at start) |
 | Readiness log | `Application ready. Server listening on port <port>` (pino-pretty output) |
-| Dependencies | `better-sqlite3@^12.8.0` (native module: prebuilt download or node-gyp compile), `express@^4`, `pino`, `pino-pretty`, `nodemailer@^8`, `adm-zip`, `cheerio`, `image-downloader`, others; dev deps are jest/eslint (not needed) |
+| Dependencies | `sqlite3@^5.1.7` (native module: prebuilt download or node-gyp compile), `express@^4.21.1`, `pino@^9.5.0`, `pino-pretty@^13.0.0`, `nodemailer@^6.9.16`, `adm-zip@^0.5.16`, `image-downloader@^4.3.0`, others; dev deps are jest/eslint (not needed) |
 
 ## 2. Target layout
 
@@ -37,7 +37,7 @@ No `defaults/` or `etc/`: the app creates its own database and library directori
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Why: Node app, and the draft names `python-node`. It supplies `node`, `npm` and a Python for `node-gyp`. Closest siblings: `apps/thelounge` and `apps/budge` (npm install into `/app`, state in `/config`). UNVERIFIED: the Node major in the base; `better-sqlite3@12` needs a modern Node (upstream uses Node 23), so check `node -v` in the first build and adjust only if it fails.
+Why: Node app, and the draft names `python-node`. It supplies `node`, `npm` and a Python for `node-gyp`. Closest siblings: `apps/thelounge` and `apps/budge` (npm install into `/app`, state in `/config`). UNVERIFIED: the Node major in the base; `sqlite3@5` needs a supported Node (upstream uses Node 23), so check `node -v` in the first build and adjust only if it fails.
 
 ## 4. Dockerfile
 
@@ -45,7 +45,7 @@ Why: Node app, and the draft names `python-node`. It supplies `node`, `npm` and 
 2. `USER root`.
 3. `ENV HOME=/config NODE_ENV=production NPM_CONFIG_CACHE=/tmp/npm-cache NPM_CONFIG_UPDATE_NOTIFIER=false`.
 4. One `RUN` (the pattern is `apps/budge/Dockerfile`):
-   - apt build tools only as a fallback for `better-sqlite3` when no prebuilt binary matches: `apt-get update && apt-get install -y --no-install-recommends build-essential python3` (python3 is in the base; list it anyway only if missing). Purge `build-essential` at the end, as budge does.
+   - apt build tools only as a fallback for `sqlite3` when no prebuilt binary matches: `apt-get update && apt-get install -y --no-install-recommends build-essential python3` (python3 is in the base; list it anyway only if missing). Purge `build-essential` at the end, as budge does.
    - `mkdir -p /app/wdosg /usr/share/licenses/wdosg`
    - `(curl -fsSL -o /tmp/wdosg.tar.gz "https://github.com/SoulRaven80/wdosg/archive/refs/tags/v${VERSION#v}.tar.gz")` then `tar xzf /tmp/wdosg.tar.gz -C /app/wdosg --strip-components=1`
    - `cd /app/wdosg && npm ci --omit=dev --no-audit --no-fund` (a `package-lock.json` exists at v1.3.9; if `npm ci` fails on a lockfile mismatch, fall back to `npm install --omit=dev`)
@@ -127,7 +127,7 @@ tcp:
 - port: '3001'
 filePaths:
 - /app/wdosg/index.js
-- /app/wdosg/node_modules/better-sqlite3
+- /app/wdosg/node_modules/sqlite3
 ```
 
 No `http` probe: unauthenticated requests are redirected or rejected by `verifyToken`, and the exact status of `/` was not confirmed. The test runs without env, which only works because start.sh defaults the IGDB variables to `DISABLED`. The email, `*_FILE` and TOKEN_SECRET-generation paths are not covered by the test and must be run by hand (section 11).
@@ -148,12 +148,12 @@ UNVERIFIED: any other path the app might write under its own directory (for exam
 ## 10. Risks, caveats and open questions
 
 - The build downloads a tag tarball and runs `npm ci`; it needs network access and is only as reproducible as the lockfile.
-- `better-sqlite3` is native: arm64 and amd64 both need either a matching prebuilt (downloaded from GitHub during install) or a `node-gyp` compile. Test both arches; the compile fallback is why `build-essential` is in the plan.
+- `sqlite3` is native: arm64 and amd64 both need either a matching prebuilt (downloaded from GitHub during install) or a `node-gyp` compile. Test both arches; the compile fallback is why `build-essential` is in the plan.
 - v1.3.9 exits without IGDB variables, but master does not. start.sh papers over this for v1.3.9; once a newer release adopts master's behavior, the defaults become harmless.
 - `TOKEN_SECRET` upstream default is `secret`; the generated value fixes that for the container, but anyone setting it by env must keep it stable.
 - wDOSg is not meant for the open internet (README caution), and registration is local; document that.
 - License mismatch: `LICENSE` (GPLv3) against `package.json` (`ISC`). Confirm with upstream or the maintainers.
-- Docker image upstream is Alpine (musl); `better-sqlite3` prebuilts for glibc exist, so this is a plus.
+- Docker image upstream is Alpine (musl); `sqlite3` prebuilts for glibc exist, so this is a plus.
 - The `.env` file in the repo is a sample and is not loaded.
 - Draft listed port 3000 as inferred; corrected to 3001.
 
