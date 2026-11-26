@@ -66,8 +66,9 @@ COPY --chmod=0755 . /
 EXPOSE 6246
 VOLUME /config
 WORKDIR /app/maintainerr
-ENTRYPOINT ["/start.sh"]
 ```
+
+No `ENTRYPOINT` override: the `ubuntu` base already sets `ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]` (apps/ubuntu/Dockerfile), which hands over to `/start.sh`. UNVERIFIED: confirm in `apps/ubuntu` entrypoint how `/start.sh` is invoked.
 
 `DATA_DIR=/config` replaces upstream `/opt/data` (ContainerForge persistence model). `start.sh` keeps the path logic and reads `DATA_DIR`. Upstream `mkdir -m 777` and `chown` are removed: `/config` is owned by `apps` at runtime and `/app` stays read-only.
 

@@ -40,7 +40,7 @@ No `defaults/` (the operator supplies the config; nothing confirmed to seed). No
 
 1. Build stage `FROM <ubuntu> AS builder`, `ARG VERSION`, `ARG TARGETARCH`, `ARG DART_SDK_VERSION` (Dart 2.x, UNVERIFIED value), `ARG DART_SDK_SHA256` (UNVERIFIED value), `ARG LEAF2MQTT_SHA256` (UNVERIFIED value), `USER root`.
 2. `apt-get install -y --no-install-recommends git ca-certificates curl unzip` (check base first; `git` is needed by `dart pub get` for the three git dependencies).
-3. Dart SDK: download `https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_SDK_VERSION}/sdk/dartsdk-linux-${TARGETARCH}-release.zip` (UNVERIFIED URL for 2.x; the arch name mapping `arm64` vs `arm64` and `x64` for amd64 must be checked), verify with `sha256sum -c`, unzip to `/usr/local/dart`, `ENV PATH=/usr/local/dart/bin:$PATH`.
+3. Dart SDK: download `https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_SDK_VERSION}/sdk/dartsdk-linux-${TARGETARCH}-release.zip` (UNVERIFIED URL for 2.x; the Dart archive names architectures `x64` (amd64) and `arm64`; map `TARGETARCH` accordingly and check), verify with `sha256sum -c`, unzip to `/usr/local/dart`, `ENV PATH=/usr/local/dart/bin:$PATH`.
 4. Source: `curl -fL -o /tmp/src.tar.gz https://github.com/mitsumaui/leaf2mqtt/archive/refs/tags/${VERSION}.tar.gz`, verify with `sha256sum -c`, extract to `/build/leaf2mqtt` with `--strip-components=1`.
 5. In `/build/leaf2mqtt`: `dart pub get` (uses `pubspec.lock`), then `dart compile exe src/leaf_2_mqtt.dart -o /out/leaf_2_mqtt`. Env: `PUB_CACHE=/tmp/pub-cache`, `HOME=/tmp`.
 6. Final stage `FROM <ubuntu>`, `USER root`:
@@ -111,7 +111,8 @@ No ports (upstream exposes none). Env: no upstream variable is confirmed; the co
 mkdir -p /config
 
 cd /config
-exec /app/bin/leaf_2_mqtt <config arguments, UNVERIFIED>
+# UNVERIFIED: arguments/config path not confirmed upstream
+exec /app/bin/leaf_2_mqtt
 ```
 
 Idempotent, seeds nothing, no writes to `/app`. The config location and argument form are UNVERIFIED (the upstream `CMD` gives no arguments). Credentials must not be passed on the command line (process list); read them from the config file under `/config` or from env, per the upstream code (UNVERIFIED which).

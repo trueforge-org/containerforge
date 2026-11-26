@@ -40,7 +40,7 @@ No `defaults/`, `etc/`, `scripts/` or `health/` needed. Do not use `root/`. No `
 ## 3. Base image
 
 - Runtime (final stage): `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. It is ubuntu-26.04 based, has `/app/venv` (read-only at runtime), `PIP_BREAK_SYSTEM_PACKAGES=1`, and `USER apps`.
-- Builder for the UI (build stage only, thrown away): `docker.io/library/node:22-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32` (the digest upstream pins because of the QEMU arm64 issue noted in its Dockerfile). Note: `apps/` has no `python-node` image in this checkout (the brief's exemplar list is out of date), so a Node builder stage is the only way to get Node. The ubuntu bake has a `NODE_VERSION` variable; whether that image ships Node is UNVERIFIED, so do not rely on it.
+- Builder for the UI (build stage only, thrown away): `docker.io/library/node:22-alpine@sha256:c610fcdfb1d5b4740dd70c284ed3cb16bb857e0f7166196e36a5501df7a3aa32` (the digest upstream pins because of the QEMU arm64 issue noted in its Dockerfile). Note: there is no `apps/python-node` folder, but `ghcr.io/trueforge-org/python-node` is used as a `FROM` by `apps/budge` and `apps/changedetection`, so it could serve as the UI build stage instead (its Node version is UNVERIFIED). The plan keeps the upstream-pinned `node:22-alpine` digest for the UI stage because of the QEMU arm64 note; either is acceptable.
 - Closest sibling: `apps/bazarr` (python base, source tarball from GitHub, ffmpeg via apt, `COPY --chmod=0755 . /`, `USER apps`, `WORKDIR /config`).
 
 ## 4. Dockerfile

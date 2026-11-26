@@ -62,8 +62,9 @@ COPY --chmod=0755 . /
 EXPOSE 8443 8080
 VOLUME /config
 WORKDIR /app/meshcentral
-ENTRYPOINT ["/start.sh"]
 ```
+
+No `ENTRYPOINT` override: the `ubuntu` base entrypoint (`tini` then `/entrypoint.sh`) execs `/start.sh`.
 
 `PORT=8443` and `REDIR_PORT=8080` are deliberate, see section 9. `CONFIG_FILE` points at `/config`, not `/opt/meshcentral`.
 
@@ -199,15 +200,16 @@ jq --argjson port "$PORT" --argjson redir "$REDIR_PORT" --arg host "$HOSTNAME" \
   "$DATA/config.json" > "$DATA/config.json.tmp" && mv "$DATA/config.json.tmp" "$DATA/config.json"
 
 cd /app/meshcentral
-exec node meshcentral.js
+exec node node_modules/meshcentral/meshcentral.js
 ```
 
+- UNVERIFIED: `jq` is present in the base image (check with `command -v jq`; add the apt package only if missing).
 - Idempotent: empty `/config` is seeded from `defaults/config.json.template`; a populated `/config` keeps its `config.json` and only the three env-driven keys are rewritten each start.
 - Never writes to `/app`: the symlinks from the Dockerfile point into `/config`.
 - The `jq` expression above is the only env mapping in this version: `.domains[""].dns` is the hostname agents use. Whether MeshCentral reads `domains[""].dns` or `settings.cert` for the enrollment host name is UNVERIFIED: check the template's keys and the upstream `entrypoint.sh` lines 90+ (not fully read) before the first build. Adjust the jq path to the real key.
 - Password and session secrets: no secrets from env are written to files in this version. `REGEN_SESSIONKEY` is not wired (out of scope).
 - Caches: npm and node temp to `/tmp` (`TMPDIR=/tmp`, verify in section 11).
-- `exec node meshcentral.js` makes node PID 1 for signal handoff. Upstream's SIGTERM trap (`kill -SIGINT`) is not needed for a single node process; node handles SIGINT/SIGTERM, verify on stop.
+- `exec node node_modules/meshcentral/meshcentral.js` (the npm layout; the data folders sit beside `node_modules`, hence the symlinks) makes node PID 1 for signal handoff. Upstream's SIGTERM trap (`kill -SIGINT`) is not needed for a single node process; node handles SIGINT/SIGTERM, verify on stop.
 - Bind all interfaces: MeshCentral listens on all interfaces by default; confirm the log shows the configured port on `0.0.0.0`.
 
 ## 8. container-test.yaml

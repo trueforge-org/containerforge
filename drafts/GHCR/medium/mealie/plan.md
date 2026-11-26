@@ -69,8 +69,9 @@ COPY --chmod=0755 . /
 EXPOSE 9000
 VOLUME /config
 WORKDIR /app
-ENTRYPOINT ["/start.sh"]
 ```
+
+No `ENTRYPOINT` override: the `ubuntu` base entrypoint (`tini` then `/entrypoint.sh`) execs `/start.sh`.
 
 `ARG COMMIT` into `GIT_COMMIT_HASH` only if the version string needs it (upstream has it; optional). `VOLUME /config` replaces upstream `/app/data/`; the symlink in step 11 keeps mealie's own path working.
 
