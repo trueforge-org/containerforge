@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Software | Kubo (go-ipfs). App folder is named `ipfs` as in the draft. |
-| Version | **v0.43.2** (latest GitHub release on 2026-11-25, published 2026-11-24). The draft and chart still say the previous patch release. |
+| Version | **v0.43.2** (latest GitHub release on 2026-11-25, published 2026-11-24). The draft still says v0.43.1; the TrueCharts chart already uses v0.43.2. |
 | Renovate | `// renovate: datasource=github-releases depName=ipfs/kubo` (semver, tag has `v` prefix) |
 | License | Dual: MIT and Apache-2.0 (`LICENSE-MIT`, `LICENSE-APACHE` exist at the tag). SPDX `Apache-2.0 OR MIT`. |
 | Source URL | https://github.com/ipfs/kubo |
