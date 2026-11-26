@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/java17:17@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a
+FROM ghcr.io/trueforge-org/java17:17@sha256:efdc903d9ce0436b6207bc5a4e732d24a27231851975c999770fd8709a8316b8
 
 # set version label
 ARG VERSION
