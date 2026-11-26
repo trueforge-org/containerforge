@@ -7,7 +7,7 @@ The plan targets the same version as the draft (`1.0.11`). The draft's concern a
 
 | Item | Value |
 | --- | --- |
-| Version | `1.0.11` (git tags `v1.0.0` and `v1.0.11` only; the GitHub Releases page is empty) |
+| Version | `1.0.11` (git tags `v1.0.0` and `v1.0.11`; GitHub release `v1.0.11` exists, published 2025-06-12, with no assets) |
 | Renovate | `datasource=github-tags depName=DumbWareio/DumbAssets versioning=semver` (tags have a `v` prefix; semver handles it) |
 | License | GPL-3.0 (`LICENSE` is GNU GPL v3; README states GPL-3.0). SPDX: `GPL-3.0-only`. UNVERIFIED whether the upstream means "or later"; only the v3 text was checked. |
 | Source | https://github.com/DumbWareio/DumbAssets |
