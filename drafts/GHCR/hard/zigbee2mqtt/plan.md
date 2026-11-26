@@ -21,7 +21,7 @@ Upstream Dockerfile summary:
 - `ENTRYPOINT ["docker-entrypoint.sh"]`, `CMD ["/sbin/tini","--","node","index.js"]`.
 - `EXPOSE 8080`. No VOLUME, no USER (root).
 
-Ports: 8080 is confirmed. The draft's 8080 frontend note is consistent. Real env vars: only `NODE_ENV` is confirmed on the Dockerfile. Config and data path beyond `/app/data`: UNVERIFIED.
+Ports: 8080 is confirmed. The draft's 8080 frontend note is consistent. Real env vars: `NODE_ENV` (Dockerfile) and `ZIGBEE2MQTT_DATA` (read by `lib/util/data.ts`; upstream `docker-entrypoint.sh` only echoes it). Log directory location: UNVERIFIED.
 
 ## 2. Target layout
 
@@ -52,7 +52,7 @@ Build from source in a build stage, then copy into the ubuntu runtime. The relea
 5. Ship the LICENSE to `/usr/share/licenses/zigbee2mqtt/`.
 6. `ENV HOME=/config` and `ENV TMPDIR=/tmp`.
 7. `USER apps`, then `COPY --chmod=0755 . /`.
-8. `EXPOSE 8080`, `VOLUME /config`, final `USER apps`.
+8. `EXPOSE 8080`, `VOLUME /config`; `USER apps` must be the last user directive.
 
 Do not compile Go here, since none is needed. Do not run `chown -R` on `/app` beyond what the copy needs.
 
@@ -69,14 +69,14 @@ Do not compile Go here, since none is needed. Do not run `chown -R` on `/app` be
 
 - Schema header and `schema_version: 1`, `upstream_env_url: "https://github.com/Koenkk/zigbee2mqtt"`.
 - `ports`: 8080/tcp, `required: false`.
-- `env`: `TZ` default `Etc/UTC`. Add `NODE_ENV` only if `start.sh` sets it explicitly. Add `ZIGBEE2MQTT_DATA` default `/config` (confirmed in upstream `docker-entrypoint.sh`).
+- `env`: `TZ` default `Etc/UTC`. Add `NODE_ENV` only if `start.sh` sets it explicitly. Add `ZIGBEE2MQTT_DATA` default `/config` (read by the app in `lib/util/data.ts` at 2.14.3).
 - `volumes`: `/config`, `required: true`.
 - `dependencies`: none in the image. The MQTT broker is an external service, not a ContainerForge dependency here, although `apps/mosquitto` exists in this repo and can serve as the broker.
 
 ## 7. start.sh
 
 - Seed `/config/configuration.yaml` from the shipped example only when missing: `[ -f /config/configuration.yaml ] || cp /defaults/configuration.yaml /config/configuration.yaml` (`defaults/` is copied to `/defaults` by `COPY . /`; source the file from `data/configuration.example.yaml` in the release tarball).
-- Point the app's data directory at `/config` with `ZIGBEE2MQTT_DATA=/config` (confirmed in upstream `docker/docker-entrypoint.sh` at 2.14.3; default is `/app/data`).
+- Point the app's data directory at `/config` with `ZIGBEE2MQTT_DATA=/config` (read by `lib/util/data.ts` at 2.14.3; the default is `data/` next to the app, i.e. `/app/data`).
 - Never write to `/app`. Caches go to `/tmp`.
 - `cd /app` then `exec node index.js` (or `exec tini -- node index.js` if tini is available). Keep signals working.
 - Bind the frontend to `0.0.0.0`. Check the upstream `frontend.host` default; set it in the seeded config only when missing.

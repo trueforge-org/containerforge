@@ -12,8 +12,8 @@
 | Binary source | No binary. Source archive `https://github.com/linuxserver/nntp2nntp/archive/0.3.tar.gz` (pip-installable). Checksum: none published; the tag commit is the pin. |
 | Python version | **Python 2 only.** `setup.py` classifiers list Python 2.6 and 2.7 only: https://github.com/linuxserver/nntp2nntp/blob/master/setup.py . `nntp2nntp.py` line 52 is `print sha256(pwd).hexdigest()`, a Python 2 print statement, so Python 3 cannot import it: https://github.com/linuxserver/nntp2nntp/blob/master/nntp2nntp.py |
 | Dependencies | `Twisted`, `pyOpenSSL` (`install_requires`), plus `service_identity` in the upstream image. Python 3 compatibility of these: UNVERIFIED. |
-| Entry point | UNVERIFIED: the `setup.py` entry point or script name was not read in full. Confirm with `pip show` or `setup.py` during the build. |
-| Usage | `nntp2nntp <config_file>`; `nntp2nntp pass` prints a password hash (`nntp2nntp.py` lines 13-19 and 52). |
+| Entry point | `setup.py` has `scripts = ["nntp2nntp.py", "nntppost.py"]`, so pip installs a script named `nntp2nntp.py` (not `nntp2nntp`) into `/app/venv/bin`. Confirm after the build. |
+| Usage | `nntp2nntp.py <config_file>`; `nntp2nntp.py pass` prints a password hash (`nntp2nntp.py` lines 13-19 and 52). |
 | Config defaults | https://raw.githubusercontent.com/linuxserver/docker-nntp2nntp/master/root/defaults/nntp2nntp.conf : `[proxy] port = 1563`, `use ssl = false`, `cert file`/`cert key` under `/config/keys`, `logfile` and `pidfile` under `/config/logs`; `[server]` host/port/login/password (placeholders `nntp.example.com`, `myuser`); `[users]`, `[connections]`. |
 | Ports | **1563/tcp**, not the draft's `1119/tcp`. Source: upstream Dockerfile `EXPOSE 1563` and default `port = 1563`. The `1119` value in the draft is inferred and has no source. |
 | Env vars | None read by the program. Configuration is the file only. |
@@ -115,14 +115,14 @@ if [[ ! -s "${CONFIG}" ]]; then
     cp /defaults/nntp2nntp.conf "${CONFIG}"
 fi
 
-exec /app/venv/bin/nntp2nntp "${CONFIG}"
+exec /app/venv/bin/nntp2nntp.py "${CONFIG}"
 ```
 
 - Seeds the config only when missing or empty (never overwrites user state).
 - `exec`s the proxy so signals reach it.
 - Default config points the upstream at `nntp.example.com`. The proxy should still bind `1563`; whether it starts with placeholder upstream settings is UNVERIFIED and is a readiness check in section 11.
 - The proxy binds on all interfaces by default in its config (no `bind` directive is shown in the default file). UNVERIFIED: check with `ss -ltn` in the build.
-- Entry point name `nntp2nntp` is UNVERIFIED (section 1).
+- Entry point name `nntp2nntp.py` comes from `setup.py` `scripts`; confirm the installed file after the build (section 1).
 
 ## 8. container-test.yaml
 

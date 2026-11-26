@@ -39,7 +39,7 @@ Files in `apps/ztcuui-aio/`:
 
 - Draft proposes `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` with the ubuntu alternative.
 - Preferred: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, because the zerotier daemon and Node are both needed and python is unused. Node is then installed from the release tarball or apt under root in a build stage.
-- Closest sibling: any ubuntu-based app with a node component. Confirm the sibling in `apps/`.
+- Closest sibling: none confirmed (`apps/changedetection`, `apps/budge` use python-node). UNVERIFIED.
 
 ## 4. Dockerfile
 
@@ -52,7 +52,7 @@ Use the prebuilt release tarball (`.tar.zst`), not the upstream build, since the
 5. Ship license notices for ztncui and zerotier to `/usr/share/licenses/ztcuui-aio/`.
 6. `ENV HOME=/config`, `ENV TMPDIR=/tmp`.
 7. Move state to `/config`: symlink or env to redirect `/var/lib/zerotier-one`, `/etc/zt-mkworld`, and `/opt/key-networks/ztncui/etc` under `/config`. UNVERIFIED: the app honors these paths via env or only via fixed paths. This is the largest open risk.
-8. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3443`, `VOLUME /config`.
+8. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 3443`, `VOLUME /config`. This holds only if zerotier-one can run unprivileged without TUN; otherwise see section 9 (UNVERIFIED, likely a needs-human decision).
 
 Do not run s6 as `apps`. s6 needs root to start services. If s6 is kept, the container runs as root, which breaks the rootless rule. See section 9.
 
@@ -84,7 +84,7 @@ Do not run s6 as `apps`. s6 needs root to start services. If s6 is kept, the con
 ## 8. container-test.yaml
 
 - forgetool schema header.
-- `tcp: - port: '3443'`, with `timeoutSeconds` from a sibling.
+- `tcp: - port: '3443'` (the port serves HTTPS; a tcp probe suffices, an http probe would need TLS support), with `timeoutSeconds` from a sibling.
 - The test runs without `/dev/net/tun`. ZeroTier may not start. The test must not rely on the daemon. If the daemon is required for the web UI to answer, the test is an honest failure, which is a finding, not a reason to weaken it. Report it to the user.
 - `filePaths`: `/opt/key-networks/ztncui` and `/usr/local/bin` helpers if the schema allows.
 

@@ -50,14 +50,14 @@ Files in `apps/zwavejs2mqtt/`:
 7. `rm` the downloaded zip from `/tmp`.
 8. `USER apps`, then `COPY --chmod=0755 . /`.
 9. `EXPOSE 8091` and `EXPOSE 3000` (3000 only if confirmed, see section 10), `VOLUME /config`.
-10. Final `USER apps`.
+10. `USER apps` must remain the last user directive.
 
 Do not run `chown -R` on `/app` if the zip already gives correct ownership. Check the extracted modes.
 
 ## 5. docker-bake.hcl
 
 - `variable "APP" { default = "zwavejs2mqtt" }`
-- `variable "VERSION"` with `// renovate: datasource=github-releases depName=zwave-js/zwave-js-ui versioning=loose` and `default = "11.27.0"`. Use the `v`-less form, matching the other apps, and strip the `v` in the download URL if needed.
+- `variable "VERSION"` with `// renovate: datasource=github-releases depName=zwave-js/zwave-js-ui versioning=loose` and `default = "11.27.0"`. Upstream tags carry a `v` prefix, so the bake default stays `v`-less and the Dockerfile adds the `v` back in the asset URL (`zwave-js-ui-v${VERSION}-linux.zip`). For Renovate to strip the prefix, the annotation needs an `extractVersion=^v(?<version>.+)$` (check how sibling apps with `v` tags annotate it).
 - `variable "LICENSE" { default = "MIT" }`
 - `variable "SOURCE" { default = "https://github.com/zwave-js/zwave-js-ui" }`
 - Standard targets: `docker-metadata-action`, `image`, `image-local`, `image-all`, and `group "default"` with `image-local`.
