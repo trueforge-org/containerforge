@@ -9,7 +9,7 @@
 | Renovate | `datasource=github-releases depName=dazedcat19/FMD2 versioning=loose` (four-part version, not semver) |
 | License | GPL-2.0 per README ("released under the GPLv2 license"); SPDX `GPL-2.0-only` (UNVERIFIED whether "or later") |
 | Source URL | https://github.com/dazedcat19/FMD2 (Object Pascal/Lazarus app with Lua modules; Windows build run under Wine) |
-| Download | amd64 only: `https://github.com/dazedcat19/FMD2/releases/download/${VERSION}/fmd_${VERSION}_x86_64-win64.7z` (from the draft; the asset list did not load on the releases page, UNVERIFIED by name). The release has 4 assets. |
+| Download | amd64 only: `https://github.com/dazedcat19/FMD2/releases/download/${VERSION}/fmd_${VERSION}_x86_64-win64.7z` (from the draft; asset name verified via the GitHub API). The release has 2 assets (`fmd_${VERSION}_i386-win32.7z`, `fmd_${VERSION}_x86_64-win64.7z`). |
 | arm64 | No (Windows x86_64 binary). |
 | Checksum | UNVERIFIED: no checksum file seen. If the release publishes digests, use them; otherwise record the sha256 of the archive in a build ARG and verify it. |
 | Upstream Dockerfile reviewed | https://github.com/Banh-Canh/docker-FMD2/blob/master/Dockerfile: base `ghcr.io/linuxserver/baseimage-kasmvnc:ubuntunoble`; `ENV WINEDLLOVERRIDES="mscoree,mshtml=" HOME=/config`; `dpkg --add-architecture i386`; apt `wine64=9.0~repack-4build3 wget p7zip-full curl git python3-pyxdg inotify-tools rsync`; extracts the 7z into `/app/FMD2`; creates `/downloads`, `/app/FMD2/userdata`, `/app/FMD2/downloads`; `VOLUME /config`; `EXPOSE 3000` |
