@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | No GitHub releases (`releases/latest` returns 404). Pin the `master` HEAD commit `23c6d2db08ac4fb44f7204cadd56faa24bf5b51a` (committed 2025-12-27). Source: `gh api repos/TheConnMan/docker-hub-rss/commits?sha=master`. Repo default branch is `dev` (pushed 2026-07-27); `master` is the branch the chart's image was built from is UNVERIFIED. package.json `version` is `0.6.2`. |
 | Draft difference | Draft says "build from repository HEAD". Confirmed: no tags, no releases. The chart's image is `ghcr.io/theconnman/docker-hub-rss:latest@sha256:38eba84b…` (chart values.yaml); the commit behind that digest is UNVERIFIED. |
-| Renovate | `datasource=git-refs depName=https://github.com/TheConnMan/docker-hub-rss currentValue=master` (same pattern as `apps/fenrus`; not yet proven in this repo). |
+| Renovate | `datasource=git-refs depName=https://github.com/TheConnMan/docker-hub-rss currentValue=master` (the `git-refs` datasource is used in `apps/nextcloud-imaginary/docker-bake.hcl`; `apps/fenrus` does not exist yet). |
 | License | MIT (GitHub API `license.spdx_id` = MIT; package.json `license` = MIT). |
 | Source URL | https://github.com/TheConnMan/docker-hub-rss |
 | Download | No binary. Source archive `https://github.com/TheConnMan/docker-hub-rss/archive/${VERSION}.tar.gz` (VERSION = commit SHA) plus `npm`/`yarn` dependencies. Arch-independent JavaScript. |
@@ -44,8 +44,8 @@ Build stage: the same python-node image (it has npm and Node), so there is no se
 3. Pin yarn 1 for the existing `yarn.lock`: `npm install -g yarn@1` (version UNVERIFIED for the current lockfile; check that `yarn install --frozen-lockfile` passes).
 4. Fetch source: `curl -fL https://github.com/TheConnMan/docker-hub-rss/archive/${VERSION}.tar.gz | tar xz -C /tmp/src --strip-components=1`, with `/tmp/src` created first.
 5. `cd /tmp/src && yarn install --frozen-lockfile --production` (no dev deps). Caches go to `/tmp` via `ENV YARN_CACHE_FOLDER=/tmp/yarn` and `npm_config_cache=/tmp/npm`.
-6. Final stage `FROM <python-node>`, `USER root`: `mkdir -p /app/docker-hub-rss && cp -a /tmp/src/. /app/docker-hub-rss/`, then `rm -rf /tmp/*` cleanup. Keep `apt` lists cleaned.
-7. License: `install -D /tmp/src/LICENSE /usr/share/licenses/docker-hub-rss/LICENSE`.
+6. Final stage `FROM <python-node>`, `USER root`: `mkdir -p /app/docker-hub-rss` and `COPY --from=build --chmod=0755 /tmp/src/ /app/docker-hub-rss/` (the final stage is a separate image, so the source must come from the build stage). Keep `apt` lists cleaned.
+7. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/docker-hub-rss/LICENSE` (UNVERIFIED: that the repo ships a file named `LICENSE`).
 8. `ENV PORT=3000 FLUENTD_HOST= FLUENTD_TAGS=` only where needed; keep defaults in `settings.yaml`, not the Dockerfile.
 9. Tail:
 

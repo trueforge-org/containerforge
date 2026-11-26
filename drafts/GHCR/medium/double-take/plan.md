@@ -44,7 +44,7 @@ Runtime: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3
 4. Final stage `FROM python-node`, `USER root`: `apt-get install -y --no-install-recommends libcairo2 libpango-1.0-0 libjpeg62-turbo libgif7 librsvg2-2` (runtime libs only; exact names UNVERIFIED on 26.04), copy the built `/double-take` tree with `COPY --from=`, the recognizer to `/usr/local/bin/recognizer`, and the models to `/opt/recognizer/models`.
 5. Models (`recognizer-models` stage) come from upstream's wget step; the source URL is in the fork's Dockerfile (lines 2–11, not fully reviewed; UNVERIFIED checksum).
 6. License: `install -D` of the fork's LICENSE to `/usr/share/licenses/double-take/LICENSE` (UNVERIFIED license file).
-7. `ENV NODE_ENV=production CONFIG_PATH=/config/config` only after section 7 is confirmed; keep `/app` read-only.
+7. `ENV NODE_ENV=production CONFIG_PATH=/config/storage/config` only after section 7 is confirmed; keep `/app` read-only.
 8. Tail:
 
 ```dockerfile
@@ -93,7 +93,7 @@ ports:
     required: true
 env:
   - name: CONFIG_PATH
-    default: "/config/config"
+    default: "/config/storage/config"
     required: false
   - name: TZ
     default: "Etc/UTC"
@@ -116,18 +116,18 @@ store="/config/storage"
 mkdir -p "${store}/matches" "${store}/train" "${store}/latest" "${store}/config"
 
 # seed a default config only when missing (never overwrite user state)
-if [ ! -s "${store}/config/config.yml" ] && [ -f /app/defaults/config.yml ]; then
-  cp /app/defaults/config.yml "${store}/config/config.yml"
+if [ ! -s "${store}/config/config.yml" ] && [ -f /defaults/config.yml ]; then
+  cp /defaults/config.yml "${store}/config/config.yml"
 fi
 
 cd /double-take
 /usr/local/bin/recognizer -cnn -port 8888 -models /opt/recognizer/models -storage "${store}" -d &
 
-export CONFIG_PATH="${CONFIG_PATH:-/config/config}"
+export CONFIG_PATH="${CONFIG_PATH:-${store}/config}"
 exec node server.js
 ```
 
-Notes: the recognizer's `-storage` flag is remapped from `/.storage` to `/config/storage`, so the upstream path is not written. Every `/.storage` reference in upstream `entrypoint.sh` must be remapped the same way. `exec` the API so signals reach PID 1; the recognizer runs in the background and needs a supervisor or a check. Confirm the API entry file (`server.js`) and whether `CONFIG_PATH` is a file or a directory (UNVERIFIED). Do not write to `/app`.
+Notes: the recognizer's `-storage` flag is remapped from `/.storage` to `/config/storage`, so the upstream path is not written. Every `/.storage` reference in upstream `entrypoint.sh` must be remapped the same way. `exec` the API so signals reach PID 1; the recognizer runs in the background and needs a supervisor or a check. Confirm the API entry file (`server.js`) and whether `CONFIG_PATH` is a file or a directory (UNVERIFIED). Do not write to `/app`. The seed source is `/defaults/` because `COPY --chmod=0755 . /` places the app's `defaults/` folder at `/defaults`.
 
 ## 8. container-test.yaml
 

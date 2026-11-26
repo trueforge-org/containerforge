@@ -38,9 +38,9 @@ Closest siblings: `apps/ubuntu` (base) and `apps/python` (apt-based runtime on t
 
 ## 4. Dockerfile
 
-1. `ARG VERSION`, `ARG TARGETARCH`. Stay on `FROM <ubuntu> AS build`, `USER root`.
+1. `ARG VERSION`. Stay on `FROM <ubuntu> AS build`, `USER root`.
 2. Install build deps with apt: `perl`, `cpanminus`, and the C build packages needed by CPAN XS modules (`build-essential`, `libssl-dev`, `zlib1g-dev`, `libperl-dev`, `UNVERIFIED: exact list`). Clean apt lists.
-3. `curl -fL https://github.com/convos-chat/convos/archive/refs/tags/v${VERSION}.tar.gz | tar xz --strip-components=1 -C /app`, after verifying a committed SHA-256. Set `CONVOS_DEPENDENCIES=all` for the install step.
+3. `mkdir -p /app` first, then `curl -fL https://github.com/convos-chat/convos/archive/refs/tags/v${VERSION}.tar.gz | tar xz --strip-components=1 -C /app`, after verifying a committed SHA-256. Set `CONVOS_DEPENDENCIES=all` for the install step.
 4. `cd /app && perl script/convos install --all` (the upstream step, run as root in the build stage, `UNVERIFIED: whether it writes into /app`). Set `PERL_CPANM_HOME=/tmp/cpanm` and `CPANM_OPT=--notest` only if needed, `UNVERIFIED`.
 5. Remove build-only packages and caches (`/root/.cpanm`, `/var/lib/apt/lists/*`).
 6. Final stage `FROM <ubuntu>`, `USER root`: install the runtime perl packages (`perl`, plus the runtime libs the app needs, `UNVERIFIED`), clean apt lists. Then `COPY --from=build /app /app`.

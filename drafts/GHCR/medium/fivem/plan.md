@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version | UNVERIFIED: the Cfx.re runtime is a rolling `master` build. No build number or LATEST file was confirmed. The FiveM docs page (https://docs.fivem.net/docs/server-download/?platform=legacy&os=linux) lists only the Windows artifact (build 38435). Source: facts/121.md. |
+| Version | UNVERIFIED: the Cfx.re runtime is a rolling `master` build. No build number or LATEST file was confirmed. The FiveM docs page (https://docs.fivem.net/docs/server-download/?platform=legacy&os=linux) lists only the Windows artifact (build 38435). |
 | Renovate | UNVERIFIED: no datasource for a rolling runtime. Open question, see section 10. |
 | License | Repo `citizenfx/fivem`: NOASSERTION ("Other") per GitHub API. UNVERIFIED: the runtime's license terms. Bake `LICENSE` cannot be filled honestly until read. |
 | Source | https://github.com/citizenfx/fivem (default branch master, pushed 2026-11-17) |
@@ -37,9 +37,9 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`. Fail the build when `TARGETARCH` is not `amd64` (arm64 is not supported upstream).
-2. `apt-get install -y --no-install-recommends xz-utils unzip` (check the base first: install only what is missing, and pin nothing unless a version is needed). Drop `screen` unless the console is kept.
+2. `xz-utils` and `unzip` are already installed by `apps/ubuntu/Dockerfile`, so no `apt-get install` is needed for them. Do not add `screen` (the console is not kept in v1).
 3. Do NOT download gotty in v1. Reason: the upstream gotty v1.0.1 is an old, unmaintained binary with no checksum, and the web console adds an unauthenticated shell surface. Open question in section 10.
-4. Copy the start script and runtime helpers: `COPY --chmod=0755 . /` covers `start.sh` (and `scripts/` if used).
+4. Copy the start script and runtime helpers: `COPY --chmod=0755 . /` covers `start.sh` (installed at `/start.sh`) and `scripts/` if used.
 5. Set the license file path only once the license is verified: `/usr/share/licenses/fivem/` (blocked, see section 10).
 6. `ENV DATA_DIR=/config SERVER_DIR=/config/server TMPDIR=/tmp HOME=/tmp UMASK=002`.
 7. `EXPOSE 30120/tcp 30120/udp`, `VOLUME /config`, `WORKDIR /config`.
@@ -80,7 +80,10 @@ env:
     required: false
   - name: SERVER_KEY
     default: ""
-    required: true
+    required: false
+  - name: SRV_ADR
+    default: "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
+    required: false
   - name: START_VARS
     default: ""
     required: false
@@ -92,7 +95,7 @@ volumes:
     required: true
 ```
 
-Notes: `SERVER_KEY` is required (the server will not start without a keymaster key; see section 10). `SRV_ADR` is kept as an env with the upstream default. Do not list 40120 or 8080 unless the web console is added. Dependencies: none.
+Notes: `SERVER_KEY` is a secret with no default, so it is `required: false` in the schema (the rule for `required: true` needs a non-empty default), but the server will not start without a keymaster key (section 10); `start.sh` prints an error when it is empty. `SRV_ADR` is kept as an env with the upstream default (HTTPS form UNVERIFIED), and `start.sh` must read it when it fetches the runtime. The chart's second port 30110 (tcp+udp) has no known purpose in the reviewed sources (UNVERIFIED), so it is not listed. The udp 30120 port has no probe: sibling apps only use `tcp`/`http` probes (UNVERIFIED that forgetool supports udp); the tcp probe covers 30120 (section 8). Do not list 40120 or 8080 unless the web console is added. Dependencies: none.
 
 ## 7. start.sh
 
@@ -109,7 +112,7 @@ cd /config/server
 exec ./run.sh +set serverKey "${SERVER_KEY}" +exec "${GAME_CONFIG:-server.cfg}" ${START_VARS:-}
 ```
 
-Rules: no write to `/app`; caches to `/tmp`; seed nothing into `/config` other than the server directory; `exec` the final process. Confirm the exact launch command from the runtime artifact (UNVERIFIED). Bind to all interfaces (`+set endpoint_add_tcp "0.0.0.0:30120"` and udp) instead of the default localhost-only binding, if the artifact uses it.
+Rules: passing the key as a command-line argument exposes it in the process list; prefer a file under `/config` with mode 0600 if the server can read the key from its config (UNVERIFIED); no write to `/app`; caches to `/tmp`; seed nothing into `/config` other than the server directory; `exec` the final process. Confirm the exact launch command from the runtime artifact (UNVERIFIED). Bind to all interfaces (`+set endpoint_add_tcp "0.0.0.0:30120"` and udp) instead of the default localhost-only binding, if the artifact uses it.
 
 ## 8. container-test.yaml
 
@@ -119,7 +122,7 @@ timeoutSeconds: 300
 tcp:
 - port: '30120'
 filePaths:
-- /app/start.sh
+- /start.sh
 ```
 
 Open issue: the test runs without `SERVER_KEY`, so the server may not open 30120 and the tcp probe would fail. Do not weaken it. Either confirm that the runtime starts the port without a key (UNVERIFIED), or narrow the test to the file check and document why. The narrowing is not the DB exception, so it needs an explicit justification in the PR.

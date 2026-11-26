@@ -47,7 +47,7 @@ Not used: `ghcr.io/ich777/steamcmd` (upstream debian-baseimage, root wrapper) an
    - Pin: `steamcmd:i386=0~${VERSION}` (same as sibling). Check the pin against `VERSION` in `docker-bake.hcl`.
 4. Install `xvfb` only if the Core Keeper start script needs a display (UNVERIFIED, section 1). If it does: `apt-get install -y --no-install-recommends xvfb xauth` and pin to the Ubuntu 26.04 archive version; record the version in the PR.
 5. 32-bit libraries needed by SteamCMD: `lib32gcc-s1 lib32stdc++6 lib32z1` (from upstream Dockerfile; check whether the ubuntu base or the steamcmd apt package already pulls them, and do not install twice).
-6. `ENV HOME=/tmp XDG_DATA_HOME=/tmp`. All SteamCMD caches go to `/tmp` by default; server files go to `/config` via `start.sh` (section 7).
+6. No `ENV HOME` override in the Dockerfile: `start.sh` exports `HOME=/config` and `XDG_DATA_HOME=/config` (sibling pattern, section 7), the base image already sets `HOME=/config`. Scratch files go to `/tmp`; server files go to `/config` via `start.sh`.
 7. `mkdir -p /config`, `chown -R apps:apps /config /usr/local/share/steamcmd` (same as sibling), `rm -rf /var/lib/apt/lists/*`.
 8. Final stage tail:
    ```dockerfile

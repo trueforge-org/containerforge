@@ -41,7 +41,7 @@ Why: the draft says "Runtime image: none (ubuntu alone is enough)". The server i
 
 Decision: download the vendor zip **at build time**, not at runtime. Reason: `/app` is read-only and the rules require verifying downloads; a runtime download on every fresh start is the draft's main caveat. A build-time download with a pinned SHA256 gives a reproducible image. (Writer: say so in the PR; it differs from the upstream runtime download.)
 
-1. `ARG VERSION` (must equal `docker-bake.hcl` `VERSION`, `1.0.1.8`) and `ARG CS2D_SHA256` (UNVERIFIED until computed, see below).
+1. `ARG VERSION` (must equal `docker-bake.hcl` `VERSION`, `1.0.1.8`) and `ARG CS2D_SHA256` (UNVERIFIED until computed, see below). The download URL has no version in it, so `VERSION` is only a label; `CS2D_SHA256` must be set as a Dockerfile `ARG` default or passed through the bake `args` (section 5 only passes `VERSION`), and must be updated together with `VERSION`.
 2. Build stage `FROM <ubuntu> AS build`, `USER root`:
    ```dockerfile
    RUN set -eux; \
