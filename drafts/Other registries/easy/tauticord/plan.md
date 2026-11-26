@@ -35,7 +35,7 @@ Fits because the app is pure Python with pip requirements. The python base ships
 
 ## 4. Dockerfile
 
-1. `FROM` line above. `ARG VERSION`, `ARG PIP_VERSION`... only where the Dockerfile uses them (not needed here).
+1. `FROM` line above, then `ARG VERSION` (used by the download URL in step 3; must equal the bake default).
 2. `USER root`, `WORKDIR /app`.
 3. Fetch source at the tag:
    ```dockerfile

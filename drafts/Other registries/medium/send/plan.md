@@ -15,7 +15,7 @@
 | Port | 1443 (`ENV PORT=1443` in the upstream Dockerfile). Matches the draft. |
 | Env vars | Only `PORT` is confirmed. UNVERIFIED: the rest of the app config (README and config files were not fetched). |
 | Data / upload paths | UNVERIFIED. Upstream creates `/app/.config/configstore`. The draft expects uploads under `/config`; the chart uses `/uploads` (chart PVC). The real upload path was not confirmed. |
-| Dependencies | Valkey or Redis, optional per the draft; `apps/valkey` exists in ContainerForge. The chart enables a Redis dependency; the exact connection env vars are UNVERIFIED. |
+| Dependencies | Valkey or Redis. The draft contradicts itself: Overview says hard dependency (valkey), Reason says optional. UNVERIFIED which is right; `apps/valkey` exists in ContainerForge. The chart enables a Redis dependency; the exact connection env vars are UNVERIFIED. |
 
 ## 2. Target layout
 
@@ -40,7 +40,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 4. Build as upstream does: `cd /tmp/src && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci && npm run build`. Then `npm prune --omit=dev` in `/tmp/src`.
 5. License: copy the pinned `LICENSE` into `/usr/share/licenses/send/LICENSE` (path and content UNVERIFIED until the source is read).
 6. Cleanup: `rm -rf /tmp/* $HOME/.cache`.
-7. Final stage: `FROM <python-node>`, `USER root`, `mkdir -p /app/send`, `COPY --from=build /tmp/src/package*.json /app/send/`, `COPY --from=build /tmp/src/app /tmp/src/common /tmp/src/server /app/send/`, `COPY --from=build /tmp/src/public/locales /app/send/public/locales`, `COPY --from=build /tmp/src/dist /app/send/dist`, `COPY --from=build /tmp/src/node_modules /app/send/node_modules`. Add `COPY --from=build /usr/share/licenses/send /usr/share/licenses/send`. Keep only the paths the server needs; confirm against the upstream `COPY` list above.
+7. Final stage: `FROM <python-node>`, `USER root`, `mkdir -p /app/send`, `COPY --from=build /tmp/src/package*.json /app/send/`, one `COPY --from=build` per directory so the layout is kept (`/tmp/src/app` to `/app/send/app/`, `/tmp/src/common` to `/app/send/common/`, `/tmp/src/server` to `/app/send/server/`; a multi-source COPY into `/app/send/` would flatten them), `COPY --from=build /tmp/src/public/locales /app/send/public/locales`, `COPY --from=build /tmp/src/dist /app/send/dist`, `COPY --from=build /tmp/src/node_modules /app/send/node_modules`. Add `COPY --from=build /usr/share/licenses/send /usr/share/licenses/send`. Keep only the paths the server needs; confirm against the upstream `COPY` list above.
 8. Tail:
 
 ```dockerfile

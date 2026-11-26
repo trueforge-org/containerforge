@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d` for the final stage, with the ubuntu base underneath. Fits because upstream runs JRE 25 (tomcat:10-jre25). Closest sibling: apps/airsonic-advanced (Tomcat-style WAR on a java base, port 4040). Java base has no Tomcat, so Tomcat must be installed. Build stage can use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the download/verify step, and the final stage copies /usr/local/tomcat and /opt/libreoffice with `COPY --from=`.
+`FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d` for the final stage, with the ubuntu base underneath. Fits because upstream runs JRE 25 (tomcat:10-jre25). Closest sibling: apps/airsonic-advanced (Tomcat-style WAR on a java base, port 4040). Java base has no Tomcat, so Tomcat must be installed. Build stage can use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the download/verify step, and the final stage copies the verified Tomcat tree, WAR and JDBC jar with `COPY --from=`. LibreOffice debs are installed in the final stage with `dpkg -i` (section 4 step 4), so `/opt/libreoffice` is not copied.
 
 ## 4. Dockerfile
 

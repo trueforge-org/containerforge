@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). Add `etc/` only if t
 
 `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`
 
-Odoo is a Python business suite, and the Python base already provides the interpreter, `/app/venv` and pip rules. The upstream `ubuntu:noble` is not used: the ContainerForge ubuntu base is `26.04` (see `apps/python`). Installing the nightly `.deb` on 26.04 (not noble) is a risk (section 10). Closest sibling: `apps/bazarr` (python app with apt libs and uv pip install).
+Odoo is a Python business suite, and the Python base already provides the interpreter, `/app/venv` and pip rules. The upstream `ubuntu:noble` is not used: the ContainerForge ubuntu base is `26.04` (see `apps/python`). Installing the nightly `.deb` on 26.04 (not noble) is a risk (section 10). Closest sibling: `apps/bazarr` (python app with apt libs and uv pip install). UNVERIFIED: the Odoo `.deb` depends on the system `python3`, not `/app/venv`, so the python base may add nothing over `ghcr.io/trueforge-org/ubuntu:26.04`; decide at build time.
 
 ## 4. Dockerfile
 
@@ -118,7 +118,6 @@ env:
     default: "odoo"
     required: false
   - name: PG_PASSWORD
-    default: "odoo"
     required: true
 volumes:
   - path: /config
@@ -127,7 +126,7 @@ dependencies:
   - postgresql
 ```
 
-The `PG_*` names and defaults are a proposal, not verified: they must match what `start.sh` and `odoo.conf` actually read (`db_host`, `db_port`, `db_user`, `db_password` in `odoo.conf` are the Odoo keys; the env mapping is UNVERIFIED). Do not list them until the seed `odoo.conf` and `start.sh` consume them. `PG_PASSWORD` with a default `odoo` is a weak default: use `required: true` with no default, and generate or require it in `start.sh` (rule: a required var needs a default or start-time handling). Dependencies: `postgresql` ✅ (`apps/postgresql` exists).
+The `PG_*` names and defaults are a proposal, not verified: they must match what `start.sh` and `odoo.conf` actually read (`db_host`, `db_port`, `db_user`, `db_password` in `odoo.conf` are the Odoo keys; the env mapping is UNVERIFIED). Do not list them until the seed `odoo.conf` and `start.sh` consume them. `PG_PASSWORD` has no default (a weak default `odoo` is not baked in); `start.sh` fails fast when it is unset. Dependencies: `postgresql` ✅ (`apps/postgresql` exists).
 
 ## 7. start.sh
 
@@ -148,6 +147,8 @@ export DB_PASSWORD="${PG_PASSWORD:?PG_PASSWORD is required}"
 cd /app
 exec odoo --config "${ODOO_RC}" --http-interface=0.0.0.0 --http-port=8069 --data-dir=/config/odoo-data
 ```
+
+UNVERIFIED: Odoo reading `DB_HOST`/`DB_PORT`/`DB_USER`/`DB_PASSWORD` from the environment is not confirmed; the real route is `db_host`/`db_port`/`db_user`/`db_password` in `odoo.conf` or the `--db_host` etc. CLI flags, so `start.sh` must write or pass them.
 
 Points to verify (UNVERIFIED, from the upstream `entrypoint.sh` and `odoo.conf`, which were not fetched):
 - The env to config mapping: upstream `entrypoint.sh` reads `HOST`, `USER`, `PASSWORD` and writes `db_*` keys into `odoo.conf`. Replicate that pattern, but keep the names ContainerForge uses in `settings.yaml`.

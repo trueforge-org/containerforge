@@ -93,10 +93,9 @@ env:
     default: "true"
     required: false
   - name: ME_CONFIG_BASICAUTH_USERNAME
-    default: "MYMONGOEXPRESSUSER"
+    default: "admin"
     required: false
   - name: ME_CONFIG_BASICAUTH_PASSWORD
-    default: "MYMONGOEXPRESSPASSWORD"
     required: false
   - name: ME_CONFIG_MONGODB_URL
     default: "mongodb://mongodb:27017"
@@ -114,8 +113,8 @@ dependencies:
   - mongodb
 ```
 
-- Only names confirmed in the README are listed. `ME_CONFIG_MONGODB_URL` is `required: true` with a default that points at the sibling `mongodb` service name; the default must match what the sibling mongodb app exposes (UNVERIFIED host name for the chart; check `apps/mongodb/settings.yaml` / `apps/mongodb/start.sh` before finalising).
-- Basic auth is enabled by default because the UI has no login otherwise (draft caveat). The default password is a placeholder; the chart or the user must override it. Do not ship a real secret.
+- Only names confirmed in the README are listed. `ME_CONFIG_MONGODB_URL` is `required: true` with a default that points at the sibling `mongodb` service name; the default must match what the sibling mongodb app exposes (`apps/mongodb/settings.yaml` exposes port 27017; the `mongodb` host name is a Docker/Kubernetes service-name choice, UNVERIFIED).
+- Basic auth is enabled by default because the UI has no login otherwise (draft caveat). No default password is baked in: `start.sh` exits with an error when basic auth is enabled and `ME_CONFIG_BASICAUTH_PASSWORD` is empty. The container test must therefore set `ME_CONFIG_BASICAUTH_ENABLED=false` or pass a throwaway password (UNVERIFIED how container-test.yaml passes env; check `container-test.instructions.md`).
 - `dependencies: [mongodb]` (mongodb exists in ContainerForge).
 
 ## 7. start.sh
@@ -127,8 +126,11 @@ set -euo pipefail
 mkdir -p /config
 export ME_CONFIG_MONGODB_URL="${ME_CONFIG_MONGODB_URL:-mongodb://mongodb:27017}"
 export ME_CONFIG_BASICAUTH_ENABLED="${ME_CONFIG_BASICAUTH_ENABLED:-true}"
-export ME_CONFIG_BASICAUTH_USERNAME="${ME_CONFIG_BASICAUTH_USERNAME:-MYMONGOEXPRESSUSER}"
-export ME_CONFIG_BASICAUTH_PASSWORD="${ME_CONFIG_BASICAUTH_PASSWORD:-MYMONGOEXPRESSPASSWORD}"
+export ME_CONFIG_BASICAUTH_USERNAME="${ME_CONFIG_BASICAUTH_USERNAME:-admin}"
+if [ "${ME_CONFIG_BASICAUTH_ENABLED}" = "true" ] && [ -z "${ME_CONFIG_BASICAUTH_PASSWORD:-}" ] && [ -z "${ME_CONFIG_BASICAUTH_PASSWORD_FILE:-}" ]; then
+  echo "ME_CONFIG_BASICAUTH_PASSWORD is required when basic auth is enabled" >&2
+  exit 1
+fi
 export PORT="${PORT:-8081}"
 
 cd /app/mongo-express
@@ -174,7 +176,7 @@ Draft expectations reconciled: upstream runs as the default user, this image run
 ## 10. Risks, caveats and open questions
 
 - Requires a reachable MongoDB at `ME_CONFIG_MONGODB_URL` (manual setup; the chart's `mongodb` dependency is the intended wiring).
-- Basic auth off by default upstream; this plan enables it by default. Placeholder credentials must be overridden by the user before exposing the UI.
+- Basic auth off by default upstream; this plan enables it by default. The user must supply the password; none is baked in.
 - Upstream tag is `rc` (`1.1.0-rc-4`), the only release. No stable 1.x exists in the fetched data.
 - The chart uses `latest`, a rolling tag; the image pins `1.1.0-rc-4`. This is a deliberate difference to note in the PR.
 - UNVERIFIED: npm tarball lockfile presence (section 4), the health/401 status on `/` (section 8), the `VCAP_APP_HOST` bind behaviour (sections 1 and 7).

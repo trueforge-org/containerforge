@@ -32,11 +32,11 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. Fits: upstream is a Python web app (warrior-code2). Closest sibling: apps/bazarr (python). The venv is at /app/venv (read-only); warrior-code2 installs go into /tmp/venv or /config/venv per the python-runtime rules.
+`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. Fits: upstream is a Python web app (warrior-code2). Closest sibling: apps/bazarr (python). The venv is at /app/venv (read-only at runtime); warrior-code2 is installed into it at build time (section 4).
 
 ## 4. Dockerfile
 
-1. Build stage on ubuntu base: `ARG VERSION` (commit SHA), `ARG TARGETARCH`, `USER root`.
+1. Single stage on the python base from section 3: `ARG VERSION` (commit SHA), `USER root`.
 2. apt: `git` (clone at build, not in python base if absent; check first). `--no-install-recommends`, clean lists.
 3. `git clone https://github.com/ArchiveTeam/warrior-code2.git /tmp/src && git -C /tmp/src checkout ${VERSION}` (pin SHA; renovate git-refs updates it).
 4. Install into the python base: `pip install /tmp/src` (or requirements from the repo) into /app/venv at build time, with `PIP_CACHE_DIR=/tmp/pip`. Do not write to /app/venv at runtime.

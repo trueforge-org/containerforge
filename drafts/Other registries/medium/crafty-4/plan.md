@@ -37,9 +37,9 @@
 
 ## 4. Dockerfile
 
-1. Build stage on ubuntu base: `ARG VERSION` (4.11.1), `ARG TARGETARCH`, `USER root`.
+1. Final base from section 3 (python base; it already ships `/app/venv`): `ARG VERSION` (4.11.1), `USER root`.
 2. Fetch source tarball of tag v4.11.1 from GitLab (verify it matches commit c5c08eff...), extract to /tmp/src.
-3. Create the venv under /app/venv at build time: `python3 -m venv /app/venv && /app/venv/bin/pip install --no-cache-dir -r requirements.txt`, with `PIP_CACHE_DIR=/tmp/pip`. Do not write to /app/venv at runtime (python-runtime rule).
+3. Install into the base's existing `/app/venv` at build time (do not create a second venv): `/app/venv/bin/pip install --no-cache-dir -r requirements.txt`, with `PIP_CACHE_DIR=/tmp/pip`. Do not write to /app/venv at runtime (python-runtime rule).
 4. Copy source to /app/crafty (read-only at runtime). Move `app/config` to `defaults/config_original` (or keep in /app and seed).
 5. License to `/usr/share/licenses/crafty-4/LICENSE`.
 6. `ENV HOME=/config`, `PYTHONDONTWRITEBYTECODE=1` (inherited).
@@ -49,12 +49,11 @@
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE 8443 8000 8123 5520-5550 25500-25600
-EXPOSE 19132/udp
+EXPOSE 8443 8000
 VOLUME /config
 ```
 
-Adjust EXPOSE to only the web ports for the first version; game ports are documented, not required (see section 10).
+First version exposes only the web ports; game ports are documented, not required (see section 10).
 
 ## 5. docker-bake.hcl
 
@@ -99,7 +98,7 @@ volumes:
 dependencies: []
 ```
 
-Only ports the image opens. Port 25565 is the default Minecraft port (not EXPOSEd upstream; it lies inside 25500-25600). Declare it only if the server-spawning code confirms it (UNVERIFIED). No app env vars are declared because none were verified.
+Game ports 25565/tcp and 19132/udp have no probe: they open only when a Minecraft server is created inside the panel, so they are not up at start. Port 25565 is the default Minecraft port (not EXPOSEd upstream; it lies inside 25500-25600). Declare it only if the server-spawning code confirms it (UNVERIFIED). No app env vars are declared because none were verified.
 
 ## 7. start.sh
 
