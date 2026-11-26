@@ -89,7 +89,7 @@ volumes:
     required: true
 dependencies: []
 ```
-`SQLITE_WEB_PASSWORD` is the only variable the upstream app reads. `SQLITE_DATABASE`, `SQLITE_WEB_PORT` and `SQLITE_WEB_ARGS` are read by `start.sh` only (image-level, not upstream); if the reviewers dislike invented names, hardcode them instead and drop them here. Keep both files consistent.
+`SQLITE_WEB_PASSWORD` is the only variable the upstream app reads. `SQLITE_DATABASE` is the variable the upstream Docker Hub page documents (the upstream Dockerfile and code do not read it); `SQLITE_WEB_PORT` and `SQLITE_WEB_ARGS` are read by `start.sh` only (image-level, not upstream); if the reviewers dislike invented names, hardcode them instead and drop them here. Keep both files consistent.
 
 ## 7. start.sh
 

@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version | `1.166.4` (GitHub release `v1.166.4`, the latest stable; `v1.167.1-rc` is a release candidate and must not be used). Matches the draft's `v1.166.4`. |
+| Version | `1.166.4` (GitHub release `v1.166.4`, 15 Nov; the draft's version). As of 2026-11-26 the latest stable is `v1.167.1` (25 Nov, marked Latest; its candidate was `v1.167.1-rc`), so `v1.166.4` is one release behind. The version server suggests `1.166.4` (minimum `1.164.2`). |
 | Renovate | `datasource=github-releases depName=storj/storj versioning=semver extractVersion=^v(?<version>.+)$`. The `-rc` releases are flagged "prerelease" on GitHub (checked v1.167.1-rc, v1.167.0-rc, v1.166.0-rc), which Renovate ignores by default. |
 | License | AGPL-3.0 (repo LICENSE is "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"). SPDX `AGPL-3.0-only` (UNVERIFIED whether "or later"). |
 | Source URL | https://github.com/storj/storj/ |

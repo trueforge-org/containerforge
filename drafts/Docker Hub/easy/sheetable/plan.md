@@ -149,7 +149,7 @@ http:
 
 ## 9. Rootless and read-only-rootfs adaptations
 
-- Upstream writes sheets, thumbnails and `database.db` to `CONFIG_PATH` (default: working directory root). Remapped to `/config` through `CONFIG_PATH=/config/` and `WORKDIR /config`.
+- Upstream writes sheets, thumbnails and `database.db` to `CONFIG_PATH` (code default `./config/`, relative to the working directory). Remapped to `/config` through `CONFIG_PATH=/config/` and `WORKDIR /config`.
 - Binary in `/app` is read-only and owned by `apps` (UID 568), matching the draft's common default 568, readOnlyRootFilesystem true.
 - Draft extra persistence `/app/config` is replaced by `/config`; document the move in the PR notes (existing TrueCharts users must remount).
 - Uploads, thumbnails and composer data go under `CONFIG_PATH` (`sheets/...`, `api/controllers/uploader.go`). Large multipart uploads are buffered by Go in `/tmp`.

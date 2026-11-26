@@ -1,18 +1,33 @@
-# TrueCharts s3sync chart
+# TrueCharts s3sync chart (values.yaml)
 
 Source URL(s) + fetch date:
-- https://github.com/trueforge-org/truecharts/tree/master/charts/stable/s3sync (fetched 2026-11-26; directory listing only)
+- https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/s3sync/values.yaml (fetched 2026-11-26)
 
 ## What it is
-TrueCharts Helm chart `s3sync` under `charts/stable/s3sync`.
+TrueCharts Helm chart `s3sync` (charts/stable/s3sync). Single `main` workload.
 
-## Files in the chart directory
-templates/, .helmignore, CHANGELOG.md, Chart.yaml, README.md, icon-small.webp, icon.webp, values.schema.json, values.yaml.
+## Image used by chart
+`docker.io/whatname/docker-s3sync` tag `latest@sha256:dbfa5eff4d67ac54dded4434a73c036c11a54dda3ade152bb9ecc53431eed9d0`, pullPolicy IfNotPresent.
 
-## Install
-`helm install mychart oci://oci.trueforge.org/truecharts/s3sync` (from README).
+## Env vars set by chart
+- `ACCESS_KEY` and `SECRET_KEY`: from secret `env-secrets` (secretKeyRef).
+- `CRON_SCHEDULE`: `0 * * * *`
+- `REGION`: `bucket_region_here` (placeholder)
+- `S3PATH`: `s3://your_bucket_name` (placeholder)
+- `S3SYNCPARAMS`: `""`
 
-## Notes
-- Chart README says the chart is not maintained by the upstream project and issues go to TrueCharts.
-- Values come from the shared "common" library chart.
-- Chart.yaml and values.yaml contents were not visible in the listing fetch, so the draft's values (runAsUser 0, readOnlyRootFilesystem false, `/data/example` mount) are NOT confirmed here. Only the draft states them.
+## Persistence
+`backupsourceexample`: enabled, mountPath `/data/example`, readOnly true.
+
+## Security
+securityContext.container: runAsUser 0, runAsGroup 0, readOnlyRootFilesystem false.
+
+## Service/probes
+service.main disabled (no ports). Liveness, readiness, startup probes all disabled.
+
+## Secret
+`env-secrets` enabled with placeholder ACCESS_KEY and SECRET_KEY.
+
+## Contradictions with plan.md
+- Matches plan.md: runAsUser/runAsGroup 0, readOnlyRootFilesystem false, `/data/example` read-only mount.
+- The chart uses the `latest` tag pinned by digest; plan.md's draft says `docker.io/whatname/docker-s3sync:latest` (consistent, digest omitted in plan).

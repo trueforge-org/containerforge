@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Wrapper version | Latest release is `v1.10.0` (published 2026-11-24). The draft pins `v1.9.11`, and the files reviewed below are at commit `89015af`. This is the image/wrapper version, not the game build. UNVERIFIED: what changed in 1.10.0; review it before implementing. |
+| Wrapper version | Latest release is `v1.10.0` (published 2026-11-24). The draft pins `v1.9.11`, and the files reviewed below are at commit `89015af`. This is the image/wrapper version, not the game build. 1.10.0 adds `SERVERADMINPASSWORD`, `SERVERNAME`, `SERVERPASSWORD` and `BACKUPLIMIT` (default 10, timestamped backup rotation), falls back to the installed version when a Steam update fails, and shuts down cleanly on `docker stop` (per release notes; see `context/github-wolveix-satisfactory-server.md`). |
 | Game | Satisfactory Dedicated Server, Steam app id `1690800`, downloaded at runtime with SteamCMD (anonymous login). Linux depot is x86_64 only. |
 | Renovate | Nothing tracks the game build. Proposed `datasource=github-releases depName=robtme/satisfactory-server versioning=semver` so the tag follows the wrapper whose behavior this plan copies. |
 | License | The wrapper repo is MIT (GitHub API), but its code is not shipped. UNVERIFIED: the license value for this image; the game server is proprietary (Coffee Stain) and SteamCMD is under Valve's license. See section 10. |

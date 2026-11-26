@@ -1,38 +1,32 @@
 # awscli (PyPI)
 
 Source URL(s) + fetch date:
-- https://pypi.org/project/awscli/ (fetched 2026-11-26)
+- https://pypi.org/project/awscli/ (fetched 2026-11-26; page is long, first 100000 chars read)
 
 ## What it is
-AWS CLI v1 published on PyPI (the `awscli` package).
+AWS CLI v1 published on PyPI as `awscli`. Pure Python.
+
+## Install/build steps
+- `pip install awscli==<version>` (no build deps needed for the wheel).
+- Files: `awscli-1.46.3.tar.gz` (sdist, 16.8 MB) and `awscli-1.46.3-py3-none-any.whl` (20.2 MB, universal wheel, no ABI tag).
+
+## Runtime deps
+From setup.py install_requires (see github-aws-aws-cli.md): docutils>=0.18.1,<=0.19; PyYAML>=3.10,<6.1; colorama>=0.2.5,<0.4.7; rsa>=3.1.2,<4.8; jmespath>=0.7.1,<2.0.0; python-dateutil>=2.1,<3.0.0; urllib3>=1.25.4,!=2.2.0,<3. (botocore/s3transfer are pulled in by the package, not listed on this page as read.)
+
+## Binaries/entrypoint/CLI flags
+Console script `aws` (plus `aws_completer`, `aws_bash_completer`, `aws_zsh_completer.sh`).
 
 ## Version/release info and asset naming
-- Latest: 1.46.3, released Nov 5, 2026 (matches plan).
-- PyPI source distribution and wheel names follow the standard `awscli-<version>` pattern (not separately verified here).
+- Latest: 1.46.3, released Nov 5, 2026 (matches plan.md).
+- AWS CLI v1 is in maintenance mode (critical bug and security fixes only); end of support July 15, 2027; AWS recommends migrating to v2.
+- Neither file has provenance attestations.
 
-## Runtime deps (install_requires, from setup.py at tag 1.46.3)
-- docutils >=0.18.1,<=0.19
-- PyYAML >=3.10,<6.1
-- colorama >=0.2.5,<0.4.7
-- rsa >=3.1.2,<4.8
-- jmespath >=0.7.1,<2.0.0
-- python-dateutil >=2.1,<3.0.0
-- urllib3 >=1.25.4,!=2.2.0,<3
-
-Optional extra `crt`: awscrt==0.36.0.
-
-botocore is not in the extracted list above; the summariser may have dropped it. Verify against the wheel's METADATA before relying on it. The plan's risk note about botocore/urllib3 pins on newer Python stays open.
-
-## Python requirement and classifiers
-- Requires-Python: >=3.10.
-- Classifiers list Python 3.10 through 3.14 (no 3.15 classifier). Plan agrees.
-
-## Binaries/entrypoint
-Installs script files (not console_scripts): `bin/aws`, `bin/aws.cmd`, `bin/aws_completer`, `bin/aws_zsh_completer.sh`, `bin/aws_bash_completer`. The `aws` binary path in pip installs is the Python venv `bin/aws`.
-
-## License
-Apache License 2.0 (Apache Software License). Matches plan.
+## Arch support
+Universal wheel (any platform, Python 3).
 
 ## Gotchas
-- v1 line only; AWS CLI v2 is not on PyPI (plan agrees).
-- Upper bounds on several deps (PyYAML <6.1, docutils <=0.19, colorama <0.4.7) can conflict with newer Python builds; the plan lists Python 3.15 as UNVERIFIED.
+- `requires_python`: `>=3.10`. Classifiers list Python 3.10 to 3.14 (no 3.15 classifier).
+- AWS CLI v2 is not published on PyPI (per plan.md; not verified on this page).
+
+## Contradictions with plan.md
+- None on version, Python range or license. plan.md's "classifiers list Python up to 3.14" matches.
