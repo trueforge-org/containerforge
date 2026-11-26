@@ -12,7 +12,7 @@
 | Download | Only `https://github.com/ledccn/iyuuplus-dev/archive/HEAD.zip` (unpinned). No release assets. A commit-pinned archive `https://github.com/ledccn/iyuuplus-dev/archive/${VERSION}.tar.gz` is the proposed form (same as `apps/tvheadend`), but the commit is UNVERIFIED. |
 | Checksum source | UNVERIFIED: none for a source archive. The pinned commit SHA is the content address. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/docker/Dockerfile. `FROM alpine:3.21` (not Debian or Ubuntu). Installs s6-overlay, PHP 8.3 with extensions, nginx, nginx-mod-http-headers-more, Composer, and mariadb with mariadb-client. Creates `/iyuu`. Optional apk mirror rewrite (`ARG package_url`). `COPY --chmod=755 ./rootfs /`. `ENTRYPOINT ["/init"]` (s6-overlay). No `CMD`. Runs as root. |
-| Port | `EXPOSE 8780` (upstream). The draft's `8787` is inferred and conflicts with upstream. Use 8780 unless the app says otherwise (UNVERIFIED). |
+| Port | `EXPOSE 8780` (upstream). nginx listens on 8780 and proxies to the PHP app on 127.0.0.1:8787 (`docker/rootfs/etc/nginx/nginx.conf`), so 8787 is internal, not a conflict. The TrueCharts chart targets 8787 directly. |
 | Env (real) | Upstream `ENV`: `LANG=C.UTF-8`, `TZ=Asia/Shanghai`, `S6_SERVICES_GRACETIME=30000`, `S6_KILL_GRACETIME=60000`, `S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0`, `S6_SYNC_DISKS=1`, `COMPOSER_ALLOW_SUPERUSER=1`, `APP_ENV=prod`, `IYUU_REPO_URL` (Gitee). Other app env vars are UNVERIFIED (the `rootfs` tree is not in the facts). |
 | Data paths (upstream) | `VOLUME /iyuu` and `VOLUME /data`. The draft's `/IYUU/db` (chart config path) does not match upstream. |
 | Runs as | root (no `USER`). |
