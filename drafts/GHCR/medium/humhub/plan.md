@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | Draft image `ghcr.io/mriedmann/humhub-phponly:1.17.2` wraps upstream `v1.17.2` (released 2025-04-07). Latest stable upstream is `v1.19.4` (published 2026-11-09). Plan targets `v1.19.4`, subject to the PHP requirement check in section 10. Sources: https://api.github.com/repos/humhub/humhub/releases/tags/v1.17.2 and `releases/latest` (via `gh api`). |
-| Renovate | `datasource=github-releases depName=humhub/humhub versioning=semver` (tags are `vX.Y.Z`; UNVERIFIED against repo renovate config) |
+| Renovate | `datasource=github-releases depName=humhub/humhub versioning=semver` (tags are `vX.Y.Z` but bake `VERSION` and the URL use `v${VERSION}`, so Renovate needs `extractVersion=^v(?<version>.*)$`; UNVERIFIED against repo renovate config) |
 | License | GitHub API reports `NOASSERTION` (`Other`) for `humhub/humhub`. UNVERIFIED: the LICENSE file was not fetched. Read `LICENSE` at the pinned tag before setting `LICENSE` in bake. |
 | Source URL | https://github.com/humhub/humhub |
 | Binary | No release assets on `v1.17.2` or `v1.19.4`. The artifact is the source tarball `https://github.com/humhub/humhub/archive/v${VERSION}.tar.gz`. It is PHP plus JS sources, so it is arch-neutral. |
@@ -67,7 +67,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=humhub/humhub versioning=semver
+  // renovate: datasource=github-releases depName=humhub/humhub versioning=semver extractVersion=^v(?<version>.*)$
   default = "1.19.4"
 }
 
@@ -115,12 +115,13 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - mariadb
+  - name: mariadb
+    required: true
 opt_dependencies:
-  - valkey
+  - name: valkey
 ```
 
-Port 8080 assumes the single-container topology in section 10. If the two-container topology is chosen instead, the port is 9000 (php-fpm), and the list is `humhub-nginx` plus 9000 for FastCGI. The DB env vars (host, name, user, password) are entered in the browser installer, so they are not listed (UNVERIFIED; do not invent them).
+Port 8080 assumes Option A in section 10 (not yet matched by `start.sh`, see section 7). If the two-container topology is chosen instead, the port is 9000 (php-fpm), and the list is `humhub-nginx` plus 9000 for FastCGI. The DB env vars (host, name, user, password) are entered in the browser installer, so they are not listed (UNVERIFIED; do not invent them).
 
 ## 7. start.sh
 
@@ -129,17 +130,16 @@ Port 8080 assumes the single-container topology in section 10. If the two-contai
 
 mkdir -p /config/uploads /config/protected-config /config/modules /config/assets /config/themes /config/runtime /tmp/php-sessions
 
-# apply PHP settings from env on every start
-sed -i "s|^;\?post_max_size.*|post_max_size = ${PHP_POST_MAX_SIZE:-16M}|" /etc/php/8.5/fpm/php.ini
-sed -i "s|^;\?upload_max_filesize.*|upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE:-10M}|" /etc/php/8.5/fpm/php.ini
-sed -i "s|^;\?max_execution_time.*|max_execution_time = ${PHP_MAX_EXECUTION_TIME:-60}|" /etc/php/8.5/fpm/php.ini
-sed -i "s|^;\?memory_limit.*|memory_limit = ${PHP_MEMORY_LIMIT:-1G}|" /etc/php/8.5/fpm/php.ini
-sed -i "s|^;\?date.timezone.*|date.timezone = ${PHP_TIMEZONE:-UTC}|" /etc/php/8.5/fpm/php.ini
-
-exec php-fpm8.5 -F
+# PHP settings from env are passed as -d flags: /etc/php is not writable as USER apps
+exec php-fpm8.5 -F \
+    -d "post_max_size=${PHP_POST_MAX_SIZE:-16M}" \
+    -d "upload_max_filesize=${PHP_UPLOAD_MAX_FILESIZE:-10M}" \
+    -d "max_execution_time=${PHP_MAX_EXECUTION_TIME:-60}" \
+    -d "memory_limit=${PHP_MEMORY_LIMIT:-1G}" \
+    -d "date.timezone=${PHP_TIMEZONE:-UTC}"
 ```
 
-Notes: idempotent; writes only to `/config` and `/tmp`, never `/app`. The `sed` writes target `/etc/php`, which is not read-only at runtime only if the image is built that way; with `--read-only`, php.ini changes must be made at build time or passed as `-d` flags to php-fpm instead (preferred: `exec php-fpm8.5 -F -d "memory_limit=${PHP_MEMORY_LIMIT:-1G}" ...`). Choose one approach and record it in the PR. php-fpm is the process that `exec` replaces the shell with, so signals propagate.
+Notes: idempotent; writes only to `/config` and `/tmp`, never `/app` or `/etc`. This script is the php-fpm half only, which is Option B in section 10 (FastCGI on 9000, no HTTP). Option A (php-fpm plus nginx in one container on 8080) needs nginx installed and a start script that runs both processes; that is not designed here (UNVERIFIED), so the 8080 port, `EXPOSE 8080`, the tcp/http probes on 8080 and `settings.yaml` below only hold if Option A is chosen. With Option B use port 9000, a tcp probe only (php-fpm speaks FastCGI, an http probe fails) and `EXPOSE 9000`. `exec` replaces the shell so signals propagate.
 
 Do not seed `protected/config/common.php`. HumHub creates it through the browser installer, so an empty `/config` stays valid.
 

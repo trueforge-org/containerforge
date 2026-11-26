@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java8:8@sha256:a245de24c11e3e79eec8dc598429a951c5bc71011f38a649d076816159b25ff5` (copied from an existing `apps/*/Dockerfile`). Fits because the app is a Java 8 jar plugin, and the java8 sibling already provides the JRE. Closest sibling: `apps/nzbhydra2` (Java app zip, USER apps, `/config` data) and `apps/java8` (the base itself, ubuntu-built).
+`FROM ghcr.io/trueforge-org/java8:8@sha256:a245de24c11e3e79eec8dc598429a951c5bc71011f38a649d076816159b25ff5` (copied from an existing `apps/*/Dockerfile`). Fits because the app is a Java 8 jar plugin, and the java8 sibling already provides the JRE. Closest sibling: `apps/nzbhydra2` (Java app zip, USER apps, `/config` data; it uses `java17`, not `java8`) and `apps/java8` (the base itself, ubuntu-built). Other `java8` consumers exist in `apps/*/Dockerfile` with the same digest.
 
 Note: upstream runs on Debian buster `openjdk:8`, which is EOL. The java8 sibling is the ContainerForge choice; record that in section 10.
 
@@ -40,7 +40,7 @@ Note: upstream runs on Debian buster `openjdk:8`, which is EOL. The java8 siblin
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `ARG ZIP_SHA256` (pinned checksum, see section 10).
 2. `USER root`.
-3. `apt-get install -y --no-install-recommends unzip` (not in java8 base; verify with `dpkg -l` in the build). Clean apt lists.
+3. No apt install needed for `unzip`: `apps/ubuntu/Dockerfile` installs it and `java8` builds on ubuntu (UNVERIFIED for java8 itself; `apps/nzbhydra2` installs `unzip` explicitly, so add it only if the build shows it missing).
 4. `mkdir -p /app/jts3servermod /defaults /tmp_download`.
 5. Download the zip to `/tmp_download/jts3servermod.zip` with `curl -fsSL`, verify with `echo "${ZIP_SHA256}  /tmp_download/jts3servermod.zip" | sha256sum -c -`, then `unzip -q` into `/app/jts3servermod`.
 6. Mirror the upstream cleanup: `rm -rf /app/jts3servermod/tools /app/jts3servermod/readme* /app/jts3servermod/documents /app/jts3servermod/changelog.txt`.
@@ -137,11 +137,9 @@ env:
 volumes:
   - path: /config
     required: true
-dependencies:
-  - name: ✅ none
 ```
 
-Port protocols: 9987 is UDP (voice), 10011 and 30033 are TCP. The `dependencies` entry is not a real dependency: remove it, and state in the summary that the TeamSpeak 3 server is external and not a ContainerForge app. Only list env vars that `start.sh` reads: `TZ` and `JTS3_JAVA_ARGS` (if start.sh uses it). Do not invent others. UNVERIFIED: whether the plugin reads any env var beyond these; check the vendor docs.
+Port reconciliation: JTS3ServerMod is a client-side plug-in that connects outward to a TeamSpeak server, so this container may not open 9987, 10011 or 30033 at all. `settings.yaml` rules say not to list ports the container does not open, so keep these only if the plugin is confirmed to listen on them; otherwise drop all three ports and the `tcp` probe (UNVERIFIED either way, the upstream Dockerfile has no EXPOSE). If dropped, use a `filePaths` plus process-alive check. Port protocols: 9987 is UDP (voice), 10011 and 30033 are TCP. There is no `dependencies` entry: the TeamSpeak 3 server is not a ContainerForge app. State in the summary that the TeamSpeak 3 server is external and not a ContainerForge app. Only list env vars that `start.sh` reads: `TZ` and `JTS3_JAVA_ARGS` (if start.sh uses it). Do not invent others. UNVERIFIED: whether the plugin reads any env var beyond these; check the vendor docs.
 
 ## 7. start.sh
 
@@ -172,7 +170,7 @@ Points to verify (UNVERIFIED): the jar name inside the zip, and whether the plug
 
 timeoutSeconds: 120
 tcp:
-- port: '10011'
+- port: '10011'  # UNVERIFIED: only valid if the plugin listens on 10011, see section 6
 filePaths:
 - /app/jts3servermod
 - /defaults/jts3servermod-config

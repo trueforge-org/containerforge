@@ -14,7 +14,7 @@
 | Checksum source | None published for the release or the tag archive. Plan: pin the tarball SHA-256 as a Dockerfile `ARG` computed once at implementation (UNVERIFIED value). |
 | Upstream Dockerfile reviewed | No Dockerfile in the repo root (root listing: `.github`, `charts`, `cmd`, `deploy`, `internal`, `go.mod`, `go.sum`, `.ko.yaml`, `CHANGELOG.md`, `LICENSE`, `README.md`). Upstream builds the image with `ko` (`.ko.yaml` present). Build is reconstructed from source. |
 | Go requirement | `go.mod`: `module github.com/postfinance/kubelet-csr-approver`, `go 1.26.0` (gh api contents). |
-| Main package | `cmd/` exists. Exact binary subdirectory (for example `cmd/kubelet-csr-approver`) is UNVERIFIED: the draft says `cmd`, the `cmd` listing was not read. |
+| Main package | `cmd/` exists. Binary subdirectory is `cmd/kubelet-csr-approver` (`gh api contents/cmd?ref=v1.2.16`; `.ko.yaml` has `main: ./cmd/kubelet-csr-approver/`). |
 | Ports | UNVERIFIED: draft guesses 8080 (metrics) and 8081 (health), not confirmed in source or `charts/`. Must read `cmd/` and `charts/` before fixing ports. |
 | Env vars and flags | UNVERIFIED: none read. Likely flags for the kubelet CA, policy file and listen address; confirm in `cmd/` and `README.md`. |
 | Config path | UNVERIFIED: the approval policy is a rules file deployed by the chart (ConfigMap). Path inside the image not confirmed. |
@@ -34,7 +34,7 @@ No `defaults/` unless the policy file needs a seeded default (UNVERIFIED; the ch
 
 - Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, copied from `apps/hishtory-server/Dockerfile`.
 - Closest sibling: `apps/hishtory-server` (Go built in an ubuntu `AS builder` stage, then `COPY --from=builder`).
-- Go toolchain: `apps/ubuntu/docker-bake.hcl` sets `GO_VERSION` default `1.27.4`, which satisfies `go 1.26.0`. Whether Go is shipped in the final ubuntu image or only its build layer is UNVERIFIED; the builder must check `go version`.
+- Go toolchain: `apps/ubuntu/docker-bake.hcl` sets `GO_VERSION` default `1.27.4`, which satisfies `go 1.26.0`. `apps/ubuntu/Dockerfile` is single-stage and installs Go into the image (as `apps/hishtory-server` relies on); the builder should still check `go version`.
 
 ## 4. Dockerfile
 
@@ -42,7 +42,7 @@ No `defaults/` unless the policy file needs a seeded default (UNVERIFIED; the ch
 2. Install only what the base lacks (`ca-certificates`, `curl`; check first, do not reinstall base packages).
 3. `curl -fL -o /tmp/src.tar.gz https://github.com/postfinance/kubelet-csr-approver/archive/refs/tags/${VERSION}.tar.gz`, verify with `sha256sum -c`, extract to `/build/src` with `--strip-components=1`.
 4. `cd /build/src && GOPATH=/tmp/go GOCACHE=/tmp/go-build GOMODCACHE=/tmp/go/pkg/mod go mod download`.
-5. `CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -trimpath -ldflags "-s -w -X main.version=${VERSION}" -o /out/kubelet-csr-approver ./cmd/<binary>`. The `-X` symbol name and binary subdir are UNVERIFIED (read `cmd/`).
+5. `CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -trimpath -ldflags "-s -w" -o /out/kubelet-csr-approver ./cmd/kubelet-csr-approver`. Upstream `.ko.yaml` sets `-X github.com/postfinance/kubelet-csr-approver/internal/cmd.commit` and `.ref` (from git env, absent in a tarball build), so no version `-X` is injected here; add `-X .../internal/cmd.ref=${VERSION}` only if wanted (UNVERIFIED the variable is a plain string).
 6. Final stage `FROM <ubuntu>`, `USER root`:
    - `COPY --from=builder /out/kubelet-csr-approver /app/kubelet-csr-approver`; `chown apps:apps` and `chmod 0755`.
    - License: `COPY --from=builder /build/src/LICENSE /usr/share/licenses/kubelet-csr-approver/LICENSE`.

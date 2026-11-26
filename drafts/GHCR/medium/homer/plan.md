@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (homer is not a `FROM` base). No `etc/` (
 
 ## 3. Base image
 
-Runtime: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. It serves the static site, matching the draft's nginx runtime. The nginx sibling runs as `USER apps`, listens on 8080 by default and `CMD`s `nginx -c /config/nginx.conf`.
+Runtime: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` (UNVERIFIED: the tag and digest are not in the repo, `apps/nginx` is built from the apt version `1.28.3-2ubuntu1.14` on the same ubuntu digest; check the published image). It serves the static site, matching the draft's nginx runtime. The nginx sibling runs as `USER apps`, listens on 8080 by default and `CMD`s `nginx -c /config/nginx.conf -g 'daemon off;'`; its `docker-entrypoint.d/03-copyconfig.sh` seeds `/config/nginx.conf` and `/config/sites/default.conf` before `/start.sh` runs (the ubuntu entrypoint runs `/start.sh "$@"`).
 
 Build stage (only unzip is needed, the site is pre-built upstream): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
 
@@ -43,13 +43,13 @@ Closest sibling: `apps/nginx` (runtime). The upstream pnpm build is not repeated
 ## 4. Dockerfile
 
 1. Build stage: `FROM <ubuntu> AS build`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. `apt-get install -y --no-install-recommends unzip` (not in the base, UNVERIFIED that ubuntu base lacks it; remove this step if it is already present). Clean apt lists.
+2. No apt install needed: `apps/ubuntu/Dockerfile` already installs `unzip`, `curl` and `tar`.
 3. `curl -fL -o /tmp/homer.zip https://github.com/homer-dashboard/homer/releases/download/${VERSION}/homer.zip`, then `unzip -q /tmp/homer.zip -d /tmp/homer`. Verify with a sha256 pin (`ARG HOMER_SHA256`), since no upstream checksum exists. Set the pin from the first download and state that in the PR.
 4. Final stage: `FROM ghcr.io/trueforge-org/nginx@sha256:...`, `ARG VERSION`, `USER root`.
-5. `mkdir -p /app/www && cp -r /tmp/homer/. /app/www/`. The site root is `/app/www`, read-only at runtime.
+5. `mkdir -p /app/www && cp -r /tmp/homer/. /app/www/ && mv /app/www/assets /app/www/default-assets`. The site root is `/app/www`, read-only at runtime. The upstream `assets` folder is kept as `default-assets` so `start.sh` can seed from it.
 6. Copy the nginx site include to a seed location: `COPY --chmod=0755 ./ /` brings `defaults/` into the image. `start.sh` copies `defaults/sites/homer.conf` into `/config/sites/` only when missing.
-7. `ln -s /config/assets /app/www/assets` is a dangling symlink until `start.sh` seeds `/config/assets`; this is the same pattern as `apps/bookstack` (`ln -s /config/...`).
-8. Remove `/tmp/homer*` and the `unzip` package in the build stage (build stage is discarded, so only ensure the final stage has no apt residue).
+7. `ln -s /config/assets /app/www/assets` is a dangling symlink until `start.sh` seeds `/config/assets`; this is the same pattern as `apps/bookstack` (`rm -rf` the target, then `ln -s /config/...`).
+8. The build stage is discarded; the final stage must copy the site with `COPY --from=build /tmp/homer/ /app/www/` instead of relying on `/tmp` of the final stage (steps 5 and 7 then run in the final stage after the COPY). Also ship the license: `COPY --from=build` upstream `LICENSE` if present in the zip (UNVERIFIED) to `/usr/share/licenses/homer/`.
 9. `ENV TZ=Etc/UTC`.
 10. Tail (copy the nginx sibling's pattern):
 

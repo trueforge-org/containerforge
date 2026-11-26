@@ -37,12 +37,12 @@
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG ARCHIVE_SHA256`, `ARG TARGETARCH`, `USER root`.
-2. `apt-get update && apt-get install -y --no-install-recommends nginx php8.5-fpm php8.5-cli php8.5-gd php8.5-mbstring php8.5-xml php8.5-zip php8.5-curl php8.5-intl php8.5-sqlite3 php8.5-pgsql php8.5-ldap php8.5-bcmath unzip`. Pin the PHP version in the `apt-get` lines to the one in the 26.04 archive; check it matches the `php8.5` used in `apps/bookstack`. Clean `/var/lib/apt/lists/*`.
+2. `apt-get update && apt-get install -y --no-install-recommends nginx php8.5-fpm php8.5-cli php8.5-gd php8.5-mbstring php8.5-xml php8.5-zip php8.5-curl php8.5-intl php8.5-sqlite3 php8.5-pgsql php8.5-ldap php8.5-bcmath` (`unzip` is not needed; the ubuntu base has it). Pin the PHP version in the `apt-get` lines to the one in the 26.04 archive; check it matches the `php8.5` used in `apps/bookstack`. Clean `/var/lib/apt/lists/*`.
 3. Download and verify:
    `curl -fsSL -o /tmp/kanboard.tar.gz "https://github.com/kanboard/kanboard/archive/refs/tags/${VERSION}.tar.gz"`, then `echo "${ARCHIVE_SHA256}  /tmp/kanboard.tar.gz" | sha256sum -c -`.
 4. `mkdir -p /app/www && tar xzf /tmp/kanboard.tar.gz -C /app/www --strip-components=1`.
 5. Remove unneeded: `rm -rf /app/www/docker /app/www/tests`.
-6. Data path: upstream writes `data/` and `plugins/` inside the app. Symlink them to `/config`, as bookstack does: `ln -s /config/data /app/www/data` and `ln -s /config/plugins /app/www/plugins` (dangling until start.sh creates the targets).
+6. Data path: upstream writes `data/` and `plugins/` inside the app. Symlink them to `/config`, as bookstack does: `rm -rf /app/www/data /app/www/plugins` first (the tarball ships both folders), then `ln -s /config/data /app/www/data` and `ln -s /config/plugins /app/www/plugins` (dangling until start.sh creates the targets). Create `/defaults` before step 7.
 7. Config: `cp /app/www/config.default.php /defaults/config.php` (seed only when missing; see section 7).
 8. License: `install -D /app/www/LICENSE /usr/share/licenses/kanboard/LICENSE`.
 9. Write nothing else to `/app`. `chown -R root:root /app && chmod -R 755 /app`.
@@ -148,14 +148,13 @@ if [[ ! -f /config/config.php ]]; then
 fi
 ln -sfn /config/config.php /app/www/config.php
 
-# php-fpm listens on a unix socket in /tmp
-sed -i 's#^listen = .*#listen = /tmp/php/php-fpm.sock#' /etc/php/8.5/fpm/pool.d/www.conf
-php-fpm8.5 -D
+# php-fpm with its own config (socket and pid in /tmp), shipped under etc/php/
+php-fpm8.5 -D -y /etc/php/8.5/fpm/kanboard-fpm.conf
 
 exec nginx -g 'daemon off;'
 ```
 
-Notes: `/app/www/config.php` symlink is needed only if Kanboard reads its config from its own directory (UNVERIFIED for this version). Confirm with the first run. The `sed` line keeps php-fpm off the default socket; confirm the pool path for php8.5 in 26.04. nginx's `pid` and temp paths must point at `/tmp` (section 9); the nginx site file in `etc/nginx/` sets these and `listen 8080`. Do not chown `/config` as root; the UID is `apps`.
+Notes: `/app/www/config.php` symlink is needed only if Kanboard reads its config from its own directory (UNVERIFIED for this version). Confirm with the first run. `/etc/php/8.5/fpm/kanboard-fpm.conf` is a new file shipped from `etc/php/8.5/fpm/` (add it to section 2) with `listen = /tmp/php/php-fpm.sock`, `pid` and `error_log` under `/tmp`, and the `user`/`group` lines omitted because it runs as `apps`; editing `/etc/php/.../www.conf` with `sed` at runtime is not possible as non-root. UNVERIFIED: the exact config content. nginx's `pid` and temp paths must point at `/tmp` (section 9); the nginx site file in `etc/nginx/` sets these and `listen 8080`. Do not chown `/config` as root; the UID is `apps`.
 
 ## 8. container-test.yaml
 

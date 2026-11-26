@@ -34,14 +34,14 @@ No `defaults/`: nothing is seeded (the operator writes `config.yaml`). No `etc/`
 
 - Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (copied from `apps/hishtory-server/Dockerfile`, which builds a Go binary on this base and copies it into the final stage).
 - Closest sibling: `apps/hishtory-server` (Go built in an ubuntu `AS builder` stage, `COPY --from=builder`).
-- Go toolchain: `apps/ubuntu/docker-bake.hcl` sets `GO_VERSION` default `1.27.4`. Whether that Go ships in the final ubuntu image or only in its build layer is UNVERIFIED. Implementer must check `go version` inside the builder and confirm it is `>= 1.27.0`.
-- Node.js for the assets stage: UNVERIFIED whether the ubuntu base ships Node. If not, install a pinned Node with SHA-256 verification from nodejs.org, the same way `apps/ubuntu` installs Go (GPG or SHASUMS check), using a Node version satisfying pnpm lockfile needs. Do not use the alpine images.
+- Go toolchain: `apps/ubuntu/docker-bake.hcl` sets `GO_VERSION` default `1.27.4`. `apps/ubuntu/Dockerfile` is single-stage and installs that Go (from dl.google.com, `GO_VERSION`) into the image, as `apps/hishtory-server` relies on, so the builder stage has it. Implementer must still check `go version` inside the builder and confirm it is `>= 1.27.0`.
+- Node.js for the assets stage: `apps/ubuntu/Dockerfile` installs Node (`NODE_VERSION`, default 26.13.1 in `apps/ubuntu/docker-bake.hcl`, SHASUMS-verified) into `/usr/local`, so the builder stage has it; check that it satisfies the upstream pnpm lockfile needs (UNVERIFIED). Do not use the alpine images.
 
 ## 4. Dockerfile
 
 1. Build stage `FROM <ubuntu> AS builder`, `ARG VERSION`, `ARG TARGETARCH`, `ARG KROMGO_SHA256` (pinned tarball checksum, UNVERIFIED value), `USER root`.
 2. `apt-get install -y --no-install-recommends ca-certificates curl` (only what the base lacks; check first).
-3. Node: install pinned Node if not in base (see section 3), then `npm install --global --ignore-scripts pnpm@<PNPM_VERSION>` with the version pinned as an ARG (value to be taken from upstream `Dockerfile` ARG default, UNVERIFIED).
+3. Node is already in the base (see section 3); then `npm install --global --ignore-scripts pnpm@<PNPM_VERSION>` with the version pinned as an ARG (value to be taken from upstream `Dockerfile` ARG default, UNVERIFIED).
 4. `curl -fL -o /tmp/kromgo.tar.gz https://github.com/home-operations/kromgo/archive/refs/tags/${VERSION}.tar.gz`, then `echo "${KROMGO_SHA256}  /tmp/kromgo.tar.gz" | sha256sum -c -`, then `mkdir -p /build/kromgo && tar xzf /tmp/kromgo.tar.gz -C /build/kromgo --strip-components=1`.
 5. In `/build/kromgo`: `pnpm install --frozen-lockfile` (with `STORE_DIR=/tmp/pnpm-store`), `go run ./cmd/genassets`. Env: `GOPATH=/tmp/go GOCACHE=/tmp/go-build GOMODCACHE=/tmp/go/pkg/mod`.
 6. `CGO_ENABLED=0 go build -ldflags "-s -w -X main.Version=${VERSION}" -trimpath -o /out/kromgo ./cmd/kromgo`. Upstream also injects `main.Gitsha`; the tarball has no git history, so omit it (UNVERIFIED that `Gitsha` is required at runtime).
@@ -155,13 +155,13 @@ Upstream runs as distroless `:nonroot` (UID 65532). ContainerForge runs as `apps
 - Ports: draft listed 8888 (metrics); upstream `EXPOSE` lists 8080 and 8081 only. 8888 dropped.
 - Startup without config: UNVERIFIED whether `kromgo` runs without a `config.yaml` and a reachable Prometheus. If it exits, the protocol's "still running" criterion fails and this is a blocker, not a DB exception (no DB dependency). Resolve before the test is written.
 - Go version: upstream `go 1.27.0`. Build stage must have Go >= 1.27.0 (ubuntu bake default 1.27.4). Verify.
-- Node/pnpm inside the build stage: assets are required by `cmd/genassets`; the build is not feasible if Node cannot be pinned.
+- Node/pnpm inside the build stage: assets are required by `cmd/genassets`; Node comes from the ubuntu base, pnpm must be pinned.
 - `Gitsha` omitted: the tarball has no `.git`. Version string reports `0.16.4` only.
 - Config format tied to the 0.16.x line; a future bump may change the schema.
 - No arm64 run validated; `compile` on both architectures.
 - Chart `settings`: `config.yaml` at `/config/config.yaml` is from the TrueCharts chart (not upstream); confirm the upstream default path.
 
-Blockers: none confirmed yet. Gating items are the startup-without-config question and Node availability.
+Blockers: none confirmed yet. Gating item is the startup-without-config question.
 
 ## 11. Build and test steps
 

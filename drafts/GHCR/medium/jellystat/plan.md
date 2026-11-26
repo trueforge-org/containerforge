@@ -37,7 +37,7 @@ Runtime: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3
 
 Build stage: the same `python-node` base (node and npm are already there), so `npm ci` and `npm run build` run with the pinned base.
 
-Closest sibling: `apps/changedetection` and `apps/budge` (python-node with a node build). Check whether either has a pure Node sibling pattern before finalising (UNVERIFIED).
+Closest siblings: `apps/changedetection` and `apps/budge` (both `FROM` python-node, which is a published base image, not an `apps/` folder). Whether either has a pure Node pattern is UNVERIFIED.
 
 ## 4. Dockerfile
 
@@ -45,7 +45,7 @@ Closest sibling: `apps/changedetection` and `apps/budge` (python-node with a nod
 2. `curl -fL -o /tmp/jellystat.tar.gz https://github.com/CyferShepard/Jellystat/archive/refs/tags/${VERSION}.tar.gz`, `echo "${JELLYSTAT_SHA256}  /tmp/jellystat.tar.gz" | sha256sum -c -`, `tar xzf ... --strip-components=1 -C /tmp/src`.
 3. `ENV NPM_CONFIG_CACHE=/tmp/npm-cache` (rule: caches go to `/tmp`). `npm ci` (lockfile present in the tarball; UNVERIFIED the tarball has `package-lock.json`, upstream uses `npm install`, so use `npm install` if no lockfile), then `npm run build`.
 4. Final stage: `FROM <python-node>`, `USER root`, `apt-get install -y --no-install-recommends wget` only if the healthcheck tool is needed (the probe is in `container-test.yaml` instead, so skip it), `clean apt lists`.
-5. `COPY --from=build /tmp/src /app`. Make the backend write path a symlink: `mkdir -p /app/backend && ln -s /config/backup-data /app/backend/backup-data`.
+5. `COPY --from=build /tmp/src /app`. Make the backend write path a symlink: `mkdir -p /app/backend && rm -rf /app/backend/backup-data && ln -s /config/backup-data /app/backend/backup-data`.
 6. `chown -R apps:apps /app` is not needed. `/app` stays read-only at runtime; the build puts files owned by root.
 7. `ENV TZ=Etc/UTC`.
 8. Tail:
@@ -57,7 +57,7 @@ USER apps
 COPY --chmod=0755 . /
 ```
 
-Set `CMD ["/start.sh"]` only if `start.sh` is the entry; the base `CMD` pattern is in `apps/python-node` (check before setting).
+Set `CMD ["/start.sh"]` only if `start.sh` is the entry; the base `CMD` pattern: there is no `apps/python-node` folder, so check how `apps/budge/Dockerfile` (same base digest) handles `CMD` before setting.
 
 ## 5. docker-bake.hcl
 
@@ -120,14 +120,14 @@ dependencies:
   - postgresql
 ```
 
-Notes: `required: true` env vars need a default or start.sh generation (rule). `POSTGRES_PASSWORD` is handled by `start.sh` on each start (rule for DBs), and `JWT_SECRET` is generated in `start.sh` into `/config` when empty (see section 7). The `POSTGRES_IP` default `postgresql` is the ContainerForge dependency name (UNVERIFIED that the app name resolves that way, so check in the chart). Do not list env vars the app does not read.
+Notes: `required: true` env vars need a default or start.sh generation (rule). `POSTGRES_PASSWORD` has no safe default, so `start.sh` fails fast with a clear message when it is empty (user-supplied secret, not generated), and `JWT_SECRET` is generated in `start.sh` into `/config` when empty (see section 7). The `POSTGRES_IP` default `postgresql` is the ContainerForge dependency name (UNVERIFIED that the app name resolves that way, so check in the chart). Do not list env vars the app does not read.
 
 ## 7. start.sh
 
 ```bash
 #!/usr/bin/env bash
 
-mkdir -p /config/backup-data /tmp/npm-cache
+mkdir -p /config/backup-data
 
 # FILE__<NAME> secret loader, as upstream entry.sh
 for var in $(env | grep '^FILE__'); do
@@ -149,14 +149,18 @@ if [[ -z "${JWT_SECRET}" ]]; then
   export JWT_SECRET="$(cat /config/jwt_secret)"
 fi
 
-# apply DB password from env on every start
-export POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-}"
+# the DB password must be supplied by the user (or FILE__POSTGRES_PASSWORD)
+if [[ -z "${POSTGRES_PASSWORD:-}" ]]; then
+  echo "Error: POSTGRES_PASSWORD (or FILE__POSTGRES_PASSWORD) must be set"
+  exit 1
+fi
 
-cd /app
-exec npm run start
+# same as upstream `npm run start` (cd backend && node server.js), without npm writing to $HOME
+cd /app/backend
+exec node server.js
 ```
 
-Notes: idempotent, seeds `/config` only when missing, never writes to `/app`. `exec` hands PID 1 to node. The `FILE__` loader is reproduced from upstream `entry.sh`; the upstream file is not copied. Keep secrets out of the process list: `npm run start` reads them from the environment, which is acceptable here because that is how the app reads them (UNVERIFIED whether the Node process exposes them via `/proc`, which is the same as upstream).
+Notes: idempotent, seeds `/config` only when missing, never writes to `/app`. `exec` hands PID 1 to node. The `FILE__` loader is reproduced from upstream `entry.sh`; the upstream file is not copied. Keep secrets out of the process list: the node process reads them from the environment, which is acceptable here because that is how the app reads them (UNVERIFIED whether the Node process exposes them via `/proc`, which is the same as upstream).
 
 ## 8. container-test.yaml
 
@@ -168,13 +172,13 @@ tcp:
 - port: '3000'
 http:
 - port: '3000'
-  path: /auth/isConfigured
+  path: /auth/isconfigured
 filePaths:
 - /app/backend/server.js
 - /app/backend/backup-data
 ```
 
-`/auth/isConfigured` is the upstream healthcheck path (from the Dockerfile's HEALTHCHECK). It does not need the DB to return a response (UNVERIFIED: the app may return a 5xx without a DB). If it fails for that reason, this is a DB-dependency narrowing: keep the `tcp` probe on 3000 and add the comment `# narrowed: requires external postgresql; full functional test not feasible in single-container suite`. The narrowing applies only because all three criteria in the protocol hold (hard dependency, cannot start without DB, not feasible with the primitives).
+`/auth/isconfigured` is the upstream healthcheck path (from the Dockerfile's HEALTHCHECK). It does not need the DB to return a response (UNVERIFIED: the app may return a 5xx without a DB). If it fails for that reason, this is a DB-dependency narrowing: keep the `tcp` probe on 3000 and add the comment `# narrowed: requires external postgresql; full functional test not feasible in single-container suite`. The narrowing applies only because all three criteria in the protocol hold (hard dependency, cannot start without DB, not feasible with the primitives).
 
 ## 9. Rootless and read-only-rootfs adaptations
 
