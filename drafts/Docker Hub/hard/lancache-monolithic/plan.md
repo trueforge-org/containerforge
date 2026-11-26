@@ -6,12 +6,12 @@
 | Item | Value |
 |---|---|
 | Version | No releases or tags upstream (master, 150 commits). Draft tag `latest`. Track by commit; UNVERIFIED current SHA. |
-| Renovate | `datasource=git-refs depName=https://github.com/lancachenet/monolithic versioning=loose`. nginx itself comes from the base image `nginx:1.28.3`. |
+| Renovate | `datasource=git-refs depName=https://github.com/lancachenet/monolithic versioning=loose`. nginx itself comes from the upstream base image `lancachenet/ubuntu-nginx:latest` (Dockerfile `FROM`, fetched 2026-11-26). |
 | License | MIT (verified). nginx is BSD-2-Clause (from base). `LICENSE`: `MIT`. |
 | Source | https://github.com/lancachenet/monolithic |
 | Downloads | No binary. Upstream is a config overlay on `lancachenet/ubuntu-nginx`, plus git clone of https://github.com/uklans/cache-domains. Both architectures: nginx image is multi-arch; config is arch-independent. |
 | Checksum | None published; pin git refs. |
-| Upstream Dockerfile | https://github.com/lancachenet/monolithic/blob/master/Dockerfile reviewed. Apt: jq git ca-certificates. Env: GENERICCACHE_VERSION=2, CACHE_MODE=monolithic, WEBUSER=www-data, CACHE_INDEX_SIZE=500m, CACHE_DISK_SIZE=1000g, MIN_FREE_DISK=10g, CACHE_MAX_AGE=3560d, CACHE_SLICE_SIZE=1m, UPSTREAM_DNS="8.8.8.8 8.8.4.4", BEAT_TIME=1h, LOGFILE_RETENTION=3560, CACHE_DOMAINS_REPO, CACHE_DOMAINS_BRANCH=master, NGINX_WORKER_PROCESSES=auto, NGINX_LOG_FORMAT=cachelog. Ports 80 443 8080. Volumes /data/logs /data/cache /data/cachedomains /var/www. Healthcheck `curl http://127.0.0.1/lancache-heartbeat`. Docs list `CACHE_MEM_SIZE` (500m) instead of CACHE_INDEX_SIZE: naming differs between docs and Dockerfile, UNVERIFIED which the overlay reads. |
+| Upstream Dockerfile | https://github.com/lancachenet/monolithic/blob/master/Dockerfile reviewed. Apt: jq git ca-certificates. Env: GENERICCACHE_VERSION=2, CACHE_MODE=monolithic, WEBUSER=www-data, CACHE_INDEX_SIZE=500m, CACHE_DISK_SIZE=1000g, MIN_FREE_DISK=10g, CACHE_MAX_AGE=3560d, CACHE_SLICE_SIZE=1m, UPSTREAM_DNS="8.8.8.8 8.8.4.4", BEAT_TIME=1h, LOGFILE_RETENTION=3560, CACHE_DOMAINS_REPO, CACHE_DOMAINS_BRANCH=master, NGINX_WORKER_PROCESSES=auto, NGINX_LOG_FORMAT=cachelog. Ports 80 443 8080. Volumes /data/logs /data/cache /data/cachedomains /var/www. Healthcheck `curl http://127.0.0.1/lancache-heartbeat`. Docs variables page and Dockerfile both list `CACHE_INDEX_SIZE` (500m). Only the docs overview page mentions `CACHE_MEM_SIZE` (500m); the overlay's use is UNVERIFIED. |
 | Overlay (tree only) | `etc/nginx/nginx.conf`, `workers.conf`, `conf.d/*`, `sites-available/10_cache.conf 20_upstream.conf 30_metrics.conf` plus `cache.conf.d/`, `upstream.conf.d/`, `stream-available/10_sni.conf`, `etc/supervisor/conf.d/heartbeat.conf`, `hooks/*`, `scripts/{cache_test,getconfig,heartbeat}.sh`. Contents not read: UNVERIFIED. |
 
 ## 2. Target layout
@@ -78,7 +78,7 @@ If the test harness reaches the container only after start, a `runners` entry (U
 - Needs lancache-dns (not yet in repo) or other DNS redirect; clients cannot cache HTTPS (443 is passthrough only).
 - Large disk needs (default 1000g) with no quota.
 - Hooks and templates not read; porting `10_setup.sh`, `15_generate_maps.sh`, `20_perms_check.sh` needs care.
-- Docs/Dockerfile disagree on `CACHE_MEM_SIZE` vs `CACHE_INDEX_SIZE`.
+- `CACHE_INDEX_SIZE` is the name in the Dockerfile and the variables docs page; the overview docs page's `CACHE_MEM_SIZE` is the only conflicting mention (overlay use UNVERIFIED).
 - Base nginx modules UNVERIFIED. Host ports 80/443 conflicts.
 
 ## 11. Build and test steps
