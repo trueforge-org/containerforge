@@ -12,7 +12,7 @@
 | Download URLs | The 2.9.7 release lists only `PrusaSlicer-2.9.7-setup.exe`, `.dmg` and `.zip` (no Linux AppImage in the asset list). The wrapper `helfrichmichael/prusaslicer-novnc` fetches an AppImage via its own helper script, so Linux AppImages may exist elsewhere. UNVERIFIED. Plan uses apt. |
 | Checksum source | apt (signed archive). For any AppImage route: UNVERIFIED. |
 | Upstream wrapper Dockerfile | Reviewed `helfrichmichael/prusaslicer-novnc` master: base `nvidia/opengl:1.2-glvnd-runtime-ubuntu22.04`; xorg, novnc, lxde, supervisor, firefox-esr, VirtualGL, TurboVNC; AppImage extracted with `--appimage-extract`; user `slic3r`; volumes `/configs/` and `/prints/`; entrypoint `/entrypoint.sh`; supervisord.conf. No EXPOSE. |
-| Wrapper env | `SSL_CERT_FILE` (example `/etc/ssl/certs/ca-certificates.crt`), `VNC_PASSWORD` (empty), `SUPD_LOGLEVEL` (INFO), `DISPLAY=:0`, `ENABLEHWGPU`, `VGL_DISPLAY=egl`, `NOVNC_PORT=8080`, `VNC_RESOLUTION=1280x800`, `VNC_PORT=5900`. |
+| Wrapper env | `SSL_CERT_FILE` (example `/etc/ssl/certs/ca-certificates.crt`), `VNC_PASSWORD` (empty), `SUPD_LOGLEVEL` (TRACE), `DISPLAY=:0`, `ENABLEHWGPU`, `VGL_DISPLAY=egl`, `NOVNC_PORT=8080`, `VNC_RESOLUTION=1280x800`, `VNC_PORT=5900`. |
 | Wrapper ports | 8080 (noVNC web), 5900 (raw VNC, optional). |
 | Reuse in repo | `apps/kasmvnc` (KasmVNC web desktop, ports 3000/3001, `PASSWORD`, `CUSTOM_USER`, `SUBFOLDER`, `/defaults/autostart`) and `apps/xvfb`, `apps/rdesktop` already exist. |
 
