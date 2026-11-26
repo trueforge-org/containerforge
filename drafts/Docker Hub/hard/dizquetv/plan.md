@@ -108,7 +108,7 @@ mkdir -p "${DATABASE}"
 cd /app/dizquetv
 exec node index.js
 ```
-Idempotent; the app creates `images/ channels/ filler/ custom-shows/ cache/` on first run. It binds all interfaces by default (express `listen(port)`); UNVERIFIED in source, confirm with a connection from outside during the run test. No writes to `/app`.
+Idempotent; the app creates `images/ channels/ filler/ custom-shows/ cache/` on first run. It binds all interfaces by default: index.js calls `app.listen(process.env.PORT)` with no host argument (verified in source); still confirm with a connection from outside during the run test. No writes to `/app`.
 
 ## 8. container-test.yaml
 
@@ -141,7 +141,7 @@ Check the exact `filePaths` key name against a sibling `container-test.yaml` tha
 - Upstream builds against Node 12 (nexe 12.16.2) and old deps (`request`, `diskdb`, `node-ssdp`). Running them on Node 26 is UNVERIFIED; if `npm install` or startup fails, do not install a second Node (base reuse rule); patch or bump the failing dependency in the Dockerfile build step, or report it as a blocker. Decide after the first build.
 - Source build instead of the release binary: no checksum published; tarball checksum must be pinned by us.
 - GPU/NVENC variant (`1.7.0-nvidia`, `jrottenberg/ffmpeg:4.3-nvidia1804`) is not reproduced; Ubuntu `ffmpeg` is CPU/VAAPI only. Document this.
-- ffmpeg 8.0 vs upstream tested ffmpeg 4.3: dizqueTV's ffmpeg arguments may break; the UI exposes an ffmpeg path and settings. UNVERIFIED.
+- ffmpeg 8.0 vs upstream requirement "FFMPEG 4.2.3 or later" (wiki; development tested 4.2.4; upstream Docker base 4.3): dizqueTV's ffmpeg arguments may break; the UI exposes an ffmpeg path and settings. UNVERIFIED.
 - Renovate cannot bump the apt `ffmpeg` pin; it needs a manual refresh when Ubuntu updates it.
 - Draft said "hard" because of GPU; the CPU image is simple, so GPU is a documented non-goal.
 

@@ -37,7 +37,7 @@ Why: static files. Closest sibling: `apps/it-tools` (builder stage then nginx, `
 ## 4. Dockerfile
 
 1. Builder stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS builder`, `ARG VERSION`, `ENV HOME=/tmp`, `USER root`, `WORKDIR /tmp`, `ADD https://github.com/genea-app/genea-app.git#${VERSION} /tmp/src` (like it-tools). Only run `npm install`/build if `package.json` scripts contain a build step (UNVERIFIED; README says none, so most likely copy as is).
-2. Select the publishable files into `/tmp/dist`: `index.html js css components` and any asset folders referenced by `index.html` (confirm by reading `index.html`); exclude `tests/`, `package*.json`, `.git`.
+2. Select the publishable files into `/tmp/dist`: `index.html js css components resources modals img favicon.ico` (the asset folders and favicon referenced by `index.html`, see `context/github-genea-app-genea-app.md`); exclude `tests/`, `package*.json`, `.git`.
 3. Final stage `FROM` nginx base (above): `USER root`, `COPY --from=builder --chown=568:568 /tmp/dist/ /usr/share/nginx/html`, license `mkdir -p /usr/share/licenses/genea && cp LICENSE /usr/share/licenses/genea/` (copy it in the builder stage first), `COPY --chmod=755 ./ /`.
 4. `USER apps`, `COPY --chmod=0755 . /`, `WORKDIR /usr/share/nginx/html`. `EXPOSE 8080` and `VOLUME /config` are inherited by the pattern of it-tools (it-tools omits them; add `VOLUME /config` for consistency with section 6).
 5. No apt packages. Version alignment: `ARG VERSION` equals the bake default SHA.
@@ -80,7 +80,7 @@ http:
 - No releases: version is a commit SHA; Renovate will bump to every commit on `main`. Consider pinning and reviewing manually.
 - Docker Hub image is from 2021; the repo `main` may differ. Not blocking.
 - The app may need HTTPS (service worker, clipboard); terminate TLS on the ingress (UNVERIFIED).
-- Possible external CDN fetches at runtime (Vue, Materialize) UNVERIFIED; check `index.html`. If it loads from a CDN, consider vendoring for offline use.
+- Runtime CDN: `index.html` loads `isomorphic-git@beta` and `lightning-fs` from unpkg.com (unversioned or `beta` tags). Vue, Materialize and the Graphviz wasm are local under `resources/`. Consider vendoring the unpkg scripts for offline use.
 - Difficulty is overstated now that the source is found; only open question is whether a build step exists.
 
 ## 11. Build and test steps

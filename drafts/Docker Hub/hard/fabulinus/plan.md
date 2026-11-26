@@ -14,7 +14,7 @@
 | Per-arch downloads | None. Hub tags published for amd64 only (draft: arm64 `no`) |
 | Checksum source | None |
 | Upstream Dockerfile | None public (draft: `-`). Hub description: "server component of the TitanML Takeoff server", started through the `iris` launcher (`pip install titan-iris`), example `iris takeoff --model tiiuae/falcon-7b-instruct --device cpu --port 8000` |
-| Ports | 8000 shown in the Hub example (`--port 8000`). The draft's 3000 and 8000 are inferred. UNVERIFIED which ports the image listens on |
+| Ports | Container listens on 80: the Hub run example maps host 8000 to container 80 (`-p 8000:80`), and TrueCharts targetPort is 80. The iris example also uses `--port 8000`. The draft's 3000 is inferred and not supported by any source |
 | Paths | `/code/models` per the TrueCharts chart. UNVERIFIED otherwise |
 
 ## 2. Target layout
@@ -35,7 +35,7 @@ Not applicable (blocked). If unblocked: `APP="fabulinus"`, `VERSION` with a `// 
 
 ## 6. settings.yaml
 
-Not applicable (blocked). Do not invent ports or env vars. The only facts available are the Hub example's `--port 8000` and the model path `/code/models`.
+Not applicable (blocked). Do not invent ports or env vars. Facts now available: Hub env `TAKEOFF_MODEL_NAME` and `TAKEOFF_DEVICE` (`cuda` for GPU); container port 80; TrueCharts env `TAKEOFF_QUANT_TYPE`, `TAKEOFF_MAX_BATCH_SIZE`, `TAKEOFF_DISABLE_BATCHING`; model path `/code/models` (TrueCharts).
 
 ## 7. start.sh
 
@@ -52,7 +52,7 @@ The draft's TrueCharts expectations (runAsUser 0, readOnlyRootFilesystem false, 
 ## 10. Risks, caveats and open questions
 
 - BLOCKER: closed-source, no redistributable artifact, no public Dockerfile, no license information.
-- BLOCKER: stale. Last Hub push 2023-11-17, README says the Takeoff pro edition is sold separately (contact email). A "community edition" license may forbid redistribution. UNVERIFIED.
+- BLOCKER: stale. The upstream repo was archived by its owner on 2024-01-22 and its README says it is no longer maintained. Last Hub push 2023-11-17 (not re-confirmed; the Hub page says "updated about 3 years ago"), README says the Takeoff pro edition is sold separately (contact email). A "community edition" license may forbid redistribution. UNVERIFIED.
 - BLOCKER: GPU variant (`latest-gpu`) needs NVIDIA runtime; the draft marks both amd64 and arm64 as `no`.
 - Draft caveat "first start may download large model files" is plausible but UNVERIFIED.
 - Suggested action: close the item as `won't port` or ask TitanML for terms; alternatives are maintained inference servers (for example a vLLM or llama.cpp image) if the chart is still needed.

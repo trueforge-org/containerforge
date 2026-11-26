@@ -60,7 +60,7 @@ Why: the draft says ubuntu + PHP from apt (no PHP base here). The draft's "php8.
 
 - Header, `schema_version: 1`, `upstream_env_url: "https://github.com/friendica/friendica"`.
 - ports: `8080/tcp` (draft says 80, impossible for non-root without capabilities).
-- env (only those start.sh really applies): `TZ`, `FRIENDICA_DB_HOST`, `FRIENDICA_DB_PORT` (3306), `FRIENDICA_DB_NAME`, `FRIENDICA_DB_USER`, `FRIENDICA_DB_PASSWORD`, `FRIENDICA_URL`, `FRIENDICA_ADMIN_MAIL`, `PHP_MEMORY_LIMIT` (512M), `PHP_UPLOAD_LIMIT` (512M). Names are this image's own and start.sh renders them into `local.config.php`; document that in start.sh (they are NOT upstream names unless confirmed).
+- env (only those start.sh really applies): `TZ`, `MYSQL_HOST`, `MYSQL_PORT` (3306), `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`, `FRIENDICA_URL`, `FRIENDICA_ADMIN_MAIL`, `PHP_MEMORY_LIMIT` (512M), `PHP_UPLOAD_LIMIT` (512M). These are the upstream image's names (see `context/dockerhub-friendica.md`); start.sh renders them into `local.config.php`.
 - volumes: `/config` (required true).
 - dependencies: `mariadb` ✅ (apps/mariadb exists; hard). opt_dependencies: `valkey` ✅ (apps/valkey exists; optional, for Redis cache/locks).
 

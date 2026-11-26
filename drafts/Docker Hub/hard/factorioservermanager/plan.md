@@ -16,7 +16,7 @@ Corrections to the draft: FSM is a prebuilt Go binary (not Node), so the base is
 | Checksum | Upstream publishes none. Pin the computed `sha256` of the zip: `c0777636aa521d71700bb8fd69a496b8f4964c0d495ba87c292f293f1003bde7` |
 | Factorio download | `https://www.factorio.com/get-download/<version|stable>/headless/linux64` returns HTTP 302 to `dl.factorio.com/releases/<ver>/factorio-headless_linux_<ver>.tar.xz`. No login. No published checksum found (UNVERIFIED) |
 | Upstream Dockerfile reviewed | `docker/Dockerfile` and `docker/entrypoint.sh` (master). `FROM ubuntu`; ENV `FACTORIO_VERSION=stable`, `MANAGER_VERSION=0.10.1`, `RCON_PASS=""`; VOLUMEs `/opt/fsm-data /opt/factorio/saves /opt/factorio/mods /opt/factorio/config`; EXPOSE `80/tcp 34197/udp`; entrypoint builds `/opt/fsm-data/conf.json` from `/opt/fsm/conf.json` with jq, downloads Factorio on EVERY start into `/opt`, then `cd /opt/fsm && ./factorio-server-manager --conf /opt/fsm-data/conf.json --dir /opt/factorio --port 80` |
-| Binary flags | `--port` (default 80), `--bind`, `--conf`, `--dir` (from the binary's strings and the entrypoint). `--bind` semantics UNVERIFIED |
+| Binary flags | `--port`, `--host`, `--conf`, `--dir` (from the binary's strings, the entrypoint and the wiki). The wiki flag list gives `--host` (IP the web server listens on, default `0.0.0.0`) and `--port` default `8080`; a newer config table lists `80`. There is no documented `--bind` flag. Also `--bin`, `--config`, `--max-upload`, `--autostart`, `--glibc-*`. |
 | Default conf.json | `{"rcon_pass":"","sq_lite_database_file":"sqlite.db","cookie_encryption_key":"","settings_file":"server-settings.json","log_file":"factorio-server-manager.log"}` |
 | Ports | 80/tcp web UI upstream (we use 8080), 34197/udp Factorio game. The draft's 27015 RCON is UNVERIFIED and is not listed |
 
@@ -36,7 +36,7 @@ Corrections to the draft: FSM is a prebuilt Go binary (not Node), so the base is
 2. Fail fast on arm64: `test "${TARGETARCH}" = "amd64" || { echo "FSM and Factorio are x86_64 only"; exit 1; }`.
 3. No apt packages: `curl`, `jq`, `tar`, `xz-utils`, `unzip` come from the base.
 4. Download the zip to `/tmp`, verify with `echo "c0777636aa521d71700bb8fd69a496b8f4964c0d495ba87c292f293f1003bde7  /tmp/fsm.zip" | sha256sum -c -` (keep the hash in an `ARG FSM_SHA256` and bump it with each VERSION), `unzip` to `/tmp/x`, `mv /tmp/x/factorio-server-manager /app/fsm`.
-5. License: the zip has no license file, so fetch `https://raw.githubusercontent.com/OpenFactorioServerManager/factorio-server-manager/${VERSION}/LICENSE` (UNVERIFIED path) into `/usr/share/licenses/factorioservermanager/LICENSE`. If that path 404s, fetch it from the tag archive instead.
+5. License: the zip has no license file, so fetch `https://raw.githubusercontent.com/OpenFactorioServerManager/factorio-server-manager/${VERSION}/LICENSE.md` (the repo ships `LICENSE.md`; the master `LICENSE` path returned 404) into `/usr/share/licenses/factorioservermanager/LICENSE`. If that path 404s, fetch it from the tag archive instead.
 6. `chown -R apps:apps /app && chmod -R 755 /app`; `rm -rf /tmp/*`.
 7. `ENV HOME=/config` and `ARG FACTORIO_VERSION`-free: Factorio is downloaded at first start into `/config/factorio` (not at build time) because it is proprietary and its license forbids redistribution of the binaries in our image. UNVERIFIED legal reading, flagged in section 10.
 8. `USER apps`; `COPY --chmod=0755 . /`; `EXPOSE 8080 34197/udp`; `VOLUME /config`; `WORKDIR /app/fsm`.
@@ -87,7 +87,7 @@ fi
 cd /app/fsm
 exec ./factorio-server-manager --conf "$D/fsm-data/conf.json" --dir "$F" --port "$PORT"
 ```
-Notes: no write to `/app`; the process listens on all interfaces unless `--bind` defaults to localhost, so confirm with a connection from outside the container (UNVERIFIED, section 10). The upstream entrypoint echoes the RCON password; ours does not. The tar extraction into an already-created `factorio/` with `saves`, `mods`, `config` is safe because the headless tarball ships those dirs empty or absent (UNVERIFIED).
+Notes: no write to `/app`; the wiki says `--host` defaults to `0.0.0.0` (all interfaces); confirm with a connection from outside the container during the run test (section 10). The upstream entrypoint echoes the RCON password; ours does not. The tar extraction into an already-created `factorio/` with `saves`, `mods`, `config` is safe because the headless tarball ships those dirs empty or absent (UNVERIFIED).
 
 ## 8. container-test.yaml
 
@@ -124,9 +124,9 @@ Draft expectations: TrueCharts runs as root with `/opt/factorio/{config,mods,sav
 - amd64 only. The arm64 image-all platform is intentionally dropped; check whether CI accepts an amd64-only app.
 - FSM is effectively unmaintained (last release 2021). Compatibility with Factorio 2.x (mod portal, `server-settings.json` format, `factorio_version` JSON) is UNVERIFIED and could break the UI. Test by starting a server from the UI before declaring success. Fall back to pinning `FACTORIO_VERSION` to 1.1.x if 2.x fails.
 - Factorio EULA on redistribution is UNVERIFIED, hence the runtime download instead of baking into the image.
-- `cookie_encryption_key` is empty in default `conf.json`: UNVERIFIED whether FSM generates one. Document in README if sessions are insecure.
-- Default login (reported as admin/factorio): UNVERIFIED.
-- `--bind` default and whether the web server listens on `0.0.0.0` is UNVERIFIED.
+- `cookie_encryption_key` is empty in the default `conf.json`. The Hub page for `ofsm/ofsm` says a random key is generated and saved to `fsm-data/conf.json` when it is empty; whether the repo's own image behaves the same is UNVERIFIED.
+- Default login: the Hub page for `ofsm/ofsm` says `ADMIN_USER` defaults to `admin` and `ADMIN_PASS` to `factorio`. The repo README and wiki document no default login. Treat as a known default to change.
+- `--host` defaults to `0.0.0.0` per the wiki flag list (listen address; confirm during the run test).
 - First start needs network access and enough `/tmp`.
 
 ## 11. Build and test steps

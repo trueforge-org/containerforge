@@ -18,7 +18,7 @@ Corrections to the draft: the Hub image `getferdi/ferdi-server:1.3.2` is the dea
 | Env vars (from `.env.example`, README and `config/*.ts`) | `NODE_ENV`, `APP_URL`, `APP_KEY`, `DATA_DIR`, `HOST`, `PORT`, `DB_CONNECTION` (default `sqlite`), `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE` (default `ferdium`), `DB_SSL`, `MAIL_CONNECTION`, `SMTP_HOST`, `SMTP_PORT`, `MAIL_SSL`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_SENDER`, `IS_CREATION_ENABLED`, `IS_DASHBOARD_ENABLED`, `IS_REGISTRATION_ENABLED`, `CONNECT_WITH_FRANZ`, `JWT_USE_PEM`, `LOG_LEVEL`, `DB_SQLITE_JOURNAL_MODE`, `DB_SQLITE_SYNCHRONOUS`, `DB_BUSY_TIMEOUT`. SQLite file is `${DATA_DIR}/${DB_DATABASE}.sqlite` |
 | Postgres driver value | `DB_CONNECTION` for PostgreSQL: UNVERIFIED (README has a "supported databases and drivers" table; read it before writing settings.yaml; `pg` 8.12.0 is a dependency) |
 | Ports | 3333/tcp (draft matches) |
-| Recipes path | README `docker create` and compose mount `/app/build/recipes`, while `entrypoint.sh` clones into `/app/recipes`. UNVERIFIED which one the server reads; check `config/app.ts` or `app/` for the `recipes` path at build time |
+| Recipes path | README `docker create` mounts `/app/recipes`, while `entrypoint.sh` clones into `/app/recipes`. UNVERIFIED which one the server reads; check `config/app.ts` or `app/` for the `recipes` path at build time |
 
 ## 2. Target layout
 

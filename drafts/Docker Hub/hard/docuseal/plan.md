@@ -7,11 +7,11 @@
 | --- | --- |
 | Version | Latest release is 3.4.0 (`releases/latest` redirects to https://github.com/docusealco/docuseal/releases/tag/3.4.0). The draft uses 3.3.8, which is older. Plan targets 3.4.0; bump the draft's chart tag accordingly. Tags have no `v` prefix. |
 | Renovate | `datasource=github-releases depName=docusealco/docuseal versioning=semver`. |
-| License | AGPL-3.0 (LICENSE begins "GNU AFFERO GENERAL PUBLIC LICENSE Version 3", and it mentions "Additional Terms" in section 7, so an additional-terms notice exists; UNVERIFIED the exact text). SPDX `AGPL-3.0-only` pending that check. |
+| License | AGPL-3.0 (LICENSE begins "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"). The README describes the license as "AGPLv3 License with Section 7(b) Additional Terms", and the repo has a `LICENSE_ADDITIONAL_TERMS` file (copied into the image by the Dockerfile; its text not fetched). A bare SPDX `AGPL-3.0-only` may not capture that, so decide at port time. |
 | Source URL | https://github.com/docusealco/docuseal |
 | Downloads | No binary release assets (expanded assets list empty). Source tarball `https://github.com/docusealco/docuseal/archive/refs/tags/${VERSION}.tar.gz` (both arches; app is interpreted Ruby). Gems via bundler, JS via yarn/Shakapacker. |
 | Checksum | None published for the tag archive. UNVERIFIED; pin by tag. |
-| Upstream Dockerfile reviewed | https://github.com/docusealco/docuseal/blob/a628dd30daafde9f2e7b9ef161a3a9b7c6f4d9fc/Dockerfile (draft's commit, 3.3.8). Three stages on `ruby:4.0.10-alpine`: (1) download fonts (GoNotoKurrent, DancingScript), license files, ONNX model `model_704_int8.onnx` and musl pdfium zip (sha256-checked per arch); (2) webpack build with nodejs, yarn, git, build-base and Shakapacker; (3) runtime with apk `libpq vips redis onnxruntime leptonica jemalloc font-liberation font-carlito` plus build deps removed afterwards. ENV: `RAILS_ENV=production BUNDLE_WITHOUT=development:test OPENSSL_CONF=/etc/openssl_legacy.cnf HOME=/home/docuseal WORKDIR=/data/docuseal VIPS_MAX_COORD=17000 VIPS_BLOCK_UNTRUSTED=1 MALLOC_CONF=...`. `EXPOSE 3000`, no `VOLUME`, runs as root (no `USER`), `CMD /app/bin/bundle exec puma -C /app/config/puma.rb --dir /app`. Writable: `/app/tmp`, `/app/tmp/cache`, `/app/log`, `/data/docuseal`. The pdfium binary downloaded is a musl build, a glibc build is needed on Ubuntu (UNVERIFIED source, see 10). The 3.4.0 Dockerfile was not re-read, only the 3.3.8 one. |
+| Upstream Dockerfile reviewed | https://github.com/docusealco/docuseal/blob/a628dd30daafde9f2e7b9ef161a3a9b7c6f4d9fc/Dockerfile (draft's commit, 3.3.8). Three stages on `ruby:4.0.10-alpine`: (1) download fonts (GoNotoKurrent, DancingScript), license files, ONNX model `model_704_int8.onnx` and musl pdfium zip (sha256-checked per arch); (2) webpack build with nodejs, yarn, git, build-base and Shakapacker; (3) runtime with apk `libpq vips redis onnxruntime leptonica jemalloc font-liberation font-carlito` plus build deps removed afterwards. ENV: `RAILS_ENV=production BUNDLE_WITHOUT=development:test OPENSSL_CONF=/etc/openssl_legacy.cnf HOME=/home/docuseal WORKDIR=/data/docuseal VIPS_MAX_COORD=17000 VIPS_BLOCK_UNTRUSTED=1 MALLOC_CONF=...`. `EXPOSE 3000`, no `VOLUME`, runs as root (no `USER`), `CMD /app/bin/bundle exec puma -C /app/config/puma.rb --dir /app`. Writable: `/app/tmp`, `/app/tmp/cache`, `/app/log`, `/data/docuseal`. The pdfium binary downloaded is a musl build, a glibc build is needed on Ubuntu (UNVERIFIED source, see 10). The 3.4.0 Dockerfile was re-read on 2026-11-26: same three-stage layout on `ruby:4.0.10-alpine`, same ENV and CMD; not diffed line by line against 3.3.8. |
 
 ## 2. Target layout
 
@@ -67,7 +67,7 @@ volumes:
 dependencies:
   - postgresql   # ✅ apps/postgresql exists
 ```
-Only `WORKDIR` is verified from the upstream Dockerfile. `DATABASE_URL` and `SECRET_KEY_BASE` are standard Rails/DocuSeal docs variables but UNVERIFIED in this pass (docs not fetched); confirm before writing. With empty `DATABASE_URL` upstream falls back to SQLite under `WORKDIR` (UNVERIFIED), which is what lets the container start with no env.
+Only `WORKDIR` is verified from the upstream Dockerfile. `DATABASE_URL` is confirmed by the upstream README: it selects PostgreSQL or MySQL, and "by default the container uses SQLite" when it is unset. Where the SQLite file lands under `WORKDIR` is not confirmed. `SECRET_KEY_BASE` is not mentioned by any fetched source and is UNVERIFIED. This default is what lets the container start with no env.
 
 ## 7. start.sh
 

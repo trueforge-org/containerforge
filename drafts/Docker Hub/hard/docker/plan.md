@@ -5,12 +5,12 @@
 
 | Item | Value |
 | --- | --- |
-| Version | 29.10.0 (draft tag `29.10.0-dind`). `docker-29.10.0.tgz` is the newest file in https://download.docker.com/linux/static/stable/x86_64/ (listing checked; 29.9.2, 29.9.3, 29.10.0 are the last three). |
+| Version | 29.10.0 (draft tag `29.10.0-dind`). Stale: re-checked 2026-11-26, the listing at https://download.docker.com/linux/static/stable/x86_64/ also has `docker-29.10.1.tgz` (2026-11-24), newer than `docker-29.10.0.tgz` (2026-11-16). The pin is left at 29.10.0 here (maintainer decision). |
 | Renovate | `datasource=github-releases depName=moby/moby versioning=semver`. UNVERIFIED: whether moby/moby release tags are `v29.10.0` (needs `extractVersion=^v(?<version>.+)$` if so) and whether every moby tag has a matching static tarball. |
 | License | Apache-2.0 (https://raw.githubusercontent.com/moby/moby/master/LICENSE begins "Apache License Version 2.0"). |
 | Source URL | https://github.com/moby/moby |
 | Downloads | amd64: https://download.docker.com/linux/static/stable/x86_64/docker-29.10.0.tgz (HTTP 200, ~78.7 MB). arm64: https://download.docker.com/linux/static/stable/aarch64/docker-29.10.0.tgz (HTTP 200). Rootless extras (HTTP 200 on both arches): `.../docker-rootless-extras-29.10.0.tgz`. |
-| Checksum | download.docker.com publishes no checksum file that I found. UNVERIFIED. The upstream docker-library Dockerfile pins a sha256 per arch; copy those from https://github.com/docker-library/docker/blob/70cd6b52204a3bf037510cb750e099c34b081bd4/29/dind/Dockerfile into `ARG` values and verify with `sha256sum -c`. |
+| Checksum | download.docker.com publishes a companion `docker-29.10.0.tgz.sha256` file (85 bytes) next to each tarball (listing checked 2026-11-26). The upstream docker-library Dockerfile pins a sha256 per arch (x86_64 `7c1ebadc…`, aarch64 `6e5159e8…`); copy those from https://github.com/docker-library/docker/blob/70cd6b52204a3bf037510cb750e099c34b081bd4/29/dind/Dockerfile into `ARG` values and verify with `sha256sum -c`. |
 | Upstream Dockerfile reviewed | docker-library/docker `29/dind/Dockerfile` at 70cd6b5. It is Alpine, installs `ip6tables iptables openssl pigz shadow-uidmap xz` plus `iptables-legacy`, fetches `hack/dind` from moby at `DIND_COMMIT=8d9e3502aba39127e4d12196dae16d306f76993d`, sets `EXPOSE 2375 2376`, `VOLUME /var/lib/docker`, `ENTRYPOINT ["dockerd-entrypoint.sh"]`, creates `dockremap` with subuid/subgid `165536:65536`, and extracts the static bundle without the `docker` CLI and `containerd` (it uses the embedded one). |
 | Upstream entrypoint facts | `dockerd-entrypoint.sh`: if `DOCKER_TLS_CERTDIR` is set it generates certs there and listens on `tcp://0.0.0.0:2376` with TLS; otherwise `tcp://0.0.0.0:2375`. `DOCKER_TLS_SAN` adds SANs. `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS` is used in rootless mode. |
 

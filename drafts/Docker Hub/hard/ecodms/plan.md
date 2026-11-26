@@ -9,10 +9,10 @@
 | Renovate | Not applicable: no GitHub/registry datasource for the vendor repository `http://www.ecodms.de/ecodms_260164/...`. The path segment changes per release (`ecodms_250264`, `ecodms_260164` seen in manuals); manual bumps. |
 | License | Proprietary, commercial (ecoDMS GmbH). No SPDX id (use `LicenseRef-ecoDMS-Proprietary`, UNVERIFIED). The image would redistribute vendor packages; permission is UNVERIFIED. |
 | Source URL | https://www.ecodms.de/ (download page https://www.ecodms.de/de/download). Closed source, no repository. |
-| Downloads | Vendor apt repository (Debian/Ubuntu), per the vendor's download page for Build 26.01: Ubuntu 24.04 `deb http://www.ecodms.de/ecodms_260164/noble /`, key `http://www.ecodms.de/gpg/ecodms.key`, package `ecodmsserver` (also `ecodmsclient`, `ecodmspackages`). Debian 12/13 entries also exist. Ubuntu 26.04 repository: UNVERIFIED (not listed). Architecture: amd64 only per draft, arm64 UNVERIFIED. |
+| Downloads | Vendor apt repository (Debian/Ubuntu), per the vendor's Linux download page (https://ecodms.datamagic.at/download/, not `/de/download`): Ubuntu 24.04 `deb http://www.ecodms.de/ecodms_260164/noble /`, key `http://www.ecodms.de/gpg/ecodms.key`, package `ecodmsserver`. The noble `Packages` index also lists `ecodmsclient`, `ecodmsmailzplugin`, `ecodmspackages`, `ecodmsprinter` and `postgresql-ecodms-vectorizeimage`. Current `ecodmsserver` version in that index is `26.01-4`. Debian 12/13 entries also exist. Ubuntu 26.04 repository: UNVERIFIED (not listed). Architecture: every package in the noble index is `amd64`; arm64 UNVERIFIED. |
 | Checksum | apt repository signature only (GPG key above); no standalone checksum. |
 | Upstream Dockerfile reviewed | None public (draft says `-`). Docker Hub description only: ports 17001 (standard ecoDMS port), 8080 (web), 8180; volumes `/srv/data`, `/srv/scaninput`, `/srv/backup`, `/srv/restore`; no env vars documented; backup by uploading an empty file `create` into the backup folder; restore by placing `restore.zip` in the restore folder. Sources: https://hub.docker.com/r/ecodms/allinone-18.09 and https://ecodms.datamagic.at/download/. |
-| Manual notes | The server package bundles a PostgreSQL database and a container storage system; on VMs `haveged` is recommended; installation shows interactive dialogs (needs `DEBIAN_FRONTEND=noninteractive`, UNVERIFIED how the package behaves then). |
+| Manual notes | The `ecodmsserver` package declares apt dependencies on `postgresql`, `postgresql-16-pgvector`, `postgresql-ecodms-vectorizeimage`, `samba`, `sudo` and `haveged` (noble `Packages` index), so PostgreSQL is an apt dependency, not bundled. On VMs `haveged` is recommended; installation shows interactive dialogs (needs `DEBIAN_FRONTEND=noninteractive`, UNVERIFIED how the package behaves then). |
 
 ## 2. Target layout
 
@@ -25,13 +25,13 @@ No `root/`, no `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the draft's alternative `java17` is unnecessary if the vendor package pulls its own Java as a dependency; UNVERIFIED which Java it needs). Vendor packages target Ubuntu 24.04 `noble`, so Ubuntu 26.04 compatibility is UNVERIFIED. Closest sibling: `apps/nextcloud-fpm` is not analogous; for multi-service in a single container look at `apps/unifi-network-application` (Java + bundled MongoDB handling) and `apps/postgresql` for DB start logic.
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the draft's alternative `java17` is unnecessary if the vendor package pulls its own Java as a dependency; the noble index's `ecodmsserver` Depends list has no Java package, so apt does not install one; whether the package ships its own JVM is UNVERIFIED). Vendor packages target Ubuntu 24.04 `noble`, so Ubuntu 26.04 compatibility is UNVERIFIED. Closest sibling: `apps/nextcloud-fpm` is not analogous; for multi-service in a single container look at `apps/unifi-network-application` (Java + bundled MongoDB handling) and `apps/postgresql` for DB start logic.
 
 ## 4. Dockerfile
 
 Cannot be written faithfully today. Intended steps if permitted:
 1. `ARG VERSION`, `USER root`; add the vendor apt source and key to `/etc/apt/sources.list.d/ecodms.list` and `/etc/apt/trusted.gpg.d/ecodms.asc` (path per the vendor guide, noble repo).
-2. `DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ecodmsserver=<pinned version>` (pin the apt version and check it matches `VERSION`, as `apps/valkey` does; version string UNVERIFIED), `haveged` if needed.
+2. `DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ecodmsserver=<pinned version>` (pin the apt version and check it matches `VERSION`, as `apps/valkey` does; current version string `26.01-4` per the noble `Packages` index), `haveged` if needed.
 3. Relocate the packaged PostgreSQL data dir, ecoDMS data dir and logs from `/var/lib`, `/var/log`, `/etc` to `/config` (needs knowledge of the package layout, UNVERIFIED) and make `/app` hold only read-only binaries.
 4. Vendor license/EULA files to `/usr/share/licenses/ecodms/` (UNVERIFIED which exist).
 5. `COPY --chmod=0755 . /`, `EXPOSE` the real ports, `VOLUME /config`, final `USER apps`.
@@ -61,7 +61,7 @@ volumes:
   - {path: /config/restore, required: false}
 dependencies: []
 ```
-Ports 8080, 17001, 8180 come from the Docker Hub run example (host 17004->8080, 17005->8180, 17001). The draft's port 80 is not confirmed and is dropped. No env vars are documented for the image; do not invent any. The volume layout under `/config` replaces the chart's `/srv/*` mounts (see 9). Dependencies: none (PostgreSQL is bundled in the vendor package; the ✅ `apps/postgresql` could replace it, UNVERIFIED if ecoDMS supports an external DB).
+Ports 8080, 17001, 8180 come from the Docker Hub run example (host 17004->8080, 17005->8180, 17001). The draft's port 80 is not confirmed and is dropped. No env vars are documented for the image; do not invent any. The volume layout under `/config` replaces the chart's `/srv/*` mounts (see 9). Dependencies: none in ContainerForge terms. PostgreSQL is an apt dependency of `ecodmsserver` (`postgresql`, `postgresql-16-pgvector`), not a bundled service; the ✅ `apps/postgresql` could replace it, but it is UNVERIFIED whether ecoDMS works with an external DB and whether its pgvector requirement matches `apps/postgresql`.
 
 ## 7. start.sh
 
@@ -78,7 +78,7 @@ Upstream (Docker Hub) mounts `/srv/data`, `/srv/scaninput`, `/srv/backup`, `/srv
 ## 10. Risks, caveats and open questions
 
 - BLOCKER: closed-source commercial software; redistribution of vendor packages in a public GHCR image is unconfirmed, and a license/activation may be needed (draft caveat, inferred).
-- BLOCKER: no public Dockerfile; Docker Hub image is 18.09, about 3 years old. Current vendor build is 26.01 (amd64 Ubuntu 24.04 repo). Docker Hub notes reportedly say a major version jump cannot be done directly from 16.09/14.08 (UNVERIFIED, not re-read).
+- BLOCKER: no public Dockerfile; Docker Hub image is 18.09, about 3 years old. Current vendor build is 26.01 (amd64 Ubuntu 24.04 repo). Docker Hub notes say a direct upgrade from 16.09 or 14.08 is not possible (confirmed on the Hub page, 2026-11-26).
 - Multi-service bundle (PostgreSQL, Tomcat, indexing) with root-expecting postinst scripts; hard to make rootless and read-only.
 - No renovate datasource; versions change in the repo URL path.
 - Ubuntu 26.04 support by the vendor repo is unknown; only noble (24.04) and Debian 12/13 are listed.
