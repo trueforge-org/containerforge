@@ -14,7 +14,7 @@ Status: BLOCKED pending a licence check and a decision on the docker tooling. Th
 | Upstream install | `COPY --from=compose /usr/local/bin/docker-compose`. Docker GPG key fetched from download.docker.com, apt source `deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable`, then `docker-ce` installed. amd64 only. |
 | Upstream ENV / EXPOSE / VOLUME / ENTRYPOINT / USER | Not in the fetched Dockerfile. They come from `baseimage-cloud9`, which was not fetched: UNVERIFIED. |
 | Node / npm version and c9/core clone ref | Not in the fetched Dockerfile. UNVERIFIED (base image). |
-| Renovate | UNVERIFIED. No release tags to track. Suggested `datasource=git-refs depName=https://github.com/c9/core currentValue=master`, as with `apps/fenrus`, if a commit is pinned. |
+| Renovate | UNVERIFIED. No release tags to track. Suggested `datasource=git-refs depName=https://github.com/c9/core currentValue=master`, as in the fenrus plan (`apps/fenrus` does not exist yet; UNVERIFIED precedent, `apps/tvheadend` is the cited git-refs precedent there), if a commit is pinned. |
 | License | GitHub reports `NOASSERTION` for c9/core (https://api.github.com/repos/c9/core). Declared licence in `package.json`: UNVERIFIED (not present in the fetched excerpt). The repo LICENSE file: UNVERIFIED. Linuxserver wrapper: GPL-3.0. |
 | Repo status | `archived: true`, last push 2021-01-15 (https://api.github.com/repos/c9/core). |
 | Source URL | https://github.com/c9/core |
@@ -39,7 +39,7 @@ Status: BLOCKED pending a licence check and a decision on the docker tooling. Th
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` for the build and final stage, as the draft proposes. Reason: the draft's Node IDE with a native `node-pty` build needs node and build tools. Node version inside `python-node` is UNVERIFIED; check the `apps/python-node` Dockerfile or its settings before pinning a c9/core node requirement.
 
-Closest sibling: `apps/changedetection` and `apps/budge` (python-node). Confirmed to exist in `apps/` (listed in the batch). `apps/python-node` does not exist as its own folder (the base lives in `apps/python`'s sibling layout, UNVERIFIED).
+Closest sibling: `apps/changedetection` and `apps/budge` (python-node). Both exist in `apps/` (`apps/budge` uses the same `python-node:3.15.2@sha256:0e0409c2...` base; `apps/changedetection` uses 3.14.8). There is no `apps/python-node` folder, so the source of the `python-node` base image is UNVERIFIED (not in `apps/`).
 
 ## 4. Dockerfile
 

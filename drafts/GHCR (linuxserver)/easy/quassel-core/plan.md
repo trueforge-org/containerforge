@@ -61,14 +61,14 @@ Common steps:
 - `ports`: 4242 tcp (required). 10113 (ident): include only if the daemon actually binds it.
 - `env`: only what start.sh and the daemon read. Likely none required; do not invent names.
 - `volumes`: `/config`.
-- `dependencies`: `postgresql` (optional, see blocker below); list under `opt_dependencies` if the schema supports it, not `dependencies`, because the daemon runs on SQLite by default. Confirm the schema field name against the forgetool schema (UNVERIFIED).
+- `dependencies`: `postgresql` (optional, see blocker below); list under `opt_dependencies` (field exists, e.g. `apps/airsonic-advanced/settings.yaml`), not `dependencies`, because the daemon runs on SQLite by default.
 
 ## 7. start.sh
 
 - Idempotent. Create `/config/quasselcore` data dir only when missing.
 - Database: SQLite in `/config` by default. If PostgreSQL is chosen later, apply the DB password from env on every start.
 - Bind the core to `0.0.0.0` on port 4242 (`--listen` option, check the daemon's default; do not assume localhost).
-- Run with `--config-dir /config` (UNVERIFIED flag name) and `--nofork` so the process stays in the foreground.
+- Run with `--configdir=/config` (UNVERIFIED: flag spelling; check `quasselcore --help`). UNVERIFIED: whether a `--nofork` flag exists; quasselcore is believed to stay in the foreground by default, so confirm and do not pass a flag that is not in `--help`.
 - `exec` the daemon.
 - Readiness line: UNVERIFIED (check core log on first start: "listening" string).
 

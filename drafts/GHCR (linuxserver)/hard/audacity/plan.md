@@ -111,7 +111,7 @@ Reconciling the draft's security expectations: the chart runs as root with `read
 
 ## 10. Risks, caveats and open questions
 
-- **Blocker: no display server.** Audacity is a GUI application, and the ubuntu base has no X or Wayland. Upstream supplies one through the Selkies desktop base, which is not a pattern in this repo. Decision needed before any build: either approve a desktop-style base (not an existing exemplar, so it should not be invented here), or defer this app. This plan does not choose Selkies.
+- **Blocker: no display server.** Audacity is a GUI application, and the ubuntu base has no X or Wayland. Upstream supplies one through the Selkies desktop base, which is not a pattern in this repo (no Selkies base app exists; `apps/kasmvnc` and `apps/rdesktop` are existing desktop-over-browser images that could be studied as precedents, UNVERIFIED whether either fits as a base). Decision needed before any build: either approve a desktop-style base (not an existing exemplar, so it should not be invented here), or defer this app. This plan does not choose Selkies.
 - Version jump 3.0.2 to 4.0.2 may change behaviour (draft caveat, unverified).
 - arm64: an aarch64 AppImage exists. Upstream linuxserver only fetches x86_64, so arm64 is not proven in their image.
 - License is `NOASSERTION`, so the SPDX id is UNVERIFIED.

@@ -13,7 +13,7 @@ Status: BLOCKED on a Python 3 runtime decision. The upstream code and the linuxs
 | Upstream FROM | `ghcr.io/linuxserver/baseimage-alpine:3.13` (musl Alpine, not glibc). |
 | Upstream install | `apk add --no-cache curl python2 unrar unzip`; `ENV PYTHONIOENCODING=UTF-8`; `WORKDIR /app/couchpotato`; downloads `https://github.com/CouchPotato/CouchPotatoServer/archive/${COUCHPOTATO_RELEASE}.tar.gz` and extracts with `--strip-components=1`; `COPY root/ /`; `EXPOSE 5050`; `VOLUME /config`. No ENTRYPOINT, CMD, USER or arch logic. |
 | Python | Python 2 (`python2` Alpine package). No Python 3 support confirmed. |
-| Renovate | UNVERIFIED. If a commit is pinned: `datasource=git-refs depName=https://github.com/CouchPotato/CouchPotatoServer currentValue=master`, as with `apps/fenrus`. A Python 3 fork would need its own depName (UNVERIFIED which). |
+| Renovate | UNVERIFIED. If a commit is pinned: `datasource=git-refs depName=https://github.com/CouchPotato/CouchPotatoServer currentValue=master`, as in the fenrus plan (`apps/fenrus` does not exist yet; UNVERIFIED precedent, `apps/tvheadend` is the cited git-refs precedent there). A Python 3 fork would need its own depName (UNVERIFIED which). |
 | License | GPL-3.0 (https://api.github.com/repos/CouchPotato/CouchPotatoServer, `gh api`). |
 | Repo status | `archived: true`, last push 2021-08-04 (same source). |
 | Source URL | https://github.com/CouchPotato/CouchPotatoServer |
