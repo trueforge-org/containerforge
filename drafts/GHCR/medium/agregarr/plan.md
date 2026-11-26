@@ -79,7 +79,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "GPL-3.0-only"
+  default = "GPL-3.0"
 }
 
 variable "SOURCE" {
@@ -113,7 +113,7 @@ target "image-all" {
 }
 ```
 
-`LICENSE` is `GPL-3.0`, the SPDX identifier from GitHub (`GPL-3.0-only` is not confirmed; use `GPL-3.0` unless the LICENSE file says otherwise, UNVERIFIED). Validate with `docker buildx bake --print`.
+`LICENSE` is `GPL-3.0`, matching upstream `package.json` (`"license": "GPL-3.0"`) and the GitHub SPDX value. No `-only`/`-or-later` is claimed. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -135,7 +135,7 @@ volumes:
 dependencies: []
 ```
 
-Do not list `NODE_ENV` or the Playwright variables as user env (they are image-internal). Add app variables only after they are confirmed in the server source. `/config` is the persistent path; the chart's `/app/config` mount is replaced by `/config` through the symlink in section 7.
+Do not list `NODE_ENV` or the Playwright variables as user env (they are image-internal). Add app variables only after they are confirmed in the server source. `/config` is the persistent path; the chart's `/app/config` mount is replaced by `/config` through the build-time symlink (section 7).
 
 ## 7. start.sh
 
@@ -143,19 +143,16 @@ Do not list `NODE_ENV` or the Playwright variables as user env (they are image-i
 #!/usr/bin/env bash
 
 mkdir -p /config/data /config/fonts
+touch /config/DOCKER
 
-# The app reads and writes its config under /app/config. Point that at /config.
-if [[ ! -L /app/config ]]; then
-  rm -rf /app/config 2>/dev/null || true
-  ln -s /config /app/config
-fi
-
+# /app/config is a build-time symlink to /config (Dockerfile), so /app is never written here.
 cd /app || exit 1
-exec yarn start
+export NODE_ENV=production
+exec node dist/index.js
 ```
 
-- `/app/config` is needed by the app and is created at build time as `config/DOCKER`. A build-time symlink `ln -s /config /app/config` is preferred, so `start.sh` does not touch `/app`. Remove the `if` block then, and keep the `mkdir` only.
-- `yarn start` is upstream `CMD`. Prefer `exec node dist/index.js` with `NODE_ENV=production` so the PID 1 signal path is direct (`yarn` forwards signals poorly). Use `exec node dist/index.js` (the `start` script is `node dist/index.js` under `NODE_ENV=production`).
+- `/app/config` is needed by the app and step 6 creates it at build time as `config/DOCKER`. Add to the Dockerfile (after step 6): `rm -rf /app/config && ln -s /config /app/config`. Because the upstream `DOCKER` marker then lives in the volume, `start.sh` must `touch /config/DOCKER` (add it after the `mkdir`), idempotent. UNVERIFIED that the app only checks for the marker's existence.
+- Upstream `CMD` is `yarn start`, whose script is `NODE_ENV=production node dist/index.js` (confirmed in `package.json`). `exec node dist/index.js` with `NODE_ENV=production` gives a direct PID 1 signal path.
 - Listen address: confirm the server binds `0.0.0.0` (or `::`). Next.js binds to all interfaces by default when `HOSTNAME` is unset; confirm for the custom server in `dist/index.js` (UNVERIFIED). If it defaults to localhost, set the confirmed host variable.
 - Fontconfig must point at `/config/fonts` (not `/app/config/fonts`) once the symlink exists; the build writes the conf with `/config/fonts` directly.
 

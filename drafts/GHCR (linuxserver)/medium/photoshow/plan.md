@@ -55,7 +55,7 @@ Why: PHP plus nginx come from apt on the Ubuntu base, which matches the sibling 
    - Set `imagemagick_path` only if `/usr/bin/convert` is not the default (UNVERIFIED on 26.04: check `command -v convert`).
    - Timezone: apply at runtime (section 7) through php-fpm `php_admin_value[date.timezone]`, not in `config.php`.
 6. Persistence of `user/`:
-   - `cp -a /app/photoshow/user /defaults/photoshow/user` (seed copy, read by start.sh).
+   - `mkdir -p /defaults/photoshow && cp -a /app/photoshow/user /defaults/photoshow/user` (seed copy, read by start.sh).
    - `rm -rf /app/photoshow/user && ln -s /config/photoshow/user /app/photoshow/user`. This is the one symlink; it points at a real `/config` directory (the venv rule about symlinks does not apply here). UNVERIFIED that PhotoShow only uses `user/` relative to its root (check `inc/` in the first run).
 7. Remove the `docker/` folder and `.git` leftovers from `/app/photoshow` (not needed at runtime).
 8. Ownership and license: `chown -R apps:apps /app/photoshow /defaults/photoshow` is NOT needed for `/app` (read-only). Keep `/app` `chmod -R 755`. No LICENSE file exists upstream, so no `/usr/share/licenses` file (section 10).

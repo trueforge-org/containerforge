@@ -14,7 +14,7 @@
 | Checksum source | The npm registry publishes `dist.shasum` (`863d2e267ef7cd7c2ea859a8a34538c6828e9cb2`) and `dist.integrity` (sha512) for 26.11.0. The GitHub release has no checksum file. npm verifies the tarball itself, so no extra checksum step is needed. |
 | Upstream Dockerfile reviewed | `packages/sync-server/docker/alpine.Dockerfile` at blob `1766241e3f4b3c578e424c4fa15f1eb83c0da17d` (tag v26.11.0). Two stages on `alpine:3.23` (musl). Builder runs `yarn workspaces focus @actual-app/sync-server --production`, then the prod stage copies `node_modules` and `build` to `/app`. Creates user `actual` (UID 1001) and `/data`. `ENTRYPOINT ["/sbin/tini","-g","--"]`, `EXPOSE 5006`, `CMD ["node","app.js"]`. |
 | Port | 5006 (upstream `EXPOSE`; chart `targetPort 5006`). |
-| Env vars | Only `NODE_ENV=production` is confirmed (upstream Dockerfile). The data-directory variable and the listen-address variable are **UNVERIFIED** (they are read in `packages/sync-server/src/load-config.js` at tag v26.11.0, which this run did not fetch). The chart sets `env: {}`. |
+| Env vars | Only `NODE_ENV=production` is confirmed (upstream Dockerfile). Confirmed in `packages/sync-server/src/load-config.js` at tag v26.11.0: `ACTUAL_DATA_DIR` (default `/data` if it exists, else project root), `ACTUAL_PORT` (default 5006, or `PORT`), `ACTUAL_HOSTNAME` (default `::`, all interfaces), `ACTUAL_SERVER_FILES` and `ACTUAL_USER_FILES` (default under the data dir). The chart sets `env: {}`. |
 | Data path | Upstream image creates `/data`; the chart mounts `/data`. The draft's `/config` is a ContainerForge choice (see section 9). |
 | Dependencies | None. SQLite is embedded. |
 | Draft versus verified | Draft's `copy-from` = `no` is correct (upstream is musl). Draft's `Application binary` AppImage link is wrong for a server image (see blockers). Draft's `amd64`/`arm64` = `yes` holds only through npm. |
@@ -36,7 +36,7 @@ No `defaults/`, `etc/` or `health/` needed. Never `root/`. No `DOWNSTREAM_CHANGE
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. `ENV HOME=/config npm_config_cache=/tmp/npm NPM_CONFIG_UPDATE_NOTIFIER=false`.
+2. `ENV HOME=/tmp npm_config_cache=/tmp/npm NPM_CONFIG_UPDATE_NOTIFIER=false NODE_ENV=production ACTUAL_DATA_DIR=/config/data`.
 3. Install the server into a fixed prefix (no lockfile is shipped in the npm tarball, so the version is pinned exactly):
    `npm install --omit=dev --no-audit --no-fund --prefix /app/actual-server @actual-app/sync-server@${VERSION}`
 4. Verify the Node runtime: `node -e 'process.exit(process.versions.node.split(".").map(Number)[0] >= 22 ? 0 : 1)'` (fails the build if the base has a Node older than 22).
@@ -53,7 +53,7 @@ VOLUME /config
 CMD ["/start.sh"]
 ```
 
-Do not chown `/app` to `apps` if the build plan rejects it; the rule is read-only `/app` at runtime, which the 755 root-owned layout still satisfies. Prefer `chown -R root:root /app` followed by `chmod -R a+rX /app` if reviewers object.
+`/app` stays read-only at runtime regardless of the `chown` in step 6; the root-owned alternative (`chown -R root:root /app && chmod -R a+rX /app`) also works.
 
 ## 5. docker-bake.hcl
 
@@ -117,6 +117,12 @@ ports:
     protocol: tcp
     required: true
 env:
+  - name: ACTUAL_DATA_DIR
+    default: "/config/data"
+    required: false
+  - name: ACTUAL_PORT
+    default: "5006"
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false
@@ -126,28 +132,23 @@ volumes:
 dependencies: []
 ```
 
-Only add the data-directory and listen-address variables once confirmed in `load-config.js` (section 10). Do not list unconfirmed names. The `TZ` entry follows sibling apps.
+`ACTUAL_DATA_DIR` and `ACTUAL_PORT` are confirmed in `load-config.js`; `start.sh` exports the data dir and the app reads the port itself. `ACTUAL_HOSTNAME` is not listed because its default `::` is wanted. The `TZ` entry follows sibling apps.
 
 ## 7. start.sh
 
 ```bash
 #!/usr/bin/env bash
 
-mkdir -p /config/data
-
-# Make the server's data directory point at persistent storage.
-# Replace with the confirmed env var (section 10), or keep the symlink below.
-if [[ ! -e /app/actual-server/data ]]; then
-  ln -s /config/data /app/actual-server/data
-fi
+export ACTUAL_DATA_DIR="${ACTUAL_DATA_DIR:-/config/data}"
+mkdir -p "${ACTUAL_DATA_DIR}"
 
 cd /app/actual-server/node_modules/@actual-app/sync-server || exit 1
 exec node build/bin/actual-server.js
 ```
 
 - Idempotent: it creates `/config/data` only when missing and seeds nothing. Upstream creates the first-run state (budget file, server password) through the browser setup, so the script does not write user state.
-- No writes under `/app`: the symlink targets `/config`, so this `ln` is the one place it must exist before first use. If the data dir is a symlink created at build time instead (in the Dockerfile, `ln -s /config/data /app/actual-server/data`), delete the `if` block. Prefer the build-time symlink so `start.sh` never touches `/app`.
-- Listen address: confirm the server binds `0.0.0.0` (or `::`). If it defaults to localhost, set the confirmed hostname env var in the script (section 10).
+- No writes under `/app`: the data directory is set through `ACTUAL_DATA_DIR`, so no symlink is needed.
+- Listen address: upstream `ACTUAL_HOSTNAME` defaults to `::` (all interfaces); confirm from outside the container on the first run.
 - `exec` hands PID 1 to the process; the upstream `tini` is not needed because the base image provides init handling (UNVERIFIED for the base; check `apps/budge` if the process does not exit cleanly on `SIGTERM`).
 - Caches go to `/tmp` (`npm_config_cache` set in the Dockerfile).
 
@@ -175,7 +176,7 @@ filePaths:
 
 | Upstream write path | Remap |
 | --- | --- |
-| `/data` (upstream Docker data dir, chart PVC mount) | `ln -s /config/data /app/actual-server/data` at build time, or the confirmed data env var pointing to `/config/data`. |
+| `/data` (upstream Docker data dir, chart PVC mount) | `ACTUAL_DATA_DIR=/config/data` (confirmed env var; set in the Dockerfile and `start.sh`). |
 | `/app` (upstream `/app` tree) | Read-only at runtime. The server reads its code only. |
 | npm cache, build scratch | `/tmp` (`npm_config_cache=/tmp/npm`). |
 | Chart `securityContext` root (`runAsUser 0`) | Not used. The image runs as `apps` (`USER apps`). |
@@ -190,7 +191,7 @@ Security expectations from the draft are confirmed as expectations only: the cha
 - **Draft binary link is wrong**: the AppImages are the desktop app. Use the npm package (section 1). Recorded so the next reviewer does not switch back to the AppImage.
 - **No lockfile in the npm tarball**: the version is pinned, but transitive dependencies resolve at build time. Accept this for now, or switch to a source build of the tag with the vendored `.yarn` release and `yarn.lock` (the upstream approach). The source build is heavier, so it is the fallback.
 - **Native module**: `better-sqlite3` installs its prebuilt binary from GitHub at build time. It needs network access during the build. If the prebuild is missing for arm64/glibc, the build must compile it (needs `build-essential`, `python3`; UNVERIFIED that the base has these).
-- **Data and listen env names UNVERIFIED**: read `packages/sync-server/src/load-config.js` and the `docker` notes at tag v26.11.0 before writing `settings.yaml` env entries. Until then the symlink approach in section 4 is the working path.
+- **Data and listen env names** are confirmed in `load-config.js` at v26.11.0 (section 1); no symlink is used.
 - **First-run setup**: the browser asks for the server password and the budget file. The `reset-password` script exists in the package (`scripts` list). Passwords are not required at container start, so the test is unaffected.
 - **Chart tag**: the chart pins `26.11.0@sha256:06cf186569cf58d93e12659ff1a517b65b5b0ebee7050a3991d4bd8a1d398da6` for the GHCR image. This plan uses the npm version, so the GHCR digest is not reused.
 - **Upstream image arch list**: UNVERIFIED (no manifest fetched).

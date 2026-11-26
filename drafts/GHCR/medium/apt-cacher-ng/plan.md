@@ -5,8 +5,8 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Ubuntu 26.04 (`resolute`) archive package `apt-cacher-ng 3.7.5-1.1` (packages.ubuntu.com/resolute/apt-cacher-ng, fetched). The upstream image is stale: its last release is `v3.7.4-20220421` (sameersbn/docker-apt-cacher-ng, `gh api`). Build the package from apt, pinned to the resolute version (exact pocket UNVERIFIED). |
-| Renovate | For the apt pin: no existing annotation pattern confirmed for an apt package in this repo; use the same pinned-apt pattern as `apps/valkey` (`PACKAGE_VERSION` ARG) with a renovate comment only if a datasource is confirmed. Proposed: `datasource=repology` (UNVERIFIED for this repo). |
+| Version to build | Ubuntu 26.04 (`resolute`) archive package `apt-cacher-ng 3.7.5-1.1` (packages.ubuntu.com/resolute/apt-cacher-ng; not re-fetched in this verification pass). The upstream image is stale: its last release is `v3.7.4-20220421` (sameersbn/docker-apt-cacher-ng, `gh api`). Build the package from apt, pinned to the resolute version (exact pocket UNVERIFIED). |
+| Renovate | `apps/valkey/docker-bake.hcl` (apt-pinned sibling) has no renovate comment (repology disabled, version tied to the base image). No datasource is confirmed for this app. |
 | License | MIT for the image repository (`gh api`). The Debian/Ubuntu package copyright file is UNVERIFIED; the apt-cacher-ng project is GPL-licensed in its upstream source tarball (UNVERIFIED). Use the package's `/usr/share/doc/apt-cacher-ng/copyright` as the source of truth for `LICENSE` once installed. |
 | Source / docs | Application: https://www.unix-ag.uni-kl.de/~bloch/acng/ (not fetched). Docs: https://www.unix-ag.uni-kl.de/~bloch/acng/html/ (not fetched). |
 | Per-arch download | Apt package, not a download. `amd64` and `arm64` availability of `apt-cacher-ng 3.7.5-1.1` on resolute is UNVERIFIED per arch (only the package page was read). |
@@ -66,12 +66,8 @@ No `defaults/` needed unless a config file is shipped. Use `etc/apt-cacher-ng/ac
 7. Tail:
 
 ```dockerfile
-COPY --chmod=0755 start.sh /start.sh
-
 USER apps
 COPY --chmod=0755 . /
-
-ENV APT_CACHER_NG_PORT=3142
 
 EXPOSE 3142
 
@@ -91,7 +87,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=repology depName=... versioning=loose
+  // NOTE: Ubuntu version is tied to the version of the base image in the Dockerfile (same as apps/valkey, which has no renovate comment)
   default = "3.7.5"
 }
 
@@ -135,7 +131,7 @@ target "image-all" {
 }
 ```
 
-`LICENSE` is UNVERIFIED: the upstream project license must be confirmed from the package copyright file before setting it (draft and repo give MIT only for the image repo). The renovate datasource for the apt package is not confirmed in this repo; check how `apps/valkey` is annotated and copy that exact pattern. Validate with `docker buildx bake --print`.
+`LICENSE` (`GPL-2.0-or-later`) is UNVERIFIED: confirm from the package copyright file before merging (draft and repo give MIT only for the image repo). `apps/valkey/docker-bake.hcl` carries no renovate datasource comment for its apt package (a NOTE says the version is tied to the base image), so none is invented here; the docker-bake rule asking for one cannot be met for an apt package without a confirmed datasource. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 

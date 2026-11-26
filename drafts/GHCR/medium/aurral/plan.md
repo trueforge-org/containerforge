@@ -12,13 +12,13 @@
 | Binary | No release assets on the v3.1.0 release. Build from source. |
 | Per-arch download | Source tarball `https://github.com/lklynet/aurral/archive/refs/tags/v${VERSION}.tar.gz` (UNVERIFIED: not fetched). |
 | Checksum source | None on the release. The yt-dlp and cloudflared inputs are covered below. |
-| Upstream Dockerfile reviewed | Commit 84535c99df51 (https://raw.githubusercontent.com/lklynet/aurral/84535c99df51/Dockerfile). Re-check at the v3.1.0 tag (UNVERIFIED). |
-| Upstream base images | `node:26.13.0-trixie-slim` (glibc Debian, named `node-base`), `ghcr.io/voidzero-dev/vite-plus:1.7.0` (builder and backend-deps, uses `vp install`), `mwader/static-ffmpeg:9.0.2-1` (ffmpeg, ffprobe), `cloudflare/cloudflared:2026.11.0` (cloudflared). All pinned by digest upstream. |
+| Upstream Dockerfile reviewed | Read at tag v3.1.0 (`gh api repos/lklynet/aurral/contents/Dockerfile?ref=v3.1.0`); the draft traces commit 84535c99df51 (3.0.0). |
+| Upstream base images | `node:26.13.0-trixie-slim` (glibc Debian, named `node-base`), `ghcr.io/voidzero-dev/vite-plus:1.7.0` (builder and backend-deps, uses `vp install`), `mwader/static-ffmpeg:9.0.2-1` (ffmpeg, ffprobe), `cloudflare/cloudflared:2026.11.1@sha256:e613aadbc2d9511785d2e67a86b0c8ac18dd63a3f9af0d06faf04cbfdcb35f2d` (cloudflared; checked at tag v3.1.0). All pinned by digest upstream. |
 | Upstream build steps | `builder`: `vp install --frozen-lockfile --filter aurral-frontend`, then `pnpm --filter aurral-frontend run build` with `APP_VERSION`, `GITHUB_REPO=lklynet/aurral`, `RELEASE_CHANNEL=stable` mapped to `VITE_*`. `backend-deps`: `vp install --frozen-lockfile --prod --filter aurral --filter aurral-backend`, then a check that `sharp` loads. |
 | Runtime apt packages | `fontconfig fonts-dejavu-core fonts-noto-color-emoji python3 ca-certificates libjemalloc2 tini` (`--no-install-recommends`). |
-| yt-dlp | `ADD --chmod=755 --checksum=sha256:e51e69e8…` from `https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp` to `/usr/local/bin/yt-dlp`. The full checksum is truncated in the fetch and must be read from the release's SHA2-256SUMS file (UNVERIFIED full hash). |
-| cloudflared | Upstream copies `/usr/local/bin/cloudflared` from `cloudflare/cloudflared:2026.11.0` (digest-pinned). No separate checksum. |
-| ENTRYPOINT / CMD | `ENTRYPOINT ["tini", "-s", "--", "docker-entrypoint.sh"]`, `CMD ["node", "--max-semi-space-size=4", "backend/server.ts"]`. The `docker-entrypoint.sh` script was NOT fetched (UNVERIFIED). |
+| yt-dlp | `ADD --chmod=755 --checksum=sha256:e51e69e8…` from `https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp` to `/usr/local/bin/yt-dlp`. Full checksum at v3.1.0: `e51e69e89489f199530f13d32a4342da3ddb2cf34842f364603a066db05afbf3` (from the upstream Dockerfile, not re-derived from yt-dlp's SHA2-256SUMS). |
+| cloudflared | Upstream (v3.1.0) copies `/usr/local/bin/cloudflared` from `cloudflare/cloudflared:2026.11.1` (digest-pinned). No separate checksum. |
+| ENTRYPOINT / CMD | `ENTRYPOINT ["tini", "-s", "--", "docker-entrypoint.sh"]`, `CMD ["node", "--max-semi-space-size=4", "backend/server.ts"]`. `backend/docker-entrypoint.sh` (read at v3.1.0): if root, it creates the user from `AURRAL_UID`/`AURRAL_GID` or `PUID`/`PGID`, `chown -R`s `AURRAL_DATA_DIR` (default `/config`) and drops privileges with `setpriv`; otherwise it just `exec "$@"`. Nothing else, so a non-root `start.sh` loses no behaviour. |
 | USER | Not set. The `nodejs` user (UID/GID 1001) is created and not selected, so upstream runs as root unless the entrypoint drops privileges (UNVERIFIED). |
 | EXPOSE / VOLUME | `EXPOSE 3001`. No `VOLUME`. `/config` is created and owned by `nodejs`. |
 | ENV (Dockerfile) | `LD_PRELOAD=libjemalloc.so.2`, `MALLOC_CONF=background_thread:true,dirty_decay_ms:1000,muzzy_decay_ms:1000`, `APP_VERSION`, `GITHUB_REPO`. Other runtime env vars: UNVERIFIED. |
@@ -39,7 +39,7 @@ Add `defaults/` only if the app needs a seeded config. Never use `root/`. No `DO
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Reason: the app is a Node backend, and yt-dlp needs Python 3, which the base already has. The draft gives python-node as the runtime. Confirm Node 24 or newer is in the base (UNVERIFIED). Closest siblings: `apps/budge` (python-node, npm build) and `apps/changedetection` (python-node with a Node build).
+Reason: the app is a Node backend, and yt-dlp needs Python 3, which the base already has. The draft gives python-node as the runtime. Upstream `.nvmrc` is 26.12.0 and the upstream image uses `node:26.13.0`; the base's Node (24 per the `apps/budge` comment) must run `backend/server.ts` directly (type stripping), UNVERIFIED. Closest siblings: `apps/budge` (python-node, npm build) and `apps/changedetection` (python-node with a Node build).
 
 The `ffmpeg` and `ffprobe` binaries come from a separate stage (see section 4). `cloudflared` also comes from a separate stage. Neither is a `COPY --from` of a musl-built image: `mwader/static-ffmpeg` is a static build, and `cloudflare/cloudflared` is glibc-independent Go.
 
@@ -51,9 +51,9 @@ The `ffmpeg` and `ffprobe` binaries come from a separate stage (see section 4). 
 4. Frontend: `pnpm --filter aurral-frontend run build` with `VITE_APP_VERSION=${APP_VERSION}`, `VITE_GITHUB_REPO=${GITHUB_REPO}`, `VITE_RELEASE_CHANNEL=${RELEASE_CHANNEL}`.
 5. Backend deps: `pnpm install --frozen-lockfile --prod --filter aurral --filter aurral-backend`, then `node -e "require('sharp')"` in `backend/`.
 6. Final stage `FROM <python-node>` with `USER root`:
-   - `apt-get install -y --no-install-recommends fontconfig fonts-dejavu-core fonts-noto-color-emoji libjemalloc2 tini` (python3 and ca-certificates are already in the base; check before installing).
-   - `COPY --from=ghcr.io/trueforge-org/...`: not used. Copy ffmpeg and ffprobe with `COPY --from=mwader/static-ffmpeg:9.0.2-1@sha256:f5d100184884... /ffmpeg /usr/local/bin/ffmpeg` and the same for `/ffprobe` (paths UNVERIFIED: check the image layout with `docker run --rm <image> ls /`).
-   - `COPY --from=cloudflare/cloudflared:2026.11.0@sha256:b94b96edf2c9... /usr/local/bin/cloudflared /usr/local/bin/cloudflared`.
+   - `apt-get install -y --no-install-recommends fontconfig fonts-dejavu-core fonts-noto-color-emoji libjemalloc2` (python3 and ca-certificates are already in the base; check before installing; `tini` is already in the ubuntu base).
+   - `COPY --from=ghcr.io/trueforge-org/...`: not used. Copy ffmpeg and ffprobe with `COPY --from=mwader/static-ffmpeg:9.0.2-1@sha256:f5d100184884eb3e82b0eb14bb5ebf98da99826ac824989720297fb9ef21c822 /ffmpeg /ffprobe /usr/local/bin/` (same form as upstream v3.1.0).
+   - `COPY --from=cloudflare/cloudflared:2026.11.1@sha256:e613aadbc2d9511785d2e67a86b0c8ac18dd63a3f9af0d06faf04cbfdcb35f2d /usr/local/bin/cloudflared /usr/local/bin/cloudflared`.
    - yt-dlp: `ADD --chmod=755 --checksum=sha256:<full hash> https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp /usr/local/bin/yt-dlp` (full hash from SHA2-256SUMS, see section 1).
    - Copy the built app: `/app/aurral/` from the builder: `backend/`, `lib/`, `frontend/dist`, `node_modules`, and `package.json` files. Keep `/app` read-only at runtime.
    - License: `COPY --from=builder /tmp/src/LICENSE /usr/share/licenses/aurral/LICENSE`. Also ship the notices for yt-dlp and cloudflared (licenses UNVERIFIED; check the release assets).
@@ -70,7 +70,7 @@ VOLUME /config
 WORKDIR /app/aurral
 ```
 
-The entrypoint: `start.sh` replaces the upstream `docker-entrypoint.sh`. Use `ENTRYPOINT ["tini", "-s", "--", "/app/aurral/start.sh"]` only if `start.sh` ends with `exec`. Otherwise keep `CMD` as the start command (decision for the builder; the default in this plan is to let `start.sh` own the command).
+`start.sh` replaces the upstream `docker-entrypoint.sh` and owns the command through the base image's `ENTRYPOINT` (`tini -- /entrypoint.sh`, from `apps/ubuntu`); do not set a new `ENTRYPOINT`.
 
 ## 5. docker-bake.hcl
 
@@ -106,7 +106,7 @@ volumes:
 dependencies: []
 ```
 
-Only list env vars the app reads, and add them only after reading `docker-entrypoint.sh` and the backend config at the tag (UNVERIFIED). Do not invent `PORT` or `HOST` names.
+`AURRAL_DATA_DIR` (default `/config`) is read by upstream's entrypoint at v3.1.0 and may be listed; further names only after reading the backend config at the tag (UNVERIFIED). Do not invent `PORT` or `HOST` names.
 
 ## 7. start.sh
 
@@ -121,7 +121,7 @@ exec node --max-semi-space-size=4 backend/server.ts
 
 - Idempotent: creates `/config` only, seeds nothing (the app's first-run data layout is UNVERIFIED).
 - Writes only to `/config` and `/tmp`. Caches go to `/tmp` through `XDG_CACHE_HOME`.
-- Replaces the upstream `docker-entrypoint.sh`. Check what that script does (permission fix, privilege drop, env mapping) before removing its behavior. Port it into `start.sh` where it applies.
+- Replaces the upstream `docker-entrypoint.sh`, which only drops privileges and ensures `/config` (read at v3.1.0), so nothing needs porting. Keep `LD_PRELOAD`/`MALLOC_CONF` from the Dockerfile `ENV`.
 - Bind address: check that the server listens on all interfaces at the tag (UNVERIFIED).
 
 ## 8. container-test.yaml
@@ -159,7 +159,7 @@ filePaths:
 | Node and sharp caches | `/tmp` only. |
 | yt-dlp self-update | Disabled by design: the binary is read-only in `/usr/local/bin`. |
 
-- Upstream runs as root (no USER). Our image runs as `apps` (UID 568 by chart default, UNVERIFIED for the base's `apps` user) with `--read-only --tmpfs /tmp`.
+- Upstream runs as root (no USER). Our image runs as `apps` (UID per the base image) with `--read-only --tmpfs /tmp`.
 - Port 3001 is above 1024, so no port change is needed.
 - Draft expectations hold: non-root and read-only rootfs are compatible with this plan, provided the app writes only to `/config` and `/tmp`. Verify both in the probe run.
 - Chart `/var/cache` emptyDir maps to `/tmp` here. Record this in the PR.
@@ -167,7 +167,7 @@ filePaths:
 ## 10. Risks, caveats and open questions
 
 - Draft caveats confirmed: the cloudflared binary is per-arch by image digest (no build-time download), and the pnpm monorepo build is large and slow.
-- Unresolved: `docker-entrypoint.sh` was not read. It may contain runtime logic that is needed (permission fixes, env mapping). This blocks a correct `start.sh`. Fetch it at the tag before writing `start.sh`.
+- `docker-entrypoint.sh` was read (section 1): only a privilege drop and `AURRAL_DATA_DIR` default `/config`; not needed for a rootless image. `AURRAL_DATA_DIR` is an upstream env name (could be added to `settings.yaml`, default `/config`).
 - Unresolved: the server's data path. The chart mounts `/config`, but the app's own path is UNVERIFIED.
 - Unresolved: whether the `vp` CLI is required. The pnpm route is preferred; if it cannot reproduce the build, use the vite-plus image as a build stage and note it in the PR.
 - Version: the draft targets 3.0.0, upstream latest is 3.1.0. Build the latest tag, and state the change in the PR.

@@ -12,11 +12,11 @@
 | Binary | No release assets on v1.0.0. Build the UI from source. |
 | Per-arch download | Source tarball `https://github.com/batnoter/batnoter/archive/refs/tags/v${VERSION}.tar.gz` (UNVERIFIED: not fetched). |
 | Checksum source | None on the release. Pin the tag. |
-| Upstream Dockerfile reviewed | Commit 8722c3af2b81233f158ca17e4818b9251c8cc1d3 (the draft traced repo HEAD, not the tag; https://raw.githubusercontent.com/batnoter/batnoter/8722c3af2b81233f158ca17e4818b9251c8cc1d3/Dockerfile). Re-check the Dockerfile at the v1.0.0 tag (UNVERIFIED). |
+| Upstream Dockerfile reviewed | Read at tag v1.0.0 (`gh api repos/batnoter/batnoter/contents/Dockerfile?ref=v1.0.0`): identical to the stages below. The draft traced commit 8722c3af (HEAD). The tag tree is UI only (`src`, `public`, `nginx`, `package-lock.json`, `package.json`, `LICENSE`; no backend code). |
 | Upstream stages | Stage 1: `node:16-alpine`, `WORKDIR /app`, `COPY . .`, `RUN npm i`, `RUN npm run build`. Stage 2: `nginx:stable-alpine`, copies `/app/build` to `/usr/share/nginx/html` and `/app/nginx/default.conf` to `/etc/nginx/conf.d/default.conf`. |
 | ENTRYPOINT / CMD | None. The image inherits the nginx base. |
 | USER | None (base default). |
-| EXPOSE | `EXPOSE 3000`. This does not prove the listen port: the nginx `listen` directive in `default.conf` is not shown (UNVERIFIED). The draft's 8080 is inferred and not confirmed. |
+| EXPOSE | `EXPOSE 3000`, and `nginx/default.conf` at v1.0.0 has `listen 3000;` with `root /usr/share/nginx/html; index index.html index.htm; try_files $uri $uri/ /index.html;` (SPA fallback). The draft's 8080 is a ContainerForge rootless-friendly choice, not upstream. |
 | ENV | None in the Dockerfile. |
 | Arch | No conditionals. `node:16-alpine` and `nginx:stable-alpine` are Alpine/musl; the build does not depend on arch. |
 | copy-from | No. The upstream image is Alpine (musl) and contains only the static UI, so it does not run on glibc ubuntu. |
@@ -29,7 +29,7 @@
 - `apps/batnoter/settings.yaml`
 - `apps/batnoter/container-test.yaml`
 - `apps/batnoter/start.sh`
-- `apps/batnoter/etc/nginx/conf.d/default.conf` (our own nginx config; `etc/` is on the dockerignore allow-list)
+- `apps/batnoter/etc/batnoter/nginx.conf` (our own complete nginx config; `etc/` is on the dockerignore allow-list)
 
 Never use `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
@@ -45,13 +45,13 @@ Build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c290431
 
 1. Build stage `FROM <python-node> AS build` with `ARG VERSION`, `USER root`.
 2. Source: `curl -fL "https://github.com/batnoter/batnoter/archive/refs/tags/v${VERSION}.tar.gz" | tar xz -C /tmp/src --strip-components=1`. The tag is `v1.0.0`; `VERSION` is `1.0.0`.
-3. Install and build in the app folder: `cd /tmp/src && npm ci` (the lockfile, if it exists, must be present at the tag; otherwise `npm install`, UNVERIFIED), then `npm run build`.
+3. Install and build in the app folder: `cd /tmp/src && npm ci` (`package-lock.json` exists at v1.0.0, upstream used `npm i`), then `npm run build`.
 4. Final stage `FROM <nginx>` with `USER root` only if a copy needs it (no apt needed).
 5. Copy the UI and our nginx config:
    - `COPY --from=build /tmp/src/build /app/batnoter/html` (the build output path; keep `/app` read-only at runtime).
-   - Nginx serves from `/app/batnoter/html`. Our `etc/nginx/conf.d/default.conf` listens on the chosen port and sets `root /app/batnoter/html`. Avoid writes under `/usr/share/nginx/html`.
+   - Nginx serves from `/app/batnoter/html`. Our `etc/batnoter/nginx.conf` listens on 8080, sets `root /app/batnoter/html` and keeps upstream's `try_files $uri $uri/ /index.html;` SPA fallback. Avoid writes under `/usr/share/nginx/html`.
    - License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/batnoter/LICENSE`.
-6. Writable paths for nginx: `client_body_temp_path`, `proxy_temp_path`, `fastcgi_temp_path`, `uwsgi_temp_path`, `scgi_temp_path`, `pid` set to `/tmp/...` in our `default.conf` (or the global `nginx.conf` of the sibling). Set `/var/cache/nginx` aside, it is not writable at runtime.
+6. Writable paths for nginx: `client_body_temp_path`, `proxy_temp_path`, `fastcgi_temp_path`, `uwsgi_temp_path`, `scgi_temp_path`, `pid` set to `/tmp/...` in our own `etc/batnoter/nginx.conf` (a complete config, modelled on `apps/nginx/defaults/nginx.conf`, which uses `pid /tmp/nginx.pid` and `/tmp/*_temp` paths, plus `include /etc/nginx/mime.types`). `/var/cache/nginx` is not writable at runtime.
 7. ENV: `HOME=/config`, `XDG_CACHE_HOME=/tmp`.
 8. Tail:
 
@@ -59,9 +59,10 @@ Build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c290431
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE <port>
+EXPOSE 8080
 VOLUME /config
 WORKDIR /app/batnoter
+CMD ["/start.sh"]
 ```
 
 `VOLUME /config` is listed in the chart as `/config`. The UI has no state, so `/config` can stay empty. Keep it because the sibling pattern and the `settings.yaml` schema expect `/config`.
@@ -87,7 +88,7 @@ Four standard targets and the default group copied from `apps/nginx/docker-bake.
 schema_version: 1
 upstream_env_url: "https://github.com/batnoter/batnoter"
 ports:
-  - port: <chosen port>
+  - port: 8080
     protocol: tcp
     required: true
 env:
@@ -100,7 +101,7 @@ volumes:
 dependencies: []
 ```
 
-Use the sibling `apps/nginx` env pattern (`NGINX_PORT`) only if our config reads it. The port must match `default.conf`.
+The sibling `apps/nginx` lists `NGINX_PORT`; do not list it here, because our fixed config does not read it. The port must match `etc/batnoter/nginx.conf`.
 
 ## 7. start.sh
 
@@ -109,12 +110,12 @@ Use the sibling `apps/nginx` env pattern (`NGINX_PORT`) only if our config reads
 set -euo pipefail
 
 mkdir -p /config
-exec nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
+exec nginx -c /etc/batnoter/nginx.conf -g 'daemon off;'
 ```
 
 - Idempotent. Seeds nothing; the UI is stateless.
 - Writes only to `/config` (empty) and `/tmp`.
-- Use the start command of the sibling `apps/nginx`, not this one, if it differs.
+- The sibling `apps/nginx` instead seeds `/config/nginx.conf` from `/defaults` via `docker-entrypoint.d/03-copyconfig.sh` and runs `CMD ["nginx", "-c", "/config/nginx.conf", "-g", "daemon off;"]`. This plan keeps the config read-only in `/etc/batnoter` because the UI is stateless; switch to the sibling pattern if user-editable config is wanted.
 - `exec` keeps nginx as PID 1 under tini.
 
 ## 8. container-test.yaml
@@ -124,13 +125,13 @@ exec nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
 
 timeoutSeconds: 60
 tcp:
-- port: '<chosen port>'
+- port: '8080'
 http:
-- port: '<chosen port>'
+- port: '8080'
   path: /
 filePaths:
 - /app/batnoter/html/index.html
-- /etc/nginx/conf.d/default.conf
+- /etc/batnoter/nginx.conf
 - /usr/share/licenses/batnoter/LICENSE
 ```
 
@@ -146,16 +147,16 @@ filePaths:
 | `/usr/share/nginx/html` | Not used. The UI is served from `/app/batnoter/html`. |
 | `/config` | Empty, reserved for future state. |
 
-- Port: nginx on `USER apps` cannot bind below 1024. Use a port above 1024. The sibling `apps/nginx` uses 8080, so use 8080 unless a reason is found (UNVERIFIED convention choice). The draft's 8080 is therefore kept, but it is inferred, not upstream-confirmed. Note this in the PR.
+- Port: nginx on `USER apps` cannot bind below 1024. Use a port above 1024. The sibling `apps/nginx` uses 8080 (`EXPOSE 8080`, `settings.yaml` port 8080), so 8080 is used. It is not the upstream port (3000). Note this in the PR.
 - Read-only rootfs: `--read-only --tmpfs /tmp` must work. Confirm nginx starts with no writes outside `/tmp` and `/config`.
 - The draft's "chart sets runAsUser 0" is replaced by `USER apps`. Non-root is possible once the port and temp paths are fixed, which this plan does.
 - No privileged setting and no extra persistence.
 
 ## 10. Risks, caveats and open questions
 
-- Draft caveat confirmed: the image is only the static UI. Without the backend, the app cannot work end to end. Whether a backend is needed is UNVERIFIED because the fetched Dockerfile does not show backend code. Check the repo's `README` or source at the tag before the PR. If a backend is needed, this app is blocked on a second container, so stop and report.
-- Draft caveat confirmed: the trace used repo HEAD (8722c3a), not the v1.0.0 tag. The plan builds the tag, so the built code may differ from the draft trace. Re-check the Dockerfile at the tag.
-- Upstream nginx `listen` port is UNVERIFIED (`default.conf` was not fetched). Our config replaces it, so this does not block the build, but the port in `settings.yaml` is our choice.
+- Draft caveat confirmed: the image is only the static UI. Without the backend, the app cannot work end to end. The v1.0.0 tag tree contains only the UI (no backend code), and the backend is a separate project (UNVERIFIED which repo and how the UI is pointed at it; check `src` and `README` for the API base URL). Say this in the PR; no `apps/<dep>` is declared in `dependencies`.
+- Draft caveat resolved: the Dockerfile at v1.0.0 was read and matches the HEAD trace's stages.
+- Upstream nginx listens on 3000 (confirmed at v1.0.0); our config replaces it with 8080.
 - Maintenance risk: the repo was last pushed 2022-10-01, and upstream Node 16 is end of life. The build may fail on the base's Node version. Record the fallback if it does.
 - Copy-from: no. The upstream image is musl and does not run on glibc ubuntu.
 - arm64: no arch conditionals upstream. Published arm64 is UNVERIFIED. Build amd64 first.

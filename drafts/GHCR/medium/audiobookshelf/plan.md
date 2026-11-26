@@ -48,8 +48,8 @@ Closest siblings: `apps/budge` (python-node, npm build, `/app` plus `/config`) a
    `curl -fL -o /tmp/abs.tar.gz "https://github.com/advplyr/audiobookshelf/archive/refs/tags/v${VERSION}.tar.gz"` then `tar xf /tmp/abs.tar.gz -C /tmp/src --strip-components=1`. The `v` prefix matters: the tag is `v2.38.0` while `VERSION` is `2.38.0`.
 4. Client build: `cd /tmp/src/client && npm ci && npm run generate` (client script names as in the upstream Dockerfile; UNVERIFIED for the tag).
 5. Server build: `cd /tmp/src && npm ci --include=dev --ignore-scripts && npm run build:server`, then `npm ci --omit=dev` in the same tree.
-6. nunicode-sqlite: the upstream zip is musl-only and cannot be used on glibc ubuntu. Do not copy it. Confirm at build time whether the server runs without `NUSQLITE3_PATH` (UNVERIFIED). If it needs the library, that is a blocker (section 10).
-7. Final stage: `FROM <python-node>` again (or the same base), `USER root`, `apt-get install -y --no-install-recommends ffmpeg tini tzdata`, then clean apt lists.
+6. nunicode-sqlite: the upstream zip is musl-only and cannot be used on glibc ubuntu. Do not copy it. At v2.38.0 `server/Database.js` loads the extension only `if (process.env.NUSQLITE3_PATH)`, so leave that variable unset. `server/managers/BinaryManager.js` registers `libnusqlite3` (and other binaries) for runtime download; where it writes is UNVERIFIED, check it works with a read-only `/app` and point it at `/config` or `/tmp` if needed.
+7. Final stage: `FROM <python-node>` again (or the same base), `USER root`, `apt-get install -y --no-install-recommends ffmpeg tzdata`, then clean apt lists (`tini` is already in the ubuntu base, whose `ENTRYPOINT` is `tini -- /entrypoint.sh`).
 8. `mkdir -p /app/audiobookshelf` and `COPY --from=build /tmp/src/dist-server /app/audiobookshelf/dist-server`, `/tmp/src/client/dist /app/audiobookshelf/client/dist`, `/tmp/src/node_modules`, `/tmp/src/package.json`. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/audiobookshelf/LICENSE`.
 9. ENV (`/app` stays read-only): `NODE_ENV=production`, `CONFIG_PATH=/config`, `METADATA_PATH=/metadata`, `SOURCE=docker`, `HOME=/config`, `XDG_CACHE_HOME=/tmp`, `PORT` set to the chosen port (section 9).
 10. Tail:
@@ -58,7 +58,7 @@ Closest siblings: `apps/budge` (python-node, npm build, `/app` plus `/config`) a
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE <port>
+EXPOSE 8000
 VOLUME /config
 WORKDIR /app/audiobookshelf
 ```
@@ -86,12 +86,12 @@ Four standard targets and the default group copied from `apps/budge/docker-bake.
 schema_version: 1
 upstream_env_url: "https://github.com/advplyr/audiobookshelf"
 ports:
-  - port: <chosen port>
+  - port: 8000
     protocol: tcp
     required: true
 env:
   - name: PORT
-    default: "<chosen port>"
+    default: "8000"
     required: false
   - name: CONFIG_PATH
     default: "/config"
@@ -124,7 +124,7 @@ exec node dist-server/index.js
 - Idempotent. Seeds nothing: Audiobookshelf creates its own database and config under `/config` on first start (UNVERIFIED for the tag).
 - Writes only under `/config`. Caches go to `/tmp` through `XDG_CACHE_HOME`.
 - Bind address: the server must listen on all interfaces. Check the listen call in the source at the tag (UNVERIFIED) and add `HOST=0.0.0.0` only if the server reads it.
-- The final `exec` keeps tini as PID 1 (`ENTRYPOINT` in the Dockerfile).
+- The `exec` hands the process to the base image's `ENTRYPOINT` chain (`tini` in `apps/ubuntu`), as `apps/budge` does without an explicit `CMD`.
 
 ## 8. container-test.yaml
 
@@ -133,9 +133,9 @@ exec node dist-server/index.js
 
 timeoutSeconds: 120
 tcp:
-- port: '<chosen port>'
+- port: '8000'
 http:
-- port: '<chosen port>'
+- port: '8000'
   path: /
 filePaths:
 - /app/audiobookshelf/dist-server/index.js
@@ -157,7 +157,7 @@ filePaths:
 | Node/npm and yt-dlp caches | `/tmp` through `XDG_CACHE_HOME=/tmp` and `HOME=/config` (not a cache path). |
 | `/app/audiobookshelf` | Read-only at runtime. The build writes only to `/tmp/src` and to the copied tree. |
 
-- Port 80 is below 1024. A rootless `apps` user cannot bind it. Choose a port above 1024 (for example 8000, which is our convention, UNVERIFIED) and set both `PORT` and `EXPOSE`, `settings.yaml`, `container-test.yaml` to it. Record the change in the PR. Do not use `ip_unprivileged_port_start` in the image.
+- Port 80 is below 1024. A rootless `apps` user cannot bind it. Choose a port above 1024: this plan uses 8000 (a plan choice, not an upstream value) and set both `PORT` and `EXPOSE`, `settings.yaml`, `container-test.yaml` to it. Record the change in the PR. Do not use `ip_unprivileged_port_start` in the image.
 - The draft's expectation that the chart sets `readOnlyRootFilesystem: false` is compatible with this plan: the image supports `--read-only --tmpfs /tmp` with a fresh `/config`.
 - `PUID` and `PGID` from the chart are not read by the image (the Dockerfile sets no such env, UNVERIFIED). Do not add them.
 - No `privileged` or extra capabilities are needed (draft: privileged no, confirmed by the upstream Dockerfile having no capability setup).
@@ -166,7 +166,7 @@ filePaths:
 
 - Draft caveat confirmed: ffmpeg is needed at runtime. Transcoding and library scans use CPU and RAM (inferred).
 - Draft caveat confirmed: the initial admin user is created in the web UI on first start (inferred, UNVERIFIED for 2.38.0).
-- Blocker candidate: the upstream sqlite helper (`nusqlite3`) is musl-only. If the server requires it on glibc, the image cannot be built from the upstream libraries. Open question for the builder: does the server fall back to a standard sqlite binding when `NUSQLITE3_PATH` is absent? Check in the source at v2.38.0 before writing the Dockerfile.
+- Risk: the upstream sqlite helper (`nusqlite3`) is musl-only. If the server requires it on glibc, the image cannot be built from the upstream libraries. The extension load is conditional on `NUSQLITE3_PATH` in `server/Database.js` at v2.38.0, so this is likely not a blocker; the runtime `BinaryManager` download path (UNVERIFIED) is the remaining risk.
 - Draft's `apt: ffmpeg` is confirmed as an option, but ubuntu 26.04 package availability is UNVERIFIED.
 - Upstream Dockerfile is Alpine-based and runs as root. The ubuntu port is a rewrite of the install steps, not a copy.
 - The draft named port 80 (inferred). Upstream is `PORT=80` (confirmed). The rootless change to a higher port is a deviation from upstream and must be visible in the PR.

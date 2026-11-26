@@ -49,9 +49,9 @@ Why: the app needs Node at runtime (`node app.js`), and `python-node` is the Con
 3. Install the app:
    - `ENV HOME=/tmp NPM_CONFIG_CACHE=/tmp/npm-cache NPM_CONFIG_UPDATE_NOTIFIER=false`
    - `RUN mkdir -p /app/quassel-web && curl -fL "https://github.com/magne4000/quassel-webserver/archive/${VERSION}.tar.gz" -o /tmp/quassel-web.tar.gz && tar xzf /tmp/quassel-web.tar.gz -C /app/quassel-web --strip-components=1 && rm /tmp/quassel-web.tar.gz`
-   - `RUN cd /app/quassel-web && npm install --omit=dev` (README uses `--production`; `--omit=dev` is the same and current). Use `npm ci --omit=dev` if the tarball contains a `package-lock.json` (UNVERIFIED; check).
+   - `RUN cd /app/quassel-web && npm install --omit=dev` (README uses `--production`; `--omit=dev` is the same and current). Prefer `npm ci --omit=dev`: upstream master contains `package-lock.json` (checked via the GitHub contents API).
    - `RUN chmod -R 755 /app/quassel-web && rm -rf /tmp/npm-cache`
-4. License: `RUN mkdir -p /usr/share/licenses/quassel-web && cp /app/quassel-web/LICENSE-MIT /usr/share/licenses/quassel-web/LICENSE` (file name from `package.json` `licenses[0].url`; `LICENSE-MIT` is the link target; confirm the file exists in the tarball).
+4. License: `RUN mkdir -p /usr/share/licenses/quassel-web && cp /app/quassel-web/LICENSE-MIT /usr/share/licenses/quassel-web/LICENSE` (`LICENSE-MIT` exists in upstream master, checked via the GitHub contents API).
 5. Copy local files and set user:
 
 ```dockerfile
@@ -187,10 +187,18 @@ fi
 
 cd /app/quassel-web
 export NODE_ENV=production
-exec node app.js --config "${RUN_CONFIG}"
+# Upstream settings.cjs defaults to https on 64443 (mode null); force http on 64080 unless QUASSEL_HTTPS is set,
+# so the seeded /config/settings-user.cjs also listens on the port declared in settings.yaml.
+# UNVERIFIED: that the -m/-p CLI flags override the config file; confirm in app.js on the first run.
+EXTRA_ARGS=()
+if [ -z "${QUASSEL_HTTPS:-}" ]; then
+  EXTRA_ARGS=(--mode http --port 64080)
+fi
+exec node app.js --config "${RUN_CONFIG}" "${EXTRA_ARGS[@]}"
 ```
 
-- Without `QUASSEL_CORE`, the app uses `/config/settings-user.cjs`, which the user edits.
+- Without `QUASSEL_CORE`, the app uses `/config/settings-user.cjs`, which the user edits. The seeded upstream default is mode https on 64443, so `start.sh` passes `--mode http --port 64080` when `QUASSEL_HTTPS` is empty. If the flags do not override the file, the seed must be patched instead (UNVERIFIED). With `set -u` and bash older than 4.4 an empty array expands as unbound; the Ubuntu 26.04 bash is fine.
+- The `sed` patterns for `host`, `port` and `prefixpath` follow the linuxserver init, but the plan's exact `sed` expressions are not tested against `settings.cjs` comments (UNVERIFIED); check against the file on the first run.
 - The `sed` patterns follow the linuxserver init (fetched). Do not use the linuxserver `sed` on untrusted values without quoting: `QUASSEL_CORE` and `URL_BASE` go into JS. Validate them (hostname/IP and path characters only) and fail fast; the draft said "values from the environment end up in code, so do not break on special characters" (instruction rule). Add that validation to `start.sh` before the `sed`.
 - Idempotent: the seed happens only when `/config/settings-user.cjs` is missing. Env injection rewrites only `/tmp`.
 - `exec node` gives the app PID 1 signal handling.
