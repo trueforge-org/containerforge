@@ -40,7 +40,7 @@ No `defaults/`, `etc/` or `health/` needed. No `root/`. `DOWNSTREAM_CHANGES.md` 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
-2. Install with npm, pinned to VERSION: `npm install -g --omit=dev cloudcmd@${VERSION}` into a prefix under `/app/cloudcommander` (for example `npm install --prefix /app/cloudcommander --omit=dev cloudcmd@${VERSION}`). Remove npm caches afterwards (`npm cache clean --force`).
+2. Install with npm, pinned to VERSION: a local install under `/app/cloudcommander` (`npm install --prefix /app/cloudcommander --omit=dev cloudcmd@${VERSION}`, no `-g`, so `start.sh` finds `node_modules/.bin/cloudcmd`). Remove npm caches afterwards (`npm cache clean --force`).
 3. If the terminal feature is kept, the native `node-pty` build needs `build-essential python3` in a build stage only (UNVERIFIED whether prebuilds avoid this). Decide after build test.
 4. Do not use the upstream bun installer (unpinned remote script).
 5. License: copy `LICENSE` from the installed package to `/usr/share/licenses/cloudcommander/LICENSE`.

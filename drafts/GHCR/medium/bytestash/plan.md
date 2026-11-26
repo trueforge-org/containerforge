@@ -41,10 +41,10 @@ No `defaults/`, `etc/` or `health/` (the app creates its own data and JWT on fir
 1. Build stage `FROM <python-node> AS build` (same digest), `ARG VERSION`, `USER root`.
 2. Download the source tarball to `/tmp`, verify the sha256 above, extract to `/tmp/src`, then `mkdir -p /app/bytestash && cp -r /tmp/src/server/src /tmp/src/server/docs /tmp/src/server/package.json /app/bytestash/`. Copy `/tmp/src/client` build output to `/app/client/build` after `npm ci && npm run build` in the client folder (client build step runs in the build stage, same Node version).
 3. Install server deps in `/app/bytestash`: `npm install --omit=dev` (native modules compile here if no prebuild). Install build tools with `apt-get install -y --no-install-recommends build-essential python3` in the build stage only if the compile is needed (UNVERIFIED).
-4. Remove npm caches: `npm cache clean --force`, `rm -rf /tmp/*`.
+4. Copy `/tmp/src/LICENSE` to `/usr/share/licenses/bytestash/LICENSE` in the build stage first, then remove npm caches (`npm cache clean --force`) and only the `/tmp` build files (not the license).
 5. Final stage: same base, `USER root` for `mkdir -p /app/bytestash` setup, then `COPY --from=build /app/bytestash /app/bytestash` and `COPY --from=build /app/client /app/client`.
 6. Create the data symlink so that `../../../data/snippets` resolves to writable storage: `ln -s /config/data /app/data` (dangling until `start.sh` creates `/config/data`).
-7. License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/bytestash/LICENSE` (copy in the build stage first, since the source tree is not in the final image).
+7. License: `COPY --from=build /usr/share/licenses/bytestash/LICENSE /usr/share/licenses/bytestash/LICENSE` (staged in the build stage, since the source tree is not in the final image).
 8. `chown -R apps:apps /app/bytestash` is not needed if files are root-owned and read-only; keep `chmod -R 755 /app`.
 9. ENV: `HOME=/config`, `NODE_ENV=production`, `NPM_CONFIG_CACHE=/tmp/npm`.
 10. Tail:
@@ -66,13 +66,13 @@ WORKDIR /app/bytestash
 variable "APP" { default = "bytestash" }
 variable "VERSION" {
   // renovate: datasource=github-releases depName=jordan-dalby/ByteStash versioning=semver
-  default = "1.6.2"
+  default = "v1.6.2"
 }
 variable "LICENSE" { default = "GPL-3.0-only" }
 variable "SOURCE" { default = "https://github.com/jordan-dalby/ByteStash" }
 ```
 
-Use the SPDX value reported by upstream (`GPL-3.0`), not an assumed `-only`. Four standard targets and the default group copied from `apps/adguardhome-sync`. Run `docker buildx bake --print`. The Dockerfile `ARG VERSION` must equal this default.
+UNVERIFIED: the LICENSE file was not read; GitHub reports `GPL-3.0` and `GPL-3.0-only` is assumed. The tag-prefixed `VERSION` (`v1.6.2`) is used so the download URL `.../refs/tags/${VERSION}.tar.gz` resolves. Four standard targets and the default group copied from `apps/adguardhome-sync`. Run `docker buildx bake --print`. The Dockerfile `ARG VERSION` must equal this default.
 
 ## 6. settings.yaml
 
@@ -173,9 +173,9 @@ cd apps/bytestash
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name bytestash-probe --read-only --tmpfs /tmp \
-  -v bytestash-probe-config:/config bytestash:1.6.2
+  -v bytestash-probe-config:/config bytestash:v1.6.2
 docker logs -f bytestash-probe
-forgetool containers test --image bytestash:1.6.2 --config ./apps/bytestash/container-test.yaml
+forgetool containers test --image bytestash:v1.6.2 --config ./apps/bytestash/container-test.yaml
 docker rm -f bytestash-probe; docker volume rm bytestash-probe-config
 ```
 

@@ -158,7 +158,7 @@ filePaths:
 
 Narrowed, per the database-dependent exception in `build-test-protocol.instructions.md`. Add a comment near the narrowed block: `# narrowed: requires external mariadb; full functional test not feasible in single-container suite`.
 
-Rules: the test runs with no env vars, so `DATABASE_PASSWORD` is unset. Per the protocol, the container is allowed to exit in this case, so the `tcp` probe on 6060 is not used here. Run the probe by hand (section 11) with a real MariaDB. Do not add a `tcp` or `http` probe that will fail without the DB, and do not remove the port from `settings.yaml`. Coverage rule (every port has a probe) is met only by the narrowed file checks plus the manual run, and that gap must go into the PR notes.
+Rules: the test runs with no env vars, so `DATABASE_PASSWORD` is unset. The container exits without `DATABASE_PASSWORD` (start.sh refuses), so the `tcp` probe on 6060 is not used here. UNVERIFIED: the protocol's exception expects the process to stay alive in the manual run (section 11, with a real MariaDB), not in this suite. Run the probe by hand (section 11) with a real MariaDB. Do not add a `tcp` or `http` probe that will fail without the DB, and do not remove the port from `settings.yaml`. Coverage rule (every port has a probe) is met only by the narrowed file checks plus the manual run, and that gap must go into the PR notes.
 
 UNVERIFIED: whether forgetool supports a DB sidecar. If it does, add a mariadb runner and real `tcp` + `http` probes instead of the narrowed block.
 

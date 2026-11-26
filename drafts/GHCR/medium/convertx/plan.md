@@ -40,7 +40,7 @@
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `ARG BUN_VERSION=1.4.4`.
-2. Build stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`: install bun (pinned, arch-aware), then `curl -fL https://github.com/C4illin/ConvertX/archive/refs/tags/v${VERSION}.tar.gz | tar xz`, verify with a committed SHA-256, `bun install --frozen-lockfile`, `bun run build:bin` (or keep the source and run `bun run` from `/app`, `UNVERIFIED: whether the compiled binary is needed`). Set `BUN_INSTALL_CACHE_DIR=/tmp/bun-cache`.
+2. Build stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`: install bun (pinned, arch-aware), then `curl -fL https://github.com/C4illin/ConvertX/archive/refs/tags/v${VERSION}.tar.gz | tar xz --strip-components=1`, verify with a committed SHA-256, `bun install --frozen-lockfile`, `bun run build:bin` (or keep the source and run `bun run` from `/app`, `UNVERIFIED: whether the compiled binary is needed`). Set `BUN_INSTALL_CACHE_DIR=/tmp/bun-cache`.
 3. Install the converter apt list in the final stage. Pin each package version only where it matters. The brief says to pin apt packages and check against `VERSION`; here the converters are not versioned with convertx, so record the chosen ubuntu archive version in the comment, `UNVERIFIED`.
 4. VTracer: download the arch-matched musl tarball from the GitHub release (`${TARGETARCH}` → `aarch64` or `x86_64`), verify with a SHA-256 recorded in the Dockerfile, `tar -xz -C /usr/local/bin vtracer`, `chmod 0755`. Ship its license.
 5. `markitdown[all]` via pipx: install `pipx` and `python3-pip`, set `PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin`. Or pip into a venv under `/opt`, `UNVERIFIED: which the ubuntu 26.04 archive supports`.
@@ -105,7 +105,7 @@ Only add env vars that `start.sh` or the app reads. The data path env var is add
 ## 7. start.sh
 
 - `mkdir -p /config/data /tmp/convertx` (`UNVERIFIED: whether the app needs /tmp for temp conversions`).
-- Link or point the app's data dir to `/config/data` (section 9). No writes to `/app`.
+- The app's data dir reaches `/config/data` through the build-time symlink (section 9). No writes to `/app`.
 - Export any env the app needs (the upstream data path var, `UNVERIFIED`).
 - `exec bun run /app/convertx/...` or `exec /app/convertx/convertx` (the binary from the build step, `UNVERIFIED`). Use `exec` so signals reach the process.
 
@@ -134,7 +134,7 @@ The `filePaths` entries for `magick` and other converters are `UNVERIFIED` until
 
 | Upstream write path | Remap |
 | --- | --- |
-| `/app/data` (`mkdir data` in upstream Dockerfile, chart PVC mount in draft) | `/config/data`, via a symlink created in `start.sh` (not in the image, since `/app` is read-only) |
+| `/app/data` (`mkdir data` in upstream Dockerfile, chart PVC mount in draft) | `/config/data`, via a build-time symlink `/app/convertx/data -> /config/data` (created in the Dockerfile, not in `start.sh`, since `/app` is read-only at runtime); `start.sh` only creates `/config/data` |
 | temp conversions (converter tools write scratch files) | `/tmp` (ephemeral, under `--read-only --tmpfs /tmp`) |
 | `/home/convertx` (upstream user home, UID 1000) | Not used. Our `apps` user (UID 568) uses `HOME=/config` |
 | `PIPX_HOME=/opt/pipx` | Written at build time only, read-only at runtime |

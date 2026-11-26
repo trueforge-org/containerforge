@@ -40,7 +40,7 @@
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`. Build stages first:
-   - `FROM golang:<ver> AS api-build`: download the release tarball, verify its checksum, extract to `/src`, `cd /src/api && CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -o /out/commento ./...` (exact build target `UNVERIFIED`, mirror `make ${RELEASE}` from upstream `api/Makefile`). Set `GOCACHE=/tmp/go-build`.
+   - `FROM golang:<ver> AS api-build`: download `https://github.com/souramoo/commentoplusplus/releases/download/${VERSION}/release.tar.gz` (VERSION `v1.8.7`), verify its checksum, extract to `/src`, `cd /src/api && CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -o /out/commento ./...` (exact build target `UNVERIFIED`, mirror `make ${RELEASE}` from upstream `api/Makefile`). Set `GOCACHE=/tmp/go-build`.
    - `FROM node:<ver> AS frontend-build`: copy `/src/frontend`, `npm ci`, run the frontend build from upstream `frontend/Makefile`. Set npm cache to `/tmp`.
    - `FROM ubuntu AS templates-db-build` (or reuse the same stage): run the upstream templates and db `make` steps.
 2. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`:
@@ -67,7 +67,7 @@ No `CMD` or `ENTRYPOINT` in the Dockerfile; `start.sh` is the entrypoint through
 variable "APP" { default = "commento-plusplus" }
 variable "VERSION" {
   // renovate: datasource=github-releases depName=souramoo/commentoplusplus versioning=semver
-  default = "1.8.7"
+  default = "v1.8.7"
 }
 variable "LICENSE" { default = "MIT" }
 variable "SOURCE" { default = "https://github.com/souramoo/commentoplusplus" }
@@ -96,7 +96,7 @@ volumes:
   - path: /config
     required: false
 dependencies:
-  - postgresql
+  - name: postgresql
 ```
 
 Database env vars and any SMTP vars are added only after they are confirmed from upstream (section 1). Do not invent names. `/config` is listed only if a seeded config file is needed; otherwise remove it. `dependencies: postgresql` is required.
@@ -152,9 +152,9 @@ cd apps/commento-plusplus
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name commento-plusplus-probe --read-only --tmpfs /tmp \
-  -v commento-plusplus-probe-config:/config ghcr.io/trueforge-org/commento-plusplus:1.8.7
+  -v commento-plusplus-probe-config:/config ghcr.io/trueforge-org/commento-plusplus:v1.8.7
 docker logs -f commento-plusplus-probe
-forgetool containers test --image commento-plusplus:1.8.7 --config ./apps/commento-plusplus/container-test.yaml
+forgetool containers test --image commento-plusplus:v1.8.7 --config ./apps/commento-plusplus/container-test.yaml
 docker rm -f commento-plusplus-probe; docker volume rm commento-plusplus-probe-config
 ```
 

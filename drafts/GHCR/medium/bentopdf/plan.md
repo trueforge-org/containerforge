@@ -135,7 +135,7 @@ filePaths:
 - /defaults/nginx.conf
 ```
 
-The `tcp` and `http` probes match the port in `settings.yaml`. The `timeoutSeconds` value follows the nginx family (`apps/it-tools`, `apps/nginx`); UNVERIFIED: check the sibling's value. The test runs without env vars, which this app does not need.
+The `tcp` and `http` probes match the port in `settings.yaml`. UNVERIFIED: `apps/it-tools` and `apps/nginx` container-test.yaml set no `timeoutSeconds`; 60 is a guess. The test runs without env vars, which this app does not need.
 
 ## 9. Rootless and read-only-rootfs adaptations
 
