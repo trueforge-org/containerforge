@@ -27,7 +27,7 @@ variable "YARN_VERSION"{
 
 variable "NEO_VER" {
   // renovate: datasource=github-releases depName=intel/compute-runtime versioning=loose
-  default = "26.40.40196.8"
+  default = "26.44.40734.8"
 }
 
 // Fixed Legacy value
