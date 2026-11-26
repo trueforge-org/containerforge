@@ -15,7 +15,7 @@
 | Checksums | GitHub API asset digests (above); no checksum file. Fetch the digest at build time from `https://api.github.com/repos/hyperion-project/hyperion.ng/releases/tags/${VERSION}` and verify with `sha256sum -c`. |
 | Upstream Dockerfile | None at the tag; Docker Hub image `sirfragalot/hyperion.ng` provenance UNVERIFIED. The upstream repo has no official runtime Docker image reviewed. |
 | Ports | From the draft (inferred): 8090 web UI, 8092 web UI TLS, 19444 JSON server, 19400 FlatBuffers server. Boblight (draft mentions), Proto 19445 and their exact defaults are UNVERIFIED. Confirm in `hyperiond` with `ss -ltn` after first start. |
-| Config/data | Draft: `/root/.hyperion` (runs as root). Hyperion accepts a user-data directory flag (`-u/--userdata`, UNVERIFIED, check `hyperiond --help`). |
+| Config/data | Draft: `/root/.hyperion` (runs as root). Hyperion accepts a user-data directory flag (`--userdata <path>` per upstream CLI docs; no `-u` short form documented). |
 | Hardware | LED output needs USB serial (`/dev/ttyUSB*`), SPI, GPIO, or network LEDs; capture needs V4L2 or DRM devices. Without device passthrough, only network LED devices and the UI work. |
 | Dependencies | none |
 
@@ -63,7 +63,7 @@ Schema header, `schema_version: 1`, `upstream_env_url` = SOURCE.
 - `mkdir -p /config` when missing; Hyperion creates its default DB/config on first start (UNVERIFIED), so no seeding.
 - Log a warning if no `/dev/ttyUSB*`, `/dev/spidev*`, `/dev/video*` are visible (hardware features unavailable).
 - Never write to `/app`; caches and Qt runtime to `/tmp` (`XDG_RUNTIME_DIR=/tmp/runtime`, mode 0700; `QT_QPA_PLATFORM=offscreen` if Qt tries to open a display, UNVERIFIED).
-- `exec hyperiond -u /config --silent`-style invocation; exact flags UNVERIFIED (verify with `hyperiond --help`; avoid `--daemon`/`--service` since the process must stay in foreground).
+- `exec hyperiond --userdata /config -s`-style invocation (`--userdata <path>` and `-s` per upstream CLI docs; no `-u` or `--silent` documented; verify with `hyperiond --help`; avoid `--daemon`/`--service` since the process must stay in foreground).
 - Servers must bind all interfaces: Hyperion's web UI/JSON server default binding is UNVERIFIED; verify from outside the container, and adjust the Hyperion setting through its settings JSON if it binds localhost.
 
 ## 8. container-test.yaml
