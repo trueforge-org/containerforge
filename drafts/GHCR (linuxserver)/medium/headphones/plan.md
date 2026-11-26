@@ -6,9 +6,9 @@
 | Item | Value |
 | --- | --- |
 | Version to build | v0.6.4 (GitHub release tag https://github.com/rembo10/headphones/releases/tag/v0.6.4). linuxserver builds from the **master** branch commit, not this tag. Chart image is `ghcr.io/linuxserver/headphones:version-a78f38c1`, and the commit behind that label is UNVERIFIED. We pin the tag for reproducibility; this differs from linuxserver and is a decision to state in the PR. |
-| Release date | UNVERIFIED: the tag page shows two timestamps (2025-07-01 and 2025-06-01). |
+| Release date | GitHub API: `published_at` 2025-07-01, `created_at` 2025-06-01 (tag commit date). |
 | Renovate | `datasource=github-releases depName=rembo10/headphones versioning=semver` (tag `v0.6.4` is semver with a `v` prefix; the same style as `apps/nzbhydra2`). |
-| License | GPL-3.0: the LICENSE file at v0.6.4 is the GNU GPL v3 text (https://raw.githubusercontent.com/rembo10/headphones/v0.6.4/LICENSE). Whether the copyright headers say "or later" is UNVERIFIED, so the SPDX id is `GPL-3.0-only` or `GPL-3.0-or-later` depending on that check. |
+| License | GPL-3.0 (GitHub API `license.spdx_id` agrees): the LICENSE file at v0.6.4 is the GNU GPL v3 text (https://raw.githubusercontent.com/rembo10/headphones/v0.6.4/LICENSE). Whether the copyright headers say "or later" is UNVERIFIED, so the SPDX id is `GPL-3.0-only` or `GPL-3.0-or-later` depending on that check. |
 | Source URL | https://github.com/rembo10/headphones |
 | Download | https://github.com/rembo10/headphones/archive/refs/tags/v0.6.4.tar.gz (source archive; the release has no binary asset). |
 | Checksum source | None for the release archives. UNVERIFIED upstream checksum. Pin the local sha256 of the downloaded tarball in the Dockerfile after computing it in the build (not done in this plan run). |
@@ -69,7 +69,7 @@ No `etc/` or `health/`. No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` bas
    ```
    The `HEADPHONES_SHA256` value is a placeholder: compute it from the downloaded archive in the build and pin it (not an upstream checksum). Do not commit the placeholder.
 4. License: copy `/app/headphones/LICENSE` to `/usr/share/licenses/headphones/LICENSE` (the archive has it, so no separate download is needed).
-5. Seed file: `defaults/config.ini` comes from the repo's `root/defaults/config.ini` at v0.6.4 (or the linuxserver file, adjusted). Make these changes in our copy: `launch_browser = 0` (no browser in a container), `check_github = 0` (no outbound update check, which would write under `/app`), and `http_host = 0.0.0.0`. The `http_port` line is not in the file; the code default 8181 applies. Document each change in the PR.
+5. Seed file: `defaults/config.ini` is taken from linuxserver's `docker-headphones` repo (`root/defaults/config.ini`; upstream rembo10/headphones has no such file at v0.6.4) and adjusted. Make these changes in our copy: `launch_browser = 0` (no browser in a container), `check_github = 0` (no outbound update check, which would write under `/app`), and `http_host = 0.0.0.0`. The `http_port` line is not in the file; the code default 8181 applies. Document each change in the PR.
 6. Tail:
    ```dockerfile
    USER apps
@@ -118,14 +118,11 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-  - name: UMASK
-    default: "002"
-    required: false
 volumes:
   - path: /config
     required: true
 ```
-- `env`: only `TZ` is read by the app's readme; `UMASK` is the sibling convention (bazarr, nzbhydra2). Keep `UMASK` only because the ContainerForge runtime uses it for file modes; confirm that is how the base handles it, and drop it otherwise.
+- `env`: only `TZ`. `UMASK` is not listed: the base entrypoint reads `UMASK_SET`, not `UMASK` (`apps/ubuntu/entrypoint.sh`).
 - `dependencies`: none. Do not invent database or service dependencies.
 - `HTTP_PORT` is not exposed as an env var in `settings.yaml`: the app reads it from `config.ini`, and `start.sh` does not override it.
 
@@ -190,7 +187,6 @@ Run with `--read-only --tmpfs /tmp` and an empty `/config` volume, which proves 
 
 - **Version drift from linuxserver.** linuxserver builds master; this plan pins v0.6.4 (a 2025 tag). Master may have fixes or changes that v0.6.4 lacks. State this in the PR and, if the user wants master, switch to a commit pin with the same sha256 pattern.
 - **Python 3.15 compatibility.** The upstream code has Python 2 shims and was last tagged in 2025 for a 3.x runtime. Whether it runs on the 3.15 base is UNVERIFIED and is the main runtime risk.
-- **Release date ambiguous.** Two timestamps on the tag page; do not use either until confirmed.
 - **License SPDX id.** `GPL-3.0-only` vs `-or-later` depends on headers that were not checked (blocker for `docker-bake.hcl` `LICENSE`).
 - **Checksum pin.** No upstream checksum; the `HEADPHONES_SHA256` value must be computed and pinned. Placeholder until then.
 - **shntool package.** The apt package name and version on 26.04 are UNVERIFIED; linuxserver compiles it from source.

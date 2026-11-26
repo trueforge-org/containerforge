@@ -6,9 +6,9 @@
 | Item | Value |
 | --- | --- |
 | Version to build | 0.2.0-beta.30 (GitHub release tag, https://github.com/mregni/EmbyStat/releases/tag/0.2.0-beta.30). Chart image is `ghcr.io/linuxserver/embystat:0.2.0`, which the linuxserver build pulls from the same upstream release. |
-| Release date | UNVERIFIED: the release page shows two timestamps (2022-05-16 and 2024-11-12); which one is the tag date is not clear. |
+| Release date | GitHub API `published_at` for the tag is 2022-05-16 (the 2024-11-12 timestamp on the page is not the publish date). |
 | Renovate | `datasource=github-releases depName=mregni/EmbyStat versioning=semver` (tag `0.2.0-beta.30` is valid semver with a prerelease part). |
-| License | UNVERIFIED: no LICENSE file at the top of the release zips (only third-party `*.LICENSE.txt` inside `dist/static/`). Read the LICENSE of https://github.com/mregni/EmbyStat before filling `docker-bake.hcl` `LICENSE`. |
+| License | MIT per the GitHub API (`license.spdx_id` for mregni/EmbyStat, checked 2026-11-26). No LICENSE file is in the release zips (only third-party `*.LICENSE.txt` inside `dist/static/`), so fetch the repo `LICENSE` at the tag for `/usr/share/licenses/embystat/` (UNVERIFIED that the file exists at that tag). |
 | Source URL | https://github.com/mregni/EmbyStat |
 | Download (amd64) | https://github.com/mregni/EmbyStat/releases/download/0.2.0-beta.30/EmbyStat-ubuntu-x64-v0.2.0-beta.30.zip (65472970 bytes; the linuxserver build uses this one). The draft's `EmbyStat-debian-x64-v0.2.0-beta.30.zip` is the same x64 family and also exists. |
 | Download (arm64) | https://github.com/mregni/EmbyStat/releases/download/0.2.0-beta.30/EmbyStat-linux-arm-x64-v0.2.0-beta.30.zip (61564402 bytes). Verified locally: `EmbyStat` and `libcoreclr.so` are ELF AArch64. linuxserver `Dockerfile.aarch64` uses this same asset, so the draft's arm64 caveat is resolved. |
@@ -42,7 +42,7 @@ No `defaults/`, `etc/` or `health/` directories: EmbyStat creates its own data u
 
 1. `FROM` line above. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Set env: `ENV HOME=/config DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1`. Nothing writes to `/app`.
-3. Install only what is missing. `unzip` is not in the base list checked above, so add it: `apt-get install -y --no-install-recommends unzip` plus `rm -rf /var/lib/apt/lists/*`. Do not install `libicu70` or `libssl3` blindly: first check `ldd` on the extracted `libSystem.Globalization.Native.so` and `libcoreclr.so`. Add ICU only if `ldd` reports a missing library, using the package name in the 26.04 archive (check with `apt-cache policy`). Not pinned, because these are runtime libraries and not the app.
+3. Install only what is missing. `unzip` is already in the base (`apps/ubuntu/Dockerfile`), so add no packages for it. Do not install `libicu70` or `libssl3` blindly: first check `ldd` on the extracted `libSystem.Globalization.Native.so` and `libcoreclr.so`. Add ICU only if `ldd` reports a missing library, using the package name in the 26.04 archive (check with `apt-cache policy`). Not pinned, because these are runtime libraries and not the app.
 4. Per-arch asset via `TARGETARCH`:
    ```dockerfile
    RUN case "${TARGETARCH}" in \
@@ -58,7 +58,7 @@ No `defaults/`, `etc/` or `health/` directories: EmbyStat creates its own data u
        rm -f /tmp/embystat.zip
    ```
    The sha values are our own pins (no upstream checksum), so say so in a comment. Re-pin them whenever `VERSION` changes. The `|| true` on unzip is needed because of the backslash entries; confirm the `EmbyStat` binary, `EmbyStat.runtimeconfig.json` and `libcoreclr.so` exist after unzip.
-5. License: `LICENSE` is UNVERIFIED (see section 1). Once confirmed, copy it into `/usr/share/licenses/embystat/` with the matching `unzip -j` or an explicit extraction. Do not ship a license that was not confirmed.
+5. License: MIT (section 1). Download the repo `LICENSE` at the tag (`https://raw.githubusercontent.com/mregni/EmbyStat/${VERSION}/LICENSE`, UNVERIFIED path) into `/usr/share/licenses/embystat/LICENSE`, and add it to `filePaths`. Do not ship a license file that was not fetched.
 6. Permissions: `chown -R root:root /app/embystat && chmod -R 755 /app/embystat` (no writes to `/app` at runtime).
 7. Tail:
    ```dockerfile
@@ -85,14 +85,14 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"   // replace with the SPDX id confirmed from the upstream LICENSE (section 1)
+  default = "MIT"
 }
 
 variable "SOURCE" {
   default = "https://github.com/mregni/EmbyStat"
 }
 ```
-Then the default group, `image`, `image-local`, `image-all` targets copied from `apps/nzbhydra2/docker-bake.hcl` (labels `org.opencontainers.image.source` and `.licenses`). Do not commit the `UNVERIFIED` placeholder. Validate with `cd apps/embystat && docker buildx bake --print`. `VERSION` must equal the Dockerfile `ARG VERSION`.
+Then the default group, `image`, `image-local`, `image-all` targets copied from `apps/nzbhydra2/docker-bake.hcl` (labels `org.opencontainers.image.source` and `.licenses`).  Validate with `cd apps/embystat && docker buildx bake --print`. `VERSION` must equal the Dockerfile `ARG VERSION`.
 
 ## 6. settings.yaml
 
@@ -108,14 +108,11 @@ env:
   - name: TZ
     default: "Etc/UTC"
     required: false
-  - name: UMASK
-    default: "002"
-    required: false
 volumes:
   - path: /config
     required: true
 ```
-- `env`: only `TZ` and `UMASK` (sibling convention). `BASE_URL` is left out until the EmbyStat source confirms it is read (see section 1). Do not add env names the app does not read.
+- `env`: only `TZ`. The base entrypoint reads `UMASK_SET`, not `UMASK` (`apps/ubuntu/entrypoint.sh`), so `UMASK` is not listed; add `UMASK_SET` only if wanted (UNVERIFIED that TZ is read by the app or base). `BASE_URL` is left out until the EmbyStat source confirms it is read (see section 1). Do not add env names the app does not read.
 - `dependencies`: none. The Emby or Jellyfin server and its API key are entered in the web UI, not as a ContainerForge dependency.
 
 ## 7. start.sh
@@ -176,9 +173,8 @@ Security expectations from the draft (`runAsUser: 0`, `readOnlyRootFilesystem: f
 
 ## 10. Risks, caveats and open questions
 
-- **License unknown (blocker for bake).** Read the LICENSE in https://github.com/mregni/EmbyStat before committing `docker-bake.hcl`. Do not guess the SPDX id.
+- **License file path.** The SPDX id is MIT (GitHub API); confirm the `LICENSE` file exists at the tag before relying on the download.
 - **Beta and deprecated upstream.** 0.2.0-beta.30 is a beta, and linuxserver says the upstream project is no longer maintained. Expect rough edges; say so in the PR.
-- **Release date ambiguous.** Confirm the tag date before filling any metadata that uses it.
 - **Checksums are our own.** No upstream checksum is published; the pins are local sha256 values. Re-verify them when `VERSION` changes.
 - **Bind address.** Kestrel may listen on localhost only. Check in the run step; fix with `ASPNETCORE_URLS` if needed.
 - **ICU and OpenSSL.** Whether the base already has the libraries the .NET runtime needs is UNVERIFIED until `ldd` is run in the build.

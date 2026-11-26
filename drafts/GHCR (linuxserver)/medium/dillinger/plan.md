@@ -8,12 +8,12 @@
 | Version to build | v3.39.1 (git tag; `package.json` version 3.39.1). Matches the chart image `ghcr.io/linuxserver/dillinger:3.39.1`. |
 | Version source note | GitHub `releases/latest` is stale (returns `3.5.1`, published 2016-08-04). Use tags, not releases. Tags go up to v3.39.1. |
 | Draft tag | Matches (3.39.1). |
-| Renovate | `datasource=github-tags depName=joemccann/dillinger versioning=semver` (the release feed is stale, so tags are the source). |
+| Renovate | `datasource=github-tags depName=joemccann/dillinger versioning=semver extractVersion=^v(?<version>.+)$` (the release feed is stale, so tags are the source). |
 | License | MIT (GitHub API `license.spdx_id`, joemccann/dillinger) |
 | Source URL | https://github.com/joemccann/dillinger (last pushed 2026-06-21, active) |
 | Download | Source tarball `https://github.com/joemccann/dillinger/archive/refs/tags/v3.39.1.tar.gz`. No release assets. Arch-independent source, built with npm on each arch. |
 | Checksum source | UNVERIFIED: none published. Pinned by tag; record the sha256 at build time. |
-| Upstream Dockerfile reviewed | linuxserver `docker-dillinger` @ 1d1b7d5f198a81964e0e2b1428ba7d6bd4b1526e: `FROM baseimage-alpine:3.18`; apk chromium nss freetype harfbuzz ttf-freefont npm; extracts tarball to `/app/dillinger` (`--strip-components=1`); `npm install --omit=dev --prefix /app/dillinger`; `ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser`; `EXPOSE 8080`; `VOLUME /config`; no USER, no ENTRYPOINT. (Source: facts/111.md) |
+| Upstream Dockerfile reviewed | linuxserver `docker-dillinger` @ 1d1b7d5f198a81964e0e2b1428ba7d6bd4b1526e: `FROM baseimage-alpine:3.18`; apk chromium nss freetype harfbuzz ttf-freefont npm; extracts tarball to `/app/dillinger` (`--strip-components=1`); `npm install --omit=dev --prefix /app/dillinger`; `ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser`; `EXPOSE 8080`; `VOLUME /config`; no USER, no ENTRYPOINT. |
 | Real launch | linuxserver `root/etc/s6-overlay/s6-rc.d/svc-dillinger/run`: `NODE_ENV=production`, `cd /app/dillinger`, `node app` (`package.json` start: `node app.js`), as `abc`. |
 | Init | linuxserver `init-dillinger-config/run`: move `/app/dillinger/configs` to `/config/configs`, symlink it back; chown `/config` and `/app/dillinger/public/`. |
 | Ports | 8080/tcp (`app.js`: `app.set('port', process.env.PORT \|\| 8080)`) |
@@ -80,7 +80,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-tags depName=joemccann/dillinger versioning=semver
+  // renovate: datasource=github-tags depName=joemccann/dillinger versioning=semver extractVersion=^v(?<version>.+)$
   default = "3.39.1"
 }
 

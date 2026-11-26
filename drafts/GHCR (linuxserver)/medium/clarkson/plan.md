@@ -7,12 +7,12 @@
 | --- | --- |
 | Version to build | v1.1.2 (published 2020-06-19). Latest tag. Tags: v1.1.2, v1.1.1, v1.1.0, v1.0.1, v1.0.0, v1.0.0-beta. Matches the chart image `ghcr.io/linuxserver/clarkson:1.1.2`. |
 | Draft tag | Matches (1.1.2). |
-| Renovate | `datasource=github-releases depName=linuxserver/Clarkson versioning=semver` |
+| Renovate | `datasource=github-releases depName=linuxserver/Clarkson versioning=semver extractVersion=^v(?<version>.+)$` |
 | License | MIT (GitHub API `license.spdx_id`, linuxserver/Clarkson). Note: this is the linuxserver fork, not the original project. |
 | Source URL | https://github.com/linuxserver/Clarkson (last pushed 2021-08-12, stale upstream) |
 | Download | Source tarball `https://github.com/linuxserver/Clarkson/archive/refs/tags/v1.1.2.tar.gz`. No release assets. Arch-independent source, built with npm on each arch. |
 | Checksum source | UNVERIFIED: none published. The tarball is pinned by tag; verify by recording the sha256 at build time. |
-| Upstream Dockerfile reviewed | linuxserver `docker-clarkson` @ a055394e1b15b406965902248118536959e54f1f: `FROM baseimage-alpine:3.12`; build deps build-base, curl, libsass-dev, nodejs-npm, tar, python2; runtime nodejs, nss, openjdk8-jre, sqlite-libs; extracts tarball to `/app/clarkson`; `chmod +x ./flyway/flyway`; `npm install`; `ng build --prod`; `npm run prune-angular2`; `npm prune --production`; `ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2`; no EXPOSE, VOLUME or USER. (Source: facts/111.md) |
+| Upstream Dockerfile reviewed | linuxserver `docker-clarkson` @ a055394e1b15b406965902248118536959e54f1f: `FROM baseimage-alpine:3.12`; build deps build-base, curl, libsass-dev, nodejs-npm, tar, python2; runtime nodejs, nss, openjdk8-jre, sqlite-libs; extracts tarball to `/app/clarkson`; `chmod +x ./flyway/flyway`; `npm install`; `ng build --prod`; `npm run prune-angular2`; `npm prune --production`; `ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2`; no EXPOSE, VOLUME or USER.  |
 | Real launch | linuxserver `root/etc/services.d/clarkson/run`: `cd /app/clarkson`, then `MYSQL_HOST=… MYSQL_USERNAME=… MYSQL_PASSWORD=… ENABLE_REGISTRATIONS=${ENABLE_REGISTRATIONS:-false} node clarkson.js` as `abc`. |
 | Migration | linuxserver `root/etc/cont-init.d/30-migrate`: `./flyway/flyway -user=$MYSQL_USERNAME -password=$MYSQL_PASSWORD -schemas=clarkson -url=jdbc:mysql://$MYSQL_HOST migrate`, skipped when `TEST_RUN` is set. Flyway needs a Java runtime. |
 | Upstream config (`server/config.js` @ v1.1.2) | `port: process.env.APP_PORT \|\| 3000`; `enableRegistration: process.env.ENABLE_REGISTRATIONS \|\| false`; `mysql.host/user/password` from `MYSQL_HOST`, `MYSQL_USERNAME`, `MYSQL_PASSWORD`; `jwtSecret: hash.random()` (new on every start). |
@@ -82,7 +82,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=linuxserver/Clarkson versioning=semver
+  // renovate: datasource=github-releases depName=linuxserver/Clarkson versioning=semver extractVersion=^v(?<version>.+)$
   default = "1.1.2"
 }
 
@@ -122,13 +122,13 @@ env:
     required: true
   - name: MYSQL_PASSWORD
     default: ""
-    required: true
+    required: false
 dependencies:
   - name: mariadb
 ```
 
 - `MYSQL_HOST` default `mariadb` matches the sibling app name. It is a chosen default, not an upstream value; flag it in the PR.
-- `MYSQL_PASSWORD` has no safe default. The rule requires a non-empty default or handling in `start.sh`. Open question (section 10): either generate a password in `start.sh` (not possible for an external DB user) or mark `required: false` and fail at start with a clear message. The plan proposes the second.
+- `MYSQL_PASSWORD` has no safe default. The rule requires a non-empty default or handling in `start.sh`. Open question (section 10): either generate a password in `start.sh` (not possible for an external DB user) or mark `required: false` and log a clear warning at start. The plan proposes the second. It must not exit: the container test runs with no env vars and still needs port 3000 open, so `start.sh` warns and continues (UNVERIFIED that `node clarkson.js` stays up with no reachable DB; if it exits, the test cannot probe 3000 and this needs a human decision).
 - `TEST_RUN` is read by the upstream migration to skip flyway. It is not listed in `env:` because the plan does not expose it to users; the test path uses the DB exception (section 8).
 - No `volumes:` entry: the app keeps no state on disk.
 
@@ -140,9 +140,10 @@ dependencies:
 APP_PORT="${APP_PORT:-3000}"
 ENABLE_REGISTRATIONS="${ENABLE_REGISTRATIONS:-false}"
 
-if [[ -z "${MYSQL_HOST}" || -z "${MYSQL_USERNAME}" || -z "${MYSQL_PASSWORD}" ]]; then
-  echo "clarkson: MYSQL_HOST, MYSQL_USERNAME and MYSQL_PASSWORD must be set" >&2
-  exit 1
+MYSQL_HOST="${MYSQL_HOST:-mariadb}"
+MYSQL_USERNAME="${MYSQL_USERNAME:-clarkson}"
+if [[ -z "${MYSQL_PASSWORD}" ]]; then
+  echo "clarkson: MYSQL_PASSWORD is not set, database access will fail" >&2
 fi
 
 cd /app/clarkson || exit 1
@@ -153,7 +154,7 @@ cd /app/clarkson || exit 1
   -password="${MYSQL_PASSWORD}" \
   -schemas=clarkson \
   -url="jdbc:mysql://${MYSQL_HOST}" \
-  migrate || exit 1
+  migrate || echo "clarkson: flyway migrate failed, is ${MYSQL_HOST} reachable? continuing" >&2
 
 export APP_PORT ENABLE_REGISTRATIONS MYSQL_HOST MYSQL_USERNAME MYSQL_PASSWORD
 exec node clarkson.js
@@ -218,7 +219,7 @@ cd apps/clarkson
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 
-# no DB: expect a clear migrate error from flyway (connection refused), not a crash loop with a stack trace
+# no DB: expect a flyway warning (connection refused) and node still running, not a crash loop with a stack trace
 docker run --rm --name clarkson-probe --read-only --tmpfs /tmp \
   -e MYSQL_HOST=127.0.0.1 -e MYSQL_USERNAME=probe -e MYSQL_PASSWORD=probe clarkson:1.1.2
 

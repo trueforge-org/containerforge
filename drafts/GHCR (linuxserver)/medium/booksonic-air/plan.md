@@ -7,12 +7,12 @@
 | --- | --- |
 | Version to build | v2201.1.0 (published 2022-01-13), the same as the chart image `ghcr.io/linuxserver/booksonic-air:2201.1.0`. Latest tag. Tags: v2201.1.0, v2112.2.0, v2112.1.0, v2009.1.0. |
 | Draft tag | Matches (2201.1.0). |
-| Renovate | `datasource=github-releases depName=popeen/Booksonic-Air versioning=loose` (tags are `vYYMM.x.y`, not strict semver) |
+| Renovate | `datasource=github-releases depName=popeen/Booksonic-Air versioning=loose extractVersion=^v(?<version>.+)$` (tags are `vYYMM.x.y`, not strict semver; the `v` is stripped so bake `VERSION` is `2201.1.0` and the Dockerfile adds `v` in the URL; precedent `apps/code-server`) |
 | License | GPL-3.0 (GitHub API `license.spdx_id`, popeen/Booksonic-Air) |
 | Source URL | https://github.com/popeen/Booksonic-Air (last pushed 2023-03-31, upstream looks stale) |
 | Download | `https://github.com/popeen/Booksonic-Air/releases/download/v2201.1.0/booksonic.war`, a single arch-independent JAR/WAR. Same URL for amd64 and arm64. |
 | Checksum source | UNVERIFIED: no checksum asset is published with the release. |
-| Upstream Dockerfile reviewed | linuxserver `docker-booksonic-air` @ a70824fbf40f6dc16ab7a8e957dda58267c05ed3: `FROM baseimage-alpine:3.20`, apk ffmpeg flac fontconfig lame openjdk11-jre ttf-dejavu, WAR download, `ENV BOOKSONIC_AIR_HOME=/app/booksonic-air BOOKSONIC_AIR_SETTINGS=/config LANG=C.UTF-8`, `EXPOSE 4040`, `VOLUME /config`, no USER, no ENTRYPOINT. (Source: facts/111.md) |
+| Upstream Dockerfile reviewed | linuxserver `docker-booksonic-air` @ a70824fbf40f6dc16ab7a8e957dda58267c05ed3: `FROM baseimage-alpine:3.20`, apk ffmpeg flac fontconfig lame openjdk11-jre ttf-dejavu, WAR download, `ENV BOOKSONIC_AIR_HOME=/app/booksonic-air BOOKSONIC_AIR_SETTINGS=/config LANG=C.UTF-8`, `EXPOSE 4040`, `VOLUME /config`, no USER, no ENTRYPOINT. |
 | Real launch | linuxserver `root/etc/s6-overlay/s6-rc.d/svc-booksonic-air/run`: `cd $BOOKSONIC_AIR_HOME`, then `java -Dairsonic.defaultMusicFolder=/music -Dairsonic.defaultPlaylistFolder=/playlists -Dairsonic.defaultPodcastFolder=/podcasts -Dairsonic.home=$BOOKSONIC_AIR_SETTINGS -Djava.awt.headless=true -Djava.io.tmpdir=/run/tomcat.4040 -Dserver.servlet.contextPath=/$CONTEXT_PATH -Dserver.host=0.0.0.0 -Dserver.port=4040 $JAVA_OPTS -jar booksonic.war` |
 | Init | linuxserver `init-booksonic-air-config/run`: create `$BOOKSONIC_AIR_SETTINGS/transcode`, symlink `ffmpeg`, `flac`, `lame` from `/usr/bin` into it, and chown `/config` and `/run/tomcat.4040`. |
 | Ports | 4040/tcp (`server.port=4040`) |
@@ -70,7 +70,7 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=popeen/Booksonic-Air versioning=loose
+  // renovate: datasource=github-releases depName=popeen/Booksonic-Air versioning=loose extractVersion=^v(?<version>.+)$
   default = "2201.1.0"
 }
 

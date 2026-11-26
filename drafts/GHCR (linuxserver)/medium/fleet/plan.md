@@ -9,7 +9,7 @@
 | Project identity | **The draft's docs and website links (fleetdm.com) are for a different product.** The jar is `io.linuxserver.fleet.core.Main` from https://github.com/linuxserver/fleet, and linuxserver's readme-vars (https://raw.githubusercontent.com/linuxserver/docker-fleet/68995eabc52afa0c3a1fddf3c5dbc803d6943c36/readme-vars.yml) describes it as "an online web interface which displays a set of maintained images from one or more owned repositories". Use the linuxserver/fleet repo as `SOURCE`. |
 | Release date | 2022-10-30 (release page, single timestamp). |
 | Renovate | `datasource=github-releases depName=linuxserver/fleet versioning=semver` |
-| License | GPL-3.0 text in the LICENSE of https://github.com/linuxserver/docker-fleet (verified on the tarball at 68995eabc52afa0c3a1fddf3c5dbc803d6943c36). The jar's own license is UNVERIFIED: confirm it in the linuxserver/fleet repo before committing `LICENSE`. |
+| License | GPL-3.0 text in the LICENSE of https://github.com/linuxserver/docker-fleet (verified on the tarball at 68995eabc52afa0c3a1fddf3c5dbc803d6943c36). The linuxserver/fleet repo itself reports GPL-3.0 (GitHub API `license.spdx_id`, `LICENSE` file present, checked 2026-11-26), so use `GPL-3.0` for the jar. |
 | Source URL | https://github.com/linuxserver/fleet |
 | Download | https://github.com/linuxserver/fleet/releases/download/2.3.3/fleet-2.3.3.jar (only asset; 16149488 bytes). |
 | Arch | Pure Java jar, arch-neutral. amd64 and arm64: yes. Native libraries inside the jar were not searched. |
@@ -38,7 +38,7 @@ No `defaults/`, `etc/` or `health/`: the app creates its own state under `/confi
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a` (digest from `apps/nzbhydra2/Dockerfile`). It fits because the app is one jar that runs on Java 17. Closest sibling: `apps/nzbhydra2` (single jar downloaded from a GitHub release into `/app`, `USER apps`, `VOLUME /config`). Check in the build that `java` is on `PATH` (`command -v java`), since the base layout is not checked here.
+`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a` (digest from `apps/nzbhydra2/Dockerfile`). It fits because the app is one jar that runs on Java 17. Closest sibling: `apps/nzbhydra2` (digest verified in `apps/nzbhydra2/Dockerfile`; single jar downloaded from a GitHub release into `/app`, `USER apps`, `VOLUME /config`). Check in the build that `java` is on `PATH` (`command -v java`), since the base layout is not checked here.
 
 ## 4. Dockerfile
 
@@ -55,7 +55,7 @@ No `defaults/`, `etc/` or `health/`: the app creates its own state under `/confi
     && chmod -R 755 /app/fleet
    ```
    Keep `FLEET_SHA256` in step with `VERSION`. Do not add an apt package: the base already ships Java 17 (verify in the build).
-3. License: once confirmed (section 1), `COPY`/`install` the license text to `/usr/share/licenses/fleet/`. Do not ship an unconfirmed license.
+3. License: download the repo `LICENSE` at tag 2.3.3 (`https://raw.githubusercontent.com/linuxserver/fleet/${VERSION}/LICENSE`, UNVERIFIED that it exists at that tag) into `/usr/share/licenses/fleet/LICENSE`, and add it to `filePaths`.
 4. Env defaults that match the image: `ENV fleet_database_driver="org.mariadb.jdbc.Driver" fleet_app_port=8080 fleet_admin_authentication_type=DATABASE`.
 5. Tail:
    ```dockerfile
@@ -81,14 +81,14 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "UNVERIFIED"   // replace with the SPDX id confirmed for the jar (section 1)
+  default = "GPL-3.0"
 }
 
 variable "SOURCE" {
   default = "https://github.com/linuxserver/fleet"
 }
 ```
-Then the default group, `image`, `image-local` and `image-all` targets copied from `apps/nzbhydra2/docker-bake.hcl`. Do not commit the `UNVERIFIED` placeholder. Validate with `cd apps/fleet && docker buildx bake --print`. `VERSION` must equal the Dockerfile `ARG VERSION`.
+Then the default group, `image`, `image-local` and `image-all` targets copied from `apps/nzbhydra2/docker-bake.hcl`. Validate with `cd apps/fleet && docker buildx bake --print`. `VERSION` must equal the Dockerfile `ARG VERSION`.
 
 ## 6. settings.yaml
 
@@ -131,7 +131,7 @@ volumes:
 dependencies:
   - name: mariadb
 ```
-- `dependencies: mariadb` is ✅ (`apps/mariadb` exists). `opt_dependencies`: none.
+- `dependencies: mariadb` (`apps/mariadb` exists, checked). `opt_dependencies`: none.
 - Every name above is read by the jar or set by the upstream image. `TZ` is included per sibling convention; drop it if the jar does not read it (UNVERIFIED).
 - Required values: the `required: true` rule says a required variable needs a default or to be handled by start.sh. Empty defaults are not valid for a real default, so `start.sh` must check them and exit with a clear message. Confirm the schema accepts `default: ""` before relying on it (UNVERIFIED).
 
@@ -197,7 +197,7 @@ Run with `--read-only --tmpfs /tmp` and an empty `/config` volume. Confirm in th
 
 - **Wrong upstream in the draft.** The fleetdm.com docs and website links in the draft refer to a different product. The plan uses linuxserver/fleet. Correct the draft's links, or the PR description, before it is used for anything else.
 - **Deprecated upstream.** linuxserver deprecated Fleet in 2.3.3 (banner in the upstream image). Mention this in the PR.
-- **License.** The jar's license is UNVERIFIED. Blocker for `docker-bake.hcl` `LICENSE`.
+- **License.** GPL-3.0 per the GitHub API for linuxserver/fleet; confirm the `LICENSE` file at the 2.3.3 tag.
 - **MariaDB dependency.** Full functional testing needs a MariaDB. The single-container suite cannot provide it; the narrowed test is the fallback (section 8). Run the functional check by hand with `apps/mariadb` on the same Docker network, and say so in the PR.
 - **Required env values.** `fleet_database_url` and `fleet_database_password` have no default; `start.sh` refuses to start without them. The schema behaviour for empty defaults is UNVERIFIED.
 - **Admin setup.** The first admin is created in the web UI (manual setup). Agents need a TLS endpoint to connect; that is the user's responsibility, not the container's.

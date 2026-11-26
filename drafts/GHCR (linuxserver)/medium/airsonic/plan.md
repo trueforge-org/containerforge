@@ -36,7 +36,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 Runtime: `FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`
 
-The java17 image is itself on `ghcr.io/trueforge-org/ubuntu:26.4` (see `apps/java17/Dockerfile`), so the ubuntu base is inherited. Closest sibling: `apps/nzbhydra2` or `apps/airsonic-advanced` (Java WAR/JAR on java images; not re-read in this run). Only one stage is needed, because the WAR is downloaded and checked, not compiled.
+The java17 image is itself on `ghcr.io/trueforge-org/ubuntu:26.4` (see `apps/java17/Dockerfile`), so the ubuntu base is inherited. Closest sibling: `apps/airsonic-advanced` (WAR on the same java17 digest, installs ffmpeg/flac/lame/fontconfig/fonts-dejavu-core, exists in the repo) and `apps/nzbhydra2` (JAR on java17). Only one stage is needed, because the WAR is downloaded and checked, not compiled.
 
 ## 4. Dockerfile
 
@@ -53,7 +53,7 @@ The java17 image is itself on `ghcr.io/trueforge-org/ubuntu:26.4` (see `apps/jav
    ```
 5. License: ship the GPL-3.0 text at `/usr/share/licenses/airsonic/LICENSE`, taken from the upstream source at the `v10.6.2` tag. UNVERIFIED: the file path in the repo. The `master` raw URL returned 404, so check it against the tag before building.
 6. Clean: `apt-get clean && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*`.
-7. Environment that keeps state off `/app` and `/tmp` only for scratch:
+7. Environment (state in `/config`, scratch in `/tmp`):
    `ENV AIRSONIC_HOME=/app/airsonic AIRSONIC_SETTINGS=/config LANG=C.UTF-8 JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=/tmp`.
 8. Tail:
    ```dockerfile
@@ -113,7 +113,7 @@ Intended flow:
 - `mkdir -p /config/airsonic /tmp/airsonic-tmp`. Seed nothing: airsonic creates its database and state under `/config` on first start (UNVERIFIED that it does not need a seed file).
 - Set `AIRSONIC_SETTINGS=${AIRSONIC_SETTINGS:-/config}`.
 - Launch the WAR's embedded server, listening on all interfaces (UNVERIFIED launch command; the linuxserver s6 run script was not read. Confirm `java -jar` and any `--host`/port option by running it):
-  `exec java -Djava.io.tmpdir=/tmp -jar /app/airsonic/airsonic.war --host=0.0.0.0 --port=4040` (flags UNVERIFIED).
+  The sibling `apps/airsonic-advanced/start.sh` (a fork, same family) uses system properties, not CLI flags: `exec java -Dairsonic.home="${AIRSONIC_SETTINGS}" -Djava.awt.headless=true -Djava.io.tmpdir=/tmp -Dserver.host=0.0.0.0 -Dserver.port=4040 -jar /app/airsonic/airsonic.war`. Prefer this form; whether upstream 10.6.2 reads the same property names is UNVERIFIED (the `--host`/`--port` flags are wrong for Spring Boot and are dropped).
 - Idempotent with empty `/config`. No writes to `/app`. Caches and temp files to `/tmp`.
 
 ## 8. container-test.yaml
