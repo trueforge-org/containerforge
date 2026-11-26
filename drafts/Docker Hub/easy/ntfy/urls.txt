@@ -1,0 +1,5 @@
+https://docs.ntfy.sh
+https://github.com/binwiederhier/ntfy
+https://github.com/binwiederhier/ntfy/blob/v2.38.1/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ntfy
+https://hub.docker.com/r/binwiederhier/ntfy

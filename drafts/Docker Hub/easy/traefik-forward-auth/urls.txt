@@ -1,0 +1,4 @@
+https://github.com/thomseddon/traefik-forward-auth
+https://github.com/thomseddon/traefik-forward-auth/blob/83f06df/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traefik-forward-auth
+https://hub.docker.com/r/thomseddon/traefik-forward-auth

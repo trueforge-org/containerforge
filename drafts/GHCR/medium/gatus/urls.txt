@@ -1,0 +1,10 @@
+https://api.github.com/repos/TwiN/gatus
+https://api.github.com/repos/TwiN/gatus/contents/Dockerfile?ref=d255d0cd4d69ce818574cfdb3a7e82407e6559d7
+https://api.github.com/repos/TwiN/gatus/contents/go.mod
+https://api.github.com/repos/TwiN/gatus/releases/latest
+https://gatus.io
+https://gatus.io/docs
+https://github.com/TwiN/gatus
+https://github.com/TwiN/gatus/blob/d255d0cd4d69ce818574cfdb3a7e82407e6559d7/Dockerfile
+https://github.com/home-operations/gatus-sidecar
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gatus

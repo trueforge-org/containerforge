@@ -1,0 +1,8 @@
+https://archive.ubuntu.com/ubuntu
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/daysofwar
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/daysofwar/values.yaml
+https://store.steampowered.com/app/541790
+https://store.steampowered.com/search/?term=Days+of+War
+https://www.steampowered.com

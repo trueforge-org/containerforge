@@ -1,0 +1,7 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wekan
+https://github.com/wekan/wekan
+https://github.com/wekan/wekan/blob/v13.20/Dockerfile
+https://hub.docker.com/r/wekanteam/wekan
+https://raw.githubusercontent.com/wekan/wekan/v13.20/Dockerfile
+https://wekan.fi/install
+https://wekan.github.io

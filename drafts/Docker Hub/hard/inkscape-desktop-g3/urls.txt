@@ -1,0 +1,7 @@
+https://github.com/accetto/headless-drawing-g3
+https://github.com/accetto/headless-drawing-g3/blob/master/docker/Dockerfile.xfce.drawing
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/inkscape-desktop-g3
+https://gitlab.com/inkscape/inkscape
+https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-inkscape-g3
+https://inkscape.org
+https://wiki.inkscape.org/wiki/Main_Page

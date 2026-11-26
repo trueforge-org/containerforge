@@ -1,0 +1,5 @@
+http://unix:/tmp/imgpush.sock
+https://github.com/hauxir/imgpush
+https://github.com/hauxir/imgpush/blob/9a44956/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/imgpush
+https://hub.docker.com/r/hauxir/imgpush

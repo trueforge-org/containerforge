@@ -1,0 +1,6 @@
+https://docs.kde.org/?application=krusader
+https://github.com/KDE/krusader
+https://github.com/ich777/docker-krusader/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/krusader
+https://krusader.org
+https://raw.githubusercontent.com/ich777/docker-krusader/master/Dockerfile

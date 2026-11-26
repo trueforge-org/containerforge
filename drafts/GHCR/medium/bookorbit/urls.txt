@@ -1,0 +1,8 @@
+https://api.github.com/repos/bookorbit/bookorbit/releases/latest
+https://github.com/bookorbit/bookorbit
+https://github.com/bookorbit/bookorbit/blob/c1dd6b4f1947ff50843a155e12e70f1e7d15f0c7/Dockerfile
+https://github.com/bookorbit/bookorbit/releases/tag/v3.9.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bookorbit
+https://raw.githubusercontent.com/bookorbit/bookorbit/c1dd6b4f1947ff50843a155e12e70f1e7d15f0c7/.env.example
+https://raw.githubusercontent.com/bookorbit/bookorbit/c1dd6b4f1947ff50843a155e12e70f1e7d15f0c7/Dockerfile
+https://raw.githubusercontent.com/bookorbit/bookorbit/c1dd6b4f1947ff50843a155e12e70f1e7d15f0c7/server/entrypoint.sh

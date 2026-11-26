@@ -1,0 +1,9 @@
+https://cloud.example.com:443
+https://collaboraoffice.com/downloads/gpg/collaboraonline-release-keyring.gpg
+https://collaboraonline.com
+https://example.com:443
+https://github.com/CollaboraOnline/online
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/collabora
+https://hub.docker.com/r/collabora/code
+https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-deb
+https://www.collaboraonline.com/code

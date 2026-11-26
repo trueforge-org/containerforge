@@ -1,0 +1,7 @@
+https://github.com/RemiRigal/Plex-Auto-Languages
+https://github.com/RemiRigal/Plex-Auto-Languages/blob/HEAD/requirements.txt
+https://github.com/RemiRigal/Plex-Auto-Languages/releases/tag/v1.2.3
+https://github.com/remirigal/plex-auto-languages
+https://github.com/remirigal/plex-auto-languages/blob/104ead7b2093a8ece5afa00440b6060f7d5e455f/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-auto-languages
+https://hub.docker.com/r/remirigal/plex-auto-languages

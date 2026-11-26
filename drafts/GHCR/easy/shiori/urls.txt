@@ -1,0 +1,6 @@
+https://github.com/go-shiori/shiori
+https://github.com/go-shiori/shiori/blob/master/LICENSE
+https://github.com/go-shiori/shiori/blob/master/docs/index.md
+https://github.com/go-shiori/shiori/blob/v1.8.0/Dockerfile
+https://github.com/go-shiori/shiori/pkgs/container/shiori
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shiori

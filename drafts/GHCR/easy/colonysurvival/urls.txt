@@ -1,0 +1,9 @@
+https://archive.ubuntu.com/ubuntu
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/colonysurvival
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start-server.sh
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/colonysurvival/values.yaml
+https://store.steampowered.com/app/748090
+https://store.steampowered.com/search/?term=Colony+Survival
+https://www.steampowered.com

@@ -1,0 +1,6 @@
+https://github.com/Cesura/pastey
+https://github.com/Cesura/pastey/blob/533dda7ad7d8b20407d0bc750f1dbdbb69308d1c/Dockerfile-slim
+https://github.com/Cesura/pastey/blob/HEAD/requirements.txt
+https://github.com/Cesura/pastey/releases/tag/0.5.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pastey
+https://hub.docker.com/r/cesura/pastey

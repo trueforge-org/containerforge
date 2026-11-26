@@ -1,0 +1,4 @@
+https://github.com/Webreaper/Damselfly
+https://github.com/Webreaper/Damselfly/blob/e110926104cc93d3c87a9617ba7ab4ae70dbb216/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/damselfly
+https://hub.docker.com/r/webreaper/damselfly

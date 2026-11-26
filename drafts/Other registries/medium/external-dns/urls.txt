@@ -1,0 +1,6 @@
+https://github.com/kubernetes-sigs/external-dns
+https://github.com/kubernetes-sigs/external-dns/releases/tag/v0.24.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/external-dns
+https://kubernetes-sigs.github.io/external-dns
+https://raw.githubusercontent.com/kubernetes-sigs/external-dns/v0.24.0/README.md
+https://raw.githubusercontent.com/kubernetes-sigs/external-dns/v0.24.0/go.mod

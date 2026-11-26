@@ -1,0 +1,8 @@
+https://github.com/LMS-Community/slimserver
+https://github.com/LMS-Community/slimserver-platforms
+https://github.com/LMS-Community/slimserver-platforms/blob/d05c757/Docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lyrion-music-server
+https://hub.docker.com/r/lmscommunity/lyrionmusicserver
+https://lyrion.org
+https://lyrion.org/downloads
+https://lyrion.org/getting-started

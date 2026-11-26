@@ -1,0 +1,8 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/simply-shorten
+https://gitlab.com/api/v4/projects/draganczukp%2Fsimply-shorten/repository/tags
+https://gitlab.com/draganczukp/simply-shorten
+https://gitlab.com/draganczukp/simply-shorten/-/blob/1.1/Dockerfile
+https://gitlab.com/draganczukp/simply-shorten/-/raw/1.1/Dockerfile
+https://gitlab.com/draganczukp/simply-shorten/-/raw/master/LICENSE
+https://gitlab.com/draganczukp/simply-shorten/-/releases
+https://hub.docker.com/r/draganczukp/simply-shorten

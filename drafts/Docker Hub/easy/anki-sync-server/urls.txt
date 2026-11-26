@@ -1,0 +1,8 @@
+http://anki-sync-server-probe:27701
+http://host:27701
+https://docs.ankiweb.net/sync-server.html
+https://github.com/ankicommunity/anki-devops-services
+https://github.com/ankicommunity/anki-sync-server-rs
+https://github.com/ankicommunity/anki-sync-server-rs/blob/1.1.4/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/anki-sync-server
+https://hub.docker.com/r/ankicommunity/anki-sync-server-rs

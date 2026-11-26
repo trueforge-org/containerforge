@@ -1,0 +1,7 @@
+https://api.github.com/repos/emberstack/kubernetes-reflector
+https://api.github.com/repos/emberstack/kubernetes-reflector/releases/latest
+https://github.com/emberstack/kubernetes-reflector
+https://github.com/emberstack/kubernetes-reflector/blob/b26ca679e185e5da9c2ae100ea049e251701c606/src/ES.Kubernetes.Reflector/Dockerfile
+https://github.com/emberstack/kubernetes-reflector/releases/tag/v10.0.81
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kubernetes-reflector
+https://raw.githubusercontent.com/emberstack/kubernetes-reflector/b26ca679e185e5da9c2ae100ea049e251701c606/src/ES.Kubernetes.Reflector/Dockerfile

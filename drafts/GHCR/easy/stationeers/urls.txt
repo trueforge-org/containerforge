@@ -1,0 +1,6 @@
+https://archive.ubuntu.com/ubuntu
+https://developer.valvesoftware.com/wiki/SteamCMD
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/stationeers
+https://stationeers.net
+https://www.steampowered.com

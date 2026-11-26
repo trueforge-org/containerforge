@@ -1,0 +1,4 @@
+https://github.com/MrBrax/LiveStreamDVR
+https://github.com/MrBrax/LiveStreamDVR/blob/1cd7e8fa5b68e6c0cf9e657d1caa2cc74f7eb814/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/livestreamdvr
+https://hub.docker.com/r/mrbrax/twitchautomator

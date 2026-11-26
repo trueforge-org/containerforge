@@ -1,0 +1,10 @@
+https://api.github.com/repos/koush/scrypted/license
+https://api.github.com/repos/koush/scrypted/releases/latest
+https://docs.scrypted.app
+https://github.com/koush/scrypted
+https://github.com/koush/scrypted/blob/main/install/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/scrypted
+https://raw.githubusercontent.com/koush/scrypted/main/install/docker/Dockerfile
+https://registry.npmjs.org/@scrypted/server/latest
+https://scrypted.app
+https://www.random.org/cgi-bin/randbyte?

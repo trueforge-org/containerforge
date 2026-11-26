@@ -1,0 +1,6 @@
+https://github.com/benweet/stackedit
+https://github.com/benweet/stackedit.git
+https://github.com/benweet/stackedit/releases/tag/v5.14.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/stackedit
+https://hub.docker.com/r/qmcgaw/stackedit
+https://stackedit.io

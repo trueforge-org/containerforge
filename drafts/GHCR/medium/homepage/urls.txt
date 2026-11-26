@@ -1,0 +1,8 @@
+https://api.github.com/repos/gethomepage/homepage/releases/tags/v2.8.0
+https://github.com/benphelps/homepage
+https://github.com/gethomepage/homepage
+https://github.com/gethomepage/homepage/blob/08a0c1df566464bfdb327f3fd8f1f5a058d56640/Dockerfile
+https://github.com/gethomepage/homepage/releases/tag/v2.8.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homepage
+https://raw.githubusercontent.com/gethomepage/homepage/08a0c1df566464bfdb327f3fd8f1f5a058d56640/Dockerfile
+https://raw.githubusercontent.com/gethomepage/homepage/08a0c1df566464bfdb327f3fd8f1f5a058d56640/docker-entrypoint.sh

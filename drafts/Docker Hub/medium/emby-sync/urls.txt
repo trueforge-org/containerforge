@@ -1,0 +1,7 @@
+http://emby.invalid
+https://github.com/cameronurnes/emby-sync
+https://github.com/cameronurnes/emby-sync/blob/63bd8b3/Dockerfile
+https://github.com/cameronurnes/emby-sync/blob/HEAD/requirements.txt
+https://github.com/cameronurnes/emby-sync/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/emby-sync
+https://hub.docker.com/r/lastelement21/emby-sync

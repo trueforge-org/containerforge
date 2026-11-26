@@ -1,0 +1,8 @@
+https://gatus.io
+https://gatus.io/docs
+https://github.com/TwiN/gatus
+https://github.com/home-operations/gatus-sidecar
+https://github.com/home-operations/gatus-sidecar.git
+https://github.com/home-operations/gatus-sidecar/blob/1aefae52150e/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gatus
+https://raw.githubusercontent.com/home-operations/gatus-sidecar/1aefae52150e/Dockerfile

@@ -1,0 +1,5 @@
+https://github.com/jez500/bender
+https://github.com/jez500/bender/blob/fd780e5/Dockerfile
+https://github.com/jez500/bender/releases/tag/1.0.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bender
+https://hub.docker.com/r/jez500/bender

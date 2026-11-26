@@ -1,0 +1,5 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/external-ip
+https://github.com/xavier-hernandez/docker-external-ip
+https://github.com/xavier-hernandez/docker-external-ip/blob/3be417fe91ba6ab1be2eeb1c2ee218d01470a185/Dockerfile
+https://github.com/xavier-hernandez/docker-external-ip/releases
+https://hub.docker.com/r/xavierh/external-ip

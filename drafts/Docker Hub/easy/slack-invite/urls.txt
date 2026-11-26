@@ -1,0 +1,5 @@
+https://github.com/ninthwalker/slack-invite
+https://github.com/ninthwalker/slack-invite/blob/master/Dockerfile
+https://github.com/ninthwalker/slack-invite/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slack-invite
+https://hub.docker.com/r/ninthwalker/slack-invite

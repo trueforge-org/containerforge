@@ -1,0 +1,8 @@
+https://api.github.com/repos/OperatorFoundation/shapeshifter-dispatcher/license
+https://api.github.com/repos/OperatorFoundation/shapeshifter-dispatcher/releases
+https://github.com/OperatorFoundation/shapeshifter-dispatcher
+https://github.com/juchong/shapeshifter-docker
+https://github.com/juchong/shapeshifter-docker/blob/d2857ae/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shapeshifter-obfuscator
+https://hub.docker.com/r/juchong/shapeshifter-docker
+https://raw.githubusercontent.com/juchong/shapeshifter-docker/d2857ae/Dockerfile

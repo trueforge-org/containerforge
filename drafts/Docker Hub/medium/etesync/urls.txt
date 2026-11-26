@@ -1,0 +1,8 @@
+https://github.com/etesync
+https://github.com/etesync/server
+https://github.com/etesync/server/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/etesync
+https://github.com/victor-rds/docker-etebase
+https://github.com/victor-rds/docker-etebase/blob/c06eb631/tags/base/Dockerfile
+https://hub.docker.com/r/victorrds/etesync
+https://www.etesync.com

@@ -1,0 +1,7 @@
+https://...ics
+https://example.com/dav.php
+https://github.com/Vilhjalmr26/import_ics
+https://github.com/Vilhjalmr26/import_ics/blob/HEAD/import_ics/requirements.txt
+https://github.com/Vilhjalmr26/import_ics/blob/ec04d6c/dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/import-ics
+https://hub.docker.com/r/vilhjalmr26/import_ics

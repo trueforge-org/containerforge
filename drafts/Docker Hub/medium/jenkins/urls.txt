@@ -1,0 +1,12 @@
+https://get.jenkins.io/war/2.544/jenkins.war
+https://github.com/jenkinsci/docker
+https://github.com/jenkinsci/docker/blob/2.544/debian/Dockerfile
+https://github.com/jenkinsci/jenkins
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jenkins
+https://hub.docker.com/r/jenkins/jenkins
+https://raw.githubusercontent.com/jenkinsci/docker/2.544/debian/Dockerfile
+https://raw.githubusercontent.com/jenkinsci/docker/master/README.md
+https://raw.githubusercontent.com/jenkinsci/jenkins/master/LICENSE.txt
+https://updates.jenkins.io
+https://updates.jenkins.io/download/war/2.544/jenkins.war
+https://www.jenkins.io/doc

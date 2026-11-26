@@ -1,0 +1,9 @@
+https://api.github.com/repos/semaphoreui/semaphore/contents/deployment/docker/server/server-wrapper?ref=7cf38e07fa33532defa12db82b847b2ee4e6ea6f
+https://api.github.com/repos/semaphoreui/semaphore/license
+https://github.com/ansible-semaphore/semaphore
+https://github.com/semaphoreui/semaphore
+https://github.com/semaphoreui/semaphore/blob/7cf38e07fa33532defa12db82b847b2ee4e6ea6f/deployment/docker/server/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/semaphore
+https://hub.docker.com/r/semaphoreui/semaphore
+https://raw.githubusercontent.com/semaphoreui/semaphore/v2.20.23/LICENSE
+https://semaphoreui.com/docs

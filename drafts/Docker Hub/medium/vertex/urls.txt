@@ -1,0 +1,6 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vertex
+https://github.com/vertex-app/vertex
+https://github.com/vertex-app/vertex/blob/ec6fa1e6de502b8069ee0416d397ca419713473e/docker/Dockerfile
+https://gitlab.lswl.in/lswl/vertex
+https://hub.docker.com/r/lswl/vertex
+https://raw.githubusercontent.com/vertex-app/vertex/master/docker/Dockerfile

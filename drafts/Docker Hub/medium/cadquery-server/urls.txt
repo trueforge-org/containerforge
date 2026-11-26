@@ -1,0 +1,5 @@
+https://github.com/roipoussiere/cadquery
+https://github.com/roipoussiere/cadquery-server
+https://github.com/roipoussiere/cadquery-server/blob/fe634393ae00cb271aca935a119a560b01140362/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cadquery-server
+https://hub.docker.com/r/cadquery/cadquery-server

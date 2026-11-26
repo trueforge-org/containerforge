@@ -1,0 +1,6 @@
+https://github.com/ckulka/baikal-docker
+https://github.com/ckulka/baikal-docker/blob/06c53989a648198501cce322bd200221a5e1e136/nginx.dockerfile
+https://github.com/sabre-io/Baikal
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/baikal
+https://hub.docker.com/r/ckulka/baikal
+https://sabre.io/baikal

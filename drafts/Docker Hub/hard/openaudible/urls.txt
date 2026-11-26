@@ -1,0 +1,8 @@
+https://github.com/openaudible/openaudible_docker
+https://github.com/openaudible/openaudible_docker/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openaudible
+https://hub.docker.com/r/openaudible/openaudible
+https://openaudible.org
+https://openaudible.org/documentation
+https://openaudible.org/latest/linux_x86_64_deb
+https://openaudible.org/swt_version.json

@@ -1,0 +1,12 @@
+https://api.github.com/repos/ProtonMail/proton-bridge
+https://api.github.com/repos/ProtonMail/proton-bridge/releases/latest
+https://github.com/ProtonMail/proton-bridge
+https://github.com/shenxn/protonmail-bridge-docker
+https://github.com/shenxn/protonmail-bridge-docker/blob/ae5d201/build/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/protonmail-bridge
+https://hub.docker.com/r/shenxn/protonmail-bridge
+https://hub.docker.com/v2/repositories/shenxn/protonmail-bridge/tags
+https://proton.me/mail/bridge
+https://proton.me/support/mail/bridge
+https://raw.githubusercontent.com/ProtonMail/proton-bridge/master/Makefile
+https://raw.githubusercontent.com/shenxn/protonmail-bridge-docker/master/build/Dockerfile

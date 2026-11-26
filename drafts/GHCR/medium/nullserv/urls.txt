@@ -1,0 +1,6 @@
+https://api.github.com/repos/bmrzycki/nullserv/releases/latest
+https://github.com/bmrzycki/nullserv
+https://github.com/bmrzycki/nullserv/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nullserv
+https://raw.githubusercontent.com/bmrzycki/nullserv/master/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/nullserv/values.yaml

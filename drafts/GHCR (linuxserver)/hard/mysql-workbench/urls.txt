@@ -1,0 +1,9 @@
+https://api.github.com/repos/mysql/mysql-workbench
+https://cdn.mysql.com/Downloads/MySQLGUITools/mysql-workbench-community_8.0.47-1ubuntu24.04_amd64.deb.md5
+https://dev.mysql.com/doc/relnotes/workbench/en
+https://dev.mysql.com/doc/workbench/en
+https://github.com/linuxserver/docker-mysql-workbench/blob/4113f475a942/Dockerfile
+https://github.com/mysql/mysql-workbench
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mysql-workbench
+https://raw.githubusercontent.com/linuxserver/docker-mysql-workbench/4113f475a942/Dockerfile
+https://www.mysql.com/products/workbench

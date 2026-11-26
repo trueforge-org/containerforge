@@ -1,0 +1,7 @@
+https://archive.ubuntu.com/ubuntu
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dayofdefeatsource
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/dayofdefeatsource/values.yaml
+https://store.steampowered.com/app/232290
+https://www.steampowered.com

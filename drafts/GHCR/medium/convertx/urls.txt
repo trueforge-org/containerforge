@@ -1,0 +1,8 @@
+https://api.github.com/repos/C4illin/ConvertX
+https://api.github.com/repos/C4illin/ConvertX/releases/latest
+https://api.github.com/repos/visioncortex/vtracer/releases/tags/0.6.4
+https://github.com/C4illin/ConvertX
+https://github.com/C4illin/ConvertX/blob/42224e3f1f1ad0eb6e6d2bac661a5b3f2b2a2976/Dockerfile
+https://github.com/c4illin/ConvertX
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/convertx
+https://raw.githubusercontent.com/C4illin/ConvertX/42224e3f1f1ad0eb6e6d2bac661a5b3f2b2a2976/Dockerfile

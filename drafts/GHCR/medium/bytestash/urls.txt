@@ -1,0 +1,3 @@
+https://github.com/jordan-dalby/ByteStash
+https://github.com/jordan-dalby/ByteStash/blob/eb4ecdfc30f2e7d1424137fa7fe3a9eed663218b/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bytestash

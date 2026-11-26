@@ -1,0 +1,9 @@
+https://example.invalid
+https://github.com/shlinkio/shlink-web-client
+https://github.com/shlinkio/shlink-web-client/blob/develop/LICENSE
+https://github.com/shlinkio/shlink-web-client/blob/v4.9.0/Dockerfile
+https://github.com/shlinkio/shlink-web-client/blob/v4.9.1/Dockerfile
+https://github.com/shlinkio/shlink-web-client/blob/v4.9.1/config/docker/nginx.conf
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shlink-web-client
+https://shlink.io
+https://shlink.io/documentation

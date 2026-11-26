@@ -1,0 +1,6 @@
+https://8.8.8.8/dns-query
+https://github.com/IrineSistiana/mosdns
+https://github.com/Sagit-chu/mosdns-container/blob/HEAD/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mosdns
+https://hub.docker.com/r/601096721/mosdns
+https://irine-sistiana.gitbook.io/mosdns-wiki

@@ -1,0 +1,8 @@
+https://archive.ubuntu.com/ubuntu
+https://developer.valvesoftware.com/wiki/SteamCMD
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pixark
+https://pixark.snail.com
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://store.steampowered.com/app
+https://store.steampowered.com/app/824360

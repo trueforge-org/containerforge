@@ -1,0 +1,6 @@
+https://codeproject.github.io/codeproject.ai
+https://codeproject.github.io/codeproject.ai/install/install_on_linux.html
+https://dot.net/v1/dotnet-install.sh
+https://github.com/codeproject/CodeProject.AI-Server
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/codeproject-ai-server
+https://hub.docker.com/r/codeproject/ai-server

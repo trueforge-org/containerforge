@@ -1,0 +1,11 @@
+https://api.github.com/repos/sqlitebrowser/sqlitebrowser/releases/latest
+https://github.com/linuxserver/docker-sqlitebrowser
+https://github.com/linuxserver/docker-sqlitebrowser/blob/07d24df2caea/Dockerfile
+https://github.com/sqlitebrowser/sqlitebrowser
+https://github.com/sqlitebrowser/sqlitebrowser/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sqlitebrowser
+https://hub.docker.com/v2/repositories/linuxserver/sqlitebrowser/tags/18.04.1
+https://packages.ubuntu.com/resolute/sqlitebrowser
+https://raw.githubusercontent.com/linuxserver/docker-sqlitebrowser/07d24df2caea/Dockerfile
+https://raw.githubusercontent.com/sqlitebrowser/sqlitebrowser/master/LICENSE
+https://sqlitebrowser.org

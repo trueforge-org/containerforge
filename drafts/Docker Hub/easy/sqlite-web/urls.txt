@@ -1,0 +1,4 @@
+https://github.com/coleifer/sqlite-web
+https://github.com/coleifer/sqlite-web/blob/8c72947e63d6363f7b090801965e8321200283ba/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sqlite-web
+https://hub.docker.com/r/coleifer/sqlite-web

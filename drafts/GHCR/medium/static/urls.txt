@@ -1,0 +1,8 @@
+https://git.mills.io/prologic/static
+https://git.mills.io/prologic/static.git
+https://github.com/nicholaswilde/docker-static
+https://github.com/nicholaswilde/docker-static/blob/f52fab6/Dockerfile
+https://github.com/prologic/static
+https://github.com/prologic/static.git
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/static
+https://raw.githubusercontent.com/nicholaswilde/docker-static/f52fab6/Dockerfile

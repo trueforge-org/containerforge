@@ -1,0 +1,6 @@
+https://ffmpeg.org
+https://ffmpeg.org/documentation.html
+https://github.com/JakeWharton/mkvdts2ac3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ffmpeg-mkvdts2ac3
+https://hub.docker.com/r/snoopy86/ffmpeg
+https://registry.hub.docker.com/r/snoopy86/ffmpeg

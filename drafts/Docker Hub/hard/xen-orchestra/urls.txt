@@ -1,0 +1,7 @@
+https://docs.xen-orchestra.com
+https://github.com/ronivay/xen-orchestra-docker/blob/0be1b1f87e7895d3cc0091c4088fbfc97317687e/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xen-orchestra
+https://github.com/vatesfr/xen-orchestra
+https://github.com/vatesfr/xen-orchestra/releases
+https://hub.docker.com/r/ronivay/xen-orchestra
+https://xen-orchestra.com

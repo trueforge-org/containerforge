@@ -1,0 +1,8 @@
+https://api.github.com/repos/booklore-app/booklore/contents/docker/unrar
+https://api.github.com/repos/booklore-app/booklore/releases/latest
+https://github.com/booklore-app/booklore
+https://github.com/booklore-app/booklore/blob/f397e98c5ab021b02e8930ce278583af11637238/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/booklore
+https://raw.githubusercontent.com/booklore-app/booklore/f397e98c5ab021b02e8930ce278583af11637238/Dockerfile
+https://raw.githubusercontent.com/booklore-app/booklore/f397e98c5ab021b02e8930ce278583af11637238/booklore-api/src/main/resources/application.yaml
+https://raw.githubusercontent.com/booklore-app/booklore/f397e98c5ab021b02e8930ce278583af11637238/entrypoint.sh

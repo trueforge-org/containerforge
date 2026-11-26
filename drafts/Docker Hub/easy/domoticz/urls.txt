@@ -1,0 +1,6 @@
+https://github.com/domoticz/domoticz
+https://github.com/domoticz/domoticz-docker/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/domoticz
+https://hub.docker.com/r/domoticz/domoticz
+https://wiki.domoticz.com
+https://www.domoticz.com

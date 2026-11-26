@@ -1,0 +1,5 @@
+https://github.com/simse/chronos
+https://github.com/simse/chronos/blob/067532f/Dockerfile
+https://github.com/simse/chronos/blob/HEAD/requirements.txt
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chronos
+https://hub.docker.com/r/simsemand/chronos

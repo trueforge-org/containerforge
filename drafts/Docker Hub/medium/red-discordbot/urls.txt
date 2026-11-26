@@ -1,0 +1,13 @@
+https://docs.discord.red
+https://github.com/Cog-Creators/Red-DiscordBot
+https://github.com/Cog-Creators/Red-DiscordBot/blob/V3/develop/LICENSE
+https://github.com/Cog-Creators/Red-DiscordBot/releases/tag/3.5.24
+https://github.com/PhasecoreX/docker-red-discordbot
+https://github.com/PhasecoreX/docker-red-discordbot/blob/79e918d9c2cd87e249a1ed1a708a8b5f54f1d070/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/red-discordbot
+https://hub.docker.com/r/phasecorex/red-discordbot
+https://hub.docker.com/v2/repositories/phasecorex/red-discordbot/tags?name=full
+https://pypi.org/pypi/Red-DiscordBot/json
+https://raw.githubusercontent.com/PhasecoreX/docker-red-discordbot/79e918d9c2cd87e249a1ed1a708a8b5f54f1d070/Dockerfile
+https://raw.githubusercontent.com/PhasecoreX/docker-red-discordbot/79e918d9c2cd87e249a1ed1a708a8b5f54f1d070/README.md
+https://raw.githubusercontent.com/PhasecoreX/docker-red-discordbot/79e918d9c2cd87e249a1ed1a708a8b5f54f1d070/root/app/start-redbot.sh

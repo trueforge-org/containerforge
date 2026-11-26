@@ -1,0 +1,7 @@
+https://doc.voce.chat
+https://github.com/Privoce/vocechat-server-rust
+https://github.com/Privoce/vocechat-server-rust/blob/96c0aa5d100cc1c9090c004dbeb662ba3a08a6cd/build/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vocechat-server
+https://hub.docker.com/r/privoce/vocechat-server
+https://sh.voce.chat/web_client/v0.4.x
+https://voce.chat

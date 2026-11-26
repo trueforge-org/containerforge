@@ -1,0 +1,5 @@
+https://github.com/faldez/tanoshi
+https://github.com/luigi311/tanoshi
+https://github.com/luigi311/tanoshi.git
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tanoshi
+https://hub.docker.com/r/faldez/tanoshi

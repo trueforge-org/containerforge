@@ -1,0 +1,6 @@
+http://hostIP:3000
+https://github.com/petersem/posterr
+https://github.com/petersem/posterr/blob/4609d7e2ef2ce37bac78349b3978e61a706d0180/Dockerfile
+https://github.com/petersem/posterr/releases/tag/v1.15.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/posterr
+https://hub.docker.com/r/petersem/posterr

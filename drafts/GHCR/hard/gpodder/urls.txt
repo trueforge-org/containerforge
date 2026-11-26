@@ -1,0 +1,9 @@
+https://github.com/gpodder/gpodder
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gpodder
+https://github.com/xthursdayx/gpodder-docker/blob/2c723a12db40b1ab9ab2cde0b6b298932c245321/Dockerfile
+https://gpodder.github.io
+https://gpodder.github.io/docs
+https://raw.githubusercontent.com/gpodder/gpodder/3.11.5/COPYING
+https://raw.githubusercontent.com/gpodder/gpodder/3.11.5/setup.py
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gpodder/values.yaml
+https://raw.githubusercontent.com/xthursdayx/gpodder-docker/2c723a12db40b1ab9ab2cde0b6b298932c245321/Dockerfile

@@ -1,0 +1,8 @@
+https://api.github.com/repos/gamer92000/sinusbot-docker/contents/install.sh?ref=966f042fce2ab6a93c7fa50e39aff335ebd81e9a
+https://forum.sinusbot.com
+https://github.com/gamer92000/sinusbot-docker
+https://github.com/gamer92000/sinusbot-docker/blob/966f042fce2ab6a93c7fa50e39aff335ebd81e9a/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sinusbot
+https://michael.frie.se/sinusbot-1.1f-amd64.tar.bz2
+https://raw.githubusercontent.com/gamer92000/sinusbot-docker/966f042fce2ab6a93c7fa50e39aff335ebd81e9a/Dockerfile
+https://sinusbot.github.io/docs/faq/general

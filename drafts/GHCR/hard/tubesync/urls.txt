@@ -1,0 +1,9 @@
+https://api.github.com/repos/meeb/tubesync
+https://api.github.com/repos/meeb/tubesync/contents/README.md
+https://api.github.com/repos/meeb/tubesync/releases/latest
+https://github.com/meeb/tubesync
+https://github.com/meeb/tubesync/blob/d3f65687276f/Dockerfile
+https://github.com/meeb/tubesync/releases/tag/v0.19.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tubesync
+https://raw.githubusercontent.com/meeb/tubesync/main/Dockerfile
+https://registry.hub.docker.com/r/ghcr.io/meeb/tubesync

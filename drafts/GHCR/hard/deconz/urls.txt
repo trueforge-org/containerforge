@@ -1,0 +1,11 @@
+http://phoscon.de/rest
+https://api.github.com/repos/dresden-elektronik/deconz-rest-plugin
+https://github.com/deconz-community/deconz-docker/blob/f23db7e09be257f35e3e753e69fda7494ea94d52/docker/Dockerfile
+https://github.com/dresden-elektronik/deconz-rest-plugin
+https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.33.2
+https://github.com/marthoc/docker-deconz
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/deconz
+https://phoscon.de
+https://raw.githubusercontent.com/deconz-community/deconz-docker/f23db7e09be257f35e3e753e69fda7494ea94d52/docker/Dockerfile
+https://raw.githubusercontent.com/deconz-community/deconz-docker/f23db7e09be257f35e3e753e69fda7494ea94d52/docker/download-deconz.sh
+https://www.dresden-elektronik.de/funk/software/deconz.html

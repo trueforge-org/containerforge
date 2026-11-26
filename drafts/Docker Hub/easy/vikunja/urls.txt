@@ -1,0 +1,5 @@
+https://github.com/go-vikunja/vikunja
+https://github.com/go-vikunja/vikunja/blob/v2.8.0/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vikunja
+https://hub.docker.com/r/vikunja/vikunja
+https://vikunja.io/docs

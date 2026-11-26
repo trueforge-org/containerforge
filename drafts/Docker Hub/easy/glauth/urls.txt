@@ -1,0 +1,6 @@
+https://github.com/glauth/glauth
+https://github.com/glauth/glauth/blob/251ec3ef667e7e51f4b38c3f52c048f7f20dfc32/v2/docker/Dockerfile-standalone
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/glauth
+https://glauth.github.io
+https://hub.docker.com/r/glauth/glauth
+https://raw.githubusercontent.com/glauth/glauth/GLAuth-v2.5.5/LICENSE

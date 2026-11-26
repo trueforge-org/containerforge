@@ -1,0 +1,7 @@
+http://...:8888
+https://github.com/BGameiro2000/dockerfile/blob/master/arch-cern-root/Dockerfile
+https://github.com/root-project/root
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/root
+https://hub.docker.com/r/bgameiro/arch-cern-root
+https://root.cern
+https://root.cern/manual

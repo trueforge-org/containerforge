@@ -1,0 +1,4 @@
+https://github.com/rroller/media-roller
+https://github.com/rroller/media-roller/blob/968415c8a43992941c4aaf54eb7d2f97b85120be/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/media-roller
+https://hub.docker.com/r/ronnieroller/media-roller

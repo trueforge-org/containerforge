@@ -1,0 +1,8 @@
+https://docs.browserless.io
+https://docs.browserless.io/docs/docker.html
+https://github.com/browserless/browserless
+https://github.com/browserless/chrome
+https://github.com/browserless/chrome/blob/2ebe1345023358d9006a3058b17dbfcc87347843/docker/chrome/Dockerfile
+https://github.com/browserless/chrome/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/browserless-chrome
+https://hub.docker.com/r/browserless/chrome

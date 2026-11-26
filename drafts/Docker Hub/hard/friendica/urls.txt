@@ -1,0 +1,7 @@
+https://friendi.ca
+https://github.com/friendica/docker
+https://github.com/friendica/docker/blob/91cb08d73a60af3dc355b0e6ebeaa898389cea5b/2026.05/apache/Dockerfile
+https://github.com/friendica/friendica
+https://github.com/friendica/friendica/releases/tag/2026.05
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/friendica
+https://hub.docker.com/_/friendica

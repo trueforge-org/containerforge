@@ -1,0 +1,7 @@
+https://github.com/itzg/mc-router
+https://github.com/itzg/mc-router/blob/bc9198334912/Dockerfile
+https://github.com/itzg/mc-router/blob/main/README.md
+https://github.com/itzg/mc-router/releases/latest
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-router
+https://hub.docker.com/v2/repositories/itzg/mc-router/tags/1.56.5
+https://raw.githubusercontent.com/itzg/mc-router/main/Dockerfile

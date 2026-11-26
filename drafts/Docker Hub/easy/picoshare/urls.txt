@@ -1,0 +1,5 @@
+http://...:4001
+https://github.com/mtlynch/picoshare
+https://github.com/mtlynch/picoshare/blob/v1.5.5/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/picoshare
+https://hub.docker.com/r/mtlynch/picoshare

@@ -1,0 +1,8 @@
+https://api.github.com/repos/mongo-express/mongo-express/releases/tags/v1.1.0-rc-4
+https://github.com/mongo-express/mongo-express
+https://github.com/mongo-express/mongo-express/blob/6b0fc653660f9862a23f4b111eaa4daa0a3a6e2a/Dockerfile
+https://github.com/mongo-express/mongo-express/releases/tag/v1.1.0-rc-4
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mongo-express
+https://raw.githubusercontent.com/mongo-express/mongo-express/v1.1.0-rc-4/Dockerfile
+https://raw.githubusercontent.com/mongo-express/mongo-express/v1.1.0-rc-4/README.md
+https://registry.npmjs.org/mongo-express/latest

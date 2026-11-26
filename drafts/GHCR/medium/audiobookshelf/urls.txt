@@ -1,0 +1,8 @@
+https://api.github.com/repos/advplyr/audiobookshelf
+https://api.github.com/repos/advplyr/audiobookshelf/releases/latest
+https://github.com/advplyr/audiobookshelf
+https://github.com/advplyr/audiobookshelf/blob/1430c9fc642d586ff91c8d4cbed20aab2c47e473/Dockerfile
+https://github.com/advplyr/audiobookshelf/releases/tag/v2.38.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/audiobookshelf
+https://www.audiobookshelf.org
+https://www.audiobookshelf.org/docs

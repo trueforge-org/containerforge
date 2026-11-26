@@ -1,0 +1,6 @@
+https://github.com/bastienwirtz/homer
+https://github.com/bastienwirtz/homer/blob/b3f7fd87813ce4ea9c4ab91f9ffdca81c7e19db2/Dockerfile
+https://github.com/homer-dashboard/homer
+https://github.com/homer-dashboard/homer/releases/tag/v26.11.4
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homer
+https://raw.githubusercontent.com/bastienwirtz/homer/b3f7fd87813ce4ea9c4ab91f9ffdca81c7e19db2/Dockerfile

@@ -1,0 +1,6 @@
+https://github.com/maschhoff/shortipy
+https://github.com/maschhoff/shortipy/blob/52afd09/Dockerfile
+https://github.com/maschhoff/shortipy/blob/HEAD/requirements.txt
+https://github.com/maschhoff/shortipy/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shortipy
+https://hub.docker.com/r/knex666/shortipy

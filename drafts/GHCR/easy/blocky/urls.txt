@@ -1,0 +1,13 @@
+https://0xerr0r.github.io/blocky
+https://0xerr0r.github.io/blocky/latest
+https://api.github.com/repos/0xERR0R/blocky/license
+https://github.com/0xERR0R/blocky
+https://github.com/0xERR0R/blocky/blob/2d6f7d4be5e39717c9ebb66c365d7ab2ae620edd/Dockerfile
+https://github.com/0xERR0R/blocky/blob/master/Dockerfile
+https://github.com/0xERR0R/blocky/blob/master/docs/config.yml
+https://github.com/0xERR0R/blocky/blob/master/docs/configuration.md
+https://github.com/0xERR0R/blocky/releases/tag/v0.37.0
+https://github.com/Mozart409/blocky-frontend
+https://github.com/k8s-gateway/k8s_gateway
+https://github.com/k8s-gateway/k8s_gateway/blob/fc34def22c7802832aa10870b1fa8bbe310fe541/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/blocky

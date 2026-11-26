@@ -1,0 +1,8 @@
+https://api.github.com/repos/skeeto/endlessh/tags
+https://github.com/linuxserver/docker-endlessh/blob/a8ff0136bdf6498ea00988c71ca70afa4d49a10e/Dockerfile
+https://github.com/skeeto/endlessh
+https://github.com/skeeto/endlessh/blob/master/UNLICENSE
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/endlessh
+https://packages.ubuntu.com/resolute/endlessh
+https://raw.githubusercontent.com/linuxserver/docker-endlessh/master/Dockerfile
+https://raw.githubusercontent.com/skeeto/endlessh/master/README.md

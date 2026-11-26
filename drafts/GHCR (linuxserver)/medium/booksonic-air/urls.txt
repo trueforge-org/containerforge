@@ -1,0 +1,4 @@
+https://booksonic.org
+https://github.com/linuxserver/docker-booksonic-air/blob/a70824fbf40f6dc16ab7a8e957dda58267c05ed3/Dockerfile
+https://github.com/popeen/Booksonic-Air
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/booksonic-air

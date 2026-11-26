@@ -1,0 +1,8 @@
+https://docs.jupyter.org/en/latest
+https://github.com/jupyter/docker-stacks
+https://github.com/jupyter/docker-stacks/blob/fe190c9e10d341558f637d9e7c2e2dff6145ef6b/images/base-notebook/Dockerfile
+https://github.com/jupyter/notebook
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jupyter
+https://pypi.org/pypi/jupyterlab/json
+https://pypi.org/pypi/notebook/json
+https://raw.githubusercontent.com/jupyter/docker-stacks/fe190c9e10d341558f637d9e7c2e2dff6145ef6b/images/base-notebook/Dockerfile

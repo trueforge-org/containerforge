@@ -1,0 +1,15 @@
+https://docs.kitchenowl.org
+https://github.com/TomBursch/kitchenowl
+https://github.com/TomBursch/kitchenowl/blob/v0.8.1/backend/Dockerfile
+https://github.com/TomBursch/kitchenowl/blob/v0.8.1/kitchenowl/Dockerfile
+https://github.com/TomBursch/kitchenowl/releases/expanded_assets/v0.8.1
+https://github.com/TomBursch/kitchenowl/releases/tag/v0.8.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kitchenowl
+https://hub.docker.com/r/tombursch/kitchenowl
+https://hub.docker.com/r/tombursch/kitchenowl-web
+https://kitchenowl.org
+https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.8.1/LICENSE
+https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.8.1/backend/Dockerfile
+https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.8.1/backend/wsgi.ini
+https://raw.githubusercontent.com/TomBursch/kitchenowl/v0.8.1/kitchenowl/Dockerfile
+https://tombursch.github.io/kitchenowl

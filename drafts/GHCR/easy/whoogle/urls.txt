@@ -1,0 +1,8 @@
+https://github.com/benbusby/whoogle-search
+https://github.com/benbusby/whoogle-search/blob/efa36b111dc3035f2129e255040fbe1c7d8470f9/Dockerfile
+https://github.com/benbusby/whoogle-search/blob/v1.2.4/Dockerfile
+https://github.com/benbusby/whoogle-search/blob/v1.2.4/requirements.txt
+https://github.com/benbusby/whoogle-search/blob/v1.2.4/run
+https://github.com/benbusby/whoogle-search/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/whoogle
+https://pypi.org/pypi/whoogle-search/json

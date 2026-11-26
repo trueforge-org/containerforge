@@ -1,0 +1,10 @@
+https://api.github.com/repos/pocket-id/pocket-id
+https://api.github.com/repos/pocket-id/pocket-id/contents/backend/internal/common/env_config.go?ref=v2.19.3
+https://api.github.com/repos/pocket-id/pocket-id/contents/scripts/docker/entrypoint.sh?ref=v2.19.3
+https://api.github.com/repos/pocket-id/pocket-id/releases/latest
+https://docs.pocket-id.org
+https://github.com/pocket-id/pocket-id
+https://github.com/pocket-id/pocket-id/blob/v2.19.3/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pocket-id
+https://pocket-id.org
+https://raw.githubusercontent.com/pocket-id/pocket-id/v2.19.3/docker/Dockerfile

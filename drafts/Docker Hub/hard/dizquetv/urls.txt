@@ -1,0 +1,6 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dizquetv
+https://github.com/vexorian/dizquetv
+https://github.com/vexorian/dizquetv/blob/ce37783/Dockerfile-nvidia
+https://github.com/vexorian/dizquetv/releases/tag/1.7.0
+https://github.com/vexorian/dizquetv/wiki
+https://hub.docker.com/r/vexorian/dizquetv

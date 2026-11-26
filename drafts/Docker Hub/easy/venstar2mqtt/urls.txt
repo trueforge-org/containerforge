@@ -1,0 +1,6 @@
+https://github.com/terafin/homeautomation-js-lib
+https://github.com/terafin/homeautomation-js-lib.git
+https://github.com/terafin/mqtt-venstar-bridge
+https://github.com/terafin/mqtt-venstar-bridge/blob/423f9bd/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/venstar2mqtt
+https://hub.docker.com/r/terafin/mqtt-venstar-bridge

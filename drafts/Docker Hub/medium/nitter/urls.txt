@@ -1,0 +1,5 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nitter
+https://github.com/zedeus/nitter
+https://github.com/zedeus/nitter/blob/145ca9eb68d195a74598ae39a4d6da002b252c38/Dockerfile
+https://github.com/zedeus/nitter/blob/main/Dockerfile
+https://hub.docker.com/r/zedeus/nitter

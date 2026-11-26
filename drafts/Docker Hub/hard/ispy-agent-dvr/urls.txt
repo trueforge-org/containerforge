@@ -1,0 +1,9 @@
+https://github.com/doitandbedone/ispyagentdvr-docker
+https://github.com/doitandbedone/ispyagentdvr-docker/blob/7.1.8.0/Dockerfile
+https://github.com/ispysoftware/agentdvr-docker
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ispy-agent-dvr
+https://hub.docker.com/r/doitandbedone/ispyagentdvr
+https://www.ispyconnect.com
+https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=Linux64&fromVersion=0
+https://www.ispyconnect.com/docs/agent
+https://www.ispyconnect.com/producthistory?productid=27

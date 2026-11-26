@@ -1,0 +1,7 @@
+https://archive.ubuntu.com/ubuntu
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/survivethenights
+https://hub.docker.com/v2/repositories/ich777/steamcmd/tags/stn
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://store.steampowered.com/app/541300
+https://www.steampowered.com

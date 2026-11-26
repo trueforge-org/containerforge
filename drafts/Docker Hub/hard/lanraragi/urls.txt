@@ -1,0 +1,9 @@
+http://*:3000
+https://github.com/Difegue/LANraragi
+https://github.com/Difegue/LANraragi/blob/add16039b89726afa1cdd92b6dab548191bac987/tools/build/docker/Dockerfile
+https://github.com/Difegue/LANraragi/blob/dev/tools/build/docker/Dockerfile
+https://github.com/Difegue/LANraragi/releases/tag/v.0.9.41
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lanraragi
+https://hub.docker.com/r/difegue/lanraragi
+https://sugoi.gitbook.io/lanraragi
+https://sugoi.gitbook.io/lanraragi/v/dev

@@ -1,0 +1,8 @@
+https://api.github.com/repos/pwm-project/pwm/releases/latest
+https://github.com/fjudith/pwm-container/blob/a011fb616d0a963ba60fe4f71056a0be5d34a78d/alpine/Dockerfile
+https://github.com/pwm-project/pwm
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pwm
+https://hub.docker.com/r/fjudith/pwm
+https://pwm-project.org
+https://raw.githubusercontent.com/fjudith/pwm-container/master/alpine/Dockerfile
+https://raw.githubusercontent.com/pwm-project/pwm/master/LICENSE

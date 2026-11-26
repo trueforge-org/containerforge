@@ -1,0 +1,6 @@
+https://acestream.org
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/acestream
+https://github.com/vstavrinov/acestream-service
+https://github.com/vstavrinov/acestream-service/blob/0fa3ec927b0599c213abcdd75e9a8a72211b5189/Dockerfile
+https://github.com/vstavrinov/acestream_search.git
+https://hub.docker.com/r/vstavrinov/acestream-service

@@ -1,0 +1,11 @@
+https://adaway.org/hosts.txt
+https://github.com/BeryJu/gravity
+https://github.com/BeryJu/gravity/blob/38c7947343d673dbe379ba3cc412fabf773ff7d9/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gravity
+https://gravity.beryju.io
+https://gravity.beryju.io/docs
+https://raw.githubusercontent.com/BeryJu/gravity/38c7947343d673dbe379ba3cc412fabf773ff7d9/Dockerfile
+https://raw.githubusercontent.com/BeryJu/gravity/38c7947343d673dbe379ba3cc412fabf773ff7d9/LICENSE
+https://raw.githubusercontent.com/BeryJu/gravity/38c7947343d673dbe379ba3cc412fabf773ff7d9/Makefile
+https://raw.githubusercontent.com/BeryJu/gravity/38c7947343d673dbe379ba3cc412fabf773ff7d9/go.mod
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/gravity/values.yaml

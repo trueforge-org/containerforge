@@ -1,0 +1,7 @@
+https://api.github.com/repos/kmahyyg/ztncui-aio
+https://api.github.com/repos/kmahyyg/ztncui-aio/releases/tags/v2024.1.28-r1
+https://github.com/key-networks/ztncui-containerized
+https://github.com/kmahyyg/ztncui-aio
+https://github.com/kmahyyg/ztncui-aio/blob/v2024.1.28-r1/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ztcuui-aio
+https://raw.githubusercontent.com/kmahyyg/ztncui-aio/v2024.1.28-r1/Dockerfile

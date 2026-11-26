@@ -1,0 +1,7 @@
+https://github.com/k8s-at-home/container-images
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xteve
+https://github.com/xteve-project/xTeVe
+https://github.com/xteve-project/xTeVe-Documentation/blob/master/en/configuration.md
+https://github.com/xteve-project/xTeVe-Downloads
+https://github.com/xteve-project/xTeVe-Downloads/blob/master/info.json
+https://raw.githubusercontent.com/xteve-project/xTeVe/master/LICENSE

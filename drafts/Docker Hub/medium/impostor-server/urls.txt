@@ -1,0 +1,4 @@
+https://github.com/AeonLucid/Impostor
+https://github.com/AeonLucid/Impostor/blob/v1.10.10/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/impostor-server
+https://hub.docker.com/r/aeonlucid/impostor

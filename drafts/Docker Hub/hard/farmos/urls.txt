@@ -1,0 +1,7 @@
+https://farmOS.org
+https://farmOS.org/hosting/install
+https://github.com/farmOS/composer-project.git
+https://github.com/farmOS/farmOS
+https://github.com/farmOS/farmOS/blob/c09e3f403a21e2c3073dd5db686981c99e0314b7/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/farmos
+https://hub.docker.com/r/farmos/farmos

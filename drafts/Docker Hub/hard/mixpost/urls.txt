@@ -1,0 +1,8 @@
+https://docs.mixpost.app
+https://docs.mixpost.app/lite
+https://github.com/inovector/MixpostApp
+https://github.com/inovector/mixpost
+https://github.com/inovector/mixpost/releases/tag/2.6.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mixpost
+https://hub.docker.com/r/inovector/mixpost
+https://mixpost.app

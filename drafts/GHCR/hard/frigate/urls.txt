@@ -1,0 +1,10 @@
+https://api.github.com/repos/blakeblackshear/frigate/license
+https://api.github.com/repos/blakeblackshear/frigate/releases/latest
+https://docs.frigate.video
+https://frigate.video
+https://github.com/blakeblackshear/frigate
+https://github.com/blakeblackshear/frigate/blob/HEAD/docker/main/requirements.txt
+https://github.com/blakeblackshear/frigate/blob/a19e23ae2dd3dd1082bf82a0ad5d2b62a5813676/docker/main/Dockerfile
+https://github.com/blakeblackshear/frigate/releases/tag/v0.18.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/frigate
+https://raw.githubusercontent.com/blakeblackshear/frigate/a19e23ae2dd3dd1082bf82a0ad5d2b62a5813676/docker/main/Dockerfile

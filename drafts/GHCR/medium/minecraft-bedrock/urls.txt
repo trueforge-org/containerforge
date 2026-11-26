@@ -1,0 +1,16 @@
+https://api.github.com/repos/itzg/docker-minecraft-bedrock-server/releases/latest
+https://github.com/itzg/docker-minecraft-bedrock-server
+https://github.com/itzg/docker-minecraft-bedrock-server/blob/dbf8516038c8/Dockerfile
+https://github.com/itzg/docker-minecraft-server
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-bedrock
+https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockserver/getting-started
+https://net.web.minecraft-services.net/api/v1.0/download/links
+https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/Dockerfile
+https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/LICENSE
+https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/README.md
+https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/bedrock-entry.sh
+https://raw.githubusercontent.com/itzg/docker-minecraft-bedrock-server/master/demoter-entry.sh
+https://raw.githubusercontent.com/kittizz/bedrock-server-downloads/refs/heads/main/bedrock-server-downloads.json
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/minecraft-bedrock/values.yaml
+https://www.minecraft.net/en-us/download/server/bedrock
+https://www.minecraft.net/en-us/eula

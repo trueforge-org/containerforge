@@ -1,0 +1,5 @@
+https://github.com/idank/explainshell
+https://github.com/idank/explainshell/blob/827ebe3/prod/docker/Dockerfile
+https://github.com/idank/explainshell/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/explainshell
+https://hub.docker.com/r/spaceinvaderone/explainshell

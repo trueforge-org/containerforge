@@ -1,0 +1,8 @@
+https://api.github.com/repos/ipsingh06/seedsync/releases/tags/v0.8.6
+https://github.com/ipsingh06/seedsync
+https://github.com/ipsingh06/seedsync/blob/ff2a103/src/docker/build/docker-image/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/seedsync
+https://hub.docker.com/r/ipsingh06/seedsync
+https://raw.githubusercontent.com/ipsingh06/seedsync/ff2a103/src/docker/build/docker-image/Dockerfile
+https://raw.githubusercontent.com/ipsingh06/seedsync/master/src/docker/build/docker-image/setup_default_config.sh
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/seedsync/values.yaml

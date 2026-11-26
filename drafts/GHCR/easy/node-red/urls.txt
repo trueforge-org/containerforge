@@ -1,0 +1,8 @@
+https://github.com/node-red/node-red
+https://github.com/node-red/node-red-docker
+https://github.com/node-red/node-red-docker/blob/69e4248/.docker/Dockerfile.debian
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/node-red
+https://nodered.org/docs
+https://raw.githubusercontent.com/node-red/node-red-docker/master/.docker/Dockerfile.debian
+https://raw.githubusercontent.com/node-red/node-red/master/LICENSE
+https://registry.npmjs.org/node-red/latest

@@ -1,0 +1,4 @@
+https://github.com/revenz/Fenrus
+https://github.com/revenz/Fenrus/blob/fc8f57ac9d5643d16f7d8427f8341397e645f501/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fenrus
+https://hub.docker.com/r/revenz/fenrus

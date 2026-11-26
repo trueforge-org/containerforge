@@ -1,0 +1,7 @@
+https://bitbucket.org/wisemapping/wisemapping-open-source/src/develop
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wisemapping
+https://github.com/wisemapping/wisemapping-frontend
+https://github.com/wisemapping/wisemapping-open-source
+https://github.com/wisemapping/wisemapping-open-source/blob/5099d14e6290138a97f599079eaf42daa2d2ad3c/distribution/app/Dockerfile
+https://hub.docker.com/r/wisemapping/wisemapping
+https://www.wisemapping.com

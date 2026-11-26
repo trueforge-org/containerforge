@@ -1,0 +1,9 @@
+https://github.com/mbentley/docker-omada-controller
+https://github.com/mbentley/docker-omada-controller/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/omada-controller
+https://hub.docker.com/r/mbentley/omada-controller
+https://omada-controller-url.mbentley.net/hooks/omada_ver_to_url?omada-ver=6.3.0.111
+https://www.omadanetworks.com
+https://www.omadanetworks.com/en/support
+https://www.tp-link.com/en/omada-sdn
+https://www.tp-link.com/en/support/download/omada-software-controller

@@ -1,0 +1,5 @@
+https://docs.tagspaces.org
+https://github.com/fardjad/tagspaces-lite-docker/blob/495b1805d716d826fdd70ddc558df4a700b364be/Dockerfile
+https://github.com/tagspaces/tagspaces
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tagspaces
+https://hub.docker.com/r/fardjad/tagspaces-lite-web

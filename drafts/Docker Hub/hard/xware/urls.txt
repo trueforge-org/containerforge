@@ -1,0 +1,8 @@
+https://github.com/caiguai/docker-xware
+https://github.com/caiguai/docker-xware/blob/master/Dockerfile
+https://github.com/caiguai/docker-xware/raw/2ea1f2f62c173d44beaef2a44005cc2696d2710c/xware.tar.bz
+https://github.com/caiguai/docker-xware/raw/master/xware.tar.bz
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xware
+https://help.xunlei.com
+https://hub.docker.com/r/caiguai/docker-xware
+https://www.xunlei.com

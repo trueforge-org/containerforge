@@ -1,0 +1,8 @@
+http://...:8428
+https://docs.victoriametrics.com
+https://github.com/VictoriaMetrics/VictoriaMetrics
+https://github.com/VictoriaMetrics/VictoriaMetrics/blob/v1.156.0/app/victoria-metrics/deployment/Dockerfile
+https://github.com/VictoriaMetrics/VictoriaMetrics/tree/master
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/victoriametrics
+https://hub.docker.com/r/victoriametrics/victoria-metrics
+https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/v1.157.0/LICENSE

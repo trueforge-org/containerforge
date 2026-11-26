@@ -1,0 +1,8 @@
+https://api.github.com/repos/nzzane/haste-server
+https://api.github.com/repos/nzzane/haste-server/contents/Dockerfile
+https://github.com/k8s-at-home/container-images
+https://github.com/nzzane/haste-server
+https://github.com/seejohnrun/haste-server
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/haste-server
+https://hub.docker.com/v2/repositories/k8s-at-home/haste-server
+https://registry.npmjs.org/haste-server/latest

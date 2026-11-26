@@ -1,0 +1,4 @@
+https://github.com/hoobs-org/HOOBS
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hoobs
+https://hoobs.org
+https://hub.docker.com/r/hoobs/hoobs

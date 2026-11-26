@@ -1,0 +1,5 @@
+https://github.com/squat/generic-device-plugin
+https://github.com/squat/generic-device-plugin/blob/f7c3291/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/generic-device-plugin
+https://raw.githubusercontent.com/squat/generic-device-plugin/f7c3291/LICENSE
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/generic-device-plugin/values.yaml

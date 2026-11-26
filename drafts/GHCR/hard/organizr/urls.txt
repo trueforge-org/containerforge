@@ -1,0 +1,8 @@
+https://docs.organizr.app
+https://github.com/Organizr/docker-organizr
+https://github.com/Organizr/docker-organizr/blob/53b8b05/Dockerfile
+https://github.com/causefx/Organizr
+https://github.com/causefx/Organizr/releases/latest
+https://github.com/causefx/Organizr/releases/tag/1.90
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/organizr
+https://raw.githubusercontent.com/Organizr/docker-organizr/53b8b05/Dockerfile

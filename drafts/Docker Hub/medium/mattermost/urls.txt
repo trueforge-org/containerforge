@@ -1,0 +1,9 @@
+https://docs.mattermost.com
+https://github.com/mattermost/docker
+https://github.com/mattermost/mattermost
+https://github.com/mattermost/mattermost-server
+https://github.com/mattermost/mattermost/blob/release-9.6/server/build/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mattermost
+https://hub.docker.com/r/mattermost/mattermost-enterprise-edition
+https://latest.mattermost.com/mattermost-enterprise-linux
+https://mattermost.com

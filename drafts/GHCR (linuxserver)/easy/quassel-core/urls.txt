@@ -1,0 +1,9 @@
+https://api.github.com/repos/quassel/quassel/releases/latest
+https://bugs.quassel-irc.org/projects/1/wiki
+https://github.com/linuxserver/docker-quassel-core/blob/c995ed5491d2/Dockerfile
+https://github.com/quassel/quassel
+https://github.com/quassel/quassel/releases/tag/0.14.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quassel-core
+https://packages.ubuntu.com/resolute/quassel-core
+https://quassel-irc.org/about
+https://raw.githubusercontent.com/linuxserver/docker-quassel-core/c995ed5491d2/Dockerfile

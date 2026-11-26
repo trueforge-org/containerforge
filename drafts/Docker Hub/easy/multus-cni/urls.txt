@@ -1,0 +1,5 @@
+https://github.com/alpine-docker/crane/blob/master/Dockerfile
+https://github.com/google/go-containerregistry
+https://github.com/k8snetworkplumbingwg/multus-cni
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/multus-cni
+https://hub.docker.com/r/alpine/crane

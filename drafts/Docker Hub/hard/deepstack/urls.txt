@@ -1,0 +1,8 @@
+https://deepstack.cc
+https://docs.deepstack.cc
+https://github.com/johnolafenwa/DeepStack
+https://github.com/johnolafenwa/DeepStack/blob/73b6f7ab0f9a8acc8f7a49c6f13594fe470de042/Dockerfile.cpu
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/deepstack
+https://hub.docker.com/r/deepquestai/deepstack
+https://raw.githubusercontent.com/johnolafenwa/DeepStack/73b6f7ab0f9a8acc8f7a49c6f13594fe470de042/LICENSE
+https://www.deepstack.cc

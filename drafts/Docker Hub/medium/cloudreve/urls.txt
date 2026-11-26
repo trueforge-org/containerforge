@@ -1,0 +1,5 @@
+https://docs.cloudreve.org/en
+https://github.com/cloudreve/Cloudreve
+https://github.com/cloudreve/Cloudreve/blob/9f1e0b8333f5c7304a09e1dcb3f9c170dddd63f3/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cloudreve
+https://hub.docker.com/r/cloudreve/cloudreve

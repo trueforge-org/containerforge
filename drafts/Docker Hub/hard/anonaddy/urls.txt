@@ -1,0 +1,9 @@
+https://addy-sh.test
+https://addy.io
+https://addy.io/help
+https://github.com/anonaddy/anonaddy
+https://github.com/anonaddy/anonaddy/releases/tag/v1.7.4
+https://github.com/anonaddy/docker
+https://github.com/anonaddy/docker/blob/e3f8bd3d009bab256dba3033f8c5f100198439e6/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/anonaddy
+https://hub.docker.com/r/anonaddy/anonaddy

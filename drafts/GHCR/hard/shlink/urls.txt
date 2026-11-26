@@ -1,0 +1,11 @@
+https://api.github.com/repos/shlinkio/shlink/releases/latest
+https://github.com/shlinkio/shlink
+https://github.com/shlinkio/shlink/blob/v5.1.8/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shlink
+https://raw.githubusercontent.com/shlinkio/shlink/v5.1.9/Dockerfile
+https://raw.githubusercontent.com/shlinkio/shlink/v5.1.9/LICENSE
+https://raw.githubusercontent.com/shlinkio/shlink/v5.1.9/config/roadrunner/.rr.yml
+https://raw.githubusercontent.com/shlinkio/shlink/v5.1.9/docker/docker-entrypoint.sh
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shlink/values.yaml
+https://shlink.io
+https://shlink.io/documentation

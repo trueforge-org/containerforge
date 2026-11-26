@@ -1,0 +1,8 @@
+https://fireshare.net
+https://github.com/ShaneIsrael/fireshare
+https://github.com/ShaneIsrael/fireshare/blob/6889f4484e3163231ce337ea0aa231b99cbfb5c4/Dockerfile
+https://github.com/fireshare-app/fireshare
+https://github.com/fireshare-app/fireshare/blob/HEAD/app/server/requirements.txt
+https://github.com/fireshare-app/fireshare/releases/tag/v1.9.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fireshare
+https://hub.docker.com/r/shaneisrael/fireshare

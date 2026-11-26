@@ -1,0 +1,5 @@
+https://github.com/linuxserver/docker-kodi-headless
+https://github.com/linuxserver/docker-kodi-headless/blob/8962e35/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kodi-headless
+https://github.com/xbmc/xbmc
+https://hub.docker.com/r/linuxserver/kodi-headless

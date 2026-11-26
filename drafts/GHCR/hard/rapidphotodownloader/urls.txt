@@ -1,0 +1,10 @@
+https://api.github.com/repos/damonlynch/rapid-photo-downloader/releases/latest
+https://damonlynch.net/rapid/documentation
+https://github.com/damonlynch/rapid-photo-downloader
+https://github.com/ich777/docker-rapidphotodownloader/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rapidphotodownloader
+https://packages.ubuntu.com/search?keywords=rapid-photo-downloader&searchon=names&suite=all&section=all
+https://raw.githubusercontent.com/ich777/docker-rapidphotodownloader/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-rapidphotodownloader/master/scripts/start.sh
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rapidphotodownloader/values.yaml
+https://www.damonlynch.net/rapid

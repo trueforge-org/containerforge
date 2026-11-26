@@ -1,0 +1,5 @@
+https://github.com/Forceu/barcodebuddy
+https://github.com/Forceu/barcodebuddy-docker/blob/527c3c637a39298fb0b5ab57cf532bbdc2aa54b5/Dockerfile
+https://github.com/Forceu/barcodebuddy/releases/tag/v1.9.0.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/barcodebuddy
+https://hub.docker.com/r/f0rc3/barcodebuddy

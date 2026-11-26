@@ -1,0 +1,8 @@
+https://api.github.com/repos/kovidgoyal/calibre
+https://api.github.com/repos/kovidgoyal/calibre/releases/latest
+https://calibre-ebook.com
+https://github.com/kovidgoyal/calibre
+https://github.com/linuxserver/docker-calibre/blob/8aa349b17edf2d4bed988982d71803684399f01a/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/calibre
+https://manual.calibre-ebook.com
+https://raw.githubusercontent.com/linuxserver/docker-calibre/master/Dockerfile

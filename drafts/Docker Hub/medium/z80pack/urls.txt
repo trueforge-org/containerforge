@@ -1,0 +1,11 @@
+https://api.github.com/repos/udo-munk/z80pack
+https://api.github.com/repos/udo-munk/z80pack/releases
+https://github.com/dlandon/z80pack/blob/ae67a0f2e18868f5ccc99eff31973183c4965aa6/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/z80pack
+https://github.com/udo-munk/z80pack
+https://hub.docker.com/r/dlandon/z80pack
+https://raw.githubusercontent.com/dlandon/z80pack/ae67a0f2e18868f5ccc99eff31973183c4965aa6/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/z80pack/values.yaml
+https://raw.githubusercontent.com/udo-munk/z80pack/master/README.md
+https://registry.hub.docker.com/r/dlandon/z80pack
+https://www.icl1900.co.uk/unix4fun/z80pack

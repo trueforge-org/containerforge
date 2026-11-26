@@ -1,0 +1,6 @@
+https://$host:8443
+https://github.com/trango-io/trango-self-hosted
+https://github.com/trango-io/trango-self-hosted/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/trango
+https://hub.docker.com/r/tak786/trango-self-hosted
+https://trango.io

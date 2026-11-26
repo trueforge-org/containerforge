@@ -1,0 +1,11 @@
+https://github.com/docker-library/redmine/blob/49a27f29f1d214a4226af75b55578e36d3474c4c/6.1/bookworm/Dockerfile
+https://github.com/redmine/redmine
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/redmine
+https://hub.docker.com/_/redmine
+https://hub.docker.com/v2/repositories/library/redmine/tags?page_size=100&name=bookworm
+https://raw.githubusercontent.com/docker-library/redmine/49a27f29f1d214a4226af75b55578e36d3474c4c/6.1/bookworm/Dockerfile
+https://raw.githubusercontent.com/docker-library/redmine/49a27f29f1d214a4226af75b55578e36d3474c4c/6.1/bookworm/docker-entrypoint.sh
+https://raw.githubusercontent.com/redmine/redmine/master/LICENSE.txt
+https://www.redmine.org
+https://www.redmine.org/projects/redmine/wiki
+https://www.redmine.org/releases

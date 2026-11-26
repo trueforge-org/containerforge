@@ -1,0 +1,7 @@
+https://github.com/rmountjoy92/DashMachine
+https://github.com/rmountjoy92/DashMachine/blob/be50c2e763ae4e18f95855c18ba31c42199a4b3e/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dashmachine
+https://hub.docker.com/r/rmountjoy/dashmachine
+https://hub.docker.com/v2/repositories/rmountjoy/dashmachine/tags/latest
+https://raw.githubusercontent.com/rmountjoy92/DashMachine/be50c2e763ae4e18f95855c18ba31c42199a4b3e/Dockerfile
+https://raw.githubusercontent.com/rmountjoy92/DashMachine/be50c2e763ae4e18f95855c18ba31c42199a4b3e/README.md

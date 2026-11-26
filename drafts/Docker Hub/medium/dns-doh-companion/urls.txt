@@ -1,0 +1,7 @@
+https://1.0.0.1/dns-query
+https://1.1.1.1/dns-query
+https://developers.cloudflare.com/1.1.1.1/dns-over-https/cloudflared-proxy
+https://github.com/cloudflare/cloudflared
+https://github.com/testdasi/simple-dns-doh/blob/354be66/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dns-doh-companion
+https://hub.docker.com/r/testdasi/simple-dns-doh

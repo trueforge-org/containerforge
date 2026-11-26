@@ -1,0 +1,6 @@
+https://api.uptimerobot.com/v3
+https://github.com/billimek/prometheus-uptimerobot-exporter/blob/0.0.1/Dockerfile
+https://github.com/k8s-at-home/charts/tree/master/charts/uptimerobot-prometheus
+https://github.com/lekpamartin/uptimerobot_exporter
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/uptimerobot-prometheus
+https://hub.docker.com/r/billimek/prometheus-uptimerobot-exporter

@@ -1,0 +1,4 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xmrig
+https://github.com/xmrig/xmrig
+https://hub.docker.com/r/cooleye72/xmrig
+https://xmrig.com/docs

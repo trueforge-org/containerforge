@@ -1,0 +1,6 @@
+https://api.github.com/repos/tigerblue77/Dell_iDRAC_fan_controller_Docker/releases/latest
+https://github.com/tigerblue77/Dell_iDRAC_fan_controller_Docker
+https://github.com/tigerblue77/Dell_iDRAC_fan_controller_Docker/blob/24fa182fa86f5c247466f023316939096b96042d/Dockerfile
+https://github.com/tigerblue77/Dell_iDRAC_fan_controller_Docker/releases/tag/v1.108
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dell-idrac-fan-controller
+https://raw.githubusercontent.com/tigerblue77/Dell_iDRAC_fan_controller_Docker/24fa182fa86f5c247466f023316939096b96042d/Dockerfile

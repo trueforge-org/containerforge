@@ -1,0 +1,12 @@
+https://api.github.com/repos/ich777/docker-steamcmd-server/branches
+https://api.github.com/repos/ich777/docker-steamcmd-server/contents/Dockerfile?ref=citadelfwf
+https://api.github.com/repos/ich777/docker-steamcmd-server/contents/scripts/start-server.sh?ref=citadelfwf
+https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/citadel-forgedwithfire/values.yaml
+https://archive.ubuntu.com/ubuntu
+https://github.com/ich777/docker-steamcmd-server
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/citadel-forgedwithfire
+https://store.steampowered.com/api/appdetails?appids=489650
+https://store.steampowered.com/app/489650
+https://store.steampowered.com/search/?term=Citadel+Forged+with+Fire
+https://www.steampowered.com

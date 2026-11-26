@@ -1,0 +1,8 @@
+https://api.github.com/repos/Notifiarr/notifiarr
+https://api.github.com/repos/Notifiarr/notifiarr/releases/latest
+https://github.com/Notifiarr/notifiarr
+https://github.com/Notifiarr/notifiarr/blob/85a85e8/init/docker/Dockerfile.alpine
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/notifiarr
+https://notifiarr.com
+https://notifiarr.wiki
+https://raw.githubusercontent.com/Notifiarr/notifiarr/85a85e8/init/docker/Dockerfile.alpine

@@ -1,0 +1,8 @@
+https://github.com/standardnotes/app
+https://github.com/standardnotes/app.git
+https://github.com/standardnotes/app/blob/main/packages/web/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/standardnotes-web
+https://hub.docker.com/r/standardnotes/web
+https://standardnotes.com
+https://standardnotes.com/help
+https://standardnotes.org

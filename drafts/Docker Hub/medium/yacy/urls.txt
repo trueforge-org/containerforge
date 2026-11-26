@@ -1,0 +1,9 @@
+https://download.yacy.net
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/yacy
+https://github.com/yacy/yacy_search_server
+https://github.com/yacy/yacy_search_server/blob/eba3f94b4376180de5fbf3812c41e3c65dad4cfb/docker/Dockerfile
+https://hub.docker.com/r/yacy/yacy_search_server
+https://raw.githubusercontent.com/yacy/yacy_search_server/eba3f94b4376180de5fbf3812c41e3c65dad4cfb/docker/Dockerfile
+https://yacy.net
+https://yacy.net/docs
+https://yacy.net/download_installation

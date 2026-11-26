@@ -1,0 +1,9 @@
+https://github.com/ich777/docker-megasync
+https://github.com/ich777/docker-megasync/blob/master/Dockerfile
+https://github.com/meganz/MEGAsync
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/megasync
+https://help.mega.io/installs-apps/desktop
+https://mega.io/desktop
+https://mega.nz/linux/repo/Debian_12/amd64
+https://mega.nz/linux/repo/xUbuntu_24.04/arm64
+https://raw.githubusercontent.com/ich777/docker-megasync/master/Dockerfile

@@ -1,0 +1,4 @@
+https://github.com/EdwardChamberlain/namecheap_ddns
+https://github.com/EdwardChamberlain/namecheap_ddns/blob/421a554e5267e6405850f0fe302ff95600dc8539/src/dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/namecheap-ddns
+https://hub.docker.com/r/edchamberlain/namecheap_ddns

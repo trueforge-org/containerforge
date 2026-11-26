@@ -1,0 +1,9 @@
+https://api.github.com/repos/ich777/docker-cs2d-server
+https://github.com/ich777/docker-cs2d-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/counterstrike2d
+https://raw.githubusercontent.com/ich777/docker-cs2d-server/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-cs2d-server/master/scripts/start-server.sh
+https://raw.githubusercontent.com/ich777/docker-cs2d-server/master/scripts/start.sh
+https://www.cs2d.com
+https://www.cs2d.com/download.php
+https://www.steampowered.com

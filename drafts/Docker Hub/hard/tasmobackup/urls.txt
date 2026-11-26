@@ -1,0 +1,5 @@
+https://github.com/danmed/TasmoBackupV1
+https://github.com/danmed/TasmoBackupV1/blob/59f8a66bafdc3cf5eb8255d58ceacbba33cd3bd1/Dockerfile
+https://github.com/danmed/TasmoBackupV1/releases/tag/1.08.01
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmobackup
+https://hub.docker.com/r/danmed/tasmobackupv1

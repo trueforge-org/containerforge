@@ -1,0 +1,6 @@
+https://github.com/bierdok
+https://github.com/bierdok/pixapop
+https://github.com/linuxserver/docker-pixapop
+https://github.com/linuxserver/docker-pixapop/blob/932504b80918/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pixapop
+https://raw.githubusercontent.com/linuxserver/docker-pixapop/932504b80918/Dockerfile

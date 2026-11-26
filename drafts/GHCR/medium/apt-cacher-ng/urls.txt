@@ -1,0 +1,4 @@
+https://github.com/sameersbn/docker-apt-cacher-ng/blob/6d0816a/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/apt-cacher-ng
+https://www.unix-ag.uni-kl.de/~bloch/acng
+https://www.unix-ag.uni-kl.de/~bloch/acng/html

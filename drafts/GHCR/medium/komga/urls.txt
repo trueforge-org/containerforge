@@ -1,0 +1,8 @@
+https://api.github.com/repos/gotson/komga
+https://api.github.com/repos/gotson/komga/releases/latest
+https://github.com/gotson/komga
+https://github.com/gotson/komga/blob/1.30.1/komga/docker/Dockerfile.tpl
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/komga
+https://komga.org
+https://komga.org/docs/introduction
+https://raw.githubusercontent.com/gotson/komga/1.30.1/komga/docker/Dockerfile.tpl

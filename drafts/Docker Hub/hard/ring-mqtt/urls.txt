@@ -1,0 +1,6 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ring-mqtt
+https://github.com/tsightler/ring-mqtt
+https://github.com/tsightler/ring-mqtt/blob/59aab41/Dockerfile
+https://github.com/tsightler/ring-mqtt/releases/tag/v5.9.3
+https://github.com/tsightler/ring-mqtt/wiki
+https://hub.docker.com/r/tsightler/ring-mqtt

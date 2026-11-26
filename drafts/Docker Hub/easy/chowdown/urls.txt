@@ -1,0 +1,5 @@
+https://chowdown.io
+https://github.com/clarklab/chowdown
+https://github.com/gregyankovoy/docker-chowdown/blob/9f355c82d5e74d0da93ec86d9cb32541ca6ca45c/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/chowdown
+https://hub.docker.com/r/gregyankovoy/chowdown

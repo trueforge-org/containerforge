@@ -1,0 +1,9 @@
+https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/insurgencysandstorm/values.yaml
+https://developer.valvesoftware.com/wiki/Insurgency:_Sandstorm_Dedicated_Server
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/insurgencysandstorm
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://store.steampowered.com/api/appdetails?appids=581320
+https://store.steampowered.com/app/581320
+https://www.focus-entmt.com/games/insurgency-sandstorm
+https://www.steampowered.com

@@ -1,0 +1,8 @@
+https://api.github.com/repos/headlamp-k8s/headlamp/releases/tags/v0.46.0
+https://github.com/headlamp-k8s/headlamp
+https://github.com/headlamp-k8s/headlamp/blob/v0.46.0/Dockerfile
+https://github.com/kubernetes-sigs/headlamp
+https://github.com/trueforge-org/containers/tree/main/apps/node
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/headlamp
+https://headlamp.dev
+https://raw.githubusercontent.com/headlamp-k8s/headlamp/v0.46.0/Dockerfile

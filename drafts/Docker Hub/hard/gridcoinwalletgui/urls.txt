@@ -1,0 +1,4 @@
+https://github.com/gridcoin-community/Gridcoin-Research
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gridcoinwalletgui
+https://gridcoin.us
+https://hub.docker.com/r/sublivion/gridcoinwalletgui

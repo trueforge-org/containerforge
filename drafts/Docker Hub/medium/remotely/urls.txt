@@ -1,0 +1,7 @@
+http://*:5000
+https://api.github.com/repos/immense/Remotely
+https://github.com/immense/Remotely
+https://github.com/immense/Remotely/blob/ec0d45d/Server/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/remotely
+https://hub.docker.com/r/immybot/remotely
+https://remotely.one

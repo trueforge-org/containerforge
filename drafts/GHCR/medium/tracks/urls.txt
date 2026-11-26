@@ -1,0 +1,9 @@
+https://api.github.com/repos/tracksapp/tracks
+https://api.github.com/repos/tracksapp/tracks/releases/latest
+https://getontracks.org
+https://getontracks.org/manual
+https://github.com/tracksapp/tracks
+https://github.com/tracksapp/tracks/blob/8dcca98c6c48404d8328bbee220a8b19d48799ce/Dockerfile
+https://github.com/tracksapp/tracks/releases/tag/v2.7.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tracks
+https://raw.githubusercontent.com/tracksapp/tracks/8dcca98c6c48404d8328bbee220a8b19d48799ce/Dockerfile

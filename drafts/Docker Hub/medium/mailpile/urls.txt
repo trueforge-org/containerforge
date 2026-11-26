@@ -1,0 +1,6 @@
+https://github.com/mailpile/Mailpile
+https://github.com/rroemhild/docker-mailpile/blob/be578abe73423e37c2b29efa26a28faebb5f89b3/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mailpile
+https://hub.docker.com/r/rroemhild/mailpile
+https://mailpile.is
+https://www.mailpile.is

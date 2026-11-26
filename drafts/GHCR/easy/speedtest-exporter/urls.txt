@@ -1,0 +1,8 @@
+https://docs.miguelndecarvalho.pt/projects/speedtest-exporter
+https://github.com/MiguelNdeCarvalho/speedtest-exporter
+https://github.com/MiguelNdeCarvalho/speedtest-exporter/blob/HEAD/src/requirements.txt
+https://github.com/MiguelNdeCarvalho/speedtest-exporter/blob/main/LICENSE
+https://github.com/MiguelNdeCarvalho/speedtest-exporter/blob/v3.5.4/Dockerfile
+https://github.com/MiguelNdeCarvalho/speedtest-exporter/blob/v3.5.4/src/requirements.txt
+https://github.com/MiguelNdeCarvalho/speedtest-exporter/releases/tag/v3.5.4
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/speedtest-exporter

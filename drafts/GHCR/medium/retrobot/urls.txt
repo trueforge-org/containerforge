@@ -1,0 +1,6 @@
+https://api.github.com/repos/rossimo/retrobot
+https://github.com/rossimo/retrobot
+https://github.com/rossimo/retrobot/blob/d04ddd8/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/retrobot
+https://raw.githubusercontent.com/rossimo/retrobot/d04ddd8/Dockerfile
+https://registry.npmjs.org/retrobot/latest

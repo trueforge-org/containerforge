@@ -1,0 +1,6 @@
+https://github.com/pdreker/fritz_exporter
+https://github.com/pdreker/fritz_exporter/blob/09a957c03cd7c253ea8147d0aecd1a06a08b6bbe/Dockerfile
+https://github.com/pdreker/fritz_exporter/releases/tag/fritzexporter-v4.0.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/avm-exporter
+https://hub.docker.com/r/pdreker/fritz_exporter
+https://pdreker.github.io/fritz_exporter

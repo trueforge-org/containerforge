@@ -1,0 +1,10 @@
+https://api.github.com/repos/goauthentik/authentik/releases/tags/version/2026.8.6
+https://docs.goauthentik.io
+https://github.com/goauthentik/authentik
+https://github.com/goauthentik/authentik/blob/98ec4a7684fcb0cccfe78888a12df1df1ad938be/lifecycle/container/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/authentik
+https://goauthentik.io
+https://goauthentik.io/docs
+https://raw.githubusercontent.com/goauthentik/authentik/98ec4a7684fcb0cccfe78888a12df1df1ad938be/LICENSE
+https://raw.githubusercontent.com/goauthentik/authentik/98ec4a7684fcb0cccfe78888a12df1df1ad938be/authentik/lib/default.yml
+https://raw.githubusercontent.com/goauthentik/authentik/98ec4a7684fcb0cccfe78888a12df1df1ad938be/lifecycle/container/Dockerfile

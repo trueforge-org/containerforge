@@ -1,0 +1,10 @@
+https://api.github.com/repos/TandoorRecipes/recipes
+https://api.github.com/repos/TandoorRecipes/recipes/releases/latest
+https://docs.tandoor.dev
+https://github.com/TandoorRecipes/recipes
+https://github.com/TandoorRecipes/recipes/blob/89c07f26bb168221e41d409224976960cf344289/Dockerfile
+https://github.com/TandoorRecipes/recipes/blob/HEAD/requirements.txt
+https://github.com/TandoorRecipes/recipes/pkgs/container/recipes
+https://github.com/TandoorRecipes/recipes/releases/tag/2.7.6
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tandoor-recipes
+https://tandoor.dev

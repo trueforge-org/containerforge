@@ -1,0 +1,4 @@
+https://bun.com/install
+https://github.com/coderaiser/cloudcmd
+https://github.com/coderaiser/cloudcmd/blob/ddf4726e4565ad8151aa391294a60ef3385d26b7/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cloudcommander

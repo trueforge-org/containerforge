@@ -1,0 +1,5 @@
+https://github.com/schollz/cowyo
+https://github.com/schollz/cowyo/blob/77f28842c4e9d55c50bcf7aed180be5e9ed9a41c/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cowyo
+https://hub.docker.com/r/schollz/cowyo
+https://raw.githubusercontent.com/schollz/cowyo/main/Dockerfile

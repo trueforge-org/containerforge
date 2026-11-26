@@ -1,0 +1,8 @@
+https://github.com/plausible/analytics
+https://github.com/plausible/analytics/blob/0621fc0a77cc50add00baddbdd59f378324da483/Dockerfile
+https://github.com/plausible/hosting
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plausible
+https://hub.docker.com/r/plausible/analytics
+https://plausible.io
+https://plausible.io/docs
+https://plausible.io/docs/self-hosting

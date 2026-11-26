@@ -1,0 +1,8 @@
+http://+:8181
+http://zilean:8181
+https://github.com/iPromKnight/zilean
+https://github.com/iPromKnight/zilean/blob/HEAD/requirements.txt
+https://github.com/iPromKnight/zilean/blob/ee5cbb7e41de282d8dd87f5a27e667a74370b196/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/zilean
+https://hub.docker.com/r/ipromknight/zilean
+https://ipromknight.github.io/zilean

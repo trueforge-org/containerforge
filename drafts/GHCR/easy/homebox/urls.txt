@@ -1,0 +1,10 @@
+https://api.github.com/repos/sysadminsmedia/homebox
+https://api.github.com/repos/sysadminsmedia/homebox/releases/latest
+https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/homebox/Chart.yaml
+https://api.github.com/repos/trueforge-org/truecharts/contents/charts/stable/homebox/values.yaml
+https://github.com/sysadminsmedia/homebox
+https://github.com/sysadminsmedia/homebox/blob/1fd28822634a3d5935c002d569559ef46530d4a0/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homebox
+https://homebox.software
+https://homebox.software/en
+https://raw.githubusercontent.com/sysadminsmedia/homebox/main/Dockerfile

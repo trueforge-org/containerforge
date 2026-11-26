@@ -1,0 +1,7 @@
+https://api.github.com/repos/pawelmalak/snippet-box
+https://github.com/pawelmalak/snippet-box
+https://github.com/pawelmalak/snippet-box/blob/f501941a22ead0fccd196d109098e9b065205d98/Dockerfile
+https://github.com/pawelmalak/snippet-box/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/snippet-box
+https://hub.docker.com/r/pawelmalak/snippet-box
+https://raw.githubusercontent.com/pawelmalak/snippet-box/f501941a22ead0fccd196d109098e9b065205d98/Dockerfile

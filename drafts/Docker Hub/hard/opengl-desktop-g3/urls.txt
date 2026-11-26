@@ -1,0 +1,6 @@
+https://github.com/VirtualGL/virtualgl
+https://github.com/accetto/headless-drawing-g3
+https://github.com/accetto/headless-drawing-g3/blob/master/docker/Dockerfile.xfce
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/opengl-desktop-g3
+https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-opengl-g3
+https://raw.githubusercontent.com/accetto/headless-drawing-g3/master/LICENSE

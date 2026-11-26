@@ -1,0 +1,8 @@
+https://docs.weblate.org
+https://docs.weblate.org/en/latest
+https://github.com/WeblateOrg/docker
+https://github.com/WeblateOrg/docker-compose
+https://github.com/WeblateOrg/docker/blob/4.16.4-1/Dockerfile
+https://github.com/WeblateOrg/weblate
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/weblate
+https://hub.docker.com/r/weblate/weblate

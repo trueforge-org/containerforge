@@ -1,0 +1,5 @@
+https://github.com/Threadfin/Threadfin
+https://github.com/Threadfin/Threadfin/blob/c459dd5a3a3227dfe08143183370a9898185203a/Dockerfile
+https://github.com/Threadfin/Threadfin/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/threadfin
+https://hub.docker.com/r/fyb3roptik/threadfin

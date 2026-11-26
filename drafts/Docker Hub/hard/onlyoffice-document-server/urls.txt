@@ -1,0 +1,7 @@
+https://github.com/ONLYOFFICE/Docker-DocumentServer
+https://github.com/ONLYOFFICE/Docker-DocumentServer/blob/master/Dockerfile
+https://github.com/ONLYOFFICE/DocumentServer
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/onlyoffice-document-server
+https://helpcenter.onlyoffice.com/docs
+https://hub.docker.com/r/onlyoffice/documentserver
+https://www.onlyoffice.com

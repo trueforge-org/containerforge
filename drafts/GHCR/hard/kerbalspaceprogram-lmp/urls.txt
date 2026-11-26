@@ -1,0 +1,7 @@
+https://github.com/LunaMultiplayer/LunaMultiplayer
+https://github.com/LunaMultiplayer/LunaMultiplayer/releases/tag/0.29.2
+https://github.com/LunaMultiplayer/LunaMultiplayer/wiki
+https://github.com/ich777/docker-lunamultiplayer-ksp/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kerbalspaceprogram-lmp
+https://lunamultiplayer.com
+https://raw.githubusercontent.com/ich777/docker-lunamultiplayer-ksp/master/Dockerfile

@@ -1,0 +1,6 @@
+http://$ADDRESS:$PORT/health
+https://filebrowser.org/cli/filebrowser
+https://github.com/filebrowser/filebrowser
+https://github.com/filebrowser/filebrowser/blob/e8a388f840173580116f2743813d03b22286e44e/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/filebrowser
+https://hub.docker.com/r/filebrowser/filebrowser

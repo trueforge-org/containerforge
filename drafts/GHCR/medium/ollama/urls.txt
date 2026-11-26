@@ -1,0 +1,12 @@
+https://astral.sh/uv
+https://docs.openwebui.com
+https://github.com/ollama/ollama
+https://github.com/open-webui/open-webui
+https://github.com/open-webui/open-webui/blob/0666e59/Dockerfile
+https://github.com/open-webui/open-webui/releases/tag/v0.13.5
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ollama
+https://hub.docker.com/r/ollama/ollama
+https://openwebui.com
+https://pypi.org/pypi/open-webui/json
+https://raw.githubusercontent.com/open-webui/open-webui/main/Dockerfile
+https://raw.githubusercontent.com/open-webui/open-webui/main/LICENSE

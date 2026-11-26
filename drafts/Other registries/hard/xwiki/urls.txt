@@ -1,0 +1,14 @@
+https://downloads.apache.org/tomcat/tomcat-10/v10.1.62/bin/apache-tomcat-10.1.62.tar.gz.sha512
+https://gallery.ecr.aws/docker/library/xwiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/xwiki
+https://github.com/xwiki/xwiki-docker
+https://github.com/xwiki/xwiki-docker/blob/589e96c134218b1e1d6dab64865aade428ae1106/18/postgres-tomcat/Dockerfile
+https://github.com/xwiki/xwiki-platform
+https://maven.xwiki.org/releases/org/xwiki/platform/xwiki-platform-distribution-war/18.9.0/xwiki-platform-distribution-war-18.9.0.war
+https://maven.xwiki.org/releases/org/xwiki/platform/xwiki-platform-distribution-war/maven-metadata.xml
+https://raw.githubusercontent.com/xwiki/xwiki-docker/589e96c134218b1e1d6dab64865aade428ae1106/18/postgres-tomcat/Dockerfile
+https://raw.githubusercontent.com/xwiki/xwiki-docker/589e96c134218b1e1d6dab64865aade428ae1106/18/postgres-tomcat/xwiki/docker-entrypoint.sh
+https://raw.githubusercontent.com/xwiki/xwiki-docker/master/LICENSE
+https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.14/postgresql-42.7.14.jar
+https://www.xwiki.org/xwiki/bin/view/Documentation
+https://www.xwiki.org/xwiki/bin/view/Main/WebHome

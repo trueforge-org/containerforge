@@ -1,0 +1,7 @@
+https://github.com/crazy-max/docker-rtorrent-rutorrent
+https://github.com/thde/rtorrent_exporter
+https://github.com/thde/rtorrent_exporter/blob/e79ce427fd812cb1e9d1b0e3be0a9180f8e69cca/Dockerfile
+https://github.com/thde/rtorrent_exporter/releases/tag/v1.3.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rtorrent-rutorrent
+https://raw.githubusercontent.com/thde/rtorrent_exporter/v1.3.2/README.md
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rtorrent-rutorrent/values.yaml

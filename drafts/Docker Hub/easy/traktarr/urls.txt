@@ -1,0 +1,5 @@
+https://github.com/l3uddz/traktarr
+https://github.com/l3uddz/traktarr/blob/52d71964a2cd6504adda6e2b2d5cdfc68cc794c8/docker/Dockerfile
+https://github.com/l3uddz/traktarr/blob/HEAD/requirements.txt
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traktarr
+https://hub.docker.com/r/eafxx/traktarr

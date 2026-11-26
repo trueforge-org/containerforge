@@ -1,0 +1,6 @@
+https://github.com/calibrain/shelfmark
+https://github.com/calibrain/shelfmark/blob/0d97110f0132d78147213d11902298c516c32f16/Dockerfile
+https://github.com/calibrain/shelfmark/blob/main/README.md
+https://github.com/calibrain/shelfmark/releases/tag/v1.7.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shelfmark
+https://raw.githubusercontent.com/calibrain/shelfmark/main/Dockerfile

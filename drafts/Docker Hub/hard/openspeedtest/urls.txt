@@ -1,0 +1,6 @@
+https://github.com/openspeedtest/Docker-Image
+https://github.com/openspeedtest/Docker-Image/blob/main/Dockerfile
+https://github.com/openspeedtest/Speed-Test
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openspeedtest
+https://hub.docker.com/r/openspeedtest/latest
+https://openspeedtest.com

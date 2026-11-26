@@ -1,0 +1,7 @@
+https://github.com/AnthonyBloomer/tmdbv3api.git
+https://github.com/jkirkcaldy/plex-utills
+https://github.com/jkirkcaldy/plex-utills/blob/HEAD/requirements.txt
+https://github.com/jkirkcaldy/plex-utills/blob/e945c0c/Dockerfile
+https://github.com/jkirkcaldy/plex-utills/releases/tag/0.21.12
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-utills
+https://hub.docker.com/r/jkirkcaldy/plex-utills

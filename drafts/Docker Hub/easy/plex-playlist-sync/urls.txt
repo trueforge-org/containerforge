@@ -1,0 +1,6 @@
+https://github.com/rnagabhyrava/plex-playlist-sync
+https://github.com/rnagabhyrava/plex-playlist-sync/blob/HEAD/requirements.txt
+https://github.com/rnagabhyrava/plex-playlist-sync/blob/c3333a506066c1294f67f297681fd2c342b4e2ff/Dockerfile
+https://github.com/rnagabhyrava/plex-playlist-sync/releases/tag/v1.0.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plex-playlist-sync
+https://hub.docker.com/r/rnagabhyrava/plexplaylistsync

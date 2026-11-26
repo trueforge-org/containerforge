@@ -1,0 +1,5 @@
+https://github.com/jlesage/docker-czkawka
+https://github.com/jlesage/docker-czkawka/blob/v26.09.2/Dockerfile
+https://github.com/qarmin/czkawka
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/czkawka
+https://raw.githubusercontent.com/jlesage/docker-czkawka/v26.09.2/Dockerfile

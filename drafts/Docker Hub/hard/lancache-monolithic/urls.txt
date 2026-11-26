@@ -1,0 +1,9 @@
+http://lancache.net/docs/containers/monolithic
+https://github.com/lancachenet/monolithic
+https://github.com/lancachenet/monolithic/blob/3f43cc7/Dockerfile
+https://github.com/lancachenet/monolithic/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lancache-monolithic
+https://github.com/uklans/cache-domains
+https://hub.docker.com/r/lancachenet/monolithic
+https://lancache.net
+https://lancache.net/docs

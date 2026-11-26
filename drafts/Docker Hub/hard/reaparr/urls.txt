@@ -1,0 +1,6 @@
+http://+:7000
+https://github.com/Reaparr/Reaparr
+https://github.com/Reaparr/Reaparr/blob/1e32ea55baa826a31cb4ceb3bdfd404bab2f3e11/docker/Dockerfile
+https://github.com/reaparr/reaparr
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/reaparr
+https://hub.docker.com/r/reaparr/reaparr

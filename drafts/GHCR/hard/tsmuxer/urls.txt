@@ -1,0 +1,7 @@
+https://api.github.com/repos/justdan96/tsMuxer
+https://api.github.com/repos/justdan96/tsMuxer/releases/latest
+https://github.com/jlesage/docker-tsmuxer
+https://github.com/jlesage/docker-tsmuxer/blob/v26.09.1/Dockerfile
+https://github.com/justdan96/tsMuxer
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tsmuxer
+https://raw.githubusercontent.com/jlesage/docker-tsmuxer/v26.09.1/Dockerfile

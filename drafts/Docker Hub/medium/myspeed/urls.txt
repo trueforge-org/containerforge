@@ -1,0 +1,7 @@
+https://docs.myspeed.dev/setup/linux
+https://github.com/gnmyt/MySpeed/blob/development/Dockerfile
+https://github.com/gnmyt/myspeed
+https://github.com/gnmyt/myspeed/blob/7290a97522e5fdeca9e541bc3b6048a88ae20f9c/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/myspeed
+https://hub.docker.com/r/germannewsmaker/myspeed
+https://myspeed.dev

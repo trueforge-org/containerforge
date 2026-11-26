@@ -1,0 +1,4 @@
+https://github.com/modem7/Docker-NewYearCountdown
+https://github.com/modem7/Docker-NewYearCountdown/blob/a1c6bede2351d2912dcd25e7d15e30f82be6b12f/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/newyearcountdownclock
+https://hub.docker.com/r/modem7/newyearcountdown

@@ -1,0 +1,7 @@
+http://host:8000
+https://github.com/restic/rest-server
+https://github.com/restic/rest-server/blob/master/Dockerfile
+https://github.com/restic/rest-server/blob/v0.14.0/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/restic-rest-server
+https://hub.docker.com/r/restic/rest-server
+https://restic.readthedocs.io

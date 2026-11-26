@@ -1,0 +1,5 @@
+https://ersatztv.org/docs
+https://github.com/ErsatzTV/ErsatzTV
+https://github.com/ErsatzTV/ErsatzTV/blob/2271d5497becc30f8cf689715d115fb36d0abc8a/docker/nvidia/Dockerfile
+https://github.com/jasongdove/ErsatzTV
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ersatztv

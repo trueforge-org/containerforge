@@ -1,0 +1,5 @@
+https://github.com/alturismo/owi2plex
+https://github.com/alturismo/owi2plex/blob/master/Dockerfile
+https://github.com/cvarelaruiz/owi2plex
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/owi2plex
+https://hub.docker.com/r/alturismo/owi2plex

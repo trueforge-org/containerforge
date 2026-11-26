@@ -1,0 +1,6 @@
+http://ipfs-probe:5001/api/v0/version
+https://docs.ipfs.tech
+https://github.com/ipfs/kubo
+https://github.com/ipfs/kubo/blob/v0.43.1/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ipfs
+https://hub.docker.com/r/ipfs/kubo

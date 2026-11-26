@@ -1,0 +1,7 @@
+https://fileflows.com
+https://fileflows.com/docs
+https://fileflows.com/docs/installation/linux
+https://fileflows.com/downloads/tarxz
+https://github.com/revenz/FileFlows
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fileflows
+https://hub.docker.com/r/revenz/fileflows

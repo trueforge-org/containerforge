@@ -1,0 +1,10 @@
+https://api.github.com/repos/homebridge/homebridge-apt-pkg/releases/latest
+https://api.github.com/repos/homebridge/homebridge/releases/latest
+https://github.com/homebridge/docker-homebridge/blob/2026-11-15/Dockerfile
+https://github.com/homebridge/docker-homebridge/tree/2026-11-15
+https://github.com/homebridge/homebridge
+https://github.com/oznu/docker-homebridge
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/homebridge
+https://homebridge.io
+https://homebridge.io/docs
+https://raw.githubusercontent.com/homebridge/docker-homebridge/2026-11-15/Dockerfile

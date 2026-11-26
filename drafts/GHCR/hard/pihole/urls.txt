@@ -1,0 +1,13 @@
+https://api.github.com/repos/pi-hole/FTL/releases/tags/v6.9
+https://api.github.com/repos/pi-hole/docker-pi-hole/releases/latest
+https://docs.pi-hole.net
+https://github.com/pi-hole
+https://github.com/pi-hole/FTL
+https://github.com/pi-hole/docker-pi-hole
+https://github.com/pi-hole/docker-pi-hole/blob/7a8d396/src/Dockerfile
+https://github.com/pi-hole/pi-hole
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pihole
+https://pi-hole.net
+https://raw.githubusercontent.com/pi-hole/docker-pi-hole/7a8d396/src/Dockerfile
+https://raw.githubusercontent.com/pi-hole/docker-pi-hole/master/README.md
+https://raw.githubusercontent.com/pi-hole/pi-hole/master/LICENSE

@@ -1,0 +1,5 @@
+https://dispatch.khlieng.com
+https://github.com/khlieng/dispatch
+https://github.com/khlieng/dispatch/blob/d3d8323/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dispatch
+https://hub.docker.com/r/khlieng/dispatch

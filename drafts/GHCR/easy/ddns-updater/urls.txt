@@ -1,0 +1,9 @@
+https://api.github.com/repos/qdm12/ddns-updater/releases/tags/v2.10.0
+https://github.com/qdm12/ddns-updater
+https://github.com/qdm12/ddns-updater/blob/master/README.md
+https://github.com/qdm12/ddns-updater/blob/v2.10.0/Dockerfile
+https://github.com/qdm12/ddns-updater/tree/master/docs
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ddns-updater
+https://hc-ping.com
+https://raw.githubusercontent.com/qdm12/ddns-updater/v2.10.0/Dockerfile
+https://raw.githubusercontent.com/qdm12/ddns-updater/v2.10.0/LICENSE

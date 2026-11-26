@@ -1,0 +1,9 @@
+https://api.openopus.org
+https://github.com/SheetAble
+https://github.com/SheetAble/SheetAble
+https://github.com/SheetAble/SheetAble/blob/v0.8.1/backend/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sheetable
+https://hub.docker.com/r/vallezw/sheetable
+https://pdf2png.sheetable.net/createthumbnail
+https://sheetable.net/docs
+https://sheetable.net/docs/configuration

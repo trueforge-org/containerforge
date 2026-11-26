@@ -1,0 +1,6 @@
+https://dev.azure.com/Firefly-III/_git/MainImage?path=/Dockerfile&version=GBmain
+https://docs.firefly-iii.org
+https://firefly-iii.org
+https://github.com/firefly-iii/firefly-iii
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fireflyiii
+https://hub.docker.com/r/fireflyiii/core

@@ -1,0 +1,6 @@
+https://github.com/RblSb/SyncTube
+https://github.com/RblSb/SyncTube/blob/d22d837/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/synctube
+https://hub.docker.com/r/littlestache/synctube
+https://hub.docker.com/v2/repositories/littlestache/synctube/tags?page_size=3
+https://raw.githubusercontent.com/RblSb/SyncTube/d22d837/Dockerfile

@@ -1,0 +1,7 @@
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/memories-of-mars
+https://memoriesofmars.com
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/README.md
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start.sh
+https://store.steampowered.com/search/?term=memories+of+mars

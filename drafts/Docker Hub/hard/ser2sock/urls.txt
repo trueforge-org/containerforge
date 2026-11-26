@@ -1,0 +1,5 @@
+https://github.com/nutechsoftware/ser2sock
+https://github.com/tenstartups/ser2sock
+https://github.com/tenstartups/ser2sock/blob/9553300/Dockerfile.x64
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ser2sock
+https://hub.docker.com/r/tenstartups/ser2sock

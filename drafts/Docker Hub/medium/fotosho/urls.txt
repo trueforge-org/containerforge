@@ -1,0 +1,7 @@
+https://github.com/advplyr/fotosho
+https://github.com/advplyr/fotosho/blob/master/Dockerfile
+https://github.com/advplyr/fotosho/releases
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fotosho
+https://hub.docker.com/r/advplyr/fotosho
+https://raw.githubusercontent.com/advplyr/fotosho/master/Dockerfile
+https://raw.githubusercontent.com/advplyr/fotosho/master/package.json

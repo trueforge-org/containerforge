@@ -1,0 +1,10 @@
+https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest
+https://docs.tdarr.io
+https://docs.tdarr.io/docs/installation/docker/run-compose
+https://github.com/HaveAGitGat/Tdarr
+https://github.com/HaveAGitGat/Tdarr/blob/9ec31178f6807861c207f8a65a1b8156e46c5b85/docker/Dockerfile.final
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tdarr
+https://raw.githubusercontent.com/HaveAGitGat/Tdarr/9ec31178f6807861c207f8a65a1b8156e46c5b85/docker/Dockerfile.final
+https://raw.githubusercontent.com/HaveAGitGat/Tdarr/master/docker/Dockerfile.base
+https://tdarr.io/downloads
+https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/$VERSION

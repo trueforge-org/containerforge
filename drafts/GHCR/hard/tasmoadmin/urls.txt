@@ -1,0 +1,6 @@
+https://api.github.com/repos/TasmoAdmin/TasmoAdmin
+https://api.github.com/repos/TasmoAdmin/TasmoAdmin/releases/tags/v5.0.0
+https://github.com/TasmoAdmin/TasmoAdmin
+https://github.com/TasmoAdmin/TasmoAdmin/blob/81271a076cacecb1e8d4e8723af35e61510276de/.docker/Dockerfile.alpine-tmpl
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmoadmin
+https://raw.githubusercontent.com/TasmoAdmin/TasmoAdmin/81271a076cacecb1e8d4e8723af35e61510276de/.docker/Dockerfile.alpine-tmpl

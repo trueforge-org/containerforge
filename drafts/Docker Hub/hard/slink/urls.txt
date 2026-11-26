@@ -1,0 +1,6 @@
+https://archive.ubuntu.com/ubuntu
+https://github.com/andrii-kryvoviaz/slink
+https://github.com/andrii-kryvoviaz/slink/blob/aefc97065c20c543299d23b7315551c979705378/docker/Dockerfile.prod
+https://github.com/andrii-kryvoviaz/slink/releases/tag/v1.14.6
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slink
+https://hub.docker.com/r/anirdev/slink

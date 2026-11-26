@@ -1,0 +1,11 @@
+https://api.github.com/repos/tt-rss/tt-rss
+https://api.github.com/repos/tt-rss/tt-rss/releases/latest
+https://git.tt-rss.org/fox/tt-rss
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tt-rss
+https://github.com/tt-rss/tt-rss
+https://github.com/tt-rss/tt-rss/blob/03628f0aa3c4a86e960ddd61b5ba372cd3a27b50/.docker/app/Dockerfile
+https://github.com/tt-rss/tt-rss/blob/d62bcf96d01a7a2e750f6c9581ca462556e57281/.docker/web-nginx/Dockerfile
+https://gitlab.tt-rss.org/tt-rss/tt-rss
+https://raw.githubusercontent.com/tt-rss/tt-rss/03628f0aa3c4a86e960ddd61b5ba372cd3a27b50/.docker/app/Dockerfile
+https://raw.githubusercontent.com/tt-rss/tt-rss/d62bcf96d01a7a2e750f6c9581ca462556e57281/.docker/web-nginx/Dockerfile
+https://tt-rss.org

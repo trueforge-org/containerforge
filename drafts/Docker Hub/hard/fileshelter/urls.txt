@@ -1,0 +1,4 @@
+https://github.com/epoupon/fileshelter
+https://github.com/epoupon/fileshelter/blob/bcdddfab893b2cba8aa455261b36c88160e843e7/Dockerfile-release
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fileshelter
+https://hub.docker.com/r/epoupon/fileshelter

@@ -1,0 +1,7 @@
+https://alistgo.com
+https://alistgo.com/guide
+https://github.com/AlistGo/alist
+https://github.com/AlistGo/with_aria2/blob/12a215e1e1b1375f0512d4e2e310a35a4209e4de/Dockerfile
+https://github.com/Xhofe/alist
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/alist
+https://hub.docker.com/r/xhofe/alist-aria2

@@ -1,0 +1,5 @@
+https://github.com/Netflix/lemur
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lemur-cfssl
+https://hub.docker.com/r/halianelf/lemur
+https://lemur.readthedocs.io
+https://lemur.readthedocs.io/en/latest

@@ -1,0 +1,6 @@
+https://github.com/nirui/sshwifty
+https://github.com/niruix/sshwifty
+https://github.com/niruix/sshwifty/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sshwifty
+https://hub.docker.com/r/niruix/sshwifty
+https://raw.githubusercontent.com/nirui/sshwifty/master/Dockerfile

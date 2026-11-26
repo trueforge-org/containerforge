@@ -1,0 +1,13 @@
+https://api.github.com/repos/linuxserver/docker-quassel-web
+https://api.github.com/repos/linuxserver/docker-quassel-web/contents/Dockerfile
+https://api.github.com/repos/linuxserver/docker-quassel-web/contents/root/etc/s6-overlay/s6-rc.d/init-quassel-web-config/run
+https://api.github.com/repos/linuxserver/docker-quassel-web/contents/root/etc/s6-overlay/s6-rc.d/svc-quassel-web/run
+https://api.github.com/repos/magne4000/quassel-webserver
+https://api.github.com/repos/magne4000/quassel-webserver/commits/master
+https://api.github.com/repos/magne4000/quassel-webserver/contents/app.js
+https://api.github.com/repos/magne4000/quassel-webserver/contents/package.json
+https://api.github.com/repos/magne4000/quassel-webserver/contents/settings.cjs
+https://api.github.com/repos/magne4000/quassel-webserver/tags
+https://github.com/linuxserver/docker-quassel-web/blob/a08b0a956b43/Dockerfile
+https://github.com/magne4000/quassel-webserver
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quassel-web

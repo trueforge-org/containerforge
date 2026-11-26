@@ -1,0 +1,9 @@
+https://bitcoin.org
+https://bitcoincore.org
+https://bitcoincore.org/bin/bitcoin-core-32.1/SHA256SUMS
+https://github.com/bitcoin/bitcoin
+https://github.com/kylemanna/docker-bitcoind
+https://github.com/ofawx/docker-bitcoind
+https://github.com/ofawx/docker-bitcoind/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bitcoind
+https://hub.docker.com/r/ofawx/bitcoind

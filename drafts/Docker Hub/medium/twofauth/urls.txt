@@ -1,0 +1,15 @@
+https://2fauth.app
+https://api.github.com/repos/Bubka/2FAuth
+https://api.github.com/repos/Bubka/2FAuth/contents/.env.example?ref=v9.0.3
+https://api.github.com/repos/Bubka/2FAuth/contents/Dockerfile?ref=v9.0.3
+https://api.github.com/repos/Bubka/2FAuth/contents/docker/entrypoint.sh?ref=v9.0.3
+https://api.github.com/repos/Bubka/2FAuth/contents/docker/nginx.conf?ref=v9.0.3
+https://api.github.com/repos/Bubka/2FAuth/releases/latest
+https://docs.2fauth.app
+https://github.com/Bubka/2FAuth
+https://github.com/Bubka/2FAuth/blob/2a19734/Dockerfile
+https://github.com/Bubka/2FAuth/releases/tag/v9.0.1
+https://github.com/Bubka/2fauth
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/twofauth
+https://hub.docker.com/r/2fauth/2fauth
+https://raw.githubusercontent.com/Bubka/2FAuth/v9.0.3/docker/supervisord.conf

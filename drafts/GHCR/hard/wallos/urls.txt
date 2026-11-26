@@ -1,0 +1,8 @@
+https://github.com/ellite/Wallos
+https://github.com/ellite/Wallos/blob/df7ce2d687f2891e1bd9541685159fb44ec2df3d/Dockerfile
+https://github.com/ellite/Wallos/blob/v5.11.2/Dockerfile
+https://github.com/ellite/Wallos/releases/tag/v5.11.2
+https://github.com/ellite/Wallos/releases/tag/v5.11.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/wallos
+https://packages.ubuntu.com/resolute/php-fpm
+https://packages.ubuntu.com/resolute/php8.3-fpm

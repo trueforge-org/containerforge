@@ -1,0 +1,12 @@
+https://api.github.com/repos/paperless-ngx/paperless-ngx
+https://api.github.com/repos/paperless-ngx/paperless-ngx/releases/latest
+https://github.com/paperless-ngx/builder/releases
+https://github.com/paperless-ngx/paperless-ngx
+https://github.com/paperless-ngx/paperless-ngx/blob/v3.5.1/Dockerfile
+https://github.com/paperless-ngx/paperless-ngx/tree/dev/docs
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/paperless-ngx
+https://hub.docker.com/r/apache/tika
+https://hub.docker.com/r/gotenberg/gotenberg
+https://paperless-ngx.readthedocs.io/en/latest
+https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/v3.5.1/Dockerfile
+https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/v3.5.1/docs/configuration.md

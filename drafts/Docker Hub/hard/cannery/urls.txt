@@ -1,0 +1,5 @@
+https://gitea.bubbletea.dev/shibao/cannery
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cannery
+https://gitlab.com/shibaobun/cannery
+https://gitlab.com/shibaobun/cannery/-/blob/1.5.8/Dockerfile
+https://hub.docker.com/r/shibaobun/cannery

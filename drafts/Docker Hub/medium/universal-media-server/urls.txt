@@ -1,0 +1,7 @@
+https://github.com/UniversalMediaServer/UniversalMediaServer
+https://github.com/UniversalMediaServer/UniversalMediaServer/blob/main/src/main/external-resources/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/universal-media-server
+https://hub.docker.com/r/universalmediaserver/ums
+https://hub.docker.com/v2/repositories/universalmediaserver/ums/tags
+https://raw.githubusercontent.com/UniversalMediaServer/UniversalMediaServer/main/src/main/external-resources/docker/Dockerfile
+https://www.universalmediaserver.com

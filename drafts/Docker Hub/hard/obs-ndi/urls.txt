@@ -1,0 +1,7 @@
+https://distroav.org
+https://github.com/DistroAV/DistroAV
+https://github.com/DistroAV/DistroAV/wiki
+https://github.com/patrickstigler/docker-obs-ndi
+https://github.com/patrickstigler/docker-obs-ndi/blob/400fc92a0a6953feef3bee371f5e0c2cd23991e2/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/obs-ndi
+https://hub.docker.com/r/patrickstigler/obs-ndi

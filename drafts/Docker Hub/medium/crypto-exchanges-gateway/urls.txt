@@ -1,0 +1,7 @@
+https://github.com/aloysius-pgast/crypto-exchanges-gateway
+https://github.com/aloysius-pgast/crypto-exchanges-gateway/blob/master/docker/Dockerfile
+https://github.com/aloysius-pgast/crypto-exchanges-gateway/releases/tag/1.13.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/crypto-exchanges-gateway
+https://hub.docker.com/r/apendergast/crypto-exchanges-gateway
+https://raw.githubusercontent.com/aloysius-pgast/crypto-exchanges-gateway/master/README.md
+https://raw.githubusercontent.com/aloysius-pgast/crypto-exchanges-gateway/master/docker/Dockerfile

@@ -1,0 +1,5 @@
+https://github.com/jo-nike/clipplex
+https://github.com/jo-nike/clipplex/blob/8678972/Dockerfile
+https://github.com/jo-nike/clipplex/blob/HEAD/requirements.txt
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clipplex
+https://hub.docker.com/r/jonnike/clipplex

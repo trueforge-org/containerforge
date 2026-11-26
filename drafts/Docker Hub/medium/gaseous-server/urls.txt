@@ -1,0 +1,9 @@
+http://+:5198
+https://cdn.emulatorjs.org/releases/4.2.1.7z
+https://dot.net/v1/dotnet-install.sh
+https://github.com/gaseous-project/gaseous-server
+https://github.com/gaseous-project/gaseous-server/blob/139459c1e4d989772545ca5da8cf36aaee215a3b/build/Dockerfile
+https://github.com/gaseous-project/gaseous-server/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gaseous-server
+https://hub.docker.com/r/gaseousgames/gaseousserver
+https://raw.githubusercontent.com/gaseous-project/gaseous-server/139459c1e4d989772545ca5da8cf36aaee215a3b/build/Dockerfile

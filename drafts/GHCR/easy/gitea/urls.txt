@@ -1,0 +1,8 @@
+https://about.gitea.com
+https://docs.gitea.com
+https://gitea.com/gitea/helm-chart
+https://github.com/go-gitea/gitea
+https://github.com/go-gitea/gitea/blob/v28.4.0/Dockerfile.rootless
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gitea
+https://raw.githubusercontent.com/go-gitea/gitea/v28.4.0/Dockerfile.rootless
+https://raw.githubusercontent.com/go-gitea/gitea/v28.4.0/docker/rootless/usr/local/bin/docker-entrypoint.sh

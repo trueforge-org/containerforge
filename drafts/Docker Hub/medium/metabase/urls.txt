@@ -1,0 +1,8 @@
+https://downloads.metabase.com/v0.65.6/metabase.jar
+https://github.com/metabase/metabase
+https://github.com/metabase/metabase/blob/v0.65.6/bin/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/metabase
+https://hub.docker.com/r/metabase/metabase
+https://raw.githubusercontent.com/metabase/metabase/v0.65.6/bin/docker/Dockerfile
+https://www.metabase.com
+https://www.metabase.com/docs/latest

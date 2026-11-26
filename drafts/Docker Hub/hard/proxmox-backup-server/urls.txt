@@ -1,0 +1,6 @@
+https://github.com/ayufan/pve-backup-server-dockerfiles
+https://github.com/ayufan/pve-backup-server-dockerfiles/blob/v4.2.0-1/dockerfiles/Dockerfile.build
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/proxmox-backup-server
+https://hub.docker.com/r/ayufan/proxmox-backup-server
+https://pbs.proxmox.com/docs
+https://www.proxmox.com/en/products/proxmox-backup-server/overview

@@ -1,0 +1,7 @@
+https://github.com/jakowenko/double-take
+https://github.com/jakowenko/double-take/releases/tag/v1.13.2
+https://github.com/skrashevich/double-take
+https://github.com/skrashevich/double-take/blob/60c957d/.build/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/double-take
+https://raw.githubusercontent.com/skrashevich/double-take/60c957d/.build/Dockerfile
+https://raw.githubusercontent.com/skrashevich/double-take/60c957d/.build/entrypoint.sh

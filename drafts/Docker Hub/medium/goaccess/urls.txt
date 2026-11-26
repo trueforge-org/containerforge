@@ -1,0 +1,8 @@
+https://github.com/allinurl/goaccess
+https://github.com/gregyankovoy/docker-goaccess/blob/efd688be8b6ae2991209e76de4908860a3350297/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/goaccess
+https://goaccess.io
+https://goaccess.io/man
+https://hub.docker.com/r/gregyankovoy/goaccess
+https://raw.githubusercontent.com/allinurl/goaccess/v1.12/COPYING
+https://raw.githubusercontent.com/gregyankovoy/docker-goaccess/efd688be8b6ae2991209e76de4908860a3350297/Dockerfile

@@ -1,0 +1,7 @@
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/theforest
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/theforest/values.yaml
+https://store.steampowered.com/app/242760
+https://store.steampowered.com/app/556450
+https://www.steampowered.com

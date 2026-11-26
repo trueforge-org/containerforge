@@ -1,0 +1,7 @@
+https://archive.ubuntu.com/ubuntu
+https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/csgo
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://store.steampowered.com/app/740
+https://www.steampowered.com

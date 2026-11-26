@@ -1,0 +1,9 @@
+https://api.github.com/repos/Taxel/PlexTraktSync/contents/Dockerfile?ref=5f951838eaea4466d078571cc548ac51d5ed2341
+https://api.github.com/repos/Taxel/PlexTraktSync/contents/entrypoint.sh?ref=5f951838eaea4466d078571cc548ac51d5ed2341
+https://api.github.com/repos/Taxel/PlexTraktSync/tags
+https://files.pythonhosted.org/packages/8c/0b/f41a3a3695f7560185d252488a9d54f17c05a009d06f8fbc029d01c4d9e4/plextraktsync-0.35.23-py3-none-any.whl
+https://github.com/Taxel/PlexTraktSync
+https://github.com/Taxel/PlexTraktSync/blob/5f951838eaea4466d078571cc548ac51d5ed2341/Dockerfile
+https://github.com/Taxel/PlexTraktSync/blob/main/README.md
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plextraktsync
+https://pypi.org/pypi/plextraktsync/json

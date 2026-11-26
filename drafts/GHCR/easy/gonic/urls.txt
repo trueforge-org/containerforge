@@ -1,0 +1,7 @@
+https://api.github.com/repos/sentriz/gonic
+https://github.com/sentriz/gonic
+https://github.com/sentriz/gonic/blob/v0.23.0/Dockerfile
+https://github.com/sentriz/gonic/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gonic
+https://raw.githubusercontent.com/sentriz/gonic/v0.23.0/Dockerfile
+https://raw.githubusercontent.com/sentriz/gonic/v0.23.0/README.md

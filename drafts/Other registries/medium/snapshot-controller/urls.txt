@@ -1,0 +1,11 @@
+https://github.com/kubernetes-csi/external-snapshotter
+https://github.com/kubernetes-csi/external-snapshotter/blob/v8.7.0/cmd/snapshot-controller/Dockerfile
+https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v8.7.1
+https://github.com/snapshot-controller/snapshot-controller
+https://github.com/snapshot-controller/snapshot-controller-helm-chart
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/snapshot-controller
+https://kubernetes-csi.github.io/docs
+https://kubernetes-csi.github.io/docs/external-snapshotter.html
+https://kubernetes-csi.github.io/docs/snapshot-controller.html
+https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.7.0/LICENSE
+https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.7.0/go.mod

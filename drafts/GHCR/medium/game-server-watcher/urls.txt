@@ -1,0 +1,4 @@
+https://github.com/a-sync/game-server-watcher
+https://github.com/a-sync/game-server-watcher/blob/2010cd81bc2354d7b3ad10dabd44e340440ac3a5/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/game-server-watcher
+https://raw.githubusercontent.com/a-sync/game-server-watcher/2010cd81bc2354d7b3ad10dabd44e340440ac3a5/Dockerfile

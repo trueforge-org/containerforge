@@ -1,0 +1,11 @@
+https://api.github.com/repos/linuxserver/docker-digikam/releases
+https://docs.digikam.org
+https://github.com/KDE/digikam
+https://github.com/linuxserver/docker-digikam
+https://github.com/linuxserver/docker-digikam/blob/fd0663bebb867b7dba24c63d14e0493e7d94c0b9/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/digikam
+https://mirrors.mit.edu/kde/stable/digikam
+https://mirrors.mit.edu/kde/stable/digikam/9.1.0
+https://raw.githubusercontent.com/linuxserver/docker-digikam/fd0663bebb867b7dba24c63d14e0493e7d94c0b9/Dockerfile
+https://raw.githubusercontent.com/linuxserver/docker-digikam/fd0663bebb867b7dba24c63d14e0493e7d94c0b9/README.md
+https://www.digikam.org

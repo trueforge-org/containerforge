@@ -1,0 +1,9 @@
+https://api.github.com/repos/anope/anope/license
+https://api.github.com/repos/anope/anope/releases/latest
+https://github.com/anope/anope
+https://github.com/anope/anope/releases/tag/2.0.21
+https://github.com/ich777/docker-anope/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/anope
+https://packages.ubuntu.com/resolute/anope
+https://thelounge.chat
+https://www.anope.org

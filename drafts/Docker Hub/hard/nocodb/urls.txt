@@ -1,0 +1,5 @@
+https://github.com/nocodb/nocodb
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nocodb
+https://hub.docker.com/r/nocodb/nocodb
+https://nocodb.com
+https://nocodb.com/docs/product

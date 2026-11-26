@@ -1,0 +1,10 @@
+https://api.github.com/repos/Feramance/qBitrr
+https://api.github.com/repos/Feramance/qBitrr/releases/latest
+https://feramance.github.io/qBitrr
+https://github.com/Feramance/Qbitrr
+https://github.com/Feramance/qBitrr
+https://github.com/Feramance/qBitrr/blob/1fe2bc6ee0e27a2f84be0fb78edfabe259266ecf/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/qbitrr
+https://hub.docker.com/r/feramance/qbitrr
+https://hub.docker.com/v2/repositories/feramance/qbitrr/tags
+https://raw.githubusercontent.com/Feramance/qBitrr/master/Dockerfile

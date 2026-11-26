@@ -1,0 +1,4 @@
+https://github.com/CorneliousJD/SUI-Startpage
+https://github.com/CorneliousJD/SUI-Startpage/blob/fb4094a047d25cd21352c0849b5b623171e7974c/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/suistartpage
+https://hub.docker.com/r/corneliousjd/sui-startpage

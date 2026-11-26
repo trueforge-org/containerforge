@@ -1,0 +1,6 @@
+https://github.com/traggo/server
+https://github.com/traggo/server/blob/6321119c3c2d55f04e2e4967f6492aabd6067b76/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/traggo
+https://hub.docker.com/r/traggo/server
+https://traggo.net
+https://traggo.net/install

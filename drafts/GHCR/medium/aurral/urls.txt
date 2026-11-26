@@ -1,0 +1,7 @@
+https://api.github.com/repos/lklynet/aurral
+https://api.github.com/repos/lklynet/aurral/releases/latest
+https://github.com/lklynet/aurral
+https://github.com/lklynet/aurral/blob/84535c99df51/Dockerfile
+https://github.com/lklynet/aurral/pkgs/container/aurral
+https://github.com/lklynet/aurral/releases/tag/v3.0.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/aurral

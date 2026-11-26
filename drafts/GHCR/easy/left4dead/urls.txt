@@ -1,0 +1,9 @@
+https://developer.valvesoftware.com/wiki/Left_4_Dead_Dedicated_Server
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/ich777/docker-steamcmd-server/tree/l4d
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/left4dead
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/scripts/start.sh
+https://store.steampowered.com/app/500/Left_4_Dead
+https://www.l4d.com
+https://www.steampowered.com

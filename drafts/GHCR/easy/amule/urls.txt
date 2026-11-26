@@ -1,0 +1,10 @@
+https://amule-org.github.io
+https://amule-org.github.io/docs
+https://api.github.com/repos/amule-org/amule/releases/latest
+https://api.github.com/repos/ngosang/docker-amule/releases/latest
+https://github.com/amule-org/amule
+https://github.com/ngosang/docker-amule
+https://github.com/ngosang/docker-amule/blob/3.2.0-1/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/amule
+https://packages.ubuntu.com/resolute/amule-daemon
+https://raw.githubusercontent.com/ngosang/docker-amule/3.2.0-1/Dockerfile

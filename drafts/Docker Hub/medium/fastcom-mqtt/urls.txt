@@ -1,0 +1,6 @@
+https://github.com/simonjenny/fastcom-mqtt
+https://github.com/simonjenny/fastcom-mqtt/blob/ce67907/Dockerfile
+https://github.com/simonjenny/fastcom-mqtt/releases
+https://github.com/sindresorhus/fast-cli
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fastcom-mqtt
+https://hub.docker.com/r/simonjenny/fastcom-mqtt

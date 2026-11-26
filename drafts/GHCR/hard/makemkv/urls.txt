@@ -1,0 +1,9 @@
+https://api.github.com/repos/jlesage/docker-makemkv/releases/latest
+https://forum.makemkv.com/forum
+https://forum.makemkv.com/forum/viewtopic.php?f=3&t=224
+https://github.com/jlesage/docker-makemkv
+https://github.com/jlesage/docker-makemkv/blob/v26.09.2/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/makemkv
+https://raw.githubusercontent.com/jlesage/docker-makemkv/v26.09.2/Dockerfile
+https://www.makemkv.com
+https://www.makemkv.com/download/makemkv-sha-2.0.0.txt

@@ -1,0 +1,9 @@
+https://api.github.com/repos/alam00000/bentopdf
+https://api.github.com/repos/alam00000/bentopdf/releases/latest
+https://github.com/alam00000/bentopdf
+https://github.com/alam00000/bentopdf.git
+https://github.com/alam00000/bentopdf/blob/v2.8.12/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/bentopdf
+https://raw.githubusercontent.com/alam00000/bentopdf/v2.8.12/Dockerfile
+https://raw.githubusercontent.com/alam00000/bentopdf/v2.8.12/nginx.conf
+https://www.bentopdf.com

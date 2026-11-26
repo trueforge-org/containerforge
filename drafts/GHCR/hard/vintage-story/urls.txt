@@ -1,0 +1,8 @@
+http://api.vintagestory.at/stable.json
+https://github.com/ich777/docker-vintage-story
+https://github.com/ich777/docker-vintage-story/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vintage-story
+https://packages.ubuntu.com/resolute/dotnet-runtime-10.0
+https://raw.githubusercontent.com/ich777/docker-vintage-story/master/Dockerfile
+https://wiki.vintagestory.at/index.php/Server_Config
+https://www.vintagestory.at

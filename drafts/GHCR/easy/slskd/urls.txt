@@ -1,0 +1,6 @@
+https://github.com/ansible-slskd/slskd
+https://github.com/slskd/slskd
+https://github.com/slskd/slskd/blob/e472ecd/Dockerfile
+https://github.com/slskd/slskd/blob/master/LICENSE
+https://github.com/slskd/slskd/blob/master/docs/config.md
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/slskd

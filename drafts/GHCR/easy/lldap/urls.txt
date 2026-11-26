@@ -1,0 +1,11 @@
+https://github.com/lldap/lldap
+https://github.com/lldap/lldap/blob/48a0a8d961f32bd8e3263b202053ce49a6c94781/.github/workflows/Dockerfile.ci.debian
+https://github.com/lldap/lldap/releases/expanded_assets/v0.6.3
+https://github.com/lldap/lldap/releases/latest
+https://github.com/lldap/lldap/tree/main/docs
+https://github.com/nitnelave/lldap
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/lldap
+https://raw.githubusercontent.com/lldap/lldap/48a0a8d961f32bd8e3263b202053ce49a6c94781/.github/workflows/Dockerfile.ci.debian
+https://raw.githubusercontent.com/lldap/lldap/v0.6.3/LICENSE
+https://raw.githubusercontent.com/lldap/lldap/v0.6.3/README.md
+https://raw.githubusercontent.com/lldap/lldap/v0.6.3/lldap_config.docker_template.toml

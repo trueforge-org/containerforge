@@ -1,0 +1,8 @@
+https://getdashdot.com
+https://getdashdot.com/docs
+https://github.com/MauriceNino/dashdot
+https://github.com/MauriceNino/dashdot/blob/24cc5d61e10f5255a44f85b5b35d333a3b9bc6d8/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dashdot
+https://raw.githubusercontent.com/MauriceNino/dashdot/24cc5d61e10f5255a44f85b5b35d333a3b9bc6d8/docker/Dockerfile
+https://raw.githubusercontent.com/MauriceNino/dashdot/v6.3.4/apps/docs/content/docs/configuration/server.mdx
+https://raw.githubusercontent.com/MauriceNino/dashdot/v6.3.4/package.json

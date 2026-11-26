@@ -1,0 +1,7 @@
+https://github.com/Xtrendence/Cryptofolio
+https://github.com/Xtrendence/Cryptofolio/releases/expanded_assets/V.2.2
+https://github.com/Xtrendence/cryptofolio
+https://github.com/Xtrendence/cryptofolio/blob/51f7263e77cad118bd8f2244d0ded81e5d647261/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cryptofolio
+https://hub.docker.com/r/xtrendence/cryptofolio
+https://raw.githubusercontent.com/Xtrendence/cryptofolio/master/Dockerfile

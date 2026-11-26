@@ -1,0 +1,8 @@
+https://api.github.com/repos/lovelaze/nebula-sync/releases/tags/v0.11.3
+https://github.com/lovelaze/nebula-sync
+https://github.com/lovelaze/nebula-sync/blob/main/README.md
+https://github.com/lovelaze/nebula-sync/blob/v0.11.3/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nebula-sync
+https://raw.githubusercontent.com/lovelaze/nebula-sync/main/LICENSE
+https://raw.githubusercontent.com/lovelaze/nebula-sync/main/README.md
+https://raw.githubusercontent.com/lovelaze/nebula-sync/v0.11.3/Dockerfile

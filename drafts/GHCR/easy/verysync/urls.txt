@@ -1,0 +1,6 @@
+https://github.com/Jonnyan404/verysync
+https://github.com/Jonnyan404/verysync/blob/29eb0b8c40c2e2f9e62b3f00368e152f15066a78/Dockerfile
+https://github.com/Jonnyan404/verysync/blob/master/Dockerfile
+https://github.com/Jonnyan404/verysync/blob/master/README.md
+https://github.com/Jonnyan404/verysync/blob/master/docker-entrypoint.sh
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/verysync

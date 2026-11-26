@@ -1,0 +1,7 @@
+https://docs.teslamate.org
+https://docs.teslamate.org/docs/installation/docker
+https://github.com/teslamate-org/teslamate
+https://github.com/teslamate-org/teslamate.git
+https://github.com/teslamate-org/teslamate/blob/v4.5.0/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/teslamate
+https://hub.docker.com/r/teslamate/teslamate

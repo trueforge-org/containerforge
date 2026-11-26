@@ -1,0 +1,13 @@
+https://ftp.exim.org/pub/exim/exim4
+https://github.com/Exim/exim
+https://github.com/ix-ai/smtp
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/smtp-relay
+https://gitlab.com/ix.ai/smtp/-/blob/v0.7.7/Dockerfile
+https://packages.debian.org/stable/exim4-daemon-light
+https://packages.ubuntu.com/resolute/exim4-daemon-light
+https://raw.githubusercontent.com/ix-ai/smtp/v0.7.7/Dockerfile
+https://raw.githubusercontent.com/ix-ai/smtp/v0.7.7/README.md
+https://raw.githubusercontent.com/ix-ai/smtp/v0.7.7/entrypoint.sh
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/smtp-relay/values.yaml
+https://www.exim.org
+https://www.exim.org/docs.html

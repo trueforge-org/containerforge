@@ -1,0 +1,12 @@
+https://api.github.com/repos/novnc/noVNC/git/ref/tags/v1.7.0
+https://api.github.com/repos/novnc/noVNC/releases/latest
+https://api.github.com/repos/novnc/noVNC/tarball/v1.7.0
+https://github.com/nicholaswilde/docker-novnc/blob/caa724f/Dockerfile
+https://github.com/novnc/noVNC
+https://github.com/novnc/noVNC/releases/tag/v1.7.0
+https://github.com/novnc/noVNC/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/novnc
+https://novnc.com
+https://pypi.org/pypi/websockify/json
+https://raw.githubusercontent.com/nicholaswilde/docker-novnc/caa724f/Dockerfile
+https://raw.githubusercontent.com/novnc/noVNC/v1.7.0/LICENSE.txt

@@ -1,0 +1,7 @@
+https://electrum.org
+https://electrum.readthedocs.io
+https://github.com/ich777/docker-electrum/blob/master/Dockerfile
+https://github.com/spesmilo/electrum
+https://github.com/spesmilo/electrum/releases/tag/4.8.4
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/electrum
+https://raw.githubusercontent.com/ich777/docker-electrum/master/Dockerfile

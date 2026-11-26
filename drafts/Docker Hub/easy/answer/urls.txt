@@ -1,0 +1,9 @@
+https://answer.apache.org
+https://answer.apache.org/docs/env
+https://answer.apache.org/docs/installation
+https://github.com/answerdev/answer
+https://github.com/answerdev/answer/blob/731e8b3001f2eee57c79e0d942fa078c269b9995/Dockerfile
+https://github.com/apache/answer
+https://github.com/apache/answer/blob/v2.0.3/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/answer
+https://hub.docker.com/r/answerdev/answer

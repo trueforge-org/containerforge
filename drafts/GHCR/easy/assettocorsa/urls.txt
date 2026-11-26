@@ -1,0 +1,5 @@
+https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/assettocorsa
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://www.assettocorsa.net

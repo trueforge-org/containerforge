@@ -1,0 +1,7 @@
+https://archive.ubuntu.com/ubuntu
+https://developer.valvesoftware.com/wiki/Source_Dedicated_Server
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cssource
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile
+https://store.steampowered.com/app/232330
+https://www.steampowered.com

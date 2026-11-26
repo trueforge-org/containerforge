@@ -1,0 +1,10 @@
+https://fleetdm.com
+https://fleetdm.com/docs
+https://github.com/linuxserver/docker-fleet
+https://github.com/linuxserver/docker-fleet/blob/68995eabc52afa0c3a1fddf3c5dbc803d6943c36/Dockerfile
+https://github.com/linuxserver/fleet
+https://github.com/linuxserver/fleet/releases/tag/2.3.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/fleet
+https://raw.githubusercontent.com/linuxserver/docker-fleet/68995eabc52afa0c3a1fddf3c5dbc803d6943c36/Dockerfile
+https://raw.githubusercontent.com/linuxserver/docker-fleet/68995eabc52afa0c3a1fddf3c5dbc803d6943c36/readme-vars.yml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/fleet/values.yaml

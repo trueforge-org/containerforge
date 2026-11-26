@@ -1,0 +1,8 @@
+https://bayang.github.io/jelu-web
+https://github.com/bayang/jelu
+https://github.com/bayang/jelu/blob/2aba1840c9d823851a5d219dcf9802e1a194a4e2/Dockerfile
+https://github.com/bayang/jelu/releases/latest
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jelu
+https://hub.docker.com/r/wabayang/jelu
+https://raw.githubusercontent.com/bayang/jelu/2aba1840c9d823851a5d219dcf9802e1a194a4e2/Dockerfile
+https://raw.githubusercontent.com/bayang/jelu/main/LICENSE

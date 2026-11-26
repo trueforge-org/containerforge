@@ -1,0 +1,4 @@
+https://github.com/EdwardChamberlain/IPMI-Fan-Controller
+https://github.com/EdwardChamberlain/IPMI-Fan-Controller/blob/d1ea5f15163a5ca6a5e20d6ba5c9b2fea128b246/dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ipmi-tools
+https://hub.docker.com/r/edchamberlain/ipmi-tools

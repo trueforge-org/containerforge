@@ -1,0 +1,12 @@
+https://fill-data.papermc.io/v1/objects/0844bcabdcdb4f5b875906fd4c3365bc1bb76918e42bc595ed88ad195258dd75/velocity-4.3.1-45.jar
+https://fill.papermc.io/v3/projects/velocity/versions/4.3.1/builds/latest
+https://github.com
+https://github.com/PaperMC/Velocity
+https://github.com/PaperMC/Velocity/releases/tag/v4.3.1
+https://github.com/itzg/docker-mc-proxy
+https://github.com/itzg/docker-mc-proxy/blob/89a7d3ad7dc6/Dockerfile
+https://github.com/itzg/docker-mc-proxy/releases/tag/2026.11.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-proxy
+https://hub.docker.com/v2/repositories/itzg/mc-proxy/tags
+https://papermc.io/software/velocity
+https://raw.githubusercontent.com/itzg/docker-mc-proxy/main/README.md

@@ -1,0 +1,9 @@
+https://github.com/bitnami/bitnami-docker-grafana
+https://github.com/grafana/grafana
+https://github.com/grafana/grafana/blob/5db6ba887630c7fa12e5bfd063f2fa854025468c/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/grafana
+https://grafana.com
+https://grafana.com/docs/grafana/latest
+https://hub.docker.com/r/grafana/grafana
+https://raw.githubusercontent.com/grafana/grafana/main/Dockerfile
+https://raw.githubusercontent.com/grafana/grafana/main/LICENSE

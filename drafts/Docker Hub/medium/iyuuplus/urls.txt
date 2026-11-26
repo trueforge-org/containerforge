@@ -1,0 +1,8 @@
+http://doc.iyuu.cn
+https://github.com/ledccn/iyuuplus-dev
+https://github.com/ledccn/iyuuplus-dev/blob/HEAD/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/iyuuplus
+https://hub.docker.com/r/iyuucn/iyuuplus
+https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/LICENSE
+https://raw.githubusercontent.com/ledccn/iyuuplus-dev/HEAD/docker/Dockerfile
+https://www.iyuu.cn

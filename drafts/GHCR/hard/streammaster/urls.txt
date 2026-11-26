@@ -1,0 +1,6 @@
+https://api.github.com/repos/carlreid/StreamMaster
+https://api.github.com/repos/carlreid/StreamMaster/releases/latest
+https://carlreid.github.io/StreamMaster
+https://github.com/carlreid/StreamMaster
+https://github.com/carlreid/StreamMaster/blob/a8f8f6cda65138226ea2cfe73c5dd0db3a040c88/Dockerfile.template
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/streammaster

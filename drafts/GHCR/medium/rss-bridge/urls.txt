@@ -1,0 +1,10 @@
+https://api.github.com/repos/RSS-Bridge/rss-bridge
+https://api.github.com/repos/RSS-Bridge/rss-bridge/releases/latest
+https://api.github.com/repos/RSS-Bridge/rss-bridge/releases/tags/2025-06-03
+https://github.com/RSS-Bridge/rss-bridge
+https://github.com/RSS-Bridge/rss-bridge/blob/98e03011dbb80ea9cea3ef8c5e29a1778f169cc9/Dockerfile
+https://github.com/RSS-Bridge/rss-bridge/releases/tag/2025-06-03
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rss-bridge
+https://raw.githubusercontent.com/RSS-Bridge/rss-bridge/98e03011dbb80ea9cea3ef8c5e29a1778f169cc9/Dockerfile
+https://raw.githubusercontent.com/RSS-Bridge/rss-bridge/98e03011dbb80ea9cea3ef8c5e29a1778f169cc9/docker-entrypoint.sh
+https://rss-bridge.github.io/rss-bridge/index.html

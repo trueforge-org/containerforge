@@ -1,0 +1,8 @@
+https://api.github.com/repos/AndrewPaglusch/FlashPaper/releases/latest
+https://github.com/AndrewPaglusch/FlashPaper
+https://github.com/AndrewPaglusch/FlashPaper/blob/7c986b3f712563c085762eba68cf29f744acc7ea/docker/Dockerfile
+https://github.com/AndrewPaglusch/FlashPaper/releases/tag/v2.6.0
+https://github.com/andrewpaglusch/FlashPaper/pkgs/container/flashpaper
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flashpaper
+https://raw.githubusercontent.com/AndrewPaglusch/FlashPaper/7c986b3f712563c085762eba68cf29f744acc7ea/docker/Dockerfile
+https://raw.githubusercontent.com/AndrewPaglusch/FlashPaper/7c986b3f712563c085762eba68cf29f744acc7ea/docker/entrypoint.sh

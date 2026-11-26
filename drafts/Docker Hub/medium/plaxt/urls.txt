@@ -1,0 +1,7 @@
+https://api.github.com/repos/XanderStrike/goplaxt/license
+https://github.com/XanderStrike/goplaxt
+https://github.com/XanderStrike/goplaxt/blob/1607349dea8ce7fb3b8e7ccfb0370d8103d31d61/Dockerfile-amd64
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/plaxt
+https://hub.docker.com/r/xanderstrike/goplaxt
+https://hub.docker.com/v2/repositories/xanderstrike/goplaxt/tags
+https://raw.githubusercontent.com/XanderStrike/goplaxt/1607349dea8ce7fb3b8e7ccfb0370d8103d31d61/Dockerfile-amd64

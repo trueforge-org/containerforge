@@ -1,0 +1,8 @@
+https://example.com
+https://github.com/gotenberg/gotenberg
+https://github.com/gotenberg/gotenberg/blob/da5d11a1bc50a46afe29e23fed471fa6ed3cf05e/build/Dockerfile
+https://github.com/paperless-ngx/paperless-ngx
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/paperless-ngx
+https://hub.docker.com/r/apache/tika
+https://hub.docker.com/r/gotenberg/gotenberg
+https://paperless-ngx.readthedocs.io/en/latest

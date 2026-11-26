@@ -1,0 +1,6 @@
+https://github.com/awesometic/docker-h5ai
+https://github.com/awesometic/docker-h5ai/blob/master/Dockerfile
+https://github.com/lrsjng/h5ai
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/h5ai
+https://hub.docker.com/r/awesometic/h5ai
+https://larsjung.de/h5ai

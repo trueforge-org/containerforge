@@ -1,0 +1,8 @@
+https://api.github.com/repos/Ylianst/MeshCentral/license
+https://api.github.com/repos/Ylianst/MeshCentral/releases/latest
+https://docs.meshcentral.com
+https://github.com/Ylianst/MeshCentral
+https://github.com/Ylianst/MeshCentral/blob/f436143527458d56da0336ea3047c006703fb4e4/docker/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/meshcentral
+https://meshcentral.com
+https://registry.npmjs.org/meshcentral/1.3.1

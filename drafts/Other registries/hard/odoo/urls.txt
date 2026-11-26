@@ -1,0 +1,7 @@
+https://gallery.ecr.aws/docker/library/odoo
+https://github.com/odoo/docker
+https://github.com/odoo/docker/blob/0ea197eb3852ca500e38fd72074b314833ee7dc8/20.0/Dockerfile
+https://github.com/odoo/odoo
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/odoo
+https://www.odoo.com
+https://www.odoo.com/documentation

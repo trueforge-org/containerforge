@@ -1,0 +1,7 @@
+https://github.com/nightscout/cgm-remote-monitor
+https://github.com/nightscout/cgm-remote-monitor/blob/master/Dockerfile
+https://github.com/nightscout/cgm-remote-monitor/releases/tag/v15.0.9
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nightscout
+https://hub.docker.com/r/nightscout/cgm-remote-monitor-travis
+https://nightscout.github.io
+https://registry.hub.docker.com/r/nightscout/cgm-remote-monitor-travis

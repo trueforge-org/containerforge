@@ -1,0 +1,5 @@
+https://github.com/TimWolla/docker-adminer/blob/6d83dde54e9e8a76c9e003eb494e296808a2a627/6/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/adminer
+https://github.com/vrana/adminer
+https://hub.docker.com/_/adminer
+https://www.adminer.org

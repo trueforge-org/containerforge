@@ -1,0 +1,7 @@
+https://github.com/genea-app/genea-app
+https://github.com/genea-app/genea-app.git
+https://github.com/genea-app/genea-app/releases
+https://github.com/genea-app/genea-app/tags
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/genea
+https://hub.docker.com/r/biggiesize/genea-app
+https://www.genea.app

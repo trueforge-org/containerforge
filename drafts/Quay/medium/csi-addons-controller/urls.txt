@@ -1,0 +1,9 @@
+https://api.github.com/repos/csi-addons/kubernetes-csi-addons
+https://api.github.com/repos/csi-addons/kubernetes-csi-addons/contents/Makefile
+https://api.github.com/repos/csi-addons/kubernetes-csi-addons/releases/latest
+https://csi-addons.github.io
+https://github.com/csi-addons/kubernetes-csi-addons
+https://github.com/csi-addons/kubernetes-csi-addons/blob/c92032331fe7fb165dd1a40dfb7ebb6c83a3b5cb/Dockerfile
+https://github.com/kubernetes-csi/external-snapshotter
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/csi-addons-controller
+https://raw.githubusercontent.com/csi-addons/kubernetes-csi-addons/main/Dockerfile

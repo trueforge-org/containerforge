@@ -1,0 +1,11 @@
+https://api.github.com/repos/P3TERX/Aria2-Pro-Docker/contents/rootfs/etc/services.d/aria2/run?ref=4ec58da
+https://api.github.com/repos/aria2/aria2/license
+https://api.github.com/repos/aria2/aria2/releases/latest
+https://aria2.github.io
+https://aria2.github.io/manual/en/html
+https://github.com/P3TERX/Aria2-Pro-Docker
+https://github.com/P3TERX/Aria2-Pro-Docker/blob/4ec58da/Dockerfile
+https://github.com/aria2/aria2
+https://github.com/aria2/aria2/releases/tag/release-1.37.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/aria2
+https://packages.ubuntu.com/resolute/aria2

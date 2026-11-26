@@ -1,0 +1,8 @@
+https://github.com/Giftie/docker-mediaelch/blob/master/Dockerfile
+https://github.com/Komet/MediaElch
+https://github.com/Komet/MediaElch.git
+https://github.com/Komet/MediaElch/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mediaelch
+https://hub.docker.com/r/masonxx/mediaelch
+https://mediaelch.github.io/mediaelch-doc/about.html
+https://www.mediaelch.de

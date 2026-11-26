@@ -1,0 +1,6 @@
+https://api.github.com/repos/Stirling-Tools/Stirling-PDF/releases/latest
+https://docs.stirlingpdf.com
+https://github.com/Stirling-Tools/Stirling-PDF
+https://github.com/Stirling-Tools/Stirling-PDF/blob/c544e2c3457f52d05675b36dffacc44a4479149e/docker/embedded/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/stirling-pdf
+https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/c544e2c3457f52d05675b36dffacc44a4479149e/docker/embedded/Dockerfile

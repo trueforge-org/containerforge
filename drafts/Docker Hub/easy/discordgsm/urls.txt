@@ -1,0 +1,9 @@
+https://discordgsm.com
+https://discordgsm.com/guide
+https://discordgsm.com/guide/how-to-get-a-discord-bot-token
+https://github.com/DiscordGSM/GameServerMonitor
+https://github.com/DiscordGSM/GameServerMonitor/blob/17d2e124a3d7a4b4cc4b64bada325f363fb162da/Dockerfile
+https://github.com/DiscordGSM/GameServerMonitor/blob/HEAD/requirements.txt
+https://github.com/DiscordGSM/GameServerMonitor/releases/tag/2.20.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/discordgsm
+https://hub.docker.com/r/discordgsm/discord-game-server-monitor

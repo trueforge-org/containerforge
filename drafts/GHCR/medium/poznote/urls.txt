@@ -1,0 +1,6 @@
+https://api.github.com/repos/timothepoznanski/poznote/releases/latest
+https://github.com/timothepoznanski/poznote
+https://github.com/timothepoznanski/poznote/blob/5db51e94dfa0f6f204f267505153cf5fd143feb2/Dockerfile
+https://github.com/timothepoznanski/poznote/releases/tag/6.153.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/poznote
+https://raw.githubusercontent.com/timothepoznanski/poznote/5db51e94dfa0f6f204f267505153cf5fd143feb2/Dockerfile

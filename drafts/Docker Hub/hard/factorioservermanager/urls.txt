@@ -1,0 +1,6 @@
+https://factorio.com/api/latest-releases
+https://github.com/OpenFactorioServerManager/factorio-server-manager
+https://github.com/OpenFactorioServerManager/factorio-server-manager/blob/master/docker/Dockerfile
+https://github.com/OpenFactorioServerManager/factorio-server-manager/wiki/Installation-and-Usage
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/factorioservermanager
+https://hub.docker.com/r/ofsm/ofsm

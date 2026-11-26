@@ -1,0 +1,8 @@
+https://affine.pro
+https://docs.affine.pro
+https://github.com/toeverything/AFFiNE
+https://github.com/toeverything/AFFiNE/blob/b4c8548c09da21b2898443559a5b846f0ccf5dd8/.github/deployment/node/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/affine
+https://packages.ubuntu.com/resolute/nodejs
+https://raw.githubusercontent.com/toeverything/AFFiNE/b4c8548c09da21b2898443559a5b846f0ccf5dd8/.github/deployment/node/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/affine/values.yaml

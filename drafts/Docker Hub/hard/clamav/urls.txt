@@ -1,0 +1,6 @@
+https://docs.clamav.net
+https://github.com/Cisco-Talos/clamav
+https://github.com/Cisco-Talos/clamav-docker/blob/0d44a2479470a57af03f1e212e764f1bee57fc8a/clamav/1.5/debian/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clamav
+https://hub.docker.com/r/clamav/clamav
+https://www.clamav.net/downloads/gpg_public_key

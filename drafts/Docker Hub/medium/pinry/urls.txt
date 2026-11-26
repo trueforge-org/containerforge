@@ -1,0 +1,10 @@
+https://api.github.com/repos/pinry/pinry
+https://api.github.com/repos/pinry/pinry/releases/latest
+https://github.com/pinry/pinry
+https://github.com/pinry/pinry/blob/a21b1e73c2f889499286339b8cc59c411e40b9b1/Dockerfile.autobuild
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pinry
+https://hub.docker.com/r/getpinry/pinry
+https://hub.docker.com/v2/repositories/getpinry/pinry/tags/2.1.13
+https://pinry.readthedocs.io
+https://pypi.org/pypi/pinry/json
+https://raw.githubusercontent.com/pinry/pinry/a21b1e73c2f889499286339b8cc59c411e40b9b1/Dockerfile.autobuild

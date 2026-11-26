@@ -1,0 +1,6 @@
+http://$(docker
+https://gchq.github.io/CyberChef
+https://github.com/gchq/CyberChef
+https://github.com/mpepping/docker-cyberchef/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cyberchef
+https://hub.docker.com/r/mpepping/cyberchef

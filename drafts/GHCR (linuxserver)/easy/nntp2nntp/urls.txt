@@ -1,0 +1,10 @@
+https://api.github.com/repos/linuxserver/nntp2nntp/tags
+https://github.com/linuxserver/docker-nntp2nntp/blob/e9a4fd33a54b/Dockerfile
+https://github.com/linuxserver/nntp2nntp
+https://github.com/linuxserver/nntp2nntp/blob/master/LICENSE
+https://github.com/linuxserver/nntp2nntp/blob/master/nntp2nntp.py
+https://github.com/linuxserver/nntp2nntp/blob/master/setup.py
+https://github.com/linuxserver/nntp2nntp/releases/tag/0.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nntp2nntp
+https://raw.githubusercontent.com/linuxserver/docker-nntp2nntp/master/Dockerfile
+https://raw.githubusercontent.com/linuxserver/docker-nntp2nntp/master/root/defaults/nntp2nntp.conf

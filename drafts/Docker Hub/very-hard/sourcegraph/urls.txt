@@ -1,0 +1,7 @@
+https://github.com/sourcegraph/sourcegraph
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sourcegraph
+https://hub.docker.com/r/sourcegraph/server
+https://hub.docker.com/v2/repositories/sourcegraph/server/tags/6.12.5040
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sourcegraph/Chart.yaml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/sourcegraph/values.yaml
+https://sourcegraph.com/docs

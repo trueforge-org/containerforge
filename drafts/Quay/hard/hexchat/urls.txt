@@ -1,0 +1,13 @@
+https://github.com/binhex/arch-hexchat/blob/2c35dde8b489a4cfec0ffbd3118c6166fb11516a/Dockerfile
+https://github.com/binhex/documentation
+https://github.com/hexchat/hexchat
+https://github.com/hexchat/hexchat/releases/tag/v2.16.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hexchat
+https://hexchat.github.io
+https://hexchat.readthedocs.io
+https://packages.ubuntu.com/resolute/arm64/hexchat/download
+https://packages.ubuntu.com/resolute/hexchat
+https://raw.githubusercontent.com/binhex/arch-hexchat/2c35dde8b489a4cfec0ffbd3118c6166fb11516a/Dockerfile
+https://raw.githubusercontent.com/hexchat/hexchat/master/COPYING
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/hexchat/values.yaml
+https://registry.hub.docker.com/r/binhex/arch-hexchat

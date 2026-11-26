@@ -1,0 +1,10 @@
+https://downloads.getmonero.org/cli/hashes.txt
+https://downloads.getmonero.org/cli/monero-linux-armv8-v0.18.5.4.tar.bz2
+https://downloads.getmonero.org/cli/monero-linux-x64-v0.18.5.4.tar.bz2
+https://getmonero.org
+https://getmonero.org/downloads/hashes.txt
+https://github.com/kannix/monero-full-node
+https://github.com/monero-project/monero
+https://github.com/sethforprivacy/simple-monerod-docker/blob/08e993d/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/monero-node
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/monero-node/values.yaml

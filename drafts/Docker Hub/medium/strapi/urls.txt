@@ -1,0 +1,9 @@
+https://docs.strapi.io
+https://docs.strapi.io/cms/installation/docker
+https://github.com/naskio/docker-strapi
+https://github.com/naskio/docker-strapi/blob/96fd6e7/images/strapi-alpine/Dockerfile
+https://github.com/strapi/strapi
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/strapi
+https://hub.docker.com/r/vshadbolt/strapi
+https://raw.githubusercontent.com/naskio/docker-strapi/96fd6e7/images/strapi-alpine/Dockerfile
+https://raw.githubusercontent.com/strapi/strapi/develop/LICENSE

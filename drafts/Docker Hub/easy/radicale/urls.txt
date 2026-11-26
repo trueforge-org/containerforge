@@ -1,0 +1,8 @@
+https://github.com/Kozea/Radicale
+https://github.com/tomsquest/docker-radicale
+https://github.com/tomsquest/docker-radicale/blob/3.9.2.0/Dockerfile
+https://github.com/tomsquest/docker-radicale/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/radicale
+https://hub.docker.com/r/tomsquest/docker-radicale
+https://radicale.org
+https://radicale.org/v3.html

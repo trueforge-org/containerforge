@@ -1,0 +1,6 @@
+http://flexo-probe:7878/core/os/x86_64/core.db
+https://github.com/nroi/flexo
+https://github.com/nroi/flexo/wiki
+https://github.com/nroi/scruffy
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/flexo
+https://hub.docker.com/r/nroi/flexo

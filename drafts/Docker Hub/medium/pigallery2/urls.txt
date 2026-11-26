@@ -1,0 +1,8 @@
+https://api.github.com/repos/bpatrik/pigallery2
+https://api.github.com/repos/bpatrik/pigallery2/releases/latest
+https://github.com/bpatrik/pigallery2
+https://github.com/bpatrik/pigallery2/blob/43f348a254142eea521138b783e3b8df9fe547c8/docker/alpine/Dockerfile.build
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pigallery2
+https://hub.docker.com/r/bpatrik/pigallery2
+https://hub.docker.com/v2/repositories/bpatrik/pigallery2/tags/latest
+https://raw.githubusercontent.com/bpatrik/pigallery2/43f348a254142eea521138b783e3b8df9fe547c8/docker/alpine/Dockerfile.build

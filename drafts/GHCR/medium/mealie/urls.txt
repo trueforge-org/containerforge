@@ -1,0 +1,8 @@
+https://api.github.com/repos/mealie-recipes/mealie/license
+https://api.github.com/repos/mealie-recipes/mealie/releases/latest
+https://github.com/mealie-recipes/mealie
+https://github.com/mealie-recipes/mealie/blob/v3.31.0/docker/Dockerfile
+https://github.com/mealie-recipes/mealie/releases/tag/v3.31.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mealie
+https://mealie.io
+https://raw.githubusercontent.com/mealie-recipes/mealie/v3.31.0/pyproject.toml

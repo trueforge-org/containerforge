@@ -1,0 +1,7 @@
+https://github.com/fclairamb/solidping
+https://github.com/fclairamb/solidping/blob/5e35c5e4a02b63f3e15c48ade8e6bbe4b5b4e070/Dockerfile
+https://github.com/fclairamb/solidping/blob/main/LICENSE
+https://github.com/fclairamb/solidping/pkgs/container/solidping
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/solidping
+https://raw.githubusercontent.com/fclairamb/solidping/v0.54.1/LICENSE
+https://solidping.io/docs

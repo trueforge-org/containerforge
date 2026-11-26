@@ -1,0 +1,6 @@
+https://api.github.com/repos/jeessy2/ddns-go/releases/tags/v6.18.0
+https://github.com/jeessy2/ddns-go
+https://github.com/jeessy2/ddns-go/blob/9d83c48bfa8a4cac6c6f58a00dedb49e9f848623/Dockerfile
+https://github.com/jeessy2/ddns-go/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ddns-go
+https://raw.githubusercontent.com/jeessy2/ddns-go/9d83c48bfa8a4cac6c6f58a00dedb49e9f848623/Dockerfile

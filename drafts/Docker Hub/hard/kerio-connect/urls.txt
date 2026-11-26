@@ -1,0 +1,5 @@
+https://github.com/chvb/docker-kerio-connect/blob/eb6b9083dd9e9a68e4a67b73c178a0450cecd8ca/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/kerio-connect
+https://hub.docker.com/r/chvb/docker-kerio-connect
+https://www.gfi.com/products-and-solutions/network-security-solutions/kerio/kerio-connect
+https://www.kerio.com

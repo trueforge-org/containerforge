@@ -1,0 +1,6 @@
+http://glances-probe:61208
+https://github.com/nicolargo/glances
+https://github.com/nicolargo/glances/blob/e907519c4a446da33b6968dba8f1c3b84a3379df/docker-files/ubuntu.Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/glances
+https://glances.readthedocs.io/en/develop
+https://hub.docker.com/r/nicolargo/glances

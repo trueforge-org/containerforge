@@ -1,0 +1,4 @@
+https://github.com/spegel-org/spegel
+https://github.com/spegel-org/spegel/blob/7e2e042/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/spegel
+https://raw.githubusercontent.com/spegel-org/spegel/7e2e042/Dockerfile

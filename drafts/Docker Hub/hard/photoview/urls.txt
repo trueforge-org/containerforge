@@ -1,0 +1,5 @@
+https://github.com/photoview/photoview
+https://github.com/photoview/photoview/blob/f79d379e38241c687c55e9f899e30661fd9f115a/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photoview
+https://hub.docker.com/r/viktorstrate/photoview
+https://photoview.github.io

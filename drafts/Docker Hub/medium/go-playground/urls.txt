@@ -1,0 +1,6 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/go-playground
+https://github.com/x1unix/go-playground
+https://github.com/x1unix/go-playground/blob/55b1467ad12c28578a54b80f4dd49f41a64e7a36/build/Dockerfile
+https://go.dev
+https://hub.docker.com/r/x1unix/go-playground
+https://raw.githubusercontent.com/x1unix/go-playground/master/build/Dockerfile

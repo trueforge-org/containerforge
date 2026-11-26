@@ -1,0 +1,10 @@
+http://www.ecodms.de/ecodms_260164
+http://www.ecodms.de/ecodms_260164/noble
+http://www.ecodms.de/gpg/ecodms.key
+https://ecodms.datamagic.at/download
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ecodms
+https://hub.docker.com/r/ecodms/allinone-18.09
+https://www.ecodms.de
+https://www.ecodms.de/de
+https://www.ecodms.de/de/download
+https://www.ecodms.de/index.php/en

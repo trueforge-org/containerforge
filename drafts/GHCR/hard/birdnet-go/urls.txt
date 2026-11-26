@@ -1,0 +1,7 @@
+https://api.github.com/repos/tphakala/birdnet-go/releases/tags/20261031
+https://github.com/tphakala/birdnet-go
+https://github.com/tphakala/birdnet-go/blob/bc1e0de67d9a2292b4742a79f868a7720f8e6a12/Dockerfile
+https://github.com/tphakala/birdnet-go/blob/main/LICENSE
+https://github.com/tphakala/birdnet-go/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/birdnet-go
+https://raw.githubusercontent.com/tphakala/birdnet-go/bc1e0de67d9a2292b4742a79f868a7720f8e6a12/Dockerfile

@@ -1,0 +1,7 @@
+http://minio:9000
+https://github.com/aws/aws-cli
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/s3sync
+https://github.com/what-name/docker-s3sync
+https://github.com/what-name/docker-s3sync/blob/6c971229927957435bfd04239ba21085235fdd95/Dockerfile
+https://hub.docker.com/r/whatname/docker-s3sync
+https://pypi.org/project/awscli

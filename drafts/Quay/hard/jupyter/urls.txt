@@ -1,0 +1,11 @@
+https://api.github.com/repos/jupyter/docker-stacks
+https://docs.jupyter.org/en/latest
+https://github.com/jupyter/docker-stacks
+https://github.com/jupyter/docker-stacks/blob/3b8a7969348b2c0cc6d597188f662fdb2a73616e/images/minimal-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/blob/3b8a7969348b2c0cc6d597188f662fdb2a73616e/images/pyspark-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/blob/3b8a7969348b2c0cc6d597188f662fdb2a73616e/images/r-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/blob/3b8a7969348b2c0cc6d597188f662fdb2a73616e/images/scipy-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/blob/3b8a7969348b2c0cc6d597188f662fdb2a73616e/images/tensorflow-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/blob/fe190c9e10d341558f637d9e7c2e2dff6145ef6b/images/all-spark-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/blob/fe190c9e10d341558f637d9e7c2e2dff6145ef6b/images/datascience-notebook/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/jupyter

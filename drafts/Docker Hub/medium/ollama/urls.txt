@@ -1,0 +1,8 @@
+https://docs.ollama.com
+https://github.com/ollama/ollama
+https://github.com/ollama/ollama/blob/v0.40.16/Dockerfile
+https://github.com/open-webui/open-webui
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/ollama
+https://hub.docker.com/r/ollama/ollama
+https://ollama.com
+https://raw.githubusercontent.com/ollama/ollama/v0.40.16/Dockerfile

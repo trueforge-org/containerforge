@@ -1,0 +1,7 @@
+https://github.com/NginxProxyManager/nginx-proxy-manager
+https://github.com/NginxProxyManager/nginx-proxy-manager/blob/v2.17.1/docker/Dockerfile
+https://github.com/NginxProxyManager/nginx-proxy-manager/releases/tag/v2.17.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/nginx-proxy-manager
+https://hub.docker.com/r/jc21/nginx-proxy-manager
+https://nginxproxymanager.com
+https://nginxproxymanager.com/setup

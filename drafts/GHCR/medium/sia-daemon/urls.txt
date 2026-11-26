@@ -1,0 +1,8 @@
+https://docs.sia.tech
+https://github.com/SiaFoundation/siad
+https://github.com/SiaFoundation/siad/blob/66e7fc6/Dockerfile
+https://github.com/SiaFoundation/siad/pkgs/container/siad
+https://github.com/siafoundation/siad
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sia-daemon
+https://raw.githubusercontent.com/SiaFoundation/siad/66e7fc6/Dockerfile
+https://sia.tech

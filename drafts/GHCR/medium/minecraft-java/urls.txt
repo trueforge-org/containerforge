@@ -1,0 +1,8 @@
+https://github.com/itzg/docker-minecraft-server
+https://github.com/itzg/docker-minecraft-server/blob/1ccd6a0954f6/Dockerfile
+https://github.com/itzg/docker-minecraft-server/releases/tag/2026.11.1
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/minecraft-java
+https://hub.docker.com/v2/repositories/itzg/minecraft-server/tags
+https://raw.githubusercontent.com/itzg/docker-minecraft-server/master/docs/configuration/jvm-options.md
+https://raw.githubusercontent.com/itzg/docker-minecraft-server/master/docs/data-directory.md
+https://www.minecraft.net/en-us/download/server

@@ -1,0 +1,6 @@
+https://docs.octoprint.org/en/main
+https://github.com/OctoPrint/OctoPrint
+https://github.com/OctoPrint/octoprint-docker/blob/32fdd6eae2a9a2c1f97f26cf4c7d3802cb0559db/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/octoprint
+https://hub.docker.com/r/octoprint/octoprint
+https://octoprint.org

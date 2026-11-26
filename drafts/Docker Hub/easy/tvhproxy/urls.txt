@@ -1,0 +1,4 @@
+https://github.com/chvb/docker-tvhproxy/blob/c1ed49d8924d9f5a16d581a1684c33d747d2111e/Dockerfile
+https://github.com/jkaberg/tvhProxy
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tvhproxy
+https://hub.docker.com/r/chvb/docker-tvhproxy

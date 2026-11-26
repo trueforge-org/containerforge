@@ -1,0 +1,6 @@
+https://github.com/krateng/maloja
+https://github.com/krateng/maloja/blob/HEAD/requirements.txt
+https://github.com/krateng/maloja/blob/v3.2.10/Containerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/maloja
+https://hub.docker.com/r/krateng/maloja
+https://maloja.krateng.ch

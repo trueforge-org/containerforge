@@ -1,0 +1,6 @@
+https://github.com/chacawaca/docker-post-recording
+https://github.com/chacawaca/docker-post-recording/blob/971031f2ba851a003d762c1ee9aa523100a90b4b/Dockerfile
+https://github.com/erikkaashoek/Comskip
+https://github.com/erikkaashoek/Comskip/releases/tag/V0.83
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/post-recording
+https://hub.docker.com/r/chacawaca/post-recording

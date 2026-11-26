@@ -1,0 +1,10 @@
+https://api.github.com/repos/Brandawg93/PeaNUT
+https://api.github.com/repos/Brandawg93/PeaNUT/releases/latest
+https://github.com/Brandawg93/PeaNUT
+https://github.com/Brandawg93/PeaNUT/blob/7ad39fd50525a3c7e5f0979fef7defbcc7f65229/Dockerfile
+https://github.com/Brandawg93/PeaNUT/releases/tag/v6.1.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/peanut
+https://hub.docker.com/r/brandawg93/peanut
+https://hub.docker.com/v2/repositories/brandawg93/peanut/tags?page_size=5&ordering=last_updated
+https://raw.githubusercontent.com/Brandawg93/PeaNUT/7ad39fd50525a3c7e5f0979fef7defbcc7f65229/Dockerfile
+https://raw.githubusercontent.com/Brandawg93/PeaNUT/7ad39fd50525a3c7e5f0979fef7defbcc7f65229/package.json

@@ -1,0 +1,6 @@
+https://github.com/muety/mininote
+https://github.com/muety/mininote/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mininote
+https://hub.docker.com/r/n1try/mininote
+https://raw.githubusercontent.com/muety/mininote/master/Dockerfile
+https://raw.githubusercontent.com/muety/mininote/master/README.md

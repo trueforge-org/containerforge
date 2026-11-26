@@ -1,0 +1,6 @@
+https://github.com/tiltedphoques/TiltedEvolution
+https://github.com/tiltedphoques/TiltedEvolution/blob/v1.8.4/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/st-reborn-server
+https://hub.docker.com/r/tiltedphoques/st-reborn-server
+https://hub.docker.com/v2/repositories/tiltedphoques/st-reborn-server/tags/1.8.4
+https://raw.githubusercontent.com/tiltedphoques/TiltedEvolution/v1.8.4/Dockerfile

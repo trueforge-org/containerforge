@@ -1,0 +1,13 @@
+https://github.com/laurent22/joplin
+https://github.com/laurent22/joplin/blob/6fcc076/Dockerfile.server
+https://github.com/laurent22/joplin/releases/expanded_assets/v3.7.24
+https://github.com/laurent22/joplin/releases/tag/v3.7.24
+https://github.com/laurent22/joplin/releases/tag/v3.7.6
+https://github.com/laurent22/joplin/tree/dev/packages/server
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/joplin-server
+https://hub.docker.com/r/joplin/server
+https://joplinapp.org
+https://joplinapp.org/help
+https://raw.githubusercontent.com/laurent22/joplin/6fcc076/Dockerfile.server
+https://raw.githubusercontent.com/laurent22/joplin/dev/LICENSE
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/joplin-server/values.yaml

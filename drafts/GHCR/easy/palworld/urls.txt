@@ -1,0 +1,6 @@
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/ich777/docker-steamcmd-server/tree/palworld
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/palworld
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/palworld/Dockerfile
+https://store.steampowered.com/app/2394010
+https://www.pocketpair.jp

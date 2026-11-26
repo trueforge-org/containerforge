@@ -1,0 +1,9 @@
+https://archive.ubuntu.com/ubuntu
+https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers
+https://github.com/ich777/docker-steamcmd-server/blob/master/Dockerfile
+https://github.com/ich777/docker-steamcmd-server/tree/cs2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/cs2
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/cs2/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-steamcmd-server/cs2/scripts/start.sh
+https://store.steampowered.com/app/730
+https://www.counter-strike.net

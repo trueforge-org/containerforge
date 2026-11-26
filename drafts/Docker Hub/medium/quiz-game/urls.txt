@@ -1,0 +1,6 @@
+https://github.com/ASKJR/quiz-game
+https://github.com/patrickstigler/quiz-game/blob/dd31e4d29accfa9f22ced2164a90d7394d89a374/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quiz-game
+https://hub.docker.com/r/patrickstigler/quiz-game
+https://raw.githubusercontent.com/patrickstigler/quiz-game/master/Dockerfile
+https://registry.hub.docker.com/r/patrickstigler/quiz-game

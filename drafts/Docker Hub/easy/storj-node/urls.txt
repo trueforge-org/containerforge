@@ -1,0 +1,7 @@
+https://docs.storj.io/node
+https://github.com/storj/storagenode-docker/blob/main/Dockerfile
+https://github.com/storj/storj
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/storj-node
+https://hub.docker.com/r/storjlabs/storagenode
+https://raw.githubusercontent.com/storj/storagenode-docker/main/docker/entrypoint
+https://version.storj.io

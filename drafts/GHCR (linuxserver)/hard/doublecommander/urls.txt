@@ -1,0 +1,9 @@
+https://api.github.com/repos/doublecmd/doublecmd/releases/latest
+https://doublecmd.github.io/doc/en/help.html
+https://doublecmd.sourceforge.io
+https://github.com/doublecmd/doublecmd
+https://github.com/linuxserver/docker-doublecommander
+https://github.com/linuxserver/docker-doublecommander/blob/05e15297277457b38b1c99c2207185cf73873f15/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/doublecommander
+https://raw.githubusercontent.com/linuxserver/docker-digikam/fd0663bebb867b7dba24c63d14e0493e7d94c0b9/README.md
+https://raw.githubusercontent.com/linuxserver/docker-doublecommander/05e15297277457b38b1c99c2207185cf73873f15/Dockerfile

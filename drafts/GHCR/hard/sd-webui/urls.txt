@@ -1,0 +1,9 @@
+https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/license
+https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/releases/latest
+https://github.com/AUTOMATIC1111/stable-diffusion-webui
+https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/HEAD/requirements.txt
+https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases
+https://github.com/ahmetoner/sd-webui-docker
+https://github.com/neggles/sd-webui-docker/blob/8d163826a402/docker/Dockerfile.auto
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/sd-webui
+https://raw.githubusercontent.com/neggles/sd-webui-docker/8d163826a402/docker/Dockerfile.auto

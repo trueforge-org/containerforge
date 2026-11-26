@@ -1,0 +1,15 @@
+https://api.github.com/repos/prologic/golinks
+https://git.mills.io/api/v1/repos/prologic/golinks/releases?limit=3
+https://git.mills.io/prologic/golinks
+https://git.mills.io/prologic/golinks/raw/branch/master/.dockerfiles/start.sh
+https://git.mills.io/prologic/golinks/raw/branch/master/Dockerfile
+https://git.mills.io/prologic/golinks/raw/branch/master/LICENSE
+https://git.mills.io/prologic/golinks/raw/branch/master/Makefile
+https://git.mills.io/prologic/golinks/raw/branch/master/go.mod
+https://git.mills.io/prologic/golinks/raw/branch/master/main.go
+https://github.com/nicholaswilde/docker-golinks
+https://github.com/nicholaswilde/docker-golinks/blob/bea20bc/Dockerfile
+https://github.com/prologic/golinks
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/golinks
+https://suggestqueries.google.com/complete/search?client=firefox&q=%s
+https://www.google.com/search?q=%s&btnK

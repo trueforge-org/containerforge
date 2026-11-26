@@ -1,0 +1,10 @@
+https://api.github.com/repos/whyour/qinglong
+https://api.github.com/repos/whyour/qinglong/releases/tags/v2.24.0
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/qinglong
+https://github.com/whyour/qinglong
+https://github.com/whyour/qinglong/blob/6e26899a235a955713edfb490f6ae538d0baf612/docker/Dockerfile
+https://github.com/whyour/qinglong/releases/tag/v2.24.0
+https://qinglong.online
+https://qinglong.online/guide/getting-started/installation-guide
+https://raw.githubusercontent.com/whyour/qinglong/6e26899a235a955713edfb490f6ae538d0baf612/docker/Dockerfile
+https://raw.githubusercontent.com/whyour/qinglong/develop/docker/docker-entrypoint.sh

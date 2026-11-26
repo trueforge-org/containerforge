@@ -1,0 +1,6 @@
+https://api.github.com/repos/humhub/humhub/releases/tags/v1.17.2
+https://github.com/humhub/humhub
+https://github.com/humhub/humhub/releases/tag/v1.17.2
+https://github.com/mriedmann/humhub-docker/blob/6bb3dc908c7af3a930d500397d9394280cd55753/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/humhub
+https://raw.githubusercontent.com/mriedmann/humhub-docker/6bb3dc908c7af3a930d500397d9394280cd55753/Dockerfile

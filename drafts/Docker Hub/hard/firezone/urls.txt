@@ -1,0 +1,6 @@
+https://github.com/firezone/firezone
+https://github.com/firezone/firezone/blob/dc71329fa007942ed32c69bd820f66b94cf5a5cc/Dockerfile.prod
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/firezone
+https://hub.docker.com/r/firezone/firezone
+https://www.firezone.dev
+https://www.firezone.dev/kb

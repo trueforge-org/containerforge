@@ -1,0 +1,6 @@
+https://docs.getoutline.com
+https://github.com/outline/outline
+https://github.com/outline/outline/blob/f1f5fd364842916af8c4996c75ee3bed3b30aad4/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/outline
+https://hub.docker.com/r/outlinewiki/outline
+https://www.getoutline.com

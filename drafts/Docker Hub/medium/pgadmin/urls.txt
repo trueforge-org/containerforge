@@ -1,0 +1,10 @@
+https://api.github.com/repos/pgadmin-org/pgadmin4
+https://github.com/pgadmin-org/pgadmin4
+https://github.com/pgadmin-org/pgadmin4/blob/REL-9_19/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/pgadmin
+https://hub.docker.com/r/dpage/pgadmin4
+https://hub.docker.com/v2/repositories/dpage/pgadmin4/tags/9.19
+https://pypi.org/pypi/pgadmin4/json
+https://raw.githubusercontent.com/pgadmin-org/pgadmin4/REL-9_19/Dockerfile
+https://www.pgadmin.org
+https://www.pgadmin.org/docs

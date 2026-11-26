@@ -1,0 +1,6 @@
+https://github.com/SickHub/arkserver/blob/394fd7aa4f6321e5665f9dbc7d1ff4600aa6386f/Dockerfile
+https://github.com/arkmanager/ark-server-tools
+https://github.com/arkmanager/ark-server-tools.git
+https://github.com/arkmanager/ark-server-tools/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/arksurvivalevolved
+https://hub.docker.com/r/drpsychick/arkserver

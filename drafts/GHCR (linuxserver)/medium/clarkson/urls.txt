@@ -1,0 +1,3 @@
+https://github.com/linuxserver/Clarkson
+https://github.com/linuxserver/docker-clarkson/blob/a055394e1b15b406965902248118536959e54f1f/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/clarkson

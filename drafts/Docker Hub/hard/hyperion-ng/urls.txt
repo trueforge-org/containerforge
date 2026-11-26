@@ -1,0 +1,5 @@
+https://docs.hyperion-project.org
+https://github.com/hyperion-project/hyperion.ng
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hyperion-ng
+https://hub.docker.com/r/sirfragalot/hyperion.ng
+https://hyperion-project.org

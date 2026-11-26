@@ -1,0 +1,8 @@
+https://api.github.com/repos/louislam/uptime-kuma/license
+https://github.com/louislam/uptime-kuma
+https://github.com/louislam/uptime-kuma/blob/1.23.17/docker/dockerfile
+https://github.com/louislam/uptime-kuma/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/uptime-kuma
+https://hub.docker.com/r/louislam/uptime-kuma
+https://raw.githubusercontent.com/louislam/uptime-kuma/1.23.17/docker/dockerfile
+https://raw.githubusercontent.com/louislam/uptime-kuma/2.5.12/docker/dockerfile

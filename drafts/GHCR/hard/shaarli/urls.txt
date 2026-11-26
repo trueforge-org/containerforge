@@ -1,0 +1,8 @@
+https://api.github.com/repos/shaarli/Shaarli/releases/latest
+https://github.com/shaarli/Shaarli
+https://github.com/shaarli/Shaarli/blob/v0.16.10/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/shaarli
+https://raw.githubusercontent.com/shaarli/Shaarli/v0.16.11/COPYING
+https://raw.githubusercontent.com/shaarli/Shaarli/v0.16.11/Dockerfile
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/shaarli/values.yaml
+https://shaarli.readthedocs.io

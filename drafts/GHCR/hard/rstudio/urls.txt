@@ -1,0 +1,9 @@
+https://github.com/rocker-org/rocker-versioned2
+https://github.com/rocker-org/rocker-versioned2/blob/500642d/dockerfiles/rstudio_4.6.2.Dockerfile
+https://github.com/rstudio/rstudio
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/rstudio
+https://p3m.dev/cran/__linux__/resolute/latest
+https://posit.co/download/rstudio-server
+https://raw.githubusercontent.com/rocker-org/rocker-versioned2/500642d/dockerfiles/rstudio_4.6.2.Dockerfile
+https://raw.githubusercontent.com/rocker-org/rocker-versioned2/500642d/scripts/install_rstudio.sh
+https://raw.githubusercontent.com/rstudio/rstudio/main/COPYING

@@ -1,0 +1,5 @@
+https://github.com/m-bers/docker-virt-manager/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/virt-manager
+https://github.com/virt-manager/virt-manager
+https://hub.docker.com/r/mber5/virt-manager
+https://virt-manager.org

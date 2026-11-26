@@ -1,0 +1,5 @@
+https://github.com/sdr-enthusiasts/docker-tar1090/blob/d89fb2efbe182198a0b9cde4d537b3ccd3250253/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tar1090
+https://github.com/wiedehopf/tar1090
+https://github.com/wiedehopf/tar1090.git
+https://hub.docker.com/r/mikenye/tar1090

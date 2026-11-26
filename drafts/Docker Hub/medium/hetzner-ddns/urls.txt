@@ -1,0 +1,6 @@
+https://dns.hetzner.com/api/v1
+https://github.com/kutzilla/docker-hetzner-ddns
+https://github.com/kutzilla/docker-hetzner-ddns/blob/511c911/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/hetzner-ddns
+https://hub.docker.com/r/kutzilla/hetzner-ddns
+https://status.hetzner.com/incident/c2146c42-6dd2-4454-916a-19f07e0e5a44

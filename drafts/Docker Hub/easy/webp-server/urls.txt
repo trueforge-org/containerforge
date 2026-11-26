@@ -1,0 +1,6 @@
+https://docs.webp.sh
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/webp-server
+https://github.com/webp-sh/webp_server_go
+https://github.com/webp-sh/webp_server_go/blob/5efe1bf88814f86588d4c0f030a12d071d7471ae/Dockerfile
+https://github.com/webp-sh/webp_server_go/releases/tag/0.16.2
+https://hub.docker.com/r/webpsh/webps

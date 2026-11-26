@@ -1,0 +1,9 @@
+https://github.com/Tzahi12345/YoutubeDL-Material
+https://github.com/Tzahi12345/YoutubeDL-Material/blob/58f4313e500cfcb17aa801934163f474e7be6172/Dockerfile
+https://github.com/Tzahi12345/YoutubeDL-Material/releases/tag/v4.3.2
+https://github.com/Tzahi12345/YoutubeDL-Material/wiki
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/youtubedl-material
+https://raw.githubusercontent.com/Tzahi12345/YoutubeDL-Material/58f4313e500cfcb17aa801934163f474e7be6172/Dockerfile
+https://raw.githubusercontent.com/Tzahi12345/YoutubeDL-Material/v4.3.2/backend/package.json
+https://raw.githubusercontent.com/Tzahi12345/YoutubeDL-Material/v4.3.2/docker-compose.yml
+https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/youtubedl-material/values.yaml

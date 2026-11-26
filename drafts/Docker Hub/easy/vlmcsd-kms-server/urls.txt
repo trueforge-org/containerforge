@@ -1,0 +1,5 @@
+https://github.com/Wind4/vlmcsd
+https://github.com/mikolatero/docker-vlmcsd
+https://github.com/mikolatero/docker-vlmcsd/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/vlmcsd-kms-server
+https://hub.docker.com/r/mikolatero/vlmcsd

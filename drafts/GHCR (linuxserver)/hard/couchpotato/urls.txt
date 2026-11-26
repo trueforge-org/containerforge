@@ -1,0 +1,7 @@
+https://api.github.com/repos/CouchPotato/CouchPotatoServer
+https://api.github.com/repos/CouchPotato/CouchPotatoServer/releases/tags/build%2F3.0.1
+https://github.com/CouchPotato/CouchPotatoServer
+https://github.com/CouchPotato/CouchPotatoServer/releases/tag/build%2F3.0.1
+https://github.com/linuxserver/docker-couchpotato/blob/273f98c4d935e5c5629b3978685c4066402c8490/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/couchpotato
+https://raw.githubusercontent.com/linuxserver/docker-couchpotato/273f98c4d935e5c5629b3978685c4066402c8490/Dockerfile

@@ -1,0 +1,5 @@
+https://breitbandmessung.de/test
+https://github.com/shneezin/breitbandmessung-node
+https://github.com/shneezin/breitbandmessung-node/blob/4cd4038/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/breitbandmessung-de
+https://hub.docker.com/r/shneezin/breitbandmessung-node

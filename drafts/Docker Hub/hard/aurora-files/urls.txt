@@ -1,0 +1,8 @@
+https://afterlogic.com
+https://afterlogic.com/docs
+https://github.com/afterlogic/aurora-files
+https://github.com/afterlogic/aurora-files/releases
+https://github.com/afterlogic/docker-aurora-files
+https://github.com/afterlogic/docker-aurora-files/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/aurora-files
+https://hub.docker.com/r/afterlogic/docker-aurora-files

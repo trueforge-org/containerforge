@@ -1,0 +1,7 @@
+https://github.com/HandBrake/HandBrake
+https://github.com/jlesage/docker-handbrake
+https://github.com/jlesage/docker-handbrake/blob/v26.09.1/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/handbrake
+https://handbrake.fr
+https://handbrake.fr/docs
+https://raw.githubusercontent.com/jlesage/docker-handbrake/v26.09.1/Dockerfile

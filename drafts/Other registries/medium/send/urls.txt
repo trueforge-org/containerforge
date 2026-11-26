@@ -1,0 +1,6 @@
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/send
+https://gitlab.com/api/v4/projects/timvisee%2Fsend/releases
+https://gitlab.com/api/v4/projects/timvisee%2Fsend/repository/files/Dockerfile/raw?ref=master
+https://gitlab.com/timvisee/send
+https://gitlab.com/timvisee/send/-/blob/master/Dockerfile
+https://gitlab.com/timvisee/send/-/releases

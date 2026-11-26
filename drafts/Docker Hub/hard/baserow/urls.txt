@@ -1,0 +1,8 @@
+https://baserow.io/docs/index
+https://github.com/baserow/baserow
+https://github.com/baserow/baserow/blob/HEAD/embeddings/requirements.txt
+https://github.com/baserow/baserow/blob/d897b90e9b819d4cde8b8c542f548bcdc21cd97f/deploy/all-in-one/Dockerfile
+https://github.com/baserow/baserow/releases/tag/2.4.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/baserow
+https://gitlab.com/bramw/baserow
+https://hub.docker.com/r/baserow/baserow

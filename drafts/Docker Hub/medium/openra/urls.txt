@@ -1,0 +1,5 @@
+https://github.com/OpenRA/OpenRA
+https://github.com/rmoriz/openra-dockerfile/blob/62aa1508bb9c3df1ab41b9e20252880ac6823fcc/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/openra
+https://hub.docker.com/r/rmoriz/openra
+https://www.openra.net

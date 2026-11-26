@@ -1,0 +1,6 @@
+https://github.com/getmango/Mango
+https://github.com/getmango/Mango/releases/tag/v0.27.0
+https://github.com/hkalexling/mango
+https://github.com/hkalexling/mango/blob/7a7d9eb/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/mango
+https://hub.docker.com/r/hkalexling/mango

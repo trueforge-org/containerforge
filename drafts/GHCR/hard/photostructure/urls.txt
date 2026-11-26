@@ -1,0 +1,9 @@
+https://api.github.com/repos/photostructure/photostructure-for-servers
+https://api.github.com/repos/photostructure/photostructure-for-servers/contents/Dockerfile?ref=42bd6d0e2f7c2a5abaaa1948cb9591c591163467
+https://github.com/photostructure/photostructure-for-servers
+https://github.com/photostructure/photostructure-for-servers/blob/42bd6d0e2f7c2a5abaaa1948cb9591c591163467/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/photostructure
+https://photostructure.com
+https://photostructure.com/docs
+https://photostructure.com/server/photostructure-for-docker
+https://registry.npmjs.org/photostructure/latest

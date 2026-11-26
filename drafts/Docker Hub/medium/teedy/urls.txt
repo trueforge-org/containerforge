@@ -1,0 +1,6 @@
+https://github.com/sismics/docs
+https://github.com/sismics/docs/blob/5b39c46/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/teedy
+https://hub.docker.com/r/sismics/docs
+https://raw.githubusercontent.com/sismics/docs/master/Dockerfile
+https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/12.1.6

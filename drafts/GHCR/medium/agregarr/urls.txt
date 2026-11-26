@@ -1,0 +1,5 @@
+https://api.github.com/repos/agregarr/agregarr
+https://github.com/agregarr/agregarr
+https://github.com/agregarr/agregarr/blob/4a101503a89ebfbb3d8ba63445f87053b11b991a/Dockerfile
+https://github.com/agregarr/agregarr/releases/tag/v2.4.2
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/agregarr

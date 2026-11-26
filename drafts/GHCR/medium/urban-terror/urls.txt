@@ -1,0 +1,8 @@
+http://www.urbanterror.info
+https://github.com/FrozenSand/ioq3-for-UrbanTerror-4
+https://github.com/ich777/docker-urbanterror/blob/master/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/urban-terror
+https://raw.githubusercontent.com/ich777/docker-urbanterror/master/Dockerfile
+https://raw.githubusercontent.com/ich777/docker-urbanterror/master/README.md
+https://www.urbanterror.info
+https://www.urbanterror.info/home

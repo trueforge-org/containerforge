@@ -1,0 +1,7 @@
+http://.../setup
+https://github.com/Forceu/Gokapi
+https://github.com/Forceu/gokapi
+https://github.com/Forceu/gokapi/blob/9a4b289c604198c05589e34314e889d2c25386d8/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/gokapi
+https://gokapi.readthedocs.io/en/latest
+https://hub.docker.com/r/f0rc3/gokapi

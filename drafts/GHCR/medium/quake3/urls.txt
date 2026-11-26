@@ -1,0 +1,9 @@
+https://api.github.com/repos/ioquake/ioq3
+https://ftp.gwdg.de/pub/misc/ftp.idsoftware.com/idstuff/quake3/linux/linuxq3apoint-1.32b-3.x86.run
+https://github.com/ich777/docker-quake3/blob/master/Dockerfile
+https://github.com/ioquake/ioq3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/quake3
+https://ioquake3.org
+https://ioquake3.org/help/players-guide
+https://raw.githubusercontent.com/ich777/docker-quake3/master/Dockerfile
+https://www.idsoftware.com

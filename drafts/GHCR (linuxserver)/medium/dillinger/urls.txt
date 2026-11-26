@@ -1,0 +1,5 @@
+https://dillinger.io
+https://github.com/joemccann/dillinger
+https://github.com/linuxserver/docker-dillinger/blob/1d1b7d5f198a81964e0e2b1428ba7d6bd4b1526e/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/dillinger
+https://www.dillinger.io

@@ -1,0 +1,5 @@
+https://docs.atuin.sh
+https://github.com/atuinsh/atuin
+https://github.com/atuinsh/atuin/blob/d154a94090a7e390c1685c10252128545cdcacbd/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/atuin
+https://raw.githubusercontent.com/atuinsh/atuin/d154a94090a7e390c1685c10252128545cdcacbd/Dockerfile

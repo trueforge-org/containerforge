@@ -1,0 +1,7 @@
+https://api.github.com/repos/sbondCo/Watcharr/license
+https://api.github.com/repos/sbondCo/Watcharr/releases/latest
+https://github.com/sbondCo/Watcharr
+https://github.com/sbondCo/Watcharr/blob/v4.4.0/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/watcharr
+https://raw.githubusercontent.com/sbondCo/Watcharr/v4.4.0/Dockerfile
+https://watcharr.app/docs/server_config/backup

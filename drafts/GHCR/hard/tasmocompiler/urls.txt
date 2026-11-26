@@ -1,0 +1,7 @@
+https://api.github.com/repos/benzino77/tasmocompiler
+https://api.github.com/repos/benzino77/tasmocompiler/releases/tags/v14.0.3
+https://github.com/benzino77/tasmocompiler
+https://github.com/benzino77/tasmocompiler/blob/1c863599ac02b435ffb2e8aa907fff9da5829296/Dockerfile
+https://github.com/benzino77/tasmocompiler/releases/tag/v14.0.3
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/tasmocompiler
+https://raw.githubusercontent.com/benzino77/tasmocompiler/1c863599ac02b435ffb2e8aa907fff9da5829296/Dockerfile

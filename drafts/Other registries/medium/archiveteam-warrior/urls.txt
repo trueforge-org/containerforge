@@ -1,0 +1,9 @@
+https://github.com/ArchiveTeam/warrior-code2
+https://github.com/ArchiveTeam/warrior-code2.git
+https://github.com/ArchiveTeam/warrior-dockerfile/blob/061524dc03515df50bc0c45bd96af907f401cf39/Dockerfile
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/archiveteam-warrior
+https://raw.githubusercontent.com/ArchiveTeam/warrior-code2/master/LICENSE
+https://raw.githubusercontent.com/ArchiveTeam/warrior-dockerfile/061524dc03515df50bc0c45bd96af907f401cf39/Dockerfile
+https://raw.githubusercontent.com/ArchiveTeam/warrior-dockerfile/061524dc03515df50bc0c45bd96af907f401cf39/entrypoint.sh
+https://warriorhq.archiveteam.org
+https://wiki.archiveteam.org/index.php/ArchiveTeam_Warrior

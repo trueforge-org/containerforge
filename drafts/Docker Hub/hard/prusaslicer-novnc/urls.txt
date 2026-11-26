@@ -1,0 +1,5 @@
+https://github.com/helfrichmichael/prusaslicer-novnc/blob/master/Dockerfile
+https://github.com/prusa3d/PrusaSlicer
+https://github.com/trueforge-org/truecharts/tree/master/charts/stable/prusaslicer-novnc
+https://hub.docker.com/r/mikeah/prusaslicer-novnc
+https://www.prusa3d.com/prusaslicer
