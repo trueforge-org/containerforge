@@ -1,6 +1,6 @@
 # UNVERIFIED: base tag and digest copied from the openaudible plan (ghcr.io manifest read 2026-11-24); re-check before building.
 # Inherits KasmVNC (openbox, 3000/3001, /config as HOME) from apps/kasmvnc, which owns /start.sh.
-FROM ghcr.io/trueforge-org/kasmvnc:1.5.2@sha256:870414f75035f215e19dbb5583e163b5d8e603e41ca8fa0e4669323c45fbdc27
+FROM ghcr.io/trueforge-org/kasmvnc:1.5.2@sha256:7e96ef6465ad32c153f71fdff80fa4e2cb8fdfce1ab79dd269f08c7647505275
 
 ARG VERSION
 # UNVERIFIED: the exact Ubuntu 26.04 apt version of prusa-slicer, from `apt-cache policy prusa-slicer`. Empty fails the build on purpose.
