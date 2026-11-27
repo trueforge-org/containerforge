@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=mregni/EmbyStat versioning=semver
-  default = "0.2.0-beta.30"
+  default = "0.2.0-beta.38"
 }
 
 variable "LICENSE" {
