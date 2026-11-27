@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Brandawg93/PeaNUT"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: WEB_PORT
+    default: "8080"
+    required: false
+  - name: BASE_PATH
+    default: ""
+    required: false
+  - name: SETTINGS_FILE
+    default: "/config/settings.yml"
+    required: false
+  - name: AUTH_FILE_PATH
+    default: "/config/auth.yaml"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

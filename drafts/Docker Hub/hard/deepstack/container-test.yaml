@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is generous for model load and Redis start; no sibling reference checked.
+timeoutSeconds: 300
+# No http probe: UNVERIFIED which path answers 200 without VISION-* env set.
+tcp:
+- port: '5000'
+filePaths:
+- /app/server/server
+- /app/sharedfiles
+- /usr/share/licenses/deepstack/LICENSE

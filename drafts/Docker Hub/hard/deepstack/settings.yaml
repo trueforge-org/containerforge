@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/johnolafenwa/DeepStack"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+# UNVERIFIED: hyphenated names are as documented upstream; the forgetool schema must accept them.
+# The TrueCharts chart enables all four VISION-* APIs and sets MODE High; these defaults are False and Medium.
+env:
+  - name: VISION-DETECTION
+    default: "False"
+    required: false
+  - name: VISION-FACE
+    default: "False"
+    required: false
+  - name: VISION-SCENE
+    default: "False"
+    required: false
+  - name: VISION-ENHANCE
+    default: "False"
+    required: false
+  - name: VISION-CUSTOM
+    default: "False"
+    required: false
+  - name: API-KEY
+    default: ""
+    required: false
+  - name: ADMIN-KEY
+    default: ""
+    required: false
+  - name: MODE
+    default: "Medium"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /modelstore/detection
+    required: false
+dependencies: []

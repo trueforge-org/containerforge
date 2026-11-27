@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+
+tcp:
+- port: '8080'
+- port: '9090'
+
+http:
+- port: '8080'
+  path: /
+  # UNVERIFIED: expected status; 401 once web auth is enforced (no sibling uses a statusCode key, check the schema)
+
+filePaths:
+- /usr/bin/kodi
+- /defaults/userdata/guisettings.xml
+
+# The schema has no udp probe: check that 9777/udp is bound (0x2631 in /proc/net/udp)
+healthCommands:
+- command: sh -c 'grep -q ":2631" /proc/net/udp'

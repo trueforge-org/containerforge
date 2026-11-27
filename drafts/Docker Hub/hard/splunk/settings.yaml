@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.splunk.com/en_us/download/splunk-enterprise.html"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: true
+  - port: 8089
+    protocol: tcp
+    required: false
+  # Forwarder receiver, opened by defaults/inputs.conf.
+  - port: 9997
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Admin password, applied on first start only (user-seed.conf). Without it start.sh halts.
+  - name: SPLUNK_PASSWORD
+    default: ""
+    required: true
+  # Must contain --accept-license. The license is never accepted on the user's behalf. Without it start.sh halts.
+  - name: SPLUNK_START_ARGS
+    default: ""
+    required: true
+volumes:
+  - path: /config
+    required: true
+dependencies: []

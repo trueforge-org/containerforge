@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+http:
+- port: '8085'
+  path: /
+filePaths:
+- /usr/bin/virt-manager
+- /usr/share/licenses/virt-manager/copyright

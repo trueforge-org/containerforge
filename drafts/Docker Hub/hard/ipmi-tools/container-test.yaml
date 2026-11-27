@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+http:
+# UNVERIFIED: "/" may redirect or need a form. Pick a route that returns 200 on the first run.
+- port: '5000'
+  path: /
+filePaths:
+- /usr/bin/ipmitool
+- /app/bin/main.py
+- /app/venv/bin/gunicorn

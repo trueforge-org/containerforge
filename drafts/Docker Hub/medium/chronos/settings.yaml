@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/simse/chronos"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+env:
+  - name: CHRONOS_PATH
+    default: "/config"
+    required: true
+  - name: CHRONOS_DEBUG
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

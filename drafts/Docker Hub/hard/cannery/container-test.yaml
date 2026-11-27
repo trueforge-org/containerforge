@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+timeoutSeconds: 180
+runners:
+- entrypoint: test -x /app/bin/cannery
+filePaths:
+- /app/bin/cannery
+- /usr/share/licenses/cannery/LICENSE.md

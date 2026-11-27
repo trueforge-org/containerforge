@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs with SQLite (no env vars), so the app is testable in one container.
+timeoutSeconds: 180
+tcp:
+- port: '80'
+- port: '81'
+- port: '443'
+http:
+# UNVERIFIED: /api/ on port 81. Check backend/routes/main.js and adjust. Do not loosen to a no-op.
+- port: '81'
+  path: /api/
+filePaths:
+- /app/npm/index.js
+- /usr/local/bin/nginx
+- /usr/share/licenses/nginx-proxy-manager/LICENSE

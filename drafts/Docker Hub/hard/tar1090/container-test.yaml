@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+http:
+- port: '8080'
+  path: /
+# SDR and network-input paths need env or a device, so they are tested by hand per the protocol.
+filePaths:
+- /usr/local/bin/readsb
+- /app/tar1090/html/index.html

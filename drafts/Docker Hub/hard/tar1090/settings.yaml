@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/wiedehopf/tar1090"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: INTERVAL
+    default: "8"
+    required: false
+  - name: HISTORY_SIZE
+    default: "450"
+    required: false
+  # Extra readsb arguments, split on whitespace.
+  - name: READSB_EXTRA_ARGS
+    default: ""
+    required: false
+  # host,port,beast_in of an existing feeder. Empty means no input (empty map).
+  - name: READSB_NET_CONNECTOR
+    default: ""
+    required: false
+  # Set to rtlsdr when an SDR is passed through with --device.
+  - name: READSB_DEVICE_TYPE
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

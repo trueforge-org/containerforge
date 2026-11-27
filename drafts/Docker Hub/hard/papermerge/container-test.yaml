@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Runs with no env: SQLite and a generated secret let start.sh run to completion.
+# /docs is proxied to the core app, so it checks the Python service, not only nginx.
+timeoutSeconds: 240
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+- port: '8080'
+  path: /docs
+filePaths:
+- /app/papermerge-core/alembic.ini
+- /app/nginx/nginx.conf
+- /usr/share/nginx/html/ui/index.html
+- /usr/share/licenses/papermerge/LICENSE

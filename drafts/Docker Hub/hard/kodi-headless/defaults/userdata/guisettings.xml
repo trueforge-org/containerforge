@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- UNVERIFIED: settings version attribute and setting ids for Kodi 21; compare with a generated guisettings.xml.
+     The web UI password is not set here yet (TODO: seed a generated password, never the upstream kodi/kodi). -->
+<settings version="2">
+  <setting id="services.webserver">true</setting>
+  <setting id="services.webserverport">8080</setting>
+  <setting id="services.esenabled">true</setting>
+  <setting id="services.esport">9777</setting>
+  <setting id="services.esallinterfaces">true</setting>
+</settings>

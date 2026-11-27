@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /app/intel_gpu_device_plugin
+- /usr/share/licenses/intel-gpu-plugin/LICENSE
+runners:
+# UNVERIFIED: the plugin's -h exit code. Using a file test instead of running the binary.
+- entrypoint: test -x /app/intel_gpu_device_plugin

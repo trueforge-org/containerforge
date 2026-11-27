@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/docusealco/docuseal"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  # Empty means SQLite under WORKDIR. Set to a PostgreSQL or MySQL URL to use a database.
+  - name: DATABASE_URL
+    default: ""
+    required: false
+  # Empty means start.sh generates a secret once into WORKDIR/.secret_key_base.
+  - name: SECRET_KEY_BASE
+    default: ""
+    required: false
+  - name: WORKDIR
+    default: "/config/data"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

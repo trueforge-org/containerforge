@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- UNVERIFIED: element names for Kodi 21; check against a generated advancedsettings.xml -->
+<advancedsettings>
+  <audiooutput>
+    <audiodevice>null:</audiodevice>
+  </audiooutput>
+</advancedsettings>

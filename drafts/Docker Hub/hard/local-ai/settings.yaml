@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mudler/LocalAI"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: LOCALAI_ADDRESS
+    default: "0.0.0.0:8080"
+    required: false
+  - name: LOCALAI_MODELS_PATH
+    default: "/config/models"
+    required: false
+  - name: LOCALAI_BACKENDS_PATH
+    default: "/config/backends"
+    required: false
+  - name: LOCALAI_DATA_PATH
+    default: "/config/data"
+    required: false
+  - name: LOCALAI_CONFIG_DIR
+    default: "/config/configuration"
+    required: false
+  - name: LOCALAI_GENERATED_CONTENT_PATH
+    default: "/config/generated"
+    required: false
+  - name: LOCALAI_DOWNLOAD_STAGING_PATH
+    default: "/config/downloading"
+    required: false
+  - name: LOCALAI_UPLOAD_PATH
+    default: "/tmp/upload"
+    required: false
+  - name: LOCALAI_PRELOAD_MODELS
+    default: ""
+    required: false
+  - name: HF_TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

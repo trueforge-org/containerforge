@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /_health
+# The test runs without env, so only the placeholder server answers. The real server (DB, Redis, migrations) is tested by hand per the protocol.
+filePaths:
+- /app/outline/build/server/index.js
+- /app/outline/.sequelizerc
+- /usr/share/licenses/outline/LICENSE

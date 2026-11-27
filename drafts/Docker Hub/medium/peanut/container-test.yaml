@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: that / returns 200 without a configured NUT server. Check in the first build round.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/server.js
+- /app/entrypoint.mjs
+- /app/.next/static
+- /usr/share/licenses/peanut/LICENSE

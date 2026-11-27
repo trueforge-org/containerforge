@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://gitlab.com/shibaobun/cannery"
+ports:
+  - port: 4000
+    protocol: tcp
+    required: true
+env:
+  - name: HOST
+    # Public hostname. Upstream has no default. start.sh falls back to localhost so the image starts.
+    default: "localhost"
+    required: true
+  - name: SECRET_KEY_BASE
+    # Generated into /config by start.sh when empty.
+    default: ""
+    required: true
+  - name: CLOAK_KEY
+    # Generated into /config by start.sh when empty. Losing it makes stored secrets unreadable.
+    default: ""
+    required: true
+  - name: DATABASE_URL
+    # UNVERIFIED: placeholder credentials. Replace with the postgresql app's real user and password.
+    default: "ecto://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql/cannery"
+    required: true
+  - name: PORT
+    default: "4000"
+    required: false
+  - name: POOL_SIZE
+    default: "10"
+    required: false
+  - name: REGISTRATION
+    default: "invite"
+    required: false
+  - name: LOCALE
+    default: "en_US"
+    required: false
+  - name: ECTO_IPV6
+    default: "false"
+    required: false
+  - name: DISABLE_EMAIL
+    default: ""
+    required: false
+  - name: SMTP_HOST
+    default: ""
+    required: false
+  - name: SMTP_PORT
+    default: "587"
+    required: false
+  - name: SMTP_USERNAME
+    default: ""
+    required: false
+  - name: SMTP_PASSWORD
+    default: ""
+    required: false
+  - name: SMTP_SSL
+    default: "false"
+    required: false
+  - name: EMAIL_FROM
+    default: ""
+    required: false
+  - name: EMAIL_NAME
+    default: "Cannery"
+    required: false
+  - name: UPLOADS_PATH
+    default: "/config/uploads"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql

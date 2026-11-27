@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nutechsoftware/ser2sock"
+ports:
+  - port: 10000
+    protocol: tcp
+    required: false
+env:
+  # Empty means demo mode on a virtual serial port (no hardware). Set it and pass the device with --device.
+  - name: SERIAL_DEVICE
+    default: ""
+    required: false
+  - name: LISTENER_PORT
+    default: "10000"
+    required: false
+  - name: BAUD_RATE
+    default: "9600"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

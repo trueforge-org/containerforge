@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8081'
+# Only proves the server listens. A real render (Chromium launch) is tested by hand per the protocol.
+filePaths:
+- /usr/local/bin/grafana-image-renderer
+- /usr/local/bin/chromium
+- /start.sh
+- /usr/share/licenses/grafana-image-renderer/LICENSE

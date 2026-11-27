@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/firefly-iii/firefly-iii"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: APP_ENV
+    default: "production"
+    required: false
+  - name: APP_KEY
+    default: ""
+    required: false
+  - name: APP_URL
+    default: "http://localhost:8080"
+    required: false
+  - name: SITE_OWNER
+    default: "mail@example.com"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: DB_CONNECTION
+    default: "sqlite"
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: ""
+    required: false
+  - name: DB_DATABASE
+    default: ""
+    required: false
+  - name: DB_USERNAME
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: CACHE_STORE
+    default: "file"
+    required: false
+  - name: SESSION_DRIVER
+    default: "file"
+    required: false
+  - name: REDIS_HOST
+    default: ""
+    required: false
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: TRUSTED_PROXIES
+    default: ""
+    required: false
+  - name: STATIC_CRON_TOKEN
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+  - name: mariadb
+  - name: valkey

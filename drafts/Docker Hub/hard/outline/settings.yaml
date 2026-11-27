@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/outline/outline"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: URL
+    default: "http://localhost:3000"
+    required: true
+  # Generate with: openssl rand -hex 32. start.sh starts a placeholder server while this is empty.
+  - name: SECRET_KEY
+    default: ""
+    required: true
+  - name: UTILS_SECRET
+    default: ""
+    required: true
+  - name: DATABASE_URL
+    default: "postgres://MYPOSTGRESUSER:MYPOSTGRESPASSWORD@postgresql:5432/MYPOSTGRESDB"
+    required: true
+  - name: REDIS_URL
+    default: "redis://:MYVALKEYPASSWORD@valkey:6379"
+    required: true
+  - name: PORT
+    default: "3000"
+    required: false
+  # Upstream default is true. Image default is false because a plain-HTTP health probe would be redirected.
+  - name: FORCE_HTTPS
+    default: "false"
+    required: false
+  - name: FILE_STORAGE
+    default: "local"
+    required: false
+  - name: FILE_STORAGE_LOCAL_ROOT_DIR
+    default: "/config/data"
+    required: false
+  - name: WEB_CONCURRENCY
+    default: "1"
+    required: false
+  - name: PGSSLMODE
+    default: ""
+    required: false
+  - name: DEFAULT_LANGUAGE
+    default: "en_US"
+    required: false
+  # At least one auth provider is needed to sign in. OIDC shown; Slack, Google, Azure, Discord and SMTP are also supported upstream.
+  - name: OIDC_CLIENT_ID
+    default: ""
+    required: false
+  - name: OIDC_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: OIDC_AUTH_URI
+    default: ""
+    required: false
+  - name: OIDC_TOKEN_URI
+    default: ""
+    required: false
+  - name: OIDC_USERINFO_URI
+    default: ""
+    required: false
+  - name: SMTP_SERVICE
+    default: ""
+    required: false
+  - name: SMTP_USERNAME
+    default: ""
+    required: false
+  - name: SMTP_PASSWORD
+    default: ""
+    required: false
+  - name: SMTP_FROM_EMAIL
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql
+  - name: valkey

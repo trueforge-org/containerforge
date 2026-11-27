@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '1200'
+http:
+- port: '1200'
+  path: /
+filePaths:
+- /app/package.json
+- /usr/share/licenses/rsshub/LICENSE

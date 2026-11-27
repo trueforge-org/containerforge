@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 300 is a guess for the LibreOffice kit preload; siblings use 120 to 600.
+timeoutSeconds: 300
+tcp:
+- port: '9980'
+http:
+- port: '9980'
+  path: /hosting/discovery
+filePaths:
+- /usr/bin/coolwsd
+- /usr/share/licenses/collabora

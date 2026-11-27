@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '53'
+# UNVERIFIED: dig may exit 0 on SERVFAIL, and expectedContent/matchContent are not used by any sibling. Check the forgetool schema.
+healthCommands:
+- command: dig +time=2 +tries=1 +norecurse @127.0.0.1 . NS
+filePaths:
+- /usr/local/bin/dnstool
+- /app/cache-domains
+- /usr/share/licenses/lancache-dns/LICENSE

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/CollaboraOnline/online"
+ports:
+  - port: 9980
+    protocol: tcp
+    required: true
+env:
+  - name: aliasgroup1
+    default: ""
+    required: false
+  - name: server_name
+    default: ""
+    required: false
+  - name: username
+    default: ""
+    required: false
+  - name: password
+    default: ""
+    required: false
+  - name: dictionaries
+    # UNVERIFIED: default copied from the legacy Docker-CODE script.
+    default: "de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru"
+    required: false
+  - name: extra_params
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

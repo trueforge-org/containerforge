@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8888'
+filePaths:
+- /app/root/bin/root.exe
+- /app/venv/bin/jupyter
+healthCommands:
+- command: /bin/bash -c 'source /app/root/bin/thisroot.sh && root-config --version'

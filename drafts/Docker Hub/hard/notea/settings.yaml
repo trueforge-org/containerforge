@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/QingWei-Li/notea"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+  - port: 9000
+    protocol: tcp
+    required: false
+env:
+  - name: PASSWORD
+    default: ""
+    required: false
+  - name: DISABLE_PASSWORD
+    default: ""
+    required: false
+  - name: STORE_END_POINT
+    default: ""
+    required: false
+  - name: STORE_ACCESS_KEY
+    default: ""
+    required: false
+  - name: STORE_SECRET_KEY
+    default: ""
+    required: false
+  - name: STORE_BUCKET
+    default: "notea"
+    required: false
+  - name: STORE_REGION
+    default: "us-east-1"
+    required: false
+  - name: COOKIE_SECURE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: port 8581 and the first-start time (plugin installs need internet access).
+timeoutSeconds: 240
+tcp:
+- port: '8581'
+filePaths:
+- /start.sh
+- /usr/local/bin/hoobs
+- /usr/share/licenses/hoobs/LICENSE

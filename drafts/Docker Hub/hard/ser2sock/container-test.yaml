@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+# No env and no serial device, so this relies on demo mode in start.sh (UNVERIFIED that ser2sock keeps listening on a PTY).
+tcp:
+- port: '10000'
+filePaths:
+- /usr/local/bin/ser2sock

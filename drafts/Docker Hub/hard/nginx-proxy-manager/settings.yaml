@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/NginxProxyManager/nginx-proxy-manager"
+ports:
+  - port: 80
+    protocol: tcp
+    required: false
+  - port: 81
+    protocol: tcp
+    required: false
+  - port: 443
+    protocol: tcp
+    required: false
+env:
+  - name: DB_MYSQL_HOST
+    default: ""
+    required: false
+  - name: DB_MYSQL_PORT
+    default: "3306"
+    required: false
+  - name: DB_MYSQL_USER
+    default: ""
+    required: false
+  - name: DB_MYSQL_PASSWORD
+    default: ""
+    required: false
+  - name: DB_MYSQL_NAME
+    default: ""
+    required: false
+  - name: DB_SQLITE_FILE
+    default: "/data/database.sqlite"
+    required: false
+  - name: DISABLE_IPV6
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: mariadb

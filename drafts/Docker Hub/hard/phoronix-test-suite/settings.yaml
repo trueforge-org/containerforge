@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/phoronix-test-suite/phoronix-test-suite/"
+ports: []
+env:
+  - name: PTS_USER_PATH_OVERRIDE
+    default: "/config/pts"
+    required: false
+  - name: PTS_DOWNLOAD_CACHE_OVERRIDE
+    default: "/config/download-cache"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

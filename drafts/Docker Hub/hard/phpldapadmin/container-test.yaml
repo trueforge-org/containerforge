@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+
+tcp:
+- port: '8080'
+
+http:
+- port: '8080'
+  path: /
+  # UNVERIFIED: '/' may redirect to the login page without an LDAP host; confirm the accepted status after a manual run
+
+filePaths:
+- /app/www/artisan
+- /usr/share/licenses/phpldapadmin
+
+runners:
+- entrypoint: php --version

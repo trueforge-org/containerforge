@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/virt-manager/virt-manager"
+ports:
+  - port: 8085
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: HOSTS
+    default: "['qemu:///system']"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /var/run/libvirt
+    required: false
+  - path: /var/lib/libvirt/images
+    required: false
+dependencies: []

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/root-project/root"
+ports:
+  - port: 8888
+    protocol: tcp
+    required: false
+env:
+  - name: JUPYTER_NOTEBOOK_DIR
+    default: "/config/notebooks"
+    required: false
+  # Empty means Jupyter generates a random token and logs it. Set a value to fix the login token.
+  - name: JUPYTER_TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

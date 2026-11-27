@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/DIYgod/RSSHub"
+ports:
+  - port: 1200
+    protocol: tcp
+    required: false
+# UNVERIFIED: env list is from docs.rsshub.app/deploy/config, which could not be fetched (HTTP 403).
+env:
+  - name: ACCESS_KEY
+    default: ""
+    required: false
+  - name: CACHE_TYPE
+    default: "memory"
+    required: false
+  - name: LISTEN_INADDR_ANY
+    default: "1"
+    required: false
+  - name: LOGGER_LEVEL
+    default: "info"
+    required: false
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    default: ""
+    required: false
+  - name: PORT
+    default: "1200"
+    required: false
+  - name: REDIS_URL
+    default: "redis://localhost:6379/"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

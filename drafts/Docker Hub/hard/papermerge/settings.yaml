@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/papermerge/papermerge-core"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  # Empty means start.sh generates a random key on each boot (sessions reset on restart).
+  - name: PAPERMERGE__SECURITY__SECRET_KEY
+    default: ""
+    required: false
+  - name: PAPERMERGE__DATABASE__URL
+    default: "sqlite:////config/db/db.sqlite3"
+    required: false
+  # The admin user is created only when this is set.
+  - name: PAPERMERGE__AUTH__USERNAME
+    default: "admin"
+    required: false
+  - name: PAPERMERGE__AUTH__PASSWORD
+    default: ""
+    required: false
+  - name: PAPERMERGE__AUTH__EMAIL
+    default: "admin@example.com"
+    required: false
+  - name: PAPERMERGE__MAIN__MEDIA_ROOT
+    default: "/config/media"
+    required: false
+  - name: PAPERMERGE__MAIN__API_PREFIX
+    default: ""
+    required: false
+  - name: PAPERMERGE__REDIS__URL
+    default: ""
+    required: false
+  - name: PAPERMERGE__SEARCH__URL
+    default: ""
+    required: false
+  - name: PAPERMERGE__OCR__LANG_CODES
+    default: "deu,eng,ron"
+    required: false
+  - name: PAPERMERGE__OCR__DEFAULT_LANG_CODE
+    default: "deu"
+    required: false
+  - name: PAPERMERGE__OCR__AUTOMATIC
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

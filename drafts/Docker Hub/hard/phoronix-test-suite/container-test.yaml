@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+mainRunner:
+  enabled: false
+filePaths:
+- /app/phoronix-test-suite
+- /usr/share/licenses/phoronix-test-suite/COPYING
+runners:
+- entrypoint: test -x /app/phoronix-test-suite
+- entrypoint: php --version
+# UNVERIFIED: runners run without start.sh, so /config/pts may not exist yet. Check on the first run.
+- entrypoint: /app/phoronix-test-suite version

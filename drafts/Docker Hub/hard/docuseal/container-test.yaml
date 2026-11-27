@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Runs with no env, so start.sh takes the SQLite and generated-secret paths.
+# UNVERIFIED: Rails boot time; check against apps/mastodon.
+timeoutSeconds: 240
+tcp:
+- port: '3000'
+http:
+# UNVERIFIED: "/" may redirect to /setup on first start; check which status the probe accepts.
+- port: '3000'
+  path: /
+filePaths:
+- /app/bin/bundle
+- /usr/share/licenses/docuseal/LICENSE
+- /usr/lib/libpdfium.so

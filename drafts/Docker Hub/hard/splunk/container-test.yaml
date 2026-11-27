@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 600
+# NOTE: the test runs without SPLUNK_START_ARGS and SPLUNK_PASSWORD, so start.sh halts and these port probes cannot pass as written.
+# Maintainer decision needed. Do not drop the probes silently.
+tcp:
+- port: '8000'
+- port: '8089'
+- port: '9997'
+http:
+- port: '8000'
+  path: /
+# UNVERIFIED: the runners key; check it against the forgetool schema.
+runners:
+- entrypoint: /app/splunk/bin/splunk version --accept-license
+filePaths:
+- /start.sh
+- /app/splunk/bin/splunk
+- /usr/share/licenses/splunk/license-eula.txt
