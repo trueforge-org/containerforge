@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=ghcr.io/trueforge-org/steamcmd versioning=loose
-  default = "20180105-5build1"
+  default = "20180105.0.0"
 }
 
 variable "LICENSE" {

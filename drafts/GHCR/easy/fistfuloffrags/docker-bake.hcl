@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=ghcr.io/trueforge-org/steamcmd versioning=loose
-  default = "20180105-5build1"
+  default = "20180105.0.0"
 }
 
 // The image holds SteamCMD (AGPL-3.0-or-later). The game server is proprietary and is downloaded from Steam at start.
