@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=pypi depName=github-backup
-  default = "0.68.0"
+  default = "0.69.1"
 }
 
 variable "LICENSE" {
