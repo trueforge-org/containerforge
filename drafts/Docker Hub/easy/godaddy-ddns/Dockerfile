@@ -6,7 +6,7 @@ ARG VERSION
 # Changing VERSION without updating this makes the build fail on purpose.
 ARG SCRIPT_SHA256=225cd4d453817b631242d356efe36dfa3930cb6af98f5c8e1db551a3d1e5402f
 # renovate: datasource=pypi depName=godaddypy
-ARG GODADDYPY_VERSION=2.2.7
+ARG GODADDYPY_VERSION=2.5.1
 # renovate: datasource=pypi depName=pif
 ARG PIF_VERSION=0.8.2
 USER root
