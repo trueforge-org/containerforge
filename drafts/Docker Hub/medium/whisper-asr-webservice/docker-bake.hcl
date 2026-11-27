@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=ahmetoner/whisper-asr-webservice versioning=semver
-  default = "1.10.0"
+  default = "1.11.0"
 }
 
 variable "LICENSE" {
