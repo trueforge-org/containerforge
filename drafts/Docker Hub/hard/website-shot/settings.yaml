@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Flowko/website-shot/"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: NUXT_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: NUXT_PORT
+    default: "3000"
+    required: false
+  - name: PASSWORD_PROTECT
+    default: "0"
+    required: false
+  - name: PASSWORD
+    default: "admin" # upstream Dockerfile sets null; README says admin when protection is on
+    required: false
+  - name: USER_AGENT
+    default: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+    required: false
+  - name: BLOCK_ADS
+    default: "1"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

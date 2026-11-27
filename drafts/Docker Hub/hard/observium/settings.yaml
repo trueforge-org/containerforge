@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.observium.org/"
+ports:
+  # Apache on 8080; rootless cannot bind 80/443. TLS belongs on a reverse proxy.
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: OBSERVIUM_db_host
+    default: "mariadb"
+    required: false
+  - name: OBSERVIUM_db_name
+    default: "observium"
+    required: false
+  - name: OBSERVIUM_db_user
+    default: "observium"
+    required: false
+  # UNVERIFIED default: sample password from the upstream wrapper; must be changed.
+  - name: OBSERVIUM_db_pass
+    default: "observiumpwd"
+    required: true
+  # UNVERIFIED default: sample admin login from the upstream wrapper; must be changed.
+  - name: OBSERVIUM_ADMIN_USER
+    default: "admin"
+    required: false
+  - name: OBSERVIUM_ADMIN_PASS
+    default: "admin"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

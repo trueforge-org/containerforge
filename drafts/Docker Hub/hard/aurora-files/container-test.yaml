@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# No http probe yet: the status of / without a database is UNVERIFIED (may redirect to the installer).
+filePaths:
+- /start.sh
+- /app/www/system/autoload.php
+- /defaults/afterlogic-init.php
+- /etc/nginx/aurora-files.conf.template
+- /etc/php/8.5/fpm/conf.d/99-aurora.ini
+- /usr/share/licenses/aurora-files

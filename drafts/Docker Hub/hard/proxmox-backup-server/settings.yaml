@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ayufan/pve-backup-server-dockerfiles/"
+ports:
+  - port: 8007
+    protocol: tcp
+    required: true # HTTPS web UI and API, self-signed certificate by default
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /datastore
+    required: false # suggested mount for backup datastores (any path works)
+dependencies: []

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Runs in the openbox session of the KasmVNC desktop. Starts FreeCAD without blocking the session.
+mkdir -p /config/projects
+freecad &

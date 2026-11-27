@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: placeholder value, copy from the closest Go sibling once compared
+timeoutSeconds: 180
+tcp:
+- port: '5244'
+http:
+- port: '5244'
+  path: /
+filePaths:
+- /app/alist
+- /usr/share/licenses/alist/LICENSE

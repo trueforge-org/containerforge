@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/farmOS/farmOS"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+# No database variables: the database is entered in the web installer
+env:
+  - name: PHP_MEMORY_LIMIT
+    default: "256M"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql
+opt_dependencies:
+  - name: mariadb

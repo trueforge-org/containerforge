@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+# narrowed: requires external mariadb and valkey; full functional test not feasible in single-container suite
+tcp:
+- port: '8080'
+filePaths:
+- /app/www/artisan
+- /app/www/vendor/inovector/mixpost/composer.json
+- /app/www/public/index.php
+- /usr/share/licenses/mixpost/LICENSE.md
+- /etc/nginx/mixpost.conf.template
+- /etc/php/mixpost-fpm.conf
+runners:
+- entrypoint: php --version
+- entrypoint: test -x /usr/bin/ffmpeg
+- entrypoint: test -x /usr/sbin/nginx

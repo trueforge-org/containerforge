@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+http:
+- port: '3000'
+  path: /
+tcp:
+- port: '3000'
+filePaths:
+- /app/website-shot/.nuxt
+- /usr/bin/chromium-browser
+- /usr/share/licenses/website-shot/LICENSE
+# Runs without env vars, so the PASSWORD_PROTECT=1 path is not covered here (run it by hand).

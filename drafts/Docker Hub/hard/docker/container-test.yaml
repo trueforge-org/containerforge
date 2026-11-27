@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: no sibling runs a daemon, so this timeout is a placeholder. Rootless dockerd may not start in CI.
+timeoutSeconds: 240
+tcp:
+- port: '2376'
+filePaths:
+- /usr/local/bin/dockerd
+- /usr/local/bin/docker
+- /usr/local/bin/runc
+- /usr/local/bin/containerd
+- /usr/local/bin/dockerd-rootless.sh
+- /usr/local/bin/rootlesskit
+healthCommands:
+- command: dockerd --version
+  expectedExitCode: 0

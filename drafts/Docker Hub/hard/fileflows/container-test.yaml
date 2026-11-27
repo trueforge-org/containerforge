@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '5000'
+# UNVERIFIED: the root path may redirect (EULA or login). Confirm the probe shape before adding an http check.
+filePaths:
+- /app/fileflows/Server/FileFlows.Server.dll
+- /usr/bin/ffmpeg

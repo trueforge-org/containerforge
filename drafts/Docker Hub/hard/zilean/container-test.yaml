@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: zilean needs an external PostgreSQL, which a single-container suite cannot provide.
+# UNVERIFIED: the tcp probe passes only if the process stays up without a database. If it exits, drop the tcp entry.
+timeoutSeconds: 180
+tcp:
+- port: '8181'
+filePaths:
+- /app/zilean-api
+- /app/python
+- /usr/share/licenses/zilean/NOTICE

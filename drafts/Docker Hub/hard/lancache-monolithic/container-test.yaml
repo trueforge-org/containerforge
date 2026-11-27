@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '80'
+http:
+- port: '80'
+  path: /lancache-heartbeat
+  statusCode: 204 # UNVERIFIED: the schema key is not used by sibling apps; confirm it exists in forgetool
+filePaths:
+- /app/cachedomains

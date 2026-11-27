@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nroi/flexo"
+ports:
+  - port: 7878
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Any FLEXO_* variable switches flexo to env-only config. start.sh exports the full set with these defaults.
+  - name: FLEXO_PORT
+    default: "7878"
+    required: false
+  - name: FLEXO_LISTEN_IP_ADDRESS
+    default: "0.0.0.0"
+    required: false
+  - name: FLEXO_CACHE_DIRECTORY
+    default: "/config/cache/pkg"
+    required: false
+  - name: FLEXO_MIRRORLIST_FALLBACK_FILE
+    default: "/config/cache/state/mirrorlist"
+    required: false
+  - name: FLEXO_MIRRORLIST_LATENCY_TEST_RESULTS_FILE
+    default: "/config/cache/state/latency_test_results.json"
+    required: false
+  - name: FLEXO_MIRROR_SELECTION_METHOD
+    default: "auto"
+    required: false
+  - name: FLEXO_MIRRORS_PREDEFINED
+    default: "[]"
+    required: false
+  - name: FLEXO_NUM_VERSIONS_RETAIN
+    default: "3"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_ALLOWED_COUNTRIES
+    default: "[]"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_HTTPS_REQUIRED
+    default: "true"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_IPV4
+    default: "true"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_IPV6
+    default: "false"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_MAX_SCORE
+    default: "2.5"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_NUM_MIRRORS
+    default: "8"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_MIRRORS_RANDOM_OR_SORT
+    default: "sort"
+    required: false
+  - name: FLEXO_MIRRORS_AUTO_TIMEOUT
+    default: "350"
+    required: false
+volumes:
+  - path: /config
+    required: true

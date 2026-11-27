@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# narrowed: requires external postgresql. Without LEMUR_DATABASE_URI, start.sh runs CFSSL only,
+# so port 8000 is not probed here. Full functional test is run by hand (see plan section 11).
+tcp:
+- port: '8888'
+filePaths:
+- /usr/local/bin/cfssl
+- /usr/local/bin/cfssljson
+- /app/venv/bin/lemur
+- /defaults/lemur.conf.py
+- /defaults/cfssl/ca-config.json
+- /defaults/cfssl/ca-csr.json
+runners:
+- entrypoint: cfssl version
+- entrypoint: /app/venv/bin/lemur --help

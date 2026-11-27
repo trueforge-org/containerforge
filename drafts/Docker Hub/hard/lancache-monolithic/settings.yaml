@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/lancachenet/monolithic"
+# UNVERIFIED: 443 (SNI passthrough) and 8080 (metrics) are upstream ports, not yet served by this draft. Add them with their port.
+ports:
+  - port: 80
+    protocol: tcp
+    required: true
+# Only variables start.sh reads so far. Upstream variables (UPSTREAM_DNS, MIN_FREE_DISK, BEAT_TIME, ...) wait for their port.
+env:
+  - name: CACHE_INDEX_SIZE
+    default: "500m"
+    required: false
+  - name: CACHE_DISK_SIZE
+    default: "1000g"
+    required: false
+  - name: CACHE_MAX_AGE
+    default: "3560d"
+    required: false
+  - name: NGINX_WORKER_PROCESSES
+    default: "auto"
+    required: false
+volumes:
+  - path: /config
+    required: false # UNVERIFIED: planned for generated state (plan section 6); start.sh does not write here yet
+  - path: /data/cache
+    required: true
+  - path: /data/logs
+    required: false
+dependencies: []

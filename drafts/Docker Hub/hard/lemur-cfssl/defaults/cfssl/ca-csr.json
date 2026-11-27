@@ -1,0 +1,13 @@
+{
+  "CN": "Lemur CFSSL Root CA",
+  "key": {
+    "algo": "ecdsa",
+    "size": 256
+  },
+  "names": [
+    {
+      "O": "ContainerForge",
+      "OU": "lemur-cfssl"
+    }
+  ]
+}

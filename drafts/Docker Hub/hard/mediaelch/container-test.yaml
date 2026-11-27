@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '3000'
+- port: '3001'
+filePaths:
+- /usr/local/bin/mediaelch
+- /usr/share/licenses/mediaelch/COPYING
+runners:
+- entrypoint: test -x /usr/local/bin/kasmvnc-start.sh
+# The test runs with no env, so the PASSWORD path is not covered here. Run it by hand (plan section 11).

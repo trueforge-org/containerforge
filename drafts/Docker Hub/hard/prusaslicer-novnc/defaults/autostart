@@ -1,0 +1,7 @@
+# Openbox autostart for PrusaSlicer (overrides the kasmvnc base file).
+# UNVERIFIED: that prusa-slicer accepts --datadir; confirm with `prusa-slicer --help` in the built image.
+mkdir -p /config/prints
+prusa-slicer --datadir /config/.config/PrusaSlicer &
+
+# Base autostart content is kept last (a terminal, as in apps/kasmvnc).
+xterm

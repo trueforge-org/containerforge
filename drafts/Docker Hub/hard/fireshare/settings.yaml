@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/fireshare-app/fireshare"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: DOMAIN
+    default: ""
+    required: false
+  - name: ADMIN_USERNAME
+    default: "admin"
+    required: false
+  # upstream default, change it after the first login
+  - name: ADMIN_PASSWORD
+    default: "admin"
+    required: false
+  # generated into /config/data/.secret_key when empty
+  - name: SECRET_KEY
+    default: ""
+    required: false
+  - name: ENABLE_TRANSCODING
+    default: "false"
+    required: false
+  - name: MINUTES_BETWEEN_VIDEO_SCANS
+    default: "5"
+    required: false
+  - name: FS_LOGLEVEL
+    default: "INFO"
+    required: false
+  - name: FIRESHARE_PORT
+    default: "8080"
+    required: false
+  - name: GUNICORN_THREADS
+    default: "8"
+    required: false
+  - name: SECURE_COOKIES
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /videos
+    required: false
+  - path: /images
+    required: false

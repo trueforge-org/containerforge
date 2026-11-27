@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+filePaths:
+# UNVERIFIED path of the Flask UI entry point at the pinned tag
+- /app/arm/arm/runui.py
+- /usr/share/licenses/automatic-ripping-machine/LICENSE
+runners:
+- entrypoint: HandBrakeCLI --version
+- entrypoint: ffmpeg -version
+- entrypoint: abcde -v

@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs without an RTL-SDR dongle, so start.sh runs the web UI and piaware only.
+# The 30003 and 30005 probes are not listed because dump1090 does not start without a receiver.
+timeoutSeconds: 120
+tcp:
+  - port: '8080'
+http:
+  - port: '8080'
+    path: /
+filePaths:
+  - /start.sh
+  - /usr/local/bin/dump1090-fa
+  - /usr/share/licenses/piaware

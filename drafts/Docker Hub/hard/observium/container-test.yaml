@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+filePaths:
+- /app/observium/discovery.php
+- /app/observium/html/index.php
+- /usr/share/licenses/observium/LICENSE.COMMUNITY
+- /start.sh
+# No http probe: without a database the index page returns an error. The DB-gated path is run by hand (plan section 11).

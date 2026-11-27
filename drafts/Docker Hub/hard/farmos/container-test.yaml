@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '8080'
+# UNVERIFIED: /core/install.php should answer on an unconfigured site. Adjust after the first run, do not loosen.
+http:
+- port: '8080'
+  path: /core/install.php
+filePaths:
+- /app/farmos/web/index.php
+- /app/farmos/vendor/autoload.php

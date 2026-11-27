@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: Weblate needs PostgreSQL and Valkey. Without them, start.sh waits, and nginx keeps port 8080 open
+# and serves the startup page. The full functional test is a manual run (see plan section 11).
+timeoutSeconds: 300
+tcp:
+  - port: '8080'
+filePaths:
+  - /start.sh
+  - /app/venv/bin/weblate
+  - /app/venv/bin/granian
+  - /usr/sbin/nginx
+  - /etc/weblate/nginx/nginx.conf
+  - /usr/share/licenses/weblate/LICENSE

@@ -1,0 +1,10 @@
+# UNVERIFIED: xo-server config template. Rendered once by start.sh with envsubst.
+# Variables: HTTP_PORT, REDIS_URI. Search order: $HOME/.config/xo-server/config.toml, then /etc/xo-server/config.toml.
+datadir = '/config/data'
+
+# No hostname, so xo-server listens on all addresses.
+[[http.listen]]
+port = ${HTTP_PORT}
+
+[redis]
+uri = '${REDIS_URI}'

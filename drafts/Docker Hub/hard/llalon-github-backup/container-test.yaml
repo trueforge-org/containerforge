@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+- /app/github-backup/backup.py
+- /app/github-backup/requirements.txt
+runners:
+- entrypoint: git --version
+# UNVERIFIED: importing backup.py must have no side effects. Replace with a parse-only check if it does.
+- entrypoint: python3 -c "import sys; sys.path.insert(0, '/app/github-backup'); import backup"

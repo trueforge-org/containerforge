@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '7878'
+filePaths:
+- /usr/bin/flexo
+- /usr/bin/flexo_purge_cache
+- /usr/bin/scruffy

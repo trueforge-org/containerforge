@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout taken from the plan default, no sibling value was found
+timeoutSeconds: 180
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/dizquetv/index.js
+- /app/dizquetv/web/public/bundle.js
+- /usr/bin/ffmpeg
+- /usr/share/licenses/dizquetv/LICENSE

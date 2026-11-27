@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/abusesa/github-backup"
+ports: []
+env:
+  - name: GITHUB_TOKEN
+    required: false # no default; without a token the container idles and logs a message
+  - name: GITHUB_TOKEN_FILE
+    required: false # optional path to a file holding the token (secret mount)
+  - name: GITHUB_OWNERS
+    default: ""
+    required: false # comma-separated users/orgs; empty means every repo the token can read
+  - name: BACKUP_DIR
+    default: "/config/backups"
+    required: false
+  - name: BACKUP_INTERVAL_SECONDS
+    default: "0"
+    required: false # 0 runs once and then idles
+volumes:
+  - path: /config
+    required: true
+dependencies: []

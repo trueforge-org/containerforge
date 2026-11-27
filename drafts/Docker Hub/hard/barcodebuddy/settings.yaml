@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Forceu/barcodebuddy"
+# 443 is not exposed: TLS belongs to the ingress. 8080 replaces upstream's 80 (rootless).
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+# Upstream documents no env vars; supervisor env names are UNVERIFIED and not listed.
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '7000'
+filePaths:
+- /start.sh
+- /app/AppHost.dll
+- /usr/bin/ffmpeg
+- /usr/bin/MP4Box
+- /usr/bin/mkvmerge
+- /usr/share/licenses/reaparr

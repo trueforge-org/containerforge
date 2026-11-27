@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: expected status on / (setup or login redirect); adjust after the first run, do not loosen
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/bbuddy/index.php
+- /usr/share/licenses/barcodebuddy/LICENSE

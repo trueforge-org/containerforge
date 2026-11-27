@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/erikkaashoek/Comskip/"
+ports:
+  []
+env:
+  - name: CONVERSION_FORMAT
+    default: "mp4"
+    required: false
+  - name: DELETE_TS
+    default: "1"
+    required: false
+  - name: POST_PROCESS
+    default: "comchap"
+    required: false
+  - name: SOURCE_EXT
+    default: "ts"
+    required: false
+  - name: SOURCE_MIN_DURATION
+    default: "10"
+    required: false
+  - name: SOURCE_STABLE_TIME
+    default: "10"
+    required: false
+  - name: SUBTITLES
+    default: "0"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "022"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /watch
+    required: true
+  - path: /backup
+    required: false

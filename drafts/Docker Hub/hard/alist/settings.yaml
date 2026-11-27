@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/AlistGo/alist/"
+ports:
+  - port: 5244
+    protocol: tcp
+    required: false
+env:
+  - name: ALIST_SITE_URL
+    default: ""
+    required: false
+  - name: ENABLE_ARIA2
+    default: "false"
+    required: false
+  - name: ARIA2_RPC_SECRET
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

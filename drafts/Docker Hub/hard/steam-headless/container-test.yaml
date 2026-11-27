@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The desktop stack is slow to start, hence the long timeout.
+# The test runs without env vars, so the default noVNC path must work with no password.
+timeoutSeconds: 180
+tcp:
+- port: '8083'
+filePaths:
+- /start.sh
+- /usr/bin/steam
+- /etc/supervisor/steam-headless.conf
+- /scripts/x11vnc-run.sh

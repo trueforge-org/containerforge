@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/browserless/browserless"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: PORT
+    default: "3000"
+    required: false
+  # Empty means start.sh generates a token and stores it in /config/token. Set a value to override.
+  - name: TOKEN
+    default: ""
+    required: false
+  - name: CONCURRENT
+    default: "10"
+    required: false
+  # UNVERIFIED default of QUEUED
+  - name: QUEUED
+    default: "10"
+    required: false
+  - name: TIMEOUT
+    default: "30000"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

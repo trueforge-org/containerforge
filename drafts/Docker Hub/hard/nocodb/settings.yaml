@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nocodb/nocodb"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: NC_DB
+    default: ""
+    required: false
+  - name: NC_AUTH_JWT_SECRET
+    default: ""
+    required: false
+  - name: NC_ADMIN_EMAIL
+    default: ""
+    required: false
+  - name: NC_ADMIN_PASSWORD
+    default: ""
+    required: false
+  - name: NC_CACHE_REDIS_URL
+    default: ""
+    required: false
+  - name: NC_SITE_URL
+    default: ""
+    required: false
+  - name: PORT
+    default: "8080"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+  - name: valkey

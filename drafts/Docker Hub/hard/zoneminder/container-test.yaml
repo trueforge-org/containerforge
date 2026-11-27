@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 240
+# Narrowed: the test runs without the external mariadb app. Apache still listens and
+# the DB wait runs in the background, so the port probe is real.
+tcp:
+- port: '8080'
+# UNVERIFIED paths, confirm inside the built image before commit
+filePaths:
+- /usr/share/zoneminder/www/index.php
+- /usr/bin/zmpkg.pl
+- /usr/sbin/apache2

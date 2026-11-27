@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+# UNVERIFIED: openvpn needs NET_ADMIN and /dev/net/tun, which the default test run may not provide.
+# UNVERIFIED: the 8080 probe fails until the client config server (HOST_CONF_PORT) is ported.
+tcp:
+  - port: '8080'
+healthCommands:
+  - command: "ss -lun"
+    expectedContent: "1194"
+    matchContent: true
+filePaths:
+  - /usr/sbin/openvpn
+  - /app/scripts/start.sh
+  - /start.sh

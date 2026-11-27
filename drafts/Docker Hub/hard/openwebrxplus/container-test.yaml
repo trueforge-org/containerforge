@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8073'
+http:
+- port: '8073'
+  path: /metrics
+filePaths:
+- /start.sh
+- /defaults/openwebrx.conf
+- /usr/share/licenses/openwebrx/copyright

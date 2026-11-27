@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/danmed/TasmoBackupV1"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: DBNAME
+    default: "data/tasmobackup"
+    required: false
+  - name: DBTYPE
+    default: "sqlite"
+    required: false
+  - name: MYSQL_PASSWORD
+    default: ""
+    required: false
+  - name: MYSQL_SERVER
+    default: ""
+    required: false
+  - name: MYSQL_USERNAME
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

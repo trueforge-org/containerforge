@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/moby/moby"
+# 2375 (unauthenticated) is opt-in: it only opens when DOCKER_TLS_CERTDIR is set empty, so it is not listed
+ports:
+  - port: 2376
+    protocol: tcp
+    required: false
+env:
+  - name: DOCKER_TLS_CERTDIR
+    default: "/config/certs"
+    required: false
+  - name: DOCKER_TLS_SAN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,45 @@
+# Copied to /tmp/nginx/nginx.conf by start.sh. Everything nginx writes goes under /tmp, because the rootfs is read-only.
+pid /tmp/nginx/nginx.pid;
+error_log stderr;
+
+events {
+    worker_connections 512;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+
+    access_log /dev/stdout;
+
+    client_body_temp_path /tmp/nginx/client_body;
+    proxy_temp_path /tmp/nginx/proxy;
+    fastcgi_temp_path /tmp/nginx/fastcgi;
+    uwsgi_temp_path /tmp/nginx/uwsgi;
+    scgi_temp_path /tmp/nginx/scgi;
+
+    server {
+        listen 8080;
+        server_name _;
+        root /app/www/public;
+        index index.php;
+        client_max_body_size 100M;
+
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param HTTP_PROXY "";
+        }
+
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
+    }
+}

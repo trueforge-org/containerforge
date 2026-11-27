@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/hyperion-project/hyperion.ng"
+ports:
+  - port: 8090
+    protocol: tcp
+    required: false
+  # UNVERIFIED default: JSON server, confirm with ss -ltn
+  - port: 19444
+    protocol: tcp
+    required: false
+  # UNVERIFIED default: FlatBuffers server (documented in upstream CLI docs), confirm with ss -ltn
+  - port: 19400
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

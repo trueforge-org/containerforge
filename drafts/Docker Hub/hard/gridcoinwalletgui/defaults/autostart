@@ -1,0 +1,5 @@
+#!/bin/sh
+# Seeded to /config/.config/openbox/autostart on first run, so existing users keep their copy.
+# Launches the Gridcoin Qt wallet when the openbox session starts.
+# UNVERIFIED: the binary path depends on the archive layout (see the Dockerfile).
+/app/gridcoin/usr/bin/gridcoinresearch-qt &

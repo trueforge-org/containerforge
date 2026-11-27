@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/andrii-kryvoviaz/slink"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ORIGIN
+    default: "http://localhost:3000"
+    required: false
+  - name: USER_APPROVAL_REQUIRED
+    default: "true"
+    required: false
+  - name: USER_ALLOW_REGISTRATION
+    default: "true"
+    required: false
+  - name: IMAGE_MAX_SIZE
+    default: "15M"
+    required: false
+  - name: STORAGE_PROVIDER
+    default: "local"
+    required: false
+  - name: ADMIN_EMAIL
+    default: ""
+    required: false
+  - name: ADMIN_USERNAME
+    default: "admin"
+    required: false
+  - name: ADMIN_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

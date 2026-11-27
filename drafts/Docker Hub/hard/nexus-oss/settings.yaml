@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/sonatype/nexus-public"
+ports:
+  - port: 8081
+    protocol: tcp
+    required: false
+env:
+  - name: INSTALL4J_ADD_VM_PARAMS
+    default: "-Xms1g -Xmx2g"
+    required: false
+  - name: NEXUS_CONTEXT
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

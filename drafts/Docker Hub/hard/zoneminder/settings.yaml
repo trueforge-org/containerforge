@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ZoneMinder/zoneminder"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ZM_DB_HOST
+    default: "mariadb"
+    required: false
+  - name: ZM_DB_NAME
+    default: "zm"
+    required: false
+  - name: ZM_DB_USER
+    default: "zmuser"
+    required: false
+  - name: ZM_DB_PASS
+    default: "zmpass"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb
+    required: true

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/WeblateOrg/weblate"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: POSTGRES_HOST
+    default: "postgresql"
+    required: false
+  - name: POSTGRES_PORT
+    default: "5432"
+    required: false
+  - name: POSTGRES_DATABASE
+    default: "weblate"
+    required: false
+  - name: POSTGRES_USER
+    default: "weblate"
+    required: false
+  # UNVERIFIED: Weblate needs this to connect to PostgreSQL. It is not handled by start.sh.
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: false
+  - name: REDIS_HOST
+    default: "valkey"
+    required: false
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: WEBLATE_SITE_DOMAIN
+    default: "localhost"
+    required: false
+  - name: WEBLATE_SERVER_EMAIL
+    default: ""
+    required: false
+  # Generated into /config/data/secret by start.sh when empty.
+  - name: WEBLATE_SECRET_KEY
+    default: ""
+    required: false
+# UNVERIFIED: WEBLATE_ADMIN_* are not listed. The admin creation step of the upstream start is not ported yet.
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - postgresql
+  - valkey

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/automatic-ripping-machine/automatic-ripping-machine"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+# ARM_UID and ARM_GID are not listed: they are read by the upstream my_init scripts, which this image does not run.
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  # single root for arm.yaml, db, logs and media; large media can use extra mounts under /config/media
+  - path: /config
+    required: true
+dependencies: []

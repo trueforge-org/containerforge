@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ferdium/ferdium-server"
+ports:
+  - port: 3333
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: NODE_ENV
+    default: "production"
+    required: false
+  - name: APP_URL
+    default: ""
+    required: false
+  - name: APP_KEY
+    default: ""
+    required: false
+  - name: DATA_DIR
+    default: "/config/data"
+    required: false
+  - name: DB_CONNECTION
+    default: "sqlite"
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: DB_DATABASE
+    default: "ferdium"
+    required: false
+  - name: DB_SSL
+    default: "false"
+    required: false
+  - name: IS_CREATION_ENABLED
+    default: "true"
+    required: false
+  - name: IS_DASHBOARD_ENABLED
+    default: "true"
+    required: false
+  - name: IS_REGISTRATION_ENABLED
+    default: "true"
+    required: false
+  - name: CONNECT_WITH_FRANZ
+    default: "false"
+    required: false
+  - name: JWT_USE_PEM
+    default: "true"
+    required: false
+  - name: MAIL_CONNECTION
+    default: "smtp"
+    required: false
+  - name: SMTP_HOST
+    default: ""
+    required: false
+  - name: SMTP_PORT
+    default: ""
+    required: false
+  - name: MAIL_SSL
+    default: ""
+    required: false
+  - name: MAIL_USERNAME
+    default: ""
+    required: false
+  - name: MAIL_PASSWORD
+    default: ""
+    required: false
+  - name: MAIL_SENDER
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+# UNVERIFIED: the postgres driver value for DB_CONNECTION is not confirmed (see plan section 1).
+opt_dependencies:
+  - name: postgresql

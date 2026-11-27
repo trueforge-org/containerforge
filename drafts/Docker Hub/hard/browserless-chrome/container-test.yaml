@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+http:
+# UNVERIFIED path: use '/' if /docs is absent in this release
+- port: '3000'
+  path: /docs
+filePaths:
+- /app/package.json
+- /usr/share/licenses/browserless-chrome/LICENSE
+runners:
+- entrypoint: test -d /app/browsers
+# The test runs without TOKEN, so start.sh generates one. The authenticated path is checked by hand.

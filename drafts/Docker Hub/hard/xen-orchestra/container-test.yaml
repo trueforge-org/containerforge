@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout. Take the value from apps/budge or apps/changedetection plus margin.
+timeoutSeconds: 300
+tcp:
+  - port: '8080'
+http:
+  - port: '8080'
+    path: /
+filePaths:
+  - /start.sh
+  - /app/xen-orchestra/packages/xo-server/dist/cli.mjs
+  - /app/xen-orchestra/packages/xo-web/dist
+  - /defaults/config.toml.tmpl
+  - /usr/share/licenses/xen-orchestra

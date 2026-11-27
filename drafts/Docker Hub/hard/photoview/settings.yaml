@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/photoview/photoview/"
+ports:
+  # Upstream uses port 80, which a non-root user cannot bind.
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: PHOTOVIEW_DATABASE_DRIVER
+    default: "sqlite"
+    required: false
+  - name: PHOTOVIEW_SQLITE_PATH
+    default: "/config/photoview.db"
+    required: false
+  - name: PHOTOVIEW_POSTGRES_URL
+    default: ""
+    required: false
+  - name: PHOTOVIEW_LISTEN_PORT
+    default: "8080"
+    required: false
+  - name: PHOTOVIEW_MEDIA_CACHE
+    default: "/cache"
+    required: false
+  - name: MAPBOX_TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /cache
+    required: false
+  - path: /photos
+    required: false
+opt_dependencies:
+  - name: postgresql

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: an http probe on / needs index.php to answer 200 without a Plex token. Add it after the spike.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+filePaths:
+- /app/www/index.php
+- /usr/share/licenses/flextv/license.txt

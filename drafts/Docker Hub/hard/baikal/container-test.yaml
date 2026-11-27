@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED paths, confirm inside the built image
+filePaths:
+- /app/www/html/dav.php
+- /usr/share/licenses/baikal
+# UNVERIFIED: an http probe on / would expect the install redirect, add it once forgetool's http shape is confirmed

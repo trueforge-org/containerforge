@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8090'
+# UNVERIFIED default ports, confirm before merge
+- port: '19444'
+- port: '19400'
+http:
+- port: '8090'
+  path: /
+filePaths:
+- /app/hyperion/bin/hyperiond
+- /start.sh
+- /usr/share/licenses/hyperion-ng

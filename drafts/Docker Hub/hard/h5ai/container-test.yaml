@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+http:
+- port: '8080'
+  # UNVERIFIED: confirm a 2xx on an empty /h5ai; otherwise use path /
+  path: /_h5ai/public/index.php
+tcp:
+- port: '8080'
+filePaths:
+- /app/h5ai/_h5ai/public/index.php
+- /start.sh
+- /usr/share/licenses/h5ai
+runners:
+- entrypoint: php --version

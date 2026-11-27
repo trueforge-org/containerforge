@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /app/lanraragi/package.json
+- /app/lanraragi/lib/LANraragi.pm
+healthCommands:
+- command: valkey-cli -h 127.0.0.1 ping
+  # UNVERIFIED: expectedContent and matchContent are not used by any sibling; check the forgetool schema.
+  expectedContent: PONG
+  matchContent: true

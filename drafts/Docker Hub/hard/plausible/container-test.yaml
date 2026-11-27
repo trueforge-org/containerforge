@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql and clickhouse; full functional test not feasible in single-container suite
+timeoutSeconds: 180
+# UNVERIFIED: port 8000 may only open after the database connects
+tcp:
+- port: '8000'
+filePaths:
+- /app/bin/plausible
+- /start.sh
+- /usr/share/licenses/plausible/LICENSE.md
+runners:
+- entrypoint: test -x /app/bin/plausible

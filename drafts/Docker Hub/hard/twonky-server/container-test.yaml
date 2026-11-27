@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UDP 1900 (SSDP) has no probe here. Check it by hand: docker exec <container> ss -lun | grep 1900
+timeoutSeconds: 180
+tcp:
+- port: '9000'
+filePaths:
+- /app/twonky/twonkyserver
+- /usr/bin/ffmpeg
+- /usr/share/licenses/twonky-server/NOTICES-Server.txt

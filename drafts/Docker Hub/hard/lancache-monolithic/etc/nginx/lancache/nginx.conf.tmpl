@@ -1,0 +1,41 @@
+# Template rendered by start.sh into /tmp/nginx/nginx.conf.
+# Initial draft: only the heartbeat and the cache zone are ported. The upstream overlay
+# (sites-available/10_cache.conf, 20_upstream.conf, maps, stream SNI passthrough) is NOT yet ported.
+
+worker_processes __NGINX_WORKER_PROCESSES__;
+pid /tmp/nginx/nginx.pid;
+error_log /dev/stderr warn;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    access_log /dev/stdout;
+
+    client_body_temp_path /tmp/nginx/client_body;
+    proxy_temp_path /tmp/nginx/proxy;
+    fastcgi_temp_path /tmp/nginx/fastcgi;
+    uwsgi_temp_path /tmp/nginx/uwsgi;
+    scgi_temp_path /tmp/nginx/scgi;
+
+    # Persistent cache on the /data/cache volume. Index memory and disk size come from env.
+    proxy_cache_path /data/cache levels=2:2 keys_zone=generic:__CACHE_INDEX_SIZE__ inactive=__CACHE_MAX_AGE__ max_size=__CACHE_DISK_SIZE__ use_temp_path=off;
+
+    server {
+        listen 80 default_server;
+        server_name _;
+
+        location = /lancache-heartbeat {
+            access_log off;
+            return 204;
+        }
+
+        # Placeholder: the upstream cache location and upstream proxy rules are not yet ported.
+        location / {
+            return 404;
+        }
+    }
+}

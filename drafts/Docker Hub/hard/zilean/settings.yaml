@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/iPromKnight/zilean/"
+ports:
+  - port: 8181
+    protocol: tcp
+    required: true
+env:
+  # Placeholder password, as in the documented format. Replace it in the deployment.
+  - name: Zilean__Database__ConnectionString
+    default: "Host=postgresql;Database=zilean;Username=zilean;Password=MYPOSTGRESPASSWORD;Include Error Detail=true;Timeout=30;CommandTimeout=3600;"
+    required: true
+  # Empty means zilean generates the API key on first run and keeps it in /config/settings.json.
+  - name: Zilean__ApiKey
+    default: ""
+    required: false
+  - name: Zilean__EnableDashboard
+    default: "false"
+    required: false
+  - name: Zilean__Dmm__EnableScraping
+    default: "true"
+    required: false
+  - name: Zilean__Dmm__ScrapeSchedule
+    default: "0 * * * *"
+    required: false
+  - name: Zilean__Imdb__EnableImportMatching
+    default: "true"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql
+    required: true

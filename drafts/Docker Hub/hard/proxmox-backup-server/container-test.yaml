@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 180
+tcp:
+- port: '8007' # UNVERIFIED: the endpoint is HTTPS with a self-signed certificate; an http probe needs TLS support in forgetool
+filePaths:
+- /start.sh
+- /usr/sbin/proxmox-backup-proxy
+- /usr/sbin/proxmox-backup-api
+- /usr/share/licenses/proxmox-backup-server

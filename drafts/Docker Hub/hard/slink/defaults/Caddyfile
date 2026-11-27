@@ -1,0 +1,21 @@
+# UNVERIFIED: placeholder. The plan says to adapt upstream docker/config/caddy, which was not readable.
+# Confirm the routes, and add the mercure hub directive with its JWT keys, before merge.
+{
+	admin off
+	auto_https off
+	persist_config off
+}
+
+:8080 {
+	bind 127.0.0.1
+
+	# UNVERIFIED: root path of the API's public directory.
+	root * /app/api/public
+
+	@api path /api/*
+	handle @api {
+		php_fastcgi unix//tmp/slink/php/php-fpm.sock
+	}
+
+	# UNVERIFIED: /.well-known/mercure and /sse are not configured here yet.
+}

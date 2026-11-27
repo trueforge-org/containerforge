@@ -1,0 +1,2 @@
+# openbox autostart: launch MediaElch when the desktop session starts
+/usr/local/bin/mediaelch &

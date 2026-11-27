@@ -1,0 +1,46 @@
+# Adapted nginx template for the rootless image. start.sh renders __FIRESHARE_PORT__ into /tmp/nginx.conf.
+# UNVERIFIED: this is a minimal stand-in. Replace it with the upstream app/nginx/prod.conf, adapted
+# (no user directive, temp paths in /tmp, /processed -> /config/processed, game assets -> /config/data/game_assets).
+pid /tmp/nginx.pid;
+error_log stderr warn;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    access_log /dev/stdout;
+
+    client_body_temp_path /tmp/nginx/client_body;
+    proxy_temp_path /tmp/nginx/proxy;
+    fastcgi_temp_path /tmp/nginx/fastcgi;
+    uwsgi_temp_path /tmp/nginx/uwsgi;
+    scgi_temp_path /tmp/nginx/scgi;
+    proxy_cache_path /tmp/nginx/cache levels=1:2 keys_zone=fs_cache:10m max_size=100m inactive=60m;
+
+    server {
+        listen __FIRESHARE_PORT__;
+        server_name _;
+        root /app/build;
+        client_max_body_size 0;
+
+        location /api/ {
+            proxy_pass http://127.0.0.1:5000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        # UNVERIFIED: generated media served from the processed directory
+        location /processed/ {
+            alias /config/processed/;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }
+}

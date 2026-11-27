@@ -1,0 +1,7 @@
+# Openbox autostart for the OpenAudible session (overrides the kasmvnc base file).
+# UNVERIFIED: the installed binary path; check the `dpkg -L openaudible` output in the build log and adjust.
+# The openaudible binary is launched in the background so the session keeps running.
+${OPENAUDIBLE_BIN:-/opt/OpenAudible/OpenAudible} &
+
+# Base autostart content is kept last (a terminal, as in apps/kasmvnc).
+xterm
