@@ -9,7 +9,7 @@
 | Renovate | Base steamcmd only: `apps/steamcmd` uses `datasource=deb depName=steamcmd`. The game and ExileMod are not pinned. |
 | License | Image LICENSE: open question (section 10). ExileMod is a third-party community mod; its license is UNVERIFIED. The Arma 3 server is commercial (EULA, not fetched: UNVERIFIED). |
 | Source URL | https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide (draft link). The ExileMod source is UNVERIFIED (not in the fetched chart or upstream files). |
-| Download | Same as arma3: the server via SteamCMD (`+app_update 233780`); steamcmd tarball https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz (HTTP 200). The ExileMod files are **not** in the image and the chart shows no install URL: UNVERIFIED. |
+| Download | Same as arma3: the server via SteamCMD (`+app_update 233780`); steamcmd tarball https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz (HTTP 200). The ExileMod files are **not** in the image and the chart sets `EXILEMOD_SERVER_URL` = http://www.exilemod.com/ExileServer-1.0.4a.zip (chart values.yaml; zip not fetched). |
 | Checksum source | None published (UNVERIFIED). |
 | Upstream Dockerfile reviewed | Same as arma3: https://raw.githubusercontent.com/ich777/docker-steamcmd-server/master/Dockerfile and `scripts/start.sh` (Source engine `srcds_run`, not Arma 3). |
 | Chart-bundled MariaDB | The chart exposes port **3306** (`mariadb`-style) and sets env `MARIA_DB_ROOT_PWD` (placeholder value `ExileMod` in values.yaml line 103). The fetched upstream image files do not show a MariaDB process: UNVERIFIED whether the image itself runs one. |
