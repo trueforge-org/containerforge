@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jhthorsen/app-mojopaste"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: MOJO_MODE
+    default: "production"
+    required: false
+  - name: PASTE_DIR
+    default: "/config/data"
+    required: false
+  # UNVERIFIED: whether the app reads PASTE_ENABLE_CHARTS.
+  - name: PASTE_ENABLE_CHARTS
+    default: "1"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

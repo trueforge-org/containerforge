@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5656'
+http:
+- port: '5656'
+  path: /
+filePaths:
+- /app/kapowarr/requirements.txt

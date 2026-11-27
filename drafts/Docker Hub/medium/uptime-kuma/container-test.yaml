@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '3001'
+# UNVERIFIED: the status on / for 2.5.12. The upstream Go healthcheck is not ported; this probe covers readiness.
+http:
+- port: '3001'
+  path: /
+filePaths:
+- /app/uptime-kuma/server/server.js
+- /usr/share/licenses/uptime-kuma/LICENSE

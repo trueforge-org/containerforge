@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '33411'
+http:
+# UNVERIFIED: the status on / after first start (a first-run redirect is possible). Do not weaken the probe.
+- port: '33411'
+  path: /
+filePaths:
+- /app/mailpile/mp
+- /usr/bin/gpg
+- /usr/bin/tor
+- /usr/share/licenses/mailpile/COPYING.md

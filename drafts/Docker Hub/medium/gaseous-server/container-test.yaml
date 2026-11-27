@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The health endpoint without MariaDB is UNVERIFIED. If the app fails without the DB, the DB-dependency rule
+# in the build-test protocol applies and the narrowed comment must be added (plan section 8).
+timeoutSeconds: 240
+tcp:
+- port: '5198'
+http:
+- port: '5198'
+  path: /api/v1.1/HealthCheck
+filePaths:
+- /app/gaseous-server/gaseous-server
+- /app/gaseous-server/wwwroot/emulators/EmulatorJS
+- /usr/share/licenses/gaseous-server/LICENSE

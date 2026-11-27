@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/JVT038/MetaTube"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: PORT
+    default: "5000"
+    required: false
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: DATABASE_URL
+    default: "sqlite:////config/app.db"
+    required: false
+  - name: DOWNLOADS
+    default: "/downloads"
+    required: false
+  - name: FFMPEG
+    default: "/usr/bin"
+    required: false
+  - name: DEBUG
+    default: "False"
+    required: false
+  - name: LOG
+    default: "False"
+    required: false
+  - name: LOG_LEVEL
+    default: "10"
+    required: false
+  - name: URL_SUBPATH
+    default: "/"
+    required: false
+  - name: INIT_DB
+    default: "True"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /downloads
+    required: false

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/cloudreve/Cloudreve"
+ports:
+  - port: 5212
+    protocol: tcp
+    required: true
+env:
+  - name: CR_CONF_Database.Type
+    default: "sqlite"
+    required: false
+  - name: CR_CONF_Database.Host
+    default: ""
+    required: false
+  - name: CR_CONF_Database.Port
+    default: ""
+    required: false
+  - name: CR_CONF_Database.User
+    default: ""
+    required: false
+  - name: CR_CONF_Database.Password
+    default: ""
+    required: false
+  - name: CR_CONF_Database.Name
+    default: ""
+    required: false
+  - name: CR_CONF_Redis.Server
+    default: ""
+    required: false
+  - name: CR_CONF_System.Listen
+    default: ":5212"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+    required: false
+  - name: valkey
+    required: false

@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# DB dependency decision is still open (plan section 10). Without PostgreSQL, `/` may not return 200.
+# Narrow the probe only if round 1 proves it, and keep the narrowed comment then.
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /app/redmine/config.ru
+- /app/redmine/Gemfile.lock
+- /usr/share/licenses/redmine/LICENSE.txt

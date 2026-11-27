@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/redmine/redmine"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: SECRET_KEY_BASE
+    default: ""
+    required: false
+  - name: RUN_DB_MIGRATE
+    default: "false"
+    required: false
+  # REDMINE_DB_* names are plan names, not verified upstream names (plan section 6). Check the upstream entrypoint before commit and remove any that do not exist.
+  - name: REDMINE_DB_POSTGRES
+    default: "postgresql"
+    required: false
+  - name: REDMINE_DB_DATABASE
+    default: "redmine"
+    required: false
+  - name: REDMINE_DB_USERNAME
+    default: "redmine"
+    required: false
+  - name: REDMINE_DB_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

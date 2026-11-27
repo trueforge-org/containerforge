@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+  - port: '22023'
+# UNVERIFIED: the HTTP path / returns 200. If not, drop the http block and keep tcp. UDP 22023 is not probed here.
+http:
+  - port: '22023'
+    path: /
+filePaths:
+  - /app/Impostor.Server
+  - /defaults/config.json
+  - /config/config.json
+  - /usr/share/licenses/impostor-server/LICENSE

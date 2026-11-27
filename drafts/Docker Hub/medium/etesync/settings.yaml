@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/etesync/server"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: true
+env:
+  # The ETEBASE_*, DATABASE_ENGINE and POSTGRES_* names are read by start.sh, which writes the Etebase ini file.
+  - name: ETEBASE_ALLOWED_HOSTS
+    default: "*"
+    required: false
+  - name: DATABASE_ENGINE
+    default: "sqlite"
+    required: false
+  - name: POSTGRES_HOST
+    default: ""
+    required: false
+  - name: POSTGRES_PORT
+    default: "5432"
+    required: false
+  - name: POSTGRES_DB
+    default: "etesync"
+    required: false
+  - name: POSTGRES_USER
+    default: "etesync"
+    required: false
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: false
+  - name: ETEBASE_REDIS_URI
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# postgresql and valkey are optional (SQLite works by default), so they are not listed as required dependencies.
+dependencies: []

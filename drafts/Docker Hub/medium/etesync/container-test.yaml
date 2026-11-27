@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+
+http:
+- port: '8000'
+  path: /api/v1/authentication/is_etebase/
+
+filePaths:
+- /app/etesync/manage.py
+- /app/static
+- /app/venv/bin/uvicorn
+- /usr/share/licenses/etesync/LICENSE

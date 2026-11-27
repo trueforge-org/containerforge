@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8800'
+http:
+- port: '8800'
+  path: /
+filePaths:
+# UNVERIFIED: forgetool may reject a directory entry; use a file inside the tree if so.
+- /app/seedsync
+- /app/seedsync/defaults/settings.cfg
+# UNVERIFIED: license path, see Dockerfile.
+- /usr/share/licenses/seedsync

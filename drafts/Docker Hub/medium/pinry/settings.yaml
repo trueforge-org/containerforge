@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/pinry/pinry"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Django secret key env name is UNVERIFIED. Add it here with a default or a start.sh generator once confirmed (plan section 6).
+volumes:
+  - path: /config
+    required: true
+dependencies: []

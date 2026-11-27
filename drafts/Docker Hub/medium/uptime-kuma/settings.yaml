@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/louislam/uptime-kuma"
+ports:
+  - port: 3001
+    protocol: tcp
+    required: false
+env:
+  # No other env var is listed until 2.5.12 is confirmed to read it. UPTIME_KUMA_IS_CONTAINER is set by the image.
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

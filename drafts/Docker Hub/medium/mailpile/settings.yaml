@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mailpile/Mailpile"
+ports:
+  - port: 33411
+    protocol: tcp
+    required: false
+env:
+  # MAILPILE_* tool paths are fixed in the Dockerfile and are not user settings.
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

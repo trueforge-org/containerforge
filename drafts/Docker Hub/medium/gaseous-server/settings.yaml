@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/gaseous-project/gaseous-server"
+ports:
+  - port: 5198
+    protocol: tcp
+    required: false
+env:
+  - name: ASPNETCORE_URLS
+    default: "http://+:5198"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # DB and IGDB env names are added only after the app source confirms the names it reads (plan section 6).
+  # The chart keys (dbhost, dbuser, igdbclientid, ...) are not proof of env names.
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb
