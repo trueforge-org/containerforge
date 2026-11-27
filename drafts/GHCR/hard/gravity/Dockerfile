@@ -4,7 +4,7 @@
 ARG VERSION="v0.34.0"
 
 ############## web UI build ##############
-FROM docker.io/library/node:26 AS web
+FROM docker.io/library/node:26@sha256:f8e5d4bb28fa55c74f1345166a082a10b7c68f22304350c1ce0d18358ae94996 AS web
 ARG VERSION
 ENV NODE_ENV=production \
     npm_config_cache=/tmp/npm
@@ -19,7 +19,7 @@ RUN set -eux; \
     make web-build
 
 ############## Go build ##############
-FROM docker.io/library/golang:1.27 AS build
+FROM docker.io/library/golang:1.27@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS build
 ARG VERSION
 ARG TARGETARCH
 

@@ -1,6 +1,6 @@
 # Build stage: upstream builds a static musl binary with Crystal on Alpine (see upstream docker/Dockerfile).
 # UNVERIFIED: the Crystal image digest must be pinned before merge.
-FROM 84codes/crystal:1.22.3-alpine AS build
+FROM 84codes/crystal:1.22.3-alpine@sha256:506ac3e6a91ef6c7c48baf1800d12b9b0c79d183391d0965fd4fc5daa7d1b13b AS build
 
 ARG VERSION
 # UNVERIFIED: OpenSSL is built from source in upstream. Version 3.6.5 is from the pinned upstream
