@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=itzg/mc-router versioning=semver
-  default = "1.57.0"
+  default = "1.57.1"
 }
 
 variable "LICENSE" {
