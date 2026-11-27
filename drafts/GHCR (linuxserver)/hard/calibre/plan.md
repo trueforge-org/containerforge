@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | `9.19.0` (tag `v9.19.0`, published 2026-11-21). The chart pins linuxserver `9.18.0`, which is stale. Source: https://api.github.com/repos/kovidgoyal/calibre/releases/latest |
+| Version to build | `9.19.0` (tag `v9.19.0`, published 2026-11-21). The draft pins linuxserver `9.18.0`, which is stale (the TrueCharts chart already pins `9.19.0`, appVersion 9.19.0). Source: https://api.github.com/repos/kovidgoyal/calibre/releases/latest |
 | Renovate | `// renovate: datasource=github-releases depName=kovidgoyal/calibre versioning=loose` (tag is `v`-prefixed, so `loose`). |
 | License | GPL-3.0 (https://api.github.com/repos/kovidgoyal/calibre). |
 | Source URL | https://github.com/kovidgoyal/calibre |
