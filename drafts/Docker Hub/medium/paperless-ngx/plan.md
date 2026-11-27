@@ -7,7 +7,7 @@ The draft folder is named `paperless-ngx`, but the container described is the Ap
 
 | Item | Value |
 | --- | --- |
-| Version to build | `3.4.0` is the latest stable Tika. Docker Hub `apache/tika` tag `3.4.0.0` (last_updated 2026-11-24). The draft and the TrueCharts chart pin `apache/tika:3.3.3.1`, which is older. Source: https://hub.docker.com/v2/repositories/apache/tika/tags?page_size=5&ordering=last_updated and https://archive.apache.org/dist/tika/3.4.0/ |
+| Version to build | `3.4.0` is the latest stable Tika. Docker Hub `apache/tika` tag `3.4.0.0` (last_updated 2026-11-24). The draft pins `apache/tika:3.3.3.1`, which is older. The TrueCharts chart pins `apache/tika:3.4.0.0` (fetched 2026-11-27), not 3.3.3.1. Source: https://hub.docker.com/v2/repositories/apache/tika/tags?page_size=5&ordering=last_updated and https://archive.apache.org/dist/tika/3.4.0/ |
 | Release date | Docker Hub tag date 2026-11-24. Apache announcement date: UNVERIFIED (not fetched). |
 | Renovate | UNVERIFIED: there is no GitHub release (`GET repos/apache/tika/releases/latest` returns 404), so `github-releases` does not apply. Proposed: `datasource=maven depName=org.apache.tika:tika-server-standard versioning=maven` (Maven Central hosts the artifact). Confirm the renovate manager supports it before merge. |
 | License | Apache-2.0 (GitHub API `spdx_id` for apache/tika) |
@@ -196,8 +196,8 @@ Security expectations from the draft (`runAsUser 0`, `readOnlyRootFilesystem fal
 
 ## 10. Risks, caveats and open questions
 
-- Target name: the draft folder is `paperless-ngx`, but the image is Tika. Decide the app name with the user (plan uses `apps/tika`). The chart still points at `apache/tika` tag `3.3.3.1`, so the chart upgrade to 3.4.0 is a separate downstream change.
-- Version: 3.4.0 is newer than the chart's 3.3.3.1. Confirm the 3.4.0 image tag and behaviour before pinning.
+- Target name: the draft folder is `paperless-ngx`, but the image is Tika. Decide the app name with the user (plan uses `apps/tika`). The chart points at `apache/tika` tag `3.4.0.0` (fetched 2026-11-27), so it already matches 3.4.0.
+- Version: 3.4.0 matches the chart's current pin (3.4.0.0). Confirm the 3.4.0 image tag and behaviour before pinning.
 - Renovate datasource: maven is proposed. UNVERIFIED that renovate picks the Apache jar version correctly. Fallback: a `custom.regex` manager against the Apache dist index.
 - Signature check: the `.sha512` check is planned because it needs no extra package. Upstream uses GPG `.asc` verification. Either is acceptable; document the choice in the `Dockerfile`.
 - OCR: the minimal jar has no OCR. The full `tika-server-standard` distribution still needs tesseract and fonts. This plan builds the jar only. The OCR variant is a separate app or a separate task (UNVERIFIED: which OCR packages the full image bundles).

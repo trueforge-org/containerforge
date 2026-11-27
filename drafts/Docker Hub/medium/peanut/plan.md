@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | `v6.1.2`. GitHub release `v6.1.2` published 2026-10-19 (no release assets). Docker Hub `brandawg93/peanut` tags `6.1.2` and `latest` (last_updated 2026-10-28). Sources: https://api.github.com/repos/Brandawg93/PeaNUT/releases/latest (via `gh api`) and https://hub.docker.com/v2/repositories/brandawg93/peanut/tags?page_size=5&ordering=last_updated |
-| Draft tag | Draft and chart use `docker.io/brandawg93/peanut:6.1.2`. Same version. |
+| Draft tag | Draft uses `docker.io/brandawg93/peanut:6.1.2`. The TrueCharts chart (fetched 2026-11-27) pins `docker.io/brandawg93/peanut:6.2.0`, not 6.1.2. |
 | Renovate | `datasource=github-releases depName=Brandawg93/PeaNUT versioning=semver` (release tags exist). UNVERIFIED: the `v` prefix handling; `apps/budge` does not use a `v`-prefixed VERSION: its Dockerfile tries `${VERSION}` and falls back to `v${VERSION}` for the tarball URL. Check how renovate treats the `v` here. |
 | License | Apache-2.0 (GitHub API `spdx_id`, https://api.github.com/repos/Brandawg93/PeaNUT via `gh api`). `LICENSE` in `docker-bake.hcl` = `Apache-2.0`. |
 | Source URL | https://github.com/Brandawg93/PeaNUT |
@@ -237,7 +237,7 @@ No `privileged`, no extra capabilities, no GPU.
 - Tag integrity: `v6.1.2` to commit `7ad39fd` is UNVERIFIED (section 1).
 - Build memory: Next.js build may need a lot of RAM on small hosts (draft caveat, confirmed as a reasonable concern). Note in the PR.
 - Renovate `v` prefix handling is UNVERIFIED (section 1).
-- The chart uses `brandawg93/peanut:6.1.2` (no `v`). This app uses `peanut:v6.1.2` as tag. Decide the tag form with the user, or keep `v` and note the tag difference in the PR.
+- The chart uses `brandawg93/peanut:6.2.0` (no `v`; fetched 2026-11-27). This app uses `peanut:v6.1.2` as tag. Decide the tag form with the user, or keep `v` and note the tag difference in the PR.
 - Upstream is active: last push 2026-11-23 (GitHub API). Release 6.1.2 is from 2026-10-19.
 - Blockers: none confirmed. No musl-only dependency, no GPU, no privileged mode.
 - arm64: not built or run here.
@@ -270,5 +270,5 @@ forgetool containers test --image peanut:v6.1.2 --config ./container-test.yaml
 - PR template from `.github/PULL_REQUEST_TEMPLATE.md`, keeping its sections and checkboxes. Check only the boxes that apply.
 - Notes section: `🤖 This PR is AI generated.`
 - CLA: tell the user that contributions need a signed CLA at https://cla-assistant.io/trueforge-org/containerforge. Only the user can sign it. The `license/cla` check shows the status.
-- Mention in the PR: a NUT server is required at runtime but is not part of the image; build memory note; tag form (`v6.1.2`) versus chart tag (`6.1.2`).
+- Mention in the PR: a NUT server is required at runtime but is not part of the image; build memory note; tag form (`v6.1.2`) versus chart tag (`6.2.0`).
 - Not tested: the image is not built here. State exactly what was built and run. Do not check "Built container locally" unless it was.
