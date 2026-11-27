@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "WT_VERSION" {
   // renovate: datasource=github-releases depName=emweb/wt versioning=loose
-  default = "4.12.3"
+  default = "4.12.6"
 }
 
 // UNVERIFIED: GPL-3.0-only vs GPL-3.0-or-later; confirm against COPYING and source headers.
