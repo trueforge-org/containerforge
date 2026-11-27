@@ -11,7 +11,7 @@
 | Source URL | https://www.cs2d.com/ (vendor) |
 | Download (amd64) | https://www.unrealsoftware.de/files_pub/cs2d_dedicated_linux.zip (linked from vendor page https://www.cs2d.com/download.php). Upstream script uses `http://www.unrealsoftware.de/files_pub/cs2d_dedicated_linux.zip`; plan uses HTTPS. |
 | Download (arm64) | The vendor page lists a Linux ARM64 server zip (per fetch). Exact URL: UNVERIFIED. Whether the binary runs on the target base: UNVERIFIED. |
-| Checksum source | None published (vendor page, upstream repo). UNVERIFIED: plan computes SHA256 at build time and pins it in the Dockerfile after one manual download (see section 4). |
+| Checksum source | Vendor publishes Dedicated CRC32 and SHA256 hash values for Linux x64 and ARM64 on https://www.cs2d.com/download.php (values behind links, not fetched; upstream repo publishes none). UNVERIFIED: plan computes SHA256 at build time and pins it in the Dockerfile after one manual download (see section 4). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/ich777/docker-cs2d-server/master/Dockerfile: `FROM ich777/debian-baseimage` (no tag), enables i386, installs `unzip` and `libgtk2.0-0:i386`, creates user `cs2d` (`ENV USER=cs2d`), `ENTRYPOINT ["/opt/scripts/start.sh"]`, runs as root, no USER/VOLUME/EXPOSE. |
 | Upstream start script reviewed | https://raw.githubusercontent.com/ich777/docker-cs2d-server/master/scripts/start.sh: root wrapper (`usermod`, `chown` of `DATA_DIR`), then `su ${USER} -c /opt/scripts/start-server.sh`. |
 | Upstream server script reviewed | https://raw.githubusercontent.com/ich777/docker-cs2d-server/master/scripts/start-server.sh: downloads the CS2D client zip (`https://github.com/ich777/docker-cs2d-server/raw/master/cs/cs2d_1008_linux.zip`, not needed for a dedicated server) and the dedicated zip (`http://www.unrealsoftware.de/files_pub/cs2d_dedicated_linux.zip`), both `unzip -qo` into `${SERVER_DIR}`, then runs `${SERVER_DIR}/cs2d_dedicated ${GAME_PARAMS}`. The Force Update block contains a malformed second `wget -O <url>` line: do not copy it. |
@@ -50,7 +50,7 @@ Decision: download the vendor zip **at build time**, not at runtime. Reason: `/a
        echo "${CS2D_SHA256}  /tmp/cs2d/cs2d_dedicated_linux.zip" | sha256sum -c -; \
        unzip -q /tmp/cs2d/cs2d_dedicated_linux.zip -d /tmp/cs2d/server
    ```
-   `CS2D_SHA256` must be computed by the writer or the maintainer from one manual download of this exact URL and recorded in the PR (UNVERIFIED: no vendor checksum). Mark it as such in the PR.
+   `CS2D_SHA256` must be computed by the writer or the maintainer from one manual download of this exact URL and recorded in the PR (vendor SHA256 values are on https://www.cs2d.com/download.php and must be cross-checked; not fetched). Mark it as such in the PR.
 3. Confirm the extracted layout: the binary is `cs2d_dedicated` (upstream launch line); confirm it is at the zip root (UNVERIFIED) and whether the zip contains a license file (copy it if present).
 4. Final stage `FROM <ubuntu>`, `USER root`:
    - Install libraries only if the binary needs them (`ldd cs2d_dedicated` in the build stage, UNVERIFIED). Candidate: `libgtk2.0-0t64` (the draft's i386 GTK 2 is a 32-bit package and should be dropped if `ldd` shows no need). Do not add packages the base already has.
@@ -206,7 +206,7 @@ Draft expectations reconciled:
 
 ## 10. Risks, caveats and open questions
 
-- No vendor checksum: the SHA256 pin is computed by us from one download (section 4). Note this as an unverified trust point in the PR.
+- Vendor publishes SHA256 hash values on https://www.cs2d.com/download.php: cross-check the pinned SHA256 against them (section 4). Note the check in the PR.
 - Vendor freeware terms: the license text and redistribution rights are UNVERIFIED. The bake `LICENSE` value and the shipped license file depend on this. Resolve before merging.
 - Vendor link: the vendor page links `www.unrealsoftware.de` and the upstream script uses `http://`. The plan uses HTTPS. If the HTTPS link fails, use the URL from the vendor page and record it.
 - The ARM64 zip is listed by the vendor (per fetch). Not planned in this PR; open question for a follow-up.
