@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-tags depName=airdcpp-web/airdcpp-webclient versioning=loose
-  default = "2.14.0"
+  default = "2.14.1b"
 }
 
 variable "LICENSE" {
