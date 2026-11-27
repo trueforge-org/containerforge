@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=m1k1o/blog versioning=semver
-  default = "1.5.0"
+  default = "1.5.1"
 }
 
 variable "LICENSE" {
