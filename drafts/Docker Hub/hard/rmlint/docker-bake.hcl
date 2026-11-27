@@ -8,7 +8,7 @@ variable "VERSION" {
   // NOTE: tied to the apt package of the ubuntu base image (PACKAGE_VERSION in the Dockerfile).
   // Upstream is 2.11.0 but apt ships 2.10.2, so the renovate github-releases line is disabled here.
   // renovate (disabled): datasource=github-releases depName=sahib/rmlint versioning=semver
-  default = "2.10.4"
+  default = "2.11.0"
 }
 
 variable "PACKAGE_VERSION" {
