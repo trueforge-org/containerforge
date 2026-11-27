@@ -3,6 +3,6 @@
 # UNVERIFIED: hashes are not added yet. Add them from the PyPI digests and switch to --require-hashes.
 click==7.1.2
 requests==2.34.2
-lxml==4.3.5
+lxml==4.9.4
 future==0.18.3
 pyyaml==5.4.1
