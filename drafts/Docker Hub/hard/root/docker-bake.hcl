@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=root-project/root versioning=regex:^v(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)$
-  default = "v6-40-04"
+  default = "v6-42-00"
 }
 
 // UNVERIFIED: sha256 of root_v6.40.04.Linux-ubuntu26.04-x86_64-gcc15.2.tar.gz.
