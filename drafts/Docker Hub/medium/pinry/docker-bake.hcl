@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=pinry/pinry versioning=semver
-  default = "2.1.14"
+  default = "2.1.15"
 }
 
 variable "LICENSE" {
