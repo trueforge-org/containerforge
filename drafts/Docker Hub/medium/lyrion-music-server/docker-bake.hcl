@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=lmscommunity/lyrionmusicserver versioning=loose
-  default = "9.1.2"
+  default = "9.2.0"
 }
 
 variable "LICENSE" {
