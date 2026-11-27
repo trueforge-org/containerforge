@@ -18,7 +18,7 @@ WORKDIR /frontend-build/frontend/web
 RUN corepack enable && pnpm i --frozen-lockfile && pnpm build
 
 # build stage: backend (Go). UNVERIFIED: pin golang:1.23-alpine by digest; confirm go.mod Go version.
-FROM golang:1.23-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f AS backend
+FROM golang:1.27-alpine@sha256:70bd7ddea8b6cbe5d6943cde279d6b67feb10cc924fb9100d1d8757c1575b280 AS backend
 
 ARG VERSION
 ARG TARGETARCH
