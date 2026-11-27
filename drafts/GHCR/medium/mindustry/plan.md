@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | `160.8` (tag `v160.8`, published 2026-11-18, not prerelease). TrueCharts runs the ich777 wrapper with `GAME_V=latest` (floating). Source: https://api.github.com/repos/Anuken/Mindustry/releases/latest |
+| Version to build | `160.8` (tag `v160.8`, published 2026-11-18, not prerelease). TrueCharts runs the ich777 wrapper with `GAME_V=latest@sha256:f0065aa44fb1c38b7fc30d34e220138dc0a0c6477b78eb7f59015622c2052030` (chart values.yaml, 2026-11-27; not the plain `latest` that `start-server.sh` special-cases). Source: https://api.github.com/repos/Anuken/Mindustry/releases/latest |
 | Renovate | `datasource=github-releases depName=Anuken/Mindustry versioning=loose` (tags are `vNNN.N`; the `v` is added in the download URL, as in `releases/download/v${VERSION}/...`) |
 | License | GPL-3.0 (SPDX, GitHub API). Source: https://api.github.com/repos/Anuken/Mindustry |
 | Source URL | https://github.com/Anuken/Mindustry |

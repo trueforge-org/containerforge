@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Latest stable `1.3.1` (published 2026-10-23). The chart pins `ghcr.io/ylianst/meshcentral:1.3.1`, which matches. Source: https://api.github.com/repos/Ylianst/MeshCentral/releases/latest |
+| Version to build | Latest stable `1.3.1` (published 2026-10-23). The chart pins `ghcr.io/ylianst/meshcentral:1.3.2` (values.yaml, appVersion 1.3.2), which does not match 1.3.1. Source: https://api.github.com/repos/Ylianst/MeshCentral/releases/latest |
 | Draft vs verified | Draft: "Node.js server with npm dependencies", data under `/config`. Confirmed: upstream `docker/Dockerfile` (commit `f436143527458d56da0336ea3047c006703fb4e4`) builds on `node:24.22.1-alpine3.24` (amd64, arm64) and `alpine:3.24` nodejs for arm/v6 and v7, runs `docker/entrypoint.sh`, and keeps data in `/opt/meshcentral/meshcentral-*` (not `/config`). |
 | Renovate | Binary from npm: `datasource=npm depName=meshcentral versioning=semver` (same pattern as `apps/mongosh`). |
 | License | Apache-2.0 (GitHub API `spdx_id` = `Apache-2.0`; npm metadata `license: Apache-2.0`): https://api.github.com/repos/Ylianst/MeshCentral/license |
