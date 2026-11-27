@@ -19,8 +19,8 @@ RUN apt-get update && \
 
 # UNVERIFIED: Node 24 per upstream Dockerfile. Copying binaries from a bookworm image may not match this glibc;
 # installing Node in this stage is the alternative.
-COPY --from=node:24.22.1-bookworm-slim /usr/local/bin/node /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/
-COPY --from=node:24.22.1-bookworm-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:24.22.1-bookworm-slim@sha256:be8204d4bd327363357f532187b752ff62759c31bedf98e9e18fc08c9cbd605c /usr/local/bin/node /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/
+COPY --from=node:24.22.1-bookworm-slim@sha256:be8204d4bd327363357f532187b752ff62759c31bedf98e9e18fc08c9cbd605c /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 RUN mkdir -p /src && \
   curl -fsSL "https://github.com/plausible/analytics/archive/refs/tags/v${VERSION}.tar.gz" | \

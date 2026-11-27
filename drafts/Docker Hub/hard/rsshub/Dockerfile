@@ -1,6 +1,6 @@
 # Stage 1: build RSSHub from the tagged source. Upstream publishes no release assets or checksums (UNVERIFIED for this tag).
 # UNVERIFIED: no digest for node:26-trixie is in the repo yet; pin it from the upstream Dockerfile at implementation.
-FROM docker.io/library/node:26-trixie AS build
+FROM docker.io/library/node:26-trixie@sha256:f8e5d4bb28fa55c74f1345166a082a10b7c68f22304350c1ce0d18358ae94996 AS build
 
 ARG VERSION
 

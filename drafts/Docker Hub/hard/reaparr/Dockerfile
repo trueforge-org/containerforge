@@ -17,7 +17,7 @@ RUN echo "*** Fetching Reaparr v${VERSION} ***" && \
   rm -f /tmp/reaparr.tar.gz
 
 # UNVERIFIED: the Debian-based bun 1.4.0 tag (upstream uses the alpine variant); pin the digest at port time.
-FROM oven/bun:1.4.0 AS client
+FROM oven/bun:1.4.0@sha256:5ff609364c049b54eb0ff560ec96319729a972078ef2c755d758f0c6ef89c2d6 AS client
 
 ARG VERSION
 COPY --from=source /src/src/AppHost/ClientApp /build/ClientApp
@@ -29,7 +29,7 @@ RUN bun install --frozen-lockfile && \
   bun run generate --fail-on-error
 
 # UNVERIFIED: the sdk tag 10.0 (upstream); pin the digest at port time.
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS server
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:8c6edfb26c85153f236d26efebd9ad349aec403583f343f201ee67838b23658d AS server
 
 ARG VERSION
 ARG TARGETARCH

@@ -1,6 +1,6 @@
 
 # UNVERIFIED: no digest pinned for the .NET SDK image yet. Resolve it and pin it before merging.
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:8c6edfb26c85153f236d26efebd9ad349aec403583f343f201ee67838b23658d AS build
 
 ARG VERSION
 ARG TARGETARCH
