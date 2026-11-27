@@ -9,7 +9,7 @@ ARG TERRAFORM_VERSION=1.11.3
 # renovate: datasource=github-releases depName=gruntwork-io/terragrunt
 ARG TERRAGRUNT_VERSION=0.78.0
 # renovate: datasource=pypi depName=ansible
-ARG ANSIBLE_VERSION=13.5.0
+ARG ANSIBLE_VERSION=13.8.0
 ARG TARGETARCH
 
 ENV \
