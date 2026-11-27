@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/haiwen/seafile-server"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: SEAFILE_MYSQL_DB_HOST
+    default: "mariadb"
+    required: false
+  - name: SEAFILE_MYSQL_DB_PORT
+    default: "3306"
+    required: false
+  - name: SEAFILE_MYSQL_DB_USER
+    default: "seafile"
+    required: false
+  - name: SEAFILE_MYSQL_DB_PASSWORD
+    default: ""
+    required: true
+  - name: SEAFILE_MYSQL_DB_CCNET_DB_NAME
+    default: "ccnet_db"
+    required: false
+  - name: SEAFILE_MYSQL_DB_SEAFILE_DB_NAME
+    default: "seafile_db"
+    required: false
+  - name: SEAFILE_MYSQL_DB_SEAHUB_DB_NAME
+    default: "seahub_db"
+    required: false
+  - name: INIT_SEAFILE_ADMIN_EMAIL
+    default: "me@example.com"
+    required: false
+  - name: INIT_SEAFILE_ADMIN_PASSWORD
+    default: ""
+    required: false
+  - name: SEAFILE_SERVER_HOSTNAME
+    default: "localhost"
+    required: false
+  - name: SEAFILE_SERVER_PROTOCOL
+    default: "http"
+    required: false
+  - name: JWT_PRIVATE_KEY
+    default: ""
+    required: false
+  - name: CACHE_PROVIDER
+    default: "redis"
+    required: false
+  - name: REDIS_HOST
+    default: "valkey"
+    required: false
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: MEMCACHED_HOST
+    default: "memcached"
+    required: false
+  - name: MEMCACHED_PORT
+    default: "11211"
+    required: false
+  - name: TIME_ZONE
+    default: "UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - mariadb
+  - valkey

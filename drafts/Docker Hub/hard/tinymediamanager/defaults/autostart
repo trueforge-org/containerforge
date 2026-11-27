@@ -1,0 +1,3 @@
+# Launched by the openbox session. Replaces the kasmvnc default (xterm). Seeded to /config only when missing.
+mkdir -p /config/data
+/app/tinyMediaManager/tinyMediaManager &

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '22300'
+# UNVERIFIED: /api/ping is the probe path used by the chart; confirm it returns 200 with no env vars (default SQLite).
+http:
+- port: '22300'
+  path: /api/ping
+filePaths:
+- /app/joplin/packages/server/package.json
+- /usr/share/licenses/joplin-server/LICENSE

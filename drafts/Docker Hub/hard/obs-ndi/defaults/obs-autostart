@@ -1,0 +1,3 @@
+# Launched by the openbox session. Seeded to /config/.config/openbox/autostart only when that file is missing.
+# UNVERIFIED flags: run `obs --help` in the image and adjust.
+obs --disable-shutdown-check --multi &

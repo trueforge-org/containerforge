@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# First start downloads Factorio headless (size UNVERIFIED, 100+ MB) before the web UI starts.
+timeoutSeconds: 300
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/fsm/factorio-server-manager
+- /app/fsm/app/index.html
+# 34197/udp (game) has no probe: the schema offers only tcp and http checks, and the game port opens
+# only after a server is started from the UI. Verify it by hand.

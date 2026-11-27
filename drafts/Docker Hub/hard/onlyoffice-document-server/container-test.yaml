@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+tcp:
+- port: '8080'
+# UNVERIFIED: vendor binary paths under /var/www/onlyoffice/documentserver/server, confirm after install
+filePaths:
+- /var/www/onlyoffice/documentserver/server/DocService/docservice
+- /var/www/onlyoffice/documentserver/server/FileConverter/converter
+- /usr/share/licenses/onlyoffice-document-server
+- /start.sh

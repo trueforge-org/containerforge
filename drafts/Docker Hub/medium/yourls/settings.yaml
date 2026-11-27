@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/YOURLS/YOURLS"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  # Read by defaults/user/config.php on every request (php-fpm clear_env = no).
+  # UNVERIFIED: YOURLS_USER and YOURLS_PASS are passed by the chart but are not in config-sample.php, so they are not listed.
+  - name: YOURLS_SITE
+    default: "http://localhost:8080"
+    required: true
+  - name: YOURLS_DB_HOST
+    default: "mariadb"
+    required: true
+  - name: YOURLS_DB_NAME
+    default: "MYMARIADBDB"
+    required: true
+  - name: YOURLS_DB_USER
+    default: "MYMARIADBUSER"
+    required: true
+  - name: YOURLS_DB_PASS
+    default: "MYMARIADBPASSWORD"
+    required: true
+  - name: YOURLS_DB_PREFIX
+    default: "yourls_"
+    required: false
+  - name: YOURLS_PRIVATE
+    default: "true"
+    required: false
+  # Set a random value in production. UNVERIFIED: whether YOURLS works with an empty cookie key.
+  - name: YOURLS_COOKIEKEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

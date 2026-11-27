@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8000'
+- port: '8001'
+# /exchanges/ returns the JSON list of enabled exchanges (upstream README); it needs no exchange keys.
+http:
+- port: '8000'
+  path: /exchanges/
+filePaths:
+- /app/crypto-exchanges-gateway/gateway.js
+# UNVERIFIED: license file name in the tarball.
+- /usr/share/licenses/crypto-exchanges-gateway/LICENSE

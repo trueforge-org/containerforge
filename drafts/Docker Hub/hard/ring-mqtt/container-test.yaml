@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '55123'
+- port: '8554'
+filePaths:
+- /start.sh
+- /app/ring-mqtt/ring-mqtt.js
+- /usr/local/bin/go2rtc
+- /usr/share/licenses/ring-mqtt

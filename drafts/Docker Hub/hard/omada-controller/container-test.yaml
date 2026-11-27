@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The Java controller and the embedded MongoDB start slowly.
+timeoutSeconds: 300
+tcp:
+- port: '8043'
+- port: '8088'
+- port: '8843'
+- port: '8044'
+- port: '29811'
+- port: '29812'
+- port: '29813'
+- port: '29814'
+- port: '29815'
+- port: '29816'
+- port: '29817'
+filePaths:
+- /app/omada/lib
+- /usr/local/bin/mongod
+- /usr/share/licenses/mongodb/LICENSE-Community.txt
+- /start.sh

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/damoeb/rss-proxy"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: APP_API_GATEWAY_URL
+    default: "http://localhost:8080"
+    required: false
+  - name: APP_HOST_URL
+    default: "http://localhost:8080"
+    required: false
+  - name: APP_ROOT_EMAIL
+    default: "admin@localhost"
+    required: false
+  - name: APP_JWT_SECRET
+    default: ""
+    required: false   # generated into /config/secrets.env on first start when unset
+  - name: APP_ROOT_SECRET_KEY
+    default: ""
+    required: false   # generated into /config/secrets.env on first start when unset
+  - name: APP_ACTUATOR_PASSWORD
+    default: ""
+    required: false   # generated into /config/secrets.env on first start when unset
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 120 is a placeholder, copy a multi-process sibling's value after the first run
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+filePaths:
+- /app/engine/start-engine
+- /app/engine/acestreamengine
+- /start.sh

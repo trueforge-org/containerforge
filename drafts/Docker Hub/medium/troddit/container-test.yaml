@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UNVERIFIED: HTTP status of `/` with no Reddit or auth configuration. If it is not 200, narrow the probe to the
+# status the app returns and say why in a comment. Do not remove the probe.
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /app/troddit/server.js
+- /app/troddit/.next/static
+- /usr/share/licenses/troddit/LICENSE

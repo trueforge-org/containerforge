@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+- port: '3001'
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /usr/bin/obs
+- /usr/lib/x86_64-linux-gnu/obs-plugins/distroav.so
+- /usr/share/licenses/obs-ndi/LICENSE
+- /kasmvnc-start.sh

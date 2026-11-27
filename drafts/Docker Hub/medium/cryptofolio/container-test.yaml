@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '80'
+http:
+- port: '80'
+  path: /
+filePaths:
+- /app/cryptofolio/api
+- /app/cryptofolio/website
+- /usr/share/licenses/cryptofolio/LICENSE.md

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  # UNVERIFIED: expected status for / (pwm may redirect to its setup page). Confirm on the first run; do not loosen the check.
+  path: /
+filePaths:
+- /app/tomcat/webapps/ROOT
+- /app/tomcat/bin/catalina.sh
+- /usr/share/licenses/pwm/LICENSE

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: the test has no network guarantee and no account link. If port 17500 does not open
+# before the account is linked, this tcp probe cannot pass. Escalate to maintainers, do not weaken it.
+timeoutSeconds: 240
+tcp:
+- port: '17500'
+filePaths:
+- /start.sh
+- /usr/share/licenses/dropbox-by-otherguy/README

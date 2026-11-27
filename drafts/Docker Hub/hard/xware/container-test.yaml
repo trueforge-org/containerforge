@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: whether port 9000 listens without Xunlei cloud access or activation.
+# If it does not, narrow this test (do not remove it silently).
+tcp:
+- port: '9000'
+filePaths:
+- /app/xware/portal
+- /app/xware/lib/ETMDaemon
+- /usr/share/licenses/xware/NOTICE

@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: expected exit code of `mosquitto_pub --help` and `fast --help`. Adjust to the observed value
+# rather than dropping the check.
+healthCommands:
+- command: test -f /tmp/fastcom-mqtt.ready
+- command: mosquitto_pub --help
+  expectedExitCode: 0
+- command: /app/fastcom/node_modules/.bin/fast --help
+
+filePaths:
+- /app/fastcom/node_modules/.bin/fast
+- /usr/bin/mosquitto_pub
+- /usr/bin/jq
+- /usr/share/licenses/fastcom-mqtt/LICENSE

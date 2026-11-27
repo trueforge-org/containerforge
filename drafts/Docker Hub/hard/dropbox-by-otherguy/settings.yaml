@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.dropbox.com/install"
+ports:
+  - port: 17500
+    protocol: tcp
+    # UNVERIFIED: role of this port (LAN sync is the assumption). Upstream only EXPOSEs it.
+    required: false
+env:
+  - name: DROPBOX_SKIP_UPDATE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

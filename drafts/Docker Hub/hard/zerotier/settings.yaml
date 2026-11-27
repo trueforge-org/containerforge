@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/zerotier/ZeroTierOne/"
+ports:
+  - port: 9993
+    protocol: udp
+    required: true
+  - port: 9993
+    protocol: tcp
+    # Local control API, bound to 127.0.0.1 only.
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ZEROTIER_API_SECRET
+    default: ""
+    required: false
+  - name: ZEROTIER_IDENTITY_PUBLIC
+    default: ""
+    required: false
+  - name: ZEROTIER_IDENTITY_SECRET
+    default: ""
+    required: false
+  - name: ZEROTIER_JOIN_NETWORKS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

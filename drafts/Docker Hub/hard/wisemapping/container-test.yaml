@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 180s is a starting value for Spring Boot plus embedded HSQLDB startup, tune after the first run
+timeoutSeconds: 180
+http:
+- port: '8080'
+  path: /health
+tcp:
+- port: '8080'
+filePaths:
+- /app/wisemapping-api.jar
+- /app/www/index.html
+- /usr/share/licenses/wisemapping/LICENSE.md

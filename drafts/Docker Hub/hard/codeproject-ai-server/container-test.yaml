@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The server starts modules after a short delay, and module installs need network. Allow a long startup.
+timeoutSeconds: 300
+tcp:
+- port: '32168'
+http:
+- port: '32168'
+  path: /
+filePaths:
+- /app/server/CodeProject.AI.Server.dll
+- /app/dotnet/dotnet
+- /usr/share/licenses/codeproject-ai-server/LICENCE.md

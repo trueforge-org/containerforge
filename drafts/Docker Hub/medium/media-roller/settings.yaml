@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rroller/media-roller"
+# No port is listed yet. The README suggests 3000, but the listen address is not confirmed in src/. Add the port and a probe together once confirmed.
+ports: []
+env:
+  - name: MR_DOWNLOAD_DIR
+    default: "/config/download"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

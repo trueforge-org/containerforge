@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.itsecgames.com/"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: DB_HOST
+    default: "mariadb"
+    required: true
+  - name: DB_NAME
+    default: "bwapp"
+    required: true
+  - name: DB_PASS
+    default: "MYMARIADBPASSWORD"
+    required: true
+  - name: DB_PORT
+    default: "3306"
+    required: false
+  - name: DB_USER
+    default: "MYMARIADBUSER"
+    required: true
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

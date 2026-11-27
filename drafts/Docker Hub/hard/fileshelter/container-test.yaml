@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '5091'
+http:
+- port: '5091'
+  path: /
+filePaths:
+- /usr/local/bin/fileshelter
+- /usr/local/share/fileshelter/approot
+- /defaults/fileshelter.conf
+- /start.sh

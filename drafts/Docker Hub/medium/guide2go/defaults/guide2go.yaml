@@ -1,0 +1,15 @@
+# Seed config, copied to /config/guide2go.yaml on first start only.
+# UNVERIFIED: keys follow the upstream mar-mei/guide2go sample config as described in the plan.
+# Check every key against upstream sample-config.yaml before merge.
+Account:
+  Username: ""
+  Password: ""
+Files:
+  Cache: /config/cache.json
+  XMLTV: /config/xmltv.xml
+Options:
+  Images Path: /config/images
+  Local Images Cache: false
+  Proxy Images: false
+  Hostname: localhost:8080
+Station: []

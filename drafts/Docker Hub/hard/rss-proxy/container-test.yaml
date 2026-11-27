@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# JVM startup is slow; 180 is a generous first value, compare with sibling java apps when porting.
+timeoutSeconds: 180
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/rss-proxy.jar
+- /app/public
+- /start.sh
+- /usr/share/licenses/rss-proxy/LICENSE

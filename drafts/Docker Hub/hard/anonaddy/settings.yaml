@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/anonaddy/anonaddy/"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: APP_KEY
+    default: ""
+    required: false   # generated into /config/.env on first start when unset
+  - name: APP_URL
+    default: ""
+    required: false   # left to the seeded .env when unset
+  - name: ANONADDY_DOMAIN
+    default: ""
+    required: false   # needed for real use, there is no safe default
+  - name: ANONADDY_SECRET
+    default: ""
+    required: false   # generated into /config/.env on first start when unset
+  - name: ANONADDY_ENABLE_REGISTRATION
+    default: ""
+    required: false   # left to the seeded .env when unset
+  - name: DB_HOST
+    default: ""
+    required: false   # needed for real use, the web UI runs without it but migrations are skipped
+  - name: DB_PORT
+    default: "3306"
+    required: false
+  - name: DB_DATABASE
+    default: ""
+    required: false   # left to the seeded .env when unset
+  - name: DB_USERNAME
+    default: ""
+    required: false   # left to the seeded .env when unset
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: DB_TIMEOUT
+    default: "60"
+    required: false   # seconds to wait for the database before skipping migrations
+  - name: QUEUE_CONNECTION
+    default: "sync"
+    required: false   # "redis" starts a queue worker
+  - name: REDIS_HOST
+    default: ""
+    required: false
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

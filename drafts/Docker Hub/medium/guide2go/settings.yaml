@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mar-mei/guide2go"
+# No port is opened by default. The 8080 image server only starts when the config enables image caching or proxying.
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: G2G_CONFIG
+    default: "/config/guide2go.yaml"
+    required: false
+  - name: G2G_INTERVAL
+    default: "86400"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

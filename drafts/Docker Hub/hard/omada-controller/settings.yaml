@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.tp-link.com/en/omada-sdn/"
+ports:
+  - port: 8043
+    protocol: tcp
+    required: true
+  - port: 8088
+    protocol: tcp
+    required: false
+  - port: 8843
+    protocol: tcp
+    required: false
+  - port: 8044
+    protocol: tcp
+    required: false
+  - port: 29811
+    protocol: tcp
+    required: false
+  - port: 29812
+    protocol: tcp
+    required: false
+  - port: 29813
+    protocol: tcp
+    required: false
+  - port: 29814
+    protocol: tcp
+    required: false
+  - port: 29815
+    protocol: tcp
+    required: false
+  - port: 29816
+    protocol: tcp
+    required: false
+  - port: 29817
+    protocol: tcp
+    required: false
+  - port: 19810
+    protocol: udp
+    required: false
+  - port: 27001
+    protocol: udp
+    required: false
+  - port: 29810
+    protocol: udp
+    required: false
+env:
+  - name: MANAGE_HTTP_PORT
+    default: "8088"
+    required: false
+  - name: MANAGE_HTTPS_PORT
+    default: "8043"
+    required: false
+  - name: PORTAL_HTTP_PORT
+    default: "8088"
+    required: false
+  - name: PORTAL_HTTPS_PORT
+    default: "8843"
+    required: false
+  - name: JAVA_MIN_HEAP_SIZE
+    default: "128"
+    required: false   # megabytes, number only
+  - name: JAVA_MAX_HEAP_SIZE
+    default: "1024"
+    required: false   # megabytes, number only
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

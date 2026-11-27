@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mickael-kerjean/filestash"
+ports:
+  - port: 8334
+    protocol: tcp
+    required: false
+env:
+  - name: FILESTASH_PORT
+    default: "8334"
+    required: false
+  - name: APPLICATION_URL
+    default: ""
+    required: false
+  - name: ADMIN_PASSWORD
+    default: ""
+    required: false
+  - name: CONFIG_SECRET
+    default: ""
+    required: false
+  - name: LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  []

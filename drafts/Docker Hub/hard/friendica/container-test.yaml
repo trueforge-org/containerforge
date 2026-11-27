@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Runs without a database. The web installer answers without local.config.php, so the page is not tested beyond the port.
+# UNVERIFIED: whether an http probe on / gives a useful answer without a database; upgrade the tcp probe if so.
+timeoutSeconds: 240
+tcp:
+- port: '8080'
+filePaths:
+- /app/www/index.php
+# UNVERIFIED path of the cron/worker entry point in 2026.05
+- /app/www/bin/worker.php
+- /defaults/nginx.conf
+- /defaults/php-fpm.conf

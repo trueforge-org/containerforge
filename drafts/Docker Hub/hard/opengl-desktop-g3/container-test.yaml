@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+- port: '3001'
+filePaths:
+- /start.sh
+- /kasmvnc-start.sh
+- /defaults/autostart
+- /usr/share/licenses/opengl-desktop-g3
+# UNVERIFIED: vglrun may sit under /opt/VirtualGL/bin with symlinks; check dpkg -L virtualgl.
+- /usr/bin/vglrun

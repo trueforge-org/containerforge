@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# No ports: this image is a directory watcher, so the test checks the binaries and scripts only.
+filePaths:
+- /usr/bin/ffmpeg
+- /usr/bin/mkvmerge
+- /usr/bin/inotifywait
+- /app/mkvdts2ac3.sh
+- /start.sh
+- /scripts/process-file.sh
+- /scripts/encode.sh
+runners:
+- entrypoint: ffmpeg -version
+- entrypoint: mkvmerge --version

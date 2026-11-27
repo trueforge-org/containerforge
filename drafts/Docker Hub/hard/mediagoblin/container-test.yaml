@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# SQLite is the default, so no database service is needed here. The ADMIN_PASSWORD path is not covered
+# by this run (it runs with a generated password). Check it by hand.
+timeoutSeconds: 180
+tcp:
+- port: '6543'
+http:
+- port: '6543'
+  path: /
+filePaths:
+- /app/venv/bin/gmg
+- /app/venv/bin/paster
+- /usr/share/licenses/mediagoblin/COPYING
+- /start.sh

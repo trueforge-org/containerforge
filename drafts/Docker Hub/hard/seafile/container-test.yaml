@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# narrowed: requires external mariadb and valkey; full functional test not feasible in single-container suite
+tcp:
+- port: '8080'
+filePaths:
+- /start.sh
+- /app/seafile-server
+- /app/venv/bin/python
+- /app/venv/bin/gunicorn
+- /defaults/nginx.conf

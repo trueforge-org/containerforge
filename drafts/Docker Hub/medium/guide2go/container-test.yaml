@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+# UNVERIFIED: mainRunner.enabled=false together with filePaths is accepted by forgetool.
+mainRunner:
+  enabled: false
+runners:
+  - entrypoint: /app/guide2go
+    cmd: -h
+    exitCode: 0
+filePaths:
+  - /app/guide2go
+  - /defaults/guide2go.yaml
+  - /usr/share/licenses/guide2go/LICENSE

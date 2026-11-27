@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8334'
+http:
+- port: '8334'
+  path: /healthz
+filePaths:
+- /app/filestash/filestash
+- /usr/share/licenses/filestash/LICENSE
+- /usr/bin/ffmpeg

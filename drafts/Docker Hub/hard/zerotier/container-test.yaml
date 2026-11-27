@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# The test runs with no env, no NET_ADMIN and no /dev/net/tun. The daemon should still start and serve the
+# local API. UNVERIFIED: the healthCommands result depends on the daemon being up before the check.
+# The UDP 9993 listener is not probed (no UDP probe type in the schema).
+timeoutSeconds: 180
+
+tcp:
+- port: '9993'
+
+healthCommands:
+- command: zerotier-cli info
+
+filePaths:
+- /start.sh
+- /usr/sbin/zerotier-one
+- /usr/share/licenses/zerotier/LICENSE.txt

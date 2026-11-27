@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/wisemapping/wisemapping-open-source/"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: JAVA_OPTS
+    default: "-XX:InitialRAMPercentage=60 -XX:MaxRAMPercentage=60"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Read by start.sh (ContainerForge names, not upstream). Empty URL = embedded HSQLDB, dev/test only.
+  - name: WISEMAPPING_DB_URL
+    default: ""
+    required: false
+  - name: WISEMAPPING_DB_USER
+    default: "wisemapping"
+    required: false
+  - name: WISEMAPPING_DB_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  # Required for production use; not enforced when WISEMAPPING_DB_URL is empty
+  - name: postgresql

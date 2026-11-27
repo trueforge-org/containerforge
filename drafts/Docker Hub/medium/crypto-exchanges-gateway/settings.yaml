@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/aloysius-pgast/crypto-exchanges-gateway"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+  - port: 8001
+    protocol: tcp
+    required: false
+env:
+  # Names from the upstream Dockerfile ENV block (master). Confirm them at the pinned tag before release.
+  - name: cfg.auth.apikey
+    default: ""
+    required: false
+  - name: cfg.listen.externalEndpoint
+    default: ""
+    required: false
+  - name: cfg.listenWs.externalEndpoint
+    default: ""
+    required: false
+  - name: cfg.sessions.maxSubscriptions
+    default: "0"
+    required: false
+  - name: cfg.sessions.maxDuration
+    default: "0"
+    required: false
+  - name: cfg.pushover.user
+    default: ""
+    required: false
+  - name: cfg.pushover.token
+    default: ""
+    required: false
+  - name: cfg.tickerMonitor.enabled
+    default: "1"
+    required: false
+  - name: cfg.marketCap.enabled
+    default: "1"
+    required: false
+  - name: cfg.fxConverter.enabled
+    default: "1"
+    required: false
+  # UNVERIFIED: per-exchange enabled, key, secret and password variables (poloniex, bittrex, binance, kucoin, okex) are not listed yet.
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

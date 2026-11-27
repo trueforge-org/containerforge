@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+filePaths:
+  - /app/media-roller
+  - /usr/local/bin/yt-dlp
+  - /usr/bin/ffmpeg
+runners:
+  - entrypoint: /usr/local/bin/yt-dlp
+    cmd: --version
+    expectedOutput: 2026.11.23

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Session script for the Xtigervnc display :1, seeded into /config/.vnc on first start.
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+exec dbus-launch --exit-with-session startxfce4

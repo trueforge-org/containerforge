@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/teslamate-org/teslamate"
+ports:
+  - port: 4000
+    protocol: tcp
+    required: false
+env:
+  - name: CHECK_ORIGIN
+    default: "false"
+    required: false
+  - name: DATABASE_HOST
+    default: "postgresql"
+    required: true
+  - name: DATABASE_NAME
+    default: "teslamate"
+    required: true
+  - name: DATABASE_PASS
+    default: "MYPOSTGRESPASSWORD"
+    required: true
+  - name: DATABASE_PORT
+    default: "5432"
+    required: false
+  - name: DATABASE_USER
+    default: "teslamate"
+    required: true
+  - name: DISABLE_MQTT
+    default: "false"
+    required: false
+  - name: ENCRYPTION_KEY
+    default: ""
+    required: true
+  - name: MQTT_HOST
+    default: "mosquitto"
+    required: false
+  - name: MQTT_PORT
+    default: "1883"
+    required: false
+  - name: PORT
+    default: "4000"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: VIRTUAL_HOST
+    default: "localhost"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql
+  - name: mosquitto

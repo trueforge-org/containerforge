@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Desktop start is slow; 120 is a guess, raise it if the first runs time out.
+timeoutSeconds: 120
+tcp:
+- port: '5901'
+http:
+- port: '6901'
+  path: /vnc.html
+filePaths:
+- /usr/bin/inkscape
+- /start.sh
+- /usr/share/licenses/inkscape-desktop-g3/inkscape-copyright

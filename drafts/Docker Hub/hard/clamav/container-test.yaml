@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# clamd only binds 3310 after the signature database is downloaded, so this needs outbound access on the test runner
+timeoutSeconds: 300
+tcp:
+- port: '3310'
+runners:
+- entrypoint: clamd --version
+- entrypoint: freshclam --version
+filePaths:
+# UNVERIFIED install path inside the vendor .deb (confirm with dpkg -c)
+- /usr/bin/clamscan

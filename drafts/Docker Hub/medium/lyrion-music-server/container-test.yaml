@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 180s is a starting value for a Perl server that loads many modules. Compare with sibling apps.
+timeoutSeconds: 180
+# No probe for 3483/udp: tcp probes cannot test UDP. Discovery is checked by hand.
+tcp:
+- port: '3483'
+- port: '9000'
+- port: '9090'
+http:
+- port: '9000'
+  path: /
+filePaths:
+- /app/lyrion-music-server
+- /usr/share/licenses/lyrion-music-server/copyright

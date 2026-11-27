@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: the server may need a different data path. Check the real path before relying on this test.
+# The UDP 16891 port has no probe type in the schema and is not tested here.
+timeoutSeconds: 240
+tcp:
+- port: '8866'
+filePaths:
+- /app/nextpvr/NextPVRServer.dll
+- /app/nextpvr/NextPVRServer.runtimeconfig.json
+- /usr/share/licenses/nextpvr/LICENSE.txt
+- /start.sh
+runners:
+- entrypoint: dotnet --list-runtimes
+- entrypoint: test -x /usr/bin/ffmpeg

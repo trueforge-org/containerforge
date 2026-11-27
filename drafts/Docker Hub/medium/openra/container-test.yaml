@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# tcp runs inside the container, so it does not prove another container can connect. Check that from outside by hand.
+tcp:
+- port: '1234'
+filePaths:
+- /app/openra
+- /usr/share/licenses/openra/COPYING

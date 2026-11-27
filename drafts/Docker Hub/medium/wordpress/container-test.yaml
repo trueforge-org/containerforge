@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# narrowed: requires external mariadb, which the single-container suite does not provide. The / response may be a
+# database error page (UNVERIFIED status). A full functional test is not feasible here; verify manually with apps/mariadb.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/www/index.php
+- /app/www/wp-settings.php
+- /usr/share/licenses/wordpress/LICENSE

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://inkscape.org/"
+ports:
+  - port: 6901
+    protocol: tcp
+    required: true
+  - port: 5901
+    protocol: tcp
+    required: false
+env:
+  - name: VNC_PW
+    default: ""
+    required: false   # empty: a random password is generated and logged once per start
+  - name: VNC_RESOLUTION
+    default: "1360x768"
+    required: false
+  - name: VNC_COL_DEPTH
+    default: "24"
+    required: false
+  - name: VNC_PORT
+    default: "5901"
+    required: false
+  - name: NOVNC_PORT
+    default: "6901"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Openbox autostart. Seeded to /config/.config/openbox/autostart only when missing.
+# Opens a terminal and records the active OpenGL renderer so the setup can be checked.
+# UNVERIFIED: that openbox runs this file from the seeded location in the base image.
+
+xterm -geometry 100x30+50+50 &
+( glxinfo -B > /tmp/glxinfo.txt 2>&1 || true ) &

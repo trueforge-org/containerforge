@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://nextpvr.com"
+ports:
+  - port: 8866
+    protocol: tcp
+    required: false
+  - port: 16891
+    protocol: udp
+    # UNVERIFIED: which feature uses this port.
+    required: false
+env:
+  - name: HOST_IP
+    # Only needed for legacy HDHomeRun, per the official Docker docs.
+    default: ""
+    required: false
+  - name: TZ
+    # UNVERIFIED: the server may not read TZ itself. glibc honours it for the process.
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /recordings
+    required: false
+  - path: /buffer
+    required: false
+dependencies: []

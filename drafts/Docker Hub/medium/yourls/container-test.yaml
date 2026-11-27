@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# narrowed: requires external mariadb; the install check and DB-backed pages are not exercised without env vars
+tcp:
+- port: '8080'
+# UNVERIFIED: status returned for /admin/ without a database; adjust if it is not 200 or 302
+http:
+- port: '8080'
+  path: /admin/
+filePaths:
+- /app/yourls/index.php
+- /app/yourls/includes/load-yourls.php
+- /usr/share/licenses/yourls/LICENSE

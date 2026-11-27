@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nimarion/promcord"
+ports:
+  []
+env:
+  # Discord bot token, supplied at runtime. No default: a real token must never be baked in.
+  # required is false so the image starts without it (the container tests set no env).
+  - name: DISCORD_TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  []

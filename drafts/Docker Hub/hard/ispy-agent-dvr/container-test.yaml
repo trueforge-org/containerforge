@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UDP ports 3478 and 50000-50100 are not probed here (tcp and http checks only). UNVERIFIED whether forgetool has a UDP probe.
+tcp:
+- port: '8090'
+http:
+- port: '8090'
+  path: /
+filePaths:
+- /app/Agent
+- /usr/share/licenses/ispy-agent-dvr/NOTICE
+- /start.sh

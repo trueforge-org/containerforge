@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# /health returns 503 while the server starts and 200 once it is running (upstream endpoints doc).
+timeoutSeconds: 180
+tcp:
+  - port: '8080'
+http:
+  - port: '8080'
+    path: /health
+filePaths:
+  - /app/tileserver-gl/node_modules/tileserver-gl/src/main.js

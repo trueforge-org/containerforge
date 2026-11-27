@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/LMS-Community/slimserver"
+ports:
+  - port: 3483
+    protocol: tcp
+    required: false
+  - port: 3483
+    protocol: udp
+    required: false
+  - port: 9000
+    protocol: tcp
+    required: false
+  - port: 9090
+    protocol: tcp
+    required: false
+env:
+  - name: HTTP_PORT
+    default: "9000"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /music
+    required: false
+  - path: /playlist
+    required: false

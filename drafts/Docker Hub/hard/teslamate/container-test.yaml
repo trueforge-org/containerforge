@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+timeoutSeconds: 120
+tcp:
+- port: '4000'
+filePaths:
+- /app/teslamate/bin/teslamate
+- /start.sh

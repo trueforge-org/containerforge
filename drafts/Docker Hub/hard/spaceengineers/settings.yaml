@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.spaceengineersgame.com/"
+ports:
+  - port: 27016
+    protocol: udp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: INSTANCE_NAME
+    default: "SpaceEngineers"
+    required: false
+  - name: PUBLIC_IP
+    default: ""
+    required: false
+  - name: WINEDEBUG
+    default: "-all"
+    required: false
+volumes:
+  - path: /config
+    required: true

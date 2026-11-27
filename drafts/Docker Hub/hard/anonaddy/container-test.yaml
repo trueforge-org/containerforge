@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: the app depends on mariadb and serves errors without it. The DB path is run by hand
+# (see the build and test protocol) because the single-container suite has no sidecar.
+# UNVERIFIED: check the forgetool schema for a sidecar or services field before accepting this exception.
+timeoutSeconds: 240
+tcp:
+- port: '8000'
+filePaths:
+- /app/www/artisan
+- /app/www/public/index.php
+- /usr/share/licenses/anonaddy/LICENSE
+- /start.sh

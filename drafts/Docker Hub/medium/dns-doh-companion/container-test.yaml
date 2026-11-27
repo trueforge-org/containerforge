@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '5053'
+# UNVERIFIED: healthCommands syntax and the UDP check (5053 = 0x13BD in /proc/net/udp); confirm against the forgetool schema.
+healthCommands:
+- command: grep -qi ':13BD ' /proc/net/udp /proc/net/udp6
+filePaths:
+- /app/cloudflared
+- /usr/share/licenses/dns-doh-companion/LICENSE

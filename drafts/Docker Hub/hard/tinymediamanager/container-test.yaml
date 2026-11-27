@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+- port: '3001'
+filePaths:
+- /app/tinyMediaManager/tinyMediaManager
+- /app/tinyMediaManager/tmm.jar
+- /usr/share/licenses/tinymediamanager/LICENSE
+- /defaults/autostart

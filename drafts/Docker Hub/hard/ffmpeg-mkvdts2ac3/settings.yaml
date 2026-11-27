@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://ffmpeg.org"
+# Directory watcher: no ports.
+ports:
+  []
+# Names are lowercase to match the Docker Hub image, so existing env files still work.
+env:
+  - name: script
+    default: "mkvdts2ac3.sh"
+    required: false
+  - name: parameters
+    default: ""
+    required: false
+  - name: output_format
+    default: "mkv"
+    required: false
+  - name: mkvdts2ac3_params
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /watch
+    required: false
+  - path: /output
+    required: false
+  - path: /copy
+    required: false

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The first start downloads the server with SteamCMD (several GB) and sets up Wine, so the timeout is long.
+# This needs network access in CI. Do not turn the assertion into a no-op if CI is offline.
+timeoutSeconds: 600
+healthCommands:
+- command: bash -c 'ss -lun | grep -q ":27016 "'
+runners:
+- entrypoint: wine --version
+- entrypoint: test -x /usr/local/bin/steamcmd
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd

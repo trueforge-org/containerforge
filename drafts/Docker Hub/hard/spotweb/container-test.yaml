@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /install.php
+filePaths:
+- /start.sh
+- /app/www/index.php
+- /app/www/retrieve.php
+- /usr/share/licenses/spotweb/LICENSE.md
+- /defaults/nginx.conf
+- /defaults/php-fpm.conf
+runners:
+- entrypoint: php --version

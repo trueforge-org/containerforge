@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# Narrowed: the app needs external postgresql and valkey, so the tcp 3333 probe and a full run are not
+# possible in this single-container suite. The manual run in the plan covers that.
+# UNVERIFIED: confirm main.js is the built entrypoint name after the first build.
+timeoutSeconds: 240
+mainRunner:
+  enabled: false
+
+runners:
+- entrypoint: test -f /app/ghostfolio/apps/api/main.js
+- entrypoint: test -x /start.sh
+- entrypoint: node --version
+
+filePaths:
+- /start.sh
+- /usr/share/licenses/ghostfolio/LICENSE

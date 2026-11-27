@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/epoupon/fileshelter"
+ports:
+  - port: 5091
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Image convention, mapped into the runtime config by start.sh (the app itself reads no env vars).
+  - name: FILESHELTER_UPLOAD_PASSWORDS
+    default: ""
+    required: false
+  - name: FILESHELTER_MAX_SHARE_SIZE
+    default: "100"
+    required: false
+  - name: FILESHELTER_BEHIND_REVERSE_PROXY
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

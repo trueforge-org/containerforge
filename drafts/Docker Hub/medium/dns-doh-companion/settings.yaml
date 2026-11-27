@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/cloudflare/cloudflared"
+ports:
+  - port: 5053
+    protocol: tcp
+    required: true
+  - port: 5053
+    protocol: udp
+    required: true
+env:
+  - name: TUNNEL_DNS_PORT
+    default: "5053"
+    required: false
+  - name: TUNNEL_DNS_ADDRESS
+    default: "0.0.0.0"
+    required: false
+  # Wrapper variable read by start.sh (space-separated list); not an upstream cloudflared variable.
+  - name: DOH_UPSTREAMS
+    default: "https://1.1.1.1/dns-query https://1.0.0.1/dns-query"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

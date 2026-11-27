@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+# narrowed: requires external mongodb (MONGO_URL); full functional test not feasible in single-container suite
+tcp:
+- port: '8080'
+# UNVERIFIED: whether / returns 200 before MongoDB is reachable; if not, keep the tcp probe and narrow the http one.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /build/node
+- /build/wekan-entrypoint.sh
+- /usr/share/licenses/wekan/LICENSE
