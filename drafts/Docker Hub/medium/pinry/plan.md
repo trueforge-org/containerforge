@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Latest GitHub release `v2.1.14`, published 2026-11-23. Source: https://api.github.com/repos/pinry/pinry/releases/latest. Draft ships `getpinry/pinry:2.1.13` (Docker Hub last updated 2024-10-03). Build `2.1.14`, not 2.1.13. |
+| Version to build | Latest GitHub release `v2.1.15`, published 2026-11-26. Source: https://api.github.com/repos/pinry/pinry/releases/latest. Draft ships `getpinry/pinry:2.1.13` (Docker Hub last updated 2024-10-03). Build `2.1.14`, not 2.1.13. |
 | Draft binary (`pip:pinry`) | **Not usable.** PyPI `pinry` latest is `1.3.2`, uploaded 2013-09-26, Simplified BSD, sdist only, no wheel. Source: https://pypi.org/pypi/pinry/json. Do not install from PyPI. |
 | Renovate | `datasource=github-releases depName=pinry/pinry versioning=semver` (standard form; not fetched from a renovate config) |
 | License | BSD-2-Clause (GitHub SPDX). Source: https://api.github.com/repos/pinry/pinry |
