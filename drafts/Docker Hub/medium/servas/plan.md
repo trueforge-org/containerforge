@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Latest release `v1.2.0` (published 2026-11-20). The TrueCharts chart pins `beromir/servas:1.1.3` (`v1.1.3`, published 2026-10-28, Docker Hub tag pushed 2026-10-28). Decision needed: build `1.2.0` (latest, recommended) or `1.1.3` (chart parity). This plan uses `1.2.0`. |
+| Version to build | Latest release `v1.2.0` (published 2026-11-20). The TrueCharts chart pins `beromir/servas:1.2.0@sha256:662b0d8f...` (chart `appVersion` 1.2.0; <https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/servas/values.yaml>). `v1.1.3` was published 2026-10-28. This plan uses `1.2.0`, which matches the chart. |
 | Renovate | `datasource=github-releases depName=beromir/Servas versioning=semver` (convention; repo renovate config not fetched) |
 | License | GPL-3.0 (GitHub API SPDX `GPL-3.0`; https://api.github.com/repos/beromir/Servas/license). |
 | Source URL | https://github.com/beromir/Servas |
@@ -133,7 +133,7 @@ filePaths:
 ## 10. Risks, caveats and open questions
 
 - Runtime choice (section 3) is open. The draft's apt PHP plan does not match upstream FrankenPHP.
-- Version: the chart is on `1.1.3`; latest is `1.2.0`, whose base images moved to PHP 8.5 and FrankenPHP 1.13.6. Decide the target version (section 1).
+- Version: the chart is on `1.2.0` (values.yaml tag); `1.2.0` is the target. Its base images moved to PHP 8.5 and FrankenPHP 1.13.6 relative to `1.1.3`.
 - Port: `80` upstream, `8080` in this plan. Chart service port must match, and downstream chart work is outside this PR.
 - Arm64: the draft's `yes*` is unconfirmed as a ContainerForge build (the Docker Hub image is multi-arch, but the ContainerForge build path is not). Recheck with an arm64 build if the amd64 build succeeds.
 - DB: external MariaDB or SQLite. Without a DB the sqlite path must work; test it.
