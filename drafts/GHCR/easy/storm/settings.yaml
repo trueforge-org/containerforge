@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/relvacode/storm"
+ports:
+  - port: 8221
+    protocol: tcp
+    required: true
+env:
+  - name: LISTEN_ADDR
+    default: "0.0.0.0:8221"
+    required: false
+  - name: STORM_BASE_PATH
+    default: "/"
+    required: false
+  # Storm needs a reachable Deluge daemon (RPC enabled, allow_remote true) to be
+  # useful, but it is not required to start. The DELUGE_RPC_* defaults are left
+  # empty. The TrueCharts chart uses port 58846, but the upstream default is UNVERIFIED.
+  - name: DELUGE_RPC_HOSTNAME
+    default: ""
+    required: false
+  - name: DELUGE_RPC_PORT
+    default: ""
+    required: false
+  - name: DELUGE_RPC_USERNAME
+    default: ""
+    required: false
+  - name: DELUGE_RPC_PASSWORD
+    default: ""
+    required: false
+  - name: DELUGE_RPC_VERSION
+    default: "v1"
+    required: false
+  - name: STORM_API_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes: []
+dependencies:
+  - name: deluge

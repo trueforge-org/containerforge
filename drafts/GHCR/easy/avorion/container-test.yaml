@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: first start downloads the server from Steam and the Steam app id is still UNVERIFIED, so no run or port probe is possible yet.
+filePaths:
+- /scripts/avorion-start.sh
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh

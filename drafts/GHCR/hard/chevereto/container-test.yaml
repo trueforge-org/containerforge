@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+# UNVERIFIED: / may redirect to the install page. Accept only a status the app really returns (plan section 8).
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/chevereto/index.php
+- /app/chevereto/app
+- /usr/share/licenses/chevereto/LICENSE

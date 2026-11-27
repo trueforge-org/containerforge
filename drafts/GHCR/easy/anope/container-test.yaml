@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+filePaths:
+- /start.sh
+- /usr/bin/anope # UNVERIFIED path of the apt binary
+- /defaults/services.conf
+- /usr/share/licenses/anope/copyright

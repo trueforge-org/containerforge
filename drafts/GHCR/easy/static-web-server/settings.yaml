@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/static-web-server/static-web-server"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: SERVER_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: SERVER_PORT
+    default: "8080"
+    required: false
+  - name: SERVER_ROOT
+    default: "/config/public"
+    required: false
+  - name: SERVER_LOG_LEVEL
+    default: "error"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

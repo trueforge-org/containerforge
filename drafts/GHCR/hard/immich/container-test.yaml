@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+tcp:
+- port: '2283'  # narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
+http:
+- port: '2283'
+  path: /  # narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
+filePaths:
+- /app/immich/server
+- /app/immich/web
+- /usr/share/licenses/immich/LICENSE

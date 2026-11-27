@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/bitmagnet-io/bitmagnet"
+ports:
+  - port: 3333
+    protocol: tcp
+    required: true
+  - port: 3334
+    protocol: tcp
+    required: false
+  - port: 3334
+    protocol: udp
+    required: false
+env:
+  # Database variables. POSTGRES_HOST and POSTGRES_PASSWORD are named by both the
+  # upstream compose example and the TrueCharts chart. The chart also uses
+  # POSTGRES_NAME and POSTGRES_USER, and the compose example uses POSTGRES_DB, so
+  # the real names are UNVERIFIED. Confirm against the config reader before merge.
+  - name: POSTGRES_HOST
+    default: ""
+    required: false
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: false
+  # Optional, documented upstream.
+  - name: TMDB_API_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql

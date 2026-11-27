@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: startup runs migrations, so this is set higher than a plain web app. Compare with the largest Python sibling.
+timeoutSeconds: 180
+tcp:
+- port: '4848'
+# UNVERIFIED: the app may reject a request with the wrong Host header. Check after the first run.
+http:
+- port: '4848'
+  path: /
+# ffmpeg is not in filePaths yet because the ffmpeg step is still a TODO in the Dockerfile.
+filePaths:
+- /start.sh
+- /app/tubesync/manage.py
+- /app/venv/bin/python
+- /usr/share/licenses/tubesync/LICENSE

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/amule-org/amule"
+ports:
+  - port: 4711
+    protocol: tcp
+    required: true
+  - port: 4712
+    protocol: tcp
+    required: false
+  - port: 4662
+    protocol: tcp
+    required: true
+  - port: 4665
+    protocol: udp
+    required: false
+  - port: 4672
+    protocol: udp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  []

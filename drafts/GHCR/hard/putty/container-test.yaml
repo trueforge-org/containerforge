@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '5900'
+- port: '5800'
+http:
+- port: '5800'
+  path: /vnc.html
+filePaths:
+- /start.sh
+- /usr/bin/putty

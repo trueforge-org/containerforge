@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '8886'
+# UNVERIFIED: 22330 may open only after startup. Keep this probe only if the first run shows it listening (plan.md section 8).
+- port: '22330'
+http:
+- port: '8886'
+  path: /
+
+filePaths:
+- /app/verysync/verysync
+- /usr/share/licenses/verysync/LICENSE

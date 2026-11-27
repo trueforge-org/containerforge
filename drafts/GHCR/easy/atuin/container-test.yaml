@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /start.sh
+- /app/atuin/atuin-server
+- /config
+tcp:
+# narrowed: requires external postgresql (ATUIN_DB_URI); full functional test not feasible in single-container suite
+- port: '8888'

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/unpoller/unpoller"
+ports:
+  - port: 9130
+    protocol: tcp
+    required: true
+env:
+  # UP_ prefix per upstream config mapping. Names are taken from the TrueCharts
+  # chart. Upstream docs were not fetched, so confirm them before merge.
+  - name: UP_PROMETHEUS_DISABLE
+    default: "false"
+    required: false
+  - name: UP_UNIFI_DEFAULT_URL
+    default: ""
+    required: false
+  - name: UP_UNIFI_DEFAULT_USER
+    default: ""
+    required: false
+  - name: UP_UNIFI_DEFAULT_PASS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

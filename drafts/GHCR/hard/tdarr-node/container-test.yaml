@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: the node needs an external Tdarr server, and settings.yaml lists no ports, so only file checks run here.
+timeoutSeconds: 120
+filePaths:
+- /start.sh
+- /app/tdarr-node/Tdarr_Node # UNVERIFIED binary name, taken from the upstream self-test path

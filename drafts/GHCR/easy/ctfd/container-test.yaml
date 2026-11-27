@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the expected HTTP status of / on first run (the setup wizard) is not confirmed. Check it on a real run.
+timeoutSeconds: 180
+http:
+- port: '8000'
+  path: /
+tcp:
+- port: '8000'
+
+filePaths:
+- /start.sh
+- /app/CTFd/CTFd/__init__.py

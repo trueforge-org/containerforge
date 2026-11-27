@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is a guess for monerod startup before listeners bind; set from the first real run.
+timeoutSeconds: 300
+tcp:
+- port: '18080'
+- port: '18089'
+filePaths:
+- /app/monero/monerod
+- /usr/share/licenses/monero-node/LICENSE

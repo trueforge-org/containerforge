@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/BeryJu/gravity"
+ports:
+  - port: 8008
+    protocol: tcp
+    required: false
+env:
+  # UNVERIFIED: the binary must read this name (plan section 6).
+  - name: INSTANCE_LISTEN
+    default: "0.0.0.0"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /data
+    required: false
+dependencies: []

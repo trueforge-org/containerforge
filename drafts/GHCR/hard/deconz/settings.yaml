@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/dresden-elektronik/deconz-rest-plugin"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+  - port: 8443
+    protocol: tcp
+    required: false
+env:
+  - name: DECONZ_WEB_PORT
+    default: "8080"
+    required: false
+  - name: DECONZ_WS_PORT
+    default: "8443"
+    required: false
+  - name: DECONZ_UPNP
+    default: "0"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

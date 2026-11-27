@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rustdesk/rustdesk-server"
+ports:
+  - port: 21115
+    protocol: tcp
+    required: false
+  - port: 21116
+    protocol: tcp
+    required: true
+  - port: 21116
+    protocol: udp
+    required: true
+  - port: 21117
+    protocol: tcp
+    required: true
+  - port: 21118
+    protocol: tcp
+    required: false
+  - port: 21119
+    protocol: tcp
+    required: false
+env:
+  # Empty here, not the upstream relay.example.com, so no fake relay is advertised.
+  - name: RELAY
+    default: ""
+    required: false
+  # UNVERIFIED: whether hbbs or hbbr reads this name (plan section 1).
+  - name: ENCRYPTED_ONLY
+    default: "0"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

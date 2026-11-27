@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '8080'
+
+filePaths:
+- /app/static-web-server
+# UNVERIFIED: this file exists only after start.sh has run. Check whether forgetool runs the entrypoint before filePaths is checked.
+- /config/public/index.html

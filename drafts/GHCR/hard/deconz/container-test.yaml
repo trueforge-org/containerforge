@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: the http path and status are not confirmed against the running gateway.
+# UNVERIFIED: 8443 may bind late; raise timeoutSeconds rather than dropping the probe.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+- port: '8443'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /usr/bin/deCONZ
+- /start.sh

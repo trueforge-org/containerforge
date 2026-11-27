@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/shundhammer/qdirstat"
+# UNVERIFIED: 5800 (noVNC) and 5900 (VNC) follow the jlesage GUI convention and the TrueCharts chart.
+ports:
+  - port: 5800
+    protocol: tcp
+    required: false
+  - port: 5900
+    protocol: tcp
+    required: false
+env:
+  - name: QDIRSTAT_STARTUP_SCAN_FOLDER
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /storage
+    required: false
+dependencies: []

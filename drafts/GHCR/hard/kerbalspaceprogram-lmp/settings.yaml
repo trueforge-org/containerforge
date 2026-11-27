@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/LunaMultiplayer/LunaMultiplayer"
+# UNVERIFIED: 8800/udp comes from the TrueCharts chart; the server's own listening port is not confirmed.
+ports:
+  - port: 8800
+    protocol: udp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

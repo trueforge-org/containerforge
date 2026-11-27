@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/CTFd/CTFd"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Generated into /config/.secret_key on first start when empty (start.sh).
+  - name: SECRET_KEY
+    default: ""
+    required: false
+  - name: WORKERS
+    default: "1"
+    required: false
+  - name: WORKER_CLASS
+    default: "gevent"
+    required: false
+  - name: WORKER_TEMP_DIR
+    default: "/tmp"
+    required: false
+  - name: ACCESS_LOG
+    default: "-"
+    required: false
+  - name: ERROR_LOG
+    default: "-"
+    required: false
+  - name: SKIP_DB_PING
+    default: "false"
+    required: false
+  - name: UPLOAD_FOLDER
+    default: "/config/uploads"
+    required: false
+  - name: LOG_FOLDER
+    default: "/config/logs"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: valkey

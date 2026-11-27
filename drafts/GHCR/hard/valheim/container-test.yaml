@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The server is downloaded from Steam on first start, so this needs Steam access and a long timeout.
+# UNVERIFIED: no tcp probe, because the game ports are UDP and a tcp probe does not test them.
+timeoutSeconds: 1800
+filePaths:
+- /start.sh
+- /usr/share/licenses/valheim/LICENSE
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120  # UNVERIFIED: tune on the first run
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /api/health  # health endpoint used by the upstream chart probes
+filePaths:
+- /app/bin/scrutiny-web
+- /app/bin/scrutiny-collector-metrics
+- /usr/sbin/smartctl
+- /usr/share/licenses/scrutiny/LICENSE

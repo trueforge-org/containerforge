@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: timeoutSeconds is a starting value; the app may need longer on first start.
+timeoutSeconds: 180
+tcp:
+- port: '8091'
+filePaths:
+- /app/zwave-js-ui/server/bin/www
+- /usr/share/licenses/zwavejs2mqtt/LICENSE
+- /start.sh

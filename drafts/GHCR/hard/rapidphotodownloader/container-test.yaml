@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /vnc.html
+filePaths:
+- /start.sh
+- /usr/share/novnc/vnc.html
+- /usr/bin/rapid-photo-downloader

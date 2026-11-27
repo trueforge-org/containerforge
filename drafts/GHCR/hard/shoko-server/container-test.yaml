@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300  # matches the upstream HEALTHCHECK --start-period=5m; tune on the first run (UNVERIFIED)
+tcp:
+- port: '8111'
+http:
+- port: '8111'
+  path: /api/v3/Init/Status
+filePaths:
+- /app/shoko-server/Shoko.CLI
+- /app/dotnet/dotnet
+- /usr/bin/mediainfo
+- /usr/share/licenses/shoko-server/LICENSE

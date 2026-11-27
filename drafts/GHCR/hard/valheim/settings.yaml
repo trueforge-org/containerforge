@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.valheimgame.com/"
+ports:
+  - port: 2456
+    protocol: udp
+    required: true
+  - port: 2457
+    protocol: udp
+    required: true
+env:
+  - name: SERVER_NAME
+    default: "My Server"
+    required: false
+  - name: WORLD_NAME
+    default: "Dedicated"
+    required: false
+  - name: SERVER_PORT
+    default: "2456"
+    required: false
+  - name: SERVER_PASS
+    default: ""
+    required: false
+  - name: SERVER_PUBLIC
+    default: "true"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

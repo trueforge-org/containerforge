@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# the first start runs prisma migrate deploy and a large Node server, so the timeout is long
+timeoutSeconds: 600
+tcp:
+- port: '3001'
+# UNVERIFIED: the expected status of / before the first run.
+http:
+- port: '3001'
+  path: /
+filePaths:
+- /start.sh
+- /app/server/index.js

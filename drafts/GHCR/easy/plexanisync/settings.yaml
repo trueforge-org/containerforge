@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/RickDB/PlexAniSync"
+ports: []
+env:
+  # Credentials are optional at start. Without them the sync fails and retries
+  # each interval. They are used to generate a settings.ini in /tmp on each start
+  # unless /config/settings.ini exists.
+  - name: PLEX_SECTION
+    default: "Anime"
+    required: false
+  - name: PLEX_URL
+    default: "http://127.0.0.1:32400"
+    required: false
+  - name: PLEX_TOKEN
+    default: ""
+    required: false
+  - name: ANI_USERNAME
+    default: ""
+    required: false
+  - name: ANI_TOKEN
+    default: ""
+    required: false
+  - name: INTERVAL
+    default: "3600"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

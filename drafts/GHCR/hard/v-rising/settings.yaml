@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://playvrising.com/"
+ports:
+  # UNVERIFIED: the vendor doc gives 27015 and 27016 only as examples, and the TrueCharts chart uses 9876 and 9877
+  - port: 27015
+    protocol: udp
+    required: true
+  - port: 27016
+    protocol: udp
+    required: true
+env:
+  - name: SAVE_NAME
+    default: "world1"
+    required: false
+  - name: GAME_PORT
+    default: "27015"
+    required: false
+  - name: QUERY_PORT
+    default: "27016"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

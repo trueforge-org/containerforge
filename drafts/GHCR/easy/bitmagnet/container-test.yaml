@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3333'
+# UNVERIFIED: /status is the chart's probe path. Whether it returns 200 without a
+# database is not confirmed. If the run needs a database, apply the narrowing
+# rule from the build-test protocol and say so in the PR.
+http:
+- port: '3333'
+  path: /status
+filePaths:
+- /app/bitmagnet/bitmagnet
+- /start.sh

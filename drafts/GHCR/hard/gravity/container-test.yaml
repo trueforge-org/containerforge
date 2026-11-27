@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8008'
+# UNVERIFIED: if / requires auth, use a path or status the app really returns (plan section 8).
+http:
+- port: '8008'
+  path: /
+filePaths:
+- /app/gravity/gravity
+- /usr/share/licenses/gravity/LICENSE

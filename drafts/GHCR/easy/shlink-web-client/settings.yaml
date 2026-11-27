@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/shlinkio/shlink-web-client"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  # Generates /config/servers.json when both URL and API key are set.
+  - name: SHLINK_SERVER_URL
+    default: ""
+    required: false
+  - name: SHLINK_SERVER_API_KEY
+    default: ""
+    required: false
+  - name: SHLINK_SERVER_NAME
+    default: "Shlink"
+    required: false
+  # UNVERIFIED: SHLINK_SERVER_FORWARD_CREDENTIALS from the plan is not in any
+  # fetched source, so it is not listed.
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

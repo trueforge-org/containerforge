@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/704450/"
+ports:
+  - port: 5121
+    protocol: udp
+    required: true
+env:
+  - name: SRV_NAME
+    default: "Docker NWN:EE"
+    required: false
+  - name: GAME_PORT
+    default: "5121"
+    required: false
+  - name: MAX_CLIENTS
+    default: "4"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+# UNVERIFIED: PPW and APWD (server passwords) are not defaulted here. start.sh must require them or generate them on first start.
+volumes:
+  - path: /config
+    required: true
+dependencies: []

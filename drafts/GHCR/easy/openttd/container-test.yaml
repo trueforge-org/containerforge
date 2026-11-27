@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: timeoutSeconds is a starting value; compare with sibling game servers.
+timeoutSeconds: 120
+# UDP 3979 is not probed here because tcp checks cannot test UDP.
+tcp:
+- port: '3979'
+filePaths:
+- /app/openttd/openttd
+- /usr/share/licenses/openttd/COPYING
+- /start.sh

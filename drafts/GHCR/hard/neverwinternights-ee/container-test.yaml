@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed draft: only the start script is checked. A UDP probe on 5121 and a server binary check are added once the server is packaged (plan section 8).
+timeoutSeconds: 60
+filePaths:
+- /start.sh

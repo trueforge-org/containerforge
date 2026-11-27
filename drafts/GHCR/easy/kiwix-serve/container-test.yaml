@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: kiwix-serve exits when /config has no .zim file (see start.sh). This tcp probe
+# fails on an empty /config until the empty-start behaviour is decided. Do not weaken it.
+tcp:
+- port: '8080'
+filePaths:
+- /start.sh
+- /usr/bin/kiwix-serve # UNVERIFIED path of the apt binary

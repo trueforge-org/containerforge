@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/294420/"
+# UNVERIFIED: ports come from the draft and the TrueCharts values, which list more ports (for example 26900/tcp, 26902/udp, 8082/tcp). Confirm with a server run.
+ports:
+  - port: 26900
+    protocol: udp
+    required: true
+  - port: 26901
+    protocol: udp
+    required: false
+  - port: 8081
+    protocol: tcp
+    required: false
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: STEAM_APP_IDS
+    default: "294420"
+    required: false
+  - name: STEAM_INSTALL_DIR
+    default: "/config/steamapps"
+    required: false
+  - name: STEAM_USERNAME
+    default: "anonymous"
+    required: false
+  - name: STEAM_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

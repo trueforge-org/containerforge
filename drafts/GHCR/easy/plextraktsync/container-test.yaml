@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the --version flag and its output format must be confirmed in the built image.
+timeoutSeconds: 120
+runners:
+- entrypoint: /app/venv/bin/plextraktsync
+  cmd: "--version"
+  expectedOutput: "0.35.23"
+filePaths:
+- /start.sh
+- /usr/share/licenses/plextraktsync/LICENSE

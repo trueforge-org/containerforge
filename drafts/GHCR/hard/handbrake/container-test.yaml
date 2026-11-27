@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# no listener: the headless watcher has no port, so only file checks and a running process are tested
+timeoutSeconds: 60
+filePaths:
+- /start.sh
+- /usr/bin/HandBrakeCLI
+- /usr/share/licenses/handbrake/copyright

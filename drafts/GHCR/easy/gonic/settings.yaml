@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/sentriz/gonic"
+ports:
+  - port: 4747
+    protocol: tcp
+    required: false
+env:
+  - name: GONIC_LISTEN_ADDR
+    default: "0.0.0.0:4747"
+    required: false
+  - name: GONIC_DB_PATH
+    default: "/config/gonic.db"
+    required: false
+  - name: GONIC_MUSIC_PATH
+    default: "/music"
+    required: false
+  - name: GONIC_CACHE_PATH
+    default: "/config/cache"
+    required: false
+  - name: GONIC_PODCAST_PATH
+    default: "/config/podcasts"
+    required: false
+  - name: GONIC_PLAYLISTS_PATH
+    default: "/config/playlists"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  # Music is a user mount. Read-only is the user's choice; the image does not enforce it.
+  - path: /music
+    required: false

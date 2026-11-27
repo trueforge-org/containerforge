@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/meeb/tubesync"
+ports:
+  # UNVERIFIED: 4848 vs 8080 must be settled by a live run (plan section 10).
+  - port: 4848
+    protocol: tcp
+    required: true
+# Env names come from the upstream README (plan section 1). Confirm each one against the code before merge.
+env:
+  - name: TUBESYNC_HOSTS
+    default: "*"
+    required: false
+  - name: TUBESYNC_RESET_DOWNLOAD_DIR
+    default: "True"
+    required: false
+  - name: LISTEN_PORT
+    default: "4848"
+    required: false
+  - name: DJANGO_SECRET_KEY
+    default: ""
+    required: false
+  - name: DATABASE_CONNECTION
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /downloads
+    required: false
+dependencies: []

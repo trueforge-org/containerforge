@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/immich-app/immich"
+ports:
+  - port: 2283
+    protocol: tcp
+    required: true
+env:
+  - name: DB_USERNAME
+    default: "immich"
+    required: true
+  - name: DB_PASSWORD
+    default: ""
+    required: true # start.sh refuses to start when this is unset
+  - name: DB_DATABASE_NAME
+    default: "immich"
+    required: true
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+# UNVERIFIED: DB_HOSTNAME, DB_PORT and Redis host variables are added only after they are read from the v3.4.2 source.
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql
+  - name: valkey

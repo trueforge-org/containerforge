@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300  # matches the upstream HEALTHCHECK --start-period=300s
+tcp:
+- port: '5000'
+- port: '8554'  # UNVERIFIED: go2rtc RTSP listener may need a camera config to start
+- port: '8555'  # UNVERIFIED: go2rtc WebRTC listener; the UDP 8555 port has no probe here
+filePaths:
+- /app/frigate/venv/bin/python3
+- /usr/local/go2rtc/bin/go2rtc
+- /usr/share/licenses/frigate/LICENSE

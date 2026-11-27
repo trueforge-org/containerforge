@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# UNVERIFIED coverage gap: the 8800/udp port has no probe here (no UDP check is confirmed in the schema).
+runners:
+- entrypoint: /usr/bin/dotnet --list-runtimes
+filePaths:
+- /app/lmp

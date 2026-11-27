@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+# UNVERIFIED: 21118 and 21119 (web client) may not listen without a client. Drop a probe and say why if so.
+# UDP 21116 has no probe here because the tcp check cannot cover it. Add one only if forgetool supports UDP.
+tcp:
+- port: '21115'
+- port: '21116'
+- port: '21117'
+- port: '21118'
+- port: '21119'
+filePaths:
+- /app/rustdesk/hbbs
+- /app/rustdesk/hbbr
+- /usr/share/licenses/rustdesk/LICENSE

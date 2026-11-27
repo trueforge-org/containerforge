@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5900'
+filePaths:
+- /opt/mediainfo/bin/mediainfo
+- /opt/mediainfo/bin/mediainfo-gui # UNVERIFIED install path
+- /usr/share/licenses/mediainfo

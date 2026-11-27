@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/HandBrake/HandBrake"
+ports: []
+env:
+  - name: AUTOMATED_CONVERSION_PRESET
+    default: "General/Very Fast 1080p30"
+    required: false
+  - name: AUTOMATED_CONVERSION_FORMAT
+    default: "mp4"
+    required: false
+  - name: AUTOMATED_CONVERSION_OUTPUT_DIR
+    default: "/output"
+    required: false
+  - name: AUTOMATED_CONVERSION_CHECK_INTERVAL
+    default: "5"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /storage
+    required: false
+  - path: /output
+    required: false
+dependencies: []

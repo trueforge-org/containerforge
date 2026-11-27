@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: tcp probes assume amuled and amuleweb listen on these ports with no env set.
+# 4712 (remote GUI) is not probed: it is off by default (UNVERIFIED). UDP ports have no probe.
+timeoutSeconds: 60
+tcp:
+- port: '4711'
+- port: '4662'
+filePaths:
+- /start.sh
+- /usr/local/bin/amuled
+- /usr/local/bin/amuleweb
+- /usr/share/licenses/amule/COPYING

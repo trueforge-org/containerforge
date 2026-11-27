@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+runners:
+- entrypoint: test -x /app/venv/bin/python
+
+filePaths:
+- /app/plexanisync/PlexAniSync.py
+- /usr/share/licenses/plexanisync/LICENSE

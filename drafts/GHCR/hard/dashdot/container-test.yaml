@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3001'
+# UNVERIFIED: the dashboard HTML at / is expected here. Check after the first run.
+http:
+- port: '3001'
+  path: /
+filePaths:
+- /app/dashdot/server/dist/index.cjs
+- /app/dashdot/view/dist
+- /usr/share/licenses/dashdot/LICENSE

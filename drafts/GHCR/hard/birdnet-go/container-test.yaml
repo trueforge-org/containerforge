@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: 180s for first start (model loading); compare with siblings.
+# No audio device in the test: the app may run without detecting anything. Do not weaken the probe.
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /health
+filePaths:
+- /app/birdnet-go/birdnet-go
+- /usr/share/licenses/birdnet-go/LICENSE
+- /start.sh

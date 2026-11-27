@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '9130'
+
+filePaths:
+- /app/unpoller/unpoller
+- /usr/share/licenses/unpoller/LICENSE
+- /etc/unpoller/up.conf

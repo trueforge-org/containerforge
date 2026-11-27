@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: forgetool may not support udp probes, so ports 27015 and 27016 (udp) have no probe here.
+# The first start downloads the server, which can take longer than a CI run.
+timeoutSeconds: 1200
+filePaths:
+- /start.sh
