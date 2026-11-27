@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=mbentley/omada-controller versioning=loose
-  default = "6.3.0.111"
+  default = "6.3.0.112"
 }
 
 variable "MONGODB_VERSION" {
