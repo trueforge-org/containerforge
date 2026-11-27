@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=grafana/grafana-image-renderer versioning=semver
-  default = "5.12.11"
+  default = "5.12.12"
 }
 
 // UNVERIFIED: pin a released Playwright version. The build fails while this is empty.
