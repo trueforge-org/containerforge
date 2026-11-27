@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=agusalex/Notarius versioning=loose
-  default = "1.1-2"
+  default = "1.1"
 }
 
 variable "LICENSE" {
