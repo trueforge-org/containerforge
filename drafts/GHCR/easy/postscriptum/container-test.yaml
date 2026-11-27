@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 900 is a guess. The first start downloads the game, so it is slow.
+timeoutSeconds: 900
+# No tcp probe: the game ports 10027 and 10037 are UDP, and forgetool tcp probes cannot test UDP
+# (UNVERIFIED that a UDP probe exists). The server is not started by this test yet (launcher unverified).
+filePaths:
+- /start.sh
+- /usr/local/share/steamcmd/steamcmd.sh

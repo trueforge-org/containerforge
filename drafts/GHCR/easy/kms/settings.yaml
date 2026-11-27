@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Py-KMS-Organization/py-kms"
+ports:
+  - port: 1688
+    protocol: tcp
+    required: true
+env:
+  - name: IP
+    default: "::"
+    required: false
+  - name: PORT
+    default: "1688"
+    required: false
+  - name: EPID
+    default: ""
+    required: false
+  - name: LCID
+    default: "1033"
+    required: false
+  - name: CLIENT_COUNT
+    default: "26"
+    required: false
+  - name: ACTIVATION_INTERVAL
+    default: "120"
+    required: false
+  - name: RENEWAL_INTERVAL
+    default: "10080"
+    required: false
+  - name: HWID
+    default: "RANDOM"
+    required: false
+  - name: LOGLEVEL
+    default: "INFO"
+    required: false
+  - name: LOGFILE
+    default: "STDOUT"
+    required: false
+  - name: LOGSIZE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

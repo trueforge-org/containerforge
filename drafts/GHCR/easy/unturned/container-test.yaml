@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /start.sh
+- /usr/local/share/steamcmd/steamcmd.sh
+# UNVERIFIED: the game port is UDP (27015/udp), and this schema has no UDP probe, so no tcp or http probe is added.
+# UNVERIFIED: the first start downloads the server from Steam. Set timeoutSeconds from a measured run.

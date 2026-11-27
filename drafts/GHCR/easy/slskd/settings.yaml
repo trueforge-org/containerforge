@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/slskd/slskd"
+ports:
+  - port: 5030
+    protocol: tcp
+    required: true
+  # UNVERIFIED: HTTPS is optional and off by default; confirm with ss -ltn on the first run.
+  - port: 5031
+    protocol: tcp
+    required: false
+  # UNVERIFIED: confirm whether the peer listener is required for a working connection.
+  - port: 50300
+    protocol: tcp
+    required: false
+env:
+  - name: SLSKD_HTTP_PORT
+    default: "5030"
+    required: false
+  - name: SLSKD_HTTPS_PORT
+    default: "5031"
+    required: false
+  - name: SLSKD_SLSK_LISTEN_PORT
+    default: "50300"
+    required: false
+  - name: SLSKD_UMASK
+    default: "0022"
+    required: false
+  - name: SLSKD_DOWNLOADS_DIR
+    default: "/config/downloads"
+    required: false
+  - name: SLSKD_INCOMPLETE_DIR
+    default: "/config/incomplete"
+    required: false
+  - name: SLSKD_SHARED_DIR
+    default: ""
+    required: false
+  # Username name is taken from the docs/config.md example. The password name is UNVERIFIED.
+  - name: SLSKD_SLSK_USERNAME
+    default: ""
+    required: false
+  - name: SLSKD_SLSK_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

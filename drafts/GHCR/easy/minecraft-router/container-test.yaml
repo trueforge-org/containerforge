@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the listener starts without any routing config. If it does not, fix the defaults, do not weaken this probe.
+timeoutSeconds: 30
+tcp:
+- port: '25565'
+filePaths:
+- /app/mc-router
+- /start.sh
+- /usr/share/licenses/minecraft-router/LICENSE

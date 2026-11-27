@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is an estimate; align with sibling Go apps.
+timeoutSeconds: 60
+tcp:
+- port: '9898'
+# UNVERIFIED: the http status for / is not confirmed; do not loosen it to any status.
+http:
+- port: '9898'
+  path: /
+filePaths:
+- /app/backrest/backrest
+- /app/backrest/restic
+- /start.sh

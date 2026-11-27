@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.pocketpair.jp/"
+# UNVERIFIED: game, query, RCON and REST ports are not confirmed yet, so none are listed.
+ports:
+  []
+env:
+  - name: STEAM_INSTALL_DIR
+    default: "/config/palworld"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

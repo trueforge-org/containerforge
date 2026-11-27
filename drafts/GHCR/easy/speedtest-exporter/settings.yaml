@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/MiguelNdeCarvalho/speedtest-exporter"
+ports:
+  - port: 9798
+    protocol: tcp
+    required: true
+env:
+  - name: SPEEDTEST_PORT
+    default: "9798"
+    required: false
+  - name: SPEEDTEST_CACHE_FOR
+    default: "0"
+    required: false
+  # Empty means the Ookla CLI picks the server.
+  - name: SPEEDTEST_SERVER
+    default: ""
+    required: false
+  - name: SPEEDTEST_TIMEOUT
+    default: "90"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

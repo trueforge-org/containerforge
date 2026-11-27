@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/KDE/kdenlive"
+ports:
+  - port: 3001
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: TITLE
+    default: "Kdenlive"
+    required: false
+  - name: NO_GAMEPAD
+    default: "true"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

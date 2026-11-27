@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.postscriptum.com/"
+ports:
+  - port: 10027
+    protocol: udp
+    required: true
+  - port: 10037
+    protocol: udp
+    required: true
+env:
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: GAME_PARAMS
+    default: "Port=10027 QueryPort=10037 -log"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '9091'
+http:
+- port: '9091'
+  path: /api/health
+filePaths:
+- /start.sh
+- /app/authelia/authelia
+- /usr/share/licenses/authelia/LICENSE
+- /defaults/configuration.yml
+- /defaults/users_database.yml

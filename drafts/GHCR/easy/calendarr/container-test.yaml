@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# BLOCKED: the app exits 1 without DISCORD_WEBHOOK_URL and the suite sets no env, so this probe
+# cannot pass until the no-webhook start is resolved (plan section 10). Do not add a fake webhook.
+timeoutSeconds: 180
+tcp:
+- port: '5000'

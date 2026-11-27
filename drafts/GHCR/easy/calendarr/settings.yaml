@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jordanlambrecht/calendarr"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "UTC"
+    required: false
+  - name: LOG_DIR
+    default: "/config/logs"
+    required: false
+  - name: LOG_FILE
+    default: "calendarr.log"
+    required: false
+  - name: CALENDAR_URLS
+    default: "[]"
+    required: false
+  - name: SCHEDULE_TYPE
+    default: "WEEKLY"
+    required: false
+  - name: RUN_TIME
+    default: "09:00"
+    required: false
+  - name: CALENDAR_RANGE
+    default: "AUTO"
+    required: false
+  - name: DISCORD_WEBHOOK_URL
+    # BLOCKED: upstream exits 1 without a webhook (USE_DISCORD defaults true). See plan section 10.
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

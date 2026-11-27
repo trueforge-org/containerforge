@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is not set. Set it from the first measured install.
+# Both ports are UDP and forgetool tcp probes cannot test them (coverage gap, see plan section 8).
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/bin/steamcmd-base.sh

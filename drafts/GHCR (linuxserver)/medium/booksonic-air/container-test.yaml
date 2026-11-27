@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 180 is a proposed value. Tune it to the measured startup time.
+timeoutSeconds: 180
+tcp:
+- port: '4040'
+# UNVERIFIED: that / answers before setup. Check at run time and adjust if it redirects.
+http:
+- port: '4040'
+  path: /
+filePaths:
+- /app/booksonic-air/booksonic.war
+- /usr/share/licenses/booksonic-air/LICENSE

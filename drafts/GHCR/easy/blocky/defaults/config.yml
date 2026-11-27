@@ -1,0 +1,8 @@
+# Seed config, copied to /config/config.yml only when it is missing or empty.
+# No block lists are set here, so the container makes no outbound requests at start.
+ports:
+  dns: 5353
+  http: 4000
+
+# Cache lives in /tmp (ephemeral), never in /config.
+cachePath: /tmp/blocky-cache

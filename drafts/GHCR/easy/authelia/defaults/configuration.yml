@@ -1,0 +1,23 @@
+# Template seeded to /config/configuration.yml on first start.
+# start.sh replaces the AUTHELIA_GENERATED_* placeholders with random secrets.
+# UNVERIFIED: key names follow the Authelia 4.39 configuration reference, not yet checked against it.
+# UNVERIFIED: the cookie domain and access rules must be set by the user before Authelia is used as a portal.
+server:
+  address: 'tcp://0.0.0.0:9091/'
+identity_validation:
+  reset_password:
+    jwt_secret: 'AUTHELIA_GENERATED_JWT_SECRET'
+session:
+  secret: 'AUTHELIA_GENERATED_SESSION_SECRET'
+storage:
+  encryption_key: 'AUTHELIA_GENERATED_STORAGE_KEY'
+  local:
+    path: '/config/db.sqlite3'
+authentication_backend:
+  file:
+    path: '/config/users_database.yml'
+notifier:
+  filesystem:
+    filename: '/config/notification.txt'
+access_control:
+  default_policy: 'deny'

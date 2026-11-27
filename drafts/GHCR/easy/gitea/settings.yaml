@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/go-gitea/gitea"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+  - port: 2222
+    protocol: tcp
+    required: false
+env:
+  - name: GITEA_APP_INI
+    default: "/config/gitea/app.ini"
+    required: false
+  - name: GITEA_WORK_DIR
+    default: "/config/gitea"
+    required: false
+  - name: GITEA_CUSTOM
+    default: "/config/gitea/custom"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+  - name: memcache

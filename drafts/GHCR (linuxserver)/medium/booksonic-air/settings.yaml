@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/popeen/Booksonic-Air"
+ports:
+  - port: 4040
+    protocol: tcp
+    required: true
+env:
+  - name: CONTEXT_PATH
+    default: ""
+    required: false
+  - name: JAVA_OPTS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /music
+    required: false
+  - path: /playlists
+    required: false
+  - path: /podcasts
+    required: false

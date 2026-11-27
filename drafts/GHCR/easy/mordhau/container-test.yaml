@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 600
+# Narrowed to file checks: the functional path needs a SteamCMD download from Steam (network, large).
+# No tcp or http probe: the game ports are UDP.
+filePaths:
+- /start.sh
+- /usr/local/share/steamcmd/steamcmd.sh

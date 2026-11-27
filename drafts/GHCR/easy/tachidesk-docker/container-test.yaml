@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+tcp:
+- port: '4567'
+filePaths:
+- /app/tachidesk/Suwayomi-Server.jar
+- /usr/share/licenses/tachidesk-docker/LICENSE
+- /start.sh

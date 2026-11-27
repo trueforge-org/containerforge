@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the first start downloads the server (large, slow). Conservative timeout.
+timeoutSeconds: 1200
+tcp:
+- port: '27015'
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh

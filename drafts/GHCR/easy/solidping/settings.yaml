@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/fclairamb/solidping"
+ports:
+  - port: 4000
+    protocol: tcp
+    required: true
+env:
+  - name: SP_DB_TYPE
+    default: "sqlite"
+    required: false
+  - name: SP_DB_URL
+    # Only used when SP_DB_TYPE=postgres
+    default: ""
+    required: false
+  - name: SP_DB_DIR
+    default: "/config"
+    required: false
+  - name: SP_SERVER_LISTEN
+    default: ":4000"
+    required: false
+  - name: SP_FILESTORAGE_LOCAL_ROOT
+    default: "/config/files"
+    required: false
+  - name: SP_ADMIN_PASSWORD
+    # Optional. If unset, a password is printed once in the first start log.
+    default: ""
+    required: false
+  - name: SP_ADMIN_EMAIL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
+opt_dependencies:
+  - name: postgresql

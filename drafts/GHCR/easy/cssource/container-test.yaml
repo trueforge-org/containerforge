@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No port probes: the server is downloaded on first start, so no listener is expected in the test window.
+filePaths:
+- /start.sh
+- /usr/local/share/steamcmd/steamcmd.sh

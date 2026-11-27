@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide"
+# UNVERIFIED: the chart lists 9600 tcp+udp, 8772 tcp, 50041 tcp and 8081 tcp. Not added until confirmed on the server.
+ports: []
+env:
+  - name: GAME_ID
+    default: "302550"
+    required: true
+  - name: VALIDATE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

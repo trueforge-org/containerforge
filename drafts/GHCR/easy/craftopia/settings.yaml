@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/1670340/"
+ports:
+  # UNVERIFIED: 8787 comes from the TrueCharts chart, not from the server itself.
+  - port: 8787
+    protocol: tcp
+    required: true
+  - port: 8787
+    protocol: udp
+    required: true
+env:
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

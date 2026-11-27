@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or http probes: the tool does not listen.
+# UNVERIFIED: a runner for `gphotos-sync --version` is a candidate once the runners schema is confirmed.
+# UNVERIFIED: timeoutSeconds is not set; match apps/k8s-sidecar or apps/bazarr.
+filePaths:
+- /start.sh
+- /app/venv/bin/gphotos-sync

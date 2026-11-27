@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Only file checks: the first start downloads the server from Steam, and both ports are UDP,
+# which the tcp check cannot probe.
+timeoutSeconds: 900
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh

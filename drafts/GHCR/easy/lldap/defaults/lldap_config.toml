@@ -1,0 +1,23 @@
+# Seeded into /config by start.sh only when /config/lldap_config.toml is missing.
+# Secrets (jwt_secret, ldap_user_pass) come from LLDAP_JWT_SECRET_FILE and
+# LLDAP_LDAP_USER_PASS_FILE, which start.sh sets. Env vars override these keys.
+# UNVERIFIED: ldap_base_dn is an example value; change it before real use (no env override).
+
+verbose = false
+
+ldap_host = "0.0.0.0"
+ldap_port = 3890
+
+http_host = "0.0.0.0"
+http_port = 17170
+http_url = "http://localhost:17170"
+
+ldap_base_dn = "dc=example,dc=com"
+ldap_user_dn = "admin"
+ldap_user_email = "admin@example.com"
+
+database_url = "sqlite:///config/users.db?mode=rwc"
+key_file = "/config/private_key"
+
+[ldaps_options]
+enabled = false

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# BLOCKED: the viewer on port 3001 is not added yet, so this probe will fail until it is.
+# filePaths uses the amd64 layout; the arm64 binary is /usr/bin/blender.
+timeoutSeconds: 180
+tcp:
+- port: '3001'
+filePaths:
+- /app/blender/blender

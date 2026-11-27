@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/220070/"
+# UNVERIFIED: ports taken from the TrueCharts chart; not yet confirmed against the server.
+ports:
+  - port: 7000
+    protocol: udp
+    required: true
+  - port: 7010
+    protocol: udp
+    required: false
+  - port: 27015
+    protocol: udp
+    required: false
+env:
+  - name: GAME_ID
+    default: "220070"
+    required: false
+  - name: MAP
+    default: "aocffa-moor_p"
+    required: false
+  - name: GAME_PARAMS
+    default: "?port=7000?queryport=7010"
+    required: false
+  - name: GAME_PARAMS_EXTRA
+    default: "-seekfreeloadingserver"
+    required: false
+  - name: ADMIN_PWD
+    default: ""
+    required: false
+  - name: VALIDATE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

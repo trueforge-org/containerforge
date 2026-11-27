@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://mordhau.com"
+ports:
+  - port: 7777
+    protocol: udp
+    required: true
+  - port: 15000
+    protocol: udp
+    required: false
+  - port: 27015
+    protocol: udp
+    required: false
+env:
+  - name: STEAM_APP_IDS
+    default: "629800"
+    required: true
+  - name: STEAM_INSTALL_DIR
+    default: "/config/serverfiles"
+    required: false
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: STEAM_USERNAME
+    default: "anonymous"
+    required: false
+  # Secret: not echoed by start.sh. Only needed for non-anonymous login.
+  - name: STEAM_PASSWORD
+    default: ""
+    required: false
+  - name: GAME_PORT
+    default: "7777"
+    required: false
+  # UNVERIFIED: the server flags for QUERY_PORT and BEACON_PORT are not confirmed yet.
+  - name: QUERY_PORT
+    default: "27015"
+    required: false
+  - name: BEACON_PORT
+    default: "15000"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

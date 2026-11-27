@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: the timeout is a placeholder. A first start downloads the server with SteamCMD, so CI only checks files.
+timeoutSeconds: 1800
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh
+- /usr/local/share/steamcmd/steamcmd-init.sh

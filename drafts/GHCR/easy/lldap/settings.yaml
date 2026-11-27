@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/lldap/lldap"
+ports:
+  - port: 3890
+    protocol: tcp
+    required: true
+  - port: 17170
+    protocol: tcp
+    required: true
+env:
+  - name: LLDAP_JWT_SECRET
+    # Generated once into /config/.secrets by start.sh when empty
+    default: ""
+    required: false
+  - name: LLDAP_LDAP_USER_PASS
+    # Generated once into /config/.secrets by start.sh when empty
+    default: ""
+    required: false
+  - name: LLDAP_DATABASE_URL
+    # Config-file default is sqlite under /config; set to a PostgreSQL URL to switch
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
+opt_dependencies:
+  - name: postgresql

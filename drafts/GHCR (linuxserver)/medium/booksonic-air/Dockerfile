@@ -1,0 +1,40 @@
+FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a
+
+# set version label
+ARG VERSION
+USER root
+
+# environment settings
+# UNVERIFIED: booksonic.war runs on Java 17 (linuxserver ships openjdk11). Fall back to java11 if not.
+ENV BOOKSONIC_AIR_HOME="/app/booksonic-air" \
+    BOOKSONIC_AIR_SETTINGS="/config" \
+    LANG="C.UTF-8"
+
+RUN \
+  echo "**** install runtime packages ****" && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    ffmpeg \
+    flac \
+    fontconfig \
+    lame \
+    fonts-dejavu-core && \
+  echo "**** install booksonic air ****" && \
+  mkdir -p "${BOOKSONIC_AIR_HOME}" && \
+  curl -fL -o "${BOOKSONIC_AIR_HOME}/booksonic.war" \
+    "https://github.com/popeen/Booksonic-Air/releases/download/v${VERSION}/booksonic.war" && \
+  echo "**** install license ****" && \
+  mkdir -p /usr/share/licenses/booksonic-air && \
+  curl -fL -o /usr/share/licenses/booksonic-air/LICENSE \
+    "https://raw.githubusercontent.com/popeen/Booksonic-Air/v${VERSION}/LICENSE" && \
+  echo "**** cleanup ****" && \
+  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+
+# add local files
+COPY --chmod=0755 . /
+
+# ports and volumes
+EXPOSE 4040
+VOLUME /config
+
+USER apps

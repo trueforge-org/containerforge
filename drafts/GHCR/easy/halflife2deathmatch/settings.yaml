@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/320/"
+ports:
+  - port: 27015
+    protocol: udp
+    required: true
+  - port: 27015
+    protocol: tcp
+    required: false
+env:
+  - name: STEAM_APP_IDS
+    # UNVERIFIED: 232370 is the value the TrueCharts chart sets. Confirm it is the HL2:DM dedicated server on Steam before merging.
+    default: "232370"
+    required: true
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: STEAM_INSTALL_DIR
+    default: "/config/steamapps"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

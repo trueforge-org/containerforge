@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /start.sh
+- /usr/local/share/steamcmd/steamcmd.sh
+# UNVERIFIED: the tcp probe passes only once the server listens, which needs a Steam download.
+# UNVERIFIED: the UDP side of 8787 has no probe primitive in this schema.
+tcp:
+- port: '8787'
+# UNVERIFIED: timeoutSeconds is not set; use a value measured from a first start.

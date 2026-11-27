@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or http probe: the game server is downloaded at first start, so no game port is open in the test.
+
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/bin/steamcmd-base.sh
+- /usr/local/share/steamcmd/steamcmd.sh

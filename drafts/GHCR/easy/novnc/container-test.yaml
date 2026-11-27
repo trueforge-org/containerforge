@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout value, tune against a sibling python app once a run is done.
+timeoutSeconds: 60
+tcp:
+- port: '6080'
+http:
+- port: '6080'
+  path: /vnc.html
+filePaths:
+- /app/novnc/vnc.html
+- /usr/share/licenses/novnc/LICENSE.txt

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/lovelaze/nebula-sync"
+# UNVERIFIED: no listen port is documented and upstream has no EXPOSE. Add a port and a tcp probe once confirmed.
+ports: []
+env:
+  # Either PRIMARY or PRIMARY_FILE is required (url|password). start.sh checks this.
+  - name: PRIMARY
+    default: ""
+    required: true
+  - name: PRIMARY_FILE
+    default: ""
+    required: false
+  # Either REPLICAS or REPLICAS_FILE is required (comma-separated url|password). start.sh checks this.
+  - name: REPLICAS
+    default: ""
+    required: true
+  - name: REPLICAS_FILE
+    default: ""
+    required: false
+  - name: FULL_SYNC
+    default: "true"
+    required: true
+  # UNVERIFIED: README lists no default. Unset may mean one-shot run, so it is not defaulted here.
+  - name: CRON
+    default: ""
+    required: false
+  - name: RUN_GRAVITY
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

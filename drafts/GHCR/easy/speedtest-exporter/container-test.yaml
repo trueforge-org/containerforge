@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '9798'
+http:
+- port: '9798'
+  path: /
+filePaths:
+- /app/exporter.py
+- /usr/local/bin/speedtest

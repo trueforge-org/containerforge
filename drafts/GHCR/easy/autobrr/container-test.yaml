@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout value for a single Go binary, match a sibling Go app when one is checked.
+timeoutSeconds: 60
+tcp:
+- port: '7474'
+http:
+- port: '7474'
+  path: /
+filePaths:
+- /app/autobrr
+- /app/autobrrctl
+- /usr/share/licenses/autobrr/LICENSE

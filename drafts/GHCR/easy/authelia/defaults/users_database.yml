@@ -1,0 +1,3 @@
+# Seeded to /config/users_database.yml on first start, only when missing.
+# UNVERIFIED: whether Authelia accepts an empty user list at startup. Add users here before use.
+users: {}

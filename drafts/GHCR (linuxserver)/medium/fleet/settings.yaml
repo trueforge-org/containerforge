@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/linuxserver/fleet"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: fleet_admin_authentication_type
+    default: "DATABASE"
+    required: false
+  - name: fleet_app_port
+    default: "8080"
+    required: false
+  - name: fleet_database_driver
+    default: "org.mariadb.jdbc.Driver"
+    required: false
+  - name: fleet_database_username
+    default: "fleet"
+    required: false
+  - name: fleet_database_url
+    default: ""
+    required: true
+  - name: fleet_database_password
+    default: ""
+    required: true
+  - name: fleet_admin_secret
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

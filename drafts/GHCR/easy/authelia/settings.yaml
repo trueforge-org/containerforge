@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/authelia/authelia"
+# Optional, not listed as dependencies: valkey (session store) and postgresql (storage). The image uses SQLite by default.
+ports:
+  - port: 9091
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: X_AUTHELIA_CONFIG
+    default: "/config/configuration.yml"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

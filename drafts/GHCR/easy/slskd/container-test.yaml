@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+
+# 5031 (HTTPS) has no probe: TLS is optional and off by default.
+tcp:
+- port: '5030'
+# UNVERIFIED: confirm the peer listener opens without Soulseek credentials.
+- port: '50300'
+
+http:
+- port: '5030'
+  path: /health

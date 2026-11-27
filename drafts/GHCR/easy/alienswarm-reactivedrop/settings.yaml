@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide"
+ports:
+  - port: 27015
+    protocol: udp
+    required: true
+  - port: 27015
+    protocol: tcp
+    required: false
+env:
+  - name: GAME_PARAMS
+    default: "+map lobby -maxplayers 4 +exec server.cfg"
+    required: false
+  - name: GAME_PORT
+    default: "27015"
+    required: false
+  - name: VALIDATE
+    default: "false"
+    required: false
+  # Secret: passed as +sv_password. Not written to disk by start.sh.
+  - name: PASSWRD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

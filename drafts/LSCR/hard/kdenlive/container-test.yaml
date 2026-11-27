@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# BLOCKED: desktop stack not built yet, so the port probe will fail until start.sh serves port 3001.
+# UNVERIFIED: http scheme and timeout are not checked against the forgetool schema.
+timeoutSeconds: 300
+tcp:
+- port: '3001'
+filePaths:
+- /usr/bin/kdenlive
+- /usr/bin/melt

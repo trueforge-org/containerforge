@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/90"
+ports:
+  # 27015/tcp is the rcon port and 27015/udp is game and query, from the TrueCharts chart.
+  - port: 27015
+    protocol: tcp
+    required: true
+  - port: 27015
+    protocol: udp
+    required: true
+env:
+  - name: GAME_PORT
+    default: "27015"
+    required: false
+  - name: GAME_PARAMS
+    default: "+maxplayers 32 +map de_dust"
+    required: false
+  - name: VALIDATE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
