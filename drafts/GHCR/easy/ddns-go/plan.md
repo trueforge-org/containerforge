@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | v6.18.0 (latest stable, published 2026-11-21). Draft/chart uses v6.17.9 (published 2026-11-17), which is older. Source: https://api.github.com/repos/jeessy2/ddns-go/releases/tags/v6.18.0 |
+| Version to build | v6.18.0 (latest stable, published 2026-11-21). Draft uses v6.17.9 (published 2026-11-17), which is older. The chart's values.yaml pins v6.18.0 as of 2026-11-27. Source: https://api.github.com/repos/jeessy2/ddns-go/releases/tags/v6.18.0 |
 | Renovate | `datasource=github-releases depName=jeessy2/ddns-go versioning=semver` |
 | License | MIT (GitHub SPDX). Source: https://github.com/jeessy2/ddns-go |
 | Source URL | https://github.com/jeessy2/ddns-go |

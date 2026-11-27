@@ -103,7 +103,7 @@ target "image-all" {
 - `upstream_env_url: "https://github.com/home-operations/gatus-sidecar"`.
 - `ports`: `[]` (no confirmed port). Add a port only after the source confirms one.
 - `env`: `[]` (none confirmed). Add entries only after reading `cmd/gatus-sidecar`.
-- `volumes`: `[]`. The app is stateless; `/config` is not required by it. If the chart mounts `/config` anyway, add `/config` with `required: false`.
+- `volumes`: `[]`. The sidecar writes its output file to `/config` (the chart passes `--output=/config/gatus-sidecar.yaml`, see truecharts-gatus.md), so `/config` is required when the sidecar is enabled. If the chart mounts `/config` anyway, add `/config` with `required: false`.
 - `dependencies`: none. Gatus main (`ghcr.io/twin/gatus`) is a chart-level peer, not a ContainerForge dependency. No Gatus main app exists in `apps/` (checked); `apps/gatus` is the new sidecar target.
 
 ## 7. start.sh
