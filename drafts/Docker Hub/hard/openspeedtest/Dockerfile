@@ -10,7 +10,7 @@ RUN set -eux; \
     curl -fsSL "https://github.com/openspeedtest/Speed-Test/archive/${VERSION}.tar.gz" \
         | tar xz --strip-components=1
 
-FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f
+FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
 
 USER root
 
