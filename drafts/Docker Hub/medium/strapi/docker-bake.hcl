@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=npm depName=@strapi/strapi versioning=semver
-  default = "5.63.0"
+  default = "5.64.0"
 }
 
 variable "LICENSE" {
