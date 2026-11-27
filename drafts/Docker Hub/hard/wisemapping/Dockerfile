@@ -27,7 +27,7 @@ RUN mvn clean package -DskipTests -Dmaven.repo.local=/tmp/m2 \
     -Dgit.branch=unknown -Dgit.commit.id.abbrev=unknown -Dgit.commit.id.full=unknown -Dgit.commit.time=unknown
 
 # UNVERIFIED: pin the node:24 image digest at implementation time (no ContainerForge Node 24 base)
-FROM node:24-trixie-slim AS frontend-build
+FROM node:24-trixie-slim@sha256:4d00acb4bcc42c454c4eb801526f7ad7f772ea3bd4fd168c5cc2e384abcbb9d4 AS frontend-build
 ARG VERSION
 ENV COREPACK_ENABLE_STRICT=0 NODE_OPTIONS=--max-old-space-size=4096 YARN_CACHE_FOLDER=/tmp/yarn COREPACK_HOME=/tmp/corepack
 ADD https://github.com/wisemapping/wisemapping-frontend/archive/refs/tags/${VERSION}.tar.gz /tmp/frontend.tar.gz

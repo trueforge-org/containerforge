@@ -1,6 +1,6 @@
 
 # UNVERIFIED digest: the kasmvnc 1.5.2 digest is not read for this app. The obs-ndi plan lists one for the same tag, check it before pinning.
-FROM ghcr.io/trueforge-org/kasmvnc:1.5.2
+FROM ghcr.io/trueforge-org/kasmvnc:1.5.2@sha256:7e96ef6465ad32c153f71fdff80fa4e2cb8fdfce1ab79dd269f08c7647505275
 
 ARG VERSION
 ARG TARGETARCH

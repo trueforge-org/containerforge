@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 
 # Build stage: build the Node server from the source tag. The release AppImages are desktop bundles, not the server.
 # python-node provides Node.js on glibc. UNVERIFIED: the Node major must be compatible with upstream node 24.x.

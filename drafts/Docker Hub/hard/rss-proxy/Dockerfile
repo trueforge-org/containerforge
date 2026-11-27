@@ -10,7 +10,7 @@ USER root
 # renovate: datasource=docker depName=damoeb/rss-proxy versioning=semver
 # UNVERIFIED: pin the @sha256 digest of damoeb/rss-proxy:2.1.1 (docker buildx imagetools inspect). Keep the tag identical to VERSION.
 # UNVERIFIED: /app/app.jar and /app/public are placeholder paths inside the source image. Confirm with `docker run --rm --entrypoint sh damoeb/rss-proxy:2.1.1 -c 'ls -la / /app /opt'` before the first build.
-FROM --platform=linux/amd64 docker.io/damoeb/rss-proxy:2.1.1 AS source
+FROM --platform=linux/amd64 docker.io/damoeb/rss-proxy:2.1.1@sha256:c51cf8bf000822ee73de3d7e02b961f0aa34c18270bdb7f7af081a78df6bf0da AS source
 
 FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:efdc903d9ce0436b6207bc5a4e732d24a27231851975c999770fd8709a8316b8
 

@@ -1,8 +1,8 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 
 # Build stage: the Go binary is built from the pinned upstream commit (no releases or tags exist).
 # UNVERIFIED: pin golang:1.27.4 by digest before merge (docker buildx imagetools inspect).
-FROM golang:1.27.4 AS build
+FROM golang:1.27.4@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS build
 
 ARG VERSION
 ENV GOCACHE=/tmp/go-cache \
