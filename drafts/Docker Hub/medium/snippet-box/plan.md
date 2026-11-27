@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | No GitHub releases and no tags used by Docker Hub (`latest`, last updated 2021-10-14). Pin the master commit `f501941a22ead0fccd196d109098e9b065205d98` (the commit the draft's Dockerfile link uses). The repo's last push is 2023-04-05. Source: https://api.github.com/repos/pawelmalak/snippet-box (via `gh api`). |
+| Version to build | No GitHub releases (API 404) and no GitHub tags readable (API rate-limited). Docker Hub has three tags, none used by the draft: `latest` (2021-10-14, amd64), `dev` (2021-11-18, amd64/arm64/arm), `arm` (2021-10-14, arm64/arm). Pin the master commit `f501941a22ead0fccd196d109098e9b065205d98` (the commit the draft's Dockerfile link uses). The repo's last push is 2023-04-05. Source: https://api.github.com/repos/pawelmalak/snippet-box (via `gh api`). |
 | Renovate | `datasource=git-refs depName=https://github.com/pawelmalak/snippet-box currentValue=master` (precedent: `apps/tvheadend`; `apps/fenrus` does not exist yet, it is only a plan) |
 | License | MIT (GitHub API `license.spdx_id`) |
 | Source URL | https://github.com/pawelmalak/snippet-box |
