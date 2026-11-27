@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=intel/intel-device-plugins-for-kubernetes versioning=semver
-  default = "0.37.1"
+  default = "0.37.2"
 }
 
 variable "LICENSE" {
