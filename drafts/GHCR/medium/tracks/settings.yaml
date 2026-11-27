@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/tracksapp/tracks"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  # Database names below follow upstream docker-entrypoint.sh; the Rails config reading them is UNVERIFIED.
+  - name: DATABASE_TYPE
+    default: "mysql2"
+    required: false
+  - name: DATABASE_HOST
+    default: "mariadb"
+    required: true
+  - name: DATABASE_PORT
+    default: "3306"
+    required: false
+  - name: DATABASE_NAME
+    default: "tracks"
+    required: false
+  - name: DATABASE_USERNAME
+    default: "tracks"
+    required: false
+  # no default: upstream default "password" is not copied; set it in the deployment
+  - name: DATABASE_PASSWORD
+    default: ""
+    required: false
+  - name: DATABASE_ENCODING
+    default: "utf8"
+    required: false
+  # optional: generated into /config/secret_key_base on first start when unset
+  - name: SECRET_KEY_BASE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

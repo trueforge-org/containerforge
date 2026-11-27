@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# NARROWED: the game server is UDP only and needs a multi-GB SteamCMD download on first start,
+# so this suite checks files only. No tcp/http probe: the forgetool udp probe is UNVERIFIED.
+timeoutSeconds: 1800
+filePaths:
+- /start.sh
+- /usr/games/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nzzane/haste-server"
+ports:
+  - port: 7777
+    protocol: tcp
+    required: false
+env:
+  # Read by server.js directly. Other settings (keyLength, maxLength, storage) live in /config/config.js.
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: PORT
+    default: "7777"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

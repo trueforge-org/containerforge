@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/AlfHou/hammond"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: CONFIG
+    default: "/config/config"
+    required: false
+  - name: DATA
+    default: "/config/assets"
+    required: false
+  - name: GIN_MODE
+    default: "release"
+    required: false
+  # Taken from the upstream README, not confirmed in the code reviewed. The TrueCharts
+  # chart reads it from a secret, so it matters. UNVERIFIED that the app uses an empty default.
+  - name: JWT_SECRET
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8081'
+http:
+- port: '8081'
+  path: /
+filePaths:
+- /app/reubah
+- /app/templates
+- /app/static
+- /usr/share/licenses/reubah/LICENSE

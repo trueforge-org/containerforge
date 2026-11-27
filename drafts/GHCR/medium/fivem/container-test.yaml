@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the tcp probe needs a running server. The test runs without SERVER_KEY, and the
+# runtime download is not implemented yet, so this probe is expected to fail until it is. Do not weaken it.
+timeoutSeconds: 300
+tcp:
+- port: '30120'
+filePaths:
+- /start.sh

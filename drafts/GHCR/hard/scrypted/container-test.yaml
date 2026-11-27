@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the server must listen without any device or plugin download; confirm on the first run.
+timeoutSeconds: 240
+tcp:
+- port: '10611'
+
+filePaths:
+- /app/server/node_modules/@scrypted/server
+- /usr/share/licenses/scrypted/LICENSE

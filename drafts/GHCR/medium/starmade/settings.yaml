@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.star-made.org/"
+ports:
+  - port: 4242 # UNVERIFIED: draft only, confirm by running the server
+    protocol: tcp
+    required: false
+env:
+  - name: XMX_SIZE
+    default: "1024"
+    required: false
+  - name: XMS_SIZE
+    default: "1024"
+    required: false
+  - name: EXTRA_JVM_PARAMS
+    default: ""
+    required: false
+  - name: GAME_PARAMS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

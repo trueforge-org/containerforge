@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+tcp:
+- port: '25577'
+filePaths:
+- /usr/bin/mc-image-helper
+- /usr/bin/mc-monitor
+- /usr/bin/rcon-cli
+# UNVERIFIED: the BungeeCord tcp probe needs network in CI (the proxy jar is downloaded at start). Add a licence path
+# once the LICENSE copy is in the Dockerfile.

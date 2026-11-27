@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+tcp:
+- port: '3000'
+filePaths:
+- /app/streamystats/apps/nextjs-app/server.js
+- /start.sh

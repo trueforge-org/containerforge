@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# First start generates the certificate and data directories, so allow a long timeout.
+timeoutSeconds: 300
+tcp:
+- port: '8443'
+- port: '8080'
+filePaths:
+- /start.sh
+- /defaults/config.json.template
+- /app/meshcentral/node_modules/meshcentral/meshcentral.js
+- /app/meshcentral/node_modules/meshcentral/package.json
+- /usr/share/licenses/meshcentral/LICENSE

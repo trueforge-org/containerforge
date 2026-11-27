@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/skrashevich/double-take"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+# Only variables read by the upstream entrypoint are listed. The README was not
+# fully parsed, so add more only after confirming them (plan section 6).
+env:
+  - name: CONFIG_PATH
+    default: "/config/storage/config"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

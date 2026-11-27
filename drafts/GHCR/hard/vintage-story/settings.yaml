@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.vintagestory.at/"
+ports:
+  # UNVERIFIED: tcp shown; the vendor does not state the protocol (udp not excluded). Confirm before merge.
+  - port: 42420
+    protocol: tcp
+    required: true
+env:
+  - name: VS_CHANNEL
+    default: "stable"
+    required: false
+  - name: STATIC_V
+    default: ""
+    required: false
+  - name: GAME_PARAMS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/itzg/docker-mc-proxy"
+ports:
+  - port: 25577
+    protocol: tcp
+    required: true
+  - port: 25565
+    protocol: tcp
+    required: false
+env:
+  - name: TYPE
+    default: "BUNGEECORD"
+    required: false
+  - name: VELOCITY_VERSION
+    default: "latest"
+    required: false
+  - name: VELOCITY_BUILD_ID
+    default: "latest"
+    required: false
+  - name: MEMORY
+    default: "512m"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

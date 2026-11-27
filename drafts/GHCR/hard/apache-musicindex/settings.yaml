@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "http://hacks.slashdirt.org/sw/musicindex/"
+ports:
+  # The chart maps 10006 to container port 80; rootless Apache listens on 8080.
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes: []
+dependencies: []

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5900'
+http:
+- port: '5800'
+  path: /
+filePaths:
+- /start.sh
+- /opt/makemkv/bin/makemkv
+- /opt/makemkv/lib/libmakemkv.so.1
+- /usr/share/licenses/makemkv/NOTICE

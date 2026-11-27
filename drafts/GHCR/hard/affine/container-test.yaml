@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+# The tcp probe on 3010 is not added here because the server does not listen without a database.
+timeoutSeconds: 240
+
+runners:
+- entrypoint: node --version
+
+# UNVERIFIED: the bundle layout under /app until the upstream build is written.
+filePaths:
+- /app/dist/main.js
+- /app/scripts/self-host-predeploy.js
+- /app/static
+
+mainRunner:
+  enabled: false

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '5678'
+http:
+- port: '5678'
+  # Path from the TrueCharts liveness and readiness probes (/healthz).
+  path: /healthz
+filePaths:
+- /app/n8n/bin/n8n
+- /usr/share/licenses/n8n/LICENSE.md

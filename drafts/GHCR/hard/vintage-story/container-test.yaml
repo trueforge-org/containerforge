@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 600s is a guess; the first start downloads the server (about 51 MB) from the vendor CDN
+timeoutSeconds: 600
+tcp:
+- port: '42420'
+filePaths:
+- /start.sh

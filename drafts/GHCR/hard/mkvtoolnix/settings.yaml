@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://mkvtoolnix.download/"
+ports:
+  - port: 5800
+    protocol: tcp
+    required: false
+  - port: 5900
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: DISPLAY_WIDTH
+    default: "1920"
+    required: false
+  - name: DISPLAY_HEIGHT
+    default: "1080"
+    required: false
+  - name: VNC_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /storage
+    required: false
+dependencies: []

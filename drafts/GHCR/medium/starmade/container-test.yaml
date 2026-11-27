@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 600s is an estimate; first start downloads the game
+timeoutSeconds: 600
+tcp:
+- port: '4242' # UNVERIFIED: confirm the server port by running the server
+
+filePaths:
+- /app/starmade/StarMade-Starter.jar

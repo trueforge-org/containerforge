@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: with cloudcmd_auth=true the status of / may be a redirect or 401. Confirm after a real run and accept
+# only the status the app really returns for an unauthenticated request. Do not weaken the probe.
+timeoutSeconds: 120
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/cloudcommander/node_modules/cloudcmd/bin/cloudcmd.js
+- /usr/share/licenses/cloudcommander/LICENSE

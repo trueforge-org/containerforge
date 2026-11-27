@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '6246'
+http:
+# returns 503 until the database is ready; keep the probe and tune timeoutSeconds after the first run
+- port: '6246'
+  path: /api/health/ready
+filePaths:
+- /app/maintainerr/apps/server/dist/main.js
+- /app/maintainerr/apps/server/dist/ui/index.html
+- /usr/share/licenses/maintainerr/LICENSE
+- /start.sh

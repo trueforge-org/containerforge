@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '8000'
+# UNVERIFIED: the HTTP probe on / may need a seeded index.html if the content directory starts empty
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/static/static

@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 120 is a first guess for a Python app start; confirm on the first run.
+timeoutSeconds: 120
+tcp:
+- port: '8081'
+http:
+- port: '8081'
+  path: /
+filePaths:
+- /start.sh
+- /app/app/main.py
+- /app/venv/bin/python
+- /app/ui/dist/metube
+- /usr/local/bin/ffmpeg
+- /usr/local/bin/ffprobe
+- /usr/local/bin/bgutil-pot
+- /usr/share/licenses/metube/LICENSE

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Tzahi12345/YoutubeDL-Material"
+ports:
+  - port: 17442
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: ytdl_port
+    default: "17442"
+    required: false
+  - name: ytdl_use_local_db
+    # UNVERIFIED: the chart and upstream compose use false (MongoDB); confirm the no-DB default in v4.3.2.
+    default: "true"
+    required: false
+  - name: ytdl_mongodb_connection_string
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
+opt_dependencies:
+  - name: mongodb

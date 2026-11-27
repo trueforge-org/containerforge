@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/citizenfx/fivem"
+ports:
+  - port: 30120
+    protocol: tcp
+    required: true
+  - port: 30120
+    protocol: udp
+    required: true
+env:
+  - name: GAME_CONFIG
+    default: "server.cfg"
+    required: false
+  - name: SERVER_KEY
+    # secret, no default; start.sh warns when it is empty
+    default: ""
+    required: false
+  - name: SRV_ADR
+    # UNVERIFIED: the runtime index URL serves docs HTML, not a listing (see plan section 10)
+    default: "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
+    required: false
+  - name: START_VARS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

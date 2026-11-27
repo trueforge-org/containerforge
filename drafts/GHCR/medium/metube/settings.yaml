@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/alexta69/metube"
+ports:
+  - port: 8081
+    protocol: tcp
+    required: true
+env:
+  - name: AUDIO_DOWNLOAD_DIR
+    default: "/config/downloads"
+    required: false
+  - name: DOWNLOAD_DIR
+    default: "/config/downloads"
+    required: false
+  - name: OUTPUT_TEMPLATE
+    default: "%(title)s.%(ext)s"
+    required: false
+  - name: PORT
+    default: "8081"
+    required: false
+  - name: STATE_DIR
+    default: "/config/state"
+    required: false
+  - name: TEMP_DIR
+    default: "/tmp/metube"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: URL_PREFIX
+    default: "/"
+    required: false
+  - name: YTDL_OPTIONS
+    default: "{}"
+    required: false
+volumes:
+  - path: /config
+    required: true

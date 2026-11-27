@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: expected status for "/" depends on the placeholder DocumentRoot; confirm on the first run.
+http:
+- port: '8080'
+  path: /
+
+filePaths:
+- /etc/apache2/apache2.conf
+- /usr/share/licenses/apache-musicindex/copyright

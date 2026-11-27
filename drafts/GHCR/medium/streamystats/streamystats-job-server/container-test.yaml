@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+tcp:
+- port: '3005'
+filePaths:
+- /app/streamystats-job-server/server
+- /app/streamystats-job-server/migrate-bin
+- /start.sh

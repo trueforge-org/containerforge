@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/goauthentik/authentik"
+ports:
+  - port: 9000
+    protocol: tcp
+    required: false
+  # UNVERIFIED: 9443 only if TLS is served with the default config (certs in /config/certs).
+  - port: 9443
+    protocol: tcp
+    required: false
+env:
+  # No default and not generated: start.sh refuses to start without it. Flagged for review (secret must not go to a file).
+  - name: AUTHENTIK_SECRET_KEY
+    default: ""
+    required: true
+  # UNVERIFIED: default.yml reads the password from env POSTGRES_PASSWORD.
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: true
+  # UNVERIFIED: default.yml default is localhost. Set to the PostgreSQL service host in deployment.
+  - name: AUTHENTIK_POSTGRESQL__HOST
+    default: "localhost"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql

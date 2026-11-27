@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+
+# UNVERIFIED: index.php is the expected entry point; confirm it exists in the v2.6.1 tree on the first build.
+filePaths:
+- /app/flashpaper/index.php
+- /usr/share/licenses/flashpaper/LICENSE
+- /etc/nginx/nginx.conf
+- /etc/php/php-fpm.conf

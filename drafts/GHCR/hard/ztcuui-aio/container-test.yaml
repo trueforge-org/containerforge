@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the test runs without /dev/net/tun, so the zerotier daemon may not start; a failure here is a finding
+timeoutSeconds: 180
+tcp:
+- port: '3443'
+filePaths:
+- /start.sh
+- /opt/key-networks/ztncui

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/1326470/"
+# UNVERIFIED: no confirmed ports yet (draft ports 8766, 9700 and 27016 udp are inferred only)
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # UNVERIFIED: 2465200 is the TrueCharts value for the dedicated server, not checked against Steam
+  - name: GAME_ID
+    default: "2465200"
+    required: true
+  - name: VALIDATE
+    default: ""
+    required: false
+  - name: GAME_PARAMS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: steamcmd

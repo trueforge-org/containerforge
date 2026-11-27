@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  # UNVERIFIED expected status for / on an empty /config. Confirm on the first run.
+  path: /
+filePaths:
+- /app/hammond/app
+- /app/hammond/dist/index.html
+- /usr/share/licenses/hammond/LICENSE

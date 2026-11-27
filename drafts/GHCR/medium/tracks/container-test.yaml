@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# Narrowed: start.sh runs db:prepare, which needs the external mariadb. Without a database this probe
+# may not see port 3000 open; run the full path with a database per the build, run and test protocol.
+tcp:
+- port: '3000'
+filePaths:
+- /app/config.ru
+- /app/Gemfile.lock
+- /usr/share/licenses/tracks/COPYING
+- /start.sh

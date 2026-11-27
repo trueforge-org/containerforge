@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: no port probe exists because the CLI opens no port; design decision pending (see plan section 10)
+timeoutSeconds: 60
+mainRunner:
+  enabled: false
+runners:
+- entrypoint: test -x /app/czkawka/czkawka_cli
+- entrypoint: /app/czkawka/czkawka_cli --help
+filePaths:
+- /app/czkawka/czkawka_cli
+- /usr/share/licenses/czkawka/LICENSE

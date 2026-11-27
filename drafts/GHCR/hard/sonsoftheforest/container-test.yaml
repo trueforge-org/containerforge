@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the test runs without env vars, so GAME_ID download and Wine start are not exercised here
+timeoutSeconds: 120
+mainRunner:
+  enabled: false
+runners:
+- entrypoint: test -x /usr/games/steamcmd
+- entrypoint: sh -c "command -v wine64 && command -v Xvfb"
+filePaths:
+- /start.sh

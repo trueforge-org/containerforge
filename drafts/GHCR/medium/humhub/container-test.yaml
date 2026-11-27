@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# DB-dependency narrowing: requires external mariadb; full functional test not feasible in single-container suite.
+# UNVERIFIED: the HTTP status of / on a fresh /config (installer redirect) is not confirmed. Accept only the status the app
+# really returns after a real run.
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/humhub/index.php
+- /app/humhub/vendor/autoload.php
+- /usr/sbin/php-fpm8.5
+- /defaults/nginx.conf
+- /defaults/php-fpm.conf
+- /defaults/supervisord.conf

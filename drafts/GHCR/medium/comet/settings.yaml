@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/g0ldyy/comet"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: FASTAPI_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: FASTAPI_PORT
+    default: "8000"
+    required: false
+  - name: FASTAPI_WORKERS
+    default: "1"
+    required: false
+  # UNVERIFIED: sqlite is the sample's development choice; the code default for DATABASE_TYPE is not confirmed
+  - name: DATABASE_TYPE
+    default: "sqlite"
+    required: false
+  - name: DATABASE_PATH
+    default: "data/comet.db"
+    required: false
+  - name: PUBLIC_API_TOKEN_FILE
+    default: "data/public_api_token.txt"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

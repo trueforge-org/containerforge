@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/alam00000/bentopdf"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+# No runtime env is read. BASE_URL, SIMPLE_MODE, SITE_URL, ALLOW_INDEXING and
+# DISABLE_TOOLS are build-time only (build args), so they are not listed here.
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

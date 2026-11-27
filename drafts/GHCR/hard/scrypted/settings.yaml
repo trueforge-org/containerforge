@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/koush/scrypted"
+ports:
+  # UNVERIFIED: 10611 is SCRYPTED_INSECURE_PORT in the TrueCharts chart; upstream docs not confirmed.
+  - port: 10611
+    protocol: tcp
+    required: true
+env:
+  - name: NODE_OPTIONS
+    default: "--dns-result-order=ipv4first"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

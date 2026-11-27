@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/coderaiser/cloudcmd"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  # Root is /config, not / as upstream, so the default does not expose the container filesystem.
+  - name: cloudcmd_root
+    default: "/config"
+    required: false
+  # Hardened: upstream defaults to auth false.
+  # UNVERIFIED: how the password is set without the config dialog.
+  - name: cloudcmd_auth
+    default: "true"
+    required: false
+  - name: cloudcmd_open
+    default: "false"
+    required: false
+  - name: cloudcmd_terminal
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/libredb/libredb-studio"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: WORKFLOW_LOCAL_DATA_DIR
+    default: "/config/workflow"
+    required: false
+  - name: NODE_OPTIONS
+    default: "--max-old-space-size=384"
+    required: false
+  # Real runtime variables per upstream README. Not required: start.sh generates
+  # JWT_SECRET on first run, and the app auto-generates an admin password unless
+  # AUTH_BOOTSTRAP=off.
+  - name: JWT_SECRET
+    default: ""
+    required: false
+  - name: ADMIN_PASSWORD
+    default: ""
+    required: false
+  - name: USER_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

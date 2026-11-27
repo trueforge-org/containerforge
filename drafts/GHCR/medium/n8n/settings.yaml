@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/n8n-io/n8n"
+ports:
+  - port: 5678
+    protocol: tcp
+    required: false
+# N8N_PORT from the plan is dropped: its name is not confirmed in the docs fetched.
+# N8N_ENCRYPTION_KEY is not listed: n8n manages its own key in the user folder.
+env:
+  - name: N8N_USER_FOLDER
+    default: "/config"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+  - name: valkey

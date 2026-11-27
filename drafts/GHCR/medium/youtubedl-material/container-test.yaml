@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '17442'
+http:
+- port: '17442'
+  path: /
+filePaths:
+- /usr/bin/ffmpeg
+# UNVERIFIED: add /app/<entry file> and /app/venv/bin/yt-dlp once the zip layout and entry file are confirmed.

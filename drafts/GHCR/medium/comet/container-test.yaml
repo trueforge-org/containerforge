@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the HTTP status of / without debrid keys or a database is not confirmed. Pick a path that returns 200 after a real run.
+timeoutSeconds: 180
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/comet/comet/main.py
+- /app/comet/.venv/bin/python
+- /usr/share/licenses/comet/LICENSE

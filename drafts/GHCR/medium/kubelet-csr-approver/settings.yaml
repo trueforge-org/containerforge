@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/postfinance/kubelet-csr-approver"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+  - port: 8081
+    protocol: tcp
+    required: false
+env:
+  # Names and defaults from upstream internal/cmd/cmd.go at v1.2.16 (flags with env bindings)
+  - name: LEVEL
+    default: "0"
+    required: false
+  - name: METRICS_BIND_ADDRESS
+    default: ":8080"
+    required: false
+  - name: HEALTH_PROBE_BIND_ADDRESS
+    default: ":8081"
+    required: false
+  - name: LEADER_ELECTION
+    default: "false"
+    required: false
+  - name: PROVIDER_REGEX
+    default: ".*"
+    required: false
+  - name: MAX_EXPIRATION_SEC
+    default: "31708800"
+    required: false
+  - name: BYPASS_DNS_RESOLUTION
+    default: "false"
+    required: false
+  - name: BYPASS_HOSTNAME_CHECK
+    default: "false"
+    required: false
+  - name: IGNORE_NON_SYSTEM_NODE
+    default: "false"
+    required: false
+  - name: SKIP_DENY_STEP
+    default: "false"
+    required: false
+  - name: ALLOWED_DNS_NAMES
+    default: "1"
+    required: false
+  - name: PROVIDER_IP_PREFIXES
+    default: "0.0.0.0/0,::/0"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

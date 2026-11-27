@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/shlinkio/shlink"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: PORT
+    default: "8080"
+    required: false
+  - name: GEOLITE_LICENSE_KEY
+    default: ""
+    required: false
+  - name: SKIP_INITIAL_GEOLITE_DOWNLOAD
+    default: "false"
+    required: false
+  - name: INITIAL_API_KEY
+    default: ""
+    required: false
+  - name: DB_DRIVER
+    default: "sqlite"
+    required: false
+  # UNVERIFIED: DB_* and REDIS_SERVERS names are taken from the TrueCharts chart, not confirmed against Shlink docs
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: ""
+    required: false
+  - name: DB_NAME
+    default: ""
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: REDIS_SERVERS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
+opt_dependencies:
+  - name: postgresql
+  - name: valkey

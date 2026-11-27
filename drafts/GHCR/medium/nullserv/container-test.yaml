@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout is a placeholder for a small static binary; confirm on the first run.
+timeoutSeconds: 30
+tcp:
+- port: '8080'
+- port: '8443'
+filePaths:
+- /start.sh
+- /app/nullserv

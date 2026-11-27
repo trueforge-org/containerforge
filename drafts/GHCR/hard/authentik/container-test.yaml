@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# NARROWED (database exception): the server needs AUTHENTIK_SECRET_KEY and a reachable PostgreSQL to reach
+# a ready state, and the test runs without env and without a database. So no tcp/http probe on 9000 here.
+# Port 9000 probing is still required once a database fixture exists. Coverage gap noted in the PR.
+timeoutSeconds: 300
+filePaths:
+- /start.sh
+- /ak-root/.venv/bin/python
+- /lifecycle/ak
+- /authentik
+- /web/dist
+- /usr/share/licenses/authentik/NOTICE

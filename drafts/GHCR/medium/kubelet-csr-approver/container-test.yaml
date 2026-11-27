@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the binary may exit at startup without a Kubernetes API (in-cluster config or kubeconfig).
+# If so, these probes fail standalone. Confirm in the run step before trusting them. Do not weaken them.
+timeoutSeconds: 60
+tcp:
+- port: '8080'
+- port: '8081'
+filePaths:
+- /app/kubelet-csr-approver
+- /usr/share/licenses/kubelet-csr-approver/LICENSE
