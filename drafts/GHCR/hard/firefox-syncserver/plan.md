@@ -14,7 +14,7 @@
 | Ports | `EXPOSE 5000` (same Dockerfile). |
 | Volumes | `VOLUME ["/data"]` (same Dockerfile). Chart uses `/config` only (draft). |
 | Env (real) | `TZ=UTC`, `PUID=1000`, `PGID=1000` (same Dockerfile). Syncserver's own env names: UNVERIFIED (not fetched). |
-| User | No `USER` instruction; `entrypoint.sh` creates a `syncserver` user via `PUID`/`PGID`. |
+| User | No `USER` instruction. The Dockerfile `RUN` creates group and user `syncserver` at build time with `PGID`/`PUID` (default 1000), and chowns `/data` and `/opt/syncserver`. `entrypoint.sh` was not fetched in this run. |
 | Binary per arch | No release asset. Source only, pinned by commit. amd64 and arm64: **no ready-made executable** (draft `no`/`no`, confirmed by the Dockerfile). |
 | copy-from | `no`: upstream image is Alpine/musl, Python 2.7. |
 | Checksum | None published (source pinned by commit SHA). |

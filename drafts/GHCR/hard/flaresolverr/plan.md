@@ -16,7 +16,7 @@
 | Upstream arm64 image | UNVERIFIED (not checked on ghcr). |
 | Source license | MIT (https://api.github.com/repos/FlareSolverr/FlareSolverr). Repo active, last push 2026-10-24. |
 | Checksum | UNVERIFIED: no checksum asset on the release (only the two archives). |
-| Requirements (draft, inferred) | selenium, undetected-chromedriver, bottle, waitress (https://github.com/FlareSolverr/FlareSolverr/blob/HEAD/requirements.txt). Versions UNVERIFIED. |
+| Requirements | `requirements.txt` (https://raw.githubusercontent.com/FlareSolverr/FlareSolverr/HEAD/requirements.txt, fetched 2026-11-27) pins: bottle==0.13.4, waitress==3.0.2, selenium==4.51.0, func-timeout==4.3.5, prometheus-client==0.26.0, requests==2.34.2, certifi==2026.10.23, websockets==17.3, packaging==26.3, xvfbwrapper==0.2.37 (non-Windows), pefile (Windows). `undetected-chromedriver` is NOT listed directly (a comment says it is required by one of the pins). |
 
 ## 2. Target layout
 

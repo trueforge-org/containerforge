@@ -11,7 +11,7 @@
 | Source URL | https://github.com/Dispatcharr/Dispatcharr |
 | Per-arch download | None. No release assets. Upstream builds the image from source (`docker/Dockerfile`). |
 | Checksum source | None (no assets). Pin by git tag/commit instead. |
-| Upstream Dockerfile reviewed | `docker/Dockerfile` on `main` (https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docker/Dockerfile). The draft's pinned commit `83f82bf` could **not** be fetched; `UNVERIFIED: pinned-commit content may differ from main`. |
+| Upstream Dockerfile reviewed | `docker/Dockerfile` on `main` (https://raw.githubusercontent.com/Dispatcharr/Dispatcharr/main/docker/Dockerfile). The draft's pinned commit `83f82bf` (`docker/Dockerfile`, raw URL) was fetched and is identical to `main` as of 2026-11-27. |
 | Upstream Dockerfile summary | Stage 1 `FROM node:24 AS frontend-builder`: `npm install` and `npm run build` in `/app/frontend`. Stage 2 `FROM ghcr.io/${REPO_OWNER}/${REPO_NAME}:${BASE_TAG} AS final` (defaults `dispatcharr/dispatcharr:base`). `WORKDIR /app`, `COPY . /app`, nginx config to `/etc/nginx/sites-enabled/default`, CRLF fix and chmod on `docker/entrypoint*.sh`, `dist` copied in, optional `TIMESTAMP` sed on `/app/version.py`. `ENV VIRTUAL_ENV=/dispatcharrpy`, `ENTRYPOINT ["/app/docker/entrypoint.sh"]`. No EXPOSE, VOLUME, USER or CMD. |
 | Base image | `ghcr.io/dispatcharr/dispatcharr:base` is a **project-owned image** that does not exist in this repo. `UNVERIFIED: whether the base tag is published and what it contains` (python venv at `/dispatcharrpy`, nginx, redis, celery, supervisor, ffmpeg). |
 | apt / pip in this Dockerfile | None. Everything else comes from the base or from `docker/entrypoint.sh`, which was **not read** (`UNVERIFIED`). |

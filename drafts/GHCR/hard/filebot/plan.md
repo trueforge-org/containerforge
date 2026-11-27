@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Chart tag today | `ghcr.io/jlesage/filebot:v26.09.2`, GitHub release published 2026-09-22 (https://api.github.com/repos/jlesage/docker-filebot/releases/tags/v26.09.2). Image digests: amd64 `sha256:5abb879b…ed8b5`, arm64 `sha256:2138a3ae…9a36f` (https://hub.docker.com/v2/repositories/jlesage/filebot/tags/v26.09.2). |
+| Chart tag today | `ghcr.io/jlesage/filebot:v26.11.2` (TrueCharts `values.yaml` and `appVersion`, fetched 2026-11-27; this line previously said v26.09.2). The older `v26.09.2` tag: GitHub release published 2026-09-22 (https://api.github.com/repos/jlesage/docker-filebot/releases/tags/v26.09.2). Image digests: amd64 `sha256:5abb879b…ed8b5`, arm64 `sha256:2138a3ae…9a36f` (https://hub.docker.com/v2/repositories/jlesage/filebot/tags/v26.09.2). |
 | Application version to build | FileBot **5.3.0** (upstream `ARG FILEBOT_VERSION=5.3.0`, https://raw.githubusercontent.com/jlesage/docker-filebot/v26.09.2/Dockerfile). The `v26.09.2` tag is the wrapper's CalVer, not FileBot's version. |
 | Upstream image base | `jlesage/baseimage-gui:alpine-3.20-v4.14.0`, Alpine/musl, GUI (X, VNC, noVNC). Same Dockerfile. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/jlesage/docker-filebot/v26.09.2/Dockerfile (multi-stage: unrar, MediaInfoLib 26.05, ZenLib 0.4.41, UnRAR 6.1.7 built from source; `openjdk17-jre`, `chromaprint` (fpcalc), `zenity`, `ttf-dejavu`). |

@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | Git tag `4.8.4` exists (commit `460c117c4f4a6ae2e1dc13f2934b14fac6a1b9d9`, `gh api repos/spesmilo/electrum/git/ref/tags/4.8.4`). **No GitHub Release object** for 4.8.4 (release API returns 404, release list empty). `UNVERIFIED: release assets and checksums`. |
+| Version to build | Git tag `4.8.4` exists (commit `460c117c4f4a6ae2e1dc13f2934b14fac6a1b9d9`, `gh api repos/spesmilo/electrum/git/ref/tags/4.8.4`). A GitHub Release object **exists** for 4.8.4 (https://github.com/spesmilo/electrum/releases/tag/4.8.4, published 2026-11-06 UTC, fetched 2026-11-27; the earlier "no release" claim was wrong). Asset names were not recovered from the HTML page. `UNVERIFIED: release assets and checksums`. |
 | Renovate | `datasource=github-tags depName=spesmilo/electrum versioning=loose` (no releases; tags are plain `4.8.4`, not `v`-prefixed) |
 | License | MIT (GitHub license API, `repos/spesmilo/electrum/license`) |
 | Source URL | https://github.com/spesmilo/electrum |
