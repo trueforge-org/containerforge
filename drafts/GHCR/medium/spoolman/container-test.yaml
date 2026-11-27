@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# runs with no env vars: SQLite default. PostgreSQL is optional, so the test is not narrowed.
+# UNVERIFIED: path / returns 200 without a database. If not, use the API info route checked on the running image.
+timeoutSeconds: 120
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/spoolman/spoolman/main.py
+- /app/venv/bin/uvicorn
+# UNVERIFIED: depends on LICENSE being in the zip (see Dockerfile). Drop this entry if it is not.
+- /usr/share/licenses/spoolman/LICENSE

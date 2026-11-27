@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: index init is slow on first start; adjust after the first real run
+timeoutSeconds: 300
+tcp:
+- port: '5797'
+http:
+- port: '5797'
+  path: /health/ # UNVERIFIED: may need the admin host header; fall back to / if it does not return OK
+filePaths:
+- /start.sh
+- /usr/local/bin/archivebox # UNVERIFIED: console-script path in the python base

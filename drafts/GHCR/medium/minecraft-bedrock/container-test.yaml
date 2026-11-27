@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the test runs without env, so start.sh refuses (EULA unset); only files are checked here.
+# UNVERIFIED: forgetool UDP support for 19132/udp; do not add a tcp probe on it.
+timeoutSeconds: 120
+filePaths:
+- /etc/bedrock-entry.sh
+- /usr/local/bin/mc-server-runner
+- /usr/local/bin/set-property
+- /usr/share/licenses/minecraft-bedrock/LICENSE

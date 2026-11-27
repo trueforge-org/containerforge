@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: /healthcheck.php is the path upstream's HEALTHCHECK uses. Confirm the status code on the first run.
+http:
+- port: '8080'
+  path: /healthcheck.php
+filePaths:
+- /app/www/index.php
+- /app/www/app
+- /usr/share/licenses/kanboard/LICENSE

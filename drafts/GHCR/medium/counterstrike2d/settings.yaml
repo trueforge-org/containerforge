@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.cs2d.com/"
+# UNVERIFIED: no port confirmed yet. The draft's UDP 36963 comes from TrueCharts only. Confirm from the server's own log or config before listing it.
+ports:
+  []
+env:
+  - name: GAME_PARAMS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

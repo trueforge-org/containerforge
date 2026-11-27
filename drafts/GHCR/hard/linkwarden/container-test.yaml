@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the app needs postgresql (dependencies in settings.yaml). Without a DB this test will fail at start.sh.
+# The narrowing decision (plan section 8) is still open. Do not weaken the file checks.
+timeoutSeconds: 300
+tcp:
+- port: '3000'
+filePaths:
+- /app/linkwarden/apps/web/.next/BUILD_ID
+- /usr/local/bin/monolith
+- /usr/share/licenses/linkwarden/LICENSE

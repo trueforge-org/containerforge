@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: no tcp probe can check 26000/udp; process and file checks only
+timeoutSeconds: 180
+filePaths:
+- /app/xonotic/xonotic-linux64-dedicated
+- /app/xonotic/data
+- /defaults/server.cfg
+# UNVERIFIED: exact license file name in the zip
+- /usr/share/licenses/xonotic

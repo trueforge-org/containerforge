@@ -1,0 +1,18 @@
+# ContainerForge borg-server sshd config (rootless: port 2222, host keys and authorized_keys in /config).
+# UNVERIFIED: non-root sshd start, privilege separation and StrictModes behaviour on this base.
+Port 2222
+ListenAddress 0.0.0.0
+HostKey /config/ssh/ssh_host_ed25519_key
+PidFile /tmp/sshd.pid
+
+UsePAM no
+PubkeyAuthentication yes
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitRootLogin no
+AuthorizedKeysFile /config/.ssh/authorized_keys
+
+X11Forwarding no
+ClientAliveInterval 10
+ClientAliveCountMax 30
+LogLevel ERROR

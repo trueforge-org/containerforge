@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+ports:
+  - port: 7860
+    protocol: tcp
+    required: true
+env:
+  - name: WEBUI_PORT
+    default: "7860"
+    required: false
+  - name: DATA_DIR
+    default: "/config/data"
+    required: false
+  - name: CLI_ARGS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

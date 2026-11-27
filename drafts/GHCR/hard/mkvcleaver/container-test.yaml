@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 300s is a starting value. Wine prefix creation is slow on first start. Compare with apps/kasmvnc.
+timeoutSeconds: 300
+tcp:
+- port: '5800'
+- port: '5900'
+http:
+- port: '5800'
+  path: /
+filePaths:
+- /start.sh
+- /opt/mkvcleaver/MKVCleaver.exe
+- /opt/mkvtoolnix
+- /opt/autoit

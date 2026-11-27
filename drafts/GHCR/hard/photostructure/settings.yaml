@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/photostructure/photostructure-for-servers"
+ports:
+  - port: 1787
+    protocol: tcp
+    required: false
+env:
+  - name: PS_HTTP_PORT
+    default: "1787"
+    required: false
+  - name: PS_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: PS_LIBRARY_DIR
+    # ContainerForge path decision, not an upstream default (plan section 6).
+    default: "/config/library"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds, take the value from a PHP sibling after the first run.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /start.sh
+# UNVERIFIED: entry file name in the Wallos tree.
+- /app/wallos/index.php

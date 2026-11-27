@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/spegel-org/spegel"
+# UNVERIFIED: the TrueCharts values show 5000 (registry), 5001 (router) and 9090 (metrics). They are not listed
+# until they are confirmed from the spegel CLI flags or docs.
+ports: []
+env: []
+volumes: []
+dependencies: []

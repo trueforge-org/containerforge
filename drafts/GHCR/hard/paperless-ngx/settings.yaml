@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/paperless-ngx/paperless-ngx"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: PAPERLESS_SECRET_KEY
+    default: ""
+    required: true # empty default: start.sh generates and stores one in /config/data/secret_key on first start
+  - name: PAPERLESS_REDIS
+    default: "redis://valkey:6379"
+    required: false
+  - name: PAPERLESS_DBENGINE
+    default: "sqlite"
+    required: false
+  - name: PAPERLESS_DBHOST
+    default: ""
+    required: false
+  - name: PAPERLESS_DBPORT
+    default: ""
+    required: false
+  - name: PAPERLESS_DBNAME
+    default: "paperless"
+    required: false
+  - name: PAPERLESS_DBUSER
+    default: "paperless"
+    required: false
+  - name: PAPERLESS_DBPASS
+    default: ""
+    required: false
+# UNVERIFIED: PAPERLESS_URL, PAPERLESS_TIME_ZONE and PAPERLESS_OCR_LANGUAGE are standard Paperless settings,
+# but they are not in the fetched configuration page, so they are not listed yet.
+volumes:
+  - path: /config
+    required: true
+# valkey is the Celery broker and is needed at runtime. postgresql is optional (SQLite is the default).
+# UNVERIFIED: whether settings support an optional-dependency field, so postgresql is listed as a dependency for now.
+dependencies:
+  - valkey
+  - postgresql

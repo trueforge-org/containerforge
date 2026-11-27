@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: timeoutSeconds covers world generation on first start. Check the value against a sibling game server.
+timeoutSeconds: 600
+tcp:
+- port: '7777'
+filePaths:
+- /app/tshock
+- /usr/share/licenses/terraria-tshock/LICENSE
+# UNVERIFIED: add the TShock server DLL once its exact name is known from the zip listing.

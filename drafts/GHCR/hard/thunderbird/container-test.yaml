@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180 # UNVERIFIED startup time, compare with sibling desktop apps
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: / # UNVERIFIED: noVNC root must return 200
+filePaths:
+- /start.sh
+- /app/thunderbird/thunderbird

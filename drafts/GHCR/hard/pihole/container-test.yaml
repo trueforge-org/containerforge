@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: tcp 53 only passes if the bind succeeds as apps (plan section 10). Do not drop the probe.
+# UNVERIFIED: the /admin/ path needs a run to confirm.
+timeoutSeconds: 180
+healthCommands:
+- command: dig +short +time=2 @127.0.0.1 pi.hole
+tcp:
+- port: '53'
+- port: '8080'
+http:
+- port: '8080'
+  path: /admin/

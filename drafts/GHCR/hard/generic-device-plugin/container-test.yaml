@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '8080' # UNVERIFIED: depends on the listen default in settings.yaml
+filePaths:
+- /app/generic-device-plugin/generic-device-plugin
+- /usr/share/licenses/generic-device-plugin/LICENSE

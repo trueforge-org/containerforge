@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/824360"
+ports:
+  - port: 27015
+    protocol: udp
+    required: true
+  - port: 27016
+    protocol: udp
+    required: false
+  - port: 27018
+    protocol: udp
+    required: false
+env:
+  - name: GAME_PARAMS
+    default: "?MaxPlayers=10"
+    required: false
+  - name: GAME_PARAMS_EXTRA
+    default: "-QueryPort=27016 -Port=27015 -CubePort=27018 -NoBattlEye -nosteamclient -game -server -log"
+    required: false
+  - name: MAP
+    default: "CubeWorld_Light"
+    required: false
+  - name: SERVER_NAME
+    default: "PIXARKDocker"
+    required: false
+  - name: VALIDATE
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

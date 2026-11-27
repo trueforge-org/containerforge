@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '3000'
+# UNVERIFIED: the probe Host header must be in HOMEPAGE_ALLOWED_HOSTS (default localhost). Confirm 200 on the first run.
+http:
+- port: '3000'
+  path: /api/healthcheck

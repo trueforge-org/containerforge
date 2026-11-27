@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the / response code without login. Confirm in the run and adjust only if the app redirects.
+timeoutSeconds: 240
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /config/data
+- /tmp/nginx/nginx.conf

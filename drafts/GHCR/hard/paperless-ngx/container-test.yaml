@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8000'
+# UNVERIFIED: `/` is assumed to answer with a login or redirect. Confirm the status in the first run.
+http:
+- port: '8000'
+  path: /

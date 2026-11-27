@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/museofficial/muse"
+ports: []
+env:
+  - name: DISCORD_TOKEN
+    default: ""
+    required: true
+  - name: YOUTUBE_API_KEY
+    default: ""
+    required: true
+  - name: SPOTIFY_CLIENT_ID
+    default: ""
+    required: false
+  - name: SPOTIFY_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: CACHE_LIMIT
+    default: "2GB"
+    required: false
+  - name: YT_DLP_AUTO_UPDATE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

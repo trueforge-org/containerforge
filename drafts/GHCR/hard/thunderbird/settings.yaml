@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.thunderbird.net/"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: CUSTOM_DEPTH
+    default: "16"
+    required: false
+  - name: CUSTOM_RES_H
+    default: "768"
+    required: false
+  - name: CUSTOM_RES_W
+    default: "1024"
+    required: false
+  - name: THUNDERBIRD_LANG
+    default: "en-US"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

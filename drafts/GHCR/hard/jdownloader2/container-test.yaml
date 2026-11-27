@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UNVERIFIED: add a tcp probe on 3129 once the app is confirmed to listen on it without MyJDownloader configured.
+filePaths:
+- /app/jdownloader/JDownloader.jar
+- /start.sh
+runners:
+- entrypoint: java -version

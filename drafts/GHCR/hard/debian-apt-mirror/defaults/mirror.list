@@ -1,0 +1,19 @@
+############# config ##################
+#
+# Seeded to /config/mirror.list on first start. Edit the copy in /config, not this file.
+# UNVERIFIED: the set keys below (base_path, mirror_path, skel_path, var_path) are apt-mirror's standard names.
+# They were not in the fetched man page text and must be confirmed against the package's example config.
+#
+set base_path    /config
+set mirror_path  $base_path/mirror
+set skel_path    $base_path/skel
+set var_path     $base_path/var
+set defaultarch  amd64
+
+############# end config ##############
+
+# Suite and component are explicit. Only one suite is enabled to keep the first sync small.
+# UNVERIFIED: which suite is wanted (the upstream image rewrote unstable to stable).
+deb http://deb.debian.org/debian trixie main
+
+clean http://deb.debian.org/debian

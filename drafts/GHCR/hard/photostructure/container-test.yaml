@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 240s, first start initialises the library and may fetch FFmpeg. Check a sibling of the same family.
+timeoutSeconds: 240
+tcp:
+- port: '1787'
+# UNVERIFIED: /ping may need a licence. If it does not return 200, use tcp only and say so in the PR.
+http:
+- port: '1787'
+  path: /ping

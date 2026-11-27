@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/benzino77/tasmocompiler"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+# No app env vars are listed: upstream server/app.js was not read (UNVERIFIED), so none are confirmed.
+volumes: []

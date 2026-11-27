@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs with no env vars, so the OVERRIDE_PASSWORD path is not covered. Run it by hand.
+# UNVERIFIED: the bot's startup time. The timeout is a starting value.
+timeoutSeconds: 300
+tcp:
+- port: '8087'
+http:
+- port: '8087'
+  path: /api/v1/botId
+filePaths:
+- /config/config.ini
+- /app/sinusbot/sinusbot

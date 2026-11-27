@@ -1,0 +1,35 @@
+# rootless nginx config; start.sh renders __HTTP_PORT__ into /tmp/nginx/nginx.conf
+worker_processes 1;
+pid /tmp/nginx/nginx.pid;
+error_log /dev/stderr warn;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    access_log /dev/stdout;
+
+    client_body_temp_path /tmp/nginx/client_body;
+    proxy_temp_path /tmp/nginx/proxy;
+    fastcgi_temp_path /tmp/nginx/fastcgi;
+    uwsgi_temp_path /tmp/nginx/uwsgi;
+    scgi_temp_path /tmp/nginx/scgi;
+
+    server {
+        listen __HTTP_PORT__;
+        root /app;
+        index index.php;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+}

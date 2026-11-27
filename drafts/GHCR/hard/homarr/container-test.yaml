@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '7575'
+http:
+- port: '7575'
+  path: /api/health/live
+# UNVERIFIED: file paths depend on the tarball layout (see Dockerfile).
+filePaths:
+- /usr/share/licenses/homarr/LICENSE

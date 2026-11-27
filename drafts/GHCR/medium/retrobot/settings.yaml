@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rossimo/retrobot"
+# The Discord bot uses the outbound gateway only, so nothing is listened on.
+ports: []
+env:
+  # Bot token from the Discord developer portal (README). Never baked into the image.
+  - name: DISCORD_TOKEN
+    default: ""
+    required: true
+  # README: unset means one worker per CPU core.
+  - name: MAX_WORKERS
+    default: ""
+    required: false
+  - name: MAX_WORKERS_PER_GAME
+    default: "3"
+    required: false
+  - name: RECORDING_FRAMERATE
+    default: "30"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

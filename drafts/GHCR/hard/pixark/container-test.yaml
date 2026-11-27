@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Startup path only: the first real start downloads the server through SteamCMD,
+# so this covers the scripts and binaries, not gameplay. UDP ports are not probed.
+timeoutSeconds: 600
+filePaths:
+- /start.sh
+- /usr/games/steamcmd
+- /usr/bin/wine

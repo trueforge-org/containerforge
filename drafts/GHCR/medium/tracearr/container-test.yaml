@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
+# UNVERIFIED: /health may return 200 only with a database. If the first run shows otherwise, keep tcp and drop http with a reason here.
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /health
+filePaths:
+- /app/tracearr/apps/server/dist/index.js
+- /app/tracearr/apps/web/dist
+- /usr/share/licenses/tracearr/LICENSE

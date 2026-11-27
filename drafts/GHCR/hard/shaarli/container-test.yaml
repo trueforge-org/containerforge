@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: a fresh /config redirects / to the setup wizard. Confirm the status code in the run and adjust the http probe only if needed.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/shaarli/index.php
+- /app/shaarli/vendor/autoload.php
+- /usr/share/licenses/shaarli/COPYING

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the tcp probe may fail without a PostgreSQL sidecar; narrowed mode per build protocol, confirm on first run
+timeoutSeconds: 300
+tcp:
+- port: '8080'
+filePaths:
+- /app/gamevault-backend/dist/src/main.js
+- /usr/share/licenses/gamevault-backend/LICENSE

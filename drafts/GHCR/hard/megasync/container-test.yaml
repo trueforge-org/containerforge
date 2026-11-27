@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No MEGA account is available in CI, so the login is not tested.
+# The VNC port 5900 is bound to localhost and is not exposed, so it has no probe here.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /usr/bin/megasync

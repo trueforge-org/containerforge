@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ether/etherpad"
+ports:
+  - port: 9001
+    protocol: tcp
+    required: true
+env:
+  - name: IP
+    default: "0.0.0.0"
+    required: false
+  - name: PORT
+    default: "9001"
+    required: false
+  - name: DB_TYPE
+    default: "sqlite"
+    required: false
+  - name: DB_FILENAME
+    default: "/config/etherpad.sq3"
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: ""
+    required: false
+  - name: DB_NAME
+    default: ""
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: DB_PASS
+    default: ""
+    required: false
+  # UNVERIFIED: the settings file must read these two names for them to count (plan section 1).
+  - name: ADMIN_PASSWORD
+    default: ""
+    required: false
+  - name: USER_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

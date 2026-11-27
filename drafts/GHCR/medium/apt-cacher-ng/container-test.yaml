@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '3142'
+http:
+- port: '3142'
+  path: /acng-report.html
+filePaths:
+- /usr/sbin/apt-cacher-ng
+- /etc/apt-cacher-ng/acng.conf
+- /usr/share/licenses/apt-cacher-ng/LICENSE
+- /start.sh

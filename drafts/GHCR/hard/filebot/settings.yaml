@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.filebot.net/"
+# Headless AMC: no ports. The upstream GUI (VNC/noVNC) is not part of this image.
+ports:
+  []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: AMC_INPUT_DIR
+    default: "/watch"
+    required: false
+  - name: AMC_OUTPUT_DIR
+    default: "/output"
+    required: false
+  - name: AMC_INTERVAL
+    default: "1800"
+    required: false
+  - name: AMC_ACTION
+    default: "test"
+    required: false
+  - name: AMC_CONFLICT
+    default: "auto"
+    required: false
+  - name: AMC_LANG
+    default: "English"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

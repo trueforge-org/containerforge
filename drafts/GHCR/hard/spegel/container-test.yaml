@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or http probe yet: the ports are not confirmed (see settings.yaml).
+# The binary is not run here, because it needs a containerd node to do anything useful.
+filePaths:
+- /app/spegel
+- /start.sh

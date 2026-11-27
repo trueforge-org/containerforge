@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 120s is a judgement for three services starting in order. Compare with a sibling.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: /rutorrent/ path, confirm it returns 200 on the first run.
+http:
+- port: '8080'
+  path: /rutorrent/
+filePaths:
+- /start.sh
+- /app/rutorrent/index.php
+- /usr/bin/rtorrent
+- /usr/share/licenses/rtorrent-rutorrent/rtorrent-copyright

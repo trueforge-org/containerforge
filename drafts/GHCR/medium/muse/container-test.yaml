@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or http probe: muse opens no port.
+# OPEN (plan section 10): start.sh exits without DISCORD_TOKEN, and this test sets no env, so the run fails until that decision is made. Do not drop the check silently.
+timeoutSeconds: 180
+filePaths:
+- /app/muse/dist/scripts/migrate-and-start.js
+- /app/muse/node_modules/.prisma/client
+- /opt/yt-dlp/bin/yt-dlp
+- /usr/bin/ffmpeg
+- /usr/share/licenses/muse/LICENSE

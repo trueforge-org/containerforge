@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://jdownloader.org/"
+# UNVERIFIED: 3129/tcp is declared by the upstream EXPOSE only. Confirm the app listens on it without MyJDownloader configured.
+ports:
+  - port: 3129
+    protocol: tcp
+    required: false
+env:
+  - name: JDOWNLOADER_MAX_MEM
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

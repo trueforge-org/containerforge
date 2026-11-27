@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+tcp:
+- port: '9980'
+- port: '9981'
+- port: '9982'
+- port: '9983'
+http:
+# UNVERIFIED endpoint for this upstream commit; confirm before running the test
+- port: '9980'
+  path: /daemon/version
+filePaths:
+- /app/siad/siad
+- /usr/share/licenses/sia-daemon/LICENSE

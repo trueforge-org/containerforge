@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# No tcp or http probes: the headless image exposes no ports.
+filePaths:
+- /app/filebot/filebot.sh
+- /usr/share/licenses/filebot/NOTICE
+# UNVERIFIED: fpcalc path from the libchromaprint-tools package.
+- /usr/bin/fpcalc
+- /start.sh

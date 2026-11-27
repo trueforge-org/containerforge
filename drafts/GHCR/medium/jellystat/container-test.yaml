@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The suite runs without env vars and without a database. The probe checks the web server only.
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /auth/isconfigured # UNVERIFIED: may return an error without postgresql; if so, narrow to tcp and say so
+filePaths:
+- /start.sh
+- /app/backend/server.js

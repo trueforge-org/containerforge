@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external mariadb; full functional test not feasible in single-container suite.
+# The container exits without DATABASE_PASSWORD, so no tcp or http probe on 6060 here. Run the probe by hand with a real MariaDB.
+timeoutSeconds: 300
+filePaths:
+- /app/app.jar
+- /usr/local/bin/unrar
+- /usr/share/licenses/booklore/LICENSE
+- /start.sh

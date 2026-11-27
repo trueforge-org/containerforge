@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or http probes: the bot has no listener. The run check needs DISCORD_TOKEN, which the test does not set.
+# UNVERIFIED: start.sh exits without the token, so readiness cannot be proven by this suite. Record it as a known limit.
+timeoutSeconds: 120
+filePaths:
+- /app/package.json
+- /app/node_modules
+- /usr/share/licenses/retrobot/LICENSE
+- /start.sh

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/CyferShepard/Jellystat"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: JWT_SECRET
+    default: ""
+    required: false # generated into /config/jwt_secret by start.sh when empty
+  - name: POSTGRES_IP
+    default: "postgresql"
+    required: true
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: false # user-supplied secret; start.sh warns when it is empty
+  - name: POSTGRES_PORT
+    default: "5432"
+    required: false
+  - name: POSTGRES_USER
+    default: "postgres"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - postgresql

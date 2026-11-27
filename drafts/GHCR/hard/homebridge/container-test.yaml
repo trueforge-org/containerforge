@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '8581'
+# UNVERIFIED: confirm the status the first-run UI returns on / before relying on this http probe.
+http:
+- port: '8581'
+  path: /
+filePaths:
+- /usr/share/licenses/homebridge/NOTICE
+- /config

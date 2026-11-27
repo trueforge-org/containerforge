@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UNVERIFIED: no port probe yet. Add a tcp or udp probe once the port is confirmed in settings.yaml.
+filePaths:
+- /app/counterstrike2d/cs2d_dedicated
+- /usr/share/licenses/counterstrike2d/NOTICE
+- /start.sh

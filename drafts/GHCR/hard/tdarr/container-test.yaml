@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 300s is a starting value for first start (plan section 8). Compare with a large-service sibling.
+timeoutSeconds: 300
+tcp:
+- port: '8265'
+- port: '8266'
+# UNVERIFIED: with auth on by default, the root may answer with a redirect or 401 rather than 200. Adjust after the first run.
+http:
+- port: '8265'
+  path: /
+filePaths:
+- /start.sh
+- /app/Tdarr_Server/Tdarr_Server
+- /app/Tdarr_Node/Tdarr_Node

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/booklore-app/booklore"
+ports:
+  - port: 6060
+    protocol: tcp
+    required: false
+env:
+  - name: BOOKLORE_PORT
+    default: "6060"
+    required: false
+  - name: DATABASE_HOST
+    default: "mariadb"
+    required: false
+  - name: DATABASE_PORT
+    default: "3306"
+    required: false
+  - name: DATABASE_NAME
+    default: "booklore"
+    required: false
+  - name: DATABASE_USERNAME
+    default: "root"
+    required: false
+  - name: DATABASE_PASSWORD
+    default: ""
+    required: true
+  - name: REMOTE_AUTH_ENABLED
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mariadb

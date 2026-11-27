@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/homarr-labs/homarr"
+ports:
+  - port: 7575
+    protocol: tcp
+    required: false
+env:
+  - name: AUTH_PROVIDERS
+    default: "credentials"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# Redis (6379) is internal to the container and is not listed.
+# UNVERIFIED: encryption key variable and its persistence location (plan section 10).
+dependencies: []

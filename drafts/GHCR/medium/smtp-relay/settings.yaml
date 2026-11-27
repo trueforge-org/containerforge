@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Exim/exim"
+ports:
+  - port: 2525
+    protocol: tcp
+    required: false
+env:
+  - name: PORT
+    default: "2525"
+    required: false
+  - name: BIND_IP
+    default: "0.0.0.0"
+    required: false
+  - name: BIND_IP6
+    default: "::0"
+    required: false
+  - name: NET_DEV
+    default: "eth0"
+    required: false
+  - name: DISABLE_IPV6
+    default: "true"
+    required: false
+  - name: RELAY_NETWORKS
+    default: ""
+    required: false
+  - name: RELAY_DOMAINS
+    default: ""
+    required: false
+  - name: MAILNAME
+    default: ""
+    required: false
+  - name: OTHER_HOSTNAMES
+    default: ""
+    required: false
+  - name: SMARTHOST_ADDRESS
+    default: ""
+    required: false
+  - name: SMARTHOST_PORT
+    default: "25"
+    required: false
+  - name: SMARTHOST_USER
+    default: ""
+    required: false
+  - name: SMARTHOST_PASSWORD
+    default: ""
+    required: false
+  - name: SMARTHOST_ALIASES
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

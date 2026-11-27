@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '9001'
+# UNVERIFIED: the health route and the expected status. Upstream uses /health in its image HEALTHCHECK.
+http:
+- port: '9001'
+  path: /
+filePaths:
+# UNVERIFIED: adjust these to the real files once the image is built.
+- /app/etherpad/settings.json.dist
+- /usr/share/licenses/etherpad/LICENSE

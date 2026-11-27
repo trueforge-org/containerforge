@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs with no GPU, no models and no env vars. The web UI must still start and listen on 7860 (CPU mode).
+timeoutSeconds: 600
+tcp:
+- port: '7860'
+filePaths:
+- /app/stable-diffusion-webui/webui.py
+- /app/venv/bin/python

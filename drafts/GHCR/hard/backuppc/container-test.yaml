@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UNVERIFIED: the tcp and http probes on 8080 need the web server config in etc/, which is not written yet.
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/backuppc/bin/BackupPC
+- /usr/share/licenses/backuppc/LICENSE
+- /start.sh

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8191'
+# UNVERIFIED: the response to `/` (status and body) is not confirmed. Check it in the first run.
+http:
+- port: '8191'
+  path: /
+filePaths:
+- /app/flaresolverr/src/flaresolverr.py
+- /app/flaresolverr/venv/bin/python
+- /usr/share/licenses/flaresolverr/LICENSE

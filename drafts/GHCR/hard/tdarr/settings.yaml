@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/HaveAGitGat/Tdarr"
+ports:
+  - port: 8265
+    protocol: tcp
+    required: true
+  - port: 8266
+    protocol: tcp
+    required: true
+env:
+  - name: WEB_UI_PORT
+    default: "8265"
+    required: false
+  - name: SERVER_PORT
+    default: "8266"
+    required: false
+  - name: internalNode
+    default: "true"
+    required: false
+  - name: nodeName
+    default: "InternalNode"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

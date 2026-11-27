@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/itzg/docker-minecraft-bedrock-server"
+ports:
+  - port: 19132
+    protocol: udp
+    required: true
+  - port: 19132
+    protocol: tcp
+    required: false
+  - port: 19133
+    protocol: udp
+    required: false
+env:
+  - name: EULA
+    default: ""
+    required: true # UNVERIFIED: schema may reject an empty default; start.sh refuses to start unless TRUE
+  - name: VERSION
+    default: "LATEST"
+    required: false
+  - name: SERVER_NAME
+    default: "Bedrock Dedicated Server"
+    required: false
+  - name: SERVER_PORT
+    default: "19132"
+    required: false
+  - name: SERVER_PORT_V6
+    default: "19133"
+    required: false
+  - name: TRANSPORT
+    default: "raknet"
+    required: false
+  - name: LEVEL_NAME
+    default: "Bedrock level"
+    required: false
+  - name: ENABLE_BDS_V6BIND_FIX
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

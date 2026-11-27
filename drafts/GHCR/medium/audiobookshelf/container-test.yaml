@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8000'
+# UNVERIFIED: expected status of / for the web UI; confirm on the first run and adjust if it redirects.
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/audiobookshelf/dist-server/index.js
+- /app/audiobookshelf/client/dist/index.html
+- /usr/share/licenses/audiobookshelf/LICENSE

@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Donkie/Spoolman"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: SPOOLMAN_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: SPOOLMAN_PORT
+    default: "8000"
+    required: false
+  - name: SPOOLMAN_DIR_DATA
+    default: "/config/data"
+    required: false
+  - name: SPOOLMAN_DIR_LOGS
+    default: "/config/logs"
+    required: false
+  - name: SPOOLMAN_DIR_BACKUPS
+    default: "/config/backups"
+    required: false
+  - name: SPOOLMAN_DB_TYPE
+    default: "sqlite"
+    required: false
+  - name: SPOOLMAN_DB_HOST
+    default: ""
+    required: false
+  - name: SPOOLMAN_DB_PORT
+    default: "5432"
+    required: false
+  - name: SPOOLMAN_DB_NAME
+    default: ""
+    required: false
+  - name: SPOOLMAN_DB_USERNAME
+    default: ""
+    required: false
+  - name: SPOOLMAN_DB_PASSWORD
+    default: ""
+    required: false
+  - name: SPOOLMAN_LOGGING_LEVEL
+    default: "INFO"
+    required: false
+  # the chart sets this to true. Upstream default is FALSE, which is kept here.
+  - name: SPOOLMAN_DEBUG_MODE
+    default: "FALSE"
+    required: false
+  - name: SPOOLMAN_AUTOMATIC_BACKUP
+    default: "TRUE"
+    required: false
+  # contacts GitHub when enabled. Left at the upstream default, document in the PR.
+  - name: SPOOLMAN_UPDATE_CHECK
+    default: "TRUE"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

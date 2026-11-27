@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The firmware build (PlatformIO toolchain download) needs internet and is not covered here.
+# UNVERIFIED: an http probe on / is not added until the server's response is checked.
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+filePaths:
+- /app/tasmocompiler/server/app.js
+- /usr/local/lib/platformio-venv/bin/pio

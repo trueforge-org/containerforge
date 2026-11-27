@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://git.mills.io/prologic/golinks"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: true
+env:
+  - name: BIND
+    default: "0.0.0.0:8000"
+    required: false
+  - name: BASEURL
+    default: "http://localhost:8000"
+    required: false
+  - name: DBPATH
+    default: "/config/search.db"
+    required: false
+  - name: TITLE
+    default: "Search"
+    required: false
+  - name: SEARCHURL
+    default: "https://www.google.com/search?q=%s&btnK"
+    required: false
+  - name: SUGGESTURL
+    default: "https://suggestqueries.google.com/complete/search?client=firefox&q=%s"
+    required: false
+  - name: CONFIG
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

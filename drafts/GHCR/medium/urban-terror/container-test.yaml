@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The game port is UDP. The tcp and http checks here cannot prove it is open, so no probe is added for it.
+# UNVERIFIED: whether forgetool has a UDP probe. Add one for 27960/udp if it does.
+timeoutSeconds: 120
+filePaths:
+- /app/Quake3-UrT-Ded.x86_64
+- /start.sh
