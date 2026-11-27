@@ -14,7 +14,7 @@
 | Checksum source | PyPI sha256 per file (files list not read: UNVERIFIED). |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/open-webui/open-webui/main/Dockerfile . Stage 1 `FROM --platform=$BUILDPLATFORM node:22-alpine3.20 AS build` builds the frontend. Stage 2 `FROM python:3.12-slim-trixie AS base` is the image: pip installs CPU `torch<=2.9.1` from download.pytorch.org, then `uv pip install --system` of locked requirements, copies the built frontend. `USER $UID:$GID` (defaults 0:0, root). `CMD ["bash","start.sh"]`, no ENTRYPOINT, `EXPOSE 8080`, no VOLUME. |
 | Port | `PORT=8080` (upstream ENV, Dockerfile). |
-| Env vars (real, from Dockerfile) | `ENV=prod`, `PORT=8080`, `PYTHONUNBUFFERED=1`, `DOCKER=true`, `OLLAMA_BASE_URL` (empty), `OPENAI_API_BASE_URL`, `OPENAI_API_KEY` (empty), `WEBUI_SECRET_KEY` (empty), `SCARF_NO_ANALYTICS`, `DO_NOT_TRACK`, `ANONYMIZED_TELEMETRY` (disabled), RAG/Whisper/HF cache vars, `UV_LINK_MODE=copy`, `HOME=/root`. `DATA_DIR` and the `open-webui serve` CLI are UNVERIFIED (not in the fetched Dockerfile). |
+| Env vars (real, from Dockerfile) | `ENV=prod`, `PORT=8080`, `PYTHONUNBUFFERED=1`, `DOCKER=true`, `OLLAMA_BASE_URL` (`/ollama`), `OPENAI_API_BASE_URL`, `OPENAI_API_KEY` (empty), `WEBUI_SECRET_KEY` (empty), `SCARF_NO_ANALYTICS`, `DO_NOT_TRACK`, `ANONYMIZED_TELEMETRY` (disabled), RAG/Whisper/HF cache vars, `UV_LINK_MODE=copy`, `HOME=/root`. `DATA_DIR` and the `open-webui serve` CLI are UNVERIFIED (not in the fetched Dockerfile). |
 | Data path | Upstream sets up `/app/backend/data`; no VOLUME. Chart mounts `/app/backend/data` (pvc) and `/root/.ollama` (pvc). Draft says `/config`. |
 | Dependencies | Ollama server is a separate service (draft; chart role sidecar). No ContainerForge `dependencies` entry is confirmed. |
 | arm64 | PyPI package is arch-independent. Torch CPU wheels are needed only by the upstream image (see section 4). Upstream image multi-arch status: UNVERIFIED. |
@@ -115,7 +115,7 @@ volumes:
     required: true
 ```
 
-`OLLAMA_BASE_URL` is the one setting the Ollama sidecar needs (upstream ENV, empty by default): the user points it at the Ollama server. `WEBUI_SECRET_KEY` is not listed with a default; see section 7 for how it is generated. Add `DATA_DIR` only after its name is confirmed (UNVERIFIED).
+`OLLAMA_BASE_URL` is the one setting the Ollama sidecar needs (upstream ENV, default `/ollama`): the user points it at the Ollama server. `WEBUI_SECRET_KEY` is not listed with a default; see section 7 for how it is generated. Add `DATA_DIR` only after its name is confirmed (UNVERIFIED).
 
 ## 7. start.sh
 
