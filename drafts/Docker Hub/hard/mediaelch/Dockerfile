@@ -79,7 +79,7 @@ RUN \
 
 # Final stage: the kasmvnc web desktop (Xvnc, openbox, nginx) plus MediaElch.
 # UNVERIFIED: no digest pinned for the kasmvnc image; add it with `docker buildx imagetools inspect` once it is published.
-FROM ghcr.io/trueforge-org/kasmvnc:1.5.2
+FROM ghcr.io/trueforge-org/kasmvnc:1.5.2@sha256:7e96ef6465ad32c153f71fdff80fa4e2cb8fdfce1ab79dd269f08c7647505275
 
 # set version label
 ARG VERSION

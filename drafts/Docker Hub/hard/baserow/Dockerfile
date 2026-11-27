@@ -56,7 +56,7 @@ RUN echo "*** Installing runtime packages ***" && \
     xmlsec1 && \
   rm -rf /var/lib/apt/lists/*
 
-COPY --from=ghcr.io/trueforge-org/caddy:2.11.9 /app/caddy /usr/local/bin/caddy
+COPY --from=ghcr.io/trueforge-org/caddy:2.11.9@sha256:975fd93fee9719d4f9519c6f4640ed98144cbebde8cb2dd60ca6bb506428be4a /app/caddy /usr/local/bin/caddy
 COPY --from=build /app/baserow /app/baserow
 COPY --from=build /usr/share/licenses/baserow /usr/share/licenses/baserow
 

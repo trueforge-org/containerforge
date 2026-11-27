@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 # Upstream: https://github.com/lancachenet/monolithic (config overlay on lancachenet/ubuntu-nginx)
 # Base nginx module availability (slice, stream, stream_ssl_preread, realip) is UNVERIFIED: check `nginx -V`.
 

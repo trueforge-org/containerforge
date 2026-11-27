@@ -1,10 +1,10 @@
 # UNVERIFIED: upstream build dependencies image (photoview/dependencies:trixie) is taken from the upstream
 # Dockerfile. Confirm it is public and versioned for this tag, or replace it with package installs
 # from the upstream scripts/ helpers.
-FROM photoview/dependencies:trixie AS dependencies
+FROM photoview/dependencies:trixie@sha256:8c3e34eaa10310d7f2026ecee8ad525626dd6d02de8a0bb793b91d54da49b1cf AS dependencies
 
 # UNVERIFIED: the Node major is not pinned by the plan. Upstream uses node:18, which is EOL.
-FROM node:22-trixie-slim AS ui
+FROM node:22-trixie-slim@sha256:f0960f8dc047f358e3fb428f36ccba21732194fa5f0cac849f401e63e62fb9e6 AS ui
 ARG VERSION
 ENV UI_PUBLIC_URL=/ \
   npm_config_cache=/tmp/npm
@@ -18,7 +18,7 @@ RUN mkdir -p /src && \
   rm -rf /tmp/photoview.tar.gz /tmp/npm
 
 # Go binaries are built in this stage only. Version tracks the go.mod of the pinned tag (UNVERIFIED).
-FROM golang:1.27-trixie AS api
+FROM golang:1.27-trixie@sha256:430985542100b871e108ccc00e8dcc5eef08ca14ee5825e98ebf563d8ffec4ee AS api
 ARG VERSION
 ENV \
   CGO_ENABLED=1 \

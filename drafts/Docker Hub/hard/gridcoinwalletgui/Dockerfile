@@ -1,6 +1,6 @@
 # UNVERIFIED: no digest is pinned yet. ghcr.io/trueforge-org/kasmvnc is not consumed by any app,
 # so add the published digest once the kasmvnc image exists. The tag matches apps/kasmvnc/docker-bake.hcl.
-FROM ghcr.io/trueforge-org/kasmvnc:1.5.2
+FROM ghcr.io/trueforge-org/kasmvnc:1.5.2@sha256:7e96ef6465ad32c153f71fdff80fa4e2cb8fdfce1ab79dd269f08c7647505275
 
 ARG VERSION
 ARG TARGETARCH
