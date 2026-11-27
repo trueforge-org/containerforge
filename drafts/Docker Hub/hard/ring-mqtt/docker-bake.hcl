@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "GO2RTC_VERSION" {
   // renovate: datasource=github-releases depName=AlexxIT/go2rtc versioning=semver
-  default = "1.9.14"
+  default = "1.9.15"
 }
 
 variable "LICENSE" {
