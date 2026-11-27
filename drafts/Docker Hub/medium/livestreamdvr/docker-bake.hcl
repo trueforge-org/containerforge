@@ -17,7 +17,7 @@ variable "LIVESTREAMDVR_SHA256" {
 // TwitchDownloaderCLI version, from docker/fetch-tdl.sh (depName inferred from its download URL).
 variable "TD_VERSION" {
   // renovate: datasource=github-releases depName=lay295/TwitchDownloader versioning=loose
-  default = "1.54.3"
+  default = "1.54.9"
 }
 
 variable "LICENSE" {
