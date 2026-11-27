@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires an external PostgreSQL; a full functional test is not feasible in the single-container suite.
+# start.sh exits without JWT_SECRET, SETUP_BOOTSTRAP_TOKEN and POSTGRES_PASSWORD, by design.
+# No tcp/http probe on 3000 yet: the server is not expected to listen without a database. Coverage gap noted for the PR.
+timeoutSeconds: 300
+filePaths:
+- /app/dist/main.js
+- /app/bin/kepubify
+- /app/LICENSE
+- /opt/bookorbit-python/bin/python
+- /start.sh

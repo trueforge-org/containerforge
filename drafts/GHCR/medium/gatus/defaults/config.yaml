@@ -1,0 +1,16 @@
+# Seeded to /config/config.yaml on first start when missing or empty.
+# UNVERIFIED: the web.address key and the /health endpoint; check the upstream README before merging.
+web:
+  address: 0.0.0.0
+  port: 8080
+
+storage:
+  type: sqlite
+  path: /config/data/gatus.db
+
+endpoints:
+  - name: example
+    url: "https://example.org"
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"

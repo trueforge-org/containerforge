@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '3389'
+- port: '6636'
+- port: '9300'
+filePaths:
+- /app/ldap
+- /usr/share/licenses/authentik-ldap/LICENSE
+# Known risk: with no server URL or token the outpost may exit instead of listening. If so, this is a real
+# failure to fix or document, not a reason to drop the tcp probes (plan section 8).

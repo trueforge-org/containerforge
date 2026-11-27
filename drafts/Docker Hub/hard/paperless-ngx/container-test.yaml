@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /health
+filePaths:
+- /usr/bin/gotenberg
+- /usr/bin/lok
+- /usr/bin/chromium
+- /usr/lib/libreoffice/program/soffice.bin
+- /usr/share/licenses/gotenberg/LICENSE

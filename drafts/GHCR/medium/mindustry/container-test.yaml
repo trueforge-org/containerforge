@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# UNVERIFIED: the TCP probe depends on the server binding 6567 on TCP (see settings.yaml).
+# No UDP probe: forgetool support for UDP is unconfirmed. Noted as untested for the PR.
+tcp:
+- port: '6567'
+filePaths:
+- /app/mindustry/server-release.jar
+- /usr/share/licenses/mindustry/LICENSE
+runners:
+- entrypoint: java -version

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '5690'
+http:
+- port: '5690'
+  # /health is the upstream HEALTHCHECK path; its status with an empty database is UNVERIFIED
+  path: /health
+filePaths:
+- /app/wizarr/.venv/bin/gunicorn
+- /app/wizarr/app
+- /usr/share/licenses/wizarr/LICENSE

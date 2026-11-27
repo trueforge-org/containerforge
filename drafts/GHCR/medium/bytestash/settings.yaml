@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jordan-dalby/ByteStash"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: BASE_PATH
+    default: ""
+    required: false
+  # UNVERIFIED: confirm the default against the upstream README before merging
+  - name: ALLOW_NEW_ACCOUNTS
+    default: "true"
+    required: false
+  - name: JWT_SECRET
+    # empty: the server generates and stores one under /config when unset
+    default: ""
+    required: false
+  - name: TOKEN_EXPIRY
+    default: "24h"
+    required: false
+  - name: DISABLE_ACCOUNTS
+    default: "false"
+    required: false
+  - name: DISABLE_INTERNAL_ACCOUNTS
+    default: "false"
+    required: false
+  # OIDC_*, DATABASE_URL and POSTGRES_* are optional and not listed yet
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

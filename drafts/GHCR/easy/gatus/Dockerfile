@@ -1,0 +1,31 @@
+# UNVERIFIED: the golang:1.27 tag and digest must be confirmed (go.mod declares go 1.27.0). Pin the digest before merge.
+FROM golang:1.27 AS build
+
+ARG VERSION
+ARG REVISION
+
+# UNVERIFIED: the release tag is assumed to be plain "0.6.1" with no "v" prefix
+RUN git clone --depth 1 --branch "${VERSION}" https://github.com/home-operations/gatus-sidecar.git /src
+
+WORKDIR /src
+
+RUN go mod download && \
+    CGO_ENABLED=0 go build -trimpath \
+        -ldflags "-s -w -X main.Version=${VERSION} -X main.Gitsha=${REVISION:-unknown}" \
+        -o /out/gatus-sidecar ./cmd/gatus-sidecar
+
+# UNVERIFIED: base digest is taken from the plan (Ubuntu 26.04)
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+
+USER root
+
+COPY --from=build /out/gatus-sidecar /app/gatus-sidecar
+# UNVERIFIED: LICENSE is assumed to be in the repo root
+COPY --from=build /src/LICENSE /usr/share/licenses/gatus/LICENSE
+
+RUN chown -R apps:apps /app && chmod -R 755 /app
+
+USER apps
+COPY --chmod=0755 . /
+
+CMD ["/start.sh"]

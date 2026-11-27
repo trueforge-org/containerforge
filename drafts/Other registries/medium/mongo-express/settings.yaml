@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mongo-express/mongo-express"
+ports:
+  - port: 8081
+    protocol: tcp
+    required: false
+env:
+  - name: ME_CONFIG_MONGODB_URL
+    default: "mongodb://mongodb:27017"
+    required: true
+  # Off by default so the image starts with no env set. Enable it and set a password to protect the UI.
+  - name: ME_CONFIG_BASICAUTH_ENABLED
+    default: "false"
+    required: false
+  - name: ME_CONFIG_BASICAUTH_USERNAME
+    default: "admin"
+    required: false
+  - name: ME_CONFIG_BASICAUTH_PASSWORD
+    default: ""
+    required: false
+  - name: ME_CONFIG_OPTIONS_READONLY
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - mongodb

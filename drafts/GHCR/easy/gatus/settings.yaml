@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/home-operations/gatus-sidecar"
+# UNVERIFIED: no port or env var is confirmed from the source yet. Add them only after reading cmd/gatus-sidecar.
+ports: []
+env: []
+# The sidecar is stateless in this image. The chart writes its output to /config, so decide on the mount once the chart behaviour is confirmed.
+volumes: []
+dependencies: []

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+tcp:
+- port: '9000'
+http:
+- port: '9000'
+  path: /api/app/about
+filePaths:
+- /opt/mealie/bin/mealie
+- /nltk_data
+- /usr/share/licenses/mealie/LICENSE
+- /start.sh

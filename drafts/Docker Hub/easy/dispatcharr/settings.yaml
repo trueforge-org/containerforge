@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Dispatcharr/Dispatcharr"
+ports:
+  - port: 9191
+    protocol: tcp
+    required: true
+env:
+  - name: DISPATCHARR_PORT
+    default: "9191"
+    required: false
+  - name: DISPATCHARR_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: DISPATCHARR_TIME_ZONE
+    default: "Etc/UTC"
+    required: false
+  - name: POSTGRES_HOST
+    default: "postgresql"
+    required: true
+  - name: POSTGRES_PORT
+    default: "5432"
+    required: false
+  - name: POSTGRES_DB
+    default: "dispatcharr"
+    required: false
+  - name: POSTGRES_USER
+    default: "dispatch"
+    required: false
+  # upstream default is "secret"; change it for real deployments
+  - name: POSTGRES_PASSWORD
+    default: "secret"
+    required: true
+  - name: REDIS_HOST
+    default: "valkey"
+    required: true
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: UWSGI_WORKERS
+    default: "4"
+    required: false
+  - name: CELERY_MAX_WORKERS
+    default: "6"
+    required: false
+  - name: CELERY_MIN_WORKERS
+    default: "1"
+    required: false
+  - name: DISPATCHARR_SETUP_ALLOWED_IP
+    default: ""
+    required: false
+  - name: DISPATCHARR_TRUSTED_PROXIES
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql
+  - name: valkey

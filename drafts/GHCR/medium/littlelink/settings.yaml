@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/techno-tim/littlelink-server"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+# Partial list: only the README-documented profile and meta names that matter for a first start.
+# UNVERIFIED: the full README list was not read (fetch truncated at about 4 KB).
+env:
+  - name: NAME
+    default: ""
+    required: false
+  - name: BIO
+    default: ""
+    required: false
+  - name: THEME
+    default: ""
+    required: false
+  - name: META_TITLE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes: []

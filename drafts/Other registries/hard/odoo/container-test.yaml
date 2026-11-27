@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 300
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+# UNVERIFIED: that odoo binds 8069 with no reachable database. Confirm on the first run.
+tcp:
+- port: '8069'
+filePaths:
+- /usr/bin/odoo
+- /usr/local/bin/wkhtmltopdf
+- /defaults/odoo.conf
+- /usr/share/licenses/odoo/copyright

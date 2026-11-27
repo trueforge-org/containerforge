@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the http status code on / and whether port 8000 listens without edge
+# compute enabled are not confirmed. If 8000 stays closed by default, remove it from
+# settings.yaml ports rather than weakening this test.
+timeoutSeconds: 120
+tcp:
+- port: '9000'
+- port: '9443'
+- port: '8000'
+http:
+- port: '9000'
+  path: /
+filePaths:
+- /app/portainer
+- /app/public/index.html
+- /usr/share/licenses/portainer/LICENSE

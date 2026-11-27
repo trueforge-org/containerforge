@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://gitlab.com/timvisee/send"
+ports:
+  - port: 1443
+    protocol: tcp
+    required: false
+env:
+  - name: PORT
+    default: "1443"
+    required: false
+  - name: FILE_DIR
+    default: "/config/uploads"
+    required: false
+  # Public URL of the instance. Leave empty and set DETECT_BASE_URL=true to detect it from the browser.
+  - name: BASE_URL
+    default: ""
+    required: false
+  # UNVERIFIED: the service host name of the valkey app is assumed. Check the dependency wiring.
+  - name: REDIS_HOST
+    default: "valkey"
+    required: true
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - valkey

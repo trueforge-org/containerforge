@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/quassel/quassel"
+ports:
+  - port: 4242
+    protocol: tcp
+    required: true
+# UNVERIFIED: 10113 (ident) is not listed until the daemon is confirmed to bind it
+env: []
+volumes:
+  - path: /config
+    required: true
+# PostgreSQL is optional: the daemon uses SQLite in /config by default
+opt_dependencies:
+  - name: postgresql

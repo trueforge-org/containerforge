@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://codeberg.org/nwithan8/tauticord"
+# UNVERIFIED: upstream EXPOSEs 8283 and the chart probes it on /ping, but the app listener is not
+# confirmed from the source. Add 8283 here, with a probe in container-test.yaml, once it is confirmed.
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

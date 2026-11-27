@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 600
+# No tcp probe on 25565 yet: the test runs without EULA=TRUE, so start.sh exits by design and the port never opens.
+# Add `tcp: [port 25565]` once the EULA decision in plan.md section 10 is made. Coverage gap noted for the PR.
+filePaths:
+- /usr/bin/mc-image-helper
+- /usr/local/bin/rcon-cli
+- /usr/local/bin/mc-monitor
+- /usr/share/licenses/minecraft-java/LICENSE
+- /start.sh

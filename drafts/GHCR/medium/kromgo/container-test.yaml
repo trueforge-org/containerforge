@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: both listeners are expected to start with no config and no Prometheus. Confirm in the run step.
+timeoutSeconds: 60
+tcp:
+- port: '8080'
+- port: '8081'
+filePaths:
+- /app/kromgo
+- /usr/share/licenses/kromgo/LICENSE

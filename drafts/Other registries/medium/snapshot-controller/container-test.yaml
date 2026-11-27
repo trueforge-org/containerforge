@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# BLOCKER (see plan section 10): the controller needs a Kubernetes API server and
+# the VolumeSnapshot CRDs. Without a cluster it is expected to exit at startup, so
+# these probes will fail until the maintainers pick a test approach. Do not weaken them.
+timeoutSeconds: 60
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /metrics
+filePaths:
+- /app/snapshot-controller/snapshot-controller
+- /usr/share/licenses/snapshot-controller/LICENSE

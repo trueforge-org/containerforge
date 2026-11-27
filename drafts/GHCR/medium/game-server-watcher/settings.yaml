@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/a-sync/game-server-watcher"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: DATA_PATH
+    default: "/config/data/"
+    required: false
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: PORT
+    default: "8080"
+    required: false
+  # upstream default; the README says to set a unique value, so flag this in the PR
+  - name: SECRET
+    default: "secret"
+    required: false
+  - name: DBG
+    default: "0"
+    required: false
+  - name: REFRESH_TIME_MINUTES
+    default: "2"
+    required: false
+  - name: DISCORD_BOT_TOKEN
+    default: ""
+    required: false
+  - name: TELEGRAM_BOT_TOKEN
+    default: ""
+    required: false
+  - name: SLACK_BOT_TOKEN
+    default: ""
+    required: false
+  - name: SLACK_APP_TOKEN
+    default: ""
+    required: false
+  - name: STEAM_WEB_API_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

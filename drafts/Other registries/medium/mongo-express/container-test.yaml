@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+# narrowed: requires external mongodb; full functional test not feasible in single-container suite
+# UNVERIFIED: an http probe on / is not added until the status without a database is confirmed on a run.
+tcp:
+- port: '8081'
+filePaths:
+- /app/mongo-express/app.js
+- /app/mongo-express/package.json
+- /usr/share/licenses/mongo-express/LICENSE

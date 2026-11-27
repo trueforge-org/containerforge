@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/home-operations/kromgo"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+  - port: 8081
+    protocol: tcp
+    required: false
+env:
+  # Upstream README marks this required. It is optional here so the image starts for the test with no env.
+  - name: KROMGO_PROMETHEUS_URL
+    default: ""
+    required: false
+  - name: KROMGO_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: KROMGO_LOG_FORMAT
+    default: "json"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

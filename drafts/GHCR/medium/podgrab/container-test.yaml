@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED starting value; no Go sibling sets this. Adjust after measuring startup.
+timeoutSeconds: 120
+tcp:
+- port: '8080'

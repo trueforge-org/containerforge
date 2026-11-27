@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Anuken/Mindustry"
+ports:
+  # UNVERIFIED: the TCP side is taken from the TrueCharts chart only. Drop this entry if TCP 6567 is not open on the first run.
+  - port: 6567
+    protocol: tcp
+    required: true
+  - port: 6567
+    protocol: udp
+    required: true
+env:
+  - name: SRV_NAME
+    default: "DockerMindustry"
+    required: false
+  - name: GAME_PARAMS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the sidecar may exit without a Kubernetes API. If so, the "still running" check cannot pass in a plain container.
+# No tcp probe: settings.yaml declares no ports yet.
+filePaths:
+- /app/gatus-sidecar
+- /start.sh

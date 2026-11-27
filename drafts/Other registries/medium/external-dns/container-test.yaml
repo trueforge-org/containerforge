@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+# UNVERIFIED: the /healthz path is chart-defined, not confirmed in v0.24.0 source. Check on the first run.
+# UNVERIFIED: the process may exit without a Kubernetes API. If so, this test is a blocker, not a reason to loosen it.
+tcp:
+- port: '7979'
+http:
+- port: '7979'
+  path: /healthz
+filePaths:
+- /app/external-dns
+- /usr/share/licenses/external-dns/LICENSE

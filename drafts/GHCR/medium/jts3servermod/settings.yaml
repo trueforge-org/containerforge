@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/galexrt/container-jts3servermod"
+# No ports: the bot is an outbound client of an external TeamSpeak 3 server.
+# UNVERIFIED: the upstream image has no EXPOSE. Add ports only after the plugin is confirmed to listen.
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: JTS3_JAVA_ARGS
+    default: "-Xmx256M"
+    required: false
+  - name: JTS3_LOG
+    default: "/config/logs/JTS3ServerMod_InstanceManager.cfg"
+    required: false
+volumes:
+  - path: /config
+    required: true

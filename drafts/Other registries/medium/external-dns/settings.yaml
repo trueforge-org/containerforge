@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/kubernetes-sigs/external-dns"
+ports:
+  # UNVERIFIED: 7979 is the metrics and health address default (pkg types). The chart sets it too.
+  - port: 7979
+    protocol: tcp
+    required: false
+env:
+  # No other env names are listed: the env binding of flags was not verified against the source.
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

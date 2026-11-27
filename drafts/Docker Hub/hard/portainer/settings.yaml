@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/portainer/portainer/"
+ports:
+  - port: 9000
+    protocol: tcp
+    required: false
+  - port: 9443
+    protocol: tcp
+    required: false
+  - port: 8000
+    protocol: tcp
+    required: false
+# Upstream reads no env vars (confirmed only for flags in the plan). The PORTAINER_*
+# names are ContainerForge wrapper variables that start.sh maps to Portainer flags.
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: PORTAINER_DATA
+    default: "/config"
+    required: false
+  - name: PORTAINER_BIND
+    default: ":9000"
+    required: false
+  - name: PORTAINER_BIND_HTTPS
+    default: ":9443"
+    required: false
+  - name: PORTAINER_TUNNEL_PORT
+    default: "8000"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

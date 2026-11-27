@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/thde/rtorrent_exporter"
+ports:
+  - port: 9135
+    protocol: tcp
+    required: true
+env:
+  - name: RTORRENT_EXPORTER_WEB_LISTEN_ADDRESS
+    default: ":9135"
+    required: false
+  - name: RTORRENT_EXPORTER_RTORRENT_SCRAPE_URI
+    default: ""
+    required: false
+  - name: RTORRENT_EXPORTER_RTORRENT_TIMEOUT
+    default: "5s"
+    required: false
+volumes: []
+dependencies: []

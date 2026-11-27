@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 60
+tcp:
+- port: '3478'
+- port: '5349'
+filePaths:
+- /usr/bin/turnserver
+- /usr/share/licenses/stun-turn-server/LICENSE

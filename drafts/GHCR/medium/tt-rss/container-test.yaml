@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Startup waits up to about 60 seconds for PostgreSQL before php-fpm starts.
+timeoutSeconds: 240
+tcp:
+- port: '9000'
+filePaths:
+- /config/html/tt-rss/index.php
+- /config/html/tt-rss/config.php
+- /usr/share/licenses/tt-rss/LICENSE

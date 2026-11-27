@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 180
+tcp:
+- port: '3001'
+http:
+- port: '3001'
+  path: /
+filePaths:
+- /app/aurral/backend/server.ts
+- /app/aurral/frontend/dist/index.html
+- /usr/local/bin/yt-dlp
+- /usr/local/bin/cloudflared
+- /usr/local/bin/ffmpeg
+- /usr/share/licenses/aurral/LICENSE

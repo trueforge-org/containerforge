@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+# narrowed: requires external redis/valkey; full functional test not feasible in single-container suite
+# UNVERIFIED: an http probe on / is not added until the status without Redis is confirmed on a run.
+tcp:
+- port: '1443'
+filePaths:
+- /app/send/server/bin/prod.js
+- /usr/share/licenses/send/LICENSE

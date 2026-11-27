@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: with no LEAF_* or MQTT_HOST set, the app may exit at start. If it does, this test cannot pass as written. Resolve before merging, do not weaken it.
+timeoutSeconds: 60
+filePaths:
+- /app/bin/leaf_2_mqtt
+- /usr/share/licenses/leaf2mqtt/LICENSE

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UNVERIFIED: no port probe until the listener is confirmed (see settings.yaml). File checks only for now.
+filePaths:
+- /app/venv/bin/python
+- /app/requirements.txt
+- /app/entrypoint.sh
+- /usr/share/licenses/tauticord/LICENSE

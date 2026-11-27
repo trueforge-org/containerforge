@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '8000'
+http:
+# UNVERIFIED: the status code of / with no config. Confirm during the run.
+- port: '8000'
+  path: /
+filePaths:
+- /app/ddns-updater
+- /usr/share/licenses/ddns-updater/LICENSE
+# Known risk: the updater may exit without config. Confirm it stays up with an empty /config.

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/odoo/odoo"
+ports:
+  - port: 8069
+    protocol: tcp
+    required: false
+  # UNVERIFIED: 8071 and 8072 are EXPOSEd upstream. Add them here with probes once confirmed as listeners.
+env:
+  - name: PG_HOST
+    default: "postgresql"
+    required: false
+  - name: PG_PORT
+    default: "5432"
+    required: false
+  - name: PG_USER
+    default: "odoo"
+    required: false
+  # No default. start.sh warns and starts without it, so the image still starts with no env set.
+  - name: PG_PASSWORD
+    required: true
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - postgresql

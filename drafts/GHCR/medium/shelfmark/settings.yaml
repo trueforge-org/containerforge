@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/calibrain/shelfmark"
+ports:
+  - port: 8084
+    protocol: tcp
+    required: true
+env:
+  # UNVERIFIED: env names taken from the upstream README, which was not readable in the context fetch
+  - name: FLASK_PORT
+    default: "8084"
+    required: false
+  - name: INGEST_DIR
+    default: "/books"
+    required: false
+  - name: LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /books
+    required: false
+dependencies: []

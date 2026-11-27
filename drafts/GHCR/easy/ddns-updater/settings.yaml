@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/qdm12/ddns-updater"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: CONFIG
+    default: ""
+    required: false
+  - name: PERIOD
+    default: "5m"
+    required: false
+  - name: UPDATE_COOLDOWN_PERIOD
+    default: "5m"
+    required: false
+  - name: LISTENING_ADDRESS
+    default: ":8000"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: DATADIR
+    default: "/config"
+    required: false
+  - name: CONFIG_FILEPATH
+    default: "/config/config.json"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

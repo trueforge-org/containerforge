@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED starting value: the Next.js app is slow to start; align with the largest sibling Node app.
+timeoutSeconds: 180
+tcp:
+- port: '7171'
+http:
+- port: '7171'
+  path: /
+# UNVERIFIED: GET / may redirect to a setup page on first run; confirm the expected status.
+filePaths:
+- /app/dist/index.js
+- /app/committag.json
+- /usr/share/licenses/agregarr/LICENSE

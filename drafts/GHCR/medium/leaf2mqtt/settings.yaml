@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mitsumaui/leaf2mqtt"
+ports: []
+# The four vars below are documented as required in the v0.6 README. They have no default, so start.sh warns when they are missing.
+env:
+  - name: LEAF_USERNAME
+    default: ""
+    required: false
+  - name: LEAF_PASSWORD
+    default: ""
+    required: false
+  - name: LEAF_TYPE
+    default: ""
+    required: false
+  - name: MQTT_HOST
+    default: ""
+    required: false
+  - name: MQTT_PORT
+    default: "1883"
+    required: false
+  - name: MQTT_USERNAME
+    default: ""
+    required: false
+  - name: MQTT_PASSWORD
+    default: ""
+    required: false
+  - name: MQTT_BASE_TOPIC
+    default: "leaf"
+    required: false
+  - name: UPDATE_INTERVAL_MINUTES
+    default: "60"
+    required: false
+  - name: CHARGING_UPDATE_INTERVAL_MINUTES
+    default: "15"
+    required: false
+  - name: COMMAND_ATTEMPTS
+    default: "1"
+    required: false
+  - name: LOG_LEVEL
+    default: "Warning"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

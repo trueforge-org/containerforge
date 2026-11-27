@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '4466'
+# UNVERIFIED: GET / returns 200 without a kubeconfig; confirm in the test run, otherwise drop this probe.
+http:
+- port: '4466'
+  path: /

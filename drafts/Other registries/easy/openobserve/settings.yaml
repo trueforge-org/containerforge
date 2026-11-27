@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/openobserve/openobserve"
+ports:
+  - port: 5080
+    protocol: tcp
+    required: false
+env:
+  - name: ZO_HTTP_PORT
+    default: "5080"
+    required: false
+  - name: ZO_DATA_DIR
+    default: "/config/data"
+    required: false
+  # Upstream docs mark these required. Optional here, with no default, so the image starts for the test.
+  - name: ZO_ROOT_USER_EMAIL
+    default: ""
+    required: false
+  - name: ZO_ROOT_USER_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

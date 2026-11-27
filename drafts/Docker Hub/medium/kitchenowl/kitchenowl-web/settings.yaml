@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/TomBursch/kitchenowl"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  # Host:port of the kitchenowl backend container. The name is a proposal, not verified (plan section 6).
+  - name: BACK_URL
+    default: "kitchenowl:8080"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

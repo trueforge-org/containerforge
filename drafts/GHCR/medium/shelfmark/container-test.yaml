@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8084'
+http:
+- port: '8084'
+  path: /api/health
+filePaths:
+- /app/shelfmark/.venv/bin/python
+- /app/shelfmark/frontend-dist
+- /usr/share/licenses/shelfmark/LICENSE

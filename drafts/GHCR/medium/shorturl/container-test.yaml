@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+# UNVERIFIED: these probes need the app to listen on 0.0.0.0:8000. The upstream repo page documents a localhost:8000 default,
+# so the listen-address flag must be confirmed before these pass (plan.md R4 and section 7).
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/shorturl/shorturl
+- /usr/share/licenses/shorturl/LICENSE

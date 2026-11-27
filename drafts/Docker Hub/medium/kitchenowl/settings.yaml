@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/TomBursch/kitchenowl"
+ports:
+  # UNVERIFIED: wsgi.ini binds 8080; the chart targets 5000. Confirm in a run (plan section 10).
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: STORAGE_PATH
+    default: "/config/data"
+    required: false
+  - name: DEBUG
+    default: "False"
+    required: false
+  # Generated and kept in /config/jwt_secret_key by start.sh when empty or the upstream placeholder.
+  - name: JWT_SECRET_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

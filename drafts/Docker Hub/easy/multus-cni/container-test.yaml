@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# crane is a CLI with no port or long-running process; verify the install instead.
+# The version string is not asserted, so Renovate bumps do not break the test.
+runners:
+- entrypoint: /usr/local/bin/crane
+  cmd: --help
+  expectedOutput: tool for managing container images
+  exitCode: 0
+- entrypoint: /usr/bin/ls
+  cmd: /usr/share/licenses/crane/LICENSE
+  expectedOutput: /usr/share/licenses/crane/LICENSE
+  exitCode: 0
+
+mainRunner:
+  enabled: false

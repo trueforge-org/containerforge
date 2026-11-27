@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/sissbruecker/linkding"
+ports:
+  - port: 9090
+    protocol: tcp
+    required: false
+env:
+  - name: LD_SERVER_HOST
+    default: "[::]"
+    required: false
+  - name: LD_SERVER_PORT
+    default: "9090"
+    required: false
+  - name: LD_DISABLE_BACKGROUND_TASKS
+    default: "False"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# UNVERIFIED: LD_SUPERUSER_NAME / LD_SUPERUSER_PASSWORD are used by create_initial_superuser, which is
+# only in the draft plan. Add them here once the management command's env names are read from source.

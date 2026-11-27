@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '5006'
+http:
+- port: '5006'
+  path: /
+filePaths:
+- /app/actual-server/node_modules/@actual-app/sync-server/build/bin/actual-server.js
+- /usr/share/licenses/actualserver/LICENSE

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/gotenberg/gotenberg"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: API_PORT
+    default: "3000"
+    required: false
+  - name: API_TIMEOUT
+    default: "30s"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: CHROMIUM_AUTO_START
+    default: "false"
+    required: false
+  - name: CHROMIUM_MAX_CONCURRENCY
+    default: "6"
+    required: false
+  - name: CHROMIUM_RESTART_AFTER
+    default: "100"
+    required: false
+  - name: LIBREOFFICE_AUTO_START
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

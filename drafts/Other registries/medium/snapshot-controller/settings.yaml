@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/kubernetes-csi/external-snapshotter"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+# The env names below are ContainerForge wrapper variables read by start.sh and
+# mapped to upstream flags. The upstream binary does not read them itself.
+env:
+  - name: LEADER_ELECTION
+    default: "true"
+    required: false
+  - name: LEADER_ELECTION_NAMESPACE
+    default: ""
+    required: false
+  - name: HTTP_ENDPOINT_PORT
+    default: "8080"
+    required: false
+# No volumes: the controller keeps no state on disk.
+volumes: []
+# Kubernetes API and VolumeSnapshot CRDs are cluster prerequisites, not ContainerForge apps.
+dependencies: []

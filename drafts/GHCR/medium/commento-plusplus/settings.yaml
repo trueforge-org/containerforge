@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/souramoo/commentoplusplus"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: COMMENTO_BIND_ADDRESS
+    default: "0.0.0.0"
+    required: false
+  # UNVERIFIED default: the README example is 8080.
+  - name: COMMENTO_PORT
+    default: "8080"
+    required: false
+  # Upstream needs these, but no safe default exists. Set by the operator. SMTP names are not confirmed.
+  - name: COMMENTO_POSTGRES
+    default: ""
+    required: false
+  - name: COMMENTO_ORIGIN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+dependencies:
+  - name: postgresql

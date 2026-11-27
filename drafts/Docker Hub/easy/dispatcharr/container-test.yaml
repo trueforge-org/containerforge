@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
+timeoutSeconds: 180
+tcp:
+- port: '9191'
+filePaths:
+- /app/manage.py
+- /app/frontend/dist/index.html
+- /app/venv/bin/uwsgi
+- /app/venv/bin/celery
+- /usr/sbin/nginx
+- /usr/share/licenses/dispatcharr/LICENSE
