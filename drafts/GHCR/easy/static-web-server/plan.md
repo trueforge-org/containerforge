@@ -7,7 +7,7 @@
 | --- | --- |
 | Version to build | `2.44.3`, GitHub release `v2.44.3` published 2026-11-15. Draft chart tag `2.44.3` matches. |
 | Renovate | `datasource=github-releases depName=static-web-server/static-web-server versioning=semver` |
-| License | Apache-2.0 (GitHub SPDX). Source: https://api.github.com/repos/static-web-server/static-web-server |
+| License | MIT OR Apache-2.0 (dual-licensed per upstream README, files LICENSE-MIT and LICENSE-APACHE). Source: https://raw.githubusercontent.com/static-web-server/static-web-server/master/README.md (GitHub API SPDX was 403, not verified) |
 | Source URL | https://github.com/static-web-server/static-web-server |
 | amd64 download | `https://github.com/static-web-server/static-web-server/releases/download/v2.44.3/static-web-server-v2.44.3-x86_64-unknown-linux-gnu.tar.gz` |
 | arm64 download | `https://github.com/static-web-server/static-web-server/releases/download/v2.44.3/static-web-server-v2.44.3-aarch64-unknown-linux-gnu.tar.gz` |
@@ -42,7 +42,7 @@ No `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md`: this image is not a
 2. Map `TARGETARCH` to the Rust triple: `amd64` → `x86_64`, `arm64` → `aarch64`; fail on anything else.
 3. Download the tarball and `static-web-server-v${VERSION}-SHA256SUM` into `/tmp/sws`. Verify with `grep " static-web-server-v${VERSION}-${SWS_ARCH}-unknown-linux-gnu.tar.gz$" SHA256SUM | sha256sum -c -`.
 4. Extract to `/tmp/sws`, `install -m 0755` the `static-web-server` binary to `/app/static-web-server`. The tarball layout (binary at root or in a subdirectory) is UNVERIFIED; confirm with `tar tzf` during the build step.
-5. License: ship the Apache-2.0 license file to `/usr/share/licenses/static-web-server/`. Confirm the file name inside the tarball at build time (UNVERIFIED; the repo has a `LICENSE` file at its root, so `curl` it from `raw.githubusercontent.com/static-web-server/static-web-server/v${VERSION}/LICENSE` if the tarball lacks it).
+5. License: ship the MIT and Apache-2.0 license files to `/usr/share/licenses/static-web-server/`. Confirm the file name inside the tarball at build time (UNVERIFIED; the repo has a `LICENSE` file at its root, so `curl` it from `raw.githubusercontent.com/static-web-server/static-web-server/v${VERSION}/LICENSE` if the tarball lacks it).
 6. `rm -rf /tmp/sws`, `chown -R apps:apps /app`, `chmod -R 755 /app`.
 7. `ENV HOME=/config`.
 8. Tail:
@@ -72,7 +72,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "Apache-2.0"
+  default = "MIT OR Apache-2.0"
 }
 
 variable "SOURCE" {

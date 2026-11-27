@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | 4.9.1 (`v4.9.1`, published 2026-11-21). The draft and chart use 4.9.0; 4.9.1 is the latest release, so the plan pins it. Source: `gh api repos/shlinkio/shlink-web-client/releases/latest`. 4.9.1 changelog: dependency update and nginx base bump to `nginx/nginx-unprivileged:1.31-alpine` (security fix). |
+| Version to build | 4.9.1 (`v4.9.1`, published 2026-11-21). The draft uses 4.9.0; the TrueCharts chart (17.0.0) uses 4.9.1; 4.9.1 is the latest release, so the plan pins it. Source: `gh api repos/shlinkio/shlink-web-client/releases/latest`. 4.9.1 changelog: dependency update and nginx base bump to `nginx/nginx-unprivileged:1.31-alpine` (security fix). |
 | Renovate | `datasource=github-releases depName=shlinkio/shlink-web-client versioning=semver` |
 | License | MIT (SPDX `MIT`). https://github.com/shlinkio/shlink-web-client/blob/develop/LICENSE |
 | Source URL | https://github.com/shlinkio/shlink-web-client |
