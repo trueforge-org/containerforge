@@ -17,7 +17,7 @@
 | Env vars the chart sets | `YOURLS_DB_HOST`, `YOURLS_DB_NAME`, `YOURLS_DB_USER`, `YOURLS_DB_PASS`, `YOURLS_PRIVATE`, `YOURLS_SITE`, `YOURLS_USER`, `YOURLS_PASS` (chart values, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/yourls/values.yaml). UNVERIFIED: the sample config has no `YOURLS_USER`/`YOURLS_PASS` constants, so whether the app reads them is not confirmed. Do not list them in `settings.yaml` until confirmed. |
 | Port | Chart service `main` is 8080/tcp (targetPort 8080). Upstream port not stated in any fetched source. |
 | Chart security | runAsUser 0, runAsGroup 0, readOnlyRootFilesystem false, runAsNonRoot and privileged unset. Persistence: none. |
-| Upstream image | `yourls:1.10.6@sha256:2cc01addde3f5bfdcca3640681e9dbcb38d5e1ee7c72d35520d743e361defdea` (chart). |
+| Upstream image | `yourls:1.10.6@sha256:4e5ec5cdc4be3470bf2a718a1b77c01525498c7b770119bd2a1ed669dd4c529a` (chart). |
 | PHP requirements | UNVERIFIED: minimum PHP version and extension list not confirmed. docs.yourls.org redirects to https://yourls.org/docs/guide/requirements, which was not followed in this run. |
 | Ubuntu PHP packages | `php8.5-mysql`, `php8.5-curl`, `php8.5-xml`, `php8.5-zip` are installed from apt on this base in `apps/bookstack/Dockerfile`, so PHP 8.5 is available on `ghcr.io/trueforge-org/ubuntu:26.04`. `php8.5-mbstring` is UNVERIFIED for this base. |
 | Dependencies | `mariadb` (apps/mariadb exists ✅). |
