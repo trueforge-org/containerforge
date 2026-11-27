@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 
 # python-node provides Node.js on glibc, which tileserver-gl needs.
 # UNVERIFIED: the Node major in this base must satisfy the engines range ^20.19.0 || ^22.13.0 || 24.

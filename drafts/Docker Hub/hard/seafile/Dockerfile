@@ -1,9 +1,9 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 
 # Source stage: the upstream server tree from the official image, same version as VERSION.
 # UNVERIFIED: pin this stage by digest (docker buildx imagetools inspect seafileltd/seafile-mc:14.0.9).
 # renovate: datasource=docker depName=seafileltd/seafile-mc versioning=semver
-FROM docker.io/seafileltd/seafile-mc:14.0.9 AS source
+FROM docker.io/seafileltd/seafile-mc:14.0.9@sha256:75d8b88e8bfaa54099082aec0e99ff1a962bd364bfc21da34125fa66998f0861 AS source
 
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
