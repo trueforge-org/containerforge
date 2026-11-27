@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: /login is expected to answer without a token on notebook 7.6.5; confirm on the first run
+http:
+- port: '8888'
+  path: /login

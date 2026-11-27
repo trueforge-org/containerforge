@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: first start downloads the whole game. Measure in CI and adjust.
+timeoutSeconds: 1800
+
+# No tcp or http probe: the server listens on UDP only (settings.yaml), and udp probe
+# support in forgetool is UNVERIFIED. Do not add a fake tcp probe.
+filePaths:
+- /start.sh
+- /defaults/server.cfg
+- /usr/local/share/steamcmd/steamcmd.sh

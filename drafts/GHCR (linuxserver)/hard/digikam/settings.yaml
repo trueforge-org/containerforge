@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/KDE/digikam"
+# UNVERIFIED: 3001 is the upstream HTTPS port served directly. Port 3000 (HTTP, meant for a
+# reverse proxy) is left out until the display stack is chosen (plan section 10).
+ports:
+  - port: 3001
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

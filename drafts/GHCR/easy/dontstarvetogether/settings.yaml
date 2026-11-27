@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.klei.com/games/dont-starve-together"
+# UNVERIFIED: no ports confirmed. The TrueCharts chart lists 10890/udp, 8766/udp and 27016/udp; confirm against the server config before adding.
+ports:
+  []
+env:
+  # UNVERIFIED: dedicated server app id from the TrueCharts chart; the Steam store check did not confirm it.
+  - name: GAME_ID
+    default: "343050"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

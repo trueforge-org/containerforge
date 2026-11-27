@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://min.io/product/aistor"
+ports:
+  - port: 9000
+    protocol: tcp
+    required: true
+  - port: 9001
+    protocol: tcp
+    required: false
+env:
+  - name: MINIO_ROOT_USER
+    default: "minio"
+    required: false
+  # start.sh refuses to start without it. Never a fixed password.
+  - name: MINIO_ROOT_PASSWORD
+    default: ""
+    required: true
+  # UNVERIFIED: whether AIStor reads a file path or the licence content. Confirm before use.
+  - name: MINIO_LICENSE
+    default: ""
+    required: false
+  - name: MINIO_BROWSER_REDIRECT_URL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

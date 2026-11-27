@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No port or HTTP probes: the image opens no listeners.
+# The Pushover send path needs tokens and is not exercised here; it is run manually per the build and test protocol.
+filePaths:
+- /start.sh

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '64080'
+http:
+- port: '64080'
+  path: /
+filePaths:
+- /app/quassel-web/app.js
+- /app/quassel-web/settings.cjs
+- /app/quassel-web/node_modules/libquassel/package.json
+- /usr/share/licenses/quassel-web/LICENSE
+- /start.sh

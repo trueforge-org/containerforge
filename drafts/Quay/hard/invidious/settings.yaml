@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/iv-org/invidious"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+# UNVERIFIED: env names for the database host and password are not listed until checked
+# against upstream src/invidious/config.cr. Do not add invented names.
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - postgresql

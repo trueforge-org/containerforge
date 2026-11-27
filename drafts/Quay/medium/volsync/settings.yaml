@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/backube/volsync"
+# UNVERIFIED: ports come from the TrueCharts chart args (health 8081, metrics 8443), not from the source at the tag
+ports:
+  - port: 8081
+    protocol: tcp
+    required: false
+  - port: 8443
+    protocol: tcp
+    required: false
+env:
+  []
+volumes:
+  []

@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+filePaths:
+- /start.sh
+- /usr/local/bin/sftpgo
+- /defaults/sftpgo.json
+- /usr/share/licenses/sftpgo/LICENSE
+tcp:
+- port: '2022'
+- port: '8080'

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: take the timeout from the chosen display-stack sibling
+timeoutSeconds: 120
+tcp:
+- port: '3000' # UNVERIFIED: depends on the display stack decision
+filePaths:
+- /usr/bin/filezilla
+- /usr/share/licenses/filezilla/LICENSE

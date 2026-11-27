@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/FreeRDP/Remmina"
+# BLOCKED (plan section 10): ports are filled in once the display stack is decided. Do not list the upstream EXPOSE 3001 or the draft 3000.
+ports: []
+# Only variables start.sh really reads. None confirmed yet.
+env: []
+volumes:
+  - path: /config
+    required: true
+dependencies: []

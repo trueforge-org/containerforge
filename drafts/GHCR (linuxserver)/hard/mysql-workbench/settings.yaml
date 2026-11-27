@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mysql/mysql-workbench"
+ports:
+  - port: 3001 # UNVERIFIED: only if the display/web layer serves it
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: TITLE
+    default: "MySQL Workbench"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: mariadb

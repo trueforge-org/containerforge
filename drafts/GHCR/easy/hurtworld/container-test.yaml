@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 900
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh
+# UDP ports 12871 and 12881 have no probe: the tcp check is TCP-only.

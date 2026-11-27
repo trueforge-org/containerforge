@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# BLOCKED: no display layer yet (see plan section 10). This probe cannot pass until one is chosen.
+# UNVERIFIED: timeoutSeconds for a GUI start
+timeoutSeconds: 120
+tcp:
+- port: '3001'
+filePaths:
+- /app/firefox/firefox

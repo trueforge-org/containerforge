@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/csi-addons/kubernetes-csi-addons"
+ports:
+  # metrics (chart: --metrics-bind-address=:8080)
+  - port: 8080
+    protocol: tcp
+    required: false
+  # health probes (chart: --health-probe-bind-address=:8081)
+  - port: 8081
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  []

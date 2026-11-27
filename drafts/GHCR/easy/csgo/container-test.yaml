@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or udp probe on 27015: the first start downloads the server with SteamCMD, which is too slow
+# and too unreliable for CI. Probes can be added once a run shows the server listening.
+filePaths:
+- /start.sh
+- /usr/local/share/steamcmd/steamcmd.sh

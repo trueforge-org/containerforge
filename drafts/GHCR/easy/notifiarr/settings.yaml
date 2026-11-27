@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Notifiarr/notifiarr"
+ports:
+  - port: 5454
+    protocol: tcp
+    required: true
+env:
+  # DN_BIND_ADDR and DN_API_KEY are taken from the TrueCharts chart; UNVERIFIED against the binary.
+  - name: DN_BIND_ADDR
+    default: "0.0.0.0:5454"
+    required: false
+  - name: DN_API_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

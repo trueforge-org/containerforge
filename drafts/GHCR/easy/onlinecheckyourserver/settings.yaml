@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ich777/docker-online-check-pushover"
+ports:
+  []
+env:
+  - name: HOST
+    default: "google.com"
+    required: false
+  - name: PING_INTERVAL
+    default: "300"
+    required: false
+  - name: PING_RETRY
+    default: "3600"
+    required: false
+  - name: PING_TIMEOUT
+    default: "10"
+    required: false
+  - name: PUSHOVER_APP_TOKEN
+    default: ""
+    required: false
+  - name: PUSHOVER_MESSAGE
+    default: "google.com is offline!"
+    required: false
+  - name: PUSHOVER_PRIORITY
+    default: "0"
+    required: false
+  - name: PUSHOVER_TITLE
+    default: "Online Check"
+    required: false
+  - name: PUSHOVER_USER_TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '5000'
+http:
+- port: '5000'
+  path: /healthz
+filePaths:
+- /app/whoogle/run
+- /app/whoogle/requirements.txt
+- /app/whoogle/app/__init__.py
+- /usr/share/licenses/whoogle/LICENSE

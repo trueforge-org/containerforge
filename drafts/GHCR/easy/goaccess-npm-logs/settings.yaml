@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://goaccess.io"
+# UNVERIFIED: the wrapper's EXPOSE and README use 7880, its npm.sh config writes 7890. Confirm in the build test.
+ports:
+  - port: 7880
+    protocol: tcp
+    required: false
+env:
+  - name: GOACCESS_LOG_DIR
+    default: "/opt/log"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  # Read-only mount of the NPM log directory, supplied by the user.
+  - path: /opt/log
+    required: false

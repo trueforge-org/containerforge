@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed test (draft): the operator (/manager) needs a Kubernetes API server and exits without one,
+# so the tcp probes for 8081 and 8443 are not added yet. Decide how to test the manager before adding them.
+filePaths:
+- /manager
+- /usr/local/bin/rclone
+- /usr/local/bin/restic
+- /usr/local/bin/syncthing
+- /usr/local/bin/diskrsync
+- /usr/local/bin/diskrsync-tcp
+
+runners:
+- entrypoint: rclone version
+- entrypoint: syncthing --version

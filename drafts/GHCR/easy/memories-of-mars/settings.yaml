@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://memoriesofmars.com"   # UNVERIFIED: draft website, not fetched
+ports: []
+env:
+  - name: STEAM_APP_IDS
+    default: ""   # UNVERIFIED: Steam app id not confirmed; start.sh fails clearly when empty
+    required: true
+  - name: STEAM_INSTALL_DIR
+    default: "/config/memories-of-mars"
+    required: false
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: STEAM_USERNAME
+    default: "anonymous"
+    required: false
+  - name: STEAM_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

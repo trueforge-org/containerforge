@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# CONFLICT (open): the manager needs a Kubernetes config. Without a cluster it may exit, and
+# then the probes below fail. If it exits, record the log and decide with the user. Do not
+# remove the probes to make the test pass.
+tcp:
+- port: '8080'
+- port: '8081'
+filePaths:
+- /start.sh
+- /app/csi-addons-manager

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/navidrome/navidrome"
+ports:
+  - port: 4533
+    protocol: tcp
+    required: true
+env:
+  - name: ND_MUSICFOLDER
+    default: "/music"
+    required: false
+  - name: ND_DATAFOLDER
+    default: "/config"
+    required: false
+  - name: ND_CONFIGFILE
+    default: "/config/navidrome.toml"
+    required: false
+  - name: ND_PORT
+    default: "4533"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /music
+    required: false
+dependencies: []

@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No ports are exposed, so there are no tcp or http probes.
+# The executable bit (0755) is set in the Dockerfile; filePaths only checks existence.
+filePaths:
+- /app/recyclarr/recyclarr

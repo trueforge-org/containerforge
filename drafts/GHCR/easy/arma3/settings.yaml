@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide"
+ports:
+  - port: 2302
+    protocol: udp
+    required: true
+  # UNVERIFIED: the chart also lists 2302/tcp (main). Add it only if the server opens it.
+  - port: 2303
+    protocol: udp
+    required: false
+  - port: 2304
+    protocol: udp
+    required: false
+  - port: 2305
+    protocol: udp
+    required: false
+  - port: 2306
+    protocol: udp
+    required: false
+env:
+  - name: VALIDATE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

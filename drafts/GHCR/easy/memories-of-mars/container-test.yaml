@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/share/steamcmd/steamcmd.sh
+# No ports are verified yet, so there are no probes. Narrow test: first start fails without STEAM_APP_IDS by design.

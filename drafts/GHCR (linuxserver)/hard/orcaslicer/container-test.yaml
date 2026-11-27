@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is not set from a GUI sibling yet. The tcp probe on 3001
+# fails until the display stack is added (plan section 10).
+timeoutSeconds: 120
+tcp:
+- port: '3001'
+filePaths:
+- /app/orcaslicer/AppRun
+- /usr/share/licenses/orcaslicer/LICENSE

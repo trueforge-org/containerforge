@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mozilla-firefox/firefox"
+# UNVERIFIED: port 3001 is the upstream EXPOSE; it is only served once a display and web layer is decided (see PR notes)
+ports:
+  - port: 3001
+    protocol: tcp
+    required: false
+env:
+  - name: TITLE
+    default: "Firefox"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

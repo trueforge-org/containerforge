@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/benbusby/whoogle-search"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: EXPOSE_PORT
+    default: "5000"
+    required: false
+  - name: WHOOGLE_USER
+    default: ""
+    required: false
+  - name: WHOOGLE_PASS
+    default: ""
+    required: false
+  - name: WHOOGLE_URL_PREFIX
+    default: ""
+    required: false
+  - name: WHOOGLE_SECRET_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

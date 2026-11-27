@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+# UNVERIFIED: no tcp or http probe until a port is decided (see settings.yaml).
+filePaths:
+- /app/audacity/AppRun   # UNVERIFIED path for AppImage entry point in 4.0.2
+- /usr/share/licenses/audacity/

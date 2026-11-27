@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# CONFLICT (open): the test runs with no env, so start.sh exits 1 without MINIO_ROOT_PASSWORD and
+# the probes below fail. Decide with the user how the test passes the password (UNVERIFIED that the
+# schema supports env). Do not remove the probes to make it pass.
+timeoutSeconds: 120
+tcp:
+- port: '9000'
+- port: '9001'
+http:
+- port: '9000'
+  path: /minio/health/live
+- port: '9001'
+  path: /
+filePaths:
+- /start.sh
+- /app/aistor/minio

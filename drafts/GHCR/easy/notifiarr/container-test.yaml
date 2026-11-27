@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: startup without an API key, and the timeout value, are not confirmed; adjust after the first run.
+timeoutSeconds: 120
+tcp:
+- port: '5454'
+# UNVERIFIED: the web UI path is not confirmed; adjust after the first run.
+http:
+- port: '5454'
+  path: /
+filePaths:
+- /start.sh
+- /app/notifiarr
+- /usr/share/licenses/notifiarr/LICENSE

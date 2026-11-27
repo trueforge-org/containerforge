@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8181'
+http:
+- port: '8181'
+  path: /
+filePaths:
+- /app/headphones/Headphones.py
+- /defaults/config.ini
+- /usr/share/licenses/headphones/LICENSE
+- /start.sh

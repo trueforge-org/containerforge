@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/linuxserver/Clarkson"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: APP_PORT
+    default: "3000"
+    required: false
+  - name: ENABLE_REGISTRATIONS
+    default: "false"
+    required: false
+  - name: MYSQL_HOST # chosen default matching the sibling app name, not an upstream value
+    default: "mariadb"
+    required: true
+  - name: MYSQL_USERNAME
+    default: "clarkson"
+    required: true
+  - name: MYSQL_PASSWORD # no safe default: start.sh warns when it is empty
+    default: ""
+    required: false
+opt_dependencies:
+  - name: mariadb

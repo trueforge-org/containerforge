@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/joemccann/dillinger"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: PORT
+    default: "8080"
+    required: false
+  - name: BIND_ADDRESS # upstream default is localhost, which is unreachable from other containers
+    default: "0.0.0.0"
+    required: false
+  - name: NODE_ENV
+    default: "production"
+    required: false
+volumes:
+  - path: /config
+    required: true

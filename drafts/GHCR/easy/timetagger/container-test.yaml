@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: the response to GET / without credentials is not confirmed; adjust after the first run.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /start.sh
+- /app/venv/bin/python
+- /usr/share/licenses/timetagger/LICENSE

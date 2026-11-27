@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/photoshow/index.php
+- /app/photoshow/config.php
+- /defaults/photoshow/user
+- /etc/photoshow/nginx.conf
+- /etc/photoshow/supervisord.conf
+- /start.sh

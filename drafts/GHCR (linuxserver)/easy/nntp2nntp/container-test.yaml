@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# BLOCKED with the Python 2 source (see Dockerfile): this test cannot pass until that is resolved
+timeoutSeconds: 60
+tcp:
+- port: '1563'
+filePaths:
+- /config/nntp2nntp.conf
+- /defaults/nntp2nntp.conf

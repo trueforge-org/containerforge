@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '4533'
+# UNVERIFIED: /ping is not confirmed as an upstream endpoint; confirm at the run step before merging.
+http:
+- port: '4533'
+  path: /ping
+filePaths:
+- /app/navidrome
+- /usr/share/licenses/navidrome/LICENSE

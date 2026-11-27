@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://necessegame.com"
+ports:
+  - port: 14159
+    protocol: udp
+    required: true
+env:
+  - name: STEAM_APP_IDS
+    default: "1169370"
+    required: true
+  - name: STEAM_INSTALL_DIR
+    default: "/config/necesse"
+    required: false
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: STEAM_USERNAME
+    default: "anonymous"
+    required: false
+  - name: STEAM_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

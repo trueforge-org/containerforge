@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/223350"
+ports:
+  - port: 2302
+    protocol: udp
+    required: true
+  - port: 27016
+    protocol: udp
+    required: false
+env:
+  - name: STEAM_APP_IDS
+    default: "1042420"
+    required: false
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: GAME_PORT
+    default: "2302"
+    required: false
+  - name: GAME_PARAMS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

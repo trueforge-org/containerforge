@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide"
+ports:
+  - port: 8778
+    protocol: udp
+    required: true
+  - port: 27015
+    protocol: udp
+    required: true
+  # UNVERIFIED: 7778/udp is the game port from GAME_PARAMS (-port=7778). Protocol not confirmed by the chart.
+  - port: 7778
+    protocol: udp
+    required: true
+env:
+  - name: GAME_PARAMS
+    default: "-port=7778 -SAP=8778 -SQP=27015 -aauregion=1 -log=Server.log"
+    required: false
+  - name: SRV_NAME
+    default: "Army Docker"
+    required: false
+  - name: STEAM_APP_VALIDATE
+    default: "false"
+    required: false
+  - name: PASSWRD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

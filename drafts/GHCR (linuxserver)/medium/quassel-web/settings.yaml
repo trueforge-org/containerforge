@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/magne4000/quassel-webserver"
+ports:
+  - port: 64080
+    protocol: tcp
+    required: false
+env:
+  - name: QUASSEL_CORE
+    default: ""
+    required: false
+  - name: QUASSEL_PORT
+    default: "4242"
+    required: false
+  - name: QUASSEL_HTTPS
+    default: ""
+    required: false
+  - name: URL_BASE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

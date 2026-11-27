@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No tcp or http probe: the game port is UDP. UNVERIFIED whether forgetool supports UDP probes.
+# Blocked: the dedicated-server Steam app ID is not confirmed, so there is no install run to test yet.
+filePaths:
+- /start.sh

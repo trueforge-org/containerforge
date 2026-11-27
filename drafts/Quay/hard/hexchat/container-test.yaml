@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# CONFLICT (open): the test runs with no env, so start.sh exits 1 without VNC_PASSWORD and the
+# probes below fail. Decide with the user how the test passes the password (UNVERIFIED that the
+# schema supports env). Do not remove the probes to make it pass.
+timeoutSeconds: 120
+tcp:
+- port: '6080'
+http:
+- port: '6080'
+  path: /vnc.html
+filePaths:
+- /start.sh
+- /usr/bin/hexchat
+- /usr/share/novnc/vnc.html
+- /usr/share/licenses/hexchat/copyright

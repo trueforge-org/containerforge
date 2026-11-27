@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '6555'
+http:
+- port: '6555'
+  path: /
+filePaths:
+- /app/embystat/EmbyStat
+- /app/embystat/EmbyStat.runtimeconfig.json
+- /usr/share/licenses/embystat/LICENSE
+- /start.sh
