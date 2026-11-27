@@ -7,7 +7,7 @@ ARG TOFU_VERSION=1.11.0
 # renovate: datasource=github-releases depName=hashicorp/terraform
 ARG TERRAFORM_VERSION=1.11.3
 # renovate: datasource=github-releases depName=gruntwork-io/terragrunt
-ARG TERRAGRUNT_VERSION=0.78.0
+ARG TERRAGRUNT_VERSION=0.78.4
 # renovate: datasource=pypi depName=ansible
 ARG ANSIBLE_VERSION=13.5.0
 ARG TARGETARCH
