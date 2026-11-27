@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Chart image | `ghcr.io/jlesage/qdirstat:v26.09.1` (TrueCharts `charts/stable/qdirstat`, draft) |
+| Chart image | `ghcr.io/jlesage/qdirstat:v26.11.3` (TrueCharts `charts/stable/qdirstat`, draft) |
 | Upstream image Dockerfile | `jlesage/docker-qdirstat` tag v26.09.1 `Dockerfile`: `FROM jlesage/baseimage-gui:alpine-3.20-v4.14.0`; build stage `alpine:3.20 AS qdirstat` runs `/build/build.sh` with `QDIRSTAT_URL`; final stage copies `/tmp/qdirstat-install/usr/bin/qdirstat`; `add-pkg` installs `qt6-qtbase-x11 qt6-qt5compat adwaita-qt mesa-gl font-croscore file git make xterm`; `VOLUME ["/storage"]`; no `EXPOSE`, `USER` or `ENTRYPOINT`. |
 | Latest upstream software release | `2.0.1`, published 2026-11-22 (`gh api repos/shundhammer/qdirstat/releases/latest`). The upstream Dockerfile at v26.09.1 defaults `QDIRSTAT_VERSION=2.0`. Use `2.0.1` as `VERSION` only after the build confirms it compiles. |
 | Renovate | `datasource=github-releases depName=shundhammer/qdirstat versioning=loose` (tags are not strict semver in the repo list; `versioning=loose` per the bake rule). |

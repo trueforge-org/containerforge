@@ -5,8 +5,8 @@
 
 | Item | Value | Source |
 | --- | --- | --- |
-| Chart image | `ghcr.io/hotio/rflood:latest@sha256:cc8e4ae38ba0ac223717328488e5905a567f40b65d2524b326717c9555772a36` (unpinned tag) | https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rflood/values.yaml |
-| Latest stable version | `UNVERIFIED: hotio publishes no semver tag; the rtorrent version is the VERSION build arg of the hotio image, not fetched` | upstream Dockerfile |
+| Chart image | `ghcr.io/hotio/rflood:latest@sha256:92e3c258699714bae99c7471ccf256ef03afb085b1e05fe7cfbc0a3b0c806acb` (unpinned tag) | https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/rflood/values.yaml |
+| Latest stable version | hotio publishes `release-0.16.29`-style tags (https://hotio.dev/containers/rflood, modified 2026-11-26); latest rtorrent release is `v0.16.29` (GitHub releases HTML). The hotio image's VERSION build arg is not in the fetched Dockerfile. | upstream Dockerfile |
 | Renovate | `UNVERIFIED`: no version to track. Pin a rtorrent version and a flood release (see section 4) and use `datasource=github-releases` for each | n/a |
 | SPDX license (rtorrent) | GPL-2.0 | https://api.github.com/repos/rakshasa/rtorrent |
 | SPDX license (image, flood) | `UNVERIFIED`: flood and hotio licenses not fetched. Set `LICENSE` only after reading the flood repo `LICENSE` at the chosen tag | n/a |

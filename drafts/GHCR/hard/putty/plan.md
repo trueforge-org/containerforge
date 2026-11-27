@@ -5,16 +5,16 @@
 
 | Item | Value |
 | --- | --- |
-| Chart image | `ghcr.io/jlesage/putty:v26.09.1` (TrueCharts `charts/stable/putty`, draft) |
+| Chart image | `ghcr.io/jlesage/putty:v26.11.2` (TrueCharts `charts/stable/putty`, draft) |
 | Latest upstream release | `v26.09.1`, published 2026-09-22 (`gh api repos/jlesage/docker-putty/releases/latest`). Tags `v26.08.3`, `v26.08.2` also exist. |
 | Renovate | `datasource=github-releases depName=jlesage/docker-putty` is for the upstream image, not the PuTTY software. PuTTY software version is `0.85` (default `PUTTY_VERSION` in the upstream Dockerfile). Renovate for the software: UNVERIFIED for the source host `the.earth.li` (no GitHub release); use `datasource=custom` only if a version feed is confirmed. |
 | License | PuTTY is MIT for PuTTY (PuTTY's own license is MIT-style; the `jlesage/docker-putty` repo license is MIT per gh api, which covers the packaging only). Put `LICENSE = "MIT"` in bake; confirm against `/usr/share/doc/putty/copyright` in the built image (UNVERIFIED). |
-| Source URL | https://www.putty.org/ (website, draft); source tarball `https://the.earth.li/~sgtatham/putty/0.85/putty-0.85.tar.gz` (from upstream `ARG PUTTY_URL`) |
+| Source URL | https://putty.software (website, per upstream README; putty.org returns an unrelated page); source tarball `https://the.earth.li/~sgtatham/putty/0.85/putty-0.85.tar.gz` (from upstream `ARG PUTTY_URL`) |
 | Per-arch download | Source tarball, one for both arches. The upstream image is multi-arch via `tonistiigi/xx`. The draft's apt route avoids a compile. |
 | Checksum source | None in the upstream Dockerfile. PuTTY publishes checksums on its site (UNVERIFIED: not fetched). Verify the tarball if built from source. |
 | Upstream Dockerfile reviewed | `jlesage/docker-putty` tag v26.09.1 `Dockerfile`: `FROM jlesage/baseimage-gui:alpine-3.20-v4.14.0` (Alpine); build stage `alpine:3.20 AS putty` with `tonistiigi/xx`; `add-pkg gtk+3.0 adwaita-icon-theme ttf-dejavu`; no `EXPOSE`, `VOLUME`, `USER` or `ENTRYPOINT`; `set-cont-env APP_NAME=PuTTY`. |
 | Ports | Not declared by the upstream Dockerfile. The noVNC (5800/http) and VNC (5900/tcp) ports come from the jlesage GUI base convention (UNVERIFIED for this image). |
-| Env | Upstream sets `APP_NAME`, `APP_VERSION`, `DOCKER_IMAGE_VERSION` only. No user-facing env var was confirmed. |
+| Env | Upstream sets `APP_NAME`, `APP_VERSION`, `DOCKER_IMAGE_VERSION` only. The upstream README documents user env vars (USER_ID, GROUP_ID, UMASK, TZ, DISPLAY_WIDTH/HEIGHT, KEEP_APP_RUNNING, VNC_PASSWORD, WEB_*, SECURE_CONNECTION, ENABLE_CJK_FONT; see context/docker-putty-readme.md). Those are read by the jlesage base scripts, which this plan does not reuse. |
 | apt package | `putty` on ubuntu 26.04: UNVERIFIED (not confirmed on a fetched page). This is the draft's assumption and must be checked in the build. |
 | arm64 | Upstream image is multi-arch (`xx`), so the software builds on arm64. The apt route for arm64 is UNVERIFIED. |
 | Dependencies | None. |
