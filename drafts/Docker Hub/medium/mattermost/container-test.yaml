@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the ping path comes from the 9.x Dockerfile; confirm on 12.x
+# UNVERIFIED: a hard postgresql dependency may need the narrowed-test exception (see plan.md section 8)
+timeoutSeconds: 180
+tcp:
+- port: '8065'
+http:
+- port: '8065'
+  path: /api/v4/system/ping
+filePaths:
+- /app/mattermost/bin/mattermost
+- /app/mattermost/client

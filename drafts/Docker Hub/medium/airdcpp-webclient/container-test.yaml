@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '5600'
+# UNVERIFIED: the root path may redirect to a login page; adjust the expected status if it does not return 200
+http:
+- port: '5600'
+  path: /
+filePaths:
+- /app/airdcpp-webclient/airdcppd
+- /defaults/DCPlusPlus.xml

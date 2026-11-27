@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout is a guess; the probes run without a database, so verify startup in the run step
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+- port: '5003'
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /app/peppermint/ecosystem.config.js
+- /app/peppermint/apps/api
+- /usr/share/licenses/peppermint/LICENSE

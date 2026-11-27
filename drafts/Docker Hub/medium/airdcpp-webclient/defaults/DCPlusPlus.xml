@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- UNVERIFIED: element names follow the plan, not the upstream seed file. Check against the real format on first run. -->
+<DCPlusPlus>
+  <Settings>
+    <DownloadDirectory>/config/Downloads/</DownloadDirectory>
+    <InPort>21248</InPort>
+    <UDPPort>21248</UDPPort>
+    <TLSPort>21249</TLSPort>
+    <AutoDetectIncomingConnection>0</AutoDetectIncomingConnection>
+  </Settings>
+  <Shares>
+    <Directory Name="Default">/config/Share/</Directory>
+  </Shares>
+</DCPlusPlus>

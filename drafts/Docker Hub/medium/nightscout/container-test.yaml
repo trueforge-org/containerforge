@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# narrowed: requires external mongodb; full functional test not feasible in single-container suite
+# The suite runs without env, so start.sh exits at the required-secret check and no port probe can pass here.
+filePaths:
+- /app/nightscout/lib/server/server.js
+- /app/nightscout/node_modules
+- /usr/share/licenses/nightscout/LICENSE

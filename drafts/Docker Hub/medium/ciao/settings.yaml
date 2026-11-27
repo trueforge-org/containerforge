@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/brotandgames/ciao"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: SECRET_KEY_BASE
+    default: ""
+    required: false
+  - name: TIME_ZONE
+    default: "UTC"
+    required: false
+  - name: CIAO_LOG_LEVEL
+    default: "WARN"
+    required: false
+  - name: CIAO_BASE_URL
+    default: ""
+    required: false
+  - name: BASIC_AUTH_USERNAME
+    default: ""
+    required: false
+  - name: BASIC_AUTH_PASSWORD
+    default: ""
+    required: false
+  - name: PROMETHEUS_ENABLED
+    default: "false"
+    required: false
+  - name: SMTP_ADDRESS
+    default: ""
+    required: false
+  - name: SMTP_PORT
+    default: ""
+    required: false
+  - name: SMTP_USERNAME
+    default: ""
+    required: false
+  - name: SMTP_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nightscout/cgm-remote-monitor"
+ports:
+  - port: 1337
+    protocol: tcp
+    required: false
+# Only variables documented in the upstream README are listed. The chart also sets BASE_URL, BG_HIGH, BG_LOW,
+# BG_TARGET_BOTTOM, BG_TARGET_TOP, DISPLAY_UNITS, ENABLE, INSECURE_USE_HTTP, THEME and TIME_FORMAT. They are
+# UNVERIFIED at v15.0.9 and are added after they are confirmed in the source.
+env:
+  - name: API_SECRET
+    default: ""
+    required: true
+  - name: MONGO_CONNECTION
+    default: ""
+    required: true
+volumes:
+  - path: /config
+    required: false
+dependencies:
+  - name: mongodb

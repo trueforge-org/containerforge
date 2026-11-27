@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 120s chosen for the first database migration, tune after the first run
+timeoutSeconds: 120
+tcp:
+- port: '5000'
+http:
+- port: '5000'
+  path: /api/healthcheck

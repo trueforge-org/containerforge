@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Cog-Creators/Red-DiscordBot"
+# No port is confirmed in the source (plan section 10). Do not add one until it is.
+ports: []
+# UNVERIFIED: the variables below come from the upstream docker image README (PhasecoreX/docker-red-discordbot).
+# start.sh does not pass them to Red yet (plan section 7).
+env:
+  - name: OWNER
+    default: ""
+    required: false
+  - name: PREFIX
+    default: ""
+    required: false
+  - name: STORAGE_TYPE
+    default: "json"
+    required: false
+  - name: TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

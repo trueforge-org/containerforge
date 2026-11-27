@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout is a starting value; onnxruntime, opencv and nudenet load slowly on first start.
+timeoutSeconds: 300
+http:
+- port: '5000'
+  path: /liveness
+tcp:
+- port: '5000'
+filePaths:
+- /app/imgpush/app.py
+- /app/home/.NudeNet/classifier_model.onnx
+- /usr/share/licenses/imgpush/LICENSE

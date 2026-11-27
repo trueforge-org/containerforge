@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is not set; take the value used by the closest sibling.
+# UDP 6888 has no probe here: tcp checks cannot cover it.
+# UNVERIFIED: an http probe on /jsonrpc is not added, because JSON-RPC expects POST. Add it once the GET status is confirmed.
+tcp:
+- port: '6800'
+- port: '6888'
+filePaths:
+- /usr/bin/aria2c
+- /defaults/aria2.conf
+- /usr/share/licenses/aria2/copyright

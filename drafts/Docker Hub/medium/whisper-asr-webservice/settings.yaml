@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ahmetoner/whisper-asr-webservice"
+ports:
+  - port: 9000
+    protocol: tcp
+    required: false
+env:
+  - name: ASR_DEVICE
+    default: ""
+    required: false
+  - name: ASR_ENGINE
+    default: "openai_whisper"
+    required: false
+  - name: ASR_MODEL
+    default: "base"
+    required: false
+  - name: ASR_MODEL_PATH
+    default: "/config/cache/whisper"
+    required: false
+  - name: HF_TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

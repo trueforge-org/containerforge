@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/metabase/metabase"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: JAVA_OPTS
+    default: ""
+    required: false
+  - name: JAVA_TIMEZONE
+    default: "UTC"
+    required: false
+  - name: MB_JETTY_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: MB_JETTY_PORT
+    default: "3000"
+    required: false
+  - name: MB_DB_TYPE
+    default: "h2"
+    required: false
+  - name: MB_DB_FILE
+    default: "/config/metabase.db"
+    required: false
+  - name: MB_DB_CONNECTION_URI
+    default: ""
+    required: false
+  - name: MB_DB_HOST
+    default: ""
+    required: false
+  - name: MB_DB_PORT
+    default: ""
+    required: false
+  - name: MB_DB_DBNAME
+    default: ""
+    required: false
+  - name: MB_DB_USER
+    default: ""
+    required: false
+  - name: MB_DB_PASS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

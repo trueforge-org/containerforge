@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the first start downloads several GB from Steam, so this timeout is a guess.
+timeoutSeconds: 1800
+filePaths:
+  - /start.sh
+  - /usr/local/share/steamcmd/steamcmd.sh
+tcp:
+  - port: '27015'

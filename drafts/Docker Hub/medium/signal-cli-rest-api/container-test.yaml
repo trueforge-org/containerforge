@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  # UNVERIFIED: health endpoint should return 200 without an account; if not, use path / and record why
+  path: /v1/health
+filePaths:
+- /app/signal-cli-rest-api
+- /app/signal-cli-0.14.8/bin/signal-cli
+- /usr/share/licenses/signal-cli-rest-api/LICENSE

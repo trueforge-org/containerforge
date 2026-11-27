@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/sysadminsmedia/homebox"
+ports:
+  - port: 7745
+    protocol: tcp
+    required: true
+env:
+  - name: HBOX_DATABASE_DRIVER
+    default: "sqlite3"
+    required: false
+  - name: HBOX_DATABASE_SQLITE_PATH
+    default: "/config/homebox.db?_pragma=busy_timeout=2000&_pragma=journal_mode=WAL&_fk=1&_time_format=sqlite"
+    required: false
+  - name: HBOX_LOG_FORMAT
+    default: "text"
+    required: false
+  - name: HBOX_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: HBOX_MODE
+    default: "production"
+    required: false
+  - name: HBOX_WEB_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: HBOX_WEB_PORT
+    default: "7745"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# UNVERIFIED: HBOX_AUTH_API_KEY_PEPPER is not added. The chart marks it as required (32+ bytes),
+# but upstream behaviour is not confirmed. HBOX_DATABASE_* is only read for postgres and is not listed.
+opt_dependencies:
+  - name: postgresql

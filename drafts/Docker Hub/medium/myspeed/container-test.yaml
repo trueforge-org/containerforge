@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5216'
+http:
+- port: '5216'
+  # UNVERIFIED: path that returns 200 without setup; `/` is a guess. Drop the http probe if none does.
+  path: /
+filePaths:
+- /app/myspeed
+- /usr/share/licenses/myspeed/LICENSE

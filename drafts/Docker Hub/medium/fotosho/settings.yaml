@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/advplyr/fotosho"
+ports:
+  # BLOCKED: 80 is upstream EXPOSE; UID 568 cannot bind it. Settle the port before the PR.
+  - port: 80
+    protocol: tcp
+    required: false
+env:
+  - name: NODE_ENV
+    default: "production"
+    required: false
+  - name: LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  # UNVERIFIED: /photos (read-only library) and /thumbnails from the draft chart; add once the data paths are confirmed
+dependencies: []

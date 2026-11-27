@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: starting value. Adjust after the first run.
+timeoutSeconds: 600
+tcp:
+- port: '9000'
+# UNVERIFIED: /docs route is not yet confirmed at v1.10.0.
+http:
+- port: '9000'
+  path: /docs
+filePaths:
+- /app/venv/bin/whisper-asr-webservice
+- /app/swagger-ui-assets/swagger-ui-bundle.js
+- /usr/share/licenses/whisper-asr-webservice/LICENSE

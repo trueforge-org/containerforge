@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No listener: the app is a scheduled Puppeteer script that needs the internet,
+# so only verify the install. forgetool splits cmd on whitespace (no shell
+# quoting), so commands are kept space-free.
+timeoutSeconds: 180
+mainRunner:
+  enabled: false
+
+runners:
+- entrypoint: test -x /usr/local/bin/chromium
+- entrypoint: test -x /usr/local/bin/supercronic
+- entrypoint: test -f /usr/share/licenses/breitbandmessung-de/NOTICE
+filePaths:
+- /app/index.js
+- /usr/local/bin/supercronic
+- /usr/share/licenses/breitbandmessung-de/NOTICE

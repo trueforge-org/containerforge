@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 600
+tcp:
+- port: '2222'
+filePaths:
+- /app/meshroom/meshroom
+- /usr/share/licenses/meshroom/LICENSE

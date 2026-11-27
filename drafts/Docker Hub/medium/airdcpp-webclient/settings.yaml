@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/airdcpp-web/airdcpp-webclient"
+# UNVERIFIED: 5601, 21248 and 21249 are not listed until `ss -ltn` in the run step shows them open
+ports:
+  - port: 5600
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

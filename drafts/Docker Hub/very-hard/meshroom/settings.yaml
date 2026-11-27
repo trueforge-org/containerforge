@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/alicevision/Meshroom"
+ports:
+  # Upstream sshd listens on 22; a non-root user cannot bind it, so the container uses 2222
+  - port: 2222
+    protocol: tcp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # UNVERIFIED: needed by the NVIDIA runtime only, confirm before keeping
+  - name: NVIDIA_DRIVER_CAPABILITIES
+    default: "compute,utility,graphics"
+    required: false
+volumes:
+  - path: /config
+    required: true

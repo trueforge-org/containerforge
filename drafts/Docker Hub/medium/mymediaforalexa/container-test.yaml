@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '52051'
+- port: '52050'
+filePaths:
+- /app/mymediaforalexa
+- /usr/share/licenses/mymediaforalexa

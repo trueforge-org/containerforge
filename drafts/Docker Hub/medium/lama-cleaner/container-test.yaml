@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: model download at start may need network; timeout is a first estimate.
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/venv/bin/iopaint
+- /usr/share/licenses/lama-cleaner/LICENSE

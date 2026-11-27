@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/BoKKeR/RSS-to-Telegram-Bot"
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: TOKEN
+    default: ""
+    required: true
+  - name: CHATID
+    default: ""
+    required: true
+  - name: DEBUG
+    default: "false"
+    required: false
+  - name: REDIS_HOST
+    default: "valkey"
+    required: true
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_USER
+    default: "default"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: REDIS_MUTEX
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: valkey

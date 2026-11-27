@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://developer.valvesoftware.com/wiki/Dedicated_Server_Guide"
+# UNVERIFIED: the draft's ExileMod MariaDB (3306/tcp) is not listed. The plan recommends a separate mariadb dependency (decision open).
+ports:
+  - port: 2302
+    protocol: udp
+    required: true
+  - port: 2303
+    protocol: udp
+    required: false
+  - port: 2304
+    protocol: udp
+    required: false
+  - port: 2305
+    protocol: udp
+    required: false
+  - port: 2306
+    protocol: udp
+    required: false
+env:
+  - name: STEAM_APP_IDS
+    default: "233780"
+    required: false
+  - name: STEAM_USERNAME
+    default: "anonymous"
+    required: false
+  - name: STEAM_PASSWORD
+    default: ""
+    required: false
+  - name: GAME_PORT
+    default: "2302"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# UNVERIFIED: MariaDB as a separate dependency is the recommended option, pending the decision in the plan
+dependencies:
+  - mariadb

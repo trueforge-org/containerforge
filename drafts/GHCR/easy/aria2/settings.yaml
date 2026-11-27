@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/aria2/aria2"
+ports:
+  - port: 6800
+    protocol: tcp
+    required: false
+  - port: 6888
+    protocol: tcp
+    required: false
+  - port: 6888
+    protocol: udp
+    required: false
+env:
+  - name: RPC_PORT
+    default: "6800"
+    required: false
+  - name: LISTEN_PORT
+    default: "6888"
+    required: false
+  - name: RPC_SECRET
+    default: ""
+    required: false
+  - name: UMASK
+    default: "022"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /downloads
+    required: false
+dependencies: []

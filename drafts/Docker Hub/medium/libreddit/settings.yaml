@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/libreddit/libreddit"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+# empty default means the app's own default applies; confirm each default from the README before the PR (UNVERIFIED)
+# instance-level LIBREDDIT_* names are not listed until confirmed from the README
+env:
+  - name: LIBREDDIT_DEFAULT_AUTOPLAY_VIDEOS
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_COMMENT_SORT
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_FRONT_PAGE
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_HIDE_HLS_NOTIFICATION
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_LAYOUT
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_POST_SORT
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_SHOW_NSFW
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_THEME
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_USE_HLS
+    default: ""
+    required: false
+  - name: LIBREDDIT_DEFAULT_WIDE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+dependencies: []

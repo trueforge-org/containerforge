@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '8080'
+# UNVERIFIED: agent port 50000 is listening on the run (see start.sh)
+- port: '50000'
+http:
+- port: '8080'
+  # UNVERIFIED: /login returns 200 on this version, confirm on the run
+  path: /login
+filePaths:
+- /app/jenkins.war
+- /usr/share/licenses/jenkins/LICENSE.txt

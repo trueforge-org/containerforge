@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Peppermint-Lab/peppermint"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+  - port: 5003
+    protocol: tcp
+    required: true
+# UNVERIFIED: the app's runtime env vars (database URL, secret, API URL) are not yet read from source.
+# Do not add names here until they are confirmed in apps/api and apps/client.
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes: []
+dependencies:
+  - postgresql

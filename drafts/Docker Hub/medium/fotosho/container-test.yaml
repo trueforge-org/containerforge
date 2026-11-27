@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '80'   # must match the final port in settings.yaml
+http:
+- port: '80'
+  path: /
+filePaths:
+- /app/fotosho/index.js
+- /app/fotosho/server
+- /app/fotosho/static

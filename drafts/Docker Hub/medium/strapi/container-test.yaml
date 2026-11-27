@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 300s is a guess to cover the first start, tune after the first run
+timeoutSeconds: 300
+tcp:
+- port: '1337'
+# UNVERIFIED: /admin must return 200 on first start, adjust if not
+http:
+- port: '1337'
+  path: /admin
+filePaths:
+- /app/strapi/package.json
+- /usr/share/licenses/strapi/LICENSE

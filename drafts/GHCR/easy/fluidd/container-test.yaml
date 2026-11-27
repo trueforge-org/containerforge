@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+filePaths:
+  - /usr/share/nginx/html/index.html
+  - /usr/share/licenses/fluidd/LICENSE
+  - /defaults/default.conf
+http:
+  - port: '8080'
+    path: /
+  - port: '8080'
+    path: /healthz

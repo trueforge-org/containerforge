@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '3030'
+http:
+- port: '3030'
+  path: /
+filePaths:
+- /app/rustpad/rustpad-server
+- /app/rustpad/dist/index.html
+- /usr/share/licenses/rustpad/LICENSE

@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/shneezin/breitbandmessung-node"
+# the container opens no port: it is a scheduled script, not a server
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: EXPORT_PATH
+    default: "/config/export"
+    required: false
+  - name: START_HEADLESS
+    default: "true"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# schedule settings live in /config/config.cfg (timezone, crontab, run_once, run_on_startup), not in env
+dependencies: []

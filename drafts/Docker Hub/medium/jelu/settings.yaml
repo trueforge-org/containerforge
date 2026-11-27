@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/bayang/jelu"
+ports:
+  - port: 11111
+    protocol: tcp
+    required: false
+env:
+  - name: JELU_DATABASE_PATH
+    default: "/config/database/"
+    required: false
+  - name: JELU_FILES_IMAGES
+    default: "/config/files/images/"
+    required: false
+  - name: JELU_FILES_IMPORTS
+    default: "/config/files/imports/"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

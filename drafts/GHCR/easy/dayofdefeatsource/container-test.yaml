@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is set from the first measured run (SteamCMD download plus server start)
+# UDP game port 27015 has no probe here: tcp checks cannot cover it
+tcp:
+- port: '27015'
+filePaths:
+- /start.sh
+- /usr/local/bin/steamcmd
+- /usr/local/bin/steamcmd-base.sh

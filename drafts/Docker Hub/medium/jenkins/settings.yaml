@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jenkinsci/jenkins"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+  - port: 50000
+    protocol: tcp
+    required: false
+env:
+  - name: JENKINS_HOME
+    default: "/config"
+    required: false
+  - name: JENKINS_UC
+    default: "https://updates.jenkins.io"
+    required: false
+  - name: JENKINS_SLAVE_AGENT_PORT
+    default: "50000"
+    required: false
+  - name: JAVA_OPTS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mattermost/mattermost"
+ports:
+  - port: 8065
+    protocol: tcp
+    required: false
+# UNVERIFIED: database and site URL variables (not fetched from docs); add them once confirmed
+env:
+  - name: MM_SERVICESETTINGS_ENABLELOCALMODE
+    default: "true"
+    required: false
+  - name: MM_INSTALL_TYPE
+    default: "docker"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: postgresql

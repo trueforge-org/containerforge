@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+runners:
+- entrypoint: /app/ollama/bin/ollama --version
+tcp:
+- port: '11434'
+filePaths:
+- /app/ollama/bin/ollama
+# UNVERIFIED: lib/ollama path until the tarball layout is checked on the build
+- /app/ollama/lib/ollama
+- /usr/share/licenses/ollama/LICENSE

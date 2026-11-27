@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/hauxir/imgpush"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+# Defaults are empty where upstream app/settings.py was not fetched (UNVERIFIED). Empty means the app's own default applies.
+env:
+  - name: ALLOW_REMOVE_BG
+    default: ""
+    required: false
+  - name: ALLOW_VIDEO
+    default: ""
+    required: false
+  - name: ALLOWED_ORIGINS
+    default: "['*']"
+    required: false
+  - name: API_KEY
+    default: ""
+    required: false
+  - name: CACHE_DIR
+    default: "/config/cache/"
+    required: false
+  - name: HIDE_UPLOAD_FORM
+    default: ""
+    required: false
+  - name: IMAGES_DIR
+    default: "/config/images/"
+    required: false
+  - name: LOCAL_CACHE_DIR
+    default: "/tmp/local_cache/"
+    required: false
+  - name: LOCAL_CACHE_MAX_SIZE_MB
+    default: ""
+    required: false
+  - name: MAX_API_KEY_ATTEMPTS_PER_MINUTE
+    default: ""
+    required: false
+  - name: MAX_SIZE_MB
+    default: "16"
+    required: false
+  - name: MAX_UPLOADS_PER_DAY
+    default: ""
+    required: false
+  - name: MAX_UPLOADS_PER_HOUR
+    default: ""
+    required: false
+  - name: MAX_UPLOADS_PER_MINUTE
+    default: ""
+    required: false
+  - name: MAX_VIDEO_DURATION
+    default: ""
+    required: false
+  - name: NAME_STRATEGY
+    default: ""
+    required: false
+  - name: NUDE_FILTER_MAX_FRAMES
+    default: ""
+    required: false
+  - name: NUDE_FILTER_MAX_THRESHOLD
+    default: ""
+    required: false
+  - name: NUDE_FILTER_VIDEO_INTERVAL
+    default: ""
+    required: false
+  - name: OUTPUT_TYPE
+    default: ""
+    required: false
+  - name: REQUIRE_API_KEY_FOR_DELETE
+    default: ""
+    required: false
+  - name: REQUIRE_API_KEY_FOR_UPLOAD
+    default: "False"
+    required: false
+  - name: S3_ACCESS_KEY_ID
+    default: ""
+    required: false
+  - name: S3_BUCKET_NAME
+    default: ""
+    required: false
+  - name: S3_CACHE_PREFIX
+    default: ""
+    required: false
+  - name: S3_ENDPOINT_URL
+    default: ""
+    required: false
+  - name: S3_IMAGES_PREFIX
+    default: ""
+    required: false
+  - name: S3_REGION
+    default: ""
+    required: false
+  - name: S3_SECRET_ACCESS_KEY
+    default: ""
+    required: false
+  - name: STORAGE_BACKEND
+    default: "local"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: VALID_SIZES
+    default: ""
+    required: false
+  - name: WORKERS
+    default: "2"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is set from the first measured run (the server download is large).
+# UNVERIFIED: no probe for the UDP game ports (2302-2306); confirm forgetool UDP probe support.
+# Functional tests are not run here: the ExileMod and database paths need env vars and a running mariadb.
+filePaths:
+- /start.sh
+- /defaults/server.cfg
+- /usr/local/bin/steamcmd-base.sh

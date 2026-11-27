@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: the bot needs a Telegram token, and Redis (valkey) as a hard dependency.
+# start.sh exits at the TOKEN/CHATID guard when they are unset, so this suite
+# only checks files. The full run with a valkey sidecar is a manual protocol step.
+timeoutSeconds: 60
+filePaths:
+- /app/dist/src/main.js
+- /usr/share/licenses/rss-to-telegram/LICENSE
+- /config

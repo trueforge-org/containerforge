@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The game download needs STEAM_APP_IDS and network, so CI checks files only.
+timeoutSeconds: 120
+filePaths:
+  - /start.sh
+  - /usr/local/bin/steamcmd
+  - /usr/local/share/steamcmd/steamcmd.sh
+  - /scripts/survivethenights-start.sh

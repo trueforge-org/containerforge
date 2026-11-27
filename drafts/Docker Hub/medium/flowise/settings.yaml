@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/FlowiseAI/Flowise"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+# Defaults follow the upstream env var docs (docs.flowiseai.com). Paths are moved under /config.
+# DATABASE_TYPE and DATABASE_HOST/PORT/NAME/USER/PASSWORD (postgres) are upstream variables, left out until the
+# PostgreSQL path is tested by hand.
+env:
+  - name: BLOB_STORAGE_PATH
+    default: "/config/storage"
+    required: false
+  - name: DATABASE_PATH
+    default: "/config"
+    required: false
+  - name: LOG_PATH
+    default: "/config/logs"
+    required: false
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: SECRETKEY_PATH
+    default: "/config/secrets"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

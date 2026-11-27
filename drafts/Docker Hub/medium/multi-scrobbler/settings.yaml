@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/FoxxMD/multi-scrobbler"
+ports:
+  - port: 9078
+    protocol: tcp
+    required: false
+env:
+  - name: PORT
+    default: "9078"
+    required: false
+  - name: CONFIG_DIR
+    default: "/config"
+    required: false
+  - name: LOGS_DIR
+    default: "/config/logs"
+    required: false
+  # UNVERIFIED default: check against upstream .env.example before merge
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

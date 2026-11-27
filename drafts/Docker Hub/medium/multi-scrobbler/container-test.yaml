@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout is a guess; 180 is the most common value in sibling apps
+timeoutSeconds: 180
+tcp:
+- port: '9078'
+filePaths:
+- /app/src/backend/index.ts
+- /app/node_modules
+- /usr/share/licenses/multi-scrobbler/LICENSE

@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/AdguardTeam/AdGuardHome"
+ports:
+  # Only the setup wizard / admin UI port is open on an empty /config. DNS ports appear after the wizard.
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: ADGUARD_HOME_DEFAULT_WEB_PORT
+    default: "3000"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

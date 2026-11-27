@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: first-start index and DATA creation time is not measured yet.
+timeoutSeconds: 300
+tcp:
+- port: '8090'
+- port: '8443'
+http:
+- port: '8090'
+  path: /
+filePaths:
+- /app/yacy_search_server/startYACY.sh
+- /usr/share/licenses/yacy/LICENSE

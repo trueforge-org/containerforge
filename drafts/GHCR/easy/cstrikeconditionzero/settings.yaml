@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/search/?term=Counter-Strike+Condition+Zero"
+ports:
+  - port: 27015
+    protocol: tcp
+    required: true
+  - port: 27015
+    protocol: udp
+    required: true
+env:
+  - name: GAME_PARAMS
+    default: "-secure +maxplayers 32 +map as_oilrig"
+    required: false
+  - name: GAME_PORT
+    default: "27015"
+    required: false
+  - name: STEAM_PASSWORD
+    default: ""
+    required: false
+  - name: STEAM_USERNAME
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: VALIDATE
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
