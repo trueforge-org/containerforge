@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=ollama/ollama versioning=semver
-  default = "0.40.18"
+  default = "0.40.19"
 }
 
 variable "LICENSE" {
