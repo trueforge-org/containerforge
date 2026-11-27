@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=misskey-dev/misskey versioning=loose
-  default = "2026.11.0"
+  default = "2026.11.1"
 }
 
 variable "SRC_SHA256" {
