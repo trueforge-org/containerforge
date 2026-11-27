@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version | UNVERIFIED: the Cfx.re runtime is a rolling `master` build. No build number or LATEST file was confirmed. The FiveM docs page (https://docs.fivem.net/docs/server-download/?platform=legacy&os=linux) lists only the Windows artifact (build 38435). |
+| Version | UNVERIFIED: the Cfx.re runtime is a rolling `master` build. No build number or LATEST file was confirmed. The FiveM docs page (https://docs.fivem.net/docs/server-download/?platform=legacy&os=linux) lists Linux `build_proot_linux` artifacts up to build 38781 and a Windows "Latest" block for build 38435 (fetched 2026-11-27). |
 | Renovate | UNVERIFIED: no datasource for a rolling runtime. Open question, see section 10. |
 | License | Repo `citizenfx/fivem`: NOASSERTION ("Other") per GitHub API. UNVERIFIED: the runtime's license terms. Bake `LICENSE` cannot be filled honestly until read. |
 | Source | https://github.com/citizenfx/fivem (default branch master, pushed 2026-11-17) |
