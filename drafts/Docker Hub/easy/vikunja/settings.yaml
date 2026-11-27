@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/go-vikunja/vikunja"
+ports:
+  - port: 3456
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: VIKUNJA_SERVICE_ROOTPATH
+    default: "/config"
+    required: false
+  - name: VIKUNJA_SERVICE_INTERFACE
+    default: ":3456"
+    required: false
+  - name: VIKUNJA_SERVICE_PUBLICURL
+    default: ""
+    required: false
+  # Generated once and stored in /config/.service_secret by start.sh when empty.
+  - name: VIKUNJA_SERVICE_SECRET
+    default: ""
+    required: false
+  - name: VIKUNJA_SERVICE_ENABLEREGISTRATION
+    default: "true"
+    required: false
+  - name: VIKUNJA_DATABASE_TYPE
+    default: "sqlite"
+    required: false
+  - name: VIKUNJA_DATABASE_PATH
+    default: "/config/vikunja.db"
+    required: false
+  - name: VIKUNJA_DATABASE_HOST
+    default: ""
+    required: false
+  - name: VIKUNJA_DATABASE_USER
+    default: ""
+    required: false
+  - name: VIKUNJA_DATABASE_PASSWORD
+    default: ""
+    required: false
+  - name: VIKUNJA_DATABASE_DATABASE
+    default: ""
+    required: false
+  - name: VIKUNJA_FILES_BASEPATH
+    default: "/config/files"
+    required: false
+  - name: VIKUNJA_KEYVALUE_TYPE
+    default: "memory"
+    required: false
+  - name: VIKUNJA_REDIS_HOST
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql
+  - name: valkey

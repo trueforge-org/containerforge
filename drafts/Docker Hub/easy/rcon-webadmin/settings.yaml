@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rcon-web-admin/rcon-web-admin"
+ports:
+  - port: 4326
+    protocol: tcp
+    required: true
+  - port: 4327
+    protocol: tcp
+    required: true
+env:
+  - name: RWA_USERNAME
+    default: "admin"
+    required: false
+  - name: RWA_PASSWORD
+    default: ""
+    required: false
+  - name: RWA_ADMIN
+    default: "FALSE"
+    required: false
+  - name: RWA_READ_ONLY_WIDGET_OPTIONS
+    default: "FALSE"
+    required: false
+  - name: RWA_RESTRICT_COMMANDS
+    default: ""
+    required: false
+  - name: RWA_RESTRICT_WIDGETS
+    default: ""
+    required: false
+  - name: RWA_RCON_HOST
+    default: "127.0.0.1"
+    required: false
+  - name: RWA_RCON_PORT
+    default: "25575"
+    required: false
+  - name: RWA_RCON_PASSWORD
+    default: ""
+    required: false
+  - name: RWA_GAME
+    default: "minecraft"
+    required: false
+  - name: RWA_SERVER_NAME
+    default: ""
+    required: false
+  - name: RWA_WEB_RCON
+    default: "FALSE"
+    required: false
+  - name: RWA_WEBSOCKET_URL
+    default: ""
+    required: false
+  - name: RWA_WEBSOCKET_URL_SSL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

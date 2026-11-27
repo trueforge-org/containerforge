@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/hexo-cli/node_modules/.bin/hexo
+- /app/hexo-starter/_config.yml

@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '4822'
+# UNVERIFIED: plugin file names follow upstream's libguac-client-*.so glob. Confirm on the first build.
+# The TCP probe passes even if guacd binds only to localhost. -b 0.0.0.0 is checked by hand (see plan section 11).
+filePaths:
+- /usr/local/sbin/guacd
+- /usr/local/lib/libguac-client-rdp.so
+- /usr/local/lib/libguac-client-ssh.so
+- /usr/local/lib/libguac-client-vnc.so

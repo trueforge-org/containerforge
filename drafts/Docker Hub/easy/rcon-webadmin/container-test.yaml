@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs without env vars, so the RWA_PASSWORD path (user and server setup) is not covered here.
+# UNVERIFIED: whether / answers 200 before any user exists; a redirect or setup page still counts as an answer.
+timeoutSeconds: 180
+http:
+- port: '4326'
+  path: /
+tcp:
+- port: '4327'
+filePaths:
+- /app/rcon-web-admin/src/main.js
+- /usr/share/licenses/rcon-web-admin/LICENSE

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/storj/storj/"
+ports:
+  - port: 28967
+    protocol: tcp
+    required: true
+  - port: 28967
+    protocol: udp
+    required: true
+  - port: 14002
+    protocol: tcp
+    required: false
+env:
+  - name: ADDRESS
+    default: ""
+    required: false
+  - name: EMAIL
+    default: ""
+    required: false
+  - name: WALLET
+    default: ""
+    required: false
+  - name: STORAGE
+    default: "2.0TB"
+    required: false
+  - name: LOG_LEVEL
+    default: ""
+    required: false
+  - name: STORJ_CONSOLE_ADDRESS
+    default: "0.0.0.0:14002"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

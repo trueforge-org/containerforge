@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Upstream exits at startup without an OAuth provider configured. The test supplies dummy Google
+# credentials, as apps/drydock does. The image itself ships none.
+# Maintainer decision: container-test.instructions says the image must start with no env vars.
+# This is a deliberate exception unless start.sh is changed to idle without a provider.
+mainRunner:
+  env:
+    PROVIDERS_GOOGLE_CLIENT_ID: "test-client-id"
+    PROVIDERS_GOOGLE_CLIENT_SECRET: "test-client-secret"
+
+tcp:
+- port: '4181'
+
+filePaths:
+- /app/traefik-forward-auth
+- /usr/share/licenses/traefik-forward-auth/LICENSE.md

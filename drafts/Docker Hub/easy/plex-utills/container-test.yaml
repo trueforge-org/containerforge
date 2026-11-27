@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '5000'
+# UNVERIFIED: an http probe on / (expects 200 with an empty DB) can be added after the first manual run.
+filePaths:
+- /app/plex-utills/main.py
+- /app/plex-utills/app/static/default_db/default_app.db
+- /usr/share/licenses/plex-utills/LICENSE

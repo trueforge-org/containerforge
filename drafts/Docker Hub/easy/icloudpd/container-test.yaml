@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# UNVERIFIED: mainRunner.env is in the forgetool schema but no sibling uses it yet. Confirm on a real run.
+# The web UI on 8080 only opens once a username is set.
+mainRunner:
+  env:
+    ICLOUDPD_USERNAME: "test@example.com"
+tcp:
+- port: '8080'
+filePaths:
+- /app/icloudpd
+- /usr/share/licenses/icloudpd/LICENSE.md
+healthCommands:
+- command: /app/icloudpd --version
+  expectedContent: "1.34.0"
+  matchContent: true

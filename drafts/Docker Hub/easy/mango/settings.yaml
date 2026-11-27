@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/getmango/Mango"
+ports:
+  - port: 9000
+    protocol: tcp
+    required: false
+env:
+  - name: CONFIG_PATH
+    default: "/config/config.yml"
+    required: false
+  - name: LIBRARY_PATH
+    default: "/data"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: PORT
+    default: "9000"
+    required: false
+  - name: SCAN_INTERVAL_MINUTES
+    default: "5"
+    required: false
+  # Generated on first start when empty. Config file values win over env after the first start.
+  - name: SESSION_SECRET
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /data
+    required: false

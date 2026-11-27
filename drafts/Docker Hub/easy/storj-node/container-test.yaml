@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: a storage node needs a pre-created, authorized identity before it can listen, and the
+# test runs with no env and no identity, so ports 28967 and 14002 are never opened and no tcp/http
+# probe is possible. UNVERIFIED: maintainers to accept this narrowing (see plan section 8).
+filePaths:
+- /app/storagenode
+- /app/identity
+- /usr/share/licenses/storj-node/LICENSE

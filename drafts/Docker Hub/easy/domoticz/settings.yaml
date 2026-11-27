@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/domoticz/domoticz"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: WWW_PORT
+    default: "8080"
+    required: false
+  # HTTPS is off by default. Upstream's image default is 443; set this to enable HTTPS.
+  - name: SSL_PORT
+    default: "0"
+    required: false
+  - name: DATABASE_PATH
+    default: "/config/domoticz.db"
+    required: false
+  # Empty means log to stdout.
+  - name: LOG_PATH
+    default: ""
+    required: false
+  - name: EXTRA_CMD_ARG
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

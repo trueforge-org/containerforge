@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The exporter exits 1 without FRITZ!Box credentials (by design, see plan section 10),
+# so no tcp/http probe on 9787 is possible in this suite. Runner checks cover the
+# installed files and the CLI. Port 9787 is checked by hand with env vars set.
+timeoutSeconds: 120
+mainRunner:
+  enabled: false
+
+runners:
+- entrypoint: test -f /app/venv/bin/python
+- entrypoint: test -f /defaults/config.example.yaml
+- entrypoint: test -f /usr/share/licenses/avm-exporter/LICENSE.md
+- entrypoint: /app/venv/bin/python -m fritzexporter --version
+  # UNVERIFIED: plain version output; confirm on first build
+  expectedOutput: "4.0.3"

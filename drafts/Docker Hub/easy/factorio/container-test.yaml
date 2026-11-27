@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The game port 34197 is UDP and cannot be probed by tcp/http checks; RCON (27015/tcp) is always enabled by start.sh.
+timeoutSeconds: 300
+tcp:
+- port: '27015'
+filePaths:
+- /start.sh
+- /app/bin/x64/factorio
+- /defaults/config.ini

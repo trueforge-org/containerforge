@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/josegonzalez/python-github-backup"
+ports: []
+# GITHUB_USER and GITHUB_TOKEN are required for a backup. Their names are defined by this image's
+# start.sh (the upstream tool reads no env vars). With them empty, start.sh idles with a log message.
+env:
+  - name: GITHUB_USER
+    default: ""
+    required: true
+  - name: GITHUB_TOKEN
+    default: ""
+    required: true
+  - name: GITHUB_ORGANIZATION
+    default: "false"
+    required: false
+  - name: BACKUP_ARGS
+    default: "--all"
+    required: false
+  - name: OUTPUT_DIR
+    default: "/config/backups"
+    required: false
+  - name: SCHEDULE
+    default: "86400"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The main process downloads the game and listens on UDP only, so the main runner is off.
+# Assert the installed files and tools with one-shot runners instead.
+timeoutSeconds: 240
+mainRunner:
+  enabled: false
+
+runners:
+- entrypoint: ls /usr/local/bin/arkmanager /usr/local/share/steamcmd/steamcmd.sh /defaults/arkmanager.cfg /start.sh /usr/share/licenses/arksurvivalevolved/LICENSE
+  expectedOutput: /usr/share/licenses/arksurvivalevolved/LICENSE
+- entrypoint: arkmanager --version
+  # UNVERIFIED: exact output format and exit code of --version.
+  expectedOutput: "Version:"

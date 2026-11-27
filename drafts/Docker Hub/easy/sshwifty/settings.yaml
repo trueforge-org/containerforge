@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nirui/sshwifty/"
+ports:
+  - port: 8182
+    protocol: tcp
+    required: true
+env:
+  - name: SSHWIFTY_LISTENINTERFACE
+    default: "0.0.0.0"
+    required: false
+  - name: SSHWIFTY_LISTENPORT
+    default: "8182"
+    required: false
+  - name: SSHWIFTY_SHAREDKEY
+    default: ""
+    required: false
+  - name: SSHWIFTY_HOSTNAME
+    default: ""
+    required: false
+  - name: SSHWIFTY_ALLOWEDORIGINS
+    default: ""
+    required: false
+  - name: SSHWIFTY_DIALTIMEOUT
+    default: "10"
+    required: false
+  - name: SSHWIFTY_SOCKS5
+    default: ""
+    required: false
+  - name: SSHWIFTY_SOCKS5_USER
+    default: ""
+    required: false
+  - name: SSHWIFTY_SOCKS5_PASSWORD
+    default: ""
+    required: false
+  - name: SSHWIFTY_PRESETS
+    default: ""
+    required: false
+  - name: SSHWIFTY_ONLYALLOWPRESETREMOTES
+    default: ""
+    required: false
+  - name: SSHWIFTY_SERVERMESSAGE
+    default: ""
+    required: false
+  - name: SSHWIFTY_TLSCERTIFICATEFILE
+    default: ""
+    required: false
+  - name: SSHWIFTY_TLSCERTIFICATEKEYFILE
+    default: ""
+    required: false
+  - name: SSHWIFTY_DOCKER_TLSCERT
+    default: ""
+    required: false
+  - name: SSHWIFTY_DOCKER_TLSCERTKEY
+    default: ""
+    required: false
+  - name: SSHWIFTY_CONFIG
+    default: ""
+    required: false
+  - name: SSHWIFTY_HOOK_BEFORE_CONNECTING
+    default: ""
+    required: false
+  - name: SSHWIFTY_HOOKTIMEOUT
+    default: "30"
+    required: false
+  - name: SSHWIFTY_PINNEDSSHHOSTFINGERPRINTS
+    default: ""
+    required: false
+  - name: SSHWIFTY_INITIALTIMEOUT
+    default: ""
+    required: false
+  - name: SSHWIFTY_READTIMEOUT
+    default: ""
+    required: false
+  - name: SSHWIFTY_WRITETIMEOUT
+    default: ""
+    required: false
+  - name: SSHWIFTY_HEARTBEATTIMEOUT
+    default: ""
+    required: false
+  - name: SSHWIFTY_READDELAY
+    default: ""
+    required: false
+  - name: SSHWIFTY_WRITEELAY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

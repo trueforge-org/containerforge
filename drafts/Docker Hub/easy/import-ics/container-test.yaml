@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+filePaths:
+- /app/import_ics/import_ics.py
+- /usr/local/bin/supercronic
+- /defaults/calendar_download_map.py
+# The first command must not end in a quote (include/healthcheck.sh strips a trailing quote).
+# UNVERIFIED: pgrep is available in the base image (procps).
+healthCommands:
+- command: /app/venv/bin/python -c "import caldav, requests" && test -f /app/import_ics/import_ics.py
+- command: pgrep -x supercronic

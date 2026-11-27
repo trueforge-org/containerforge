@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/binwiederhier/ntfy"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: NTFY_LISTEN_HTTP
+    default: ":8080"
+    required: false
+  - name: NTFY_BASE_URL
+    default: ""
+    required: false
+  - name: NTFY_CACHE_FILE
+    default: "/config/cache.db"
+    required: false
+  - name: NTFY_AUTH_FILE
+    default: "/config/user.db"
+    required: false
+  - name: NTFY_ATTACHMENT_CACHE_DIR
+    default: ""
+    required: false
+  - name: NTFY_BEHIND_PROXY
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

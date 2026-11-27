@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Privoce/vocechat-server-rust"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  # No app variables were confirmed. Public URL and bind address are passed as arguments, see the PR notes.
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '34400'
+# UNVERIFIED: the UI route /web/ is not confirmed from the source. If it does not return the expected status, record the real path or drop this probe. Do not weaken it.
+http:
+- port: '34400'
+  path: /web/
+filePaths:
+- /app/threadfin
+- /usr/share/licenses/threadfin/LICENSE

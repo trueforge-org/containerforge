@@ -1,0 +1,12 @@
+# Example only: copied to /config/config.example.yaml, never read as the real config.
+# Copy it to /config/config.yaml and edit it to enable config-file mode.
+exporter_port: 9787
+# Must be 0.0.0.0 to be reachable from other containers (config-file mode ignores FRITZ_LISTEN_ADDRESS).
+listen_address: 0.0.0.0
+log_level: INFO
+devices:
+  - name: fritzbox
+    hostname: fritz.box
+    username: exporter
+    # Keep the password in a file (max 32 characters), not inline.
+    password_file: /config/password

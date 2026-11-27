@@ -1,0 +1,81 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jsavargas/telethon_downloader"
+ports:
+  []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: TG_API_ID
+    default: ""
+    required: true
+  - name: TG_API_HASH
+    default: ""
+    required: true
+  - name: TG_BOT_TOKEN
+    default: ""
+    required: true
+  - name: TG_AUTHORIZED_USER_ID
+    default: ""
+    required: true
+  - name: TG_DOWNLOAD_PATH
+    default: "/download"
+    required: false
+  - name: DOWNLOAD_PATH_TORRENTS
+    default: "/watch"
+    required: false
+  - name: TG_MAX_PARALLEL
+    default: "4"
+    required: false
+  - name: TORRENT_MODE
+    default: "watch"
+    required: false
+  - name: PATH_CONFIG
+    default: "/config/"
+    required: false
+  - name: TG_PROGRESS_DOWNLOAD
+    default: "True"
+    required: false
+  - name: PROGRESS_STATUS_SHOW
+    default: "10"
+    required: false
+  - name: QBT_HOST
+    default: ""
+    required: false
+  - name: QBT_PORT
+    default: "8080"
+    required: false
+  - name: QBT_USERNAME
+    default: ""
+    required: false
+  - name: QBT_PASSWORD
+    default: ""
+    required: false
+  - name: YOUTUBE_VIDEO_FOLDER
+    default: "/download/youtube/videos"
+    required: false
+  - name: YOUTUBE_AUDIO_FOLDER
+    default: "/download/youtube/audios"
+    required: false
+  - name: YOUTUBE_FORMAT_VIDEO
+    default: "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
+    required: false
+  - name: YOUTUBE_FORMAT_AUDIO
+    default: "bestaudio/best"
+    required: false
+  - name: YOUTUBE_DEFAULT_DOWNLOAD
+    default: "video"
+    required: false
+  - name: YOUTUBE_TIMEOUT_OPTION
+    default: "5"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /download
+    required: false
+  - path: /watch
+    required: false
+opt_dependencies:
+  - name: qbittorrent

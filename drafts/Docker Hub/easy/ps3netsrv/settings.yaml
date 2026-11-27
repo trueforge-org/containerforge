@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/aldostools/ps3netsrv"
+ports:
+  - port: 38008
+    protocol: tcp
+    required: false
+env:
+  # Read by start.sh (names follow the shawly wrapper; upstream itself takes positional arguments).
+  - name: PS3NETSRV_PORT
+    default: "38008"
+    required: false
+  - name: PS3NETSRV_WHITELIST
+    default: ""
+    required: false
+volumes:
+  # Required by the settings schema. The app keeps no state here.
+  - path: /config
+    required: false
+  - path: /games
+    required: true

@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: the sync needs two external Radarr servers. Without env the container only waits.
+filePaths:
+- /app/radarrsync/RadarrSync.py

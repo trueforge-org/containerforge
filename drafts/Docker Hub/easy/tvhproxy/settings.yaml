@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jkaberg/tvhProxy"
+ports:
+  - port: 5004
+    protocol: tcp
+    required: true
+env:
+  - name: TVH_URL
+    default: "http://test:test@localhost:9981"
+    required: false
+  - name: TVH_PROXY_URL
+    default: "http://localhost"
+    required: false
+  - name: TVH_BINDADDR
+    default: ""
+    required: false
+  - name: TVH_TUNER_COUNT
+    default: "6"
+    required: false
+  - name: TVH_WEIGHT
+    default: "300"
+    required: false
+  - name: TVH_CHUNK_SIZE
+    default: "1048576"
+    required: false
+  - name: TVH_PROFILE
+    default: "pass"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies:
+  - name: tvheadend

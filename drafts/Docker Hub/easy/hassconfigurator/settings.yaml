@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/danielperna84/hass-configurator"
+ports:
+  - port: 3218
+    protocol: tcp
+    required: true
+env:
+  - name: HC_BASEPATH
+    default: "/hass-config"
+    required: false
+  - name: HC_ENFORCE_BASEPATH
+    default: "true"
+    required: false
+  - name: HC_LISTENIP
+    default: "0.0.0.0"
+    required: false
+  - name: HC_PORT
+    default: "3218"
+    required: false
+  - name: HC_HASS_API
+    default: "None"
+    required: false
+  - name: HC_LOGLEVEL
+    default: "info"
+    required: false
+  - name: HC_USERNAME
+    default: ""
+    required: false
+  - name: HC_PASSWORD
+    default: ""
+    required: false
+  - name: HC_ALLOWED_NETWORKS
+    default: ""
+    required: false
+  - name: HC_GIT
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /hass-config
+    required: false
+dependencies: []

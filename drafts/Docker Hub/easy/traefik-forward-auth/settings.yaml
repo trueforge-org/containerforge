@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/thomseddon/traefik-forward-auth"
+ports:
+  - port: 4181
+    protocol: tcp
+    required: false
+env:
+  # Required by the app. start.sh generates one into /config/secret when empty (keep it stable across restarts).
+  - name: SECRET
+    default: ""
+    required: true
+  - name: DEFAULT_PROVIDER
+    default: "google"
+    required: false
+  - name: AUTH_HOST
+    default: ""
+    required: false
+  - name: COOKIE_DOMAIN
+    default: ""
+    required: false
+  - name: COOKIE_NAME
+    default: "_forward_auth"
+    required: false
+  - name: CSRF_COOKIE_NAME
+    default: "_forward_auth_csrf"
+    required: false
+  - name: CONFIG
+    default: ""
+    required: false
+  - name: DEFAULT_ACTION
+    default: "auth"
+    required: false
+  - name: DOMAIN
+    default: ""
+    required: false
+  - name: INSECURE_COOKIE
+    default: "false"
+    required: false
+  - name: LIFETIME
+    default: "43200"
+    required: false
+  - name: LOG_FORMAT
+    default: "text"
+    required: false
+  - name: LOG_LEVEL
+    default: "warn"
+    required: false
+  - name: LOGOUT_REDIRECT
+    default: ""
+    required: false
+  - name: MATCH_WHITELIST_OR_DOMAIN
+    default: "false"
+    required: false
+  - name: PORT
+    default: "4181"
+    required: false
+  - name: URL_PATH
+    default: "/_oauth"
+    required: false
+  - name: WHITELIST
+    default: ""
+    required: false
+  # Google provider.
+  - name: PROVIDERS_GOOGLE_CLIENT_ID
+    default: ""
+    required: false
+  - name: PROVIDERS_GOOGLE_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: PROVIDERS_GOOGLE_PROMPT
+    default: ""
+    required: false
+  # Generic OIDC provider.
+  - name: PROVIDERS_OIDC_ISSUER_URL
+    default: ""
+    required: false
+  - name: PROVIDERS_OIDC_CLIENT_ID
+    default: ""
+    required: false
+  - name: PROVIDERS_OIDC_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: PROVIDERS_OIDC_RESOURCE
+    default: ""
+    required: false
+  # Generic OAuth provider.
+  - name: PROVIDERS_GENERIC_OAUTH_AUTH_URL
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_TOKEN_URL
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_USER_URL
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_CLIENT_ID
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_SCOPE
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_TOKEN_STYLE
+    default: ""
+    required: false
+  - name: PROVIDERS_GENERIC_OAUTH_RESOURCE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

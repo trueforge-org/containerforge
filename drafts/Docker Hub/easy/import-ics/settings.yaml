@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Vilhjalmr26/import_ics"
+# No listener: the app is a cron-driven script that only makes outbound requests.
+ports: []
+env:
+  - name: ICS_URL
+    default: ""
+    required: false
+  - name: ICS_USERNAME
+    default: ""
+    required: false
+  - name: ICS_PASSWORD
+    default: ""
+    required: false
+  - name: CRONTAB_SCHEDULE
+    default: "0 0 * * *"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

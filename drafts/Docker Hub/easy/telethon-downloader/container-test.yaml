@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: the bot needs real Telegram credentials and network access, so the test
+# cannot start it. It checks that the code, its dependencies and the licence are present.
+filePaths:
+- /app/telethon/app.py
+- /app/telethon/env_config.py
+- /usr/share/licenses/telethon-downloader/License.md
+
+runners:
+- entrypoint: /app/venv/bin/python
+  cmd: "-c __import__('telethon');print('telethon'+'-ok')"
+  expectedOutput: telethon-ok

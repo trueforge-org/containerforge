@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/cloudflare/cloudflared"
+ports:
+  - port: 20241
+    protocol: tcp
+    required: false
+env:
+  - name: TUNNEL_TOKEN
+    default: ""
+    required: false
+  - name: TUNNEL_TOKEN_FILE
+    default: ""
+    required: false
+  - name: TUNNEL_METRICS
+    default: "0.0.0.0:20241"
+    required: false
+  - name: TUNNEL_LOGLEVEL
+    default: "info"
+    required: false
+  - name: TUNNEL_TRANSPORT_PROTOCOL
+    default: "auto"
+    required: false
+  - name: TUNNEL_EDGE_IP_VERSION
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

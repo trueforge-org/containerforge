@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/DiscordGSM/GameServerMonitor"
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: APP_TOKEN
+    default: ""
+    required: true
+  - name: WHITELIST_GUILDS
+    default: ""
+    required: false
+  - name: APP_PUBLIC
+    default: "false"
+    required: false
+  - name: APP_DEBUG
+    default: "false"
+    required: false
+  - name: DB_CONNECTION
+    default: "sqlite"
+    required: false
+  - name: DATABASE_URL
+    default: ""
+    required: false
+  - name: POSTGRES_SSL_MODE
+    default: "require"
+    required: false
+  - name: TASK_QUERY_SERVER
+    default: "60"
+    required: false
+  - name: TASK_QUERY_SERVER_TIMEOUT
+    default: "15"
+    required: false
+  - name: COMMAND_QUERY_PUBLIC
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

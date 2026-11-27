@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No http probe: GET / queries the NUT server and fails without an upsd.
+tcp:
+- port: '6543'
+filePaths:
+- /app/webNUT/production.ini
+- /app/webNUT/webnut/config.py
+- /usr/share/licenses/webnut/LICENSE

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/dairefinn/RadarrSync"
+# No listener: the app is a polling script.
+ports: []
+# The required vars have no default. start.sh waits and logs the missing names instead of exiting.
+env:
+  - name: RADARR_URL
+    default: ""
+    required: true
+  - name: RADARR_KEY
+    default: ""
+    required: true
+  - name: RADARR4K_URL
+    default: ""
+    required: true
+  - name: RADARR4K_KEY
+    default: ""
+    required: true
+  - name: PROFILE_ID
+    default: ""
+    required: true
+  # Read by start.sh only. The upstream script hard-codes 15 minutes.
+  - name: DELAY
+    default: "900"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

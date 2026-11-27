@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5000'
+http:
+- port: '5000'
+  path: /v2/
+filePaths:
+- /app/registry
+- /usr/share/licenses/dockerregistry/LICENSE

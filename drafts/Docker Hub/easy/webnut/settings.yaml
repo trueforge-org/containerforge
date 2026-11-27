@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rshipp/webNUT"
+ports:
+  - port: 6543
+    protocol: tcp
+    required: false
+env:
+  - name: UPS_HOST
+    default: "127.0.0.1"
+    required: false
+  - name: UPS_PORT
+    default: "3493"
+    required: false
+  - name: UPS_USER
+    default: ""
+    required: false
+  - name: UPS_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

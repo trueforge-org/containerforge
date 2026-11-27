@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/arkmanager/ark-server-tools"
+ports:
+  - port: 7777
+    protocol: udp
+    required: false
+  - port: 7778
+    protocol: udp
+    required: false
+  - port: 27015
+    protocol: udp
+    required: false
+  # UNVERIFIED: RCON default 27020 (written by start.sh as am_ark_RCONPort).
+  - port: 27020
+    protocol: tcp
+    required: false
+env:
+  - name: am_serverMap
+    default: "TheIsland"
+    required: false
+  - name: am_ark_SessionName
+    default: "ARK Server"
+    required: false
+  - name: am_ark_ServerAdminPassword
+    default: ""
+    required: false
+  - name: am_ark_MaxPlayers
+    default: "70"
+    required: false
+  - name: am_ark_Port
+    default: "7777"
+    required: false
+  - name: am_ark_QueryPort
+    default: "27015"
+    required: false
+  - name: am_ark_RCONPort
+    default: "27020"
+    required: false
+  - name: am_ark_AltSaveDirectoryName
+    default: "SavedArks"
+    required: false
+  - name: am_ark_GameModIds
+    default: ""
+    required: false
+  - name: am_arkAutoUpdateOnStart
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

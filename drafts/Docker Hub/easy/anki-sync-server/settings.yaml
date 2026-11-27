@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ankicommunity/anki-sync-server-rs"
+ports:
+  - port: 27701
+    protocol: tcp
+    required: false
+env:
+  - name: ANKISYNCD_USERNAME
+    default: ""
+    required: false
+  - name: ANKISYNCD_PASSWORD
+    default: ""
+    required: false
+  - name: MAX_SYNC_PAYLOAD_MEGS
+    default: "1000"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

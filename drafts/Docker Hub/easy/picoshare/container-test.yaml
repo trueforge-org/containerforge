@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '4001'
+http:
+- port: '4001'
+  path: /
+filePaths:
+- /app/picoshare
+- /app/litestream
+- /usr/share/licenses/picoshare/LICENSE

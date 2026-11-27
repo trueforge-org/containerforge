@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs without env vars, so the real backup path (token handling, loop) is not exercised here.
+# It is run by hand per the plan. The health command runs the installed CLI.
+filePaths:
+- /start.sh
+- /app/venv/bin/github-backup
+healthCommands:
+- command: /app/venv/bin/github-backup --help

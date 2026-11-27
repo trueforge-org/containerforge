@@ -1,0 +1,22 @@
+# Seed config, copied to /config/quickshare.yml on first start.
+# UNVERIFIED: this is a reduced config. The plan asks for a full copy of lan.yml from the
+# v0.11.4 release, which was not in the context. Replace it with that file (paths moved to
+# /config, host 0.0.0.0) before merging, and check that a partial file is merged with defaults.
+fs:
+  root: /config/files
+  publicPath: static/public
+
+db:
+  dbPath: quickshare.sqlite
+
+server:
+  host: "0.0.0.0"
+  port: 8686
+  cookieSecure: false
+
+secrets:
+  tokenSecret: ""
+
+users:
+  defaultAdmin: ""
+  defaultAdminPwd: ""

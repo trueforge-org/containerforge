@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+http:
+- port: '8080'
+  path: /
+- port: '8080'
+  path: /v1/health
+filePaths:
+- /app/ntfy
+- /usr/share/licenses/ntfy

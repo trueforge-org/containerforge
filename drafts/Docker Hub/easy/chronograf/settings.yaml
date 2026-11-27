@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/influxdata/chronograf"
+ports:
+  - port: 8888
+    protocol: tcp
+    required: false
+env:
+  # Only variables Chronograf reads (config-options docs). Empty values mean unset.
+  - name: BOLT_PATH
+    default: "/config/chronograf-v1.db"
+    required: false
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: PORT
+    default: "8888"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: INFLUXDB_URL
+    default: ""
+    required: false
+  - name: KAPACITOR_URL
+    default: ""
+    required: false
+  - name: BASE_PATH
+    default: ""
+    required: false
+  - name: REPORTING_DISABLED
+    default: "true"
+    required: false
+  - name: CANNED_PATH
+    default: "/usr/share/chronograf/canned"
+    required: false
+  - name: RESOURCES_PATH
+    default: "/usr/share/chronograf/resources"
+    required: false
+  - name: TLS_CERTIFICATE
+    default: ""
+    required: false
+  - name: TLS_PRIVATE_KEY
+    default: ""
+    required: false
+  - name: CUSTOM_AUTO_REFRESH
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

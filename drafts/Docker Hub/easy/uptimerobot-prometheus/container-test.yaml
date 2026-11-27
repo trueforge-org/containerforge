@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+
+http:
+- port: '9705'
+  path: /
+
+filePaths:
+- /app/exporter/exporter.py
+- /usr/share/licenses/uptimerobot-prometheus/LICENSE

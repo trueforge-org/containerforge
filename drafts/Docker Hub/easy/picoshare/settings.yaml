@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/mtlynch/picoshare"
+ports:
+  - port: 4001
+    protocol: tcp
+    required: false
+env:
+  - name: PORT
+    default: "4001"
+    required: false
+  # start.sh generates /config/shared_secret when neither secret variable is set
+  - name: PS_SHARED_SECRET
+    default: ""
+    required: false
+  - name: PS_SHARED_SECRET_FILE
+    default: ""
+    required: false
+  - name: PS_BEHIND_PROXY
+    default: ""
+    required: false
+  - name: LITESTREAM_BUCKET
+    default: ""
+    required: false
+  - name: LITESTREAM_ENDPOINT
+    default: ""
+    required: false
+  - name: LITESTREAM_ACCESS_KEY_ID
+    default: ""
+    required: false
+  - name: LITESTREAM_SECRET_ACCESS_KEY
+    default: ""
+    required: false
+  - name: LITESTREAM_PATH
+    default: "db"
+    required: false
+  - name: LITESTREAM_RETENTION
+    default: "72h"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jkirkcaldy/plex-utills"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  # Not read by the upstream app. Read by start.sh (gunicorn threads).
+  - name: GUNICORN_THREADS
+    default: "4"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  # Read-only media library, same path as Plex sees it.
+  - path: /films
+    required: false

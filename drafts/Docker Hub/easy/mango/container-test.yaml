@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: a tcp probe is used because the root URL may redirect to login. Switch to http (path /login) once checked.
+tcp:
+- port: '9000'
+filePaths:
+- /app/mango
+- /start.sh
+- /usr/share/licenses/mango/LICENSE

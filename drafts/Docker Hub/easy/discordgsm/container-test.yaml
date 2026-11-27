@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The bot needs APP_TOKEN and a Discord connection, so the test runs without env vars and checks the files and dependencies only.
+timeoutSeconds: 120
+filePaths:
+- /app/main.py
+- /app/discordgsm/main.py
+- /app/venv/bin/python
+- /usr/share/licenses/discordgsm/LICENSE
+runners:
+# forgetool splits cmd on whitespace (no shell quoting), so keep the code space-free;
+# build the expected string at runtime so a traceback echoing the source can't match
+- entrypoint: /app/venv/bin/python
+  cmd: "-c __import__('discord');__import__('flask');__import__('psycopg2');__import__('pymongo');__import__('opengsq');print('deps'+'-ok')"
+  expectedOutput: deps-ok

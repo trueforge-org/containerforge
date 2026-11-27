@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Cesura/pastey"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: PASTEY_DATA_DIRECTORY
+    default: "/config/data"
+    required: false
+  - name: PASTEY_LISTEN_ADDRESS
+    default: "0.0.0.0"
+    required: false
+  - name: PASTEY_LISTEN_PORT
+    default: "5000"
+    required: false
+  - name: PASTEY_USE_WHITELIST
+    default: "True"
+    required: false
+  - name: PASTEY_WHITELIST_CIDR
+    default: "127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+    required: false
+  - name: PASTEY_BLACKLIST_CIDR
+    default: ""
+    required: false
+  - name: PASTEY_RESTRICT_PASTING
+    default: "False"
+    required: false
+  - name: PASTEY_RECENT_PASTES
+    default: "10"
+    required: false
+  - name: PASTEY_BEHIND_PROXY
+    default: "False"
+    required: false
+  - name: PASTEY_DEFAULT_THEME
+    default: "Light"
+    required: false
+  - name: PASTEY_PURGE_INTERVAL
+    default: "3600"
+    required: false
+  - name: PASTEY_FORCE_SHOW_RECENT
+    default: "False"
+    required: false
+  - name: PASTEY_SHOW_CLI_BUTTON
+    default: "True"
+    required: false
+  - name: PASTEY_FORCE_HTTPS_LINKS
+    default: "False"
+    required: false
+  - name: PASTEY_OVERRIDE_DOMAIN
+    default: ""
+    required: false
+  - name: PASTEY_MINIMUM_URL_LENGTH
+    default: "5"
+    required: false
+  - name: PASTEY_RATE_LIMIT
+    default: "5/hour"
+    required: false
+volumes:
+  - path: /config
+    required: true

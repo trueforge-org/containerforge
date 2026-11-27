@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ihexxa/quickshare"
+ports:
+  - port: 8686
+    protocol: tcp
+    required: false
+env:
+  - name: DEFAULTADMIN
+    default: "admin"
+    required: false
+  - name: DEFAULTADMINPWD
+    default: ""
+    required: false
+  - name: PORT
+    default: "8686"
+    required: false
+  - name: TOKENSECRET
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

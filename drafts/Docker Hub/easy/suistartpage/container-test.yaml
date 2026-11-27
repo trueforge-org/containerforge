@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+http:
+- port: '8080'
+  path: /
+
+filePaths:
+- /usr/share/nginx/html/index.html
+- /usr/share/nginx/html/apps.json
+- /usr/share/licenses/suistartpage/LICENSE

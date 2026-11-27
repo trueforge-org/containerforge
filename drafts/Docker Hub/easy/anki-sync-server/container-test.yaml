@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '27701'
+http:
+- port: '27701'
+  path: /
+  statusCode: 200
+filePaths:
+- /app/ankisyncd
+- /defaults/ankisyncd.toml
+- /usr/share/licenses/anki-sync-server/LICENSE

@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No ports, so no tcp or http probe. The test runs without env, so the sync path is not covered here.
+filePaths:
+- /app/venv/bin/aws
+- /start.sh

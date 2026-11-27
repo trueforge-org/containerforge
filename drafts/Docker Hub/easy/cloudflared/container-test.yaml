@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Port 20241 (metrics) only opens once a tunnel runs, which needs a real TUNNEL_TOKEN.
+# The test runs without env vars, so that path is checked by hand (see plan section 11).
+runners:
+- entrypoint: /app/cloudflared --version
+  # UNVERIFIED: expected text is "cloudflared version 2026.11.2 ..."; confirm on first run.
+  expectedOutput: cloudflared version
+filePaths:
+- /app/cloudflared
+- /start.sh
+- /usr/share/licenses/cloudflared/LICENSE

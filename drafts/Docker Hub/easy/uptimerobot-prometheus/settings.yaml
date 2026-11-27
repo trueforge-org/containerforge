@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/lekpamartin/uptimerobot_exporter"
+ports:
+  - port: 9705
+    protocol: tcp
+    required: true
+env:
+  - name: UPTIMEROBOT_API_KEY
+    default: ""
+    required: false
+  - name: UPTIMEROBOT_SERVER_NAME
+    default: "0.0.0.0"
+    required: false
+  - name: UPTIMEROBOT_SERVER_PORT
+    default: "9705"
+    required: false
+  - name: UPTIMEROBOT_CACHE_TTL
+    default: "60"
+    required: false
+  - name: UPTIMEROBOT_RESPONSE_TIMES
+    default: "false"
+    required: false
+  - name: UPTIMEROBOT_RESPONSE_TIME_WINDOW
+    default: "3600"
+    required: false
+  - name: UPTIMEROBOT_API_URL
+    default: "https://api.uptimerobot.com/v3"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

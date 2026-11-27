@@ -1,0 +1,12 @@
+# Seed file, copied to /config/ankisyncd.toml by start.sh when missing.
+[listen]
+host = "0.0.0.0"
+port = 27701
+
+[paths]
+root_dir = "/config"
+
+[encryption]
+ssl_enable = false
+cert_file = ""
+key_file = ""

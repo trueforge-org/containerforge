@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Threadfin/Threadfin"
+ports:
+  - port: 34400
+    protocol: tcp
+    required: false
+env:
+  # Read by start.sh and turned into command-line flags. The binary itself reads no env vars.
+  - name: THREADFIN_PORT
+    default: "34400"
+    required: false
+  - name: THREADFIN_BIND_IP_ADDRESS
+    default: "0.0.0.0"
+    required: false
+  - name: THREADFIN_DEBUG
+    default: "0"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://factorio.com/"
+ports:
+  - port: 34197
+    protocol: udp
+    required: true
+  - port: 27015
+    protocol: tcp
+    required: false
+env:
+  - name: BIND
+    default: ""
+    required: false
+  - name: GENERATE_NEW_SAVE
+    default: "false"
+    required: false
+  - name: LOAD_LATEST_SAVE
+    default: "true"
+    required: false
+  - name: PORT
+    default: "34197"
+    required: false
+  - name: PRESET
+    default: ""
+    required: false
+  - name: RCON_PORT
+    default: "27015"
+    required: false
+  - name: SAVE_NAME
+    default: "_autosave1"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

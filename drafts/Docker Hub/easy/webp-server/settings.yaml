@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/webp-sh/webp_server_go"
+ports:
+  - port: 3333
+    protocol: tcp
+    required: false
+env:
+  - name: LOG_VERBOSITY
+    default: "3"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: WEBP_ALLOWED_TYPES
+    default: "jpg,png,jpeg,gif,bmp,svg,heic,nef"
+    required: false
+  - name: WEBP_CACHE_TTL
+    default: "259200"
+    required: false
+  - name: WEBP_CONVERT_TYPES
+    default: "webp"
+    required: false
+  - name: WEBP_ENABLE_EXTRA_PARAMS
+    default: "false"
+    required: false
+  - name: WEBP_EXHAUST_PATH
+    default: "/tmp/exhaust"
+    required: false
+  - name: WEBP_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: WEBP_IMG_PATH
+    default: "/opt/pics"
+    required: false
+  - name: WEBP_MAX_CACHE_SIZE
+    default: "0"
+    required: false
+  - name: WEBP_PORT
+    default: "3333"
+    required: false
+  - name: WEBP_QUALITY
+    default: "80"
+    required: false
+  - name: WEBP_STRIP_METADATA
+    default: "true"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /opt/pics
+    required: false

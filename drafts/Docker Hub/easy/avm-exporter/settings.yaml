@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/pdreker/fritz_exporter"
+ports:
+  - port: 9787
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: FRITZ_LISTEN_ADDRESS
+    default: "0.0.0.0"
+    required: false
+  - name: FRITZ_PORT
+    default: "9787"
+    required: false
+  - name: FRITZ_LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: FRITZ_HOSTNAME
+    default: "fritz.box"
+    required: false
+  - name: FRITZ_NAME
+    default: ""
+    required: false
+  - name: FRITZ_USERNAME
+    default: ""
+    required: false
+  - name: FRITZ_PASSWORD
+    default: ""
+    required: false
+  - name: FRITZ_PASSWORD_FILE
+    default: ""
+    required: false
+  - name: FRITZ_HOST_INFO
+    default: "false"
+    required: false
+  - name: FRITZ_WIFI_CLIENT_INFO
+    default: "false"
+    required: false
+  - name: FRITZ_DEVICE_PORT
+    default: ""
+    required: false
+  - name: FRITZ_REMOTE_ACCESS
+    default: ""
+    required: false
+  - name: FRITZ_CONNECTION_TIMEOUT
+    default: "10"
+    required: false
+  - name: FRITZ_USE_TLS
+    default: "false"
+    required: false
+  - name: FRITZ_ALLOW_UNSAFE_MD5_PASSWORD
+    default: "false"
+    required: false
+  - name: FRITZ_CONFIG_FILE
+    default: "/config/config.yaml"
+    required: false
+volumes:
+  - path: /config
+    required: false

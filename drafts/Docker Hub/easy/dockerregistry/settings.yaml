@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/distribution/distribution"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+env:
+  - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+    default: "/config/data"
+    required: false
+  - name: REGISTRY_STORAGE_DELETE_ENABLED
+    default: "false"
+    required: false
+  - name: REGISTRY_LOG_LEVEL
+    default: "info"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
