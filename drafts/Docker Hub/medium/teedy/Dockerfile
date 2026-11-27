@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # JDK 25 base matches the upstream runtime (ubuntu:26.04 with openjdk-25).
-FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d
+FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:3db5983d5bd504865ac842efb282bcbdbd286adbc116fc18645ec3c433eba44a
 
 ARG VERSION
 USER root
