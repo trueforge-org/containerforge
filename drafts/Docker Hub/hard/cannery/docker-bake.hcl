@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=gitlab-tags depName=shibaobun/cannery versioning=semver
-  default = "1.5.9"
+  default = "1.5.10"
 }
 
 variable "LICENSE" {
