@@ -2,7 +2,7 @@
 # Upstream: https://github.com/lancachenet/monolithic (config overlay on lancachenet/ubuntu-nginx)
 # Base nginx module availability (slice, stream, stream_ssl_preread, realip) is UNVERIFIED: check `nginx -V`.
 
-FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f
+FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
 
 # Upstream lancachenet/monolithic commit this overlay is ported from (VERSION in docker-bake.hcl)
 ARG VERSION
