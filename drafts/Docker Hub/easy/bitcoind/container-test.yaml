@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8333'
+- port: '8332'
+filePaths:
+- /app/bin/bitcoind
+- /app/bin/bitcoin-cli
+- /usr/share/licenses/bitcoind/COPYING

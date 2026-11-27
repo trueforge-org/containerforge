@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/vrana/adminer"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: MEMORY_LIMIT
+    default: "1G"
+    required: false
+  - name: UPLOAD_LIMIT
+    default: "128M"
+    required: false
+  - name: MAX_EXECUTION_TIME
+    default: "600"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+opt_dependencies:
+  - name: mariadb
+  - name: postgresql

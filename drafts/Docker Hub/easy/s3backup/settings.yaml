@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/s3tools/s3cmd"
+ports: []
+env:
+  - name: ACCESS_KEY
+    default: ""
+    required: false
+  - name: INTERVAL_SECONDS
+    default: "3600"
+    required: false
+  - name: RUN_ONCE
+    default: "false"
+    required: false
+  - name: S3CMDPARAMS
+    default: ""
+    required: false
+  - name: S3PATH
+    default: ""
+    required: false
+  - name: SECRET_KEY
+    default: ""
+    required: false
+  - name: SOURCE_DIR
+    default: "/data"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /data
+    required: false
+dependencies: []

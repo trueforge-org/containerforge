@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/pglombardo/PasswordPusher"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+  - port: 5100
+    protocol: tcp
+    required: false
+env:
+  - name: DATABASE_URL
+    default: "sqlite3:storage/db/production.sqlite3"
+    required: false
+  - name: SECRET_KEY_BASE
+    default: ""
+    required: false
+  - name: PWP__HOST_DOMAIN
+    default: ""
+    required: false
+  - name: PWP__HOST_PROTOCOL
+    default: "https"
+    required: false
+  - name: PWP__OVERRIDE_BASE_URL
+    default: ""
+    required: false
+  - name: PWP__NO_WORKER
+    default: ""
+    required: false
+  - name: PWP__PROMETHEUS__ENABLED
+    default: "false"
+    required: false
+  - name: HTTP_PORT
+    default: "8080"
+    required: false
+  - name: TARGET_PORT
+    default: "5100"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
+opt_dependencies:
+  - name: postgresql

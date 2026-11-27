@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/l3uddz/traktarr"
+# The app opens no port. Trakt credentials go in config.json, not in env.
+ports: []
+env:
+  - name: TRAKTARR_CONFIG
+    default: "/config/config.json"
+    required: false
+  - name: TRAKTARR_CACHEFILE
+    default: "/config/cache.db"
+    required: false
+  - name: TRAKTARR_LOGFILE
+    default: "/config/traktarr.log"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: sonarr
+  - name: radarr

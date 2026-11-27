@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/dchesterton/amcrest2mqtt"
+# none: MQTT and camera client only
+ports: []
+# AMCREST_HOST, AMCREST_PASSWORD and MQTT_USERNAME are mandatory in practice;
+# start.sh reports them when missing, so they are not marked required here.
+env:
+  - name: AMCREST_HOST
+    default: ""
+    required: false
+  - name: AMCREST_PORT
+    default: "80"
+    required: false
+  - name: AMCREST_USERNAME
+    default: "admin"
+    required: false
+  - name: AMCREST_PASSWORD
+    default: ""
+    required: false
+  - name: DEVICE_NAME
+    default: ""
+    required: false
+  - name: HOME_ASSISTANT
+    default: "false"
+    required: false
+  - name: HOME_ASSISTANT_PREFIX
+    default: "homeassistant"
+    required: false
+  - name: MQTT_HOST
+    default: "localhost"
+    required: false
+  - name: MQTT_PASSWORD
+    default: ""
+    required: false
+  - name: MQTT_PORT
+    default: "1883"
+    required: false
+  - name: MQTT_QOS
+    default: "0"
+    required: false
+  - name: MQTT_TLS_CA_CERT
+    default: ""
+    required: false
+  - name: MQTT_TLS_CERT
+    default: ""
+    required: false
+  - name: MQTT_TLS_ENABLED
+    default: "false"
+    required: false
+  - name: MQTT_TLS_KEY
+    default: ""
+    required: false
+  - name: MQTT_USERNAME
+    default: ""
+    required: false
+  - name: STORAGE_POLL_INTERVAL
+    default: "3600"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

@@ -1,0 +1,39 @@
+# Seeded to /config/config.toml on first start (only when missing).
+# Based on upstream khlieng/dispatch v0.7 config.default.toml, with port 8080 and HTTPS disabled.
+# UNVERIFIED: this is only the subset of upstream keys recorded in context. Replace it with the full
+# v0.7 config.default.toml (keeping the port and https changes) before the PR.
+address = ""
+port = 8080
+hexIP = false
+verify_certificates = true
+
+[defaults]
+name = "freenode"
+host = "chat.freenode.net"
+port = 6697
+channels = ["#dispatch", "#go-nuts"]
+password = ""
+ssl = true
+readonly = false
+show_details = false
+
+[https]
+enabled = false
+port = 443
+cert = ""
+key = ""
+
+[https.hsts]
+enabled = false
+max_age = 31536000
+include_subdomains = false
+preload = false
+
+[letsencrypt]
+domain = ""
+email = ""
+
+[auth]
+anonymous = true
+login = true
+registration = true

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: many ports open only after setup. If a port stays closed on a fresh
+# instance, drop it from settings.yaml and here together; do not weaken the probe otherwise.
+timeoutSeconds: 180
+tcp:
+- port: '4040'
+- port: '80'
+- port: '443'
+- port: '25'
+- port: '465'
+- port: '587'
+- port: '110'
+- port: '995'
+- port: '143'
+- port: '993'
+filePaths:
+- /start.sh
+- /usr/share/licenses/kerio-connect/

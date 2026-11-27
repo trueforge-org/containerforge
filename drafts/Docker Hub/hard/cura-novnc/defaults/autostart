@@ -1,0 +1,3 @@
+# Opens Cura on the kasmvnc desktop. The kasmvnc start script copies this file to
+# /config/.config/openbox/autostart only when that file is missing, so an old config volume keeps its copy.
+cura &

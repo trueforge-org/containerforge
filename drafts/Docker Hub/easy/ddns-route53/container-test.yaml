@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No port is opened (settings.yaml lists none). A real run needs AWS credentials and a hosted zone,
+# which the test cannot supply, so start.sh takes the idle path.
+# UNVERIFIED: the exact --version output. Add expectedOutput after the first real run.
+runners:
+- entrypoint: /app/ddns-route53
+  cmd: --version
+filePaths:
+- /app/ddns-route53
+- /start.sh
+- /usr/share/licenses/ddns-route53/LICENSE

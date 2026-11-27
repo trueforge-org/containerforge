@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/RemiRigal/Plex-Auto-Languages"
+ports:
+  # internal health/readiness JSON endpoint
+  - port: 9880
+    protocol: tcp
+    required: false
+env:
+  - name: PLEX_URL
+    default: ""
+    required: false
+  - name: PLEX_TOKEN
+    default: ""
+    required: false
+  - name: PLEX_TOKEN_FILE
+    default: "/run/secrets/plex_token"
+    required: false
+  # show | season
+  - name: UPDATE_LEVEL
+    default: "show"
+    required: false
+  # all | next (v1.2.3 default.yaml says next)
+  - name: UPDATE_STRATEGY
+    default: "next"
+    required: false
+  - name: TRIGGER_ON_PLAY
+    default: "true"
+    required: false
+  - name: TRIGGER_ON_SCAN
+    default: "true"
+    required: false
+  - name: TRIGGER_ON_ACTIVITY
+    default: "false"
+    required: false
+  - name: REFRESH_LIBRARY_ON_SCAN
+    default: "true"
+    required: false
+  # comma separated
+  - name: IGNORE_TAGS
+    default: "PAL_IGNORE"
+    required: false
+  - name: SCHEDULER_ENABLE
+    default: "true"
+    required: false
+  # HH:MM
+  - name: SCHEDULER_SCHEDULE_TIME
+    default: "02:00"
+    required: false
+  - name: NOTIFICATIONS_ENABLE
+    default: "false"
+    required: false
+  - name: DEBUG
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

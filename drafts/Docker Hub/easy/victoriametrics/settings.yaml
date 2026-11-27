@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/VictoriaMetrics/VictoriaMetrics"
+ports:
+  - port: 8428
+    protocol: tcp
+    required: false
+env:
+  - name: storageDataPath
+    default: "/config/data"
+    required: false
+  - name: retentionPeriod
+    default: "1M"
+    required: false
+  - name: httpListenAddr
+    default: ":8428"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

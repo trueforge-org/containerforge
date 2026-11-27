@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/robtme/satisfactory-server"
+ports:
+  - port: 7777
+    protocol: udp
+    required: true
+  - port: 7777
+    protocol: tcp
+    required: true
+  - port: 8888
+    protocol: tcp
+    required: true
+env:
+  - name: AUTOSAVENUM
+    default: "5"
+    required: false
+  - name: DISABLESEASONALEVENTS
+    default: "false"
+    required: false
+  - name: MAXOBJECTS
+    default: "2162688"
+    required: false
+  - name: MAXPLAYERS
+    default: "4"
+    required: false
+  - name: MAXTICKRATE
+    default: "30"
+    required: false
+  - name: MULTIHOME
+    default: "::"
+    required: false
+  - name: SERVERGAMEPORT
+    default: "7777"
+    required: false
+  - name: SERVERMESSAGINGPORT
+    default: "8888"
+    required: false
+  - name: SERVERSTREAMING
+    default: "true"
+    required: false
+  - name: SKIPUPDATE
+    default: "false"
+    required: false
+  - name: STEAMBETA
+    default: "false"
+    required: false
+  - name: STEAMBETAID
+    default: ""
+    required: false
+  - name: STEAMBETAKEY
+    default: ""
+    required: false
+  - name: TIMEOUT
+    default: "30"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

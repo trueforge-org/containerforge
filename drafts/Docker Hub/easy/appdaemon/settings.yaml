@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/AppDaemon/appdaemon"
+ports:
+  - port: 5050
+    protocol: tcp
+    required: false
+env:
+  - name: DASH_URL
+    default: ""
+    required: false
+  - name: ELEVATION
+    default: ""
+    required: false
+  - name: HA_CERT_VERIFY
+    default: ""
+    required: false
+  - name: HA_URL
+    default: ""
+    required: false
+  - name: LATITUDE
+    default: ""
+    required: false
+  - name: LONGITUDE
+    default: ""
+    required: false
+  - name: TIMEZONE
+    default: ""
+    required: false
+  - name: TOKEN
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: home-assistant

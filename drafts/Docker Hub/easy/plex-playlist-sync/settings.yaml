@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rnagabhyrava/plex-playlist-sync"
+# none: outbound client only
+ports:
+  []
+env:
+  - name: ADD_PLAYLIST_DESCRIPTION
+    default: "1"
+    required: false
+  - name: ADD_PLAYLIST_POSTER
+    default: "1"
+    required: false
+  - name: APPEND_INSTEAD_OF_SYNC
+    default: "0"
+    required: false
+  - name: DEEZER_PLAYLIST_ID
+    default: ""
+    required: false
+  - name: DEEZER_USER_ID
+    default: ""
+    required: false
+  - name: PLEX_TOKEN
+    default: ""
+    required: false
+  - name: PLEX_URL
+    default: ""
+    required: false
+  - name: SECONDS_TO_WAIT
+    default: "86400"
+    required: false
+  - name: SPOTIFY_CLIENT_ID
+    default: ""
+    required: false
+  - name: SPOTIFY_CLIENT_SECRET
+    default: ""
+    required: false
+  - name: SPOTIFY_USER_ID
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: WRITE_MISSING_AS_CSV
+    default: "0"
+    required: false
+volumes:
+  - path: /config
+    required: true

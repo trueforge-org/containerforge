@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Usage: create_user <name> [password]
+# Adds or updates a bcrypt user in $PASSWORD_FILE. Without a password, htpasswd prompts.
+set -euo pipefail
+
+PASSWORD_FILE="${PASSWORD_FILE:-/config/.htpasswd}"
+name="${1:?usage: create_user <name> [password]}"
+
+if [ -n "${2:-}" ]; then
+  # -i reads the password from stdin, so it stays out of the process list.
+  printf '%s' "$2" | htpasswd -B -i "${PASSWORD_FILE}" "${name}"
+else
+  htpasswd -B "${PASSWORD_FILE}" "${name}"
+fi

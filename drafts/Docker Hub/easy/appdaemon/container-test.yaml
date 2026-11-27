@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '5050'
+filePaths:
+- /app/venv/bin/appdaemon
+- /defaults/appdaemon.yaml
+- /usr/share/licenses/appdaemon/LICENSE.md

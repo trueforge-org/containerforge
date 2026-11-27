@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /healthz
+  statusCode: 200
+filePaths:
+- /app/answer
+- /usr/share/licenses/answer/LICENSE
+- /usr/share/licenses/answer/NOTICE

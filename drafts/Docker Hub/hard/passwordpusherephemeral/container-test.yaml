@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '8080'
+- port: '5100'
+http:
+- port: '8080'
+  path: /
+- port: '5100'
+  path: /
+filePaths:
+- /app/passwordpusher/db/migrate
+- /app/passwordpusher/Gemfile.lock
+- /usr/share/licenses/passwordpusher/LICENSE
+# UNVERIFIED: the /app/passwordpusher/VERSION file exists upstream. The / probe may redirect depending on PWP__HOST_PROTOCOL.

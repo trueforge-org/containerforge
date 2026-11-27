@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the first start builds the Wine prefix (minutes); raise this if the probes time out.
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+- port: '3001'
+filePaths:
+- /defaults/autostart
+- /defaults/fmd2.sh

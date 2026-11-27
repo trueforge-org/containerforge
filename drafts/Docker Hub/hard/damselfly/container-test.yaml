@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeout. Larger than typical because migrations and model loads run on first start. Compare with the .NET siblings.
+timeoutSeconds: 300
+tcp:
+- port: '6363'
+http:
+- port: '6363'
+  path: /
+filePaths:
+- /app/Damselfly.Web.Server
+- /usr/share/licenses/damselfly/LICENSE

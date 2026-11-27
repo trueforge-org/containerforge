@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/modem7/docker-rickroll"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: HEADLINE
+    default: ""
+    required: false
+  - name: HEIGHT
+    default: "100vh"
+    required: false
+  - name: LOOP
+    default: "true"
+    required: false
+  - name: OBJECT_FIT
+    default: "cover"
+    required: false
+  - name: TITLE
+    default: "Rickroll"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: WIDTH
+    default: "100%"
+    required: false
+volumes:
+  - path: /config
+    required: true

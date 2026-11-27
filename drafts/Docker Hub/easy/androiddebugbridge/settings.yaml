@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/BLBurgess/adb-hass-androidtv"
+ports:
+  - port: 5037
+    protocol: tcp
+    required: false
+env:
+  - name: devicelist
+    default: ""
+    required: false
+  - name: bootwait
+    default: "10"
+    required: false
+  - name: checkfreq
+    default: "300"
+    required: false
+  - name: enable_adb_usb
+    default: "no"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

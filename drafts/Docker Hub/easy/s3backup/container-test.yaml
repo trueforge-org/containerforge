@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /app/venv/bin/s3cmd
+- /start.sh
+- /usr/share/licenses/s3cmd/LICENSE
+# The sync path needs S3PATH and credentials, so it is tested by hand only.

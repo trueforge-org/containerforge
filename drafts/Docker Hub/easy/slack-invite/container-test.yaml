@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+http:
+- port: '7879'
+  path: /
+tcp:
+- port: '7879'
+filePaths:
+- /app/slack-invite/bin/www
+- /app/slack-invite/node_modules/express
+# The POST /invite path calls Slack and needs a token, so it is tested by hand only.

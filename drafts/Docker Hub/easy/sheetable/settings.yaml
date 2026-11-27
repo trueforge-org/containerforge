@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/SheetAble/SheetAble/"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: PORT
+    default: "8080"
+    required: false
+  - name: CONFIG_PATH
+    default: "/config/"
+    required: false
+  - name: DB_DRIVER
+    default: "sqlite"
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_NAME
+    default: ""
+    required: false
+  - name: DB_USER
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: API_SECRET
+    default: ""
+    required: false
+  - name: ADMIN_EMAIL
+    default: "admin@admin.com"
+    required: false
+  - name: ADMIN_PASSWORD
+    default: "sheetable"
+    required: false
+  - name: SERVER_URL
+    default: ""
+    required: false
+  - name: DEV
+    default: ""
+    required: false
+  - name: SMTP_ENABLED
+    default: "0"
+    required: false
+  - name: SMTP_FROM
+    default: ""
+    required: false
+  - name: SMTP_SERVER_ADDR
+    default: ""
+    required: false
+  - name: SMTP_HOST_SERVER_PORT
+    default: ""
+    required: false
+  - name: SMTP_USERNAME
+    default: ""
+    required: false
+  - name: SMTP_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

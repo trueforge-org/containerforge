@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/petersem/posterr"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  # UNVERIFIED: PORT is read in index.js per plan.md; the README lists only TZ and BASEPATH
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: BASEPATH
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

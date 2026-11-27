@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/terafin/mqtt-venstar-bridge"
+# none: MQTT client only
+ports: []
+# MQTT_HOST and VENSTAR_HOST are functionally required; start.sh idles with a message when they are unset.
+env:
+  - name: LOGGING_NAME
+    default: "venstar2mqtt"
+    required: false
+  - name: LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: MQTT_HOST
+    default: ""
+    required: false
+  - name: MQTT_PASS
+    default: ""
+    required: false
+  - name: MQTT_RETAIN
+    default: "true"
+    required: false
+  - name: MQTT_USER
+    default: ""
+    required: false
+  - name: TOPIC_PREFIX
+    default: "/venstar"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: VENSTAR_HOST
+    default: ""
+    required: false
+  - name: VENSTAR_QUERY_INTERVAL
+    default: "15"
+    required: false
+volumes:
+  - path: /config
+    required: false

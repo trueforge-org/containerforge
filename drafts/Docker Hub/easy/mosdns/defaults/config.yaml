@@ -1,0 +1,23 @@
+# rendered into /config/config.yaml by start.sh on first start (envsubst)
+log:
+  level: info
+
+plugins:
+  - tag: main
+    type: sequence
+    args:
+      - exec: cache 1024
+      - matches:
+          - has_resp
+        exec: accept
+      - exec: forward ${MOSDNS_UPSTREAM}
+
+  - type: udp_server
+    args:
+      entry: main
+      # binds all interfaces: the wiki examples use 127.0.0.1
+      listen: 0.0.0.0:${MOSDNS_PORT}
+  - type: tcp_server
+    args:
+      entry: main
+      listen: 0.0.0.0:${MOSDNS_PORT}

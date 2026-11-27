@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: /health must return 200 without auth. If it does not, use a tcp probe on 8080 instead.
+http:
+- port: '8080'
+  path: /health
+filePaths:
+- /app/filebrowser
+- /defaults/settings.json

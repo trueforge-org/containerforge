@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: the app needs a reachable Plex server and has no port, so only the install is verified.
+# forgetool splits cmd on whitespace (no quoting), so commands are space-free and the expected
+# strings are built at runtime. Follows the apps/jbops pattern.
+runners:
+- entrypoint: /usr/local/bin/python
+  cmd: "-c __import__('plexapi'),__import__('spotipy'),__import__('deezer');print('pps'+'-ok')"
+  expectedOutput: pps-ok
+- entrypoint: /usr/local/bin/python
+  cmd: "-c print('script'+'-ok'*__import__('os').path.isfile('/app/plex-playlist-sync/plex-playlist-sync/run.py'))"
+  expectedOutput: script-ok
+
+mainRunner:
+  enabled: false

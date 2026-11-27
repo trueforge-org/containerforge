@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Kozea/Radicale"
+ports:
+  - port: 5232
+    protocol: tcp
+    required: false
+env:
+  - name: RADICALE_CONFIG
+    default: "/config/config"
+    required: false
+  - name: RADICALE_USER
+    default: ""
+    required: false
+  - name: RADICALE_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

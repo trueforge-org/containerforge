@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/xavier-hernandez/docker-external-ip"
+# The service opens no port; it only makes outbound requests.
+ports: []
+env:
+  - name: DELAY
+    default: "5m"
+    required: false
+  - name: PROVIDER
+    default: "CLOUDFLARE"
+    required: false
+  - name: NOTIFICATION_TYPE
+    default: ""
+    required: false
+  - name: RECOVERY_ALERT
+    default: "False"
+    required: false
+  - name: SAVE_IP
+    default: "False"
+    required: false
+  - name: PUSHOVER_TOKEN
+    default: ""
+    required: false
+  - name: PUSHOVER_USER
+    default: ""
+    required: false
+  - name: PUSHOVER_TITLE
+    default: "EXTERNAL IP"
+    required: false
+  - name: APPRISE_TITLE
+    default: "EXTERNAL IP"
+    required: false
+  - name: APPRISE_1
+    default: ""
+    required: false
+  - name: APPRISE_2
+    default: ""
+    required: false
+  - name: APPRISE_3
+    default: ""
+    required: false
+  - name: APPRISE_4
+    default: ""
+    required: false
+  - name: APPRISE_5
+    default: ""
+    required: false
+  - name: APPRISE_6
+    default: ""
+    required: false
+  - name: APPRISE_7
+    default: ""
+    required: false
+  - name: APPRISE_8
+    default: ""
+    required: false
+  - name: APPRISE_9
+    default: ""
+    required: false
+  - name: APPRISE_10
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/SoulRaven80/wdosg"
+ports:
+  - port: 3001
+    protocol: tcp
+    required: false
+env:
+  - name: DB_PATH
+    default: "/config/database"
+    required: false
+  - name: EMAIL_PASS
+    default: ""
+    required: false
+  - name: EMAIL_PASS_FILE
+    default: ""
+    required: false
+  - name: EMAIL_SERVICE
+    default: ""
+    required: false
+  - name: EMAIL_USER
+    default: ""
+    required: false
+  - name: GAMES_LIBRARY
+    default: "/config/wdosglibrary"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: PORT
+    default: "3001"
+    required: false
+  - name: SERVER_FRIENDLY_URL
+    default: ""
+    required: false
+  - name: TOKEN_SECRET
+    default: ""
+    required: false
+  - name: TOKEN_SECRET_FILE
+    default: ""
+    required: false
+  - name: TWITCH_CLIENT_ID
+    default: "DISABLED"
+    required: false
+  - name: TWITCH_CLIENT_ID_FILE
+    default: ""
+    required: false
+  - name: TWITCH_CLIENT_SECRET
+    default: "DISABLED"
+    required: false
+  - name: TWITCH_CLIENT_SECRET_FILE
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

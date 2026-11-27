@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+filePaths:
+- /app/scripts/lib/ipv4.sh
+- /app/scripts/lib/notify.sh
+- /app/venv/bin/apprise
+- /usr/share/licenses/external-ip/LICENSE
+runners:
+- entrypoint: test -x /usr/bin/dig

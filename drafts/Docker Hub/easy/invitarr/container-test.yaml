@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+filePaths:
+- /app/invitarr/run.py
+- /app/invitarr/app/bot/cogs/app.py
+# Keep the trailing "&& true": include/healthcheck.sh strips a trailing quote, which breaks a command ending in a quote.
+healthCommands:
+- command: /app/venv/bin/python -c "import discord, plexapi, texttable, dotenv; import app.bot.cogs.app" && true

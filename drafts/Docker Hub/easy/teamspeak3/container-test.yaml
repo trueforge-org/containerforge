@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# OPEN DECISION (plan section 10): the server does not stay up without license acceptance, which conflicts with
+# the start-without-env rule. This opt-in follows apps/drydock. A maintainer must confirm it or pick another approach.
+mainRunner:
+  env:
+    TS3SERVER_LICENSE: "accept"
+
+tcp:
+- port: '10011'
+- port: '30033'
+
+filePaths:
+- /app/ts3server
+- /usr/local/lib/libts3_ssh.so
+- /usr/share/licenses/teamspeak3/LICENSE
+
+timeoutSeconds: 180

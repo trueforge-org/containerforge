@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/nosqlclient/nosqlclient"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: MONGO_URL
+    default: ""
+    required: false
+  - name: MONGO_SCHEME
+    default: "mongodb"
+    required: false
+  - name: MONGO_ADDRESSES
+    default: "127.0.0.1:27017"
+    required: false
+  - name: MONGO_DATABASE
+    default: "meteor"
+    required: false
+  - name: MONGO_USERNAME
+    default: ""
+    required: false
+  - name: MONGO_PASSWORD
+    default: ""
+    required: false
+  - name: MONGO_TLS
+    default: ""
+    required: false
+  - name: MONGO_OPT_PARAMS
+    default: ""
+    required: false
+  - name: MONGOCLIENT_DEFAULT_CONNECTION_URL
+    default: ""
+    required: false
+  - name: ROOT_URL
+    default: "http://localhost"
+    required: false
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: STARTUP_DELAY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - name: mongodb

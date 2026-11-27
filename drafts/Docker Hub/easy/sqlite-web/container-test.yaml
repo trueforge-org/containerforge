@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Runs without SQLITE_WEB_PASSWORD on purpose. The password path (-P) is checked by hand.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /usr/local/bin/sqlite_wsgi
+- /usr/share/licenses/sqlite-web/LICENSE

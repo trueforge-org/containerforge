@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+  statusCode: 401
+filePaths:
+- /usr/sbin/apache2
+- /usr/lib/apache2/modules/mod_dav_fs.so
+- /etc/apache-webdav/httpd.conf.template
+- /usr/share/licenses/apache-webdav/copyright

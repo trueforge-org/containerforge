@@ -1,0 +1,5 @@
+# Seeds a GUI-only node on first start (no inbound P2P, no RPC server), then opens bitcoin-qt on the kasmvnc desktop.
+# The kasmvnc start script copies this file to /config/.config/openbox/autostart only when that file is missing.
+mkdir -p /config/.bitcoin
+[ -f /config/.bitcoin/bitcoin.conf ] || printf 'server=0\nlisten=0\n' > /config/.bitcoin/bitcoin.conf
+/app/bin/bitcoin-qt -datadir=/config/.bitcoin &

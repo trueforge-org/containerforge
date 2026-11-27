@@ -1,0 +1,3 @@
+# Seeded into /config/apps/apps.yaml only when missing.
+# Add app definitions here, see https://appdaemon.readthedocs.io/
+# UNVERIFIED: AppDaemon accepts a comment-only apps.yaml. Upstream seeds apps.yaml.example with content.

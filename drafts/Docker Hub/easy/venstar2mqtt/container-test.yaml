@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No port, and the MQTT and thermostat path needs external services, so only files are checked.
+# UNVERIFIED: mqtt_helpers.js is the path the plan expects inside homeautomation-js-lib.
+timeoutSeconds: 120
+filePaths:
+- /app/venstar2mqtt/index.js
+- /app/venstar2mqtt/node_modules/homeautomation-js-lib/mqtt_helpers.js
+- /start.sh

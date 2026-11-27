@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/maschhoff/shortipy/"
+ports:
+  - port: 4321
+    protocol: tcp
+    required: true
+env:
+  # image-level settings read by start.sh; the app itself reads none
+  - name: SHORTIPY_PORT
+    default: "4321"
+    required: false
+  - name: SHORTIPY_PROCESSES
+    default: "1"
+    required: false
+  - name: SHORTIPY_THREADS
+    default: "1"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

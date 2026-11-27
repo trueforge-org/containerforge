@@ -1,0 +1,14 @@
+[server]
+# IPv6 is left out on purpose: [::] can fail when the container has no IPv6
+hosts = 0.0.0.0:5232
+
+[auth]
+type = htpasswd
+htpasswd_filename = /config/users
+htpasswd_encryption = autodetect
+
+[storage]
+filesystem_folder = /config/collections
+
+[logging]
+level = info

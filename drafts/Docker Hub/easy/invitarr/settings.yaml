@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/faizyy01/Invitarr"
+# The bot only makes outbound connections (Discord, Plex). It opens no port.
+ports: []
+env:
+  # Read as os.environ['token'] by the bot. Empty means start.sh idles unless /config/bot.env has a token.
+  - name: token
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+opt_dependencies:
+  - name: plex
+volumes:
+  - path: /config
+    required: true

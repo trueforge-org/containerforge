@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/EdwardChamberlain/namecheap_ddns"
+ports:
+  []
+env:
+  - name: APP_HOST
+    default: ""
+    required: true
+  - name: APP_DOMAIN
+    default: ""
+    required: true
+  - name: APP_PASSWORD
+    default: ""
+    required: true
+  - name: APP_UPDATE_TIME
+    default: "60"
+    required: false
+  - name: APP_LOG_LEVEL
+    default: "INFO"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

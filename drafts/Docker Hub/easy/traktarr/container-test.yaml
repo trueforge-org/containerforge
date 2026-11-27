@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+filePaths:
+- /app/traktarr/traktarr.py
+- /config/config.json
+- /usr/share/licenses/traktarr/LICENSE.md
+# UNVERIFIED: the import check depends on the attrdict3 swap; the app has no port to probe.
+runners:
+- entrypoint: /app/venv/bin/python
+  cmd: "-c __import__('attrdict');print('attrdict'+'-ok')"
+  expectedOutput: attrdict-ok

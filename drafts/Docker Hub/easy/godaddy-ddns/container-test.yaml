@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No ports. The test runs without env vars, so the idle path runs.
+# The GoDaddy call path needs credentials and is checked by hand.
+filePaths:
+- /app/bin/godaddy-publicip-updater.py
+- /app/venv/bin/python

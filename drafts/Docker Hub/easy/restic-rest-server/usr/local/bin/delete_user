@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: delete_user <name>
+set -euo pipefail
+
+PASSWORD_FILE="${PASSWORD_FILE:-/config/.htpasswd}"
+name="${1:?usage: delete_user <name>}"
+
+htpasswd -D "${PASSWORD_FILE}" "${name}"

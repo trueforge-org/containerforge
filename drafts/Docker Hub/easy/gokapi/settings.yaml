@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Forceu/Gokapi"
+ports:
+  - port: 53842
+    protocol: tcp
+    required: true
+env:
+  - name: GOKAPI_PORT
+    default: "53842"
+    required: false
+  - name: GOKAPI_CONFIG_DIR
+    default: "/config/config"
+    required: false
+  - name: GOKAPI_DATA_DIR
+    default: "/config/data"
+    required: false
+  # Upstream default is false; start.sh sets true so logs reach the container output.
+  - name: GOKAPI_LOG_STDOUT
+    default: "true"
+    required: false
+  - name: GOKAPI_MAX_FILESIZE
+    default: "102400"
+    required: false
+  - name: GOKAPI_CHUNK_SIZE_MB
+    default: "45"
+    required: false
+  - name: GOKAPI_MAX_MEMORY_UPLOAD
+    default: "50"
+    required: false
+  - name: GOKAPI_MAX_PARALLEL_UPLOADS
+    default: "3"
+    required: false
+  - name: GOKAPI_TRUSTED_PROXIES
+    default: "127.0.0.1"
+    required: false
+  - name: GOKAPI_USE_CLOUDFLARE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

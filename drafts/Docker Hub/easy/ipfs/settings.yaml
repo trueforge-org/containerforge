@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ipfs/kubo"
+ports:
+  - port: 4001
+    protocol: tcp
+    required: false
+  - port: 4001
+    protocol: udp
+    required: false
+  - port: 5001
+    protocol: tcp
+    required: false
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: IPFS_PATH
+    default: "/config/ipfs"
+    required: false
+  - name: IPFS_PROFILE
+    default: ""
+    required: false
+  - name: IPFS_SWARM_KEY
+    default: ""
+    required: false
+  - name: IPFS_SWARM_KEY_FILE
+    default: ""
+    required: false
+  - name: IPFS_TELEMETRY
+    default: ""
+    required: false
+  - name: GOLOG_LOG_LEVEL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /data
+    required: false
+dependencies: []

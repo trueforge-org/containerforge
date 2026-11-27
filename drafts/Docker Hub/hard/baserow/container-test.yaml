@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: requires external postgresql and valkey; full functional test not feasible in single-container suite
+timeoutSeconds: 300
+mainRunner:
+  enabled: false
+
+runners:
+- entrypoint: test -d /app/baserow/backend
+- entrypoint: test -x /app/baserow/venv/bin/python
+- entrypoint: test -x /usr/local/bin/caddy
+- entrypoint: test -s /usr/share/licenses/baserow/LICENSE
+- entrypoint: python --version
+- entrypoint: node --version

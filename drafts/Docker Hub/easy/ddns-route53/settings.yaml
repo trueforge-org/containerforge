@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/crazy-max/ddns-route53"
+ports:
+  []
+env:
+  - name: SCHEDULE
+    default: "*/30 * * * *"
+    required: false
+  - name: LOG_LEVEL
+    default: "info"
+    required: false
+  - name: DDNSR53_CREDENTIALS_ACCESSKEYID
+    default: ""
+    required: false
+  - name: DDNSR53_CREDENTIALS_SECRETACCESSKEY
+    default: ""
+    required: false
+  - name: DDNSR53_ROUTE53_HOSTEDZONEID
+    default: ""
+    required: false
+  - name: DDNSR53_ROUTE53_RECORDSSET_0_NAME
+    default: ""
+    required: false
+  - name: DDNSR53_ROUTE53_RECORDSSET_0_TYPE
+    default: "A"
+    required: false
+  - name: DDNSR53_ROUTE53_RECORDSSET_0_TTL
+    default: "300"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

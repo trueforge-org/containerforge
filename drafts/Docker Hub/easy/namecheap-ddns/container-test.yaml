@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# No port, and the app exits without APP_* variables. The test cannot set them,
+# so the main process is disabled and the install is checked by runners instead.
+# forgetool skips filePaths when mainRunner is disabled, so files are checked by a runner.
+runners:
+- entrypoint: /app/venv/bin/python
+  cmd: "-c __import__('requests');print('requests'+'-ok')"
+  expectedOutput: requests-ok
+  exitCode: 0
+- entrypoint: /usr/bin/ls
+  cmd: /app/namecheap-ddns/main.py /app/namecheap-ddns/config.py /start.sh /usr/share/licenses/namecheap-ddns/LICENSE
+  expectedOutput: /app/namecheap-ddns/main.py
+  exitCode: 0
+
+mainRunner:
+  enabled: false

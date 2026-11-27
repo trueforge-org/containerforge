@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/apache/httpd"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: ANONYMOUS_METHODS
+    default: ""
+    required: false
+  - name: AUTH_TYPE
+    default: "Basic"
+    required: false
+  - name: LOCATION
+    default: "/"
+    required: false
+  - name: PASSWORD
+    default: ""
+    required: false
+  - name: PUMASK
+    default: "0022"
+    required: false
+  - name: REALM
+    default: "WebDAV"
+    required: false
+  - name: SERVER_NAMES
+    default: "localhost"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: USERNAME
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /data
+    required: true

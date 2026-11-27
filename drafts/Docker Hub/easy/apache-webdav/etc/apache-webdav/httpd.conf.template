@@ -1,0 +1,79 @@
+# Rendered by start.sh into /tmp/apache2/httpd.conf with envsubst.
+# Only the variables listed in start.sh are substituted, so Apache's own syntax is left alone.
+# UNVERIFIED: module file names and that log_config and unixd are built into the Ubuntu apache2 package.
+
+ServerRoot "/etc/apache2"
+Listen 8080
+ServerName ${SERVER_NAME}
+PidFile /tmp/apache2/httpd.pid
+DefaultRuntimeDir /tmp/apache2
+Mutex file:/tmp/apache2 default
+
+LoadModule mpm_event_module /usr/lib/apache2/modules/mod_mpm_event.so
+LoadModule authn_core_module /usr/lib/apache2/modules/mod_authn_core.so
+LoadModule authn_file_module /usr/lib/apache2/modules/mod_authn_file.so
+LoadModule authz_core_module /usr/lib/apache2/modules/mod_authz_core.so
+LoadModule authz_user_module /usr/lib/apache2/modules/mod_authz_user.so
+LoadModule authz_host_module /usr/lib/apache2/modules/mod_authz_host.so
+LoadModule auth_basic_module /usr/lib/apache2/modules/mod_auth_basic.so
+LoadModule auth_digest_module /usr/lib/apache2/modules/mod_auth_digest.so
+LoadModule dav_module /usr/lib/apache2/modules/mod_dav.so
+LoadModule dav_fs_module /usr/lib/apache2/modules/mod_dav_fs.so
+LoadModule dav_lock_module /usr/lib/apache2/modules/mod_dav_lock.so
+LoadModule alias_module /usr/lib/apache2/modules/mod_alias.so
+LoadModule autoindex_module /usr/lib/apache2/modules/mod_autoindex.so
+LoadModule dir_module /usr/lib/apache2/modules/mod_dir.so
+LoadModule mime_module /usr/lib/apache2/modules/mod_mime.so
+LoadModule setenvif_module /usr/lib/apache2/modules/mod_setenvif.so
+LoadModule headers_module /usr/lib/apache2/modules/mod_headers.so
+LoadModule env_module /usr/lib/apache2/modules/mod_env.so
+LoadModule reqtimeout_module /usr/lib/apache2/modules/mod_reqtimeout.so
+
+TypesConfig /etc/mime.types
+
+# Logs go to the container's stdout and stderr
+ErrorLog /proc/self/fd/2
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog /proc/self/fd/1 common
+
+HostnameLookups Off
+ServerTokens Prod
+ServerSignature Off
+
+# Lock database lives in /config (state), files in /data (shared content)
+DavLockDB /config/dav/DavLock
+
+# Common WebDAV clients need these (from upstream dav.conf)
+BrowserMatch "Microsoft Data Access Internet Publishing Provider" redirect-carefully
+BrowserMatch "MiniRedir" redirect-carefully
+BrowserMatch "MS FrontPage" redirect-carefully
+BrowserMatch "WebDrive" redirect-carefully
+BrowserMatch "WebDAVFS/1.[012]" redirect-carefully
+BrowserMatch "gnome-vfs/1.0" redirect-carefully
+BrowserMatch "XML Spy" redirect-carefully
+BrowserMatch "Dreamweaver-WebDAV-SCM1" redirect-carefully
+BrowserMatch "Konqueror/4" redirect-carefully
+BrowserMatch "gvfs" redirect-carefully
+BrowserMatch "Jakarta-Commons-VFS" redirect-carefully
+# UNVERIFIED: exact BrowserMatch list, copied from the upstream dav.conf summary
+RequestHeader edit Destination ^https http early
+
+# Requests outside LOCATION get no content
+DocumentRoot "/tmp/apache2/empty"
+<Directory "/tmp/apache2/empty">
+    Require all denied
+</Directory>
+
+Alias ${LOCATION} "/data/"
+<Directory "/data/">
+    Dav On
+    Options +Indexes
+    IndexOptions Charset=UTF-8
+    DirectoryIndex disabled
+    AuthType ${AUTH_TYPE}
+    AuthName "${REALM}"
+    AuthUserFile ${AUTH_FILE}
+    <RequireAny>
+        ${REQUIRE_LINES}
+    </RequireAny>
+</Directory>

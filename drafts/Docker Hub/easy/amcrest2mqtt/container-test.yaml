@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: the app exits at once without env vars and needs a camera and an MQTT broker.
+# No port, so only file and import checks run. forgetool splits cmd on whitespace (no quoting),
+# so commands are space-free and the expected strings are built at runtime.
+# UNVERIFIED: not run with forgetool yet.
+runners:
+- entrypoint: ls
+  cmd: "/app/amcrest2mqtt/src/amcrest2mqtt.py /app/amcrest2mqtt/VERSION /usr/share/licenses/amcrest2mqtt/LICENSE"
+  expectedOutput: /usr/share/licenses/amcrest2mqtt/LICENSE
+- entrypoint: /app/venv/bin/python
+  cmd: "-c __import__('amcrest'),__import__('paho.mqtt.client'),__import__('slugify');print('imports'+'-ok')"
+  expectedOutput: imports-ok
+
+mainRunner:
+  enabled: false

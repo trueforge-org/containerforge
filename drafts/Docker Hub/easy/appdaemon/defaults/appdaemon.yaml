@@ -1,0 +1,17 @@
+# Seeded into /config/appdaemon.yaml only when missing. Copy of upstream conf/appdaemon.yaml.example (4.5.16).
+appdaemon:
+  latitude: 0
+  longitude: 0
+  elevation: 30
+  time_zone: Europe/Berlin
+  plugins:
+    HASS:
+      type: hass
+      ha_url:
+      token:
+      cert_verify: True
+http:
+  url: http://0.0.0.0:5050
+admin:
+api:
+hadashboard:

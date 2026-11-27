@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://www.teamspeak.com/en/downloads/"
+ports:
+  - port: 9987
+    protocol: udp
+    required: false
+  - port: 10011
+    protocol: tcp
+    required: false
+  - port: 30033
+    protocol: tcp
+    required: false
+env:
+  # Empty default: start.sh logs what to set. The server only runs after the license is accepted.
+  - name: TS3SERVER_LICENSE
+    default: ""
+    required: true
+  - name: TS3SERVER_DB_CLIENTKEEPDAYS
+    default: "30"
+    required: false
+  - name: TS3SERVER_DEFAULT_VOICE_PORT
+    default: "9987"
+    required: false
+  - name: TS3SERVER_FILETRANSFER_PORT
+    default: "30033"
+    required: false
+  - name: TS3SERVER_LOG_QUERY_COMMANDS
+    default: "0"
+    required: false
+  - name: TS3SERVER_QUERY_PORT
+    default: "10011"
+    required: false
+  - name: TS3SERVER_QUERY_PROTOCOLS
+    default: "raw"
+    required: false
+  - name: TS3SERVER_QUERY_TIMEOUT
+    default: "300"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

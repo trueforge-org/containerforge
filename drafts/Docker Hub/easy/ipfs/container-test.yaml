@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+healthCommands:
+- command: ipfs --api=/ip4/127.0.0.1/tcp/5001 diag healthy
+tcp:
+- port: '4001'
+- port: '5001'
+- port: '8080'
+filePaths:
+- /app/ipfs
+- /usr/share/licenses/ipfs/LICENSE-MIT

@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/apache/answer"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: SITE_ADDR
+    default: "0.0.0.0:8080"
+    required: false
+  - name: INSTALL_PORT
+    default: "8080"
+    required: false
+  # any non-empty AUTO_INSTALL enables install from env vars (UNVERIFIED against source; docs say "true")
+  - name: AUTO_INSTALL
+    default: ""
+    required: false
+  - name: DB_TYPE
+    default: ""
+    required: false
+  - name: DB_FILE
+    default: ""
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_NAME
+    default: ""
+    required: false
+  - name: DB_USERNAME
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: LANGUAGE
+    default: "en_US"
+    required: false
+  - name: SITE_NAME
+    default: ""
+    required: false
+  - name: SITE_URL
+    default: ""
+    required: false
+  - name: CONTACT_EMAIL
+    default: ""
+    required: false
+  - name: ADMIN_NAME
+    default: ""
+    required: false
+  - name: ADMIN_PASSWORD
+    default: ""
+    required: false
+  - name: ADMIN_EMAIL
+    default: ""
+    required: false
+  - name: EXTERNAL_CONTENT_DISPLAY
+    default: ""
+    required: false
+  - name: LOG_LEVEL
+    default: ""
+    required: false
+  - name: LOG_PATH
+    default: ""
+    required: false
+  - name: SWAGGER_HOST
+    default: ""
+    required: false
+  - name: SWAGGER_ADDRESS_PORT
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

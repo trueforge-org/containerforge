@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# The test runs without env vars, so start.sh takes the bare ADB server path and port 5037 opens.
+tcp:
+- port: '5037'
+filePaths:
+- /app/androidtv-connect.sh
+- /usr/bin/adb
+- /usr/local/bin/yq
+- /usr/share/licenses/androiddebugbridge/LICENSE
