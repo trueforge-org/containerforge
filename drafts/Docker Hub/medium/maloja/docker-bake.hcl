@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-tags depName=krateng/maloja versioning=semver
-  default = "3.2.10"
+  default = "3.2.11"
 }
 
 variable "LICENSE" {
