@@ -23,7 +23,7 @@
 | Real env vars (upstream) | `PUID=499`, `PGID=100`, `HTTP_PORT=9000`, `LC_ALL=C.UTF-8`, `LANG=en_US.UTF-8`, `LANGUAGE=en_US.UTF-8`, `DEBIAN_FRONTEND=noninteractive`. |
 | Ports | 3483/tcp, 3483/udp (SlimProto and discovery), 9000/tcp (`${HTTP_PORT}`, web UI and streaming), 9090/tcp (CLI). |
 | Entrypoint | `start-container`, WORKDIR `/config`. |
-| Chart | `lyrion-music-server` version 8.0.0, appVersion 9.2.0, common 32.8.5 (`charts/stable/lyrion-music-server/Chart.yaml`). |
+| Chart | `lyrion-music-server` version 8.0.1, appVersion 9.2.0, common 32.8.5 (`charts/stable/lyrion-music-server/Chart.yaml`). |
 
 ## 2. Target layout
 
