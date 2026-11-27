@@ -3,7 +3,7 @@ FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50
 # renovate: datasource=github-releases depName=semaphoreui/semaphore versioning=semver
 ARG VERSION=2.20.23
 # renovate: datasource=github-releases depName=opentofu/opentofu
-ARG TOFU_VERSION=1.11.0
+ARG TOFU_VERSION=1.11.14
 # renovate: datasource=github-releases depName=hashicorp/terraform
 ARG TERRAFORM_VERSION=1.11.3
 # renovate: datasource=github-releases depName=gruntwork-io/terragrunt
