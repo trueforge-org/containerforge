@@ -1,6 +1,6 @@
 # Build stage: compile the REST server from the upstream tag (no release binary is published)
 # UNVERIFIED: digest for golang:1.26-trixie not pinned; add it after lookup.
-FROM golang:1.26-trixie@sha256:f9e99477a80ccd7adfb69780510b22c7249ce9169885f18aa762cd886e75e018 AS build
+FROM golang:1.27-trixie@sha256:430985542100b871e108ccc00e8dcc5eef08ca14ee5825e98ebf563d8ffec4ee AS build
 
 ARG VERSION
 ARG SIGNAL_CLI_VERSION

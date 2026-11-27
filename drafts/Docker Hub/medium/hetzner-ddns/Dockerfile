@@ -1,5 +1,5 @@
 # build stage: static Go binary. BLOCKER: upstream targets dns.hetzner.com, shut down May 2026 (see plan.md section 10).
-FROM --platform=$BUILDPLATFORM golang:1.26@sha256:6e59e17a20f13c102e49d82dffab66d41cffe6c266b225d82794328aea859ab5 AS build
+FROM --platform=$BUILDPLATFORM golang:1.27@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS build
 
 # VERSION is the upstream commit SHA (no release tags are usable)
 ARG VERSION
