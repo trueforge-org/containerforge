@@ -1,5 +1,5 @@
 # build stage: UI (Node 22). UNVERIFIED: pin node:22-alpine by digest once fetched.
-FROM node:22-alpine AS frontend
+FROM node:22-alpine@sha256:1314fb30ec37592d5845e5a160d522c0e680972aa534549940b8d73bde88481a AS frontend
 
 ARG VERSION
 WORKDIR /frontend-build
@@ -18,7 +18,7 @@ WORKDIR /frontend-build/frontend/web
 RUN corepack enable && pnpm i --frozen-lockfile && pnpm build
 
 # build stage: backend (Go). UNVERIFIED: pin golang:1.23-alpine by digest; confirm go.mod Go version.
-FROM golang:1.23-alpine AS backend
+FROM golang:1.23-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f AS backend
 
 ARG VERSION
 ARG TARGETARCH

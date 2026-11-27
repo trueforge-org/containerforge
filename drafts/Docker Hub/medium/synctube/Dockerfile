@@ -1,5 +1,5 @@
 # UNVERIFIED: digest for haxe:4.3-alpine3.22 not fetched; pin it with `docker buildx imagetools inspect` before merge.
-FROM haxe:4.3-alpine3.22 AS build
+FROM haxe:4.3-alpine3.22@sha256:98ef841bd72a58302092845a99f6f09b7b671ce5d669fd5cbf1483bf758d2a19 AS build
 
 ARG VERSION
 
