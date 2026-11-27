@@ -4,5 +4,5 @@
 click==7.1.2
 requests==2.21.0
 lxml==4.3.5
-future==0.17.1
+future==0.18.3
 pyyaml==5.4.1
