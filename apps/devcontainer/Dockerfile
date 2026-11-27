@@ -152,7 +152,7 @@ ENV helmDocsVersion=1.14.2
 # renovate: datasource=github-releases depName=databus23/helm-diff
 ENV helmDiffVersion=3.15.15
 # renovate: datasource=github-releases depName=helm-unittest/helm-unittest
-ENV helmUnittestVersion=1.2.1
+ENV helmUnittestVersion=1.3.0
 
 ARG XARCH=${TARGETARCH/arm64/arm64}
 ARG XARCH=${TARGETARCH/amd64/x86_64}
