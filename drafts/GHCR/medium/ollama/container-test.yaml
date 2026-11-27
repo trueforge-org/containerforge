@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the /health path for Open WebUI; confirm it returns 200 on an empty /config, otherwise probe /.
+# UNVERIFIED: timeoutSeconds is a placeholder for a large Python web app; set it from the first real run.
+timeoutSeconds: 300
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /health
+filePaths:
+- /app/venv/bin/open-webui
+- /usr/share/licenses/ollama

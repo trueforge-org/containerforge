@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+http:
+- port: '8080'
+  path: /openapi
+# UNVERIFIED: the first start runs migrations and is slow. Measure, then tune.
+timeoutSeconds: 300

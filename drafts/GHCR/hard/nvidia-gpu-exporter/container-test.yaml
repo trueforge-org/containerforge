@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '9835'
+http:
+- port: '9835'
+  path: /metrics
+# UNVERIFIED: the test runs without a GPU, so the exporter may exit at startup. Do not weaken the test. Surface it.

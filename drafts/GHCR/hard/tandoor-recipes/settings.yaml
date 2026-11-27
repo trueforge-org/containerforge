@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/TandoorRecipes/recipes"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  # start.sh generates this once into /config/secret_key when it is empty.
+  - name: SECRET_KEY
+    default: ""
+    required: false
+  - name: ALLOWED_HOSTS
+    default: "*"
+    required: false
+  - name: MEDIA_ROOT
+    default: "/config/mediafiles"
+    required: false
+  - name: STATIC_ROOT
+    default: "/tmp/staticfiles"
+    required: false
+  # Empty means SQLite. Set the POSTGRES_* values to use the postgresql dependency.
+  - name: DB_ENGINE
+    default: ""
+    required: false
+  - name: POSTGRES_HOST
+    default: ""
+    required: false
+  - name: POSTGRES_PORT
+    default: "5432"
+    required: false
+  - name: POSTGRES_DB
+    default: ""
+    required: false
+  - name: POSTGRES_USER
+    default: ""
+    required: false
+  - name: POSTGRES_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - postgresql

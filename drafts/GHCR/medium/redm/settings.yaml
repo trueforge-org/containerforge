@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/citizenfx/fivem"
+ports:
+  # UNVERIFIED: 30120 (game) is in the plan and the chart; confirm on the first run.
+  - port: 30120
+    protocol: udp
+    required: true
+  - port: 30120
+    protocol: tcp
+    required: true
+  # UNVERIFIED: 40120 (txAdmin) is only in the plan; the chart does not declare it.
+  - port: 40120
+    protocol: tcp
+    required: false
+env:
+  - name: SRV_ADR
+    default: "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

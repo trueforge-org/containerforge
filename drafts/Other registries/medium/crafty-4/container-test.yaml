@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 180
+tcp:
+- port: '8443'
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /usr/share/licenses/crafty-4/LICENSE
+- /app/venv/bin/python

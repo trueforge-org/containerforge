@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Dispatcharr/Dispatcharr"
+ports:
+  - port: 9191
+    protocol: tcp
+    required: true
+env:
+  - name: DISPATCHARR_PORT
+    default: "9191"
+    required: false
+  - name: DISPATCHARR_ENV
+    default: "aio"
+    required: false
+  - name: DISPATCHARR_LOG_LEVEL
+    default: "info"
+    required: false
+volumes:
+  - path: /config
+    required: true

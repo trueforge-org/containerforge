@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is an estimate; align with the Go-based siblings after the first run.
+timeoutSeconds: 60
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/openbooks
+- /usr/share/licenses/openbooks/LICENSE

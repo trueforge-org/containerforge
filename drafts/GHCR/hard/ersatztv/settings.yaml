@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ErsatzTV/ErsatzTV"
+ports:
+  # UNVERIFIED: 8409 is not declared in the upstream Dockerfile; confirm in the app's config or docs.
+  - port: 8409
+    protocol: tcp
+    required: true
+env:
+  - name: ETV_CONFIG_FOLDER
+    default: "/config"
+    required: false
+  - name: ETV_TRANSCODE_FOLDER
+    default: "/tmp/transcode"
+    required: false
+  - name: ETV_DISABLE_VULKAN
+    default: "1"
+    required: false
+volumes:
+  - path: /config
+    required: true

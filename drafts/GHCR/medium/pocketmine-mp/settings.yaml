@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/pmmp/PocketMine-MP"
+ports:
+  # UNVERIFIED: upstream also exposes 19132/tcp and 19133/udp. Add them only if the server binds them.
+  - port: 19132
+    protocol: udp
+    required: false
+env:
+  - name: POCKETMINE_ARGS
+    default: ""
+    required: false
+  - name: POCKETMINE_PLUGINS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

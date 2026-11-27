@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: the game port is UDP and this schema has no UDP probe, so the server's listening port is not asserted here.
+# Check it manually with `ss -lun` on a probe run (see the build and test protocol).
+# UNVERIFIED: timeoutSeconds is an estimate; the server start is slow. Adjust from the first real run.
+timeoutSeconds: 180
+filePaths:
+- /opt/pocketmine/PocketMine-MP.phar
+- /usr/local/bin/php
+- /usr/share/licenses/pocketmine-mp/LICENSE

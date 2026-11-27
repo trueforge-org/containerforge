@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: arp-scan discovery needs host networking and NET_RAW, which this test may not provide.
+tcp:
+- port: '8840'
+filePaths:
+- /app/WatchYourLAN
+- /usr/share/licenses/watchyourlan/LICENSE

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ioquake/ioq3"
+ports:
+  - port: 27960
+    protocol: udp
+    required: true
+env:
+  - name: Q3_PORT
+    default: "27960"
+    required: false
+  - name: Q3_MAP
+    default: "q3dm0"
+    required: false
+  # UNVERIFIED: fs_game osp is the upstream default for the OSP mod; it needs mod data that is not in the image.
+  - name: GAME_PARAMS
+    default: "+set sv_punkbuster 0 +set fs_game osp +set com_hunkMegs 32"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

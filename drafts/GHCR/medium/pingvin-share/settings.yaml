@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/stonith404/pingvin-share"
+ports:
+  # UNVERIFIED: the port Caddy serves. Upstream EXPOSE is 3000; the chart maps 3333 (the frontend).
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: CADDY_DISABLED
+    default: "false"
+    required: false
+  - name: TRUST_PROXY
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

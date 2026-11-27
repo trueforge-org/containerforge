@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/tigerblue77/Dell_iDRAC_fan_controller_Docker"
+ports: []
+env:
+  - name: IDRAC_HOST
+    default: "local"
+    required: true
+  - name: IDRAC_USERNAME
+    default: ""
+    required: false
+  - name: IDRAC_PASSWORD
+    default: ""
+    required: false
+  - name: FAN_SPEED
+    default: "5"
+    required: false
+  - name: CPU_TEMPERATURE_THRESHOLD
+    default: "auto"
+    required: false
+  - name: CPU_TEMPERATURE_THRESHOLD_TO_START_LINE_INTERPOLATION
+    default: "30"
+    required: false
+  - name: CPU_TEMPERATURE_SOURCE
+    default: "auto"
+    required: false
+  - name: CHECK_INTERVAL
+    default: "5"
+    required: false
+  - name: MAXIMUM_IPMI_UNREACHABLE_DURATION
+    default: "60s"
+    required: false
+  - name: MAXIMUM_CONSECUTIVE_IPMI_FAILURES
+    default: ""
+    required: false
+  - name: DISABLE_THIRD_PARTY_PCIE_CARD_DELL_DEFAULT_COOLING_RESPONSE
+    default: "false"
+    required: false
+  - name: KEEP_THIRD_PARTY_PCIE_CARD_COOLING_RESPONSE_STATE_ON_EXIT
+    default: "false"
+    required: false
+  - name: MONITORING_ONLY_MODE
+    default: "false"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false

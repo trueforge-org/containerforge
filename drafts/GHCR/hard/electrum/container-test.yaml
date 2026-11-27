@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '6080'
+# UNVERIFIED: /vnc.html is the noVNC default; confirm for the packaged noVNC build.
+http:
+- port: '6080'
+  path: /vnc.html
+filePaths:
+- /usr/share/licenses/electrum/LICENSE
+- /app/venv/bin/electrum

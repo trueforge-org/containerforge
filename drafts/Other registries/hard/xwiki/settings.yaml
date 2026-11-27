@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/xwiki/xwiki-platform"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: DB_USER
+    default: "xwiki"
+    required: false
+  - name: DB_PASSWORD
+    default: "xwiki"
+    required: false
+  - name: DB_DATABASE
+    default: "xwiki"
+    required: false
+  - name: DB_HOST
+    default: "postgresql"
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: JDBC_PARAMS
+    default: ""
+    required: false
+  - name: CONTEXT_PATH
+    default: "ROOT"
+    required: false
+  - name: JAVA_OPTS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - postgresql

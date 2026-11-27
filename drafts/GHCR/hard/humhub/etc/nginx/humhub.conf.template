@@ -1,0 +1,60 @@
+# Hand-written template, rendered by start.sh into /tmp/nginx.conf.
+# UNVERIFIED: the upstream mriedmann humhub-nginx overlay was not fetched. Compare with it before shipping.
+# The PHP-FPM container must serve the same tree at /app/humhub so SCRIPT_FILENAME matches.
+
+worker_processes auto;
+pid /tmp/nginx.pid;
+error_log /dev/stderr warn;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    access_log /dev/stdout;
+
+    # Every temp path must be writable with a read-only rootfs.
+    client_body_temp_path /tmp/nginx-client;
+    proxy_temp_path /tmp/nginx-proxy;
+    fastcgi_temp_path /tmp/nginx-fastcgi;
+    scgi_temp_path /tmp/nginx-scgi;
+    uwsgi_temp_path /tmp/nginx-uwsgi;
+
+    client_max_body_size @NGINX_CLIENT_MAX_BODY_SIZE@;
+    keepalive_timeout @NGINX_KEEPALIVE_TIMEOUT@;
+
+    upstream humhub_php {
+        server @NGINX_UPSTREAM@;
+    }
+
+    server {
+        listen 8080;
+        root /app/humhub;
+        index index.php;
+
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass humhub_php;
+            fastcgi_index index.php;
+            include /etc/nginx/fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+        }
+
+        location ~ /\. {
+            deny all;
+        }
+
+        location ~* ^/(protected|vendor)/ {
+            deny all;
+        }
+    }
+}

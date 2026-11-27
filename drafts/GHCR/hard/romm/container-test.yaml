@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# narrowed: the full functional test needs external postgresql and valkey. start.sh skips the wait when DB_HOST is empty, so this probe runs without them.
+tcp:
+- port: '10680'
+filePaths:
+- /app/venv/bin/python
+# UNVERIFIED: tune after the first run
+timeoutSeconds: 120

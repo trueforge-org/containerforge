@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds is an estimate for Prisma and Next.js start-up. Adjust from the first real run.
+timeoutSeconds: 180
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /
+filePaths:
+# UNVERIFIED: backend entry path, confirm from the backend build output.
+- /app/backend/dist/main.js
+- /app/frontend/server.js
+- /usr/share/licenses/pingvin-share/LICENSE

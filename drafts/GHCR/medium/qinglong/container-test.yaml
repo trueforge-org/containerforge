@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: timeoutSeconds covers the panel start only, not runtime task installs; align with the Node siblings after the first run.
+# UNVERIFIED: the http path and status; the panel may redirect to a login page on /.
+timeoutSeconds: 180
+tcp:
+- port: '5700'
+http:
+- port: '5700'
+  path: /
+filePaths:
+- /app/qinglong/package.json
+- /usr/share/licenses/qinglong/LICENSE

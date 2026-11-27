@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the server needs a licence key and may exit without one, so this test can fail for that reason alone.
+# Do not drop the tcp probes to get green; fix the start script or re-plan the test with the owner.
+# UNVERIFIED: the first start downloads the runtime, so timeoutSeconds is an estimate.
+timeoutSeconds: 600
+tcp:
+- port: '30120'
+- port: '40120'
+filePaths:
+- /start.sh

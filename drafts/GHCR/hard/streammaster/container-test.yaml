@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '7095'
+http:
+- port: '7095'
+  path: /
+# UNVERIFIED: health path. "/" is a placeholder until the StreamMaster API routes are checked.

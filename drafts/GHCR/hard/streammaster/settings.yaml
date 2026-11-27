@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/carlreid/StreamMaster"
+ports:
+  - port: 7095
+    protocol: tcp
+    required: true
+volumes:
+  - path: /config
+    required: true
+# UNVERIFIED: Postgres. Upstream bundles it, and the TrueCharts chart uses a separate postgresql dependency.
+# Its env names are not set here until the dependency decision is made (plan section 10).

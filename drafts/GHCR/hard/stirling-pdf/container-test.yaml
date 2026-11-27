@@ -1,0 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: set timeoutSeconds from the measured first start (Spring Boot is slow on first run).
+http:
+- port: '8080'
+  path: /api/v1/info/status

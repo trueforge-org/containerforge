@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/humhub/humhub"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: NGINX_CLIENT_MAX_BODY_SIZE
+    default: "10m"
+    required: false
+  - name: NGINX_KEEPALIVE_TIMEOUT
+    default: "65"
+    required: false
+  - name: NGINX_UPSTREAM
+    default: "humhub:9000"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# The database and the PHP-FPM companion belong to the PHP-FPM container, not to this nginx frontend.
+dependencies: []

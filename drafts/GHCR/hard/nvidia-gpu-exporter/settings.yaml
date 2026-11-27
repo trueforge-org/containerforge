@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/utkuozdemir/nvidia_gpu_exporter"
+ports:
+  - port: 9835
+    protocol: tcp
+    required: true
+env:
+  - name: WEB_LISTEN_ADDRESS
+    default: "0.0.0.0:9835"
+    required: false
+  - name: COLLECT_BACKEND
+    default: "nvml"
+    required: false
+# No volumes: the exporter has no persistent state.

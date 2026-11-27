@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 300
+tcp:
+- port: '8080'
+# narrowed: requires external postgresql; full functional test not feasible in single-container suite
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /usr/share/licenses/xwiki/LICENSE
+- /usr/local/tomcat/webapps-src/ROOT/WEB-INF/lib/postgresql-42.7.14.jar
+- /opt/libreoffice/program/soffice

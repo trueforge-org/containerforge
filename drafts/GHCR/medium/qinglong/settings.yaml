@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/whyour/qinglong"
+ports:
+  # UNVERIFIED: the panel port is 5700 (EXPOSE); the ql_port default is not confirmed against share.sh.
+  - port: 5700
+    protocol: tcp
+    required: true
+# UNVERIFIED: upstream entrypoint toggles (AutoStartBot, EnableExtraShell, QL_SCHEDULER) are not wired,
+# because start.sh does not run the upstream entrypoint. Add them back only once start.sh reads them.
+env: []
+volumes:
+  - path: /config
+    required: true
+dependencies: []

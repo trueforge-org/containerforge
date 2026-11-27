@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+# UNVERIFIED: port 8409 and the HTTP path / are not confirmed upstream.
+tcp:
+- port: '8409'
+http:
+- port: '8409'
+  path: /
+filePaths:
+- /app/ErsatzTV
+- /usr/share/licenses/ersatztv/LICENSE

@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rakshasa/rtorrent"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+# UNVERIFIED: BitTorrent peer ports (6881 tcp/udp) are not in the chart or the upstream Dockerfile, so they are not listed.
+volumes:
+  - path: /config
+    required: true

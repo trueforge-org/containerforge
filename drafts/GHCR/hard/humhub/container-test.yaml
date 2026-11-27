@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# Narrowed: this nginx frontend needs an external PHP-FPM container and a database for a full
+# functional test, which a single-container suite cannot provide. These checks prove the nginx side starts.
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: a request to / may return 404 or 502 without PHP-FPM. Confirm the status on a real run
+# and pick a static path if needed. Do not weaken the probe to make it pass.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/humhub/index.php
+- /usr/share/licenses/humhub/LICENSE

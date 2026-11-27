@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /v2/version
+filePaths:
+- /app/bin/YACReaderLibraryServer
+# UNVERIFIED: Qt startup and library scan time. Tune after the first run.
+timeoutSeconds: 180
