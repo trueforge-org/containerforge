@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: expected status for / with force_login (login page or 302). Adjust the check only after a real run.
+timeoutSeconds: 180
+
+http:
+- port: '8080'
+  path: /
+
+filePaths:
+- /app/www/index.php
+- /defaults/nginx.conf

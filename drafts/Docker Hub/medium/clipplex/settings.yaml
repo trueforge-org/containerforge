@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/jo-nike/clipplex"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+env:
+  # The app starts without these and reads them per request, so they are not required at start.
+  - name: PLEX_URL
+    default: ""
+    required: false
+  - name: PLEX_TOKEN
+    default: ""
+    required: false
+  - name: STREAMABLE_LOGIN
+    default: ""
+    required: false
+  - name: STREAMABLE_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+  - path: /media
+    required: false
+dependencies: []
+opt_dependencies:
+  - name: plex
+    required: false

@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+filePaths:
+- /app/st-server/SkyrimTogetherServer   # UNVERIFIED: path depends on tarball layout
+- /app/st-server/libSTServer.so         # UNVERIFIED: path depends on tarball layout
+- /start.sh
+# No UDP probe: tcp and http checks cover TCP only. 10578/udp is not probed here.

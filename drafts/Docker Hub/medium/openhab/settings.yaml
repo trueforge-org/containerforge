@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/openhab/openhab-distro"
+# UNVERIFIED: only 8080 is listed. 8443, 8101 (Karaf console) and 5007 (LSP) are added only after a run shows them listening.
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: EXTRA_JAVA_OPTS
+    default: ""
+    required: false
+  - name: OPENHAB_HTTP_PORT
+    default: "8080"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

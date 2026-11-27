@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '4200'
+http:
+- port: '4200'
+  path: /
+filePaths:
+- /app/z80pack/cpmsim/cpm22
+- /app/z80pack/cpmsim/cpm3
+- /usr/bin/shellinaboxd
+- /usr/share/licenses/z80pack/LICENSE
+- /start.sh

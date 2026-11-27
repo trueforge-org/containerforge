@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/cameronurnes/emby-sync"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+env:
+  # Emby base URL. Required for real use; the container starts without it.
+  - name: EMBY_SERVER
+    default: ""
+    required: false
+  # Flask secret and Emby API key (sent as X-Emby-Token). Required for real use.
+  - name: SECRET_KEY
+    default: ""
+    required: false
+  - name: DEFAULT_ROOM
+    default: "Bacon Bar"
+    required: false
+  - name: INTERVAL
+    default: "3.0"
+    required: false
+  - name: BUFFER
+    default: "0"
+    required: false
+  - name: SYNC_LIMIT
+    default: "8"
+    required: false
+  - name: DATABASE_URL
+    default: "sqlite:////config/app.db"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

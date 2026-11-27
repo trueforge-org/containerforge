@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5231'
+# UNVERIFIED: "/" may not return 200 on an empty /config; if not, use the path that does
+http:
+- port: '5231'
+  path: /
+filePaths:
+- /app/slash/slash
+- /usr/share/licenses/slash/LICENSE

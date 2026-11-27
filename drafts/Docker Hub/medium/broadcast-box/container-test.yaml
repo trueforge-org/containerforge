@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8080'
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/broadcast-box
+- /app/web/build/index.html
+# UNVERIFIED: healthCommands.command may not be shell-split, so bash -c is used. The check looks for UDP port 8080 (0x1F90) in /proc/net/udp.
+healthCommands:
+- command: bash -c "grep -qi ':1F90 ' /proc/net/udp /proc/net/udp6"

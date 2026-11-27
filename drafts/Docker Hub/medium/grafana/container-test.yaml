@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '3000'
+# UNVERIFIED: status code of "/" on a fresh /config.
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /app/grafana/bin/grafana
+- /etc/grafana/grafana.ini
+- /usr/share/licenses/grafana/LICENSE

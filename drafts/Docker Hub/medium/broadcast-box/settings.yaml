@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Glimesh/broadcast-box"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+  - port: 8080
+    protocol: udp
+    required: true
+env:
+  - name: FRONTEND_ADMIN_TOKEN
+    default: ""
+    required: false
+  - name: HTTP_ADDRESS
+    default: ":8080"
+    required: false
+  - name: INCLUDE_PUBLIC_IP_IN_NAT_1_TO_1_IP
+    default: ""
+    required: false
+  - name: LOGGING_ENABLED
+    default: "false"
+    required: false
+  - name: LOGGING_LEVEL
+    default: "INFO"
+    required: false
+  - name: NAT_1_TO_1_IP
+    default: ""
+    required: false
+  - name: NETWORK_TEST_ON_START
+    default: "false"
+    required: false
+  - name: STREAM_PROFILE_PATH
+    default: "/config/profiles"
+    required: false
+  - name: STREAM_PROFILE_POLICY
+    default: "ANYONE_WITH_RESERVED"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UDP_MUX_PORT
+    default: "8080"
+    required: false
+volumes:
+  - path: /config
+    required: true

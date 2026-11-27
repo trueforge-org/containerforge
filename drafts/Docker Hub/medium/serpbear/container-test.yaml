@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  path: /
+# UNVERIFIED: / may answer with a 307/302 redirect to login rather than 200. Record the real status on the first run.
+filePaths:
+- /app/server.js
+- /app/cron.js
+- /usr/share/licenses/serpbear/LICENSE

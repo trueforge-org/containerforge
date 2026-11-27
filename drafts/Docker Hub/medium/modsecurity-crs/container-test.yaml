@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+filePaths:
+- /etc/apache2/apache2.conf
+- /app/modsecurity/modsecurity.conf
+- /app/owasp-crs/rules
+- /usr/share/licenses/modsecurity-crs/LICENSE

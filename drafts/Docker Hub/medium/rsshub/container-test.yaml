@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '1200'
+http:
+# UNVERIFIED: that / returns 200 with no env set. Adjust if the first run shows otherwise.
+- port: '1200'
+  path: /

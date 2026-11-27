@@ -1,0 +1,10 @@
+# UNVERIFIED: draft batch parameters for the keychain key. Replace with the upstream gpgparams contents after reading them.
+%no-protection
+Key-Type: RSA
+Key-Length: 3072
+Subkey-Type: RSA
+Subkey-Length: 3072
+Name-Real: ProtonMail Bridge
+Name-Email: bridge@localhost
+Expire-Date: 0
+%commit

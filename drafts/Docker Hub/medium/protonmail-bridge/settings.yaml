@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ProtonMail/proton-bridge"
+# UNVERIFIED: no port is listed yet. Upstream EXPOSEs 25 and 143, which apps cannot bind as a non-root user.
+# The bridge's real listen ports and bind address are confirmed from upstream entrypoint.sh and a local run before any port is added.
+ports: []
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

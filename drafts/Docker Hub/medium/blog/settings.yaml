@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/m1k1o/blog"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: BLOG_TITLE
+    default: "Blog"
+    required: false
+  - name: BLOG_NAME
+    default: "Max Musermann"
+    required: false
+  - name: BLOG_NICK
+    default: "demo"
+    required: false
+  - name: BLOG_PASS
+    default: "demo"
+    required: false
+  - name: BLOG_LANG
+    default: "en"
+    required: false
+  - name: BLOG_DB_CONNECTION
+    default: "sqlite"
+    required: false
+  - name: BLOG_DB_NAME
+    default: "blog"
+    required: false
+  - name: BLOG_MYSQL_HOST
+    default: ""
+    required: false
+  - name: BLOG_MYSQL_PORT
+    default: ""
+    required: false
+  - name: BLOG_MYSQL_USER
+    default: ""
+    required: false
+  - name: BLOG_MYSQL_PASS
+    default: ""
+    required: false
+  - name: BLOG_POSTGRES_HOST
+    default: ""
+    required: false
+  - name: BLOG_POSTGRES_PORT
+    default: ""
+    required: false
+  - name: BLOG_POSTGRES_USER
+    default: ""
+    required: false
+  - name: BLOG_POSTGRES_PASS
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []
+opt_dependencies:
+  - name: postgresql
+    required: false
+  - name: mariadb
+    required: false

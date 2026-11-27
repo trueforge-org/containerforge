@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+# UNVERIFIED: the first-run initial-config redirect may change the status of /; keep path / only if it returns 200
+http:
+- port: '3000'
+  path: /
+filePaths:
+- /app/fenrus/Fenrus.dll
+- /app/fenrus/Apps
+- /usr/share/licenses/fenrus/LICENSE

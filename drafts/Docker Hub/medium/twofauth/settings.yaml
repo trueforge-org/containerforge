@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Bubka/2FAuth"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: APP_NAME
+    default: "2FAuth"
+    required: false
+  - name: APP_KEY
+    default: ""
+    required: false
+  - name: APP_URL
+    default: ""
+    required: false
+  - name: APP_DEBUG
+    default: "false"
+    required: false
+  - name: DB_CONNECTION
+    default: "sqlite"
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "5432"
+    required: false
+  - name: DB_DATABASE
+    default: "/config/database/database.sqlite"
+    required: false
+  - name: DB_USERNAME
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: WEBAUTHN_NAME
+    default: "2FAuth"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

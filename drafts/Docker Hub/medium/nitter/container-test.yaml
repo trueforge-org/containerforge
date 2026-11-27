@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: the http status on / without a Valkey backend. Use the path the app serves with 200 once checked on a real run.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/nitter/nitter
+- /app/nitter/public
+- /defaults/nitter.conf
+- /usr/share/licenses/nitter/LICENSE

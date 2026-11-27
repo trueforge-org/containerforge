@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/Qolors/FeedCord"
+ports: []
+env:
+  # Optional override for the config file path, passed as the single CLI argument.
+  - name: CONFIGFILE
+    default: "/config/appsettings.json"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

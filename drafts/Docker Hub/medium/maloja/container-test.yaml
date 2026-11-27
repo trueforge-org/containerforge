@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '42010'
+# UNVERIFIED: "/" may not return 200 on a first start with an empty /config
+http:
+- port: '42010'
+  path: /
+filePaths:
+- /app/maloja/venv/bin/python
+- /usr/share/licenses/maloja/LICENSE

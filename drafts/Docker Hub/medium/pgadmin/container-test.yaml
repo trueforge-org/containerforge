@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '5050'
+# UNVERIFIED: /misc/ping is used by the chart probes; confirm it returns 200 on an empty /config
+http:
+- port: '5050'
+  path: /misc/ping
+filePaths:
+- /app/pgadmin/venv/bin/gunicorn
+- /app/pgadmin/venv/lib
+- /usr/share/licenses/pgadmin/LICENSE

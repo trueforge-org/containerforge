@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/redis/redis"
+ports:
+  - port: 6379
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: REDIS_PASSWORD
+    default: ""
+    required: false
+  - name: REDIS_PORT
+    default: "6379"
+    required: false
+  - name: REDIS_DATA_DIR
+    default: "/config"
+    required: false
+  - name: REDIS_APPENDONLY
+    default: "yes"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

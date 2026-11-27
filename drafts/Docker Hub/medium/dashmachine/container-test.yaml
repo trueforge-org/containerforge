@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '5000'
+# UNVERIFIED: path / may redirect to a login page; adjust only to a real 200 page.
+http:
+- port: '5000'
+  path: /
+filePaths:
+- /app/dashmachine/wsgi.py
+- /app/dashmachine/requirements.txt
+- /app/venv/bin/gunicorn
+- /usr/share/licenses/dashmachine/License.md

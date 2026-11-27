@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/agusalex/Notarius"
+ports:
+  # UNVERIFIED: Tomcat default connector port, check conf/server.xml on the first build
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  # no state is verified to persist yet
+  - path: /config
+    required: false
+dependencies: []

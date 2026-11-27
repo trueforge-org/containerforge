@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+# No tcp or http probes: the image exposes no ports.
+# UNVERIFIED: /app/venv/bin/owi2plex is the expected console script name.
+filePaths:
+- /app/venv/bin/owi2plex
+- /usr/local/bin/supercronic
+- /usr/share/licenses/owi2plex
+- /defaults/crontab
+- /defaults/cronjob.sh

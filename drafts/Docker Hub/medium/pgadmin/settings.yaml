@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/pgadmin-org/pgadmin4"
+ports:
+  - port: 5050
+    protocol: tcp
+    required: true
+env:
+  # UNVERIFIED names, read from upstream pkg/docker/entrypoint.sh before use.
+  # No default password is shipped; the first-user setup is not implemented in start.sh yet.
+  - name: PGADMIN_DEFAULT_EMAIL
+    default: ""
+    required: false
+  - name: PGADMIN_DEFAULT_PASSWORD
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

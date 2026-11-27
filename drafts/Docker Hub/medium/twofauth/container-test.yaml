@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/2fauth/artisan
+- /app/2fauth/vendor/autoload.php
+- /usr/share/licenses/twofauth/LICENSE

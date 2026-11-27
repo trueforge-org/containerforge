@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/rmountjoy92/DashMachine"
+ports:
+  - port: 5000
+    protocol: tcp
+    required: true
+env:
+  # Subfolder hosting, e.g. /dash. Empty means served at the root.
+  - name: CONTEXT_PATH
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

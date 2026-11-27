@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '9000'
+- port: '9443'
+- port: '8000'
+# UNVERIFIED: /api/status is the planned status path. Confirm it returns 200 on a real run before relying on it.
+http:
+- port: '9000'
+  path: /api/status
+filePaths:
+- /app/portainer
+- /app/public/index.html

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '3000'
+http:
+- port: '3000'
+  # UNVERIFIED: root page may call translation APIs at render time; confirm in the run
+  path: /
+filePaths:
+- /app/lingva/package.json
+- /app/lingva/.next/BUILD_ID
+- /usr/share/licenses/lingva/LICENSE

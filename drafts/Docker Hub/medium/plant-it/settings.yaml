@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/MDeLuise/plant-it"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+dependencies:
+  - name: mariadb
+  - name: valkey
+volumes:
+  - path: /config
+    required: true

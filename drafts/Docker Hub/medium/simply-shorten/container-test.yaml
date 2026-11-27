@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '4567'
+# UNVERIFIED: path / is a guess until the first run shows the app response.
+http:
+- port: '4567'
+  path: /
+filePaths:
+- /app/application.jar
+- /usr/share/licenses/simply-shorten/LICENSE

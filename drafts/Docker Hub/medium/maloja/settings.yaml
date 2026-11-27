@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/krateng/maloja"
+ports:
+  - port: 42010
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: MALOJA_DATA_DIRECTORY
+    default: "/config"
+    required: false
+  - name: MALOJA_SKIP_SETUP
+    default: "yes"
+    required: false
+  - name: MALOJA_FORCE_PASSWORD
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

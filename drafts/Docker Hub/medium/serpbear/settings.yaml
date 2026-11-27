@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/towfiqi/serpbear"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: APIKEY
+    default: ""
+    required: false
+  - name: NEXT_PUBLIC_APP_URL
+    default: "http://localhost:3000"
+    required: false
+  - name: PASSWORD
+    default: ""
+    required: false
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: SECRET
+    default: ""
+    required: false
+  - name: SEARCH_CONSOLE_CLIENT_EMAIL
+    default: ""
+    required: false
+  - name: SEARCH_CONSOLE_PRIVATE_KEY
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: USER_NAME
+    default: "admin"
+    required: false
+volumes:
+  - path: /config
+    required: true

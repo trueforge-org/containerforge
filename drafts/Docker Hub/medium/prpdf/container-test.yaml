@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /app/prpdf/prpdf.py
+- /app/venv/bin/flask
+- /usr/bin/gs
+- /usr/bin/tesseract
+
+http:
+- port: '5000'
+  path: /
+  # UNVERIFIED: root page served by the app; confirm and adjust. Sibling python apps use timeoutSeconds.
+  timeoutSeconds: 120

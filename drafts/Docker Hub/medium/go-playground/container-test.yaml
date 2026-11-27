@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '8000'
+# UNVERIFIED: confirm the status code for / on first run; keep path / only if it is 200
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/go-playground/server
+- /usr/local/go/bin/go
+- /usr/share/licenses/go-playground/LICENSE

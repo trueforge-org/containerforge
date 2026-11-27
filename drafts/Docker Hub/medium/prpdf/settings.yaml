@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/maschhoff/pdfscanexplorer"
+ports:
+  # Upstream default is 80 (privileged, cannot be bound rootless). 5000 is a deliberate deviation.
+  - port: 5000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+  - name: FLASK_RUN_PORT
+    default: "5000"
+    required: false
+  # UNVERIFIED: app-specific settings (OCR language, AI API keys, config.json keys) are not read from source yet.
+volumes:
+  - path: /config
+    required: true
+dependencies: []

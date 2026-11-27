@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: no tcp or http probe yet, because no port is confirmed in settings.yaml.
+# Add one for each port once it is verified. Do not weaken this file to pass.
+timeoutSeconds: 180
+
+filePaths:
+- /app/protonmail-bridge/proton-bridge
+- /start.sh
+- /defaults/gpgparams
+- /usr/share/licenses/protonmail-bridge/LICENSE

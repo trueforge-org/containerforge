@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: the status of / without DUMBASSETS_PIN. If it redirects to a login page, add a statusCode or probe /login.
+http:
+- port: '3000'
+  path: /
+
+filePaths:
+- /app/dumbassets/server.js
+- /app/venv/bin/apprise
+- /usr/share/licenses/dumbassets/LICENSE

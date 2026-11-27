@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8484'
+http:
+- port: '8484'
+  path: /   # UNVERIFIED: confirm / returns a status the probe accepts; do not weaken the probe
+filePaths:
+- /app/gaps/gaps.jar
+- /usr/share/licenses/gaps/LICENSE
+- /start.sh

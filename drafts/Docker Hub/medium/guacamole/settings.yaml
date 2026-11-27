@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/apache/guacamole-client"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: false
+env:
+  - name: BAN_ENABLED
+    default: "true"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+# UNVERIFIED: guacd (the RDP/VNC/SSH proxy) has no apps/guacd entry yet. Add it here once that app exists.
+opt_dependencies:
+  - name: postgresql

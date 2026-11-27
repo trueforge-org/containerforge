@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '8000'
+http:
+- port: '8000'
+  path: /health
+filePaths:
+- /app/server.py
+- /app/venv/bin/python
+- /app/venv/bin/gunicorn   # UNVERIFIED: depends on the flask/gunicorn install step
+- /usr/share/licenses/dailynotes/LICENSE
+- /start.sh

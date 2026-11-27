@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/semaphoreui/semaphore"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: SEMAPHORE_CONFIG_PATH
+    default: "/config/semaphore"
+    required: false
+  - name: SEMAPHORE_DB_PATH
+    default: "/config/semaphore"
+    required: false
+  # UNVERIFIED: sqlite is assumed to be the wrapper default so the container starts without an external DB.
+  - name: SEMAPHORE_DB_DIALECT
+    default: "sqlite"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: postgresql

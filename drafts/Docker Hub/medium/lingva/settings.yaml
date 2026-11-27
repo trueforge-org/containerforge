@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/TheDavidDelta/lingva-translate"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+# NEXT_PUBLIC_* (site domain, theme, languages) are build-time values in this draft (docker-bake.hcl), so they are not runtime env here. UNVERIFIED decision.
+dependencies: []

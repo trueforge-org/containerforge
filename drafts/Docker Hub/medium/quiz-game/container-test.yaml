@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+
+tcp:
+- port: '8080'
+
+http:
+- port: '8080'
+  path: /
+
+# UNVERIFIED: that npm run build writes dist/index.html. Adjust the path after the first build, not the assertion.
+filePaths:
+- /app/www/index.html

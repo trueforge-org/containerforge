@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/yourselfhosted/slash"
+ports:
+  - port: 5231
+    protocol: tcp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: SLASH_MODE
+    default: "prod"
+    required: false
+  - name: SLASH_PORT
+    default: "5231"
+    required: false
+  - name: SLASH_DRIVER
+    default: "sqlite"
+    required: false
+  - name: SLASH_DSN
+    default: ""
+    required: false
+volumes:
+  - path: /config
+    required: true

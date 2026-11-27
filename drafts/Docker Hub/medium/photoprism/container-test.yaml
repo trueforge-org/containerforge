@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: 300s chosen for TensorFlow init and first index; measure during the run step.
+timeoutSeconds: 300
+tcp:
+- port: '2342'
+http:
+# UNVERIFIED health path; confirm with a real request on a fresh /config.
+- port: '2342'
+  path: /api/v1/status
+filePaths:
+- /opt/photoprism/bin/photoprism
+- /opt/photoprism/assets

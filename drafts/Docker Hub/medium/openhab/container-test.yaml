@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+# UNVERIFIED: first Karaf boot is slow; 300 is a proposal based on siblings
+timeoutSeconds: 300
+
+tcp:
+- port: '8080'
+
+# UNVERIFIED: the status returned by / before the first-run wizard may be a redirect
+http:
+- port: '8080'
+  path: /
+
+filePaths:
+- /app/openhab/runtime/bin
+- /app/openhab/start.sh
+- /defaults/conf
+- /usr/share/licenses/openhab

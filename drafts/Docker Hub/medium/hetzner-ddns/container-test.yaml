@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+mainRunner:
+  enabled: false
+runners:
+- entrypoint: test -x /app/hetzner-ddns
+- entrypoint: bash -n /start.sh
+filePaths:
+- /app/hetzner-ddns
+- /usr/share/licenses/hetzner-ddns/LICENSE.md

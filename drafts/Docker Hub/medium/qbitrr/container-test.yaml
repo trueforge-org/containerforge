@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '6969'
+http:
+- port: '6969'
+  path: /
+# UNVERIFIED: the http path must return an accepted status. Confirm on the first local run; do not loosen the check.
+filePaths:
+- /app/venv/bin/python
+- /start.sh

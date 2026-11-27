@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/UniversalMediaServer/UniversalMediaServer"
+ports:
+  - port: 9001
+    protocol: tcp
+    required: false
+  - port: 9002
+    protocol: tcp
+    required: false
+  - port: 5001
+    protocol: tcp
+    required: false
+  - port: 5353
+    protocol: udp
+    required: false
+  - port: 1900
+    protocol: udp
+    required: false
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: UMASK
+    default: "002"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

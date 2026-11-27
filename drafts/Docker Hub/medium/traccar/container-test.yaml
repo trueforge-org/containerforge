@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 240
+tcp:
+- port: '8082'
+# UNVERIFIED: expected status and path for the web UI on a first start; confirm with curl -i
+http:
+- port: '8082'
+  path: /
+filePaths:
+- /app/traccar/tracker-server.jar
+- /defaults/traccar.xml
+- /usr/share/licenses/traccar/LICENSE

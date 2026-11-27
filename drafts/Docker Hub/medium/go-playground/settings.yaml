@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/x1unix/go-playground"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: false
+env:
+  # UNVERIFIED: the server reads these names; confirm against the upstream source
+  - name: APP_CLEAN_INTERVAL
+    default: "10m"
+    required: false
+  - name: APP_DEBUG
+    default: "false"
+    required: false
+  - name: APP_PLAYGROUND_URL
+    default: "https://go.dev/_"
+    required: false
+  - name: APP_GTAG_ID
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: false
+dependencies: []

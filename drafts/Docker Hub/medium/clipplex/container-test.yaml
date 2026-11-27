@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+
+tcp:
+- port: '5000'
+
+# /instant_video.html is used because / redirects (302)
+http:
+- port: '5000'
+  path: /instant_video.html
+
+filePaths:
+- /app/main.py
+- /app/clipplexAPI.py
+- /usr/bin/ffmpeg
+- /usr/share/licenses/clipplex/LICENSE

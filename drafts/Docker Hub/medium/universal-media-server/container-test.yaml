@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 180
+tcp:
+- port: '9001'
+- port: '9002'
+- port: '5001'
+http:
+- port: '9001'
+  path: /
+# UNVERIFIED: the jar path depends on the release tarball layout. UDP ports 1900 and 5353 are not probed here.
+filePaths:
+- /app/ums/ums.jar
+- /usr/share/licenses/universal-media-server/LICENSE

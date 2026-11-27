@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+timeoutSeconds: 120
+tcp:
+- port: '8000'
+# UNVERIFIED: path / may need to return 200 without Trakt credentials; confirm on first run.
+http:
+- port: '8000'
+  path: /
+filePaths:
+- /app/plaxt/plaxt
+- /app/plaxt/static
+- /usr/share/licenses/plaxt/LICENSE

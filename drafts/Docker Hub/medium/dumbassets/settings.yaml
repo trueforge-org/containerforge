@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/DumbWareio/DumbAssets"
+ports:
+  - port: 3000
+    protocol: tcp
+    required: true
+env:
+  - name: APPRISE_URL
+    default: ""
+    required: false
+  - name: BASE_URL
+    default: ""
+    required: false
+  - name: CURRENCY_CODE
+    default: "USD"
+    required: false
+  - name: CURRENCY_LOCALE
+    default: "en-US"
+    required: false
+  - name: DEMO_MODE
+    default: "false"
+    required: false
+  - name: DUMBASSETS_PIN
+    default: ""
+    required: false
+  - name: PORT
+    default: "3000"
+    required: false
+  - name: SESSION_SECRET
+    default: ""
+    required: false
+  - name: SITE_TITLE
+    default: "DumbAssets"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

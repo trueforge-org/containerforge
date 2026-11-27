@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8080'
+# UNVERIFIED: "/" status code on a fresh /config; /healthz is used by the chart but not confirmed in upstream source.
+http:
+- port: '8080'
+  path: /
+filePaths:
+- /app/venv/bin/granian
+- /app/searxng/searx/webapp.py
+- /app/searxng/settings.template.yml
+- /usr/share/licenses/searxng/LICENSE

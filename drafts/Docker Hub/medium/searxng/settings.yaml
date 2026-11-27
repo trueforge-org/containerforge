@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/searxng/searxng"
+ports:
+  - port: 8080
+    protocol: tcp
+    required: true
+env:
+  - name: GRANIAN_PORT
+    default: "8080"
+    required: false
+  - name: GRANIAN_HOST
+    default: "0.0.0.0"
+    required: false
+  - name: SEARXNG_SECRET
+    # Empty by default: start.sh seeds a random server.secret_key into settings.yml on first start.
+    # UNVERIFIED: that the app reads this name as an override.
+    default: ""
+    required: false
+  - name: SEARXNG_BASE_URL
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies: []

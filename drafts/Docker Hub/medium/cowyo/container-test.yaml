@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+tcp:
+- port: '8001'
+# UNVERIFIED: "/" status code on a fresh /config.
+http:
+- port: '8001'
+  path: /
+filePaths:
+- /app/cowyo/cowyo
+# Add /usr/share/licenses/cowyo/LICENSE once the license file is confirmed and shipped.

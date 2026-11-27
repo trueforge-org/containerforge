@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/djedi/DailyNotes"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: true
+env:
+  - name: API_SECRET_KEY
+    default: ""
+    required: false
+  - name: BASE_URL
+    default: ""
+    required: false
+  - name: DATABASE_URI
+    default: ""
+    required: false
+  - name: DB_ENCRYPTION_KEY
+    default: ""
+    required: false
+  - name: DEFAULT_TIMEZONE
+    default: ""
+    required: false
+  - name: PREVENT_SIGNUPS
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

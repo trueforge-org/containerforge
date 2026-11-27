@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/photoprism/photoprism"
+ports:
+  - port: 2342
+    protocol: tcp
+    required: true
+env:
+  - name: PHOTOPRISM_ADMIN_PASSWORD
+    # Name verified in upstream config options; no default is shipped. Set on first start.
+    default: ""
+    required: false
+  - name: PHOTOPRISM_SITE_URL
+    default: "http://localhost:2342/"
+    required: false
+  - name: PHOTOPRISM_DATABASE_DRIVER
+    default: "sqlite"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+opt_dependencies:
+  - name: mariadb
