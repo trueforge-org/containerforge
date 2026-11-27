@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-tags depName=DIYgod/RSSHub versioning=loose
-  default = "v2026.11.27-8768.gbfc93be"
+  default = "v2026.11.27-8770.gea99cee"
 }
 
 variable "LICENSE" {
