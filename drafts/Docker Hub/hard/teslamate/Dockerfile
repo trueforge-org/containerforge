@@ -1,4 +1,4 @@
-FROM elixir:1.20.4-otp-29@sha256:c904ce753c35768c76a3be6f16428a83f8237ca0c402355b49bac99d74da2beb AS builder
+FROM elixir:1.20.5-otp-29@sha256:028a755eef5692f4f64b06c68104b7a326e0f610646e9d8faa8d3a651f1060f3 AS builder
 # UNVERIFIED: pin the elixir:1.20.4-otp-29 digest at implementation time
 ARG VERSION
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
