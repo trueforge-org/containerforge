@@ -1,5 +1,5 @@
 # UNVERIFIED: no digest for this java11 tag is in the repo yet. Pin the digest from the java11 build output before merge.
-FROM ghcr.io/trueforge-org/java11:11.0.29
+FROM ghcr.io/trueforge-org/java11:11.0.29@sha256:3c922b22d4856bcc05acec2eba258316e46413638632a9b49fc26bb6717e4a39
 
 ARG VERSION
 ARG TOMCAT_VERSION
