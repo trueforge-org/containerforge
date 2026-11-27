@@ -10,8 +10,8 @@
 | License | MIT, per the `LICENSE` file (https://git.mills.io/prologic/golinks/raw/branch/master/LICENSE). The GitHub mirror reports no SPDX (https://api.github.com/repos/prologic/golinks, `license.spdx_id` null). |
 | Source URL | https://git.mills.io/prologic/golinks (the GitHub repo `prologic/golinks` is a README pointing here). |
 | Source tarball | https://git.mills.io/prologic/golinks/archive/v0.0.7.tar.gz (HTTP 200 confirmed). |
-| Per-arch download | None. No release assets. Build from source for amd64 and arm64. |
-| Checksum source | None published. UNVERIFIED: no checksum on the release. Pin by tag and record the tarball sha256 in the Dockerfile comment block after the first download. |
+| Per-arch download | v0.0.7 has release assets: `_0.0.7_linux_amd64.tar.gz`, `_0.0.7_linux_arm64.tar.gz`, `_0.0.7_darwin_amd64.tar.gz` (https://git.mills.io/api/v1/repos/prologic/golinks/releases?limit=3, fetched 2026-11-27). Plan still builds from source for amd64 and arm64. |
+| Checksum source | `_0.0.7_checksums.txt` (+ `.sig`) is on the v0.0.7 release (same API response, fetched 2026-11-27). Contents not read. Pin by tag and record the tarball sha256 in the Dockerfile comment block after the first download. |
 | Module | `git.mills.io/prologic/golinks`, `go 1.13` (https://git.mills.io/prologic/golinks/raw/branch/master/go.mod). Dependencies: `git.mills.io/prologic/bitcask v1.0.0`, `github.com/GeertJohan/go.rice v1.0.2`. |
 | Upstream Dockerfile reviewed | https://git.mills.io/prologic/golinks/raw/branch/master/Dockerfile: `golang:alpine` build (`make TAG=$TAG BUILD=$BUILD build`), `alpine:latest` runtime, `COPY .dockerfiles/start.sh /start.sh`, binary to `/usr/local/bin/golinks`, `EXPOSE 8000/tcp`, `ENTRYPOINT ["/start.sh"]`. No `USER`, no `VOLUME`. |
 | Makefile | https://git.mills.io/prologic/golinks/raw/branch/master/Makefile: `CGO_ENABLED=0`, `go build -tags "netgo static_build" -ldflags "-s -w ..."`. The `deps` target runs `rice embed-go` (go.rice tooling needed at build time). |

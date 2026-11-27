@@ -21,7 +21,7 @@
 | Health | `/api/healthcheck` (upstream HEALTHCHECK every 10 s). |
 | Entrypoint behavior | https://raw.githubusercontent.com/gethomepage/homepage/08a0c1df566464bfdb327f3fd8f1f5a058d56640/docker-entrypoint.sh: defaults `PUID`/`PGID` to 0; drops privileges with `su-exec` only when root and `PUID != 0`; creates `/app/config` to `/config` symlink when missing; chowns `/app/config`, `/app/config/logs`, `/app/.next` when `PUID != 0`; sets `HOMEPAGE_BUILDTIME`; defaults `HOSTNAME` to `::` with a fallback to `0.0.0.0`; `exec "$@"`. |
 | Config path | Upstream config dir is `/app/config` (symlinked to `/config`). |
-| Host check | Next.js checks the Host header. The env name that allows extra hosts is UNVERIFIED (the expected name is `HOMEPAGE_ALLOWED_HOSTS`; confirm in the upstream docs/source before listing it). |
+| Host check | Next.js checks the Host header. The env name is `HOMEPAGE_ALLOWED_HOSTS` (upstream README, https://raw.githubusercontent.com/gethomepage/homepage/main/README.md, fetched 2026-11-27: "required, may need port"; example `gethomepage.dev`). |
 | Dependencies | none. |
 
 ## 2. Target layout
