@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=influxdata/chronograf
-  default = "1.11.7"
+  default = "1.11.8"
 }
 
 variable "LICENSE" {
