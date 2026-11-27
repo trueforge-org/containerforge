@@ -17,7 +17,7 @@ RUN echo "*** Fetching Reaparr v${VERSION} ***" && \
   rm -f /tmp/reaparr.tar.gz
 
 # UNVERIFIED: the Debian-based bun 1.4.0 tag (upstream uses the alpine variant); pin the digest at port time.
-FROM oven/bun:1.4.0@sha256:5ff609364c049b54eb0ff560ec96319729a972078ef2c755d758f0c6ef89c2d6 AS client
+FROM oven/bun:1.4.5@sha256:3aa040e5445efa09d75bb428a64ba50db13e2b3ac9b6b0c7f145615f62b2ee18 AS client
 
 ARG VERSION
 COPY --from=source /src/src/AppHost/ClientApp /build/ClientApp
