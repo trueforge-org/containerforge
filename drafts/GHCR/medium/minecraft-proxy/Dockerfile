@@ -10,7 +10,7 @@ ARG MC_MONITOR_VERSION=1.21.1
 # renovate: datasource=github-releases depName=itzg/rcon-cli
 ARG RCON_CLI_VERSION=1.7.10
 # renovate: datasource=github-releases depName=itzg/mc-image-helper
-ARG MC_HELPER_VERSION=1.76.4
+ARG MC_HELPER_VERSION=1.80.0
 
 RUN \
   echo "**** install helper tools (checked against the checksums each release publishes) ****" && \
