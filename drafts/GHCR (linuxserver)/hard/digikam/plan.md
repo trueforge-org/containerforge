@@ -30,7 +30,7 @@ No `defaults/` or `etc/` (no seed config is needed for a first run). No `root/` 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, single stage (AppImage, no compile step).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, single stage (AppImage, no compile step).
 
 Why: the AppImage is self-contained, so ubuntu is enough. There is no `python` or `java` runtime need. Closest sibling for a display-based app on ubuntu: `apps/xvfb` (ubuntu plus `apt-get install xvfb`, `USER apps`, `COPY --chmod=0755 . /`). The linuxserver `baseimage-selkies` base is NOT used: ContainerForge has no equivalent, and it runs as root (see section 10).
 

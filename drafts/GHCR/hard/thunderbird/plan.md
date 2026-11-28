@@ -33,7 +33,7 @@ Files under `apps/thunderbird/`:
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Reason: draft and upstream both need a desktop stack (GTK3, fonts, X display). Sibling choice: `apps/kasmvnc` (desktop over VNC in a ContainerForge image) or `apps/xvfb`. Both exist in `apps/`. `apps/kasmvnc` exposes 3000 and 3001 (not 8080) and `apps/xvfb` has no noVNC, so the 8080 port in this plan only holds if a noVNC layer is added; align `settings.yaml`, `EXPOSE` and the probes with whichever display stack is chosen. Check both before writing; reuse the sibling's display and VNC/noVNC setup rather than copying the ich777 base.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Reason: draft and upstream both need a desktop stack (GTK3, fonts, X display). Sibling choice: `apps/kasmvnc` (desktop over VNC in a ContainerForge image) or `apps/xvfb`. Both exist in `apps/`. `apps/kasmvnc` exposes 3000 and 3001 (not 8080) and `apps/xvfb` has no noVNC, so the 8080 port in this plan only holds if a noVNC layer is added; align `settings.yaml`, `EXPOSE` and the probes with whichever display stack is chosen. Check both before writing; reuse the sibling's display and VNC/noVNC setup rather than copying the ich777 base.
 
 ## 4. Dockerfile
 

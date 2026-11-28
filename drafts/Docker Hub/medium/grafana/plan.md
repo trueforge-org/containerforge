@@ -39,7 +39,7 @@ No `defaults/` and no `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the extraction stage and the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the extraction stage and the final stage.
 
 Fits: the app is a Go binary shipped as a `.deb` for each arch, with its own bundled assets. No language base needed. The `.deb` is a Debian archive, so `dpkg-deb -x` extracts it on glibc Ubuntu. Closest sibling: `apps/pwndrop` (download a release artifact in a build stage and copy it into an ubuntu runtime stage).
 

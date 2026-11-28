@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/`, `root/` planned. Add `defaults/` only if a bl
 
 Option A needs a Python 3.14 runtime. The upstream venv and interpreter are built for Python 3.14.10. ContainerForge `apps/python` is 3.15.2 (`ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`). A venv from 3.14 does not run on 3.15 without a rebuild. Eight other apps use `ghcr.io/trueforge-org/python:3.14.8@sha256:f099b700b824b7760cb846418f84a2c14c2f04992320506ab3ca5b79d3ac1232`, so a 3.14 minor image is consumed in the repo (patch 3.14.8 vs upstream 3.14.10; same minor, compatibility UNVERIFIED). This is the main blocker (section 10).
 
-Base choice for the final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus a Python 3.14 interpreter, or a Python 3.14 base if one exists in ContainerForge (a `python:3.14.8` image is used by other apps, see above; whether it fits the 3.14.10 venv is UNVERIFIED). Closest sibling: `apps/bazarr` for Python-app layout.
+Base choice for the final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus a Python 3.14 interpreter, or a Python 3.14 base if one exists in ContainerForge (a `python:3.14.8` image is used by other apps, see above; whether it fits the 3.14.10 venv is UNVERIFIED). Closest sibling: `apps/bazarr` for Python-app layout.
 
 ## 4. Dockerfile
 

@@ -39,7 +39,7 @@ Not needed: `defaults/`, `etc/`, `health/`, `app/`. Never use `root/`. No `DOWNS
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 - Why it fits: the release binary is a static Go build (`CGO_ENABLED=0` upstream, and the release asset is the same kind of build; confirm with `file` in step 2). It needs no runtime beyond CA certificates and, for transcoding, `ffmpeg` (see section 4). The ubuntu base already has `ca-certificates` and `curl`.
 - Closest sibling: `apps/adguardhome-sync` (ubuntu base, a single downloaded binary per `TARGETARCH`, `USER apps`, `COPY --chmod=0755 . /`).
 - No `golang` build stage: the release binary is used as-is, so the go-runtime rule about build stages does not apply.

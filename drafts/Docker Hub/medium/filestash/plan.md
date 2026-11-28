@@ -30,7 +30,7 @@ No `defaults/` (the app writes `config.json` itself and generates `general.secre
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage (Go already installed in the base) and for the final stage. Closest sibling: `apps/pwndrop` (Go build stage, then runtime stage) and `.github/instructions/go-runtime.instructions.md`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage (Go already installed in the base) and for the final stage. Closest sibling: `apps/pwndrop` (Go build stage, then runtime stage) and `.github/instructions/go-runtime.instructions.md`.
 
 ## 4. Dockerfile
 

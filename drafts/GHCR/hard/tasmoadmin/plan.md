@@ -30,7 +30,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because the app is PHP source served by a web server, and no ContainerForge PHP base exists in the table. The `nginx` base is an alternative, but it adds a pinned nginx version the draft does not need. The brief lists `apps/bookstack` as the PHP stack sibling; read its Dockerfile and reuse its PHP apt install pattern. UNVERIFIED: that PHP 8.x packages (`php-fpm`, `php-xml`, `php-mbstring`, `php-curl`) exist in the Ubuntu 26.04 archive under the names in the draft; check with `apt-cache policy` in the build before pinning.
 
@@ -48,7 +48,7 @@ Fits because the app is PHP source served by a web server, and no ContainerForge
 8. Tail: `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080` (see section 9 for the port choice), `VOLUME /config`, `ENTRYPOINT ["/start.sh"]` or `CMD`, following the sibling's convention.
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ARG VERSION
 USER root
 # apt install nginx + php-fpm + extensions, tarball download, sha256 check, extract to /var/www/tasmoadmin

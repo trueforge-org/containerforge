@@ -36,7 +36,7 @@ No `root/` (reserved). No `etc/` unless a system file must change (not planned).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because the 26.04 archive carries `rapid-photo-downloader` 0.9.37. The upstream image's `bullseye` base is replaced, not reused. Closest siblings (both exist): `apps/kasmvnc` (VNC stack on the ubuntu base) and `apps/xvfb` (installs apt `xvfb`, confirmed). The Python alternative (`ghcr.io/trueforge-org/python`) is not used: the app is an apt-installed PyQt app and the distro provides Python.
 

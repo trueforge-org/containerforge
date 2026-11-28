@@ -33,7 +33,7 @@ No `defaults/`. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-Final stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, as in the draft: its Node runs `next start`. (The Python part is unused; if you prefer, `ubuntu` plus a pinned apt `nodejs` also works, but `python-node` is the documented Node base.) Build stage 1 for the Notea bundle: the same `python-node` image with `yarn` (enable via `corepack`, UNVERIFIED that it is available). Build stage 2 for MinIO: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with `golang-go` and `build-essential`, as in `apps/pwndrop`. Closest siblings: `apps/pwndrop` (Go build from source) and `apps/budge` (python-node with Node app).
+Final stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, as in the draft: its Node runs `next start`. (The Python part is unused; if you prefer, `ubuntu` plus a pinned apt `nodejs` also works, but `python-node` is the documented Node base.) Build stage 1 for the Notea bundle: the same `python-node` image with `yarn` (enable via `corepack`, UNVERIFIED that it is available). Build stage 2 for MinIO: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with `golang-go` and `build-essential`, as in `apps/pwndrop`. Closest siblings: `apps/pwndrop` (Go build from source) and `apps/budge` (python-node with Node app).
 
 ## 4. Dockerfile
 

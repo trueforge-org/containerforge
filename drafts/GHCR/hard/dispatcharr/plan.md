@@ -38,7 +38,7 @@ No `root/`. `DOWNSTREAM_CHANGES.md` is not needed unless this image becomes a `F
 **Blocked for now.** The natural base is `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Python plus Node, matching the upstream node build stage and python runtime). But the upstream runtime is `ghcr.io/dispatcharr/dispatcharr:base`, which contains the Python venv, nginx, redis and celery.
 
 Two options:
-1. **Preferred if the upstream base is reproducible:** rebuild the upstream `base` stage on the ContainerForge `ubuntu` base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`), then add the app layer. Requires reading the upstream base Dockerfile first (`UNVERIFIED: not in this repo or fetched`).
+1. **Preferred if the upstream base is reproducible:** rebuild the upstream `base` stage on the ContainerForge `ubuntu` base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`), then add the app layer. Requires reading the upstream base Dockerfile first (`UNVERIFIED: not in this repo or fetched`).
 2. **Fallback:** `python-node` as the final stage, and add nginx, redis-server, ffmpeg and supervisor via apt in the final stage, with a `start.sh` that starts them.
 
 Closest sibling: `apps/bazarr` (Python), `apps/changedetection` (python-node; it has no supervisor, only a `start.sh`), `apps/nginx` (nginx). Decide after the upstream base is read.

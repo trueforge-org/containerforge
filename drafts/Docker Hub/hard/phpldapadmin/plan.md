@@ -27,7 +27,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Closest sibling: `apps/bookstack` (Laravel on ubuntu with php8.5 from apt, so PHP 8.5 is available on 26.04). Web serving: simplest is `php artisan serve`-free approach; use php-fpm + `apps/nginx`-style config, or FrankenPHP as upstream (UNVERIFIED availability as a package on ubuntu 26.04). Plan: php8.5-fpm + nginx from apt, config in `etc/`, listening on 8080.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Closest sibling: `apps/bookstack` (Laravel on ubuntu with php8.5 from apt, so PHP 8.5 is available on 26.04). Web serving: simplest is `php artisan serve`-free approach; use php-fpm + `apps/nginx`-style config, or FrankenPHP as upstream (UNVERIFIED availability as a package on ubuntu 26.04). Plan: php8.5-fpm + nginx from apt, config in `etc/`, listening on 8080.
 
 ## 4. Dockerfile
 

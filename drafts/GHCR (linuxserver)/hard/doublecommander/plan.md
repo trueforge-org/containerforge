@@ -29,7 +29,7 @@ No `defaults/` or `etc/` unless a seed config is needed (none is confirmed). No 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, single stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, single stage.
 
 Why: the release is a prebuilt tarball, so no compiler is needed. Ubuntu is the ContainerForge base for generic userland. Closest sibling for tarball-plus-apt on ubuntu: `apps/adguardhome-sync` (tarball download by `$TARGETARCH`) and `apps/xvfb` (display server on ubuntu). The upstream Debian trixie package set is not used (the base is Ubuntu 26.04).
 

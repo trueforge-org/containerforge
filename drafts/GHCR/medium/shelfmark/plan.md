@@ -36,7 +36,7 @@ Not applicable: `root/` (must not be touched). `DOWNSTREAM_CHANGES.md` (not a `F
 
 - Build stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`. It has Python and Node for the frontend build. Upstream uses node 24 and Python 3.14.10, so see risk R1.
 - Final stage: `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. Closest sibling: `apps/bazarr` (python base, `/app` venv layout). Reason: Python backend, and the python base covers the runtime.
-- Alternative if the python base cannot run the app: the ubuntu base `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with `uv` installed from `ghcr.io/astral-sh/uv:0.13.9` (mount or copy). Only if a Python-base problem is shown.
+- Alternative if the python base cannot run the app: the ubuntu base `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with `uv` installed from `ghcr.io/astral-sh/uv:0.13.9` (mount or copy). Only if a Python-base problem is shown.
 
 ## 4. Dockerfile
 

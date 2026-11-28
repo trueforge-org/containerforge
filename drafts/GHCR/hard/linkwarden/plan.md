@@ -33,7 +33,7 @@
 
 ## 3. Base image
 
-- Final and build stages: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Final and build stages: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Draft proposed `ghcr.io/trueforge-org/python-node` as the runtime image. That is a deviation: this app needs Node and no Python. The porter table maps Node-only apps to ubuntu, so the plan uses ubuntu, and Node 22 is added in the build stage. Decision for the user (section 10): switch to python-node only if it provides Node 22 and the tooling needed.
 - Closest sibling: a Node/Next.js app in `apps/` (search `apps/*/Dockerfile` for `corepack` or `yarn` in the first build step; not done in this plan, UNVERIFIED pattern).
 

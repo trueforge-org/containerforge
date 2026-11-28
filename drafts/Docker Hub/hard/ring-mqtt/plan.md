@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Why: provides Node (UNVERIFIED: its Node major; upstream uses Node 22, check `node -v` in the base and that `engines` in `package.json` is met). Python is unused. If the Node version is wrong, use ubuntu 26.04 (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`) plus NodeSource, like `apps/mstream`. Closest siblings: `apps/mstream` (npm app on ubuntu), `apps/changedetection` (python-node).
+Why: provides Node (UNVERIFIED: its Node major; upstream uses Node 22, check `node -v` in the base and that `engines` in `package.json` is met). Python is unused. If the Node version is wrong, use ubuntu 26.04 (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`) plus NodeSource, like `apps/mstream`. Closest siblings: `apps/mstream` (npm app on ubuntu), `apps/changedetection` (python-node).
 
 ## 4. Dockerfile
 

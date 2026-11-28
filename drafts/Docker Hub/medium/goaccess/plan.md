@@ -38,7 +38,7 @@ Recommended: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820
 
 Why: the report is an HTML page served by a web server. `apps/nginx/Dockerfile` already provides nginx on the same ubuntu base (`ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ce...`), so nginx does not need to be installed again. goaccess is then the only package added with apt.
 
-Alternative (the draft's first choice): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, with goaccess from apt and nginx from apt (adds a package install and is the route that needs a supervisor either way). Pick one before the first build. Closest siblings: `apps/nginx` and `apps/it-tools` (nginx-based).
+Alternative (the draft's first choice): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, with goaccess from apt and nginx from apt (adds a package install and is the route that needs a supervisor either way). Pick one before the first build. Closest siblings: `apps/nginx` and `apps/it-tools` (nginx-based).
 
 ## 4. Dockerfile
 

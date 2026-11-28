@@ -36,7 +36,7 @@ Never `root/`. No `DOWNSTREAM_CHANGES.md`: not a `FROM` base.
 
 ## 3. Base image
 
-- `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (ubuntu alone, per the draft). `apps/dokuwiki`, `apps/grav` and `apps/bookstack` exist as PHP siblings. UNVERIFIED: which one uses php-cgi on ubuntu. (Both `ubuntu:26.04` and `ubuntu:26.4` tags with this digest are used in `apps/*/Dockerfile`.)
+- `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (ubuntu alone, per the draft). `apps/dokuwiki`, `apps/grav` and `apps/bookstack` exist as PHP siblings. UNVERIFIED: which one uses php-cgi on ubuntu. (Both `ubuntu:26.04` and `ubuntu:26.4` tags with this digest are used in `apps/*/Dockerfile`.)
 - No Python or Node runtime needed.
 - The upstream Alpine base is NOT reused: the pi-hole scripts assume Alpine paths (`apk`, `busybox`). The plan rebuilds the layout on Ubuntu. Record this as the main risk.
 

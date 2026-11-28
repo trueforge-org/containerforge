@@ -36,7 +36,7 @@ No `defaults/`, `etc/`, `root/`. `DOWNSTREAM_CHANGES.md` not needed.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (runtime) for the non-GUI option, using the ContainerForge Python rules. Alternative: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with `apt-get install gpodder` if the distro package is acceptable (version lags upstream).
+`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (runtime) for the non-GUI option, using the ContainerForge Python rules. Alternative: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with `apt-get install gpodder` if the distro package is acceptable (version lags upstream).
 
 The draft's Base container section (ubuntu + python) is consistent with this. Python version compatibility of gPodder 3.11.5 with the 3.15 base is UNVERIFIED: test it in step 2.
 

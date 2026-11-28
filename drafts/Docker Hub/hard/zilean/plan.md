@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage (draft: .NET from the ubuntu base; Python ingestion via apt). Build stage uses a Microsoft SDK image, as other apps use external build stages for Go (`apps/*` Go builds): `FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:<resolve and pin the digest at implementation> AS build` (the Debian-based SDK image; digest not looked up yet, UNVERIFIED). The app is published self-contained so no .NET runtime is installed in the final image. Closest sibling: `apps/sonarr` (dotnet app on ubuntu, `libicu-dev` already in base) for the runtime side.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage (draft: .NET from the ubuntu base; Python ingestion via apt). Build stage uses a Microsoft SDK image, as other apps use external build stages for Go (`apps/*` Go builds): `FROM mcr.microsoft.com/dotnet/sdk:9.0@sha256:<resolve and pin the digest at implementation> AS build` (the Debian-based SDK image; digest not looked up yet, UNVERIFIED). The app is published self-contained so no .NET runtime is installed in the final image. Closest sibling: `apps/sonarr` (dotnet app on ubuntu, `libicu-dev` already in base) for the runtime side.
 
 ## 4. Dockerfile
 

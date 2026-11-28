@@ -31,7 +31,7 @@ apps/traefik-forward-auth/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for both the build stage and the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for both the build stage and the final stage.
 
 The ubuntu base already ships a Go toolchain on `PATH` (`/usr/local/go/bin`, `GO_VERSION` in `apps/ubuntu`), which `apps/hishtory-server` uses for a builder stage on the same base. Closest sibling: `apps/hishtory-server` (a Go source build copied into the final image). The final stage needs only the binary and the CA certificates already in ubuntu, so no extra packages.
 

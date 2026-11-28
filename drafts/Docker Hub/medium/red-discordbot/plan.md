@@ -36,7 +36,7 @@ No `defaults/`, `etc/` or `health/` needed. No `root/` (never used by agents). `
 
 Blocked choice. Two options:
 
-- **Option A (preferred, matches upstream):** `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with a pinned CPython 3.11 added in the build stage (for example a `uv`-managed or tarball-built 3.11 in `/usr/local`), then `/app/venv` created with it. The runtime then has no Python 3.15 dependency. The exact CPython 3.11 source and checksum are UNVERIFIED and must be pinned in the build.
+- **Option A (preferred, matches upstream):** `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with a pinned CPython 3.11 added in the build stage (for example a `uv`-managed or tarball-built 3.11 in `/usr/local`), then `/app/venv` created with it. The runtime then has no Python 3.15 dependency. The exact CPython 3.11 source and checksum are UNVERIFIED and must be pinned in the build.
 - **Option B:** `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. Not viable: Red 3.5.24 refuses Python 3.15 (`requires_python <3.12`).
 
 Closest sibling: `apps/python` (venv at `/app/venv`, read-only rule) and `apps/bazarr` (python venv pattern; note Option A does not use the python base, so the `/app/venv` layout must be recreated by hand). Python rules apply: `/app/venv` is read-only; cogs' runtime installs go to `/config/venv`, seeded from `/app/venv` only when missing (python-runtime instructions).

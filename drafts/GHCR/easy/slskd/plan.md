@@ -34,7 +34,7 @@ No `defaults/`, `etc/`, `health/` needed. The app creates its own config on firs
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft and the .NET rule say ubuntu. The .NET runtime is bundled in the release zip (section 1), so the final stage needs no runtime package. Build stage (only for `unzip` and the checksum) uses the same base. Closest sibling: `apps/webgrabplus` (.NET on ubuntu, per the fenrus plan reference) and `apps/valkey` for the `health/` pattern.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The draft and the .NET rule say ubuntu. The .NET runtime is bundled in the release zip (section 1), so the final stage needs no runtime package. Build stage (only for `unzip` and the checksum) uses the same base. Closest sibling: `apps/webgrabplus` (.NET on ubuntu, per the fenrus plan reference) and `apps/valkey` for the `health/` pattern.
 
 ## 4. Dockerfile
 

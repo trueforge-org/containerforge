@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, or `health/` needed (no seeded config). No `root/`. No `
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage and the runtime stage. No runtime sibling is needed: the server is one native binary and the frontend is static files. Closest sibling for a build stage plus a runtime stage: `apps/pwndrop` (Go build stage, `COPY --from=buildstage`).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage and the runtime stage. No runtime sibling is needed: the server is one native binary and the frontend is static files. Closest sibling for a build stage plus a runtime stage: `apps/pwndrop` (Go build stage, `COPY --from=buildstage`).
 
 Note: upstream uses musl (`rust:alpine`) and `scratch`. We use glibc on ubuntu, so the binary is built for the target arch in the build stage.
 

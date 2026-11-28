@@ -20,7 +20,7 @@
 Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh, defaults/ (bitcoin.conf seed, openbox/xfce autostart). Reuse the desktop stack pattern of apps/kasmvnc (and apps/xvfb): prefer `FROM ghcr.io/trueforge-org/kasmvnc` as a base if it is published and consumable; that would need no DOWNSTREAM_CHANGES for this app (kasmvnc owns that). Open question in section 10.
 
 ## 3. Base image
-Preferred: kasmvnc-based desktop (web VNC on 3000/3001, built-in noVNC replacement, already rootless). Fallback: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus apt `xvfb x11vnc novnc websockify openbox` (lighter than xfce4; tigervnc-standalone-server alternative). Closest siblings: apps/kasmvnc, apps/xvfb.
+Preferred: kasmvnc-based desktop (web VNC on 3000/3001, built-in noVNC replacement, already rootless). Fallback: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus apt `xvfb x11vnc novnc websockify openbox` (lighter than xfce4; tigervnc-standalone-server alternative). Closest siblings: apps/kasmvnc, apps/xvfb.
 
 ## 4. Dockerfile
 1. `ARG VERSION`, `ARG TARGETARCH`; map amd64 -> x86_64-linux-gnu, arm64 -> aarch64-linux-gnu.

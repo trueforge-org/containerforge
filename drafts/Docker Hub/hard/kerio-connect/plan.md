@@ -31,7 +31,7 @@ No `DOWNSTREAM_CHANGES.md`, no `root/`.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (draft). This is a poor match: the vendor supports Ubuntu up to 20.04 in the lists found. If installation on 26.04 fails (libraries, postinst), the fallback is a different base, which breaks the repo convention; if no workable base exists, abandon the port (section 10). Closest sibling: `apps/kasm` (large vendor stack with its own installer), `apps/hytale` (vendor binary).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (draft). This is a poor match: the vendor supports Ubuntu up to 20.04 in the lists found. If installation on 26.04 fails (libraries, postinst), the fallback is a different base, which breaks the repo convention; if no workable base exists, abandon the port (section 10). Closest sibling: `apps/kasm` (large vendor stack with its own installer), `apps/hytale` (vendor binary).
 
 ## 4. Dockerfile
 

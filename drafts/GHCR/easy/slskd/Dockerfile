@@ -1,5 +1,5 @@
 # Fetch stage: download the self-contained release zip and verify it.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS fetch
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS fetch
 
 ARG VERSION
 ARG TARGETARCH
@@ -26,7 +26,7 @@ RUN set -eux; \
     rm -f /tmp/slskd.zip; \
     curl -fsSL -o /tmp/LICENSE "https://raw.githubusercontent.com/slskd/slskd/${VERSION}/LICENSE"
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 # UNVERIFIED: the upstream image sets SLSKD_APP_DIR=/app, while docs/config.md calls the variable APP_DIR.
 # /config is used here. The release zip bundles the .NET runtime; it is extracted to /tmp at start.

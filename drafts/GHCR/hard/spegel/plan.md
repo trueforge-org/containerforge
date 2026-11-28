@@ -30,7 +30,7 @@ No `defaults/` or `etc/` are expected. Do not use `root/`. No `DOWNSTREAM_CHANGE
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 - Why: the upstream image is distroless static, and the binary is a static Go binary. Our rules say runtime stages use ubuntu unless a language base is needed, and a static Go binary needs no runtime beyond ubuntu. A Go build stage is not needed because the release tarball is prebuilt.
 - Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu).
 

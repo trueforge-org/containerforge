@@ -36,7 +36,7 @@ No `defaults/`: Vikunja runs with zero config (SQLite default). `root/` is never
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: a self-contained Go binary from release zips. The ubuntu base already provides `unzip`, `curl`, `ca-certificates`, `tzdata` and `jq`. Closest sibling: `apps/adguardhome-sync`; `apps/bazarr` shows the `unzip` pattern. Go is not compiled here because upstream ships the binary (the Go rule about build stages applies only when building from source).
 

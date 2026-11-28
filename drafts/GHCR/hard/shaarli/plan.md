@@ -34,7 +34,7 @@ No `root/`, no `etc/`, no `DOWNSTREAM_CHANGES.md` (not used as a FROM base). `de
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build and final stages.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build and final stages.
 
 Why: PHP is not a ContainerForge runtime, and `apps/phpmyadmin` and `apps/bookstack` already install `php8.5-*` from apt on this exact base. The `ghcr.io/trueforge-org/nginx` base is an alternative, but nginx alone does not give PHP, so the ubuntu base is simpler. Closest siblings: `apps/phpmyadmin` (php8.5 + web app, php-fpm pool env handling, `/app/www`, `/config` seeding) and `apps/it-tools` (nginx on 8080 with `defaults/default.conf`).
 

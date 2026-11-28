@@ -29,7 +29,7 @@ No `defaults/` is needed (Jupyter creates its config on first start). No `root/`
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 The release tarball is built for Ubuntu 26.04 with gcc 15.2, so it matches the ubuntu base exactly. The python base is not used because ROOT's PyROOT bindings are built against the system python of that Ubuntu release (UNVERIFIED). Closest siblings: `apps/adguardhome-sync` (tarball extracted to `/app`) and `apps/changedetection` (venv with pip packages).
 

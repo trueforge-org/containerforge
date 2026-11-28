@@ -34,7 +34,7 @@ No `defaults/`, `etc/`, `health/` needed: the app creates its own database on fi
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The ubuntu base is the required final-stage base for a static Go binary plus a static web bundle; no language runtime is needed at runtime.
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The ubuntu base is the required final-stage base for a static Go binary plus a static web bundle; no language runtime is needed at runtime.
 - Node build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, because it already ships Node (`apps/budge` uses it for a Node 24 build). Reuse the node base and avoid a second `node:24-slim` pull. pnpm is enabled via corepack, as `apps/it-tools` does (it installs corepack with npm first). UNVERIFIED: exact Node major in python-node; confirm with `node -v` in step 2.
 - Go build stage: upstream uses `golang:1.26-alpine`. Go apps in `apps/` such as `apps/pwndrop` build on the ubuntu base with apt `golang-go`; this plan instead follows the go-runtime rule (`FROM golang:<ver> AS build`). Use `FROM golang:1.26-alpine@<digest>` (digest UNVERIFIED: resolve it in step 2 and pin it). The binary is static (`CGO_ENABLED=0`), so alpine as a build image is fine; it is not shipped.
 - Closest siblings: `apps/it-tools` (node build stage, copy output into nginx final stage) and `apps/adguardhome-sync` (prebuilt binary in ubuntu with `ARG VERSION` and `TARGETARCH`).

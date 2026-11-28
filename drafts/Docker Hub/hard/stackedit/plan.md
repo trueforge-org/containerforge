@@ -32,7 +32,7 @@ Mirrors `apps/it-tools`, which also uses `docker-entrypoint.d/10-copyconfig.sh`;
 
 ## 3. Base image
 
-Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (has node 26.x, yarn, git). Final stage: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` (draft main runtime, static JS editor). Closest sibling: `apps/it-tools` (node build in ubuntu stage, `dist/` copied into nginx html). Alternative if the app needs its Express server (see section 10): ubuntu with `node .`.
+Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (has node 26.x, yarn, git). Final stage: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` (draft main runtime, static JS editor). Closest sibling: `apps/it-tools` (node build in ubuntu stage, `dist/` copied into nginx html). Alternative if the app needs its Express server (see section 10): ubuntu with `node .`.
 
 ## 4. Dockerfile
 

@@ -41,7 +41,7 @@ Files under `apps/rdtclient/`:
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (copy exactly from the brief)
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (copy exactly from the brief)
 - Reason: the app is .NET, so the final stage is glibc ubuntu. The upstream Alpine and musl runtime cannot be reused. There is no `ghcr.io/trueforge-org/dotnet` base in this repo (checked `apps/`).
 - Closest sibling: `apps/adguardhome-sync` (prebuilt binary tarball on ubuntu, `USER apps`, `/config` volume). Its Dockerfile is the template for the download and copy steps.
 - The .NET runtime has to be added on top of ubuntu. `UNVERIFIED:` the glibc runtime package name and availability on Ubuntu 26.04 (Microsoft package feed or the `dotnet-runtime-10.0` package). Check before writing the `RUN`; if neither works, stop and report as `blocked`.

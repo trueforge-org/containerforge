@@ -37,7 +37,7 @@ No `defaults/`, `etc/` or `health/` needed (no config file is seeded; the app re
 
 ## 3. Base image
 
-- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`
+- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build`
 - Final stage: the same line, `AS` omitted.
 
 The ubuntu base already ships Go (`GO_VERSION` 1.27.4 at `/usr/local/go`, `GOTOOLCHAIN=local`), Node 26.13.1 and yarn 1.22.22 (`apps/ubuntu/docker-bake.hcl`, `apps/ubuntu/Dockerfile`), so it covers the runtime Go toolchain the server needs to compile user code. No separate language base is needed. Closest sibling: `apps/pwndrop` (Go built in a build stage, `COPY --from=buildstage` into an ubuntu runtime stage).

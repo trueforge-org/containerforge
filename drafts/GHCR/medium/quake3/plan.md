@@ -29,7 +29,7 @@ Not needed: `defaults/` (no config seed beyond what the server writes at first s
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, both build and final stage (the draft says "ubuntu alone is enough"). The upstream base is Debian; ubuntu is the ContainerForge rule for generic userland. Closest sibling: `apps/steamcmd` (game server, data under `/config`) and `apps/adguardhome-sync` (simple ubuntu runtime). No dependency container.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, both build and final stage (the draft says "ubuntu alone is enough"). The upstream base is Debian; ubuntu is the ContainerForge rule for generic userland. Closest sibling: `apps/steamcmd` (game server, data under `/config`) and `apps/adguardhome-sync` (simple ubuntu runtime). No dependency container.
 
 ## 4. Dockerfile
 

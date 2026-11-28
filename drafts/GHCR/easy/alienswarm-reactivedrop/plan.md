@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/`, `scripts/` (the steamcmd base provides `/usr/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>` where the tag is the `VERSION` of `apps/steamcmd/docker-bake.hcl` (currently `20180105-5build1`). The digest is UNVERIFIED: read it from the registry at build time and pin it, do not guess. Fits because it already provides steamcmd (i386 package with lib32 libs), `USER apps`, and `/config`. Closest sibling: `apps/steamcmd` itself. The ubuntu base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`) is the root of that chain and is not used directly.
+`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>` where the tag is the `VERSION` of `apps/steamcmd/docker-bake.hcl` (currently `20180105-5build1`). The digest is UNVERIFIED: read it from the registry at build time and pin it, do not guess. Fits because it already provides steamcmd (i386 package with lib32 libs), `USER apps`, and `/config`. Closest sibling: `apps/steamcmd` itself. The ubuntu base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`) is the root of that chain and is not used directly.
 
 ## 4. Dockerfile
 

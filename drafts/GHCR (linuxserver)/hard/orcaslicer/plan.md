@@ -31,7 +31,7 @@ No `defaults/` unless a default profile is needed. No `root/`. No `DOWNSTREAM_CH
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Fits because the app is a prebuilt AppImage (built for Ubuntu 24.04) and needs only glibc plus GUI libraries. Closest sibling for GUI apps: `apps/kasmvnc` or `apps/xvfb` (both exist; not inspected in this run). The draft's `libfuse2` guess is not needed if the AppImage is extracted (upstream method).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Fits because the app is a prebuilt AppImage (built for Ubuntu 24.04) and needs only glibc plus GUI libraries. Closest sibling for GUI apps: `apps/kasmvnc` or `apps/xvfb` (both exist; not inspected in this run). The draft's `libfuse2` guess is not needed if the AppImage is extracted (upstream method).
 
 ## 4. Dockerfile
 

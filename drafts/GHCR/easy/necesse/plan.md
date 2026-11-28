@@ -36,7 +36,7 @@ Files in `apps/necesse/`:
 ## 3. Base image
 
 - Runtime base: `ghcr.io/trueforge-org/steamcmd` (`apps/steamcmd`). The draft's choice is confirmed: that image provides `steamcmd` and `start.sh` that installs apps from `STEAM_APP_IDS`.
-- Its own base: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Its own base: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Pin the steamcmd image by tag and digest. `apps/steamcmd/docker-bake.hcl` records only `VERSION` (`20180105-5build1`), no image digest; its Dockerfile pins the ubuntu digest above (with tag `26.4`). The published steamcmd image digest is UNVERIFIED (take it from the registry at build time). Alternative: rebuild the steamcmd install block on the ubuntu base as `apps/mordhau`'s plan does.
 - Closest sibling: `apps/steamcmd` itself. No other game-server sibling confirmed.
 

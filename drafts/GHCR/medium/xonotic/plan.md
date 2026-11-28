@@ -34,7 +34,7 @@ No `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage and the build stage. The game is a native Linux binary, so ubuntu alone is enough (draft: "Runtime image: none"). `ich777/debian-baseimage` (upstream) is not reused: it is a Debian base with its own user/entrypoint model that ContainerForge does not use.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage and the build stage. The game is a native Linux binary, so ubuntu alone is enough (draft: "Runtime image: none"). `ich777/debian-baseimage` (upstream) is not reused: it is a Debian base with its own user/entrypoint model that ContainerForge does not use.
 
 Closest sibling: no game-server sibling exists. The nearest native-binary pattern is `apps/pwndrop` (build stage, runtime stage, `COPY --from=`), plus `apps/adguardhome-sync` for prebuilt tarball install from a release URL with checksum-free download.
 

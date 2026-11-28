@@ -36,7 +36,7 @@ No `defaults/` unless the server needs a seed config (UNVERIFIED: not seen in th
 
 Build stages: `docker.io/library/node:26` (web UI, as upstream) and `docker.io/library/golang:1.27` (go.mod requires 1.27.3). Digests UNVERIFIED: resolve and pin at implementation time.
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Upstream's final stage is `debian:stable-slim`; ubuntu is the ContainerForge rule.
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Upstream's final stage is `debian:stable-slim`; ubuntu is the ContainerForge rule.
 
 Closest sibling for the Go-build pattern: `apps/pwndrop` (build stage, `COPY --from=buildstage`). Closest for a DNS/network service: none confirmed; `apps/wg-easy` is the only app whose settings mention network-privilege terms, and its test was checked only for those terms.
 

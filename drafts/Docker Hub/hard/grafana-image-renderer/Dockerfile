@@ -1,9 +1,9 @@
-# grafana-image-renderer 5.12.11 (AGPL-3.0-only) on the ContainerForge ubuntu base.
+# grafana-image-renderer 5.12.12 (AGPL-3.0-only) on the ContainerForge ubuntu base.
 # The upstream release binary is used as is. Chromium comes from Playwright, not Debian (see the plan: the Ubuntu chromium package is a snap stub).
 # Upstream: https://github.com/grafana/grafana-image-renderer (no checksum file; the per-asset digest comes from the GitHub release API at build time).
 # UNVERIFIED: Playwright install-deps and install on Ubuntu 26.04, and the font package names. Drop any that do not resolve and record it in the PR.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG TARGETARCH

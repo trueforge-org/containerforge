@@ -1,7 +1,7 @@
 # Backend (Spring Boot, Java 27) and frontend (React, Node 24) are built from two repos.
 # Source tarballs are fetched with ADD and unpacked with tar, since ADD does not extract remote archives.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS backend-build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS backend-build
 ARG BACKEND_REF
 ARG TARGETARCH
 USER root
@@ -43,7 +43,7 @@ RUN APP_CONFIG_TYPE=file:prod yarn build --concurrency 1
 # Leave a <base> placeholder for the nginx sub_filter
 RUN sed -i -E 's|<base [^>]*>||; s|<head>|<head><base>|' packages/webapp/dist/index.html
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ARG TARGETARCH
 USER root
 # nginx is not in the base image. Unpinned, so record the installed version in the PR.

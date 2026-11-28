@@ -30,7 +30,7 @@ Not needed: `defaults/`, `root/`. `DOWNSTREAM_CHANGES.md` not needed (not a FROM
 
 ## 3. Base image
 
-- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Why: SteamCMD needs 32-bit libs (`lib32gcc-s1`, `lib32stdc++6`, `lib32z1`) and Ubuntu multiverse, which `apps/steamcmd` already sets up on the ubuntu base.
 - Alternative considered: `FROM ghcr.io/trueforge-org/steamcmd:<tag>`. Rejected for now: no sibling uses `steamcmd` as a `FROM` base and the published tag/digest scheme was not checked (open question, section 10).
 - Closest sibling: `apps/steamcmd` (same family, same base, same start-script pattern).

@@ -32,7 +32,7 @@ No `defaults/` unless the policy file needs a seeded default (UNVERIFIED; the ch
 
 ## 3. Base image
 
-- Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, copied from `apps/hishtory-server/Dockerfile`.
+- Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, copied from `apps/hishtory-server/Dockerfile`.
 - Closest sibling: `apps/hishtory-server` (Go built in an ubuntu `AS builder` stage, then `COPY --from=builder`).
 - Go toolchain: `apps/ubuntu/docker-bake.hcl` sets `GO_VERSION` default `1.27.4`, which satisfies `go 1.26.0`. `apps/ubuntu/Dockerfile` is single-stage and installs Go into the image (as `apps/hishtory-server` relies on); the builder should still check `go version`.
 

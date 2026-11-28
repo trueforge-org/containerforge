@@ -29,7 +29,7 @@ No `defaults/` unless the server needs a seed config (decide after the first dow
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:<VERSION>` (the `apps/steamcmd` image). The steamcmd image already ships SteamCMD (`/usr/local/share/steamcmd/steamcmd.sh`), 32-bit steamcmd and runs as `apps`. Closest sibling: `apps/steamcmd`. The steamcmd image's own digest is not in this repo; pin it from the published image before merge (UNVERIFIED digest). Its ubuntu base is `ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/steamcmd:<VERSION>` (the `apps/steamcmd` image). The steamcmd image already ships SteamCMD (`/usr/local/share/steamcmd/steamcmd.sh`), 32-bit steamcmd and runs as `apps`. Closest sibling: `apps/steamcmd`. The steamcmd image's own digest is not in this repo; pin it from the published image before merge (UNVERIFIED digest). Its ubuntu base is `ghcr.io/trueforge-org/ubuntu:26.4@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 ## 4. Dockerfile
 

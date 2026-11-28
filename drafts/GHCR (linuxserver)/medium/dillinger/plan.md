@@ -35,7 +35,7 @@ No `defaults/`: the `configs/` defaults come from the tarball and are seeded at 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Deviation from the draft: the draft says `python-node`. The repo rule in `.github/agents/container-porter.agent.md` maps "Node" to `ubuntu`, and sibling Node-only apps (`apps/pairdrop`, `apps/it-tools`) use ubuntu. `python-node` is for images that need Python and Node. Dillinger has no Python step, so `ubuntu` is used. The ubuntu base already ships Node 26.13.1 and npm.
 

@@ -34,7 +34,7 @@ No `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md`: this image is not a
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The upstream image is `scratch`, but we need a `USER apps` runtime with `/config` and a glibc binary, which the ubuntu base provides. The gnu asset is glibc-linked, so ubuntu is the right base. Closest sibling: `apps/adguardhome-sync` (prebuilt release tarball on ubuntu).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The upstream image is `scratch`, but we need a `USER apps` runtime with `/config` and a glibc binary, which the ubuntu base provides. The gnu asset is glibc-linked, so ubuntu is the right base. Closest sibling: `apps/adguardhome-sync` (prebuilt release tarball on ubuntu).
 
 ## 4. Dockerfile
 

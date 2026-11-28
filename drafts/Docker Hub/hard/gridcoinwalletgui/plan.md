@@ -34,7 +34,7 @@ apps/gridcoinwalletgui/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/kasmvnc:<VERSION from apps/kasmvnc/docker-bake.hcl, currently 1.5.2>@sha256:<UNVERIFIED: digest of the published kasmvnc image; take it from ghcr.io after kasmvnc publishes, or copy the tag form used by other consumers once one exists>`. No app in the repo consumes kasmvnc yet, so the digest cannot be copied from a sibling. Fallback: ubuntu base `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus `xvfb`, `x11vnc`, `novnc`, `openbox` from apt. Preference is kasmvnc (it already solves rootless VNC). Closest sibling: `apps/kasmvnc` itself, `apps/steamcmd` for download-and-verify style.
+`FROM ghcr.io/trueforge-org/kasmvnc:<VERSION from apps/kasmvnc/docker-bake.hcl, currently 1.5.2>@sha256:<UNVERIFIED: digest of the published kasmvnc image; take it from ghcr.io after kasmvnc publishes, or copy the tag form used by other consumers once one exists>`. No app in the repo consumes kasmvnc yet, so the digest cannot be copied from a sibling. Fallback: ubuntu base `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus `xvfb`, `x11vnc`, `novnc`, `openbox` from apt. Preference is kasmvnc (it already solves rootless VNC). Closest sibling: `apps/kasmvnc` itself, `apps/steamcmd` for download-and-verify style.
 
 ## 4. Dockerfile
 

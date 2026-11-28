@@ -27,7 +27,7 @@ Possibly `defaults/openssl_legacy.cnf` (upstream sets `OPENSSL_CONF=/etc/openssl
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Ruby is not a ContainerForge base. Use a multi-stage build: a build stage on the same ubuntu image (apt `ruby`, `ruby-dev`, `build-essential`, `nodejs`, `yarnpkg`, `libpq-dev`, `libyaml-dev`, `git`), then `COPY --from` into a final ubuntu stage with only runtime packages. UNVERIFIED: Ubuntu 26.04 ruby apt version versus upstream's pinned Ruby 4.0.10 (Gemfile/.ruby-version must be checked; if too old, install Ruby from source or `ruby-install` into `/usr/local` in the build stage). Closest sibling: `apps/bookstack` (PHP web app seeded from `/defaults`, DB dependency); `apps/mastodon` (also Rails) is the nearest Rails precedent and should be read for gem/asset handling before porting.
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Ruby is not a ContainerForge base. Use a multi-stage build: a build stage on the same ubuntu image (apt `ruby`, `ruby-dev`, `build-essential`, `nodejs`, `yarnpkg`, `libpq-dev`, `libyaml-dev`, `git`), then `COPY --from` into a final ubuntu stage with only runtime packages. UNVERIFIED: Ubuntu 26.04 ruby apt version versus upstream's pinned Ruby 4.0.10 (Gemfile/.ruby-version must be checked; if too old, install Ruby from source or `ruby-install` into `/usr/local` in the build stage). Closest sibling: `apps/bookstack` (PHP web app seeded from `/defaults`, DB dependency); `apps/mastodon` (also Rails) is the nearest Rails precedent and should be read for gem/asset handling before porting.
 
 ## 4. Dockerfile
 

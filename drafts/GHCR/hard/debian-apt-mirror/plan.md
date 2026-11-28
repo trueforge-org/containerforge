@@ -33,7 +33,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-Draft proposes ubuntu alone. Proposed base: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` for serving the mirror over HTTP, since apache2 runs as root and does not suit a rootless read-only image. apt-mirror is installed on top of the base. If the nginx base is not a fit, use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` and serve with nginx from apt (UNVERIFIED that the nginx base has an usable config path; read `apps/it-tools` or `apps/theme-park` first). Closest sibling: `apps/it-tools` (nginx on trueforge base).
+Draft proposes ubuntu alone. Proposed base: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` for serving the mirror over HTTP, since apache2 runs as root and does not suit a rootless read-only image. apt-mirror is installed on top of the base. If the nginx base is not a fit, use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` and serve with nginx from apt (UNVERIFIED that the nginx base has an usable config path; read `apps/it-tools` or `apps/theme-park` first). Closest sibling: `apps/it-tools` (nginx on trueforge base).
 
 ## 4. Dockerfile
 

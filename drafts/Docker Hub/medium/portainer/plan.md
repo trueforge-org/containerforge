@@ -36,7 +36,7 @@ No `defaults/`, `etc/`, `health/`, `root/` needed (the app creates its own data 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, the final stage and the download stage. Portainer is a static Go binary plus a UI bundle, so ubuntu only needs `curl` and `tar` (already in the base). Closest siblings: a prebuilt-binary app on ubuntu such as `apps/adguardhome-sync` (binary, `defaults/`, `start.sh`), and `apps/it-tools` / `apps/theme-park` for static UI assets.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, the final stage and the download stage. Portainer is a static Go binary plus a UI bundle, so ubuntu only needs `curl` and `tar` (already in the base). Closest siblings: a prebuilt-binary app on ubuntu such as `apps/adguardhome-sync` (binary, `defaults/`, `start.sh`), and `apps/it-tools` / `apps/theme-park` for static UI assets.
 
 ## 4. Dockerfile
 

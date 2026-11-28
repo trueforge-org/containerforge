@@ -38,7 +38,7 @@ Prefer no `defaults/`: extract `docker/rootfs/etc/nginx` and `letsencrypt.ini` f
 
 ## 3. Base image
 
-Final stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Node for the backend, Python for certbot, matching the draft). Build stage for OpenResty: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS openresty`. Frontend and backend dependency build run in a `python-node` build stage (same Node ABI as runtime for `sqlite3`/`better-sqlite3`). Closest siblings: `apps/changedetection` and `apps/budge` (python-node), `apps/nginx` (nginx paths), `apps/kasmvnc` (multi-stage build plus an nginx started at runtime).
+Final stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Node for the backend, Python for certbot, matching the draft). Build stage for OpenResty: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS openresty`. Frontend and backend dependency build run in a `python-node` build stage (same Node ABI as runtime for `sqlite3`/`better-sqlite3`). Closest siblings: `apps/changedetection` and `apps/budge` (python-node), `apps/nginx` (nginx paths), `apps/kasmvnc` (multi-stage build plus an nginx started at runtime).
 
 ## 4. Dockerfile
 

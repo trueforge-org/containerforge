@@ -35,7 +35,7 @@ apps/wisemapping/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: the draft proposed `java17`, but the backend is compiled for Java 27 (`<java.version>27</java.version>`), and no ContainerForge `java27` exists (java8/11/17/21/25 only; verified `apps/`). The runtime JRE 27 is therefore installed from the Temurin tarball like `apps/java25/Dockerfile` does, and nginx comes from apt on ubuntu. Closest siblings: `apps/java25` (Temurin install) and `apps/it-tools` / `apps/theme-park` (nginx). Build stages use `eclipse-temurin:27-jdk` style tooling: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb... AS backend-build` with the Temurin JDK 27 tarball and `apt-get install maven`, and `... AS frontend-build` with Node 24.
 

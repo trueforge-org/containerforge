@@ -35,7 +35,7 @@ No `defaults/`, `etc/`, `health/` needed: Nexus seeds its own `/config` content.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: the tarball carries its own Temurin 21 JDK for both architectures, so no `java*` base is required (and `java17` would be too old for 3.98). Using `java21` as base would duplicate a JDK. Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu), with `apps/nzbhydra2` for a JVM app.
 

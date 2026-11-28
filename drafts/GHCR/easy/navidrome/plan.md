@@ -35,7 +35,7 @@ Not needed: `defaults/` (Navidrome creates its database on first start, UNVERIFI
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The upstream final stage is alpine, but the release binary is a static glibc build (upstream's final build stage verifies `xx-verify --static`), so it runs on Ubuntu. Closest sibling: `apps/adguardhome-sync` (Go binary in `/app`, port 8080).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The upstream final stage is alpine, but the release binary is a static glibc build (upstream's final build stage verifies `xx-verify --static`), so it runs on Ubuntu. Closest sibling: `apps/adguardhome-sync` (Go binary in `/app`, port 8080).
 
 ## 4. Dockerfile
 

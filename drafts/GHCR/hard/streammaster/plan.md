@@ -32,8 +32,8 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base). No `etc/` or `health/`
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. ContainerForge has no .NET runtime base, so the app runtime is installed with apt on ubuntu.
-- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build` with the .NET 9 SDK and Node.js from apt (UNVERIFIED that the ubuntu 26.04 archive carries `dotnet-sdk-9.0`; if not, use the Microsoft apt repo, which needs a pinned key).
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. ContainerForge has no .NET runtime base, so the app runtime is installed with apt on ubuntu.
+- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build` with the .NET 9 SDK and Node.js from apt (UNVERIFIED that the ubuntu 26.04 archive carries `dotnet-sdk-9.0`; if not, use the Microsoft apt repo, which needs a pinned key).
 - Closest sibling: `apps/webgrabplus` (dotnet 9 runtime on ubuntu, installed with `dotnet-install.sh -c 9.0 --runtime dotnet` into `/app/dotnet`, not apt; also an option here if apt packages are missing). `apps/fenrus` does not exist in `apps/` yet (only a plan), so it is not a precedent.
 
 ## 4. Dockerfile

@@ -32,7 +32,7 @@ Never `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. No runtime image is needed (the draft's "ubuntu alone" choice): the upstream binary is a self-contained Rust build from the release tarball.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. No runtime image is needed (the draft's "ubuntu alone" choice): the upstream binary is a self-contained Rust build from the release tarball.
 
 Closest sibling: `apps/adguardhome-sync` (prebuilt tarball for `TARGETARCH`, extracted into `/app`, `USER apps`, `COPY --chmod=0755 . /`, `VOLUME /config`).
 

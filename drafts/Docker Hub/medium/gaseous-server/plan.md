@@ -32,7 +32,7 @@ No `defaults/` unless the app needs a template config (UNVERIFIED). No `root/`. 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for both the build stage and the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for both the build stage and the final stage.
 
 Why: .NET 8 is not in ContainerForge (no dotnet app in `apps/` uses the 8.0 runtime). The upstream `aspnet:8.0` and `sdk:8.0` images are not used. Instead the SDK is installed with the official `dotnet-install.sh`, the same way `apps/webgrabplus/Dockerfile` installs .NET (`curl https://dot.net/v1/dotnet-install.sh` with `--install-dir`). Closest sibling: `apps/webgrabplus` (dotnet on ubuntu) and `apps/mariadb` (the dependency).
 

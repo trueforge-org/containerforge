@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 Reason: no language runtime is needed. The draft's "ubuntu alone is enough" holds. Closest sibling: `apps/valkey` (same kind of in-memory server, same `start.sh` pattern, apt install from a vendor repo, pinned package version). `apps/valkey` does not ship the JSON module, so it cannot replace this image.
 
 ## 4. Dockerfile

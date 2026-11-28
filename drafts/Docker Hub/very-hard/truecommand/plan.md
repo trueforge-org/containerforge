@@ -27,7 +27,7 @@ Not applicable for now: no buildable layout exists until the blockers in section
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` is the default base the draft names. The upstream image (`docker.io/ixsystems/truecommand:3.3.0`) is the only artifact, and its base OS is UNVERIFIED. Closest sibling: none found in `apps/` for a closed-source monitoring product.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` is the default base the draft names. The upstream image (`docker.io/ixsystems/truecommand:3.3.0`) is the only artifact, and its base OS is UNVERIFIED. Closest sibling: none found in `apps/` for a closed-source monitoring product.
 
 ## 4. Dockerfile
 

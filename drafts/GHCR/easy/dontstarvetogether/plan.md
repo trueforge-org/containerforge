@@ -34,7 +34,7 @@ No `defaults/`, `etc/` or `health/`: nothing needs seeding beyond what start.sh 
 ## 3. Base image
 
 - FROM `ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`. Digest: UNVERIFIED. The steamcmd image is built by CI and no `apps/*/Dockerfile` in this repo consumes it yet, so take the digest from the published manifest at build time, not from memory.
-- Foundation is `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (through steamcmd).
+- Foundation is `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (through steamcmd).
 - Closest sibling: `apps/steamcmd` (the steamcmd base; its start.sh already seeds `/config/Steam/steamcmd` and installs app IDs from `STEAM_APP_IDS`). No other game server in `apps/` uses it yet.
 - Rationale: steamcmd provides the 32-bit runtime and the seeded SteamCMD, so this image needs only a start script.
 

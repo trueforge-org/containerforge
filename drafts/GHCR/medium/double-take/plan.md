@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). The upstream `.build
 
 ## 3. Base image
 
-Runtime: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`. Node in the base is 24 (per `apps/budge` comment, UNVERIFIED for the exact version). The fork needs Node 16 for `better-sqlite3` and `canvas`. This is the main risk (section 10). Closest siblings: `apps/budge` (node on python-node), `apps/changedetection`. Build stage: a `FROM` of the same base, or of `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` if a node 16 toolchain is installed from a pinned source. Decide after the spike in section 10.
+Runtime: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`. Node in the base is 24 (per `apps/budge` comment, UNVERIFIED for the exact version). The fork needs Node 16 for `better-sqlite3` and `canvas`. This is the main risk (section 10). Closest siblings: `apps/budge` (node on python-node), `apps/changedetection`. Build stage: a `FROM` of the same base, or of `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` if a node 16 toolchain is installed from a pinned source. Decide after the spike in section 10.
 
 ## 4. Dockerfile
 

@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 - Why: the upstream binary is a static Go build from a release tarball, so ubuntu is enough. The Python tooling (ansible) needs `python3` and `python3-venv`; `apps/python` is the alternative if ubuntu lacks them at the pinned release (check with `apt-cache policy python3-venv` in a build round).
 - Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on ubuntu, `COPY --chmod=0755 . /`, `VOLUME /config`).
 

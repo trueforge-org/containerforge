@@ -30,7 +30,7 @@ No `defaults/`, `etc/` or `health/` needed unless the app reads a config file (U
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (porter table: Go final stage maps to ubuntu). Closest siblings: `apps/adguardhome-sync` (ubuntu, `USER apps`, `COPY --chmod=0755 . /`) and `apps/bookstack` (ubuntu with many apt packages).
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (porter table: Go final stage maps to ubuntu). Closest siblings: `apps/adguardhome-sync` (ubuntu, `USER apps`, `COPY --chmod=0755 . /`) and `apps/bookstack` (ubuntu with many apt packages).
 
 Build stage: the porter rule says the Go binary must be built in a dedicated stage. Use a Go image on Debian/Ubuntu (not alpine, so the binary is glibc and matches the final stage). Candidate: `golang:1.22` (version from upstream builder). Pin tag and digest, which are UNVERIFIED in this run. Go version must satisfy the module's `go` directive (UNVERIFIED; README says Go 1.22+).
 

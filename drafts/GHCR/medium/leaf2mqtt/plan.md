@@ -32,7 +32,7 @@ No `defaults/` (the operator supplies the config; nothing confirmed to seed). No
 
 ## 3. Base image
 
-- Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Upstream uses `FROM dart` (unpinned) and `FROM scratch`; scratch is replaced, because ContainerForge runs on ubuntu and needs `USER apps`, `/config` and `--read-only --tmpfs /tmp`.
+- Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Upstream uses `FROM dart` (unpinned) and `FROM scratch`; scratch is replaced, because ContainerForge runs on ubuntu and needs `USER apps`, `/config` and `--read-only --tmpfs /tmp`.
 - Closest sibling for a compiled-binary build stage: `apps/hishtory-server` (ubuntu `AS builder`, `COPY --from=builder`).
 - Dart SDK in the build stage: not in any ContainerForge base. Must be installed in the builder from the official Dart archive with SHA-256 verification. Version: must satisfy `<3.0.0`, so a Dart 2.x SDK (UNVERIFIED which 2.x release builds v0.6 and whether it is still downloadable).
 

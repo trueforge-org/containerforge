@@ -25,7 +25,7 @@ No `root/`, no `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the draft's alternative `java17` is unnecessary if the vendor package pulls its own Java as a dependency; the noble index's `ecodmsserver` Depends list has no Java package, so apt does not install one; whether the package ships its own JVM is UNVERIFIED). Vendor packages target Ubuntu 24.04 `noble`, so Ubuntu 26.04 compatibility is UNVERIFIED. Closest sibling: `apps/nextcloud-fpm` is not analogous; for multi-service in a single container look at `apps/unifi-network-application` (Java + bundled MongoDB handling) and `apps/postgresql` for DB start logic.
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the draft's alternative `java17` is unnecessary if the vendor package pulls its own Java as a dependency; the noble index's `ecodmsserver` Depends list has no Java package, so apt does not install one; whether the package ships its own JVM is UNVERIFIED). Vendor packages target Ubuntu 24.04 `noble`, so Ubuntu 26.04 compatibility is UNVERIFIED. Closest sibling: `apps/nextcloud-fpm` is not analogous; for multi-service in a single container look at `apps/unifi-network-application` (Java + bundled MongoDB handling) and `apps/postgresql` for DB start logic.
 
 ## 4. Dockerfile
 

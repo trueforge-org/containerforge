@@ -32,7 +32,7 @@ No `defaults/` or `etc/`. No `DOWNSTREAM_CHANGES.md`: no ContainerForge image us
 
 `FROM ghcr.io/trueforge-org/steamcmd:<steamcmd VERSION>@sha256:<digest>`. The digest is not yet known: the steamcmd image must be published to GHCR before this app can build (UNVERIFIED that it is published). Closest sibling: `apps/steamcmd` (SteamCMD with `lib32` packages, `/config` owned by `apps`, `start.sh` with `+` arguments).
 
-Fallback if the steamcmd image is not published: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` and copy the SteamCMD pieces the way `apps/steamcmd/Dockerfile` installs them. This increases the Dockerfile scope and needs review.
+Fallback if the steamcmd image is not published: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` and copy the SteamCMD pieces the way `apps/steamcmd/Dockerfile` installs them. This increases the Dockerfile scope and needs review.
 
 ## 4. Dockerfile
 

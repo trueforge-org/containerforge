@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md`. The wrapper's `/scripts/`, `/conf/`, `/i
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The app is a desktop program, so the base is plain Ubuntu userland with apt. No java, python or node base fits.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. The app is a desktop program, so the base is plain Ubuntu userland with apt. No java, python or node base fits.
 
 Closest sibling: none that runs a desktop. `apps/ubuntu` is the base itself; for a GUI with a VNC front end, `apps/kasm`, `apps/kasmvnc` and `apps/rdesktop` exist and should be reviewed before writing the Dockerfile (contents not reviewed in this plan: UNVERIFIED fit). No app in `apps/` uses novnc, x11vnc or Xvfb. The ich777 `novnc-baseimage` is not used: it is amd64 only, Debian bookworm, and not a ContainerForge base.
 

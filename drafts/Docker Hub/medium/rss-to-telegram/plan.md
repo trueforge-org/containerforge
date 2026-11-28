@@ -33,7 +33,7 @@ No `defaults/` (config comes from env). No `etc/`, `health/`, `root/`. No `DOWNS
 
 ## 3. Base image
 
-- Build and final stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (node sibling, as the draft says). Alternative: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (has Node 26.13.1, no Python). Pick the ubuntu base if Python is not needed; this app is Node only.
+- Build and final stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (node sibling, as the draft says). Alternative: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (has Node 26.13.1, no Python). Pick the ubuntu base if Python is not needed; this app is Node only.
 - Node version in `python-node` is UNVERIFIED: `apps/budge` comments say "Node 24" for its base, so check `node --version` in the base before building.
 - Closest siblings: `apps/budge` (Node app on `python-node`, `/config` for the SQLite DB via `start.sh`), `apps/changedetection` (node).
 

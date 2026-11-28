@@ -34,7 +34,7 @@ No `root/` (s6 `root/` is not used; processes are started by `start.sh`). No `DO
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (generic userland; no sibling for SDR). Closest sibling for process-model: `apps/tvheadend` / `apps/oscam` (hardware-adjacent), but none exercises USB SDRs. Because of the Python ABI blocker the base must provide Python 3.12 next to the system Python (route A) or the Python extensions must be rebuilt (route B).
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (generic userland; no sibling for SDR). Closest sibling for process-model: `apps/tvheadend` / `apps/oscam` (hardware-adjacent), but none exercises USB SDRs. Because of the Python ABI blocker the base must provide Python 3.12 next to the system Python (route A) or the Python extensions must be rebuilt (route B).
 
 ## 4. Dockerfile
 

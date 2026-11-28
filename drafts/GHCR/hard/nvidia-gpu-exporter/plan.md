@@ -39,7 +39,7 @@ Sibling for the pattern: `apps/adguardhome-sync` (prebuilt Go binary on ubuntu, 
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (copied from the brief).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (copied from the brief).
 - Why: the binary is a static-ish Go build but it shells out to `nvidia-smi`, and the exec backend expects a normal userland. The ubuntu base is the ContainerForge default for a prebuilt binary.
 - Go build stage: not needed. The binary is downloaded and checksum-verified, not compiled.
 - Closest sibling: `apps/adguardhome-sync`.

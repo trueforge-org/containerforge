@@ -1,6 +1,6 @@
 # Build from source with the .NET SDK from the Ubuntu archive. No .NET base exists in ContainerForge.
 # UNVERIFIED: the apt package strings below come from a sibling plan. Re-check on packages.ubuntu.com before merge.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
 ARG VERSION
 ARG DOTNET_SDK_PACKAGE_VERSION=10.0.114-0ubuntu1~26.04.1
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/src /tmp/publish && \
         -c Release -o /tmp/publish /p:UseAppHost=false
 
 # hadolint ignore=DL3007
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG DOTNET_RUNTIME_PACKAGE_VERSION=10.0.14-0ubuntu1~26.04.1
 

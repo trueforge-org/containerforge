@@ -37,7 +37,7 @@ apps/fireflyiii/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. PHP comes from apt (no php base image in the repo). Closest sibling: `apps/bookstack` (Laravel, php8.5 packages, `/app/www`, symlinks into `/config`), plus `apps/nginx` for the nginx-as-`apps` pattern. Note bookstack currently runs only a queue worker and relies on a s6 init hook; do not copy that part, because this plan runs nginx itself.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. PHP comes from apt (no php base image in the repo). Closest sibling: `apps/bookstack` (Laravel, php8.5 packages, `/app/www`, symlinks into `/config`), plus `apps/nginx` for the nginx-as-`apps` pattern. Note bookstack currently runs only a queue worker and relies on a s6 init hook; do not copy that part, because this plan runs nginx itself.
 
 ## 4. Dockerfile
 

@@ -37,7 +37,7 @@ Sibling patterns: `apps/nginx` (web server config, `docker-entrypoint.d`, `defau
 ## 3. Base image
 
 Choice to make before coding (see section 10):
-- Option A (recommended): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, with php-fpm and nginx installed via apt. Reason: the upstream runtime is untraced, so the versions must be set by us. The ubuntu base is the default for PHP apps (see bookstack).
+- Option A (recommended): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, with php-fpm and nginx installed via apt. Reason: the upstream runtime is untraced, so the versions must be set by us. The ubuntu base is the default for PHP apps (see bookstack).
 - Option B: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`, adding php-fpm via apt. Reason: nginx is already provided. Check that php-fpm installs on top of this base without a new process model.
 
 Either way, do not copy the untraced `ghcr.io/organizr/base` image; the plan does not reuse it.

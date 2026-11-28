@@ -18,8 +18,8 @@ loop=$!
 trap 'kill "$web" "$loop" 2>/dev/null || true' TERM INT
 
 # Stop the container if either process dies.
-wait -n "$web" "$loop" || true
-status=$?
+status=0
+wait -n "$web" "$loop" || status=$?
 kill "$web" "$loop" 2>/dev/null || true
 wait || true
 exit "$status"

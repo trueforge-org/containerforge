@@ -31,14 +31,14 @@ No `defaults/` needed unless a config file is shipped. Use `etc/apt-cacher-ng/ac
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, as the draft says (`Runtime image: none`). Ubuntu alone is enough: `apt-cacher-ng` is a single daemon. Closest sibling: `apps/valkey` (single daemon, apt-installed on ubuntu, pinned package version, `health` dir, `start.sh`). The draft's `Runtime image: none` is confirmed.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, as the draft says (`Runtime image: none`). Ubuntu alone is enough: `apt-cacher-ng` is a single daemon. Closest sibling: `apps/valkey` (single daemon, apt-installed on ubuntu, pinned package version, `health` dir, `start.sh`). The draft's `Runtime image: none` is confirmed.
 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG PACKAGE_VERSION`, `USER root`. Follow the `apps/valkey` pattern exactly:
    ```dockerfile
    # hadolint ignore=DL3007
-   FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+   FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
    ARG VERSION
    ARG PACKAGE_VERSION

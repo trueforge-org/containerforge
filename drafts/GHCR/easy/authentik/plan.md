@@ -35,7 +35,7 @@ The rest of this plan describes `apps/authentik-ldap/`. The same steps apply to 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (from the brief's base table). Fits because the outposts are self-contained release binaries and need only CA certificates and glibc. Closest sibling for a prebuilt-binary ubuntu app: `apps/adguardhome-sync` (prebuilt binary on ubuntu). Upstream's fips-debian base is not needed: the outpost does not require a FIPS base for our purposes, which is a choice to record in the PR (UNVERIFIED that the binary runs without FIPS-only glibc paths).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (from the brief's base table). Fits because the outposts are self-contained release binaries and need only CA certificates and glibc. Closest sibling for a prebuilt-binary ubuntu app: `apps/adguardhome-sync` (prebuilt binary on ubuntu). Upstream's fips-debian base is not needed: the outpost does not require a FIPS base for our purposes, which is a choice to record in the PR (UNVERIFIED that the binary runs without FIPS-only glibc paths).
 
 ## 4. Dockerfile
 

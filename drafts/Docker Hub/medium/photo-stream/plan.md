@@ -34,7 +34,7 @@ No `root/`, no `DOWNSTREAM_CHANGES.md` (not a `FROM` base). `etc/` is not needed
 
 ## 3. Base image
 
-- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Reason: Ruby and Jekyll need apt packages, and the ubuntu base is the generic userland.
+- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Reason: Ruby and Jekyll need apt packages, and the ubuntu base is the generic userland.
 - Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. Reason: the site is static once built, so nginx serves it. The draft's runtime choice is nginx; ubuntu is the fallback only if Jekyll must run at container start (see section 10).
 - Closest siblings: `apps/nginx` (runtime), `apps/it-tools` and `apps/theme-park` (nginx static sites), `apps/adguardhome-sync` (prebuilt binary layout reference only).
 

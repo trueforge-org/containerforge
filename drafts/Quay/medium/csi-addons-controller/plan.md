@@ -30,7 +30,7 @@ No `defaults/`, `etc/` or `health/` needed. No `DOWNSTREAM_CHANGES.md` (not a `F
 
 ## 3. Base image
 
-- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The protocol rule for Go apps: build in a dedicated stage, copy the binary into the ubuntu final stage.
+- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The protocol rule for Go apps: build in a dedicated stage, copy the binary into the ubuntu final stage.
 - Build stage: `quay.io/projectquay/golang:1.26` (upstream's builder image, tag only). Digest UNVERIFIED: pin it at build time. Alternative: the ubuntu base with `golang-go` apt package, as `apps/pwndrop` does. Go 1.26 apt availability on 26.04 UNVERIFIED, so the upstream builder image is preferred.
 - Closest sibling: `apps/pwndrop` (Go build stage, ubuntu final).
 - Draft said "distroless nonroot". ContainerForge uses ubuntu, so distroless is not copied. Runtime user is `apps`, not 65532 (see section 9).

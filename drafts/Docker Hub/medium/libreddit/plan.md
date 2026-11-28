@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/` or `root/`: the app has no config files and no
 ## 3. Base image
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 
 A single static-or-glibc Rust binary runs directly on Ubuntu, so no runtime image is needed. The upstream runtime is `alpine:latest` (musl), which is not used. Closest sibling for a single-binary app: `apps/adguardhome-sync` (prebuilt tarball on ubuntu, `start.sh`, `exec`). Upstream `copy-from` is `no`: the binary is built in an Alpine (musl) image and that stage is not reused.
@@ -48,7 +48,7 @@ A single static-or-glibc Rust binary runs directly on Ubuntu, so no runtime imag
 4. `USER apps` and `COPY --chmod=0755 . /`.
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG TARGETARCH

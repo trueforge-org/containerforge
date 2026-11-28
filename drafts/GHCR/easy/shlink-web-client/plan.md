@@ -33,7 +33,7 @@ No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). No `root/`.
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. The draft names nginx as the runtime image, and the nginx sibling already runs as `apps` with a `/config` seeded config and `/tmp` writable paths. Build stage (only for unzip and checksum): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Closest sibling: `apps/nginx` (static server on nginx) and `apps/it-tools` (static SPA on nginx).
+Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. The draft names nginx as the runtime image, and the nginx sibling already runs as `apps` with a `/config` seeded config and `/tmp` writable paths. Build stage (only for unzip and checksum): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Closest sibling: `apps/nginx` (static server on nginx) and `apps/it-tools` (static SPA on nginx).
 
 The nginx sibling's Dockerfile is the pattern: `USER root` for installs, `USER apps`, `COPY --chmod=0755 . /`. Its `CMD` reads `/config/nginx.conf`, which the base's `docker-entrypoint.d/03-copyconfig.sh` seeds (`cp -n`) together with `/config/sites/default.conf`.
 

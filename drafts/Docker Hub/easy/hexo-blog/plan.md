@@ -35,7 +35,7 @@ No `defaults/`: the starter blog is baked at `/app/hexo-starter` during the buil
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: the draft proposes `python-node`, but the ubuntu base already installs Node (`NODE_VERSION` 26.13.1 in `apps/ubuntu/docker-bake.hcl`, in `/usr/local`), npm, yarn and git (`hexo init` needs git). Python is not needed, so python-node is wasted size. Closest siblings: `apps/it-tools` (npm build on ubuntu), `apps/thelounge` (node app, `start.sh` with `exec`).
 

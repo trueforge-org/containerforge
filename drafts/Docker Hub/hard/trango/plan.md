@@ -33,7 +33,7 @@ apps/trango/
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (Flask API in `/app/venv`, nginx from apt). Build stages: web stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5 AS web` (the React 16 / react-scripts 3.4.1 build) and C++ stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS ws` (g++, boost, openssl). Closest siblings: `apps/kasmvnc` (multi-stage with python-node + ubuntu build stages and nginx in /tmp), `apps/bazarr` (python final stage). Node version shipped in python-node: UNVERIFIED.
+Final stage: `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (Flask API in `/app/venv`, nginx from apt). Build stages: web stage `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5 AS web` (the React 16 / react-scripts 3.4.1 build) and C++ stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS ws` (g++, boost, openssl). Closest siblings: `apps/kasmvnc` (multi-stage with python-node + ubuntu build stages and nginx in /tmp), `apps/bazarr` (python final stage). Node version shipped in python-node: UNVERIFIED.
 
 ## 4. Dockerfile
 

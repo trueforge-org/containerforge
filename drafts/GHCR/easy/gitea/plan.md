@@ -39,7 +39,7 @@ Not needed: `defaults/` (gitea writes its own `app.ini` through the install wiza
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 - Why it fits: a Go release binary has no runtime requirement beyond glibc (confirm, see section 1), and git, curl and CA certificates are already in the base. Upstream's alpine final stage is not needed.
 - Closest sibling: none for gitea. For a single-binary web app on ubuntu with a binary download and `/config` state, use `apps/adguardhome-sync` (same base digest, `curl` + `tar`, `USER apps`, `COPY --chmod=0755 . /`).
 

@@ -34,7 +34,7 @@ Not needed: `defaults/` (Muximux creates its config on first start, UNVERIFIED f
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The Muximux binary is `CGO_ENABLED=0` static, so it runs on glibc Ubuntu; no musl runtime is needed, and the upstream alpine base is not copied. Closest siblings: `apps/adguardhome-sync` (prebuilt Go binary, `/app` binary, port 8080) and `apps/cni-plugins` (release download with ARG TARGETARCH).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The Muximux binary is `CGO_ENABLED=0` static, so it runs on glibc Ubuntu; no musl runtime is needed, and the upstream alpine base is not copied. Closest siblings: `apps/adguardhome-sync` (prebuilt Go binary, `/app` binary, port 8080) and `apps/cni-plugins` (release download with ARG TARGETARCH).
 
 ## 4. Dockerfile
 

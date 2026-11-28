@@ -32,7 +32,7 @@ Exact file list for `apps/fluttercoin-wallet/`:
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build and the final stage. The draft's reason is confirmed: a headless daemon from a zip needs only the ubuntu base.
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build and the final stage. The draft's reason is confirmed: a headless daemon from a zip needs only the ubuntu base.
 - Closest sibling: any apps/* with an ubuntu base and a single prebuilt binary, for example `apps/adguardhome-sync` (prebuilt binary on ubuntu). Check its layout before writing.
 - Not `ich777/novnc-baseimage`: the upstream base is a Debian buster desktop image. It is not used.
 

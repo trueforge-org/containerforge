@@ -26,7 +26,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Generic userland, nothing but the vendor package is needed. Ubuntu's own `clamav` apt package will not match 1.5.5, so the vendor .deb is used to keep image version equal to the tag. Closest sibling: `apps/adguardhome-sync` (versioned download) and `apps/valkey` (apt-installed daemon).
 

@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the brief's pinned digest). Go API binary runs on ubuntu, as the draft says.
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the brief's pinned digest). Go API binary runs on ubuntu, as the draft says.
 - Go build stage: `FROM golang:<ver>` with a `// renovate: datasource=docker depName=docker.io/library/golang` annotation. Pick the version the code needs, `UNVERIFIED`. Pin a digest, `UNVERIFIED: digest not looked up`.
 - Node build stage: `FROM node:<lts>` with a renovate annotation, `UNVERIFIED: version and digest`. Use the frontend's required Node version, which needs confirming from `frontend/package.json`.
 - Closest sibling: `apps/pwndrop` (build stage, then runtime stage) and `apps/postgresql` (ubuntu base with a database dependency).
@@ -43,7 +43,7 @@
    - `FROM golang:<ver> AS api-build`: download `https://github.com/souramoo/commentoplusplus/releases/download/${VERSION}/release.tar.gz` (VERSION `v1.8.7`), verify its checksum, extract to `/src`, `cd /src/api && CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -o /out/commento ./...` (exact build target `UNVERIFIED`, mirror `make ${RELEASE}` from upstream `api/Makefile`). Set `GOCACHE=/tmp/go-build`.
    - `FROM node:<ver> AS frontend-build`: copy `/src/frontend`, `npm ci`, run the frontend build from upstream `frontend/Makefile`. Set npm cache to `/tmp`.
    - `FROM ubuntu AS templates-db-build` (or reuse the same stage): run the upstream templates and db `make` steps.
-2. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`:
+2. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`:
    - `USER root`, `apt-get install -y --no-install-recommends ca-certificates`, clean apt lists. Check whether ubuntu already has it (`apt-get` only if missing).
    - `COPY --from=api-build /out/commento /app/commento/commento`, `COPY --from=frontend-build` for the built assets, `COPY --from=templates-db-build` for templates and db output. Target layout under `/app/commento/`, `UNVERIFIED: exact paths the binary expects at runtime`.
    - `ENV COMMENTO_BIND_ADDRESS=0.0.0.0 HOME=/tmp` (keep caches out of `/config`).

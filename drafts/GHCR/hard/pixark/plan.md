@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Why: the upstream steamcmd image is Debian-based, but ContainerForge's rule is the ubuntu base. The closest sibling is `apps/steamcmd`, which installs `steamcmd` from apt on the same ubuntu base. Do not use `ghcr.io/trueforge-org/steamcmd` as `FROM`: `apps/steamcmd/Dockerfile` has no published digest to pin and its `/start.sh` and `/usr/local/bin/steamcmd` wrapper would be overwritten by this app's `start.sh`. Repeat the install instead. Wine and Xvfb are added on top (see section 4).
 

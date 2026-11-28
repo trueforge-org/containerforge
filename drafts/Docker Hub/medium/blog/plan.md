@@ -35,7 +35,7 @@ apps/blog/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: no PHP base exists in the repo; apps such as `apps/bookstack` and `apps/piwigo` install `php8.5-*` from apt on the ubuntu base. This plan uses nginx plus php-fpm (not Apache, which needs root to start cleanly and relies on `.htaccess`). Closest sibling: `apps/bookstack` (PHP on ubuntu), `apps/piwigo`.
 

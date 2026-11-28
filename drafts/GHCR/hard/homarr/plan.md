@@ -36,7 +36,7 @@ No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` for the Node runtime, or `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus a Node install if python-node lacks the Node version needed. Upstream uses Node 24; check the Node version in the python-node base before choosing (UNVERIFIED).
+`FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` for the Node runtime, or `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus a Node install if python-node lacks the Node version needed. Upstream uses Node 24; check the Node version in the python-node base before choosing (UNVERIFIED).
 
 Also needed: `redis-server` and `nginx` from apt in the final image (the upstream copies redis from the redis image, which is not a ContainerForge base). Check `apps/redis-exporter` or the valkey app for redis packaging conventions before choosing (valkey is a Redis fork, not the same binary).
 

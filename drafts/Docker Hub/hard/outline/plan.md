@@ -33,7 +33,7 @@ No `defaults/` (nothing to seed), no `root/`, no `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-Builder and final stage both `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (Node 26.13.1 and `git`/`curl` are already in the base). The draft suggests python-node; not needed, Outline has no Python. Closest sibling: `apps/it-tools` (Node build stage on ubuntu, `corepack`), and `apps/mastodon` for the "required env missing, start a placeholder server" pattern.
+Builder and final stage both `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (Node 26.13.1 and `git`/`curl` are already in the base). The draft suggests python-node; not needed, Outline has no Python. Closest sibling: `apps/it-tools` (Node build stage on ubuntu, `corepack`), and `apps/mastodon` for the "required env missing, start a placeholder server" pattern.
 
 ## 4. Dockerfile
 

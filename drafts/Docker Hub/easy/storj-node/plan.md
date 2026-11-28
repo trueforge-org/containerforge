@@ -34,7 +34,7 @@ apps/storj-node/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: the Go binaries are static enough for glibc (upstream runs them on Debian), and ubuntu already has `unzip`, `ca-certificates` and `curl` (checked in `apps/ubuntu/Dockerfile`). Closest sibling: `apps/adguardhome-sync` (release download, `/app`, `exec` start.sh). Unlike the upstream image there is no supervisor, no updater, and the binaries are baked in at build time.
 

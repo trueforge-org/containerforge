@@ -31,7 +31,7 @@ No `defaults/`, no `root/`, no `DOWNSTREAM_CHANGES.md`. App folder is `passwordp
 
 ## 3. Base image
 
-Final stage `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus a Ruby copied from `docker.io/library/ruby:4.0.10-slim-trixie` (pin its digest when implementing; digest UNVERIFIED here). Debian trixie glibc (2.41) is older than Ubuntu 26.04's, so the copied binaries run. Closest sibling: `apps/mastodon` (Rails on ubuntu with apt Ruby; here apt Ruby is too old).
+Final stage `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus a Ruby copied from `docker.io/library/ruby:4.0.10-slim-trixie` (pin its digest when implementing; digest UNVERIFIED here). Debian trixie glibc (2.41) is older than Ubuntu 26.04's, so the copied binaries run. Closest sibling: `apps/mastodon` (Rails on ubuntu with apt Ruby; here apt Ruby is too old).
 
 ## 4. Dockerfile
 

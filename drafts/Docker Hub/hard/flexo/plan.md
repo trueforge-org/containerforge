@@ -37,7 +37,7 @@ No `defaults/` needed (config comes from env mode, so no file seeding). No `root
 
 ## 3. Base image
 
-Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build` with Rust installed from apt (`cargo rustc`; Ubuntu 26.04's rustc must be recent enough for the dependency set, UNVERIFIED; upstream tests use Rust 1.96, so if apt is older, install via `rustup` pinned to 1.96 with checksum, or use a `rust:1.96` build image). Final stage: the same ubuntu line. No Rust base exists in this repo (`go-runtime` rules are analogous: compile in a build stage, copy with `COPY --from=`). Closest sibling: `apps/adguardhome-sync` for the final layout; `apps/kasmvnc` for build-stage patterns.
+Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build` with Rust installed from apt (`cargo rustc`; Ubuntu 26.04's rustc must be recent enough for the dependency set, UNVERIFIED; upstream tests use Rust 1.96, so if apt is older, install via `rustup` pinned to 1.96 with checksum, or use a `rust:1.96` build image). Final stage: the same ubuntu line. No Rust base exists in this repo (`go-runtime` rules are analogous: compile in a build stage, copy with `COPY --from=`). Closest sibling: `apps/adguardhome-sync` for the final layout; `apps/kasmvnc` for build-stage patterns.
 
 ## 4. Dockerfile
 

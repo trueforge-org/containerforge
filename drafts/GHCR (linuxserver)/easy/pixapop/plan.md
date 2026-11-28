@@ -23,7 +23,7 @@ Cannot be decided until the runtime is confirmed. If the app is a PHP site, `app
 
 ## 3. Base image
 
-- Draft: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`, alternative `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Draft: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`, alternative `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Neither is verified to provide PHP 7. PHP 7 is EOL and is not in ubuntu 26.04 apt (UNVERIFIED for this base). Likely needs a PHP 8.x port of the app, which is a code change upstream of ContainerForge.
 - Closest sibling: `apps/it-tools` or `apps/theme-park` (nginx static) for static parts only.
 

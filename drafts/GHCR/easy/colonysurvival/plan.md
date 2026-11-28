@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/`, `scripts/` (not needed; the start logic is on
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:<digest: UNVERIFIED, read from the registry at build time and pin, do not guess>`. The tag is the `VERSION` of `apps/steamcmd/docker-bake.hcl`. It provides SteamCMD with lib32 libs, `USER apps`, and `/config`. Closest sibling: `apps/steamcmd`. The ubuntu root (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`) is not used directly.
+`FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:<digest: UNVERIFIED, read from the registry at build time and pin, do not guess>`. The tag is the `VERSION` of `apps/steamcmd/docker-bake.hcl`. It provides SteamCMD with lib32 libs, `USER apps`, and `/config`. Closest sibling: `apps/steamcmd`. The ubuntu root (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`) is not used directly.
 
 ## 4. Dockerfile
 

@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/`, `root/`. A web terminal needs a wrapper proce
 
 ## 3. Base image
 
-Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Final stage: the same. Source build on ubuntu, copy the installed emulator tree into the final stage. Closest sibling: `apps/pwndrop` (build stage then runtime stage). The upstream phusion/runit init is dropped.
+Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Final stage: the same. Source build on ubuntu, copy the installed emulator tree into the final stage. Closest sibling: `apps/pwndrop` (build stage then runtime stage). The upstream phusion/runit init is dropped.
 
 ## 4. Dockerfile
 

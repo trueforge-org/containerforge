@@ -40,7 +40,7 @@ Do not create `root/`. Do not create `DOWNSTREAM_CHANGES.md` (not a `FROM` base)
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (same as `apps/xvfb`, `apps/valkey`, `apps/cni-plugins`; generic Debian/Ubuntu userland per repo base table).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (same as `apps/xvfb`, `apps/valkey`, `apps/cni-plugins`; generic Debian/Ubuntu userland per repo base table).
 - Why it fits: the official MKVToolNix apt repo has a `resolute` (26.04) component, so the packages match the base's release. No compile is needed, which removes the draft's long build.
 - Not the upstream `jlesage/baseimage-gui:alpine-3.20` base (Alpine/musl; s6 layout not available on the trueforge base; UNVERIFIED whether the trueforge ubuntu base ships `add-pkg`/`set-cont-env`, check before use).
 - Closest siblings: `apps/xvfb` (Xvfb on the same base), `apps/kasmvnc` (VNC/web on the same base; do not copy its `root/` dir).

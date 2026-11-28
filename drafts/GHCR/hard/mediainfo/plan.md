@@ -33,7 +33,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage and the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage and the final stage.
 
 Why it fits: the upstream image is a jlesage Alpine GUI base over VNC. ContainerForge has no GUI base, so the GUI stack (Qt plus a VNC server and web proxy) is built on ubuntu. Closest sibling for a GUI/VNC app on ubuntu: `apps/kasmvnc`. For a compiled-from-source build stage: `apps/adguardhome-sync` (binary copy pattern) and `apps/kasmvnc` (multi-stage build).
 

@@ -32,7 +32,7 @@ No `defaults/` (stateless). Not a `FROM` base for other apps, so no `DOWNSTREAM_
 
 ## 3. Base image
 
-Build stage and final stage on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (Go 1.27.4 is already in the base; `go-runtime.instructions.md` applies: Go compiled in a dedicated build stage, `GOCACHE` in `/tmp`). Closest siblings: `apps/adguardhome-sync` (Go binary on ubuntu) and `apps/calibre-web` (the only existing app that installs Chromium).
+Build stage and final stage on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (Go 1.27.4 is already in the base; `go-runtime.instructions.md` applies: Go compiled in a dedicated build stage, `GOCACHE` in `/tmp`). Closest siblings: `apps/adguardhome-sync` (Go binary on ubuntu) and `apps/calibre-web` (the only existing app that installs Chromium).
 
 ## 4. Dockerfile
 

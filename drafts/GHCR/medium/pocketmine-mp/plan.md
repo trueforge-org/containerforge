@@ -34,7 +34,7 @@ Not needed: `defaults/` (no seeded config is required; the server creates its da
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. PHP is not a ContainerForge runtime base, so PHP comes from a build stage (amd64: downloaded binary; arm64: compiled) and is copied into the ubuntu final stage. Upstream builds on ubuntu:22.04; the compiled PHP must run on 26.04 (glibc forward compatibility: UNVERIFIED, test in the probe).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. PHP is not a ContainerForge runtime base, so PHP comes from a build stage (amd64: downloaded binary; arm64: compiled) and is copied into the ubuntu final stage. Upstream builds on ubuntu:22.04; the compiled PHP must run on 26.04 (glibc forward compatibility: UNVERIFIED, test in the probe).
 
 Closest siblings: `apps/bookstack` (PHP stack on ubuntu:26.04, `WORKDIR /config`, `USER apps`) and `apps/valkey` (compiled binary plus `start.sh`).
 

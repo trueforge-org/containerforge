@@ -30,7 +30,7 @@
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Upstream uses `ubi9-minimal`; the ContainerForge rule is an ubuntu-based final stage (go-runtime rule).
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Upstream uses `ubi9-minimal`; the ContainerForge rule is an ubuntu-based final stage (go-runtime rule).
 - Build stage: `FROM golang:1.26@sha256:<digest>` (UNVERIFIED digest: resolve with `docker buildx imagetools inspect golang:1.26` at implementation time; v0.17.0 upstream uses `golang:1.26`). Pinning to the same Go minor as upstream v0.17.0 avoids surprises.
 - Closest Go siblings to check before writing: `apps/go-yq`, `apps/kube-sa-proxy` (not read in this plan; confirm their Dockerfile shape first).
 

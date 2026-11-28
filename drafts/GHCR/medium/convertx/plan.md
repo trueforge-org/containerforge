@@ -33,14 +33,14 @@
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Upstream uses debian:testing-slim, so ubuntu is a choice, not a copy. The draft calls ubuntu a guess; the reason for ubuntu is that every apt package in the list must be present on it (section 1).
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Upstream uses debian:testing-slim, so ubuntu is a choice, not a copy. The draft calls ubuntu a guess; the reason for ubuntu is that every apt package in the list must be present on it (section 1).
 - Build stage: bun. `oven/bun:1.4.4-slim` (upstream) pinned with a renovate annotation, or a bun binary installed on the ubuntu build stage. `UNVERIFIED: whether bun 1.4.4 runs on ubuntu`.
 - Closest sibling: `apps/python` (apt-based ubuntu with a runtime) and `apps/changedetection` (node or python-node with apt packages). The draft suggests `python-node`; that base has python and node but not the converter set, so `ubuntu` is the better fit.
 
 ## 4. Dockerfile
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `ARG BUN_VERSION=1.4.4`.
-2. Build stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`: install bun (pinned, arch-aware), then `curl -fL https://github.com/C4illin/ConvertX/archive/refs/tags/v${VERSION}.tar.gz | tar xz --strip-components=1`, verify with a committed SHA-256, `bun install --frozen-lockfile`, `bun run build:bin` (or keep the source and run `bun run` from `/app`, `UNVERIFIED: whether the compiled binary is needed`). Set `BUN_INSTALL_CACHE_DIR=/tmp/bun-cache`.
+2. Build stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build`: install bun (pinned, arch-aware), then `curl -fL https://github.com/C4illin/ConvertX/archive/refs/tags/v${VERSION}.tar.gz | tar xz --strip-components=1`, verify with a committed SHA-256, `bun install --frozen-lockfile`, `bun run build:bin` (or keep the source and run `bun run` from `/app`, `UNVERIFIED: whether the compiled binary is needed`). Set `BUN_INSTALL_CACHE_DIR=/tmp/bun-cache`.
 3. Install the converter apt list in the final stage. Pin each package version only where it matters. The brief says to pin apt packages and check against `VERSION`; here the converters are not versioned with convertx, so record the chosen ubuntu archive version in the comment, `UNVERIFIED`.
 4. VTracer: download the arch-matched musl tarball from the GitHub release (`${TARGETARCH}` → `aarch64` or `x86_64`), verify with a SHA-256 recorded in the Dockerfile, `tar -xz -C /usr/local/bin vtracer`, `chmod 0755`. Ship its license.
 5. `markitdown[all]` via pipx: install `pipx` and `python3-pip`, set `PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin`. Or pip into a venv under `/opt`, `UNVERIFIED: which the ubuntu 26.04 archive supports`.

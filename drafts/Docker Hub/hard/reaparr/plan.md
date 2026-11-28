@@ -31,7 +31,7 @@ No `defaults/` unless a seed config is needed. No `root/`. No `DOWNSTREAM_CHANGE
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Build stages use upstream's own build images (frontend `oven/bun:1.4.0` Debian variant not Alpine, backend `mcr.microsoft.com/dotnet/sdk:10.0`) pinned by digest at port time (UNVERIFIED digests and the existence of the non-alpine bun tag). Fits because the final image only needs the ASP.NET runtime and media tools, and ubuntu is glibc, which removes upstream's glibc-donor hack. Closest siblings: `apps/jackett` (dotnet binary on ubuntu), `apps/kasmvnc` (multi-stage with a node build).
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Build stages use upstream's own build images (frontend `oven/bun:1.4.0` Debian variant not Alpine, backend `mcr.microsoft.com/dotnet/sdk:10.0`) pinned by digest at port time (UNVERIFIED digests and the existence of the non-alpine bun tag). Fits because the final image only needs the ASP.NET runtime and media tools, and ubuntu is glibc, which removes upstream's glibc-donor hack. Closest siblings: `apps/jackett` (dotnet binary on ubuntu), `apps/kasmvnc` (multi-stage with a node build).
 
 ## 4. Dockerfile
 

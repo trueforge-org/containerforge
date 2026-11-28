@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md`: nothin
 ## 3. Base image
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 
 The draft proposes `python-node`. That is not needed: there is no Python code. The repo table maps Node apps to `ghcr.io/trueforge-org/ubuntu`, and `apps/docusaurus` already runs `npm` on that base, so Node is expected to be present there. UNVERIFIED: the Node and npm versions in the ubuntu base, and whether `yarn` is present. If Node is missing or too old for `package.json`, switch to `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Node 24 per `apps/budge`), and say so in the PR.
@@ -49,7 +49,7 @@ Closest sibling: `apps/docusaurus` (ubuntu, Node tooling, `/tmp` caches, read-on
 5. `USER apps` and `COPY --chmod=0755 . /`.
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 USER root

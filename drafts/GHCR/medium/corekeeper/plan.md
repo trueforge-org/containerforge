@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage.
 
 Why: the draft says reuse `apps/steamcmd` and `apps/xvfb`. Both are built on the same ubuntu base and install SteamCMD from the Ubuntu multiverse archive (`apps/steamcmd/Dockerfile`: `steamcmd:i386=0~${VERSION}`). Using that pattern keeps the image glibc Ubuntu and rootless. Closest siblings: `apps/steamcmd` (SteamCMD install and `/config/steamcmd` layout) and `apps/xvfb` (virtual display).
 

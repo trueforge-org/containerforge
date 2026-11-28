@@ -25,7 +25,7 @@
 No root/. No DOWNSTREAM_CHANGES.md (not used as a FROM base).
 
 ## 3. Base image
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Pure PHP app, no language base needed; nginx and PHP come from apt exactly like apps/bookstack (php8.5-* on 26.04). Closest sibling: apps/bookstack (PHP stack) plus apps/kasmvnc (rootless nginx with pid/logs in /tmp).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Pure PHP app, no language base needed; nginx and PHP come from apt exactly like apps/bookstack (php8.5-* on 26.04). Closest sibling: apps/bookstack (PHP stack) plus apps/kasmvnc (rootless nginx with pid/logs in /tmp).
 
 ## 4. Dockerfile
 1. `ARG VERSION`, `ARG TARGETARCH` (arch is unused, the zip is arch-neutral), `USER root`.

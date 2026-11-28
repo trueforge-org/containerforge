@@ -25,7 +25,7 @@ No `defaults/`, no `root/`; no DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
 
-Final: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Build stage on `hexpm/elixir:<ver>-erlang-<ver>-ubuntu-<release>` (glibc build, since the upstream alpine/musl release does not run on glibc Ubuntu; a release built on ubuntu with the same glibc family as the final stage is required). Closest sibling: `apps/clickhouse`/`apps/postgresql` for dependencies; for source builds none exact.
+Final: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Build stage on `hexpm/elixir:<ver>-erlang-<ver>-ubuntu-<release>` (glibc build, since the upstream alpine/musl release does not run on glibc Ubuntu; a release built on ubuntu with the same glibc family as the final stage is required). Closest sibling: `apps/clickhouse`/`apps/postgresql` for dependencies; for source builds none exact.
 
 ## 4. Dockerfile
 

@@ -29,7 +29,7 @@ No `defaults/`, `etc/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md` (nothin
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: the draft says ubuntu alone is enough; PHP comes from apt. Closest sibling: `apps/phpmyadmin` (ubuntu + php8.5 apt packages + `php -S` built-in server, `/app/www/public`) and `apps/adguardhome-sync` for the file layout.
 

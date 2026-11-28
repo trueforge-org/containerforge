@@ -1,6 +1,6 @@
 
 # Draft from plan.md sections 2 to 4. UNVERIFIED and BLOCKER items are marked inline.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
 ARG VERSION
 ARG TARGETARCH
@@ -31,7 +31,7 @@ RUN echo "*** Installing Shoko-WebUI ***" && \
   unzip -q /tmp/webui.zip -d /output/app/shoko-server/webui && \
   rm /tmp/webui.zip
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG TARGETARCH

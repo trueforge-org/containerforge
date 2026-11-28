@@ -33,7 +33,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). No `etc/` unless a c
 
 ## 3. Base image
 
-Proposed: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Proposed: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 Reason: the draft says ubuntu fits and the upstream Debian bullseye base is amd64-only and old. Closest sibling: a closed-source native server on ubuntu, to be picked from `apps/` (not yet chosen; this is an open decision). The needed 32-bit libraries are not confirmed: the upstream Dockerfile has no i386 step, so do not add multiarch unless the server binary's `ldd` output needs it (check in round 1).
 
 ## 4. Dockerfile

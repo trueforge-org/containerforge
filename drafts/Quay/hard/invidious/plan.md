@@ -39,7 +39,7 @@ Not needed: `etc/`, `scripts/`, `health/`, `app/`. `root/` must not be touched.
 
 ## 3. Base image
 
-- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (same as `apps/pwndrop` and `apps/postgresql`).
+- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (same as `apps/pwndrop` and `apps/postgresql`).
 - Build stage: the upstream build (Crystal, OpenSSL) is alpine-based. Two options:
   - **A (recommended, if the static binary runs on glibc):** build stage is `84codes/crystal:1.22.3-alpine@<digest>` (digest UNVERIFIED, must be pinned from the registry at build time), copy `/invidious` out with `COPY --from=`. The result is a static musl binary, which needs no musl at runtime, and it runs on the ubuntu final stage.
   - **B:** build Crystal on ubuntu from the upstream linux tarball (URL and checksum UNVERIFIED). Glibc binary, more work, arm64 UNVERIFIED.

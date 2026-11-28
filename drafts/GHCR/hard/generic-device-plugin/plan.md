@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/`, `root/` needed: the plugin takes all config f
 
 ## 3. Base image
 
-Build stage: `docker.io/library/golang:1.27` (go.mod needs at least 1.25.0; the official image is the build toolchain, not shipped). Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Build stage: `docker.io/library/golang:1.27` (go.mod needs at least 1.25.0; the official image is the build toolchain, not shipped). Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Pinned Go image digest is UNVERIFIED: resolve it at implementation time and pin it. Alternative: `apt-get install golang-go` on the ubuntu build stage, as `apps/pwndrop` does, but the Ubuntu Go version is UNVERIFIED against `go 1.25.0`, so the official image is preferred.
 

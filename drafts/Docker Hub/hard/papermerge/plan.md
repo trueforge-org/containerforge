@@ -30,7 +30,7 @@ No `defaults/` (nginx config is derived from the upstream file with `sed` at bui
 
 ## 3. Base image
 
-Final stage `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (Python app; `python-runtime.instructions.md` applies, `/app/venv` is read-only at runtime). Node stages use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (Node 26.13.1 in the base). Closest siblings: `apps/bazarr` (python base, download + `uv pip install`), `apps/budge` (node build), `apps/mastodon` (placeholder-server pattern). Python 3.15 vs the 3.13 that `poetry.lock` was resolved for is a risk (section 10).
+Final stage `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (Python app; `python-runtime.instructions.md` applies, `/app/venv` is read-only at runtime). Node stages use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (Node 26.13.1 in the base). Closest siblings: `apps/bazarr` (python base, download + `uv pip install`), `apps/budge` (node build), `apps/mastodon` (placeholder-server pattern). Python 3.15 vs the 3.13 that `poetry.lock` was resolved for is a risk (section 10).
 
 ## 4. Dockerfile
 

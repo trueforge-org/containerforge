@@ -17,7 +17,7 @@
 | arm64 | none: amd64 only (Wine base) | draft.md, upstream base |
 | License | UNVERIFIED (no SPDX id for the server or for Wine). The Steam store page is not a license source | — |
 | Checksum | UNVERIFIED | — |
-| Local sibling | `apps/steamcmd` exists: `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, `USER root` for install, `USER apps` at end | apps/steamcmd/Dockerfile (local) |
+| Local sibling | `apps/steamcmd` exists: `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, `USER root` for install, `USER apps` at end | apps/steamcmd/Dockerfile (local) |
 
 Upstream Dockerfile reviewed: yes (two branches). Checksum source: none.
 
@@ -34,7 +34,7 @@ Do not use `root/`. Add `DOWNSTREAM_CHANGES.md` only if this app becomes a FROM 
 
 ## 3. Base image
 
-- Runtime: `FROM ghcr.io/trueforge-org/steamcmd:<tag>` (tag from `apps/steamcmd/docker-bake.hcl` `VERSION`; digest UNVERIFIED, not available in the repo). `apps/steamcmd/Dockerfile` itself is `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, so the alternative is that ubuntu line plus the same `steamcmd` apt install. Conflict to resolve: `apps/steamcmd` ships its own `/start.sh` and `/usr/local/bin/steamcmd` execs `/start.sh`; a child image that overwrites `/start.sh` breaks that wrapper, so name this app's script differently or call `/usr/games/steamcmd` directly.
+- Runtime: `FROM ghcr.io/trueforge-org/steamcmd:<tag>` (tag from `apps/steamcmd/docker-bake.hcl` `VERSION`; digest UNVERIFIED, not available in the repo). `apps/steamcmd/Dockerfile` itself is `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, so the alternative is that ubuntu line plus the same `steamcmd` apt install. Conflict to resolve: `apps/steamcmd` ships its own `/start.sh` and `/usr/local/bin/steamcmd` execs `/start.sh`; a child image that overwrites `/start.sh` breaks that wrapper, so name this app's script differently or call `/usr/games/steamcmd` directly.
 - Wine and Xvfb are not in the base and must be added in the Dockerfile.
 - Closest sibling: `apps/steamcmd`.
 

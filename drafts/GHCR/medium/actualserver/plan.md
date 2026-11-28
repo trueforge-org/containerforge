@@ -31,7 +31,7 @@ No `defaults/`, `etc/` or `health/` needed. Never `root/`. No `DOWNSTREAM_CHANGE
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, as the draft says. The repo's `apps/budge/Dockerfile` comment states that `python-node` ships Node 24, which satisfies `>=22.19.0`. Node is the only runtime needed; Python is unused but is part of the chosen base. Closest sibling: `apps/budge` (node app on python-node). If the Node version check fails on the pinned digest, switch to `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` and add Node 22+ from a pinned source (UNVERIFIED for a pinned Ubuntu Node package).
+`FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, as the draft says. The repo's `apps/budge/Dockerfile` comment states that `python-node` ships Node 24, which satisfies `>=22.19.0`. Node is the only runtime needed; Python is unused but is part of the chosen base. Closest sibling: `apps/budge` (node app on python-node). If the Node version check fails on the pinned digest, switch to `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` and add Node 22+ from a pinned source (UNVERIFIED for a pinned Ubuntu Node package).
 
 ## 4. Dockerfile
 

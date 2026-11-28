@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/` needed (SteamCMD writes its own state into `/c
 
 Use the ContainerForge steamcmd base, not the wrapper image:
 
-`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`: UNVERIFIED tag and digest. No sibling app in `apps/` uses `trueforge-org/steamcmd` as `FROM` (grep of `apps/*/Dockerfile` finds none), so copy the exact tag and digest from the registry at build time, or build the base locally first (`apps/steamcmd`). The sibling `apps/steamcmd` itself is built on `ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`: UNVERIFIED tag and digest. No sibling app in `apps/` uses `trueforge-org/steamcmd` as `FROM` (grep of `apps/*/Dockerfile` finds none), so copy the exact tag and digest from the registry at build time, or build the base locally first (`apps/steamcmd`). The sibling `apps/steamcmd` itself is built on `ghcr.io/trueforge-org/ubuntu:26.4@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Why: it already has the 32-bit SteamCMD (`steamcmd:i386`), the `lib32` runtime, `HOME=/config`, the `apps` user, and a start script that installs Steam apps into `/config`. Closest sibling for layout: `apps/steamcmd`. Wrapper image is not used.
 

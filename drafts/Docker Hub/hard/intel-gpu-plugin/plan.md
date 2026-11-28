@@ -29,7 +29,7 @@ No defaults/ (no config files). No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Build stage: the same ubuntu image (Go is available there, as in `apps/hishtory-server`) `AS builder`; if Go 1.27 is not present, install it from the official tarball with checksum in the builder only (UNVERIFIED: version availability). Closest sibling: `apps/hishtory-server` (Go build stage then copy). Draft says ubuntu alone suffices; the binary is static (`CGO_ENABLED=0`).
+Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Build stage: the same ubuntu image (Go is available there, as in `apps/hishtory-server`) `AS builder`; if Go 1.27 is not present, install it from the official tarball with checksum in the builder only (UNVERIFIED: version availability). Closest sibling: `apps/hishtory-server` (Go build stage then copy). Draft says ubuntu alone suffices; the binary is static (`CGO_ENABLED=0`).
 
 ## 4. Dockerfile
 

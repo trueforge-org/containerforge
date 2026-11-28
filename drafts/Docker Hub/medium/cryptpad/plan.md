@@ -37,7 +37,7 @@ No `defaults/`, `etc/`, `health/`, `root/` needed. No `DOWNSTREAM_CHANGES.md` (n
 
 `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`
 
-Fits because it is the ContainerForge Node runtime (Node 22/24 class is UNVERIFIED for this digest: check `node --version` in the base before the build). Closest sibling: `apps/thelounge` (Node app built with yarn on python-node, `USER apps`, `/config` volume, `EXPOSE`, `VOLUME /config`). The upstream image is `node:lts-slim`, so no Python is needed; python-node is chosen because the draft and the sibling pattern use it. Alternative if `python-node` is judged too heavy: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with Node installed by apt (UNVERIFIED: no ubuntu-based Node sibling was confirmed here).
+Fits because it is the ContainerForge Node runtime (Node 22/24 class is UNVERIFIED for this digest: check `node --version` in the base before the build). Closest sibling: `apps/thelounge` (Node app built with yarn on python-node, `USER apps`, `/config` volume, `EXPOSE`, `VOLUME /config`). The upstream image is `node:lts-slim`, so no Python is needed; python-node is chosen because the draft and the sibling pattern use it. Alternative if `python-node` is judged too heavy: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with Node installed by apt (UNVERIFIED: no ubuntu-based Node sibling was confirmed here).
 
 ## 4. Dockerfile
 

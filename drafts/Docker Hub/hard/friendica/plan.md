@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: the draft says ubuntu + PHP from apt (no PHP base here). The draft's "php8.4 needs a PPA" is moot: Ubuntu 26.04 ships php8.5 (as bookstack and phpmyadmin use). Use nginx + php-fpm, not Apache, to match `apps/bookstack` and `apps/phpmyadmin` (closest siblings).
 

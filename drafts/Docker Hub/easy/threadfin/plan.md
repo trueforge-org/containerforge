@@ -33,7 +33,7 @@ apps/threadfin/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 The Go binary is prebuilt and static (upstream uses `CGO_ENABLED=0`), so no Go stage is needed. The `go-runtime` rules do not apply because we do not compile. Closest sibling: `apps/adguardhome-sync` (a Go release binary on ubuntu). The ubuntu base already provides `curl` and `ca-certificates`.
 

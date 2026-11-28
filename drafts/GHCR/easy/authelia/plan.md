@@ -33,7 +33,7 @@ No `defaults/` unless the seeded config template is kept as a file (recommended:
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (brief's exact string; siblings use tag `26.4` with the same digest).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (brief's exact string; siblings use tag `26.4` with the same digest).
 
 Fits because Authelia is one static Go binary (musl build runs on glibc). Closest siblings: `apps/valkey` (prebuilt binary on ubuntu, `/config` data) and `apps/adguardhome-sync` (prebuilt binary with arch mapping). Upstream `authelia/base` is not used: it is an Alpine-style base with PUID/PGID handling we do not need.
 

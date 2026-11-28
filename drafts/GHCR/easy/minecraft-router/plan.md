@@ -30,7 +30,7 @@ No `defaults/`, `etc/` or `health/` unless a verified config is needed. No `root
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The binary is static Go, so no runtime packages are needed. Closest sibling: `apps/adguardhome-sync` (release tarball extracted into `/app`).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The binary is static Go, so no runtime packages are needed. Closest sibling: `apps/adguardhome-sync` (release tarball extracted into `/app`).
 
 ## 4. Dockerfile
 

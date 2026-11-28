@@ -32,7 +32,7 @@ Files in `apps/urban-terror/`:
 
 ## 3. Base image
 
-Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Why: the upstream base is `ich777/debian-baseimage`, which is not a ContainerForge base. Ubuntu with the apt packages below covers the need. Closest sibling: `apps/adguardhome-sync` (prebuilt tarball, `USER apps`). For a game server that downloads data at first start, check a sibling that downloads at start (search `apps/*/start.sh` for `curl` or `steamcmd`); `apps/steamcmd` is the closest pattern for runtime downloads.
 

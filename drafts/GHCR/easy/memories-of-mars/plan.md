@@ -39,7 +39,7 @@ No `defaults/` or `etc/`. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 - It already provides SteamCMD (`/usr/local/bin/steamcmd`, `/usr/local/share/steamcmd/steamcmd.sh`), runs as `apps`, and creates `/config`.
 - Its `start.sh` supports `STEAM_APP_IDS` (numeric, comma-separated), `STEAM_INSTALL_DIR`, `STEAM_APP_VALIDATE`, and `STEAM_USERNAME`/`STEAM_PASSWORD` for login. This app's own `start.sh` replaces it at `/start.sh` (see section 7), so the install logic must be carried into the new script; the env names stay the same.
 
-Fallback if the steamcmd image cannot be used: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus the apt setup from `apps/steamcmd/Dockerfile` (multiverse, `steamcmd:i386`). That duplicates the base, so prefer the steamcmd base.
+Fallback if the steamcmd image cannot be used: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus the apt setup from `apps/steamcmd/Dockerfile` (multiverse, `steamcmd:i386`). That duplicates the base, so prefer the steamcmd base.
 
 Closest sibling: `apps/steamcmd` (base) and, for a game-server layout, any sibling that uses `start.sh` with `exec`.
 

@@ -29,7 +29,7 @@ No `defaults/`, `etc/` or `root/`. `defaults/` is only needed if we ship a confi
 
 ## 3. Base image
 
-- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (from `apps/adguardhome-sync/Dockerfile`).
+- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (from `apps/adguardhome-sync/Dockerfile`).
 - Build stage: Go toolchain in a dedicated stage (`FROM golang:<ver> AS build`), per `go-runtime.instructions.md`. The Go version must be read from the `go` directive in the dispatcher's `go.mod` at `v3.0.1`, which is UNVERIFIED (not fetched). Pin the digest at build time.
 - Closest sibling: `apps/adguardhome-sync` (prebuilt Go binary on ubuntu, same layout).
 

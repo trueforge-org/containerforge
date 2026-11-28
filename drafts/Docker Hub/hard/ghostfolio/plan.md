@@ -34,7 +34,7 @@ No `defaults/`, `etc/` or `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.m
 ## 3. Base image
 
 - Build stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Node plus python3 for node-gyp, as the draft proposes; g++/make from apt).
-- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (already contains Node under `/usr/local`, plus curl, openssl is added only if missing).
+- Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (already contains Node under `/usr/local`, plus curl, openssl is added only if missing).
 - Why: the repo table maps Node apps to ubuntu; the Nx build needs Python and a compiler, so only the builder uses python-node. Closest siblings: `apps/it-tools` (node builder stage, runtime stage), `apps/bookstack` (DB-backed web app).
 
 ## 4. Dockerfile

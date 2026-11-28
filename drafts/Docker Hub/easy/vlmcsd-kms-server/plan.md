@@ -35,7 +35,7 @@ No `defaults/` (optionally ship `etc/vlmcsd.ini` later). `root/` is never used. 
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 Build stage: the same ubuntu image `AS build`, with `build-essential` installed (not in the base). No sibling builds C from source in a separate stage; use the `apps/tvheadend` Dockerfile (builds from git with apt build deps) as the pattern, and `apps/it-tools` as an example of `AS build`. The draft says "ubuntu alone is enough", which holds for the final stage.
 
 ## 4. Dockerfile

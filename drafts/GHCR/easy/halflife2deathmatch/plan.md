@@ -32,7 +32,7 @@ Alternative: this could be a `FROM ghcr.io/trueforge-org/steamcmd:<version>` app
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:<version>` with the digest copied from the sibling `apps/steamcmd` build output, or the ubuntu base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`) if the steamcmd image is not published at the needed tag. Closest sibling: `apps/steamcmd` (SteamCMD wrapper, `/config` home, `STEAM_APP_IDS` dispatch). The draft's ubuntu-plus-steamcmd reason is correct; do not copy the upstream debian bullseye base.
+`FROM ghcr.io/trueforge-org/steamcmd:<version>` with the digest copied from the sibling `apps/steamcmd` build output, or the ubuntu base (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`) if the steamcmd image is not published at the needed tag. Closest sibling: `apps/steamcmd` (SteamCMD wrapper, `/config` home, `STEAM_APP_IDS` dispatch). The draft's ubuntu-plus-steamcmd reason is correct; do not copy the upstream debian bullseye base.
 
 ## 4. Dockerfile
 

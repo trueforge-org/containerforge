@@ -31,7 +31,7 @@ No `defaults/` or `etc/` unless the GUI needs a config file (reason: UNVERIFIED)
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Why: the app is a Qt desktop tool installed from apt (draft). The upstream jlesage Alpine base is not reused. Closest sibling: the same GUI-over-VNC pattern as `apps/putty` (this plan's sibling in the batch); `apps/kasmvnc` (ubuntu 26.04, noVNC on 3000/3001) is the only existing VNC precedent in `apps/`; reuse its setup where it fits.
 

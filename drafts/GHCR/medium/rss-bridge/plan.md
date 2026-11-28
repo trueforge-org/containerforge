@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (porter table: generic userland maps to ubuntu). Upstream is `debian:12-slim`, which is not a ContainerForge base; ubuntu is the family default.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (porter table: generic userland maps to ubuntu). Upstream is `debian:12-slim`, which is not a ContainerForge base; ubuntu is the family default.
 
 Closest sibling: `apps/bookstack` (PHP stack on ubuntu 26.04, `php8.5-*` packages from apt, `clear_env = no` for php-fpm, `USER apps`, `COPY --chmod=0755 . /`). Use `php8.5` the same way. Also `apps/nginx` for nginx config layout. PHP version support by RSS-Bridge is UNVERIFIED: check the upstream `composer.json` or README at the chosen tag before pinning `php8.5`.
 

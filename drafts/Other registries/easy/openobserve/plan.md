@@ -30,7 +30,7 @@ No `defaults/`, `etc/` or `health/`: openobserve creates its own data directory.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because the binary is a glibc-linked Rust executable. The upstream runtime is distroless glibc (cc-debian13), so Ubuntu's glibc is compatible. Ubuntu already provides `ca-certificates`, `curl` and `tar`. Closest sibling for a prebuilt tarball download is `apps/adguardhome-sync` (same base, same download pattern).
 

@@ -33,7 +33,7 @@ No `defaults/`, `etc/` or `health/` needed. No `root/` (never use it). No `DOWNS
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (brief's exact string; sibling Dockerfiles such as `apps/steamcmd` and `apps/valkey` use tag `26.4` with the same digest. Confirm which tag string to keep when the Dockerfile is written.)
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (brief's exact string; sibling Dockerfiles such as `apps/steamcmd` and `apps/valkey` use tag `26.4` with the same digest. Confirm which tag string to keep when the Dockerfile is written.)
 
 Fits because it is a single native binary with no runtime language. Ubuntu supplies glibc, which the gnu tarball needs. Closest siblings: `apps/valkey` (prebuilt binary on ubuntu, `/config` data, pinned health dir) and `apps/adguardhome-sync` (prebuilt binary download with arch mapping).
 

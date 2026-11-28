@@ -5,12 +5,12 @@
 
 | Item | Value |
 | --- | --- |
-| Version | 5.12.11 (tag `v5.12.11`, published 2026-11-11, marked Latest; matches the draft links) |
+| Version | 5.12.12 (tag `v5.12.12`, published 2026-11-11, marked Latest; matches the draft links) |
 | Renovate | `datasource=github-releases depName=grafana/grafana-image-renderer versioning=semver` (tags have a `v` prefix, Dockerfile builds URL with `v${VERSION#v}`) |
 | License | AGPL-3.0 (SPDX `AGPL-3.0-only`; UNVERIFIED: confirm LICENSE header) |
 | Source URL | https://github.com/grafana/grafana-image-renderer |
-| amd64 URL | https://github.com/grafana/grafana-image-renderer/releases/download/v5.12.11/grafana-image-renderer-linux-amd64 (raw executable) |
-| arm64 URL | https://github.com/grafana/grafana-image-renderer/releases/download/v5.12.11/grafana-image-renderer-linux-arm64 |
+| amd64 URL | https://github.com/grafana/grafana-image-renderer/releases/download/v5.12.12/grafana-image-renderer-linux-amd64 (raw executable) |
+| arm64 URL | https://github.com/grafana/grafana-image-renderer/releases/download/v5.12.12/grafana-image-renderer-linux-arm64 |
 | Checksums | GitHub API asset digests: amd64 `sha256:fc6419daa002fffb3f6f6f5d68c9bad1e52346f59ec4801251a0650ba9822f69`, arm64 `sha256:18ed121c7860695a90865790aa95e66422c06ae9502af19e0d0e725744d5eda7`. No separate checksum file published. Digests change per version, so the Dockerfile cannot hardcode them next to a renovated VERSION; fetch the digest at build time from `https://api.github.com/repos/grafana/grafana-image-renderer/releases/tags/v${VERSION}` (jq is in the ubuntu base) and verify with `sha256sum -c`. |
 | Upstream Dockerfile | Reviewed (master). Go builder (`CGO_ENABLED=0`, static) into Debian trixie. Installs fonts (ipaexfont-gothic, wqy-zenhei, thai-tlwg, khmeros, kacst-one, freefont-ttf, unifont, open-sans, roboto, inter, fonts-recommended), libxss1, bash, util-linux, openssl, tini, ca-certificates, locales, libnss3-tools, and `chromium chromium-driver chromium-shell chromium-sandbox` (each at least 156.0.8078.108). `ENV CHROME_BIN=/usr/bin/chromium LANG/LC_ALL=en_US.UTF-8`, `EXPOSE 8081`, `ENTRYPOINT tini -- /usr/bin/grafana-image-renderer`, `CMD server`, HEALTHCHECK `grafana-image-renderer healthcheck`, runs as UID 65532. |
 | Config (v5 docs) | `--server.addr` / env `SERVER_ADDR` default `:8081` (all interfaces); `--server.auth-token` / env `AUTH_TOKEN` default `-` (comma-separated for several); `--browser.flag` / env `BROWSER_FLAGS` or `BROWSER_FLAG` (format `--flag=value`, space-separated); TLS `SERVER_CERTIFICATE_FILE`, `SERVER_KEY_FILE`. Source: grafana.com image-rendering flags doc. |
@@ -32,7 +32,7 @@ No other directories. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Prebuilt static Go binary on ubuntu (no Go stage needed since upstream ships a release binary). Closest siblings: `apps/adguardhome-sync` (binary download) and `apps/changedetection` (headless browser via Playwright, which this plan reuses).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Prebuilt static Go binary on ubuntu (no Go stage needed since upstream ships a release binary). Closest siblings: `apps/adguardhome-sync` (binary download) and `apps/changedetection` (headless browser via Playwright, which this plan reuses).
 
 ## 4. Dockerfile
 
@@ -46,7 +46,7 @@ No other directories. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 ## 5. docker-bake.hcl
 
-`APP = "grafana-image-renderer"`, `LICENSE = "AGPL-3.0-only"`, `SOURCE = "https://github.com/grafana/grafana-image-renderer"`, `VERSION` default `"5.12.11"` under `// renovate: datasource=github-releases depName=grafana/grafana-image-renderer versioning=semver`. Standard targets: `docker-metadata-action`, `image` (args VERSION, labels), `image-local`, `image-all` (amd64+arm64), group default `image-local`. Validate with `docker buildx bake --print`.
+`APP = "grafana-image-renderer"`, `LICENSE = "AGPL-3.0-only"`, `SOURCE = "https://github.com/grafana/grafana-image-renderer"`, `VERSION` default `"5.12.12"` under `// renovate: datasource=github-releases depName=grafana/grafana-image-renderer versioning=semver`. Standard targets: `docker-metadata-action`, `image` (args VERSION, labels), `image-local`, `image-all` (amd64+arm64), group default `image-local`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -100,9 +100,9 @@ cd apps/grafana-image-renderer
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name grafana-image-renderer-probe --read-only --tmpfs /tmp \
-  -v grafana-image-renderer-probe-config:/config grafana-image-renderer:5.12.11
+  -v grafana-image-renderer-probe-config:/config grafana-image-renderer:5.12.12
 docker logs -f grafana-image-renderer-probe
-forgetool containers test --image grafana-image-renderer:5.12.11 --config ./apps/grafana-image-renderer/container-test.yaml
+forgetool containers test --image grafana-image-renderer:5.12.12 --config ./apps/grafana-image-renderer/container-test.yaml
 docker rm -f grafana-image-renderer-probe; docker volume rm grafana-image-renderer-probe-config
 ```
 

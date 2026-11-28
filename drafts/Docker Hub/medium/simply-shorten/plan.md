@@ -32,7 +32,7 @@ No `defaults/`, `etc/` or `root/` unless the app needs a default config (UNVERIF
 ## 3. Base image
 
 - Final stage: `ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a` (from `apps/nzbhydra2/Dockerfile`; the draft names java17 as the replacement for EOL JDK 14).
-- Build stage: needs a JDK and Gradle. The java17 base ships a JRE, not a JDK (see `apps/java25/Dockerfile`, JRE from Temurin), so the build stage cannot reuse it for `javac`. Plan: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build` with `apt-get install openjdk-17-jdk-headless` (UNVERIFIED in the 26.04 archive; pin the version against the archive before building).
+- Build stage: needs a JDK and Gradle. The java17 base ships a JRE, not a JDK (see `apps/java25/Dockerfile`, JRE from Temurin), so the build stage cannot reuse it for `javac`. Plan: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build` with `apt-get install openjdk-17-jdk-headless` (UNVERIFIED in the 26.04 archive; pin the version against the archive before building).
 - Closest sibling: `apps/nzbhydra2` (Java jar on java17 base, `/app` layout).
 
 ## 4. Dockerfile

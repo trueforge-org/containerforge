@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for both the build and the final stage. Fits because the app is Perl and cpanm can run on ubuntu from apt. The base already has `libicu-dev`, curl, tar, wget, `libssl3`, `ca-certificates` (confirmed in `apps/ubuntu/Dockerfile`).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for both the build and the final stage. Fits because the app is Perl and cpanm can run on ubuntu from apt. The base already has `libicu-dev`, curl, tar, wget, `libssl3`, `ca-certificates` (confirmed in `apps/ubuntu/Dockerfile`).
 
 Closest siblings: `apps/ubuntu` (base) and `apps/python` (apt-based runtime on this base). No Perl sibling was checked (`UNVERIFIED: confirm with a search of apps/ for perl`).
 

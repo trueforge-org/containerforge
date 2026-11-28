@@ -25,7 +25,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The base already sets `DOTNET_RUNNING_IN_CONTAINER=true`, `HOME=/config`, and adds user `apps` to groups 44 (video) and 107 etc. (GPU device access groups). Closest siblings: `apps/webgrabplus` (.NET app on ubuntu), `apps/jellyfin` (ffmpeg and media), `apps/adguardhome-sync` (download plus layout). The draft's "ffmpeg comes from a sibling container" is wrong: there is no ffmpeg sidecar; ffmpeg must be inside this image.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The base already sets `DOTNET_RUNNING_IN_CONTAINER=true`, `HOME=/config`, and adds user `apps` to groups 44 (video) and 107 etc. (GPU device access groups). Closest siblings: `apps/webgrabplus` (.NET app on ubuntu), `apps/jellyfin` (ffmpeg and media), `apps/adguardhome-sync` (download plus layout). The draft's "ffmpeg comes from a sibling container" is wrong: there is no ffmpeg sidecar; ffmpeg must be inside this image.
 
 ## 4. Dockerfile
 

@@ -38,7 +38,7 @@ apps/ddns-route53/
 ## 3. Base image
 
 ```
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 
 Single static Go binary, so ubuntu alone is enough (matches the draft). `curl`, `tar`, `ca-certificates` (needed for TLS to AWS) and `tzdata` are already in the base. We do not compile Go; we use the release binary, so the build-stage rule for Go does not apply.

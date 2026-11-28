@@ -23,7 +23,7 @@ Upstream process model (supervisor/services): redis-server (`/etc/redis.conf --d
 No Go supervisor is built: it only supervises four processes, which start.sh replaces, so no Go stage and no go-runtime obligations. No root/, no DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (glibc, so the alpine/musl upstream image cannot be copied; draft copy-from is "no"). Closest siblings: apps/bookstack (apt PHP), apps/kasmvnc (rootless nginx edits).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (glibc, so the alpine/musl upstream image cannot be copied; draft copy-from is "no"). Closest siblings: apps/bookstack (apt PHP), apps/kasmvnc (rootless nginx edits).
 
 ## 4. Dockerfile
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.

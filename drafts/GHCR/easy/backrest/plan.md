@@ -32,7 +32,7 @@ No `defaults/`, `etc/` or `health/` (nothing to seed; the app creates its config
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because backrest is a Go release binary and runs directly on glibc Ubuntu. The upstream alpine image is musl, so it cannot be used with `COPY --from` (matches the draft's `copy-from: no`). Closest sibling: `apps/adguardhome-sync` (prebuilt tarball, `TARGETARCH`, `/app/<app>`, port 8080).
 
@@ -50,7 +50,7 @@ Fits because backrest is a Go release binary and runs directly on glibc Ubuntu. 
 ```dockerfile
 ARG VERSION
 ARG TARGETARCH
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ARG VERSION
 ARG TARGETARCH
 USER root

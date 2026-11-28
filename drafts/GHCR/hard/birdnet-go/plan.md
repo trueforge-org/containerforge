@@ -34,7 +34,7 @@ Exact file list for `apps/birdnet-go/`:
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Upstream runs on Debian trixie (glibc). Ubuntu 26.04 base is glibc too, so the release binary should run without a copy. Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on ubuntu). Upstream `libasound2` and `ffmpeg` come from apt on the ubuntu base (package availability UNVERIFIED for 26.04).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Upstream runs on Debian trixie (glibc). Ubuntu 26.04 base is glibc too, so the release binary should run without a copy. Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on ubuntu). Upstream `libasound2` and `ffmpeg` come from apt on the ubuntu base (package availability UNVERIFIED for 26.04).
 
 ## 4. Dockerfile
 

@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 
 ## 3. Base image
 
-- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The java17 image is a JRE only, so it cannot run Maven. Install a JDK and Maven from apt in this stage.
+- Build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The java17 image is a JRE only, so it cannot run Maven. Install a JDK and Maven from apt in this stage.
 - Final stage: `FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`. Nearest supported runtime to upstream Java 16.
 - Alternative: `ghcr.io/trueforge-org/java21` (bake VERSION `21.0.8+9`; image tag form UNVERIFIED) is not the nearest runtime. Use java17 unless the pom requires 21.
 - Closest siblings: `apps/java17`, `apps/nzbhydra2` (Java app on java base, `/config` volume). `apps/java21` exists as the alternative.

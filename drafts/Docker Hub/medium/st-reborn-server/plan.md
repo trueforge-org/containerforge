@@ -33,7 +33,7 @@ No `defaults/`, `etc/` or `health/` (no seeded config is confirmed; add `default
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the same `FROM` line as the 122 existing apps that pin this ubuntu digest; the `26.04` tag form is used by the `adguardhome-sync` sibling).
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the same `FROM` line as the 122 existing apps that pin this ubuntu digest; the `26.04` tag form is used by the `adguardhome-sync` sibling).
 
 Why it fits: the upstream runtime is a glibc `debian:12-slim` image, and the release is a prebuilt tarball. Ubuntu 26.04 provides glibc and `libssl3`, so no runtime stack is needed. Closest sibling: `apps/adguardhome-sync` (prebuilt tarball unpacked into `/app` on ubuntu, `TARGETARCH` in the URL).
 

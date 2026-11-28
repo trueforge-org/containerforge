@@ -33,7 +33,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). The `.deb` is downlo
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. Reason: the `.deb` is the app, so a plain Ubuntu userland is enough. The `.deb` needs `nodejs (>= 24)` (see section 4 for how to satisfy it). Closest sibling for a Node server on the Ubuntu base: `apps/budge` (node on python-node). If the Node runtime comes from python-node instead, use `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Node 24 per budge comment, UNVERIFIED for the exact version). Decide after step 1 of section 11.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. Reason: the `.deb` is the app, so a plain Ubuntu userland is enough. The `.deb` needs `nodejs (>= 24)` (see section 4 for how to satisfy it). Closest sibling for a Node server on the Ubuntu base: `apps/budge` (node on python-node). If the Node runtime comes from python-node instead, use `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (Node 24 per budge comment, UNVERIFIED for the exact version). Decide after step 1 of section 11.
 
 ## 4. Dockerfile
 

@@ -30,7 +30,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, the ubuntu base alone (draft says no runtime image is needed). PHP comes from Ubuntu apt. Closest sibling: `apps/bookstack` (PHP on the ubuntu base, php8.5 packages from apt, `/config` symlinks, `USER apps`, `COPY --chmod=0755 . /`). Confirmed in that Dockerfile: `php8.5-*` packages install on ubuntu 26.04.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, the ubuntu base alone (draft says no runtime image is needed). PHP comes from Ubuntu apt. Closest sibling: `apps/bookstack` (PHP on the ubuntu base, php8.5 packages from apt, `/config` symlinks, `USER apps`, `COPY --chmod=0755 . /`). Confirmed in that Dockerfile: `php8.5-*` packages install on ubuntu 26.04.
 
 The Bitnami base is not used: it is Debian/minideb with its own stack, so ContainerForge would not match its layout.
 

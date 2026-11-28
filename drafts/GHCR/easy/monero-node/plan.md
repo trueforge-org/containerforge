@@ -34,7 +34,7 @@ Ban list: upstream passes `--ban-list` with a file from the monero ban-list repo
 
 ## 3. Base image
 
-- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Why: the official tarballs are glibc builds, which run on the Ubuntu base; no runtime image needed.
 - Closest siblings: `apps/adguardhome-sync` (tarball fetched in the ubuntu image, `USER apps`) and `apps/steamcmd` (`TARGETARCH` mapping).
 - UNVERIFIED: whether the tarball needs libraries beyond the base. Confirm with `ldd` in step 2.

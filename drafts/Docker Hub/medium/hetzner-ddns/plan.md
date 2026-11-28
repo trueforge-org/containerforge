@@ -34,7 +34,7 @@ No `defaults/` (no config file; everything is env). No `root/`. No `DOWNSTREAM_C
 
 ## 3. Base image
 
-Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`; build stage `FROM --platform=$BUILDPLATFORM golang:1.26@sha256:6e59e17a20f13c102e49d82dffab66d41cffe6c266b225d82794328aea859ab5 AS build` (digest read from Docker Hub 2026-11-23). Reason: static Go binary calling HTTPS APIs; base already ships `ca-certificates` (upstream switched to Alpine to fix cert errors). Closest siblings: `apps/cloudflareddns` (DDNS updater with a runner-only test) and `apps/adguardhome-sync` (Go binary).
+Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`; build stage `FROM --platform=$BUILDPLATFORM golang:1.26@sha256:6e59e17a20f13c102e49d82dffab66d41cffe6c266b225d82794328aea859ab5 AS build` (digest read from Docker Hub 2026-11-23). Reason: static Go binary calling HTTPS APIs; base already ships `ca-certificates` (upstream switched to Alpine to fix cert errors). Closest siblings: `apps/cloudflareddns` (DDNS updater with a runner-only test) and `apps/adguardhome-sync` (Go binary).
 
 ## 4. Dockerfile
 

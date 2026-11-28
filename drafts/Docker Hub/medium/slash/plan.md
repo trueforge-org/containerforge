@@ -31,7 +31,7 @@ No `defaults/`, `etc/` or `health/`: Slash creates its own database on first sta
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The app is a static Go binary (`CGO_ENABLED=0`), so ubuntu is only the userland. Closest sibling: `apps/pwndrop` (Go build stage, then ubuntu runtime stage).
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The app is a static Go binary (`CGO_ENABLED=0`), so ubuntu is only the userland. Closest sibling: `apps/pwndrop` (Go build stage, then ubuntu runtime stage).
 
 Build stages (build-only, never shipped): `FROM golang:1.23-alpine` for the binary, as `go-runtime.instructions.md` allows; and a Node 22 stage for the UI. The Node stage digest is UNVERIFIED: get it with `docker buildx imagetools inspect node:22-alpine` before pinning. Alternative: reuse `ghcr.io/trueforge-org/python-node` if its Node major is 22 (UNVERIFIED, see section 10).
 
@@ -39,7 +39,7 @@ Build stages (build-only, never shipped): `FROM golang:1.23-alpine` for the bina
 
 1. `FROM node:22-alpine@<digest> AS frontend`: `ARG VERSION`, fetch the tarball from the tag, `corepack enable && pnpm i --frozen-lockfile && pnpm build` in the directory upstream builds (`frontend/web`, as upstream `/frontend-build/frontend/web`; confirm with the upstream `WORKDIR`, UNVERIFIED).
 2. `FROM golang:1.23-alpine@<digest> AS backend`: `ARG VERSION`, `ARG TARGETARCH`. Fetch the same tarball. Copy the `frontend/web/dist` output to `server/route/frontend/dist` (the Go module embeds it), then `CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build -trimpath -ldflags="-s -w" -o /out/slash ./bin/slash/main.go`. Using `GOARCH=$TARGETARCH` gives native arm64 output without QEMU for the Go step.
-3. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
+3. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 4. `COPY --from=backend /out/slash /app/slash/slash` and `chmod 0755`.
 5. License: copy `LICENSE` from the source tarball to `/usr/share/licenses/slash/LICENSE`.
 6. Persistence redirect (root, at build time): `mkdir -p /var/opt && ln -s /config/slash /var/opt/slash`, so the upstream default data dir resolves to `/config` without changing `/app`. Upstream creates `/var/opt/slash` in its image; this keeps that path working.

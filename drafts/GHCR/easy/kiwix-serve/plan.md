@@ -36,7 +36,7 @@ Not needed: `defaults/`, `etc/`, `app/`, `health/` (no seeding, no config file, 
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (copied from `apps/ubuntu` base list in the brief).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (copied from `apps/ubuntu` base list in the brief).
 - Why: a glibc Ubuntu base, and the binary comes from the Ubuntu archive. No runtime language needed.
 - Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu) and `apps/steamcmd` (apt install pinned on the ubuntu base).
 - Universe: `kiwix-tools` is in the `universe` component. The trueforge ubuntu base may not enable universe by default (UNVERIFIED). Enable it the way `apps/steamcmd/Dockerfile` enables multiverse (`add-apt-repository -y universe`) only if `apt-get install kiwix-tools` fails without it.

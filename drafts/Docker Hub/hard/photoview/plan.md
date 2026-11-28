@@ -27,7 +27,7 @@ No `defaults/` needed, no `root/`, no DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
 
-Final: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Build stages: Node (UI) and Go (api) images copied from the upstream Dockerfile; the Go stage must be a dedicated build stage with `COPY --from=` (go-runtime rule). Closest sibling: `apps/adguardhome-sync` (Go binary on ubuntu); no sibling does cgo with native libs.
+Final: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Build stages: Node (UI) and Go (api) images copied from the upstream Dockerfile; the Go stage must be a dedicated build stage with `COPY --from=` (go-runtime rule). Closest sibling: `apps/adguardhome-sync` (Go binary on ubuntu); no sibling does cgo with native libs.
 
 ## 4. Dockerfile
 

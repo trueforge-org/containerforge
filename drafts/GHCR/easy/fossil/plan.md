@@ -30,7 +30,7 @@ No `defaults/`, `etc/`, `health/` or `DOWNSTREAM_CHANGES.md`. Fossil is not used
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. Fossil is a single C binary from the Ubuntu archive, so the ubuntu base covers it. Closest siblings: `apps/valkey` (single server binary from apt, pinned package version, `start.sh`) and `apps/steamcmd` (apt package with renovate `deb` datasource).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. Fossil is a single C binary from the Ubuntu archive, so the ubuntu base covers it. Closest siblings: `apps/valkey` (single server binary from apt, pinned package version, `start.sh`) and `apps/steamcmd` (apt package with renovate `deb` datasource).
 
 ## 4. Dockerfile
 

@@ -1,6 +1,6 @@
 # UNVERIFIED throughout: upstream builds on ruby:4.0.10-alpine. Ubuntu packages for ruby, nodejs, yarnpkg,
 # libonnxruntime and the pdfium library, plus the pdfium musl-vs-glibc question, must be checked on the first build.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS download
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS download
 
 ARG TARGETARCH
 USER root
@@ -31,7 +31,7 @@ RUN echo "*** Installing pdfium ***" && \
   find /tmp/pdfium -iname 'LICENSE*' -exec install -m 0644 {} /out/licenses/ \; && \
   rm -rf /tmp/pdfium /tmp/pdfium.zip
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
 ARG VERSION
 USER root
@@ -73,7 +73,7 @@ RUN echo "*** Installing gems and building assets ***" && \
   bundle exec bin/shakapacker && \
   rm -rf /tmp/bundle /usr/local/share/.cache /root/.cache
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 USER root
 

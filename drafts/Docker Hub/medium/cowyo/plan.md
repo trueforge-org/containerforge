@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/` or `root/`: nothing needs seeding or config fi
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Frontend build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, because it provides Node (sibling `apps/budge` notes Node 24 in this base). The Node version in the base is UNVERIFIED and must be read with `node --version` during the build.
 - Go build stage: the ubuntu base, which already ships Go 1.27.4 (as `apps/hishtory-server` uses it); no apt `golang-go`.
 - Closest siblings: `apps/pwndrop` (Go compiled on ubuntu, build stage then runtime stage) and `apps/adguardhome-sync` (single-binary app on ubuntu, `/app` layout, `EXPOSE`, `VOLUME /config`).

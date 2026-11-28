@@ -36,7 +36,7 @@ Files in `apps/watchyourlan/`:
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (final stage).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (final stage).
 - Go build stage: `golang:<ver>` pinned to the version used by an existing Go app in `apps/` (UNVERIFIED: `grep -l golang apps/*/Dockerfile` finds no sibling with a Go build stage in this repo, so there is no repo precedent for the tag; choose one matching `backend/go.mod` and set `GOCACHE=/tmp/go-build` in the build stage).
 - Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu, `USER apps`, `COPY --chmod=0755 . /`). No sibling in `apps/` has a Go build stage (grep found none), so follow `.github/instructions/go-runtime.instructions.md` directly.
 - Reason: Go builds in a dedicated stage, copied into the ubuntu runtime. The upstream Alpine (`apk`) runtime cannot be used on ubuntu.

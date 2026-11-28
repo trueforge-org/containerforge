@@ -30,7 +30,7 @@ Seven rows, one per image. The protocol says one app per `apps/<app>/`, so the p
 
 ## 3. Base image
 
-- **Ubuntu base** (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`) is the default. Build the chain on it or copy from upstream (`COPY --from=quay.io/jupyter/minimal-notebook:notebook-X.Y.Z`).
+- **Ubuntu base** (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`) is the default. Build the chain on it or copy from upstream (`COPY --from=quay.io/jupyter/minimal-notebook:notebook-X.Y.Z`).
 - **Option A (recommended for a first app, `jupyter-minimal`):** `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` and install the Notebook package with pip into `/tmp`-safe paths. Simpler than conda and matches the protocol's Python rules (`/app/venv` read-only). The draft's "python base" matches this option.
 - **Option B:** Copy the conda prefix from upstream with `COPY --from`. Heavier, and the copy-from images are the full upstream images with conda inside.
 - Closest siblings: `apps/bazarr` and `apps/changedetection` (python base); `apps/python-node` (for any Node kernel).

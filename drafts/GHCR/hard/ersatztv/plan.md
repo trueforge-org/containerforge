@@ -31,13 +31,13 @@ No `defaults/`, `etc/` or `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.m
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. ErsatzTV ships self-contained linux-x64 and linux-arm64 tarballs. No .NET runtime base exists in ContainerForge, and the tarball does not need one installed. `ffmpeg` comes from apt (see section 4) or from a ContainerForge ffmpeg sibling if one is added later (none in `apps/` today).
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. ErsatzTV ships self-contained linux-x64 and linux-arm64 tarballs. No .NET runtime base exists in ContainerForge, and the tarball does not need one installed. `ffmpeg` comes from apt (see section 4) or from a ContainerForge ffmpeg sibling if one is added later (none in `apps/` today).
 
 Closest sibling: `apps/ubuntu` (base), `apps/webgrabplus` (dotnet on ubuntu, per the fenrus precedent). Verify the sibling before finalising.
 
 ## 4. Dockerfile
 
-1. `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS final`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
+1. `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS final`, `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Architecture mapping: `case "${TARGETARCH}" in amd64) ETV_ARCH=x64 ;; arm64) ETV_ARCH=arm64 ;; esac`.
 3. `apt-get install -y --no-install-recommends ffmpeg libva-drm2 ca-certificates` (`UNVERIFIED`: which ffmpeg build has NVENC or VAAPI; the apt build may lack NVENC). Pin apt versions and check against `VERSION` where applicable. Clean apt lists.
 4. Download and extract: `curl -fL https://github.com/ErsatzTV/ErsatzTV/releases/download/v${VERSION}/ErsatzTV-v${VERSION}-linux-${ETV_ARCH}.tar.gz | tar xz -C /app` (create `/app` first; check whether the tarball has a top-level folder, UNVERIFIED). Verify the download (no checksum published, `UNVERIFIED`).

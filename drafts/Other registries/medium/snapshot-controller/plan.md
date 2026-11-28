@@ -31,7 +31,7 @@ No `defaults/`, `etc/`, `health/` or `root/`: nothing is seeded. No `DOWNSTREAM_
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft's `ubuntu` foundation is the right fit because the rules require the runtime to be ContainerForge's own base; the binary is static Go, so no runtime packages are needed.
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The draft's `ubuntu` foundation is the right fit because the rules require the runtime to be ContainerForge's own base; the binary is static Go, so no runtime packages are needed.
 - Build stage: a Go toolchain image is needed for `go 1.26.0`. UNVERIFIED: no ContainerForge golang base is confirmed. Use `FROM docker.io/library/golang:<1.26.x> AS build`, with a pinned digest taken from the registry at build time. The bake file's renovate comment would then use `datasource=docker depName=docker.io/library/golang`, as the existing bake files do for golang.
 - Closest sibling: `apps/pwndrop` (Go build stage on ubuntu, then runtime stage). Note that pwndrop installs `golang-go` from apt; that is not used here because the apt Go version is UNVERIFIED against `go 1.26.0`.
 

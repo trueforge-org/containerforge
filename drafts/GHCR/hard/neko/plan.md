@@ -33,7 +33,7 @@ Config files copied from upstream (supervisord, openbox) would live under `apps/
 
 ## 3. Base image
 
-Proposed `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Proposed `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 Reason: the draft's guess. Upstream builds on `ghcr.io/m1k1o/neko/base`, which is NOT confirmed. Using the ContainerForge base means reinstalling everything the neko base gives (Xorg, openbox, pulseaudio, supervisord, the neko server), which is a large rework. This is the main open decision. Closest sibling: none for a desktop stack; check `apps/` for a KDE/VNC or Xorg-based app before starting.
 
 ## 4. Dockerfile

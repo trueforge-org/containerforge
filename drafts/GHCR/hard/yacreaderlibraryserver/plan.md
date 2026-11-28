@@ -28,7 +28,7 @@
 
 ## 3. Base image
 
-- Final and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Final and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Do NOT use `ghcr.io/linuxserver/baseimage-ubuntu` (the wrapper's base): it is outside the ContainerForge base-image rules and brings s6 and linuxserver's user model.
 - Closest sibling for a compiled C++/Qt app: none confirmed; find one with `ls apps/ | grep -i qt` or a C++ app before writing. Otherwise use `apps/adguardhome-sync` for layout (prebuilt binary, `USER apps`, `COPY --chmod=0755 . /`).
 - Reason: Ubuntu 26.04 (resolute) matches the upstream requirement (CMake >= 3.25, Qt >= 6.4). Confirm the trueforge ubuntu 26.04 image carries these packages or install them in the build stage.

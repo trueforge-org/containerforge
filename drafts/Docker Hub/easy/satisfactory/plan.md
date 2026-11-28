@@ -36,7 +36,7 @@ apps/satisfactory/
 Reuse the existing sibling: `FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`, matching `apps/steamcmd` (it installs `steamcmd:i386` and has `dpkg --add-architecture i386`, runs as `apps`, and copies its own `/start.sh`).
 - UNVERIFIED: the published tag format. `apps/steamcmd/docker-bake.hcl` has `VERSION=20180105-5build1` and its Dockerfile uses `0~${VERSION}`; look up the real tag and digest with `docker buildx imagetools inspect ghcr.io/trueforge-org/steamcmd` or in `.github` workflows before writing the FROM line.
 - This app's `COPY --chmod=0755 . /` overwrites the steamcmd image's `/start.sh` with this app's `start.sh`; that is intended, but keep using `/usr/local/share/steamcmd/steamcmd.sh` from the base as the seed.
-- Fallback if the steamcmd image tag is not usable: ubuntu `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus the same apt block as `apps/steamcmd/Dockerfile` (pinned `steamcmd:i386=0~${VERSION}`).
+- Fallback if the steamcmd image tag is not usable: ubuntu `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus the same apt block as `apps/steamcmd/Dockerfile` (pinned `steamcmd:i386=0~${VERSION}`).
 - Closest sibling: `apps/steamcmd`. `apps/hytale` is also a game server downloaded at runtime (on `java25`), and its `container-test.yaml` only checks `filePaths`. No `apps/*/Dockerfile` uses the steamcmd image as FROM yet.
 - The steamcmd base's `/usr/local/bin/steamcmd` runs `exec /start.sh`, which in this image is the game's `start.sh`. Never call that wrapper from `start.sh` or a test: it would recurse.
 

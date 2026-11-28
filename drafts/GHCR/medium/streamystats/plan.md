@@ -35,7 +35,7 @@ No `defaults/` (no seeded config is needed). No `root/`. No `DOWNSTREAM_CHANGES.
 
 ## 3. Base image
 
-- Row 1 final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, with Node added in the build stage (see section 4). The draft suggested `python-node`, but it adds Python, which Next.js does not need. Use `ubuntu` plus Node only if the node version can be pinned to the upstream `node:26` line. UNVERIFIED: the exact Node version available from the ubuntu archive or a pinned tarball.
+- Row 1 final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, with Node added in the build stage (see section 4). The draft suggested `python-node`, but it adds Python, which Next.js does not need. Use `ubuntu` plus Node only if the node version can be pinned to the upstream `node:26` line. UNVERIFIED: the exact Node version available from the ubuntu archive or a pinned tarball.
 - Row 2 final stage: the same ubuntu digest. The compiled binary is glibc-linked, so it runs on Ubuntu. The base already has `curl` and `ca-certificates`.
 - Build stage (both rows): ubuntu digest plus a pinned Bun. Bun is not in the ubuntu archive; obtain it from the pinned `oven/bun:1.4.2` image (`COPY --from=oven/bun:1.4.2@sha256:<digest>`, digest UNVERIFIED) or from an official Bun release tarball (checksum UNVERIFIED). Do not use an unpinned `curl | bash`.
 - Closest sibling: `apps/pwndrop` (build stage then runtime stage), `apps/bazarr` (Python), `apps/changedetection` (node-based app layout).

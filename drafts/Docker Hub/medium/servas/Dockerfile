@@ -1,7 +1,7 @@
 # Initial draft from drafts/Docker Hub/medium/servas/plan.md (option 1: ubuntu + apt PHP-FPM + nginx). Not built yet.
 
 # PHP stage: fetch the upstream source and install PHP dependencies with composer.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS php
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS php
 ARG VERSION
 # UNVERIFIED: PHP minor version. Check `apt-cache policy` on the base and pin it.
 ARG PHP_VERSION=8.5
@@ -53,7 +53,7 @@ RUN echo "**** build frontend assets ****" && \
     rm -rf /tmp/npm
 
 # Final stage: ubuntu with PHP-FPM and nginx, running as apps.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ARG VERSION
 # UNVERIFIED: must match the PHP stage.
 ARG PHP_VERSION=8.5

@@ -38,7 +38,7 @@ No `defaults/` needed unless secrets seeding templates are wanted (not needed). 
 
 ## 3. Base image
 
-Runtime stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the draft's base; no Elixir base exists). Build stage: an Elixir 1.14.3 / OTP 25.2.1 image on Debian/Ubuntu glibc, for example `hexpm/elixir:1.14.3-erlang-25.2.1-ubuntu-jammy-<date>` (exact tag UNVERIFIED; check Docker Hub `hexpm/elixir`). A release built on glibc 2.35 (jammy) runs on 26.04 because glibc is backward compatible. Closest sibling for multi-stage compile-and-copy: `apps/kasmvnc`; no Elixir sibling exists.
+Runtime stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the draft's base; no Elixir base exists). Build stage: an Elixir 1.14.3 / OTP 25.2.1 image on Debian/Ubuntu glibc, for example `hexpm/elixir:1.14.3-erlang-25.2.1-ubuntu-jammy-<date>` (exact tag UNVERIFIED; check Docker Hub `hexpm/elixir`). A release built on glibc 2.35 (jammy) runs on 26.04 because glibc is backward compatible. Closest sibling for multi-stage compile-and-copy: `apps/kasmvnc`; no Elixir sibling exists.
 
 ## 4. Dockerfile
 

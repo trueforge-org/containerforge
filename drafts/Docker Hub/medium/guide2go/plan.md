@@ -36,7 +36,7 @@ apps/guide2go/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage; build stage `FROM --platform=$BUILDPLATFORM golang:1.26@sha256:6e59e17a20f13c102e49d82dffab66d41cffe6c266b225d82794328aea859ab5 AS build` (the `1.26` digest is UNVERIFIED in this pass and no `apps/*/Dockerfile` uses a `golang:` stage; the repo precedent is the ubuntu base, which already ships Go 1.27.4 in `/usr/local/go`, so `FROM` the ubuntu line `AS build` is the safer alternative). Reason: single static Go binary, no language runtime needed; the repo's Go rule forbids compiling in the runtime stage. Closest sibling: `apps/adguardhome-sync` (Go binary on ubuntu, config seeded from `defaults/`) and `apps/cloudflareddns` (CLI that is not a server).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage; build stage `FROM --platform=$BUILDPLATFORM golang:1.26@sha256:6e59e17a20f13c102e49d82dffab66d41cffe6c266b225d82794328aea859ab5 AS build` (the `1.26` digest is UNVERIFIED in this pass and no `apps/*/Dockerfile` uses a `golang:` stage; the repo precedent is the ubuntu base, which already ships Go 1.27.4 in `/usr/local/go`, so `FROM` the ubuntu line `AS build` is the safer alternative). Reason: single static Go binary, no language runtime needed; the repo's Go rule forbids compiling in the runtime stage. Closest sibling: `apps/adguardhome-sync` (Go binary on ubuntu, config seeded from `defaults/`) and `apps/cloudflareddns` (CLI that is not a server).
 
 ## 4. Dockerfile
 

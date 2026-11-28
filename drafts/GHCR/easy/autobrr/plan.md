@@ -32,7 +32,7 @@ No `defaults/` needed unless the seeded config is kept as a file in the image; s
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The app is a static Go binary, so the base needs only CA certificates and a shell. Closest sibling for a prebuilt-binary ubuntu app: `apps/adguardhome-sync`. Upstream's alpine base is not reused: the Go binary is static, so glibc is not an issue.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The app is a static Go binary, so the base needs only CA certificates and a shell. Closest sibling for a prebuilt-binary ubuntu app: `apps/adguardhome-sync`. Upstream's alpine base is not reused: the Go binary is static, so glibc is not an issue.
 
 ## 4. Dockerfile
 

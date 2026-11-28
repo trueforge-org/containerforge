@@ -35,7 +35,7 @@ Not needed: `defaults/` (unless a default config file is seeded; then include it
 
 ## 3. Base image
 
-Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Build stage: `docker.io/library/rust:1.99.1-slim-trixie` (copied from the upstream Dockerfile). Note: the build stage's glibc must be no newer than the final stage's glibc. Trixie (glibc 2.41) is older than Ubuntu 26.04 (verify the glibc version in the built image with `ldd --version`), so the binary runs on the final image. If Ubuntu 26.04 glibc is older than trixie's, use a rust image built on an Ubuntu tag instead (UNVERIFIED, to check at build time).
 

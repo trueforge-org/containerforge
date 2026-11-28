@@ -36,7 +36,7 @@ No `defaults/` (the app writes its own DB on first start). No `etc/`, `health/`,
 
 ## 3. Base image
 
-- Final and build stages: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The app is a .NET 8 ASP.NET Core server; ContainerForge has no .NET sibling. The ubuntu base is the same choice as `apps/adguardhome-sync` and the draft's Base container section.
+- Final and build stages: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The app is a .NET 8 ASP.NET Core server; ContainerForge has no .NET sibling. The ubuntu base is the same choice as `apps/adguardhome-sync` and the draft's Base container section.
 - Runtime: `aspnetcore-runtime-8.0` from the Ubuntu archive is UNVERIFIED for `resolute` (26.04). If it is absent, use Microsoft's `dotnet-install.sh` with a pinned version and verify the download, or install the runtime in a build stage and copy it. Do not use `COPY --from=mcr.microsoft.com/dotnet/aspnet:8.0` (not a ContainerForge base).
 - Closest siblings: `apps/adguardhome-sync` (prebuilt tarball on ubuntu, `USER apps`, `HOME=/config`). No .NET sibling exists.
 

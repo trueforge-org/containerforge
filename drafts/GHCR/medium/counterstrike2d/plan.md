@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/` needed unless a default `server.cfg` must be s
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage and the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage and the final stage.
 
 Why: the draft says "Runtime image: none (ubuntu alone is enough)". The server is a 32-bit-era freeware binary, so the draft's `libgtk2.0-0:i386` is a candidate dependency (UNVERIFIED: whether the dedicated server needs GTK 2 at all; the GUI libs are a client-side need). Closest sibling: `apps/webgrabplus` (vendor zip extracted on ubuntu) and `apps/adguardhome-sync` (prebuilt binary on ubuntu).
 

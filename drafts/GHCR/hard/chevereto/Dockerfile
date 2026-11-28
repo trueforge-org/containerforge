@@ -2,7 +2,7 @@
 # BLOCKER (plan section 3): upstream composer.json requires PHP ~7.4, which ubuntu 26.04 does not ship.
 # The PHP runtime step below is a placeholder until that blocker is resolved. Do not guess a PHP 8 package set.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 # UNVERIFIED: no upstream checksum for 1.6.2.zip. Compute it, pin it here, and mark it self-computed (trust on first use).

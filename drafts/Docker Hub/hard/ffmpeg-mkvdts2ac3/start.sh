@@ -3,7 +3,7 @@
 # This is our own implementation. The Docker Hub image's scripts are not public, so the exact semantics are UNVERIFIED.
 set -euo pipefail
 
-mkdir -p /config /watch /output /copy /tmp/work
+mkdir -p /tmp/work
 
 # process-file.sh reads these from the environment. Defaults match settings.yaml.
 export script="${script:-mkvdts2ac3.sh}"

@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a FROM base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: PHP app, and there is no PHP base image in the repo, so use ubuntu plus apt `php8.5-fpm` and `nginx`, as `apps/bookstack` and `apps/phpmyadmin` do. Closest siblings: `apps/phpmyadmin` (PHP fed by a pinned download), `apps/bookstack`. Risk: a 2019-era codebase may break on PHP 8.5 (UNVERIFIED); if the spike fails, the app is a blocker.
 

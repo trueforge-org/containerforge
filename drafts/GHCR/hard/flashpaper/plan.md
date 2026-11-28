@@ -38,7 +38,7 @@ Not used: `defaults/` (no seed files), `health/` (no health probe script), `root
 
 ## 3. Base image
 
-- Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The ubuntu base is the default for a non-Python, non-Java runtime (the porter table, and the draft's own rule that PHP comes from apt on ubuntu).
+- Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The ubuntu base is the default for a non-Python, non-Java runtime (the porter table, and the draft's own rule that PHP comes from apt on ubuntu).
 - Closest sibling: `apps/bookstack` (PHP stack on the same ubuntu 26.04 digest, `USER apps`, `VOLUME /config`).
 - Alternative `apps/nginx` (nginx on ubuntu 26.04) was considered. It is not used, because the PHP-FPM part still has to be installed, and the sibling PHP pattern is ubuntu.
 - No `python` or `python-node` base: no Python or Node in the upstream runtime.

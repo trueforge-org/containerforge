@@ -31,7 +31,7 @@ No `root/` (never used). No `DOWNSTREAM_CHANGES.md`: not a `FROM` base.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Ubuntu carries the kdenlive package for both arches. The draft's "runtime image: none" is confirmed. Closest siblings for a desktop image: `apps/kasmvnc` and `apps/rdesktop` (both ship a `root/` tree, which this plan must not copy: use `etc/` or `defaults/` instead). The linuxserver selkies base is NOT an option: it is Arch-based.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Ubuntu carries the kdenlive package for both arches. The draft's "runtime image: none" is confirmed. Closest siblings for a desktop image: `apps/kasmvnc` and `apps/rdesktop` (both ship a `root/` tree, which this plan must not copy: use `etc/` or `defaults/` instead). The linuxserver selkies base is NOT an option: it is Arch-based.
 
 ## 4. Dockerfile
 

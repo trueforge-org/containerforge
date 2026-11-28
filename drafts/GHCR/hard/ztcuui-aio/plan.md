@@ -38,7 +38,7 @@ Files in `apps/ztcuui-aio/`:
 ## 3. Base image
 
 - Draft proposes `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` with the ubuntu alternative.
-- Preferred: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, because the zerotier daemon and Node are both needed and python is unused. Node is then installed from the release tarball or apt under root in a build stage.
+- Preferred: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, because the zerotier daemon and Node are both needed and python is unused. Node is then installed from the release tarball or apt under root in a build stage.
 - Closest sibling: none confirmed (`apps/changedetection`, `apps/budge` use python-node). UNVERIFIED.
 
 ## 4. Dockerfile

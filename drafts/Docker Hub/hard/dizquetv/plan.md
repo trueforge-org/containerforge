@@ -34,7 +34,7 @@ No `defaults/`, `etc/`, `health/` needed (the app seeds its own data dir). No `r
 ## 3. Base image
 
 ```
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 Why: the ubuntu base already ships Node (`NODE_VERSION` 26.x in `apps/ubuntu/docker-bake.hcl`), yarn, tini, curl, tar. The draft suggested python-node; that base is not needed because there is no Python. The prebuilt nexe binary is x64-only and bundles Node 12, so building from source on the base's Node supports amd64 and arm64. Closest sibling: `apps/overseerr` / `apps/pairdrop` (Node source builds on ubuntu); layout from `apps/adguardhome-sync`.
 

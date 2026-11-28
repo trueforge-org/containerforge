@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Fits because PHP 8.5 is in the Ubuntu 26.04 archive and the same family is already used by `apps/bookstack` (`php8.5-*` packages from apt, nginx/php-fpm style). The draft suggested the `nginx` sibling as runtime; the plan does not use it, because PHP must be installed alongside nginx, and the ubuntu base is simpler. Closest sibling: `apps/bookstack` (PHP stack on ubuntu, `/config` for data).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Fits because PHP 8.5 is in the Ubuntu 26.04 archive and the same family is already used by `apps/bookstack` (`php8.5-*` packages from apt, nginx/php-fpm style). The draft suggested the `nginx` sibling as runtime; the plan does not use it, because PHP must be installed alongside nginx, and the ubuntu base is simpler. Closest sibling: `apps/bookstack` (PHP stack on ubuntu, `/config` for data).
 
 ## 4. Dockerfile
 

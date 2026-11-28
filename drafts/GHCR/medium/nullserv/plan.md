@@ -32,14 +32,14 @@ No `defaults/`, `etc/` or `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.m
 
 Build stage: `FROM docker.io/library/golang:<pinned-version>@sha256:<digest>` (an official Go builder, used as a dedicated build stage, per the go-runtime rule). Use the Go version from `apps/ubuntu/docker-bake.hcl` (`GO_VERSION` is `1.27.4` there) and a `golang` digest that the other ContainerForge Go builds use (see `apps/dexafix`, which is the closest Go sibling; its Dockerfile copies a prebuilt binary and does not compile, so copy only the stage layout, not the download). The digest is UNVERIFIED: resolve it with `docker buildx imagetools inspect` before writing.
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the same digest `apps/valkey` and `apps/adguardhome-sync` use). Reason: the upstream `scratch` image has no user and no `/config` owner; the ContainerForge base gives `apps` and writable `/config`. Upstream's static binary runs on glibc Ubuntu because `CGO_ENABLED=0`.
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the same digest `apps/valkey` and `apps/adguardhome-sync` use). Reason: the upstream `scratch` image has no user and no `/config` owner; the ContainerForge base gives `apps` and writable `/config`. Upstream's static binary runs on glibc Ubuntu because `CGO_ENABLED=0`.
 
 ## 4. Dockerfile
 
 1. `FROM docker.io/library/golang:<pinned> AS build`, `ARG VERSION`, `WORKDIR /go/src/app`.
 2. Fetch the source at the pinned commit: `RUN curl -fL https://github.com/bmrzycki/nullserv/archive/${VERSION}.tar.gz | tar xz -C /go/src/app --strip-components=1`. `VERSION` is a commit SHA (40 hex characters, see section 5). Do not fetch `master` at build time.
 3. Build exactly as upstream does: `RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags '-w -extldflags "-static"' -o /out/nullserv *.go`. The `./mkbuildinfo.sh` step must run first (it generates `buildinfo.go` from `buildinfo.go.in`; both exist at master). Run `sh ./mkbuildinfo.sh` before `go build`; without git history it writes `unknown` for the commit info.
-4. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, `ARG VERSION`, `USER root`.
+4. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, `ARG VERSION`, `USER root`.
 5. `COPY --from=build /out/nullserv /app/nullserv` and `COPY --from=build /go/src/app/LICENSE /usr/share/licenses/nullserv/LICENSE` (the file exists at the repo root).
 6. `chown -R apps:apps /app && chmod -R 755 /app`.
 7. Tail:

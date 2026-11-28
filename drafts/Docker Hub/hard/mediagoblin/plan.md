@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a base).
 
 ## 3. Base image
 
-Decision: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with the system Python and a venv created with `--system-site-packages`. Reason: video and audio processing needs `python3-gst-1.0` and `python3-gi` from apt, and those bindings are bound to the distro Python. The draft proposes `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. That base works for image and PDF only, because gi cannot be shared with a custom Python, and Python 3.15 may break old packages (PasteScript, Paste, celery). Use the python base only as a fallback and document that gstreamer features are then off. Closest sibling: `apps/bazarr` for the venv and `/app` layout.
+Decision: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with the system Python and a venv created with `--system-site-packages`. Reason: video and audio processing needs `python3-gst-1.0` and `python3-gi` from apt, and those bindings are bound to the distro Python. The draft proposes `ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. That base works for image and PDF only, because gi cannot be shared with a custom Python, and Python 3.15 may break old packages (PasteScript, Paste, celery). Use the python base only as a fallback and document that gstreamer features are then off. Closest sibling: `apps/bazarr` for the venv and `/app` layout.
 
 ## 4. Dockerfile
 

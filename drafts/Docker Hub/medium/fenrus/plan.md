@@ -31,7 +31,7 @@ No `defaults/`, `etc/`, `health/` needed (the app creates its own data on first 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage and the final stage. Fits because both .NET 10 packages exist in the 26.04 archive and the base already carries `libicu-dev`, curl, tar. Closest sibling: `apps/webgrabplus` (dotnet on ubuntu) and `apps/pwndrop` (build stage then runtime stage).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage and the final stage. Fits because both .NET 10 packages exist in the 26.04 archive and the base already carries `libicu-dev`, curl, tar. Closest sibling: `apps/webgrabplus` (dotnet on ubuntu) and `apps/pwndrop` (build stage then runtime stage).
 
 ## 4. Dockerfile
 

@@ -36,7 +36,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. PHP comes from Ubuntu apt (`php-fpm`, `php-pgsql`, `php-curl`, `php-gd`, `php-mbstring`, `php-xml`, `php-intl`, `php-zip`, `php-apcu`), not from Alpine. Alpine and PHP 8.5 are upstream-only. The Ubuntu PHP version must be checked against tt-rss's requirements (UNVERIFIED: PHP version in 26.04 apt). Closest sibling: `apps/bookstack` (PHP stack on ubuntu) and `apps/nginx` for row 2.
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. PHP comes from Ubuntu apt (`php-fpm`, `php-pgsql`, `php-curl`, `php-gd`, `php-mbstring`, `php-xml`, `php-intl`, `php-zip`, `php-apcu`), not from Alpine. Alpine and PHP 8.5 are upstream-only. The Ubuntu PHP version must be checked against tt-rss's requirements (UNVERIFIED: PHP version in 26.04 apt). Closest sibling: `apps/bookstack` (PHP stack on ubuntu) and `apps/nginx` for row 2.
 
 ## 4. Dockerfile
 

@@ -38,7 +38,7 @@ Do not create `root/`. Do not create `DOWNSTREAM_CHANGES.md` (not a `FROM` base)
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (same as `apps/cni-plugins`, the closest sibling; it uses the `26.4` tag form, which is the sibling's choice, keep it for consistency).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (same as `apps/cni-plugins`, the closest sibling; it uses the `26.4` tag form, which is the sibling's choice, keep it for consistency).
 - Why it fits: a prebuilt Go binary needs no runtime beyond glibc-compatible userland. Upstream's `debian:stable-slim` is replaced by the ContainerForge ubuntu base (repo base table: generic Debian/Ubuntu userland). The static Go build is not known to be static (UNVERIFIED); test that it runs on ubuntu glibc.
 - Build stage is not needed: the release tarball is used, not a source build (repo rule for Go: build stage only if compiled in this image; here it is not).
 

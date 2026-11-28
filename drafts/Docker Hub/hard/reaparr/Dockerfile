@@ -1,7 +1,7 @@
 
 # UNVERIFIED: the ubuntu:26.04 digest comes from plan.md section 3; confirm it on ghcr.io before the first build.
 # Source stage: fetch and extract the tagged source once, for both build stages.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS source
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS source
 
 ARG VERSION
 ARG REAPARR_SHA256
@@ -49,7 +49,7 @@ RUN case "${TARGETARCH}" in \
     -p:InformationalVersion="${VERSION}"
 
 # Runtime stage: ubuntu (glibc).
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 USER root

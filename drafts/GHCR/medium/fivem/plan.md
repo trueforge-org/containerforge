@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The runtime is a glibc x86_64 binary fetched at start, so a generic Ubuntu userland is enough and no language base is needed (draft). Closest sibling: a prebuilt-binary-on-ubuntu app such as `apps/adguardhome-sync`. The upstream `ich777/debian-baseimage` is not used.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The runtime is a glibc x86_64 binary fetched at start, so a generic Ubuntu userland is enough and no language base is needed (draft). Closest sibling: a prebuilt-binary-on-ubuntu app such as `apps/adguardhome-sync`. The upstream `ich777/debian-baseimage` is not used.
 
 ## 4. Dockerfile
 

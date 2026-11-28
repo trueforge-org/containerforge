@@ -36,7 +36,7 @@ Files in `apps/cstrike1-6/`:
 
 ## 3. Base image
 
-- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the repo ubuntu base, same digest as `apps/steamcmd`).
+- FROM: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the repo ubuntu base, same digest as `apps/steamcmd`).
 - Why: the upstream wrapper runs on Debian with the ich777 base, which is not a ContainerForge base. ContainerForge already packages SteamCMD in `apps/steamcmd`, so this app follows the same install path.
 - Why not `ghcr.io/trueforge-org/steamcmd` as FROM: no sibling uses it as FROM (grep of `apps/*/Dockerfile` finds no `FROM ghcr.io/trueforge-org/steamcmd`), and its published tag is `UNVERIFIED`. The plan copies the install steps from `apps/steamcmd/Dockerfile` instead.
 - Closest sibling: `apps/steamcmd` (same steamcmd install, `USER apps`, `COPY --chmod=0755 . /`).

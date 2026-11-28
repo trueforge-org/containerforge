@@ -29,7 +29,7 @@ No `defaults/` is needed unless the first-run config must be pre-seeded (see sec
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, plus the .NET 8 ASP.NET Core runtime. The apt package `dotnet8` was not found for Ubuntu 26.04 (the Launchpad listing stops at 25.10), so the runtime source is UNVERIFIED: use `aspnetcore-runtime-8.0` from Ubuntu if it exists, or install the runtime from Microsoft's `dotnet-install.sh` into `/usr/share/dotnet` with a verified checksum. There is no `apps/dotnet*` image to reuse. Closest sibling: `apps/tvheadend` (PVR, tuners, ubuntu) and `apps/emby` or `apps/jellyfin` for large vendor installs and `/config`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, plus the .NET 8 ASP.NET Core runtime. The apt package `dotnet8` was not found for Ubuntu 26.04 (the Launchpad listing stops at 25.10), so the runtime source is UNVERIFIED: use `aspnetcore-runtime-8.0` from Ubuntu if it exists, or install the runtime from Microsoft's `dotnet-install.sh` into `/usr/share/dotnet` with a verified checksum. There is no `apps/dotnet*` image to reuse. Closest sibling: `apps/tvheadend` (PVR, tuners, ubuntu) and `apps/emby` or `apps/jellyfin` for large vendor installs and `/config`.
 
 ## 4. Dockerfile
 

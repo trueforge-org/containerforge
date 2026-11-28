@@ -46,7 +46,7 @@ No `defaults/`, `etc/`, `scripts/` or `health/`: no config file is needed becaus
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 A static Go binary needs nothing beyond ubuntu (curl is already present in the base, as `apps/adguardhome-sync/Dockerfile` relies on it). Closest sibling: `apps/adguardhome-sync` (prebuilt binary, `TARGETARCH` mapping, `start.sh` that execs the binary).
 

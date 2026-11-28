@@ -33,7 +33,7 @@ No `defaults/` needed. No `root/`. No `DOWNSTREAM_CHANGES.md`.
 ## 3. Base image
 
 ```
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 Why: self-contained .NET binary only needs native libs (libicu, libssl already in base). Add the image/ML libs listed in section 4. For the arm64 source build use a separate build stage from the .NET SDK image (Microsoft sdk 10.0; copy the exact `FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:...` line from an existing apps/ Dockerfile if one exists, otherwise UNVERIFIED digest: resolve with `docker buildx imagetools inspect`). Closest sibling: `apps/webgrabplus` (.NET on ubuntu) and `apps/adguardhome-sync` (download pattern).
 

@@ -1,4 +1,4 @@
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS src
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS src
 
 ARG VERSION=5.44.3
 
@@ -20,7 +20,7 @@ RUN apt-get update \
 # PHP is compiled from the source tree with the upstream script (build/php/compile.sh -t linux64).
 # The amd64 prebuilt PHP tarball URL was not located, so both arches compile the same way.
 # Built on the same ubuntu 26.04 base as the runtime, not the upstream 22.04.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build-php
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build-php
 
 USER root
 
@@ -48,7 +48,7 @@ RUN cd /tmp/pocketmine/build/php \
  && cp -r bin /opt/pocketmine/bin
 
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION=5.44.3
 

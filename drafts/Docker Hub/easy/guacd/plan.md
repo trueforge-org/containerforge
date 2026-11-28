@@ -36,7 +36,7 @@ No `defaults/` (no config file needed: all options are flags). No `root/`. `DOWN
 ## 3. Base image
 
 ```
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 
 Used for both the build stage and the final stage (same glibc and library versions, which matters for the `ldd`-derived package list). C daemon, so no language runtime. Closest sibling by shape: a source build into a runtime stage like the Go rule (`COPY --from=build`), and `apps/valkey` for pinned-version discipline. The ubuntu base already provides `curl`, `tini`, `ca-certificates`, `tzdata`, `fontconfig`, `wget`, `tar`, `xz-utils`, `jq` and `libssl3` (verified in `apps/ubuntu/Dockerfile`), so do not install them again.

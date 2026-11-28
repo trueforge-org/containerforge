@@ -33,7 +33,7 @@ No `defaults/` unless a default site page is needed (reason: an empty `/config` 
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Build stage: the same ubuntu digest with `golang-go` from apt (the pattern of `apps/pwndrop`, which builds Go in an ubuntu build stage). Runtime image is ubuntu alone; no language runtime is needed for a static binary.
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Build stage: the same ubuntu digest with `golang-go` from apt (the pattern of `apps/pwndrop`, which builds Go in an ubuntu build stage). Runtime image is ubuntu alone; no language runtime is needed for a static binary.
 
 Closest sibling: `apps/pwndrop` (Go build stage, `COPY --from=buildstage`, `EXPOSE`, `WORKDIR /config`, `VOLUME /config`).
 

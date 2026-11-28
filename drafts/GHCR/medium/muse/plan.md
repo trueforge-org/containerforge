@@ -33,7 +33,7 @@ No `defaults/` (the bot creates its DB on first run via `migrate-and-start`). No
 
 Use `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (brief). It covers both Python (pip for yt-dlp) and Node (muse). Closest sibling: `apps/changedetection` (python-node, `/app/venv`, `USER apps`, `COPY --chmod=0755 . /`).
 
-Node version inside `python-node`: UNVERIFIED. Muse needs `>=22.12.0`. Check it in the build (`node --version`). If it is older, use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` and install Node 22 from the official tarball, verified against `SHASUMS256.txt`. Decide in the build step, not at review.
+Node version inside `python-node`: UNVERIFIED. Muse needs `>=22.12.0`. Check it in the build (`node --version`). If it is older, use `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` and install Node 22 from the official tarball, verified against `SHASUMS256.txt`. Decide in the build step, not at review.
 
 ## 4. Dockerfile
 

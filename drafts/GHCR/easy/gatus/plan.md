@@ -31,7 +31,7 @@ No `defaults/` or `etc/`. No `DOWNSTREAM_CHANGES.md`: the image is not a `FROM` 
 ## 3. Base image
 
 - Builder: `FROM golang:1.27@sha256:<digest>` (matches `go.mod`). Closest sibling for the build pattern: `apps/whoami` (`git clone --branch "${VERSION}"`, `CGO_ENABLED=0 go build -trimpath -ldflags="-s -w"`). Note that `whoami` builds on the ContainerForge ubuntu base; the go-runtime rule says a dedicated `golang:<ver>` build stage is preferred, so this plan uses the golang image. UNVERIFIED that the tag is published and the digest is pinned at build time.
-- Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Reason: the rule is that apps use the ContainerForge base, and a static binary needs no extra packages. Distroless (upstream final) is not used, because the image must be `USER apps` on the ContainerForge base.
+- Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Reason: the rule is that apps use the ContainerForge base, and a static binary needs no extra packages. Distroless (upstream final) is not used, because the image must be `USER apps` on the ContainerForge base.
 
 ## 4. Dockerfile
 

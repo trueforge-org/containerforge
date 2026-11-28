@@ -38,7 +38,7 @@ Sibling pattern: no direct sibling. The closest prebuilt-binary pattern is `apps
 
 ## 3. Base image
 
-- Default: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Default: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Not the linuxserver `baseimage-rdesktop-web`. Using it would bring in the s6 and PUID/PGID model, which conflicts with the ContainerForge rootless model.
 - Go and Python: not applicable.
 

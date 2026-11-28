@@ -30,7 +30,7 @@ No `defaults/`, `health/` or `etc/` are needed. No `root/`. No `DOWNSTREAM_CHANG
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because rmlint is a native tool that apt provides on 26.04 for amd64 and arm64. No language runtime is needed. Closest sibling: `apps/valkey` (pinned apt package checked against `VERSION`).
 

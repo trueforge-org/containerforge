@@ -35,7 +35,7 @@ No `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base). `
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage and the final stage. Apt has anope on resolute, and the source build (if chosen) needs compilers that the build stage installs. Closest sibling: `apps/ngircd` or `apps/znc` (IRC daemons on ubuntu with a config file in `/config`). Check both during the build for layout (UNVERIFIED which one is the closer template).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage and the final stage. Apt has anope on resolute, and the source build (if chosen) needs compilers that the build stage installs. Closest sibling: `apps/ngircd` or `apps/znc` (IRC daemons on ubuntu with a config file in `/config`). Check both during the build for layout (UNVERIFIED which one is the closer template).
 
 Version decision (must be made before scaffolding):
 - Option A (default in this plan): Ubuntu apt `anope=2.0.17-1.1`, `VERSION=2.0.17`. Simplest, matches the apt pin rule (the apt version is checked against `VERSION`). Drawback: 2.0.17 is older than the 2.0.21 release, and the draft asked for 2.0.20.

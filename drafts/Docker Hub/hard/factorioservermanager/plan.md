@@ -28,7 +28,7 @@ Corrections to the draft: FSM is a prebuilt Go binary (not Node), so the base is
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Glibc is required by Factorio and the FSM binary, which ubuntu provides (the upstream comment says the same). `curl`, `jq`, `tar`, `xz-utils` are already in the base. `unzip` and `xz-utils` are also in the base (`apps/ubuntu/Dockerfile` installs them), so no apt step is needed. Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu) and `apps/steamcmd` (game server download at runtime).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Glibc is required by Factorio and the FSM binary, which ubuntu provides (the upstream comment says the same). `curl`, `jq`, `tar`, `xz-utils` are already in the base. `unzip` and `xz-utils` are also in the base (`apps/ubuntu/Dockerfile` installs them), so no apt step is needed. Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu) and `apps/steamcmd` (game server download at runtime).
 
 ## 4. Dockerfile
 

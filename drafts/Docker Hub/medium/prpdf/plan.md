@@ -33,7 +33,7 @@ Do not use `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM base).
 
 - Final stage: `FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. Matches the draft's runtime choice, and the base provides `/app/venv` and pip.
 - The upstream `python:3.11` image is replaced by the ContainerForge python base. The python base version (3.15.2) differs from upstream 3.11: this is an intended change; tests must confirm the app runs on it (flagged in section 10).
-- Alternative: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` if python base proves wrong.
+- Alternative: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` if python base proves wrong.
 - Closest siblings: `apps/bazarr` (python on `/app` with `start.sh`), `apps/python` (base definition).
 
 ## 4. Dockerfile

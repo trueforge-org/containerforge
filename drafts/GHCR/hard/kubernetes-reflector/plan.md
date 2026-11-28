@@ -31,7 +31,7 @@
 
 ## 3. Base image
 
-- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Build stage: the same ubuntu image (so the SDK comes from the Ubuntu archive, not from MCR).
 - Why: ubuntu is the ContainerForge base for "generic" runtimes, and there is no .NET base in ContainerForge. The .NET 10 runtime is installed from apt in the final stage.
 - Closest sibling: `apps/webgrabplus` (dotnet on ubuntu). It installs dotnet by `dotnet-install.sh` into `/app/dotnet`, which is not used here because apt packages are pinned and reproducible (decision noted in section 10).

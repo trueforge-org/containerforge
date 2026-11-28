@@ -36,7 +36,7 @@ No `defaults/`, `etc/` or `health/` needed unless the setup in section 7 needs a
 Runtime and build base must be a ContainerForge Python base, per the python-runtime rule. The closest sibling is `apps/python` (`ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`, venv at `/app/venv`).
 
 **Blocker:** Open WebUI 0.13.5 needs Python `>=3.11,<3.13`. The `python` base is 3.15.2, which is outside that range. No ContainerForge base with Python 3.11 or 3.12 is confirmed in this plan. Options, to decide before writing the Dockerfile:
-- (a) Build `/app/venv` on Ubuntu (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`) with a Python 3.12 interpreter (for example `uv python install 3.12` in the build stage; uv verifies the download). The venv is then a self-contained `/app/venv`, and `python` base is not used. Recommended, but it needs the maintainers to accept a non-base Python.
+- (a) Build `/app/venv` on Ubuntu (`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`) with a Python 3.12 interpreter (for example `uv python install 3.12` in the build stage; uv verifies the download). The venv is then a self-contained `/app/venv`, and `python` base is not used. Recommended, but it needs the maintainers to accept a non-base Python.
 - (b) Find a ContainerForge Python 3.12 base (none found in the brief's base list; UNVERIFIED for older tags).
 
 Closest sibling for the start script and venv layout: `apps/bazarr` (python, `/app/venv` pattern).
@@ -45,12 +45,12 @@ Closest sibling for the start script and venv layout: `apps/bazarr` (python, `/a
 
 Pick option (a) from section 3 unless the maintainers choose (b). Steps for option (a):
 
-1. Build stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build`, `ARG VERSION`, `USER root`.
+1. Build stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build`, `ARG VERSION`, `USER root`.
 2. Install a Python 3.12 with uv: `RUN curl -LsSf https://astral.sh/uv/... ` (pin the uv version and its checksum; UNVERIFIED, check the uv release page first), then `uv python install 3.12 --install-dir /opt/python` (uv downloads a standalone build and verifies it).
 3. Create the venv under `/app/venv` at build time: `/opt/python/bin/python3.12 -m venv /app/venv`, then `/app/venv/bin/pip install --no-cache-dir "open-webui==${VERSION}"`. Set `PIP_NO_CACHE_DIR=1` and `UV_NO_CACHE=true` and `HOME=/tmp` so no cache lands in `/config`. Torch is NOT installed (see section 10).
 4. Remove test and cache artifacts: `find /app/venv -depth -name __pycache__ -exec rm -rf {} +`, `rm -rf /tmp/*`.
 5. License: `mkdir -p /usr/share/licenses/ollama && cp /app/venv/lib/python3.12/site-packages/open_webui*/LICENSE* /usr/share/licenses/ollama/` (exact dist-info path UNVERIFIED; locate it in the build).
-6. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, `ARG VERSION`, `USER root`.
+6. Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, `ARG VERSION`, `USER root`.
 7. `COPY --from=build /opt/python /opt/python`, `COPY --from=build /app/venv /app/venv`, `COPY --from=build /usr/share/licenses/ollama /usr/share/licenses/ollama`, then `chown -R apps:apps /app && chmod -R 755 /app`. The venv's `python` symlink must resolve inside `/opt/python`, so copy that tree whole (UNVERIFIED that the symlinks are relative).
 8. `ENV PORT=8080 PYTHONUNBUFFERED=1 DOCKER=true ENV=prod SCARF_NO_ANALYTICS=true DO_NOT_TRACK=true ANONYMIZED_TELEMETRY=false HOME=/config PATH=/app/venv/bin:/opt/python/bin:$PATH`.
 9. Tail:

@@ -29,7 +29,7 @@ No `defaults/` unless a server config template is shipped (recommended: `default
 
 ## 3. Base image
 
-Preferred: `FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>` (the image built from `apps/steamcmd`). The digest is **UNVERIFIED** (not published-checked in this run), so the exact string is set when the steamcmd image is built or published. Fallback if steamcmd is not published: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus the apt install that `apps/steamcmd/Dockerfile` does (`steamcmd:i386`, multiverse, debconf for the license).
+Preferred: `FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>` (the image built from `apps/steamcmd`). The digest is **UNVERIFIED** (not published-checked in this run), so the exact string is set when the steamcmd image is built or published. Fallback if steamcmd is not published: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus the apt install that `apps/steamcmd/Dockerfile` does (`steamcmd:i386`, multiverse, debconf for the license).
 
 Why: the Assetto Corsa server is a 32/64-bit Steam download launched through SteamCMD, so reusing `apps/steamcmd` avoids duplicating the i386/lib32 setup. The ich777 wrapper image is Debian bullseye and runs as root, so it is not used.
 

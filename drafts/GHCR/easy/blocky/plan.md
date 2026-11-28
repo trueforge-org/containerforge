@@ -32,7 +32,7 @@ Not needed: `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not used as 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The blocky binary is static (CGO-free, per upstream Dockerfile), so ubuntu is only a userland for the seeded config and the start script. Closest sibling for a prebuilt-binary app: `apps/adguardhome-sync` (listed as the exemplar in the brief).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. The blocky binary is static (CGO-free, per upstream Dockerfile), so ubuntu is only a userland for the seeded config and the start script. Closest sibling for a prebuilt-binary app: `apps/adguardhome-sync` (listed as the exemplar in the brief).
 
 ## 4. Dockerfile
 

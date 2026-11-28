@@ -33,7 +33,7 @@ No `defaults/`, `etc/` or `health/` unless the server needs a default `Config` f
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The draft's "no .NET base" note matches: no ContainerForge java or python base provides .NET, so the .NET runtime is installed with apt on ubuntu. The Fenrus plan (a draft plan, not an existing app) states `aspnetcore-runtime-10.0` and `dotnet-sdk-10.0` exist in the Ubuntu 26.04 archive (amd64 and arm64, packages.ubuntu.com, 2026-11-23). Those package versions are for .NET 10, and the LMP 0.29.2 target version is UNVERIFIED (section 10).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. The draft's "no .NET base" note matches: no ContainerForge java or python base provides .NET, so the .NET runtime is installed with apt on ubuntu. The Fenrus plan (a draft plan, not an existing app) states `aspnetcore-runtime-10.0` and `dotnet-sdk-10.0` exist in the Ubuntu 26.04 archive (amd64 and arm64, packages.ubuntu.com, 2026-11-23). Those package versions are for .NET 10, and the LMP 0.29.2 target version is UNVERIFIED (section 10).
 
 Closest sibling: `apps/webgrabplus` (dotnet runtime on ubuntu, `ENV HOME=/config`, `WORKDIR /config`; it installs .NET with `dotnet-install.sh` into `/app/dotnet`, not apt, so the apt route here is a deviation).
 

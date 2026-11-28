@@ -41,7 +41,7 @@ Do not create `root/` (repo rule: reserved, agents must not touch it). Do not cr
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage (copy from `apps/xvfb/Dockerfile` and `apps/adguardhome-sync/Dockerfile`; the draft's "Foundation: ubuntu" matches the repo rule for generic userland).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage (copy from `apps/xvfb/Dockerfile` and `apps/adguardhome-sync/Dockerfile`; the draft's "Foundation: ubuntu" matches the repo rule for generic userland).
 - Why it fits: the app is a Windows exe run under Wine; no native Linux runtime is needed beyond Wine itself, so ubuntu alone is enough (draft: "Runtime image: none").
 - Not the upstream `jlesage/baseimage-gui:alpine-3.18` base. It is Alpine (musl) and its s6 service layout is not available on `ghcr.io/trueforge-org/ubuntu`. UNVERIFIED whether the trueforge ubuntu base ships s6-overlay or `add-pkg`/`set-cont-env`; check with `docker run --rm <base> sh -c 'ls /etc/s6-overlay /usr/bin/add-pkg'` before using them.
 - Closest siblings: `apps/xvfb` (Xvfb on the same base, no runtime), `apps/kasmvnc` (VNC/web desktop on the same base, ports 3000/3001 and an openbox autostart pattern). Do not copy kasmvnc's `root/` directory.

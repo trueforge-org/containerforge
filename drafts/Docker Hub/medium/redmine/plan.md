@@ -33,7 +33,7 @@ No `defaults/`, `etc/` or `health/` unless a config template is needed (`config/
 
 ## 3. Base image
 
-`ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Ruby has no ContainerForge base, so apt `ruby` and `bundler` are added on ubuntu (the draft's own choice). Closest sibling: `apps/mastodon` (Ruby on Rails on this same base, apt `ruby` + `bundler`, `bundle config` with `without`, `rails assets:precompile`, `S6_STAGE2_HOOK` for an init hook).
+`ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Ruby has no ContainerForge base, so apt `ruby` and `bundler` are added on ubuntu (the draft's own choice). Closest sibling: `apps/mastodon` (Ruby on Rails on this same base, apt `ruby` + `bundler`, `bundle config` with `without`, `rails assets:precompile`, `S6_STAGE2_HOOK` for an init hook).
 
 ## 4. Dockerfile
 

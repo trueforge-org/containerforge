@@ -31,7 +31,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Seahub is a Django app with a long pip list, so the ubuntu base with a venv in `/app/venv` follows the `apps/changedetection` venv pattern (note: that app uses the `python-node` base, not ubuntu; the draft's alternative `ghcr.io/trueforge-org/python` base is worth considering) and `apps/bookstack` for the multi-process layout on ubuntu. UNVERIFIED: that Python of Ubuntu 26.04 works with the seahub requirements (upstream uses 24.04). Closest sibling: `apps/bookstack` (several processes, MariaDB) and `apps/changedetection` (venv).
 

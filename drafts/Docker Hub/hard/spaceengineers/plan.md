@@ -31,7 +31,7 @@ apps/spaceengineers/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (the draft's alternative). The draft prefers `ghcr.io/trueforge-org/steamcmd`, but that image owns `/start.sh` and `/usr/local/bin/steamcmd` and `COPY . /` would overwrite them; no app in this repo uses it as a `FROM`, and it has no `DOWNSTREAM_CHANGES.md`. So install the same steamcmd package as `apps/steamcmd` (multiverse, i386) on plain ubuntu. Closest sibling: `apps/steamcmd`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (the draft's alternative). The draft prefers `ghcr.io/trueforge-org/steamcmd`, but that image owns `/start.sh` and `/usr/local/bin/steamcmd` and `COPY . /` would overwrite them; no app in this repo uses it as a `FROM`, and it has no `DOWNSTREAM_CHANGES.md`. So install the same steamcmd package as `apps/steamcmd` (multiverse, i386) on plain ubuntu. Closest sibling: `apps/steamcmd`.
 
 ## 4. Dockerfile
 

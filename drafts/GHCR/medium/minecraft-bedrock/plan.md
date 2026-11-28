@@ -35,7 +35,7 @@ No `defaults/` (the entry script writes its own `server.properties`). No `etc/` 
 
 ## 3. Base image
 
-- `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The upstream image is `debian`; ContainerForge uses ubuntu. Ubuntu is the final stage and the build stage, because no runtime above ubuntu is needed (no python, java or node).
+- `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The upstream image is `debian`; ContainerForge uses ubuntu. Ubuntu is the final stage and the build stage, because no runtime above ubuntu is needed (no python, java or node).
 - Closest sibling: a single-binary server app on ubuntu (`apps/adguardhome-sync`: release tarball, `chown -R apps:apps`, `USER apps`, `COPY --chmod=0755 . /`), plus `apps/valkey` for a pinned apt package if box64 is later added.
 
 ## 4. Dockerfile

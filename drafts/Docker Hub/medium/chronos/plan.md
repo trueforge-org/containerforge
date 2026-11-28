@@ -34,7 +34,7 @@ No `defaults/` needed (app creates its db and migrates). No `root/`. No `DOWNSTR
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. The UI build needs Node and yarn; the ubuntu base underneath already ships Node and yarn (`apps/ubuntu/Dockerfile`, `Install Node` section), and `ghcr.io/trueforge-org/python-node` is the draft's alternative. Plan uses the python base and runs the UI build in a `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS ui` stage so Node is not left in the final image. Closest siblings: `apps/changedetection` (installs into `/app/venv`) and `apps/bazarr`.
+`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d`. The UI build needs Node and yarn; the ubuntu base underneath already ships Node and yarn (`apps/ubuntu/Dockerfile`, `Install Node` section), and `ghcr.io/trueforge-org/python-node` is the draft's alternative. Plan uses the python base and runs the UI build in a `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS ui` stage so Node is not left in the final image. Closest siblings: `apps/changedetection` (installs into `/app/venv`) and `apps/bazarr`.
 
 ## 4. Dockerfile
 

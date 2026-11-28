@@ -37,7 +37,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
 - Final stage: `ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d`. Sibling pattern: `FROM java25` in the repo. The base is a JRE (Temurin), which is enough for `java -jar`.
 - Build stage: the JRE base has no `javac`, and Gradle needs a JDK. Two options, to be decided before implementing:
-  - A (preferred, check first): `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, then `apt-get install openjdk-25-jdk-headless` and Node 24 (from the archive or NodeSource). UNVERIFIED: the package names and their presence in the 26.04 archive. Run `apt-cache policy` in the base first.
+  - A (preferred, check first): `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, then `apt-get install openjdk-25-jdk-headless` and Node 24 (from the archive or NodeSource). UNVERIFIED: the package names and their presence in the 26.04 archive. Run `apt-cache policy` in the base first.
   - B (fallback): `gradle:9.3.1-jdk25-alpine` pinned by digest, as upstream. This is not a ContainerForge base. It is build-only (musl), and its output is a jar and static files, so it does not reach the runtime. Needs maintainer agreement under the base-image rule.
 - Closest siblings: `apps/nzbhydra2` (Java app built from a release), `apps/java25` (runtime).
 

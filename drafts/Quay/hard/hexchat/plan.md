@@ -33,7 +33,7 @@
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The package is in the Ubuntu 26.04 archive for both arches (section 1), so the ubuntu base is the right fit.
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. The package is in the Ubuntu 26.04 archive for both arches (section 1), so the ubuntu base is the right fit.
 - Do not base on `ghcr.io/binhex/arch-int-gui`: it is Arch Linux, not ContainerForge's Ubuntu base, and the rules forbid copying a foreign runtime in.
 - Closest sibling for a desktop/VNC session: `apps/kasmvnc` (ubuntu base, `start.sh` seeds `/config` openbox files from `/defaults`, `DISPLAY=:1`). Reuse its layout and naming, not its code, because kasmvnc is a larger stack.
 

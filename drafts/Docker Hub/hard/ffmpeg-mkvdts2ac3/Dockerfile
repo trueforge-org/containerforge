@@ -21,14 +21,14 @@ RUN p="${PACKAGE_VERSION#*:}" && test "${p%%-*}" = "${VERSION}" && \
 
 # Only mkvdts2ac3.sh and its license are extracted from the archive, so the license ships alongside it.
 RUN echo "*** Installing mkvdts2ac3 ***" && \
-    mkdir -p /tmp/mkv /app /usr/share/licenses/ffmpeg-mkvdts2ac3 && \
+    mkdir -p /tmp/mkv /app /watch /output /copy /usr/share/licenses/ffmpeg-mkvdts2ac3 && \
     curl -fsSL -o /tmp/mkvdts2ac3.tar.gz \
         "https://github.com/JakeWharton/mkvdts2ac3/archive/refs/tags/${MKVDTS2AC3_VERSION}.tar.gz" && \
     echo "${MKVDTS2AC3_SHA256}  /tmp/mkvdts2ac3.tar.gz" | sha256sum -c - && \
     tar xzf /tmp/mkvdts2ac3.tar.gz -C /tmp/mkv --strip-components=1 --wildcards '*/mkvdts2ac3.sh' '*/LICENSE.txt' && \
     install -m 0755 /tmp/mkv/mkvdts2ac3.sh /app/mkvdts2ac3.sh && \
     install -m 0644 /tmp/mkv/LICENSE.txt /usr/share/licenses/ffmpeg-mkvdts2ac3/mkvdts2ac3-LICENSE.txt && \
-    chown -R apps:apps /app && \
+    chown -R apps:apps /app /watch /output /copy && \
     rm -rf /tmp/*
 
 ENV HOME=/config \

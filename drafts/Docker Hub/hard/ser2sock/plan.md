@@ -30,7 +30,7 @@ No `defaults/` (settings are passed on the command line). No `root/`. No `DOWNST
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build stage and the final stage. Plain C binary, glibc on ubuntu. Closest sibling for a compiled-then-copied binary: `apps/adguardhome-sync` (final layout) with the build stage rule from the Dockerfile instructions.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build stage and the final stage. Plain C binary, glibc on ubuntu. Closest sibling for a compiled-then-copied binary: `apps/adguardhome-sync` (final layout) with the build stage rule from the Dockerfile instructions.
 
 ## 4. Dockerfile
 

@@ -32,7 +32,7 @@ No `defaults/`: nothing is seeded (the operator writes `config.yaml`). No `etc/`
 
 ## 3. Base image
 
-- Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (copied from `apps/hishtory-server/Dockerfile`, which builds a Go binary on this base and copies it into the final stage).
+- Build stage and final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (copied from `apps/hishtory-server/Dockerfile`, which builds a Go binary on this base and copies it into the final stage).
 - Closest sibling: `apps/hishtory-server` (Go built in an ubuntu `AS builder` stage, `COPY --from=builder`).
 - Go toolchain: `apps/ubuntu/docker-bake.hcl` sets `GO_VERSION` default `1.27.4`. `apps/ubuntu/Dockerfile` is single-stage and installs that Go (from dl.google.com, `GO_VERSION`) into the image, as `apps/hishtory-server` relies on, so the builder stage has it. Implementer must still check `go version` inside the builder and confirm it is `>= 1.27.0`.
 - Node.js for the assets stage: `apps/ubuntu/Dockerfile` installs Node (`NODE_VERSION`, default 26.13.1 in `apps/ubuntu/docker-bake.hcl`, SHASUMS-verified) into `/usr/local`, so the builder stage has it; check that it satisfies the upstream pnpm lockfile needs (UNVERIFIED). Do not use the alpine images.

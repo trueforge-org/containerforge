@@ -29,7 +29,7 @@ Not needed: `defaults/` unless a seeded server config is confirmed, `etc/`, `hea
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, build and final stage. The runtime artifact is a glibc-compatible proot build, so the ubuntu base is the right choice (draft: "no language base needed"). Closest sibling: `apps/steamcmd` (game server fetched at runtime) and `apps/webgrabplus` for a runtime-download pattern. No FiveM sibling exists in `apps/`. No dependency container.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, build and final stage. The runtime artifact is a glibc-compatible proot build, so the ubuntu base is the right choice (draft: "no language base needed"). Closest sibling: `apps/steamcmd` (game server fetched at runtime) and `apps/webgrabplus` for a runtime-download pattern. No FiveM sibling exists in `apps/`. No dependency container.
 
 ## 4. Dockerfile
 

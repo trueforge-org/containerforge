@@ -34,7 +34,7 @@ No `defaults/`, `etc/`, `scripts/` or `health/` are planned: the game and SteamC
 
 ## 3. Base image
 
-Foundation: `FROM ghcr.io/trueforge-org/steamcmd` (the runtime image named in the draft, which is built from `apps/steamcmd`). Its digest is UNVERIFIED: it must be read from the image that the `apps/steamcmd` build publishes, following the same rule as the other `FROM` lines. The steamcmd image is itself built on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Closest siblings: `apps/steamcmd` (base) and `apps/ubuntu` (foundation).
+Foundation: `FROM ghcr.io/trueforge-org/steamcmd` (the runtime image named in the draft, which is built from `apps/steamcmd`). Its digest is UNVERIFIED: it must be read from the image that the `apps/steamcmd` build publishes, following the same rule as the other `FROM` lines. The steamcmd image is itself built on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Closest siblings: `apps/steamcmd` (base) and `apps/ubuntu` (foundation).
 
 Open point: the 32-bit libraries (`lib32gcc-s1`, `lib32stdc++6`, `lib32z1`) are required by the upstream image. `apps/steamcmd` installs `steamcmd:i386` with `dpkg --add-architecture i386`, which should provide them. This is UNVERIFIED for the Alien Swarm server; check at build time.
 

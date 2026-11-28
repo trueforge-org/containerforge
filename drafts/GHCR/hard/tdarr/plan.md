@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because the draft assigned the ubuntu base, and the upstream LinuxServer base (jammy, root + s6) is not reused. This means the ffmpeg, HandBrake and mkvtoolnix stack is reinstalled from Ubuntu 26.04 packages, not copied from upstream. UNVERIFIED: that `ffmpeg`, `handbrake-cli`, `mkvtoolnix` and `libtesseract-dev` exist in the 26.04 archive; check with `apt-cache policy` in the build. The jellyfin-ffmpeg 6 and HandBrake-from-git builds on x86 are not reproduced in the first pass; record that gap in section 10.
 

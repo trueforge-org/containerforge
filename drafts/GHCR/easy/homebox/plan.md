@@ -33,7 +33,7 @@ No `defaults/`, `etc/`, `health/` needed: homebox runs on env vars alone (no con
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. A Go binary built with `CGO_ENABLED=0` (upstream) needs no libraries; the release binary's linkage is UNVERIFIED (check with `file` in step 2). Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on the ubuntu base, same `ARG VERSION`/`TARGETARCH` pattern).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. A Go binary built with `CGO_ENABLED=0` (upstream) needs no libraries; the release binary's linkage is UNVERIFIED (check with `file` in step 2). Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on the ubuntu base, same `ARG VERSION`/`TARGETARCH` pattern).
 
 ## 4. Dockerfile
 

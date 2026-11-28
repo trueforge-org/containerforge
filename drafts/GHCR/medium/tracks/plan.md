@@ -30,7 +30,7 @@ Also `apps/tracks/defaults/` only if a `config/database.yml` template is needed 
 
 ## 3. Base image
 
-Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Ruby comes from apt (`ruby-full`, `build-essential`, `libyaml-dev`, `libpq-dev` as needed for native gems) in a build stage; the gems are installed to `/app/vendor/bundle`. Ruby is not in the base image; there is no `ruby` ContainerForge base. Closest sibling: `apps/webgrabplus` (dotnet on ubuntu, build then runtime).
+Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Ruby comes from apt (`ruby-full`, `build-essential`, `libyaml-dev`, `libpq-dev` as needed for native gems) in a build stage; the gems are installed to `/app/vendor/bundle`. Ruby is not in the base image; there is no `ruby` ContainerForge base. Closest sibling: `apps/webgrabplus` (dotnet on ubuntu, build then runtime).
 
 ## 4. Dockerfile
 

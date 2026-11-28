@@ -36,7 +36,7 @@ No `defaults/`, `etc/` or `health/` directories: EmbyStat creates its own data u
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (single stage). Fits because the upstream is a prebuilt zip with its own .NET runtime, so no build stage is needed. The base already has `curl`, `tar`, `ca-certificates` and `libicu-dev` (checked in `apps/ubuntu/Dockerfile`). Closest sibling: `apps/nzbhydra2` (prebuilt artifact downloaded and unpacked on the ubuntu-derived base). For a .NET-on-ubuntu precedent see `apps/sonarr/Dockerfile` (dotnet on ubuntu).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (single stage). Fits because the upstream is a prebuilt zip with its own .NET runtime, so no build stage is needed. The base already has `curl`, `tar`, `ca-certificates` and `libicu-dev` (checked in `apps/ubuntu/Dockerfile`). Closest sibling: `apps/nzbhydra2` (prebuilt artifact downloaded and unpacked on the ubuntu-derived base). For a .NET-on-ubuntu precedent see `apps/sonarr/Dockerfile` (dotnet on ubuntu).
 
 ## 4. Dockerfile
 

@@ -34,7 +34,7 @@ No `defaults/` (RSSHub has no required config files; it reads env). No `etc/`, `
 
 ## 3. Base image
 
-- Build and final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Node is already in this base (`NODE_VERSION` 26.13.1), so the upstream `node:26` requirement matches without `python-node`.
+- Build and final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Node is already in this base (`NODE_VERSION` 26.13.1), so the upstream `node:26` requirement matches without `python-node`.
 - Do not use `ghcr.io/trueforge-org/python-node` unless node in that base is confirmed to be 26.x (UNVERIFIED: `budge` mentions Node 24 in its Dockerfile comment, so python-node may be older).
 - Closest siblings: `apps/changedetection`, `apps/budge` (node apps on ubuntu/python-node; `apps/budge` uses `npm` builds with `USER apps` and `/config`).
 
@@ -213,7 +213,7 @@ Security expectations (from draft, reconciled):
 
 From `apps/rsshub/`:
 
-1. Pre-check: `docker run --rm ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 node --version` must print 26.x.
+1. Pre-check: `docker run --rm ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a node --version` must print 26.x.
 2. `docker buildx bake --print`: must exit 0.
 3. Build: `docker buildx bake --set image-local.platform=linux/amd64 image-local`.
 4. Run with an empty `/config`:

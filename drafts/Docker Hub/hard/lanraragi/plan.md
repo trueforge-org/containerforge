@@ -20,7 +20,7 @@
 - No `root/` (upstream s6 service tree is not ported). No `DOWNSTREAM_CHANGES.md`.
 
 ## 3. Base image
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 Perl has no ContainerForge base; the draft's `python-node` alternative is not needed since Node is only a build tool, so use ubuntu with `nodejs npm` in the build stage only. Closest siblings: `apps/bookstack` (build-from-source app stack), `apps/valkey` (valkey packages).
 
 ## 4. Dockerfile

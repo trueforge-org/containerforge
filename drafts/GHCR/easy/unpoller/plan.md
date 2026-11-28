@@ -30,7 +30,7 @@ No `defaults/`, `health/` or `root/`. No `DOWNSTREAM_CHANGES.md` (not a FROM bas
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Fits because unpoller is a single Go release binary: no runtime is needed, so no java, python or node base. The draft says "ubuntu alone is enough", which matches. Closest sibling for a prebuilt-binary app: `apps/adguardhome-sync` (prebuilt binary on ubuntu). Note: sibling Dockerfiles use the tag `26.4`; the brief's `26.04` tag with the same digest is used here. The digest is the same, so the image is identical.
 

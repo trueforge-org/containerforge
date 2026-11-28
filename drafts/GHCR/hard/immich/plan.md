@@ -35,9 +35,9 @@ Row 2 (machine-learning) is a separate app folder, for example `apps/immich-mach
 
 ## 3. Base image
 
-Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, as the draft says. The server is Node.js, and no Node base exists in the brief's base table, so Node must be installed on the ubuntu base (version UNVERIFIED: read `engines` and `.nvmrc` from the v3.4.2 source). Closest sibling for a Node-on-ubuntu server: none confirmed; use the `apps/bookstack` multi-package apt pattern and the `apps/adguardhome-sync` single-binary layout as shape references only.
+Final stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, as the draft says. The server is Node.js, and no Node base exists in the brief's base table, so Node must be installed on the ubuntu base (version UNVERIFIED: read `engines` and `.nvmrc` from the v3.4.2 source). Closest sibling for a Node-on-ubuntu server: none confirmed; use the `apps/bookstack` multi-package apt pattern and the `apps/adguardhome-sync` single-binary layout as shape references only.
 
-Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with Node, pnpm (via corepack) and `libvips` headers installed by apt.
+Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with Node, pnpm (via corepack) and `libvips` headers installed by apt.
 
 ## 4. Dockerfile
 

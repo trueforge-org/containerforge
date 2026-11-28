@@ -35,7 +35,7 @@ Never use `root/`. `DOWNSTREAM_CHANGES.md`: not needed.
 
 ## 3. Base image
 
-- Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, with `golang-go` from apt (as in `apps/pwndrop`). Go version for `go 1.13` modules: apt version UNVERIFIED; any Go 1.13+ toolchain should build, but verify.
+- Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, with `golang-go` from apt (as in `apps/pwndrop`). Go version for `go 1.13` modules: apt version UNVERIFIED; any Go 1.13+ toolchain should build, but verify.
 - Final stage: the same ubuntu base. The upstream alpine runtime is not used.
 - Closest sibling: `apps/pwndrop` (Go build stage, ubuntu runtime).
 

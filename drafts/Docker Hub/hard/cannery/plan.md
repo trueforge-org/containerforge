@@ -22,7 +22,7 @@
 
 ## 3. Base image
 
-Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (an Elixir release bundles ERTS, so no Erlang is needed at runtime; only libssl, libncurses, libstdc++ equivalents, UNVERIFIED).
+Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (an Elixir release bundles ERTS, so no Erlang is needed at runtime; only libssl, libncurses, libstdc++ equivalents, UNVERIFIED).
 Build stage: an Elixir toolchain image or ubuntu plus apt `erlang`/`elixir`; required versions (verified at tag 1.5.9): Elixir `1.20.5` (exact pin in `mix.exs`), Erlang/OTP `29.1.2` (`.tool-versions`); asset build uses Node `26.13.1` with `npm ci` in `assets/`. Pin the builder by digest, and match the builder's glibc to the runtime (Ubuntu 26.04) to avoid ABI problems, so prefer an ubuntu 26.04 builder with apt/asdf toolchain. Closest sibling: none for Elixir; Go build-stage pattern of `COPY --from` applies.
 
 ## 4. Dockerfile

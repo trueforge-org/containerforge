@@ -40,7 +40,7 @@ Not needed: `defaults/`, `etc/`, `health/`, `app/`, `root/` (never use `root/`).
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 - Why: the apt package is in the Ubuntu archive, so it installs on the ubuntu base. The wrapper's alpine/nginx/root stack is not reused: it adds nginx basic auth and a web server that ContainerForge can handle at the ingress instead, and its GeoLite2 databases are not redistributed by this plan (see section 10).
 - Closest sibling: none for GoAccess. For a single-package ubuntu app with a `start.sh` that reads a mounted directory, use `apps/adguardhome-sync` for layout, and `apps/valkey` for the pinned apt pattern (`apt-get install "pkg=${PACKAGE_VERSION}"` plus a `test` that checks `VERSION`).
 

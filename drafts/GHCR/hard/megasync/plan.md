@@ -34,7 +34,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build and final stages.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build and final stages.
 
 Why it fits: the upstream base is a Debian 12 noVNC image. ContainerForge has no equivalent GUI base, so the GUI (Qt client, Xvnc, noVNC) is rebuilt on ubuntu. Closest sibling for a GUI/VNC app on ubuntu: `apps/kasmvnc`. The vendor deb targets Ubuntu 24.04 (arm64) and Debian 12 (amd64), so ubuntu 26.04 is a best fit for the arm64 deb and an untested fit for the amd64 Debian deb (see section 10).
 

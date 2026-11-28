@@ -30,7 +30,7 @@ No `defaults/`, `etc/`, `health/` needed. No `root/` (never used). No `DOWNSTREA
 
 ## 3. Base image
 
-- Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The brief's base table lists ubuntu for Go final stages.
+- Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The brief's base table lists ubuntu for Go final stages.
 - Build stage Go toolchain: apt `golang-go` on the ubuntu base is the sibling pattern (apps/pwndrop uses an ubuntu build stage with `golang-go`). The Go version must satisfy `go 1.27.3` in go.mod. UNVERIFIED: whether Ubuntu 26.04's `golang-go` package is >= 1.27.3. If not, use a pinned `golang:<ver>` build stage instead, and check the sibling pattern first.
 - Closest sibling: `apps/pwndrop` (Go compiled in a build stage, copied into the ubuntu final stage).
 

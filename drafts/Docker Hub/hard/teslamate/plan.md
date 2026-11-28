@@ -31,7 +31,7 @@ No defaults/ (no seeded config files). No root/. No DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
 
-- Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Final: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Builder: `FROM elixir:1.20.4-otp-29 AS builder` (the exact image upstream uses, tag verified on Docker Hub; Debian trixie, glibc, multi-arch; it is not a ContainerForge image, so pin its digest at implementation time, UNVERIFIED which digest). The release bundles ERTS built against Debian trixie glibc/OpenSSL, run on Ubuntu 26.04 (newer glibc, so compatible; UNVERIFIED OpenSSL 3 soname match, `libssl3t64` is also what upstream installs). No ContainerForge Elixir base exists.
 - Closest siblings: `apps/it-tools` (builder + final stage with npm assets), `apps/postgresql` for the dependency.
 

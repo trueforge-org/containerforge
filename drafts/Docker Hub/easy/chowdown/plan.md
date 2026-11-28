@@ -40,7 +40,7 @@ Runtime stage (exact line from `apps/theme-park/Dockerfile`):
 FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f
 ```
 
-Builder stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS builder` (the draft's "alternative runtime image: ubuntu" is only needed for the build). Jekyll is Ruby, so the python base is not useful.
+Builder stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS builder` (the draft's "alternative runtime image: ubuntu" is only needed for the build). Jekyll is Ruby, so the python base is not useful.
 
 ## 4. Dockerfile
 

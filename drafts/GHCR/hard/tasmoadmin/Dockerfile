@@ -1,7 +1,7 @@
 # UNVERIFIED (draft): the upstream image is Alpine with s6-overlay. This draft runs nginx and php-fpm on ubuntu as apps.
 # The app version is 5.1.0. The plan pinned 5.0.0, but the context shows 5.1.0 is the latest tag and the chart uses it.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG TASMOADMIN_SHA256=""

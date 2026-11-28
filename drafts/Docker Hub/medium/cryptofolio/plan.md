@@ -35,7 +35,7 @@ No `defaults/`, `etc/` or `health/` is needed: there is no seeded config and no 
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage.
 
 Why: the upstream PHP 7.4 base is EOL and Debian-based, and this is the ContainerForge PHP pattern on ubuntu with `php8.5-*` from apt (`apps/kimai`, `apps/bookstack`). No separate build stage is needed, because the app is source only.
 

@@ -35,7 +35,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
 - Final stage and build stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`. It provides Python (for the `kobo-cloudscraper` venv) and Node. This matches the draft's choice of `python-node`. Sibling pattern: `apps/changedetection`, `apps/budge` (python-node apps).
 - UNVERIFIED: the Node major in `python-node:3.15.2`. Upstream needs Node 26 (`node:26.13.1`). If the base's Node is older than the `engines` field of `package.json`, use option B:
-  - B: build stage on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus NodeSource or the upstream Node 26 binary (pinned by digest and checked by checksum). The runtime stays on python-node. Needs a maintainer decision.
+  - B: build stage on `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus NodeSource or the upstream Node 26 binary (pinned by digest and checked by checksum). The runtime stays on python-node. Needs a maintainer decision.
 - `pnpm` version: pin `pnpm@11.28.9` as upstream does. Install with `npm install -g pnpm@11.28.9` in the build stage only.
 
 ## 4. Dockerfile

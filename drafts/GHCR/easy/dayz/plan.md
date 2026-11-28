@@ -32,7 +32,7 @@ No `defaults/`, `etc/`, `health/` or `root/` is planned: SteamCMD and the server
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:<DIGEST UNVERIFIED>`. Reason: `apps/steamcmd` already provides SteamCMD (`/usr/local/share/steamcmd/steamcmd.sh`, `/usr/local/bin/steamcmd`), the i386 build with 32-bit libs, and `/start.sh`, which installs apps through `STEAM_APP_IDS`. The tag is the `apps/steamcmd` VERSION; the published digest is UNVERIFIED because no fetched source or local build output provides it. Closest siblings: `apps/steamcmd` (base) and `apps/adguardhome-sync` (exemplar layout). Foundation: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+`FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:<DIGEST UNVERIFIED>`. Reason: `apps/steamcmd` already provides SteamCMD (`/usr/local/share/steamcmd/steamcmd.sh`, `/usr/local/bin/steamcmd`), the i386 build with 32-bit libs, and `/start.sh`, which installs apps through `STEAM_APP_IDS`. The tag is the `apps/steamcmd` VERSION; the published digest is UNVERIFIED because no fetched source or local build output provides it. Closest siblings: `apps/steamcmd` (base) and `apps/adguardhome-sync` (exemplar layout). Foundation: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 ## 4. Dockerfile
 

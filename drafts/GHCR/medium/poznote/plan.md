@@ -35,7 +35,7 @@ No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Reason: PHP is installed from the Ubuntu archive, as `apps/bookstack` does (`php8.5-*` packages). No PHP base exists for this app in ContainerForge.
 - Closest sibling: `apps/bookstack` (PHP 8.5 from apt on ubuntu, `USER root` for install, `USER apps` at the end, symlinks into `/config`).
 

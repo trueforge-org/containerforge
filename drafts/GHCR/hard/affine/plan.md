@@ -35,7 +35,7 @@
 
 ## 3. Base image
 
-- Final and build stages: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+- Final and build stages: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 - Why not `python-node`: the brief maps Node-only apps to the ubuntu base. `python-node` also ships Node 24 (per the `budge` comment), and AFFiNE's upstream image uses Node 22.
 - Node 22 comes from apt (`nodejs` 22.22.1 on resolute), pinned to that version in the Dockerfile.
 - Closest sibling: `apps/planka` (Node app on the ubuntu-family base with a build stage and a `USER apps` final stage). The `apps/planka` base is `python-node`, so only its layout is copied, not its base.

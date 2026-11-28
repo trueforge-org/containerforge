@@ -33,7 +33,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. No runtime sibling is needed: the Go server and the webapp come in the tarball.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. No runtime sibling is needed: the Go server and the webapp come in the tarball.
 
 Fits because the upstream final image is distroless (no shell, no apt), which does not suit `start.sh`. The tarball is unpacked onto the ubuntu base, as the draft says. Closest sibling: `apps/pwndrop` (ubuntu base, app unpacked under `/app/<app>/`, `WORKDIR /config`, `VOLUME /config`). Go and the bundled webapp need no runtime package.
 

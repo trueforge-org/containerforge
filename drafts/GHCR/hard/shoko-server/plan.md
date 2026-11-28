@@ -33,7 +33,7 @@ No `defaults/` needed unless the Shoko-WebUI is vendored (see section 10). No `r
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the build and final stages.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the build and final stages.
 
 Why: the base already has `libicu-dev`, `curl` and `tar`. The .NET runtime is not on this base, so it is installed (see section 4). Closest siblings: `apps/webgrabplus` (the only .NET app on ubuntu; it installs the runtime with Microsoft's `dotnet-install.sh` into `/app/dotnet`, lines 17 to 24 of its Dockerfile) and `apps/sonarr`/`apps/radarr` (the Servarr .NET pattern). The `apps/ubuntu` base sets `DOTNET_RUNNING_IN_CONTAINER=true`.
 

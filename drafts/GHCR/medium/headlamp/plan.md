@@ -35,7 +35,7 @@ No `defaults/`, `etc/`, `health/`. No `root/`. No `DOWNSTREAM_CHANGES.md` (not a
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, for both the download stage and the final stage. The runtime is a Go server plus static frontend, so no language base is needed. The draft's `apps/node` sibling does not exist; the closest pattern is `apps/adguardhome-sync` (prebuilt release tarball on ubuntu, `ARG VERSION`, `TARGETARCH`).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, for both the download stage and the final stage. The runtime is a Go server plus static frontend, so no language base is needed. The draft's `apps/node` sibling does not exist; the closest pattern is `apps/adguardhome-sync` (prebuilt release tarball on ubuntu, `ARG VERSION`, `TARGETARCH`).
 
 ## 4. Dockerfile
 

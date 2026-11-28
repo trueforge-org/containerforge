@@ -34,7 +34,7 @@ Never use `root/`.
 
 ## 3. Base image
 
-- Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`, `AS build`, with `golang-go` from apt (same approach as `apps/pwndrop/Dockerfile`). Go version: the apt version of `golang-go` on Ubuntu 26.04 is UNVERIFIED; the v0.1.0 tree is from 2017, so check whether it builds with a modern toolchain (it may need `GO111MODULE` handling or a GOPATH layout; the Makefile is UNVERIFIED). If modern Go fails, use a `golang:<ver>` build stage with a pinned digest and `COPY --from`.
+- Build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`, `AS build`, with `golang-go` from apt (same approach as `apps/pwndrop/Dockerfile`). Go version: the apt version of `golang-go` on Ubuntu 26.04 is UNVERIFIED; the v0.1.0 tree is from 2017, so check whether it builds with a modern toolchain (it may need `GO111MODULE` handling or a GOPATH layout; the Makefile is UNVERIFIED). If modern Go fails, use a `golang:<ver>` build stage with a pinned digest and `COPY --from`.
 - Final stage: the same ubuntu base. No runtime image needed (draft: `Runtime image: none`).
 - Closest sibling for Go on ubuntu: `apps/pwndrop`.
 

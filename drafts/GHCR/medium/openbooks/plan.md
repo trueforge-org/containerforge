@@ -31,7 +31,7 @@ Not needed: `defaults/` (no seeded config), `etc/`, `health/`, `root/` (never us
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The draft's "ubuntu alone is enough" is correct: the binary is static, so no runtime package is needed.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. The draft's "ubuntu alone is enough" is correct: the binary is static, so no runtime package is needed.
 
 The arm64 build stage needs Go and Node. Use a separate build stage (`FROM` a Go image, version UNVERIFIED for this plan; pick the Go version from a sibling Go app or the go-runtime rules) and copy the output into the ubuntu final stage. Node for the web build: UNVERIFIED which Node major version works (upstream uses node:16, which is EOL). Plan to try node 22 LTS in the build stage and record the result.
 

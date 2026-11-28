@@ -37,7 +37,7 @@ No `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. Apt has the package on resolute, so the ubuntu base is enough (draft: "Runtime image: none"). Closest sibling: `apps/adguardhome-sync` (ubuntu base, `USER root` for setup, `USER apps` at the end). A sibling with an apt-installed daemon and a config file is the better template; pick one from `apps/` at build time (for example `apps/valkey`, which pins an apt version and uses a health dir, as the rules mention).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. Apt has the package on resolute, so the ubuntu base is enough (draft: "Runtime image: none"). Closest sibling: `apps/adguardhome-sync` (ubuntu base, `USER root` for setup, `USER apps` at the end). A sibling with an apt-installed daemon and a config file is the better template; pick one from `apps/` at build time (for example `apps/valkey`, which pins an apt version and uses a health dir, as the rules mention).
 
 ## 4. Dockerfile
 

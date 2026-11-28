@@ -1,5 +1,5 @@
 # Build stage: guacd is compiled from the Apache source tarball. The draft's apt route does not work because resolute has no guacd package.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
 ARG VERSION
 # Must be changed together with VERSION. Renovate cannot update it.
@@ -47,7 +47,7 @@ RUN set -eux; \
   rm -f /tmp/ldd.out /tmp/libs.txt /tmp/deps.txt; \
   rm -rf /tmp/gs.tgz "/tmp/guacamole-server-${VERSION}"
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 USER root

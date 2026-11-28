@@ -37,7 +37,7 @@ No `defaults/`, `etc/`, `health/` (the app creates its data on first start). No 
 ## 3. Base image
 
 ```dockerfile
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ```
 
 Upstream's `alpine:3.5` is EOL and musl, so it is not reused. Ubuntu gives glibc, a supported Perl, and apt `cpanminus`. Closest siblings: `apps/adguardhome-sync` (ubuntu layout, `VOLUME /config`, `USER apps`) and `apps/budge` (build step on the base, then `COPY --chmod=0755 . /`). There is no Perl sibling (UNVERIFIED: not searched beyond the apps list).

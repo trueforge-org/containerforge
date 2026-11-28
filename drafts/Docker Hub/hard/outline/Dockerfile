@@ -2,7 +2,7 @@
 # Upstream: https://github.com/outline/outline (Dockerfile + Dockerfile.base at v1.13.0, reviewed; no tarball checksum published, integrity comes from yarn.lock).
 # UNVERIFIED: build memory need; upstream sets a 24 GB heap, this draft uses 8 GB.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS builder
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS builder
 
 ARG VERSION
 
@@ -31,7 +31,7 @@ RUN npm install -g corepack && \
     yarn workspaces focus --production && \
     yarn cache clean
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ENV NODE_ENV=production \
     MALLOC_ARENA_MAX=2 \

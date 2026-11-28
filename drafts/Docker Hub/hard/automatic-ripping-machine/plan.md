@@ -19,7 +19,7 @@
 Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh, defaults/ (arm.yaml, apprise.yaml, abcde.conf seeds taken from the repo's setup/ dir at the tag, copied at build into /defaults). No DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
-`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (draft). Python compatibility of ARM's requirements.txt with 3.15 is UNVERIFIED; fallback `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` with apt python3. Closest siblings: apps/bazarr (python), apps/pyload-ng (python plus system tools), apps/unrar. Note: apps/ does not contain handbrake, makemkv or abcde, so all of them are new here.
+`FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b8f8d1ad91e00997f3eae4deea94d2e9d` (draft). Python compatibility of ARM's requirements.txt with 3.15 is UNVERIFIED; fallback `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` with apt python3. Closest siblings: apps/bazarr (python), apps/pyload-ng (python plus system tools), apps/unrar. Note: apps/ does not contain handbrake, makemkv or abcde, so all of them are new here.
 
 ## 4. Dockerfile
 1. `ARG VERSION`, `ARG TARGETARCH`; `USER root`.

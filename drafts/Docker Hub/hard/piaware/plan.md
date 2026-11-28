@@ -27,7 +27,7 @@ No `root/`; no DOWNSTREAM_CHANGES.md.
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage; build stage also ubuntu with build-essential. No s6: replace with `start.sh` starting helpers in the background and `exec`-ing piaware (section 7). No sibling with a multi-process `start.sh` was confirmed (`apps/bookstack/start.sh` ends in a single `exec`); compiled-from-source: none exact. UNVERIFIED precedent.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage; build stage also ubuntu with build-essential. No s6: replace with `start.sh` starting helpers in the background and `exec`-ing piaware (section 7). No sibling with a multi-process `start.sh` was confirmed (`apps/bookstack/start.sh` ends in a single `exec`); compiled-from-source: none exact. UNVERIFIED precedent.
 
 ## 4. Dockerfile
 

@@ -32,12 +32,12 @@ No `defaults/`: the connection file is optional. No `root/`. No `DOWNSTREAM_CHAN
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft proposes `python-node`, but the bundle needs **Node 12**, while that base ships a current Node; the old Node binary is installed separately under `/usr/local/lib/node12` (not `/app`) and used explicitly. Ubuntu base keeps the image small. The runtime for the bundle is glibc (Debian jessie), so it works on Ubuntu 26.04 for amd64. Closest sibling: `apps/kasmvnc` (copies node assets between stages); for prebuilt tarballs `apps/adguardhome-sync`.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The draft proposes `python-node`, but the bundle needs **Node 12**, while that base ships a current Node; the old Node binary is installed separately under `/usr/local/lib/node12` (not `/app`) and used explicitly. Ubuntu base keeps the image small. The runtime for the bundle is glibc (Debian jessie), so it works on Ubuntu 26.04 for amd64. Closest sibling: `apps/kasmvnc` (copies node assets between stages); for prebuilt tarballs `apps/adguardhome-sync`.
 
 ## 4. Dockerfile
 
 1. Stage `src`: `FROM mongoclient/mongoclient:4.0.1@sha256:885dd82b3db780258d1204850058453e0db7f7010b8a75033fac066062318f04 AS src` (the draft's copy-from; upstream Dockerfile compiled it).
-2. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. `ARG VERSION`, `ARG NODE_VERSION=12.16.1`, `ARG NODE_SHA256=b826753f14df9771609ffb8e7d2cc4cb395247cb704cf0cea0f04132d9cf3505`, `ARG TARGETARCH`.
+2. Final stage `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. `ARG VERSION`, `ARG NODE_VERSION=12.16.1`, `ARG NODE_SHA256=b826753f14df9771609ffb8e7d2cc4cb395247cb704cf0cea0f04132d9cf3505`, `ARG TARGETARCH`.
 3. `USER root`. Fail clearly on arm64: `RUN [ "${TARGETARCH}" = "amd64" ] || (echo "nosqlclient is amd64 only" && exit 1)`. Packages: `xz-utils` (check the base first) to unpack Node, plus `ca-certificates`; pin versions if installed from apt and check them against the Ubuntu 26.04 archive.
 4. Node 12: download `node-v${NODE_VERSION}-linux-x64.tar.xz`, `echo "${NODE_SHA256}  /tmp/node.tar.xz" | sha256sum -c -`, extract to `/usr/local/lib/node12` with `--strip-components=1`, link `/usr/local/bin/node12`; copy its `LICENSE` to `/usr/share/licenses/nosqlclient/LICENSE-node`.
 5. `COPY --from=src /opt/meteor/dist/bundle /app` (read-only). Remove `/app/entrypoint.sh` (replaced by our `start.sh`). `COPY --from=src` the upstream `LICENSE` if the bundle contains one, otherwise fetch it from the GitHub tag `4.0.1` into `/usr/share/licenses/nosqlclient/LICENSE` (path UNVERIFIED); the bundled `programs/server/npm` tree has third-party licenses, keep it.

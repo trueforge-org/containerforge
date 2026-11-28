@@ -31,7 +31,7 @@ No `start.sh` of our own: the kasmvnc base already owns `/start.sh`, and `COPY .
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/kasmvnc:<tag>@sha256:<digest>`. UNVERIFIED: published tag and digest; take them from the registry or the latest kasmvnc build when porting, never guess. Rationale: gives a rootless browser desktop with openbox on 3000/3001, replacing the upstream noVNC+supervisor+lxde stack. Fallback if kasmvnc is unsuitable as a base: ubuntu `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` plus xvfb and noVNC (large rework). Closest sibling: `apps/kasmvnc`, then `apps/rdesktop`.
+`FROM ghcr.io/trueforge-org/kasmvnc:<tag>@sha256:<digest>`. UNVERIFIED: published tag and digest; take them from the registry or the latest kasmvnc build when porting, never guess. Rationale: gives a rootless browser desktop with openbox on 3000/3001, replacing the upstream noVNC+supervisor+lxde stack. Fallback if kasmvnc is unsuitable as a base: ubuntu `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` plus xvfb and noVNC (large rework). Closest sibling: `apps/kasmvnc`, then `apps/rdesktop`.
 
 ## 4. Dockerfile
 

@@ -24,7 +24,7 @@ The Hub image `snoopy86/ffmpeg` has no public source (amd64 only, last pushed 20
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` (draft: ubuntu alone is enough; confirmed). Closest siblings: `apps/valkey` (pinned apt version with `PACKAGE_VERSION`, `health/` dir) and `apps/beets`, `apps/bazarr` (ffmpeg via apt). `jq`, `coreutils`, `curl`, `tar`, `xz-utils` are already in the base; `perl-base` is part of Ubuntu minimal; `rsync` and `mkvtoolnix` are not listed in the base: install them.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` (draft: ubuntu alone is enough; confirmed). Closest siblings: `apps/valkey` (pinned apt version with `PACKAGE_VERSION`, `health/` dir) and `apps/beets`, `apps/bazarr` (ffmpeg via apt). `jq`, `coreutils`, `curl`, `tar`, `xz-utils` are already in the base; `perl-base` is part of Ubuntu minimal; `rsync` and `mkvtoolnix` are not listed in the base: install them.
 
 ## 4. Dockerfile
 
@@ -33,7 +33,7 @@ The Hub image `snoopy86/ffmpeg` has no public source (amd64 only, last pushed 20
 3. `apt-get update && apt-get install -y --no-install-recommends "ffmpeg=${PACKAGE_VERSION}" mkvtoolnix inotify-tools rsync` then `rm -rf /var/lib/apt/lists/*`. Do not pin mkvtoolnix and inotify-tools (they are not the tagged version). If the pinned ffmpeg no longer exists in the archive when building (security update), the build fails on purpose; Renovate must bump `PACKAGE_VERSION`.
 4. Download `mkvdts2ac3` tarball, verify `echo "${MKVDTS2AC3_SHA256}  /tmp/m.tar.gz" | sha256sum -c -`, extract only `mkvdts2ac3.sh` and `LICENSE.txt`: `tar xzf /tmp/m.tar.gz -C /tmp --strip-components=1 --wildcards '*/mkvdts2ac3.sh' '*/LICENSE.txt'`; `install -m 0755 /tmp/mkvdts2ac3.sh /app/mkvdts2ac3.sh`; `mkdir -p /usr/share/licenses/ffmpeg-mkvdts2ac3 && cp /tmp/LICENSE.txt /usr/share/licenses/ffmpeg-mkvdts2ac3/mkvdts2ac3-LICENSE.txt` (Apache license text must ship because only part of the archive is extracted). Also copy `/usr/share/doc/ffmpeg/copyright` and `/usr/share/doc/mkvtoolnix/copyright` references (Ubuntu already ships them under `/usr/share/doc`; no extra copy needed).
 5. `chown -R apps:apps /app`, `rm -rf /tmp/*`.
-6. `ENV HOME=/config TMPDIR=/tmp`; `USER apps`; `COPY --chmod=0755 . /`; no `EXPOSE` (no ports); `VOLUME /config`; `WORKDIR /config`. Declare `VOLUME` only for `/config`: `/watch`, `/output`, `/copy` are user mounts documented in settings.yaml (they are created with `mkdir -p` if absent but writable only when mounted).
+6. `ENV HOME=/config TMPDIR=/tmp`; `USER apps`; `COPY --chmod=0755 . /`; no `EXPOSE` (no ports); `VOLUME /config`; `WORKDIR /config`. Declare `VOLUME` only for `/config`: `/watch`, `/output`, `/copy` are user mounts documented in settings.yaml (the Dockerfile creates them owned by `apps`, since start.sh cannot create directories in `/`).
 
 ## 5. docker-bake.hcl
 
@@ -59,7 +59,7 @@ Own implementation (the Hub scripts are not public). Contract, to be documented 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
-mkdir -p /config /watch /output /copy /tmp/work
+mkdir -p /tmp/work
 script="${script:-mkvdts2ac3.sh}"; fmt="${output_format:-mkv}"
 # split ';' separated option strings into arrays (never eval them)
 IFS=';' read -r -a ff_params <<< "${parameters:-}"

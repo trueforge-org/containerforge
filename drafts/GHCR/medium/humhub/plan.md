@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage. The ubuntu base carries apt, so PHP comes from the archive (`php8.5-*`), as in `apps/bookstack/Dockerfile`. Closest sibling: `apps/bookstack` (PHP app on ubuntu with a Composer install, runtime `/config` symlinks, `clear_env = no` for php-fpm).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage. The ubuntu base carries apt, so PHP comes from the archive (`php8.5-*`), as in `apps/bookstack/Dockerfile`. Closest sibling: `apps/bookstack` (PHP app on ubuntu with a Composer install, runtime `/config` symlinks, `clear_env = no` for php-fpm).
 
 Build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` only if Node is needed for the grunt asset build. Node is in this base. UNVERIFIED whether the ubuntu base has a usable `nodejs`; the python-node base avoids that question.
 

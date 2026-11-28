@@ -32,7 +32,7 @@ No `defaults/` unless a config template is needed for seeding `/config`. No `roo
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. The draft suggested `ghcr.io/trueforge-org/python-node` as runtime base; the upstream tarball bundles its own Node runtime (x64), so a Node base is not required. Use ubuntu alone to keep the image small, unless the arm64 tarball lacks a bundled Node (UNVERIFIED: check for `node` inside the arm64 tarball). Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on ubuntu, per-arch `$TARGETARCH`).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. The draft suggested `ghcr.io/trueforge-org/python-node` as runtime base; the upstream tarball bundles its own Node runtime (x64), so a Node base is not required. Use ubuntu alone to keep the image small, unless the arm64 tarball lacks a bundled Node (UNVERIFIED: check for `node` inside the arm64 tarball). Closest sibling: `apps/adguardhome-sync` (prebuilt tarball on ubuntu, per-arch `$TARGETARCH`).
 
 ## 4. Dockerfile
 

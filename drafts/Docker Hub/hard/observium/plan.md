@@ -32,7 +32,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base). `etc/` and `
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`
 
 Why: PHP source app; Apache and PHP come from ubuntu apt (26.04 = PHP 8.5 per Observium docs). No language base needed. Closest sibling: `apps/bookstack` (PHP stack on ubuntu, php8.5 packages, `/config` symlinks, DB wait loop). `apps/mariadb` exists and is the hard dependency.
 

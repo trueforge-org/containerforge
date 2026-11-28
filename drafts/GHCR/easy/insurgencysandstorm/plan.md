@@ -30,7 +30,7 @@ No `defaults/`, `etc/`, `health/`. No `root/`. No `DOWNSTREAM_CHANGES.md` (not a
 
 ## 3. Base image
 
-Runtime base `ghcr.io/trueforge-org/steamcmd` (`apps/steamcmd`): its `start.sh` installs SteamCMD under `/config/Steam/steamcmd`, runs `app_update` from `STEAM_APP_IDS` into `STEAM_INSTALL_DIR`, and ships the 32-bit libraries. Built from `ghcr.io/trueforge-org/ubuntu:26.04` (digest `sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`). No sibling app uses the steamcmd base yet, so the steamcmd image digest is UNVERIFIED: resolve it with `docker buildx imagetools inspect ghcr.io/trueforge-org/steamcmd:<VERSION>` and pin it. Closest sibling: `apps/steamcmd`, and `hurtworld` in this same batch (same pattern).
+Runtime base `ghcr.io/trueforge-org/steamcmd` (`apps/steamcmd`): its `start.sh` installs SteamCMD under `/config/Steam/steamcmd`, runs `app_update` from `STEAM_APP_IDS` into `STEAM_INSTALL_DIR`, and ships the 32-bit libraries. Built from `ghcr.io/trueforge-org/ubuntu:26.04` (digest `sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`). No sibling app uses the steamcmd base yet, so the steamcmd image digest is UNVERIFIED: resolve it with `docker buildx imagetools inspect ghcr.io/trueforge-org/steamcmd:<VERSION>` and pin it. Closest sibling: `apps/steamcmd`, and `hurtworld` in this same batch (same pattern).
 
 ## 4. Dockerfile
 

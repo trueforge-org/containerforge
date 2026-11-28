@@ -30,7 +30,7 @@ No `defaults/` or `etc/` unless a config seed is shown to be needed (UNVERIFIED)
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. It is a generic userland, and the AppImage is self-contained. Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. It is a generic userland, and the AppImage is self-contained. Closest sibling: `apps/adguardhome-sync` (prebuilt binary on ubuntu).
 
 ## 4. Dockerfile
 

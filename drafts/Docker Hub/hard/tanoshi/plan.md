@@ -30,7 +30,7 @@ apps/tanoshi/
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the final stage (upstream runtime is also ubuntu:26.04, so libraries match). Builder stage on the same ubuntu image with rustup (no ContainerForge Rust base). Closest sibling: `apps/adguardhome-sync` (single binary + config seed) for runtime, `apps/it-tools` for the multi-stage build shape.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the final stage (upstream runtime is also ubuntu:26.04, so libraries match). Builder stage on the same ubuntu image with rustup (no ContainerForge Rust base). Closest sibling: `apps/adguardhome-sync` (single binary + config seed) for runtime, `apps/it-tools` for the multi-stage build shape.
 
 ## 4. Dockerfile
 

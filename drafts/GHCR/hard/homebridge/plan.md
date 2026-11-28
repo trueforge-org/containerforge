@@ -33,7 +33,7 @@ No `defaults/` (the config is created by homebridge on first start, so seeding i
 
 ## 3. Base image
 
-Final and build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`.
+Final and build stage: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 
 Draft proposed `python-node`. Not chosen: the homebridge runtime comes from the vendor `.deb`, and no Python code or Node build runs in this image. If the `.deb` depends on a system `node` that ubuntu does not supply, switch to `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`. Node presence in the `.deb` dependency tree: UNVERIFIED. Closest sibling: `apps/adguardhome-sync` (single binary on ubuntu, same `COPY --chmod` shape).
 

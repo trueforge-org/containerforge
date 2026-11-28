@@ -32,7 +32,7 @@ Reason: no root/ allowed; etc/ and defaults/ are on the allow-list. No DOWNSTREA
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Steam is a glibc, x86-64 binary and works on Ubuntu with `dpkg --add-architecture i386`. Closest sibling: `apps/steamcmd` (i386 multiarch + apt), and `apps/kasmvnc`, `apps/rdesktop`, `apps/xvfb` for the VNC/desktop parts (read these before writing; their patterns win over the upstream overlay).
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Steam is a glibc, x86-64 binary and works on Ubuntu with `dpkg --add-architecture i386`. Closest sibling: `apps/steamcmd` (i386 multiarch + apt), and `apps/kasmvnc`, `apps/rdesktop`, `apps/xvfb` for the VNC/desktop parts (read these before writing; their patterns win over the upstream overlay).
 
 ## 4. Dockerfile
 

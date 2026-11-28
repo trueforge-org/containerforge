@@ -31,7 +31,7 @@ No `defaults/`, `etc/` or `root/`. No `DOWNSTREAM_CHANGES.md` (nothing builds fr
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Reason: closed-source x86-64 glibc binary, no language runtime. Closest sibling: `apps/adguardhome-sync` (download + extract to `/app`). Ubuntu 26.04 may be too new for a 2015-era binary (libjpeg8, OpenSSL 1.0 style dependencies): UNVERIFIED, use `ldd` on the binary in the build.
+`FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Reason: closed-source x86-64 glibc binary, no language runtime. Closest sibling: `apps/adguardhome-sync` (download + extract to `/app`). Ubuntu 26.04 may be too new for a 2015-era binary (libjpeg8, OpenSSL 1.0 style dependencies): UNVERIFIED, use `ldd` on the binary in the build.
 
 ## 4. Dockerfile
 

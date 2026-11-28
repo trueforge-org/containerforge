@@ -34,7 +34,7 @@ No `defaults/` or `etc/` needed: the script writes all state under `/config`. No
 
 ## 3. Base image
 
-Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454`. Upstream's runtime is `alpine:latest` (musl); this plan does not use it. Our binary is built with `CGO_ENABLED=0`, so a glibc base is fine.
+Final stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`. Upstream's runtime is `alpine:latest` (musl); this plan does not use it. Our binary is built with `CGO_ENABLED=0`, so a glibc base is fine.
 
 Closest sibling: `apps/pwndrop` (Go built in an ubuntu build stage, copied into the ubuntu runtime stage).
 

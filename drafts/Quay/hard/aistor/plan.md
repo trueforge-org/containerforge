@@ -35,7 +35,7 @@ No `defaults/` or `etc/` are needed: no seeded config is shipped. `health/` only
 
 ## 3. Base image
 
-- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454` for the download stage and the final stage. The binary is a static-enough Go executable from the vendor; the ubuntu base is the ContainerForge default for vendor Linux binaries (`apps/adguardhome-sync` does the same with a release tarball).
+- `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a` for the download stage and the final stage. The binary is a static-enough Go executable from the vendor; the ubuntu base is the ContainerForge default for vendor Linux binaries (`apps/adguardhome-sync` does the same with a release tarball).
 - Closest sibling: `apps/adguardhome-sync` (download a per-arch release artifact into `/app`, pinned version, `TARGETARCH` mapping).
 - Verify at build time whether the binary needs glibc beyond the ubuntu base (`ldd` on the file in the build stage). UNVERIFIED until the binary is run.
 
