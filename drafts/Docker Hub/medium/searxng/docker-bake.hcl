@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=docker.io/searxng/searxng versioning=regex:^(?<major>\d{4})\.(?<minor>\d{2})\.(?<patch>\d{2})-[0-9a-f]+$
-  default = "2026.11.26-b5605b8f2"
+  default = "2026.11.28-b98615a25"
 }
 
 variable "SOURCE_REF" {
