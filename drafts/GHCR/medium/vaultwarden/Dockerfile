@@ -3,7 +3,7 @@
 
 FROM --platform=$BUILDPLATFORM docker.io/tonistiigi/xx@sha256:40fe21f44bb8cddf1eb1226db190d0a984118f62ee02a91b77d99448d28264a6 AS xx
 FROM --platform=$BUILDPLATFORM docker.io/vaultwarden/web-vault@sha256:7baaa7d5349742548b6c44e557c1512157b22010cdf314ccc399ffdcacb5eb52 AS vault
-FROM --platform=$BUILDPLATFORM docker.io/library/rust:1.100.0-slim-trixie@sha256:3b199fd6db7d709274df56565b8f4003f9e30d7bfcff9d53148c86053b7855e2 AS build
+FROM --platform=$BUILDPLATFORM docker.io/library/rust:1.100.0-slim-trixie@sha256:24516ae4487ab804e3db145c93f7240e58e225587ab9b7c62ea31a218727bf67 AS build
 
 ARG VERSION
 ARG TARGETPLATFORM
