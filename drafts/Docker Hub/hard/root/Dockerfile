@@ -5,7 +5,7 @@ ARG VERSION
 ARG ROOT_SHA256
 ARG TARGETARCH
 # renovate: datasource=pypi depName=notebook
-# UNVERIFIED: 7.2.2 is a placeholder pin; confirm it exists and supports the ROOT python bindings.
+# UNVERIFIED: 7.2.3 is a placeholder pin; confirm it exists and supports the ROOT python bindings.
 ARG JUPYTER_VERSION=7.2.2
 USER root
 
