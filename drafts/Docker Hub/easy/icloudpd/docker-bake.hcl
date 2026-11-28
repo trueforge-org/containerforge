@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=icloud-photos-downloader/icloud_photos_downloader versioning=semver
-  default = "v1.34.0"
+  default = "v1.35.0"
 }
 
 variable "LICENSE" {
