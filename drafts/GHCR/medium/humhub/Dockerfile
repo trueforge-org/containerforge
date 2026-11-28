@@ -69,12 +69,12 @@ RUN apt-get update && \
 COPY --from=build /build/humhub /app/humhub
 
 # Writable paths point at the persistent /config. UNVERIFIED: whether build-generated assets must be seeded into /config/assets.
-# protected/config is the installer target, so an empty /config stays valid.
-RUN rm -rf \
+# protected/config keeps upstream's tracked defaults (common.php, web.php, console.php) as config.dist; start.sh seeds them into /config when missing.
+RUN mv /app/humhub/protected/config /app/humhub/protected/config.dist && \
+    rm -rf \
       /app/humhub/uploads \
       /app/humhub/assets \
       /app/humhub/themes \
-      /app/humhub/protected/config \
       /app/humhub/protected/modules \
       /app/humhub/protected/runtime && \
     ln -s /config/uploads /app/humhub/uploads && \

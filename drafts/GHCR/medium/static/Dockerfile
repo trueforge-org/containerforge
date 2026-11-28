@@ -16,6 +16,7 @@ RUN apt-get update \
 
 # UNVERIFIED: tag name 0.0.2 (the plan assumes no "v" prefix); no checksum exists for git tags
 RUN git clone --depth 1 --branch "${VERSION}" https://git.mills.io/prologic/static.git /tmp/static \
+ && mkdir -p /app/static \
  && cd /tmp/static \
  && CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /app/static/static ./cmd/static \
  && rm -rf /tmp/static

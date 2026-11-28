@@ -56,6 +56,10 @@ COPY --from=buildstage /usr/share/licenses/bytestash /usr/share/licenses/bytesta
 RUN \
   ln -s /config/data /app/data
 
+ENV HOME=/config \
+    NODE_ENV=production \
+    NPM_CONFIG_CACHE=/tmp/npm
+
 # add local files
 USER apps
 COPY --chmod=0755 . /
@@ -64,4 +68,4 @@ COPY --chmod=0755 . /
 EXPOSE 5000
 VOLUME /config
 
-WORKDIR /config
+WORKDIR /app/bytestash

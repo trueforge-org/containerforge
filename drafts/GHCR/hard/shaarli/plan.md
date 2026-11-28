@@ -48,7 +48,7 @@ Renovate-compatible: the ubuntu digest is copied as-is from the brief.
 4. Final stage: `FROM <ubuntu>`, `ARG VERSION`, `USER root`.
 5. `apt-get update && apt-get install -y --no-install-recommends nginx php8.5-fpm php8.5-cli php8.5-curl php8.5-gd php8.5-intl php8.5-ldap php8.5-mbstring php8.5-xml php8.5-zip php8.5-gettext` (package list derived from upstream extensions; php8.5-gettext availability and whether ctype/json/iconv/session/openssl/zlib are built into php8.5-common are UNVERIFIED; the build will tell). Clean `/var/lib/apt/lists/*`.
 6. Pool and fpm tweaks as in `apps/phpmyadmin`: `clear_env = no`, plus `listen = /tmp/php-fpm.sock` and `user = apps` via `defaults/php-fpm/www.conf` copied to `/etc/php/8.5/fpm/pool.d/www.conf`.
-7. `mkdir -p /app/shaarli`, `cp -a /tmp/src/shaarli/. /app/shaarli/`. Remove upstream `data/` and `cache/` directories from the copy, and symlink them: `ln -s /config/data /app/shaarli/data`, `ln -s /config/cache /app/shaarli/cache`. Symlinks are dangling until `start.sh` creates them.
+7. `mkdir -p /app/shaarli`, `cp -a /tmp/src/shaarli/. /app/shaarli/`. Remove upstream `data/` and `cache/` directories from the copy, (also `pagecache/` and `tmp/`, which Shaarli writes at runtime) and symlink them: `ln -s /config/data /app/shaarli/data`, `ln -s /config/cache /app/shaarli/cache`, `ln -s /config/pagecache /app/shaarli/pagecache`, `ln -s /config/tmp /app/shaarli/tmp`. Symlinks are dangling until `start.sh` creates them.
 8. License: `install -D /tmp/src/shaarli/COPYING /usr/share/licenses/shaarli/COPYING`.
 9. Set `ENV TMPDIR=/tmp`.
 10. `chown -R apps:apps /app/shaarli` and `chmod -R 755 /app/shaarli`.
@@ -115,7 +115,7 @@ Only `TZ` is read, by the base image. No Shaarli env vars exist upstream, so non
 ```bash
 #!/usr/bin/env bash
 
-mkdir -p /config/data /config/cache /tmp/nginx
+mkdir -p /config/data /config/cache /config/pagecache /config/tmp /tmp/nginx
 
 # Shaarli writes its config and bookmarks under data/ and its template cache under cache/.
 # Both are symlinked from /app/shaarli, so nothing is written to /app.

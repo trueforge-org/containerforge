@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (homer is not a `FROM` base). No `etc/` (
 
 ## 3. Base image
 
-Runtime: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f` (UNVERIFIED: the tag and digest are not in the repo, `apps/nginx` is built from the apt version `1.28.3-2ubuntu1.14` on the same ubuntu digest; check the published image). It serves the static site, matching the draft's nginx runtime. The nginx sibling runs as `USER apps`, listens on 8080 by default and `CMD`s `nginx -c /config/nginx.conf -g 'daemon off;'`; its `docker-entrypoint.d/03-copyconfig.sh` seeds `/config/nginx.conf` and `/config/sites/default.conf` before `/start.sh` runs (the ubuntu entrypoint runs `/start.sh "$@"`).
+Runtime: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1` (UNVERIFIED: the tag and digest are not in the repo, `apps/nginx` is built from the apt version `1.28.3-2ubuntu1.14` on the same ubuntu digest; check the published image). It serves the static site, matching the draft's nginx runtime. The nginx sibling runs as `USER apps`, listens on 8080 by default and `CMD`s `nginx -c /config/nginx.conf -g 'daemon off;'`; its `docker-entrypoint.d/03-copyconfig.sh` seeds `/config/nginx.conf` and `/config/sites/default.conf` before `/start.sh` runs (the ubuntu entrypoint runs `/start.sh "$@"`).
 
 Build stage (only unzip is needed, the site is pre-built upstream): `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a`.
 

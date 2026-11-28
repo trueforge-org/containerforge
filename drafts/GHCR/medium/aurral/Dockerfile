@@ -16,6 +16,7 @@ ENV HOME=/tmp \
 # Source archive. UNVERIFIED: curl must exist in the base image.
 FROM node-base AS source
 ARG VERSION
+USER root
 RUN mkdir -p /src \
     && curl -fL "https://github.com/lklynet/aurral/archive/refs/tags/v${VERSION}.tar.gz" \
         | tar xz -C /src --strip-components=1

@@ -60,6 +60,7 @@ COPY --from=build /tmp/src/user-data/conf.yml /defaults/conf.yml
 # Config and icons are written to /config (app root is read-only at runtime)
 RUN set -eux; \
     ln -s /config/user-data /app/dashy/user-data; \
+    rm -rf /app/dashy/public/item-icons; \
     ln -s /config/item-icons /app/dashy/public/item-icons; \
     chown -R root:root /app/dashy /defaults; \
     chmod -R 0755 /app/dashy /defaults

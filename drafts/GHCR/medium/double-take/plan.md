@@ -67,7 +67,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-tags depName=skrashevich/double-take versioning=loose
-  default = "1.13.11"
+  default = "1.13.12.0rc3"
 }
 
 variable "LICENSE" {
@@ -121,10 +121,10 @@ if [ ! -s "${store}/config/config.yml" ] && [ -f /defaults/config.yml ]; then
 fi
 
 cd /double-take
-/usr/local/bin/recognizer -cnn -port 8888 -models /opt/recognizer/models -storage "${store}" -d &
+/usr/local/bin/recognizer -port 8888 -models /opt/recognizer/models -storage "${store}" -d &
 
 export CONFIG_PATH="${CONFIG_PATH:-${store}/config}"
-exec node server.js
+exec node api/server.js
 ```
 
 Notes: the recognizer's `-storage` flag is remapped from `/.storage` to `/config/storage`, so the upstream path is not written. Every `/.storage` reference in upstream `entrypoint.sh` must be remapped the same way. `exec` the API so signals reach PID 1; the recognizer runs in the background and needs a supervisor or a check. Confirm the API entry file (`server.js`) and whether `CONFIG_PATH` is a file or a directory (UNVERIFIED). Do not write to `/app`. The seed source is `/defaults/` because `COPY --chmod=0755 . /` places the app's `defaults/` folder at `/defaults`.
@@ -141,7 +141,7 @@ http:
 - port: '3000'
   path: /
 filePaths:
-- /double-take/server.js
+- /double-take/api/server.js
 - /usr/local/bin/recognizer
 - /opt/recognizer/models
 - /usr/share/licenses/double-take/LICENSE
@@ -178,9 +178,9 @@ cd apps/double-take
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name double-take-probe --read-only --tmpfs /tmp \
-  -v double-take-probe-config:/config double-take:1.13.11
+  -v double-take-probe-config:/config double-take:1.13.12.0rc3
 docker logs -f double-take-probe
-forgetool containers test --image double-take:1.13.11 --config ./apps/double-take/container-test.yaml
+forgetool containers test --image double-take:1.13.12.0rc3 --config ./apps/double-take/container-test.yaml
 docker rm -f double-take-probe; docker volume rm double-take-probe-config
 ```
 

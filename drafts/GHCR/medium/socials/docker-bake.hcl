@@ -4,10 +4,10 @@ variable "APP" {
   default = "socials"
 }
 
-// UNVERIFIED: upstream has no releases or tags. Pinned to commit 2b7a17b, which has the same
-// Dockerfile as main. Replace with the current main HEAD SHA before the first build.
-// renovate: datasource=git-refs depName=https://github.com/diamkil/socials currentValue=main
 variable "VERSION" {
+  // UNVERIFIED: upstream has no releases or tags. Pinned to commit 2b7a17b, which has the same
+  // Dockerfile as main. Replace with the current main HEAD SHA before the first build.
+  // renovate: datasource=git-refs depName=https://github.com/diamkil/socials currentValue=main
   default = "2b7a17b519896cc18b775536d7f9016921df133a"
 }
 

@@ -7,7 +7,7 @@ Note: the draft image is `coderaiser/cloudcmd` and the app name is `cloudcommand
 
 | Item | Value |
 | --- | --- |
-| Version to build | v19.24.1 (GitHub release 2026-11-23, tag commit `e854f6b7572890c98f62d5fdb4d65ef1ec1e584a`). npm `cloudcmd` 19.24.1 published 2026-11-23. Draft image tag 19.23.2 is older. |
+| Version to build | (bake now pins 19.24.6 via renovate; facts below were checked at) v19.24.1 (GitHub release 2026-11-23, tag commit `e854f6b7572890c98f62d5fdb4d65ef1ec1e584a`). npm `cloudcmd` 19.24.1 published 2026-11-23. Draft image tag 19.23.2 is older. |
 | Renovate | `datasource=npm depName=cloudcmd versioning=semver` (proposed). Alternative: `github-releases depName=coderaiser/cloudcmd`. |
 | License | MIT (repo and npm) |
 | Source | https://github.com/coderaiser/cloudcmd |
@@ -63,7 +63,7 @@ WORKDIR /config
 variable "APP" { default = "cloudcommander" }
 variable "VERSION" {
   // renovate: datasource=npm depName=cloudcmd versioning=semver
-  default = "19.24.1"
+  default = "19.24.6"
 }
 variable "LICENSE" { default = "MIT" }
 variable "SOURCE" { default = "https://github.com/coderaiser/cloudcmd" }
@@ -168,9 +168,9 @@ cd apps/cloudcommander
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name cloudcommander-probe --read-only --tmpfs /tmp \
-  -v cloudcommander-probe-config:/config cloudcommander:19.24.1
+  -v cloudcommander-probe-config:/config cloudcommander:19.24.6
 docker logs -f cloudcommander-probe
-forgetool containers test --image cloudcommander:19.24.1 --config ./apps/cloudcommander/container-test.yaml
+forgetool containers test --image cloudcommander:19.24.6 --config ./apps/cloudcommander/container-test.yaml
 docker rm -f cloudcommander-probe; docker volume rm cloudcommander-probe-config
 ```
 

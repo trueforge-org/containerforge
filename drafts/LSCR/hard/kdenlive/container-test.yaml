@@ -8,3 +8,4 @@ tcp:
 filePaths:
 - /usr/bin/kdenlive
 - /usr/bin/melt
+- /usr/share/licenses/kdenlive/COPYING

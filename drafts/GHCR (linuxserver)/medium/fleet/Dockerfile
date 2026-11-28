@@ -1,5 +1,3 @@
-# NOTE: digest taken from apps/nzbhydra2/Dockerfile as it is in the repo today.
-# The plan cited 74b81362..., which does not match the repo.
 FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:efdc903d9ce0436b6207bc5a4e732d24a27231851975c999770fd8709a8316b8
 
 ARG VERSION

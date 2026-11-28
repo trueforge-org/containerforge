@@ -7,6 +7,9 @@ ports:
     protocol: tcp
     required: true
 env:
+  - name: SCRYPTED_INSECURE_PORT
+    default: "10611"
+    required: false
   - name: NODE_OPTIONS
     default: "--dns-result-order=ipv4first"
     required: false

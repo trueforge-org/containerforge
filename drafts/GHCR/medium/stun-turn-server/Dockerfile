@@ -26,7 +26,7 @@ RUN test "${PACKAGE_VERSION%%-*}" = "${VERSION}" && \
 USER apps
 COPY --chmod=0755 . /
 
-EXPOSE 3478/tcp 3478/udp 5349/tcp
+EXPOSE 3478/tcp 3478/udp 5349/tcp 5349/udp
 
 VOLUME /config
 

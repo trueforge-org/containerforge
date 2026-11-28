@@ -183,7 +183,7 @@ exec supervisord -n -c /etc/photoshow/supervisord.conf
 ```
 
 - The `php-fpm` pool sets no `user`/`group`: php-fpm runs as `apps` (rootless).
-- `supervisord.conf` (in `etc/photoshow/`) starts two programs: `php-fpm -F -y /tmp/photoshow/php-fpm.conf` and `nginx -g "daemon off;" -c /etc/photoshow/nginx.conf`. `supervisord` supervises both, so a crash in either is visible to the container. Its pid and log go to `/tmp`.
+- `supervisord.conf` (in `etc/photoshow/`) starts two programs: `php-fpm -F -y /tmp/photoshow/php-fpm.conf` and `nginx -c /etc/photoshow/nginx.conf` (`daemon off;` is set in the config, so no `-g` flag, which would be a duplicate directive). `supervisord` supervises both, so a crash in either is visible to the container. Its pid and log go to `/tmp`.
 - `nginx.conf` root: `/app/photoshow`, `index index.php`, `fastcgi_pass 127.0.0.1:9000`, `fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name`, `client_max_body_size 0`, `pid /tmp/photoshow/nginx.pid`, all temp paths under `/tmp/photoshow/`, `access_log /dev/stdout`, `error_log /dev/stderr`.
 - Listen on `0.0.0.0:8080` (`listen 8080;`), not localhost.
 - Idempotent: seeding happens only when `user/` is missing.

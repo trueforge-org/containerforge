@@ -14,6 +14,8 @@ RUN apt-get update \
       melt \
       frei0r-plugins \
       ffmpeg \
+ && mkdir -p /usr/share/licenses/kdenlive \
+ && cp /usr/share/doc/kdenlive/copyright /usr/share/licenses/kdenlive/COPYING \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/*
 

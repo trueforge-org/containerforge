@@ -8,6 +8,7 @@ Recommendation up front: this container is a poor port candidate. Upstream is ar
 | Item | Value | Source |
 | --- | --- | --- |
 | Latest tag | v2024.1.28-r1, published 2024-01-28 (draft matches) | https://api.github.com/repos/kmahyyg/ztncui-aio/releases/tags/v2024.1.28-r1 |
+| Version in docker-bake.hcl | 2024.5.3-rc1 (bumped by renovate after this plan). The facts in the rows below were checked at v2024.1.28-r1 and must be re-checked at the bumped tag (asset names, Dockerfile, state paths). | UNVERIFIED |
 | Repo status | archived: true | https://api.github.com/repos/kmahyyg/ztncui-aio |
 | Renovate | datasource=github-releases depName=kmahyyg/ztncui-aio versioning=loose (renovate config not checked) | UNVERIFIED: not fetched |
 | License | GPL-3.0 | https://api.github.com/repos/kmahyyg/ztncui-aio |
@@ -59,7 +60,7 @@ Do not run s6 as `apps`. s6 needs root to start services. If s6 is kept, the con
 ## 5. docker-bake.hcl
 
 - `APP`: `ztcuui-aio`.
-- `VERSION`: `// renovate: datasource=github-releases depName=kmahyyg/ztncui-aio versioning=loose` and `default = "2024.1.28-r1"`. Strip the `v` in asset URLs if needed.
+- `VERSION`: `// renovate: datasource=github-releases depName=kmahyyg/ztncui-aio versioning=loose` and `default = "2024.5.3-rc1"`. Strip the `v` in asset URLs if needed.
 - `LICENSE`: `GPL-3.0`.
 - `SOURCE`: `https://github.com/kmahyyg/ztncui-aio`.
 - Standard targets and group `default` with `image-local`.
@@ -110,8 +111,8 @@ Do not run s6 as `apps`. s6 needs root to start services. If s6 is kept, the con
 From `apps/ztcuui-aio/`, per the build-test protocol:
 1. `docker buildx bake --print`.
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`.
-3. `docker run --rm -d --name ztcuui-aio-probe --read-only --tmpfs /tmp --tmpfs /run --cap-add NET_ADMIN --device /dev/net/tun -v ztcuui-aio-probe-config:/config ztcuui-aio:2024.1.28-r1` (flags are a starting point; confirm they are needed). Expected readiness: web UI listening on 3443. Confirm the line after the first run.
-4. `forgetool containers test --image ztcuui-aio:2024.1.28-r1 --config ./container-test.yaml`.
+3. `docker run --rm -d --name ztcuui-aio-probe --read-only --tmpfs /tmp --tmpfs /run --cap-add NET_ADMIN --device /dev/net/tun -v ztcuui-aio-probe-config:/config ztcuui-aio:2024.5.3-rc1` (flags are a starting point; confirm they are needed). Expected readiness: web UI listening on 3443. Confirm the line after the first run.
+4. `forgetool containers test --image ztcuui-aio:2024.5.3-rc1 --config ./container-test.yaml`.
 5. Clean up: `docker rm -f ztcuui-aio-probe; docker volume rm ztcuui-aio-probe-config`.
 6. arm64 build only if amd64 fails for an arm64 reason.
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-mkdir -p /config/data /config/cache /tmp/nginx/client_body /tmp/nginx/proxy /tmp/nginx/fastcgi
+mkdir -p /config/data /config/cache /config/pagecache /config/tmp /tmp/nginx/client_body /tmp/nginx/proxy /tmp/nginx/fastcgi
 
 # Shaarli creates its config on the first visit to the setup wizard. Existing files are never overwritten.
 # php-fpm daemonizes. Its pid file and error log are set in the image (see Dockerfile).

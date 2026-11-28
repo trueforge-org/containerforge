@@ -35,7 +35,7 @@ Never use `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`
+`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`
 
 Reason: the static UI is served by nginx, and `apps/nginx` is the matching ContainerForge runtime. Use `apps/nginx` as the closest sibling; read its Dockerfile, `settings.yaml` and `container-test.yaml` before writing ours.
 

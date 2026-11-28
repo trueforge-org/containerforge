@@ -96,7 +96,8 @@ Do not list 8443 unless HTTPS is implemented in the start script. Dependency `po
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
-mkdir -p /config/upload /config/log
+export VOLUMES_FILES="${VOLUMES_FILES:-/config/files}"   # also VOLUMES_IMAGES=/config/media, VOLUMES_LOG=/config/logs (names from the chart)
+mkdir -p "${VOLUMES_FILES}" /config/media /config/logs
 export SERVER_PORT="${SERVER_PORT:-8080}"
 # upload/log/data paths: confirm the env names from source and point them at /config
 cd /app/gamevault-backend

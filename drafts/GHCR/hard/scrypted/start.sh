@@ -5,6 +5,8 @@ mkdir -p /config/volume
 mkdir -p /tmp/npm-cache
 export npm_config_cache=/tmp/npm-cache
 export NODE_OPTIONS="${NODE_OPTIONS:---dns-result-order=ipv4first}"
+# The chart sets this port explicitly; without it the server uses its own default, so 10611 is pinned here.
+export SCRYPTED_INSECURE_PORT="${SCRYPTED_INSECURE_PORT:-10611}"
 
 cd /app/server || exit 1
 

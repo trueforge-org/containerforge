@@ -38,7 +38,7 @@ No `defaults/`, `etc/` or `health/`: the app creates its own state under `/confi
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a` (digest from `apps/nzbhydra2/Dockerfile`). It fits because the app is one jar that runs on Java 17. Closest sibling: `apps/nzbhydra2` (digest verified in `apps/nzbhydra2/Dockerfile`; single jar downloaded from a GitHub release into `/app`, `USER apps`, `VOLUME /config`). Check in the build that `java` is on `PATH` (`command -v java`), since the base layout is not checked here.
+`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:efdc903d9ce0436b6207bc5a4e732d24a27231851975c999770fd8709a8316b8` (digest from `apps/nzbhydra2/Dockerfile`). It fits because the app is one jar that runs on Java 17. Closest sibling: `apps/nzbhydra2` (digest verified in `apps/nzbhydra2/Dockerfile`; single jar downloaded from a GitHub release into `/app`, `USER apps`, `VOLUME /config`). Check in the build that `java` is on `PATH` (`command -v java`), since the base layout is not checked here.
 
 ## 4. Dockerfile
 

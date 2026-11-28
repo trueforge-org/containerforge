@@ -36,7 +36,7 @@ Final stage and build stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01
 
 1. `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 2. Build stage on the ubuntu base: apt `ruby-full build-essential libyaml-dev libpq-dev libffi-dev git ca-certificates` (not in base: confirm with `apt-cache policy`). Pin ruby/apt versions against the Ruby version the Gemfile needs.
-3. Download the source archive `https://github.com/tracksapp/tracks/archive/refs/tags/v${VERSION}.tar.gz` with curl, verify the sha256 recorded in the Dockerfile, extract to `/app`.
+3. Download the source archive `https://github.com/tracksapp/tracks/archive/refs/tags/v${VERSION}.tar.gz` with curl, verify the sha256 recorded in the Dockerfile, extract to `/app`. Then copy `config/database.docker.yml` to `config/database.yml` and `config/site.docker.yml` to `config/site.yml`, as the upstream Dockerfile does.
 4. `gem install bundler`, `bundle config set --local path /app/vendor/bundle`, `bundle install --without development test`, `RAILS_ENV=production bundle exec rails assets:precompile` (SECRET_KEY_BASE set to a build-time dummy only for precompile).
 5. Copy `/usr/share/doc` and upstream `LICENSE` to `/usr/share/licenses/tracks/`.
 6. `ENV HOME=/config`, `RAILS_LOG_TO_STDOUT=1`, `RAILS_ENV=production`, `TMPDIR=/tmp`, `BUNDLE_PATH=/app/vendor/bundle`. Caches (bundle, tmp) must stay under `/tmp` or `/config`.

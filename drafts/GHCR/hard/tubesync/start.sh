@@ -3,6 +3,8 @@
 # and TUBESYNC_RESET_DOWNLOAD_DIR, which upstream uses to chown /downloads and cannot do as the apps user.
 # UNVERIFIED: the WSGI module path and the gunicorn install.
 
+set -euo pipefail
+
 mkdir -p /config/tubesync /config/state /tmp/cache
 cd /app/tubesync || exit 1
 

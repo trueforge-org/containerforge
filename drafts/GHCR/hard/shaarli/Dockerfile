@@ -52,9 +52,11 @@ COPY --from=build /tmp/src/shaarli/COPYING /usr/share/licenses/shaarli/COPYING
 
 # Shaarli writes config, bookmarks and cache under /config through these symlinks.
 # They dangle until start.sh creates the targets.
-RUN rm -rf /app/shaarli/data /app/shaarli/cache && \
+RUN rm -rf /app/shaarli/data /app/shaarli/cache /app/shaarli/pagecache /app/shaarli/tmp && \
   ln -s /config/data /app/shaarli/data && \
   ln -s /config/cache /app/shaarli/cache && \
+  ln -s /config/pagecache /app/shaarli/pagecache && \
+  ln -s /config/tmp /app/shaarli/tmp && \
   chown -R apps:apps /app/shaarli && \
   chmod -R 755 /app/shaarli
 

@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "RCLONE_VERSION" {
   // renovate: datasource=github-tags depName=rclone/rclone versioning=semver
-  default = "v1.76.0"
+  default = "v1.75.2"
 }
 
 variable "RCLONE_GIT_HASH" {

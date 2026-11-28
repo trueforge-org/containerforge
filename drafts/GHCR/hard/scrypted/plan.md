@@ -64,7 +64,7 @@ Files in `apps/scrypted/`:
 
 - Schema header, `schema_version: 1`, `upstream_env_url: https://github.com/koush/scrypted`.
 - `ports`: only ports confirmed on docs.scrypted.app. Until confirmed, list only the web UI port the server actually binds, verified in a run (UNVERIFIED).
-- `env`: `NODE_OPTIONS` (default `--dns-result-order=ipv4first`), plus any variables start.sh reads after verification.
+- `env`: `NODE_OPTIONS` (default `--dns-result-order=ipv4first`) and `SCRYPTED_INSECURE_PORT` (default `10611`, set in start.sh because the chart sets it and the test runs without env), plus any variables start.sh reads after verification.
 - `volumes`: `/config` persistent. Map upstream `/server/volume` to `/config/volume`.
 - `dependencies`: none.
 

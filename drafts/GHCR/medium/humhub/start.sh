@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Seed nothing: HumHub creates protected/config/common.php through the browser installer.
+# HumHub writes dynamic.php through the browser installer; upstream's default config files are seeded below.
 mkdir -p \
   /config/uploads \
   /config/assets \
@@ -9,6 +9,9 @@ mkdir -p \
   /config/protected-config \
   /config/modules \
   /config/runtime
+
+# Seed upstream's default config files only when missing (never overwrite user state).
+cp -Rn /app/humhub/protected/config.dist/. /config/protected-config/ || true
 
 # Scratch for php-fpm sessions and nginx temp files (ephemeral /tmp).
 mkdir -p \

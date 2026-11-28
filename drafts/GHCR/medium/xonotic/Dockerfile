@@ -25,7 +25,7 @@ RUN \
   mv /tmp/xonotic-extract/Xonotic /app/xonotic && \
   chmod +x /app/xonotic/xonotic-linux64-dedicated && \
   echo "**** seed default config ****" && \
-  cp /app/xonotic/data/server.cfg /defaults/server.cfg && \
+  cp /app/xonotic/server/server.cfg /defaults/server.cfg && \
   echo "**** license files ****" && \
   mkdir -p /usr/share/licenses/xonotic && \
   find /app/xonotic -maxdepth 1 -type f \( -iname 'COPYING*' -o -iname 'LICEN*' -o -iname 'NOTICE*' \) \

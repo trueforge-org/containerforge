@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=Maintainerr/Maintainerr versioning=semver
-  // plan builds 3.33.0; the chart pins 3.32.0 (plan section 10)
+  // plan builds 3.33.0; the chart pins 3.33.0 too (plan section 10 predates the chart bump)
   default = "3.33.0"
 }
 

@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:bba631340c8aefc1a10656a894475312bd89a9dd75d9e5da12c3098242f1e8f2` (copied from an existing `apps/*/Dockerfile`). Fits because Komga is a Spring Boot jar that runs on Java 21 and the java21 sibling provides the JRE. The upstream runner uses Temurin 25; Komga 1.30.2 is built against that runtime upstream, so `komga/build.gradle.kts` at tag 1.30.2 sets `jvmTarget = JVM_17`, so Java 21 should be enough; confirm on first run. If it does not, switch to `ghcr.io/trueforge-org/java25` and record that in section 10. Closest sibling: `apps/airsonic-advanced` (Java web app, same java21 digest) and `apps/nzbhydra2` (`/config` data, USER apps).
+`FROM ghcr.io/trueforge-org/java21:21.0.8@sha256:5651f46cebe5a42ff069da176dd7ab50f6b050169493fe06ebc1be2fe81cd15e` (copied from an existing `apps/*/Dockerfile`). Fits because Komga is a Spring Boot jar that runs on Java 21 and the java21 sibling provides the JRE. The upstream runner uses Temurin 25; Komga 1.30.2 is built against that runtime upstream, so `komga/build.gradle.kts` at tag 1.30.2 sets `jvmTarget = JVM_17`, so Java 21 should be enough; confirm on first run. If it does not, switch to `ghcr.io/trueforge-org/java25` and record that in section 10. Closest sibling: `apps/airsonic-advanced` (Java web app, same java21 digest) and `apps/nzbhydra2` (`/config` data, USER apps).
 
 ## 4. Dockerfile
 

@@ -37,7 +37,7 @@ No `defaults/`, `health/` or `root/` (the upstream `root/` is not copied). No `D
 ## 3. Base image
 
 - Build stage: `FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5 AS build`. Provides Node and npm for `npm ci` and `npm run build`.
-- Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. Serves the static `dist/`, and it is the sibling of this app's nginx role. Its Ubuntu 26.04 base is the same as the sibling `apps/nginx`.
+- Final stage: `FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`. Serves the static `dist/`, and it is the sibling of this app's nginx role. Its Ubuntu 26.04 base is the same as the sibling `apps/nginx`.
 
 Closest siblings: `apps/nginx` (nginx on 8080, `USER apps`, `COPY --chmod=0755 . /`) and `apps/budge` / `apps/changedetection` (python-node build patterns).
 
@@ -145,7 +145,7 @@ set -euo pipefail
 # Nothing to seed: the wallet is client-side and nginx config is read-only in /etc.
 # /tmp is a fresh tmpfs under --read-only, so create the nginx temp dirs each start.
 mkdir -p /tmp/nginx/client_body /tmp/nginx/proxy /tmp/nginx/fastcgi /tmp/nginx/uwsgi /tmp/nginx/scgi
-exec nginx -c /etc/nano-wallet/nginx.conf -g "daemon off;"
+exec nginx -c /etc/nano-wallet/nginx.conf
 ```
 
 - Idempotent and empty-`/config` safe because it never touches `/config`.

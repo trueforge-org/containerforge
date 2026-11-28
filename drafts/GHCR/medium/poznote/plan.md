@@ -80,7 +80,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=timothepoznanski/poznote versioning=semver
-  default = "6.159.0"
+  default = "6.161.0"
 }
 
 variable "LICENSE" {

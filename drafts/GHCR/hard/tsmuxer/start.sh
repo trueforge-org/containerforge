@@ -15,8 +15,9 @@ Xvfb "${DISPLAY}" -screen 0 1280x768x24 -nolisten tcp &
 sleep 2
 
 if [ -n "${VNC_PASSWORD:-}" ]; then
-  x11vnc -storepasswd "${VNC_PASSWORD}" /tmp/vnc.passwd >/dev/null
-  vnc_auth=(-rfbauth /tmp/vnc.passwd)
+  # password file, so the secret stays out of the process list
+  ( umask 077; printf '%s\n' "${VNC_PASSWORD}" > /tmp/vnc.pass )
+  vnc_auth=(-passwdfile /tmp/vnc.pass)
 else
   echo "tsmuxer: VNC_PASSWORD is not set, the VNC server accepts connections without a password" >&2
   vnc_auth=(-nopw)

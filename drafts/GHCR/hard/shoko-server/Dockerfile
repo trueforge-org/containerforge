@@ -58,12 +58,13 @@ RUN echo "*** Installing runtime dependencies ***" && \
     mediainfo && \
   rm -rf /var/lib/apt/lists/*
 
-# .NET 8 runtime, same pattern as apps/webgrabplus. No checksum is published with dotnet-install.sh (plan section 10 risk).
+# .NET 8 runtime plus the ASP.NET Core runtime (upstream runs on the aspnet image), same pattern as apps/webgrabplus. No checksum is published with dotnet-install.sh (plan section 10 risk).
 RUN echo "*** Installing .NET 8 runtime ***" && \
   mkdir -p /app/dotnet && \
   curl -fL -o /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh && \
   chmod +x /tmp/dotnet-install.sh && \
   /tmp/dotnet-install.sh -c 8.0 --install-dir /app/dotnet --runtime dotnet && \
+  /tmp/dotnet-install.sh -c 8.0 --install-dir /app/dotnet --runtime aspnetcore && \
   rm /tmp/dotnet-install.sh
 
 COPY --from=build /output/ /

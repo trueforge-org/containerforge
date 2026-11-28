@@ -5,9 +5,9 @@
 
 | Item | Value | Source |
 | --- | --- | --- |
-| Upstream source tag | 10.4.0 (exists: https://github.com/YACReader/yacreader/releases/tag/10.4.0) | wrapper Dockerfile |
-| Release date | 2026-10-09 (GitHub API) | gh api |
-| renovate | `datasource=github-releases depName=YACReader/yacreader versioning=loose` (tag form is plain `10.4.0`, so `semver` may also work; confirm) | derived |
+| Upstream source tag | 10.5.1 (exists: https://github.com/YACReader/yacreader/releases/tag/10.5.1) | wrapper Dockerfile |
+| Release date | UNVERIFIED for 10.5.1 (2026-10-09 was the date of 10.4.0) | gh api |
+| renovate | `datasource=github-releases depName=YACReader/yacreader versioning=loose` (tag form is plain `10.5.1`, so `semver` may also work; confirm) | derived |
 | License | GPL-3.0 (GitHub SPDX for the repo; exact file name at the tag still to confirm) | gh api |
 | Source | https://github.com/YACReader/yacreader | draft |
 | Binary | None published for Linux (draft; upstream publishes source tarball plus macOS/Windows). | draft |
@@ -35,7 +35,7 @@
 
 ## 4. Dockerfile
 
-1. `ARG VERSION="10.4.0"` (match bake), `ARG DECOMPRESSION_BACKEND="libarchive"` (see section 10 for the backend choice), `ARG PDF_BACKEND="poppler"`.
+1. `ARG VERSION="10.5.1"` (match bake), `ARG DECOMPRESSION_BACKEND="libarchive"` (see section 10 for the backend choice), `ARG PDF_BACKEND="poppler"`.
 2. Build stage on trueforge ubuntu: `USER root`, `apt-get install --no-install-recommends` for the build set listed in section 1 (pin the Qt6 and CMake versions to the resolute archive and record them; check against `VERSION`).
 3. Source: `git clone --depth 1 --branch ${VERSION} https://github.com/YACReader/yacreader.git /src`.
 4. Backend choice: use `libarchive` (apt package `libarchive-dev`, no external tarball, no SHA verification gap). The `7zip` backend pulls `7z2301-src.7z` from a third-party repo; use it only if RAR support is required, and in that case verify the SHA-256 in the Dockerfile as the wrapper does.
@@ -49,7 +49,7 @@
 ## 5. docker-bake.hcl
 
 - `APP = "yacreaderlibraryserver"`.
-- `VERSION` with renovate annotation (`datasource=github-releases depName=YACReader/yacreader versioning=loose`), default `"10.4.0"`.
+- `VERSION` with renovate annotation (`datasource=github-releases depName=YACReader/yacreader versioning=loose`), default `"10.5.1"`.
 - `LICENSE = "GPL-3.0"` (GitHub SPDX; confirm against the LICENSE file at the tag).
 - `SOURCE = "https://github.com/YACReader/yacreader"`.
 - Standard targets and default group. Validate with `docker buildx bake --print`.
@@ -101,10 +101,10 @@
 From `apps/yacreaderlibraryserver`:
 1. `docker buildx bake --print`.
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local` (expect a long build).
-3. `docker run --rm -d --name yacreader-probe --read-only --tmpfs /tmp -v yacreader-probe-config:/config yacreaderlibraryserver:10.4.0`.
+3. `docker run --rm -d --name yacreader-probe --read-only --tmpfs /tmp -v yacreader-probe-config:/config yacreaderlibraryserver:10.5.1`.
 4. `docker logs -f yacreader-probe`. Expected readiness: the server's listening line on 8080 (exact text UNVERIFIED) or a 200 from `GET /v2/version`.
 5. `docker rm -f yacreader-probe; docker volume rm yacreader-probe-config`.
-6. `forgetool containers test --image yacreaderlibraryserver:10.4.0 --config ./container-test.yaml`.
+6. `forgetool containers test --image yacreaderlibraryserver:10.5.1 --config ./container-test.yaml`.
 7. Round limit 10.
 
 ## 12. PR checklist

@@ -1,7 +1,7 @@
 target "docker-metadata-action" {}
 
-// renovate: datasource=github-releases depName=Koenkk/zigbee2mqtt versioning=semver
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=Koenkk/zigbee2mqtt versioning=semver
   default = "2.14.3"
 }
 

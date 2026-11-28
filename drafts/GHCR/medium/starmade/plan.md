@@ -34,7 +34,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base). No `etc/` or
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`. It fits because the server is a Java jar (the upstream runtime is a bundled JRE, which we replace with the base's Java 17). Closest sibling: `apps/nzbhydra2` (Java jar on java17, `/config` as data, `USER apps`). Note: the upstream image is `ich777/debian-baseimage`; we do not reuse it.
+`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:efdc903d9ce0436b6207bc5a4e732d24a27231851975c999770fd8709a8316b8`. It fits because the server is a Java jar (the upstream runtime is a bundled JRE, which we replace with the base's Java 17). Closest sibling: `apps/nzbhydra2` (Java jar on java17, `/config` as data, `USER apps`). Note: the upstream image is `ich777/debian-baseimage`; we do not reuse it.
 
 ## 4. Dockerfile
 

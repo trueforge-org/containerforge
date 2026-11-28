@@ -2,10 +2,16 @@
 ARG BUN_VERSION=1.4.4
 FROM oven/bun:${BUN_VERSION}-slim AS build
 
+ARG VERSION
+
+# Fetch the upstream source at the tag. The build context is only this app folder, not the upstream repository.
+ADD https://github.com/C4illin/ConvertX/archive/refs/tags/v${VERSION}.tar.gz /tmp/convertx.tar.gz
+RUN mkdir -p /app \
+ && tar xzf /tmp/convertx.tar.gz -C /app --strip-components=1 \
+ && rm -f /tmp/convertx.tar.gz
+
 WORKDIR /app
-COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
-COPY . .
 RUN bun run build:bin
 
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a

@@ -42,9 +42,9 @@
 3. Map the arch: `ARCH=$(dpkg --print-architecture)` (script-equivalent; amd64 and arm64 only).
 4. Download and install the deb, then verify it:
    ```sh
-   RSTUDIO_DEB_VERSION="$(echo "${VERSION}" | tr '+' '-')"
+   RSTUDIO_DEB_VERSION="${VERSION}"  # tag-safe VERSION already uses "-" like the deb filename; the deb path uses jammy (rocker remaps resolute to jammy)
    curl -fL -o /tmp/rstudio-server.deb \
-     "https://download2.rstudio.org/server/resolute/${ARCH}/rstudio-server-${RSTUDIO_DEB_VERSION}-${ARCH}.deb"
+     "https://download2.rstudio.org/server/jammy/${ARCH}/rstudio-server-${RSTUDIO_DEB_VERSION}-${ARCH}.deb"
    echo "<sha256>  /tmp/rstudio-server.deb" | sha256sum -c -
    gdebi -n /tmp/rstudio-server.deb && rm -f /tmp/rstudio-server.deb
    ```
@@ -74,7 +74,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=rstudio/rstudio versioning=loose
-  default = "2026.11.0+203"
+  default = "2026.11.0-203"
 }
 
 variable "LICENSE" {

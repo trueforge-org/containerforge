@@ -17,7 +17,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 COPY --from=xx / /
 
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends clang && \
+  apt-get install -y --no-install-recommends clang curl && \
   xx-apt-get install -y --no-install-recommends \
     libpq-dev \
     libpq5 \

@@ -10,7 +10,7 @@ mkdir -p "$CONF/session" "$WEB/share" "$WEB/users" /downloads \
   "$RUN/nginx/client" "$RUN/nginx/proxy" "$RUN/nginx/fastcgi" "$RUN/sessions"
 
 # Seed the rTorrent config only when missing. Never overwrite user state.
-# rTorrent reads $HOME/.rtorrent.rc, and HOME is set to $CONF below.
+# -n skips the default ~/.rtorrent.rc, so start.sh imports this file explicitly.
 if [ ! -f "$CONF/.rtorrent.rc" ]; then
   cat > "$CONF/.rtorrent.rc" <<'EOF'
 directory.default.set = /downloads
@@ -74,7 +74,7 @@ EOF
 PHP_FPM="$(ls /usr/sbin/php-fpm* | head -n 1)"
 
 # Supervisor: UNVERIFIED design (plan section 7). Start the three services, then exit when any one stops.
-HOME="$CONF" rtorrent -n &
+HOME="$CONF" rtorrent -n -o import="$CONF/.rtorrent.rc" &
 "$PHP_FPM" -y "$RUN/php-fpm.conf" -F &
 nginx -c "$RUN/nginx.conf" -g 'daemon off;' &
 

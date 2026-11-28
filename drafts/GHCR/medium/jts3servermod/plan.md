@@ -32,7 +32,7 @@
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java8:8@sha256:a245de24c11e3e79eec8dc598429a951c5bc71011f38a649d076816159b25ff5` (copied from an existing `apps/*/Dockerfile`). Fits because the app is a Java 8 jar plugin, and the java8 sibling already provides the JRE. Closest sibling: `apps/nzbhydra2` (Java app zip, USER apps, `/config` data; it uses `java17`, not `java8`) and `apps/java8` (the base itself, ubuntu-built). Other `java8` consumers exist in `apps/*/Dockerfile` with the same digest.
+`FROM ghcr.io/trueforge-org/java8:8@sha256:c3b5d515a5f2658b61680bbaff4cbb4a91b386f6e6f7ccab2eaafa5b7620d3ab` (copied from an existing `apps/*/Dockerfile`). Fits because the app is a Java 8 jar plugin, and the java8 sibling already provides the JRE. Closest sibling: `apps/nzbhydra2` (Java app zip, USER apps, `/config` data; it uses `java17`, not `java8`) and `apps/java8` (the base itself, ubuntu-built). Other `java8` consumers exist in `apps/*/Dockerfile` with the same digest.
 
 Note: upstream runs on Debian buster `openjdk:8`, which is EOL. The java8 sibling is the ContainerForge choice; record that in section 10.
 

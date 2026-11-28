@@ -25,6 +25,7 @@ RUN \
   npm ci && \
   npm run build && \
   npm prune --omit=dev && \
+  ln -fs dist/version.json /app/send/version.json && \
   install -Dm0644 /app/send/LICENSE /usr/share/licenses/send/LICENSE && \
   npm cache clean --force && \
   rm -rf \

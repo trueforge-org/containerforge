@@ -1,5 +1,5 @@
 # UNVERIFIED (draft): the upstream image is Alpine with s6-overlay. This draft runs nginx and php-fpm on ubuntu as apps.
-# The app version is 5.1.0. The plan pinned 5.0.0, but the context shows 5.1.0 is the latest tag and the chart uses it.
+# The app version follows docker-bake.hcl (5.1.1). The plan originally pinned 5.0.0.
 
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
@@ -7,7 +7,9 @@ ARG VERSION
 ARG TASMOADMIN_SHA256=""
 USER root
 
-ENV HOME=/config
+ENV HOME=/config \
+  TASMO_DATADIR=/config/data/ \
+  TASMO_TMPDIR=/tmp/tasmoadmin/
 
 # UNVERIFIED: nginx and PHP 8.5 package names on ubuntu 26.04 (plan section 3). php8.5 matches apps/phpmyadmin.
 RUN apt-get update && \
@@ -16,7 +18,8 @@ RUN apt-get update && \
     php8.5-fpm \
     php8.5-curl \
     php8.5-mbstring \
-    php8.5-xml && \
+    php8.5-xml \
+    php8.5-zip && \
   rm -rf /var/lib/apt/lists/*
 
 # UNVERIFIED: no upstream checksum is published. TASMOADMIN_SHA256 must come from a verified download. The build fails while it is unset.

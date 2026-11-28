@@ -31,7 +31,7 @@ No `defaults/` unless a config seed is needed. No `root/`. No `DOWNSTREAM_CHANGE
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`. No sibling Dockerfile in this repo (checked with grep) uses the steamcmd image as a `FROM` yet, so the exact tag and digest must be taken from the `apps/steamcmd` build output after it is published; UNVERIFIED here. Fits because the base already provides SteamCMD and the `apps` user. Do not reinstall SteamCMD. Note: the base's `/usr/local/bin/steamcmd` wrapper does `exec /start.sh "$@"`, and this image replaces `/start.sh`, so call `/usr/games/steamcmd` (or `/usr/local/share/steamcmd/steamcmd.sh`) directly from `start.sh`, never `steamcmd`, or it recurses. Base steamcmd is 32-bit (`steamcmd:i386`) on Ubuntu 26.4. Ubuntu is the underlying base of steamcmd, so no direct ubuntu FROM is needed.
+`FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>`. No sibling Dockerfile in this repo (checked with grep) uses the steamcmd image as a `FROM` yet, so the tag is the `apps/steamcmd` VERSION `20180105-5build1`; the published digest is UNVERIFIED and must be added after `apps/steamcmd` is published. Fits because the base already provides SteamCMD and the `apps` user. Do not reinstall SteamCMD. Note: the base's `/usr/local/bin/steamcmd` wrapper does `exec /start.sh "$@"`, and this image replaces `/start.sh`, so call `/usr/games/steamcmd` (or `/usr/local/share/steamcmd/steamcmd.sh`) directly from `start.sh`, never `steamcmd`, or it recurses. Base steamcmd is 32-bit (`steamcmd:i386`) on Ubuntu 26.4. Ubuntu is the underlying base of steamcmd, so no direct ubuntu FROM is needed.
 
 ## 4. Dockerfile
 

@@ -6,7 +6,7 @@
 | Item | Value |
 | --- | --- |
 | Version to build | 3.09.00 (latest release at plan time, published 2026-11-22; a re-check on 2026-11-26 shows 3.10.00 published 2026-11-25, so confirm which one to build). Source: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest . The chart pins `ghcr.io/haveagitgat/tdarr:3.08.00`, one version behind. |
-| Renovate | `datasource=github-releases depName=HaveAGitGat/Tdarr versioning=semver` (best judgement; no renovate config checked for this app). |
+| Renovate | `datasource=github-releases depName=HaveAGitGat/Tdarr versioning=loose` (the leading zero in 3.10.00 is not strict semver; best judgement; no renovate config checked for this app). |
 | License | UNVERIFIED: GitHub API reports `NOASSERTION` (not detected automatically). Read the LICENSE file in https://github.com/HaveAGitGat/Tdarr before setting `LICENSE` in docker-bake.hcl. |
 | Source URL | https://github.com/HaveAGitGat/Tdarr |
 | Download | Not on GitHub. Upstream Dockerfile.final downloads the module zip from a Backblaze bucket: `BASE_LINK="https://tdarrs.s3.us-west-000.backblazeb2.com/dev/versions/$VERSION"`, then `/$MODULE` zip per arch (`linux_x64`, `linux_arm64`, `linux_arm`). Per-arch filenames (Dockerfile.final at 9ec3117): `${BASE_LINK}/linux_x64/${MODULE}_$DATE.zip` (and `linux_arm64`, `linux_arm`), where `DATE` is a build arg tied to the upstream `tdarr_acc:base_${VERSION}_${DATE}` tag; its value for the target version is UNVERIFIED and blocks the URL. UNVERIFIED: that the target version exists in that bucket. tdarr.io/downloads did not expose links when fetched. |
@@ -53,7 +53,7 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 ## 5. docker-bake.hcl
 
 - `APP = "tdarr"`, `LICENSE` set from the upstream LICENSE file (NOASSERTION, see section 1), `SOURCE = "https://github.com/HaveAGitGat/Tdarr"`.
-- `VERSION` default `"3.09.00"` with `// renovate: datasource=github-releases depName=HaveAGitGat/Tdarr versioning=semver`.
+- `VERSION` default `"3.10.00"` with `// renovate: datasource=github-releases depName=HaveAGitGat/Tdarr versioning=loose`.
 - Standard targets: `docker-metadata-action`, `image`, `image-local`, `image-all` (amd64, arm64), `group "default"`.
 - Validate with `docker buildx bake --print` in `apps/tdarr`.
 
@@ -92,7 +92,7 @@ Fits because the draft assigned the ubuntu base, and the upstream LinuxServer ba
 
 ## 10. Risks, caveats and open questions
 
-- UNVERIFIED: the exact Backblaze zip names per arch and whether 3.09.00 is published there. The fetched `tdarr.io/downloads` page had no links.
+- UNVERIFIED: the exact Backblaze zip names per arch and whether 3.10.00 is published there. The fetched `tdarr.io/downloads` page had no links.
 - UNVERIFIED: whether the upstream dev path (`/dev/versions/`) is the stable one. The Dockerfile uses it, so the stable URL may differ.
 - UNVERIFIED: Ubuntu 26.04 package names for ffmpeg, handbrake-cli, mkvtoolnix, libtesseract-dev.
 - Gap: x86 uses jellyfin-ffmpeg 6, HandBrake built from source, and Intel GPU drivers. This first pass drops them unless the test shows they are needed.
@@ -110,9 +110,9 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker rm -f tdarr-probe 2>/dev/null; docker volume rm tdarr-probe-config 2>/dev/null
 docker run --rm -d --name tdarr-probe --read-only --tmpfs /tmp \
-  -v tdarr-probe-config:/config tdarr:3.09.00
+  -v tdarr-probe-config:/config tdarr:3.10.00
 docker logs -f tdarr-probe
-forgetool containers test --image tdarr:3.09.00 --config ./apps/tdarr/container-test.yaml
+forgetool containers test --image tdarr:3.10.00 --config ./apps/tdarr/container-test.yaml
 docker rm -f tdarr-probe; docker volume rm tdarr-probe-config
 ```
 

@@ -17,7 +17,8 @@ RUN set -eux; \
         https://downloads.apache.org/tomcat/tomcat-10/v10.1.62/bin/apache-tomcat-10.1.62.tar.gz; \
     echo "ca776bf4045d3eadc2ede1b9bb2c33fc52ce1d102b63ca635ec6c0e515140027c6be7a15b2c1e1d8d8692aeaf25a72de99ca0f14135c3e1d163eedaf3dac5a54  /tmp/dl/tomcat.tar.gz" | sha512sum -c -; \
     tar -xzf /tmp/dl/tomcat.tar.gz -C /usr/local/tomcat --strip-components=1; \
-    rm -rf /usr/local/tomcat/webapps/* /tmp/dl/tomcat.tar.gz
+    rm -rf /usr/local/tomcat/webapps/* /tmp/dl/tomcat.tar.gz; \
+    chmod -R a+rX /usr/local/tomcat
 
 # XWiki WAR (pinned to 18.9.0; update the sha256 together with VERSION) and the PostgreSQL JDBC driver.
 # The unpacked WAR is kept as a template in webapps-src and copied to /tmp by start.sh on each start.

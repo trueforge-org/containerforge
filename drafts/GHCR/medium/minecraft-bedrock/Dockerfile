@@ -54,7 +54,7 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 # add entry scripts, helpers and licence
-COPY --from=buildstage /tmp/bedrock/bedrock-entry.sh /etc/bedrock-entry.sh
+COPY --from=buildstage --chmod=0755 /tmp/bedrock/bedrock-entry.sh /etc/bedrock-entry.sh
 COPY --from=buildstage /tmp/bedrock/bds-property-definitions.json /etc/bds-property-definitions.json
 COPY --from=buildstage /usr/local/bin/set-property /usr/local/bin/set-property
 COPY --from=buildstage /usr/local/bin/mc-server-runner /usr/local/bin/mc-server-runner

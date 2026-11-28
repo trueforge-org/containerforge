@@ -1,5 +1,5 @@
-# UNVERIFIED: tag and digest of ghcr.io/trueforge-org/steamcmd are not published yet; pin them after apps/steamcmd is built and pushed.
-FROM ghcr.io/trueforge-org/steamcmd:latest
+# UNVERIFIED: the published digest of ghcr.io/trueforge-org/steamcmd is not known yet; pin it after apps/steamcmd is built and pushed.
+FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1
 
 # set version label
 ARG VERSION

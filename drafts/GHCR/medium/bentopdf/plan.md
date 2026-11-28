@@ -36,7 +36,7 @@ No `root/`. No `DOWNSTREAM_CHANGES.md` (not used as a `FROM` base).
 
 ## 3. Base image
 
-- Final stage: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. This is the sibling pattern in `apps/it-tools/Dockerfile`, which serves a Vite-built SPA from `/usr/share/nginx/html`.
+- Final stage: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`. This is the sibling pattern in `apps/it-tools/Dockerfile`, which serves a Vite-built SPA from `/usr/share/nginx/html`.
 - Build stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5`, which provides node and npm. UNVERIFIED: the Node major version in that base must be checked against the `engines` field of upstream `package.json` (the upstream image uses Node 26).
 - Why: the draft's "Alternative runtime image" (`python-node`) is not needed for serving. nginx is the right runtime. `python-node` is only used for the build step.
 

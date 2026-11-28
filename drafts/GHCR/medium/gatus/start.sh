@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 CONFIG_FILE="${GATUS_CONFIG_PATH:-/config/config.yaml}"
 

@@ -67,7 +67,7 @@ COPY --from=build --chmod=0755 /tmp/src/node_modules /app/maintainerr/node_modul
 COPY --from=build --chmod=0755 /tmp/src/apps/server/dist /app/maintainerr/apps/server/dist
 COPY --from=build --chmod=0755 /tmp/src/apps/server/package.json /app/maintainerr/apps/server/package.json
 COPY --from=build --chmod=0755 /tmp/src/apps/server/node_modules /app/maintainerr/apps/server/node_modules
-COPY --from=build --chmod=0755 /tmp/src/apps/server/assets /app/maintainerr/apps/server/assets
+COPY --from=build --chmod=0755 /tmp/src/apps/server/assets /app/maintainerr/apps/server/dist/assets
 # bundled UI; start.sh copies it to ${DATA_DIR}/ui on each boot
 COPY --from=build --chmod=0755 /tmp/src/apps/ui/dist /app/maintainerr/apps/server/dist/ui
 COPY --from=build --chmod=0755 /tmp/src/packages/contracts/dist /app/maintainerr/packages/contracts/dist

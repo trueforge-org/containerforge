@@ -5,7 +5,7 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | 3.09.00 (GitHub latest release, published 2026-11-22: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest). A re-check on 2026-11-26 shows 3.10.00 published 2026-11-25, so confirm which one to build. Draft says 3.08.00; the TrueCharts chart already pins 3.09.00 (`ghcr.io/haveagitgat/tdarr_node:3.09.00@sha256:0b9a1a5217629930e4fe361047471c78f20a884bdd91f120960cca0a12613742`, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tdarr-node/values.yaml). Use 3.09.00. |
+| Version to build | 3.09.00 (GitHub latest release, published 2026-11-22: https://api.github.com/repos/HaveAGitGat/Tdarr/releases/latest). A re-check on 2026-11-26 shows 3.10.00 published 2026-11-25, so confirm which one to build. Draft says 3.08.00; the TrueCharts chart already pins 3.09.00 (`ghcr.io/haveagitgat/tdarr_node:3.09.00@sha256:0b9a...`, https://raw.githubusercontent.com/trueforge-org/truecharts/master/charts/stable/tdarr-node/values.yaml). Build 3.10.00 (docker-bake.hcl VERSION; the chart now pins 3.10.00 too). |
 | Renovate | `datasource=github-releases depName=HaveAGitGat/Tdarr versioning=loose` (UNVERIFIED: no renovate precedent checked in this run; tags are plain 3.x.y). |
 | License | UNVERIFIED: GitHub reports `NOASSERTION` for https://github.com/HaveAGitGat/Tdarr. Read the LICENSE file in the repo before setting `LICENSE`. |
 | Source URL | https://github.com/HaveAGitGat/Tdarr |
@@ -39,7 +39,7 @@ Not used: `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` b
 
 ## 4. Dockerfile
 
-1. `ARG VERSION=3.09.00`, `ARG DATE=<resolved, see section 1>`, both matched in `docker-bake.hcl`.
+1. `ARG VERSION=3.10.00`, `ARG DATE=<resolved, see section 1>`, both matched in `docker-bake.hcl`.
 2. `FROM <ubuntu> AS base`, `USER root`.
 3. Install only what the base lacks: check `curl`, `unzip` (ubuntu base ships curl; unzip is UNVERIFIED), `ffmpeg`, `mkvtoolnix`, `libtesseract-dev` (draft inferred `ffmpeg` and `handbrake-cli`; `handbrake-cli` is not confirmed on ubuntu 26.04). Pin apt versions and check them against `VERSION` where the package is tied to the app (UNVERIFIED pins).
 4. Download the zip for `TARGETARCH` (amd64 to `linux_x64`, arm64 to `linux_arm64`) to `/tmp/Tdarr_Node.zip`. Verify its checksum (see section 1). Unzip into `/app/tdarr-node/`.
@@ -66,7 +66,7 @@ Port 8267 is included only if the node opens its web port; otherwise drop the `E
 variable "APP" { default = "tdarr-node" }
 variable "VERSION" {
   // renovate: datasource=github-releases depName=HaveAGitGat/Tdarr versioning=loose
-  default = "3.09.00"
+  default = "3.10.00"
 }
 variable "LICENSE" { default = "UNVERIFIED" } // NOASSERTION is not a license; set the SPDX id from the LICENSE file (section 1) before shipping
 variable "SOURCE" { default = "https://github.com/HaveAGitGat/Tdarr" }
@@ -153,8 +153,8 @@ From `apps/tdarr-node/`:
 
 1. `docker buildx bake --print`
 2. `docker buildx bake --set image-local.platform=linux/amd64 image-local`
-3. `docker run --rm -d --name tdarr-node-probe --read-only --tmpfs /tmp -v tdarr-node-probe-config:/config ghcr.io/trueforge-org/tdarr-node:3.09.00`, then `docker logs -f tdarr-node-probe`. Expected readiness signal: UNVERIFIED (the node prints a connection line; confirm on first run).
-4. `forgetool containers test --image <image>:3.09.00 --config ./apps/tdarr-node/container-test.yaml`
+3. `docker run --rm -d --name tdarr-node-probe --read-only --tmpfs /tmp -v tdarr-node-probe-config:/config ghcr.io/trueforge-org/tdarr-node:3.10.00`, then `docker logs -f tdarr-node-probe`. Expected readiness signal: UNVERIFIED (the node prints a connection line; confirm on first run).
+4. `forgetool containers test --image <image>:3.10.00 --config ./apps/tdarr-node/container-test.yaml`
 5. Clean up: `docker rm -f tdarr-node-probe; docker volume rm tdarr-node-probe-config`.
 
 ## 12. PR checklist

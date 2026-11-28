@@ -2,7 +2,7 @@
 # UNVERIFIED draft (plan section 7): the nginx and php-fpm configs are rendered to /tmp at each start.
 set -euo pipefail
 
-mkdir -p /config/data /tmp/nginx/client_body /tmp/nginx/proxy /tmp/nginx/fastcgi
+mkdir -p /config/data /tmp/tasmoadmin /tmp/nginx/client_body /tmp/nginx/proxy /tmp/nginx/fastcgi
 
 # php-fpm: the full config lives in /tmp, so the packaged pool under /etc is not used.
 cat > /tmp/php-fpm.conf <<'CONF'
@@ -54,6 +54,7 @@ http {
 
         location ~ \.php$ {
             include /etc/nginx/fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_pass unix:/tmp/php-fpm.sock;
         }
     }

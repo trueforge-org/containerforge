@@ -52,7 +52,7 @@ RUN \
   tar -C \
     /usr/share -zxf /tmp/helpers/mc-image-helper.tgz && \
   ln -sf \
-    /usr/share/mc-image-helper/bin/mc-image-helper /usr/bin/mc-image-helper && \
+    /usr/share/mc-image-helper-${MC_HELPER_VERSION}/bin/mc-image-helper /usr/bin/mc-image-helper && \
   chmod 0755 /usr/bin/mc-monitor /usr/bin/rcon-cli && \
   echo "**** cleanup ****" && \
   rm -rf \

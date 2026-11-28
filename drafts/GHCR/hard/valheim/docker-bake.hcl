@@ -1,7 +1,7 @@
 target "docker-metadata-action" {}
 
-// renovate: datasource=github-releases depName=community-valheim-tools/valheim-server-docker versioning=semver
 variable "VERSION" {
+  // renovate: datasource=github-releases depName=community-valheim-tools/valheim-server-docker versioning=semver
   default = "1.4.1"
 }
 

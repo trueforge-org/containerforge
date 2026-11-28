@@ -45,7 +45,7 @@ Two stages on the same base (`AS build`, then final). Keep `USER root` only for 
 6. `yarn turbo build`, then `yarn workspaces focus --all --production`. Create empty `packages/contracts/node_modules` and `apps/server/node_modules` as upstream does.
 7. Final stage: `WORKDIR /app/maintainerr`. Copy with `COPY --from=build --chmod=0755 --chown=apps:apps` from `/tmp/src`:
    - `node_modules` -> `./node_modules`
-   - `apps/server/dist`, `apps/server/package.json`, `apps/server/node_modules`, `apps/server/assets` (fonts) -> `./apps/server/`; `apps/ui/dist` -> `./apps/server/dist/ui` (the bundle `start.sh` copies).
+   - `apps/server/dist`, `apps/server/package.json`, `apps/server/node_modules`, `apps/server/assets` (fonts, to `./apps/server/dist/assets`) -> `./apps/server/`; `apps/ui/dist` -> `./apps/server/dist/ui` (the bundle `start.sh` copies).
    - `packages/contracts/dist`, `packages/contracts/package.json`, `packages/contracts/node_modules` -> `./packages/contracts/`.
    - License: `COPY --from=build /tmp/src/LICENSE /usr/share/licenses/maintainerr/LICENSE`.
 8. Runtime apt, as root: `apt-get install -y --no-install-recommends libcairo2 libpango-1.0-0 libpixman-1-0 curl` (curl only if the base lacks it; check first). Clean `/var/lib/apt/lists/*`.

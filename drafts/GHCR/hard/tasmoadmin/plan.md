@@ -5,11 +5,11 @@
 
 | Item | Value |
 | --- | --- |
-| Version to build | v5.0.0 (latest release per GitHub API, published 2026-03-09). Source: https://api.github.com/repos/TasmoAdmin/TasmoAdmin/releases/tags/v5.0.0 . Chart image `ghcr.io/tasmoadmin/tasmoadmin:v5.0.0` matches. |
+| Version to build | v5.1.1 (docker-bake.hcl VERSION, bumped by renovate). The plan first targeted v5.0.0 (latest release per GitHub API at the time, published 2026-03-09); the chart uses 5.1.0. |
 | Renovate | `datasource=github-releases depName=TasmoAdmin/TasmoAdmin versioning=semver` (best judgement; no renovate config checked for this app). |
 | License | GPL-3.0 (GitHub API `spdx_id`). Source: https://api.github.com/repos/TasmoAdmin/TasmoAdmin |
 | Source URL | https://github.com/TasmoAdmin/TasmoAdmin |
-| Download | `https://github.com/TasmoAdmin/TasmoAdmin/releases/download/v5.0.0/tasmoadmin_v5.0.0.tar.gz` (1946749 bytes). Also `tasmoadmin_v5.0.0.zip` (2753191 bytes). Architecture-independent PHP source, so one URL serves amd64 and arm64. |
+| Download | `https://github.com/TasmoAdmin/TasmoAdmin/releases/download/v5.1.1/tasmoadmin_v5.1.1.tar.gz` (1946749 bytes). Also `tasmoadmin_v5.1.1.zip` (2753191 bytes). Architecture-independent PHP source, so one URL serves amd64 and arm64. |
 | Checksum source | UNVERIFIED: none. No checksum asset and no digest in the release API. Plan: record the sha256 of the tarball in the Dockerfile at build time and check it on rebuild, but do not claim it is upstream-published. |
 | Upstream Dockerfile reviewed | https://raw.githubusercontent.com/TasmoAdmin/TasmoAdmin/81271a076cacecb1e8d4e8723af35e61510276de/.docker/Dockerfile.alpine-tmpl : node:22.22.1-slim (npm ci, npm run build), composer:2.9.5 (`composer install --optimize-autoloader --no-dev`), final `amd64/alpine:3.23` with nginx, PHP 8.5 FPM, bash, curl, s6-overlay v3.1.6.2 (no checksum). `ENTRYPOINT ["/init"]`, no CMD, no USER (root), `VOLUME ["/data"]`, `EXPOSE 80 443`, `ENV SSL=false`, app at `/var/www/tasmoadmin`, HEALTHCHECK on 127.0.0.1. |
 | Ports | 80 and 443 (upstream EXPOSE). Draft's `80/http` is confirmed for the container side. |
@@ -61,7 +61,7 @@ VOLUME /config
 ## 5. docker-bake.hcl
 
 - `APP = "tasmoadmin"`, `LICENSE = "GPL-3.0"`, `SOURCE = "https://github.com/TasmoAdmin/TasmoAdmin"`.
-- `VERSION` default `"5.0.0"` with the renovate line `// renovate: datasource=github-releases depName=TasmoAdmin/TasmoAdmin versioning=semver`. Dockerfile uses `v${VERSION}` in the download URL, so the bake default has no `v` prefix. Check the sibling for the convention and keep it consistent.
+- `VERSION` default `"5.1.1"` with the renovate line `// renovate: datasource=github-releases depName=TasmoAdmin/TasmoAdmin versioning=semver`. Dockerfile uses `v${VERSION}` in the download URL, so the bake default has no `v` prefix. Check the sibling for the convention and keep it consistent.
 - Standard targets: `docker-metadata-action`, `image`, `image-local`, `image-all` (amd64, arm64), `group "default"`.
 - Validate with `docker buildx bake --print` in `apps/tasmoadmin`.
 
@@ -105,7 +105,7 @@ VOLUME /config
 - UNVERIFIED: PHP package names and version on Ubuntu 26.04.
 - UNVERIFIED: whether the tarball ships `vendor/`, and whether composer is needed.
 - Initial admin setup happens in the web UI on first visit (draft, inferred; not confirmed).
-- Upstream pins the tarball to v5.0.0. Each upgrade needs a new URL and checksum; renovate with the `github-releases` datasource covers the version, not the URL shape. Check that the URL template in the Dockerfile follows the `v${VERSION}` convention.
+- Upstream pins the tarball to v5.1.1. Each upgrade needs a new URL and checksum; renovate with the `github-releases` datasource covers the version, not the URL shape. Check that the URL template in the Dockerfile follows the `v${VERSION}` convention.
 - Upstream's Dockerfile title label contains a stray brace (`TasmoAdmin}`). Not copied.
 - Blockers: none found that stop a rootless build. The draft's "hard" rating comes from the multi-process nginx + php-fpm layout, not from musl or GPU.
 
@@ -117,9 +117,9 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker rm -f tasmoadmin-probe 2>/dev/null; docker volume rm tasmoadmin-probe-config 2>/dev/null
 docker run --rm -d --name tasmoadmin-probe --read-only --tmpfs /tmp \
-  -v tasmoadmin-probe-config:/config tasmoadmin:5.0.0
+  -v tasmoadmin-probe-config:/config tasmoadmin:5.1.1
 docker logs -f tasmoadmin-probe
-forgetool containers test --image tasmoadmin:5.0.0 --config ./apps/tasmoadmin/container-test.yaml
+forgetool containers test --image tasmoadmin:5.1.1 --config ./apps/tasmoadmin/container-test.yaml
 docker rm -f tasmoadmin-probe; docker volume rm tasmoadmin-probe-config
 ```
 

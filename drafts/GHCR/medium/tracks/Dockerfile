@@ -39,6 +39,8 @@ RUN \
     /app --strip-components=1 && \
   echo "**** install gems and precompile assets ****" && \
   cd /app && \
+  cp config/database.docker.yml config/database.yml && \
+  cp config/site.docker.yml config/site.yml && \
   bundle install --without development test --jobs 4 && \
   SECRET_KEY_BASE=build-only-dummy bundle exec rails assets:precompile && \
   echo "**** make writable paths point at /tmp (app is read-only at runtime) ****" && \

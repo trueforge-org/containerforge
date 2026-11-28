@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 # seed the configuration only when it is missing, so user state is kept
 if [[ ! -s /config/configuration.yaml ]]; then

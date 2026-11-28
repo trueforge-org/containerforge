@@ -4,9 +4,9 @@ variable "APP" {
   default = "jts3servermod"
 }
 
-// UNVERIFIED: no application release exists upstream. This is the wrapper image tag.
-// renovate: datasource=docker depName=ghcr.io/galexrt/jts3servermod versioning=loose
 variable "VERSION" {
+  // UNVERIFIED: no application release exists upstream. This is the wrapper image tag.
+  // renovate: datasource=docker depName=ghcr.io/galexrt/jts3servermod versioning=loose
   default = "v20240301-172535-248"
 }
 
