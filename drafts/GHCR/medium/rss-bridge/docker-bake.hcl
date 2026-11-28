@@ -11,7 +11,7 @@ variable "VERSION" {
 
 variable "CURL_IMPERSONATE_VERSION" {
   // renovate: datasource=github-releases depName=lexiforest/curl-impersonate versioning=loose
-  default = "1.0.0rc2"
+  default = "1.0.3"
 }
 
 variable "LICENSE" {
