@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=homarr-labs/homarr versioning=semver
-  default = "2.13.1"
+  default = "2.14.0"
 }
 
 variable "LICENSE" {
