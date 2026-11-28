@@ -6,7 +6,7 @@ FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad093
 # set version label
 ARG VERSION
 # renovate: datasource=npm depName=pnpm
-ARG PNPM_VERSION=12.20.0
+ARG PNPM_VERSION=12.23.0
 USER root
 
 RUN \
