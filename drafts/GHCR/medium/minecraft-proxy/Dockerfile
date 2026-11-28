@@ -8,7 +8,7 @@ USER root
 # renovate: datasource=github-releases depName=itzg/mc-monitor
 ARG MC_MONITOR_VERSION=1.21.1
 # renovate: datasource=github-releases depName=itzg/rcon-cli
-ARG RCON_CLI_VERSION=1.7.10
+ARG RCON_CLI_VERSION=1.10.0
 # renovate: datasource=github-releases depName=itzg/mc-image-helper
 ARG MC_HELPER_VERSION=1.80.0
 
