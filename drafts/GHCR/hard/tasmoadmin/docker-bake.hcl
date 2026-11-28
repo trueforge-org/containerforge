@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=TasmoAdmin/TasmoAdmin versioning=semver
-  default = "5.1.0"
+  default = "5.1.1"
 }
 
 // UNVERIFIED: no upstream checksum is published. Set this from the first verified download. The build fails while it is empty.
