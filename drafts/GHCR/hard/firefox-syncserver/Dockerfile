@@ -5,7 +5,7 @@
 # - No upstream security fixes exist. The successor is mozilla-services/syncstorage-rs (a new app).
 # - Source is pinned by commit, there is no published checksum.
 
-FROM docker.io/library/python:2.7-alpine3.10
+FROM docker.io/library/python:2.7-alpine3.10@sha256:aa6542f4f074bba8f048b3e663d46cc7adf24337ca39642b0d1bae743a7e38ef
 ARG VERSION
 ARG SYNCSERVER_COMMIT=5932c464d70ec9cf0344b1d3e970b3711de6a98e
 
