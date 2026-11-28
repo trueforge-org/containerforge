@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=YACReader/yacreader versioning=loose
-  default = "10.4.0"
+  default = "10.5.1"
 }
 
 variable "LICENSE" {
