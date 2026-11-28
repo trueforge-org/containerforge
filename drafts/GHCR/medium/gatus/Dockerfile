@@ -1,6 +1,6 @@
 # Build stage: Go compiles here and only the static binary is copied.
 # UNVERIFIED: no digest pinned yet for the Go image; go.mod needs go 1.26.3, so check the tag provides it.
-FROM golang:1.26@sha256:6e59e17a20f13c102e49d82dffab66d41cffe6c266b225d82794328aea859ab5 AS buildstage
+FROM golang:1.27@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS buildstage
 
 # set version label
 ARG VERSION

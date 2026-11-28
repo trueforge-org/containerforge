@@ -1,5 +1,5 @@
 # UNVERIFIED: golang:1.22 tag and digest are not pinned yet; 1.22 matches the upstream builder
-FROM golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02 AS build
+FROM golang:1.27@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS build
 
 # build variables
 ARG VERSION

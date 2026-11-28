@@ -1,5 +1,5 @@
 # UNVERIFIED: golang tag. Check the Docker Hub tag list and the go.mod directive of the pinned twtxt tag before the first build.
-FROM golang:1.24@sha256:d2d2bc1c84f7e60d7d2438a3836ae7d0c847f4888464e7ec9ba3a1339a1ee804 AS build
+FROM golang:1.27@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS build
 
 ARG VERSION
 ARG CHECKSUM
