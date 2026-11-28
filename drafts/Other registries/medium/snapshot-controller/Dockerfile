@@ -1,6 +1,6 @@
 # UNVERIFIED: no pinned digest for the Go build image yet; pin one from the registry before merge.
 # go.mod declares go 1.26.0, so any 1.26.x or newer tag satisfies it.
-FROM docker.io/library/golang:1.26.11-trixie@sha256:f9e99477a80ccd7adfb69780510b22c7249ce9169885f18aa762cd886e75e018 AS build
+FROM docker.io/library/golang:1.27.4-trixie@sha256:430985542100b871e108ccc00e8dcc5eef08ca14ee5825e98ebf563d8ffec4ee AS build
 
 ARG VERSION
 ARG TARGETARCH
