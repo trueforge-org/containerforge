@@ -13,7 +13,7 @@ RUN mkdir -p /opt/recognizer/models
 
 # Stage 2: recognizer binary (Go + dlib via go-face). A Go build stage, copied out with COPY --from.
 # UNVERIFIED: golang:1.20-buster is the fork's pin; confirm it still builds (plan section 4, step 1).
-FROM golang:1.20-buster AS recognizer
+FROM golang:1.20-buster@sha256:eb3f9ac805435c1b2c965d63ce460988e1000058e1f67881324746362baf9572 AS recognizer
 
 ARG VERSION
 ENV GOCACHE=/tmp/go-cache
@@ -52,7 +52,7 @@ RUN npm install && \
     npm cache clean --force
 
 # Stage 4: frontend (Vue). UNVERIFIED: upstream uses bun; the tag below is a placeholder pin.
-FROM oven/bun AS frontend
+FROM oven/bun@sha256:3aa040e5445efa09d75bb428a64ba50db13e2b3ac9b6b0c7f145615f62b2ee18 AS frontend
 
 ARG VERSION
 RUN mkdir -p /src && \
