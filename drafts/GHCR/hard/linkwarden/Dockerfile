@@ -1,7 +1,7 @@
 # UNVERIFIED (draft): the plan uses ubuntu, not python-node, because this app needs Node 22 and no Python.
 # Node 22 and Rust are installed in build stages. Upstream v2.17.0 uses rust:1.96 and node:22.23.4.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS monolith
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS monolith
 
 ARG MONOLITH_VERSION=2.11.7
 USER root
@@ -18,7 +18,7 @@ RUN apt-get update && \
   cargo install --locked monolith --version "${MONOLITH_VERSION}" --root /opt/monolith && \
   rm -rf /var/lib/apt/lists/* /tmp/cargo
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS node
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS node
 
 ARG NODE_VERSION=22.23.4
 ARG TARGETARCH
@@ -44,7 +44,7 @@ RUN apt-get update && \
   tar -xJf "node-v${NODE_VERSION}-linux-${NODE_ARCH}.tar.xz" -C /opt/node --strip-components=1 && \
   rm -f /tmp/node-v* /tmp/SHASUMS256.txt
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS app
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS app
 
 ARG VERSION
 USER root
@@ -70,7 +70,7 @@ RUN corepack enable && \
   yarn prisma:generate && \
   yarn web:build
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 USER root

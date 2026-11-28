@@ -1,6 +1,6 @@
 
 # Source: the upstream release has no binary assets, so the tag archive is fetched once and shared by both build stages.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS src
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS src
 ARG VERSION
 USER root
 RUN echo "*** Fetching Hasty Paste source ***" && \
@@ -40,7 +40,7 @@ RUN mkdir -p /out && \
   go tool templ generate && \
   CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /out/hasty-paste .
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 USER root
 

@@ -1,6 +1,6 @@
 # Initial draft from plan.md. UNVERIFIED items are marked inline.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 ARG VERSION
 ARG TARGETARCH
 # sha256 of the v${VERSION} source tarball. Not published upstream: compute it once and pin it before the first build.
@@ -48,7 +48,7 @@ RUN case "${TARGETARCH}" in \
  && cd /tmp/src/gaseous-server \
  && dotnet publish gaseous-server.csproj -c Release -r "${RID}" --self-contained true -o /tmp/out
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 USER root
 
 # ICU is needed by the .NET runtime (UNVERIFIED whether this app needs it; check the startup log).

@@ -1,6 +1,6 @@
 # LICENSING BLOCKER (see plan.md section 10): bWAPP is CC BY-NC-ND 4.0. Confirm with the maintainers
 # before this image is published. This draft repackages the upstream zip unmodified.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ARG VERSION
 # UNVERIFIED: SHA256 of bWAPPv${VERSION}.zip, computed and pinned at implementation time (no published checksum)
 ARG BWAPP_SHA256

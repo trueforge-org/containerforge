@@ -1,7 +1,7 @@
 
 # Fetch the prebuilt release tarball for the target arch and verify it against the release digest.
 # UNVERIFIED: the tarball layout (resources/headlamp-server, resources/frontend) is not confirmed; check with `tar tzf` in the build.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS fetch
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS fetch
 ARG VERSION
 ARG TARGETARCH
 ARG SHA256_AMD64=1747c5de63963be925ded64dc2a5308144d260e43452855169bc771f03846434
@@ -27,7 +27,7 @@ RUN echo "*** Fetching Headlamp ${VERSION} (${TARGETARCH}) ***" && \
   cp -a /tmp/hl/resources/frontend /tmp/out/ && \
   rm -rf /tmp/hl
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 USER root
 

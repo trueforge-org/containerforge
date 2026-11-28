@@ -1,7 +1,7 @@
 
 # BLOCKED skeleton (plan.md sections 4 and 10). The server files are not packaged: no confirmed, legal download URL,
 # no pinned version and no license. No download is added here. Do not build this as a release until those are resolved.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG TARGETARCH

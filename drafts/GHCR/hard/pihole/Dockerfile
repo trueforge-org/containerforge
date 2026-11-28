@@ -2,7 +2,7 @@
 # Open blockers, not solved here: DNS on port 53 needs a capability or a remap (section 10);
 # the FTL link type (glibc or musl) is not checked (section 11, step 0); PIHOLE_CORE_REF is not set.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG FTL_VERSION

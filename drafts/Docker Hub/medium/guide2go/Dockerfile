@@ -3,7 +3,7 @@
 # Build stage: the upstream release ships no binaries, so compile from source.
 # UNVERIFIED: the ubuntu base is assumed to ship Go in /usr/local/go (plan section 3).
 # If it does not, use a pinned golang:<ver> build stage instead.
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
 ARG VERSION
 ARG TARGETARCH
@@ -19,7 +19,7 @@ RUN set -eux; \
     GOOS=linux GOARCH="${TARGETARCH}" go build -trimpath -ldflags="-s -w" -o /out/guide2go .; \
     cp LICENSE /out/LICENSE
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 USER root

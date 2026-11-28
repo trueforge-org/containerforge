@@ -1,7 +1,7 @@
 # Initial draft from plan.md. UNVERIFIED items are marked inline.
 # Redmine needs a PostgreSQL database to serve pages (plan section 10 decision is still open).
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 ARG VERSION
 # sha256 of redmine-6.1.6.tar.gz (docker-library REDMINE_DOWNLOAD_SHA256). Bump together with VERSION.
 ARG REDMINE_SHA256=a09f0541e3ef5579de8be1c21fc9cabbd7625d77ec4dd2ddddc39ad9c2c5a483
@@ -44,7 +44,7 @@ RUN rm -rf files log tmp \
  && ln -s /tmp/tmp tmp \
  && ln -s /tmp/redmine/database.yml config/database.yml
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 USER root
 
 # Runtime libraries only. Package names libxml2-16 and libxslt1.1 follow the bazarr sibling; libyaml-0-2 is UNVERIFIED.

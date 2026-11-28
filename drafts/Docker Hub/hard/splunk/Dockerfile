@@ -2,7 +2,7 @@
 # The upstream splunk/docker-splunk packaging (ansible, root) is not ported.
 # Checksum: SPLUNK_SHA512 is copied from the .sha512 file published next to the tarball (UNVERIFIED value, see docker-bake.hcl).
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG SPLUNK_BUILD

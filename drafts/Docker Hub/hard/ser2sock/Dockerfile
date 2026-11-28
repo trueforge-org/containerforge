@@ -1,7 +1,7 @@
 # ser2sock 1.5.5 (GPL-3.0-only), built from the upstream tag on the ContainerForge ubuntu base.
 # Upstream: https://github.com/nutechsoftware/ser2sock (tags only, no published checksum; the tag is pinned by VERSION).
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS build
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
 ARG VERSION
 
@@ -25,7 +25,7 @@ RUN curl -fsSL -o /tmp/ser2sock.tar.gz "https://github.com/nutechsoftware/ser2so
     make DESTDIR=/out install && \
     install -D -m 0644 /tmp/src/COPYING /out/usr/share/licenses/ser2sock/COPYING
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 # socat is only used for the virtual serial pair in demo mode (start.sh). libssl is already in the base.
 USER root

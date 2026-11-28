@@ -2,7 +2,7 @@
 # Upstream: https://github.com/wiedehopf/tar1090 (no releases, pinned by commit in VERSION). Decoder: https://github.com/wiedehopf/readsb
 # UNVERIFIED: readsb build flags, tar1090.sh arguments, and the aircraft.csv.gz download URL. Check the repos before the first build.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454 AS builder
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS builder
 
 ARG VERSION
 ARG READSB_REF

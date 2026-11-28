@@ -3,7 +3,7 @@
 # Pinned sha256 values from plan.md (computed 2026-11-23), add per arch if pinning:
 #   amd64 d16510d0a7b8b39d387b87883b23d865556d63bb51a6624a4eb3e3732da7e5ef
 #   arm64 20265cefc04eb1ec29c27ad1995a2e017e13cc3a461f11e671e476babe54f577
-FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
 ARG TARGETARCH
