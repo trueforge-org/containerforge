@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=npm depName=meshcentral versioning=semver
-  default = "1.3.1"
+  default = "1.3.2"
 }
 
 variable "LICENSE" {
