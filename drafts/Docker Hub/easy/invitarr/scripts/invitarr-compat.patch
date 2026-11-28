@@ -1,0 +1,91 @@
+diff -ruN a/app/bot/cogs/app.py b/app/bot/cogs/app.py
+--- a/app/bot/cogs/app.py
++++ b/app/bot/cogs/app.py
+@@ -3,7 +3,6 @@
+ import asyncio
+ from plexapi.server import PlexServer
+ from plexapi.myplex import MyPlexAccount
+-from discord import Webhook, AsyncWebhookAdapter
+ import app.bot.helper.db as db
+ import app.bot.helper.plexhelper as plexhelper
+ import texttable
+@@ -37,9 +36,11 @@
+     except:
+         pass
+ 
++PLEX_SERVER_NAME = "Plex"
+ try:
+     plex = PlexServer(PLEX_URL, PLEX_TOKEN)
+     account = MyPlexAccount(PLEX_TOKEN)
++    PLEX_SERVER_NAME = plex.friendlyName or PLEX_SERVER_NAME
+     print('Logged into plex!')
+ except:
+     print('Error with plex login. Please check username and password and Plex server name or setup plex in the bot.')
+@@ -259,5 +260,5 @@
+         except Exception as e:
+             print(e)
+ 
+-def setup(bot):
+-    bot.add_cog(app(bot))
+\ No newline at end of file
++async def setup(bot):
++    await bot.add_cog(app(bot))
+\ No newline at end of file
+diff -ruN a/run.py b/run.py
+--- a/run.py
++++ b/run.py
+@@ -27,6 +27,7 @@
+ 
+ intents = discord.Intents.default()
+ intents.members = True
++intents.message_content = True
+ bot = commands.Bot(command_prefix=".", intents = intents)
+ bot.remove_command('help')
+ 
+@@ -43,8 +44,8 @@
+         return
+     await bot.process_commands(message)
+ 
+-def reload():
+-    bot.reload_extension(f'app.bot.cogs.app')
++async def reload():
++    await bot.reload_extension('app.bot.cogs.app')
+ 
+ async def getplex(ctx, message):
+     username = None
+@@ -83,7 +84,7 @@
+         confighelper.change_config("roles", saveroles)
+         await ctx.author.send("Updated roles. Bot is restarting. Please wait.")
+         print("Roles updated. Restarting bot.")
+-        reload()
++        await reload()
+         await ctx.author.send("Bot has been restarted. Give it a few seconds.")
+         print("Bot has been restarted. Give it a few seconds.")
+ 
+@@ -114,7 +115,7 @@
+     confighelper.change_config("plex_url", str(plexurl))
+     print("Plex token and plex url updated. Restarting bot.")
+     await ctx.author.send("Plex token and plex url updated. Restarting bot. Please wait.")
+-    reload()
++    await reload()
+     await ctx.author.send("Bot has been restarted. Give it a few seconds. Please check logs and make sure you see the line: `Logged into plex`. If not run this command again and make sure you enter the right values. ")
+     print("Bot has been restarted. Give it a few seconds.")
+ 
+@@ -128,9 +129,13 @@
+     else:
+         confighelper.change_config("plex_libs", str(libs))
+         print("Plex libraries updated. Restarting bot. Please wait.")
+-        reload()
++        await reload()
+         await ctx.author.send("Bot has been restarted. Give it a few seconds. Please check logs and make sure you see the line: `Logged into plex`. If not run this command again and make sure you enter the right values. ")
+         print("Bot has been restarted. Give it a few seconds.")
+ 
+-bot.load_extension(f'app.bot.cogs.app')
+-bot.run(Discord_bot_token)
+\ No newline at end of file
++async def main():
++    async with bot:
++        await bot.load_extension('app.bot.cogs.app')
++        await bot.start(Discord_bot_token)
++
++asyncio.run(main())

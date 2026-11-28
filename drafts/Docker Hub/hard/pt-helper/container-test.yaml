@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '8192'
+filePaths:
+- /start.sh
+- /app/pt_helper
+- /app/config/config.toml
+- /usr/share/licenses/pt-helper/NOTICE

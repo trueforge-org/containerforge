@@ -1,12 +1,14 @@
 
-# BLOCKED draft: upstream 0.7.36 needs root and NET_ADMIN for WireGuard, see plan.md section 10.
-
-# renovate-tracked via docker-bake.hcl VERSION
+# Legacy Firezone 0.7.x omnibus release. The WireGuard/nftables data plane needs root and NET_ADMIN, which
+# this rootless image does not have (see plan.md section 10): only the portal can run unprivileged.
 ARG ELIXIR_VERSION=1.14.3
 ARG OTP_VERSION=25.2.1
-# UNVERIFIED: glibc (ubuntu) builder tag. The upstream firezone/elixir builder is alpine (musl),
-# which would not run on the ubuntu runtime. Confirm the tag on Docker Hub (hexpm/elixir).
-ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-jammy-UNVERIFIED
+# glibc builder (the upstream firezone/elixir builder is alpine/musl and would not run on the ubuntu runtime).
+# Tag and digest read from Docker Hub on 2026-11-28; amd64 and arm64 are published.
+ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-jammy-20260509@sha256:a4ccc904c4e2aeb974a912e8306644c4d43a1d761fb5fbef237b8e9ce7bb51ca
+
+# Node 18.16.0 (.tool-versions of the 0.7.36 tag) and yarn 1.x, taken from the official node image.
+FROM docker.io/library/node:18.16.0-bullseye-slim@sha256:2b05866efb50b6bbc642e6d1cef908372351ad981453b8a747b1d0c9b5777cd8 AS node
 
 FROM ${BUILDER_IMAGE} AS builder
 
@@ -18,8 +20,12 @@ ENV MIX_ENV=prod \
 
 WORKDIR /src
 
-# UNVERIFIED: upstream pins Node 18.16.0 via .tool-versions, apt nodejs may differ
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node /opt /opt
 RUN \
+  ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
+  ln -s /opt/yarn-v1.22.19/bin/yarn /usr/local/bin/yarn && \
   echo "**** install build tools ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -27,10 +33,7 @@ RUN \
     ca-certificates \
     curl \
     git \
-    nodejs \
-    npm \
     python3 && \
-  npm install -g yarn && \
   rm -rf /var/lib/apt/lists/*
 
 RUN \
@@ -77,9 +80,6 @@ RUN \
 # release from the builder stage, read-only at runtime
 COPY --from=builder /src/_build/prod/rel/firezone /app
 COPY --from=builder /src/LICENSE /usr/share/licenses/firezone/LICENSE
-
-# upstream bootstrap writes state to /var/firezone, point it at /config
-RUN ln -s /config/firezone /var/firezone
 
 USER apps
 ENV HOME=/config \

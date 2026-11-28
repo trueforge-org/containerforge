@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=custom.channels-dvr depName=channels-dvr
-  // UNVERIFIED: no Renovate datasource exists for this. The value is https://cdn.channelsdvr.net/dvr/latest.txt as read on 2026-11-27. Bump it by hand, or add a custom.regex manager.
+  // No standard Renovate datasource exists. Value is https://cdn.channelsdvr.net/dvr/latest.txt as read on 2026-11-28; needs a custom datasource or a manual bump.
   default = "2026.10.24.0621"
 }
 

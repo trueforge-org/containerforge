@@ -219,3 +219,20 @@ Run from `apps/dispatcharr/`, one app at a time, per `build-test-protocol.instru
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge. Only the user can sign it.
 - State what was not tested: the base image, arm64 and the full stack are not validated until built.
 - If the image is not built, do not check "Built container locally".
+
+## Fix attempt (2026-11-28)
+
+What was read: upstream `docker/DispatcharrBase`, `Dockerfile`, `entrypoint.sh`, `entrypoint.celery.sh`, `init/*.sh`, `nginx.conf`, `uwsgi.ini`, `uwsgi.modular.ini`, `pyproject.toml` and `dispatcharr/settings.py` at tag v0.34.1. The "base image blocker" is resolved by not using the upstream base: the upstream base is just Ubuntu 26.04 + ffmpeg + Python 3.13 venv (uv) + nginx + redis + PostgreSQL 17 and can be rebuilt on `python-node:3.13.13`.
+
+Design chosen (files now written: Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh, etc/dispatcharr/nginx.conf):
+- Python 3.13 (upstream's version) on `ghcr.io/trueforge-org/python-node:3.13.13@sha256:c636840e...` (tag and digest fetched from GHCR). Dependencies come from `pyproject.toml` via pip, with the PyTorch CPU index (`torch==2.15.0+cpu` exists for cp313 on x86_64 and aarch64). The frontend is built in the same layer; `collectstatic` runs at build time.
+- Rootless all-in-one: PostgreSQL and Redis are NOT embedded. They are the ContainerForge `postgresql` and `valkey` apps (settings.yaml `dependencies`). One image runs nginx + uWSGI (+ daphne + celery via uwsgi.ini `attach-daemon`), using a build-time `sed` copy of upstream `uwsgi.ini` (embedded redis line removed, socket in `/tmp`, venv `/app/venv`) and of `nginx.conf` (socket in `/tmp`).
+- Upstream hardcodes `/data` in many Python files (uploads, logos, recordings, plugins), so `/data` is the data volume instead of `/config`.
+
+Still unverified or not done:
+- Nothing was built or run. `collectstatic` at build time without a database, and the frontend `npm install` inside the python-node base, may need adjusting.
+- Redis: upstream `wait_for_redis.py` flushes non-celery keys at start in aio mode, so give Dispatcharr its own valkey instance.
+- Default `POSTGRES_PASSWORD=secret` mirrors upstream and is insecure; the database must already exist with this user (the `postgresql` app creates it from its own `POSTGRES_*` env).
+- Not carried over: upstream log collector (logs go to stdout only), comskip, the custom `ghcr.io/dispatcharr/ffmpeg` build (Ubuntu apt ffmpeg is used, so NVENC/VAAPI behaviour is unverified), `USE_LEGACY_NUMPY`, hardware-acceleration check. apt packages are not version-pinned.
+- container-test has only a tcp probe: without a database `/` returns 502 because start.sh opens nginx first and then waits for PostgreSQL.
+- No source checksum exists upstream (release has no assets); the source is pinned by tag only.

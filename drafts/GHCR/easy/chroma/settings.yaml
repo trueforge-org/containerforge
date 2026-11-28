@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/chroma-core/chroma"
+ports:
+  - port: 8000
+    protocol: tcp
+    required: true
+env:
+  - name: CHROMA_HOST_ADDR
+    default: "0.0.0.0"
+    required: false
+  - name: CHROMA_HOST_PORT
+    default: "8000"
+    required: false
+  - name: CHROMA_WORKERS
+    default: "1"
+    required: false
+  - name: CHROMA_TIMEOUT_KEEP_ALIVE
+    default: "30"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true

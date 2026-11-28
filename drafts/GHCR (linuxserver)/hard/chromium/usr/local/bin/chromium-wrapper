@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Profile in /config (persistent), cache and shared memory scratch in /tmp (read-only rootfs).
+mkdir -p /config/chromium /tmp/chromium-cache
+
+FLAGS=(
+  --user-data-dir=/config/chromium
+  --disk-cache-dir=/tmp/chromium-cache
+  --disable-dev-shm-usage
+  --no-first-run
+  --no-default-browser-check
+  --start-maximized
+)
+
+# Docker's default seccomp profile blocks the user namespaces the Chromium sandbox needs.
+if [[ "${CHROMIUM_SANDBOX:-false}" != "true" ]]; then
+  FLAGS+=(--no-sandbox)
+fi
+
+# shellcheck disable=SC2086
+exec /usr/bin/chromium "${FLAGS[@]}" ${CHROMIUM_FLAGS:-} "$@"

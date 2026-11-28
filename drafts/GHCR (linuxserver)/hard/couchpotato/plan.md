@@ -129,3 +129,7 @@ Readiness signal: UNVERIFIED (CouchPotato's startup line for the chosen source).
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep sections, check only applicable boxes.
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it; the `license/cla` check shows the status.
 - Say that this plan has not been built or run, and state the Python 3 source, port and arm64 status as unverified.
+
+## Fix attempt (2026-11-28)
+
+Blocker 1 (Python 2 only) resolved by switching the source to the Python 3 fork https://github.com/bassings/CouchPotatoServer (GPL-3.0-or-later, actively released; latest stable v3.312.0 at time of writing, runs on Python 3.14+, default bind 0.0.0.0, port 5050, entry `CouchPotato.py --console_log --data_dir --config_file`). Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml and start.sh written on the `python` base. Still unverified: not built; `7zip`/`mediainfo` package names on the base Ubuntu; whether the app writes anywhere under /app at runtime (`removePyc` at startup); Python 3.15 compatibility of the pinned requirements; arm64. The fork is small (few contributors), so review it before trusting it with network exposure.

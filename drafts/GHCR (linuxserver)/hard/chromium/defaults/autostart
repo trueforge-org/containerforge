@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Started by openbox for the apps user. Chromium is restarted if it exits.
+(
+  while true; do
+    /usr/local/bin/chromium-wrapper
+    sleep 2
+  done
+) &

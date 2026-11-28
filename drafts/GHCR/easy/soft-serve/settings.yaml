@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/charmbracelet/soft-serve"
+ports:
+  - port: 23231
+    protocol: tcp
+    required: true
+  - port: 23232
+    protocol: tcp
+    required: false
+  - port: 23233
+    protocol: tcp
+    required: false
+  - port: 9418
+    protocol: tcp
+    required: false
+env:
+  - name: SOFT_SERVE_DATA_PATH
+    default: "/config/soft-serve"
+    required: false
+  - name: SOFT_SERVE_INITIAL_ADMIN_KEYS
+    default: ""
+    required: false
+  - name: SOFT_SERVE_DEFAULT_REPO
+    default: ""
+    required: false
+  - name: SOFT_SERVE_SSH_LISTEN_ADDR
+    default: ":23231"
+    required: false
+  - name: SOFT_SERVE_HTTP_LISTEN_ADDR
+    default: ":23232"
+    required: false
+  - name: SOFT_SERVE_STATS_LISTEN_ADDR
+    default: ":23233"
+    required: false
+  - name: SOFT_SERVE_GIT_LISTEN_ADDR
+    default: ":9418"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  []

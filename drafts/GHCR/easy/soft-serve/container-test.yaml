@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '23231'
+- port: '23232'
+- port: '23233'
+- port: '9418'
+http:
+- port: '23232'
+  path: /
+filePaths:
+- /app/soft-serve/soft
+- /usr/share/licenses/soft-serve/LICENSE

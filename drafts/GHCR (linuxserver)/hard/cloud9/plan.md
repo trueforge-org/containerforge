@@ -124,3 +124,11 @@ Readiness signal: UNVERIFIED (server startup line from c9/core).
 - Fill `.github/PULL_REQUEST_TEMPLATE.md`, keep sections, check only applicable boxes.
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it; the `license/cla` check shows the status.
 - Say that this plan has not been built or run, and state the licence, port, node version and arm64 status as unverified.
+
+## Fix attempt (2026-11-28)
+
+Status: still blocked, no files written.
+
+Tried: read https://raw.githubusercontent.com/c9/core/master/LICENSE. It is the "Cloud9 SDK Non-Commercial License Agreement", not an open-source licence (the earlier NOASSERTION/empty `package.json` licence was the cause of the unknown). Section 1.1 allows only personal, non-commercial internal use and plugin development. Section 1.4 forbids to "license, sell, rent, lease, transfer, distribute, display, host ... or make the SDK available to any third party" and to make more copies than reasonably needed. Publishing a container image that contains the SDK is distribution, so a ContainerForge image cannot legally ship it. Also confirmed: the repo is archived, has no tags, `linuxserver/cloud9` was last pushed 2022-06-28 and is marked unsupported, and the linuxserver wrapper (`ghcr.io/linuxserver/baseimage-cloud9`, Ubuntu bionic, `EXPOSE 8000`, `VOLUME /code`, installs curl/git/gnupg/sudo/unzip/zip) only adds docker-ce/compose on top.
+
+Still needed: written permission from Cloud9/AWS to redistribute, or drop this app. Technically it would be `node server.js -w /config/code --listen 0.0.0.0 --port 8000` after `scripts/install-sdk.sh` (flags from the c9/core README, unverified in a build), but that is moot until the licence is resolved.

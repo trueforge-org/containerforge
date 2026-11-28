@@ -166,3 +166,9 @@ Expected readiness signal: the server starts and listens on 1411 (`Now listening
 - CLA notice: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge); only the user can sign it, and the `license/cla` check shows status.
 - Say what was not tested: the build, the run on `--read-only`, the first-run setup, passkeys over HTTPS, arm64.
 - `docker buildx bake --print` passes; bake `VERSION` equals Dockerfile `ARG VERSION`; no assertion weakened.
+
+## Fix attempt (2026-11-28)
+
+- Wrote the full file set. Verified: release assets and `checksums.txt` lines for `pocket-id_linux_amd64`/`arm64` (v2.19.3), `LICENSE` exists at the tag (BSD 2-Clause), `/healthz` route exists in `router_bootstrap.go`, default DB and uploads paths are relative (`data/pocket-id.db`, `data/uploads`), so `start.sh` runs from `/config`. PORT default 1411 and HOST 0.0.0.0 confirmed from `env_config.go`.
+- Base digest corrected to the one used by `apps/adguardhome-sync` (`f01a4295...`); the plan's `19cb...` was not found.
+- Not verified: no build or run; whether the app generates an encryption key itself when `ENCRYPTION_KEY` is empty; `TRUST_PROXY` accepted values (default "false" assumed).

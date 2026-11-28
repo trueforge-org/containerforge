@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
-# BLOCKED draft: the TCP probe only passes once start.sh reaches the Phoenix listener, which needs postgresql.
+# NOTE: the TCP probe only passes once start.sh reaches the Phoenix listener, which needs postgresql.
 timeoutSeconds: 240
 tcp:
 - port: '13000'

@@ -80,3 +80,18 @@ Not applicable while blocked. Once unblocked, the protocol is: `docker buildx ba
 ## 12. PR checklist
 
 Not applicable while blocked. If the port proceeds: branch `feat/add-qwantify`, commit `feat(qwantify): add new container`, PR template with `🤖 This PR is AI generated.` in Notes, CLA notice to the user (https://cla-assistant.io/trueforge-org/containerforge, only the user can sign), and an honest list of what was not built or run.
+
+## Fix attempt (2026-11-28)
+
+No container files written: a port would have meant inventing most of the runtime, so the blockers below are recorded instead.
+
+Resolved by this attempt:
+- The repo `github.com/wanjohiryan/qwantify` now 301-redirects to `https://github.com/wanjohiryan/Arc3dia` (renamed). Use that URL.
+- Which Dockerfile builds the chart's `20.04` image: very likely `gamevm/base/Dockerfile` at commit `2d4c204c8902da9026fc15baf21eab0fedc0f0dd` (the path 404s on `master`, and the `docker/base` Dockerfile is Ubuntu 22.04 with systemd, so it is not it). Evidence: its `gamevm/base/entrypoint.sh` runs `cd "${APPPATH}" && wine "${APPFILE}"` (matches chart env `APPFILE=/game.exe`, `APPPATH=/games`), `VOLUME /games` matches the chart mount, and `ENV NEKO_BIND=:8080` matches chart targetPort 8080. The ghcr tag list could not be read (ghcr returns UNAUTHORIZED), so the link between that commit and the `20.04` digest is still inferred.
+- What that image is: a fork of m1k1o/neko. Stage 1 `golang:1.18-bullseye` builds `server/cmd/neko/main.go` (needs libclipboard, X11 and GStreamer dev libs). Stage 2 `node:14-bullseye-slim` builds `client/`. Runtime is `nvcr.io/nvidia/cudagl:11.2.2-runtime-ubuntu20.04` with supervisord (as root) running dbus, Xvfb, pulseaudio, neko and a `game` program (`/etc/entrypoint.sh`, wine or `vglrun wine`), plus VirtualGL 3.0.2 (amd64 .deb from sourceforge), WineHQ staging, winetricks and `d3dx11_43`. Env defaults: `NEKO_PASSWORD=neko`, `NEKO_PASSWORD_ADMIN=admin`, `NEKO_BIND=:8080`, `DISPLAY=:99.0`, `REFRESH=60`, `DPI=96`, `CDEPTH=24`, `VGL_DISPLAY=egl`.
+
+Still blocking (needs a maintainer decision, not more research):
+- It is a Wine, Xvfb, VirtualGL and NVIDIA-GPU stack that supervisord runs as root, so `USER apps` and a read-only rootfs need a real redesign (X sockets in `/tmp`, pulseaudio, dbus, `/home/neko`, `/var/log/neko`). The setuid VirtualGL libraries (`chmod u+s`) are not compatible with the repo rules.
+- Upstream is stale (last push 2024-05-19, no release assets), amd64 only (VirtualGL amd64 .deb, WineHQ staging on Ubuntu 20.04), and the user supplies the game binary, so no probe beyond `tcp 8080` is possible.
+- The `master` branch of the repo no longer has `gamevm/base`, so a port must pin commit `2d4c204c8902da9026fc15baf21eab0fedc0f0dd` with `datasource=git-refs` or build from that tarball, and no licence or checksum is published for it beyond the AGPL-3.0 repo licence.
+- A cleaner route is to build on the existing ContainerForge `neko` app (a draft exists at `drafts/GHCR/hard/neko`) and add wine on top, rather than porting this fork. That is a new design, not a fix of this draft.

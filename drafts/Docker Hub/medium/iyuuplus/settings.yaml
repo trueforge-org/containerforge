@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/ledccn/iyuuplus-dev"
+ports:
+  - port: 8787
+    protocol: tcp
+    required: true
+env:
+  - name: APP_ENV
+    default: "prod"
+    required: false
+  - name: DB_HOST
+    default: ""
+    required: false
+  - name: DB_PORT
+    default: "3306"
+    required: false
+  - name: DB_DATABASE
+    default: "iyuu"
+    required: false
+  - name: DB_USERNAME
+    default: ""
+    required: false
+  - name: DB_PASSWORD
+    default: ""
+    required: false
+  - name: IYUU_LISTEN_IPV6
+    default: ""
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  - mariadb

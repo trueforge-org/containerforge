@@ -91,3 +91,9 @@ Not applicable now: nothing to build. If a source is adopted, follow the protoco
 - No PR should be opened for this draft until a source exists.
 - When it does: branch `feat/add-auto-yt-dl`, commit `feat(auto-yt-dl): add new container`, fill the PR template, put `🤖 This PR is AI generated.` in Notes, and tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - State as untested: everything (no build, no run, no license, no version).
+
+## Fix attempt (2026-11-28)
+
+The blocker (no public source) is resolved: the fork https://github.com/CDeLeon94/auto-yt-dl (branch `latest`, commit `32ee552af051c48fffc63fde973737ce93688684`) has full source, a `LICENSE` (GPL-3.0) and the same README as the missing xXGuhuXx repo (the Dockerfile still labels the old repo as source). Files written from it: Dockerfile (downloads the commit tarball, sha256 `0d745faa...82e3d` computed by us because upstream publishes none), docker-bake.hcl, settings.yaml, container-test.yaml, start.sh. The app uses cwd-relative `data/` and `Downloads/`, so start.sh runs from `/config` (`/config/data`, `/config/Downloads`), and code lives in read-only `/app`. The Flask GUI binds 0.0.0.0:5000, no env vars exist.
+
+Still unresolved: (1) VERSION `1.2.0` is UNVERIFIED for the fork (no tags there; 1.2.0 is the original's latest release per a web search); (2) deps changed from Flask 2.0.1 / pytube~=11.0.0 (Python 3.8) to Flask 3.1.3 / pytube 15.0.0 for Python 3.15, so the fork's use of `Channel.video_urls`, `channel_name` etc. on pytube 15 needs a run to confirm; (3) pytube is known to break against YouTube, so downloads may fail; (4) the fork's copy is an unreviewed third party; (5) GPL variant `GPL-3.0-only` is assumed, as the repo only says "GPL-3.0"; (6) the policy question on YouTube downloading remains for the maintainers; (7) nothing was built or run.

@@ -146,3 +146,9 @@ docker rm -f tonido-probe; docker volume rm tonido-probe-config
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only they can sign).
 - Pre-completion: bake print ok, `VERSION`/`ARG` aligned, final `USER apps`, `COPY --chmod=0755 . /`, license note in `/usr/share/licenses/tonido/`.
 - Untested/unknown to state: download URL, checksum, binary compatibility with Ubuntu 26.04, arm64 (not supported), bind address, writes to the install dir.
+
+## Fix attempt (2026-11-28)
+- Blocker resolved: the vendor URL still returns 404, but the Internet Archive holds the 2021-10-06 snapshot of `download.php?tonido64.tar.gz` (43,477,755 bytes, sha256 `d5b582f53d455e083604b306c7cb98e836579b5fa9f3c74efc0ccd72157f3a84`). `manifest.xml` inside reports version `14.90.0.34042`, `<License>Free</License>`. The archive is flat (no top directory) and bundles Poco, OpenSSL 1.0, libgd, taglib and wx libs. `VERSION` is now `14.90.0.34042` and the Dockerfile checks it against `manifest.xml`.
+- Found by readelf: bundled `libgd.so.2` needs `libpng12.so.0` and `libjpeg.so.8`. `libjpeg-turbo8` exists for Ubuntu resolute; `libpng12` does not, so it is taken from the Ubuntu xenial `.deb` (sha256 pinned in the bake file).
+- Files written: Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh.
+- Still unresolved: redistribution rights (no licence text in the archive); run-time compatibility on Ubuntu 26.04 (glibc, OpenSSL 1.0 bundled); bind address; whether the app writes to `/app/tonido`; arm64 unsupported. Nothing was built or run.

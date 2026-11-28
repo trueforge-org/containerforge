@@ -8,8 +8,7 @@ ENV \
 
 USER root
 
-# TODO(draft): scripts/invitarr-compat.patch is NOT written yet. It needs app/bot/cogs/app.py and run.py
-# at ce30f13 (plan section 4 item 5). The build fails until the patch exists.
+# discord.py 2.x compatibility patch for app/bot/cogs/app.py and run.py at ce30f13.
 COPY scripts/invitarr-compat.patch /tmp/invitarr-compat.patch
 
 # UNVERIFIED: discord.py 2.7.1 and PlexAPI 4.18.3 on Python 3.15 (wheel or build not checked).

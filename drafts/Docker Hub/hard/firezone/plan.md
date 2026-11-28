@@ -149,3 +149,9 @@ Also run once with an empty `/config` and no env (the container-test condition) 
 - CLA notice: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; `license/cla` check shows status).
 - State clearly what is untested: the WireGuard/nftables path (not supported rootless), arm64 build, env var name mapping, builder image tag, and any narrowed tests.
 - Pre-completion: bake `--print` ok, Dockerfile/bake aligned (`VERSION`, `ELIXIR_VERSION`, `OTP_VERSION`), read-only rootfs and empty `/config` verified, no downstream consumers.
+
+## Fix attempt (2026-11-28)
+
+Resolved: env var naming is confirmed (`FzHttp.Config.Resolver.env_key` upper-cases the config key, so `EXTERNAL_URL`, `DATABASE_HOST`, `WIREGUARD_PRIVATE_KEY_PATH`, `SAML_CERTFILE_PATH`, `SAML_KEYFILE_PATH`, `PHOENIX_HTTP_PORT`, `TELEMETRY_ENABLED` etc. are real); the glibc builder is now `hexpm/elixir:1.14.3-erlang-25.2.1-ubuntu-jammy-20260509` pinned by digest (amd64 and arm64 exist on Docker Hub); Node 18.16.0 and yarn come from the official `node:18.16.0-bullseye-slim` image (pinned digest) instead of the apt Node; the `/var/firezone` symlink was replaced by explicit state-path env vars pointing into `/config/firezone`, with the SAML self-signed cert generated when missing; `start.sh` now repeats the upstream interface/route setup when the process has NET_ADMIN, and otherwise skips it.
+
+Still open: the capability blocker is by design not solvable rootless (portal only, `fz_vpn`/`fz_wall` behaviour without NET_ADMIN is untested and may crash the release), and the Node/yarn copy from the node image and `mix release` on arm64 are unbuilt. Maintainer sign-off was waived for this unreviewed draft.

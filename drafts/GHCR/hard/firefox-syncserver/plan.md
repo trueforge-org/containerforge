@@ -69,3 +69,7 @@ Not applicable: do not run `docker buildx bake` or any build for this draft.
 ## 12. PR checklist
 
 Not applicable: no branch, commit or PR while blocked. If the user later overrides and a port goes ahead, the checklist would be the standard one (`feat/add-firefox-syncserver`, `feat(firefox-syncserver): add new container`, AI notice, CLA notice, honest list of what was not tested).
+
+## Fix attempt (2026-11-28)
+
+Wrote a best-effort draft (Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh). Verified: upstream master (`requirements.txt`, `setup.py`, `Makefile`) is still Python 2.7 only, and the crazy-max `entrypoint.sh` env names were fetched and mirrored in `start.sh`. Still unresolved: the Dockerfile uses `docker.io/library/python:2.7-alpine3.10` (EOL, no ContainerForge Python 2.7 base, no digest pinned), the source is pinned by commit with no checksum, upstream is archived (no security fixes), the app was never built, and the `apps` UID/GID 568 plus `/config` secret handling are untested. The `USER apps`/`/config` mapping replaces upstream's `/data`. Successor `syncstorage-rs` would be a separate app.

@@ -209,3 +209,7 @@ From `apps/multus-cni/` (one app at a time, per the build protocol). Only option
 - The repo-rule conflict (section 10) must be stated in the PR body. The PR must not claim `USER apps` compliance for the daemon.
 - Do not add `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 - Pre-completion: bake-print ran; `VERSION`/`ARG VERSION` aligned; checksum verified; `USER apps` in the final stage.
+
+## Fix attempt (2026-11-28)
+
+Policy blocker overridden (draft only): wrote Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml for the daemon image (option B shape, no start.sh). Verified by downloading the v4.3.2 amd64 tarball: the SHA-256 matches checksums.txt (amd64 `6775a433...`, arm64 `2af3dd58...` from checksums.txt), and the tarball layout is `multus-cni_4.3.2_linux_<arch>/{LICENSE,README.md,multus,multus-daemon,multus-shim}` (no `cert-approver`, unlike the upstream thick image). Binaries are installed to `/usr/src/multus-cni/bin` to match upstream's image path. Still open: the chart must run it as root/privileged with hostPath mounts (the image sets `USER apps`), the `--version` flag and "no listening port" are unverified, the chart's metrics port 8080 is not confirmed on the daemon, the arm64 tarball was not downloaded, nothing was built or run, and the chart's crane/talos installer images are not ContainerForge apps.

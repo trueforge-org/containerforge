@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+filePaths:
+- /usr/src/multus-cni/bin/multus-daemon
+- /usr/src/multus-cni/bin/multus-shim
+- /usr/src/multus-cni/bin/multus
+- /usr/share/licenses/multus-cni/LICENSE

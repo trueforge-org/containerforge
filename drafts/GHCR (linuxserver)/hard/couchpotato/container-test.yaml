@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+
+tcp:
+- port: '5050'
+
+http:
+- port: '5050'
+  path: /
+
+filePaths:
+- /app/couchpotato/CouchPotato.py
+- /usr/share/licenses/couchpotato/LICENSE

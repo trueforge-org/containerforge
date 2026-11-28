@@ -142,3 +142,11 @@ Readiness signal: UNVERIFIED (no startup log was fetched).
 - CLA notice: signed CLA is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it; `license/cla` shows the status.
 - Untested to state honestly: everything, since no build was run and no startup was observed.
 - Check `docker buildx bake --print` passes and bake `VERSION` equals the Dockerfile `ARG VERSION` before any PR.
+
+## Fix attempt (2026-11-28)
+Nothing written; the folder stays a skipped draft. Tried and found:
+- `https://github.com/sourcegraph/sourcegraph` is 404 (private) from the GitHub API. Only `sourcegraph/sourcegraph-public-snapshot` exists: archived, last push 2024-09-02, licence `NOASSERTION`. It predates 6.x, so it cannot build `6.12.5040`.
+- Image config of `sourcegraph/server:6.12.5040` (linux/amd64, read with `crane config`, nothing run): no `USER` (root), `ENTRYPOINT ["/sbin/tini","--","/server"]`, no `CMD`, no `EXPOSE`, no `VOLUME`, `WORKDIR /`, env `PATH`, `SSL_CERT_FILE`, `GO111MODULES`, `LANG`, `LC_ALL`. Built with apko plus Bazel; the layers (about 1.17 GB compressed) contain frontend, gitserver, searcher, worker, migrator, zoekt (indexserver, webserver, git-index, archive-index), precise-code-intel-worker, prom-wrapper, syntax-highlighter, scip-ctags and postgres tooling. It is an all-in-one monolith with an embedded PostgreSQL and Redis set-up, not a single binary.
+- Ports 7080, 2633 and 3370 come only from the TrueCharts chart; the image declares none. Data paths `/var/opt/sourcegraph` and `/etc/sourcegraph` come from the chart.
+- No build source, no standalone per-arch binary, amd64 only, licence not confirmed: a faithful Dockerfile would mean guessing the user, paths and env of an unverified root-oriented monolith.
+Still needed: a public buildable source or a redistributable per-service binary release, plus the licence terms for 6.x.

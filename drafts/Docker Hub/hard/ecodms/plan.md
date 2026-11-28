@@ -94,3 +94,18 @@ Not applicable now. If it proceeds: `docker buildx bake --print`, `docker buildx
 - When ready: branch `feat/add-ecodms`, commit `feat(ecodms): add new container`, PR template filled, `🤖 This PR is AI generated.` in Notes.
 - CLA: tell the user, https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Untested: everything (no build, run, package layout, ports, or license check).
+
+## Fix attempt (2026-11-28)
+
+Result: no container files written; the draft cannot be written without inventing runtime facts. Policy blockers (redistribution, EULA) were set aside as authorised, the technical ones remain.
+
+New verified facts (vendor noble repo `https://www.ecodms.de/ecodms_260164/noble/`, HTTP redirects to HTTPS; control scripts read from the first bytes of `ecodmsserver-26.01-4_amd64.deb`):
+- `ecodmsserver 26.01-4`, amd64 only, 814689322 bytes, SHA256 `cf629936cad0666b52efc2368b44157344b679615421a5a8dec446c570ce8020` (from the `Packages` index). `.deb` members: `control.tar.gz`, `data.tar.gz`. Installed size about 1.4 GB.
+- It is a native (Qt5, `DMSService`) server, not Java/Tomcat: install root `/opt/ecodms` (`ecodmsserver`, `log`, `contentstore`, `ocr`, `data`, `workdir/scaninput`, `workdir/lucene`, `dupai`, `ecotmp`), run as user `ecodms`.
+- `preinst` aborts unless the debconf question `ecodmsserver/license` (EULA, DE/EN variants `license_en`) and `ecodmsserver/upgrade` are answered `true`, so a build must preseed acceptance of the vendor EULA on behalf of users.
+- `postinst` is not container-safe: it needs a running local PostgreSQL (`su postgres -c "psql -f /opt/ecodms/create_db.sql"`, then `ecopostgrecheck localhost 5432 ecosims eco ecodms`), edits `/etc/samba/smb.conf`, creates a samba user `dmsscanner` with a fixed password `dmsscanner` and a world-writable (777) scaninput share, writes `/etc/sudoers.d/ecodms*`, registers `DMSService -i` and an init.d script `/etc/init.d/ecodms`, and deletes `create_db.sql`. Locale is set by sed on `/opt/ecodms/ecodmsserver/ecodms.properties`.
+- Hard dependencies: `postgresql`, `postgresql-16-pgvector` (so Ubuntu 24.04 `noble`, not 26.04), `postgresql-ecodms-vectorizeimage`, `samba`, `sudo`, `haveged`, Qt5 libs.
+
+Why still blocked: the DB creation and database credentials are set at package install time, so a first-start flow (init PostgreSQL in `/config`, create the DB, then run `DMSService`) would have to be reverse engineered from `/opt/ecodms/create_db.sql` and `/etc/init.d/ecodms`, which sit inside the 815 MB data archive. Ports, the exact process list, and whether `DMSService` runs unprivileged on a read-only rootfs are unverified. The base would have to be `ubuntu:24.04` (vendor repo has noble only; confirm that tag exists), and the image is amd64 only.
+
+Needed to continue: download the full `.deb`, read `/etc/init.d/ecodms`, `/opt/ecodms/create_db.sql` and `ecodms.properties`; a decision on the EULA/redistribution; then write a start.sh that runs PostgreSQL and `DMSService` as `apps` with data in `/config`.

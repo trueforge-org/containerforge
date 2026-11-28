@@ -231,3 +231,12 @@ docker rm -f iyuuplus-probe; docker volume rm iyuuplus-probe-config
 - CLA: a signed Contributor License Agreement is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it. The `license/cla` check shows status.
 - Say in the PR what was not tested: the pinned commit, the service start commands, the PHP 8.5 choice, the `--read-only` run, the arm64 build, and the HTTP probe.
 - `docker buildx bake --print` passes; bake `VERSION` equals the Dockerfile `ARG VERSION`; no assertion was weakened.
+
+## Fix attempt (2026-11-28)
+Resolved by reading the upstream repo at HEAD `6610e577604eecdd5d6bc15af6c5087045eb800c` (2026-11-16, `.version` 8.3.25):
+- Version: pinned to that commit SHA in `docker-bake.hcl` (git-refs renovate rule as in `apps/tvheadend`).
+- Scope: no nginx, s6 or bundled MariaDB. `config/server.php` makes webman listen on `0.0.0.0:${SERVER_LISTEN_PORT:-8787}` itself, so `start.sh` runs a single `php start.php start`. Database is the separate `mariadb` app (entered in the web installer or via `DB_*`; `config/database.php` reads `getenv('DB_*')`). The SQLite connection exists too but the installer is MySQL-based.
+- Port: 8787, not 8780. `config/plugin/webman/push/app.php` hardcodes `channel_hook` to `http://127.0.0.1:8787`, so the port is fixed. nginx (8780) only proxied to it.
+- `vendor/` is committed upstream (5298 files), so no Composer step.
+- The app writes into its own tree (`.env`, `runtime/`, `config/crontab.php`, `config/sites.php`, `plugin/admin/config/*.php`), so `start.sh` copies `/app/iyuuplus` to `/config/iyuu` on first start and overlays code on image upgrade while keeping those files.
+Still open: PHP 8.5 compatibility and the Ubuntu 26.04 package set (all `php8.5-*` names checked in the resolute archive; `php-event`/`opcache` packages do not exist there and were dropped); websocket push on 3131 is not proxied without nginx, so live notifications in the UI may not work; in-app git self-update does not work (no `.git`); nothing was built or run.

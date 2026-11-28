@@ -105,3 +105,9 @@ Not applicable until blockers 1 and 2 are resolved. When unblocked, follow `.git
 - `🤖 This PR is AI generated.` in the Notes section, and the PR template.
 - Tell the user about the CLA at https://cla-assistant.io/trueforge-org/containerforge; only the user can sign it.
 - State in the PR that the game was not run and that the keys were not tested.
+
+## Fix attempt (2026-11-28)
+
+- Blocker 1 resolved by evidence: upstream `ich777/docker-steamcmd-server` (branch `lastoasis`, `scripts/start-server.sh`) runs `Mist/Binaries/Linux/MistServer`, so a Linux depot exists even though the Steam store flag says Windows-only. Not checked with `app_info_print`.
+- Wrote Dockerfile (FROM `ghcr.io/trueforge-org/steamcmd:20180105.0.0@sha256:cc4726c1...`, digest fetched from GHCR), docker-bake.hcl, settings.yaml, container-test.yaml and start.sh. start.sh calls the base wrapper (copied to `/usr/local/bin/steamcmd-init`) for the install.
+- Still open: nothing was built or run; the Steam EULA licence string is a `LicenseRef`; the vendor keys appear in the process list (server takes them as CLI args); the container-test has no UDP probes since the game is only downloaded at start.

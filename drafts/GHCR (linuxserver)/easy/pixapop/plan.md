@@ -91,3 +91,14 @@ Not run. When unblocked:
 - Notes section: `🤖 This PR is AI generated.`
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Say what was not tested (no build was run, upstream runtime unverified).
+
+## Fix attempt (2026-11-28)
+
+No container files written: the application source cannot be fetched, and a Dockerfile would have had to invent the app layout.
+
+Tried:
+- `https://github.com/bierdok/pixapop` returns 404 (HTML), and so do `codeload.github.com/bierdok/pixapop/tar.gz/v1.2` and `.../refs/heads/master`. The repo has been removed or made private. The archive.org availability API lists a 2025-01-14 snapshot of the repo page only, not a source tarball.
+- Web search (kandi, aggregators) confirms what the app is: Symfony (PHP) backend with a VueJS front end, MIT licence, last release v1.2, 17 stars, 1 fork. No fork name or `composer.json` could be found, so no verifiable replacement source exists.
+- The linuxserver wrapper `linuxserver/docker-pixapop` is archived (2022-10-18) and deprecated, and its Dockerfile downloads the bierdok tarball at build time, so it cannot be rebuilt either. Its `root/` overlay holds only `defaults/` and `etc/cont-init.d/` (file contents not retrievable here), so the nginx/PHP config and the `APP_USERNAME`/`APP_PASSWORD` handling are unknown.
+
+What would be needed to proceed: a reachable copy of the v1.2 source (a fork or a pinned archive with a checksum), or `COPY --from=ghcr.io/linuxserver/pixapop:v1.2-ls61` of `/var/www/html` plus a decision on PHP 7 versus PHP 8 (the app was built with Composer 1.x on PHP 7), the linuxserver `root/` config files, and confirmation of what the app writes (thumbnail cache, `/config`). The image has not been updated since 2022-10-14 and is deprecated, so dropping this draft is the other option.

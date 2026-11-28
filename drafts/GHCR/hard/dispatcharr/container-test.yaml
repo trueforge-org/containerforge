@@ -1,13 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
 
-# UNVERIFIED: the HTTP path / may redirect to the setup page. The Dockerfile is not written yet (base image blocked).
+# The test runs without PostgreSQL or Redis. start.sh starts nginx first and then waits
+# for the database, so port 9191 is open but "/" would return 502; hence no http probe.
 timeoutSeconds: 180
 tcp:
 - port: '9191'
-http:
-- port: '9191'
-  path: /
 filePaths:
 - /app/manage.py
-- /app/docker/entrypoint.sh
+- /etc/dispatcharr/uwsgi.ini
+- /etc/dispatcharr/site.conf
 - /usr/share/licenses/dispatcharr/LICENSE

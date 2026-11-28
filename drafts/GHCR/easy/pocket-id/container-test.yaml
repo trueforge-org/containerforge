@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 120
+tcp:
+- port: '1411'
+http:
+- port: '1411'
+  path: /healthz
+filePaths:
+- /app/pocket-id
+- /usr/share/licenses/pocket-id/LICENSE

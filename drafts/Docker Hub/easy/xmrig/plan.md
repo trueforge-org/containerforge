@@ -165,3 +165,7 @@ Do not point the test at a real pool or wallet.
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Untested until implemented: apt package name and install path on 26.04 for both arches, idle-pool behaviour, HTTP API probe, donate-level default.
 - Do not tick "Built container locally" unless it was built.
+
+## Fix attempt (2026-11-28)
+
+Files written (Dockerfile, docker-bake.hcl, settings.yaml, container-test.yaml, start.sh) on the user's authorisation to skip the policy sign-off for drafts. Verified: Ubuntu resolute package ships `/usr/bin/xmrig` and `/usr/share/doc/xmrig/copyright` (packages.ubuntu.com filelist); source headers say GPLv3 "or any later version" so `GPL-3.0-or-later`; donate-level default is 1. Base image digest taken from the repo (`f01a4295...`) instead of the older digest in this plan. start.sh writes pool credentials to `/tmp/xmrig.json` (umask 077) so they stay out of `ps`. Still UNVERIFIED (needs a build): the `config.json` key names in start.sh against the upstream sample, idle behaviour against `127.0.0.1:1` keeping the API up on 8080, `+dfsg-1` still current, and the maintainer policy decision.

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/pkg/containers/test/container-test.schema.json
+
+timeoutSeconds: 60
+http:
+- port: '5000'
+  path: /
+tcp:
+- port: '5000'
+filePaths:
+- /app/app.py
+- /app/main.py
+- /app/pytubDef/__init__.py
+- /usr/share/licenses/auto-yt-dl/LICENSE

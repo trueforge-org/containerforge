@@ -10,7 +10,7 @@ variable "VERSION" {
 }
 
 variable "LICENSE" {
-  default = "AGPL-3.0"
+  default = "AGPL-3.0-only"
 }
 
 variable "SOURCE" {

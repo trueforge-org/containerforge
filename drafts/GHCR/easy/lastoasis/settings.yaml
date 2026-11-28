@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://store.steampowered.com/app/903950/Last_Oasis/"
+ports:
+  - port: 5555
+    protocol: udp
+    required: true
+  - port: 27015
+    protocol: udp
+    required: true
+env:
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+  - name: GAME_ID
+    default: "920720"
+    required: false
+  - name: IDENTIFIER
+    default: "dockeroasis_1"
+    required: false
+  - name: SLOTS
+    default: "20"
+    required: false
+  - name: BACKENDAPIURLOVERRIDE
+    default: "backend.last-oasis.com"
+    required: false
+  - name: CUSTOMER_KEY
+    default: ""
+    required: false
+  - name: PROVIDER_KEY
+    default: ""
+    required: false
+  - name: GAME_PARAMS
+    default: "-port=5555 -QueryPort=27015 -NoLiveServer -EnableCheats"
+    required: false
+  - name: VALIDATE
+    default: "false"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  []

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/trueforge-org/forgetool/refs/heads/main/schemas/container-settings.schema.json
+schema_version: 1
+upstream_env_url: "https://github.com/pocket-id/pocket-id"
+ports:
+  - port: 1411
+    protocol: tcp
+    required: true
+env:
+  - name: APP_URL
+    default: "http://localhost:1411"
+    required: true
+  - name: PORT
+    default: "1411"
+    required: false
+  - name: HOST
+    default: "0.0.0.0"
+    required: false
+  - name: TRUST_PROXY
+    default: "false"
+    required: false
+  - name: ANALYTICS_DISABLED
+    default: "true"
+    required: false
+  - name: ENCRYPTION_KEY
+    default: ""
+    required: false
+  - name: DB_CONNECTION_STRING
+    default: "file:data/pocket-id.db"
+    required: false
+  - name: TZ
+    default: "Etc/UTC"
+    required: false
+volumes:
+  - path: /config
+    required: true
+dependencies:
+  []

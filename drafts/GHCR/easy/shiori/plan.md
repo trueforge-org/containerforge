@@ -144,3 +144,8 @@ From `apps/shiori/`:
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign it).
 - Report what was not tested (arm64 build, default login, `SHIORI_HOSTNAME`).
 - Do not tick "Built container locally" unless the build and run above were done.
+
+## Fix attempt (2026-11-28)
+
+- Wrote the full file set. Verified again: v1.8.0 is still the latest release; both Linux tarball checksums match the lines in `checksums.txt`; the x86_64 tarball contains `LICENSE`, `README.md` and `shiori`, so the licence is installed from the tarball. Base digest corrected to `f01a4295...` (as in `apps/adguardhome-sync`).
+- Not verified: no build or run; `SHIORI_HOSTNAME` behaviour, default login, and whether `/` returns 200 for the http probe.

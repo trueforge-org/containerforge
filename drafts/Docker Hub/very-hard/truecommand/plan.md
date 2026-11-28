@@ -132,3 +132,11 @@ Readiness signal: UNVERIFIED (no startup log was fetched).
 - CLA notice: signed CLA is required (https://cla-assistant.io/trueforge-org/containerforge). Only the user can sign it; `license/cla` shows the status.
 - Untested to state honestly: everything, since no build was run and no startup was observed.
 - Check `docker buildx bake --print` passes and bake `VERSION` equals the Dockerfile `ARG VERSION` before any PR.
+
+## Fix attempt (2026-11-28)
+Nothing written; the folder stays a skipped draft. Tried and found:
+- `https://github.com/iXsystems/TrueCommand` (named in the image labels) is 404 (private) from the GitHub API, so no source and no licence file. Image label `org.opencontainers.image.licenses` is empty.
+- Image config of `ixsystems/truecommand:3.3.0` (linux/amd64, read with `crane config`/`crane export`, nothing run): `CMD ["/usr/bin/truecommand-mw"]`, no `ENTRYPOINT`, no `USER` (root), `EXPOSE 80 and 50135`, `VOLUME /data`, env `TC_CONFIG_FILE_PATH=/etc/middleware/config.yaml` and `GOTRACEBACK=crash`, labels `version=v3.3.0`, revision `4a7e47a9d10b31bed1affb6d894ce0bf35ab79d0`. Build history: ADD to `/bin`, COPY of the Angular UI to `/usr/www/truecommand`, COPY to `/etc/middleware/`, COPY of the binary.
+- `/usr/bin/truecommand-mw` is a 64 MB statically linked Go 1.26 binary (module `github.com/iXsystems/TrueCommand/middleware`). The image holds only `/etc/middleware/VERSION`; the `config.yaml` named by `TC_CONFIG_FILE_PATH` is not in the image, so the binary must create or default it. The UI ships `3rdpartylicenses.txt` (third-party only).
+- A `COPY --from=ixsystems/truecommand@sha256:35a6bb629397c70b4fa79426df5bdd548d5bc0c283bbf592e4394ba3b54c8761` of the binary and `/usr/www/truecommand` onto the ubuntu base looks feasible, but these cannot be settled without running it: how the binary picks its listen ports (80 cannot be bound by `apps` without a port override), where it writes besides `/data`, the config file format, and what 50135 is. Static strings showed no env var or flag names for them.
+Still needed: a run of the image (not allowed in this task) or vendor docs for the port and data-dir settings, and a licence statement permitting redistribution.

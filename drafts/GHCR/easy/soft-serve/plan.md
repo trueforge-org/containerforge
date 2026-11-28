@@ -191,3 +191,9 @@ forgetool containers test --image soft-serve:0.12.4 --config ./apps/soft-serve/c
 - Notes section includes `🤖 This PR is AI generated.`.
 - Tell the user the CLA is needed: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; the `license/cla` check shows status).
 - State what is untested: the arm64 build, SSH admin flow, and whether 9418 opens by default, unless verified.
+
+## Fix attempt (2026-11-28)
+
+- Wrote the full file set. Verified: v0.12.4 is still the latest release; both Linux checksums match `checksums.txt`; the tarball holds `soft-serve_0.12.4_Linux_x86_64/{soft,LICENSE,...}`, so the Dockerfile uses `--strip-components=1`; `SOFT_SERVE_{SSH,HTTP,GIT,STATS}_LISTEN_ADDR` names confirmed in `pkg/config/config.go`. Upstream defaults the stats listener to `localhost:23233`, so `start.sh` sets `:23233`.
+- Base digest corrected to `f01a4295...` (as in `apps/adguardhome-sync`).
+- Not verified: no build or run; apt packages are not version-pinned; `/` on 23232 returning 200; the README marks the project as sunset (no further security updates), which the PR should mention.

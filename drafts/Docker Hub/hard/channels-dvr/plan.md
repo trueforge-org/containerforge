@@ -84,3 +84,9 @@ Expected readiness: a log line showing the server listening on 8089 / web UI ava
 - Fill the PR template; Notes include `🤖 This PR is AI generated.`
 - Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign).
 - Untested: whole build, read-only operation, arm64, tve variant, licensing/redistribution question (ask maintainers first).
+
+## Fix attempt (2026-11-28)
+
+Done: verified `latest.txt` = 2026.10.24.0621 and that the per-version `linux-x86_64.sha256` / `linux-arm64.sha256` files exist on the CDN (format `<sha256>  <file>`); Dockerfile now verifies them with `sha256sum -c --ignore-missing` and no longer calls an unverified `--version` flag; the writable `data` dir that setup.sh creates next to the version directory is replaced by a symlink to `/config` so the image works with a read-only `/app`. Redistribution is a policy question and was accepted for this unreviewed draft.
+
+Still unverified (needs a real run): that the server really uses `channels-dvr/data` for state (no env or flag for it was found in the docs or community posts), self-update behaviour on a read-only dir, shared libs for `/dev/dri`, the `/` web path, `video`/`render` group mapping, and the Renovate datasource for the version.

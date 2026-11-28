@@ -64,3 +64,9 @@ Not applicable: do not build. If unblocked, follow the protocol for `apps/fabuli
 ## 12. PR checklist
 
 No PR should be opened. If it is ever unblocked: branch `feat/add-fabulinus`, commit and PR title `feat(fabulinus): add new container`, PR template filled in, Notes section containing `🤖 This PR is AI generated.`, and tell the user about the CLA (https://cla-assistant.io/trueforge-org/containerforge; only the user can sign it). Untested: everything (nothing was built or run).
+
+## Fix attempt (2026-11-28)
+
+Result: no container files written. Tried: re-read the plan and context, searched the web for a public source or redistributable artifact. Findings: the `titanml/takeoff-community` repo is archived and holds docs only; the server source is not public (public pieces are only Apache-2.0 integrations such as `takeoff-haystack` and `takeoff-dataiku`); an early announcement said the server is free for personal and academic use and commercial use needs contacting TitanML (restricted, not an OSS licence); the current product is `tytn/takeoff-pro`, which needs a licence key at first launch. The only runnable artifact is the closed `tytn/fabulinus` image (last push 2023-11-17, root, amd64 only), and without a licence grant a Dockerfile could only copy from it or invent a server, so any file would contain invented facts.
+
+Needed to continue: a written redistribution grant from TitanML, or a public source plus licence for the fabulinus server (then the plan above applies). Otherwise close as won't port, or replace the chart's image with a maintained inference server (for example vLLM or llama.cpp).

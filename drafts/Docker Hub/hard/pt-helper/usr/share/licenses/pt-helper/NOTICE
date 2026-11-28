@@ -1,0 +1,6 @@
+PT Helper (PT小助手) by crazyq
+
+The files in /app (pt_helper binary, template/, public/, config/, pt_helper.db) are
+taken unmodified from the Docker Hub image docker.io/crazyq/pt_helper (pinned by digest in
+the Dockerfile). The author published no source code and no license text. Redistribution
+terms are unknown. Contact: see https://hub.docker.com/r/crazyq/pt_helper
