@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=jlesage/docker-jdownloader-2 versioning=loose
-  default = "v26.09.1"
+  default = "v26.11.2"
 }
 
 variable "LICENSE" {
