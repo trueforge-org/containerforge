@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=spegel-org/spegel versioning=semver
-  default = "0.8.1"
+  default = "0.8.2"
 }
 
 variable "LICENSE" {
