@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=firefly-iii/firefly-iii versioning=semver
-  default = "6.7.12"
+  default = "6.7.14"
 }
 
 variable "LICENSE" {
