@@ -1,7 +1,7 @@
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb2ceefb7364eed299290b4f4270d50a2eaa9393b0002b267f5b4f13926454
 
 # renovate: datasource=github-tags depName=DIYgod/RSSHub versioning=loose
-ARG VERSION=v2026.11.28-8771.g6973206
+ARG VERSION=v2026.11.28-8772.gcbce479
 ARG TARGETARCH
 
 ENV \
