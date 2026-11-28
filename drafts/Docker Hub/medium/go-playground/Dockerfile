@@ -51,7 +51,7 @@ RUN \
   cp /tmp/go-playground/server /app/go-playground/server && \
   cp /tmp/go-playground/*.wasm /app/go-playground/public/wasm/ && \
   # UNVERIFIED: upstream also copies its *.js files (likely wasm_exec.js) into public/wasm; not reproduced yet
-  cp /tmp/go-playground/data/. /app/go-playground/public/data/ && \
+  cp -r /tmp/go-playground/data/. /app/go-playground/public/data/ && \
   chmod -R 755 /app/go-playground && \
   echo "**** cleanup ****" && \
   rm -rf \

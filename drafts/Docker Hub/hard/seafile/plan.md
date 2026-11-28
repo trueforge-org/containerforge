@@ -5,13 +5,13 @@
 
 | Item | Value |
 | --- | --- |
-| Version | 14.0.9 (git tag `v14.0.9-server`, 2026-09-22). Newer tags exist only on the 13.0 line (`v13.0.30-server`, 2026-11-20). |
-| Draft tag | `docker.io/seafileltd/seafile-mc:14.0.9` (same version). |
+| Version | 14.0.11 (git tag `v14.0.11-server`; matches the digest-pinned seafile-mc:14.0.11 image used by TrueCharts). Newer tags exist only on the 13.0 line (`v13.0.30-server`, 2026-11-20). |
+| Draft tag | `docker.io/seafileltd/seafile-mc:14.0.11` (same version). |
 | Renovate | `datasource=github-tags depName=haiwen/seafile-server versioning=loose extractVersion=^v(?<version>\d+\.\d+\.\d+)-server$`, and restrict to the 14.x line with a packageRule (`allowedVersions: "/^14\\./"`) so it does not jump to or from 13.x. UNVERIFIED: that this regex is accepted as written. |
 | License | AGPL-3.0 for the repository ("released under Affero GPLv3", with an OpenSSL linking exception; code under `python/` is Apache-2.0). SPDX `AGPL-3.0-only` (UNVERIFIED: `-only` or `-or-later`). |
 | Source | https://github.com/haiwen/seafile-server (manual https://manual.seafile.com/) |
 | Download URLs | None found. The latest GitHub release is `v7.1.1-server` from 2019 with no assets, and web search found no 14.0 tarball link. The official generic-Linux tarball (x86_64 only per the draft) lives on the Seafile download page. UNVERIFIED: the exact URL and any checksum. Fallback route: `COPY --from=docker.io/seafileltd/seafile-mc:14.0.9` (the draft lists it for both architectures). |
-| Checksum | UNVERIFIED. Pin the source image by digest (`docker buildx imagetools inspect seafileltd/seafile-mc:14.0.9`). |
+| Checksum | UNVERIFIED. Pin the source image by digest (`docker buildx imagetools inspect seafileltd/seafile-mc:14.0.11`). |
 | Upstream Dockerfile reviewed | https://github.com/haiwen/seafile-docker/blob/7880bf3/image/seafile_14.0/Dockerfile (summary): `ubuntu:24.04` with phusion baseimage `/sbin/my_init`; copies the local `seafile-server-${SEAFILE_VERSION}` into `/opt/seafile/` with chmod 777; installs nginx (nginx.org repo), fuse, poppler-utils, exiftool, libmysqlclient-dev, libmemcached, LDAP libs, python3 and a long pip list (click, termcolor, colorlog, pytz, sqlalchemy, pymysql, jinja2, django-pylibmc, pylibmc, psd-tools, lxml, django, cffi, future, mysqlclient, captcha, django_simple_captcha, pyjwt, djangosaml2, pysaml2, pycryptodome, python-ldap, pillow, pillow-heif, cairosvg, cryptography); `EXPOSE 80`; `CMD ["/sbin/my_init","--","/scripts/enterpoint.sh"]`. |
 | Ports | 80 (nginx in the upstream image), Seahub 8000 and fileserver 8082 (manual), draft adds 443 (inferred). |
 | Env vars (manual, Docker setup) | `SEAFILE_MYSQL_DB_HOST` (default `db`), `SEAFILE_MYSQL_DB_PORT` 3306, `SEAFILE_MYSQL_DB_USER` `seafile`, `SEAFILE_MYSQL_DB_PASSWORD` (required), `INIT_SEAFILE_MYSQL_ROOT_PASSWORD` (first deploy only), `SEAFILE_MYSQL_DB_CCNET_DB_NAME`, `SEAFILE_MYSQL_DB_SEAFILE_DB_NAME`, `SEAFILE_MYSQL_DB_SEAHUB_DB_NAME`, `INIT_SEAFILE_ADMIN_EMAIL` (`me@example.com`), `INIT_SEAFILE_ADMIN_PASSWORD` (`asecret`), `SEAFILE_SERVER_HOSTNAME` (required), `SEAFILE_SERVER_PROTOCOL` (`http`), `JWT_PRIVATE_KEY` (required, at least 32 characters), `CACHE_PROVIDER` (`redis` default, or `memcached`), `REDIS_HOST` (`redis`), `REDIS_PORT` 6379, `REDIS_PASSWORD`, `MEMCACHED_HOST`/`MEMCACHED_PORT` 11211, `TIME_ZONE` (`UTC`), `NON_ROOT` (default `false`). UNVERIFIED: default database names. |
@@ -37,11 +37,11 @@ Seahub is a Django app with a long pip list, so the ubuntu base with a venv in `
 
 ## 4. Dockerfile
 
-1. Source stage: `FROM docker.io/seafileltd/seafile-mc:14.0.9@sha256:<digest> AS source` with a `# renovate: datasource=docker depName=seafileltd/seafile-mc versioning=semver` comment above it (UNVERIFIED digest). Use the official tarball instead if its URL and a checksum are confirmed.
+1. Source stage: `FROM docker.io/seafileltd/seafile-mc:14.0.11@sha256:<digest> AS source` with a `# renovate: datasource=docker depName=seafileltd/seafile-mc versioning=semver` comment above it (UNVERIFIED digest). Use the official tarball instead if its URL and a checksum are confirmed.
 2. Final stage: `ARG VERSION`, `ARG TARGETARCH`, `USER root`.
 3. apt (not in the ubuntu base, UNVERIFIED which are already present): `nginx`, `python3`, `python3-venv`, `python3-dev`, `pkg-config`, `libmariadb-dev`, `libmemcached11t64`, `libldap2-dev`, `libsasl2-dev`, `poppler-utils`, `libimage-exiftool-perl`, `fuse3`, `libssl3t64`, `ca-certificates`, `curl`, `build-essential` (removed after the pip step; purge it in the same `RUN`). Pin `nginx` to a version that exists on resolute (UNVERIFIED) only if it ends up being the shipped product; it is not, so no pin.
 4. Venv: `python3 -m venv /app/venv`, then `pip install --no-cache-dir` the list from the upstream Dockerfile (section 1) with `PIP_CACHE_DIR=/tmp/pip`; pin versions as the upstream `requirements` files at tag `v14.0.9-server`/seahub (UNVERIFIED, read them before writing).
-5. `COPY --from=source /opt/seafile/seafile-server-14.0.9 /app/seafile-server`, then `chown -R apps:apps /app && chmod -R 755 /app`. Verify the binaries run on 26.04 glibc with `ldd` (UNVERIFIED).
+5. `COPY --from=source /opt/seafile/seafile-server-14.0.11 /app/seafile-server`, then `chown -R apps:apps /app && chmod -R 755 /app`. Verify the binaries run on 26.04 glibc with `ldd` (UNVERIFIED).
 6. Licenses: copy `/app/seafile-server/LICENSE*` to `/usr/share/licenses/seafile/` (paths UNVERIFIED).
 7. `ENV HOME=/config PYTHONPATH=... (from upstream setup scripts, UNVERIFIED) TIME_ZONE=UTC NON_ROOT=true`. UNVERIFIED: what `NON_ROOT` changes upstream; the name appears in the manual's env table and is the hook for rootless support.
 8. `USER apps`, then `COPY --chmod=0755 . /`.
@@ -53,7 +53,7 @@ Seahub is a Django app with a long pip list, so the ubuntu base with a venv in `
 variable "APP" { default = "seafile" }
 variable "VERSION" {
   // renovate: datasource=github-tags depName=haiwen/seafile-server versioning=loose extractVersion=^v(?<version>\d+\.\d+\.\d+)-server$
-  default = "14.0.9"
+  default = "14.0.11"
 }
 variable "LICENSE" { default = "AGPL-3.0-only" }
 variable "SOURCE" { default = "https://github.com/haiwen/seafile-server" }
@@ -120,9 +120,9 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create seafile-probe-config
 docker run --rm -d --name seafile-probe --read-only --tmpfs /tmp \
-  -v seafile-probe-config:/config seafile:14.0.9
+  -v seafile-probe-config:/config seafile:14.0.11
 docker logs -f seafile-probe
-forgetool containers test --image seafile:14.0.9 --config ./apps/seafile/container-test.yaml
+forgetool containers test --image seafile:14.0.11 --config ./apps/seafile/container-test.yaml
 docker rm -f seafile-probe; docker volume rm seafile-probe-config
 ```
 

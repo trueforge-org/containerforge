@@ -7,6 +7,7 @@ FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83
 
 ARG VERSION
 ARG TARGETARCH
+USER root
 ENV GOCACHE=/tmp/go-cache \
     GOPATH=/tmp/go \
     CGO_ENABLED=0

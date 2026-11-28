@@ -60,9 +60,8 @@ RUN apt-get update && \
 
 COPY --from=build /out /app
 
-RUN echo "*** Installing licenses ***" && \
-  install -d /usr/share/licenses/plausible && \
-  cp /src/LICENSE.md /usr/share/licenses/plausible/ && \
+COPY --from=build /src/LICENSE.md /usr/share/licenses/plausible/LICENSE.md
+RUN echo "*** Finalising ***" && \
   # UNVERIFIED: third-party notices shipped under /app/priv
   chown -R apps:apps /app && chmod -R 755 /app
 

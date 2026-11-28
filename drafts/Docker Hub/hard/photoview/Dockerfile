@@ -49,7 +49,7 @@ ENV \
   PHOTOVIEW_UI_PATH=/app/ui \
   PHOTOVIEW_API_ENDPOINT=/api \
   PHOTOVIEW_FACE_RECOGNITION_MODELS_PATH=/app/data/models \
-  PHOTOVIEW_MEDIA_CACHE=/cache \
+  PHOTOVIEW_MEDIA_CACHE=/config/cache \
   PHOTOVIEW_SQLITE_PATH=/config/photoview.db
 
 # UNVERIFIED: runtime libraries must match the libraries the api stage links against (see the

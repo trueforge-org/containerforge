@@ -34,4 +34,4 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - mariadb
+  - name: mariadb

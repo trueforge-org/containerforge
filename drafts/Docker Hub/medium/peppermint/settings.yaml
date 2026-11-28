@@ -16,4 +16,4 @@ env:
     required: false
 volumes: []
 dependencies:
-  - postgresql
+  - name: postgresql

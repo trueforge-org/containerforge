@@ -39,4 +39,4 @@ volumes:
     required: true
 # UNVERIFIED: MariaDB as a separate dependency is the recommended option, pending the decision in the plan
 dependencies:
-  - mariadb
+  - name: mariadb

@@ -38,5 +38,5 @@ volumes:
 # valkey is the Celery broker and is needed at runtime. postgresql is optional (SQLite is the default).
 # UNVERIFIED: whether settings support an optional-dependency field, so postgresql is listed as a dependency for now.
 dependencies:
-  - valkey
-  - postgresql
+  - name: valkey
+  - name: postgresql

@@ -20,7 +20,7 @@ env:
     default: "8080"
     required: false
   - name: PHOTOVIEW_MEDIA_CACHE
-    default: "/cache"
+    default: "/config/cache"
     required: false
   - name: MAPBOX_TOKEN
     default: ""
@@ -31,8 +31,6 @@ env:
 volumes:
   - path: /config
     required: true
-  - path: /cache
-    required: false
   - path: /photos
     required: false
 opt_dependencies:

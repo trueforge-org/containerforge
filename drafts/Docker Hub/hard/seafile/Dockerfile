@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 
 # Source stage: the upstream server tree from the official image, same version as VERSION.
-# UNVERIFIED: pin this stage by digest (docker buildx imagetools inspect seafileltd/seafile-mc:14.0.9).
+# UNVERIFIED: pin this stage by digest (docker buildx imagetools inspect seafileltd/seafile-mc:14.0.11).
 # renovate: datasource=docker depName=seafileltd/seafile-mc versioning=semver
 FROM docker.io/seafileltd/seafile-mc:14.0.11@sha256:7b809052450067bb5c508600409db261d3d498971b77c8ecd647ccaf079323f3 AS source
 
@@ -60,7 +60,7 @@ RUN echo "*** Installing system and Python build dependencies ***" && \
     gunicorn && \
   apt-get purge -y build-essential pkg-config python3-dev && \
   rm -rf /var/lib/apt/lists/*
-# UNVERIFIED: the pip list is taken from the upstream image. Pin versions to the v14.0.9-server requirements.
+# UNVERIFIED: the pip list is taken from the upstream image. Pin versions to the v14.0.11-server requirements.
 
 COPY --from=source /opt/seafile/seafile-server-${VERSION} /app/seafile-server
 

@@ -7,7 +7,7 @@ set -euo pipefail
 : "${PHOTOVIEW_POSTGRES_URL:=}"
 : "${PHOTOVIEW_LISTEN_IP:=0.0.0.0}"
 : "${PHOTOVIEW_LISTEN_PORT:=8080}"
-: "${PHOTOVIEW_MEDIA_CACHE:=/cache}"
+: "${PHOTOVIEW_MEDIA_CACHE:=/config/cache}"
 : "${PHOTOVIEW_SERVE_UI:=1}"
 : "${PHOTOVIEW_UI_PATH:=/app/ui}"
 : "${PHOTOVIEW_API_ENDPOINT:=/api}"
@@ -25,7 +25,7 @@ if [ "${PHOTOVIEW_DATABASE_DRIVER}" = "postgres" ] && [ -z "${PHOTOVIEW_POSTGRES
   exit 1
 fi
 
-# Only /config and /cache are writable. Scratch space goes to /tmp.
+# Only /config is writable. Scratch space goes to /tmp.
 mkdir -p /config "${PHOTOVIEW_MEDIA_CACHE}" /tmp/photoview
 
 cd /app

@@ -67,5 +67,5 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - mariadb
-  - valkey
+  - name: mariadb
+  - name: valkey

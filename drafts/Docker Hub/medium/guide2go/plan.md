@@ -40,7 +40,7 @@ apps/guide2go/
 
 ## 4. Dockerfile
 
-1. Build stage (`AS build`): `ARG VERSION`, `ARG TARGETARCH`, `ENV GOCACHE=/tmp/go-cache GOPATH=/tmp/go CGO_ENABLED=0`. Download the tarball with `curl -fsSL "https://github.com/mar-mei/guide2go/archive/refs/tags/${VERSION}.tar.gz" | tar xz --strip-components=1 -C /src`, then `cd /src && GOOS=linux GOARCH=${TARGETARCH} go build -trimpath -ldflags="-s -w" -o /out/guide2go .`. Copy `LICENSE` to `/out/LICENSE`. Do not edit `go.mod`/`go.sum`.
+1. Build stage (`AS build`): `ARG VERSION`, `ARG TARGETARCH`, `USER root`, `ENV GOCACHE=/tmp/go-cache GOPATH=/tmp/go CGO_ENABLED=0`. Download the tarball with `curl -fsSL "https://github.com/mar-mei/guide2go/archive/refs/tags/${VERSION}.tar.gz" | tar xz --strip-components=1 -C /src`, then `cd /src && GOOS=linux GOARCH=${TARGETARCH} go build -trimpath -ldflags="-s -w" -o /out/guide2go .`. Copy `LICENSE` to `/out/LICENSE`. Do not edit `go.mod`/`go.sum`.
 2. Final stage: `FROM` ubuntu line above, `ARG VERSION`, `USER root`.
 3. `COPY --from=build /out/guide2go /app/guide2go`, `COPY --from=build /out/LICENSE /usr/share/licenses/guide2go/LICENSE`, `ln -s /app/guide2go /usr/local/bin/guide2go` (so `docker exec -it <c> guide2go -configure /config/guide2go.yaml` works), `chown -R root:root /app && chmod -R 755 /app`. No apt packages (base already has `ca-certificates` and `curl`; no `tzdata` needed beyond the base).
 4. `ENV HOME=/config`. `TZ` is read from the environment by Go at runtime.

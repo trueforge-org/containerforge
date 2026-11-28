@@ -43,14 +43,11 @@ USER root
 
 RUN mkdir -p /app/outline /usr/share/licenses/outline
 
-COPY --from=builder --chown=568:568 \
-    /tmp/outline/build \
-    /tmp/outline/server \
-    /tmp/outline/public \
-    /tmp/outline/.sequelizerc \
-    /tmp/outline/node_modules \
-    /tmp/outline/package.json \
-    /app/outline/
+COPY --from=builder --chown=568:568 /tmp/outline/build /app/outline/build
+COPY --from=builder --chown=568:568 /tmp/outline/server /app/outline/server
+COPY --from=builder --chown=568:568 /tmp/outline/public /app/outline/public
+COPY --from=builder --chown=568:568 /tmp/outline/node_modules /app/outline/node_modules
+COPY --from=builder --chown=568:568 /tmp/outline/.sequelizerc /tmp/outline/package.json /app/outline/
 
 COPY --from=builder /tmp/outline/LICENSE /usr/share/licenses/outline/LICENSE
 

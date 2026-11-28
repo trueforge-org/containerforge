@@ -37,7 +37,7 @@ Final: `ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81
 4. `COPY --from=api /out/photoview /app/photoview`, `COPY --from=api /app/api/data /app/data`, `COPY --from=ui /app/ui/dist /app/ui` (UNVERIFIED path), `COPY --from=api` the self-built `/usr/local/lib/*.so*` then `ldconfig`.
 5. Licenses: copy `LICENSE.md` and the face-model / go-face third-party notices to `/usr/share/licenses/photoview/`.
 6. `chown -R apps:apps /app`, `chmod -R 755 /app`.
-7. ENV: `HOME=/config`, `PHOTOVIEW_LISTEN_IP=0.0.0.0`, `PHOTOVIEW_LISTEN_PORT=8080`, `PHOTOVIEW_SERVE_UI=1`, `PHOTOVIEW_UI_PATH=/app/ui`, `PHOTOVIEW_API_ENDPOINT=/api`, `PHOTOVIEW_FACE_RECOGNITION_MODELS_PATH=/app/data/models`, `PHOTOVIEW_MEDIA_CACHE=/cache`, `PHOTOVIEW_SQLITE_PATH=/config/photoview.db`.
+7. ENV: `HOME=/config`, `PHOTOVIEW_LISTEN_IP=0.0.0.0`, `PHOTOVIEW_LISTEN_PORT=8080`, `PHOTOVIEW_SERVE_UI=1`, `PHOTOVIEW_UI_PATH=/app/ui`, `PHOTOVIEW_API_ENDPOINT=/api`, `PHOTOVIEW_FACE_RECOGNITION_MODELS_PATH=/app/data/models`, `PHOTOVIEW_MEDIA_CACHE=/config/cache`, `PHOTOVIEW_SQLITE_PATH=/config/photoview.db`.
 8. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 8080`, `VOLUME /config`.
 
 ## 5. docker-bake.hcl
@@ -57,13 +57,13 @@ Plus the 4 standard targets (`docker-metadata-action`, `image` with args.VERSION
 
 Header + `schema_version: 1`, `upstream_env_url: "https://github.com/photoview/photoview/"`.
 - ports: `8080` tcp required false (draft says 80; non-root cannot bind 80 without sysctl, so 8080).
-- env (names confirmed from example.env/Dockerfile): `PHOTOVIEW_DATABASE_DRIVER` default `sqlite`; `PHOTOVIEW_SQLITE_PATH` default `/config/photoview.db`; `PHOTOVIEW_POSTGRES_URL` default "" (required false); `PHOTOVIEW_LISTEN_PORT` default `8080`; `PHOTOVIEW_MEDIA_CACHE` default `/cache`; `MAPBOX_TOKEN` default ""; `TZ` default `Etc/UTC`.
-- volumes: `/config` required true; `/cache` required false; `/photos` required false (media mount).
+- env (names confirmed from example.env/Dockerfile): `PHOTOVIEW_DATABASE_DRIVER` default `sqlite`; `PHOTOVIEW_SQLITE_PATH` default `/config/photoview.db`; `PHOTOVIEW_POSTGRES_URL` default "" (required false); `PHOTOVIEW_LISTEN_PORT` default `8080`; `PHOTOVIEW_MEDIA_CACHE` default `/config/cache`; `MAPBOX_TOKEN` default ""; `TZ` default `Etc/UTC`.
+- volumes: `/config` required true; `/photos` required false (media mount).
 - dependencies: `postgresql` ✅ (optional; SQLite works without it).
 
 ## 7. start.sh
 
-`mkdir -p /config /cache /tmp/photoview`; no seeding beyond dirs; if `PHOTOVIEW_DATABASE_DRIVER=postgres` and `PHOTOVIEW_POSTGRES_URL` empty, log a clear error and exit non-zero; export the defaults matching settings.yaml; `cd /app`; final `exec /app/photoview`. Binds 0.0.0.0 via `PHOTOVIEW_LISTEN_IP`. No writes to /app. `ldconfig` must not run at runtime (done at build).
+`mkdir -p /config /config/cache /tmp/photoview`; no seeding beyond dirs; if `PHOTOVIEW_DATABASE_DRIVER=postgres` and `PHOTOVIEW_POSTGRES_URL` empty, log a clear error and exit non-zero; export the defaults matching settings.yaml; `cd /app`; final `exec /app/photoview`. Binds 0.0.0.0 via `PHOTOVIEW_LISTEN_IP`. No writes to /app. `ldconfig` must not run at runtime (done at build).
 
 ## 8. container-test.yaml
 
@@ -71,7 +71,7 @@ Schema header; `timeoutSeconds: 120`; `tcp: - port: '8080'`; `http: - port: '808
 
 ## 9. Rootless and read-only-rootfs adaptations
 
-- Upstream writes: SQLite file (-> /config), media cache `/home/photoview/media-cache` (-> `/cache` volume, matches draft extra persistence), face models read from /app/data (read-only OK), tmp files (-> /tmp).
+- Upstream writes: SQLite file (-> /config), media cache `/home/photoview/media-cache` (-> `/config/cache`), face models read from /app/data (read-only OK), tmp files (-> /tmp).
 - Draft expectation: UID 568 default, readOnlyRootFilesystem true; consistent with `USER apps`. Photos mounted at /photos read-only, user needs read permission.
 - Upstream UID 999 user and `/home/photoview` are replaced by `apps` and `HOME=/config`.
 
@@ -92,7 +92,7 @@ cd apps/photoview
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name photoview-probe --read-only --tmpfs /tmp \
-  -v photoview-probe-config:/config -v photoview-probe-cache:/cache photoview:2.4.0
+  -v photoview-probe-config:/config photoview:2.4.0
 docker logs -f photoview-probe
 forgetool containers test --image photoview:2.4.0 --config ./apps/photoview/container-test.yaml
 docker rm -f photoview-probe; docker volume rm photoview-probe-config photoview-probe-cache

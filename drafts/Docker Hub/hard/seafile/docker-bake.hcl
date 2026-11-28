@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-tags depName=haiwen/seafile-server versioning=loose extractVersion=^v(?<version>\d+\.\d+\.\d+)-server$
-  default = "14.0.9"
+  default = "14.0.11"
 }
 
 // UNVERIFIED: AGPL-3.0-only vs AGPL-3.0-or-later; confirm against the repository license.

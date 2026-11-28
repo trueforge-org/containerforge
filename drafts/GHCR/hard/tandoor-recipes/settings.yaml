@@ -45,4 +45,4 @@ volumes:
   - path: /config
     required: true
 opt_dependencies:
-  - postgresql
+  - name: postgresql

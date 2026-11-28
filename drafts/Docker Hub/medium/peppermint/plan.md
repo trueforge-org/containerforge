@@ -107,7 +107,7 @@ env:
     required: false
 volumes: []
 dependencies:
-  - postgresql
+  - name: postgresql
 ```
 
 - Ports: 3000 and 5003 (upstream `EXPOSE`; probes are in section 8).

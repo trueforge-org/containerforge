@@ -49,5 +49,5 @@ volumes:
   - path: /config
     required: true
 dependencies:
-  - postgresql
-  - valkey
+  - name: postgresql
+  - name: valkey
