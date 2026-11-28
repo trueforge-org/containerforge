@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=ghostfolio/ghostfolio versioning=loose
-  default = "3.100.0"
+  default = "3.101.0"
 }
 
 variable "LICENSE" {
