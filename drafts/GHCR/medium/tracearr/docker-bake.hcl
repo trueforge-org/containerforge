@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=connorgallopo/Tracearr versioning=semver
-  default = "3.2.1"
+  default = "3.3.0"
 }
 
 variable "LICENSE" {
