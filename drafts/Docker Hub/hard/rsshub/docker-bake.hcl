@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=DIYgod/RSSHub versioning=loose
-  default = "v2026.11.27-8770.gea99cee"
+  default = "v2026.11.28-8771.g6973206"
 }
 
 // UNVERIFIED: AGPL-3.0 per the RSSHub repository, not re-checked for this tag.
