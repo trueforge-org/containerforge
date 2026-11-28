@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=npm depName=cloudcmd versioning=semver
-  default = "19.24.1"
+  default = "19.24.6"
 }
 
 variable "LICENSE" {
