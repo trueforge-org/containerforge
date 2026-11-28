@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=humhub/humhub versioning=semver
-  default = "1.19.4"
+  default = "1.19.5"
 }
 
 variable "LICENSE" {
