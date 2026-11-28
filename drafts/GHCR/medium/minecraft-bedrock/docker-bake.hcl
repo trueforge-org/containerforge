@@ -20,7 +20,7 @@ variable "SET_PROPERTY_SHA256" {
 
 variable "MC_SERVER_RUNNER_VERSION" {
   // renovate: datasource=github-releases depName=itzg/mc-server-runner versioning=loose
-  default = "1.17.0"
+  default = "1.18.0"
 }
 
 variable "MC_SERVER_RUNNER_SHA256" {
