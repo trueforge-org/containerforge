@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=docker depName=ronivay/xen-orchestra versioning=loose
-  default = "5.213.0"
+  default = "5.214.1"
 }
 
 // Commit of vatesfr/xen-orchestra that matches VERSION. UNVERIFIED: e9760747 is the master HEAD seen in the plan, which reports xo-server 5.214.0.
