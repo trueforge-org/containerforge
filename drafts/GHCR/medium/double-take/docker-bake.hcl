@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-tags depName=skrashevich/double-take versioning=loose
-  default = "1.13.11"
+  default = "1.13.12.0rc3"
 }
 
 variable "LICENSE" {
