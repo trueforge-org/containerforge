@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=fclairamb/solidping versioning=semver
-  default = "0.56.0"
+  default = "0.57.0"
 }
 
 variable "LICENSE" {
