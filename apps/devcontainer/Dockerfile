@@ -92,7 +92,7 @@ ENV k9sVersion=0.51.0
 # renovate: datasource=github-releases depName=starship/starship
 ENV starshipVersion=1.27.0
 # renovate: datasource=github-releases depName=trueforge-org/clustertool
-ENV clustertoolVersion=4.0.0
+ENV clustertoolVersion=5.0.0
 
 ### Cluster maintenance tools
 # renovate: datasource=github-releases depName=fluxcd/flux2
