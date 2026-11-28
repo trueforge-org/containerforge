@@ -1,5 +1,5 @@
 
-# UNVERIFIED: plan cites ubuntu digest 19cb2ceef...; 92 apps use f01a4295... (the digest used here).
+# UNVERIFIED: plan cites ubuntu digest f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a...; 92 apps use f01a4295... (the digest used here).
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS builder
 
 ARG VERSION

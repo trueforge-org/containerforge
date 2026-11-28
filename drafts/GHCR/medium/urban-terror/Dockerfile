@@ -1,5 +1,5 @@
 # hadolint ignore=DL3007
-# UNVERIFIED: the plan's digest (19cb2cee...) is not used elsewhere in the repo. This uses the digest the sibling apps pin.
+# UNVERIFIED: the plan's digest (f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a...) is not used elsewhere in the repo. This uses the digest the sibling apps pin.
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION

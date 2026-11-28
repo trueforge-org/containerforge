@@ -1,5 +1,5 @@
 # hadolint ignore=DL3007
-# UNVERIFIED: base digest. Plan says 19cb2ceef...; the digest used by every other app in apps/ is f01a4295f...
+# UNVERIFIED: base digest. Plan says f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a...; the digest used by every other app in apps/ is f01a4295f...
 # This draft uses the repo-wide digest. Confirm which one is the 26.04 image before merge.
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS source
 

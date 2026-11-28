@@ -1,5 +1,5 @@
 
-# UNVERIFIED: the plan cited ubuntu 26.04 digest 19cb2cee...; the repo apps use f01a4295... (used by 92 apps), so that digest is used here.
+# UNVERIFIED: the plan cited ubuntu 26.04 digest f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a...; the repo apps use f01a4295... (used by 92 apps), so that digest is used here.
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 # set version label

@@ -1,4 +1,4 @@
-# UNVERIFIED: base digest. The plan listed 19cb2cee...; the other 26.04 apps in apps/ use f01a4295.... Reconcile before merge.
+# UNVERIFIED: base digest. The plan listed f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a...; the other 26.04 apps in apps/ use f01a4295.... Reconcile before merge.
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION

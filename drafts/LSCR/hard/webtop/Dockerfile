@@ -1,4 +1,4 @@
-# UNVERIFIED: the plan cited ubuntu digest 19cb2cee...; the repo's ubuntu:26.04 siblings use f01a4295... (used here).
+# UNVERIFIED: the plan cited ubuntu digest f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a...; the repo's ubuntu:26.04 siblings use f01a4295... (used here).
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 
 ARG VERSION
