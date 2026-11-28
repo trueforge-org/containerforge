@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=homebridge/homebridge-apt-pkg versioning=semver
-  default = "v1.7.12"
+  default = "v1.7.17"
 }
 
 variable "LICENSE" {
