@@ -29,7 +29,7 @@ variable "MC_SERVER_RUNNER_SHA256" {
 
 variable "MC_MONITOR_VERSION" {
   // renovate: datasource=github-releases depName=itzg/mc-monitor versioning=loose
-  default = "1.21.0"
+  default = "1.21.1"
 }
 
 variable "MC_MONITOR_SHA256" {
