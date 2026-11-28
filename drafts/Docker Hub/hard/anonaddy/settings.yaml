@@ -56,3 +56,5 @@ volumes:
     required: true
 dependencies:
   - name: mariadb
+opt_dependencies:
+  - name: valkey

@@ -9,6 +9,8 @@ export HOST="${HOST:-0.0.0.0}"
 export PORT="${PORT:-3333}"
 export DATA_DIR="${DATA_DIR:-/config/data}"
 
+cd /app/ferdi-server
+
 mkdir -p "$DATA_DIR" /config/recipes
 
 # Seed the recipes only when the directory is empty, so custom recipes are kept.
@@ -42,8 +44,6 @@ if [[ "${JWT_USE_PEM:-}" == "true" ]]; then
   JWT_PRIVATE_KEY="$(cat "$priv")"
   export JWT_PUBLIC_KEY JWT_PRIVATE_KEY
 fi
-
-cd /app/ferdi-server
 
 # Migrations run on every start. Migrations that were already applied are skipped.
 # The v4 to v5 script in the upstream entrypoint is not ported, because this image is for fresh installs.

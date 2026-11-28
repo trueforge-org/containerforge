@@ -19,7 +19,7 @@
 | Config | Binary takes optional argv[1] config path, default `/etc/fileshelter.conf` (`src/fileshelter/main/main.cpp`). Sample at `conf/fileshelter.conf`, libconfig syntax |
 | Data | `working-dir` (config key, default `/var/fileshelter`, must be writable). Wt config `wt_config.xml` and `user_messages.xml` are generated inside it; shares and sqlite DB live there |
 | Env vars | The app reads none. All settings are config-file keys, so env vars in this image are an image-level feature that start.sh maps into the generated config (see section 7) |
-| Wt latest | 4.15.0 (2026-10-28). Upstream pins 4.12.3; keep 4.12.3 (UNVERIFIED that fileshelter 6.4.0 compiles against newer Wt) |
+| Wt latest | 4.15.0 (2026-10-28). Upstream pins 4.12.3; `docker-bake.hcl` now carries 4.15.0 (renovate bump, UNVERIFIED that fileshelter 6.4.0 compiles against it; fall back to 4.12.3 if the build fails) |
 
 ## 2. Target layout
 
@@ -65,7 +65,7 @@ variable "VERSION" {
 
 variable "WT_VERSION" {
   // renovate: datasource=github-releases depName=emweb/wt versioning=loose
-  default = "4.12.3"
+  default = "4.15.0"
 }
 
 variable "LICENSE" { default = "GPL-3.0-only" }

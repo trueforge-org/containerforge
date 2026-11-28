@@ -29,7 +29,7 @@ No `start.sh`, `defaults/` or `etc/`: the nginx base entrypoint seeds `/config/n
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`
+`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`
 
 It is a static bundle, so nothing else is needed. Closest sibling: `apps/theme-park`. The base has `curl`, `unzip` (installed in the ubuntu base) and `sha256sum` (coreutils).
 

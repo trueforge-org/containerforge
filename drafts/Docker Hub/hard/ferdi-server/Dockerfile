@@ -71,7 +71,8 @@ COPY --from=build /app/ferdi-server /app/ferdi-server
 COPY --from=build /app/recipes-seed /app/recipes-seed
 
 # The server reads ./recipes from its working directory. Point it at the persistent copy in /config.
-RUN ln -s /config/recipes /app/ferdi-server/recipes && \
+RUN rm -rf /app/ferdi-server/recipes && \
+    ln -s /config/recipes /app/ferdi-server/recipes && \
     mkdir -p /usr/share/licenses/ferdi-server && \
     cp /app/ferdi-server/LICENSE /usr/share/licenses/ferdi-server/LICENSE && \
     cp /app/recipes-seed/LICENSE.md /usr/share/licenses/ferdi-server/recipes-LICENSE.md

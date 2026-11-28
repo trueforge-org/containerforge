@@ -5,16 +5,16 @@
 
 | Item | Value |
 |---|---|
-| Version | `2.38.2` (tag `v2.38.2`, Latest, published 2026-11-24, security release). The draft tag `v2.38.1` is one release older. |
+| Version | `2.38.3` (tag `v2.38.3`, bumped by renovate; the plan was verified against `2.38.2`, published 2026-11-24, a security release). The draft tag `v2.38.1` is older. |
 | Renovate | `datasource=github-releases depName=binwiederhier/ntfy versioning=semver` |
 | License | Dual Apache-2.0 / GPLv2 (README; repo has `LICENSE` and `LICENSE.GPLv2`; upstream image label "Apache-2.0, GPL-2.0"). SPDX `Apache-2.0 OR GPL-2.0-only` (UNVERIFIED: `-only` versus `-or-later`). |
 | Source URL | https://github.com/binwiederhier/ntfy |
 | Docs | https://docs.ntfy.sh/ |
-| amd64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.2/ntfy_2.38.2_linux_amd64.tar.gz (the draft names the `.deb`; the tarball is also published, verified in the asset list) |
-| arm64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.2/ntfy_2.38.2_linux_arm64.tar.gz |
+| amd64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.3/ntfy_2.38.3_linux_amd64.tar.gz (the draft names the `.deb`; the tarball is also published, verified in the asset list) |
+| arm64 asset | https://github.com/binwiederhier/ntfy/releases/download/v2.38.3/ntfy_2.38.3_linux_arm64.tar.gz |
 | Checksum source | `checksums.txt` in the same release, `<sha256>  <file>` lines (verified; amd64 hash matched). |
 | Tarball layout | amd64 inspected: top folder `ntfy_<ver>_linux_amd64/` with `ntfy` (statically linked), `LICENSE` (no `LICENSE.GPLv2`), `README.md`, `server/`, `client/`. arm64 UNVERIFIED. |
-| Upstream Dockerfile reviewed | `v2.38.2/Dockerfile`: alpine, installs only tzdata, copies the prebuilt `ntfy` to `/usr/bin`, EXPOSE 80/tcp, `ENTRYPOINT ["ntfy"]`, no USER (root), no VOLUME. Command is `ntfy serve`. |
+| Upstream Dockerfile reviewed | `v2.38.3/Dockerfile`: alpine, installs only tzdata, copies the prebuilt `ntfy` to `/usr/bin`, EXPOSE 80/tcp, `ENTRYPOINT ["ntfy"]`, no USER (root), no VOLUME. Command is `ntfy serve`. |
 | Config | Default config file `/etc/ntfy/server.yml`; `--config`/`-c` overrides it. Env names verified in `cmd/serve.go`: `NTFY_BASE_URL`, `NTFY_LISTEN_HTTP`, `NTFY_CACHE_FILE`, `NTFY_AUTH_FILE`, `NTFY_AUTH_DEFAULT_ACCESS`, `NTFY_ATTACHMENT_CACHE_DIR`, `NTFY_BEHIND_PROXY`, `NTFY_UPSTREAM_BASE_URL`, `NTFY_CONFIG_FILE`. `attachment-cache-dir` requires `base-url` and may also be an `s3://` URL. |
 | Defaults (from server.yml) | `listen-http` `:80`; `cache-file` unset (in-memory, 12h); `auth-file` unset (auth off); `attachment-cache-dir` unset (attachments off; needs `base-url`); `behind-proxy` false; `web-root` `/`; `auth-default-access` `read-write`. |
 | Package paths | Debian/RPM suggest `/var/cache/ntfy/cache.db` and `/var/lib/ntfy/user.db` (we remap to `/config`). |
@@ -54,7 +54,7 @@ Why: single static-ish Go binary; ubuntu already has `curl`, `tar`, `tzdata`, `c
 
 ## 5. docker-bake.hcl
 
-`APP=ntfy`; `VERSION` with `// renovate: datasource=github-releases depName=binwiederhier/ntfy versioning=semver` default `"2.38.2"`; `LICENSE="Apache-2.0 OR GPL-2.0-only"`; `SOURCE="https://github.com/binwiederhier/ntfy"`. Standard four targets and `group "default"` copied from `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`.
+`APP=ntfy`; `VERSION` with `// renovate: datasource=github-releases depName=binwiederhier/ntfy versioning=semver` default `"2.38.3"`; `LICENSE="Apache-2.0 OR GPL-2.0-only"`; `SOURCE="https://github.com/binwiederhier/ntfy"`. Standard four targets and `group "default"` copied from `apps/adguardhome-sync/docker-bake.hcl`. Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -159,14 +159,14 @@ cd apps/ntfy
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name ntfy-probe --read-only --tmpfs /tmp \
-  -v ntfy-probe-config:/config ntfy:2.38.2
+  -v ntfy-probe-config:/config ntfy:2.38.3
 docker logs -f ntfy-probe
 # from outside: curl -fsS http://<container-ip>:8080/ ; publish test: curl -d hi http://<container-ip>:8080/test
-forgetool containers test --image ntfy:2.38.2 --config ./apps/ntfy/container-test.yaml
+forgetool containers test --image ntfy:2.38.3 --config ./apps/ntfy/container-test.yaml
 docker rm -f ntfy-probe; docker volume rm ntfy-probe-config
 ```
 
-Expected readiness signal: a log line like `Listening on :8080` (from `server/server.go`: `Listening on :8080[http], ntfy 2.38.2, log level is INFO`), process alive, no fatal errors. Restart on the same volume to confirm cache/auth DB reuse.
+Expected readiness signal: a log line like `Listening on :8080` (from `server/server.go`: `Listening on :8080[http], ntfy 2.38.3, log level is INFO`), process alive, no fatal errors. Restart on the same volume to confirm cache/auth DB reuse.
 
 ## 12. PR checklist
 

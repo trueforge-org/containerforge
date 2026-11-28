@@ -44,7 +44,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/brows
 
 1. `mkdir -p /config/downloads /config/metrics /tmp/chrome-data`.
 2. If `TOKEN` is empty, generate one with `openssl rand -hex 24`, persist to `/config/token`, export it, and log that a token was generated (not its value). This keeps the unauthenticated `/function` endpoint closed by default; document the deviation.
-3. `cd /app && exec dumb-init -- node build/index.js` (upstream `scripts/start.sh` runs `dumb-init -- node build/index.js` and starts Xvfb when `DISPLAY` is unset; see context/github-browserless-browserless.md). Chrome flags: run as UID 568 with `--no-sandbox` only if the userns sandbox is unavailable; decide per runtime test, and pass via Browserless launch args (UNVERIFIED config).
+3. `cd /app && exec node build/index.js` (the ubuntu base already runs tini as PID 1 and has no dumb-init; upstream `scripts/start.sh` runs `dumb-init -- node build/index.js` and starts Xvfb when `DISPLAY` is unset; see context/github-browserless-browserless.md). Chrome flags: run as UID 568 with `--no-sandbox` only if the userns sandbox is unavailable; decide per runtime test, and pass via Browserless launch args (UNVERIFIED config).
 
 ## 8. container-test.yaml
 

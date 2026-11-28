@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 export TRAGGO_DATABASE_CONNECTION="${TRAGGO_DATABASE_CONNECTION:-/config/traggo.db}"
 export TRAGGO_PORT="${TRAGGO_PORT:-3030}"

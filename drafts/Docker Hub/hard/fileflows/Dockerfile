@@ -32,6 +32,7 @@ RUN \
   echo "**** install licenses ****" && \
   mkdir -p /usr/share/licenses/fileflows && \
   cp /app/fileflows/Server/third-party.txt /usr/share/licenses/fileflows/ && \
+  chmod -R a+rX /app/fileflows && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

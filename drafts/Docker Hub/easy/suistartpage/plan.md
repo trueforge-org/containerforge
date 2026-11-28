@@ -30,7 +30,7 @@ No `start.sh`: the nginx base image has its own entrypoint and `CMD`, which also
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`
+`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`
 
 It is a static site, so no runtime beyond nginx is needed. Closest siblings: `apps/theme-park` (static files copied into `/usr/share/nginx/html`) and `apps/it-tools`. The base is already ubuntu based, so `curl`, `tar` and `ca-certificates` are present and no apt install is needed.
 

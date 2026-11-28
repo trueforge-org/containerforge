@@ -5,7 +5,7 @@
 
 | Item | Value |
 |---|---|
-| Version | 1.5.9 (tag, 2026-11-22). The draft says 1.5.8 (2026-11-19); use 1.5.9 |
+| Version | 1.5.10 (tag; renovate bumped from 1.5.9, which was verified on 2026-11-22). The draft says 1.5.8; bake and Dockerfile use 1.5.10 |
 | Renovate | `datasource=gitlab-tags depName=shibaobun/cannery versioning=semver` |
 | License | AGPLv3 per the GitLab project page. SPDX: `AGPL-3.0-or-later` (README says "AGPLv3 or later"; LICENSE.md is the AGPL v3 text) |
 | Source URL | https://gitlab.com/shibaobun/cannery |
@@ -35,7 +35,7 @@ Build stage: an Elixir toolchain image or ubuntu plus apt `erlang`/`elixir`; req
 
 ## 5. docker-bake.hcl
 
-APP `cannery`; VERSION `1.5.9` with `// renovate: datasource=gitlab-tags depName=shibaobun/cannery versioning=semver`; LICENSE `AGPL-3.0-or-later`; SOURCE `https://gitlab.com/shibaobun/cannery`. Four standard targets, default group `image-local`. `docker buildx bake --print` must pass.
+APP `cannery`; VERSION `1.5.10` with `// renovate: datasource=gitlab-tags depName=shibaobun/cannery versioning=semver`; LICENSE `AGPL-3.0-or-later`; SOURCE `https://gitlab.com/shibaobun/cannery`. Four standard targets, default group `image-local`. `docker buildx bake --print` must pass.
 
 ## 6. settings.yaml
 
@@ -78,9 +78,9 @@ cd apps/cannery
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create cannery-probe-config
-docker run --rm -d --name cannery-probe --read-only --tmpfs /tmp -v cannery-probe-config:/config cannery:1.5.9
+docker run --rm -d --name cannery-probe --read-only --tmpfs /tmp -v cannery-probe-config:/config cannery:1.5.10
 docker logs -f cannery-probe
-forgetool containers test --image cannery:1.5.9 --config ./apps/cannery/container-test.yaml
+forgetool containers test --image cannery:1.5.10 --config ./apps/cannery/container-test.yaml
 docker rm -f cannery-probe; docker volume rm cannery-probe-config
 ```
 Step 3 uses a throwaway `postgresql` container on a shared network and `DATABASE_URL` pointing to it. Expected: migrations complete, then the Phoenix/Cowboy line `Running CanneryWeb.Endpoint with ... at 0.0.0.0:4000 (http)` (wording UNVERIFIED); port 4000 open. Without the DB the container may log connection retries; that only counts if the process stays alive.

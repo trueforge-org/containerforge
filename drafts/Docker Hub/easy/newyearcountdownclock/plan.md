@@ -32,7 +32,7 @@ No `start.sh`: the nginx base runs `nginx -c /config/nginx.conf` through the ubu
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`
+`FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`
 
 Why: static site, exactly what `apps/it-tools` and `apps/theme-park` do. `curl` and `tar` come from the ubuntu layer, so no apt step. The nginx base already provides `/config/nginx.conf` seeding (`docker-entrypoint.d/03-copyconfig.sh`: `cp -n /defaults/nginx.conf` and `/defaults/default.conf`) and includes `/config/sites/*.conf`. Closest sibling: `apps/it-tools`.
 

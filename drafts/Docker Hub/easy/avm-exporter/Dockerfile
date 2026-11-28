@@ -4,7 +4,7 @@ FROM ghcr.io/trueforge-org/python:3.15.2@sha256:064e0c7d1d04ba647bfd1f91e2bee22b
 ARG VERSION=4.0.3
 
 ENV FRITZ_LISTEN_ADDRESS=0.0.0.0 \
-    HOME=/tmp
+    HOME=/config
 
 USER root
 

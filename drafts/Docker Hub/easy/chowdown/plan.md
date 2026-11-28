@@ -37,7 +37,7 @@ apps/chowdown/
 Runtime stage (exact line from `apps/theme-park/Dockerfile`):
 
 ```
-FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f
+FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
 ```
 
 Builder stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS builder` (the draft's "alternative runtime image: ubuntu" is only needed for the build). Jekyll is Ruby, so the python base is not useful.
@@ -46,7 +46,7 @@ Builder stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14
 
 1. Builder:
    ```dockerfile
-   FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:19cb... AS builder
+   FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS builder
    ARG VERSION
    USER root
    WORKDIR /tmp/src
@@ -60,7 +60,7 @@ Builder stage: `FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14
    - Fail the build if the output is empty: `test -f /tmp/site/index.html`.
 2. Final stage:
    ```dockerfile
-   FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f...
+   FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
    USER root
    COPY --from=builder --chown=568:568 /tmp/site/ /usr/share/nginx/html/
    COPY --from=builder --chown=568:568 /tmp/src/LICENSE /usr/share/licenses/chowdown/LICENSE

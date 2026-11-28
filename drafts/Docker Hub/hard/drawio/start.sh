@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # CATALINA_HOME (/app/tomcat) is read-only, so Tomcat's conf and webapp are copied into CATALINA_BASE (/tmp/tomcat) on every start.
 # NOT PORTED: the upstream docker-entrypoint.sh writes PreConfig.js, PostConfig.js, server.xml and a keystore from DRAWIO_* variables.

@@ -6,11 +6,11 @@
 | Item | Value |
 |---|---|
 | Which project | The draft names `lnxd/github-backup` (Alpine 3.9, Unraid-oriented, repo archived 2022-09-06, MIT) but the binary field says `pip:github-backup`. The PyPI package `github-backup` is a different, maintained project: `josegonzalez/python-github-backup`. This plan ports the PyPI one and defines a thin wrapper `start.sh`. Confirm with maintainers (section 10). |
-| Version | `0.68.0` (PyPI, released 2026-11-09). Requires Python >= 3.11 (classifiers 3.11-3.14; 3.15 not listed). |
+| Version | `0.69.1` (bake VERSION, bumped by renovate; verified as `0.68.0` released 2026-11-09 on 2026-11-23). Requires Python >= 3.11 (classifiers 3.11-3.14; 3.15 not listed). |
 | Renovate | `datasource=pypi depName=github-backup` (for example `apps/esphome` uses `datasource=pypi`). |
 | License | `MIT` (PyPI classifier and README). `LICENSE.txt` exists on the repo (starts "The MIT License (MIT) Copyright (c) 2013 Jose Diaz-Gonzalez"). |
 | Source URL | https://github.com/josegonzalez/python-github-backup |
-| Download | `pip install github-backup==0.68.0` from PyPI, same for both arches (pure Python, no declared dependencies). Needs `git` >= 1.9 at runtime (present in the ubuntu base). |
+| Download | `pip install github-backup==0.69.1` from PyPI, same for both arches (pure Python, no declared dependencies). Needs `git` >= 1.9 at runtime (present in the ubuntu base). |
 | Checksum source | None for pip. Optionally `pip install --require-hashes` with a hash file; not available from upstream. |
 | CLI | `github-backup [options] USER`; `-t/--token` (classic) and `-f/--token-fine` (fine-grained `github_pat_...`) both accept a `file://` path; `-o/--output-directory`; `--all` (excludes `--attachments`, `-P/--private`, `-F/--fork`, `--all-starred`, `--pull-details`, `--lfs`, `--gists`, `--starred-gists`); `--organization`; `--token-from-gh`; GitHub App flags. No token environment variable is read by the tool itself. |
 | Ports / listeners | None. It is a one-shot CLI. |
@@ -67,7 +67,7 @@ VOLUME /config
 Notes:
 - Uses `/app/venv/bin/pip` directly (python base layout, same as `apps/changedetection`); `/app/venv` stays read-only at runtime. Verify `/app/venv/bin/github-backup` exists after build.
 - `apt-get` not needed: `git` is already in the ubuntu base. Optionally `openssl` is only needed for GitHub App tokens (not in scope).
-- The upstream tag is `0.68.0` (no `v` prefix) and `LICENSE.txt` exists at that tag (checked 2026-11-25), so the licence fetch must fail the build if it breaks.
+- The upstream tag is `0.69.1` (no `v` prefix) and `LICENSE.txt` exists at that tag (checked 2026-11-25), so the licence fetch must fail the build if it breaks.
 - No `EXPOSE`: no ports.
 - Final `USER apps`; `COPY --chmod=0755 . /` kept.
 
@@ -82,7 +82,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=pypi depName=github-backup
-  default = "0.68.0"
+  default = "0.69.1"
 }
 
 variable "LICENSE" {
@@ -241,13 +241,13 @@ docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker volume create github-backup-probe-config
 docker run --rm -d --name github-backup-probe --read-only --tmpfs /tmp \
-  -v github-backup-probe-config:/config github-backup:0.68.0
+  -v github-backup-probe-config:/config github-backup:0.69.1
 docker logs github-backup-probe   # expect the "not set ... Idling" line, container still running
 docker rm -f github-backup-probe; docker volume rm github-backup-probe-config
 # manual functional run with a read-only token against a tiny public account:
 docker run --rm --read-only --tmpfs /tmp -v github-backup-probe-config:/config \
-  -e GITHUB_USER=<small-account> -e GITHUB_TOKEN=<token> -e SCHEDULE=0 github-backup:0.68.0
-forgetool containers test --image github-backup:0.68.0 --config ./apps/github-backup/container-test.yaml
+  -e GITHUB_USER=<small-account> -e GITHUB_TOKEN=<token> -e SCHEDULE=0 github-backup:0.69.1
+forgetool containers test --image github-backup:0.69.1 --config ./apps/github-backup/container-test.yaml
 ```
 Expected readiness signal for the unconfigured run: the idle log line plus a running container. For the manual run: clones appear under `/config/backups` and a second run updates them. Max 10 rounds.
 
@@ -257,5 +257,5 @@ Expected readiness signal for the unconfigured run: the idle log line plus a run
 - [ ] PR template filled; only applicable boxes ticked.
 - [ ] Notes: `🤖 This PR is AI generated.` plus the lnxd versus PyPI project note.
 - [ ] Tell the user about the CLA: https://cla-assistant.io/trueforge-org/containerforge (only the user can sign; `license/cla` shows status).
-- [ ] `docker buildx bake --print` passed; `ARG VERSION` equals bake `VERSION` (`0.68.0`).
+- [ ] `docker buildx bake --print` passed; `ARG VERSION` equals bake `VERSION` (`0.69.1`).
 - [ ] Untested until run: build, python 3.15 compatibility, token/loop path with a real token, read-only start, arm64, forgetool. Do not tick "Built container locally" unless done.

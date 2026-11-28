@@ -3,6 +3,7 @@
 FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5 AS build
 
 ARG VERSION
+USER root
 ENV \
   UV_CACHE_DIR=/tmp/baserow_uv_cache \
   YARN_CACHE_FOLDER=/tmp/yarn \
@@ -43,6 +44,7 @@ ENV \
   DJANGO_SETTINGS_MODULE=baserow.config.settings.base \
   XDG_DATA_HOME=/config/caddy \
   XDG_CONFIG_HOME=/tmp \
+  PYTHONPATH=/app/baserow/backend/src \
   PATH=/app/baserow/venv/bin:${PATH}
 
 # UNVERIFIED: the apt package set is inferred from the upstream all-in-one image. Confirm the postgresql-client version matches the server.

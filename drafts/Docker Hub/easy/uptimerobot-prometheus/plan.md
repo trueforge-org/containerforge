@@ -57,6 +57,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/lekpa
 ## 7. start.sh
 ```bash
 #!/usr/bin/env bash
+set -euo pipefail
 export UPTIMEROBOT_SERVER_NAME="${UPTIMEROBOT_SERVER_NAME:-0.0.0.0}"
 export UPTIMEROBOT_SERVER_PORT="${UPTIMEROBOT_SERVER_PORT:-9705}"
 if [[ -z "${UPTIMEROBOT_API_KEY:-}" ]]; then

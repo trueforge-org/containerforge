@@ -8,12 +8,6 @@ ENV \
   HOME=/config \
   GODEBUG=multipathtcp=0
 
-RUN echo "*** Installing unzip ***" && \
-  apt-get update && \
-  apt-get install -y --no-install-recommends \
-    unzip && \
-  rm -rf /var/lib/apt/lists/*
-
 # The release zip ships the prebuilt binary. It is verified with the .sha256 inside the zip,
 # which only proves the zip is intact. Authenticity (GPG .sig) is not checked yet.
 RUN echo "*** Installing Vikunja ***" && \

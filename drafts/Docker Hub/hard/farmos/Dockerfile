@@ -8,7 +8,8 @@ USER root
 ENV \
   HOME=/config \
   COMPOSER_HOME=/tmp/composer \
-  COMPOSER_MEMORY_LIMIT=-1
+  COMPOSER_MEMORY_LIMIT=-1 \
+  COMPOSER_ALLOW_SUPERUSER=1
 
 # UNVERIFIED on 26.04: php-geos must provide the geos extension for PHP 8.5, and the PHP 8.5 build
 # must satisfy Drupal 10.6 (see plan section 10). Check with `php -m` in the build.

@@ -25,5 +25,5 @@ fi
 # Browserless launch options, and check the env name for the downloads directory before pointing it at /config/downloads.
 
 cd /app || exit 1
-# UNVERIFIED: dumb-init is used by upstream scripts/start.sh; confirm it is in the base image.
-exec dumb-init -- node build/index.js
+# The ubuntu base already runs tini as PID 1 and does not ship dumb-init, so node is exec'd directly.
+exec node build/index.js

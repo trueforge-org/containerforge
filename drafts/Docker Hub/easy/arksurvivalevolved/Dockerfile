@@ -22,13 +22,13 @@ RUN echo "*** Installing arkmanager runtime deps ***" && \
   rm -rf /var/lib/apt/lists/*
 
 # Clone the release tag (no checksum is published for the tag tarball).
-# UNVERIFIED: the install.sh option set. Upstream v1.6.69 takes <user> or --me and installs to
-# /usr/local/bin and /etc/arkmanager. Confirm it creates no sudoers, cron or service files.
+# install.sh takes <user> or --me, and refuses --me as root, so pass the runtime user. Upstream v1.6.69
+# installs to /usr/local/bin and /etc/arkmanager and installs no sudoers, cron or service files by default.
 RUN echo "*** Installing arkmanager ${VERSION} ***" && \
   cd /tmp && \
   git clone --depth 1 --branch "v${VERSION}" https://github.com/arkmanager/ark-server-tools.git ast && \
   cd ast/tools && \
-  ./install.sh --me && \
+  ./install.sh apps && \
   mkdir -p /usr/share/licenses/arksurvivalevolved && \
   cp /tmp/ast/LICENSE /usr/share/licenses/arksurvivalevolved/LICENSE && \
   echo "*** Cleaning Up ***" && \

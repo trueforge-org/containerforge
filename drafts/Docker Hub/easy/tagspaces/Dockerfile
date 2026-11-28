@@ -1,4 +1,3 @@
-# UNVERIFIED: sibling apps (theme-park, it-tools) pin nginx 1.28.3 at digest 3a862278...; this plan uses 1e4f20bf.... Confirm the digest at build time.
 FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
 
 ARG VERSION

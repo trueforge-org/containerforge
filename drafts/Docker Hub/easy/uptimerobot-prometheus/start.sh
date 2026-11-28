@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 export UPTIMEROBOT_SERVER_NAME="${UPTIMEROBOT_SERVER_NAME:-0.0.0.0}"
 export UPTIMEROBOT_SERVER_PORT="${UPTIMEROBOT_SERVER_PORT:-9705}"

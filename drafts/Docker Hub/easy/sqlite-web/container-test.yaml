@@ -4,6 +4,8 @@
 http:
 - port: '8080'
   path: /
+tcp:
+- port: '8080'
 filePaths:
 - /usr/local/bin/sqlite_wsgi
 - /usr/share/licenses/sqlite-web/LICENSE

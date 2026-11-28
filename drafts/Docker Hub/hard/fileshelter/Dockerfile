@@ -27,7 +27,7 @@ RUN echo "*** Installing build dependencies ***" && \
     libsqlite3-dev && \
   rm -rf /var/lib/apt/lists/*
 
-# Wt 4.12.3 is pinned as upstream does; HTTP connector and the sqlite3 Dbo backend must stay enabled.
+# Wt is pinned by WT_VERSION (upstream pins 4.12.3); HTTP connector and the sqlite3 Dbo backend must stay enabled.
 # UNVERIFIED: the license file name inside the Wt tarball (LICENSE* glob assumed).
 RUN echo "*** Building Wt ${WT_VERSION} ***" && \
   curl -fsSL -o /tmp/wt.tar.gz \

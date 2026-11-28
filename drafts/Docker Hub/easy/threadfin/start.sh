@@ -8,7 +8,7 @@ export THREADFIN_DEBUG="${THREADFIN_DEBUG:-0}"
 # Scratch space goes to /tmp, not /config.
 export TMPDIR=/tmp
 
-mkdir -p /config
+mkdir -p /config /tmp/threadfin
 
 exec /app/threadfin \
   -port="${THREADFIN_PORT}" \

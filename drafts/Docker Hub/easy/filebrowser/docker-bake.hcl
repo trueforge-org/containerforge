@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=github-releases depName=filebrowser/filebrowser extractVersion=^v(?<version>.+)$ versioning=semver
   // Upstream is archived (2026-09-01) and gets no further releases; Renovate will not find updates.
+  // renovate: datasource=github-releases depName=filebrowser/filebrowser extractVersion=^v(?<version>.+)$ versioning=semver
   default = "2.63.23"
 }
 

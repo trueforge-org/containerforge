@@ -5,7 +5,7 @@ set -euo pipefail
 mkdir -p /config/sites /config/private /tmp/php/sessions /tmp/php/ini /tmp/nginx
 
 # Seed Drupal's default sites directory without overwriting anything that already exists
-cp -rn /app/farmos-sites-default/. /config/sites/
+cp -rn /app/farmos-sites-default/. /config/sites/ || true
 
 # Drupal's installer must write settings.php and files/ on first run
 chmod u+w /config/sites /config/sites/default 2>/dev/null || true

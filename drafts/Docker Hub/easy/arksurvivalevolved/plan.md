@@ -49,11 +49,11 @@ FROM ghcr.io/trueforge-org/steamcmd:<tag>@sha256:<digest>
    ```dockerfile
    RUN set -eux; cd /tmp; \
        git clone --depth 1 --branch "v${VERSION}" https://github.com/arkmanager/ark-server-tools.git ast; \
-       cd ast/tools && ./install.sh <apps-user> --prefix=... ; \
+       cd ast/tools && ./install.sh apps ; \
        mkdir -p /usr/share/licenses/arksurvivalevolved && cp /tmp/ast/LICENSE /usr/share/licenses/arksurvivalevolved/LICENSE; \
        rm -rf /tmp/*
    ```
-   The `install.sh` arguments are UNVERIFIED (not fetched). Read `tools/install.sh` of tag v1.6.69 first and choose options so that: binaries land in `/usr/local/bin` (`arkmanager`), libexec/data under `/usr/local`, the default config goes to `/etc/arkmanager/arkmanager.cfg` and **no** sudoers/cron/systemd service is installed (upstream `install.sh` normally requires a target user and may write to `/etc/sudoers.d` or init scripts; skip or delete those). If `install.sh` cannot be driven non-interactively, copy the files by hand following its `install` commands.
+   `install.sh` takes `{<user>|--me}` and refuses `--me` as root (context: github-arkmanager-ark-server-tools.md), so the Dockerfile runs `./install.sh apps` (the `apps` user exists in the base); defaults install to `/usr/local/bin` and `/etc/arkmanager`, no sudoers or cron. Read `tools/install.sh` of tag v1.6.69 first and choose options so that: binaries land in `/usr/local/bin` (`arkmanager`), libexec/data under `/usr/local`, the default config goes to `/etc/arkmanager/arkmanager.cfg` and **no** sudoers/cron/systemd service is installed (upstream `install.sh` normally requires a target user and may write to `/etc/sudoers.d` or init scripts; skip or delete those). If `install.sh` cannot be driven non-interactively, copy the files by hand following its `install` commands.
 4. `chown -R apps:apps /config`, `ENV HOME=/config`, `ENV XDG_DATA_HOME=/config` (same as `apps/steamcmd/start.sh`).
 5. `USER apps`, `COPY --chmod=0755 . /`, `EXPOSE 7777/udp 7778/udp 27015/udp 27020/tcp`, `VOLUME /config`, `WORKDIR /config`. No ENTRYPOINT override.
 

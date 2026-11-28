@@ -10,7 +10,7 @@ export HOST
 
 UPLOADS_PATH="${UPLOADS_PATH:-/config/uploads}"
 export UPLOADS_PATH
-mkdir -p "${UPLOADS_PATH}"
+mkdir -p "${UPLOADS_PATH}" "${UPLOADS_PATH}/tmp"
 
 # Generate a secret once and keep it in /config. A value set in the environment always wins.
 # The value is never printed.

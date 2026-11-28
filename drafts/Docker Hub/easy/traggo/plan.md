@@ -79,6 +79,7 @@ Write the entries in the multi-line style of the siblings. `TRAGGO_DATABASE_DIAL
 ## 7. start.sh
 ```bash
 #!/usr/bin/env bash
+set -euo pipefail
 export TRAGGO_DATABASE_CONNECTION="${TRAGGO_DATABASE_CONNECTION:-/config/traggo.db}"
 export TRAGGO_PORT="${TRAGGO_PORT:-3030}"
 mkdir -p "$(dirname "${TRAGGO_DATABASE_CONNECTION}")"

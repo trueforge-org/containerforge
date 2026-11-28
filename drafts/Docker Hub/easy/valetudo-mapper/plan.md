@@ -57,6 +57,7 @@ Schema header, `schema_version: 1`, `upstream_env_url: "https://github.com/rand2
 ## 7. start.sh
 ```bash
 #!/usr/bin/env bash
+set -euo pipefail
 if [[ ! -f /config/config.json ]]; then
   cp /defaults/config.json /config/config.json
 fi
