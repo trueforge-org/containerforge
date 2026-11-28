@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=OrcaSlicer/OrcaSlicer versioning=semver
-  default = "2.5.2"
+  default = "2.5.3"
 }
 
 variable "LICENSE" {
