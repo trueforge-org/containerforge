@@ -6,7 +6,7 @@ ARG TARGETARCH
 USER root
 
 # renovate: datasource=github-releases depName=itzg/mc-monitor
-ARG MC_MONITOR_VERSION=1.18.3
+ARG MC_MONITOR_VERSION=1.21.1
 # renovate: datasource=github-releases depName=itzg/rcon-cli
 ARG RCON_CLI_VERSION=1.7.9
 # renovate: datasource=github-releases depName=itzg/mc-image-helper
