@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=kmahyyg/ztncui-aio versioning=loose
-  default = "2024.1.28-r1"
+  default = "2024.5.3-rc1"
 }
 
 variable "LICENSE" {
