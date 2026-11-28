@@ -59,7 +59,7 @@ RUN apt-get update && \
 
 # Pinned by digest, as upstream v3.1.0 does.
 COPY --from=mwader/static-ffmpeg:9.0.2-1@sha256:f5d100184884eb3e82b0eb14bb5ebf98da99826ac824989720297fb9ef21c822 /ffmpeg /ffprobe /usr/local/bin/
-COPY --from=cloudflare/cloudflared:2026.11.1@sha256:e613aadbc2d9511785d2e67a86b0c8ac18dd63a3f9af0d06faf04cbfdcb35f2d /usr/local/bin/cloudflared /usr/local/bin/cloudflared
+COPY --from=cloudflare/cloudflared:2026.11.2@sha256:55c7e3e8d89d5e8d20b75a82f3602cbf98e06db406e73e282073cfdc5a9a3af6 /usr/local/bin/cloudflared /usr/local/bin/cloudflared
 ADD --chmod=755 --checksum=sha256:e51e69e89489f199530f13d32a4342da3ddb2cf34842f364603a066db05afbf3 https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp /usr/local/bin/yt-dlp
 
 RUN ffmpeg -version && ffprobe -version && cloudflared --version && yt-dlp --version
