@@ -17,7 +17,7 @@ RUN mkdir -p /tmp/src \
 
 # Final stage
 # UNVERIFIED: digest from the plan; the repo's it-tools and theme-park images use sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1 for the same tag
-FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f
+FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
 
 ARG VERSION
 
