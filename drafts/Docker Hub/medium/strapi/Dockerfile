@@ -1,6 +1,6 @@
 FROM ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5
 
-# UNVERIFIED: Strapi 5.63 needs Node 22 to 26. Check `node -v` in this base before relying on it.
+# UNVERIFIED: Strapi 5.64 needs Node 22 to 26. Check `node -v` in this base before relying on it.
 ARG VERSION
 ARG TARGETARCH
 USER root
@@ -10,7 +10,7 @@ ENV \
   npm_config_cache=/tmp/npm-cache
 
 # The project is scaffolded and built at image build time. start.sh copies it to /config/app on first start.
-# UNVERIFIED: create-strapi flags for a non-interactive scaffold on 5.63, confirm against the CLI.
+# UNVERIFIED: create-strapi flags for a non-interactive scaffold on 5.64, confirm against the CLI.
 RUN echo "*** Installing build packages ***" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \

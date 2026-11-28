@@ -96,6 +96,7 @@ RUN apt-get update && \
 RUN mkdir -p /app/linkwarden/apps/web/.next && \
   rm -rf /app/linkwarden/apps/web/.next/cache && \
   ln -s /tmp/next-cache /app/linkwarden/apps/web/.next/cache && \
+  ln -s /config/data /app/linkwarden/data && \
   install -D /app/linkwarden/LICENSE /usr/share/licenses/linkwarden/LICENSE && \
   chown -R apps:apps /app/linkwarden && \
   chmod -R 755 /app/linkwarden

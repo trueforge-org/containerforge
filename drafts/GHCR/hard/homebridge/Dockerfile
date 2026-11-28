@@ -25,7 +25,7 @@ RUN \
   apt-get update && \
   curl -fL -o \
     /tmp/homebridge.deb \
-    "https://github.com/homebridge/homebridge-apt-pkg/releases/download/${VERSION}/homebridge_${VERSION#v}_${TARGETARCH}.deb" && \
+    "https://github.com/homebridge/homebridge-apt-pkg/releases/download/${VERSION}/homebridge_${VERSION}_${TARGETARCH}.deb" && \
   apt-get install -y --no-install-recommends \
     /tmp/homebridge.deb && \
   echo "**** license ****" && \

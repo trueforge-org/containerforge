@@ -23,7 +23,9 @@ mkdir -p "${SERVER_DIR}" /config/steamcmd /config/.steam/sdk32
 if [ ! -f "${STEAMCMD_DIR}/steamcmd.sh" ]; then
   mkdir -p "${STEAMCMD_DIR}/linux32"
   cp /usr/local/share/steamcmd/steamcmd.sh "${STEAMCMD_DIR}/"
-  cp /usr/local/share/steamcmd/linux32/steamcmd "${STEAMCMD_DIR}/linux32/"
+  if [ -f /usr/local/share/steamcmd/linux32/steamcmd ]; then
+    cp /usr/local/share/steamcmd/linux32/steamcmd "${STEAMCMD_DIR}/linux32/"
+  fi
 fi
 
 # Install or update the server. Anonymous login is used; the server is not a Steam account.

@@ -41,7 +41,7 @@ trap 'rm -f "${script_file}"' EXIT
   echo "@ShutdownOnFailedCommand 1"
   echo "login anonymous"
   echo "force_install_dir ${INSTALL_DIR}"
-  if [ "${STEAM_APP_VALIDATE}" = "true" ]; then
+  if [ "${STEAM_APP_VALIDATE:-false}" = "true" ]; then
     echo "app_update ${APP_ID} validate"
   else
     echo "app_update ${APP_ID}"

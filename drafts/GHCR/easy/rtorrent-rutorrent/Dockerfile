@@ -22,7 +22,7 @@ RUN set -eux; \
     curl -fsSLO "${BASE_URL}/${CHECKSUMS}"; \
     grep " ${ASSET}\$" "${CHECKSUMS}" | sha256sum -c -; \
     tar -xzf "${ASSET}"; \
-    install -m 0755 rtorrent_exporter /app/rtorrent_exporter; \
+    install -Dm0755 rtorrent_exporter /app/rtorrent_exporter; \
     if [ -f LICENSE ]; then install -Dm0644 LICENSE /usr/share/licenses/rtorrent-exporter/LICENSE; fi; \
     chown -R apps:apps /app; \
     cd /; \

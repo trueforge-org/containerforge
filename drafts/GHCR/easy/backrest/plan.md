@@ -111,7 +111,7 @@ volumes:
     required: true
 dependencies: []
 ```
-
+- Env vars: `BACKREST_PORT` (default `0.0.0.0:9898`, bind address, as set by the TrueCharts chart) and `TZ`. The draft's `BACKREST_DATA` is not confirmed, so it is not listed.
 - No env vars beyond `TZ` are listed. The draft's `BACKREST_DATA` is not confirmed, so it is not listed (rule: do not invent env vars). Add any verified variable later.
 - `dependencies: []`: backrest needs no ContainerForge app. Remote repositories are configured in the UI.
 
@@ -134,7 +134,7 @@ exec /app/backrest/backrest
 
 - Idempotent: creates directories only; nothing is seeded. The UI creates `config.json` on first visit.
 - Writes only to `/config` (persistent) and `/tmp` (restic cache). Nothing is written to `/app`.
-- The backrest listen address is UNVERIFIED. If it binds to `127.0.0.1` only, add the verified flag or env var to bind `0.0.0.0:9898` (section 10). Confirm with the probe in section 11.
+- start.sh exports `BACKREST_PORT=0.0.0.0:9898` (default) so backrest binds all interfaces, as the TrueCharts chart does. Confirm with the probe in section 11.
 - `RESTIC_CACHE_DIR` is a restic environment variable (not confirmed on a fetched page). Keep it, because restic's default cache is under `$HOME/.cache` which is `/config` here, and caches must stay in `/tmp`.
 
 ## 8. container-test.yaml

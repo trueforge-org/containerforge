@@ -31,14 +31,14 @@ No `defaults/`, `etc/`, `health/` needed (Tachidesk creates its data on first st
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8a73c79e2f733c7513aefceef24ab8a213fd35af0ab1946996efc21636d` (sibling `apps/java25`, from the brief).
+`FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:3db5983d5bd504865ac842efb282bcbdbd286adbc116fc18645ec3c433eba44a` (sibling `apps/java25`, from the brief).
 
 Why not java21 (the draft's choice): the upstream image is built on Temurin 25, so Java 25 matches the runtime Suwayomi is tested with. Java 21 is UNVERIFIED for this JAR. If the maintainer prefers java21 (`ghcr.io/trueforge-org/java21:21.0.8@sha256:bba631340c8aefc1a10656a894475312bd89a9dd75d9e5da12c3098242f1e8f2`, copied from an existing `FROM` in `apps/*/Dockerfile`), run the JAR on it first and record the result. Closest sibling for layout: `apps/java21` and `apps/java25` (Temurin, `USER apps`).
 
 ## 4. Dockerfile
 
 1. `ARG VERSION` (`2.4.2373`, `v`-less or tag form matched to the bake), `ARG TARGETARCH` (unused for the JAR, kept only if needed).
-2. `FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:22a0f8...` (section 3).
+2. `FROM ghcr.io/trueforge-org/java25:25.0.1@sha256:3db598...` (section 3).
 3. `USER root`.
 4. `mkdir -p /app/tachidesk` first (the download below writes into it), then download and verify the JAR:
    ```dockerfile

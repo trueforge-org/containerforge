@@ -10,6 +10,7 @@ fi
 # UNVERIFIED: shellinaboxd flags and the service spec (url:user:group:dir:cmd) must be checked against the installed binary.
 # Auth is an open decision: the terminal currently has no login. Do not publish without deciding this in the PR.
 exec shellinaboxd \
+  -t \
   -p 4200 \
   -c /tmp/shellinabox \
   --no-beep \

@@ -3,7 +3,7 @@
 
 FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a AS build
 
-ARG VERSION=1.19.4
+ARG VERSION=1.19.5
 
 ENV COMPOSER_HOME=/tmp/composer \
     npm_config_cache=/tmp/npm
@@ -40,7 +40,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction \
 
 FROM ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1
 
-ARG VERSION=1.19.4
+ARG VERSION=1.19.5
 
 USER root
 

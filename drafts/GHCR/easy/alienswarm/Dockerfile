@@ -1,5 +1,6 @@
 # UNVERIFIED: pin a digest once ghcr.io/trueforge-org/steamcmd is published.
-FROM ghcr.io/trueforge-org/steamcmd:20180105-5build1
+ARG VERSION=20180105-5build1
+FROM ghcr.io/trueforge-org/steamcmd:${VERSION}
 
 ARG VERSION
 

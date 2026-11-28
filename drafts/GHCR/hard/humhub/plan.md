@@ -67,7 +67,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=humhub/humhub versioning=semver
-  default = "1.19.4"
+  default = "1.19.5"
 }
 
 variable "LICENSE" {
@@ -105,7 +105,7 @@ target "image-all" {
 }
 ```
 
-`LICENSE` is a best judgement pending the UNVERIFIED SPDX check in section 1; confirm before commit. `ARG VERSION` in the Dockerfile must be `1.19.4` (no `v` prefix; the tarball URL adds it). Validate with `docker buildx bake --print`.
+`LICENSE` is a best judgement pending the UNVERIFIED SPDX check in section 1; confirm before commit. `ARG VERSION` in the Dockerfile must be `1.19.5` (no `v` prefix; the tarball URL adds it). Validate with `docker buildx bake --print`.
 
 ## 6. settings.yaml
 
@@ -208,9 +208,9 @@ cd apps/humhub
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name humhub-probe --read-only --tmpfs /tmp \
-  -v humhub-probe-config:/config humhub:1.19.4
+  -v humhub-probe-config:/config humhub:1.19.5
 docker logs -f humhub-probe
-forgetool containers test --image humhub:1.19.4 --config ./apps/humhub/container-test.yaml
+forgetool containers test --image humhub:1.19.5 --config ./apps/humhub/container-test.yaml
 docker rm -f humhub-probe; docker volume rm humhub-probe-config
 ```
 

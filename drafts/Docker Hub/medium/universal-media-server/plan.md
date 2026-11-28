@@ -30,7 +30,7 @@ No `etc/`, `health/`, `root/`. No `DOWNSTREAM_CHANGES.md` (not a `FROM` base).
 
 ## 3. Base image
 
-`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:74b81362a2cf4b7f6efb8eb67baf0d1090ce56b38fc9e7a0dc11333b35179e1a`
+`FROM ghcr.io/trueforge-org/java17:17.0.16@sha256:efdc903d9ce0436b6207bc5a4e732d24a27231851975c999770fd8709a8316b8`
 
 Fits because UMS is a Java 17 jar and the base already provides the JRE, so the upstream `openjdk-17-jre-headless` package is not installed. Closest sibling: `apps/nzbhydra2` (Java jar from a GitHub release zip, `USER apps`, `/config` as WORKDIR and VOLUME). UNVERIFIED: whether the java17 base already includes ffmpeg or mediainfo (assumed no; checked at build time with `command -v`).
 

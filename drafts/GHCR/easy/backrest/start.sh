@@ -10,7 +10,7 @@ export RESTIC_CACHE_DIR=/tmp/restic-cache
 mkdir -p /config/.config/backrest /config/.local/share/backrest /tmp/restic-cache
 cd /config
 
-# UNVERIFIED: the listen address. Backrest must bind 0.0.0.0:9898 to be reachable from other containers.
-# The TrueCharts chart sets BACKREST_PORT=0.0.0.0:9898, but this is not confirmed upstream.
-# Confirm with the probe, and add the verified setting here if it binds to localhost only.
+# Backrest binds to localhost by default. Bind all interfaces so other containers can reach it.
+# The TrueCharts chart sets BACKREST_PORT=0.0.0.0:9898.
+export BACKREST_PORT="${BACKREST_PORT:-0.0.0.0:9898}"
 exec /app/backrest/backrest

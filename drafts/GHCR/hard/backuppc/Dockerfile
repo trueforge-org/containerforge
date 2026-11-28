@@ -25,6 +25,7 @@ RUN \
     openssh-client \
     samba-client \
     rrdtool \
+    supervisor \
     msmtp \
     pigz \
     par2 \

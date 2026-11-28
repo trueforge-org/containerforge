@@ -65,7 +65,7 @@ WORKDIR /config
 variable "APP" { default = "strapi" }
 variable "VERSION" {
   // renovate: datasource=npm depName=@strapi/strapi versioning=semver
-  default = "5.63.0"
+  default = "5.64.0"
 }
 variable "LICENSE" { default = "MIT" }
 variable "SOURCE" { default = "https://github.com/strapi/strapi" }
@@ -205,9 +205,9 @@ cd apps/strapi
 docker buildx bake --print
 docker buildx bake --set image-local.platform=linux/amd64 image-local
 docker run --rm -d --name strapi-probe --read-only --tmpfs /tmp \
-  -v strapi-probe-config:/config strapi:5.63.0
+  -v strapi-probe-config:/config strapi:5.64.0
 docker logs -f strapi-probe
-forgetool containers test --image strapi:5.63.0 --config ./apps/strapi/container-test.yaml
+forgetool containers test --image strapi:5.64.0 --config ./apps/strapi/container-test.yaml
 docker rm -f strapi-probe; docker volume rm strapi-probe-config
 ```
 

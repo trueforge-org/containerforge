@@ -109,5 +109,5 @@ Not applicable until blockers 1 and 2 are resolved. When unblocked, follow `.git
 ## Fix attempt (2026-11-28)
 
 - Blocker 1 resolved by evidence: upstream `ich777/docker-steamcmd-server` (branch `lastoasis`, `scripts/start-server.sh`) runs `Mist/Binaries/Linux/MistServer`, so a Linux depot exists even though the Steam store flag says Windows-only. Not checked with `app_info_print`.
-- Wrote Dockerfile (FROM `ghcr.io/trueforge-org/steamcmd:20180105.0.0@sha256:cc4726c1...`, digest fetched from GHCR), docker-bake.hcl, settings.yaml, container-test.yaml and start.sh. start.sh calls the base wrapper (copied to `/usr/local/bin/steamcmd-init`) for the install.
+- Wrote Dockerfile (FROM `ghcr.io/trueforge-org/steamcmd:20180105-5build1@sha256:cc4726c1...`, digest fetched from GHCR), docker-bake.hcl, settings.yaml, container-test.yaml and start.sh. start.sh calls the base wrapper (copied to `/usr/local/bin/steamcmd-init`) for the install.
 - Still open: nothing was built or run; the Steam EULA licence string is a `LicenseRef`; the vendor keys appear in the process list (server takes them as CLI args); the container-test has no UDP probes since the game is only downloaded at start.

@@ -31,7 +31,7 @@ No `defaults/`, `etc/` or `health/` needed unless the nginx site config must cha
 ## 3. Base image
 
 - Build stage: `ghcr.io/trueforge-org/python-node:3.15.2@sha256:0e0409c29043146f3ea597ad09325a96200ea22239da1b8180349fc7a53c3ef5` (provides Node for the Yarn build, per the draft). UNVERIFIED: Node major version in this base; check `node --version` in the build. Yarn via `corepack enable` as upstream.
-- Final stage: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:1e4f20bfcf614853820179bb28127b1375061c09f565bb7010495845d4742c9f`. Fits: serves static files on 8080 and already runs as `apps`. Closest sibling: `apps/it-tools` (static frontend on nginx) and `apps/theme-park`.
+- Final stage: `ghcr.io/trueforge-org/nginx:1.28.3@sha256:3a862278083a33d9ff969e987ee3a6ab24d2b928c35df07b2e69fa6f5d4e6cc1`. Fits: serves static files on 8080 and already runs as `apps`. Closest sibling: `apps/it-tools` (static frontend on nginx) and `apps/theme-park`.
 
 Rationale for not using `node:24-alpine` (upstream): musl build stage; ContainerForge builds on glibc. The dist output is arch-neutral JS/CSS/HTML, so the build can run on the python-node base. Alternative: the ubuntu base with Node installed by apt (not confirmed to exist in the archive; UNVERIFIED).
 

@@ -28,6 +28,7 @@ COPY --from=build --chown=apps:apps /src/build /app/build
 COPY --from=build --chown=apps:apps /src/node_modules /app/node_modules
 COPY --from=build --chown=apps:apps /src/package.json /app/package.json
 COPY --from=build --chown=apps:apps /src/res /app/res
+COPY --from=build --chown=apps:apps /src/default-config.json /app/default-config.json
 
 USER apps
 COPY --chmod=0755 . /

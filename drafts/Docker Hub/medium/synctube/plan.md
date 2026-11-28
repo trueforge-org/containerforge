@@ -61,7 +61,8 @@ RUN mkdir -p /app /config && chown -R apps:apps /app /config && chmod -R 755 /ap
 COPY --from=build --chown=apps:apps /src/build /app/build
 COPY --from=build --chown=apps:apps /src/node_modules /app/node_modules
 COPY --from=build --chown=apps:apps /src/package.json /app/package.json
-COPY --from=build --chown=apps:apps /src/public /app/public
+COPY --from=build --chown=apps:apps /src/res /app/res
+COPY --from=build --chown=apps:apps /src/default-config.json /app/default-config.json
 # ... plus any other runtime folders the server reads (UNVERIFIED: list from the source tree)
 USER apps
 COPY --chmod=0755 . /

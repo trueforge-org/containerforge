@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=causefx/Organizr versioning=loose
-  default = "1.601"
+  default = "1.90"
 }
 
 variable "LICENSE" {

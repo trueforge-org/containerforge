@@ -39,7 +39,7 @@ Exact files in `apps/sftpgo/`:
 1. `ARG VERSION` and `ARG TARGETARCH`. Map `amd64` to `x86_64` and `arm64` to `arm64` for the tarball name.
 2. `USER root` only for the install step, then `USER apps`.
 3. Install `ca-certificates` only if not already in the base (check first; do not re-install).
-4. Download the tarball `sftpgo_v${VERSION}_linux_${ARCH}.tar.xz` to `/tmp`, verify against a checksum (UNVERIFIED: no published checksum; document this in the PR), extract the `sftpgo` binary to `/usr/local/bin/sftpgo` and, from the same tarball, the `templates/`, `static/` and `openapi/` folders to `/usr/local/share/sftpgo` (UNVERIFIED tarball layout: inspect it at build time). The web admin needs them, and the seeded `/config/sftpgo.json` must point `templates_path`, `static_files_path` and `openapi_path` there (UNVERIFIED key names; read the upstream default config). Avoid the `.deb`, which installs under `/usr/bin` and `/etc`.
+4. Download the tarball `sftpgo_v${VERSION}_linux_${ARCH}.tar.xz` to `/tmp`, verify against a checksum (UNVERIFIED: no published checksum; document this in the PR), extract the `sftpgo` binary to `/usr/local/bin/sftpgo` and, from the same tarball, the `templates/`, `static/` and `openapi/` folders to `/usr/share/sftpgo` (UNVERIFIED tarball layout: inspect it at build time). The web admin needs them, and the seeded `/config/sftpgo.json` must point `templates_path`, `static_files_path` and `openapi_path` there (UNVERIFIED key names; read the upstream default config). Avoid the `.deb`, which installs under `/usr/bin` and `/etc`.
 5. Ship license files to `/usr/share/licenses/sftpgo/` (AGPL-3.0 `LICENSE`).
 6. `ENV HOME=/config` and point caches to `/tmp`.
 7. `COPY --chmod=0755 start.sh /start.sh` and `COPY --chmod=0755 . /` (defaults included).
@@ -65,6 +65,7 @@ Exact files in `apps/sftpgo/`:
 
 - Idempotent. Seed `/config/sftpgo.json` from the defaults only when missing.
 - Create `/config/data` and `/config/backups` when missing, and point `users_base_dir` and backup paths there through the seeded config (not by editing `/etc`).
+- Export `SFTPGO_HTTPD__TEMPLATES_PATH`, `SFTPGO_HTTPD__STATIC_FILES_PATH` and `SFTPGO_HTTPD__OPENAPI_PATH` pointing to `/usr/share/sftpgo/...`, because the seeded config uses relative paths that would resolve against `/config`.
 - Write nothing to `/usr/local` or `/app`.
 - Listen on `0.0.0.0` for SFTP and HTTP.
 - Final command: `exec sftpgo serve -c /config`. Use `-c` and `-d` only if the flags are confirmed.

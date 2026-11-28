@@ -5,8 +5,8 @@ variable "APP" {
 }
 
 variable "VERSION" {
-  // renovate: datasource=docker depName=ghcr.io/trueforge-org/steamcmd versioning=loose
-  default = "20180105.0.0"
+  // renovate: datasource=deb depName=steamcmd registryUrl=https://archive.ubuntu.com/ubuntu
+  default = "20180105-5build1"
 }
 
 variable "LICENSE" {

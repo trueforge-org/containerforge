@@ -4,7 +4,7 @@
 #   chart must override the security context. Maintainer exception authorised for this draft.
 # - Not built or run. The `--version` flag of multus-daemon is unverified, so it is not tested.
 
-FROM ghcr.io/trueforge-org/ubuntu:26.4@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
+FROM ghcr.io/trueforge-org/ubuntu:26.04@sha256:f01a4295f711d7b14378bedf91fc81b83835ba063493140e22fd08b030ce634a
 ARG TARGETARCH
 ARG VERSION
 ARG SHA256_AMD64=6775a43348e17d08b1be6dea2fc2185af418ece7149a94a469c0787f2e486ad8

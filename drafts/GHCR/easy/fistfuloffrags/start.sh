@@ -20,7 +20,9 @@ fi
 mkdir -p "${steamcmd_dir}/linux32" "${install_dir}"
 if [ ! -f "${steamcmd_dir}/steamcmd.sh" ]; then
     cp /usr/local/share/steamcmd/steamcmd.sh "${steamcmd_dir}/"
-    cp /usr/local/share/steamcmd/linux32/steamcmd "${steamcmd_dir}/linux32/"
+    if [ -f /usr/local/share/steamcmd/linux32/steamcmd ]; then
+        cp /usr/local/share/steamcmd/linux32/steamcmd "${steamcmd_dir}/linux32/"
+    fi
 fi
 
 # Install or update the server. Running on every start is idempotent. Writes go only to /config and /tmp.

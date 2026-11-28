@@ -6,6 +6,9 @@ ports:
     protocol: tcp
     required: true
 env:
+  - name: BACKREST_PORT
+    default: "0.0.0.0:9898"
+    required: false
   - name: TZ
     default: "Etc/UTC"
     required: false

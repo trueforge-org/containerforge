@@ -17,4 +17,5 @@ COPY --chmod=0755 . /
 # The launcher lives in scripts/ so it does not replace the base /start.sh (the SteamCMD wrapper).
 ENTRYPOINT ["/scripts/stationeers-start.sh"]
 
+EXPOSE 27015/udp 27500/udp
 VOLUME /config
