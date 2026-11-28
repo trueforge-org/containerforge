@@ -8,7 +8,7 @@ ARG OTP_VERSION=25.2.1
 ARG BUILDER_IMAGE=hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-jammy-20260509@sha256:a4ccc904c4e2aeb974a912e8306644c4d43a1d761fb5fbef237b8e9ce7bb51ca
 
 # Node 18.16.0 (.tool-versions of the 0.7.36 tag) and yarn 1.x, taken from the official node image.
-FROM docker.io/library/node:18.16.0-bullseye-slim@sha256:2b05866efb50b6bbc642e6d1cef908372351ad981453b8a747b1d0c9b5777cd8 AS node
+FROM docker.io/library/node:18.16.1-bullseye-slim@sha256:1ba1ddfc61b385b6436fd0fa0d1d42d322a0cd03c1ff110fa39e828511152aef AS node
 
 FROM ${BUILDER_IMAGE} AS builder
 
