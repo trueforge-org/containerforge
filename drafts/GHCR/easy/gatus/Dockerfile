@@ -1,5 +1,5 @@
 # UNVERIFIED: the golang:1.27 tag and digest must be confirmed (go.mod declares go 1.27.0). Pin the digest before merge.
-FROM golang:1.27 AS build
+FROM golang:1.27@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS build
 
 ARG VERSION
 ARG REVISION

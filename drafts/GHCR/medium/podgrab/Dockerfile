@@ -1,7 +1,7 @@
 
 # Build stage. Upstream pins golang:1.15.2, which cannot build go.mod's `go 1.25.0`, so a current Go image is used.
 # UNVERIFIED: digest for golang:1.27.4 is not resolved; pin it once confirmed. Debian-based so cgo links against glibc like the runtime.
-FROM golang:1.27.4 AS buildstage
+FROM golang:1.27.4@sha256:5f1b98fa02fe396ebce2a0227a0e08309e11792915b9dd2e1f71053d7e7e6666 AS buildstage
 ARG VERSION
 ARG TARGETARCH
 USER root
